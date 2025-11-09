@@ -1,6 +1,6 @@
 /*	
     NSURLError.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.
     
     Public header file.
 */
@@ -31,34 +31,34 @@ FOUNDATION_EXPORT NSErrorDomain const NSURLErrorDomain;
     @const NSURLErrorFailingURLErrorKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the URL which caused a load to fail.
 */
-FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLErrorKey NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLErrorKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLErrorFailingURLStringErrorKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail.
     @discussion This constant supersedes NSErrorFailingURLStringKey, which was deprecated in Mac OS X 10.6.  Both constants refer to the same value for backward-compatibility, but this symbol name has a better prefix.
 */
-FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLStringErrorKey NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLStringErrorKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSErrorFailingURLStringKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSString object for the URL which caused a load to fail.
     @discussion This constant is deprecated in Mac OS X 10.6, and is superseded by NSURLErrorFailingURLStringErrorKey.  Both constants refer to the same value for backward-compatibility, but the new symbol name has a better prefix.
 */
-FOUNDATION_EXPORT NSString * const NSErrorFailingURLStringKey NS_DEPRECATED(10_0, 10_6, 2_0, 4_0);
+FOUNDATION_EXPORT NSString * const NSErrorFailingURLStringKey API_DEPRECATED("Use NSURLErrorFailingURLStringErrorKey instead", macos(10.0,10.6), ios(2.0,4.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /*!
     @const NSURLErrorFailingURLPeerTrustErrorKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the SecTrustRef object representing the state of a failed SSL handshake.
  */
-FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLPeerTrustErrorKey NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSString * const NSURLErrorFailingURLPeerTrustErrorKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLErrorBackgroundTaskCancelledReasonKey
     @abstract The NSError userInfo dictionary key used to store and retrieve the NSNumber corresponding to the reason why a background
 	NSURLSessionTask was cancelled
  */
-FOUNDATION_EXPORT NSString * const NSURLErrorBackgroundTaskCancelledReasonKey NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXPORT NSString * const NSURLErrorBackgroundTaskCancelledReasonKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /*!
     @enum Codes associated with NSURLErrorBackgroundTaskCancelledReasonKey
@@ -69,15 +69,15 @@ NS_ENUM(NSInteger)
 {
     NSURLErrorCancelledReasonUserForceQuitApplication =    0,
     NSURLErrorCancelledReasonBackgroundUpdatesDisabled =   1,
-    NSURLErrorCancelledReasonInsufficientSystemResources NS_ENUM_AVAILABLE(10_10, 8_0) = 2,
+    NSURLErrorCancelledReasonInsufficientSystemResources API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) = 2,
     
-} NS_ENUM_AVAILABLE(10_10, 7_0);
+} API_AVAILABLE(macos(10.10), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*!
     @enum NSURL-related Error Codes
     @abstract Constants used by NSError to indicate errors in the NSURL domain
 */
-NS_ENUM(NSInteger)
+NS_ERROR_ENUM(NSURLErrorDomain)
 {
     NSURLErrorUnknown = 			-1,
     NSURLErrorCancelled = 			-999,
@@ -99,11 +99,12 @@ NS_ENUM(NSInteger)
     NSURLErrorCannotDecodeRawData =             -1015,
     NSURLErrorCannotDecodeContentData =         -1016,
     NSURLErrorCannotParseResponse =             -1017,
-    NSURLErrorAppTransportSecurityRequiresSecureConnection NS_ENUM_AVAILABLE(10_11, 9_0) = -1022,
+    NSURLErrorAppTransportSecurityRequiresSecureConnection API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = -1022,
     NSURLErrorFileDoesNotExist = 		-1100,
     NSURLErrorFileIsDirectory = 		-1101,
     NSURLErrorNoPermissionsToReadFile = 	-1102,
-    NSURLErrorDataLengthExceedsMaximum NS_ENUM_AVAILABLE(10_5, 2_0) =	-1103,
+    NSURLErrorDataLengthExceedsMaximum API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)) =	-1103,
+    NSURLErrorFileOutsideSafeArea API_AVAILABLE(macos(10.12.4), ios(10.3), watchos(3.2), tvos(10.2)) = -1104,
     
     // SSL errors
     NSURLErrorSecureConnectionFailed = 		-1200,
@@ -125,14 +126,14 @@ NS_ENUM(NSInteger)
     NSURLErrorDownloadDecodingFailedMidStream = -3006,
     NSURLErrorDownloadDecodingFailedToComplete =-3007,
 
-    NSURLErrorInternationalRoamingOff NS_ENUM_AVAILABLE(10_7, 3_0) =         -1018,
-    NSURLErrorCallIsActive NS_ENUM_AVAILABLE(10_7, 3_0) =                    -1019,
-    NSURLErrorDataNotAllowed NS_ENUM_AVAILABLE(10_7, 3_0) =                  -1020,
-    NSURLErrorRequestBodyStreamExhausted NS_ENUM_AVAILABLE(10_7, 3_0) =      -1021,
+    NSURLErrorInternationalRoamingOff API_AVAILABLE(macos(10.7), ios(3.0), watchos(2.0), tvos(9.0)) =         -1018,
+    NSURLErrorCallIsActive API_AVAILABLE(macos(10.7), ios(3.0), watchos(2.0), tvos(9.0)) =                    -1019,
+    NSURLErrorDataNotAllowed API_AVAILABLE(macos(10.7), ios(3.0), watchos(2.0), tvos(9.0)) =                  -1020,
+    NSURLErrorRequestBodyStreamExhausted API_AVAILABLE(macos(10.7), ios(3.0), watchos(2.0), tvos(9.0)) =      -1021,
     
-    NSURLErrorBackgroundSessionRequiresSharedContainer NS_ENUM_AVAILABLE(10_10, 8_0) = -995,
-    NSURLErrorBackgroundSessionInUseByAnotherProcess NS_ENUM_AVAILABLE(10_10, 8_0) = -996,
-    NSURLErrorBackgroundSessionWasDisconnected NS_ENUM_AVAILABLE(10_10, 8_0)= -997,
+    NSURLErrorBackgroundSessionRequiresSharedContainer API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) = -995,
+    NSURLErrorBackgroundSessionInUseByAnotherProcess API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) = -996,
+    NSURLErrorBackgroundSessionWasDisconnected API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))= -997,
 };
 
 NS_ASSUME_NONNULL_END

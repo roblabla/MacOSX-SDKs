@@ -13,16 +13,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class AMAction;
 @class AMWorkflowController;
 
-@interface AMWorkflow : NSObject <NSCopying>
-{
-@private
+@interface AMWorkflow : NSObject <NSCopying> {
+   @private
 	NSString *_uuid;
 	NSURL *_fileURL;
 	id _actions;
 	id _variables;
 	id _connectors;
-	AMWorkflowController *_controller;
-	id _options;
+	__weak AMWorkflowController *_controller;
+	AM_UNUSED_FOR_ANALYZER id _options;
 	id _input;
 	id _scriptingRunData;
 	id _owningApplication;
@@ -35,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 	NSUInteger _updateCount;
 	id _inputType;
 	id _outputType;
-	
+
 	id _future;
 	AM_UNUSED_FOR_ANALYZER id _future2;
 	AM_UNUSED_FOR_ANALYZER id _future3;
@@ -50,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)writeToURL:(NSURL *)fileURL error:(NSError **)outError;
 
 - (BOOL)setValue:(nullable id)value forVariableWithName:(NSString *)variableName;
-- (id)valueForVariableWithName:(NSString *)variableName;
+- (nullable id)valueForVariableWithName:(NSString *)variableName;
 
 - (void)addAction:(AMAction *)action;
 - (void)removeAction:(AMAction *)action;
@@ -58,9 +57,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)moveActionAtIndex:(NSUInteger)startIndex toIndex:(NSUInteger)endIndex;
 
 @property (nullable, readonly, copy) NSURL *fileURL;
-@property (readonly, retain) NSArray<__kindof AMAction *> *actions;
-@property (nullable, readwrite, retain) id input;
-@property (nullable, readonly, retain) id output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
+@property (readonly, strong) NSArray<__kindof AMAction *> *actions;
+@property (nullable, strong, nonatomic) id input;
+@property (nullable, readonly, strong, nonatomic) id output AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER;
 
 @end
 

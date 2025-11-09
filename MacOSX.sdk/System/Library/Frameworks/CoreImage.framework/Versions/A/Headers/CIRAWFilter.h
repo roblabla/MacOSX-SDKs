@@ -104,6 +104,9 @@ CORE_IMAGE_EXPORT NSString *const kCIInputEnableChromaticNoiseTrackingKey NS_AVA
 /** NSNumber (double) : The amount of noise reduction applied. Range is 0 to 1. */
 CORE_IMAGE_EXPORT NSString *const kCIInputNoiseReductionAmountKey NS_AVAILABLE(10_7, 10_0);
 
+/** NSNumber (double) : The amount of moire reduction applied. Range is 0 to 1. */
+CORE_IMAGE_EXPORT NSString *const kCIInputMoireAmountKey NS_AVAILABLE(10_13, 11_0);
+
 /** NSNumber (BOOL) : Determines if the default vendor lens correction be on. default = YES if raw image used for initialization contains lens distortion parameters. */
 CORE_IMAGE_EXPORT NSString *const kCIInputEnableVendorLensCorrectionKey NS_AVAILABLE(10_10, 10_0);
 

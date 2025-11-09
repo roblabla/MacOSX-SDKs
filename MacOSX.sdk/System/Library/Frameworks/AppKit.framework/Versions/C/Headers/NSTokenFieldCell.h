@@ -1,7 +1,7 @@
 /*
 	NSTokenFieldCell.h
 	Application Kit
-	Copyright (c) 2004-2016, Apple Inc.
+	Copyright (c) 2004-2017, Apple Inc.
 	All rights reserved.
 
 */
@@ -31,7 +31,7 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 @interface NSTokenFieldCell : NSTextFieldCell {
 @private
     NSCharacterSet *_tokenizingCharacterSet;
-    id _delegate;
+    __weak id _delegate;
     NSTimeInterval _completionDelay;
     id _cache;
     id _defaultTerminator;
@@ -62,12 +62,12 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 /* Sets the auto-completion delay before the list of possible completions automatically pops up.  Completions are only offered if the delegate implements the completion delegate API.  A negative delay will disable completion while a delay of 0.0 will make completion UI presentation immediate.
 */
 @property NSTimeInterval completionDelay;
-+ (NSTimeInterval)defaultCompletionDelay;
+@property (class, readonly) NSTimeInterval defaultCompletionDelay;
 
 @property (null_resettable, copy) NSCharacterSet *tokenizingCharacterSet;
-+ (NSCharacterSet *)defaultTokenizingCharacterSet;
+@property (class, readonly, copy) NSCharacterSet *defaultTokenizingCharacterSet;
 
-@property (nullable, assign) id<NSTokenFieldCellDelegate> delegate;
+@property (nullable, weak) id<NSTokenFieldCellDelegate> delegate;
 
 @end
 
@@ -90,7 +90,7 @@ static const NSTokenStyle NSRoundedTokenStyle = NSTokenStyleRounded;
 // editing string = display string = represented object
 - (nullable NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell displayStringForRepresentedObject:(id)representedObject;
 - (nullable NSString *)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell editingStringForRepresentedObject:(id)representedObject;
-- (id)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell representedObjectForEditingString: (NSString *)editingString;
+- (nullable id)tokenFieldCell:(NSTokenFieldCell *)tokenFieldCell representedObjectForEditingString: (NSString *)editingString;
 
 // We put the string on the pasteboard before calling this delegate method. 
 // By default, we write the NSStringPboardType as well as an array of NSStrings.

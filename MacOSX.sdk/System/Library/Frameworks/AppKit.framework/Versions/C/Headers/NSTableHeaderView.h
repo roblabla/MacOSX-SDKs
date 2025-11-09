@@ -1,7 +1,7 @@
 /*
     NSTableHeaderView.h
     Application Kit
-    Copyright (c) 1995-2016, Apple Inc.
+    Copyright (c) 1995-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSTableHeaderView : NSView {
     /* All instance variables are private */ 
-    NSTableView	*_tableView;
+    __weak NSTableView *_tableView;
     NSInteger _resizedColumn;
     NSInteger _draggedColumn;
     NSInteger _pressedColumn;
@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
     id _viewDataX;
 }
 
-@property (nullable, assign) NSTableView *tableView;
+@property (nullable, weak) NSTableView *tableView;
 
 // Returns -1 if there is no column being dragged
 @property (readonly) NSInteger draggedColumn;

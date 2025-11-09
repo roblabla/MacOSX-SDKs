@@ -1,5 +1,5 @@
 /*	NSNotification.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, retain) id object;
 @property (nullable, readonly, copy) NSDictionary *userInfo;
 
-- (instancetype)initWithName:(NSNotificationName)name object:(nullable id)object userInfo:(nullable NSDictionary *)userInfo NS_AVAILABLE(10_6, 4_0) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithName:(NSNotificationName)name object:(nullable id)object userInfo:(nullable NSDictionary *)userInfo API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)) NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;
 
 @end
@@ -41,11 +41,9 @@ NS_ASSUME_NONNULL_BEGIN
     void *_pad[11];
 }
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSNotificationCenter *defaultCenter;
 
 - (void)addObserver:(id)observer selector:(SEL)aSelector name:(nullable NSNotificationName)aName object:(nullable id)anObject;
-#endif
 
 - (void)postNotification:(NSNotification *)notification;
 - (void)postNotificationName:(NSNotificationName)aName object:(nullable id)anObject;
@@ -54,7 +52,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeObserver:(id)observer;
 - (void)removeObserver:(id)observer name:(nullable NSNotificationName)aName object:(nullable id)anObject;
 
-- (id <NSObject>)addObserverForName:(nullable NSNotificationName)name object:(nullable id)obj queue:(nullable NSOperationQueue *)queue usingBlock:(void (^)(NSNotification *note))block NS_AVAILABLE(10_6, 4_0);
+- (id <NSObject>)addObserverForName:(nullable NSNotificationName)name object:(nullable id)obj queue:(nullable NSOperationQueue *)queue usingBlock:(void (^)(NSNotification *note))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
     // The return value is retained by the system, and should be held onto by the caller in
     // order to remove the observer with removeObserver: later, to stop observation.
 

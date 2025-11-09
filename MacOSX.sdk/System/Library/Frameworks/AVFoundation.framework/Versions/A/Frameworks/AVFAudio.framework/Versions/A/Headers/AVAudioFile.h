@@ -64,8 +64,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@param outError
 		on exit, if an error occurs, a description of the error
 	@discussion
-		The file type to create is inferred from the file extension. Will overwrite a file at the
-		specified URL if a file exists.
+		The file type to create can be set through the corresponding settings key. If not set, it will be
+		inferred from the file extension. Will overwrite a file at the specified URL if a file exists.
 
 		This opens the file for writing using the standard format (deinterleaved floating point).
 */
@@ -84,8 +84,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@param outError
 		on exit, if an error occurs, a description of the error
 	@discussion
-		The file type to create is inferred from the file extension. Will overwrite a file at the
-		specified URL if a file exists.
+		The file type to create can be set through the corresponding settings key. If not set, it will be
+		inferred from the file extension. Will overwrite a file at the specified URL if a file exists.
 */
 - (nullable instancetype)initForWriting:(NSURL *)fileURL settings:(NSDictionary<NSString *, id> *)settings commonFormat:(AVAudioCommonFormat)format interleaved:(BOOL)interleaved error:(NSError **)outError;
 

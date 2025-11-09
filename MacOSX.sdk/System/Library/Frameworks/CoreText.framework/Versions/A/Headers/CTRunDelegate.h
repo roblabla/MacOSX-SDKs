@@ -27,7 +27,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTRunDelegate * CTRunDelegateRef;
 	@abstract	Returns the CFType of CTRunDelegate objects.
 */
 
-CFTypeID CTRunDelegateGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTRunDelegateGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -168,7 +168,7 @@ enum {
 
 CTRunDelegateRef __nullable CTRunDelegateCreate(
 	const CTRunDelegateCallbacks* callbacks,
-	void * __nullable refCon ) CT_AVAILABLE(10_5, 3_2);
+	void * __nullable refCon ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -189,7 +189,7 @@ CTRunDelegateRef __nullable CTRunDelegateCreate(
 */
 
 void * CTRunDelegateGetRefCon(
-	CTRunDelegateRef runDelegate ) CT_AVAILABLE(10_5, 3_2);
+	CTRunDelegateRef runDelegate ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

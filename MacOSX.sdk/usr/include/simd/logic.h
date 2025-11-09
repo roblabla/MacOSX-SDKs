@@ -1,5 +1,4 @@
-/*  Copyright (c) 2014 Apple, Inc. All rights reserved.
- *
+/*! @header
  *  The interfaces declared in this header provide logical and bitwise
  *  operations on vectors.  Some of these function operate elementwise,
  *  and some produce a scalar result that depends on all lanes of the input.
@@ -9,224 +8,617 @@
  *
  *      Function                    Result
  *      ------------------------------------------------------------------
- *      vector_all(comparison)      True if and only if the comparison is true
+ *      simd_all(comparison)        True if and only if the comparison is true
  *                                  in every vector lane.  e.g.:
  *
- *                                      if (vector_all(x == 0.0f)) {
+ *                                      if (simd_all(x == 0.0f)) {
  *                                          // executed if every lane of x
  *                                          // contains zero.
  *                                      }
  *
- *                                  The precise function of vector_all is to
+ *                                  The precise function of simd_all is to
  *                                  return the high-order bit of the result
  *                                  of a horizontal bitwise AND of all vector
  *                                  lanes.
  *
- *      vector_any(comparison)      True if and only if the comparison is true
+ *      simd_any(comparison)        True if and only if the comparison is true
  *                                  in at least one vector lane.  e.g.:
  *
- *                                      if (vector_any(x < 0.0f)) {
+ *                                      if (simd_any(x < 0.0f)) {
  *                                          // executed if any lane of x
  *                                          // contains a negative value.
  *                                      }
  *
- *                                  The precise function of vector_all is to
+ *                                  The precise function of simd_all is to
  *                                  return the high-order bit of the result
  *                                  of a horizontal bitwise OR of all vector
  *                                  lanes.
  *
- *      vector_select(x,y,mask)     For each lane in the result, selects the
+ *      simd_select(x,y,mask)       For each lane in the result, selects the
  *                                  corresponding element of x if the high-
  *                                  order bit of the corresponding element of
  *                                  mask is 0, and the corresponding element
  *                                  of y otherwise.
  *
- *      vector_bitselect(x,y,mask)  For each bit in the result, selects the
+ *      simd_bitselect(x,y,mask)    For each bit in the result, selects the
  *                                  corresponding bit of x if the corresponding
  *                                  bit of mask is clear, and the corresponding
  *                                  of y otherwise.
  *
- *  In C++, these functions are available under the SIMD:: namespace:
+ *  In C++, these functions are available under the simd:: namespace:
  *
  *      C++ Function                    Equivalent C Function
  *      --------------------------------------------------------------------
- *      simd::all(comparison)           vector_all(comparison)
- *      simd::any(comparison)           vector_any(comparison)
- *      simd::select(x,y,mask)          vector_select(x,y,mask)
- *      simd::bitselect(x,y,mask)       vector_bitselect(x,y,mask)
- */
+ *      simd::all(comparison)           simd_all(comparison)
+ *      simd::any(comparison)           simd_any(comparison)
+ *      simd::select(x,y,mask)          simd_select(x,y,mask)
+ *      simd::bitselect(x,y,mask)       simd_bitselect(x,y,mask)
+ *
+ *  @copyright 2014-2017 Apple, Inc. All rights reserved.
+ *  @unsorted                                                                 */
 
-#ifndef __SIMD_LOGIC_HEADER__
-#define __SIMD_LOGIC_HEADER__
+#ifndef SIMD_LOGIC_HEADER
+#define SIMD_LOGIC_HEADER
 
-#include <simd/internal.h>
-#if __SIMD_REQUIRED_COMPILER_FEATURES__
-#include <simd/vector_types.h>
+#include <simd/base.h>
+#if SIMD_COMPILER_HAS_REQUIRED_FEATURES
+#include <simd/vector_make.h>
 #include <stdint.h>
 
 #ifdef __cplusplus
-#    define __SIMD_BOOLEAN_TYPE__ bool
 extern "C" {
-#else
-#    define __SIMD_BOOLEAN_TYPE__ _Bool
 #endif
 
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long2 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long3 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long4 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long8 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong2 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong3 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong4 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong8 __x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_char2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_char3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_char4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_char8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_char16 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_char32 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_char64 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar16 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar32 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar64 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_short2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_short3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_short4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_short8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_short16 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_short32 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort16 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort32 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_int2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_int3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_int4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_int8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_int16 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint16 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_long2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_long3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_long4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_long8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong2 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong3 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong4 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong8 x);
+/*! @abstract True if and only if the high-order bit of any lane of the
+ *  vector is set.
+ *  @discussion Deprecated. Use simd_any instead.                             */
+#define vector_any simd_any
 
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long2 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long3 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long4 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long8 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort32 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint2  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint3  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint4  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint8  __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint16 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong2 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong3 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong4 __x);
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong8 __x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_char2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_char3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_char4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_char8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_char16 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_char32 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_char64 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar16 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar32 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar64 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_short2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_short3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_short4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_short8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_short16 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_short32 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort16 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort32 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_int2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_int3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_int4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_int8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_int16 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint16 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_long2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_long3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_long4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_long8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong2 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong3 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong4 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.                                                            */
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong8 x);
+/*! @abstract True if and only if the high-order bit of every lane of the
+ *  vector is set.
+ *  @discussion Deprecated. Use simd_all instead.                             */
+#define vector_all simd_all
 
-static vector_float2  __SIMD_ATTRIBUTES__ vector_select(vector_float2  __x, vector_float2  __y, vector_int2  __z);
-static vector_float3  __SIMD_ATTRIBUTES__ vector_select(vector_float3  __x, vector_float3  __y, vector_int3  __z);
-static vector_float4  __SIMD_ATTRIBUTES__ vector_select(vector_float4  __x, vector_float4  __y, vector_int4  __z);
-static vector_float8  __SIMD_ATTRIBUTES__ vector_select(vector_float8  __x, vector_float8  __y, vector_int8  __z);
-static vector_float16 __SIMD_ATTRIBUTES__ vector_select(vector_float16 __x, vector_float16 __y, vector_int16 __z);
-static vector_double2 __SIMD_ATTRIBUTES__ vector_select(vector_double2 __x, vector_double2 __y, vector_long2 __z);
-static vector_double3 __SIMD_ATTRIBUTES__ vector_select(vector_double3 __x, vector_double3 __y, vector_long3 __z);
-static vector_double4 __SIMD_ATTRIBUTES__ vector_select(vector_double4 __x, vector_double4 __y, vector_long4 __z);
-static vector_double8 __SIMD_ATTRIBUTES__ vector_select(vector_double8 __x, vector_double8 __y, vector_long8 __z);
-
-static vector_char2    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char2    __x, vector_char2    __y, vector_char2   __z);
-static vector_char3    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char3    __x, vector_char3    __y, vector_char3   __z);
-static vector_char4    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char4    __x, vector_char4    __y, vector_char4   __z);
-static vector_char8    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char8    __x, vector_char8    __y, vector_char8   __z);
-static vector_char16   __SIMD_ATTRIBUTES__ vector_bitselect(vector_char16   __x, vector_char16   __y, vector_char16  __z);
-static vector_char32   __SIMD_ATTRIBUTES__ vector_bitselect(vector_char32   __x, vector_char32   __y, vector_char32  __z);
-static vector_uchar2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar2   __x, vector_uchar2   __y, vector_char2   __z);
-static vector_uchar3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar3   __x, vector_uchar3   __y, vector_char3   __z);
-static vector_uchar4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar4   __x, vector_uchar4   __y, vector_char4   __z);
-static vector_uchar8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar8   __x, vector_uchar8   __y, vector_char8   __z);
-static vector_uchar16  __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar16  __x, vector_uchar16  __y, vector_char16  __z);
-static vector_uchar32  __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar32  __x, vector_uchar32  __y, vector_char32  __z);
-static vector_short2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short2   __x, vector_short2   __y, vector_short2  __z);
-static vector_short3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short3   __x, vector_short3   __y, vector_short3  __z);
-static vector_short4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short4   __x, vector_short4   __y, vector_short4  __z);
-static vector_short8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short8   __x, vector_short8   __y, vector_short8  __z);
-static vector_short16  __SIMD_ATTRIBUTES__ vector_bitselect(vector_short16  __x, vector_short16  __y, vector_short16 __z);
-static vector_short32  __SIMD_ATTRIBUTES__ vector_bitselect(vector_short32  __x, vector_short32  __y, vector_short32 __z);
-static vector_ushort2  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort2  __x, vector_ushort2  __y, vector_short2  __z);
-static vector_ushort3  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort3  __x, vector_ushort3  __y, vector_short3  __z);
-static vector_ushort4  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort4  __x, vector_ushort4  __y, vector_short4  __z);
-static vector_ushort8  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort8  __x, vector_ushort8  __y, vector_short8  __z);
-static vector_ushort16 __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort16 __x, vector_ushort16 __y, vector_short16 __z);
-static vector_ushort32 __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort32 __x, vector_ushort32 __y, vector_short32 __z);
-static vector_int2     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int2     __x, vector_int2     __y, vector_int2    __z);
-static vector_int3     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int3     __x, vector_int3     __y, vector_int3    __z);
-static vector_int4     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int4     __x, vector_int4     __y, vector_int4    __z);
-static vector_int8     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int8     __x, vector_int8     __y, vector_int8    __z);
-static vector_int16    __SIMD_ATTRIBUTES__ vector_bitselect(vector_int16    __x, vector_int16    __y, vector_int16   __z);
-static vector_uint2    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint2    __x, vector_uint2    __y, vector_int2    __z);
-static vector_uint3    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint3    __x, vector_uint3    __y, vector_int3    __z);
-static vector_uint4    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint4    __x, vector_uint4    __y, vector_int4    __z);
-static vector_uint8    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint8    __x, vector_uint8    __y, vector_int8    __z);
-static vector_uint16   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint16   __x, vector_uint16   __y, vector_int16   __z);
-static vector_float2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float2   __x, vector_float2   __y, vector_int2    __z);
-static vector_float3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float3   __x, vector_float3   __y, vector_int3    __z);
-static vector_float4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float4   __x, vector_float4   __y, vector_int4    __z);
-static vector_float8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float8   __x, vector_float8   __y, vector_int8    __z);
-static vector_float16  __SIMD_ATTRIBUTES__ vector_bitselect(vector_float16  __x, vector_float16  __y, vector_int16   __z);
-static vector_long2    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long2    __x, vector_long2    __y, vector_long2   __z);
-static vector_long3    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long3    __x, vector_long3    __y, vector_long3   __z);
-static vector_long4    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long4    __x, vector_long4    __y, vector_long4   __z);
-static vector_long8    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long8    __x, vector_long8    __y, vector_long8   __z);
-static vector_ulong2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong2   __x, vector_ulong2   __y, vector_long2   __z);
-static vector_ulong3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong3   __x, vector_ulong3   __y, vector_long3   __z);
-static vector_ulong4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong4   __x, vector_ulong4   __y, vector_long4   __z);
-static vector_ulong8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong8   __x, vector_ulong8   __y, vector_long8   __z);
-static vector_double2  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double2  __x, vector_double2  __y, vector_long2   __z);
-static vector_double3  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double3  __x, vector_double3  __y, vector_long3   __z);
-static vector_double4  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double4  __x, vector_double4  __y, vector_long4   __z);
-static vector_double8  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double8  __x, vector_double8  __y, vector_long8   __z);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_float2 simd_select(simd_float2 x, simd_float2 y, simd_int2 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_float3 simd_select(simd_float3 x, simd_float3 y, simd_int3 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_float4 simd_select(simd_float4 x, simd_float4 y, simd_int4 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_float8 simd_select(simd_float8 x, simd_float8 y, simd_int8 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_float16 simd_select(simd_float16 x, simd_float16 y, simd_int16 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_double2 simd_select(simd_double2 x, simd_double2 y, simd_long2 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_double3 simd_select(simd_double3 x, simd_double3 y, simd_long3 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_double4 simd_select(simd_double4 x, simd_double4 y, simd_long4 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.                                     */
+static inline SIMD_CFUNC simd_double8 simd_select(simd_double8 x, simd_double8 y, simd_long8 mask);
+/*! @abstract For each lane in the result, selects the corresponding element
+ *  of x or y according to whether the high-order bit of the corresponding
+ *  lane of mask is 0 or 1, respectively.
+ *  @discussion Deprecated. Use simd_select instead.                          */
+#define vector_select simd_select
+  
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_char2 simd_bitselect(simd_char2 x, simd_char2 y, simd_char2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_char3 simd_bitselect(simd_char3 x, simd_char3 y, simd_char3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_char4 simd_bitselect(simd_char4 x, simd_char4 y, simd_char4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_char8 simd_bitselect(simd_char8 x, simd_char8 y, simd_char8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_char16 simd_bitselect(simd_char16 x, simd_char16 y, simd_char16 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_char32 simd_bitselect(simd_char32 x, simd_char32 y, simd_char32 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_char64 simd_bitselect(simd_char64 x, simd_char64 y, simd_char64 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uchar2 simd_bitselect(simd_uchar2 x, simd_uchar2 y, simd_char2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uchar3 simd_bitselect(simd_uchar3 x, simd_uchar3 y, simd_char3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uchar4 simd_bitselect(simd_uchar4 x, simd_uchar4 y, simd_char4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uchar8 simd_bitselect(simd_uchar8 x, simd_uchar8 y, simd_char8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uchar16 simd_bitselect(simd_uchar16 x, simd_uchar16 y, simd_char16 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uchar32 simd_bitselect(simd_uchar32 x, simd_uchar32 y, simd_char32 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uchar64 simd_bitselect(simd_uchar64 x, simd_uchar64 y, simd_char64 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_short2 simd_bitselect(simd_short2 x, simd_short2 y, simd_short2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_short3 simd_bitselect(simd_short3 x, simd_short3 y, simd_short3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_short4 simd_bitselect(simd_short4 x, simd_short4 y, simd_short4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_short8 simd_bitselect(simd_short8 x, simd_short8 y, simd_short8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_short16 simd_bitselect(simd_short16 x, simd_short16 y, simd_short16 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_short32 simd_bitselect(simd_short32 x, simd_short32 y, simd_short32 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ushort2 simd_bitselect(simd_ushort2 x, simd_ushort2 y, simd_short2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ushort3 simd_bitselect(simd_ushort3 x, simd_ushort3 y, simd_short3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ushort4 simd_bitselect(simd_ushort4 x, simd_ushort4 y, simd_short4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ushort8 simd_bitselect(simd_ushort8 x, simd_ushort8 y, simd_short8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ushort16 simd_bitselect(simd_ushort16 x, simd_ushort16 y, simd_short16 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ushort32 simd_bitselect(simd_ushort32 x, simd_ushort32 y, simd_short32 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_int2 simd_bitselect(simd_int2 x, simd_int2 y, simd_int2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_int3 simd_bitselect(simd_int3 x, simd_int3 y, simd_int3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_int4 simd_bitselect(simd_int4 x, simd_int4 y, simd_int4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_int8 simd_bitselect(simd_int8 x, simd_int8 y, simd_int8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_int16 simd_bitselect(simd_int16 x, simd_int16 y, simd_int16 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uint2 simd_bitselect(simd_uint2 x, simd_uint2 y, simd_int2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uint3 simd_bitselect(simd_uint3 x, simd_uint3 y, simd_int3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uint4 simd_bitselect(simd_uint4 x, simd_uint4 y, simd_int4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uint8 simd_bitselect(simd_uint8 x, simd_uint8 y, simd_int8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_uint16 simd_bitselect(simd_uint16 x, simd_uint16 y, simd_int16 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_float2 simd_bitselect(simd_float2 x, simd_float2 y, simd_int2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_float3 simd_bitselect(simd_float3 x, simd_float3 y, simd_int3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_float4 simd_bitselect(simd_float4 x, simd_float4 y, simd_int4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_float8 simd_bitselect(simd_float8 x, simd_float8 y, simd_int8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_float16 simd_bitselect(simd_float16 x, simd_float16 y, simd_int16 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_long2 simd_bitselect(simd_long2 x, simd_long2 y, simd_long2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_long3 simd_bitselect(simd_long3 x, simd_long3 y, simd_long3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_long4 simd_bitselect(simd_long4 x, simd_long4 y, simd_long4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_long8 simd_bitselect(simd_long8 x, simd_long8 y, simd_long8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ulong2 simd_bitselect(simd_ulong2 x, simd_ulong2 y, simd_long2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ulong3 simd_bitselect(simd_ulong3 x, simd_ulong3 y, simd_long3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ulong4 simd_bitselect(simd_ulong4 x, simd_ulong4 y, simd_long4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_ulong8 simd_bitselect(simd_ulong8 x, simd_ulong8 y, simd_long8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_double2 simd_bitselect(simd_double2 x, simd_double2 y, simd_long2 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_double3 simd_bitselect(simd_double3 x, simd_double3 y, simd_long3 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_double4 simd_bitselect(simd_double4 x, simd_double4 y, simd_long4 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.                                                             */
+static inline SIMD_CFUNC simd_double8 simd_bitselect(simd_double8 x, simd_double8 y, simd_long8 mask);
+/*! @abstract For each bit in the result, selects the corresponding bit of x
+ *  or y according to whether the corresponding bit of mask is 0 or 1,
+ *  respectively.
+ *  @discussion Deprecated. Use simd_bitselect instead.                       */
+#define vector_bitselect simd_bitselect
 
 #ifdef __cplusplus
 } /* extern "C" */
 
 namespace simd {
-    template <typename inttypeN> static __SIMD_INLINE__ __SIMD_BOOLEAN_TYPE__ all(const inttypeN predicate) { return ::vector_all(predicate); }
-    template <typename inttypeN> static __SIMD_INLINE__ __SIMD_BOOLEAN_TYPE__ any(const inttypeN predicate) { return ::vector_any(predicate); }
-    template <typename inttypeN, typename fptypeN> static __SIMD_INLINE__ fptypeN select(const fptypeN x, const fptypeN y, const inttypeN predicate) { return ::vector_select(x,y,predicate); }
-    template <typename inttypeN, typename typeN> static __SIMD_INLINE__ typeN bitselect(const typeN x, const typeN y, const inttypeN mask) { return ::vector_bitselect(x,y,mask); }
+  /*! @abstract True if and only if the high-order bit of every lane is set.  */
+  template <typename inttypeN> static SIMD_CPPFUNC simd_bool all(const inttypeN predicate) { return ::simd_all(predicate); }
+  /*! @abstract True if and only if the high-order bit of any lane is set.    */
+  template <typename inttypeN> static SIMD_CPPFUNC simd_bool any(const inttypeN predicate) { return ::simd_any(predicate); }
+  /*! @abstract Each lane of the result is selected from the corresponding lane
+   *  of x or y according to whether the high-order bit of the corresponding
+   *  lane of mask is 0 or 1, respectively.                                   */
+  template <typename inttypeN, typename fptypeN> static SIMD_CPPFUNC fptypeN select(const fptypeN x, const fptypeN y, const inttypeN predicate) { return ::simd_select(x,y,predicate); }
+  /*! @abstract For each bit in the result, selects the corresponding bit of x
+   *  or y according to whether the corresponding bit of mask is 0 or 1,
+   *  respectively.                                                           */
+  template <typename inttypeN, typename typeN> static SIMD_CPPFUNC typeN bitselect(const typeN x, const typeN y, const inttypeN mask) { return ::simd_bitselect(x,y,mask); }
 }
 
 extern "C" {
@@ -234,214 +626,690 @@ extern "C" {
 
 #pragma mark - Implementations
 
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char2  __x) { union { uint16_t __i; vector_char2  __v; } __u = { .__v = __x }; return (__u.__i & 0x8080) == 0x8080; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char2  __x) { union { uint16_t __i; vector_char2  __v; } __u = { .__v = __x }; return __u.__i & 0x8080; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char3  __x) { union { uint32_t __i; vector_char3  __v; } __u = { .__v = __x }; return (__u.__i & 0x808080) == 0x808080; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char3  __x) { union { uint32_t __i; vector_char3  __v; } __u = { .__v = __x }; return __u.__i & 0x808080; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char4  __x) { union { uint32_t __i; vector_char4  __v; } __u = { .__v = __x }; return (__u.__i & 0x80808080U) == 0x80808080U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char4  __x) { union { uint32_t __i; vector_char4  __v; } __u = { .__v = __x }; return __u.__i & 0x80808080U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char8  __x) { union { uint64_t __i; vector_char8  __v; } __u = { .__v = __x }; return (__u.__i & 0x8080808080808080U) == 0x8080808080808080U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char8  __x) { union { uint64_t __i; vector_char8  __v; } __u = { .__v = __x }; return __u.__i & 0x8080808080808080U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short2 __x) { union { uint32_t __i; vector_short2 __v; } __u = { .__v = __x }; return (__u.__i & 0x80008000U) == 0x80008000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short2 __x) { union { uint32_t __i; vector_short2 __v; } __u = { .__v = __x }; return __u.__i & 0x80008000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short3 __x) { union { uint64_t __i; vector_short3 __v; } __u = { .__v = __x }; return (__u.__i & 0x800080008000U) == 0x800080008000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short3 __x) { union { uint64_t __i; vector_short3 __v; } __u = { .__v = __x }; return __u.__i & 0x800080008000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short4 __x) { union { uint64_t __i; vector_short4 __v; } __u = { .__v = __x }; return (__u.__i & 0x8000800080008000U) == 0x8000800080008000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short4 __x) { union { uint64_t __i; vector_short4 __v; } __u = { .__v = __x }; return __u.__i & 0x8000800080008000U; }
+static inline SIMD_CFUNC simd_bool simd_any(simd_char2 x) {
 #if defined __SSE2__
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char16 __x) { return _mm_movemask_epi8(__x) == 0xffff; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char16 __x) { return _mm_movemask_epi8(__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short8 __x) { return (_mm_movemask_epi8(__x) & 0xaaaa) == 0xaaaa; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short8 __x) { return _mm_movemask_epi8(__x) & 0xaaaa; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int2  __x) { vector_int4 __x4; __x4.lo  = __x; return (_mm_movemask_ps(__x4) & 0x3) == 0x3; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int2  __x) { vector_int4 __x4; __x4.lo  = __x; return (_mm_movemask_ps(__x4) & 0x3); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int3  __x) { vector_int4 __x4; __x4.xyz = __x; return (_mm_movemask_ps(__x4) & 0x7) == 0x7; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int3  __x) { vector_int4 __x4; __x4.xyz = __x; return (_mm_movemask_ps(__x4) & 0x7); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int4  __x) { return _mm_movemask_ps(__x) == 0xf; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int4  __x) { return _mm_movemask_ps(__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long2 __x) { return _mm_movemask_pd(__x) == 0x3; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long2 __x) { return _mm_movemask_pd(__x); }
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0x3);
 #elif defined __arm64__
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char16 __x) { return vminvq_u8(__x) & 0x80; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char16 __x) { return vmaxvq_u8(__x) & 0x80; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short8 __x) { return vminvq_u16(__x) & 0x8000; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short8 __x) { return vmaxvq_u16(__x) & 0x8000; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int2  __x) { return vminv_u32(__x) & 0x80000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int2  __x) { return vmaxv_u32(__x) & 0x80000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int3  __x) { return vector_all(__x.xyzz); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int3  __x) { return vector_any(__x.xyzz); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int4  __x) { return vminvq_u32(__x) & 0x80000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int4  __x) { return vmaxvq_u32(__x) & 0x80000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long2 __x) { return (__x.x & __x.y) & 0x8000000000000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long2 __x) { return (__x.x | __x.y) & 0x8000000000000000U; }
+  return simd_any(x.xyxy);
 #else
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char16 __x) { return vector_all(__x.hi & __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char16 __x) { return vector_any(__x.hi | __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short8 __x) { return vector_all(__x.hi & __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short8 __x) { return vector_any(__x.hi | __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int2  __x) { union { uint64_t __i; vector_int2 __v; } __u = { .__v = __x }; return (__u.__i & 0x8000000080000000U) == 0x8000000080000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int2  __x) { union { uint64_t __i; vector_int2 __v; } __u = { .__v = __x }; return __u.__i & 0x8000000080000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int3  __x) { return vector_all(__x.xyzz); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int3  __x) { return vector_any(__x.xyzz); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int4  __x) { return vector_all(__x.hi & __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int4  __x) { return vector_any(__x.hi | __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long2 __x) { return (__x.x & __x.y) & 0x8000000000000000U; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long2 __x) { return (__x.x | __x.y) & 0x8000000000000000U; }
+  union { uint16_t i; simd_char2 v; } u = { .v = x };
+  return (u.i & 0x8080);
 #endif
-#if defined __AVX__
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int8  __x) { return _mm256_movemask_ps(__x) == 0xff; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int8  __x) { return _mm256_movemask_ps(__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long3 __x) { vector_long4 __x4; __x4.xyz = __x; return (_mm256_movemask_pd(__x4) & 0x7) == 0x7; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long3 __x) { vector_long4 __x4; __x4.xyz = __x; return (_mm256_movemask_pd(__x4) & 0x7); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long4 __x) { return _mm256_movemask_pd(__x) == 0xf; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long4 __x) { return _mm256_movemask_pd(__x); }
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_char3 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0x7);
+#elif defined __arm64__
+  return simd_any(x.xyzz);
 #else
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int8  __x) { return vector_all(__x.lo & __x.hi); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int8  __x) { return vector_any(__x.hi | __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long3 __x) { return vector_all(__x.xyzz); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long3 __x) { return vector_any(__x.xyzz); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long4 __x) { return vector_all(__x.lo & __x.hi); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long4 __x) { return vector_any(__x.hi | __x.lo); }
+  union { uint32_t i; simd_char3 v; } u = { .v = x };
+  return (u.i & 0x808080);
 #endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_char4 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0xf);
+#elif defined __arm64__
+  return simd_any(x.xyzwxyzw);
+#else
+  union { uint32_t i; simd_char4 v; } u = { .v = x };
+  return (u.i & 0x80808080);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_char8 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0xff);
+#elif defined __arm64__
+  return vmaxv_u8(x) & 0x80;
+#else
+  union { uint64_t i; simd_char8 v; } u = { .v = x };
+  return (u.i & 0x8080808080808080);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_char16 x) {
+#if defined __SSE2__
+  return _mm_movemask_epi8(x);
+#elif defined __arm64__
+  return vmaxvq_u8(x) & 0x80;
+#else
+  return simd_any(x.lo | x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_char32 x) {
 #if defined __AVX2__
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char32  __x) { return _mm256_movemask_epi8(__x) == 0xffffffffU; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char32  __x) { return _mm256_movemask_epi8(__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short16 __x) { return (_mm256_movemask_epi8(__x) & 0xaaaaaaaaU) == 0xaaaaaaaaU; }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short16 __x) { return _mm256_movemask_epi8(__x) & 0xaaaaaaaaU; }
+  return _mm256_movemask_epi8(x);
 #else
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_char32  __x) { return vector_all(__x.lo & __x.hi); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_char32  __x) { return vector_any(__x.hi | __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short16 __x) { return vector_all(__x.lo & __x.hi); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short16 __x) { return vector_any(__x.hi | __x.lo); }
+  return simd_any(x.lo | x.hi);
 #endif
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_short32 __x) { return vector_all(__x.lo & __x.hi); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_short32 __x) { return vector_any(__x.hi | __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_int16 __x) { return vector_all(__x.lo & __x.hi); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_int16 __x) { return vector_any(__x.hi | __x.lo); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_long8 __x) { return vector_all(__x.lo & __x.hi); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_long8 __x) { return vector_any(__x.hi | __x.lo); }
-
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar2   __x) { return vector_all((vector_char2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar3   __x) { return vector_all((vector_char3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar4   __x) { return vector_all((vector_char4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar8   __x) { return vector_all((vector_char8)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar16  __x) { return vector_all((vector_char16)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uchar32  __x) { return vector_all((vector_char32)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort2  __x) { return vector_all((vector_short2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort3  __x) { return vector_all((vector_short3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort4  __x) { return vector_all((vector_short4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort8  __x) { return vector_all((vector_short8)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort16 __x) { return vector_all((vector_short16)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ushort32 __x) { return vector_all((vector_short32)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint2    __x) { return vector_all((vector_int2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint3    __x) { return vector_all((vector_int3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint4    __x) { return vector_all((vector_int4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint8    __x) { return vector_all((vector_int8)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_uint16   __x) { return vector_all((vector_int16)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong2   __x) { return vector_all((vector_long2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong3   __x) { return vector_all((vector_long3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong4   __x) { return vector_all((vector_long4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_all(vector_ulong8   __x) { return vector_all((vector_long8)__x); }
-
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar2   __x) { return vector_any((vector_char2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar3   __x) { return vector_any((vector_char3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar4   __x) { return vector_any((vector_char4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar8   __x) { return vector_any((vector_char8)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar16  __x) { return vector_any((vector_char16)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uchar32  __x) { return vector_any((vector_char32)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort2  __x) { return vector_any((vector_short2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort3  __x) { return vector_any((vector_short3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort4  __x) { return vector_any((vector_short4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort8  __x) { return vector_any((vector_short8)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort16 __x) { return vector_any((vector_short16)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ushort32 __x) { return vector_any((vector_short32)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint2    __x) { return vector_any((vector_int2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint3    __x) { return vector_any((vector_int3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint4    __x) { return vector_any((vector_int4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint8    __x) { return vector_any((vector_int8)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_uint16   __x) { return vector_any((vector_int16)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong2   __x) { return vector_any((vector_long2)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong3   __x) { return vector_any((vector_long3)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong4   __x) { return vector_any((vector_long4)__x); }
-static __SIMD_BOOLEAN_TYPE__ __SIMD_ATTRIBUTES__ vector_any(vector_ulong8   __x) { return vector_any((vector_long8)__x); }
-
-static vector_float2  __SIMD_ATTRIBUTES__ vector_select(vector_float2 __x, vector_float2 __y, vector_int2 __z) { vector_float4 __x4, __y4, __r4; vector_int4 __z4; __x4.lo  = __x; __y4.lo  = __y; __z4.lo  = __z; __r4 = vector_select(__x4,__y4,__z4); return __r4.lo; }
-static vector_float3  __SIMD_ATTRIBUTES__ vector_select(vector_float3 __x, vector_float3 __y, vector_int3 __z) { vector_float4 __x4, __y4, __r4; vector_int4 __z4; __x4.xyz = __x; __y4.xyz = __y; __z4.xyz = __z; __r4 = vector_select(__x4,__y4,__z4); return __r4.xyz; }
-#if defined __SSE4_1__
-static vector_float4  __SIMD_ATTRIBUTES__ vector_select(vector_float4  __x, vector_float4  __y, vector_int4  __z) { return _mm_blendv_ps(__x,__y,__z); }
-static vector_double2 __SIMD_ATTRIBUTES__ vector_select(vector_double2 __x, vector_double2 __y, vector_long2 __z) { return _mm_blendv_pd(__x,__y,__z); }
-#elif defined __SSE2__
-static vector_float4  __SIMD_ATTRIBUTES__ vector_select(vector_float4  __x, vector_float4  __y, vector_int4  __z) { return vector_bitselect(__x, __y, __z >> 31); }
-static vector_double2 __SIMD_ATTRIBUTES__ vector_select(vector_double2 __x, vector_double2 __y, vector_long2 __z) { return vector_bitselect(__x, __y, (vector_long2)((vector_int4)_mm_shuffle_ps(__z,__z,0xf5) >> 31)); }
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_char64 x) {
+  return simd_any(x.lo | x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar2 x) {
+  return simd_any((simd_char2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar3 x) {
+  return simd_any((simd_char3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar4 x) {
+  return simd_any((simd_char4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar8 x) {
+  return simd_any((simd_char8)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar16 x) {
+  return simd_any((simd_char16)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar32 x) {
+  return simd_any((simd_char32)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uchar64 x) {
+  return simd_any((simd_char64)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_short2 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_short8_undef(x)) & 0xa);
+#elif defined __arm64__
+  return simd_any(x.xyxy);
 #else
-static vector_float4  __SIMD_ATTRIBUTES__ vector_select(vector_float4  __x, vector_float4  __y, vector_int4  __z) { return vector_bitselect(__x, __y, __z >> 31); }
-static vector_double2 __SIMD_ATTRIBUTES__ vector_select(vector_double2 __x, vector_double2 __y, vector_long2 __z) { return vector_bitselect(__x, __y, __z >> 63); }
+  union { uint32_t i; simd_short2 v; } u = { .v = x };
+  return (u.i & 0x80008000);
 #endif
-static vector_double3 __SIMD_ATTRIBUTES__ vector_select(vector_double3 __x, vector_double3 __y, vector_long3 __z) { vector_double4 __x4, __y4, __r4; vector_long4 __z4; __x4.xyz = __x; __y4.xyz = __y; __z4.xyz = __z; __r4 = vector_select(__x4,__y4,__z4); return __r4.xyz; }
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_short3 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_short8_undef(x)) & 0x2a);
+#elif defined __arm64__
+  return simd_any(x.xyzz);
+#else
+  union { uint64_t i; simd_short3 v; } u = { .v = x };
+  return (u.i & 0x800080008000);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_short4 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_short8_undef(x)) & 0xaa);
+#elif defined __arm64__
+  return vmaxv_u16(x) & 0x8000;
+#else
+  union { uint64_t i; simd_short4 v; } u = { .v = x };
+  return (u.i & 0x8000800080008000);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_short8 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(x) & 0xaaaa);
+#elif defined __arm64__
+  return vmaxvq_u16(x) & 0x8000;
+#else
+  return simd_any(x.lo | x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_short16 x) {
+#if defined __AVX2__
+  return (_mm256_movemask_epi8(x) & 0xaaaaaaaa);
+#else
+  return simd_any(x.lo | x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_short32 x) {
+  return simd_any(x.lo | x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort2 x) {
+  return simd_any((simd_short2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort3 x) {
+  return simd_any((simd_short3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort4 x) {
+  return simd_any((simd_short4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort8 x) {
+  return simd_any((simd_short8)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort16 x) {
+  return simd_any((simd_short16)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ushort32 x) {
+  return simd_any((simd_short32)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_int2 x) {
+#if defined __SSE2__
+  return (_mm_movemask_ps(simd_make_int4_undef(x)) & 0x3);
+#elif defined __arm64__
+  return vmaxv_u32(x) & 0x80000000;
+#else
+  union { uint64_t i; simd_int2 v; } u = { .v = x };
+  return (u.i & 0x8000000080000000);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_int3 x) {
+#if defined __SSE2__
+  return (_mm_movemask_ps(simd_make_int4_undef(x)) & 0x7);
+#elif defined __arm64__
+  return simd_any(x.xyzz);
+#else
+  return (x.x | x.y | x.z) & 0x80000000;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_int4 x) {
+#if defined __SSE2__
+  return _mm_movemask_ps(x);
+#elif defined __arm64__
+  return vmaxvq_u32(x) & 0x80000000;
+#else
+  return simd_any(x.lo | x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_int8 x) {
 #if defined __AVX__
-static vector_float8  __SIMD_ATTRIBUTES__ vector_select(vector_float8  __x, vector_float8  __y, vector_int8  __z) { return _mm256_blendv_ps(__x, __y, __z); }
-static vector_double4 __SIMD_ATTRIBUTES__ vector_select(vector_double4 __x, vector_double4 __y, vector_long4 __z) { return _mm256_blendv_pd(__x, __y, __z); }
+  return _mm256_movemask_ps(x);
 #else
-static vector_float8  __SIMD_ATTRIBUTES__ vector_select(vector_float8  __x, vector_float8  __y, vector_int8  __z) { vector_float8  __r;  __r.lo = vector_select(__x.lo,__y.lo,__z.lo); __r.hi = vector_select(__x.hi,__y.hi,__z.hi); return __r; }
-static vector_double4 __SIMD_ATTRIBUTES__ vector_select(vector_double4 __x, vector_double4 __y, vector_long4 __z) { vector_double4 __r;  __r.lo = vector_select(__x.lo,__y.lo,__z.lo); __r.hi = vector_select(__x.hi,__y.hi,__z.hi); return __r; }
+  return simd_any(x.lo | x.hi);
 #endif
-static vector_float16 __SIMD_ATTRIBUTES__ vector_select(vector_float16 __x, vector_float16 __y, vector_int16 __z) { vector_float16 __r;  __r.lo = vector_select(__x.lo,__y.lo,__z.lo); __r.hi = vector_select(__x.hi,__y.hi,__z.hi); return __r; }
-static vector_double8 __SIMD_ATTRIBUTES__ vector_select(vector_double8 __x, vector_double8 __y, vector_long8 __z) { vector_double8 __r;  __r.lo = vector_select(__x.lo,__y.lo,__z.lo); __r.hi = vector_select(__x.hi,__y.hi,__z.hi); return __r; }
-
-static vector_char2    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char2    __x, vector_char2    __y, vector_char2   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_char3    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char3    __x, vector_char3    __y, vector_char3   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_char4    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char4    __x, vector_char4    __y, vector_char4   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_char8    __SIMD_ATTRIBUTES__ vector_bitselect(vector_char8    __x, vector_char8    __y, vector_char8   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_char16   __SIMD_ATTRIBUTES__ vector_bitselect(vector_char16   __x, vector_char16   __y, vector_char16  __z) { return (__x & ~__z) | (__y & __z); }
-static vector_char32   __SIMD_ATTRIBUTES__ vector_bitselect(vector_char32   __x, vector_char32   __y, vector_char32  __z) { return (__x & ~__z) | (__y & __z); }
-static vector_uchar2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar2   __x, vector_uchar2   __y, vector_char2   __z) { return (vector_uchar2)vector_bitselect((vector_char2)__x, (vector_char2)__y, __z); }
-static vector_uchar3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar3   __x, vector_uchar3   __y, vector_char3   __z) { return (vector_uchar3)vector_bitselect((vector_char3)__x, (vector_char3)__y, __z); }
-static vector_uchar4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar4   __x, vector_uchar4   __y, vector_char4   __z) { return (vector_uchar4)vector_bitselect((vector_char4)__x, (vector_char4)__y, __z); }
-static vector_uchar8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar8   __x, vector_uchar8   __y, vector_char8   __z) { return (vector_uchar8)vector_bitselect((vector_char8)__x, (vector_char8)__y, __z); }
-static vector_uchar16  __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar16  __x, vector_uchar16  __y, vector_char16  __z) { return (vector_uchar16)vector_bitselect((vector_char16)__x,(vector_char16)__y, __z); }
-static vector_uchar32  __SIMD_ATTRIBUTES__ vector_bitselect(vector_uchar32  __x, vector_uchar32  __y, vector_char32  __z) { return (vector_uchar32)vector_bitselect((vector_char32)__x,(vector_char32)__y, __z); }
-static vector_short2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short2   __x, vector_short2   __y, vector_short2  __z) { return (__x & ~__z) | (__y & __z); }
-static vector_short3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short3   __x, vector_short3   __y, vector_short3  __z) { return (__x & ~__z) | (__y & __z); }
-static vector_short4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short4   __x, vector_short4   __y, vector_short4  __z) { return (__x & ~__z) | (__y & __z); }
-static vector_short8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_short8   __x, vector_short8   __y, vector_short8  __z) { return (__x & ~__z) | (__y & __z); }
-static vector_short16  __SIMD_ATTRIBUTES__ vector_bitselect(vector_short16  __x, vector_short16  __y, vector_short16 __z) { return (__x & ~__z) | (__y & __z); }
-static vector_short32  __SIMD_ATTRIBUTES__ vector_bitselect(vector_short32  __x, vector_short32  __y, vector_short32 __z) { return (__x & ~__z) | (__y & __z); }
-static vector_ushort2  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort2  __x, vector_ushort2  __y, vector_short2  __z) { return (vector_ushort2)vector_bitselect((vector_short2)__x, (vector_short2)__y, __z); }
-static vector_ushort3  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort3  __x, vector_ushort3  __y, vector_short3  __z) { return (vector_ushort3)vector_bitselect((vector_short3)__x, (vector_short3)__y, __z); }
-static vector_ushort4  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort4  __x, vector_ushort4  __y, vector_short4  __z) { return (vector_ushort4)vector_bitselect((vector_short4)__x, (vector_short4)__y, __z); }
-static vector_ushort8  __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort8  __x, vector_ushort8  __y, vector_short8  __z) { return (vector_ushort8)vector_bitselect((vector_short8)__x, (vector_short8)__y, __z); }
-static vector_ushort16 __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort16 __x, vector_ushort16 __y, vector_short16 __z) { return (vector_ushort16)vector_bitselect((vector_short16)__x,(vector_short16)__y, __z); }
-static vector_ushort32 __SIMD_ATTRIBUTES__ vector_bitselect(vector_ushort32 __x, vector_ushort32 __y, vector_short32 __z) { return (vector_ushort32)vector_bitselect((vector_short32)__x,(vector_short32)__y, __z); }
-static vector_int2     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int2     __x, vector_int2     __y, vector_int2    __z) { return (__x & ~__z) | (__y & __z); }
-static vector_int3     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int3     __x, vector_int3     __y, vector_int3    __z) { return (__x & ~__z) | (__y & __z); }
-static vector_int4     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int4     __x, vector_int4     __y, vector_int4    __z) { return (__x & ~__z) | (__y & __z); }
-static vector_int8     __SIMD_ATTRIBUTES__ vector_bitselect(vector_int8     __x, vector_int8     __y, vector_int8    __z) { return (__x & ~__z) | (__y & __z); }
-static vector_int16    __SIMD_ATTRIBUTES__ vector_bitselect(vector_int16    __x, vector_int16    __y, vector_int16   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_uint2    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint2    __x, vector_uint2    __y, vector_int2    __z) { return (vector_uint2)vector_bitselect((vector_int2)__x, (vector_int2)__y, __z); }
-static vector_uint3    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint3    __x, vector_uint3    __y, vector_int3    __z) { return (vector_uint3)vector_bitselect((vector_int3)__x, (vector_int3)__y, __z); }
-static vector_uint4    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint4    __x, vector_uint4    __y, vector_int4    __z) { return (vector_uint4)vector_bitselect((vector_int4)__x, (vector_int4)__y, __z); }
-static vector_uint8    __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint8    __x, vector_uint8    __y, vector_int8    __z) { return (vector_uint8)vector_bitselect((vector_int8)__x, (vector_int8)__y, __z); }
-static vector_uint16   __SIMD_ATTRIBUTES__ vector_bitselect(vector_uint16   __x, vector_uint16   __y, vector_int16   __z) { return (vector_uint16)vector_bitselect((vector_int16)__x,(vector_int16)__y, __z); }
-static vector_float2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float2   __x, vector_float2   __y, vector_int2    __z) { return (vector_float2)vector_bitselect((vector_int2)__x, (vector_int2)__y, __z); }
-static vector_float3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float3   __x, vector_float3   __y, vector_int3    __z) { return (vector_float3)vector_bitselect((vector_int3)__x, (vector_int3)__y, __z); }
-static vector_float4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float4   __x, vector_float4   __y, vector_int4    __z) { return (vector_float4)vector_bitselect((vector_int4)__x, (vector_int4)__y, __z); }
-static vector_float8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_float8   __x, vector_float8   __y, vector_int8    __z) { return (vector_float8)vector_bitselect((vector_int8)__x, (vector_int8)__y, __z); }
-static vector_float16  __SIMD_ATTRIBUTES__ vector_bitselect(vector_float16  __x, vector_float16  __y, vector_int16   __z) { return (vector_float16)vector_bitselect((vector_int16)__x,(vector_int16)__y, __z); }
-static vector_long2    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long2    __x, vector_long2    __y, vector_long2   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_long3    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long3    __x, vector_long3    __y, vector_long3   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_long4    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long4    __x, vector_long4    __y, vector_long4   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_long8    __SIMD_ATTRIBUTES__ vector_bitselect(vector_long8    __x, vector_long8    __y, vector_long8   __z) { return (__x & ~__z) | (__y & __z); }
-static vector_ulong2   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong2   __x, vector_ulong2   __y, vector_long2   __z) { return (vector_ulong2)vector_bitselect((vector_long2)__x, (vector_long2)__y, __z); }
-static vector_ulong3   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong3   __x, vector_ulong3   __y, vector_long3   __z) { return (vector_ulong3)vector_bitselect((vector_long3)__x, (vector_long3)__y, __z); }
-static vector_ulong4   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong4   __x, vector_ulong4   __y, vector_long4   __z) { return (vector_ulong4)vector_bitselect((vector_long4)__x, (vector_long4)__y, __z); }
-static vector_ulong8   __SIMD_ATTRIBUTES__ vector_bitselect(vector_ulong8   __x, vector_ulong8   __y, vector_long8   __z) { return (vector_ulong8)vector_bitselect((vector_long8)__x, (vector_long8)__y, __z); }
-static vector_double2  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double2  __x, vector_double2  __y, vector_long2   __z) { return (vector_double2)vector_bitselect((vector_long2)__x, (vector_long2)__y, __z); }
-static vector_double3  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double3  __x, vector_double3  __y, vector_long3   __z) { return (vector_double3)vector_bitselect((vector_long3)__x, (vector_long3)__y, __z); }
-static vector_double4  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double4  __x, vector_double4  __y, vector_long4   __z) { return (vector_double4)vector_bitselect((vector_long4)__x, (vector_long4)__y, __z); }
-static vector_double8  __SIMD_ATTRIBUTES__ vector_bitselect(vector_double8  __x, vector_double8  __y, vector_long8   __z) { return (vector_double8)vector_bitselect((vector_long8)__x, (vector_long8)__y, __z); }
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_int16 x) {
+  return simd_any(x.lo | x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint2 x) {
+  return simd_any((simd_int2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint3 x) {
+  return simd_any((simd_int3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint4 x) {
+  return simd_any((simd_int4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint8 x) {
+  return simd_any((simd_int8)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_uint16 x) {
+  return simd_any((simd_int16)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_long2 x) {
+#if defined __SSE2__
+  return _mm_movemask_pd(x);
+#elif defined __arm64__
+  return (x.x | x.y) & 0x8000000000000000U;
+#else
+  return (x.x | x.y) & 0x8000000000000000U;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_long3 x) {
+#if defined __AVX__
+  return (_mm256_movemask_pd(simd_make_long4_undef(x)) & 0x7);
+#else
+  return (x.x | x.y | x.z) & 0x8000000000000000U;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_long4 x) {
+#if defined __AVX__
+  return _mm256_movemask_pd(x);
+#else
+  return simd_any(x.lo | x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_long8 x) {
+  return simd_any(x.lo | x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong2 x) {
+  return simd_any((simd_long2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong3 x) {
+  return simd_any((simd_long3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong4 x) {
+  return simd_any((simd_long4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_any(simd_ulong8 x) {
+  return simd_any((simd_long8)x);
+}
+  
+static inline SIMD_CFUNC simd_bool simd_all(simd_char2 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0x3) == 0x3;
+#elif defined __arm64__
+  return simd_all(x.xyxy);
+#else
+  union { uint16_t i; simd_char2 v; } u = { .v = x };
+  return (u.i & 0x8080) == 0x8080;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_char3 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0x7) == 0x7;
+#elif defined __arm64__
+  return simd_all(x.xyzz);
+#else
+  union { uint32_t i; simd_char3 v; } u = { .v = x };
+  return (u.i & 0x808080) == 0x808080;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_char4 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0xf) == 0xf;
+#elif defined __arm64__
+  return simd_all(x.xyzwxyzw);
+#else
+  union { uint32_t i; simd_char4 v; } u = { .v = x };
+  return (u.i & 0x80808080) == 0x80808080;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_char8 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_char16_undef(x)) & 0xff) == 0xff;
+#elif defined __arm64__
+  return vminv_u8(x) & 0x80;
+#else
+  union { uint64_t i; simd_char8 v; } u = { .v = x };
+  return (u.i & 0x8080808080808080) == 0x8080808080808080;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_char16 x) {
+#if defined __SSE2__
+  return _mm_movemask_epi8(x) == 0xffff;
+#elif defined __arm64__
+  return vminvq_u8(x) & 0x80;
+#else
+  return simd_all(x.lo & x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_char32 x) {
+#if defined __AVX2__
+  return _mm256_movemask_epi8(x) == 0xffffffff;
+#else
+  return simd_all(x.lo & x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_char64 x) {
+  return simd_all(x.lo & x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar2 x) {
+  return simd_all((simd_char2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar3 x) {
+  return simd_all((simd_char3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar4 x) {
+  return simd_all((simd_char4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar8 x) {
+  return simd_all((simd_char8)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar16 x) {
+  return simd_all((simd_char16)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar32 x) {
+  return simd_all((simd_char32)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uchar64 x) {
+  return simd_all((simd_char64)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_short2 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_short8_undef(x)) & 0xa) == 0xa;
+#elif defined __arm64__
+  return simd_all(x.xyxy);
+#else
+  union { uint32_t i; simd_short2 v; } u = { .v = x };
+  return (u.i & 0x80008000) == 0x80008000;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_short3 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_short8_undef(x)) & 0x2a) == 0x2a;
+#elif defined __arm64__
+  return simd_all(x.xyzz);
+#else
+  union { uint64_t i; simd_short3 v; } u = { .v = x };
+  return (u.i & 0x800080008000) == 0x800080008000;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_short4 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(simd_make_short8_undef(x)) & 0xaa) == 0xaa;
+#elif defined __arm64__
+  return vminv_u16(x) & 0x8000;
+#else
+  union { uint64_t i; simd_short4 v; } u = { .v = x };
+  return (u.i & 0x8000800080008000) == 0x8000800080008000;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_short8 x) {
+#if defined __SSE2__
+  return (_mm_movemask_epi8(x) & 0xaaaa) == 0xaaaa;
+#elif defined __arm64__
+  return vminvq_u16(x) & 0x8000;
+#else
+  return simd_all(x.lo & x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_short16 x) {
+#if defined __AVX2__
+  return (_mm256_movemask_epi8(x) & 0xaaaaaaaa) == 0xaaaaaaaa;
+#else
+  return simd_all(x.lo & x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_short32 x) {
+  return simd_all(x.lo & x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort2 x) {
+  return simd_all((simd_short2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort3 x) {
+  return simd_all((simd_short3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort4 x) {
+  return simd_all((simd_short4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort8 x) {
+  return simd_all((simd_short8)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort16 x) {
+  return simd_all((simd_short16)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ushort32 x) {
+  return simd_all((simd_short32)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_int2 x) {
+#if defined __SSE2__
+  return (_mm_movemask_ps(simd_make_int4_undef(x)) & 0x3) == 0x3;
+#elif defined __arm64__
+  return vminv_u32(x) & 0x80000000;
+#else
+  union { uint64_t i; simd_int2 v; } u = { .v = x };
+  return (u.i & 0x8000000080000000) == 0x8000000080000000;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_int3 x) {
+#if defined __SSE2__
+  return (_mm_movemask_ps(simd_make_int4_undef(x)) & 0x7) == 0x7;
+#elif defined __arm64__
+  return simd_all(x.xyzz);
+#else
+  return (x.x & x.y & x.z) & 0x80000000;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_int4 x) {
+#if defined __SSE2__
+  return _mm_movemask_ps(x) == 0xf;
+#elif defined __arm64__
+  return vminvq_u32(x) & 0x80000000;
+#else
+  return simd_all(x.lo & x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_int8 x) {
+#if defined __AVX__
+  return _mm256_movemask_ps(x) == 0xff;
+#else
+  return simd_all(x.lo & x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_int16 x) {
+  return simd_all(x.lo & x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint2 x) {
+  return simd_all((simd_int2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint3 x) {
+  return simd_all((simd_int3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint4 x) {
+  return simd_all((simd_int4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint8 x) {
+  return simd_all((simd_int8)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_uint16 x) {
+  return simd_all((simd_int16)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_long2 x) {
+#if defined __SSE2__
+  return _mm_movemask_pd(x) == 0x3;
+#elif defined __arm64__
+  return (x.x & x.y) & 0x8000000000000000U;
+#else
+  return (x.x & x.y) & 0x8000000000000000U;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_long3 x) {
+#if defined __AVX__
+  return (_mm256_movemask_pd(simd_make_long4_undef(x)) & 0x7) == 0x7;
+#else
+  return (x.x & x.y & x.z) & 0x8000000000000000U;
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_long4 x) {
+#if defined __AVX__
+  return _mm256_movemask_pd(x) == 0xf;
+#else
+  return simd_all(x.lo & x.hi);
+#endif
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_long8 x) {
+  return simd_all(x.lo & x.hi);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong2 x) {
+  return simd_all((simd_long2)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong3 x) {
+  return simd_all((simd_long3)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong4 x) {
+  return simd_all((simd_long4)x);
+}
+static inline SIMD_CFUNC simd_bool simd_all(simd_ulong8 x) {
+  return simd_all((simd_long8)x);
+}
+  
+static inline SIMD_CFUNC simd_float2 simd_select(simd_float2 x, simd_float2 y, simd_int2 mask) {
+  return simd_make_float2(simd_select(simd_make_float4_undef(x), simd_make_float4_undef(y), simd_make_int4_undef(mask)));
+}
+static inline SIMD_CFUNC simd_float3 simd_select(simd_float3 x, simd_float3 y, simd_int3 mask) {
+  return simd_make_float3(simd_select(simd_make_float4_undef(x), simd_make_float4_undef(y), simd_make_int4_undef(mask)));
+}
+static inline SIMD_CFUNC simd_float4 simd_select(simd_float4 x, simd_float4 y, simd_int4 mask) {
+#if defined __SSE4_1__
+  return _mm_blendv_ps(x, y, mask);
+#else
+  return simd_bitselect(x, y, mask >> 31);
+#endif
+}
+static inline SIMD_CFUNC simd_float8 simd_select(simd_float8 x, simd_float8 y, simd_int8 mask) {
+#if defined __AVX__
+  return _mm256_blendv_ps(x, y, mask);
+#else
+  return simd_bitselect(x, y, mask >> 31);
+#endif
+}
+static inline SIMD_CFUNC simd_float16 simd_select(simd_float16 x, simd_float16 y, simd_int16 mask) {
+  return simd_bitselect(x, y, mask >> 31);
+}
+static inline SIMD_CFUNC simd_double2 simd_select(simd_double2 x, simd_double2 y, simd_long2 mask) {
+#if defined __SSE4_1__
+  return _mm_blendv_pd(x, y, mask);
+#else
+  return simd_bitselect(x, y, mask >> 63);
+#endif
+}
+static inline SIMD_CFUNC simd_double3 simd_select(simd_double3 x, simd_double3 y, simd_long3 mask) {
+  return simd_make_double3(simd_select(simd_make_double4_undef(x), simd_make_double4_undef(y), simd_make_long4_undef(mask)));
+}
+static inline SIMD_CFUNC simd_double4 simd_select(simd_double4 x, simd_double4 y, simd_long4 mask) {
+#if defined __AVX__
+  return _mm256_blendv_pd(x, y, mask);
+#else
+  return simd_bitselect(x, y, mask >> 63);
+#endif
+}
+static inline SIMD_CFUNC simd_double8 simd_select(simd_double8 x, simd_double8 y, simd_long8 mask) {
+  return simd_bitselect(x, y, mask >> 63);
+}
+  
+static inline SIMD_CFUNC simd_char2 simd_bitselect(simd_char2 x, simd_char2 y, simd_char2 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_char3 simd_bitselect(simd_char3 x, simd_char3 y, simd_char3 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_char4 simd_bitselect(simd_char4 x, simd_char4 y, simd_char4 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_char8 simd_bitselect(simd_char8 x, simd_char8 y, simd_char8 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_char16 simd_bitselect(simd_char16 x, simd_char16 y, simd_char16 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_char32 simd_bitselect(simd_char32 x, simd_char32 y, simd_char32 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_char64 simd_bitselect(simd_char64 x, simd_char64 y, simd_char64 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_uchar2 simd_bitselect(simd_uchar2 x, simd_uchar2 y, simd_char2 mask) {
+  return (simd_uchar2)simd_bitselect((simd_char2)x, (simd_char2)y, mask);
+}
+static inline SIMD_CFUNC simd_uchar3 simd_bitselect(simd_uchar3 x, simd_uchar3 y, simd_char3 mask) {
+  return (simd_uchar3)simd_bitselect((simd_char3)x, (simd_char3)y, mask);
+}
+static inline SIMD_CFUNC simd_uchar4 simd_bitselect(simd_uchar4 x, simd_uchar4 y, simd_char4 mask) {
+  return (simd_uchar4)simd_bitselect((simd_char4)x, (simd_char4)y, mask);
+}
+static inline SIMD_CFUNC simd_uchar8 simd_bitselect(simd_uchar8 x, simd_uchar8 y, simd_char8 mask) {
+  return (simd_uchar8)simd_bitselect((simd_char8)x, (simd_char8)y, mask);
+}
+static inline SIMD_CFUNC simd_uchar16 simd_bitselect(simd_uchar16 x, simd_uchar16 y, simd_char16 mask) {
+  return (simd_uchar16)simd_bitselect((simd_char16)x, (simd_char16)y, mask);
+}
+static inline SIMD_CFUNC simd_uchar32 simd_bitselect(simd_uchar32 x, simd_uchar32 y, simd_char32 mask) {
+  return (simd_uchar32)simd_bitselect((simd_char32)x, (simd_char32)y, mask);
+}
+static inline SIMD_CFUNC simd_uchar64 simd_bitselect(simd_uchar64 x, simd_uchar64 y, simd_char64 mask) {
+  return (simd_uchar64)simd_bitselect((simd_char64)x, (simd_char64)y, mask);
+}
+static inline SIMD_CFUNC simd_short2 simd_bitselect(simd_short2 x, simd_short2 y, simd_short2 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_short3 simd_bitselect(simd_short3 x, simd_short3 y, simd_short3 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_short4 simd_bitselect(simd_short4 x, simd_short4 y, simd_short4 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_short8 simd_bitselect(simd_short8 x, simd_short8 y, simd_short8 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_short16 simd_bitselect(simd_short16 x, simd_short16 y, simd_short16 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_short32 simd_bitselect(simd_short32 x, simd_short32 y, simd_short32 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_ushort2 simd_bitselect(simd_ushort2 x, simd_ushort2 y, simd_short2 mask) {
+  return (simd_ushort2)simd_bitselect((simd_short2)x, (simd_short2)y, mask);
+}
+static inline SIMD_CFUNC simd_ushort3 simd_bitselect(simd_ushort3 x, simd_ushort3 y, simd_short3 mask) {
+  return (simd_ushort3)simd_bitselect((simd_short3)x, (simd_short3)y, mask);
+}
+static inline SIMD_CFUNC simd_ushort4 simd_bitselect(simd_ushort4 x, simd_ushort4 y, simd_short4 mask) {
+  return (simd_ushort4)simd_bitselect((simd_short4)x, (simd_short4)y, mask);
+}
+static inline SIMD_CFUNC simd_ushort8 simd_bitselect(simd_ushort8 x, simd_ushort8 y, simd_short8 mask) {
+  return (simd_ushort8)simd_bitselect((simd_short8)x, (simd_short8)y, mask);
+}
+static inline SIMD_CFUNC simd_ushort16 simd_bitselect(simd_ushort16 x, simd_ushort16 y, simd_short16 mask) {
+  return (simd_ushort16)simd_bitselect((simd_short16)x, (simd_short16)y, mask);
+}
+static inline SIMD_CFUNC simd_ushort32 simd_bitselect(simd_ushort32 x, simd_ushort32 y, simd_short32 mask) {
+  return (simd_ushort32)simd_bitselect((simd_short32)x, (simd_short32)y, mask);
+}
+static inline SIMD_CFUNC simd_int2 simd_bitselect(simd_int2 x, simd_int2 y, simd_int2 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_int3 simd_bitselect(simd_int3 x, simd_int3 y, simd_int3 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_int4 simd_bitselect(simd_int4 x, simd_int4 y, simd_int4 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_int8 simd_bitselect(simd_int8 x, simd_int8 y, simd_int8 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_int16 simd_bitselect(simd_int16 x, simd_int16 y, simd_int16 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_uint2 simd_bitselect(simd_uint2 x, simd_uint2 y, simd_int2 mask) {
+  return (simd_uint2)simd_bitselect((simd_int2)x, (simd_int2)y, mask);
+}
+static inline SIMD_CFUNC simd_uint3 simd_bitselect(simd_uint3 x, simd_uint3 y, simd_int3 mask) {
+  return (simd_uint3)simd_bitselect((simd_int3)x, (simd_int3)y, mask);
+}
+static inline SIMD_CFUNC simd_uint4 simd_bitselect(simd_uint4 x, simd_uint4 y, simd_int4 mask) {
+  return (simd_uint4)simd_bitselect((simd_int4)x, (simd_int4)y, mask);
+}
+static inline SIMD_CFUNC simd_uint8 simd_bitselect(simd_uint8 x, simd_uint8 y, simd_int8 mask) {
+  return (simd_uint8)simd_bitselect((simd_int8)x, (simd_int8)y, mask);
+}
+static inline SIMD_CFUNC simd_uint16 simd_bitselect(simd_uint16 x, simd_uint16 y, simd_int16 mask) {
+  return (simd_uint16)simd_bitselect((simd_int16)x, (simd_int16)y, mask);
+}
+static inline SIMD_CFUNC simd_float2 simd_bitselect(simd_float2 x, simd_float2 y, simd_int2 mask) {
+  return (simd_float2)simd_bitselect((simd_int2)x, (simd_int2)y, mask);
+}
+static inline SIMD_CFUNC simd_float3 simd_bitselect(simd_float3 x, simd_float3 y, simd_int3 mask) {
+  return (simd_float3)simd_bitselect((simd_int3)x, (simd_int3)y, mask);
+}
+static inline SIMD_CFUNC simd_float4 simd_bitselect(simd_float4 x, simd_float4 y, simd_int4 mask) {
+  return (simd_float4)simd_bitselect((simd_int4)x, (simd_int4)y, mask);
+}
+static inline SIMD_CFUNC simd_float8 simd_bitselect(simd_float8 x, simd_float8 y, simd_int8 mask) {
+  return (simd_float8)simd_bitselect((simd_int8)x, (simd_int8)y, mask);
+}
+static inline SIMD_CFUNC simd_float16 simd_bitselect(simd_float16 x, simd_float16 y, simd_int16 mask) {
+  return (simd_float16)simd_bitselect((simd_int16)x, (simd_int16)y, mask);
+}
+static inline SIMD_CFUNC simd_long2 simd_bitselect(simd_long2 x, simd_long2 y, simd_long2 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_long3 simd_bitselect(simd_long3 x, simd_long3 y, simd_long3 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_long4 simd_bitselect(simd_long4 x, simd_long4 y, simd_long4 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_long8 simd_bitselect(simd_long8 x, simd_long8 y, simd_long8 mask) {
+  return (x & ~mask) | (y & mask);
+}
+static inline SIMD_CFUNC simd_ulong2 simd_bitselect(simd_ulong2 x, simd_ulong2 y, simd_long2 mask) {
+  return (simd_ulong2)simd_bitselect((simd_long2)x, (simd_long2)y, mask);
+}
+static inline SIMD_CFUNC simd_ulong3 simd_bitselect(simd_ulong3 x, simd_ulong3 y, simd_long3 mask) {
+  return (simd_ulong3)simd_bitselect((simd_long3)x, (simd_long3)y, mask);
+}
+static inline SIMD_CFUNC simd_ulong4 simd_bitselect(simd_ulong4 x, simd_ulong4 y, simd_long4 mask) {
+  return (simd_ulong4)simd_bitselect((simd_long4)x, (simd_long4)y, mask);
+}
+static inline SIMD_CFUNC simd_ulong8 simd_bitselect(simd_ulong8 x, simd_ulong8 y, simd_long8 mask) {
+  return (simd_ulong8)simd_bitselect((simd_long8)x, (simd_long8)y, mask);
+}
+static inline SIMD_CFUNC simd_double2 simd_bitselect(simd_double2 x, simd_double2 y, simd_long2 mask) {
+  return (simd_double2)simd_bitselect((simd_long2)x, (simd_long2)y, mask);
+}
+static inline SIMD_CFUNC simd_double3 simd_bitselect(simd_double3 x, simd_double3 y, simd_long3 mask) {
+  return (simd_double3)simd_bitselect((simd_long3)x, (simd_long3)y, mask);
+}
+static inline SIMD_CFUNC simd_double4 simd_bitselect(simd_double4 x, simd_double4 y, simd_long4 mask) {
+  return (simd_double4)simd_bitselect((simd_long4)x, (simd_long4)y, mask);
+}
+static inline SIMD_CFUNC simd_double8 simd_bitselect(simd_double8 x, simd_double8 y, simd_long8 mask) {
+  return (simd_double8)simd_bitselect((simd_long8)x, (simd_long8)y, mask);
+}
 
 #ifdef __cplusplus
 }
 #endif
-#endif /* __SIMD_REQUIRED_COMPILER_FEATURES__ */
+#endif /* SIMD_COMPILER_HAS_REQUIRED_FEATURES */
 #endif /* __SIMD_LOGIC_HEADER__ */

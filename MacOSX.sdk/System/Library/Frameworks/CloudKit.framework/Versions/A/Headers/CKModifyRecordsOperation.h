@@ -22,10 +22,10 @@ typedef NS_ENUM(NSInteger, CKRecordSavePolicy) {
                                                1 - Since you've fetched this record, another client has added a new key to the record.
                                                2 - The presence of desiredKeys on the fetch / query that returned this record meant
                                                that only a portion of the record's keys were downloaded. */
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKModifyRecordsOperation : CKDatabaseOperation
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -42,7 +42,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (nonatomic, copy, nullable) NSData *clientChangeTokenData;
 
 /* Determines whether the batch should fail atomically or not. YES by default.
-   This only applies to zones that support CKRecordZoneCapabilityAtomic. */
+   Server-side write atomicity is only enforced on zones that have CKRecordZoneCapabilityAtomic.
+   If isAtomic is YES, client-side optimizations are enforced regardless of the zone's capabilities.  (For example, if a record is malformed, and cannot be sent to the server, the client will forcibly fail all other records-to-be-modified in that zone)  */
 @property (nonatomic, assign) BOOL atomic NS_SWIFT_NAME(isAtomic);
 
 /* Called repeatedly during transfer.

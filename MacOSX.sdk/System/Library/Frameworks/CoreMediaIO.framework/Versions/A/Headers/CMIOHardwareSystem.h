@@ -100,6 +100,8 @@ enum
                         This property is never settable.
     @constant       kCMIOHardwarePropertyAllowScreenCaptureDevices
                         A UInt32 where 1 means that screen capture devices will be presented to the process. A 0 means screen capture devices will be ignored. By default, this property is 1.
+	@constant       kCMIOHardwarePropertyAllowWirelessScreenCaptureDevices
+						A UInt32 where 1 means that wireless screen capture devices will be presented to the process. A 0 means wireless screen capture devices will be ignored. By default, this property is 0.
 */
 enum
 {
@@ -114,7 +116,8 @@ enum
     kCMIOHardwarePropertyPlugInForBundleID              = 'pibi',
     kCMIOHardwarePropertyUserSessionIsActiveOrHeadless  = 'user',
     kCMIOHardwarePropertySuspendedBySystem              = 'sbys',
-    kCMIOHardwarePropertyAllowScreenCaptureDevices      = 'yes '
+    kCMIOHardwarePropertyAllowScreenCaptureDevices      = 'yes ',
+    kCMIOHardwarePropertyAllowWirelessScreenCaptureDevices = 'wscd'
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

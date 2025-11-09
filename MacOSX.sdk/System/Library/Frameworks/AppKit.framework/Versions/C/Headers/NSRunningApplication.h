@@ -1,7 +1,7 @@
 /*
 	NSRunningApplication.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -149,7 +149,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 + (nullable instancetype)runningApplicationWithProcessIdentifier:(pid_t)pid;
 
 /* Returns an NSRunningApplication representing this application. */
-+ (instancetype)currentApplication;
+@property (class, readonly, strong) __kindof NSRunningApplication *currentApplication;
 
 /*
  *  Cause any applications that are invisibly still running (see NSProcessInfo.h automatic termination methods and docs) to terminate as if triggered by system memory pressure

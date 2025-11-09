@@ -47,8 +47,8 @@ extern "C" {
  *  Discussion:
  *    Return a value representing the number of microseconds since some
  *    point in time, usually since the system was booted.  One
- *    microsecond is 1 * 10^-6 seconds, and so there are one milMac OS
- *    X 10.7 ( 1,000,000 ) microseconds per second.  For reference, in
+ *    microsecond is 1 * 10^-6 seconds, and so there are one million
+ *    ( 1,000,000 ) microseconds per second.  For reference, in
  *    one microsecond light can travel about 850 feet in a vacuum.
  *     
  *    Microseconds() doesn't necessarily advance while the computer is

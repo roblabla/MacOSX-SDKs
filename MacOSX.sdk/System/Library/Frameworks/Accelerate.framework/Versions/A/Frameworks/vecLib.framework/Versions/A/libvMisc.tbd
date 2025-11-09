@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: 5A6450C5-F8B5-3D5C-B542-966BC86E0435', 'x86_64: F6EA539E-0A90-3F8A-9ECA-001E46394E29', 
-                   'x86_64h: 70D4B548-47EE-3C6B-A93B-3EA6B60701E0' ]
+uuids:           [ 'i386: 586BE48F-78E9-3EA7-9837-6B4F926613B1', 'x86_64: CA8D770A-D2A0-3312-8CB4-8547693A6609', 
+                   'x86_64h: 40CF36D9-8EDE-332B-BB4E-CD9D7BCBEEF5' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libvMisc.dylib
-current-version: 600.0
+current-version: 622
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64, x86_64h ]

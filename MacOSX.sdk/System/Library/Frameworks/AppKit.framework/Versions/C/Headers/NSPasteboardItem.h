@@ -1,7 +1,7 @@
 /*
 	NSPasteboardItem.h
 	Application Kit
-	Copyright (c) 2008-2016, Apple Inc.
+	Copyright (c) 2008-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -46,27 +46,27 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* Returns an array of UTI strings of the data types supported by the receiver.
 */
-@property (readonly, copy) NSArray<NSString *> *types;
+@property (readonly, copy) NSArray<NSPasteboardType> *types;
 
 /* Given an array of types, will return the first type contained in the pasteboard item, according to the sender's ordering of types.  It will check for UTI conformance of the requested types, preferring an exact match to conformance.
 */
-- (nullable NSString *)availableTypeFromArray:(NSArray<NSString *> *)types;
+- (nullable NSPasteboardType)availableTypeFromArray:(NSArray<NSPasteboardType> *)types;
 
 /* Promises the types and registers the data provider to be messaged to provide the data for that type when requested.
 */
-- (BOOL)setDataProvider:(id <NSPasteboardItemDataProvider>)dataProvider forTypes:(NSArray *)types;
+- (BOOL)setDataProvider:(id<NSPasteboardItemDataProvider>)dataProvider forTypes:(NSArray<NSPasteboardType> *)types;
 
 /* Sets a value for the provided UTI type string.
 */
-- (BOOL)setData:(nullable NSData *)data forType:(NSString *)type;
-- (BOOL)setString:(nullable NSString *)string forType:(NSString *)type;
-- (BOOL)setPropertyList:(nullable id)propertyList forType:(NSString *)type;
+- (BOOL)setData:(NSData *)data forType:(NSPasteboardType)type;
+- (BOOL)setString:(NSString *)string forType:(NSPasteboardType)type;
+- (BOOL)setPropertyList:(id)propertyList forType:(NSPasteboardType)type;
 
 /* Returns a value for the provided UTI type string.
 */
-- (nullable NSData *)dataForType:(NSString *)type;
-- (nullable NSString *)stringForType:(NSString *)type;
-- (nullable id)propertyListForType:(NSString *)type;
+- (nullable NSData *)dataForType:(NSPasteboardType)type;
+- (nullable NSString *)stringForType:(NSPasteboardType)type;
+- (nullable id)propertyListForType:(NSPasteboardType)type;
 
 @end
 
@@ -76,7 +76,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 /* Implemented by the data provider of a pasteboard item, to provide the data for a particular UTI type.
 */
 @required
-- (void)pasteboard:(nullable NSPasteboard *)pasteboard item:(NSPasteboardItem *)item provideDataForType:(NSString *)type;
+- (void)pasteboard:(nullable NSPasteboard *)pasteboard item:(NSPasteboardItem *)item provideDataForType:(NSPasteboardType)type;
 
 /* One data provider can provide data for more than one pasteboard item.  This method is called when the pasteboard no longer needs the data provider for any of its pasteboard items.  This can be either because the data provider has fulfilled all promises, or because ownership of the pasteboard has changed.
 */

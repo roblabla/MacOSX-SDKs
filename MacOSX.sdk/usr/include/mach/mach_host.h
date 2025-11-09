@@ -177,21 +177,6 @@ kern_return_t kmod_get_info
 	mach_msg_type_number_t *modulesCnt
 );
 
-/* Routine host_zone_info */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t host_zone_info
-(
-	host_priv_t host,
-	zone_name_array_t *names,
-	mach_msg_type_number_t *namesCnt,
-	zone_info_array_t *info,
-	mach_msg_type_number_t *infoCnt
-);
-
 /* Routine host_virtual_physical_table_info */
 #ifdef	mig_external
 mig_external
@@ -566,16 +551,6 @@ __END_DECLS
 #endif
 	typedef struct {
 		mach_msg_header_t Head;
-	} __Request__host_zone_info_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
 	} __Request__host_virtual_physical_table_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -805,7 +780,6 @@ union __RequestUnion__mach_host_subsystem {
 	__Request__host_get_io_master_t Request_host_get_io_master;
 	__Request__host_get_clock_service_t Request_host_get_clock_service;
 	__Request__kmod_get_info_t Request_kmod_get_info;
-	__Request__host_zone_info_t Request_host_zone_info;
 	__Request__host_virtual_physical_table_info_t Request_host_virtual_physical_table_info;
 	__Request__processor_set_default_t Request_processor_set_default;
 	__Request__processor_set_create_t Request_processor_set_create;
@@ -944,24 +918,6 @@ union __RequestUnion__mach_host_subsystem {
 		NDR_record_t NDR;
 		mach_msg_type_number_t modulesCnt;
 	} __Reply__kmod_get_info_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_ool_descriptor_t names;
-		mach_msg_ool_descriptor_t info;
-		/* end of the kernel processed data */
-		NDR_record_t NDR;
-		mach_msg_type_number_t namesCnt;
-		mach_msg_type_number_t infoCnt;
-	} __Reply__host_zone_info_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
@@ -1240,7 +1196,6 @@ union __ReplyUnion__mach_host_subsystem {
 	__Reply__host_get_io_master_t Reply_host_get_io_master;
 	__Reply__host_get_clock_service_t Reply_host_get_clock_service;
 	__Reply__kmod_get_info_t Reply_kmod_get_info;
-	__Reply__host_zone_info_t Reply_host_zone_info;
 	__Reply__host_virtual_physical_table_info_t Reply_host_virtual_physical_table_info;
 	__Reply__processor_set_default_t Reply_processor_set_default;
 	__Reply__processor_set_create_t Reply_processor_set_create;
@@ -1272,7 +1227,6 @@ union __ReplyUnion__mach_host_subsystem {
     { "host_get_io_master", 205 },\
     { "host_get_clock_service", 206 },\
     { "kmod_get_info", 207 },\
-    { "host_zone_info", 208 },\
     { "host_virtual_physical_table_info", 209 },\
     { "processor_set_default", 213 },\
     { "processor_set_create", 214 },\

@@ -5,11 +5,12 @@
 #ifndef CGPATTERN_H_
 #define CGPATTERN_H_
 
-typedef struct CGPattern *CGPatternRef;
+#include <CoreFoundation/CFBase.h>
+
+typedef struct CF_BRIDGED_TYPE(id) CGPattern *CGPatternRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGContext.h>
-#include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 

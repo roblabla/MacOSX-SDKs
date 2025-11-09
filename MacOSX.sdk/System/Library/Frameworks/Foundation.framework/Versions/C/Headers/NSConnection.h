@@ -1,5 +1,5 @@
 /*	NSConnection.h
-	Copyright (c) 1989-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,6 +13,7 @@
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 NS_ASSUME_NONNULL_BEGIN
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSConnection : NSObject {
     @private
@@ -104,11 +105,12 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSConnectionReplyMode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+FOUNDATION_EXPORT NSString * const NSConnectionReplyMode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 
-FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+FOUNDATION_EXPORT NSString * const NSConnectionDidDieNotification NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @protocol NSConnectionDelegate <NSObject>
 @optional
@@ -130,10 +132,11 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSFailedAuthenticationException NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+FOUNDATION_EXPORT NSString * const NSFailedAuthenticationException NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 
-FOUNDATION_EXPORT NSString * const NSConnectionDidInitializeNotification NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+FOUNDATION_EXPORT NSString * const NSConnectionDidInitializeNotification NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSDistantObjectRequest : NSObject
 

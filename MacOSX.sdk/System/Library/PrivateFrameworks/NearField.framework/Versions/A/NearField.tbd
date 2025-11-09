@@ -1,13 +1,12 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: B6FFFF78-F7D5-377C-B351-3EFED2B98850' ]
+uuids:           [ 'x86_64: 8A863545-169D-3C44-83C0-692122E8BABE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/NearField.framework/Versions/A/NearField
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NFSecureElementManagerSessionECDSACertificateKey, _NFSecureElementManagerSessionRSAACertificateKey, 
-                       _ObliterationDeleteAllApplets ]
+                       _NFSignedPlatformData, _NFSignedPlatformSignatureBlob, _ObliterationDeleteAllApplets ]
     objc-classes:    [ _NFApplet, _NFContactlessPaymentEndEvent, _NFContactlessPaymentSession, 
                        _NFContactlessPaymentSessionCallbacks, _NFContactlessPaymentSessionInterface, 
                        _NFContactlessPaymentStartEvent, _NFContactlessSession, _NFContactlessSessionCallbacks, 
@@ -15,14 +14,18 @@ exports:
                        _NFECommercePaymentRequest, _NFECommercePaymentResponse, _NFECommercePaymentSession, 
                        _NFECommercePaymentSessionInterface, _NFFieldDetectSession, 
                        _NFFieldDetectSessionInterfaceCallbacks, _NFHardwareBoosterInfo, 
-                       _NFHardwareControllerInfo, _NFHardwareManager, _NFHardwareManagerInterface, 
-                       _NFHardwareSecureElementInfo, _NFLoyaltyAndPaymentSession, 
-                       _NFNdefMessage, _NFNdefRecord, _NFReaderSession, _NFReaderSessionCallbacks, 
-                       _NFReaderSessionInterface, _NFRemoteAdminCardIngestionRequest, 
-                       _NFRemoteAdminManager, _NFRemoteAdminManagerInterface, _NFSecureElement, 
+                       _NFHardwareControllerInfo, _NFHardwareManager, _NFHardwareManagerCallbacks, 
+                       _NFHardwareManagerInterface, _NFHardwareSecureElementInfo, 
+                       _NFLoyaltyAndPaymentSession, _NFNdefMessage, _NFNdefRecord, 
+                       _NFNdefTagSession, _NFPeerPaymentEnrollmentRequest, _NFPeerPaymentEnrollmentResponse, 
+                       _NFPeerPaymentRequest, _NFPeerPaymentResponse, _NFPeerPaymentSession, 
+                       _NFPeerPaymentSessionInterface, _NFPeerPaymentTransferRequest, 
+                       _NFReaderSession, _NFReaderSessionInternalInterface, _NFRemoteAdminCardIngestionRequest, 
+                       _NFRemoteAdminManager, _NFRemoteAdminManagerCallbacks, _NFRemoteAdminManagerInterface, 
+                       _NFRestoreInterface, _NFRestoreService, _NFSecureElement, 
                        _NFSecureElementManagerSession, _NFSecureElementManagerSessionInterface, 
                        _NFSecureElementSession, _NFSecureElementSessionInterface, 
-                       _NFSession, _NFSignatureInfo, _NFTag, _NFTechnologyEvent, 
+                       _NFSeshatSession, _NFSession, _NFSignatureInfo, _NFTag, _NFTechnologyEvent, 
                        _NFValueAddedServiceCard, _NFValueAddedServiceSession, _NFValueAddedServiceSessionCallbacks, 
                        _NFValueAddedServiceSessionInterface, _NFValueAddedServiceTransaction ]
 ...

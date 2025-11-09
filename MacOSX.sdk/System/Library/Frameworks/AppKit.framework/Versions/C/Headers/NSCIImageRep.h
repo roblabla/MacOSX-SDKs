@@ -1,13 +1,13 @@
 /*
         NSCIImageRep.h
         Application Kit
-        Copyright (c) 2003-2016, Apple Inc.
+        Copyright (c) 2003-2017, Apple Inc.
         All rights reserved.
 */
 
 #import <AppKit/NSImageRep.h>
 #import <AppKit/NSGraphics.h>
-#import <QuartzCore/CIImage.h>
+#import <CoreImage/CIImage.h>
 
 
 NS_ASSUME_NONNULL_BEGIN

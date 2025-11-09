@@ -2,7 +2,7 @@
  *  IOSurfaceObjC.h
  *  IOSurface Objective C Interface
  *
- *  Copyright 20016 Apple, Inc. All rights reserved.
+ *  Copyright 2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -11,7 +11,7 @@
 
 #if defined(__OBJC__)
 
-#import <IOSurface/IOSurfaceAPI.h>
+#import <IOSurface/IOSurfaceTypes.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -133,8 +133,8 @@ IOSFC_CLASS_AVAILABLE(10_12, 10_0)
     so care should be taken to avoid the calls whenever possible.   The seed values are 
     particularly useful for keeping a cache of the buffer contents.
 */
-- (IOReturn)lockWithOptions:(IOSurfaceLockOptions)options seed:(nullable uint32_t *)seed;
-- (IOReturn)unlockWithOptions:(IOSurfaceLockOptions)options seed:(nullable uint32_t *)seed;
+- (kern_return_t)lockWithOptions:(IOSurfaceLockOptions)options seed:(nullable uint32_t *)seed;
+- (kern_return_t)unlockWithOptions:(IOSurfaceLockOptions)options seed:(nullable uint32_t *)seed;
 
 /* The total allocation size of the IOSurface */
 @property (readonly) NSInteger allocationSize;
@@ -173,8 +173,8 @@ IOSFC_CLASS_AVAILABLE(10_12, 10_0)
 - (void)setAttachment:(id)anObject forKey:(NSString *)key;
 - (nullable id)attachmentForKey:(NSString *)key;
 - (void)removeAttachmentForKey:(NSString *)key;
-- (void)setAllAttachments:(NSDictionary *)dict;
-- (nullable NSDictionary *)allAttachments;
+- (void)setAllAttachments:(NSDictionary<NSString *, id> *)dict;
+- (nullable NSDictionary<NSString *, id> *)allAttachments;
 - (void)removeAllAttachments;
 
 /* There are cases where it is useful to know whether or not an IOSurface buffer is considered to be "in use"
@@ -193,7 +193,7 @@ IOSFC_CLASS_AVAILABLE(10_12, 10_0)
    incremented by one.   When the per-process usage count drops back to zero (either via explicit decrement
    calls or the process terminates), the global usage count is decremented by one. */
    
-@property (readonly) BOOL isInUse;
+@property (readonly, getter = isInUse) BOOL inUse;
 - (void)incrementUseCount;
 - (void)decrementUseCount;
 
@@ -206,6 +206,10 @@ IOSFC_CLASS_AVAILABLE(10_12, 10_0)
 value that is different than the bytesPerElement value(s) of this IOSurface.  Returns NO if the bytes per pixel
 value must be an exact match. */
 @property (readonly) BOOL allowsPixelSizeCasting;
+
+/* See comments in IOSurfaceAPI.h */
+- (kern_return_t)setPurgeable:(IOSurfacePurgeabilityState)newState oldState:(IOSurfacePurgeabilityState * __nullable)oldState
+	IOSFC_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 @end 
 

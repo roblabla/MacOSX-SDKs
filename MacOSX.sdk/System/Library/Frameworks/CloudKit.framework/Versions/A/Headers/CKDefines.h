@@ -17,11 +17,10 @@
 #define CK_HIDDEN   __attribute__((visibility("hidden")))
 #endif
 
-
-#if DEBUG
-    #define CK_UNIT_TESTS_AVAILABLE NS_CLASS_AVAILABLE(10_10, 8_0)
-    #define CK_UNIT_TESTS_EXTERN CK_EXTERN
+#ifndef CK_EXTERN_HIDDEN
+#ifdef __cplusplus
+#define CK_EXTERN_HIDDEN   extern "C" __attribute__((visibility ("hidden")))
 #else
-    #define CK_UNIT_TESTS_AVAILABLE CK_HIDDEN
-    #define CK_UNIT_TESTS_EXTERN CK_HIDDEN
+#define CK_EXTERN_HIDDEN   extern __attribute__((visibility ("hidden")))
+#endif
 #endif

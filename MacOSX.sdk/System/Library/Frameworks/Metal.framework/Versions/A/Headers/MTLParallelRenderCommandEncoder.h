@@ -6,6 +6,7 @@
 //
 
 #import <Metal/MTLDefines.h>
+#import <Metal/MTLTypes.h>
 #import <Metal/MTLRenderPass.h>
 #import <Metal/MTLCommandEncoder.h>
 
@@ -24,7 +25,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method renderCommandEncoder
  @abstract Return a new autoreleased object that conforms to <MTLRenderCommandEncoder> that may be used to encode on a different thread.
  */
-- (id <MTLRenderCommandEncoder>)renderCommandEncoder;
+- (nullable id <MTLRenderCommandEncoder>)renderCommandEncoder;
 
 /*!
  @method setColorStoreAction:atIndex:
@@ -48,6 +49,29 @@ NS_AVAILABLE(10_11, 8_0)
  setStencilStoreAction: must be used to finalize the store action before endEncoding is called.
 */
 - (void)setStencilStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @method setColorStoreActionOptions:atIndex:
+ @brief If the the store action for a given color attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setColorStoreActionOptions:atIndex: may be used to finalize the store action options before endEncoding is called.
+ @param storeActionOptions The desired store action options for the given color attachment.
+ @param colorAttachmentIndex The index of the color attachment
+ */
+- (void)setColorStoreActionOptions:(MTLStoreActionOptions)storeActionOptions atIndex:(NSUInteger)colorAttachmentIndex NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @method setDepthStoreActionOptions:
+ @brief If the the store action for the depth attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setDepthStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
+ */
+- (void)setDepthStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @method setStencilStoreActionOptions:
+ @brief If the the store action for the stencil attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setStencilStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
+ */
+- (void)setStencilStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
 
 @end
 NS_ASSUME_NONNULL_END

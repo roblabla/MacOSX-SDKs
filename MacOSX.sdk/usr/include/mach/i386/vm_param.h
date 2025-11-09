@@ -137,7 +137,11 @@
 /*
  * default top of user stack... it grows down from here
  */
-#define VM_USRSTACK64		((user_addr_t) 0x00007FFF5FC00000ULL)
+#define VM_USRSTACK64		((user_addr_t) 0x00007FFEEFC00000ULL)
+
+/*
+ * XXX TODO: Obsolete?
+ */
 #define VM_DYLD64		((user_addr_t) 0x00007FFF5FC00000ULL)
 #define VM_LIB64_SHR_DATA	((user_addr_t) 0x00007FFF60000000ULL)
 #define VM_LIB64_SHR_TEXT	((user_addr_t) 0x00007FFF80000000ULL)

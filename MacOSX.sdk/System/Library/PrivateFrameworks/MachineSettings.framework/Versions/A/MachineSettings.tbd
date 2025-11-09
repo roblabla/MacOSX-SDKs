@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A3333FAD-3908-377E-A8AB-054C195DA6A1', 'x86_64: A8C9C57A-FAEF-3F35-9FE8-AAAFD1C656F7' ]
+uuids:           [ 'i386: 14572317-05CE-310D-A7FA-AE04ACDC4FDA', 'x86_64: 2555FB0D-1DE7-3DAD-AAB1-5F87927C4ABF' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MachineSettings.framework/Versions/A/MachineSettings
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _DelayUntilRepeatKey, _DoubleClickThresholdTimeKey, _FNStateKey, 

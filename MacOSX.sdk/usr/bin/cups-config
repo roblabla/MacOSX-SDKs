@@ -12,9 +12,9 @@
 # file is missing or damaged, see the license at "http://www.cups.org/".
 #
 
-VERSION="2.2.0"
+VERSION="2.2.4"
 APIVERSION="2.2"
-BUILD="cups-450"
+BUILD="cups-460"
 
 prefix=/
 exec_prefix=/usr

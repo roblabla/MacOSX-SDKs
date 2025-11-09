@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright 2005-2015 Apple Inc. All rights reserved.
+    Copyright © 2005-2017 Apple Inc. All rights reserved.
  
 */
 
@@ -870,7 +870,7 @@ CM_EXPORT
 Boolean CMSampleBufferHasDataFailed(
 	CMSampleBufferRef CM_NONNULL sbuf,	/*! @param sbuf
 											CMSampleBuffer being interrogated. */
-	OSStatus * CM_NONNULL statusOut)		/*! @param statusOut
+	OSStatus * CM_NULLABLE statusOut)	/*! @param statusOut
 											Points to an OSStatus to receive a status code describing the failure.
 											Pass NULL if you do not want this information. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
@@ -1374,7 +1374,7 @@ CM_EXPORT const CFStringRef kCMSampleAttachmentKey_HasRedundantCoding  // kCFBoo
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 CM_EXPORT const CFStringRef kCMSampleAttachmentKey_IsDependedOnByOthers  // kCFBooleanTrue, kCFBooleanFalse, or absent if unknown
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
-CM_EXPORT const CFStringRef kCMSampleAttachmentKey_DependsOnOthers  // kCFBooleanTrue, kCFBooleanFalse, or absent if unknown
+CM_EXPORT const CFStringRef kCMSampleAttachmentKey_DependsOnOthers  // kCFBooleanTrue (e.g., non-I-frame), kCFBooleanFalse (e.g. I-frame), or absent if unknown
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 CM_EXPORT const CFStringRef kCMSampleAttachmentKey_EarlierDisplayTimesAllowed  // CFBoolean
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
@@ -1394,6 +1394,42 @@ CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_PostNotificationWhenCon
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_ResumeOutput  // CFNumber (ResumeTag)
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+
+/*!
+	@constant	kCMSampleAttachmentKey_HEVCTemporalLevelInfo
+	@abstract	Indicates a video frame's level within a hierarchical frame dependency structure.
+	@discussion
+		When present, the temporal level attachments among a group of video frames provide information about where inter-frame dependencies may and may not exist.  
+		The temporal level attachment, if present, is a positive CFNumber, and indicates that this video frame does not depend on any video frame with a greater temporal level.
+		The attachment may be absent if no such information is available.
+
+*/
+CM_EXPORT const CFStringRef kCMSampleAttachmentKey_HEVCTemporalLevelInfo  // CFDictionary(kCMHEVCTemporalLevelInfoKey_*), optional.  Corresponds to 'tscl' sample group.
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+
+CM_EXPORT const CFStringRef kCMHEVCTemporalLevelInfoKey_TemporalLevel					// CFNumber(Int)
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMHEVCTemporalLevelInfoKey_ProfileSpace					// CFNumber(Int)
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMHEVCTemporalLevelInfoKey_TierFlag						// CFNumber(Int)
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMHEVCTemporalLevelInfoKey_ProfileIndex					// CFNumber(Int)
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMHEVCTemporalLevelInfoKey_ProfileCompatibilityFlags		// CFData(4 bytes)
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMHEVCTemporalLevelInfoKey_ConstraintIndicatorFlags		// CFData(6 bytes)
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMHEVCTemporalLevelInfoKey_LevelIndex						// CFNumber(Int)
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+
+CM_EXPORT const CFStringRef kCMSampleAttachmentKey_HEVCTemporalSubLayerAccess			// CFBoolean, optional.  Corresponds to 'tsas' sample group.
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+
+CM_EXPORT const CFStringRef kCMSampleAttachmentKey_HEVCStepwiseTemporalSubLayerAccess  // CFBoolean, optional.  Corresponds to 'stsa' sample group.
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+
+CM_EXPORT const CFStringRef kCMSampleAttachmentKey_HEVCSyncSampleNALUnitType			// CFNumber(Int), optional.  Corresponds to 'sync' sample group.
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
 
 /*!
 	@constant	kCMSampleBufferAttachmentKey_TransitionID
@@ -1669,6 +1705,20 @@ CM_EXPORT const CFStringRef kCMSampleBufferLensStabilizationInfo_Unavailable  //
  */
 CM_EXPORT const CFStringRef kCMSampleBufferLensStabilizationInfo_Off  // CFString
 							__OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_9_0);
+
+/*!
+	 @constant	kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix
+	 @abstract	Indicates the 3x3 camera intrinsic matrix applied to the current sample buffer.
+	 @discussion
+		Camera intrinsic matrix is a CFData containing a matrix_float3x3, which is column-major. It has the following contents:
+			fx	0	ox
+			0	fy	oy
+			0	0	1
+			fx and fy are the focal length in pixels. For square pixels, they will have the same value.
+			ox and oy are the coordinates of the principal point. The origin is the upper left of the frame.
+ */
+CM_EXPORT const CFStringRef kCMSampleBufferAttachmentKey_CameraIntrinsicMatrix  // CFData (matrix_float3x3)
+							__OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_11_0);
 
 /*!
 	@constant	kCMSampleBufferAttachmentKey_ForceKeyFrame

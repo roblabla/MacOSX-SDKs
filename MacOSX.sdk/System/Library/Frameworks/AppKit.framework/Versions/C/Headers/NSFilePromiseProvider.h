@@ -1,7 +1,7 @@
 /*
 	NSFilePromiseProvider.h
 	Application Kit
-	Copyright (c) 2015-2016, Apple Inc.
+	Copyright (c) 2015-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -22,7 +22,7 @@ NS_CLASS_AVAILABLE_MAC(10_12)
     NSString *_fileType;
     NSArray<NSString *> *_reservedA;
     id _reservedB;
-    id <NSFilePromiseProviderDelegate> _delegate;
+    __weak id <NSFilePromiseProviderDelegate> _delegate;
     id _userInfo;
     NSURL *_destinationURL;
     NSInteger _dragggingSequenceNumber;

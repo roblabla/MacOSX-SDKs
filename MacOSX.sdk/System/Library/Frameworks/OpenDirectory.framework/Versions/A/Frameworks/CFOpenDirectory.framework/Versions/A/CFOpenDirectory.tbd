@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 73459C3C-DDD8-3E7A-BC31-D1CA301B37B2', 'x86_64: 292FCA26-B2E4-37F8-BC8C-8369ACD3345A' ]
+uuids:           [ 'i386: 5EA0808A-0753-3AB9-92B5-5E330FA2C89F', 'x86_64: 22AB4959-4303-3F67-9766-ED8308380EC8' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenDirectory.framework/Versions/A/Frameworks/CFOpenDirectory.framework/Versions/A/CFOpenDirectory
 objc-constraint: none
@@ -14,21 +14,25 @@ exports:
                        _ODNodeCopyUnreachableSubnodeNames, _ODNodeCreateCopy, _ODNodeCreateRecord, 
                        _ODNodeCreateWithDSRef, _ODNodeCreateWithName, _ODNodeCreateWithNameAndOptions, 
                        _ODNodeCreateWithNodeType, _ODNodeCustomCall, _ODNodeCustomFunction, 
-                       _ODNodeGetDSRef, _ODNodeGetName, _ODNodeGetTypeID, _ODNodePasswordContentCheck, 
-                       _ODNodeRemoveAccountPolicy, _ODNodeRemovePolicy, _ODNodeSetAccountPolicies, 
-                       _ODNodeSetCredentials, _ODNodeSetCredentialsExtended, _ODNodeSetCredentialsUsingKerberosCache, 
-                       _ODNodeSetPolicies, _ODNodeSetPolicy, _ODNodeVerifyCredentialsExtended, 
-                       _ODQueryCopyResults, _ODQueryCreateWithNode, _ODQueryCreateWithNodeType, 
-                       _ODQueryGetTypeID, _ODQueryScheduleWithRunLoop, _ODQuerySetCallback, 
-                       _ODQuerySetDispatchQueue, _ODQuerySynchronize, _ODQueryUnscheduleFromRunLoop, 
-                       _ODRecordAddAccountPolicy, _ODRecordAddMember, _ODRecordAddValue, 
-                       _ODRecordAuthenticationAllowed, _ODRecordChangePassword, _ODRecordContainsMember, 
-                       _ODRecordContainsMemberRefresh, _ODRecordCopyAccountPolicies, 
-                       _ODRecordCopyDetails, _ODRecordCopyEffectivePolicies, _ODRecordCopyPasswordContentSummary, 
-                       _ODRecordCopyPasswordPolicy, _ODRecordCopyPolicies, _ODRecordCopySupportedPolicies, 
-                       _ODRecordCopyValues, _ODRecordDelete, _ODRecordEnumerateMembers, 
-                       _ODRecordEnumerateMembership, _ODRecordGetRecordName, _ODRecordGetRecordType, 
-                       _ODRecordGetTypeID, _ODRecordPasswordChangeAllowed, _ODRecordRemoveAccountPolicy, 
+                       _ODNodeGetDSRef, _ODNodeGetName, _ODNodeGetSecureTokenRecoveryType, 
+                       _ODNodeGetTypeID, _ODNodePasswordContentCheck, _ODNodeRemoveAccountPolicy, 
+                       _ODNodeRemovePolicy, _ODNodeSetAccountPolicies, _ODNodeSetCredentials, 
+                       _ODNodeSetCredentialsExtended, _ODNodeSetCredentialsUsingKerberosCache, 
+                       _ODNodeSetPolicies, _ODNodeSetPolicy, _ODNodeSetSecureTokenRecoveryCloud, 
+                       _ODNodeSetSecureTokenRecoveryCloudUsingIdentity, _ODNodeSetSecureTokenRecoveryMasterPassword, 
+                       _ODNodeSetSecureTokenRecoveryPersonal, _ODNodeSetSecureTokenRecoveryPersonalUsingKey, 
+                       _ODNodeVerifyCredentialsExtended, _ODQueryCopyResults, _ODQueryCreateWithNode, 
+                       _ODQueryCreateWithNodeType, _ODQueryGetTypeID, _ODQueryScheduleWithRunLoop, 
+                       _ODQuerySetCallback, _ODQuerySetDispatchQueue, _ODQuerySynchronize, 
+                       _ODQueryUnscheduleFromRunLoop, _ODRecordAddAccountPolicy, 
+                       _ODRecordAddMember, _ODRecordAddValue, _ODRecordAuthenticationAllowed, 
+                       _ODRecordChangePassword, _ODRecordContainsMember, _ODRecordContainsMemberRefresh, 
+                       _ODRecordCopyAccountPolicies, _ODRecordCopyDetails, _ODRecordCopyEffectivePolicies, 
+                       _ODRecordCopyPasswordContentSummary, _ODRecordCopyPasswordPolicy, 
+                       _ODRecordCopyPolicies, _ODRecordCopySupportedPolicies, _ODRecordCopyValues, 
+                       _ODRecordDelete, _ODRecordEnumerateMembers, _ODRecordEnumerateMembership, 
+                       _ODRecordGetRecordName, _ODRecordGetRecordType, _ODRecordGetTypeID, 
+                       _ODRecordPasswordChangeAllowed, _ODRecordRemoveAccountPolicy, 
                        _ODRecordRemoveMember, _ODRecordRemovePolicy, _ODRecordRemoveValue, 
                        _ODRecordSecondsUntilAuthenticationsExpire, _ODRecordSecondsUntilPasswordExpires, 
                        _ODRecordSetAccountPolicies, _ODRecordSetNodeCredentials, 

@@ -1,5 +1,5 @@
 /*	NSMapTable.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -19,13 +19,13 @@ NS_ASSUME_NONNULL_BEGIN
    An NSMapTable can also be configured to operate on arbitrary pointers and not just objects.  We recommend the C function API for "void *" access.  To configure for pointer use, consult and choose the appropriate NSPointerFunction options or configure and use  NSPointerFunctions objects directly for initialization.
 */
 
-static const NSPointerFunctionsOptions NSMapTableStrongMemory NS_ENUM_AVAILABLE(10_5, 6_0) = NSPointerFunctionsStrongMemory;
+static const NSPointerFunctionsOptions NSMapTableStrongMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsStrongMemory;
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
 static const NSPointerFunctionsOptions NSMapTableZeroingWeakMemory NS_ENUM_DEPRECATED_MAC(10_5, 10_8) = NSPointerFunctionsZeroingWeakMemory;
 #endif
-static const NSPointerFunctionsOptions NSMapTableCopyIn NS_ENUM_AVAILABLE(10_5, 6_0) = NSPointerFunctionsCopyIn;
-static const NSPointerFunctionsOptions NSMapTableObjectPointerPersonality NS_ENUM_AVAILABLE(10_5, 6_0) = NSPointerFunctionsObjectPointerPersonality;
-static const NSPointerFunctionsOptions NSMapTableWeakMemory NS_ENUM_AVAILABLE(10_8, 6_0) = NSPointerFunctionsWeakMemory;
+static const NSPointerFunctionsOptions NSMapTableCopyIn API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsCopyIn;
+static const NSPointerFunctionsOptions NSMapTableObjectPointerPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsObjectPointerPersonality;
+static const NSPointerFunctionsOptions NSMapTableWeakMemory API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsWeakMemory;
 
 typedef NSUInteger NSMapTableOptions;
 
@@ -38,16 +38,16 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 + (NSMapTable<KeyType, ObjectType> *)mapTableWithKeyOptions:(NSPointerFunctionsOptions)keyOptions valueOptions:(NSPointerFunctionsOptions)valueOptions;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
-+ (id)mapTableWithStrongToStrongObjects NS_DEPRECATED_MAC(10_5, 10_8);
-+ (id)mapTableWithWeakToStrongObjects NS_DEPRECATED_MAC(10_5, 10_8);
-+ (id)mapTableWithStrongToWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);
-+ (id)mapTableWithWeakToWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);
++ (id)mapTableWithStrongToStrongObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos);
++ (id)mapTableWithWeakToStrongObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos);
++ (id)mapTableWithStrongToWeakObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos);
++ (id)mapTableWithWeakToWeakObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 #endif
 
-+ (NSMapTable<KeyType, ObjectType> *)strongToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0);
-+ (NSMapTable<KeyType, ObjectType> *)weakToStrongObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key is reclaimed
-+ (NSMapTable<KeyType, ObjectType> *)strongToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0);
-+ (NSMapTable<KeyType, ObjectType> *)weakToWeakObjectsMapTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak key or object is reclaimed
++ (NSMapTable<KeyType, ObjectType> *)strongToStrongObjectsMapTable API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
++ (NSMapTable<KeyType, ObjectType> *)weakToStrongObjectsMapTable API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)); // entries are not necessarily purged right away when the weak key is reclaimed
++ (NSMapTable<KeyType, ObjectType> *)strongToWeakObjectsMapTable API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
++ (NSMapTable<KeyType, ObjectType> *)weakToWeakObjectsMapTable API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)); // entries are not necessarily purged right away when the weak key or object is reclaimed
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */
 @property (readonly, copy) NSPointerFunctions *keyPointerFunctions;
@@ -127,22 +127,22 @@ FOUNDATION_EXPORT NSMapTable *NSCreateMapTable(NSMapTableKeyCallBacks keyCallBac
 
 /****************	Common map table key callbacks	****************/
 
-FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntegerMapKeyCallBacks NS_AVAILABLE_MAC(10_5);
+FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntegerMapKeyCallBacks API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonOwnedPointerMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonOwnedPointerOrNullMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSNonRetainedObjectMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSObjectMapKeyCallBacks;
 FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSOwnedPointerMapKeyCallBacks;
-FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntMapKeyCallBacks NS_DEPRECATED_MAC(10_0, 10_5);
+FOUNDATION_EXPORT const NSMapTableKeyCallBacks NSIntMapKeyCallBacks API_DEPRECATED("Not supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /****************	Common map table value callbacks	****************/
 
-FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntegerMapValueCallBacks NS_AVAILABLE_MAC(10_5);
+FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntegerMapValueCallBacks API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSNonOwnedPointerMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSObjectMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSNonRetainedObjectMapValueCallBacks;
 FOUNDATION_EXPORT const NSMapTableValueCallBacks NSOwnedPointerMapValueCallBacks;
-FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntMapValueCallBacks NS_DEPRECATED_MAC(10_0, 10_5);
+FOUNDATION_EXPORT const NSMapTableValueCallBacks NSIntMapValueCallBacks API_DEPRECATED("Not supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 NS_ASSUME_NONNULL_END
 

@@ -1,6 +1,6 @@
 /* CoreAnimation - CAConstraintLayoutManager.h
 
-   Copyright (c) 2006-2016, Apple Inc.
+   Copyright (c) 2006-2017, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -68,7 +68,7 @@ CA_CLASS_AVAILABLE (10.5)
 /** The class representing a single layout constraint. **/
 
 CA_CLASS_AVAILABLE (10.5)
-@interface CAConstraint : NSObject <NSCoding>
+@interface CAConstraint : NSObject <NSSecureCoding>
 {
 @private
   NSString *_srcId;

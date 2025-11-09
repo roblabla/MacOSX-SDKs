@@ -1,7 +1,7 @@
 /*
 	NSPrintPanel.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,6 +10,7 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSSet.h>
+#import <AppKit/NSHelpManager.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -43,20 +44,22 @@ typedef NS_OPTIONS(NSUInteger, NSPrintPanelOptions) {
 
 /* Valid values for passing into -[NSPrintPanel setJobStyleHint:].
 */
-APPKIT_EXTERN NSString * const NSPrintPhotoJobStyleHint;
-APPKIT_EXTERN NSString * const NSPrintAllPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString * const NSPrintNoPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
+typedef NSString * NSPrintPanelJobStyleHint NS_STRING_ENUM;
+APPKIT_EXTERN NSPrintPanelJobStyleHint const NSPrintPhotoJobStyleHint;
+APPKIT_EXTERN NSPrintPanelJobStyleHint const NSPrintAllPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSPrintPanelJobStyleHint const NSPrintNoPresetsJobStyleHint NS_AVAILABLE_MAC(10_6);
 
 /* The keys of the entries that must be in the dictionaries returned by NSPrintPanelAccessorizing's -localizedSummaryItems method.
 */
-APPKIT_EXTERN NSString * const NSPrintPanelAccessorySummaryItemNameKey NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString * const NSPrintPanelAccessorySummaryItemDescriptionKey NS_AVAILABLE_MAC(10_5);
+typedef NSString * NSPrintPanelAccessorySummaryKey NS_STRING_ENUM;
+APPKIT_EXTERN NSPrintPanelAccessorySummaryKey const NSPrintPanelAccessorySummaryItemNameKey NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSPrintPanelAccessorySummaryKey const NSPrintPanelAccessorySummaryItemDescriptionKey NS_AVAILABLE_MAC(10_5);
 
 @protocol NSPrintPanelAccessorizing
 
 /* Return the text that summarizes the settings that the user has chosen using this print panel accessory view and that should appear in the summary pane of the print panel. It must be an array of dictionaries (not nil), each of which has an NSPrintPanelAccessorySummaryItemNameKey entry and an NSPrintPanelAccessorySummaryItemDescriptionKey entry whose values are strings. A print panel accessory view must be KVO-compliant for "localizedSummaryItems" because NSPrintPanel observes it to keep what it displays in its Summary view up to date. (In Mac OS 10.5 there is no way for the user to see your accessory view and the Summary view at the same time, but that might not always be true in the future.)
 */
-- (NSArray<NSDictionary<NSString *, NSString *> *> *)localizedSummaryItems;
+- (NSArray<NSDictionary<NSPrintPanelAccessorySummaryKey, NSString *> *> *)localizedSummaryItems;
 
 @optional
 
@@ -111,12 +114,12 @@ APPKIT_EXTERN NSString * const NSPrintPanelAccessorySummaryItemDescriptionKey NS
 
 /* The HTML help anchor for the print panel. You can override the standard anchor of the print panel's help button.
 */
-@property (nullable, copy) NSString *helpAnchor NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSHelpAnchorName helpAnchor NS_AVAILABLE_MAC(10_5);
 
 
 
 // Set or get a string that provides a hint about the type of print job in which this print panel is being used. This controls the set of items that appear in the Presets menu. The string must be one of the job style hint strings declared above, or nil to show general presets.
-@property (nullable, copy) NSString *jobStyleHint;
+@property (nullable, copy) NSPrintPanelJobStyleHint jobStyleHint;
 
 
 /* Present a print panel to the user, document-modally. When the user has dismissed it, send the message selected by didEndSelector to the delegate, with the contextInfo as the last argument. The method selected by didEndSelector must have the same signature as:

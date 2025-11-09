@@ -51,7 +51,9 @@ CF_ASSUME_NONNULL_BEGIN
  *  kUTTypeContent
  *
  *    base type for anything containing user-viewable document content
- *    (documents, pasteboard data, and document packages)
+ *    (documents, pasteboard data, and document packages.) Types describing
+ *    files or packages must also conform to kUTTypeData or kUTTypePackage
+ *    in order for the system to bind documents to them.
  *
  *    UTI: public.content
  *

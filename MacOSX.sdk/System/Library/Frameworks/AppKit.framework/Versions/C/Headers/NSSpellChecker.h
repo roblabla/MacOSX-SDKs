@@ -1,7 +1,7 @@
 /*
         NSSpellChecker.h
         Application Kit
-        Copyright (c) 1990-2016, Apple Inc.
+        Copyright (c) 1990-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -16,6 +16,20 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSString, NSOrthography, NSPanel, NSView, NSViewController, NSMenu;
+
+/* Optional keys that may be used in the options dictionary with checkString:range:types:options:inSpellDocumentWithTag:orthography:wordCount:, requestCheckingOfString:range:types:options:inSpellDocumentWithTag:completionHandler:, and menuForResult:string:options:atLocation:inView:. */
+typedef NSString * NSTextCheckingOptionKey NS_STRING_ENUM;
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingOrthographyKey        NS_AVAILABLE_MAC(10_6);  // NSOrthography indicating an orthography to be used as a starting point for orthography checking, or as the orthography if orthography checking is not enabled
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingQuotesKey             NS_AVAILABLE_MAC(10_6);  // NSArray containing four strings to be used with NSTextCheckingTypeQuote (opening double quote, closing double quote, opening single quote, and closing single quote in that order); if not specified, values will be taken from user's preferences
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingReplacementsKey       NS_AVAILABLE_MAC(10_6);  // NSDictionary containing replacements to be used with NSTextCheckingTypeReplacement; if not specified, values will be taken from user's preferences
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingReferenceDateKey      NS_AVAILABLE_MAC(10_6);  // NSDate to be associated with the document, used as a referent for relative dates; if not specified, the current date will be used
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingReferenceTimeZoneKey  NS_AVAILABLE_MAC(10_6);  // NSTimeZone to be associated with the document, used as a referent for dates without time zones; if not specified, the current time zone will be used
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingDocumentURLKey        NS_AVAILABLE_MAC(10_6);  // NSURL to be associated with the document
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingDocumentTitleKey      NS_AVAILABLE_MAC(10_6);  // NSString, a title to be associated with the document
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingDocumentAuthorKey     NS_AVAILABLE_MAC(10_6);  // NSString, name of an author to be associated with the document
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingRegularExpressionsKey NS_AVAILABLE_MAC(10_7);  // NSArray of NSRegularExpressions to be matched in the text of the document
+APPKIT_EXTERN NSTextCheckingOptionKey NSTextCheckingSelectedRangeKey      NS_AVAILABLE_MAC(10_12); // NSValue containing NSRange, should be the portion of the selected range intersecting the string being checked, or a zero-length range if there is an insertion point in or adjacent to the string being checked, or NSMakeRange(NSNotFound, 0) if the selection is entirely outside of the string being checked.
+
 
 /* The NSSpellChecker object is used by a client (e.g. a document in an application) to spell-check a given NSString.  There is only one NSSpellChecker instance per application (since spell-checking is interactive and you only have one mouse and one keyboard).
 
@@ -76,8 +90,8 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
 }
 
 /* Only one per application. */
-+ (NSSpellChecker *)sharedSpellChecker;
-+ (BOOL)sharedSpellCheckerExists;
+@property (class, readonly, strong) NSSpellChecker *sharedSpellChecker;
+@property (class, readonly) BOOL sharedSpellCheckerExists;
 
 /* Returns a guaranteed unique tag to use as the spell document tag for a document.  You should use this method to generate tags, if possible, to avoid collisions with other objects that can be spell checked. */
 + (NSInteger)uniqueSpellDocumentTag;
@@ -94,29 +108,16 @@ The usual usage of this is to implement a checkSpelling: method in an object tha
 - (NSRange)checkGrammarOfString:(NSString *)stringToCheck startingAt:(NSInteger)startingOffset language:(nullable NSString *)language wrap:(BOOL)wrapFlag inSpellDocumentWithTag:(NSInteger)tag details:(NSArray<NSDictionary<NSString *, id> *> * __nullable * __nullable)details NS_AVAILABLE_MAC(10_5);
 
 /* Requests unified text checking for the given range of the given string.  The checkingTypes should be a bitmask of checking types from NSTextCheckingResult.h, describing which types of checking are desired.  The options dictionary allows clients to pass in options for certain types of checking.  The orthography and wordCount arguments will return by reference these two attributes of the range as a whole, while the return value is an array of NSTextCheckingResult objects describing particular items found during checking and their individual ranges, sorted by range origin, then range end, then result type. */  
-- (NSArray<NSTextCheckingResult *> *)checkString:(NSString *)stringToCheck range:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options inSpellDocumentWithTag:(NSInteger)tag orthography:(NSOrthography * __nullable * __nullable)orthography wordCount:(nullable NSInteger *)wordCount NS_AVAILABLE_MAC(10_6);
+- (NSArray<NSTextCheckingResult *> *)checkString:(NSString *)stringToCheck range:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSTextCheckingOptionKey, id> *)options inSpellDocumentWithTag:(NSInteger)tag orthography:(NSOrthography * __nullable * __nullable)orthography wordCount:(nullable NSInteger *)wordCount NS_AVAILABLE_MAC(10_6);
 
 /* Requests unified text checking in the background.  The return value is a monotonically increasing sequence number that can be used to keep track of requests in flight.  The completion handler will be called (in an arbitrary context) when results are available, with the sequence number and results.  The arguments and results are otherwise the same as for the previous method. */
-- (NSInteger)requestCheckingOfString:(NSString *)stringToCheck range:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options inSpellDocumentWithTag:(NSInteger)tag completionHandler:(void (^ __nullable)(NSInteger sequenceNumber, NSArray<NSTextCheckingResult *> *results, NSOrthography *orthography, NSInteger wordCount))completionHandler NS_AVAILABLE_MAC(10_6);
+- (NSInteger)requestCheckingOfString:(NSString *)stringToCheck range:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSTextCheckingOptionKey, id> *)options inSpellDocumentWithTag:(NSInteger)tag completionHandler:(void (^ __nullable)(NSInteger sequenceNumber, NSArray<NSTextCheckingResult *> *results, NSOrthography *orthography, NSInteger wordCount))completionHandler NS_AVAILABLE_MAC(10_6);
 
 /* Requests candidate generation in the background.  The return value is a monotonically increasing sequence number that can be used to keep track of requests in flight.  The completion handler will be called (in an arbitrary context) when results are available, with the sequence number and results. */
-- (NSInteger)requestCandidatesForSelectedRange:(NSRange)selectedRange inString:(NSString *)stringToCheck types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options inSpellDocumentWithTag:(NSInteger)tag completionHandler:(void (^ __nullable)(NSInteger sequenceNumber, NSArray<NSTextCheckingResult *> *candidates))completionHandler NS_AVAILABLE_MAC(10_12_2);
+- (NSInteger)requestCandidatesForSelectedRange:(NSRange)selectedRange inString:(NSString *)stringToCheck types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSTextCheckingOptionKey, id> *)options inSpellDocumentWithTag:(NSInteger)tag completionHandler:(void (^ __nullable)(NSInteger sequenceNumber, NSArray<NSTextCheckingResult *> *candidates))completionHandler NS_AVAILABLE_MAC(10_12_2);
 
 /* Provides a menu containing contextual menu items suitable for certain kinds of detected results (notably date/time/address results).  The options dictionary allows clients to pass in information associated with the document.  */
-- (nullable NSMenu *)menuForResult:(NSTextCheckingResult *)result string:(NSString *)checkedString options:(nullable NSDictionary<NSString *, id> *)options atLocation:(NSPoint)location inView:(NSView *)view NS_AVAILABLE_MAC(10_6);
-
-/* Optional keys that may be used in the options dictionary with checkString:range:types:options:inSpellDocumentWithTag:orthography:wordCount:, requestCheckingOfString:range:types:options:inSpellDocumentWithTag:completionHandler:, and menuForResult:string:options:atLocation:inView:. */
-APPKIT_EXTERN NSString * NSTextCheckingOrthographyKey        NS_AVAILABLE_MAC(10_6);  // NSOrthography indicating an orthography to be used as a starting point for orthography checking, or as the orthography if orthography checking is not enabled
-APPKIT_EXTERN NSString * NSTextCheckingQuotesKey             NS_AVAILABLE_MAC(10_6);  // NSArray containing four strings to be used with NSTextCheckingTypeQuote (opening double quote, closing double quote, opening single quote, and closing single quote in that order); if not specified, values will be taken from user's preferences
-APPKIT_EXTERN NSString * NSTextCheckingReplacementsKey       NS_AVAILABLE_MAC(10_6);  // NSDictionary containing replacements to be used with NSTextCheckingTypeReplacement; if not specified, values will be taken from user's preferences
-APPKIT_EXTERN NSString * NSTextCheckingReferenceDateKey      NS_AVAILABLE_MAC(10_6);  // NSDate to be associated with the document, used as a referent for relative dates; if not specified, the current date will be used
-APPKIT_EXTERN NSString * NSTextCheckingReferenceTimeZoneKey  NS_AVAILABLE_MAC(10_6);  // NSTimeZone to be associated with the document, used as a referent for dates without time zones; if not specified, the current time zone will be used
-APPKIT_EXTERN NSString * NSTextCheckingDocumentURLKey        NS_AVAILABLE_MAC(10_6);  // NSURL to be associated with the document
-APPKIT_EXTERN NSString * NSTextCheckingDocumentTitleKey      NS_AVAILABLE_MAC(10_6);  // NSString, a title to be associated with the document
-APPKIT_EXTERN NSString * NSTextCheckingDocumentAuthorKey     NS_AVAILABLE_MAC(10_6);  // NSString, name of an author to be associated with the document
-APPKIT_EXTERN NSString * NSTextCheckingRegularExpressionsKey NS_AVAILABLE_MAC(10_7);  // NSArray of NSRegularExpressions to be matched in the text of the document
-APPKIT_EXTERN NSString * NSTextCheckingSelectedRangeKey      NS_AVAILABLE_MAC(10_12); // NSValue containing NSRange, should be the portion of the selected range intersecting the string being checked, or a zero-length range if there is an insertion point in or adjacent to the string being checked, or NSMakeRange(NSNotFound, 0) if the selection is entirely outside of the string being checked.
-
+- (nullable NSMenu *)menuForResult:(NSTextCheckingResult *)result string:(NSString *)checkedString options:(nullable NSDictionary<NSTextCheckingOptionKey, id> *)options atLocation:(NSPoint)location inView:(NSView *)view NS_AVAILABLE_MAC(10_6);
 
 /* Methods for obtaining the default values for NSTextCheckingQuotesKey and NSTextCheckingReplacementsKey. */
 - (NSArray<NSString *> *)userQuotesArrayForLanguage:(NSString *)language NS_AVAILABLE_MAC(10_6);
@@ -203,13 +204,13 @@ typedef NS_ENUM(NSInteger, NSCorrectionIndicatorType) {
 - (void)unlearnWord:(NSString *)word NS_AVAILABLE_MAC(10_5);
 
 /* These methods allow clients to determine the global user preference settings for automatic text replacement, spelling correction, quote substitution, dash substitution, autocapitalization, and double-space-to-period substitution.  Text views by default will follow these automatically, but clients may override that by programmatically setting the values on the text view.  These methods will be useful for non-text view clients and others who wish to keep track of the settings.  Notifications are available (see below) when the settings change. */
-+ (BOOL)isAutomaticTextReplacementEnabled NS_AVAILABLE_MAC(10_7);
-+ (BOOL)isAutomaticSpellingCorrectionEnabled NS_AVAILABLE_MAC(10_7);
-+ (BOOL)isAutomaticQuoteSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
-+ (BOOL)isAutomaticDashSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
-+ (BOOL)isAutomaticCapitalizationEnabled NS_AVAILABLE_MAC(10_12);
-+ (BOOL)isAutomaticPeriodSubstitutionEnabled NS_AVAILABLE_MAC(10_12);
-+ (BOOL)isAutomaticTextCompletionEnabled NS_AVAILABLE_MAC(10_12_2);
+@property (class, readonly, getter=isAutomaticTextReplacementEnabled) BOOL automaticTextReplacementEnabled NS_AVAILABLE_MAC(10_7);
+@property (class, readonly, getter=isAutomaticSpellingCorrectionEnabled) BOOL automaticSpellingCorrectionEnabled NS_AVAILABLE_MAC(10_7);
+@property (class, readonly, getter=isAutomaticQuoteSubstitutionEnabled) BOOL automaticQuoteSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
+@property (class, readonly, getter=isAutomaticDashSubstitutionEnabled) BOOL automaticDashSubstitutionEnabled NS_AVAILABLE_MAC(10_9);
+@property (class, readonly, getter=isAutomaticCapitalizationEnabled) BOOL automaticCapitalizationEnabled NS_AVAILABLE_MAC(10_12);
+@property (class, readonly, getter=isAutomaticPeriodSubstitutionEnabled) BOOL automaticPeriodSubstitutionEnabled NS_AVAILABLE_MAC(10_12);
+@property (class, readonly, getter=isAutomaticTextCompletionEnabled) BOOL automaticTextCompletionEnabled NS_AVAILABLE_MAC(10_12_2);
 
 /* Use of the following methods is discouraged; ordinarily language identification should be allowed to take place automatically, or else a specific language should be passed in to the methods that take such an argument, if the language is known in advance.  -setLanguage: allows programmatic setting of the language to spell-check in, for compatibility use if other methods are called with no language specified.  -setLanguage: accepts any of the language formats used by NSBundle, and tries to find the closest match among the available languages.  If -setLanguage: has been called, then -language will return that match; otherwise, it will return Multilingual if there is more than one element in -userPreferredLanguages, or the one element in that array if there is only one.  */
 

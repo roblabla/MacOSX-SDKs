@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2005-2016 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 2005-2017 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -55,6 +55,7 @@ __BEGIN_DECLS
 #define PROC_UID_ONLY		4
 #define PROC_RUID_ONLY		5
 #define PROC_PPID_ONLY		6
+#define PROC_KDBG_ONLY		7
 
 struct proc_bsdinfo {
 	uint32_t		pbi_flags;		/* 64bit; emulated etc */
@@ -581,6 +582,19 @@ struct kqueue_info {
 	struct vinfo_stat	kq_stat;
 	uint32_t		kq_state;
 	uint32_t		rfu_1;	/* reserved */
+};
+
+struct kqueue_dyninfo {
+	struct kqueue_info kqdi_info;
+	uint64_t kqdi_servicer;
+	uint64_t kqdi_owner;
+	uint32_t kqdi_sync_waiters;
+	uint8_t  kqdi_sync_waiter_qos;
+	uint8_t  kqdi_async_qos;
+	uint16_t kqdi_request_state;
+	uint8_t  kqdi_events_qos;
+	uint8_t  _kqdi_reserved0[7];
+	uint64_t _kqdi_reserved1[4];
 };
 
 /* keep in sync with KQ_* in sys/eventvar.h */

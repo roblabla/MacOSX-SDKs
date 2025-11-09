@@ -1,27 +1,27 @@
 /*
 	NSSearchFieldCell.h
 	Application Kit
-	Copyright (c) 2003-2016, Apple Inc.
+	Copyright (c) 2003-2017, Apple Inc.
 	All rights reserved.
  */
 
 #import <Foundation/NSArray.h>
 #import <AppKit/NSTextFieldCell.h>
-
+#import <AppKit/NSSearchField.h>
 
 // Search menu template tags. Special items in the search menu are tagged so when the actual dynamic search menu is constructed, we know which items to show or hide.
 
-#define	NSSearchFieldRecentsTitleMenuItemTag     1000
 // Title of recents menu group. Hidden if no recents. Also use for separators that my go away with recents
+static const NSInteger NSSearchFieldRecentsTitleMenuItemTag = 1000;
 
-#define	NSSearchFieldRecentsMenuItemTag          1001
 // Recent items have this tag. Use to indicate location of recents in custom menu if no title specified
+static const NSInteger NSSearchFieldRecentsMenuItemTag = 1001;
 
-#define	NSSearchFieldClearRecentsMenuItemTag     1002
 // The 'Clear Recents' item has this tag. Hidden if no recents
+static const NSInteger NSSearchFieldClearRecentsMenuItemTag = 1002;
 
-#define	NSSearchFieldNoRecentsMenuItemTag        1003
 // The item describing a lack of recents uses this tag. Hidden if recents
+static const NSInteger NSSearchFieldNoRecentsMenuItemTag = 1003;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -93,7 +93,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (null_resettable, copy) NSArray<NSString *> *recentSearches;
     // if app wants to do custom search lists. will return empty array if no searches
 
-@property (nullable, copy) NSString *recentsAutosaveName;
+@property (nullable, copy) NSSearchFieldRecentsAutosaveName recentsAutosaveName;
     // must be set to use. default is nil which means no autosave.
 
 @property BOOL sendsSearchStringImmediately;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1999-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 1999-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -81,6 +81,9 @@
 
 #include <sys/cdefs.h>
 #include <sys/appleapiopts.h>
+#include <sys/_types/_u_int32_t.h> /* u_int32_t */
+#include <sys/_types/_u_int64_t.h> /* u_int64_t */
+#include <sys/_types/_u_short.h> /* u_short */
 
 
 /* mbuf types */

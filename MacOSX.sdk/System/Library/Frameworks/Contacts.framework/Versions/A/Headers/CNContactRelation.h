@@ -33,6 +33,8 @@ CONTACTS_EXTERN NSString * const CNLabelContactRelationMother             NS_AVA
 CONTACTS_EXTERN NSString * const CNLabelContactRelationParent             NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationBrother            NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationSister             NS_AVAILABLE(10_11, 9_0);
+CONTACTS_EXTERN NSString * const CNLabelContactRelationSon                NS_AVAILABLE(10_13, 11_0);
+CONTACTS_EXTERN NSString * const CNLabelContactRelationDaughter           NS_AVAILABLE(10_13, 11_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationChild              NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationFriend             NS_AVAILABLE(10_11, 9_0);
 CONTACTS_EXTERN NSString * const CNLabelContactRelationSpouse             NS_AVAILABLE(10_11, 9_0);

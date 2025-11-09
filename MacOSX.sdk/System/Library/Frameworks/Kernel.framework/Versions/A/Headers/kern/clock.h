@@ -45,6 +45,7 @@
 
 #include <sys/cdefs.h>
 
+
 #ifdef	__LP64__
 
 typedef unsigned long		clock_sec_t;

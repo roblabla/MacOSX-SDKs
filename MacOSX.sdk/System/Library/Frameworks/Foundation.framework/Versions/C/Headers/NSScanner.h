@@ -1,5 +1,5 @@
 /*	NSScanner.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -24,15 +24,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 // On overflow, the below methods will return success and clamp
 - (BOOL)scanInt:(nullable int *)result;
-- (BOOL)scanInteger:(nullable NSInteger *)result NS_AVAILABLE(10_5, 2_0);
+- (BOOL)scanInteger:(nullable NSInteger *)result API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 - (BOOL)scanLongLong:(nullable long long *)result;
-- (BOOL)scanUnsignedLongLong:(nullable unsigned long long *)result NS_AVAILABLE(10_9, 7_0);
+- (BOOL)scanUnsignedLongLong:(nullable unsigned long long *)result API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 - (BOOL)scanFloat:(nullable float *)result;
 - (BOOL)scanDouble:(nullable double *)result;
 - (BOOL)scanHexInt:(nullable unsigned *)result;                                          // Optionally prefixed with "0x" or "0X"
-- (BOOL)scanHexLongLong:(nullable unsigned long long *)result NS_AVAILABLE(10_5, 2_0);   // Optionally prefixed with "0x" or "0X"
-- (BOOL)scanHexFloat:(nullable float *)result NS_AVAILABLE(10_5, 2_0);                   // Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix.
-- (BOOL)scanHexDouble:(nullable double *)result NS_AVAILABLE(10_5, 2_0);                 // Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix.
+- (BOOL)scanHexLongLong:(nullable unsigned long long *)result API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));   // Optionally prefixed with "0x" or "0X"
+- (BOOL)scanHexFloat:(nullable float *)result API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));                   // Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix.
+- (BOOL)scanHexDouble:(nullable double *)result API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));                 // Corresponding to %a or %A formatting. Requires "0x" or "0X" prefix.
 
 - (BOOL)scanString:(NSString *)string intoString:(NSString * _Nullable * _Nullable)result;
 - (BOOL)scanCharactersFromSet:(NSCharacterSet *)set intoString:(NSString * _Nullable * _Nullable)result;

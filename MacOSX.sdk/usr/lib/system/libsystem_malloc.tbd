@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1BA5FD5A-DFFC-3EFC-9AB4-2ED0A49EFF6E', 'x86_64: F40DEE3B-386A-3529-A3F7-98117ED55BF4' ]
+uuids:           [ 'i386: A36A4600-B667-3150-B784-A6AD61780F43', 'x86_64: E72A0E45-9B7E-37D3-A5FE-52C813176646' ]
 platform:        macosx
 install-name:    /usr/lib/system/libsystem_malloc.dylib
-current-version: 116.30.3
+current-version: 140
 objc-constraint: none
 parent-umbrella: System
 exports:         
@@ -13,8 +13,9 @@ exports:
     symbols:         [ ___disk_stack_logging_log_stack, ___invalid_stack_id, ___libsystem_mallocVersionNumber, 
                        ___libsystem_mallocVersionString, ___mach_stack_logging_copy_uniquing_table, 
                        ___mach_stack_logging_enumerate_records, ___mach_stack_logging_frames_for_uniqued_stack, 
-                       ___mach_stack_logging_get_frames, ___mach_stack_logging_set_file_path, 
-                       ___mach_stack_logging_shared_memory_address, ___mach_stack_logging_start_reading, 
+                       ___mach_stack_logging_get_frames, ___mach_stack_logging_get_frames_for_stackid, 
+                       ___mach_stack_logging_set_file_path, ___mach_stack_logging_shared_memory_address, 
+                       ___mach_stack_logging_stackid_for_vm_region, ___mach_stack_logging_start_reading, 
                        ___mach_stack_logging_stop_reading, ___mach_stack_logging_uniquing_table_copy_from_serialized, 
                        ___mach_stack_logging_uniquing_table_read_stack, ___mach_stack_logging_uniquing_table_release, 
                        ___mach_stack_logging_uniquing_table_retain, ___mach_stack_logging_uniquing_table_serialize, 
@@ -43,9 +44,11 @@ exports:
                        _malloc_zone_print, _malloc_zone_print_ptr_info, _malloc_zone_realloc, 
                        _malloc_zone_register, _malloc_zone_statistics, _malloc_zone_unregister, 
                        _malloc_zone_valloc, _malloc_zones, _mstats, _posix_memalign, 
-                       _realloc, '_reallocarray$DARWIN_EXTSN', '_reallocarrayf$DARWIN_EXTSN', 
-                       _scalable_zone_info, _scalable_zone_statistics, _set_malloc_singlethreaded, 
-                       _stack_logging_dontcompact, _stack_logging_enable_logging, 
+                       _radix_tree_count, _radix_tree_create, _radix_tree_delete, 
+                       _radix_tree_destory, _radix_tree_init, _radix_tree_insert, 
+                       _radix_tree_lookup, _radix_tree_size, _realloc, '_reallocarray$DARWIN_EXTSN', 
+                       '_reallocarrayf$DARWIN_EXTSN', _scalable_zone_info, _scalable_zone_statistics, 
+                       _set_malloc_singlethreaded, _stack_logging_dontcompact, _stack_logging_enable_logging, 
                        _stack_logging_finished_init, _stack_logging_lite_batch_free, 
                        _stack_logging_lite_batch_malloc, _stack_logging_mode, _stack_logging_postponed, 
                        _szone_check_counter, _szone_check_modulo, _szone_check_start, 

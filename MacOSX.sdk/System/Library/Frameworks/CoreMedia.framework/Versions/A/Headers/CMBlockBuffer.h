@@ -16,7 +16,7 @@
 	@discussion	BlockBuffers are CF objects that are used to move blocks of memory through a processing system.
 	A CMBlockBuffer represents a contiguous range of data offsets, from zero to CMBlockBufferGetDataLength(), across a
 	possibly noncontiguous memory region composed of memoryBlocks and buffer references which in turn could
-	refer to addtional regions.
+	refer to additional regions.
 	<BR>
 	IMPORTANT: Clients of CMBlockBuffer must explicitly manage the retain count by 
 	calling CFRetain and CFRelease even in processes using garbage collection.  
@@ -116,11 +116,11 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef;
 /*!
 	@typedef CMBlockBufferCustomBlockSource
 	Used with functions that accept a memory block allocator, this structure allows a client to provide a custom facility for
-	obtaining the memory block to be used in a CMBlockBuffer. The Allocate function must be non-zero if the CMBlockBuffer code will
+	obtaining the memory block to be used in a CMBlockBuffer. The AllocateBlock function must be non-zero if the CMBlockBuffer code will
 	need to call for allocation (not required if a previously-obtained memory block is provided to the CMBlockBuffer API). The
-	Free() routine, if non-NULL, will be called once when the CMBlockBuffer is disposed. It will not be called if no memory block
-	is ever allocated or supplied. The refCon will be passed to both the Allocate and Free() calls. The client is responsible for
-	its disposal (if any) during the Free() callback.
+	FreeBlock() routine, if non-NULL, will be called once when the CMBlockBuffer is disposed. It will not be called if no memory block
+	is ever allocated or supplied. The refCon will be passed to both the AllocateBlock and FreeBlock() calls. The client is responsible for
+	its disposal (if any) during the FreeBlock() callback.
 */
 typedef  struct {
 	uint32_t	version;

@@ -122,7 +122,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @method     sourceWithIdentifier:
     @abstract   Returns a source with a specified identifier.
 */
-- (EKSource *)sourceWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_8, 5_0);
+- (nullable EKSource *)sourceWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_8, 5_0);
 
 //----------------------------------------------------
 // CALENDARS
@@ -145,14 +145,16 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
 /*!
     @property   defaultCalendarForNewEvents
     @abstract   Returns the calendar that events should be added to by default.
+    @discussion This may be nil if there is no default calendar for new events.
 */
-@property(nonatomic, readonly) EKCalendar *defaultCalendarForNewEvents;
+@property(nullable, nonatomic, readonly) EKCalendar *defaultCalendarForNewEvents;
 
 /*!
     @method     defaultCalendarForNewReminders
     @abstract   Returns the calendar that reminders should be added to by default.
+    @discussion This may be nil if there is no default calendar for new reminders.
 */
-- (EKCalendar *)defaultCalendarForNewReminders NS_AVAILABLE(10_8, 6_0);
+- (nullable EKCalendar *)defaultCalendarForNewReminders NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @method     calendarWithIdentifier:
@@ -208,7 +210,7 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
     @method     calendarItemWithIdentifier:
     @abstract   Returns either a reminder or the first occurrence of an event.
 */
-- (EKCalendarItem *)calendarItemWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_8, 6_0);
+- (nullable EKCalendarItem *)calendarItemWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_8, 6_0);
 
 /*!
     @method     calendarItemsWithExternalIdentifier:

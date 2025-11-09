@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: B33E6C8C-0982-32C2-8348-74E772C9CADA', 'x86_64: 9160FEAC-572C-3E88-86F0-687B4DF47CE7' ]
+uuids:           [ 'i386: AD6CABC7-3863-3EF9-A361-AE88F51560F1', 'x86_64: C595485D-40B6-30DD-BB23-62BFC8DC80DF' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ISSupport.framework/Versions/A/ISSupport
-current-version: 58.0
-objc-constraint: none
+current-version: 58
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _ISS_AYEvent._code, _ISS_AYEvent._domain, _ISS_AYEvent._info, 

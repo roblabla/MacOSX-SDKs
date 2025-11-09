@@ -1,7 +1,7 @@
 /*
     NSSplitViewController.h
     Application Kit
-    Copyright (c) 2014-2016, Apple Inc.
+    Copyright (c) 2014-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -26,7 +26,7 @@ APPKIT_EXTERN const CGFloat NSSplitViewControllerAutomaticDimension NS_AVAILABLE
  * NSViewController's methods \c -addChildViewController:, \c -insertViewController:atIndex:, and \c -removeChildViewControllerAtIndex: can all be used as convience methods to add children; default SplitViewItems will be appropriately created or destroyed.
  */
 NS_CLASS_AVAILABLE_MAC(10_10)
-@interface NSSplitViewController : NSViewController <NSSplitViewDelegate> {
+@interface NSSplitViewController : NSViewController <NSSplitViewDelegate, NSUserInterfaceValidations> {
 @private
     NSSplitView *_splitView;
     id _splitViewControllerPrivateData;
@@ -75,6 +75,9 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * Defaults to \c NSSplitViewControllerAutomaticDimension, which will use the effective minimum sizes of the split view item views as described by constraints in the window to determine the minimum size for inline sidebars. Once constraints establishing the minimum size can't be satisfied for all non-collapsed split panes, all sidebars will auto-collapse. When fullscreen, if a sidebar tries to uncollapse in this state, it will overlay.
  */
 @property CGFloat minimumThicknessForInlineSidebars NS_AVAILABLE_MAC(10_11);
+
+/// Validates items with an action of `toggleSidebar:` to reflect the status of the sidebar item contained within the receiver.
+- (BOOL)validateUserInterfaceItem:(id<NSValidatedUserInterfaceItem>)item NS_AVAILABLE_MAC(10_11);
 
 /* Overridden methods from NSViewController. These require a call to super if overriden by a subclass */
 - (void)viewDidLoad NS_REQUIRES_SUPER;

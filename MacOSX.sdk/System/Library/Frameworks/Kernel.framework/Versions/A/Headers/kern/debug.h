@@ -33,6 +33,7 @@
 
 #include <sys/cdefs.h>
 #include <stdint.h>
+#include <stdarg.h>
 #include <uuid/uuid.h>
 #include <mach/boolean.h>
 #include <mach/kern_return.h>
@@ -187,7 +188,6 @@ enum generic_snapshot_flags {
 	kKernel64_p 		= 0x2
 };
 
-
 #define VM_PRESSURE_TIME_WINDOW 5 /* seconds */
 
 enum {
@@ -234,47 +234,89 @@ enum {
 	STACKSHOT_ENABLE_UUID_FAULTING             = 0x200000,
 	STACKSHOT_FROM_PANIC                       = 0x400000,
 	STACKSHOT_NO_IO_STATS                      = 0x800000,
+	/* Report owners of and pointers to kernel objects that threads are blocked on */
+	STACKSHOT_THREAD_WAITINFO                  = 0x1000000,
+	STACKSHOT_THREAD_GROUP                     = 0x2000000,
+	STACKSHOT_SAVE_JETSAM_COALITIONS           = 0x4000000,
+	STACKSHOT_INSTRS_CYCLES                    = 0x8000000,
 };
 
-#define STACKSHOT_THREAD_SNAPSHOT_MAGIC 	0xfeedface
-#define STACKSHOT_TASK_SNAPSHOT_MAGIC   	0xdecafbad
-#define STACKSHOT_MEM_AND_IO_SNAPSHOT_MAGIC	0xbfcabcde
-#define STACKSHOT_MICRO_SNAPSHOT_MAGIC		0x31c54011
+#define STACKSHOT_THREAD_SNAPSHOT_MAGIC     0xfeedface
+#define STACKSHOT_TASK_SNAPSHOT_MAGIC       0xdecafbad
+#define STACKSHOT_MEM_AND_IO_SNAPSHOT_MAGIC 0xbfcabcde
+#define STACKSHOT_MICRO_SNAPSHOT_MAGIC      0x31c54011
+
+#define KF_INITIALIZED (0x1)
+#define KF_SERIAL_OVRD (0x2)
+#define KF_PMAPV_OVRD (0x4)
+#define KF_MATV_OVRD (0x8)
+#define KF_STACKSHOT_OVRD (0x10)
+#define KF_COMPRSV_OVRD (0x20)
+
+boolean_t kern_feature_override(uint32_t fmask);
+
+/*
+ * Any updates to this header should be also updated in astris as it can not
+ * grab this header from the SDK.
+ *
+ * NOTE: DO NOT REMOVE OR CHANGE THE MEANING OF ANY FIELDS FROM THIS STRUCTURE.
+ *       Any modifications should add new fields at the end, bump the version number
+ *       and be done alongside astris and DumpPanic changes.
+ */
+struct embedded_panic_header {
+	uint32_t eph_magic;                /* PANIC_MAGIC if valid */
+	uint32_t eph_crc;                  /* CRC of everything following the ph_crc in the header and the contents */
+	uint32_t eph_version;              /* embedded_panic_header version */
+	uint64_t eph_panic_flags;          /* Flags indicating any state or relevant details */
+	uint32_t eph_panic_log_offset;     /* Offset of the beginning of the panic log from the beginning of the header */
+	uint32_t eph_panic_log_len;        /* length of the panic log */
+	uint32_t eph_stackshot_offset;     /* Offset of the beginning of the panic stackshot from the beginning of the header */
+	uint32_t eph_stackshot_len;        /* length of the panic stackshot (0 if not valid ) */
+	uint32_t eph_other_log_offset;     /* Offset of the other log (any logging subsequent to the stackshot) from the beginning of the header */
+	uint32_t eph_other_log_len;        /* length of the other log */
+} __attribute__((packed));
+
+#define EMBEDDED_PANIC_HEADER_FLAG_COREDUMP_COMPLETE             0x01
+#define EMBEDDED_PANIC_HEADER_FLAG_STACKSHOT_SUCCEEDED           0x02
+#define EMBEDDED_PANIC_HEADER_FLAG_STACKSHOT_FAILED_DEBUGGERSYNC 0x04
+#define EMBEDDED_PANIC_HEADER_FLAG_STACKSHOT_FAILED_ERROR        0x08
+#define EMBEDDED_PANIC_HEADER_FLAG_STACKSHOT_FAILED_INCOMPLETE   0x10
+#define EMBEDDED_PANIC_HEADER_FLAG_STACKSHOT_FAILED_NESTED       0x20
+#define EMBEDDED_PANIC_HEADER_FLAG_NESTED_PANIC                  0x40
+#define EMBEDDED_PANIC_HEADER_FLAG_BUTTON_RESET_PANIC            0x80
+#define EMBEDDED_PANIC_HEADER_FLAG_COPROC_INITIATED_PANIC        0x100
+
+#define EMBEDDED_PANIC_HEADER_CURRENT_VERSION 1
+#define EMBEDDED_PANIC_MAGIC 0x46554E4B /* FUNK */
+
+struct macos_panic_header {
+	uint32_t mph_magic;              /* PANIC_MAGIC if valid */
+	uint32_t mph_crc;                /* CRC of everything following mph_crc in the header and the contents */
+	uint32_t mph_version;            /* macos_panic_header version */
+	uint32_t mph_padding;            /* unused */
+	uint64_t mph_panic_flags;        /* Flags indicating any state or relevant details */
+	uint32_t mph_panic_log_offset;   /* Offset of the panic log from the beginning of the header */
+	uint32_t mph_panic_log_len;      /* length of the panic log */
+	char     mph_data[];             /* panic data -- DO NOT ACCESS THIS FIELD DIRECTLY. Use the offsets above relative to the beginning of the header */
+} __attribute__((packed));
+
+#define MACOS_PANIC_HEADER_CURRENT_VERSION 1
+#define MACOS_PANIC_MAGIC 0x44454544 /* DEED */
+
+#define MACOS_PANIC_HEADER_FLAG_NESTED_PANIC            0x01
+#define MACOS_PANIC_HEADER_FLAG_COPROC_INITIATED_PANIC  0x02
 
 #endif /* __APPLE_API_UNSTABLE */
 #endif /* __APPLE_API_PRIVATE */
-
-
-
 
 
 __BEGIN_DECLS
 
 extern void panic(const char *string, ...) __printflike(1,2);
 
-
-#ifdef CONFIG_NO_PANIC_STRINGS
-#define panic_plain(...) (panic)((char *)0)
-#define panic(...)  (panic)((char *)0)
-#else /* CONFIGS_NO_PANIC_STRINGS */
-#define panic_plain(ex, ...) \
-	(panic)(ex, ## __VA_ARGS__)
-#define __STRINGIFY(x) #x
-#define LINE_NUMBER(x) __STRINGIFY(x)
-#define PANIC_LOCATION __FILE__ ":" LINE_NUMBER(__LINE__)
-#if CONFIG_EMBEDDED || TARGET_OS_EMBEDDED
-#define panic(ex, ...) \
-	(panic)(# ex, ## __VA_ARGS__)
-#else
-#define panic(ex, ...) \
-	(panic)(# ex "@" PANIC_LOCATION, ## __VA_ARGS__)
-#endif
-#endif /* CONFIGS_NO_PANIC_STRINGS */
-
-
-
-
 __END_DECLS
+
+
 
 
 #endif	/* _KERN_DEBUG_H_ */

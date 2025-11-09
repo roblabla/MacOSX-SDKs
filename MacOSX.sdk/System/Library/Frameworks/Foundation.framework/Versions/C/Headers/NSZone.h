@@ -1,9 +1,10 @@
 /*	NSZone.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
 #include <CoreFoundation/CFBase.h>
+#include <stddef.h>
 
 @class NSString;
 
@@ -67,6 +68,6 @@ FOUNDATION_EXPORT NSUInteger NSRoundDownToMultipleOfPageSize(NSUInteger bytes);
 FOUNDATION_EXPORT void *NSAllocateMemoryPages(NSUInteger bytes);
 FOUNDATION_EXPORT void NSDeallocateMemoryPages(void *ptr, NSUInteger bytes);
 FOUNDATION_EXPORT void NSCopyMemoryPages(const void *source, void *dest, NSUInteger bytes);
-FOUNDATION_EXPORT NSUInteger NSRealMemoryAvailable(void) NS_DEPRECATED(10_0, 10_8, 2_0, 6_0); // see NSProcessInfo.h instead
+FOUNDATION_EXPORT NSUInteger NSRealMemoryAvailable(void) API_DEPRECATED("Use NSProcessInfo instead", macos(10.0,10.8), ios(2.0,6.0), watchos(2.0,2.0), tvos(9.0,9.0)); // see NSProcessInfo.h instead
 
 NS_ASSUME_NONNULL_END

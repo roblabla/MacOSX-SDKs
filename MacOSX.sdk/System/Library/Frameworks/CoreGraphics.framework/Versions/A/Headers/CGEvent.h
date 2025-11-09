@@ -102,6 +102,13 @@ CG_EXTERN CGEventRef __nullable CGEventCreateScrollWheelEvent(
     CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1, ...)
     CG_AVAILABLE_STARTING(__MAC_10_5, __IPHONE_NA);
 
+/* A non-variadic variant version of SLEventCreateScrollWheelEvent. */
+
+CG_EXTERN CGEventRef __nullable CGEventCreateScrollWheelEvent2(
+    CGEventSourceRef __nullable source,
+    CGScrollEventUnit units, uint32_t wheelCount, int32_t wheel1, int32_t wheel2, int32_t wheel3)
+    CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_NA);
+
 /* Return a copy of `event'. */
 
 CG_EXTERN CGEventRef __nullable CGEventCreateCopy(CGEventRef __nullable event)
@@ -357,6 +364,7 @@ CG_EXTERN void CGEventPost(CGEventTapLocation tap, CGEventRef __nullable event)
    instantiated for the specified process, and the event passes through any
    such taps. */
 
+/* DEPRECATED; use CGEventPostToPid instead. */
 CG_EXTERN void CGEventPostToPSN(void * __nullable processSerialNumber,
     CGEventRef __nullable event)
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);

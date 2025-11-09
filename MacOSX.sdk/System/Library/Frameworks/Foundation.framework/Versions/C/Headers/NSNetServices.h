@@ -1,5 +1,5 @@
 /*	NSNetServices.h
-        Copyright (c) 2002-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -72,7 +72,7 @@ typedef NS_OPTIONS(NSUInteger, NSNetServiceOptions) {
      * New incoming connections will be delivered in the form of NSStreams via the
      * -netService:didAcceptConnectionWithInputStream:outputStream: delegate method.
      */
-    NSNetServiceListenForConnections NS_ENUM_AVAILABLE(10_9, 7_0) = 1UL << 1
+    NSNetServiceListenForConnections API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)) = 1UL << 1
 };
 
 
@@ -106,9 +106,9 @@ If publish: is called on an NSNetService instance initialized with this method, 
  */
 @property (nullable, assign) id <NSNetServiceDelegate> delegate;
 
-/* Initially set to NO. Set to YES to also publish, resolve, or monitor this service over peer to peer Bluetooth and Wi-Fi (if available). Must be set before operation starts.
+/* Initially set to NO. Set to YES to also publish, resolve, or monitor this service over peer to peer Wi-Fi (if available). Must be set before operation starts.
 */
-@property BOOL includesPeerToPeer NS_AVAILABLE(10_10, 7_0);
+@property BOOL includesPeerToPeer API_AVAILABLE(macos(10.10), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* Returns the name of the discovered or published service.
 */
@@ -132,7 +132,7 @@ If publish: is called on an NSNetService instance initialized with this method, 
 
 /* The port of a resolved service. This returns -1 if the service has not been resolved.
 */
-@property (readonly) NSInteger port NS_AVAILABLE(10_5, 2_0);
+@property (readonly) NSInteger port API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
  
 /* Advertises a given service on the network. This method returns immediately. Success or failure is indicated by callbacks to the NSNetService instance's delegate.
  
@@ -144,12 +144,12 @@ If publish: is called on an NSNetService instance initialized with this method, 
  
     See the notes above for NSNetServiceNoAutoRename for information about controlling the auto-renaming behavior using this method.
 */
-- (void)publishWithOptions:(NSNetServiceOptions)options NS_AVAILABLE(10_5, 2_0);
+- (void)publishWithOptions:(NSNetServiceOptions)options API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 /* Attempts to determine at least one address for the NSNetService instance. For applications linked on or after Mac OS X 10.4 "Tiger", this method calls -resolveWithTimeout: with a value of 5.0. Applications linked prior to Mac OS X 10.4 "Tiger" must call -stop on the instance after an appropriate (short) amount of time to avoid causing unnecessary network traffic.
 */
-- (void)resolve NS_DEPRECATED(10_2, 10_4, 2_0, 2_0);
+- (void)resolve API_DEPRECATED("Not supported", macos(10.2,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /* Halts a service which is either publishing or resolving.
 */
@@ -206,9 +206,9 @@ __WATCHOS_PROHIBITED
 */
 @property (nullable, assign) id <NSNetServiceBrowserDelegate> delegate;
 
-/* Initially set to NO. Set to YES to also browse over peer to peer Bluetooth and Wi-Fi (if available). Must be set before starting to search.
+/* Initially set to NO. Set to YES to also browse over peer to peer Wi-Fi (if available). Must be set before starting to search.
 */
-@property BOOL includesPeerToPeer NS_AVAILABLE(10_10, 7_0);
+@property BOOL includesPeerToPeer API_AVAILABLE(macos(10.10), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* NSNetServiceBrowser instances may be scheduled on NSRunLoops to operate in different modes, or in other threads. It is generally not necessary to schedule NSNetServiceBrowsers in other threads. NSNetServiceBrowsers are scheduled in the current thread's NSRunLoop in the NSDefaultRunLoopMode when they are created.
 */
@@ -282,7 +282,7 @@ __WATCHOS_PROHIBITED
  * kCFBooleanTrue for kCFStreamSSLIsServer in the settings dictionary along with
  * a valid SecIdentityRef as the first entry of kCFStreamSSLCertificates.
  */
-- (void)netService:(NSNetService *)sender didAcceptConnectionWithInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream NS_AVAILABLE(10_9, 7_0);
+- (void)netService:(NSNetService *)sender didAcceptConnectionWithInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 @end
 

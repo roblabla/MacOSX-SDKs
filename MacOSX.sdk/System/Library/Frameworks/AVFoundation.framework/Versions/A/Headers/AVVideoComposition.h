@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -52,11 +52,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    The returned AVVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks.
    It will also have the following values for its properties:
    
-   	- A value for frameDuration short enough to accommodate the greatest nominalFrameRate among the asset's video tracks. If the nominalFrameRate of all of the asset's video tracks is 0, a default framerate of 30fps is used.
+   	- If the asset has exactly one video track, the original timing of the source video track will be used. If the asset has more than one video track, and the nominal frame rate of any of video tracks is known, the reciprocal of the greatest known nominalFrameRate will be used as the value of frameDuration. Otherwise, a default framerate of 30fps is used.
    	- If the specified asset is an instance of AVComposition, the renderSize will be set to the naturalSize of the AVComposition; otherwise the renderSize will be set to a value that encompasses all of the asset's video tracks.
    	- A renderScale of 1.0.
    	- A nil animationTool.
-
+ 
+   If the specified asset has no video tracks, this method will return an AVVideoComposition instance with an empty collection of instructions.
+ 
 */
 + (AVVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset NS_AVAILABLE(10_9, 6_0);
 
@@ -66,6 +68,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates the interval which the video composition, when enabled, should render composed video frames */
 @property (nonatomic, readonly) CMTime frameDuration;
+
+/* If sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */
+@property (nonatomic, readonly) CMPersistentTrackID sourceTrackIDForFrameTiming NS_AVAILABLE(10_13, 11_0);
 
 /* indicates the size at which the video composition, when enabled, should render */
 @property (nonatomic, readonly) CGSize renderSize;
@@ -156,7 +161,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  
 	The video composition will also have the following values for its properties:
 
-		- A value for frameDuration to accommodate the nominalFrameRate for asset's first enabled video track. If the nominalFrameRate is 0, a default framerate of 30fps is used.
+		- The original timing of the asset's first enabled video track will be used.
 		- A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform.
 		- A renderScale of 1.0.
 
@@ -195,7 +200,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableVideoComposition : AVVideoComposition {
 @private
-    AVMutableVideoCompositionInternal    *_mutableVideoComposition;
+    AVMutableVideoCompositionInternal    *_mutableVideoComposition __attribute__((unused));
 }
 
 /*  
@@ -213,14 +218,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
  @result		An instance of AVMutableVideoComposition.
  @discussion
-   The returned AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks.
+   The returned AVMutableVideoComposition will have instructions that respect the spatial properties and timeRanges of the specified asset's video tracks. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing.
    It will also have the following values for its properties:
    
-   	- A value for frameDuration short enough to accommodate the greatest nominalFrameRate among the asset's video tracks. If the nominalFrameRate of all of the asset's video tracks is 0, a default framerate of 30fps is used.
+   	- If the asset has exactly one video track, the original timing of the source video track will be used. If the asset has more than one video track, and the nominal frame rate of any of video tracks is known, the reciprocal of the greatest known nominalFrameRate will be used as the value of frameDuration. Otherwise, a default framerate of 30fps is used.
    	- If the specified asset is an instance of AVComposition, the renderSize will be set to the naturalSize of the AVComposition; otherwise the renderSize will be set to a value that encompasses all of the asset's video tracks.
    	- A renderScale of 1.0.
    	- A nil animationTool.
 
+   If the specified asset has no video tracks, this method will return an AVMutableVideoComposition instance with an empty collection of instructions.
+ 
 */
 + (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset NS_AVAILABLE(10_9, 6_0);
 
@@ -229,6 +236,9 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 
 /* indicates the interval which the video composition, when enabled, should render composed video frames */
 @property (nonatomic) CMTime frameDuration;
+
+/* If sourceTrackIDForFrameTiming is not kCMPersistentTrackID_Invalid, frame timing for the video composition is derived from the source asset's track with the corresponding ID. This may be used to preserve a source asset's variable frame timing. If an empty edit is encountered in the source asset’s track, the compositor composes frames as needed up to the frequency specified in frameDuration property. */
+@property (nonatomic) CMPersistentTrackID sourceTrackIDForFrameTiming NS_AVAILABLE(10_13, 11_0);
 
 /* indicates the size at which the video composition, when enabled, should render */
 @property (nonatomic) CGSize renderSize;
@@ -315,11 +325,11 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  @param			asset		An instance of AVAsset. For best performance, ensure that the duration and tracks properties of the asset are already loaded before invoking this method.
  @result		An instance of AVMutableVideoComposition.
  @discussion
-	The returned AVMutableVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload.
+	The returned AVMutableVideoComposition will cause the specified handler block to be called to filter each frame of the asset's first enabled video track. The handler block should use the properties of the provided AVAsynchronousCIImageFilteringRequest and respond using finishWithImage:context: with a "filtered" new CIImage (or the provided source image for no affect). In the event of an error, respond to the request using finishWithError:. The error can be observed via AVPlayerItemFailedToPlayToEndTimeNotification, see AVPlayerItemFailedToPlayToEndTimeErrorKey in notification payload. The client can set sourceTrackIDForFrameTiming to kCMPersistentTrackID_Invalid and frameDuration to an appropriate value in order to specify the maximum output frame rate independent of the source track timing.
  
 	The video composition will also have the following values for its properties:
 
-		- A value for frameDuration to accommodate the nominalFrameRate for asset's first enabled video track. If the nominalFrameRate is 0, a default framerate of 30fps is used.
+		- The original timing of the asset's first enabled video track will be used.
 		- A renderSize that encompasses the asset's first enabled video track respecting the track's preferredTransform.
 		- A renderScale of 1.0.
 
@@ -406,7 +416,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableVideoCompositionInstruction : AVVideoCompositionInstruction {
 @private
-	AVMutableVideoCompositionInstructionInternal	*_mutableInstruction;
+	AVMutableVideoCompositionInstructionInternal	*_mutableInstruction __attribute__((unused));
 }
 
 /*  
@@ -518,7 +528,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableVideoCompositionLayerInstruction : AVVideoCompositionLayerInstruction {
 @private
-	AVMutableVideoCompositionLayerInstructionInternal	*_mutableLayerInstruction;
+	AVMutableVideoCompositionLayerInstructionInternal	*_mutableLayerInstruction __attribute__((unused));
 };
 
 /*  

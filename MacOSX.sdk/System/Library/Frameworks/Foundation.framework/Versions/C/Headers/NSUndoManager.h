@@ -1,5 +1,5 @@
 /*	NSUndoManager.h
-	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2017, Apple Inc. All rights reserved.
 */
 
 
@@ -113,16 +113,16 @@ NS_CLASS_AVAILABLE(10_0, 3_0)
     @discussion
       As with other undo operations, this does not strongly retain target. Care should be taken to avoid introducing retain cycles by other references captured by the block.
  */
-- (void)registerUndoWithTarget:(id)target handler:(void (^)(id target))undoHandler NS_AVAILABLE(10_11, 9_0) NS_REFINED_FOR_SWIFT;
+- (void)registerUndoWithTarget:(id)target handler:(void (^)(id target))undoHandler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_REFINED_FOR_SWIFT;
 
-- (void)setActionIsDiscardable:(BOOL)discardable NS_AVAILABLE(10_7, 5_0);
+- (void)setActionIsDiscardable:(BOOL)discardable API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
    // Set the latest undo action to discardable if it may be safely discarded when a document can not be saved for any reason. An example might be an undo action that changes the viewable area of a document. To find out if an undo group contains only discardable actions, look for the NSUndoManagerGroupIsDiscardableKey in the userInfo dictionary of the NSUndoManagerDidCloseUndoGroupNotification.
 
 // This key is set on the user info dictionary of the NSUndoManagerDidCloseUndoGroupNotification, with a NSNumber boolean value of YES, if the undo group as a whole is discardable.
-FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey NS_AVAILABLE(10_7, 5_0);
+FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
-@property (readonly) BOOL undoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
-@property (readonly) BOOL redoActionIsDiscardable NS_AVAILABLE(10_7, 5_0);
+@property (readonly) BOOL undoActionIsDiscardable API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
+@property (readonly) BOOL redoActionIsDiscardable API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
    // Call to see if the next undo or redo action is discardable.
 
     	/* Undo/Redo action name */
@@ -154,21 +154,21 @@ FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey NS_AVAILAB
 
 @end
 
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerCheckpointNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerCheckpointNotification API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0));
     // This is called before an undo group is begun or ended so any
     // clients that need to lazily register undos can do so in the
     // correct group.
 
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillUndoChangeNotification API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillRedoChangeNotification API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0));
 
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidUndoChangeNotification NS_AVAILABLE(10_0, 3_0);
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidRedoChangeNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidUndoChangeNotification API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidRedoChangeNotification API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0));
 
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidOpenUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillCloseUndoGroupNotification NS_AVAILABLE(10_0, 3_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidOpenUndoGroupNotification API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerWillCloseUndoGroupNotification API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0));
 
 // This notification is sent after an undo group closes. It should be safe to undo at this time.
-FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidCloseUndoGroupNotification NS_AVAILABLE(10_7, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSUndoManagerDidCloseUndoGroupNotification API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

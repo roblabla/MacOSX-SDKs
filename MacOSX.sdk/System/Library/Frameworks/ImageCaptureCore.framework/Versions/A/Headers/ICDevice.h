@@ -11,6 +11,13 @@
 
 #pragma once
 
+#import <Foundation/NSObjCRuntime.h>
+#import <objc/NSObject.h>
+
+@class NSError, NSDictionary, NSData, NSMutableDictionary;
+
+#import <CoreGraphics/CGImage.h>
+
 /*!
     @header ICDevice
     ICDevice is an abstract class that represents a device supported by Image Capture. ImageCaptureCore defines two concrete subclasses of ICDevice, ICCameraDevice and ICScannerDevice. ICDeviceBrowser creates instances of these two subclasses to represent cameras and scanners it finds.
@@ -280,7 +287,7 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
   @abstract This message is sent when the sharing state of a device has changes.
   @discusson Any Image Capture client application can choose to share the device over the network using the sharing or webSharing facility in Image Capture.
 */
-- (void)deviceDidChangeSharingState:(ICDevice*)device;
+- (void)deviceDidChangeSharingState:(ICDevice*)device NS_DEPRECATED(10_4, 10_13, NA, NA);
 
 /*! 
   @method device:didReceiveStatusInformation:
@@ -390,14 +397,14 @@ extern NSString *const ICDeviceCanEjectOrDisconnect;
     @abstract ￼Indicates whether the device is shared using the Image Capture device sharing facility. This value will change when sharing of this device is enabled or disabled.
 
 */
-@property(readonly, getter=isShared)    BOOL                  shared;
+@property(readonly, getter=isShared)    BOOL                  shared NS_DEPRECATED(10_4, 10_13, NA, NA);
 
 /*!
     @property hasConfigurableWiFiInterface
     @abstract ￼Indicates whether the device can be configured for use on a WiFi network.
 
 */
-@property(readonly)                     BOOL                  hasConfigurableWiFiInterface;
+@property(readonly)                     BOOL                  hasConfigurableWiFiInterface NS_DEPRECATED(10_4, 10_13, NA, NA);
 
 /*!
     @property transportType

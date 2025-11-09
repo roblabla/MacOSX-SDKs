@@ -1,7 +1,7 @@
 /*
 	NSAppleScriptExtensions.h
 	Application Kit
-	Copyright (c) 2002-2016, Apple Inc.
+	Copyright (c) 2002-2017, Apple Inc.
 	All rights reserved.
 */
 

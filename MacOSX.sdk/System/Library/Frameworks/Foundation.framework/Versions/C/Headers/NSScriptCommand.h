@@ -1,6 +1,6 @@
 /*
 	NSScriptCommand.h
-	Copyright (c) 1997-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -77,8 +77,8 @@ NS_ENUM(NSInteger) {
 
 // Set the error number, offending object descriptor, type descriptor, or message, respectively, that will be put in the reply to the Apple event from which this command was constructed, when execution of the command is completed, if the sender of the event requested a reply. If -setScriptErrorNumber: is invoked during an invocation of -executeCommand, the invocation of -executeCommand may stop invoking command handling methods in the receiver and return early.
 @property NSInteger scriptErrorNumber;
-@property (nullable, retain) NSAppleEventDescriptor *scriptErrorOffendingObjectDescriptor NS_AVAILABLE(10_5, NA);
-@property (nullable, retain) NSAppleEventDescriptor *scriptErrorExpectedTypeDescriptor NS_AVAILABLE(10_5, NA);
+@property (nullable, retain) NSAppleEventDescriptor *scriptErrorOffendingObjectDescriptor API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nullable, retain) NSAppleEventDescriptor *scriptErrorExpectedTypeDescriptor API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 @property (nullable, copy) NSString *scriptErrorString;
 
 // If a command is being executed in the current thread by Cocoa Scripting's built-in Apple event handling (i.e., an instance of NSScriptCommand is handling an -executeCommand message at this instant, as the result of the dispatch of an Apple event), return the command.  Return nil otherwise.  -setScriptErrorNumber: and -setScriptErrorString: messages sent to the returned command object will affect the reply event sent to the sender of the event from which the command was constructed, if the sender has requested a reply.

@@ -103,7 +103,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImageSourceCreateThumbnailWithTransform  IMA
  * The resulting image will be smaller and have reduced spacial quality but will otherwise have the same characteristics
  * as the full size normal image.
  * If the specified scaling factor is not supported, a larger or full size normal image will be returned.
- * Supported file formats are JPEG, TIFF, and PNG.
+ * Supported file formats are JPEG, HEIF, TIFF, and PNG.
  * The value of this key must be an integer CFNumberRef (allowed values: 2, 4, and 8).
  */
 
@@ -221,6 +221,16 @@ IMAGEIO_EXTERN CGImageSourceStatus CGImageSourceGetStatus(CGImageSourceRef __non
  * providing non-incremental data as well. */
 
 IMAGEIO_EXTERN CGImageSourceStatus CGImageSourceGetStatusAtIndex(CGImageSourceRef __nonnull isrc, size_t index)  IMAGEIO_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_4_0);
+
+
+/* Depth data support for JPEG, HEIF, and DNG images.
+ * The returned CFDictionary contains:
+ *   - the depth data (CFDataRef) - (kCGImageAuxiliaryDataInfoData),
+ *   - the depth data description (CFDictionary) - (kCGImageAuxiliaryDataInfoDataDescription)
+ *   - metadata (CGImageMetadataRef) - (kCGImageAuxiliaryDataInfoMetadata)
+ * CGImageSourceCopyAuxiliaryDataInfoAtIndex returns nil if the image did not contain ‘auxiliaryImageDataType’ data.
+ */
+IMAGEIO_EXTERN CFDictionaryRef __nullable CGImageSourceCopyAuxiliaryDataInfoAtIndex(CGImageSourceRef __nonnull isrc, size_t index, CFStringRef __nonnull auxiliaryImageDataType ) IMAGEIO_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 CF_IMPLICIT_BRIDGING_DISABLED
 

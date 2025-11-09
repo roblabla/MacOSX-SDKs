@@ -1,7 +1,7 @@
 //
 //  SCNHitTest.h
 //
-//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -9,6 +9,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SCNNode;
+
+/*! @enum SCNHitTestSearchMode
+ @abstract hit test modes
+ */
+typedef NS_ENUM(NSInteger, SCNHitTestSearchMode) {
+    SCNHitTestSearchModeClosest = 0, // The closest object found.
+    SCNHitTestSearchModeAll     = 1, // All found objects sorted from nearest to farthest.
+    SCNHitTestSearchModeAny     = 2  // The first object found. This object is not necessarily the nearest.
+} API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*! @group Hit-test options */
 
@@ -18,15 +27,17 @@ typedef NSString * SCNHitTestOption NS_STRING_ENUM;
 typedef NSString * SCNHitTestOption;
 #endif
 
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestFirstFoundOnlyKey;                                                         // If set to YES, returns the first object found. This object is not necessarily the nearest. Defaults to NO.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestSortResultsKey;                                                            // Determines whether the results should be sorted. If set to YES sorts nearest objects first. Defaults to YES.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestClipToZRangeKey;                                                           // If set to YES ignores the objects clipped by the zNear/zFar range of the current point of view. Defaults to YES.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestBackFaceCullingKey;                                                        // If set to YES ignores the faces not facing to the camera. Defaults to YES.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestBoundingBoxOnlyKey;                                                        // If set to YES only tests the bounding boxes of the 3D objects. Defaults to NO.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestIgnoreChildNodesKey;                                                       // Determines whether the child nodes are ignored. Defaults to NO.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestRootNodeKey;                                                               // Specifies the root node to use for the hit test. Defaults to the root node of the scene.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestIgnoreHiddenNodesKey  API_AVAILABLE(macosx(10.9));                         // Determines whether hidden nodes should be ignored. Defaults to YES.
-FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestOptionCategoryBitMask API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0)); // Determines the node categories to test. Defaults to all bits set.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestClipToZRangeKey;                                                                        // If set to YES ignores the objects clipped by the zNear/zFar range of the current point of view. Defaults to YES.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestBackFaceCullingKey;                                                                     // If set to YES ignores the faces not facing to the camera. Defaults to YES.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestBoundingBoxOnlyKey;                                                                     // If set to YES only tests the bounding boxes of the 3D objects. Defaults to NO.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestIgnoreChildNodesKey;                                                                    // Determines whether the child nodes are ignored. Defaults to NO.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestRootNodeKey;                                                                            // Specifies the root node to use for the hit test. Defaults to the root node of the scene.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestIgnoreHiddenNodesKey  API_AVAILABLE(macos(10.9));                                       // Determines whether hidden nodes should be ignored. Defaults to YES.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestOptionCategoryBitMask API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));               // Determines the node categories to test. Defaults to all bits set.
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestOptionSearchMode      API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)); // Determines whether the search should be exhaustive. Defaults to SCNHitTestSearchModeClosest.
+
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestFirstFoundOnlyKey;                                                                      // Deprecated, use SCNHitTestSearchModeAny for the SCNHitTestOptionSearchMode option instead
+FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestSortResultsKey;                                                                         // Deprecated, use SCNHitTestSearchModeAll for the SCNHitTestOptionSearchMode option instead
 
 #define SCNHitTestOptionFirstFoundOnly    SCNHitTestFirstFoundOnlyKey
 #define SCNHitTestOptionSortResults       SCNHitTestSortResultsKey
@@ -68,7 +79,7 @@ FOUNDATION_EXTERN SCNHitTestOption const SCNHitTestOptionCategoryBitMask API_AVA
 @property(nonatomic, readonly) SCNMatrix4 modelTransform;
 
 /*! The bone node hit. Only available if the node hit has a SCNSkinner attached. */
-@property(nonatomic, readonly) SCNNode *boneNode API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+@property(nonatomic, readonly, nullable) SCNNode *boneNode API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 /*!
  @method textureCoordinatesWithMappingChannel:

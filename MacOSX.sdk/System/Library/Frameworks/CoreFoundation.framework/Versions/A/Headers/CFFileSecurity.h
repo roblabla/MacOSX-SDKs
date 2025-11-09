@@ -2,7 +2,7 @@
  *  CFFileSecurity.h
  *  NSFileSecurity and CFFileSecurity are toll-free bridged.
  *
- *  Copyright (c) 2010-2016, Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2017, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -31,7 +31,7 @@ typedef struct CF_BRIDGED_MUTABLE_TYPE(NSFileSecurity) __CFFileSecurity* CFFileS
  *		The type identifier for the CFFileSecurity opaque type.
  */
 CF_EXPORT
-CFTypeID CFFileSecurityGetTypeID(void) CF_AVAILABLE(10_7, 5_0);
+CFTypeID CFFileSecurityGetTypeID(void) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -46,7 +46,7 @@ CFTypeID CFFileSecurityGetTypeID(void) CF_AVAILABLE(10_7, 5_0);
  *		object. Ownership follows the Create Rule.
  */
 CF_EXPORT
-CFFileSecurityRef CFFileSecurityCreate(CFAllocatorRef allocator) CF_AVAILABLE(10_7, 5_0);
+CFFileSecurityRef CFFileSecurityCreate(CFAllocatorRef allocator) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -63,7 +63,7 @@ CFFileSecurityRef CFFileSecurityCreate(CFAllocatorRef allocator) CF_AVAILABLE(10
  *		Ownership follows the Create Rule.
  */
 CF_EXPORT
-CFFileSecurityRef CFFileSecurityCreateCopy(CFAllocatorRef allocator, CFFileSecurityRef fileSec) CF_AVAILABLE(10_7, 5_0);
+CFFileSecurityRef CFFileSecurityCreateCopy(CFAllocatorRef allocator, CFFileSecurityRef fileSec) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -79,7 +79,7 @@ CFFileSecurityRef CFFileSecurityCreateCopy(CFAllocatorRef allocator, CFFileSecur
  *		UUID property associated with an CFFileSecurity object.
  */
 CF_EXPORT
-Boolean CFFileSecurityCopyOwnerUUID(CFFileSecurityRef fileSec, CFUUIDRef *ownerUUID) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecurityCopyOwnerUUID(CFFileSecurityRef fileSec, CFUUIDRef *ownerUUID) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*
  *	This routine sets the owner UUID associated with an CFFileSecurity object.
@@ -93,7 +93,7 @@ Boolean CFFileSecurityCopyOwnerUUID(CFFileSecurityRef fileSec, CFUUIDRef *ownerU
  *		true if the owner UUID was successfully set; otherwise, false.
  */
 CF_EXPORT
-Boolean CFFileSecuritySetOwnerUUID(CFFileSecurityRef fileSec, CFUUIDRef ownerUUID) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecuritySetOwnerUUID(CFFileSecurityRef fileSec, CFUUIDRef ownerUUID) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*
  *	This routine copies the group UUID associated with an CFFileSecurity object.
@@ -108,7 +108,7 @@ Boolean CFFileSecuritySetOwnerUUID(CFFileSecurityRef fileSec, CFUUIDRef ownerUUI
  *		UUID property associated with an CFFileSecurity object.
  */
 CF_EXPORT
-Boolean CFFileSecurityCopyGroupUUID(CFFileSecurityRef fileSec, CFUUIDRef *groupUUID) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecurityCopyGroupUUID(CFFileSecurityRef fileSec, CFUUIDRef *groupUUID) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -123,7 +123,7 @@ Boolean CFFileSecurityCopyGroupUUID(CFFileSecurityRef fileSec, CFUUIDRef *groupU
  *		true if the group UUID was successfully set; otherwise, false.
  */
 CF_EXPORT
-Boolean CFFileSecuritySetGroupUUID(CFFileSecurityRef fileSec, CFUUIDRef groupUUID) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecuritySetGroupUUID(CFFileSecurityRef fileSec, CFUUIDRef groupUUID) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -143,7 +143,7 @@ Boolean CFFileSecuritySetGroupUUID(CFFileSecurityRef fileSec, CFUUIDRef groupUUI
  *		no access control list property associated with the CFFileSecurity object.
  */
 CF_EXPORT
-Boolean CFFileSecurityCopyAccessControlList(CFFileSecurityRef fileSec, acl_t *accessControlList) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecurityCopyAccessControlList(CFFileSecurityRef fileSec, acl_t *accessControlList) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 #define kCFFileSecurityRemoveACL (acl_t) _FILESEC_REMOVE_ACL
 
@@ -165,7 +165,7 @@ Boolean CFFileSecurityCopyAccessControlList(CFFileSecurityRef fileSec, acl_t *ac
  *		true if the access control list is successfully set; otherwise, false.
  */
 CF_EXPORT
-Boolean CFFileSecuritySetAccessControlList(CFFileSecurityRef fileSec, acl_t accessControlList) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecuritySetAccessControlList(CFFileSecurityRef fileSec, acl_t accessControlList) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -181,7 +181,7 @@ Boolean CFFileSecuritySetAccessControlList(CFFileSecurityRef fileSec, acl_t acce
  *		property associated with an CFFileSecurity object.
  */
 CF_EXPORT
-Boolean CFFileSecurityGetOwner(CFFileSecurityRef fileSec, uid_t *owner) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecurityGetOwner(CFFileSecurityRef fileSec, uid_t *owner) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -196,7 +196,7 @@ Boolean CFFileSecurityGetOwner(CFFileSecurityRef fileSec, uid_t *owner) CF_AVAIL
  *		true if the owner uid_t was successfully set; otherwise, false.
  */
 CF_EXPORT
-Boolean CFFileSecuritySetOwner(CFFileSecurityRef fileSec, uid_t owner) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecuritySetOwner(CFFileSecurityRef fileSec, uid_t owner) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -212,7 +212,7 @@ Boolean CFFileSecuritySetOwner(CFFileSecurityRef fileSec, uid_t owner) CF_AVAILA
  *		property associated with an CFFileSecurity object.
  */
 CF_EXPORT
-Boolean CFFileSecurityGetGroup(CFFileSecurityRef fileSec, gid_t *group) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecurityGetGroup(CFFileSecurityRef fileSec, gid_t *group) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -227,7 +227,7 @@ Boolean CFFileSecurityGetGroup(CFFileSecurityRef fileSec, gid_t *group) CF_AVAIL
  *		true if the group gid_t was successfully set; otherwise, false.
  */
 CF_EXPORT
-Boolean CFFileSecuritySetGroup(CFFileSecurityRef fileSec, gid_t group) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecuritySetGroup(CFFileSecurityRef fileSec, gid_t group) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -243,7 +243,7 @@ Boolean CFFileSecuritySetGroup(CFFileSecurityRef fileSec, gid_t group) CF_AVAILA
  *		property associated with an CFFileSecurity object.
  */
 CF_EXPORT
-Boolean CFFileSecurityGetMode(CFFileSecurityRef fileSec, mode_t *mode) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecurityGetMode(CFFileSecurityRef fileSec, mode_t *mode) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*
@@ -258,7 +258,7 @@ Boolean CFFileSecurityGetMode(CFFileSecurityRef fileSec, mode_t *mode) CF_AVAILA
  *		true if the mode_t was successfully set; otherwise, false.
  */
 CF_EXPORT
-Boolean CFFileSecuritySetMode(CFFileSecurityRef fileSec, mode_t mode) CF_AVAILABLE(10_7, 5_0);
+Boolean CFFileSecuritySetMode(CFFileSecurityRef fileSec, mode_t mode) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /* values to pass in the clearPropertyMask to CFFileSecurityClearProperties */
@@ -269,7 +269,7 @@ typedef CF_OPTIONS(CFOptionFlags, CFFileSecurityClearOptions) {
     kCFFileSecurityClearOwnerUUID           = 1UL << 3,
     kCFFileSecurityClearGroupUUID           = 1UL << 4,
     kCFFileSecurityClearAccessControlList   = 1UL << 5
-} CF_ENUM_AVAILABLE(10_8, 6_0);
+} API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*
  *	This routine clears file security properties in the CFFileSecurity object.
@@ -281,7 +281,7 @@ typedef CF_OPTIONS(CFOptionFlags, CFFileSecurityClearOptions) {
  *		true if the file security properties were successfully cleared; otherwise, false.
  */
 CF_EXPORT
-Boolean CFFileSecurityClearProperties(CFFileSecurityRef fileSec, CFFileSecurityClearOptions clearPropertyMask) CF_AVAILABLE(10_8, 6_0);
+Boolean CFFileSecurityClearProperties(CFFileSecurityRef fileSec, CFFileSecurityClearOptions clearPropertyMask) API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 CF_EXTERN_C_END

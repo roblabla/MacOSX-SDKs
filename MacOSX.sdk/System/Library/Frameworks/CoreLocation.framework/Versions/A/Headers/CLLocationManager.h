@@ -114,7 +114,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      If NO, and you proceed to call other CoreLocation API, user will be prompted with the warning
  *      dialog. You may want to check this property and use location services only when explicitly requested by the user.
  */
-+ (BOOL)locationServicesEnabled __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
++ (BOOL)locationServicesEnabled API_AVAILABLE(ios(4.0), macos(10.7));
 
 /*
  *  headingAvailable
@@ -122,7 +122,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Returns YES if the device supports the heading service, otherwise NO.
  */
-+ (BOOL)headingAvailable __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
++ (BOOL)headingAvailable API_AVAILABLE(ios(4.0), macos(10.7)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  significantLocationChangeMonitoringAvailable
@@ -130,7 +130,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Returns YES if the device supports significant location change monitoring, otherwise NO.
  */
-+ (BOOL)significantLocationChangeMonitoringAvailable __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
++ (BOOL)significantLocationChangeMonitoringAvailable API_AVAILABLE(ios(4.0), macos(10.7)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  isMonitoringAvailableForClass:
@@ -139,7 +139,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      Determines whether the device supports monitoring for the specified type of region.
  *      If NO, all attempts to monitor the specified type of region will fail.
  */
-+ (BOOL)isMonitoringAvailableForClass:(Class)regionClass __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
++ (BOOL)isMonitoringAvailableForClass:(Class)regionClass API_AVAILABLE(ios(7.0), macos(10.10)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  regionMonitoringAvailable
@@ -147,7 +147,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Deprecated. Use +isMonitoringAvailableForClass: instead.
  */
-+ (BOOL)regionMonitoringAvailable __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
++ (BOOL)regionMonitoringAvailable API_DEPRECATED_WITH_REPLACEMENT("+isMonitoringAvailableForClass:", ios(4.0, 7.0), macos(10.8, 10.10)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  regionMonitoringEnabled
@@ -155,7 +155,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Deprecated. Use +isMonitoringAvailableForClass: and +authorizationStatus instead.
  */
-+ (BOOL)regionMonitoringEnabled __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_8, __MAC_10_10,__IPHONE_4_0, __IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
++ (BOOL)regionMonitoringEnabled API_DEPRECATED("Use +isMonitoringAvailableForClass: and +authorizationStatus instead", ios(4.0, 6.0), macos(10.8, 10.10)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  isRangingAvailable
@@ -164,7 +164,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      Determines whether the device supports ranging.
  *      If NO, all attempts to range beacons will fail.
  */
-+ (BOOL)isRangingAvailable __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
++ (BOOL)isRangingAvailable API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  authorizationStatus
@@ -172,7 +172,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Returns the current authorization status of the calling application.
  */
-+ (CLAuthorizationStatus)authorizationStatus __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_2);
++ (CLAuthorizationStatus)authorizationStatus API_AVAILABLE(ios(4.2), macos(10.7));
 
 @property(assign, nonatomic, nullable) id<CLLocationManagerDelegate> delegate;
 
@@ -182,7 +182,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Deprecated. Use +locationServicesEnabled instead.
  */
-@property(readonly, nonatomic) BOOL locationServicesEnabled __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA,__MAC_NA,__IPHONE_2_0,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(readonly, nonatomic) BOOL locationServicesEnabled API_DEPRECATED_WITH_REPLACEMENT("+locationServicesEnabled", ios(2.0, 4.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  purpose
@@ -194,7 +194,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *
  *      Deprecated.  Set the purpose string in Info.plist using key NSLocationUsageDescription.
  */
-@property(copy, nonatomic, nullable) NSString *purpose __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7, __MAC_NA, __IPHONE_3_2, __IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(copy, nonatomic, nullable) NSString *purpose API_AVAILABLE(macos(10.7)) API_DEPRECATED("Set the purpose string in Info.plist using key NSLocationUsageDescription", ios(3.2, 6.0)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *	activityType
@@ -204,7 +204,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *		the determination of when location updates may be automatically paused.
  *		By default, CLActivityTypeOther is used.
  */
-@property(assign, nonatomic) CLActivityType activityType __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(assign, nonatomic) CLActivityType activityType API_AVAILABLE(ios(6.0), watchos(4.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED;
 
 /*
  *  distanceFilter
@@ -236,7 +236,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *		Specifies that location updates may automatically be paused when possible.
  *		By default, this is YES for applications linked against iOS 6.0 or later.
  */
-@property(assign, nonatomic) BOOL pausesLocationUpdatesAutomatically __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(assign, nonatomic) BOOL pausesLocationUpdatesAutomatically API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  allowsBackgroundLocationUpdates
@@ -262,7 +262,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      See -requestWhenInUseAuthorization and -requestAlwaysAuthorization for
  *      more details on possible authorization values.
  */
-@property(assign, nonatomic) BOOL allowsBackgroundLocationUpdates __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_9_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(assign, nonatomic) BOOL allowsBackgroundLocationUpdates API_AVAILABLE(ios(9.0), watchos(4.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED;
 
 /*
  *  location
@@ -278,7 +278,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Deprecated. Use +headingAvailable instead.
  */
-@property(readonly, nonatomic) BOOL headingAvailable __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA,__MAC_NA,__IPHONE_3_0,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(readonly, nonatomic) BOOL headingAvailable API_DEPRECATED_WITH_REPLACEMENT("+headingAvailable", ios(3.0, 4.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  headingFilter
@@ -288,7 +288,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      be notified of updates less than the stated filter value. Pass in kCLHeadingFilterNone to be
  *      notified of all updates. By default, 1 degree is used.
  */
-@property(assign, nonatomic) CLLocationDegrees headingFilter __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(assign, nonatomic) CLLocationDegrees headingFilter API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  headingOrientation
@@ -299,7 +299,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      CLDeviceOrientationFaceDown are ignored.
  *      
  */
-@property(assign, nonatomic) CLDeviceOrientation headingOrientation __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(assign, nonatomic) CLDeviceOrientation headingOrientation API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  heading
@@ -307,7 +307,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Returns the latest heading update received, or nil if none is available.
  */
-@property(readonly, nonatomic, copy, nullable) CLHeading *heading __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property(readonly, nonatomic, copy, nullable) CLHeading *heading API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  maximumRegionMonitoringDistance
@@ -317,7 +317,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *       Attempts to register a region larger than this will generate a kCLErrorRegionMonitoringFailure.
  *       This value may vary based on the hardware features of the device, as well as on dynamically changing resource constraints.
  */
-@property (readonly, nonatomic) CLLocationDistance maximumRegionMonitoringDistance __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property (readonly, nonatomic) CLLocationDistance maximumRegionMonitoringDistance API_AVAILABLE(ios(4.0), macos(10.8)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  monitoredRegions
@@ -327,7 +327,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *       has been instructed to monitor a region, during this or previous launches of your application, it will
  *       be present in this set.
  */
-@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *monitoredRegions __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *monitoredRegions API_AVAILABLE(ios(4.0), macos(10.8)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  rangedRegions
@@ -335,7 +335,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *       Retrieve a set of objects representing the regions for which this location manager is actively providing ranging.
  */
-@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *rangedRegions __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+@property (readonly, nonatomic, copy) NSSet<__kindof CLRegion *> *rangedRegions API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  requestWhenInUseAuthorization
@@ -363,11 +363,11 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      When +authorizationStatus != kCLAuthorizationStatusNotDetermined, (ie
  *      generally after the first call) this method will do nothing.
  *
- *      If the NSLocationWhenInUseUsageDescription key is not specified in your
- *      Info.plist, this method will do nothing, as your app will be assumed not
- *      to support WhenInUse authorization.
+ *      The NSLocationWhenInUseUsageDescription key must be specified in your
+ *      Info.plist; otherwise, this method will do nothing, as your app will be
+ *      assumed not to support WhenInUse authorization.
  */
-- (void)requestWhenInUseAuthorization __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_8_0);
+- (void)requestWhenInUseAuthorization API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
 
 /*
  *  requestAlwaysAuthorization
@@ -384,7 +384,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      If received, "always" authorization grants access to the user's
  *      location via any CLLocationManager API, and grants access to
  *      launch-capable monitoring API such as geofencing/region monitoring,
- *      significante location visits, etc.  Even if killed by the user, launch
+ *      significant location visits, etc.  Even if killed by the user, launch
  *      events triggered by monitored regions or visit patterns will cause a
  *      relaunch.
  *
@@ -393,14 +393,18 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      is genuinely required.  Do not call +requestAlwaysAuthorization unless
  *      you think users will thank you for doing so.
  *
- *      When +authorizationStatus != kCLAuthorizationStatusNotDetermined, (ie
+ *      An application which currently has "when-in-use" authorization and has
+ *      never before requested "always" authorization may use this method to
+ *      request "always" authorization one time only.  Otherwise, if
+ *      +authorizationStatus != kCLAuthorizationStatusNotDetermined, (ie
  *      generally after the first call) this method will do nothing.
  *
- *      If the NSLocationAlwaysUsageDescription key is not specified in your
- *      Info.plist, this method will do nothing, as your app will be assumed not
- *      to support Always authorization.
+ *      Both the NSLocationAlwaysAndWhenInUseUsageDescription and
+ *      NSLocationWhenInUseUsageDescription keys must be specified in your
+ *      Info.plist; otherwise, this method will do nothing, as your app will be
+ *      assumed not to support Always authorization.
  */
-- (void)requestAlwaysAuthorization __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_8_0) __TVOS_PROHIBITED;
+- (void)requestAlwaysAuthorization API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED;
 
 /*
  *  startUpdatingLocation
@@ -408,7 +412,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Start updating locations.
  */
-- (void)startUpdatingLocation __TVOS_PROHIBITED;
+- (void)startUpdatingLocation API_AVAILABLE(watchos(3.0)) __TVOS_PROHIBITED;
 
 /*
  *  stopUpdatingLocation
@@ -440,7 +444,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      immediately cancel the location request.  The method
  *      stopUpdatingLocation can be used to explicitly cancel the request.
  */
-- (void)requestLocation __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_9_0);
+- (void)requestLocation API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos);
 
 /*
  *  startUpdatingHeading
@@ -448,7 +452,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Start updating heading.
  */
-- (void)startUpdatingHeading __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)startUpdatingHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  stopUpdatingHeading
@@ -456,7 +460,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Stop updating heading.
  */
-- (void)stopUpdatingHeading __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)stopUpdatingHeading API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  dismissHeadingCalibrationDisplay
@@ -464,7 +468,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Dismiss the heading calibration immediately.
  */
-- (void)dismissHeadingCalibrationDisplay __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)dismissHeadingCalibrationDisplay API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  startMonitoringSignificantLocationChanges
@@ -475,7 +479,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      location service.
  *
  */
-- (void)startMonitoringSignificantLocationChanges __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)startMonitoringSignificantLocationChanges API_AVAILABLE(ios(4.0), macos(10.7)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  stopMonitoringSignificantLocationChanges
@@ -484,7 +488,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      Stop monitoring significant location changes.
  *
  */
-- (void)stopMonitoringSignificantLocationChanges __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)stopMonitoringSignificantLocationChanges API_AVAILABLE(ios(4.0), macos(10.7)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  startMonitoringForRegion:desiredAccuracy:
@@ -502,7 +506,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
  */
 - (void)startMonitoringForRegion:(CLRegion *)region
-                 desiredAccuracy:(CLLocationAccuracy)accuracy __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA, __MAC_NA,__IPHONE_4_0, __IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+                 desiredAccuracy:(CLLocationAccuracy)accuracy API_DEPRECATED_WITH_REPLACEMENT("-startMonitoringForRegion:", ios(4.0, 6.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  stopMonitoringForRegion:
@@ -513,7 +517,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *
  *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
  */
-- (void)stopMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)stopMonitoringForRegion:(CLRegion *)region API_AVAILABLE(ios(4.0), macos(10.8)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  startMonitoringForRegion:
@@ -527,7 +531,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *
  *      This is done asynchronously and may not be immediately reflected in monitoredRegions.
  */
-- (void)startMonitoringForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_5_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)startMonitoringForRegion:(CLRegion *)region API_AVAILABLE(ios(5.0), macos(10.8)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  requestStateForRegion:
@@ -536,7 +540,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *      Asynchronously retrieve the cached state of the specified region. The state is returned to the delegate via
  *      locationManager:didDetermineState:forRegion:.
  */
-- (void)requestStateForRegion:(CLRegion *)region __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)requestStateForRegion:(CLRegion *)region API_AVAILABLE(ios(7.0), macos(10.10)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  startRangingBeaconsInRegion:
@@ -544,7 +548,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Start calculating ranges for beacons in the specified region.
  */
-- (void)startRangingBeaconsInRegion:(CLBeaconRegion *)region __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)startRangingBeaconsInRegion:(CLBeaconRegion *)region API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  stopRangingBeaconsInRegion:
@@ -552,7 +556,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Stop calculating ranges for the specified region.
  */
-- (void)stopRangingBeaconsInRegion:(CLBeaconRegion *)region __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_7_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)stopRangingBeaconsInRegion:(CLBeaconRegion *)region API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *	allowDeferredLocationUpdatesUntilTraveled:timeout:
@@ -589,7 +593,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *		criteria have not been met.
  */
 - (void)allowDeferredLocationUpdatesUntilTraveled:(CLLocationDistance)distance
-					  timeout:(NSTimeInterval)timeout __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+					  timeout:(NSTimeInterval)timeout API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *	disallowDeferredLocationUpdates
@@ -598,7 +602,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *		Disallow deferred location updates if previously enabled. Any outstanding
  *		updates will be sent and regular location updates will resume.
  */
-- (void)disallowDeferredLocationUpdates __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (void)disallowDeferredLocationUpdates API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  deferredLocationUpdatesAvailable
@@ -606,7 +610,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *      Returns YES if the device supports deferred location updates, otherwise NO.
  */
-+ (BOOL)deferredLocationUpdatesAvailable __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
++ (BOOL)deferredLocationUpdatesAvailable API_AVAILABLE(ios(6.0), macos(10.9)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 @end
 

@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BF63AB60-BD91-3EAA-AE3D-270ACF863E58' ]
+uuids:           [ 'x86_64: 05361BF9-D23D-36BE-A9AC-BBA2D0A1699C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/FindMyDevice.framework/Versions/A/FindMyDevice
 objc-constraint: none
@@ -11,10 +11,11 @@ exports:
                        _kFMDFMMUserAgentAccessEntitlement, _kFMDLogPrefsChangedDarwinNotification, 
                        _kFMDNotBackedUpPrefDomain, _kFMDPlaySoundStartedDarwinNotification, 
                        _kFMDPlaySoundStoppedDarwinNotification, _kFMDPostWipePrefDomain, 
-                       _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, _kFMDUAXPCServiceName, 
-                       _kFMDUserAgentPrefDomain, _kFMDWatchNotBackedUpPrefDomain, 
-                       _kFMDWatchPrefDomain, _kFMDXPCServiceName, _kFMDXPCServiceNameUAServices, 
-                       _kFMMAuthRight, _kFMMEnabledPrefDomain, _kFMMEnabledPrefKey, 
-                       _kFMMLocateAlertPendingNotification, _kFMMRemoveAuthRight ]
-    objc-classes:    [ _FMDFMMAccountInfo, _FMDFMMManager ]
+                       _kFMDPrefDomain, _kFMDPublicNotBackedUpPrefDomain, _kFMDUserAgentPrefDomain, 
+                       _kFMDWatchNotBackedUpPrefDomain, _kFMDWatchPrefDomain, _kFMMAuthRight, 
+                       _kFMMEnabledPrefDomain, _kFMMEnabledPrefKey, _kFMMLocateAlertPendingNotification, 
+                       _kFMMRemoveAuthRight, _kFindMyDeviceIdentityXPCInterfaceErrorDomain ]
+    objc-classes:    [ _FMDAccessoryIdentifier, _FMDFMMAccountInfo, _FMDFMMManager, 
+                       _FMDVolatileMetaDataRecord, _FMNSXPCConnection, _FMNSXPCConnectionCache, 
+                       _FMNSXPCConnectionConfiguration ]
 ...

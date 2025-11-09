@@ -1,6 +1,6 @@
 /*	
     NSURLRequest.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -197,9 +197,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     @abstract Indicates that NSURLRequest implements the NSSecureCoding protocol.
     @result A BOOL value set to YES.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly) BOOL supportsSecureCoding;
-#endif
 /*!
     @method requestWithURL:cachePolicy:timeoutInterval:
     @abstract Allocates and initializes a NSURLRequest with the given
@@ -240,21 +238,18 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 - (instancetype)initWithURL:(NSURL *)URL cachePolicy:(NSURLRequestCachePolicy)cachePolicy timeoutInterval:(NSTimeInterval)timeoutInterval NS_DESIGNATED_INITIALIZER;
 
 /*! 
-    @method URL
     @abstract Returns the URL of the receiver. 
     @result The URL of the receiver. 
 */
 @property (nullable, readonly, copy) NSURL *URL;
 
 /*! 
-    @method cachePolicy
-    @abstract Returns the cache policy of the receiver. 
+    @abstract Returns the cache policy of the receiver.
     @result The cache policy of the receiver. 
 */
 @property (readonly) NSURLRequestCachePolicy cachePolicy;
 
 /*! 
-    @method timeoutInterval
     @abstract Returns the timeout interval of the receiver.
     @discussion The timeout interval specifies the limit on the idle
     interval alloted to a request in the process of loading. The "idle
@@ -271,7 +266,6 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 @property (readonly) NSTimeInterval timeoutInterval;
 
 /*!
-    @method mainDocumentURL
     @abstract The main document URL associated with this load.
     @discussion This URL is used for the cookie "same domain as main
     document" policy. There may also be other future uses.
@@ -284,22 +278,20 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 @property (nullable, readonly, copy) NSURL *mainDocumentURL;
 
 /*!
- @method networkServiceType
  @abstract Returns the NSURLRequestNetworkServiceType associated with this request.
  @discussion  This will return NSURLNetworkServiceTypeDefault for requests that have
  not explicitly set a networkServiceType (using the setNetworkServiceType method).
  @result The NSURLRequestNetworkServiceType associated with this request.
  */
-@property (readonly) NSURLRequestNetworkServiceType networkServiceType NS_AVAILABLE(10_7, 4_0);
+@property (readonly) NSURLRequestNetworkServiceType networkServiceType API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
-/*! 
- @method allowsCellularAccess:
+/*!
  @abstract returns whether a connection created with this request is allowed to use
  the built in cellular radios (if present).
  @result YES if the receiver is allowed to use the built in cellular radios to
  satify the request, NO otherwise.
  */
-@property (readonly) BOOL allowsCellularAccess  NS_AVAILABLE(10_8, 6_0);
+@property (readonly) BOOL allowsCellularAccess  API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -337,21 +329,16 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 @interface NSMutableURLRequest : NSURLRequest
 
 /*! 
-    @method URL
-    @abstract Sets the URL of the receiver. 
-    @param URL The new URL for the receiver. 
+    @abstract The URL of the receiver.
 */
 @property (nullable, copy) NSURL *URL;
 
 /*! 
-    @method setCachePolicy:
-    @abstract The cache policy of the receiver. 
-    @param policy The new NSURLRequestCachePolicy for the receiver. 
+    @abstract The cache policy of the receiver.
 */
 @property NSURLRequestCachePolicy cachePolicy;
 
 /*! 
-    @method setTimeoutInterval:
     @abstract Sets the timeout interval of the receiver.
     @discussion The timeout interval specifies the limit on the idle
     interval allotted to a request in the process of loading. The "idle
@@ -363,14 +350,11 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     becomes greater than or equal to the timeout interval, the request
     is considered to have timed out. This timeout interval is measured
     in seconds.
-    @param seconds The new timeout interval of the receiver. 
 */
 @property NSTimeInterval timeoutInterval;
 
 /*!
-    @method setMainDocumentURL:
     @abstract Sets the main document URL
-    @param URL The main document URL.
     @discussion The caller should pass the URL for an appropriate main
     document, if known. For example, when loading a web page, the URL
     of the main html document for the top-level frame should be
@@ -384,22 +368,19 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 @property (nullable, copy) NSURL *mainDocumentURL;
 
 /*!
- @method setNetworkServiceType:
  @abstract Sets the NSURLRequestNetworkServiceType to associate with this request
- @param networkServiceType The NSURLRequestNetworkServiceType to associate with the request.
  @discussion This method is used to provide the network layers with a hint as to the purpose
  of the request.  Most clients should not need to use this method.
  */
-@property NSURLRequestNetworkServiceType networkServiceType NS_AVAILABLE(10_7, 4_0);
+@property NSURLRequestNetworkServiceType networkServiceType API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
-/*! 
- @method setAllowsCellularAccess
+/*!
  @abstract sets whether a connection created with this request is allowed to use
- the built in cellular radios (if present).
- @param allow NO if the receiver should not be allowed to use the built in
+ the built in cellular radios (if present). 
+ @discussion NO if the receiver should not be allowed to use the built in
  cellular radios to satisfy the request, YES otherwise.  The default is YES.
  */
-@property BOOL allowsCellularAccess NS_AVAILABLE(10_8, 6_0);
+@property BOOL allowsCellularAccess API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -412,15 +393,13 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 */
 @interface NSURLRequest (NSHTTPURLRequest) 
 
-/*! 
-    @method HTTPMethod
+/*!
     @abstract Returns the HTTP request method of the receiver. 
     @result the HTTP request method of the receiver. 
 */
 @property (nullable, readonly, copy) NSString *HTTPMethod;
 
-/*! 
-    @method allHTTPHeaderFields
+/*!
     @abstract Returns a dictionary containing all the HTTP header fields
     of the receiver.
     @result a dictionary containing all the HTTP header fields of the
@@ -440,8 +419,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 */
 - (nullable NSString *)valueForHTTPHeaderField:(NSString *)field;
 
-/*! 
-    @method HTTPBody
+/*!
     @abstract Returns the request body data of the receiver. 
     @discussion This data is sent as the message body of the request, as
     in done in an HTTP POST request.
@@ -450,7 +428,6 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 @property (nullable, readonly, copy) NSData *HTTPBody;
 
 /*!
-    @method HTTPBodyStream
     @abstract Returns the request body stream of the receiver
     if any has been set
     @discussion The stream is returned for examination only; it is
@@ -463,8 +440,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 */
 @property (nullable, readonly, retain) NSInputStream *HTTPBodyStream;
 
-/*! 
-    @method HTTPShouldHandleCookies
+/*!
     @abstract Determine whether default cookie handling will happen for 
     this request.
     @discussion NOTE: This value is not used prior to 10.3
@@ -474,14 +450,13 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 @property (readonly) BOOL HTTPShouldHandleCookies;
 
 /*!
- @method HTTPShouldUsePipelining
  @abstract Reports whether the receiver is not expected to wait for the
  previous response before transmitting.
  @result YES if the receiver should transmit before the previous response
  is received.  NO if the receiver should wait for the previous response
  before transmitting.
  */
-@property (readonly) BOOL HTTPShouldUsePipelining NS_AVAILABLE(10_7, 4_0);
+@property (readonly) BOOL HTTPShouldUsePipelining API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -494,15 +469,12 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 */
 @interface NSMutableURLRequest (NSMutableHTTPURLRequest) 
 
-/*! 
-    @method HTTPMethod:
+/*!
     @abstract Sets the HTTP request method of the receiver. 
-    @param method the new HTTP request method for the receiver.
 */
 @property (copy) NSString *HTTPMethod;
 
-/*! 
-    @method allHTTPHeaderFields:
+/*!
     @abstract Sets the HTTP header fields of the receiver to the given
     dictionary.
     @discussion This method replaces all header fields that may have
@@ -512,7 +484,6 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
     sent an <tt>-isKindOfClass:[NSString class]</tt> message. If either
     the key or value for a key-value pair answers NO when sent this
     message, the key-value pair is skipped.
-    @param headerFields a dictionary containing HTTP header fields.
 */
 @property (nullable, copy) NSDictionary<NSString *, NSString *> *allHTTPHeaderFields;
 
@@ -544,33 +515,27 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 */
 - (void)addValue:(NSString *)value forHTTPHeaderField:(NSString *)field;
 
-/*! 
-    @method HTTPBody:
+/*!
     @abstract Sets the request body data of the receiver.
     @discussion This data is sent as the message body of the request, as
     in done in an HTTP POST request.
-    @param data the new request body data for the receiver.
 */
 @property (nullable, copy) NSData *HTTPBody;
 
 /*!
-    @method HTTPBodyStream:
     @abstract Sets the request body to be the contents of the given stream. 
     @discussion The provided stream should be unopened; the request will take
     over the stream's delegate.  The entire stream's contents will be 
     transmitted as the HTTP body of the request.  Note that the body stream
     and the body data (set by setHTTPBody:, above) are mutually exclusive 
-    - setting one will clear the other. 
-    @param inputStream the new input stream for use by the receiver
+    - setting one will clear the other.
 */
 @property (nullable, retain) NSInputStream *HTTPBodyStream;
 
 /*!
-    @method HTTPShouldHandleCookies
     @abstract Decide whether default cookie handling will happen for 
-    this request.
-    @param YES if cookies should be sent with and set for this request; 
-    otherwise NO.
+    this request (YES if cookies should be sent with and set for this request;
+    otherwise NO).
     @discussion The default is YES - in other words, cookies are sent from and 
     stored to the cookie manager by default.
     NOTE: In releases prior to 10.3, this value is ignored
@@ -578,11 +543,9 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
 @property BOOL HTTPShouldHandleCookies;
 
 /*!
- @method HTTPShouldUsePipelining
  @abstract Sets whether the request should not wait for the previous response 
- before transmitting.
- @param YES if the receiver should transmit before the previous response is
- received.  NO to wait for the previous response before transmitting.
+ before transmitting (YES if the receiver should transmit before the previous response is
+ received.  NO to wait for the previous response before transmitting)
  @discussion Calling this method with a YES value does not guarantee HTTP 
  pipelining behavior.  This method may have no effect if an HTTP proxy is
  configured, or if the HTTP request uses an unsafe request method (e.g., POST
@@ -595,7 +558,7 @@ typedef NS_ENUM(NSUInteger, NSURLRequestNetworkServiceType)
  pipelining (disconnecting, sending resources misordered, omitting part of
  a resource, etc.).
  */
-@property BOOL HTTPShouldUsePipelining NS_AVAILABLE(10_7, 4_0);
+@property BOOL HTTPShouldUsePipelining API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 

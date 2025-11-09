@@ -1,7 +1,7 @@
 /*
 	NSColorPanel.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -51,7 +51,7 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
     id			_opacitySlider;
     id			_opacityText;
     id			_opacityView;
-    id			_modalButtons;
+    id            _modalButtons;
     id			_pickerView;
     id			_customViewsList;
     id			_customPickerList;
@@ -74,12 +74,12 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
     BOOL		_continuous;
     BOOL		_allowColorSetting;
     BOOL		_stillInitializing;
-    BOOL                _reserved5;
+    BOOL                _hasModalAppearance;
     id			_opacityTextController;
 }
 
-+ (NSColorPanel *)sharedColorPanel;
-+ (BOOL)sharedColorPanelExists;
+@property (class, readonly, strong) NSColorPanel *sharedColorPanel;
+@property (class, readonly) BOOL sharedColorPanelExists;
 + (BOOL)dragColor:(NSColor *)color withEvent:(NSEvent *)event fromView:(NSView *)sourceView;
 + (void)setPickerMask:(NSColorPanelOptions)mask;
 + (void)setPickerMode:(NSColorPanelMode)mode;
@@ -108,15 +108,15 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 APPKIT_EXTERN NSNotificationName NSColorPanelColorDidChangeNotification;
 
 
-static const NSColorPanelMode NSNoModeColorPanel NS_AVAILABLE_MAC(10_5) /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeNone", macosx(10.5, 10.12))*/ = NSColorPanelModeNone;
-static const NSColorPanelMode NSGrayModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeGray", macosx(10.0, 10.12))*/ = NSColorPanelModeGray;
-static const NSColorPanelMode NSRGBModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeRGB", macosx(10.0, 10.12))*/ = NSColorPanelModeRGB;
-static const NSColorPanelMode NSCMYKModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCMYK", macosx(10.0, 10.12))*/ = NSColorPanelModeCMYK;
-static const NSColorPanelMode NSHSBModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeHSB", macosx(10.0, 10.12))*/ = NSColorPanelModeHSB;
-static const NSColorPanelMode NSCustomPaletteModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCustomPalette", macosx(10.0, 10.12))*/ = NSColorPanelModeCustomPalette;
-static const NSColorPanelMode NSColorListModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeColorList", macosx(10.0, 10.12))*/ = NSColorPanelModeColorList;
-static const NSColorPanelMode NSWheelModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeWheel", macosx(10.0, 10.12))*/ = NSColorPanelModeWheel;
-static const NSColorPanelMode NSCrayonModeColorPanel /*API_DEPRECATED_WITH_REPLACEMENT("NSColorPanelModeCrayon", macosx(10.0, 10.12))*/ = NSColorPanelModeCrayon;
+static const NSColorPanelMode NSNoModeColorPanel NS_AVAILABLE_MAC(10_5) /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeNone", 10.5, 10.12)*/ = NSColorPanelModeNone;
+static const NSColorPanelMode NSGrayModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeGray", 10.0, 10.12)*/ = NSColorPanelModeGray;
+static const NSColorPanelMode NSRGBModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeRGB", 10.0, 10.12)*/ = NSColorPanelModeRGB;
+static const NSColorPanelMode NSCMYKModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeCMYK", 10.0, 10.12)*/ = NSColorPanelModeCMYK;
+static const NSColorPanelMode NSHSBModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeHSB", 10.0, 10.12)*/ = NSColorPanelModeHSB;
+static const NSColorPanelMode NSCustomPaletteModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeCustomPalette", 10.0, 10.12)*/ = NSColorPanelModeCustomPalette;
+static const NSColorPanelMode NSColorListModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeColorList", 10.0, 10.12)*/ = NSColorPanelModeColorList;
+static const NSColorPanelMode NSWheelModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeWheel", 10.0, 10.12)*/ = NSColorPanelModeWheel;
+static const NSColorPanelMode NSCrayonModeColorPanel /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSColorPanelModeCrayon", 10.0, 10.12)*/ = NSColorPanelModeCrayon;
 
 NS_ASSUME_NONNULL_END
 

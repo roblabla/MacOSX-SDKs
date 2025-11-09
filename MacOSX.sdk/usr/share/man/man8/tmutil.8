@@ -180,7 +180,9 @@ The
 .Fl Sy p
 option configures fixed-path exclusions. The
 .Fl Sy v
-option configures volume exclusions. Both require root privileges.
+option configures volume exclusions. Both require root privileges. The
+.Fl Sy v
+option is the only supported way to exclude or unexclude a volume; behavior is undefined if a sticky or fixed-path exclusion is specified.
 .\" - - - - - - - - - - - - - - REMOVEEXCLUSION - - - - - - - - - - - - - - - -
 .It Sy removeexclusion Op Fl pv
 .Ar item ...
@@ -449,18 +451,50 @@ option tells
 to find all snapshot volumes in the same machine directory that match the identity of
 .Pa MyStuff Ns
 , and then perform the association on all of them.
-.\" - - - - - - - - - - - - - - - ENABLELOCAL - - - - - - - - - - - - - - - - -
-.It Sy enablelocal
+.\" - - - - - - - - - - - - - - - - APFS  - - - - - - - - - - - - - - - - -
+.It Sy localsnapshot
 .br
-Turn on local Time Machine snapshots. Requires root privileges.
-.\" - - - - - - - - - - - - - - - DISABLELOCAL  - - - - - - - - - - - - - - - -
-.It Sy disablelocal
+Create new local Time Machine snapshots of all APFS volumes included in the Time Machine backup.
+.It Sy listlocalsnapshots
+. Ar mount_point
 .br
-Turn off local Time Machine snapshots and trigger automatic cleanup of accumulated local snapshot data. Requires root privileges.
-.\" - - - - - - - - - - - - - - - - SNAPSHOT  - - - - - - - - - - - - - - - - -
-.It Sy snapshot
+List local Time Machine snapshots of the specified volume.
+.It Sy listlocalsnapshotdates
+.Op Ar mount_point
 .br
-Create new local Time Machine snapshot.
+List the creation dates of all local Time Machine snapshots.
+.Pp
+Specify
+.Ar mount_point
+to list snapshot creation dates from a specific volume.
+.Pp
+Listed dates are formatted YYYY-MM-DD-HHMMSS.
+.It Sy deletelocalsnapshots
+.Ar date
+.br
+Delete all local Time Machine snapshots for the specified
+.Ar date
+(formatted YYYY-MM-DD-HHMMSS).
+.It Sy thinlocalsnapshots
+.Ar mount_point
+.Op Ar purge_amount
+.Op Ar urgency
+.br
+Thin local Time Machine snapshots for the specified volume.
+.Pp
+When
+.Ar purge_amount
+and
+.Ar urgency
+are specified, tmutil will attempt (with
+.Ar urgency
+level 1-4) to reclaim
+.Ar purge_amount
+in bytes by thinning snapshots.
+.Pp
+If
+.Ar urgency
+is not specified, the default urgency will be used.
 .El
 .\" ----------------------------- END VERBS LIST -------------------------------
 .\" ----------------------------------------------------------------------------

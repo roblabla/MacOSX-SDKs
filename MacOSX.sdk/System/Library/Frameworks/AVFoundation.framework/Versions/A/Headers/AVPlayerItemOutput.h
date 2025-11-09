@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2015 Apple Inc. All rights reserved.
+	Copyright 2011-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -365,10 +365,17 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface AVPlayerItemLegibleOutput (AVPlayerItemLegibleOutput_TextStylingResolution)
 
 /*!
+ @typedef AVPlayerItemLegibleOutputTextStylingResolution
+ @abstract
+    The type of a text styling resolution.
+*/
+typedef NSString * AVPlayerItemLegibleOutputTextStylingResolution NS_STRING_ENUM;
+
+/*!
  @constant		AVPlayerItemLegibleOutputTextStylingResolutionDefault
  @abstract		Specify this level of text styling resolution to receive attributed strings from an AVPlayerItemLegibleOutput that include the same level of styling information that AVFoundation would use itself to render text within an AVPlayerLayer. The text styling will accommodate user-level Media Accessibility settings.
  */
-AVF_EXPORT NSString *const AVPlayerItemLegibleOutputTextStylingResolutionDefault NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionDefault NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @constant		AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly
@@ -376,7 +383,7 @@ AVF_EXPORT NSString *const AVPlayerItemLegibleOutputTextStylingResolutionDefault
  @discussion
 	This level of resolution excludes styling provided by the user-level Media Accessibility settings. You would typically use it if you wish to override the styling specified in source media. If you do this, you are strongly encouraged to allow your custom styling in turn to be overriden by user preferences for text styling that are available as Media Accessibility settings.
  */
-AVF_EXPORT NSString *const AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property		textStylingResolution
@@ -384,7 +391,7 @@ AVF_EXPORT NSString *const AVPlayerItemLegibleOutputTextStylingResolutionSourceA
  @discussion
 	Valid values are AVPlayerItemLegibleOutputTextStylingResolutionDefault and AVPlayerItemLegibleOutputTextStylingResolutionSourceAndRulesOnly.  An NSInvalidArgumentException is raised if this property is set to any other value.  The default value is AVPlayerItemLegibleOutputTextStylingResolutionDefault, which indicates that attributed strings vended by the receiver will include the same level of styling information that would be used if AVFoundation were rendering the text via AVPlayerLayer.
  */
-@property (nonatomic, copy) NSString *textStylingResolution;
+@property (nonatomic, copy) AVPlayerItemLegibleOutputTextStylingResolution textStylingResolution;
 
 @end
 
@@ -511,7 +518,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @optional
 /*!
-	@method			metadataOutput:didOutputTimedMetadataGroup:fromPlayerItemTrack:
+	@method			metadataOutput:didOutputTimedMetadataGroups:fromPlayerItemTrack:
 	@abstract		A delegate callback that delivers a new collection of metadata items.
 	@param			output
 					The AVPlayerItemMetadataOutput source.
@@ -526,7 +533,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		Note that if the item carries multiple metadata tracks containing metadata with the same metadata identifiers, this method can be invoked for each one separately, each with reference to the associated AVPlayerItemTrack.
 		Note that the associated AVPlayerItemTrack parameter can be nil which implies that the metadata describes the asset as a whole, not just a single track of the asset.
  */
-- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)groups fromPlayerItemTrack:(AVPlayerItemTrack *)track NS_AVAILABLE(10_10, 8_0);
+- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)groups fromPlayerItemTrack:(nullable AVPlayerItemTrack *)track NS_AVAILABLE(10_10, 8_0);
 
 @end
 

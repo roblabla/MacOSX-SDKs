@@ -1,15 +1,16 @@
 //	
 //	CalCalendar.h
-//	Calendar Store Framework
+//	CalendarStore Framework
 //	
 //  Copyright 2006 Apple Inc. All rights reserved.
 //	
 //	This class can be used to get attributes of a calendar, but cannot be used to get the list of events or tasks in a calendar. 
 //	Instead use CalCalendarStore's eventsFromPredicate: and tasksFromPredicate: methods.
 //
-//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
+//  The CalendarStore framework is deprecated.  Please use the EventKit framework instead.
 
-@class NSColor;
+#import <Foundation/Foundation.h>
+#import <AppKit/AppKit.h>
 
 extern NSString * const CalCalendarTypeBirthday NS_DEPRECATED_MAC(10_5, 10_8);
 extern NSString * const CalCalendarTypeCalDAV NS_DEPRECATED_MAC(10_5, 10_8);

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2008-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2008-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -273,7 +273,7 @@ __BEGIN_DECLS
 		than one mbuf.  In addition, data that is virtually contiguous
 		might not be represented by physically contiguous pages; see
 		further comments in mbuf_data_to_physical.  Use mbuf_len to
-		determine the lenght of data available in this mbuf. If a data
+		determine the length of data available in this mbuf. If a data
 		structure you want to access stradles two mbufs in a chain,
 		either use mbuf_pullup to get the data contiguous in one mbuf
 		or copy the pieces of data from each mbuf in to a contiguous
@@ -930,8 +930,7 @@ extern errno_t mbuf_copy_pkthdr(mbuf_t dest, const mbuf_t src);
 /*!
 	@function mbuf_pkthdr_len
 	@discussion Returns the length as reported by the packet header.
-	@param mbuf The mbuf containing the packet header with the length to
-		be changed.
+	@param mbuf The mbuf containing the packet header
 	@result The length, in bytes, of the packet.
  */
 extern size_t mbuf_pkthdr_len(const mbuf_t mbuf);

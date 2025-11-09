@@ -1,7 +1,7 @@
 /*
 	NSSliderCell.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
     } _scFlags;
 }
 
-+ (BOOL)prefersTrackingUntilMouseUp;
+@property (class, readonly) BOOL prefersTrackingUntilMouseUp;
 
 @property double minValue;
 @property double maxValue;
@@ -122,10 +122,10 @@ typedef NS_ENUM(NSUInteger, NSSliderType) {
 - (void)setKnobThickness:(CGFloat)thickness NS_DEPRECATED_MAC(10_0, 10_9);
 @end
 
-static const NSTickMarkPosition NSTickMarkBelow API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionBelow", macosx(10.0, 10.12)) = NSTickMarkPositionBelow;
-static const NSTickMarkPosition NSTickMarkAbove API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionAbove", macosx(10.0, 10.12)) = NSTickMarkPositionAbove;
-static const NSTickMarkPosition NSTickMarkLeft API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionLeading", macosx(10.0, 10.12)) = NSTickMarkPositionLeading;
-static const NSTickMarkPosition NSTickMarkRight API_DEPRECATED_WITH_REPLACEMENT("NSTickMarkPositionTrailing", macosx(10.0, 10.12)) = NSTickMarkPositionTrailing;
+static const NSTickMarkPosition NSTickMarkBelow NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionBelow", 10.0, 10.12) = NSTickMarkPositionBelow;
+static const NSTickMarkPosition NSTickMarkAbove NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionAbove", 10.0, 10.12) = NSTickMarkPositionAbove;
+static const NSTickMarkPosition NSTickMarkLeft NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionLeading", 10.0, 10.12) = NSTickMarkPositionLeading;
+static const NSTickMarkPosition NSTickMarkRight NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTickMarkPositionTrailing", 10.0, 10.12) = NSTickMarkPositionTrailing;
 
-static const NSSliderType NSLinearSlider API_DEPRECATED_WITH_REPLACEMENT("NSSliderTypeLinear", macosx(10.0, 10.12)) = NSSliderTypeLinear;
-static const NSSliderType NSCircularSlider API_DEPRECATED_WITH_REPLACEMENT("NSSliderTypeCircular", macosx(10.0, 10.12)) = NSSliderTypeCircular;
+static const NSSliderType NSLinearSlider NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSSliderTypeLinear", 10.0, 10.12) = NSSliderTypeLinear;
+static const NSSliderType NSCircularSlider NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSSliderTypeCircular", 10.0, 10.12) = NSSliderTypeCircular;

@@ -20,6 +20,18 @@ delivered to the job through a handler that is set early in its execution. The
 period between when the event is delivered to the job and when a handler is set
 is race-free, and any pending events will be queued up for consumption by the
 job. An event is consumed when it is delivered to the handler.
+.Sh REQUIREMENT TO SET STREAM HANDLER
+.Em IMPORTANT :
+If a launchd job registers for an event, it
+.Em MUST
+check in for the event with
+.Fn xpc_set_event_stream_handler
+during its initialization (e.g., in
+.Fn main ) .
+Failure to do so is a
+.Em serious programming error
+and may result in failure to deliver future events, unexpected relaunching of
+the job when it exits, or other system performance problems.
 .Sh EVENT STREAMS
 Providers of events are known as streams. Two example event streams are the
 IOKit stream and the BSD Notifications stream. Streams are denoted by a
@@ -39,14 +51,15 @@ Events are specified through the
 with the LaunchEvents key. The value for this key is a dictionary. Each value of
 this dictionary is itself a dictionary corresponding to an event stream. The
 values of this inner dictionary are events that may cause the job to be launched
-on-demand.
+on-demand. The keys of this inner dictionary are names chosen by the developer
+to identify the event.
 .Pp
 .Bd -literal -offset indent
 <key>LaunchEvents</key>
 <dict>
 	<key>com.apple.iokit.matching</key>
 	<dict>
-		<key>com.apple.device-attach</key>
+		<key>Device was attached</key>
 		<dict>
 			<key>idProduct</key>
 			<integer>2794</integer>
@@ -60,19 +73,25 @@ on-demand.
 	</dict>
 	<key>com.apple.notifyd.matching</key>
 	<dict>
-		<key>com.apple.interesting-notification</key>
+		<key>interesting-notification was posted</key>
 		<dict>
 			<key>Notification</key>
 			<string>com.apple.interesting-notification</string>
+		</dict>
+		<key>other-notification was posted</key>
+		<dict>
+			<key>Notification</key>
+			<string>com.apple.other-interesting-notification</string>
 		</dict>
 	</dict>
 </dict>
 .Ed
 .Pp
 The above specifies that the job will be launched when a node matching the given
-matching dictionary appears in the IORegistry or when a notification named
+matching dictionary appears in the IORegistry, when a notification named
 "com.apple.interesting-notification" is posted using
-.Xr notify_post 3 .
+.Xr notify_post 3 ,
+or a notification named "com.apple.other-interesting-notification" is posted.
 .Pp
 .Em NOTE :
 The IOMatchLaunchStream key is required to be present and be a Boolean set to
@@ -100,7 +119,9 @@ key set. The value for this key is the string that was given as the name for the
 event in the
 .Xr launchd.plist 5 .
 So if the IOKit event in the above example was received, the value of this key
-would be "com.apple.device-attach".
+would be "Device was attached". The name can be an arbitrary string, so that
+in the case of several events on the same stream (like notifications in the
+example above), the event handler can know which specific event fired.
 .Pp
 In addition to the standard payload, events from the IOKit stream also have the
 "IOMatchLaunchServiceID" key set to a

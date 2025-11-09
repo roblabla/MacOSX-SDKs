@@ -1,7 +1,7 @@
 /*
     NSAnimationContext.h
     Application Kit
-    Copyright (c) 2006-2016, Apple Inc.
+    Copyright (c) 2006-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -30,7 +30,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 + (void)beginGrouping;
 + (void)endGrouping;
 
-+ (NSAnimationContext *)currentContext;
+@property (class, readonly, strong) NSAnimationContext *currentContext;
 
 @property NSTimeInterval duration;
 @property (nullable, strong) CAMediaTimingFunction *timingFunction NS_AVAILABLE_MAC(10_7);

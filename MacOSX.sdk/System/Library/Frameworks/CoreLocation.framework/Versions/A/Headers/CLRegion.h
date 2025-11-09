@@ -65,7 +65,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  */
 - (instancetype)initCircularRegionWithCenter:(CLLocationCoordinate2D)center
 									  radius:(CLLocationDistance)radius
-								  identifier:(NSString *)identifier __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
+								  identifier:(NSString *)identifier API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
 
 /*
  *  center
@@ -75,7 +75,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationCoordinate2D center __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
+@property (readonly, nonatomic) CLLocationCoordinate2D center API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
 
 /*
  *  radius
@@ -85,7 +85,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-@property (readonly, nonatomic) CLLocationDistance radius __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
+@property (readonly, nonatomic) CLLocationDistance radius API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
 
 /*
  *  identifier
@@ -93,7 +93,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *  Discussion:
  *    Returns the region's identifier.
  */
-@property (readonly, nonatomic, copy) NSString *identifier __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+@property (readonly, nonatomic, copy) NSString *identifier API_AVAILABLE(ios(4.0), macos(10.7));
 
 /*
  *  notifyOnEntry
@@ -102,7 +102,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *    App will be launched and the delegate will be notified via locationManager:didEnterRegion:
  *    when the user enters the region. By default, this is YES.
  */
-@property (nonatomic, assign) BOOL notifyOnEntry __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_0);
+@property (nonatomic, assign) BOOL notifyOnEntry API_AVAILABLE(ios(7.0), macos(10.10));
 
 /*
  *  notifyOnExit
@@ -111,7 +111,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *    App will be launched and the delegate will be notified via locationManager:didExitRegion:
  *    when the user exits the region. By default, this is YES.
  */
-@property (nonatomic, assign) BOOL notifyOnExit __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_7_0);
+@property (nonatomic, assign) BOOL notifyOnExit API_AVAILABLE(ios(7.0), macos(10.10));
 
 /*
  *  containsCoordinate:
@@ -121,7 +121,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  *
  *    This method has been deprecated, please see CLCircularRegion.
  */
-- (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_7,__MAC_10_10,__IPHONE_4_0,__IPHONE_7_0) __TVOS_PROHIBITED;
+- (BOOL)containsCoordinate:(CLLocationCoordinate2D)coordinate API_DEPRECATED("Please see CLCircularRegion", ios(4.0, 7.0), macos(10.7, 10.10)) __TVOS_PROHIBITED;
 
 @end
 

@@ -1,6 +1,6 @@
 /*	
     NSURLCache.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -84,29 +84,25 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 */
 - (instancetype)initWithResponse:(NSURLResponse *)response data:(NSData *)data userInfo:(nullable NSDictionary *)userInfo storagePolicy:(NSURLCacheStoragePolicy)storagePolicy;
 
-/*! 
-    @method response
+/*!
     @abstract Returns the response wrapped by this instance. 
     @result The response wrapped by this instance. 
 */
 @property (readonly, copy) NSURLResponse *response;
 
-/*! 
-    @method data
+/*!
     @abstract Returns the data of the receiver. 
     @result The data of the receiver. 
 */
 @property (readonly, copy) NSData *data;
 
-/*! 
-    @method userInfo
+/*!
     @abstract Returns the userInfo dictionary of the receiver. 
     @result The userInfo dictionary of the receiver. 
 */
 @property (nullable, readonly, copy) NSDictionary *userInfo;
 
-/*! 
-    @method storagePolicy
+/*!
     @abstract Returns the NSURLCacheStoragePolicy constant of the receiver. 
     @result The NSURLCacheStoragePolicy constant of the receiver. 
 */
@@ -149,9 +145,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     becoming unexpectedly unretrievable.
     @result the shared NSURLCache instance.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, strong) NSURLCache *sharedURLCache;
-#endif
 
 /*! 
     @method initWithMemoryCapacity:diskCapacity:diskPath:
@@ -161,7 +155,8 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
     developers can be more liberal with space when choosing the
     capacity for this kind of cache. A disk cache measured in the tens
     of megabytes should be acceptable in most cases.
-    @param capacity the capacity, measured in bytes, for the cache.
+    @param memoryCapacity the capacity, measured in bytes, for the cache in memory.
+    @param diskCapacity the capacity, measured in bytes, for the cache on disk.
     @param path the path on disk where the cache data is stored.
     @result an initialized NSURLCache, with the given capacity, backed
     by disk.
@@ -211,26 +206,22 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
  @method removeCachedResponsesSince:
  @abstract Clears the given cache of any cached responses since the provided date.
  */
-- (void)removeCachedResponsesSinceDate:(NSDate *)date NS_AVAILABLE(10_10, 8_0);
+- (void)removeCachedResponsesSinceDate:(NSDate *)date API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
-/*! 
-    @method memoryCapacity
+/*!
     @abstract In-memory capacity of the receiver. 
     @discussion At the time this call is made, the in-memory cache will truncate its contents to the size given, if necessary.
     @result The in-memory capacity, measured in bytes, for the receiver. 
 */
 @property NSUInteger memoryCapacity;
 
-/*! 
-    @method diskCapacity
+/*!
     @abstract The on-disk capacity of the receiver. 
-    @discussion At the time this call is made, the on-disk cache will truncate its contents to the size given, if necessary.
-    @param diskCapacity the new on-disk capacity, measured in bytes, for the receiver.
+    @discussion The on-disk capacity, measured in bytes, for the receiver. On mutation the on-disk cache will truncate its contents to the size given, if necessary.
 */
 @property NSUInteger diskCapacity;
 
-/*! 
-    @method currentMemoryUsage
+/*!
     @abstract Returns the current amount of space consumed by the
     in-memory cache of the receiver.
     @discussion This size, measured in bytes, indicates the current
@@ -239,8 +230,7 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 */
 @property (readonly) NSUInteger currentMemoryUsage;
 
-/*! 
-    @method currentDiskUsage
+/*!
     @abstract Returns the current amount of space consumed by the
     on-disk cache of the receiver.
     @discussion This size, measured in bytes, indicates the current
@@ -252,9 +242,9 @@ typedef NS_ENUM(NSUInteger, NSURLCacheStoragePolicy)
 @end
 
 @interface NSURLCache (NSURLSessionTaskAdditions)
-- (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
-- (void)getCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask completionHandler:(void (^) (NSCachedURLResponse * _Nullable cachedResponse))completionHandler NS_AVAILABLE(10_10, 8_0);
-- (void)removeCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask NS_AVAILABLE(10_10, 8_0);
+- (void)storeCachedResponse:(NSCachedURLResponse *)cachedResponse forDataTask:(NSURLSessionDataTask *)dataTask API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)getCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask completionHandler:(void (^) (NSCachedURLResponse * _Nullable cachedResponse))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)removeCachedResponseForDataTask:(NSURLSessionDataTask *)dataTask API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 @end
 
 NS_ASSUME_NONNULL_END

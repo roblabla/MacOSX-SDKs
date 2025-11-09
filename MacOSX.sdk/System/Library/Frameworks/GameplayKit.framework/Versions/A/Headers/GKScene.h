@@ -31,6 +31,11 @@ GK_BASE_AVAILABILITY_2 @interface GKScene : NSObject <NSCopying, NSCoding>
 + (nullable instancetype)sceneWithFileNamed:(NSString *)filename;
 
 /**
+ Loads a scene from a file contained within the bundle and link with the specified rootNode.
+ */
++ (nullable instancetype)sceneWithFileNamed:(NSString *)filename rootNode:(id <GKSceneRootNodeType>) rootNode;
+
+/**
  The entities of this scene.
  */
 @property (nonatomic, readonly) NSArray<GKEntity *> *entities;

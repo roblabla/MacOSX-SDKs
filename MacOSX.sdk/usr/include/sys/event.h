@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2003-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2003-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -60,6 +60,9 @@
 #include <sys/cdefs.h>
 #include <stdint.h>
 
+/*
+ * Filter types
+ */
 #define EVFILT_READ		(-1)
 #define EVFILT_WRITE		(-2)
 #define EVFILT_AIO		(-3)	/* attached to aio requests */
@@ -75,7 +78,7 @@
 
 #define EVFILT_EXCEPT		(-15)	/* Exception events */
 
-#define EVFILT_SYSCOUNT		15
+#define EVFILT_SYSCOUNT		17
 #define EVFILT_THREADMARKER	EVFILT_SYSCOUNT /* Internal use only */
 
 #pragma pack(4)
@@ -127,9 +130,9 @@ struct kevent64_s {
 
 
 /* kevent system call flags */
-#define KEVENT_FLAG_NONE               0x000	/* no flag value */
-#define KEVENT_FLAG_IMMEDIATE          0x001	/* immediate timeout */
-#define KEVENT_FLAG_ERROR_EVENTS       0x002	/* output events only include change errors */
+#define KEVENT_FLAG_NONE                         0x000	/* no flag value */
+#define KEVENT_FLAG_IMMEDIATE                    0x001	/* immediate timeout */
+#define KEVENT_FLAG_ERROR_EVENTS                 0x002	/* output events only include change errors */
 
 
 /* actions */
@@ -217,6 +220,7 @@ struct kevent64_s {
 #define NOTE_FFCTRLMASK 0xc0000000              /* mask for operations */
 #define NOTE_FFLAGSMASK	0x00ffffff 
 
+
 /*
  * data/hint fflags for EVFILT_{READ|WRITE}, shared with userspace
  *
@@ -303,11 +307,21 @@ enum {
 #define NOTE_USECONDS	0x00000002		/* data is microseconds    */
 #define NOTE_NSECONDS	0x00000004		/* data is nanoseconds     */
 #define NOTE_ABSOLUTE	0x00000008		/* absolute timeout        */
-						/* ... implicit EV_ONESHOT */
+	/* ... implicit EV_ONESHOT, timeout uses the gettimeofday epoch */
 #define NOTE_LEEWAY	0x00000010		/* ext[1] holds leeway for power aware timers */
 #define NOTE_CRITICAL	0x00000020		/* system does minimal timer coalescing */
 #define NOTE_BACKGROUND	0x00000040		/* system does maximum timer coalescing */
-#define NOTE_MACH_CONTINUOUS_TIME	0x00000080		/* use continuous time base */
+#define NOTE_MACH_CONTINUOUS_TIME	0x00000080
+	/*
+	 * NOTE_MACH_CONTINUOUS_TIME:
+	 * with NOTE_ABSOLUTE: causes the timer to continue to tick across sleep,
+	 *      still uses gettimeofday epoch
+	 * with NOTE_MACHTIME and NOTE_ABSOLUTE: uses mach continuous time epoch
+	 * without NOTE_ABSOLUTE (interval timer mode): continues to tick across sleep
+	 */
+#define NOTE_MACHTIME   0x00000100              /* data is mach absolute time units */
+	/* timeout uses the mach absolute time epoch */
+
 
 /*
  * data/hint fflags for EVFILT_MACHPORT, shared with userspace.
@@ -377,6 +391,7 @@ int     kevent64(int kq,
 
 
 __END_DECLS
+
 
 
 

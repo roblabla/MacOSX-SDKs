@@ -1,5 +1,5 @@
 /*	NSUserActivity.h
-	Copyright (c) 2014-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2014-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* NSUserActivity encapsulates the state of a user activity in an application on a particular device, in a way that allows the same activity to be continued on another device in a corresponding application from the same developer. Examples of user user activities include editing a document, viewing a web page, or watching a video.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 @interface NSUserActivity : NSObject
 
 /* Initializes and returns a newly created NSUserActivity with the given activityType. A user activity may be continued only in an application that (1) has the same developer Team ID as the activity's source application and (2) supports the activity's type. Supported activity types are specified in the application's Info.plist under the NSUserActivityTypes key. When receiving a user activity for continuation, the system locates the appropriate application to launch by finding applications with the target Team ID, then filtering on the incoming activity's type identifier.
@@ -22,7 +22,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /* Initializes and returns a newly created NSUserActivity with the first activityType from the NSUserActivityTypes key in the application’s Info.plist.
 */
-- (instancetype)init API_DEPRECATED("Use initWithActivityType: with a specific activity type string", macosx(10.10, 10.12), ios(8.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
+- (instancetype)init API_DEPRECATED("Use initWithActivityType: with a specific activity type string", macosx(10.10, 10.12), ios(8.0,10.0), watchos(2.0,3.0), tvos(9.0,10.0));
 
 /* The activityType the user activity was created with.
 */
@@ -40,22 +40,26 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 - (void)addUserInfoEntriesFromDictionary:(NSDictionary *)otherDictionary;
 
-/* The keys from the userInfo property which represent the minimal information about this user activity that should be stored for later restoration */
-@property (copy) NSSet<NSString *> *requiredUserInfoKeys NS_AVAILABLE(10_11, 9_0);
+/* The keys from the userInfo property which represent the minimal information about this user activity that should be stored for later restoration.  A nil value means all keys in .userInfo are required. */
+@property (nullable, copy) NSSet<NSString *> *requiredUserInfoKeys API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
 
 /* If set to YES, then the delegate for this user activity will receive a userActivityWillSave: callback before being sent for continuation on another device. 
 */
 @property (assign) BOOL needsSave;
 
-/* When no suitable application is installed on a resuming device and the webPageURL is set, the user activity will instead be continued in a web browser by loading this resource.
+/* When no suitable application is installed on a resuming device and the webpageURL is set, the user activity will instead be continued in a web browser by loading this resource.
 */
 @property (nullable, copy) NSURL *webpageURL;
 
+/* The URL of the webpage that referred (linked to) webpageURL.
+ */
+@property (nullable, copy) NSURL *referrerURL API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 /* If non-nil, then an absolute date after which this activity is no longer eligible to be indexed or handed off. */
-@property (copy) NSDate *expirationDate NS_AVAILABLE(10_11, 9_0);
+@property (nullable, copy) NSDate *expirationDate API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
 
 /* A set of NSString* keywords, representing words or phrases in the current user's language that might help the user to find this activity in the application history. */
-@property (copy) NSSet<NSString *> *keywords NS_AVAILABLE(10_11, 9_0);
+@property (copy) NSSet<NSString *> *keywords API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
 
 /* When used for continuation, the user activity can allow the continuing side to connect back for more information using streams. This value is set to NO by default. It can be dynamically set to YES to selectively support continuation streams based on the state of the user activity.
 */
@@ -70,7 +74,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (void)becomeCurrent;
 
 /* If this activity is the current activity, it should stop being so and set the current activity to nothing. */
-- (void)resignCurrent NS_AVAILABLE(10_11, 9_0);
+- (void)resignCurrent API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
 
 /* Invalidate an activity when it's no longer eligible for continuation, for example, when the window associated with an activity is closed. An invalid activity cannot become current.
 */
@@ -81,23 +85,23 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 - (void)getContinuationStreamsWithCompletionHandler:(void (^)(NSInputStream * _Nullable inputStream, NSOutputStream * _Nullable outputStream, NSError * _Nullable error))completionHandler;
 
 /* Set to YES if this user activity should be eligible to be handed off to another device */
-@property (getter=isEligibleForHandoff) BOOL eligibleForHandoff NS_AVAILABLE(10_11, 9_0);
+@property (getter=isEligibleForHandoff) BOOL eligibleForHandoff API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
 
 /* Set to YES if this user activity should be indexed by App History */
-@property (getter=isEligibleForSearch) BOOL eligibleForSearch NS_AVAILABLE(10_11, 9_0);
+@property (getter=isEligibleForSearch) BOOL eligibleForSearch API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
 
 /* Set to YES if this user activity should be eligible for indexing for any user of this application, on any device, or NO if the activity contains private or sensitive information or which would not be useful to other users if indexed.  The activity must also have requiredUserActivityKeys or a webpageURL */
-@property (getter=isEligibleForPublicIndexing) BOOL eligibleForPublicIndexing NS_AVAILABLE(10_11, 9_0);
+@property (getter=isEligibleForPublicIndexing) BOOL eligibleForPublicIndexing API_AVAILABLE(macos(10.11), ios(9.0), watchos(3.0), tvos(10.0));
 
 @end
 
 /* The activity type used when continuing from a web browsing session to either a web browser or a native app. Only activities of this type can be continued from a web browser to a native app.
 */
-FOUNDATION_EXPORT NSString * const NSUserActivityTypeBrowsingWeb NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXPORT NSString * const NSUserActivityTypeBrowsingWeb;
 
 /* The user activity delegate is responsible for updating the state of an activity and is also notified when an activity has been continued on another device.
 */
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0), tvos(9.0))
 @protocol NSUserActivityDelegate <NSObject>
 @optional
 
@@ -111,7 +115,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 /* If supportsContinuationStreams is set to YES the continuing side can request streams back to this user activity. This delegate callback will be received with the incoming streams from the other side. The streams will be in an unopened state. The streams should be opened immediately to start receiving requests from the continuing side.
 */
-- (void)userActivity:(nullable NSUserActivity *)userActivity didReceiveInputStream:(NSInputStream *)inputStream outputStream:(NSOutputStream *)outputStream;
+- (void)userActivity:(NSUserActivity *)userActivity didReceiveInputStream:(NSInputStream *) inputStream outputStream:(NSOutputStream *)outputStream;
 
 @end
 

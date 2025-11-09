@@ -1,5 +1,6 @@
 //
 //  PDFKit.h
+//  Copyright © 2016 Apple. All rights reserved.
 //
 
 // Cross-platform support
@@ -13,6 +14,8 @@
 #import <PDFKit/PDFActionRemoteGoTo.h>
 #import <PDFKit/PDFActionURL.h>
 #import <PDFKit/PDFAnnotation.h>
+#import <PDFKit/PDFAnnotationUtilities.h>
+#import <PDFKit/PDFAppearanceCharacteristics.h>
 #import <PDFKit/PDFBorder.h>
 #import <PDFKit/PDFDestination.h>
 #import <PDFKit/PDFDocument.h>

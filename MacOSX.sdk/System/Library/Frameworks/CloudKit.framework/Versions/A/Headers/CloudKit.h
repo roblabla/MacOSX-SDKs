@@ -30,6 +30,7 @@
 #import <CloudKit/CKUserIdentity.h>
 #import <CloudKit/CKUserIdentityLookupInfo.h>
 
+#import <CloudKit/CKOperationGroup.h>
 #import <CloudKit/CKOperation.h>
 #import <CloudKit/CKDatabaseOperation.h>
 #import <CloudKit/CKModifyRecordsOperation.h>

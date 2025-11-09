@@ -9,7 +9,11 @@
 #import <EventKit/EKObject.h>
 #import <EventKit/EKTypes.h>
 
+#if TARGET_OS_IPHONE
 #if !TARGET_OS_WATCH
+#import <AddressBook/ABPerson.h>
+#endif
+#else
 #import <AddressBook/AddressBook.h>
 #endif
 

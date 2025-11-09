@@ -5,6 +5,7 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
 
 /*!
@@ -23,7 +24,7 @@ MTL_INLINE MTLOrigin MTLOriginMake(NSUInteger x, NSUInteger y, NSUInteger z)
 
 /*!
  @typedef MTLSize
- @abstract A set of dimensions to declare the size of an object such as a compute kernel work group or grid.
+ @abstract A set of dimensions to declare the size of an object, such as an image, texture, threadgroup, or grid.
  */
 typedef struct {
     NSUInteger width, height, depth;
@@ -70,3 +71,17 @@ MTL_INLINE MTLRegion MTLRegionMake3D(NSUInteger x, NSUInteger y, NSUInteger z, N
     return region;
 }
 
+/*!
+ @struct MTLSamplePosition
+ @abstract Identify a sample within a pixel. Origin is top-left with a range [0,1) for both x and y.
+ */
+
+typedef struct {
+    float x, y;
+} MTLSamplePosition;
+
+MTL_INLINE MTLSamplePosition MTLSamplePositionMake(float x, float y)
+{
+    MTLSamplePosition position = {x, y};
+    return position;
+}

@@ -1,6 +1,6 @@
 /*	
     NSURLProtectionSpace.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -18,19 +18,19 @@ NS_ASSUME_NONNULL_BEGIN
    @const NSURLProtectionSpaceHTTP
    @abstract The protocol for HTTP
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTP NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTP API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
    @const NSURLProtectionSpaceHTTPS
    @abstract The protocol for HTTPS
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPS NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceHTTPS API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
    @const NSURLProtectionSpaceFTP
    @abstract The protocol for FTP
 */
-FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSString * const NSURLProtectionSpaceFTP API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLProtectionSpaceHTTPProxy
@@ -85,25 +85,25 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodHTMLForm;
    @const NSURLAuthenticationMethodNTLM
    @abstract NTLM authentication.
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNTLM NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNTLM API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
    @const NSURLAuthenticationMethodNegotiate
    @abstract Negotiate authentication.
 */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNegotiate NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodNegotiate API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLAuthenticationMethodClientCertificate
     @abstract SSL Client certificate.  Applies to any protocol.
  */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodClientCertificate NS_AVAILABLE(10_6, 3_0);
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodClientCertificate API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const NSURLAuthenticationMethodServerTrust
     @abstract SecTrustRef validation required.  Applies to any protocol.
  */
-FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAILABLE(10_6, 3_0);
+FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 @class NSURLProtectionSpaceInternal;
 
@@ -151,7 +151,6 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
 - (instancetype)initWithProxyHost:(NSString *)host port:(NSInteger)port type:(nullable NSString *)type realm:(nullable NSString *)realm  authenticationMethod:(nullable NSString *)authenticationMethod;
 
 /*!
-    @method realm
     @abstract Get the authentication realm for which the protection space that
     needs authentication
     @discussion This is generally only available for http
@@ -161,49 +160,42 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
 @property (nullable, readonly, copy) NSString *realm;
 
 /*!
-    @method receivesCredentialSecurely
     @abstract Determine if the password for this protection space can be sent securely
     @result YES if a secure authentication method or protocol will be used, NO otherwise
 */
 @property (readonly) BOOL receivesCredentialSecurely;
 
 /*!
-    @method isProxy
     @abstract Determine if this authenticating protection space is a proxy server
     @result YES if a proxy, NO otherwise
 */
 @property (readonly) BOOL isProxy;
 
 /*!
-    @method host
     @abstract Get the proxy host if this is a proxy authentication, or the host from the URL.
     @result The host for this protection space.
 */
 @property (readonly, copy) NSString *host;
 
 /*!
-    @method port
     @abstract Get the proxy port if this is a proxy authentication, or the port from the URL.
     @result The port for this protection space, or 0 if not set.
 */
 @property (readonly) NSInteger port;
 
 /*!
-    @method proxyType
     @abstract Get the type of this protection space, if a proxy
     @result The type string, or nil if not a proxy.
  */
 @property (nullable, readonly, copy) NSString *proxyType;
 
 /*!
-    @method protocol
     @abstract Get the protocol of this protection space, if not a proxy
     @result The type string, or nil if a proxy.
 */
 @property (nullable, readonly, copy) NSString *protocol;
 
 /*!
-    @method authenticationMethod
     @abstract Get the authentication method to be used for this protection space
     @result The authentication method
 */
@@ -212,32 +204,28 @@ FOUNDATION_EXPORT NSString * const NSURLAuthenticationMethodServerTrust NS_AVAIL
 @end
 
 /*!
-    @class NSURLProtectionSpace(NSClientCertificateSpace)
     @discussion This category supplies additional information for use when a client certificate is required by the server in order to complete authentication.
  */
 @interface NSURLProtectionSpace(NSClientCertificateSpace)
 
 /*!
-    @method distinguishedNames
     @abstract Returns an array of acceptable certificate issuing authorities for client certification authentication. Issuers are identified by their distinguished name and returned as a DER encoded data.
     @result An array of NSData objects.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodClientCertificate)
  */
-@property (nullable, readonly, copy) NSArray<NSData *> *distinguishedNames NS_AVAILABLE(10_6, 3_0);
+@property (nullable, readonly, copy) NSArray<NSData *> *distinguishedNames API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 @end
 
 /*!
-    @class NSURLProtectionSpace(NSServerTrustValidationSpace)
     @discussion This category supplies additional information for use by the client to evaluate whether to trust a given server during a security handshake.
  */
 @interface NSURLProtectionSpace(NSServerTrustValidationSpace)
 
 /*!
-    @method serverTrust
     @abstract Returns a SecTrustRef which represents the state of the servers SSL transaction state
     @result A SecTrustRef from Security.framework.  (Nil if the authenticationMethod is not NSURLAuthenticationMethodServerTrust)
  */
-@property (nullable, readonly) SecTrustRef serverTrust NS_AVAILABLE(10_6, 3_0);
+@property (nullable, readonly) SecTrustRef serverTrust API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 @end
 

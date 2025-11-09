@@ -1,5 +1,5 @@
 /*	NSNumberFormatter.h
-	Copyright (c) 1996-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1996-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -29,7 +29,7 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterBehavior) {
     void *_reserved[8];
 }
 
-@property NSFormattingContext formattingContext NS_AVAILABLE(10_10, 8_0); // default is NSFormattingContextUnknown
+@property NSFormattingContext formattingContext API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // default is NSFormattingContextUnknown
 
 // - (id)init; // designated initializer
 
@@ -50,13 +50,13 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterStyle) {
     NSNumberFormatterPercentStyle = kCFNumberFormatterPercentStyle,
     NSNumberFormatterScientificStyle = kCFNumberFormatterScientificStyle,
     NSNumberFormatterSpellOutStyle = kCFNumberFormatterSpellOutStyle,
-    NSNumberFormatterOrdinalStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterOrdinalStyle,
-    NSNumberFormatterCurrencyISOCodeStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyISOCodeStyle,
-    NSNumberFormatterCurrencyPluralStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyPluralStyle,
-    NSNumberFormatterCurrencyAccountingStyle NS_ENUM_AVAILABLE(10_11, 9_0) = kCFNumberFormatterCurrencyAccountingStyle,
+    NSNumberFormatterOrdinalStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterOrdinalStyle,
+    NSNumberFormatterCurrencyISOCodeStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyISOCodeStyle,
+    NSNumberFormatterCurrencyPluralStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyPluralStyle,
+    NSNumberFormatterCurrencyAccountingStyle API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = kCFNumberFormatterCurrencyAccountingStyle,
 };
 
-+ (NSString *)localizedStringFromNumber:(NSNumber *)num numberStyle:(NSNumberFormatterStyle)nstyle NS_AVAILABLE(10_6, 4_0);
++ (NSString *)localizedStringFromNumber:(NSNumber *)num numberStyle:(NSNumberFormatterStyle)nstyle API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 // Attributes of an NSNumberFormatter
 
@@ -136,12 +136,12 @@ typedef NS_ENUM(NSUInteger, NSNumberFormatterRoundingMode) {
 @property NSUInteger maximumFractionDigits;
 @property (nullable, copy) NSNumber *minimum;
 @property (nullable, copy) NSNumber *maximum;
-@property (null_resettable, copy) NSString *currencyGroupingSeparator NS_AVAILABLE(10_5, 2_0);
-@property (getter=isLenient) BOOL lenient NS_AVAILABLE(10_5, 2_0);
-@property BOOL usesSignificantDigits NS_AVAILABLE(10_5, 2_0);
-@property NSUInteger minimumSignificantDigits NS_AVAILABLE(10_5, 2_0);
-@property NSUInteger maximumSignificantDigits NS_AVAILABLE(10_5, 2_0);
-@property (getter=isPartialStringValidationEnabled) BOOL partialStringValidationEnabled NS_AVAILABLE(10_5, 2_0);
+@property (null_resettable, copy) NSString *currencyGroupingSeparator API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (getter=isLenient) BOOL lenient API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property BOOL usesSignificantDigits API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property NSUInteger minimumSignificantDigits API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property NSUInteger maximumSignificantDigits API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (getter=isPartialStringValidationEnabled) BOOL partialStringValidationEnabled API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @end
 

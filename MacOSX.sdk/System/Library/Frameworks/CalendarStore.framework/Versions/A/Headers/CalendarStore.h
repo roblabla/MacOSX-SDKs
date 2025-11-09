@@ -1,6 +1,6 @@
 //
 //  CalendarStore.h
-//  Calendar Store Framework
+//  CalendarStore Framework
 //
 //  Copyright (c) 2006 Apple. All rights reserved.
 

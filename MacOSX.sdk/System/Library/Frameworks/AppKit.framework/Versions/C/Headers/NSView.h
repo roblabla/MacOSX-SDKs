@@ -1,27 +1,29 @@
 /*
     NSView.h
     Application Kit
-    Copyright (c) 1994-2016, Apple Inc.
+    Copyright (c) 1994-2017, Apple Inc.
     All rights reserved.
 */
 
-#import <AppKit/NSApplication.h>
-#import <AppKit/NSResponder.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSRange.h>
+
 #import <AppKit/AppKitDefines.h>
-#import <AppKit/NSGraphics.h>
 #import <AppKit/NSAnimation.h>
-#import <AppKit/NSUserInterfaceItemIdentification.h>
-#import <AppKit/NSDragging.h>
 #import <AppKit/NSAppearance.h>
+#import <AppKit/NSApplication.h>
+#import <AppKit/NSDragging.h>
+#import <AppKit/NSGraphics.h>
+#import <AppKit/NSPasteboard.h>
+#import <AppKit/NSResponder.h>
 #import <AppKit/NSTouch.h>
+#import <AppKit/NSUserInterfaceItemIdentification.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSBitmapImageRep, NSCursor, NSDraggingSession, NSGestureRecognizer, NSGraphicsContext, NSImage, NSPasteboard, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
+@class NSBitmapImageRep, NSCursor, NSDraggingSession, NSGestureRecognizer, NSGraphicsContext, NSImage, NSScrollView, NSTextInputContext, NSWindow, NSAttributedString;
 @class CIFilter, CALayer, NSScreen, NSShadow, NSTrackingArea;
 @protocol NSDraggingSource;
 
@@ -72,53 +74,28 @@ typedef NS_ENUM(NSInteger, NSViewLayerContentsPlacement) {
 } NS_ENUM_AVAILABLE_MAC(10_6);
 
 typedef struct __VFlags {
-#ifdef __BIG_ENDIAN__
-	unsigned int rotatedFromBase:1;
-	unsigned int rotatedOrScaledFromBase:1;
-	unsigned int autosizing:6;
-	unsigned int autoresizeSubviews:1;
-	unsigned int wantsGState:1;
-	unsigned int needsDisplay:1;
-	unsigned int allowsVibrancy:2;
-	unsigned int canDrawSubviewsIntoLayer:1;
-	unsigned int frameChangeNotesSuspended:1;
-	unsigned int needsFrameChangeNote:1;
-	unsigned int unused2:1;
-	unsigned int boundsChangeNotesSuspended:1;
-	unsigned int needsBoundsChangeNote:1;
-	unsigned int removingWithoutInvalidation:1;
-	unsigned int isFlipped:1;
-	unsigned int needsDisplayForBounds:1;
-	unsigned int specialArchiving:1;
-	unsigned int ignoreHitTest:1;
-        unsigned int hasNotMessedWithIsFlipped:1;
-	unsigned int unused3:5;
-	unsigned int isOpaque:1;
-	unsigned int aboutToResize:1;
-#else
-	unsigned int aboutToResize:1;
-	unsigned int isOpaque:1;
-	unsigned int unused3:5;
-        unsigned int hasNotMessedWithIsFlipped:1;
-	unsigned int ignoreHitTest:1;
-	unsigned int specialArchiving:1;
-	unsigned int needsDisplayForBounds:1;
-	unsigned int isFlipped:1;
-	unsigned int removingWithoutInvalidation:1;
-	unsigned int needsBoundsChangeNote:1;
-	unsigned int boundsChangeNotesSuspended:1;
-	unsigned int unused2:1;
-	unsigned int needsFrameChangeNote:1;
-	unsigned int frameChangeNotesSuspended:1;
-	unsigned int canDrawSubviewsIntoLayer:1;
-	unsigned int allowsVibrancy:2;
-	unsigned int needsDisplay:1;
-	unsigned int wantsGState:1;
-	unsigned int autoresizeSubviews:1;
-	unsigned int autosizing:6;
-	unsigned int rotatedOrScaledFromBase:1;
-	unsigned int rotatedFromBase:1;
-#endif
+    unsigned int aboutToResize:1;
+    unsigned int isOpaque:1;
+    unsigned int unused3:5;
+    unsigned int hasNotMessedWithIsFlipped:1;
+    unsigned int ignoreHitTest:1;
+    unsigned int specialArchiving:1;
+    unsigned int needsDisplayForBounds:1;
+    unsigned int isFlipped:1;
+    unsigned int removingWithoutInvalidation:1;
+    unsigned int needsBoundsChangeNote:1;
+    unsigned int boundsChangeNotesSuspended:1;
+    unsigned int unused2:1;
+    unsigned int needsFrameChangeNote:1;
+    unsigned int frameChangeNotesSuspended:1;
+    unsigned int canDrawSubviewsIntoLayer:1;
+    unsigned int allowsVibrancy:2;
+    unsigned int needsDisplay:1;
+    unsigned int unused1:1;
+    unsigned int autoresizeSubviews:1;
+    unsigned int autosizing:6;
+    unsigned int rotatedOrScaledFromBase:1;
+    unsigned int rotatedFromBase:1;
 } _VFlags;
 
 typedef NSInteger NSTrackingRectTag;
@@ -131,8 +108,8 @@ typedef NSInteger NSToolTipTag;
     /* All instance variables are private */
     NSRect              _frame;
     NSRect              _bounds;
-    id                  _superview;
-    id                  _subviews;
+    __kindof NSView    *_superview;
+    NSArray<__kindof NSView *> *_subviews;
     NSWindow           *_window;
     id                  _unused_was_gState;
     id                  _frameMatrix;
@@ -151,7 +128,7 @@ typedef NSInteger NSToolTipTag;
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder *)decoder NS_DESIGNATED_INITIALIZER;
 
 @property (nullable, readonly, assign) NSWindow *window;
 @property (nullable, readonly, assign) NSView *superview;
@@ -258,8 +235,8 @@ typedef NSInteger NSToolTipTag;
 - (void)lockFocus;
 - (void)unlockFocus;
 - (BOOL)lockFocusIfCanDraw;
-- (BOOL)lockFocusIfCanDrawInContext:(NSGraphicsContext *)context;
-+ (nullable NSView *)focusView;
+- (BOOL)lockFocusIfCanDrawInContext:(NSGraphicsContext *)context NS_DEPRECATED_MAC(10_4, 10_13, "Use -[NSView displayRectIgnoringOpacity:inContext:] to draw a view subtree into a graphics context.");
+@property (class, readonly, nullable, strong) NSView *focusView;
 @property (readonly) NSRect visibleRect;
 
 - (void)display;
@@ -294,7 +271,7 @@ typedef NSInteger NSToolTipTag;
 @property (readonly) BOOL mouseDownCanMoveWindow;
 
 /* Deprecated in favor of allowedTouchTypes. Return YES if allowedTouchTypes includes NSTouchTypeMaskIndirect */
-@property BOOL acceptsTouchEvents NS_DEPRECATED_MAC(10_6, 10_12_2);
+@property BOOL acceptsTouchEvents NS_DEPRECATED_MAC(10_6, 10_12_2, "Use allowedTouchTypes instead");
 
 /* In some cases, the user may rest a thumb or other touch on the device. By default, these touches are not delivered and are not included in the event's set of touches. Touches may transition in and out of resting at any time. Unless the view wants restingTouches, began / ended events are simlulated as touches transition from resting to active and vice versa.
 */
@@ -365,7 +342,7 @@ typedef NSInteger NSToolTipTag;
 @property (nullable, readonly, strong) NSScrollView *enclosingScrollView;
 
 - (nullable NSMenu *)menuForEvent:(NSEvent *)event;
-+ (nullable NSMenu *)defaultMenu;
+@property (class, readonly, nullable, strong) NSMenu *defaultMenu;
 
 /*!
  * A contextual menu is being opened from the receiving view.
@@ -409,7 +386,7 @@ typedef NSInteger NSToolTipTag;
 @property (readonly) NSRect rectPreservedDuringLiveResize;
 
 /* On return from -getRectsExposedDuringLiveResize, exposedRects indicates the parts of the view that are newly exposed (at most 4 rects).  *count indicates how many rects are in the exposedRects list */
-- (void)getRectsExposedDuringLiveResize:(NSRect[4])exposedRects count:(NSInteger *)count;
+- (void)getRectsExposedDuringLiveResize:(NSRect[__nonnull 4])exposedRects count:(NSInteger *)count;
 
 /* Text Input */
 /* Returns NSTextInputContext object for the receiver. Returns nil if the receiver doesn't conform to NSTextInputClient protocol.
@@ -434,7 +411,7 @@ typedef NSInteger NSToolTipTag;
 
 /* A subclass of any NSScrollView, NSClipView or the NSScrollView's documentView can override this method to verify that its customizations are compatible with 10.9's responsive scrolling behavior. By default, AppKit assumes that a ScrollView is responsive scrolling compatible if it and its clipview and document view do not override certain methods such as -scrollWheel: (See documentation for the expanded list). However, these views may still opt into responsive scrolling if they work with the new scrolling behavior by overriding and returning YES for this method. Likewise, the same set of views may return NO to explicitly opt out of responsive scrolling.
 */
-+ (BOOL)isCompatibleWithResponsiveScrolling NS_AVAILABLE_MAC(10_9);
+@property (class, readonly, getter=isCompatibleWithResponsiveScrolling) BOOL compatibleWithResponsiveScrolling NS_AVAILABLE_MAC(10_9);
 
 /* Called by NSView with a 'rect' for a recommended area that should be fully rendered for overdraw. Override this method and bring in additional subviews and pre-cached content for the 'rect' in order to perform responsive scrolling. Calling super may be required for some subclasses (such as NSTableView and NSOutlineView), so in general, super should always be called. To suppress overdraw for a particular view (such as NSTableView), override this method and call [super prepareContentInRect:[self visibleRect]].
  */
@@ -475,7 +452,7 @@ typedef NSInteger NSToolTipTag;
 - (void)setKeyboardFocusRingNeedsDisplayInRect:(NSRect)rect;
 
 @property NSFocusRingType focusRingType;
-+ (NSFocusRingType)defaultFocusRingType;
+@property (class, readonly) NSFocusRingType defaultFocusRingType;
 
 - (void)drawFocusRingMask NS_AVAILABLE_MAC(10_7);
 @property (readonly) NSRect focusRingMaskBounds NS_AVAILABLE_MAC(10_7);
@@ -491,7 +468,6 @@ typedef NSInteger NSToolTipTag;
 - (void)writePDFInsideRect:(NSRect)rect toPasteboard:(NSPasteboard *)pasteboard;
 - (NSData *)dataWithPDFInsideRect:(NSRect)rect;
 
-/* Printing action method (Note fax: is obsolete) */
 - (void)print:(nullable id)sender;
 
 /* Pagination */
@@ -525,25 +501,33 @@ typedef NSInteger NSToolTipTag;
 */
 - (NSDraggingSession *)beginDraggingSessionWithItems:(NSArray<NSDraggingItem *> *)items event:(NSEvent *)event source:(id<NSDraggingSource>)source NS_AVAILABLE_MAC(10_7);
 
-@property (readonly, copy) NSArray<NSString *> *registeredDraggedTypes;
-- (void)registerForDraggedTypes:(NSArray<NSString *> *)newTypes;
+@property (readonly, copy) NSArray<NSPasteboardType> *registeredDraggedTypes;
+- (void)registerForDraggedTypes:(NSArray<NSPasteboardType> *)newTypes;
 - (void)unregisterDraggedTypes;
-
-- (BOOL)dragFile:(NSString *)filename fromRect:(NSRect)rect slideBack:(BOOL)flag event:(NSEvent *)event;
-- (BOOL)dragPromisedFilesOfTypes:(NSArray<NSString *> *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)flag event:(NSEvent *)event;
-@end
-
-@interface NSView (NSFullScreenMode) 
-- (BOOL)enterFullScreenMode:(NSScreen *)screen withOptions:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_5);
-- (void)exitFullScreenModeWithOptions:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_5);
-@property (getter=isInFullScreenMode, readonly) BOOL inFullScreenMode NS_AVAILABLE_MAC(10_5); 
 @end
 
 /* Constants for options when entering and exiting full screen mode */
-APPKIT_EXTERN NSString * const NSFullScreenModeAllScreens NS_AVAILABLE_MAC(10_5);                      // NSNumber numberWithBool:YES/NO
-APPKIT_EXTERN NSString * const NSFullScreenModeSetting NS_AVAILABLE_MAC(10_5);                         // NSDictionary (obtained from CGSDisplay based functions)
-APPKIT_EXTERN NSString * const NSFullScreenModeWindowLevel NS_AVAILABLE_MAC(10_5);                     // NSNumber numberWithInt:windowLevel
-APPKIT_EXTERN NSString * const NSFullScreenModeApplicationPresentationOptions NS_AVAILABLE_MAC(10_5);  // NSNumber numberWithUnsignedInteger:(NSApplicationPresentationOptions flags)
+typedef NSString * NSViewFullScreenModeOptionKey NS_STRING_ENUM;
+APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeAllScreens NS_AVAILABLE_MAC(10_5);                      // NSNumber numberWithBool:YES/NO
+APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeSetting NS_AVAILABLE_MAC(10_5);                         // NSDictionary (obtained from CGSDisplay based functions)
+APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeWindowLevel NS_AVAILABLE_MAC(10_5);                     // NSNumber numberWithInt:windowLevel
+APPKIT_EXTERN NSViewFullScreenModeOptionKey const NSFullScreenModeApplicationPresentationOptions NS_AVAILABLE_MAC(10_5);  // NSNumber numberWithUnsignedInteger:(NSApplicationPresentationOptions flags)
+
+@interface NSView (NSFullScreenMode) 
+- (BOOL)enterFullScreenMode:(NSScreen *)screen withOptions:(nullable NSDictionary<NSViewFullScreenModeOptionKey, id> *)options NS_AVAILABLE_MAC(10_5);
+- (void)exitFullScreenModeWithOptions:(nullable NSDictionary<NSViewFullScreenModeOptionKey, id> *)options NS_AVAILABLE_MAC(10_5);
+@property (getter=isInFullScreenMode, readonly) BOOL inFullScreenMode NS_AVAILABLE_MAC(10_5); 
+@end
+
+
+/* NSDefinitionPresentationTypeKey is an optional key in 'options' that specifies the presentation type of the definition display.  The possible values are NSDefinitionPresentationTypeOverlay that produces a small overlay window at the string location, or NSDefinitionPresentationTypeDictionaryApplication that invokes 'Dictionary' application to display the definition.  Without this option, the definition will be shown in either of those presentation forms depending on the 'Contextual Menu:' setting in Dictionary application preferences.
+ */
+typedef NSString * NSDefinitionOptionKey NS_STRING_ENUM;
+APPKIT_EXTERN NSDefinitionOptionKey const NSDefinitionPresentationTypeKey NS_AVAILABLE_MAC(10_6);
+
+typedef NSString * NSDefinitionPresentationType NS_STRING_ENUM;
+APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeOverlay NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDictionaryApplication NS_AVAILABLE_MAC(10_6);
 
 @interface NSView(NSDefinition)
 /* Shows a window that displays the definition (or other subject depending on available dictionaries) of the specified attributed string.  This method can be used for implementing the same functionality as NSTextView's 'Look Up in Dictionary' contextual menu on a custom view.
@@ -562,15 +546,9 @@ APPKIT_EXTERN NSString * const NSFullScreenModeApplicationPresentationOptions NS
  
  If the receiver is an NSTextView, both attrString and originProvider may be nil, in which case the text view will automatically supply values suitable for displaying definitions for the specified range within its text content.  This method does not cause scrolling, so clients should perform any necessary scrolling before calling this method.
  */
-- (void)showDefinitionForAttributedString:(nullable NSAttributedString *)attrString range:(NSRange)targetRange options:(nullable NSDictionary<NSString *, id> *)options baselineOriginProvider:(NSPoint (^ __nullable)(NSRange adjustedRange))originProvider NS_AVAILABLE_MAC(10_6);
+- (void)showDefinitionForAttributedString:(nullable NSAttributedString *)attrString range:(NSRange)targetRange options:(nullable NSDictionary<NSDefinitionOptionKey, id> *)options baselineOriginProvider:(NSPoint (^ __nullable)(NSRange adjustedRange))originProvider NS_AVAILABLE_MAC(10_6);
 
 @end
-
-/* NSDefinitionPresentationTypeKey is an optional key in 'options' that specifies the presentation type of the definition display.  The possible values are NSDefinitionPresentationTypeOverlay that produces a small overlay window at the string location, or NSDefinitionPresentationTypeDictionaryApplication that invokes 'Dictionary' application to display the definition.  Without this option, the definition will be shown in either of those presentation forms depending on the 'Contextual Menu:' setting in Dictionary application preferences.
- */
-APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeKey NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeOverlay NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication NS_AVAILABLE_MAC(10_6);
 
 
 @interface NSView(NSFindIndicator)
@@ -600,6 +578,9 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
  */
 - (void)dragImage:(NSImage *)image at:(NSPoint)viewLocation offset:(NSSize)initialOffset event:(NSEvent *)event pasteboard:(NSPasteboard *)pboard source:(id)sourceObj slideBack:(BOOL)slideFlag NS_DEPRECATED_MAC(10_0, 10_7, "Use -beginDraggingSessionWithItems:event:source: instead");
 
+- (BOOL)dragFile:(NSString *)filename fromRect:(NSRect)rect slideBack:(BOOL)flag event:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "Use -beginDraggingSessionWithItems:event:source: instead");
+- (BOOL)dragPromisedFilesOfTypes:(NSArray<NSString *> *)typeArray fromRect:(NSRect)rect source:(id)sourceObject slideBack:(BOOL)flag event:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "Use -beginDraggingSessionWithItems:event:source: with an NSFilePromiseProvider instead");
+
 /* These methods are deprecated on 10.7 and later. */
 - (NSPoint)convertPointToBase:(NSPoint)point NS_DEPRECATED_MAC(10_5, 10_7);
 - (NSPoint)convertPointFromBase:(NSPoint)point NS_DEPRECATED_MAC(10_5, 10_7);
@@ -610,11 +591,11 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 
 /* This method is deprecated in 10.8 and higher. On MacOS it has historically not done anything.
  */
-- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8);
+- (BOOL)performMnemonic:(NSString *)string NS_DEPRECATED_MAC(10_0, 10_8, "This method does nothing on macOS");
 
 /* shouldDrawColor is no longer used by AppKit.
  */
-- (BOOL)shouldDrawColor NS_DEPRECATED_MAC(10_0, 10_10);
+- (BOOL)shouldDrawColor NS_DEPRECATED_MAC(10_0, 10_10, "This method no longer does anything");
 
 /* The gState class of methods are deprecatd and in many cases did not do anything, or not what one would expect.
  */
@@ -632,7 +613,7 @@ APPKIT_EXTERN NSString * const NSDefinitionPresentationTypeDictionaryApplication
 /* Sent when the frame changes for a view. This is only sent if postsFrameChangedNotifications is set to YES.
  */
 APPKIT_EXTERN NSNotificationName NSViewFrameDidChangeNotification;
-APPKIT_EXTERN NSNotificationName NSViewFocusDidChangeNotification;
+APPKIT_EXTERN NSNotificationName NSViewFocusDidChangeNotification NS_DEPRECATED_MAC(10_0, 10_4);
 
 /* This notification is sent whenever the views bounds change and the frame does not.  That is, it is sent whenever the view's bounds are translated, scaled or rotated, but NOT when the bounds change as a result of, for example, setFrameSize:.
  */

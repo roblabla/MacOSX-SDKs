@@ -1,7 +1,7 @@
 /*
         NSPDFInfo.h
         Application Kit
-        Copyright (c) 2013-2016, Apple Inc.
+        Copyright (c) 2013-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -30,7 +30,7 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 @property (copy) NSArray<NSString *> *tagNames;
 @property NSPaperOrientation orientation;
 @property NSSize paperSize;
-@property (readonly) NSMutableDictionary<NSString *, id> *attributes;
+@property (readonly) NSMutableDictionary<NSPrintInfoAttributeKey, id> *attributes;
 
 @end
 

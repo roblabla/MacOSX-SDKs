@@ -1,7 +1,7 @@
 /*
 	NSGridView.h
 	Application Kit
-	Copyright (c) 2015-2016, Apple Inc.
+	Copyright (c) 2015-2017, Apple Inc.
 	All rights reserved.
  */
 
@@ -57,10 +57,11 @@ NS_CLASS_AVAILABLE_MAC(10_12)
     NSMutableArray *_rows;
     NSMapTable *_cellTable;
     NSInteger _currentConstraintGeneration;
-    
+#if !__OBJC2__
     id  _reserved __unused;
     id  _reserved2 __unused;
     id  _reserved3 __unused;
+#endif
 }
 
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
@@ -116,10 +117,11 @@ NS_CLASS_AVAILABLE_MAC(10_12)
     NSGridView *_owningGridView;
     NSMutableArray <NSGridCell*> *_cells;
     NSLayoutYAxisAnchor* _top;
-    
+#if !__OBJC2__
     id  _reserved __unused;
     id  _reserved2 __unused;
     id  _reserved3 __unused;
+#endif
     
     NSGridCellPlacement _yPlacement;
     NSGridRowAlignment _rowAlignment;
@@ -157,9 +159,11 @@ NS_CLASS_AVAILABLE_MAC(10_12)
     NSGridView *_owningGridView;
     NSLayoutXAxisAnchor *_leading;
     
+#if !__OBJC2__
     id  _reserved __unused;
     id  _reserved2 __unused;
     id  _reserved3 __unused;
+#endif
     
     NSInteger _hasContentInGeneration;
     NSGridCellPlacement _xPlacement;
@@ -189,15 +193,17 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSGridCell : NSObject <NSCoding> {
 @private
-    NSGridRow *_row;
-    NSGridColumn *_column;
+    __weak NSGridRow *_row;
+    __weak NSGridColumn *_column;
     NSView  *_contentView;
     NSGridCell *_headOfMergedCell;
     NSArray<NSLayoutConstraint*> *_customPlacementConstraints;
     
+#if !__OBJC2__
     id  _reserved __unused;
     id  _reserved2 __unused;
     id  _reserved3 __unused;
+#endif
     
     NSGridCellPlacement _xPlacement;
     NSGridCellPlacement _yPlacement;

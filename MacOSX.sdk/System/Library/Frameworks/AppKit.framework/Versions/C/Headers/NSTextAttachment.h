@@ -1,6 +1,6 @@
 /*
         NSTextAttachment.h
-        Copyright (c) 1994-2015, Apple Inc.
+        Copyright (c) 1994-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -61,13 +61,13 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextAttachment : NSObject <NSTextAtta
 /**************************** Content properties ****************************/
 
 // These two properties define the contents for the text attachment.  Modifying these properties have a side effect of invalidating -image and -fileWrapper properties. -fileType is an UTI describing the format for -contents.
-@property(nullable, copy) NSData *contents NS_AVAILABLE(10_11, 7_0);
-@property(nullable, copy) NSString *fileType NS_AVAILABLE(10_11, 7_0);
+@property (nullable, copy) NSData *contents NS_AVAILABLE(10_11, 7_0);
+@property (nullable, copy) NSString *fileType NS_AVAILABLE(10_11, 7_0);
 
 /**************************** Rendering/layout properties ****************************/
 
 // Image representing the text attachment contents. Modifying this property invalidates -contents, -fileType, and -FileWrapper properties.
-@property(nullable, strong) NSImage *image NS_AVAILABLE(10_11, 7_0);
+@property (nullable, strong) NSImage *image NS_AVAILABLE(10_11, 7_0);
 
 // Defines the layout bounds of the receiver's graphical representation in the text coordinate system.  The origin is at the glyph location on the text baseline.  The default value is CGRectZero.
 @property NSRect bounds NS_AVAILABLE(10_11, 7_0);
@@ -76,7 +76,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextAttachment : NSObject <NSTextAtta
 /**************************** Non-image contents properties ****************************/
 
 // Optionally, NSTextAttachment can be associated with a file wrapper. Modifying this property has a side effect of invalidating -image, -contents, and fileType properties.
-@property(nullable, strong) NSFileWrapper *fileWrapper;
+@property (nullable, strong) NSFileWrapper *fileWrapper;
 
 // The cell which handles user interaction. By default an instance of NSTextAttachmentCell is used.
 @property (nullable, strong) id <NSTextAttachmentCell> attachmentCell;
@@ -102,7 +102,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextAttachment : NSObject <NSTextAtta
 - (BOOL)trackMouse:(NSEvent *)theEvent inRect:(NSRect)cellFrame ofView:(nullable NSView *)controlView untilMouseUp:(BOOL)flag;
 - (NSSize)cellSize;
 - (NSPoint)cellBaselineOffset;
-@property(nullable, assign) NSTextAttachment *attachment;
+@property (nullable, assign) NSTextAttachment *attachment;
 
 // Sophisticated cells should implement these in addition to the simpler methods, above.  The class NSTextAttachmentCell implements them to simply call the simpler methods; more complex conformers should implement the simpler methods to call these.
 - (void)drawWithFrame:(NSRect)cellFrame inView:(nullable NSView *)controlView characterIndex:(NSUInteger)charIndex;

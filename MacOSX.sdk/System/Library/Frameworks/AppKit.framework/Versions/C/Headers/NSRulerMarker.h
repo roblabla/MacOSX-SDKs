@@ -1,7 +1,7 @@
 /*
         NSRulerMarker.h
         Application Kit
-        Copyright (c) 1994-2016, Apple Inc.
+        Copyright (c) 1994-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSRulerMarker : NSObject <NSCopying, NSCoding> {
     /*All instance variables are private*/
-    NSRulerView *_ruler;
+    __weak NSRulerView *_ruler;
     CGFloat _location;
     NSImage *_image;
     NSPoint _imageOrigin;
@@ -42,7 +42,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Returns the ruler.
  */
-@property (readonly, assign) NSRulerView *ruler;
+@property (readonly, weak) NSRulerView *ruler;
 
 
 /* The location is set by the -init... method and the -setLocation: method.  Location is an x position for horizontal rulers or a y position for vertical rulers.  It is expressed in the client view's coordinate system.

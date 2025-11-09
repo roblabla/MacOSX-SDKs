@@ -1,7 +1,7 @@
 /*
     NSSearchField.h
     Application Kit
-    Copyright (c) 2003-2016, Apple Inc.
+    Copyright (c) 2003-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSTextField.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * NSSearchFieldRecentsAutosaveName NS_EXTENSIBLE_STRING_ENUM;
 
 @class NSSearchField;
 
@@ -47,7 +49,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (copy) NSArray<NSString *> *recentSearches;
 
 /* must be set to use. default is nil which means no autosave. */
-@property (nullable, copy) NSString *recentsAutosaveName;
+@property (nullable, copy) NSSearchFieldRecentsAutosaveName recentsAutosaveName;
 
 /* set/get search menu template. Menu can use custom tagged items to indicate special items. this menu isn't actually set but used to construct the dynamic search menu. if cleared, then we don't track recents. */
 @property (nullable, strong) NSMenu *searchMenuTemplate NS_AVAILABLE_MAC(10_10);
@@ -60,7 +62,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property BOOL sendsSearchStringImmediately NS_AVAILABLE_MAC(10_10);
 
-@property (nullable, assign) id<NSSearchFieldDelegate> delegate NS_AVAILABLE_MAC(10_11);
+@property (nullable, weak) id<NSSearchFieldDelegate> delegate NS_AVAILABLE_MAC(10_11);
 
 /* Defaults to YES. When set, the search field's components are centered within the control if the field is empty and does not have focus. When receiving focus, given the field is empty, the centered objects will animate to the edges of the control. When this property is set to NO, the components are always at the edge. When set ot YES, wantsLayer is also set to YES.
 */

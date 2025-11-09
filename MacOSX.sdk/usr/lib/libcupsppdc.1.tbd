@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 54334CB9-E55E-3807-8861-4BB3A64C6A60', 'x86_64: 74C8FC9E-E185-35CA-A8A5-132C94F1BB19' ]
+uuids:           [ 'i386: 58D90EC6-7AA6-3D08-A03C-76BAC7C6F436', 'x86_64: F3E013D3-5F18-39F7-A56F-2640A90BC7F9' ]
 platform:        macosx
 install-name:    /usr/lib/libcupsppdc.1.dylib
 objc-constraint: none

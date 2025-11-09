@@ -14,7 +14,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-// utilities for carriage of CoreMedia time structures in NSValues
+/*
+	Utilities for carriage of CoreMedia time structures in NSValues
+	
+	Notes for archiving NSValues created with CMTime / CMTimeRange / CMTimeMapping.
+	We recommend that on macOS Sierra, iOS 10, and later you use NSKeyedArchiver to serialize NSValues created with a CMTime, CMTimeRange, or CMTimeMapping. This will ensure that before and after archiving, use of such values with -isEqual:, with -[NSDictionary objectForKey:], and with other facilities that depend on hashing or equality, will have correct results.
+	Should it be necessary to write a value in a way that is readable pre-Sierra or pre-iOS 10, you can re-encode the values using [NSValue valueWithBytes:objCType:] before handing it to the NSArchiver. If you are reading serialized values produced with an NSArchiver, it will still successfully produce NSValues. If in this scenario you require the use of such values with -isEqual:, with -[NSDictionary objectForKey:], and with other facilities that depend on hashing or equality to have correct results, we recommend that you immediately re-create a new NSValue via the NSValue utilities provided here and use the new NSValue in place of the unarchived one.
+*/
 
 @interface NSValue (NSValueAVFoundationExtensions)
 

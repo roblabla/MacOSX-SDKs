@@ -1,6 +1,6 @@
 /*  Copyright (c) 2014 Apple, Inc. All rights reserved.
  *
- *  This header provides small vector (SIMD) types and basic arithmetic and
+ *  This header provides small vector (simd) types and basic arithmetic and
  *  math functions that operate on them.
  *
  *  A wide assortment of vector types are provided in <simd/vector_types.h>,
@@ -13,21 +13,21 @@
  *  work" with these types, so it is not necessary to make function calls
  *  to do basic arithmetic:
  *
- *      vector_float4 x, y;
+ *      simd_float4 x, y;
  *      x = x + y;          // vector sum of x and y.
  *
  *  scalar values are implicitly promoted to vectors (with a "splat"), so it
  *  is possible to easily write expressions involving scalars as well:
  *
- *      vector_float4 x;
+ *      simd_float4 x;
  *      x = 2*x;            // scale x by 2.
  *
  *  Besides the basic operations provided by the compiler, this header provides
  *  a set of mathematical and geometric primitives for use with these types.
  *  In C and Objective-C, these functions are prefixed with vector_; in C++,
- *  unprefixed names are available within the SIMD:: namespace.
+ *  unprefixed names are available within the simd:: namespace.
  *
- *      vector_float3 x, y;
+ *      simd_float3 x, y;
  *      vector_max(x,y)     // elementwise maximum of x and y
  *      fabs(x)             // same as vector_abs(x)
  *      vector_clamp(x,0,1) // x clamped to the range [0,1].  This has no
@@ -40,9 +40,9 @@
 #ifndef __SIMD_VECTOR_HEADER__
 #define __SIMD_VECTOR_HEADER__
 
-#include <simd/internal.h>
 #include <simd/vector_types.h>
 #include <simd/packed.h>
+#include <simd/vector_make.h>
 #include <simd/logic.h>
 #include <simd/math.h>
 #include <simd/common.h>

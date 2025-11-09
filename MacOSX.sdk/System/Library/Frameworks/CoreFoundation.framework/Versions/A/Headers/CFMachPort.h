@@ -1,11 +1,17 @@
 /*	CFMachPort.h
-	Copyright (c) 1998-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1998-2017, Apple Inc. and the Swift project authors
+ 
+	Portions Copyright (c) 2014-2017, Apple Inc. and the Swift project authors
+	Licensed under Apache License v2.0 with Runtime Library Exception
+	See http://swift.org/LICENSE.txt for license information
+	See http://swift.org/CONTRIBUTORS.txt for the list of Swift project authors
 */
 
 #if !defined(__COREFOUNDATION_CFMACHPORT__)
 #define __COREFOUNDATION_CFMACHPORT__ 1
 
 #include <CoreFoundation/CFRunLoop.h>
+#if TARGET_OS_MAC
 #include <mach/port.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -40,6 +46,8 @@ CF_EXPORT CFRunLoopSourceRef	CFMachPortCreateRunLoopSource(CFAllocatorRef alloca
 
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED
+
+#endif
 
 #endif /* ! __COREFOUNDATION_CFMACHPORT__ */
 

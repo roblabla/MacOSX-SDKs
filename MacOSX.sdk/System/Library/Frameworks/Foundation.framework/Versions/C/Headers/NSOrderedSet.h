@@ -1,5 +1,5 @@
 /*	NSOrderedSet.h
-	Copyright (c) 2007-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2007-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -27,7 +27,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 @interface NSOrderedSet<ObjectType> (NSExtendedOrderedSet)
 
-- (void)getObjects:(ObjectType __unsafe_unretained [])objects range:(NSRange)range NS_SWIFT_UNAVAILABLE("Use 'array' instead");
+- (void)getObjects:(ObjectType _Nonnull __unsafe_unretained [_Nullable])objects range:(NSRange)range NS_SWIFT_UNAVAILABLE("Use 'array' instead");
 - (NSArray<ObjectType> *)objectsAtIndexes:(NSIndexSet *)indexes;
 @property (nullable, nonatomic, readonly) ObjectType firstObject;
 @property (nullable, nonatomic, readonly) ObjectType lastObject;
@@ -41,7 +41,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (BOOL)isSubsetOfOrderedSet:(NSOrderedSet<ObjectType> *)other;
 - (BOOL)isSubsetOfSet:(NSSet<ObjectType> *)set;
 
-- (ObjectType)objectAtIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
+- (ObjectType)objectAtIndexedSubscript:(NSUInteger)idx API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 - (NSEnumerator<ObjectType> *)objectEnumerator;
 - (NSEnumerator<ObjectType> *)reverseObjectEnumerator;
@@ -84,7 +84,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 + (instancetype)orderedSet;
 + (instancetype)orderedSetWithObject:(ObjectType)object;
-+ (instancetype)orderedSetWithObjects:(const ObjectType [])objects count:(NSUInteger)cnt;
++ (instancetype)orderedSetWithObjects:(const ObjectType _Nonnull [_Nonnull])objects count:(NSUInteger)cnt;
 + (instancetype)orderedSetWithObjects:(ObjectType)firstObj, ... NS_REQUIRES_NIL_TERMINATION;
 + (instancetype)orderedSetWithOrderedSet:(NSOrderedSet<ObjectType> *)set;
 + (instancetype)orderedSetWithOrderedSet:(NSOrderedSet<ObjectType> *)set range:(NSRange)range copyItems:(BOOL)flag;
@@ -123,7 +123,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface NSMutableOrderedSet<ObjectType> (NSExtendedMutableOrderedSet)
 
 - (void)addObject:(ObjectType)object;
-- (void)addObjects:(const ObjectType [])objects count:(NSUInteger)count;
+- (void)addObjects:(const ObjectType _Nonnull [_Nullable])objects count:(NSUInteger)count;
 - (void)addObjectsFromArray:(NSArray<ObjectType> *)array;
 
 - (void)exchangeObjectAtIndex:(NSUInteger)idx1 withObjectAtIndex:(NSUInteger)idx2;
@@ -132,9 +132,9 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 - (void)insertObjects:(NSArray<ObjectType> *)objects atIndexes:(NSIndexSet *)indexes;
 
 - (void)setObject:(ObjectType)obj atIndex:(NSUInteger)idx;
-- (void)setObject:(ObjectType)obj atIndexedSubscript:(NSUInteger)idx NS_AVAILABLE(10_8, 6_0);
+- (void)setObject:(ObjectType)obj atIndexedSubscript:(NSUInteger)idx API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
-- (void)replaceObjectsInRange:(NSRange)range withObjects:(const ObjectType [])objects count:(NSUInteger)count;
+- (void)replaceObjectsInRange:(NSRange)range withObjects:(const ObjectType _Nonnull [_Nullable])objects count:(NSUInteger)count;
 - (void)replaceObjectsAtIndexes:(NSIndexSet *)indexes withObjects:(NSArray<ObjectType> *)objects;
 
 - (void)removeObjectsInRange:(NSRange)range;

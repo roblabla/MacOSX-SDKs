@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -107,7 +107,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     @discussion
       Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVCompositionTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+- (NSArray<AVCompositionTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
     @method         tracksWithMediaCharacteristic:
@@ -118,7 +118,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     @discussion
       Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVCompositionTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (NSArray<AVCompositionTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 
 @end
 
@@ -129,7 +129,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableComposition : AVComposition
 {
 @private
-    AVMutableCompositionInternal    *_mutablePriv;
+    AVMutableCompositionInternal    *_mutablePriv __attribute__((unused));
 }
 
 /*!
@@ -241,7 +241,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     @discussion
       If the specified preferred track ID is not available, or kCMPersistentTrackID_Invalid was passed in, a unique track ID will be generated.
 */
-- (AVMutableCompositionTrack *)addMutableTrackWithMediaType:(NSString *)mediaType preferredTrackID:(CMPersistentTrackID)preferredTrackID;
+- (nullable AVMutableCompositionTrack *)addMutableTrackWithMediaType:(AVMediaType)mediaType preferredTrackID:(CMPersistentTrackID)preferredTrackID;
 
 /*!
     @method         removeTrack:
@@ -292,7 +292,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     @discussion
       Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+- (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
     @method         tracksWithMediaCharacteristic:
@@ -303,7 +303,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
     @discussion
       Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (NSArray<AVMutableCompositionTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 
 @end
 

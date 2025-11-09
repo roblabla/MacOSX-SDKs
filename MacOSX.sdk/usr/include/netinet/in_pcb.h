@@ -74,14 +74,14 @@
 #include <sys/types.h>
 #include <sys/queue.h>
 
+#if IPSEC
 #include <netinet6/ipsec.h> /* for IPSEC */
+#endif /* IPSEC */
+
 #if NECP
 #include <net/necp.h>
 #endif
 
-#if IPSEC
-#include <netinet6/ipsec.h> /* for IPSEC */
-#endif
 
 typedef	u_quad_t	inp_gen_t;
 

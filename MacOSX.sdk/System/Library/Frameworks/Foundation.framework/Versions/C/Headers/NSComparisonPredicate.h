@@ -1,5 +1,5 @@
 /*	NSComparisonPredicate.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPredicate.h>
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, NSComparisonPredicateOptions) {
     NSCaseInsensitivePredicateOption = 0x01,
     NSDiacriticInsensitivePredicateOption = 0x02,
-    NSNormalizedPredicateOption NS_ENUM_AVAILABLE(10_6, 4_0) = 0x04, /* Indicate that the strings to be compared have been preprocessed; this supersedes other options and is intended as a performance optimization option */
+    NSNormalizedPredicateOption API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)) = 0x04, /* Indicate that the strings to be compared have been preprocessed; this supersedes other options and is intended as a performance optimization option */
 };
 
 // Describes how the operator is modified: can be direct, ALL, or ANY
@@ -35,8 +35,8 @@ typedef NS_ENUM(NSUInteger, NSPredicateOperatorType) {
     NSEndsWithPredicateOperatorType,
     NSInPredicateOperatorType, // rhs contains lhs returns true
     NSCustomSelectorPredicateOperatorType,
-    NSContainsPredicateOperatorType NS_ENUM_AVAILABLE(10_5, 3_0) = 99, // lhs contains rhs returns true
-    NSBetweenPredicateOperatorType NS_ENUM_AVAILABLE(10_5, 3_0)
+    NSContainsPredicateOperatorType API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)) = 99, // lhs contains rhs returns true
+    NSBetweenPredicateOperatorType API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0))
 };
 
 @class NSPredicateOperator;

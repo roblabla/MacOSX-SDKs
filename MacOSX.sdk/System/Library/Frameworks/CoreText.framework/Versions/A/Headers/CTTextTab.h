@@ -50,7 +50,7 @@ typedef const struct CF_RELATED_TYPE(NSTextTab,,) __CTTextTab * CTTextTabRef;
 	@abstract	Returns the CFType of the text tab object
 */
 
-CFTypeID CTTextTabGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTTextTabGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -69,7 +69,7 @@ CFTypeID CTTextTabGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 				optional.
 */
 
-CT_EXPORT const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -99,7 +99,7 @@ CT_EXPORT const CFStringRef kCTTabColumnTerminatorsAttributeName CT_AVAILABLE(10
 CTTextTabRef CTTextTabCreate(
 	CTTextAlignment alignment,
 	double location,
-	CFDictionaryRef __nullable options ) CT_AVAILABLE(10_5, 3_2);
+	CFDictionaryRef __nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -117,7 +117,7 @@ CTTextTabRef CTTextTabCreate(
 */
 
 CTTextAlignment CTTextTabGetAlignment(
-	CTTextTabRef tab ) CT_AVAILABLE(10_5, 3_2);
+	CTTextTabRef tab ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -131,7 +131,7 @@ CTTextAlignment CTTextTabGetAlignment(
 */
 
 double CTTextTabGetLocation(
-	CTTextTabRef tab ) CT_AVAILABLE(10_5, 3_2);
+	CTTextTabRef tab ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -146,7 +146,7 @@ double CTTextTabGetLocation(
 */
 
 CFDictionaryRef __nullable CTTextTabGetOptions(
-	CTTextTabRef tab ) CT_AVAILABLE(10_5, 3_2);
+	CTTextTabRef tab ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

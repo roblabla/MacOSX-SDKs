@@ -1,7 +1,7 @@
 /*
     NSPathCell.h
     Application Kit
-    Copyright (c) 2005-2016, Apple Inc.
+    Copyright (c) 2005-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -62,7 +62,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
     NSAnimation *_animation;
     NSArray *_allowedTypes;
     SEL _doubleAction;
-    id _delegate;
+    __weak id<NSPathCellDelegate> _delegate;
     struct {
         unsigned int cbs:4;
         unsigned int reserved:28;
@@ -83,11 +83,11 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 @property (nullable, copy) NSArray<NSString *> *allowedTypes;
 
-@property (nullable, assign) id<NSPathCellDelegate> delegate;
+@property (nullable, weak) id<NSPathCellDelegate> delegate;
 
 /* Returns the class used to create pathComponentCells when automatically filling up the control. Subclassers can override this method to return a custom cell class that will automatically be used. By default, it will return [NSPathComponentCell class], or a specialized subclass thereof.
 */
-+ (Class)pathComponentCellClass;
+@property (class, readonly) Class pathComponentCellClass;
     
 @property (copy) NSArray<__kindof NSPathComponentCell *>  *pathComponentCells;
 

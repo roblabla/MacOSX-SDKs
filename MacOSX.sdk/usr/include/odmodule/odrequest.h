@@ -24,6 +24,8 @@
 #if !defined(__ODREQUEST_H)
 #define __ODREQUEST_H
 
+#include <os/activity.h>
+
 typedef bool (^od_result_validation_block_t)(od_request_t request, CFArrayRef values, CFDictionaryRef result);
 
 __BEGIN_DECLS
@@ -32,7 +34,8 @@ __BEGIN_DECLS
     @function   odrequest_log_message
     @abstract   allows logging of a message, it will be prefixed accordingly, etc.
 */
-OD_NOTHROW
+API_DEPRECATED("Switch to using os_log API for logging", macos(10.10, 10.13))
+OS_EXPORT OS_NOTHROW OS_NOT_TAIL_CALLED
 void
 odrequest_log_message(od_request_t request, eODLogLevel level, CFStringRef format, ...) CF_FORMAT_FUNCTION(3, 4);
 /*!
@@ -41,7 +44,7 @@ odrequest_log_message(od_request_t request, eODLogLevel level, CFStringRef forma
     @discussion since requests are not persistent, contexts are stored in the od_node_t object associated
 				with the request.
 */
-OD_WARN_RESULT
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 od_context_t
 odrequest_copy_context_with_uuid(od_request_t request, uuid_t uuid);
 
@@ -51,6 +54,7 @@ odrequest_copy_context_with_uuid(od_request_t request, uuid_t uuid);
     @discussion requests are not persistent, so contexts are attached to an od_node_t object.  When that
 				node closes, these contexts are released and are no long valid.
 */
+OS_EXPORT OS_NOTHROW
 void
 odrequest_remove_context(od_request_t request, od_context_t context);
 
@@ -286,39 +290,40 @@ odrequest_respond_query_result(od_request_t request, od_context_t query_ctx, xpc
 void
 odrequest_respond_query_sync(od_request_t request, od_context_t query_ctx);
 
+OS_EXPORT OS_NOTHROW
 void
 odrequest_submit_rpc_response(od_request_t request, xpc_object_t reply);
 
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 odrequest_testcancel(od_request_t request);
 
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 uid_t
 odrequest_get_uid(od_request_t request);
 
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 uid_t
 odrequest_get_euid(od_request_t request);
 
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 gid_t
 odrequest_get_gid(od_request_t request);
 
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 gid_t
 odrequest_get_egid(od_request_t request);
 
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 pid_t
 odrequest_get_pid(od_request_t request);
 
 // will return the username associated with the UID of the request
-OD_WARN_RESULT OD_NOTHROW CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odrequest_copy_process_username(od_request_t request);
 
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 int
 odrequest_verify_access(od_request_t request, od_credential_t credential, CFStringRef authed_user);
 
@@ -330,14 +335,19 @@ odrequest_verify_access(od_request_t request, od_credential_t credential, CFStri
     @param      connection is a new usable connection, will replace any existing.  The existing will
                 be released immediately.  It is retained when called.
 */
+OS_EXPORT OS_NOTHROW
 void
 odrequest_set_auth_connection(od_request_t request, od_connection_t connection);
+
+
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 eODRequestType
 odrequest_get_typeid(od_request_t request);
 
-OD_WARN_RESULT OD_NOTHROW OD_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_connection_t
 odrequest_copy_session_connection(od_request_t request);
+
 __END_DECLS
 
 #endif

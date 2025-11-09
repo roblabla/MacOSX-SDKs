@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookieStorage.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -56,9 +56,7 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     @discussion Starting in OS X 10.11, each app has its own sharedHTTPCookieStorage singleton, 
     which will not be shared with other applications.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property(class, readonly, strong) NSHTTPCookieStorage *sharedHTTPCookieStorage;
-#endif
 
 /*!
     @method sharedCookieStorageForGroupContainerIdentifier:
@@ -71,10 +69,9 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
     shared among all applications and extensions with access to the same application group. Subsequent calls to this
     method with the same identifier will return the same cookie storage instance.
  */
-+ (NSHTTPCookieStorage *)sharedCookieStorageForGroupContainerIdentifier:(NSString *)identifier NS_AVAILABLE(10_11, 9_0);
++ (NSHTTPCookieStorage *)sharedCookieStorageForGroupContainerIdentifier:(NSString *)identifier API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /*!
-    @method cookies
     @abstract Get all the cookies
     @result An NSArray of NSHTTPCookies
 */
@@ -98,7 +95,7 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
  @method removeCookiesSince:
  @abstract Delete all cookies from the cookie storage since the provided date.
  */
-- (void)removeCookiesSinceDate:(NSDate *)date NS_AVAILABLE(10_10, 8_0);
+- (void)removeCookiesSinceDate:(NSDate *)date API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /*!
     @method cookiesForURL:
@@ -132,7 +129,6 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
 - (void)setCookies:(NSArray<NSHTTPCookie *> *)cookies forURL:(nullable NSURL *)URL mainDocumentURL:(nullable NSURL *)mainDocumentURL;
 
 /*!
-    @method cookieAcceptPolicy
     @abstract The cookie accept policy preference of the
     receiver.
 */
@@ -144,13 +140,13 @@ typedef NS_ENUM(NSUInteger, NSHTTPCookieAcceptPolicy) {
   @param sortOrder an array of NSSortDescriptors which represent the preferred sort order of the resulting array.
   @discussion proper sorting of cookies may require extensive string conversion, which can be avoided by allowing the system to perform the sorting.  This API is to be preferred over the more generic -[NSHTTPCookieStorage cookies] API, if sorting is going to be performed.
 */
-- (NSArray<NSHTTPCookie *> *)sortedCookiesUsingDescriptors:(NSArray<NSSortDescriptor *> *) sortOrder NS_AVAILABLE(10_7, 5_0);
+- (NSArray<NSHTTPCookie *> *)sortedCookiesUsingDescriptors:(NSArray<NSSortDescriptor *> *) sortOrder API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 @end
 
 @interface NSHTTPCookieStorage (NSURLSessionTaskAdditions)
-- (void)storeCookies:(NSArray<NSHTTPCookie *> *)cookies forTask:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (void)getCookiesForTask:(NSURLSessionTask *)task completionHandler:(void (^) (NSArray<NSHTTPCookie *> * _Nullable cookies))completionHandler NS_AVAILABLE(10_10, 8_0);
+- (void)storeCookies:(NSArray<NSHTTPCookie *> *)cookies forTask:(NSURLSessionTask *)task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)getCookiesForTask:(NSURLSessionTask *)task completionHandler:(void (^) (NSArray<NSHTTPCookie *> * _Nullable cookies))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 @end
 
 /*!

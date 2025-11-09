@@ -1,7 +1,7 @@
 /*
  NSScrubberLayout.h
  Application Kit
- Copyright (c) 2016, Apple Inc.
+ Copyright (c) 2016-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -25,8 +25,10 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
     NSInteger _itemIndex;
     NSRect _frame;
     CGFloat _alpha;
+    unsigned int _escapes:1;
+    unsigned int _reservedLayoutAttributeFlags:31 __unused;
 #ifndef __OBJC2__
-    id _reserved[3] __unused;
+    id _reserved[2] __unused;
 #endif
 }
 
@@ -47,10 +49,9 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberLayout : NSObject <NSCoding> {
 @private
-    id _private;
+    __weak id _private;
     unsigned int _dirty:1;
-    unsigned int _unprepared:1;
-    unsigned int _reservedFlags:30 __unused;
+    unsigned int _reservedFlags:31 __unused;
 }
 
 #pragma mark Base Implementation
@@ -59,7 +60,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
  */
 
 /// Specifies a class for describing layout attributes. By default, this is @c NSScrubberLayoutAttributes, but subclasses may override this method to use a custom subclass of @c NSScrubberLayoutAttributes.
-+ (Class)layoutAttributesClass;
+@property (class, readonly) Class layoutAttributesClass;
 
 /// The NSScrubber control that this layout is assigned to, or @c nil if the receiver is not assigned to a scrubber.
 @property (weak, nullable, readonly) NSScrubber *scrubber;
@@ -75,14 +76,14 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 
 #pragma mark Subclassing Hooks
 /* 
- The following methods should be implemented by subclasses.
+ The following methods and properties should be implemented by subclasses.
  */
 
 /// Following any invalidation in layout, @c NSScrubber will call @c prepareLayout on its layout object prior to requesting any other layout information. Subclasses should use this method to perform upfront calculations and caching. The base implementation of this method does nothing.
 - (void)prepareLayout;
 
 /// Returns the content size for all elements within the scrubber. The base implementation returns @c NSZeroSize.
-- (NSSize)scrubberContentSize;
+@property (readonly) NSSize scrubberContentSize;
 
 /// Returns the layout attributes for a single item within the scrubber. The base implementation returns @c nil.
 - (nullable __kindof NSScrubberLayoutAttributes *)layoutAttributesForItemAtIndex:(NSInteger)index;
@@ -91,16 +92,16 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 - (NSSet<__kindof NSScrubberLayoutAttributes *> *)layoutAttributesForItemsInRect:(NSRect)rect;
 
 /// If @c YES, the scrubber will invalidate its layout when the selection changes. The default value is @c NO. Subclasses should return @c YES if the selection index affects the item layout.
-- (BOOL)shouldInvalidateLayoutForSelectionChange;
+@property (readonly) BOOL shouldInvalidateLayoutForSelectionChange;
 
 /// If @c YES, the scrubber will invalidate its layout when an item is highlighted. The default value is @c NO. Subclasses should return @c YES if the highlight state affects the item layout.
-- (BOOL)shouldInvalidateLayoutForHighlightChange;
+@property (readonly) BOOL shouldInvalidateLayoutForHighlightChange;
 
 /// If @c YES, the scrubber will invalidate its layout in response to a change in the visible region. The default value is @c NO. Subclasses which rely on the size or origin of the visible region should return @c YES.
 - (BOOL)shouldInvalidateLayoutForChangeFromVisibleRect:(NSRect)fromVisibleRect toVisibleRect:(NSRect)toVisibleRect;
 
 /// If @c YES, the layout object will automatically have its inputs and outputs mirrored in right-to-left interfaces. The default value is @c YES. Subclasses that wish to handle RTL layout manually should return @c NO.
-- (BOOL)automaticallyMirrorsInRightToLeftLayout;
+@property (readonly) BOOL automaticallyMirrorsInRightToLeftLayout;
 
 @end
 

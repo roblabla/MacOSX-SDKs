@@ -9,6 +9,7 @@
 #define JDWP_JDWP_H
 
 #include "JDWPCommands.h"
+#include "jni_md.h"
 
 /*                         
  * JDWPCommands.h is the javah'ed version of all the constants defined

@@ -261,6 +261,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*!
  An allocator to use when backing with an NSData is appropriate.
  */
+NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
 @interface MDLMeshBufferDataAllocator: NSObject <MDLMeshBufferAllocator>
 
@@ -269,6 +270,8 @@ MDL_EXPORT
 /*!
  A default zone that can be use for convenience 
  */
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
+MDL_EXPORT
 @interface MDLMeshBufferZoneDefault : NSObject <MDLMeshBufferZone>
 
 @property (nonatomic, readonly) NSUInteger capacity;

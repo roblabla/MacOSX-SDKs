@@ -211,7 +211,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 		A token which can be passed to removeParameterObserver: or to -[AUParameter
 		setValue:originator:]
 */
-- (AUParameterObserverToken)tokenByAddingParameterAutomationObserver:(AUParameterAutomationObserver)observer NS_AVAILABLE(10_12, 10_0);
+- (AUParameterObserverToken)tokenByAddingParameterAutomationObserver:(AUParameterAutomationObserver)observer API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!	@method removeParameterObserver:
 	@brief	Remove an observer created with tokenByAddingParameterObserver,
@@ -342,10 +342,10 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 		From an audio playback engine, a host should schedule automated parameter changes through
 		AUAudioUnit's scheduleParameterBlock.
 */
-- (void)setValue:(AUValue)value originator:(AUParameterObserverToken __nullable)originator atHostTime:(uint64_t)hostTime eventType:(AUParameterAutomationEventType)eventType NS_AVAILABLE(10_12, 10_0);
+- (void)setValue:(AUValue)value originator:(AUParameterObserverToken __nullable)originator atHostTime:(uint64_t)hostTime eventType:(AUParameterAutomationEventType)eventType API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!	@brief Get a textual representation of a value for the parameter. Use value==nil to use the
-		current value.
+		   current value. Bridged to the v2 property kAudioUnitProperty_ParameterStringFromValue.
 	@discussion
 		This is currently only supported for parameters whose flags include
 		kAudioUnitParameterFlag_ValuesHaveStrings.

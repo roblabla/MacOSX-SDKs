@@ -1,7 +1,7 @@
 /*
         NSTextView.h
         Application Kit
-        Copyright (c) 1994-2016, Apple Inc.
+        Copyright (c) 1994-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -17,6 +17,8 @@
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSTextFinder.h>
 #import <AppKit/NSLayoutManager.h>
+#import <AppKit/NSSpellChecker.h>
+#import <AppKit/NSPasteboard.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSTextCheckingResult.h>
@@ -229,22 +231,22 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // To implement new mechanisms that cause data to be read from the pasteboard you can call preferredPasteboardTypeFromArray:restrictedToTypesFromArray: and readSelectionFromPasteboard:type:.
 
 // Returns an array of pasteboard types that can be provided from the current selection.  Overriders should copy the result from super and add their own new types.
-@property (readonly, copy) NSArray<NSString *> *writablePasteboardTypes;
+@property (readonly, copy) NSArray<NSPasteboardType> *writablePasteboardTypes;
 
 // Invoked automatically to write a single type to the pasteboard.  The type will already have been declared to the pasteboard so this should merely write the data using the appropriate set method on the pasteboard.
-- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard type:(NSString *)type;
+- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard type:(NSPasteboardType)type;
 
 // Declares all the types to the pasteboard then calls writeSelectionToPasteboard:type: for each type in the array.
-- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray<NSString *> *)types;
+- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray<NSPasteboardType> *)types;
 
 // Returns an array of types that could be read currently in order of preference.  Subclassers should take care to consider the "preferred" part of the semantics of this method.  Figure out where your new type should fit into the preferred order.  The preferred order should usually be from the richest types down to the less rich.  The default array will start with RTFD, RTF, strings, files, images, colors and so on.  The ordering list really starts to lose significance after the first few elements.  If the new format you are supporting is richer than RTFD, put it at the head of the list, otherwise try to find the right place for it, but don't count on the actual contents of the list you get from super either.
-@property (readonly, copy) NSArray<NSString *> *readablePasteboardTypes;
+@property (readonly, copy) NSArray<NSPasteboardType> *readablePasteboardTypes;
 
 // Returns the most preferred type from the available types array that it is currently possible to read.  If allowedTypes is provided then only those types will be considered regardless of whether others could currently be read.  You should not have to override this to support new types.
-- (nullable NSString *)preferredPasteboardTypeFromArray:(NSArray<NSString *> *)availableTypes restrictedToTypesFromArray:(nullable NSArray<NSString *> *)allowedTypes;
+- (nullable NSPasteboardType)preferredPasteboardTypeFromArray:(NSArray<NSPasteboardType> *)availableTypes restrictedToTypesFromArray:(nullable NSArray<NSPasteboardType> *)allowedTypes;
 
 // Invoked automatically to read a specific type from the pasteboard.  The type will already have been by the preferredPasteboardTypeFromArray:restrictedToTypesFromArray: method so this should merely read the data using the appropriate accessor method on the pasteboard.
-- (BOOL)readSelectionFromPasteboard:(NSPasteboard *)pboard type:(NSString *)type;
+- (BOOL)readSelectionFromPasteboard:(NSPasteboard *)pboard type:(NSPasteboardType)type;
 
 // Part of the services mechanism.  This is implemented such that you should not need to override it to support new types.  It should not be necessary to call this.
 - (BOOL)readSelectionFromPasteboard:(NSPasteboard *)pboard;
@@ -253,7 +255,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 + (void)registerForServices;
 
 // This method is part of the services protocol and is implemented in such a way that if you extend the type support correctly you should not need to override it.  You should never need to call it either.
-- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
+- (nullable id)validRequestorForSendType:(nullable NSPasteboardType)sendType returnType:(nullable NSPasteboardType)returnType;
 
 // These methods are like paste: (from NSResponder) but they restrict the acceptable type of the pasted data.  They are suitable as menu actions for appropriate "Paste As" submenu commands.
 - (void)pasteAsPlainText:(nullable id)sender;
@@ -270,10 +272,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (nullable NSImage *)dragImageForSelectionWithEvent:(NSEvent *)event origin:(nullable NSPointPointer)origin;
 
 // Must be overridden to support new drag types in addition to adding support for reading and writing the type.  Override it to call super, then make a copy of the result and add your own new types before returning the copy.  You should probably never need to call this except to message super in an override.
-@property (readonly, copy) NSArray<NSString *> *acceptableDragTypes;
+@property (readonly, copy) NSArray<NSPasteboardType> *acceptableDragTypes;
 
 // This is called by draggingEntered:... and draggingUpdated:...  It should return the drag operation constant appropriate to the current situation or NSDragOperationNone.  It can also do any other auxiliary stuff like drawing a ghost to indicate where the dragged thing will go when it is dropped.  Be aware that this is called over and over so if you're going to draw a ghost or something avoid doing it over and over unless you need to.  Any state you set up in this method that needs to be cleared can be cleared by overriding the next method.  You should probably never need to call this except to message super in an override.  Clients should override this method rather than draggingEntered:... and draggingUpdated:... to control the drag operation.  Clients overriding this method must message super to get the standard drag insertion indicator.
-- (NSDragOperation)dragOperationForDraggingInfo:(id <NSDraggingInfo>)dragInfo type:(NSString *)type;
+- (NSDragOperation)dragOperationForDraggingInfo:(id <NSDraggingInfo>)dragInfo type:(NSPasteboardType)type;
 
 // If you set up persistent state that should go away when the drag operation finishes, you can clean it up here.  Such state is usually set up in -dragOperationForDraggingInfo:type:.  You should probably never need to call this except to message super in an override.
 - (void)cleanUpAfterDragOperation;
@@ -295,17 +297,17 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property NSSelectionGranularity selectionGranularity;
 
 // Selected text attributes are applied as temporary attributes to selected text.  Candidates include those attributes that do not affect layout.
-@property (copy) NSDictionary<NSString *, id> *selectedTextAttributes;
+@property (copy) NSDictionary<NSAttributedStringKey, id> *selectedTextAttributes;
 
 @property (copy) NSColor *insertionPointColor;
 
 - (void)updateInsertionPointStateAndRestartTimer:(BOOL)restartFlag;
 
 // Marked text attributes are applied as temporary attributes to selected text.  Candidates include those attributes that do not affect layout.
-@property (nullable, copy) NSDictionary<NSString *, id> *markedTextAttributes;
+@property (nullable, copy) NSDictionary<NSAttributedStringKey, id> *markedTextAttributes;
 
 // Link text attributes are applied as temporary attributes to any text with a link attribute.  Candidates include those attributes that do not affect layout.  Default attributes are blue color, single underline, and the pointing hand cursor.
-@property (nullable, copy) NSDictionary<NSString *, id> *linkTextAttributes;
+@property (nullable, copy) NSDictionary<NSAttributedStringKey, id> *linkTextAttributes;
 
 // If set, then text with a link attribute will automatically be treated as if it had an implicit tooltip attribute with the same value as the link attribute.  An explicit tooltip attribute will take precedence over this implicit one.  The textView:willDisplayToolTip:forCharacterAtIndex: delegate method affects these tooltips as it does any other.
 @property BOOL displaysLinkToolTips NS_AVAILABLE_MAC(10_5);
@@ -332,7 +334,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 // May be called or overridden to control setting of spelling and grammar indicators.  Values are those listed for NSSpellingStateAttributeName.  Calls the delegate method textView:shouldSetSpellingState:range:.
 - (void)setSpellingState:(NSInteger)value range:(NSRange)charRange NS_AVAILABLE_MAC(10_5);
 
-@property (copy) NSDictionary<NSString *, id> *typingAttributes;
+@property (copy) NSDictionary<NSAttributedStringKey, id> *typingAttributes;
 
 // These multiple-range methods supersede the corresponding single-range methods.  For the first method, the affectedRanges argument obeys the same restrictions as the argument to setSelectedRanges:, and the replacementStrings array should either be nil (for attribute-only changes) or have the same number of elements as affectedRanges.  For the remaining three methods, the return values obey the same restrictions as that for selectedRanges, except that they will be nil if the corresponding change is not permitted, where the corresponding single-range methods return (NSNotFound, 0).
 - (BOOL)shouldChangeTextInRanges:(NSArray<NSValue *> *)affectedRanges replacementStrings:(nullable NSArray<NSString *> *)replacementStrings;
@@ -370,7 +372,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /*************************** NSText methods ***************************/
 
-@property (nullable, assign) id<NSTextViewDelegate> delegate;
+@property (nullable, weak) id<NSTextViewDelegate> delegate;
 @property (getter=isEditable) BOOL editable;
 @property (getter=isSelectable) BOOL selectable;
 @property (getter=isRichText) BOOL richText;
@@ -419,8 +421,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property NSTextCheckingTypes enabledTextCheckingTypes NS_AVAILABLE_MAC(10_6);
 
 // These two methods usually would not be called directly, since NSTextView itself will call them as needed, but they can be overridden.
-- (void)checkTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_6);
-- (void)handleTextCheckingResults:(NSArray<NSTextCheckingResult *> *)results forRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSString *, id> *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount NS_AVAILABLE_MAC(10_6);
+- (void)checkTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options NS_AVAILABLE_MAC(10_6);
+- (void)handleTextCheckingResults:(NSArray<NSTextCheckingResult *> *)results forRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount NS_AVAILABLE_MAC(10_6);
 
 - (void)orderFrontSubstitutionsPanel:(nullable id)sender NS_AVAILABLE_MAC(10_6);
 
@@ -460,27 +462,27 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 
 #pragma mark NSTouchBar support
-/* NSTextView provides support for text formatting and inputting touch bar items. -[NSTextView makeTouchBar] instantiates an NSTouchBar configured based on settings such as -automaticTextCompletionEnabled and -richText. NSTextView conforms to NSTouchBarDelegate and supplies touch bar items via -touchBar:makeItemForIdentifier:.
+/* NSTextView provides support for text formatting and inputting NSTouchBarItems. -[NSTextView makeTouchBar] instantiates an NSTouchBar configured based on settings such as -automaticTextCompletionEnabled and -richText. NSTextView conforms to NSTouchBarDelegate and supplies NSTouchBarItems via -touchBar:makeItemForIdentifier:.
  */
 @interface NSTextView (NSTextView_TouchBar) <NSCandidateListTouchBarItemDelegate, NSTouchBarDelegate>
 
-// Enables automatic completion touch bar item. YES by default. When YES, NSTextView displays the candidates for the text selection in its NSCandidateListTouchBarItem returned from -candidateListTouchBarItem. Invokes -updateTouchBarItemIdentifiers.
+// Enables the automatic completion NSTouchBarItem. YES by default. When YES, NSTextView displays the candidates for the text selection in its NSCandidateListTouchBarItem returned from -candidateListTouchBarItem. Invokes -updateTouchBarItemIdentifiers.
 @property (getter=isAutomaticTextCompletionEnabled) BOOL automaticTextCompletionEnabled NS_AVAILABLE_MAC(10_12_2);
 - (IBAction)toggleAutomaticTextCompletion:(nullable id)sender NS_AVAILABLE_MAC(10_12_2);
 
-// When Yes, NSTouchBarItemIdentifierCharacterPicker is included in -[NSTouchBar itemIdentifiers] for its touch bar. Default is YES. Invokes -updateTouchBarItemIdentifiers.
+// When Yes, NSTouchBarItemIdentifierCharacterPicker is included in -[NSTouchBar itemIdentifiers] for the receiver's NSTouchBar. Default is YES. Invokes -updateTouchBarItemIdentifiers.
 @property BOOL allowsCharacterPickerTouchBarItem NS_AVAILABLE_MAC(10_12_2);
 
-// This message should be sent whenever a property affecting touch bar item states is changed. It updates -itemIdentifiers for its touch bar.
+// This message should be sent whenever a property affecting NSTouchBarItem states is changed. It updates -itemIdentifiers for the receiver's NSTouchBar.
 - (void)updateTouchBarItemIdentifiers NS_AVAILABLE_MAC(10_12_2);
 
-// Updates state of text formatting touch bar items such as NSTouchBarItemIdentifierTextStyle and NSTouchBarItemIdentifierTextAlignment for the receiver based on the current selection.
+// Updates state of text formatting NSTouchBarItems such as NSTouchBarItemIdentifierTextStyle and NSTouchBarItemIdentifierTextAlignment for the receiver based on the current selection.
 - (void)updateTextTouchBarItems NS_AVAILABLE_MAC(10_12_2);
 
 // Updates the candidates for -candidateListTouchBarItem.
 - (void)updateCandidates NS_AVAILABLE_MAC(10_12_2);
 
-// -[NSTextView candidateListTouchBarItem] returns an NSCandidateTouchBarItem instance owned by the receiver. The touch bar item is instantiated in -[NSTextView touchBar:makeItemForIdentifier:] with NSTouchBarItemIdentifierCandidateLit.
+// -[NSTextView candidateListTouchBarItem] returns an NSCandidateTouchBarItem instance owned by the receiver. The NSTouchBarItem is instantiated in -[NSTextView touchBar:makeItemForIdentifier:] with NSTouchBarItemIdentifierCandidateList.
 @property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem NS_AVAILABLE_MAC(10_12_2);
 @end
 
@@ -510,10 +512,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (void)textView:(NSTextView *)view draggedCell:(id <NSTextAttachmentCell>)cell inRect:(NSRect)rect event:(NSEvent *)event atIndex:(NSUInteger)charIndex;
 
 // Delegate only.  If the previous method is not used, this method and the next allow the textview to take care of attachment dragging and pasting, with the delegate responsible only for writing the attachment to the pasteboard.  In this method, the delegate should return an array of types that it can write to the pasteboard for the given attachment.
-- (NSArray<NSString *> *)textView:(NSTextView *)view writablePasteboardTypesForCell:(id<NSTextAttachmentCell>)cell atIndex:(NSUInteger)charIndex;
+- (NSArray<NSPasteboardType> *)textView:(NSTextView *)view writablePasteboardTypesForCell:(id<NSTextAttachmentCell>)cell atIndex:(NSUInteger)charIndex;
 
 // Delegate only.  In this method, the delegate should attempt to write the given attachment to the pasteboard with the given type, and return success or failure.
-- (BOOL)textView:(NSTextView *)view writeCell:(id <NSTextAttachmentCell>)cell atIndex:(NSUInteger)charIndex toPasteboard:(NSPasteboard *)pboard type:(NSString *)type ;
+- (BOOL)textView:(NSTextView *)view writeCell:(id<NSTextAttachmentCell>)cell atIndex:(NSUInteger)charIndex toPasteboard:(NSPasteboard *)pboard type:(NSPasteboardType)type;
 
 // Delegate only.  Will not be called if textView:willChangeSelectionFromCharacterRanges:toCharacterRanges: is implemented.  Effectively prevents multiple selection.
 - (NSRange)textView:(NSTextView *)textView willChangeSelectionFromCharacterRange:(NSRange)oldSelectedCharRange toCharacterRange:(NSRange)newSelectedCharRange;
@@ -525,7 +527,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (BOOL)textView:(NSTextView *)textView shouldChangeTextInRanges:(NSArray<NSValue *> *)affectedRanges replacementStrings:(nullable NSArray<NSString *> *)replacementStrings;
 
 // Delegate only.  The delegate should return newTypingAttributes to allow the change, oldTypingAttributes to prevent it, or some other dictionary to modify it.
-- (NSDictionary<NSString *, id> *)textView:(NSTextView *)textView shouldChangeTypingAttributes:(NSDictionary<NSString *, id> *)oldTypingAttributes toAttributes:(NSDictionary<NSString *, id> *)newTypingAttributes;
+- (NSDictionary<NSAttributedStringKey, id> *)textView:(NSTextView *)textView shouldChangeTypingAttributes:(NSDictionary<NSString *, id> *)oldTypingAttributes toAttributes:(NSDictionary<NSAttributedStringKey, id> *)newTypingAttributes;
 
 - (void)textViewDidChangeSelection:(NSNotification *)notification;
 
@@ -549,10 +551,10 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (nullable NSMenu *)textView:(NSTextView *)view menu:(NSMenu *)menu forEvent:(NSEvent *)event atIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_5);
 
 // Delegate only.  Called by checkTextInRange:types:options:, this method allows control over text checking options (via the return value) or types (by modifying the flags pointed to by the inout parameter checkingTypes).
-- (NSDictionary<NSString *, id> *)textView:(NSTextView *)view willCheckTextInRange:(NSRange)range options:(NSDictionary<NSString *, id> *)options types:(NSTextCheckingTypes *)checkingTypes NS_AVAILABLE_MAC(10_6);
+- (NSDictionary<NSTextCheckingOptionKey, id> *)textView:(NSTextView *)view willCheckTextInRange:(NSRange)range options:(NSDictionary<NSTextCheckingOptionKey, id> *)options types:(NSTextCheckingTypes *)checkingTypes NS_AVAILABLE_MAC(10_6);
 
 // Delegate only.  Called by handleTextCheckingResults:forRange:orthography:wordCount:, this method allows observation of text checking, or modification of the results (via the return value).
-- (NSArray<NSTextCheckingResult *> *)textView:(NSTextView *)view didCheckTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSString *, id> *)options results:(NSArray<NSTextCheckingResult *> *)results orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount NS_AVAILABLE_MAC(10_6);
+- (NSArray<NSTextCheckingResult *> *)textView:(NSTextView *)view didCheckTextInRange:(NSRange)range types:(NSTextCheckingTypes)checkingTypes options:(NSDictionary<NSTextCheckingOptionKey, id> *)options results:(NSArray<NSTextCheckingResult *> *)results orthography:(NSOrthography *)orthography wordCount:(NSInteger)wordCount NS_AVAILABLE_MAC(10_6);
 
 // Returns an URL representing the document contents for textAttachment.  The returned NSURL object is utilized by NSTextView for providing default behaviors involving text attachments such as Quick Look and double-clicking.  -[NSTextView quickLookPreviewableItemsInRanges:] uses this method for mapping text attachments to their corresponding document URLs.  NSTextView invokes -[NSWorkspace openURL:] with the URL returned from this method when the delegate has no -textView:doubleClickedOnCell:inRect:atPoint: implementation.
 - (nullable NSURL *)textView:(NSTextView *)textView URLForContentsOfTextAttachment:(NSTextAttachment *)textAttachment atIndex:(NSUInteger)charIndex NS_AVAILABLE_MAC(10_7);
@@ -563,7 +565,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 - (nullable NSUndoManager *)undoManagerForTextView:(NSTextView *)view;
 
 
-// Delegate only. Invoked from -updateTouchBarItemIdentifiers before setting the item identifiers for textView's touch bar.
+// Delegate only. Invoked from -updateTouchBarItemIdentifiers before setting the item identifiers for textView's NSTouchBar.
 - (NSArray<NSTouchBarItemIdentifier> *)textView:(NSTextView *)textView shouldUpdateTouchBarItemIdentifiers:(NSArray<NSTouchBarItemIdentifier> *)identifiers NS_AVAILABLE_MAC(10_12_2);
 
 // Delegate only. Provides customized list of candidates to textView.candidateListTouchBarItem. Invoked from -updateCandidates. NSTextView uses the candidates returned from this method and suppress its built-in candidate generation. Returning nil from this delegate method allows NSTextView to query candidates from NSSpellChecker.
@@ -585,25 +587,25 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @end
 
 
-#pragma mark Touch Bar Item Identifiers
-/* Standard Touch Bar Item Identifiers */
-// A touch bar item identifier for a control selecting special characters (i.e. Emoji). -[NSTouchBar itemForIdentifier:] recognizes the identifier.
+#pragma mark NSTouchBarItemIdentifiers
+/* Standard NSTouchBarItemIdentifiers */
+// An NSTouchBarItemIdentifier for a control selecting special characters (i.e. Emoji). -[NSTouchBar itemForIdentifier:] recognizes the identifier.
 APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierCharacterPicker NS_AVAILABLE_MAC(10_12_2);
 
 /* Identifiers recognized by -[NSTextView touchBar:makeItemForIdentifier:] */
-// A touch bar item identifier for a control selecting the text color.
+// An NSTouchBarItemIdentifier for a control selecting the text color.
 APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextColorPicker NS_AVAILABLE_MAC(10_12_2);
 
-// A touch bar item identifier for a control selecting the text style.
+// An NSTouchBarItemIdentifier for a control selecting the text style.
 APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextStyle NS_AVAILABLE_MAC(10_12_2);
 
-// A touch bar item identifier for a control selecting the text alignment. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
+// An NSTouchBarItemIdentifier for a control selecting the text alignment. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
 APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextAlignment NS_AVAILABLE_MAC(10_12_2);
 
-// A touch bar item identifier for a control inserting the text list style. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
+// An NSTouchBarItemIdentifier for a control inserting the text list style. -[NSTextView touchBarItemForIdentifier:] returns an NSPopoverTouchBarItem.
 APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextList NS_AVAILABLE_MAC(10_12_2);
 
-// A touch bar item identifier for a group of text format controls.
+// An NSTouchBarItemIdentifier for a group of text format controls.
 APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierTextFormat NS_AVAILABLE_MAC(10_12_2);
 
 
@@ -634,10 +636,11 @@ typedef NS_ENUM(NSUInteger, NSFindPanelAction) {
 
 /* Values for NSFindPanel search metadata */
 
-APPKIT_EXTERN NSString * NSFindPanelSearchOptionsPboardType  NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSPasteboardType NSFindPanelSearchOptionsPboardType  NS_AVAILABLE_MAC(10_5);
 
-APPKIT_EXTERN NSString * NSFindPanelCaseInsensitiveSearch NS_AVAILABLE_MAC(10_5);     // BOOL
-APPKIT_EXTERN NSString * NSFindPanelSubstringMatch NS_AVAILABLE_MAC(10_5);            // NSNumber containing NSFindPanelSubstringMatchType
+typedef NSString * NSPasteboardTypeFindPanelSearchOptionKey NS_STRING_ENUM;
+APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelCaseInsensitiveSearch NS_AVAILABLE_MAC(10_5);     // BOOL
+APPKIT_EXTERN NSPasteboardTypeFindPanelSearchOptionKey NSFindPanelSubstringMatch NS_AVAILABLE_MAC(10_5);            // NSNumber containing NSFindPanelSubstringMatchType
 
 typedef NS_ENUM(NSUInteger, NSFindPanelSubstringMatchType) {
     NSFindPanelSubstringMatchTypeContains = 0,

@@ -1,6 +1,6 @@
 /*
 	NSKeyValueCoding.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
@@ -41,9 +41,7 @@ FOUNDATION_EXPORT NSKeyValueOperator const NSUnionOfSetsKeyValueOperator;
 
 /* Return YES if -valueForKey:, -setValue:forKey:, -mutableArrayValueForKey:, -storedValueForKey:, -takeStoredValue:forKey:, and -takeValue:forKey: may directly manipulate instance variables when sent to instances of the receiving class, NO otherwise. The default implementation of this property returns YES.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly) BOOL accessInstanceVariablesDirectly;
-#endif
 
 /* Given a key that identifies an attribute or to-one relationship, return the attribute value or the related object. Given a key that identifies a to-many relationship, return an immutable array or an immutable set that contains all of the related objects.
     
@@ -105,7 +103,7 @@ The default implementation of this method recognizes the same simple accessor me
 
 Performance note: the repetitive -set<Key>: messages implied by step 2's description are a potential performance problem. For better performance implement insertion and removal methods that fulfill the requirements for step 1 in your KVC-compliant class. For best performance implement a replacement method too.
 */
-- (NSMutableOrderedSet *)mutableOrderedSetValueForKey:(NSString *)key NS_AVAILABLE(10_7, 5_0);
+- (NSMutableOrderedSet *)mutableOrderedSetValueForKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 /* Given a key that identifies an _unordered_ and uniquing to-many relationship, return a mutable set that provides read-write access to the related objects. Objects added to the mutable set will become related to the receiver, and objects removed from the mutable set will become unrelated.
 
@@ -125,7 +123,7 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 - (void)setValue:(nullable id)value forKeyPath:(NSString *)keyPath;
 - (BOOL)validateValue:(inout id _Nullable * _Nonnull)ioValue forKeyPath:(NSString *)inKeyPath error:(out NSError **)outError;
 - (NSMutableArray *)mutableArrayValueForKeyPath:(NSString *)keyPath;
-- (NSMutableOrderedSet *)mutableOrderedSetValueForKeyPath:(NSString *)keyPath NS_AVAILABLE(10_7, 5_0);
+- (NSMutableOrderedSet *)mutableOrderedSetValueForKeyPath:(NSString *)keyPath API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 - (NSMutableSet *)mutableSetValueForKeyPath:(NSString *)keyPath;
 
 /* Given that an invocation of -valueForKey: would be unable to get a keyed value using its default access mechanism, return the keyed value using some other mechanism. The default implementation of this method raises an NSUndefinedKeyException. You can override it to handle properties that are dynamically defined at run-time.
@@ -182,11 +180,11 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 /* Return an ordered set containing the results of invoking -valueForKey: on each of the receiver's members. The returned ordered set might not have the same number of members as the receiver. The returned ordered set will not contain any elements corresponding to instances of -valueForKey: returning nil, nor will it contain duplicates.
 */
-- (id)valueForKey:(NSString *)key NS_AVAILABLE(10_7, 5_0);
+- (id)valueForKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 /* Invoke -setValue:forKey: on each of the receiver's members.
 */
-- (void)setValue:(nullable id)value forKey:(NSString *)key NS_AVAILABLE(10_7, 5_0);
+- (void)setValue:(nullable id)value forKey:(NSString *)key API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -208,19 +206,19 @@ Performance note: the repetitive -set<Key>: messages implied by step 2's descrip
 
 /* Methods that were deprecated in Mac OS 10.4.
 */
-+ (BOOL)useStoredAccessor NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (nullable id)storedValueForKey:(NSString *)key NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (void)takeStoredValue:(nullable id)value forKey:(NSString *)key NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
++ (BOOL)useStoredAccessor API_DEPRECATED("Legacy KVC API", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (nullable id)storedValueForKey:(NSString *)key API_DEPRECATED("Legacy KVC API", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)takeStoredValue:(nullable id)value forKey:(NSString *)key API_DEPRECATED("Legacy KVC API", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /* Methods that were deprecated in Mac OS 10.3. Use the new, more consistently named, methods declared above instead.
 */
-- (void)takeValue:(nullable id)value forKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (void)takeValue:(nullable id)value forKeyPath:(NSString *)keyPath NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (nullable id)handleQueryWithUnboundKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (void)handleTakeValue:(nullable id)value forUnboundKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (void)unableToSetNilForKey:(NSString *)key NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (NSDictionary *)valuesForKeys:(NSArray *)keys NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
-- (void)takeValuesFromDictionary:(NSDictionary *)properties NS_DEPRECATED(10_0, 10_3, 2_0, 2_0);
+- (void)takeValue:(nullable id)value forKey:(NSString *)key API_DEPRECATED("Legacy KVC API", macos(10.0,10.3), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)takeValue:(nullable id)value forKeyPath:(NSString *)keyPath API_DEPRECATED("Legacy KVC API", macos(10.0,10.3), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (nullable id)handleQueryWithUnboundKey:(NSString *)key API_DEPRECATED("Legacy KVC API", macos(10.0,10.3), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)handleTakeValue:(nullable id)value forUnboundKey:(NSString *)key API_DEPRECATED("Legacy KVC API", macos(10.0,10.3), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)unableToSetNilForKey:(NSString *)key API_DEPRECATED("Legacy KVC API", macos(10.0,10.3), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (NSDictionary *)valuesForKeys:(NSArray *)keys API_DEPRECATED("Legacy KVC API", macos(10.0,10.3), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)takeValuesFromDictionary:(NSDictionary *)properties API_DEPRECATED("Legacy KVC API", macos(10.0,10.3), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 @end
 

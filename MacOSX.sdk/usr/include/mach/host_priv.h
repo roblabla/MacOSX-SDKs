@@ -347,30 +347,6 @@ kern_return_t host_processor_set_priv
 	processor_set_t *set
 );
 
-/* Routine set_dp_control_port */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t set_dp_control_port
-(
-	host_priv_t host,
-	mach_port_t control_port
-);
-
-/* Routine get_dp_control_port */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t get_dp_control_port
-(
-	host_priv_t host,
-	mach_port_t *contorl_port
-);
-
 /* Routine host_set_UNDServer */
 #ifdef	mig_external
 mig_external
@@ -725,30 +701,6 @@ __END_DECLS
 		mach_msg_header_t Head;
 		/* start of the kernel processed data */
 		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t control_port;
-		/* end of the kernel processed data */
-	} __Request__set_dp_control_port_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-	} __Request__get_dp_control_port_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
 		mach_msg_port_descriptor_t server;
 		/* end of the kernel processed data */
 	} __Request__host_set_UNDServer_t __attribute__((unused));
@@ -809,8 +761,6 @@ union __RequestUnion__host_priv_subsystem {
 	__Request__mach_vm_wire_t Request_mach_vm_wire;
 	__Request__host_processor_sets_t Request_host_processor_sets;
 	__Request__host_processor_set_priv_t Request_host_processor_set_priv;
-	__Request__set_dp_control_port_t Request_set_dp_control_port;
-	__Request__get_dp_control_port_t Request_get_dp_control_port;
 	__Request__host_set_UNDServer_t Request_host_set_UNDServer;
 	__Request__host_get_UNDServer_t Request_host_get_UNDServer;
 	__Request__kext_request_t Request_kext_request;
@@ -1109,32 +1059,6 @@ union __RequestUnion__host_priv_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
-	} __Reply__set_dp_control_port_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		/* start of the kernel processed data */
-		mach_msg_body_t msgh_body;
-		mach_msg_port_descriptor_t contorl_port;
-		/* end of the kernel processed data */
-	} __Reply__get_dp_control_port_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack()
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
 	} __Reply__host_set_UNDServer_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1199,8 +1123,6 @@ union __ReplyUnion__host_priv_subsystem {
 	__Reply__mach_vm_wire_t Reply_mach_vm_wire;
 	__Reply__host_processor_sets_t Reply_host_processor_sets;
 	__Reply__host_processor_set_priv_t Reply_host_processor_set_priv;
-	__Reply__set_dp_control_port_t Reply_set_dp_control_port;
-	__Reply__get_dp_control_port_t Reply_get_dp_control_port;
 	__Reply__host_set_UNDServer_t Reply_host_set_UNDServer;
 	__Reply__host_get_UNDServer_t Reply_host_get_UNDServer;
 	__Reply__kext_request_t Reply_kext_request;
@@ -1229,8 +1151,6 @@ union __ReplyUnion__host_priv_subsystem {
     { "mach_vm_wire", 418 },\
     { "host_processor_sets", 419 },\
     { "host_processor_set_priv", 420 },\
-    { "set_dp_control_port", 421 },\
-    { "get_dp_control_port", 422 },\
     { "host_set_UNDServer", 423 },\
     { "host_get_UNDServer", 424 },\
     { "kext_request", 425 }

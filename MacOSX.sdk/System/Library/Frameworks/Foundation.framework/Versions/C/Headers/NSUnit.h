@@ -1,6 +1,6 @@
 /*
  NSUnit.h
- Copyright (c) 2015-2016, Apple Inc.
+ Copyright (c) 2015-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -10,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark Unit Converters
 /*
- NSUnitConverter describes how to convert a unit to and from the base unit of its dimension.  Use the NSUnitConverter protocol to implement new ways of converting a unit.
+ NSUnitConverter describes how to convert a unit to and from the base unit of its dimension.  Subclass NSUnitConverter to implement new ways of converting a unit.
  */
 API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 @interface NSUnitConverter : NSObject
@@ -93,7 +93,10 @@ API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0))
 
 @property (readonly, copy) NSString *symbol;
 
-- (instancetype)initWithSymbol:(NSString *)symbol;
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+- (instancetype)initWithSymbol:(NSString *)symbol NS_DESIGNATED_INITIALIZER;
 
 @end
 

@@ -1,7 +1,7 @@
 /*
     NSBrowser.h
     Application Kit
-    Copyright (c) 1994-2016, Apple Inc.
+    Copyright (c) 1994-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -9,11 +9,14 @@
 #import <AppKit/NSControl.h>
 #import <AppKit/NSDragging.h>
 #import <AppKit/NSViewController.h>
+#import <AppKit/NSApplication.h>
 
-#define NSAppKitVersionNumberWithContinuousScrollingBrowser 680.0
-#define NSAppKitVersionNumberWithColumnResizingBrowser      685.0
+static const NSAppKitVersion NSAppKitVersionNumberWithContinuousScrollingBrowser = 680.0;
+static const NSAppKitVersion NSAppKitVersionNumberWithColumnResizingBrowser = 685.0;
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * NSBrowserColumnsAutosaveName NS_EXTENSIBLE_STRING_ENUM;
 
 @class NSMatrix, NSScroller, NSIndexSet;
 @protocol NSBrowserDelegate;
@@ -106,27 +109,27 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 @interface NSBrowser : NSControl
 {
     /* All instance variables are private */
-    id                  _nsreserved2;
-    SEL                 _nsreserved3;
-    id                  _delegate;
-    SEL                 _doubleAction;
-    Class               _matrixClass;
-    id                  _cellPrototype;
-    NSSize		_columnSize;
-    short		_numberOfVisibleColumns;
-    short		_minColumnWidth;
-    short		_firstVisibleColumn;
-    short		_maxVisibleColumns;
-    NSMutableArray	*_titles;
-    NSString		*_pathSeparator;
-    NSMutableArray	*_columns;
-    id                  _brAuxiliaryStorage;
-    NSString		*_firstColumnTitle;
-    NSScroller		*_scroller;
-    _Brflags            _brflags;
+    id                           _nsreserved2;
+    SEL                          _nsreserved3;
+    __weak id                    _delegate;
+    SEL                          _doubleAction;
+    Class                        _matrixClass;
+    id                           _cellPrototype;
+    NSSize		         _columnSize;
+    short		         _numberOfVisibleColumns;
+    short		         _minColumnWidth;
+    short		         _firstVisibleColumn;
+    short		         _maxVisibleColumns;
+    NSMutableArray	        *_titles;
+    NSString		        *_pathSeparator;
+    NSMutableArray	        *_columns;
+    id                           _brAuxiliaryStorage;
+    NSString		        *_firstColumnTitle;
+    NSScroller		        *_scroller;
+    _Brflags                    _brflags;
 }
 
-+ (Class)cellClass;
+@property (class, readonly) Class cellClass;
 
 - (void)loadColumnZero;
 @property (getter=isLoaded, readonly) BOOL loaded;
@@ -134,7 +137,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 @property (nullable) SEL doubleAction;
 - (void)setCellClass:(Class)factoryId;
 @property (null_resettable, strong) id /* NSCell * */ cellPrototype;
-@property (nullable, assign) id<NSBrowserDelegate> delegate;
+@property (nullable, weak) id<NSBrowserDelegate> delegate;
 @property BOOL reusesColumns;
 
 @property BOOL hasHorizontalScroller;
@@ -209,7 +212,7 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Returns the index path of the item selected in the browser, or nil if there is no selection. The setter sets the browser's selection to the item at path. Throws an exception if the path is invalid. This method can only be used if the delegate implements the item data source methods.
  */
-@property (copy) NSIndexPath *selectionIndexPath NS_AVAILABLE_MAC(10_6);
+@property (nullable, copy) NSIndexPath *selectionIndexPath NS_AVAILABLE_MAC(10_6);
 
 /* Returns the index paths of all items selected in the browser. The setter sets the browser's selection to the specified index paths. Throws an exception if any of the paths are invalid. This method can only be used if the delegate implements the item data source methods.
  */
@@ -297,11 +300,11 @@ typedef NS_ENUM(NSUInteger, NSBrowserDropOperation) {
 
 /* Sets the name used to automatically save the receivers column configuration.  This setting is persistent.  If name is different from the current name, this method also reads in the saved column configuration for the new name and applies the values to the browser.  Column configuration is defined as an array of column content widths.  One width is saved for each level the user has reached.  That is, browser saves column width based on depth, not based on unique paths.  To do more complex column persistence, you should register for NSBrowserColumnConfigurationDidChangeNotifications and handle persistence yourself. 
  */
-@property (copy) NSString *columnsAutosaveName;
+@property (copy) NSBrowserColumnsAutosaveName columnsAutosaveName;
 
 /* Removes the column data stored under name from the applications user defaults. 
  */
-+ (void)removeSavedColumnsWithAutosaveName:(NSString *)name;
++ (void)removeSavedColumnsWithAutosaveName:(NSBrowserColumnsAutosaveName)name;
 
 
 #pragma mark -
@@ -463,7 +466,7 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 
 /* The delegate can support file promise drags by adding NSFilesPromisePboardType to the pasteboard in browser:writeRowsWithIndexes:inColumn:toPasteboard:. NSBrowser implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this data source method.  This method should returns an array of filenames for the created files (filenames only, not full paths).  The URL represents the drop location.  For more information on file promise dragging, see documentation on the NSDraggingSource protocol and -namesOfPromisedFilesDroppedAtDestination:. You do not need to implement this method for your browser to be a drag source.
  */
-- (NSArray<NSString *> *)browser:(NSBrowser *)browser namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_5);
+- (NSArray<NSString *> *)browser:(NSBrowser *)browser namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)rowIndexes inColumn:(NSInteger)column NS_DEPRECATED_MAC(10_5, 10_13, "Use NSFilePromiseReceiver objects instead");
 
 /* The delegate can control if some particular rows can be dragged or not for a particular event. You do not need to implement this method for your browser to be a drag source. 
  */
@@ -494,7 +497,7 @@ APPKIT_EXTERN NSNotificationName NSBrowserColumnConfigurationDidChangeNotificati
 /* Optional - Type select support
     Implement this method if you want to control the string that is used for type selection. You may want to change what is searched for based on what is displayed, or simply return an empty string for that row and/or column to not be searched. You can also return 'nil' if the cell does not contain any text. By default, all cells with text in them are searched. The default value when this delegate method is not implemented is the stringValue for the cell at that location.
  */
-- (NSString *)browser:(NSBrowser *)browser typeSelectStringForRow:(NSInteger)row inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_5);
+- (nullable NSString *)browser:(NSBrowser *)browser typeSelectStringForRow:(NSInteger)row inColumn:(NSInteger)column NS_AVAILABLE_MAC(10_5);
 
 /* Optional - Type select support
     Implement this method if you would like to prevent a type select from happening based on the current event and current search string. Generally, this will be called from keyDown: and the event will be a key event. The search string will be nil if no type select has began. 

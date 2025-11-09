@@ -1,6 +1,6 @@
 /*
     CFURLEnumerator.h
-    Copyright (c) 2008-2016, Apple Inc. All rights reserved.
+    Copyright (c) 2008-2017, Apple Inc. All rights reserved.
  */
 
 #if (TARGET_OS_MAC || TARGET_OS_EMBEDDED || TARGET_OS_IPHONE) || CF_BUILDING_CF || NSBUILDINGFOUNDATION
@@ -21,7 +21,7 @@ typedef const struct CF_BRIDGED_MUTABLE_TYPE(id) __CFURLEnumerator *CFURLEnumera
 
 /* CFURLEnumeratorGetTypeID - Returns the CFURLEnumerator CFTypeID. */
 CF_EXPORT
-CFTypeID CFURLEnumeratorGetTypeID( void ) CF_AVAILABLE(10_6, 4_0);
+CFTypeID CFURLEnumeratorGetTypeID( void ) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 
 /* CFURLEnumeratorOptions - Options for controlling enumerator behavior. */
@@ -43,7 +43,7 @@ A directory enumerator generates URLs with the same type as the directory URL be
 The kCFURLEnumeratorGenerateFileReferenceURLs option is ignored by CFURLEnumeratorCreateForDirectoryURL.
 */
 CF_EXPORT
-CFURLEnumeratorRef CFURLEnumeratorCreateForDirectoryURL( CFAllocatorRef alloc, CFURLRef directoryURL, CFURLEnumeratorOptions option, CFArrayRef propertyKeys ) CF_AVAILABLE(10_6, 4_0);
+CFURLEnumeratorRef CFURLEnumeratorCreateForDirectoryURL( CFAllocatorRef alloc, CFURLRef directoryURL, CFURLEnumeratorOptions option, CFArrayRef propertyKeys ) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 
 /* CFURLEnumeratorCreateForMountedVolumes - Creates an enumerator for mounted filesystem volumes. Client specifies an allocator, a bit array of options, and an optional array of property keys to pre-fetch for the volume URLs. Specifying pre-fetch properties allows the implementation to optimize device access by using bulk operations when available. Pre-fetching more properties than are actually needed may degrade performance.
@@ -53,7 +53,7 @@ A volume enumerator generates file path URLs. If you want a volume enumerator to
 The kCFURLEnumeratorDescendRecursively and kCFURLEnumeratorSkipPackageContents options are ignored by CFURLEnumeratorCreateForMountedVolumes.
 */
 CF_EXPORT
-CFURLEnumeratorRef CFURLEnumeratorCreateForMountedVolumes( CFAllocatorRef alloc, CFURLEnumeratorOptions option, CFArrayRef propertyKeys ) CF_AVAILABLE(10_6, 4_0);
+CFURLEnumeratorRef CFURLEnumeratorCreateForMountedVolumes( CFAllocatorRef alloc, CFURLEnumeratorOptions option, CFArrayRef propertyKeys ) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 
 /* CFURLEnumeratorResult - Results for CFURLEnumeratorGetNextURL */
@@ -69,7 +69,7 @@ typedef CF_ENUM(CFIndex, CFURLEnumeratorResult) {
 The url output parameter, if returned, is not retained. The error output parameter, if returned, is retained and must be released.
 */
 CF_EXPORT
-CFURLEnumeratorResult CFURLEnumeratorGetNextURL( CFURLEnumeratorRef enumerator, CFURLRef *url, CFErrorRef *error ) CF_AVAILABLE(10_6, 4_0);
+CFURLEnumeratorResult CFURLEnumeratorGetNextURL( CFURLEnumeratorRef enumerator, CFURLRef *url, CFErrorRef *error ) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 
 /* CFURLEnumeratorSkipDescendents - Tells a recursive CFURLEnumerator not to descend into the directory of the last CFURLRef returned by CFURLEnumeratorGetNextURL.
@@ -80,13 +80,13 @@ Calls to CFURLEnumeratorSkipDescendents are ignored if:
     * The CFURLEnumerator was not created with CFURLEnumeratorCreateForDirectoryURL using the kCFURLEnumeratorDescendRecursively option.
 */
 CF_EXPORT
-void CFURLEnumeratorSkipDescendents( CFURLEnumeratorRef enumerator ) CF_AVAILABLE(10_6, 4_0);
+void CFURLEnumeratorSkipDescendents( CFURLEnumeratorRef enumerator ) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 
 /* CFURLEnumeratorGetDescendentLevel - Returns the number of levels a directory enumerator has descended down into the directory hierarchy from the starting directory. The children of the starting directory are at level 1. Each time a recursive enumerator descends into a subdirectory, it adds one to the descendent level. It then subtracts one from the level when it finishes a subdirectory and continues enumerating the parent directory.
 */
 CF_EXPORT
-CFIndex CFURLEnumeratorGetDescendentLevel( CFURLEnumeratorRef enumerator ) CF_AVAILABLE(10_6, 4_0);
+CFIndex CFURLEnumeratorGetDescendentLevel( CFURLEnumeratorRef enumerator ) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 
 /* CFURLEnumeratorGetSourceDidChange is deprecated. If your program is interested in directory hierarchy changes during enumeration (and most programs are not interested), you should use the File System Events API.
@@ -94,7 +94,7 @@ CFIndex CFURLEnumeratorGetDescendentLevel( CFURLEnumeratorRef enumerator ) CF_AV
  CFURLEnumeratorGetSourceDidChange does nothing and always returns false.
  */
 CF_EXPORT
-Boolean CFURLEnumeratorGetSourceDidChange( CFURLEnumeratorRef enumerator ) CF_DEPRECATED(10_6, 10_7, 4_0, 5_0);
+Boolean CFURLEnumeratorGetSourceDidChange( CFURLEnumeratorRef enumerator ) API_DEPRECATED("Use File System Events API instead", macos(10.6,10.7), ios(4.0,5.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 
 CF_EXTERN_C_END

@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: E1E961A7-9EE9-302B-BC80-A8C1E8573BEE', 'x86_64: 73F03A78-B534-3CAD-BB13-E6DC8F3AC88B' ]
+uuids:           [ 'i386: 23025671-061B-3E1F-A3E4-459AF8E3EEAE', 'x86_64: FFA87EA7-AE60-3E67-82FC-53C552699440' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/EAP8021X.framework/Versions/A/EAP8021X
 objc-constraint: none
@@ -24,12 +24,14 @@ exports:
                        _EAPOLClientConfigurationCreate, _EAPOLClientConfigurationCreateInternal, 
                        _EAPOLClientConfigurationCreateWithAuthorization, _EAPOLClientConfigurationGetDefaultAuthenticationProperties, 
                        _EAPOLClientConfigurationGetProfileWithID, _EAPOLClientConfigurationGetProfileWithWLANDomain, 
-                       _EAPOLClientConfigurationGetProfileWithWLANSSID, _EAPOLClientConfigurationGetSystemProfile, 
-                       _EAPOLClientConfigurationGetTypeID, _EAPOLClientConfigurationRemoveProfile, 
-                       _EAPOLClientConfigurationSave, _EAPOLClientConfigurationSetDefaultAuthenticationProperties, 
-                       _EAPOLClientConfigurationSetLoginWindowProfiles, _EAPOLClientConfigurationSetSystemProfile, 
-                       _EAPOLClientDetach, _EAPOLClientEstablishSession, _EAPOLClientForceRenew, 
-                       _EAPOLClientGetConfig, _EAPOLClientItemIDCopyDictionary, _EAPOLClientItemIDCopyIdentity, 
+                       _EAPOLClientConfigurationGetProfileWithWLANSSID, _EAPOLClientConfigurationGetSystemEthernetProfile, 
+                       _EAPOLClientConfigurationGetSystemProfile, _EAPOLClientConfigurationGetTypeID, 
+                       _EAPOLClientConfigurationRemoveProfile, _EAPOLClientConfigurationSave, 
+                       _EAPOLClientConfigurationSetDefaultAuthenticationProperties, 
+                       _EAPOLClientConfigurationSetLoginWindowProfiles, _EAPOLClientConfigurationSetSystemEthernetProfile, 
+                       _EAPOLClientConfigurationSetSystemProfile, _EAPOLClientDetach, 
+                       _EAPOLClientEstablishSession, _EAPOLClientForceRenew, _EAPOLClientGetConfig, 
+                       _EAPOLClientItemIDCopyDictionary, _EAPOLClientItemIDCopyIdentity, 
                        _EAPOLClientItemIDCopyPasswordItem, _EAPOLClientItemIDCreateDefault, 
                        _EAPOLClientItemIDCreateWithDictionary, _EAPOLClientItemIDCreateWithProfile, 
                        _EAPOLClientItemIDCreateWithProfileID, _EAPOLClientItemIDCreateWithWLANDomain, 
@@ -88,7 +90,7 @@ exports:
                        _eapgtc_introspect, _eapmschapv2_introspect, _eapol_socket, 
                        _eapsim_introspect, _eaptls_introspect, _eapttls_eap_process, 
                        _eapttls_eap_start, _eapttls_introspect, _fprint_bytes, _fprint_data, 
-                       _isA_SecCertificate, _kEAPOLAutoDetectAuthenticatorMACAddress, 
+                       _isA_SecCertificate, _isA_SecIdentity, _kEAPOLAutoDetectAuthenticatorMACAddress, 
                        _kEAPOLAutoDetectSecondsSinceLastPacket, _kEAPOLClientConfigurationChangedNotifyKey, 
                        _kEAPOLClientProfileWLANSecurityTypeAny, _kEAPOLClientProfileWLANSecurityTypeWEP, 
                        _kEAPOLClientProfileWLANSecurityTypeWPA, _kEAPOLClientProfileWLANSecurityTypeWPA2, 

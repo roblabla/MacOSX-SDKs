@@ -8,13 +8,13 @@
 .Nd gathers memory information about one or more processes
 .Sh SYNOPSIS
 .Nm
-[-j] [-t] [-s] [-v] ( -a | <process name | pid> [ ... ] )
+[-j] [-t] [-s] [-v] ( -a | <process name | pid | memgraph> [ ... ] )
 .Nm
 .Fl h
 .Sh DESCRIPTION
 The
 .Nm
-utility gathers and displays memory consumption information for the specified processes.
+utility gathers and displays memory consumption information for the specified processes or memory graph files.
 .Pp
 .Nm
 will display all addressable memory used by the specified processes, but it emphasizes anonymous and wired memory.  If multiple processes are specified,

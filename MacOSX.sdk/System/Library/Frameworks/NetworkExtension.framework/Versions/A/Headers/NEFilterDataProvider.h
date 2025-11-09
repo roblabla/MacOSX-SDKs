@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015-2017 Apple Inc.
  * All rights reserved.
  */
 
@@ -85,9 +85,8 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  */
 - (NEFilterRemediationVerdict *)handleRemediationForFlow:(NEFilterFlow *)flow NS_AVAILABLE(NA, 9_0);
 
-
 /*!
- * @meethod handleRulesChanged
+ * @method handleRulesChanged
  * @discussion This function is called by the framework when -[NEFilterControlProvider notifyRulesChanged] is called. Subclasses should override this method to reload new rules from disk.
  */
 - (void)handleRulesChanged NS_AVAILABLE(NA, 9_0);
@@ -129,7 +128,7 @@ NS_CLASS_AVAILABLE(NA, 9_0)
 /*!
  * @method dataVerdictWithPassBytes:peekBytes:
  * @discussion This class method returns a data verdict indicating that the filter is passing a given number of bytes through the filter and needs to see a given number of bytes after the bytes that are passed.
- * @param passBytes The number of bytes to pass through the filter. Note that the framework does not pass the bytes to the destination until a "final" allow/drop/remediate verdict is returned.
+ * @param passBytes The number of bytes to pass through the filter.
  * @param peekBytes The number of bytes after the end of the bytes passed that the filter wants to see in the next call to -[NEFilterDataProvider handleOutboundDataFromFlow:readBytesStartOffset:readBytes:] or -[NEFilterDataProvider handleInboundDataFromFlow:readBytesStartOffset:readBytes:].
  * @return The data flow verdict.
  */

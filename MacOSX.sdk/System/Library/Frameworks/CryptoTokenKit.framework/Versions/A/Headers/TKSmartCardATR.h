@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Bitmask of available smartcard protocols.
+/// Bitmask of available SmartCard protocols.
 typedef NS_OPTIONS(NSUInteger, TKSmartCardProtocol) {
     TKSmartCardProtocolNone  = 0,
     TKSmartCardProtocolT0    = (1L << 0),
@@ -74,7 +74,7 @@ NS_CLASS_AVAILABLE(10_10, 9_0)
 ///       appended into the returned records as if historical bytes would begin with 0x80 and 0x8 record is present
 ///       in historical bytes.
 @property (nonatomic, readonly, nullable) NSArray<TKCompactTLVRecord *> *historicalRecords
-__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_UNAVAILABLE __WATCHOS_UNAVAILABLE;
+__OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0);
 
 @end
 

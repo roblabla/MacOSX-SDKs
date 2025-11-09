@@ -66,6 +66,7 @@
 #include <sys/types.h>
 #include <sys/appleapiopts.h>
 #include <machine/endian.h>
+#include <machine/types.h> /* __uint32_t */
 
 #if !defined(_POSIX_C_SOURCE) || defined(_DARWIN_C_SOURCE)
 typedef	__uint32_t tcp_seq;
@@ -266,13 +267,15 @@ struct tcp_connection_info {
 			tcpi_tfo_heuristics_disable:1, /* TFO-heuristics disabled it */
 			tcpi_tfo_send_blackhole:1, /* A sending-blackhole got detected */
 			tcpi_tfo_recv_blackhole:1, /* A receiver-blackhole got detected */
-			__pad2:18;
+			tcpi_tfo_onebyte_proxy:1, /* A proxy acknowledges all but one byte of the SYN */
+			__pad2:17;
         u_int64_t	tcpi_txpackets __attribute__((aligned(8)));
         u_int64_t	tcpi_txbytes __attribute__((aligned(8)));
         u_int64_t	tcpi_txretransmitbytes __attribute__((aligned(8)));
         u_int64_t	tcpi_rxpackets __attribute__((aligned(8)));
         u_int64_t	tcpi_rxbytes __attribute__((aligned(8)));
         u_int64_t	tcpi_rxoutoforderbytes __attribute__((aligned(8)));
+        u_int64_t	tcpi_txretransmitpackets __attribute__((aligned(8)));
 };
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 

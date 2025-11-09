@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Accounts/AccountsDefines.h>
+
 @class ACAccountType, ACAccountCredential;
 
 // The ACAccount class represents an account stored on the system.

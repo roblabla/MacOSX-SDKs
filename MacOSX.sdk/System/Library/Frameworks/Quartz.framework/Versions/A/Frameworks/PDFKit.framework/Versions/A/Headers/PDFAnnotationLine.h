@@ -1,26 +1,20 @@
-// =====================================================================================================================
+//
 //  PDFAnnotationLine.h
-// =====================================================================================================================
-
+//  Copyright © 2016 Apple. All rights reserved.
+//
+//  Deprecated annotation class. Use PDFAnnotation directly to create this
+//  kind of annotation. Use the helper methods in PDFAnnotationUtilities.h
+//  to quickly build an appropriate dictionary for this annotation type.
+//
 
 #import <PDFKit/PDFKitPlatform.h>
 #import <PDFKit/PDFAnnotation.h>
 
-// Style used for line end caps.
-NS_ENUM_DEPRECATED(10_4, 10_12, NA, NA)
-typedef NS_ENUM(NSInteger, PDFLineStyle)
-{
-    kPDFLineStyleNone = 0,
-    kPDFLineStyleSquare = 1,
-    kPDFLineStyleCircle = 2,
-    kPDFLineStyleDiamond = 3,
-    kPDFLineStyleOpenArrow = 4,
-    kPDFLineStyleClosedArrow = 5
-};
+#import <PDFKit/PDFAnnotationUtilities.h>
 
 @class PDFAnnotationLinePrivateVars;
 
-NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
+PDFKIT_CLASS_DEPRECATED(10_4, 10_12, NA, NA)
 @interface PDFAnnotationLine : PDFAnnotation <NSCopying, NSCoding>
 {
 @private

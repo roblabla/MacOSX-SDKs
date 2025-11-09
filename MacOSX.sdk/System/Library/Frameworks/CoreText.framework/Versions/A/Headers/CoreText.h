@@ -2,7 +2,7 @@
  *  CoreText.h
  *  CoreText
  *
- *  Copyright (c) 2006-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -58,7 +58,7 @@ CF_EXTERN_C_BEGIN
                 constants beginning with kCTVersionNumber.
 */
 
-uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(10_5, 3_2);
+uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 #define kCTVersionNumber10_5 0x00020000
 #define kCTVersionNumber10_5_2 0x00020001
@@ -71,6 +71,7 @@ uint32_t CTGetCoreTextVersion( void ) CT_AVAILABLE(10_5, 3_2);
 #define kCTVersionNumber10_10 0x00070000
 #define kCTVersionNumber10_11 0x00080000
 #define kCTVersionNumber10_12 0x00090000
+#define kCTVersionNumber10_13 0x000A0000
 
 CF_EXTERN_C_END
 

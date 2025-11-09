@@ -48,4 +48,16 @@ MK_EXTERN NSString * const MKLaunchOptionsMapSpanKey            NS_AVAILABLE(10_
 
 MK_EXTERN NSString * const MKLaunchOptionsCameraKey             NS_AVAILABLE(10_10, 7_1) __TVOS_PROHIBITED; // Key to MKMapCamera object
 
+
+@interface MKMapItem (MKMapItemSerialization) <NSSecureCoding>
+@end
+
+MK_EXTERN NSString * const MKMapItemTypeIdentifier NS_AVAILABLE(10_13, 11_0);
+
+
+#if TARGET_OS_IOS
+@interface MKMapItem (MKMapItemDragAndDropSupport) <NSItemProviderReading, NSItemProviderWriting>
+@end
+#endif
+
 NS_ASSUME_NONNULL_END

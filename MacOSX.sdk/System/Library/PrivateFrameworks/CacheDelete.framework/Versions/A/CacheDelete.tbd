@@ -1,37 +1,36 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 74C78009-7CC8-366B-8673-3D698AC1C307' ]
+uuids:           [ 'x86_64: EB5714EA-0BF0-3101-A47B-F396983EDB37' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CacheDelete.framework/Versions/A/CacheDelete
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _CDGetLogHandle, _CacheDeleteCancelPurge, _CacheDeleteCopyItemizedPurgeableSpace, 
+    symbols:         [ _CDGetLogHandle, _CDVEnumerationFlagsAll, _CacheDeleteCancelPurge, 
+                       _CacheDeleteCopyAvailableSpaceForVolume, _CacheDeleteCopyItemizedPurgeableSpace, 
                        _CacheDeleteCopyItemizedPurgeableSpaceWithInfo, _CacheDeleteCopyPurgeableSpaceWithInfo, 
-                       _CacheDeleteErrorDomain, _CacheDeletePerformOperation, _CacheDeletePurgeAsync, 
+                       _CacheDeleteDoNotPurgeUserManagedAssets, _CacheDeleteErrorDomain, 
+                       _CacheDeleteGetSetting, _CacheDeletePerformOperation, _CacheDeletePurgeAsync, 
                        _CacheDeletePurgeSpace, _CacheDeletePurgeSpaceWithInfo, _CacheDeletePurgeSpaceWithInfoSync, 
-                       _CacheDeletePurgeableSpace, _CacheDeleteRegister, _CacheDeleteRegisterCallback, 
-                       _CacheDeleteRegisterCallbacks, _CacheDeleteRegisterCallbacksForProcess, 
-                       _CacheDeleteRegisterExtensionCallbacks, _CacheDeleteRegisterForProcess, 
-                       _CacheDeleteRegisterInfoCallbacks, _CacheDeleteRegisterInfoCallbacksForProcess, 
-                       _CacheDeleteUpdatePurgeable, _CacheManagementAdd, _CacheManagementObjectEnumerate, 
-                       _CacheManagementRemove, _CallCacheD, _amountPurged, _cacheSizeForVolume, 
-                       _clearAllSampleServiceCache, _clearSampleServiceCache, _connectionIsEntitled, 
-                       _copySampleServiceCachePath, _createCacheDeleteToken, _enumerateSampleCacheFiles, 
-                       _enumerateSampleCacheSubDirs, _evaluateBoolProperty, _evaluateNumberProperty, 
-                       _evaluateStringProperty, _evaluateUrgency, _getAllVolumes, 
+                       _CacheDeletePurgeUserManagedAssets, _CacheDeletePurgeableSpace, 
+                       _CacheDeleteRegister, _CacheDeleteRegisterCallback, _CacheDeleteRegisterCallbacks, 
+                       _CacheDeleteRegisterCallbacksForProcess, _CacheDeleteRegisterExtensionCallbacks, 
+                       _CacheDeleteRegisterForProcess, _CacheDeleteRegisterInfoCallbacks, 
+                       _CacheDeleteRegisterInfoCallbacksForProcess, _CacheDeleteRequestCacheableSpaceGuidance, 
+                       _CacheDeleteUpdatePurgeable, _CacheDeleteUpdatePurgeableSync, 
+                       _CacheDeleteUpdateSetting, _CacheDeleteUserManagedAssetsPurgeable, 
+                       _CacheManagementEnumerateAssets, _CacheManagementErrorDomain, 
+                       _CacheManagementRemove, _CallCacheD, _CallCacheDPublic, __CacheDeleteAbortWithMessage, 
+                       _cacheSizeForVolume, _clearAllSampleServiceCache, _clearSampleServiceCache, 
+                       _connectionIsEntitled, _copySampleServiceCachePath, _createCacheDeleteToken, 
+                       _diskUsageList, _enumerateSampleCacheFiles, _enumerateSampleCacheSubDirs, 
+                       _evaluateBoolProperty, _evaluateNumberProperty, _evaluateStringProperty, 
+                       _evaluateUrgency, _flattenedAssetDescription, _getAllVolumes, 
                        _getCacheDeleteXattr, _getFunc, _getLocalVolumes, _getRootVolume, 
-                       _log_user_defaults, _lowSpaceVolumes, _normalizeUserMountpoint, 
-                       _paddingForVolume, _persistPath, _populateSampleServiceCache, 
-                       _pretty_user_defaults, _readRecentInfoFile, _recoveryDevices, 
-                       _sampleServiceCacheSubPath, _statusForVolume, _thresholdsForVolume, 
-                       _truncFile, _validateTimestamp, _validateVolume, _volumeFreespace, 
-                       _volumeSize ]
-    objc-classes:    [ _CDAnonymousXPCService, _CDAppExtensionService, _CDNamedXPCService, 
-                       _CDService, _CDXPCService, _CacheDeleteHostExtensionContext, 
-                       _CacheDeleteListener, _CacheDeleteRecent, _CacheDeleteRecentInfo, 
-                       _CacheDeleteRecentServiceInfo, _CacheDeleteRecentVolumeInfo, 
-                       _CacheDeleteRemoteExtensionContext, _CacheDeleteServiceInfo, 
-                       _CacheDeleteServiceListener ]
-    objc-ivars:      [ _CacheDeleteRecentServiceInfo.diagnostics, _CacheDeleteRecentServiceInfo.urgencies ]
+                       _is_first_boot, _lowSpaceVolumes, _paddingForVolume, _persistPath, 
+                       _populateSampleServiceCache, _pretty_user_defaults, _sampleServiceCacheSubPath, 
+                       _set_first_boot_work_completed, _traverse_directory, _truncFile, 
+                       _validateTimestamp ]
+    objc-classes:    [ _CacheDeleteHostExtensionContext, _CacheDeleteListener, _CacheDeleteRemoteExtensionContext, 
+                       _CacheDeleteServiceInfo, _CacheDeleteServiceListener, _CacheDeleteVolume, 
+                       _CacheManagementAsset ]
 ...

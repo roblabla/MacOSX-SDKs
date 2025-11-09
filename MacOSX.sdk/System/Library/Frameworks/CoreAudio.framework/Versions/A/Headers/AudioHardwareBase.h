@@ -640,7 +640,7 @@ CF_ENUM(UInt32)
                         in the AudioDevice Constants section of this file.
     @constant       kAudioDevicePropertyRelatedDevices
                         An array of AudioDeviceIDs for devices related to the AudioDevice. For
-                        IOAudio-based devices, a AudioDevices are related if they share the same
+                        IOAudio-based devices, AudioDevices are related if they share the same
                         IOAudioDevice object.
     @constant       kAudioDevicePropertyClockDomain
                         A UInt32 whose value indicates the clock domain to which this AudioDevice

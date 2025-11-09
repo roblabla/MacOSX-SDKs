@@ -47,6 +47,24 @@ typedef unsigned int			uint;
 #define bit_clear(x, b)			((x) &= ~BIT(b))
 #define bit_test(x, b)			((bool)((x) & BIT(b)))
 
+/* Non-atomically clear the bit and returns whether the bit value was changed */
+inline static bool
+bit_clear_if_set(uint64_t bitmap, int bit)
+{
+    bool bit_is_set = bit_test(bitmap, bit);
+    bit_clear(bitmap, bit);
+    return bit_is_set;
+}
+
+/* Non-atomically set the bit and returns whether the bit value was changed */
+inline static bool
+bit_set_if_clear(uint64_t bitmap, int bit)
+{
+    bool bit_is_set = bit_test(bitmap, bit);
+    bit_set(bitmap, bit);
+    return !bit_is_set;
+}
+
 /* Returns the most significant '1' bit, or -1 if all zeros */
 inline static int
 bit_first(uint64_t bitmap)

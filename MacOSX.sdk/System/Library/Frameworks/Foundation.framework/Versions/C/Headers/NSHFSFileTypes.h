@@ -1,6 +1,6 @@
 /*
 	NSHFSFileTypes.h
-	Copyright (c) 2000-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2000-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>

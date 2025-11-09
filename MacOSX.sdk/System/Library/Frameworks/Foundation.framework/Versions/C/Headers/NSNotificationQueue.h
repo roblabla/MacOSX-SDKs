@@ -1,5 +1,5 @@
 /*	NSNotificationQueue.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -29,9 +29,7 @@ typedef NS_OPTIONS(NSUInteger, NSNotificationCoalescing) {
     id		_idleQueue;
     id		_idleObs;
 }
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSNotificationQueue *defaultQueue;
-#endif
 
 - (instancetype)initWithNotificationCenter:(NSNotificationCenter *)notificationCenter NS_DESIGNATED_INITIALIZER;
 

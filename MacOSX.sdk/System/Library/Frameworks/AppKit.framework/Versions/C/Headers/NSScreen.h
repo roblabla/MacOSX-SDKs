@@ -1,7 +1,7 @@
 /*
 	NSScreen.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -27,18 +27,18 @@ typedef struct NSScreenAuxiliary NSScreenAuxiliaryOpaque;
     id _auxiliaryStorage;
 }
 
-+ (nullable NSArray<NSScreen *> *)screens;		/* All screens; first one is "zero" screen */
-+ (nullable NSScreen *)mainScreen;	/* Screen with key window */
-+ (nullable NSScreen *)deepestScreen;
+@property (class, readonly, copy) NSArray<NSScreen *> *screens;	/* All screens; first one is "zero" screen */
+@property (class, readonly, nullable, strong) NSScreen *mainScreen;	/* Screen with key window */
+@property (class, readonly, nullable, strong) NSScreen *deepestScreen;
 
 /* screensHaveSeparateSpaces returns YES if each screen has its own set of spaces.  This is a system  setting and does not necessarily imply that there are multiple screens, nor that there are multiple spaces on any one screen 
 */
-+ (BOOL)screensHaveSeparateSpaces NS_AVAILABLE_MAC(10_9);
+@property (class, readonly) BOOL screensHaveSeparateSpaces NS_AVAILABLE_MAC(10_9);
 
 @property (readonly) NSWindowDepth depth;
 @property (readonly) NSRect frame;
 @property (readonly) NSRect visibleFrame;
-@property (readonly, copy) NSDictionary<NSString *, id> *deviceDescription;
+@property (readonly, copy) NSDictionary<NSDeviceDescriptionKey, id> *deviceDescription;
 @property (nullable, readonly, strong) NSColorSpace *colorSpace NS_AVAILABLE_MAC(10_6);
 
 @property (readonly) const NSWindowDepth *supportedWindowDepths NS_RETURNS_INNER_POINTER; /* 0 terminated */

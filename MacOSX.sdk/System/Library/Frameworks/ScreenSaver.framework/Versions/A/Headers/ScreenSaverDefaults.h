@@ -17,7 +17,6 @@ NS_ASSUME_NONNULL_BEGIN
 	NSString				*_userName;
 	NSString				*_domainName;
 	BOOL					_dirty;
-	BOOL					_screenLockPrefChanged;
 }
 
 + (nullable instancetype) defaultsForModuleWithName:(NSString *)inModuleName;

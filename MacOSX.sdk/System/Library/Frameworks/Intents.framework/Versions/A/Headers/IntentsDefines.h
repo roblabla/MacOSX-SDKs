@@ -2,7 +2,7 @@
 //  IntentsDefines.h
 //  Intents
 //
-//  Copyright © 2016 Apple. All rights reserved.
+//  Copyright (c) 2016 Apple Inc. All rights reserved.
 //
 
 #import <Availability.h>

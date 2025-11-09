@@ -46,7 +46,7 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationBackgroundColor  IMAGEIO_AVA
 
 IMAGEIO_EXTERN const CFStringRef kCGImageDestinationImageMaxPixelSize  IMAGEIO_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
 
-/* Enable or disable JPEG thumbnail embedding.
+/* Enable or disable thumbnail embedding for JPEG and HEIF.
  * The value should be kCFBooleanTrue or kCFBooleanFalse. Defaults to kCFBooleanFalse */
 
 IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEmbedThumbnail  IMAGEIO_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_8_0);
@@ -196,6 +196,15 @@ CF_ASSUME_NONNULL_END
  * and 'err' will be set to a CFErrorRef. Not all image formats are supported 
  * for this operation. */
 IMAGEIO_EXTERN bool CGImageDestinationCopyImageSource(CGImageDestinationRef __nonnull idst, CGImageSourceRef __nonnull isrc, CFDictionaryRef __nullable options, __nullable CFErrorRef * __nullable err) IMAGEIO_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_7_0);
+
+/* Depth data support for JPEG, HEIF, and DNG images.
+ * The auxiliaryDataInfoDictionary should contain:
+ *   - the depth data (CFDataRef) - (kCGImageAuxiliaryDataInfoData),
+ *   - the depth data description (CFDictionary) - (kCGImageAuxiliaryDataInfoDataDescription)
+ *   - metadata (CGImageMetadataRef) - (kCGImageAuxiliaryDataInfoMetadata)
+ * To add depth data to an image, call CGImageDestinationAddAuxiliaryDataInfo() after adding the CGImage to the CGImageDestinationRef.
+ */
+IMAGEIO_EXTERN void CGImageDestinationAddAuxiliaryDataInfo(CGImageDestinationRef __nonnull idst, CFStringRef __nonnull auxiliaryImageDataType, CFDictionaryRef __nonnull auxiliaryDataInfoDictionary ) IMAGEIO_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 
 CF_IMPLICIT_BRIDGING_DISABLED

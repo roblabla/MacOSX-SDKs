@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BF97FB93-0643-371E-81BA-E5EC00E2CA3B' ]
+uuids:           [ 'x86_64: F5FA0157-647B-3A98-B449-09B49A0F32B2' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PhysicsKit.framework/Versions/A/PhysicsKit
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _PKArrayFromB2ChainShape, _PKArrayFromB2PolygonShape, _PKArrayFromCGPath, 

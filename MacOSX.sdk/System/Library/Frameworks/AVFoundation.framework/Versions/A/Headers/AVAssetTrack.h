@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -20,6 +20,8 @@
 #import <AVFoundation/AVAsynchronousKeyValueLoading.h>
 #import <AVFoundation/AVAsset.h>
 #import <AVFoundation/AVAssetTrackSegment.h>
+#import <AVFoundation/AVMediaFormat.h>
+#import <AVFoundation/AVMetadataFormat.h>
 #import <CoreMedia/CMTimeRange.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -48,7 +50,7 @@ AV_INIT_UNAVAILABLE
 @interface AVAssetTrack (AVAssetTrackBasicPropertiesAndCharacteristics)
 
 /* indicates the media type for this track, e.g. AVMediaTypeVideo, AVMediaTypeAudio, etc., as defined in AVMediaFormat.h. */
-@property (nonatomic, readonly) NSString *mediaType;
+@property (nonatomic, readonly) AVMediaType mediaType;
 
 /* provides an array of CMFormatDescriptions
    each of which indicates the format of media samples referenced by the track;
@@ -58,6 +60,9 @@ AV_INIT_UNAVAILABLE
 
 /* Indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.  */
 @property (nonatomic, readonly, getter=isPlayable) BOOL playable NS_AVAILABLE(10_8, 5_0);
+
+/* Indicates whether the receiver is decodable in the current environment; if YES, the track can be decoded even though decoding may be too slow for real time playback.  */
+@property (nonatomic, readonly, getter=isDecodable) BOOL decodable NS_AVAILABLE(10_13, 11_0);
 
 /* indicates whether the track is enabled according to state stored in its container or construct;
    note that its presentation state can be changed from this default via AVPlayerItemTrack */
@@ -77,7 +82,7 @@ AV_INIT_UNAVAILABLE
 					as defined above.
 	@result			YES if the track references media with the specified characteristic, otherwise NO.
 */
-- (BOOL)hasMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 
 @end
 
@@ -192,7 +197,7 @@ AV_INIT_UNAVAILABLE
 
 /* provides an NSArray of NSStrings, each representing a format of metadata that's available for the track (e.g. QuickTime userdata, etc.)
    Metadata formats are defined in AVMetadataItem.h. */
-@property (nonatomic, readonly) NSArray<NSString *> *availableMetadataFormats;
+@property (nonatomic, readonly) NSArray<AVMetadataFormat> *availableMetadataFormats;
 
 /*!
 	@method			metadataForFormat:
@@ -202,12 +207,19 @@ AV_INIT_UNAVAILABLE
 	@result			An NSArray containing AVMetadataItems.
 	@discussion		Becomes callable without blocking when the key @"availableMetadataFormats" has been loaded
 */
-- (NSArray<AVMetadataItem *> *)metadataForFormat:(NSString *)format;
+- (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;
 
 @end
 
 
 @interface AVAssetTrack (AVAssetTrackTrackAssociations)
+
+/*!
+ @typedef AVTrackAssociationType
+ @abstract
+    The type of a track association.
+*/
+typedef NSString * AVTrackAssociationType NS_STRING_ENUM;
 
 /*
  @constant		AVTrackAssociationTypeAudioFallback
@@ -219,7 +231,7 @@ AV_INIT_UNAVAILABLE
 	Example: Using AVTrackAssociationTypeAudioFallback, a stereo audio track with media subtype kAudioFormatMPEG4AAC could be nominated as the "fallback" for an audio track encoding the same source material but with media subtype kAudioFormatAC3 and a 5.1 channel layout.  This would ensure that all clients are capable of playing back some form of the audio.
 
  */
-AVF_EXPORT NSString *const AVTrackAssociationTypeAudioFallback NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeAudioFallback NS_AVAILABLE(10_9, 7_0);
 
 /*
  @constant		AVTrackAssociationTypeChapterList
@@ -228,7 +240,7 @@ AVF_EXPORT NSString *const AVTrackAssociationTypeAudioFallback NS_AVAILABLE(10_9
  @discussion
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that has renderable content while the input parameter should be an instance of AVAssetWriterInput with a corresponding track that contains chapter metadata.
  */
-AVF_EXPORT NSString *const AVTrackAssociationTypeChapterList NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeChapterList NS_AVAILABLE(10_9, 7_0);
 
 /*
  @constant		AVTrackAssociationTypeForcedSubtitlesOnly
@@ -237,7 +249,7 @@ AVF_EXPORT NSString *const AVTrackAssociationTypeChapterList NS_AVAILABLE(10_9, 
  @discussion
 	Associations of type AVTrackAssociationTypeForcedSubtitlesOnly are supported only between subtitle tracks.  This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains non-forced subtitles, and the input parameter should be an instance of AVAssetWriterInput with a corresponding subtitle track that contains forced subtitles only.
  */
-AVF_EXPORT NSString *const AVTrackAssociationTypeForcedSubtitlesOnly NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeForcedSubtitlesOnly NS_AVAILABLE(10_9, 7_0);
 
 /*
  @constant		AVTrackAssociationTypeSelectionFollower
@@ -246,7 +258,7 @@ AVF_EXPORT NSString *const AVTrackAssociationTypeForcedSubtitlesOnly NS_AVAILABL
  @discussion
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the input parameter should be an instance of AVAssetWriterInput whose selection may depend on the selection of the receiver.  In the example above, the receiver would be the instance of AVAssetWriterInput corresponding with the audio track and the input parameter would be the instance of AVAssetWriterInput corresponding with the subtitle track.
  */
-AVF_EXPORT NSString *const AVTrackAssociationTypeSelectionFollower NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeSelectionFollower NS_AVAILABLE(10_9, 7_0);
 
 /*
  @constant		AVTrackAssociationTypeTimecode
@@ -255,7 +267,7 @@ AVF_EXPORT NSString *const AVTrackAssociationTypeSelectionFollower NS_AVAILABLE(
  @discussion
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with a corresponding track that may be a video track or an audio track while the input parameter should be an instance of AVAssetWriterInput with a corresponding timecode track.
  */
-AVF_EXPORT NSString *const AVTrackAssociationTypeTimecode NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeTimecode NS_AVAILABLE(10_9, 7_0);
 
 /*
 @constant		AVTrackAssociationTypeMetadataReferent
@@ -265,11 +277,11 @@ AVF_EXPORT NSString *const AVTrackAssociationTypeTimecode NS_AVAILABLE(10_9, 7_0
 	This track association is optional for AVAssetTracks with the mediaType AVMediaTypeMetadata. When a metadata track lacks this track association, its contents are assumed to describe or annotate the asset as a whole.
 	This association is not symmetric; when used with -[AVAssetWriterInput addTrackAssociationWithTrackOfInput:type:], the receiver should be an instance of AVAssetWriterInput with mediaType AVMediaTypeMetadata while the input parameter should be an instance of AVAssetWriterInput that's used to create the track to which the contents of the receiver's corresponding metadata track refer.
 */
-AVF_EXPORT NSString *const AVTrackAssociationTypeMetadataReferent NS_AVAILABLE(10_10, 8_0);
+AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent NS_AVAILABLE(10_10, 8_0);
 
 /* Provides an NSArray of NSStrings, each representing a type of track association that the receiver has with one or more of the other tracks of the asset (e.g. AVTrackAssociationTypeChapterList, AVTrackAssociationTypeTimecode, etc.).
    Track association types are defined immediately above. */
-@property (nonatomic, readonly) NSArray<NSString *> *availableTrackAssociationTypes NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes NS_AVAILABLE(10_9, 7_0);
 
 /*!
 	@method			associatedTracksOfType:
@@ -279,7 +291,7 @@ AVF_EXPORT NSString *const AVTrackAssociationTypeMetadataReferent NS_AVAILABLE(1
 	@result			An NSArray containing AVAssetTracks; may be empty if there is no associated tracks of the specified type.
 	@discussion		Becomes callable without blocking when the key @"availableTrackAssociationTypes" has been loaded.
 */
-- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(NSString *)trackAssociationType NS_AVAILABLE(10_9, 7_0);
+- (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -360,7 +372,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @interface AVFragmentedAssetTrack : AVAssetTrack
 {
 @private
-	AVFragmentedAssetTrackInternal	*_fragmentedAssetTrack;
+	AVFragmentedAssetTrackInternal	*_fragmentedAssetTrack __attribute__((unused));
 }
 
 @end

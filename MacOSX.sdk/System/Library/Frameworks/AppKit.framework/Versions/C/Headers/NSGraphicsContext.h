@@ -1,7 +1,7 @@
 /*
         NSGraphicsContext.h
         Application Kit
-        Copyright (c) 1997-2016, Apple Inc.
+        Copyright (c) 1997-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -20,14 +20,14 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSBitmapImageRep;
 
 /* Attributes that can be passed to graphicsContextWithAttributes: method */
-APPKIT_EXTERN NSString * NSGraphicsContextDestinationAttributeName; // Can be an instance of NSWindow, NSMutableData, NSBitmapImageRep, or NSURL.
-
-// Attributes for NSMutableData or NSURL destinations
-APPKIT_EXTERN NSString * NSGraphicsContextRepresentationFormatAttributeName; // Specifies destination file format
+typedef NSString * NSGraphicsContextAttributeKey NS_STRING_ENUM;
+APPKIT_EXTERN NSGraphicsContextAttributeKey NSGraphicsContextDestinationAttributeName; // Can be an instance of NSWindow, NSMutableData, NSBitmapImageRep, or NSURL.
+APPKIT_EXTERN NSGraphicsContextAttributeKey NSGraphicsContextRepresentationFormatAttributeName; // Specifies destination file format. Used only for NSMutableData or NSURL destinations
 
 // Supported file format
-APPKIT_EXTERN NSString * NSGraphicsContextPSFormat;
-APPKIT_EXTERN NSString * NSGraphicsContextPDFFormat;
+typedef NSString * NSGraphicsContextRepresentationFormatName NS_STRING_ENUM;
+APPKIT_EXTERN NSGraphicsContextRepresentationFormatName NSGraphicsContextPSFormat;
+APPKIT_EXTERN NSGraphicsContextRepresentationFormatName NSGraphicsContextPDFFormat;
 
 typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
    NSImageInterpolationDefault = 0,
@@ -41,7 +41,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 }
 
 // Instantiates from an appropriate concrete subclass depending on NSGraphicsContextDestinationAttributeName attribute
-+ (nullable NSGraphicsContext *)graphicsContextWithAttributes:(NSDictionary<NSString *, id> *)attributes;
++ (nullable NSGraphicsContext *)graphicsContextWithAttributes:(NSDictionary<NSGraphicsContextAttributeKey, id> *)attributes;
 
 // Convenience cover method for [NSGraphicsContext graphicsContextWithAttributes:[NSDictionary dictionaryWithObject:<NSWindow instance> forKey:NSGraphicsContextDestinationAttributeName]]
 + (NSGraphicsContext *)graphicsContextWithWindow:(NSWindow *)window;
@@ -55,8 +55,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 + (NSGraphicsContext *)graphicsContextWithCGContext:(CGContextRef)graphicsPort flipped:(BOOL)initialFlippedState NS_AVAILABLE_MAC(10_10);
 
 // Setting and identifying the current context in the thread
-+ (nullable NSGraphicsContext *)currentContext;
-+ (void)setCurrentContext:(nullable NSGraphicsContext *)context;
+@property (class, nullable, strong) NSGraphicsContext *currentContext;
 
 // Convenience cover method for [[NSGraphicsContext currentContext] isDrawingToScreen]
 + (BOOL)currentContextDrawingToScreen;
@@ -68,7 +67,7 @@ typedef NS_ENUM(NSUInteger, NSImageInterpolation) {
 + (void)restoreGraphicsState;
 
 // Returns attributes used to create this instance
-@property (nullable, readonly, copy) NSDictionary<NSString *, id> *attributes;
+@property (nullable, readonly, copy) NSDictionary<NSGraphicsContextAttributeKey, id> *attributes;
 
 // Testing the drawing destination
 @property (getter=isDrawingToScreen, readonly) BOOL drawingToScreen;

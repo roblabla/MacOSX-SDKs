@@ -56,6 +56,7 @@ extern void	*memcpy(void *, const void *, size_t);
 extern int	memcmp(const void *, const void *, size_t);
 extern void	*memmove(void *, const void *, size_t);
 extern void	*memset(void *, int, size_t);
+extern int	memset_s(void *, size_t, int, size_t);
 
 extern size_t	strlen(const char *);
 extern size_t	strnlen(const char *, size_t);
@@ -86,6 +87,49 @@ extern int	bcmp(const void *, const void *, size_t);
 extern void	bcopy(const void *, void *, size_t);
 extern void	bzero(void *, size_t);
 
+
+#if defined(__MAC_OS_X_VERSION_MIN_REQUIRED) && __MAC_OS_X_VERSION_MIN_REQUIRED < __MAC_10_13
+/* older deployment target */
+#elif defined(KASAN) || (defined (_FORTIFY_SOURCE) && _FORTIFY_SOURCE == 0)
+/* FORTIFY_SOURCE disabled */
+#else /* _chk macros */
+#if __has_builtin(__builtin___memcpy_chk)
+#define memcpy(dest, src, len) __builtin___memcpy_chk(dest, src, len, __builtin_object_size(dest, 0))
+#endif
+
+#if __has_builtin(__builtin___memmove_chk)
+#define memmove(dest, src, len) __builtin___memmove_chk(dest, src, len, __builtin_object_size(dest, 0))
+#endif
+
+#if __has_builtin(__builtin___strncpy_chk)
+#define strncpy(dest, src, len) __builtin___strncpy_chk(dest, src, len, __builtin_object_size(dest, 1))
+#endif
+
+#if __has_builtin(__builtin___strncat_chk)
+#define strncat(dest, src, len) __builtin___strncat_chk(dest, src, len, __builtin_object_size(dest, 1))
+#endif
+
+#if __has_builtin(__builtin___strlcat_chk)
+#define strlcat(dest, src, len) __builtin___strlcat_chk(dest, src, len, __builtin_object_size(dest, 1))
+#endif
+
+#if __has_builtin(__builtin___strlcpy_chk)
+#define strlcpy(dest, src, len) __builtin___strlcpy_chk(dest, src, len, __builtin_object_size(dest, 1))
+#endif
+
+#if __has_builtin(__builtin___strcpy_chk)
+#define strcpy(dest, src, len) __builtin___strcpy_chk(dest, src, __builtin_object_size(dest, 1))
+#endif
+
+#if __has_builtin(__builtin___strcat_chk)
+#define strcat(dest, src) __builtin___strcat_chk(dest, src, __builtin_object_size(dest, 1))
+#endif
+
+#if __has_builtin(__builtin___memmove_chk)
+#define bcopy(src, dest, len) __builtin___memmove_chk(dest, src, len, __builtin_object_size(dest, 0))
+#endif
+
+#endif /* _chk macros */
 #ifdef __cplusplus
 }
 #endif

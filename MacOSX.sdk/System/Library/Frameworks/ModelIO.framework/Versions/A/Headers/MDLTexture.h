@@ -36,6 +36,7 @@ typedef NS_ENUM(NSInteger, MDLTextureChannelEncoding) {
     MDLTextureChannelEncodingUInt32 = 4,
     MDLTextureChannelEncodingUint32 = 4,
     MDLTextureChannelEncodingFloat16 = 0x102,
+    MDLTextureChannelEncodingFloat16SR = 0x302,
     MDLTextureChannelEncodingFloat32 = 0x104,
 };
 
@@ -120,13 +121,20 @@ MDL_EXPORT
              channelEncoding:(MDLTextureChannelEncoding)channelEncoding
                       isCube:(BOOL)isCube NS_DESIGNATED_INITIALIZER;
 
-/** writeToURL, deducing type from path extension */
+/** write a texture to URL, deducing type from path extension */
 - (BOOL)writeToURL:(NSURL *)URL;
 
-/** writeToURL using a specific UT type */
+/** write a particular level of a mipped texture to URL, deducing type from path extension */
+- (BOOL)writeToURL:(NSURL *)URL level:(NSUInteger)level;
+
+/** write a texture to URL, using a specific UT type */
 - (BOOL)writeToURL:(NSURL *)nsurl type:(CFStringRef)type;
 
+/** write a particular level of a mipped texture to URL, using a specific UT type */
+- (BOOL)writeToURL:(NSURL *)nsurl type:(CFStringRef)type level:(NSUInteger)level;
+
 - (nullable CGImageRef)imageFromTexture;
+- (nullable CGImageRef)imageFromTextureAtLevel:(NSUInteger)level;
 
 - (nullable NSData *)texelDataWithTopLeftOrigin;
 - (nullable NSData *)texelDataWithBottomLeftOrigin;
@@ -218,7 +226,17 @@ MDLSkyCubeTexture
            replacement should occur. Negative values are below the horizon.
 
  @property groundColor If this value is set, the environment will be replaced with
-           the color below the horizonElevation value.
+           the color below the horizonElevation value blended with the w factor up to
+           Pi/2.0 past the horizon.
+           (e.g. w = 0.0 groundColor is applied immediatly on the horizon with no blend
+                 w = Pi/2 groundColor is linearly applied all the way to the south pole)
+           NOTE: To maintain default behavior a simple length(groundColor) != 0 is used to determine
+                 if we want to set the ground color (e.g. black and blended immediatly
+                 on the horizon use (0.0, 0.0, 0.0, 0.0000001))
+           4 component treats the first 3 components as color and w as blend factor
+           3 component treats the first 3 components as color and 0 as blend factor
+           2 component treats the first component as greyscale color and y as blend factor
+           1 component treats the scalar component as greyscale color and 0 as blend factor
  
  @property gamma Modifies the amount of gamma correction applied during
            tone mapping.
@@ -247,6 +265,15 @@ MDL_EXPORT
    upperAtmosphereScattering:(float)upperAtmosphereScattering // how intense the sun looks, 0 to 1
                 groundAlbedo:(float)groundAlbedo;             // how much sky color is reflected from the Earth
 
+- (instancetype)initWithName:(nullable NSString*)name
+             channelEncoding:(MDLTextureChannelEncoding)channelEncoding
+           textureDimensions:(vector_int2)textureDimensions   // the size of one cube face
+                   turbidity:(float)turbidity                 // the clearness of the sky
+                sunElevation:(float)sunElevation              // from 0 to 1 zenith to nadir
+                  sunAzimuth:(float)sunAzimuth                // from 0 to 2Pi
+   upperAtmosphereScattering:(float)upperAtmosphereScattering // how intense the sun looks, 0 to 1
+                groundAlbedo:(float)groundAlbedo;             // how much sky color is reflected from the Earth
+
 /**
  Call updateTexture if parameters have been changed and a new sky is required.
  */
@@ -254,6 +281,7 @@ MDL_EXPORT
 
 @property (nonatomic, assign) float turbidity;
 @property (nonatomic, assign) float sunElevation;
+@property (nonatomic, assign) float sunAzimuth;
 @property (nonatomic, assign) float upperAtmosphereScattering;
 @property (nonatomic, assign) float groundAlbedo;
 

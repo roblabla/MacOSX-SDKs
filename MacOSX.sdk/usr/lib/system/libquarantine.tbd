@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 643FE490-1C84-3224-82CC-DC4EDCF3F6D7', 'x86_64: C1D7749F-5F5F-3BB9-BEFC-1F0B9DA941FD' ]
+uuids:           [ 'i386: EC4AD63D-2F08-32B3-897F-44246F42D79C', 'x86_64: 3F819F14-EDE5-3118-BE33-E2E9F3424C43' ]
 platform:        macosx
 install-name:    /usr/lib/system/libquarantine.dylib
-current-version: 85.0
+current-version: 86
 objc-constraint: none
 parent-umbrella: System
 exports:         

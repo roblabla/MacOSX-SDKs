@@ -30,6 +30,12 @@ typedef NS_ENUM(NSInteger, SKBlendMode) {
     SKBlendModeReplace      = 6     // Replaces the destination with the source (ignores alpha).
 } NS_ENUM_AVAILABLE(10_9, 7_0);
 
+typedef NS_ENUM(NSInteger, SKNodeFocusBehavior) {
+    SKNodeFocusBehaviorNone = 0,    // Not focusable and node has no impact on other nodes that have focus interaction enabled.  This is the default.
+    SKNodeFocusBehaviorOccluding,   // Not focusable, but will prevent other focusable nodes that this node visually obscures from being focusable.
+    SKNodeFocusBehaviorFocusable    // Focusable and will also prevent other focusable nodes that this node visually obscures from being focusable.
+} API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos, watchos);
+
 /**
  A SpriteKit scene graph node. These are the branch nodes that together with geometric leaf nodes make up the directed acyclic graph that is the SpriteKit scene graph tree.
  
@@ -113,12 +119,16 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
 @property (nonatomic, getter=isUserInteractionEnabled) BOOL userInteractionEnabled;
 
 /**
+ Determines how this node participates in the focus system.  The default is SKNodeFocusBehaviorNone.
+ */
+@property (nonatomic) SKNodeFocusBehavior focusBehavior API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos, watchos);
+
+/**
  The parent of the node.
  
  If this is nil the node has not been added to another group and is thus the root node of its own graph.
  */
 @property (nonatomic, readonly, nullable) SKNode *parent;
-
 
 /**
  The children of this node.
@@ -161,6 +171,16 @@ SK_EXPORT @interface SKNode : NSResponder <NSCopying, NSCoding>
  The node's transform will be changed to satisfy the constraint.
  */
 @property (nonatomic, copy, nullable) NSArray<SKConstraint*> *constraints;
+
+/**
+ Optional dictionary of SKAttributeValues
+ Attributes can be used with custom SKShaders.
+ DEPRECATED: Attributes are only available for node classes supporting SKShader (see SKSpriteNode etc.).
+ */
+@property (nonatomic, nonnull, copy) NSDictionary<NSString *, SKAttributeValue *> *attributeValues NS_DEPRECATED(10_12, 10_12, 10_0, 10_0);
+
+- (nullable SKAttributeValue*)valueForAttributeNamed:(nonnull NSString *)key NS_DEPRECATED(10_12, 10_12, 10_0, 10_0);
+- (void)setValue:(SKAttributeValue*)value forAttributeNamed:(nonnull NSString *)key NS_SWIFT_NAME(setValue(_:forAttribute:)) NS_DEPRECATED(10_12, 10_12, 10_0, 10_0);
 
 /**
  Sets both the x & y scale

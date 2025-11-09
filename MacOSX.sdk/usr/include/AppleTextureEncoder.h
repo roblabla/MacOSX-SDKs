@@ -46,22 +46,27 @@
 /*
  *  Availability information for AppleTextureEncoder.
  *  Release info:
- *      version 1 (v1): MacOS X.12, iOS 10, tvOS 10
+ *      version 1a (AT_AVAILABILITY_v1): MacOS X.12, iOS 10, tvOS 10    (library version 1.12.x)
  *          ASTC compression for 4x4 and 8x8 block sizes
  *          ASTC decompression of all LDR (not HDR, not 3D) textures
  *          unorm8, unorm16 and fp16 texel support for l, la, and rgba color models.
  *          sRGB->linear conversions for ASTC decode.
  *          various alpha operations.
+ *      version 1b (AT_AVAILABILITY_v1): MacOS X.13, iOS 11, tvOS 11    (library version 1.13.x)
+ *          Improvements to ASTC 8x8 block image quality
+ *          Fix giant values in macOS/iOS/tvOS availability macros
+ *          no new API, so still AT_AVAILABILITY_v1. See at_encoder_get_version() to identify these improvements.
+ *
  *
  *  The major field of the at_encoder_get_version build version corresponds with
  *  the availability version (e.g. AT_AVAILABILITY_v1) here.
  */
 #   ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#       define  AT_AVAILABILITY_v1      __IOS_AVAILABLE(__IPHONE_10_0)
+#       define  AT_AVAILABILITY_v1      __IOS_AVAILABLE(10.0)
 #   elif defined __MAC_OS_X_VERSION_MIN_REQUIRED
-#       define  AT_AVAILABILITY_v1      __OSX_AVAILABLE(__MAC_10_12)
+#       define  AT_AVAILABILITY_v1      __OSX_AVAILABLE(10.12)
 #   elif __has_feature(attribute_availability_tvos)
-#       define  AT_AVAILABILITY_v1      __TVOS_AVAILABLE(__TVOS_10_0)
+#       define  AT_AVAILABILITY_v1      __TVOS_AVAILABLE(10.0)
 #   elif __has_feature(attribute_availability_watchos)
 #       define  AT_AVAILABILITY_v1      __WATCHOS_UNAVAILABLE
 #   else
@@ -70,11 +75,11 @@
 
 #   if __has_extension(enumerator_attributes)
 #       ifdef __IPHONE_OS_VERSION_MIN_REQUIRED
-#           define  AT_ENUM_AVAILABILITY_v1      __IOS_AVAILABLE(__IPHONE_10_0)
+#           define  AT_ENUM_AVAILABILITY_v1      __IOS_AVAILABLE(10.0)
 #       elif defined __MAC_OS_X_VERSION_MIN_REQUIRED
-#           define  AT_ENUM_AVAILABILITY_v1      __OSX_AVAILABLE(__MAC_10_12)
+#           define  AT_ENUM_AVAILABILITY_v1      __OSX_AVAILABLE(10.12)
 #       elif __has_feature(attribute_availability_tvos)
-#           define  AT_ENUM_AVAILABILITY_v1      __TVOS_AVAILABLE(__TVOS_10_0)
+#           define  AT_ENUM_AVAILABILITY_v1      __TVOS_AVAILABLE(10.0)
 #       elif __has_feature(attribute_availability_watchos)
 #           define  AT_ENUM_AVAILABILITY_v1      __WATCHOS_UNAVAILABLE
 #       else

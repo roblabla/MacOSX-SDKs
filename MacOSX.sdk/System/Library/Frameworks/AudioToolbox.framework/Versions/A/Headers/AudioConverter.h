@@ -309,7 +309,18 @@ CF_ENUM(UInt32)
     @discussion         Mastering quality sample rate conversion. More expensive.
     @constant       kAudioConverterSampleRateConverterComplexity_MinimumPhase
     @discussion         Minimum phase impulse response. Stopband attenuation varies with quality setting.
-						InitialPhase and PrimeMethod properties are not operative with this mode.
+                        The InitialPhase and PrimeMethod properties are not operative with this mode.
+                        There are three levels of quality provided.
+                            kAudioConverterQuality_Low (or Min)  : noise floor to -96 dB
+                            kAudioConverterQuality_Medium        : noise floor to -144 dB
+                            kAudioConverterQuality_High (or Max) : noise floor to -160 dB (this uses double precision internally)
+						Quality equivalences to the other complexity modes are very roughly as follows:
+							MinimumPhase Low    is somewhat better than Normal Medium.
+							MinimumPhase Medium is similar to Normal Max.
+							MinimumPhase High   is similar to Mastering Low.
+						In general, MinimumPhase performs better than Normal and Mastering for the equivalent qualities listed above.
+						MinimumPhase High is several times faster than Mastering Low.
+ 
 */
 CF_ENUM(UInt32)
 {

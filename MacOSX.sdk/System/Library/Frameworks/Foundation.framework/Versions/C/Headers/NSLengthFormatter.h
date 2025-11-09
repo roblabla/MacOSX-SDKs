@@ -1,5 +1,5 @@
 /*      NSLengthFormatter.h
-        Copyright (c) 2014-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2014-2017, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, NSLengthFormatterUnit) {
     NSLengthFormatterUnitFoot = (5 << 8) + 2,
     NSLengthFormatterUnitYard = (5 << 8) + 3,
     NSLengthFormatterUnitMile = (5 << 8) + 4,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface NSLengthFormatter : NSFormatter {

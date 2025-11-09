@@ -189,6 +189,27 @@ typedef NS_ENUM(NSUInteger, ICScannerTransferMode)
 */
 @property(copy)     NSString*                   documentUTI;
 
+/*!
+ @property defaultUsername
+ @abstract If the device is protected, instead of prompting the user for a username, this property
+        can be set to default to a specific username as a convience.  The value will persist until
+        reset by setting it to nil.
+ 
+ */
+@property(copy)     NSString*                   defaultUsername;
+
+
+/*!
+ @method requestOpenSessionWithCredentials:
+ @abstract This message requests to open a session on the protected device with the authorized username and
+           passcode.  If the device reports back a failure of credentials, they can be provided here for the
+           launch.
+           A client MUST open a session on a device in order to use the device.
+ @discussion Make sure the receiver's delegate is set prior to sending this message; otherwise this message will be ignored. This request is completed when the delegate receives a "device:didOpenSessionWithError:" message. No more messages will be sent to the delegate if this request fails.
+ */
+
+- (void)requestOpenSessionWithCredentials:(NSString*)username password:(NSString*)password;
+
 /*! 
   @method requestSelectFunctionalUnit:delegate:selector:contextInfo:
   @abstract Requests the scanner device to select a functional unit.

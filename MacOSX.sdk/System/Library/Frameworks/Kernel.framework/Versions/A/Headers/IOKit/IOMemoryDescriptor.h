@@ -70,9 +70,6 @@ enum IODirection
      kIODirectionCompleteWithDataValid = 0x00000080,
 };
 
-
-
-
 #ifdef __LP64__
 typedef IOOptionBits IODirection;
 #endif /* __LP64__ */
@@ -102,6 +99,7 @@ enum {
     kIOMemoryMapperNone		= 0x00000800,	// Shared with Buffer MD
     kIOMemoryHostOnly           = 0x00001000,   // Never DMA accessible
     kIOMemoryPersistent		= 0x00010000,
+    kIOMemoryRemote		= 0x00040000,
     kIOMemoryThreadSafe		= 0x00100000,	// Shared with Buffer MD
     kIOMemoryClearEncrypt	= 0x00200000,	// Shared with Buffer MD
     kIOMemoryUseReserve  	= 0x00800000,	// Shared with Buffer MD
@@ -208,14 +206,14 @@ protected:
     IOOptionBits 	_flags;
 
 
-    void * __iomd_reserved5;
+    void *      	__iomd_reserved5;
+    uint16_t		__iomd_reserved1[4];
+    uintptr_t		__iomd_reserved2;
 
-#ifdef __LP64__
-    uint64_t		__iomd_reserved1;
-    uint64_t		__iomd_reserved2;
-    uint64_t		__iomd_reserved3;
-    uint64_t		__iomd_reserved4;
-#else /* !__LP64__ */
+    uintptr_t		__iomd_reserved3;
+    uintptr_t		__iomd_reserved4;
+
+#ifndef __LP64__
     IODirection         _direction;        /* use _flags instead */
 #endif /* !__LP64__ */
     IOByteCount         _length;           /* length of all ranges */
@@ -521,6 +519,13 @@ public:
     @result The tag. */
 
     virtual IOOptionBits getTag( void );
+
+/*! @function getFlags
+    @abstract Accessor to the retrieve the options the memory descriptor was created with.
+    @discussion Accessor to the retrieve the options the memory descriptor was created with, and flags with its state. These bits are defined by the kIOMemory* enum.
+    @result The flags bitfield. */
+
+    uint64_t getFlags(void);
 
 /*! @function readBytes
     @abstract Copy data from the memory descriptor's buffer to the specified buffer.

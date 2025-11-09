@@ -1,7 +1,7 @@
 /*
 	NSPasteboard.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,29 +19,33 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSPasteboardWriting;
 /* Standard Pasteboard Types */
 
-APPKIT_EXTERN NSString *const NSPasteboardTypeString	 		NS_AVAILABLE_MAC(10_6); // Replaces NSStringPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypePDF			NS_AVAILABLE_MAC(10_6); // Replaces NSPDFPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeTIFF	 		NS_AVAILABLE_MAC(10_6); // Replaces NSTIFFPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypePNG	 		NS_AVAILABLE_MAC(10_6);
-APPKIT_EXTERN NSString *const NSPasteboardTypeRTF	 		NS_AVAILABLE_MAC(10_6); // Replaces NSRTFPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeRTFD	 		NS_AVAILABLE_MAC(10_6); // Replaces NSRTFDPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeHTML	 		NS_AVAILABLE_MAC(10_6); // Replaces NSHTMLPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeTabularText 		NS_AVAILABLE_MAC(10_6); // Replaces NSTabularTextPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeFont 			NS_AVAILABLE_MAC(10_6); // Replaces NSFontPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeRuler 			NS_AVAILABLE_MAC(10_6); // Replaces NSRulerPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeColor 			NS_AVAILABLE_MAC(10_6); // Replaces NSColorPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeSound 			NS_AVAILABLE_MAC(10_6); // Replaces NSSoundPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeMultipleTextSelection 	NS_AVAILABLE_MAC(10_6); // Replaces NSMultipleTextSelectionPboardType
-APPKIT_EXTERN NSString *const NSPasteboardTypeTextFinderOptions		NS_AVAILABLE_MAC(10_7); // Replaces NSPasteboardTypeFindPanelSearchOptions
+typedef NSString * NSPasteboardType NS_EXTENSIBLE_STRING_ENUM;
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeString	 		NS_AVAILABLE_MAC(10_6); // Replaces NSStringPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypePDF			NS_AVAILABLE_MAC(10_6); // Replaces NSPDFPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeTIFF	 		NS_AVAILABLE_MAC(10_6); // Replaces NSTIFFPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypePNG	 		NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeRTF	 		NS_AVAILABLE_MAC(10_6); // Replaces NSRTFPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeRTFD	 		NS_AVAILABLE_MAC(10_6); // Replaces NSRTFDPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeHTML	 		NS_AVAILABLE_MAC(10_6); // Replaces NSHTMLPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeTabularText 		NS_AVAILABLE_MAC(10_6); // Replaces NSTabularTextPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeFont 			NS_AVAILABLE_MAC(10_6); // Replaces NSFontPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeRuler 			NS_AVAILABLE_MAC(10_6); // Replaces NSRulerPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeColor 			NS_AVAILABLE_MAC(10_6); // Replaces NSColorPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeSound 			NS_AVAILABLE_MAC(10_6); // Replaces NSSoundPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeMultipleTextSelection 	NS_AVAILABLE_MAC(10_6); // Replaces NSMultipleTextSelectionPboardType
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeTextFinderOptions		NS_AVAILABLE_MAC(10_7); // Replaces NSPasteboardTypeFindPanelSearchOptions
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeURL                        NS_AVAILABLE_MAC(10_13); // Equivalent to kUTTypeURL
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeFileURL                    NS_AVAILABLE_MAC(10_13); // Equivalent to kUTTypeFileURL
 
 
 /* Standard Pasteboard Names */
 
-APPKIT_EXTERN NSString *NSGeneralPboard;
-APPKIT_EXTERN NSString *NSFontPboard;
-APPKIT_EXTERN NSString *NSRulerPboard;
-APPKIT_EXTERN NSString *NSFindPboard;
-APPKIT_EXTERN NSString *NSDragPboard;
+typedef NSString * NSPasteboardName NS_EXTENSIBLE_STRING_ENUM;
+APPKIT_EXTERN NSPasteboardName NSPasteboardNameGeneral NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSPasteboardName NSPasteboardNameFont NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSPasteboardName NSPasteboardNameRuler NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSPasteboardName NSPasteboardNameFind NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSPasteboardName NSPasteboardNameDrag NS_AVAILABLE_MAC(10_13);
 
 /* Options for prepareForNewContentsWithOptions: */
 
@@ -50,9 +54,20 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardContentsOptions) {
 } NS_ENUM_AVAILABLE_MAC(10_12);
 
 
+/* Pasteboard Reading Options
+ These options can be used for both the -readObjectsForClasses:options: and -canReadObjectForClasses:options: methods, unless otherwise specified.  The currently available options allow for customization of how NSURLs are read from the pasteboard.
+ */
+typedef NSString * NSPasteboardReadingOptionKey NS_STRING_ENUM;
+/* Option for reading NSURLs to restrict the results to file URLs only.  The value for this key is an NSNumber with a boolean value.
+ */
+APPKIT_EXTERN NSPasteboardReadingOptionKey const NSPasteboardURLReadingFileURLsOnlyKey NS_AVAILABLE_MAC(10_6);
+/* Option for reading NSURLs to restrict the results to URLs with contents that conform to any of the provided UTI types.  If the content type of a URL cannot be determined, it will not be considered to match.  The value for this key is an array of UTI type strings.
+ */
+APPKIT_EXTERN NSPasteboardReadingOptionKey const NSPasteboardURLReadingContentsConformToTypesKey NS_AVAILABLE_MAC(10_6);
+
+
 /* An NSPasteboard can contain multiple items.  Any object that implements the NSPasteboardWriting and NSPasteboardReading protocols can be written and read on the pasteboard directly.  This allows common pasteboard classes such as URLs, colors, images, strings, attributed strings, and sounds to be written and read without an intermediary object.  The custom classes of an application can also implement these protocols for use with the pasteboard.
 */
-
 
 @class NSPasteboardItem;
 
@@ -70,11 +85,11 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardContentsOptions) {
     void *		_reserved[3] __unused;
 }
 
-+ (NSPasteboard *)generalPasteboard;
-+ (NSPasteboard *)pasteboardWithName:(NSString *)name;
+@property (class, readonly, strong) NSPasteboard *generalPasteboard;
++ (NSPasteboard *)pasteboardWithName:(NSPasteboardName)name;
 + (NSPasteboard *)pasteboardWithUniqueName;
 
-@property (readonly, copy) NSString *name;
+@property (readonly, copy) NSPasteboardName name;
 
 @property (readonly) NSInteger changeCount;
 
@@ -82,7 +97,7 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardContentsOptions) {
 
 /* Prepares the pasteboard for new contents, clearing the existing contents of the pasteboard. This is the first step in providing data on the pasteboard. Any options specified will persist until prepareForNewContentsWithOptions: or clearContents is called. Returns the change count of the pasteboard.
  */
-- (NSInteger)prepareForNewContentsWithOptions:(NSPasteboardContentsOptions)options NS_SWIFT_NAME(prepareForNewContents(with:)) NS_AVAILABLE_MAC(10_12);
+- (NSInteger)prepareForNewContentsWithOptions:(NSPasteboardContentsOptions)options NS_AVAILABLE_MAC(10_12);
 
 /* Prepares the pasteboard for new contents, clearing the existing contents of the pasteboard.  This is equivalent to calling prepareForNewContentsWithOptions: with no options.  Returns the change count of the pasteboard.
 */
@@ -98,7 +113,7 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardContentsOptions) {
 
 Example: there are five items on the pasteboard, two contain TIFF data, two contain RTF data, one contains a private data type.  Calling -readObjectsForClasses: with just the NSImage class, will return an array containing two image objects.  Calling with just the NSAttributedString class, will return an array containing two attributed strings.  Calling with both classes will return two image objects and two attributed strings.  Note that in the above examples, the count of objects returned is less than the number of items on the pasteboard.  Only objects of the requested classes are returned.  You can always ensure to receive one object per item on the pasteboard by including the NSPasteboardItem class in the array of classes.  In this example, an array containing the NSImage, NSAttributedString, and NSSPasteboardItem classes will return an array with two images, two attributed strings, and one pasteboard item containing the private data type.
 */
-- (nullable NSArray *)readObjectsForClasses:(NSArray<Class> *)classArray options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_6);
+- (nullable NSArray *)readObjectsForClasses:(NSArray<Class> *)classArray options:(nullable NSDictionary<NSPasteboardReadingOptionKey, id> *)options NS_AVAILABLE_MAC(10_6);
 
 
 /* Returns all pasteboard items.  Returns nil if there is an error retrieving pasteboard items.
@@ -118,7 +133,7 @@ Example: there are five items on the pasteboard, two contain TIFF data, two cont
 
 /* Method to validate whether at least one instance of any of the provided classes can be created with data on the pasteboard.  Classes in the provided array must implement the NSPasteboardReading protocol.  Additional options, such as restricting the search to file URLs, or URLs particular content types, can be specified with an options dictionary.  See the comments for the reading option keys for a full description.
 */
-- (BOOL)canReadObjectForClasses:(NSArray<Class> *)classArray options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE_MAC(10_6);
+- (BOOL)canReadObjectForClasses:(NSArray<Class> *)classArray options:(nullable NSDictionary<NSPasteboardReadingOptionKey, id> *)options NS_AVAILABLE_MAC(10_6);
 
 
 /* The following methods all operate on what is conceptually the first item on the pasteboard.  They accept UTIs and pboard type strings.  In a future release they may take only UTIs.
@@ -126,59 +141,47 @@ Example: there are five items on the pasteboard, two contain TIFF data, two cont
 
 /* This method is the equivalent of calling -clearContents, implicitly writing the first pasteboard item, and then calling -addTypes:owner: to promise types for the first pasteboard item.  In general, this method should not be used with -writeObjects: since -writeObjects: will always write additional items to the pasteboard, and will not affect items already on the pasteboard, including the item implicitly created by this method.
 */
-- (NSInteger)declareTypes:(NSArray<NSString *> *)newTypes owner:(nullable id)newOwner;
+- (NSInteger)declareTypes:(NSArray<NSPasteboardType> *)newTypes owner:(nullable id)newOwner;
 
 /* This method adds promises for the specified types to the first pasteboard item.  If the data for those types is provided immediately, the owner can be nil.  If the data for the added types will be provided lazily when requested from the pasteboard, an owner object must be provided that implements the -pasteboard:provideDataForType: method of the NSPasteboardOwner informal protocol.
 */
-- (NSInteger)addTypes:(NSArray<NSString *> *)newTypes owner:(nullable id)newOwner;
+- (NSInteger)addTypes:(NSArray<NSPasteboardType> *)newTypes owner:(nullable id)newOwner;
 
 /* These methods provide information about the types available from the entire pasteboard.
 */
-@property (nullable, readonly, copy) NSArray<NSString *> *types;
-- (nullable NSString *)availableTypeFromArray:(NSArray<NSString *> *)types;
+@property (nullable, readonly, copy) NSArray<NSPasteboardType> *types;
+- (nullable NSPasteboardType)availableTypeFromArray:(NSArray<NSPasteboardType> *)types;
 
 /* These methods set data for the specified type on the first pasteboard item.
 */
-- (BOOL)setData:(nullable NSData *)data forType:(NSString *)dataType;
-- (BOOL)setPropertyList:(id)plist forType:(NSString *)dataType;
-- (BOOL)setString:(NSString *)string forType:(NSString *)dataType;
+- (BOOL)setData:(nullable NSData *)data forType:(NSPasteboardType)dataType;
+- (BOOL)setPropertyList:(id)plist forType:(NSPasteboardType)dataType;
+- (BOOL)setString:(NSString *)string forType:(NSPasteboardType)dataType;
 
 /* These methods return a best representation of all items on the pasteboard for the requested type.  For almost all data types, this simply means returning the data for the first item on the pasteboard that contains that type.  For standard text data types such as string, RTF, and RTFD, the text data from each item will be returned as one combined result separated by newlines.
 */
-- (nullable NSData *)dataForType:(NSString *)dataType;
-- (nullable id)propertyListForType:(NSString *)dataType;
-- (nullable NSString *)stringForType:(NSString *)dataType;
+- (nullable NSData *)dataForType:(NSPasteboardType)dataType;
+- (nullable id)propertyListForType:(NSPasteboardType)dataType;
+- (nullable NSString *)stringForType:(NSPasteboardType)dataType;
 
 
 @end
 
 
 @interface NSPasteboard(FilterServices)
-+ (NSArray<NSString *> *)typesFilterableTo:(NSString *)type;
++ (NSArray<NSPasteboardType> *)typesFilterableTo:(NSPasteboardType)type;
 
 + (NSPasteboard *)pasteboardByFilteringFile:(NSString *)filename;
-+ (NSPasteboard *)pasteboardByFilteringData:(NSData *)data ofType:(NSString *)type;
++ (NSPasteboard *)pasteboardByFilteringData:(NSData *)data ofType:(NSPasteboardType)type;
 + (NSPasteboard *)pasteboardByFilteringTypesInPasteboard:(NSPasteboard *)pboard;
 @end
 
 
 @interface NSObject(NSPasteboardOwner)
-- (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSString *)type;
+- (void)pasteboard:(NSPasteboard *)sender provideDataForType:(NSPasteboardType)type;
 - (void)pasteboardChangedOwner:(NSPasteboard *)sender;
 @end
 
-
-/* Pasteboard Reading Options
-These options can be used for both the -readObjectsForClasses:options: and -canReadObjectForClasses:options: methods, unless otherwise specified.  The currently available options allow for customization of how NSURLs are read from the pasteboard.
-*/
-
-/* Option for reading NSURLs to restrict the results to file URLs only.  The value for this key is an NSNumber with a boolean value.
-*/ 
-APPKIT_EXTERN NSString *const NSPasteboardURLReadingFileURLsOnlyKey NS_AVAILABLE_MAC(10_6);
-
-/* Option for reading NSURLs to restrict the results to URLs with contents that conform to any of the provided UTI types.  If the content type of a URL cannot be determined, it will not be considered to match.  The value for this key is an array of UTI type strings.
-*/ 
-APPKIT_EXTERN NSString *const NSPasteboardURLReadingContentsConformToTypesKey NS_AVAILABLE_MAC(10_6);
 
 /*** NSPasteboardWriting and NSPasteboardReading Protocols ***/
 
@@ -195,19 +198,19 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardWritingOptions) {
 @required
 /* Returns an array of UTI strings of data types the receiver can write to the pasteboard.  By default, data for the first returned type is put onto the pasteboard immediately, with the remaining types being promised.  To change the default behavior, implement -writingOptionsForType:pasteboard: and return NSPasteboardWritingPromised to lazily provided data for types, return no option to provide the data for that type immediately.  Use the pasteboard argument to provide different types based on the pasteboard name, if desired.  Do not perform other pasteboard operations in the method implementation.
  */
-- (NSArray<NSString *> *)writableTypesForPasteboard:(NSPasteboard *)pasteboard;
+- (NSArray<NSPasteboardType> *)writableTypesForPasteboard:(NSPasteboard *)pasteboard;
 
 
 @optional
 /* Returns options for writing data of a type to a pasteboard.  Use the pasteboard argument to provide different options based on the pasteboard name, if desired.  Do not perform other pasteboard operations in the method implementation.
  */
-- (NSPasteboardWritingOptions)writingOptionsForType:(NSString *)type pasteboard:(NSPasteboard *)pasteboard;
+- (NSPasteboardWritingOptions)writingOptionsForType:(NSPasteboardType)type pasteboard:(NSPasteboard *)pasteboard;
 
 
 @required
 /* Returns the appropriate property list object for the provided type.  This will commonly be the NSData for that data type.  However, if this method returns either a string, or any other property-list type, the pasteboard will automatically convert these items to the correct NSData format required for the pasteboard.
  */
-- (nullable id)pasteboardPropertyListForType:(NSString *)type;
+- (nullable id)pasteboardPropertyListForType:(NSPasteboardType)type;
 
 @end
 
@@ -232,19 +235,19 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardReadingOptions) {
 /* Returns an array of data types as UTI strings that the receiver can read from the pasteboard and be initialized from.  By default, the NSData for the type is provided to -initWithPasteboardPropertyList:ofType:.  By implementing -readingOptionsForType:pasteboard: and specifying a different option, the NSData for that type can be automatically converted to an NSString or property list object before being passed to -readingOptionsForType:pasteboard:.  Use the pasteboard argument to provide different types based on the pasteboard name, if desired.  Do not perform other pasteboard operations in the method implementation.
  */
 @required
-+ (NSArray<NSString *> *)readableTypesForPasteboard:(NSPasteboard *)pasteboard;
++ (NSArray<NSPasteboardType> *)readableTypesForPasteboard:(NSPasteboard *)pasteboard;
 
 
 @optional
 /* Returns options for reading data of a type from a pasteboard.  Use the pasteboard argument to provide different options based on the pasteboard name, if desired.  Do not perform other pasteboard operations in the method implementation.
  */
-+ (NSPasteboardReadingOptions)readingOptionsForType:(NSString *)type pasteboard:(NSPasteboard *)pasteboard;
++ (NSPasteboardReadingOptions)readingOptionsForType:(NSPasteboardType)type pasteboard:(NSPasteboard *)pasteboard;
 
 
 /* Initializes an instance with a property list object and a type string.  By default, the property list object is the NSData for that type on the pasteboard.  By specifying an NSPasteboardReading option for a type, the data on the pasteboard can be retrieved and automatically converted to a string or property list instead.  This method is considered optional because if there is a single type returned from +readableTypesForPasteboard, and that type uses the NSPasteboardReadingAsKeyedArchive reading option, then initWithCoder: will be called to initialize a new instance from the keyed archive.
  */
 @optional
-- (nullable id)initWithPasteboardPropertyList:(id)propertyList ofType:(NSString *)type;
+- (nullable id)initWithPasteboardPropertyList:(id)propertyList ofType:(NSPasteboardType)type;
 
 @end
 
@@ -288,29 +291,29 @@ typedef NS_OPTIONS(NSUInteger, NSPasteboardReadingOptions) {
 /*** Pboard Types ***/
 
 /* Use of pboard types should be replaced with use of UTIs.  Pboard types will be deprecated in a future release. */
-APPKIT_EXTERN NSString *NSStringPboardType;	    // Use NSPasteboardTypeString
-APPKIT_EXTERN NSString *NSFilenamesPboardType;	    // Use -writeObjects: to write file URLs to the pasteboard
-APPKIT_EXTERN NSString *NSTIFFPboardType;	    // Use NSPasteboardTypeTIFF
-APPKIT_EXTERN NSString *NSRTFPboardType;	    // Use NSPasteboardTypeRTF
-APPKIT_EXTERN NSString *NSTabularTextPboardType;    // Use NSPasteboardTypeTabularText
-APPKIT_EXTERN NSString *NSFontPboardType;	    // Use NSPasteboardTypeFont
-APPKIT_EXTERN NSString *NSRulerPboardType;	    // Use NSPasteboardTypeRuler
-APPKIT_EXTERN NSString *NSColorPboardType;	    // Use NSPasteboardTypeColor
-APPKIT_EXTERN NSString *NSRTFDPboardType;	    // Use NSPasteboardTypeRTFD
-APPKIT_EXTERN NSString *NSHTMLPboardType;	    // Use NSPasteboardTypeHTML
-APPKIT_EXTERN NSString *NSURLPboardType;	    // Use -writeObjects: to write URLs to the pasteboard
-APPKIT_EXTERN NSString *NSPDFPboardType;	    // Use NSPasteboardTypePDF
-APPKIT_EXTERN NSString *NSMultipleTextSelectionPboardType   NS_AVAILABLE_MAC(10_5); // Use NSPasteboardTypeMultipleTextSelection
+APPKIT_EXTERN NSPasteboardType NSStringPboardType;	    // Use NSPasteboardTypeString
+APPKIT_EXTERN NSPasteboardType NSFilenamesPboardType;	    // Use NSPasteboardTypeFileURL
+APPKIT_EXTERN NSPasteboardType NSTIFFPboardType;	    // Use NSPasteboardTypeTIFF
+APPKIT_EXTERN NSPasteboardType NSRTFPboardType;	    // Use NSPasteboardTypeRTF
+APPKIT_EXTERN NSPasteboardType NSTabularTextPboardType;    // Use NSPasteboardTypeTabularText
+APPKIT_EXTERN NSPasteboardType NSFontPboardType;	    // Use NSPasteboardTypeFont
+APPKIT_EXTERN NSPasteboardType NSRulerPboardType;        // Use NSPasteboardTypeRuler
+APPKIT_EXTERN NSPasteboardType NSColorPboardType;        // Use NSPasteboardTypeColor
+APPKIT_EXTERN NSPasteboardType NSRTFDPboardType;        // Use NSPasteboardTypeRTFD
+APPKIT_EXTERN NSPasteboardType NSHTMLPboardType;        // Use NSPasteboardTypeHTML
+APPKIT_EXTERN NSPasteboardType NSURLPboardType;        // Use NSPasteboardTypeURL
+APPKIT_EXTERN NSPasteboardType NSPDFPboardType;        // Use NSPasteboardTypePDF
+APPKIT_EXTERN NSPasteboardType NSMultipleTextSelectionPboardType   NS_AVAILABLE_MAC(10_5); // Use NSPasteboardTypeMultipleTextSelection
 
-APPKIT_EXTERN NSString *NSPostScriptPboardType;	    // Use @"com.adobe.encapsulated-postscript"
-APPKIT_EXTERN NSString *NSVCardPboardType; // Use (NSString *)kUTTypeVCard
-APPKIT_EXTERN NSString *NSInkTextPboardType; // Use (NSString *)kUTTypeInkText
+APPKIT_EXTERN NSPasteboardType NSPostScriptPboardType;        // Use @"com.adobe.encapsulated-postscript"
+APPKIT_EXTERN NSPasteboardType NSVCardPboardType; // Use (NSString *)kUTTypeVCard
+APPKIT_EXTERN NSPasteboardType NSInkTextPboardType; // Use (NSString *)kUTTypeInkText
 
 // HFS Promise type for dragging only
-APPKIT_EXTERN NSString *NSFilesPromisePboardType; // Use (NSString *)kPasteboardTypeFileURLPromise
+APPKIT_EXTERN NSPasteboardType NSFilesPromisePboardType; // Use (NSString *)kPasteboardTypeFileURLPromise
 
 /* This UTI constant has been replaced by NSPasteboardTypeTextFinderOptions. */
-APPKIT_EXTERN NSString *const NSPasteboardTypeFindPanelSearchOptions	NS_AVAILABLE_MAC(10_6);
+APPKIT_EXTERN NSPasteboardType const NSPasteboardTypeFindPanelSearchOptions    NS_AVAILABLE_MAC(10_6);
 
 /*** File Contents ***/
 
@@ -318,24 +321,30 @@ APPKIT_EXTERN NSString *const NSPasteboardTypeFindPanelSearchOptions	NS_AVAILABL
 
 @interface NSPasteboard(NSFileContents)
 - (BOOL)writeFileContents:(NSString *)filename;
-- (nullable NSString *)readFileContentsType:(nullable NSString *)type toFile:(NSString *)filename;
+- (nullable NSString *)readFileContentsType:(nullable NSPasteboardType)type toFile:(NSString *)filename;
 
 - (BOOL)writeFileWrapper:(NSFileWrapper *)wrapper;
 - (nullable NSFileWrapper *)readFileWrapper;
 
 @end
 
-APPKIT_EXTERN NSString *NSFileContentsPboardType;   
+APPKIT_EXTERN NSPasteboardType NSFileContentsPboardType;
 
-APPKIT_EXTERN NSString * __nullable NSCreateFilenamePboardType( NSString *fileType);
-APPKIT_EXTERN NSString * __nullable NSCreateFileContentsPboardType( NSString *fileType);
-APPKIT_EXTERN NSString * __nullable NSGetFileType( NSString *pboardType);
-APPKIT_EXTERN NSArray<NSString *> * __nullable NSGetFileTypes( NSArray<NSString *> *pboardTypes);
+APPKIT_EXTERN NSPasteboardType __nullable NSCreateFilenamePboardType(NSString *fileType);
+APPKIT_EXTERN NSPasteboardType __nullable NSCreateFileContentsPboardType(NSString *fileType);
+APPKIT_EXTERN NSString * __nullable NSGetFileType(NSPasteboardType pboardType);
+APPKIT_EXTERN NSArray<NSString *> * __nullable NSGetFileTypes(NSArray<NSPasteboardType> *pboardTypes);
 
 
 /*** Deprecated ***/
 
 /*** Everything remaining in this header is deprecated and should not be used ***/
+
+APPKIT_EXTERN NSPasteboardName NSGeneralPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameGeneral", 10.0, 10.13);
+APPKIT_EXTERN NSPasteboardName NSFontPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameFont", 10.0, 10.13);
+APPKIT_EXTERN NSPasteboardName NSRulerPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameRuler", 10.0, 10.13);
+APPKIT_EXTERN NSPasteboardName NSFindPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameFind", 10.0, 10.13);
+APPKIT_EXTERN NSPasteboardName NSDragPboard NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSPasteboardNameDrag", 10.0, 10.13);
 
 /* NSPICTPboardType is deprecated in SnowLeopard.  The PICT format was formally deprecated in Tiger along with QuickDraw.  Applications should not be explicitly providing or looking for PICT data on the pasteboard.
 
@@ -343,7 +352,7 @@ To aid in this deprecation, if PICT is the only image type on the pasteboard, as
 
 Although NSPICTPboardType and its UTI equivalent kUTTypePICT will appear in a pasteboard's type array retrieved from the existing NSPasteboard API, it may cease to be reported in future releases.
 */
-APPKIT_EXTERN NSString *NSPICTPboardType NS_DEPRECATED_MAC(10_0, 10_6);
+APPKIT_EXTERN NSPasteboardType NSPICTPboardType NS_DEPRECATED_MAC(10_0, 10_6);
 
 NS_ASSUME_NONNULL_END
 

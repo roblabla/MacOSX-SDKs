@@ -1,5 +1,5 @@
 /*	NSXMLNode.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -22,11 +22,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 	NSXMLProcessingInstructionKind,
 	NSXMLCommentKind,
 	NSXMLTextKind,
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 	NSXMLDTDKind NS_SWIFT_NAME(DTDKind),
-#else
-        NSXMLDTDKind NS_SWIFT_NAME(dtd),
-#endif
 	NSXMLEntityDeclarationKind,
 	NSXMLAttributeDeclarationKind,
 	NSXMLElementDeclarationKind,
@@ -169,25 +165,21 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 #endif
 
 /*!
-    @method kind
     @abstract Returns an element, attribute, entity, or notation DTD node based on the full XML string.
 */
 @property (readonly) NSXMLNodeKind kind; //primitive
 
 /*!
-    @method name
     @abstract Sets the nodes name. Applicable for element, attribute, namespace, processing-instruction, document type declaration, element declaration, attribute declaration, entity declaration, and notation declaration.
 */
 @property (nullable, copy) NSString *name; //primitive
 
 /*!
-    @method objectValue
     @abstract Sets the content of the node. Setting the objectValue removes all existing children including processing instructions and comments. Setting the object value on an element creates a single text node child.
 */
 @property (nullable, retain) id objectValue; //primitive
 
 /*!
-    @method stringValue:
     @abstract Sets the content of the node. Setting the stringValue removes all existing children including processing instructions and comments. Setting the string value on an element creates a single text node child. The getter returns the string value of the node, which may be either its content or child text nodes, depending on the type of node. Elements are recursed and text nodes concatenated in document order with no intervening spaces.
 */
 @property (nullable, copy) NSString *stringValue; //primitive
@@ -203,37 +195,31 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 #endif
 
 /*!
-    @method index
     @abstract A node's index amongst its siblings.
 */
 @property (readonly) NSUInteger index; //primitive
 
 /*!
-    @method level
     @abstract The depth of the node within the tree. Documents and standalone nodes are level 0.
 */
 @property (readonly) NSUInteger level;
 
 /*!
-    @method rootDocument
     @abstract The encompassing document or nil.
 */
 @property (nullable, readonly, retain) NSXMLDocument *rootDocument;
 
 /*!
-    @method parent
     @abstract The parent of this node. Documents and standalone Nodes have a nil parent; there is not a 1-to-1 relationship between parent and children, eg a namespace cannot be a child but has a parent element.
 */
 @property (nullable, readonly, copy) NSXMLNode *parent; //primitive
 
 /*!
-    @method childCount
     @abstract The amount of children, relevant for documents, elements, and document type declarations. Use this instead of [[self children] count].
 */
 @property (readonly) NSUInteger childCount; //primitive
 
 /*!
-    @method children
     @abstract An immutable array of child nodes. Relevant for documents, elements, and document type declarations.
 */
 @property (nullable, readonly, copy) NSArray<NSXMLNode *> *children; //primitive
@@ -245,25 +231,21 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 - (nullable NSXMLNode *)childAtIndex:(NSUInteger)index; //primitive
 
 /*!
-    @method previousSibling:
     @abstract Returns the previous sibling, or nil if there isn't one.
 */
 @property (nullable, readonly, copy) NSXMLNode *previousSibling;
 
 /*!
-    @method nextSibling:
     @abstract Returns the next sibling, or nil if there isn't one.
 */
 @property (nullable, readonly, copy) NSXMLNode *nextSibling;
 
 /*!
-    @method previousNode:
     @abstract Returns the previous node in document order. This can be used to walk the tree backwards.
 */
 @property (nullable, readonly, copy) NSXMLNode *previousNode;
 
 /*!
-    @method nextNode:
     @abstract Returns the next node in document order. This can be used to walk the tree forwards.
 */
 @property (nullable, readonly, copy) NSXMLNode *nextNode;
@@ -275,7 +257,6 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 - (void)detach; //primitive
 
 /*!
-    @method XPath
     @abstract Returns the XPath to this node, for example foo/bar[2]/baz.
 */
 @property (nullable, readonly, copy) NSString *XPath;
@@ -285,19 +266,16 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 #endif
 
 /*!
-	@method localName
 	@abstract Returns the local name bar if this attribute or element's name is foo:bar
 */
 @property (nullable, readonly, copy) NSString *localName; //primitive
 
 /*!
-	@method prefix
 	@abstract Returns the prefix foo if this attribute or element's name if foo:bar
 */
 @property (nullable, readonly, copy) NSString *prefix; //primitive
 
 /*!
-	@method URI
 	@abstract Set the URI of this element, attribute, or document. For documents it is the URI of document origin. Getter returns the URI of this element, attribute, or document. For documents it is the URI of document origin and is automatically set when using initWithContentsOfURL.
 */
 @property (nullable, copy) NSString *URI; //primitive
@@ -326,13 +304,11 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
 #endif
 
 /*!
-    @method description
     @abstract Used for debugging. May give more information than XMLString.
 */
 @property (readonly, copy) NSString *description;
 
 /*!
-    @method XMLString
     @abstract The representation of this node as it would appear in an XML document.
 */
 @property (readonly, copy) NSString *XMLString;
@@ -341,7 +317,7 @@ typedef NS_ENUM(NSUInteger, NSXMLNodeKind) {
     @method XMLStringWithOptions:
     @abstract The representation of this node as it would appear in an XML document, with various output options available.
 */
-- (NSString *)XMLStringWithOptions:(NSUInteger)options;
+- (NSString *)XMLStringWithOptions:(NSXMLNodeOptions)options;
 
 /*!
     @method canonicalXMLStringPreservingComments:

@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSUInteger, MTLPixelFormat)
 {
@@ -73,6 +74,8 @@ typedef NS_ENUM(NSUInteger, MTLPixelFormat)
 
     MTLPixelFormatRG11B10Float = 92,
     MTLPixelFormatRGB9E5Float = 93,
+
+    MTLPixelFormatBGR10A2Unorm  NS_AVAILABLE(10_13, 11_0) = 94,
 
     MTLPixelFormatBGR10_XR      NS_AVAILABLE_IOS(10_0) = 554,
     MTLPixelFormatBGR10_XR_sRGB NS_AVAILABLE_IOS(10_0) = 555,

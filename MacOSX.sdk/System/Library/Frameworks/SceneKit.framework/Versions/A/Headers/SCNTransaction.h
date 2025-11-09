@@ -1,7 +1,7 @@
 //
 //  SCNTransaction.h
 //
-//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

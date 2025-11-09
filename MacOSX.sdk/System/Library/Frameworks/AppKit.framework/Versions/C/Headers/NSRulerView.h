@@ -1,7 +1,7 @@
 /*
     NSRulerView.h
     Application Kit
-    Copyright (c) 1994-2016, Apple Inc.
+    Copyright (c) 1994-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -12,16 +12,20 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSScrollView, NSRulerMarker;
 
-/* Values for NSRulerOrientation */
 typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
     NSHorizontalRuler,
     NSVerticalRuler
 };
 
+typedef NSString * NSRulerViewUnitName NS_EXTENSIBLE_STRING_ENUM;
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitInches NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitCentimeters NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPoints NS_AVAILABLE_MAC(10_13);
+APPKIT_EXTERN NSRulerViewUnitName const NSRulerViewUnitPicas NS_AVAILABLE_MAC(10_13);
+
 @interface NSRulerView : NSView {
-  /*All instance variables are private*/
-  @private
-    NSScrollView *_scrollView;
+@private
+    __weak NSScrollView *_scrollView;
     NSRulerOrientation _orientation;
 
     NSString *_units;
@@ -31,7 +35,7 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
     CGFloat _thicknessForMarkers;
     CGFloat _thicknessForAccessoryView;
 
-    NSView *_clientView;
+    __weak NSView *_clientView;
     NSMutableArray *_markers;
     NSView *_accessoryView;
 
@@ -50,7 +54,7 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 
 /************************* Registering new units *************************/
 
-+ (void)registerUnitWithName:(NSString *)unitName abbreviation:(NSString *)abbreviation unitToPointsConversionFactor:(CGFloat)conversionFactor stepUpCycle:(NSArray<NSNumber *> *)stepUpCycle stepDownCycle:(NSArray<NSNumber *> *)stepDownCycle;
++ (void)registerUnitWithName:(NSRulerViewUnitName)unitName abbreviation:(NSString *)abbreviation unitToPointsConversionFactor:(CGFloat)conversionFactor stepUpCycle:(NSArray<NSNumber *> *)stepUpCycle stepDownCycle:(NSArray<NSNumber *> *)stepDownCycle;
 
 /**************************** Initialization ****************************/
 
@@ -61,7 +65,7 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 
 /**************************** Basic setup ****************************/
 
-@property (nullable, assign) NSScrollView *scrollView;
+@property (nullable, weak) NSScrollView *scrollView;
     // A ruler uses its scrollView to finds it's document view to see whether it should be flipped.  The set method is generally called only by the scroll view itself.  You should not have to set this.
 
 @property NSRulerOrientation orientation;
@@ -87,7 +91,7 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 
 /**************************** Rule configuration ****************************/
 
-@property (copy) NSString *measurementUnits;
+@property (copy) NSRulerViewUnitName measurementUnits;
     // The units of the ruler start out with the user's preferred measurement.  They can be changed if desired.  The units set must be registered with the ruler factory.  By default Inches, Centimeters, Picas, and Points are supported.
 
 @property CGFloat originOffset;
@@ -95,7 +99,7 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 
 /**************************** Client view setup ****************************/
 
-@property (nullable, assign) NSView *clientView;
+@property (nullable, weak) NSView *clientView;
 
 - (void)addMarker:(NSRulerMarker *)marker;
 - (void)removeMarker:(NSRulerMarker *)marker;
@@ -162,7 +166,7 @@ typedef NS_ENUM(NSUInteger, NSRulerOrientation) {
 - (void)rulerView:(NSRulerView *)ruler willSetClientView:(NSView *)newClient;
     // This is sent to the existing client before it is replaced by the new client.  The existing client can catch this to clean up any cached state it keeps while it is the client of a ruler.
 
-// This additional mapping allows mapping between location and point for clients with rotated coordinate system (i.e. vertical text view)
+// This additional mapping allows mapping between location and point for clients with rotated coordinate system (e.g. vertical text view)
 - (CGFloat)rulerView:(NSRulerView *)ruler locationForPoint:(NSPoint)point NS_AVAILABLE_MAC(10_7);
 - (NSPoint)rulerView:(NSRulerView *)ruler pointForLocation:(CGFloat)point NS_AVAILABLE_MAC(10_7);
 @end

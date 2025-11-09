@@ -1,11 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 57895557-AFDF-3CE1-8119-97BF9F7FFF8B', 'x86_64: E119DFDF-592B-35DF-8D44-73293AF31595' ]
+uuids:           [ 'i386: 94F2BEA7-AE6A-3C99-8484-0E5249C44FE1', 'x86_64: CC12BE09-44EF-3789-A80F-E6351AB13808' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DiskImages.framework/Versions/A/DiskImages
-current-version: 444.30.5
+current-version: 480
 compatibility-version: 1.0.8
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     re-exports:      [ /usr/lib/libobjc.A.dylib ]
@@ -63,17 +62,13 @@ exports:
                        _DIDiskImageFlush, _DIDiskImageGetBackingStore, _DIDiskImageGetImageFormat, 
                        _DIDiskImageGetSectorCount, _DIDiskImageGetUniqueIDDict, _DIDiskImageGetVirtualBandSize, 
                        _DIDiskImageHandleIdle, _DIDiskImageHandlePowerChange, _DIDiskImageHasChecksum, 
-                       _DIDiskImageHasPartitionMap, _DIDiskImageHasValidChecksum, 
-                       _DIDiskImageInUse, _DIDiskImageIsEncrypted, _DIDiskImageIsHFS, 
-                       _DIDiskImageIsHFSPlus, _DIDiskImageIsHFSPlusWithWrapper, _DIDiskImageIsHFSX, 
-                       _DIDiskImageIsISO9660, _DIDiskImageIsKernelCompatible, _DIDiskImageIsMFS, 
-                       _DIDiskImageIsProDOS, _DIDiskImageIsUDF, _DIDiskImageIsUFS, 
-                       _DIDiskImageIsWriteEnabled, _DIDiskImageObjectCallDIProgressCallBackProc, 
-                       _DIDiskImageObjectGetClassName, _DIDiskImageObjectGetDIProgressCallBackProcPtr, 
-                       _DIDiskImageObjectGetProperty, _DIDiskImageObjectGetRefCon, 
-                       _DIDiskImageObjectRelease, _DIDiskImageObjectRetain, _DIDiskImageObjectSetDIProgressCallBackProcPtr, 
-                       _DIDiskImageObjectSetProperty, _DIDiskImageObjectSetRefCon, 
-                       _DIDiskImageReadSectors, _DIDiskImageSetProgressCancelProcPtr, 
+                       _DIDiskImageHasValidChecksum, _DIDiskImageInUse, _DIDiskImageIsEncrypted, 
+                       _DIDiskImageIsKernelCompatible, _DIDiskImageIsWriteEnabled, 
+                       _DIDiskImageObjectCallDIProgressCallBackProc, _DIDiskImageObjectGetClassName, 
+                       _DIDiskImageObjectGetDIProgressCallBackProcPtr, _DIDiskImageObjectGetProperty, 
+                       _DIDiskImageObjectGetRefCon, _DIDiskImageObjectRelease, _DIDiskImageObjectRetain, 
+                       _DIDiskImageObjectSetDIProgressCallBackProcPtr, _DIDiskImageObjectSetProperty, 
+                       _DIDiskImageObjectSetRefCon, _DIDiskImageReadSectors, _DIDiskImageSetProgressCancelProcPtr, 
                        _DIDiskImageSetProgressMessageProcPtr, _DIDiskImageSetProgressPercentProcPtr, 
                        _DIDiskImageSetSectorCount, _DIDiskImageValidateChecksum, 
                        _DIDiskImageValidateChecksumWithFlags, _DIDiskImageWriteSectors, 
@@ -97,25 +92,25 @@ exports:
                        _DIIsPotentiallyValidDiskImage, _DIKenCodeCompressorCalculateBufferSize, 
                        _DIKenCodeCompressorCompressData, _DIKenCodeCompressorDelete, 
                        _DIKenCodeCompressorNew, _DILoadDriver, _DIMakeStubBLKX, _DIMediaKitCreateMKMediaRef, 
-                       _DIMediaKitVectorProc, _DIMediaKitVectorProcWithOffset, _DIMountPointGetInformation, 
-                       _DINDIFDiskImageGetNDIFHeader, _DIPartitionSchemeScan, _DIRawDevEntryToBlockDevice, 
-                       _DIResolveBackingStoreToDiskImage, _DIResolvePathsToDiskImage, 
-                       _DIResolvePathsToDiskImageWithOptions, _DIResolveURLToBackingStore, 
-                       _DIResolveURLToDiskImage, _DIResourceFileAddResource, _DIResourceFileChangedResource, 
-                       _DIResourceFileCopyResourcesFrom, _DIResourceFileCopyXMLRepresentation, 
-                       _DIResourceFileCountResources, _DIResourceFileCountTypes, 
-                       _DIResourceFileCreateWithXMLRepresentation, _DIResourceFileDeleteAllResources, 
-                       _DIResourceFileDeleteAllResourcesOfType, _DIResourceFileDetachResource, 
-                       _DIResourceFileGetIndResource, _DIResourceFileGetIndType, 
-                       _DIResourceFileGetResAttrs, _DIResourceFileGetResInfo, _DIResourceFileGetResource, 
-                       _DIResourceFileReleaseResource, _DIResourceFileSetResAttrs, 
-                       _DIResourceFileSetResInfo, _DIResourceFileUpdateResFile, _DIResourceFileWriteResource, 
-                       _DISetDebugLevel, _DISetVerboseLevel, _DIShadowedDiskImageCopyDefaultShadowFileURL, 
-                       _DIShadowedDiskImageCreateDefaultShadowFileName, _DIShadowedDiskImageNewWithDiskImageAndShadowURL, 
-                       _DIStrError, _DIStrError_r, _DISubDiskImageCreateNewWithDiskImage, 
-                       _DIUDIFDiskImageGetBLKX, _DIUDIFDiskImageGetBLKXStartingAt, 
-                       _DIUDIFDiskImageGetImageVariant, _DIUDIFDiskImageGetUDIFFileHeader, 
-                       _DIUDIFFileAccessAppendData, _DIUDIFFileAccessCloseFile, _DIUDIFFileAccessCreateWithCFURL, 
+                       _DIMountPointGetInformation, _DINDIFDiskImageGetNDIFHeader, 
+                       _DIPartitionSchemeScan, _DIRawDevEntryToBlockDevice, _DIResolveBackingStoreToDiskImage, 
+                       _DIResolvePathsToDiskImage, _DIResolvePathsToDiskImageWithOptions, 
+                       _DIResolveURLToBackingStore, _DIResolveURLToDiskImage, _DIResourceFileAddResource, 
+                       _DIResourceFileChangedResource, _DIResourceFileCopyResourcesFrom, 
+                       _DIResourceFileCopyXMLRepresentation, _DIResourceFileCountResources, 
+                       _DIResourceFileCountTypes, _DIResourceFileCreateWithXMLRepresentation, 
+                       _DIResourceFileDeleteAllResources, _DIResourceFileDeleteAllResourcesOfType, 
+                       _DIResourceFileDetachResource, _DIResourceFileGetIndResource, 
+                       _DIResourceFileGetIndType, _DIResourceFileGetResAttrs, _DIResourceFileGetResInfo, 
+                       _DIResourceFileGetResource, _DIResourceFileReleaseResource, 
+                       _DIResourceFileSetResAttrs, _DIResourceFileSetResInfo, _DIResourceFileUpdateResFile, 
+                       _DIResourceFileWriteResource, _DISetDebugLevel, _DISetVerboseLevel, 
+                       _DIShadowedDiskImageCopyDefaultShadowFileURL, _DIShadowedDiskImageCreateDefaultShadowFileName, 
+                       _DIShadowedDiskImageNewWithDiskImageAndShadowURL, _DIStrError, 
+                       _DIStrError_r, _DISubDiskImageCreateNewWithDiskImage, _DIUDIFDiskImageGetBLKX, 
+                       _DIUDIFDiskImageGetBLKXStartingAt, _DIUDIFDiskImageGetImageVariant, 
+                       _DIUDIFDiskImageGetUDIFFileHeader, _DIUDIFFileAccessAppendData, 
+                       _DIUDIFFileAccessCloseFile, _DIUDIFFileAccessCreateWithCFURL, 
                        _DIUDIFFileAccessDelete, _DIUDIFFileAccessDeleteFile, _DIUDIFFileAccessFlattenFile, 
                        _DIUDIFFileAccessFlattenFileWithEmbedOptions, _DIUDIFFileAccessGetBackingStore, 
                        _DIUDIFFileAccessGetHeaderStyle, _DIUDIFFileAccessGetResourceFile, 
@@ -134,5 +129,5 @@ exports:
                        _DI_logNDIFHeader, _DI_logNDIFSegmentInfo, _DI_logNDIFSourceSubTable, 
                        _DI_logUDIFFileHeader, _DI_logUDIFPartitionList, _DI_logUDIFRun, 
                        _DI_logUDIFblkx, _DI_logUDIFblkx_ptr, _DI_logVH, _DI_logVH_to_file, 
-                       _MKCalculatePartitionParameters, _MKCopyDefaultLayouts, _MKCopyLayoutInfoArrayWithOverhead ]
+                       _MKCopyDefaultLayouts, _MKCopyLayoutInfoArrayWithOverhead ]
 ...

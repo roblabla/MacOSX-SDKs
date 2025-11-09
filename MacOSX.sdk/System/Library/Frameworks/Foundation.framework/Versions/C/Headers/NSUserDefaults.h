@@ -1,5 +1,5 @@
 /*	NSUserDefaults.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
@@ -57,9 +57,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 /*!
  +standardUserDefaults returns a global instance of NSUserDefaults configured to search the current application's search list.
  */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSUserDefaults *standardUserDefaults;
-#endif
 
 /// +resetStandardUserDefaults releases the standardUserDefaults and sets it to nil. A new standardUserDefaults will be created the next time it's accessed. The only visible effect this has is that all KVO observers of the previous standardUserDefaults will no longer be observing it.
 + (void)resetStandardUserDefaults;
@@ -68,10 +66,10 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (instancetype)init;
 
 /// -initWithSuiteName: initializes an instance of NSUserDefaults that searches the shared preferences search list for the domain 'suitename'. For example, using the identifier of an application group will cause the receiver to search the preferences for that group. Passing the current application's bundle identifier, NSGlobalDomain, or the corresponding CFPreferences constants is an error. Passing nil will search the default search list.
-- (nullable instancetype)initWithSuiteName:(nullable NSString *)suitename NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithSuiteName:(nullable NSString *)suitename API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)) NS_DESIGNATED_INITIALIZER;
 
 /// -initWithUser: is equivalent to -init
-- (nullable id)initWithUser:(NSString *)username NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
+- (nullable id)initWithUser:(NSString *)username API_DEPRECATED("Use -init instead", macos(10.0,10.9), ios(2.0,7.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /*!
  -objectForKey: will search the receiver's search list for a default with the key 'defaultName' and return it. If another process has changed defaults in the search list, NSUserDefaults will automatically update to the latest values. If the key in question has been marked as ubiquitous via a Defaults Configuration File, the latest value may not be immediately available, and the registered value will be returned instead.
@@ -103,7 +101,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (NSInteger)integerForKey:(NSString *)defaultName;
 /// -floatForKey: is similar to -integerForKey:, except that it returns a float, and boolean values will not be converted.
 - (float)floatForKey:(NSString *)defaultName;
-/// -doubleForKey: is similar to -doubleForKey:, except that it returns a double, and boolean values will not be converted.
+/// -doubleForKey: is similar to -integerForKey:, except that it returns a double, and boolean values will not be converted.
 - (double)doubleForKey:(NSString *)defaultName;
 /*!
  -boolForKey: is equivalent to -objectForKey:, except that it converts the returned value to a BOOL. If the value is an NSNumber, NO will be returned if the value is 0, YES otherwise. If the value is an NSString, values of "YES" or "1" will return YES, and values of "NO", "0", or any other string will return NO. If the value is absent or can't be converted to a BOOL, NO will be returned.
@@ -113,7 +111,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 /*!
  -URLForKey: is equivalent to -objectForKey: except that it converts the returned value to an NSURL. If the value is an NSString path, then it will construct a file URL to that path. If the value is an archived URL from -setURL:forKey: it will be unarchived. If the value is absent or can't be converted to an NSURL, nil will be returned.
  */
-- (nullable NSURL *)URLForKey:(NSString *)defaultName NS_AVAILABLE(10_6, 4_0);
+- (nullable NSURL *)URLForKey:(NSString *)defaultName API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /// -setInteger:forKey: is equivalent to -setObject:forKey: except that the value is converted from an NSInteger to an NSNumber.
 - (void)setInteger:(NSInteger)value forKey:(NSString *)defaultName;
@@ -124,7 +122,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 /// -setBool:forKey: is equivalent to -setObject:forKey: except that the value is converted from a BOOL to an NSNumber.
 - (void)setBool:(BOOL)value forKey:(NSString *)defaultName;
 /// -setURL:forKey is equivalent to -setObject:forKey: except that the value is archived to an NSData. Use -URLForKey: to retrieve values set this way.
-- (void)setURL:(nullable NSURL *)url forKey:(NSString *)defaultName NS_AVAILABLE(10_6, 4_0);
+- (void)setURL:(nullable NSURL *)url forKey:(NSString *)defaultName API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /*!
  -registerDefaults: adds the registrationDictionary to the last item in every search list. This means that after NSUserDefaults has looked for a value in every other valid location, it will look in registered defaults, making them useful as a "fallback" value. Registered defaults are never stored between runs of an application, and are visible only to the application that registers them.
@@ -156,7 +154,7 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 - (void)removeVolatileDomainForName:(NSString *)domainName;
 
 /// -persistentDomainNames returns an incomplete list of domains that have preferences stored in them.
-- (NSArray *)persistentDomainNames NS_DEPRECATED(10_0, 10_9, 2_0, 7_0);
+- (NSArray *)persistentDomainNames API_DEPRECATED("Not recommended", macos(10.0,10.9), ios(2.0,7.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /// -persistentDomainForName: returns a dictionary representation of the search list entry specified by 'domainName', the current user, and any host.
 - (nullable NSDictionary<NSString *, id> *)persistentDomainForName:(NSString *)domainName;
@@ -187,24 +185,24 @@ FOUNDATION_EXPORT NSString * const NSRegistrationDomain;
 /*!
  NSUserDefaultsSizeLimitExceededNotification is posted on the main queue when more data is stored in user defaults than is allowed. Currently there is no limit for local user defaults except on tvOS, where a warning notification will be posted at 512kB, and the process terminated at 1MB. For ubiquitous defaults, the limit depends on the logged in iCloud user.
  */
-FOUNDATION_EXPORT NSNotificationName const NSUserDefaultsSizeLimitExceededNotification NS_AVAILABLE_IOS(9_3);
+FOUNDATION_EXPORT NSNotificationName const NSUserDefaultsSizeLimitExceededNotification API_AVAILABLE(ios(9.3), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /*!
  NSUbiquitousUserDefaultsNoCloudAccountNotification is posted on the main queue to the default notification center when a cloud default is set, but no iCloud user is logged in.
  
  This is not necessarily an error: ubiquitous defaults set when no iCloud user is logged in will be uploaded the next time one is available if configured to do so.
  */
-FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsNoCloudAccountNotification NS_AVAILABLE_IOS(9_3);
+FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsNoCloudAccountNotification API_AVAILABLE(ios(9.3), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /*!
  NSUbiquitousUserDefaultsDidChangeAccountsNotification is posted on the main queue to the default notification center when the user changes the primary iCloud account. The keys and values in the local key-value store have been replaced with those from the new account, regardless of the relative timestamps.
  */
-FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsDidChangeAccountsNotification NS_AVAILABLE_IOS(9_3);
+FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsDidChangeAccountsNotification API_AVAILABLE(ios(9.3), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /*!
  NSUbiquitousUserDefaultsCompletedInitialSyncNotification is posted on the main queue when ubiquitous defaults finish downloading the first time a device is connected to an iCloud account, and when a user switches their primary iCloud account.
  */
-FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsCompletedInitialSyncNotification NS_AVAILABLE_IOS(9_3);
+FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsCompletedInitialSyncNotification API_AVAILABLE(ios(9.3), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /*!
  NSUserDefaultsDidChangeNotification is posted whenever any user defaults changed within the current process, but is not posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.

@@ -390,8 +390,8 @@ CMTimebaseGetRate(
 CM_EXPORT OSStatus 
 CMTimebaseGetTimeAndRate( 
 		CMTimebaseRef CM_NONNULL timebase,
-		CMTime * CM_NONNULL outTime,
-		Float64 * CM_NONNULL outRate )
+		CMTime * CM_NULLABLE outTime,
+		Float64 * CM_NULLABLE outRate )
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!
@@ -642,9 +642,9 @@ CM_EXPORT OSStatus
 CMSyncGetRelativeRateAndAnchorTime( 
 		CMClockOrTimebaseRef CM_NONNULL ofClockOrTimebase,
 		CMClockOrTimebaseRef CM_NONNULL relativeToClockOrTimebase,
-		Float64* CM_NONNULL outRelativeRate,
-		CMTime* CM_NONNULL outOfClockOrTimebaseAnchorTime,
-		CMTime* CM_NONNULL outRelativeToClockOrTimebaseAnchorTime)
+		Float64* CM_NULLABLE outRelativeRate,
+		CMTime* CM_NULLABLE outOfClockOrTimebaseAnchorTime,
+		CMTime* CM_NULLABLE outRelativeToClockOrTimebaseAnchorTime)
 			__OSX_AVAILABLE_STARTING(__MAC_10_8, __IPHONE_6_0);
 
 /*!

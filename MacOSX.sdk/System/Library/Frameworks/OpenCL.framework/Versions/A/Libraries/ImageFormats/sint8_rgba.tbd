@@ -1,8 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: E07959E3-5B29-3EBC-B47B-16E9585E808F', 'x86_64: FC8DFF00-822B-3BCC-9FA6-C269579D4757' ]
+uuids:           [ 'i386: 9C9EF045-6176-3DB9-B824-F73FECB9F8AE', 'x86_64: 7AD83171-4D55-328C-A38F-23671F991DD5' ]
 platform:        macosx
-install-name:    /System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/sint8_rgba.dylib
+install-name:    /System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/ImageFormats/sint8_rgba.dylib
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

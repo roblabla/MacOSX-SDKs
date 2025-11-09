@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 5C7521A1-6C0B-394B-A641-2750432D9DC9', 'x86_64: A202005E-CF88-3F7B-B955-B25FD89EC790' ]
+uuids:           [ 'i386: 17816DB3-5E46-3882-8705-A474644E9761', 'x86_64: 8AA3D1FA-711E-3F06-B0A1-90757C19220C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Suggestions.framework/Versions/A/Suggestions
-current-version: 197.0
-objc-constraint: none
+current-version: 210
 exports:         
   - archs:           [ i386 ]
     objc-classes:    [ _SGTABPerson, _SGTABPersonGeniusHelper, _SGTABPersonImageAsyncLoader, 
@@ -37,30 +36,32 @@ exports:
                        __SGTQueryScopeMenuOverride._title ]
   - archs:           [ i386, x86_64 ]
     symbols:         [ _SGTAddressBookAccessAllowed, _SGTAppCopyDefaultValueKeys, 
-                       _SGTAppGetDefaultValueForKey, _SGTHumanDateRangeLastDay, _SGTHumanDateRangeLastMonth, 
-                       _SGTHumanDateRangeLastWeek, _SGTHumanDateRangeLastYear, _SGTHumanDateRangeNextMonth, 
-                       _SGTHumanDateRangeNextWeek, _SGTHumanDateRangeNextYear, _SGTHumanDateRangePastDay, 
-                       _SGTHumanDateRangePastMonth, _SGTHumanDateRangePastWeek, _SGTHumanDateRangePastYear, 
-                       _SGTHumanDateRangePreviousDay, _SGTHumanDateRangePreviousMonth, 
-                       _SGTHumanDateRangePreviousWeek, _SGTHumanDateRangePreviousYear, 
-                       _SGTHumanDateRangeThisMonth, _SGTHumanDateRangeThisWeek, _SGTHumanDateRangeThisYear, 
-                       _SGTHumanDateRangeToday, _SGTHumanDateRangeTomorrow, _SGTHumanDateRangeYesterday, 
-                       _SGTItemMailAttachmentKinds, _SGTItemMailAttachmentName, _SGTItemMailAttachmentTypeTrees, 
+                       _SGTAppGetDefaultValueForKey, _SGTCoreRecentsAccessAllowed, 
+                       _SGTHumanDateRangeLastDay, _SGTHumanDateRangeLastMonth, _SGTHumanDateRangeLastWeek, 
+                       _SGTHumanDateRangeLastYear, _SGTHumanDateRangeNextMonth, _SGTHumanDateRangeNextWeek, 
+                       _SGTHumanDateRangeNextYear, _SGTHumanDateRangePastDay, _SGTHumanDateRangePastMonth, 
+                       _SGTHumanDateRangePastWeek, _SGTHumanDateRangePastYear, _SGTHumanDateRangePreviousDay, 
+                       _SGTHumanDateRangePreviousMonth, _SGTHumanDateRangePreviousWeek, 
+                       _SGTHumanDateRangePreviousYear, _SGTHumanDateRangeThisMonth, 
+                       _SGTHumanDateRangeThisWeek, _SGTHumanDateRangeThisYear, _SGTHumanDateRangeToday, 
+                       _SGTHumanDateRangeTomorrow, _SGTHumanDateRangeYesterday, _SGTItemMailAttachmentKinds, 
+                       _SGTItemMailAttachmentName, _SGTItemMailAttachmentTypeTrees, 
                        _SGTItemMailAttachmentTypes, _SGTItemMailFlagColor, _SGTItemMailPriority, 
                        _SGTItemMailStatus, _SGTItemMailbox, _SGTMailQueryGeniusAccountKey, 
                        _SGTMailQueryGeniusDisplayNameKey, _SGTMailQueryGeniusImageKey, 
                        _SGTMailQueryGeniusRepresentedObjectKey, _SuggestionsVersionNumber, 
                        _SuggestionsVersionString, __MDQueryCreateQueryDictionaryWithOptionsDict_serially, 
-                       __SGTAppGetDefaultValues, __SGTCreateSimpleQueryEvaluator, 
-                       __SGTQueryCreateQueryString, __SGTQueryCreateQueryStringWithFuzzyThreshold, 
-                       __SGTSanitizeInputString, __SGTSuggestionsPboardType, __valueEvaluator, 
-                       _fuzzyQueryStringVersionCreateFromString, _kSGTUserQueryAttributedInputDateEndKey, 
-                       _kSGTUserQueryAttributedInputDateKey, _kSGTUserQueryAttributedInputDateStartKey ]
+                       __SGTAppGetDefaultValues, __SGTAppPreferenceExists, __SGTAppPreferenceIsKindOfClass, 
+                       __SGTCreateSimpleQueryEvaluator, __SGTQueryCreateQueryString, 
+                       __SGTQueryCreateQueryStringWithFuzzyThreshold, __SGTSanitizeInputString, 
+                       __SGTSuggestionsPboardType, __valueEvaluator, _fuzzyQueryStringVersionCreateFromString, 
+                       _kSGTUserQueryAttributedInputDateEndKey, _kSGTUserQueryAttributedInputDateKey, 
+                       _kSGTUserQueryAttributedInputDateStartKey ]
     objc-classes:    [ _SGTCategory, _SGTCompletionTableView, _SGTCompletionWindow, 
-                       _SGTDFRTokenBarViewController, _SGTDateSuggester, _SGTDateSuggestion, 
-                       _SGTFileLabelSuggester, _SGTFileLabelSuggestion, _SGTFolderNameField, 
-                       _SGTFolderSuggester, _SGTFolderSuggestion, _SGTHasAttachmentSuggester, 
-                       _SGTISODateRange, _SGTInput, _SGTMailFlagColorSuggester, _SGTMailPrioritySuggester, 
+                       _SGTDateSuggester, _SGTDateSuggestion, _SGTFileLabelSuggester, 
+                       _SGTFileLabelSuggestion, _SGTFolderNameField, _SGTFolderSuggester, 
+                       _SGTFolderSuggestion, _SGTHasAttachmentSuggester, _SGTISODateRange, 
+                       _SGTInput, _SGTMailFlagColorSuggester, _SGTMailPrioritySuggester, 
                        _SGTMailQueryGenius, _SGTMailStatusSuggester, _SGTMailStatusSuggestion, 
                        _SGTMailboxSuggester, _SGTMailboxSuggestion, _SGTQueryGenius, 
                        _SGTRecentsSuggester, _SGTSearchField, _SGTSearchFieldCell, 

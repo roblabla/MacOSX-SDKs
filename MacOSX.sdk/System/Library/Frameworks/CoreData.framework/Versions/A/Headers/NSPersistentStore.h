@@ -1,7 +1,7 @@
 /*
     NSPersistentStore.h
     Core Data
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSPersistentStore;
 @class NSPersistentStoreRequest;
 @class NSPersistentStoreCoordinator;
+@class NSCoreDataCoreSpotlightDelegate;
 
 API_AVAILABLE(macosx(10.5),ios(3.0))
 @interface NSPersistentStore : NSObject {
@@ -38,7 +39,7 @@ API_AVAILABLE(macosx(10.5),ios(3.0))
         unsigned int _RESERVED:29;
     } _flags;
 	void *_temporaryIDClass;
-	id _externalRecordsMonitor;
+	id _coreSpotlightDelegate;
 	int32_t _activeRequests;
 #if __LP64__
     int32_t _reserved32;
@@ -89,6 +90,10 @@ API_AVAILABLE(macosx(10.5),ios(3.0))
 // Gives the store a chance to do any non-dealloc teardown (for example, closing a network connection) 
 // before removal.
 - (void)willRemoveFromPersistentStoreCoordinator:(nullable NSPersistentStoreCoordinator *)coordinator;
+
+/* Return the Core Spotlight exporter if one exists for this store. The exporter
+    can be set as part of the store options when it is added to the coordinator. */
+@property (nonatomic, readonly) NSCoreDataCoreSpotlightDelegate *coreSpotlightExporter API_AVAILABLE(macosx(10.13),ios(11.0)) API_UNAVAILABLE(tvos,watchos);
 
 @end
 

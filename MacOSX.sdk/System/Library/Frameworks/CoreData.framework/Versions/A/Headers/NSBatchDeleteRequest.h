@@ -1,9 +1,9 @@
 /*
     NSBatchDeleteRequest.h
     Core Data
-    Copyright (c) 2015-2016, Apple Inc.
+    Copyright (c) 2015-2017, Apple Inc.
     All rights reserved.
- */
+*/
 
 
 #import <Foundation/NSArray.h>
@@ -29,7 +29,7 @@ API_AVAILABLE(macosx(10.11),ios(9.0))
     @private
     NSBatchDeleteRequestResultType _resultType;
     NSFetchRequest *_deleteTarget;
-    void *_reserved;
+    intptr_t _flags;
 #endif
 }
 

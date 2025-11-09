@@ -7,9 +7,9 @@
 
 #import <AVFAudio/AVAudioNode.h>
 
-#if __has_include(<AudioUnit/AudioUnit.h>)
+#if __has_include(<AudioToolbox/AudioUnit.h>)
 #define AVAUDIOUNIT_HAVE_AUDIOUNIT 1
-#import <AudioUnit/AudioUnit.h>
+#import <AudioToolbox/AudioUnit.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
@@ -41,7 +41,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
 	@discussion
 		Components whose flags include kAudioComponentFlag_RequiresAsyncInstantiation must be 
 		instantiated asynchronously, via this method if they are to be used with AVAudioEngine.
-		See the discussion of this flag in AudioUnit/AudioComponent.h.
+		See the discussion of this flag in AudioToolbox/AudioComponent.h.
 		
 		The returned AVAudioUnit instance normally will be of a subclass (AVAudioUnitEffect,
 		AVAudioUnitGenerator, AVAudioUnitMIDIInstrument, or AVAudioUnitTimeEffect), selected

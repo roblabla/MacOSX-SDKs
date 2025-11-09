@@ -3,8 +3,8 @@
 #ifndef __SIMD_EXTERN_HEADER__
 #define __SIMD_EXTERN_HEADER__
 
-#include <simd/internal.h>
-#if __SIMD_REQUIRED_COMPILER_FEATURES__
+#include <simd/base.h>
+#if SIMD_COMPILER_HAS_REQUIRED_FEATURES
 #include <simd/vector_types.h>
 #include <simd/matrix_types.h>
 
@@ -34,21 +34,6 @@ extern double _simd_orient_vd3(const double *);
 extern double _simd_orient_pd3(const double *);
 extern double _simd_insphere_pd3(const double *);
 #endif /* SIMD_LIBRARY_VERSION */
-  
-#pragma mark - math
-extern  vector_float4 __cos_f4( vector_float4);
-extern vector_double2 __cos_d2(vector_double2);
-
-extern  vector_float4 __sin_f4( vector_float4);
-extern vector_double2 __sin_d2(vector_double2);
-
-#if defined __AVX__
-extern  vector_float8 __cos_f8( vector_float8);
-extern vector_double4 __cos_d4(vector_double4);
-
-extern  vector_float8 __sin_f8( vector_float8);
-extern vector_double4 __sin_d4(vector_double4);
-#endif
 
 #pragma mark - matrix
 extern  matrix_float2x2 __invert_f2( matrix_float2x2);
@@ -61,5 +46,5 @@ extern matrix_double4x4 __invert_d4(matrix_double4x4);
 #ifdef __cplusplus
 }
 #endif
-#endif /* __SIMD_REQUIRED_COMPILER_FEATURES__ */
+#endif /* SIMD_COMPILER_HAS_REQUIRED_FEATURES */
 #endif /* __SIMD_EXTERN_HEADER__ */

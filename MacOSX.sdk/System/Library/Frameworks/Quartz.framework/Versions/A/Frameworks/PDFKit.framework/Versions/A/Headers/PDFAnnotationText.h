@@ -1,35 +1,27 @@
-// =====================================================================================================================
+//
 //  PDFAnnotationText.h
-// =====================================================================================================================
-
+//  Copyright © 2016 Apple. All rights reserved.
+//
+//  Deprecated annotation class. Use PDFAnnotation directly to create this
+//  kind of annotation. Use the helper methods in PDFAnnotationUtilities.h
+//  to quickly build an appropriate dictionary for this annotation type.
+//
 
 #import <PDFKit/PDFKitPlatform.h>
 #import <PDFKit/PDFAnnotation.h>
 
-// Icon that appears indicating text annotaion pop-up.
-NS_ENUM_DEPRECATED(10_4, 10_12, NA, NA)
-typedef NS_ENUM(NSInteger, PDFTextAnnotationIconType)
-{
-    kPDFTextAnnotationIconComment = 0,
-    kPDFTextAnnotationIconKey = 1,
-    kPDFTextAnnotationIconNote = 2,
-    kPDFTextAnnotationIconHelp = 3,
-    kPDFTextAnnotationIconNewParagraph = 4,
-    kPDFTextAnnotationIconParagraph = 5,
-    kPDFTextAnnotationIconInsert = 6
-};
+#import <PDFKit/PDFAnnotationUtilities.h>
 
 @class PDFAnnotationTextPrivateVars;
 
-NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
+PDFKIT_CLASS_DEPRECATED(10_4, 10_12, NA, NA)
 @interface PDFAnnotationText : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
     PDFAnnotationTextPrivateVars *_private2;
 }
 
-// The type of icon displayed in the PDF.  Supported icons: "Comment", "Key", "Note", "Help", "NewParagraph", 
-// "Paragraph" and "Insert".
+// The type of icon displayed in the PDF. Supported icons: "Comment", "Key", "Note", "Help", "NewParagraph", "Paragraph" and "Insert".
 - (PDFTextAnnotationIconType) iconType;
 - (void) setIconType: (PDFTextAnnotationIconType) type;
 

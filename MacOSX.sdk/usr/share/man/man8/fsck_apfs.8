@@ -7,9 +7,9 @@
 .Nd APFS consistency check
 .Sh SYNOPSIS
 .Nm fsck_apfs
-.Op Fl n | y
-.Op Fl fpq
-.Ar device ...
+.Op Fl q | n | y
+.Op Fl l
+.Ar device
 .Sh DESCRIPTION
 .Pp
 The
@@ -28,10 +28,10 @@ data structures. We do not check for overlapping allocations.
 .Pp
 The options are as follows:
 .Bl -hang -offset indent
-.It Fl f
-Force
-.Nm
-to check `clean' file systems. Currently unimplemented.
+.It Fl l
+Lock down the file system for a verify-only check.  This makes it
+possible to check a file system that is currently mounted, although no
+repairs can be made.
 .It Fl q
 Causes
 .Nm

@@ -1,6 +1,6 @@
 /*	
     NSURLResponse.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -40,24 +40,22 @@ NS_ASSUME_NONNULL_BEGIN
     @method initWithURL:MIMEType:expectedContentLength:textEncodingName:
     @abstract Initialize an NSURLResponse with the provided values.
     @param URL the URL
-    @param MIMETYPE the MIME content type of the response
-    @param expectedContentLength the expected content length of the associated data
-    @param textEncodingName the name of the text encoding for the associated data, if applicable, else nil
+    @param MIMEType the MIME content type of the response
+    @param length the expected content length of the associated data
+    @param name the name of the text encoding for the associated data, if applicable, else nil
     @result The initialized NSURLResponse.
     @discussion This is the designated initializer for NSURLResponse.
 */
 - (instancetype)initWithURL:(NSURL *)URL MIMEType:(nullable NSString *)MIMEType expectedContentLength:(NSInteger)length textEncodingName:(nullable NSString *)name NS_DESIGNATED_INITIALIZER;
 
 /*! 
-    @method URL
-    @abstract Returns the URL of the receiver. 
+    @abstract Returns the URL of the receiver.
     @result The URL of the receiver. 
 */
 @property (nullable, readonly, copy) NSURL *URL;
 
 /*! 
-    @method MIMEType
-    @abstract Returns the MIME type of the receiver. 
+    @abstract Returns the MIME type of the receiver.
     @discussion The MIME type is based on the information provided
     from an origin source. However, that value may be changed or
     corrected by a protocol implementation if it can be determined
@@ -69,7 +67,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSString *MIMEType;
 
 /*! 
-    @method expectedContentLength
     @abstract Returns the expected content length of the receiver.
     @discussion Some protocol implementations report a content length
     as part of delivering load metadata, but not all protocols
@@ -84,7 +81,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) long long expectedContentLength;
 
 /*! 
-    @method textEncodingName
     @abstract Returns the name of the text encoding of the receiver.
     @discussion This name will be the actual string reported by the
     origin source during the course of performing a protocol-specific
@@ -97,7 +93,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSString *textEncodingName;
 
 /*!
-    @method suggestedFilename
     @abstract Returns a suggested filename if the resource were saved to disk.
     @discussion The method first checks if the server has specified a filename using the
     content disposition header. If no valid filename is specified using that mechanism,
@@ -140,17 +135,15 @@ NS_ASSUME_NONNULL_BEGIN
   @result 	the instance of the object, or NULL if an error occurred during initialization.
   @discussion This API was introduced in Mac OS X 10.7.2 and iOS 5.0 and is not available prior to those releases.
 */
-- (nullable instancetype)initWithURL:(NSURL *)url statusCode:(NSInteger)statusCode HTTPVersion:(nullable NSString *)HTTPVersion headerFields:(nullable NSDictionary<NSString *, NSString *> *)headerFields NS_AVAILABLE(10_7, 5_0);
+- (nullable instancetype)initWithURL:(NSURL *)url statusCode:(NSInteger)statusCode HTTPVersion:(nullable NSString *)HTTPVersion headerFields:(nullable NSDictionary<NSString *, NSString *> *)headerFields API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*! 
-    @method statusCode
     @abstract Returns the HTTP status code of the receiver. 
     @result The HTTP status code of the receiver. 
 */
 @property (readonly) NSInteger statusCode;
 
 /*! 
-    @method allHeaderFields
     @abstract Returns a dictionary containing all the HTTP header fields
     of the receiver.
     @discussion By examining this header dictionary, clients can see
@@ -166,7 +159,7 @@ NS_ASSUME_NONNULL_BEGIN
     @method localizedStringForStatusCode:
     @abstract Convenience method which returns a localized string
     corresponding to the status code for this response.
-    @param the status code to use to produce a localized string.
+    @param statusCode the status code to use to produce a localized string.
     @result A localized string corresponding to the given status code.
 */
 + (NSString *)localizedStringForStatusCode:(NSInteger)statusCode;

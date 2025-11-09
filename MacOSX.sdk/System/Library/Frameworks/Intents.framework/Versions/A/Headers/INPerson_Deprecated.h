@@ -2,7 +2,7 @@
 //  INPerson_Deprecated.h
 //  Intents
 //
-//  Copyright © 2016 Apple. All rights reserved.
+//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INPerson.h>

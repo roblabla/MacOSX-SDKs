@@ -1,7 +1,7 @@
 /*
 	NSInputServer.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -67,7 +67,7 @@ NS_CLASS_DEPRECATED_MAC(10_0, 10_6)
     id _delegate;
 }
 
-- initWithDelegate:(null_unspecified id)delegate name:(null_unspecified NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
+- (instancetype) initWithDelegate:(null_unspecified id)delegate name:(null_unspecified NSString *)name NS_DEPRECATED_MAC(10_0, 10_6);
 @end
 
 NS_ASSUME_NONNULL_END

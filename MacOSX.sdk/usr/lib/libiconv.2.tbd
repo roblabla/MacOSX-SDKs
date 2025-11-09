@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 34E6F33E-A727-3A53-8661-3F6380019B65', 'x86_64: 42125B35-81D7-3FC4-9475-A26DBE10884D' ]
+uuids:           [ 'i386: FE6D05A5-18DB-3FD8-A52F-B7BADB232C78', 'x86_64: 0772997F-4109-38A1-91ED-0F3F16AE99E5' ]
 platform:        macosx
 install-name:    /usr/lib/libiconv.2.dylib
-current-version: 7.0
-compatibility-version: 7.0
+current-version: 7
+compatibility-version: 7
 objc-constraint: none
 exports:         
   - archs:           [ i386 ]

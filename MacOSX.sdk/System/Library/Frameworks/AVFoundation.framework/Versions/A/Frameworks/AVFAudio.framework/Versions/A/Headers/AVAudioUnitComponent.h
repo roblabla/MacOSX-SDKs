@@ -7,10 +7,10 @@
 
 #import <AVFAudio/AVAudioTypes.h>
 
-#if __has_include(<AudioUnit/AudioComponent.h>)
+#if __has_include(<AudioToolbox/AudioComponent.h>)
 #define AVAUDIOUNITCOMPONENT_HAVE_AUDIOCOMPONENT 1
-#import <AudioUnit/AudioComponent.h>
-#import <AudioUnit/AUComponent.h>
+#import <AudioToolbox/AudioComponent.h>
+#import <AudioToolbox/AUComponent.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

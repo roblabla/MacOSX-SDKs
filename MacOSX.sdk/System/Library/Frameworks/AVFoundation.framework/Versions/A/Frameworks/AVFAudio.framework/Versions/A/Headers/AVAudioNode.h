@@ -7,9 +7,18 @@
 
 #import <AVFAudio/AVAudioTypes.h>
 
+#if __has_include(<AudioToolbox/AudioUnit.h>) && __OBJC2__
+#define AVAUDIONODE_HAVE_AUAUDIOUNIT 1
+#import <AudioToolbox/AudioUnit.h>
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVAudioEngine, AVAudioFormat, AVAudioInputNode, AVAudioMixerNode, AVAudioOutputNode, AVAudioPCMBuffer, AVAudioTime;
+
+#if AVAUDIONODE_HAVE_AUAUDIOUNIT
+@class AUAudioUnit;
+#endif 
 
 /*!	@typedef AVAudioNodeTapBlock
 	@abstract A block that receives copies of the output of an AVAudioNode.
@@ -62,12 +71,12 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 /*!	@method nameForInputBus:
 	@abstract Return the name of an input bus.
 */
-- (NSString *)nameForInputBus:(AVAudioNodeBus)bus;
+- (nullable NSString *)nameForInputBus:(AVAudioNodeBus)bus;
 
 /*!	@method nameForOutputBus:
 	@abstract Return the name of an output bus.
 */
-- (NSString *)nameForOutputBus:(AVAudioNodeBus)bus;
+- (nullable NSString *)nameForOutputBus:(AVAudioNodeBus)bus;
 
 /*! @method installTapOnBus:bufferSize:format:block:
 	@abstract Create a "tap" to record/monitor/observe the output of the node.
@@ -138,6 +147,55 @@ AVAudioFormat *format = [input outputFormatForBus: 0];
 		output node.
 */
 @property (nonatomic, readonly, nullable) AVAudioTime *lastRenderTime;
+
+#if AVAUDIONODE_HAVE_AUAUDIOUNIT
+/*! @property AUAudioUnit
+	@abstract An AUAudioUnit wrapping or underlying the implementation's AudioUnit.
+	@discussion
+		This provides an AUAudioUnit which either wraps or underlies the implementation's
+		AudioUnit, depending on how that audio unit is packaged. Applications can interact with this
+		AUAudioUnit to control custom properties, select presets, change parameters, etc.
+
+		No operations that may conflict with state maintained by the engine should be performed 
+		directly on the audio unit. These include changing initialization state, stream formats, 
+		channel layouts or connections to other audio units.
+*/
+@property (nonatomic, readonly) AUAudioUnit *AUAudioUnit API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+#endif // AVAUDIONODE_HAVE_AUAUDIOUNIT
+
+/*!	@property latency
+	@abstract The processing latency of the node, in seconds.
+	@discussion
+		This property reflects the delay between when an impulse in the audio stream arrives at the
+		input vs. output of the node. This should reflect the delay due to signal processing 
+		(e.g. filters, FFT's, etc.), not delay or reverberation which is being applied as an effect. 
+		A value of zero indicates either no latency or an unknown latency.
+*/
+@property (nonatomic, readonly) NSTimeInterval latency API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*!	@property outputPresentationLatency
+	@abstract The maximum render pipeline latency downstream of the node, in seconds.
+	@discussion
+		This describes the maximum time it will take for the audio at the output of a node to be
+		presented. 
+		For instance, the output presentation latency of the output node in the engine is:
+			- zero in manual rendering mode
+			- the presentation latency of the device itself when rendering to an audio device
+			  (see `AVAudioIONode(presentationLatency)`)
+		The output presentation latency of a node connected directly to the output node is the
+		output node's presentation latency plus the output node's processing latency (see `latency`).
+ 
+		For a node which is exclusively in the input node chain (i.e. not connected to engine's 
+		output node), this property reflects the latency for the output of this node to be 
+		presented at the output of the terminating node in the input chain.
+
+		A value of zero indicates either an unknown or no latency.
+ 
+		Note that this latency value can change as the engine is reconfigured (started/stopped, 
+		connections made/altered downstream of this node etc.). So it is recommended not to cache
+		this value and fetch it whenever it's needed.
+*/
+@property (nonatomic, readonly) NSTimeInterval outputPresentationLatency API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 @end
 

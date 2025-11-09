@@ -13,6 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class CLLocation;
 @class CLRegion;
 @class CLPlacemarkInternal;
+@class CNPostalAddress;
+
 
 /*
  *  CLPlacemark
@@ -68,7 +70,7 @@ NS_CLASS_AVAILABLE(10_8,5_0)
  *    This dictionary can be formatted as an address using ABCreateStringWithAddressDictionary,
  *    defined in the AddressBookUI framework.
  */
-@property (nonatomic, readonly, copy, nullable) NSDictionary *addressDictionary;
+@property (nonatomic, readonly, copy, nullable) NSDictionary *addressDictionary API_DEPRECATED("Use @properties", macos(10.8, 10.13), ios(5.0, 11.0), watchos(1.0, 4.0));
 
 // address dictionary properties
 @property (nonatomic, readonly, copy, nullable) NSString *name; // eg. Apple Inc.
@@ -84,6 +86,10 @@ NS_CLASS_AVAILABLE(10_8,5_0)
 @property (nonatomic, readonly, copy, nullable) NSString *inlandWater; // eg. Lake Tahoe
 @property (nonatomic, readonly, copy, nullable) NSString *ocean; // eg. Pacific Ocean
 @property (nonatomic, readonly, copy, nullable) NSArray<NSString *> *areasOfInterest; // eg. Golden Gate Park
+@end
+
+@interface CLPlacemark (ContactsAdditions)
+@property (nonatomic, nullable, readonly) CNPostalAddress *postalAddress API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
 @end
 
 NS_ASSUME_NONNULL_END

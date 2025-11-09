@@ -7,6 +7,12 @@
 
 #import <CoreImage/CIImage.h>
 
+#if !TARGET_OS_IPHONE
+#import <IOSurface/IOSurface.h>
+#elif !TARGET_OS_SIMULATOR
+#import <IOSurface/IOSurfaceRef.h>
+#endif
+
 NS_ASSUME_NONNULL_BEGIN
 
 @protocol MTLTexture, MTLCommandBuffer;
@@ -82,6 +88,16 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 +(CIFormat)outputFormat;
 #endif
 
+// Override this class property if your processor's output stores 1.0 into the
+// alpha channel of all pixels within the output extent.
+// If not overridden, false is returned.
+//
+#if __has_feature(objc_class_property)
+@property (class, readonly) bool outputIsOpaque NS_AVAILABLE(10_13, 11_0);
+#else
++ (bool)outputIsOpaque NS_AVAILABLE(10_13, 11_0);
+#endif
+
 // Override this class property to return false if you want your processor to be given
 // CIImageProcessorInput objects that have not been synchonized for CPU access.
 //
@@ -132,8 +148,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 // This memory must not be modified by the block.
 @property (readonly, nonatomic) const void *baseAddress NS_RETURNS_INNER_POINTER;
 
-
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_SIMULATOR
 // An input IOSurface that the processor block can read from.
 // This surface must not be modified by the block.
 @property (nonatomic, readonly) IOSurfaceRef surface;
@@ -167,8 +182,7 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 // The base address of the output buffer that the processor block can write output pixels to.
 @property (readonly, nonatomic) void *baseAddress NS_RETURNS_INNER_POINTER;
 
-
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_SIMULATOR
 // An output IOSurface that the processor block can write to.
 @property (nonatomic, readonly) IOSurfaceRef surface;
 #endif

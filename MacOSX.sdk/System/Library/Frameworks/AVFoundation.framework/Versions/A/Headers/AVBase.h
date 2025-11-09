@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
  */
 
@@ -16,30 +16,20 @@
 	#define AVF_EXPORT extern
 #endif
 
-// Annotation for classes that inherit -init from NSObject but cannot be usefully initialized using -init
-#define AV_INIT_UNAVAILABLE - (instancetype)init NS_UNAVAILABLE;
+// Annotation for classes that inherit -init and +new from NSObject but cannot be usefully initialized using -init or +new
+#define AV_INIT_UNAVAILABLE - (instancetype)init NS_UNAVAILABLE; \
+                            + (instancetype)new  NS_UNAVAILABLE;
 
 #ifndef __has_feature
 	#define __has_feature(FEATURE) 0
 #endif
 
-// Generics
-
-// Use when declaring a variable of a generic type
-#if __has_feature(objc_generics)
-	#define AV_GENERIC(BASETYPE, ...) BASETYPE<__VA_ARGS__>
-#else
-	#define AV_GENERIC(BASETYPE, ...) BASETYPE
+#ifndef NS_STRING_ENUM
+	#define NS_STRING_ENUM
 #endif
 
-// Use when declaring a generic class interface
-#define AV_GENERIC_CLASS AV_GENERIC
-
-// Use to refer to generic types in a generic class
-#if __has_feature(objc_generics)
-	#define AV_PARAMETERIZED_TYPE(TYPENAME, TYPEBOUNDS) TYPENAME
-#else
-	#define AV_PARAMETERIZED_TYPE(TYPENAME, TYPEBOUNDS) TYPEBOUNDS
+#ifndef NS_EXTENSIBLE_STRING_ENUM
+	#define NS_EXTENSIBLE_STRING_ENUM
 #endif
 
 // Pre-10.12
@@ -180,6 +170,10 @@
 
 #ifndef AVAILABLE_MAC_OS_X_VERSION_TBD_AND_LATER
    #define AVAILABLE_MAC_OS_X_VERSION_TBD_AND_LATER WEAK_IMPORT_ATTRIBUTE
+#endif
+
+#ifndef API_AVAILABLE
+	#define API_AVAILABLE(...)
 #endif
 
 #ifndef NS_AVAILABLE

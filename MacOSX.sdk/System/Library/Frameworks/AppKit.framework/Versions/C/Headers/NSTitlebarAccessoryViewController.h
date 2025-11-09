@@ -1,7 +1,7 @@
 /*
     NSTitlebarAccessoryViewController.h
     Application Kit
-    Copyright (c) 2014-2016, Apple Inc.
+    Copyright (c) 2014-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -30,7 +30,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
     unsigned int _registered:1;
     unsigned int _reservedTVC:28 __unused;
 
-    id      _animationData;
+    id _animationData;
     CGFloat _visibleAmount; // For animating visibility
 }
 
@@ -40,6 +40,8 @@ NS_CLASS_AVAILABLE(10_10, NA)
  
     For applications linked on 10.12 and higher, NSLayoutAttributeLeading and NSLayoutAttributeTrailing can also be used to specify an abstract position that automatically flips depending on the localized language.  For applications that do not link on 10.12, NSLayoutAttributeLeft will automatically flip to the Right when in a Right To Left language.
  
+    For applications linked on 10.13 and higher, NSLayoutAttributeTop can also be used to specify a view that will be at the top of the titlebar area. Only one should be used per window, and if one is set the normal titlebar will not be drawn. Using the top attributed requires the window to have the NSWindowStyleMaskFullSizeContentView style mask set. The "hidden" property can be used to show and hide the view. The "hidden" property will animate the view via an alpha fade in and out if accessed through the animator proxy (such as: viewController.animator.hidden = YES).
+
  */
 @property NSLayoutAttribute layoutAttribute;
 
@@ -53,7 +55,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
 */
 @property CGFloat fullScreenMinHeight;
 
-/* Indicates whether the accessory view is actually visible in the window. When set, this property will collapse the accessory view to 0 height (animatable) but NOT remove it from the window. That way, you can easily show and hide it without difficulty. Set through the animator object to animate it. */
+/* Indicates whether the accessory view is actually visible in the window. This property only applies to controllers set with the top or bottom layoutAtribute. When set, this property will collapse the accessory view to 0 height (animatable) but NOT remove it from the window. That way, you can easily show and hide it without difficulty. Set through the animator object to animate it. */
 @property (getter=isHidden) BOOL hidden NS_AVAILABLE_MAC(10_12);
 
 - (void)viewWillAppear NS_REQUIRES_SUPER;

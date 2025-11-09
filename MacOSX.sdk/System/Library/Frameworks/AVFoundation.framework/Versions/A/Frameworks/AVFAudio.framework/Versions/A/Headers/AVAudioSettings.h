@@ -27,6 +27,9 @@ AVF_EXPORT NSString *const AVLinearPCMIsFloatKey;						/* value is a BOOL */
 AVF_EXPORT NSString *const AVLinearPCMIsNonInterleaved                  NS_AVAILABLE(10_7, 4_0);   /* value is a BOOL */
 #define AVLinearPCMIsNonInterleavedKey AVLinearPCMIsNonInterleaved
 
+/* audio file type key */
+AVF_EXPORT NSString *const AVAudioFileTypeKey API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0)); /* value is an integer (audio file type) from AudioFile.h */
+
 /* encoder property keys */
 AVF_EXPORT NSString *const AVEncoderAudioQualityKey;					/* value is an integer from enum AVAudioQuality */
 AVF_EXPORT NSString *const AVEncoderAudioQualityForVBRKey               NS_AVAILABLE(10_9, 7_0); /* value is an integer from enum AVAudioQuality. only relevant for AVAudioBitRateStrategy_Variable */
@@ -56,7 +59,7 @@ AVF_EXPORT NSString *const AVAudioBitRateStrategy_Variable              NS_AVAIL
 /* values for AVSampleRateConverterAlgorithmKey */
 AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Normal        NS_AVAILABLE(10_9, 7_0);
 AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_Mastering     NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_MinimumPhase  NS_AVAILABLE(10_12, 10_0);
+AVF_EXPORT NSString *const AVSampleRateConverterAlgorithm_MinimumPhase  API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 typedef NS_ENUM(NSInteger, AVAudioQuality) {
 	AVAudioQualityMin    = 0,

@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7137FDDC-BD79-36CE-85C7-AFF736D949CF' ]
+uuids:           [ 'x86_64: 4D71F0AD-D6D2-3C47-959E-97FF4710CA0B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/iCalendar.framework/Versions/A/iCalendar
-current-version: 262.0
-objc-constraint: none
+current-version: 275
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ICSDecodeBase64, _ICSEncodeBase64, _ICSObscuritySalt, _ICSTravelAdvisoryBehavior_Automatic, 
@@ -12,13 +11,13 @@ exports:
                        _ICSiCalendarErrorDomain, _SHA256StringOfString, __uniqueSaltForThisMachine, 
                        _iCalendarAppendStringToStringWithOptions, _iCalendarRepresentationForCALDay, 
                        _kCALSTR_XAPPLE_inviter_name_param, _kCALSTR_XAPPLE_self_invited_param, 
-                       _kICSSTR_XAPPLE_acknowledged_param, _kICSSTR_XAPPLE_activity_prop, 
-                       _kICSSTR_XAPPLE_app_link_data_prop, _kICSSTR_XAPPLE_auto_refresh_prop, 
-                       _kICSSTR_XAPPLE_autoarchived_param, _kICSSTR_XAPPLE_bookmark, 
-                       _kICSSTR_XAPPLE_calendar_color_prop, _kICSSTR_XAPPLE_contact_identifiers, 
-                       _kICSSTR_XAPPLE_default_alarm, _kICSSTR_XAPPLE_dontschedule_prop, 
-                       _kICSSTR_XAPPLE_dropbox_prop, _kICSSTR_XAPPLE_end_location, 
-                       _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
+                       _kCALSTR_XAPPLE_telephone_param, _kICSSTR_XAPPLE_acknowledged_param, 
+                       _kICSSTR_XAPPLE_activity_prop, _kICSSTR_XAPPLE_app_link_data_prop, 
+                       _kICSSTR_XAPPLE_auto_refresh_prop, _kICSSTR_XAPPLE_autoarchived_param, 
+                       _kICSSTR_XAPPLE_bookmark, _kICSSTR_XAPPLE_calendar_color_prop, 
+                       _kICSSTR_XAPPLE_contact_identifiers, _kICSSTR_XAPPLE_default_alarm, 
+                       _kICSSTR_XAPPLE_dontschedule_prop, _kICSSTR_XAPPLE_dropbox_prop, 
+                       _kICSSTR_XAPPLE_end_location, _kICSSTR_XAPPLE_etag, _kICSSTR_XAPPLE_ews_attachmentid_param, 
                        _kICSSTR_XAPPLE_ews_busystatus_prop, _kICSSTR_XAPPLE_ews_changekey_prop, 
                        _kICSSTR_XAPPLE_ews_itemid_prop, _kICSSTR_XAPPLE_ews_needsserverconfirmation_prop, 
                        _kICSSTR_XAPPLE_ews_permission_prop, _kICSSTR_XAPPLE_filename_param, 
@@ -26,8 +25,8 @@ exports:
                        _kICSSTR_XAPPLE_proximity_prop, _kICSSTR_XAPPLE_related_travel_param, 
                        _kICSSTR_XAPPLE_routing_param, _kICSSTR_XAPPLE_scheduletag, 
                        _kICSSTR_XAPPLE_serverFilename, _kICSSTR_XAPPLE_sort_order_prop, 
-                       _kICSSTR_XAPPLE_structured_location_prop, _kICSSTR_XAPPLE_suggestion_info_changed_fields_prop, 
-                       _kICSSTR_XAPPLE_suggestion_info_changes_acknowledged_prop, 
+                       _kICSSTR_XAPPLE_structured_data_prop, _kICSSTR_XAPPLE_structured_location_prop, 
+                       _kICSSTR_XAPPLE_suggestion_info_changed_fields_prop, _kICSSTR_XAPPLE_suggestion_info_changes_acknowledged_prop, 
                        _kICSSTR_XAPPLE_suggestion_info_opaque_key_prop, _kICSSTR_XAPPLE_suggestion_info_timestamp_prop, 
                        _kICSSTR_XAPPLE_suggestion_info_unique_key_prop, _kICSSTR_XAPPLE_travel_advisory_behavior, 
                        _kICSSTR_XAPPLE_travel_default_alarm, _kICSSTR_XAPPLE_travel_duration, 
@@ -95,18 +94,19 @@ exports:
                        _strncmp_s, _symbolicColorForLegacyRGB ]
     objc-classes:    [ _ICSActionValue, _ICSAlarm, _ICSAlternateTimeProposal, _ICSAlternateTimeProposalStatusParameter, 
                        _ICSAttachment, _ICSAttendeeComment, _ICSAvailability, _ICSAvailable, 
-                       _ICSBusyStatusValue, _ICSByDayValue, _ICSCalendar, _ICSCalendarServerAccessValue, 
-                       _ICSCalendarUserParameter, _ICSClassificationValue, _ICSColor, 
-                       _ICSComponent, _ICSConference, _ICSDate, _ICSDateTimeUTCValue, 
-                       _ICSDateTimeValue, _ICSDateValue, _ICSDocument, _ICSDuration, 
-                       _ICSEvent, _ICSFreeBusy, _ICSFreeBusyTime, _ICSFreeBusyTypeParameter, 
-                       _ICSJournal, _ICSLogger, _ICSMethodValue, _ICSMultiValueProperty, 
-                       _ICSParser, _ICSParticipationStatusParameter, _ICSPeriod, 
-                       _ICSPredefinedValue, _ICSProperty, _ICSRecurrenceRule, _ICSRelationshipTypeParameter, 
-                       _ICSRoleParameter, _ICSScheduleAgentParameter, _ICSScheduleForceSendParameter, 
-                       _ICSScheduleStatusParameter, _ICSStatusValue, _ICSStringWriter, 
-                       _ICSStructuredLocation, _ICSTimeZone, _ICSTimeZoneBlock, _ICSTimeZoneChange, 
-                       _ICSTimeZoneDaylightBlock, _ICSTimeZoneStandardBlock, _ICSTimeZoneTranslator, 
-                       _ICSTodo, _ICSTokenizer, _ICSTransparencyValue, _ICSTravelAdvisoryBehavior, 
+                       _ICSBusyStatusValue, _ICSByDayValue, _ICSCalendar, _ICSCalendarItem, 
+                       _ICSCalendarServerAccessValue, _ICSCalendarUserParameter, 
+                       _ICSClassificationValue, _ICSColor, _ICSComponent, _ICSConference, 
+                       _ICSDate, _ICSDateTimeUTCValue, _ICSDateTimeValue, _ICSDateValue, 
+                       _ICSDocument, _ICSDuration, _ICSEvent, _ICSFreeBusy, _ICSFreeBusyTime, 
+                       _ICSFreeBusyTypeParameter, _ICSJournal, _ICSLogger, _ICSMethodValue, 
+                       _ICSMultiValueProperty, _ICSParser, _ICSParticipationStatusParameter, 
+                       _ICSPeriod, _ICSPredefinedValue, _ICSProperty, _ICSRecurrenceRule, 
+                       _ICSRelationshipTypeParameter, _ICSRoleParameter, _ICSScheduleAgentParameter, 
+                       _ICSScheduleForceSendParameter, _ICSScheduleStatusParameter, 
+                       _ICSStatusValue, _ICSStringWriter, _ICSStructuredLocation, 
+                       _ICSTimeZone, _ICSTimeZoneBlock, _ICSTimeZoneChange, _ICSTimeZoneDaylightBlock, 
+                       _ICSTimeZoneStandardBlock, _ICSTimeZoneTranslator, _ICSTodo, 
+                       _ICSTokenizer, _ICSTransparencyValue, _ICSTravelAdvisoryBehavior, 
                        _ICSTravelDuration, _ICSTrigger, _ICSUserAddress, _ICSZStringWriter ]
 ...

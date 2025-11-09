@@ -19,7 +19,6 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
 @end
 
-
 /** Specifies the type of a feature that is a face. */
 CORE_IMAGE_EXPORT NSString* const CIFeatureTypeFace;
 /** Specifies the type of a feature that is a rectangle. */
@@ -35,26 +34,26 @@ CORE_IMAGE_EXPORT NSString* const CIFeatureTypeText;
 NS_CLASS_AVAILABLE(10_7, 5_0)
 @interface CIFaceFeature : CIFeature
 {
-	CGRect bounds;
-	BOOL hasLeftEyePosition;
-	CGPoint leftEyePosition;
-	BOOL hasRightEyePosition;
-	CGPoint rightEyePosition;
-	BOOL hasMouthPosition;
-	CGPoint mouthPosition;
-	
+    CGRect bounds;
+    BOOL hasLeftEyePosition;
+    CGPoint leftEyePosition;
+    BOOL hasRightEyePosition;
+    CGPoint rightEyePosition;
+    BOOL hasMouthPosition;
+    CGPoint mouthPosition;
     
-	BOOL hasTrackingID;
-	int trackingID;
-	BOOL hasTrackingFrameCount;
-	int trackingFrameCount;
-	
-	BOOL hasFaceAngle;
-	float faceAngle;
-	
-	BOOL hasSmile;
-	BOOL leftEyeClosed;
-	BOOL rightEyeClosed;
+    
+    BOOL hasTrackingID;
+    int trackingID;
+    BOOL hasTrackingFrameCount;
+    int trackingFrameCount;
+    
+    BOOL hasFaceAngle;
+    float faceAngle;
+    
+    BOOL hasSmile;
+    BOOL leftEyeClosed;
+    BOOL rightEyeClosed;
 }
 
 /** coordinates of various cardinal points within a face.
@@ -106,18 +105,20 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @end
 
-/** A barcode feature found by a CIDetector
+/** A QR code feature found by a CIDetector
  All positions are relative to the original image. */
 
+@class CIQRCodeDescriptor;
+
 NS_CLASS_AVAILABLE(10_10, 8_0)
-@interface CIQRCodeFeature : CIFeature
+@interface CIQRCodeFeature : CIFeature <NSSecureCoding, NSCopying>
 {
     CGRect bounds;
     CGPoint topLeft;
     CGPoint topRight;
     CGPoint bottomLeft;
     CGPoint bottomRight;
-    NSString* messageString;
+    CIQRCodeDescriptor *symbolDescriptor;
 }
 
 @property (readonly) CGRect bounds;
@@ -125,12 +126,14 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property (readonly) CGPoint topRight;
 @property (readonly) CGPoint bottomLeft;
 @property (readonly) CGPoint bottomRight;
+
 #if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 @property (nullable, readonly) NSString* messageString;
 #else
 @property (readonly) NSString* messageString;
 #endif
 
+@property (nullable, readonly) CIQRCodeDescriptor *symbolDescriptor NS_AVAILABLE(10_13, 11_0);
 
 @end
 

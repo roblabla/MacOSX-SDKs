@@ -1,7 +1,7 @@
 //
 //  SCNAudioSource.h
 //
-//  Copyright (c) 2015-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNNode.h>
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class SCNAudioSource
  @abstract The SCNAudioSource class represents an audio source that can be added to a SCNNode.
  */
-API_AVAILABLE(macosx(10.11), ios(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0))
 @interface SCNAudioSource : NSObject <NSCopying, NSSecureCoding>
 
 /*!
@@ -38,6 +38,7 @@ API_AVAILABLE(macosx(10.11), ios(9.0))
 /*!
  @property positional
  @abstract Marks the audio source as positional so that the audio mix considers relative position and velocity with regards to the SCNSceneRenderer's current listener node. Defaults to YES.
+ @discussion shouldStream must be set to false in order to get positional audio (see shouldStream).
  @see SCNSceneRenderer audioListener.
  */
 @property(nonatomic, getter=isPositional) BOOL positional;
@@ -81,7 +82,7 @@ API_AVAILABLE(macosx(10.11), ios(9.0))
 
 @end
 
-API_AVAILABLE(macosx(10.11), ios(9.0))
+API_AVAILABLE(macos(10.11), ios(9.0))
 @interface SCNAudioPlayer : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -114,13 +115,13 @@ API_AVAILABLE(macosx(10.11), ios(9.0))
  @property playbackStarted
  @abstract This block is called when the playback starts in case a valid audio source is present.
  */
-@property(nonatomic, copy, nullable) void (^willStartPlayback)();
+@property(nonatomic, copy, nullable) void (^willStartPlayback)(void);
 
 /*!
  @property playbackFinished
  @abstract This block is called when the playback stops in case a valid audio source is present.
  */
-@property(nonatomic, copy, nullable) void (^didFinishPlayback)();
+@property(nonatomic, copy, nullable) void (^didFinishPlayback)(void);
 
 /*!
  @property audioNode
@@ -143,25 +144,25 @@ API_AVAILABLE(macosx(10.11), ios(9.0))
  @method addAudioPlayer:
  @abstract Add an audio player to the node and starts playing it right away.
  */
-- (void)addAudioPlayer:(SCNAudioPlayer *)player API_AVAILABLE(macosx(10.11), ios(9.0));
+- (void)addAudioPlayer:(SCNAudioPlayer *)player API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method removeAllAudioPlayers
  @abstract Remove all audio players from this node and stop playing them.
  */
-- (void)removeAllAudioPlayers API_AVAILABLE(macosx(10.11), ios(9.0));
+- (void)removeAllAudioPlayers API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @method removeAudioPlayer:
  @abstract Remove the given audio player from this node and stop playing it.
  */
-- (void)removeAudioPlayer:(SCNAudioPlayer *)player API_AVAILABLE(macosx(10.11), ios(9.0));
+- (void)removeAudioPlayer:(SCNAudioPlayer *)player API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property audioPlayers
  @abstract Get an array with all the audio players connected and playing on this node.
  */
-@property(nonatomic, readonly) NSArray<SCNAudioPlayer *> *audioPlayers API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic, readonly) NSArray<SCNAudioPlayer *> *audioPlayers API_AVAILABLE(macos(10.11), ios(9.0));
 
 @end
 

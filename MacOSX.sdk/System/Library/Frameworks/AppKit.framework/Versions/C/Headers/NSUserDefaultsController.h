@@ -1,7 +1,7 @@
 /*
 	NSUserDefaultsController.h
 	Application Kit
-	Copyright (c) 2002-2016, Apple Inc.
+	Copyright (c) 2002-2017, Apple Inc.
 	All rights reserved.
  */
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
     } _userDefaultsControllerFlags;
 }
 
-+ (NSUserDefaultsController *)sharedUserDefaultsController;
+@property (class, readonly, strong) NSUserDefaultsController *sharedUserDefaultsController;
 
 - (instancetype)initWithDefaults:(nullable NSUserDefaults *)defaults initialValues:(nullable NSDictionary<NSString *, id> *)initialValues NS_DESIGNATED_INITIALIZER;    // if defaults is nil, the controller uses [NSUserDefaults standardUserDefaults]; if initialValues is nil, revertToInitialValues: has no effect
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -43,9 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, strong) id values;    // accessor object for default values (independent of whether they are derived directly from the NSUserDefaults or from the initial values)
 
-- (void)revert:(nullable id)sender;
-- (void)save:(nullable id)sender;    // no effect if applies immediately
-- (void)revertToInitialValues:(nullable id)sender;    // no effect if no initial values are specified
+- (IBAction)revert:(nullable id)sender;
+- (IBAction)save:(nullable id)sender;    // no effect if applies immediately
+- (IBAction)revertToInitialValues:(nullable id)sender;    // no effect if no initial values are specified
 
 @end
 

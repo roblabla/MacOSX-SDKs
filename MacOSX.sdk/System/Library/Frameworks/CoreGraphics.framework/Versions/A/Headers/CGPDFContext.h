@@ -291,6 +291,17 @@ CG_EXTERN const CFStringRef  kCGPDFXDestinationOutputProfile
 CG_EXTERN const CFStringRef  kCGPDFContextOutputIntents
   CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_NA);
 
+/* The document's access permissions, expressed as a CFNumber. The number is
+   defined by ORing together the desired CGPDFAccessPermissions values. */
+
+CG_EXTERN const CFStringRef  kCGPDFContextAccessPermissions
+  CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+
+/* Set the outline in the PDF created by a CGPDFContext (no effect in other types of CGContexts). */
+
+CG_EXTERN void CGPDFContextSetOutline(CGContextRef context, __nullable CFDictionaryRef outline)
+  CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+
 CF_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED

@@ -8,6 +8,7 @@
 */
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVMediaSelectionGroup.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMBase.h>
@@ -84,7 +85,7 @@ AV_INIT_UNAVAILABLE
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-+ (nullable instancetype)assetWriterWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * _Nullable * _Nullable)outError;
++ (nullable instancetype)assetWriterWithURL:(NSURL *)outputURL fileType:(AVFileType)outputFileType error:(NSError * _Nullable * _Nullable)outError;
 
 /*!
  @method initWithURL:fileType:error:
@@ -105,7 +106,7 @@ AV_INIT_UNAVAILABLE
 	
 	UTIs for container formats that can be written are declared in AVMediaFormat.h.
  */
-- (nullable instancetype)initWithURL:(NSURL *)outputURL fileType:(NSString *)outputFileType error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithURL:(NSURL *)outputURL fileType:(AVFileType)outputFileType error:(NSError * _Nullable * _Nullable)outError NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property outputURL
@@ -121,7 +122,7 @@ AV_INIT_UNAVAILABLE
  @abstract
 	The UTI of the file format of the file for which the instance of AVAssetWriter was initialized for writing.
  */
-@property (nonatomic, copy, readonly) NSString *outputFileType;
+@property (nonatomic, copy, readonly) AVFileType outputFileType;
 
 /*!
  @property availableMediaTypes
@@ -131,7 +132,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	Some media types may not be accepted within the file format with which an AVAssetWriter was initialized.
  */
-@property (nonatomic, readonly) NSArray<NSString *> *availableMediaTypes;
+@property (nonatomic, readonly) NSArray<AVMediaType> *availableMediaTypes;
 
 /*!
  @property status
@@ -217,7 +218,7 @@ AV_INIT_UNAVAILABLE
  
 	Attempting to add an input with output settings and a media type for which this method returns NO will cause an exception to be thrown.
 */
-- (BOOL)canApplyOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings forMediaType:(NSString *)mediaType;
+- (BOOL)canApplyOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings forMediaType:(AVMediaType)mediaType;
 
 /*!
  @method canAddInput:

@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 52D28735-9CFB-38A1-85E4-286181A83630' ]
+uuids:           [ 'x86_64: 11E76531-A8C8-352E-839F-045C0CF4A759' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Swift/libswiftCoreImage.dylib
-current-version: 800.8.18
-objc-constraint: none
+current-version: 900.8.48
+swift-version:   5
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ '__swift_FORCE_LOAD_$_swiftCoreImage' ]

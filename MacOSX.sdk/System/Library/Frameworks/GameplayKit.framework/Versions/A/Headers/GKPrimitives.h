@@ -5,6 +5,7 @@
 //  Copyright © 2016 Apple. All rights reserved.
 //
 
+#include <simd/vector_types.h>
 
 /**
  * Representation of an axis aligned box via its min corner (lower-left) and max corner (upper-right) 

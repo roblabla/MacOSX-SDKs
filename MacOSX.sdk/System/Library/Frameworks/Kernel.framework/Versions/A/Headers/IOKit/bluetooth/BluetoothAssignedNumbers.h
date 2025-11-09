@@ -1,6 +1,6 @@
 /*
 	File:		BluetoothAssignedNumbers.h
-	Copyright:	(c) 2001-2012 by Apple, Inc. All rights reserved.
+	Copyright:	(c) 2001-2017 by Apple, Inc. All rights reserved.
 */
 
 #pragma once
@@ -11,6 +11,17 @@
 
 #pragma mark -
 #pragma mark === General ===
+
+//==================================================================================================================
+//	General
+//==================================================================================================================
+
+/*
+ BluetoothCompanyIdentifers
+ 
+ The "living document" can be found on the Bluetooth SIG website:
+ https://www.bluetooth.com/specifications/assigned-numbers/company-identifiers
+ */
 
 enum BluetoothCompanyIdentifers
 {
@@ -105,9 +116,183 @@ enum BluetoothCompanyIdentifers
 	kBluetoothCompanyIdentiferVisio												=	88,
 	kBluetoothCompanyIdentiferNordicSemiconductor								=	89,
 	kBluetoothCompanyIdentiferEMMicroElectronicMarin							=	90,
-
+	kBluetoothCompanyIdentiferRalinkTechnology									=	91,
+	kBluetoothCompanyIdentiferBelkinInternational								=	92,
+	kBluetoothCompanyIdentiferRealtekSemiconductor								=	93,
+	kBluetoothCompanyIdentiferStonestreetOne									=	94,
+	kBluetoothCompanyIdentiferWicentric											=	95,
+	kBluetoothCompanyIdentiferRivieraWaves										=	96,
+	kBluetoothCompanyIdentiferRDAMicroelectronics								=	97,
+	kBluetoothCompanyIdentiferGibsonGuitars										=	98,
+	kBluetoothCompanyIdentiferMiCommand											=	99,
+	kBluetoothCompanyIdentiferBandXIInternational								=	100,
+	kBluetoothCompanyIdentiferHewlettPackard									=	101,
+	kBluetoothCompanyIdentifer9SolutionsOy										=	102,
+	kBluetoothCompanyIdentiferGNNetcom											=	103,
+	kBluetoothCompanyIdentiferGeneralMotors										=	104,
+	kBluetoothCompanyIdentiferAAndDEngineering									=	105,
+	kBluetoothCompanyIdentiferMindTree											=	106,
+	kBluetoothCompanyIdentiferPolarElectroOY									=	107,
+	kBluetoothCompanyIdentiferBeautifulEnterprise								=	108,
+	kBluetoothCompanyIdentiferBriarTek											=	109,
+	kBluetoothCompanyIdentiferSummitDataCommunications							=	110,
+	kBluetoothCompanyIdentiferSoundID											=	111,
+	kBluetoothCompanyIdentiferMonster											=	112,
+	kBluetoothCompanyIdentiferConnectBlueAB										=	113,
+	kBluetoothCompanyIdentiferShangHaiSuperSmartElectronics						=	114,
+	kBluetoothCompanyIdentiferGroupSense										=	115,
+	kBluetoothCompanyIdentiferZomm												=	116,
+	kBluetoothCompanyIdentiferSamsungElectronics								=	117,
+	kBluetoothCompanyIdentiferCreativeTechnology								=	118,
+	kBluetoothCompanyIdentiferLairdTechnologies									=	119,
+	kBluetoothCompanyIdentiferNike												=	120,
+	kBluetoothCompanyIdentiferLessWire											=	121,
+	kBluetoothCompanyIdentiferMStarTechnologies									=	122,
+	kBluetoothCompanyIdentiferHanlynnTechnologies								=	123,
+	kBluetoothCompanyIdentiferAAndRCambridge									=	124,
+	kBluetoothCompanyIdentiferSeersTechnology									=	125,
+	kBluetoothCompanyIdentiferSportsTrackingTechnologies						=	126,
+	kBluetoothCompanyIdentiferAutonetMobile										=	127,
+	kBluetoothCompanyIdentiferDeLormePublishingCompany							=	128,
+	kBluetoothCompanyIdentiferWuXiVimicro										=	129,
+	kBluetoothCompanyIdentiferSennheiserCommunications							=	130,
+	kBluetoothCompanyIdentiferTimeKeepingSystems								=	131,
+	kBluetoothCompanyIdentiferLudusHelsinki										=	132,
+	kBluetoothCompanyIdentiferBlueRadios										=	133,
+	kBluetoothCompanyIdentiferEquinux											=	134,
+	kBluetoothCompanyIdentiferGarminInternational								=	135,
+	kBluetoothCompanyIdentiferEcotest											=	136,
+	kBluetoothCompanyIdentiferGNResound											=	137,
+	kBluetoothCompanyIdentiferJawbone											=	138,
+	kBluetoothCompanyIdentiferTopconPositioningSystems							=	139,
+	kBluetoothCompanyIdentiferGimbal											=	140,
+	kBluetoothCompanyIdentiferZscanSoftware										=	141,
+	kBluetoothCompanyIdentiferQuintic											=	142,
+	kBluetoothCompanyIdentiferTelitWirelessSolutions							=	143,
+	kBluetoothCompanyIdentiferFunaiElectric										=	144,
+	kBluetoothCompanyIdentiferAdvancedPANMOBILSystems							=	145,
+	kBluetoothCompanyIdentiferThinkOptics										=	146,
+	kBluetoothCompanyIdentiferUniversalElectriconics							=	147,
+	kBluetoothCompanyIdentiferAirohaTechnology									=	148,
+	kBluetoothCompanyIdentiferNECLightning										=	149,
+	kBluetoothCompanyIdentiferODMTechnology										=	150,
+	kBluetoothCompanyIdentiferConnecteDevice									=	151,
+	kBluetoothCompanyIdentiferZero1TV											=	152,
+	kBluetoothCompanyIdentiferITechDynamicGlobalDistribution					=	153,
+	kBluetoothCompanyIdentiferAlpwise											=	154,
+	kBluetoothCompanyIdentiferJiangsuToppowerAutomotiveElectronics				=	155,
+	kBluetoothCompanyIdentiferColorfy											=	156,
+	kBluetoothCompanyIdentiferGeoforce											=	157,
+	kBluetoothCompanyIdentiferBose												=	158,
+	kBluetoothCompanyIdentiferSuuntoOy											=	159,
+	kBluetoothCompanyIdentiferKensingtonComputerProductsGroup					=	160,
+	kBluetoothCompanyIdentiferSRMedizinelektronik								=	161,
+	kBluetoothCompanyIdentiferVertu												=	162,
+	kBluetoothCompanyIdentiferMetaWatch											=	163,
+	kBluetoothCompanyIdentiferLinak												=	164,
+	kBluetoothCompanyIdentiferOTLDynamics										=	165,
+	kBluetoothCompanyIdentiferPandaOcean										=	166,
+	kBluetoothCompanyIdentiferVisteon											=	167,
+	kBluetoothCompanyIdentiferARPDevicesUnlimited								=	168,
+	kBluetoothCompanyIdentiferMagnetiMarelli									=	169,
+	kBluetoothCompanyIdentiferCaenRFID											=	170,
+	kBluetoothCompanyIdentiferIngenieurSystemgruppeZahn							=	171,
+	kBluetoothCompanyIdentiferGreenThrottleGames								=	172,
+	kBluetoothCompanyIdentiferPeterSystemtechnik								=	173,
+	kBluetoothCompanyIdentiferOmegawave											=	174,
+	kBluetoothCompanyIdentiferCinetix											=	175,
+	kBluetoothCompanyIdentiferPassifSemiconductor								=	176,
+	kBluetoothCompanyIdentiferSarisCyclingGroup									=	177,
+	kBluetoothCompanyIdentiferBekey												=	178,
+	kBluetoothCompanyIdentiferClarinoxTechnologies								=	179,
+	kBluetoothCompanyIdentiferBDETechnology										=	180,
+	kBluetoothCompanyIdentiferSwirlNetworks										=	181,
+	kBluetoothCompanyIdentiferMesoInternational									=	182,
+	kBluetoothCompanyIdentiferTreLab											=	183,
+	kBluetoothCompanyIdentiferQualcommInnovationCenter							=	184,
+	kBluetoothCompanyIdentiferJohnsonControls									=	185,
+	kBluetoothCompanyIdentiferStarkeyLaboratories								=	186,
+	kBluetoothCompanyIdentiferSPowerElectronics									=	187,
+	kBluetoothCompanyIdentiferAceSensor											=	188,
+	kBluetoothCompanyIdentiferAplix												=	189,
+	kBluetoothCompanyIdentiferAAMPofAmerica										=	190,
+	kBluetoothCompanyIdentiferStalmartTechnology								=	191,
+	kBluetoothCompanyIdentiferAMICCOMElectronics								=	192,
+	kBluetoothCompanyIdentiferShenzhenExcelsecuDataTechnology					=	193,
+	kBluetoothCompanyIdentiferGeneq												=	194,
+	kBluetoothCompanyIdentiferAdidas											=	195,
+	kBluetoothCompanyIdentiferLGElectronics										=	196,
+	kBluetoothCompanyIdentiferOnsetComputer										=	197,
+	kBluetoothCompanyIdentiferSelflyBV											=	198,
+	kBluetoothCompanyIdentiferQuupa												=	199,
+	kBluetoothCompanyIdentiferGeLo												=	200,
+	kBluetoothCompanyIdentiferEvluma											=	201,
+	kBluetoothCompanyIdentiferMC10												=	202,
+	kBluetoothCompanyIdentiferBinauricSE										=	203,
+	kBluetoothCompanyIdentiferBeatsElectronics									=	204,
+	kBluetoothCompanyIdentiferMicrochipTechnology								=	205,
+	kBluetoothCompanyIdentiferElgatoSystems										=	206,
+	kBluetoothCompanyIdentiferARCHOS											=	207,
+	kBluetoothCompanyIdentiferDexcom											=	208,
+	kBluetoothCompanyIdentiferPolarElectroEurope								=	209,
+	kBluetoothCompanyIdentiferDialogSemiconductor								=	210,
+	kBluetoothCompanyIdentiferTaixingbangTechnology								=	211,
+	kBluetoothCompanyIdentiferKawantech											=	212,
+	kBluetoothCompanyIdentiferAustcoCommunicationsSystems						=	213,
+	kBluetoothCompanyIdentiferTimexGroup										=	214,
+	kBluetoothCompanyIdentiferQualcommTechnologies								=	215,
+	kBluetoothCompanyIdentiferQualcommConnectedExperiences						=	216,
+	kBluetoothCompanyIdentiferVoyetraTurtleBeach								=	217,
+	kBluetoothCompanyIdentifertxtrGMBH											=	218,
+	kBluetoothCompanyIdentiferBiosentronics										=	219,
+	kBluetoothCompanyIdentiferProctorAndGamble									=	220,
+	kBluetoothCompanyIdentiferHosiden											=	221,
+	kBluetoothCompanyIdentiferMusik												=	222,
+	kBluetoothCompanyIdentiferMisfitWearables									=	223,
+	kBluetoothCompanyIdentiferGoogle											=	224,
+	kBluetoothCompanyIdentiferDanlers											=	225,
+	kBluetoothCompanyIdentiferSemilink											=	226,
+	kBluetoothCompanyIdentiferInMusicBrands										=	227,
+	kBluetoothCompanyIdentiferLSResearch										=	228,
+	kBluetoothCompanyIdentiferEdenSoftwareConsultants							=	229,
+	kBluetoothCompanyIdentiferFreshtemp											=	230,
+	kBluetoothCompanyIdentiferKSTechnologies									=	231,
+	kBluetoothCompanyIdentiferACTSTechnologies									=	232,
+	kBluetoothCompanyIdentiferVtrackSystems										=	233,
+	kBluetoothCompanyIdentiferNielsenKellerman									=	234,
+	kBluetoothCompanyIdentiferServerTechnology									=	235,
+	kBluetoothCompanyIdentiferBioResearchAssociates								=	236,
+	kBluetoothCompanyIdentiferJollyLogic										=	237,
+	kBluetoothCompanyIdentiferAboveAverageOutcomes								=	238,
+	kBluetoothCompanyIdentiferBitsplitters										=	239,
+	kBluetoothCompanyIdentiferPayPal											=	240,
+	kBluetoothCompanyIdentiferWitronTechnology									=	241,
+	kBluetoothCompanyIdentiferMorseProject										=	242,
+	kBluetoothCompanyIdentiferKentDisplays										=	243,
+	kBluetoothCompanyIdentiferNautilus											=	244,
+	kBluetoothCompanyIdentiferSmartifier										=	245,
+	kBluetoothCompanyIdentiferElcometer											=	246,
+	kBluetoothCompanyIdentiferVSNTechnologies									=	247,
+	kBluetoothCompanyIdentiferAceUni											=	248,
+	kBluetoothCompanyIdentiferStickNFind										=	249,
+	kBluetoothCompanyIdentiferCrystalCode										=	250,
+	kBluetoothCompanyIdentiferKOUKAMM											=	251,
+	kBluetoothCompanyIdentiferDelphi											=	252,
+	kBluetoothCompanyIdentiferValenceTech										=	253,
+	kBluetoothCompanyIdentiferStanleyBlackAndDecker								=	254,
+	kBluetoothCompanyIdentiferTypeProducts										=	255,
+	kBluetoothCompanyIdentiferTomTomInternational								=	256,
+	kBluetoothCompanyIdentiferFuGoo												=	257,
+	kBluetoothCompanyIdentiferKeiser											=	258,
+	kBluetoothCompanyIdentiferBangAndOlufson									=	259,
+	kBluetoothCompanyIdentiferPLUSLocationSystems								=	260,
+	kBluetoothCompanyIdentiferUbiquitousComputingTechnology						=	261,
+	kBluetoothCompanyIdentiferInnovativeYachtterSolutions						=	262,
+	kBluetoothCompanyIdentiferWilliamDemantHolding								=	263,
+	
 	kBluetoothCompanyIdentiferInteropIdentifier									=	65535
 };
+
 
 #pragma mark -
 #pragma mark === Baseband ===
@@ -658,6 +843,7 @@ enum BluetoothHCIExtendedInquiryResponseDataTypes
 
 
 // HCI Versions
+// Living Document URL: https://www.bluetooth.com/specifications/assigned-numbers/host-controller-interface
 
 typedef enum BluetoothHCIVersions
 {
@@ -669,11 +855,13 @@ typedef enum BluetoothHCIVersions
 	kBluetoothHCIVersionCoreSpecification3_0HS												=	0x05,
 	kBluetoothHCIVersionCoreSpecification4_0												=	0x06,
     kBluetoothHCIVersionCoreSpecification4_1												=	0x07,
-    kBluetoothHCIVersionCoreSpecification4_2												=	0x08
+	kBluetoothHCIVersionCoreSpecification4_2												=	0x08,
+	kBluetoothHCIVersionCoreSpecification5_0												=	0x09
 } BluetoothHCIVersions;
 
 
 // LMP Versions
+// Living Document URL: https://www.bluetooth.com/specifications/assigned-numbers/link-manager
 
 typedef enum BluetoothLMPVersions
 {
@@ -685,7 +873,8 @@ typedef enum BluetoothLMPVersions
 	kBluetoothLMPVersionCoreSpecification3_0HS												=	0x05,
 	kBluetoothLMPVersionCoreSpecification4_0												=	0x06,
 	kBluetoothLMPVersionCoreSpecification4_1												=	0x07,
-    kBluetoothLMPVersionCoreSpecification4_2												=	0x08
+	kBluetoothLMPVersionCoreSpecification4_2												=	0x08,
+	kBluetoothLMPVersionCoreSpecification5_0												=	0x09
 } BluetoothLMPVersions;
 
 #ifdef	__cplusplus

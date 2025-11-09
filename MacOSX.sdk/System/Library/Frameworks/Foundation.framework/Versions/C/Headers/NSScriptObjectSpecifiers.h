@@ -1,6 +1,6 @@
 /*
 	NSScriptObjectSpecifiers.h
-	Copyright (c) 1997-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -61,7 +61,7 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
 
 /* Given a typeObjectSpecifier Apple event descriptor, create and return an object specifier, or nil for failure. If this is invoked and fails during the execution of a script command, information about the error that caused the failure is recorded in [NSScriptCommand currentCommand].
 */
-+ (nullable NSScriptObjectSpecifier *)objectSpecifierWithDescriptor:(NSAppleEventDescriptor *)descriptor NS_AVAILABLE(10_5, NA);
++ (nullable NSScriptObjectSpecifier *)objectSpecifierWithDescriptor:(NSAppleEventDescriptor *)descriptor API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 - (instancetype)initWithContainerSpecifier:(NSScriptObjectSpecifier *)container key:(NSString *)property;
     // This figures out the container class desc from the container specifier.
@@ -99,7 +99,7 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
 
 /* Return an Apple event descriptor that represents the receiver. If the receiver was created with +objectSpecifierWithDescriptor: that passed-in descriptor is returned. Otherwise a new one is created and returned (autoreleased, of course).
 */ 
-@property (nullable, readonly, copy) NSAppleEventDescriptor *descriptor NS_AVAILABLE(10_5, NA);
+@property (nullable, readonly, copy) NSAppleEventDescriptor *descriptor API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -163,8 +163,8 @@ typedef NS_ENUM(NSUInteger, NSWhoseSubelementIdentifier) {
 - (instancetype)initWithPosition:(NSInsertionPosition)position objectSpecifier:(NSScriptObjectSpecifier *)specifier NS_DESIGNATED_INITIALIZER;
 
 // Return the position or object specifier that was specified at initialization time.
-@property (readonly) NSInsertionPosition position NS_AVAILABLE(10_5, NA);
-@property (readonly, retain) NSScriptObjectSpecifier *objectSpecifier NS_AVAILABLE(10_5, NA);
+@property (readonly) NSInsertionPosition position API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (readonly, retain) NSScriptObjectSpecifier *objectSpecifier API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Set the class description for the object or objects to be inserted.  This message can be sent at any time after object initialization, but must be sent before evaluation to have any effect.
 - (void)setInsertionClassDescription:(NSScriptClassDescription *)classDescription;

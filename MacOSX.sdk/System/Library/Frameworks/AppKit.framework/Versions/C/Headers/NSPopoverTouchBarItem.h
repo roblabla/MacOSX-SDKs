@@ -1,7 +1,7 @@
 /*
  NSPopoverTouchBarItem.h
  Application Kit
- Copyright (c) 2015-2016, Apple Inc.
+ Copyright (c) 2015-2017, Apple Inc.
  All rights reserved.
 */
 
@@ -34,7 +34,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 }
 
 /*
-    The touch bar displayed when this item is "popped." By default this is an empty touch bar that cannot be customized. This property is archived.
+    The NSTouchBar displayed when this item is "popped." By default this is an empty bar that cannot be customized. This property is archived.
 */
 @property (strong) NSTouchBar *popoverTouchBar;
 
@@ -44,7 +44,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @property (readwrite, copy, null_resettable) NSString *customizationLabel;
 
 /*
-    The view displayed when the item is in its hosted touch bar. By default, this is an NSButton whose target is this popover item, whose action is showPopover:, and whose image and title are bound to this item's collapsedRepresentationImage and collapsedRepresentationLabel respectively. This property is archived.
+    The view displayed when the item is in its hosted NSTouchBar. By default, this is an NSButton whose target is this popover item, whose action is showPopover:, and whose image and title are bound to this item's collapsedRepresentationImage and collapsedRepresentationLabel respectively. This property is archived.
 */
 @property (strong) __kindof NSView *collapsedRepresentation;
 
@@ -59,7 +59,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @property (strong) NSString *collapsedRepresentationLabel;
 
 /*
-    A touchbar to be used exclusively for press-and-hold popovers. This touch bar can be the same as the one used for "popoverTouchBar" property, but does not have to be. When non-nil this touch bar will be displayed while the user holds their finger down on the collapsed representation and released when the user raises their finger. This tracking behavior is automatic, but popovers with custom collapsed representations will still need to send -showPopover: to start tracking.
+    An NSTouchBar to be used exclusively for press-and-hold popovers. This NSTouchBar can be the same as the one used for "popoverTouchBar" property, but does not have to be. When non-nil this NSTouchBar will be displayed while the user holds their finger down on the collapsed representation and released when the user raises their finger. This tracking behavior is automatic, but popovers with custom collapsed representations will still need to send -showPopover: to start tracking.
 
     This property is archived.
 */
@@ -71,12 +71,12 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @property BOOL showsCloseButton;
 
 /*
-    Replaces the main touch bar with this item's popover touch bar. If this item is not visible, this method will have no effect. If this item ceases to be visible, the popover touch bar will automatically be ordered out.
+    Replaces the main NSTouchBar with this item's popover NSTouchBar. If this item is not visible, this method will have no effect. If this item ceases to be visible, the popover NSTouchBar will automatically be ordered out.
 */
 - (void)showPopover:(nullable id)sender;
 
 /*
-    This method will restore the previously visible main touch bar. This method can be invoked explicitly to order out a popover if interacting with an item inside it should close it.
+    This method will restore the previously visible main NSTouchBar. This method can be invoked explicitly to order out a popover if interacting with an item inside it should close it.
 */
 - (void)dismissPopover:(nullable id)sender;
 

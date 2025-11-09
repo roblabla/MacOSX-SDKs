@@ -1,17 +1,17 @@
-.TH "MPSCNNPooling" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSCNNPooling" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSCNNPooling \- 
+MPSCNNPooling
 .SH SYNOPSIS
 .br
 .PP
 .PP
-\fC#import <MPSCNN\&.h>\fP
+\fC#import <MPSCNNPooling\&.h>\fP
 .PP
 Inherits \fBMPSCNNKernel\fP\&.
 .PP
-Inherited by \fBMPSCNNPoolingAverage\fP, and \fBMPSCNNPoolingMax\fP\&.
+Inherited by \fBMPSCNNDilatedPoolingMax\fP, \fBMPSCNNPoolingAverage\fP, \fBMPSCNNPoolingL2Norm\fP, and \fBMPSCNNPoolingMax\fP\&.
 .SS "Instance Methods"
 
 .in +1c
@@ -22,23 +22,10 @@ Inherited by \fBMPSCNNPoolingAverage\fP, and \fBMPSCNNPoolingMax\fP\&.
 .RI "(nonnull instancetype) \- \fBinitWithDevice:kernelWidth:kernelHeight:strideInPixelsX:strideInPixelsY:\fP"
 .br
 .ti -1c
+.RI "(nullable instancetype) \- \fBinitWithCoder:device:\fP"
+.br
+.ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:\fP"
-.br
-.in -1c
-.SS "Properties"
-
-.in +1c
-.ti -1c
-.RI "NSUInteger \fBkernelWidth\fP"
-.br
-.ti -1c
-.RI "NSUInteger \fBkernelHeight\fP"
-.br
-.ti -1c
-.RI "NSUInteger \fBstrideInPixelsX\fP"
-.br
-.ti -1c
-.RI "NSUInteger \fBstrideInPixelsY\fP"
 .br
 .in -1c
 .SS "Additional Inherited Members"
@@ -47,7 +34,27 @@ Inherited by \fBMPSCNNPoolingAverage\fP, and \fBMPSCNNPoolingMax\fP\&.
 This depends on Metal\&.framework  Pooling is a form of non-linear sub-sampling\&. Pooling partitions the input image into a set of rectangles (overlapping or non-overlapping) and, for each such sub-region, outputs a value\&. The pooling operation is used in computer vision to reduce the dimensionality of intermediate representations\&. 
 .SH "Method Documentation"
 .PP 
-.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) NS_DESIGNATED_INITIALIZER"
+.SS "\- (nullable instancetype) \fBinitWithCoder:\fP (NSCoder *__nonnull) aDecoder(nonnull id< MTLDevice >) device"
+\fBNSSecureCoding\fP compatability  See \fBMPSKernel::initWithCoder\fP\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIaDecoder\fP The NSCoder subclass with your serialized \fBMPSCNNPooling\fP 
+.br
+\fIdevice\fP The MTLDevice on which to make the \fBMPSCNNPooling\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A new \fBMPSCNNPooling\fP object, or nil if failure\&. 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBMPSCNNKernel\fP\&.
+.PP
+Reimplemented in \fBMPSCNNDilatedPoolingMax\fP, \fBMPSCNNPoolingAverage\fP, \fBMPSCNNPoolingL2Norm\fP, and \fBMPSCNNPoolingMax\fP\&.
+.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) device"
 Standard init with default properties per filter type 
 .PP
 \fBParameters:\fP
@@ -57,12 +64,12 @@ Standard init with default properties per filter type
 .PP
 \fBReturns:\fP
 .RS 4
-a pointer to the newly initialized object\&. This will fail, returning nil if the device is not supported\&. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later\&. 
+A pointer to the newly initialized object\&. This will fail, returning nil if the device is not supported\&. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later\&. 
 .RE
 .PP
 
 .PP
-Reimplemented from \fBMPSKernel\fP\&.
+Reimplemented from \fBMPSCNNKernel\fP\&.
 .SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) kernelWidth(NSUInteger) kernelHeight"
 Initialize a pooling filter 
 .PP
@@ -81,7 +88,7 @@ A valid \fBMPSCNNPooling\fP object or nil, if failure\&.
 .RE
 .PP
 
-.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) kernelWidth(NSUInteger) kernelHeight(NSUInteger) strideInPixelsX(NSUInteger) NS_DESIGNATED_INITIALIZER"
+.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) kernelWidth(NSUInteger) kernelHeight(NSUInteger) strideInPixelsX(NSUInteger) strideInPixelsY"
 Initialize a pooling filter 
 .PP
 \fBParameters:\fP
@@ -103,16 +110,8 @@ A valid \fBMPSCNNPooling\fP object or nil, if failure\&.
 .RE
 .PP
 
-.SH "Property Documentation"
-.PP 
-.SS "\- kernelHeight\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
-The height of the filter window 
-.SS "\- kernelWidth\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
-The width of the filter window 
-.SS "\- strideInPixelsX\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
-The output stride (downsampling factor) in the x dimension\&. The default value is 1\&. 
-.SS "\- strideInPixelsY\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
-The output stride (downsampling factor) in the y dimension\&. The default value is 1\&. 
+.PP
+Reimplemented in \fBMPSCNNPoolingAverage\fP, \fBMPSCNNPoolingL2Norm\fP, and \fBMPSCNNPoolingMax\fP\&.
 
 .SH "Author"
 .PP 

@@ -1,16 +1,12 @@
 /*	NSError.h
-	Copyright (c) 2003-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 
-@class NSDictionary, NSArray<ObjectType>, NSString;
+@class NSDictionary<KeyType, ObjectType>, NSArray<ObjectType>, NSString;
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
 typedef NSString *NSErrorDomain;
-#else
-typedef NSString *NSErrorDomain NS_EXTENSIBLE_STRING_ENUM;
-#endif
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,41 +18,25 @@ FOUNDATION_EXPORT NSErrorDomain const NSPOSIXErrorDomain;
 FOUNDATION_EXPORT NSErrorDomain const NSOSStatusErrorDomain;
 FOUNDATION_EXPORT NSErrorDomain const NSMachErrorDomain;
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
+typedef NSString *NSErrorUserInfoKey;
+
 // Key in userInfo. A recommended standard way to embed NSErrors from underlying calls. The value of this key should be an NSError.
-FOUNDATION_EXPORT NSString *const NSUnderlyingErrorKey;
-#else
-typedef NSString *NSErrorUserInfoKey NS_EXTENSIBLE_STRING_ENUM;
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSUnderlyingErrorKey;
-#endif
 
 // Keys in userInfo, for subsystems wishing to provide their error messages up-front. Note that NSError will also consult the userInfoValueProvider for the domain when these values are not present in the userInfo dictionary.
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
-FOUNDATION_EXPORT NSString *const NSLocalizedDescriptionKey;             // NSString
-FOUNDATION_EXPORT NSString *const NSLocalizedFailureReasonErrorKey;      // NSString
-FOUNDATION_EXPORT NSString *const NSLocalizedRecoverySuggestionErrorKey; // NSString
-FOUNDATION_EXPORT NSString *const NSLocalizedRecoveryOptionsErrorKey;    // NSArray of NSStrings
-FOUNDATION_EXPORT NSString *const NSRecoveryAttempterErrorKey;           // Instance of a subclass of NSObject that conforms to the NSErrorRecoveryAttempting informal protocol
-FOUNDATION_EXPORT NSString *const NSHelpAnchorErrorKey;                  // NSString containing a help anchor
-
-// Other standard keys in userInfo, for various error codes
-FOUNDATION_EXPORT NSString *const NSStringEncodingErrorKey ;  // NSNumber containing NSStringEncoding
-FOUNDATION_EXPORT NSString *const NSURLErrorKey;              // NSURL
-FOUNDATION_EXPORT NSString *const NSFilePathErrorKey;         // NSString
-#else
-FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedDescriptionKey;             // NSString
-FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedFailureReasonErrorKey;      // NSString
-FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedRecoverySuggestionErrorKey; // NSString
-FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedRecoveryOptionsErrorKey;    // NSArray of NSStrings
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedDescriptionKey;             // NSString, a complete sentence (or more) describing ideally both what failed and why it failed.
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedFailureReasonErrorKey;      // NSString, a complete sentence (or more) describing why the operation failed.
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedRecoverySuggestionErrorKey; // NSString, a complete sentence (or more) describing what the user can do to fix the problem.
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedRecoveryOptionsErrorKey;    // NSArray of NSStrings corresponding to button titles.
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSRecoveryAttempterErrorKey;           // Instance of a subclass of NSObject that conforms to the NSErrorRecoveryAttempting informal protocol
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSHelpAnchorErrorKey;                  // NSString containing a help anchor
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSDebugDescriptionErrorKey API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));     // NSString. This provides a string which will be shown when constructing the debugDescription of the NSError, to be used when debugging or when formatting the error with %@.  This string will never be used in localizedDescription, so will not be shown to the user.
+FOUNDATION_EXPORT NSErrorUserInfoKey const NSLocalizedFailureErrorKey API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));  // NSString, a complete sentence (or more) describing what failed.  Setting a value for this key in userInfo dictionary of errors received from framework APIs is a good way to customize and fine tune the localizedDescription of an NSError.  As an example, for Foundation error code NSFileWriteOutOfSpaceError, setting the value of this key to "The image library could not be saved." will allow the localizedDescription of the error to come out as "The image library could not be saved. The volume Macintosh HD is out of space." rather than the default (say) “You can't save the file ImgDatabaseV2 because the volume Macintosh HD is out of space."
 
 // Other standard keys in userInfo, for various error codes
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSStringEncodingErrorKey ;  // NSNumber containing NSStringEncoding
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSURLErrorKey;              // NSURL
 FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSString
-#endif
-
 
 @interface NSError : NSObject <NSCopying, NSSecureCoding> {
     @private
@@ -68,8 +48,8 @@ FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSStri
 
 /* Domain cannot be nil; dict may be nil if no userInfo desired.
 */
-- (instancetype)initWithDomain:(NSErrorDomain)domain code:(NSInteger)code userInfo:(nullable NSDictionary *)dict NS_DESIGNATED_INITIALIZER;
-+ (instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code userInfo:(nullable NSDictionary *)dict;
+- (instancetype)initWithDomain:(NSErrorDomain)domain code:(NSInteger)code userInfo:(nullable NSDictionary<NSErrorUserInfoKey, id> *)dict NS_DESIGNATED_INITIALIZER;
++ (instancetype)errorWithDomain:(NSErrorDomain)domain code:(NSInteger)code userInfo:(nullable NSDictionary<NSErrorUserInfoKey, id> *)dict;
 
 /* These define the error. Domains are described by names that are arbitrary strings used to differentiate groups of codes; for custom domain using reverse-DNS naming will help avoid conflicts. Codes are domain-specific.
 */
@@ -78,9 +58,15 @@ FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSStri
 
 /* Additional info which may be used to describe the error further. Examples of keys that might be included in here are "Line Number", "Failed URL", etc. Embedding other errors in here can also be used as a way to communicate underlying reasons for failures; for instance "File System Error" embedded in the userInfo of an NSError returned from a higher level document object. If the embedded error information is itself NSError, the standard key NSUnderlyingErrorKey can be used.
 */
-@property (readonly, copy) NSDictionary *userInfo;
+@property (readonly, copy) NSDictionary<NSErrorUserInfoKey, id> *userInfo;
 
-/* The primary user-presentable message for the error, for instance for NSFileReadNoPermissionError: "The file "File Name" couldn't be opened because you don't have permission to view it.". By default this looks for NSLocalizedDescriptionKey in the user info. If not present, it consults the userInfoValueProvider for the domain, and if that returns nil, it manufactures a last-resort string from the domain and code. This manufactured result is likely not suitable for presentation to the user, but can be used in logs or debugging.
+/* The primary user-presentable message for the error, for instance for NSFileReadNoPermissionError: "The file "File Name" couldn't be opened because you don't have permission to view it.". This message should ideally indicate what failed and why it failed. This value either comes from NSLocalizedDescriptionKey, or NSLocalizedFailureErrorKey+NSLocalizedFailureReasonErrorKey, or NSLocalizedFailureErrorKey. The steps this takes to construct the description include:
+ 1. Look for NSLocalizedDescriptionKey in userInfo, use value as-is if present.
+ 2. Look for NSLocalizedFailureErrorKey in userInfo. If present, use, combining with value for NSLocalizedFailureReasonErrorKey if available.
+ 3. Fetch NSLocalizedDescriptionKey from userInfoValueProvider, use value as-is if present.
+ 4. Fetch NSLocalizedFailureErrorKey from userInfoValueProvider. If present, use, combining with value for NSLocalizedFailureReasonErrorKey if available.
+ 5. Look for NSLocalizedFailureReasonErrorKey in userInfo or from userInfoValueProvider; combine with generic "Operation failed" message.
+ 6. Last resort localized but barely-presentable string manufactured from domain and code. The result is never nil.
 */
 @property (readonly, copy) NSString *localizedDescription;
 
@@ -105,7 +91,7 @@ FOUNDATION_EXPORT NSErrorUserInfoKey const NSFilePathErrorKey;         // NSStri
 @property (nullable, readonly, copy) NSString *helpAnchor;
 
 
-/* Specify a block which will be called from the implementations of localizedDescription, localizedFailureReason, localizedRecoverySuggestion, localizedRecoveryOptions, recoveryAttempter, and helpAnchor, when the underlying value for these is not present in the userInfo dictionary of NSError instances with the specified domain.  The provider will be called with the userInfo key corresponding to the queried property: For instance, NSLocalizedDescriptionKey for localizedDescription.  The provider should return nil for any keys it is not able to provide and, very importantly, any keys it does not recognize (since we may extend the list of keys in future releases).
+/* Specify a block which will be called from the implementations of localizedDescription, localizedFailureReason, localizedRecoverySuggestion, localizedRecoveryOptions, recoveryAttempter, helpAnchor, and debugDescription when the underlying value for these is not present in the userInfo dictionary of NSError instances with the specified domain.  The provider will be called with the userInfo key corresponding to the queried property: For instance, NSLocalizedDescriptionKey for localizedDescription.  The provider should return nil for any keys it is not able to provide and, very importantly, any keys it does not recognize (since we may extend the list of keys in future releases).
 
 The specified block will be called synchronously at the time when the above properties are queried. The results are not cached.
 
@@ -115,10 +101,8 @@ It is expected that only the “owner” of an NSError domain specifies the prov
  
 If an appropriate result for the requested key cannot be provided, return nil rather than choosing to manufacture a generic fallback response such as "Operation could not be completed, error 42." NSError will take care of the fallback cases.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(7)
-+ (void)setUserInfoValueProviderForDomain:(NSErrorDomain)errorDomain provider:(id _Nullable (^ _Nullable)(NSError *err, NSString *userInfoKey))provider NS_AVAILABLE(10_11, 9_0);
-+ (id _Nullable (^ _Nullable)(NSError *err, NSString *userInfoKey))userInfoValueProviderForDomain:(NSErrorDomain)errorDomain NS_AVAILABLE(10_11, 9_0);
-#endif
++ (void)setUserInfoValueProviderForDomain:(NSErrorDomain)errorDomain provider:(id _Nullable (^ _Nullable)(NSError *err, NSErrorUserInfoKey userInfoKey))provider API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
++ (id _Nullable (^ _Nullable)(NSError *err, NSErrorUserInfoKey userInfoKey))userInfoValueProviderForDomain:(NSErrorDomain)errorDomain API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 @end
 

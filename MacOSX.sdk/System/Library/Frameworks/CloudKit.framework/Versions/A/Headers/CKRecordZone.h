@@ -17,13 +17,12 @@ typedef NS_OPTIONS(NSUInteger, CKRecordZoneCapabilities) {
     /* Batched changes to this zone happen atomically */
     CKRecordZoneCapabilityAtomic         = 1 << 1,
     /* Records in this zone can be shared */
-    CKRecordZoneCapabilitySharing        NS_AVAILABLE(10_12, 10_0) = 1 << 2,
-} NS_AVAILABLE(10_10, 8_0);
+    CKRecordZoneCapabilitySharing        API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) = 1 << 2,
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
-/* The default zone has no capabilities */
-CK_EXTERN NSString * const CKRecordZoneDefaultName NS_AVAILABLE(10_10, 8_0);
+CK_EXTERN NSString * const CKRecordZoneDefaultName API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKRecordZone : NSObject <NSSecureCoding, NSCopying>
 
 + (CKRecordZone *)defaultRecordZone;
@@ -34,7 +33,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 
 @property (nonatomic, readonly, strong) CKRecordZoneID *zoneID;
 
-/* Capabilities are not set until a record zone is saved */
+/* Capabilities on locally-created record zones are not valid until the record zone is saved.
+ Capabilities on record zones fetched from the server are valid. */
 @property (nonatomic, readonly, assign) CKRecordZoneCapabilities capabilities;
 
 @end

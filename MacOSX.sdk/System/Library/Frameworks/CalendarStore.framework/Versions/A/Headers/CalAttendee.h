@@ -1,10 +1,12 @@
 //
 //  CalAttendee.h
-//	Calendar Store Framework
+//	CalendarStore Framework
 //
 //  Copyright 2006 Apple Inc. All rights reserved.
 //
-//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
+//  The CalendarStore framework is deprecated.  Please use the EventKit framework instead.
+
+#import <Foundation/Foundation.h>
 
 //  These constants are used to describe the user's confirmation status for an attendee. For now, it is not possible to 
 //  modify an event's attendees or the attendees themselves.

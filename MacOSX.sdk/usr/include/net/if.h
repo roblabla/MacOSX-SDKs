@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -120,7 +120,7 @@ struct if_clonereq {
  *   contains the enabled optional features & capabilites that can be used
  *   individually per packet and are specified in the mbuf pkthdr.csum_flags
  *   field.  IFCAP_* and IFNET_* do not match one to one and IFNET_* may be
- *   more detailed or differenciated than IFCAP_*.
+ *   more detailed or differentiated than IFCAP_*.
  *   IFNET_* hwassist flags have corresponding CSUM_* in sys/mbuf.h
  */
 #define	IFCAP_RXCSUM		0x00001	/* can offload checksum on RX */
@@ -136,13 +136,16 @@ struct if_clonereq {
 #define	IFCAP_SKYWALK		0x00400	/* Skywalk mode supported/enabled */
 #define	IFCAP_HW_TIMESTAMP	0x00800	/* Time stamping in hardware */
 #define	IFCAP_SW_TIMESTAMP	0x01000	/* Time stamping in software */
+#define	IFCAP_CSUM_PARTIAL	0x02000 /* can offload partial checksum */
+#define	IFCAP_CSUM_ZERO_INVERT	0x04000 /* can invert 0 to -0 (0xffff) */
 
 #define	IFCAP_HWCSUM	(IFCAP_RXCSUM | IFCAP_TXCSUM)
 #define	IFCAP_TSO	(IFCAP_TSO4 | IFCAP_TSO6)
 
 #define	IFCAP_VALID (IFCAP_HWCSUM | IFCAP_TSO | IFCAP_LRO | IFCAP_VLAN_MTU | \
 	IFCAP_VLAN_HWTAGGING | IFCAP_JUMBO_MTU | IFCAP_AV | IFCAP_TXSTATUS | \
-	IFCAP_SKYWALK | IFCAP_SW_TIMESTAMP | IFCAP_HW_TIMESTAMP)
+	IFCAP_SKYWALK | IFCAP_SW_TIMESTAMP | IFCAP_HW_TIMESTAMP | \
+	IFCAP_CSUM_PARTIAL | IFCAP_CSUM_ZERO_INVERT)
 
 #define	IFQ_MAXLEN	128
 #define	IFNET_SLOWHZ	1	/* granularity is 1 second */
@@ -302,6 +305,15 @@ struct	ifreq {
 		u_int32_t ifru_wake_flags;
 		u_int32_t ifru_route_refcnt;
 		int	ifru_cap[2];
+		u_int32_t ifru_functional_type;
+#define IFRTYPE_FUNCTIONAL_UNKNOWN	0
+#define IFRTYPE_FUNCTIONAL_LOOPBACK	1
+#define IFRTYPE_FUNCTIONAL_WIRED	2
+#define IFRTYPE_FUNCTIONAL_WIFI_INFRA	3
+#define IFRTYPE_FUNCTIONAL_WIFI_AWDL	4
+#define IFRTYPE_FUNCTIONAL_CELLULAR	5
+#define	IFRTYPE_FUNCTIONAL_INTCOPROC	6
+#define IFRTYPE_FUNCTIONAL_LAST		6
 	} ifr_ifru;
 #define	ifr_addr	ifr_ifru.ifru_addr	/* address */
 #define	ifr_dstaddr	ifr_ifru.ifru_dstaddr	/* other end of p-to-p link */

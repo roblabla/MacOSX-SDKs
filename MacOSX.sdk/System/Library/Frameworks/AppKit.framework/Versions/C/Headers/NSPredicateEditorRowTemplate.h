@@ -1,7 +1,7 @@
 /*
         NSPredicateEditorRowTemplate.h
 	Application Kit
-	Copyright (c) 2006-2016, Apple Inc.
+	Copyright (c) 2006-2017, Apple Inc.
 	All rights reserved.
 */
 

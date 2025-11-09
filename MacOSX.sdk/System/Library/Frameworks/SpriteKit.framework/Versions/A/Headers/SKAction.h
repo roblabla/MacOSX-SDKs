@@ -53,7 +53,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 
-/** The duration required to complete an action. */
+/** The duration required to complete an action, in seconds. */
 @property (nonatomic) NSTimeInterval duration;
 
 /** The timing mode used to execute an action
@@ -67,7 +67,7 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
  */
 @property (nonatomic) SKActionTimingFunction timingFunction NS_AVAILABLE(10_10, 8_0);
 
-/** A speed factor that modifies how fast an action runs. */
+/** A speed factor that modifies how fast an action runs. Default value is 1.0 */
 @property (nonatomic) CGFloat speed;
 
 /** Creates an action that reverses the behavior of another action
@@ -83,51 +83,51 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 
 /** Creates an action that moves a node relative to its current position
  @param delta A vector that describes the change to apply to the node’s position
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)moveBy:(CGVector)delta duration:(NSTimeInterval)sec;
-+ (SKAction *)moveByX:(CGFloat)deltaX y:(CGFloat)deltaY duration:(NSTimeInterval)sec;
++ (SKAction *)moveBy:(CGVector)delta duration:(NSTimeInterval)duration;
++ (SKAction *)moveByX:(CGFloat)deltaX y:(CGFloat)deltaY duration:(NSTimeInterval)duration;
 
 /** Creates an action that moves a node to a new position
  @param location The coordinates for the node’s new position
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)moveTo:(CGPoint)location duration:(NSTimeInterval)sec;
-+ (SKAction *)moveToX:(CGFloat)x duration:(NSTimeInterval)sec;
-+ (SKAction *)moveToY:(CGFloat)y duration:(NSTimeInterval)sec;
++ (SKAction *)moveTo:(CGPoint)location duration:(NSTimeInterval)duration;
++ (SKAction *)moveToX:(CGFloat)x duration:(NSTimeInterval)duration;
++ (SKAction *)moveToY:(CGFloat)y duration:(NSTimeInterval)duration;
 
 /** Creates an action that rotates the node by a relative value
  @param radians The amount to rotate the node, in radians
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)rotateByAngle:(CGFloat)radians duration:(NSTimeInterval)sec;
++ (SKAction *)rotateByAngle:(CGFloat)radians duration:(NSTimeInterval)duration;
 
 /** Creates an action that rotates the node counterclockwise to an absolute angle
  @param radians The angle to rotate the node to, in radians
  @param duration The duration of the animation
  */
-+ (SKAction *)rotateToAngle:(CGFloat)radians duration:(NSTimeInterval)sec;
++ (SKAction *)rotateToAngle:(CGFloat)radians duration:(NSTimeInterval)duration;
 
 /** Creates an action that rotates the node to an absolute value
  @param radians The angle to rotate the node to, in radians
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  @param shortestUnitArc If YES, then the rotation is performed in whichever
  direction results in the smallest rotation. If NO, then the rotation
  is interpolated
  */
-+ (SKAction *)rotateToAngle:(CGFloat)radians duration:(NSTimeInterval)sec shortestUnitArc:(BOOL)shortestUnitArc;
++ (SKAction *)rotateToAngle:(CGFloat)radians duration:(NSTimeInterval)duration shortestUnitArc:(BOOL)shortestUnitArc;
 
 /** Creates an action that adjusts the size of a sprite
  @param width The amount to add to the sprite’s width
  @param height The amount to add to the sprite’s height
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
 + (SKAction *)resizeByWidth:(CGFloat)width height:(CGFloat)height duration:(NSTimeInterval)duration;
 
 /** Creates an action that changes the width and height of a sprite to a new absolute value
  @param width The new width of the sprite
  @param height The new height of the sprite
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
 + (SKAction *)resizeToWidth:(CGFloat)width height:(CGFloat)height duration:(NSTimeInterval)duration;
 + (SKAction *)resizeToWidth:(CGFloat)width duration:(NSTimeInterval)duration;
@@ -135,24 +135,25 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 
 /** Creates an action that changes the x and y scale values of a node by a relative value
  @param scale The amount to modify to the node’s x and y scale values
- @param sec The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)scaleBy:(CGFloat)scale duration:(NSTimeInterval)sec;
-+ (SKAction *)scaleXBy:(CGFloat)xScale y:(CGFloat)yScale duration:(NSTimeInterval)sec;
++ (SKAction *)scaleBy:(CGFloat)scale duration:(NSTimeInterval)duration;
++ (SKAction *)scaleXBy:(CGFloat)xScale y:(CGFloat)yScale duration:(NSTimeInterval)duration;
 
 /** Creates an action that changes the x and y scale values of a node by a relative value
  @param scale The new value for the node’s x and y scale values
- @param sec The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)scaleTo:(CGFloat)scale duration:(NSTimeInterval)sec;
-+ (SKAction *)scaleXTo:(CGFloat)xScale y:(CGFloat)yScale duration:(NSTimeInterval)sec;
-+ (SKAction *)scaleXTo:(CGFloat)scale duration:(NSTimeInterval)sec;
-+ (SKAction *)scaleYTo:(CGFloat)scale duration:(NSTimeInterval)sec;
++ (SKAction *)scaleTo:(CGFloat)scale duration:(NSTimeInterval)duration;
++ (SKAction *)scaleXTo:(CGFloat)xScale y:(CGFloat)yScale duration:(NSTimeInterval)duration;
++ (SKAction *)scaleXTo:(CGFloat)scale duration:(NSTimeInterval)duration;
++ (SKAction *)scaleYTo:(CGFloat)scale duration:(NSTimeInterval)duration;
 
 /**
  Adjust the sprite's xScale & yScale to achieve the desired size (in parent's coordinate space)
- */
-+ (SKAction *)scaleToSize:(CGSize)size duration:(NSTimeInterval)sec NS_AVAILABLE(10_12, 10_0);
+ @param duration The duration of the animation, in seconds
+*/
++ (SKAction *)scaleToSize:(CGSize)size duration:(NSTimeInterval)duration NS_AVAILABLE(10_12, 10_0);
 
 /** Creates an action that runs a collection of actions sequentially
  @param sequence An array of SKAction objects
@@ -195,26 +196,26 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 + (SKAction *)repeatActionForever:(SKAction *)action;
 
 /** Creates an action that changes the alpha value of the node to 1.0
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)fadeInWithDuration:(NSTimeInterval)sec;
++ (SKAction *)fadeInWithDuration:(NSTimeInterval)duration;
 
 /** Creates an action that changes the alpha value of the node to 0.0
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)fadeOutWithDuration:(NSTimeInterval)sec;
++ (SKAction *)fadeOutWithDuration:(NSTimeInterval)duration;
 
 /** Creates an action that adjusts the alpha value of a node by a relative value
  @param factor The amount to modify the node’s alpha value
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)fadeAlphaBy:(CGFloat)factor duration:(NSTimeInterval)sec;
++ (SKAction *)fadeAlphaBy:(CGFloat)factor duration:(NSTimeInterval)duration;
 
 /** Creates an action that adjusts the alpha value of a node to a new value
  @param alpha The new value of the node’s alpha
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)fadeAlphaTo:(CGFloat)alpha duration:(NSTimeInterval)sec;
++ (SKAction *)fadeAlphaTo:(CGFloat)alpha duration:(NSTimeInterval)duration;
 
 /** Creates an action that hides a node */
 + (SKAction *)hide NS_AVAILABLE(10_10, 8_0);
@@ -223,7 +224,7 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 + (SKAction *)unhide NS_AVAILABLE(10_10, 8_0);
 
 /** Creates an action that changes a sprite’s texture
- @param The new texture to use on the sprite
+ @param texture The new texture to use on the sprite
  */
 + (SKAction *)setTexture:(SKTexture *)texture NS_AVAILABLE(10_10, 7_1);
 + (SKAction *)setNormalTexture:(SKTexture *)texture NS_AVAILABLE(10_11, 9_0);
@@ -272,24 +273,24 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 /** Creates an animation that animates a sprite’s color and blend factor
  @param The new color for the sprite
  @param colorBlendFactor The new blend factor for the sprite
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)colorizeWithColor:(SKColor *)color colorBlendFactor:(CGFloat)colorBlendFactor duration:(NSTimeInterval)sec;
++ (SKAction *)colorizeWithColor:(SKColor *)color colorBlendFactor:(CGFloat)colorBlendFactor duration:(NSTimeInterval)duration;
 + (SKAction *)colorizeWithColorBlendFactor:(CGFloat)colorBlendFactor duration:(NSTimeInterval)sec;
 
 /** Creates an action that sets the falloff of a field
  @param falloff The new value for falloff
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  @see SKFieldNode
  */
-+ (SKAction *)falloffTo:(float)falloff duration:(NSTimeInterval)sec NS_AVAILABLE(10_10, 8_0);
++ (SKAction *)falloffTo:(float)falloff duration:(NSTimeInterval)duration NS_AVAILABLE(10_10, 8_0);
 
 /** Creates an action that sets the falloff of a field
  @param falloff The value to modify falloff by
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  @see SKFieldNode
  */
-+ (SKAction *)falloffBy:(float)falloff duration:(NSTimeInterval)sec NS_AVAILABLE(10_10, 8_0);
++ (SKAction *)falloffBy:(float)falloff duration:(NSTimeInterval)duration NS_AVAILABLE(10_10, 8_0);
 
 
 /** Creates an action that moves the node along a relative path, orienting the
@@ -297,9 +298,9 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
  
  @param path A Core Graphics path whose coordinates are relative to the node’s
  current position
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)followPath:(CGPathRef)path duration:(NSTimeInterval)sec;
++ (SKAction *)followPath:(CGPathRef)path duration:(NSTimeInterval)duration;
 
 /** Creates an action that moves the node along a path
  
@@ -313,7 +314,7 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
  the node is unchanged.
  @param duration The duration of the animation
  */
-+ (SKAction *)followPath:(CGPathRef)path asOffset:(BOOL)offset orientToPath:(BOOL)orient duration:(NSTimeInterval)sec;
++ (SKAction *)followPath:(CGPathRef)path asOffset:(BOOL)offset orientToPath:(BOOL)orient duration:(NSTimeInterval)duration;
 
 /** Creates an action that moves the node along a relative path, orienting the
  node to the path
@@ -328,24 +329,24 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 /** Creates an action that changes how fast the node executes actions by a
  relative value
  @param speed amount to modify the speed by
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)speedBy:(CGFloat)speed duration:(NSTimeInterval)sec;
++ (SKAction *)speedBy:(CGFloat)speed duration:(NSTimeInterval)duration;
 
 /** Creates an action that changes how fast the node executes actions
  @param speed The new value for the node’s speed
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)speedTo:(CGFloat)speed duration:(NSTimeInterval)sec;
++ (SKAction *)speedTo:(CGFloat)speed duration:(NSTimeInterval)duration;
 
 /** Creates an action that performs an inverse kinematic reach.
  This action must be run on a descendent of the rootNode for animation to occur.
  Running this action on the rootNode itself will not cause any animation to occur.
  @param position The position (in screen space) to reach for
  @param rootNode Where to start the inverse kinematic operation from
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
-+ (SKAction *)reachTo:(CGPoint)position rootNode:(SKNode *)root duration:(NSTimeInterval)sec NS_AVAILABLE(10_10, 8_0);
++ (SKAction *)reachTo:(CGPoint)position rootNode:(SKNode *)root duration:(NSTimeInterval)duration NS_AVAILABLE(10_10, 8_0);
 
 /** Creates an action that performs an inverse kinematic reach.
  This action must be run on a descendent of the rootNode for animation to occur.
@@ -361,7 +362,7 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
  Running this action on the rootNode itself will not cause any animation to occur.
  @param node The node to reach for
  @param rootNode Where to start the inverse kinematic operation from
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  */
 + (SKAction *)reachToNode:(SKNode *)node rootNode:(SKNode *)root duration:(NSTimeInterval)sec NS_AVAILABLE(10_10, 8_0);
 
@@ -376,27 +377,28 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 
 /** Creates an action that sets the strength of a field
  @param strength The new value for strength
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  @see SKFieldNode
  */
-+ (SKAction *)strengthTo:(float)strength duration:(NSTimeInterval)sec NS_AVAILABLE(10_10, 8_0);
++ (SKAction *)strengthTo:(float)strength duration:(NSTimeInterval)duration NS_AVAILABLE(10_10, 8_0);
 
 /** Creates an action that sets the strength of a field
  @param strength The value to modify strength by
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  @see SKFieldNode
  */
-+ (SKAction *)strengthBy:(float)strength duration:(NSTimeInterval)sec NS_AVAILABLE(10_10, 8_0);
++ (SKAction *)strengthBy:(float)strength duration:(NSTimeInterval)duration NS_AVAILABLE(10_10, 8_0);
 
 /** Creates an action that idles for a specified period of time
- @param duration The duration of the idle
+ @param duration The duration of the idle, in seconds
  */
-+ (SKAction *)waitForDuration:(NSTimeInterval)sec;
++ (SKAction *)waitForDuration:(NSTimeInterval)duration;
 
 /** Creates an action that idles for a randomized period of time
+ @param duration The duration of the idle, in seconds
  @param withRange The range of possible values for the duration
  */
-+ (SKAction *)waitForDuration:(NSTimeInterval)sec withRange:(NSTimeInterval)durationRange;
++ (SKAction *)waitForDuration:(NSTimeInterval)duration withRange:(NSTimeInterval)durationRange;
 
 /** Creates an action that removes the node from its parent */
 + (SKAction *)removeFromParent;
@@ -426,12 +428,12 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 + (SKAction *)runAction:(SKAction *)action onChildWithName:(NSString*)name;
 
 /** Creates an action that executes a block over a duration
- @param duration The duration of the animation
+ @param duration The duration of the animation, in seconds
  @param actionBlock The block to run. The block takes the following parameters:
  node The node on which the action is running.
  elapsedTime The amount of time that has passed in the animation.
  */
-+ (SKAction *)customActionWithDuration:(NSTimeInterval)seconds actionBlock:(void (^)(SKNode *node, CGFloat elapsedTime))block;
++ (SKAction *)customActionWithDuration:(NSTimeInterval)duration actionBlock:(void (^)(SKNode *node, CGFloat elapsedTime))block;
 
 /** Creates an action of the given name from an action file.
  @param name The name of the action
@@ -442,7 +444,7 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
  @param name The name of the action
  @param duration The duration of the action
  */
-+ (nullable SKAction *)actionNamed:(NSString *)name duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
++ (nullable SKAction *)actionNamed:(NSString *)name duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 
 /** Creates an action of the given name from an action file.
  @param name The name of the action
@@ -455,7 +457,7 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
  @param url The url of the file containing the action
  @param duration The duration of the action
  */
-+ (nullable SKAction *)actionNamed:(NSString *)name fromURL:(NSURL *)url duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
++ (nullable SKAction *)actionNamed:(NSString *)name fromURL:(NSURL *)url duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 
 @end
 
@@ -467,15 +469,15 @@ SK_EXPORT @interface SKAction : NSObject <NSCopying, NSCoding>
 + (SKAction *)changeMassTo:(float)v duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 + (SKAction *)changeMassBy:(float)v duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 
-+ (SKAction *)applyForce:(CGVector)force duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
-+ (SKAction *)applyForce:(CGVector)force atPoint:(CGPoint)point duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
++ (SKAction *)applyForce:(CGVector)force duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
++ (SKAction *)applyForce:(CGVector)force atPoint:(CGPoint)point duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 
-+ (SKAction *)applyTorque:(CGFloat)torque duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
++ (SKAction *)applyTorque:(CGFloat)torque duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 
-+ (SKAction *)applyImpulse:(CGVector)impulse duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
-+ (SKAction *)applyImpulse:(CGVector)impulse atPoint:(CGPoint)point duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
++ (SKAction *)applyImpulse:(CGVector)impulse duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
++ (SKAction *)applyImpulse:(CGVector)impulse atPoint:(CGPoint)point duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 
-+ (SKAction *)applyAngularImpulse:(CGFloat)impulse duration:(NSTimeInterval)sec NS_AVAILABLE(10_11, 9_0);
++ (SKAction *)applyAngularImpulse:(CGFloat)impulse duration:(NSTimeInterval)duration NS_AVAILABLE(10_11, 9_0);
 
 @end
 

@@ -803,8 +803,8 @@ sparse_status sparse_matrix_product_dense_double( enum CBLAS_ORDER order,
 
  @param ldc
  Increment in elements between rows (row major) or columns (column major) of C.
- Must be greater than or equal to n when row major, or number of rows of
- A when column major.
+ Must be greater than or equal to the number of columns of B when row major,
+ or number of rows of A when column major.
 
  @result
  On success, SPARSE_SUCCESS is returned and C has been updated with result of the
@@ -1786,13 +1786,13 @@ long sparse_get_vector_nonzero_count_double( sparse_dimension N,
  supported.
  
  @param y
- The destination dense storage of nonzero values of y.  Expected to be of size
+ The destination dense storage for nonzero values of x.  Expected to be of size
  nz elements.  On return, any nonzero values are placed in this array, if the 
  actual number of nonzero values is less than nz, then the last 
  nz - actual_nonzero_count elements are unused.
  
  @param indy
- The destination dense storage of nonzero indices of y.  Expected to be of size 
+ The destination dense storage for nonzero indices of x.  Expected to be of size 
  nz elements.  On return, any nonzero indices are placed in this array, if the 
  actual number of nonzero values is less than nz, then the last 
  nz - actual_nonzero_count elements are unused.  Returned indices are 0 based 

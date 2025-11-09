@@ -443,18 +443,18 @@ LSSetDefaultRoleHandlerForContentType(
 
 
 /*
- *  LSCopyDefaultHandlerForURLScheme
+ *  LSCopyDefaultHandlerForURLScheme()   *** DEPRECATED ***
  *  
  *  Returns the bundle identifier of the default handler for
  *  the specified URL scheme. Returns NULL if no handler
  *  is available.
- */
-/*
- *  LSCopyDefaultHandlerForURLScheme()
- *  
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
+ *  Deprecated:
+ *    Use LSCopyDefaultApplicationURLForURL() instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available
@@ -466,20 +466,20 @@ LSCopyDefaultHandlerForURLScheme(CFStringRef inURLScheme)            __OSX_AVAIL
 
 
 /*
- *  LSCopyAllHandlersForURLScheme
- *  
+ *  LSCopyAllHandlersForURLScheme()   *** DEPRECATED ***
+ *
  *  Returns an array of application bundle identifiers for
- *  applications capable of handling the specified URL scheme. 
- *  URL handling capability is determined according to the 
+ *  applications capable of handling the specified URL scheme.
+ *  URL handling capability is determined according to the
  *  kCFBundleURLTypes listed in an application's Info.plist).
  *  Returns NULL if no handlers are available.
- */
-/*
- *  LSCopyAllHandlersForURLScheme()
- *  
+ *
  *  Mac OS X threading:
  *    Thread safe since version 10.4
  *  
+ *  Deprecated:
+ *    Use LSCopyApplicationURLsForURL() instead.
+ *
  *  Availability:
  *    Mac OS X:         in version 10.4 and later in CoreServices.framework
  *    CarbonLib:        not available

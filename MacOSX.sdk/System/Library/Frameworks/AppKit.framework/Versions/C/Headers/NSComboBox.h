@@ -1,7 +1,7 @@
 /*
 	NSComboBox.h
 	Application Kit
-	Copyright (c) 1996-2016, Apple Inc.
+	Copyright (c) 1996-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -65,7 +65,7 @@ APPKIT_EXTERN NSNotificationName NSComboBoxSelectionIsChangingNotification;
 
 @property BOOL completes;
 
-@property (nullable, assign) id<NSComboBoxDelegate> delegate;
+@property (nullable, weak) id<NSComboBoxDelegate> delegate;
 
 /* The dataSource will only be used when usesDataSource is YES */
 @property (nullable, assign) id<NSComboBoxDataSource> dataSource;

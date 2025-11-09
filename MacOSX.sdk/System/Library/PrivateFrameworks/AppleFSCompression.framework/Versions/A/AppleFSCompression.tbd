@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 5E01D3E8-1867-34EB-A291-9A6CB0EF9F4C', 'x86_64: B6E2148F-BFBF-3F1B-A7DF-0F39190B4C20' ]
+uuids:           [ 'i386: AAC3A2FE-96FF-3F2A-9A76-5940A5FF54E7', 'x86_64: 7364D0F9-51F1-389D-AFC1-42AB32FFA8EE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression
-current-version: 88.0
+current-version: 96
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
@@ -19,5 +19,6 @@ exports:
                        _kAFSCPathContainsStringKey, _kAFSCPathEndsWithStringKey, 
                        _kAFSCPathExactlyEqualsStringKey, _kAFSCRuleTypeExclude, _kAFSCRuleTypeInclude, 
                        _kAFSCRuleTypeKey, _kAFSCSkipMachOFileTypes, _kAFSCSkipMachOOverridePaths, 
-                       _kAFSCThrottledIO, _queryCompressionInfo, _type5_handler_function ]
+                       _kAFSCSynchronous, _kAFSCThrottledIO, _queryCompressionInfo, 
+                       _type5_handler_function ]
 ...

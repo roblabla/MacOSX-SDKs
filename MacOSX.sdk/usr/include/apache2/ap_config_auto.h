@@ -111,14 +111,22 @@
 #define HAVE_MEMORY_H 1
 
 /* Define if nghttp2 is available */
-/* #undef HAVE_NGHTTP2 */
+#define HAVE_NGHTTP2 1
 
 /* Define to 1 if you have the <nghttp2/nghttp2.h> header file. */
-/* #undef HAVE_NGHTTP2_NGHTTP2_H */
+#define HAVE_NGHTTP2_NGHTTP2_H 1
+
+/* Define to 1 if you have the
+   `nghttp2_session_callbacks_set_on_invalid_header_callback' function. */
+/* #undef HAVE_NGHTTP2_SESSION_CALLBACKS_SET_ON_INVALID_HEADER_CALLBACK */
 
 /* Define to 1 if you have the `nghttp2_session_change_stream_priority'
    function. */
 /* #undef HAVE_NGHTTP2_SESSION_CHANGE_STREAM_PRIORITY */
+
+/* Define to 1 if you have the `nghttp2_session_get_stream_local_window_size'
+   function. */
+/* #undef HAVE_NGHTTP2_SESSION_GET_STREAM_LOCAL_WINDOW_SIZE */
 
 /* Define to 1 if you have the `nghttp2_session_server_new2' function. */
 /* #undef HAVE_NGHTTP2_SESSION_SERVER_NEW2 */
@@ -152,9 +160,6 @@
 
 /* Define to 1 if you have the `setsid' function. */
 #define HAVE_SETSID 1
-
-/* Define to 1 if you have the `SSLeay_version' function. */
-#define HAVE_SSLEAY_VERSION 1
 
 /* Define to 1 if you have the `SSL_CTX_new' function. */
 #define HAVE_SSL_CTX_NEW 1

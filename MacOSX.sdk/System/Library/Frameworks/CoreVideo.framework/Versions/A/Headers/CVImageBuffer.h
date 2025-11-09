@@ -85,8 +85,11 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_SMPTE_240M
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_UseGamma __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_EBU_3213 __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);			// Should not be used.
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_SMPTE_C __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);			// Should not be used.
-CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_ITU_R_2020 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_sRGB __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);			// IEC 61966-2-1 sRGB or sYCC
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_ITU_R_2020 __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0); // note: kCVImageBufferTransferFunction_ITU_R_709_2 is equivalent, and preferred
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_SMPTE_ST_428_1 __OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_10_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferTransferFunction_ITU_R_2100_HLG __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
 	
 /* Chroma siting information. For progressive images, only the TopField value is used. */
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferChromaLocationTopFieldKey __OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_4_0);			// CFString with one of the following CFString values
@@ -108,7 +111,21 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferChromaSubsampling_411 __OSX
 
 // Can be set to kCFBooleanTrue as a hint that the alpha channel is fully opaque.  Not used if the pixel format type has no alpha channel.
 CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferAlphaChannelIsOpaque __OSX_AVAILABLE_STARTING(__MAC_10_10,__IPHONE_8_0);
-	
+
+// Returns the standard integer code point corresponding to a given CoreVideo YCbCrMatrix constant string (in the kCVImageBufferYCbCrMatrix_... family).  Returns 2 (the code point for "unknown") if the string is NULL or not recognized.
+CV_EXPORT int CVYCbCrMatrixGetIntegerCodePointForString( CV_NULLABLE CFStringRef yCbCrMatrixString ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+// Returns the standard integer code point corresponding to a given CoreVideo ColorPrimaries constant string (in the kCVImageBufferColorPrimaries_... family).  Returns 2 (the code point for "unknown") if the string is NULL or not recognized.
+CV_EXPORT int CVColorPrimariesGetIntegerCodePointForString( CV_NULLABLE CFStringRef colorPrimariesString ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+// Returns the standard integer code point corresponding to a given CoreVideo TransferFunction constant string (in the kCVImageBufferTransferFunction_... family).  Returns 2 (the code point for "unknown") if the string is NULL or not recognized.
+CV_EXPORT int CVTransferFunctionGetIntegerCodePointForString( CV_NULLABLE CFStringRef transferFunctionString ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+// Returns the CoreVideo YCbCrMatrix constant string (in the kCVImageBufferYCbCrMatrix_... family) corresponding to a given standard integer code point.  Returns NULL if the code point is not recognized, or if it is 2 (the code point for "unknown").
+CV_EXPORT CV_NULLABLE CFStringRef CVYCbCrMatrixGetStringForIntegerCodePoint( int yCbCrMatrixCodePoint ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+// Returns the CoreVideo ColorPrimaries constant string (in the kCVImageBufferColorPrimaries_... family) corresponding to a given standard integer code point.  Returns NULL if the code point is not recognized, or if it is 2 (the code point for "unknown").
+CV_EXPORT CV_NULLABLE CFStringRef CVColorPrimariesGetStringForIntegerCodePoint( int colorPrimariesCodePoint ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+// Returns the CoreVideo TransferFunction constant string (in the kCVImageBufferTransferFunction_... family) corresponding to a given standard integer code point.  Returns NULL if the code point is not recognized, or if it is 2 (the code point for "unknown").
+CV_EXPORT CV_NULLABLE CFStringRef CVTransferFunctionGetStringForIntegerCodePoint( int transferFunctionCodePoint ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
 #pragma mark CVImageBufferRef
 
 /*!
@@ -168,6 +185,8 @@ CV_EXPORT Boolean CVImageBufferIsFlipped( CVImageBufferRef CV_NONNULL imageBuffe
 		Returns NULL if called with a non-CVImageBufferRef type or NULL.
 */
 CV_EXPORT CGColorSpaceRef CV_NULLABLE CVImageBufferGetColorSpace( CVImageBufferRef CV_NONNULL imageBuffer ) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
+	
+#endif
 
 /*!
    @function   CVImageBufferCreateColorSpaceFromAttachments
@@ -182,9 +201,13 @@ CV_EXPORT CGColorSpaceRef CV_NULLABLE CVImageBufferGetColorSpace( CVImageBufferR
 	The client is responsible for releasing the CGColorSpaceRef when it is done with it (CGColorSpaceRelease() or CFRelease())
 		
 */
-CV_EXPORT CGColorSpaceRef CV_NULLABLE CVImageBufferCreateColorSpaceFromAttachments( CFDictionaryRef CV_NONNULL attachments ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_NA);
+CV_EXPORT CGColorSpaceRef CV_NULLABLE CVImageBufferCreateColorSpaceFromAttachments( CFDictionaryRef CV_NONNULL attachments ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_10_0);
+	
+// CFData (24 bytes) containing big-endian data matching payload of ISO/IEC 23008-2:2015(E), D.2.28 Mastering display colour volume SEI message
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferMasteringDisplayColorVolumeKey __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
 
-#endif
+	// CFData (4 bytes) containing big-endian data matching payload of Content Light Level Information SEI message
+CV_EXPORT const CFStringRef CV_NONNULL kCVImageBufferContentLightLevelInfoKey __OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
 
 #if defined(__cplusplus)
 }

@@ -1,7 +1,7 @@
 /*
  *  NSPointerFunctions.h
  *
- *  Copyright (c) 2005-2016, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2017, Apple Inc. All rights reserved.
  *
  */
  
@@ -32,25 +32,25 @@ typedef NS_OPTIONS(NSUInteger, NSPointerFunctionsOptions) {
     // Memory options are mutually exclusive
     
     // default is strong
-    NSPointerFunctionsStrongMemory NS_ENUM_AVAILABLE(10_5, 6_0) = (0UL << 0),       // use strong write-barrier to backing store; use GC memory on copyIn
+    NSPointerFunctionsStrongMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (0UL << 0),       // use strong write-barrier to backing store; use GC memory on copyIn
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
     NSPointerFunctionsZeroingWeakMemory NS_ENUM_DEPRECATED_MAC(10_5, 10_8) = (1UL << 0),  // deprecated; uses GC weak read and write barriers, and dangling pointer behavior otherwise 
 #endif
-    NSPointerFunctionsOpaqueMemory NS_ENUM_AVAILABLE(10_5, 6_0) = (2UL << 0),
-    NSPointerFunctionsMallocMemory NS_ENUM_AVAILABLE(10_5, 6_0) = (3UL << 0),       // free() will be called on removal, calloc on copyIn
-    NSPointerFunctionsMachVirtualMemory NS_ENUM_AVAILABLE(10_5, 6_0) = (4UL << 0),
-    NSPointerFunctionsWeakMemory NS_ENUM_AVAILABLE(10_8, 6_0) = (5UL << 0),         // uses weak read and write barriers appropriate for ARC or GC
+    NSPointerFunctionsOpaqueMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (2UL << 0),
+    NSPointerFunctionsMallocMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (3UL << 0),       // free() will be called on removal, calloc on copyIn
+    NSPointerFunctionsMachVirtualMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (4UL << 0),
+    NSPointerFunctionsWeakMemory API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) = (5UL << 0),         // uses weak read and write barriers appropriate for ARC
     
     // Personalities are mutually exclusive
     // default is object.  As a special case, 'strong' memory used for Objects will do retain/release under non-GC
-    NSPointerFunctionsObjectPersonality NS_ENUM_AVAILABLE(10_5, 6_0) = (0UL << 8),         // use -hash and -isEqual, object description
-    NSPointerFunctionsOpaquePersonality NS_ENUM_AVAILABLE(10_5, 6_0) = (1UL << 8),         // use shifted pointer hash and direct equality
-    NSPointerFunctionsObjectPointerPersonality NS_ENUM_AVAILABLE(10_5, 6_0) = (2UL << 8),  // use shifted pointer hash and direct equality, object description
-    NSPointerFunctionsCStringPersonality NS_ENUM_AVAILABLE(10_5, 6_0) = (3UL << 8),        // use a string hash and strcmp, description assumes UTF-8 contents; recommended for UTF-8 (or ASCII, which is a subset) only cstrings
-    NSPointerFunctionsStructPersonality NS_ENUM_AVAILABLE(10_5, 6_0) = (4UL << 8),         // use a memory hash and memcmp (using size function you must set)
-    NSPointerFunctionsIntegerPersonality NS_ENUM_AVAILABLE(10_5, 6_0) = (5UL << 8),        // use unshifted value as hash & equality
+    NSPointerFunctionsObjectPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (0UL << 8),         // use -hash and -isEqual, object description
+    NSPointerFunctionsOpaquePersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (1UL << 8),         // use shifted pointer hash and direct equality
+    NSPointerFunctionsObjectPointerPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (2UL << 8),  // use shifted pointer hash and direct equality, object description
+    NSPointerFunctionsCStringPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (3UL << 8),        // use a string hash and strcmp, description assumes UTF-8 contents; recommended for UTF-8 (or ASCII, which is a subset) only cstrings
+    NSPointerFunctionsStructPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (4UL << 8),         // use a memory hash and memcmp (using size function you must set)
+    NSPointerFunctionsIntegerPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (5UL << 8),        // use unshifted value as hash & equality
 
-    NSPointerFunctionsCopyIn NS_ENUM_AVAILABLE(10_5, 6_0) = (1UL << 16),      // the memory acquire function will be asked to allocate and copy items on input
+    NSPointerFunctionsCopyIn API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = (1UL << 16),      // the memory acquire function will be asked to allocate and copy items on input
 };
 
 NS_CLASS_AVAILABLE(10_5, 6_0)
@@ -71,10 +71,10 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 
 // GC used to require that read and write barrier functions be used when pointers are from GC memory
 @property BOOL usesStrongWriteBarrier // pointers should (not) be assigned using the GC strong write barrier
-    API_DEPRECATED("Garbage collection no longer supported", macosx(10.5, 10.12), ios(2.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
+    API_DEPRECATED("Garbage collection no longer supported", macosx(10.5, 10.12), ios(2.0,10.0), watchos(2.0,3.0), tvos(9.0,10.0));
 
 @property BOOL usesWeakReadAndWriteBarriers       // pointers should (not) use GC weak read and write barriers
-    API_DEPRECATED("Garbage collection no longer supported", macosx(10.5, 10.12), ios(2.0, 10.0), watchos(2.0, 3.0), tvos(9.0, 10.0));
+    API_DEPRECATED("Garbage collection no longer supported", macosx(10.5, 10.12), ios(2.0,10.0), watchos(2.0,3.0), tvos(9.0,10.0));
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 //
 //  SceneKit.h
 //
-//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
 //
 
 /*! @framework SceneKit
@@ -49,6 +49,7 @@
 #import <SceneKit/SCNReferenceNode.h>
 #import <SceneKit/SCNAudioSource.h>
 #import <SceneKit/SCNHitTest.h>
+#import <SceneKit/SCNCameraController.h>
 
 //scripting
 #import <SceneKit/SCNJavascript.h>

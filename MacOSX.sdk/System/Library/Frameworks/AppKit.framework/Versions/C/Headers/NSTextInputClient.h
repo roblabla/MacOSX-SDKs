@@ -1,7 +1,7 @@
 /*
 	NSTextInputClient.h
 	Application Kit
-	Copyright (c) 2006-2016, Apple Inc.
+	Copyright (c) 2006-2017, Apple Inc.
 	All rights reserved.
  */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSArray.h>
 #import <Foundation/NSRange.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSAttributedString.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -50,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Returns an array of attribute names recognized by the receiver.
 */
-- (NSArray<NSString *> *)validAttributesForMarkedText;
+- (NSArray<NSAttributedStringKey> *)validAttributesForMarkedText;
 
 /* Returns the first logical rectangular area for range. The return value is in the screen coordinate. The size value can be negative if the text flows to the left. If non-NULL, actuallRange contains the character range corresponding to the returned area.
 */

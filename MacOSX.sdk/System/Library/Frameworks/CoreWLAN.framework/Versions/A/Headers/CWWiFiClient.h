@@ -7,6 +7,7 @@
 #define _CORE_WLAN_WIFI_CLIENT_H_
 
 #import <Foundation/Foundation.h>
+#import <CoreWLAN/CoreWLANTypes.h>
 
 /*!
  * @protocol
@@ -239,7 +240,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
         
         dispatch_queue_t    _mutex;
         
-        __weak id           _delegate;
+        id                  _delegate;
 }
 
 /*! @functiongroup Setting the Delegate */
@@ -345,9 +346,6 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  *
  * @abstract 
  * Register for specific Wi-Fi event notifications.
- * 
- * @discussion
- * Requires the <i>com.apple.wifi.events</i> entitlement.
  */
 - (BOOL)startMonitoringEventWithType:(CWEventType)type error:(out NSError **)error NS_AVAILABLE_MAC(10_10);
 
@@ -366,9 +364,6 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  *
  * @abstract
  * Unregister for specific Wi-Fi event notifications.
- *
- * @discussion
- * Requires the <i>com.apple.wifi.events</i> entitlement.
  */
 - (BOOL)stopMonitoringEventWithType:(CWEventType)type error:(out NSError **)error NS_AVAILABLE_MAC(10_10);
 
@@ -384,9 +379,6 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  *
  * @abstract
  * Unregister for all Wi-Fi event notifications.
- *
- * @discussion
- * Requires the <i>com.apple.wifi.events</i> entitlement.
  */
 - (BOOL)stopMonitoringAllEventsAndReturnError:(out NSError **)error NS_AVAILABLE_MAC(10_10);
 

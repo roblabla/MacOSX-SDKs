@@ -5,13 +5,13 @@
  *	@copyright 2011 Apple, Inc. All rights reserved.
  */
 
-#import <CoreBluetooth/CBDefines.h>
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
 
-#import <Foundation/Foundation.h>
+#import <CoreBluetooth/CBAttribute.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class CBPeripheral, CBCentral, CBDescriptor;
 
 /*!
  *  @enum CBCharacteristicProperties
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  *	@constant CBCharacteristicPropertyIndicateEncryptionRequired	If set, only trusted devices can enable indications of the characteristic value.
  *
  */
-typedef NS_OPTIONS(NSInteger, CBCharacteristicProperties) {
+typedef NS_OPTIONS(NSUInteger, CBCharacteristicProperties) {
 	CBCharacteristicPropertyBroadcast												= 0x01,
 	CBCharacteristicPropertyRead													= 0x02,
 	CBCharacteristicPropertyWriteWithoutResponse									= 0x04,
@@ -40,13 +40,11 @@ typedef NS_OPTIONS(NSInteger, CBCharacteristicProperties) {
 	CBCharacteristicPropertyIndicate												= 0x20,
 	CBCharacteristicPropertyAuthenticatedSignedWrites								= 0x40,
 	CBCharacteristicPropertyExtendedProperties										= 0x80,
-	CBCharacteristicPropertyNotifyEncryptionRequired NS_ENUM_AVAILABLE(10_9, 6_0)		= 0x100,
+	CBCharacteristicPropertyNotifyEncryptionRequired NS_ENUM_AVAILABLE(10_9, 6_0)	= 0x100,
 	CBCharacteristicPropertyIndicateEncryptionRequired NS_ENUM_AVAILABLE(10_9, 6_0)	= 0x200
 };
 
 
-
-@class CBService, CBUUID;
 
 /*!
  *  @class CBCharacteristic
@@ -56,22 +54,7 @@ typedef NS_OPTIONS(NSInteger, CBCharacteristicProperties) {
  *
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
-CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
-{
-@protected
-	CBService					*_service;
-	CBUUID						*_UUID;
-	CBCharacteristicProperties	 _properties;
-	
-	NSData						*_value;
-	NSArray						*_descriptors;
-	BOOL						 _isBroadcasted;
-	BOOL						 _isNotifying;
-	
-	CBPeripheral				*_peripheral;
-	NSNumber					*_handle;
-	NSNumber					*_valueHandle;
-}
+CB_EXTERN_CLASS @interface CBCharacteristic : CBAttribute
 
 /*!
  * @property service
@@ -81,15 +64,6 @@ CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
  *
  */
 @property(assign, readonly, nonatomic) CBService *service;
-
-/*!
- * @property UUID
- *
- *  @discussion
- *      The Bluetooth UUID of the characteristic.
- *
- */
-@property(readonly, nonatomic) CBUUID *UUID;
 
 /*!
  * @property properties
@@ -125,7 +99,7 @@ CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
  *      Whether the characteristic is currently broadcasted or not.
  *
  */
-@property(readonly) BOOL isBroadcasted;
+@property(readonly) BOOL isBroadcasted NS_DEPRECATED(10_9, 10_13, 5_0, 8_0);
 
 /*!
  * @property isNotifying
@@ -149,7 +123,7 @@ CB_EXTERN_CLASS @interface CBCharacteristic : NSObject
  *	@constant CBAttributePermissionsWriteEncryptionRequired		Writeable by trusted devices.
  *
  */
-typedef NS_OPTIONS(NSInteger, CBAttributePermissions) {
+typedef NS_OPTIONS(NSUInteger, CBAttributePermissions) {
 	CBAttributePermissionsReadable					= 0x01,
 	CBAttributePermissionsWriteable					= 0x02,
 	CBAttributePermissionsReadEncryptionRequired	= 0x04,
@@ -169,12 +143,7 @@ typedef NS_OPTIONS(NSInteger, CBAttributePermissions) {
  *
  */
 NS_CLASS_AVAILABLE(10_9, 6_0)
-CB_EXTERN_CLASS @interface CBMutableCharacteristic : CBCharacteristic {
-@private
-	NSNumber *_ID;
-    CBAttributePermissions	_permissions;
-    NSMutableArray			*_subscribedCentrals;
-}
+CB_EXTERN_CLASS @interface CBMutableCharacteristic : CBCharacteristic
 
 /*!
  *	@property permissions
@@ -192,7 +161,6 @@ CB_EXTERN_CLASS @interface CBMutableCharacteristic : CBCharacteristic {
  */
 @property(retain, readonly, nullable) NSArray<CBCentral *> *subscribedCentrals NS_AVAILABLE(10_9, 7_0);
 
-@property(retain, readwrite, nonatomic, nullable) CBUUID *UUID;
 @property(assign, readwrite, nonatomic) CBCharacteristicProperties properties;
 @property(retain, readwrite, nullable) NSData *value;
 @property(retain, readwrite, nullable) NSArray<CBDescriptor *> *descriptors;
@@ -208,7 +176,7 @@ CB_EXTERN_CLASS @interface CBMutableCharacteristic : CBCharacteristic {
  *  @discussion			Returns an initialized characteristic.
  *
  */
-- (id)initWithType:(nullable CBUUID *)UUID properties:(CBCharacteristicProperties)properties value:(nullable NSData *)value permissions:(CBAttributePermissions)permissions;
+- (instancetype)initWithType:(CBUUID *)UUID properties:(CBCharacteristicProperties)properties value:(nullable NSData *)value permissions:(CBAttributePermissions)permissions NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 @end
 

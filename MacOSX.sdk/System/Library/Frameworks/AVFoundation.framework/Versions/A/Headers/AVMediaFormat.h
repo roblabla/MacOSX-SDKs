@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -11,15 +11,16 @@
 #import <Foundation/Foundation.h>
 
 // Media types
+typedef NSString * AVMediaType NS_EXTENSIBLE_STRING_ENUM;
 
-AVF_EXPORT NSString *const AVMediaTypeVideo                 NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMediaTypeAudio                 NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMediaTypeText                  NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMediaTypeClosedCaption         NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMediaTypeSubtitle              NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMediaTypeTimecode              NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVMediaTypeMetadata              NS_AVAILABLE(10_8, 6_0);
-AVF_EXPORT NSString *const AVMediaTypeMuxed                 NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeVideo                 NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeAudio                 NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeText                  NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeClosedCaption         NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeSubtitle              NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeTimecode              NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaType const AVMediaTypeMetadata              NS_AVAILABLE(10_8, 6_0);
+AVF_EXPORT AVMediaType const AVMediaTypeMuxed                 NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVMediaTypeMetadataObject
@@ -52,10 +53,13 @@ AVF_EXPORT NSString *const AVMediaTypeMuxed                 NS_AVAILABLE(10_7, 4
  If clients want to record a particular kind of metadata to a movie, they must manually form connections
  between a AVMediaTypeMetadata port and the movie file output using AVCaptureSession's -addConnection API.
 */
-AVF_EXPORT NSString *const AVMediaTypeMetadataObject NS_AVAILABLE_IOS(9_0);
+AVF_EXPORT AVMediaType const AVMediaTypeMetadataObject NS_AVAILABLE_IOS(9_0);
+
+AVF_EXPORT AVMediaType const AVMediaTypeDepthData NS_AVAILABLE(10_13, 11_0);
 
 
 // Media characteristics
+typedef NSString * AVMediaCharacteristic NS_EXTENSIBLE_STRING_ENUM;
 
 /*!
  @constant AVMediaCharacteristicVisual
@@ -64,7 +68,7 @@ AVF_EXPORT NSString *const AVMediaTypeMetadataObject NS_AVAILABLE_IOS(9_0);
  AVMediaTypeVideo, AVMediaTypeSubtitle, AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicVisual.
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicVisual      NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVisual      NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVMediaCharacteristicAudible
@@ -73,7 +77,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicVisual      NS_AVAILABLE(10_7, 4
  AVMediaTypeAudio is a media type with the characteristic AVMediaCharacteristicAudible.
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicAudible     NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicAudible     NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVMediaCharacteristicLegible
@@ -82,7 +86,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicAudible     NS_AVAILABLE(10_7, 4
  AVMediaTypeSubtitle and AVMediaTypeClosedCaption are examples of media types with the characteristic AVMediaCharacteristicLegible.
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicLegible     NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLegible     NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVMediaCharacteristicFrameBased
@@ -91,7 +95,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicLegible     NS_AVAILABLE(10_7, 4
  Frame-based content typically comprises discrete media samples that, once rendered, can remain current for indefinite periods of time without additional processing in support of "time-stretching". Further, any dependencies between samples are always explicitly signalled, so that the operations required to render any single sample can readily be performed on demand. AVMediaTypeVideo is the most common type of frame-based media. AVMediaTypeAudio is the most common counterexample. 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicFrameBased  NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicFrameBased  NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVMediaCharacteristicUsesWideGamutColorSpace
@@ -99,7 +103,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicFrameBased  NS_AVAILABLE(10_7, 4
  @discussion
  A wide color space such as AVVideo*_P3_D65 contains additional dynamic range that may benefit from special treatment when compositing. Care should be taken to avoid clamping. Non-wide spaces include AVVideo*_ITU_R_709_2 and AVVideo*_SMPTE_C.
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicUsesWideGamutColorSpace NS_AVAILABLE(10_12, 10_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicUsesWideGamutColorSpace NS_AVAILABLE(10_12, 10_0);
 
 /*!
  @constant AVMediaCharacteristicIsMainProgramContent
@@ -111,7 +115,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicUsesWideGamutColorSpace NS_AVAIL
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicIsMainProgramContent NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsMainProgramContent NS_AVAILABLE(10_8, 5_0);
 
 /*!
  @constant AVMediaCharacteristicIsAuxiliaryContent
@@ -124,7 +128,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicIsMainProgramContent NS_AVAILABL
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicIsAuxiliaryContent NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIsAuxiliaryContent NS_AVAILABLE(10_8, 5_0);
 
 /*!
  @constant AVMediaCharacteristicContainsOnlyForcedSubtitles
@@ -136,7 +140,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicIsAuxiliaryContent NS_AVAILABLE(
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicContainsOnlyForcedSubtitles NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicContainsOnlyForcedSubtitles NS_AVAILABLE(10_8, 5_0);
 
 /*!
  @constant AVMediaCharacteristicTranscribesSpokenDialogForAccessibility
@@ -155,7 +159,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicContainsOnlyForcedSubtitles NS_A
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicTranscribesSpokenDialogForAccessibility NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicTranscribesSpokenDialogForAccessibility NS_AVAILABLE(10_8, 5_0);
 
 /*!
  @constant AVMediaCharacteristicDescribesMusicAndSoundForAccessibility
@@ -174,7 +178,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicTranscribesSpokenDialogForAccess
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicDescribesMusicAndSoundForAccessibility NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesMusicAndSoundForAccessibility NS_AVAILABLE(10_8, 5_0);
 
 /*!
  @constant AVMediaCharacteristicEasyToRead
@@ -189,11 +193,11 @@ AVF_EXPORT NSString *const AVMediaCharacteristicDescribesMusicAndSoundForAccessi
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicEasyToRead NS_AVAILABLE(10_8, 6_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicEasyToRead NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @constant AVMediaCharacteristicDescribesVideoForAccessibility
- @abstract A media characteristic that indicates that a track or media selection option includes audible descriptions of the visual portion of the presentation that are sufficient for listeners without access to the visual content to comprehend the essential information, such as action and setting, that it depicts.
+ @abstract A media characteristic that indicates that a track or media selection option provides descriptions of the visual portion of the presentation that are sufficient to comprehend essential information that it depicts, such as action and setting.
  @discussion
  See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
  The value of this characteristic is @"public.accessibility.describes-video".
@@ -202,7 +206,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicEasyToRead NS_AVAILABLE(10_8, 6_
 
  Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicDescribesVideoForAccessibility NS_AVAILABLE(10_8, 5_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesVideoForAccessibility NS_AVAILABLE(10_8, 5_0);
 
 /*!
  @constant AVMediaCharacteristicLanguageTranslation
@@ -213,7 +217,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicDescribesVideoForAccessibility N
  Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicLanguageTranslation only if it's explicitly tagged with that characteristic.
  See the discussion of the tagging of tracks with media characteristics below.
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicLanguageTranslation NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicLanguageTranslation NS_AVAILABLE(10_11, 9_0);
 
 /*!
  @constant AVMediaCharacteristicDubbedTranslation
@@ -225,7 +229,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicLanguageTranslation NS_AVAILABLE
  Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicDubbedTranslation only if it's explicitly tagged with that characteristic.
  See the discussion of the tagging of tracks with media characteristics below.
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicDubbedTranslation NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDubbedTranslation NS_AVAILABLE(10_11, 9_0);
 
 /*!
  @constant AVMediaCharacteristicVoiceOverTranslation NS_AVAILABLE(10_11, 9_0);
@@ -237,7 +241,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicDubbedTranslation NS_AVAILABLE(1
  Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicVoiceOverTranslation only if it's explicitly tagged with that characteristic.
  See the discussion of the tagging of tracks with media characteristics below.
 */
-AVF_EXPORT NSString *const AVMediaCharacteristicVoiceOverTranslation NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVoiceOverTranslation NS_AVAILABLE(10_11, 9_0);
 
 /*
 	Tagging of tracks of .mov and .m4v files with media characteristics
@@ -275,6 +279,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicVoiceOverTranslation NS_AVAILABL
 */
 
 // File format UTIs
+typedef NSString * AVFileType NS_EXTENSIBLE_STRING_ENUM;
 
 /*!
  @constant AVFileTypeQuickTimeMovie
@@ -283,7 +288,7 @@ AVF_EXPORT NSString *const AVMediaCharacteristicVoiceOverTranslation NS_AVAILABL
  The value of this UTI is @"com.apple.quicktime-movie".
  Files are identified with the .mov and .qt extensions.
  */
-AVF_EXPORT NSString *const AVFileTypeQuickTimeMovie NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeQuickTimeMovie NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeMPEG4
@@ -292,7 +297,7 @@ AVF_EXPORT NSString *const AVFileTypeQuickTimeMovie NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.mpeg-4".
  Files are identified with the .mp4 extension.
  */
-AVF_EXPORT NSString *const AVFileTypeMPEG4 NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeMPEG4 NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeAppleM4V
@@ -300,7 +305,7 @@ AVF_EXPORT NSString *const AVFileTypeMPEG4 NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"com.apple.m4v-video".
  Files are identified with the .m4v extension.
  */
-AVF_EXPORT NSString *const AVFileTypeAppleM4V NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAppleM4V NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeAppleM4A
@@ -308,7 +313,7 @@ AVF_EXPORT NSString *const AVFileTypeAppleM4V NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"com.apple.m4a-audio".
  Files are identified with the .m4a extension.
  */
-AVF_EXPORT NSString *const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileType3GPP
@@ -317,7 +322,7 @@ AVF_EXPORT NSString *const AVFileTypeAppleM4A NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.3gpp".
  Files are identified with the .3gp, .3gpp, and .sdv extensions.
  */
-AVF_EXPORT NSString *const AVFileType3GPP NS_AVAILABLE(10_11, 4_0);
+AVF_EXPORT AVFileType const AVFileType3GPP NS_AVAILABLE(10_11, 4_0);
 
 /*!
  @constant AVFileType3GPP2
@@ -326,7 +331,7 @@ AVF_EXPORT NSString *const AVFileType3GPP NS_AVAILABLE(10_11, 4_0);
  The value of this UTI is @"public.3gpp2".
  Files are identified with the .3g2, .3gp2 extensions.
  */
-AVF_EXPORT NSString *const AVFileType3GPP2 NS_AVAILABLE(10_11, 4_0);
+AVF_EXPORT AVFileType const AVFileType3GPP2 NS_AVAILABLE(10_11, 4_0);
 
 /*!
  @constant AVFileTypeCoreAudioFormat
@@ -335,7 +340,7 @@ AVF_EXPORT NSString *const AVFileType3GPP2 NS_AVAILABLE(10_11, 4_0);
  The value of this UTI is @"com.apple.coreaudio-format".
  Files are identified with the .caf extension.
  */
-AVF_EXPORT NSString *const AVFileTypeCoreAudioFormat NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeCoreAudioFormat NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeWAVE
@@ -344,7 +349,7 @@ AVF_EXPORT NSString *const AVFileTypeCoreAudioFormat NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"com.microsoft.waveform-audio".
  Files are identified with the .wav, .wave, and .bwf extensions.
  */
-AVF_EXPORT NSString *const AVFileTypeWAVE NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeWAVE NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeAIFF
@@ -353,7 +358,7 @@ AVF_EXPORT NSString *const AVFileTypeWAVE NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.aiff-audio".
  Files are identified with the .aif and .aiff extensions.
  */
-AVF_EXPORT NSString *const AVFileTypeAIFF NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAIFF NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeAIFC
@@ -362,7 +367,7 @@ AVF_EXPORT NSString *const AVFileTypeAIFF NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.aifc-audio".
  Files are identified with the .aifc and .cdda extensions.
  */
-AVF_EXPORT NSString *const AVFileTypeAIFC NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAIFC NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeAMR
@@ -371,7 +376,7 @@ AVF_EXPORT NSString *const AVFileTypeAIFC NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"org.3gpp.adaptive-multi-rate-audio".
  Files are identified with the .amr extension.
  */
-AVF_EXPORT NSString *const AVFileTypeAMR NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVFileType const AVFileTypeAMR NS_AVAILABLE(10_7, 4_0);
 
 /*!
  @constant AVFileTypeMPEGLayer3
@@ -380,7 +385,7 @@ AVF_EXPORT NSString *const AVFileTypeAMR NS_AVAILABLE(10_7, 4_0);
  The value of this UTI is @"public.mp3".
  Files are identified with the .mp3 extension.
  */
-AVF_EXPORT NSString *const AVFileTypeMPEGLayer3 NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVFileType const AVFileTypeMPEGLayer3 NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @constant AVFileTypeSunAU
@@ -389,7 +394,7 @@ AVF_EXPORT NSString *const AVFileTypeMPEGLayer3 NS_AVAILABLE(10_9, 7_0);
  The value of this UTI is @"public.au-audio".
  Files are identified with the .au and .snd extensions.
  */
-AVF_EXPORT NSString *const AVFileTypeSunAU NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVFileType const AVFileTypeSunAU NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @constant AVFileTypeAC3
@@ -398,7 +403,7 @@ AVF_EXPORT NSString *const AVFileTypeSunAU NS_AVAILABLE(10_9, 7_0);
  The value of this UTI is @"public.ac3-audio".
  Files are identified with the .ac3 extension.
  */
-AVF_EXPORT NSString *const AVFileTypeAC3 NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVFileType const AVFileTypeAC3 NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @constant AVFileTypeEnhancedAC3
@@ -407,7 +412,61 @@ AVF_EXPORT NSString *const AVFileTypeAC3 NS_AVAILABLE(10_9, 7_0);
  The value of this UTI is @"public.enhanced-ac3-audio".
  Files are identified with the .eac3 extension.
  */
-AVF_EXPORT NSString *const AVFileTypeEnhancedAC3 NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT AVFileType const AVFileTypeEnhancedAC3 NS_AVAILABLE(10_11, 9_0);
+
+/*!
+ @constant AVFileTypeJPEG
+ @abstract A UTI for the JPEG (JFIF) format.
+ @discussion
+ The value of this UTI is @"public.jpeg".
+ Files are identified with the .jpg or .jpeg extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeJPEG NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @constant AVFileTypeDNG
+ @abstract A UTI for the Adobe digital negative file format.
+ @discussion
+ The value of this UTI is @"com.adobe.raw-image".
+ Files are identified with the .dng extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeDNG NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @constant AVFileTypeHEIC
+ @abstract A UTI for the high efficiency image file format containing HEVC compressed images.
+ @discussion
+ The value of this UTI is @"public.heic".
+ Files are identified with the .heic extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeHEIC NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @constant AVFileTypeAVCI
+ @abstract A UTI for the high efficiency image file format containing H.264 compressed images.
+ @discussion
+ The value of this UTI is @"public.avci".
+ Files are identified with the .avci extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeAVCI NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @constant AVFileTypeHEIF
+ @abstract A UTI for the high efficiency image file format containing images compressed with any codec.
+ @discussion
+ The value of this UTI is @"public.heif".
+ Files are identified with the .heif extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeHEIF NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @constant AVFileTypeTIFF
+ @abstract A UTI for the tagged image file format.
+ @discussion
+ The value of this UTI is @"public.tiff".
+ Files are identified with the .tiff or .tif extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeTIFF NS_AVAILABLE(10_13, 11_0);
 
 /*!
  @constant AVStreamingKeyDeliveryContentKeyType
@@ -415,7 +474,7 @@ AVF_EXPORT NSString *const AVFileTypeEnhancedAC3 NS_AVAILABLE(10_11, 9_0);
  @discussion
  The value of this UTI is @"com.apple.streamingkeydelivery.contentkey".
  */
-AVF_EXPORT NSString *const AVStreamingKeyDeliveryContentKeyType NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString * const AVStreamingKeyDeliveryContentKeyType NS_AVAILABLE(10_11, 9_0);
 
 /*!
  @constant AVStreamingKeyDeliveryPersistentContentKeyType
@@ -423,6 +482,6 @@ AVF_EXPORT NSString *const AVStreamingKeyDeliveryContentKeyType NS_AVAILABLE(10_
  @discussion
  The value of this UTI is @"com.apple.streamingkeydelivery.persistentcontentkey".
  */
-AVF_EXPORT NSString *const AVStreamingKeyDeliveryPersistentContentKeyType NS_AVAILABLE(10_11, 9_0);
+AVF_EXPORT NSString * const AVStreamingKeyDeliveryPersistentContentKeyType NS_AVAILABLE(10_11, 9_0);
 
 

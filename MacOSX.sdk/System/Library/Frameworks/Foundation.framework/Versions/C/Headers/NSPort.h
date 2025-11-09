@@ -1,5 +1,5 @@
 /*	NSPort.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -57,8 +57,8 @@ FOUNDATION_EXPORT NSNotificationName const NSPortDidBecomeInvalidNotification;
 	// being used in the same program, this requires some care.
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
-- (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
-- (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+- (void)addConnection:(NSConnection *)conn toRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
+- (void)removeConnection:(NSConnection *)conn fromRunLoop:(NSRunLoop *)runLoop forMode:(NSRunLoopMode)mode NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 	// The default implementation of these two methods is to
 	// simply add the receiving port to the run loop in the
 	// given mode.  Subclassers need not override these methods,
@@ -97,7 +97,7 @@ typedef NS_OPTIONS(NSUInteger, NSMachPortOptions) {
     NSMachPortDeallocateNone = 0,
     NSMachPortDeallocateSendRight = (1UL << 0),
     NSMachPortDeallocateReceiveRight = (1UL << 1)
-} NS_ENUM_AVAILABLE(10_5, 2_0);
+} API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 + (NSPort *)portWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f NS_AVAILABLE(10_5, 2_0);
 - (instancetype)initWithMachPort:(uint32_t)machPort options:(NSMachPortOptions)f NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;

@@ -1,24 +1,5 @@
 /*
- * Copyright (c) 2009-2013 Apple Inc. All rights reserved.
- *
- * @APPLE_LICENSE_HEADER_START@
- * 
- * This file contains Original Code and/or Modifications of Original Code
- * as defined in and that are subject to the Apple Public Source License
- * Version 2.0 (the 'License'). You may not use this file except in
- * compliance with the License. Please obtain a copy of the License at
- * http://www.opensource.apple.com/apsl/ and read it before using this
- * file.
- * 
- * The Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
- * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
- * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
- * Please see the License for the specific language governing rights and
- * limitations under the License.
- * 
- * @APPLE_LICENSE_HEADER_END@
+ * Copyright (c) 2009-2017 Apple Inc. All rights reserved.
  */
 
 #if !defined(__ODTYPES__)
@@ -73,7 +54,8 @@ typedef union {
 
 #define OD_CFRELEASE_NULL(a)        do { if ((a) != NULL) { CFRelease(a); (a) = NULL; } } while (0)
 #define OD_RELEASE_NULL(a)          do { od_release(a); a = NULL; } while (0)
-#define OD_FREE_NULL(a)             do { free(a); (a) = NULL; } while (0)
+#define OD_FREE(a)                  __extension__({ if (a) free(a); })
+#define OD_FREE_NULL(a)             __extension__({ if (a) { free(a); (a) = NULL; } })
 #define OD_ZERO_FREE_NULL(a)        do { if ((a) != NULL) { memset((a), 0, malloc_size(a)); free(a); (a) = NULL; } } while (0)
 #define OD_DISPATCH_RETAIN_SAFE(a)  do { if ((a) != NULL) { dispatch_retain(a); } } while (0)
 #define OD_DISPATCH_RELEASE_NULL(a) do { if ((a) != NULL) { dispatch_release(a); (a) = NULL; } } while (0)
@@ -330,7 +312,7 @@ odm_configuration_loaded(od_module_t module, od_moduleconfig_t moduleconfig, od_
                 eODAuthInfoAuthTypes are the authentication types supported by this module (kODAuthenticationTypeDIGEST_MD5, etc.)
                 eODAuthInfoMechanisms are what authority tags this module handles "PasswordServer", "Kerberos", "Basic", etc.
  */
-OD_NOTHROW OD_WARN_RESULT CF_RETURNS_RETAINED
+OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFTypeRef
 odm_copy_auth_information(od_module_t module, od_moduleconfig_t moduleconfig, long info);
 

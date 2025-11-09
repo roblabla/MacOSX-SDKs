@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -11,6 +11,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
 #import <AVFoundation/AVMetadataFormat.h>
+#import <AVFoundation/AVMetadataIdentifiers.h>
 #import <AVFoundation/AVAsynchronousKeyValueLoading.h>
 
 #import <CoreGraphics/CoreGraphics.h>
@@ -46,7 +47,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 }
 
 /* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
-@property (nonatomic, readonly, copy, nullable) NSString *identifier NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly, copy, nullable) AVMetadataIdentifier identifier NS_AVAILABLE(10_10, 8_0);
 
 /* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
 @property (nonatomic, readonly, copy, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_10, 8_0);
@@ -67,7 +68,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> value;
 
 /* provides a dictionary of the additional attributes */
-@property (nonatomic, readonly, copy, nullable) NSDictionary<NSString *, id> *extraAttributes;
+@property (nonatomic, readonly, copy, nullable) NSDictionary<AVMetadataExtraAttributeKey, id> *extraAttributes;
 
 @end
 
@@ -130,7 +131,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 	The identifier that must be matched for a metadata item to be copied to the output array. Items are considered a match not only when their identifiers are equal to the specified identifier, and also when their identifiers conform to the specified identifier.
 	@result			An instance of NSArray containing the metadata items of the target NSArray that match the specified identifier.
 */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems filteredByIdentifier:(AVMetadataIdentifier)identifier NS_AVAILABLE(10_10, 8_0);
 
 /*!
 	@method			metadataItemsFromArray:filteredByMetadataItemFilter:
@@ -160,23 +161,23 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  
 		For custom identifiers, the keySpace AVMetadataKeySpaceQuickTimeMetadata is recommended.  This keySpace defines its key values to be expressed as reverse-DNS strings, which allows third parties to define their own keys in a well established way that avoids collisions.
 */
-+ (nullable NSString *)identifierForKey:(id)key keySpace:(NSString *)keySpace NS_AVAILABLE(10_10, 8_0);
++ (nullable AVMetadataIdentifier)identifierForKey:(id)key keySpace:(AVMetadataKeySpace)keySpace NS_AVAILABLE(10_10, 8_0);
 
 /* provides the metadata keySpace indicated by the identifier  */
-+ (nullable NSString *)keySpaceForIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
++ (nullable AVMetadataKeySpace)keySpaceForIdentifier:(AVMetadataIdentifier)identifier NS_AVAILABLE(10_10, 8_0);
 
 /* provides the metadata key indicated by the identifier  */
-+ (nullable id)keyForIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
++ (nullable id)keyForIdentifier:(AVMetadataIdentifier)identifier NS_AVAILABLE(10_10, 8_0);
 
 /* indicates the key of the metadata item */
 @property (nonatomic, readonly, copy, nullable) id<NSObject, NSCopying> key;
 
 /* indicates the common key of the metadata item */
-@property (nonatomic, readonly, copy, nullable) NSString *commonKey;
+@property (nonatomic, readonly, copy, nullable) AVMetadataKey commonKey;
 
 /* indicates the keyspace of the metadata item's key; this will typically
  be the default keyspace for the metadata container in which the metadata item is stored */
-@property (nonatomic, readonly, copy, nullable) NSString *keySpace;
+@property (nonatomic, readonly, copy, nullable) AVMetadataKeySpace keySpace;
 
 @end
 
@@ -199,7 +200,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 }
 
 /* Indicates the identifier of the metadata item. Publicly defined identifiers are declared in AVMetadataIdentifiers.h. */
-@property (nonatomic, readwrite, copy, nullable) NSString *identifier NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readwrite, copy, nullable) AVMetadataIdentifier identifier NS_AVAILABLE(10_10, 8_0);
 
 /* indicates the IETF BCP 47 (RFC 4646) language identifier of the metadata item; may be nil if no language tag information is available */
 @property (nonatomic, readwrite, copy, nullable) NSString *extendedLanguageTag NS_AVAILABLE(10_10, 8_0);
@@ -220,7 +221,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @property (nonatomic, readwrite, copy, nullable) id<NSObject, NSCopying> value;
 
 /* Provides a dictionary of the additional attributes. Extra attributes of metadata items are related to specifics of their carriage in their container format. Keys for extra attributes are declared in AVMetadataFormat.h. */
-@property (nonatomic, readwrite, copy, nullable) NSDictionary<NSString *, id> *extraAttributes;
+@property (nonatomic, readwrite, copy, nullable) NSDictionary<AVMetadataExtraAttributeKey, id> *extraAttributes;
 
 /*!
 	@method			metadataItem
@@ -240,7 +241,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableMetadataItem (AVMutableMetadataItemKeyAndKeyspace)
 
 /* Indicates the keyspace of the metadata item's key; this will typically be the default keyspace for the metadata container in which the metadata item is stored. */
-@property (nonatomic, readwrite, copy, nullable) NSString *keySpace;
+@property (nonatomic, readwrite, copy, nullable) AVMetadataKeySpace keySpace;
 
 /* Indicates the key of the metadata item. Metadata item keys that are not instances NSString, NSNumber, or NSData cannot be converted to metadata identifiers; they also cannot be written to media resources via AVAssetExportSession or AVAssetWriter. */
 @property (nonatomic, readwrite, copy, nullable) id<NSObject, NSCopying> key;
@@ -309,7 +310,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface AVMetadataItemFilter : NSObject {
 @private
-	AVMetadataItemFilterInternal	*_itemFilterInternal;
+	AVMetadataItemFilterInternal	*_itemFilterInternal __attribute__((unused));
 }
 
 /* Provides an instance of an AVMetadataItemFilter useful for sharing assets.  Removes many user-identifying metadata items, such as location information, leaving only playback-, copyright- and commercial-related metadata (such as the purchaser's Apple ID), along with metadata either derivable from the media itself or necessary for its proper behavior.  */
@@ -329,7 +330,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0)
  @method			metadataItemsFromArray:withKey:keySpace:
  @discussion		Instead, use metadataItemsFromArray:filteredByIdentifier:.
  */
-+ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems withKey:(nullable id)key keySpace:(nullable NSString *)keySpace;
++ (NSArray<AVMetadataItem *> *)metadataItemsFromArray:(NSArray<AVMetadataItem *> *)metadataItems withKey:(nullable id)key keySpace:(nullable AVMetadataKeySpace)keySpace;
 
 @end
 

@@ -1,5 +1,5 @@
 /*	NSPersonNameComponentsFormatter.h
-	Copyright (c) 2015-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2015-2017, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSPersonNameComponents.h>
@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, NSPersonNameComponentsFormatterStyle) {
 
     /* The maximally-abbreviated form of a name suitable for monograms, e.g. CRD) */
     NSPersonNameComponentsFormatterStyleAbbreviated
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 typedef NS_OPTIONS (NSUInteger, NSPersonNameComponentsFormatterOptions) {
     /* Indicates that the formatter should format the component object's phoneticRepresentation components instead of its own components.
@@ -30,7 +30,7 @@ typedef NS_OPTIONS (NSUInteger, NSPersonNameComponentsFormatterOptions) {
      <family:"Family", given:"Given", phoneticRepresentation:<family:"FamilyPhonetic", given:"GivenPhonetic">>.
      If this option is specified, we perform formatting operations on <family "FamilyPhonetic", given "GivenPhonetic"> instead. */
     NSPersonNameComponentsFormatterPhonetic = (1UL << 1)
-} NS_ENUM_AVAILABLE(10_11, 9_0);
+} API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 
 NS_CLASS_AVAILABLE(10_11, 9_0)
@@ -73,19 +73,19 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @end
 
 // Attributed String identifier key string
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentKey NS_AVAILABLE(10_11, 9_0);
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentKey API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 // Constants for attributed strings
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentGivenName NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentFamilyName NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentMiddleName NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentPrefix NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentSuffix NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentNickname NS_AVAILABLE(10_11, 9_0);
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentGivenName API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentFamilyName API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentMiddleName API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentPrefix API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentSuffix API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentNickname API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* The delimiter is the character or characters used to separate name components.
  For CJK languages there is no delimiter.
  */
-FOUNDATION_EXPORT NSString * const NSPersonNameComponentDelimiter NS_AVAILABLE(10_11, 9_0);
+FOUNDATION_EXPORT NSString * const NSPersonNameComponentDelimiter API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

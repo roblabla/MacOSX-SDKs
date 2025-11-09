@@ -50,7 +50,7 @@ __BEGIN_DECLS
  * @result
  * an od_connection_t object created or NULL on failure
  */
-OD_WARN_RESULT OD_NOTHROW OD_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_connection_t
 odconnection_create(od_moduleconfig_t moduleconfig, CFStringRef name, bool shared, uint64_t timeout);
 
@@ -70,7 +70,7 @@ odconnection_create(od_moduleconfig_t moduleconfig, CFStringRef name, bool share
  * is an od_request_t that has triggered this connection
  *
  * @param name
- * is a CFStringRef to call the connection (optional, NULL is allowed)
+ * is a CFStringRef to call the connection
  *
  * @param guid
  * is a guid_t to assign to this connection (optional, NULL is allowed)
@@ -90,7 +90,7 @@ odconnection_create(od_moduleconfig_t moduleconfig, CFStringRef name, bool share
  * @result
  * An od_connection_t object created or NULL on failure
  */
-OD_WARN_RESULT OD_NOTHROW OD_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED OS_NONNULL1 OS_NONNULL3
 od_connection_t
 odconnection_create_ext(od_moduleconfig_t moduleconfig, od_request_t request, CFStringRef name, guid_t *guid,
                         od_credential_t credential, eODModuleConfigServerFlags flags, uint64_t timeout, od_connection_info_t *info);
@@ -132,6 +132,7 @@ odconnection_connect_if_necessary(od_connection_t connection, od_request_t reque
  * @param request
  * A valid od_request_t object that triggered this activity (optional)
  */
+OS_EXPORT OS_NOTHROW
 void
 odconnection_set_failed(od_connection_t connection, od_request_t request);
 
@@ -147,6 +148,7 @@ odconnection_set_failed(od_connection_t connection, od_request_t request);
  * @param connection
  * A valid od_connection_t object, must not be NULL
  */
+OS_EXPORT OS_NOTHROW
 void
 odconnection_disconnect(od_connection_t connection);
 
@@ -165,7 +167,7 @@ odconnection_disconnect(od_connection_t connection);
  * @result
  * Returns a valid od_moduleconfig_t object.
  */
-OD_WARN_RESULT OD_NOTHROW OD_RETURNS_NOT_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_NOT_RETAINED
 od_moduleconfig_t
 odconnection_get_moduleconfig(od_connection_t connection);
 
@@ -187,10 +189,8 @@ odconnection_get_moduleconfig(od_connection_t connection);
  *
  * @param dealloc
  * An optional deallocation function for the context.
- *
- * @result
- * Returns a valid od_moduleconfig_t object.
  */
+OS_EXPORT OS_NOTHROW
 void
 odconnection_set_context(od_connection_t connection, void *context, od_context_dealloc_fn_t dealloc);
 
@@ -209,7 +209,7 @@ odconnection_set_context(od_connection_t connection, void *context, od_context_d
  * @result
  * Returns a valid CFStringRef if a destination is present.
  */
-OD_NOTHROW OD_WARN_RESULT CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odconnection_copy_destination(od_connection_t connection);
 
@@ -229,9 +229,11 @@ odconnection_copy_destination(od_connection_t connection);
  * @result
  * Returns a true if the connection has credentials associated with it.
  */
+OS_EXPORT OS_WARN_RESULT OS_NOTHROW
 bool
 odconnection_has_credentials(od_connection_t connection);
 
+OS_EXPORT OS_NOTHROW
 void
 odconnection_set_credential(od_connection_t connection, od_request_t request, od_credential_t credential);
 
@@ -250,7 +252,7 @@ odconnection_set_credential(od_connection_t connection, od_request_t request, od
  * @result
  * Returns a valid od_credential_t if present.
  */
-OD_WARN_RESULT OD_NOTHROW OD_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_credential_t
 odconnection_copy_credential(od_connection_t connection);
 

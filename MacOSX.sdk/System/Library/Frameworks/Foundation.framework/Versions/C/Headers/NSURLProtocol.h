@@ -1,6 +1,6 @@
 /*	
     NSURLProtocol.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -68,7 +68,7 @@ implementors.
 @method URLProtocol:wasRedirectedToRequest:
  @abstract Indicates to an NSURLProtocolClient that a redirect has
  occurred.
- @param URLProtocol the NSURLProtocol object sending the message.
+ @param protocol the NSURLProtocol object sending the message.
  @param request the NSURLRequest to which the protocol implementation
  has redirected.
  */
@@ -79,7 +79,7 @@ implementors.
      @abstract Indicates to an NSURLProtocolClient that the protocol
      implementation has examined a cached response and has
      determined that it is valid.
-     @param URLProtocol the NSURLProtocol object sending the message.
+     @param protocol the NSURLProtocol object sending the message.
      @param cachedResponse the NSCachedURLResponse object that has
      examined and is valid.
      */
@@ -89,10 +89,10 @@ implementors.
 @method URLProtocol:didReceiveResponse:
      @abstract Indicates to an NSURLProtocolClient that the protocol
      implementation has created an NSURLResponse for the current load.
-     @param URLProtocol the NSURLProtocol object sending the message.
+     @param protocol the NSURLProtocol object sending the message.
      @param response the NSURLResponse object the protocol implementation
      has created.
-     @param cacheStoragePolicy The NSURLCacheStoragePolicy the protocol
+     @param policy The NSURLCacheStoragePolicy the protocol
      has determined should be used for the given response if the
      response is to be stored in a cache.
      */
@@ -105,7 +105,7 @@ implementors.
      @discussion The data object must contain only new data loaded since
      the previous call to this method (if any), not cumulative data for
      the entire load.
-     @param URLProtocol the NSURLProtocol object sending the message.
+     @param protocol the NSURLProtocol object sending the message.
      @param data URL load data being made available.
      */
 - (void)URLProtocol:(NSURLProtocol *)protocol didLoadData:(NSData *)data;
@@ -114,7 +114,7 @@ implementors.
 @method URLProtocolDidFinishLoading:
      @abstract Indicates to an NSURLProtocolClient that the protocol
      implementation has finished loading successfully.
-     @param URLProtocol the NSURLProtocol object sending the message.
+     @param protocol the NSURLProtocol object sending the message.
      */
 - (void)URLProtocolDidFinishLoading:(NSURLProtocol *)protocol;
 
@@ -122,7 +122,7 @@ implementors.
                 @method URLProtocol:didFailWithError:
      @abstract Indicates to an NSURLProtocolClient that the protocol
      implementation has failed to load successfully.
-     @param URLProtocol the NSURLProtocol object sending the message.
+     @param protocol the NSURLProtocol object sending the message.
      @param error The error that caused the load to fail.
      */
 - (void)URLProtocol:(NSURLProtocol *)protocol didFailWithError:(NSError *)error;
@@ -179,22 +179,19 @@ implementors.
 */
 - (instancetype)initWithRequest:(NSURLRequest *)request cachedResponse:(nullable NSCachedURLResponse *)cachedResponse client:(nullable id <NSURLProtocolClient>)client NS_DESIGNATED_INITIALIZER;
 
-/*! 
-    @method client
+/*!
     @abstract Returns the NSURLProtocolClient of the receiver. 
     @result The NSURLProtocolClient of the receiver.  
 */
 @property (nullable, readonly, retain) id <NSURLProtocolClient> client;
 
-/*! 
-    @method request
+/*!
     @abstract Returns the NSURLRequest of the receiver. 
     @result The NSURLRequest of the receiver. 
 */
 @property (readonly, copy) NSURLRequest *request;
 
-/*! 
-    @method cachedResponse
+/*!
     @abstract Returns the NSCachedURLResponse of the receiver.  
     @result The NSCachedURLResponse of the receiver. 
 */
@@ -349,9 +346,9 @@ implementors.
 
 
 @interface NSURLProtocol (NSURLSessionTaskAdditions)
-+ (BOOL)canInitWithTask:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (instancetype)initWithTask:(NSURLSessionTask *)task cachedResponse:(nullable NSCachedURLResponse *)cachedResponse client:(nullable id <NSURLProtocolClient>)client NS_AVAILABLE(10_10, 8_0);
-@property (nullable, readonly, copy) NSURLSessionTask *task NS_AVAILABLE(10_10, 8_0);
++ (BOOL)canInitWithTask:(NSURLSessionTask *)task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (instancetype)initWithTask:(NSURLSessionTask *)task cachedResponse:(nullable NSCachedURLResponse *)cachedResponse client:(nullable id <NSURLProtocolClient>)client API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+@property (nullable, readonly, copy) NSURLSessionTask *task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 @end
 
 NS_ASSUME_NONNULL_END

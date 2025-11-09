@@ -20,6 +20,7 @@
 #import <SpriteKit/SKLightNode.h>
 #import <SpriteKit/SKReferenceNode.h>
 #import <SpriteKit/SK3DNode.h>
+#import <SpriteKit/SKTransformNode.h>
 #import <SpriteKit/SKRegion.h>
 #import <SpriteKit/SKView.h>
 #import <SpriteKit/SKTransition.h>
@@ -27,6 +28,7 @@
 #import <SpriteKit/SKUniform.h>
 #import <SpriteKit/SKAttribute.h>
 #import <SpriteKit/SKWarpGeometry.h>
+#import <SpriteKit/SKRenderer.h>
 
 #import <SpriteKit/SKTileDefinition.h>
 #import <SpriteKit/SKTileSet.h>

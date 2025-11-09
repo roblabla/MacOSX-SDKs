@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FFD780D9-4298-3FB6-9CF4-B7EBE602737A' ]
+uuids:           [ 'x86_64: 2BF17897-5F4E-3F5B-BB61-A55D2EA3A08E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Frameworks/OpusFoundation.framework/Versions/A/OpusFoundation
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CLLocationCoordinate2DFromString, _MKCoordinateRegionFromString, 

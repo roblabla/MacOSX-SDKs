@@ -27,6 +27,7 @@
 #import <AVFoundation/AVAssetReader.h>
 #import <AVFoundation/AVAssetReaderOutput.h>
 #import <AVFoundation/AVAssetResourceLoader.h>
+#import <AVFoundation/AVContentKeySession.h>
 #import <AVFoundation/AVAssetTrack.h>
 #import <AVFoundation/AVAssetTrackGroup.h>
 #import <AVFoundation/AVAssetTrackSegment.h>
@@ -38,9 +39,11 @@
 
 #if TARGET_OS_IPHONE
 #import <AVFoundation/AVAssetDownloadTask.h>
+#import <AVFoundation/AVAssetDownloadStorageManager.h>
 #endif
 
 #if (TARGET_OS_IPHONE || defined(__MAC_10_7))
+#import <AVFoundation/AVCaptureDataOutputSynchronizer.h>
 #import <AVFoundation/AVCaptureDevice.h>
 #import <AVFoundation/AVCaptureInput.h>
 #import <AVFoundation/AVCaptureOutput.h>
@@ -51,6 +54,7 @@
 #import <AVFoundation/AVComposition.h>
 #import <AVFoundation/AVCompositionTrack.h>
 #import <AVFoundation/AVCompositionTrackSegment.h>
+#import <AVFoundation/AVDepthData.h>
 #import <AVFoundation/AVError.h>
 #endif
 
@@ -80,7 +84,11 @@
 #import <AVFoundation/AVPlayerLayer.h>
 #import <AVFoundation/AVPlayerLooper.h>
 #import <AVFoundation/AVPlayerMediaSelectionCriteria.h>
+#import <AVFoundation/AVQueuedSampleBufferRendering.h>
+#import <AVFoundation/AVRouteDetector.h>
+#import <AVFoundation/AVSampleBufferAudioRenderer.h>
 #import <AVFoundation/AVSampleBufferDisplayLayer.h>
+#import <AVFoundation/AVSampleBufferRenderSynchronizer.h>
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 #import <AVFoundation/AVSampleBufferGenerator.h>
 #import <AVFoundation/AVSampleCursor.h>

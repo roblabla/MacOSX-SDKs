@@ -104,7 +104,7 @@ necessary for services that send periodic messages to their clients, not in
 direct reply to a received message.
 .Pp
 If the service has a non-zero transaction count at a time when the system deems
-it necessary to terminate the service, all peer connections in the service will
+it necessary to terminate the service, peer connections in the service may
 receive the
 .Ft XPC_ERROR_TERMINATION_IMMINENT
 event. This event indicates that the service should unwind all outstanding work

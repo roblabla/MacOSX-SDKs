@@ -1,7 +1,7 @@
 /*
         NSOpenGL.h
         Application Kit
-        Copyright (c) 2000-2016, Apple Inc.
+        Copyright (c) 2000-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -9,16 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <OpenGL/gltypes.h>
 
-#define NS_OPENGL_PIXEL_FORMAT_DECLARES_DESIGNATED_INITIALIZERS APPKIT_SWIFT_SDK_EPOCH_AT_LEAST(2)
-
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSData, NSView, NSScreen;
-
-/*
-** NSOpenGL current API version
-*/
-#define NSOPENGL_CURRENT_VERSION  1
 
 /* Option names for NSOpenGLSetOption() and NSOpenGLGetOption() */
 typedef enum {
@@ -118,9 +111,7 @@ enum {
     void *_reserved4 __unused;
 }
 
-#if NS_OPENGL_PIXEL_FORMAT_DECLARES_DESIGNATED_INITIALIZERS
 - (nullable NSOpenGLPixelFormat *)initWithCGLPixelFormatObj:(struct _CGLPixelFormatObject *)format NS_AVAILABLE_MAC(10_6) NS_DESIGNATED_INITIALIZER;
-#endif
 - (nullable instancetype)initWithAttributes:(const NSOpenGLPixelFormatAttribute *)attribs;
 - (nullable id)initWithData:(null_unspecified NSData*)attribs NS_DEPRECATED_MAC(10_0, 10_6, "Use -initWithAttributes: instead");
 
@@ -202,7 +193,7 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 @interface NSOpenGLContext : NSObject <NSLocking>
 {
 @private
-    NSView *_view;
+    __weak NSView *_view;
     struct _CGLContextObject *_CGLContext;
 }
 
@@ -213,7 +204,7 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 @property (readonly, strong) NSOpenGLPixelFormat *pixelFormat NS_AVAILABLE_MAC(10_10);
 
 /* Drawable management */
-@property (nullable, assign) NSView *view;
+@property (nullable, weak) NSView *view;
 - (void)setFullScreen NS_DEPRECATED_MAC(10_0, 10_7, "Use a fullscreen NSOpenGLView instead");
 
 /* Deprecated in 10.7.  The -setOffScreen:width:height:rowbytes: API forces use of the software rasterizer, which is much slower than GPU rendering.  It is generally much better nowadays to use a normal pixel format with either an off-screen window or an FBO (GL_EXT_framebuffer_object), and then call glReadPixels() to read the rendered result back to CPU memory (if that's where it is needed).
@@ -229,7 +220,7 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 /* Current context control */
 - (void)makeCurrentContext;
 + (void)clearCurrentContext;
-+ (nullable NSOpenGLContext *)currentContext;
+@property (class, readonly, nullable, strong) NSOpenGLContext *currentContext;
 
 /* Copy attributes from another context */
 - (void)copyAttributesFromContext:(NSOpenGLContext *)context withMask:(GLbitfield)mask NS_DEPRECATED_MAC(10_0, 10_8);
@@ -277,21 +268,21 @@ typedef struct _CGLContextObject NSOpenGLContextAuxiliary;
 @end
 
 
-static const NSOpenGLContextParameter NSOpenGLCPSwapInterval /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterSwapInterval", macosx(10.5, 10.12))*/ = NSOpenGLContextParameterSwapInterval;
-static const NSOpenGLContextParameter NSOpenGLCPSurfaceOrder /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterSurfaceOrder", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterSurfaceOrder;
-static const NSOpenGLContextParameter NSOpenGLCPSurfaceOpacity /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterSurfaceOpacity", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterSurfaceOpacity;
-static const NSOpenGLContextParameter NSOpenGLCPSurfaceBackingSize /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterSurfaceBackingSize", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterSurfaceBackingSize;
-static const NSOpenGLContextParameter NSOpenGLCPReclaimResources /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterReclaimResources", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterReclaimResources;
-static const NSOpenGLContextParameter NSOpenGLCPCurrentRendererID /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterCurrentRendererID", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterCurrentRendererID;
-static const NSOpenGLContextParameter NSOpenGLCPGPUVertexProcessing /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterGPUVertexProcessing", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterGPUVertexProcessing;
-static const NSOpenGLContextParameter NSOpenGLCPGPUFragmentProcessing /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterGPUFragmentProcessing", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterGPUFragmentProcessing;
-static const NSOpenGLContextParameter NSOpenGLCPHasDrawable /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterHasDrawable", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterHasDrawable;
-static const NSOpenGLContextParameter NSOpenGLCPMPSwapsInFlight /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterMPSwapsInFlight", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterMPSwapsInFlight;
+static const NSOpenGLContextParameter NSOpenGLCPSwapInterval /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterSwapInterval", 10.5, 10.12)*/ = NSOpenGLContextParameterSwapInterval;
+static const NSOpenGLContextParameter NSOpenGLCPSurfaceOrder /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterSurfaceOrder", 10.0, 10.12)*/ = NSOpenGLContextParameterSurfaceOrder;
+static const NSOpenGLContextParameter NSOpenGLCPSurfaceOpacity /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterSurfaceOpacity", 10.0, 10.12)*/ = NSOpenGLContextParameterSurfaceOpacity;
+static const NSOpenGLContextParameter NSOpenGLCPSurfaceBackingSize /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterSurfaceBackingSize", 10.0, 10.12)*/ = NSOpenGLContextParameterSurfaceBackingSize;
+static const NSOpenGLContextParameter NSOpenGLCPReclaimResources /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterReclaimResources", 10.0, 10.12)*/ = NSOpenGLContextParameterReclaimResources;
+static const NSOpenGLContextParameter NSOpenGLCPCurrentRendererID /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterCurrentRendererID", 10.0, 10.12)*/ = NSOpenGLContextParameterCurrentRendererID;
+static const NSOpenGLContextParameter NSOpenGLCPGPUVertexProcessing /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterGPUVertexProcessing", 10.0, 10.12)*/ = NSOpenGLContextParameterGPUVertexProcessing;
+static const NSOpenGLContextParameter NSOpenGLCPGPUFragmentProcessing /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterGPUFragmentProcessing", 10.0, 10.12)*/ = NSOpenGLContextParameterGPUFragmentProcessing;
+static const NSOpenGLContextParameter NSOpenGLCPHasDrawable /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterHasDrawable", 10.0, 10.12)*/ = NSOpenGLContextParameterHasDrawable;
+static const NSOpenGLContextParameter NSOpenGLCPMPSwapsInFlight /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterMPSwapsInFlight", 10.0, 10.12)*/ = NSOpenGLContextParameterMPSwapsInFlight;
 
-static const NSOpenGLContextParameter NSOpenGLCPSwapRectangle /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterSwapRectangle", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterSwapRectangle;
-static const NSOpenGLContextParameter NSOpenGLCPSwapRectangleEnable /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterSwapRectangleEnable", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterSwapRectangleEnable;
-static const NSOpenGLContextParameter NSOpenGLCPRasterizationEnable /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterRasterizationEnable", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterRasterizationEnable;
-static const NSOpenGLContextParameter NSOpenGLCPStateValidation /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterStateValidation", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterStateValidation;
-static const NSOpenGLContextParameter NSOpenGLCPSurfaceSurfaceVolatile /*API_DEPRECATED_WITH_REPLACEMENT("NSOpenGLContextParameterSurfaceSurfaceVolatile", macosx(10.0, 10.12))*/ = NSOpenGLContextParameterSurfaceSurfaceVolatile;
+static const NSOpenGLContextParameter NSOpenGLCPSwapRectangle /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterSwapRectangle", 10.0, 10.12)*/ = NSOpenGLContextParameterSwapRectangle;
+static const NSOpenGLContextParameter NSOpenGLCPSwapRectangleEnable /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterSwapRectangleEnable", 10.0, 10.12)*/ = NSOpenGLContextParameterSwapRectangleEnable;
+static const NSOpenGLContextParameter NSOpenGLCPRasterizationEnable /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterRasterizationEnable", 10.0, 10.12)*/ = NSOpenGLContextParameterRasterizationEnable;
+static const NSOpenGLContextParameter NSOpenGLCPStateValidation /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterStateValidation", 10.0, 10.12)*/ = NSOpenGLContextParameterStateValidation;
+static const NSOpenGLContextParameter NSOpenGLCPSurfaceSurfaceVolatile /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSOpenGLContextParameterSurfaceSurfaceVolatile", 10.0, 10.12)*/ = NSOpenGLContextParameterSurfaceSurfaceVolatile;
 
 NS_ASSUME_NONNULL_END

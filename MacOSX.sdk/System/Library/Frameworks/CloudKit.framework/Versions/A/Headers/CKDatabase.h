@@ -15,13 +15,13 @@ typedef NS_ENUM(NSInteger, CKDatabaseScope) {
     CKDatabaseScopePublic = 1,
     CKDatabaseScopePrivate,
     CKDatabaseScopeShared,
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+} API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKDatabase : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 - (void)addOperation:(CKDatabaseOperation *)operation;
-@property (nonatomic, readonly, assign) CKDatabaseScope databaseScope NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly, assign) CKDatabaseScope databaseScope API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 @end
 
 @interface CKDatabase (ConvenienceMethods)

@@ -37,7 +37,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTFramesetter * CTFramesetterRef;
 	@abstract	Returns the CFType of the framesetter object
 */
 
-CFTypeID CTFramesetterGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTFramesetterGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -61,7 +61,7 @@ CFTypeID CTFramesetterGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 CTFramesetterRef CTFramesetterCreateWithAttributedString(
-	CFAttributedStringRef string ) CT_AVAILABLE(10_5, 3_2);
+	CFAttributedStringRef string ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -103,7 +103,7 @@ CTFrameRef CTFramesetterCreateFrame(
 	CTFramesetterRef framesetter,
 	CFRange stringRange,
 	CGPathRef path,
-	CFDictionaryRef __nullable frameAttributes ) CT_AVAILABLE(10_5, 3_2);
+	CFDictionaryRef __nullable frameAttributes ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -124,7 +124,7 @@ CTFrameRef CTFramesetterCreateFrame(
 */
 
 CTTypesetterRef CTFramesetterGetTypesetter(
-	CTFramesetterRef framesetter ) CT_AVAILABLE(10_5, 3_2);
+	CTFramesetterRef framesetter ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -169,7 +169,7 @@ CGSize CTFramesetterSuggestFrameSizeWithConstraints(
 	CFRange stringRange,
 	CFDictionaryRef __nullable frameAttributes,
 	CGSize constraints,
-	CFRange * __nullable fitRange ) CT_AVAILABLE(10_5, 3_2);
+	CFRange * __nullable fitRange ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

@@ -1,7 +1,7 @@
 /*
 	AppKitDefines.h
 	Application Kit
-	Copyright (c) 1995-2016, Apple Inc.
+	Copyright (c) 1995-2017, Apple Inc.
 	All rights reserved.
 */
 #ifndef _APPKITDEFINES_H
@@ -20,8 +20,6 @@
 #define AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_6 DEPRECATED_IN_MAC_OS_X_VERSION_10_6_AND_LATER
 #define AVAILABLE_MAC_OS_X_VERSION_10_7_AND_LATER_BUT_DEPRECATED_IN_MAC_OS_X_VERSION_10_7 DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER
 #endif
-
-#define APPKIT_SWIFT_SDK_EPOCH_AT_LEAST(__epoch__) (!defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_APPKIT_EPOCH) && SWIFT_SDK_OVERLAY_APPKIT_EPOCH >= __epoch__))
 
 //
 //  Platform specific defs for externs

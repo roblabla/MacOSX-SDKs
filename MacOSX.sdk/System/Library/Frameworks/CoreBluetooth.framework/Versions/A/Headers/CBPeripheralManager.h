@@ -7,30 +7,37 @@
  *	@copyright 2012 Apple, Inc. All rights reserved.
  */
 
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
+
+#import <Foundation/Foundation.h>
 #import <CoreBluetooth/CBDefines.h>
 #import <CoreBluetooth/CBError.h>
+#import <CoreBluetooth/CBManager.h>
+#import <CoreBluetooth/CBL2CAPChannel.h>
+
 #import <CoreBluetooth/CBPeripheralManagerConstants.h>
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
- *  @enum CBPeripheralAuthorizationStatus
+ *  @enum CBPeripheralManagerAuthorizationStatus
  *
  *  @discussion Represents the current state of a CBPeripheralManager.
  *
- *  @constant CBPeripheralAuthorizationStatusNotDetermined	User has not yet made a choice with regards to this application.
- *  @constant CBPeripheralAuthorizationStatusRestricted		This application is not authorized to share data while backgrounded. The user cannot change this application’s status, possibly due to active restrictions such as parental controls being in place.
- *  @constant CBPeripheralAuthorizationStatusDenied			User has explicitly denied this application from sharing data while backgrounded.
- *  @constant CBPeripheralAuthorizationStatusAuthorized		User has authorized this application to share data while backgrounded.
+ *  @constant CBPeripheralManagerAuthorizationStatusNotDetermined	User has not yet made a choice with regards to this application.
+ *  @constant CBPeripheralManagerAuthorizationStatusRestricted		This application is not authorized to share data while backgrounded. The user cannot change this application’s status, possibly due to active restrictions such as parental controls being in place.
+ *  @constant CBPeripheralManagerAuthorizationStatusDenied			User has explicitly denied this application from sharing data while backgrounded.
+ *  @constant CBPeripheralManagerAuthorizationStatusAuthorized		User has authorized this application to share data while backgrounded.
  *
  */
-typedef NS_ENUM(NSInteger, CBPeripheralAuthorizationStatus) {
-	CBPeripheralAuthorizationStatusNotDetermined = 0,
-	CBPeripheralAuthorizationStatusRestricted,
-	CBPeripheralAuthorizationStatusDenied,
-	CBPeripheralAuthorizationStatusAuthorized,		
-	} NS_ENUM_AVAILABLE(10_9, 6_0);
+typedef NS_ENUM(NSInteger, CBPeripheralManagerAuthorizationStatus) {
+	CBPeripheralManagerAuthorizationStatusNotDetermined = 0,
+	CBPeripheralManagerAuthorizationStatusRestricted,
+	CBPeripheralManagerAuthorizationStatusDenied,
+	CBPeripheralManagerAuthorizationStatusAuthorized,		
+} NS_ENUM_AVAILABLE(10_9, 7_0);
 
 /*!
  *  @enum CBPeripheralManagerState
@@ -46,13 +53,13 @@ typedef NS_ENUM(NSInteger, CBPeripheralAuthorizationStatus) {
  *
  */
 typedef NS_ENUM(NSInteger, CBPeripheralManagerState) {
-	CBPeripheralManagerStateUnknown = 0,
-	CBPeripheralManagerStateResetting,
-	CBPeripheralManagerStateUnsupported,
-	CBPeripheralManagerStateUnauthorized,
-	CBPeripheralManagerStatePoweredOff,
-	CBPeripheralManagerStatePoweredOn,
-} NS_ENUM_AVAILABLE(10_9, 6_0);
+	CBPeripheralManagerStateUnknown = CBManagerStateUnknown,
+	CBPeripheralManagerStateResetting = CBManagerStateResetting,
+	CBPeripheralManagerStateUnsupported = CBManagerStateUnsupported,
+	CBPeripheralManagerStateUnauthorized = CBManagerStateUnauthorized,
+	CBPeripheralManagerStatePoweredOff = CBManagerStatePoweredOff,
+	CBPeripheralManagerStatePoweredOn = CBManagerStatePoweredOn,
+} NS_DEPRECATED(10_9, 10_13, 6_0, 10_0, "Use CBManagerState instead");
 
 /*!
  *  @enum CBPeripheralManagerConnectionLatency
@@ -69,7 +76,6 @@ typedef NS_ENUM(NSInteger, CBPeripheralManagerConnectionLatency) {
 	CBPeripheralManagerConnectionLatencyMedium,
 	CBPeripheralManagerConnectionLatencyHigh
 } NS_ENUM_AVAILABLE(10_9, 6_0);
-
 
 @class CBCentral, CBService, CBMutableService, CBCharacteristic, CBMutableCharacteristic, CBATTRequest;
 @protocol CBPeripheralManagerDelegate;
@@ -91,23 +97,7 @@ typedef NS_ENUM(NSInteger, CBPeripheralManagerConnectionLatency) {
  *
  */
 NS_CLASS_AVAILABLE(10_9, 6_0)
-CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
-{
-@private
-	id<CBPeripheralManagerDelegate>	_delegate;
-	id                              _connection;
-	
-	CBPeripheralManagerState		_state;
-	BOOL							_advertising;
-	NSMutableDictionary				*_centrals;
-	
-	NSMutableArray					*_services;
-	NSMutableDictionary				*_characteristicIDs;
-    
-    NSLock							*_updateLock;
-    BOOL							_readyForUpdates;
-    BOOL							_waitingForReady;
-}
+CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
 
 /*!
  *  @property delegate
@@ -115,16 +105,7 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
  *  @discussion The delegate object that will receive peripheral events.
  *
  */
-@property(assign, nonatomic, nullable) id<CBPeripheralManagerDelegate> delegate;
-
-/*!
- *  @property state
- *
- *  @discussion The current state of the peripheral, initially set to <code>CBPeripheralManagerStateUnknown</code>. Updates are provided by required
- *              delegate method @link peripheralManagerDidUpdateState: @/link.
- *
- */
-@property(readonly) CBPeripheralManagerState state;
+@property(nonatomic, weak, nullable) id<CBPeripheralManagerDelegate> delegate;
 
 /*!
  *  @property isAdvertising
@@ -132,7 +113,7 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
  *  @discussion Whether or not the peripheral is currently advertising data.
  *
  */
-@property(readonly) BOOL isAdvertising;
+@property(nonatomic, assign, readonly) BOOL isAdvertising;
 
 /*!
  *  @method authorizationStatus
@@ -140,11 +121,13 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
  *  @discussion	This method does not prompt the user for access. You can use it to detect restricted access and simply hide UI instead of
  *				prompting for access.
  *
- *  @return		The current authorization status for sharing data while backgrounded. For the constants returned, see {@link CBPeripheralAuthorizationStatus}.
+ *  @return		The current authorization status for sharing data while backgrounded. For the constants returned, see {@link CBPeripheralManagerAuthorizationStatus}.
  *
- *  @see		CBPeripheralAuthorizationStatus
+ *  @see		CBPeripheralManagerAuthorizationStatus
  */
-+ (CBPeripheralAuthorizationStatus)authorizationStatus NS_AVAILABLE(NA, 7_0);
++ (CBPeripheralManagerAuthorizationStatus)authorizationStatus NS_AVAILABLE(10_9, 7_0);
+
+- (instancetype)init;
 
 /*!
  *  @method initWithDelegate:queue:
@@ -156,7 +139,8 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
  *                  If <i>nil</i>, the main queue will be used.
  *
  */
-- (id)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate queue:(nullable dispatch_queue_t)queue;
+- (instancetype)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate
+						   queue:(nullable dispatch_queue_t)queue __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
  *  @method initWithDelegate:queue:options:
@@ -172,7 +156,9 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
  *	@seealso		CBPeripheralManagerOptionRestoreIdentifierKey
  *
  */
-- (id)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate queue:(nullable dispatch_queue_t)queue options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0);
+- (instancetype)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate
+						   queue:(nullable dispatch_queue_t)queue
+						 options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
  *  @method startAdvertising:
@@ -287,6 +273,31 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
  */
 - (BOOL)updateValue:(NSData *)value forCharacteristic:(CBMutableCharacteristic *)characteristic onSubscribedCentrals:(nullable NSArray<CBCentral *> *)centrals;
 
+/*!
+ *  @method publishL2CAPChannelWithEncryption:
+ *
+ *  @param encryptionRequired		YES if the service requires the link to be encrypted before a stream can be established.  NO if the service can be used over
+ *									an unsecured link.
+ *
+ *  @discussion     Create a listener for incoming L2CAP Channel connections.  The system will determine an unused PSM at the time of publishing, which will be returned
+ *					with @link peripheralManager:didPublishL2CAPChannel:error: @/link.  L2CAP Channels are not discoverable by themselves, so it is the application's
+ *					responsibility to handle PSM discovery on the client.
+ *
+ */
+- (void)publishL2CAPChannelWithEncryption:(BOOL)encryptionRequired NS_AVAILABLE(NA, 11_0);
+
+/*!
+ *  @method unpublishL2CAPChannel:
+ *
+ *  @param PSM		The service PSM to be removed from the system.
+ *
+ *  @discussion     Removes a published service from the local system.  No new connections for this PSM will be accepted, and any existing L2CAP channels
+ *					using this PSM will be closed.
+ *
+ */
+- (void)unpublishL2CAPChannel:(CBL2CAPPSM)PSM NS_AVAILABLE(NA, 11_0);
+
+
 @end
 
 
@@ -323,10 +334,15 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
 /*!
  *  @method peripheralManager:willRestoreState:
  *
- *  @param peripheral   The peripheral manager providing this information.
- *  @param dict
+ *  @param peripheral	The peripheral manager providing this information.
+ *  @param dict			A dictionary containing information about <i>peripheral</i> that was preserved by the system at the time the app was terminated.
  *
- *  @discussion
+ *  @discussion			For apps that opt-in to state preservation and restoration, this is the first method invoked when your app is relaunched into
+ *						the background to complete some Bluetooth-related task. Use this method to synchronize your app's state with the state of the
+ *						Bluetooth system.
+ *
+ *  @seealso            CBPeripheralManagerRestoredStateServicesKey;
+ *  @seealso            CBPeripheralManagerRestoredStateAdvertisementDataKey;
  *
  */
 - (void)peripheralManager:(CBPeripheralManager *)peripheral willRestoreState:(NSDictionary<NSString *, id> *)dict;
@@ -422,6 +438,46 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : NSObject
  */
 - (void)peripheralManagerIsReadyToUpdateSubscribers:(CBPeripheralManager *)peripheral;
 
+/*!
+ *  @method peripheralManager:didPublishL2CAPChannel:error:
+ *
+ *  @param peripheral   The peripheral manager requesting this information.
+ *  @param PSM			The PSM of the channel that was published.
+ *  @param error		If an error occurred, the cause of the failure.
+ *
+ *  @discussion         This method is the response to a  @link publishL2CAPChannel: @/link call.  The PSM will contain the PSM that was assigned for the published
+ *						channel
+ *
+ */
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didPublishL2CAPChannel:(CBL2CAPPSM)PSM error:(nullable NSError *)error;
+
+/*!
+ *  @method peripheralManager:didUnublishL2CAPChannel:error:
+ *
+ *  @param peripheral   The peripheral manager requesting this information.
+ *  @param PSM			The PSM of the channel that was published.
+ *  @param error		If an error occurred, the cause of the failure.
+ *
+ *  @discussion         This method is the response to a  @link unpublishL2CAPChannel: @/link call.
+ *
+ */
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didUnpublishL2CAPChannel:(CBL2CAPPSM)PSM error:(nullable NSError *)error;
+
+/*!
+ *  @method peripheralManager:didOpenL2CAPChannel:error:
+ *
+ *  @param peripheral   The peripheral manager requesting this information.
+ *  @param requests     A list of one or more <code>CBATTRequest</code> objects.
+ *
+ *  @discussion         This method is invoked when <i>peripheral</i> receives an ATT request or command for one or more characteristics with a dynamic value.
+ *                      For every invocation of this method, @link respondToRequest:withResult: @/link should be called exactly once. If <i>requests</i> contains
+ *                      multiple requests, they must be treated as an atomic unit. If the execution of one of the requests would cause a failure, the request
+ *                      and error reason should be provided to <code>respondToRequest:withResult:</code> and none of the requests should be executed.
+ *
+ *  @see                CBATTRequest
+ *
+ */
+- (void)peripheralManager:(CBPeripheralManager *)peripheral didOpenL2CAPChannel:(nullable CBL2CAPChannel *)channel error:(nullable NSError *)error;
 @end
 
 NS_ASSUME_NONNULL_END

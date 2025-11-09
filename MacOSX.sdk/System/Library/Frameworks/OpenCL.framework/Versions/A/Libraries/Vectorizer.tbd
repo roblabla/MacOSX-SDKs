@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 34051983-DA46-325F-B6B4-515392423A37', 'x86_64: 09F8F32B-C870-3C41-BDB2-AF41794E2AAE' ]
+uuids:           [ 'i386: 66A5E520-25D8-364C-BDD4-4E0C2495AC56', 'x86_64: CDE7D864-8C1C-3AB5-8358-C1C83FD7074F' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/Vectorizer.dylib
 objc-constraint: none

@@ -1,7 +1,7 @@
 /*
     NSPopover.h
     Application Kit
-    Copyright (c) 2010-2016, Apple Inc.
+    Copyright (c) 2010-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -64,7 +64,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
     NSView *_positioningView;
     NSViewController *_contentViewController;
     NSWindow *_positioningWindow;
-    NSPopoverAppearance _appearance;
+    NSInteger _appearance;
     NSPopoverBehavior _behavior;
     id _popoverPrivateData;
     NSRectEdge _preferredEdge;
@@ -120,6 +120,8 @@ NS_CLASS_AVAILABLE(10_7, NA)
 @property(nullable, weak) IBOutlet id <NSPopoverDelegate> delegate;
 
 #if MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_10
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wavailability"
 
 /*!
  * The appearance of the popover. The popover's contentView will inherit this appearance. The default effective appearance is the NSAppearanceNameVibrantLight appearance.
@@ -130,6 +132,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 @property (readonly, strong) NSAppearance *effectiveAppearance NS_AVAILABLE_MAC(10_10);
 
+#pragma clang diagnostic pop
 #else
 
 /*!
@@ -195,13 +198,12 @@ NS_CLASS_AVAILABLE(10_7, NA)
  */
 APPKIT_EXTERN NSString * const NSPopoverCloseReasonKey NS_AVAILABLE_MAC(10_7);
 
-/* Specifies that the popover is being closed in a standard way; a possible value for NSPopoverCloseReasonKey.
- */
-APPKIT_EXTERN NSString * const NSPopoverCloseReasonStandard NS_AVAILABLE_MAC(10_7);
-
-/* Specifies that the popover has been closed because it is being detached to a window; a possible value for NSPopoverCloseReasonKey.
- */
-APPKIT_EXTERN NSString * const NSPopoverCloseReasonDetachToWindow NS_AVAILABLE_MAC(10_7);
+/* Possible values for NSPopoverCloseReasonKey */
+typedef NSString * NSPopoverCloseReasonValue NS_STRING_ENUM;
+/* the popover is being closed in a standard way */
+APPKIT_EXTERN NSPopoverCloseReasonValue const NSPopoverCloseReasonStandard NS_AVAILABLE_MAC(10_7);
+/* The popover has been closed because it is being detached to a window */
+APPKIT_EXTERN NSPopoverCloseReasonValue const NSPopoverCloseReasonDetachToWindow NS_AVAILABLE_MAC(10_7);
 
 /*  Sent before the popover is shown. 
  */

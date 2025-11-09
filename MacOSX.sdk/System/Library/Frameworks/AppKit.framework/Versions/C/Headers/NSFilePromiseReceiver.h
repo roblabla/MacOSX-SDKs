@@ -1,7 +1,7 @@
 /*
 	NSFilePromiseReceiver.h
 	Application Kit
-	Copyright (c) 2015-2016, Apple Inc.
+	Copyright (c) 2015-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -37,7 +37,7 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 
 /* A view must register what types it accepts via -registerForDraggedTypes:. Use this class method to get the file promise drag types that NSFilePromiseReceiver can accept, in order to register a view to accept promised files.
  */
-+ (NSArray<NSString *> *)readableDraggedTypes;
+@property (class, readonly, copy) NSArray<NSString *> *readableDraggedTypes;
 
 /* The UTI of the file types promised (Note: The count of fileTypes should tell you the number of promised files, however, that is not guaranteed. Historically, some legacy file promisers only list each unique fileType once and write one or more files per type.
  */

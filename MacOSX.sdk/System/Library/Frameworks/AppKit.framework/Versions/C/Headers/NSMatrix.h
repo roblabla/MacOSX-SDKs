@@ -1,7 +1,7 @@
 /*
 	NSMatrix.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -45,29 +45,25 @@ typedef struct __MFlags {
     unsigned int	refusesFirstResponder:1;
     unsigned int	useSimpleTrackingMode:1;
     unsigned int	checkForSimpleTrackingMode:1;
-    unsigned int	liveResizeImageCacheingEnabled:1;
-    unsigned int 	hasCachedSubclassIsSafeForLiveResize:1;
-    unsigned int	subclassIsSafeForLiveResize:1;
-    unsigned int 	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
-    unsigned int 	needsRedrawBeforeFirstLiveResizeCache:1;
-    unsigned int        browserOptimizationsEnabled:1;
-    unsigned int        drawingContextMenuHighlight:1;
+    unsigned int	reservedMatrix2:3;
+    unsigned int	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
+    unsigned int	reservedMatrix3:1;
+    unsigned int	browserOptimizationsEnabled:1;
+    unsigned int	drawingContextMenuHighlight:1;
     unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
-    unsigned int      autorecalculatesCellSize:1;
-    unsigned int       cellSizeNeedsAutorecalc:1;
+    unsigned int	autorecalculatesCellSize:1;
+    unsigned int	cellSizeNeedsAutorecalc:1;
     unsigned int	reservedMatrix:2;
 #else
     unsigned int	reservedMatrix:2;
-    unsigned int       cellSizeNeedsAutorecalc:1;
-    unsigned int      autorecalculatesCellSize:1;
+    unsigned int	cellSizeNeedsAutorecalc:1;
+    unsigned int	autorecalculatesCellSize:1;
     unsigned int	drawingContextMenuHighlightOnAllSelectedRows:1;
-    unsigned int        drawingContextMenuHighlight:1;
-    unsigned int        browserOptimizationsEnabled:1;
-    unsigned int 	needsRedrawBeforeFirstLiveResizeCache:1;
-    unsigned int 	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
-    unsigned int	subclassIsSafeForLiveResize:1;
-    unsigned int 	hasCachedSubclassIsSafeForLiveResize:1;
-    unsigned int	liveResizeImageCacheingEnabled:1;
+    unsigned int	drawingContextMenuHighlight:1;
+    unsigned int	browserOptimizationsEnabled:1;
+    unsigned int	reservedMatrix3:1;
+    unsigned int	tmpAllowNonVisibleCellsToBecomeFirstResponder:1;
+    unsigned int	reservedMatrix2:3;
     unsigned int	checkForSimpleTrackingMode:1;
     unsigned int	useSimpleTrackingMode:1;
     unsigned int	refusesFirstResponder:1;
@@ -97,25 +93,25 @@ typedef struct __MFlags {
 @interface NSMatrix : NSControl <NSUserInterfaceValidations>
 {
     /*All instance variables are private*/
-    id                  _reserved2;
-    SEL                 _reserved3;
-    SEL                 _doubleAction;
-    SEL                 _errorAction;
-    id                  _delegate;
-    id                  _selectedCell;
-    NSInteger           _selectedRow;
-    NSInteger           _selectedCol;
-    NSInteger           _numRows;
-    NSInteger           _numCols;
-    NSSize              _cellSize;
-    NSSize              _intercell;
-    id                  _font;
-    id                  _protoCell;
-    id                  _cellClass;
-    NSColor             *_backgroundColor;
-    id                  _private;
-    NSMutableArray	*_cells;
-    _MFlags              _mFlags;
+    id                          _reserved2;
+    SEL                         _reserved3;
+    SEL                         _doubleAction;
+    SEL                         _errorAction;
+    __weak id                   _delegate;
+    id                          _selectedCell;
+    NSInteger                   _selectedRow;
+    NSInteger                   _selectedCol;
+    NSInteger                   _numRows;
+    NSInteger                   _numCols;
+    NSSize                      _cellSize;
+    NSSize                      _intercell;
+    id                          _font;
+    id                          _protoCell;
+    id                          _cellClass;
+    NSColor                    *_backgroundColor;
+    id                          _private;
+    NSMutableArray	       *_cells;
+    _MFlags                     _mFlags;
 }
 
 
@@ -186,7 +182,7 @@ typedef struct __MFlags {
 - (BOOL)performKeyEquivalent:(NSEvent *)event;
 - (BOOL)sendAction;
 - (void)sendDoubleAction;
-@property (nullable, assign) id<NSMatrixDelegate> delegate;
+@property (nullable, weak) id<NSMatrixDelegate> delegate;
 - (BOOL)textShouldBeginEditing:(NSText *)textObject;
 - (BOOL)textShouldEndEditing:(NSText *)textObject;
 - (void)textDidBeginEditing:(NSNotification *)notification;
@@ -209,7 +205,7 @@ typedef struct __MFlags {
 
 @interface NSMatrix(NSKeyboardUI)
 @property BOOL tabKeyTraversesCells;
-@property (nullable, assign) __kindof NSCell *keyCell;
+@property (nullable, strong) __kindof NSCell *keyCell;
 @end
 
 @protocol NSMatrixDelegate <NSControlTextEditingDelegate> @end

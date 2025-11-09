@@ -31,6 +31,7 @@
 
 #import <Foundation/NSURLDownload.h>
 
+@class NSWindow;
 @class WebDownloadInternal;
 
 /*!
@@ -63,9 +64,6 @@
 
 /*!
     @method downloadWindowForAuthenticationSheet:
-    @abstract
-    @param
-    @result
 */
 - (NSWindow *)downloadWindowForAuthenticationSheet:(WebDownload *)download;
 

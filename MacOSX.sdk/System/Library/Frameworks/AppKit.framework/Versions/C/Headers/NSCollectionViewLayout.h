@@ -1,7 +1,7 @@
 /*
     NSCollectionViewLayout.h
     Application Kit
-    Copyright (c) 2015-2016, Apple Inc.
+    Copyright (c) 2015-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSCollectionView.h>
 
 /* The NSCollectionViewLayout class is provided as an abstract class for subclassing to define custom collection layouts.  Defining a custom layout is an advanced operation intended for applications with complex needs.
 */
@@ -24,9 +25,11 @@ typedef NS_ENUM(NSInteger, NSCollectionElementCategory) {
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * NSCollectionViewDecorationElementKind NS_EXTENSIBLE_STRING_ENUM;
+
 /* The elementKind that NSCollectionView uses to identify an inter-item gap, when the proposedDropOperation is NSCollectionViewDropBefore.  A client can customize the default look of the inter-item gap drop target indicator by registering a supplementary view nib or class for this elementKind.  If your -collectionView:validateDrop:proposedIndexPath:dropOperation: method disallows NSCollectionViewDropBefore operations, the CollectionView won't show this indicator.
 */
-APPKIT_EXTERN NSString *const NSCollectionElementKindInterItemGapIndicator NS_AVAILABLE_MAC(10_11);
+APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElementKindInterItemGapIndicator NS_AVAILABLE_MAC(10_11);
 
 @class NSCollectionViewLayoutAttributes;
 @class NSCollectionView;
@@ -52,7 +55,8 @@ NS_CLASS_AVAILABLE_MAC(10_11)
         unsigned int isHidden:1;
         unsigned int isClone:1;
         unsigned int isInterItemGap:1;
-        unsigned int reserved:27;
+        unsigned int isInterSectionGap:1;
+        unsigned int reserved:26;
     } _layoutFlags;
     NSInteger _zIndex;
     id _reserved[32];
@@ -67,12 +71,12 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @property (nullable, strong) NSIndexPath *indexPath;
 
 @property (readonly) NSCollectionElementCategory representedElementCategory;
-@property (nullable, readonly) NSString *representedElementKind; // nil when representedElementCategory is NSCollectionElementCategoryItem
+@property (nullable, readonly) NSString *representedElementKind; // nil when representedElementCategory is NSCollectionElementCategoryItem. NSCollectionViewSupplementaryElementKind when representedElementCategory is NSCollectionElementCategorySupplementaryView or NSCollectionElementCategoryInterItemGap. NSCollectionViewDecorationElementKind when representedElementCategory is NSCollectionElementCategoryDecorationView.
 
 + (instancetype)layoutAttributesForItemWithIndexPath:(NSIndexPath *)indexPath;
 + (instancetype)layoutAttributesForInterItemGapBeforeIndexPath:(NSIndexPath *)indexPath;
-+ (instancetype)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind withIndexPath:(NSIndexPath *)indexPath;
-+ (instancetype)layoutAttributesForDecorationViewOfKind:(NSString *)decorationViewKind withIndexPath:(NSIndexPath*)indexPath;
++ (instancetype)layoutAttributesForSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)elementKind withIndexPath:(NSIndexPath *)indexPath;
++ (instancetype)layoutAttributesForDecorationViewOfKind:(NSCollectionViewDecorationElementKind)decorationViewKind withIndexPath:(NSIndexPath*)indexPath;
 
 @end
 
@@ -129,11 +133,11 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @property (readonly) BOOL invalidateDataSourceCounts; // if YES, the layout should requery section and item counts from the collection view - set to YES when the collection view is sent -reloadData and when items are inserted or deleted
 
 - (void)invalidateItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths;
-- (void)invalidateSupplementaryElementsOfKind:(NSString *)elementKind atIndexPaths:(NSSet<NSIndexPath *> *)indexPaths;
-- (void)invalidateDecorationElementsOfKind:(NSString *)elementKind atIndexPaths:(NSSet<NSIndexPath *> *)indexPaths;
+- (void)invalidateSupplementaryElementsOfKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPaths:(NSSet<NSIndexPath *> *)indexPaths;
+- (void)invalidateDecorationElementsOfKind:(NSCollectionViewDecorationElementKind)elementKind atIndexPaths:(NSSet<NSIndexPath *> *)indexPaths;
 @property (nullable, readonly) NSSet<NSIndexPath *> *invalidatedItemIndexPaths;
-@property (nullable, readonly) NSDictionary<NSString *, NSSet<NSIndexPath *> *> *invalidatedSupplementaryIndexPaths; // keys are element kind strings - values are NSSet<NSIndexPath *>
-@property (nullable, readonly) NSDictionary<NSString *, NSSet<NSIndexPath *> *> *invalidatedDecorationIndexPaths; // keys are element kind strings - values are NSSet<NSIndexPath *>
+@property (nullable, readonly) NSDictionary<NSCollectionViewSupplementaryElementKind, NSSet<NSIndexPath *> *> *invalidatedSupplementaryIndexPaths; // keys are element kind strings - values are NSSet<NSIndexPath *>
+@property (nullable, readonly) NSDictionary<NSCollectionViewDecorationElementKind, NSSet<NSIndexPath *> *> *invalidatedDecorationIndexPaths; // keys are element kind strings - values are NSSet<NSIndexPath *>
 
 @property NSPoint contentOffsetAdjustment; // delta to be applied to the collection view's current contentOffset - default is NSZeroPoint
 @property NSSize contentSizeAdjustment; // delta to be applied to the current content size - default is NSZeroSize
@@ -194,16 +198,16 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 - (void)invalidateLayout;
 - (void)invalidateLayoutWithContext:(NSCollectionViewLayoutInvalidationContext *)context;
 
-- (void)registerClass:(nullable Class)viewClass forDecorationViewOfKind:(NSString *)elementKind;
-- (void)registerNib:(nullable NSNib *)nib forDecorationViewOfKind:(NSString *)elementKind;
+- (void)registerClass:(nullable Class)viewClass forDecorationViewOfKind:(NSCollectionViewDecorationElementKind)elementKind;
+- (void)registerNib:(nullable NSNib *)nib forDecorationViewOfKind:(NSCollectionViewDecorationElementKind)elementKind;
 
 @end
 
 @interface NSCollectionViewLayout (NSSubclassingHooks)
 
-+ (Class)layoutAttributesClass; // override this method to provide a custom class to be used when instantiating instances of NSCollectionViewLayoutAttributes
+@property (class, readonly) Class layoutAttributesClass; // override this method to provide a custom class to be used when instantiating instances of NSCollectionViewLayoutAttributes
 
-+ (Class)invalidationContextClass; // override this method to provide a custom class to be used for invalidation contexts
+@property (class, readonly) Class invalidationContextClass; // override this method to provide a custom class to be used for invalidation contexts
 
 /* The collection view calls -prepareLayout once at its first layout as the first message to the layout instance.  The collection view calls -prepareLayout again after layout is invalidated and before requerying the layout information.  Subclasses should always call super if they override.
 */
@@ -213,8 +217,8 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 */
 - (NSArray<__kindof NSCollectionViewLayoutAttributes *> *)layoutAttributesForElementsInRect:(NSRect)rect; // return an array layout attributes instances for all the views in the given rect
 - (nullable NSCollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath;
-- (nullable NSCollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath;
-- (nullable NSCollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath;
+- (nullable NSCollectionViewLayoutAttributes *)layoutAttributesForSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath *)indexPath;
+- (nullable NSCollectionViewLayoutAttributes *)layoutAttributesForDecorationViewOfKind:(NSCollectionViewDecorationElementKind)elementKind atIndexPath:(NSIndexPath *)indexPath;
 
 /* Returns an NSCollectionViewLayoutAttributes instance that identifies an appropriate proposed drop target from the given hover point.  If the point is between items, the returned layout attributes may describe an inter-item gap, which is distinguished by having a representedElementCategory of NSCollectionElementCategoryInterItemGap, and a representedElementKind of NSCollectionElementKindInterItemGapIndicator.  Its "frame" provides a bounding box for the gap, that will be used to position and size a drop target indicator, and its "indexPath" identifies the proposed "insert before" position.  The frame might not contain the given point, if the insertion indicator should lie elsewhere.  (For example, when a vertical Flow layout hit-tests a gap between rows, it may suggest an insertion gap to the left of the lower row's first item.)  Subclasses should override this method to return appropriate results based on their knowledge of the particular layout.  This method should return nil if no suitable drop target can be inferred from the given point.
 */
@@ -258,17 +262,17 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 // For each element on screen after the invalidation, initialLayoutAttributesForAppearingXXX will be called an an animation setup from those initial attributes to what ends up on screen.
 - (nullable NSCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
 - (nullable NSCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingItemAtIndexPath:(NSIndexPath *)itemIndexPath;
-- (nullable NSCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
-- (nullable NSCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
-- (nullable NSCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
-- (nullable NSCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingDecorationElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
+- (nullable NSCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingSupplementaryElementOfKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
+- (nullable NSCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingSupplementaryElementOfKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath *)elementIndexPath;
+- (nullable NSCollectionViewLayoutAttributes *)initialLayoutAttributesForAppearingDecorationElementOfKind:(NSCollectionViewDecorationElementKind)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
+- (nullable NSCollectionViewLayoutAttributes *)finalLayoutAttributesForDisappearingDecorationElementOfKind:(NSCollectionViewDecorationElementKind)elementKind atIndexPath:(NSIndexPath *)decorationIndexPath;
 
 // These methods are called by collection view during an update block.
 // Return an array of index paths to indicate views that the layout is deleting or inserting in response to the update.
-- (NSSet<NSIndexPath *> *)indexPathsToDeleteForSupplementaryViewOfKind:(NSString *)elementKind;
-- (NSSet<NSIndexPath *> *)indexPathsToDeleteForDecorationViewOfKind:(NSString *)elementKind;
-- (NSSet<NSIndexPath *> *)indexPathsToInsertForSupplementaryViewOfKind:(NSString *)elementKind;
-- (NSSet<NSIndexPath *> *)indexPathsToInsertForDecorationViewOfKind:(NSString *)elementKind;
+- (NSSet<NSIndexPath *> *)indexPathsToDeleteForSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)elementKind;
+- (NSSet<NSIndexPath *> *)indexPathsToDeleteForDecorationViewOfKind:(NSCollectionViewDecorationElementKind)elementKind;
+- (NSSet<NSIndexPath *> *)indexPathsToInsertForSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)elementKind;
+- (NSSet<NSIndexPath *> *)indexPathsToInsertForDecorationViewOfKind:(NSCollectionViewDecorationElementKind)elementKind;
 
 @end
 

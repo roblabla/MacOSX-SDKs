@@ -9,7 +9,7 @@
 #import <CloudKit/CKDatabaseOperation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKQueryCursor : NSObject <NSCopying, NSSecureCoding>
 - (instancetype)init NS_UNAVAILABLE;
 @end
@@ -19,9 +19,9 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 /* Query operations have a dynamically defined maximum number of results.  If the results of a query
  trip this max, your completion block will invoked with a cursor.  Issue a new query with that cursor
  to fetch the next batch of results. */
-CK_EXTERN const NSUInteger CKQueryOperationMaximumResults NS_AVAILABLE(10_10, 8_0);
+CK_EXTERN const NSUInteger CKQueryOperationMaximumResults API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKQueryOperation : CKDatabaseOperation
 
 /* Queries invoked within a sharedCloudDatabase must specify a zoneID.  Cross-zone queries are not supported in a sharedCloudDatabase */

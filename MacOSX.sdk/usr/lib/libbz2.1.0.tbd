@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: DEB36300-52BE-3AC3-AE86-ADD5C7A6D843', 'x86_64: 6FD3B63F-0F86-3A25-BD5B-E243F58792C9' ]
+uuids:           [ 'i386: 77C24A36-BE84-3702-A786-935C597A0A86', 'x86_64: 0A5086BB-4724-3C14-979D-5AD4F26B5B45' ]
 platform:        macosx
 install-name:    /usr/lib/libbz2.1.0.dylib
 current-version: 1.0.5

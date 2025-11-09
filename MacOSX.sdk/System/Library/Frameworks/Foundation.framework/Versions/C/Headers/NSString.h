@@ -1,12 +1,41 @@
 /*	NSString.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
+/*
+ An NSString object encodes a Unicode-compliant text string, represented as a sequence of UTF–16 code units. All lengths, character indexes, and ranges are expressed in terms of UTF–16 code units, with index values starting at 0.  The length property of an NSString returns the number of UTF-16 code units in an NSString, and the characterAtIndex: method retrieves a specific UTF-16 code unit. These two "primitive" methods provide basic access to the contents of a string object.
+ 
+ Most use of strings, however, is at a higher level, with the strings being treated as single entities: Using the APIs in NSString, you can compare strings against one another, search them for substrings, combine them into new strings, and so on. In cases where locale settings may make a difference, use the localized... API variants to perform the operations using the current user's locale, or use the locale: variants that take an explicit NSLocale argument.
+ 
+ If you do need to access individual characters in a string, you need to consider whether you want to access the individual UTF-16 code points (referred to as "characters" in APIs, and represented with the "unichar" type), or human-readable characters (referred to as "composed character sequences" or "grapheme clusters").  Composed character sequences can span multiple UTF-16 characters, when representing a base letter plus an accent, for example, or Emoji.
+ 
+ To access composed character sequences, use APIs such as rangeOfComposedCharacterSequenceAtIndex:, or enumerate the whole or part of the string with enumerateSubstringsInRange:options:usingBlock:, supplying NSStringEnumerationByComposedCharacterSequences as the enumeration option.
+ 
+ For instance, to extract the composed character sequence at a given index (where index is a valid location in the string, 0..length-1):
+ 
+     NSString *substr = [string substringWithRange:[string rangeOfComposedCharacterSequenceAtIndex:index]];
+ 
+ And to enumerate composed character sequences in a string:
+ 
+     [string enumerateSubstringsInRange:NSMakeRange(0, string.length)                      // enumerate the whole range of the string
+                                options:NSStringEnumerationByComposedCharacterSequences    // by composed character sequences
+                             usingBlock:^(NSString * substr, NSRange substrRange, NSRange enclosingRange, BOOL *stop) {
+          ... use substr, whose range in string is substrRange ...
+     }];
+ 
+ NSStrings can be immutable or mutable. The contents of an immutable string is defined when it is created and subsequently cannot be changed.  To construct and manage a string that can be changed after it has been created, use NSMutableString, which is a subclass of NSString.
+ 
+ An NSString object can be initialized using a number of ways: From a traditional (char *) C-string, a sequence of bytes, an NSData object, the contents of an NSURL, etc, with the character contents specified in a variety of string encodings, such as ASCII, ISOLatin1, UTF–8, UTF–16, etc.
+*/
+
+/* The unichar type represents a single UTF-16 code unit in an NSString. Although many human-readable characters are representable with a single unichar, some  such as Emoji may span multiple unichars. See discussion above.
+*/
 typedef unsigned short unichar;
 
 #import <limits.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
+#import <Foundation/NSItemProvider.h>
 #import <stdarg.h>
 
 @class NSData, NSArray<ObjectType>, NSDictionary<KeyType, ObjectType>, NSCharacterSet, NSURL, NSError, NSLocale;
@@ -21,10 +50,10 @@ typedef NS_OPTIONS(NSUInteger, NSStringCompareOptions) {
     NSBackwardsSearch = 4,		/* Search from end of source string */
     NSAnchoredSearch = 8,		/* Search is limited to start (or end, if NSBackwardsSearch) of source string */
     NSNumericSearch = 64,		/* Added in 10.2; Numbers within strings are compared using numeric value, that is, Foo2.txt < Foo7.txt < Foo25.txt; only applies to compare methods, not find */
-    NSDiacriticInsensitiveSearch NS_ENUM_AVAILABLE(10_5, 2_0) = 128, /* If specified, ignores diacritics (o-umlaut == o) */
-    NSWidthInsensitiveSearch NS_ENUM_AVAILABLE(10_5, 2_0) = 256, /* If specified, ignores width differences ('a' == UFF41) */
-    NSForcedOrderingSearch NS_ENUM_AVAILABLE(10_5, 2_0) = 512, /* If specified, comparisons are forced to return either NSOrderedAscending or NSOrderedDescending if the strings are equivalent but not strictly equal, for stability when sorting (e.g. "aaa" > "AAA" with NSCaseInsensitiveSearch specified) */
-    NSRegularExpressionSearch NS_ENUM_AVAILABLE(10_7, 3_2) = 1024    /* Applies to rangeOfString:..., stringByReplacingOccurrencesOfString:..., and replaceOccurrencesOfString:... methods only; the search string is treated as an ICU-compatible regular expression; if set, no other options can apply except NSCaseInsensitiveSearch and NSAnchoredSearch */
+    NSDiacriticInsensitiveSearch API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)) = 128, /* If specified, ignores diacritics (o-umlaut == o) */
+    NSWidthInsensitiveSearch API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)) = 256, /* If specified, ignores width differences ('a' == UFF41) */
+    NSForcedOrderingSearch API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)) = 512, /* If specified, comparisons are forced to return either NSOrderedAscending or NSOrderedDescending if the strings are equivalent but not strictly equal, for stability when sorting (e.g. "aaa" > "AAA" with NSCaseInsensitiveSearch specified) */
+    NSRegularExpressionSearch API_AVAILABLE(macos(10.7), ios(3.2), watchos(2.0), tvos(9.0)) = 1024    /* Applies to rangeOfString:..., stringByReplacingOccurrencesOfString:..., and replaceOccurrencesOfString:... methods only; the search string is treated as an ICU-compatible regular expression; if set, no other options can apply except NSCaseInsensitiveSearch and NSAnchoredSearch */
 };
 
 /* Note that in addition to the values explicitly listed below, NSStringEncoding supports encodings provided by CFString.
@@ -113,7 +142,7 @@ typedef NS_OPTIONS(NSUInteger, NSStringEncodingConversionOptions) {
 
 /* localizedStandardCompare:, added in 10.6, should be used whenever file names or other strings are presented in lists and tables where Finder-like sorting is appropriate.  The exact behavior of this method may be tweaked in future releases, and will be different under different localizations, so clients should not depend on the exact sorting order of the strings.
 */
-- (NSComparisonResult)localizedStandardCompare:(NSString *)string NS_AVAILABLE(10_6, 4_0);
+- (NSComparisonResult)localizedStandardCompare:(NSString *)string API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 - (BOOL)isEqualToString:(NSString *)aString;
 
@@ -129,13 +158,13 @@ typedef NS_OPTIONS(NSUInteger, NSStringEncodingConversionOptions) {
 
 /* Simple convenience methods for string searching. containsString: returns YES if the target string is contained within the receiver. Same as calling rangeOfString:options: with no options, thus doing a case-sensitive, locale-unaware search. localizedCaseInsensitiveContainsString: is the case-insensitive variant which also takes the current locale into effect. Starting in 10.11 and iOS9, the new localizedStandardRangeOfString: or localizedStandardContainsString: APIs are even better convenience methods for user level searching.   More sophisticated needs can be achieved by calling rangeOfString:options:range:locale: directly.
 */
-- (BOOL)containsString:(NSString *)str NS_AVAILABLE(10_10, 8_0);
-- (BOOL)localizedCaseInsensitiveContainsString:(NSString *)str NS_AVAILABLE(10_10, 8_0);
+- (BOOL)containsString:(NSString *)str API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (BOOL)localizedCaseInsensitiveContainsString:(NSString *)str API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /* The following two are the most appropriate methods for doing user-level string searches, similar to how searches are done generally in the system.  The search is locale-aware, case and diacritic insensitive. As with other APIs, "standard" in the name implies "system default behavior," so the exact list of search options applied may change over time.  If you need more control over the search options, please use the rangeOfString:options:range:locale: method. You can pass [NSLocale currentLocale] for searches in user's locale.
 */
-- (BOOL)localizedStandardContainsString:(NSString *)str NS_AVAILABLE(10_11, 9_0);
-- (NSRange)localizedStandardRangeOfString:(NSString *)str NS_AVAILABLE(10_11, 9_0);
+- (BOOL)localizedStandardContainsString:(NSString *)str API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+- (NSRange)localizedStandardRangeOfString:(NSString *)str API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* These methods perform string search, looking for the searchString within the receiver string.  These return length==0 if the target string is not found. So, to check for containment: ([str rangeOfString:@"target"].length > 0).  Note that the length of the range returned by these methods might be different than the length of the target string, due composed characters and such.
  
@@ -146,7 +175,7 @@ The range argument specifies the subrange, rather than the whole, of the receive
 - (NSRange)rangeOfString:(NSString *)searchString;
 - (NSRange)rangeOfString:(NSString *)searchString options:(NSStringCompareOptions)mask;
 - (NSRange)rangeOfString:(NSString *)searchString options:(NSStringCompareOptions)mask range:(NSRange)rangeOfReceiverToSearch;
-- (NSRange)rangeOfString:(NSString *)searchString options:(NSStringCompareOptions)mask range:(NSRange)rangeOfReceiverToSearch locale:(nullable NSLocale *)locale NS_AVAILABLE(10_5, 2_0);
+- (NSRange)rangeOfString:(NSString *)searchString options:(NSStringCompareOptions)mask range:(NSRange)rangeOfReceiverToSearch locale:(nullable NSLocale *)locale API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* These return the range of the first character from the set in the string, not the range of a sequence of characters. 
  
@@ -157,7 +186,7 @@ The range argument specifies the subrange, rather than the whole, of the receive
 - (NSRange)rangeOfCharacterFromSet:(NSCharacterSet *)searchSet options:(NSStringCompareOptions)mask range:(NSRange)rangeOfReceiverToSearch;
 
 - (NSRange)rangeOfComposedCharacterSequenceAtIndex:(NSUInteger)index;
-- (NSRange)rangeOfComposedCharacterSequencesForRange:(NSRange)range NS_AVAILABLE(10_5, 2_0);
+- (NSRange)rangeOfComposedCharacterSequencesForRange:(NSRange)range API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 - (NSString *)stringByAppendingString:(NSString *)aString;
 - (NSString *)stringByAppendingFormat:(NSString *)format, ... NS_FORMAT_FUNCTION(1,2);
@@ -170,9 +199,9 @@ The range argument specifies the subrange, rather than the whole, of the receive
 @property (readonly) double doubleValue;
 @property (readonly) float floatValue;
 @property (readonly) int intValue;
-@property (readonly) NSInteger integerValue NS_AVAILABLE(10_5, 2_0);
-@property (readonly) long long longLongValue NS_AVAILABLE(10_5, 2_0);
-@property (readonly) BOOL boolValue NS_AVAILABLE(10_5, 2_0);  // Skips initial space characters (whitespaceSet), or optional -/+ sign followed by zeroes. Returns YES on encountering one of "Y", "y", "T", "t", or a digit 1-9. It ignores any trailing characters.
+@property (readonly) NSInteger integerValue API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (readonly) long long longLongValue API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (readonly) BOOL boolValue API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));  // Skips initial space characters (whitespaceSet), or optional -/+ sign followed by zeroes. Returns YES on encountering one of "Y", "y", "T", "t", or a digit 1-9. It ignores any trailing characters.
 
 
 #pragma mark *** Case changing ***
@@ -185,15 +214,15 @@ The range argument specifies the subrange, rather than the whole, of the receive
 
 /* The following three return the locale-aware case mappings. They are suitable for strings presented to the user.
 */
-@property (readonly, copy) NSString *localizedUppercaseString NS_AVAILABLE(10_11, 9_0);
-@property (readonly, copy) NSString *localizedLowercaseString NS_AVAILABLE(10_11, 9_0);
-@property (readonly, copy) NSString *localizedCapitalizedString NS_AVAILABLE(10_11, 9_0);
+@property (readonly, copy) NSString *localizedUppercaseString API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+@property (readonly, copy) NSString *localizedLowercaseString API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+@property (readonly, copy) NSString *localizedCapitalizedString API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* The following methods perform localized case mappings based on the locale specified. Passing nil indicates the canonical mapping.  For the user preference locale setting, specify +[NSLocale currentLocale].
 */
-- (NSString *)uppercaseStringWithLocale:(nullable NSLocale *)locale NS_AVAILABLE(10_8, 6_0);
-- (NSString *)lowercaseStringWithLocale:(nullable NSLocale *)locale NS_AVAILABLE(10_8, 6_0);
-- (NSString *)capitalizedStringWithLocale:(nullable NSLocale *)locale NS_AVAILABLE(10_8, 6_0);
+- (NSString *)uppercaseStringWithLocale:(nullable NSLocale *)locale API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+- (NSString *)lowercaseStringWithLocale:(nullable NSLocale *)locale API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+- (NSString *)capitalizedStringWithLocale:(nullable NSLocale *)locale API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 #pragma mark *** Finding lines, sentences, words, etc ***
@@ -219,8 +248,8 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 
 /* In the enumerate methods, the blocks will be invoked inside an autorelease pool, so any values assigned inside the block should be retained.
 */
-- (void)enumerateSubstringsInRange:(NSRange)range options:(NSStringEnumerationOptions)opts usingBlock:(void (^)(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
-- (void)enumerateLinesUsingBlock:(void (^)(NSString *line, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateSubstringsInRange:(NSRange)range options:(NSStringEnumerationOptions)opts usingBlock:(void (^)(NSString * _Nullable substring, NSRange substringRange, NSRange enclosingRange, BOOL *stop))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (void)enumerateLinesUsingBlock:(void (^)(NSString *line, BOOL *stop))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 
 #pragma mark *** Character encoding and converting to/from c-string representations ***
@@ -235,10 +264,10 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 
 - (BOOL)canBeConvertedToEncoding:(NSStringEncoding)encoding;
 
-/* Methods to convert NSString to a NULL-terminated cString using the specified encoding. Note, these are the "new" cString methods, and are not deprecated like the older cString methods which do not take encoding arguments.
+/* Methods to convert NSString to a NULL-terminated cString using the specified encoding. Note, these are the "new" cString methods, and are not deprecated like the older cString methods which do not take encoding arguments.  Also, cString methods should be used just with 8-bit encodings, and not encodings such as UTF-16 or UTF-32.  For those, use methods such as getCharacters:range: (for UTF-16 characters in system endianness) or getBytes:... (which can take any encoding).
 */
-- (nullable const char *)cStringUsingEncoding:(NSStringEncoding)encoding NS_RETURNS_INNER_POINTER;	// "Autoreleased"; NULL return if encoding conversion not possible; for performance reasons, lifetime of this should not be considered longer than the lifetime of the receiving string (if the receiver string is freed, this might go invalid then, before the end of the autorelease scope)
-- (BOOL)getCString:(char *)buffer maxLength:(NSUInteger)maxBufferCount encoding:(NSStringEncoding)encoding;	// NO return if conversion not possible due to encoding errors or too small of a buffer. The buffer should include room for maxBufferCount bytes; this number should accomodate the expected size of the return value plus the NULL termination character, which this method adds. (So note that the maxLength passed to this method is one more than the one you would have passed to the deprecated getCString:maxLength:.)
+- (nullable const char *)cStringUsingEncoding:(NSStringEncoding)encoding NS_RETURNS_INNER_POINTER;	// "Autoreleased"; NULL return if encoding conversion not possible; for performance reasons, lifetime of this should not be considered longer than the lifetime of the receiving string (if the receiver string is freed, this might go invalid then, before the end of the autorelease scope). Use only with 8-bit encodings, and not encodings such as UTF-16 or UTF-32.
+- (BOOL)getCString:(char *)buffer maxLength:(NSUInteger)maxBufferCount encoding:(NSStringEncoding)encoding;	// NO return if conversion not possible due to encoding errors or too small of a buffer. The buffer should include room for maxBufferCount bytes; this number should accomodate the expected size of the return value plus the NULL termination character, which this method adds. (So note that the maxLength passed to this method is one more than the one you would have passed to the deprecated getCString:maxLength:.) Use only with 8-bit encodings, and not encodings such as UTF-16 or UTF-32.
 
 /* Use this to convert string section at a time into a fixed-size buffer, without any allocations.  Does not NULL-terminate. 
     buffer is the buffer to write to; if NULL, this method can be used to computed size of needed buffer.
@@ -258,17 +287,13 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 - (NSUInteger)maximumLengthOfBytesUsingEncoding:(NSStringEncoding)enc;	// Result in O(1) time; the estimate may be way over what's needed. Returns 0 on error (overflow)
 - (NSUInteger)lengthOfBytesUsingEncoding:(NSStringEncoding)enc;		// Result in O(n) time; the result is exact. Returns 0 on error (cannot convert to specified encoding, or overflow)
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly) const NSStringEncoding *availableStringEncodings;
-#endif
+
 + (NSString *)localizedNameOfStringEncoding:(NSStringEncoding)encoding;
 
 /* User-dependent encoding whose value is derived from user's default language and potentially other factors. The use of this encoding might sometimes be needed when interpreting user documents with unknown encodings, in the absence of other hints.  This encoding should be used rarely, if at all. Note that some potential values here might result in unexpected encoding conversions of even fairly straightforward NSString content --- for instance, punctuation characters with a bidirectional encoding.
  */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly) NSStringEncoding defaultCStringEncoding;	// Should be rarely used
-#endif
-
 
 #pragma mark *** Other ***
 
@@ -278,49 +303,49 @@ typedef NS_OPTIONS(NSUInteger, NSStringEnumerationOptions) {
 @property (readonly, copy) NSString *precomposedStringWithCompatibilityMapping;
 
 - (NSArray<NSString *> *)componentsSeparatedByString:(NSString *)separator;
-- (NSArray<NSString *> *)componentsSeparatedByCharactersInSet:(NSCharacterSet *)separator NS_AVAILABLE(10_5, 2_0);
+- (NSArray<NSString *> *)componentsSeparatedByCharactersInSet:(NSCharacterSet *)separator API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 - (NSString *)stringByTrimmingCharactersInSet:(NSCharacterSet *)set;
 - (NSString *)stringByPaddingToLength:(NSUInteger)newLength withString:(NSString *)padString startingAtIndex:(NSUInteger)padIndex;
 
 /* Returns a string with the character folding options applied. theOptions is a mask of compare flags with *InsensitiveSearch suffix.
 */
-- (NSString *)stringByFoldingWithOptions:(NSStringCompareOptions)options locale:(nullable NSLocale *)locale NS_AVAILABLE(10_5, 2_0);
+- (NSString *)stringByFoldingWithOptions:(NSStringCompareOptions)options locale:(nullable NSLocale *)locale API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* Replace all occurrences of the target string in the specified range with replacement. Specified compare options are used for matching target. If NSRegularExpressionSearch is specified, the replacement is treated as a template, as in the corresponding NSRegularExpression methods, and no other options can apply except NSCaseInsensitiveSearch and NSAnchoredSearch.
 */
-- (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange NS_AVAILABLE(10_5, 2_0);
+- (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement options:(NSStringCompareOptions)options range:(NSRange)searchRange API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* Replace all occurrences of the target string with replacement. Invokes the above method with 0 options and range of the whole string.
 */
-- (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement NS_AVAILABLE(10_5, 2_0);
+- (NSString *)stringByReplacingOccurrencesOfString:(NSString *)target withString:(NSString *)replacement API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* Replace characters in range with the specified string, returning new string.
 */
-- (NSString *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement NS_AVAILABLE(10_5, 2_0);
+- (NSString *)stringByReplacingCharactersInRange:(NSRange)range withString:(NSString *)replacement API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 typedef NSString *NSStringTransform NS_EXTENSIBLE_STRING_ENUM;
 
 /* Perform string transliteration.  The transformation represented by transform is applied to the receiver. reverse indicates that the inverse transform should be used instead, if it exists. Attempting to use an invalid transform identifier or reverse an irreversible transform will return nil; otherwise the transformed string value is returned (even if no characters are actually transformed). You can pass one of the predefined transforms below (NSStringTransformLatinToKatakana, etc), or any valid ICU transform ID as defined in the ICU User Guide. Arbitrary ICU transform rules are not supported.
 */
-- (nullable NSString *)stringByApplyingTransform:(NSStringTransform)transform reverse:(BOOL)reverse NS_AVAILABLE(10_11, 9_0);	// Returns nil if reverse not applicable or transform is invalid
+- (nullable NSString *)stringByApplyingTransform:(NSStringTransform)transform reverse:(BOOL)reverse API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));	// Returns nil if reverse not applicable or transform is invalid
 
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToKatakana         NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToHiragana         NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToHangul           NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToArabic           NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToHebrew           NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToThai             NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToCyrillic         NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToGreek            NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformToLatin                 NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformMandarinToLatin         NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformHiraganaToKatakana      NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformFullwidthToHalfwidth    NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformToXMLHex                NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformToUnicodeName           NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformStripCombiningMarks     NS_AVAILABLE(10_11, 9_0);
-FOUNDATION_EXPORT NSStringTransform const NSStringTransformStripDiacritics         NS_AVAILABLE(10_11, 9_0);
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToKatakana         API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToHiragana         API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToHangul           API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToArabic           API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToHebrew           API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToThai             API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToCyrillic         API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformLatinToGreek            API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformToLatin                 API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformMandarinToLatin         API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformHiraganaToKatakana      API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformFullwidthToHalfwidth    API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformToXMLHex                API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformToUnicodeName           API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformStripCombiningMarks     API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSStringTransform const NSStringTransformStripDiacritics         API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 
 /* Write to specified url or path using the specified encoding.  The optional error return is to indicate file system or encoding errors.
@@ -398,20 +423,23 @@ If the values in the dictionary are unknown (for example, the value in the array
 + (NSStringEncoding)stringEncodingForData:(NSData *)data
                           encodingOptions:(nullable NSDictionary<NSStringEncodingDetectionOptionsKey, id> *)opts
                           convertedString:(NSString * _Nullable * _Nullable)string
-                      usedLossyConversion:(nullable BOOL *)usedLossyConversion NS_AVAILABLE(10_10, 8_0);
+                      usedLossyConversion:(nullable BOOL *)usedLossyConversion API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /* The following keys are for the option dictionary for the string encoding detection API.
 */
-FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionSuggestedEncodingsKey           NS_AVAILABLE(10_10, 8_0);   // NSArray of NSNumbers which contain NSStringEncoding values; if this key is not present in the dictionary, all encodings are weighted the same
-FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionDisallowedEncodingsKey          NS_AVAILABLE(10_10, 8_0);   // NSArray of NSNumbers which contain NSStringEncoding values; if this key is not present in the dictionary, all encodings are considered
-FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionUseOnlySuggestedEncodingsKey    NS_AVAILABLE(10_10, 8_0);   // NSNumber boolean value; if this key is not present in the dictionary, the default value is NO
-FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionAllowLossyKey                   NS_AVAILABLE(10_10, 8_0);   // NSNumber boolean value; if this key is not present in the dictionary, the default value is YES
-FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionFromWindowsKey                  NS_AVAILABLE(10_10, 8_0);   // NSNumber boolean value; if this key is not present in the dictionary, the default value is NO
-FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionLossySubstitutionKey            NS_AVAILABLE(10_10, 8_0);   // NSString value; if this key is not present in the dictionary, the default value is U+FFFD
-FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionLikelyLanguageKey               NS_AVAILABLE(10_10, 8_0);   // NSString value; ISO language code; if this key is not present in the dictionary, no such information is considered
+FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionSuggestedEncodingsKey           API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));   // NSArray of NSNumbers which contain NSStringEncoding values; if this key is not present in the dictionary, all encodings are weighted the same
+FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionDisallowedEncodingsKey          API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));   // NSArray of NSNumbers which contain NSStringEncoding values; if this key is not present in the dictionary, all encodings are considered
+FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionUseOnlySuggestedEncodingsKey    API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));   // NSNumber boolean value; if this key is not present in the dictionary, the default value is NO
+FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionAllowLossyKey                   API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));   // NSNumber boolean value; if this key is not present in the dictionary, the default value is YES
+FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionFromWindowsKey                  API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));   // NSNumber boolean value; if this key is not present in the dictionary, the default value is NO
+FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionLossySubstitutionKey            API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));   // NSString value; if this key is not present in the dictionary, the default value is U+FFFD
+FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDetectionLikelyLanguageKey               API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));   // NSString value; ISO language code; if this key is not present in the dictionary, no such information is considered
 
 @end
 
+
+@interface NSString (NSItemProvider) <NSItemProviderReading, NSItemProviderWriting>
+@end
 
 
 @interface NSMutableString : NSString
@@ -440,7 +468,7 @@ FOUNDATION_EXPORT NSStringEncodingDetectionOptionsKey const NSStringEncodingDete
 
 /* Perform string transliteration.  The transformation represented by transform is applied to the given range of string in place. Only the specified range will be modified, but the transform may look at portions of the string outside that range for context. If supplied, resultingRange is modified to reflect the new range corresponding to the original range. reverse indicates that the inverse transform should be used instead, if it exists. Attempting to use an invalid transform identifier or reverse an irreversible transform will return NO; otherwise YES is returned, even if no characters are actually transformed. You can pass one of the predefined transforms listed above (NSStringTransformLatinToKatakana, etc), or any valid ICU transform ID as defined in the ICU User Guide. Arbitrary ICU transform rules are not supported.
 */
-- (BOOL)applyTransform:(NSString *)transform reverse:(BOOL)reverse range:(NSRange)range updatedRange:(nullable NSRangePointer)resultingRange NS_AVAILABLE(10_11, 9_0);
+- (BOOL)applyTransform:(NSStringTransform)transform reverse:(BOOL)reverse range:(NSRange)range updatedRange:(nullable NSRangePointer)resultingRange API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* In addition to these two, NSMutableString responds properly to all NSString creation methods.
  */
@@ -470,26 +498,26 @@ FOUNDATION_EXPORT NSExceptionName const NSParseErrorException; // raised by -pro
 
 /* The following methods are deprecated and will be removed from this header file in the near future. These methods use NSString.defaultCStringEncoding as the encoding to convert to, which means the results depend on the user's language and potentially other settings. This might be appropriate in some cases, but often these methods are misused, resulting in issues when running in languages other then English. UTF8String in general is a much better choice when converting arbitrary NSStrings into 8-bit representations. Additional potential replacement methods are being introduced in NSString as appropriate.
 */
-- (nullable const char *)cString NS_RETURNS_INNER_POINTER NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (nullable const char *)lossyCString NS_RETURNS_INNER_POINTER NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (NSUInteger)cStringLength NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (void)getCString:(char *)bytes NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (void)getCString:(char *)bytes maxLength:(NSUInteger)maxLength NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (void)getCString:(char *)bytes maxLength:(NSUInteger)maxLength range:(NSRange)aRange remainingRange:(nullable NSRangePointer)leftoverRange NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (nullable const char *)cString NS_RETURNS_INNER_POINTER API_DEPRECATED("Use -cStringUsingEncoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (nullable const char *)lossyCString NS_RETURNS_INNER_POINTER API_DEPRECATED("Use -cStringUsingEncoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (NSUInteger)cStringLength API_DEPRECATED("Use -lengthOfBytesUsingEncoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)getCString:(char *)bytes API_DEPRECATED("Use -getCString:maxLength:encoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)getCString:(char *)bytes maxLength:(NSUInteger)maxLength API_DEPRECATED("Use -getCString:maxLength:encoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)getCString:(char *)bytes maxLength:(NSUInteger)maxLength range:(NSRange)aRange remainingRange:(nullable NSRangePointer)leftoverRange API_DEPRECATED("Use -getCString:maxLength:encoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
-- (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (BOOL)writeToFile:(NSString *)path atomically:(BOOL)useAuxiliaryFile API_DEPRECATED("Use -writeToFile:atomically:error: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (BOOL)writeToURL:(NSURL *)url atomically:(BOOL)atomically API_DEPRECATED("Use -writeToURL:atomically:error: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
-- (nullable id)initWithContentsOfFile:(NSString *)path NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (nullable id)initWithContentsOfURL:(NSURL *)url NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-+ (nullable id)stringWithContentsOfFile:(NSString *)path NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-+ (nullable id)stringWithContentsOfURL:(NSURL *)url NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (nullable id)initWithContentsOfFile:(NSString *)path API_DEPRECATED("Use -initWithContentsOfFile:encoding:error: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (nullable id)initWithContentsOfURL:(NSURL *)url API_DEPRECATED("Use -initWithContentsOfURL:encoding:error: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
++ (nullable id)stringWithContentsOfFile:(NSString *)path API_DEPRECATED("Use +stringWithContentsOfFile:encoding:error: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
++ (nullable id)stringWithContentsOfURL:(NSURL *)url API_DEPRECATED("Use +stringWithContentsOfURL:encoding:error: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
-- (nullable id)initWithCStringNoCopy:(char *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)freeBuffer NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (nullable id)initWithCString:(const char *)bytes length:(NSUInteger)length NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-- (nullable id)initWithCString:(const char *)bytes NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-+ (nullable id)stringWithCString:(const char *)bytes length:(NSUInteger)length NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
-+ (nullable id)stringWithCString:(const char *)bytes NS_DEPRECATED(10_0, 10_4, 2_0, 2_0);
+- (nullable id)initWithCStringNoCopy:(char *)bytes length:(NSUInteger)length freeWhenDone:(BOOL)freeBuffer API_DEPRECATED("Use -initWithCString:encoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (nullable id)initWithCString:(const char *)bytes length:(NSUInteger)length API_DEPRECATED("Use -initWithCString:encoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (nullable id)initWithCString:(const char *)bytes API_DEPRECATED("Use -initWithCString:encoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
++ (nullable id)stringWithCString:(const char *)bytes length:(NSUInteger)length API_DEPRECATED("Use +stringWithCString:encoding:", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
++ (nullable id)stringWithCString:(const char *)bytes API_DEPRECATED("Use +stringWithCString:encoding: instead", macos(10.0,10.4), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /* This method is unsafe because it could potentially cause buffer overruns. You should use -getCharacters:range: instead.
 */

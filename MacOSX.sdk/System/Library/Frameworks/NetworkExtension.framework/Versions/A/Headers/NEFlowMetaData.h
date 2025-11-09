@@ -18,7 +18,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 /*!
  * @property sourceAppUniqueIdentifier
- * @discussion A blob of bytes that uniquely identifies the source app binary of the flow. This value is unique across multiple versions of the same app.
+ * @discussion A byte string that uniquely identifies the binary for each build of the source application of the flow.
  */
 @property (readonly) NSData *sourceAppUniqueIdentifier NS_AVAILABLE(10_11, 9_0);
 

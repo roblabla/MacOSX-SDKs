@@ -1,7 +1,7 @@
 /*
  NSColorPickerTouchBarItem.h
  Application Kit
- Copyright (c) 2016-2016, Apple Inc.
+ Copyright (c) 2016-2017, Apple Inc.
  All rights reserved.
 */
 
@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSViewController, NSColor, NSImage, NSString, NSColorList;
+@class NSViewController, NSColor, NSImage, NSString, NSColorList, NSColorSpace;
 
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSColorPickerTouchBarItem : NSTouchBarItem {
@@ -25,7 +25,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
     NSImage *_buttonImage;
     NSColorList *_colorList;
     id _autounbinder;
-    id _colorPickerReserved __unused;
+    NSArray<NSColorSpace *> *_allowedColorSpaces;
     signed char _showsAlpha:1;
     signed char _supportsPressAndHoldVariants:1;
     signed char _enabled:1;
@@ -50,6 +50,9 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 
 /// Whether or not the picker should allow picking a color with non-1.0 alpha. Defaults to `!NSColor.ignoresAlpha`.
 @property BOOL showsAlpha;
+
+/// Controls the color spaces that the receiver is able to produce. If a color outside of the allowed spaces are displayed or selected, it will first be converted to the first color space in the array. `nil` signifies any color space is allowed. Empty array is an invalid value and will raise an exception if set. Defaults to `nil`.
+@property (copy, nullable) NSArray<NSColorSpace *> *allowedColorSpaces NS_AVAILABLE_MAC(10_13);
 
 /// The color list displayed in the list color picker. Defaults to the standard system color list. Setting a custom color list will disable the additional tints/shades that appear on long-press.
 @property (strong, null_resettable) NSColorList *colorList;

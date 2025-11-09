@@ -1,6 +1,6 @@
 /*	
     NSURLDownload.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -51,7 +51,7 @@ NS_ASSUME_NONNULL_BEGIN
     @param delegate The delegate of the download.
     @result An initialized NSURLDownload object.
 */
-- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id <NSURLDownloadDelegate>)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession downloadTask (see NSURLSession.h)");
+- (instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id <NSURLDownloadDelegate>)delegate API_DEPRECATED("Use NSURLSession downloadTask (see NSURLSession.h)", macos(10.3,10.11), ios(2.0,9.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /*!
     @method initWithResumeData:delegate:path:
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
     @param path The path of the incomplete downloaded file.
     @result An initialized NSURLDownload object.
 */
-- (instancetype)initWithResumeData:(NSData *)resumeData delegate:(nullable id <NSURLDownloadDelegate>)delegate path:(NSString *)path NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession downloadTask (see NSURLSession.h)");
+- (instancetype)initWithResumeData:(NSData *)resumeData delegate:(nullable id <NSURLDownloadDelegate>)delegate path:(NSString *)path API_DEPRECATED("Use NSURLSession downloadTask (see NSURLSession.h)", macos(10.3,10.11), ios(2.0,9.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 /*!
     @method cancel
@@ -83,14 +83,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setDestination:(NSString *)path allowOverwrite:(BOOL)allowOverwrite;
 
 /*!
-    @method request
     @abstract Returns the request of the download.
     @result The request of the download.
 */
 @property (readonly, copy) NSURLRequest *request;
 
 /*!
-    @method resumeData
     @abstract Returns the resume data of a download that is incomplete.
     @result The resume data.
     @description resumeData returns the resume data of a download that is incomplete. This data represents the necessary
@@ -103,10 +101,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSData *resumeData;
 
 /*!
-    @method deletesFileUponFailure
     @abstract Sets whether or not the downloaded file should be deleted upon failure.
-    @param deletesFileUponFailure The value of deletesFileUponFailure.
-    @description To allow the download to be resumed in case the download ends prematurely,
+1    @description To allow the download to be resumed in case the download ends prematurely,
     deletesFileUponFailure must be set to NO as soon as possible to prevent the downloaded file
     from being deleted. deletesFileUponFailure is YES by default.
 */
@@ -231,7 +227,7 @@ NS_ASSUME_NONNULL_BEGIN
     @method download:shouldDecodeSourceDataOfMIMEType:
     @abstract This method is called if the download detects that the downloading file is encoded.
     @param download The download that has detected that the downloading file is encoded.
-    @param mimeType A MIME type expressing the encoding type.
+    @param encodingType A MIME type expressing the encoding type.
     @result Return YES to decode the file, NO to not decode the file.
     @discussion An encoded file is encoded in MacBinary, BinHex or gzip format. This method may be
     called more than once if the file is encoded multiple times. This method is not called if the

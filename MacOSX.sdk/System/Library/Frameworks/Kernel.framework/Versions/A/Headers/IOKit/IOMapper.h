@@ -59,6 +59,7 @@ class IOMapper : public IOService
     // Give the platform expert access to setMapperRequired();
     friend class IOPlatformExpert;
     friend class IOMemoryDescriptor;
+    friend class IOGeneralMemoryDescriptor;
 
 private:
     enum SystemMapperState {

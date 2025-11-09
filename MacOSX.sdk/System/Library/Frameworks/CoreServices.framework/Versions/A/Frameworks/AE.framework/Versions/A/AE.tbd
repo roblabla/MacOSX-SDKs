@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: D9BEEADF-6796-3E2C-A88F-2D894BB35C05', 'x86_64: 342A13C0-4A6A-3947-B66B-0F624A4A7B52' ]
+uuids:           [ 'i386: 9330B4F8-05B8-33BF-BBA4-18B4549F2E55', 'x86_64: A7256019-50B0-3B80-8BB8-B6840A7E5AB7' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/AE.framework/Versions/A/AE
-current-version: 712.2
+current-version: 733
 objc-constraint: none
 parent-umbrella: CoreServices
 exports:         
@@ -53,8 +53,12 @@ exports:
                        _CreateRangeDescriptor, _GDBPrintAECoercionTables, _GDBPrintAEDesc, 
                        _GDBPrintAEHandlerTables, _GDBPrintHelpDebuggingAppleEvents, 
                        __AEAddAnnotationsToAppleEvent, __AEAppleEventMergeAnnotations, 
-                       __AECopyRegisteredMachPort, __AECreateAnnotatedAppleEvent, 
-                       __AEDoesAppleEventContainAnyTypesWhichRequireAnnotation, __AEEventRequiresSecurityHandlerChecks, 
+                       __AECanSandboxedApplicationSendAppleEvent, __AECopyRegisteredMachPort, 
+                       __AECreateAnnotatedAppleEvent, __AEDescEventGetCounts, __AEDescEventIndexedAttributeItem, 
+                       __AEDescEventIndexedParamItem, __AEDescGetAsString, __AEDescInformation, 
+                       __AEDescListGetCount, __AEDescListIndexedItem, __AEDescRecordGetCount, 
+                       __AEDescRecordIndexedItem, __AEDescToInternalImpl, __AEDoesAppleEventContainAnyTypesWhichRequireAnnotation, 
+                       __AEEventDescGetInformation, __AEEventRequiresSecurityHandlerChecks, 
                        __AEEventSecurityHandlerDoChecks, __AEGenerateAnnotations, 
                        __AEGetSKServiceDescription, __AEInstallEventSecurityHandler, 
                        __AEInstallEventSecurityHandlerBlock, __AEIsAppleEventTargetInSandbox, 

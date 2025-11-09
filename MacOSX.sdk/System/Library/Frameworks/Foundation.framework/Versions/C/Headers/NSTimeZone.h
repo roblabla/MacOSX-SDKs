@@ -1,5 +1,5 @@
 /*	NSTimeZone.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -18,37 +18,33 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)secondsFromGMTForDate:(NSDate *)aDate;
 - (nullable NSString *)abbreviationForDate:(NSDate *)aDate;
 - (BOOL)isDaylightSavingTimeForDate:(NSDate *)aDate;
-- (NSTimeInterval)daylightSavingTimeOffsetForDate:(NSDate *)aDate NS_AVAILABLE(10_5, 2_0);
-- (nullable NSDate *)nextDaylightSavingTimeTransitionAfterDate:(NSDate *)aDate NS_AVAILABLE(10_5, 2_0);
+- (NSTimeInterval)daylightSavingTimeOffsetForDate:(NSDate *)aDate API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+- (nullable NSDate *)nextDaylightSavingTimeTransitionAfterDate:(NSDate *)aDate API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @end
 
 @interface NSTimeZone (NSExtendedTimeZone)
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, copy) NSTimeZone *systemTimeZone;
-#endif
 + (void)resetSystemTimeZone;
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, copy) NSTimeZone *defaultTimeZone;
 
 @property (class, readonly, copy) NSTimeZone *localTimeZone;
 
 @property (class, readonly, copy) NSArray<NSString *> *knownTimeZoneNames;
 
-@property (class, copy) NSDictionary<NSString *, NSString *> *abbreviationDictionary NS_AVAILABLE(10_6, 4_0);
+@property (class, copy) NSDictionary<NSString *, NSString *> *abbreviationDictionary API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 + (NSDictionary<NSString *, NSString *> *)abbreviationDictionary;
 
-@property (class, readonly, copy) NSString *timeZoneDataVersion NS_AVAILABLE(10_6, 4_0);
-#endif
+@property (class, readonly, copy) NSString *timeZoneDataVersion API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @property (readonly) NSInteger secondsFromGMT;
 @property (nullable, readonly, copy) NSString *abbreviation;
 @property (readonly, getter=isDaylightSavingTime) BOOL daylightSavingTime;
-@property (readonly) NSTimeInterval daylightSavingTimeOffset NS_AVAILABLE(10_5, 2_0); // for current instant
-@property (nullable, readonly, copy) NSDate *nextDaylightSavingTimeTransition NS_AVAILABLE(10_5, 2_0); // after current instant
+@property (readonly) NSTimeInterval daylightSavingTimeOffset API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)); // for current instant
+@property (nullable, readonly, copy) NSDate *nextDaylightSavingTimeTransition API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)); // after current instant
 
 @property (readonly, copy) NSString *description;
 
@@ -63,7 +59,7 @@ typedef NS_ENUM(NSInteger, NSTimeZoneNameStyle) {
 	NSTimeZoneNameStyleShortGeneric		// CT
 };
 
-- (nullable NSString *)localizedName:(NSTimeZoneNameStyle)style locale:(nullable NSLocale *)locale NS_AVAILABLE(10_5, 2_0);
+- (nullable NSString *)localizedName:(NSTimeZoneNameStyle)style locale:(nullable NSLocale *)locale API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -87,6 +83,6 @@ typedef NS_ENUM(NSInteger, NSTimeZoneNameStyle) {
 
 @end
 
-FOUNDATION_EXPORT NSNotificationName const NSSystemTimeZoneDidChangeNotification NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSNotificationName const NSSystemTimeZoneDidChangeNotification API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

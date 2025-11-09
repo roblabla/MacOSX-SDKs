@@ -3,7 +3,7 @@
 .\" Originally written by Sergey A. Osokin
 .\" Rewritten by Tom Rhodes
 .\"
-.\" Portions Copyright (C) 2005 - 2013 Apple Inc. All rights reserved.
+.\" Portions Copyright (C) 2005 - 2017 Apple Inc. All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
 .\" modification, are permitted provided that the following conditions
@@ -97,10 +97,7 @@ Possible keywords may include:
 .It Va validate_neg_off   Ta "+ - -"  Ta "no"     Ta "Turn off using validate negotiate"
 .It Va max_resp_timeout   Ta "+ + -"  Ta "30s"    Ta "Max time to wait for any response from server"
 .It Va submounts_off      Ta "+ + +"  Ta "no"     Ta "Turn off using submounts"
-.It Va read_async_cnt  Ta "+ + -"  Ta "4"   Ta "Max async number of reads"
-.It Va write_async_cnt  Ta "+ + -"  Ta "4"   Ta "Max async number of writes"
 .It Va dir_cache_async_cnt  Ta "+ + -"  Ta "10"   Ta "Max async queries to fill dir cache"
-.It Va dir_cache_max_cnt  Ta "+ + -"  Ta "2048"   Ta "Max entries to cache for a dir"
 .It Va dir_cache_max      Ta "+ + -"  Ta "60s"    Ta "Max time to cache for a dir"
 .It Va dir_cache_min      Ta "+ + -"  Ta "30s"    Ta "Min time to cache for a dir"
 .El

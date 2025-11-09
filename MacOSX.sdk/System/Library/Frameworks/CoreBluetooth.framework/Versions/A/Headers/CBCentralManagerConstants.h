@@ -32,7 +32,7 @@ CB_EXTERN NSString * const CBCentralManagerOptionShowPowerAlertKey NS_AVAILABLE(
  *  @seealso	centralManager:willRestoreState:
  *
  */
-CB_EXTERN NSString * const CBCentralManagerOptionRestoreIdentifierKey NS_AVAILABLE(NA, 7_0);
+CB_EXTERN NSString * const CBCentralManagerOptionRestoreIdentifierKey NS_AVAILABLE(10_13, 7_0);
 
 /*!
  *  @const CBCentralManagerScanOptionAllowDuplicatesKey
@@ -70,7 +70,7 @@ CB_EXTERN NSString * const CBCentralManagerScanOptionSolicitedServiceUUIDsKey NS
  *  @see        connectPeripheral:
  *
  */
-CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnConnectionKey NS_AVAILABLE(NA, 6_0);
+CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnConnectionKey NS_AVAILABLE(10_13, 6_0);
 
 /*!
  *  @const CBConnectPeripheralOptionNotifyOnDisconnectionKey
@@ -98,7 +98,7 @@ CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnDisconnectionKey;
  *  @see        connectPeripheral:
  *
  */
-CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnNotificationKey NS_AVAILABLE(NA, 6_0);
+CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnNotificationKey NS_AVAILABLE(10_13, 6_0);
 
 /*!
  *  @const  CBCentralManagerRestoredStatePeripheralsKey
@@ -111,7 +111,7 @@ CB_EXTERN NSString * const CBConnectPeripheralOptionNotifyOnNotificationKey NS_A
  *	@seealso	connectPeripheral:options:
  *
  */
-CB_EXTERN NSString * const CBCentralManagerRestoredStatePeripheralsKey NS_AVAILABLE(NA, 7_0);
+CB_EXTERN NSString * const CBCentralManagerRestoredStatePeripheralsKey NS_AVAILABLE(10_13, 7_0);
 
 /*!
  *  @const  CBCentralManagerRestoredStateScanServicesKey
@@ -122,7 +122,7 @@ CB_EXTERN NSString * const CBCentralManagerRestoredStatePeripheralsKey NS_AVAILA
  *	@seealso	scanForPeripheralsWithServices:options:
  *
  */
-CB_EXTERN NSString * const CBCentralManagerRestoredStateScanServicesKey NS_AVAILABLE(NA, 7_0);
+CB_EXTERN NSString * const CBCentralManagerRestoredStateScanServicesKey NS_AVAILABLE(10_13, 7_0);
 
 /*!
  *  @const  CBCentralManagerRestoredStateScanOptionsKey
@@ -133,6 +133,6 @@ CB_EXTERN NSString * const CBCentralManagerRestoredStateScanServicesKey NS_AVAIL
  *	@seealso	scanForPeripheralsWithServices:options:
  *
  */
-CB_EXTERN NSString * const CBCentralManagerRestoredStateScanOptionsKey NS_AVAILABLE(NA, 7_0);
+CB_EXTERN NSString * const CBCentralManagerRestoredStateScanOptionsKey NS_AVAILABLE(10_13, 7_0);
 
 NS_ASSUME_NONNULL_END

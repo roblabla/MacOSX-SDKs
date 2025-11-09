@@ -1,8 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A2AA98E9-DFCE-31BC-BAFB-58E54F9BAA81', 'x86_64: F52E3F78-8A4A-389E-9A0A-68C2FA155EC3' ]
+uuids:           [ 'i386: 50C1AEDA-43AD-3929-B91B-84320FBA95EE', 'x86_64: 2A88D18C-B67C-3C0B-B0F4-D40EC54FBA99' ]
 platform:        macosx
-install-name:    '/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/GPUDriversNvidia-10.14.20~30/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/PTX.dylib'
+install-name:    /BuildRoot/Library/Caches/com.apple.xbs/Binaries/GPUDriversNvidia/install/TempContent/Root/System/Library/Frameworks/OpenCL.framework/Versions/A/Libraries/PTX.dylib
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
@@ -110,7 +110,42 @@ exports:
                        __ZTVN4llvm17PTXTargetLoweringE, __ZTVN4llvm18PTXGenRegisterInfoE, 
                        __ZTVN4llvm18PTXLowerAggrCopiesE, __ZTVN4llvm19PTXGenSubtargetInfoE, 
                        _createPTXIRLowering, _createPTXLowerStructArgsPass, _createPTXPrintfLowering ]
-    weak-def-symbols: [ __ZTIN4llvm10PTXSectionE, __ZTIN4llvm12PTXSubtargetE, __ZTIN4llvm14PTXInstPrinterE, 
+    weak-def-symbols: [ __ZN4llvm12makeArrayRefIPNS_4TypeEEENS_8ArrayRefIT_EEPKS4_m, 
+                        __ZN4llvm12makeArrayRefIPNS_5ValueEEENS_8ArrayRefIT_EEPKS4_S7_, 
+                        __ZN4llvm12makeArrayRefIPNS_5ValueEEENS_8ArrayRefIT_EEPKS4_m, 
+                        __ZN4llvm12makeArrayRefItEENS_8ArrayRefIT_EEPKS2_m, __ZN4llvm12makeArrayRefItLm510EEENS_8ArrayRefIT_EERAT0__KS2_, 
+                        __ZN4llvm15SmallVectorImplIcEaSERKS1_, __ZNK4llvm4Pass11getAnalysisINS_10TargetDataEEERT_v, 
+                        __ZNK4llvm4Pass13getAnalysisIDINS_10TargetDataEEERT_PKv, 
+                        __ZNKSt3__16vectorIN4llvm11SmallStringILj8EEENS_9allocatorIS3_EEE8max_sizeEv, 
+                        __ZNKSt3__16vectorIN4llvm14MachineOperandENS_9allocatorIS2_EEE8max_sizeEv, 
+                        __ZNKSt3__16vectorINS_4pairIN4llvm3EVTEPKNS2_19TargetRegisterClassEEENS_9allocatorIS7_EEE8max_sizeEv, 
+                        __ZNKSt3__16vectorIPN4llvm8LoadInstENS_9allocatorIS3_EEE8max_sizeEv, 
+                        __ZNKSt3__16vectorIPN4llvm9StoreInstENS_9allocatorIS3_EEE8max_sizeEv, 
+                        __ZNKSt3__16vectorIjNS_9allocatorIjEEE8max_sizeEv, __ZNSt3__118__tree_left_rotateIPNS_16__tree_node_baseIPvEEEEvT_, 
+                        __ZNSt3__118uninitialized_copyIPKcPcEET0_T_S5_S4_, __ZNSt3__118uninitialized_fillIPN4llvm7SDValueES2_EEvT_S4_RKT0_, 
+                        __ZNSt3__118uninitialized_fillIPNS_4pairIN4llvm7SDValueEPNS2_6SDNodeEEES6_EEvT_S8_RKT0_, 
+                        __ZNSt3__119__tree_right_rotateIPNS_16__tree_node_baseIPvEEEEvT_, 
+                        __ZNSt3__127__tree_balance_after_insertIPNS_16__tree_node_baseIPvEEEEvT_S5_, 
+                        __ZNSt3__16__treeIPN4llvm11InstructionENS_4lessIS3_EENS_9allocatorIS3_EEE12__find_equalIS3_EERPNS_16__tree_node_baseIPvEERPNS_15__tree_end_nodeISD_EERKT_, 
+                        __ZNSt3__16__treeIPN4llvm11InstructionENS_4lessIS3_EENS_9allocatorIS3_EEE16__construct_nodeERKS3_, 
+                        __ZNSt3__16__treeIPN4llvm11InstructionENS_4lessIS3_EENS_9allocatorIS3_EEE16__insert_node_atEPNS_15__tree_end_nodeIPNS_16__tree_node_baseIPvEEEERSD_SD_, 
+                        __ZNSt3__16__treeIPN4llvm11InstructionENS_4lessIS3_EENS_9allocatorIS3_EEE7destroyEPNS_11__tree_nodeIS3_PvEE, 
+                        __ZNSt3__16vectorIN4llvm11SmallStringILj8EEENS_9allocatorIS3_EEE21__push_back_slow_pathIKS3_EEvRT_, 
+                        __ZNSt3__16vectorIN4llvm11SmallStringILj8EEENS_9allocatorIS3_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS3_RS5_EE, 
+                        __ZNSt3__16vectorIN4llvm14MachineOperandENS_9allocatorIS2_EEE21__push_back_slow_pathIKS2_EEvRT_, 
+                        __ZNSt3__16vectorIN4llvm14MachineOperandENS_9allocatorIS2_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS2_RS4_EE, 
+                        __ZNSt3__16vectorINS_4pairIN4llvm3EVTEPKNS2_19TargetRegisterClassEEENS_9allocatorIS7_EEE21__push_back_slow_pathIKS7_EEvRT_, 
+                        __ZNSt3__16vectorINS_4pairIN4llvm3EVTEPKNS2_19TargetRegisterClassEEENS_9allocatorIS7_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS7_RS9_EE, 
+                        __ZNSt3__16vectorIPN4llvm8LoadInstENS_9allocatorIS3_EEE21__push_back_slow_pathIKS3_EEvRT_, 
+                        __ZNSt3__16vectorIPN4llvm8LoadInstENS_9allocatorIS3_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS3_RS5_EE, 
+                        __ZNSt3__16vectorIPN4llvm9StoreInstENS_9allocatorIS3_EEE21__push_back_slow_pathIKS3_EEvRT_, 
+                        __ZNSt3__16vectorIPN4llvm9StoreInstENS_9allocatorIS3_EEE26__swap_out_circular_bufferERNS_14__split_bufferIS3_RS5_EE, 
+                        __ZNSt3__16vectorIjNS_9allocatorIjEEE21__push_back_slow_pathIKjEEvRT_, 
+                        __ZNSt3__16vectorIjNS_9allocatorIjEEE26__swap_out_circular_bufferERNS_14__split_bufferIjRS2_EE, 
+                        __ZNSt3__1plIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_12basic_stringIT_T0_T1_EEPKS6_RKS9_, 
+                        __ZNSt3__1plIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_12basic_stringIT_T0_T1_EERKS9_PKS6_, 
+                        __ZNSt3__1plIcNS_11char_traitsIcEENS_9allocatorIcEEEENS_12basic_stringIT_T0_T1_EERKS9_SB_, 
+                        __ZTIN4llvm10PTXSectionE, __ZTIN4llvm12PTXSubtargetE, __ZTIN4llvm14PTXInstPrinterE, 
                         __ZTIN4llvm15PTXGenInstrInfoE, __ZTIN4llvm18PTXMCAsmInfoDarwinE, 
                         __ZTIN4llvm19PTXSelectionDAGInfoE, __ZTIN4llvm19PTXTargetObjectFileE, 
                         __ZTSN4llvm10PTXSectionE, __ZTSN4llvm12PTXSubtargetE, __ZTSN4llvm14PTXInstPrinterE, 

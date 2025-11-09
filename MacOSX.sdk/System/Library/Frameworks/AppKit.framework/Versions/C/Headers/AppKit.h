@@ -1,7 +1,7 @@
 /*
 	AppKit.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 
 	This file is included by all AppKit application source files for easy building.  Using this file is preferred over importing individual files because it will use a precompiled version.
@@ -32,6 +32,7 @@
 #import <AppKit/NSControl.h>
 #import <AppKit/NSDockTile.h>
 #import <AppKit/NSFont.h>
+#import <AppKit/NSFontAssetRequest.h>
 #import <AppKit/NSFontCollection.h>
 #import <AppKit/NSFontDescriptor.h>
 #import <AppKit/NSFontManager.h>
@@ -54,6 +55,7 @@
 #import <AppKit/NSColorPicker.h>
 #import <AppKit/NSColorPickerTouchBarItem.h>
 #import <AppKit/NSColorWell.h>
+#import <AppKit/NSUserInterfaceCompression.h>
 #import <AppKit/NSCursor.h>
 #import <AppKit/NSCustomImageRep.h>
 #import <AppKit/NSCustomTouchBarItem.h>
@@ -78,12 +80,13 @@
 #import <AppKit/NSPressGestureRecognizer.h>
 #import <AppKit/NSMagnificationGestureRecognizer.h>
 #import <AppKit/NSRotationGestureRecognizer.h>
+#import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSLayoutGuide.h>
+#import <AppKit/NSLayoutAnchor.h>
 #import <AppKit/NSImage.h>
 #import <AppKit/NSImageCell.h>
 #import <AppKit/NSImageRep.h>
 #import <AppKit/NSImageView.h>
-#import <AppKit/NSLayoutConstraint.h>
-#import <AppKit/NSLayoutGuide.h>
 #import <AppKit/NSNib.h>
 #import <AppKit/NSNibLoading.h>
 #import <AppKit/NSPrinter.h>
@@ -137,6 +140,8 @@
 #import <AppKit/NSView.h>
 #import <AppKit/NSViewController.h>
 #import <AppKit/NSWindow.h>
+#import <AppKit/NSWindowTab.h>
+#import <AppKit/NSWindowTabGroup.h>
 #import <AppKit/NSWindowController.h>
 #import <AppKit/NSWorkspace.h>
 #import <AppKit/NSRunningApplication.h>
@@ -243,4 +248,3 @@
 #import <AppKit/NSAlignmentFeedbackFilter.h>
 #import <AppKit/NSHapticFeedback.h>
 #import <AppKit/NSPressureConfiguration.h>
-#import <AppKit/AppKitLegacySwiftCompatibility.h>

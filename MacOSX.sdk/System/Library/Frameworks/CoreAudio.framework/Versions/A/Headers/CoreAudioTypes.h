@@ -284,7 +284,7 @@ typedef struct AudioStreamBasicDescription  AudioStreamBasicDescription;
                         The format can use any sample rate. Note that this constant can only appear
                         in listings of supported formats. It will never appear in a current format.
 */
-static const Float64	kAudioStreamAnyRate = 0.0;
+static const Float64    kAudioStreamAnyRate = 0.0;
 
 /*!
     @enum           Format IDs
@@ -376,6 +376,10 @@ static const Float64	kAudioStreamAnyRate = 0.0;
                         331M-2000. It has no flags.
     @constant       kAudioFormatEnhancedAC3
                         Enhanced AC-3, has no flags.
+    @constant       kAudioFormatFLAC
+                        Free Lossless Audio Codec, the flags indicate the bit depth of the source material.
+    @constant       kAudioFormatOpus
+                        Opus codec, has no flags.
 */
 CF_ENUM(AudioFormatID)
 {
@@ -415,7 +419,9 @@ CF_ENUM(AudioFormatID)
     kAudioFormatDVIIntelIMA             = 0x6D730011,
     kAudioFormatMicrosoftGSM            = 0x6D730031,
     kAudioFormatAES3                    = 'aes3',
-    kAudioFormatEnhancedAC3             = 'ec-3'
+    kAudioFormatEnhancedAC3             = 'ec-3',
+    kAudioFormatFLAC                    = 'flac',
+    kAudioFormatOpus                    = 'opus'
 };
 
 /*!
@@ -995,7 +1001,29 @@ CF_ENUM(AudioChannelLabel)
     kAudioChannelLabel_Discrete_13              = (1U<<16) | 13,
     kAudioChannelLabel_Discrete_14              = (1U<<16) | 14,
     kAudioChannelLabel_Discrete_15              = (1U<<16) | 15,
-    kAudioChannelLabel_Discrete_65535           = (1U<<16) | 65535
+    kAudioChannelLabel_Discrete_65535           = (1U<<16) | 65535,
+    
+    // generic HOA ACN channel
+    kAudioChannelLabel_HOA_ACN                  = 500,
+    
+    // numbered HOA ACN channels
+    kAudioChannelLabel_HOA_ACN_0                = (2U << 16) | 0,
+    kAudioChannelLabel_HOA_ACN_1                = (2U << 16) | 1,
+    kAudioChannelLabel_HOA_ACN_2                = (2U << 16) | 2,
+    kAudioChannelLabel_HOA_ACN_3                = (2U << 16) | 3,
+    kAudioChannelLabel_HOA_ACN_4                = (2U << 16) | 4,
+    kAudioChannelLabel_HOA_ACN_5                = (2U << 16) | 5,
+    kAudioChannelLabel_HOA_ACN_6                = (2U << 16) | 6,
+    kAudioChannelLabel_HOA_ACN_7                = (2U << 16) | 7,
+    kAudioChannelLabel_HOA_ACN_8                = (2U << 16) | 8,
+    kAudioChannelLabel_HOA_ACN_9                = (2U << 16) | 9,
+    kAudioChannelLabel_HOA_ACN_10               = (2U << 16) | 10,
+    kAudioChannelLabel_HOA_ACN_11               = (2U << 16) | 11,
+    kAudioChannelLabel_HOA_ACN_12               = (2U << 16) | 12,
+    kAudioChannelLabel_HOA_ACN_13               = (2U << 16) | 13,
+    kAudioChannelLabel_HOA_ACN_14               = (2U << 16) | 14,
+    kAudioChannelLabel_HOA_ACN_15               = (2U << 16) | 15,
+    kAudioChannelLabel_HOA_ACN_65024            = (2U << 16) | 65024    // 254th order uses 65025 channels
 };
 
 /*!
@@ -1260,6 +1288,11 @@ CF_ENUM(AudioChannelLayoutTag)
     kAudioChannelLayoutTag_DTS_8_1_B                = (181U<<16) | 9,                        // Lc C Rc L R Ls Cs Rs LFE
     kAudioChannelLayoutTag_DTS_6_1_D                = (182U<<16) | 7,                        // C L R Ls Rs LFE Cs
     
+    kAudioChannelLayoutTag_HOA_ACN_SN3D             = (190U<<16) | 0,                        // Higher Order Ambisonics, Ambisonics Channel Number, SN3D normalization
+                                                                                             // needs to be ORed with the actual number of channels (not the HOA order)
+    kAudioChannelLayoutTag_HOA_ACN_N3D              = (191U<<16) | 0,                        // Higher Order Ambisonics, Ambisonics Channel Number, N3D normalization
+                                                                                             // needs to be ORed with the actual number of channels (not the HOA order)
+
     kAudioChannelLayoutTag_DiscreteInOrder          = (147U<<16) | 0,                        // needs to be ORed with the actual number of channels
     kAudioChannelLayoutTag_Unknown                  = 0xFFFF0000                            // needs to be ORed with the actual number of channels  
 };
@@ -1327,9 +1360,9 @@ typedef struct AudioChannelLayout AudioChannelLayout;
     @result         The number of channels the tag indicates.
 */
 #ifdef CF_INLINE
-	CF_INLINE UInt32    AudioChannelLayoutTag_GetNumberOfChannels(AudioChannelLayoutTag inLayoutTag)    { return (UInt32)(inLayoutTag & 0x0000FFFF); }
+    CF_INLINE UInt32    AudioChannelLayoutTag_GetNumberOfChannels(AudioChannelLayoutTag inLayoutTag)    { return (UInt32)(inLayoutTag & 0x0000FFFF); }
 #else
-	#define AudioChannelLayoutTag_GetNumberOfChannels(layoutTag) ((UInt32)((layoutTag) & 0x0000FFFF))
+    #define AudioChannelLayoutTag_GetNumberOfChannels(layoutTag) ((UInt32)((layoutTag) & 0x0000FFFF))
 #endif
 
 

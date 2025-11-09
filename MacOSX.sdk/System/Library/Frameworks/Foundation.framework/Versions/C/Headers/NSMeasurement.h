@@ -1,6 +1,6 @@
 /*
     NSMeasurement.h
-    Copyright (c) 2015-2016, Apple Inc.
+    Copyright (c) 2015-2017, Apple Inc.
     All rights reserved.
  */
 

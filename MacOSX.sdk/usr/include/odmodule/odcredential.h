@@ -60,7 +60,7 @@ __BEGIN_DECLS
  * @result
  * an od_credential_t
  */
-OD_NOTHROW OD_WARN_RESULT
+OS_NOTHROW OS_WARN_RESULT
 od_credential_t
 odcredential_create_ext(od_request_t request, od_moduleconfig_t moduleconfig,
 					CFStringRef rectype, CFStringRef recname, CFStringRef metarecname, CFStringRef password, CFArrayRef authorities,
@@ -78,7 +78,7 @@ odcredential_create_ext(od_request_t request, od_moduleconfig_t moduleconfig,
  * @result
  * a CFDictionaryRef
  */
-OD_NOTHROW OD_WARN_RESULT CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFDictionaryRef
 odcredential_copy_details(od_credential_t credential);
 
@@ -94,7 +94,7 @@ odcredential_copy_details(od_credential_t credential);
  * @result
  * a CFSTringRef
  */
-OD_NOTHROW OD_WARN_RESULT CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odcredential_copy_recordname(od_credential_t credential);
 
@@ -110,7 +110,7 @@ odcredential_copy_recordname(od_credential_t credential);
  * @result
  * a CFSTringRef
  */
-OD_NOTHROW OD_WARN_RESULT CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odcredential_copy_recordtype(od_credential_t credential);
 
@@ -126,7 +126,7 @@ odcredential_copy_recordtype(od_credential_t credential);
  * @result
  * a CFSTringRef
  */
-OD_NOTHROW OD_WARN_RESULT CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odcredential_copy_password(od_credential_t credential);
 
@@ -142,7 +142,7 @@ odcredential_copy_password(od_credential_t credential);
  * @result
  * a CFStringRef
  */
-OD_NOTHROW OD_WARN_RESULT CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odcredential_copy_metarecordname(od_credential_t credential);
 

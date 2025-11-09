@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F8FAAC3A-4C27-3DA0-B28F-7B90F2B47A33', 'x86_64: 422EDCDC-0DF8-37B4-84D7-FA18806CA0BC' ]
+uuids:           [ 'i386: 5781A2C9-0E78-3E66-B386-0D03FADA780D', 'x86_64: 9DD74722-A011-3ED9-9B6F-0D7899366751' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AppleShareClientCore.framework/Versions/A/AppleShareClientCore
 objc-constraint: none
@@ -35,13 +35,12 @@ exports:
                        __ZN22SharedVolumeEnumerator5MountEPhPKhPKcjjjPch, __ZN9TUAMProxy10GetUAMInfoEPvPPcPj ]
   - archs:           [ i386, x86_64 ]
     symbols:         [ _AFPCopyPString, _AFPCopyPtoCString, _AFPGetTagFromBuffer, 
-                       _AFPHexDump, _AFPLoadModules, _AFPLogToMessageTracer, _AFPMountURL, 
-                       _AFPResolveDNS, _DSCloseSession, _DSCommand, _DSGetParms, 
-                       _DSGetSessionInfo, _DSGetStatus, _DSMountVolume, _DSOpenSession, 
-                       _DSWrite, _DisposeAFPURL, _GetIndexedAddressFromVMIB, _IsAFPURL, 
-                       _LogAFPMessage, _NewAFPURL, _ParseAFPURL, _ParseAFPURLext, 
-                       _SetAFPLogLevel, _TraceLogCopyExt, _TraceLogEventExt, _TraceLogInitExt, 
-                       _WritePrefs, __Z24GetPrincipalFromSrvrInfoP11AFPSrvrInfoPh, 
+                       _AFPHexDump, _AFPLoadModules, _AFPMountURL, _AFPResolveDNS, 
+                       _DSCloseSession, _DSCommand, _DSGetParms, _DSGetSessionInfo, 
+                       _DSGetStatus, _DSMountVolume, _DSOpenSession, _DSWrite, _DisposeAFPURL, 
+                       _GetIndexedAddressFromVMIB, _IsAFPURL, _LogAFPMessage, _NewAFPURL, 
+                       _ParseAFPURL, _ParseAFPURLext, _SetAFPLogLevel, _TraceLogCopyExt, 
+                       _TraceLogEventExt, _TraceLogInitExt, _WritePrefs, __Z24GetPrincipalFromSrvrInfoP11AFPSrvrInfoPh, 
                        __Z26CreateGSSMechsFromSrvrInfoP11AFPSrvrInfo, __ZN11TAFPSession22SetRemoteServerAddressEP8sockaddr, 
                        __ZN11TAFPSession9AFPLogoutEv, __ZN11TUAMHandler10GetUAMNameEPcm, 
                        __ZN11TUAMHandler10GetUAMTypeEv, __ZN11TUAMHandler10SetAFPNameEP7AFPName, 

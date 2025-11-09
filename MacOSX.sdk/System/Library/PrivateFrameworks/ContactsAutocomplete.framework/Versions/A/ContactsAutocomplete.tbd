@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 9DECFFBD-1514-3714-AFF8-F764A6D05F6B' ]
+uuids:           [ 'x86_64: 8C0356EE-E984-3741-9FBA-A457842A79C3' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ContactsAutocomplete.framework/Versions/A/ContactsAutocomplete
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CNALoggingContextDebug, _CNALoggingContextPerformance, _CNALoggingContextProbes, 
@@ -18,12 +17,12 @@ exports:
                        _CNAutocompleteDefaultsSuggestionsEnabled, _CNAutocompleteDefaultsSupplementalContactsEnabled, 
                        _CNAutocompleteDefaultsSuppressAddressesAlreadyChosen, _CNAutocompleteErrorDomain, 
                        _CNAutocompleteIsDebugLoggingEnabled, _CNAutocompleteIsProbesLoggingEnabled, 
-                       _CNAutocompleteIsSortingLoggingEnabled, _CNAutocompleteLoggingSubsystem, 
-                       _CNAutocompleteProbeBatchKey, _CNAutocompleteProbeBoolKey, 
-                       _CNAutocompleteProbeBuildKey, _CNAutocompleteProbeIgnoreResultsThreshold, 
-                       _CNAutocompleteProbeKeyCommonPrefix, _CNAutocompleteProbeKeyIncludingServers, 
-                       _CNAutocompleteProbeKeyPerformanceKey, _CNAutocompleteProbeKeyPerformanceLatency, 
-                       _CNAutocompleteProbeKeyPerformanceNumberOfResultsKey, _CNAutocompleteProbeKeyUsageMonitorConsideredSuggestionCount, 
+                       _CNAutocompleteIsSortingLoggingEnabled, _CNAutocompleteProbeBatchKey, 
+                       _CNAutocompleteProbeBoolKey, _CNAutocompleteProbeBuildKey, 
+                       _CNAutocompleteProbeIgnoreResultsThreshold, _CNAutocompleteProbeKeyCommonPrefix, 
+                       _CNAutocompleteProbeKeyIncludingServers, _CNAutocompleteProbeKeyPerformanceKey, 
+                       _CNAutocompleteProbeKeyPerformanceLatency, _CNAutocompleteProbeKeyPerformanceNumberOfResultsKey, 
+                       _CNAutocompleteProbeKeyUsageMonitorConsideredSuggestionCount, 
                        _CNAutocompleteProbeKeyUsageMonitorDuetReturnedResults, _CNAutocompleteProbeKeyUsageMonitorKey, 
                        _CNAutocompleteProbeKeyUsageMonitorNoResultSelectedIndexKey, 
                        _CNAutocompleteProbeKeyUsageMonitorNoResultsFromDuet, _CNAutocompleteProbeKeyUsageMonitorNumberOfCharactersKey, 
@@ -72,17 +71,18 @@ exports:
                        _CNAutocompleteResultValue, _CNAutocompleteSearchObservableProvider, 
                        _CNAutocompleteSearchProviderFactory, _CNAutocompleteSourceInclusionPolicy, 
                        _CNAutocompleteStore, _CNAutocompleteStoreQueryHelper, _CNAutocompleteSuggestedContactResult, 
-                       _CNAutocompleteSuggestionsSearch, _CNAutocompleteTokenMatcher, 
-                       _CNAutocompleteUsageMonitor, _CNAutocompleteUsageMonitorTracing, 
-                       _CNAutocompleteUserSession, __CNAutocompleteAggregateSourceInclusionPolicy, 
-                       __CNAutocompleteCachingSearchProvider, __CNAutocompleteCalendarObservableBuilderBatchingHelper, 
-                       __CNAutocompleteEntitlementSourceInclusionPolicy, __CNAutocompleteFetchDelegateSafeWrapper, 
-                       __CNAutocompleteMessageTracingProbeProvider, __CNAutocompleteMutableSourceInclusionPolicy, 
-                       __CNAutocompleteNonCachingSearchProvider, __CNAutocompleteObservableBuilderBatchingHelper, 
-                       __CNAutocompleteResponsePreparerDecorator, __CNAutocompleteStandardObservableBuilderBatchingHelper, 
-                       __CNAutocompleteUserDefaultsSourceInclusionPolicy, __CNAutocompleteUserSessionDisplayedResults, 
-                       __CNDelegateAdjustingResponsePreparer, __CNDiagnosticResponsePreparer, 
-                       __CNFilteringResponsePreparer, __CNSortingResponsePreparer ]
+                       _CNAutocompleteSuggestionsProbe, _CNAutocompleteSuggestionsSearch, 
+                       _CNAutocompleteTokenMatcher, _CNAutocompleteUsageMonitor, 
+                       _CNAutocompleteUsageMonitorTracing, _CNAutocompleteUserSession, 
+                       __CNAutocompleteAggregateSourceInclusionPolicy, __CNAutocompleteCachingSearchProvider, 
+                       __CNAutocompleteCalendarObservableBuilderBatchingHelper, __CNAutocompleteEntitlementSourceInclusionPolicy, 
+                       __CNAutocompleteFetchDelegateSafeWrapper, __CNAutocompleteMessageTracingProbeProvider, 
+                       __CNAutocompleteMutableSourceInclusionPolicy, __CNAutocompleteNonCachingSearchProvider, 
+                       __CNAutocompleteObservableBuilderBatchingHelper, __CNAutocompleteResponsePreparerDecorator, 
+                       __CNAutocompleteStandardObservableBuilderBatchingHelper, __CNAutocompleteUserDefaultsSourceInclusionPolicy, 
+                       __CNAutocompleteUserSessionDisplayedResults, __CNDelegateAdjustingResponsePreparer, 
+                       __CNDiagnosticResponsePreparer, __CNFilteringResponsePreparer, 
+                       __CNSortingResponsePreparer ]
     objc-ivars:      [ _CNAutocompleteInfrequentRecentResult._dateCount, _CNAutocompleteLocalQuery._contactFetcherStore, 
                        _CNAutocompleteLocalQuery._contactStore, _CNAutocompleteLocalQuery._delegate, 
                        _CNAutocompleteLocalQuery._request, _CNAutocompleteNameComponents._firstName, 

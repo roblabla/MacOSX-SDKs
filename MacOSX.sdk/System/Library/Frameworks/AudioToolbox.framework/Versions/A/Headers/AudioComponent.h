@@ -630,23 +630,23 @@ typedef CF_ENUM(UInt32, AudioComponentValidationResult)
 	@define		kAudioComponentConfigurationInfo_ValidationResult
 	@abstract	Dictionary that contains the AudioComponentValidationResult for the component.
 	@discussion
-		The keys for this dictionary is the platform (e.g. "i386") that generated the result.
+		The keys in this dictionary are the CPU architectures (e.g. "i386") that generated each result.
 */
 #define kAudioComponentConfigurationInfo_ValidationResult	"ValidationResult"
 	
 /*!
-	 @function		AudioComponentValidate
-	 @abstract		Tests a specified AudioComponent for API and behavioural conformance
-	 @discussion	Currently, only AudioUnits can can be validated.
-	 @param			inComponent
+	@function		AudioComponentValidate
+	@abstract		Tests a specified AudioComponent for API and behavioral conformance.
+	@discussion	Currently, only AudioUnits can can be validated.
+	@param			inComponent
 						The AudioComponent to validate.
-	 @param			inValidationParameters
+	@param			inValidationParameters
 						A CFDictionaryRef that contains parameters for the validation operation.
 						Passing NULL for this argument tells the system to use the default
 						parameters.
-	 @param			outValidationResult
+	@param			outValidationResult
 						On exit, this is an AudioComponentValidationResult.
-	 @result		an OSStatus result code.
+	@result			an OSStatus result code.
 */
 extern OSStatus
 AudioComponentValidate( AudioComponent					inComponent,

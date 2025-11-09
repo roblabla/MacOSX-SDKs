@@ -1,7 +1,7 @@
-.\""Copyright (c) 2001 Apple Computer, Inc. All Rights Reserved.
-.Dd February 10, 2004
+.\""Copyright (c) 2001-2017 Apple Computer, Inc. All Rights Reserved.
+.Dd April 14, 2017
 .Dt OPEN 1  
-.Os "Mac OS X"       
+.Os "macOS"
 .Sh NAME
 .Nm open
 .Nd open files and directories
@@ -15,6 +15,7 @@
 .Op Fl R
 .Op Fl n 
 .Op Fl g
+.Op Fl j
 .Op Fl h
 .Op Fl s Ar sdk
 .Op Fl b Ar bundle_identifier
@@ -68,6 +69,8 @@ Reveals the file(s) in the Finder instead of opening them.
 Open a new instance of the application(s) even if one is already running.
 .It Fl g
 Do not bring the application to the foreground.
+.It Fl j
+Launches the app hidden.
 .It Fl h
 Searches header locations for a header whose name matches the given string and then opens it.  Pass a full header name (such as NSView.h) for increased performance.
 .It Fl s
@@ -98,9 +101,9 @@ tool.
 .Pp
 "open -h NSView" lists headers whose names contain NSView and allows you to choose which ones to open.
 .Pp
-"open -h NSView -s OSX10.12" lists headers whose names contain NSView in the MacOSX 10.12 SDK and allows you to choose which ones to open.
+"open -h NSView.h" immediately opens NSView.h.
 .Pp
-"open -a Xcode -h NSString.h" quickly opens /System/Library/Frameworks/Foundation.framework/Headers/NSString.h in Xcode.
+"open -h NSView -s OSX10.12" lists headers whose names contain NSView in the MacOSX 10.12 SDK and allows you to choose which ones to open.
 .Pp
 .Sh HISTORY
 First appeared in NextStep.

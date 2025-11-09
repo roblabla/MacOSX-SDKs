@@ -140,6 +140,14 @@ The value is a UInt32 corresponding to the number of retries.
  */
 #define kIOPropertyRequiresRestartEjectKey          "Require Restart Eject"
 
+/*!
+ @constant kIOPropertyNoSenseDebounceRetries
+ @discussion
+ This key is used to indicate how many retries a device may require when it reports
+ NO_SENSE/NO_ADITIONAL_SENSE_INFORMATION as a response to a REQUEST_SENSE.
+ */
+#define kIOPropertyNoSenseDebounceRetries           "NO_SENSE Debounce Retries"
+
 #if defined(KERNEL) && defined(__cplusplus)
 
 
@@ -148,7 +156,7 @@ The value is a UInt32 corresponding to the number of retries.
 @discussion
 Property key for CFBundleIdentifier.
 */
-#define kCFBundleIdentifierKey					"CFBundleIdentifier"
+#define kCFBundleIdentifierKey                      "CFBundleIdentifier"
 
 /*!
 @constant kIOSCSIArchitectureBundleIdentifierKey

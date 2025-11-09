@@ -6,6 +6,7 @@
 //
 
 #import <Metal/MTLDefines.h>
+#import <Metal/MTLTypes.h>
 #import <Metal/MTLBlitCommandEncoder.h>
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLCommandBuffer.h>
@@ -25,3 +26,6 @@
 #import <Metal/MTLSampler.h>
 #import <Metal/MTLTexture.h>
 #import <Metal/MTLHeap.h>
+#import <Metal/MTLArgumentEncoder.h>
+#import <Metal/MTLCaptureManager.h>
+#import <Metal/MTLCaptureScope.h>

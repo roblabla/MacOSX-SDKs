@@ -34,8 +34,7 @@ typedef NS_ENUM(NSInteger, EKEventStatus) {
     @abstract   The EKEvent class represents an occurrence of an event.
 */
 NS_CLASS_AVAILABLE(10_8, 4_0)
-@interface EKEvent : EKCalendarItem {
-}
+@interface EKEvent : EKCalendarItem
 
 /*!
     @method     eventWithEventStore:
@@ -56,8 +55,10 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
                 currently also possible for the ID to change due to a sync operation. For example, if
                 a user moved an event on a different client to another calendar, we'd see it as a 
                 completely new event here.
+ 
+                This may be nil for events that have not been saved.
 */
-@property(nonatomic, readonly) NSString *eventIdentifier;
+@property(null_unspecified, nonatomic, readonly) NSString *eventIdentifier;
 
 /*!
     @property   allDay
@@ -71,14 +72,17 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
      @discussion This property represents the start date for this event. Floating events (such
                  as all-day events) are currently always returned in the default time zone.
                  ([NSTimeZone defaultTimeZone])
+
+                 This will be nil for new events until you set it.
  */
-@property(nonatomic, copy) NSDate *startDate;
+@property(null_unspecified, nonatomic, copy) NSDate *startDate;
 
 /*!
     @property   endDate
     @abstract   The end date for the event.
+    @discussion This will be nil for new events until you set it.
 */
-@property(nonatomic, copy) NSDate *endDate;
+@property(null_unspecified, nonatomic, copy) NSDate *endDate;
 
 /*!
     @property   structuredLocation
@@ -140,8 +144,10 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
                 This value will remain the same even if the event has been detached and its start 
                 date has changed. Floating events (such as all-day events) are currently returned
                 in the default time zone. ([NSTimeZone defaultTimeZone])
+ 
+                This will be nil for new events until you set startDate.
  */
-@property(nonatomic, readonly) NSDate *occurrenceDate NS_AVAILABLE(10_8, 9_0);
+@property(null_unspecified, nonatomic, readonly) NSDate *occurrenceDate NS_AVAILABLE(10_8, 9_0);
 
 /*!
      @method     refresh

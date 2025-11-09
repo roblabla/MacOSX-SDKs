@@ -1,11 +1,11 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 099C45EF-8DF3-369D-8856-D2883499BC79', 'x86_64: B96D2FDE-B3F2-3AD4-A14F-9E04E4F5D82A' ]
+uuids:           [ 'i386: 428E7E23-3927-34E5-AF80-E6F126C7A946', 'x86_64: 51217F2E-CADB-3CEB-87D3-64842E74F925' ]
 platform:        macosx
 flags:           [ not_app_extension_safe ]
 install-name:    /System/Library/PrivateFrameworks/DeviceLink.framework/Versions/A/DeviceLink
-current-version: 264.0
-compatibility-version: 100.0
+current-version: 264
+compatibility-version: 100
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

@@ -1,5 +1,5 @@
 /*	NSByteCountFormatter.h
-	Copyright (c) 2012-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2012-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -83,7 +83,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 /* Specify the formatting context for the formatted string. Default is NSFormattingContextUnknown.
 */
-@property NSFormattingContext formattingContext NS_AVAILABLE(10_10, 8_0);
+@property NSFormattingContext formattingContext API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 @end
 

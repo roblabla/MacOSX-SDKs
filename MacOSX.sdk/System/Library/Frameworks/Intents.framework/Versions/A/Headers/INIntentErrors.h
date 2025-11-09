@@ -2,14 +2,14 @@
 //  INIntentErrors.h
 //  Intents
 //
-//  Copyright © 2016 Apple. All rights reserved.
+//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import <Intents/IntentsDefines.h>
 
-INTENTS_EXTERN NSString * const INIntentErrorDomain API_AVAILABLE(macosx(10.12), ios(10.0));
+INTENTS_EXTERN NSString * const INIntentErrorDomain API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2));
 
 typedef NS_ENUM(NSInteger, INIntentErrorCode) {
     // Interactions
@@ -30,4 +30,10 @@ typedef NS_ENUM(NSInteger, INIntentErrorCode) {
     
     // User Vocabulary Sync
     INIntentErrorInvalidUserVocabularyFileLocation = 4000,
-} API_AVAILABLE(macosx(10.12), ios(10.0));
+    
+    // Extension connection
+    INIntentErrorExtensionLaunchingTimeout = 5000,
+    INIntentErrorExtensionBringUpFailed = 5001,
+    
+    
+} API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2));

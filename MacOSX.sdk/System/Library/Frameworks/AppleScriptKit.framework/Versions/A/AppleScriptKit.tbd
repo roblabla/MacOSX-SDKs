@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: C346A664-7CDB-3CC3-81BD-5ACC3DDBDDF2', 'x86_64: 2F2E3D62-0F22-376C-835D-F38D22729BE8' ]
+uuids:           [ 'i386: E991FB77-5C9E-3ACC-8F14-7663B9A0C476', 'x86_64: 2E56E6C0-94B7-3C13-B14F-606E941503E2' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/AppleScriptKit.framework/Versions/A/AppleScriptKit
-current-version: 83.0
-objc-constraint: none
+current-version: 83
 exports:         
   - archs:           [ i386 ]
     objc-classes:    [ _ASKLoadMovieScriptCommand ]

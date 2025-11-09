@@ -1,7 +1,7 @@
 /*
  NSMenu.h
  Application Kit
- Copyright (c) 1996-2016, Apple Inc.
+ Copyright (c) 1996-2017, Apple Inc.
  All rights reserved.
 */
 
@@ -122,7 +122,7 @@ NS_ASSUME_NONNULL_BEGIN
 /* Returns the first item in the menu that matches the given property, or -1 if no item in the menu matches. */
 - (NSInteger)indexOfItemWithTitle:(NSString *)title;
 - (NSInteger)indexOfItemWithTag:(NSInteger)tag;
-- (NSInteger)indexOfItemWithRepresentedObject:(id)object;
+- (NSInteger)indexOfItemWithRepresentedObject:(nullable id)object;
 - (NSInteger)indexOfItemWithSubmenu:(nullable NSMenu *)submenu;
 - (NSInteger)indexOfItemWithTarget:(nullable id)target andAction:(nullable SEL)actionSelector;
 
@@ -203,7 +203,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSInteger)numberOfItemsInMenu:(NSMenu*)menu;
 - (BOOL)menu:(NSMenu*)menu updateItem:(NSMenuItem*)item atIndex:(NSInteger)index shouldCancel:(BOOL)shouldCancel;
     // implement either the first one or the next two to populate the menu
-- (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(__nullable id* __nullable)target action:(__nullable SEL* __nullable)action;
+- (BOOL)menuHasKeyEquivalent:(NSMenu*)menu forEvent:(NSEvent*)event target:(__nullable id* __nonnull)target action:(__nullable SEL* __nonnull)action;
     // bypasses populating the menu for checking for key equivalents. set target and action on return
 
 /* indicates that the menu is being opened (displayed) or closed (hidden).  Do not modify the structure of the menu or the menu items from within these callbacks. */

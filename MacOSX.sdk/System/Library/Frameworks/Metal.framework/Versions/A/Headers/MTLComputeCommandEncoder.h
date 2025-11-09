@@ -24,7 +24,6 @@ typedef struct {
     uint32_t threadgroupsPerGrid[3];
 } MTLDispatchThreadgroupsIndirectArguments;
 
-
 /*!
  @protocol MTLComputeCommandEncoder
  @abstract A command encoder that writes data parallel compute commands.
@@ -60,7 +59,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setBuffers:offsets:withRange:
  @brief Set an array of global buffers for all compute kernels with the given bind point range.
  */
-- (void)setBuffers:(const id <MTLBuffer> __nullable [])buffers offsets:(const NSUInteger [])offsets withRange:(NSRange)range;
+- (void)setBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range;
 
 /*!
  @method setTexture:atIndex:
@@ -72,7 +71,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setTextures:withRange:
  @brief Set an array of global textures for all compute kernels with the given bind point range.
  */
-- (void)setTextures:(const id <MTLTexture> __nullable [__nullable])textures withRange:(NSRange)range;
+- (void)setTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range;
 
 /*!
  @method setSamplerState:atIndex:
@@ -84,7 +83,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setSamplers:withRange:
  @brief Set an array of global samplers for all compute kernels with the given bind point range.
  */
-- (void)setSamplerStates:(const id <MTLSamplerState> __nullable [__nullable])samplers withRange:(NSRange)range;
+- (void)setSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range;
 
 /*!
  @method setSamplerState:lodMinClamp:lodMaxClamp:atIndex:
@@ -96,7 +95,8 @@ NS_AVAILABLE(10_11, 8_0)
  @method setSamplers:lodMinClamps:lodMaxClamps:withRange:
  @brief Set an array of global samplers for all compute kernels with the given bind point range.
  */
-- (void)setSamplerStates:(const id <MTLSamplerState> __nullable [__nullable])samplers lodMinClamps:(const float [__nullable])lodMinClamps lodMaxClamps:(const float [__nullable])lodMaxClamps withRange:(NSRange)range;
+- (void)setSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range;
+
 
 /*!
  @method setThreadgroupMemoryLength:atIndex:
@@ -106,6 +106,11 @@ NS_AVAILABLE(10_11, 8_0)
 
 
 
+
+/*
+ @method setStageInRegion:region:
+ @brief Set the region of the stage_in attributes to apply the compute kernel.
+*/
 - (void)setStageInRegion:(MTLRegion)region NS_AVAILABLE(10_12, 10_0);
 
 /*
@@ -122,6 +127,11 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (void)dispatchThreadgroupsWithIndirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup NS_AVAILABLE(10_11, 9_0);
 
+/*
+ @method dispatchThreads:threadsPerThreadgroup:
+ @abstract Enqueue a compute function dispatch.
+ */
+- (void)dispatchThreads:(MTLSize)threadsPerGrid threadsPerThreadgroup:(MTLSize)threadsPerThreadgroup NS_AVAILABLE(10_13, 11_0);
 
 /*!
  @method updateFence:
@@ -129,7 +139,7 @@ NS_AVAILABLE(10_11, 8_0)
  @discussion The event is updated at kernel submission to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
-- (void)updateFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
+- (void)updateFence:(id <MTLFence>)fence NS_AVAILABLE(10_13, 10_0);
 
 /*!
  @method waitForFence:
@@ -137,7 +147,36 @@ NS_AVAILABLE(10_11, 8_0)
  @discussion The event is evaluated at kernel submision to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
-- (void)waitForFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
+- (void)waitForFence:(id <MTLFence>)fence NS_AVAILABLE(10_13, 10_0);
+
+
+/*!
+ * @method useResource:usage:
+ * @abstract Declare that a resource may be accessed by the command encoder through an argument buffer
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resource through an argument buffer.
+ */
+- (void)useResource:(id <MTLResource>)resource usage:(MTLResourceUsage)usage NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @method useResources:count:usage:
+ * @abstract Declare that an array of resources may be accessed through an argument buffer by the command encoder
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resources through an argument buffer.
+ */
+- (void)useResources:(const id <MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count usage:(MTLResourceUsage)usage NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @method useHeap:
+ * @abstract Declare that the resources allocated from a heap may be accessed by the render pass through an argument buffer
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resources allocated from the heap through an argument buffer. This method may cause all of the color attachments allocated from the heap to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ */
+- (void)useHeap:(id <MTLHeap>)heap NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @method useHeaps:count:
+ * @abstract Declare that the resources allocated from an array of heaps may be accessed by the render pass through an argument buffer
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any dispatch commands which may access the resources allocated from the heaps through an argument buffer. This method may cause all of the color attachments allocated from the heaps to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ */
+- (void)useHeaps:(const id <MTLHeap> __nonnull[__nonnull])heaps count:(NSUInteger)count NS_AVAILABLE(10_13, 11_0);
 
 @end
 NS_ASSUME_NONNULL_END

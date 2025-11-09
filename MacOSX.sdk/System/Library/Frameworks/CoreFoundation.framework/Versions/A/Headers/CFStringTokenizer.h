@@ -1,5 +1,5 @@
 /*	CFStringTokenizer.h
-	Copyright (c) 2006-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2017, Apple Inc. All rights reserved.
 */
 
 /*!
@@ -42,15 +42,14 @@ CF_EXTERN_C_BEGIN
 	@param string The string whose language is to be guessed.
 	@param range The range of characters in string whose language to be
 		guessed. The specified range must not exceed the bounds of the string.
-		If the range is empty (length 0), the first few hundred characters in
-		the string are used.
-	@result A language represented in BCP 47 string, or NULL if the
-		language of the string cannot be guessed. 
+	@result A language represented in BCP 47 string. NULL is returned either if
+		string is NULL, the location of range is negative, the length of range
+		is 0, or the language of the string cannot be guessed.
 	@discussion The result is not guaranteed to be accurate. Typically 200-400
 		characters are required to reliably guess the language of a string.
 */
 CF_EXPORT
-CFStringRef CFStringTokenizerCopyBestStringLanguage(CFStringRef string, CFRange range) CF_AVAILABLE(10_5, 3_0);
+CFStringRef CFStringTokenizerCopyBestStringLanguage(CFStringRef string, CFRange range) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*
 ===================================================================
@@ -131,7 +130,7 @@ typedef CF_OPTIONS(CFOptionFlags, CFStringTokenizerTokenType) {
 	@result the type identifier of all CFStringTokenizer instances.
 */
 CF_EXPORT
-CFTypeID CFStringTokenizerGetTypeID(void) CF_AVAILABLE(10_5, 3_0);
+CFTypeID CFStringTokenizerGetTypeID(void) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 																				
 /*!
 	@function CFStringTokenizerCreate
@@ -151,7 +150,7 @@ CFTypeID CFStringTokenizerGetTypeID(void) CF_AVAILABLE(10_5, 3_0);
 	@result A reference to the new CFStringTokenizer.
 */
 CF_EXPORT
-CFStringTokenizerRef CFStringTokenizerCreate(CFAllocatorRef alloc, CFStringRef string, CFRange range, CFOptionFlags options, CFLocaleRef locale) CF_AVAILABLE(10_5, 3_0);
+CFStringTokenizerRef CFStringTokenizerCreate(CFAllocatorRef alloc, CFStringRef string, CFRange range, CFOptionFlags options, CFLocaleRef locale) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function CFStringTokenizerSetString
@@ -163,7 +162,7 @@ CFStringTokenizerRef CFStringTokenizerCreate(CFAllocatorRef alloc, CFStringRef s
 		specified range must not exceed the length of the string.
 */
 CF_EXPORT
-void CFStringTokenizerSetString(CFStringTokenizerRef tokenizer, CFStringRef string, CFRange range) CF_AVAILABLE(10_5, 3_0);
+void CFStringTokenizerSetString(CFStringTokenizerRef tokenizer, CFStringRef string, CFRange range) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 																		
 /*!
 	@function CFStringTokenizerGoToTokenAtIndex
@@ -181,7 +180,7 @@ void CFStringTokenizerSetString(CFStringTokenizerRef tokenizer, CFStringRef stri
 		(or) derived subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens. 
 */
 CF_EXPORT
-CFStringTokenizerTokenType CFStringTokenizerGoToTokenAtIndex(CFStringTokenizerRef tokenizer, CFIndex index) CF_AVAILABLE(10_5, 3_0);
+CFStringTokenizerTokenType CFStringTokenizerGoToTokenAtIndex(CFStringTokenizerRef tokenizer, CFIndex index) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function CFStringTokenizerAdvanceToNextToken
@@ -205,7 +204,7 @@ CFStringTokenizerTokenType CFStringTokenizerGoToTokenAtIndex(CFStringTokenizerRe
 		(or) derived subtokens can be obtained by calling CFStringTokenizerGetCurrentSubTokens. 
 */
 CF_EXPORT
-CFStringTokenizerTokenType CFStringTokenizerAdvanceToNextToken(CFStringTokenizerRef tokenizer) CF_AVAILABLE(10_5, 3_0);
+CFStringTokenizerTokenType CFStringTokenizerAdvanceToNextToken(CFStringTokenizerRef tokenizer) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function CFStringTokenizerGetCurrentTokenRange
@@ -215,7 +214,7 @@ CFStringTokenizerTokenType CFStringTokenizerAdvanceToNextToken(CFStringTokenizer
 	@result Range of current token, or {kCFNotFound,0} if there is no current token.
 */
 CF_EXPORT 
-CFRange CFStringTokenizerGetCurrentTokenRange(CFStringTokenizerRef tokenizer) CF_AVAILABLE(10_5, 3_0);
+CFRange CFStringTokenizerGetCurrentTokenRange(CFStringTokenizerRef tokenizer) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 																				
 /*!
 	@function CFStringTokenizerCopyCurrentTokenAttribute
@@ -229,7 +228,7 @@ CFRange CFStringTokenizerGetCurrentTokenRange(CFStringTokenizerRef tokenizer) CF
 		attribute or if there is no current token.
 */
 CF_EXPORT
-CFTypeRef CFStringTokenizerCopyCurrentTokenAttribute(CFStringTokenizerRef tokenizer, CFOptionFlags attribute) CF_AVAILABLE(10_5, 3_0);
+CFTypeRef CFStringTokenizerCopyCurrentTokenAttribute(CFStringTokenizerRef tokenizer, CFOptionFlags attribute) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function CFStringTokenizerGetCurrentSubTokens
@@ -256,7 +255,7 @@ CFTypeRef CFStringTokenizerCopyCurrentTokenAttribute(CFStringTokenizerRef tokeni
 		the ordinary non-derived subtokens are added to the derivedSubTokens array. 
 */
 CF_EXPORT
-CFIndex CFStringTokenizerGetCurrentSubTokens(CFStringTokenizerRef tokenizer, CFRange *ranges, CFIndex maxRangeLength, CFMutableArrayRef derivedSubTokens) CF_AVAILABLE(10_5, 3_0);
+CFIndex CFStringTokenizerGetCurrentSubTokens(CFStringTokenizerRef tokenizer, CFRange *ranges, CFIndex maxRangeLength, CFMutableArrayRef derivedSubTokens) API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 
 CF_EXTERN_C_END
 CF_IMPLICIT_BRIDGING_DISABLED

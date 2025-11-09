@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 27FC5EA3-0BE8-387F-9F49-C9414BE4028F' ]
+uuids:           [ 'x86_64: 01519521-AF2D-3C13-8AE8-C5C95B240328' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CalendarDraw.framework/Versions/A/CalendarDraw
-current-version: 1859.0
-objc-constraint: none
+current-version: 1862
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BirthdayCalendarColor, _BirthdayMonthCalendarColor, _CalCGColorConvertToRGBCopy, 
@@ -55,8 +54,8 @@ exports:
                        _CalDrawTileOptions._canceled, _CalDrawTileOptions._colorBar, 
                        _CalDrawTileOptions._darkBackground, _CalDrawTileOptions._dash, 
                        _CalDrawTileOptions._declined, _CalDrawTileOptions._dimmed, 
-                       _CalDrawTileOptions._fillDot, _CalDrawTileOptions._large, 
-                       _CalDrawTileOptions._maybe, _CalDrawTileOptions._needsReply, 
+                       _CalDrawTileOptions._fillDot, _CalDrawTileOptions._flippedForRTL, 
+                       _CalDrawTileOptions._large, _CalDrawTileOptions._maybe, _CalDrawTileOptions._needsReply, 
                        _CalDrawTileOptions._noBorder, _CalDrawTileOptions._outline, 
                        _CalDrawTileOptions._outlineColor, _CalDrawTileOptions._selected ]
 ...

@@ -7,6 +7,10 @@
  *	@copyright 2012 Apple, Inc. All rights reserved.
  */
 
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
+
 #import <CoreBluetooth/CBDefines.h>
 
 #import <Foundation/Foundation.h>
@@ -23,16 +27,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 NS_CLASS_AVAILABLE(10_9, 6_0)
 CB_EXTERN_CLASS @interface CBATTRequest : NSObject
-{
-@private
-    CBCentral			*_central;
-    CBCharacteristic	*_characteristic;
-    NSUInteger			_offset;
-    NSData				*_value;
-    
-	NSNumber	*_transactionID;
-	BOOL		_ignoreResponse;
-}
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /*!
  *  @property central
@@ -40,7 +36,7 @@ CB_EXTERN_CLASS @interface CBATTRequest : NSObject
  *  @discussion The central that originated the request.
  *
  */
-@property(readonly, retain, nonatomic) CBCentral *central;
+@property(readonly, nonatomic) CBCentral *central;
 
 /*!
  *  @property characteristic
@@ -48,7 +44,7 @@ CB_EXTERN_CLASS @interface CBATTRequest : NSObject
  *  @discussion The characteristic whose value will be read or written.
  *
  */
-@property(readonly, retain, nonatomic) CBCharacteristic *characteristic;
+@property(readonly, nonatomic) CBCharacteristic *characteristic;
 
 /*!
  *  @property offset

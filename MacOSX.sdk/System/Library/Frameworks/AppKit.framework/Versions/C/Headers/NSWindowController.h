@@ -1,25 +1,27 @@
 /*
     NSWindowController.h
     Application Kit
-    Copyright (c) 1997-2016, Apple Inc.
+    Copyright (c) 1997-2017, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSResponder.h>
+#import <AppKit/NSNib.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSStoryboardSegue.h>
+#import <AppKit/NSWindow.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSArray, NSDocument, NSStoryboard, NSViewController, NSWindow;
 
-@interface NSWindowController : NSResponder <NSCoding, NSSeguePerforming> {
+@interface NSWindowController : NSResponder <NSSeguePerforming> {
 @private
     NSWindow *_window;
-    NSString *_windowNibName;
+    NSNibName _windowNibName;
     NSDocument *_document;
     NSArray *_topLevelObjects;
-    id _owner;
+    __weak id _owner;
     struct __wcFlags {
         unsigned int shouldCloseDocument:1;
         unsigned int shouldCascade:1;
@@ -42,8 +44,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Instances initialized with the "Name" methods will eventually locate their nib file in the file's owner's class' bundle or in the app's +mainBundle using standard NSBundle API.  Use the "Path" method if your nib file is at a fixed location (which is not inside one of those bundles).
  */
-- (instancetype)initWithWindowNibName:(NSString *)windowNibName;	// self is the owner
-- (instancetype)initWithWindowNibName:(NSString *)windowNibName owner:(id)owner; // The owner is NOT retained
+- (instancetype)initWithWindowNibName:(NSNibName)windowNibName;	// self is the owner
+- (instancetype)initWithWindowNibName:(NSNibName)windowNibName owner:(id)owner; // The owner is NOT retained
 - (instancetype)initWithWindowNibPath:(NSString *)windowNibPath owner:(id)owner;
 
 // -----------------------------------------------------------------------------
@@ -52,19 +54,19 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* If -initWithWindowNibPath:owner: was used to initialize the instance, this gives the last path component with its extension stripped off.  If -initWithWindowNibName:[owner:] was used this just gives that name.
 */
-@property(nullable, copy, readonly) NSString *windowNibName;
+@property(nullable, copy, readonly) NSNibName windowNibName;
 
 /* The full path of the nib.  If -initWithWindowNibPath:owner: was used to initialize the instance, the path is just returned.  If -initWithWindowNibName:[owner:] was used this locates the nib in the file's owner's class' bundle or in the app's mainBundle and returns the full path (or nil if it cannot be located).  Subclasses can override this to augment the search behavior, but probably ought to call super first.
 */
 @property(nullable, copy, readonly) NSString *windowNibPath;
 
-/* The file's owner for this window controller's nib file.  Usually this is either the controller itself or the controller's document, but, in general, it is specified by the -init... methods. The owner is not retained.
+/* The file's owner for this window controller's nib file.  Usually this is either the controller itself or the controller's document, but, in general, it is specified by the -init... methods. The owner is weakly referenced.
 */
-@property(assign, readonly) id owner;
+@property(weak, readonly) id owner;
 
 /* This allows setting and accessing the autosave name for the controller's window.  If the controller has a window frame autosave name, it will automatically make sure its window gets it set appropriately whenever it gets its window set.
 */
-@property(nullable, copy) NSString *windowFrameAutosaveName;
+@property(copy) NSWindowFrameAutosaveName windowFrameAutosaveName;
 
 /* If this is set to YES then new windows loaded from nibs (only windows from nibs) will be cascaded based on the original frame of the window from the nib.
 */

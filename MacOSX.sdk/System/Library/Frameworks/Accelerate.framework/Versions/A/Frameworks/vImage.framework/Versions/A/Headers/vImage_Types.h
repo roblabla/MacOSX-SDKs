@@ -108,7 +108,7 @@ extern "C" {
     @discussion A number of pixels.  Typically, this is the height or width of an image.
  */
 
-typedef unsigned long   vImagePixelCount;       /* Pedantic: A number of pixels. For LP64 (ppc64/x86_64) this is a 64-bit quantity.  */
+typedef unsigned long   vImagePixelCount;       /* Pedantic: A number of pixels. For LP64 (arm64/x86_64) this is a 64-bit quantity.  */
 
     
 /*!

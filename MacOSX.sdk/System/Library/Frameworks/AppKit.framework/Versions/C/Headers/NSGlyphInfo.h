@@ -1,6 +1,6 @@
-/*	
+/*
 	NSGlyphInfo.h
-	Copyright (c) 2002-2016, Apple Inc.
+	Copyright (c) 2002-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@interface NSGlyphInfo : NSObject <NSCopying, NSSecureCoding> {
+    @package
+    NSString *_baseString;
+}
+
++ (nullable NSGlyphInfo *)glyphInfoWithCGGlyph:(CGGlyph)glyph forFont:(NSFont *)font baseString:(NSString *)string API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+@property (readonly) CGGlyph glyphID API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+@property (readonly, copy) NSString *baseString API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+@end
+
+// Non-CGGlyph NSGlyphInfo support is now deprecated. The following API will be formally deprecated in a future version of macOS
 typedef NS_ENUM(NSUInteger, NSCharacterCollection) {
     NSIdentityMappingCharacterCollection = 0, // Identity mapping (CID == NSGlyph)
     NSAdobeCNS1CharacterCollection = 1, // Adobe-CNS1
@@ -16,28 +29,14 @@ typedef NS_ENUM(NSUInteger, NSCharacterCollection) {
     NSAdobeJapan1CharacterCollection = 3, // Adobe-Japan1
     NSAdobeJapan2CharacterCollection = 4, // Adobe-Japan2
     NSAdobeKorea1CharacterCollection = 5, // Adobe-Korea1
-};
+}; // Deprecated.
 
-@interface NSGlyphInfo : NSObject <NSCopying, NSSecureCoding> {
-    NSString *_baseString;
-}
-
-// Returns an NSGlyphInfo object for the glyph name such as "copyright."
+@interface NSGlyphInfo (NSGlyphInfo_Deprecated)
 + (nullable NSGlyphInfo *)glyphInfoWithGlyphName:(NSString *)glyphName forFont:(NSFont *)font baseString:(NSString *)string;
-
-// Returns an NSGlyphInfo object for the NSGlyph glyph
 + (nullable NSGlyphInfo *)glyphInfoWithGlyph:(NSGlyph)glyph forFont:(NSFont *)font baseString:(NSString *)string;
-
-// Returns an NSGlyphInfo object for the CID/RO
-+ (nullable NSGlyphInfo *)glyphInfoWithCharacterIdentifier:(NSUInteger)cid collection:(NSCharacterCollection)characterCollection baseString:(NSString *)string;
-
-// Returns the glyph name.  If the receiver is instantiated without glyph name, returns nil
++ (nullable NSGlyphInfo *)glyphInfoWithCharacterIdentifier:(NSUInteger)cid collection:(NSCharacterCollection)characterCollection baseString:(NSString *)string ;
 @property (nullable, readonly, copy) NSString *glyphName;
-
-// Returns CID
 @property (readonly) NSUInteger characterIdentifier;
-
-// Returns RO (character collection).  Returns NSIdentityMappingCharacterCollection if instantiated with NSGlyph or glyph name
 @property (readonly) NSCharacterCollection characterCollection;
 @end
 

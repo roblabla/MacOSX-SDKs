@@ -1,6 +1,6 @@
 /* CoreAnimation - CABase.h
 
-   Copyright (c) 2006-2016, Apple Inc.
+   Copyright (c) 2006-2017, Apple Inc.
    All rights reserved. */
 
 #ifndef CABASE_H
@@ -73,9 +73,7 @@
 # define CA_AVAILABLE_BUT_DEPREDATED_IOS(...)
 #endif
 
-/* Clunky, but we have no better way of specifying OSX only. */
-
-#if !TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+#if TARGET_OS_OSX
 # define CA_OSX_VERSION(v) ((v) > 0 && MAC_OS_X_VERSION_MIN_REQUIRED >= (v))
 #else
 # define CA_OSX_VERSION(v) (0)

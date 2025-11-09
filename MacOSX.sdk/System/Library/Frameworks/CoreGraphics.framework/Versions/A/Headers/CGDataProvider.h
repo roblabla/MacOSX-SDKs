@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGDataProvider *CGDataProviderRef;
+typedef struct CF_BRIDGED_TYPE(id) CGDataProvider *CGDataProviderRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFURL.h>
@@ -84,9 +84,13 @@ typedef size_t (*CGDataProviderGetBytesAtPositionCallback)(
 /* Callbacks for directly accessing data.
    `version' is the version of this structure. It should be set to 0.
    `getBytePointer', if non-NULL, is called to return a pointer to the
-     provider's entire block of data.
+     provider's entire block of data. This callback may be called multiple
+     times in proper sequence with `releaseBytePointer'. Data block does not
+     need to be available until this callback is invoked.
    `releaseBytePointer', if non-NULL, is called to release a pointer to the
-     provider's entire block of data.
+     provider's entire block of data. This callback may be called multiple
+     times in proper sequence with `getBytePointer'. If possible, data should
+     be purged with this callback and refilled with `getBytePointer'.
    `getBytesAtPosition', if non-NULL, is called to copy `count' bytes at
      offset `position' from the provider's data to `buffer'. It should
      return the number of bytes copied, or 0 if there's no more data.
@@ -94,7 +98,10 @@ typedef size_t (*CGDataProviderGetBytesAtPositionCallback)(
      the provider is freed.
 
    At least one of `getBytePointer' or `getBytesAtPosition' must be
-   non-NULL. */
+   non-NULL. 
+ 
+   If both `getBytePointer' are present `getBytesAtPosition', the latter one 
+   may be ignored. */
 
 struct CGDataProviderDirectCallbacks {
     unsigned int version;
@@ -179,6 +186,9 @@ CG_EXTERN void CGDataProviderRelease(CGDataProviderRef cg_nullable provider)
 CG_EXTERN CFDataRef __nullable CGDataProviderCopyData(
     CGDataProviderRef cg_nullable provider)
     CG_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_2_0);
+
+CG_EXTERN void* __nullable CGDataProviderGetInfo(CGDataProviderRef cg_nullable provider)
+    CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 CF_ASSUME_NONNULL_END
 

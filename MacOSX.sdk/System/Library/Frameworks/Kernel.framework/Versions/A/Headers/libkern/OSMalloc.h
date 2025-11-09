@@ -176,7 +176,7 @@ extern void OSMalloc_Tagfree(OSMallocTag tag);
  */
 extern void * OSMalloc(
     uint32_t    size,
-    OSMallocTag tag);
+    OSMallocTag tag) __attribute__((alloc_size(1)));
 
 
 /*!
@@ -187,7 +187,7 @@ extern void * OSMalloc(
  */
 extern void * OSMalloc_nowait(
     uint32_t    size,
-    OSMallocTag tag);
+    OSMallocTag tag) __attribute__((alloc_size(1)));
 
 
 /*!
@@ -217,7 +217,7 @@ extern void * OSMalloc_nowait(
  */
 extern void * OSMalloc_noblock(
     uint32_t    size,
-    OSMallocTag tag);
+    OSMallocTag tag) __attribute__((alloc_size(1)));
 
 
 /*!

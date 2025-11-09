@@ -20,6 +20,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 @property (readonly, assign) PHAssetMediaType mediaType;
 @property (readonly, assign) PHAssetMediaSubtype mediaSubtypes;
+@property (readonly, assign) PHAssetPlaybackStyle playbackStyle;
 @property (readonly, copy, nullable) NSDate *creationDate;
 @property (readonly, copy, nullable) CLLocation *location;
 @property (readonly, copy, nullable) NSString *uniformTypeIdentifier;

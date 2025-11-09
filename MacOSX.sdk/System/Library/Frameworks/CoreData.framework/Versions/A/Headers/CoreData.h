@@ -1,8 +1,8 @@
 /*
-	CoreData.h
-	Core Data
-    Copyright (c) 2004-2016, Apple Inc.
-	All rights reserved.
+    CoreData.h
+    Core Data
+    Copyright (c) 2004-2017, Apple Inc.
+    All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -16,6 +16,8 @@
 #import <CoreData/NSPropertyDescription.h>
 #import <CoreData/NSExpressionDescription.h>
 #import <CoreData/NSRelationshipDescription.h>
+#import <CoreData/NSFetchIndexDescription.h>
+#import <CoreData/NSFetchIndexElementDescription.h>
 #import <CoreData/NSFetchRequest.h>
 #import <CoreData/NSFetchRequestExpression.h>
 #import <CoreData/NSManagedObjectModel.h>
@@ -50,3 +52,13 @@
 #import <CoreData/NSQueryGenerationToken.h>
 #import <CoreData/NSPersistentStoreDescription.h>
 #import <CoreData/NSPersistentContainer.h>
+
+#import <CoreData/NSFetchIndexDescription.h>
+#import <CoreData/NSFetchIndexElementDescription.h>
+#import <CoreData/NSPersistentHistoryChange.h>
+#import <CoreData/NSPersistentHistoryChangeRequest.h>
+#import <CoreData/NSPersistentHistoryToken.h>
+#import <CoreData/NSPersistentHistoryTransaction.h>
+
+#import <CoreData/NSCoreDataCoreSpotlightDelegate.h>
+

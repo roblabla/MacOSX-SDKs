@@ -1,5 +1,5 @@
 /*	NSXMLDocument.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -73,19 +73,19 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method initWithXMLString:options:error:
     @abstract Returns a document created from either XML or HTML, if the HTMLTidy option is set. Parse errors are returned in <tt>error</tt>.
 */
-- (nullable instancetype)initWithXMLString:(NSString *)string options:(NSUInteger)mask error:(NSError **)error;
+- (nullable instancetype)initWithXMLString:(NSString *)string options:(NSXMLNodeOptions)mask error:(NSError **)error;
 
 /*!
     @method initWithContentsOfURL:options:error:
     @abstract Returns a document created from the contents of an XML or HTML URL. Connection problems such as 404, parse errors are returned in <tt>error</tt>.
 */
-- (nullable instancetype)initWithContentsOfURL:(NSURL *)url options:(NSUInteger)mask error:(NSError **)error;
+- (nullable instancetype)initWithContentsOfURL:(NSURL *)url options:(NSXMLNodeOptions)mask error:(NSError **)error;
 
 /*!
     @method initWithData:options:error:
     @abstract Returns a document created from data. Parse errors are returned in <tt>error</tt>.
 */
-- (nullable instancetype)initWithData:(NSData *)data options:(NSUInteger)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
+- (nullable instancetype)initWithData:(NSData *)data options:(NSXMLNodeOptions)mask error:(NSError **)error NS_DESIGNATED_INITIALIZER; //primitive
 
 /*!
     @method initWithRootElement:
@@ -100,37 +100,31 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
 + (Class)replacementClassForClass:(Class)cls;
 
 /*!
-    @method characterEncoding
     @abstract Sets the character encoding to an IANA type.
 */
 @property (nullable, copy) NSString *characterEncoding; //primitive
 
 /*!
-    @method version
     @abstract Sets the XML version. Should be 1.0 or 1.1.
 */
 @property (nullable, copy) NSString *version; //primitive
 
 /*!
-    @method standalone
     @abstract Set whether this document depends on an external DTD. If this option is set the standalone declaration will appear on output.
 */
 @property (getter=isStandalone) BOOL standalone; //primitive
 
 /*!
-    @method documentContentKind
     @abstract The kind of document.
 */
 @property NSXMLDocumentContentKind documentContentKind; //primitive
 
 /*!
-    @method MIMEType
     @abstract Set the MIME type, eg text/xml.
 */
 @property (nullable, copy) NSString *MIMEType; //primitive
 
 /*!
-    @method DTD
     @abstract Set the associated DTD. This DTD will be output with the document.
 */
 @property (nullable, copy) NSXMLDTD *DTD; //primitive
@@ -192,7 +186,6 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
 #endif
 
 /*!
-    @method XMLData
     @abstract Invokes XMLDataWithOptions with NSXMLNodeOptionsNone.
 */
 @property (readonly, copy) NSData *XMLData;
@@ -201,7 +194,7 @@ typedef NS_ENUM(NSUInteger, NSXMLDocumentContentKind) {
     @method XMLDataWithOptions:
     @abstract The representation of this node as it would appear in an XML document, encoded based on characterEncoding.
 */
-- (NSData *)XMLDataWithOptions:(NSUInteger)options;
+- (NSData *)XMLDataWithOptions:(NSXMLNodeOptions)options;
 
 #if 0
 #pragma mark --- XSLT ---

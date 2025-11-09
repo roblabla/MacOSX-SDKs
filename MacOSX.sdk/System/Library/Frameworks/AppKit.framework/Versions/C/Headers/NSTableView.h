@@ -1,7 +1,7 @@
 /*
     NSTableView.h
     Application Kit
-    Copyright (c) 1995-2016, Apple Inc.
+    Copyright (c) 1995-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -158,6 +158,8 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
     NSTableRowActionEdgeTrailing, // Action buttons that appear on the trailing (or right) edge of an NSTableRowView
 } NS_ENUM_AVAILABLE_MAC(10_11);
 
+typedef NSString * NSTableViewAutosaveName NS_EXTENSIBLE_STRING_ENUM;
+
 @interface NSTableView : NSControl <NSUserInterfaceValidations, NSTextViewDelegate, NSDraggingSource, NSAccessibilityTable>
 {
     /* All instance variables are private */
@@ -181,12 +183,12 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
     NSColor             *_gridColor;
     id                  _rowDataX;
     id                  _reserved3;
-    SEL                 _reserved4;
+    NSIndexSet          *_oldSelection;
     SEL                 _doubleAction;
     NSRect              _rectOfLastColumn;
     NSInteger           _lastCachedRectColumn;
-    NSRect              _rectOfLastRow NS_DEPRECATED_MAC(10_0, 10_7); // UNUSED and will be removed
-    NSInteger           _lastCachedRectRow NS_DEPRECATED_MAC(10_0, 10_7); // UNUSED and will be removed
+    NSRect              _unused2;
+    NSInteger           _unused3;
     _TvFlags            _tvFlags;
     id                  _reserved;
 }
@@ -286,11 +288,11 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 
 /* Returns the first index of the NSTableColumn instance with the -identifier that isEqual to 'identifier'. Returns -1 if 'identifier' can not be found. In 10.7, the identifier was changed from NSString to id.
  */
-- (NSInteger)columnWithIdentifier:(NSString *)identifier;
+- (NSInteger)columnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier;
 
 /* Returns the first NSTableColumn instance with the -identifier that isEqual to 'identifier'. Returns nil if 'identifier' can not be found. In 10.7, the identifier was changed from NSString to id.
  */
-- (nullable NSTableColumn *)tableColumnWithIdentifier:(NSString *)identifier;
+- (nullable NSTableColumn *)tableColumnWithIdentifier:(NSUserInterfaceItemIdentifier)identifier;
 
 /* Causes the table to tile in size appropriate for the content. This method will be called automatically when necessary, and generally does not need to be called.
  */
@@ -340,7 +342,7 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 
 /* Support for highlightable column header, for use with row selection.
 */
-@property (nullable, assign) NSTableColumn *highlightedTableColumn;
+@property (nullable, weak) NSTableColumn *highlightedTableColumn;
 
 #pragma mark -
 #pragma mark ***** Drag and Drop *****
@@ -460,7 +462,7 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 /*
  * Persistence methods
  */
-@property (nullable, copy) NSString *autosaveName;
+@property (nullable, copy) NSTableViewAutosaveName autosaveName;
 
 /* On Mac OS 10.4 and higher, the NSTableColumn width and location is saved. On Mac OS 10.5 and higher, the NSTableColumn 'isHidden' state is also saved. The 'autosaveName' must be set for 'autosaveTableColumns' to take effect.
 */
@@ -519,7 +521,7 @@ typedef NS_ENUM(NSInteger, NSTableRowActionEdge) {
 
 /* View Based TableView: Returns an autoreleased view with a particular 'identifier'. Typically the 'identifier' is associated with a particular "cell view" in IB. The TableView will automatically instantiate the embedded view with the provided owner. This method will typically be called by the delegate in -viewForTableColumn:row:, but it can also be overridden to provide custom views for a particular 'identifier'. This method may also return a reused view with the same 'identifier' that was no longer available on screen. 'identifier' can not be nil. Note that 'owner' will get an 'awakeFromNib:' call each time the object is instantiated.
  */ 
-- (nullable __kindof NSView *)makeViewWithIdentifier:(NSString *)identifier owner:(nullable id)owner NS_AVAILABLE_MAC(10_7);
+- (nullable __kindof NSView *)makeViewWithIdentifier:(NSUserInterfaceItemIdentifier)identifier owner:(nullable id)owner NS_AVAILABLE_MAC(10_7);
 
 /* Enumerates all available NSTableRowViews. This includes all views in the -visibleRect, however, it may also include ones that are "in flight" due to animations or other various attributes of the table.
  */
@@ -587,11 +589,11 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 
 /* View Based TableView: Registers (or associates) the 'nib' with 'identifier' so the table can instantiate views from it when a view with 'identifier' is requested. Generally, this means one calls -makeViewWithIdentifier:'identifier' owner:, and there was no NIB created at design time for this particular table view that could be found. This allows dynamic loading of nibs that can be associated with the table. To remove a previously associated NIB for a given identifier, pass in 'nil' for the nib value.
  */
-- (void)registerNib:(nullable NSNib *)nib forIdentifier:(NSString *)identifier NS_AVAILABLE_MAC(10_8);
+- (void)registerNib:(nullable NSNib *)nib forIdentifier:(NSUserInterfaceItemIdentifier)identifier NS_AVAILABLE_MAC(10_8);
 
 /* View Based TableView: Returns a dictionary of all registered nibs. The keys are the identifier, and the value is the NSNib that is registered.
  */
-@property (nullable, readonly, copy) NSDictionary<NSString *, NSNib *> *registeredNibsByIdentifier NS_AVAILABLE_MAC(10_8);
+@property (nullable, readonly, copy) NSDictionary<NSUserInterfaceItemIdentifier, NSNib *> *registeredNibsByIdentifier NS_AVAILABLE_MAC(10_8);
 
 /* View Based TableView: The subclass can implement this method to be alerted when a new 'rowView' has been added to the table. At this point, the subclass can choose to add in extra views, or modify any properties on 'rowView'. Be sure to call 'super'.
  */
@@ -608,6 +610,11 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 /* Get and set the user interface layout direction. When set to NSUserInterfaceLayoutDirectionRightToLeft, the TableView will flip the visual order of the table columns, while the logical order remains as it was. The default value is NSUserInterfaceLayoutDirectionLeftToRight. This method is available only on 10.12 and higher, and in previous releases it was hardcoded to always return NSUserInterfaceLayoutDirectionLeftToRight. However, NSOutlineView has had a separate implmentation since 10.7.
  */
 @property NSUserInterfaceLayoutDirection userInterfaceLayoutDirection; // NS_AVAILABLE_MAC(10_12);
+
+/* View Based TableViews: When set to YES, the table will utilize autolayout for the row heights. Set the rowHeight property to provide an estimated row height for views that are not yet loaded. This is not required, but it is recommended in order to provide a proper estimate for the scroll bars. The delegate method -tableView:heightOfRow: can still be used to provide a more specific estimated row height. Note that a rowView's height is set to the rowHeight plus intercellSpacing.height, so an estimated rowHeight should have the intercellSpacing.height subtracted from it. The default value is NO. This value is encoded.
+ */
+@property BOOL usesAutomaticRowHeights NS_AVAILABLE_MAC(10_13);
+
 
 @end
 
@@ -652,7 +659,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableViewAnimationOptions) {
 - (BOOL)tableView:(NSTableView *)tableView shouldEditTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row;
 
 /* Optional - Tool Tip Support
- When the user pauses over a cell, the value returned from this method will be displayed in a tooltip.  'point' represents the current mouse location in view coordinates.  If you don't want a tooltip at that location, return nil or the empty string.  On entry, 'rect' represents the proposed active area of the tooltip.  By default, rect is computed as [cell drawingRectForBounds:cellFrame].  To control the default active area, you can modify the 'rect' parameter.
+ When the user pauses over a cell, the value returned from this method will be displayed in a tooltip.  'point' represents the current mouse location in view coordinates.  If you don't want a tooltip at that location, return an empty string.  On entry, 'rect' represents the proposed active area of the tooltip.  By default, rect is computed as [cell drawingRectForBounds:cellFrame].  To control the default active area, you can modify the 'rect' parameter.
  */
 - (NSString *)tableView:(NSTableView *)tableView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row mouseLocation:(NSPoint)mouseLocation;
 
@@ -755,7 +762,7 @@ APPKIT_EXTERN NSNotificationName NSTableViewColumnDidResizeNotification;     // 
 APPKIT_EXTERN NSNotificationName NSTableViewSelectionIsChangingNotification;
 
 // The NSTableViewRowViewKey is the key that View Based TableView uses to identify the NIB containing the template row view. You can specify a custom row view (without any code) by associating this key with the appropriate NIB name in IB.
-APPKIT_EXTERN NSString * const NSTableViewRowViewKey NS_AVAILABLE_MAC(10_7); // @"NSTableViewRowViewKey"
+APPKIT_EXTERN NSUserInterfaceItemIdentifier const NSTableViewRowViewKey NS_AVAILABLE_MAC(10_7); // @"NSTableViewRowViewKey"
 
 #pragma mark -
 
@@ -767,7 +774,7 @@ APPKIT_EXTERN NSString * const NSTableViewRowViewKey NS_AVAILABLE_MAC(10_7); // 
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)tableView;
 
-/* This method is required for the "Cell Based" TableView, and is optional for the "View Based" TableView. If implemented in the latter case, the value will be set to the view at a given row/column if the view responds to -setObjectValue: (such as NSControl and NSTableCellView).
+/* This method is required for the "Cell Based" TableView, and is optional for the "View Based" TableView. If implemented in the latter case, the value will be set to the view at a given row/column if the view responds to -setObjectValue: (such as NSControl and NSTableCellView). Note that NSTableCellView does not actually display the objectValue, and its value is to be used for bindings. See NSTableCellView.h for more information.
  */
 - (nullable id)tableView:(NSTableView *)tableView objectValueForTableColumn:(nullable NSTableColumn *)tableColumn row:(NSInteger)row;
 
@@ -813,7 +820,7 @@ APPKIT_EXTERN NSString * const NSTableViewRowViewKey NS_AVAILABLE_MAC(10_7); // 
 
 /* Dragging Destination Support - NSTableView data source objects can support file promised drags by adding NSFilesPromisePboardType to the pasteboard in tableView:writeRowsWithIndexes:toPasteboard:.  NSTableView implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this data source method.  This method should returns an array of filenames for the created files (filenames only, not full paths).  The URL represents the drop location.  For more information on file promise dragging, see documentation on the NSDraggingSource protocol and -namesOfPromisedFilesDroppedAtDestination:.
 */
-- (NSArray<NSString *> *)tableView:(NSTableView *)tableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet;
+- (NSArray<NSString *> *)tableView:(NSTableView *)tableView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedRowsWithIndexes:(NSIndexSet *)indexSet NS_DEPRECATED_MAC(10_0, 10_13, "Use NSFilePromiseReceiver objects instead");
 
 @end
 

@@ -64,12 +64,14 @@ typedef int (*BNNSAlloc)(void * _Nullable * _Nullable memptr, size_t alignment, 
 */
 typedef void (*BNNSFree)(void * _Null_unspecified ptr);
 
+#pragma mark - Constants
+
 /*!
  
 @abstract Storage data type
 
 @constant BNNSDataTypeFloatBit
-Common bit to floating point types
+Common bit to floating point types, this constant is not a valid type
 
 @constant BNNSDataTypeFloat16
 16-bit half precision floating point
@@ -78,7 +80,7 @@ Common bit to floating point types
 32-bit single precision floating point
 
 @constant BNNSDataTypeIntBit
-Common bit to signed integer types
+Common bit to signed integer types, this constant is not a valid type
 
 @constant BNNSDataTypeInt8
 8-bit signed integer
@@ -89,26 +91,44 @@ Common bit to signed integer types
 @constant BNNSDataTypeIn32
 32-bit signed integer
 
+@constant BNNSDataTypeUIntBit
+Common bit to unsigned integer types, this constant is not a valid type (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@constant BNNSDataTypeUInt8
+8-bit unsigned integer (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@constant BNNSDataTypeUInt16
+16-bit unsigned integer (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@constant BNNSDataTypeUIn32
+32-bit unsigned integer (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
 @constant BNNSDataTypeIndexedBit
-Common bit to indexed floating point types
+Common bit to indexed floating point types, this constant is not a valid type
 
 @constant BNNSDataTypeIndexed8
-8-bit indices into a floating point conversion table (256 values)
+8-bit unsigned indices into a floating point conversion table (256 values)
 
 */
 typedef enum {
 
-  BNNSDataTypeFloatBit = 0x10000,
-  BNNSDataTypeFloat16 = BNNSDataTypeFloatBit | 16,
-  BNNSDataTypeFloat32 = BNNSDataTypeFloatBit | 32,
+  BNNSDataTypeFloatBit            = 0x10000,
+  BNNSDataTypeFloat16             = BNNSDataTypeFloatBit | 16,
+  BNNSDataTypeFloat32             = BNNSDataTypeFloatBit | 32,
 
-  BNNSDataTypeIntBit = 0x20000,
-  BNNSDataTypeInt8 = BNNSDataTypeIntBit | 8,
-  BNNSDataTypeInt16 = BNNSDataTypeIntBit | 16,
-  BNNSDataTypeInt32 = BNNSDataTypeIntBit | 32,
+  BNNSDataTypeIntBit              = 0x20000,
+  BNNSDataTypeInt8                = BNNSDataTypeIntBit | 8,
+  BNNSDataTypeInt16               = BNNSDataTypeIntBit | 16,
+  BNNSDataTypeInt32               = BNNSDataTypeIntBit | 32,
 
-  BNNSDataTypeIndexedBit = 0x80000,
-  BNNSDataTypeIndexed8 = BNNSDataTypeIndexedBit | 8,
+  // The UInt fields are available in macOS 10.13, iOS 11, tvOS 11, watchOS 4
+  BNNSDataTypeUIntBit             = 0x40000,
+  BNNSDataTypeUInt8               = BNNSDataTypeUIntBit | 8,
+  BNNSDataTypeUInt16              = BNNSDataTypeUIntBit | 16,
+  BNNSDataTypeUInt32              = BNNSDataTypeUIntBit | 32,
+
+  BNNSDataTypeIndexedBit          = 0x80000,
+  BNNSDataTypeIndexed8            = BNNSDataTypeIndexedBit | 8,
 
 } BNNSDataType;
 
@@ -128,8 +148,8 @@ max(X<sub>i</sub>)
 */
 typedef enum {
 
-  BNNSPoolingFunctionMax,
-  BNNSPoolingFunctionAverage,
+  BNNSPoolingFunctionMax          = 0,
+  BNNSPoolingFunctionAverage      = 1,
 
 } BNNSPoolingFunction;
 
@@ -156,19 +176,45 @@ tanh(x)
 alpha*tanh(x*beta)
 
 @constant BNNSActivationFunctionAbs
-abs(x)
+abs(x) (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
 
+@constant BNNSActivationFunctionLinear
+alpha*x (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@constant BNNSActivationFunctionClamp
+min(max(x, alpha), beta) (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@constant BNNSActivationFunctionIntegerLinearSaturate
+Saturate<output_type>((iscale * x + ioffset) >> ishift)
+This is an arithmetic shift, preserving sign. (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@constant BNNSActivationFunctionIntegerLinearSaturatePerChannel
+Saturate<output_type>((iscale_per_channel[channel] * x + ioffset_per_channel[channel]) >> ishift_per_channel[channel]) for each channel
+This is an arithmetic shift, preserving sign. (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@constant BNNSActivationFunctionSoftmax
+softmax(x)_i = exp(x_i) / ( sum_i exp(x_i) )
+(macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+ 
 */
 typedef enum {
 
-  BNNSActivationFunctionIdentity,
-  BNNSActivationFunctionRectifiedLinear,
-  BNNSActivationFunctionLeakyRectifiedLinear,
-  BNNSActivationFunctionSigmoid,
-  BNNSActivationFunctionTanh,
-  BNNSActivationFunctionScaledTanh,
-  BNNSActivationFunctionAbs,
-  
+  BNNSActivationFunctionIdentity                        =  0,
+  BNNSActivationFunctionRectifiedLinear                 =  1,
+  BNNSActivationFunctionLeakyRectifiedLinear            =  2,
+  BNNSActivationFunctionSigmoid                         =  3,
+  BNNSActivationFunctionTanh                            =  4,
+  BNNSActivationFunctionScaledTanh                      =  5,
+  BNNSActivationFunctionAbs                             =  6,
+
+  // The following fields are available in macOS 10.13, iOS 11, tvOS 11, watchOS 4
+
+  BNNSActivationFunctionLinear                          =  7,
+  BNNSActivationFunctionClamp                           =  8,
+  BNNSActivationFunctionIntegerLinearSaturate           =  9,
+  BNNSActivationFunctionIntegerLinearSaturatePerChannel = 10,
+  BNNSActivationFunctionSoftmax                         = 11,
+
 } BNNSActivationFunction;
 
 /*!
@@ -186,7 +232,7 @@ to keep the pointers valid after the filter is created.
 */
 typedef enum {
 
-  BNNSFlagsUseClientPtr = 0x0001,
+  BNNSFlagsUseClientPtr                         = 0x0001,
 
 } BNNSFlags;
 
@@ -194,7 +240,7 @@ typedef enum {
 
 /*!
 
-@abstract Image stack format descriptor
+@abstract Image stack descriptor
 
 @discussion
 An image stack is a sequence of images with the same width and height. Each image in the sequence is called a channel.
@@ -215,8 +261,8 @@ Int<n> types are converted to floating point using float Y = DATA_SCALE * (float
 @field row_stride Increment (in values) between image rows
 @field image_stride Increment (in values) between image channels
 @field data_type Storage data type for image values. INDEXED data types are not allowed here.
-@field data_scale Conversion scale for image values, used for INT data types only
-@field data_bias Conversion bias for image values, used for INT data types only
+@field data_scale Conversion scale for image values, used for INT,UINT data types only
+@field data_bias Conversion bias for image values, used for INT,UINT data types only
 
 */
 typedef struct {
@@ -247,8 +293,8 @@ Int<n> types are converted to floating point using float Y = DATA_SCALE * (float
 
 @field size Vector dimension
 @field data_type Storage data type for vector values. INDEXED data types are not allowed here.
-@field data_scale Conversion scale for vector values, used for INT data types only
-@field data_bias Conversion bias for vector values, used for INT data types only
+@field data_scale Conversion scale for vector values, used for INT,UINT data types only
+@field data_bias Conversion bias for vector values, used for INT,UINT data types only
 
 */
 typedef struct {
@@ -294,12 +340,30 @@ typedef struct {
 @field alpha Parameter to the activation function
 @field beta Parameter to the activation function
 
+@field iscale Scale for integer functions (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+@field ioffset Offset for integer functions (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+@field ishift Shift for integer functions (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
+@field iscale_per_channel Scale per channel for integer functions (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+@field ioffset_per_channel Offset per channel for integer functions (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+@field ishift_per_channel Shift per channel for integer functions (macOS 10.13, iOS 11, tvOS 11, watchOS 4)
+
 */
 typedef struct {
 
   BNNSActivationFunction function;
   float alpha;
   float beta;
+
+  // The following fields are available in macOS 10.13, iOS 11, tvOS 11, watchOS 4
+
+  int32_t iscale;
+  int32_t ioffset;
+  int32_t ishift;
+
+  const int32_t * _Nullable iscale_per_channel;
+  const int32_t * _Nullable ioffset_per_channel;
+  const int32_t * _Nullable ishift_per_channel;
 
 } BNNSActivation;
 
@@ -465,8 +529,8 @@ typedef struct {
 
   uint32_t flags;
   size_t n_threads;
-  BNNSAlloc alloc_memory;
-  BNNSFree free_memory;
+  BNNSAlloc _Nullable alloc_memory;
+  BNNSFree _Nullable free_memory;
 
 } BNNSFilterParameters;
 
@@ -509,8 +573,8 @@ __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AV
 Creates a filter applying the fully connected layer described in <tt>layer_params</tt>.
 Some combinations of the parameters may not be supported, in which case the call will fail.
 
-@param in_desc Input image stack descriptor
-@param out_desc Output image stack descriptor
+@param in_desc Input vector descriptor
+@param out_desc Output vector descriptor
 @param layer_params Layer parameters and weights
 @param filter_params Filter runtime parameters, may be NULL for default parameters
 
@@ -545,6 +609,27 @@ BNNSFilter BNNSFilterCreatePoolingLayer(const BNNSImageStackDescriptor * in_desc
                                         const BNNSPoolingLayerParameters * layer_params,
                                         const BNNSFilterParameters * _Nullable filter_params)
 __OSX_AVAILABLE(10.12) __IOS_AVAILABLE(10.0) __TVOS_AVAILABLE(10.0) __WATCHOS_AVAILABLE(3.0);
+
+/*!
+
+@abstract Create a vector conversion/activation layer filter
+
+@discussion
+Creates a filter applying the given activation function and conversions to vectors. Input and output vectors must have the same size.
+
+@param in_desc Input vector descriptor
+@param out_desc Output vector descriptor
+@param activation Activation function to apply and its parameters
+@param filter_params Filter runtime parameters, may be NULL for default parameters
+
+@return A new non-NULL filter on success, and NULL on failure.
+
+*/
+BNNSFilter BNNSFilterCreateVectorActivationLayer(const BNNSVectorDescriptor * in_desc,
+                                                 const BNNSVectorDescriptor * out_desc,
+                                                 const BNNSActivation * activation,
+                                                 const BNNSFilterParameters * _Nullable filter_params)
+__OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0);
 
 /*!
 

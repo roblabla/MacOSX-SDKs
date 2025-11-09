@@ -35,7 +35,6 @@
 .Op Fl localuser Ar username
 .Op Fl localpassword Ar password
 .Op Fl alldomains Ar enable | Ar disable
-.Op Fl enableSSO
 .Op Fl localhome Ar enable | Ar disable
 .Op Fl gid Ar attribute | Fl nogid
 .Op Fl ggid Ar attribute | Fl noggid
@@ -67,8 +66,6 @@ The fully-qualified DNS name of the Domain to be used when adding the computer t
 This flag determines whether the plugin allows authentication from any domain in the forest.  When this is enabled, individual domains will not be visible, only "All Domains". If it is disabled, you will have the ability to select the specific domains that can authenticate to this computer. Enabled by default.
 .It Fl computer Ar computerid
 The "computerid" to add the specified Domain
-.It Fl enableSSO
-(Server Only) When using MacOS X Server with Active Directory, this enables SSO for all supported services.
 .It Fl force
 Force the process (i.e., join the existing account or remove the binding)
 .It Fl ggid Ar attribute

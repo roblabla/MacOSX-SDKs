@@ -41,6 +41,7 @@ GK_BASE_AVAILABILITY_2 @interface GKDecisionNode : NSObject
  */
 - (instancetype)createBranchWithWeight:(NSInteger)weight attribute:(id <NSObject>)attribute;
 
+
 @end
 
 
@@ -88,6 +89,22 @@ GK_BASE_AVAILABILITY_2 @interface GKDecisionTree : NSObject <NSSecureCoding>
  * @return GKDecisionTree created by learning from the provided examples for the provided attributes
  */
 - (instancetype)initWithExamples:(NSArray <NSArray <id <NSObject>>*>*)examples actions:(NSArray <id <NSObject>>*)actions attributes:(NSArray <id <NSObject>>*)attributes;
+
+/**
+ * Initializes a decision tree from the contents of a file
+ *
+ * @param url The URL from which the contents will be loaded
+ * @return The instance of the decision tree constructed
+ */
+- (instancetype)initWithURL:(NSURL *)url error:(NSError * _Nullable)error;
+
+/**
+ * Exports a decision tree to the given URL
+ *
+ * @param url The URL to which the contents will be exported
+ * @return The response indicating the status of the decision tree being successfully exported
+ */
+- (BOOL)exportToURL:(NSURL *)url error:(NSError * _Nullable)error;
 
 /**
  * Will branch down from the root node to find the correct action attribute for the given collection of results and their respective attributes

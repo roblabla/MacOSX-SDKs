@@ -69,29 +69,28 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2DeadPeerDetectionRate) {
 typedef NS_ENUM(NSInteger, NEVPNIKEv2DiffieHellmanGroup) {
 	/*! @const NEVPNIKEv2DiffieHellmanGroupInvalid Diffie Hellman group 0 is not a valid DH group*/
 	NEVPNIKEv2DiffieHellmanGroupInvalid = 0,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup1 Diffie Hellman group 1 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup1 Diffie Hellman group 1 (768-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup1 = 1,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup2 Diffie Hellman group 2 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup2 Diffie Hellman group 2 (1024-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup2 = 2,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup5 Diffie Hellman group 5 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup5 Diffie Hellman group 5 (1536-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup5 = 5,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup14 Diffie Hellman group 14 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup14 Diffie Hellman group 14 (2048-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup14 = 14,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup15 Diffie Hellman group 15 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup15 Diffie Hellman group 15 (3072-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup15 = 15,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup16 Diffie Hellman group 16 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup16 Diffie Hellman group 16 (4096-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup16 = 16,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup17 Diffie Hellman group 17 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup17 Diffie Hellman group 17 (6144-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup17 = 17,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup18 Diffie Hellman group 18 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup18 Diffie Hellman group 18 (8192-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup18 = 18,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup19 Diffie Hellman group 19 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup19 Diffie Hellman group 19 (256-bit random ECP) */
 	NEVPNIKEv2DiffieHellmanGroup19 = 19,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup20 Diffie Hellman group 20 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup20 Diffie Hellman group 20 (384-bit random ECP) */
 	NEVPNIKEv2DiffieHellmanGroup20 = 20,
-	/*! @const NEVPNIKEv2DiffieHellmanGroup21 Diffie Hellman group 21 */
+	/*! @const NEVPNIKEv2DiffieHellmanGroup21 Diffie Hellman group 21 (521-bit random ECP) */
 	NEVPNIKEv2DiffieHellmanGroup21 = 21,
-	
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 /*!
@@ -108,6 +107,21 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2CertificateType) {
     /*! @const NEVPNIKEv2CertificateTypeECDSA521 ECDSA with p-521 curve */
     NEVPNIKEv2CertificateTypeECDSA521 = 4,
 } NS_ENUM_AVAILABLE(10_11, 8_3);
+
+/*!
+ * @typedef NEVPNIKEv2CertificateType
+ * @abstract IKEv2 Certificate types
+ */
+typedef NS_ENUM(NSInteger, NEVPNIKEv2TLSVersion) {
+	/*! @const NEVPNIKEv2TLSVersionDefault Use the default TLS configuration */
+	NEVPNIKEv2TLSVersionDefault = 0,
+	/*! @const NEVPNIKEv2TLSVersion1_0 TLS 1.0 */
+	NEVPNIKEv2TLSVersion1_0 = 1,
+	/*! @const NEVPNIKEv2TLSVersion1_0 TLS 1.1 */
+	NEVPNIKEv2TLSVersion1_1 = 2,
+	/*! @const NEVPNIKEv2TLSVersion1_0 TLS 1.2 */
+	NEVPNIKEv2TLSVersion1_2 = 3,
+} NS_ENUM_AVAILABLE(10_13, 11_0);
 
 /*!
  * @class NEVPNIKEv2SecurityAssociationParameters
@@ -225,6 +239,18 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * @discussion Require positive certificate revocation check response for peer certificate validation to pass. Default is NO.
  */
 @property BOOL strictRevocationCheck NS_AVAILABLE(10_11, 9_0);
+
+/*!
+ * @property minimumTLSVersion
+ * @discussion Sets a minimum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
+ */
+@property NEVPNIKEv2TLSVersion minimumTLSVersion NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @property maximumTLSVersion
+ * @discussion Sets a maximum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
+ */
+@property NEVPNIKEv2TLSVersion maximumTLSVersion NS_AVAILABLE(10_13, 11_0);
 
 @end
 

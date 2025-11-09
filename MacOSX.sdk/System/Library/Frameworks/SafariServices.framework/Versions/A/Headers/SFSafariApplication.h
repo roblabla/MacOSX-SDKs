@@ -13,6 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class NSRunningApplication;
 @class SFSafariWindow;
 
 SF_CLASS_AVAILABLE_MAC_SAFARI(10_0)
@@ -30,8 +31,14 @@ SF_CLASS_AVAILABLE_MAC_SAFARI(10_0)
 /// This will cause -validateToolbarItemInWindow:completionHandler: to be called on all windows, to let the extension update enabled states or badges of its toolbar items.
 + (void)setToolbarItemsNeedUpdate;
 
+/// Gets an NSRunningApplication instance with information about the app that this extension is connected to.
++ (void)getHostApplicationWithCompletionHandler:(void (^)(NSRunningApplication *hostApplication))completionHandler SF_AVAILABLE_MAC_SAFARI(11_0);
+
 /// Opens Safari Extensions preferences and selects extension with the identifier.
 + (void)showPreferencesForExtensionWithIdentifier:(NSString *)identifier completionHandler:(void (^ _Nullable)(NSError * _Nullable error))completionHandler NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+
+// Dispatches a message to the Safari Extension with the given identifier.
++ (void)dispatchMessageWithName:(NSString *)messageName toExtensionWithIdentifier:(NSString *)identifier userInfo:(nullable NSDictionary<NSString *, id> *)userInfo completionHandler:(void (^ _Nullable)(NSError * _Nullable error))completionHandler NS_EXTENSION_UNAVAILABLE("Not available to extensions") SF_AVAILABLE_MAC_SAFARI(10_1);
 
 @end
 

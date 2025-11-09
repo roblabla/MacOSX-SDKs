@@ -1,5 +1,5 @@
 /*	NSBundle.h
-	Copyright (c) 1994-2016, Apple Inc.  All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -29,44 +29,40 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /* Methods for creating or retrieving bundle instances. */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSBundle *mainBundle;
-#endif
 
 + (nullable instancetype)bundleWithPath:(NSString *)path;
 - (nullable instancetype)initWithPath:(NSString *)path NS_DESIGNATED_INITIALIZER;
 
-+ (nullable instancetype)bundleWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
-- (nullable instancetype)initWithURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
++ (nullable instancetype)bundleWithURL:(NSURL *)url API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (nullable instancetype)initWithURL:(NSURL *)url API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 + (NSBundle *)bundleForClass:(Class)aClass;
 + (nullable NSBundle *)bundleWithIdentifier:(NSString *)identifier;
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, copy) NSArray<NSBundle *> *allBundles;
 @property (class, readonly, copy) NSArray<NSBundle *> *allFrameworks;
-#endif
 
 /* Methods for loading and unloading bundles. */
 - (BOOL)load;
 @property (readonly, getter=isLoaded) BOOL loaded;
 - (BOOL)unload;
 
-- (BOOL)preflightAndReturnError:(NSError **)error NS_AVAILABLE(10_5, 2_0);
-- (BOOL)loadAndReturnError:(NSError **)error NS_AVAILABLE(10_5, 2_0);
+- (BOOL)preflightAndReturnError:(NSError **)error API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+- (BOOL)loadAndReturnError:(NSError **)error API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 /* Methods for locating various components of a bundle. */
-@property (readonly, copy) NSURL *bundleURL NS_AVAILABLE(10_6, 4_0);
-@property (nullable, readonly, copy) NSURL *resourceURL NS_AVAILABLE(10_6, 4_0);
-@property (nullable, readonly, copy) NSURL *executableURL NS_AVAILABLE(10_6, 4_0);
-- (nullable NSURL *)URLForAuxiliaryExecutable:(NSString *)executableName NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSURL *bundleURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+@property (nullable, readonly, copy) NSURL *resourceURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+@property (nullable, readonly, copy) NSURL *executableURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (nullable NSURL *)URLForAuxiliaryExecutable:(NSString *)executableName API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-@property (nullable, readonly, copy) NSURL *privateFrameworksURL NS_AVAILABLE(10_6, 4_0);
-@property (nullable, readonly, copy) NSURL *sharedFrameworksURL NS_AVAILABLE(10_6, 4_0);
-@property (nullable, readonly, copy) NSURL *sharedSupportURL NS_AVAILABLE(10_6, 4_0);
-@property (nullable, readonly, copy) NSURL *builtInPlugInsURL NS_AVAILABLE(10_6, 4_0);
+@property (nullable, readonly, copy) NSURL *privateFrameworksURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+@property (nullable, readonly, copy) NSURL *sharedFrameworksURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+@property (nullable, readonly, copy) NSURL *sharedSupportURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+@property (nullable, readonly, copy) NSURL *builtInPlugInsURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-@property (nullable, readonly, copy) NSURL *appStoreReceiptURL NS_AVAILABLE(10_7, 7_0);
+@property (nullable, readonly, copy) NSURL *appStoreReceiptURL API_AVAILABLE(macos(10.7), ios(7.0), watchos(2.0), tvos(9.0));
 
 @property (readonly, copy) NSString *bundlePath;
 @property (nullable, readonly, copy) NSString *resourcePath;
@@ -80,15 +76,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Methods for locating bundle resources.  Instance methods locate resources in the bundle indicated by the receiver; class methods take an argument pointing to a bundle on disk.  In the class methods, bundleURL is a URL pointing to the location of a bundle on disk, and may not be nil; bundlePath is the path equivalent of bundleURL, an absolute path pointing to the location of a bundle on disk.  By contrast, subpath is a relative path to a subdirectory inside the relevant global or localized resource directory, and should be nil if the resource file in question is not in a subdirectory.  Where appropriate, localizationName is the name of a .lproj directory in the bundle, minus the .lproj extension; passing nil for localizationName retrieves only global resources, whereas using a method without this argument retrieves both global and localized resources (using the standard localization search algorithm).  */
 
-+ (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath inBundleWithURL:(NSURL *)bundleURL NS_AVAILABLE(10_6, 4_0);
-+ (nullable NSArray<NSURL *> *)URLsForResourcesWithExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath inBundleWithURL:(NSURL *)bundleURL NS_AVAILABLE(10_6, 4_0);
++ (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath inBundleWithURL:(NSURL *)bundleURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
++ (nullable NSArray<NSURL *> *)URLsForResourcesWithExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath inBundleWithURL:(NSURL *)bundleURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-- (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext NS_AVAILABLE(10_6, 4_0);
-- (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath NS_AVAILABLE(10_6, 4_0);
-- (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath localization:(nullable NSString *)localizationName NS_AVAILABLE(10_6, 4_0);
+- (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (nullable NSURL *)URLForResource:(nullable NSString *)name withExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath localization:(nullable NSString *)localizationName API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-- (nullable NSArray<NSURL *> *)URLsForResourcesWithExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath NS_AVAILABLE(10_6, 4_0);
-- (nullable NSArray<NSURL *> *)URLsForResourcesWithExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath localization:(nullable NSString *)localizationName NS_AVAILABLE(10_6, 4_0);
+- (nullable NSArray<NSURL *> *)URLsForResourcesWithExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (nullable NSArray<NSURL *> *)URLsForResourcesWithExtension:(nullable NSString *)ext subdirectory:(nullable NSString *)subpath localization:(nullable NSString *)localizationName API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 + (nullable NSString *)pathForResource:(nullable NSString *)name ofType:(nullable NSString *)ext inDirectory:(NSString *)bundlePath;
 + (NSArray<NSString *> *)pathsForResourcesOfType:(nullable NSString *)ext inDirectory:(NSString *)bundlePath;
@@ -128,7 +124,7 @@ enum {
     NSBundleExecutableArchitecturePPC64     = 0x01000012
 };
 
-@property (nullable, readonly, copy) NSArray<NSNumber *> *executableArchitectures NS_AVAILABLE(10_5, 2_0);
+@property (nullable, readonly, copy) NSArray<NSNumber *> *executableArchitectures API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -145,7 +141,7 @@ enum {
 
 /* For strings with length variations, such as from a stringsdict file, this method returns the variant at the given width. If there is no variant at the given width, the one for the next smaller width is returned. And if there are none smaller, the smallest available is returned. For strings without variations, this method returns self. The unit that width is expressed in is decided by the application or framework. But it is intended to be some measurement indicative of the context a string would fit best to avoid truncation and wasted space.
 */ 
-- (NSString *)variantFittingPresentationWidth:(NSInteger)width NS_AVAILABLE(10_11, 9_0);
+- (NSString *)variantFittingPresentationWidth:(NSInteger)width API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -234,8 +230,8 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  
    This method will throw an exception if the receiver bundle has no on demand resource tag information.
 */
-- (void)setPreservationPriority:(double)priority forTags:(NSSet<NSString *> *)tags NS_AVAILABLE(NA, 9_0);
-- (double)preservationPriorityForTag:(NSString *)tag NS_AVAILABLE(NA, 9_0);
+- (void)setPreservationPriority:(double)priority forTags:(NSSet<NSString *> *)tags API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+- (double)preservationPriorityForTag:(NSString *)tag API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -246,10 +242,10 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  
  Note that this notification may not be the same as low disk space on the system, as applications can have a smaller quota.
  */
-FOUNDATION_EXPORT NSNotificationName const NSBundleResourceRequestLowDiskSpaceNotification NS_AVAILABLE(NA, 9_0);
+FOUNDATION_EXPORT NSNotificationName const NSBundleResourceRequestLowDiskSpaceNotification API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /* Use this value for the loadingPriority property if the user is doing nothing but waiting on the result of this request. The system will dedicate the maximum amount of resources available to finishing this request as soon as possible.
  */
-FOUNDATION_EXPORT double const NSBundleResourceRequestLoadingPriorityUrgent NS_AVAILABLE(NA, 9_0);
+FOUNDATION_EXPORT double const NSBundleResourceRequestLoadingPriorityUrgent API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 NS_ASSUME_NONNULL_END

@@ -1,5 +1,5 @@
 /*	NSPortCoder.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -8,6 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSPortCoder : NSCoder
 
@@ -26,9 +27,9 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 @interface NSObject (NSDistributedObjects)
 
-@property (readonly) Class classForPortCoder NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+@property (readonly) Class classForPortCoder NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 
-- (nullable id)replacementObjectForPortCoder:(NSPortCoder *)coder NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead");
+- (nullable id)replacementObjectForPortCoder:(NSPortCoder *)coder NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead") API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 
 @end
 

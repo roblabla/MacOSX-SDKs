@@ -1,5 +1,5 @@
 /*	NSDateComponentsFormatter.h
-	Copyright (c) 2014-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2014-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -8,7 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_ENUM_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 typedef NS_ENUM(NSInteger, NSDateComponentsFormatterUnitsStyle) {
     NSDateComponentsFormatterUnitsStylePositional = 0, // "1:10; may fall back to abbreviated units in some cases, e.g. 3d"
     NSDateComponentsFormatterUnitsStyleAbbreviated, // "1h 10m"
@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, NSDateComponentsFormatterUnitsStyle) {
     NSDateComponentsFormatterUnitsStyleBrief API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0)) // "1hr 10min" - Brief is shorter than Short (e.g. in English, it removes the comma)
 };
 
-NS_ENUM_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 typedef NS_OPTIONS(NSUInteger, NSDateComponentsFormatterZeroFormattingBehavior) {
     NSDateComponentsFormatterZeroFormattingBehaviorNone = (0), //drop none, pad none
     NSDateComponentsFormatterZeroFormattingBehaviorDefault = (1 << 0), //Positional units: drop leading zeros, pad other zeros. All others: drop all zeros.
@@ -59,9 +59,11 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (nullable NSString *)stringForObjectValue:(nullable id)obj;
 
+/* Convenience method for formatting an NSDateComponents object. This calculates the count of the unit(s) starting from referenceDate.
+ */
 - (nullable NSString *)stringFromDateComponents:(NSDateComponents *)components;
 
-/* Normally, NSDateComponentsFormatter will calculate as though counting from the current date and time (e.g. in February, 1 month formatted as a number of days will be 28). -stringFromDate:toDate: calculates from the passed-in startDate instead.
+/* Normally, NSDateComponentsFormatter will calculate as though counting from referenceDate (e.g. in February, 1 month formatted as a number of days will be 28). -stringFromDate:toDate: calculates from the passed-in startDate instead.
  
    See 'allowedUnits' for how the default set of allowed units differs from -stringFromDateComponents:.
  
@@ -69,7 +71,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 - (nullable NSString *)stringFromDate:(NSDate *)startDate toDate:(NSDate *)endDate;
 
-/* Convenience method for formatting a number of seconds. See 'allowedUnits' for how the default set of allowed units differs from -stringFromDateComponents:.
+/* Convenience method for formatting a number of seconds. See 'allowedUnits' for how the default set of allowed units differs from -stringFromDateComponents:. This calculates the count of the unit(s) from referenceDate to the passed-in time interval.
  */
 - (nullable NSString *)stringFromTimeInterval:(NSTimeInterval)ti;
 
@@ -106,6 +108,10 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
  */
 @property (nullable, copy) NSCalendar *calendar;
 
+/*  Where units have variable length (number of days in a month, number of hours in a day, etc...), NSDateComponentsFormatter will calculate as though counting from the date specified by the referenceDate in the appropriate calendar. Defaults to [NSDate dateWithTimeIntervalSinceReferenceDate:0] at the time of the -stringForObjectValue: call if not set. Set to nil to get the default behavior.
+ */
+@property (nullable, copy) NSDate *referenceDate API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 /* Choose whether non-integer units should be used to handle display of values that can't be exactly represented with the allowed units. For example, if minutes aren't allowed, then "1h 30m" could be formatted as "1.5h". Default is NO.
  */
 @property BOOL allowsFractionalUnits;
@@ -134,7 +140,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @property BOOL includesTimeRemainingPhrase;
 
 /* 
-   Currently unimplemented, will be removed in a future seed.
+   Not yet supported.
  */
 @property NSFormattingContext formattingContext;
 

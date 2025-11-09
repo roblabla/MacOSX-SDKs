@@ -1,7 +1,7 @@
 //
 //  SCNPhysicsContact.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class SCNPhysicsContact
  @abstract SCNPhysicsContact contains information about a physics contact.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsContact : NSObject
 
 //The two nodes in contact
@@ -25,7 +25,8 @@ API_AVAILABLE(macosx(10.10))
 @property(nonatomic, readonly) SCNVector3 contactPoint;
 @property(nonatomic, readonly) SCNVector3 contactNormal;
 @property(nonatomic, readonly) CGFloat    collisionImpulse; // the collision impulse on nodeA
-@property(nonatomic, readonly) CGFloat    penetrationDistance; 
+@property(nonatomic, readonly) CGFloat    penetrationDistance;
+@property(nonatomic, readonly) CGFloat    sweepTestFraction API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)); // Value between 0 and 1 giving the relative position of the physic shape when performing a convex sweep test.
 
 @end
 

@@ -9,8 +9,8 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGPath *CGMutablePathRef;
-typedef const struct CGPath *CGPathRef;
+typedef struct CF_BRIDGED_TYPE(id) CGPath *CGMutablePathRef;
+typedef const struct CF_BRIDGED_TYPE(id) CGPath *CGPathRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGAffineTransform.h>
@@ -387,6 +387,11 @@ typedef void (*CGPathApplierFunction)(void * __nullable info,
 CG_EXTERN void CGPathApply(CGPathRef cg_nullable path, void * __nullable info,
     CGPathApplierFunction cg_nullable function)
     CG_AVAILABLE_STARTING(__MAC_10_2, __IPHONE_2_0);
+
+typedef void (^CGPathApplyBlock)(const CGPathElement * element);
+
+CG_EXTERN void CGPathApplyWithBlock(CGPathRef path, CGPathApplyBlock CF_NOESCAPE block)
+    CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 CF_ASSUME_NONNULL_END
 

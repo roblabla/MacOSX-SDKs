@@ -1,7 +1,7 @@
 /*
     NSSavePanel.h
     Application Kit
-    Copyright (c) 1994-2016, Apple Inc.
+    Copyright (c) 1994-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 /* Return codes from the open/save panel.
 */
 enum {
-    NSFileHandlingPanelCancelButton	= NSModalResponseCancel,
-    NSFileHandlingPanelOKButton	= NSModalResponseOK,
+    NSFileHandlingPanelCancelButton NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSModalResponseCancel", 10_0, 10_13) = NSModalResponseCancel,
+    NSFileHandlingPanelOKButton	NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSModalResponseOK", 10_0, 10_13) = NSModalResponseOK,
 };
 
 typedef struct __SPFlags {
@@ -73,8 +73,8 @@ typedef struct __SPFlags {
     IBOutlet NSView       *_directoryPopUpContainer;
     IBOutlet NSControl    *_directoryPopUp;
     IBOutlet NSTextField  *_directoryPopUpLabel;
-    IBOutlet NSBox        *_navViewContainer;
-    IBOutlet NSBox        *_accessoryViewContainer;
+    IBOutlet NSView       *_navViewContainer;
+    IBOutlet NSView       *_accessoryViewContainer;
     IBOutlet NSView       *_bottomControlsContainer;
     IBOutlet NSButton     *_hideExtensionButton;
     IBOutlet NSButton     *_newFolderButton;
@@ -130,9 +130,15 @@ typedef struct __SPFlags {
 */
 @property (nullable, strong) NSView *accessoryView;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
+
 /* Gets and sets the delegate.
 */
-@property (nullable, assign) id<NSOpenSavePanelDelegate> delegate;
+@property (nullable, weak) id<NSOpenSavePanelDelegate> delegate;
+
+#pragma clang diagnostic pop
+
 
 /*  NSSavePanel: Returns YES if the panel is expanded. Defaults to NO, and persists in the user defaults.
     NSOpenPanel: Not used.
@@ -204,17 +210,17 @@ typedef struct __SPFlags {
 #pragma mark -
 #pragma mark Displaying/Showing
 
-/* NSSavePanel/NSOpenPanel: Presents the panel as a sheet modal to 'window' and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel, however, the open/save panel sheet may still be on screen. If you require the sheet to be offscreen (for example, to show an alert), first call [savePanel orderOut:nil] to close it. The passed in 'result' will be NSFileHandlingPanelOKButton==1 or NSFileHandlingPanelCancelButton==0.
+/* NSSavePanel/NSOpenPanel: Presents the panel as a sheet modal to 'window' and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel, however, the open/save panel sheet may still be on screen. If you require the sheet to be offscreen (for example, to show an alert), first call [savePanel orderOut:nil] to close it. The passed in 'result' will be NSModalResponseOK==1 or NSModalResponseCancel==0.
 */
-- (void)beginSheetModalForWindow:(NSWindow *)window completionHandler:(void (^)(NSInteger result))handler NS_AVAILABLE_MAC(10_6);
+- (void)beginSheetModalForWindow:(NSWindow *)window completionHandler:(void (^)(NSModalResponse result))handler NS_AVAILABLE_MAC(10_6);
 
-/* NSSavePanel/NSOpenPanel: Presents the panel as a modeless window and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel. The passed in 'result' will be NSFileHandlingPanelOKButton==1 or NSFileHandlingPanelCancelButton==0.
+/* NSSavePanel/NSOpenPanel: Presents the panel as a modeless window and returns immediately. Desired properties of the panel should be properly setup before calling this method. The completion handler block will be called after the user has closed the panel. The passed in 'result' will be NSModalResponseOK==1 or NSModalResponseCancel==0.
 */
-- (void)beginWithCompletionHandler:(void (^)(NSInteger result))handler NS_AVAILABLE_MAC(10_6);
+- (void)beginWithCompletionHandler:(void (^)(NSModalResponse result))handler NS_AVAILABLE_MAC(10_6);
 
-/* NSSavePanel/NSOpenPanel: Presents the panel as an application modal window. It returns only after the user has closed the panel. The return value is NSFileHandlingPanelOKButton==1 or NSFileHandlingPanelCancelButton==0.
+/* NSSavePanel/NSOpenPanel: Presents the panel as an application modal window. It returns only after the user has closed the panel. The return value is NSModalResponseOK==1 or NSModalResponseCancel==0.
 */
-- (NSInteger)runModal;
+- (NSModalResponse)runModal;
 
 @end
 

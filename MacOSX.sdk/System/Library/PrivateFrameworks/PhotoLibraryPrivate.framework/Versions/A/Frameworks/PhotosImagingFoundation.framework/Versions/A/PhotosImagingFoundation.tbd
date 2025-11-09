@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 1DCF0628-4BF9-3546-B441-B5D324F98692' ]
+uuids:           [ 'x86_64: 4FA1AA0F-30F6-3C27-9499-C05FCBC071D4' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PhotoLibraryPrivate.framework/Versions/A/Frameworks/PhotosImagingFoundation.framework/Versions/A/PhotosImagingFoundation
-current-version: 3130.0.240
-objc-constraint: none
+current-version: 3201.9.160
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CGAffineTransformDeterminant, _CGAffineTransformDot, _CGAffineTransformFixedPoint, 
@@ -30,25 +29,33 @@ exports:
                        _IPAClipTimeRange, _IPADestructiveVideoAdjustmentFormat, _IPADestructiveVideoAdjustmentFormatVersion, 
                        _IPAEditSourceIsForMaster, _IPAGeometryDebugNotificationName, 
                        _IPALegacyExternalAdjustmentFormat, _IPALegacyExternalAdjustmentFormatVersion, 
-                       _IPAMapNormalizedTime, _IPAMapNormalizedTimeRange, _IPANaturalTimeFromScaledTime, 
+                       _IPALivePhotoAdjustment_AutoLoop_Flavor, _IPALivePhotoAdjustment_AutoLoop_Flavor_AutoLoop, 
+                       _IPALivePhotoAdjustment_AutoLoop_Flavor_LongExposure, _IPALivePhotoAdjustment_AutoLoop_Flavor_Mirror, 
+                       _IPALivePhotoAdjustment_AutoLoop_Identifier, _IPALivePhotoAdjustment_AutoLoop_Recipe, 
+                       _IPALivePhotoAdjustment_HighResolutionFusion_Alignment, _IPALivePhotoAdjustment_HighResolutionFusion_Identifier, 
+                       _IPALivePhotoAdjustment_KeyFrame_Identifier, _IPALivePhotoAdjustment_KeyFrame_Time, 
+                       _IPALivePhotoAdjustment_Mute_Identifier, _IPAMapNormalizedTime, 
+                       _IPAMapNormalizedTimeRange, _IPANaturalTimeFromScaledTime, 
                        _IPAOrientationConcat, _IPAOrientationFromClockwiseRotation, 
                        _IPAOrientationFromClockwiseRotationAndFlip, _IPAOrientationFromTIFFOrientation, 
                        _IPAOrientationHasFlip, _IPAOrientationInverse, _IPAOrientationIsValid, 
                        _IPAOrientationMakeTransformWithSize, _IPAOrientationName, 
-                       _IPAOrientationToClockwiseRotation, _IPAOrientationTransformImagePoint, 
-                       _IPAOrientationTransformImageRect, _IPAOrientationTransformImageSize, 
-                       _IPAOrientationTransformIntegralImageSize, _IPAOrientationTransformVector, 
-                       _IPAPhotoAdjustmentAutoPendingKey, _IPAPhotoAdjustmentAutoSettingsKey, 
-                       _IPAPhotoAdjustmentCurrentAutoIdentifierKey, _IPAPhotoAdjustmentEnabledKey, 
-                       _IPAPhotoAdjustmentFormat, _IPAPhotoAdjustmentFormatVersionCurrent_OSX, 
-                       _IPAPhotoAdjustmentFormatVersionCurrent_iOS, _IPAPhotoAdjustmentFormatVersion_1_0, 
-                       _IPAPhotoAdjustmentFormatVersion_1_1, _IPAPhotoAdjustmentFormatVersion_1_2, 
+                       _IPAOrientationToCGImagePropertyOrientation, _IPAOrientationToClockwiseRotation, 
+                       _IPAOrientationTransformImagePoint, _IPAOrientationTransformImageRect, 
+                       _IPAOrientationTransformImageSize, _IPAOrientationTransformIntegralImageSize, 
+                       _IPAOrientationTransformVector, _IPAPhotoAdjustmentAutoPendingKey, 
+                       _IPAPhotoAdjustmentAutoSettingsKey, _IPAPhotoAdjustmentCurrentAutoIdentifierKey, 
+                       _IPAPhotoAdjustmentEnabledKey, _IPAPhotoAdjustmentFormat, 
+                       _IPAPhotoAdjustmentFormatVersionCurrent_OSX, _IPAPhotoAdjustmentFormatVersionCurrent_iOS, 
+                       _IPAPhotoAdjustmentFormatVersion_1_0, _IPAPhotoAdjustmentFormatVersion_1_1, 
+                       _IPAPhotoAdjustmentFormatVersion_1_2, _IPAPhotoAdjustmentFormatVersion_1_3, 
                        _IPAPhotoAdjustmentIdentifier_RawDecode, _IPAPhotoAdjustmentMaskUUIDKey, 
                        _IPAPhotoAdjustment_Crop_Identifier, _IPAPhotoAdjustment_Crop_Key_ConstraintHeight, 
                        _IPAPhotoAdjustment_Crop_Key_ConstraintWidth, _IPAPhotoAdjustment_Crop_Key_Height, 
                        _IPAPhotoAdjustment_Crop_Key_StraightenAngleRadiansCW, _IPAPhotoAdjustment_Crop_Key_Width, 
                        _IPAPhotoAdjustment_Crop_Key_XOrigin, _IPAPhotoAdjustment_Crop_Key_YOrigin, 
-                       _IPAPhotoAdjustment_Crop_Version_Current, _IPAPhotoAdjustment_Effect_Identifier, 
+                       _IPAPhotoAdjustment_Crop_Version_Current, _IPAPhotoAdjustment_DepthEffect_DepthInfo, 
+                       _IPAPhotoAdjustment_DepthEffect_Identifier, _IPAPhotoAdjustment_Effect_Identifier, 
                        _IPAPhotoAdjustment_Effect_Key_EffectName, _IPAPhotoAdjustment_Effect_Key_EffectVersion, 
                        _IPAPhotoAdjustment_Effect_Version_Current, _IPAPhotoAdjustment_Key_Statistics, 
                        _IPAPhotoAdjustment_RedEyeBB_Identifier, _IPAPhotoAdjustment_RedEyeBB_Key_AutoRedEyeCorrections, 
@@ -85,7 +92,8 @@ exports:
                        _IPAPhotoAdjustment_WhiteBalance_Key_Tint, _IPAPhotoAdjustment_WhiteBalance_Version_Current, 
                        _IPAPhotoAdjustmentsMetadataMasterSizeHeightKey, _IPAPhotoAdjustmentsMetadataMasterSizeWidthKey, 
                        _IPAPhotoAdjustmentsMetadataOrientationKey, _IPAPhotoAdjustmentsMetadataOrientationKey_Legacy, 
-                       _IPAPhotoAdjustmentsMetadataPipelineVersionKey, _IPAPhotosImagingErrorDomain, 
+                       _IPAPhotoAdjustmentsMetadataPipelineVersionKey, _IPAPhotosCodecKey, 
+                       _IPAPhotosFileTypeKey, _IPAPhotosImagingErrorDomain, _IPAPhotosImagingUnusableInputErrorDomain, 
                        _IPAPhotosNonLocalizedErrorMessage, _IPAScaleImageSizePolicy_ScaleKey, 
                        _IPAScaledTimeFromNaturalTime, _IPAShortestEdgeImageSizePolicy_shortestEdgeKey, 
                        _IPASlomoVideoAdjustmentFormat, _IPASlomoVideoAdjustmentFormatVersionCurrent, 

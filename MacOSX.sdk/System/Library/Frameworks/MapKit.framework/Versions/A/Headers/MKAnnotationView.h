@@ -25,6 +25,16 @@ typedef NS_ENUM(NSUInteger, MKAnnotationViewDragState) {
     MKAnnotationViewDragStateEnding         // View was dragged, new coordinate is set and view should return to resting position (e.g. pin drop)
 } NS_ENUM_AVAILABLE(10_9, 4_0) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
+typedef float MKFeatureDisplayPriority NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED;
+static const MKFeatureDisplayPriority MKFeatureDisplayPriorityRequired NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED = 1000;
+static const MKFeatureDisplayPriority MKFeatureDisplayPriorityDefaultHigh NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED = 750;
+static const MKFeatureDisplayPriority MKFeatureDisplayPriorityDefaultLow NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED = 250;
+
+typedef NS_ENUM(NSInteger, MKAnnotationViewCollisionMode) {
+    MKAnnotationViewCollisionModeRectangle,
+    MKAnnotationViewCollisionModeCircle
+} NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED;
+
 @protocol MKAnnotation;
 
 #if TARGET_OS_IPHONE
@@ -42,6 +52,8 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 // Classes that override must call super.
 - (void)prepareForReuse;
+
+- (void)prepareForDisplay NS_REQUIRES_SUPER NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
 
 @property (nonatomic, strong, nullable) id <MKAnnotation> annotation;
 
@@ -111,6 +123,18 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 // Developers targeting iOS 4.2 and after must use setDragState:animated: instead of setDragState:.
 - (void)setDragState:(MKAnnotationViewDragState)newDragState animated:(BOOL)animated NS_AVAILABLE(10_9, 4_2) __TVOS_PROHIBITED;
+
+// Annotation views with equal non-nil identifiers can cluster together.
+@property (nonatomic, copy, nullable) NSString *clusteringIdentifier  NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+
+// If non-nil this is the annotation view this view is clustered into.
+@property (nonatomic, weak, readonly, nullable) MKAnnotationView *clusterAnnotationView NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+
+// Default is MKFeatureDisplayPriorityRequired, other values opts into collision occlusion by priority.
+@property (nonatomic) MKFeatureDisplayPriority displayPriority NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+
+// Default collision mode is rectangle.
+@property (nonatomic) MKAnnotationViewCollisionMode collisionMode NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
 
 @end
 

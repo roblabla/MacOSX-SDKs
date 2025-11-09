@@ -1,5 +1,5 @@
 /*	NSXMLParser.h
-        Copyright (c) 2003-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2003-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_ENUM_AVAILABLE(10_9, 8_0)
+API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0))
 typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
     NSXMLParserResolveExternalEntitiesNever = 0, // default
     NSXMLParserResolveExternalEntitiesNoNetwork,
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
 }
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url;  // initializes the parser with the specified URL.
 - (instancetype)initWithData:(NSData *)data NS_DESIGNATED_INITIALIZER; // create the parser from data
-- (instancetype)initWithStream:(NSInputStream *)stream NS_AVAILABLE(10_7, 5_0); //create a parser that incrementally pulls data from the specified stream and parses it.
+- (instancetype)initWithStream:(NSInputStream *)stream API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)); //create a parser that incrementally pulls data from the specified stream and parses it.
 
 // delegate management. The delegate is not retained.
 @property (nullable, assign) id <NSXMLParserDelegate> delegate;
@@ -37,9 +37,9 @@ typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
 @property BOOL shouldReportNamespacePrefixes;
     
 // The next two properties are really only available in OS X 10.9.5 or later
-@property NSXMLParserExternalEntityResolvingPolicy externalEntityResolvingPolicy NS_AVAILABLE(10_9, 8_0); //defaults to NSXMLNodeLoadExternalEntitiesNever
+@property NSXMLParserExternalEntityResolvingPolicy externalEntityResolvingPolicy API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0)); //defaults to NSXMLNodeLoadExternalEntitiesNever
 
-@property (nullable, copy) NSSet<NSURL *> *allowedExternalEntityURLs NS_AVAILABLE(10_9, 8_0);
+@property (nullable, copy) NSSet<NSURL *> *allowedExternalEntityURLs API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0));
 
 - (BOOL)parse;	// called to start the event-driven parse. Returns YES in the event of a successful parse, and NO in case of error.
 - (void)abortParsing;	// called by the delegate to stop the parse. The delegate will get an error message sent to it.
@@ -144,7 +144,7 @@ typedef NS_ENUM(NSUInteger, NSXMLParserExternalEntityResolvingPolicy) {
     // If validation is on, this will report a fatal validation error to the delegate. The parser will stop parsing.
 @end
 
-FOUNDATION_EXPORT NSErrorDomain const NSXMLParserErrorDomain	NS_AVAILABLE(10_3, 2_0);  // for use with NSError.
+FOUNDATION_EXPORT NSErrorDomain const NSXMLParserErrorDomain	API_AVAILABLE(macos(10.3), ios(2.0), watchos(2.0), tvos(9.0));  // for use with NSError.
 
 // Error reporting
 typedef NS_ENUM(NSInteger, NSXMLParserError) {

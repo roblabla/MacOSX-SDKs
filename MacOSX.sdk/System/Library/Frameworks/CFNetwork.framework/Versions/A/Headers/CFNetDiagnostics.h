@@ -3,7 +3,7 @@
  
 	 Contains:   CFNetDiagnostics interface
   
-	 Copyright:  Copyright (c) 2004-2013 Apple Inc. All rights reserved.
+	 Copyright:  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
  
 	 Bugs?:	  For bug reports, consult the following page on
 				 the World Wide Web:
@@ -69,7 +69,8 @@ typedef CF_ENUM(int, CFNetDiagnosticStatusValues) {
    * The connection does not appear to be working
    */
   kCFNetDiagnosticConnectionDown = -66557L
-};
+
+} CF_DEPRECATED(10_4, 10_13, 2_0, 11_0);
 
 
 /*
@@ -78,7 +79,7 @@ typedef CF_ENUM(int, CFNetDiagnosticStatusValues) {
  *  Discussion:
  *	Returned by the various status and diagnostic calls
  */
-typedef CFIndex	CFNetDiagnosticStatus;
+typedef CFIndex	CFNetDiagnosticStatus CF_DEPRECATED(10_4, 10_13, 2_0, 11_0);
 
 /*
  *  CFNetDiagnosticCreateWithStreams()
@@ -105,7 +106,7 @@ typedef CFIndex	CFNetDiagnosticStatus;
  *  
  */
 CFN_EXPORT CFNetDiagnosticRef 
-CFNetDiagnosticCreateWithStreams(CFAllocatorRef __nullable alloc, CFReadStreamRef __nullable readStream, CFWriteStreamRef __nullable writeStream) CF_AVAILABLE(10_4, 2_0);
+CFNetDiagnosticCreateWithStreams(CFAllocatorRef __nullable alloc, CFReadStreamRef __nullable readStream, CFWriteStreamRef __nullable writeStream) CF_DEPRECATED(10_4, 10_13, 2_0, 11_0);
 
 
 /*
@@ -128,7 +129,7 @@ CFNetDiagnosticCreateWithStreams(CFAllocatorRef __nullable alloc, CFReadStreamRe
  *  
  */
 CFN_EXPORT CFNetDiagnosticRef 
-CFNetDiagnosticCreateWithURL(CFAllocatorRef alloc, CFURLRef url) CF_AVAILABLE(10_4, 2_0);
+CFNetDiagnosticCreateWithURL(CFAllocatorRef alloc, CFURLRef url) CF_DEPRECATED(10_4, 10_13, 2_0, 11_0);
 
 
 
@@ -153,7 +154,7 @@ CFNetDiagnosticCreateWithURL(CFAllocatorRef alloc, CFURLRef url) CF_AVAILABLE(10
  *  
  */
 CFN_EXPORT void 
-CFNetDiagnosticSetName(CFNetDiagnosticRef details, CFStringRef name) CF_AVAILABLE(10_4, 2_0);
+CFNetDiagnosticSetName(CFNetDiagnosticRef details, CFStringRef name) CF_DEPRECATED(10_4, 10_13, 2_0, 11_0);
 
 
 
@@ -177,7 +178,7 @@ CFNetDiagnosticSetName(CFNetDiagnosticRef details, CFStringRef name) CF_AVAILABL
  *  
  */
 CFN_EXPORT CFNetDiagnosticStatus 
-CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) CF_AVAILABLE(10_4, 2_0);
+CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) CF_DEPRECATED(10_4, 10_13, 2_0, 11_0);
 
 
 
@@ -207,7 +208,7 @@ CFNetDiagnosticDiagnoseProblemInteractively(CFNetDiagnosticRef details) CF_AVAIL
  *  
  */
 CFN_EXPORT CFNetDiagnosticStatus 
-CFNetDiagnosticCopyNetworkStatusPassively(CFNetDiagnosticRef details, CFStringRef __nullable * __nullable description) CF_AVAILABLE(10_4, 2_0);
+CFNetDiagnosticCopyNetworkStatusPassively(CFNetDiagnosticRef details, CFStringRef __nullable * __nullable description) CF_DEPRECATED(10_4, 10_13, 2_0, 11_0);
 
 
 

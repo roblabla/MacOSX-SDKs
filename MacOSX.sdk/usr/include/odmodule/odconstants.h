@@ -21,6 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#import <CoreFoundation/CFBase.h> // CF_EXPORT
+
 #if !defined(__ODCONSTANTS_H)
 #define __ODCONSTANTS_H
 
@@ -92,6 +94,7 @@ const CFStringRef kODModuleConfigOptionPacketSigning __OSX_AVAILABLE_STARTING(__
  */
 CF_EXPORT
 const CFStringRef kODModuleConfigOptionPacketEncryption __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
 /*!
  @const      kODModuleConfigOptionManInTheMiddle
  @abstract   enable or disable man-in-middle countermeasures
@@ -99,6 +102,7 @@ const CFStringRef kODModuleConfigOptionPacketEncryption __OSX_AVAILABLE_STARTING
  */
 CF_EXPORT
 const CFStringRef kODModuleConfigOptionManInTheMiddle __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_NA);
+
 /*!
 	@enum		ODNodeType
 	@abstract   Types of nodes that can be opened
@@ -2703,6 +2707,18 @@ const ODAuthenticationType kODAuthenticationTypeChangePasswd;
 */
 CF_EXPORT
 const ODAuthenticationType kODAuthenticationTypeClearText;
+
+/*!
+    @const		kODAuthenticationTypeClearTextReadOnly
+	@abstract   Clear text authentication method.
+	@discussion Clear text authentication method.
+
+                Authentication array has following items in order:
+                    user name in UTF8 encoding,
+                    password in UTF8 encoding
+ */
+CF_EXPORT
+const ODAuthenticationType kODAuthenticationTypeClearTextReadOnly;
 
 /*!
     @const		kODAuthenticationTypeCrypt

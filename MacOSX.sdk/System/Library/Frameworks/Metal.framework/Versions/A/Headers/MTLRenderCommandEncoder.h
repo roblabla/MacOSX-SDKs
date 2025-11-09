@@ -7,11 +7,13 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
+#import <Metal/MTLTypes.h>
 #import <Metal/MTLCommandEncoder.h>
 #import <Metal/MTLCommandBuffer.h>
 #import <Metal/MTLRenderPass.h>
 #import <Metal/MTLFence.h>
 #import <Metal/MTLStageInputOutputDescriptor.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
@@ -81,6 +83,7 @@ typedef struct {
     uint32_t baseInstance;
 } MTLDrawIndexedPrimitivesIndirectArguments;
 
+
 typedef struct {
     uint32_t patchCount;
     uint32_t instanceCount;
@@ -109,7 +112,7 @@ typedef NS_OPTIONS(NSUInteger, MTLRenderStages)
 {
     MTLRenderStageVertex   = (1UL << 0),
     MTLRenderStageFragment = (1UL << 1),
-} NS_ENUM_AVAILABLE_IOS(10_0);
+} NS_ENUM_AVAILABLE(10_13, 10_0);
 
 /*!
  @protocol MTLRenderCommandEncoder
@@ -148,7 +151,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setVertexBuffers:offsets:withRange:
  @brief Set an array of global buffers for all vertex shaders with the given bind point range.
  */
-- (void)setVertexBuffers:(const id <MTLBuffer> __nullable [])buffers offsets:(const NSUInteger [])offsets withRange:(NSRange)range;
+- (void)setVertexBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range;
 
 /*!
  @method setVertexTexture:atIndex:
@@ -160,7 +163,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setVertexTextures:withRange:
  @brief Set an array of global textures for all vertex shaders with the given bind point range.
  */
-- (void)setVertexTextures:(const id <MTLTexture> __nullable [__nullable])textures withRange:(NSRange)range;
+- (void)setVertexTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range;
 
 /*!
  @method setVertexSamplerState:atIndex:
@@ -172,7 +175,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setVertexSamplerStates:withRange:
  @brief Set an array of global samplers for all vertex shaders with the given bind point range.
  */
-- (void)setVertexSamplerStates:(const id <MTLSamplerState> __nullable [__nullable])samplers withRange:(NSRange)range;
+- (void)setVertexSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range;
 
 /*!
  @method setVertexSamplerState:lodMinClamp:lodMaxClamp:atIndex:
@@ -184,7 +187,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setVertexSamplerStates:lodMinClamps:lodMaxClamps:withRange:
  @brief Set an array of global samplers for all vertex shaders with the given bind point range.
  */
-- (void)setVertexSamplerStates:(const id <MTLSamplerState> __nullable [__nullable])samplers lodMinClamps:(const float [__nullable])lodMinClamps lodMaxClamps:(const float [__nullable])lodMaxClamps withRange:(NSRange)range;
+- (void)setVertexSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range;
 
 /*!
  @method setViewport:
@@ -193,10 +196,17 @@ NS_AVAILABLE(10_11, 8_0)
 - (void)setViewport:(MTLViewport)viewport;
 
 /*!
+ @method setViewports:
+ @brief Specifies an array of viewports, which are used to transform vertices from normalized device coordinates to window coordinates based on [[ viewport_array_index ]] value specified in the vertex shader.
+ */
+- (void)setViewports:(const MTLViewport [__nonnull])viewports count:(NSUInteger)count NS_AVAILABLE(10_13, NA);
+
+/*!
  @method setFrontFacingWinding:
  @brief The winding order of front-facing primitives.
  */
 - (void)setFrontFacingWinding:(MTLWinding)frontFacingWinding;
+
 
 /*!
  @method setCullMode:
@@ -208,7 +218,7 @@ NS_AVAILABLE(10_11, 8_0)
 @method setDepthClipMode:
 @brief Controls what is done with fragments outside of the near or far planes.
 */
-- (void)setDepthClipMode:(MTLDepthClipMode)depthClipMode NS_AVAILABLE(10_11, NA);
+- (void)setDepthClipMode:(MTLDepthClipMode)depthClipMode NS_AVAILABLE(10_11, 11_0);
 
 /*!
  @method setDepthBias:slopeScale:clamp:
@@ -221,6 +231,12 @@ NS_AVAILABLE(10_11, 8_0)
  @brief Specifies a rectangle for a fragment scissor test.  All fragments outside of this rectangle are discarded.
  */
 - (void)setScissorRect:(MTLScissorRect)rect;
+
+/*!
+ @method setViewports:
+ @brief Specifies an array of rectangles for a fragment scissor test. The specific rectangle used is based on the [[ viewport_array_index ]] value output by the vertex shader. Fragments that lie outside the scissor rectangle are discarded.
+ */
+- (void)setScissorRects:(const MTLScissorRect [__nonnull])scissorRects count:(NSUInteger)count NS_AVAILABLE(10_13, NA);
 
 /*!
  @method setTriangleFillMode:
@@ -252,7 +268,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setFragmentBuffers:offsets:withRange:
  @brief Set an array of global buffers for all fragment shaders with the given bind point range.
  */
-- (void)setFragmentBuffers:(const id <MTLBuffer> __nullable [])buffers offsets:(const NSUInteger [])offset withRange:(NSRange)range;
+- (void)setFragmentBuffers:(const id <MTLBuffer> __nullable [__nonnull])buffers offsets:(const NSUInteger [__nonnull])offsets withRange:(NSRange)range;
 
 /*!
  @method setFragmentTexture:atIndex:
@@ -264,7 +280,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setFragmentTextures:withRange:
  @brief Set an array of global textures for all fragment shaders with the given bind point range.
  */
-- (void)setFragmentTextures:(const id <MTLTexture> __nullable [__nullable])textures withRange:(NSRange)range;
+- (void)setFragmentTextures:(const id <MTLTexture> __nullable [__nonnull])textures withRange:(NSRange)range;
 
 /*!
  @method setFragmentSamplerState:atIndex:
@@ -276,7 +292,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method setFragmentSamplerStates:withRange:
  @brief Set an array of global samplers for all fragment shaders with the given bind point range.
  */
-- (void)setFragmentSamplerStates:(const id <MTLSamplerState> __nullable [__nullable])samplers withRange:(NSRange)range;
+- (void)setFragmentSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers withRange:(NSRange)range;
 
 /*!
  @method setFragmentSamplerState:lodMinClamp:lodMaxClamp:atIndex:
@@ -288,7 +304,8 @@ NS_AVAILABLE(10_11, 8_0)
  @method setFragmentSamplerStates:lodMinClamps:lodMaxClamps:withRange:
  @brief Set an array of global samplers for all fragment shaders with the given bind point range.
  */
-- (void)setFragmentSamplerStates:(const id <MTLSamplerState> __nullable [__nullable])samplers lodMinClamps:(const float [__nullable])lodMinClamps lodMaxClamps:(const float [__nullable])lodMaxClamps withRange:(NSRange)range;
+- (void)setFragmentSamplerStates:(const id <MTLSamplerState> __nullable [__nonnull])samplers lodMinClamps:(const float [__nonnull])lodMinClamps lodMaxClamps:(const float [__nonnull])lodMaxClamps withRange:(NSRange)range;
+
 
 /* Constant Blend Color */
 /*!
@@ -345,6 +362,29 @@ NS_AVAILABLE(10_11, 8_0)
  setStencilStoreAction: must be used to finalize the store action before endEncoding is called.
 */
 - (void)setStencilStoreAction:(MTLStoreAction)storeAction NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @method setColorStoreActionOptions:atIndex:
+ @brief If the the store action for a given color attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setColorStoreActionOptions:atIndex: may be used to finalize the store action options before endEncoding is called.
+ @param storeActionOptions The desired store action options for the given color attachment.
+ @param colorAttachmentIndex The index of the color attachment
+ */
+- (void)setColorStoreActionOptions:(MTLStoreActionOptions)storeActionOptions atIndex:(NSUInteger)colorAttachmentIndex NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @method setDepthStoreActionOptions:
+ @brief If the the store action for the depth attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setDepthStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
+ */
+- (void)setDepthStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @method setStencilStoreActionOptions:
+ @brief If the the store action for the stencil attachment was set to MTLStoreActionUnknown when the render command encoder was created,
+ setStencilStoreActionOptions: may be used to finalize the store action options before endEncoding is called.
+ */
+- (void)setStencilStoreActionOptions:(MTLStoreActionOptions)storeActionOptions NS_AVAILABLE(10_13, 11_0);
 
 /* Drawing */
 
@@ -448,7 +488,7 @@ NS_AVAILABLE(10_11, 8_0)
  @discussion Unlike <st>updateFence:</st>, this method will update the event when the given stage(s) complete, allowing for commands to overlap in execution.
  On iOS, render command encoder fence updates are always delayed until the end of the encoder.
  */
-- (void)updateFence:(id <MTLFence>)fence afterStages:(MTLRenderStages)stages NS_AVAILABLE_IOS(10_0);
+- (void)updateFence:(id <MTLFence>)fence afterStages:(MTLRenderStages)stages NS_AVAILABLE(10_13, 10_0);
 
 /*!
  @method waitForFence:beforeStages:
@@ -456,7 +496,7 @@ NS_AVAILABLE(10_11, 8_0)
  @discussion Unlike <st>waitForFence:</st>, this method will only block commands assoicated with the given stage(s), allowing for commands to overlap in execution.
  On iOS, render command encoder fence waits always occur the beginning of the encoder.
  */
-- (void)waitForFence:(id <MTLFence>)fence beforeStages:(MTLRenderStages)stages NS_AVAILABLE_IOS(10_0);
+- (void)waitForFence:(id <MTLFence>)fence beforeStages:(MTLRenderStages)stages NS_AVAILABLE(10_13, 10_0);
 
 -(void)setTessellationFactorBuffer:(nullable id <MTLBuffer>)buffer offset:(NSUInteger)offset instanceStride:(NSUInteger)instanceStride NS_AVAILABLE(10_12, 10_0);
 
@@ -469,6 +509,42 @@ NS_AVAILABLE(10_11, 8_0)
 -(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchStart:(NSUInteger)patchStart patchCount:(NSUInteger)patchCount patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset instanceCount:(NSUInteger)instanceCount baseInstance:(NSUInteger)baseInstance NS_AVAILABLE(10_12, 10_0);
 
 -(void)drawIndexedPatches:(NSUInteger)numberOfPatchControlPoints patchIndexBuffer:(nullable id <MTLBuffer>)patchIndexBuffer patchIndexBufferOffset:(NSUInteger)patchIndexBufferOffset controlPointIndexBuffer:(id <MTLBuffer>)controlPointIndexBuffer controlPointIndexBufferOffset:(NSUInteger)controlPointIndexBufferOffset indirectBuffer:(id <MTLBuffer>)indirectBuffer indirectBufferOffset:(NSUInteger)indirectBufferOffset NS_AVAILABLE(10_12, NA);
+
+
+/*!
+ * @method useResource:usage:
+ * @abstract Declare that a resource may be accessed by the render pass through an argument buffer
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resource through an argument buffer. However, this method may cause color attachments to become decompressed. Therefore, this method should be called until as late as possible within a render command encoder. Declaring a minimal usage (i.e. read-only) may prevent color attachments from becoming decompressed on some devices.
+ 
+     Note that calling useResource does not retain the resource. It is the responsiblity of the user to retain the resource until
+     the command buffer has been executed.
+ */
+- (void)useResource:(id <MTLResource>)resource usage:(MTLResourceUsage)usage NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @method useResources:count:usage:
+ * @abstract Declare that an array of resources may be accessed through an argument buffer by the render pass
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources through an argument buffer. However, this method may cause color attachments to become decompressed. Therefore, this method should be called until as late as possible within a render command encoder. Declaring a minimal usage (i.e. read-only) may prevent color attachments from becoming decompressed on some devices.
+ 
+   Note that calling useResources does not retain the resources. It is the responsiblity of the user to retain the resources until
+   the command buffer has been executed.
+*/
+- (void)useResources:(const id <MTLResource> __nonnull[__nonnull])resources count:(NSUInteger)count usage:(MTLResourceUsage)usage NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @method useHeap:
+ * @abstract Declare that the resources allocated from a heap may be accessed by the render pass through an argument buffer
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heap through an argument buffer. This method may cause all of the color attachments allocated from the heap to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ */
+- (void)useHeap:(id <MTLHeap>)heap NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @method useHeaps:count:
+ * @abstract Declare that the resources allocated from an array of heaps may be accessed by the render pass through an argument buffer
+ * @discussion This method does not protect against data hazards; these hazards must be addressed using an MTLFence. This method must be called before encoding any draw commands which may access the resources allocated from the heaps through an argument buffer. This method may cause all of the color attachments allocated from the heaps to become decompressed. Therefore, it is recommended that the useResource:usage: or useResources:count:usage: methods be used for color attachments instead, with a minimal (i.e. read-only) usage.
+ */
+- (void)useHeaps:(const id <MTLHeap> __nonnull[__nonnull])heaps count:(NSUInteger)count NS_AVAILABLE(10_13, 11_0);
+
 
 @end
 NS_ASSUME_NONNULL_END

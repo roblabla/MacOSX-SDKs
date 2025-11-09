@@ -2,6 +2,7 @@
 	SFChooseIdentityPanel.h
 	SecurityInterface
 	Copyright (c) 2002-2004 Apple Computer, Inc.
+	Copyright (c) 2002-2017 Apple, Inc.
 	All rights reserved.
 */
 
@@ -14,7 +15,7 @@
 @class SFCertificateView;
 
 /*!
-	@class SFChooseIdentityPanel 
+	@class SFChooseIdentityPanel
     @abstract SFChooseIdentityPanel is a panel and sheet interface that allows a user to select an identity from a list.
 */
 
@@ -28,16 +29,16 @@
 	IBOutlet NSTextField *_panelMessage;
 	IBOutlet NSPopUpButton *_identityPopup;
 	IBOutlet SFCertificateView *_certificateView;
-	IBOutlet NSButton *_cancelButton;	
-	IBOutlet NSButton *_okButton;	
-    IBOutlet NSLayoutConstraint *_aboveContentHeightConstraint;
+	IBOutlet NSButton *_cancelButton;
+	IBOutlet NSButton *_okButton;
+	IBOutlet NSLayoutConstraint *_aboveContentHeightConstraint;
 	int _indexOfChosenIdentity;
 	SecCertificateRef _currCertRefDisplayed;
 	NSArray *_identities;
-	NSWindow *_parentWindowForSheet;	
+	NSWindow *_parentWindowForSheet;
 	IBOutlet NSWindow *_panel;
 	SEL _clientDidEndSelector;
-	id _clientDelegate;			
+	id _clientDelegate;
 	void *_clientContextInfo;
 	id _reserved_SFChooseIdentityPanel;
 #endif
@@ -116,9 +117,9 @@
     @method setShowsHelp:
 	@abstract Displays a help button in the panel.
     @param showsHelp Set to YES if the help button should be displayed, NO if it should be hidden.
-    @discussion -setShowsHelp:YES adds a help button to the panel. When the help button is pressed, the delegate 
-is first consulted.  If the delegate does not implement -chooseIdentityPanelShowHelp: or returns NO, then 
--[NSHelpManager openHelpAnchor:inBook:] is called with a nil book and the anchor specified by -setHelpAnchor: 
+    @discussion -setShowsHelp:YES adds a help button to the panel. When the help button is pressed, the delegate
+is first consulted.  If the delegate does not implement -chooseIdentityPanelShowHelp: or returns NO, then
+-[NSHelpManager openHelpAnchor:inBook:] is called with a nil book and the anchor specified by -setHelpAnchor:
 (if any). An exception will be raised if the delegate returns NO and there is no help anchor set.
 */
 - (void)setShowsHelp:(BOOL)showsHelp;

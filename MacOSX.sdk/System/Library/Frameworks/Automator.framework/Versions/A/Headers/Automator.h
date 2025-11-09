@@ -13,3 +13,4 @@
 #import <Automator/AMWorkflowController.h>
 #import <Automator/AMWorkflowView.h>
 #import <Automator/AutomatorErrors.h>
+#import <Automator/AMWorkspace.h>

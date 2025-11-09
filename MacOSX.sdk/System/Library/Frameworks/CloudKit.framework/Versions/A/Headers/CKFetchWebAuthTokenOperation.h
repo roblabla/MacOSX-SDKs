@@ -8,7 +8,7 @@
 #import <CloudKit/CKDatabaseOperation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_11, 9_2)
+API_AVAILABLE(macos(10.11), ios(9.2), tvos(9.1), watchos(3.0))
 @interface CKFetchWebAuthTokenOperation : CKDatabaseOperation
 
 /* This operation will fetch a web auth token given an API token obtained

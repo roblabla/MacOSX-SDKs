@@ -1,9 +1,9 @@
 /*
- NSIncrementalStore.h
- Core Data
- Copyright (c) 2004-2016, Apple Inc.
- All rights reserved.
- */
+    NSIncrementalStore.h
+    Core Data
+    Copyright (c) 2004-2017, Apple Inc.
+    All rights reserved.
+*/
 
 #import <Foundation/NSArray.h>
 #import <CoreData/NSPersistentStore.h>

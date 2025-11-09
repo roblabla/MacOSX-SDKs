@@ -1,8 +1,8 @@
-.TH "MPSImageConversion" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSImageConversion" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSImageConversion \- 
+MPSImageConversion
 .SH SYNOPSIS
 .br
 .PP
@@ -21,16 +21,16 @@ Inherits \fBMPSUnaryImageKernel\fP\&.
 
 .in +1c
 .ti -1c
-.RI "MPSAlphaType \fBsourceAlpha\fP"
+.RI "\fBMPSAlphaType\fP \fBsourceAlpha\fP"
 .br
 .ti -1c
-.RI "MPSAlphaType \fBdestinationAlpha\fP"
+.RI "\fBMPSAlphaType\fP \fBdestinationAlpha\fP"
 .br
 .in -1c
 .SS "Additional Inherited Members"
 .SH "Detailed Description"
 .PP 
-MPSConversions\&.h  MetalPerformanceShaders\&.framework
+MPSImageConversions\&.h  MetalPerformanceShaders\&.framework
 .PP
 \fBCopyright:\fP
 .RS 4
@@ -40,7 +40,7 @@ Copyright (c) 2015 Apple Inc\&. All rights reserved\&.  MetalPerformanceShaders 
 The \fBMPSImageConversion\fP filter performs a conversion from source to destination 
 .SH "Method Documentation"
 .PP 
-.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(MPSAlphaType) srcAlpha(MPSAlphaType) destAlpha(nullable CGFloat *) backgroundColor(nullable CGColorConversionInfoRef) conversionInfo"
+.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(\fBMPSAlphaType\fP) srcAlpha(\fBMPSAlphaType\fP) destAlpha(nullable CGFloat *) backgroundColor(nullable CGColorConversionInfoRef) conversionInfo"
 Create a converter that can convert texture colorspace, alpha and texture format  Create a converter that can convert texture colorspace, alpha and MTLPixelFormat\&. Optimized cases exist for NULL color space converter and no alpha conversion\&. 
 .PP
 \fBParameters:\fP

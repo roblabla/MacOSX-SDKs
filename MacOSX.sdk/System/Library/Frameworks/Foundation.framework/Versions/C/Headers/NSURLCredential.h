@@ -1,6 +1,6 @@
 /*	
     NSURLCredential.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -28,7 +28,7 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     NSURLCredentialPersistenceNone,
     NSURLCredentialPersistenceForSession,
     NSURLCredentialPersistencePermanent,
-    NSURLCredentialPersistenceSynchronizable NS_ENUM_AVAILABLE(10_8, 6_0)
+    NSURLCredentialPersistenceSynchronizable API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0))
 };
 
 @class NSURLCredentialInternal;
@@ -45,7 +45,6 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 }
 
 /*!
-    @method persistence
     @abstract Determine whether this credential is or should be stored persistently
     @result A value indicating whether this credential is stored permanently, per session or not at all.
  */
@@ -54,7 +53,6 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 @end
 
 /*!
-    @class NSURLCredential(NSInternetPassword)
     @discussion This category defines the methods available to an NSURLCredential created to represent an internet password credential.  These are most commonly used for resources that require a username and password combination.
  */
 @interface NSURLCredential(NSInternetPassword)
@@ -80,14 +78,12 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 + (NSURLCredential *)credentialWithUser:(NSString *)user password:(NSString *)password persistence:(NSURLCredentialPersistence)persistence;
 
 /*!
-    @method user
     @abstract Get the username
     @result The user string
 */
 @property (nullable, readonly, copy) NSString *user;
 
 /*!
-    @method password
     @abstract Get the password
     @result The password string
     @discussion This method might actually attempt to retrieve the
@@ -97,7 +93,6 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 @property (nullable, readonly, copy) NSString *password;
 
 /*!
-    @method hasPassword
     @abstract Find out if this credential has a password, without trying to get it
     @result YES if this credential has a password, otherwise NO
     @discussion If this credential's password is actually kept in an
@@ -110,7 +105,6 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
 @end
 
 /*!
-    @class NSURLCredential(NSClientCertificate)
     @discussion This category defines the methods available to an NSURLCredential created to represent a client certificate credential.  Client certificates are commonly stored on the users computer in the keychain and must be presented to the server during a handshake.
 */
 @interface NSURLCredential(NSClientCertificate)
@@ -123,7 +117,7 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     @param persistence enum that says to store per session, permanently or not at all
     @result the Initialized NSURLCredential
  */
-- (instancetype)initWithIdentity:(SecIdentityRef)identity certificates:(nullable NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence NS_AVAILABLE(10_6, 3_0);
+- (instancetype)initWithIdentity:(SecIdentityRef)identity certificates:(nullable NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
     @method credentialWithIdentity:certificates:persistence:
@@ -133,21 +127,19 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     @param persistence enum that says to store per session, permanently or not at all
     @result The new autoreleased NSURLCredential
  */
-+ (NSURLCredential *)credentialWithIdentity:(SecIdentityRef)identity certificates:(nullable NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence NS_AVAILABLE(10_6, 3_0);
++ (NSURLCredential *)credentialWithIdentity:(SecIdentityRef)identity certificates:(nullable NSArray *)certArray persistence:(NSURLCredentialPersistence)persistence API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
-    @method identity
     @abstract Returns the SecIdentityRef of this credential, if it was created with a certificate and identity
     @result A SecIdentityRef or NULL if this is a username/password credential
  */
 @property (nullable, readonly) SecIdentityRef identity;
 
 /*!
-    @method certificates
     @abstract Returns an NSArray of SecCertificateRef objects representing the client certificate for this credential, if this credential was created with an identity and certificate.
     @result an NSArray of SecCertificateRef or NULL if this is a username/password credential
  */
-@property (readonly, copy) NSArray *certificates NS_AVAILABLE(10_6, 3_0);
+@property (readonly, copy) NSArray *certificates API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -158,14 +150,14 @@ typedef NS_ENUM(NSUInteger, NSURLCredentialPersistence) {
     @abstract Initialize a new NSURLCredential which specifies that the specified trust has been accepted.
     @result the Initialized NSURLCredential
  */
-- (instancetype)initWithTrust:(SecTrustRef)trust NS_AVAILABLE(10_6, 3_0);
+- (instancetype)initWithTrust:(SecTrustRef)trust API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 /*!
     @method credentialForTrust:
     @abstract Create a new NSURLCredential which specifies that a handshake has been trusted.
     @result The new autoreleased NSURLCredential
  */
-+ (NSURLCredential *)credentialForTrust:(SecTrustRef)trust NS_AVAILABLE(10_6, 3_0);
++ (NSURLCredential *)credentialForTrust:(SecTrustRef)trust API_AVAILABLE(macos(10.6), ios(3.0), watchos(2.0), tvos(9.0));
 
 @end
 

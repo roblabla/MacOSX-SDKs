@@ -263,6 +263,10 @@ CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
 #endif
 
 /* Render 'image' to the given bitmap.
+ * The 'data' parameter must point to at least rowBytes*floor(bounds.size.height) bytes.
+ * The 'bounds' parameter has the following behavior:
+ *    The 'bounds' parameter acts to specify the region of 'image' to render.
+ *    This region (regardless of its origin) is rendered at upper-left corner of 'data'.
  * Passing a 'colorSpace' value of null means:
  *   Disable output color management if app is linked against iOS SDK
  *   Disable output color management if app is linked against OSX 10.11 SDK or later
@@ -275,7 +279,7 @@ CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
 		format:(CIFormat)format
 	colorSpace:(nullable CGColorSpaceRef)colorSpace;
 
-#if !TARGET_OS_IPHONE
+#if !TARGET_OS_SIMULATOR
 /* Render 'image' to the given IOSurface.
  * The 'bounds' parameter has the following behavior:
  *    The 'image' is rendered into 'surface' so that
@@ -285,7 +289,7 @@ CF_RETURNS_RETAINED NS_DEPRECATED_MAC(10_4,10_11);
 - (void)render:(CIImage *)image
    toIOSurface:(IOSurfaceRef)surface
 		bounds:(CGRect)bounds
-	colorSpace:(nullable CGColorSpaceRef)colorSpace NS_AVAILABLE_MAC(10_6);
+	colorSpace:(nullable CGColorSpaceRef)colorSpace NS_AVAILABLE(10_6,5_0);
 #endif
 
 /* Render 'image' into the given CVPixelBuffer. 
@@ -303,7 +307,7 @@ toCVPixelBuffer:(CVPixelBufferRef)buffer NS_AVAILABLE(10_11,5_0);
  *      point (0,0) of 'image' aligns to the lower left corner of 'buffer'.
  *      The 'bounds' acts like a clip rect to limit what region of 'buffer' is modified.
  *    In iOS 8 and earlier: The 'bounds' parameter acts to specify the region of 'image' to render.
- *      This region (regarless of its origin) is rendered at upper-left corner of 'buffer'.
+ *      This region (regardless of its origin) is rendered at upper-left corner of 'buffer'.
  * If 'colorSpace' is nil, CI will not color match to the destination.
  */
 - (void)render:(CIImage *)image
@@ -378,6 +382,10 @@ toCVPixelBuffer:(CVPixelBufferRef)buffer
 
 @interface CIContext (ImageRepresentation)
 
+CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationAVDepthData NS_AVAILABLE(10_13,11_0);
+CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDepthImage NS_AVAILABLE(10_13,11_0);
+CORE_IMAGE_EXPORT NSString * const kCIImageRepresentationDisparityImage NS_AVAILABLE(10_13,11_0);
+
 /* Render a CIImage to TIFF data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
 /* and must match the specified CIFormat. */
@@ -389,10 +397,32 @@ toCVPixelBuffer:(CVPixelBufferRef)buffer
 
 /* Render a CIImage to JPEG data. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
-/* Supported options keys are kCGImageDestinationLossyCompressionQuality */
+/* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
+/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
+/* kCIImageRepresentationDisparityImage. */
 - (nullable NSData*) JPEGRepresentationOfImage:(CIImage*)image
                                     colorSpace:(CGColorSpaceRef)colorSpace
                                        options:(NSDictionary*)options NS_AVAILABLE(10_12,10_0);
+
+/* Render a CIImage to HEIF data. Image must have a finite non-empty extent. */
+/* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
+/* and must match the specified CIFormat. */
+/* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
+/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
+/* kCIImageRepresentationDisparityImage. */
+- (nullable NSData*) HEIFRepresentationOfImage:(CIImage*)image
+                                        format:(CIFormat)format
+                                    colorSpace:(CGColorSpaceRef)colorSpace
+                                       options:(NSDictionary*)options NS_AVAILABLE_IOS(11_0);
+
+/* Render a CIImage to PNG data. Image must have a finite non-empty extent. */
+/* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
+/* and must match the specified CIFormat. */
+/* No options keys are supported at this time. */
+- (nullable NSData*) PNGRepresentationOfImage:(CIImage*)image
+                                       format:(CIFormat)format
+                                   colorSpace:(CGColorSpaceRef)colorSpace
+                                      options:(NSDictionary*)options NS_AVAILABLE(10_13,11_0);
 
 /* Render a CIImage to TIFF file. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
@@ -405,14 +435,40 @@ toCVPixelBuffer:(CVPixelBufferRef)buffer
                                 options:(NSDictionary*)options
                                   error:(NSError **)errorPtr NS_AVAILABLE(10_12,10_0);
 
+/* Render a CIImage to PNG file. Image must have a finite non-empty extent. */
+/* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
+/* and must match the specified CIFormat. */
+/* No options keys are supported at this time. */
+- (BOOL) writePNGRepresentationOfImage:(CIImage*)image
+                                 toURL:(NSURL*)url
+                                format:(CIFormat)format
+                            colorSpace:(CGColorSpaceRef)colorSpace
+                               options:(NSDictionary*)options
+                                 error:(NSError **)errorPtr NS_AVAILABLE(10_13,11_0);
+
 /* Render a CIImage to JPEG file. Image must have a finite non-empty extent. */
 /* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome. */
-/* Supported options keys are kCGImageDestinationLossyCompressionQuality */
+/* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
+/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
+/* kCIImageRepresentationDisparityImage. */
 - (BOOL) writeJPEGRepresentationOfImage:(CIImage*)image
                                   toURL:(NSURL*)url
                              colorSpace:(CGColorSpaceRef)colorSpace
                                 options:(NSDictionary*)options
                                   error:(NSError **)errorPtr NS_AVAILABLE(10_12,10_0);
+
+/* Render a CIImage to HEIF file. Image must have a finite non-empty extent. */
+/* The CGColorSpace must be kCGColorSpaceModelRGB or kCGColorSpaceModelMonochrome */
+/* and must match the specified CIFormat. */
+/* Supported options keys are kCGImageDestinationLossyCompressionQuality, */
+/* kCIImageRepresentationAVDepthData, kCIImageRepresentationDepthImage, */
+/* kCIImageRepresentationDisparityImage. */
+- (BOOL) writeHEIFRepresentationOfImage:(CIImage*)image
+                                  toURL:(NSURL*)url
+                                 format:(CIFormat)format
+                             colorSpace:(CGColorSpaceRef)colorSpace
+                                options:(NSDictionary*)options
+                                  error:(NSError **)errorPtr NS_AVAILABLE_IOS(11_0);
 
 
 @end

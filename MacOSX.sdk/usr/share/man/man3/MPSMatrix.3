@@ -1,15 +1,17 @@
-.TH "MPSMatrix" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSMatrix" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSMatrix \- 
+MPSMatrix
 .SH SYNOPSIS
 .br
 .PP
 .PP
-\fC#import <MPSMatrix\&.h>\fP
+\fC#import <MPSMatrixTypes\&.h>\fP
 .PP
 Inherits NSObject\&.
+.PP
+Inherited by \fBMPSTemporaryMatrix\fP\&.
 .SS "Instance Methods"
 
 .in +1c
@@ -17,7 +19,7 @@ Inherits NSObject\&.
 .RI "(nonnull instancetype) \- \fBinitWithBuffer:descriptor:\fP"
 .br
 .ti -1c
-.RI "(nonnull instancetype) \- \fBNS_UNAVAILABLE\fP"
+.RI "(nonnull instancetype) \- \fBinit\fP"
 .br
 .in -1c
 .SS "Properties"
@@ -33,10 +35,16 @@ Inherits NSObject\&.
 .RI "NSUInteger \fBcolumns\fP"
 .br
 .ti -1c
-.RI "MPSDataType \fBdataType\fP"
+.RI "NSUInteger \fBmatrices\fP"
+.br
+.ti -1c
+.RI "\fBMPSDataType\fP \fBdataType\fP"
 .br
 .ti -1c
 .RI "NSUInteger \fBrowBytes\fP"
+.br
+.ti -1c
+.RI "NSUInteger \fBmatrixBytes\fP"
 .br
 .ti -1c
 .RI "id< MTLBuffer > \fBdata\fP"
@@ -46,11 +54,17 @@ Inherits NSObject\&.
 .PP 
 This depends on Metal\&.framework
 .PP
-A \fBMPSMatrix\fP object describes a 2-dimensional array of data and provides storage for its values\&. \fBMPSMatrix\fP objects serve as inputs and outputs of MPSMatrixKernel objects\&.
+A \fBMPSMatrix\fP object describes a set of 2-dimensional arrays of data and provides storage for its values\&. \fBMPSMatrix\fP objects serve as inputs and outputs of MPSMatrixKernel objects\&.
 .PP
-Implementation note: A \fBMPSMatrix\fP object maintains its internal storage using a MTLBuffer object and thus the same rules for maintaining coherency of a MTLBuffer's data between CPU memory and GPU memory apply to a \fBMPSMatrix\fP\&. Data is assumed to be stored in row-major layout\&. 
+Implementation note: A \fBMPSMatrix\fP object maintains its internal storage using a MTLBuffer object and thus the same rules for maintaining coherency of a MTLBuffer's data between CPU memory and GPU memory apply to a \fBMPSMatrix\fP\&. An \fBMPSMatrix\fP object's data refers to an array of matrices\&. Data is assumed to be ordered by matrix first, followed by row, followed by column\&.
+.PP
+For example, index [i,j] of the k'th matrix of an \fBMPSMatrix\fP is located at byte offset: k * matrixBytes + i * rowBytes + j * sizeof(dataType)
+.PP
+Where matrixBytes is a multiple of rowBytes at least equal to rows * rowBytes\&. 
 .SH "Method Documentation"
 .PP 
+.SS "\- (nonnull instancetype) init "
+
 .SS "\- (nonnull instancetype) initWithBuffer: (nonnull id< MTLBuffer >) buffer(nonnull \fBMPSMatrixDescriptor\fP *) descriptor"
 Initialize a \fBMPSMatrix\fP object with a MTLBuffer\&.
 .PP
@@ -71,24 +85,32 @@ This function returns a \fBMPSMatrix\fP object which uses the supplied MTLBuffer
 The provided MTLBuffer must have enough storage to hold 
 .PP
 .nf
-(descriptor.rows-1) * descriptor.rowBytes + descriptor.columns * (element size) bytes.
+(descriptor.matrices-1) * descriptor.matrixBytes +
+(descriptor.rows-1) * descriptor.rowBytes +
+ descriptor.columns * (element size) bytes.
 .fi
 .PP
  
+.PP
+Reimplemented in \fBMPSTemporaryMatrix\fP\&.
 .SH "Property Documentation"
 .PP 
 .SS "\- columns\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
-The number of columns in the \fBMPSMatrix\fP\&. 
+The number of columns in a matrix in the \fBMPSMatrix\fP\&. 
 .SS "\- data\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 An MTLBuffer to store the data\&. 
 .SS "\- dataType\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 The type of the \fBMPSMatrix\fP data\&. 
 .SS "\- device\fC [read]\fP, \fC [nonatomic]\fP, \fC [retain]\fP"
 The device on which the \fBMPSMatrix\fP will be used\&. 
+.SS "\- matrices\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+The number of matrices in the \fBMPSMatrix\fP\&. 
+.SS "\- matrixBytes\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+The stride, in bytes, between corresponding elements of consecutive matrices\&. 
 .SS "\- rowBytes\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 The stride, in bytes, between corresponding elements of consecutive rows\&. 
 .SS "\- rows\fC [read]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
-The number of rows in the \fBMPSMatrix\fP\&. 
+The number of rows in a matrix in the \fBMPSMatrix\fP\&. 
 
 .SH "Author"
 .PP 

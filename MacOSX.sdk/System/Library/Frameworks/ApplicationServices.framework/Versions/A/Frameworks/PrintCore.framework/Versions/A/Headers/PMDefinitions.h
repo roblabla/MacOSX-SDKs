@@ -201,6 +201,7 @@ enum {
 #define kPDFWorkflowItemURLKey          CFSTR("itemURL")
 #define kPDFWorkflowDisplayNameKey      CFSTR("displayName")
 #define kPDFWorkflowItemsKey            CFSTR("items")
+#define kPDFWorkflowModifiedKey         CFSTR("wasModifiedInline")
 
 /* Print Selection Title string */
 #define kPMPrintSelectionTitleKey		CFSTR("com.apple.printSelection.title")

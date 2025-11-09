@@ -30,6 +30,7 @@ MDL_EXPORT
 @property (nonatomic) void *dataStart;
 @property (nonatomic) NSUInteger stride;
 @property (nonatomic) MDLVertexFormat format;
+@property (nonatomic) NSUInteger bufferSize;
 
 @end
 
@@ -137,9 +138,8 @@ MDL_EXPORT
 /*!
  @property vertexCount
  @abstract Number of vertices in the vertexBuffers
- @discussion The size of vertex data in each buffer can be computed by multiplying
-             this value with the stride of the buffer in the vertexDescriptor's
-             layout
+ @discussion This value is valid only if the mesh was initialized
+             with an explicit vertex count
  */
 @property (nonatomic, readwrite) NSUInteger vertexCount;
 
@@ -220,7 +220,7 @@ MDL_EXPORT
 /*!
  @method addNormalsWithAttributeNamed:creaseThreshold:
  @abstract Calculate and add vertex normal data
- @param attributeName Name of vertex normal attribute.  If nil, vertex normals
+ @param attributeName Name is the attribute name of vertex normal attribute.  If nil, vertex normals
         will be added with the MDLVertexAttributeNormal name string
  @param creaseThreshold Threshold of the dot product between the 2 triangles after which
                         their face normal will be smoothed out. Therefore, a threshold of 0 will
@@ -237,35 +237,53 @@ MDL_EXPORT
 
 /*!
  @method addTangentBasisForTextureCoordinateAttributeNamed:tangentAttributeNamed:bitangentAttributeNamed
- @abstract Create tangent basis data
- @param textureCoordinateAttributeName texture coordinates to use in calculations
- @param tangentAttributeNamed Name of vertex tangent attribute.
- @param bitangentAttributeNamed Name of vertex bitangent attribute.
+ @abstract Create a shader basis where the tangent and bitangent span the uv -> object space transform
+ @param textureCoordinateAttributeName Name of texture coordinates to use in calculations
+ @param tangentAttributeName Name of vertex tangent attribute.
+ @param bitangentAttributeName Name of vertex bitangent attribute.
  @discussion Uses the attribute named MDLVertexAttributePosition and
              textureCoordinateAttributeName to calculate tangent and bitangent
              attributes. The mesh's vertexDescriptor will be updated to reflect
-             the new attributes if necessary.
+             the new attributes if necessary. The basis may not be orthogonal; to gaurantee an orthogonal
+              tangent basis please use addOrthTanBasisForTextureCoordinateAttibuteNamed selector.
  */
 - (void)addTangentBasisForTextureCoordinateAttributeNamed:(NSString*)textureCoordinateAttributeName
-                                    tangentAttributeNamed:(NSString *)tangentAttributeNamed
+                                    tangentAttributeNamed:(NSString *)tangentAttributeName
                                   bitangentAttributeNamed:(nullable NSString *)bitangentAttributeName;
 
 /*!
  @method addTangentBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed
- @abstract Create tangent basis data
+ @abstract Create tangents which are orthogonal to the normal
  @param textureCoordinateAttributeName texture coordinates to use in calculations
- @param normalAttributeNamed normals to use in calculations
+ @param normalAttributeName normals to use in calculations
  @param tangentAttributeName Name of a four component vertex tangent attribute.
  @discussion Uses the attribute named MDLVertexAttributePosition and
              textureCoordinateAttributeName and the specified normals to calculate
              tangent information. The mesh's vertexDescriptor will be updated to
              reflect the new attribute if necessary.
-             Note that the bitangent can be calculated from the normal and
-             tangent by B = (N x T) * T.w
+             Note that this method does NOT produce a T.w component which is used in B = (N x T) * T.w
+             Please use addOrthTanBasisForTextureCoordinateAttributeNamed.
  */
 - (void)addTangentBasisForTextureCoordinateAttributeNamed:(NSString*)textureCoordinateAttributeName
-                                     normalAttributeNamed:(NSString*)normalAttributeNamed
-                                    tangentAttributeNamed:(NSString *)tangentAttributeNamed;
+                                     normalAttributeNamed:(NSString*)normalAttributeName
+                                    tangentAttributeNamed:(NSString *)tangentAttributeName;
+
+/*
+@method addOrthTanBasisForTextureCoordinateAttributeNamed:normalAttributeNamed:tangentAttributeNamed
+@abstract Create an orthonormal tangent basis with tangent specified
+@param textureCoordinateAttributeName texture coordinates to use in calculations
+@param normalAttributeName normals to use in calculations
+@param tangentAttributeName Name of a three/four component vertex tangent attribute.
+@discussion Uses the attribute named MDLVertexAttributePosition and
+            textureCoordinateAttributeName and the specified normals to calculate
+            tangent information. The mesh's vertexDescriptor will be updated to
+            reflect the new attribute if necessary.
+            Note that the bitangent can be calculated from the normal and
+            tangent by B = (N x T) * T.w
+*/
+- (void)addOrthTanBasisForTextureCoordinateAttributeNamed:(NSString *)textureCoordinateAttributeName
+                                     normalAttributeNamed:(NSString *)normalAttributeName
+                                    tangentAttributeNamed:(NSString *)tangentAttributeName;
 
 /*!
  @method addTextureCoordinatesForAttributeNamed:textureCoordinateAttributeName
@@ -276,6 +294,20 @@ MDL_EXPORT
  */
 - (void)addUnwrappedTextureCoordinatesForAttributeNamed:(NSString*)textureCoordinateAttributeName;
 
+
+/*!
+ @method flipTextureCoordinatesInAttributeNamed:
+ @abstract Flips texture coordinates by performing the operation (u,v) = (u, 1-v)
+ @param textureCoordinateAttributeName texture coordinates to modify
+ @discussion Many application generate model files with texture coordinate mapping
+             assuming a bottom left bitmap origin. It can be more convenient to
+             have texture coordinates corresponding to an upper left bitmap origin.
+             This selector will perform the flip operation if the requested texture
+             coordinate attribute exists on the mesh. An exception will be raised if
+             the attribute cannot be found
+ */
+- (void)flipTextureCoordinatesInAttributeNamed:(NSString*)textureCoordinateAttributeName;
+
 /*!
  @method makeVerticesUnique:
  @abstract Deindexes the vertex array
@@ -283,7 +315,17 @@ MDL_EXPORT
              vertices so faces do not share vertices. The vertex buffer and index
              buffers on submeshes may grow to accomadate any vertices added.
  */
-- (void)makeVerticesUnique;
+- (void)makeVerticesUnique NS_DEPRECATED(10.11,10.13,9.0,11.0);
+
+
+/*!
+ @method makeVerticesUniqueAndReturnError:
+ @abstract Deindexes the vertex array
+ @discussion If any vertices are shared on multiple faces, duplicate those
+ vertices so faces do not share vertices. The vertex buffer and index
+ buffers on submeshes may grow to accomadate any vertices added.
+ */
+- (BOOL)makeVerticesUniqueAndReturnError:(NSError **)error;
 
 /*!
  @method replaceAttributeNamed:withData
@@ -298,7 +340,7 @@ MDL_EXPORT
 /*!
  @method updateAttributeNamed:withData
  @abstract update existing attribute data with new attribute data retaining
- the format of the exisitng data.
+ the format of the existing data.
  @discussion If the specified attribute does not already exist, it will be
  created with the same format as the newData.
  */
@@ -409,32 +451,35 @@ MDL_EXPORT
  @abstract Factory method for generating a mesh with a capsule shape; a cylinder
            with hemispheres for caps.
  @return MDLMesh capsule with desired attributes
+ @param extent Dimension of bounding box for capsule.
  @param hemisphereSegments Number of slices through hemisphere caps along Y axis
  @param geometryType Must be MDLGeometryTypeTriangles or MDLGeometryTypeLines
  @param inwardNormals Normals point toward center of cylinder
  @param allocator A mesh buffer allocator used to allocate memory to back buffers
         for the returned mesh.  If nil, a default allocator will be used
- @discussion Center of cylinder at (0, 0, 0) with a top at +Y and bottom at -Y.
-             Specifying equal X and Z radia will generate a true cylinder.
-             Specifying a height of 0.0 and verticalSegments of 0 will generate
-             a sphere. Height controls the size of the cylinder, the full height
+ @discussion Center of capsule at (0, 0, 0) with a top at +Y and bottom at -Y.
+             The height of hemisphere cap is specified by the minimum of X and Z
+             Specifying equal X and Z radii will generate a true capsule.
+             Specifying a height that is less than the twice of min of the X and Z 
+             radii or verticalSegments of 0 will generate a sphere. The full height
              of the capsule will also incorporate the hemisphere caps.
-            Will raise an exception if radialSegments is < 3 or if an unsupported
-            geometry type is passed in.
-            Generated texture coordinates are laid out as follows:
+             Will raise an exception if radialSegments is < 3 or if hemisphereSegments < 1
+             or if an unsupported geometry type is specified.
+             Generated texture coordinates for top and bottom caps are wrapped 
+             in a similar manner as for asphere, laid out as follows:
                                       ___
                                      /   \   <- T texcoord = 0.0
  Texture for top of cylinder   ---> [-----]
-                                    [     ]  <- T texcoord = 0.3333
+                                    [     ]  <- T texcoord = extent.x/extent.y
                                     [     ]
  Texture for sides of cylinder ---> [     ]
-                                    [_____]  <- T texcoord = 0.6666
+                                    [_____]  <- T texcoord = 1.0 - extent.x/extent.y
  Texture for base of cylinder  ---> [     ]
                                      \___/   <- T texcoord = 1.0
 */
 - (instancetype)initCapsuleWithExtent:(vector_float3)extent
                      cylinderSegments:(vector_uint2)segments
-                   hemisphereSegments:(uint32_t)hemisphereSegments
+                   hemisphereSegments:(int)hemisphereSegments
                         inwardNormals:(BOOL)inwardNormals
                          geometryType:(MDLGeometryType)geometryType
                             allocator:(nullable id<MDLMeshBufferAllocator>)allocator;
@@ -518,7 +563,6 @@ MDL_EXPORT
                              submeshIndex:(int)submeshIndex
                         subdivisionLevels:(unsigned int)subdivisionLevels
                                 allocator:(nullable id<MDLMeshBufferAllocator>)allocator;
-
 
 + (instancetype)newBoxWithDimensions:(vector_float3)dimensions
                             segments:(vector_uint3)segments

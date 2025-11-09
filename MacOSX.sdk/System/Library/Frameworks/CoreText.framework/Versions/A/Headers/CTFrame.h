@@ -40,7 +40,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTFrame * CTFrameRef;
 	@abstract	Returns the CFType of the frame object
 */
 
-CFTypeID CTFrameGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTFrameGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -86,7 +86,7 @@ typedef CF_ENUM(uint32_t, CTFrameProgression) {
 	@seealso	CTFramesetterCreateFrame
 */
 
-CT_EXPORT const CFStringRef kCTFrameProgressionAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFrameProgressionAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
 	@enum		CTFramePathFillRule
@@ -121,7 +121,7 @@ typedef CF_ENUM(uint32_t, CTFramePathFillRule) {
 	@seealso	CTFramesetterCreateFrame
  */
 
-CT_EXPORT const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE(10_7, 4_2);
+CT_EXPORT const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE(macos(10.7), ios(4.2), watchos(2.0), tvos(9.0));
 
 /*!
 	@const		kCTFramePathWidthAttributeName
@@ -134,7 +134,7 @@ CT_EXPORT const CFStringRef kCTFramePathFillRuleAttributeName CT_AVAILABLE(10_7,
 	@seealso	CTFramesetterCreateFrame
  */
 
-CT_EXPORT const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE(10_7, 4_2);
+CT_EXPORT const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE(macos(10.7), ios(4.2), watchos(2.0), tvos(9.0));
 
 	
 /*!
@@ -148,7 +148,7 @@ CT_EXPORT const CFStringRef kCTFramePathWidthAttributeName CT_AVAILABLE(10_7, 4_
 	@seealso	CTFramesetterCreateFrame
 */
 
-CT_EXPORT const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE(10_7, 4_3);
+CT_EXPORT const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE(macos(10.7), ios(4.3), watchos(2.0), tvos(9.0));
 
 /*!
 	@const		kCTFramePathClippingPathAttributeName
@@ -160,7 +160,7 @@ CT_EXPORT const CFStringRef kCTFrameClippingPathsAttributeName CT_AVAILABLE(10_7
 	@seealso	kCTFrameClippingPathsAttributeName
  */
 
-CT_EXPORT const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE(10_7, 4_3);
+CT_EXPORT const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE(macos(10.7), ios(4.3), watchos(2.0), tvos(9.0));
 
 /* --------------------------------------------------------------------------- */
 /* Frame Accessors */
@@ -181,7 +181,7 @@ CT_EXPORT const CFStringRef kCTFramePathClippingPathAttributeName CT_AVAILABLE(1
 */
 
 CFRange CTFrameGetStringRange(
-	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
+	CTFrameRef frame ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -204,7 +204,7 @@ CFRange CTFrameGetStringRange(
 */
 
 CFRange CTFrameGetVisibleStringRange(
-	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
+	CTFrameRef frame ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -216,7 +216,7 @@ CFRange CTFrameGetVisibleStringRange(
 */
 
 CGPathRef CTFrameGetPath(
-	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
+	CTFrameRef frame ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -238,7 +238,7 @@ CGPathRef CTFrameGetPath(
 */
 
 CFDictionaryRef __nullable CTFrameGetFrameAttributes(
-	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
+	CTFrameRef frame ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -260,7 +260,7 @@ CFDictionaryRef __nullable CTFrameGetFrameAttributes(
 */
 
 CFArrayRef CTFrameGetLines(
-	CTFrameRef frame ) CT_AVAILABLE(10_5, 3_2);
+	CTFrameRef frame ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -297,7 +297,7 @@ CFArrayRef CTFrameGetLines(
 void CTFrameGetLineOrigins(
 	CTFrameRef frame,
 	CFRange range,
-	CGPoint origins[] ) CT_AVAILABLE(10_5, 3_2);
+	CGPoint origins[_Nonnull] ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -320,7 +320,7 @@ void CTFrameGetLineOrigins(
 
 void CTFrameDraw(
 	CTFrameRef frame,
-	CGContextRef context ) CT_AVAILABLE(10_5, 3_2);
+	CGContextRef context ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

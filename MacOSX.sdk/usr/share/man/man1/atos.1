@@ -1,5 +1,5 @@
-.\" Copyright (c) 1998-2010  Apple Inc. All rights reserved.
-.Dd January 15, 2010
+.\" Copyright (c) 1998-2017  Apple Inc. All rights reserved.
+.Dd May 9, 2017
 .Dt "atos" 1
 .Os
 .Sh NAME
@@ -13,6 +13,7 @@
 .Op Fl l Ar <load-address>
 .Op Fl s Ar <slide>
 .Op Fl printHeader
+.Op Fl fullPath
 .Op Fl f Ar <address-input-file>
 .Op <address> ...
 .Sh DESCRIPTION
@@ -70,6 +71,8 @@ If a process was specified, the first line of atos output should be a header of 
 This is primarily used when
 .Nm
 is invoked as part of a stackshot(1) run, for verification of the process ID and name.
+.It Fl fullPath
+Print the full path of the source files.
 .El
 .Sh EXAMPLE
 A stripped, optimized version of Sketch was built as an x86_64 position-independent executable (PIE) into /BuildProducts/Release.

@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @class MTLHeapDescriptor
  */
-NS_CLASS_AVAILABLE(NA, 10_0)
+NS_CLASS_AVAILABLE(10_13, 10_0)
 @interface MTLHeapDescriptor : NSObject <NSCopying>
 
 /*!
@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(NA, 10_0)
 /*!
  @protocol MTLHeap
  */
-NS_AVAILABLE(NA, 10_0)
+NS_AVAILABLE(10_13, 10_0)
 @protocol MTLHeap <NSObject>
 
 /*!
@@ -89,6 +89,12 @@ NS_AVAILABLE(NA, 10_0)
  @abstract The size in bytes, of all resources allocated from the heap.
  */
 @property (readonly) NSUInteger usedSize;
+
+/*!
+ @property currentAllocatedSize
+ @abstract The size in bytes of the current heap allocation.
+ */
+@property (readonly) NSUInteger currentAllocatedSize NS_AVAILABLE(10_13, 11_0);
 
 /*!
  @method maxAvailableSizeWithAlignment:

@@ -3,12 +3,13 @@
 
 	Framework:  AVFoundation
  
-    Copyright 2010-2015 Apple Inc. All rights reserved.
+    Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVVideoComposition.h>
+#import <AVFoundation/AVAudioProcessingSettings.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMSampleBuffer.h>
 
@@ -27,6 +28,8 @@ NS_ASSUME_NONNULL_BEGIN
  
  @discussion
 	Clients can read the media data of an asset by adding one or more concrete instances of AVAssetReaderOutput to an AVAssetReader using the -[AVAssetReader addOutput:] method.
+	
+	IMPORTANT PERFORMANCE NOTE: Make sure to set the alwaysCopiesSampleData property to NO if you do not need to modify the sample data in-place, to avoid unnecessary and inefficient copying.
  */
 NS_CLASS_AVAILABLE(10_7, 4_1)
 @interface AVAssetReaderOutput : NSObject
@@ -244,7 +247,7 @@ AV_INIT_UNAVAILABLE
  
 	The default value is AVAudioTimePitchAlgorithmSpectral.
  */
-@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -347,7 +350,7 @@ AV_INIT_UNAVAILABLE
  
 	The default value is AVAudioTimePitchAlgorithmSpectral.
  */
-@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
 
 @end
 

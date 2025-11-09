@@ -11,7 +11,7 @@
 @class CKRecordID, CKDiscoveredUserInfo;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use CKDiscoverUserIdentitiesOperation instead")
+API_DEPRECATED_WITH_REPLACEMENT("CKDiscoverUserIdentitiesOperation", macos(10.10, 10.12), ios(8.0, 10.0), tvos(9.0, 10.0), watchos(3.0, 3.0))
 @interface CKDiscoverUserInfosOperation : CKOperation
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -20,9 +20,14 @@ NS_CLASS_DEPRECATED(10_10, 10_12, 8_0, 10_0, "Use CKDiscoverUserIdentitiesOperat
 @property (nonatomic, copy, nullable) NSArray<NSString *> *emailAddresses;
 @property (nonatomic, copy, nullable) NSArray<CKRecordID *> *userRecordIDs;
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+
 /*  This block is called when the operation completes.
     The [NSOperation completionBlock] will also be called if both are set. */
 @property (nonatomic, copy, nullable) void (^discoverUserInfosCompletionBlock)(NSDictionary<NSString *, CKDiscoveredUserInfo *> * _Nullable emailsToUserInfos, NSDictionary<CKRecordID *, CKDiscoveredUserInfo *> * _Nullable userRecordIDsToUserInfos, NSError * _Nullable operationError);
+
+#pragma clang diagnostic pop
 
 @end
 NS_ASSUME_NONNULL_END

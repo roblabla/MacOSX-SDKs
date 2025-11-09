@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2013 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -160,9 +160,9 @@
 #define	IPPROTO_SWIPE		53		/* IP with encryption */
 #define	IPPROTO_NHRP		54		/* Next Hop Resolution */
 /* 55-57: Unassigned */
-#define 	IPPROTO_ICMPV6	58		/* ICMP6 */
-#define 	IPPROTO_NONE		59		/* IP6 no next header */
-#define 	IPPROTO_DSTOPTS	60		/* IP6 destination option */
+#define	IPPROTO_ICMPV6		58		/* ICMP6 */
+#define	IPPROTO_NONE		59		/* IP6 no next header */
+#define	IPPROTO_DSTOPTS		60		/* IP6 destination option */
 #define	IPPROTO_AHIP		61		/* any host internal protocol */
 #define	IPPROTO_CFTP		62		/* CFTP */
 #define	IPPROTO_HELLO		63		/* "hello" routing protocol */
@@ -360,10 +360,11 @@ struct in_addr {
 			 (((u_int32_t)(i) & 0xfff00000) == 0xac100000) || \
 			 (((u_int32_t)(i) & 0xffff0000) == 0xc0a80000))
 
+
 #define	IN_LOCAL_GROUP(i)	(((u_int32_t)(i) & 0xffffff00) == 0xe0000000)
- 
+
 #define	IN_ANY_LOCAL(i)		(IN_LINKLOCAL(i) || IN_LOCAL_GROUP(i))
-#endif
+#endif /* __APPLE__ */
 
 #define	IN_LOOPBACKNET		127			/* official! */
 #endif	/* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
@@ -429,7 +430,7 @@ struct ip_opts {
 #define	IP_BOUND_IF		25   /* int; set/get bound interface */
 #define	IP_PKTINFO		26   /* get pktinfo on recv socket, set src on sent dgram  */
 #define	IP_RECVPKTINFO		IP_PKTINFO	/* receive pktinfo w/dgram */
-
+#define	IP_RECVTOS		27   /* bool; receive IP TOS w/dgram */
 
 #define	IP_FW_ADD     		40   /* add a firewall rule to chain */
 #define	IP_FW_DEL    		41   /* delete a firewall rule from chain */

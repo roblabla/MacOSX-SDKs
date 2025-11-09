@@ -8,13 +8,13 @@
  *	@copyright 2011 Apple, Inc. All rights reserved.
  */
 
-#import <CoreBluetooth/CBDefines.h>
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
 
-#import <Foundation/Foundation.h>
+#import <CoreBluetooth/CBAttribute.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class CBPeripheral, CBUUID, CBCharacteristic;
 
 /*!
  * @class CBService
@@ -24,19 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
-CB_EXTERN_CLASS @interface CBService : NSObject
-{
-@protected
-	CBPeripheral	*_peripheral;
-	CBUUID			*_UUID;
-	BOOL			_isPrimary;
-	
-	NSArray			*_includedServices;
-	NSArray			*_characteristics;
-	
-	NSNumber		*_startHandle;
-	NSNumber		*_endHandle;
-}
+CB_EXTERN_CLASS @interface CBService : CBAttribute
 
 /*!
  * @property peripheral
@@ -45,16 +33,7 @@ CB_EXTERN_CLASS @interface CBService : NSObject
  *      A back-pointer to the peripheral this service belongs to.
  *
  */
-@property(assign, readonly, nonatomic, nonnull) CBPeripheral *peripheral;
-
-/*!
- * @property UUID
- *
- * @discussion
- *      The Bluetooth UUID of the service.
- *
- */
-@property(readonly, nonatomic) CBUUID *UUID;
+@property(assign, readonly, nonatomic) CBPeripheral *peripheral;
 
 /*!
  * @property isPrimary
@@ -97,13 +76,7 @@ CB_EXTERN_CLASS @interface CBService : NSObject
  */
 NS_CLASS_AVAILABLE(10_9, 6_0)
 CB_EXTERN_CLASS @interface CBMutableService : CBService
-{
-@private
-	NSNumber *_ID;
-}
 
-@property(retain, readwrite, nonatomic, nullable) CBUUID *UUID;
-@property(readwrite, nonatomic) BOOL isPrimary;
 @property(retain, readwrite, nullable) NSArray<CBService *> *includedServices;
 @property(retain, readwrite, nullable) NSArray<CBCharacteristic *> *characteristics;
 
@@ -116,7 +89,7 @@ CB_EXTERN_CLASS @interface CBMutableService : CBService
  *  @discussion			Returns a service, initialized with a service type and UUID.
  *
  */
-- (id)initWithType:(nullable CBUUID *)UUID primary:(BOOL)isPrimary;
+- (instancetype)initWithType:(CBUUID *)UUID primary:(BOOL)isPrimary NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 @end
 

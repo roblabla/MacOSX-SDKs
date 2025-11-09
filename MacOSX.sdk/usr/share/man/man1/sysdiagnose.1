@@ -15,11 +15,20 @@
 .Nm
 .Op Fl f Ar results_directory
 .Op Fl A Ar archive_name
-.Op Fl q
+.Op Fl V Ar volume_path
+.Op Fl n
+.Op Fl k
+.Op Fl F
+.Op Fl S
+.Op Fl u
+.Op Fl Q
 .Op Fl b
 .Op Fl p
+.Op Fl P
 .Op Fl d
-.Op Fl X
+.Op Fl D
+.Op Fl r
+.Op Fl R
 .Op Ar process_name | pid
 .\" =========================== END SYNOPSIS SECTION ===========================
 .\" ============================================================================
@@ -29,9 +38,12 @@
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 The
 .Nm
-tool gathers system diagnostic information helpful in investigating system performance issues. A great deal of information is harvested, spanning system state and configuration.
+tool gathers system diagnostic information helpful in investigating system performance issues.
+A great deal of information is harvested, spanning system state and configuration. The data is stored /var/tmp directory.
 .Nm
-needs to be run as root.
+needs to be run as root. To cancel an in-flight
+.Nm
+triggered via command line interface, press Ctrl-\\.
 .Nm
 is automatically triggered when the following key chord is pressed: Control-Option-Command-Shift-Period.
 .\" ----------------------------------------------------------------------------
@@ -85,18 +97,36 @@ Display help.
 Specify the directory where the results will be stored. The default results directory is /var/tmp.
 .It Fl A Ar archive_name
 Specify the name of the archive created in the results directory.
-.It Fl q
+.It Fl V Ar volume_path
+Specify the root volume for sysdiagnose to run on.
+.It Fl n
+Do not tar the resulting sysdiagnose directory.
+.It Fl k
+Do not remove the temporary directory.
+.It Fl F
+Get feedback data.
+.It Fl S
+Disable streaming to tarball.
+.It Fl u
+Disable UI feedback.
+.It Fl Q
 Skip footprint.
 .It Fl b
-Do not show the resulting archive in a Finder window upon completion.
+Do NOT show the resulting archive in a Finder window upon completion.
 .It Fl p
-Request only time-sensitive data to be collected (performance issues).
+Collect only time-sensitive data. Disregards previous -d or -r flags.
+.It Fl P
+Do not collect time-sensitive data.
 .It Fl d
-Request only log data to be collected (historical issues).
-.It Fl X
-Run all diagnostics with no timeout.
+Collect only log data. Disregards previous -p or -r flags.
+.It Fl D
+Do not collect log data.
+.It Fl r
+Collect only log archive. Disregards previous -p or -d flags.
+.It Fl R
+Do not collect log archive.
 .It Ar process_name | pid
-If a single process appears to be slowing down the system, passing in the process name or ID as the argument gathers additional process-specific diagnostic data.
+If a single process appears to be slowing down the system, passing in the process name or ID as the argument gathers additional process-specific diagnostic data. Specify only ONE process at a time -- specifying multiple processes is not supported.
 .El
 .\" =========================== END OPTIONS SECTION ============================
 .\" ============================================================================

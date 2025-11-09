@@ -41,3 +41,5 @@
 #import <GameplayKit/GKScene.h>
 #import <GameplayKit/GKSKNodeComponent.h>
 #import <GameplayKit/SpriteKit+Additions.h>
+#import <GameplayKit/GKSCNNodeComponent.h>
+#import <GameplayKit/SceneKit+Additions.h>

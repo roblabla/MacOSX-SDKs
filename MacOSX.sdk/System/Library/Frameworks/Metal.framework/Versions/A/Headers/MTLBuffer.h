@@ -22,7 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @protocol MTLBuffer
- @abstract A typeless allocation accessible by both the CPU and the GPU (MTLDevice).
+ @abstract A typeless allocation accessible by both the CPU and the GPU (MTLDevice) or by only the GPU when the storage mode is
+ MTLResourceStorageModePrivate.
  
  @discussion
  Unlike in OpenGL and OpenCL, access to buffers is not synchronized.  The caller may use the CPU to modify the data at any time
@@ -64,7 +65,7 @@ NS_AVAILABLE(10_11, 8_0)
  @method newTextureWithDescriptor:offset:bytesPerRow:
  @abstract Create a 2D texture that shares storage with this buffer.
 */
-- (id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor*)descriptor offset:(NSUInteger)offset bytesPerRow:(NSUInteger)bytesPerRow NS_AVAILABLE_IOS(8_0);
+- (nullable id <MTLTexture>)newTextureWithDescriptor:(MTLTextureDescriptor*)descriptor offset:(NSUInteger)offset bytesPerRow:(NSUInteger)bytesPerRow NS_AVAILABLE(10_13, 8_0);
 
 /*!
  @method addDebugMarker:range:

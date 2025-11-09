@@ -1,7 +1,7 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: 986FB661-8202-335F-A063-EA3211AF2846', 'x86_64: 912E3D25-27C0-3245-B64C-3CAD43A5D633', 
-                   'x86_64h: C35235B7-CFA6-39A7-BD6E-79F4D9CAFD36' ]
+uuids:           [ 'i386: 0C7848B1-0F3B-3EB7-8784-57D15012D2B4', 'x86_64: 508D8382-065F-3133-B61B-ADCD1A401470', 
+                   'x86_64h: 547C43FB-0243-340A-9B9B-AE8E5A5653BA' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vecLib.framework/Versions/A/libSparseBLAS.dylib
 objc-constraint: none

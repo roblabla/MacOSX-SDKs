@@ -13,12 +13,6 @@
  * API, including submitting, removing, starting, stopping and listing jobs.
  */
 
-#if XPC_BUILDING_LAUNCHD
-// Temporary hack to resolve conflicting availability with launchd's existing
-// internal headers.
-#pragma GCC diagnostic ignored "-Wavailability"
-#endif // XPC_BUILDING_LAUNCHD
-
 #include <os/base.h>
 #include <Availability.h>
 

@@ -3,11 +3,12 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
  
  */
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVAudioProcessingSettings.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMBase.h>
 #import <CoreMedia/CMTime.h>
@@ -44,7 +45,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableAudioMix : AVAudioMix {
 @private
-    AVMutableAudioMixInternal    *_mutableAudioMix;
+    AVMutableAudioMixInternal    *_mutableAudioMix __attribute__((unused));
 }
 
 /*  
@@ -104,7 +105,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, readonly, copy, nullable) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic, readonly, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
 
 /*!
  @property		audioTapProcessor
@@ -139,7 +140,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableAudioMixInputParameters : AVAudioMixInputParameters {
 @private
-    AVMutableAudioMixInputParametersInternal    *_mutableInputParameters;
+    AVMutableAudioMixInputParametersInternal    *_mutableInputParameters __attribute__((unused));
 }
 
 /*  
@@ -169,7 +170,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    Can be nil, in which case the audioTimePitchAlgorithm set on the AVPlayerItem, AVAssetExportSession, or AVAssetReaderAudioMixOutput on which the AVAudioMix is set will be used for the associated track.
 */
-@property (nonatomic, copy, nullable) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
+@property (nonatomic, copy, nullable) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_10, 7_0);
 
 /*!
  @property		audioTapProcessor

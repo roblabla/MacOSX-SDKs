@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FE5773E7-2B91-3BB0-AC2D-975AFF778814' ]
+uuids:           [ 'x86_64: 5079D6F9-1D94-3818-BB94-14B2085803AE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/WeatherFoundation.framework/Versions/A/WeatherFoundation
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CLLocationCoordinate2DFromString, _CLPlacemarkClosestToReferenceLocation, 
@@ -26,11 +25,11 @@ exports:
                        _WFConvertTemperature, _WFDefaultAllowedAlmanacStaleness, 
                        _WFDefaultAllowedCurrentForecastStaleness, _WFDefaultAllowedDailyForecastStaleness, 
                        _WFDefaultAllowedHistoricalStaleness, _WFDefaultAllowedHourlyForecastStaleness, 
-                       _WFFavoriteLocationsKey, _WFForecastRequestAttachRawAPIOptionsKey, 
-                       _WFForecastRequestComponentsKey, _WFForecastRequestDateKey, 
-                       _WFForecastRequestLocationKey, _WFForecastRequestTypeKey, 
-                       _WFForecastTypeForDateComponents, _WFLocationArchiveVersionKey, 
-                       _WFLocationCodingCityKey, _WFLocationCodingCountryAbbreviationKey, 
+                       _WFExecutingReverseGeoNotification, _WFFavoriteLocationsKey, 
+                       _WFForecastRequestAttachRawAPIOptionsKey, _WFForecastRequestComponentsKey, 
+                       _WFForecastRequestDateKey, _WFForecastRequestLocationKey, 
+                       _WFForecastRequestTypeKey, _WFForecastTypeForDateComponents, 
+                       _WFLocationArchiveVersionKey, _WFLocationCodingCityKey, _WFLocationCodingCountryAbbreviationKey, 
                        _WFLocationCodingCountryKey, _WFLocationCodingCountyKey, _WFLocationCodingCreationDateKey, 
                        _WFLocationCodingGeoLocationKey, _WFLocationCodingLocationIDKey, 
                        _WFLocationCodingStateAbbreviationKey, _WFLocationCodingStateKey, 
@@ -42,7 +41,10 @@ exports:
                        _WFURLComponentCityIndex, _WFURLComponentIsLocalURL, _WFURLComponentIsShowingHourly, 
                        _WFURLComponentLatitude, _WFURLComponentLocale, _WFURLComponentLocationName, 
                        _WFURLComponentLongitude, _WFURLComponentPlatform, _WFURLComponentSiriLongitude, 
-                       _WFURLComponentTWCLatitude, _WFURLComponentTWCLongitude, _WFUnknownTemperatureString, 
+                       _WFURLComponentTWCLatitude, _WFURLComponentTWCLongitude, _WFURLComponentsCityIndexKey, 
+                       _WFURLComponentsDestinationKey, _WFURLComponentsIsLocalWeatherCityKey, 
+                       _WFURLComponentsLocaleKey, _WFURLComponentsLocationKey, _WFURLComponentsLocationNameKey, 
+                       _WFURLComponentsShowHourlyWeatherOnlyKey, _WFUnknownTemperatureString, 
                        _WFUserDefaultsPersistencePrefsContainer, _WFUserDefaultsPersistencePrefsDomain, 
                        _WFUserDefaultsPersistencePrefsGroupId, _WFWeatherConditionComponent, 
                        _WFWeatherDewpointComponent, _WFWeatherFeelsLikeTemperatureComponent, 
@@ -75,8 +77,9 @@ exports:
                        _WFGeocodeRequest, _WFGeocodeResponse, _WFHourlyForecastRequest, 
                        _WFJSONStructureLeafNode, _WFLocation, _WFLocationQueryGeocode, 
                        _WFLocationQueryGeocodeCache, _WFParsedForecastData, _WFQueryDispatcher, 
-                       _WFResourceManager, _WFResponse, _WFServiceConnection, _WFTask, 
-                       _WFTaskIdentifier, _WFTemperature, _WFTemperatureFormatter, 
+                       _WFReachabilityConfigurationRequest, _WFReachabilityConfigurationResponse, 
+                       _WFResourceManager, _WFResponse, _WFServiceConnection, _WFServiceReachabilityObserver, 
+                       _WFTask, _WFTaskIdentifier, _WFTemperature, _WFTemperatureFormatter, 
                        _WFTemperatureUnitChangeRequest, _WFTemperatureUnitObserver, 
                        _WFTemperatureUnitProvider, _WFTemperatureUnitRequest, _WFTemperatureUnitResponse, 
                        _WFTypes, _WFURLComponents, _WFUserDefaultsPersistence, _WFWeatherChannelParser, 

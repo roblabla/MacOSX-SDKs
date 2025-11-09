@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 4C90C7A7-6326-3CB7-AB52-BE997F55082A', 'x86_64: 40DFC2B9-91F0-37F2-86D5-BAD726974FA0' ]
+uuids:           [ 'i386: 514B63DE-AFBB-316F-9531-6D53DE097AF0', 'x86_64: 27330DF3-CE8C-3715-9E48-B1D7717E67E6' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/StoreKit.framework/Versions/A/StoreKit
-current-version: 379.0
-objc-constraint: none
+current-version: 379
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _SKPayment._internal, _SKPaymentTransactionInternal._UUID, 

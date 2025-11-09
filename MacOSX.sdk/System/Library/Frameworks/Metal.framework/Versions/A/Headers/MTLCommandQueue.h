@@ -30,20 +30,20 @@ NS_AVAILABLE(10_11, 8_0)
  @abstract Returns a new autoreleased command buffer used to encode work into this queue that 
  maintains strong references to resources used within the command buffer.
 */
-- (id <MTLCommandBuffer>)commandBuffer;
+- (nullable id <MTLCommandBuffer>)commandBuffer;
 
 /*!
  @method commandBufferWithUnretainedReferences
  @abstract Returns a new autoreleased command buffer used to encode work into this queue that 
  does not maintain strong references to resources used within the command buffer.
 */
-- (id <MTLCommandBuffer>)commandBufferWithUnretainedReferences;
+- (nullable id <MTLCommandBuffer>)commandBufferWithUnretainedReferences;
 
 /*!
  @method insertDebugCaptureBoundary
  @abstract Inform Xcode about when debug capture should start and stop.
  */
-- (void)insertDebugCaptureBoundary;
+- (void)insertDebugCaptureBoundary NS_DEPRECATED(10_11, 10_13, 8_0, 11_0, "Use MTLCaptureScope instead");
 
 @end
 NS_ASSUME_NONNULL_END

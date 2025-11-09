@@ -6,6 +6,7 @@
 //
 
 #import <GameController/GameController.h>
+#import <GameController/GameControllerExtern.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

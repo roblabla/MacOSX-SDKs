@@ -1,5 +1,5 @@
 /*	NSUUID.h
-        Copyright (c) 2011-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -23,10 +23,10 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 - (nullable instancetype)initWithUUIDString:(NSString *)string;
 
 /* Create an NSUUID with the given bytes */
-- (instancetype)initWithUUIDBytes:(const uuid_t)bytes;
+- (instancetype)initWithUUIDBytes:(const uuid_t _Nullable)bytes;
 
 /* Get the individual bytes of the receiver */
-- (void)getUUIDBytes:(uuid_t)uuid;
+- (void)getUUIDBytes:(uuid_t _Nonnull)uuid;
 
 /* Return a string description of the UUID, such as "E621E1F8-C36C-495A-93FC-0C247A3E6E5F" */
 @property (readonly, copy) NSString *UUIDString;

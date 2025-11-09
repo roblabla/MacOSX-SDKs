@@ -80,6 +80,7 @@
 
 #include <sys/appleapiopts.h>
 #include <libkern/sysctl.h>
+
 #include <sys/proc.h>
 #include <sys/vm.h>
 
@@ -357,6 +358,12 @@ __END_DECLS
 		ptr, 0, sysctl_handle_long, "L", descr); \
 	typedef char _sysctl_##parent##_##name##_size_check[(__builtin_constant_p(ptr) || sizeof(*(ptr)) == sizeof(long)) ? 0 : -1];
 
+/* Oid for a unsigned long.  The pointer must be non NULL. */
+#define SYSCTL_ULONG(parent, nbr, name, access, ptr, descr) \
+	SYSCTL_OID(parent, nbr, name, CTLTYPE_INT|access, \
+		ptr, 0, sysctl_handle_long, "LU", descr); \
+	typedef char _sysctl_##parent##_##name##_size_check[(__builtin_constant_p(ptr) || sizeof(*(ptr)) == sizeof(unsigned long)) ? 0 : -1];
+
 /* Oid for a quad.  The pointer must be non NULL. */
 #define SYSCTL_QUAD(parent, nbr, name, access, ptr, descr) \
 	SYSCTL_OID(parent, nbr, name, CTLTYPE_QUAD|access, \
@@ -394,6 +401,24 @@ SYSCTL_DECL(_debug);
 SYSCTL_DECL(_hw);
 SYSCTL_DECL(_machdep);
 SYSCTL_DECL(_user);
+
+
+
+#ifndef SYSCTL_SKMEM_UPDATE_FIELD
+
+#define SYSCTL_SKMEM_UPDATE_FIELD(field, value)
+#define SYSCTL_SKMEM_UPDATE_AT_OFFSET(offset, value)
+#define SYSCTL_SKMEM_INT(parent, oid, sysctl_name, access, ptr, offset, descr) \
+	SYSCTL_INT(parent, oid, sysctl_name, access, ptr, 0, descr)
+
+#define SYSCTL_SKMEM_TCP_INT(oid, sysctl_name, access, variable_type,	\
+							 variable_name, initial_value, descr)		\
+	variable_type variable_name = initial_value;						\
+	SYSCTL_SKMEM_INT(_net_inet_tcp, oid, sysctl_name, access,			\
+					 &variable_name, 0, descr)
+
+#endif /* SYSCTL_SKMEM_UPDATE_FIELD */
+
 
 
 

@@ -91,7 +91,7 @@ extern const CLLocationDistance kCLDistanceFilterNone;
  *    power performance, be sure to specify an appropriate accuracy for your usage scenario (eg,
  *    use a large accuracy value when only a coarse location is needed).
  */
-extern const CLLocationAccuracy kCLLocationAccuracyBestForNavigation __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+extern const CLLocationAccuracy kCLLocationAccuracyBestForNavigation API_AVAILABLE(ios(4.0), macos(10.7));
 extern const CLLocationAccuracy kCLLocationAccuracyBest;
 extern const CLLocationAccuracy kCLLocationAccuracyNearestTenMeters;
 extern const CLLocationAccuracy kCLLocationAccuracyHundredMeters;
@@ -104,7 +104,7 @@ extern const CLLocationAccuracy kCLLocationAccuracyThreeKilometers;
  *  Discussion:
  *  	Used to specify the maximum CLLocationDistance
  */
-extern const CLLocationDistance CLLocationDistanceMax __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+extern const CLLocationDistance CLLocationDistanceMax API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
 
 /*
  *  CLTimeIntervalMax
@@ -112,7 +112,7 @@ extern const CLLocationDistance CLLocationDistanceMax __OSX_AVAILABLE_STARTING(_
  *  Discussion:
  *  	Used to specify the maximum NSTimeInterval
  */
-extern const NSTimeInterval CLTimeIntervalMax __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);
+extern const NSTimeInterval CLTimeIntervalMax API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(macos);
 
 /*
  *  kCLLocationCoordinate2DInvalid
@@ -120,7 +120,7 @@ extern const NSTimeInterval CLTimeIntervalMax __OSX_AVAILABLE_STARTING(__MAC_NA,
  *  Discussion:
  *    Used to specify an invalid CLLocationCoordinate2D.
  */
-extern const CLLocationCoordinate2D kCLLocationCoordinate2DInvalid __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+extern const CLLocationCoordinate2D kCLLocationCoordinate2DInvalid API_AVAILABLE(ios(4.0), macos(10.7));
 
 #ifdef __cplusplus
 extern "C" {
@@ -132,7 +132,7 @@ extern "C" {
  *  Discussion:
  *    Returns YES if the specified coordinate is valid, NO otherwise.
  */
-BOOL CLLocationCoordinate2DIsValid(CLLocationCoordinate2D coord) __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+BOOL CLLocationCoordinate2DIsValid(CLLocationCoordinate2D coord) API_AVAILABLE(ios(4.0), macos(10.7));
 
 /*
  *  CLLocationCoordinate2DMake:
@@ -140,7 +140,7 @@ BOOL CLLocationCoordinate2DIsValid(CLLocationCoordinate2D coord) __OSX_AVAILABLE
  *  Discussion:
  *    Returns a new CLLocationCoordinate2D at the given latitude and longitude
  */
-CLLocationCoordinate2D CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude) __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
+CLLocationCoordinate2D CLLocationCoordinate2DMake(CLLocationDegrees latitude, CLLocationDegrees longitude) API_AVAILABLE(ios(4.0), macos(10.7));
 
 #ifdef __cplusplus
 }
@@ -216,7 +216,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
     verticalAccuracy:(CLLocationAccuracy)vAccuracy
     course:(CLLocationDirection)course
     speed:(CLLocationSpeed)speed
-    timestamp:(NSDate *)timestamp __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_2);
+    timestamp:(NSDate *)timestamp API_AVAILABLE(ios(4.2), macos(10.7));
 
 /*
  *  coordinate
@@ -259,7 +259,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Range:
  *    0.0 - 359.9 degrees, 0 being true North
  */
-@property(readonly, nonatomic) CLLocationDirection course __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_2_2) __TVOS_PROHIBITED;
+@property(readonly, nonatomic) CLLocationDirection course API_AVAILABLE(ios(2.2), macos(10.7)) __TVOS_PROHIBITED;
 
 /*
  *  speed
@@ -267,7 +267,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Returns the speed of the location in m/s. Negative if speed is invalid.
  */
-@property(readonly, nonatomic) CLLocationSpeed speed __OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_2_2) __TVOS_PROHIBITED;
+@property(readonly, nonatomic) CLLocationSpeed speed API_AVAILABLE(ios(2.2), macos(10.7)) __TVOS_PROHIBITED;
 
 /*
  *  timestamp
@@ -285,7 +285,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *    in the current building if you are inside a supported venue.
  *    This will be nil if the floor is unavailable.
  */
-@property(readonly, nonatomic, copy, nullable) CLFloor *floor __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_8_0);
+@property(readonly, nonatomic, copy, nullable) CLFloor *floor API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
 
 /*
  *  getDistanceFrom:
@@ -293,7 +293,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Deprecated. Use -distanceFromLocation: instead.
  */
-- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA,__MAC_NA,__IPHONE_2_0,__IPHONE_3_2) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+- (CLLocationDistance)getDistanceFrom:(const CLLocation *)location API_DEPRECATED_WITH_REPLACEMENT("-distanceFromLocation:", ios(2.0, 3.2)) API_UNAVAILABLE(macos) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*
  *  distanceFromLocation:
@@ -301,7 +301,7 @@ NS_CLASS_AVAILABLE(10_6, 2_0)
  *  Discussion:
  *    Returns the lateral distance between two locations.
  */
-- (CLLocationDistance)distanceFromLocation:(const CLLocation *)location __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_3_2);
+- (CLLocationDistance)distanceFromLocation:(const CLLocation *)location API_AVAILABLE(ios(3.2), macos(10.6));
 
 @end
 

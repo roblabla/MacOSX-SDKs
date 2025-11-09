@@ -222,6 +222,29 @@ constant may be used to append a value to the end of the
 .Fa array
 instead of operating on a specific
 .Fa index .
+.Pp
+.Sh ITERATION
+The
+.Fn xpc_array_apply
+function may be used to iterate the
+.Fa index
+and
+.Fa value
+pairs of an
+.Fa array
+using an
+.Fa applier
+callback block. The callback block is invoked for each pair and must return a
+.Ft bool
+indicating whether the iteration should continue (true if it should continue,
+false if it should not).
+The
+.Fn xpc_array_apply
+function will return true if the
+.Fa applier
+block was called and returned true for all pairs, or false if it was not (i.e. the
+.Fa applier
+returned false during the iteration, which may have caused iteration to stop early).
 .Sh SEE ALSO
 .Xr xpc_object 3 ,
 .Xr xpc_objects 3 ,

@@ -10,7 +10,7 @@
 @class CKNotification, CKServerChangeToken;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_DEPRECATED("Instead of iterating notifications to enumerate changed record zones, use CKDatabaseSubscription, CKFetchDatabaseChangesOperation, and CKFetchRecordZoneChangesOperation", macos(10.10, 10.13), ios(8.0, 11.0), tvos(9.0, 11.0), watchos(3.0, 4.0))
 @interface CKFetchNotificationChangesOperation : CKOperation
 
 /* This operation will fetch all notification changes.

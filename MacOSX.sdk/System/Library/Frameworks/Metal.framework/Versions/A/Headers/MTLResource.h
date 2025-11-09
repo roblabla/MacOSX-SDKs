@@ -146,7 +146,7 @@ typedef NS_OPTIONS(NSUInteger, MTLResourceOptions)
     MTLResourceStorageModePrivate    NS_ENUM_AVAILABLE(10_11, 9_0)  = MTLStorageModePrivate    << MTLResourceStorageModeShift,
     MTLResourceStorageModeMemoryless NS_ENUM_AVAILABLE(NA,    10_0) = MTLStorageModeMemoryless << MTLResourceStorageModeShift,
 
-    MTLResourceHazardTrackingModeUntracked NS_ENUM_AVAILABLE(NA, 10_0) = 0x1UL << MTLResourceHazardTrackingModeShift,
+    MTLResourceHazardTrackingModeUntracked NS_ENUM_AVAILABLE(10_13, 10_0) = 0x1UL << MTLResourceHazardTrackingModeShift,
 
     // Deprecated spellings
     MTLResourceOptionCPUCacheModeDefault       = MTLResourceCPUCacheModeDefaultCache,
@@ -201,7 +201,13 @@ NS_AVAILABLE(10_11, 8_0)
  @abstract The heap from which this resouce was created.
  @discussion Nil when this resource is not backed by a heap.
  */
-@property (readonly, nullable) id <MTLHeap> heap NS_AVAILABLE(NA, 10_0);
+@property (readonly, nullable) id <MTLHeap> heap NS_AVAILABLE(10_13, 10_0);
+
+/*!
+ @property allocatedSize
+ @abstrace The size in bytes occupied by this resource
+*/
+@property (readonly) NSUInteger allocatedSize NS_AVAILABLE(10_13, 11_0);
 
 /*!
  @method makeAliasable
@@ -212,7 +218,7 @@ NS_AVAILABLE(10_11, 8_0)
  from Buffers backed by heap memory has no effect.
  Once a resource is made aliasable, the decision cannot be reverted.
  */
--(void) makeAliasable NS_AVAILABLE(NA, 10_0);
+-(void) makeAliasable NS_AVAILABLE(10_13, 10_0);
 
 /*!
  @method isAliasable
@@ -221,7 +227,7 @@ NS_AVAILABLE(10_11, 8_0)
  If resource is sub-allocated from other resource created on the heap, isAliasable returns 
  aliasing state of that base resource. Also returns NO when storage mode is memoryless.
  */
--(BOOL) isAliasable NS_AVAILABLE(NA, 10_0);
+-(BOOL) isAliasable NS_AVAILABLE(10_13, 10_0);
 
 @end
 

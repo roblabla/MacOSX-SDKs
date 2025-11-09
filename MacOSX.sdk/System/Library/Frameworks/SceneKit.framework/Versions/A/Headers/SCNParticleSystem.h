@@ -1,7 +1,7 @@
 //
 //  SCNParticleSystem.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -19,25 +19,25 @@ typedef NSString * SCNParticleProperty NS_STRING_ENUM;
 typedef NSString * SCNParticleProperty;
 #endif
 
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyPosition API_AVAILABLE(macosx(10.10));        // float3 : {x,y,z}     controller animation type : {NSValue(SCNVector3)}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyAngle API_AVAILABLE(macosx(10.10));           // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyRotationAxis API_AVAILABLE(macosx(10.10));    // float3 : {x,y,z}     controller animation type : {NSValue(SCNVector3)}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyVelocity API_AVAILABLE(macosx(10.10));        // float3 : {x,y,z}     controller animation type : {NSValue(SCNVector3)}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyAngularVelocity API_AVAILABLE(macosx(10.10)); // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyLife API_AVAILABLE(macosx(10.10));            // float                not controllable
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyColor API_AVAILABLE(macosx(10.10));           // float4 : {r,g,b,a}   controller animation type : {NSColor}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyOpacity API_AVAILABLE(macosx(10.10));         // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertySize API_AVAILABLE(macosx(10.10));            // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyFrame API_AVAILABLE(macosx(10.10));           // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyFrameRate API_AVAILABLE(macosx(10.10));       // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyBounce API_AVAILABLE(macosx(10.10));          // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyCharge API_AVAILABLE(macosx(10.10));          // float                controller animation type : {NSNumber}
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyFriction API_AVAILABLE(macosx(10.10));        // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyPosition API_AVAILABLE(macos(10.10));        // float3 : {x,y,z}     controller animation type : {NSValue(SCNVector3)}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyAngle API_AVAILABLE(macos(10.10));           // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyRotationAxis API_AVAILABLE(macos(10.10));    // float3 : {x,y,z}     controller animation type : {NSValue(SCNVector3)}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyVelocity API_AVAILABLE(macos(10.10));        // float3 : {x,y,z}     controller animation type : {NSValue(SCNVector3)}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyAngularVelocity API_AVAILABLE(macos(10.10)); // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyLife API_AVAILABLE(macos(10.10));            // float                not controllable
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyColor API_AVAILABLE(macos(10.10));           // float4 : {r,g,b,a}   controller animation type : {NSColor}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyOpacity API_AVAILABLE(macos(10.10));         // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertySize API_AVAILABLE(macos(10.10));            // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyFrame API_AVAILABLE(macos(10.10));           // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyFrameRate API_AVAILABLE(macos(10.10));       // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyBounce API_AVAILABLE(macos(10.10));          // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyCharge API_AVAILABLE(macos(10.10));          // float                controller animation type : {NSNumber}
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyFriction API_AVAILABLE(macos(10.10));        // float                controller animation type : {NSNumber}
 
 // These two properties are only available when handling the events of type SCNParticleEventCollision.
 // They are read-only values.
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyContactPoint API_AVAILABLE(macosx(10.10));    // float3               not controllable
-FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyContactNormal API_AVAILABLE(macosx(10.10));   // float3               not controllable
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyContactPoint API_AVAILABLE(macos(10.10));    // float3               not controllable
+FOUNDATION_EXTERN SCNParticleProperty const SCNParticlePropertyContactNormal API_AVAILABLE(macos(10.10));   // float3               not controllable
 
 /*!
  @typedef SCNParticleEventBlock
@@ -91,7 +91,7 @@ typedef NS_ENUM(NSInteger, SCNParticleSortingMode) {
 	SCNParticleSortingModeDistance,                    //particles are sorted by distance from the point of view
 	SCNParticleSortingModeOldestFirst,                 //particles are sorted by birth date - oldest first
 	SCNParticleSortingModeYoungestFirst                //particles are sorted by birth date - yougest first
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Particle Blend Mode
 typedef NS_ENUM(NSInteger, SCNParticleBlendMode) {
@@ -101,43 +101,43 @@ typedef NS_ENUM(NSInteger, SCNParticleBlendMode) {
 	SCNParticleBlendModeScreen,
 	SCNParticleBlendModeAlpha,
 	SCNParticleBlendModeReplace
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Particle Orientation Mode
 typedef NS_ENUM(NSInteger, SCNParticleOrientationMode) {
 	SCNParticleOrientationModeBillboardScreenAligned,  // particles are aligned on screen
 	SCNParticleOrientationModeBillboardViewAligned,    // particles are perpendicular with the vector from the point of view to the particle.
-	SCNParticleOrientationModeFree, 	                 // free on all axis.
+	SCNParticleOrientationModeFree, 	               // free on all axis.
     SCNParticleOrientationModeBillboardYAligned        // fixed on Y axis.
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Particle Birth Location
 typedef NS_ENUM(NSInteger, SCNParticleBirthLocation) {
     SCNParticleBirthLocationSurface,                   //particles are emitted on the surface of the emitter shape.
     SCNParticleBirthLocationVolume,                    //particles are emitted inside the volume of the emitter shape.
     SCNParticleBirthLocationVertex                     //particles are emitted on the vertices of the emitter shape.
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Particle Birth Direction
 typedef NS_ENUM(NSInteger, SCNParticleBirthDirection) {
     SCNParticleBirthDirectionConstant,                 // Z Direction of the Emitter.
-    SCNParticleBirthDirectionSurfaceNormal,	        // Use the direction induced by the shape
+    SCNParticleBirthDirectionSurfaceNormal,	           // Use the direction induced by the shape
     SCNParticleBirthDirectionRandom                    // Random direction.
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Texture Animation Mode
 typedef NS_ENUM(NSInteger, SCNParticleImageSequenceAnimationMode) {
     SCNParticleImageSequenceAnimationModeRepeat,             // The animation will loop.
     SCNParticleImageSequenceAnimationModeClamp,              // The animation will stop at both ends.
     SCNParticleImageSequenceAnimationModeAutoReverse         // The animation will reverse when reaching an end.
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Particle Variation Mode
 typedef NS_ENUM(NSInteger, SCNParticleInputMode) {
 	SCNParticleInputModeOverLife,                  // The input time for the controller animation is the current life duration of the particle
 	SCNParticleInputModeOverDistance,              // The input time for the controller animation is the distance from the variation origin node.
 	SCNParticleInputModeOverOtherProperty,         // The input time for the controller animation is the current value of another specified property.
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Particle Modifier Stage
 typedef NS_ENUM(NSInteger, SCNParticleModifierStage) {
@@ -145,28 +145,28 @@ typedef NS_ENUM(NSInteger, SCNParticleModifierStage) {
 	SCNParticleModifierStagePostDynamics,
 	SCNParticleModifierStagePreCollision,
 	SCNParticleModifierStagePostCollision
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 // Particle Event
 typedef NS_ENUM(NSInteger, SCNParticleEvent) {
 	SCNParticleEventBirth,                             // Event triggered when a new particle spawns.
 	SCNParticleEventDeath,                             // Event triggered when a particle dies.
 	SCNParticleEventCollision                          // Event triggered when a particle collides with a collider node.
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 /*!
  @class SCNParticlePropertyController
  @abstract The SCNParticlePropertyController class controls the variation over time or over distance of a particle property.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNParticlePropertyController: NSObject <NSSecureCoding, NSCopying>
 
 // Creates and initializes a particle property controller with the specified animation.
-+ (instancetype)controllerWithAnimation:(CAAnimation *)animation;
++ (instancetype)controllerWithAnimation:(CAAnimation *)animation __WATCHOS_PROHIBITED;
 
 // Specifies the animation to be applied on the particle system property. The type of the animation will depend of the property controlled.
 // See the documentation along property name definition.
-@property(nonatomic, retain) CAAnimation *animation;
+@property(nonatomic, retain) CAAnimation *animation __WATCHOS_PROHIBITED;
 
 // Specify the input mode of the receiver.
 // This can be over life, over distance or over the evolution of another proprety.
@@ -191,7 +191,7 @@ API_AVAILABLE(macosx(10.10))
  @class SCNParticleSystem
  @abstract The SCNParticleSystem class represents a system of particles.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNParticleSystem : NSObject <NSCopying, NSSecureCoding, SCNAnimatable>
 
 // Create an instance of a particle system
@@ -242,6 +242,9 @@ API_AVAILABLE(macosx(10.10))
 // Specifies the emitting direction of newly created particles, used in the SCNParticleBirthDirectionConstant mode. Default to {0, 0, 1}. Animatable.
 @property(nonatomic) SCNVector3 emittingDirection;
 
+// Specifies the orientation direction of newly created particles, used in the SCNParticleOrientationModeFree mode. The particle will rotate around this axis. Default to {0, 0, 0}, which means random. The particle will then rotate arbitraly. Animatable.
+@property(nonatomic) SCNVector3 orientationDirection API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
 // Specifies the acceleration applied to particles, in world coordinates.
 // Allows to simulate winds or gravity. Default to {0, 0, 0}. Animatable.
 @property(nonatomic) SCNVector3 acceleration;
@@ -278,10 +281,10 @@ API_AVAILABLE(macosx(10.10))
 // Specifies the life span variation of particles. Animatable.
 @property(nonatomic) CGFloat particleLifeSpanVariation;
 
-// Specifies an optional system to spawn new particles when a particle die
+// Specifies an optional system to spawn new particles when a particle dies
 @property(nonatomic, retain, nullable) SCNParticleSystem *systemSpawnedOnDying;
 
-// Specifies an optional system to spawn new particles when a particle die
+// Specifies an optional system to spawn new particles when a particle dies
 @property(nonatomic, retain, nullable) SCNParticleSystem *systemSpawnedOnCollision;
 
 // Specifies an optional system to spawn new particles when a particle is alive
@@ -326,6 +329,12 @@ API_AVAILABLE(macosx(10.10))
 
 // Specifies the initial size variation of the particle. Animatable.
 @property(nonatomic) CGFloat particleSizeVariation;
+
+// Specifies the initial intensity of the particle. Animatable.
+@property(nonatomic) CGFloat particleIntensity API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+// Specifies the initial intensity variation of the particle. Animatable.
+@property(nonatomic) CGFloat particleIntensityVariation API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 // Specifies the blend mode to use to render the particle system. Defaults to SCNParticleBlendModeAdditive.
 @property(nonatomic) SCNParticleBlendMode blendMode;
@@ -418,16 +427,16 @@ API_AVAILABLE(macosx(10.10))
 @interface SCNNode (SCNParticleSystemSupport)
 
 // Add a particle system to the receiver.
-- (void)addParticleSystem:(SCNParticleSystem *)system API_AVAILABLE(macosx(10.10));
+- (void)addParticleSystem:(SCNParticleSystem *)system API_AVAILABLE(macos(10.10));
 
 // Remove all particle systems of the receiver.
-- (void)removeAllParticleSystems API_AVAILABLE(macosx(10.10));
+- (void)removeAllParticleSystems API_AVAILABLE(macos(10.10));
 
 // Remove the specified particle system from the receiver.
-- (void)removeParticleSystem:(SCNParticleSystem *)system API_AVAILABLE(macosx(10.10));
+- (void)removeParticleSystem:(SCNParticleSystem *)system API_AVAILABLE(macos(10.10));
 
 // The particle systems attached to the node.
-@property(readonly, nullable) NSArray<SCNParticleSystem *> *particleSystems API_AVAILABLE(macosx(10.10));
+@property(readonly, nullable) NSArray<SCNParticleSystem *> *particleSystems API_AVAILABLE(macos(10.10));
 
 @end
 
@@ -435,16 +444,16 @@ API_AVAILABLE(macosx(10.10))
 @interface SCNScene (SCNParticleSystemSupport)
 
 // Add a particle system at the given location.
-- (void)addParticleSystem:(SCNParticleSystem *)system withTransform:(SCNMatrix4)transform API_AVAILABLE(macosx(10.10));
+- (void)addParticleSystem:(SCNParticleSystem *)system withTransform:(SCNMatrix4)transform API_AVAILABLE(macos(10.10));
 
 // Remove all particle systems in the scene.
-- (void)removeAllParticleSystems API_AVAILABLE(macosx(10.10));
+- (void)removeAllParticleSystems API_AVAILABLE(macos(10.10));
 
 // Remove the specified particle system from the receiver.
-- (void)removeParticleSystem:(SCNParticleSystem *)system API_AVAILABLE(macosx(10.10));
+- (void)removeParticleSystem:(SCNParticleSystem *)system API_AVAILABLE(macos(10.10));
 
 // The particle systems attached to the scene.
-@property(readonly, nullable) NSArray<SCNParticleSystem *> *particleSystems API_AVAILABLE(macosx(10.10));
+@property(readonly, nullable) NSArray<SCNParticleSystem *> *particleSystems API_AVAILABLE(macos(10.10));
 
 @end
 

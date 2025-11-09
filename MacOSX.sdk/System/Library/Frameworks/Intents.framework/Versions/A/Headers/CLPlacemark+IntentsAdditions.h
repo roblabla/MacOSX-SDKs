@@ -2,13 +2,12 @@
 //  CLPlacemark+IntentsAdditions.h
 //  Intents
 //
-//  Copyright © 2016 Apple. All rights reserved.
+//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <Contacts/CNPostalAddress.h>
 #import <CoreLocation/CLPlacemark.h>
-
-@class CNPostalAddress;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)placemarkWithLocation:(CLLocation *)location
                                  name:(nullable NSString *)name
-                        postalAddress:(nullable CNPostalAddress *)postalAddress API_AVAILABLE(ios(10.0));
+                        postalAddress:(nullable CNPostalAddress *)postalAddress API_AVAILABLE(ios(10.0), watchos(3.2));
 
 @end
 

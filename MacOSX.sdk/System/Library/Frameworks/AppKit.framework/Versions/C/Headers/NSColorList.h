@@ -1,7 +1,7 @@
 /*
 	NSColorList.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -19,6 +19,9 @@ NSColorLists post "NSColorListDidChangeNotification" when changed.
 #import <CoreFoundation/CFDictionary.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * NSColorListName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSColorName NS_EXTENSIBLE_STRING_ENUM;
 
 @class NSColor, NSBundle;
 
@@ -49,40 +52,40 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Returns all color lists in the user's color list path, including those added at runtime. Creating a named color list and saving with writeToFile:nil will add it to this list; removeFile will remove it from this list. (That is what happens as the user creates and destroys color lists in the color panel.)
 */
-+ (NSArray<NSColorList *> *)availableColorLists;
+@property (class, readonly, copy) NSArray<NSColorList *> *availableColorLists;
 
 /* Returns the named color list from availableColorLists
 */
-+ (nullable NSColorList *)colorListNamed:(NSString *)name;
++ (nullable NSColorList *)colorListNamed:(NSColorListName)name;
 
 /* Creates a color list; specify @"" if you don't want a name. NOTE that this does not add the color list to availableColorLists until the color list is saved into the user's path with writeToFile:nil.
 */
-- (instancetype)initWithName:(NSString *)name;			
-- (nullable instancetype)initWithName:(NSString *)name fromFile:(nullable NSString *)path;	/* Load initial contents */
+- (instancetype)initWithName:(NSColorListName)name;
+- (nullable instancetype)initWithName:(NSColorListName)name fromFile:(nullable NSString *)path;	/* Load initial contents */
 
 /* Name of the color list
 */
-@property (nullable, readonly, copy) NSString *name;
+@property (nullable, readonly, copy) NSColorListName name;
 
 /* If key already exists, sets the corresponding color. Otherwise inserts the color at the end.
 */
-- (void)setColor:(NSColor *)color forKey:(NSString *)key;
+- (void)setColor:(NSColor *)color forKey:(NSColorName)key;
 
 /* Inserts color at the specified location. If a color by the same key is already in the list but at a different location it is removed from there.
 */
-- (void)insertColor:(NSColor *)color key:(NSString *)key atIndex:(NSUInteger)loc;
+- (void)insertColor:(NSColor *)color key:(NSColorName)key atIndex:(NSUInteger)loc;
 
 /* No-op if key doesn't exist.
 */
-- (void)removeColorWithKey:(NSString *)key;
+- (void)removeColorWithKey:(NSColorName)key;
 
 /* Returns nil if key doesn't exist.
 */
-- (nullable NSColor *)colorWithKey:(NSString *)key;
+- (nullable NSColor *)colorWithKey:(NSColorName)key;
 
 /* Use this array to get count of colors and enumerate them according to the ordering specified when inserting.
 */
-@property (readonly, copy) NSArray<NSString *> *allKeys;
+@property (readonly, copy) NSArray<NSColorName> *allKeys;
 
 /* Depends on the source of the colorlist file
 */

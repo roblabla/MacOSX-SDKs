@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKDiscoverUserIdentitiesOperation : CKOperation
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

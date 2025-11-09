@@ -1,25 +1,24 @@
 /*
     NSLevelIndicatorCell.h
     Application Kit
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSActionCell.h>
 #import <AppKit/NSSliderCell.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
-    NSRelevancyLevelIndicatorStyle,
-    NSContinuousCapacityLevelIndicatorStyle,
-    NSDiscreteCapacityLevelIndicatorStyle,
-    NSRatingLevelIndicatorStyle
+    NSLevelIndicatorStyleRelevancy,
+    NSLevelIndicatorStyleContinuousCapacity,
+    NSLevelIndicatorStyleDiscreteCapacity,
+    NSLevelIndicatorStyleRating
 };
 
 @interface NSLevelIndicatorCell : NSActionCell {
-  @private
+@private
     double _value;
     double _minValue;
     double _maxValue;
@@ -28,17 +27,19 @@ typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
     int    _numberOfTickMarks;
     int    _numberOfMajorTickMarks;
     struct {
-	unsigned int indicatorStyle:4;
+        unsigned int indicatorStyle:4;
         unsigned int tickMarkPosition:1;
         unsigned int selectable:1;
-	unsigned int ratingPlaceholder:1;
-	unsigned int reserved:25;
+        unsigned int placeholderVisibility:2;
+        unsigned int tieredCapacity:1;
+        unsigned int inTableView:1;
+        unsigned int reserved:22;
     } _liFlags;
     NSRect _cellFrame;
-    int    _reserved1;
-    int    _reserved2;
-    int    _reserved3;
-    int    _reserved4;
+    id     _aux;
+    id     _core;
+    int    _reserved1 __unused;
+    int    _reserved2 __unused;
 }
 
 - (instancetype)initWithLevelIndicatorStyle:(NSLevelIndicatorStyle)levelIndicatorStyle;
@@ -62,9 +63,13 @@ typedef NS_ENUM(NSUInteger, NSLevelIndicatorStyle) {
 - (NSRect)rectOfTickMarkAtIndex:(NSInteger)index;
 - (double)tickMarkValueAtIndex:(NSInteger)index;
 
-- (void)setImage:(nullable NSImage*)image;
-
 @end
+
+/* Legacy style names. These constants will be deprecated in a future release. */
+static const NSLevelIndicatorStyle NSRelevancyLevelIndicatorStyle = NSLevelIndicatorStyleRelevancy;
+static const NSLevelIndicatorStyle NSContinuousCapacityLevelIndicatorStyle = NSLevelIndicatorStyleContinuousCapacity;
+static const NSLevelIndicatorStyle NSDiscreteCapacityLevelIndicatorStyle = NSLevelIndicatorStyleDiscreteCapacity;
+static const NSLevelIndicatorStyle NSRatingLevelIndicatorStyle = NSLevelIndicatorStyleRating;
 
 NS_ASSUME_NONNULL_END
 

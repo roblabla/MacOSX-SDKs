@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 81CABFD8-B8F6-387C-B694-27385ECA0C7F' ]
+uuids:           [ 'x86_64: 34558724-4B3A-35B0-B871-68BB68AD554F' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PhotoLibraryPrivate.framework/Versions/A/Frameworks/UXKit.framework/Versions/A/UXKit
-current-version: 3130.0.240
-objc-constraint: none
+current-version: 3201.9.160
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NSStringFromUXCollectionViewLayoutDropPosition, _UXCollectionElementKindCell, 
@@ -12,22 +11,22 @@ exports:
                        _UXCollectionViewDraggingPasteboardItemType, _UXCollectionViewDraggingPasteboardOptionWasPressed, 
                        _UXCollectionViewElementKindCell, _UXCollectionViewElementKindDecorationView, 
                        _UXCollectionViewElementKindSectionFooter, _UXCollectionViewElementKindSectionHeader, 
-                       _UXCollectionViewSourcePointerPasteboardItemType, _UXEdgeInsetsZero, 
-                       _UXEventTrackerStateToString, _UXFlowLayoutCommonRowHorizontalAlignmentKey, 
+                       _UXEdgeInsetsZero, _UXFlowLayoutCommonRowHorizontalAlignmentKey, 
                        _UXFlowLayoutLastRowHorizontalAlignmentKey, _UXFlowLayoutRowVerticalAlignmentKey, 
                        _UXKitVersionNumber, _UXKitVersionString, _UXLocalizedString, 
+                       _UXSourceControllerForceSelectionKey, _UXSourceControllerSenderIdentifierKey, 
                        _UXTransitionContextFromViewControllerKey, _UXTransitionContextToViewControllerKey, 
                        __UXApplyTintColorWithViewController, __UXCollectionElementIsClone, 
                        __UXCollectionElementIsOriginal, __UXDebugFramesOfView, __UXDefaultTintColor, 
                        __UXImageBackChevron, __UXImageCheckmark, __UXImageForwardChevron, 
-                       __UXImageLeftChevron, __UXImageRightChevron, __UXLowPassFilter, 
-                       __animationForViewFromValueToValueKeyPath, __transitionControllerClassForTransition, 
-                       __uxImageFromRect, _kDefaultHeaderHeight, _kDefaultRowHeight, 
-                       _kDefaultTransitionDuration, _parametersOfSpringAnimation ]
+                       __UXImageLeftChevron, __UXImageRightChevron, __animationForViewFromValueToValueKeyPath, 
+                       __transitionControllerClassForTransition, __uxImageFromRect, 
+                       _kDefaultHeaderHeight, _kDefaultRowHeight, _kDefaultTransitionDuration, 
+                       _parametersOfSpringAnimation ]
     objc-classes:    [ _UIMutableIndexPath, _UXAuxiliaryNavigationStore, _UXBackButton, 
-                       _UXBar, _UXBarButtonItem, _UXBarItem, _UXClickEventTracker, 
-                       _UXCollectionClipView, _UXCollectionDocumentView, _UXCollectionReusableView, 
-                       _UXCollectionView, _UXCollectionViewAnimation, _UXCollectionViewAnimationContext, 
+                       _UXBar, _UXBarButtonItem, _UXBarItem, _UXCollectionClipView, 
+                       _UXCollectionDocumentView, _UXCollectionReusableView, _UXCollectionView, 
+                       _UXCollectionViewAnimation, _UXCollectionViewAnimationContext, 
                        _UXCollectionViewCell, _UXCollectionViewController, _UXCollectionViewData, 
                        _UXCollectionViewFlowLayout, _UXCollectionViewFlowLayoutInvalidationContext, 
                        _UXCollectionViewIndexPathsSet, _UXCollectionViewLayout, _UXCollectionViewLayoutAccessibility, 
@@ -35,23 +34,24 @@ exports:
                        _UXCollectionViewLayoutSectionAccessibility, _UXCollectionViewMutableIndexPathsSet, 
                        _UXCollectionViewPanGestureRecognizer, _UXCollectionViewRearrangingCoordinatorDragRecognizer, 
                        _UXCollectionViewUpdate, _UXCollectionViewUpdateGap, _UXCollectionViewUpdateItem, 
-                       _UXControl, _UXDragEventTracker, _UXEventTracker, _UXIdentityTransitionController, 
-                       _UXImageView, _UXLabel, _UXLongClickEventTracker, _UXNavigationBar, 
-                       _UXNavigationController, _UXNavigationItem, _UXParallaxTransitionController, 
-                       _UXPinchEventTracker, _UXPopover, _UXPopoverController, _UXProxyViewController, 
-                       _UXSlideTransitionController, _UXSourceController, _UXTabBarController, 
-                       _UXTabBarItem, _UXTableLayout, _UXTableView, _UXTableViewCell, 
-                       _UXTableViewController, _UXTableViewHeaderFooterView, _UXToolbar, 
-                       _UXTransitionController, _UXView, _UXViewAnimationContext, 
-                       _UXViewController, _UXWindowController, _UXZoomingCrossfadeTransitionController, 
-                       __UXButton, __UXButtonCell, __UXCollectionDocumentView, __UXCollectionSnapshotView, 
-                       __UXCollectionView, __UXCollectionViewItemKey, __UXCollectionViewLayoutProxy, 
+                       _UXControl, _UXIdentityTransitionController, _UXImageView, 
+                       _UXLabel, _UXNavigationBar, _UXNavigationController, _UXNavigationItem, 
+                       _UXParallaxTransitionController, _UXPopover, _UXPopoverController, 
+                       _UXProxyViewController, _UXSlideTransitionController, _UXSourceController, 
+                       _UXSubtoolbar, _UXTabBarController, _UXTabBarItem, _UXTabBarItemSegment, 
+                       _UXTableLayout, _UXTableView, _UXTableViewCell, _UXTableViewController, 
+                       _UXTableViewHeaderFooterView, _UXToolbar, _UXTransitionController, 
+                       _UXView, _UXViewAnimationContext, _UXViewController, _UXWindowController, 
+                       _UXZoomingCrossfadeTransitionController, __UXButton, __UXButtonCell, 
+                       __UXCollectionDocumentView, __UXCollectionSnapshotView, __UXCollectionView, 
+                       __UXCollectionViewItemKey, __UXCollectionViewLayoutProxy, 
                        __UXCollectionViewRearrangingCoordinator, __UXCollectionViewSectionItemIndexes, 
-                       __UXContainerView, __UXFlowLayoutInfo, __UXFlowLayoutItem, 
-                       __UXFlowLayoutRow, __UXFlowLayoutSection, __UXLayoutGuide, 
-                       __UXNavigationDestination, __UXNavigationItemContainerView, 
-                       __UXNavigationRequest, __UXResizableImage, __UXSinglePixelLine, 
-                       __UXSourceSplitView, __UXSourceUtilities, __UXTableHeaderView, 
+                       __UXContainerView, __UXContentUnavailableView, __UXFlowLayoutInfo, 
+                       __UXFlowLayoutItem, __UXFlowLayoutRow, __UXFlowLayoutSection, 
+                       __UXLayoutSpacer, __UXNavigationDestination, __UXNavigationItemContainerView, 
+                       __UXNavigationRequest, __UXResizableImage, __UXSettings, __UXSettingsGroup, 
+                       __UXSinglePixelLine, __UXSourceSplitView, __UXSourceSplitViewShadowView, 
+                       __UXSourceSplitViewSpringLoadingView, __UXTableHeaderView, 
                        __UXToolbarItemsContainer, __UXViewControllerOneToOneTransitionContext, 
                        __UXViewControllerTransitionContext, __UXViewControllerTransitionCoordinator, 
                        __UXWindow, __UXWindowState ]

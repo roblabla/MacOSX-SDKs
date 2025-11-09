@@ -254,6 +254,7 @@ typedef struct memory_object_attr_info	memory_object_attr_info_data_t;
 #define MAP_MEM_WCOMB		4	/* Write combining mode */
 					/* aka store gather     */
 #define MAP_MEM_INNERWBACK	5
+#define MAP_MEM_POSTED		6
 
 #define GET_MAP_MEM(flags)	\
 	((((unsigned int)(flags)) >> 24) & 0xFF)
@@ -262,7 +263,8 @@ typedef struct memory_object_attr_info	memory_object_attr_info_data_t;
 	((flags) = ((((unsigned int)(caching)) << 24) \
 			& 0xFF000000) | ((flags) & 0xFFFFFF));
 
-/* leave room for vm_prot bits */
+/* leave room for vm_prot bits (0xFF ?) */
+#define MAP_MEM_PURGABLE_KERNEL_ONLY 0x004000 /* volatility controlled by kernel */
 #define MAP_MEM_GRAB_SECLUDED	0x008000 /* can grab secluded pages */
 #define MAP_MEM_ONLY		0x010000 /* change processor caching  */
 #define MAP_MEM_NAMED_CREATE	0x020000 /* create extant object      */
@@ -272,6 +274,19 @@ typedef struct memory_object_attr_info	memory_object_attr_info_data_t;
 #define MAP_MEM_VM_COPY		0x200000 /* make a copy of a VM range */
 #define MAP_MEM_VM_SHARE	0x400000 /* extract a VM range for remap */
 #define	MAP_MEM_4K_DATA_ADDR	0x800000 /* preserve 4K aligned address of data */
+
+#define MAP_MEM_FLAGS_MASK 0x00FFFF00
+#define MAP_MEM_FLAGS_USER ( 				   \
+	MAP_MEM_PURGABLE_KERNEL_ONLY |		   	   \
+	MAP_MEM_GRAB_SECLUDED |				   \
+	MAP_MEM_ONLY |					   \
+	MAP_MEM_NAMED_CREATE |				   \
+	MAP_MEM_PURGABLE |				   \
+	MAP_MEM_NAMED_REUSE |				   \
+	MAP_MEM_USE_DATA_ADDR |				   \
+	MAP_MEM_VM_COPY |				   \
+	MAP_MEM_VM_SHARE |				   \
+	MAP_MEM_4K_DATA_ADDR)
 
 
 #endif	/* _MACH_MEMORY_OBJECT_TYPES_H_ */

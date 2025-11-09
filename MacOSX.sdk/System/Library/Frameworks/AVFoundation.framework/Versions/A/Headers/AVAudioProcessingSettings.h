@@ -3,12 +3,25 @@
  
     Framework:  AVFoundation
  
-	Copyright 2013 Apple Inc. All rights reserved.
+	Copyright 2013-2017 Apple Inc. All rights reserved.
  
  */
 
 #import <AVFoundation/AVBase.h>
 #import <Foundation/Foundation.h>
+
+
+/*!
+ @typedef AVAudioTimePitchAlgorithm
+ @abstract
+    The type of a time pitch algorithm.
+ @discussion
+	On OS X, the default algorithm for all time pitch operations is AVAudioTimePitchAlgorithmSpectral.  On iOS, the default algorithm for playback is AVAudioTimePitchAlgorithmLowQualityZeroLatency and the default for export & other offline processing is AVAudioTimePitchAlgorithmSpectral.
+
+	For scaled audio edits, i.e. when the timeMapping of an AVAssetTrackSegment is between timeRanges of unequal duration, it is important to choose an algorithm that supports the full range of edit rates present in the source media.  AVAudioTimePitchAlgorithmSpectral is often the best choice due to the highly inclusive range of rates it supports, assuming that it is desirable to maintain a constant pitch regardless of the edit rate.  If it is instead desirable to allow the pitch to vary with the edit rate, AVAudioTimePitchAlgorithmVarispeed is the best choice.
+ 
+*/
+typedef NSString * AVAudioTimePitchAlgorithm NS_STRING_ENUM;
 
 /*!
  @abstract		Values for time pitch algorithm
@@ -29,13 +42,8 @@
 				High quality, no pitch correction. Pitch varies with rate.
                 Variable rate from 1/32 to 32.
  
- @discussion
-	On OS X, the default algorithm for all time pitch operations is AVAudioTimePitchAlgorithmSpectral.  On iOS, the default algorithm for playback is AVAudioTimePitchAlgorithmLowQualityZeroLatency and the default for export & other offline processing is AVAudioTimePitchAlgorithmSpectral.
-
-	For scaled audio edits, i.e. when the timeMapping of an AVAssetTrackSegment is between timeRanges of unequal duration, it is important to choose an algorithm that supports the full range of edit rates present in the source media.  AVAudioTimePitchAlgorithmSpectral is often the best choice due to the highly inclusive range of rates it supports, assuming that it is desirable to maintain a constant pitch regardless of the edit rate.  If it is instead desirable to allow the pitch to vary with the edit rate, AVAudioTimePitchAlgorithmVarispeed is the best choice.
- 
 */
-AVF_EXPORT NSString *const AVAudioTimePitchAlgorithmLowQualityZeroLatency NS_AVAILABLE_IOS(7_0);
-AVF_EXPORT NSString *const AVAudioTimePitchAlgorithmTimeDomain NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString *const AVAudioTimePitchAlgorithmSpectral NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString *const AVAudioTimePitchAlgorithmVarispeed NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmLowQualityZeroLatency NS_AVAILABLE_IOS(7_0);
+AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmTimeDomain NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmSpectral NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmVarispeed NS_AVAILABLE(10_9, 7_0);

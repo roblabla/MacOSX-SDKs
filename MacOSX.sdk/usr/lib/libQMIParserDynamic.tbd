@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DF4116E7-6F7E-38E1-98D3-565556300F91' ]
+uuids:           [ 'x86_64: 5FD3628E-0FF7-3DC2-BDA7-94671AA910CB' ]
 platform:        macosx
 install-name:    /usr/lib/libQMIParserDynamic.dylib
 objc-constraint: none
@@ -13,9 +13,11 @@ exports:
                        __ZN3qmi11MessageBaseC1ERKNS_18MutableMessageBaseE, __ZN3qmi11MessageBaseC1EtNS_5ErrorE, 
                        __ZN3qmi11MessageBaseC2ENS_5ErrorE, __ZN3qmi11MessageBaseC2EPKvm, 
                        __ZN3qmi11MessageBaseC2ERKNS_18MutableMessageBaseE, __ZN3qmi11MessageBaseC2EtNS_5ErrorE, 
-                       __ZN3qmi11MessageBaseD1Ev, __ZN3qmi11MessageBaseD2Ev, __ZN3qmi12ResponseBaseC1EPKvm, 
-                       __ZN3qmi12ResponseBaseC2EPKvm, __ZN3qmi13createRequestEhhttU13block_pointerFvPhmE, 
-                       __ZN3qmi15isInternalErrorENS_5ErrorE, __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEPKvmS3_m, 
+                       __ZN3qmi11MessageBaseD1Ev, __ZN3qmi11MessageBaseD2Ev, __ZN3qmi11fixupHeaderERKNSt3__110shared_ptrINS_17SerializedMessageEEEhh, 
+                       __ZN3qmi12ResponseBaseC1EPKvm, __ZN3qmi12ResponseBaseC2EPKvm, 
+                       __ZN3qmi13createRequestEhNS_11buffer_viewE, __ZN3qmi13createRequestEhhttU13block_pointerFvPhmE, 
+                       __ZN3qmi15isInternalErrorENS_5ErrorE, __ZN3qmi16createRawRequestEhNS_11buffer_viewEm, 
+                       __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEPKvmS3_m, 
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterERKNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEESA_, 
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterERKNSt3__16vectorIhNS2_9allocatorIhEEEES8_, 
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEaa, 
@@ -27,12 +29,14 @@ exports:
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEtt, 
                        __ZN3qmi17validateTlvFieldsERNS_21RandomMessageReporterEyy, 
                        __ZN3qmi18MutableMessageBase18sWriteErrorHandlerE, __ZN3qmi18MutableMessageBase20setWriteErrorHandlerEPFvtRNSt3__16vectorIhNS1_9allocatorIhEEEElE, 
-                       __ZN3qmi18MutableMessageBase4swapERS0_, __ZN3qmi18MutableMessageBaseC1ERKNS_11MessageBaseE, 
-                       __ZN3qmi18MutableMessageBaseC1ERKS0_, __ZN3qmi18MutableMessageBaseC1Et, 
-                       __ZN3qmi18MutableMessageBaseC1Ev, __ZN3qmi18MutableMessageBaseC2ERKNS_11MessageBaseE, 
+                       __ZN3qmi18MutableMessageBase4swapERS0_, __ZN3qmi18MutableMessageBaseC1EOS0_, 
+                       __ZN3qmi18MutableMessageBaseC1ERKNS_11MessageBaseE, __ZN3qmi18MutableMessageBaseC1ERKS0_, 
+                       __ZN3qmi18MutableMessageBaseC1Et, __ZN3qmi18MutableMessageBaseC1Ev, 
+                       __ZN3qmi18MutableMessageBaseC2EOS0_, __ZN3qmi18MutableMessageBaseC2ERKNS_11MessageBaseE, 
                        __ZN3qmi18MutableMessageBaseC2ERKS0_, __ZN3qmi18MutableMessageBaseC2Et, 
                        __ZN3qmi18MutableMessageBaseC2Ev, __ZN3qmi18MutableMessageBaseD1Ev, 
-                       __ZN3qmi18MutableMessageBaseD2Ev, __ZN3qmi18MutableMessageBaseaSERKS0_, 
+                       __ZN3qmi18MutableMessageBaseD2Ev, __ZN3qmi18MutableMessageBaseaSEOS0_, 
+                       __ZN3qmi18MutableMessageBaseaSERKS0_, __ZN3qmi18stripRequestHeaderEhRKNSt3__110shared_ptrIKNS_17SerializedMessageEEE, 
                        __ZN3qmi19generateRandomFieldERNS_20RandomMessageContextERNSt3__112basic_stringIcNS2_11char_traitsIcEENS2_9allocatorIcEEEE, 
                        __ZN3qmi19generateRandomFieldERNS_20RandomMessageContextERa, 
                        __ZN3qmi19generateRandomFieldERNS_20RandomMessageContextERb, 

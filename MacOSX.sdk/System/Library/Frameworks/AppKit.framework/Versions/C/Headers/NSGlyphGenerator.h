@@ -1,12 +1,14 @@
 /*
         NSGlyphGenerator.h
         Application Kit
-        Copyright (c) 1993-2016, Apple Inc.
+        Copyright (c) 1993-2017, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSAttributedString.h>
 #import <AppKit/NSFont.h> // for NSGlyph
+
+// NSGlyphGenerator is now deprecated. It will be formally deprecated in a future version of macOS. Use -layoutManager:shouldGenerateGlyphs:properties:characterIndexes:forGlyphRange: in order to customize the canonical glyph generation mapping
 
 /* NSGlyphStorage layout options */
 NS_ASSUME_NONNULL_BEGIN
@@ -30,7 +32,7 @@ enum {
 @interface NSGlyphGenerator : NSObject
 - (void)generateGlyphsForGlyphStorage:(id <NSGlyphStorage>)glyphStorage desiredNumberOfCharacters:(NSUInteger)nChars glyphIndex:(nullable NSUInteger *)glyphIndex characterIndex:(nullable NSUInteger *)charIndex;
 
-+ (NSGlyphGenerator *)sharedGlyphGenerator;
+@property (class, readonly, strong) NSGlyphGenerator *sharedGlyphGenerator;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -10,7 +10,7 @@ module Compression [system] [extern_c] {
 	link "compression"
 }
 
-module Darwin [system] [extern_c] {
+module Darwin [system] [extern_c] [no_undeclared_includes] {
 	// Headers that are repeatedly included, and therefore should not be
 	// assigned to any given module.
 	exclude header "_structs.h"
@@ -18,7 +18,8 @@ module Darwin [system] [extern_c] {
 
 	module cdefs {
 		header "sys/cdefs.h"
-		textual header "sys/_symbol_aliasing.h"
+		header "sys/_symbol_aliasing.h"
+		header "sys/_posix_availability.h"
 		export *
 	}
 
@@ -79,6 +80,7 @@ module Darwin [system] [extern_c] {
 
 		module limits {
 			header "limits.h" // note: supplied/augmented by compiler
+			export Darwin.POSIX.sys.types
 			export *
 		}
 
@@ -174,8 +176,20 @@ module Darwin [system] [extern_c] {
 		}
 
 		module xlocale {
-			header "xlocale.h"
-			export *
+			textual header "xlocale.h"
+			textual header "_xlocale.h"
+			textual header "xlocale/_ctype.h"
+			textual header "xlocale/_inttypes.h"
+			textual header "xlocale/_langinfo.h"
+			textual header "xlocale/_monetary.h"
+			textual header "xlocale/_regex.h"
+			textual header "xlocale/_stdio.h"
+			textual header "xlocale/_stdlib.h"
+			textual header "xlocale/_string.h"
+			textual header "xlocale/_time.h"
+			textual header "xlocale/_wchar.h"
+			textual header "xlocale/_wctype.h"
+			textual header "xlocale/__wctype.h"
 		}
 
 		module xattr_flags {
@@ -189,8 +203,6 @@ module Darwin [system] [extern_c] {
 	module POSIX {
 		module basic {
 			header "sys/_endian.h"
-			header "sys/_posix_availability.h"
-			header "sys/_symbol_aliasing.h"
 			export *
 		}
 
@@ -263,6 +275,11 @@ module Darwin [system] [extern_c] {
 			export *
 		}
 
+		module ifaddrs {
+			header "ifaddrs.h"
+			export *
+		}
+
 		module ioctl {
 			header "sys/ioctl.h"
 			export *
@@ -294,8 +311,18 @@ module Darwin [system] [extern_c] {
 		}
 
 		module net {
+			module dl {
+				header "net/if_dl.h"
+				export *
+			}
+
 			module if {
 				header "net/if.h"
+				export *
+			}
+
+			module types {
+				header "net/if_types.h"
 				export *
 			}
 		}
@@ -326,9 +353,10 @@ module Darwin [system] [extern_c] {
 		}
 
 		module pthread {
-			header "pthread.h"
-			export *
-
+			module pthread {
+				header "pthread.h"
+				export *
+			}
 			module impl {
 				header "pthread_impl.h"
 				export *
@@ -341,6 +369,11 @@ module Darwin [system] [extern_c] {
 
 			module spis {
 				header "pthread_spis.h"
+				export *
+			}
+
+			module spawn {
+				header "pthread/spawn.h"
 				export *
 			}
 		}
@@ -418,12 +451,12 @@ module Darwin [system] [extern_c] {
 			}
 
 			module select_proto {
-				header "sys/_select.h"
-				export *
+				export Darwin.POSIX.sys.select
 			}
 
 			module select {
 				header "sys/select.h"
+				textual header "sys/_select.h"
 				export *
 			}
 
@@ -457,6 +490,7 @@ module Darwin [system] [extern_c] {
 
 			module time {
 				header "sys/time.h"
+				textual header "sys/_select.h"
 				export *
 			}
 
@@ -1046,6 +1080,11 @@ module Darwin [system] [extern_c] {
 			header "mach/machine.h"
 			export *
 
+			module _structs {
+				header "mach/machine/_structs.h"
+				export *
+			}
+
 			module boolean {
 				header "mach/machine/boolean.h"
 				export *
@@ -1169,9 +1208,27 @@ module Darwin [system] [extern_c] {
 	}
 
 	module secure {
-		umbrella "secure"
+		module _common {
+			header "secure/_common.h"
+			export *
+		}
+
+		module _string {
+			export Darwin.C.string
+		}
+
+		module _strings {
+			export Darwin.C.strings
+		}
+
+		module _stdio {
+			export Darwin.C.stdio
+		}
+
+		exclude header "secure/_string.h"
+		exclude header "secure/_stdio.h"
+		exclude header "secure/_strings.h"
 		export *
-		module * { export * }
 	}
 
 	module _locale {
@@ -1227,8 +1284,7 @@ module Darwin [system] [extern_c] {
 		}
 
 		explicit module unctrl {
-			header "unctrl.h"
-			export *
+			textual header "unctrl.h"
 		}
 	}
 	
@@ -1302,12 +1358,18 @@ module Darwin [system] [extern_c] {
 			header "sys/buf.h"
 			export *
 		}
+		
 
+		module clonefile {
+			header "sys/clonefile.h"
+			export *
+		}
+
+		
 		module conf {
 			header "sys/conf.h"
 			export *
 		}
-
 		
 
 		
@@ -1643,6 +1705,10 @@ module os [system] [extern_c] {
 	module object {
 		export os_object
 	}
+	module trace_base {
+		header "os/trace_base.h"
+		export *
+	}
 	explicit module activity {
 		header "os/activity.h"
 		export *
@@ -1745,5 +1811,262 @@ module krb5 [system] [extern_c] {
 	}
 	
 	exclude header "krb5.h" // deprecated
+	requires !swift
+}
+
+
+module kcdata [system] [extern_c] {
+    header "kern/kcdata.h"
+    export *
+}
+
+module xml2 [system] [extern_c] {
+    module HTMLparser {
+        header "libxml/HTMLparser.h"
+        export *
+    }
+
+    module HTMLtree {
+        header "libxml/HTMLtree.h"
+        export *
+    }
+
+    module SAX {
+        header "libxml/SAX.h"
+        export *
+    }
+
+    module SAX2 {
+        header "libxml/SAX2.h"
+        export *
+    }
+
+    module c14n {
+        header "libxml/c14n.h"
+        export *
+    }
+
+    module catalog {
+        header "libxml/catalog.h"
+        export *
+    }
+
+    module chvalid {
+        header "libxml/chvalid.h"
+        export *
+    }
+
+    module debugXML {
+        header "libxml/debugXML.h"
+        export *
+    }
+
+    module dict {
+        header "libxml/dict.h"
+        export *
+    }
+
+    module encoding {
+        header "libxml/encoding.h"
+        export *
+    }
+
+    module entities {
+        header "libxml/entities.h"
+        export *
+    }
+
+    module globals {
+        header "libxml/globals.h"
+        export *
+    }
+
+    module hash {
+        header "libxml/hash.h"
+        export *
+    }
+
+    module list {
+        header "libxml/list.h"
+        export *
+    }
+
+    module nanoftp {
+        header "libxml/nanoftp.h"
+        export *
+    }
+
+    module nanohttp {
+        header "libxml/nanohttp.h"
+        export *
+    }
+
+    module parser {
+        header "libxml/parser.h"
+        export *
+    }
+
+    module parserInternals {
+        header "libxml/parserInternals.h"
+        export *
+    }
+
+    module pattern {
+        header "libxml/pattern.h"
+        export *
+    }
+
+    module relaxng {
+        header "libxml/relaxng.h"
+        export *
+    }
+
+    module schemasInternals {
+        header "libxml/schemasInternals.h"
+        export *
+    }
+
+    module schematron {
+        header "libxml/schematron.h"
+        export *
+    }
+
+    module threads {
+        header "libxml/threads.h"
+        export *
+    }
+
+    module tree {
+        header "libxml/tree.h"
+        export *
+    }
+
+    module uri {
+        header "libxml/uri.h"
+        export *
+    }
+
+    module valid {
+        header "libxml/valid.h"
+        export *
+    }
+
+    module xinclude {
+        header "libxml/xinclude.h"
+        export *
+    }
+
+    module xlink {
+        header "libxml/xlink.h"
+        export *
+    }
+
+    module xmlIO {
+        header "libxml/xmlIO.h"
+        export *
+    }
+
+    module xmlautomata {
+        header "libxml/xmlautomata.h"
+        export *
+    }
+
+    module xmlerror {
+        header "libxml/xmlerror.h"
+        export *
+    }
+
+    module xmlexports {
+        header "libxml/xmlexports.h"
+        export *
+    }
+
+    module xmlmemory {
+        header "libxml/xmlmemory.h"
+        export *
+    }
+
+    module xmlmodule {
+        header "libxml/xmlmodule.h"
+        export *
+    }
+
+    module xmlreader {
+        header "libxml/xmlreader.h"
+        export *
+    }
+
+    module xmlregexp {
+        header "libxml/xmlregexp.h"
+        export *
+    }
+
+    module xmlsave {
+        header "libxml/xmlsave.h"
+        export *
+    }
+
+    module xmlschemas {
+        header "libxml/xmlschemas.h"
+        export *
+    }
+
+    module xmlschemastypes {
+        header "libxml/xmlschemastypes.h"
+        export *
+    }
+
+    module xmlstring {
+        header "libxml/xmlstring.h"
+        export *
+    }
+
+    module xmlunicode {
+        header "libxml/xmlunicode.h"
+        export *
+    }
+
+    module xmlversion {
+        header "libxml/xmlversion.h"
+        export *
+    }
+
+    module xmlwriter {
+        header "libxml/xmlwriter.h"
+        export *
+    }
+
+    module xpath {
+        header "libxml/xpath.h"
+        export *
+    }
+
+    module xpathInternals {
+        header "libxml/xpathInternals.h"
+        export *
+    }
+
+    module xpointer {
+        header "libxml/xpointer.h"
+        export *
+    }
+
+    exclude header "libxml2/libxml/DOCBparser.h" // deprecated
+}
+
+module zlib [system] [extern_c] {
+	header "zlib.h"
+	export *
+	link "z"
+}
+
+module SQLite3 [system] [extern_c] {
+	header "sqlite3.h"
+	link "sqlite3"
+	explicit module Ext {
+		header "sqlite3ext.h"
+		export *
+	}
+	export *
 }
 

@@ -21,6 +21,8 @@
 #include <CoreFoundation/CFRunLoop.h>
 #include <CoreMIDI/CoreMIDI.h>
 
+CF_ASSUME_NONNULL_BEGIN
+
 /*!
 	@header MIDIDriver.h
 	
@@ -87,7 +89,7 @@ typedef struct MIDIDriverInterface		MIDIDriverInterface;
 					MIDIDriver.h) containing function pointers for the driver's methods.  Only the
 					MIDIServer may call a driver's methods.
 */
-typedef MIDIDriverInterface **			MIDIDriverRef;
+typedef MIDIDriverInterface * __nonnull * MIDIDriverRef;
 
 /*!
 	@typedef		MIDIDeviceListRef
@@ -126,7 +128,7 @@ struct MIDIDriverInterface
 
 			The driver should not retain any references to the created devices and entities.
 	*/	
-	OSStatus	(*FindDevices)(MIDIDriverRef self, MIDIDeviceListRef devList);
+	OSStatus	(*FindDevices)(MIDIDriverRef __nonnull self, MIDIDeviceListRef devList);
 
 	/*!
 		@function Start
@@ -159,7 +161,7 @@ struct MIDIDriverInterface
 			only devices owned by this driver.  The driver may retain references to the devices
 			in this list and any it creates while running.
 	*/					
-	OSStatus	(*Start)(MIDIDriverRef self, MIDIDeviceListRef devList);
+	OSStatus	(*Start)(MIDIDriverRef __nonnull self, MIDIDeviceListRef devList);
 
 	/*!
 		@function Stop
@@ -168,14 +170,14 @@ struct MIDIDriverInterface
 			were begun in Start, or as a result of a subsequent IOKit notification, should be
 			terminated.
 	*/
-	OSStatus	(*Stop)(MIDIDriverRef self);
+	OSStatus	(*Stop)(MIDIDriverRef __nonnull self);
 	
 	/*!
 		@function Configure
 		@discussion
 			not currently used
 	*/
-	OSStatus	(*Configure)(MIDIDriverRef self, MIDIDeviceRef device);
+	OSStatus	(*Configure)(MIDIDriverRef __nonnull self, MIDIDeviceRef device);
 
 	/*!
 		@function Send
@@ -183,7 +185,7 @@ struct MIDIDriverInterface
 			Send a MIDIPacketList to the destination endpoint whose refCons are being passed as
 			arguments.
 	*/
-	OSStatus	(*Send)(MIDIDriverRef self, const MIDIPacketList *pktlist, void *destRefCon1, void *destRefCon2);
+	OSStatus	(*Send)(MIDIDriverRef __nonnull self, const MIDIPacketList *pktlist, void *destRefCon1, void *destRefCon2);
 	
 	/*!
 		@function EnableSource
@@ -194,7 +196,7 @@ struct MIDIDriverInterface
 			from the source to the server, and it may even be able to tell the source hardware
 			not to generate incoming MIDI I/O for that source.
 	*/
-	OSStatus	(*EnableSource)(MIDIDriverRef self, MIDIEndpointRef src, Boolean enabled);
+	OSStatus	(*EnableSource)(MIDIDriverRef __nonnull self, MIDIEndpointRef src, Boolean enabled);
 	
 	/*!
 		@function Flush
@@ -202,10 +204,10 @@ struct MIDIDriverInterface
 			Only for version 2 drivers (new for CoreMIDI 1.1).
 
 			Drivers which support schedule-ahead, when receiving this message, should unschedule
-			all pending output to the specified destination.  If the destination is null, the
+			all pending output to the specified destination.  If the destination is null/0, the
 			driver should unschedule all pending output to all destinations.
 	*/
-	OSStatus	(*Flush)(MIDIDriverRef self, MIDIEndpointRef dest, void *destRefCon1, void *destRefCon2);
+	OSStatus	(*Flush)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest, void * __nullable destRefCon1, void * __nullable destRefCon2);
 
 	/*!
 		@function Monitor		
@@ -219,7 +221,7 @@ struct MIDIDriverInterface
 			cannot rely on the MIDI events arriving in order, due to MIDIServer's schedule-ahead
 			facilities.
 	*/
-	OSStatus	(*Monitor)(MIDIDriverRef self, MIDIEndpointRef dest, const MIDIPacketList *pktlist);
+	OSStatus	(*Monitor)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest, const MIDIPacketList *pktlist);
 };
 
 
@@ -316,7 +318,7 @@ extern "C" {
 						On successful return, points to the newly-created device.
 	@result			An OSStatus result code.
 */
-extern OSStatus		MIDIDeviceCreate(MIDIDriverRef owner, 
+extern OSStatus		MIDIDeviceCreate(MIDIDriverRef __nullable owner,
 							CFStringRef name, CFStringRef manufacturer, 
 							CFStringRef model, MIDIDeviceRef *outDevice)
 																__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
@@ -433,7 +435,7 @@ extern OSStatus		MIDIDeviceListDispose(MIDIDeviceListRef devList)
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
-					void *ref1, void *ref2)					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+					void * __nullable ref1, void * __nullable ref2)					__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -450,7 +452,7 @@ extern OSStatus		MIDIEndpointSetRefCons(MIDIEndpointRef endpt,
 	@result			An OSStatus result code.
 */
 extern OSStatus		MIDIEndpointGetRefCons(MIDIEndpointRef endpt, 
-					void **ref1, void **ref2)				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
+					void * __nonnull * __nullable ref1, void * __nonnull * __nullable ref2)				__OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_4_2);
 
 // ___________________________________________________________________________________________
 
@@ -491,7 +493,7 @@ extern CFRunLoopRef	MIDIGetDriverIORunLoop()				__OSX_AVAILABLE_STARTING(__MAC_1
 
 	@result			The requested device list.
 */
-extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef driver)
+extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef __nonnull driver)
 															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_4_2);
 
 //  -----------------------------------------------------------------------------
@@ -509,7 +511,7 @@ extern MIDIDeviceListRef	MIDIGetDriverDeviceList(MIDIDriverRef driver)
 
 	@result			An OSStatus result code.
 */
-extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef driver, Boolean enabled)
+extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef __nonnull driver, Boolean enabled)
 															__OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
 
 
@@ -517,5 +519,6 @@ extern OSStatus			MIDIDriverEnableMonitoring(MIDIDriverRef driver, Boolean enabl
 }
 #endif
 
+CF_ASSUME_NONNULL_END
 
 #endif // __MIDIDriver_h__

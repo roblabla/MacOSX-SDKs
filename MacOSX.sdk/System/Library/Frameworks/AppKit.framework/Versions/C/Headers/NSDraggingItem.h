@@ -1,7 +1,7 @@
 /*
 	NSDraggingItem.h
 	Application Kit
-	Copyright (c) 2010-2016, Apple Inc.
+	Copyright (c) 2010-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,26 +16,27 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSPasteboardWriting;
 
 
-APPKIT_EXTERN NSString * const NSDraggingImageComponentIconKey NS_AVAILABLE_MAC(10_7);
-APPKIT_EXTERN NSString * const NSDraggingImageComponentLabelKey NS_AVAILABLE_MAC(10_7);
+typedef NSString * NSDraggingImageComponentKey NS_EXTENSIBLE_STRING_ENUM;
+APPKIT_EXTERN NSDraggingImageComponentKey const NSDraggingImageComponentIconKey NS_AVAILABLE_MAC(10_7);
+APPKIT_EXTERN NSDraggingImageComponentKey const NSDraggingImageComponentLabelKey NS_AVAILABLE_MAC(10_7);
 
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSDraggingImageComponent : NSObject {
 @private
-    NSString *_key;
+    NSDraggingImageComponentKey _key;
     id	_contents;
     NSRect _frame;
 }
 
-+ (NSDraggingImageComponent *)draggingImageComponentWithKey:(NSString *)key;
++ (NSDraggingImageComponent *)draggingImageComponentWithKey:(NSDraggingImageComponentKey)key;
 
 /* Designated initializer */
-- (instancetype)initWithKey:(NSString *)key NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithKey:(NSDraggingImageComponentKey)key NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
 
 /* key must be unique for each component in an NSDraggingItem. You can create your own named components, but the following names have special meaning. NSDraggingImageComponentIconKey is an image of the item being dragged. NSDraggingImageComponentLabelKey represents a textual label associate with the item, for example, a file name.
 */
-@property (copy) NSString *key;
+@property (copy) NSDraggingImageComponentKey key;
 
 /* An object providing the image contents of the component, typically you set an NSImage, but may be anything CALayer accepts.
 */
@@ -62,7 +63,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
 
 /* The designated initializer. When creating an NSDraggingItem the pasteboardWriter must implement the NSPasteboardWriting protocol.
 */
-- (instancetype)initWithPasteboardWriter:(id <NSPasteboardWriting>) pasteboardWriter NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPasteboardWriter:(id <NSPasteboardWriting>)pasteboardWriter NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
 
 /* When you create an NSDraggingItem, item is the pasteboardWriter passed to initWithPasteboardWriter. However, when enumerating dragging items in an NSDraggingSession or NSDraggingInfo object, item is not the original pasteboardWriter. It is an instance of one of the classes provided to the enumeration method.

@@ -1,6 +1,6 @@
 /*
 	NSFileWrapper.h
-	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,7 +19,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileWrapperReadingOptions) {
     */
     NSFileWrapperReadingWithoutMapping = 1 << 1
 
-} NS_ENUM_AVAILABLE(10_6, 4_0);
+} API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 typedef NS_OPTIONS(NSUInteger, NSFileWrapperWritingOptions) {
 
@@ -31,7 +31,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileWrapperWritingOptions) {
     */
     NSFileWrapperWritingWithNameUpdating = 1 << 1
 
-} NS_ENUM_AVAILABLE(10_6, 4_0);
+} API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 NS_CLASS_AVAILABLE(10_0, 4_0)
 @interface NSFileWrapper : NSObject<NSCoding> {
@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(10_0, 4_0)
 
 /* A designated initializer for creating an instance whose kind (directory, regular file, or symbolic link) is determined based on what the URL locates. If reading is not successful return nil after setting *outError to an NSError that encapsulates the reason why the file wrapper could not be read.
 */
-- (nullable instancetype)initWithURL:(NSURL *)url options:(NSFileWrapperReadingOptions)options error:(NSError **)outError NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_6, 4_0);
+- (nullable instancetype)initWithURL:(NSURL *)url options:(NSFileWrapperReadingOptions)options error:(NSError **)outError NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /* A designated initializer for creating an instance for which -isDirectory returns YES. The passed-in dictionary must contain entries whose values are the file wrappers that are to become children and whose keys are file names. Each file wrapper that does not already have a preferred file name is sent -setPreferredFilename: with the corresponding key as the argument.
 */
@@ -60,7 +60,7 @@ NS_CLASS_AVAILABLE(10_0, 4_0)
 
 /* A designated initializer for creating an instance for which -isSymbolicLink returns YES. -writeToURL:options:originalContentsURL:error: uses the result of sending -relativePath to this URL when creating a symbolic link. (An NSURL initialized by -initFileURLWithPath: returns that entire path when sent -relativePath though.)
 */
-- (instancetype)initSymbolicLinkWithDestinationURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_AVAILABLE(10_6, 4_0);
+- (instancetype)initSymbolicLinkWithDestinationURL:(NSURL *)url NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /* A designated initializer. The data must be in the same format as that returned by -serializedRepresentation.
 */
@@ -97,17 +97,17 @@ Some instances of NSFileWrapper may be created without a preferredFilename (e.g.
 
 /* Whether the receiver matches the directory, regular file, or symbolic link that is located by the URL. For a directory, children are compared against the files in the directory, recursively. The contents of files are not compared; matching of regular files is based on file modification dates. Because children of directory file wrappers are not read immediately by -initWithURL:options:error: or -readFromURL:options:error: unless NSFileWrapperReadingImmediate is used, creating a file wrapper and then later sending it this message is not a reliable way to simply check whether anything in a directory has changed. You can use this method to determine whether the receiver's contents in memory are out of date relative to the file system.
 */
-- (BOOL)matchesContentsOfURL:(NSURL *)url NS_AVAILABLE(10_6, 4_0);
+- (BOOL)matchesContentsOfURL:(NSURL *)url API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /* Recursively reread the entire contents of the receiver from the specified location, and return YES if successful. If not successful, return NO after setting *outError to an NSError that encapsulates the reason why the file wrapper could not be reread. When reading a directory children are added and removed as necessary to match the file system.
 */
-- (BOOL)readFromURL:(NSURL *)url options:(NSFileWrapperReadingOptions)options error:(NSError **)outError NS_AVAILABLE(10_6, 4_0);
+- (BOOL)readFromURL:(NSURL *)url options:(NSFileWrapperReadingOptions)options error:(NSError **)outError API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 #pragma mark *** Writing ***
 
 /* Recursively write the entire contents of the receiver at the specified location, and return YES if successful. If not successful, return NO after setting *outError to an NSError that encapsulates the reason why the file wrapper could not be written. originalContentsURL may be nil or it may be the location of a previous revision of what is being written. If it is not nil the default implementation of this method attempts to avoid unnecessary I/O by merely writing hard links to regular files instead of actually writing out their contents. The descendant file wrappers must return accurate values when sent -filename for this to work (use NSFileWrapperWritingWithNameUpdating to increase the likelihood of that).
 */
-- (BOOL)writeToURL:(NSURL *)url options:(NSFileWrapperWritingOptions)options originalContentsURL:(nullable NSURL *)originalContentsURL error:(NSError **)outError NS_AVAILABLE(10_6, 4_0);
+- (BOOL)writeToURL:(NSURL *)url options:(NSFileWrapperWritingOptions)options originalContentsURL:(nullable NSURL *)originalContentsURL error:(NSError **)outError API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 #pragma mark *** Serialization ***
 
@@ -153,7 +153,7 @@ Some instances of NSFileWrapper may be created without a preferredFilename (e.g.
 
 /* Return the destination link of the receiver. This may return nil if the receiver is the result of reading a parent from the file system (use NSFileWrapperReadingImmediately if appropriate to prevent that).
 */
-@property (nullable, readonly, copy) NSURL *symbolicLinkDestinationURL NS_AVAILABLE(10_6, 4_0);
+@property (nullable, readonly, copy) NSURL *symbolicLinkDestinationURL API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -165,14 +165,14 @@ Some instances of NSFileWrapper may be created without a preferredFilename (e.g.
 
 /* Methods that were deprecated in OS X 10.6 and never available on iOS. */
 
-- (nullable id)initWithPath:(NSString *)path NS_DEPRECATED_MAC(10_0, 10_10, "Use -initWithURL:options:error: instead.");
-- (id)initSymbolicLinkWithDestination:(NSString *)path NS_DEPRECATED_MAC(10_0, 10_10, "Use -initSymbolicLinkWithDestinationURL: and -setPreferredFileName:, if necessary, instead.");
-- (BOOL)needsToBeUpdatedFromPath:(NSString *)path NS_DEPRECATED_MAC(10_0, 10_10, "Use -matchesContentsOfURL: instead.");
-- (BOOL)updateFromPath:(NSString *)path NS_DEPRECATED_MAC(10_0, 10_10, "Use -readFromURL:options:error: instead.");
-- (BOOL)writeToFile:(NSString *)path atomically:(BOOL)atomicFlag updateFilenames:(BOOL)updateFilenamesFlag NS_DEPRECATED_MAC(10_0, 10_10, "Use -writeToURL:options:originalContentsURL:error: instead.");
-- (NSString *)addFileWithPath:(NSString *)path NS_DEPRECATED_MAC(10_0, 10_10, "Instantiate a new NSFileWrapper with -initWithURL:options:error:, send it -setPreferredFileName: if necessary, then use -addFileWrapper: instead.");
-- (NSString *)addSymbolicLinkWithDestination:(NSString *)path preferredFilename:(NSString *)filename NS_DEPRECATED_MAC(10_0, 10_10, "Instantiate a new NSFileWrapper with -initWithSymbolicLinkDestinationURL:, send it -setPreferredFileName: if necessary, then use -addFileWrapper: instead.");
-- (NSString *)symbolicLinkDestination NS_DEPRECATED_MAC(10_0, 10_10, "Use -symbolicLinkDestinationURL instead.");
+- (nullable id)initWithPath:(NSString *)path API_DEPRECATED("Use -initWithURL:options:error: instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+- (id)initSymbolicLinkWithDestination:(NSString *)path API_DEPRECATED("Use -initSymbolicLinkWithDestinationURL: and -setPreferredFileName:, if necessary, instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+- (BOOL)needsToBeUpdatedFromPath:(NSString *)path API_DEPRECATED("Use -matchesContentsOfURL: instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+- (BOOL)updateFromPath:(NSString *)path API_DEPRECATED("Use -readFromURL:options:error: instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+- (BOOL)writeToFile:(NSString *)path atomically:(BOOL)atomicFlag updateFilenames:(BOOL)updateFilenamesFlag API_DEPRECATED("Use -writeToURL:options:originalContentsURL:error: instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+- (NSString *)addFileWithPath:(NSString *)path API_DEPRECATED("Instantiate a new NSFileWrapper with -initWithURL:options:error:, send it -setPreferredFileName: if necessary, then use -addFileWrapper: instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+- (NSString *)addSymbolicLinkWithDestination:(NSString *)path preferredFilename:(NSString *)filename API_DEPRECATED("Instantiate a new NSFileWrapper with -initWithSymbolicLinkDestinationURL:, send it -setPreferredFileName: if necessary, then use -addFileWrapper: instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
+- (NSString *)symbolicLinkDestination API_DEPRECATED("Use -symbolicLinkDestinationURL instead.", macos(10.0,10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

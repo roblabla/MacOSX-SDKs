@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FDCC7E17-51BB-340C-BDD3-C67E57CC4547', 'x86_64: F1E2C24E-79DE-304F-BD87-A78AC23A7517' ]
+uuids:           [ 'i386: 9D2EF843-8EB4-312D-8D7A-BEABADD50E1A', 'x86_64: F4518122-1ED4-317B-B60F-AB32197C455B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/GameCenterUI.framework/Versions/A/GameCenterUI
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _GKAccountViewController._accountName, _GKAccountViewController._alias, 
@@ -27,16 +26,18 @@ exports:
                        _GKGreenBuddyViewController._window, _GKHostedChallengeIssueController._challenge, 
                        _GKHostedChallengeIssueController._defaultMessage, _GKHostedChallengeIssueController._forcePicker, 
                        _GKHostedChallengeIssueController._internalFlag, _GKHostedChallengeIssueController._players, 
-                       _GKHostedChallengeIssueController._remoteViewController, _GKLeaderboardViewController._category, 
-                       _GKLeaderboardViewController._leaderboardDelegate, _GKLeaderboardViewController._timeScope, 
-                       _GKLoginAlertView._passwordFieldIndex, _GKLoginAlertView._username, 
-                       _GKMatchmakerViewController._acceptedInvite, _GKMatchmakerViewController._finished, 
-                       _GKMatchmakerViewController._hosted, _GKMatchmakerViewController._hostedPlayers, 
-                       _GKMatchmakerViewController._internalFlag, _GKMatchmakerViewController._match, 
-                       _GKMatchmakerViewController._matchRequest, _GKMatchmakerViewController._matchmakerDelegateWeak, 
-                       _GKMatchmakerViewController._remoteViewController, _GKNotificationBannerWindow.iconView, 
-                       _GKNotificationBannerWindow.label, _GKPanel._sheetOffset, 
-                       _GKPanel._titleBarHeight, _GKPasswordVerifyAlert._accountField, 
+                       _GKHostedChallengeIssueController._remoteViewController, _GKHostedSignInViewController._delegateWeak, 
+                       _GKHostedSignInViewController._didRequestRemoteViewController, 
+                       _GKHostedSignInViewController._localPlayer, _GKHostedSignInViewController._remoteViewController, 
+                       _GKLeaderboardViewController._category, _GKLeaderboardViewController._leaderboardDelegate, 
+                       _GKLeaderboardViewController._timeScope, _GKLoginAlertView._passwordFieldIndex, 
+                       _GKLoginAlertView._username, _GKMatchmakerViewController._acceptedInvite, 
+                       _GKMatchmakerViewController._finished, _GKMatchmakerViewController._hosted, 
+                       _GKMatchmakerViewController._hostedPlayers, _GKMatchmakerViewController._internalFlag, 
+                       _GKMatchmakerViewController._match, _GKMatchmakerViewController._matchRequest, 
+                       _GKMatchmakerViewController._matchmakerDelegateWeak, _GKMatchmakerViewController._remoteViewController, 
+                       _GKNotificationBannerWindow.iconView, _GKNotificationBannerWindow.label, 
+                       _GKPanel._sheetOffset, _GKPanel._titleBarHeight, _GKPasswordVerifyAlert._accountField, 
                        _GKPasswordVerifyAlert._accountLabel, _GKPasswordVerifyAlert._createAccountButton, 
                        _GKPasswordVerifyAlert._environment, _GKPasswordVerifyAlert._forgotPasswordButton, 
                        _GKPasswordVerifyAlert._loginView, _GKPasswordVerifyAlert._passwordField, 
@@ -74,14 +75,14 @@ exports:
                        _GKBrush, _GKBrushList, _GKChallengeEventHandlerUIDelegate, 
                        _GKCircleImageBrush, _GKComposedImageBrush, _GKConditionBrush, 
                        _GKDialogController, _GKDialogController_Concrete, _GKFriendRequestComposeViewController, 
-                       _GKGameCenterViewController, _GKGreenBuddyViewController, 
-                       _GKHostedChallengeIssueController, _GKImageBrush, _GKImageContext, 
-                       _GKImageKey, _GKImageSource, _GKLeaderboardViewController, 
-                       _GKLocalImageSource, _GKLoginAlertAccessoryView, _GKLoginAlertView, 
-                       _GKMButton, _GKMButtonCell, _GKMacGameIconBrush, _GKMatchmakerViewController, 
-                       _GKMultiCircleImageBrush, _GKNetworkImageSource, _GKNotificationBanner, 
-                       _GKNotificationBannerWindow, _GKPanel, _GKPasswordVerifyAlert, 
-                       _GKRemoteViewController, _GKScreenConfigurationController, 
+                       _GKGameCenterViewController, _GKGameMessagesBrush, _GKGreenBuddyViewController, 
+                       _GKHostedChallengeIssueController, _GKHostedSignInViewController, 
+                       _GKImageBrush, _GKImageContext, _GKImageKey, _GKImageSource, 
+                       _GKLeaderboardViewController, _GKLocalImageSource, _GKLoginAlertAccessoryView, 
+                       _GKLoginAlertView, _GKMButton, _GKMButtonCell, _GKMacGameIconBrush, 
+                       _GKMatchmakerViewController, _GKMultiCircleImageBrush, _GKNetworkImageSource, 
+                       _GKNotificationBanner, _GKNotificationBannerWindow, _GKPanel, 
+                       _GKPasswordVerifyAlert, _GKRemoteViewController, _GKScreenConfigurationController, 
                        _GKServerWebViewController, _GKServerWebViewJSAccount, _GKServerWebViewJSEnvironment, 
                        _GKServerWebViewJSExternalAccounts, _GKServerWebViewJSGame, 
                        _GKServerWebViewJSRoot, _GKThemeBrush, _GKThreadsafeImageCache, 

@@ -8,13 +8,18 @@
 #import <Foundation/Foundation.h>
 #import <CoreImage/CoreImageDefines.h>
 #import <CoreVideo/CoreVideo.h>
+#import <ImageIO/ImageIO.h>
+
 #if !TARGET_OS_IPHONE
 #import <IOSurface/IOSurface.h>
+#elif !TARGET_OS_SIMULATOR
+#import <IOSurface/IOSurfaceRef.h>
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class CIContext, CIFilterShape, CIColor, CIFilter;
+@class AVDepthData;
 
 @protocol MTLTexture;
 
@@ -36,12 +41,9 @@ CORE_IMAGE_EXPORT CIFormat kCIFormatBGRA8;
 CORE_IMAGE_EXPORT CIFormat kCIFormatRGBA8;
 CORE_IMAGE_EXPORT CIFormat kCIFormatABGR8 NS_AVAILABLE(10_11, 9_0);
 
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBA16 NS_AVAILABLE_MAC(10_4);
-CORE_IMAGE_EXPORT CIFormat kCIFormatRGBAf NS_AVAILABLE(10_4, 7_0);
-
-/* RGBA values that are IEEE 754-2008 half float compliant. */
 CORE_IMAGE_EXPORT CIFormat kCIFormatRGBAh NS_AVAILABLE(10_4, 6_0);
-
+CORE_IMAGE_EXPORT CIFormat kCIFormatRGBA16 NS_AVAILABLE(10_4, 10_0);
+CORE_IMAGE_EXPORT CIFormat kCIFormatRGBAf NS_AVAILABLE(10_4, 7_0);
 
 CORE_IMAGE_EXPORT CIFormat kCIFormatA8 NS_AVAILABLE(10_11, 9_0);
 CORE_IMAGE_EXPORT CIFormat kCIFormatA16 NS_AVAILABLE(10_11, 9_0);
@@ -58,6 +60,16 @@ CORE_IMAGE_EXPORT CIFormat kCIFormatRG16 NS_AVAILABLE(10_11, 9_0);
 CORE_IMAGE_EXPORT CIFormat kCIFormatRGh NS_AVAILABLE(10_11, 9_0);
 CORE_IMAGE_EXPORT CIFormat kCIFormatRGf NS_AVAILABLE(10_11, 9_0);
 
+CORE_IMAGE_EXPORT CIFormat kCIFormatL8 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT CIFormat kCIFormatL16 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT CIFormat kCIFormatLh NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT CIFormat kCIFormatLf NS_AVAILABLE(10_12, 10_0);
+
+CORE_IMAGE_EXPORT CIFormat kCIFormatLA8 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT CIFormat kCIFormatLA16 NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT CIFormat kCIFormatLAh NS_AVAILABLE(10_12, 10_0);
+CORE_IMAGE_EXPORT CIFormat kCIFormatLAf NS_AVAILABLE(10_12, 10_0);
+
 
 /* Image options dictionary keys.
    These keys can be passed with appropriate values to the methods:
@@ -71,6 +83,10 @@ CORE_IMAGE_EXPORT CIFormat kCIFormatRGf NS_AVAILABLE(10_11, 9_0);
  * If [NSNull null] then dont color manage the image. */
 CORE_IMAGE_EXPORT NSString * const kCIImageColorSpace;
 
+/* A boolean value specifying whether the image should sampled using "nearest neighbor" 
+ * behavior.  If not specified, the image will be sampled using "linear sampling" */
+CORE_IMAGE_EXPORT NSString * const kCIImageNearestSampling NS_AVAILABLE(10_13, 11_0);
+
 
 /* A NSDictionary of metadata properties to pass to CIImage initialization methods.
  * When used with imageWithCGImage:options:, initWithCGImage:options:, imageWithData:options:, initWithData:options:
@@ -79,8 +95,31 @@ CORE_IMAGE_EXPORT NSString * const kCIImageColorSpace;
  */
 CORE_IMAGE_EXPORT NSString * const kCIImageProperties NS_AVAILABLE(10_8, 5_0);
 
+
+/* A boolean value specifying whether the image should transformed according to orientation metadata properties.
+ * This can be used with imageWithContentsOfURL: or initWithData: when the image contains orientation metadata
+ * or with any of the initWith:options: method if the kCIImageProperties option is also provided.
+ *   If this option value is @YES, the image will transformed according to the orientation metadata
+ *   and the orientation metadata will be be removed.
+ *   If this option not present or the value is @NO, then the image will not be transformed
+ *   and the orientation metadata will left unaltered.
+ */
+CORE_IMAGE_EXPORT NSString * const kCIImageApplyOrientationProperty NS_AVAILABLE(10_13, 11_0);
+
+
 CORE_IMAGE_EXPORT NSString * const kCIImageTextureTarget NS_AVAILABLE_MAC(10_9);
 CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
+
+
+/* The kCIImageAuxiliaryDepth or kCIImageAuxiliaryDisparity keys can be passed to the methods:
+ + [CIImage imageWithContentsOfURL:options:]
+ + [CIImage imageWithData:options:]
+ If the value of one of these keys is @YES, the auxiliary image be return instead of the primary image.
+ If an auxiliary image is not present, then nil will be returned.
+ The returned image will be a half float monochrome image.
+ */
+CORE_IMAGE_EXPORT NSString * const kCIImageAuxiliaryDepth NS_AVAILABLE(10_13, 11_0);
+CORE_IMAGE_EXPORT NSString * const kCIImageAuxiliaryDisparity NS_AVAILABLE(10_13, 11_0);
 
 
 /* Creates a new image from the contents of 'image'. */
@@ -123,7 +162,9 @@ CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
                       flipped:(BOOL)flipped
                       options:(nullable NSDictionary<NSString *,id> *)options NS_AVAILABLE_MAC(10_9);
 
-// imageWithMTLTexture will return nil if textureType is not MTLTextureType2D.
+/* Creates a new image referencing the contents of the Metal texture object.
+ * The texture type must be MTLTextureType2D and the texture format must be unsigned normalized or floating-point.
+ * When rendering a CIImage referencing this Metal texture, there should not be any uncommitted Metal comand buffers writing to the texture. */
 #if !defined(SWIFT_CLASS_EXTRA) || (defined(SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH) && SWIFT_SDK_OVERLAY_COREIMAGE_EPOCH >= 2)
 + (nullable CIImage *)imageWithMTLTexture:(id<MTLTexture>)texture
                                   options:(nullable NSDictionary<NSString *,id> *)options NS_AVAILABLE(10_11, 9_0);
@@ -150,11 +191,11 @@ CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
 + (CIImage *)imageWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer
                             options:(nullable NSDictionary<NSString *,id> *)options NS_AVAILABLE(10_11, 5_0);
 
+#if !TARGET_OS_SIMULATOR
 /* Creates a new image from the contents of an IOSurface. */
-#if !TARGET_OS_IPHONE
-+ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface NS_AVAILABLE_MAC(10_6);
++ (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface NS_AVAILABLE(10_6, 5_0);
 + (CIImage *)imageWithIOSurface:(IOSurfaceRef)surface
-                        options:(nullable NSDictionary<NSString *,id> *)options NS_AVAILABLE_MAC(10_6);
+                        options:(nullable NSDictionary<NSString *,id> *)options NS_AVAILABLE(10_6, 5_0);
 #endif
 
 /* Return or initialize a new image with an infinite amount of the color
@@ -209,12 +250,14 @@ CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
 - (nullable instancetype)initWithContentsOfURL:(NSURL *)url
                                        options:(nullable NSDictionary<NSString *,id> *)options;
 
-#if !TARGET_OS_IPHONE
-- (instancetype)initWithIOSurface:(IOSurfaceRef)surface NS_AVAILABLE_MAC(10_6);
+#if !TARGET_OS_SIMULATOR
+- (instancetype)initWithIOSurface:(IOSurfaceRef)surface NS_AVAILABLE(10_6, 5_0);
 
 - (instancetype)initWithIOSurface:(IOSurfaceRef)surface
-                          options:(nullable NSDictionary<NSString *,id> *)options NS_AVAILABLE_MAC(10_6);
+                          options:(nullable NSDictionary<NSString *,id> *)options NS_AVAILABLE(10_6, 5_0);
+#endif
 
+#if !TARGET_OS_IPHONE
 - (instancetype)initWithIOSurface:(IOSurfaceRef)surface
                             plane:(size_t)plane
                            format:(CIFormat)format
@@ -235,18 +278,21 @@ CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
  * 'matrix' appended to it. */
 - (CIImage *)imageByApplyingTransform:(CGAffineTransform)matrix;
 
-/* Returns a new image representing the original image with a transform
- * appied to it based on an orientation value.
- * Orientation values from 1 to 8 as defined in the TIFF spec are supported.
- * See also the CGImagePropertyOrientation type for what the 1 to 8 values do.
+/* Returns a new image representing the original image with a transform applied to it based on an orientation value.
+ * CGImagePropertyOrientation enum values from 1 to 8 as defined in the TIFF spec are supported.
  * Returns original image if the image is of infinite extent. */
 - (CIImage *)imageByApplyingOrientation:(int)orientation NS_AVAILABLE(10_10, 8_0);
 
-/* Returns a CGAffineTransform for an orientation value that can be appied to an image.
- * Orientation values from 1 to 8 as defined in the TIFF spec are supported.
- * See also the CGImagePropertyOrientation type for what the 1 to 8 values do.
+/* Returns a CGAffineTransform for an orientation value that can be applied to an image.
+ * CGImagePropertyOrientation enum values from 1 to 8 as defined in the TIFF spec are supported.
  * Returns CGAffineTransformIdentity if the image is of infinite extent.*/
 - (CGAffineTransform)imageTransformForOrientation:(int)orientation NS_AVAILABLE(10_10, 8_0);
+
+/* Returns a new image representing the original image transformeded for the given CGImagePropertyOrientation */
+- (CIImage *)imageByApplyingCGOrientation:(CGImagePropertyOrientation)orientation NS_AVAILABLE(10_13, 11_0);
+
+/* Returns a CGAffineTransform for the CGImagePropertyOrientation value that can be applied to an image.*/
+- (CGAffineTransform)imageTransformForCGOrientation:(CGImagePropertyOrientation)orientation NS_AVAILABLE(10_13, 11_0);
 
 /* Return a new image formed by compositing the receiver image over 'dest'.
  * This is equivalent to the CISourceOverCompositing filter. */
@@ -265,9 +311,15 @@ CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
 /* A convenience method for applying a filter to an image.
  * The method returns outputImage of the filter after setting the
  * filter's inputImage to the method receiver and other parameters
- * from from the key/value pairs of 'params'. */
+ * from the key/value pairs of 'params'. */
 - (CIImage *)imageByApplyingFilter:(NSString *)filterName
                withInputParameters:(nullable NSDictionary<NSString *,id> *)params NS_AVAILABLE(10_10, 8_0);
+
+/* A convenience method for applying a filter to an image.
+ * The method returns outputImage of the filter after setting the
+ * filter's inputImage to the method receiver and any other parameters
+ * from the filter's defaults. */
+- (CIImage *)imageByApplyingFilter:(NSString *)filterName NS_AVAILABLE(10_13, 11_0);
 
 
 /* Return a new image by color matching from the colorSpace to the context's working space.
@@ -295,6 +347,13 @@ CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
 /* Return a new image by changing the recevier's properties. */
 - (CIImage *)imageBySettingProperties:(NSDictionary*)properties NS_AVAILABLE(10_12, 10_0);
 
+/* Returns a new image by changing the receiver's sample mode to bilinear interpolation. */
+- (CIImage *)imageBySamplingLinear NS_AVAILABLE(10_13, 11_0)
+  NS_SWIFT_NAME(samplingLinear());
+
+/* Returns a new image by changing the receiver's sample mode to nearest neighbor. */
+- (CIImage *)imageBySamplingNearest NS_AVAILABLE(10_13, 11_0)
+  NS_SWIFT_NAME(samplingNearest());
 
 /* Return a rect the defines the bounds of non-(0,0,0,0) pixels */
 @property (NS_NONATOMIC_IOSONLY, readonly) CGRect extent;
@@ -320,9 +379,13 @@ CORE_IMAGE_EXPORT NSString * const kCIImageTextureFormat NS_AVAILABLE_MAC(10_9);
  * Modifying the contents of this pixelBuffer will cause the CIImage to render with undefined results. */
 @property (nonatomic, readonly, nullable) CVPixelBufferRef pixelBuffer NS_AVAILABLE(10_12, 10_0);
 
-/* Returns a CGImageRef if the CIImage was created with [CIImage imageWithCGImage] or [CIImage imageWithURL] and no options.
+/* Returns a CGImageRef if the CIImage was created with [CIImage imageWithCGImage] or [CIImage imageWithContentsOfURL] and no options.
  * Otherwise this property will be nil and calling [CIContext createCGImage:fromRect:] is recommended. */
 @property (nonatomic, readonly, nullable) CGImageRef CGImage NS_AVAILABLE(10_12,10_0);
+
+/* Returns a AVDepthData if the CIImage was created with [CIImage imageWithData] or [CIImage imageWithContentsOfURL] and.
+ * one the options kCIImageAuxiliaryDepth or kCIImageAuxiliaryDisparity. */
+@property (nonatomic, readonly, nullable) AVDepthData *depthData NS_AVAILABLE(10_13,11_0);
 
 /* Returns the rectangle of 'image' that is required to render the
  * rectangle 'rect' of the receiver.  This may return a null rect. */

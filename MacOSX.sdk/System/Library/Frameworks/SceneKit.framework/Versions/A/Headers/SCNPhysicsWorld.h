@@ -1,7 +1,7 @@
 //
 //  SCNPhysicsWorld.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -22,9 +22,9 @@ typedef NSString * SCNPhysicsTestOption NS_STRING_ENUM;
 typedef NSString * SCNPhysicsTestOption;
 #endif
 
-FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestCollisionBitMaskKey API_AVAILABLE(macosx(10.10)); // Allows to filter the objects tested by rayTest, contactTest and convexSweep. Default is SCNPhysicsCollisionCategoryAll
-FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestSearchModeKey       API_AVAILABLE(macosx(10.10)); // Specifies how to perform the ray/contact/sweep test. Values are defined below. If not defined, then defaults to SCNPhysicsTestSearchModeAny
-FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestBackfaceCullingKey  API_AVAILABLE(macosx(10.10)); // Specifies whether the back faces should be ignored or not. Defaults to YES.
+FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestCollisionBitMaskKey API_AVAILABLE(macos(10.10)); // Allows to filter the objects tested by rayTest, contactTest and convexSweep. Default is SCNPhysicsCollisionCategoryAll
+FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestSearchModeKey       API_AVAILABLE(macos(10.10)); // Specifies how to perform the ray/contact/sweep test. Values are defined below. If not defined, then defaults to SCNPhysicsTestSearchModeAny
+FOUNDATION_EXTERN SCNPhysicsTestOption const SCNPhysicsTestBackfaceCullingKey  API_AVAILABLE(macos(10.10)); // Specifies whether the back faces should be ignored or not. Defaults to YES.
 
 #define SCNPhysicsTestOptionCollisionBitMask SCNPhysicsTestCollisionBitMaskKey
 #define SCNPhysicsTestOptionSearchMode       SCNPhysicsTestSearchModeKey
@@ -37,15 +37,15 @@ typedef NSString * SCNPhysicsTestSearchMode NS_STRING_ENUM;
 typedef NSString * SCNPhysicsTestSearchMode;
 #endif
 
-FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAny     API_AVAILABLE(macosx(10.10)); // Returns the first contact found.
-FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeClosest API_AVAILABLE(macosx(10.10)); // Returns the nearest contact found only.
-FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAll     API_AVAILABLE(macosx(10.10)); // All contacts are returned.
+FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAny     API_AVAILABLE(macos(10.10)); // Returns the first contact found.
+FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeClosest API_AVAILABLE(macos(10.10)); // Returns the nearest contact found only.
+FOUNDATION_EXTERN SCNPhysicsTestSearchMode const SCNPhysicsTestSearchModeAll     API_AVAILABLE(macos(10.10)); // All contacts are returned.
 
 /*!
  @protocol SCNPhysicsContactDelegate
  @abstract The SCNPhysicsContactDelegate protocol is to be implemented by delegates that want to be notified when a contact occured.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @protocol SCNPhysicsContactDelegate <NSObject>
 @optional
 - (void)physicsWorld:(SCNPhysicsWorld *)world didBeginContact:(SCNPhysicsContact *)contact;
@@ -58,7 +58,7 @@ API_AVAILABLE(macosx(10.10))
  @abstract The SCNPhysicsWorld class describes and allows to control the physics simulation of a 3d scene.
  @discussion The SCNPhysicsWorld class should not be allocated directly but retrieved from the SCNScene class using the physicsWorld property.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsWorld : NSObject <NSSecureCoding>
 
 //A global 3D vector specifying the field force acceleration due to gravity. The unit is meter per second. Default is {0, -9.8, 0}.

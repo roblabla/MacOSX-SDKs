@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014, 2015 Apple Inc.
+ * Copyright (c) 2014-2015, 2017 Apple Inc.
  * All rights reserved.
  */
 
@@ -15,6 +15,9 @@
 #import <NetworkExtension/NEAppProxyTCPFlow.h>
 #import <NetworkExtension/NEAppProxyUDPFlow.h>
 #import <NetworkExtension/NEAppRule.h>
+#import <NetworkExtension/NEDNSProxyManager.h>
+#import <NetworkExtension/NEDNSProxyProvider.h>
+#import <NetworkExtension/NEDNSProxyProviderProtocol.h>
 #import <NetworkExtension/NEDNSSettings.h>
 #import <NetworkExtension/NEFilterControlProvider.h>
 #import <NetworkExtension/NEFilterDataProvider.h>
@@ -25,6 +28,7 @@
 #import <NetworkExtension/NEFlowMetaData.h>
 #if TARGET_OS_IPHONE
 #import <NetworkExtension/NEHotspotHelper.h>
+#import <NetworkExtension/NEHotspotConfigurationManager.h>
 #endif
 #import <NetworkExtension/NEIPv4Settings.h>
 #import <NetworkExtension/NEIPv6Settings.h>

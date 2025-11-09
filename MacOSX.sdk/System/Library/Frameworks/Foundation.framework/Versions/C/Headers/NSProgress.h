@@ -1,6 +1,6 @@
 /*
 	NSProgress.h
-	Copyright (c) 2011-2016, Apple Inc.
+	Copyright (c) 2011-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -10,11 +10,7 @@
 @class NSDictionary, NSMutableDictionary, NSMutableSet, NSURL, NSUUID, NSXPCConnection, NSLock;
 
 typedef NSString * NSProgressKind NS_EXTENSIBLE_STRING_ENUM;
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 typedef NSString * NSProgressUserInfoKey NS_EXTENSIBLE_STRING_ENUM;
-#else
-typedef NSString * NSProgressKey NS_EXTENSIBLE_STRING_ENUM;
-#endif
 typedef NSString * NSProgressFileOperationKind NS_EXTENSIBLE_STRING_ENUM;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -40,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_9, 7_0)
 @interface NSProgress : NSObject {
 @private
-    NSProgress *_parent;
+    NSProgress *__weak _parent;
     int64_t _reserved4;
     id _values;
     void (^ _resumingHandler)(void);
@@ -81,13 +77,17 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* The designated initializer. If a parent NSProgress object is passed then progress reporting and cancellation checking done by the receiver will notify or consult the parent. The only valid arguments to the first argument of this method are nil (indicating no parent) or [NSProgress currentProgress]. Any other value will throw an exception.
 */
-- (instancetype)initWithParent:(nullable NSProgress *)parentProgressOrNil userInfo:(nullable NSDictionary *)userInfoOrNil NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithParent:(nullable NSProgress *)parentProgressOrNil userInfo:(nullable NSDictionary<NSProgressUserInfoKey, id> *)userInfoOrNil NS_DESIGNATED_INITIALIZER;
 
 /* Make the receiver the current thread's current progress object, returned by +currentProgress. At the same time, record how large a portion of the work represented by the receiver will be represented by the next progress object initialized by invoking -initWithParent:userInfo: in the current thread with the receiver as the parent. This will be used when that child is sent -setCompletedUnitCount: and the receiver is notified of that.
  
    With this mechanism, code that doesn't know anything about its callers can report progress accurately by using +progressWithTotalUnitCount: and -setCompletedUnitCount:. The calling code will account for the fact that the work done is only a portion of the work to be done as part of a larger operation. The unit of work in a call to -becomeCurrentWithPendingUnitCount: has to be the same unit of work as that used for the value of the totalUnitCount property, but the unit of work used by the child can be a completely different one, and often will be. You must always balance invocations of this method with invocations of -resignCurrent.
 */
 - (void)becomeCurrentWithPendingUnitCount:(int64_t)unitCount;
+
+/* Become current, do some work, then resign current.
+ */
+- (void)performAsCurrentWithPendingUnitCount:(int64_t)unitCount usingBlock:(void (NS_NOESCAPE ^)(void))work API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0)) NS_REFINED_FOR_SWIFT;
 
 /* Balance the most recent previous invocation of -becomeCurrentWithPendingUnitCount: on the same thread by restoring the current progress object to what it was before -becomeCurrentWithPendingUnitCount: was invoked.
 */
@@ -151,11 +151,7 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Set a value in the dictionary returned by invocations of -userInfo, with appropriate KVO notification for properties whose values can depend on values in the user info dictionary, like localizedDescription. If a nil value is passed then the dictionary entry is removed.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 - (void)setUserInfoObject:(nullable id)objectOrNil forKey:(NSProgressUserInfoKey)key;
-#else
-- (void)setUserInfoObject:(nullable id)objectOrNil forKey:(NSString *)key;
-#endif
 
 #pragma mark *** Observing and Controlling Progress ***
 
@@ -166,6 +162,11 @@ You can invoke this method on one thread and then message the returned NSProgres
 /* The fraction of the overall work completed by this progress object, including work done by any children it may have.
 */
 @property (readonly) double fractionCompleted;
+
+/* True if the progress is considered finished. This property is observable.
+*/
+@property (readonly, getter=isFinished) BOOL finished;
+
 
 /* Invoke the block registered with the cancellationHandler property, if there is one, and set the cancelled property to YES. Do this for the receiver, any descendants of the receiver, the instance of NSProgress that was published in another process to make the receiver if that's the case, and any descendants of such a published instance of NSProgress.
 */
@@ -181,15 +182,51 @@ You can invoke this method on one thread and then message the returned NSProgres
 
 /* Arbitrary values associated with the receiver. Returns a KVO-compliant dictionary that changes as -setUserInfoObject:forKey: is sent to the receiver. The dictionary will send all of its KVO notifications on the thread which updates the property. The result will never be nil, but may be an empty dictionary. Some entries have meanings that are recognized by the NSProgress class itself. See the NSProgress...Key string constants listed below.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (readonly, copy) NSDictionary<NSProgressUserInfoKey, id> *userInfo;
-#else
-@property (readonly, copy) NSDictionary *userInfo;
-#endif
 
 /* Either a string identifying what kind of progress is being made, like NSProgressKindFile, or nil. If the value of the localizedDescription property has not been set to a non-nil value then the default implementation of -localizedDescription uses the progress kind to determine how to use the values of other properties, as well as values in the user info dictionary, to create a string that is presentable to the user. This is most useful when -localizedDescription is actually being invoked in another process, whose localization language may be different, as a result of using the publish and subscribe mechanism described here.
 */
 @property (nullable, copy) NSProgressKind kind;
+
+/* How much time is probably left in the operation, as an NSNumber containing a number of seconds.
+   This property is optional. If present, NSProgress will use the information to present more information in its localized description.
+   This property sets a value in the userInfo dictionary.
+ */
+@property (nullable, copy) NSNumber *estimatedTimeRemaining API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0)) NS_REFINED_FOR_SWIFT;
+
+/* How fast data is being processed, as an NSNumber containing bytes per second.
+ This property is optional. If present, NSProgress will use the information to present more information in its localized description.
+ This property sets a value in the userInfo dictionary.
+ */
+@property (nullable, copy) NSNumber *throughput API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0)) NS_REFINED_FOR_SWIFT;
+
+/*
+ When the kind property is NSProgressKindFile, this value should be set. It describes the kind of file operation being performed.
+ If present, NSProgress will use the information to present more information in its localized description.
+ This property sets a value in the userInfo dictionary.
+ */
+@property (nullable, copy) NSProgressFileOperationKind fileOperationKind API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*
+ A URL identifying the item on which progress is being made. This is required for any NSProgress that is published using -publish to be reported to subscribers registered with +addSubscriberForFileURL:withPublishingHandler:
+ If present, NSProgress will use the information to present more information in its localized description.
+ This property sets a value in the userInfo dictionary.
+ */
+@property (nullable, copy) NSURL *fileURL API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*
+ If the progress is operating on a set of files, then set to the total number of files in the operation.
+ This property is optional. If present, NSProgress will use the information to present more information in its localized description.
+ This property sets a value in the userInfo dictionary.
+ */
+@property (nullable, copy) NSNumber *fileTotalCount API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0)) NS_REFINED_FOR_SWIFT;
+
+/*
+ If the progress is operating on a set of files, then set to the number of completed files in the operation.
+ This property is optional. If present, NSProgress will use the information to present more information in its localized description.
+ This property sets a value in the userInfo dictionary.
+ */
+@property (nullable, copy) NSNumber *fileCompletedCount API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0)) NS_REFINED_FOR_SWIFT;
 
 #pragma mark *** Reporting Progress to Other Processes (OS X Only) ***
 
@@ -199,11 +236,11 @@ When you make an NSProgress observable by other processes you must ensure that a
 
 You can publish an instance of NSProgress at most once.
 */
-- (void)publish NS_AVAILABLE(10_9, NA);
+- (void)publish API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* Make the NSProgress no longer observable by other processes.
 */
-- (void)unpublish NS_AVAILABLE(10_9, NA);
+- (void)unpublish API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 #pragma mark *** Observing and Controlling File Progress by Other Processes (OS X Only) ***
 
@@ -212,17 +249,17 @@ typedef _Nullable NSProgressUnpublishingHandler (^NSProgressPublishingHandler)(N
 
 /* Register to hear about file progress. The passed-in block will be invoked when -publish has been sent to an NSProgress whose NSProgressFileURLKey user info dictionary entry is an NSURL locating the same item located by the passed-in NSURL, or an item directly contained by it. The NSProgress passed to your block will be a proxy of the one that was published. The passed-in block may return another block. If it does, then that returned block will be invoked when the corresponding invocation of -unpublish is made, or the publishing process terminates, or +removeSubscriber: is invoked. Your blocks will be invoked on the main thread.
 */
-+ (id)addSubscriberForFileURL:(NSURL *)url withPublishingHandler:(NSProgressPublishingHandler)publishingHandler NS_AVAILABLE(10_9, NA);
++ (id)addSubscriberForFileURL:(NSURL *)url withPublishingHandler:(NSProgressPublishingHandler)publishingHandler API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* Given the object returned by a previous invocation of -addSubscriberForFileURL:withPublishingHandler:, deregister.
 */
-+ (void)removeSubscriber:(id)subscriber NS_AVAILABLE(10_9, NA);
++ (void)removeSubscriber:(id)subscriber API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* Return YES if the receiver represents progress that was published before the invocation of +addSubscriberForFileURL:withPublishingHandler: that resulted in the receiver appearing in this process, NO otherwise. The publish and subscribe mechanism described here is generally "level triggered," in that when you invoke +addSubscriberForFileURL:withPublishingHandler: your block will be invoked for every relevant NSProgress that has already been published and not yet unpublished. Sometimes however you need to implement "edge triggered" behavior, in which you do something either exactly when new progress begins or not at all. In the example described above, the Dock does not animate file icon flying when this method returns YES.
 
 Note that there is no reliable definition of "before" in this case, which involves multiple processes in a preemptively scheduled system. You should not use this method for anything more important than best efforts at animating perfectly in the face of processes coming and going due to unpredictable user actions.
 */
-@property (readonly, getter=isOld) BOOL old NS_AVAILABLE(10_9, NA);
+@property (readonly, getter=isOld) BOOL old API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -236,19 +273,11 @@ Note that there is no reliable definition of "before" in this case, which involv
 
 /* How much time is probably left in the operation, as an NSNumber containing a number of seconds.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressEstimatedTimeRemainingKey NS_AVAILABLE(10_9, 7_0);
-#else
-FOUNDATION_EXPORT NSProgressKey const NSProgressEstimatedTimeRemainingKey NS_AVAILABLE(10_9, 7_0);
-#endif
 
 /* How fast data is being processed, as an NSNumber containing bytes per second.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressThroughputKey NS_AVAILABLE(10_9, 7_0);
-#else
-FOUNDATION_EXPORT NSProgressKey const NSProgressThroughputKey NS_AVAILABLE(10_9, 7_0);
-#endif
 
 #pragma mark *** Details of File Progress ***
 
@@ -258,11 +287,7 @@ FOUNDATION_EXPORT NSProgressKind const NSProgressKindFile NS_AVAILABLE(10_9, 7_0
 
 /* A user info dictionary key, for an entry that is required when the value for the kind property is NSProgressKindFile. The value must be one of the strings listed in the next section. The default implementations of of -localizedDescription and -localizedItemDescription use this value to determine the text that they return.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileOperationKindKey NS_AVAILABLE(10_9, 7_0);
-#else
-FOUNDATION_EXPORT NSProgressKey const NSProgressFileOperationKindKey NS_AVAILABLE(10_9, 7_0);
-#endif
 
 /* Possible values for NSProgressFileOperationKindKey entries.
 */
@@ -273,37 +298,20 @@ FOUNDATION_EXPORT NSProgressFileOperationKind const NSProgressFileOperationKindC
 
 /* A user info dictionary key. The value must be an NSURL identifying the item on which progress is being made. This is required for any NSProgress that is published using -publish to be reported to subscribers registered with +addSubscriberForFileURL:withPublishingHandler:.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileURLKey NS_AVAILABLE(10_9, 7_0);
-#else
-FOUNDATION_EXPORT NSProgressKey const NSProgressFileURLKey NS_AVAILABLE(10_9, 7_0);
-#endif
 
 /* User info dictionary keys. The values must be NSNumbers containing integers. These entries are optional but if they are both present then the default implementation of -localizedAdditionalDescription uses them to determine the text that it returns.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileTotalCountKey NS_AVAILABLE(10_9, 7_0);
 FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileCompletedCountKey NS_AVAILABLE(10_9, 7_0);
-#else
-FOUNDATION_EXPORT NSProgressKey const NSProgressFileTotalCountKey NS_AVAILABLE(10_9, 7_0);
-FOUNDATION_EXPORT NSProgressKey const NSProgressFileCompletedCountKey NS_AVAILABLE(10_9, 7_0);
-#endif
 
 /* User info dictionary keys. The value for the first entry must be an NSImage, typically an icon. The value for the second entry must be an NSValue containing an NSRect, in screen coordinates, locating the image where it initially appears on the screen.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileAnimationImageKey NS_AVAILABLE(10_9, NA);
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileAnimationImageOriginalRectKey NS_AVAILABLE(10_9, NA);
-#else
-FOUNDATION_EXPORT NSProgressKey const NSProgressFileAnimationImageKey NS_AVAILABLE(10_9, NA);
-FOUNDATION_EXPORT NSProgressKey const NSProgressFileAnimationImageOriginalRectKey NS_AVAILABLE(10_9, NA);
-#endif
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileAnimationImageKey API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileAnimationImageOriginalRectKey API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
+
 /* A user info dictionary key. The value must be an NSImage containing an icon. This entry is optional but, if it is present, the Finder will use it to show the icon of a file while progress is being made on that file. For example, the App Store uses this to specify an icon for an application being downloaded before the icon can be gotten from the application bundle itself.
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
-FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileIconKey NS_AVAILABLE(10_9, NA);
-#else
-FOUNDATION_EXPORT NSProgressKey const NSProgressFileIconKey NS_AVAILABLE(10_9, NA);
-#endif
+FOUNDATION_EXPORT NSProgressUserInfoKey const NSProgressFileIconKey API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 NS_ASSUME_NONNULL_END

@@ -3,22 +3,21 @@
 	
 	Framework:  AVKit
 	
-	Copyright © 2013-2016 Apple Inc. All rights reserved.
+	Copyright © 2013-2017 Apple Inc. All rights reserved.
 	
  */
 
 #import <AppKit/AppKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class AVPlayer;
 
 /*!
 	@class		AVPlayerView
 	@abstract	AVPlayerView is a subclass of NSView that can be used to display the visual content of an AVPlayer object and the standard playback controls.
  */
 
-NS_CLASS_AVAILABLE_MAC(10_9)
+API_AVAILABLE(macosx(10.9))
 @interface AVPlayerView : NSView
 
 /*!
@@ -29,15 +28,15 @@ NS_CLASS_AVAILABLE_MAC(10_9)
 
 /*!
 	@constant	AVPlayerViewControlsStyleNone
-	@abstract	No controls pane is associated with the view.
+				No controls pane is associated with the view.
 	@constant	AVPlayerViewControlsStyleInline
-	@abstract	The inline controls pane is associated with the view.
+				The inline controls pane is associated with the view.
 	@constant	AVPlayerViewControlsStyleFloating
-	@abstract	The floating controls pane is associated with the view.
+				The floating controls pane is associated with the view.
 	@constant	AVPlayerViewControlsStyleMinimal
-	@abstract	The minimal controls pane is associated with the view.
+				The minimal controls pane is associated with the view.
 	@constant	AVPlayerViewControlsStyleDefault
-	@abstract	The default controls pane is associated with the view.
+				The default controls pane is associated with the view.
  */
 typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	AVPlayerViewControlsStyleNone,
@@ -45,7 +44,7 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	AVPlayerViewControlsStyleFloating,
 	AVPlayerViewControlsStyleMinimal,
 	AVPlayerViewControlsStyleDefault = AVPlayerViewControlsStyleInline
-} NS_ENUM_AVAILABLE_MAC(10_9);
+} API_AVAILABLE(macosx(10.9));
 
 /*!
 	@property	controlsStyle
@@ -59,25 +58,31 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	@discussion	Options are AVLayerVideoGravityResizeAspect, AVLayerVideoGravityResizeAspectFill and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default.
 				See <AVFoundation/AVAnimation.h> for a description of these options.
  */
-@property (copy) NSString *videoGravity NS_AVAILABLE_MAC(10_10);
+@property (copy) NSString *videoGravity API_AVAILABLE(macosx(10.10));
 
 /*!
 	@property	readyForDisplay
 	@abstract	Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
  */
-@property (readonly, getter = isReadyForDisplay) BOOL readyForDisplay NS_AVAILABLE_MAC(10_10);
+@property (readonly, getter = isReadyForDisplay) BOOL readyForDisplay API_AVAILABLE(macosx(10.10));
 
 /*!
 	@property	videoBounds
 	@abstract	The current size and position of the video image as displayed within the receiver's view's bounds.
  */
-@property (readonly) NSRect videoBounds NS_AVAILABLE_MAC(10_10);
+@property (readonly) NSRect videoBounds API_AVAILABLE(macosx(10.10));
 
 /*!
 	@property	contentOverlayView
 	@abstract	Use the content overlay view to add additional custom views between the video content and the controls.
  */
-@property (readonly, nullable) NSView *contentOverlayView NS_AVAILABLE_MAC(10_10);
+@property (readonly, nullable) NSView *contentOverlayView API_AVAILABLE(macosx(10.10));
+
+/*!
+	@property	updatesNowPlayingInfoCenter
+	@abstract	Whether or not the now playing info center should be updated. Default is YES.
+ */
+@property BOOL updatesNowPlayingInfoCenter API_AVAILABLE(macosx(10.13));
 
 @end
 
@@ -121,14 +126,14 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 
 /*!
 	@constant	AVPlayerViewTrimOKButton
-	@abstract	The user selected the Trim button.
+				The user selected the Trim button.
 	@constant	AVPlayerViewTrimCancelButton
-	@abstract	The user selected the Cancel button.
+				The user selected the Cancel button.
  */
 typedef NS_ENUM(NSInteger, AVPlayerViewTrimResult) {
 	AVPlayerViewTrimOKButton,
 	AVPlayerViewTrimCancelButton
-} NS_ENUM_AVAILABLE_MAC(10_9);
+} API_AVAILABLE(macosx(10.9));
 
 /*!
 	@method		beginTrimmingWithCompletionHandler:

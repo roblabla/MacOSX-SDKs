@@ -292,6 +292,11 @@ cl_kernel clCreateKernelFromDAGAPPLE(cl_dag d, cl_uint n,
 */
 
 
+/* 64-bit (cl_ulong) IOKit registryID for this device. May be zero for pure software devices. */
+#define CL_DEVICE_REGISTRY_ID_APPLE               0x10000030
+/* cl_bool that reports whether this device is removable or not (eGPU) */
+#define CL_DEVICE_REMOVABLE_APPLE                 0x10000031
+	
 #ifdef __cplusplus
 }
 #endif

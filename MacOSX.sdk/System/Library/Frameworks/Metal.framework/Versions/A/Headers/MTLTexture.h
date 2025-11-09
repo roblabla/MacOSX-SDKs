@@ -11,6 +11,9 @@
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLTypes.h>
 
+
+#import <IOSurface/IOSurface.h>
+
 NS_ASSUME_NONNULL_BEGIN
 /*!
  @enum MTLTextureType
@@ -151,7 +154,7 @@ NS_AVAILABLE(10_11, 8_0)
  @property rootResource
  @abstract The resource this texture was created from. It may be a texture or a buffer. If this texture is not reusing storage of another MTLResource, then nil is returned.
  */
-@property (nullable, readonly) id <MTLResource> rootResource NS_DEPRECATED(10_11, 10_12, 8_0, 10_0);
+@property (nullable, readonly) id <MTLResource> rootResource NS_DEPRECATED(10_11, 10_12, 8_0, 10_0, "Use parentTexture or buffer instead");
 
 /*!
  @property parentTexture
@@ -194,13 +197,13 @@ NS_AVAILABLE(10_11, 8_0)
  @property iosurface
  @abstract If this texture was created from an IOSurface, this returns a reference to that IOSurface. iosurface is nil if this texture was not created from an IOSurface.
  */
-@property (nullable, readonly) IOSurfaceRef iosurface;
+@property (nullable, readonly) IOSurfaceRef iosurface NS_AVAILABLE(10_11, 11_0);
 
 /*!
  @property iosurfacePlane
  @abstract If this texture was created from an IOSurface, this returns the plane of the IOSurface from which the texture was created. iosurfacePlane is 0 if this texture was not created from an IOSurface.
  */
-@property (readonly) NSUInteger iosurfacePlane;
+@property (readonly) NSUInteger iosurfacePlane NS_AVAILABLE(10_11, 11_0);
 
 /*!
  @property type
@@ -295,13 +298,13 @@ NS_AVAILABLE(10_11, 8_0)
  @method newTextureViewWithPixelFormat:
  @abstract Create a new texture which shares the same storage as the source texture, but with a different (but compatible) pixel format.
  */
-- (id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat;
+- (nullable id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat;
 
 /*!
  @method newTextureViewWithPixelFormat:textureType:levels:slices:
  @abstract Create a new texture which shares the same storage as the source texture, but with a different (but compatible) pixel format, texture type, levels and slices.
  */
-- (id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat textureType:(MTLTextureType)textureType levels:(NSRange)levelRange slices:(NSRange)sliceRange NS_AVAILABLE(10_11, 9_0);
+- (nullable id<MTLTexture>)newTextureViewWithPixelFormat:(MTLPixelFormat)pixelFormat textureType:(MTLTextureType)textureType levels:(NSRange)levelRange slices:(NSRange)sliceRange NS_AVAILABLE(10_11, 9_0);
 
 @end
 NS_ASSUME_NONNULL_END

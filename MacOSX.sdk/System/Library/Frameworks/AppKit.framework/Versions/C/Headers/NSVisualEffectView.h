@@ -1,7 +1,7 @@
 /*
     NSVisualEffectView.h
     Application Kit
-    Copyright (c) 2014-2016, Apple Inc.
+    Copyright (c) 2014-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -60,7 +60,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
     CALayer *_maskLayer;
     CALayer *_clearCopyLayer;
     CALayer *_backdropLayer;
-    CALayer *_backdropLayerForMask;
+    CALayer *_backdropLayerForMask __unused;
     
     unsigned int _dirty:1;
     unsigned int _hasMask:1;

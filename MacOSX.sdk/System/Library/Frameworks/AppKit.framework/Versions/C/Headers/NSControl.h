@@ -1,7 +1,7 @@
 /*
 	NSControl.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -154,8 +154,7 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 // Use formatters instead.  See -[NSControl formatter] and -[NSControl setFormatter:].
 - (void)setFloatingPointFormat:(BOOL)autoRange left:(NSUInteger)leftDigits right:(NSUInteger)rightDigits NS_DEPRECATED_MAC(10_0, 10_0);
 
-+ (void)setCellClass:(nullable Class)factoryId;
-+ (nullable Class)cellClass;
+@property (class, nullable) Class cellClass;
 
 @property (nullable, strong) __kindof NSCell *cell;
 

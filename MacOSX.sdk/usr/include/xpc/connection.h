@@ -58,10 +58,10 @@ const struct _xpc_dictionary_s _xpc_error_connection_invalid;
 
 /*!
  * @constant XPC_ERROR_TERMINATION_IMMINENT
- * This error will be delivered to a peer connection's event handler when the
- * XPC runtime has determined that the program should exit and that all
- * outstanding transactions must be wound down, and no new transactions can be
- * opened.
+ * On macOS, this error will be delivered to a peer connection's event handler
+ * when the XPC runtime has determined that the program should exit and that
+ * all outstanding transactions must be wound down, and no new transactions can
+ * be opened.
  *
  * After this error has been delivered to the event handler, no more messages
  * will be received by the connection. The runtime will still attempt to deliver

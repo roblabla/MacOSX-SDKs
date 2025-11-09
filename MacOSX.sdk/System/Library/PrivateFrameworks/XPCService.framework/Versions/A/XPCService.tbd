@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 90E2DE01-699D-3FCB-927C-D3A9AB80AC22', 'x86_64: BC3FCE26-6219-3316-949F-37F7005C9A0F' ]
+uuids:           [ 'i386: B9E86D7E-5FF4-3168-AF85-41BE1904B292', 'x86_64: 085DD0E3-EC6B-367D-834F-5578452333C7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/XPCService.framework/Versions/A/XPCService
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _XPCServiceBundle._bundle, _XPCServiceBundle._executablePath, 

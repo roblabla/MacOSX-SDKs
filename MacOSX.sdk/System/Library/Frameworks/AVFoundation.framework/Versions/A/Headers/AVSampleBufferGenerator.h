@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2014-2015 Apple Inc. All rights reserved.
+	Copyright 2014-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -46,7 +46,7 @@ AV_INIT_UNAVAILABLE
 - (instancetype)initWithAsset:(AVAsset *)asset timebase:(nullable CMTimebaseRef)timebase NS_DESIGNATED_INITIALIZER;
 
 /* It is an error to use an AVSampleBufferRequest with mode set to AVSampleBufferRequestModeScheduled when the AVSampleBufferGenerator was created with a NULL timebase. */
-- (CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED;
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED;
 
 /* completionHandler is called when data is ready or as soon as an error has occurred. */
 + (void)notifyOfDataReadyForSampleBuffer:(CMSampleBufferRef)sbuf completionHandler:(void (^)(BOOL dataReady, NSError *error))completionHandler;

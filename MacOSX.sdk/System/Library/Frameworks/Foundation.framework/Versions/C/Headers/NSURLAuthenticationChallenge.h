@@ -1,6 +1,6 @@
 /*	
     NSURLAuthenticationChallenge.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -85,7 +85,6 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
     @method initWithAuthenticationChallenge:
     @abstract Initialize an authentication challenge copying all parameters from another one.
-    @param challenge
     @result A new challenge initialized with the parameters from the passed in challenge
     @discussion This initializer may be useful to subclassers that want to proxy
     one type of authentication challenge to look like another type.
@@ -93,14 +92,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge sender:(id<NSURLAuthenticationChallengeSender>)sender;
 
 /*!
-    @method protectionSpace
     @abstract Get a description of the protection space that requires authentication
     @result The protection space that needs authentication
 */
 @property (readonly, copy) NSURLProtectionSpace *protectionSpace;
 
 /*!
-    @method proposedCredential
     @abstract Get the proposed credential for this challenge
     @result The proposed credential
     @discussion proposedCredential may be nil, if there is no default
@@ -114,14 +111,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSURLCredential *proposedCredential;
 
 /*!
-    @method previousFailureCount
     @abstract Get count of previous failed authentication attempts
     @result The count of previous failures
 */
 @property (readonly) NSInteger previousFailureCount;
 
 /*!
-    @method failureResponse
     @abstract Get the response representing authentication failure.
     @result The failure response or nil
     @discussion If there was a previous authentication failure, and
@@ -132,7 +127,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSURLResponse *failureResponse;
 
 /*!
-    @method error
     @abstract Get the error representing authentication failure.
     @discussion If there was a previous authentication failure, and
     this protocol uses errors to indicate authentication failure,
@@ -142,7 +136,6 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSError *error;
 
 /*!
-    @method sender
     @abstract Get the sender of this challenge
     @result The sender of the challenge
     @discussion The sender is the object you should reply to when done processing the challenge.

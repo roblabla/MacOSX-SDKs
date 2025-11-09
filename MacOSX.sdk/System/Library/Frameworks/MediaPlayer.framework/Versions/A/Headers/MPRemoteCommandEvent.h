@@ -36,7 +36,7 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 typedef NS_ENUM(NSUInteger, MPSeekCommandEventType) {
     MPSeekCommandEventTypeBeginSeeking,
     MPSeekCommandEventTypeEndSeeking
-} NS_ENUM_AVAILABLE(10_12_2, 7_1);
+} MP_API(ios(7.1), macos(10.12.2));
 
 MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 @interface MPSeekCommandEvent : MPRemoteCommandEvent

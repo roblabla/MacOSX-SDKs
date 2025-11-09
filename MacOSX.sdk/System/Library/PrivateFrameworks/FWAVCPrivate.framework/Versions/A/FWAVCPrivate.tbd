@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386 ]
-uuids:           [ 'i386: DB9CB557-1A16-3B5D-905A-4D1D5910D558' ]
+uuids:           [ 'i386: 35661302-34A3-35A4-B3AA-A30C7880C1B3' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/FWAVCPrivate.framework/Versions/A/FWAVCPrivate
-current-version: 46.0
+current-version: 46
 objc-constraint: none
 exports:         
   - archs:           [ i386 ]

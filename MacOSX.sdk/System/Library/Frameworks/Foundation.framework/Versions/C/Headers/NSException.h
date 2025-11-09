@@ -1,5 +1,5 @@
 /*	NSException.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -52,8 +52,8 @@ __attribute__((__objc_exception__))
 @property (nullable, readonly, copy) NSString *reason;
 @property (nullable, readonly, copy) NSDictionary *userInfo;
 
-@property (readonly, copy) NSArray<NSNumber *> *callStackReturnAddresses NS_AVAILABLE(10_5, 2_0);
-@property (readonly, copy) NSArray<NSString *> *callStackSymbols NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) NSArray<NSNumber *> *callStackReturnAddresses API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (readonly, copy) NSArray<NSString *> *callStackSymbols API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 - (void)raise;
 
@@ -101,7 +101,7 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 #define NSAssert(condition, desc, ...)	\
     do {				\
 	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
-	if (!(condition)) {		\
+	if (__builtin_expect(!(condition), 0)) {		\
             NSString *__assert_file__ = [NSString stringWithUTF8String:__FILE__]; \
             __assert_file__ = __assert_file__ ? __assert_file__ : @"<Unknown File>"; \
 	    [[NSAssertionHandler currentHandler] handleFailureInMethod:_cmd \
@@ -116,7 +116,7 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 #define NSCAssert(condition, desc, ...) \
     do {				\
 	__PRAGMA_PUSH_NO_EXTRA_ARG_WARNINGS \
-	if (!(condition)) {		\
+	if (__builtin_expect(!(condition), 0)) {		\
             NSString *__assert_fn__ = [NSString stringWithUTF8String:__PRETTY_FUNCTION__]; \
             __assert_fn__ = __assert_fn__ ? __assert_fn__ : @"<Unknown Function>"; \
             NSString *__assert_file__ = [NSString stringWithUTF8String:__FILE__]; \
@@ -286,16 +286,14 @@ FOUNDATION_EXPORT void NSSetUncaughtExceptionHandler(NSUncaughtExceptionHandler 
 #endif
 
 
-FOUNDATION_EXPORT NSString * const NSAssertionHandlerKey NS_AVAILABLE(10_6, 4_0);
+FOUNDATION_EXPORT NSString * const NSAssertionHandlerKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @interface NSAssertionHandler : NSObject {
     @private
     void *_reserved;
 }
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSAssertionHandler *currentHandler;
-#endif
 
 - (void)handleFailureInMethod:(SEL)selector object:(id)object file:(NSString *)fileName lineNumber:(NSInteger)line description:(nullable NSString *)format,... NS_FORMAT_FUNCTION(5,6);
 

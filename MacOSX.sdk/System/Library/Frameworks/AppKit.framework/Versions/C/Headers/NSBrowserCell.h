@@ -1,7 +1,7 @@
 /*
 	NSBrowserCell.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initImageCell:(nullable NSImage *)image NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-+ (nullable NSImage *)branchImage;
-+ (nullable NSImage *)highlightedBranchImage;
+@property (class, readonly, nullable, strong) NSImage *branchImage;
+@property (class, readonly, nullable, strong) NSImage *highlightedBranchImage;
 
 - (nullable NSColor *)highlightColorInView:(NSView *)controlView;
 

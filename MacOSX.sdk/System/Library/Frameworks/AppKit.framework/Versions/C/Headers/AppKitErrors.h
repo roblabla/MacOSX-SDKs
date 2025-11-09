@@ -1,7 +1,7 @@
 /*
 	AppKitErrors.h
 	Application Kit
-	Copyright (c) 2004-2016, Apple Inc.
+	Copyright (c) 2004-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -17,6 +17,11 @@ enum {
     // Inclusive error range definitions, for checking future error codes
     NSTextReadWriteErrorMinimum = 65792,
     NSTextReadWriteErrorMaximum = 66303,
+
+    // Font error codes
+    NSFontAssetDownloadError NS_ENUM_AVAILABLE_MAC(10_13) = 66304,  // Generic code when font asset download error occurs.
+    NSFontErrorMinimum NS_ENUM_AVAILABLE_MAC(10_13) = 66304,
+    NSFontErrorMaximum NS_ENUM_AVAILABLE_MAC(10_13) = 66335,
     
     // Service error codes
     NSServiceApplicationNotFoundError = 66560,			// The service provider could not be found.

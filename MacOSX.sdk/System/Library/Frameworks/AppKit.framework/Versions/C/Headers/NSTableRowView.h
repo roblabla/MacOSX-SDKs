@@ -1,7 +1,7 @@
 /*
     NSTableRowView.h
     Application Kit
-    Copyright (c) 2008-2016, Apple Inc.
+    Copyright (c) 2008-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -15,6 +15,8 @@
  */
 NS_ASSUME_NONNULL_BEGIN
 
+@class NSLayoutConstraint;
+
 NS_CLASS_AVAILABLE(10_7, NA)
 @interface NSTableRowView : NSView <NSAccessibilityRow> {
 @private
@@ -27,7 +29,7 @@ NS_CLASS_AVAILABLE(10_7, NA)
     CGFloat _dropOperationIndentation;
 
     NSColor *_backgroundColor;
-    CGFloat _selectionAlpha;
+    NSMutableDictionary<NSNumber *, NSArray<NSLayoutConstraint *> *> *_columnConstraints;
 
     unsigned int _targetForDropOperation:1;
     unsigned int _groupRowStyle:2;
@@ -49,8 +51,11 @@ NS_CLASS_AVAILABLE(10_7, NA)
     unsigned int _checkingFontRefColor:1;
     unsigned int _forDeletion:1;
     unsigned int _emphasizedForDropOperation:1;
+    unsigned int _keyViewLoopIsDirty:1;
+    unsigned int _hasSelectionAlpha:1;
+    unsigned int _hasLayoutChangedListener:1;
 #if !__LP64__    
-    unsigned int _reserved2:7;
+    unsigned int _reserved2:4 __unused;
 #endif
 }
 

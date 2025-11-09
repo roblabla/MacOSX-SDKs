@@ -1,5 +1,5 @@
 /*	NSPredicate.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -29,22 +29,21 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 + (NSPredicate *)predicateWithFormat:(NSString *)predicateFormat, ...;
 + (NSPredicate *)predicateWithFormat:(NSString *)predicateFormat arguments:(va_list)argList;
 
-+ (nullable NSPredicate *)predicateFromMetadataQueryString:(NSString *)queryString NS_AVAILABLE_MAC(10_9);
++ (nullable NSPredicate *)predicateFromMetadataQueryString:(NSString *)queryString API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 + (NSPredicate *)predicateWithValue:(BOOL)value;    // return predicates that always evaluate to true/false
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(6)
-+ (NSPredicate*)predicateWithBlock:(BOOL (^)(id _Nullable evaluatedObject, NSDictionary<NSString *, id> * _Nullable bindings))block NS_AVAILABLE(10_6, 4_0);
-#endif
++ (NSPredicate*)predicateWithBlock:(BOOL (^)(id _Nullable evaluatedObject, NSDictionary<NSString *, id> * _Nullable bindings))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+
 @property (readonly, copy) NSString *predicateFormat;    // returns the format string of the predicate
 
 - (instancetype)predicateWithSubstitutionVariables:(NSDictionary<NSString *, id> *)variables;    // substitute constant values for variables
 
 - (BOOL)evaluateWithObject:(nullable id)object;    // evaluate a predicate against a single object
 
-- (BOOL)evaluateWithObject:(nullable id)object substitutionVariables:(nullable NSDictionary<NSString *, id> *)bindings NS_AVAILABLE(10_5, 3_0); // single pass evaluation substituting variables from the bindings dictionary for any variable expressions encountered
+- (BOOL)evaluateWithObject:(nullable id)object substitutionVariables:(nullable NSDictionary<NSString *, id> *)bindings API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // single pass evaluation substituting variables from the bindings dictionary for any variable expressions encountered
 
-- (void)allowEvaluation NS_AVAILABLE(10_9, 7_0); // Force a predicate which was securely decoded to allow evaluation
+- (void)allowEvaluation API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); // Force a predicate which was securely decoded to allow evaluation
 
 @end
 
@@ -58,22 +57,22 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
 
 
 @interface NSSet<ObjectType> (NSPredicateSupport)
-- (NSSet<ObjectType> *)filteredSetUsingPredicate:(NSPredicate *)predicate NS_AVAILABLE(10_5, 3_0);    // evaluate a predicate against a set of objects and return a filtered set
+- (NSSet<ObjectType> *)filteredSetUsingPredicate:(NSPredicate *)predicate API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));    // evaluate a predicate against a set of objects and return a filtered set
 @end
 
 @interface NSMutableSet<ObjectType> (NSPredicateSupport)
-- (void)filterUsingPredicate:(NSPredicate *)predicate NS_AVAILABLE(10_5, 3_0);    // evaluate a predicate against a set of objects and filter the mutable set directly
+- (void)filterUsingPredicate:(NSPredicate *)predicate API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));    // evaluate a predicate against a set of objects and filter the mutable set directly
 @end
 
 @interface NSOrderedSet<ObjectType> (NSPredicateSupport)
 
-- (NSOrderedSet<ObjectType> *)filteredOrderedSetUsingPredicate:(NSPredicate *)p NS_AVAILABLE(10_7, 5_0);    // evaluate a predicate against an ordered set of objects and return a filtered ordered set
+- (NSOrderedSet<ObjectType> *)filteredOrderedSetUsingPredicate:(NSPredicate *)p API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));    // evaluate a predicate against an ordered set of objects and return a filtered ordered set
 
 @end
 
 @interface NSMutableOrderedSet<ObjectType> (NSPredicateSupport)
 
-- (void)filterUsingPredicate:(NSPredicate *)p NS_AVAILABLE(10_7, 5_0);  // evaluate a predicate against an ordered set of objects and filter the mutable ordered set directly
+- (void)filterUsingPredicate:(NSPredicate *)p API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));  // evaluate a predicate against an ordered set of objects and filter the mutable ordered set directly
 
 @end
 

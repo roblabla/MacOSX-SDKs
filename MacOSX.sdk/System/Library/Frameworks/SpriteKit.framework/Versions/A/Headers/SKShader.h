@@ -41,7 +41,7 @@ SK_EXPORT @interface SKShader : NSObject <NSCopying, NSCoding>
                    encoding:NSUTF8StringEncoding
                       error:NULL]];
  
- Though error handling is encapsulated and the encoding flexible.
+ The encoding is assumed to be NSUTF8StringEncoding.
  */
 + (instancetype)shaderWithFileNamed:(NSString *)name;
 

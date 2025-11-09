@@ -72,6 +72,14 @@
 
 
 
+__BEGIN_DECLS
+extern vm_offset_t vm_kernel_addrhash(vm_offset_t addr);
+__END_DECLS
+
+extern void vm_kernel_addrhide(
+	vm_offset_t addr,
+	vm_offset_t *hide_addr);
+
 extern vm_offset_t vm_kernel_addrperm_ext;
 
 extern void	vm_kernel_addrperm_external(
@@ -81,4 +89,8 @@ extern void	vm_kernel_addrperm_external(
 extern void	vm_kernel_unslide_or_perm_external(
 		vm_offset_t addr,
 		vm_offset_t *up_addr);
+
+
+extern void vm_init_before_launchd(void);
+
 #endif	/* _VM_VM_KERN_H_ */

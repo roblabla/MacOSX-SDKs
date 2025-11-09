@@ -660,7 +660,7 @@ GetIconRefFromFileInfo(
   const FSCatalogInfo *    inCatalogInfo,          /* can be NULL */
   IconServicesUsageFlags   inUsageFlags,
   IconRef *                outIconRef,
-  SInt16 *                 outLabel)               /* can be NULL */ __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+  SInt16 *                 outLabel)               /* can be NULL */ __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "Use -[NSWorkspace iconForFile:] instead.");
 
 
 /* GetIconRefFromTypeInfo*/
@@ -896,7 +896,7 @@ RegisterIconRefFromFSRef(
   OSType         creator,
   OSType         iconType,
   const FSRef *  iconFile,
-  IconRef *      theIconRef)                                  __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+  IconRef *      theIconRef)                                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "You do not need to register .icns files to use them with -[NSImage initWithContentsOfURL:].");
 
 
 /*
@@ -921,7 +921,7 @@ RegisterIconRefFromFSRef(
 extern OSErr 
 UnregisterIconRef(
   OSType   creator,
-  OSType   iconType)                                          __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  OSType   iconType)                                          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "You do not need to unregister icons.");
 
 
 
@@ -1382,7 +1382,7 @@ WriteIconFile(
 extern OSStatus 
 ReadIconFromFSRef(
   const FSRef *       ref,
-  IconFamilyHandle *  iconFamily)                             __OSX_AVAILABLE_STARTING(__MAC_10_1, __IPHONE_NA);
+  IconFamilyHandle *  iconFamily)                             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_1, __MAC_10_13, __IPHONE_NA, __IPHONE_NA, "Use -[NSWorkspace iconForFile:] instead.");
 
 
 

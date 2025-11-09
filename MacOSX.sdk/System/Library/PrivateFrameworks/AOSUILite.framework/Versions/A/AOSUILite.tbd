@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A3A23B8E-98BC-38BB-A476-F998C56E9448' ]
+uuids:           [ 'x86_64: 43D5F3E0-3326-387E-A36D-7D5D9AFF82F2' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AOSUILite.framework/Versions/A/AOSUILite
-current-version: 415.0
-objc-constraint: none
+current-version: 415
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AOSUILiteVersionNumber, _AOSUILiteVersionString, _AddGlobalObject, 
@@ -35,12 +34,14 @@ exports:
                        _kAOSUIPrefPaneImageAccounts, _kAOSUIPrefPaneImageBTMM, _kAOSUIPrefPaneImageBTMMSharing, 
                        _kAOSUIPrefPaneImageBTMMWarning, _kAOSUIPrefPaneImageCalendars, 
                        _kAOSUIPrefPaneImageContacts, _kAOSUIPrefPaneImageDocuments, 
-                       _kAOSUIPrefPaneImageFMM, _kAOSUIPrefPaneImageMail, _kAOSUIPrefPaneImageNotes, 
-                       _kAOSUIPrefPaneImageReminders, _kAOSUIPrefPaneImageSafari, 
-                       _kAOSUIPrefPaneImageiPhoto, _kMMCDigitField, _kMMCDigitFieldFocus, 
-                       _kMMModialDialogEscapeKey, _kNetworkReachabilityNode, _keychainaccessBundleIdentifier, 
-                       _mailBundleIdentifier, _notesBundleIdentifier, _remindersBundleIdentifier, 
-                       _safariBundleIdentifier, _strcasecmp, _vsCallJSFunction ]
+                       _kAOSUIPrefPaneImageFMM, _kAOSUIPrefPaneImageMail, _kAOSUIPrefPaneImageMessages, 
+                       _kAOSUIPrefPaneImageNotes, _kAOSUIPrefPaneImageReminders, 
+                       _kAOSUIPrefPaneImageSafari, _kAOSUIPrefPaneImageSiri, _kAOSUIPrefPaneImageiPhoto, 
+                       _kMMCDigitField, _kMMCDigitFieldFocus, _kMMModialDialogEscapeKey, 
+                       _kNetworkReachabilityNode, _keychainaccessBundleIdentifier, 
+                       _mailBundleIdentifier, _messagesBundleIdentifier, _notesBundleIdentifier, 
+                       _remindersBundleIdentifier, _safariBundleIdentifier, _siriBundleIdentifier, 
+                       _strcasecmp, _vsCallJSFunction ]
     objc-classes:    [ _MMAlert, _MMDateFormatter, _MMDeviceInfo, _MMJSDialog, _MMJSDialogController, 
                        _MMMBWebKitViewController, _MMModalDialog, _MMNetworkReachability, 
                        _MMPinFieldBoxUIElement, _MMPinFieldView, _MMURLRequestFactory, 

@@ -11,6 +11,7 @@
 #define VTPROFESSIONALVIDEOWORKFLOW_H
 
 #include <VideoToolbox/VTBase.h>
+#include <CoreMedia/CMBase.h>
 
 #if defined(__cplusplus)
 extern "C"

@@ -13,30 +13,33 @@
 
 typedef struct _IMServicePlugInFileTransferSessionInternal IMServicePlugInFileTransferSessionInternal;
 
+NS_CLASS_DEPRECATED_MAC(10_7, 10_13)
 @interface IMServicePlugInFileTransferSession : NSObject {
     IMServicePlugInFileTransferSessionInternal *_internal;
 }
 
-@property (readonly) NSString *guid;
-@property (readonly) NSString *containerName;
+@property (readonly) NSString *guid NS_DEPRECATED_MAC(10_7, 10_13);
+@property (readonly) NSString *containerName NS_DEPRECATED_MAC(10_7, 10_13);;
 
 @end
 
 
+NS_CLASS_DEPRECATED_MAC(10_7, 10_13)
 @interface IMServicePlugInOutgoingFileTransferSession : IMServicePlugInFileTransferSession
 
-@property (readonly) NSArray *outgoingFileTransfers;
-- (IMServicePlugInOutgoingFileTransfer *) outgoingFileTransferForPath:(NSString *)path;
+@property (readonly) NSArray *outgoingFileTransfers NS_DEPRECATED_MAC(10_7, 10_13);;
+- (IMServicePlugInOutgoingFileTransfer *) outgoingFileTransferForPath:(NSString *)path NS_DEPRECATED_MAC(10_7, 10_13);;
 
 @end
 
 
+NS_CLASS_DEPRECATED_MAC(10_7, 10_13)
 @interface IMServicePlugInIncomingFileTransferSession : IMServicePlugInFileTransferSession
 
-- (void) setContainerName:(NSString *)containerName;
-- (void) addIncomingFileTransfer:(IMServicePlugInIncomingFileTransfer *)fileTransfer;
+- (void) setContainerName:(NSString *)containerName NS_DEPRECATED_MAC(10_7, 10_13);;
+- (void) addIncomingFileTransfer:(IMServicePlugInIncomingFileTransfer *)fileTransfer NS_DEPRECATED_MAC(10_7, 10_13);;
 
-- (NSArray *) incomingFileTransfers;
-- (IMServicePlugInIncomingFileTransfer *) incomingFileTransferForPath:(NSString *)path;
+- (NSArray *) incomingFileTransfers NS_DEPRECATED_MAC(10_7, 10_13);;
+- (IMServicePlugInIncomingFileTransfer *) incomingFileTransferForPath:(NSString *)path NS_DEPRECATED_MAC(10_7, 10_13);;
 
 @end

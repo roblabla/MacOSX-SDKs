@@ -63,7 +63,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		If the format specifies more than 2 channels, this method fails (returns nil).
 */
-- (instancetype)initWithStreamDescription:(const AudioStreamBasicDescription *)asbd;
+- (nullable instancetype)initWithStreamDescription:(const AudioStreamBasicDescription *)asbd;
 
 /*! @method initWithStreamDescription:channelLayout:
 	@abstract Initialize from an AudioStreamBasicDescription and optional channel layout.
@@ -75,7 +75,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		If the format specifies more than 2 channels, this method fails (returns nil) unless layout
 		is non-nil.
 */
-- (instancetype)initWithStreamDescription:(const AudioStreamBasicDescription *)asbd channelLayout:(AVAudioChannelLayout * __nullable)layout;
+- (nullable instancetype)initWithStreamDescription:(const AudioStreamBasicDescription *)asbd channelLayout:(AVAudioChannelLayout * __nullable)layout;
 
 /*! @method initStandardFormatWithSampleRate:channels:
 	@abstract Initialize to deinterleaved float with the specified sample rate and channel count.
@@ -86,7 +86,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		If the format specifies more than 2 channels, this method fails (returns nil).
 */
-- (instancetype)initStandardFormatWithSampleRate:(double)sampleRate channels:(AVAudioChannelCount)channels;
+- (nullable instancetype)initStandardFormatWithSampleRate:(double)sampleRate channels:(AVAudioChannelCount)channels;
 
 /*! @method initStandardFormatWithSampleRate:channelLayout:
 	@abstract Initialize to deinterleaved float with the specified sample rate and channel layout.
@@ -110,7 +110,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		If the format specifies more than 2 channels, this method fails (returns nil).
 */
-- (instancetype)initWithCommonFormat:(AVAudioCommonFormat)format sampleRate:(double)sampleRate channels:(AVAudioChannelCount)channels interleaved:(BOOL)interleaved;
+- (nullable instancetype)initWithCommonFormat:(AVAudioCommonFormat)format sampleRate:(double)sampleRate channels:(AVAudioChannelCount)channels interleaved:(BOOL)interleaved;
 
 /*! @method initWithCommonFormat:sampleRate:interleaved:channelLayout:
 	@abstract Initialize to float with the specified sample rate, channel layout and interleavedness.
@@ -130,8 +130,15 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		See AVAudioSettings.h. Note that many settings dictionary elements pertain to encoder
 		settings, not the basic format, and will be ignored.
+
+ 		Returns nil if a format cannot be constructed with the provided settings, e.g. when:
+			- AVNumberOfChannelsKey specifies more than 2 channels, but AVChannelLayoutKey hasn't 
+			  been specified or the layout does not match
+			- AVLinearPCMBitDepthKey for linear PCM format specifies less than 8 or greater
+			  than 32 bits
+			- values for the keys are not of the expected types
 */
-- (instancetype)initWithSettings:(NSDictionary<NSString *, id> *)settings;
+- (nullable instancetype)initWithSettings:(NSDictionary<NSString *, id> *)settings;
 
 #if AVAUDIOFORMAT_HAVE_CMFORMATDESCRIPTION
 /*!
@@ -196,7 +203,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@discussion
 		Only formats with more than 2 channels are required to have channel layouts.
 */
-@property (nonatomic, readonly, nullable) const AVAudioChannelLayout *channelLayout;
+@property (nonatomic, readonly, nullable) AVAudioChannelLayout *channelLayout;
 
 /*! @property magicCookie
 	@abstract The underlying magic cookie, if any.
@@ -204,7 +211,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		A magic cookie contains metadata associated with encoders and decoders.
 		Encoders produce a magic cookie, and some decoders require a magic cookie to decode properly.
 */
-@property (nonatomic, retain, nullable) NSData *magicCookie NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, retain, nullable) NSData *magicCookie API_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!	@property settings
 	@abstract Returns the format represented as a dictionary with keys from AVAudioSettings.h.

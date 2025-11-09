@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2002-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -84,7 +84,7 @@ __BEGIN_DECLS
 #   define FP_FAST_FMA     1
 #   define FP_FAST_FMAF    1
 #   define FP_FAST_FMAL    1
-#elif (defined __i386__ || defined __x86_64__) && (defined __FMA__)
+#elif (defined __i386__ || defined __x86_64__) && (defined __FMA__ || defined __AVX512F__)
 /*  When targeting the FMA ISA extension, fma() and fmaf( ) are generally
     about as fast as (or faster than) separate multiply and add of the same
     operands, but fmal( ) may be more costly.                                 */

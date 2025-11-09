@@ -15,10 +15,10 @@ typedef NS_ENUM(NSUInteger, CKReferenceAction) {
     CKReferenceActionNone       = 0,
     /* When the referred record is deleted then this record is also deleted. */
     CKReferenceActionDeleteSelf = 1,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
 
-NS_CLASS_AVAILABLE(10_10, 8_0)
+API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0))
 @interface CKReference : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

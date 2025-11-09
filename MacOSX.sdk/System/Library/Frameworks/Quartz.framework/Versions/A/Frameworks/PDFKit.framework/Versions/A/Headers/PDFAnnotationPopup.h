@@ -1,17 +1,18 @@
-// =====================================================================================================================
+//
 //  PDFAnnotationPopup.h
-// =====================================================================================================================
-
+//  Copyright © 2016 Apple. All rights reserved.
+//
+//  Deprecated annotation class. Use PDFAnnotation directly to create this
+//  kind of annotation. Use the helper methods in PDFAnnotationUtilities.h
+//  to quickly build an appropriate dictionary for this annotation type.
+//
 
 #import <PDFKit/PDFKitPlatform.h>
-
 #import <PDFKit/PDFAnnotation.h>
-
 
 @class PDFAnnotationPopupPrivateVars;
 
-
-NS_CLASS_DEPRECATED_MAC(10_5, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
+PDFKIT_ENUM_DEPRECATED(10_5, 10_12, NA, NA)
 @interface PDFAnnotationPopup : PDFAnnotation <NSCopying, NSCoding>
 {
 @private

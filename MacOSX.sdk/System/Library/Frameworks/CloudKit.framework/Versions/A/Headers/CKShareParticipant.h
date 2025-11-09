@@ -15,7 +15,7 @@ typedef NS_ENUM(NSInteger, CKShareParticipantAcceptanceStatus) {
     CKShareParticipantAcceptanceStatusPending,
     CKShareParticipantAcceptanceStatusAccepted,
     CKShareParticipantAcceptanceStatusRemoved,
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+} API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 /* These permissions determine what share participants can do with records inside that share */
 typedef NS_ENUM(NSInteger, CKShareParticipantPermission) {
@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, CKShareParticipantPermission) {
     CKShareParticipantPermissionNone,
     CKShareParticipantPermissionReadOnly,
     CKShareParticipantPermissionReadWrite,
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+} API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 /* The participant type determines whether a participant can modify the list of participants on a share.
     - Owners can add private users
@@ -35,10 +35,10 @@ typedef NS_ENUM(NSInteger, CKShareParticipantType) {
     CKShareParticipantTypeOwner = 1,
     CKShareParticipantTypePrivateUser = 3,
     CKShareParticipantTypePublicUser = 4,
-} NS_ENUM_AVAILABLE(10_12, 10_0);
+} API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKShareParticipant : NSObject <NSSecureCoding, NSCopying>
 
 /* Use CKFetchShareParticipantsOperation to create a CKShareParticipant object */

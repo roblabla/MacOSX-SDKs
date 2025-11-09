@@ -1,7 +1,7 @@
 /*
     NSSplitViewItem.h
     Application Kit
-    Copyright (c) 2014-2016, Apple Inc.
+    Copyright (c) 2014-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -73,7 +73,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * \param viewController The view controller used to set the viewController property
  * \return An autoreleased SplitViewItem that acts as a sidebar.
  */
-+ (instancetype)sidebarWithViewController:(NSViewController *)viewController NS_SWIFT_NAME(init(sidebarWithViewController:)) NS_AVAILABLE_MAC(10_11);
++ (instancetype)sidebarWithViewController:(NSViewController *)viewController NS_AVAILABLE_MAC(10_11);
 
 /*!
  * Creates a split view item representing a content list for the provided ViewController, akin to Mail's message list, Note's note list.
@@ -84,7 +84,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * \param viewController The view controller used to set the viewController property
  * \return An autoreleased SplitViewItem that acts as a content list.
  */
-+ (instancetype)contentListWithViewController:(NSViewController *)viewController NS_SWIFT_NAME(init(contentListWithViewController:)) NS_AVAILABLE_MAC(10_11);
++ (instancetype)contentListWithViewController:(NSViewController *)viewController NS_AVAILABLE_MAC(10_11);
 
 /// The standard behavior type of the receiver. See initializers for descriptions of each behavior.
 @property (readonly) NSSplitViewItemBehavior behavior NS_AVAILABLE_MAC(10_11);

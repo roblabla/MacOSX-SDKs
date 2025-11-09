@@ -1,5 +1,5 @@
 /*	NSKeyedArchiver.h
-	Copyright (c) 2001-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2001-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 FOUNDATION_EXPORT NSExceptionName const NSInvalidArchiveOperationException;
 FOUNDATION_EXPORT NSExceptionName const NSInvalidUnarchiveOperationException;
 // Archives created using the class method archivedRootDataWithObject used this key for the root object in the hierarchy of encoded objects. The NSKeyedUnarchiver class method unarchiveObjectWithData: will look for this root key as well. You can also use it as the key for the root object in your own archives.
-FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 @interface NSKeyedArchiver : NSCoder {
 @private
@@ -66,18 +66,18 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 + (nullable NSString *)classNameForClass:(Class)cls;
 - (nullable NSString *)classNameForClass:(Class)cls;
 
-- (void)encodeObject:(nullable id)objv forKey:(NSString *)key;
-- (void)encodeConditionalObject:(nullable id)objv forKey:(NSString *)key;
-- (void)encodeBool:(BOOL)boolv forKey:(NSString *)key;
-- (void)encodeInt:(int)intv forKey:(NSString *)key;	// native int
-- (void)encodeInt32:(int32_t)intv forKey:(NSString *)key;
-- (void)encodeInt64:(int64_t)intv forKey:(NSString *)key;
-- (void)encodeFloat:(float)realv forKey:(NSString *)key;
-- (void)encodeDouble:(double)realv forKey:(NSString *)key;
-- (void)encodeBytes:(nullable const uint8_t *)bytesp length:(NSUInteger)lenv forKey:(NSString *)key;
+- (void)encodeObject:(nullable id)object forKey:(NSString *)key;
+- (void)encodeConditionalObject:(nullable id)object forKey:(NSString *)key;
+- (void)encodeBool:(BOOL)value forKey:(NSString *)key;
+- (void)encodeInt:(int)value forKey:(NSString *)key;	// native int
+- (void)encodeInt32:(int32_t)value forKey:(NSString *)key;
+- (void)encodeInt64:(int64_t)value forKey:(NSString *)key;
+- (void)encodeFloat:(float)value forKey:(NSString *)key;
+- (void)encodeDouble:(double)value forKey:(NSString *)key;
+- (void)encodeBytes:(nullable const uint8_t *)bytes length:(NSUInteger)length forKey:(NSString *)key;
 
 // Enables secure coding support on this keyed archiver. You do not need to enable secure coding on the archiver to enable secure coding on the unarchiver. Enabling secure coding on the archiver is a way for you to be sure that all classes that are encoded conform with NSSecureCoding (it will throw an exception if a class which does not NSSecureCoding is archived). Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
-@property (readwrite) BOOL requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
+@property (readwrite) BOOL requiresSecureCoding API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -102,7 +102,7 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 }
 
 + (nullable id)unarchiveObjectWithData:(NSData *)data;
-+ (nullable id)unarchiveTopLevelObjectWithData:(NSData *)data error:(NSError **)error NS_AVAILABLE(10_11, 9_0) NS_SWIFT_UNAVAILABLE("Use 'unarchiveTopLevelObjectWithData(_:) throws' instead");
++ (nullable id)unarchiveTopLevelObjectWithData:(NSData *)data error:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_SWIFT_UNAVAILABLE("Use 'unarchiveTopLevelObjectWithData(_:) throws' instead");
 + (nullable id)unarchiveObjectWithFile:(NSString *)path;
 
 - (instancetype)initForReadingWithData:(NSData *)data;
@@ -130,10 +130,10 @@ FOUNDATION_EXPORT NSString * const NSKeyedArchiveRootObjectKey NS_AVAILABLE(10_9
 - (double)decodeDoubleForKey:(NSString *)key;
 - (nullable const uint8_t *)decodeBytesForKey:(NSString *)key returnedLength:(nullable NSUInteger *)lengthp NS_RETURNS_INNER_POINTER;	// returned bytes immutable, and they go away with the unarchiver, not the containing autorelease pool
 
-// Enables secure coding support on this keyed unarchiver. When enabled, anarchiving a disallowed class throws an exception. Once enabled, attempting to set requiresSecureCoding to NO will throw an exception. This is to prevent classes from selectively turning secure coding off. This is designed to be set once at the top level and remain on. Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
-@property (readwrite) BOOL requiresSecureCoding NS_AVAILABLE(10_8, 6_0);
+// Enables secure coding support on this keyed unarchiver. When enabled, unarchiving a disallowed class throws an exception. Once enabled, attempting to set requiresSecureCoding to NO will throw an exception. This is to prevent classes from selectively turning secure coding off. This is designed to be set once at the top level and remain on. Note that the getter is on the superclass, NSCoder. See NSCoder for more information about secure coding.
+@property (readwrite) BOOL requiresSecureCoding API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
-@property (readwrite) NSDecodingFailurePolicy decodingFailurePolicy NS_AVAILABLE(10_11, 9_0);
+@property (readwrite) NSDecodingFailurePolicy decodingFailurePolicy API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 @end
 

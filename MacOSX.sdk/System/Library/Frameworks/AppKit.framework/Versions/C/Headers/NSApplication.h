@@ -1,7 +1,7 @@
 /*
     NSApplication.h
     Application Kit
-    Copyright (c) 1994-2016, Apple Inc.
+    Copyright (c) 1994-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -12,6 +12,8 @@
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <AppKit/NSRunningApplication.h>
 #import <AppKit/NSUserInterfaceLayout.h>
+#import <AppKit/NSPrintInfo.h>
+#import <AppKit/NSPasteboard.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,47 +24,47 @@ NS_ASSUME_NONNULL_BEGIN
 @class CKShareMetadata;
 @protocol NSApplicationDelegate;
 
+typedef double NSAppKitVersion NS_TYPED_EXTENSIBLE_ENUM;
 /* The version of the AppKit framework */
-APPKIT_EXTERN const double NSAppKitVersionNumber;
-
-#define NSAppKitVersionNumber10_0 577
-#define NSAppKitVersionNumber10_1 620
-#define NSAppKitVersionNumber10_2 663
-#define NSAppKitVersionNumber10_2_3 663.6
-#define NSAppKitVersionNumber10_3 743
-#define NSAppKitVersionNumber10_3_2 743.14
-#define NSAppKitVersionNumber10_3_3 743.2
-#define NSAppKitVersionNumber10_3_5 743.24
-#define NSAppKitVersionNumber10_3_7 743.33
-#define NSAppKitVersionNumber10_3_9 743.36
-#define NSAppKitVersionNumber10_4 824
-#define NSAppKitVersionNumber10_4_1 824.1
-#define NSAppKitVersionNumber10_4_3 824.23
-#define NSAppKitVersionNumber10_4_4 824.33
-#define NSAppKitVersionNumber10_4_7 824.41
-#define NSAppKitVersionNumber10_5 949
-#define NSAppKitVersionNumber10_5_2 949.27
-#define NSAppKitVersionNumber10_5_3 949.33
-#define NSAppKitVersionNumber10_6 1038
-#define NSAppKitVersionNumber10_7 1138
-#define NSAppKitVersionNumber10_7_2 1138.23
-#define NSAppKitVersionNumber10_7_3 1138.32
-#define NSAppKitVersionNumber10_7_4 1138.47
-#define NSAppKitVersionNumber10_8 1187
-#define NSAppKitVersionNumber10_9 1265
-#define NSAppKitVersionNumber10_10 1343
-#define NSAppKitVersionNumber10_10_2 1344
-#define NSAppKitVersionNumber10_10_3 1347
-#define NSAppKitVersionNumber10_10_4 1348
-#define NSAppKitVersionNumber10_10_5 1348
-#define NSAppKitVersionNumber10_10_Max 1349
-#define NSAppKitVersionNumber10_11 1404
-#define NSAppKitVersionNumber10_11_1 1404.13
-#define NSAppKitVersionNumber10_11_2 1404.34
-#define NSAppKitVersionNumber10_11_3 1404.34
-#define NSAppKitVersionNumber10_12 1504
-#define NSAppKitVersionNumber10_12_1 1504.60
-
+APPKIT_EXTERN const NSAppKitVersion NSAppKitVersionNumber;
+static const NSAppKitVersion NSAppKitVersionNumber10_0 = 577;
+static const NSAppKitVersion NSAppKitVersionNumber10_1 = 620;
+static const NSAppKitVersion NSAppKitVersionNumber10_2 = 663;
+static const NSAppKitVersion NSAppKitVersionNumber10_2_3 = 663.6;
+static const NSAppKitVersion NSAppKitVersionNumber10_3 = 743;
+static const NSAppKitVersion NSAppKitVersionNumber10_3_2 = 743.14;
+static const NSAppKitVersion NSAppKitVersionNumber10_3_3 = 743.2;
+static const NSAppKitVersion NSAppKitVersionNumber10_3_5 = 743.24;
+static const NSAppKitVersion NSAppKitVersionNumber10_3_7 = 743.33;
+static const NSAppKitVersion NSAppKitVersionNumber10_3_9 = 743.36;
+static const NSAppKitVersion NSAppKitVersionNumber10_4 = 824;
+static const NSAppKitVersion NSAppKitVersionNumber10_4_1 = 824.1;
+static const NSAppKitVersion NSAppKitVersionNumber10_4_3 = 824.23;
+static const NSAppKitVersion NSAppKitVersionNumber10_4_4 = 824.33;
+static const NSAppKitVersion NSAppKitVersionNumber10_4_7 = 824.41;
+static const NSAppKitVersion NSAppKitVersionNumber10_5 = 949;
+static const NSAppKitVersion NSAppKitVersionNumber10_5_2 = 949.27;
+static const NSAppKitVersion NSAppKitVersionNumber10_5_3 = 949.33;
+static const NSAppKitVersion NSAppKitVersionNumber10_6 = 1038;
+static const NSAppKitVersion NSAppKitVersionNumber10_7 = 1138;
+static const NSAppKitVersion NSAppKitVersionNumber10_7_2 = 1138.23;
+static const NSAppKitVersion NSAppKitVersionNumber10_7_3 = 1138.32;
+static const NSAppKitVersion NSAppKitVersionNumber10_7_4 = 1138.47;
+static const NSAppKitVersion NSAppKitVersionNumber10_8 = 1187;
+static const NSAppKitVersion NSAppKitVersionNumber10_9 = 1265;
+static const NSAppKitVersion NSAppKitVersionNumber10_10 = 1343;
+static const NSAppKitVersion NSAppKitVersionNumber10_10_2 = 1344;
+static const NSAppKitVersion NSAppKitVersionNumber10_10_3 = 1347;
+static const NSAppKitVersion NSAppKitVersionNumber10_10_4 = 1348;
+static const NSAppKitVersion NSAppKitVersionNumber10_10_5 = 1348;
+static const NSAppKitVersion NSAppKitVersionNumber10_10_Max = 1349;
+static const NSAppKitVersion NSAppKitVersionNumber10_11 = 1404;
+static const NSAppKitVersion NSAppKitVersionNumber10_11_1 = 1404.13;
+static const NSAppKitVersion NSAppKitVersionNumber10_11_2 = 1404.34;
+static const NSAppKitVersion NSAppKitVersionNumber10_11_3 = 1404.34;
+static const NSAppKitVersion NSAppKitVersionNumber10_12 = 1504;
+static const NSAppKitVersion NSAppKitVersionNumber10_12_1 = 1504.60;
+static const NSAppKitVersion NSAppKitVersionNumber10_12_2 = 1504.76;
 
 /* Modes passed to NSRunLoop */
 APPKIT_EXTERN NSRunLoopMode NSModalPanelRunLoopMode;
@@ -70,13 +72,11 @@ APPKIT_EXTERN NSRunLoopMode NSEventTrackingRunLoopMode;
 
 
 /* Pre-defined return values for -runModalFor: and -runModalSession:. The system also reserves all values below these. Other values can be used. */
-enum {
-    NSModalResponseStop                 = (-1000), // Also used as the default response for sheets
-    NSModalResponseAbort                = (-1001),
-    NSModalResponseContinue             = (-1002),
-} NS_ENUM_AVAILABLE_MAC(10_9);
-typedef NSInteger NSModalResponse NS_AVAILABLE_MAC(10_9);
-
+typedef NSInteger NSModalResponse NS_TYPED_EXTENSIBLE_ENUM;
+/// Also used as the default response for sheets
+static const NSModalResponse NSModalResponseStop NS_AVAILABLE_MAC(10_9) = (-1000);
+static const NSModalResponse NSModalResponseAbort NS_AVAILABLE_MAC(10_9) = (-1001);
+static const NSModalResponse NSModalResponseContinue NS_AVAILABLE_MAC(10_9) = (-1002);
 
 /* used with NSRunLoop's performSelector:target:argument:order:modes: */
 enum {
@@ -124,14 +124,14 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
     /*All instance variables are private*/
     NSEvent            *_currentEvent;
     id     		_windowList;
-    id                  _keyWindow;
-    id                  _mainWindow;
-    id                  _delegate;
+    __weak id           _keyWindow;
+    __weak id           _mainWindow;
+    __weak id           _delegate;
     id            	_hiddenList;
     int                 _hiddenCount __unused;
     NSInteger               _context;
     void		*_appleEventSuspensionID;
-    NSWindow            *_previousKeyWindowX;
+    __weak NSWindow            *_previousKeyWindowX;
     short               _unusedApp;
     short               _running;
     struct __appFlags {
@@ -168,21 +168,22 @@ typedef struct NSThreadPrivate _NSThreadPrivate;
         unsigned int        _mightBeSwitching:1;
     }                   _appFlags;
     id                  _mainMenu;
-    id                  _unused[2];
+    id                  _openWindows;
+    id                  _unused[1];
     id                  _eventDelegate;
     _NSThreadPrivate     *_threadingSupport;
 }
 
 APPKIT_EXTERN __kindof NSApplication * __null_unspecified NSApp;
 
-+ (__kindof NSApplication *)sharedApplication;
-@property (nullable, assign) id<NSApplicationDelegate> delegate;
+@property (class, readonly, strong) __kindof NSApplication *sharedApplication;
+@property (nullable, weak) id<NSApplicationDelegate> delegate;
 - (void)hide:(nullable id)sender;
 - (void)unhide:(nullable id)sender;
 - (void)unhideWithoutActivation;
 - (nullable NSWindow *)windowWithWindowNumber:(NSInteger)windowNum;
-@property (nullable, readonly, assign) NSWindow *mainWindow;
-@property (nullable, readonly, assign) NSWindow *keyWindow;
+@property (nullable, readonly, weak) NSWindow *mainWindow;
+@property (nullable, readonly, weak) NSWindow *keyWindow;
 @property (getter=isActive, readonly) BOOL active;
 @property (getter=isHidden, readonly) BOOL hidden;
 @property (getter=isRunning, readonly) BOOL running;
@@ -194,14 +195,14 @@ APPKIT_EXTERN __kindof NSApplication * __null_unspecified NSApp;
 
 - (void)finishLaunching;
 - (void)run;
-- (NSInteger)runModalForWindow:(NSWindow *)window;
+- (NSModalResponse)runModalForWindow:(NSWindow *)window;
 - (void)stop:(nullable id)sender;
 - (void)stopModal;
-- (void)stopModalWithCode:(NSInteger)returnCode;
+- (void)stopModalWithCode:(NSModalResponse)returnCode;
 - (void)abortModal;
 @property (nullable, readonly, strong) NSWindow *modalWindow;
 - (NSModalSession)beginModalSessionForWindow:(NSWindow *)window NS_RETURNS_INNER_POINTER;
-- (NSInteger)runModalSession:(NSModalSession)session;
+- (NSModalResponse)runModalSession:(NSModalSession)session;
 - (void)endModalSession:(NSModalSession)session;
 - (void)terminate:(nullable id)sender;
 
@@ -210,7 +211,7 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
       NSInformationalRequest = 10
 };
 
-// inform the user that this application needs attention - call this method only if your application is not already active
+/* inform the user that this application needs attention - call this method only if your application is not already active */
 - (NSInteger)requestUserAttention:(NSRequestUserAttentionType)requestType;
 - (void)cancelUserAttentionRequest:(NSInteger)request;
 
@@ -226,7 +227,6 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
 @property (nullable, strong) NSMenu *mainMenu;
 
 /* Set or get the Help menu for the app.  If a non-nil menu is set as the Help menu, Spotlight for Help will be installed in it; otherwise AppKit will install Spotlight for Help into a menu of its choosing (and that menu is not returned from -helpMenu).  If you wish to completely suppress Spotlight for Help, you can set a menu that does not appear in the menu bar.  NSApplication retains its Help menu and releases it when a different menu is set.
- 
  */
 @property (nullable, strong) NSMenu *helpMenu NS_AVAILABLE_MAC(10_6);
 
@@ -246,7 +246,7 @@ typedef NS_ENUM(NSUInteger, NSRequestUserAttentionType) {
 - (void)reportException:(NSException *)exception;
 + (void)detachDrawingThread:(SEL)selector toTarget:(id)target withObject:(nullable id)argument;
 
-/*  If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
+/* If an application delegate returns NSTerminateLater from -applicationShouldTerminate:, -replyToApplicationShouldTerminate: must be called with YES or NO once the application decides if it can terminate */
 - (void)replyToApplicationShouldTerminate:(BOOL)shouldTerminate;
 
 typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
@@ -292,7 +292,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationDelegateReply) {
 - (nullable id)targetForAction:(SEL)action;
 - (nullable id)targetForAction:(SEL)action to:(nullable id)target from:(nullable id)sender;
 - (BOOL)tryToPerform:(SEL)action with:(nullable id)object;
-- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
+- (nullable id)validRequestorForSendType:(nullable NSPasteboardType)sendType returnType:(nullable NSPasteboardType)returnType;
 @end
 
 @interface NSApplication(NSWindowsMenu)
@@ -336,6 +336,11 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
             this return value is for delegates who need to provide document modal alerts (sheets) in order to decide whether to quit.
 */
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender;
+
+/* This will be called for any URLs your application is asked to open. This includes URL types (CFBundleURLTypes) defined in your Info.plist, and Document types (CFBundleDocumentTypes) that have no associated NSDocument class. Document URLs that have an associated NSDocument class will be opened through NSDocumentController. If this is implemented, application:openFiles: and application:openFile: will not be called.
+ */
+- (void)application:(NSApplication *)application openURLs:(NSArray<NSURL *> *)urls NS_AVAILABLE_MAC(10_13);
+
 - (BOOL)application:(NSApplication *)sender openFile:(NSString *)filename;
 - (void)application:(NSApplication *)sender openFiles:(NSArray<NSString *> *)filenames;
 - (BOOL)application:(NSApplication *)sender openTempFile:(NSString *)filename;
@@ -343,7 +348,7 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 - (BOOL)applicationOpenUntitledFile:(NSApplication *)sender;
 - (BOOL)application:(id)sender openFileWithoutUI:(NSString *)filename;
 - (BOOL)application:(NSApplication *)sender printFile:(NSString *)filename;
-- (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray<NSString *> *)fileNames withSettings:(NSDictionary<NSString *, id> *)printSettings showPrintPanels:(BOOL)showPrintPanels;
+- (NSApplicationPrintReply)application:(NSApplication *)application printFiles:(NSArray<NSString *> *)fileNames withSettings:(NSDictionary<NSPrintInfoAttributeKey, id> *)printSettings showPrintPanels:(BOOL)showPrintPanels;
 - (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender;
 - (BOOL)applicationShouldHandleReopen:(NSApplication *)sender hasVisibleWindows:(BOOL)flag;
 - (nullable NSMenu *)applicationDockMenu:(NSApplication *)sender;
@@ -416,12 +421,12 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 
 @interface NSApplication(NSServicesMenu)
 @property (nullable, strong) NSMenu *servicesMenu;
-- (void)registerServicesMenuSendTypes:(NSArray<NSString *> *)sendTypes returnTypes:(NSArray<NSString *> *)returnTypes;
+- (void)registerServicesMenuSendTypes:(NSArray<NSPasteboardType> *)sendTypes returnTypes:(NSArray<NSPasteboardType> *)returnTypes;
 @end
 
 @protocol NSServicesMenuRequestor <NSObject>
 @optional
-- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray<NSString *> *)types;
+- (BOOL)writeSelectionToPasteboard:(NSPasteboard *)pboard types:(NSArray<NSPasteboardType> *)types;
 - (BOOL)readSelectionFromPasteboard:(NSPasteboard *)pboard;
 @end
 
@@ -429,34 +434,22 @@ typedef NS_ENUM(NSUInteger, NSApplicationPrintReply) {
 @property (nullable, strong) id servicesProvider;
 @end
 
+/* Optional keys in -orderFrontStandardAboutPanelWithOptions: optionsDictionary */
+typedef NSString * NSAboutPanelOptionKey NS_STRING_ENUM;
+/// NSAttributedString displayed in the info area of the panel. If not specified, contents obtained from "Credits.rtf" in [NSBundle mainBundle]; if not available, blank.
+APPKIT_EXTERN NSAboutPanelOptionKey const NSAboutPanelOptionCredits NS_AVAILABLE_MAC(10_13);
+/// NSString displayed in place of the default app name. If not specified, uses the value of CFBundleName (localizable). Fallback is [[NSProcessInfo processInfo] processName].
+APPKIT_EXTERN NSAboutPanelOptionKey const NSAboutPanelOptionApplicationName NS_AVAILABLE_MAC(10_13);
+/// NSImage displayed in place of NSApplicationIcon. If not specified, use [NSImage imageNamed:@"NSApplicationIcon"]; if not available, generic icon.
+APPKIT_EXTERN NSAboutPanelOptionKey const NSAboutPanelOptionApplicationIcon NS_AVAILABLE_MAC(10_13);
+/// NSString containing the build version number of the application ("58.4", "1.2d3"); displayed as "Version 58.4" or "Version 1.0 (58.4) depending on the presence of ApplicationVersion. If not specified, obtain from the CFBundleVersion key in infoDictionary; if not specified or empty string, leave blank.
+APPKIT_EXTERN NSAboutPanelOptionKey const NSAboutPanelOptionVersion NS_AVAILABLE_MAC(10_13);
+/// NSString displayed as the marketing version  ("1.0", "Mac OS X", "3", "WebObjects 3.5", ...), before the build version. If not specified, obtain from CFBundleShortVersionString key in infoDictionary. Prefixed with word "Version" if it looks like a number.
+APPKIT_EXTERN NSAboutPanelOptionKey const NSAboutPanelOptionApplicationVersion NS_AVAILABLE_MAC(10_13);
+
 @interface NSApplication(NSStandardAboutPanel)
 - (void)orderFrontStandardAboutPanel:(nullable id)sender;
-- (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary<NSString *, id> *)optionsDictionary;
-
-
-/* Optional keys in optionsDictionary:
-
-@"Credits": NSAttributedString displayed in the info area of the panel. If
-not specified, contents obtained from "Credits.rtf" in [NSBundle mainBundle];
-if not available, blank.
-
-@"ApplicationName": NSString displayed in place of the default app name. If
-not specified, uses the value of CFBundleName (localizable). Fallback is [[NSProcessInfo processInfo] processName].
-
-@"ApplicationIcon": NSImage displayed in place of NSApplicationIcon. If not
-specified, use [NSImage imageNamed:@"NSApplicationIcon"]; if not available, generic icon.
-
-@"Copyright": NSString containing the copyright string. If not specified,
-obtain from the value of NSHumanReadableCopyright (localizable) in infoDictionary; if not available, leave blank.
-
-@"Version": NSString containing the build version number of the application
-("58.4", "1.2d3"); displayed as "Version 58.4" or "Version 1.0 (58.4) depending on the presence of ApplicationVersion. 
-If not specified, obtain from the CFBundleVersion key in infoDictionary; if not specified or empty string, leave blank.
-
-@"ApplicationVersion": NSString displayed as the marketing version  ("1.0", "Mac OS X", "3", "WebObjects 3.5", ...), before the build version.
-If not specified, obtain from CFBundleShortVersionString key in infoDictionary. Prefixed with word "Version" if it looks like a number.
-*/
-
+- (void)orderFrontStandardAboutPanelWithOptions:(NSDictionary<NSAboutPanelOptionKey, id> *)optionsDictionary;
 @end
 
 /* Bi-directional User Interface
@@ -498,7 +491,7 @@ typedef NS_OPTIONS(NSUInteger, NSRemoteNotificationType) {
 
 /* An Application's startup function */
 
-APPKIT_EXTERN int NSApplicationMain(int argc, const char *argv[]);
+APPKIT_EXTERN int NSApplicationMain(int argc, const char *__nonnull argv[__nonnull]);
 
 /* NSApplicationLoad should be called when loading a Cocoa bundle in a Carbon app in order to initialize NSApplication and other Cocoa objects.  Redundant calls are ignored.
 */  
@@ -515,8 +508,9 @@ APPKIT_EXTERN NSInteger NSSetShowsServicesMenuItem(NSString *itemName, BOOL enab
 APPKIT_EXTERN void NSUpdateDynamicServices(void);
 APPKIT_EXTERN BOOL NSPerformService(NSString *itemName, NSPasteboard * __nullable pboard);
 
-APPKIT_EXTERN void NSRegisterServicesProvider(id __nullable provider, NSString *name); // apps should use -setServicesProvider
-APPKIT_EXTERN void NSUnregisterServicesProvider(NSString *name);
+typedef NSString * NSServiceProviderName NS_EXTENSIBLE_STRING_ENUM;
+APPKIT_EXTERN void NSRegisterServicesProvider(id __nullable provider, NSServiceProviderName name); // apps should use -setServicesProvider
+APPKIT_EXTERN void NSUnregisterServicesProvider(NSServiceProviderName name);
 
 /* Notifications */
 APPKIT_EXTERN NSNotificationName NSApplicationDidBecomeActiveNotification;
@@ -548,47 +542,42 @@ APPKIT_EXTERN NSString * const NSApplicationLaunchUserNotificationKey NS_AVAILAB
 APPKIT_EXTERN NSString * const NSApplicationLaunchRemoteNotificationKey NS_DEPRECATED_MAC(10_7, 10_8);
 
 /* Upon receiving this notification, you can query the NSApplication for its occlusion state. Note that this only notifies about changes in the state of the occlusion, not when the occlusion region changes. You can use this notification to increase responsiveness and save power, by halting any expensive calculations that the user can not see. */
-APPKIT_EXTERN NSString * const NSApplicationDidChangeOcclusionStateNotification NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSNotificationName const NSApplicationDidChangeOcclusionStateNotification NS_AVAILABLE_MAC(10_9);
 
 
 /* Deprecated Methods */
 @interface NSApplication (NSDeprecated)
 
-/*
- ** runModalForWindow:relativeToWindow: was deprecated in Mac OS 10.0.  
- ** Please use -[NSWindow beginSheet:completionHandler:] instead
+/* -runModalForWindow:relativeToWindow: was deprecated in Mac OS X 10.0. Please use -[NSWindow beginSheet:completionHandler:] instead.
  */
-- (NSInteger)runModalForWindow:(null_unspecified NSWindow *)window relativeToWindow:(null_unspecified NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0);
+- (NSInteger)runModalForWindow:(null_unspecified NSWindow *)window relativeToWindow:(null_unspecified NSWindow *)docWindow NS_DEPRECATED_MAC(10_0, 10_0, "Use -[NSWindow beginSheet:completionHandler:] instead");
 
-/* 
- ** beginModalSessionForWindow:relativeToWindow: was deprecated in Mac OS 10.0.
- ** Please use -[NSWindow beginSheet:completionHandler:] instead
+/* -beginModalSessionForWindow:relativeToWindow: was deprecated in Mac OS X 10.0. Please use -[NSWindow beginSheet:completionHandler:] instead.
  */
-- (NSModalSession)beginModalSessionForWindow:(null_unspecified NSWindow *)window relativeToWindow:(null_unspecified NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0);
+- (NSModalSession)beginModalSessionForWindow:(null_unspecified NSWindow *)window relativeToWindow:(null_unspecified NSWindow *)docWindow NS_RETURNS_INNER_POINTER NS_DEPRECATED_MAC(10_0, 10_0, "Use -[NSWindow beginSheet:completionHandler:] instead");
 
-// -application:printFiles: was deprecated in Mac OS 10.4. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
+/* -application:printFiles: was deprecated in Mac OS X 10.4. Implement application:printFiles:withSettings:showPrintPanels: in your application delegate instead.
+ */
 - (void)application:(null_unspecified NSApplication *)sender printFiles:(null_unspecified NSArray<NSString *> *)filenames NS_DEPRECATED_MAC(10_3, 10_4);
 
-/* These constants are deprecated in 10.9 and will be formally deprecated in the following release */
+/* These constants were informally deprecated in OS X 10.9. */
 enum {
     NSRunStoppedResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseStop instead") = (-1000),
     NSRunAbortedResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseAbort instead") = (-1001),
     NSRunContinuesResponse NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSModalResponseContinue instead") = (-1002)
 };
 
-/* These methods are deprecated in 10.9 and will be formally deprecated in the following release.
- NSWindow's -beginSheet:completionHandler: and -endSheet:returnCode: should be used instead.
- NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
+/* These methods were informally deprecated in OS X 10.9.  NSWindow's -beginSheet:completionHandler: and -endSheet:returnCode: should be used instead.  NSApplication's -beginSheet:modalForWindow:modalDelegate:didEndSelector:contextInfo: will continue to work as it previously did, leaking contextInfo and failing when there is already an existing sheet.
  */
 - (void)beginSheet:(NSWindow *)sheet modalForWindow:(NSWindow *)docWindow modalDelegate:(nullable id)modalDelegate didEndSelector:(nullable SEL)didEndSelector contextInfo:(null_unspecified void *)contextInfo NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow beginSheet:completionHandler:] instead");
 - (void)endSheet:(NSWindow *)sheet NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:] instead");
 - (void)endSheet:(NSWindow *)sheet returnCode:(NSInteger)returnCode NS_DEPRECATED_MAC(10_0, 10_10, "Use -[NSWindow endSheet:returnCode:] instead");
 
-/* This method is soft deprecated starting with OS X 10.12. It will be officially deprecated in a future release. Use -enumerateWindowsWithOptions:usingBlock: instead.
+/* This method is soft deprecated starting with macOS 10.12. It will be officially deprecated in a future release. Use -enumerateWindowsWithOptions:usingBlock: instead.
  */
 - (nullable NSWindow *)makeWindowsPerform:(SEL)selector inOrder:(BOOL)flag;
 
-/* This method is deprecated as of OS X 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
+/* This method is deprecated as of macOS 10.12. Beginning in OS X 10.11 it would always return nil. Prior to this it would return an undefined graphics context that was not generally suitable for drawing.
  */
 @property (nullable, readonly, strong) NSGraphicsContext *context NS_DEPRECATED_MAC(10_0, 10_12, "This method always returns nil. If you need access to the current drawing context, use [NSGraphicsContext currentContext] inside of a draw operation.");
 

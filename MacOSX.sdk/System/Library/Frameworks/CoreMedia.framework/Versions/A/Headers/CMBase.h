@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
 	
-    Copyright 2006-2015 Apple Inc. All rights reserved.
+    Copyright 2006-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -13,6 +13,16 @@
 #include <TargetConditionals.h>
 #include <Availability.h>
 #include <AvailabilityMacros.h>
+
+// Pre-10.13, weak import
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_13
+#define __AVAILABILITY_INTERNAL__MAC_10_13 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+// Pre- iOS 11.0 weak import
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_11_0
+#define __AVAILABILITY_INTERNAL__IPHONE_11_0 __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
 
 // Pre-10.12, weak import
 #ifndef __AVAILABILITY_INTERNAL__MAC_10_12
@@ -110,6 +120,10 @@
 
 #include <CoreFoundation/CFBase.h>		// OSStatus, Boolean, Float32, Float64
 
+#ifndef API_AVAILABLE
+#define API_AVAILABLE(...)
+#endif
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -134,6 +148,20 @@ typedef int64_t CMItemIndex;
 #else
 typedef signed long	CMItemCount;
 typedef signed long	CMItemIndex;
+#endif
+
+#ifndef COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION
+#define COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION 1
+#endif
+
+#if ! COREMEDIA_USE_ALIGNED_CMBASECLASS_VERSION
+	typedef uint32_t CMBaseClassVersion, CMStructVersion;
+#else
+#if TARGET_OS_IPHONE && TARGET_RT_64_BIT
+	typedef uint64_t CMBaseClassVersion, CMStructVersion;
+#else
+	typedef uint32_t CMBaseClassVersion, CMStructVersion;
+#endif
 #endif
 
 #define COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS	(__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))

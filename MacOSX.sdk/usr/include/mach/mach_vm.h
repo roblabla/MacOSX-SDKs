@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_vm_MSG_COUNT
-#define	mach_vm_MSG_COUNT	20
+#define	mach_vm_MSG_COUNT	21
 #endif	/* mach_vm_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -368,6 +368,21 @@ kern_return_t mach_vm_page_info
 	vm_page_info_flavor_t flavor,
 	vm_page_info_t info,
 	mach_msg_type_number_t *infoCnt
+);
+
+/* Routine mach_vm_page_range_query */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_vm_page_range_query
+(
+	vm_map_t target_map,
+	mach_vm_offset_t address,
+	mach_vm_size_t size,
+	mach_vm_address_t dispositions,
+	mach_vm_size_t *dispositions_count
 );
 
 __END_DECLS
@@ -689,6 +704,21 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		mach_vm_offset_t address;
+		mach_vm_size_t size;
+		mach_vm_address_t dispositions;
+		mach_vm_size_t dispositions_count;
+	} __Request__mach_vm_page_range_query_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__mach_vm_subsystem__defined */
 
 /* union of all requests */
@@ -716,6 +746,7 @@ union __RequestUnion__mach_vm_subsystem {
 	__Request___mach_make_memory_entry_t Request__mach_make_memory_entry;
 	__Request__mach_vm_purgable_control_t Request_mach_vm_purgable_control;
 	__Request__mach_vm_page_info_t Request_mach_vm_page_info;
+	__Request__mach_vm_page_range_query_t Request_mach_vm_page_range_query;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 /* typedefs for all replies */
@@ -995,6 +1026,19 @@ union __RequestUnion__mach_vm_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_vm_size_t dispositions_count;
+	} __Reply__mach_vm_page_range_query_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__mach_vm_subsystem__defined */
 
 /* union of all replies */
@@ -1022,6 +1066,7 @@ union __ReplyUnion__mach_vm_subsystem {
 	__Reply___mach_make_memory_entry_t Reply__mach_make_memory_entry;
 	__Reply__mach_vm_purgable_control_t Reply_mach_vm_purgable_control;
 	__Reply__mach_vm_page_info_t Reply_mach_vm_page_info;
+	__Reply__mach_vm_page_range_query_t Reply_mach_vm_page_range_query;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 
@@ -1046,7 +1091,8 @@ union __ReplyUnion__mach_vm_subsystem {
     { "mach_vm_region", 4816 },\
     { "_mach_make_memory_entry", 4817 },\
     { "mach_vm_purgable_control", 4818 },\
-    { "mach_vm_page_info", 4819 }
+    { "mach_vm_page_info", 4819 },\
+    { "mach_vm_page_range_query", 4820 }
 #endif
 
 #ifdef __AfterMigUserHeader

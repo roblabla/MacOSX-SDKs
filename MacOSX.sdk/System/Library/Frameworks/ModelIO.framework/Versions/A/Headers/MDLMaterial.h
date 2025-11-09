@@ -14,6 +14,7 @@
 #import <ModelIO/ModelIOExports.h>
 #import <ModelIO/MDLTypes.h>
 #import <ModelIO/MDLTransform.h>
+#import <ModelIO/MDLAssetResolver.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -236,7 +237,7 @@ MDL_EXPORT
 - (void)setProperties:(MDLMaterialProperty *)property;
 
 @property (nonatomic, assign) MDLMaterialSemantic semantic;
-@property (nonatomic, readonly) MDLMaterialPropertyType type;
+@property (nonatomic, assign) MDLMaterialPropertyType type;
 
 /** @see MDLNamed */
 @property (nonatomic, copy) NSString *name;
@@ -365,13 +366,30 @@ MDL_EXPORT
 
 - (void)setProperty:(MDLMaterialProperty*)property;
 - (void)removeProperty:(MDLMaterialProperty*)property;
+
 - (nullable MDLMaterialProperty*)propertyNamed:(NSString*)name;
+
 // Returns the first occurence of the property that matches the semantic.
 // Not recommended to use when there are multiple properties with same semantic.
 - (nullable MDLMaterialProperty*)propertyWithSemantic:(MDLMaterialSemantic)semantic;
+
 // Returns the complete list of properties that match the semantic (e.g. Kd & Kd_map)
 - (NSArray<MDLMaterialProperty *> *)propertiesWithSemantic:(MDLMaterialSemantic)semantic;
 - (void)removeAllProperties;
+
+// Iterates all material properties. If they are string values, they are resolved into
+// valid paths as NSURL values.
+// @param resolver If non-nil, the resolver can be invoked to convert stringValues
+//                 to NSURLs for loading.
+- (void)resolveTexturesWithResolver:(id<MDLAssetResolver>)resolver;
+
+// Iterates all material properties. If they are string values or NSURL values, and
+// can be resolved as textures, then the string and NSURL values will be replaced by
+// MDLTextureSampler values. The transforms on the samplers will be identity, the
+// wrap modes will be clamp, and the filter modes will be linear.
+// @param resolver If non-nil, the resolver can be invoked to convert stringValues
+//                 to NSURLs for loading.
+- (void)loadTexturesUsingResolver:(id<MDLAssetResolver>)resolver;
 
 @property (nonatomic, readonly, retain) MDLScatteringFunction *scatteringFunction;
 

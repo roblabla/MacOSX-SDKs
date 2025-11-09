@@ -1,13 +1,15 @@
 //
 //  SCNView.h
 //
-//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
 //
 
 #import <AppKit/AppKit.h>
 
 #import <SceneKit/SCNSceneRenderer.h>
 #import <SceneKit/SCNTechnique.h>
+
+@class SCNCameraController;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,23 +23,35 @@ typedef NSString * SCNViewOption;
  @constant SCNViewOptionPreferredRenderingAPI Specifies the preferred rendering API to be used by the renderer.
  @discussion Pass it as the key in the options dictionary given to initWithFrame:options:. The value is a NSNumber wrapping a SCNRenderingAPI. You can also select the preferred rendering API directly from the SCNView inspector in InterfaceBuilder.
  */
-FOUNDATION_EXTERN SCNViewOption const SCNPreferredRenderingAPIKey API_AVAILABLE(macosx(10.11), ios(9.0)) __WATCHOS_UNAVAILABLE;
+FOUNDATION_EXTERN SCNViewOption const SCNPreferredRenderingAPIKey API_AVAILABLE(macos(10.11), ios(9.0)) __WATCHOS_UNAVAILABLE;
 
 /*!
  @constant SCNViewOptionPreferredDevice Specifies the preferred metal device to be used by the renderer.
  @discussion The value is directly a id <MTLDevice>.
  */
-FOUNDATION_EXTERN SCNViewOption const SCNPreferredDeviceKey API_AVAILABLE(macosx(10.11), ios(9.0));
+FOUNDATION_EXTERN SCNViewOption const SCNPreferredDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @constant SCNViewOptionPreferLowPowerDevice Specifies if the renderer should prefer a low power metal device.
  @discussion The value is a NSNumber wrapping a BOOL. Defaults to NO.
  */
-FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(macosx(10.11), ios(9.0));
+FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(macos(10.11), ios(9.0));
 
 #define SCNViewOptionPreferredRenderingAPI SCNPreferredRenderingAPIKey
 #define SCNViewOptionPreferredDevice       SCNPreferredDeviceKey
 #define SCNViewOptionPreferLowPowerDevice  SCNPreferLowPowerDeviceKey
+
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+@protocol SCNCameraControlConfiguration <NSObject>
+
+@property(nonatomic, assign) BOOL autoSwitchToFreeCamera;
+@property(nonatomic, assign) BOOL allowsTranslation;
+@property(nonatomic, assign) CGFloat flyModeVelocity; // in m/s
+@property(nonatomic, assign) CGFloat panSensitivity;
+@property(nonatomic, assign) CGFloat truckSensitivity;
+@property(nonatomic, assign) CGFloat rotationSensitivity;
+
+@end
 
 /*!
  @class SCNView
@@ -58,6 +72,13 @@ FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(m
  @abstract Specifies the scene of the receiver
  */
 @property(nonatomic, retain, nullable) SCNScene *scene;
+
+/*!
+ @property rendersContinuously
+ @abstract When set to YES, the view continously redraw at the display link frame rate. When set to NO the view will only redraw when something change or animates in the receiver's scene. Defaults to NO.
+ */
+@property(nonatomic, assign) BOOL rendersContinuously;
+
 
 /*!
  @property backgroundColor
@@ -82,17 +103,27 @@ FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(m
  */
 @property(nonatomic) BOOL allowsCameraControl;
 
+/*! 
+ @property cameraControlConfiguration
+ @abstract An object describing the current configuration of the event handler which pilot the default camera controller.
+ @discussion This object will be used to configure the event handler when allowCameraControl is set to YES.
+ */
+@property(nonatomic, readonly) id<SCNCameraControlConfiguration> cameraControlConfiguration API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+/*!
+ @property defaultCameraController
+ @abstract Returns the default SCNCameraController used to drive the current point of view when allowCameraController is set to YES.
+ */
+@property(nonnull, nonatomic, readonly) SCNCameraController* defaultCameraController API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
 /*!
  @property snapshot
  @abstract Draws the contents of the view and returns them as a new image object
  @discussion This method is thread-safe and may be called at any time.
  */
-- (NSImage *)snapshot API_AVAILABLE(macosx(10.10));
+- (NSImage *)snapshot API_AVAILABLE(macos(10.10));
 
-/*! 
- @functiongroup Actions
- */
-/*! 
+/*!
  @method play:
  @abstract This action method begins playing the scene at its current location.
  @param sender The object (such as a button or menu item) sending the message to play the scene.
@@ -119,9 +150,9 @@ FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(m
  @property preferredFramesPerSecond
  @abstract The rate you want the view to redraw its contents.
  @discussion When your application sets its preferred frame rate, the view chooses a frame rate as close to that as possible based on the capabilities of the screen the view is displayed on. The actual frame rate chosen is usually a factor of the maximum refresh rate of the screen to provide a consistent frame rate. For example, if the maximum refresh rate of the screen is 60 frames per second, that is also the highest frame rate the view sets as the actual frame rate. However, if you ask for a lower frame rate, it might choose 30, 20, 15 or some other factor to be the actual frame rate. Your application should choose a frame rate that it can consistently maintain.
-             The default value is 0 which means the display link will fire at the native cadence of the display hardware.
+     The default value is 0 which means the display link will fire at the native cadence of the display hardware.
  */
-@property(nonatomic) NSInteger preferredFramesPerSecond API_AVAILABLE(macosx(10.12));
+@property(nonatomic) NSInteger preferredFramesPerSecond API_AVAILABLE(macos(10.12));
 
 /*!
  @property openGLContext
@@ -134,7 +165,8 @@ FOUNDATION_EXTERN SCNViewOption const SCNPreferLowPowerDeviceKey API_AVAILABLE(m
  @property antialiasingMode
  @abstract Defaults to SCNAntialiasingModeMultisampling4X on macOS and SCNAntialiasingModeNone on iOS.
  */
-@property(nonatomic) SCNAntialiasingMode antialiasingMode API_AVAILABLE(macosx(10.10));
+@property(nonatomic) SCNAntialiasingMode antialiasingMode API_AVAILABLE(macos(10.10));
+
 
 /*!
  @property pixelFormat

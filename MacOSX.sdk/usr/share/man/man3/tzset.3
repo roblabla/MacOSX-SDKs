@@ -70,7 +70,11 @@ does not appear in the environment, the best available approximation to
 local wall clock time, as specified by the
 .Xr tzfile 5 Ns -format
 file
+#ifdef UNIFDEF_MOVE_LOCALTIME
+.Pa /var/db/timezone/localtime ,
+#else /* !UNIFDEF_MOVE_LOCALTIME */
 .Pa /etc/localtime ,
+#endif /* UNIFDEF_MOVE_LOCALTIME */
 is used.
 .Pp
 If
@@ -294,7 +298,11 @@ may be used to separate the
 .Em rule
 from the rest of the specification.
 .Sh FILES
+#ifdef UNIFDEF_TZDIR_SYMLINK
+.ds zi /var/db/timezone/zoneinfo
+#else /* !UNIFDEF_TZDIR_SYMLINK */
 .ds zi /usr/share/zoneinfo
+#endif /* UNIFDEF_TZDIR_SYMLINK */
 .Bl -tag -width \*(zi/posixrules -compact
 .It Pa /etc/localtime
 local time zone file

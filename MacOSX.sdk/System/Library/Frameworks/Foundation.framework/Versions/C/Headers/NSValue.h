@@ -1,5 +1,5 @@
 /*	NSValue.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,7 +10,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSValue : NSObject <NSCopying, NSSecureCoding>
 
-- (void)getValue:(void *)value;
+- (void)getValue:(void *)value size:(NSUInteger)size API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 @property (readonly) const char *objCType NS_RETURNS_INNER_POINTER;
 
 - (instancetype)initWithBytes:(const void *)value objCType:(const char *)type NS_DESIGNATED_INITIALIZER;
@@ -53,8 +54,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSNumber *)initWithFloat:(float)value NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithDouble:(double)value NS_DESIGNATED_INITIALIZER;
 - (NSNumber *)initWithBool:(BOOL)value NS_DESIGNATED_INITIALIZER;
-- (NSNumber *)initWithInteger:(NSInteger)value NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;
-- (NSNumber *)initWithUnsignedInteger:(NSUInteger)value NS_AVAILABLE(10_5, 2_0) NS_DESIGNATED_INITIALIZER;
+- (NSNumber *)initWithInteger:(NSInteger)value API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)) NS_DESIGNATED_INITIALIZER;
+- (NSNumber *)initWithUnsignedInteger:(NSUInteger)value API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)) NS_DESIGNATED_INITIALIZER;
 
 @property (readonly) char charValue;
 @property (readonly) unsigned char unsignedCharValue;
@@ -69,8 +70,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (readonly) float floatValue;
 @property (readonly) double doubleValue;
 @property (readonly) BOOL boolValue;
-@property (readonly) NSInteger integerValue NS_AVAILABLE(10_5, 2_0);
-@property (readonly) NSUInteger unsignedIntegerValue NS_AVAILABLE(10_5, 2_0);
+@property (readonly) NSInteger integerValue API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (readonly) NSUInteger unsignedIntegerValue API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 @property (readonly, copy) NSString *stringValue;
 
@@ -97,9 +98,15 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSNumber *)numberWithFloat:(float)value;
 + (NSNumber *)numberWithDouble:(double)value;
 + (NSNumber *)numberWithBool:(BOOL)value;
-+ (NSNumber *)numberWithInteger:(NSInteger)value NS_AVAILABLE(10_5, 2_0);
-+ (NSNumber *)numberWithUnsignedInteger:(NSUInteger)value NS_AVAILABLE(10_5, 2_0);
++ (NSNumber *)numberWithInteger:(NSInteger)value API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
++ (NSNumber *)numberWithUnsignedInteger:(NSUInteger)value API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
+@end
+
+@interface NSValue (NSDeprecated)
+/* This method is unsafe because it could potentially cause buffer overruns. You should use -getValue:size: instead.
+ */
+- (void)getValue:(void *)value; // This method will likely be deprecated in a future release
 @end
 
 NS_ASSUME_NONNULL_END

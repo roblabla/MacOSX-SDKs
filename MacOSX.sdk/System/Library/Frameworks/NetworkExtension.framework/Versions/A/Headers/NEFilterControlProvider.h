@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015-2017 Apple Inc.
  * All rights reserved.
  */
 
@@ -74,6 +74,12 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  */
 - (void)notifyRulesChanged NS_AVAILABLE(NA, 9_0);
 
+/*!
+ * @method handleReport:
+ * @discussion This function is called by the framework when the data provider extension returns a verdict with the report property set to True. Subclass implementations may override this method to handle the flow report.
+ * @param report The report being delivered
+ */
+- (void)handleReport:(NEFilterReport *)report NS_AVAILABLE(NA, 11_0);
 @end
 
 NS_ASSUME_NONNULL_END

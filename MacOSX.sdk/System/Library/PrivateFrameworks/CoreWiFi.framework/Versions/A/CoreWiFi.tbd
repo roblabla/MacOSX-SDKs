@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 4AA585D9-B05E-3643-9FB7-3776840253AC', 'x86_64: BEFA276C-D284-3160-8641-7DD47E38C9D7' ]
+uuids:           [ 'i386: D3DFB123-B78A-31BC-A1AC-B746AD807DF0', 'x86_64: 01F42306-20BB-3B4C-8C50-731812B26570' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreWiFi.framework/Versions/A/CoreWiFi
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _CoreWiFiAppleDeviceIE.bluetoothMac, _CoreWiFiAppleDeviceIE.deviceID, 

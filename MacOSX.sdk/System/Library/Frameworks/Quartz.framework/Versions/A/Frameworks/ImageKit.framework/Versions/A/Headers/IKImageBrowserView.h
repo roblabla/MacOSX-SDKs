@@ -177,7 +177,7 @@ typedef enum
     IBOutlet __weak NSScroller*                   _horizontalScroller;
     IBOutlet __weak id                            _delegate;
 
-    void* __strong                                _reserved;
+    void*                                         _reserved;
 }
 @end
 

@@ -3,7 +3,7 @@
  
     Framework:  AVFoundation
  
-	Copyright 2010-2012 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
  
  */
 
@@ -19,6 +19,7 @@
 */
 AVF_EXPORT const CFTimeInterval AVCoreAnimationBeginTimeAtZero NS_AVAILABLE(10_7, 4_0);
 
+typedef NSString * AVLayerVideoGravity NS_STRING_ENUM;
 
 /*!
 	@constant		AVLayerVideoGravityResizeAspect
@@ -26,7 +27,7 @@ AVF_EXPORT const CFTimeInterval AVCoreAnimationBeginTimeAtZero NS_AVAILABLE(10_7
 	@discussion		AVLayerVideoGravityResizeAspect may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT NSString *const AVLayerVideoGravityResizeAspect NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspect NS_AVAILABLE(10_7, 4_0);
 
 
 /*!
@@ -35,7 +36,7 @@ AVF_EXPORT NSString *const AVLayerVideoGravityResizeAspect NS_AVAILABLE(10_7, 4_
     @discussion     AVLayerVideoGravityResizeAspectFill may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT NSString *const AVLayerVideoGravityResizeAspectFill NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResizeAspectFill NS_AVAILABLE(10_7, 4_0);
 
 /*!
 	@constant		AVLayerVideoGravityResize
@@ -43,4 +44,4 @@ AVF_EXPORT NSString *const AVLayerVideoGravityResizeAspectFill NS_AVAILABLE(10_7
     @discussion     AVLayerVideoGravityResize may be used when setting the videoGravity
                     property of an AVPlayerLayer or AVCaptureVideoPreviewLayer instance.
  */
-AVF_EXPORT NSString *const AVLayerVideoGravityResize NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVLayerVideoGravity const AVLayerVideoGravityResize NS_AVAILABLE(10_7, 4_0);

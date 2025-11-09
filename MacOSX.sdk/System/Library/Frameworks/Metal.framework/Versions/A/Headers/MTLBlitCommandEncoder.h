@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
+#import <Metal/MTLTypes.h>
 #import <Metal/MTLCommandEncoder.h>
 #import <Metal/MTLBuffer.h>
 #import <Metal/MTLTexture.h>
@@ -112,7 +113,7 @@ NS_AVAILABLE(10_11, 8_0)
  @discussion The event is updated at kernel submission to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
-- (void)updateFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
+- (void)updateFence:(id <MTLFence>)fence NS_AVAILABLE(10_13, 10_0);
 
 /*!
  @method waitForFence:
@@ -120,7 +121,7 @@ NS_AVAILABLE(10_11, 8_0)
  @discussion The event is evaluated at kernel submision to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
-- (void)waitForFence:(id <MTLFence>)fence NS_AVAILABLE(NA, 10_0);
+- (void)waitForFence:(id <MTLFence>)fence NS_AVAILABLE(10_13, 10_0);
 
 @end
 NS_ASSUME_NONNULL_END

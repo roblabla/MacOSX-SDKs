@@ -1,28 +1,31 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: DCDC3C2D-0003-35FD-BDA6-0ECC67889B64' ]
+uuids:           [ 'x86_64: 58763680-08B1-340B-8298-BAE20554A71B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/BookmarkDAV.framework/Versions/A/BookmarkDAV
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _BABookmarkCopyURL_Safe, _bookmarkSyncLog, _cdXBELBookmark, 
-                       _cdXBELFolder, _cdXBELHref, _cdXBELInfo, _cdXBELMetaData, 
-                       _cdXBELMetaDataAppleOwner, _cdXBELMetaDataOwner, _cdXBELPosition, 
-                       _cdXBELTitle, _cdXBELURI, _cdXBELXbel, _cdXMLBookmarkDAVBookmarkBarFolder, 
+    symbols:         [ _BABookmarkCopyURL_Safe, _BookmarkDAVErrorDomain, __BHReportTaskFailed, 
+                       __BHReportTaskGroupFailed, __BHReportTaskGroupSubmitted, __BHReportTaskGroupSucceeded, 
+                       __BHReportTaskSubmitted, __BHReportTaskSucceeded, __BHReportWokenByPush, 
+                       _bookmarkSyncLog, _cdXBELBookmark, _cdXBELFolder, _cdXBELHref, 
+                       _cdXBELInfo, _cdXBELMetaData, _cdXBELMetaDataAppleOwner, _cdXBELMetaDataOwner, 
+                       _cdXBELPosition, _cdXBELTitle, _cdXBELURI, _cdXBELXbel, _cdXMLBookmarkDAVBookmarkBarFolder, 
                        _cdXMLBookmarkDAVBookmarkData, _cdXMLBookmarkDAVBookmarkFolder, 
                        _cdXMLBookmarkDAVBookmarkHomeSet, _cdXMLBookmarkDAVBookmarkMenuFolder, 
                        _cdXMLBookmarkDAVGetPTag, _cdXMLBookmarkDAVMultiGetReport, 
                        _cdXMLBookmarkDAVRootCTag, _cdXMLBookmarkDAVRootSyncToken, 
                        _cdXMLMMeBookmarkDAVURI, _safeStringFromError ]
-    objc-classes:    [ _BookmarkDAVBookmark, _BookmarkDAVBulkPostTask, _BookmarkDAVFolder, 
-                       _BookmarkDAVFolderMultiGetTask, _BookmarkDAVGetAccountPropertiesTaskGroup, 
-                       _BookmarkDAVMultiGetTask, _BookmarkDAVRecursiveContainerSyncTaskGroup, 
-                       _BookmarkDAVSyncData, _BookmarkDAVSyncDriver ]
+    objc-classes:    [ _BookmarkDAVBookmark, _BookmarkDAVBulkPostTask, _BookmarkDAVDatabaseLockArbiter, 
+                       _BookmarkDAVFolder, _BookmarkDAVFolderMultiGetTask, _BookmarkDAVGetAccountPropertiesTaskGroup, 
+                       _BookmarkDAVMoveIDUpdater, _BookmarkDAVMoveURLRewriter, _BookmarkDAVMultiGetTask, 
+                       _BookmarkDAVRecursiveContainerSyncTaskGroup, _BookmarkDAVSyncData, 
+                       _BookmarkDAVSyncDriver ]
     objc-ivars:      [ _BookmarkDAVBookmark._appleAttributeString, _BookmarkDAVBookmark._appleAttributes, 
                        _BookmarkDAVBookmark._bookmarkURL, _BookmarkDAVBookmark._bulkUploadErrorItem, 
-                       _BookmarkDAVBookmark._ignoreLevel, _BookmarkDAVBookmark._name, 
-                       _BookmarkDAVBookmark._parseState, _BookmarkDAVBookmark._serverID, 
+                       _BookmarkDAVBookmark._destinationURL, _BookmarkDAVBookmark._ignoreLevel, 
+                       _BookmarkDAVBookmark._name, _BookmarkDAVBookmark._parseState, 
+                       _BookmarkDAVBookmark._serverID, _BookmarkDAVBookmark._sourceURL, 
                        _BookmarkDAVBookmark._syncKey, _BookmarkDAVBulkPostTask._checkCTag, 
                        _BookmarkDAVBulkPostTask._checkCTagURL, _BookmarkDAVBulkPostTask._folderURLToChildrenURLOrder, 
                        _BookmarkDAVBulkPostTask._nextRootCTag, _BookmarkDAVBulkPostTask._nextRootSyncToken, 
@@ -30,7 +33,8 @@ exports:
                        _BookmarkDAVBulkPostTask._parsedFolders, _BookmarkDAVBulkPostTask._parsedFoldersByURL, 
                        _BookmarkDAVFolder._appleAttributes, _BookmarkDAVFolder._bulkParsedCTag, 
                        _BookmarkDAVFolder._bulkParsedPTag, _BookmarkDAVFolder._bulkUploadErrorItem, 
-                       _BookmarkDAVFolder._childrenOrder, _BookmarkDAVSyncDriver._accountInfoProvider, 
+                       _BookmarkDAVFolder._childrenOrder, _BookmarkDAVFolder._destinationURL, 
+                       _BookmarkDAVFolder._sourceURL, _BookmarkDAVSyncDriver._accountInfoProvider, 
                        _BookmarkDAVSyncDriver._changeToken, _BookmarkDAVSyncDriver._closeDBBlock, 
                        _BookmarkDAVSyncDriver._forceSafariOrdering, _BookmarkDAVSyncDriver._forceSave, 
                        _BookmarkDAVSyncDriver._getAccountPropertiesHandler, _BookmarkDAVSyncDriver._getDBBlock, 

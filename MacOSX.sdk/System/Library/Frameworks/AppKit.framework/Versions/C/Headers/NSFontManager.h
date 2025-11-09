@@ -1,7 +1,7 @@
 /*
 	NSFontManager.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -87,7 +87,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 + (void)setFontPanelFactory:(nullable Class)factoryId;
 + (void)setFontManagerFactory:(nullable Class)factoryId;
-+ (NSFontManager *)sharedFontManager;
+@property (class, readonly, strong) NSFontManager *sharedFontManager;
 
 @property (getter=isMultiple, readonly) BOOL multiple;
 @property (nullable, readonly, strong) NSFont *selectedFont;

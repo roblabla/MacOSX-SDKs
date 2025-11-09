@@ -1,14 +1,15 @@
 /*
- NSPersistentStoreDescription.h
- Core Data
- Copyright (c) 2016, Apple Inc.
- All rights reserved.
- */
+    NSPersistentStoreDescription.h
+    Core Data
+    Copyright (c) 2016-2017, Apple Inc.
+    All rights reserved.
+*/
 
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
-#import <Foundation/NSURL.h>
+#import <Foundation/NSDate.h>
 
+@class NSURL;
 
 NS_ASSUME_NONNULL_BEGIN
 

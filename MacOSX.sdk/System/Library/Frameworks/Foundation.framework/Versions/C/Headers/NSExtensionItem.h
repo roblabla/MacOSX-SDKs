@@ -1,5 +1,5 @@
 /*	NSExtensionItem.h
-        Copyright (c) 2013-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2013-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/Foundation.h>
@@ -27,9 +27,9 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @end
 
 // Keys corresponding to properties exposed on the NSExtensionItem interface
-FOUNDATION_EXTERN NSString * __null_unspecified const NSExtensionItemAttributedTitleKey NS_AVAILABLE(10_10, 8_0);
-FOUNDATION_EXTERN NSString * __null_unspecified const NSExtensionItemAttributedContentTextKey NS_AVAILABLE(10_10, 8_0);
-FOUNDATION_EXTERN NSString * __null_unspecified const NSExtensionItemAttachmentsKey NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXTERN NSString * _Null_unspecified const NSExtensionItemAttributedTitleKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXTERN NSString * _Null_unspecified const NSExtensionItemAttributedContentTextKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXTERN NSString * _Null_unspecified const NSExtensionItemAttachmentsKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END
 #endif

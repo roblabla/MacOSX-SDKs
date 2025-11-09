@@ -1,18 +1,19 @@
-// =====================================================================================================================
+//
 //  PDFAnnotationTextWidget.h
-// =====================================================================================================================
-
+//  Copyright © 2016 Apple. All rights reserved.
+//
+//  Deprecated annotation class. Use PDFAnnotation directly to create this
+//  kind of annotation by setting the subtype to "/Widget" and assign the key-
+//  value pair { @"/FT" : @"/Tx" }. Use the helper methods in PDFAnnotationUtilities.h
+//  to quickly build an appropriate dictionary for this annotation type.
+//
 
 #import <PDFKit/PDFKitPlatform.h>
-
 #import <PDFKit/PDFAnnotation.h>
-
-#import <Availability.h>
-
 
 @class PDFAnnotationTextWidgetPrivateVars;
 
-NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
+PDFKIT_CLASS_DEPRECATED(10_4, 10_12, NA, NA)
 @interface PDFAnnotationTextWidget : PDFAnnotation <NSCopying>
 {
 @private
@@ -25,7 +26,7 @@ NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, sett
 - (NSString *) stringValue;
 - (void) setStringValue: (NSString *) value;
 
-// Attributed string associated with text field ( font / fontColor)
+// Attributed string associated with text field (font / fontColor).
 - (NSAttributedString*) attributedStringValue;
 - (void) setAttributedStringValue: (NSAttributedString*) value;
 
@@ -41,7 +42,7 @@ NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, sett
 - (PDFKitPlatformColor *) fontColor;
 - (void) setFontColor: (PDFKitPlatformColor *) color;
 
-// Alignment of text.  Supported: NSLeftTextAlignment, NSRightTextAlignment and NSCenterTextAlignment.
+// Alignment of text. Supported: NSLeftTextAlignment, NSRightTextAlignment and NSCenterTextAlignment.
 - (NSTextAlignment) alignment;
 - (void) setAlignment: (NSTextAlignment) alignment;
 
@@ -49,7 +50,7 @@ NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, sett
 - (NSUInteger) maximumLength;
 - (void) setMaximumLength: (NSUInteger) maxLen;
 
-// Internal name for the field (optional).  Used for ResetForm actions.
+// Internal name for the field (optional). Used for ResetForm actions.
 - (NSString *) fieldName;
 - (void) setFieldName: (NSString *) name;
 

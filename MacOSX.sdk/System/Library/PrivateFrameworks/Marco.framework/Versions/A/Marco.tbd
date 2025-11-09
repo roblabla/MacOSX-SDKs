@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 31820AAC-9780-329E-B8E3-F0E950B4DD26', 'x86_64: C761F1E8-BDAC-34F8-BEBF-9B812ED294F8' ]
+uuids:           [ 'i386: 93EB8159-0217-31F3-A3F1-7703378720EE', 'x86_64: 8EBD1541-263A-30F7-A02C-9443D52E0072' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Marco.framework/Versions/A/Marco
-current-version: 800.0
-objc-constraint: none
+current-version: 800
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _MarcoAction, _MarcoActionWithUserInfo, _MarcoAddCallMetric, 

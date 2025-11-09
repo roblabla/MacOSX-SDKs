@@ -79,7 +79,7 @@ typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCCon
 @property (nonatomic, readonly, retain) GCControllerButtonInput *buttonX;
 
 /**
- The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first conact point with the surface.
+ The Micro profile can use the raw position values of the touchpad on the remote as D-pad values, or it can create a virtual dpad centered around the first contact point with the surface.
  
  If NO; a smaller sliding window is created around the initial touch point and subsequent movement is relative to that center. Movement outside the window will slide the window with it to re-center it. This is great for surfaces where there is no clear sense of a middle and drift over time is an issue.
  
@@ -95,6 +95,7 @@ typedef void (^GCMicroGamepadValueChangedHandler)(GCMicroGamepad *gamepad, GCCon
  The default value for this property is NO.
  */
 @property (nonatomic, assign) BOOL allowsRotation;
+
 
 @end
 

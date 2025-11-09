@@ -68,6 +68,12 @@ __BEGIN_DECLS
 #define XPC_NOINLINE __attribute__((noinline))
 #define XPC_NOIMPL __attribute__((unavailable))
 
+#if __has_attribute(noescape)
+#define XPC_NOESCAPE __attribute__((__noescape__))
+#else
+#define XPC_NOESCAPE
+#endif
+
 #if __has_extension(attribute_unavailable_with_message)
 #define XPC_UNAVAILABLE(m) __attribute__((unavailable(m)))
 #else // __has_extension(attribute_unavailable_with_message)
@@ -102,7 +108,7 @@ __BEGIN_DECLS
 #else // __has_feature(objc_arc)
 #define XPC_GIVES_REFERENCE
 #define XPC_UNRETAINED
-#define XPC_BRIDGE(xo)
+#define XPC_BRIDGE(xo) (xo)
 #define XPC_BRIDGEREF_BEGIN(xo) (xo)
 #define XPC_BRIDGEREF_BEGIN_WITH_REF(xo) (xo)
 #define XPC_BRIDGEREF_MIDDLE(xo) (xo)
@@ -171,6 +177,8 @@ __BEGIN_DECLS
 #define XPC_DEPRECATED
 /*! @parseOnly */
 #define XPC_UNAVAILABLE(m)
+/*! @parseOnly */
+#define XPC_NOESCAPE
 #endif // __GNUC__
 
 #if __has_feature(assume_nonnull)
@@ -179,6 +187,12 @@ __BEGIN_DECLS
 #else
 #define XPC_ASSUME_NONNULL_BEGIN
 #define XPC_ASSUME_NONNULL_END
+#endif
+
+#if __has_feature(nullability_on_arrays)
+#define XPC_NONNULL_ARRAY _Nonnull
+#else
+#define XPC_NONNULL_ARRAY
 #endif
 
 __END_DECLS

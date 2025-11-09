@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -30,6 +30,8 @@
 */
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVMediaFormat.h>
+#import <AVFoundation/AVAnimation.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
 #import <CoreMedia/CMSync.h>
@@ -183,12 +185,19 @@ typedef NS_ENUM(NSInteger, AVPlayerTimeControlStatus) {
 
 /*!
  @property		timeControlStatus
- @abstract		Indicates whether playback is currently paused indefinitely, suspend while waiting for appropriate conditions, or in progress.
+ @abstract		Indicates whether playback is currently paused indefinitely, suspended while waiting for appropriate conditions, or in progress.
  @discussion    For possible values and discussion, see AVPlayerTimeControlStatus.
  
 When automaticallyWaitsToMinimizeStalling is YES, absent intervention in the form of invocations of -setRate: or -pause or, on iOS, an interruption that requires user intervention before playback can resume, the value of the property timeControlStatus automatically changes between AVPlayerTimeControlStatusPlaying and AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate depending on whether sufficient media data is available to continue playback. This property is key value observable.
 */
 @property (nonatomic, readonly) AVPlayerTimeControlStatus timeControlStatus NS_AVAILABLE(10_12, 10_0);
+
+/*!
+ @typedef AVPlayerWaitingReason
+ @abstract
+    The type of reason that a player is waiting for playback.
+*/
+typedef NSString * AVPlayerWaitingReason NS_STRING_ENUM;
 
 /*!
  @constant AVPlayerWaitingToMinimizeStallsReason
@@ -197,7 +206,7 @@ When automaticallyWaitsToMinimizeStalling is YES, absent intervention in the for
 	The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and playback at the specified rate would likely cause the playback buffer to become empty before playback completes. Playback will resume when 1) playback at the specified rate will likely complete without a stall or 2) the playback buffer becomes full, meaning no forther buffering of media data is possible.
 	When the value of automaticallyWaitsToMinimizeStalling is NO, timeControlStatus cannot become AVPlayerTimeControlStatusWaitingToPlayAtSpecifiedRate for this reason.
  */
-AVF_EXPORT NSString *const AVPlayerWaitingToMinimizeStallsReason NS_AVAILABLE(10_12, 10_0);
+AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingToMinimizeStallsReason NS_AVAILABLE(10_12, 10_0);
 
 /*!
  @constant AVPlayerWaitingWhileEvaluatingBufferingRateReason
@@ -206,7 +215,7 @@ AVF_EXPORT NSString *const AVPlayerWaitingToMinimizeStallsReason NS_AVAILABLE(10
 	The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and it has not yet determined if starting playback at the specified rate would likely cause the buffer to become empty. When the brief initial monitoring period is over, either playback will begin or the value of reasonForWaitingToPlayAtSpecifiedRate will switch to AVPlayerWaitingToMinimizeStallsReason.
 	Recommended practice is not to show UI indicating the waiting state to the user while the value of reasonForWaitingToPlayAtSpecifiedRate is AVPlayerWaitingWhileEvaluatingBufferingRateReason.
  */
-AVF_EXPORT NSString *const AVPlayerWaitingWhileEvaluatingBufferingRateReason NS_AVAILABLE(10_12, 10_0);
+AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingWhileEvaluatingBufferingRateReason NS_AVAILABLE(10_12, 10_0);
 
 /*!
  @constant AVPlayerWaitingWithNoItemToPlayReason
@@ -214,7 +223,7 @@ AVF_EXPORT NSString *const AVPlayerWaitingWhileEvaluatingBufferingRateReason NS_
  @discussion
 	The player is waiting for playback because automaticallyWaitToMinimizeStalling is YES and the value of currentItem is nil. When an item becomes available, either because of a call to -replaceCurrentItemWithPlayerItem: or  -insertItem: afterItem:, playback will begin or the value of reasonForWaitingToPlay will change.
  */
-AVF_EXPORT NSString *const AVPlayerWaitingWithNoItemToPlayReason NS_AVAILABLE(10_12, 10_0);
+AVF_EXPORT AVPlayerWaitingReason const AVPlayerWaitingWithNoItemToPlayReason NS_AVAILABLE(10_12, 10_0);
 
 
 /*!
@@ -227,7 +236,7 @@ AVF_EXPORT NSString *const AVPlayerWaitingWithNoItemToPlayReason NS_AVAILABLE(10
     Possible values are AVPlayerWaitingWithNoItemToPlayReason, AVPlayerWaitingWhileEvaluatingBufferingRateReason, and AVPlayerWaitingToMinimizeStallsReason.
 */
 
-@property (nonatomic, readonly, nullable) NSString *reasonForWaitingToPlay NS_AVAILABLE(10_12, 10_0);
+@property (nonatomic, readonly, nullable) AVPlayerWaitingReason reasonForWaitingToPlay NS_AVAILABLE(10_12, 10_0);
 
 
 /*!
@@ -514,9 +523,6 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 /* indicates whether or not audio output of the player is muted. Only affects audio muting for the player instance and not for the device. */
 @property (nonatomic, getter=isMuted) BOOL muted NS_AVAILABLE(10_7, 7_0);
 
-/* indicates whether display of closed captions is enabled */
-@property (nonatomic, getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled;
-
 @end
 
 
@@ -546,7 +552,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 
    Specific selections made by -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:] within any group will override automatic selection in that group until -[AVPlayerItem selectMediaOptionAutomaticallyInMediaSelectionGroup:] is received.
 */
-- (void)setMediaSelectionCriteria:(nullable AVPlayerMediaSelectionCriteria *)criteria forMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
+- (void)setMediaSelectionCriteria:(nullable AVPlayerMediaSelectionCriteria *)criteria forMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @method     mediaSelectionCriteriaForMediaCharacteristic:
@@ -554,7 +560,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
  @param      mediaCharacteristic
   The media characteristic for which the selection criteria is to be returned. Supported values include AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, and AVMediaCharacteristicVisual.
 */
-- (nullable AVPlayerMediaSelectionCriteria *)mediaSelectionCriteriaForMediaCharacteristic:(NSString *)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
+- (nullable AVPlayerMediaSelectionCriteria *)mediaSelectionCriteriaForMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic NS_AVAILABLE(10_9, 7_0);
 
 @end
 
@@ -611,7 +617,7 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 @property (nonatomic) BOOL usesExternalPlaybackWhileExternalScreenIsActive NS_AVAILABLE_IOS(6_0);
 
 /* Video gravity strictly for "external playback" mode, one of AVLayerVideoGravity* defined in AVAnimation.h */
-@property (nonatomic, copy) NSString *externalPlaybackVideoGravity NS_AVAILABLE_IOS(6_0);
+@property (nonatomic, copy) AVLayerVideoGravity externalPlaybackVideoGravity NS_AVAILABLE_IOS(6_0);
 
 @end
 
@@ -660,6 +666,29 @@ typedef NS_ENUM(NSInteger, AVPlayerActionAtItemEnd)
 		If the current item does not require external protection, the value of this property will be NO.
  */
 @property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection NS_AVAILABLE(10_12, 6_0);
+
+@end
+
+
+@interface AVPlayer (AVPlayerDeprecated)
+
+/*!
+	@property closedCaptionDisplayEnabled
+	@abstract
+		Indicates whether display of closed captions is enabled.
+
+	@discussion
+		This property is deprecated.
+
+		When the value of appliesMediaSelectionCriteriaAutomatically is YES, the receiver will enable closed captions automatically either according to user preferences or, if you provide them, according to AVPlayerMediaSelectionCriteria for the media characteristic AVMediaCharacteristicLegible.
+
+		If you want to determine whether closed captions may be available for a given AVPlayerItem, you can examine the AVMediaSelectionOptions in the AVMediaSelectionGroup for the characteristic AVMediaCharacteristicLegible, as vended by -[AVAsset mediaSelectionGroupForMediaCharacteristic:]. See AVMediaCharacteristicTranscribesSpokenDialogForAccessibility and AVMediaCharacteristicDescribesMusicAndSoundForAccessibility as documented in AVMediaFormat.h for information about how to identify legible media selection options that offer the features of closed captions for accessibility purposes.
+
+		You can select or deselect a specific AVMediaSelectionOption via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
+
+		For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
+ */
+@property (nonatomic, getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled NS_DEPRECATED(10_7, 10_13, 4_0, 11_0, "Allow AVPlayer to enable closed captions automatically according to user preferences by ensuring that the value of appliesMediaSelectionCriteriaAutomatically is YES.");
 
 @end
 

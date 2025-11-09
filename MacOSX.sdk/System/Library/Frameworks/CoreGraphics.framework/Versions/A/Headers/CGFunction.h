@@ -5,11 +5,13 @@
 #ifndef CGFUNCTION_H_
 #define CGFUNCTION_H_
 
+#include <CoreFoundation/CFBase.h>
+
 /* A CGFunction is a general floating-point function evaluator which uses a
    user-specified callback to map an arbitrary number of inputs to an
    arbitrary number of outputs. */
 
-typedef struct CGFunction *CGFunctionRef;
+typedef struct CF_BRIDGED_TYPE(id) CGFunction *CGFunctionRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFBase.h>

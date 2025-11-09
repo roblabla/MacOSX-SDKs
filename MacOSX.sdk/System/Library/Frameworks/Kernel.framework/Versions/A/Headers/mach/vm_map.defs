@@ -71,7 +71,14 @@ subsystem
 #include <mach/mach_types.defs>
 #include <mach_debug/mach_debug_types.defs>
 
+#define CONCAT(a,b) a ## b
 #define PREFIX(NAME) NAME
+
+#if	KERNEL_SERVER
+#define KERNEL_SERVER_SUFFIX(NAME) CONCAT(NAME, _external)
+#else
+#define KERNEL_SERVER_SUFFIX(NAME) NAME
+#endif
 
 /*
  *      Returns information about the contents of the virtual
@@ -102,7 +109,7 @@ routine vm_region(
  *	allocation actually took place is returned.
  */
 
-routine PREFIX(vm_allocate)(
+routine PREFIX(KERNEL_SERVER_SUFFIX(vm_allocate))(
 		target_task	: vm_task_entry_t;
 	inout	address		: vm_address_t;
 		size		: vm_size_t;
@@ -267,7 +274,7 @@ routine vm_behavior_set(
  *	The user-defined memory manager for this object is responsible
  *	for further consistency.]
  */
-routine PREFIX(vm_map) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(vm_map)) (
 		target_task	: vm_task_entry_t;
 	inout	address		: vm_address_t;
 		size		: vm_size_t;
@@ -295,7 +302,7 @@ routine vm_machine_attribute(
 /*
  *      Map portion of a task's address space.
  */
-routine PREFIX(vm_remap) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(vm_remap)) (
 		target_task	: vm_map_t;
 	inout	target_address	: vm_address_t;
 		size		: vm_size_t;
@@ -426,7 +433,7 @@ routine mach_make_memory_entry_64(
 
 
 
-routine vm_map_64(
+routine KERNEL_SERVER_SUFFIX(vm_map_64)(
 		target_task	: vm_task_entry_t;
 	inout	address		: vm_address_t;
 		size		: vm_size_t;

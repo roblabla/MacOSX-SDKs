@@ -1,5 +1,5 @@
 /*	NSXPCConnection.h
-        Copyright (c) 2011-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2011-2017, Apple Inc. All rights reserved.
  */
 
 #import <dispatch/dispatch.h>
@@ -25,6 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 // Returns a proxy object which will invoke the error handling block if an error occurs on the connection. If the message sent to the proxy has a reply handler, then either the error handler or the reply handler will be called exactly once. This proxy object will also conform with the NSXPCProxyCreating protocol.
 - (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
 
+@optional
+
+// Make a synchronous IPC call instead of the default async behavior. The error handler block and reply block will be invoked on the calling thread before the message to the proxy returns, instead of on the queue for the connection.
+- (id)synchronousRemoteObjectProxyWithErrorHandler:(void (NS_NOESCAPE ^)(NSError *error))handler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+
 @end
 
 // ----------------------------------
@@ -33,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_OPTIONS(NSUInteger, NSXPCConnectionOptions) {
     // Use this option if connecting to a service in the privileged Mach bootstrap (for example, a launchd.plist in /Library/LaunchDaemons).
     NSXPCConnectionPrivileged = (1 << 12UL)
-} NS_ENUM_AVAILABLE(10_8, 6_0);
+} API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 // This object is the main configuration mechanism for the communication between two processes. Each NSXPCConnection instance has a private serial queue. This queue is used when sending messages to reply handlers, interruption handlers, and invalidation handlers.
 NS_CLASS_AVAILABLE(10_8, 6_0)
@@ -60,11 +65,11 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 }
 
 // Initialize an NSXPCConnection that will connect to the specified service name. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
-- (instancetype)initWithServiceName:(NSString *)serviceName;
+- (instancetype)initWithServiceName:(NSString *)serviceName __IOS_PROHIBITED __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 @property (nullable, readonly, copy) NSString *serviceName;
 
 // Use this if looking up a name advertised in a launchd.plist. For example, an agent with a launchd.plist in ~/Library/LaunchAgents. If the connection is being made to something in a privileged Mach bootstrap (for example, a daemon with a launchd.plist in /Library/LaunchDaemons), then use the NSXPCConnectionPrivileged option. Note: Receiving a non-nil result from this init method does not mean the service name is valid or the service has been launched. The init method simply constructs the local object.
-- (instancetype)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options;
+- (instancetype)initWithMachServiceName:(NSString *)name options:(NSXPCConnectionOptions)options __IOS_PROHIBITED __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 // Initialize an NSXPCConnection that will connect to an NSXPCListener (identified by its NSXPCListenerEndpoint).
 - (instancetype)initWithListenerEndpoint:(NSXPCListenerEndpoint *)endpoint;
@@ -84,11 +89,14 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 
 - (id)remoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler;
 
+// Make a synchronous IPC call instead of the default async behavior. The error handler block and reply block will be invoked on the calling thread before the message to the proxy returns, instead of on the queue for the connection.
+- (id)synchronousRemoteObjectProxyWithErrorHandler:(void (^)(NSError *error))handler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
+
 // The interruption handler will be called if the remote process exits or crashes. It may be possible to re-establish the connection by simply sending another message. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
 // The interruptionHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the NSXPCConnection instance inside this block.
 @property (nullable, copy) void (^interruptionHandler)(void);
 
-// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
+// The invalidation handler will be called if the connection can not be formed or the connection has terminated and may not be re-established. The invalidation handler will also be called if a connection created with an NSXPCListenerEndpoint is invalidated from the remote side, or if the NSXPCListener used to create that endpoint is invalidated. The handler will be invoked on the same queue as replies and other handlers, but there is no guarantee of ordering between those callbacks and this one.
 // You may not send messages over the connection from within an invalidation handler block.
 // The invalidationHandler property is cleared after the connection becomes invalid. This is to mitigate the impact of a retain cycle created by referencing the NSXPCConnection instance inside this block.
 @property (nullable, copy) void (^invalidationHandler)(void);
@@ -132,7 +140,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 + (NSXPCListener *)anonymousListener;
 
 // Use this if listening on name advertised in a launchd.plist For example, an agent with a launchd.plist in ~/Library/LaunchAgents, or a daemon with a launchd.plist in /Library/LaunchDaemons.
-- (instancetype)initWithMachServiceName:(NSString *)name NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMachServiceName:(NSString *)name NS_DESIGNATED_INITIALIZER __IOS_PROHIBITED __WATCHOS_PROHIBITED __TVOS_PROHIBITED;
 
 // The delegate for the connection listener. If no delegate is set, all new connections will be rejected. See the protocol for more information on how to implement it.
 @property (nullable, assign) id <NSXPCListenerDelegate> delegate;
@@ -165,7 +173,7 @@ NS_CLASS_AVAILABLE(10_8, 6_0)
 @interface NSXPCInterface : NSObject {
 @private
     Protocol *_protocol;
-    CFMutableDictionaryRef _methods2;
+    void *_reserved2;
     id _reserved1;
 }
 

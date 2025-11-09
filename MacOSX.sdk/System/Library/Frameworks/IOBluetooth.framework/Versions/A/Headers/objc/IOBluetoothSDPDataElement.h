@@ -67,7 +67,7 @@
                 must contain sub-elements that will be parsed out individually.
 */
 
-@interface IOBluetoothSDPDataElement : NSObject <NSCoding> {
+@interface IOBluetoothSDPDataElement : NSObject <NSCoding, NSSecureCoding>  {
     BluetoothSDPDataElementTypeDescriptor	mTypeDescriptor;
     BluetoothSDPDataElementSizeDescriptor	mSizeDescriptor;
     uint32_t								mSize;

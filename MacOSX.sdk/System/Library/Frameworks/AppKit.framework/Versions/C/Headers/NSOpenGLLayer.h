@@ -1,7 +1,7 @@
 /*
         NSOpenGLLayer.h
         Application Kit
-        Copyright (c) 2008-2016, Apple Inc.
+        Copyright (c) 2008-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -16,14 +16,14 @@ NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSOpenGLLayer : CAOpenGLLayer
 {
 @private
-    NSOpenGLPixelFormat *_openGLPixelFormat;
-    NSOpenGLContext *_openGLContext;
-    void *_reserved[5] __unused;
+#ifndef __OBJC2__
+    void *_reserved[7] __unused;
+#endif
 }
 
 /* Provides access to the layer's associated view.  Subclasses shouldn't invoke -setView:, but can override it if desired to intercept the layer's association to, or dissociation from, a view.
 */
-@property (nullable, assign) NSView *view;
+@property (nullable, weak) NSView *view;
 
 /* Provides access to the layer's associated NSOpenGLPixelFormat.  Subclasses shouldn't invoke -setOpenGLPixelFormat:, but can override it if desired to intercept assignment of the layer's pixel format.
 */

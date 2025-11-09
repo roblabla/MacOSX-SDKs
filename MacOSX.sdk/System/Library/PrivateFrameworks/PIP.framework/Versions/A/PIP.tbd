@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FEB78307-F3CD-3C46-939F-C64543F70EA1' ]
+uuids:           [ 'x86_64: 83746C17-A421-3E92-B368-41CA686AEE05' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PIP.framework/Versions/A/PIP
-current-version: 50.2
-objc-constraint: none
+current-version: 82
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _PIPProtocolAnimated, _PIPProtocolAnimationFence, _PIPProtocolAspectRatio, 

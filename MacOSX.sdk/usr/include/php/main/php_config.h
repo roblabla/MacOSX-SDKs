@@ -58,9 +58,6 @@
 /* Whether to build enchant as dynamic module */
 /* #undef COMPILE_DL_ENCHANT */
 
-/* Whether to build ereg as dynamic module */
-/* #undef COMPILE_DL_EREG */
-
 /* Whether to build exif as dynamic module */
 /* #undef COMPILE_DL_EXIF */
 
@@ -111,12 +108,6 @@
 
 /* Whether to build mcrypt as dynamic module */
 /* #undef COMPILE_DL_MCRYPT */
-
-/* Whether to build mssql as dynamic module */
-/* #undef COMPILE_DL_MSSQL */
-
-/* Whether to build mysql as dynamic module */
-/* #undef COMPILE_DL_MYSQL */
 
 /* Whether to build mysqli as dynamic module */
 /* #undef COMPILE_DL_MYSQLI */
@@ -172,6 +163,9 @@
 /* Whether to build phar as dynamic module */
 /* #undef COMPILE_DL_PHAR */
 
+/* Whether to build phpdbg_webhelper as dynamic module */
+/* #undef COMPILE_DL_PHPDBG_WEBHELPER */
+
 /* Whether to build posix as dynamic module */
 /* #undef COMPILE_DL_POSIX */
 
@@ -213,9 +207,6 @@
 
 /* Whether to build standard as dynamic module */
 /* #undef COMPILE_DL_STANDARD */
-
-/* Whether to build sybase_ct as dynamic module */
-/* #undef COMPILE_DL_SYBASE_CT */
 
 /* Whether to build sysvmsg as dynamic module */
 /* #undef COMPILE_DL_SYSVMSG */
@@ -394,27 +385,12 @@
 /* Define to 1 if you have the `alphasort' function. */
 #define HAVE_ALPHASORT 1
 
-/* Whether you have AOLserver */
-/* #undef HAVE_AOLSERVER */
-
-/* */
-/* #undef HAVE_APACHE */
-
-/* */
-/* #undef HAVE_APACHE_HOOKS */
-
 /* do we have apparmor support? */
 /* #undef HAVE_APPARMOR */
 
 /* Define to 1 if you have the <ApplicationServices/ApplicationServices.h>
    header file. */
 #define HAVE_APPLICATIONSERVICES_APPLICATIONSERVICES_H 1
-
-/* */
-/* #undef HAVE_AP_COMPAT_H */
-
-/* */
-/* #undef HAVE_AP_CONFIG_H */
 
 /* Define to 1 if you have the <arpa/inet.h> header file. */
 #define HAVE_ARPA_INET_H 1
@@ -488,9 +464,6 @@
 /* */
 #define HAVE_CALENDAR 1
 
-/* Whether to compile with Caudium support */
-/* #undef HAVE_CAUDIUM */
-
 /* Define to 1 if you have the `chroot' function. */
 #define HAVE_CHROOT 1
 
@@ -523,9 +496,6 @@
 
 /* */
 /* #undef HAVE_CODBC */
-
-/* Whether you have a Continuity Server */
-/* #undef HAVE_CONTINUITY */
 
 /* Define to 1 if you have the `CreateProcess' function. */
 /* #undef HAVE_CREATEPROCESS */
@@ -580,6 +550,22 @@
 
 /* Whether system headers declare timezone */
 #define HAVE_DECLARED_TIMEZONE 1
+
+/* Define to 1 if you have the declaration of `arc4random_buf', and to 0 if
+   you don't. */
+#define HAVE_DECL_ARC4RANDOM_BUF 1
+
+/* Define to 1 if you have the declaration of `isfinite', and to 0 if you
+   don't. */
+#define HAVE_DECL_ISFINITE 1
+
+/* Define to 1 if you have the declaration of `isinf', and to 0 if you don't.
+   */
+#define HAVE_DECL_ISINF 1
+
+/* Define to 1 if you have the declaration of `isnan', and to 0 if you don't.
+   */
+#define HAVE_DECL_ISNAN 1
 
 /* Define to 1 if you have the declaration of `tzname', and to 0 if you don't.
    */
@@ -714,11 +700,29 @@
 /* Whether you want FTP support */
 #define HAVE_FTP 1
 
+/* Whether FTP over SSL is supported */
+#define HAVE_FTP_SSL 1
+
+/* Define to 1 if you have the <fts.h> header file. */
+#define HAVE_FTS_H 1
+
+/* Define to 1 if you have the three-argument form of gethostbyname_r(). */
+/* #undef HAVE_FUNC_GETHOSTBYNAME_R_3 */
+
+/* Define to 1 if you have the five-argument form of gethostbyname_r(). */
+/* #undef HAVE_FUNC_GETHOSTBYNAME_R_5 */
+
+/* Define to 1 if you have the six-argument form of gethostbyname_r(). */
+/* #undef HAVE_FUNC_GETHOSTBYNAME_R_6 */
+
 /* Define to 1 if you have the `funopen' function. */
 #define HAVE_FUNOPEN 1
 
 /* Define to 1 if you have the `gai_strerror' function. */
 #define HAVE_GAI_STRERROR 1
+
+/* Define if the target system has support for global register variables */
+/* #undef HAVE_GCC_GLOBAL_REGS */
 
 /* Whether you have gcov */
 /* #undef HAVE_GCOV */
@@ -767,6 +771,9 @@
 
 /* */
 #define HAVE_GETHOSTBYADDR 1
+
+/* Define to 1 if you have some form of gethostbyname_r(). */
+/* #undef HAVE_GETHOSTBYNAME_R */
 
 /* Define to 1 if you have the `gethostname' function. */
 #define HAVE_GETHOSTNAME 1
@@ -851,6 +858,9 @@
 
 /* */
 #define HAVE_HTONL 1
+
+/* Define to enable copying PHP CODE pages into HUGE PAGES (experimental) */
+#define HAVE_HUGE_CODE_PAGES 1
 
 /* whether HUGE_VAL == INF */
 #define HAVE_HUGE_VAL_INF 1
@@ -962,15 +972,6 @@
 
 /* Define to 1 if you have the `isascii' function. */
 #define HAVE_ISASCII 1
-
-/* Define to 1 if you have the `isfinite' function. */
-/* #undef HAVE_ISFINITE */
-
-/* Define to 1 if you have the `isinf' function. */
-#define HAVE_ISINF 1
-
-/* Define to 1 if you have the `isnan' function. */
-#define HAVE_ISNAN 1
 
 /* */
 /* #undef HAVE_ISQLEXT_H */
@@ -1084,9 +1085,6 @@
 /* #undef HAVE_LIBSOCKET */
 
 /* */
-/* #undef HAVE_LIBT1 */
-
-/* */
 #define HAVE_LIBXML 1
 
 /* */
@@ -1190,11 +1188,8 @@
 /* Define to 1 if you have the `mremap' function. */
 /* #undef HAVE_MREMAP */
 
-/* */
-/* #undef HAVE_MSSQL */
-
 /* Whether you have MySQL */
-#define HAVE_MYSQL 1
+/* #undef HAVE_MYSQL */
 
 /* */
 /* #undef HAVE_MYSQLILIB */
@@ -1225,9 +1220,6 @@
 
 /* Define to 1 if you have the `nl_langinfo' function. */
 #define HAVE_NL_LANGINFO 1
-
-/* Whether you have a Netscape/iPlanet/Sun Webserver */
-/* #undef HAVE_NSAPI */
 
 /* */
 /* #undef HAVE_NSLDAP */
@@ -1269,14 +1261,14 @@
 /* */
 /* #undef HAVE_ODBC_ROUTER */
 
-/* */
-/* #undef HAVE_OLD_COMPAT_H */
-
 /* whether you have old-style readdir_r */
 /* #undef HAVE_OLD_READDIR_R */
 
 /* Define to 1 if the oniguruma library is available */
 #define HAVE_ONIG 1
+
+/* Define to enable file based caching (experimental) */
+#define HAVE_OPCACHE_FILE_CACHE 1
 
 /* Define to 1 if you have the <openssl/crypto.h> header file. */
 /* #undef HAVE_OPENSSL_CRYPTO_H */
@@ -1296,11 +1288,11 @@
 /* */
 /* #undef HAVE_ORALDAP_12 */
 
-/* Whether struct _zend_object_value is packed */
-#define HAVE_PACKED_OBJECT_VALUE 0
-
 /* */
 #define HAVE_PCRE 1
+
+/* */
+/* #undef HAVE_PCRE_JIT_SUPPORT */
 
 /* */
 /* #undef HAVE_PDO_DBLIB */
@@ -1347,11 +1339,11 @@
 /* */
 #define HAVE_PHP_SESSION 1
 
-/* Whether you have phttpd */
-/* #undef HAVE_PHTTPD */
-
 /* Define to 1 if you have the `poll' function. */
 #define HAVE_POLL 1
+
+/* Define to 1 if you have the <poll.h> header file. */
+#define HAVE_POLL_H 1
 
 /* do we have port framework? */
 /* #undef HAVE_PORT */
@@ -1479,11 +1471,11 @@
 /* Whether Reflection is enabled */
 #define HAVE_REFLECTION 1
 
-/* 1 */
-#define HAVE_REGEX_T_RE_MAGIC 1
-
 /* Define to 1 if you have the <resolv.h> header file. */
 #define HAVE_RESOLV_H 1
+
+/* */
+/* #undef HAVE_RES_NDESTROY */
 
 /* */
 /* #undef HAVE_RES_NSEARCH */
@@ -1502,9 +1494,6 @@
 
 /* */
 #define HAVE_RL_ON_NEW_LINE 1
-
-/* Whether you use Roxen */
-/* #undef HAVE_ROXEN */
 
 /* */
 /* #undef HAVE_SAPDB */
@@ -1544,6 +1533,9 @@
 
 /* Define to 1 if you have the `setproctitle' function. */
 /* #undef HAVE_SETPROCTITLE */
+
+/* Define to 1 if you have the `setrlimit' function. */
+#define HAVE_SETRLIMIT 1
 
 /* Define to 1 if you have the `setsid' function. */
 #define HAVE_SETSID 1
@@ -1693,7 +1685,7 @@
 #define HAVE_STDARG_PROTOTYPES 1
 
 /* Define to 1 if you have the <stdbool.h> header file. */
-/* #undef HAVE_STDBOOL_H */
+#define HAVE_STDBOOL_H 1
 
 /* Define to 1 if you have the <stdint.h> header file. */
 #define HAVE_STDINT_H 1
@@ -1808,9 +1800,6 @@
 /* Define to 1 if your `struct stat' has `st_rdev'. Deprecated, use
    `HAVE_STRUCT_STAT_ST_RDEV' instead. */
 #define HAVE_ST_RDEV 1
-
-/* */
-/* #undef HAVE_SYBASE_CT */
 
 /* Define to 1 if you have the `symlink' function. */
 #define HAVE_SYMLINK 1
@@ -1946,6 +1935,9 @@
 /* */
 #define HAVE_TIDY 1
 
+/* defined if tidybuffio.h exists */
+/* #undef HAVE_TIDYBUFFIO_H */
+
 /* */
 #define HAVE_TIDYOPTGETDOC 1
 
@@ -1966,10 +1958,7 @@
 #define HAVE_TM_ZONE 1
 
 /* Whether you have a working ttyname_r */
-/* #undef HAVE_TTYNAME_R */
-
-/* Define to 1 if you have the <tuxmodule.h> header file. */
-/* #undef HAVE_TUXMODULE_H */
+#define HAVE_TTYNAME_R 1
 
 /* Define to 1 if you don't have `tm_zone' but do have the external array
    `tzname'. */
@@ -2065,6 +2054,9 @@
 /* Define to 1 if you have the `wait3' function. */
 /* #undef HAVE_WAIT3 */
 
+/* Define to 1 if you have the `wait4' function. */
+/* #undef HAVE_WAIT4 */
+
 /* */
 /* #undef HAVE_WAITPID */
 
@@ -2119,9 +2111,6 @@
 /* */
 /* #undef HPUX */
 
-/* */
-#define HSREGEX 1
-
 /* iconv() is aliased to libiconv() in -liconv */
 /* #undef ICONV_ALIASED_LIBICONV */
 
@@ -2170,11 +2159,8 @@
 /* Enable core mysqlnd SSL code */
 #define MYSQLND_SSL_SUPPORTED 1
 
-/* Whether mysqlnd is enabled */
-#define MYSQL_USE_MYSQLND 1
-
 /* */
-#define NDBM_INCLUDE_FILE "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.Internal.sdk/usr/include/ndbm.h"
+#define NDBM_INCLUDE_FILE "/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.Internal.sdk/usr/include/ndbm.h"
 
 /* */
 /* #undef NEUTRINO */
@@ -2183,7 +2169,7 @@
 /* #undef NO_MINUS_C_MINUS_O */
 
 /* The highest supported ODBC version */
-#define ODBCVER 0x0300
+#define ODBCVER 0x0350
 
 /* Define to the address where bug reports for this package should be sent. */
 #define PACKAGE_BUGREPORT ""
@@ -2213,25 +2199,16 @@
 #define PHAR_HASH_OK 1
 
 /* */
-#define PHAR_HAVE_OPENSSL 1
+/* #undef PHAR_HAVE_OPENSSL */
 
 /* */
 /* #undef PHPDBG_DEBUG */
 
-/* */
-/* #undef PHP_APACHE_HAVE_CLIENT_FD */
-
-/* Whether the system supports BlowFish salt */
-#define PHP_BLOWFISH_CRYPT 1
-
 /* PHP build date */
-#define PHP_BUILD_DATE "2016-10-23"
+#define PHP_BUILD_DATE "2017-07-10"
 
 /* Define if your system has fork/vfork/CreateProcess */
 #define PHP_CAN_SUPPORT_PROC_OPEN 1
-
-/* Whether the system supports extended DES salt */
-#define PHP_EXT_DES_CRYPT 1
 
 /* fpm group name */
 #define PHP_FPM_GROUP "nobody"
@@ -2242,6 +2219,18 @@
 /* fpm user name */
 #define PHP_FPM_USER "nobody"
 
+/* Whether the compiler supports __builtin_clz */
+#define PHP_HAVE_BUILTIN_CLZ 1
+
+/* Whether the compiler supports __builtin_ctzl */
+#define PHP_HAVE_BUILTIN_CTZL 1
+
+/* Whether the compiler supports __builtin_ctzll */
+#define PHP_HAVE_BUILTIN_CTZLL 1
+
+/* Whether the compiler supports __builtin_expect */
+#define PHP_HAVE_BUILTIN_EXPECT 1
+
 /* Checked for stdint types */
 #define PHP_HAVE_STDINT_TYPES 1
 
@@ -2249,16 +2238,13 @@
 /* #undef PHP_HPUX_TIME_R */
 
 /* Path to iconv.h */
-#define PHP_ICONV_H_PATH </Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.Internal.sdk/usr/include/iconv.h>
+#define PHP_ICONV_H_PATH </BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.Internal.sdk/usr/include/iconv.h>
 
 /* Which iconv implementation to use */
 #define PHP_ICONV_IMPL "libiconv"
 
 /* Whether you have IRIX-style functions */
 /* #undef PHP_IRIX_TIME_R */
-
-/* Whether the system supports MD5 salt */
-#define PHP_MD5_CRYPT 1
 
 /* */
 /* #undef PHP_MHASH_BC */
@@ -2290,20 +2276,11 @@
 /* whether pwrite64 is default */
 /* #undef PHP_PWRITE_64 */
 
-/* Whether the system supports SHA256 salt */
-#define PHP_SHA256_CRYPT 1
-
-/* Whether the system supports SHA512 salt */
-#define PHP_SHA512_CRYPT 1
-
 /* */
 #define PHP_SIGCHILD 0
 
-/* Whether the system supports standard DES salt */
-#define PHP_STD_DES_CRYPT 1
-
 /* uname -a output */
-#define PHP_UNAME "Darwin osx300.apple.com 16.0 Darwin Kernel Version 15.0.0: Wed Apr 6 00:55:38 PDT 2016; root:xnu-3247.1.106.2.8~1/DEVELOPMENT_X86_64 x86_64"
+#define PHP_UNAME "Darwin osx347.sd.apple.com 17.0 Darwin Kernel Version 16.1.0: Wed May 17 11:07:20 PDT 2017; root:xnu-3789.21.4.1.5~1/DEVELOPMENT_X86_64 x86_64"
 
 /* Whether PHP has to use its own crypt_r for blowfish, des and ext des */
 #define PHP_USE_PHP_CRYPT_R 1
@@ -2320,14 +2297,8 @@
 /* */
 /* #undef QDBM_INCLUDE_FILE */
 
-/* */
-#define REGEX 1
-
 /* Define as the return type of signal handlers (`int' or `void'). */
 #define RETSIGTYPE void
-
-/* Whether to use Roxen in ZTS mode */
-/* #undef ROXEN_USE_ZTS */
 
 /* The size of `char', as computed by sizeof. */
 #define SIZEOF_CHAR 1
@@ -2446,15 +2417,6 @@
 #endif
 
 
-/* */
-/* #undef USE_TRANSFER_TABLES */
-
-/* whether you want Pi3Web support */
-/* #undef WITH_PI3WEB */
-
-/* */
-/* #undef WITH_ZEUS */
-
 /* Define if processor uses big-endian word */
 /* #undef WORDS_BIGENDIAN */
 
@@ -2474,10 +2436,7 @@
 #define ZEND_MM_ALIGNMENT_LOG2 3
 
 /* Use zend signal handling */
-/* #undef ZEND_SIGNALS */
-
-/* virtual machine dispatch method */
-#define ZEND_VM_KIND ZEND_VM_KIND_CALL
+#define ZEND_SIGNALS 1
 
 /* */
 /* #undef ZTS */
@@ -2554,36 +2513,36 @@ int zend_sprintf(char *buffer, const char *format, ...);
 
 /* To enable the is_nan, is_infinite and is_finite PHP functions */
 #ifdef NETWARE
-	#define HAVE_ISNAN 1
-	#define HAVE_ISINF 1
-	#define HAVE_ISFINITE 1
+	#define HAVE_DECL_ISNAN 1
+	#define HAVE_DECL_ISINF 1
+	#define HAVE_DECL_ISFINITE 1
 #endif
 
 #ifndef zend_isnan
-#ifdef HAVE_ISNAN
+#if HAVE_DECL_ISNAN
 #define zend_isnan(a) isnan(a)
 #elif defined(HAVE_FPCLASS)
 #define zend_isnan(a) ((fpclass(a) == FP_SNAN) || (fpclass(a) == FP_QNAN))
 #else
-#define zend_isnan(a) 0
+#define zend_isnan(a) ((a) != (a))
 #endif
 #endif
 
-#ifdef HAVE_ISINF
+#if HAVE_DECL_ISINF
 #define zend_isinf(a) isinf(a)
 #elif defined(INFINITY)
 /* Might not work, but is required by ISO C99 */
-#define zend_isinf(a) (((a)==INFINITY)?1:0)
+#define zend_isinf(a) (((a)==INFINITY || (a)==-INFINITY)?1:0)
 #elif defined(HAVE_FPCLASS)
 #define zend_isinf(a) ((fpclass(a) == FP_PINF) || (fpclass(a) == FP_NINF))
 #else
 #define zend_isinf(a) 0
 #endif
 
-#ifdef HAVE_FINITE
-#define zend_finite(a) finite(a)
-#elif defined(HAVE_ISFINITE) || defined(isfinite)
+#if HAVE_DECL_ISFINITE
 #define zend_finite(a) isfinite(a)
+#elif defined(HAVE_FINITE)
+#define zend_finite(a) finite(a)
 #elif defined(fpclassify)
 #define zend_finite(a) ((fpclassify((a))!=FP_INFINITE&&fpclassify((a))!=FP_NAN)?1:0)
 #else

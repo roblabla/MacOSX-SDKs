@@ -2,7 +2,7 @@
  *	CTGlyphInfo.h
  *	CoreText
  *
- *	Copyright (c) 2006-2015 Apple Inc. All rights reserved.
+ *	Copyright (c) 2006-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -39,7 +39,7 @@ typedef const struct CF_BRIDGED_TYPE(NSGlyphInfo) __CTGlyphInfo * CTGlyphInfoRef
 	@abstract	Returns the CFType of the glyph info object
 */
 
-CFTypeID CTGlyphInfoGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTGlyphInfoGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -71,19 +71,25 @@ CFTypeID CTGlyphInfoGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 typedef CF_ENUM(uint16_t, CTCharacterCollection) {
-	kCTCharacterCollectionIdentityMapping CT_ENUM_AVAILABLE(10_8, 6_0) = 0,
-	kCTCharacterCollectionAdobeCNS1       CT_ENUM_AVAILABLE(10_8, 6_0) = 1,
-	kCTCharacterCollectionAdobeGB1        CT_ENUM_AVAILABLE(10_8, 6_0) = 2,
-	kCTCharacterCollectionAdobeJapan1     CT_ENUM_AVAILABLE(10_8, 6_0) = 3,
-	kCTCharacterCollectionAdobeJapan2     CT_ENUM_AVAILABLE(10_8, 6_0) = 4,
-	kCTCharacterCollectionAdobeKorea1     CT_ENUM_AVAILABLE(10_8, 6_0) = 5,
+	kCTCharacterCollectionIdentityMapping = 0,
+	kCTCharacterCollectionAdobeCNS1       = 1,
+	kCTCharacterCollectionAdobeGB1        = 2,
+	kCTCharacterCollectionAdobeJapan1     = 3,
+	kCTCharacterCollectionAdobeJapan2     = 4,
+	kCTCharacterCollectionAdobeKorea1     = 5,
 
-	kCTIdentityMappingCharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionIdentityMapping,
-	kCTAdobeCNS1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeCNS1,
-	kCTAdobeGB1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeGB1,
-	kCTAdobeJapan1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeJapan1,
-	kCTAdobeJapan2CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeJapan2,
-	kCTAdobeKorea1CharacterCollection CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTCharacterCollectionAdobeKorea1
+	kCTIdentityMappingCharacterCollection CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTCharacterCollectionIdentityMapping,
+	kCTAdobeCNS1CharacterCollection CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTCharacterCollectionAdobeCNS1,
+	kCTAdobeGB1CharacterCollection CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTCharacterCollectionAdobeGB1,
+	kCTAdobeJapan1CharacterCollection CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTCharacterCollectionAdobeJapan1,
+	kCTAdobeJapan2CharacterCollection CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTCharacterCollectionAdobeJapan2,
+	kCTAdobeKorea1CharacterCollection CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTCharacterCollectionAdobeKorea1
 };
 
 
@@ -114,7 +120,7 @@ typedef CF_ENUM(uint16_t, CTCharacterCollection) {
 CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
 	CFStringRef glyphName,
 	CTFontRef font,
-	CFStringRef baseString ) CT_AVAILABLE(10_5, 3_2);
+	CFStringRef baseString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -140,7 +146,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyphName(
 CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
 	CGGlyph glyph,
 	CTFontRef font,
-	CFStringRef baseString ) CT_AVAILABLE(10_5, 3_2);
+	CFStringRef baseString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -166,7 +172,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithGlyph(
 CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
 	CGFontIndex cid,
 	CTCharacterCollection collection,
-	CFStringRef baseString ) CT_AVAILABLE(10_5, 3_2);
+	CFStringRef baseString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -187,7 +193,7 @@ CTGlyphInfoRef CTGlyphInfoCreateWithCharacterIdentifier(
 */
 
 CFStringRef __nullable CTGlyphInfoGetGlyphName(
-	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(10_5, 3_2);
+	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -204,7 +210,7 @@ CFStringRef __nullable CTGlyphInfoGetGlyphName(
 */
 
 CGFontIndex CTGlyphInfoGetCharacterIdentifier(
-	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(10_5, 3_2);
+	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -224,7 +230,7 @@ CGFontIndex CTGlyphInfoGetCharacterIdentifier(
 */
 
 CTCharacterCollection CTGlyphInfoGetCharacterCollection(
-	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(10_5, 3_2);
+	CTGlyphInfoRef glyphInfo ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

@@ -2,27 +2,69 @@
 //  INMessage.h
 //  Intents
 //
-//  Copyright © 2016 Apple. All rights reserved.
+//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 @class INPerson;
+@class INSpeakableString;
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macosx(10.12), ios(10.0))
+typedef NS_ENUM(NSInteger, INMessageType) {
+    INMessageTypeUnspecified = 0,
+    INMessageTypeText,
+    INMessageTypeAudio,
+    INMessageTypeDigitalTouch,
+    INMessageTypeHandwriting,
+    INMessageTypeSticker,
+    INMessageTypeTapbackLiked,
+    INMessageTypeTapbackDisliked,
+    INMessageTypeTapbackEmphasized,
+    INMessageTypeTapbackLoved,
+    INMessageTypeTapbackQuestioned,
+    INMessageTypeTapbackLaughed,
+    INMessageTypeMediaCalendar,
+    INMessageTypeMediaLocation,
+    INMessageTypeMediaAddressCard,
+    INMessageTypeMediaImage,
+    INMessageTypeMediaVideo,
+    INMessageTypeMediaPass,
+    INMessageTypeMediaAudio,
+} API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+
+API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
 @interface INMessage : NSObject <NSCopying, NSSecureCoding>
 
 - (id)init NS_UNAVAILABLE;
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
+            conversationIdentifier:(nullable NSString *)conversationIdentifier
                            content:(nullable NSString *)content
                           dateSent:(nullable NSDate *)dateSent
                             sender:(nullable INPerson *)sender
-                        recipients:(nullable NSArray<INPerson *> *)recipients NS_DESIGNATED_INITIALIZER;
+                        recipients:(nullable NSArray<INPerson *> *)recipients
+                         groupName:(nullable INSpeakableString *)groupName
+                       messageType:(INMessageType)messageType NS_DESIGNATED_INITIALIZER API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+            conversationIdentifier:(nullable NSString *)conversationIdentifier
+                           content:(nullable NSString *)content
+                          dateSent:(nullable NSDate *)dateSent
+                            sender:(nullable INPerson *)sender
+                        recipients:(nullable NSArray<INPerson *> *)recipients
+                       messageType:(INMessageType)messageType API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+                           content:(nullable NSString *)content
+                          dateSent:(nullable NSDate *)dateSent
+                            sender:(nullable INPerson *)sender
+                        recipients:(nullable NSArray<INPerson *> *)recipients;
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *identifier;
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *conversationIdentifier API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *content;
 
@@ -31,6 +73,10 @@ API_AVAILABLE(macosx(10.12), ios(10.0))
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INPerson *sender;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSArray<INPerson *> *recipients;
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INSpeakableString *groupName API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
+
+@property (readonly, NS_NONATOMIC_IOSONLY) INMessageType messageType API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0));
 
 @end
 

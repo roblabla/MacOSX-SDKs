@@ -1,7 +1,7 @@
 /*
 	NSWindowRestoration.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
  */
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  Note that the receiver may invoke the completion handler before or after the method returns, and on any queue.  If you plan to invoke the completion handler after the method returns, you must copy the completion handler via the -copy method, and -release it after you invoke it.  It is not necessary or recommended for implementations of this method to order restored windows onscreen (for example, the window may have been minimized, in which case it will not be ordered onscreen).
  
  */
-+ (void)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
++ (void)restoreWindowWithIdentifier:(NSUserInterfaceItemIdentifier)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
 @end
 
 /* NSDocumentController implements the NSWindowRestoration protocol.  It is set as the restoration class for document windows.  You may subclass it and override the restoreWindowWithIdentifier:state:completionHandler: method to control how documents are restored. */
@@ -40,7 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
  
  Unlike the class-level counterpart, this method returns BOOL.  A YES return means that the window is recognized and that the completion handler will be called (or has already been called).  A NO return means that the window was not recognized and the completion handler will not be called.  If you override this and return YES, it is important that the completion handler be called, even if the window you pass to it is nil; otherwise the app will never finish restoring its state.
 */
-- (BOOL)restoreWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
+- (BOOL)restoreWindowWithIdentifier:(NSUserInterfaceItemIdentifier)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -69,9 +69,14 @@ APPKIT_EXTERN NSNotificationName const NSApplicationDidFinishRestoringWindowsNot
 
 @interface NSResponder (NSRestorableState)
 
-/* Method called to save the restorable state.  The receiver is passed an NSCoder that supports keyed encoding (but not decoding), and should encode its restorable state. If you override this method, you should call through to super.  You should not otherwise invoke this method.  If you encode an object that implements the NSUserInterfaceItemIdentification protocol, the object itself is not archived; only its identifier is stored.  Thus, for example, a window may efficiently store its firstResponder as restorable state.
+/* Method called on the main thread to save the receiver's restorable state.  The receiver is passed an NSCoder that supports keyed encoding (but not decoding), and should encode its restorable state. If you override this method, you should call through to super.  You should not otherwise invoke this method.  If you encode an object that implements the NSUserInterfaceItemIdentification protocol, the object itself is not archived; only its identifier is stored.  Thus, for example, a window may efficiently store its firstResponder as restorable state. If you have objects which may take a long time to fetch or encode, consider implementing encodeRestorableStateWithCoder:backgroundQueue: instead of this method.
  */
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
+
+/* A variant of encodeRestorableStateWithCoder:. This method is also called on the main thread, and the receiver may use the provided thread-safe NSCoder to encode restorable state synchronously. In addition, the receiver may enqueue asynchronous work that will encode additional restorable state using the provided serial background NSOperationQueue, if that state is safe to be accessed and encoded in such a fashion. Encoding will be considered finished once the enqueued operations are finished. If you override this method, you should call through to super. You should not otherwise invoke this method.
+ */
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder backgroundQueue:(NSOperationQueue *)queue NS_AVAILABLE_MAC(10_13);
+
 
 /* Method called to restore state.  The receiver is passed an NSCoder that supports keyed decoding (but not encoding).  The receiver should decode any previously stored state.  If you override this method, you should call through to super.  You should not otherwise invoke this method.
 */
@@ -85,7 +90,7 @@ APPKIT_EXTERN NSNotificationName const NSApplicationDidFinishRestoringWindowsNot
 
 /* Returns a set of key paths, representing paths of properties that should be persistent.  The frameworks will observe these key paths via KVO and automatically persist their values as part of the persistent state, and restore them on relaunch.  The values of the key paths should implement keyed archiving.  The base implementation returns an empty array.
 */
-+ (NSArray<NSString *> *)restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
+@property (class, readonly, copy) NSArray<NSString *> *restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
 
 @end
 
@@ -113,13 +118,14 @@ APPKIT_EXTERN NSNotificationName const NSApplicationDidFinishRestoringWindowsNot
 
 If your document has variable or optional windows, you may override this to create the requested window, and then call the completion handler with it.  This allows you to use the default document reopening behavior, but intervene at the point of creating the windows.  The parameters are the same as in the class method +restoreWindowWithIdentifier:state:completionHandler:. 
 */
-- (void)restoreDocumentWindowWithIdentifier:(NSString *)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
+- (void)restoreDocumentWindowWithIdentifier:(NSUserInterfaceItemIdentifier)identifier state:(NSCoder *)state completionHandler:(void (^)(NSWindow * __nullable, NSError * __nullable))completionHandler NS_AVAILABLE_MAC(10_7);
 
 /* NSDocument implements the NSRestorableState methods, even though it itself is not an NSResponder. */
 - (void)encodeRestorableStateWithCoder:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
+- (void)encodeRestorableStateWithCoder:(NSCoder *)coder backgroundQueue:(NSOperationQueue *)queue NS_AVAILABLE_MAC(10_13);
 - (void)restoreStateWithCoder:(NSCoder *)coder NS_AVAILABLE_MAC(10_7);
 - (void)invalidateRestorableState NS_AVAILABLE_MAC(10_7);
-+ (NSArray<NSString *> *)restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
+@property (class, readonly, copy) NSArray<NSString *> *restorableStateKeyPaths NS_AVAILABLE_MAC(10_7);
 
 @end
 

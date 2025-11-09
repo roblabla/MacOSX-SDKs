@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 30CDCF9F-6FC8-3786-B0B0-5BE5D8C13DCD', 'x86_64: 0E8DACB6-C3EF-3611-AAAE-7827D9E1242E' ]
+uuids:           [ 'i386: ACE85ADB-5BE5-3CF5-ABA6-903D104248EF', 'x86_64: B56795B8-282D-3125-88F2-AE098BC99992' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/GameKit.framework/Versions/A/GameKit
-current-version: 471.2.105
-objc-constraint: none
+current-version: 547
 exports:         
   - archs:           [ x86_64 ]
     re-exports:      [ /System/Library/Frameworks/GameController.framework/Versions/A/GameController, 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -218,7 +218,8 @@ struct vfsstatfs {
 #define MNT_NOUSERXATTR	0x01000000	/* Don't allow user extended attributes */
 #define MNT_DEFWRITE	0x02000000	/* filesystem should defer writes */
 #define MNT_MULTILABEL	0x04000000	/* MAC support for individual labels */
-#define MNT_NOATIME	0x10000000	/* disable update of file access time */
+#define MNT_NOATIME		0x10000000	/* disable update of file access time */
+#define MNT_SNAPSHOT	0x40000000 /* The mount is a snapshot */
 
 /* backwards compatibility only */
 #define MNT_UNKNOWNPERMISSIONS MNT_IGNORE_OWNERSHIP
@@ -235,7 +236,7 @@ struct vfsstatfs {
 			MNT_ROOTFS	| MNT_DOVOLFS	| MNT_DONTBROWSE | \
 			MNT_IGNORE_OWNERSHIP | MNT_AUTOMOUNTED | MNT_JOURNALED | \
 			MNT_NOUSERXATTR | MNT_DEFWRITE	| MNT_MULTILABEL | \
-			MNT_NOATIME | MNT_CPROTECT)
+			MNT_NOATIME | MNT_SNAPSHOT | MNT_CPROTECT)
 /*
  * External filesystem command modifier flags.
  * Unmount can use the MNT_FORCE flag.
@@ -356,8 +357,8 @@ struct netfs_status {
 #define VQ_SYNCEVENT	0x0400	/* a sync just happened (not set by kernel starting Mac OS X 10.9) */
 #define VQ_SERVEREVENT  0x0800  /* server issued notification/warning */
 #define VQ_QUOTA	0x1000	/* a user quota has been hit */
-#define VQ_FLAG2000	0x2000	/* placeholder */
-#define VQ_FLAG4000	0x4000	/* placeholder */
+#define VQ_NEARLOWDISK		0x2000	/* Above lowdisk and below desired disk space */
+#define VQ_DESIRED_DISK 	0x4000	/* the desired disk space */
 #define VQ_FLAG8000	0x8000	/* placeholder */
 
 
@@ -389,10 +390,14 @@ int	getfsstat(struct statfs *, int, int) __DARWIN_INODE64(getfsstat);
 int	getfsstat64(struct statfs64 *, int, int) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 #endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 int	getmntinfo(struct statfs **, int) __DARWIN_INODE64(getmntinfo);
+int	getmntinfo_r_np(struct statfs **, int) __DARWIN_INODE64(getmntinfo_r_np) 
+	    __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11.0)
+	    __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0);
 #if !__DARWIN_ONLY_64_BIT_INO_T
 int	getmntinfo64(struct statfs64 **, int) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);
 #endif /* !__DARWIN_ONLY_64_BIT_INO_T */
 int	mount(const char *, const char *, int, void *);
+int	fmount(const char *, int, int, void *) __OSX_AVAILABLE(10.13) __IOS_AVAILABLE(11.0) __TVOS_AVAILABLE(11.0) __WATCHOS_AVAILABLE(4.0);
 int	statfs(const char *, struct statfs *) __DARWIN_INODE64(statfs);
 #if !__DARWIN_ONLY_64_BIT_INO_T
 int	statfs64(const char *, struct statfs64 *) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_5,__MAC_10_6,__IPHONE_NA,__IPHONE_NA);

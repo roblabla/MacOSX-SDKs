@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6EF0D333-B8D5-30DD-9EF6-31C11F352C47' ]
+uuids:           [ 'x86_64: ABB1CB2D-E82C-317F-8E6E-032C3FB116B9' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/acfs.framework/Versions/A/acfs
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CFXsanErrorDomain, _GetXsanConfigEssentials, _buildRevisionStringFromConfig, 

@@ -44,6 +44,6 @@
                 IMSessionPropertyIdleDate       - the time of the last user activity
                 IMSessionPropertyIsInvisible    - If YES, the user wishes to appear offline to other users
 */
-- (oneway void) updateSessionProperties:(NSDictionary *)properties;
+- (oneway void) updateSessionProperties:(NSDictionary *)properties NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end

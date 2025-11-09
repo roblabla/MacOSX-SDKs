@@ -1,7 +1,7 @@
 /*
 	NSScroller.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -107,7 +107,7 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 - It can deal with the fact that scroller arrows no longer exist, and -rectForPart: returns empty rects for them.
 - It can accommodate the potentially different size and layout metrics used by Overlay scrollers.
 */
-+ (BOOL)isCompatibleWithOverlayScrollers NS_AVAILABLE_MAC(10_7);
+@property (class, readonly, getter=isCompatibleWithOverlayScrollers) BOOL compatibleWithOverlayScrollers NS_AVAILABLE_MAC(10_7);
 
 /* Returns the with for scrollers of the receiving class, given the specified controlSize and scrollerStyle.  This method should be used in preference to +scrollerWidthForControlSize:, which assumes a scrollerStyle of NSScrollerStyleLegacy, and +scrollerWidth:, which assumes that and a controlSize of NSRegularControlSize.
 */
@@ -123,7 +123,7 @@ When it opts in in this manner, an NSScroller subclass certifies that:
 
 /* Returns the style of scrollers that applications should use wherever possible.  This value is determined by the Appearance preference panel's "Show scroll bars" setting for the current user, and -- when the user's prefernce is set to "Automatically based on input device" -- by the set of built-in and connected pointing devices and the user's scroll capability preference settings for them.  The preferredScrollerStyle will therefore change over time, and applications should be prepared to adapt their user interfaces to the new scroller style if needed.  In most cases, the updating is automatic: When the preferredScrollerStyle changes, AppKit notifies all NSScrollView instances, sending -setScrollerStyle: to each with the new style, which causees each NSScrollView to automatically re-tile (update its layout) to adapt to the new scroller style.  Some NSScrollView instances may refuse the new scroller style setting if they cannot accommodate it for compatibility reasons (presence of accessory views or legacy scroller subclasses prevent use of Overlay scrollers), but most instances will switch to the specified new preferredScrollerStyle.  Clients that wish to be notified of changes to +preferredScrollerStyle's return value can subscribe to NSPreferredScrollerStyleDidChangeNotification (declared below).
 */
-+ (NSScrollerStyle)preferredScrollerStyle NS_AVAILABLE_MAC(10_7);
+@property (class, readonly) NSScrollerStyle preferredScrollerStyle NS_AVAILABLE_MAC(10_7);
 
 /* Accessors for scroller's style.  For a scroller that's managed by an NSScrollView, the setter is automatically invoked by the ScrollView with the appropriate setting, according to the user's Appearance preference settings and possibly what pointing device(s) are present.
 */

@@ -1,5 +1,5 @@
 /*	NSHashTable.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSPointerFunctions.h>
@@ -17,13 +17,13 @@ NS_ASSUME_NONNULL_BEGIN
    An NSHashTable can also be configured to operate on arbitrary pointers and not just objects.  We recommend the C function API for "void *" access.  To configure for pointer use, consult and choose the appropriate NSPointerFunctionsOptions or configure or use an NSPointerFunctions object itself for initialization.
 */
 
-static const NSPointerFunctionsOptions NSHashTableStrongMemory NS_AVAILABLE(10_5, 6_0) = NSPointerFunctionsStrongMemory;
+static const NSPointerFunctionsOptions NSHashTableStrongMemory API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsStrongMemory;
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
-static const NSPointerFunctionsOptions NSHashTableZeroingWeakMemory NS_DEPRECATED_MAC(10_5, 10_8) = NSPointerFunctionsZeroingWeakMemory;
+static const NSPointerFunctionsOptions NSHashTableZeroingWeakMemory API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos) = NSPointerFunctionsZeroingWeakMemory;
 #endif
-static const NSPointerFunctionsOptions NSHashTableCopyIn NS_AVAILABLE(10_5, 6_0) = NSPointerFunctionsCopyIn;
-static const NSPointerFunctionsOptions NSHashTableObjectPointerPersonality NS_AVAILABLE(10_5, 6_0) = NSPointerFunctionsObjectPointerPersonality;
-static const NSPointerFunctionsOptions NSHashTableWeakMemory NS_AVAILABLE(10_8, 6_0) = NSPointerFunctionsWeakMemory;
+static const NSPointerFunctionsOptions NSHashTableCopyIn API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsCopyIn;
+static const NSPointerFunctionsOptions NSHashTableObjectPointerPersonality API_AVAILABLE(macos(10.5), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsObjectPointerPersonality;
+static const NSPointerFunctionsOptions NSHashTableWeakMemory API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)) = NSPointerFunctionsWeakMemory;
 
 typedef NSUInteger NSHashTableOptions;
 
@@ -38,10 +38,10 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 + (NSHashTable<ObjectType> *)hashTableWithOptions:(NSPointerFunctionsOptions)options;
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_WIN32
-+ (id)hashTableWithWeakObjects NS_DEPRECATED_MAC(10_5, 10_8);  // GC zeroing, otherwise unsafe unretained
++ (id)hashTableWithWeakObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos);  // GC zeroing, otherwise unsafe unretained
 #endif
 
-+ (NSHashTable<ObjectType> *)weakObjectsHashTable NS_AVAILABLE(10_8, 6_0); // entries are not necessarily purged right away when the weak object is reclaimed
++ (NSHashTable<ObjectType> *)weakObjectsHashTable API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0)); // entries are not necessarily purged right away when the weak object is reclaimed
 
 
 /* return an NSPointerFunctions object reflecting the functions in use.  This is a new autoreleased object that can be subsequently modified and/or used directly in the creation of other pointer "collections". */
@@ -115,14 +115,14 @@ FOUNDATION_EXPORT NSHashTable *NSCreateHashTableWithZone(NSHashTableCallBacks ca
 FOUNDATION_EXPORT NSHashTable *NSCreateHashTable(NSHashTableCallBacks callBacks, NSUInteger capacity);
 
 
-FOUNDATION_EXPORT const NSHashTableCallBacks NSIntegerHashCallBacks NS_AVAILABLE_MAC(10_5);
+FOUNDATION_EXPORT const NSHashTableCallBacks NSIntegerHashCallBacks API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 FOUNDATION_EXPORT const NSHashTableCallBacks NSNonOwnedPointerHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSNonRetainedObjectHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSObjectHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSOwnedObjectIdentityHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSOwnedPointerHashCallBacks;
 FOUNDATION_EXPORT const NSHashTableCallBacks NSPointerToStructHashCallBacks;
-FOUNDATION_EXPORT const NSHashTableCallBacks NSIntHashCallBacks NS_DEPRECATED_MAC(10_0, 10_5);
+FOUNDATION_EXPORT const NSHashTableCallBacks NSIntHashCallBacks API_DEPRECATED("Not supported", macos(10.0,10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 NS_ASSUME_NONNULL_END
 

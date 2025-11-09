@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 8FFF7D4A-0F63-3FC6-8FC7-F2B3AF33AD79', 'x86_64: 02CD6212-0A89-3BB5-888C-07B5E1F0A90A' ]
+uuids:           [ 'i386: B546A8C4-8517-37F9-809A-0F6A1900C8BE', 'x86_64: 303F2B5B-A245-3655-BE4F-6F0A22923A8F' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CoreDAV.framework/Versions/A/CoreDAV
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _CardDAVAddressBookContainer._maxImageSize, _CardDAVAddressBookContainer._maxResourceSize, 
@@ -73,6 +72,7 @@ exports:
                        _CoreDAVContainerSyncTaskGroup._unsubmittedTasks, _CoreDAVContainerSyncTaskGroup._urlToETag, 
                        _CoreDAVContainerSyncTaskGroup._useMultiGet, _CoreDAVContainerSyncTaskGroup._useSyncCollection, 
                        _CoreDAVCopyOrMoveTask._destinationURL, _CoreDAVCopyOrMoveTask._overwrite, 
+                       _CoreDAVCopyOrMoveTask._priorOrderedURL, _CoreDAVCopyOrMoveTask._shouldSendOrder, 
                        _CoreDAVCurrentUserPrincipalItem._href, _CoreDAVCurrentUserPrincipalItem._unauthenticated, 
                        _CoreDAVCurrentUserPrivilegeSetItem._privileges, _CoreDAVDeleteTask._previousETag, 
                        _CoreDAVDenyItem._privileges, _CoreDAVDiscoveryAccountInfo._accountID, 
@@ -251,9 +251,10 @@ exports:
                        _CoreDAVHTTPHeaders, _CoreDAVHTTPStatusErrorDomain, _CoreDAVSRVLookupTask_SRVHostClientCallback, 
                        __CDVTaskLogInternal, __CoreDAVSecCopyIdentityFromPersist, 
                        __CoreDAVSecDeleteIdentityByPersistentRef, __CoreDAVSecIdentityCopySSLClientAuthenticationChain, 
-                       _cdXMLACE, _cdXMLACL, _cdXMLAddMember, _cdXMLAll, _cdXMLAllProp, 
-                       _cdXMLAppleBookmarksURI, _cdXMLAppleExtraAttributes, _cdXMLApplyToPrincipalCollectionSet, 
-                       _cdXMLAuthenticated, _cdXMLBind, _cdXMLCalDAVAnyOf, _cdXMLCalDAVCalendarFreeBusyReport, 
+                       __systemVersionDict, _cdXMLACE, _cdXMLACL, _cdXMLAddMember, 
+                       _cdXMLAll, _cdXMLAllProp, _cdXMLAppleBookmarksURI, _cdXMLAppleExtraAttributes, 
+                       _cdXMLApplyToPrincipalCollectionSet, _cdXMLAuthenticated, 
+                       _cdXMLBind, _cdXMLCalDAVAnyOf, _cdXMLCalDAVCalendarFreeBusyReport, 
                        _cdXMLCalDAVCalendarHomeSet, _cdXMLCalDAVCalendarMultiGetReport, 
                        _cdXMLCalDAVCalendarQueryReport, _cdXMLCalDAVCalendarSearchReport, 
                        _cdXMLCalDAVInboxURL, _cdXMLCalDAVLimit, _cdXMLCalDAVNResults, 
@@ -268,13 +269,14 @@ exports:
                        _cdXMLCalendarServerEmailAddressSet, _cdXMLCalendarServerGetCTag, 
                        _cdXMLCalendarServerLanguage, _cdXMLCalendarServerLastModifiedBy, 
                        _cdXMLCalendarServerMatchResults, _cdXMLCalendarServerNotificationURL, 
-                       _cdXMLCalendarServerPrivateComments, _cdXMLCalendarServerPublishURL, 
-                       _cdXMLCalendarServerPushKey, _cdXMLCalendarServerPushTransports, 
-                       _cdXMLCalendarServerReadFreeBusy, _cdXMLCalendarServerRefreshInterval, 
-                       _cdXMLCalendarServerRegion, _cdXMLCalendarServerShared, _cdXMLCalendarServerSource, 
-                       _cdXMLCalendarServerSubscribedStripAlarms, _cdXMLCalendarServerSubscribedStripAttachments, 
-                       _cdXMLCalendarServerSubscribedStripTodos, _cdXMLCalendarServerSubscriptionURL, 
-                       _cdXMLCalendarServerTitle, _cdXMLCalendarServerTokenURL, _cdXMLCalendarServerTransport, 
+                       _cdXMLCalendarServerPhoneNumber, _cdXMLCalendarServerPrivateComments, 
+                       _cdXMLCalendarServerPublishURL, _cdXMLCalendarServerPushKey, 
+                       _cdXMLCalendarServerPushTransports, _cdXMLCalendarServerReadFreeBusy, 
+                       _cdXMLCalendarServerRefreshInterval, _cdXMLCalendarServerRegion, 
+                       _cdXMLCalendarServerShared, _cdXMLCalendarServerSource, _cdXMLCalendarServerSubscribedStripAlarms, 
+                       _cdXMLCalendarServerSubscribedStripAttachments, _cdXMLCalendarServerSubscribedStripTodos, 
+                       _cdXMLCalendarServerSubscriptionURL, _cdXMLCalendarServerTitle, 
+                       _cdXMLCalendarServerTokenURL, _cdXMLCalendarServerTransport, 
                        _cdXMLCalendarServerUID, _cdXMLCalendarServerURI, _cdXMLCalendarServerXMPPHeartbeatMinutes, 
                        _cdXMLCalendarServerXMPPHeartbeatURI, _cdXMLCalendarServerXMPPServer, 
                        _cdXMLCalendarServerXMPPURI, _cdXMLCalendarTimeZone, _cdXMLCardDAVAddressBook, 

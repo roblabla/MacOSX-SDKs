@@ -1,6 +1,6 @@
 /* CoreAnimation - CAValueFunction.h
 
-   Copyright (c) 2008-2016, Apple Inc.
+   Copyright (c) 2008-2017, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CABase.h>
@@ -9,7 +9,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 CA_CLASS_AVAILABLE (10.6, 3.0, 9.0, 2.0)
-@interface CAValueFunction : NSObject <NSCoding>
+@interface CAValueFunction : NSObject <NSSecureCoding>
 {
 @protected
   NSString *_string;

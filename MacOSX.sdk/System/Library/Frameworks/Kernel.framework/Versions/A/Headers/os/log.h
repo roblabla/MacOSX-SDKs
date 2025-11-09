@@ -48,7 +48,8 @@ __BEGIN_DECLS
 
 extern void *__dso_handle;
 
-OS_ALWAYS_INLINE static inline void _os_log_verify_format_str(__unused const char *msg, ...) __attribute__((format(os_trace, 1, 2)));
+
+OS_ALWAYS_INLINE static inline void _os_log_verify_format_str(__unused const char *msg, ...) __attribute__((format(os_log, 1, 2)));
 OS_ALWAYS_INLINE static inline void _os_log_verify_format_str(__unused const char *msg, ...) { /* placeholder */ }
 
 #if OS_OBJECT_USE_OBJC
@@ -484,6 +485,7 @@ os_log_debug_enabled(os_log_t log);
     _os_log_sensitive(&__dso_handle, log, OS_LOG_TYPE_DEBUG, _os_log_fmt, ##__VA_ARGS__);                             \
     __asm__(""); /* avoid tailcall */                                                                                 \
 })
+
 
 /*!
  * @function _os_log_internal

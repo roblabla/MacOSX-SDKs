@@ -5,13 +5,13 @@
  *	@copyright 2011 Apple, Inc. All rights reserved.
  */
 
-#import <CoreBluetooth/CBDefines.h>
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
 
-#import <Foundation/Foundation.h>
+#import <CoreBluetooth/CBAttribute.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class CBCharacteristic, CBUUID;
 
 /*!
  * @class CBDescriptor
@@ -21,17 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
-CB_EXTERN_CLASS @interface CBDescriptor : NSObject
-{
-@protected
-	CBCharacteristic	*_characteristic;
-	CBUUID				*_UUID;
-	
-	id					 _value;
-	
-	CBPeripheral		*_peripheral;
-	NSNumber			*_handle;
-}
+CB_EXTERN_CLASS @interface CBDescriptor : CBAttribute
 
 /*!
  *  @property characteristic
@@ -41,15 +31,6 @@ CB_EXTERN_CLASS @interface CBDescriptor : NSObject
  *
  */
 @property(assign, readonly, nonatomic) CBCharacteristic *characteristic;
-
-/*!
- *  @property UUID
- *
- *  @discussion
- *      The Bluetooth UUID of the descriptor.
- *
- */
-@property(readonly, nonatomic) CBUUID *UUID;
 
 /*!
  *  @property value
@@ -75,10 +56,6 @@ CB_EXTERN_CLASS @interface CBDescriptor : NSObject
  */
 NS_CLASS_AVAILABLE(10_9, 6_0)
 CB_EXTERN_CLASS @interface CBMutableDescriptor : CBDescriptor
-{
-@private
-	NSNumber *_ID;
-}
 
 /*!
  *  @method initWithType:value:
@@ -90,7 +67,7 @@ CB_EXTERN_CLASS @interface CBMutableDescriptor : CBDescriptor
  *					once the parent service has been published.
  *
  */
-- (id)initWithType:(CBUUID *)UUID value:(nullable id)value;
+- (instancetype)initWithType:(CBUUID *)UUID value:(nullable id)value NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 @end
 

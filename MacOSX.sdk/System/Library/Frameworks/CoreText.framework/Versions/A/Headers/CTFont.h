@@ -2,7 +2,7 @@
  *  CTFont.h
  *  CoreText
  *
- *  Copyright (c) 2006-2016 Apple Inc. All rights reserved.
+ *  Copyright (c) 2006-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -48,7 +48,7 @@ typedef const struct CF_BRIDGED_TYPE(NSFont) __CTFont * CTFontRef;
     @abstract   Returns the type identifier for Core Text font references.
     @result     The identifier for the opaque type CTFontRef.
 */
-CFTypeID CTFontGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTFontGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Constants
@@ -59,94 +59,94 @@ CFTypeID CTFontGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
     @defined    kCTFontCopyrightNameKey
     @abstract   The name specifier for the copyright name.
 */
-CT_EXPORT const CFStringRef kCTFontCopyrightNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontCopyrightNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFamilyNameKey
     @abstract   The name specifier for the family name.
 */
-CT_EXPORT const CFStringRef kCTFontFamilyNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFamilyNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontSubFamilyNameKey
     @abstract   The name specifier for the subfamily name.
 */
-CT_EXPORT const CFStringRef kCTFontSubFamilyNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontSubFamilyNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontStyleNameKey
     @abstract   The name specifier for the style name.
 */
-CT_EXPORT const CFStringRef kCTFontStyleNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontStyleNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontUniqueNameKey
     @abstract   The name specifier for the unique name.
     @discussion Note that this name is often not unique and should not be
                 assumed to be truly unique.
 */
-CT_EXPORT const CFStringRef kCTFontUniqueNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontUniqueNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFullNameKey
     @abstract   The name specifier for the full name.
 */
-CT_EXPORT const CFStringRef kCTFontFullNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFullNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontVersionNameKey
     @abstract   The name specifier for the version name.
 */
-CT_EXPORT const CFStringRef kCTFontVersionNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontVersionNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontPostScriptNameKey
     @abstract   The name specifier for the PostScript name.
 */
-CT_EXPORT const CFStringRef kCTFontPostScriptNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontPostScriptNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontTrademarkNameKey
     @abstract   The name specifier for the trademark name.
 */
-CT_EXPORT const CFStringRef kCTFontTrademarkNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontTrademarkNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontManufacturerNameKey
     @abstract   The name specifier for the manufacturer name.
 */
-CT_EXPORT const CFStringRef kCTFontManufacturerNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontManufacturerNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontDesignerNameKey
     @abstract   The name specifier for the designer name.
 */
-CT_EXPORT const CFStringRef kCTFontDesignerNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontDesignerNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontDescriptionNameKey
     @abstract   The name specifier for the description name.
 */
-CT_EXPORT const CFStringRef kCTFontDescriptionNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontDescriptionNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontVendorURLNameKey
     @abstract   The name specifier for the vendor url name.
 */
-CT_EXPORT const CFStringRef kCTFontVendorURLNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontVendorURLNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontDesignerURLNameKey
     @abstract   The name specifier for the designer url name.
 */
-CT_EXPORT const CFStringRef kCTFontDesignerURLNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontDesignerURLNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontLicenseNameKey
     @abstract   The name specifier for the license name.
 */
-CT_EXPORT const CFStringRef kCTFontLicenseNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontLicenseNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontLicenseURLNameKey
     @abstract   The name specifier for the license url name.
 */
-CT_EXPORT const CFStringRef kCTFontLicenseURLNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontLicenseURLNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontSampleTextNameKey
     @abstract   The name specifier for the sample text name string.
 */
-CT_EXPORT const CFStringRef kCTFontSampleTextNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontSampleTextNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontPostScriptCIDNameKey
     @abstract   The name specifier for the PostScript CID name.
 */
-CT_EXPORT const CFStringRef kCTFontPostScriptCIDNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontPostScriptCIDNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Creation
@@ -170,9 +170,9 @@ CT_EXPORT const CFStringRef kCTFontPostScriptCIDNameKey CT_AVAILABLE(10_5, 3_2);
     @result     This function will return a CTFontRef that best matches the name provided with size and matrix attributes. The name parameter is the only required parameters, and default values will be used for unspecified parameters. A best match will be found if all parameters cannot be matched identically.
 */
 CTFontRef CTFontCreateWithName(
-    CFStringRef __nullable      name,
+    CFStringRef                 name,
     CGFloat                     size,
-    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCreateWithFontDescriptor
@@ -192,7 +192,7 @@ CTFontRef CTFontCreateWithName(
 CTFontRef CTFontCreateWithFontDescriptor(
     CTFontDescriptorRef     descriptor,
     CGFloat                 size,
-    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @enum       CTFontOptions
@@ -233,7 +233,7 @@ CTFontRef CTFontCreateWithNameAndOptions(
     CFStringRef                 name,
     CGFloat                     size,
     const CGAffineTransform * __nullable matrix,
-    CTFontOptions               options ) CT_AVAILABLE(10_6, 3_2);
+    CTFontOptions               options ) CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCreateWithFontDescriptorAndOptions
@@ -257,7 +257,7 @@ CTFontRef CTFontCreateWithFontDescriptorAndOptions(
     CTFontDescriptorRef     descriptor,
     CGFloat                 size,
     const CGAffineTransform * __nullable matrix,
-    CTFontOptions           options ) CT_AVAILABLE(10_6, 3_2);
+    CTFontOptions           options ) CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @enum       UI Type constants
@@ -265,63 +265,91 @@ CTFontRef CTFontCreateWithFontDescriptorAndOptions(
     @discussion Use these constants with CTFontCreateUIFontForLanguage to indicate the intended user interface usage of the font reference to be created.
 */
 typedef CF_ENUM(uint32_t, CTFontUIFontType) {
-    kCTFontUIFontNone                   CT_ENUM_AVAILABLE(10_8, 6_0) = (uint32_t)-1,
-    kCTFontUIFontUser                   CT_ENUM_AVAILABLE(10_8, 6_0) =  0,
-    kCTFontUIFontUserFixedPitch         CT_ENUM_AVAILABLE(10_8, 6_0) =  1,
-    kCTFontUIFontSystem                 CT_ENUM_AVAILABLE(10_8, 6_0) =  2,
-    kCTFontUIFontEmphasizedSystem       CT_ENUM_AVAILABLE(10_8, 6_0) =  3,
-    kCTFontUIFontSmallSystem            CT_ENUM_AVAILABLE(10_8, 6_0) =  4,
-    kCTFontUIFontSmallEmphasizedSystem  CT_ENUM_AVAILABLE(10_8, 6_0) =  5,
-    kCTFontUIFontMiniSystem             CT_ENUM_AVAILABLE(10_8, 6_0) =  6,
-    kCTFontUIFontMiniEmphasizedSystem   CT_ENUM_AVAILABLE(10_8, 6_0) =  7,
-    kCTFontUIFontViews                  CT_ENUM_AVAILABLE(10_8, 6_0) =  8,
-    kCTFontUIFontApplication            CT_ENUM_AVAILABLE(10_8, 6_0) =  9,
-    kCTFontUIFontLabel                  CT_ENUM_AVAILABLE(10_8, 6_0) = 10,
-    kCTFontUIFontMenuTitle              CT_ENUM_AVAILABLE(10_8, 6_0) = 11,
-    kCTFontUIFontMenuItem               CT_ENUM_AVAILABLE(10_8, 6_0) = 12,
-    kCTFontUIFontMenuItemMark           CT_ENUM_AVAILABLE(10_8, 6_0) = 13,
-    kCTFontUIFontMenuItemCmdKey         CT_ENUM_AVAILABLE(10_8, 6_0) = 14,
-    kCTFontUIFontWindowTitle            CT_ENUM_AVAILABLE(10_8, 6_0) = 15,
-    kCTFontUIFontPushButton             CT_ENUM_AVAILABLE(10_8, 6_0) = 16,
-    kCTFontUIFontUtilityWindowTitle     CT_ENUM_AVAILABLE(10_8, 6_0) = 17,
-    kCTFontUIFontAlertHeader            CT_ENUM_AVAILABLE(10_8, 6_0) = 18,
-    kCTFontUIFontSystemDetail           CT_ENUM_AVAILABLE(10_8, 6_0) = 19,
-    kCTFontUIFontEmphasizedSystemDetail CT_ENUM_AVAILABLE(10_8, 6_0) = 20,
-    kCTFontUIFontToolbar                CT_ENUM_AVAILABLE(10_8, 6_0) = 21,
-    kCTFontUIFontSmallToolbar           CT_ENUM_AVAILABLE(10_8, 6_0) = 22,
-    kCTFontUIFontMessage                CT_ENUM_AVAILABLE(10_8, 6_0) = 23,
-    kCTFontUIFontPalette                CT_ENUM_AVAILABLE(10_8, 6_0) = 24,
-    kCTFontUIFontToolTip                CT_ENUM_AVAILABLE(10_8, 6_0) = 25,
-    kCTFontUIFontControlContent         CT_ENUM_AVAILABLE(10_8, 6_0) = 26,
+    kCTFontUIFontNone                   = (uint32_t)-1,
+    kCTFontUIFontUser                   =  0,
+    kCTFontUIFontUserFixedPitch         =  1,
+    kCTFontUIFontSystem                 =  2,
+    kCTFontUIFontEmphasizedSystem       =  3,
+    kCTFontUIFontSmallSystem            =  4,
+    kCTFontUIFontSmallEmphasizedSystem  =  5,
+    kCTFontUIFontMiniSystem             =  6,
+    kCTFontUIFontMiniEmphasizedSystem   =  7,
+    kCTFontUIFontViews                  =  8,
+    kCTFontUIFontApplication            =  9,
+    kCTFontUIFontLabel                  = 10,
+    kCTFontUIFontMenuTitle              = 11,
+    kCTFontUIFontMenuItem               = 12,
+    kCTFontUIFontMenuItemMark           = 13,
+    kCTFontUIFontMenuItemCmdKey         = 14,
+    kCTFontUIFontWindowTitle            = 15,
+    kCTFontUIFontPushButton             = 16,
+    kCTFontUIFontUtilityWindowTitle     = 17,
+    kCTFontUIFontAlertHeader            = 18,
+    kCTFontUIFontSystemDetail           = 19,
+    kCTFontUIFontEmphasizedSystemDetail = 20,
+    kCTFontUIFontToolbar                = 21,
+    kCTFontUIFontSmallToolbar           = 22,
+    kCTFontUIFontMessage                = 23,
+    kCTFontUIFontPalette                = 24,
+    kCTFontUIFontToolTip                = 25,
+    kCTFontUIFontControlContent         = 26,
 
-    kCTFontNoFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontNone,
-    kCTFontUserFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontUser,
-    kCTFontUserFixedPitchFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontUserFixedPitch,
-    kCTFontSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSystem,
-    kCTFontEmphasizedSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontEmphasizedSystem,
-    kCTFontSmallSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSmallSystem,
-    kCTFontSmallEmphasizedSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSmallEmphasizedSystem,
-    kCTFontMiniSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMiniSystem,
-    kCTFontMiniEmphasizedSystemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMiniEmphasizedSystem,
-    kCTFontViewsFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontViews,
-    kCTFontApplicationFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontApplication,
-    kCTFontLabelFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontLabel,
-    kCTFontMenuTitleFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuTitle,
-    kCTFontMenuItemFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuItem,
-    kCTFontMenuItemMarkFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuItemMark,
-    kCTFontMenuItemCmdKeyFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMenuItemCmdKey,
-    kCTFontWindowTitleFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontWindowTitle,
-    kCTFontPushButtonFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontPushButton,
-    kCTFontUtilityWindowTitleFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontUtilityWindowTitle,
-    kCTFontAlertHeaderFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontAlertHeader,
-    kCTFontSystemDetailFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSystemDetail,
-    kCTFontEmphasizedSystemDetailFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontEmphasizedSystemDetail,
-    kCTFontToolbarFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontToolbar,
-    kCTFontSmallToolbarFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontSmallToolbar,
-    kCTFontMessageFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontMessage,
-    kCTFontPaletteFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontPalette,
-    kCTFontToolTipFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontToolTip,
-    kCTFontControlContentFontType CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTFontUIFontControlContent
+    kCTFontNoFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontNone,
+    kCTFontUserFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontUser,
+    kCTFontUserFixedPitchFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontUserFixedPitch,
+    kCTFontSystemFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontSystem,
+    kCTFontEmphasizedSystemFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontEmphasizedSystem,
+    kCTFontSmallSystemFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontSmallSystem,
+    kCTFontSmallEmphasizedSystemFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontSmallEmphasizedSystem,
+    kCTFontMiniSystemFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontMiniSystem,
+    kCTFontMiniEmphasizedSystemFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontMiniEmphasizedSystem,
+    kCTFontViewsFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontViews,
+    kCTFontApplicationFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontApplication,
+    kCTFontLabelFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontLabel,
+    kCTFontMenuTitleFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontMenuTitle,
+    kCTFontMenuItemFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontMenuItem,
+    kCTFontMenuItemMarkFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontMenuItemMark,
+    kCTFontMenuItemCmdKeyFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontMenuItemCmdKey,
+    kCTFontWindowTitleFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontWindowTitle,
+    kCTFontPushButtonFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontPushButton,
+    kCTFontUtilityWindowTitleFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontUtilityWindowTitle,
+    kCTFontAlertHeaderFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontAlertHeader,
+    kCTFontSystemDetailFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontSystemDetail,
+    kCTFontEmphasizedSystemDetailFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontEmphasizedSystemDetail,
+    kCTFontToolbarFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontToolbar,
+    kCTFontSmallToolbarFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontSmallToolbar,
+    kCTFontMessageFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontMessage,
+    kCTFontPaletteFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontPalette,
+    kCTFontToolTipFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontToolTip,
+    kCTFontControlContentFontType CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTFontUIFontControlContent
 };
 
 /*!
@@ -342,7 +370,7 @@ typedef CF_ENUM(uint32_t, CTFontUIFontType) {
 CTFontRef __nullable CTFontCreateUIFontForLanguage(
     CTFontUIFontType    uiType,
     CGFloat             size,
-    CFStringRef __nullable language ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef __nullable language ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCreateCopyWithAttributes
@@ -368,7 +396,7 @@ CTFontRef CTFontCreateCopyWithAttributes(
     CTFontRef                   font,
     CGFloat                     size,
     const CGAffineTransform * __nullable matrix,
-    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE(10_5, 3_2);
+    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCreateCopyWithSymbolicTraits
@@ -396,7 +424,7 @@ CTFontRef __nullable CTFontCreateCopyWithSymbolicTraits(
     CGFloat                     size,
     const CGAffineTransform * __nullable matrix,
     CTFontSymbolicTraits        symTraitValue,
-    CTFontSymbolicTraits        symTraitMask ) CT_AVAILABLE(10_5, 3_2);
+    CTFontSymbolicTraits        symTraitMask ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCreateCopyWithFamily
@@ -420,7 +448,7 @@ CTFontRef __nullable CTFontCreateCopyWithFamily(
     CTFontRef                   font,
     CGFloat                     size,
     const CGAffineTransform * __nullable matrix,
-    CFStringRef                 family ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef                 family ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Cascading
@@ -450,7 +478,7 @@ CTFontRef __nullable CTFontCreateCopyWithFamily(
 CTFontRef CTFontCreateForString(
     CTFontRef       currentFont,
     CFStringRef     string,
-    CFRange         range ) CT_AVAILABLE(10_5, 3_2);
+    CFRange         range ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Accessors
@@ -466,7 +494,7 @@ CTFontRef CTFontCreateForString(
     @result     This function returns a normalized font descriptor for a font. The font descriptor contains enough information to recreate this font at a later time.
 */
 CTFontDescriptorRef CTFontCopyFontDescriptor(
-    CTFontRef       font ) CT_AVAILABLE(10_5, 3_2);
+    CTFontRef       font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyAttribute
@@ -482,7 +510,7 @@ CTFontDescriptorRef CTFontCopyFontDescriptor(
 */
 CFTypeRef __nullable CTFontCopyAttribute(
     CTFontRef       font,
-    CFStringRef     attribute ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef     attribute ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetSize
@@ -493,7 +521,7 @@ CFTypeRef __nullable CTFontCopyAttribute(
 
     @result     This function returns the point size of the given font reference. This is the point size provided when the font was created.
 */
-CGFloat CTFontGetSize( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetSize( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetMatrix
@@ -504,7 +532,7 @@ CGFloat CTFontGetSize( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the transformation matrix for this given font reference. This is the matrix that was provided when the font was created.
 */
-CGAffineTransform CTFontGetMatrix( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGAffineTransform CTFontGetMatrix( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetSymbolicTraits
@@ -515,7 +543,7 @@ CGAffineTransform CTFontGetMatrix( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the symbolic traits of the font. This is equivalent to the kCTFontSymbolicTrait of traits dictionary. See CTFontTraits.h for a definition of the font traits.
 */
-CTFontSymbolicTraits CTFontGetSymbolicTraits( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CTFontSymbolicTraits CTFontGetSymbolicTraits( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyTraits
@@ -526,7 +554,7 @@ CTFontSymbolicTraits CTFontGetSymbolicTraits( CTFontRef font ) CT_AVAILABLE(10_5
 
     @result     This function returns a retained reference to the font traits dictionary. Individual traits can be accessed with the trait key constants. See CTFontTraits.h for a definition of the font traits.
 */
-CFDictionaryRef CTFontCopyTraits( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFDictionaryRef CTFontCopyTraits( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Names
@@ -541,7 +569,7 @@ CFDictionaryRef CTFontCopyTraits( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns a retained reference to the PostScript name of the font.
 */
-CFStringRef CTFontCopyPostScriptName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFStringRef CTFontCopyPostScriptName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyFamilyName
@@ -552,7 +580,7 @@ CFStringRef CTFontCopyPostScriptName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns a retained reference to the family name of the font.
 */
-CFStringRef CTFontCopyFamilyName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFStringRef CTFontCopyFamilyName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyFullName
@@ -563,7 +591,7 @@ CFStringRef CTFontCopyFamilyName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns a retained reference to the full name of the font.
 */
-CFStringRef CTFontCopyFullName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFStringRef CTFontCopyFullName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyDisplayName
@@ -574,7 +602,7 @@ CFStringRef CTFontCopyFullName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns a retained reference to the localized display name of the font.
 */
-CFStringRef CTFontCopyDisplayName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFStringRef CTFontCopyDisplayName( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyName
@@ -590,7 +618,7 @@ CFStringRef CTFontCopyDisplayName( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 */
 CFStringRef __nullable CTFontCopyName(
     CTFontRef       font,
-    CFStringRef     nameKey ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef     nameKey ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyLocalizedName
@@ -611,7 +639,7 @@ CFStringRef __nullable CTFontCopyName(
 CFStringRef __nullable CTFontCopyLocalizedName(
     CTFontRef       font,
     CFStringRef     nameKey,
-    CFStringRef __nullable * __nullable actualLanguage ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef __nullable * __nullable actualLanguage ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Encoding
@@ -626,7 +654,7 @@ CFStringRef __nullable CTFontCopyLocalizedName(
 
     @result     This function returns a retained reference to the font's character set. This character set covers the nominal referenced by the font's Unicode cmap table (or equivalent).
 */
-CFCharacterSetRef CTFontCopyCharacterSet( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFCharacterSetRef CTFontCopyCharacterSet( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetStringEncoding
@@ -637,7 +665,7 @@ CFCharacterSetRef CTFontCopyCharacterSet( CTFontRef font ) CT_AVAILABLE(10_5, 3_
 
     @result     This function returns the best string encoding for the font.
 */
-CFStringEncoding CTFontGetStringEncoding( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFStringEncoding CTFontGetStringEncoding( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopySupportedLanguages
@@ -648,7 +676,7 @@ CFStringEncoding CTFontGetStringEncoding( CTFontRef font ) CT_AVAILABLE(10_5, 3_
 
     @result     This function returns a retained reference to an array of languages supported by the font. The array contains language identifier strings as CFStringRefs. The format of the language identifier will conform to UTS #35.
 */
-CFArrayRef CTFontCopySupportedLanguages( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFArrayRef CTFontCopySupportedLanguages( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetGlyphsForCharacters
@@ -674,9 +702,9 @@ CFArrayRef CTFontCopySupportedLanguages( CTFontRef font ) CT_AVAILABLE(10_5, 3_2
 */
 bool CTFontGetGlyphsForCharacters(
     CTFontRef       font,
-    const UniChar   characters[],
-    CGGlyph         glyphs[],
-    CFIndex         count ) CT_AVAILABLE(10_5, 3_2);
+    const UniChar   characters[_Nonnull],
+    CGGlyph         glyphs[_Nonnull],
+    CFIndex         count ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Metrics
@@ -691,7 +719,7 @@ bool CTFontGetGlyphsForCharacters(
 
     @result     This function returns the font ascent metric scaled based on the point size and matrix of the font reference.
 */
-CGFloat CTFontGetAscent( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetAscent( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetDescent
@@ -702,7 +730,7 @@ CGFloat CTFontGetAscent( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the font descent metric scaled based on the point size and matrix of the font reference.
 */
-CGFloat CTFontGetDescent( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetDescent( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetLeading
@@ -713,7 +741,7 @@ CGFloat CTFontGetDescent( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the font leading metric scaled based on the point size and matrix of the font reference.
 */
-CGFloat CTFontGetLeading( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetLeading( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetUnitsPerEm
@@ -724,7 +752,7 @@ CGFloat CTFontGetLeading( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the units per em of the font.
 */
-unsigned CTFontGetUnitsPerEm( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+unsigned CTFontGetUnitsPerEm( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetGlyphCount
@@ -735,7 +763,7 @@ unsigned CTFontGetUnitsPerEm( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the number of glyphs in the font.
 */
-CFIndex CTFontGetGlyphCount( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFIndex CTFontGetGlyphCount( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetBoundingBox
@@ -746,7 +774,7 @@ CFIndex CTFontGetGlyphCount( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This will return the design bounding box of the font, which is the rectangle defined by xMin, yMin, xMax, and yMax values for the font.
 */
-CGRect CTFontGetBoundingBox( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGRect CTFontGetBoundingBox( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetUnderlinePosition
@@ -757,7 +785,7 @@ CGRect CTFontGetBoundingBox( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the font underline position metric scaled based on the point size and matrix of the font reference.
 */
-CGFloat CTFontGetUnderlinePosition( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetUnderlinePosition( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetUnderlineThickness
@@ -768,7 +796,7 @@ CGFloat CTFontGetUnderlinePosition( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the font underline thickness metric scaled based on the point size and matrix of the font reference.
 */
-CGFloat CTFontGetUnderlineThickness( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetUnderlineThickness( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetSlantAngle
@@ -779,7 +807,7 @@ CGFloat CTFontGetUnderlineThickness( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the transformed slant angle of the font. This is equivalent to the italic or caret angle with any skew from the transformation matrix applied.
 */
-CGFloat CTFontGetSlantAngle( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetSlantAngle( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetCapHeight
@@ -790,7 +818,7 @@ CGFloat CTFontGetSlantAngle( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the font cap height metric scaled based on the point size and matrix of the font reference.
 */
-CGFloat CTFontGetCapHeight( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetCapHeight( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetXHeight
@@ -801,7 +829,7 @@ CGFloat CTFontGetCapHeight( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns the font X height metric scaled based on the point size and matrix of the font reference.
 */
-CGFloat CTFontGetXHeight( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CGFloat CTFontGetXHeight( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Glyphs
@@ -821,7 +849,7 @@ CGFloat CTFontGetXHeight( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
 */
 CGGlyph CTFontGetGlyphWithName(
     CTFontRef           font,
-    CFStringRef         glyphName ) CT_AVAILABLE(10_5, 3_2);
+    CFStringRef         glyphName ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetBoundingRectsForGlyphs
@@ -847,9 +875,9 @@ CGGlyph CTFontGetGlyphWithName(
 CGRect CTFontGetBoundingRectsForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
-    const CGGlyph       glyphs[],
+    const CGGlyph       glyphs[_Nonnull],
     CGRect * __nullable boundingRects,
-    CFIndex             count ) CT_AVAILABLE(10_5, 3_2);
+    CFIndex             count ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetOpticalBoundsForGlyphs
@@ -876,10 +904,10 @@ CGRect CTFontGetBoundingRectsForGlyphs(
 */
 CGRect CTFontGetOpticalBoundsForGlyphs(
     CTFontRef           font,
-    const CGGlyph       glyphs[],
+    const CGGlyph       glyphs[_Nonnull],
     CGRect * __nullable boundingRects,
     CFIndex             count,
-    CFOptionFlags       options ) CT_AVAILABLE(10_8, 6_0);
+    CFOptionFlags       options ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetAdvancesForGlyphs
@@ -905,9 +933,9 @@ CGRect CTFontGetOpticalBoundsForGlyphs(
 double CTFontGetAdvancesForGlyphs(
     CTFontRef           font,
     CTFontOrientation   orientation,
-    const CGGlyph       glyphs[],
+    const CGGlyph       glyphs[_Nonnull],
     CGSize * __nullable advances,
-    CFIndex             count ) CT_AVAILABLE(10_5, 3_2);
+    CFIndex             count ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontGetVerticalTranslationsForGlyphs
@@ -927,9 +955,9 @@ double CTFontGetAdvancesForGlyphs(
 */
 void CTFontGetVerticalTranslationsForGlyphs(
     CTFontRef       font,
-    const CGGlyph   glyphs[],
-    CGSize          translations[],
-    CFIndex         count ) CT_AVAILABLE(10_5, 3_2);
+    const CGGlyph   glyphs[_Nonnull],
+    CGSize          translations[_Nonnull],
+    CFIndex         count ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCreatePathForGlyph
@@ -951,7 +979,7 @@ void CTFontGetVerticalTranslationsForGlyphs(
 CGPathRef __nullable CTFontCreatePathForGlyph(
     CTFontRef                   font,
     CGGlyph                     glyph,
-    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(10_5, 3_2);
+    const CGAffineTransform * __nullable matrix ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Variations
@@ -962,31 +990,37 @@ CGPathRef __nullable CTFontCreatePathForGlyph(
     @abstract   Key to get the variation axis identifier.
     @discussion This key is used with a variation axis dictionary to get the axis identifier value as a CFNumberRef.
 */
-CT_EXPORT const CFStringRef kCTFontVariationAxisIdentifierKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontVariationAxisIdentifierKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontVariationAxisMinimumValueKey
     @abstract   Key to get the variation axis minimum value.
     @discussion This key is used with a variation axis dictionary to get the minimum axis value as a CFNumberRef.
 */
-CT_EXPORT const CFStringRef kCTFontVariationAxisMinimumValueKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontVariationAxisMinimumValueKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontVariationAxisMaximumValueKey
     @abstract   Key to get the variation axis maximum value.
     @discussion This key is used with a variation axis dictionary to get the maximum axis value as a CFNumberRef.
 */
-CT_EXPORT const CFStringRef kCTFontVariationAxisMaximumValueKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontVariationAxisMaximumValueKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontVariationAxisDefaultValueKey
     @abstract   Key to get the variation axis default value.
     @discussion This key is used with a variation axis dictionary to get the default axis value as a CFNumberRef.
 */
-CT_EXPORT const CFStringRef kCTFontVariationAxisDefaultValueKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontVariationAxisDefaultValueKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontVariationAxisNameKey
     @abstract   Key to get the variation axis name string.
     @discussion This key is used with a variation axis dictionary to get the localized variation axis name.
 */
-CT_EXPORT const CFStringRef kCTFontVariationAxisNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontVariationAxisNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
+/*!
+    @defined    kCTFontVariationAxisHiddenKey
+    @abstract   Key to get the hidden axis flag.
+    @discussion This key contains a CFBoolean value that is true when the font designer recommends the axis not be exposed directly to end users in application interfaces.
+*/
+CT_EXPORT const CFStringRef kCTFontVariationAxisHiddenKey CT_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
     @function   CTFontCopyVariationAxes
@@ -997,7 +1031,7 @@ CT_EXPORT const CFStringRef kCTFontVariationAxisNameKey CT_AVAILABLE(10_5, 3_2);
 
     @result     This function returns an array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis* keys above.
 */
-CFArrayRef __nullable CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFArrayRef __nullable CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyVariation
@@ -1012,7 +1046,7 @@ CFArrayRef __nullable CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(10_
     @seealso    kCTFontVariationAxisIdentifierKey
     @seealso    kCTFontVariationAxisDefaultValueKey
 */
-CFDictionaryRef __nullable CTFontCopyVariation( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFDictionaryRef __nullable CTFontCopyVariation( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Features
@@ -1023,61 +1057,61 @@ CFDictionaryRef __nullable CTFontCopyVariation( CTFontRef font ) CT_AVAILABLE(10
     @abstract   Key to get the OpenType feature tag.
     @discussion This key can be used with a font feature dictionary to get the tag as a CFStringRef.
 */
-CT_EXPORT const CFStringRef kCTFontOpenTypeFeatureTag CT_AVAILABLE(10_10, 8_0);
+CT_EXPORT const CFStringRef kCTFontOpenTypeFeatureTag CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontOpenTypeFeatureValue
     @abstract   Key to get the OpenType feature value.
     @discussion This key can be used with a font feature dictionary to get the value as a CFNumberRef.
 */
-CT_EXPORT const CFStringRef kCTFontOpenTypeFeatureValue CT_AVAILABLE(10_10, 8_0);
+CT_EXPORT const CFStringRef kCTFontOpenTypeFeatureValue CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureTypeIdentifierKey
     @abstract   Key to get the font feature type value.
     @discussion This key can be used with a font feature dictionary to get the type identifier as a CFNumberRef.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureTypeIdentifierKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureTypeIdentifierKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureTypeNameKey
     @abstract   Key to get the font feature name.
     @discussion This key can be used with a font feature dictionary to get the localized type name string as a CFString.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureTypeNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureTypeNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureTypeExclusiveKey
     @abstract   Key to get the font feature exclusive setting.
     @discussion This key can be used with a font feature dictionary to get the the exclusive setting of the feature as a CFBoolean. The value associated with this key indicates whether the feature selectors associated with this type should be mutually exclusive.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureTypeExclusiveKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureTypeExclusiveKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureTypeSelectorsKey
     @abstract   Key to get the font feature selectors.
     @discussion This key can be used with a font feature dictionary to get the array of font feature selectors as a CFArrayRef. This is an array of selector dictionaries that contain the values for the following selector keys.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureTypeSelectorsKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureTypeSelectorsKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureSelectorIdentifierKey
     @abstract   Key to get the font feature selector identifier.
     @discussion This key can be used with a selector dictionary corresponding to a feature type to obtain the selector identifier value as a CFNumberRef.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureSelectorIdentifierKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureSelectorIdentifierKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureSelectorNameKey
     @abstract   Key to get the font feature selector name.
     @discussion This key is used with a selector dictionary to get the localized name string for the selector as a CFStringRef.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureSelectorNameKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureSelectorNameKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureSelectorDefaultKey
     @abstract   Key to get the font feature selector default setting value.
     @discussion This key is used with a selector dictionary to get the default indicator for the selector. This value is a CFBooleanRef which if present and true indicates that this selector is the default setting for the current feature type.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureSelectorDefaultKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureSelectorDefaultKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontFeatureSelectorSettingKey
     @abstract   Key to get or specify the current feature setting.
     @discussion This key is used with a selector dictionary to get or specify the current setting for the selector. This value is a CFBooleanRef to indicate whether this selector is on or off. If this key is not present, the default setting is used.
 */
-CT_EXPORT const CFStringRef kCTFontFeatureSelectorSettingKey CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontFeatureSelectorSettingKey CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyFeatures
@@ -1088,7 +1122,7 @@ CT_EXPORT const CFStringRef kCTFontFeatureSelectorSettingKey CT_AVAILABLE(10_5, 
 
     @result     This function returns an array of font feature dictionaries for the font reference.
 */
-CFArrayRef __nullable CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFArrayRef __nullable CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyFeatureSettings
@@ -1101,7 +1135,7 @@ CFArrayRef __nullable CTFontCopyFeatures( CTFontRef font ) CT_AVAILABLE(10_5, 3_
 
     @result     This function returns a normalized array of font feature setting dictionaries. The array will only contain the non-default settings that should be applied to the font, or NULL if the default settings should be used.
 */
-CFArrayRef __nullable CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(10_5, 3_2);
+CFArrayRef __nullable CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Font Conversion
@@ -1121,7 +1155,7 @@ CFArrayRef __nullable CTFontCopyFeatureSettings( CTFontRef font ) CT_AVAILABLE(1
 */
 CGFontRef CTFontCopyGraphicsFont(
     CTFontRef           font,
-    CTFontDescriptorRef __nullable * __nullable attributes ) CT_AVAILABLE(10_5, 3_2);
+    CTFontDescriptorRef __nullable * __nullable attributes ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCreateWithGraphicsFont
@@ -1145,7 +1179,7 @@ CTFontRef CTFontCreateWithGraphicsFont(
     CGFontRef                   graphicsFont,
     CGFloat                     size,
     const CGAffineTransform * __nullable matrix,
-    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE(10_5, 3_2);
+    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 #ifndef ATSFONTREF_DEFINED
 typedef UInt32 ATSFontRef;
@@ -1167,7 +1201,7 @@ typedef UInt32 ATSFontRef;
 
 ATSFontRef CTFontGetPlatformFont(
     CTFontRef               font,
-    CTFontDescriptorRef __nullable * __nullable attributes ) CT_AVAILABLE_MAC(10_5);
+    CTFontDescriptorRef __nullable * __nullable attributes ) CT_AVAILABLE(macos(10.5)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function   CTFontCreateWithPlatformFont
@@ -1191,7 +1225,7 @@ CTFontRef __nullable CTFontCreateWithPlatformFont(
     ATSFontRef                  platformFont,
     CGFloat                     size,
     const CGAffineTransform * __nullable matrix,
-    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE_MAC(10_5);
+    CTFontDescriptorRef __nullable attributes ) CT_AVAILABLE(macos(10.5)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
     @function   CTFontCreateWithQuickdrawInstance
@@ -1217,48 +1251,61 @@ CTFontRef CTFontCreateWithQuickdrawInstance(
     ConstStr255Param __nullable name,
     int16_t             identifier,
     uint8_t             style,
-    CGFloat             size ) CT_AVAILABLE_MAC(10_5);
+    CGFloat             size ) CT_AVAILABLE(macos(10.5)) CT_UNAVAILABLE(ios, watchos, tvos);
 
 /*! --------------------------------------------------------------------------
     @group Font Tables
 *///--------------------------------------------------------------------------
 
 enum {
-    kCTFontTableBASE    = 'BASE',   // Baseline
-    kCTFontTableCFF     = 'CFF ',   // PostScript font program
+    kCTFontTableBASE    = 'BASE',   // Baseline data
+    kCTFontTableCBDT    = 'CBDT',   // Color bitmap data
+    kCTFontTableCBLC    = 'CBLC',   // Color bitmap location data
+    kCTFontTableCFF     = 'CFF ',   // Compact Font Format 1.0
+    kCTFontTableCFF2    = 'CFF2',   // Compact Font Format 2.0
+    kCTFontTableCOLR    = 'COLR',   // Color table
+    kCTFontTableCPAL    = 'CPAL',   // Color palette table
     kCTFontTableDSIG    = 'DSIG',   // Digital signature
-    kCTFontTableEBDT    = 'EBDT',   // Embedded bitmap
-    kCTFontTableEBLC    = 'EBLC',   // Embedded bitmap location
-    kCTFontTableEBSC    = 'EBSC',   // Embedded bitmap scaling
-    kCTFontTableGDEF    = 'GDEF',   // Glyph definition
-    kCTFontTableGPOS    = 'GPOS',   // Glyph positioning
-    kCTFontTableGSUB    = 'GSUB',   // Glyph substitution
-    kCTFontTableJSTF    = 'JSTF',   // Justification
-    kCTFontTableLTSH    = 'LTSH',   // Linear threshold
-    kCTFontTableMATH    = 'MATH',   // Math
+    kCTFontTableEBDT    = 'EBDT',   // Embedded bitmap data
+    kCTFontTableEBLC    = 'EBLC',   // Embedded bitmap location data
+    kCTFontTableEBSC    = 'EBSC',   // Embedded bitmap scaling data
+    kCTFontTableGDEF    = 'GDEF',   // Glyph definition data
+    kCTFontTableGPOS    = 'GPOS',   // Glyph positioning data
+    kCTFontTableGSUB    = 'GSUB',   // Glyph substitution data
+    kCTFontTableHVAR    = 'HVAR',   // Horizontal metrics variations
+    kCTFontTableJSTF    = 'JSTF',   // Justification data
+    kCTFontTableLTSH    = 'LTSH',   // Linear threshold data
+    kCTFontTableMATH    = 'MATH',   // Math layout data
+    kCTFontTableMERG    = 'MERG',   // Merge
+    kCTFontTableMVAR    = 'MVAR',   // Metrics variations
     kCTFontTableOS2     = 'OS/2',   // OS/2 and Windows specific metrics
     kCTFontTablePCLT    = 'PCLT',   // PCL 5 data
+    kCTFontTableSTAT    = 'STAT',   // Style attributes
+    kCTFontTableSVG     = 'SVG ',   // Scalable vector graphics
     kCTFontTableVDMX    = 'VDMX',   // Vertical device metrics
     kCTFontTableVORG    = 'VORG',   // Vertical origin
+    kCTFontTableVVAR    = 'VVAR',   // Vertical metrics variations
     kCTFontTableZapf    = 'Zapf',   // Glyph reference
     kCTFontTableAcnt    = 'acnt',   // Accent attachment
     kCTFontTableAnkr    = 'ankr',   // Anchor points
-    kCTFontTableAvar    = 'avar',   // Axis variation
+    kCTFontTableAvar    = 'avar',   // Axis variations
     kCTFontTableBdat    = 'bdat',   // Bitmap data
     kCTFontTableBhed    = 'bhed',   // Bitmap font header
     kCTFontTableBloc    = 'bloc',   // Bitmap location
     kCTFontTableBsln    = 'bsln',   // Baseline
+    kCTFontTableCidg    = 'cidg',   // CID to glyph mapping
     kCTFontTableCmap    = 'cmap',   // Character to glyph mapping
-    kCTFontTableCvar    = 'cvar',   // CVT variation
+    kCTFontTableCvar    = 'cvar',   // CVT variations
     kCTFontTableCvt     = 'cvt ',   // Control value table
     kCTFontTableFdsc    = 'fdsc',   // Font descriptor
     kCTFontTableFeat    = 'feat',   // Layout feature
     kCTFontTableFmtx    = 'fmtx',   // Font metrics
+    kCTFontTableFond    = 'fond',   // 'FOND' and 'NFNT' data
     kCTFontTableFpgm    = 'fpgm',   // Font program
-    kCTFontTableFvar    = 'fvar',   // Font variation
-    kCTFontTableGasp    = 'gasp',   // Grid-fitting/Scan-conversion
+    kCTFontTableFvar    = 'fvar',   // Font variations
+    kCTFontTableGasp    = 'gasp',   // Grid-fitting/scan-conversion
     kCTFontTableGlyf    = 'glyf',   // Glyph data
-    kCTFontTableGvar    = 'gvar',   // Glyph variation
+    kCTFontTableGvar    = 'gvar',   // Glyph variations
     kCTFontTableHdmx    = 'hdmx',   // Horizontal device metrics
     kCTFontTableHead    = 'head',   // Font header
     kCTFontTableHhea    = 'hhea',   // Horizontal header
@@ -1268,9 +1315,10 @@ enum {
     kCTFontTableKern    = 'kern',   // Kerning
     kCTFontTableKerx    = 'kerx',   // Extended kerning
     kCTFontTableLcar    = 'lcar',   // Ligature caret
-    kCTFontTableLtag    = 'ltag',   // Language tags
     kCTFontTableLoca    = 'loca',   // Index to location
+    kCTFontTableLtag    = 'ltag',   // Language tags
     kCTFontTableMaxp    = 'maxp',   // Maximum profile
+    kCTFontTableMeta    = 'meta',   // Metadata
     kCTFontTableMort    = 'mort',   // Morph
     kCTFontTableMorx    = 'morx',   // Extended morph
     kCTFontTableName    = 'name',   // Naming table
@@ -1279,16 +1327,17 @@ enum {
     kCTFontTablePrep    = 'prep',   // CVT program
     kCTFontTableProp    = 'prop',   // Properties
     kCTFontTableSbit    = 'sbit',   // Bitmap data
-    kCTFontTableSbix    = 'sbix',   // Extended bitmap data
+    kCTFontTableSbix    = 'sbix',   // Standard bitmap graphics
     kCTFontTableTrak    = 'trak',   // Tracking
     kCTFontTableVhea    = 'vhea',   // Vertical header
-    kCTFontTableVmtx    = 'vmtx'    // Vertical metrics
+    kCTFontTableVmtx    = 'vmtx',   // Vertical metrics
+    kCTFontTableXref    = 'xref'    // Cross-reference
 };
 typedef FourCharCode CTFontTableTag;
 
 typedef CF_OPTIONS(uint32_t, CTFontTableOptions) {
-    kCTFontTableOptionNoOptions CT_ENUM_AVAILABLE(10_5, 3_2) = 0,
-    kCTFontTableOptionExcludeSynthetic CT_ENUM_DEPRECATED(10_5, 10_8, 3_2, 6_0) = (1 << 0)
+    kCTFontTableOptionNoOptions = 0,
+    kCTFontTableOptionExcludeSynthetic CT_ENUM_DEPRECATED("Unsupported", macos(10.5, 10.8), ios(3.2, 6.0)) CT_ENUM_UNAVAILABLE(watchos, tvos) = (1 << 0)
 };
 
 /*!
@@ -1306,7 +1355,7 @@ typedef CF_OPTIONS(uint32_t, CTFontTableOptions) {
 */
 CFArrayRef __nullable CTFontCopyAvailableTables(
     CTFontRef           font,
-    CTFontTableOptions  options ) CT_AVAILABLE(10_5, 3_2);
+    CTFontTableOptions  options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTFontCopyTable
@@ -1326,7 +1375,7 @@ CFArrayRef __nullable CTFontCopyAvailableTables(
 CFDataRef __nullable CTFontCopyTable(
     CTFontRef           font,
     CTFontTableTag      table,
-    CTFontTableOptions  options ) CT_AVAILABLE(10_5, 3_2);
+    CTFontTableOptions  options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -1352,10 +1401,10 @@ CFDataRef __nullable CTFontCopyTable(
 */
 void CTFontDrawGlyphs(
     CTFontRef       font, 
-    const CGGlyph   glyphs[], 
-    const CGPoint   positions[], 
+    const CGGlyph   glyphs[_Nonnull],
+    const CGPoint   positions[_Nonnull],
     size_t          count, 
-    CGContextRef    context ) CT_AVAILABLE(10_7, 4_2);
+    CGContextRef    context ) CT_AVAILABLE(macos(10.7), ios(4.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -1386,7 +1435,7 @@ CFIndex CTFontGetLigatureCaretPositions(
     CTFontRef       font,
     CGGlyph         glyph,
     CGFloat * __nullable positions,
-    CFIndex         maxPositions ) CT_AVAILABLE(10_5, 3_2);
+    CFIndex         maxPositions ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*! --------------------------------------------------------------------------
     @group Baseline Alignment
@@ -1399,7 +1448,7 @@ CFIndex CTFontGetLigatureCaretPositions(
  
     @discussion This key can be used with a baseline info dictionary to offset to the Roman baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 */
-CT_EXPORT const CFStringRef kCTBaselineClassRoman CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassRoman CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @defined    kCTBaselineClassIdeographicCentered
@@ -1408,7 +1457,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassRoman CT_AVAILABLE(10_8, 6_0);
  
     @discussion This key can be used with a baseline info dictionary to offset to the Ideographic Centered baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 */
-CT_EXPORT const CFStringRef kCTBaselineClassIdeographicCentered CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassIdeographicCentered CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
     
 /*!
     @defined    kCTBaselineClassIdeographicLow
@@ -1417,7 +1466,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassIdeographicCentered CT_AVAILABLE(10_
  
     @discussion This key can be used with a baseline info dictionary to offset to the Ideographic Low baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 */
-CT_EXPORT const CFStringRef kCTBaselineClassIdeographicLow CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassIdeographicLow CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
     
 /*!
     @defined    kCTBaselineClassIdeographicHigh
@@ -1426,7 +1475,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassIdeographicLow CT_AVAILABLE(10_8, 6_
 
     @discussion This key can be used with a baseline info dictionary to offset to the Ideographic High baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 */
-CT_EXPORT const CFStringRef kCTBaselineClassIdeographicHigh CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassIdeographicHigh CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @defined    kCTBaselineClassHanging
@@ -1435,7 +1484,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassIdeographicHigh CT_AVAILABLE(10_8, 6
  
     @discussion This key can be used with a baseline info dictionary to offset to the Hanging baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 */
-CT_EXPORT const CFStringRef kCTBaselineClassHanging CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassHanging CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @defined    kCTBaselineClassMathKey
@@ -1444,7 +1493,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassHanging CT_AVAILABLE(10_8, 6_0);
 
     @discussion This key can be used with a baseline info dictionary to offset to the Math baseline as a CFNumberRef float. It can also be used as the value for kCTBaselineClassAttributeName.
 */
-CT_EXPORT const CFStringRef kCTBaselineClassMath CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassMath CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @defined    kCTBaselineReferenceFont
@@ -1453,7 +1502,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassMath CT_AVAILABLE(10_8, 6_0);
  
     @discussion This key can be used to specify a font for the reference baseline. The value is a CTFontRef or the kCTBaselineOriginalFont constant.
 */
-CT_EXPORT const CFStringRef kCTBaselineReferenceFont CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineReferenceFont CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @defined    kCTBaselineOriginalFont
@@ -1462,7 +1511,7 @@ CT_EXPORT const CFStringRef kCTBaselineReferenceFont CT_AVAILABLE(10_8, 6_0);
  
     @discussion This constant can be used as the value for kCTBaselineReferenceFont to specify that the original font should be used for the reference baseline.
 */
-CT_EXPORT const CFStringRef kCTBaselineOriginalFont CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineOriginalFont CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -1477,7 +1526,7 @@ CT_EXPORT const CFStringRef kCTBaselineOriginalFont CT_AVAILABLE(10_8, 6_0);
 
     @result     The ordered list of fallback fonts - ordered array of CTFontDescriptors.
 */
-CFArrayRef __nullable CTFontCopyDefaultCascadeListForLanguages( CTFontRef font, CFArrayRef __nullable languagePrefList ) CT_AVAILABLE(10_8, 6_0);
+CFArrayRef __nullable CTFontCopyDefaultCascadeListForLanguages( CTFontRef font, CFArrayRef __nullable languagePrefList ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 CF_ASSUME_NONNULL_END
 CF_EXTERN_C_END

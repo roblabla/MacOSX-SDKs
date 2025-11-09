@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -27,6 +27,8 @@
 */
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVAudioProcessingSettings.h>
+#import <AVFoundation/AVVideoSettings.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
@@ -327,16 +329,6 @@ AV_INIT_UNAVAILABLE
 @property (nonatomic, readonly) NSArray<NSValue *> *seekableTimeRanges;
 
 /*!
- @method			seekToTime:
- @abstract			Moves the playback cursor.
- @param				time
- @discussion		Use this method to seek to a specified time for the item.
-					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
-					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
- */
-- (void)seekToTime:(CMTime)time;
-
-/*!
  @method			seekToTime:completionHandler:
  @abstract			Moves the playback cursor and invokes the specified block when the seek operation has either been completed or been interrupted.
  @param				time
@@ -347,23 +339,7 @@ AV_INIT_UNAVAILABLE
  					completion handler will be invoked with the finished parameter set to YES. 
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO.
  */
-- (void)seekToTime:(CMTime)time completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
-
-/*!
- @method			seekToTime:toleranceBefore:toleranceAfter:
- @abstract			Moves the playback cursor within a specified time bound.
- @param				time
- @param				toleranceBefore
- @param				toleranceAfter
- @discussion		Use this method to seek to a specified time for the item.
-					The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency.
-					Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. 
-					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
-					Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime
-					within the seekable ranges.
-					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
- */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter;
+- (void)seekToTime:(CMTime)time completionHandler:(void (^_Nullable)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
 
 /*!
  @method			seekToTime:toleranceBefore:toleranceAfter:completionHandler:
@@ -381,7 +357,7 @@ AV_INIT_UNAVAILABLE
 					finished parameter set to YES.
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled and the completion handler will be invoked with the finished parameter set to NO.
  */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter completionHandler:(void (^_Nullable)(BOOL finished))completionHandler NS_AVAILABLE(10_7, 5_0);
 
 /*!
  @method			cancelPendingSeeks
@@ -399,18 +375,6 @@ AV_INIT_UNAVAILABLE
 - (nullable NSDate *)currentDate;
 
 /*!
- @method		seekToDate
- @abstract		move playhead to a point corresponding to a particular date.
- @discussion
-   For playback content that is associated with a range of dates, move the
-   playhead to point within that range. Will fail if the supplied date is outside
-   the range or if the content is not associated with a range of dates.
- @param			date	The new position for the playhead.
- @result		Returns true if the playhead was moved to the supplied date.
- */
-- (BOOL)seekToDate:(NSDate *)date;
-
-/*!
  @method		seekToDate:completionHandler:
  @abstract		move playhead to a point corresponding to a particular date, and invokes the specified block when the seek operation has either been completed or been interrupted.
  @discussion
@@ -424,7 +388,7 @@ AV_INIT_UNAVAILABLE
  @param			completionHandler	The block to invoke when seek operation is complete
  @result		Returns true if the playhead was moved to the supplied date.
  */
-- (BOOL)seekToDate:(NSDate *)date completionHandler:(void (^)(BOOL finished))completionHandler NS_AVAILABLE(10_9, 6_0);
+- (BOOL)seekToDate:(NSDate *)date completionHandler:(void (^_Nullable)(BOOL finished))completionHandler NS_AVAILABLE(10_9, 6_0);
 
 /*!
  @method		stepByCount:
@@ -494,6 +458,14 @@ AV_INIT_UNAVAILABLE
 */
 @property (nonatomic, copy, nullable) NSArray<AVTextStyleRule *> *textStyleRules NS_AVAILABLE(10_9, 6_0);
 
+/*!
+ @property	videoApertureMode
+ @abstract	Specifies the video aperture mode to apply during playback.
+ @discussion
+	See AVVideoApertureMode constants defined in AVVideoSettings.h. Default is AVVideoApertureModeCleanAperture.
+ */
+@property (nonatomic, copy) AVVideoApertureMode videoApertureMode API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+
 @end
 
 
@@ -506,7 +478,7 @@ AV_INIT_UNAVAILABLE
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchSpectral, are defined in AVAudioProcessingSettings.h.
    The default value on iOS is AVAudioTimePitchAlgorithmLowQualityZeroLatency and on OS X is AVAudioTimePitchAlgorithmSpectral.
 */
-@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
 
 /*!
  @property audioMix
@@ -567,13 +539,14 @@ AV_INIT_UNAVAILABLE
 @abstract	Indicates the media duration the caller prefers the player to buffer from the network ahead of the playhead to guard against playback disruption. 
 @discussion	The value is in seconds. If it is set to 0, the player will choose an appropriate level of buffering for most use cases.
 			Note that setting this property to a low value will increase the chance that playback will stall and re-buffer, while setting it to a high value will increase demand on system resources.
+			Note that the system may buffer less than the value of this property in order to manage resource consumption.
 */
 @property (nonatomic) NSTimeInterval preferredForwardBufferDuration NS_AVAILABLE(10_12, 10_0);
 
 @end
 
 
-@interface AVPlayerItem (AVPlayerItemBitRateControl) 
+@interface AVPlayerItem (AVPlayerItemVariantControl)
 
 /*!
  @property preferredPeakBitRate
@@ -585,6 +558,15 @@ AV_INIT_UNAVAILABLE
 	If network bandwidth consumption cannot be lowered to meet the preferredPeakBitRate, it will be reduced as much as possible while continuing to play the item.
 */
 @property (nonatomic) double preferredPeakBitRate NS_AVAILABLE(10_10, 8_0);
+
+/*!
+ @property preferredMaximumResolution
+ @abstract Indicates a preferred upper limit on the resolution of the video to be downloaded (or otherwise transferred) and rendered by the player.
+ @discussion
+	The default value is CGSizeZero, which indicates that the client enforces no limit on video resolution. Other values indicate a preferred maximum video resolution.
+	It only applies to HTTP Live Streaming asset.
+ */
+@property (nonatomic) CGSize preferredMaximumResolution NS_AVAILABLE(10_13, 11_0);
 
 @end
 
@@ -614,16 +596,6 @@ AV_INIT_UNAVAILABLE
    Has no effect unless the appliesMediaSelectionCriteriaAutomatically property of the associated AVPlayer is YES and unless automatic media selection has previously been overridden via -[AVPlayerItem selectMediaOption:inMediaSelectionGroup:].
  */
 - (void)selectMediaOptionAutomaticallyInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_9, 7_0);
-
-/*!
- @method		selectedMediaOptionInMediaSelectionGroup:
- @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil.
- @param 		mediaSelectionGroup		A media selection group obtained from the receiver's asset.
- @result		An instance of AVMediaSelectionOption that describes the currently selection option in the group.
- @discussion
-   If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
- */
-- (nullable AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_AVAILABLE(10_8, 5_0);
 
 /*!
   @property		currentMediaSelection
@@ -726,6 +698,58 @@ AV_INIT_UNAVAILABLE
  @abstract		The collection of associated mediaDataCollectors.
 */
 @property (nonatomic, readonly) NSArray<AVPlayerItemMediaDataCollector *> *mediaDataCollectors NS_AVAILABLE(10_11_3, 9_3);;
+
+@end
+
+@interface AVPlayerItem (AVPlayerItemDeprecated)
+
+/*!
+ @method			seekToTime:
+ @abstract			Moves the playback cursor.
+ @param				time
+ @discussion		Use this method to seek to a specified time for the item.
+					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
+					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
+ */
+- (void)seekToTime:(CMTime)time NS_DEPRECATED(10_7, 10_13, 4_0, 11_0, "Use -seekToTime:completionHandler:, passing nil for the completionHandler if you don't require notification of completion");
+
+/*!
+ @method			seekToTime:toleranceBefore:toleranceAfter:
+ @abstract			Moves the playback cursor within a specified time bound.
+ @param				time
+ @param				toleranceBefore
+ @param				toleranceAfter
+ @discussion		Use this method to seek to a specified time for the item.
+					The time seeked to will be within the range [time-toleranceBefore, time+toleranceAfter] and may differ from the specified time for efficiency.
+					Pass kCMTimeZero for both toleranceBefore and toleranceAfter to request sample accurate seeking which may incur additional decoding delay. 
+					Messaging this method with beforeTolerance:kCMTimePositiveInfinity and afterTolerance:kCMTimePositiveInfinity is the same as messaging seekToTime: directly.
+					Seeking is constrained by the collection of seekable time ranges. If you seek to a time outside all of the seekable ranges the seek will result in a currentTime
+					within the seekable ranges.
+					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
+ */
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter NS_DEPRECATED(10_7, 10_13, 4_0, 11_0, "Use -seekToTime:toleranceBefore:toleranceAfter:completionHandler:, passing nil for the completionHandler if you don't require notification of completion");
+
+/*!
+ @method		seekToDate
+ @abstract		move playhead to a point corresponding to a particular date.
+ @discussion
+   For playback content that is associated with a range of dates, move the
+   playhead to point within that range. Will fail if the supplied date is outside
+   the range or if the content is not associated with a range of dates.
+ @param			date	The new position for the playhead.
+ @result		Returns true if the playhead was moved to the supplied date.
+ */
+- (BOOL)seekToDate:(NSDate *)date NS_DEPRECATED(10_7, 10_13, 4_0, 11_0, "Use -seekToDate:completionHandler:, passing nil for the completionHandler if you don't require notification of completion");
+
+/*!
+ @method		selectedMediaOptionInMediaSelectionGroup:
+ @abstract		Indicates the media selection option that's currently selected from the specified group. May be nil.
+ @param 		mediaSelectionGroup		A media selection group obtained from the receiver's asset.
+ @result		An instance of AVMediaSelectionOption that describes the currently selection option in the group.
+ @discussion
+   If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
+ */
+- (nullable AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup NS_DEPRECATED(10_8, 10_13, 5_0, 11_0, "Use currentMediaSelection to obtain an instance of AVMediaSelection, which encompasses the currently selected AVMediaSelectionOption in each of the available AVMediaSelectionGroups");
 
 @end
 

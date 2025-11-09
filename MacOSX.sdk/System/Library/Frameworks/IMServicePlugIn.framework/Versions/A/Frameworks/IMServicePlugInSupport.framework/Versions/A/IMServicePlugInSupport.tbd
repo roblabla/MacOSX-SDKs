@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FF32F8F6-3A9A-379C-939D-FCBBBAC8327E' ]
+uuids:           [ 'x86_64: 550A07CE-1E3C-34E3-844C-1C0D3B6BB28B' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/IMServicePlugIn.framework/Versions/A/Frameworks/IMServicePlugInSupport.framework/Versions/A/IMServicePlugInSupport
-current-version: 1000.0
-objc-constraint: none
+current-version: 1000
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _IMAccountSettingLoginHandle, _IMAccountSettingPassword, _IMAccountSettingServerHost, 
@@ -24,7 +23,7 @@ exports:
                        _IMHandlePropertyEmailAddress, _IMHandlePropertyFirstName, 
                        _IMHandlePropertyIdleDate, _IMHandlePropertyLastName, _IMHandlePropertyNickname, 
                        _IMHandlePropertyPictureData, _IMHandlePropertyPictureIdentifier, 
-                       _IMHandlePropertyStatusMessage, _IMServiceCapabilityChatRoomSupport, 
+                       _IMHandlePropertyStatusMessage, _IMMoneyAttributeName, _IMServiceCapabilityChatRoomSupport, 
                        _IMServiceCapabilityFileTransferSessionSupport, _IMServiceCapabilityGroupListAuthorizationSupport, 
                        _IMServiceCapabilityGroupListHandlePictureSupport, _IMServiceCapabilityGroupListOrderingSupport, 
                        _IMServiceCapabilityGroupListSupport, _IMServiceCapabilityInstantMessagingSupport, 

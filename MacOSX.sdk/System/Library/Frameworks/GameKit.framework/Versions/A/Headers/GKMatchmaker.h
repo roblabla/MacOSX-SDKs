@@ -2,7 +2,7 @@
 //  GKMatchmaker.h
 //  Game Center
 //
-//  Copyright 2010-2016 Apple Inc. All rights reserved.
+//  Copyright 2010-2017 Apple Inc. All rights reserved.
 //
 
 #include <Foundation/Foundation.h>
@@ -160,7 +160,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 
 @property(nonatomic, nullable, copy) void(^inviteHandler)(GKInvite *acceptedInvite, NSArray * __nullable playerIDsToInvite) NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use registerListener on GKLocalPlayer to register an object that implements the GKInviteEventListenerProtocol instead") ;
 
-- (void)startBrowsingForNearbyPlayersWithReachableHandler:(void(^__nullable)(NSString *playerID, BOOL reachable))reachableHandler NS_DEPRECATED(10_9, 10_10, 6_0, 8_0) ;
+- (void)startBrowsingForNearbyPlayersWithReachableHandler:(void(^__nullable)(NSString *playerID, BOOL reachable))reachableHandler NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "Use startBrowsingForNearbyPlayersWithHandler: instead") ;
 - (void)cancelInviteToPlayer:(NSString *)playerID NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "use cancelPendingInviteToPlayer:") ;
 - (void)findPlayersForHostedMatchRequest:(GKMatchRequest *)request withCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable playerIDs, NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use findPlayersForHostedRequest:") ;
 

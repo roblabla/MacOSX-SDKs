@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 0CA005E4-21AC-3FCD-BEC6-89B8BFC2CF24', 'x86_64: 589A5D92-6809-3F3C-900E-DBC60A07A101' ]
+uuids:           [ 'i386: DE8D070D-6508-3C02-9419-81461AEEC0A5', 'x86_64: 70B250E8-B178-3BD2-B877-6D8F2F1AD950' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/IntlPreferences.framework/Versions/A/IntlPreferences
-current-version: 216.0
-objc-constraint: none
+current-version: 226
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _ISMigrator._currentVersion, _ISMigrator._platform, _ISMigrator._preferencesAfterMigration, 

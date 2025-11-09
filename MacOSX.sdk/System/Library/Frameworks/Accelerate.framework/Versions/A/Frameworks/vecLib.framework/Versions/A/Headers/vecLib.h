@@ -3,9 +3,9 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-600.0
+     Version:    vecLib-622.0
  
-     Copyright:  Copyright (c) 2000-2016 by Apple Inc. All rights reserved.
+     Copyright:  Copyright (c) 2000-2017 by Apple Inc. All rights reserved.
  
      Bugs:       For bug reports, consult the following page on
                  the World Wide Web:
@@ -61,6 +61,7 @@
 
 #ifndef __SPARSE_HEADER__
 #include <vecLib/Sparse/Sparse.h>
+#include <vecLib/Sparse/Solve.h>
 #endif
 
 #ifndef __QUADRATURE_PUBLIC_HEADER__

@@ -7,7 +7,13 @@
  *	@copyright 2012 Apple, Inc. All rights reserved.
  */
 
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
+
 #import <CoreBluetooth/CBDefines.h>
+#import <CoreBluetooth/CBPeer.h>
+
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,36 +25,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 NS_CLASS_AVAILABLE(10_9, 6_0)
-CB_EXTERN_CLASS @interface CBCentral : NSObject <NSCopying>
-{
-@private
-	CFUUIDRef	_UUID;
-	NSUUID		*_identifier;
-	NSUInteger	_maximumUpdateValueLength;
-}
-
-/*!
- *  @property	UUID
- *
- *  @discussion The UUID of the central. This UUID can be used to retrieve the equivalent @link CBPeripheral @/link object via @link retrievePeripherals: @/link.
- *
- *	@deprecated Use the {@link identifier} property instead.
- */
-@property(readonly, nonatomic) CFUUIDRef UUID NS_DEPRECATED(10_7, 10_9, 5_0, 7_0);
-
-/*!
- *  @property	identifier
- *
- *  @discussion	The unique identifier associated with the central. This identifier can be used to retrieve the equivalent @link CBPeripheral @/link object
- *				via @link retrievePeripheralsWithIdentifiers: @/link.
- */
-@property(readonly, nonatomic) NSUUID *identifier;
+CB_EXTERN_CLASS @interface CBCentral : CBPeer
 
 /*!
  *  @property	maximumUpdateValueLength
  *
  *  @discussion	The maximum amount of data, in bytes, that can be received by the central in a single notification or indication.
- 
+ *
  *	@see		updateValue:forCharacteristic:onSubscribedCentrals:
  */
 @property(readonly, nonatomic) NSUInteger maximumUpdateValueLength;

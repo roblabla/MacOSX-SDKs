@@ -1,12 +1,13 @@
 /*
 	NSSegmentedControl.h
 	Application Kit
-	Copyright (c) 2003-2016, Apple Inc.
+	Copyright (c) 2003-2017, Apple Inc.
 	All rights reserved.
 */
 
 #import <AppKit/NSControl.h>
 #import <AppKit/NSCell.h>
+#import <AppKit/NSUserInterfaceCompression.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,12 +28,27 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
     NSSegmentStyleSmallSquare = 6,
     NSSegmentStyleSeparated NS_ENUM_AVAILABLE_MAC(10_10) = 8,
     
-    /* In Mac OS X 10.7, the following styles have artwork identical to NSSegmentStyleTexturedSquare, and their usage is discouraged.  Use NSSegmentStyleTexturedSquare instead because it has the correct metrics for this artwork. */
+    /* In Mac OS X 10.10 and later, the following styles have identical artwork */
     NSSegmentStyleTexturedRounded NS_ENUM_AVAILABLE_MAC(10_5) = 2,
     NSSegmentStyleCapsule NS_ENUM_AVAILABLE_MAC(10_5) = 5
 } NS_ENUM_AVAILABLE_MAC(10_5);
 
-@interface NSSegmentedControl : NSControl {
+typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
+    /// Dynamically sized segments will be sized to fit their contents, any remaining space will be left blank. This style is equivalent to the way segments were distributed on older systems.
+    NSSegmentDistributionFit = 0,
+    
+    /// Dynamically sized segments will be sized to fill the available space, with extra space being distributed equally among them. Default value.
+    NSSegmentDistributionFill,
+    
+    /// Dynamically sized segments will be sized to fill the available space, and kept the same size as each other.
+    NSSegmentDistributionFillEqually,
+    
+    /// Dynamically sized segments will be sized to fill the available space, and kept proportional to their fitting size.
+    NSSegmentDistributionFillProportionally,
+    
+} NS_ENUM_AVAILABLE_MAC(10_13);
+
+@interface NSSegmentedControl : NSControl <NSUserInterfaceCompression> {
   @private
     NSInteger _reserved1;
     NSInteger _reserved2;
@@ -52,10 +68,8 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
 - (void)setImage:(nullable NSImage *)image forSegment:(NSInteger)segment;
 - (nullable NSImage *)imageForSegment:(NSInteger)segment;
 
-
 - (void)setImageScaling:(NSImageScaling)scaling forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
 - (NSImageScaling)imageScalingForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_5);
-
 
 - (void)setLabel:(NSString *)label forSegment:(NSInteger)segment;
 - (nullable NSString *)labelForSegment:(NSInteger)segment;
@@ -69,6 +83,15 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
 - (void)setEnabled:(BOOL)enabled forSegment:(NSInteger)segment;
 - (BOOL)isEnabledForSegment:(NSInteger)segment;
 
+- (void)setToolTip:(nullable NSString *)toolTip forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+- (nullable NSString *)toolTipForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+
+- (void)setTag:(NSInteger)tag forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+- (NSInteger)tagForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+
+- (void)setShowsMenuIndicator:(BOOL)showsMenuIndicator forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+- (BOOL)showsMenuIndicatorForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+
 @property NSSegmentStyle segmentStyle NS_AVAILABLE_MAC(10_5);
 
 @property (getter=isSpringLoaded) BOOL springLoaded NS_AVAILABLE_MAC(10_10_3); // sends action on deep-press or extended hover while dragging. Defaults to NO.
@@ -80,6 +103,13 @@ typedef NS_ENUM(NSInteger, NSSegmentStyle) {
 @property (readonly) double doubleValueForSelectedSegment NS_AVAILABLE_MAC(10_10_3);
 
 @property (nullable, copy) NSColor *selectedSegmentBezelColor NS_AVAILABLE_MAC(10_12_2); // The color of the selected segment's bevel, in appearances that support it
+
+@property (readonly) NSInteger indexOfSelectedItem NS_AVAILABLE_MAC(10_4); // same as selectedSegment, but useful for connecting a segmented control to -[NSTabView takeSelectedTabViewItemFromSender:]
+
+- (void)setAlignment:(NSTextAlignment)alignment forSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13); // Controls the content alignment of the specified segment. Defaults to NSTextAlignmentCenter and results in the standard centered cluster of content
+- (NSTextAlignment)alignmentForSegment:(NSInteger)segment NS_AVAILABLE_MAC(10_13);
+
+@property NSSegmentDistribution segmentDistribution NS_AVAILABLE_MAC(10_13); // Defaults to NSSegmentDistributionFill on 10.13, older systems will continue to behave similarly to NSSegmentDistributionFit
 
 @end
 

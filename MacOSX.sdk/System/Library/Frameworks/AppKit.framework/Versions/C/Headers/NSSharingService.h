@@ -1,7 +1,7 @@
 /*
  NSSharingService.h
  Application Kit
- Copyright (c) 2011-2016, Apple Inc.
+ Copyright (c) 2011-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -12,8 +12,6 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 
-#define NS_SHARING_SERVICE_DELEGATE_TRANSITION_IMAGE_FOR_SHARE_ITEM_DECLARES_NULLABILITY (1)
-
 @class NSString, NSImage, NSView, NSError, NSWindow;
 @class CKShare, CKContainer;
 
@@ -23,33 +21,35 @@ NS_ASSUME_NONNULL_BEGIN
 /* NSSharing can be used to share items to different kinds of local and remote services. Items are objects which respond to the NSPasteboardWriting protocol, like NSURL, NSImage or NSString. If an NSURL is a file URL (point to a video for example), then the content of the file will be shared. If the URL is remote, then the URL itself will be shared. 
  */
 
+typedef NSString * NSSharingServiceName NS_EXTENSIBLE_STRING_ENUM;
+
 /* built-in sharing services
  */
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnFacebook NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnTwitter NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnSinaWeibo NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnTencentWeibo NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostOnLinkedIn NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSString * const NSSharingServiceNameComposeEmail NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNameComposeMessage NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNameSendViaAirDrop NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNameAddToSafariReadingList NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNameAddToIPhoto NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNameAddToAperture NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsTwitterProfileImage NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsFacebookProfileImage NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsLinkedInProfileImage NS_AVAILABLE_MAC(10_9);
-APPKIT_EXTERN NSString * const NSSharingServiceNameUseAsDesktopPicture NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostImageOnFlickr NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostVideoOnVimeo NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostVideoOnYouku NS_AVAILABLE_MAC(10_8);
-APPKIT_EXTERN NSString * const NSSharingServiceNamePostVideoOnTudou NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnFacebook NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTwitter NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnSinaWeibo NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnTencentWeibo NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostOnLinkedIn NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeEmail NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameComposeMessage NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameSendViaAirDrop NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToSafariReadingList NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToIPhoto NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameAddToAperture NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsTwitterProfileImage NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsFacebookProfileImage NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsLinkedInProfileImage NS_AVAILABLE_MAC(10_9);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameUseAsDesktopPicture NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostImageOnFlickr NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnVimeo NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnYouku NS_AVAILABLE_MAC(10_8);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNamePostVideoOnTudou NS_AVAILABLE_MAC(10_8);
 
 /* This service differs from other NSSharingServices in that it allows the user to establishes a persistent sharing session for the specified items with potentially many participants, instead of sending a copy of the items. You can invoke this service with an NSItemProvider that has registered a CKShare & CKContainer via either -registerCloudKitShare:container: or -registerCloudKitShareWithPreparationHandler:. (Registering other types on the same provider to enable other sharing services is allowed.)
  
 When performed, this service gives the user the opportunity to invite participants and start sharing. If the content is already shared it instead allows the user to view or modify participation or stop sharing. To detect changes the service makes to the CKShare, implement -sharingService:didSaveShare: and -sharingService:didStopSharing:.
  */
-APPKIT_EXTERN NSString * const NSSharingServiceNameCloudSharing NS_AVAILABLE_MAC(10_12);
+APPKIT_EXTERN NSSharingServiceName const NSSharingServiceNameCloudSharing NS_AVAILABLE_MAC(10_12);
 
 
 @protocol NSSharingServiceDelegate;
@@ -59,7 +59,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @private
     id _reserved;
 }
-@property (nullable, assign) id <NSSharingServiceDelegate> delegate;
+@property (nullable, weak) id <NSSharingServiceDelegate> delegate;
 @property (readonly, copy) NSString *title;
 @property (readonly, strong) NSImage *image;
 @property (nullable, readonly, strong) NSImage *alternateImage;
@@ -86,14 +86,14 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 
 /* Returns a list of NSSharingServices which could share all the provided items together. sharingServicesForItems can be used to build a custom UI, or to populate a contextual NSMenu. 
-   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
+   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
  */
 + (NSArray<NSSharingService *> *)sharingServicesForItems:(NSArray *)items;
 
 
 /* Returns an NSSharingService representing one of the built-in services. 
  */
-+ (nullable NSSharingService *)sharingServiceNamed:(NSString *)serviceName;
++ (nullable NSSharingService *)sharingServiceNamed:(NSSharingServiceName)serviceName;
 
 
 /* Creates a custom NSSharingService object. Custom sharing services can be added to the NSSharingServicePicker with the sharingServicePicker:sharingServicesForItems:proposedSharingServices: delegate method.
@@ -105,13 +105,13 @@ NS_CLASS_AVAILABLE(10_8, NA)
 - (instancetype)init NS_UNAVAILABLE;
 
 /* Returns whether a service can do something with all the provided items. This can be used to validate a custom UI such as a dedicated Twitter button. If items is nil, the method will return YES when the service is configured. Therefore you could call it once at launch time with nil items to check whether to display the button or not, and then with real items to enable and disable the button depending on the context or selection.
-   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
+   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
  */
 - (BOOL)canPerformWithItems:(nullable NSArray *)items;
 
 
 /* Manually performs the service on the provided items. In most cases this will display a sharing window.
-   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
+   The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
  */
 - (void)performWithItems:(NSArray *)items;
 
@@ -141,13 +141,9 @@ typedef NS_ENUM(NSInteger, NSSharingContentScope) {
 /* The following methods are invoked when the service is performed and the sharing window pops up, to present a transition between the original items and the sharing window.
  */
 - (NSRect)sharingService:(NSSharingService *)sharingService sourceFrameOnScreenForShareItem:(id)item;
-#if NS_SHARING_SERVICE_DELEGATE_TRANSITION_IMAGE_FOR_SHARE_ITEM_DECLARES_NULLABILITY
 /* When non-nil, the image returned would be used for the transitioning animation. When nil, the transitioning animation is disabled.
  */
 - (nullable NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id)item contentRect:(NSRect *)contentRect;
-#else
-- (NSImage *)sharingService:(NSSharingService *)sharingService transitionImageForShareItem:(id)item contentRect:(NSRect *)contentRect;
-#endif
 - (nullable NSWindow *)sharingService:(NSSharingService *)sharingService sourceWindowForShareItems:(NSArray *)items sharingContentScope:(NSSharingContentScope *)sharingContentScope;
 
 /* The following method is invoked when the service is performed and wants to display its contents in a popover. The delegate should return the view that will act as the anchor of the popover, along with the target rectangle within the bounds of that view and preferred edge of that rectangle for the popover to appear. The delegate may also return nil, indicating that there is no anchoring view currently available, in which case the service may attempt to display the service via some other means.
@@ -223,9 +219,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
     id _reserved;
 }
 
-@property (nullable, assign) id <NSSharingServicePickerDelegate> delegate;
+@property (nullable, weak) id <NSSharingServicePickerDelegate> delegate;
 
-/*  Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
+/*  Returns a new picker. The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
  */
 - (instancetype)initWithItems:(NSArray *)items NS_DESIGNATED_INITIALIZER;
 
@@ -252,7 +248,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
                                            }] autorelease];
         [sharingServices addObject:customService];
         return [sharingServices autorelease];
-  The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider. (e.g. NSString, NSImage, NSURL, etc.)
+  The items represent the objects to be shared and must conform to the <NSPasteboardWriting> protocol or be an NSItemProvider or an NSDocument. (e.g. NSString, NSImage, NSURL, etc.)
  */
 - (NSArray<NSSharingService *> *)sharingServicePicker:(NSSharingServicePicker *)sharingServicePicker sharingServicesForItems:(NSArray *)items proposedSharingServices:(NSArray<NSSharingService *> *)proposedServices;
 

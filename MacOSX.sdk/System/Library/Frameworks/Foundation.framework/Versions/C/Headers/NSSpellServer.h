@@ -1,5 +1,5 @@
 /*	NSSpellServer.h
-	Copyright (c) 1990-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1990-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -81,16 +81,16 @@ The result should be an array of NSTextCheckingResult objects, of the spelling, 
 
 - (nullable NSArray<NSString *> *)spellServer:(NSSpellServer *)sender suggestCompletionsForPartialWordRange:(NSRange)range inString:(NSString *)string language:(NSString *)language;
 
-- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(nullable NSString *)language details:(NSArray<NSDictionary<NSString *, id> *> * _Nullable * _Nullable)details NS_AVAILABLE(10_5, NA);
+- (NSRange)spellServer:(NSSpellServer *)sender checkGrammarInString:(NSString *)stringToCheck language:(nullable NSString *)language details:(NSArray<NSDictionary<NSString *, id> *> * _Nullable * _Nullable)details API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* Keys for the dictionaries in the details array. */
-FOUNDATION_EXPORT NSString *const NSGrammarRange NS_AVAILABLE(10_5, NA);
-FOUNDATION_EXPORT NSString *const NSGrammarUserDescription NS_AVAILABLE(10_5, NA);
-FOUNDATION_EXPORT NSString *const NSGrammarCorrections NS_AVAILABLE(10_5, NA);
+FOUNDATION_EXPORT NSString *const NSGrammarRange API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString *const NSGrammarUserDescription API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+FOUNDATION_EXPORT NSString *const NSGrammarCorrections API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
-- (nullable NSArray<NSTextCheckingResult *> *)spellServer:(NSSpellServer *)sender checkString:(NSString *)stringToCheck offset:(NSUInteger)offset types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options orthography:(nullable NSOrthography *)orthography wordCount:(NSInteger *)wordCount NS_AVAILABLE(10_6, NA);
+- (nullable NSArray<NSTextCheckingResult *> *)spellServer:(NSSpellServer *)sender checkString:(NSString *)stringToCheck offset:(NSUInteger)offset types:(NSTextCheckingTypes)checkingTypes options:(nullable NSDictionary<NSString *, id> *)options orthography:(nullable NSOrthography *)orthography wordCount:(NSInteger *)wordCount API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
-- (void)spellServer:(NSSpellServer *)sender recordResponse:(NSUInteger)response toCorrection:(NSString *)correction forWord:(NSString *)word language:(NSString *)language NS_AVAILABLE(10_7, NA);
+- (void)spellServer:(NSSpellServer *)sender recordResponse:(NSUInteger)response toCorrection:(NSString *)correction forWord:(NSString *)word language:(NSString *)language API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

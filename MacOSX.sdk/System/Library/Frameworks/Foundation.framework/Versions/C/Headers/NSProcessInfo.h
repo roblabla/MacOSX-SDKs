@@ -1,5 +1,5 @@
 /*	NSProcessInfo.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSObject.h>
@@ -16,7 +16,7 @@ enum {	/* Constants returned by -operatingSystem */
     NSMACHOperatingSystem,
     NSSunOSOperatingSystem,
     NSOSF1OperatingSystem
-} NS_ENUM_DEPRECATED(10_0, 10_10, 2_0, 8_0);
+} API_DEPRECATED("Not supported", macos(10.0,10.10), ios(2.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 typedef struct {
     NSInteger majorVersion;
@@ -35,9 +35,7 @@ typedef struct {
     NSInteger		automaticTerminationOptOutCounter;
 }
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSProcessInfo *processInfo;
-#endif
 
 @property (readonly, copy) NSDictionary<NSString *, NSString *> *environment;
 @property (readonly, copy) NSArray<NSString *> *arguments;
@@ -47,28 +45,28 @@ typedef struct {
 
 @property (readonly, copy) NSString *globallyUniqueString;
 
-- (NSUInteger)operatingSystem NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "-operatingSystem always returns NSMACHOperatingSystem, use -operatingSystemVersion or -isOperatingSystemAtLeastVersion: instead");
-- (NSString *)operatingSystemName NS_DEPRECATED(10_0, 10_10, 2_0, 8_0, "-operatingSystemName always returns NSMACHOperatingSystem, use -operatingSystemVersionString instead");
+- (NSUInteger)operatingSystem API_DEPRECATED("-operatingSystem always returns NSMACHOperatingSystem, use -operatingSystemVersion or -isOperatingSystemAtLeastVersion: instead", macos(10.0,10.10), ios(2.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (NSString *)operatingSystemName API_DEPRECATED("-operatingSystemName always returns NSMACHOperatingSystem, use -operatingSystemVersionString instead", macos(10.0,10.10), ios(2.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 	/* Human readable, localized; appropriate for displaying to user or using in bug emails and such; NOT appropriate for parsing */
 @property (readonly, copy) NSString *operatingSystemVersionString;
 
-@property (readonly) NSOperatingSystemVersion operatingSystemVersion NS_AVAILABLE(10_10, 8_0);
+@property (readonly) NSOperatingSystemVersion operatingSystemVersion API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
-@property (readonly) NSUInteger processorCount NS_AVAILABLE(10_5, 2_0);
-@property (readonly) NSUInteger activeProcessorCount NS_AVAILABLE(10_5, 2_0);
-@property (readonly) unsigned long long physicalMemory NS_AVAILABLE(10_5, 2_0);
+@property (readonly) NSUInteger processorCount API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (readonly) NSUInteger activeProcessorCount API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (readonly) unsigned long long physicalMemory API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
-- (BOOL) isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion)version NS_AVAILABLE(10_10, 8_0);
-@property (readonly) NSTimeInterval systemUptime NS_AVAILABLE(10_6, 4_0);
+- (BOOL) isOperatingSystemAtLeastVersion:(NSOperatingSystemVersion)version API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+@property (readonly) NSTimeInterval systemUptime API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 /* Disable or reenable the ability to be quickly killed. The default implementations of these methods increment or decrement, respectively, a counter whose value is 1 when the process is first created. When the counter's value is 0 the application is considered to be safely killable and may be killed by the operating system without any notification or event being sent to the process first. If an application's Info.plist has an NSSupportsSuddenTermination entry whose value is true then NSApplication invokes -enableSuddenTermination automatically during application launch, which typically renders the process killable right away. You can also manually invoke -enableSuddenTermination right away in, for example, agents or daemons that don't depend on AppKit. After that, you can invoke these methods whenever the process has work it must do before it terminates. For example:
  - NSUserDefaults uses these to prevent process killing between the time at which a default has been set and the time at which the preferences file including that default has been written to disk.
  - NSDocument uses these to prevent process killing between the time at which the user has made a change to a document and the time at which the user's change has been written to disk.
  - You can use these whenever your application defers work that must be done before the application terminates. If for example your application ever defers writing something to disk, and it has an NSSupportsSuddenTermination entry in its Info.plist so as not to contribute to user-visible delays at logout or shutdown time, it must invoke -disableSuddenTermination when the writing is first deferred and -enableSuddenTermination after the writing is actually done.
  */
-- (void)disableSuddenTermination NS_AVAILABLE(10_6, NA);
-- (void)enableSuddenTermination NS_AVAILABLE(10_6, NA);
+- (void)disableSuddenTermination API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, watchos, tvos);
+- (void)enableSuddenTermination API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Increment or decrement the counter tracking the number of automatic quit opt-out requests. When this counter is greater than zero, the app will be considered 'active' and ineligible for automatic termination.
@@ -76,15 +74,15 @@ typedef struct {
  * Each pair of calls should have a matching "reason" argument, which can be used to easily track why an application is or is not automatically terminable.
  * A given reason can be used more than once at the same time (for example: two files are transferring over the network, each one disables automatic termination with the reason @"file transfer in progress")
  */
-- (void)disableAutomaticTermination:(NSString *)reason NS_AVAILABLE(10_7, NA);
-- (void)enableAutomaticTermination:(NSString *)reason NS_AVAILABLE(10_7, NA);
+- (void)disableAutomaticTermination:(NSString *)reason API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
+- (void)enableAutomaticTermination:(NSString *)reason API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*
  * Marks the calling app as supporting automatic termination. Without calling this or setting the equivalent Info.plist key (NSSupportsAutomaticTermination), the above methods (disableAutomaticTermination:/enableAutomaticTermination:) have no effect,
  * although the counter tracking automatic termination opt-outs is still kept up to date to ensure correctness if this is called later. Currently, passing NO has no effect.
  * This should be called during -applicationDidFinishLaunching or earlier.
  */
-@property BOOL automaticTerminationSupportEnabled NS_AVAILABLE(10_7, NA);
+@property BOOL automaticTerminationSupportEnabled API_AVAILABLE(macos(10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -154,28 +152,28 @@ typedef NS_OPTIONS(uint64_t, NSActivityOptions) {
     
     // Used for activities that require the highest amount of timer and I/O precision available. Very few applications should need to use this constant.
     NSActivityLatencyCritical = 0xFF00000000ULL,
-} NS_ENUM_AVAILABLE(10_9, 7_0);
+} API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 @interface NSProcessInfo (NSProcessInfoActivity)
 /*
  * Pass in an activity to this API, and a non-NULL, non-empty reason string. Indicate completion of the activity by calling the corresponding endActivity: method with the result of the beginActivityWithOptions:reason: method. The reason string is used for debugging.
  */
-- (id <NSObject>)beginActivityWithOptions:(NSActivityOptions)options reason:(NSString *)reason NS_AVAILABLE(10_9, 7_0);
+- (id <NSObject>)beginActivityWithOptions:(NSActivityOptions)options reason:(NSString *)reason API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*
  * The argument to this method is the result of beginActivityWithOptions:reason:.
  */
-- (void)endActivity:(id <NSObject>)activity NS_AVAILABLE(10_9, 7_0);
+- (void)endActivity:(id <NSObject>)activity API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*
  * Synchronously perform an activity. The activity will be automatically ended after your block argument returns. The reason string is used for debugging.
  */
-- (void)performActivityWithOptions:(NSActivityOptions)options reason:(NSString *)reason usingBlock:(void (^)(void))block NS_AVAILABLE(10_9, 7_0);
+- (void)performActivityWithOptions:(NSActivityOptions)options reason:(NSString *)reason usingBlock:(void (^)(void))block API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* 
  * Perform an expiring background task, which obtains an expiring task assertion on iOS. The block contains any work which needs to be completed as a background-priority task. The block will be scheduled on a system-provided concurrent queue. After a system-specified time, the block will be called with the `expired` parameter set to YES. The `expired` parameter will also be YES if the system decides to prematurely terminate a previous non-expiration invocation of the block.
  */
-- (void)performExpiringActivityWithReason:(NSString *)reason usingBlock:(void(^)(BOOL expired))block NS_AVAILABLE_IOS(8_2);
+- (void)performExpiringActivityWithReason:(NSString *)reason usingBlock:(void(^)(BOOL expired))block API_AVAILABLE(ios(8.2), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -191,27 +189,27 @@ typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
     // No corrective action is needed.
     NSProcessInfoThermalStateNominal,
 
-    // The system has reached a state where fans may become audible.
+    // The system has reached a state where fans may become audible (on systems which have fans). Recommendation: Defer non-user-visible activity.
     NSProcessInfoThermalStateFair,
 
-    // Fans are running at maximum speed, system performance maybe impacted. Recommendation: reduce application's usage of CPU, GPU and I/O, if possible. Switch to lower quality visual effects, reduce frame rates.
+    // Fans are running at maximum speed (on systems which have fans), system performance may be impacted. Recommendation: reduce application's usage of CPU, GPU and I/O, if possible. Switch to lower quality visual effects, reduce frame rates.
     NSProcessInfoThermalStateSerious,
     
-    // System performance is significantly impacted and the Mac needs to cool down. Recommendation: reduce application's usage of CPU, GPU, and I/O to the minimum level needed to respond to user actions. Consider stopping use of camera and other peripherals if your application is using them.
+    // System performance is significantly impacted and the system needs to cool down. Recommendation: reduce application's usage of CPU, GPU, and I/O to the minimum level needed to respond to user actions. Consider stopping use of camera and other peripherals if your application is using them.
     NSProcessInfoThermalStateCritical
-} NS_ENUM_AVAILABLE(10_10_3, NA);
+} API_AVAILABLE(macosx(10.10.3), ios(11.0), watchos(4.0), tvos(11.0));
 
 @interface NSProcessInfo (NSProcessInfoThermalState)
 
 // Retrieve the current thermal state of the system. On systems where thermal state is unknown or unsupported, the value returned from the thermalState property is always NSProcessInfoThermalStateNominal.
-@property (readonly) NSProcessInfoThermalState thermalState NS_AVAILABLE(10_10_3, NA);
+@property (readonly) NSProcessInfoThermalState thermalState API_AVAILABLE(macosx(10.10.3), ios(11.0), watchos(4.0), tvos(11.0));
 
 @end
 
 @interface NSProcessInfo (NSProcessInfoPowerState)
 
 // Retrieve the current setting of the system for the low power mode setting. On systems where the low power mode is unknown or unsupported, the value returned from the lowPowerModeEnabled property is always NO
-@property (readonly, getter=isLowPowerModeEnabled) BOOL lowPowerModeEnabled NS_AVAILABLE(NA, 9_0);
+@property (readonly, getter=isLowPowerModeEnabled) BOOL lowPowerModeEnabled API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -222,7 +220,7 @@ typedef NS_ENUM(NSInteger, NSProcessInfoThermalState) {
  
  This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is NSProcessInfo.processInfo.
 */
-FOUNDATION_EXTERN NSNotificationName const NSProcessInfoThermalStateDidChangeNotification NS_AVAILABLE(10_10_3, NA);
+FOUNDATION_EXTERN NSNotificationName const NSProcessInfoThermalStateDidChangeNotification API_AVAILABLE(macosx(10.10.3), ios(11.0), watchos(4.0), tvos(11.0));
 
 /*
  NSProcessInfoPowerStateDidChangeNotification is posted once any power usage mode of the system has changed. Once the notification is posted, use the isLowPowerModeEnabled property to retrieve the current state of the low power mode setting of the system.
@@ -231,6 +229,6 @@ FOUNDATION_EXTERN NSNotificationName const NSProcessInfoThermalStateDidChangeNot
  
  This notification is posted on the global dispatch queue. Register for it using the default notification center. The object associated with the notification is NSProcessInfo.processInfo.
  */
-FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotification NS_AVAILABLE(NA, 9_0);
+FOUNDATION_EXTERN NSNotificationName const NSProcessInfoPowerStateDidChangeNotification API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 NS_ASSUME_NONNULL_END

@@ -56,6 +56,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	void *_impl;
 }
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /*! @property distanceAttenuationModel
     @abstract Type of distance attenuation model
     @discussion
@@ -116,6 +118,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 @private
 	void *_impl;
 }
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /*! @property enable
     @abstract Turns on/off the reverb

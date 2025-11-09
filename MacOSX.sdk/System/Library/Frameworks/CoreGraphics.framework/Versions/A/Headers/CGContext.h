@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGContext *CGContextRef;
+typedef struct CF_BRIDGED_TYPE(id) CGContext *CGContextRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGAffineTransform.h>
@@ -464,6 +464,10 @@ CG_EXTERN void CGContextClip(CGContextRef cg_nullable c)
 
 CG_EXTERN void CGContextEOClip(CGContextRef cg_nullable c)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+
+/* Reset the current clip of `c' to the default value. */
+
+CG_EXTERN void CGContextResetClip(CGContextRef c);
 
 /* Add `mask' transformed to `rect' to the clipping area of `context'. The
    mask, which may be either an image mask or an image, is mapped into the

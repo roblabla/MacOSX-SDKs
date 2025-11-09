@@ -2,7 +2,7 @@
  *  IOSurface.h
  *  IOSurface
  *
- *  Copyright 2006-2008 Apple Computer, Inc. All rights reserved.
+ *  Copyright 2006-2017 Apple Inc. All rights reserved.
  *
  */
 

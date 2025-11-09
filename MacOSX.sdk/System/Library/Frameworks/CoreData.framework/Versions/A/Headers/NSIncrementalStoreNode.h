@@ -1,9 +1,9 @@
 /*
- NSIncrementalStoreNode.h
- Core Data
- Copyright (c) 2004-2016, Apple Inc.
- All rights reserved.
- */
+    NSIncrementalStoreNode.h
+    Core Data
+    Copyright (c) 2004-2017, Apple Inc.
+    All rights reserved.
+*/
 
 #import <CoreData/NSManagedObjectID.h>
 #import <Foundation/NSDictionary.h>

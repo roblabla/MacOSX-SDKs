@@ -1,6 +1,6 @@
 /* CoreAnimation - CAAnimation.h
 
-   Copyright (c) 2006-2016, Apple Inc.
+   Copyright (c) 2006-2017, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
 @interface CAAnimation : NSObject
-    <NSCoding, NSCopying, CAMediaTiming, CAAction>
+    <NSSecureCoding, NSCopying, CAMediaTiming, CAAction>
 {
 @private
   void *_attr;

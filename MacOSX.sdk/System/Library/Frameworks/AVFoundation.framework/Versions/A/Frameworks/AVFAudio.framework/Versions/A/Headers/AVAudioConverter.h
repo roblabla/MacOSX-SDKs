@@ -168,8 +168,10 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 		The input format.
 	@param toFormat 
 		The output format.
+	@discussion
+		Returns nil if the format conversion is not possible.
 */
-- (instancetype)initFromFormat:(AVAudioFormat *)fromFormat toFormat:(AVAudioFormat *)toFormat;
+- (nullable instancetype)initFromFormat:(AVAudioFormat *)fromFormat toFormat:(AVAudioFormat *)toFormat;
 
 
 /*! @method reset
@@ -220,7 +222,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 /*! @property sampleRateConverterAlgorithm
     @abstract An AVSampleRateConverterAlgorithmKey value as defined in AVAudioSettings.h.
 */
-@property (nonatomic, retain) NSString *sampleRateConverterAlgorithm;
+@property (nonatomic, retain, nullable) NSString *sampleRateConverterAlgorithm;
 
 /*! @property primeMethod
     @abstract Indicates the priming method to be used by the sample rate converter or decoder.

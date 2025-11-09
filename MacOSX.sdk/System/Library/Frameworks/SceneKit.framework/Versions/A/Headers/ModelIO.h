@@ -1,7 +1,7 @@
 //
 //  ModelIO.h
 //
-//  Copyright (c) 2015-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2015-2017 Apple Inc. All rights reserved.
 //
 
 #import <ModelIO/ModelIO.h>
@@ -14,63 +14,63 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 @interface SCNScene (SCNModelIO)
-+ (instancetype)sceneWithMDLAsset:(MDLAsset *)mdlAsset NS_AVAILABLE(10_11, 9_0);
++ (instancetype)sceneWithMDLAsset:(MDLAsset *)mdlAsset API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface MDLAsset (SCNModelIO)
-+ (instancetype)assetWithSCNScene:(SCNScene *)scnScene NS_AVAILABLE(10_11, 9_0);
-+ (instancetype)assetWithSCNScene:(SCNScene *)scnScene bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
++ (instancetype)assetWithSCNScene:(SCNScene *)scnScene API_AVAILABLE(macos(10.11), ios(9.0));
++ (instancetype)assetWithSCNScene:(SCNScene *)scnScene bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 @end
 
 @interface SCNNode (SCNModelIO)
-+ (instancetype)nodeWithMDLObject:(MDLObject *)mdlObject NS_AVAILABLE(10_11, 9_0);
++ (instancetype)nodeWithMDLObject:(MDLObject *)mdlObject API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface MDLObject (SCNModelIO)
-+ (instancetype)objectWithSCNNode:(SCNNode *)scnNode NS_AVAILABLE(10_11, 9_0);
-+ (instancetype)objectWithSCNNode:(SCNNode *)scnNode bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
++ (instancetype)objectWithSCNNode:(SCNNode *)scnNode API_AVAILABLE(macos(10.11), ios(9.0));
++ (instancetype)objectWithSCNNode:(SCNNode *)scnNode bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 @end
 
 @interface SCNGeometry (SCNModelIO)
-+ (instancetype)geometryWithMDLMesh:(MDLMesh *)mdlMesh NS_AVAILABLE(10_11, 9_0);
++ (instancetype)geometryWithMDLMesh:(MDLMesh *)mdlMesh API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface MDLMesh (SCNModelIO)
-+ (instancetype)meshWithSCNGeometry:(SCNGeometry *)scnGeometry NS_AVAILABLE(10_11, 9_0);
-+ (instancetype)meshWithSCNGeometry:(SCNGeometry *)scnGeometry bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
++ (instancetype)meshWithSCNGeometry:(SCNGeometry *)scnGeometry API_AVAILABLE(macos(10.11), ios(9.0));
++ (instancetype)meshWithSCNGeometry:(SCNGeometry *)scnGeometry bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 @end
 
 @interface SCNGeometryElement (SCNModelIO)
-+ (instancetype)geometryElementWithMDLSubmesh:(MDLSubmesh *)mdlSubMesh NS_AVAILABLE(10_11, 9_0);
++ (instancetype)geometryElementWithMDLSubmesh:(MDLSubmesh *)mdlSubMesh API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface MDLSubmesh (SCNModelIO)
-+ (instancetype)submeshWithSCNGeometryElement:(SCNGeometryElement *)scnGeometryElement NS_AVAILABLE(10_11, 9_0);
-+ (instancetype)submeshWithSCNGeometryElement:(SCNGeometryElement *)scnGeometryElement bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator NS_AVAILABLE(10_12, 10_0);
++ (instancetype)submeshWithSCNGeometryElement:(SCNGeometryElement *)scnGeometryElement API_AVAILABLE(macos(10.11), ios(9.0));
++ (instancetype)submeshWithSCNGeometryElement:(SCNGeometryElement *)scnGeometryElement bufferAllocator:(nullable id <MDLMeshBufferAllocator>)bufferAllocator API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 @end
 
 @interface SCNMaterial (SCNModelIO)
-+ (instancetype)materialWithMDLMaterial:(MDLMaterial *)mdlMaterial NS_AVAILABLE(10_11, 9_0);
++ (instancetype)materialWithMDLMaterial:(MDLMaterial *)mdlMaterial API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface MDLMaterial (SCNModelIO)
-+ (instancetype)materialWithSCNMaterial:(SCNMaterial *)scnMaterial NS_AVAILABLE(10_11, 9_0);
++ (instancetype)materialWithSCNMaterial:(SCNMaterial *)scnMaterial API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface SCNLight (SCNModelIO)
-+ (instancetype)lightWithMDLLight:(MDLLight *)mdlLight NS_AVAILABLE(10_11, 9_0);
++ (instancetype)lightWithMDLLight:(MDLLight *)mdlLight API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface MDLLight (SCNModelIO)
-+ (instancetype)lightWithSCNLight:(SCNLight *)scnLight NS_AVAILABLE(10_11, 9_0);
++ (instancetype)lightWithSCNLight:(SCNLight *)scnLight API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface SCNCamera (SCNModelIO)
-+ (instancetype)cameraWithMDLCamera:(MDLCamera *)mdlCamera NS_AVAILABLE(10_11, 9_0);
++ (instancetype)cameraWithMDLCamera:(MDLCamera *)mdlCamera API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 @interface MDLCamera (SCNModelIO)
-+ (instancetype)cameraWithSCNCamera:(SCNCamera *)scnCamera NS_AVAILABLE(10_11, 9_0);
++ (instancetype)cameraWithSCNCamera:(SCNCamera *)scnCamera API_AVAILABLE(macos(10.11), ios(9.0));
 @end
 
 NS_ASSUME_NONNULL_END

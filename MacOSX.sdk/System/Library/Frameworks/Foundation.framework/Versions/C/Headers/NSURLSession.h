@@ -1,10 +1,11 @@
 /*	NSURLSession.h
-	Copyright (c) 2013-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2013-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSURLRequest.h>
 #import <Foundation/NSHTTPCookieStorage.h>
+#import <Foundation/NSProgress.h>
 
 #include <Security/SecureTransport.h>
 
@@ -125,9 +126,7 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
  * The shared session uses the currently set global NSURLCache,
  * NSHTTPCookieStorage and NSURLCredentialStorage objects.
  */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSURLSession *sharedSession;
-#endif
 
 /*
  * Customization of NSURLSession occurs during creation of a new session.
@@ -175,7 +174,7 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 
 - (void)getTasksWithCompletionHandler:(void (^)(NSArray<NSURLSessionDataTask *> *dataTasks, NSArray<NSURLSessionUploadTask *> *uploadTasks, NSArray<NSURLSessionDownloadTask *> *downloadTasks))completionHandler; /* invokes completionHandler with outstanding data, upload and download tasks. */
 
-- (void)getAllTasksWithCompletionHandler:(void (^)(NSArray<__kindof NSURLSessionTask *> *tasks))completionHandler NS_AVAILABLE(10_11, 9_0); /* invokes completionHandler with all outstanding tasks. */
+- (void)getAllTasksWithCompletionHandler:(void (^)(NSArray<__kindof NSURLSessionTask *> *tasks))completionHandler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); /* invokes completionHandler with all outstanding tasks. */
 
 /* 
  * NSURLSessionTask objects are always created in a suspended state and
@@ -208,12 +207,12 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 
 /* Creates a bidirectional stream task to a given host and port.
  */
-- (NSURLSessionStreamTask *)streamTaskWithHostName:(NSString *)hostname port:(NSInteger)port NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
+- (NSURLSessionStreamTask *)streamTaskWithHostName:(NSString *)hostname port:(NSInteger)port API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 /* Creates a bidirectional stream task with an NSNetService to identify the endpoint.
  * The NSNetService will be resolved before any IO completes.
  */
-- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service NS_AVAILABLE(10_11, 9_0) __WATCHOS_PROHIBITED;
+- (NSURLSessionStreamTask *)streamTaskWithNetService:(NSNetService *)service API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 @end
 
@@ -268,12 +267,36 @@ typedef NS_ENUM(NSInteger, NSURLSessionTaskState) {
  * of processing a given request.
  */
 NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
-@interface NSURLSessionTask : NSObject <NSCopying>
+@interface NSURLSessionTask : NSObject <NSCopying, NSProgressReporting>
 
 @property (readonly)                 NSUInteger    taskIdentifier;    /* an identifier for this task, assigned by and unique to the owning session */
 @property (nullable, readonly, copy) NSURLRequest  *originalRequest;  /* may be nil if this is a stream task */
 @property (nullable, readonly, copy) NSURLRequest  *currentRequest;   /* may differ from originalRequest due to http server redirection */
 @property (nullable, readonly, copy) NSURLResponse *response;         /* may be nil if no response has been received */
+
+/*
+ * NSProgress object which represents the task progress.
+ * It can be used for task progress tracking.
+ */
+@property (readonly, strong) NSProgress *progress API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*
+ * Start the network load for this task no earlier than the specified date. If
+ * not specified, no start delay is used.
+ *
+ * Only applies to tasks created from background NSURLSession instances; has no
+ * effect for tasks created from other session types.
+ */
+@property (nullable, copy) NSDate *earliestBeginDate API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*
+ * The number of bytes that the client expects (a best-guess upper-bound) will
+ * be sent and received by this task. These values are used by system scheduling
+ * policy. If unspecified, NSURLSessionTransferSizeUnknown is used.
+ */
+@property int64_t countOfBytesClientExpectsToSend API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+@property int64_t countOfBytesClientExpectsToReceive API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 
 /* Byte count properties may be zero if no body is expected, 
  * or NSURLSessionTransferSizeUnknown if it is not possible 
@@ -344,13 +367,13 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
  * priority levels are provided: NSURLSessionTaskPriorityLow and
  * NSURLSessionTaskPriorityHigh, but use is not restricted to these.
  */
-@property float priority NS_AVAILABLE(10_10, 8_0);
+@property float priority API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 @end
 
-FOUNDATION_EXPORT const float NSURLSessionTaskPriorityDefault NS_AVAILABLE(10_10, 8_0);
-FOUNDATION_EXPORT const float NSURLSessionTaskPriorityLow NS_AVAILABLE(10_10, 8_0);
-FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXPORT const float NSURLSessionTaskPriorityDefault API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT const float NSURLSessionTaskPriorityLow API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT const float NSURLSessionTaskPriorityHigh API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /*
  * An NSURLSessionDataTask does not provide any additional
@@ -463,6 +486,38 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 
 @end
 
+/*!
+ @enum NSURLSessionMultipathServiceType
+ 
+ @discussion The NSURLSessionMultipathServiceType enum defines constants that
+ can be used to specify the multipath service type to associate an NSURLSession.  The
+ multipath service type determines whether multipath TCP should be attempted and the conditions
+ for creating and switching between subflows.  Using these service types requires the appropriate entitlement.  Any connection attempt will fail if the process does not have the required entitlement.
+ A primary interface is a generally less expensive interface in terms of both cost and power (such as WiFi or ethernet).  A secondary interface is more expensive (such as 3G or LTE).
+ 
+ @constant NSURLSessionMultipathServiceTypeNone Specifies that multipath tcp should not be used.  Connections will use a single flow.
+ This is the default value.  No entitlement is required to set this value.
+ 
+ @constant NSURLSessionMultipathServiceTypeHandover Specifies that a secondary subflow should only be used
+ when the primary subflow is not performing adequately.   Requires the com.apple.developer.networking.multipath entilement.
+ 
+ @constant NSURLSessionMultipathServiceTypeInteractive Specifies that a secodary subflow should be used if the
+ primary subflow is not performing adequately (packet loss, high round trip times, bandwidth issues).  The secondary
+ subflow will be created more aggressively than with NSURLSessionMultipathServiceTypeHandover.  Requires the com.apple.developer.networking.multipath entitlement.
+ 
+ @constant NSURLSessionMultipathServiceTypeAggregate Specifies that multiple subflows across multiple interfaces should be
+ used for better bandwidth.  This mode is only available for experimentation on devices configured for development use.
+ It can be enabled in the Developer section of the Settings app.
+ 
+ */
+typedef NS_ENUM(NSInteger, NSURLSessionMultipathServiceType)
+{
+    NSURLSessionMultipathServiceTypeNone = 0,      	/* None - no multipath (default) */
+    NSURLSessionMultipathServiceTypeHandover = 1,   	/* Handover - secondary flows brought up when primary flow is not performing adequately. */
+    NSURLSessionMultipathServiceTypeInteractive = 2, /* Interactive - secondary flows created more aggressively. */
+    NSURLSessionMultipathServiceTypeAggregate = 3    /* Aggregate - multiple subflows used for greater bandwitdh. */
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos) NS_SWIFT_NAME(URLSessionConfiguration.MultipathServiceType);
+
 /*
  * Configuration options for an NSURLSession.  When a session is
  * created, a copy of the configuration object is made - you cannot
@@ -480,12 +535,10 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 @interface NSURLSessionConfiguration : NSObject <NSCopying>
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSURLSessionConfiguration *defaultSessionConfiguration;
 @property (class, readonly, strong) NSURLSessionConfiguration *ephemeralSessionConfiguration;
-#endif
 
-+ (NSURLSessionConfiguration *)backgroundSessionConfigurationWithIdentifier:(NSString *)identifier NS_AVAILABLE(10_10, 8_0);
++ (NSURLSessionConfiguration *)backgroundSessionConfigurationWithIdentifier:(NSString *)identifier API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /* identifier for the background session configuration */
 @property (nullable, readonly, copy) NSString *identifier;
@@ -505,21 +558,37 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 /* allow request to route over cellular. */
 @property BOOL allowsCellularAccess;
 
+/*
+ * Causes tasks to wait for network connectivity to become available, rather
+ * than immediately failing with an error (such as NSURLErrorNotConnectedToInternet)
+ * when it is not. When waiting for connectivity, the timeoutIntervalForRequest
+ * property does not apply, but the timeoutIntervalForResource property does.
+ *
+ * Unsatisfactory connectivity (that requires waiting) includes cases where the
+ * device has limited or insufficient connectivity for a task (e.g., only has a
+ * cellular connection but the allowsCellularAccess property is NO, or requires
+ * a VPN connection in order to reach the desired host).
+ *
+ * Default value is NO. Ignored by background sessions, as background sessions
+ * always wait for connectivity.
+ */
+@property BOOL waitsForConnectivity API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 /* allows background tasks to be scheduled at the discretion of the system for optimal performance. */
-@property (getter=isDiscretionary) BOOL discretionary NS_AVAILABLE(10_10, 7_0);
+@property (getter=isDiscretionary) BOOL discretionary API_AVAILABLE(macos(10.10), ios(7.0), watchos(2.0), tvos(9.0));
 
 /* The identifier of the shared data container into which files in background sessions should be downloaded.
  * App extensions wishing to use background sessions *must* set this property to a valid container identifier, or
  * all transfers in that session will fail with NSURLErrorBackgroundSessionRequiresSharedContainer.
  */
-@property (nullable, copy) NSString *sharedContainerIdentifier NS_AVAILABLE(10_10, 8_0);
+@property (nullable, copy) NSString *sharedContainerIdentifier API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /* 
  * Allows the app to be resumed or launched in the background when tasks in background sessions complete
  * or when auth is required. This only applies to configurations created with +backgroundSessionConfigurationWithIdentifier:
  * and the default value is YES.
  */
-@property BOOL sessionSendsLaunchEvents NS_AVAILABLE(NA, 7_0);
+@property BOOL sessionSendsLaunchEvents API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /* The proxy dictionary, as described by <CFNetwork/CFHTTPStream.h> */
 @property (nullable, copy) NSDictionary *connectionProxyDictionary;
@@ -558,7 +627,7 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
 /* Enable extended background idle mode for any tcp sockets created.    Enabling this mode asks the system to keep the socket open
  *  and delay reclaiming it when the process moves to the background (see https://developer.apple.com/library/ios/technotes/tn2277/_index.html) 
  */
-@property BOOL shouldUseExtendedBackgroundIdleMode NS_AVAILABLE(10_11, 9_0);
+@property BOOL shouldUseExtendedBackgroundIdleMode API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 /* An optional array of Class objects which subclass NSURLProtocol.
    The Class will be sent +canInitWithRequest: when determining if
@@ -571,11 +640,20 @@ NS_CLASS_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0)
  */
 @property (nullable, copy) NSArray<Class> *protocolClasses;
 
+/* multipath service type to use for connections.  The default is NSURLSessionMultipathServiceTypeNone */
+@property NSURLSessionMultipathServiceType multipathServiceType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
 @end
 
 /*
  * Disposition options for various delegate messages
  */
+typedef NS_ENUM(NSInteger, NSURLSessionDelayedRequestDisposition) {
+    NSURLSessionDelayedRequestContinueLoading = 0,  /* Use the original request provided when the task was created; the request parameter is ignored. */
+    NSURLSessionDelayedRequestUseNewRequest = 1,    /* Use the specified request, which may not be nil. */
+    NSURLSessionDelayedRequestCancel = 2,           /* Cancel the task; the request parameter is ignored. */
+} NS_SWIFT_NAME(URLSession.DelayedRequestDisposition) API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 typedef NS_ENUM(NSInteger, NSURLSessionAuthChallengeDisposition) {
     NSURLSessionAuthChallengeUseCredential = 0,                                       /* Use the specified credential, which may be nil */
     NSURLSessionAuthChallengePerformDefaultHandling = 1,                              /* Default handling for the challenge - as if this delegate were not implemented; the credential parameter is ignored. */
@@ -588,7 +666,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
     NSURLSessionResponseCancel = 0,                                      /* Cancel the load, this is the same as -[task cancel] */
     NSURLSessionResponseAllow = 1,                                       /* Allow the load to continue */
     NSURLSessionResponseBecomeDownload = 2,                              /* Turn this request into a download */
-    NSURLSessionResponseBecomeStream NS_ENUM_AVAILABLE(10_11, 9_0) = 3,  /* Turn this task into a stream task */
+    NSURLSessionResponseBecomeStream API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 3,  /* Turn this task into a stream task */
 } NS_ENUM_AVAILABLE(NSURLSESSION_AVAILABLE, 7_0);
 
 /*
@@ -629,7 +707,7 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  * completion handler, or to begin any internal updates that will
  * result in invoking the completion handler.
  */
-- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session NS_AVAILABLE_IOS(7_0);
+- (void)URLSessionDidFinishEventsForBackgroundURLSession:(NSURLSession *)session API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 @end
 
@@ -638,6 +716,46 @@ typedef NS_ENUM(NSInteger, NSURLSessionResponseDisposition) {
  */
 @protocol NSURLSessionTaskDelegate <NSURLSessionDelegate>
 @optional
+
+/*
+ * Sent when the system is ready to begin work for a task with a delayed start
+ * time set (using the earliestBeginDate property). The completionHandler must
+ * be invoked in order for loading to proceed. The disposition provided to the
+ * completion handler continues the load with the original request provided to
+ * the task, replaces the request with the specified task, or cancels the task.
+ * If this delegate is not implemented, loading will proceed with the original
+ * request.
+ *
+ * Recommendation: only implement this delegate if tasks that have the
+ * earliestBeginDate property set may become stale and require alteration prior
+ * to starting the network load.
+ *
+ * If a new request is specified, the allowsCellularAccess property from the
+ * new request will not be used; the allowsCellularAccess property from the
+ * original request will continue to be used.
+ *
+ * Canceling the task is equivalent to calling the task's cancel method; the
+ * URLSession:task:didCompleteWithError: task delegate will be called with error
+ * NSURLErrorCancelled.
+ */
+- (void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task
+                        willBeginDelayedRequest:(NSURLRequest *)request
+                              completionHandler:(void (^)(NSURLSessionDelayedRequestDisposition disposition, NSURLRequest * _Nullable newRequest))completionHandler
+    API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*
+ * Sent when a task cannot start the network loading process because the current
+ * network connectivity is not available or sufficient for the task's request.
+ *
+ * This delegate will be called at most one time per task, and is only called if
+ * the waitsForConnectivity property in the NSURLSessionConfiguration has been
+ * set to YES.
+ *
+ * This delegate callback will never be called for background sessions, because
+ * the waitForConnectivity property is ignored by those sessions.
+ */
+- (void)URLSession:(NSURLSession *)session taskIsWaitingForConnectivity:(NSURLSessionTask *)task
+    API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /* An HTTP request is attempting to perform a redirection to a different
  * URL. You must invoke the completion routine to allow the

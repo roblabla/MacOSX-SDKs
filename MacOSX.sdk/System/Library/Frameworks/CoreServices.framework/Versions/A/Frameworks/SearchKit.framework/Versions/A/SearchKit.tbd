@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FAB92950-3E86-3EA5-8085-AC17D31DDAC5', 'x86_64: F1B3EF8D-E820-317C-AC7F-8F056C246874' ]
+uuids:           [ 'i386: C6E527B5-5F1C-3708-A0DC-20ADD3F5693A', 'x86_64: 8315A86A-BF2D-38CD-B439-C300FB3956BA' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SearchKit.framework/Versions/A/SearchKit
 current-version: 200.1

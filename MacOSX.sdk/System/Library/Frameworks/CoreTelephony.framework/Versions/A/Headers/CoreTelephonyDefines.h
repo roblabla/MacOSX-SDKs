@@ -18,6 +18,7 @@
 
 #define	CORETELEPHONY_EXTERN_CLASS	__attribute__((visibility("default")))
 #define CORETELEPHONY_CLASS_AVAILABLE(_iphoneIntro) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE(NA, _iphoneIntro)
+#define CORETELEPHONY_CLASS_DEPRECATED(_introOS, _deprecatedOS, _msg) __attribute__((visibility("default"))) NS_CLASS_DEPRECATED_IOS(_introOS, _deprecatedOS, _msg)
 
 #include <CoreFoundation/CoreFoundation.h>	// need this for SInt32
 

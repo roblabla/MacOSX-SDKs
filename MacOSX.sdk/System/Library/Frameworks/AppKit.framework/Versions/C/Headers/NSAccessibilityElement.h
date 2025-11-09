@@ -1,7 +1,7 @@
 /*
 	NSAccessibilityElement.h
 	Application Kit
-	Copyright (c) 2013-2016, Apple Inc.
+	Copyright (c) 2013-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -18,7 +18,7 @@ NS_CLASS_AVAILABLE(10_10, NA)
     id _private;
 }
 
-+ (id)accessibilityElementWithRole:(NSString *)role frame:(NSRect)frame label:(nullable NSString *)label parent:(nullable id)parent;
++ (id)accessibilityElementWithRole:(NSAccessibilityRole)role frame:(NSRect)frame label:(nullable NSString *)label parent:(nullable id)parent;
 - (void)accessibilityAddChildElement:(NSAccessibilityElement *)childElement;
 
 // Accessibility frame in the cordinate system of the accessibility parent

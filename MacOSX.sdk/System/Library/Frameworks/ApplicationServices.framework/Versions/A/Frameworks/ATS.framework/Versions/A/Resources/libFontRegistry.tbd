@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 505A91B1-B783-3E59-A124-281ED85302F3', 'x86_64: 855AF921-EAE0-3D07-B161-5EF09806B643' ]
+uuids:           [ 'i386: 41F0732E-DBEF-301A-B0BB-249325150E95', 'x86_64: 0C83CB27-D4BE-3250-B79E-30535DDE8891' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/Resources/libFontRegistry.dylib
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _XTAuthenticateAsAdminFromExternalAuthorization, _XTCopyAutoActivatedFontURLs, 
@@ -12,8 +11,8 @@ exports:
                        _XTCopyAvailableFontURLs, _XTCopyAvailableFontURLs2, _XTCopyDuplicateFonts, 
                        _XTCopyDuplicateFontsInDomain, _XTCopyFamilyNamesForLanguage, 
                        _XTCopyFontForCharacter, _XTCopyFontProviderEndpoints, _XTCopyFontProviderRemotePorts, 
-                       _XTCopyFontURLForDataFont, _XTCopyFontWithName, _XTCopyFontWithProperties, 
-                       _XTCopyFontsWithProperties, _XTCopyIgnoredInactiveFontURLs, 
+                       _XTCopyFontURLForDataFont, _XTCopyFontURLWithFontToken, _XTCopyFontWithName, 
+                       _XTCopyFontWithProperties, _XTCopyFontsWithProperties, _XTCopyIgnoredInactiveFontURLs, 
                        _XTCopyIgnoredInactiveFontURLsInDomains, _XTCopyLocalizedNameForFonts, 
                        _XTCopyPropertiesForAllFonts, _XTCopyPropertiesForAllFontsWithOptions, 
                        _XTCopyPropertiesForFont, _XTCopyPropertiesForFonts, _XTCopyPropertyForFonts, 
@@ -30,10 +29,11 @@ exports:
                        _XTDataStreamReadDouble, _XTDataStreamReadString, _XTDataStreamReadUInt32, 
                        _XTDataStreamResetReadSegment, _XTDataStreamResetStream, _XTDataStreamShow, 
                        _XTDataStreamSkipReadSegment, _XTDataStreamWithData, _XTDisableFonts, 
-                       _XTEnableFonts, _XTEnsureFontFileAccess, _XTExperimentalDataFunnel, 
-                       _XTGetAutoActivationSetting, _XTGetCommonFontNames, _XTGetDataFontATSFont, 
-                       _XTGetDirectoryFlags, _XTGetFontFlagsForDirFlags, _XTGetFunctions, 
-                       _XTGetScopeForFont, _XTInstallFonts, _XTInstallFonts2, _XTMoveFontFilesToDisabledFolder, 
+                       _XTDownloadFontsWithProperties, _XTEnableFonts, _XTEnsureFontFileAccess, 
+                       _XTExperimentalDataFunnel, _XTFontGetFontToken, _XTGetAutoActivationSetting, 
+                       _XTGetCommonFontNames, _XTGetDataFontATSFont, _XTGetDirectoryFlags, 
+                       _XTGetFontFlagsForDirFlags, _XTGetFunctions, _XTGetScopeForFont, 
+                       _XTInstallFonts, _XTInstallFonts2, _XTMoveFontFilesToDisabledFolder, 
                        _XTRegisterDataFont, _XTRegisterFont, _XTRegisterFont2, _XTRegisterFontDirectory, 
                        _XTRegisterFonts, _XTRegisterFonts2, _XTRemoveFonts, _XTRemovePropertiesForFonts, 
                        _XTRestoreDefaultFonts, _XTRestoreDefaultFonts2, _XTSetAutoActivationSearchDirectories, 
@@ -44,8 +44,8 @@ exports:
                        _kXTFontPropertyCharacterSet, _kXTFontPropertyCopyrightName, 
                        _kXTFontPropertyDesignLanguages, _kXTFontPropertyDesignerName, 
                        _kXTFontPropertyDirectory, _kXTFontPropertyDomain, _kXTFontPropertyDuplicateRanking, 
-                       _kXTFontPropertyEnabled, _kXTFontPropertyFamilyName, _kXTFontPropertyFlags, 
-                       _kXTFontPropertyFontRef, _kXTFontPropertyForFontsLanguageMap, 
+                       _kXTFontPropertyEnabled, _kXTFontPropertyFamilyName, _kXTFontPropertyFamilyNameAliases, 
+                       _kXTFontPropertyFlags, _kXTFontPropertyFontRef, _kXTFontPropertyForFontsLanguageMap, 
                        _kXTFontPropertyFormat, _kXTFontPropertyFullName, _kXTFontPropertyGlyphCount, 
                        _kXTFontPropertyIgnoreScriptAnalysis, _kXTFontPropertyInstanceName, 
                        _kXTFontPropertyIsBlacklisted, _kXTFontPropertyLWFNURLs, _kXTFontPropertyLocalizedFamilyName, 

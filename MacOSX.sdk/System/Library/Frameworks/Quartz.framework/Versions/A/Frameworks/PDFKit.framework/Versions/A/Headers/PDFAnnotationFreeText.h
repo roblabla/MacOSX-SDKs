@@ -1,15 +1,18 @@
-// =====================================================================================================================
+//
 //  PDFAnnotationFreeText.h
-// =====================================================================================================================
-
+//  Copyright © 2016 Apple. All rights reserved.
+//
+//  Deprecated annotation class. Use PDFAnnotation directly to create this
+//  kind of annotation. Use the helper methods in PDFAnnotationUtilities.h
+//  to quickly build an appropriate dictionary for this annotation type.
+//
 
 #import <PDFKit/PDFKitPlatform.h>
 #import <PDFKit/PDFAnnotation.h>
 
-
 @class PDFAnnotationFreeTextPrivateVars;
 
-NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
+PDFKIT_CLASS_DEPRECATED(10_4, 10_12, NA, NA)
 @interface PDFAnnotationFreeText : PDFAnnotation <NSCopying, NSCoding>
 {
 @private
@@ -23,7 +26,7 @@ NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, sett
 - (PDFKitPlatformColor *) fontColor;
 - (void) setFontColor: (PDFKitPlatformColor *) color;
 
-// Alignment of text within annotation bounds.  Supported: NSLeftTextAlignment, NSRightTextAlignment and 
+// Alignment of text within annotation bounds. Supported: NSLeftTextAlignment, NSRightTextAlignment and
 // NSCenterTextAlignment.
 - (NSTextAlignment) alignment;
 - (void) setAlignment: (NSTextAlignment) alignment;

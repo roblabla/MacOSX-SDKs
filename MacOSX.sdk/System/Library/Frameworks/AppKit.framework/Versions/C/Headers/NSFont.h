@@ -1,7 +1,7 @@
 /*
 	NSFont.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,40 +9,16 @@
 #import <Foundation/NSString.h> // for NSStringEncoding
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSCell.h> // for NSControlSize
+#import <AppKit/NSFontDescriptor.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSFontDescriptor, NSAffineTransform, NSGraphicsContext;
 
-/********* NSGlyph *********/
-/* This is the Application Kit glyph ID.
-*/
-typedef unsigned int NSGlyph;
-
-enum {
-    NSControlGlyph = 0x00FFFFFF, // An NSGlyph value representing control characters (i.e. tab, line breaks, etc)
-    NSNullGlyph = 0x0 // An NSGlyph value representing glyphs removed by the layout process
-};
-
 /********* Font Matrix *********/
 /* This is a font matrix value representing [1 0 0 1 0 0].
 */
 APPKIT_EXTERN const CGFloat * NSFontIdentityMatrix;
-
-/********* Glyph packing *********/
-/* Other glyph packing modes are deprecated.
-*/
-typedef NS_ENUM(NSUInteger, NSMultibyteGlyphPacking) {
-    NSNativeShortGlyphPacking = 5
-};
-
-/********* Screen Font Rendering Mode *********/
-typedef NS_ENUM(NSUInteger, NSFontRenderingMode) {
-    NSFontDefaultRenderingMode = 0, // Determines the actual mode based on the user preference settings
-    NSFontAntialiasedRenderingMode = 1, // Antialiased, floating-point advancements rendering mode (synonym to printerFont)
-    NSFontIntegerAdvancementsRenderingMode = 2, // integer advancements rendering mode
-    NSFontAntialiasedIntegerAdvancementsRenderingMode = 3 // Antialiased, integer advancements rendering mode
-};
 
 NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @interface NSFont : NSObject <NSCopying, NSSecureCoding> {
@@ -98,14 +74,14 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /* Following two factory methods return system font with NSFontWeightTrait. Returns the system font object corresponding to fontSize and weight. +monospacedDigitSystemFontOfSize:weight: always return a system font instance with monospaced digit glyphs. It's recommended to use the symbolic weight values declared in NSFontDescriptor.h. Due to sophisticated system font weight matching logic underneath, it's recommended to use this factory method all the time when getting non-standard weight system fonts instead of transforming existing instances via methods like -[NSFontManager convertFont:toSize]. When asked for a missing weight for the running version of OS X, this method returns the nearest heavier weight available if the application is linked against the current or older SDK; otherwise, it returns the nearest lighter weight available.
 */
-+ (NSFont *)systemFontOfSize:(CGFloat)fontSize weight:(CGFloat)weight NS_AVAILABLE_MAC(10_11);
-+ (NSFont *)monospacedDigitSystemFontOfSize:(CGFloat)fontSize weight:(CGFloat)weight NS_AVAILABLE_MAC(10_11);
++ (NSFont *)systemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight NS_AVAILABLE_MAC(10_11);
++ (NSFont *)monospacedDigitSystemFontOfSize:(CGFloat)fontSize weight:(NSFontWeight)weight NS_AVAILABLE_MAC(10_11);
 
 /* UI font size settings
 */
-+ (CGFloat)systemFontSize; // size of the standard System font.
-+ (CGFloat)smallSystemFontSize; // size of standard small System font.
-+ (CGFloat)labelFontSize;	// size of the standard Label Font.
+@property (class, readonly) CGFloat systemFontSize; // size of the standard System font.
+@property (class, readonly) CGFloat smallSystemFontSize; // size of standard small System font.
+@property (class, readonly) CGFloat labelFontSize; // size of the standard Label Font.
 
 + (CGFloat)systemFontSizeForControlSize:(NSControlSize)controlSize;
 
@@ -121,7 +97,6 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /********* Glyph coverage *********/
 @property (readonly) NSUInteger numberOfGlyphs;
 @property (readonly) NSStringEncoding mostCompatibleStringEncoding;
-- (NSGlyph)glyphWithName:(NSString *)name;
 @property (readonly, strong) NSCharacterSet *coveredCharacterSet;
 
 /********* Font instance-wide metrics *********/
@@ -142,23 +117,17 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @property (getter=isFixedPitch, readonly) BOOL fixedPitch;
 
 /********* Glyph metrics *********/
-- (NSRect)boundingRectForGlyph:(NSGlyph)glyph;
-- (NSSize)advancementForGlyph:(NSGlyph)glyph;
+/********* Glyph metrics *********/
+- (NSRect)boundingRectForCGGlyph:(CGGlyph)glyph NS_AVAILABLE_MAC(10_13);
+- (NSSize)advancementForCGGlyph:(CGGlyph)glyph NS_AVAILABLE_MAC(10_13);
 
 // bulk query
-- (void)getBoundingRects:(NSRectArray)bounds forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)glyphCount;
-- (void)getAdvancements:(NSSizeArray)advancements forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)glyphCount;
-- (void)getAdvancements:(NSSizeArray)advancements forPackedGlyphs:(const void *)packedGlyphs length:(NSUInteger)length; // only supports NSNativeShortGlyphPacking
+- (void)getBoundingRects:(NSRectArray)bounds forCGGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)glyphCount NS_AVAILABLE_MAC(10_13);
+- (void)getAdvancements:(NSSizeArray)advancements forCGGlyphs:(const CGGlyph *)glyphs count:(NSUInteger)glyphCount NS_AVAILABLE_MAC(10_13);
 
 /********* NSGraphicsContext-related *********/
 - (void)set;
 - (void)setInContext:(NSGraphicsContext *)graphicsContext;
-
-/********* Rendering mode *********/
-@property (readonly, copy) NSFont *printerFont;
-@property (readonly, copy) NSFont *screenFont; // Same as screenFontWithRenderingMode:NSFontDefaultRenderingMode
-- (NSFont *)screenFontWithRenderingMode:(NSFontRenderingMode)renderingMode;
-@property (readonly) NSFontRenderingMode renderingMode;
 
 /********* Vertical mode *********/
 /* Returns a vertical version of the receiver if such a configuration is supported.  Returns the receiver if no vertical variant available.  A vertical font applies appropriate rotation to the text matrix in -setInContext:, returns vertical metrics, and enables the vertical glyph substitution feature by default. */
@@ -167,11 +136,6 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 /* Returns YES if a vertical variant */
 @property (getter=isVertical, readonly) BOOL vertical NS_AVAILABLE_MAC(10_7);
 @end
-
-/********* Glyph packing *********/
-/* Take a buffer of NSGlyphs, of some given length, and a packing type, and a place to put some packed glyphs.  Pack up the NSGlyphs according to the NSMultibyteGlyphPacking, null-terminate the bytes, and then put them into the output buffer.  Return the count of bytes output, including the null-terminator.  The output buffer (packedGlyphs) provided by the caller is guaranteed to be at least "count*4+1" bytes long. This function only supports NSNativeShortGlyphPacking on Mac OS X.
-*/
-APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * __nonnull glBuf, NSInteger count, NSMultibyteGlyphPacking packing, char * __nonnull packedGlyphs);
 
 /********* Notifications *********/
 /* This notification is posted when the antialias threshold is changed by the user.
@@ -182,10 +146,50 @@ APPKIT_EXTERN NSNotificationName NSAntialiasThresholdChangedNotification;
 */
 APPKIT_EXTERN NSNotificationName NSFontSetChangedNotification;
 
-NS_ASSUME_NONNULL_END
-
 
 /********* Deprecated API *********/
+// NSGlyph and related API are soft deprecated. They will be formally deprecated in a future version. Use CGGlyph-based TextKit API instead
+typedef unsigned int NSGlyph; // Use CGGlyph instead
+
+enum {
+    NSControlGlyph = 0x00FFFFFF, // Deprecated. Use NSGlyphPropertyControlCharacter instead
+    NSNullGlyph = 0x0 // Deprecated. Use NSGlyphPropertyNull instead
+};
+
+// NSFontRenderingMode-related API is now deprecated.
+/********* Screen Font Rendering Mode *********/
+typedef NS_ENUM(NSUInteger, NSFontRenderingMode) {
+    NSFontDefaultRenderingMode = 0, // Determines the actual mode based on the user preference settings
+    NSFontAntialiasedRenderingMode = 1, // Antialiased, floating-point advancements rendering mode (synonym to printerFont)
+    NSFontIntegerAdvancementsRenderingMode = 2, // integer advancements rendering mode
+    NSFontAntialiasedIntegerAdvancementsRenderingMode = 3 // Antialiased, integer advancements rendering mode
+};
+
+typedef NS_ENUM(NSUInteger, NSMultibyteGlyphPacking) {
+    NSNativeShortGlyphPacking NS_ENUM_DEPRECATED_MAC(10_0, 10_13) = 5
+} NS_ENUM_DEPRECATED_MAC(10_0, 10_13);
+
+APPKIT_EXTERN NSInteger NSConvertGlyphsToPackedGlyphs(NSGlyph * __nonnull glBuf, NSInteger count, NSMultibyteGlyphPacking packing, char * __nonnull packedGlyphs) NS_DEPRECATED_MAC(10_0, 10_13);
+
+@interface NSFont (NSFont_Deprecated)
+- (NSGlyph)glyphWithName:(NSString *)name;
+- (NSRect)boundingRectForGlyph:(NSGlyph)glyph; // Deprecated. Use -boundingRectForCGGlyph: instead
+- (NSSize)advancementForGlyph:(NSGlyph)glyph; // Deprecated. Use -advancementForCGGlyph: instead
+
+// bulk query
+- (void)getBoundingRects:(NSRectArray)bounds forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)glyphCount; // Deprecated. Use -getBoundingRects:forCGGlyphs:count: instead
+- (void)getAdvancements:(NSSizeArray)advancements forGlyphs:(const NSGlyph *)glyphs count:(NSUInteger)glyphCount; // Deprecated. Use -getAdvancements:forCGGlyphs:count: insteda
+- (void)getAdvancements:(NSSizeArray)advancements forPackedGlyphs:(const void *)packedGlyphs length:(NSUInteger)length; // Deprecated. Use -getAdvancements:forCGGlyphs:count: instead
+
+/********* Rendering mode *********/
+@property (readonly, copy) NSFont *printerFont;
+@property (readonly, copy) NSFont *screenFont;
+- (NSFont *)screenFontWithRenderingMode:(NSFontRenderingMode)renderingMode;
+@property (readonly) NSFontRenderingMode renderingMode;
+@end
+
+NS_ASSUME_NONNULL_END
+
 // The remaining portion is deprecated on Mac OS X 10.4 and Later.
 #if !__LP64__
 #if MAC_OS_X_VERSION_MIN_REQUIRED <= MAC_OS_X_VERSION_10_4

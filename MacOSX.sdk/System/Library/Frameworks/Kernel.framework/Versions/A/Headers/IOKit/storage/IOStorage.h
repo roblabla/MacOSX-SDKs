@@ -261,9 +261,7 @@ struct IOStorageAttributes
     UInt64            reserved0064;
     UInt64            reserved0128;
     bufattr_t         bufattr;
-#if TARGET_OS_EMBEDDED
     UInt64            adjustedOffset;
-#endif /* TARGET_OS_EMBEDDED */
 };
 
 /*!

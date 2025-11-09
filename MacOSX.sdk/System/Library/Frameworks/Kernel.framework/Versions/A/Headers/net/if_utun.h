@@ -50,6 +50,7 @@
 															from the control socket at a time */
 #define UTUN_OPT_ENABLE_CHANNEL				17
 #define UTUN_OPT_GET_CHANNEL_UUID			18
+#define UTUN_OPT_ENABLE_FLOWSWITCH			19
 /*
  * Flags for by UTUN_OPT_FLAGS 
  */

@@ -13,7 +13,7 @@
 #include <MacTypes.h>
 #endif
 
-
+#include <stdint.h> /* uint32_t */
 
 #include <Availability.h>
 

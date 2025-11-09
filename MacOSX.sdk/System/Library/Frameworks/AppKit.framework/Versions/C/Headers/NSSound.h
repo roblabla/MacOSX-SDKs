@@ -1,7 +1,7 @@
 /*
         NSSound.h
 	Application Kit
-	Copyright (c) 1997-2016, Apple Inc.
+	Copyright (c) 1997-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,12 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSData, NSURL;
 @protocol NSSoundDelegate;
 
-APPKIT_EXTERN NSString * const NSSoundPboardType;
+APPKIT_EXTERN NSPasteboardType const NSSoundPboardType;
+
+typedef NSString * NSSoundName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSSoundPlaybackDeviceIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 @interface NSSound : NSObject <NSCopying, NSCoding, NSPasteboardReading, NSPasteboardWriting>
 {
 @private
-    id _delegate;
+    __weak id<NSSoundDelegate> _delegate;
     id _info;
     id _reserved[6];
     uint32_t _sFlags;
@@ -29,7 +32,7 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 /* If this finds & creates the sound, only name is saved when archived.
 */
-+ (nullable NSSound *)soundNamed:(NSString *)name;
++ (nullable NSSound *)soundNamed:(NSSoundName)name;
 
 /* When archived, byref ? saves url : saves contents.
 */
@@ -42,12 +45,12 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 */
 - (nullable instancetype)initWithData:(NSData *)data;
 
-- (BOOL)setName:(nullable NSString *)string;
-@property (nullable, readonly, copy) NSString *name;
+- (BOOL)setName:(nullable NSSoundName)string;
+@property (nullable, readonly, copy) NSSoundName name;
 
 // Pasteboard support
 + (BOOL)canInitWithPasteboard:(NSPasteboard *)pasteboard;
-+ (NSArray<NSString *> *)soundUnfilteredTypes NS_AVAILABLE_MAC(10_5);
+@property (class, readonly, copy) NSArray<NSString *> *soundUnfilteredTypes NS_AVAILABLE_MAC(10_5);
 - (nullable instancetype)initWithPasteboard:(NSPasteboard *)pasteboard;
 - (void)writeToPasteboard:(NSPasteboard *)pasteboard;
 
@@ -58,7 +61,7 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 - (BOOL)stop;
 @property (getter=isPlaying, readonly) BOOL playing;
 
-@property (nullable, assign) id<NSSoundDelegate> delegate;
+@property (nullable, weak) id<NSSoundDelegate> delegate;
 
 
 /* Returns the duration of the sound in seconds.
@@ -82,7 +85,7 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 /* Setter: Set the UID of the audio device where playback will occur.  Pass nil to play on the default output device.
    Getter: Get the UID of the audio device where playback will occur.  Returns nil if playback tracks the default device, which is the default.
 */
-@property (nullable, copy) NSString *playbackDeviceIdentifier NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSSoundPlaybackDeviceIdentifier playbackDeviceIdentifier NS_AVAILABLE_MAC(10_5);
 
 /* Set the channel mapping for the sound.  Pass an array of NSNumbers, which maps sound channels to device channels.  Pass -1 to indicate that a particular sound channel should be ignored.  For any channel, instead of an NSNumber, you may also pass an NSArray of NSNumbers to map a single sound channel to multiple device channels.
 */
@@ -115,7 +118,7 @@ APPKIT_EXTERN NSString * const NSSoundPboardType;
 
 /* May return nil if no file found
 */
-- (nullable NSString *)pathForSoundResource:(NSString *)name;
+- (nullable NSString *)pathForSoundResource:(NSSoundName)name;
 
 @end
 

@@ -1,9 +1,9 @@
 /*
- NSBatchUpdateRequest.h
- Core Data
- Copyright (c) 2004-2016, Apple Inc.
- All rights reserved.
- */
+    NSBatchUpdateRequest.h
+    Core Data
+    Copyright (c) 2004-2017, Apple Inc.
+    All rights reserved.
+*/
 
 #import <Foundation/NSPredicate.h>
 #import <Foundation/NSDictionary.h>
@@ -30,7 +30,8 @@ API_AVAILABLE(macosx(10.10),ios(8.0))
         unsigned int includesSubentities:1;
         unsigned int resultType:2;
         unsigned int entityIsName:1;
-        unsigned int _RESERVED:28;
+        unsigned int secureOperation:1;
+        unsigned int _RESERVED:27;
     } _flags;
     NSDictionary *_columnsToUpdate;
 #endif

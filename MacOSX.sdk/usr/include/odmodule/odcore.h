@@ -1,24 +1,5 @@
 /*
- * Copyright (c) 2009-2013 Apple Inc. All rights reserved.
- *
- * @APPLE_LICENSE_HEADER_START@
- * 
- * This file contains Original Code and/or Modifications of Original Code
- * as defined in and that are subject to the Apple Public Source License
- * Version 2.0 (the 'License'). You may not use this file except in
- * compliance with the License. Please obtain a copy of the License at
- * http://www.opensource.apple.com/apsl/ and read it before using this
- * file.
- * 
- * The Original Code and all software distributed under the License are
- * distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
- * EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
- * INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
- * Please see the License for the specific language governing rights and
- * limitations under the License.
- * 
- * @APPLE_LICENSE_HEADER_END@
+ * Copyright (c) 2009-2017 Apple Inc. All rights reserved.
  */
 
 #if !defined(__ODCORE_H)
@@ -31,6 +12,8 @@
 #include <CoreFoundation/CoreFoundation.h>
 #include <Security/Authorization.h>
 #include <xpc/xpc.h>
+#include <os/log.h>
+#include <os/availability.h>
 
 #include <odmodule/odtypes.h>
 #include <odmodule/odmodule.h>
@@ -50,58 +33,68 @@
                 retains/releases should be paired (i.e., releases should be called before return from a request)
 */
 
-extern const char *kODKeyPredicateList;    // is a sublist of predicates
-extern const char *kODKeyPredicateRecordType;
-extern const char *kODKeyPredicateStdRecordType;
-extern const char *kODKeyPredicateStdAttribute;
-extern const char *kODKeyPredicateOperator;
-extern const char *kODKeyPredicateMatchType;
-extern const char *kODKeyPredicateValueList;
-extern const char *kODKeyPredicateEquality;
-
-// predicate operators
-extern const char *kODPredicateOperatorAnd;
-extern const char *kODPredicateOperatorOr;
-extern const char *kODPredicateOperatorNot;
-
-// function and attribute are mutually exclusive
-extern const char *kODKeyPredicateAttribute;
-extern const char *kODKeyPredicateFunction;
-
-// used for auth modules in additional info dictionary
-extern const char *kODKeyModuleAuthUserDetails;
-extern const char *kODKeyModuleConnectionInfo;
-extern const char *kODKeyModuleSessionCredentials;
 __BEGIN_DECLS
 
+OS_EXPORT const char *kODKeyPredicateList;    // is a sublist of predicates
+OS_EXPORT const char *kODKeyPredicateRecordType;
+OS_EXPORT const char *kODKeyPredicateStdRecordType;
+OS_EXPORT const char *kODKeyPredicateStdAttribute;
+OS_EXPORT const char *kODKeyPredicateOperator;
+OS_EXPORT const char *kODKeyPredicateMatchType;
+OS_EXPORT const char *kODKeyPredicateValueList;
+OS_EXPORT const char *kODKeyPredicateEquality;
 
-/*!
-    @function   log_level_enabled
-    @abstract   check if a particular log level is enabled to prevent expensive calculations
-*/
+// predicate operators
+OS_EXPORT const char *kODPredicateOperatorAnd;
+OS_EXPORT const char *kODPredicateOperatorOr;
+OS_EXPORT const char *kODPredicateOperatorNot;
+
+// function and attribute are mutually exclusive
+OS_EXPORT const char *kODKeyPredicateAttribute;
+OS_EXPORT const char *kODKeyPredicateFunction;
+
+// used for auth modules in additional info dictionary
+OS_EXPORT const char *kODKeyModuleAuthUserDetails;
+OS_EXPORT const char *kODKeyModuleConnectionInfo;
+OS_EXPORT const char *kODKeyModuleSessionCredentials;
+
+__BEGIN_DECLS
+
+OS_ALWAYS_INLINE
+static inline os_log_type_t
+_odlevel_to_oslogtype(eODLogLevel level)
+{
+    switch (level) {
+        case eODLogAlert:
+        case eODLogCritical:
+            return OS_LOG_TYPE_FAULT;
+
+        case eODLogWarning:
+        case eODLogNotice:
+            return OS_LOG_TYPE_DEFAULT;
+
+        case eODLogInfo:
+            return OS_LOG_TYPE_INFO;
+
+        case eODLogDebug:
+            return OS_LOG_TYPE_DEBUG;
+
+        case eODLogError:
+            return OS_LOG_TYPE_ERROR;
+    }
+
+    return OS_LOG_TYPE_DEBUG;
+}
+
+OS_EXPORT OS_WARN_RESULT OS_NOTHROW
 bool
 log_level_enabled(eODLogLevel level);
 
 /*!
- @function   od_retain_internal
- @abstract   retain an object (internal reference)
- */
-OD_NOTHROW
-void
-od_retain_internal(od_object_t object);
-
-/*!
- @function   od_release_internal
- @abstract   release an object (internal reference)
- */
-OD_NOTHROW
-void
-od_release_internal(od_object_t object);
-/*!
  @function   od_retain
  @abstract   retain an object
  */
-OD_NOTHROW
+OS_EXPORT OS_NOTHROW
 void
 od_retain(od_object_t object);
 
@@ -115,7 +108,7 @@ _od_object_validate(_o); (void)[_o retain]; })
     @function   od_release
     @abstract   release an object
 */
-OD_NOTHROW
+OS_EXPORT OS_NOTHROW
 void
 od_release(od_object_t object);
 #if OS_OBJECT_USE_OBJC_RETAIN_RELEASE
@@ -133,7 +126,7 @@ _od_object_validate(_o); [_o release]; })
  with the request.  When a context is released, it will be removed from the underlying node's
  context list.
  */
-OD_WARN_RESULT
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 od_context_t
 odcontext_create(od_request_t request, od_connection_t connection, void *context, od_context_dealloc_fn_t context_dealloc);
 /*!
@@ -141,6 +134,7 @@ odcontext_create(od_request_t request, od_connection_t connection, void *context
     @abstract   get the identifier of a context, usually to store in a response
     @discussion get the identifier of a context, usually to store in a response
 */
+OS_EXPORT OS_NOTHROW
 void
 odcontext_get_identifier(od_context_t context, uuid_t uuid);
 
@@ -150,9 +144,10 @@ odcontext_get_identifier(od_context_t context, uuid_t uuid);
     @discussion ensure the context is retained until this data is no longer needed, failure to do so could
 				cause the data to become deallocated before the client is done.
 */
-OD_WARN_RESULT
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 void *
 odcontext_get_data(od_context_t context);
+
 
 #pragma mark -
 #pragma mark Utility functions
@@ -165,7 +160,7 @@ odcontext_get_data(od_context_t context);
     @param      ioCStr must be freed if it is non-NULL
     @result     a constant C string that should not be freed as it may be internal storage from the CFString
 */
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 const char *
 od_cstr_from_cfstring(CFStringRef inCFStr, char **ioCStr);
 
@@ -176,9 +171,10 @@ od_cstr_from_cfstring(CFStringRef inCFStr, char **ioCStr);
     @param      value is a CFDataRef or CFStringRef to extract the string from
     @result     a pointer to a char string that must be freed
 */
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OS_MALLOC
 char *
 od_cstr_from_cfstring_or_cfdata(CFTypeRef value);
+
 
 /*!
  @function   xpctype_to_cftype
@@ -186,7 +182,8 @@ od_cstr_from_cfstring_or_cfdata(CFTypeRef value);
  @param      xpc_obj is the source object
  @result     is a retained CFTypeRef
  */
-CF_RETURNS_RETAINED CFTypeRef
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
+CFTypeRef
 xpctype_to_cftype(xpc_object_t xpc_obj);
 
 /*!
@@ -195,7 +192,7 @@ xpctype_to_cftype(xpc_object_t xpc_obj);
  @param      cfType is the source object
  @result     is a retained xpc_object_t
  */
-XPC_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT XPC_RETURNS_RETAINED
 xpc_object_t
 cftype_to_xpctype(CFTypeRef cfType);
 
@@ -205,6 +202,7 @@ cftype_to_xpctype(CFTypeRef cfType);
  @param      xarray is the xpc_array to append to
  @param      cfType is the source object
  */
+OS_EXPORT OS_NOTHROW
 void
 xpc_array_append_cftype(xpc_object_t xarray, CFTypeRef cfType);
 
@@ -215,6 +213,7 @@ xpc_array_append_cftype(xpc_object_t xarray, CFTypeRef cfType);
  @param      key is the key name
  @param      value is the CFTypeRef value.
  */
+OS_EXPORT OS_NOTHROW
 void
 xpc_dictionary_set_cftype(xpc_object_t xdict, const char *key, CFTypeRef value);
 
@@ -226,6 +225,7 @@ xpc_dictionary_set_cftype(xpc_object_t xdict, const char *key, CFTypeRef value);
  @param      port is the portnumber
  @param      writeable is a bool
  */
+OS_EXPORT OS_NOTHROW
 void
 CFArrayAppendServer(CFMutableArrayRef array, CFStringRef hostname, int port, bool writeable);
 
@@ -235,6 +235,7 @@ CFArrayAppendServer(CFMutableArrayRef array, CFStringRef hostname, int port, boo
  @param      predicate is an xpc_object_t of type XPC_TYPE_DICTIONARY
  @result     returns a string that must be freed by caller
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OS_MALLOC
 char *
 od_predicate_create_ldapfilter(xpc_object_t predicate);
 

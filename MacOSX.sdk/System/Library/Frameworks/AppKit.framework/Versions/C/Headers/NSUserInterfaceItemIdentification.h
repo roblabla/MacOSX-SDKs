@@ -1,16 +1,16 @@
 /*
     NSUserInterfaceItemIdentification.h
     Application Kit
-    Copyright (c) 2006-2016, Apple Inc.
+    Copyright (c) 2006-2017, Apple Inc.
     All rights reserved.
 */
 
-#import <Foundation/NSObject.h>
+#import <Foundation/NSString.h>
 #import <AppKit/AppKitDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSString;
+typedef NSString * NSUserInterfaceItemIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 /* Introduced in Mac OS 10.7 */
 @protocol NSUserInterfaceItemIdentification
@@ -22,7 +22,7 @@ To help avoid collision of identifiers, it is recommended that identifiers use t
 
 The slash '/', backslash '\', and colon ':' characters are reserved and should not be used in identifiers.
  */
-@property (nullable, copy) NSString *identifier;
+@property (nullable, copy) NSUserInterfaceItemIdentifier identifier;
 
 @end
 

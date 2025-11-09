@@ -1,7 +1,7 @@
 /*
         NSProgressIndicator.h
         Application Kit
-        Copyright (c) 1997-2016, Apple Inc.
+        Copyright (c) 1997-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -11,59 +11,26 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-struct __NSProgressIndicatorThreadInfo;
-typedef struct __NSProgressIndicatorThreadInfo _NSProgressIndicatorThreadInfo;
-
-//================================================================================
-//	NSprogressIndicator can support any size (for both determinate and indeterminate).
-//	But to get the best result the height of a progress indicator should be as follow:
-//
-//           	    with bezel    without bezel
-//	small		10		8	
-//	regular		14		12	
-//	large		18		16
-//	Aqua		12		12
-
-typedef NS_ENUM(NSUInteger, NSProgressIndicatorThickness) {
-    NSProgressIndicatorPreferredThickness 	= 14,
-    NSProgressIndicatorPreferredSmallThickness 	= 10,
-    NSProgressIndicatorPreferredLargeThickness	= 18,
-    NSProgressIndicatorPreferredAquaThickness	= 12
-};
-
 typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
-    NSProgressIndicatorBarStyle = 0,
-    NSProgressIndicatorSpinningStyle = 1
+    NSProgressIndicatorStyleBar = 0,
+    NSProgressIndicatorStyleSpinning = 1
 };
 
-//================================================================================
-//	NSProgressIndicator interface
-//
-@interface NSProgressIndicator : NSView <NSAccessibilityProgressIndicator>
-{
+@interface NSProgressIndicator : NSView <NSAccessibilityProgressIndicator> {
 @private
-    /* Persistent properties */
-    BOOL		_isBezeled;		// has or not a 3D bezel around the progress indicator (invariant)
-    BOOL		_isIndeterminate;	// YES by default
+    BOOL		_isBezeled;
+    BOOL		_isIndeterminate;
     BOOL		_threadedAnimation;
-    
-    double		_minimum;		// 0 by default
-    double		_maximum;		// 100 by default
-    
-    /* Non-persistent properties */
-    double		_value;			// _minimum by default
-    
+    double		_minimum;
+    double		_maximum;
+    double		_value;
     unsigned int        _animationIndex;
-    NSTimeInterval	_animationDelay;	// 5/60 of a seconds by default
-
+    NSTimeInterval	_animationDelay;
     id			_timer;
-
     CGFloat     _drawingWidth;
-
     id		_roundColor;
     id          _reserved __unused;
-
-    volatile struct __progressIndicatorFlags {
+    struct __progressIndicatorFlags {
         unsigned int isSpinning:1;
         unsigned int isVector:1;
         unsigned int isLocked:1;
@@ -81,14 +48,12 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
         unsigned int _isDetaching:1;
         unsigned int RESERVED:7;
     } _progressIndicatorFlags;
-
-    /* For future use */
     id _NSProgressIndicatorReserved1 __unused;
 }
 
-	/* Options */
+#pragma mark Options
 
-@property (getter=isIndeterminate) BOOL indeterminate;				
+@property (getter=isIndeterminate) BOOL indeterminate;
 
 @property (getter=isBezeled) BOOL bezeled;
 
@@ -96,32 +61,51 @@ typedef NS_ENUM(NSUInteger, NSProgressIndicatorStyle) {
 
 @property NSControlSize controlSize;
 
-	/* Determinate progress indicator */
+#pragma mark Determinate progress indicator
 
 @property double doubleValue;
 
-- (void)incrementBy:(double)delta;			// equivalent to [self setDoubleValue:[self doubleValue] + delta]
+/* Equivalent to [self setDoubleValue:[self doubleValue] + delta].
+ */
+- (void)incrementBy:(double)delta;
 
 @property double minValue;
 @property double maxValue;
 
-/* Indeterminate progress indicator */
+#pragma mark Indeterminate progress indicator
 
-@property BOOL usesThreadedAnimation;				// returns YES if the PI uses a thread instead of a timer (default in NO)
+/* YES if the NSProgressIndicator uses a thread instead of a timer (defaults to NO).
+ */
+@property BOOL usesThreadedAnimation;
 
 - (void)startAnimation:(nullable id)sender;
 - (void)stopAnimation:(nullable id)sender;
 
-
 @property NSProgressIndicatorStyle style;
 
-// For the spinning style, it will size the spinning arrows to their default size.  
-// For the bar style, the height will be set to the recommended height. 
-- (void) sizeToFit;
+/* For the spinning style, it will size the spinning arrows to their default size. For the bar style, the height will be set to the recommended height.
+ */
+- (void)sizeToFit;
 
 @property (getter=isDisplayedWhenStopped) BOOL displayedWhenStopped;
 
 @end
+
+#pragma mark Deprecated declarations
+
+/* These constants do not accurately represent the geometry of NSProgressIndicator.  Use `controlSize` and `sizeToFit` instead.  These declarations will be formally marked deprecated in a future release.
+ */
+typedef NS_ENUM(NSUInteger, NSProgressIndicatorThickness) {
+    NSProgressIndicatorPreferredThickness      = 14,
+    NSProgressIndicatorPreferredSmallThickness = 10,
+    NSProgressIndicatorPreferredLargeThickness = 18,
+    NSProgressIndicatorPreferredAquaThickness  = 12
+};
+
+/* These declarations will be formally marked deprecated in a future release.
+ */
+static const NSProgressIndicatorStyle NSProgressIndicatorBarStyle = NSProgressIndicatorStyleBar;
+static const NSProgressIndicatorStyle NSProgressIndicatorSpinningStyle = NSProgressIndicatorStyleSpinning;
 
 @interface NSProgressIndicator (NSProgressIndicatorDeprecated)
 - (NSTimeInterval)animationDelay NS_DEPRECATED_MAC(10_0, 10_6);

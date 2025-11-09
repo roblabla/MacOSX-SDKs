@@ -1,5 +1,5 @@
 /*	NSMetadata.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSMetadataAttributes.h>
@@ -36,11 +36,11 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 // locations to which the search is limited; an empty array means no
 // limits, which is the default state.
 
-@property (nullable, copy) NSArray *searchItems NS_AVAILABLE(10_9, 7_0);
+@property (nullable, copy) NSArray *searchItems API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 // items can be a mixture of NSMetadataItem, NSURL objects (file URLs only)
 // and/or string paths; the getter returns the same mixture as was set
 
-@property (nullable, retain) NSOperationQueue *operationQueue NS_AVAILABLE(10_9, 7_0);
+@property (nullable, retain) NSOperationQueue *operationQueue API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 // optional operation queue for notifications and delegate method calls
 
 - (BOOL)startQuery;
@@ -58,8 +58,8 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @property (readonly) NSUInteger resultCount;
 - (id)resultAtIndex:(NSUInteger)idx;
 
-- (void)enumerateResultsUsingBlock:(void (NS_NOESCAPE ^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
-- (void)enumerateResultsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(id result, NSUInteger idx, BOOL *stop))block NS_AVAILABLE(10_9, 7_0);
+- (void)enumerateResultsUsingBlock:(void (NS_NOESCAPE ^)(id result, NSUInteger idx, BOOL *stop))block API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
+- (void)enumerateResultsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(id result, NSUInteger idx, BOOL *stop))block API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 @property (readonly, copy) NSArray *results;   // this is for K-V Bindings, and causes side-effects on the query
 
@@ -82,30 +82,30 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
 @end
 
 // notifications
-FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidStartGatheringNotification NS_AVAILABLE(10_4, 5_0);
-FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryGatheringProgressNotification NS_AVAILABLE(10_4, 5_0);
-FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidFinishGatheringNotification NS_AVAILABLE(10_4, 5_0);
-FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidUpdateNotification NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidStartGatheringNotification API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryGatheringProgressNotification API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidFinishGatheringNotification API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSMetadataQueryDidUpdateNotification API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0));
 
 // keys for use with notification info dictionary
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateAddedItemsKey NS_AVAILABLE(10_9, 8_0);
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateChangedItemsKey NS_AVAILABLE(10_9, 8_0);
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateRemovedItemsKey NS_AVAILABLE(10_9, 8_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateAddedItemsKey API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateChangedItemsKey API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUpdateRemovedItemsKey API_AVAILABLE(macos(10.9), ios(8.0), watchos(2.0), tvos(9.0));
 
-FOUNDATION_EXPORT NSString * const NSMetadataQueryResultContentRelevanceAttribute NS_AVAILABLE(10_4, 5_0);
+FOUNDATION_EXPORT NSString * const NSMetadataQueryResultContentRelevanceAttribute API_AVAILABLE(macos(10.4), ios(5.0), watchos(2.0), tvos(9.0));
 
 // Scope constants for defined search locations
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUserHomeScope NS_AVAILABLE_MAC(10_4); // user home directory
-FOUNDATION_EXPORT NSString * const NSMetadataQueryLocalComputerScope NS_AVAILABLE_MAC(10_4); // all local mounted volumes + user home (even if remote)
-FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope NS_AVAILABLE_MAC(10_4); // all user-mounted remote volumes
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUserHomeScope API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos); // user home directory
+FOUNDATION_EXPORT NSString * const NSMetadataQueryLocalComputerScope API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos); // all local mounted volumes + user home (even if remote)
+FOUNDATION_EXPORT NSString * const NSMetadataQueryNetworkScope API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos); // all user-mounted remote volumes
 
-FOUNDATION_EXPORT NSString * const NSMetadataQueryIndexedLocalComputerScope NS_AVAILABLE_MAC(10_9); // all indexed local mounted volumes + user home (even if remote)
-FOUNDATION_EXPORT NSString * const NSMetadataQueryIndexedNetworkScope NS_AVAILABLE_MAC(10_9); // all indexed user-mounted remote volumes
+FOUNDATION_EXPORT NSString * const NSMetadataQueryIndexedLocalComputerScope API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos); // all indexed local mounted volumes + user home (even if remote)
+FOUNDATION_EXPORT NSString * const NSMetadataQueryIndexedNetworkScope API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos); // all indexed user-mounted remote volumes
 
 // -setSearchScopes: will throw an exception if the given array contains a mix of the scope constants below with constants above.
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDocumentsScope NS_AVAILABLE(10_7, 5_0); // "Documents" subdirectory in the application's Ubiquity container
-FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope NS_AVAILABLE(10_7, 5_0); // application's Ubiquity container, excluding the "Documents" subdirectory
-FOUNDATION_EXPORT NSString * const NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope NS_AVAILABLE(10_10, 8_0); // documents from outside the application's container that are accessible without user interaction. NSMetadataItemURLKey attributes of results are security-scoped NSURLs.
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDocumentsScope API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)); // "Documents" subdirectory in the application's Ubiquity container
+FOUNDATION_EXPORT NSString * const NSMetadataQueryUbiquitousDataScope API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0)); // application's Ubiquity container, excluding the "Documents" subdirectory
+FOUNDATION_EXPORT NSString * const NSMetadataQueryAccessibleUbiquitousExternalDocumentsScope API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // documents from outside the application's container that are accessible without user interaction. NSMetadataItemURLKey attributes of results are security-scoped NSURLs.
 
 
 NS_CLASS_AVAILABLE(10_4, 5_0)
@@ -115,7 +115,7 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
     void *_reserved;
 }
 
-- (nullable instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER NS_AVAILABLE_MAC(10_9);
+- (nullable instancetype)initWithURL:(NSURL *)url NS_DESIGNATED_INITIALIZER API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 - (nullable id)valueForAttribute:(NSString *)key;
 - (nullable NSDictionary<NSString *, id> *)valuesForAttributes:(NSArray<NSString *> *)keys;

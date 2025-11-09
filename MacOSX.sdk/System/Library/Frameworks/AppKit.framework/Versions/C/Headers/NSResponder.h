@@ -1,7 +1,7 @@
 /*
         NSResponder.h
         Application Kit
-        Copyright (c) 1994-2016, Apple Inc.
+        Copyright (c) 1994-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSArray.h>
 #import <AppKit/NSEvent.h>
 #import <AppKit/NSAccessibilityProtocols.h>
+#import <AppKit/NSPasteboard.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -26,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, assign) NSResponder *nextResponder;
 - (BOOL)tryToPerform:(SEL)action with:(nullable id)object;
 - (BOOL)performKeyEquivalent:(NSEvent *)event;
-- (nullable id)validRequestorForSendType:(NSString *)sendType returnType:(NSString *)returnType;
+- (nullable id)validRequestorForSendType:(nullable NSPasteboardType)sendType returnType:(nullable NSPasteboardType)returnType;
 - (void)mouseDown:(NSEvent *)event;
 - (void)rightMouseDown:(NSEvent *)event;
 - (void)otherMouseDown:(NSEvent *)event;

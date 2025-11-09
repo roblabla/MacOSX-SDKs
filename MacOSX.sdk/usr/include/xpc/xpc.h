@@ -734,7 +734,7 @@ xpc_date_get_value(xpc_object_t xdate);
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT
 xpc_object_t
-xpc_data_create(const void *bytes, size_t length);
+xpc_data_create(const void * _Nullable bytes, size_t length);
 
 /*!
  * @function xpc_data_create_with_dispatch_data
@@ -942,9 +942,9 @@ xpc_string_get_string_ptr(xpc_object_t xstring);
  * A new UUID object. 
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT
+XPC_EXPORT XPC_MALLOC XPC_RETURNS_RETAINED XPC_WARN_RESULT XPC_NONNULL1
 xpc_object_t
-xpc_uuid_create(const uuid_t uuid);
+xpc_uuid_create(const uuid_t XPC_NONNULL_ARRAY uuid);
 
 /*!
  * @function xpc_uuid_get_bytes
@@ -1112,7 +1112,7 @@ xpc_shmem_map(xpc_object_t xshmem, void * _Nullable * _Nonnull region);
  * A Boolean indicating whether iteration should continue.
  */
 #ifdef __BLOCKS__
-typedef bool (^xpc_array_applier_t)(size_t index, xpc_object_t value);
+typedef bool (^xpc_array_applier_t)(size_t index, xpc_object_t _Nonnull value);
 #endif // __BLOCKS__ 
 
 /*!
@@ -1254,7 +1254,7 @@ xpc_array_get_value(xpc_object_t xarray, size_t index);
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL
 bool
-xpc_array_apply(xpc_object_t xarray, xpc_array_applier_t applier);
+xpc_array_apply(xpc_object_t xarray, XPC_NOESCAPE xpc_array_applier_t applier);
 #endif // __BLOCKS__ 
 
 #pragma mark Array Primitive Setters
@@ -1466,9 +1466,10 @@ xpc_array_set_string(xpc_object_t xarray, size_t index, const char *string);
  * {@link xpc_array_get_value()}.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL1
+XPC_EXPORT XPC_NONNULL1 XPC_NONNULL3
 void
-xpc_array_set_uuid(xpc_object_t xarray, size_t index, const uuid_t uuid);
+xpc_array_set_uuid(xpc_object_t xarray, size_t index,
+	const uuid_t XPC_NONNULL_ARRAY uuid);
 
 /*!
  * @function xpc_array_set_fd
@@ -1833,7 +1834,8 @@ xpc_array_get_array(xpc_object_t self, size_t index);
  * A Boolean indicating whether iteration should continue.
  */
 #ifdef __BLOCKS__
-typedef bool (^xpc_dictionary_applier_t)(const char *key, xpc_object_t value);
+typedef bool (^xpc_dictionary_applier_t)(const char * _Nonnull key,
+		xpc_object_t _Nonnull value);
 #endif // __BLOCKS__ 
 
 /*!
@@ -1992,7 +1994,8 @@ xpc_dictionary_get_count(xpc_object_t xdict);
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
 XPC_EXPORT XPC_NONNULL_ALL
 bool
-xpc_dictionary_apply(xpc_object_t xdict, xpc_dictionary_applier_t applier);
+xpc_dictionary_apply(xpc_object_t xdict,
+		XPC_NOESCAPE xpc_dictionary_applier_t applier);
 #endif // __BLOCKS__ 
 
 /*!
@@ -2193,9 +2196,10 @@ xpc_dictionary_set_string(xpc_object_t xdict, const char *key,
  * with {@link xpc_dictionary_get_value()}.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)
-XPC_EXPORT XPC_NONNULL1 XPC_NONNULL2
+XPC_EXPORT XPC_NONNULL1 XPC_NONNULL2 XPC_NONNULL3
 void
-xpc_dictionary_set_uuid(xpc_object_t xdict, const char *key, const uuid_t uuid);
+xpc_dictionary_set_uuid(xpc_object_t xdict, const char *key,
+	const uuid_t XPC_NONNULL_ARRAY uuid);
 
 /*!
  * @function xpc_dictionary_set_fd
@@ -2577,11 +2581,11 @@ xpc_service_main(int argc, const char *argv[],
  * and xpc_transaction_end() to inform the XPC runtime about activity that
  * occurs outside of this common pattern.
  *
- * When the XPC runtime has determined that the service should exit, the event
- * handlers for all active peer connections will receive
+ * On macOS, when the XPC runtime has determined that the service should exit,
+ * the event handlers for all active peer connections will receive
  * {@link XPC_ERROR_TERMINATION_IMMINENT} as an indication that they should
  * unwind their existing transactions. After this error is delivered to a
- * connection's event handler, no more messages will be delivered to the 
+ * connection's event handler, no more messages will be delivered to the
  * connection.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_7, __IPHONE_5_0)

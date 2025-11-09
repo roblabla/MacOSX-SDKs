@@ -42,7 +42,7 @@
 
     @param      handle  The handle to which the user has started typing.
 */
-- (oneway void) userDidStartTypingToHandle:(NSString *)handle;
+- (oneway void) userDidStartTypingToHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -53,7 +53,7 @@
 
     @param      handle  The handle to which the user started typing, but then cleared the input line.
 */
-- (oneway void) userDidStopTypingToHandle:(NSString *)handle;
+- (oneway void) userDidStopTypingToHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -72,7 +72,7 @@
     @param      message  The message to send
     @param      handle   The receipient of the message
 */
-- (oneway void) sendMessage:(IMServicePlugInMessage *)message toHandle:(NSString *)handle;
+- (oneway void) sendMessage:(IMServicePlugInMessage *)message toHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -107,7 +107,7 @@
 
     @param      handle   The handle that started typing
 */
-- (oneway void) handleDidStartTyping:(NSString *)handle;
+- (oneway void) handleDidStartTyping:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -118,7 +118,7 @@
 
     @param      handle   The handle that stopped typing
 */
-- (oneway void) handleDidStopTyping:(NSString *)handle;
+- (oneway void) handleDidStopTyping:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -132,7 +132,7 @@
     @param      message  The incoming message
     @param      handle   The sender of the message
 */
-- (oneway void) plugInDidReceiveMessage:(IMServicePlugInMessage *)message fromHandle:(NSString *)handle;
+- (oneway void) plugInDidReceiveMessage:(IMServicePlugInMessage *)message fromHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -151,6 +151,6 @@
     @param      handle   The sender of the message
     @param      error    An error that occurred during message delivery
 */
-- (oneway void) plugInDidSendMessage:(IMServicePlugInMessage *)message toHandle:(NSString *)handle error:(NSError *)error;
+- (oneway void) plugInDidSendMessage:(IMServicePlugInMessage *)message toHandle:(NSString *)handle error:(NSError *)error NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end

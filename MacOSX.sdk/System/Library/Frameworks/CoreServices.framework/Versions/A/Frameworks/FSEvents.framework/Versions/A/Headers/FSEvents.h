@@ -280,9 +280,39 @@ enum {
    * triggered by your process. Note: this has no effect on historical events, i.e.,
    * those delivered before the HistoryDone sentinel event.
    */
-  kFSEventStreamCreateFlagMarkSelf __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0) = 0x00000020
+  kFSEventStreamCreateFlagMarkSelf __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0) = 0x00000020,
+
+  /*
+   * Requires kFSEventStreamCreateFlagUseCFTypes and instructs the
+   * framework to invoke your callback function with CF types but,
+   * instead of passing it a CFArrayRef of CFStringRefs, a CFArrayRef of
+   * CFDictionaryRefs is passed.  Each dictionary will contain the event
+   * path and possibly other "extended data" about the event.  See the
+   * kFSEventStreamEventExtendedData*Key definitions for the set of keys
+   * that may be set in the dictionary.  (See also FSEventStreamCallback.)
+   */
+  kFSEventStreamCreateFlagUseExtendedData __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0) = 0x00000040
 };
 
+/*
+ *  kFSEventStreamCreateFlagUseExtendedData
+ *
+ *  Discussion:
+ *    Keys for extended data CFDictionary
+ */
+
+/*
+ * Path to file system object.
+ * Value of type CFStringRef (per CFStringCreateWithFileSystemRepresentation()).
+ */
+#define kFSEventStreamEventExtendedDataPathKey      CFSTR("path")
+
+/*
+ * File system object inode number.
+ * Value of type CFNumberRef.
+ * (Set only if you specified the FileEvents flag when creating the stream.)
+ */
+#define kFSEventStreamEventExtendedFileIDKey        CFSTR("fileID")
 
 /*
  *  FSEventStreamEventFlags
@@ -494,6 +524,12 @@ enum {
    */
   kFSEventStreamEventFlagItemIsLastHardlink __OSX_AVAILABLE_STARTING(__MAC_10_10, __IPHONE_9_0) = 0x00200000,
 
+  /*
+   * The file system object at the specific path supplied in this event is a clone or was cloned.
+   * (This flag is only ever set if you specified the FileEvents flag when creating the stream.)
+   */
+  kFSEventStreamEventFlagItemCloned __OSX_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0) = 0x00400000
+
 };
 
 
@@ -600,17 +636,25 @@ typedef struct FSEventStreamContext     FSEventStreamContext;
  *    eventPaths:
  *      An array of paths to the directories in which event(s)
  *      occurred. The type of this parameter depends on the flags
- *      passed to FSEventStreamCreate...(). If
- *      kFSEventStreamCreateFlagUseCFTypes was set, then this will be a
+ *      passed to FSEventStreamCreate...().
+ *      * If kFSEventStreamCreateFlagUseCFTypes was not set, then the
+ *      framework will pass your callback a raw C array of raw C
+ *      strings that will be deallocated by the framework after your
+ *      callback returns.
+ *      * If both kFSEventStreamCreateFlagUseCFTypes and
+ *      kFSEventStreamCreateFlagUseExtendedData are set, then this will be a
+ *      CFArrayRef containing CFDictionaryRef objects (containing entries
+ *      as described by the kFSEventStreamEventExtendedData*Key constants).
+ *      Ownership follows the Get rule, and they will be released by the
+ *      framework after your callback returns.
+ *      * If kFSEventStreamCreateFlagUseCFTypes was set, then this will be a
  *      CFArrayRef containing CFStringRef objects (per
  *      CFStringCreateWithFileSystemRepresentation()). Ownership
  *      follows the Get rule, and they will be released by the
- *      framework after your callback returns. If
- *      kFSEventStreamCreateFlagUseCFTypes was not set, then the
- *      framework will pass your callback a raw C array of raw C
- *      strings that will be deallocated by the framework after your
- *      callback returns. A path might be "/" if ether of these flags
- *      is set for the event: kFSEventStreamEventFlagUserDropped,
+ *      framework after your callback returns.
+ *
+ *      A path might be "/" if ether of these flags is set for the event:
+ *      kFSEventStreamEventFlagUserDropped,
  *      kFSEventStreamEventFlagKernelDropped.
  *    
  *    eventFlags:
@@ -636,7 +680,7 @@ typedef struct FSEventStreamContext     FSEventStreamContext;
  *      pass for the sinceWhen parameter to the
  *      FSEventStreamCreate...() function.
  */
-typedef CALLBACK_API_C( void , FSEventStreamCallback )(ConstFSEventStreamRef streamRef, void * __nullable clientCallBackInfo, size_t numEvents, void *eventPaths, const FSEventStreamEventFlags eventFlags[], const FSEventStreamEventId eventIds[]);
+typedef CALLBACK_API_C( void , FSEventStreamCallback )(ConstFSEventStreamRef streamRef, void * __nullable clientCallBackInfo, size_t numEvents, void *eventPaths,  const FSEventStreamEventFlags  * _Nonnull eventFlags, const FSEventStreamEventId * _Nonnull eventIds);
 /*
  *  Create
  */
@@ -694,7 +738,7 @@ typedef CALLBACK_API_C( void , FSEventStreamCallback )(ConstFSEventStreamRef str
  *      FSEventStreamCreateFlags.
  *  
  *  Result:
- *    A valid FSEventStreamRef.
+ *    A valid FSEventStreamRef or NULL if there was a problem creating the object.
  *  
  *  Availability:
  *    Mac OS X:         in version 10.5 and later in CoreServices.framework

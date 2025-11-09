@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1C0B5192-7015-3CA6-9A92-A84147024CF3', 'x86_64: 15FACC21-079A-3BDF-9AFB-4253EFDEB587' ]
+uuids:           [ 'i386: 90F29B8A-1796-36A7-8402-AE820D5D0A45', 'x86_64: 0C427D38-C210-3EC8-831E-BE8820B168F1' ]
 platform:        macosx
 install-name:    /usr/lib/system/liblaunch.dylib
-current-version: 972.30.7
+current-version: 1201
 objc-constraint: none
 parent-umbrella: System
 exports:         
@@ -42,9 +42,8 @@ exports:
                        _launch_get_fd, _launch_msg, _launch_socket_service_check_in, 
                        _launch_wait, _launchd_close, _launchd_fdopen, _launchd_getfd, 
                        _launchd_msg_recv, _launchd_msg_send, _load_launchd_jobs_at_loginwindow_prompt, 
-                       _mpm_uncork_fork, _mpm_wait, _os_system_version_get_current_version, 
-                       _reboot2, _vproc_release, _vproc_retain, _vproc_standby_begin, 
-                       _vproc_standby_end, _vproc_swap_complex, _vproc_swap_integer, 
-                       _vproc_swap_string, _vproc_transaction_begin, _vproc_transaction_end, 
-                       _vprocmgr_lookup_vproc ]
+                       _mpm_uncork_fork, _mpm_wait, _reboot2, _vproc_release, _vproc_retain, 
+                       _vproc_standby_begin, _vproc_standby_end, _vproc_swap_complex, 
+                       _vproc_swap_integer, _vproc_swap_string, _vproc_transaction_begin, 
+                       _vproc_transaction_end, _vprocmgr_lookup_vproc ]
 ...

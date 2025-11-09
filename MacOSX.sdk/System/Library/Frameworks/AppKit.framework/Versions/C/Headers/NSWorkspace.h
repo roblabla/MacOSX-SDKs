@@ -1,7 +1,7 @@
 /*
 	NSWorkspace.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -38,6 +38,14 @@ typedef NS_OPTIONS(NSUInteger, NSWorkspaceIconCreationOptions) {
     NSExclude10_4ElementsIconCreationOption	    = 1 << 2
 };
 
+
+/* The following keys can be used in the configuration dictionary of the launchApplicationAtURL:, openURL:, and openURL:withApplicationAtURL: methods.  Each key is optional, and if omitted, default behavior is applied. */
+typedef NSString * NSWorkspaceLaunchConfigurationKey NS_STRING_ENUM;
+APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigurationAppleEvent NS_AVAILABLE_MAC(10_6); //the first NSAppleEventDescriptor to send to the new app.  If an instance of the app is already running, this is sent to that app.
+APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigurationArguments NS_AVAILABLE_MAC(10_6); //an NSArray of NSStrings, passed to the new app in the argv parameter.  Ignored if a new instance is not launched.
+APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigurationEnvironment NS_AVAILABLE_MAC(10_6); //an NSDictionary, mapping NSStrings to NSStrings, containing environment variables to set for the new app.  Ignored if a new instance is not launched.
+APPKIT_EXTERN NSWorkspaceLaunchConfigurationKey const NSWorkspaceLaunchConfigurationArchitecture NS_AVAILABLE_MAC(10_6); //an NSNumber containing an NSBundleExecutableArchitecture (from NSBundle.h).  Ignored if a new instance is not launched.
+
 @interface NSWorkspace : NSObject {
   /*All instance variables are private*/
   @private
@@ -50,7 +58,7 @@ typedef NS_OPTIONS(NSUInteger, NSWorkspaceIconCreationOptions) {
 }
 
 /* Get the shared instance of NSWorkspace.  This method will create an instance of NSWorkspace if it has not been created yet.  You should not attempt to instantiate instances of NSWorkspace yourself, and you should not attempt to subclass NSWorkspace. */
-+ (NSWorkspace *)sharedWorkspace;
+@property (class, readonly, strong) NSWorkspace *sharedWorkspace;
 
 /* Returns the NSNotificationCenter for this NSWorkspace.  All notifications in this header file must be registered on this notification center.  If you register on other notification centers, you will not receive the notifications. */
 @property (readonly, strong) NSNotificationCenter *notificationCenter;
@@ -69,15 +77,15 @@ typedef NS_OPTIONS(NSUInteger, NSWorkspaceIconCreationOptions) {
 
 /* Launches the app at the given URL.  If the app is successfully launched, a reference to the new running app is returned.  If the app is already running, and NSWorkspaceLaunchNewInstance is not specified, then a reference to the existing app is returned.  If the app could not be launched, nil is returned and an NSError is returned by reference.
 
-  The configuration dictionary can be used to pass additional options to the app.  Possible keys are listed later in this file (search for NSWorkspaceLaunchConfiguration). The configuration dictionary may be empty, in which case default behavior applies.
+  The configuration dictionary can be used to pass additional options to the app. The configuration dictionary may be empty, in which case default behavior applies.
 */
-- (nullable NSRunningApplication *)launchApplicationAtURL:(NSURL *)url options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary<NSString *, id> *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_6);
+- (nullable NSRunningApplication *)launchApplicationAtURL:(NSURL *)url options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary<NSWorkspaceLaunchConfigurationKey, id> *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_6);
 
 /* Opens the given URL in an the application that claims it. An NSRunningApplication instance representing the app that the URL was opened in is returned. If the app could not be launched or no app claims the URL, nil is returned and an NSError is returned by reference. The options and configuration parameters are the same as those in launchApplicationAtURL:options:configuration:error:. */
-- (nullable NSRunningApplication *)openURL:(NSURL *)url options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary<NSString *, id> *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_10);
+- (nullable NSRunningApplication *)openURL:(NSURL *)url options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary<NSWorkspaceLaunchConfigurationKey, id> *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_10);
 
 /* Opens the given URLs in the application at applicationURL. Returns the NSRunningApplication for the app the URLs were opened in. If the app could not be launched, nil is returned and an NSError is returned by reference. The options and configuration parameters are the same as those in launchApplicationAtURL:options:configuration:error:. */
-- (nullable NSRunningApplication *)openURLs:(NSArray<NSURL *> *)urls withApplicationAtURL:(NSURL *)applicationURL options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary<NSString *, id> *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_10);
+- (nullable NSRunningApplication *)openURLs:(NSArray<NSURL *> *)urls withApplicationAtURL:(NSURL *)applicationURL options:(NSWorkspaceLaunchOptions)options configuration:(NSDictionary<NSWorkspaceLaunchConfigurationKey, id> *)configuration error:(NSError **)error NS_AVAILABLE_MAC(10_10);
 
 /* This currently does the same thing as launchApplication:.  Its use is discouraged. */
 - (BOOL)launchApplication:(NSString *)appName showIcon:(BOOL)showIcon autolaunch:(BOOL)autolaunch;
@@ -214,6 +222,22 @@ Use this method instead of merely comparing UTIs for equality.
 @end
 
 
+/* The following keys may be specified or returned in the options dictionary for setDesktopImageURL:forScreen:options:error: and desktopImageURLForScreen:options:. */
+typedef NSString * NSWorkspaceDesktopImageOptionKey NS_STRING_ENUM;
+
+/* The value is an NSNumber containing an NSImageScaling.  If this is not specified, NSImageScaleProportionallyUpOrDown is used.  Note: NSImageScaleProportionallyDown is not currently supported.
+ */
+APPKIT_EXTERN NSWorkspaceDesktopImageOptionKey const NSWorkspaceDesktopImageScalingKey NS_AVAILABLE_MAC(10_6);
+
+/* The value is an NSNumber containing a BOOL, which affects the interpretation of Proportional scaling types.  A NO value will make the image fully visible, but there may be empty space on the sides or top and bottom.  A YES value will cause the image to fill the entire screen, but the image may be clipped.  If this is not specified, NO is assumed.  Non-proportional scaling types ignore this value.
+ */
+APPKIT_EXTERN NSWorkspaceDesktopImageOptionKey const NSWorkspaceDesktopImageAllowClippingKey NS_AVAILABLE_MAC(10_6);
+
+/* The value is an NSColor, which is used to fill any empty space around the image.  If not specified, a default value is used.  Currently, only colors that use or can be converted to use NSCalibratedRGBColorSpace are supported, and any alpha value is ignored.
+ */
+APPKIT_EXTERN NSWorkspaceDesktopImageOptionKey const NSWorkspaceDesktopImageFillColorKey NS_AVAILABLE_MAC(10_6);
+
+
 /* Desktop images */
 @interface NSWorkspace (NSDesktopImages)
 
@@ -221,7 +245,7 @@ Use this method instead of merely comparing UTIs for equality.
 
   You should normally NOT present a user interface for picking the options.  Instead, just choose appropriate defaults and allow the user to adjust them in the System Preference Pane.
  */
-- (BOOL)setDesktopImageURL:(NSURL *)url forScreen:(NSScreen *)screen options:(NSDictionary<NSString *, id> *)options error:(NSError **)error NS_AVAILABLE_MAC(10_6);
+- (BOOL)setDesktopImageURL:(NSURL *)url forScreen:(NSScreen *)screen options:(NSDictionary<NSWorkspaceDesktopImageOptionKey, id> *)options error:(NSError **)error NS_AVAILABLE_MAC(10_6);
 
 /* Returns the URL for the desktop image for the given screen.
  */
@@ -229,23 +253,9 @@ Use this method instead of merely comparing UTIs for equality.
 
 /* Returns the options dictionary for the desktop image for the given screen.
  */
-- (nullable NSDictionary<NSString *, id> *)desktopImageOptionsForScreen:(NSScreen *)screen NS_AVAILABLE_MAC(10_6);
+- (nullable NSDictionary<NSWorkspaceDesktopImageOptionKey, id> *)desktopImageOptionsForScreen:(NSScreen *)screen NS_AVAILABLE_MAC(10_6);
 
 @end
-
-/* The following keys may be specified or returned in the options dictionary for setDesktopImageURL:forScreen:options:error: and desktopImageURLForScreen:options:. */
-
-/* The value is an NSNumber containing an NSImageScaling.  If this is not specified, NSImageScaleProportionallyUpOrDown is used.  Note: NSImageScaleProportionallyDown is not currently supported.
- */
-APPKIT_EXTERN NSString * const NSWorkspaceDesktopImageScalingKey NS_AVAILABLE_MAC(10_6);
-
-/* The value is an NSNumber containing a BOOL, which affects the interpretation of Proportional scaling types.  A NO value will make the image fully visible, but there may be empty space on the sides or top and bottom.  A YES value will cause the image to fill the entire screen, but the image may be clipped.  If this is not specified, NO is assumed.  Non-proportional scaling types ignore this value.
- */
-APPKIT_EXTERN NSString * const NSWorkspaceDesktopImageAllowClippingKey NS_AVAILABLE_MAC(10_6);
-
-/* The value is an NSColor, which is used to fill any empty space around the image.  If not specified, a default value is used.  Currently, only colors that use or can be converted to use NSCalibratedRGBColorSpace are supported, and any alpha value is ignored.
- */
-APPKIT_EXTERN NSString * const NSWorkspaceDesktopImageFillColorKey NS_AVAILABLE_MAC(10_6);
 
 
 /* Application notifications */
@@ -307,15 +317,8 @@ APPKIT_EXTERN NSNotificationName const NSWorkspaceDidChangeFileLabelsNotificatio
 APPKIT_EXTERN NSNotificationName const NSWorkspaceActiveSpaceDidChangeNotification NS_AVAILABLE_MAC(10_6);
 
 
-/* The following keys can be used in the configuration dictionary of the launchApplicationAtURL:, openURL:, and openURL:withApplicationAtURL: methods.  Each key is optional, and if omitted, default behavior is applied. */
-
-APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationAppleEvent NS_AVAILABLE_MAC(10_6); //the first NSAppleEventDescriptor to send to the new app.  If an instance of the app is already running, this is sent to that app.
-APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationArguments NS_AVAILABLE_MAC(10_6); //an NSArray of NSStrings, passed to the new app in the argv parameter.  Ignored if a new instance is not launched.
-APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationEnvironment NS_AVAILABLE_MAC(10_6); //an NSDictionary, mapping NSStrings to NSStrings, containing environment variables to set for the new app.  Ignored if a new instance is not launched.
-APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationArchitecture NS_AVAILABLE_MAC(10_6); //an NSNumber containing an NSBundleExecutableArchitecture (from NSBundle.h).  Ignored if a new instance is not launched.
-
-
 /* Everything remaining in this header is deprecated and should not be used. */
+typedef NSString * NSWorkspaceFileOperationName NS_DEPRECATED_MAC(10_0, 10_11) NS_STRING_ENUM;
 
 @interface NSWorkspace (NSDeprecated)
 - (BOOL)openTempFile:(NSString *)fullPath NS_DEPRECATED_MAC(10_0, 10_6);
@@ -360,22 +363,22 @@ APPKIT_EXTERN NSString * const NSWorkspaceLaunchConfigurationArchitecture NS_AVA
 /* Performs the given file operation, blocking until complete.  source should be the directory containing the file(s).  For operations that require a destination, such as Move and Copy, destination should be the destination directory; otherwise it should be nil.  files is an array of file names that are in the source directory.
  A value is returned by reference in the tag parameter, either 0 for success, or -1 for failure.  tag may be NULL.
  */
-- (BOOL)performFileOperation:(NSString *)operation source:(NSString *)source destination:(NSString *)destination files:(NSArray *)files tag:(nullable NSInteger *)tag NS_DEPRECATED_MAC(10_0, 10_11);
+- (BOOL)performFileOperation:(NSWorkspaceFileOperationName)operation source:(NSString *)source destination:(NSString *)destination files:(NSArray *)files tag:(nullable NSInteger *)tag NS_DEPRECATED_MAC(10_0, 10_11);
 
 @end
 
 /* Possible values for operation in performFileOperation:...
  */
-APPKIT_EXTERN NSString * NSWorkspaceMoveOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager moveItemAtURL:toURL:error:] instead.");
-APPKIT_EXTERN NSString * NSWorkspaceCopyOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager copyItemAtURL:toURL:error:] instead.");
-APPKIT_EXTERN NSString * NSWorkspaceLinkOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager linkItemAtURL:toURL:error:] instead.");
-APPKIT_EXTERN NSString * NSWorkspaceCompressOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
-APPKIT_EXTERN NSString * NSWorkspaceDecompressOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
-APPKIT_EXTERN NSString * NSWorkspaceEncryptOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
-APPKIT_EXTERN NSString * NSWorkspaceDecryptOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
-APPKIT_EXTERN NSString * NSWorkspaceDestroyOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager removeItemAtURL:error:] instead.");
-APPKIT_EXTERN NSString * NSWorkspaceRecycleOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace recycleURLs:completionHandler:] instead.");
-APPKIT_EXTERN NSString * NSWorkspaceDuplicateOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace duplicateURLs:completionHandler:] instead.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceMoveOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager moveItemAtURL:toURL:error:] instead.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceCopyOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager copyItemAtURL:toURL:error:] instead.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceLinkOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager linkItemAtURL:toURL:error:] instead.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceCompressOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceDecompressOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceEncryptOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceDecryptOperation NS_DEPRECATED_MAC(10_0, 10_11, "This operation is unimplemented.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceDestroyOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSFileManager removeItemAtURL:error:] instead.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceRecycleOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace recycleURLs:completionHandler:] instead.");
+APPKIT_EXTERN NSWorkspaceFileOperationName NSWorkspaceDuplicateOperation NS_DEPRECATED_MAC(10_0, 10_11, "Use -[NSWorkspace duplicateURLs:completionHandler:] instead.");
 
 APPKIT_EXTERN NSNotificationName NSWorkspaceDidPerformFileOperationNotification NS_DEPRECATED_MAC(10_0, 10_11);	//	@"NSOperationNumber"
 

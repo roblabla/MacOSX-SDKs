@@ -1,5 +1,5 @@
 /*	NSValueTransformer.h
-        Copyright (c) 2002-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2002-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,11 +10,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef NSString *NSValueTransformerName NS_EXTENSIBLE_STRING_ENUM;
 
-FOUNDATION_EXPORT NSValueTransformerName const NSNegateBooleanTransformerName	NS_AVAILABLE(10_3, 3_0);
-FOUNDATION_EXPORT NSValueTransformerName const NSIsNilTransformerName		NS_AVAILABLE(10_3, 3_0);
-FOUNDATION_EXPORT NSValueTransformerName const NSIsNotNilTransformerName		NS_AVAILABLE(10_3, 3_0);
-FOUNDATION_EXPORT NSValueTransformerName const NSUnarchiveFromDataTransformerName	NS_AVAILABLE(10_3, 3_0);
-FOUNDATION_EXPORT NSValueTransformerName const NSKeyedUnarchiveFromDataTransformerName	NS_AVAILABLE(10_5, 3_0);
+FOUNDATION_EXPORT NSValueTransformerName const NSNegateBooleanTransformerName	API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSValueTransformerName const NSIsNilTransformerName		API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSValueTransformerName const NSIsNotNilTransformerName		API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSValueTransformerName const NSUnarchiveFromDataTransformerName	API_AVAILABLE(macos(10.3), ios(3.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSValueTransformerName const NSKeyedUnarchiveFromDataTransformerName	API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
 
 NS_CLASS_AVAILABLE(10_3, 3_0)
 @interface NSValueTransformer : NSObject {

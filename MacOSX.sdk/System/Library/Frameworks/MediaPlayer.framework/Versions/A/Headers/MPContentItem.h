@@ -45,10 +45,10 @@ MP_API(ios(7.1), tvos(7.1), macos(10.12.2))
 
 /// Represents whether this content item is streaming content, i.e. from the cloud
 /// where the content is not stored locally.
-@property (nonatomic, assign, getter = isStreamingContent) BOOL streamingContent NS_AVAILABLE_IOS(10_0);
+@property (nonatomic, assign, getter = isStreamingContent) BOOL streamingContent MP_API(ios(10.0), tvos(10.0), macos(10.12.2));
 
 /// Represents whether this content item is explicit content
-@property (nonatomic, assign, getter = isExplicitContent) BOOL explicitContent NS_AVAILABLE_IOS(10_0);
+@property (nonatomic, assign, getter = isExplicitContent) BOOL explicitContent MP_API(ios(10.0), tvos(10.0), macos(10.12.2));
 
 /// Represents whether the content item is a container that may contain other
 /// content items, e.g. an album or a playlist.

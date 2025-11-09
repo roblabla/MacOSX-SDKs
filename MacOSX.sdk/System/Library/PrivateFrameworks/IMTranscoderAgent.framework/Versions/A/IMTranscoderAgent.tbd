@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: EBBCC4C7-E00F-3D90-8F0B-71F838089DAA' ]
+uuids:           [ 'x86_64: 3113FF73-D183-3D3B-8BA6-2440AEEDA9EB' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/IMTranscoderAgent.framework/Versions/A/IMTranscoderAgent
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _IMTranscodeErrorDomain, __IMTranscoderLinkFile ]

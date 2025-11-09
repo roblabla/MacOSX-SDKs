@@ -1,19 +1,20 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 7739EA9E-3C10-3BFB-B518-6EC62B82F4BC', 'x86_64: 278D1962-FFC8-399C-92FF-1D50383D291F' ]
+uuids:           [ 'i386: 13D8CDE6-D57E-3797-81F4-910DF789D41A', 'x86_64: D7CB6879-DD93-33EA-9D49-84AC875D4F5A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard
-current-version: 0.0
-compatibility-version: 0.0
-objc-constraint: none
+current-version: 0
+compatibility-version: 0
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _CNVCard30CardBuilder._countOfLinesBeforePhoto, _CNVCard30CardBuilder._groupCount, 
                        _CNVCard30CardBuilder._lineFactory, _CNVCard30CardBuilder._lines, 
                        _CNVCard30CardBuilder._person, _CNVCard30CardBuilder._photoHandled, 
                        _CNVCard30CardBuilder._retrofitPhoto, _CNVCard30CardBuilder._unknownProperties, 
-                       _CNVCardActivityAlertScanner._position, _CNVCardActivityAlertScanner._string, 
-                       _CNVCardDataStorage._data, _CNVCardDateComponentsFormatter._compactYearMonthDayDateFormatter, 
+                       _CNVCard30PHOTOHelper._maxBytes, _CNVCard30PHOTOHelper._options, 
+                       _CNVCard30PHOTOHelper._person, _CNVCardActivityAlertScanner._position, 
+                       _CNVCardActivityAlertScanner._string, _CNVCardDataStorage._data, 
+                       _CNVCardDateComponentsFormatter._compactYearMonthDayDateFormatter, 
                        _CNVCardDateComponentsFormatter._compactYearMonthDayDateHourMinuteSecondZFormatter, 
                        _CNVCardDateComponentsFormatter._gregorianCalendar, _CNVCardDateComponentsFormatter._monthDayDateFormatter, 
                        _CNVCardDateComponentsFormatter._yearMonthDayDateFormatter, 
@@ -23,6 +24,7 @@ exports:
                        _CNVCardEncoding._name, _CNVCardEncoding._stringEncoding, 
                        _CNVCardFilteredPerson._person, _CNVCardFilteredPerson._scope, 
                        _CNVCardFilteredPersonScope._blacklist, _CNVCardFilteredPersonScope._filterOptions, 
+                       _CNVCardImage._cropRects, _CNVCardImage._data, _CNVCardImage._size, 
                        _CNVCardLexer._activeTokenSets, _CNVCardLexer._bytes, _CNVCardLexer._cursor, 
                        _CNVCardLexer._data, _CNVCardLexer._errorCount, _CNVCardLexer._length, 
                        _CNVCardLexer._peekedPoint, _CNVCardLexer._unicode, _CNVCardLine._groupedLines, 
@@ -31,15 +33,19 @@ exports:
                        _CNVCardLine30SerializationStrategy._startingLineLength, _CNVCardLineGenerator._groupingCount, 
                        _CNVCardLineGenerator._lineFactory, _CNVCardLineGenerator._lineName, 
                        _CNVCardLineSerializationStrategyImpl._storage, _CNVCardLiteralLine._literalValue, 
-                       _CNVCardNameComponents._companyName, _CNVCardNameComponents._firstName, 
-                       _CNVCardNameComponents._formattedName, _CNVCardNameComponents._isCompany, 
-                       _CNVCardNameComponents._lastName, _CNVCardNameComponents._middleName, 
-                       _CNVCardNameComponents._suffix, _CNVCardNameComponents._title, 
-                       _CNVCardOptions._availableEncodings, _CNVCardOptions._compressPhotos, 
-                       _CNVCardOptions._includeNotes, _CNVCardOptions._includePhotos, 
-                       _CNVCardOptions._includePrivateBundleIdentifiers, _CNVCardOptions._includePrivateFields, 
-                       _CNVCardOptions._includeUserSettings, _CNVCardOptions._maximumEncodingLength, 
-                       _CNVCardOptions._maximumImageEncodingLength, _CNVCardOptions._outputVersion, 
+                       _CNVCardMutableImage._CGImage, _CNVCardMutableImage._attemptedCGImage, 
+                       _CNVCardMutableImage._compressionQuality, _CNVCardMutableImage._originalCropRects, 
+                       _CNVCardMutableImage._originalData, _CNVCardMutableImage._originalSize, 
+                       _CNVCardMutableImage._targetSizeValue, _CNVCardNameComponents._companyName, 
+                       _CNVCardNameComponents._firstName, _CNVCardNameComponents._formattedName, 
+                       _CNVCardNameComponents._isCompany, _CNVCardNameComponents._lastName, 
+                       _CNVCardNameComponents._middleName, _CNVCardNameComponents._suffix, 
+                       _CNVCardNameComponents._title, _CNVCardOptions._availableEncodings, 
+                       _CNVCardOptions._compressPhotos, _CNVCardOptions._includeNotes, 
+                       _CNVCardOptions._includePhotos, _CNVCardOptions._includePrivateBundleIdentifiers, 
+                       _CNVCardOptions._includePrivateFields, _CNVCardOptions._includeUserSettings, 
+                       _CNVCardOptions._maximumEncodingLength, _CNVCardOptions._maximumImageEncodingLength, 
+                       _CNVCardOptions._maximumImageSize, _CNVCardOptions._outputVersion, 
                        _CNVCardOptions._prefersUncroppedPhotos, _CNVCardOptions._treatAsUnknownProperties, 
                        _CNVCardOptions._usePhotoReferencesIfAvailable, _CNVCardParameter._name, 
                        _CNVCardParameter._value, _CNVCardParsedDictionaryResultBuilder._dictionaryRep, 
@@ -93,7 +99,9 @@ exports:
                        _CNVCardActivityAlertKey, _CNVCardActivityAlertSoundKey, _CNVCardActivityAlertTextKey, 
                        _CNVCardActivityAlertTypeKey, _CNVCardActivityAlertVibrationKey, 
                        _CNVCardAddressCityKey, _CNVCardAddressCountryCodeKey, _CNVCardAddressCountryKey, 
+                       _CNVCardAddressExtendedStreetKey, _CNVCardAddressPostOfficeBoxKey, 
                        _CNVCardAddressPostalCodeKey, _CNVCardAddressStateKey, _CNVCardAddressStreetKey, 
+                       _CNVCardAddressSubAdministrativeAreaKey, _CNVCardAddressSubLocalityKey, 
                        _CNVCardAlternateBirthdayComponentsKey, _CNVCardBirthdayComponentsKey, 
                        _CNVCardCalendarURIsKey, _CNVCardCardDAVUIDKey, _CNVCardDepartmentNameKey, 
                        _CNVCardEmailKey, _CNVCardFirstNameKey, _CNVCardFormattedNameKey, 
@@ -134,7 +142,8 @@ exports:
                        _CNVCardUnknownLabel, _CNVCardUnknownYear, _CNVCardValueKey, 
                        _CNVCardWorkLabel, _CNVCardYearlessDateMagicInterval, _byteBufferWithCapacity, 
                        _sFilterIMPPsForService ]
-    objc-classes:    [ _CNVCard30CardBuilder, _CNVCardADRParser, _CNVCardActivityAlertEscapingSerializationStrategy, 
+    objc-classes:    [ _CNMECARDParser, _CNVCard30CardBuilder, _CNVCard30PHOTOHelper, 
+                       _CNVCardADRParser, _CNVCardActivityAlertEscapingSerializationStrategy, 
                        _CNVCardActivityAlertLineGenerator, _CNVCardActivityAlertQuotingSerializationStrategy, 
                        _CNVCardActivityAlertScanner, _CNVCardActivityAlertSerialization, 
                        _CNVCardActivityAlertSerializer, _CNVCardAlternateDateComponentsLineGenerator, 
@@ -142,12 +151,12 @@ exports:
                        _CNVCardDateComponentsLineGenerator, _CNVCardDateComponentsParser, 
                        _CNVCardDateScanner, _CNVCardDictionarySerialization, _CNVCardEmailLineGenerator, 
                        _CNVCardEncoding, _CNVCardFilteredPerson, _CNVCardFilteredPersonScope, 
-                       _CNVCardInstantMessageParser, _CNVCardInstantMessagingLineGenerator, 
+                       _CNVCardImage, _CNVCardInstantMessageParser, _CNVCardInstantMessagingLineGenerator, 
                        _CNVCardLegacyInstantMessagingLineGenerator, _CNVCardLexer, 
                        _CNVCardLine, _CNVCardLine21SerializationStrategy, _CNVCardLine30SerializationStrategy, 
                        _CNVCardLineFactory, _CNVCardLineGenerator, _CNVCardLineSerializationStrategy, 
                        _CNVCardLineSerializationStrategyImpl, _CNVCardLiteralLine, 
-                       _CNVCardMutableNameComponents, _CNVCardNameComponentPostProcessor, 
+                       _CNVCardMutableImage, _CNVCardMutableNameComponents, _CNVCardNameComponentPostProcessor, 
                        _CNVCardNameComponents, _CNVCardNameSerialization, _CNVCardOptions, 
                        _CNVCardPHOTOParser, _CNVCardParameter, _CNVCardParameterDecoder, 
                        _CNVCardParameterEncoder, _CNVCardParsedDictionaryResultBuilder, 

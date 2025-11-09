@@ -42,7 +42,7 @@
                 are still pending, -plugInDidUpdateGroupList:error: should not be
                 called until they finish.
 */
-- (oneway void) requestGroupList;
+- (oneway void) requestGroupList NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -72,7 +72,7 @@
     @param      groupNames  An array of NSString objects, corresponding to the
                             names of the added groups
 */
-- (oneway void) addGroups:(NSArray *)groupNames;
+- (oneway void) addGroups:(NSArray *)groupNames NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -84,7 +84,7 @@
     @param      groupNames  An array of NSString objects, corresponding to the
                             names of the removed groups
 */
-- (oneway void) removeGroups:(NSArray *)groupNames;
+- (oneway void) removeGroups:(NSArray *)groupNames NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -95,7 +95,7 @@
     @param      oldGroupName  The former name of the group
     @param      newGroupName  The new name of the group
 */
-- (oneway void) renameGroup:(NSString *)oldGroupName toGroup:(NSString *)newGroupName;
+- (oneway void) renameGroup:(NSString *)oldGroupName toGroup:(NSString *)newGroupName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -111,7 +111,7 @@
     @param      handles    The added handles
     @param      groupName  The name of the group
 */
-- (oneway void) addHandles:(NSArray *)handles toGroup:(NSString *)groupName;
+- (oneway void) addHandles:(NSArray *)handles toGroup:(NSString *)groupName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -127,7 +127,7 @@
     @param      handles    The removed handles
     @param      groupName  The name of the group
 */
-- (oneway void) removeHandles:(NSArray *)handles fromGroup:(NSString *)groupName;
+- (oneway void) removeHandles:(NSArray *)handles fromGroup:(NSString *)groupName NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -166,7 +166,7 @@
     @param      handles    An NSArray of NSStrings, corresponding to handles in the new order
     @param      groupName  The containing group
 */
-- (oneway void) reorderHandles:(NSArray *)handles inGroup:(NSString *)groupName;
+- (oneway void) reorderHandles:(NSArray *)handles inGroup:(NSString *)groupName NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -199,7 +199,7 @@
 
     @param      handle     The handle from which to request authorization
 */
-- (oneway void) sendAuthorizationRequestToHandle:(NSString *)handle;
+- (oneway void) sendAuthorizationRequestToHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -210,7 +210,7 @@
 
     @param      handle     The handle to authorize
 */
-- (oneway void) acceptAuthorizationRequestFromHandle:(NSString *)handle;
+- (oneway void) acceptAuthorizationRequestFromHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -221,7 +221,7 @@
 
     @param      handle     The handle to not authorize
 */
-- (oneway void) declineAuthorizationRequestFromHandle:(NSString *)handle;
+- (oneway void) declineAuthorizationRequestFromHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -269,7 +269,7 @@
     @param      handle      The handle to fetch
     @param      identifier  A unqiue handle picture identifier
 */
-- (oneway void) requestPictureForHandle:(NSString *)handle withIdentifier:(NSString *)identifier;
+- (oneway void) requestPictureForHandle:(NSString *)handle withIdentifier:(NSString *)identifier NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -316,7 +316,7 @@
                 
     @param      error   An error for any requested group list modification operation, if one occurred
 */
-- (oneway void) plugInDidUpdateGroupList:(NSArray *)groups error:(NSError *)error;
+- (oneway void) plugInDidUpdateGroupList:(NSArray *)groups error:(NSError *)error NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -349,7 +349,7 @@
 
 	@param      handle   The handle requesting authorization
 */
-- (oneway void) plugInDidReceiveAuthorizationRequestFromHandle:(NSString *)handle;
+- (oneway void) plugInDidReceiveAuthorizationRequestFromHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 

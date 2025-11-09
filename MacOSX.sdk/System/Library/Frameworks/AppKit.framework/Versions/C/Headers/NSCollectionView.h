@@ -1,7 +1,7 @@
 /*
     NSCollectionView.h
     Application Kit
-    Copyright (c) 2005-2016, Apple Inc.
+    Copyright (c) 2005-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -44,8 +44,10 @@ typedef NS_OPTIONS(NSUInteger, NSCollectionViewScrollPosition) {
     NSCollectionViewScrollPositionNearestVerticalEdge  = 1 << 8, /* Nearer of Leading,Trailing */
 };
 
+typedef NSString * NSCollectionViewSupplementaryElementKind NS_EXTENSIBLE_STRING_ENUM;
+
 @class NSButton, NSCollectionView, NSCollectionViewLayout, NSCollectionViewLayoutAttributes, NSCollectionViewTransitionLayout, NSDraggingImageComponent, NSImageView, NSIndexSet, NSMutableIndexSet, NSNib, NSTextField;
-@protocol NSCollectionViewDataSource, NSCollectionViewDelegate;
+@protocol NSCollectionViewDataSource, NSCollectionViewDelegate, NSCollectionViewPrefetching;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -80,7 +82,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* If your header contains a button that's set up to toggle section collapse, wire this outlet to it.  This enables CollectionView to automatically show and hide the button, based on whether the section's items all fit.
 */
-@property (nullable, assign) IBOutlet NSButton *sectionCollapseButton NS_AVAILABLE_MAC(10_12);
+@property (nullable, weak) IBOutlet NSButton *sectionCollapseButton NS_AVAILABLE_MAC(10_12);
 
 @end
 
@@ -90,7 +92,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_5)
 @interface NSCollectionViewItem : NSViewController <NSCopying, NSCollectionViewElement> {
 @private
-    NSCollectionView *_collectionView;
+    __weak NSCollectionView *_collectionView;
     struct {
         unsigned int isSelected:1;
         unsigned int suppressSelectionChangedNotification:1;
@@ -110,7 +112,7 @@ NS_CLASS_AVAILABLE_MAC(10_5)
 
 /* Non-retained backlink to the containing CollectionView.
 */
-@property (readonly) NSCollectionView *collectionView;
+@property (readonly, nullable, weak) NSCollectionView *collectionView;
 
 /* Whether the item is part of its collectionView's current selection.
 */
@@ -122,11 +124,11 @@ NS_CLASS_AVAILABLE_MAC(10_5)
 
 /* Convenience outlet to the item's primary NSImageView (if any).
 */
-@property (nullable, assign) IBOutlet NSImageView *imageView NS_AVAILABLE_MAC(10_7);
+@property (nullable, weak) IBOutlet NSImageView *imageView NS_AVAILABLE_MAC(10_7);
 
 /* Convenience outlet to the item's primary NSTextField (if any).
 */
-@property (nullable, assign) IBOutlet NSTextField *textField NS_AVAILABLE_MAC(10_7);
+@property (nullable, weak) IBOutlet NSTextField *textField NS_AVAILABLE_MAC(10_7);
 
 /* Multi-image drag and drop support. The default implementation will return an array of up to two NSDraggingImageComponent instances -- one for the imageView and another for the textField (if not nil). This methods can be subclassed and overridden to provide a custom set of NSDraggingImageComponents to create the drag image. Note: the component frames are relative to a coordinate system that has its origin at the bottom left, so you need to take into account the flippedness of your view when computing the component frames.
 */
@@ -172,7 +174,8 @@ NS_CLASS_AVAILABLE_MAC(10_5)
         unsigned int backgroundViewScrollsWithContent:1;
         unsigned int opensGaps:1;
         unsigned int visMode:1;
-        unsigned int reserved:11;
+        unsigned int restoringState:1;
+        unsigned int reserved:10;
     } _cvFlags;
     id _delegate;
     NSMutableArray *_backgroundLayers;
@@ -208,6 +211,10 @@ Defaults to nil, which makes the CollectionView look to its "content" property o
 To get the new capabilities and behaviors, and use the new NSCollectionView APIs added in OS X 10.11, you must specify a dataSource.  Setting dataSource != nil causes the CollectionView to empty its "content" array, and attempting to set "content" to a non-empty array while dataSource != nil is considered a programming error that will cause an exception to be raised.
 */
 @property (nullable, weak) id<NSCollectionViewDataSource> dataSource NS_AVAILABLE_MAC(10_11);
+
+/* An optional assistant to the CollectionView's 'dataSource' (potentially the same object), that receives notifications conducive to managing item data pre-fetching.
+*/
+@property (nullable, weak) id<NSCollectionViewPrefetching> prefetchDataSource NS_AVAILABLE_MAC(10_13);
 
 /* The array of model objects that will be shown as "items" in this CollectionView.  The objects may be of any type(s).  If you prefer not to give the CollectionView a "dataSource", you can set its "content" property explicitly, or bind the CollectionView's NSContentBinding to an NSArrayController's arrangedObjects property, to provide the CollectionView with its model objects.  A CollectionView whose content is provided in this way cannot have more than one section.
 
@@ -254,7 +261,7 @@ To get an animated transition to the new layout, use [[collectionView animator] 
 
 Use this method to retrieve the layout information for a particular supplementary view. You should always use this method instead of querying the layout object directly.
 */
-- (nullable NSCollectionViewLayoutAttributes *)layoutAttributesForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
+- (nullable NSCollectionViewLayoutAttributes *)layoutAttributesForSupplementaryElementOfKind:(NSCollectionViewSupplementaryElementKind)kind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
 /* Returns the frame calculated by the receiver where it intends to place the subview for the NSCollectionViewItem at the given index. You can use this method in the draggingImage methods to determine which views are in the visible portion of the enclosing scroll view. Overriding this method will have no effect on the receiver's subview layout. For apps that target OS X 10.11 and later, you may want to use -layoutAttributesForItemAtIndexPath: instead, which provides more than just the item's frame. This method raises an exception if invoked for a CollectionView that has more than one section. Use -layoutAttributesForItemAtIndexPath: instead.
 */
@@ -332,25 +339,25 @@ Use this method to retrieve the layout information for a particular supplementar
 
 /* For each item identifier that the collection view will use, register either a nib or class from which to instantiate an item, or provide a nib file or class whose name matches the identifier you plan to use.  If a nib is registered, it must contain exactly one top-level NSCollectionViewItem.  If a class is registered instead of a nib, it will be instantiated via alloc/init.
  */
-- (void)registerClass:(nullable Class)itemClass forItemWithIdentifier:(NSString *)identifier NS_AVAILABLE_MAC(10_11);
-- (void)registerNib:(nullable NSNib *)nib forItemWithIdentifier:(NSString *)identifier NS_AVAILABLE_MAC(10_11);
+- (void)registerClass:(nullable Class)itemClass forItemWithIdentifier:(NSUserInterfaceItemIdentifier)identifier NS_AVAILABLE_MAC(10_11);
+- (void)registerNib:(nullable NSNib *)nib forItemWithIdentifier:(NSUserInterfaceItemIdentifier)identifier NS_AVAILABLE_MAC(10_11);
 
 /* For each supplementary view identifier that the collection view will use, register either a nib or class from which to instantiate a view, or provide a nib file or class whose name matches the identifier you plan to use.  If a nib is registered, it must contain exactly one top-level view, that conforms to the NSCollectionViewElement protocol.  If a class is registered instead of a nib, it will be instantiated via alloc/initWithFrame:.
  */
-- (void)registerClass:(nullable Class)viewClass forSupplementaryViewOfKind:(NSString *)kind withIdentifier:(NSString *)identifier NS_AVAILABLE_MAC(10_11);
-- (void)registerNib:(nullable NSNib *)nib forSupplementaryViewOfKind:(NSString *)kind withIdentifier:(NSString *)identifier NS_AVAILABLE_MAC(10_11);
+- (void)registerClass:(nullable Class)viewClass forSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)kind withIdentifier:(NSUserInterfaceItemIdentifier)identifier NS_AVAILABLE_MAC(10_11);
+- (void)registerNib:(nullable NSNib *)nib forSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)kind withIdentifier:(NSUserInterfaceItemIdentifier)identifier NS_AVAILABLE_MAC(10_11);
 
 /* Call this method from your data source object when asked to provide a new item for the collection view.  This method dequeues an existing item if one is available or creates a new one based on the nib file or class you previously registered.  If you have not registered a nib file or class for the given identifier, CollectionView will try to load a nib file named identifier.nib, or (failing that) find and instantiate an NSCollectionViewItem subclass named "identifier".
  
  If you a new item must be created from a class, this method initializes the item by invoking its -init method.  For nib-based items, this method loads the item from the provided nib file.  If an existing item was available for reuse, this method invokes the item's -prepareForReuse method instead.
  */
-- (__kindof NSCollectionViewItem *)makeItemWithIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
+- (__kindof NSCollectionViewItem *)makeItemWithIdentifier:(NSUserInterfaceItemIdentifier)identifier forIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
 /* Call this method from your data source object when asked to provide a new supplementary view for the collection view.  This method dequeues an existing view if one is available or creates a new one based on the nib file or class you previously registered.  If you have not registered a nib file or class for the given identifier, CollectionView will try to load a nib file named identifier.nib, or (failing that) find and instantiate an NSView subclass named "identifier".
  
  If a new view must be created from a class, this method initializes the view by invoking its -initWithFrame: method. For nib-based views, this method loads the view from the provided nib file.  If an existing view was available for reuse, this method invokes the view's -prepareForReuse method instead.
  */
-- (__kindof NSView *)makeSupplementaryViewOfKind:(NSString *)elementKind withIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
+- (__kindof NSView *)makeSupplementaryViewOfKind:(NSCollectionViewSupplementaryElementKind)elementKind withIdentifier:(NSUserInterfaceItemIdentifier)identifier forIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
 /* (Soft-Deprecated)  Invoked by a dataSource-less NSCollectionView when it needs a new item to represent the given model "object" (which is presumed to be a member of the CollectionView's "content" array).  Instantiates and returns a non-autoreleased item whose "representedObject" has been set to point to the given "object".  NSCollectionView's implementation of this method makes a copy of the CollectionView's itemPrototype (raising an exception if itemPrototype is nil).  You can override this method to customize the returned item or its view subtree however you wish, calling up to super first to obtain it.  Or, you can replace super's implementation entirely, to instantiate whatever kind of item you wish, potentially based on the type or properties of the given model "object".  The item returned from this factory method should NOT be autoreleased.
  
@@ -398,15 +405,15 @@ Use this method to retrieve the layout information for a particular supplementar
 
 /* Returns the supplementary view (if any) of the given elementKind that's associated with the given indexPath.  Returns nil if no such supplementary view is currently instantiated.
  */
-- (nullable NSView<NSCollectionViewElement> *)supplementaryViewForElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
+- (nullable NSView<NSCollectionViewElement> *)supplementaryViewForElementKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
 /* Returns the supplementary views that the CollectionView has instantiated and is managing as currently active.  Each such supplementary view is associated with an indexPath, and is part of the currently displayed view hierarchy.  Note that this list may include supplementary views that fall outside the CollectionView's current visibleRect (for example, recently visible section header or footer views that have been scrolled out of view, or section header or footer views that the CollectionView anticipates may soon be visible). To determine which of these views may actually be visible to the user, test each view.frame for intersection with the CollectionView's visibleRect.
  */
-- (NSArray<NSView<NSCollectionViewElement> *> *)visibleSupplementaryViewsOfKind:(NSString *)elementKind NS_AVAILABLE_MAC(10_11);
+- (NSArray<NSView<NSCollectionViewElement> *> *)visibleSupplementaryViewsOfKind:(NSCollectionViewSupplementaryElementKind)elementKind NS_AVAILABLE_MAC(10_11);
 
 /* Returns the index paths of the supplementary views of the given elementKind that are currently displayed by the CollectionView.  Note that these indexPaths correspond to the same supplementary views that "visibleSupplementaryViewsOfKind:" reports, and thus may include supplementary views that fall outside the CollectionView's current "visibleRect".
  */
-- (NSSet<NSIndexPath *> *)indexPathsForVisibleSupplementaryElementsOfKind:(NSString *)elementKind NS_AVAILABLE_MAC(10_11);
+- (NSSet<NSIndexPath *> *)indexPathsForVisibleSupplementaryElementsOfKind:(NSCollectionViewSupplementaryElementKind)elementKind NS_AVAILABLE_MAC(10_11);
 
 
 #pragma mark *** Modifying Items and Sections ***
@@ -552,7 +559,24 @@ You do not need to set the location of the view inside the collection view’s b
 
 This method must always return a valid view.
 */
-- (NSView *)collectionView:(NSCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath;
+- (NSView *)collectionView:(NSCollectionView *)collectionView viewForSupplementaryElementOfKind:(NSCollectionViewSupplementaryElementKind)kind atIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
+
+@protocol NSCollectionViewPrefetching <NSObject>
+
+@required
+
+/* Notifies your 'prefetchDataSource' that items at the specified 'indexPaths' are likely to be instantiated and displayed soon.  The CollectionView sends this as early as possible, to give your 'prefetchDataSource' the opportunity to begin acquiring any resources such as thumbnail images or metadata that you might need in order to prepare the item's content for display.  The given 'indexPaths' are sorted by the order in which they are likely to be needed.
+*/
+- (void)collectionView:(NSCollectionView *)collectionView prefetchItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
+
+@optional
+
+/* Notifies your 'prefetchDataSource' that items at the specified 'indexPaths', for which the CollectionView previously sent -collectionView:prefetchItemsAtIndexPaths:, are no longer expected to be displayed.  This is a good opportunity to cancel any pending resource fetches you've initiated for the items, if possible and worthwhile.  This is only sent for items that don't end up being displayed; CollectionView doesn't cancel prefetching for items that it actually instantiates and shows.
+*/
+- (void)collectionView:(NSCollectionView *)collectionView cancelPrefetchingForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths;
 
 @end
 
@@ -572,19 +596,21 @@ This method must always return a valid view.
 /* Old Form (Single Section Only) */
 - (BOOL)collectionView:(NSCollectionView *)collectionView canDragItemsAtIndexes:(NSIndexSet *)indexes withEvent:(NSEvent *)event NS_AVAILABLE_MAC(10_6);
 
-/* This method is called after it has been determined that a drag should begin, but before the drag has been started. To refuse the drag, return NO. To start the drag, declare the pasteboard types that you support with -[NSPasteboard declareTypes:owner:], place your data for the items at the given index paths on the pasteboard, and return YES from the method. The drag image and other drag related information will be set up and provided by the view once this call returns YES. You need to implement this method, or -collectionView:pasteboardWriterForItemAtIndexPath:, for your collection view to be a drag source.
+/* This method is called after it has been determined that a drag should begin, but before the drag has been started. To refuse the drag, return NO. To start the drag, declare the pasteboard types that you support with -[NSPasteboard declareTypes:owner:], place your data for the items at the given index paths on the pasteboard, and return YES from the method. The drag image and other drag related information will be set up and provided by the view once this call returns YES. You need to implement this method, or -collectionView:pasteboardWriterForItemAtIndexPath: (its more modern counterpart), for your collection view to be a drag source.  If you want to put file promises on the pasteboard, using the modern NSFilePromiseProvider API added in macOS 10.12, implement -collectionView:pasteboardWriterForItemAtIndexPath: instead of this method, and have it return an NSFilePromiseProvider.
 */
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths toPasteboard:(NSPasteboard *)pasteboard NS_AVAILABLE_MAC(10_11);
 
 /* Old Form (Single Section Only) */
 - (BOOL)collectionView:(NSCollectionView *)collectionView writeItemsAtIndexes:(NSIndexSet *)indexes toPasteboard:(NSPasteboard *)pasteboard NS_AVAILABLE_MAC(10_6);
 
-/* The delegate can support file promise drags by adding NSFilesPromisePboardType to the pasteboard in -collectionView:writeItemsAtIndexPaths:toPasteboard:. NSCollectionView implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this delegate method. This method should return an array of filenames (not full paths) for the created files. The URL represents the drop location. For more information on file promise dragging, see documentation for the NSDraggingSource protocol and -namesOfPromisedFilesDroppedAtDestination:. You do not need to implement this method for your collection view to be a drag source.
+/* This is a legacy method for file promise dragging, that's invoked when the delegate has placed NSFilesPromisePboardType data on the dragging pasteboard (typically in -collectionView:writeItemsAtIndexPaths:toPasteboard:). When using file promises and targeting macOS 10.12 and later, you should instead implement -collectionView:pasteboardWriterForItemAtIndexPath: to return a fully configured NSFilePromiseProvider, whose delegate provides the file name resolution functionality that was previously delegated to this method.
+ 
+NSCollectionView implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this delegate method. This method should return an array of filenames (not full paths) for the created files. `dropURL` specifies the drop location. You do not need to implement this method for your collection view to be a drag source.
 */
-- (NSArray<NSString *> *)collectionView:(NSCollectionView *)collectionView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropURL forDraggedItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths NS_AVAILABLE_MAC(10_11);
+- (NSArray<NSString *> *)collectionView:(NSCollectionView *)collectionView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropURL forDraggedItemsAtIndexPaths:(NSSet<NSIndexPath *> *)indexPaths NS_DEPRECATED_MAC(10_11, 10_13, "Use NSFilePromiseReceiver objects instead");
 
 /* Old Form (Single Section Only) */
-- (NSArray<NSString *> *)collectionView:(NSCollectionView *)collectionView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropURL forDraggedItemsAtIndexes:(NSIndexSet *)indexes NS_AVAILABLE_MAC(10_6);
+- (NSArray<NSString *> *)collectionView:(NSCollectionView *)collectionView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropURL forDraggedItemsAtIndexes:(NSIndexSet *)indexes NS_DEPRECATED_MAC(10_6, 10_13, "Use NSFilePromiseReceiver objects instead");
 
 /* Allows the delegate to construct a custom dragging image for the items being dragged. 'indexPaths' contains the (section,item) identification of the items being dragged. 'event' is a reference to the  mouse down event that began the drag. 'dragImageOffset' is an in/out parameter. This method will be called with dragImageOffset set to NSZeroPoint, but it can be modified to re-position the returned image. A dragImageOffset of NSZeroPoint will cause the image to be centered under the mouse. You can safely call -[NSCollectionView draggingImageForItemsAtIndexPaths:withEvent:offset:] from within this method. You do not need to implement this method for your collection view to be a drag source.
 */
@@ -672,14 +698,14 @@ Multi-image drag and drop: If draggingInfo.animatesToDestination is set to YES, 
 
 /* Sent to notify the delegate that the CollectionView is about to add a supplementary view (e.g. a section header or footer view).  Each NSCollectionViewLayout class defines its own possible values and associated meanings for "elementKind".  (For example, NSCollectionViewFlowLayout declares NSCollectionElementKindSectionHeader and NSCollectionElementKindSectionFooter.)
 */
-- (void)collectionView:(NSCollectionView *)collectionView willDisplaySupplementaryView:(NSView *)view forElementKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
+- (void)collectionView:(NSCollectionView *)collectionView willDisplaySupplementaryView:(NSView *)view forElementKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
 /* Sent to notify the delegate that the CollectionView is no longer displaying the given NSCollectionViewItem instance.  This happens when the model changes, or when an item is scrolled out of view.  You should perform any actions necessary to help decommission the item (such as releasing expensive resources).  The CollectionView may retain the item instance and later reuse it to represent the same or a different model object.
 */
 - (void)collectionView:(NSCollectionView *)collectionView didEndDisplayingItem:(NSCollectionViewItem *)item forRepresentedObjectAtIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
 /* Sent to notify the delegate that the CollectionView is no longer displaying the given supplementary view. This happens when the model changes, or when a supplementary view is scrolled out of view. You should perform any actions necessary to help decommission the view (such as releasing expensive resources). The CollectionView may retain the view and later reuse it. */
-- (void)collectionView:(NSCollectionView *)collectionView didEndDisplayingSupplementaryView:(NSView *)view forElementOfKind:(NSString *)elementKind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
+- (void)collectionView:(NSCollectionView *)collectionView didEndDisplayingSupplementaryView:(NSView *)view forElementOfKind:(NSCollectionViewSupplementaryElementKind)elementKind atIndexPath:(NSIndexPath *)indexPath NS_AVAILABLE_MAC(10_11);
 
 
 #pragma mark *** Layout Transition Support ***
@@ -709,7 +735,7 @@ Multi-image drag and drop: If draggingInfo.animatesToDestination is set to YES, 
  */
 + (instancetype)setWithCollectionViewIndexPaths:(NSArray<NSIndexPath *> *)indexPaths NS_AVAILABLE_MAC(10_11);
 
-/* Executes the given block for each NSIndexPath in the set.  The index paths are enumerated in the order defined by NSIndexPath's -compare: method.  For CollectionView item index paths, this means all index paths in section 0, in ascending order, followed by all index paths in section 1, and so on.  You may pass the NSEnumerationReverse option to enumerate in the reverse order.  Set *stop = YES if desired, to halt the enumeration early.
+/* Executes the given block for each NSIndexPath in the set.  The index paths are enumerated in the order defined by NSIndexPath's -compare: method.  For CollectionView item index paths, this means all index paths in section 0, in ascending order, followed by all index paths in section 1, and so on.  You may pass the NSEnumerationReverse option to enumerate in the reverse order.  Set *stop = YES if desired, to halt the enumeration early.  Note that the given indexPath is not guaranteed to survive return from the block invocation, so if you wish to pass it outside the block, you must make a -copy (and later -release or -autorelease, if not using ARC).
  */
 - (void)enumerateIndexPathsWithOptions:(NSEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSIndexPath *indexPath, BOOL *stop))block NS_AVAILABLE_MAC(10_11);
 

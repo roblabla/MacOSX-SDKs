@@ -1,5 +1,5 @@
 /*	NSObjCRuntime.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -288,26 +288,6 @@ NS_ENUM(NSInteger) {
 #define NS_ENUM(...) CF_ENUM(__VA_ARGS__)
 #define NS_OPTIONS(_type, _name) CF_OPTIONS(_type, _name)
 
-
-#ifndef CF_STRING_ENUM
-#if __has_attribute(swift_wrapper)
-#define _CF_TYPED_ENUM __attribute__((swift_wrapper(enum)))
-#else
-#define _CF_TYPED_ENUM
-#endif
-
-#define CF_STRING_ENUM _CF_TYPED_ENUM
-#endif
-
-#ifndef CF_EXTENSIBLE_STRING_ENUM
-#if __has_attribute(swift_wrapper)
-#define _CF_TYPED_EXTENSIBLE_ENUM __attribute__((swift_wrapper(struct)))
-#else
-#define _CF_TYPED_EXTENSIBLE_ENUM
-#endif
-
-#define CF_EXTENSIBLE_STRING_ENUM _CF_TYPED_EXTENSIBLE_ENUM
-#endif
 /* */
 
 #define _NS_TYPED_ENUM _CF_TYPED_ENUM
@@ -315,6 +295,33 @@ NS_ENUM(NSInteger) {
 
 #define NS_STRING_ENUM _NS_TYPED_ENUM
 #define NS_EXTENSIBLE_STRING_ENUM _NS_TYPED_EXTENSIBLE_ENUM
+
+#define NS_TYPED_ENUM _NS_TYPED_ENUM
+#define NS_TYPED_EXTENSIBLE_ENUM _NS_TYPED_EXTENSIBLE_ENUM
+
+
+#define __NS_ERROR_ENUM_GET_MACRO(_1, _2, NAME, ...) NAME
+#if ((__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))) && __has_attribute(ns_error_domain)
+#define __NS_NAMED_ERROR_ENUM(_domain, _name)     enum _name : NSInteger _name; enum __attribute__((ns_error_domain(_domain))) _name : NSInteger
+#define __NS_ANON_ERROR_ENUM(_domain)             enum __attribute__((ns_error_domain(_domain))) : NSInteger
+#else
+#define __NS_NAMED_ERROR_ENUM(_domain, _name) NS_ENUM(NSInteger, _name)
+#define __NS_ANON_ERROR_ENUM(_domain) NS_ENUM(NSInteger)
+#endif
+
+/* NS_ERROR_ENUM supports the use of one or two arguments. The first argument is always the domain specifier for the enum. The second argument is an optional name of the typedef for the macro. When specifying a name for of the typedef, you must precede the macro with 'typedef' like so:
+ 
+ typedef NS_ERROR_ENUM(MyErrorDomain, SomeErrorCodes) {
+ ...
+ };
+ 
+ If you do not specify a typedef name, do not use 'typedef', like so:
+ 
+ NS_ERROR_ENUM(MyErrorDomain) {
+ ...
+ };
+ */
+#define NS_ERROR_ENUM(...) __NS_ERROR_ENUM_GET_MACRO(__VA_ARGS__, __NS_NAMED_ERROR_ENUM, __NS_ANON_ERROR_ENUM)(__VA_ARGS__)
 
 // This macro is to be used by system frameworks to support the weak linking of classes. Weak linking is supported on iOS 3.1 and Mac OS X 10.6.8 or later.
 #if (__MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_6 || __IPHONE_OS_VERSION_MIN_REQUIRED >= __IPHONE_3_1) && \
@@ -340,8 +347,12 @@ NS_ENUM(NSInteger) {
 
 #define NS_SWIFT_UNAVAILABLE(_msg) CF_SWIFT_UNAVAILABLE(_msg)
 
+#ifndef NS_ASSUME_NONNULL_BEGIN
 #define NS_ASSUME_NONNULL_BEGIN _Pragma("clang assume_nonnull begin")
+#endif
+#ifndef NS_ASSUME_NONNULL_END
 #define NS_ASSUME_NONNULL_END   _Pragma("clang assume_nonnull end")
+#endif
 
 #define NS_REFINED_FOR_SWIFT CF_REFINED_FOR_SWIFT
 
@@ -500,8 +511,8 @@ FOUNDATION_EXPORT SEL NSSelectorFromString(NSString *aSelectorName);
 FOUNDATION_EXPORT NSString *NSStringFromClass(Class aClass);
 FOUNDATION_EXPORT Class _Nullable NSClassFromString(NSString *aClassName);
 
-FOUNDATION_EXPORT NSString *NSStringFromProtocol(Protocol *proto) NS_AVAILABLE(10_5, 2_0);
-FOUNDATION_EXPORT Protocol * _Nullable NSProtocolFromString(NSString *namestr) NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSString *NSStringFromProtocol(Protocol *proto) API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT Protocol * _Nullable NSProtocolFromString(NSString *namestr) API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 FOUNDATION_EXPORT const char *NSGetSizeAndAlignment(const char *typePtr, NSUInteger * _Nullable sizep, NSUInteger * _Nullable alignp);
 
@@ -540,7 +551,7 @@ typedef NS_ENUM(NSInteger, NSQualityOfService) {
 
     /* Default QoS indicates the absence of QoS information.  Whenever possible QoS information will be inferred from other sources.  If such inference is not possible, a QoS between UserInitiated and Utility will be used. */
     NSQualityOfServiceDefault = -1
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 static const NSInteger NSNotFound = NSIntegerMax;
 

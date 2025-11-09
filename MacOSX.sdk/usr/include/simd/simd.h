@@ -1,6 +1,6 @@
 /*  Copyright (c) 2014 Apple, Inc.  All rights reserved.
  *
- *  This header provides small vector (SIMD) and matrix types, and basic
+ *  This header provides small vector (simd) and matrix types, and basic
  *  arithmetic and mathematical functions for them.  The vast majority of these
  *  operations are implemented as header inlines, as they can be performed
  *  using just a few instructions on most processors.
@@ -16,5 +16,6 @@
 
 #include <simd/vector.h>
 #include <simd/matrix.h>
+#include <simd/quaternion.h>
 
 #endif

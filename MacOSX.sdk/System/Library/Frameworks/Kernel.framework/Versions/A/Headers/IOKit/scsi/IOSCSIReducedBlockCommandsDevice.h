@@ -216,9 +216,9 @@ protected:
 	/*!
 	@function ClearNotReadyStatus
 	@abstract Clears any NOT_READY status for the device.
-	@discussion Polls device with TEST_UNIT_READY until the device stops returning NOT_READY status. 
+	@discussion Polls device with TEST_UNIT_READY until the device returns <code>kSCSITaskStatus_GOOD</code> status.
 	Exits if device has become disconnected.
-	@result <code>true</code> if able to clear the NOT_READY status and <code>false</code> if not.
+	@result <code>true</code> if device is now active (isInactive == false) and <code>false</code> otherwise.
 	*/
 	virtual bool		ClearNotReadyStatus ( void ) APPLE_KEXT_OVERRIDE;
 	

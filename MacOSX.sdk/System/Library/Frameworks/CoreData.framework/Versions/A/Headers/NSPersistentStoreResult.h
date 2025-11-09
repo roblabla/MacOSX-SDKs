@@ -1,9 +1,10 @@
 /*
- NSPersistentStoreResult.h
- Core Data
- Copyright (c) 2004-2016, Apple Inc.
- All rights reserved.
- */
+    NSPersistentStoreResult.h
+    Core Data
+    Copyright (c) 2004-2017, Apple Inc.
+    All rights reserved.
+*/
+
 #import <Foundation/NSArray.h>
 #import <CoreData/NSFetchRequest.h>
 
@@ -28,6 +29,16 @@ typedef NS_ENUM(NSUInteger, NSBatchDeleteRequestResultType) {
     NSBatchDeleteResultTypeObjectIDs = 0x1,  // Return the object IDs of the rows that were deleted
     NSBatchDeleteResultTypeCount = 0x2,      // Return the number of rows that were deleted
 } API_AVAILABLE(macosx(10.11), ios(9.0));
+
+
+typedef NS_ENUM(NSInteger, NSPersistentHistoryResultType) {
+    NSPersistentHistoryResultTypeStatusOnly = 0x0,
+    NSPersistentHistoryResultTypeObjectIDs = 0x1,   // Return the object IDs of the changes objects
+    NSPersistentHistoryResultTypeCount = 0x2,       // Return the number of changes
+    NSPersistentHistoryResultTypeTransactionsOnly = 0x3,// Return the transactions since
+    NSPersistentHistoryResultTypeChangesOnly = 0x4,     // Return the changes since
+    NSPersistentHistoryResultTypeTransactionsAndChanges = 0x5,// Return the transactions and changes since
+} API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
 
 // Used to wrap the result of whatever is returned by the persistent store coordinator when
 // -[NSManagedObjectContext executeRequest:error:] is called
@@ -101,6 +112,23 @@ API_AVAILABLE(macosx(10.11),ios(9.0))
 // Return the result. See NSBatchDeleteRequestResultType for options
 @property (nullable, strong, readonly) id result;
 @property (readonly) NSBatchDeleteRequestResultType resultType;
+
+@end
+
+
+// The result returned when executing an NSPersistentHistoryChangeRequest
+API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0))
+@interface NSPersistentHistoryResult : NSPersistentStoreResult {
+#if (!__OBJC2__)
+@private
+    id _aggregatedResult;
+    NSPersistentHistoryResultType _resultType;
+#endif
+}
+
+// Return the result. See NSPersistentHistoryResultType for options
+@property (nullable, strong, readonly) id result;
+@property (readonly) NSPersistentHistoryResultType resultType;
 
 @end
 

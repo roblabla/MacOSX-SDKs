@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGPDFPage *CGPDFPageRef;
+typedef struct CF_BRIDGED_TYPE(id) CGPDFPage *CGPDFPageRef;
 
 #include <CoreGraphics/CGAffineTransform.h> 
 #include <CoreGraphics/CGPDFDictionary.h> 

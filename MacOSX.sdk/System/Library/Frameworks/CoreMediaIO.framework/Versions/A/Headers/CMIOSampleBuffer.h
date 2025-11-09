@@ -299,6 +299,10 @@ extern CFStringRef kCMIOSampleBufferAttachmentKey_ClientSequenceID;
 					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionX
 					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorPositionY
 					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsVisible
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorFrameRect
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference
+					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorScale
 					kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers
 */
 extern CFStringRef kCMIOSampleBufferAttachmentKey_MouseAndKeyboardModifiers;
@@ -329,6 +333,49 @@ extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_Curs
 				captured.
 */
 extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_MouseButtonState;
+	
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsVisible
+	@discussion	Used to look up a CFBoolean from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the visibility of the mouse cursor when the screen was
+				captured.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorIsVisible;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorFrameRect
+	@discussion	Used to look up a CFDictionary representation of a CGRect from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the frame CGRect as dictionary of the mouse cursor when the screen was captured.
+ */
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorFrameRect;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference
+	@discussion	Used to look up a NSCursor reference from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the NSCursor when the screen was captured.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorSeed
+	@discussion	Used to look up the cursor seed value from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the CFNumber of the seed value for the cursor referenced by
+				kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorReference;
+				changes in this number reflect that the cursor has changed.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorSeed;
+
+/*!
+	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorScale
+	@discussion	Used to look up a CFNumber from the CFDictionary specified by
+				kCMIOSampleBufferAttachmentKey_MouseAndKeyModifiers.  It specifies
+				the cursor scaling when the screen was captured.
+*/
+extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_CursorScale;
 
 /*!
 	@const		kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiers

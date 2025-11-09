@@ -1,4 +1,4 @@
-.\" Copyright (c) 2011 Apple Inc. All rights reserved.
+.\" Copyright (c) 2011, 2016 Apple Inc. All rights reserved.
 .Dd 1 July, 2011
 .Dt xpc_objects 3
 .Os Darwin
@@ -302,7 +302,7 @@ for details.
 .Pp
 The length of the C string value may be determined using the
 .Fn xpc_string_get_length
-function. This length is does not include the NUL terminator character,
+function. This length does not include the NUL terminator character,
 similar to
 .Xr strlen 3 .
 .Pp
@@ -354,18 +354,51 @@ Boxed representations of file descriptors may be created using the
 .Fn xpc_fd_create
 function.
 Once created, there is no way to retrieve the original file descriptor from
-the boxed representation. Instead, the
+the boxed representation. This function performs the equivalent of a
+.Xr dup 2
+on the descriptor, and thus it is safe to call
+.Xr close 2
+on the descriptor after boxing it.
+.Pp
+The
 .Fn xpc_fd_dup
-function can be used to create a new file descriptor in a similar manner to
+function can be used to create a new file descriptor from a boxed representation
+in a similar manner to
 .Xr dup 2 .
 The caller is responsible for calling
 .Xr close 2
-on the descriptor returned by this function.
+on the descriptor returned by
+.Fn xpc_fd_dup .
+
 Multiple calls to
 .Fn xpc_fd_dup
 will produce multiple unique file descriptor values.
 If a failure occurs (i.e. process file descriptor table is full), the invalid
 file descriptor value -1 will be returned.
+.Pp
+.Em Important :
+When file descriptors are copied with
+.Xr dup 2 ,
+they share some state, including flags and
+.Xr lseek 2
+file offset. The same sharing obtains when these boxing and unboxing functions
+create copies of file descriptors, and when a boxed representation of a
+file descriptor is sent to another process using XPC.
+.Pp
+For example, suppose one process opens a file and sends the file descriptor to
+another process. Then, the first process uses
+.Xr read 2
+to read the first 100 bytes from the file. If the second process then calls
+.Xr read 2
+on the descriptor that it received from the first process,
+the data it reads will start at the 101st byte of the file, not the 1st.
+.Pp
+This is not usually the desired behavior.
+.Pp
+Therefore, if you wish to send a file to another process, it is best
+not to box one shared file descriptor. Instead you should
+.Xr open 2
+the file afresh for each other process you wish to share with.
 .Ss SHARED MEMORY
 Boxed representations of shared memory regions allocated using
 .Xr mmap 2

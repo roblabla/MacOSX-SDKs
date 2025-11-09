@@ -1,7 +1,7 @@
 /*
     NSAnimation.h
     Application Kit
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSGraphicsContext, NSString, NSDisplayLink;
+@class NSGraphicsContext, NSString, NSDisplayLink1;
 @protocol NSAnimationDelegate;
 
 typedef NS_ENUM(NSUInteger, NSAnimationCurve) {
@@ -33,16 +33,16 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 
 @interface NSAnimation : NSObject <NSCopying, NSCoding> {
   @private
-    NSTimeInterval       _duration;
-    NSAnimationProgress  _currentProgress;
-    float                 _framesPerSecond;
-    id                   _delegate;
-    NSDisplayLink       *_displayLink;
-    NSTimeInterval       _startTime;
-    NSMutableArray      *_progressMarks;
-    NSAnimation         *_startAnimation;
-    NSAnimation         *_stopAnimation;
-    int                  _nextProgressMark;
+    NSTimeInterval _duration;
+    NSAnimationProgress _currentProgress;
+    float _framesPerSecond;
+    __weak id<NSAnimationDelegate> _delegate;
+    NSDisplayLink1 *_displayLink;
+    NSTimeInterval _startTime;
+    NSMutableArray *_progressMarks;
+    NSAnimation *_startAnimation;
+    NSAnimation *_stopAnimation;
+    int _nextProgressMark;
     struct __aFlags {
 	unsigned int delegateAnimationShouldStart:1;
 	unsigned int delegateAnimationDidStop:1;
@@ -87,7 +87,7 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 
 @property (readonly) float currentValue;
 
-@property (nullable, assign) id<NSAnimationDelegate> delegate;
+@property (nullable, weak) id<NSAnimationDelegate> delegate;
 
 @property (copy) NSArray<NSNumber *> *progressMarks;
 
@@ -115,12 +115,15 @@ APPKIT_EXTERN NSString * NSAnimationProgressMark; // NSNumber(float) with NSAnim
 
 /*-----------------------------------------------------------------------------------------*/
 
-APPKIT_EXTERN NSString * NSViewAnimationTargetKey;       // NSWindow* or NSView* (required)
-APPKIT_EXTERN NSString * NSViewAnimationStartFrameKey;   // NSValue*(NSRect) (optional)
-APPKIT_EXTERN NSString * NSViewAnimationEndFrameKey;     // NSValue*(NSRect) (optional)
-APPKIT_EXTERN NSString * NSViewAnimationEffectKey;       // NSString*(effect strings) (optional)
-APPKIT_EXTERN NSString * NSViewAnimationFadeInEffect;
-APPKIT_EXTERN NSString * NSViewAnimationFadeOutEffect;
+typedef NSString * NSViewAnimationKey NS_STRING_ENUM;
+APPKIT_EXTERN NSViewAnimationKey NSViewAnimationTargetKey;       // NSWindow* or NSView* (required)
+APPKIT_EXTERN NSViewAnimationKey NSViewAnimationStartFrameKey;   // NSValue*(NSRect) (optional)
+APPKIT_EXTERN NSViewAnimationKey NSViewAnimationEndFrameKey;     // NSValue*(NSRect) (optional)
+APPKIT_EXTERN NSViewAnimationKey NSViewAnimationEffectKey;       // NSViewAnimationEffectName (optional)
+
+typedef NSString * NSViewAnimationEffectName NS_STRING_ENUM;
+APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeInEffect;
+APPKIT_EXTERN NSViewAnimationEffectName NSViewAnimationFadeOutEffect;
 
 @interface NSViewAnimation : NSAnimation {
   @private
@@ -141,12 +144,13 @@ APPKIT_EXTERN NSString * NSViewAnimationFadeOutEffect;
 #endif
 }
 
-- (instancetype)initWithViewAnimations:(NSArray<NSDictionary<NSString *, id> *> *)viewAnimations;
+- (instancetype)initWithViewAnimations:(NSArray<NSDictionary<NSViewAnimationKey, id> *> *)viewAnimations;
 
-@property (copy) NSArray<NSDictionary<NSString *, id> *> *viewAnimations;
+@property (copy) NSArray<NSDictionary<NSViewAnimationKey, id> *> *viewAnimations;
 
 @end
 
+typedef NSString * NSAnimatablePropertyKey NS_EXTENSIBLE_STRING_ENUM;
 
 @protocol NSAnimatablePropertyContainer
 
@@ -158,11 +162,11 @@ It's perfectly valid to set a new value for a property for which an animation is
 
 /* An animatable property container's optional "animations" dictionary maps NSString keys to CAAnimation values. When an occurrence matching the key fires for the view, -animationForKey: first looks in this dictionary for an animation to execute in response. Typically, the key will name a property of the object whose value has just changed, but it may instead specify a special event trigger (NSAnimationTriggerOrderIn or NSAnimationTriggerOrderOut).
 */
-@property (readwrite, copy) NSDictionary<NSString *, id> *animations NS_AVAILABLE_MAC(10_5);
+@property (readwrite, copy) NSDictionary<NSAnimatablePropertyKey, id> *animations NS_AVAILABLE_MAC(10_5);
 
 /* When the occurrence specified by "key" fires for an object, this method is consulted to find the animation, if any, that should be performed in response. Like its counterpart, -[CALayer actionForKey:], this method is a funnel point that defines the order in which the search for an animation proceeds, and is not one that clients would typically need to override. It first checks the receiver's "animations" dictionary, then falls back to  +defaultAnimationForKey: for the receiver's class.
 */
-- (nullable id)animationForKey:(NSString *)key NS_AVAILABLE_MAC(10_5);
+- (nullable id)animationForKey:(NSAnimatablePropertyKey)key NS_AVAILABLE_MAC(10_5);
 
 /* As described above, -animationForKey: consults this class method when its search of an instance's "animations" dictionary doesn't turn up an animation to use for a given property change.
 
@@ -184,12 +188,12 @@ The full set of available CAAnimation classes can be found in QuartzCore/CAAnima
 }
 @end
 */
-+ (nullable id)defaultAnimationForKey:(NSString *)key NS_AVAILABLE_MAC(10_5);
++ (nullable id)defaultAnimationForKey:(NSAnimatablePropertyKey)key NS_AVAILABLE_MAC(10_5);
 
 @end /* @protocol NSAnimatablePropertyContainer */
 
-APPKIT_EXTERN NSString * NSAnimationTriggerOrderIn NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString * NSAnimationTriggerOrderOut NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSAnimatablePropertyKey NSAnimationTriggerOrderIn NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSAnimatablePropertyKey NSAnimationTriggerOrderOut NS_AVAILABLE_MAC(10_5);
 
 NS_ASSUME_NONNULL_END
 

@@ -144,8 +144,15 @@
 #define CPUID_LEAF7_FEATURE_CLFSOPT  _Bit(23)	/* CLFSOPT */
 #define CPUID_LEAF7_FEATURE_IPT      _Bit(25)	/* Intel Processor Trace */
 #define CPUID_LEAF7_FEATURE_SHA      _Bit(29)	/* SHA instructions */
+#define CPUID_LEAF7_FEATURE_AVX512F  _Bit(16)	/* AVX512F instructions */
+#define CPUID_LEAF7_FEATURE_AVX512DQ _Bit(17)	/* AVX512DQ instructions */
+#define CPUID_LEAF7_FEATURE_AVX512IFMA _Bit(21)	/* AVX512IFMA instructions */
+#define CPUID_LEAF7_FEATURE_AVX512CD _Bit(28)	/* AVX512CD instructions */
+#define CPUID_LEAF7_FEATURE_AVX512BW _Bit(30)	/* AVX512BW instructions */
+#define CPUID_LEAF7_FEATURE_AVX512VL _Bit(31)	/* AVX512VL instructions */
 
 #define CPUID_LEAF7_FEATURE_PREFETCHWT1 _HBit(0)/* Prefetch Write/T1 hint */
+#define CPUID_LEAF7_FEATURE_AVX512VBMI  _HBit(1)/* AVX512VBMI instructions */
 
 /*
  * The CPUID_EXTFEATURE_XXX values define 64-bit values
@@ -217,6 +224,11 @@
 #define CPUID_MODEL_SKYLAKE_ULT		0x4E
 #define CPUID_MODEL_SKYLAKE_ULX		0x4E
 #define CPUID_MODEL_SKYLAKE_DT		0x5E
+#define CPUID_MODEL_SKYLAKE_W		0x55
+#define CPUID_MODEL_KABYLAKE            0x8E
+#define CPUID_MODEL_KABYLAKE_ULT        0x8E
+#define CPUID_MODEL_KABYLAKE_ULX        0x8E
+#define CPUID_MODEL_KABYLAKE_DT         0x9E
 
 #define CPUID_VMM_FAMILY_UNKNOWN	0x0
 #define CPUID_VMM_FAMILY_VMWARE		0x1

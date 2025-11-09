@@ -1,16 +1,16 @@
 /*
  NSLayoutAnchor.h
  Application Kit
- Copyright (c) 2015-2016, Apple Inc.
+ Copyright (c) 2015-2017, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/NSGeometry.h>
-#import <Foundation/NSObject.h>
+#import <Foundation/NSArray.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSLayoutConstraint;
+@class NSLayoutConstraint, NSLayoutDimension;
 
 /*
  An NSLayoutAnchor represents an edge or dimension of a layout item.  Its concrete subclasses allow concise creation of constraints.  The idea is that instead of invoking +[NSLayoutConstraint constraintWithItem: attribute: relatedBy: toItem: attribute: multiplier: constant:] directly, you can instead do something like this:
@@ -42,16 +42,32 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 - (NSLayoutConstraint*)constraintEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor constant:(CGFloat)c;
 - (NSLayoutConstraint*)constraintGreaterThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor constant:(CGFloat)c;
 - (NSLayoutConstraint*)constraintLessThanOrEqualToAnchor:(NSLayoutAnchor<AnchorType>*)anchor constant:(CGFloat)c;
+
+
+// These properties are for debugging only:
+@property (readonly, copy) NSString *name NS_AVAILABLE(10_12, 10_0);
+@property (readonly, nullable, weak) id item NS_AVAILABLE(10_12, 10_0);
+@property (readonly) BOOL hasAmbiguousLayout NS_AVAILABLE(10_12, 10_0);
+@property (readonly) NSArray<NSLayoutConstraint *> *constraintsAffectingLayout NS_AVAILABLE(10_12, 10_0);
+
 @end
 
 
 // Axis-specific subclasses for location anchors: top/bottom, leading/trailing, baseline, etc.
 @class NSLayoutXAxisAnchor, NSLayoutYAxisAnchor;
+
 NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface NSLayoutXAxisAnchor : NSLayoutAnchor<NSLayoutXAxisAnchor*>
+
+// Creation of composite anchors:
+- (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutXAxisAnchor *)otherAnchor NS_AVAILABLE(10_12, 10_0);
 @end
+
 NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface NSLayoutYAxisAnchor : NSLayoutAnchor<NSLayoutYAxisAnchor*>
+
+// Creation of composite anchors:
+- (NSLayoutDimension *)anchorWithOffsetToAnchor:(NSLayoutYAxisAnchor *)otherAnchor NS_AVAILABLE(10_12, 10_0);
 @end
 
 
@@ -76,6 +92,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 - (NSLayoutConstraint*)constraintEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m constant:(CGFloat)c;
 - (NSLayoutConstraint*)constraintGreaterThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m constant:(CGFloat)c;
 - (NSLayoutConstraint*)constraintLessThanOrEqualToAnchor:(NSLayoutDimension*)anchor multiplier:(CGFloat)m constant:(CGFloat)c;
+
 @end
 
 

@@ -108,7 +108,7 @@ NS_ASSUME_NONNULL_BEGIN
  
     @property fieldOfView
  
-    The field of view is calcualted from the focal length and sensor aperture.
+    The field of view is calculated from the focal length and sensor aperture.
     Changing the field of view will update the focalLength property with respect 
     to the sensor aperture. The default is 54 degrees, corresponding to a focal 
     length of 50mm, and a vertical sensor aperture of 24mm.
@@ -192,7 +192,7 @@ NS_ASSUME_NONNULL_BEGIN
     lens. This is useful in certain calculations, such as shadow or reflection
     projections, as well as to provide vergence in a parallel stereoscopic camera.
 
- 5. Exposure
+ 7. Exposure
  
     Finally, the sensor values need to be converted for display.
  

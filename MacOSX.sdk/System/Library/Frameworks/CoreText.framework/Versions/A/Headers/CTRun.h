@@ -2,7 +2,7 @@
  *  CTRun.h
  *  CoreText
  *
- *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -68,7 +68,7 @@ typedef CF_OPTIONS(uint32_t, CTRunStatus)
     @abstract   Returns the CFType of the run object
 */
 
-CFTypeID CTRunGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTRunGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -88,7 +88,7 @@ CFTypeID CTRunGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 CFIndex CTRunGetGlyphCount(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -109,7 +109,7 @@ CFIndex CTRunGetGlyphCount(
 */
 
 CFDictionaryRef CTRunGetAttributes(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -131,7 +131,7 @@ CFDictionaryRef CTRunGetAttributes(
 */
 
 CTRunStatus CTRunGetStatus(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -152,7 +152,7 @@ CTRunStatus CTRunGetStatus(
 */
 
 const CGGlyph * __nullable CTRunGetGlyphsPtr(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -176,7 +176,7 @@ const CGGlyph * __nullable CTRunGetGlyphsPtr(
 void CTRunGetGlyphs(
     CTRunRef run,
     CFRange range,
-    CGGlyph buffer[] ) CT_AVAILABLE(10_5, 3_2);
+    CGGlyph buffer[_Nonnull] ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -199,7 +199,7 @@ void CTRunGetGlyphs(
 */
 
 const CGPoint * __nullable CTRunGetPositionsPtr(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -227,7 +227,7 @@ const CGPoint * __nullable CTRunGetPositionsPtr(
 void CTRunGetPositions(
     CTRunRef run,
     CFRange range,
-    CGPoint buffer[] ) CT_AVAILABLE(10_5, 3_2);
+    CGPoint buffer[_Nonnull] ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -252,7 +252,7 @@ void CTRunGetPositions(
 */
 
 const CGSize * __nullable CTRunGetAdvancesPtr(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -277,7 +277,7 @@ const CGSize * __nullable CTRunGetAdvancesPtr(
 void CTRunGetAdvances(
     CTRunRef run,
     CFRange range,
-    CGSize buffer[] ) CT_AVAILABLE(10_5, 3_2);
+    CGSize buffer[_Nonnull] ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -301,7 +301,7 @@ void CTRunGetAdvances(
 */
 
 const CFIndex * __nullable CTRunGetStringIndicesPtr(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -330,7 +330,7 @@ const CFIndex * __nullable CTRunGetStringIndicesPtr(
 void CTRunGetStringIndices(
     CTRunRef run,
     CFRange range,
-    CFIndex buffer[] ) CT_AVAILABLE(10_5, 3_2);
+    CFIndex buffer[_Nonnull] ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -346,7 +346,7 @@ void CTRunGetStringIndices(
 */
 
 CFRange CTRunGetStringRange(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -383,7 +383,7 @@ double CTRunGetTypographicBounds(
     CFRange range,
     CGFloat * __nullable ascent,
     CGFloat * __nullable descent,
-    CGFloat * __nullable leading ) CT_AVAILABLE(10_5, 3_2);
+    CGFloat * __nullable leading ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -392,7 +392,9 @@ double CTRunGetTypographicBounds(
 
     @discussion The image bounds for a run is the union of all non-empty glyph
                 bounding rects, each positioned as it would be if drawn using
-                CTRunDraw using the current context. Note that the result is
+                CTRunDraw using the current context (for clients linked against
+                macOS High Sierra or iOS 11 and later) or the text position of
+                the supplied context (for all others). Note that the result is
                 ideal and does not account for raster coverage due to rendering.
                 This function is purely a convenience for using glyphs as an
                 image and should not be used for typographic purposes.
@@ -422,7 +424,7 @@ double CTRunGetTypographicBounds(
 CGRect CTRunGetImageBounds(
     CTRunRef run,
     CGContextRef __nullable context,
-    CFRange range ) CT_AVAILABLE(10_5, 3_2);
+    CFRange range ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -440,7 +442,7 @@ CGRect CTRunGetImageBounds(
 */
 
 CGAffineTransform CTRunGetTextMatrix(
-    CTRunRef run ) CT_AVAILABLE(10_5, 3_2);
+    CTRunRef run ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -451,9 +453,11 @@ CGAffineTransform CTRunGetTextMatrix(
                 accessing its glyphs, positions, and text matrix. Unlike when
                 drawing the entire line containing the run with CTLineDraw, the
                 run's underline (if any) will not be drawn, since the underline's
-                appearance may depend on other runs in the line. Note that this
-                call may leave the graphics context in any state and does not
-                flush the context after the draw operation.
+                appearance may depend on other runs in the line. This call may
+                leave the graphics context in any state and does not flush the
+                context after drawing. This call also expects a text matrix with
+                `y` values increasing from bottom to top; a flipped text matrix
+                may result in misplaced diacritics.
 
     @param      run
                 The run that you want to draw.
@@ -471,7 +475,7 @@ CGAffineTransform CTRunGetTextMatrix(
 void CTRunDraw(
     CTRunRef run,
     CGContextRef context,
-    CFRange range ) CT_AVAILABLE(10_5, 3_2);
+    CFRange range ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

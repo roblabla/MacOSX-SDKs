@@ -42,14 +42,14 @@ protected:
     IOService *            _acpiParent;
     IOACPIPlatformExpert * _platform;
 
-    /*! @struct ExpansionData
-        @discussion This structure will be used to expand the capablilties
-                    of the class in the future.
+    /* 
+     * This structure will be used to expand the capablilties
+     * of the class in the future.
      */
     struct ExpansionData { };
 
-    /*! @var reserved
-        Reserved for future use. (Internal use only)
+    /*
+     * Reserved for future use. (Internal use only)
      */
     ExpansionData *  reserved;
 

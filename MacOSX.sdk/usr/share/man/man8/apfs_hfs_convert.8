@@ -26,15 +26,16 @@
 file system
 .Sh SYNOPSIS
 .Nm
+.Op Fl D
 .Op Fl e
 .Op Fl v
+.Op Fl i
 .Op Fl S Ar path
 .Op Fl n
 .Op Fl f
 .Op Fl F Ar index
 .Op Fl M Ar mount_path
 .Op Fl o Ar nx-apfs-format
-.Op Fl -no-warning
 .Ar <device-path>
 .Sh DESCRIPTION
 The
@@ -63,6 +64,8 @@ The options are as follows:
 Estimate the APFS metadata size after conversion.
 .It Fl v | Fl -verbose
 Increase verbosity of the output.
+.It Fl s | Fl -force-case-sensitive
+Force the converted volume to be case-sensitive. By default, the converted volume will have the same case-sensitivity as the original HFS volume.
 .It Fl S Ar path | Fl -stats Ar path
 Print statistics about the conversion to the supplied
 .Ar path .
@@ -85,9 +88,8 @@ as the mount point.
 If this option is not used, a temporary directory will be created and used.
 .It Fl o Ar nx-apfs-format
 NX or APFS format options.
-.It Fl -no-warning
-Avoid printing the warning that APFS is pre-release technology, and do not ask for user confirmation.
-If standard input or standard error are not a TTY, then the warning and user confirmation are also skipped.
+.It Fl D | Fl -skip-single-dirlinks
+Convert all former and current directory hardlinks to files/aliases. 
 .El
 .Sh DIAGNOSTICS
 .Ex -std

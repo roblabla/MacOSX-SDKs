@@ -1,7 +1,7 @@
 /*
 	NSText.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -50,18 +50,17 @@ typedef NS_ENUM(NSInteger, NSWritingDirection) {
 
 /* Movement codes for movement between fields; these codes are the integer values of the NSTextMovement key in NSTextDidEndEditing notifications, and are used when completions change in the NSTextView method insertCompletion:forPartialWordRange:movement:isFinal:.  Note that the value 0 is used for movements that do not fall under any of the other values, hence NSOtherTextMovement is a more appropriate name than the previous NSIllegalTextMovement.
 */
-enum {
-    NSIllegalTextMovement		= 0,
-    NSReturnTextMovement		= 0x10,
-    NSTabTextMovement			= 0x11,
-    NSBacktabTextMovement		= 0x12,
-    NSLeftTextMovement			= 0x13,
-    NSRightTextMovement			= 0x14,
-    NSUpTextMovement			= 0x15,
-    NSDownTextMovement			= 0x16,
-    NSCancelTextMovement		= 0x17,
-    NSOtherTextMovement			= 0
-};
+typedef NS_ENUM(NSInteger, NSTextMovement) {
+    NSTextMovementReturn        = 0x10,
+    NSTextMovementTab           = 0x11,
+    NSTextMovementBacktab       = 0x12,
+    NSTextMovementLeft          = 0x13,
+    NSTextMovementRight         = 0x14,
+    NSTextMovementUp            = 0x15,
+    NSTextMovementDown          = 0x16,
+    NSTextMovementCancel        = 0x17,
+    NSTextMovementOther         = 0
+} NS_ENUM_AVAILABLE_MAC(10_13);
 
 @interface NSText : NSView <NSChangeSpelling, NSIgnoreMisspelledWords> {
     /*All instance variables are private*/
@@ -71,7 +70,7 @@ enum {
 - (instancetype)initWithFrame:(NSRect)frameRect NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-@property (nullable, copy) NSString *string;
+@property (copy) NSString *string;
 
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)string;
 - (void)replaceCharactersInRange:(NSRange)range withRTF:(NSData *)rtfData;
@@ -150,21 +149,37 @@ enum {
 
 /* Notifications */
 APPKIT_EXTERN NSNotificationName NSTextDidBeginEditingNotification;
-APPKIT_EXTERN NSNotificationName NSTextDidEndEditingNotification;    // userInfo key:  @"NSTextMovement"
+APPKIT_EXTERN NSNotificationName NSTextDidEndEditingNotification;    // userInfo key:  NSTextMovementUserInfoKey
 APPKIT_EXTERN NSNotificationName NSTextDidChangeNotification;
 
+// The user info dictionary key for NSTextDidEndEditingNotification
+APPKIT_EXTERN NSString * const NSTextMovementUserInfoKey NS_AVAILABLE_MAC(10_13);
 
 /* Deprecated */
+// The following enum items are deprecated. Use NSTextMovement instead
+enum {
+    NSIllegalTextMovement = 0,
+    NSReturnTextMovement = 0x10,
+    NSTabTextMovement = 0x11,
+    NSBacktabTextMovement = 0x12,
+    NSLeftTextMovement = 0x13,
+    NSRightTextMovement = 0x14,
+    NSUpTextMovement = 0x15,
+    NSDownTextMovement = 0x16,
+    NSCancelTextMovement = 0x17,
+    NSOtherTextMovement = 0
+};
+
 /* Additional values to be added to NSWritingDirectionLeftToRight or NSWritingDirectionRightToLeft, when used with NSWritingDirectionAttributeName */
 enum {
     NSTextWritingDirectionEmbedding NS_DEPRECATED_MAC(10_0, 10_11, "Use NSWritingDirectionEmbedding instead")     = (0 << 1),
     NSTextWritingDirectionOverride NS_DEPRECATED_MAC(10_0, 10_11, "Use NSWritingDirectionOverride instead")      = (1 << 1)
 };
 
-static const NSTextAlignment NSLeftTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentLeft", macosx(10.0, 10.12))  = NSTextAlignmentLeft;
-static const NSTextAlignment NSRightTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentRight", macosx(10.0, 10.12))  = NSTextAlignmentRight;
-static const NSTextAlignment NSCenterTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentCenter", macosx(10.0, 10.12))  = NSTextAlignmentCenter;
-static const NSTextAlignment NSJustifiedTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentJustified", macosx(10.0, 10.12))  = NSTextAlignmentJustified;
-static const NSTextAlignment NSNaturalTextAlignment API_DEPRECATED_WITH_REPLACEMENT("NSTextAlignmentNatural", macosx(10.0, 10.12))  = NSTextAlignmentNatural;
+static const NSTextAlignment NSLeftTextAlignment NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTextAlignmentLeft", 10.0, 10.12)  = NSTextAlignmentLeft;
+static const NSTextAlignment NSRightTextAlignment NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTextAlignmentRight", 10.0, 10.12)  = NSTextAlignmentRight;
+static const NSTextAlignment NSCenterTextAlignment NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTextAlignmentCenter", 10.0, 10.12)  = NSTextAlignmentCenter;
+static const NSTextAlignment NSJustifiedTextAlignment NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTextAlignmentJustified", 10.0, 10.12)  = NSTextAlignmentJustified;
+static const NSTextAlignment NSNaturalTextAlignment NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSTextAlignmentNatural", 10.0, 10.12)  = NSTextAlignmentNatural;
 
 NS_ASSUME_NONNULL_END

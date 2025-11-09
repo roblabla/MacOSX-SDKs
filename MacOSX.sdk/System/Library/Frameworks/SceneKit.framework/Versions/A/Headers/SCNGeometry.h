@@ -1,7 +1,7 @@
 //
 //  SCNGeometry.h
 //
-//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -13,16 +13,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class SCNGeometrySource;
 @class SCNGeometryElement;
+@class SCNGeometryTessellator;
 @class SCNLevelOfDetail;
 @protocol MTLBuffer;
 
 typedef NS_ENUM(NSInteger, SCNGeometryPrimitiveType) {
-	SCNGeometryPrimitiveTypeTriangles                                                   = 0,
-	SCNGeometryPrimitiveTypeTriangleStrip                                               = 1,
-	SCNGeometryPrimitiveTypeLine                                                        = 2,
-	SCNGeometryPrimitiveTypePoint                                                       = 3,
+	SCNGeometryPrimitiveTypeTriangles                                                  = 0,
+	SCNGeometryPrimitiveTypeTriangleStrip                                              = 1,
+	SCNGeometryPrimitiveTypeLine                                                       = 2,
+	SCNGeometryPrimitiveTypePoint                                                      = 3,
 #if defined(SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH) && SWIFT_SDK_OVERLAY2_SCENEKIT_EPOCH >= 2
-    SCNGeometryPrimitiveTypePolygon API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0)) = 4
+    SCNGeometryPrimitiveTypePolygon API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) = 4
 #endif
 };
 
@@ -40,11 +41,13 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticVerte
 FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticNormal;
 FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticColor;
 FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticTexcoord;
-FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticTangent API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
-FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticVertexCrease API_AVAILABLE(macosx(10.10));
-FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticEdgeCrease API_AVAILABLE(macosx(10.10));
-FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneWeights API_AVAILABLE(macosx(10.10));
-FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneIndices API_AVAILABLE(macosx(10.10));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticTangent API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticVertexCrease API_AVAILABLE(macos(10.10));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticEdgeCrease API_AVAILABLE(macos(10.10));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneWeights API_AVAILABLE(macos(10.10));
+FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneIndices API_AVAILABLE(macos(10.10));
+
+// MARK: -
 
 /*!
  @class SCNGeometry
@@ -58,7 +61,7 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
  @abstract Creates and returns an empty geometry object.
  @discussion An empty geometry may be used as the lowest level of detail of a geometry.
  */
-+ (instancetype)geometry API_AVAILABLE(macosx(10.9));
++ (instancetype)geometry API_AVAILABLE(macos(10.9));
 
 /*!
  @property name
@@ -123,7 +126,7 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
  @property geometrySources
  @abstract The array of geometry sources of the receiver.
  */
-@property(nonatomic, readonly) NSArray<SCNGeometrySource *> *geometrySources API_AVAILABLE(macosx(10.10));
+@property(nonatomic, readonly) NSArray<SCNGeometrySource *> *geometrySources API_AVAILABLE(macos(10.10));
 
 /*! 
  @method geometrySourcesForSemantic:
@@ -137,7 +140,7 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
  @property geometryElements
  @abstract The array of geometry elements of the receiver.
  */
-@property(nonatomic, readonly) NSArray<SCNGeometryElement *> *geometryElements API_AVAILABLE(macosx(10.10));
+@property(nonatomic, readonly) NSArray<SCNGeometryElement *> *geometryElements API_AVAILABLE(macos(10.10));
 
 /*!
  @property geometryElementCount
@@ -156,31 +159,47 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
  @property levelsOfDetail
  @abstract Determines the receiver's levels of detail. Defaults to nil.
  */
-@property(nonatomic, copy, nullable) NSArray<SCNLevelOfDetail *> *levelsOfDetail API_AVAILABLE(macosx(10.9));
+@property(nonatomic, copy, nullable) NSArray<SCNLevelOfDetail *> *levelsOfDetail API_AVAILABLE(macos(10.9));
+
+/*!
+ @property tessellator
+ @abstract Specifies how the geometry should be tessellated at render time on the GPU. Defaults to nil.
+ */
+#if SCN_ENABLE_METAL
+@property(nonatomic, retain, nullable) SCNGeometryTessellator *tessellator API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+#endif
 
 /*!
  @property subdivisionLevel
  @abstract Specifies the subdivision level of the receiver. Defaults to 0.
- @discussion A subdivision level of 0 means no subdivision.
+ @discussion A subdivision level of 0 means no subdivision. When the `tessellator` property of the receiver is not nil, the refinement is done on the GPU.
  */
-@property(nonatomic) NSUInteger subdivisionLevel API_AVAILABLE(macosx(10.10));
+@property(nonatomic) NSUInteger subdivisionLevel API_AVAILABLE(macos(10.10));
+
+/*!
+ @property wantsAdaptiveSubdivision
+ @abstract Specifies if the subdivision is adaptive or uniform. Defaults to YES.
+ @discussion Adaptive subdivision requires that the `tessellator` property of the receiver is not nil.
+ */
+@property (nonatomic) BOOL wantsAdaptiveSubdivision API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 /*!
  @property edgeCreasesElement
  @abstract Specifies the edges creases that control the subdivision. Defaults to nil.
  @discussion The primitive type of this geometry element must be SCNGeometryPrimitiveTypeLine. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
  */
-@property(nonatomic, retain, nullable) SCNGeometryElement *edgeCreasesElement API_AVAILABLE(macosx(10.10));
+@property(nonatomic, retain, nullable) SCNGeometryElement *edgeCreasesElement API_AVAILABLE(macos(10.10));
 
 /*!
  @property edgeCreasesSource
  @abstract Specifies the crease value of the edges specified by edgeCreasesElement. Defaults to nil.
  @discussion The semantic of this geometry source must be "SCNGeometrySourceSemanticEdgeCrease". The creases values are floating values between 0 and 10, where 0 means smooth and 10 means infinitely sharp. See subdivisionLevel above to control the level of subdivision. See edgeCreasesElement above to specify edges for edge creases.
  */
-@property(nonatomic, retain, nullable) SCNGeometrySource *edgeCreasesSource API_AVAILABLE(macosx(10.10));
+@property(nonatomic, retain, nullable) SCNGeometrySource *edgeCreasesSource API_AVAILABLE(macos(10.10));
 
 @end
 
+// MARK: -
 
 /*!
  @class SCNGeometrySource
@@ -234,7 +253,7 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
 /*!
  @method geometrySourceWithBuffer:semantic:vectorCount:floatComponents:componentsPerVector:bytesPerComponent:dataOffset:dataStride:
  @abstract Creates and returns a geometry source from the given data and parameters.
- @param buffer A metal buffer.
+ @param mtlBuffer A metal buffer.
  @param vertexFormat The vertex format.
  @param semantic The semantic of the geometry source.
  @param vertexCount The number of vertex.
@@ -262,7 +281,7 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
  }
  
  */
-+ (instancetype)geometrySourceWithBuffer:(id <MTLBuffer>)mtlBuffer vertexFormat:(MTLVertexFormat)vertexFormat semantic:(SCNGeometrySourceSemantic)semantic vertexCount:(NSInteger)vertexCount dataOffset:(NSInteger)offset dataStride:(NSInteger)stride API_AVAILABLE(macosx(10.11), ios(9.0));
++ (instancetype)geometrySourceWithBuffer:(id <MTLBuffer>)mtlBuffer vertexFormat:(MTLVertexFormat)vertexFormat semantic:(SCNGeometrySourceSemantic)semantic vertexCount:(NSInteger)vertexCount dataOffset:(NSInteger)offset dataStride:(NSInteger)stride API_AVAILABLE(macos(10.11), ios(9.0));
 #endif
 
 /*! 
@@ -315,6 +334,7 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
 
 @end
 
+// MARK: -
 
 /*!
  @class SCNGeometryElement
@@ -352,11 +372,108 @@ FOUNDATION_EXTERN SCNGeometrySourceSemantic const SCNGeometrySourceSemanticBoneI
 @property(nonatomic, readonly) NSInteger primitiveCount;
 
 /*!
+ @property primitiveRange
+ @abstract <#primitiveRange description#>
+ */
+@property(nonatomic) NSRange primitiveRange API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+/*!
  @property bytesPerIndex
  @abstract The number of bytes that represent an index value
  */
 @property(nonatomic, readonly) NSInteger bytesPerIndex;
 
+/*!
+ @property pointSize
+ @abstract Specifies the size of the point in local space. Defaults to 1
+ */
+@property(nonatomic) CGFloat pointSize API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+/*!
+ @property minimumPointScreenSpaceRadius
+ @abstract Specifies the minimum size in screen-space (in pixel). Defaults to 1
+ */
+@property(nonatomic) CGFloat minimumPointScreenSpaceRadius API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+/*!
+ @property maximumPointScreenSpaceRadius
+ @abstract Specifies the maximum size in screen-space (in pixel). Defaults to 1
+ */
+@property(nonatomic) CGFloat maximumPointScreenSpaceRadius API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
 @end
+
+// MARK: -
+
+#if SCN_ENABLE_METAL
+
+typedef NS_ENUM(NSInteger, SCNTessellationSmoothingMode) {
+    SCNTessellationSmoothingModeNone = 0,
+    SCNTessellationSmoothingModePNTriangles,
+    SCNTessellationSmoothingModePhong
+} API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+ @class SCNGeometryTessellator
+ @abstract A geometry tessellator describes how a more detailed surface is calculated from the geometry's initial surface.
+ */
+
+API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos, watchos)
+@interface SCNGeometryTessellator : NSObject <NSCopying, NSSecureCoding>
+
+/*!
+ @property tessellationFactorScale
+ @abstract Specifies the scale factor applied to the per-patch tessellation factors. Defaults to 1.
+ */
+@property (nonatomic) CGFloat tessellationFactorScale;
+
+/*!
+ @property tessellationPartitionMode
+ @abstract Specifies the tessellation partition mode. Defaults to MTLTessellationPartitionModePow2.
+ */
+@property (nonatomic) MTLTessellationPartitionMode tessellationPartitionMode;
+
+/*!
+ @property adaptive
+ @abstract Specifies if the tessellation should be uniform or adaptive. Defaults to NO.
+ */
+@property (nonatomic, getter=isAdaptive) BOOL adaptive;
+
+/*!
+ @property screenspace
+ @abstract Specifies if the level of tessellation should be adapted in screenSpace. Defaults to NO.
+ */
+@property (nonatomic, getter=isScreenSpace) BOOL screenSpace;
+
+/*!
+ @property edgeTessellationFactor
+ @abstract Specifies the edge tessellation factor. Defaults to 1.
+ @discussion This has no effect for adaptive subdivision
+ */
+@property (nonatomic) CGFloat edgeTessellationFactor;
+
+/*!
+ @property insideTessellationFactor
+ @abstract Specifies the inside tessellation factor. Defaults to 1.
+ @discussion This has no effect for adaptive subdivision
+ */
+@property (nonatomic) CGFloat insideTessellationFactor;
+
+/*!
+ @property maximumEdgeLength
+ @abstract Specifies the maximum edge length. Defaults to 1.
+ @discussion This has no effect for non-adaptive subdivision
+ */
+@property (nonatomic) CGFloat maximumEdgeLength;
+
+/*!
+ @property smoothingMode
+ @abstract Defaults to SCNTessellationSmoothingModeNone.
+ */
+@property(nonatomic) SCNTessellationSmoothingMode smoothingMode;
+
+@end
+
+#endif
 
 NS_ASSUME_NONNULL_END

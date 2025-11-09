@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 896043EB-3243-3C7E-9C49-7A65E7C751E3' ]
+uuids:           [ 'x86_64: 26150368-ED45-31E7-B51D-E3FB9A3B4123' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/NetworkStatistics.framework/Versions/A/NetworkStatistics
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NStatManagerAddAllRoutes, _NStatManagerAddAllRoutesWithFilter, 
@@ -18,14 +17,16 @@ exports:
                        _NStatManagerSetInterfaceTraceFD, _NStatManagerSetQueuePriority, 
                        _NStatRouteValuesForIPv4Host, _NStatRouteValuesForIPv6Host, 
                        _NStatSourceCopyCounts, _NStatSourceCopyProperties, _NStatSourceCopyProperty, 
-                       _NStatSourceQueryCounts, _NStatSourceQueryDescription, _NStatSourceQueryUpdate, 
-                       _NStatSourceRemove, _NStatSourceSetCountsBlock, _NStatSourceSetDescriptionBlock, 
+                       _NStatSourceCurrentSnapshot, _NStatSourceIdentifier, _NStatSourceQueryCounts, 
+                       _NStatSourceQueryDescription, _NStatSourceQueryUpdate, _NStatSourceRemove, 
+                       _NStatSourceSetCountsBlock, _NStatSourceSetDescriptionBlock, 
                        _NStatSourceSetEventsBlock, _NStatSourceSetFilter, _NStatSourceSetRemovedBlock, 
                        _kNStatProviderInterface, _kNStatProviderRoute, _kNStatProviderSysinfo, 
                        _kNStatProviderTCP, _kNStatProviderUDP, _kNStatSrcKeyAvgRTT, 
-                       _kNStatSrcKeyConnProbeFailed, _kNStatSrcKeyConnectAttempt, 
-                       _kNStatSrcKeyConnectSuccess, _kNStatSrcKeyEPID, _kNStatSrcKeyEUPID, 
-                       _kNStatSrcKeyEUUID, _kNStatSrcKeyInterface, _kNStatSrcKeyInterfaceCellConfigBackoffTime, 
+                       _kNStatSrcKeyChannelArchitecture, _kNStatSrcKeyConnProbeFailed, 
+                       _kNStatSrcKeyConnectAttempt, _kNStatSrcKeyConnectSuccess, 
+                       _kNStatSrcKeyEPID, _kNStatSrcKeyEUPID, _kNStatSrcKeyEUUID, 
+                       _kNStatSrcKeyInterface, _kNStatSrcKeyInterfaceCellConfigBackoffTime, 
                        _kNStatSrcKeyInterfaceCellConfigInactivityTime, _kNStatSrcKeyInterfaceCellUlAvgQueueSize, 
                        _kNStatSrcKeyInterfaceCellUlMaxQueueSize, _kNStatSrcKeyInterfaceCellUlMinQueueSize, 
                        _kNStatSrcKeyInterfaceDescription, _kNStatSrcKeyInterfaceDlCurrentBandwidth, 
@@ -63,8 +64,9 @@ exports:
                        _kNStatSrcTCPStateFinWait1, _kNStatSrcTCPStateFinWait2, _kNStatSrcTCPStateLastAck, 
                        _kNStatSrcTCPStateListen, _kNStatSrcTCPStateSynReceived, _kNStatSrcTCPStateSynSent, 
                        _kNStatSrcTCPStateTimeWait ]
-    objc-classes:    [ _NWRouteSnapshot, _NWRouteSnapshotter, _NWSnapshot, _NWSnapshotSource, 
-                       _NWSnapshotter, _NWStatisticsDelegateBlockWrapper, _NWStatisticsInterfaceSource, 
-                       _NWStatisticsManager, _NWStatisticsRouteSource, _NWStatisticsSource, 
-                       _NWStatisticsTCPSource, _NWStatisticsUDPSource ]
+    objc-classes:    [ _NWSInterfaceSnapshot, _NWSProtocolSnapshot, _NWSRouteSnapshot, 
+                       _NWSRouteSnapshotter, _NWSSnapshot, _NWSSnapshotSource, _NWSSnapshotter, 
+                       _NWSTCPSnapshot, _NWSUDPSnapshot, _NWStatisticsDelegateBlockWrapper, 
+                       _NWStatisticsInterfaceSource, _NWStatisticsManager, _NWStatisticsRouteSource, 
+                       _NWStatisticsSource, _NWStatisticsTCPSource, _NWStatisticsUDPSource ]
 ...

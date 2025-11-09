@@ -12,16 +12,15 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // AMAppleScriptAction
-// ==================
 
 NS_CLASS_AVAILABLE_MAC(10_4)
 @interface AMAppleScriptAction : AMBundleAction {
-@private
-    IBOutlet OSAScript *_script;
+   @private
+	IBOutlet OSAScript *_script;
 }
 
 // Accessors
-@property (strong) OSAScript *script;
+@property (copy, nonatomic, nullable) OSAScript *script;
 
 @end
 

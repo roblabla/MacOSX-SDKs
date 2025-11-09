@@ -1,7 +1,7 @@
 /*
  NSTouchBar.h
  Application Kit
- Copyright (c) 2015-2016, Apple Inc.
+ Copyright (c) 2015-2017, Apple Inc.
  All rights reserved.
 */
 
@@ -24,7 +24,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
     
     NSSet<NSTouchBarItem *> *_templateItems;
     
-    id <NSTouchBarDelegate> _delegate;
+    __weak id <NSTouchBarDelegate> _delegate;
     
     NSCache *_itemCache;
     
@@ -56,28 +56,28 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 /* 
     A string uniquely identifying this bar for customization purposes. All bars with this identifier will have their items coordinated automatically during customization or instantiation.
 
-    Touch bars lacking a customizationIdentifier are not customizable.
+    NSTouchBars lacking a customizationIdentifier are not customizable.
     
     This property is archived.
 */
 @property (copy, nullable) NSTouchBarCustomizationIdentifier customizationIdentifier;
 
 /*
-    The items that are presented in the customization palette for the user to add to the touch bar. These items will be presented to the user in the order specified in this array.
+    The items that are presented in the customization palette for the user to add to the NSTouchBar. These items will be presented to the user in the order specified in this array.
 
     This property is archived.
 */
 @property (copy) NSArray<NSTouchBarItemIdentifier> *customizationAllowedItemIdentifiers;
 
 /*
-    Some items are too important to be removed. The corresponding item identifiers should be listed here. During customization the user will be prevented from removing these items from the touch bar.
+    Some items are too important to be removed. The corresponding item identifiers should be listed here. During customization the user will be prevented from removing these items from the NSTouchBar.
     
     This property is archived.
 */
 @property (copy) NSArray<NSTouchBarItemIdentifier> *customizationRequiredItemIdentifiers;
 
 /*
-    An array of identifiers specifying the items in this touch bar. When constructing the instantiated items array, the identifiers in this array will be fed through the -itemForIdentifier: method.
+    An array of identifiers specifying the items in this NSTouchBar. When constructing the instantiated items array, the identifiers in this array will be fed through the -itemForIdentifier: method.
     Item identifiers should be globally unique, excepting NSTouchBarItemIdentifierFixedSpaceSmall, NSTouchBarItemIdentifierFixedSpaceLarge, NSTouchBarItemIdentifierFlexibleSpace, and NSTouchBarItemIdentifierOtherItemsProxy.
     
     This array also corresponds to the item ordering for the receiver in the “default set” in the customization palette.
@@ -94,7 +94,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @property (copy, readonly) NSArray<NSTouchBarItemIdentifier> *itemIdentifiers;
 
 /*
-    Specifying a principal item identifier communicates that the item with that identifier has special significance to this touch bar. Currently, that item will be placed in the center of the resolved touch row. Note that multiple visible bars may each specify a principal item identifier - but only one of them can have the request honored.
+    Specifying a principal item identifier communicates that the item with that identifier has special significance to this NSTouchBar. Currently, that item will be placed in the center of the resolved  row. Note that multiple visible bars may each specify a principal item identifier - but only one of them can have the request honored.
     
     This property is archived.
 */
@@ -114,7 +114,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @property (copy) NSSet<NSTouchBarItem *> *templateItems;
 
 /*
-    The touch bar delegate. The touch bar delegate can dynamically create items.
+    The NSTouchBar delegate. The delegate can dynamically create items.
     
     This property is conditionally archived (see -encodeConditionalObject:forKey:.)
 */
@@ -129,12 +129,12 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
  NSTouchBarItemIdentifierFixedSpaceSmall -> NSTouchBar will automatically create a standard small space
  NSTouchBarItemIdentifierFixedSpaceLarge -> NSTouchBar will automatically create a standard large space
  NSTouchBarItemIdentifierFlexibleSpace -> NSTouchBar will automatically create a standard flexible space
- NSTouchBarItemIdentifierOtherItemsProxy -> NSTouchBar will automatically create a special item that acts as a proxy for the items of touch bars closer to the first responder.
+ NSTouchBarItemIdentifierOtherItemsProxy -> NSTouchBar will automatically create a special item that acts as a proxy for the items of NSTouchBar closer to the first responder.
  */
 - (nullable __kindof NSTouchBarItem *)itemForIdentifier:(NSTouchBarItemIdentifier)identifier;
 
 /*
-    When YES, the touch bar is attached to an eligible touch bar provider, and its items are displayable, assuming adequate space.
+    When YES, the NSTouchBar is attached to an eligible NSTouchBar provider, and its items are displayable, assuming adequate space.
     This property is key value observable.
 */
 @property (readonly, getter=isVisible) BOOL visible;
@@ -144,13 +144,13 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @protocol NSTouchBarDelegate <NSObject>
 @optional
 /*
-    When constructing the items array, this delegate method will be invoked to construct a touch bar item if that item cannot be found in the defaultItems set.
+    When constructing the items array, this delegate method will be invoked to construct an NSTouchBarItem if that item cannot be found in the `templateItems` set.
 */
 - (nullable NSTouchBarItem *)touchBar:(NSTouchBar *)touchBar makeItemForIdentifier:(NSTouchBarItemIdentifier)identifier;
 @end
 
 /*
-    Touch bars are discovered by searching certain well known components of the application for objects that conform to the NSTouchBarProvider protocol.
+    Instances of NSTouchBar are discovered by searching certain well known components of the application for objects that conform to the NSTouchBarProvider protocol.
     
     Some specific objects in a process are searched to discover NSTouchBar providers. In order, these objects are:
     * the application delegate
@@ -179,12 +179,12 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
     * key window’s first responder’s view controller
     * key window’s first responder
 
-    Touch bars can be nested by including the special NSTouchBarItemIdentifierOtherItemsProxy item identifier. This allows more broadly scoped touch bars (closer to the app delegate) to also display the contents of more narrowly scoped touch bars (closer to the first responder.) If a touch bar omits the special NSTouchBarItemIdentifierOtherItemsProxy item identifier, it will be hidden if a more narrowly scoped touch bar is provided.
+    NSTouchBars can be nested by including the special NSTouchBarItemIdentifierOtherItemsProxy item identifier. This allows more broadly scoped NSTouchBars (closer to the app delegate) to also display the contents of more narrowly scoped NSTouchBars (closer to the first responder.) If an NSTouchBar omits the special NSTouchBarItemIdentifierOtherItemsProxy item identifier, it will be hidden if a more narrowly scoped NSTouchBar is provided.
 */
 @protocol NSTouchBarProvider <NSObject>
 @required
 /*
-    The basic method for providing a touch bar. AppKit will key value observe this property, if for some reason you wish to replace a live touch bar wholesale.
+    The basic method for providing an NSTouchBar. AppKit will key value observe this property, if for some reason you wish to replace a live NSTouchBar wholesale.
     Note that many subclasses of NSResponder already implement this method and conform to this protocol.
 */
 @property (strong, readonly, nullable) NSTouchBar *touchBar NS_AVAILABLE_MAC(10_12_2);
@@ -192,22 +192,22 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 
 @interface NSResponder (NSTouchBarProvider) <NSTouchBarProvider>
 /*
-    The touch bar object associated with this responder. If no touch bar is explicitly set, NSResponder will send -makeTouchBar to itself to create the default touch bar for this responder. This property is archived.
+    The NSTouchBar object associated with this responder. If no NSTouchBar is explicitly set, NSResponder will send -makeTouchBar to itself to create the default NSTouchBar for this responder. This property is archived.
 */
 @property (strong, readwrite, nullable) NSTouchBar *touchBar NS_AVAILABLE_MAC(10_12_2);
 
 /*
-    Subclasses should over-ride this method to create and configure the default touch bar for this responder.
+    Subclasses should over-ride this method to create and configure the default NSTouchBar for this responder.
 */
 - (nullable NSTouchBar *)makeTouchBar NS_AVAILABLE_MAC(10_12_2);
 @end
 
 
 @interface NSApplication (NSTouchBarCustomization)
-/// Whether or not a menu item to customize the touch bar can be automatically added to the main menu. It will only actually be added when a touch bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
+/// Whether or not a menu item to customize the NSTouchBar can be automatically added to the main menu. It will only actually be added when Touch Bar hardware or simulator is present. Defaults to NO. Setting this property to YES is the recommended way to add the customization menu item. But if non-standard placement of the menu item is needed, creating a menu item with an action of `toggleTouchBarCustomizationPalette:` can be used instead.
 @property (getter=isAutomaticCustomizeTouchBarMenuItemEnabled) BOOL automaticCustomizeTouchBarMenuItemEnabled NS_AVAILABLE_MAC(10_12_2);
 
-/// Show or dismiss the customization palette for the currently displayed touch bars. NSApplication validates this selector against whether the current touch bars are customizable and, if configured on a menu item, will standardize and localize the title. If the current system does not have touch bar support, the menu item will be automatically hidden.
+/// Show or dismiss the customization palette for the currently displayed NSTouchBars. NSApplication validates this selector against whether the current NSTouchBars are customizable and, if configured on a menu item, will standardize and localize the title. If the current system does not have Touch Bar support, the menu item will be automatically hidden.
 - (IBAction)toggleTouchBarCustomizationPalette:(nullable id)sender NS_AVAILABLE_MAC(10_12_2);
 @end
 

@@ -1,7 +1,7 @@
 /*
 	NSObjectController.h
 	Application Kit
-	Copyright (c) 2002-2016, Apple Inc.
+	Copyright (c) 2002-2017, Apple Inc.
 	All rights reserved.
  */
 
@@ -52,9 +52,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeObject:(id)object;    // if the object is the current content object of the controller, clears the content - if the controller's content is bound to another object or controller through a relationship key, the relationship of the 'master' object will be cleared
    // determines whether controller allows adding and removing objects
 @property (getter=isEditable) BOOL editable;
-- (void)add:(nullable id)sender;    // creates a new object and adds it through addObject:
+- (IBAction)add:(nullable id)sender;    // creates a new object and adds it through addObject:
 @property (readonly) BOOL canAdd;    // can be used in bindings controlling the enabling of buttons, for example
-- (void)remove:(nullable id)sender;    // removes content object through removeObject:
+- (IBAction)remove:(nullable id)sender;    // removes content object through removeObject:
 @property (readonly) BOOL canRemove;    // can be used in bindings controlling the enabling of buttons, for example
 - (BOOL)validateUserInterfaceItem:(id <NSValidatedUserInterfaceItem>)item;    // overridden to automatically disable user interface elements sending action methods to the controller (for example if canAdd returns NO, menu items with the add: action are disabled)
 
@@ -70,7 +70,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)fetchWithRequest:(nullable NSFetchRequest *)fetchRequest merge:(BOOL)merge error:(NSError **)error;    // subclasses can override this method to customize the fetch request, for example to specify fetch limits (passing nil for the fetch request will result in the default fetch request to be used; this method will never be invoked with a nil fetch request from within the standard Cocoa frameworks) - the merge flag determines whether the controller replaces the entire content with the fetch result or merges the existing content with the fetch result
 
-- (void)fetch:(nullable id)sender;
+- (IBAction)fetch:(nullable id)sender;
 
 
 @property BOOL usesLazyFetching NS_AVAILABLE_MAC(10_5); // defaults to NO. 

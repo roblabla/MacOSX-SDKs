@@ -1,7 +1,7 @@
 /*
 	NSPrintOperation.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -56,8 +56,7 @@ APPKIT_EXTERN NSExceptionName NSPrintOperationExistsException;
 
 /* The current print operation for this thread. If this is nil, there is no current operation for the current thread.
 */
-+ (nullable NSPrintOperation *)currentOperation;
-+ (void)setCurrentOperation:(nullable NSPrintOperation *)operation;
+@property (class, nullable, strong) NSPrintOperation *currentOperation;
 
 /* Return YES if the operation for copying to PDF or EPS, NO if it's for printing.
 */

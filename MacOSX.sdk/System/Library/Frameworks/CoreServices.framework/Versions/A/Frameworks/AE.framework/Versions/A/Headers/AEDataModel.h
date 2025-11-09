@@ -216,6 +216,10 @@ CF_ENUM(AEKeyword) {
 	keySenderApplicationSandboxed = 'sssb', /* read-only, an AEDesc typeBoolean, true if the sender application was in an application sandbox */
 	keyActualSenderAuditToken		= 'acat', /* read-only, an AEDesc typeAuditToken of the acual ( possibly over-ridden ) audit token for the sender of this event */
 	#endif
+
+	#if defined(__MAC_10_13) && __MAC_OS_X_VERSION_MIN_REQUIRED >= __MAC_10_13
+	keyAppleEventAttributesAttr = 'attr', /* read-only, an AEDescList of AEKeyword entries of the attributes on this event. */
+	#endif
 };
 
 /* These bits are specified in the keyXMLDebuggingAttr (an SInt32) */

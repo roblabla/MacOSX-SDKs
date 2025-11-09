@@ -1,6 +1,6 @@
 /*
         NSStringDrawing.h
-        Copyright (c) 1994-2015, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2017, Apple Inc.  All rights reserved.
 */
 
 #import <Foundation/NSString.h>
@@ -24,17 +24,17 @@ NS_CLASS_AVAILABLE(10_11, 6_0) @interface NSStringDrawingContext : NSObject
 @property CGFloat minimumScaleFactor;
 
 // actual scale factor used by the last drawing call where minimum scale factor was specified
-@property(readonly) CGFloat actualScaleFactor;
+@property (readonly) CGFloat actualScaleFactor;
 
 // bounds of the string drawn by the previous invocation of drawWithRect:options:context:
-@property(readonly) NSRect totalBounds;
+@property (readonly) NSRect totalBounds;
 
 @end
 
 @interface NSString(NSStringDrawing)
-- (NSSize)sizeWithAttributes:(nullable NSDictionary<NSString *, id> *)attrs NS_AVAILABLE(10_0, 7_0);
-- (void)drawAtPoint:(NSPoint)point withAttributes:(nullable NSDictionary<NSString *, id> *)attrs NS_AVAILABLE(10_0, 7_0);
-- (void)drawInRect:(NSRect)rect withAttributes:(nullable NSDictionary<NSString *, id> *)attrs NS_AVAILABLE(10_0, 7_0);
+- (NSSize)sizeWithAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs NS_AVAILABLE(10_0, 7_0);
+- (void)drawAtPoint:(NSPoint)point withAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs NS_AVAILABLE(10_0, 7_0);
+- (void)drawInRect:(NSRect)rect withAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs NS_AVAILABLE(10_0, 7_0);
 @end
 
 @interface NSAttributedString(NSStringDrawing)
@@ -57,8 +57,8 @@ typedef NS_OPTIONS(NSInteger, NSStringDrawingOptions) {
 // NOTE: All of the following methods will default to drawing on a baseline, limiting drawing to a single line.
 // To correctly draw and size multi-line text, pass NSStringDrawingUsesLineFragmentOrigin in the options parameter.
 @interface NSString (NSExtendedStringDrawing)
-- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSString *, id> *)attributes context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 7_0);
-- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSString *, id> *)attributes context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 7_0);
+- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 7_0);
+- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes context:(nullable NSStringDrawingContext *)context NS_AVAILABLE(10_11, 7_0);
 @end
 
 @interface NSAttributedString (NSExtendedStringDrawing)
@@ -69,9 +69,9 @@ typedef NS_OPTIONS(NSInteger, NSStringDrawingOptions) {
 /************************ Deprecated ************************/
 // Following NSStringDrawing methods are soft deprecated starting with OS X 10.11. It will be officially deprecated in a future release. Use corresponding API with NSStringDrawingContext instead
 @interface NSString (NSStringDrawingDeprecated)
-- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSString *, id> *)attributes; // Use -drawWithRect:options:attributes:context: instead
+- (void)drawWithRect:(NSRect)rect options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes; // Use -drawWithRect:options:attributes:context: instead
 
-- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSString *, id> *)attributes; // Use -boundingRectWithSize:options:attributes:context: instead
+- (NSRect)boundingRectWithSize:(NSSize)size options:(NSStringDrawingOptions)options attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attributes; // Use -boundingRectWithSize:options:attributes:context: instead
 @end
 
 @interface NSAttributedString (NSStringDrawingDeprecated)

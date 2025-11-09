@@ -32,7 +32,7 @@ CF_ASSUME_NONNULL_BEGIN
    This opaque type is derived from `CFType' and inherits the properties
    that all Core Foundation types have in common. */
 
-typedef struct __CGEvent *CGEventRef;
+typedef struct CF_BRIDGED_TYPE(id) __CGEvent *CGEventRef;
 
 /* Constants that specify buttons on a one, two, or three-button mouse. */
 typedef CF_ENUM(uint32_t, CGMouseButton) {
@@ -460,7 +460,7 @@ struct __CGEventTapInformation {
 typedef struct __CGEventTapInformation CGEventTapInformation;
 
 /* An opaque type that represents the source of a Quartz event. */
-typedef struct __CGEventSource *CGEventSourceRef;
+typedef struct CF_BRIDGED_TYPE(id) __CGEventSource *CGEventSourceRef;
 
 /* Constants that specify the possible source states of an event source. */
 typedef CF_ENUM(int32_t, CGEventSourceStateID) {

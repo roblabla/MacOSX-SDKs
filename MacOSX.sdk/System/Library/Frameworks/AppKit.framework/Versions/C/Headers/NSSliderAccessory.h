@@ -1,7 +1,7 @@
 /*
     NSSliderAccessory.h
     Application Kit
-    Copyright (c) 2016-2016, Apple Inc.
+    Copyright (c) 2016-2017, Apple Inc.
     All rights reserved.
  */
 
@@ -41,14 +41,14 @@ NS_CLASS_AVAILABLE_MAC(10_12)
 NS_CLASS_AVAILABLE_MAC(10_12)
 @interface NSSliderAccessoryBehavior : NSObject <NSCoding, NSCopying>
 
-/// The behavior is automatically picked to be the system standard for the slider's current context, e.g. touch bars have `.valueStep` behavior.
-@property (class, readonly, copy) NSSliderAccessoryBehavior *automaticBehavior  NS_SWIFT_NAME(automatic);
+/// The behavior is automatically picked to be the system standard for the slider's current context, e.g. NSTouchBarItems have `.valueStep` behavior.
+@property (class, readonly, copy) NSSliderAccessoryBehavior *automaticBehavior;
 
 /// The value of the slider moves towards the associated value for the accessory with by a delta of the slider's `altIncrementValue`.
-@property (class, readonly, copy) NSSliderAccessoryBehavior *valueStepBehavior NS_SWIFT_NAME(valueStep);
+@property (class, readonly, copy) NSSliderAccessoryBehavior *valueStepBehavior;
 
 /// The value of the slider is reset to the associated value for the accessory.
-@property (class, readonly, copy) NSSliderAccessoryBehavior *valueResetBehavior NS_SWIFT_NAME(valueReset);
+@property (class, readonly, copy) NSSliderAccessoryBehavior *valueResetBehavior;
 
 /// The action is sent to the target on interaction. The optional first parameter is an NSSliderAccessory.
 + (NSSliderAccessoryBehavior *)behaviorWithTarget:(nullable id)target action:(SEL)action;

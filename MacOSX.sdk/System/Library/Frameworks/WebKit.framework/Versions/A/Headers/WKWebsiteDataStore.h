@@ -31,6 +31,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class WKHTTPCookieStore;
+
 /*! A WKWebsiteDataStore represents various types of data that a website might
  make use of. This includes cookies, disk and memory caches, and persistent data such as WebSQL,
  IndexedDB databases, and local storage.
@@ -74,6 +76,9 @@ WK_EXTERN API_AVAILABLE(macosx(10.11), ios(9.0))
  @param completionHandler A block to invoke when the website data has been removed.
 */
 - (void)removeDataOfTypes:(NSSet<NSString *> *)websiteDataTypes modifiedSince:(NSDate *)date completionHandler:(void (^)(void))completionHandler;
+
+/*! @abstract Returns the cookie store representing HTTP cookies in this website data store. */
+@property (nonatomic, readonly) WKHTTPCookieStore *httpCookieStore API_AVAILABLE(macosx(10.13), ios(11.0));
 
 @end
 

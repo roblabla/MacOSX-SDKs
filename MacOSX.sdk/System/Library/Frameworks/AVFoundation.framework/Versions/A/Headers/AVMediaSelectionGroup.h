@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2015 Apple Inc. All rights reserved.
+	Copyright 2011-2016 Apple Inc. All rights reserved.
 
 */
 
@@ -15,6 +15,7 @@
 */
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVMediaFormat.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -172,7 +173,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
   				The media characteristic of interest, e.g. AVMediaCharacteristicVisual, AVMediaCharacteristicAudible, AVMediaCharacteristicLegible, etc.
   @result		YES if the media selection option includes media with the specified characteristic, otherwise NO.
 */
-- (BOOL)hasMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 
 /*!
  @property		playable

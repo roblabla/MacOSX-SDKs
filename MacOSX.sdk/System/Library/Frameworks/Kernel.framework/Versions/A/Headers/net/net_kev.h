@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2016-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -91,8 +91,7 @@
 #define	KEV_INET6_NEW_LL_ADDR           4 /* Autoconf LL address appeared */
 #define	KEV_INET6_NEW_RTADV_ADDR        5 /* Autoconf address has appeared */
 #define	KEV_INET6_DEFROUTER             6 /* Default router detected */
-
+#define	KEV_INET6_REQUEST_NAT64_PREFIX	7 /* Asking for the NAT64-prefix */
 
 #endif /* (!_POSIX_C_SOURCE || _DARWIN_C_SOURCE) */
-
 #endif /* _NET_NETKEV_H_ */

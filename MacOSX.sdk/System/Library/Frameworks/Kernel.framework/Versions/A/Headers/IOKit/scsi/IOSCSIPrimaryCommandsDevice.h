@@ -139,6 +139,8 @@ protected:
 		IOSimpleLock *				fTaskIDLock;
 		UInt32						fRetryCount;
         UInt32                      fNumCommandsExecuting;
+        int                         fMaxPollRetries;
+        int                         fPollDebounceRetriesLeft;
 	};
 	IOSCSIPrimaryCommandsDeviceExpansionData * fIOSCSIPrimaryCommandsDeviceReserved;
 	
@@ -146,6 +148,8 @@ protected:
 	#define	fWriteTimeoutDuration		fIOSCSIPrimaryCommandsDeviceReserved->fWriteTimeoutDuration
 	#define	fRetryCount					fIOSCSIPrimaryCommandsDeviceReserved->fRetryCount
     #define	fNumCommandsExecuting       fIOSCSIPrimaryCommandsDeviceReserved->fNumCommandsExecuting
+    #define fMaxPollRetries             fIOSCSIPrimaryCommandsDeviceReserved->fMaxPollRetries
+    #define fPollDebounceRetriesLeft    fIOSCSIPrimaryCommandsDeviceReserved->fPollDebounceRetriesLeft
     
 	UInt8							fDefaultInquiryCount;
 	OSDictionary *					fDeviceCharacteristicsDictionary;

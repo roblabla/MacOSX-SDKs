@@ -1,7 +1,7 @@
 /*
 	NSToolbarItem.h
 	Application Kit
-	Copyright (c) 2000-2016, Apple Inc.
+	Copyright (c) 2000-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -14,11 +14,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSToolbarItemViewer, NSMenuItem, NSView, NSImage, CKShare;
 
+typedef NSInteger NSToolbarItemVisibilityPriority NS_TYPED_EXTENSIBLE_ENUM;
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityStandard = 0;
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityLow  = -1000;
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityHigh  = 1000;
+static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityUser  = 2000;
+
 @interface NSToolbarItem : NSObject <NSCopying, NSValidatedUserInterfaceItem> {
 @private
-    NSToolbar *		_toolbar;
+    __weak NSToolbar *  _toolbar;
     NSImage *		_image;
-    NSString *		_itemIdentifier;
+    NSToolbarItemIdentifier _itemIdentifier;
     
     NSString *		_label;
     NSTextAlignment	_labelAlignment;
@@ -69,11 +75,11 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /* Initialize the toolbar item with an identifier which is a development language string used by the toolbar and its delegate for identification purposes.  */
-- (instancetype)initWithItemIdentifier:(NSString *)itemIdentifier NS_DESIGNATED_INITIALIZER;
-@property (readonly, copy) NSString *itemIdentifier;
+- (instancetype)initWithItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier NS_DESIGNATED_INITIALIZER;
+@property (readonly, copy) NSToolbarItemIdentifier itemIdentifier;
 
 /* Use this to determine the toolbar in which an item is currently displayed. */
-@property (nullable, readonly, assign) NSToolbar *toolbar;
+@property (readonly, nullable, weak) NSToolbar *toolbar;
 
 // ----- Setters and Getters -----
 
@@ -113,16 +119,8 @@ NS_ASSUME_NONNULL_BEGIN
 /* Unless you have set your own custom view, you should not call this method. */
 @property NSSize maxSize;
 
-
-enum {
-   NSToolbarItemVisibilityPriorityStandard = 0, // The default visibility priority value.  By default, all items have this priority
-   NSToolbarItemVisibilityPriorityLow  = -1000, // A good value to use for items which should be first to fall into the overflow menu
-   NSToolbarItemVisibilityPriorityHigh  = 1000, // A good value to use for items you want to stay visible, allowing users to still have highest priority
-   NSToolbarItemVisibilityPriorityUser  = 2000  // Value assigned to an item the user wants to "keep visible". You should only use values less than this
-};
-
 /* When a toolbar does not have enough space to fit all its items, it must push some into the overflow menu.  Items with the highest visibility priority level are choosen last for the overflow menu.  The default visibilityPriority value is NSToolbarItemVisibilityPriorityStandard.  To suggest that an item always remain visible, give it a value greater than NSToolbarItemVisibilityPriorityStandard, but less than NSToolbarItemVisibilityPriorityUser.   In 10.7, users can no longer modify the toolbar item visibility priority. */
-@property NSInteger visibilityPriority;
+@property NSToolbarItemVisibilityPriority visibilityPriority;
 
 
 // ----- Validation of the items -----
@@ -161,17 +159,15 @@ enum {
 
 /* standard toolbar item identifiers */
 
-APPKIT_EXTERN NSString * NSToolbarSeparatorItemIdentifier;
-APPKIT_EXTERN NSString * NSToolbarSpaceItemIdentifier;
-APPKIT_EXTERN NSString * NSToolbarFlexibleSpaceItemIdentifier;
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSeparatorItemIdentifier;
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarSpaceItemIdentifier;
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarFlexibleSpaceItemIdentifier;
 
-APPKIT_EXTERN NSString * NSToolbarShowColorsItemIdentifier;        // Shows the color panel.
-APPKIT_EXTERN NSString * NSToolbarShowFontsItemIdentifier;         // Shows the font panel.
-APPKIT_EXTERN NSString * NSToolbarCustomizeToolbarItemIdentifier;  // Puts the current toolbar into customize mode.
-APPKIT_EXTERN NSString * NSToolbarPrintItemIdentifier;             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
-APPKIT_EXTERN NSString * NSToolbarToggleSidebarItemIdentifier NS_AVAILABLE_MAC(10_11);  // A standard toolbar item identifier for sidebars. It sends -toggleSidebar: to the firstResponder.
-APPKIT_EXTERN NSString * NSToolbarCloudSharingItemIdentifier API_AVAILABLE(macosx(10.12)); // A standard toolbar item identifier for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
-
-
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowColorsItemIdentifier;        // Shows the color panel.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarShowFontsItemIdentifier;         // Shows the font panel.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCustomizeToolbarItemIdentifier;  // Puts the current toolbar into customize mode.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarPrintItemIdentifier;             // Sends printDocument: to firstResponder, but you can change this in toolbarWillAddItem: if you need to do so.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarToggleSidebarItemIdentifier NS_AVAILABLE_MAC(10_11);  // A standard toolbar item identifier for sidebars. It sends -toggleSidebar: to the firstResponder.
+APPKIT_EXTERN NSToolbarItemIdentifier NSToolbarCloudSharingItemIdentifier NS_AVAILABLE_MAC(10_12); // A standard toolbar item identifier for cloud sharing via NSSharingServiceNameCloudSharing. It validates itself and modifies its appearance by using the NSCloudSharingValidation protocol. It sends -performCloudSharing: to the firstResponder.
 
 NS_ASSUME_NONNULL_END

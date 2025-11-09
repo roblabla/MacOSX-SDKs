@@ -1,5 +1,5 @@
 /*	NSFileHandle.h
-	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,20 +37,18 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSFileHandle (NSFileHandleCreation)
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSFileHandle *fileHandleWithStandardInput;
 @property (class, readonly, strong) NSFileHandle *fileHandleWithStandardOutput;
 @property (class, readonly, strong) NSFileHandle *fileHandleWithStandardError;
 @property (class, readonly, strong) NSFileHandle *fileHandleWithNullDevice;
-#endif
 
 + (nullable instancetype)fileHandleForReadingAtPath:(NSString *)path;
 + (nullable instancetype)fileHandleForWritingAtPath:(NSString *)path;
 + (nullable instancetype)fileHandleForUpdatingAtPath:(NSString *)path;
 
-+ (nullable instancetype)fileHandleForReadingFromURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
-+ (nullable instancetype)fileHandleForWritingToURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
-+ (nullable instancetype)fileHandleForUpdatingURL:(NSURL *)url error:(NSError **)error NS_AVAILABLE(10_6, 4_0);
++ (nullable instancetype)fileHandleForReadingFromURL:(NSURL *)url error:(NSError **)error API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
++ (nullable instancetype)fileHandleForWritingToURL:(NSURL *)url error:(NSError **)error API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
++ (nullable instancetype)fileHandleForUpdatingURL:(NSURL *)url error:(NSError **)error API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -63,7 +61,7 @@ FOUNDATION_EXPORT NSNotificationName const NSFileHandleDataAvailableNotification
 
 FOUNDATION_EXPORT NSString * const NSFileHandleNotificationDataItem;
 FOUNDATION_EXPORT NSString * const NSFileHandleNotificationFileHandleItem;
-FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes NS_DEPRECATED(10_0, 10_7, 2_0, 5_0);
+FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes API_DEPRECATED("Not supported", macos(10.0,10.7), ios(2.0,5.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 @interface NSFileHandle (NSFileHandleAsynchronousAccess)
 
@@ -80,8 +78,8 @@ FOUNDATION_EXPORT NSString * const NSFileHandleNotificationMonitorModes NS_DEPRE
 - (void)waitForDataInBackgroundAndNotify;
 
 #ifdef __BLOCKS__
-@property (nullable, copy) void (^readabilityHandler)(NSFileHandle *)  NS_AVAILABLE(10_7, 5_0);
-@property (nullable, copy) void (^writeabilityHandler)(NSFileHandle *) NS_AVAILABLE(10_7, 5_0);
+@property (nullable, copy) void (^readabilityHandler)(NSFileHandle *)  API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
+@property (nullable, copy) void (^writeabilityHandler)(NSFileHandle *) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 #endif
 
 @end

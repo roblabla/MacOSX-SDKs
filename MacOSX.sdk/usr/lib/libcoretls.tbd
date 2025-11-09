@@ -1,14 +1,13 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FAB825BB-BC35-32F2-BC7F-C4AD4BE22088', 'x86_64: BCC32537-4831-3E9F-876E-8C9F4CF52FD3' ]
+uuids:           [ 'i386: A24271C7-E511-3884-851E-46D70579A55F', 'x86_64: BBD3C8EF-FDE1-3CA2-9CE4-EC8F418B2003' ]
 platform:        macosx
 install-name:    /usr/lib/libcoretls.dylib
-current-version: 121.31.1
+current-version: 155
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
-    symbols:         [ _CipherSuiteCount, _KnownCipherSuites, ___ssl_debug, _coretlsVersionNumber, 
-                       _coretlsVersionString, _sslCipherSuiteGetKeyExchangeMethod, 
+    symbols:         [ _CipherSuiteCount, _KnownCipherSuites, ___ssl_debug, _sslCipherSuiteGetKeyExchangeMethod, 
                        _sslCipherSuiteGetKeydataSize, _sslCipherSuiteGetMacAlgorithm, 
                        _sslCipherSuiteGetMacSize, _sslCipherSuiteGetMinSupportedTLSVersion, 
                        _sslCipherSuiteGetSymmetricCipherAlgorithm, _sslCipherSuiteGetSymmetricCipherBlockIvSize, 
@@ -37,11 +36,12 @@ exports:
                        _tls_handshake_internal_prf, _tls_handshake_internal_server_random, 
                        _tls_handshake_internal_set_master_secret_function, _tls_handshake_internal_set_session_ticket, 
                        _tls_handshake_negotiate, _tls_handshake_process, _tls_handshake_request_renegotiation, 
-                       _tls_handshake_retransmit_timer_expired, _tls_handshake_set_acceptable_client_auth_type, 
-                       _tls_handshake_set_acceptable_dn_list, _tls_handshake_set_alpn_data, 
-                       _tls_handshake_set_callbacks, _tls_handshake_set_ciphersuites, 
-                       _tls_handshake_set_client_auth, _tls_handshake_set_client_auth_type, 
-                       _tls_handshake_set_config, _tls_handshake_set_curves, _tls_handshake_set_dh_parameters, 
+                       _tls_handshake_retransmit_timer_expired, _tls_handshake_send_alert, 
+                       _tls_handshake_set_acceptable_client_auth_type, _tls_handshake_set_acceptable_dn_list, 
+                       _tls_handshake_set_alpn_data, _tls_handshake_set_callbacks, 
+                       _tls_handshake_set_ciphersuites, _tls_handshake_set_client_auth, 
+                       _tls_handshake_set_client_auth_type, _tls_handshake_set_config, 
+                       _tls_handshake_set_curves, _tls_handshake_set_dh_parameters, 
                        _tls_handshake_set_ems_enable, _tls_handshake_set_encrypt_rsa_public_key, 
                        _tls_handshake_set_fallback, _tls_handshake_set_false_start, 
                        _tls_handshake_set_identity, _tls_handshake_set_max_protocol_version, 

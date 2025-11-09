@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGLayer *CGLayerRef;
+typedef struct CF_BRIDGED_TYPE(id) CGLayer *CGLayerRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGContext.h>

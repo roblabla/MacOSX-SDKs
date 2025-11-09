@@ -1,6 +1,6 @@
 /*
     NSISO8601DateFormatter.h
-    Copyright (c) 2015-2016, Apple Inc. All rights reserved.
+    Copyright (c) 2015-2017, Apple Inc. All rights reserved.
  */
 
 #include <CoreFoundation/CFDateFormatter.h>

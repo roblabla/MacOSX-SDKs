@@ -1,6 +1,6 @@
 /*	
     NSURLCredentialStorage.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -34,20 +34,17 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract Get the shared singleton authentication storage
     @result the shared authentication storage
 */
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSURLCredentialStorage *sharedCredentialStorage;
-#endif
 
 /*!
     @method credentialsForProtectionSpace:
     @abstract Get a dictionary mapping usernames to credentials for the specified protection space.
-    @param protectionSpace An NSURLProtectionSpace indicating the protection space for which to get credentials
+    @param space An NSURLProtectionSpace indicating the protection space for which to get credentials
     @result A dictionary where the keys are usernames and the values are the corresponding NSURLCredentials.
 */
 - (nullable NSDictionary<NSString *, NSURLCredential *> *)credentialsForProtectionSpace:(NSURLProtectionSpace *)space;
 
 /*!
-    @method allCredentials
     @abstract Get a dictionary mapping NSURLProtectionSpaces to dictionaries which map usernames to NSURLCredentials
     @result an NSDictionary where the keys are NSURLProtectionSpaces
     and the values are dictionaries, in which the keys are usernames
@@ -88,7 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
  are removed, the credential will be removed on all devices that contain this credential.
  @discussion The credential is removed from both persistent and temporary storage.
  */
-- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)space options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0);
+- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)space options:(nullable NSDictionary<NSString *, id> *)options API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 /*!
     @method defaultCredentialForProtectionSpace:
@@ -109,11 +106,11 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 @interface NSURLCredentialStorage (NSURLSessionTaskAdditions)
-- (void)getCredentialsForProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task completionHandler:(void (^) (NSDictionary<NSString *, NSURLCredential *> * _Nullable credentials))completionHandler NS_AVAILABLE(10_10, 8_0);
-- (void)setCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace options:(nullable NSDictionary<NSString *, id> *)options task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
-- (void)getDefaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space task:(NSURLSessionTask *)task completionHandler:(void (^) (NSURLCredential * _Nullable credential))completionHandler NS_AVAILABLE(10_10, 8_0);
-- (void)setDefaultCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task NS_AVAILABLE(10_10, 8_0);
+- (void)getCredentialsForProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task completionHandler:(void (^) (NSDictionary<NSString *, NSURLCredential *> * _Nullable credentials))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)setCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)removeCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace options:(nullable NSDictionary<NSString *, id> *)options task:(NSURLSessionTask *)task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)getDefaultCredentialForProtectionSpace:(NSURLProtectionSpace *)space task:(NSURLSessionTask *)task completionHandler:(void (^) (NSURLCredential * _Nullable credential))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
+- (void)setDefaultCredential:(NSURLCredential *)credential forProtectionSpace:(NSURLProtectionSpace *)protectionSpace task:(NSURLSessionTask *)task API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 @end
 
 /*!
@@ -129,6 +126,6 @@ FOUNDATION_EXPORT NSNotificationName const NSURLCredentialStorageChangedNotifica
  *		attribute should be removed.  If the key is missing or the value is @NO, then no attempt will be made
  *		to remove such a credential.
  */
-FOUNDATION_EXPORT NSString *const NSURLCredentialStorageRemoveSynchronizableCredentials NS_AVAILABLE(10_9, 7_0);
+FOUNDATION_EXPORT NSString *const NSURLCredentialStorageRemoveSynchronizableCredentials API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 NS_ASSUME_NONNULL_END

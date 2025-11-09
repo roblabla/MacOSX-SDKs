@@ -1,4 +1,4 @@
-.\" Copyright (c) 2015-2016 Apple Inc. All rights reserved.
+.\" Copyright (c) 2015-2017 Apple Inc. All rights reserved.
 .\" 
 .\" The contents of this file constitute Original Code as defined in and
 .\" are subject to the Apple Public Source License Version 1.1 (the
@@ -27,28 +27,35 @@ volume
 .Sh SYNOPSIS
 .Nm
 .Op Fl o Ar options
+.Op Fl i
 .Op Fl b Ar block-size
 .Op Fl s Ar volume-size | Fl q Ar volume-quota Fl r Ar volume-reserve
 .Op Fl v Ar volume-name
 .Op Fl E | Fl P
+.Op Fl R Ar role
 .Ar special
 .Nm
 .Fl C
 .Op Fl o Ar options
+.Op Fl i
 .Op Fl b Ar block-size
 .Ar special
 .Nm
 .Fl A
 .Op Fl o Ar options
+.Op Fl i
 .Op Fl s Ar volume-size | Fl q Ar volume-quota Fl r Ar volume-reserve
 .Op Fl v Ar volume-name
 .Op Fl E | Fl P
+.Op Fl R Ar role
 .Ar special
 .Nm
 .Op Fl o Ar options
+.Op Fl i
 .Op Fl s Ar volume-size | Fl q Ar volume-quota Fl r Ar volume-reserve
 .Op Fl v Ar volume-name
 .Op Fl E | Fl P
+.Op Fl R Ar role
 .Ar special
 .Sh DESCRIPTION
 The
@@ -85,6 +92,14 @@ All volumes within this container will use this block size.
 The default is 4096 bytes.
 .It Fl o Ar options
 Additional (undocumented) formatting options.
+.It Fl i
+Creates a case-insensitive volume. This is the default on macOS.
+.It Fl e
+Creates a case-sensitive volume.
+.It Fl U Ar uid
+The UID of the root volume. Defaults to current UID.
+.It Fl G Ar uid
+The GID of the root volume. Defaults to current GID.
 .It Fl q Ar volume-quota
 Places a quota, or upper limit, on the size of the volume.  If specified then no more than this much space will be used for its content,
 even if there is additional free space in the container; however it is not guaranteed that the entire quota will always be available.
@@ -117,19 +132,33 @@ Create a container only, with no volume.
 .Fl A
 may be used later to format volumes inside that container.
 .It Fl E
-Make the volume
-.Qq effaceable ;
-all its data and metadata will be encrypted with a single key
-.Pq destroying this key results in a fast-wipe .
-.It Fl P
-Enable per-file encryption
-.Pq Qq content protection
-on the volume.  The volume metadata is also encrypted.
+Enable volume encryption.
+The volume metadata is also encrypted.
+.It Fl F Ar special
+Format as a Fusion device (with the secondary device specified here).
+.It Fl R Ar role
+Set the OS
+.Qq role
+of the volume within the container.  The
+.Ar role
+may be certain valid combinations of the following characters:
+.Bl -tag -width "  " -offset "  " -compact
+.It Sy b
+PreBoot - will contain information used to help boot System volumes
+.It Sy u
+User - will contain home directory and other user data
+.It Sy s
+System - will contain a bootable system
+.It Sy r
+Recovery - will contain the RecoveryOS
+.It Sy v
+VM - will contain swapfiles and hibernate image
+.El
 .El
 .Sh DIAGNOSTICS
 .Ex -std
 .Sh EXAMPLES
-The following formats a new container and volume named
+The following formats a new container and a volume named
 .Qq Macintosh
 on the
 .Pa /dev/disk1s2

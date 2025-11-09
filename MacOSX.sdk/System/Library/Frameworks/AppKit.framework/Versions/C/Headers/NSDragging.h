@@ -1,7 +1,7 @@
 /*
 	NSDragging.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -11,6 +11,8 @@
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSGeometry.h>
 #import <limits.h>
+
+#import <AppKit/NSPasteboard.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -77,7 +79,7 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 - (nullable id)draggingSource;
 - (NSInteger)draggingSequenceNumber;
 - (void)slideDraggedImageTo:(NSPoint)screenPoint;
-- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
+- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination NS_DEPRECATED_MAC(10_0, 10_13, "Use NSFilePromiseReceiver objects instead");
 
 /* Controls the dragging formation while the drag is over this destination. The default value is the current drag formation. */
 @property NSDraggingFormation draggingFormation NS_AVAILABLE_MAC(10_7);
@@ -96,7 +98,7 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 
 /* Enumerate through each dragging item. Any changes made to the properties of the draggingItem are reflected in the drag and are automatically removed when the drag exits. Classes in the provided array must implement the NSPasteboardReading protocol. Cocoa classes that implement this protocol include NSImage, NSString, NSURL, NSColor, NSAttributedString, and NSPasteboardItem. For every item on the pasteboard, each class in the provided array will be queried for the types it can read using -readableTypesForPasteboard:. An instance will be created of the first class found in the provided array whose readable types match a conforming type contained in that pasteboard item. If an Instance is created from the pasteboard item data, it is placed into an NSDraggingItem along with the dragging properties of that item such as the dragging image. The NSDraggingItem is then passed as a parameter to the provided block. Additional search options, such as restricting the search to file URLs with particular content types, can be specified with a search options dictionary.  See the comments for the Pasteboard Reading Options keys in NSPasteboard.h for a full description. Note: all coordinate properties in the NSDraggingItem are in the coordinate system of view. If view is nil, the screen coordinate space is used.
 */
-- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(nullable  NSView *)view classes:(NSArray<Class> *)classArray searchOptions:(NSDictionary<NSString *, id> *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block NS_AVAILABLE_MAC(10_7);
+- (void)enumerateDraggingItemsWithOptions:(NSDraggingItemEnumerationOptions)enumOpts forView:(nullable  NSView *)view classes:(NSArray<Class> *)classArray searchOptions:(NSDictionary<NSPasteboardReadingOptionKey, id> *)searchOptions usingBlock:(void (^)(NSDraggingItem *draggingItem, NSInteger idx, BOOL *stop))block NS_AVAILABLE_MAC(10_7);
 
 @property (readonly) NSSpringLoadingHighlight springLoadingHighlight NS_AVAILABLE_MAC(10_11);
 
@@ -119,7 +121,7 @@ typedef NS_ENUM(NSInteger, NSSpringLoadingHighlight) {
 - (BOOL)performDragOperation:(id <NSDraggingInfo>)sender;
 - (void)concludeDragOperation:(nullable id <NSDraggingInfo>)sender;
 /* draggingEnded: is implemented as of Mac OS 10.5 */
-- (void)draggingEnded:(nullable id <NSDraggingInfo>)sender;
+- (void)draggingEnded:(id<NSDraggingInfo>)sender;
 /* the receiver of -wantsPeriodicDraggingUpdates should return NO if it does not require periodic -draggingUpdated messages (eg. not autoscrolling or otherwise dependent on draggingUpdated: sent while mouse is stationary) */
 - (BOOL)wantsPeriodicDraggingUpdates;
 
@@ -196,11 +198,7 @@ typedef NS_OPTIONS(NSUInteger, NSSpringLoadingOptions) {
 
 
 @interface NSObject(NSDraggingSourceDeprecated)
-/* The following methods are informally deprecated and are only called if the source does not implement the NSDraggingSource protocol methods. These methods will be formally deprecated in a future OS release
-*/
-- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination;
-
-// Formally deprecated
+- (nullable NSArray<NSString *> *)namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination NS_DEPRECATED_MAC(10_0, 10_13, "Use NSFilePromiseProvider objects instead");
 - (NSDragOperation)draggingSourceOperationMaskForLocal:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:sourceOperationMaskForDraggingContext: instead");
 - (void)draggedImage:(null_unspecified NSImage *)image beganAt:(NSPoint)screenPoint NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:willBeginAtPoint: instead");
 - (void)draggedImage:(null_unspecified NSImage *)image endedAt:(NSPoint)screenPoint operation:(NSDragOperation)operation NS_DEPRECATED_MAC(10_0, 10_7, "Use -draggingSession:endedAtPoint:operation: instead");

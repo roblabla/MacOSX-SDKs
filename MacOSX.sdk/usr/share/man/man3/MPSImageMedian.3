@@ -1,8 +1,8 @@
-.TH "MPSImageMedian" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSImageMedian" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSImageMedian \- 
+MPSImageMedian
 .SH SYNOPSIS
 .br
 .PP
@@ -15,6 +15,9 @@ Inherits \fBMPSUnaryImageKernel\fP\&.
 .in +1c
 .ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:kernelDiameter:\fP"
+.br
+.ti -1c
+.RI "(nullable instancetype) \- \fBinitWithCoder:device:\fP"
 .br
 .ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:\fP"
@@ -52,7 +55,25 @@ The \fBMPSImageMedian\fP applies a median filter to an image\&. A median filter 
 NOTE: The \fBMPSImageMedian\fP filter currently only supports images with <= 8 bits/channel\&. 
 .SH "Method Documentation"
 .PP 
-.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) NS_DESIGNATED_INITIALIZER"
+.SS "\- (nullable instancetype) \fBinitWithCoder:\fP (NSCoder *__nonnull) aDecoder(nonnull id< MTLDevice >) device"
+\fBNSSecureCoding\fP compatability  While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly\&. To avoid that problem, use initWithCoder:device instead\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIaDecoder\fP The NSCoder subclass with your serialized \fBMPSKernel\fP 
+.br
+\fIdevice\fP The MTLDevice on which to make the \fBMPSKernel\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A new \fBMPSKernel\fP object, or nil if failure\&. 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBMPSUnaryImageKernel\fP\&.
+.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) device"
 Standard init with default properties per filter type 
 .PP
 \fBParameters:\fP
@@ -67,8 +88,8 @@ a pointer to the newly initialized object\&. This will fail, returning nil if th
 .PP
 
 .PP
-Reimplemented from \fBMPSKernel\fP\&.
-.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) NS_DESIGNATED_INITIALIZER"
+Reimplemented from \fBMPSUnaryImageKernel\fP\&.
+.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) kernelDiameter"
 Initialize a filter for a particular kernel size and device 
 .PP
 \fBParameters:\fP

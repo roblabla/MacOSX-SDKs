@@ -1,13 +1,13 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5A5A892D-E14B-3FBC-9BEB-ACF9809DD2EC' ]
+uuids:           [ 'x86_64: 7E443506-7413-3E21-A2C3-C530DF893ADE' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomAnalytics.framework/Versions/A/SymptomAnalytics
-objc-constraint: none
+current-version: 817
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SymptomAnalyticsFrameworkDidSaveNotification, _analyticsHandle, 
-                       _analyticsVerbose, _init_symptom_analytics_logging, _kProcessKeyTypeBundleName, 
+                       _init_symptom_analytics_logging, _kProcessKeyTypeBundleName, 
                        _kProcessKeyTypeProcName, _kSymptomAnalyticsModelTrainServiceEndpoint, 
                        _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, _kSymptomAnalyticsNetworkAdvisoryDefiniteNotUse, 
                        _kSymptomAnalyticsNetworkAdvisoryDefiniteUse, _kSymptomAnalyticsNetworkAdvisoryError, 
@@ -25,12 +25,14 @@ exports:
                        _kSymptomAnalyticsServiceNOIArg1, _kSymptomAnalyticsServiceNOICanUseOnAlternate, 
                        _kSymptomAnalyticsServiceNOICanUseOnAlternateCodes, _kSymptomAnalyticsServiceNOICanUseOnAlternateReasons, 
                        _kSymptomAnalyticsServiceNOIEstTransferTimeConfidence, _kSymptomAnalyticsServiceNOIEstTransferTimeDLSecs, 
-                       _kSymptomAnalyticsServiceNOIEstTransferTimeULSecs, _kSymptomAnalyticsServiceNOIFetchDayOfWeekGrouping, 
-                       _kSymptomAnalyticsServiceNOIFetchEstTransferTime, _kSymptomAnalyticsServiceNOIFetchForegroundActivity, 
-                       _kSymptomAnalyticsServiceNOIFetchInstantQuality, _kSymptomAnalyticsServiceNOIFetchL2ThroughputMetrics, 
-                       _kSymptomAnalyticsServiceNOIFetchPredictions, _kSymptomAnalyticsServiceNOIFetchPredictionsError, 
-                       _kSymptomAnalyticsServiceNOIFetchPredictionsGenerationDate, 
-                       _kSymptomAnalyticsServiceNOIFetchThroughputPredictions, _kSymptomAnalyticsServiceNOIFetchTrafficInvitesHourlyDistribution, 
+                       _kSymptomAnalyticsServiceNOIEstTransferTimeULSecs, _kSymptomAnalyticsServiceNOIFetchAuditableLinkQuality, 
+                       _kSymptomAnalyticsServiceNOIFetchAuditableLinkQualityLoadedLQM, 
+                       _kSymptomAnalyticsServiceNOIFetchAuditableLinkQualityValue, 
+                       _kSymptomAnalyticsServiceNOIFetchDayOfWeekGrouping, _kSymptomAnalyticsServiceNOIFetchEstTransferTime, 
+                       _kSymptomAnalyticsServiceNOIFetchForegroundActivity, _kSymptomAnalyticsServiceNOIFetchInstantQuality, 
+                       _kSymptomAnalyticsServiceNOIFetchL2ThroughputMetrics, _kSymptomAnalyticsServiceNOIFetchPredictions, 
+                       _kSymptomAnalyticsServiceNOIFetchPredictionsError, _kSymptomAnalyticsServiceNOIFetchPredictionsGenerationDate, 
+                       _kSymptomAnalyticsServiceNOIFetchTrafficInvitesHourlyDistribution, 
                        _kSymptomAnalyticsServiceNOIFetchTrainingProgress, _kSymptomAnalyticsServiceNOIPayloadInfoDLKB, 
                        _kSymptomAnalyticsServiceNOIPayloadInfoULKB, _kSymptomAnalyticsServiceNOIPredictions24hrs, 
                        _kSymptomAnalyticsServiceNOIRRCIdleDLThroughputKbps, _kSymptomAnalyticsServiceNOIRRCIdleULThroughputKbps, 
@@ -38,12 +40,12 @@ exports:
                        _kSymptomAnalyticsServiceNetworkAttachmentHistorical, _kSymptomAnalyticsServiceNetworkAttachmentInstant, 
                        _kSymptomAnalyticsServiceNetworkAttachmentPerformance, _kSymptomAnalyticsServicePostProcess, 
                        _kSymptomAnalyticsServicePostProcessComposeAdvisory, _kSymptomAnalyticsServiceProcessWithGeneration, 
+                       _kSymptomAnalyticsServiceRNFForcedAdviceLevel, _kSymptomAnalyticsServiceRNFTestResult, 
                        _kSymptomAnalyticsServiceRefreshUsage, _kSymptomAnalyticsServiceSweepUsage, 
                        _kSymptomAnalyticsServiceTypicalUsageToggle, _kSymptomAnalyticsServiceUsage, 
                        _kSymptomAnalyticsServiceWatchpointKey, _kSymptomAnalyticsServiceWatchpointTarget, 
                        _kSymptomAnalyticsServiceWatchpointValue, _kSymptomAnalyticsTypeBundleIdentifier, 
-                       _kSymptomAnalyticsTypeProcessName, _kSymptomAnalyticsWorkspacePersistenceOptionPersistentKey, 
-                       _prefs_add_logger ]
+                       _kSymptomAnalyticsTypeProcessName, _kSymptomAnalyticsWorkspacePersistenceOptionPersistentKey ]
     objc-classes:    [ _AnalyticsWorkspace, _App, _AppAnalytics, _AppCalendarUsage, 
                        _AppRun, _AppTypicalUsage, _CheckUpEvent, _DemoLiveUsage, 
                        _DiagnosticCaseStorage, _DiagnosticCaseStorageAnalytics, _DiagnosticCaseUsage, 

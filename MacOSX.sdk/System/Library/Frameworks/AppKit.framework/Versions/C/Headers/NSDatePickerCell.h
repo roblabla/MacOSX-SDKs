@@ -1,7 +1,7 @@
 /*
 	NSDatePickerCell.h
 	Application Kit
-	Copyright (c) 2004-2016, Apple Inc.
+	Copyright (c) 2004-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -54,7 +54,7 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
         unsigned int forcesLeadingZeroes:1;
         unsigned int wrapsDateComponentArithmetic:1;
     } _dcFlags;
-    id _delegate;
+    __weak id<NSDatePickerCellDelegate> _delegate;
     NSCalendar *_calendar;
     NSLocale *_locale;
     NSTimeZone *_timeZone;
@@ -110,7 +110,7 @@ typedef NS_OPTIONS(NSUInteger, NSDatePickerElementFlags) {
 
 #pragma mark *** Delegate ***
 
-@property (nullable, assign) id<NSDatePickerCellDelegate> delegate;
+@property (nullable, weak) id<NSDatePickerCellDelegate> delegate;
 
 @end
 

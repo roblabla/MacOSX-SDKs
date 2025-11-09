@@ -1,7 +1,7 @@
 /*
 	NSHelpManager.h
 	Application Kit
-	Copyright (c) 1995-2016, Apple Inc.
+	Copyright (c) 1995-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,6 +16,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSAttributedString, NSWindow;
 
+typedef NSString * NSHelpBookName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSHelpAnchorName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSHelpManagerContextHelpKey NS_EXTENSIBLE_STRING_ENUM;
+
 @interface NSHelpManager : NSObject
 {
     /*All instance variables are private*/
@@ -28,9 +32,8 @@ NS_ASSUME_NONNULL_BEGIN
     NSBundle		*_helpBundle;
 }
 
-+ (NSHelpManager *)sharedHelpManager;
-+ (void)setContextHelpModeActive:(BOOL)active;
-+ (BOOL)isContextHelpModeActive;
+@property (class, readonly, strong) NSHelpManager *sharedHelpManager;
+@property (class, getter=isContextHelpModeActive) BOOL contextHelpModeActive;
 
 - (void)setContextHelp:(NSAttributedString *)attrString forObject:(id)object;
 - (void)removeContextHelpForObject:(id)object;
@@ -38,8 +41,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (BOOL)showContextHelpForObject:(id)object locationHint:(NSPoint)pt;
 
-- (void)openHelpAnchor:(NSString *)anchor inBook:(nullable NSString *)book;
-- (void)findString:(NSString *)query inBook:(nullable NSString *)book;
+- (void)openHelpAnchor:(NSHelpAnchorName)anchor inBook:(nullable NSHelpBookName)book;
+- (void)findString:(NSString *)query inBook:(nullable NSHelpBookName)book;
 
 /* Register one or more help books in the given bundle.  The main bundle is automatically registered by -openHelpAnchor:inBook: and -findString:inBook:.  You can use -registerBooksInBundle: to register help books in a plugin bundle, for example.  The Info.plist in the bundle should contain a help book directory path, which specifies one or more folders containing help books.  Returns NO if the bundle doesn't contain any help books or if registration fails.  Returns YES on successful registration. */
 - (BOOL)registerBooksInBundle:(NSBundle *)bundle NS_AVAILABLE_MAC(10_6);
@@ -58,7 +61,7 @@ APPKIT_EXTERN NSNotificationName NSContextHelpModeDidDeactivateNotification;
 //
 
 @interface NSBundle(NSBundleHelpExtension)
-- (nullable NSAttributedString *)contextHelpForKey:(NSString *)key;	/* return nil if not found */
+- (nullable NSAttributedString *)contextHelpForKey:(NSHelpManagerContextHelpKey)key;	/* return nil if not found */
 @end
 
 //

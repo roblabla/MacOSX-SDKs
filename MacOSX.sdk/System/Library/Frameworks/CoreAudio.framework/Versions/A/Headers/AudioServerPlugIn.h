@@ -29,7 +29,7 @@
     "AudioServerPlugIn_LoadingConditions". The value of this key is a dictionary whose keys describe
     the loading conditions for the plug-in. Currently, the only defined key is named
     "IOService Matching" whose value is an array of IOService matching dictionaries. The host will
-	load the plug-in if any of these matching dictionaries match an IOService.
+    load the plug-in if any of these matching dictionaries match an IOService.
     
     An AudioServerPlugIn operates in a limited environment. First and foremost, an AudioServerPlugIn
     may not make any calls to the client HAL API in the CoreAudio.framework. This will result in
@@ -273,7 +273,7 @@ CF_ENUM(AudioObjectID)
     @constant       kAudioServerPlugInCustomPropertyDataTypeCFPropertyList
                         The property/qualifier data is a CFPropertyListRef.
 */
-typedef UInt32	AudioServerPlugInCustomPropertyDataType;
+typedef UInt32  AudioServerPlugInCustomPropertyDataType;
 CF_ENUM(AudioServerPlugInCustomPropertyDataType)
 {
     kAudioServerPlugInCustomPropertyDataTypeNone            = 0,
@@ -388,13 +388,16 @@ CF_ENUM(AudioObjectPropertySelector)
     @constant       kAudioDeviceClockAlgorithmSimpleIIR
                         When this value for the clock algorithm is specified, the Host applies a
                         simple IIR filter to the time stamp stream. This is the default algorithm
-                        used for devices that don't implement
-                        kAudioDevicePropertyClockAlgorithm.
+                        used for devices that don't implement kAudioDevicePropertyClockAlgorithm.
+    @constant       kAudioDeviceClockAlgorithm12PtMovingWindowAverage
+                        This clock algorithm uses a 12 point moving window average to filter the time
+                        stamps returned from GetZeroTimeStamp().
 */
-typedef	CF_ENUM(UInt32, AudioDeviceClockAlgorithmSelector)
+typedef CF_ENUM(UInt32, AudioDeviceClockAlgorithmSelector)
 {
-    kAudioDeviceClockAlgorithmRaw       = 'raww',
-    kAudioDeviceClockAlgorithmSimpleIIR = 'iirf'
+    kAudioDeviceClockAlgorithmRaw                       = 'raww',
+    kAudioDeviceClockAlgorithmSimpleIIR                 = 'iirf',
+    kAudioDeviceClockAlgorithm12PtMovingWindowAverage   = 'mavg'
 };
 
 //==================================================================================================

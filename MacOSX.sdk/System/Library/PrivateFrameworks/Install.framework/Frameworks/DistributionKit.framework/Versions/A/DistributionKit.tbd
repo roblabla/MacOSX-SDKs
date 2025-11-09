@@ -1,12 +1,21 @@
 --- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: DAD2F2C0-3AD7-3039-A313-4B47D6FA5CFE', 'x86_64: 2FF35977-EAD5-31F4-AD1A-890CF9FE0DD4' ]
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: A40F1342-2C2A-3D5A-92DD-D7F92F04B244' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Install.framework/Frameworks/DistributionKit.framework/Versions/A/DistributionKit
-current-version: 1000.0
-objc-constraint: none
+current-version: 1000
 exports:         
   - archs:           [ x86_64 ]
+    symbols:         [ _IFJS_ChoiceItemClassDefinition, _IFJS_MyEvaluatorMakeGetProperty, 
+                       _IFJS_MySearchResultsMakeGetProperty, _PKDistributionControllerErrorDomain, 
+                       _PKDistributionControllerPeripheralErrorDomain, _PKDistributionEvaluatorActiveNotification, 
+                       _PKDistributionEvaluatorQuiescentNotification ]
+    objc-classes:    [ _IFJS_Context, _PKBasicHardwareRequirements, _PKDistributionChoiceItem, 
+                       _PKDistributionChoiceTitleButtonCell, _PKDistributionController, 
+                       _PKDistributionControllerCommonCheckRecoveryAttempter, _PKDistributionEvaluator, 
+                       _PKDistributionValueNode, _PKGraphicsHardwareRequirements, 
+                       _PKPredicateRequirements, _PKRequiredCLDevice, _PKRequiredGLRenderer, 
+                       __PKBasicHardwareRequirementsMatcher ]
     objc-ivars:      [ _IFJS_Context.allowInsecure, _IFJS_Context.choiceItem, _IFJS_Context.choicesDelegate, 
                        _IFJS_Context.currentBundle, _IFJS_Context.currentChoice, 
                        _IFJS_Context.destinationPath, _IFJS_Context.distributionController, 
@@ -42,15 +51,4 @@ exports:
                        _PKRequiredCLDevice._device, _PKRequiredCLDevice._extensions, 
                        _PKRequiredCLDevice._symbolTable, _PKRequiredGLRenderer._extensions, 
                        _PKRequiredGLRenderer._queryVersion, _PKRequiredGLRenderer._symbolTable ]
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ _IFJS_ChoiceItemClassDefinition, _IFJS_MyEvaluatorMakeGetProperty, 
-                       _IFJS_MySearchResultsMakeGetProperty, _PKDistributionControllerErrorDomain, 
-                       _PKDistributionControllerPeripheralErrorDomain, _PKDistributionEvaluatorActiveNotification, 
-                       _PKDistributionEvaluatorQuiescentNotification ]
-    objc-classes:    [ _IFJS_Context, _PKBasicHardwareRequirements, _PKDistributionChoiceItem, 
-                       _PKDistributionChoiceTitleButtonCell, _PKDistributionController, 
-                       _PKDistributionControllerCommonCheckRecoveryAttempter, _PKDistributionEvaluator, 
-                       _PKDistributionValueNode, _PKGraphicsHardwareRequirements, 
-                       _PKPredicateRequirements, _PKRequiredCLDevice, _PKRequiredGLRenderer, 
-                       __PKBasicHardwareRequirementsMatcher ]
 ...

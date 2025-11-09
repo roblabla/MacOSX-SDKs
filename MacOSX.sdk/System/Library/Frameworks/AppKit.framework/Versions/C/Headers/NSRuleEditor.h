@@ -1,7 +1,7 @@
 /*
         NSRuleEditor.h
 	Application Kit
-	Copyright (c) 2006-2016, Apple Inc.
+	Copyright (c) 2006-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -41,6 +41,16 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSIndexSet, NSView, NSPredicate, NSString, NSViewAnimation;
 @protocol NSRuleEditorDelegate;
 
+/* The following strings are to be used as keys to the dictionary returned from the optional method ruleEditor: predicatePartsForCriterion: withDisplayValue: inRow: .  In order to construct a valid predicate, the union of the dictionaries for each item in the row must contain the required parts as described below: */
+typedef NSString * NSRuleEditorPredicatePartKey NS_STRING_ENUM;
+APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateLeftExpression; /* The value of this key should be an NSExpression representing the left expression in the predicate; this value is required for a non-nil comparison predicate */
+APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateRightExpression; /* The value of this key should be an NSExpression representing the right expression in the predicate; this value is required for a non-nil comparison predicate */
+APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateComparisonModifier; /* NSNumber representing the NSComparisonPredicateModifier of the predicate; this value is optional and, if not specified, NSDirectPredicateModifier is assumed */
+APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateOptions; /* NSNumber representing NSComparisonPredicateOptions; these are bitwise ORed together when constructing a predicate.  If none is specified, 0 (no options) is assumed. */
+APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateOperatorType; /* NSNumber representing NSPredicateOperatorType; this value is required for a non-nil comparison predicate */
+APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateCustomSelector; /* NSString representing a custom selector; if specified, this will override the operator type, options, and comparison modifier */
+APPKIT_EXTERN NSRuleEditorPredicatePartKey const NSRuleEditorPredicateCompoundType; /* NSNumber representing a NSCompoundPredicateType; if specified, the other keys are ignored and the predicate for the row will be an NSCompoundPredicate predicate, whose subpredicates are the predicates of the subrows of the given row. */
+
 typedef NS_ENUM(NSUInteger, NSRuleEditorNestingMode) {
     NSRuleEditorNestingModeSingle,	    /* Only a single row is allowed.  Plus/minus buttons will not be shown */
     NSRuleEditorNestingModeList,	    /* Allows a single list, with no nesting and no compound rows */
@@ -58,7 +68,7 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 @interface NSRuleEditor : NSControl {
     @private
     id _ruleDataSource;
-    id _ruleDelegate;
+    __weak id _ruleDelegate;
     NSIndexSet *_draggingRows;
     NSMutableArray *_rowCache;
     NSView *_slicesHolder;
@@ -104,7 +114,7 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 /* -- Configuring NSRuleEditor -- */
 
 /* Clients can call this method to set and get the delegate for the NSRuleEditor.  NSRuleEditor requires a delegate that implements the required NSRuleEditorDelegateMethods methods to function. */
-@property (nullable, assign) id<NSRuleEditorDelegate> delegate;
+@property (nullable, weak) id<NSRuleEditorDelegate> delegate;
 
 /* Clients can call this to automatically set a formatting dictionary based on the strings file with the given name.  Setting a formatting strings file searches the main bundle, and the bundle containing this nib, for a (possibly localized) strings file resource with the given name, loads it, and sets it as the formatting dictionary.  The resulting dictionary can be obtained with -[NSRuleEditor formattingDictionary].  If you set the formatting dictionary explicitly with -[NSRuleEditor setFormattingDictionary:], then it sets the current formattingStringsFilename to nil */
 @property (nullable, copy) NSString *formattingStringsFilename;
@@ -225,23 +235,12 @@ typedef NS_ENUM(NSUInteger, NSRuleEditorRowType) {
 
 
 /* When called, you should return an NSDictionary representing the parts of the predicate determined by the given criterion and value.  The keys of the dictionary should be the strings shown above that begin with NSRuleEditorPredicate..., and the values should be as described in the comments adjacent to the keys.  Implementation of this method is optional. */
-- (nullable NSDictionary<NSString *, id> *)ruleEditor:(NSRuleEditor *)editor predicatePartsForCriterion:(id)criterion withDisplayValue:(id)value inRow:(NSInteger)row;
+- (nullable NSDictionary<NSRuleEditorPredicatePartKey, id> *)ruleEditor:(NSRuleEditor *)editor predicatePartsForCriterion:(id)criterion withDisplayValue:(id)value inRow:(NSInteger)row;
 
 /* If ruleEditorRowsDidChange: is implemented, NSRuleEditor will automatically register its delegate to receive NSRuleEditorRowsDidChangeNotification notifications to this method. Implementation of this method is optional. */
 - (void)ruleEditorRowsDidChange:(NSNotification *)notification;
 
 @end
-
-/* The following strings are to be used as keys to the dictionary returned from the optional method ruleEditor: predicatePartsForCriterion: withDisplayValue: inRow: .  In order to construct a valid predicate, the union of the dictionaries for each item in the row must contain the required parts as described below: */
-
-APPKIT_EXTERN NSString * const NSRuleEditorPredicateLeftExpression; /* The value of this key should be an NSExpression representing the left expression in the predicate; this value is required for a non-nil comparison predicate */
-APPKIT_EXTERN NSString * const NSRuleEditorPredicateRightExpression; /* The value of this key should be an NSExpression representing the right expression in the predicate; this value is required for a non-nil comparison predicate */
-APPKIT_EXTERN NSString * const NSRuleEditorPredicateComparisonModifier; /* NSNumber representing the NSComparisonPredicateModifier of the predicate; this value is optional and, if not specified, NSDirectPredicateModifier is assumed */
-APPKIT_EXTERN NSString * const NSRuleEditorPredicateOptions; /* NSNumber representing NSComparisonPredicateOptions; these are bitwise ORed together when constructing a predicate.  If none is specified, 0 (no options) is assumed. */
-APPKIT_EXTERN NSString * const NSRuleEditorPredicateOperatorType; /* NSNumber representing NSPredicateOperatorType; this value is required for a non-nil comparison predicate */
-APPKIT_EXTERN NSString * const NSRuleEditorPredicateCustomSelector; /* NSString representing a custom selector; if specified, this will override the operator type, options, and comparison modifier */
-
-APPKIT_EXTERN NSString * const NSRuleEditorPredicateCompoundType; /* NSNumber representing a NSCompoundPredicateType; if specified, the other keys are ignored and the predicate for the row will be an NSCompoundPredicate predicate, whose subpredicates are the predicates of the subrows of the given row. */
 
 
 /* Posted to the default notification center whenever the view's rows change.

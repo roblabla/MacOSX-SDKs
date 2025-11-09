@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 5A2524B9-C40F-3A8A-9377-8DD6362C46DB' ]
+uuids:           [ 'x86_64: 5C61F405-4F60-311D-A0AE-6BD5831101C7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CorePrediction.framework/Versions/A/CorePrediction
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _CPMLAnalysisClassify, _CPMLAnalysisRegressionPrediction, 
@@ -70,6 +69,7 @@ exports:
                        __ZN12CPMLRemapper5unmapEii, __ZN12CPMLRemapperC1EP7sqlite3P14CPMLStatisticsb, 
                        __ZN12CPMLRemapperC2EP7sqlite3P14CPMLStatisticsb, __ZN12CPMLRemapperD1Ev, 
                        __ZN12CPMLRemapperD2Ev, __ZN13CPMLAlgorithm11setDelegateEP12CPMLDelegate, 
+                       __ZN13CPMLAlgorithm15getAlgoSolutionERNSt3__18valarrayIdEE, 
                        __ZN13CPMLAlgorithm17setDelegateEngineEP18CPMLDelegateEngine, 
                        __ZN13CPMLAlgorithm6updateEP7CPMLCDBP17CPMLSerializationP15CPMLTunableData, 
                        __ZN13CPMLAlgorithmC2EP7CPMLCDBP17CPMLSerializationP15CPMLTunableData, 
@@ -321,8 +321,8 @@ exports:
                        __ZN28CPMLNaiveBayesClassifierBaseC2EP7CPMLCDBP17CPMLSerializationP15CPMLTunableData, 
                        __ZN28CPMLNaiveBayesClassifierBaseD0Ev, __ZN28CPMLNaiveBayesClassifierBaseD1Ev, 
                        __ZN28CPMLNaiveBayesClassifierBaseD2Ev, __ZN29CPLogisticRegressionClassfier11DeserializeERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE, 
-                       __ZN29CPLogisticRegressionClassfier12findGradientEPd, __ZN29CPLogisticRegressionClassfier15gradientDescentEv, 
-                       __ZN29CPLogisticRegressionClassfier17ObjectiveFunctionERKNSt3__18valarrayIdEEPKv, 
+                       __ZN29CPLogisticRegressionClassfier12findGradientEPd, __ZN29CPLogisticRegressionClassfier15getAlgoSolutionERNSt3__18valarrayIdEE, 
+                       __ZN29CPLogisticRegressionClassfier15gradientDescentEv, __ZN29CPLogisticRegressionClassfier17ObjectiveFunctionERKNSt3__18valarrayIdEEPKv, 
                        __ZN29CPLogisticRegressionClassfier18ObjectiveFunction0ERKNSt3__18valarrayIdEEPKv, 
                        __ZN29CPLogisticRegressionClassfier20ComputeSingleHessianERK13data_record_tRKNSt3__18valarrayIdEEiiRS5_, 
                        __ZN29CPLogisticRegressionClassfier20ComputeSingleLogProbERK13data_record_tRKNSt3__18valarrayIdEEiii, 

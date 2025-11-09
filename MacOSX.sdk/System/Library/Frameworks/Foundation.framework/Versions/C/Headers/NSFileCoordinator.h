@@ -1,12 +1,13 @@
 /*
 	NSFileCoordinator.h
-	Copyright (c) 2010-2016, Apple Inc.
+	Copyright (c) 2010-2017, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSURL.h>
 
-@class NSArray<ObjectType>, NSError, NSMutableDictionary, NSOperationQueue, NSURL;
+@class NSArray<ObjectType>, NSError, NSMutableDictionary, NSOperationQueue, NSSet<ObjectType>;
 
 @protocol NSFilePresenter;
 
@@ -24,13 +25,13 @@ typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorReadingOptions) {
 
     /* Whether the reading to be done will only attempt to get an item's metadata that is immediately available (name, modification date, tags, and other attributes), and not its contents. For ubiquitous items, specifying this option will cause coordinated reads to be granted immediately (barring other coordinated readers or writers or file presenters on the same system on the same system preventing this) instead of waiting for any downloading of contents or additional metadata like conflicting versions or thumbnails. Attempting to read the item's contents during such a coordinated read may give you unexpected results or fail.
      */
-    NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly NS_ENUM_AVAILABLE(10_10, 8_0) = 1 << 2,
+    NSFileCoordinatorReadingImmediatelyAvailableMetadataOnly API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) = 1 << 2,
 
     /* Whether reading of an item is being done for the purpose of uploading. When using this option, NSFileCoordinator will create a temporary snapshot of the item being read and will relinquish its claim on the file once that snapshot is made to avoid blocking other coordinated writes during a potentially long upload. If the item at the URL being read is a directory (such as a document package), then the snapshot will be a new file that contains the zipped contents of that directory, and the URL passed to the accessor block will locate that file.
      
     When using this option, you may upload the document outside of the accessor block. However, you should open a file descriptor to the file or relocate the file within the accessor block before you do so, because NSFileCoordinator will unlink the file after the block returns, rendering it inaccessible via the URL.
     */
-    NSFileCoordinatorReadingForUploading NS_ENUM_AVAILABLE(10_10, 8_0) = 1 << 3,
+    NSFileCoordinatorReadingForUploading API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) = 1 << 3,
 
 };
 
@@ -65,7 +66,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorWritingOptions) {
 
     /* Whether the writing to be done will change the item's metadata only and not its contents. If the item being written to is ubiquitous, then changes to the item's contents during this coordinated write may not be preserved or fail. When using this option, changing metadata that is related to the item's contents is not supported for ubiquitous items and such changes may not be preserved. For example, changing the value of NSURLTagNamesKey is supported, but changing the value of NSURLContentModificationDateKey is not.
      */
-    NSFileCoordinatorWritingContentIndependentMetadataOnly NS_ENUM_AVAILABLE(10_10, 8_0) = 1 << 4
+    NSFileCoordinatorWritingContentIndependentMetadataOnly API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)) = 1 << 4
 
 };
 
@@ -103,9 +104,7 @@ If your application reads an item and then registers a file presenter for it the
 */
 + (void)addFilePresenter:(id<NSFilePresenter>)filePresenter;
 + (void)removeFilePresenter:(id<NSFilePresenter>)filePresenter;
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, copy) NSArray<id<NSFilePresenter>> *filePresenters;
-#endif
 
 /* The designated initializer. If an NSFilePresenter is provided then the receiver is considered to have been created by that NSFilePresenter, or on its behalf.
 
@@ -133,7 +132,7 @@ When creating custom purpose identifiers, you can use a reverse DNS style string
  
 Purpose identifiers can be set only once. If you attempt to set the purpose identifier of an NSFileCoordinator that you initialized with -initWithFilePresenter: or that you already assigned a purpose identifier, an exception will be thrown.
 */
-@property (copy) NSString *purposeIdentifier NS_AVAILABLE(10_7, 5_0);
+@property (copy) NSString *purposeIdentifier API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 #pragma mark *** Asynchronous File Coordination ***
 
@@ -169,7 +168,7 @@ Coordinated writing of an item triggers the sending of messages to NSFilePresent
  
 For both coordinated reading and writing, if there are multiple NSFilePresenters involved then the order in which they are messaged is undefined. If an NSFilePresenter signals failure then waiting will fail and *outError will be set to an NSError describing the failure.
 */
-- (void)coordinateAccessWithIntents:(NSArray<NSFileAccessIntent *> *)intents queue:(NSOperationQueue *)queue byAccessor:(void (^)(NSError * _Nullable error))accessor NS_AVAILABLE(10_10, 8_0);
+- (void)coordinateAccessWithIntents:(NSArray<NSFileAccessIntent *> *)intents queue:(NSOperationQueue *)queue byAccessor:(void (^)(NSError * _Nullable error))accessor API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 #pragma mark *** Synchronous File Coordination ***
 
@@ -181,10 +180,10 @@ The accessor block of each of these methods is passed one or more URLs that loca
  
 Each of these methods returns an NSError by reference instead of passing it to the accessory block. However, these methods are uncommon among Cocoa framework methods in that they don't also return a result indicating success or failure. The success of the waiting that they do is typically not interesting to invokers. Only the success of file system access done by the passed-in block is interesting. (The failure of either is of course interesting.) When invoking these methods it's cleanest to just declare a __block variable outside of the block and initialize it to a value that signals failure, and then inside the block set it to a value that signals success. If the waiting fails then the invoked method sets the error reference to an NSError that describes what went wrong, your block will not be invoked, your __block variable will not be set to a value that signals success, and all will be as it should be, with failure signaled and an NSError that describes the failure.
 */
-- (void)coordinateReadingItemAtURL:(NSURL *)url options:(NSFileCoordinatorReadingOptions)options error:(NSError **)outError byAccessor:(void (^)(NSURL *newURL))reader;
-- (void)coordinateWritingItemAtURL:(NSURL *)url options:(NSFileCoordinatorWritingOptions)options error:(NSError **)outError byAccessor:(void (^)(NSURL *newURL))writer;
-- (void)coordinateReadingItemAtURL:(NSURL *)readingURL options:(NSFileCoordinatorReadingOptions)readingOptions writingItemAtURL:(NSURL *)writingURL options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (^)(NSURL *newReadingURL, NSURL *newWritingURL))readerWriter;
-- (void)coordinateWritingItemAtURL:(NSURL *)url1 options:(NSFileCoordinatorWritingOptions)options1 writingItemAtURL:(NSURL *)url2 options:(NSFileCoordinatorWritingOptions)options2 error:(NSError **)outError byAccessor:(void (^)(NSURL *newURL1, NSURL *newURL2))writer;
+- (void)coordinateReadingItemAtURL:(NSURL *)url options:(NSFileCoordinatorReadingOptions)options error:(NSError **)outError byAccessor:(void (NS_NOESCAPE ^)(NSURL *newURL))reader;
+- (void)coordinateWritingItemAtURL:(NSURL *)url options:(NSFileCoordinatorWritingOptions)options error:(NSError **)outError byAccessor:(void (NS_NOESCAPE ^)(NSURL *newURL))writer;
+- (void)coordinateReadingItemAtURL:(NSURL *)readingURL options:(NSFileCoordinatorReadingOptions)readingOptions writingItemAtURL:(NSURL *)writingURL options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (NS_NOESCAPE ^)(NSURL *newReadingURL, NSURL *newWritingURL))readerWriter;
+- (void)coordinateWritingItemAtURL:(NSURL *)url1 options:(NSFileCoordinatorWritingOptions)options1 writingItemAtURL:(NSURL *)url2 options:(NSFileCoordinatorWritingOptions)options2 error:(NSError **)outError byAccessor:(void (NS_NOESCAPE ^)(NSURL *newURL1, NSURL *newURL2))writer;
 
 #pragma mark *** Batched File Coordination ***
 
@@ -194,7 +193,7 @@ The -coordinate... methods must use interprocess communication to message instan
 
 In most cases it is redundant to pass the same reading or writing options in an invocation of this method as are passed to individual invocations of the -coordinate... methods invoked by the block passed to an invocation of this method. For example, when Finder invokes this method during a copy operation it does not pass NSFileCoordinatorReadingWithoutChanges because it is appropriate to trigger the saving of document changes right away, but it does pass it when doing the nested invocations of -coordinate... methods because it is not necessary to trigger saving again, even if the user changes the document before the Finder proceeds far enough to actually copy that document's file.
 */
-- (void)prepareForReadingItemsAtURLs:(NSArray<NSURL *> *)readingURLs options:(NSFileCoordinatorReadingOptions)readingOptions writingItemsAtURLs:(NSArray<NSURL *> *)writingURLs options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (^)(void (^completionHandler)(void)))batchAccessor;
+- (void)prepareForReadingItemsAtURLs:(NSArray<NSURL *> *)readingURLs options:(NSFileCoordinatorReadingOptions)readingOptions writingItemsAtURLs:(NSArray<NSURL *> *)writingURLs options:(NSFileCoordinatorWritingOptions)writingOptions error:(NSError **)outError byAccessor:(void (NS_NOESCAPE ^)(void (^completionHandler)(void)))batchAccessor;
 
 #pragma mark *** Renaming and Moving Notification ***
 
@@ -204,7 +203,7 @@ Support for App Sandbox on OS X. Some applications can rename files while saving
 
 There is no reason to invoke this method from applications that do not use App Sandbox. Invoking it does nothing on iOS.
 */
-- (void)itemAtURL:(NSURL *)oldURL willMoveToURL:(NSURL *)newURL NS_AVAILABLE(10_8, 6_0);
+- (void)itemAtURL:(NSURL *)oldURL willMoveToURL:(NSURL *)newURL API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 /* Announce that the item located by a URL is now located by another URL.
 
@@ -218,6 +217,14 @@ This also balances invocations of -itemAtURL:willMoveToURL:, as described above.
 Useless invocations of this method are harmless, so you don't have to write code that compares NSURLs for equality, which is not straightforward. This method must be invoked from within the block passed to an invocation of -coordinateAccessWithIntents:queue:byAccessory:, -coordinateWritingItemAtURL:options:error:byAccessor:, or -coordinateReadingItemAtURL:options:writingItemAtURL:options:error:byAccessor:.
 */
 - (void)itemAtURL:(NSURL *)oldURL didMoveToURL:(NSURL *)newURL;
+
+#pragma mark *** Ubiquity Attribute Change Notification ***
+
+/* Announce that the item located by a URL has changed one or more ubiquity attributes. See NSFilePresenter.observedPresentedItemUbiquityAttributes for an explanation of valid attributes.
+ 
+This triggers the sending of messages to NSFilePresenters that implement -presentedItemDidChangeUbiquityAttibutes:, even those in other processes.
+*/
+- (void)itemAtURL:(NSURL *)url didChangeUbiquityAttributes:(NSSet <NSURLResourceKey> *)attributes API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 #pragma mark *** Cancellation ***
 

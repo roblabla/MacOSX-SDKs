@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2014 Apple Inc. All rights reserved.
+	Copyright 2011-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -15,6 +15,7 @@
 
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVAnimation.h>
+#import <AVFoundation/AVQueuedSampleBufferRendering.h>
 #import <QuartzCore/CoreAnimation.h>
 #import <CoreMedia/CMSync.h>
 #import <CoreMedia/CMSampleBuffer.h>
@@ -23,27 +24,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVSampleBufferDisplayLayerInternal;
 
-/*!
-	@enum		 AVQueuedSampleBufferRenderingStatus
-	@abstract	 These constants are the possible values of the AVSampleBufferDisplayLayer status property.
-	@constant	 AVQueuedSampleBufferRenderingStatusUnknown
-	Indicates that the receiver is in a fresh state without any sample buffers enqueued on it.
-	@constant	 AVQueuedSampleBufferRenderingStatusRendering
-	Indicates at least one sample buffer has been enqueued on the receiver.
-	@constant	 AVQueuedSampleBufferRenderingStatusFailed
-	Indicates that the receiver cannot currently enqueue or render sample buffers because of an error. The error is described by
-	the value of AVSampleBufferDisplayLayer's error property.
- */
-typedef NS_ENUM(NSInteger, AVQueuedSampleBufferRenderingStatus) {
-	AVQueuedSampleBufferRenderingStatusUnknown,
-	AVQueuedSampleBufferRenderingStatusRendering,
-	AVQueuedSampleBufferRenderingStatusFailed
-} NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED;
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED; // decode failed, see NSError in notification payload
+AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED; // NSError
 
-AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED; // decode failed, see NSError in notification payload
-AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey NS_AVAILABLE(10_10, 8_0) __TVOS_PROHIBITED; // NSError
-
-NS_CLASS_AVAILABLE(10_8, 8_0) __TVOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) __WATCHOS_PROHIBITED
 @interface AVSampleBufferDisplayLayer : CALayer
 {
 @private
@@ -76,7 +60,12 @@ NS_CLASS_AVAILABLE(10_8, 8_0) __TVOS_PROHIBITED
  					and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. 
 					See <AVFoundation/AVAnimation.h> for a description of these options.
  */
-@property(copy) NSString *videoGravity;
+@property(copy) AVLayerVideoGravity videoGravity;
+
+@end
+
+
+@interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerQueueManagement) <AVQueuedSampleBufferRendering>
 
 /*!
 	@property		status
@@ -85,19 +74,14 @@ NS_CLASS_AVAILABLE(10_8, 8_0) __TVOS_PROHIBITED
 		
 					This property is key value observable.
  */
-@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status NS_AVAILABLE(10_10, 8_0);
+@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status;
 
 /*!
 	@property		error
 	@abstract		If the display layer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure.
 	@discussion		The value of this property is an NSError that describes what caused the display layer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly, nullable) NSError *error NS_AVAILABLE(10_10, 8_0);
-
-@end
-
-
-@interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerQueueManagement)
+@property (nonatomic, readonly, nullable) NSError *error;
 
 /*!
 	@method			enqueueSampleBuffer:

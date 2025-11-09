@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMetalLayer.h
 
-   Copyright (c) 2013-2016, Apple Inc.
+   Copyright (c) 2013-2017, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CALayer.h>
@@ -101,6 +101,15 @@ CA_CLASS_AVAILABLE (10.11, 8.0, 9.0, 2.0)
  * rather than 1.0. The default is NO.  */
 
 @property BOOL wantsExtendedDynamicRangeContent;
+
+/* This property controls if this layer and its drawables will be synchronized
+ * to the display's Vsync. The default value is YES. */
+@property BOOL displaySyncEnabled CA_AVAILABLE_STARTING (10.13);
+
+/* This property controls if nextDrawable is allowed to timeout and return nil if
+ * the system does not have a free drawable available for longer than one second.
+ * The default value is YES. */
+@property BOOL allowsNextDrawableTimeout CA_AVAILABLE_STARTING (10.13, 11.0, 11.0, 4.0);
 
 @end
 

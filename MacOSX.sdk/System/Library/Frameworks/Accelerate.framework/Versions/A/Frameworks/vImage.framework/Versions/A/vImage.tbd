@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: 685A28A8-BAAF-3457-B21C-A176D712F464', 'x86_64: 77F96C96-725E-31E5-8072-D09C6BD988A2', 
-                   'x86_64h: 6408805B-67E9-3874-8D32-0BB814CE5CDA' ]
+uuids:           [ 'i386: F43BC90E-52A8-3930-B8B0-0004EB48EF6D', 'x86_64: F546A524-CB2D-3AA9-9FBE-C1E982C17447', 
+                   'x86_64h: 30445946-AF66-3CDB-ABE7-19BF121DD06D' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Frameworks/vImage.framework/Versions/A/vImage
-current-version: 331.5
+current-version: 417
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64, x86_64h ]
@@ -31,8 +31,11 @@ exports:
                        _vImageBuffer_GetSize, _vImageBuffer_Init, _vImageBuffer_InitForCopyFromCVPixelBuffer, 
                        _vImageBuffer_InitForCopyToCVPixelBuffer, _vImageBuffer_InitWithCGImage, 
                        _vImageBuffer_InitWithCVPixelBuffer, _vImageByteSwap_Planar16U, 
-                       _vImageCGImageFormat_GetComponentCount, _vImageCGImageFormat_IsEqual, 
-                       _vImageCVImageFormat_Copy, _vImageCVImageFormat_CopyChannelDescription, 
+                       _vImageCGCompositeConstMask_ARGB16F, _vImageCGCompositeConstShape_ARGB16F, 
+                       _vImageCGCompositeMarkConstDeepMaskARGB_ARGB16F, _vImageCGCompositeMarkConstDeepMaskBGColorARGB_ARGB16F, 
+                       _vImageCGCompositeMarkConstDeepMaskXRGB_ARGB16F, _vImageCGCompositePixelMask_ARGB16F, 
+                       _vImageCGCompositePixelShape_ARGB16F, _vImageCGImageFormat_GetComponentCount, 
+                       _vImageCGImageFormat_IsEqual, _vImageCVImageFormat_Copy, _vImageCVImageFormat_CopyChannelDescription, 
                        _vImageCVImageFormat_CopyConversionMatrix, _vImageCVImageFormat_Create, 
                        _vImageCVImageFormat_CreateWithCVPixelBuffer, _vImageCVImageFormat_GetAlphaHint, 
                        _vImageCVImageFormat_GetChannelCount, _vImageCVImageFormat_GetChannelDescription, 
@@ -50,19 +53,24 @@ exports:
                        _vImageConvert_16Fto16U, _vImageConvert_16Q12to16F, _vImageConvert_16Q12to16U, 
                        _vImageConvert_16Q12to8, _vImageConvert_16Q12toF, _vImageConvert_16SToF, 
                        _vImageConvert_16UTo12U, _vImageConvert_16UToF, _vImageConvert_16UToPlanar8, 
-                       _vImageConvert_16Uto16F, _vImageConvert_16Uto16Q12, _vImageConvert_420Yp10_CbCr10ToXRGB2101010W, 
-                       _vImageConvert_420Yp8_Cb8_Cr8ToARGB8888, _vImageConvert_420Yp8_CbCr8ToARGB8888, 
+                       _vImageConvert_16Uto16F, _vImageConvert_16Uto16Q12, _vImageConvert_420Yp10_CbCr10ToARGB16F, 
+                       _vImageConvert_420Yp10_CbCr10ToXRGB2101010W, _vImageConvert_420Yp8_Cb8_Cr8ToARGB8888, 
+                       _vImageConvert_420Yp8_CbCr8ToARGB8888, _vImageConvert_422CbYpCrYp10ToARGB16F, 
                        _vImageConvert_422CbYpCrYp10ToXRGB2101010W, _vImageConvert_422CbYpCrYp16ToARGB16U, 
                        _vImageConvert_422CbYpCrYp16ToARGB8888, _vImageConvert_422CbYpCrYp8ToARGB8888, 
                        _vImageConvert_422CbYpCrYp8_AA8ToARGB8888, _vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB16Q12, 
-                       _vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888, _vImageConvert_422Yp10_CbCr10ToXRGB2101010W, 
-                       _vImageConvert_422YpCbYpCr8ToARGB8888, _vImageConvert_444AYpCbCr16ToARGB16U, 
-                       _vImageConvert_444AYpCbCr16ToARGB8888, _vImageConvert_444AYpCbCr8ToARGB8888, 
-                       _vImageConvert_444CbYpCrA8ToARGB8888, _vImageConvert_444CrYpCb10ToARGB16Q12, 
-                       _vImageConvert_444CrYpCb10ToARGB8888, _vImageConvert_444CrYpCb8ToARGB8888, 
-                       _vImageConvert_444Yp10_CbCr10ToXRGB2101010W, _vImageConvert_444YpCbCr10ToXRGB2101010W, 
-                       _vImageConvert_8to16Q12, _vImageConvert_ARGB1555toARGB8888, 
-                       _vImageConvert_ARGB1555toPlanar8, _vImageConvert_ARGB1555toRGB565, 
+                       _vImageConvert_422CrYpCbYpCbYpCbYpCrYpCrYp10ToARGB8888, _vImageConvert_422Yp10_CbCr10ToARGB16F, 
+                       _vImageConvert_422Yp10_CbCr10ToXRGB2101010W, _vImageConvert_422YpCbYpCr8ToARGB8888, 
+                       _vImageConvert_444AYpCbCr16ToARGB16U, _vImageConvert_444AYpCbCr16ToARGB8888, 
+                       _vImageConvert_444AYpCbCr8ToARGB8888, _vImageConvert_444CbYpCrA8ToARGB8888, 
+                       _vImageConvert_444CrYpCb10ToARGB16Q12, _vImageConvert_444CrYpCb10ToARGB8888, 
+                       _vImageConvert_444CrYpCb8ToARGB8888, _vImageConvert_444Yp10_CbCr10ToARGB16F, 
+                       _vImageConvert_444Yp10_CbCr10ToXRGB2101010W, _vImageConvert_444YpCbCr10ToARGB16F, 
+                       _vImageConvert_444YpCbCr10ToXRGB2101010W, _vImageConvert_8to16Q12, 
+                       _vImageConvert_ARGB1555toARGB8888, _vImageConvert_ARGB1555toPlanar8, 
+                       _vImageConvert_ARGB1555toRGB565, _vImageConvert_ARGB16FTo420Yp10_CbCr10, 
+                       _vImageConvert_ARGB16FTo422CbYpCrYp10, _vImageConvert_ARGB16FTo422Yp10_CbCr10, 
+                       _vImageConvert_ARGB16FTo444Yp10_CbCr10, _vImageConvert_ARGB16FTo444YpCbCr10, 
                        _vImageConvert_ARGB16Q12To422CrYpCbYpCbYpCbYpCrYpCrYp10, _vImageConvert_ARGB16Q12To444CrYpCb10, 
                        _vImageConvert_ARGB16Q12ToARGB2101010, _vImageConvert_ARGB16Q12ToRGBA1010102, 
                        _vImageConvert_ARGB16Q12ToXRGB2101010, _vImageConvert_ARGB16UTo422CbYpCrYp16, 

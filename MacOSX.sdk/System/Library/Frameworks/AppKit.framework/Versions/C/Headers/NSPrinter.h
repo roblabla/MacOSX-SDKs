@@ -1,7 +1,7 @@
 /*
 	NSPrinter.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,7 @@
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
+#import <AppKit/NSGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,6 +22,9 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
     NSPrinterTableNotFound = 1,
     NSPrinterTableError = 2
 };
+
+typedef NSString * NSPrinterTypeName NS_EXTENSIBLE_STRING_ENUM;
+typedef NSString * NSPrinterPaperName NS_EXTENSIBLE_STRING_ENUM;
 
 @interface NSPrinter: NSObject<NSCopying, NSCoding> {
     @private
@@ -39,11 +43,11 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
 
 /* Return an array of strings that contain the human-readable names of all available printers.
 */
-+ (NSArray<NSString *> *)printerNames;
+@property (class, readonly, copy) NSArray<NSString *> *printerNames;
 
 /* Return an array of strings that contain the human-readable descriptions of the makes and models of all available printers. The array may contain fewer entries than the array that would be returned by an invocation of +printerNames.
 */
-+ (NSArray<NSString *> *)printerTypes;
+@property (class, readonly, copy) NSArray<NSPrinterTypeName> *printerTypes;
 
 /* Given a human-readable printer name of the sort that appears in a Print panel's "Printer:" popup menu, return an instance of NSPrinter if the named printer is available, nil otherwise.
 */
@@ -51,7 +55,7 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
 
 /* Given a string of the sort returned by +printerTypes:, return the first printer whose description matches, or nil if no available printer matches.
 */
-+ (nullable NSPrinter *)printerWithType:(NSString *)type;
++ (nullable NSPrinter *)printerWithType:(NSPrinterTypeName)type;
 
 /* Return the printer's human-readable name, or an empty string for failure.
 */
@@ -59,7 +63,7 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
 
 /* Return a human-readable description of the printer's make and model, or an empty string for failure.
 */
-@property (readonly, copy) NSString *type;
+@property (readonly, copy) NSPrinterTypeName type;
 
 /* Return the PostScript language level of the printer if it is a PostScript printer, or 0 if it is not a PostScript printer or for failure.
 */
@@ -67,11 +71,11 @@ typedef NS_ENUM(NSUInteger, NSPrinterTableStatus) {
 
 /* Given a valid paper name, return the corresponding paper size in points, or NSZeroSize for failure.
 */
-- (NSSize)pageSizeForPaper:(NSString *)paperName;
+- (NSSize)pageSizeForPaper:(NSPrinterPaperName)paperName;
 
 /* Return a dictionary that describes the printing device using entries keyed by the NSDevice... strings declared in NSGraphics.h. The only entry that is guaranteed to exist in the returned dictionary is NSDeviceIsPrinter.
 */
-@property (readonly, copy) NSDictionary<NSString *, id> *deviceDescription;
+@property (readonly, copy) NSDictionary<NSDeviceDescriptionKey, id> *deviceDescription;
 
 @end
 

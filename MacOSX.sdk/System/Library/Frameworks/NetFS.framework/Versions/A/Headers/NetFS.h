@@ -387,7 +387,7 @@ NetFSMountURLCancel(AsyncRequestID requestID) 	__OSX_AVAILABLE_STARTING(__MAC_10
  * return "smb" which the caller can use to build a URL:
  * "smb://hostname".
  *
- * We start with a list of likely protocols, e.g. "smb", "afp", "nfs"
+ * We start with a list of likely protocols, e.g. "smb", "afp"
  * and initiate a TCP connection to the port for each protocol. These
  * connect attempts run in parallel.  Then wait in a select() call to
  * see which connections are successful, or refused, or do not respond.

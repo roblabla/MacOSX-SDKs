@@ -1,7 +1,7 @@
 //
 //  SCNJavascript.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -52,6 +52,6 @@ NS_ASSUME_NONNULL_BEGIN
  aNode.transform = {m11:1, m12:0, m13:0 ... m44:1};
  */
 
-FOUNDATION_EXTERN void SCNExportJavaScriptModule(JSContext *context) API_AVAILABLE(macosx(10.10));
+FOUNDATION_EXTERN void SCNExportJavaScriptModule(JSContext *context) API_AVAILABLE(macos(10.10));
 
 NS_ASSUME_NONNULL_END

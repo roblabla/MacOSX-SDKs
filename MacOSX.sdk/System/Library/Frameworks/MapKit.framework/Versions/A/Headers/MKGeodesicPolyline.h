@@ -16,8 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED
 @interface MKGeodesicPolyline : MKPolyline
 
-+ (instancetype)polylineWithPoints:(MKMapPoint *)points count:(NSUInteger)count;
-+ (instancetype)polylineWithCoordinates:(CLLocationCoordinate2D *)coords count:(NSUInteger)count;
++ (instancetype)polylineWithPoints:(const MKMapPoint *)points count:(NSUInteger)count;
++ (instancetype)polylineWithCoordinates:(const CLLocationCoordinate2D *)coords count:(NSUInteger)count;
 
 @end
 

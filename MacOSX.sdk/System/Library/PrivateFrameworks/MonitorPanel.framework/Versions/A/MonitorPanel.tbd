@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F4775810-525E-37D2-A541-77B1F583931F', 'x86_64: A038154C-A9C1-3B2E-B4B2-D6CECF902808' ]
+uuids:           [ 'i386: 540F63F8-C112-3F1E-9AA4-3723F69AAF9B', 'x86_64: C8B242EE-C7AC-30A6-BB95-714A55CABBA7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MonitorPanel.framework/Versions/A/MonitorPanel
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _MPDisplay._accessLock, _MPDisplay._aliasID, _MPDisplay._allModes, 

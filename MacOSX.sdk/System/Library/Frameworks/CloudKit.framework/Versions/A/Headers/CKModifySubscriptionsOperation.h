@@ -10,7 +10,7 @@
 @class CKSubscription;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.10), ios(8.0)) __WATCHOS_PROHIBITED
 @interface CKModifySubscriptionsOperation : CKDatabaseOperation
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;

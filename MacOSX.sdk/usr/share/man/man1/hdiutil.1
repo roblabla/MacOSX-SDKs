@@ -1,5 +1,5 @@
-.Dd 13 Jun 2016
-.\" 10.12 revision: macOS, apfs, srm, fullfsync, pmap -diagnostic, -atomic/-noatomic
+.Dd 01 Sep 2016
+.\" 10.13 revision: so far, minor tense changes
 .\" preview changes to this file with 'man Documentation/hdiutil.1'
 .Os "macOS"
 .Dt HDIUTIL 1
@@ -2312,7 +2312,7 @@ These images are also supported in-kernel, but will not work on any
 earlier versions of the OS.
 .Pp
 macOS 10.12 included a pre-release version of the Apple File System
-called APFS which is meant for evaluation and development purposes only.
+called APFS which was meant for evaluation and development purposes only.
 Files stored in APFS-based images may not be accessible in future
 releases of macOS, and won't work in past ones.  All data to be stored
 in APFS volumes should be backed up prior to using APFS and regularly
@@ -2350,8 +2350,8 @@ recognizes the filesystems.  They can also be burned with
 .Ns Sy burn .
 .\"
 .Sh WHAT'S NEW
-macOS 10.12 introduces the pre-release APFS for evaluation (see COMPATIBILITY
-above).  10.12 also adds an option to disable atomic copying during image from
+macOS 10.12 introduced the pre-release APFS for evaluation (see COMPATIBILITY
+above).  10.12 also added an option to disable atomic copying during image from
 folder operations, 
 .Fl noatomic Ns ,
 which may result in slightly faster image creation.

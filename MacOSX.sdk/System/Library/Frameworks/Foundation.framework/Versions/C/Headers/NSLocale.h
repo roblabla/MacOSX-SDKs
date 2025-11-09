@@ -1,5 +1,5 @@
 /*	NSLocale.h
-	Copyright (c) 2003-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2003-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -79,14 +79,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSLocale (NSLocaleCreation)
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
-@property (class, readonly, strong) NSLocale *autoupdatingCurrentLocale NS_AVAILABLE(10_5, 2_0); // generally you should use this property
+@property (class, readonly, strong) NSLocale *autoupdatingCurrentLocale API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)); // generally you should use this property
 
 @property (class, readonly, copy) NSLocale *currentLocale;	// an object representing the user's current locale
 @property (class, readonly, copy) NSLocale *systemLocale;	// the default generic root locale with little localization
-#endif
 
-+ (instancetype)localeWithLocaleIdentifier:(NSString *)ident NS_AVAILABLE(10_6, 4_0);
++ (instancetype)localeWithLocaleIdentifier:(NSString *)ident API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 - (instancetype)init NS_UNAVAILABLE;     /* do not invoke; not a valid initializer for this class */
 
@@ -94,15 +92,13 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSLocale (NSLocaleGeneralInfo)
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, copy) NSArray<NSString *> *availableLocaleIdentifiers;
 @property (class, readonly, copy) NSArray<NSString *> *ISOLanguageCodes;
 @property (class, readonly, copy) NSArray<NSString *> *ISOCountryCodes;
 @property (class, readonly, copy) NSArray<NSString *> *ISOCurrencyCodes;
-@property (class, readonly, copy) NSArray<NSString *> *commonISOCurrencyCodes NS_AVAILABLE(10_5, 2_0);
+@property (class, readonly, copy) NSArray<NSString *> *commonISOCurrencyCodes API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
-@property (class, readonly, copy) NSArray<NSString *> *preferredLanguages NS_AVAILABLE(10_5, 2_0); // note that this list does not indicate what language the app is actually running in; the NSBundle.mainBundle object determines that at launch and knows that information
-#endif
+@property (class, readonly, copy) NSArray<NSString *> *preferredLanguages API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0)); // note that this list does not indicate what language the app is actually running in; the NSBundle.mainBundle object determines that at launch and knows that information
 
 + (NSDictionary<NSString *, NSString *> *)componentsFromLocaleIdentifier:(NSString *)string;
 + (NSString *)localeIdentifierFromComponents:(NSDictionary<NSString *, NSString *> *)dict;
@@ -110,8 +106,8 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSString *)canonicalLocaleIdentifierFromString:(NSString *)string;
 + (NSString *)canonicalLanguageIdentifierFromString:(NSString *)string;
 
-+ (nullable NSString *)localeIdentifierFromWindowsLocaleCode:(uint32_t)lcid NS_AVAILABLE(10_6, 4_0);
-+ (uint32_t)windowsLocaleCodeFromLocaleIdentifier:(NSString *)localeIdentifier NS_AVAILABLE(10_6, 4_0);
++ (nullable NSString *)localeIdentifierFromWindowsLocaleCode:(uint32_t)lcid API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
++ (uint32_t)windowsLocaleCodeFromLocaleIdentifier:(NSString *)localeIdentifier API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 typedef NS_ENUM(NSUInteger, NSLocaleLanguageDirection) {
     NSLocaleLanguageDirectionUnknown = kCFLocaleLanguageDirectionUnknown,
@@ -121,13 +117,13 @@ typedef NS_ENUM(NSUInteger, NSLocaleLanguageDirection) {
     NSLocaleLanguageDirectionBottomToTop = kCFLocaleLanguageDirectionBottomToTop
 };
 
-+ (NSLocaleLanguageDirection)characterDirectionForLanguage:(NSString *)isoLangCode NS_AVAILABLE(10_6, 4_0);
-+ (NSLocaleLanguageDirection)lineDirectionForLanguage:(NSString *)isoLangCode NS_AVAILABLE(10_6, 4_0);
++ (NSLocaleLanguageDirection)characterDirectionForLanguage:(NSString *)isoLangCode API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
++ (NSLocaleLanguageDirection)lineDirectionForLanguage:(NSString *)isoLangCode API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 
 
-FOUNDATION_EXPORT NSNotificationName const NSCurrentLocaleDidChangeNotification NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSNotificationName const NSCurrentLocaleDidChangeNotification API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 
 FOUNDATION_EXPORT NSLocaleKey const NSLocaleIdentifier;		// NSString
@@ -144,11 +140,11 @@ FOUNDATION_EXPORT NSLocaleKey const NSLocaleDecimalSeparator;	// NSString
 FOUNDATION_EXPORT NSLocaleKey const NSLocaleGroupingSeparator;	// NSString
 FOUNDATION_EXPORT NSLocaleKey const NSLocaleCurrencySymbol;      // NSString
 FOUNDATION_EXPORT NSLocaleKey const NSLocaleCurrencyCode;	// NSString
-FOUNDATION_EXPORT NSLocaleKey const NSLocaleCollatorIdentifier NS_AVAILABLE(10_6, 4_0);  // NSString
-FOUNDATION_EXPORT NSLocaleKey const NSLocaleQuotationBeginDelimiterKey NS_AVAILABLE(10_6, 4_0);	// NSString
-FOUNDATION_EXPORT NSLocaleKey const NSLocaleQuotationEndDelimiterKey NS_AVAILABLE(10_6, 4_0);	// NSString
-FOUNDATION_EXPORT NSLocaleKey const NSLocaleAlternateQuotationBeginDelimiterKey NS_AVAILABLE(10_6, 4_0);	// NSString
-FOUNDATION_EXPORT NSLocaleKey const NSLocaleAlternateQuotationEndDelimiterKey NS_AVAILABLE(10_6, 4_0);	// NSString
+FOUNDATION_EXPORT NSLocaleKey const NSLocaleCollatorIdentifier API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));  // NSString
+FOUNDATION_EXPORT NSLocaleKey const NSLocaleQuotationBeginDelimiterKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));	// NSString
+FOUNDATION_EXPORT NSLocaleKey const NSLocaleQuotationEndDelimiterKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));	// NSString
+FOUNDATION_EXPORT NSLocaleKey const NSLocaleAlternateQuotationBeginDelimiterKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));	// NSString
+FOUNDATION_EXPORT NSLocaleKey const NSLocaleAlternateQuotationEndDelimiterKey API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));	// NSString
 
 
 #if !defined(NS_CALENDAR_ENUM_DEPRECATED)

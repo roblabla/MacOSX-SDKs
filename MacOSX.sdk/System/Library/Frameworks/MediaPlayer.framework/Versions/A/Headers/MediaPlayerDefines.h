@@ -5,37 +5,39 @@
 //  Copyright 2008 Apple, Inc. All rights reserved.
 //
 
+#import <Availability.h>
+#import <TargetConditionals.h>
+
 #ifdef __cplusplus
 #define MP_EXTERN extern "C" __attribute__((visibility ("default")))
 #else
-#define MP_EXTERN     extern __attribute__((visibility ("default")))
+#define MP_EXTERN extern __attribute__((visibility ("default")))
 #endif
 
-#define MP_EXTERN_CLASS                       __attribute__((visibility("default")))
-#define MP_EXTERN_CLASS_AVAILABLE(version)    __attribute__((visibility("default"))) NS_CLASS_AVAILABLE(NA, version)
-#define MP_EXTERN_CLASS_AVAILABLE_X(ios, mac) __attribute__((visibility("default"))) NS_CLASS_AVAILABLE(mac, ios)
+#define MP_API(...) __API_AVAILABLE(__VA_ARGS__)
+#define MP_DEPRECATED(...) __API_DEPRECATED(__VA_ARGS__)
+#define MP_UNAVAILABLE(...) __API_UNAVAILABLE(__VA_ARGS__)
+#define MP_DEPRECATED_WITH_REPLACEMENT(...) __API_DEPRECATED_WITH_REPLACEMENT(__VA_ARGS__)
 
-#define MP_API __attribute__((visibility("default"))) __API_AVAILABLE
-#define MP_DEPRECATED __attribute__((visibility("default"))) __API_DEPRECATED
-#define MP_DEPRECATED_WITH_REPLACEMENT __attribute__((visibility("default"))) __API_DEPRECATED_WITH_REPLACEMENT
-#define MP_UNAVAILABLE __attribute__((visibility("default"))) __API_UNAVAILABLE
+#pragma mark - Prohibited
+
+#define __MP_PROHIBITED_PLATFORM_macos macos,unavailable
+#define __MP_PROHIBITED_PLATFORM_macosx macosx,unavailable
+#define __MP_PROHIBITED_PLATFORM_ios ios,unavailable
+#define __MP_PROHIBITED_PLATFORM_watchos watchos,unavailable
+#define __MP_PROHIBITED_PLATFORM_tvos tvos,unavailable
+#define __MP_PROHIBITED_PLATFORM_bridgeos bridgeos,unavailable
 
 #if __has_include(<AvailabilityProhibitedInternal.h>)
-#define MP_API_IOS_AVAILABLE_TVOS_PROHIBITED(iosver, macosver, tvosver) MP_API(ios(iosver), tvos(tvosver), macos(macosver)) __TVOS_PROHIBITED
-#define MP_API_IOS_AVAILABLE_MACOS_TVOS_PROHIBITED(iosver, macosver, tvosver) MP_API(ios(iosver), tvos(tvosver), macos(macosver)) __TVOS_PROHIBITED
-#define MP_API_IOS_DEPRECATED_TVOS_PROHIBITED(iosintro, iosdep, macosintro, macosdep, tvosintro, tvosdep) \
-    MP_DEPRECATED("No longer supported", ios(iosintro, iosdep), tvos(tvosintro, tvosdep), macos(macosintro, macosdep)) __TVOS_PROHIBITED
-#define MP_API_IOS_DEPRECATED_MACOS_TVOS_PROHIBITED(iosintro, iosdep, macosintro, macosdep, tvosintro, tvosdep) \
-    MP_DEPRECATED("No longer supported", ios(iosintro, iosdep), tvos(tvosintro, tvosdep), macos(macosintro, macosdep)) __TVOS_PROHIBITED
-#define MP_API_IOS_DEPRECATED_WITH_REPLACEMENT_MACOS_TVOS_PROHIBITED(replacement, iosintro, iosdep, macosintro, macosdep, tvosintro, tvosdep) \
-    MP_DEPRECATED_WITH_REPLACEMENT(replacement, ios(iosintro, iosdep), tvos(tvosintro, tvosdep), macos(macosintro, macosdep)) __TVOS_PROHIBITED
+#define __MP_P(x)
 #else
-#define MP_API_IOS_AVAILABLE_TVOS_PROHIBITED(iosver, macosver, tvosver) MP_API(ios(iosver), macos(macosver)) __TVOS_PROHIBITED
-#define MP_API_IOS_AVAILABLE_MACOS_TVOS_PROHIBITED(iosver, macosver, tvosver) MP_API(ios(iosver)) __TVOS_PROHIBITED __OS_AVAILABILITY(macosx,unavailable)
-#define MP_API_IOS_DEPRECATED_TVOS_PROHIBITED(iosintro, iosdep, macosintro, macosdep, tvosintro, tvosdep) \
-    MP_DEPRECATED("No longer supported", ios(iosintro, iosdep), macos(macosintro, macosdep)) __TVOS_PROHIBITED
-#define MP_API_IOS_DEPRECATED_MACOS_TVOS_PROHIBITED(iosintro, iosdep, macosintro, macosdep, tvosintro, tvosdep) \
-    MP_DEPRECATED("No longer supported", ios(iosintro, iosdep)) __TVOS_PROHIBITED __OS_AVAILABILITY(macosx,unavailable)
-#define MP_API_IOS_DEPRECATED_WITH_REPLACEMENT_MACOS_TVOS_PROHIBITED(replacement, iosintro, iosdep, macosintro, macosdep, tvosintro, tvosdep) \
-    MP_DEPRECATED_WITH_REPLACEMENT(replacement, ios(iosintro, iosdep)) __TVOS_PROHIBITED __OS_AVAILABILITY(macosx,unavailable)
+#define __MP_P(x) __attribute__((availability(__MP_PROHIBITED_PLATFORM_##x)))
 #endif
+
+#define __MP_PROHIBITED1(x) __MP_P(x)
+#define __MP_PROHIBITED2(x,y) __MP_P(x) __MP_P(y)
+#define __MP_PROHIBITED3(x,y,z) __MP_PROHIBITED2(x,y) __MP_P(z)
+#define __MP_PROHIBITED4(x,y,z,t) __MP_PROHIBITED3(x,y) __MP_P(b)
+#define __MP_PROHIBITED_GET_MACRO(_1,_2,_3,_4,NAME,...) NAME
+
+#define MP_PROHIBITED(...) __MP_PROHIBITED_GET_MACRO(__VA_ARGS__,__MP_PROHIBITED4,__MP_PROHIBITED3,__MP_PROHIBITED2,__MP_PROHIBITED1)(__VA_ARGS__)

@@ -76,6 +76,7 @@
 #include <sys/lock.h>
 #include <sys/param.h>
 #include <sys/event.h>
+#include <sys/time.h>
 #include <mach/boolean.h>
 
 

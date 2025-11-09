@@ -104,11 +104,11 @@ CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLInternalFormat __OSX_
 CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatCGBitmapInfo __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /* Pixel format compatibility flags */
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatQDCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatCGBitmapContextCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatCGImageCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLCompatibility __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLESCompatibility __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatQDCompatibility API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatCGBitmapContextCompatibility API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatCGImageCompatibility API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLCompatibility API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelFormatOpenGLESCompatibility API_AVAILABLE(ios(5.0), tvos(9.0)) API_UNAVAILABLE(macosx) __WATCHOS_PROHIBITED;
     
 /* This callback routine implements code to handle the functionality of CVPixelBufferFillExtendedPixels.  
    For custom pixel formats where you will never need to use that call, this is not required. */

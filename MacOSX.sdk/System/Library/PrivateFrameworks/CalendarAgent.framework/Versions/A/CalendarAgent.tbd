@@ -1,17 +1,15 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6FD914AD-3AB0-3079-BDE0-23DBF0BE7B78' ]
+uuids:           [ 'x86_64: 34A4B26B-D27E-3B7F-AE00-0DAB7A54BA8E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CalendarAgent.framework/Versions/A/CalendarAgent
-current-version: 384.0
-objc-constraint: none
+current-version: 399
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _CalAPSKey_Development, _CalAPSKey_PrincipalID, _CalAgentErrorDomain, 
-                       _CalAgentErrorGenerateStringVersion, _CalAgentExitStatusCode_AccountsMigrationNotComplete, 
-                       _CalAgentExitStatusCode_DatabaseResetRequired, _CalAgentExitStatusCode_NoCoreDataConnection, 
-                       _CalAgentExitStatusCode_Normal, _CalAgentExitStatusCode_NotLaunchedByLaunchd, 
-                       _CalAgentExitStatusCode_UnexpectedCompletionOfMainFunction, 
+    symbols:         [ _CalAgentErrorDomain, _CalAgentErrorGenerateStringVersion, 
+                       _CalAgentExitStatusCode_AccountsMigrationNotComplete, _CalAgentExitStatusCode_DatabaseResetRequired, 
+                       _CalAgentExitStatusCode_NoCoreDataConnection, _CalAgentExitStatusCode_Normal, 
+                       _CalAgentExitStatusCode_NotLaunchedByLaunchd, _CalAgentExitStatusCode_UnexpectedCompletionOfMainFunction, 
                        _CalAgentNS_ApplePushServiceConnection, _CalAgentNS_Log, _CalAgentNS_Log_Accounts, 
                        _CalAgentNS_Log_Operations, _CalAgentNS_Log_Push, _CalAgentNS_Log_Refresh, 
                        _CalAgentNS_Log_XPC, _CalAgentNS_Preference_DefaultEventCalendar, 

@@ -2,12 +2,12 @@
  *  CVBase.h
  *  CoreVideo
  *
- *  Copyright (c) 2004-2016 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
  *
  */
  
  /*! @header CVBase.h
-	@copyright 2004-2015 Apple Inc. All rights reserved.
+	@copyright 2004-2017 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later, and iOS 4.0 or later
     @discussion Here you can find the type declarations for CoreVideo. CoreVideo uses a CVTimeStamp structure to store video display time stamps.
 */
@@ -22,6 +22,26 @@
 
 #if TARGET_OS_WIN32
 #pragma warning (disable: 4068)		// ignore unknown pragmas
+#endif
+
+#ifndef API_AVAILABLE
+#define API_AVAILABLE(...)
+#endif
+
+#ifndef API_UNAVAILABLE
+#define API_UNAVAILABLE(...)
+#endif
+
+#ifndef __IOS_PROHIBITED
+#define __IOS_PROHIBITED
+#endif
+
+#ifndef __TVOS_PROHIBITED
+#define __TVOS_PROHIBITED
+#endif
+
+#ifndef __WATCHOS_PROHIBITED
+#define __WATCHOS_PROHIBITED
 #endif
 
 #ifndef AVAILABLE_MAC_OS_X_VERSION_10_6_AND_LATER
@@ -56,12 +76,20 @@
 #define __AVAILABILITY_INTERNAL__MAC_10_12        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
+#ifndef __AVAILABILITY_INTERNAL__MAC_10_13
+#define __AVAILABILITY_INTERNAL__MAC_10_13        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_9_0
 #define __AVAILABILITY_INTERNAL__IPHONE_9_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
 #ifndef __AVAILABILITY_INTERNAL__IPHONE_10_0
 #define __AVAILABILITY_INTERNAL__IPHONE_10_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
+#endif
+
+#ifndef __AVAILABILITY_INTERNAL__IPHONE_11_0
+#define __AVAILABILITY_INTERNAL__IPHONE_11_0        __AVAILABILITY_INTERNAL_WEAK_IMPORT
 #endif
 
 #include <CoreFoundation/CFBase.h>
@@ -77,6 +105,7 @@ extern "C" {
 #define COREVIDEO_SUPPORTS_DISPLAYLINK 	(TARGET_OS_MAC && ! TARGET_OS_IPHONE)
 #define COREVIDEO_SUPPORTS_IOSURFACE	(TARGET_OS_IPHONE ? TARGET_OS_EMBEDDED : (TARGET_OS_MAC && ((MAC_OS_X_VERSION_MAX_ALLOWED >= 1060))))
 #define COREVIDEO_SUPPORTS_IOSURFACE_PREFETCH    (TARGET_OS_EMBEDDED && (__IPHONE_OS_VERSION_MIN_REQUIRED >= 80300))
+#define COREVIDEO_USE_IOSURFACEREF		(TARGET_OS_IPHONE)
 #define COREVIDEO_SUPPORTS_METAL        (COREVIDEO_SUPPORTS_IOSURFACE && (TARGET_OS_IPHONE || (MAC_OS_X_VERSION_MIN_REQUIRED >= 101100)) && (! TARGET_OS_WATCH))
 
 #define COREVIDEO_USE_DERIVED_ENUMS_FOR_CONSTANTS	(__cplusplus && __cplusplus >= 201103L && (__has_extension(cxx_strong_enums) || __has_feature(objc_fixed_enum))) || (!__cplusplus && __has_feature(objc_fixed_enum))
@@ -111,6 +140,8 @@ extern "C" {
 #define CV_NULLABLE
 #define CV_NONNULL
 #endif
+	
+#define CV_INTERNAL __attribute__((visibility("hidden")))
 
 #if TARGET_OS_WIN32 && defined(CV_BUILDING_CV) && defined(__cplusplus)
 #define CV_EXPORT extern "C" __declspec(dllexport) 
@@ -121,7 +152,7 @@ extern "C" {
 #elif TARGET_OS_WIN32
 #define CV_EXPORT extern __declspec(dllimport) 
 #else
-#define CV_EXPORT CF_EXPORT 
+#define CV_EXPORT __attribute__((visibility("default"))) CF_EXPORT 
 #endif
 
 #define CV_INLINE CF_INLINE

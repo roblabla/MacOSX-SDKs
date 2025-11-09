@@ -2,7 +2,7 @@
 //  INPerson.h
 //  Intents
 //
-//  Copyright © 2016 Apple. All rights reserved.
+//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macosx(10.12), ios(10.0))
+API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.2))
 @interface INPerson : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -42,6 +42,7 @@ API_AVAILABLE(macosx(10.12), ios(10.0))
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *contactIdentifier;
 
 // This property can be set to the app's identifier for this person
+// It is also used as the vocabulary identifier for this person
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *customIdentifier;
 
 // This person's relationship to the user

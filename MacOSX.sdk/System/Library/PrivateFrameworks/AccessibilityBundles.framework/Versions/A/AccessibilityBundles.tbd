@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FDE33402-5832-3DC6-90F4-8F4A3B6CA164', 'x86_64: 474BD458-2B87-3D53-ABE9-C4B7FBF618E3' ]
+uuids:           [ 'i386: F4CD9D4F-39C5-3FA0-AD26-8F1D75A951D1', 'x86_64: B5C29DA9-B1EB-3149-9ED1-A504CDD229A7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AccessibilityBundles.framework/Versions/A/AccessibilityBundles
-current-version: 12.0
-objc-constraint: none
+current-version: 12
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _AXBBundleManager._blacklistedBundles, _AXBBundleManager._bundlesWithoutAXBundles, 
@@ -21,15 +20,16 @@ exports:
                        _AXBValidationShouldCrashOnErrors, _AXBValidationShouldLogErrors, 
                        _AXBValidationShouldReportErrors, __AXBLocalizedString, __AXBLocalizedStringGlobal, 
                        __AXBStarRatingEqual, __AXBValidationCheckClassConformsToProtocol, 
-                       __AXBValidationCheckClassMethod, __AXBValidationCheckClassName, 
-                       __AXBValidationCheckClassProtocolMethod, __AXBValidationCheckExpression, 
-                       __AXBValidationCheckInstanceMethod, __AXBValidationCheckInstanceMethodComplete, 
-                       __AXBValidationCheckIsKindOfClass, __AXBValidationCheckIvar, 
-                       __AXBValidationCheckIvarType, __AXBValidationCheckProperty, 
+                       __AXBValidationCheckClassMethod, __AXBValidationCheckClassMethodComplete, 
+                       __AXBValidationCheckClassName, __AXBValidationCheckClassProtocolMethod, 
+                       __AXBValidationCheckExpression, __AXBValidationCheckInstanceMethod, 
+                       __AXBValidationCheckInstanceMethodComplete, __AXBValidationCheckIsKindOfClass, 
+                       __AXBValidationCheckIvar, __AXBValidationCheckIvarType, __AXBValidationCheckProperty, 
                        __AXBValidationCheckProtocolProperty, __AXBValidationCheckSymbol, 
                        __AbortOnValidationError, __ForceValidationTests, __RunningUnitTests, 
                        ___AXBCastAsClass, ___AXBCastAsForwardedClass, ___AXBCastAsForwardedSafeCategory, 
-                       ___AXBCastAsProtocol, ___AXBCastAsSafeCategory, ___AXBValidationCheckInstanceMethodArguments ]
+                       ___AXBCastAsProtocol, ___AXBCastAsSafeCategory, ___AXBValidationCheckClassMethodArguments, 
+                       ___AXBValidationCheckInstanceMethodArguments ]
     objc-classes:    [ _AXBBundleManager, _AXBNSBundleAccessibility, _AXBSafeCategory, 
                        _AXBSafeCategory__NSObject, _AXBWeakReferenceContainer, ___AXBNSBundleAccessibility_super ]
 ...

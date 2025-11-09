@@ -3,26 +3,31 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2012-2015 Apple Inc. All rights reserved.
+	Copyright 2012-2017 Apple Inc. All rights reserved.
 
 */
 
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVMediaFormat.h>
 #import <CoreMedia/CMFormatDescription.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * AVOutputSettingsPreset NS_STRING_ENUM;
 
 /*
  Use these identifiers with +[AVOutputSettingsAssistant outputSettingsAssistantWithPreset:].
  
  When source format information is supplied with these presets, the resulting video settings will not scale up the video from a smaller size.
  */
-AVF_EXPORT NSString * const AVOutputSettingsPreset640x480		NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString * const AVOutputSettingsPreset960x540   	NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString * const AVOutputSettingsPreset1280x720  	NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString * const AVOutputSettingsPreset1920x1080		NS_AVAILABLE(10_9, 7_0);
-AVF_EXPORT NSString * const AVOutputSettingsPreset3840x2160		NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset640x480		NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset960x540   	NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1280x720  	NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset1920x1080		NS_AVAILABLE(10_9, 7_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPreset3840x2160		NS_AVAILABLE(10_10, 9_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080	NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160	NS_AVAILABLE(10_13, 11_0);
 
 @class AVOutputSettingsAssistantInternal;
 
@@ -54,7 +59,7 @@ AV_INIT_UNAVAILABLE
  
 		On iOS, the returned array may be different between different device models.
  */
-+ (NSArray<NSString *> *)availableOutputSettingsPresets NS_AVAILABLE(10_10, 7_0);
++ (NSArray<AVOutputSettingsPreset> *)availableOutputSettingsPresets NS_AVAILABLE(10_10, 7_0);
 
 /*!
 	@method outputSettingsAssistantWithPreset:
@@ -69,7 +74,7 @@ AV_INIT_UNAVAILABLE
  
 		Use +availableOutputSettingsPresets to get a list of presets identifiers that can be used with this method.
  */
-+ (nullable instancetype)outputSettingsAssistantWithPreset:(NSString *)presetIdentifier;
++ (nullable instancetype)outputSettingsAssistantWithPreset:(AVOutputSettingsPreset)presetIdentifier;
 
 /*!
 	@property audioSettings
@@ -96,7 +101,7 @@ AV_INIT_UNAVAILABLE
 	@discussion
 		Use UTTypeCopyPreferredTagWithClass / kUTTagClassFilenameExtension to get a suitable file extension for a given file type.
  */
-@property (nonatomic, readonly) NSString *outputFileType;
+@property (nonatomic, readonly) AVFileType outputFileType;
 
 @end
 

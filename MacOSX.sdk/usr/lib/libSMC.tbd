@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F933DE8B-B13C-35DF-B895-609C2B803B66' ]
+uuids:           [ 'x86_64: CC8F972D-482B-36E2-8695-DBED1BEC672F' ]
 platform:        macosx
 install-name:    /usr/lib/libSMC.dylib
-current-version: 0.0
-compatibility-version: 0.0
+current-version: 0
+compatibility-version: 0
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
@@ -14,7 +14,9 @@ exports:
                        _SMCMakeUInt32Key, _SMCOpenConnection, _SMCProgramAccum, _SMCProgramAccum1Channel, 
                        _SMCProgramAccumDefaults, _SMCProgramAccumWithoutReset, _SMCReadKey, 
                        _SMCReadKeyAsNumeric, _SMCReadKeyAsNumericWithKnownKeyInfo, 
-                       _SMCReadKeyWithKnownSize, _SMCSetAccum1msChannels, _SMCSetAccum1secChannels, 
+                       _SMCReadKeyWithKnownSize, _SMCRegisterForNotification, _SMCRegisterForSubTypeNotification, 
+                       _SMCRequestMacOSWakeFromAP, _SMCSetAccum1msChannels, _SMCSetAccum1secChannels, 
                        _SMCSetAccumBitShift, _SMCSetAccumMode, _SMCStartAccum, _SMCStopAccum, 
-                       _SMCUInt32ToString, _SMCWriteKey, _SMCWriteKeyAsNumeric, _SMCWriteKeyWithKnownSize ]
+                       _SMCUInt32ToString, _SMCUnregisterForNotification, _SMCWriteKey, 
+                       _SMCWriteKeyAsNumeric, _SMCWriteKeyWithKnownSize ]
 ...

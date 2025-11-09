@@ -17,6 +17,7 @@
 #import <MediaPlayer/MPMediaQuerySection.h>
 #import <MediaPlayer/MPMoviePlayerController.h>
 #import <MediaPlayer/MPMoviePlayerViewController.h>
+#import <MediaPlayer/MPMusicPlayerApplicationController.h>
 #import <MediaPlayer/MPMusicPlayerController.h>
 #import <MediaPlayer/MPMusicPlayerQueueDescriptor.h>
 #import <MediaPlayer/MPPlayableContentDataSource.h>
@@ -25,6 +26,7 @@
 #import <MediaPlayer/MPPlayableContentManagerContext.h>
 #import <MediaPlayer/MPVolumeSettings.h>
 #import <MediaPlayer/MPVolumeView.h>
+#import <MediaPlayer/NSUserActivity+MediaPlayerAdditions.h>
 #endif
 
 #import <MediaPlayer/AVFoundation+MPNowPlayingInfoLanguageOptionAdditions.h>

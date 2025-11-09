@@ -222,27 +222,14 @@ if(   stringDescriptor != NULL
 #include <IOKit/pwr_mgt/RootDomain.h>
 #include <kern/thread_call.h>
 
-// The following are definitions for errata properties needed for different devices.  This
-// should be but in the dictionary of the IOUSBHostDevice in question.  This can be achieved
-// by using the AppleUSBHostMergeProperties class and having an IOProviderMergeProperties dictionary
-// with the required properties.
-
-// This property allows a device to specify a configuration value of 0 in its configuration
-// descriptor.  This does not follow the spec, but we will allow it in order to get the device
-// to work.  The property should be a Boolean
-//
-#define kAllowConfigValueOfZero         "kAllowZeroConfigValue"
-#define kAllowNumConfigsOfZero          "kAllowZeroNumConfigs"
-
 #define kUSBHostDeviceForceSuspend "kUSBHostDeviceForceSuspend"
 
 class AppleUSBHostController;
 class IOUSBHostInterface;
 class AppleUSBHostDeviceIdler;
 class AppleUSBHostRequestCompleter;
-class AppleUSBHostSynchronousRequestCompleter;
 class AppleUSBHostPort;
-class AppleUSBHostDescriptorCache;
+class AppleUSBDescriptorCache;
 class AppleUSBHostResources;
 class IOSimpleReporter;
 class IOStateReporter;
@@ -316,6 +303,7 @@ public:
     virtual bool attach(IOService* provider);
     virtual bool start(IOService* provider);
     virtual bool terminate(IOOptionBits options = 0);
+    virtual bool willTerminate(IOService* provider, IOOptionBits options);
     virtual void stop(IOService* provider);
     virtual void free(void);
 
@@ -600,7 +588,7 @@ protected:
 
 protected:
     bool                         _getDescriptorInProgress;
-    AppleUSBHostDescriptorCache* _descriptorCache;
+    AppleUSBDescriptorCache* _descriptorCache;
     
 #pragma mark Configuration, interface, and pipe management
 public:
@@ -689,10 +677,14 @@ protected:
     virtual IOReturn internalDeviceRequestGated(IOUSBHostPipe::tInternalControlRequestParameters& parameters);
 
     virtual IOReturn abortDeviceRequestsGated(IOService* forClient, IOOptionBits options, IOReturn withError);
+
+    virtual IOReturn getLPMExitLatencyGated(tUSBLinkState linkState, tUSBLPMExitLatency latencyType, uint32_t& latencyNs);
+    
+    virtual IOReturn updateLPMPolicyGated();
     
     // Protected pad slots for configuration, interface, and pipe management
-    OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 70);
-    OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 71);
+    OSMetaClassDeclareReservedUsed(IOUSBHostDevice, 70);
+    OSMetaClassDeclareReservedUsed(IOUSBHostDevice, 71);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 72);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 73);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 74);
@@ -749,8 +741,18 @@ public:
      */
     virtual IOBufferMemoryDescriptor* createIOBuffer(IOOptionBits options, mach_vm_size_t capacity);
 
+    /*!
+     * @brief       Calculate desired USB LPM Exit Latency
+     * @discussion  This method can be called to get various USB LPM Exit Latencies
+     * @param       linkState The link state we want to exit from
+     * @param       latencyType Desired type of Exit Latency to be calculated
+     * @param       latencyNs Calculated Exit Latency value in Nanoseconds
+     * @return      IOReturn result code
+     */
+    virtual IOReturn getLPMExitLatency(tUSBLinkState linkState, tUSBLPMExitLatency latencyType, uint32_t& latencyNs);
+
     // Public pad slots for miscellaneous
-    OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 80);
+    OSMetaClassDeclareReservedUsed(IOUSBHostDevice, 80);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 81);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 82);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 83);
@@ -784,7 +786,6 @@ protected:
     };
 
     AppleUSBHostRequestCompleter*            _requestCompleter;
-    AppleUSBHostSynchronousRequestCompleter* _synchronousRequestCompleter;
     AppleUSBHostDeviceIdler*                 _deviceIdler;
     tUSBHostDeviceAddress                    _address;
     IOUSBHostPipe*                           _pipeZero;
@@ -807,6 +808,9 @@ protected:
         OSSet*              _reports;
         IOStateReporter*    _powerStateReport;
         IOSimpleReporter*   _idlePolicyReport;
+        OSDictionary*       _lpmLatencyCache;
+        tUSBDeviceLPMStatus _lpmU1Status;
+        tUSBDeviceLPMStatus _lpmU2Status;
     };
 
     tExpansionData* _expansionData;
@@ -816,7 +820,8 @@ private:
     {
         kForcePowerTimeoutMs  = 1000ULL,      // Milliseconds
         kSuspendDeviceTimeout = 1000ULL,      // Milliseconds
-        kTerminationTimeout   = 5000ULL       // Milliseconds
+        kTerminationTimeout   = 5000ULL,      // Milliseconds
+        kDeviceAddressInvalid = 0xffff
     };
 };
 

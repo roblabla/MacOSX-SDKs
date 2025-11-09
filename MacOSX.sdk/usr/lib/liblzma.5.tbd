@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F1C46DE7-44C7-34CD-A9CF-56B204A31965', 'x86_64: 44BD0279-99DD-36B5-8A6E-C11432E2098D' ]
+uuids:           [ 'i386: 8A5C9679-430A-3A19-AF68-9D21BAC442C7', 'x86_64: 3D419A50-961F-37D2-8A01-3DC7AB7B8D18' ]
 platform:        macosx
 install-name:    /usr/lib/liblzma.5.dylib
 current-version: 6.3
-compatibility-version: 6.0
+compatibility-version: 6
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]

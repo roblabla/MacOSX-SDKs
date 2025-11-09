@@ -40,7 +40,7 @@ typedef enum {
  */
 
 // The accessory view is placed to the left of the search field. Setting to nil removes the view.
-@property (nonatomic, retain) NSView* accessoryView;
+@property (nonatomic, retain) IBOutlet NSView* accessoryView;
 
 // Modifies the selection behavior. Defaults to ABSingleValueSelection.
 //

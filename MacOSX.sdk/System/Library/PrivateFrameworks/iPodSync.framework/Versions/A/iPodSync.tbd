@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 778948F0-2E20-3214-9273-FA98E186C5C7', 'x86_64: 46F59095-BFD9-3967-B0C2-E2FA279019A6' ]
+uuids:           [ 'i386: 3BA60D59-A507-3D92-81D2-5C820FEF4AA3', 'x86_64: 3C99CC1F-C965-302E-BA73-BA58C4BAA03B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/iPodSync.framework/Versions/A/iPodSync
-current-version: 121.0
-objc-constraint: none
+current-version: 121
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _iPodCalendarFilter._needsUpdate, _iPodCalendarFilter._useAllCalendars, 

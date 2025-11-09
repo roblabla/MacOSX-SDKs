@@ -1,13 +1,15 @@
 /*
  NSAccessibilityProtocols.h
  Application Kit
- Copyright (c) 2013-2016, Apple Inc.
+ Copyright (c) 2013-2017, Apple Inc.
  All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
 #import <AppKit/NSAccessibilityConstants.h>
+#import <AppKit/NSAccessibilityCustomAction.h>
 
+@class NSAccessibilityCustomRotor;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -152,7 +154,10 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 - (nullable NSArray *)accessibilityColumns;
 - (nullable NSArray *)accessibilityVisibleColumns;
 - (nullable NSArray *)accessibilitySelectedColumns;
+
+// Using this API is discouraged.  This API will be deprecated in the next release.  Instead, use accessibilityHeader.
 - (nullable NSString *)accessibilityHeaderGroup;
+
 - (nullable NSArray *)accessibilitySelectedCells;
 - (nullable NSArray *)accessibilityVisibleCells;
 - (nullable NSArray *)accessibilityRowHeaderUIElements;
@@ -204,6 +209,29 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 @end
 
 
+#pragma mark  Element Loading
+
+API_AVAILABLE(macos(10.13)) @protocol NSAccessibilityElementLoading <NSObject>
+@required
+/*!
+ * @brief Loads the target element with the given load token.
+ * @returns An element that will be messaged for other accessibility
+ * properties. Assistive technologies may try to set accessibility
+ * focus on the returned element.
+ */
+- (nullable id<NSAccessibilityElement>)accessibilityElementWithToken:(NSAccessibilityLoadingToken)token;
+
+@optional
+/*!
+ * @brief For text-based elements returned from accessibilityElementWithToken,
+ * such as an NSTextView, the range specifies an area of interest. Assistive
+ * technologies will try to bring focus to the specified text range.
+ * @remark Either do not implement this method or return NSNotFound for the
+ * location if there is no range of interest for a given load token.
+ */
+- (NSRange)accessibilityRangeInTargetElementWithToken:(NSAccessibilityLoadingToken)token;
+@end
+
 // The complete accessibility protocol
 @protocol NSAccessibility <NSObject>
 @required
@@ -246,7 +274,7 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 
 // Sub-role, non - localized (e.g. NSAccessibilityCloseButtonSubrole)
 // Invokes when clients request NSAccessibilitySubroleAttribute
-@property (nullable, copy) NSString *accessibilitySubrole NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSAccessibilitySubrole accessibilitySubrole NS_AVAILABLE_MAC(10_10);
 
 // Visible text on the UIElement
 // Invokes when clients request NSAccessibilityTitleAttribute
@@ -282,7 +310,7 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 
 // Role, non - localized (e.g. NSAccessibilityRadioButtonRole)
 // Invokes when clients request NSAccessibilityRoleAttribute
-@property (nullable, copy) NSString *accessibilityRole NS_AVAILABLE_MAC(10_10);
+@property (nullable, copy) NSAccessibilityRole accessibilityRole NS_AVAILABLE_MAC(10_10);
 
 // Human readable role description (e.g. "radio button");
 // Invokes when clients request NSAccessibilityRoleDescriptionAttribute
@@ -356,6 +384,10 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 // Invokes when clients request NSAccessibilityChildrenAttribute
 @property (nullable, copy) NSArray *accessibilityChildren NS_AVAILABLE_MAC(10_10);
 
+// Returns an array of children UIElements ordered for linear navigation.
+// This array should match all UIElements found in accessibilityChildren, but in an order that's more suitable for navigation
+@property (nullable, copy) NSArray <id<NSAccessibilityElement>> *accessibilityChildrenInNavigationOrder NS_AVAILABLE_MAC(10_13);
+
 // UIElement for search field clear button
 // Invokes when clients request NSAccessibilityClearButtonAttribute
 @property (nullable, strong) id accessibilityClearButton NS_AVAILABLE_MAC(10_10);
@@ -387,6 +419,13 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 // Returns YES if the UIElement is required to have content for successful submission of a form
 // Invokes when clients request NSAccessibilityRequiredAttribute
 @property (getter=isAccessibilityRequired) BOOL accessibilityRequired NS_AVAILABLE_MAC(10_12);
+
+/*
+ * @brief Returns an array of custom rotors. Custom rotors are lists of
+ * items of a specific category. For example, a "Headings" rotor would
+ * return a list of headings a given document.
+ */
+@property (copy) NSArray<NSAccessibilityCustomRotor *> *accessibilityCustomRotors API_AVAILABLE(macos(10.13));
 
 #pragma mark Application
 
@@ -759,6 +798,9 @@ NS_PROTOCOL_REQUIRES_EXPLICIT_IMPLEMENTATION
 @property (getter = isAccessibilityMinimized) BOOL accessibilityMinimized NS_AVAILABLE_MAC(10_10);
 
 #pragma mark Actions
+
+@property (nullable, copy) NSArray<NSAccessibilityCustomAction *> *accessibilityCustomActions NS_AVAILABLE_MAC(10_13);
+
 // Invokes when clients perform NSAccessibilityCancelAction
 - (BOOL)accessibilityPerformCancel NS_AVAILABLE_MAC(10_10);
 

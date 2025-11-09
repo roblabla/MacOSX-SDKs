@@ -1,7 +1,7 @@
 /*
     NSTabViewItem.h
     Application Kit
-    Copyright (c) 2000-2016, Apple Inc.
+    Copyright (c) 2000-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
     id			_identifier;
     NSString		*__label;			// the label
     NSView		*_view;				// view to be displayed
-    NSView		*__initialFirstResponder;	// initial first responder for that view
+    __weak NSView	*__initialFirstResponder;	// initial first responder for that view
     NSColor		*__color;			// the color of the tab. By default [NSColor controlColor]
     NSTabView		*_tabView;			// back pointer to the tabView. Could be nil.
 
@@ -64,6 +64,7 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
 /// Get and set the image for this tab view item. The image may only be used in certain tab view styles and options.  The default value is nil.
 @property (nullable, strong) NSImage *image NS_AVAILABLE_MAC(10_10);
 @property (nullable, strong) NSView *view;
+
 /*! The view controller wrapped by the tab view item. This property must be set if the tab view item will be added to an NSTabViewController, but can also be used if the tab view item is added to an NSTabView. 
  * If this is set, the tab view item will forward \c -view calls onto the viewController. Setting a viewController will also set the following properties on the tab view item: \c -identifier from the address of the viewController, \c -label from the viewController's title, and \c -image based on the classname as the view controller.
  * An image named "ViewControllerClassName-TabViewItem" will be searched for first, followed by "ViewControllerClassName". It will search first using +[NSImage imageNamed:], then in \c viewController.nibBundle, and lastly in the bundle containing the view controller's class.
@@ -71,13 +72,10 @@ typedef NS_ENUM(NSUInteger, NSTabState) {
  */
 @property (nullable, strong) NSViewController *viewController NS_AVAILABLE_MAC(10_10);
 
-
-
-
 @property (readonly) NSTabState tabState;
 @property (nullable, readonly) NSTabView *tabView;
 
-@property (nullable, assign) NSView *initialFirstResponder;
+@property (nullable, weak) NSView *initialFirstResponder;
 
 /* The following methods provide support for tooltips on the tabs a tab view.  The default behavior is to use the label as a tooltip if the label is truncated due to insufficient space; this automatic tooltip is never returned by the toolTip method.  If you explicitly set a non-nil tooltip, this default behavior is suppressed, and the given tooltip will be used whether or not the label is truncated.
 */

@@ -1,6 +1,6 @@
 /*
 	NSAppleScript.h
-	Copyright (c) 2002-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -11,11 +11,11 @@
 NS_ASSUME_NONNULL_BEGIN
 
 // If the result of -initWithContentsOfURL:error:, -compileAndReturnError:, -executeAndReturnError:, or -executeAppleEvent:error:, signals failure (nil, NO, nil, or nil, respectively), a pointer to an autoreleased dictionary is put at the location pointed to by the error parameter.  The error info dictionary may contain entries that use any combination of the following keys, including no entries at all.
-FOUNDATION_EXPORT NSString *const NSAppleScriptErrorMessage NS_AVAILABLE(10_2, NA); // NSString
-FOUNDATION_EXPORT NSString *const NSAppleScriptErrorNumber NS_AVAILABLE(10_2, NA); // NSNumber
-FOUNDATION_EXPORT NSString *const NSAppleScriptErrorAppName NS_AVAILABLE(10_2, NA); // NSString
-FOUNDATION_EXPORT NSString *const NSAppleScriptErrorBriefMessage NS_AVAILABLE(10_2, NA); // NSString
-FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange NS_AVAILABLE(10_2, NA); // NSValue containing an NSRange
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorMessage API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, watchos, tvos); // NSString
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorNumber API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, watchos, tvos); // NSNumber
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorAppName API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, watchos, tvos); // NSString
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorBriefMessage API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, watchos, tvos); // NSString
+FOUNDATION_EXPORT NSString *const NSAppleScriptErrorRange API_AVAILABLE(macos(10.2)) API_UNAVAILABLE(ios, watchos, tvos); // NSValue containing an NSRange
 
 @interface NSAppleScript : NSObject<NSCopying> {
     @private

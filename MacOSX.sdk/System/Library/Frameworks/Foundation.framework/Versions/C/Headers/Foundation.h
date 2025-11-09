@@ -1,5 +1,5 @@
 /*	Foundation.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 
@@ -93,6 +93,7 @@
 #import <Foundation/NSValue.h>
 #import <Foundation/NSValueTransformer.h>
 #import <Foundation/NSXMLParser.h>
+#import <Foundation/NSXPCConnection.h>
 #import <Foundation/NSZone.h>
 
 #import <Foundation/FoundationErrors.h>
@@ -177,7 +178,6 @@
 #import <Foundation/NSSpellServer.h>
 #import <Foundation/NSUserNotification.h>
 #import <Foundation/NSUserScriptTask.h>
-#import <Foundation/NSXPCConnection.h>
 
 #endif
 

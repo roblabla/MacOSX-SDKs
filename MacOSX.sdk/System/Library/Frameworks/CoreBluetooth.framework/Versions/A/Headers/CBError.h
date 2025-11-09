@@ -7,6 +7,10 @@
  *	@copyright 2011 Apple, Inc. All rights reserved.
  */
 
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
+
 #import <CoreBluetooth/CBDefines.h>
 
 #import <Foundation/Foundation.h>
@@ -22,16 +26,19 @@ CB_EXTERN NSString * const CBErrorDomain;
  */
 typedef NS_ENUM(NSInteger, CBError) {
 	CBErrorUnknown												= 0,
-	CBErrorInvalidParameters NS_ENUM_AVAILABLE(10_9, 6_0)			= 1,
-	CBErrorInvalidHandle NS_ENUM_AVAILABLE(10_9, 6_0)				= 2,
-	CBErrorNotConnected NS_ENUM_AVAILABLE(10_9, 6_0)				= 3,
+	CBErrorInvalidParameters NS_ENUM_AVAILABLE(10_9, 6_0)		= 1,
+	CBErrorInvalidHandle NS_ENUM_AVAILABLE(10_9, 6_0)			= 2,
+	CBErrorNotConnected NS_ENUM_AVAILABLE(10_9, 6_0)			= 3,
 	CBErrorOutOfSpace NS_ENUM_AVAILABLE(10_9, 6_0)				= 4,
 	CBErrorOperationCancelled NS_ENUM_AVAILABLE(10_9, 6_0)		= 5,
-	CBErrorConnectionTimeout NS_ENUM_AVAILABLE(10_9, 6_0)			= 6,
+	CBErrorConnectionTimeout NS_ENUM_AVAILABLE(10_9, 6_0)		= 6,
 	CBErrorPeripheralDisconnected NS_ENUM_AVAILABLE(10_9, 6_0)	= 7,
 	CBErrorUUIDNotAllowed NS_ENUM_AVAILABLE(10_9, 6_0)			= 8,
-    CBErrorAlreadyAdvertising NS_ENUM_AVAILABLE(10_9, 6_0)		= 9,
-    CBErrorMaxConnection NS_ENUM_AVAILABLE(10_11, 6_0)			= 10
+	CBErrorAlreadyAdvertising NS_ENUM_AVAILABLE(10_9, 6_0)		= 9,
+	CBErrorConnectionFailed NS_ENUM_AVAILABLE(10_13, 7_1)		= 10,
+	CBErrorConnectionLimitReached NS_ENUM_AVAILABLE(10_13, 9_0)	= 11,
+	CBErrorUnkownDevice NS_ENUM_AVAILABLE(10_13, 9_0)			= 12
+
 };
 
 CB_EXTERN NSString * const CBATTErrorDomain;

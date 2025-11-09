@@ -128,6 +128,10 @@ typedef enum _CGLRendererProperty {
 	kCGLRPTextureMemoryMegabytes OPENGL_ENUM_AVAILABLE(10_7) = 132, /* video memory useable for textures (in megabytes) */
 	kCGLRPMajorGLVersion OPENGL_ENUM_AVAILABLE(10_9)         = 133, /* maximum supported major GL revision              */
 
+	kCGLRPRegistryIDLow OPENGL_ENUM_AVAILABLE(10_13)         = 140, /* Low 32-bits of registryID */
+	kCGLRPRegistryIDHigh OPENGL_ENUM_AVAILABLE(10_13)        = 141, /* High 32-bits of registryID */
+	kCGLRPRemovable OPENGL_ENUM_AVAILABLE(10_13)             = 142, /* renderer is removable (eGPU) */
+	
 	kCGLRPRobust OPENGL_ENUM_DEPRECATED(10_0, 10_5)      =  75,
 	kCGLRPMPSafe OPENGL_ENUM_DEPRECATED(10_0, 10_5)      =  78,
 	kCGLRPMultiScreen OPENGL_ENUM_DEPRECATED(10_0, 10_5) =  81,

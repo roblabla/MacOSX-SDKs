@@ -1,7 +1,7 @@
 /*
         NSLayoutManager.h
         Application Kit
-        Copyright (c) 1994-2015, Apple Inc.
+        Copyright (c) 1994-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -51,7 +51,7 @@ typedef NS_ENUM(NSInteger, NSControlCharacterAction) {
 
 @protocol NSTextLayoutOrientationProvider
 // A property describing the receiver's layout orientation.  This property defines the default value for the range of string laid out in the receiver in absence of explicit NSVerticalGlyphFormAttributeName attribute.  For example, when NSTextLayoutOrientationVertical, the default value for NSVerticalGlyphFormAttributeName is 1.  When rendering into the receiver, the Text System assumes the coordinate system is appropriately rotated.
-@property(readonly) NSTextLayoutOrientation layoutOrientation NS_AVAILABLE(10_7, 7_0);
+@property (readonly) NSTextLayoutOrientation layoutOrientation NS_AVAILABLE(10_7, 7_0);
 @end
 
 typedef NS_ENUM(NSInteger, NSTypesetterBehavior) {
@@ -179,7 +179,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 
 // Accessor for the NSTextStorage object owning the receiver.
 // Avoid assigning a text storage directly through this property.  Adding a layout manager to a text storage through -[NSTextStorage addLayoutManager:] will use the property for assigning the new text storage.
-@property(nullable, assign) NSTextStorage *textStorage;
+@property (nullable, assign) NSTextStorage *textStorage;
 
 // This method should be used instead of the primitive -setTextStorage: if you need to replace a NSLayoutManager's NSTextStorage with a new one, leaving all related objects intact.  This method deals with all the work of making sure the NSLayoutManager doesn't get deallocated and transferring all the NSLayoutManagers on the old NSTextStorage to the new one.
 - (void)replaceTextStorage:(NSTextStorage *)newTextStorage;
@@ -188,7 +188,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 /**************************** Text containers ****************************/
 
 // NSTextContainer objects owner by the receiver.
-@property(readonly) NSArray<NSTextContainer *> *textContainers;
+@property (readonly) NSArray<NSTextContainer *> *textContainers;
 
 // Add a container to the end of the array.  Must invalidate layout of all glyphs after the previous last container (i.e., glyphs that were not previously laid out because they would not fit anywhere).
 - (void)addTextContainer:(NSTextContainer *)container;
@@ -208,7 +208,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 
 /**************************** Delegate ****************************/
 
-@property(nullable, assign) id <NSLayoutManagerDelegate> delegate;
+@property (nullable, weak) id <NSLayoutManagerDelegate> delegate;
 
 
 /*********************** Global layout manager options ***********************/
@@ -229,7 +229,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 @property BOOL allowsNonContiguousLayout NS_AVAILABLE(10_5, 7_0);
 
 // Even if non-contiguous layout is allowed, it may not always be used, and there may not always be layout holes.  This method returns YES if there might currently be non-contiguous portions of the text laid out.
-@property(readonly) BOOL hasNonContiguousLayout NS_AVAILABLE(10_5, 7_0);
+@property (readonly) BOOL hasNonContiguousLayout NS_AVAILABLE(10_5, 7_0);
 
 // These methods allow you to set/query whether the NSLayoutManager will lay out text in the background, i.e. on the main thread when it is idle.  The default is YES, but this should be set to NO whenever the layout manager is being accessed from other threads.
 @property BOOL backgroundLayoutEnabled;
@@ -241,7 +241,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 
 /*********************** Typesetter ***********************/
 // By default an NSLayoutManager uses the shared default typesetter.  Setting the typesetter invalidates all glyphs in the NSLayoutManager.  It can't just invalidate layout because the typesetter may have contributed to the actual glyphs as well (e.g. hyphenation).
-@property(strong) __kindof NSTypesetter *typesetter;
+@property (strong) __kindof NSTypesetter *typesetter;
 
 // Specifies the typesetter behavior (compatibility setting) value for the layout manager.  The default is determined by the version of AppKit against which the application is linked.
 @property NSTypesetterBehavior typesetterBehavior;
@@ -283,12 +283,12 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 /************************ Get glyphs and glyph properties ************************/
 
 // Returns the total number of glyphs.  If non-contiguous layout is not enabled, this will force generation of glyphs for all characters.
-@property(readonly) NSUInteger numberOfGlyphs;
+@property (readonly) NSUInteger numberOfGlyphs;
 
 // If non-contiguous layout is not enabled, these will cause generation of all glyphs up to and including glyphIndex.  The first CGGlyphAtIndex variant returns kCGFontIndexInvalid if the requested index is out of the range (0, numberOfGlyphs), and optionally returns a flag indicating whether the requested index is in range.  The second CGGlyphAtIndex variant raises a NSRangeError if the requested index is out of range.
 - (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex isValidIndex:(nullable BOOL *)isValidIndex NS_AVAILABLE(10_11,7_0);
 - (CGGlyph)CGGlyphAtIndex:(NSUInteger)glyphIndex NS_AVAILABLE(10_11,7_0);
-- (BOOL)isValidGlyphIndex:(NSUInteger)glyphIndex NS_AVAILABLE(10_11,7_0);
+- (BOOL)isValidGlyphIndex:(NSUInteger)glyphIndex API_AVAILABLE(macosx(10.0), ios(7.0), watchos(2.0), tvos(9.0));
 
 // If non-contiguous layout is not enabled, this will cause generation of all glyphs up to and including glyphIndex.  It will return the glyph property associated with the glyph at the specified index.
 - (NSGlyphProperty)propertyForGlyphAtIndex:(NSUInteger)glyphIndex NS_AVAILABLE(10_5, 7_0);
@@ -351,9 +351,9 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 - (NSRect)lineFragmentUsedRectForGlyphAtIndex:(NSUInteger)glyphIndex effectiveRange:(nullable NSRangePointer)effectiveGlyphRange withoutAdditionalLayout:(BOOL)flag NS_AVAILABLE(10_0, 9_0);
 
 // Return info about the extra line fragment.  The extra line fragment is used for displaying the line at the end of document when the last character in the document causes a line or paragraph break.  Since the extra line is not associated with any glyph inside the layout manager, the information is handed separately from other line fragment rects.  Typically the extra line fragment is placed in the last document content text container along with other normal line fragment rects.  Line fragment rects and line fragment used rects are always in container coordinates.
-@property(readonly) NSRect extraLineFragmentRect;
-@property(readonly) NSRect extraLineFragmentUsedRect;
-@property(nullable, readonly) NSTextContainer *extraLineFragmentTextContainer;
+@property (readonly) NSRect extraLineFragmentRect;
+@property (readonly) NSRect extraLineFragmentUsedRect;
+@property (nullable, readonly) NSTextContainer *extraLineFragmentTextContainer;
 
 
 // Returns the location for the given glyph within its line fragment.  If this glyph does not have an explicit location set for it (i.e., it is part of (but not first in) a sequence of nominally spaced characters), the location is calculated by glyph advancements from the location of the most recent preceding glyph with a location set.  Glyph locations are relative to their line fragment rect's origin.  This will cause glyph generation and layout for the line fragment containing the specified glyph, or if non-contiguous layout is not enabled, up to and including that line fragment.
@@ -418,7 +418,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 - (void)drawGlyphsForGlyphRange:(NSRange)glyphsToShow atPoint:(NSPoint)origin;
 
 // This is the glyph rendering primitive method.  Renders glyphs at positions into the graphicsContext.  The positions are in the user space coordinate system.  graphicsContext that passed in is already configured according to the text attributes arguments: font, textMatrix, and attributes.  The font argument represents the font applied to the graphics state.  The value can be different from the NSFontAttributeName value in the attributes argument because of various font substitutions that the system automatically executes.  The textMatrix is the affine transform mapping the text space coordinate system to the user space coordinate system.  The tx and ty components of textMatrix are ignored since Quartz overrides them with the glyph positions.
-- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const NSPoint *)positions count:(NSUInteger)glyphCount font:(NSFont *)font matrix:(NSAffineTransform *)textMatrix attributes:(NSDictionary<NSString *, id> *)attributes inContext:(NSGraphicsContext *)graphicsContext NS_AVAILABLE(10_7, 7_0);
+- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const NSPoint *)positions count:(NSUInteger)glyphCount font:(NSFont *)font matrix:(NSAffineTransform *)textMatrix attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes inContext:(NSGraphicsContext *)graphicsContext NS_AVAILABLE(10_7, 7_0);
 
 // This is the primitive used by -drawBackgroundForGlyphRange:atPoint: for actually filling rects with a particular background color, whether due to a background color attribute, a selected or marked range highlight, a block decoration, or any other rect fill needed by that method.  As with -showCGGlyphs:..., the character range and color are merely for informational purposes; the color will already be set in the graphics state.  If for any reason you modify it, you must restore it before returning from this method.  You should never call this method, but you might override it.  The default implementation will simply fill the specified rect array.
 - (void)fillBackgroundRectArray:(const NSRect *)rectArray count:(NSUInteger)rectCount forCharacterRange:(NSRange)charRange color:(NSColor *)color NS_AVAILABLE(10_6, 7_0);
@@ -449,15 +449,15 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 
 /************************ Temporary attribute support ************************/
 // Temporary attributes provide a way to override attributes for drawing on a per-layout manager basis, without affecting the underlying stored text.  Clients may set any attributes they wish, but the only attributes that the layout manager will recognize for drawing are those that do not affect layout (color, underline, etc.).
-- (NSDictionary<NSString *, id> *)temporaryAttributesAtCharacterIndex:(NSUInteger)charIndex effectiveRange:(nullable NSRangePointer)effectiveCharRange;
-- (void)setTemporaryAttributes:(NSDictionary<NSString *, id> *)attrs forCharacterRange:(NSRange)charRange;
-- (void)addTemporaryAttributes:(NSDictionary<NSString *, id> *)attrs forCharacterRange:(NSRange)charRange;
-- (void)removeTemporaryAttribute:(NSString *)attrName forCharacterRange:(NSRange)charRange;
+- (NSDictionary<NSAttributedStringKey, id> *)temporaryAttributesAtCharacterIndex:(NSUInteger)charIndex effectiveRange:(nullable NSRangePointer)effectiveCharRange;
+- (void)setTemporaryAttributes:(NSDictionary<NSAttributedStringKey, id> *)attrs forCharacterRange:(NSRange)charRange;
+- (void)addTemporaryAttributes:(NSDictionary<NSAttributedStringKey, id> *)attrs forCharacterRange:(NSRange)charRange;
+- (void)removeTemporaryAttribute:(NSAttributedStringKey)attrName forCharacterRange:(NSRange)charRange;
 
-- (nullable id)temporaryAttribute:(NSString *)attrName atCharacterIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range NS_AVAILABLE_MAC(10_5);
-- (nullable id)temporaryAttribute:(NSString *)attrName atCharacterIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit NS_AVAILABLE_MAC(10_5);
-- (NSDictionary<NSString *, id> *)temporaryAttributesAtCharacterIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit NS_AVAILABLE_MAC(10_5);
-- (void)addTemporaryAttribute:(NSString *)attrName value:(id)value forCharacterRange:(NSRange)charRange NS_AVAILABLE_MAC(10_5);
+- (nullable id)temporaryAttribute:(NSAttributedStringKey)attrName atCharacterIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range NS_AVAILABLE_MAC(10_5);
+- (nullable id)temporaryAttribute:(NSAttributedStringKey)attrName atCharacterIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit NS_AVAILABLE_MAC(10_5);
+- (NSDictionary<NSAttributedStringKey, id> *)temporaryAttributesAtCharacterIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit NS_AVAILABLE_MAC(10_5);
+- (void)addTemporaryAttribute:(NSAttributedStringKey)attrName value:(id)value forCharacterRange:(NSRange)charRange NS_AVAILABLE_MAC(10_5);
 
 
 /******************************* Font metrics ******************************/
@@ -465,10 +465,6 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 - (CGFloat)defaultLineHeightForFont:(NSFont *)theFont;
 // Returns the default baseline offset specified by the layout manager's typesetter behavior for the given font.
 - (CGFloat)defaultBaselineOffsetForFont:(NSFont *)theFont;
-@end
-
-@interface NSLayoutManager (NSGlyphGeneration) <NSGlyphStorage>
-@property(strong) NSGlyphGenerator *glyphGenerator;
 @end
 
 @interface NSLayoutManager (NSTextViewSupport)
@@ -481,7 +477,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 // Returns YES if the firstResponder of the given window is one of the NSTextViews attached to this NSLayoutManager.
 - (BOOL)layoutManagerOwnsFirstResponderInWindow:(NSWindow *)window;
 
-@property(nullable, readonly, assign) NSTextView *firstTextView;
+@property (nullable, readonly, assign) NSTextView *firstTextView;
 
 // This method is special in that it won't cause layout if the beginning of the selected range is not yet laid out.  Other than that this method could be done through other API.
 @property (nullable, readonly, assign) NSTextView *textViewForBeginningOfSelection;
@@ -534,24 +530,24 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSLayoutManager : NSObject <NSCoding>
 - (void)layoutManager:(NSLayoutManager *)layoutManager textContainer:(NSTextContainer *)textContainer didChangeGeometryFromSize:(NSSize)oldSize NS_AVAILABLE(10_11, 7_0);
 
 // This is sent when the layout manager is drawing and needs to decide whether to use temporary attributes or not.  The delegate returns a dictionary of temporary attributes to be used, or nil to suppress the use of temporary attributes altogether.  The effectiveCharRange argument is both an in and out by-reference effective range for those attributes.  The default behavior if this method is not implemented is to use temporary attributes only when drawing to the screen, so an implementation to match that behavior would return attrs if toScreen is YES and nil otherwise, without changing effectiveCharRange.
-- (nullable NSDictionary<NSString *, id> *)layoutManager:(NSLayoutManager *)layoutManager shouldUseTemporaryAttributes:(NSDictionary<NSString *, id> *)attrs forDrawingToScreen:(BOOL)toScreen atCharacterIndex:(NSUInteger)charIndex effectiveRange:(nullable NSRangePointer)effectiveCharRange NS_AVAILABLE_MAC(10_5);
+- (nullable NSDictionary<NSAttributedStringKey, id> *)layoutManager:(NSLayoutManager *)layoutManager shouldUseTemporaryAttributes:(NSDictionary<NSAttributedStringKey, id> *)attrs forDrawingToScreen:(BOOL)toScreen atCharacterIndex:(NSUInteger)charIndex effectiveRange:(nullable NSRangePointer)effectiveCharRange NS_AVAILABLE_MAC(10_5);
 @end
 
 
 /************************ Deprecated ************************/
 enum {
-    NSGlyphAttributeSoft        = 0,
-    NSGlyphAttributeElastic     = 1,
-    NSGlyphAttributeBidiLevel   = 2,
-    NSGlyphAttributeInscribe    = 5
+    NSGlyphAttributeSoft NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 0,
+    NSGlyphAttributeElastic NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 1,
+    NSGlyphAttributeBidiLevel NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 2,
+    NSGlyphAttributeInscribe NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 5
 } NS_DEPRECATED_MAC(10_0, 10_11, "Use NSGlyphProperty instead");
 
 typedef NS_ENUM(NSUInteger, NSGlyphInscription) {
-    NSGlyphInscribeBase         = 0,
-    NSGlyphInscribeBelow        = 1,
-    NSGlyphInscribeAbove        = 2,
-    NSGlyphInscribeOverstrike   = 3,
-    NSGlyphInscribeOverBelow    = 4
+    NSGlyphInscribeBase NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 0,
+    NSGlyphInscribeBelow NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 1,
+    NSGlyphInscribeAbove NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 2,
+    NSGlyphInscribeOverstrike NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 3,
+    NSGlyphInscribeOverBelow NS_ENUM_DEPRECATED_MAC(10_0, 10_11) = 4
 } NS_DEPRECATED_MAC(10_0, 10_11, "Use NSGlyphProperty instead");
 
 @interface NSLayoutManager (NSLayoutManagerDeprecated)
@@ -587,6 +583,11 @@ typedef NS_ENUM(NSUInteger, NSGlyphInscription) {
 
 - (void)showPackedGlyphs:(char *)glyphs length:(NSUInteger)glyphLen glyphRange:(NSRange)glyphRange atPoint:(NSPoint)point font:(NSFont *)font color:(NSColor *)color printingAdjustment:(NSSize)printingAdjustment NS_DEPRECATED_MAC(10_0, 10_7, "Use -showCGGlyphs:positions:count:font:matrix:attributes:inContext: instead");
 
+@end
+
+// NSGlyph-based API is now deprecated. Use -layoutManager:shouldGenerateGlyphs:properties:characterIndexes:forGlyphRange: instead
+@interface NSLayoutManager (NSGlyphGeneration) <NSGlyphStorage>
+@property (strong) NSGlyphGenerator *glyphGenerator;
 @end
 
 NS_ASSUME_NONNULL_END

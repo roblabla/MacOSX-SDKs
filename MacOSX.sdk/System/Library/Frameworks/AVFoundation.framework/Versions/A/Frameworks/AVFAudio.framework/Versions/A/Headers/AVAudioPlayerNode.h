@@ -31,6 +31,45 @@ typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
 } NS_AVAILABLE(10_10, 8_0);
 
 /*!
+	@enum AVAudioPlayerNodeCompletionCallbackType
+	@abstract	Specifies when the completion handler must be invoked.
+
+	@constant	AVAudioPlayerNodeCompletionDataConsumed
+					The buffer or file data has been consumed by the player.
+  	@constant	AVAudioPlayerNodeCompletionDataRendered
+					The buffer or file data has been rendered (i.e. output) by the player. This
+					does not account for any signal processing latencies downstream of the player 
+					in the engine (see `AVAudioNode(outputPresentationLatency)`).
+	@constant	AVAudioPlayerNodeCompletionDataPlayedBack
+					Applicable only when the engine is rendering to/from an audio device.
+					The buffer or file has finished playing. This accounts for both (small) signal 
+					processing latencies downstream of the player in the engine, as well as
+					(possibly significant) latency in the audio playback device.
+*/
+typedef NS_ENUM(NSInteger, AVAudioPlayerNodeCompletionCallbackType) {
+	AVAudioPlayerNodeCompletionDataConsumed		= 0,
+	AVAudioPlayerNodeCompletionDataRendered		= 1,
+	AVAudioPlayerNodeCompletionDataPlayedBack	= 2,
+} API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*! @typedef AVAudioPlayerNodeCompletionHandler
+	@abstract Buffer or file completion callback handler.
+	@param callbackType
+		Indicates the type of buffer or file completion when the callback is invoked.
+	@discussion
+		AVAudioPlayerNode issues this callback to inform the client about the specific type of
+		buffer or file completion. See `AVAudioPlayerNodeCompletionCallbackType` for more details.
+ 
+		Note that the `AVAudioNodeCompletionHandler` callback from some of the player's scheduling
+		methods (e.g. `scheduleBuffer:completionHandler:`) is equivalent to the
+		AVAudioPlayerNodeCompletionHandler callback for `AVAudioPlayerNodeCompletionDataConsumed`.
+ 
+		In general the callbacks arrive on a non-main thread and it is the client's responsibility
+		to handle them in a thread-safe manner.
+*/
+typedef void (^AVAudioPlayerNodeCompletionHandler)(AVAudioPlayerNodeCompletionCallbackType callbackType) API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*!
 	@class AVAudioPlayerNode
 	@abstract Play buffers or segments of audio files.
 	@discussion
@@ -76,7 +115,9 @@ typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
 		2. sample time:
 			- relative to the node's start time (which begins at 0 when the node is started).
 		3. host time:
-			- ignored unless sample time not valid.
+			- ignored unless the sample time is invalid when the engine is rendering to an audio 
+			  device.
+			- ignored in manual rendering mode.
 		
 		ERRORS
 		
@@ -86,6 +127,22 @@ typedef NS_OPTIONS(NSUInteger, AVAudioPlayerNodeBufferOptions) {
 		2. a file can't be accessed.
 		3. an AVAudioTime specifies neither a valid sample time or host time.
 		4. a segment's start frame or frame count is negative.
+ 
+		BUFFER/FILE COMPLETION HANDLERS
+ 
+		The buffer or file completion handlers (see scheduling methods) are a means to schedule 
+		more data if available on the player node. See `AVAudioPlayerNodeCompletionCallbackType` 
+		for details on the different buffer/file completion callback types.
+		
+		Note that a player should not be stopped from within a completion handler callback because
+		it can deadlock while trying to unschedule previously scheduled buffers.
+ 
+		OFFLINE RENDERING
+	
+		When a player node is used with the engine operating in the manual rendering mode, the
+		buffer/file completion handlers, `lastRenderTime` and the latencies (`latency` and
+		`outputPresentationLatency`) can be used to track how much data the player has rendered and
+		how much more data is left to render.
 */
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface AVAudioPlayerNode : AVAudioNode <AVAudioMixing>
@@ -106,6 +163,20 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 - (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
 
+/*! @method scheduleBuffer:completionCallbackType:completionHandler:
+	@abstract Schedule playing samples from an AVAudioBuffer.
+	@param buffer
+		the buffer to play
+	@param callbackType
+		option to specify when the completion handler must be called
+	@param completionHandler
+		called after the buffer has been consumed by the player or has finished playing back or 
+		the player is stopped. may be nil.
+	@discussion
+		Schedules the buffer to be played following any previously scheduled commands.
+*/
+- (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer completionCallbackType:(AVAudioPlayerNodeCompletionCallbackType)callbackType completionHandler:(AVAudioPlayerNodeCompletionHandler __nullable)completionHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 /*! @method scheduleBuffer:atTime:options:completionHandler:
 	@abstract Schedule playing samples from an AVAudioBuffer.
 	@param buffer
@@ -122,6 +193,23 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 - (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer atTime:(AVAudioTime * __nullable)when options:(AVAudioPlayerNodeBufferOptions)options completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
 
+/*! @method scheduleBuffer:atTime:options:completionCallbackType:completionHandler:
+	@abstract Schedule playing samples from an AVAudioBuffer.
+	@param buffer
+		the buffer to play
+	@param when
+		the time at which to play the buffer. see the discussion of timestamps, above.
+	@param options
+		options for looping, interrupting other buffers, etc.
+	@param callbackType
+		option to specify when the completion handler must be called
+	@param completionHandler
+		called after the buffer has been consumed by the player or has finished playing back or 
+		the player is stopped. may be nil.
+*/
+- (void)scheduleBuffer:(AVAudioPCMBuffer *)buffer atTime:(AVAudioTime * __nullable)when options:(AVAudioPlayerNodeBufferOptions)options
+	 completionCallbackType:(AVAudioPlayerNodeCompletionCallbackType)callbackType completionHandler:(AVAudioPlayerNodeCompletionHandler __nullable)completionHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 /*! @method scheduleFile:atTime:completionHandler:
 	@abstract Schedule playing of an entire audio file.
 	@param file
@@ -135,6 +223,20 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		or before the file is played completely.
 */
 - (void)scheduleFile:(AVAudioFile *)file atTime:(AVAudioTime * __nullable)when completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
+
+/*! @method scheduleFile:atTime:completionCallbackType:completionHandler:
+	@abstract Schedule playing of an entire audio file.
+	@param file
+		the file to play
+	@param when
+		the time at which to play the file. see the discussion of timestamps, above.
+	@param callbackType
+		option to specify when the completion handler must be called
+	@param completionHandler
+		called after the file has been consumed by the player or has finished playing back or 
+		the player is stopped. may be nil.
+*/
+- (void)scheduleFile:(AVAudioFile *)file atTime:(AVAudioTime * __nullable)when completionCallbackType:(AVAudioPlayerNodeCompletionCallbackType)callbackType completionHandler:(AVAudioPlayerNodeCompletionHandler __nullable)completionHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /*! @method scheduleSegment:startingFrame:frameCount:atTime:completionHandler:
 	@abstract Schedule playing a segment of an audio file.
@@ -154,6 +256,25 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 */
 - (void)scheduleSegment:(AVAudioFile *)file startingFrame:(AVAudioFramePosition)startFrame frameCount:(AVAudioFrameCount)numberFrames atTime:(AVAudioTime * __nullable)when completionHandler:(AVAudioNodeCompletionHandler __nullable)completionHandler;
 
+/*! @method scheduleSegment:startingFrame:frameCount:atTime:completionCallbackType:completionHandler:
+	@abstract Schedule playing a segment of an audio file.
+	@param file
+		the file to play
+	@param startFrame
+		the starting frame position in the stream
+	@param numberFrames
+		the number of frames to play
+	@param when
+		the time at which to play the region. see the discussion of timestamps, above.
+	@param callbackType
+		option to specify when the completion handler must be called
+	@param completionHandler
+		called after the segment has been consumed by the player or has finished playing back or 
+		the player is stopped. may be nil.
+*/
+- (void)scheduleSegment:(AVAudioFile *)file startingFrame:(AVAudioFramePosition)startFrame frameCount:(AVAudioFrameCount)numberFrames atTime:(AVAudioTime * __nullable)when
+	completionCallbackType:(AVAudioPlayerNodeCompletionCallbackType)callbackType completionHandler:(AVAudioPlayerNodeCompletionHandler __nullable)completionHandler API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 /*!	@method stop
 	@abstract Clear all of the node's previously scheduled events and stop playback.
 	@discussion
@@ -161,6 +282,10 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		middle of playing. The node's sample time (and therefore the times to which new events are 
 		to be scheduled) is reset to 0, and will not proceed until the node is started again (via
 		play or playAtTime).
+ 
+		Note that pausing or stopping all the players connected to an engine does not pause or stop
+		the engine or the underlying hardware. The engine must be explicitly paused or stopped for
+		the hardware to stop.
 */
 - (void)stop;
 
@@ -208,6 +333,10 @@ if (!nsErr) {
 	@abstract Pause playback.
 	@discussion
 		The player's sample time does not advance while the node is paused.
+ 
+		Note that pausing or stopping all the players connected to an engine does not pause or stop
+		the engine or the underlying hardware. The engine must be explicitly paused or stopped for
+		the hardware to stop.
 */
 - (void)pause;
 

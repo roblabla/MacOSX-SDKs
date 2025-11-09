@@ -1,7 +1,7 @@
 /*
     NSTabViewController.h
     Application Kit
-    Copyright (c) 2014-2016, Apple Inc.
+    Copyright (c) 2014-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -103,14 +103,14 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 /* Implemented methods from NSToolbarDelegate. These require a call to super if overriden by a subclass. */
 /* NSTabViewController will create a toolbar item for each of its tabViewItems. The toolbar item's identifier will be the same as the tab view item's; similarly, the toolbar item's label, image, and toolTip are bound to those of the corresponding tab view item. */
-- (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSString *)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag NS_REQUIRES_SUPER;
+- (nullable NSToolbarItem *)toolbar:(NSToolbar *)toolbar itemForItemIdentifier:(NSToolbarItemIdentifier)itemIdentifier willBeInsertedIntoToolbar:(BOOL)flag NS_REQUIRES_SUPER;
 
 /* NSTabViewController returns the identifiers for the toolbar items corresponding to its tabViewItems. Overriding these allows additional items to be added to the toolbar. For example, adding NSToolbarFlexibleSpaceItemIdentifier to the beginning and end will center the TabViewController's toolbar items. If a subclass adds custom identifiers, -toolbar:itemForItemIdentifier:willBeInsertedIntoToolbar: must be overridden to return a toolbar item for that identifer. */
-- (NSArray<NSString *> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
-- (NSArray<NSString *> *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
+- (NSArray<NSToolbarItemIdentifier> *)toolbarDefaultItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
+- (NSArray<NSToolbarItemIdentifier> *)toolbarAllowedItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
 
 /* NSTabViewController returns all toolbar item identifiers corresponding to its tabViewItems. */
-- (NSArray<NSString *> *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
+- (NSArray<NSToolbarItemIdentifier> *)toolbarSelectableItemIdentifiers:(NSToolbar *)toolbar NS_REQUIRES_SUPER;
 
 @end
 

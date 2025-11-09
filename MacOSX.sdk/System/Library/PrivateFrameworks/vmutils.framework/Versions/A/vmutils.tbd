@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386 ]
-uuids:           [ 'i386: 43CD41FC-CB20-312A-B361-6A6216F56CDC' ]
+uuids:           [ 'i386: D765219E-8E4D-312F-88EE-68E3565F957C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/vmutils.framework/Versions/A/vmutils
-current-version: 110.0
-objc-constraint: none
+current-version: 110
 exports:         
   - archs:           [ i386 ]
     symbols:         [ _NSMachOHeaderArchitecture, _NSMachOHeaderBundleInfo, _NSMachOHeaderBundlePath, 

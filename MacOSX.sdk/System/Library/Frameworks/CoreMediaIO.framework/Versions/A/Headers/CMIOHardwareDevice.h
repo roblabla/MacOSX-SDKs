@@ -460,8 +460,10 @@ enum
                         If the register's offset is relative to the initial unit space, then the qualifier should be the value returned by kCMIODevicePropertyIIDCInitialUnitSpace + offset.
                         If the register's offset is relative to the initial register space, then the qualifier should be $F0000000 + offset.
                         Changes in this property never result in a property changed notification.
-   @constant       kCMIODevicePropertyCanSwitchFrameRatesWithoutFrameDrops
+    @constant       kCMIODevicePropertyCanSwitchFrameRatesWithoutFrameDrops
                         A UInt32 where a value of 0 indicates the device's streams will drop frames when altering frame rates, and a value of 1 means that they won't.
+    @constant       kCMIODevicePropertyLocation
+                        A UInt32 indicating the location of the device (for values see kCMIODevicePropertyLocationUnknown, etc., below).
 */
 enum
 {
@@ -492,7 +494,31 @@ enum
     kCMIODevicePropertyLinkedAndSyncedCoreAudioDeviceUID    = 'plsd',
     kCMIODevicePropertyIIDCInitialUnitSpace                 = 'iuns',
     kCMIODevicePropertyIIDCCSRData                          = 'csrd',
-    kCMIODevicePropertyCanSwitchFrameRatesWithoutFrameDrops = 'frnd'
+    kCMIODevicePropertyCanSwitchFrameRatesWithoutFrameDrops = 'frnd',
+    kCMIODevicePropertyLocation                             = 'dloc'
+};
+
+/*!
+    @enum           kCMIODevicePropertyLocation Values
+    @abstract       The kCMIODevicePropertyLocation returns an indication of the device's physical placement.
+    @constant       kCMIODevicePropertyLocationUnknown
+                        The device location is unknown.
+    @constant       kCMIODevicePropertyLocationBuiltInDisplay
+                        The device is located in the computer's built-in display.
+    @constant       kCMIODevicePropertyLocationExternalDisplay
+                        The device is located in an external display.
+    @constant       kCMIODevicePropertyLocationExternalDevice
+                        The device is an external to the computer and connected with a cable.
+    @constant       kCMIODevicePropertyLocationExternalWirelessDevice
+                        The device is an external to the computer and connected via a wireless protocol.
+*/
+enum
+{
+    kCMIODevicePropertyLocationUnknown = 0,
+    kCMIODevicePropertyLocationBuiltInDisplay = 1,
+    kCMIODevicePropertyLocationExternalDisplay = 2,
+    kCMIODevicePropertyLocationExternalDevice = 3,
+    kCMIODevicePropertyLocationExternalWirelessDevice = 4,
 };
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------

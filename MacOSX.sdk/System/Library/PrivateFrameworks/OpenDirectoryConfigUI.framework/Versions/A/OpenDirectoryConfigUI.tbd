@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A0D8CC58-8FF8-3CB4-8F31-0BADA01116C0', 'x86_64: BCFFE3E7-F87C-3FF2-B72D-4C4B6C737E60' ]
+uuids:           [ 'i386: FDC2B2D8-7A36-3042-91E5-A99E9409DB71', 'x86_64: 2129AEB7-2BF6-32AE-BE33-EA25E1BBE20A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/OpenDirectoryConfigUI.framework/Versions/A/OpenDirectoryConfigUI
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _ODCEmptyMessageTableView._emptyListMsg, _ODCEmptyMessageTableView._msgRow, 

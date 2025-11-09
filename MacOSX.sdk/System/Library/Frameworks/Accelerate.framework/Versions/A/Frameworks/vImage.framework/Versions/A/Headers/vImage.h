@@ -283,13 +283,16 @@
 
 // The utility headers providing CG and CV interoperability pull in higher-level system headers that assume
 // objective-c support that is not availble unless you are using clang as your compiler.
-#if defined __clang__
+#if defined __clang__ && defined __has_include
+# if __has_include(<CoreGraphics/CoreGraphics.h>)
 // Convert any image format to nearly any other one. Exchange data with CGImageRefs
-#include <vImage/vImage_Utilities.h>
+#  include <vImage/vImage_Utilities.h>
+# endif
 
+# if __has_include(<CoreVideo/CVPixelBuffer.h>)
 // Import and export video frames from CVPixelBufferRefs
-#include <vImage/vImage_CVUtilities.h>
-#endif
-
+#  include <vImage/vImage_CVUtilities.h>
+# endif
+#endif /* defined __clang__ && defined __has_include */
 
 #endif /* VIMAGE_H */

@@ -1,7 +1,7 @@
 /*
         NSTextContainer.h
         Application Kit
-        Copyright (c) 1994-2015, Apple Inc.
+        Copyright (c) 1994-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -43,7 +43,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextContainer : NSObject <NSCoding, N
 
 // Accessor for the NSLayoutManager object owning the receiver.
 // Avoid assigning a layout manager directly through this property.  Adding a text container to a layout manager through -[NSLayoutManager addTextContainer:] will use the property for assigning the new layout manager.
-@property(nullable, assign) NSLayoutManager *layoutManager;
+@property (nullable, assign) NSLayoutManager *layoutManager;
 
 // This method should be used instead of the primitive -setLayoutManager: if you need to replace a container's layoutManager with a new one leaving the rest of the web intact.  All the NSTextContainers on the old NSLayoutManager get transferred to the new one.  This method deals with all the work of making sure the containers don't get deallocated and removing the old layoutManager from the text storage and replacing it with the new one.
 - (void)replaceLayoutManager:(NSLayoutManager *)newLayoutManager NS_AVAILABLE(10_0, 9_0);
@@ -55,7 +55,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextContainer : NSObject <NSCoding, N
 @property NSSize size NS_AVAILABLE(10_11, 7_0);
 
 // Default value : empty array  An array of NSBezierPath representing the exclusion paths inside the receiver's bounding rect.
-@property(copy) NSArray<NSBezierPath *> *exclusionPaths NS_AVAILABLE(10_11, 7_0);
+@property (copy) NSArray<NSBezierPath *> *exclusionPaths NS_AVAILABLE(10_11, 7_0);
 
 // Default value: NSLineBreakByWordWrapping  The line break mode defines the behavior of the last line inside the text container.
 @property NSLineBreakMode lineBreakMode NS_AVAILABLE(10_11, 7_0);

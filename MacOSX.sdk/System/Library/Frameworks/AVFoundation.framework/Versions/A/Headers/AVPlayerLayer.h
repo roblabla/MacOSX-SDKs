@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -71,14 +71,13 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
  					and AVLayerVideoGravityResize. AVLayerVideoGravityResizeAspect is default. 
 					See <AVFoundation/AVAnimation.h> for a description of these options.
  */
-@property(copy) NSString *videoGravity;
+@property(copy) AVLayerVideoGravity videoGravity;
 
 /*!
 	 @property		readyForDisplay
 	 @abstract		Boolean indicating that the first video frame has been made ready for display for the current item of the associated AVPlayer.
 	 @discusssion	Use this property as an indicator of when best to show or animate-in an AVPlayerLayer into view. 
-					An AVPlayerLayer may be displayed, or made visible, while this propoerty is NO, however the layer will not have any 
-					user-visible content until the value becomes YES. 
+					An AVPlayerLayer may be displayed, or made visible, while this propoerty is NO, however the layer will not have any user-visible content until the value becomes YES. Note that if an animation is added to an AVPlayerLayer before it becomes readyForDisplay the video image displayed inside might not animate with the receiver.
 					This property remains NO for an AVPlayer currentItem whose AVAsset contains no enabled video tracks.
  */
 @property(nonatomic, readonly, getter=isReadyForDisplay) BOOL readyForDisplay;

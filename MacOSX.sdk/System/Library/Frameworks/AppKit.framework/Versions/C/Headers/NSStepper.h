@@ -1,7 +1,7 @@
 /*
         NSStepper.h
         Application Kit
-        Copyright (c) 2000-2016, Apple Inc.
+        Copyright (c) 2000-2017, Apple Inc.
         All rights reserved.
 */
 

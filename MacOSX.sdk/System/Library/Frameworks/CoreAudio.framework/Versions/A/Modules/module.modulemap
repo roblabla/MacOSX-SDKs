@@ -11,7 +11,16 @@ framework module CoreAudio [extern_c]
 
 		export *
 	}
-
+	
+	module AudioHardware
+	{
+		header "AudioHardware.h"
+		// AudioHardwareDeprecated.h isn't supposed to be included directly
+		// or have its own submodule since it depends on context.
+		textual header "AudioHardwareDeprecated.h"
+		export *
+	}
+	
 	export *
 	module * { export * }
 }

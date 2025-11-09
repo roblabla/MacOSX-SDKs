@@ -8,6 +8,10 @@
  *	@copyright 2011 Apple, Inc. All rights reserved.
  */
 
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
+
 #import <CoreBluetooth/CBDefines.h>
 
 #import <Foundation/Foundation.h>
@@ -50,73 +54,29 @@ CB_EXTERN NSString * const CBUUIDCharacteristicFormatString;
  */
 CB_EXTERN NSString * const CBUUIDCharacteristicAggregateFormatString;
 /*!
- *  @const CBUUIDValidRangeString
- *  @discussion The string representation of the UUID for the valid range descriptor.
- *				The corresponding value for this descriptor is an <code>NSData</code> object.
+ *  @const CBUUIDCharacteristicValidRangeString
+ *  @discussion Data representing the valid min/max values accepted for a characteristic.
  */
-CB_EXTERN NSString * const CBUUIDValidRangeString;
-
-
+CB_EXTERN NSString * const CBUUIDCharacteristicValidRangeString;
 
 /*!
- *  @const CBUUIDGenericAccessProfileString
- *  @discussion The string representation of the GAP UUID.
+ *  @const CBUUIDL2CAPPSMCharacteristicString
+ *  @discussion The PSM (a little endian uint16_t) of an L2CAP Channel associated with the GATT service
+ *				containing this characteristic.  Servers can publish this characteristic with the UUID
+ *				ABDD3056-28FA-441D-A470-55A75A52553A
  */
-CB_EXTERN NSString * const CBUUIDGenericAccessProfileString;
-/*!
- *  @const CBUUIDGenericAttributeProfileString
- *  @discussion The string representation of the GATT UUID.
- */
-CB_EXTERN NSString * const CBUUIDGenericAttributeProfileString;
-
-/*!
- *  @const CBUUIDDeviceNameString
- *  @discussion The string representation of the GAP device name UUID.
- */
-CB_EXTERN NSString * const CBUUIDDeviceNameString;
-/*!
- *  @const CBUUIDAppearanceString
- *  @discussion The string representation of the GAP appearance UUID.
- */
-CB_EXTERN NSString * const CBUUIDAppearanceString;
-/*!
- *  @const CBUUIDPeripheralPrivacyFlagString
- *  @discussion The string representation of the GAP privacy flag UUID.
- */
-CB_EXTERN NSString * const CBUUIDPeripheralPrivacyFlagString;
-/*!
- *  @const CBUUIDReconnectionAddressString
- *  @discussion The string representation of the GAP reconnection address UUID.
- */
-CB_EXTERN NSString * const CBUUIDReconnectionAddressString;
-/*!
- *  @const CBUUIDPeripheralPreferredConnectionParametersString
- *  @discussion The string representation of the GAP preferred connection parameter UUID.
- */
-CB_EXTERN NSString * const CBUUIDPeripheralPreferredConnectionParametersString;
-/*!
- *  @const CBUUIDServiceChangedString
- *  @discussion The string representation of the GATT service changed UUID.
- */
-CB_EXTERN NSString * const CBUUIDServiceChangedString;
-
-
+CB_EXTERN NSString * const CBUUIDL2CAPPSMCharacteristicString NS_AVAILABLE(10_13, 11_0);
 
 /*!
  * @class CBUUID
  *
  * @discussion
- *      A 16-bit or 128-bit Bluetooth UUID.
- *      16-bit UUIDs are implicitly pre-filled with the Bluetooth Base UUID.
+ *      A 16-bit, 32-bit, or 128-bit Bluetooth UUID.
+ *      16-bit and 32-bit UUIDs are implicitly pre-filled with the Bluetooth Base UUID.
  *
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
 CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
-{
-@private
-	NSData	*_data;
-	NSRange	 _range;
-}
 
 /*!
  * @property data
@@ -125,7 +85,7 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
  *      The UUID as NSData.
  *
  */
-@property(nonatomic, readonly, nonnull) NSData *data;
+@property(nonatomic, readonly) NSData *data;
 
 /*!
  * @property UUIDString
@@ -134,13 +94,13 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
  *      The UUID as NSString.
  *
  */
-@property(nonatomic, readonly, nonnull) NSString *UUIDString NS_AVAILABLE(10_10, 7_1);
+@property(nonatomic, readonly) NSString *UUIDString NS_AVAILABLE(10_10, 7_1);
 
 /*!
  * @method UUIDWithString:
  *
  *  @discussion
- *      Creates a CBUUID with a 16-bit or 128-bit UUID string representation.
+ *      Creates a CBUUID with a 16-bit, 32-bit, or 128-bit UUID string representation.
  *      The expected format for 128-bit UUIDs is a string punctuated by hyphens, for example 68753A44-4D6F-1226-9C60-0050E4C00067.
  *
  */
@@ -150,7 +110,7 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
  * @method UUIDWithData:
  *
  *  @discussion
- *      Creates a CBUUID with a 16-bit or 128-bit UUID data container.
+ *      Creates a CBUUID with a 16-bit, 32-bit, or 128-bit UUID data container.
  *
  */
 + (CBUUID *)UUIDWithData:(NSData *)theData;
@@ -162,7 +122,7 @@ CB_EXTERN_CLASS @interface CBUUID : NSObject <NSCopying>
  *      Creates a CBUUID with a CFUUIDRef.
  *
  */
-+ (CBUUID *)UUIDWithCFUUID:(CFUUIDRef)theUUID;
++ (CBUUID *)UUIDWithCFUUID:(CFUUIDRef)theUUID NS_DEPRECATED(10_7, 10_13, 5_0, 9_0);
 
 /*!
  * @method UUIDWithNSUUID:

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015 Apple Inc.
+ * Copyright (c) 2015, 2017 Apple Inc.
  * All rights reserved.
  */
 
@@ -65,7 +65,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface NEAppProxyFlow : NSObject
 
 /*!
- * @method openWithLocalAddress:completionHandler:
+ * @method openWithLocalEndpoint:completionHandler:
  * @discussion This function is used by an NEProvider implementation to indicate that it is ready to handle flow data.
  * @param localEndpoint The address and port that should be used as the local endpoint of the socket associated with this flow. If the source application already specifed a local endpoint by binding the socket then this parameter is ignored.
  * @param completionHandler A block that is called when the process of opening flow is complete. A nil value passed to this block indicates that the flow was opened successfully. A non-nil NSError value indicates that the flow failed to open successfully.

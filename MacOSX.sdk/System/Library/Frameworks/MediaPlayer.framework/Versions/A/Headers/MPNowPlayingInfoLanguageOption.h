@@ -22,21 +22,21 @@ NS_ASSUME_NONNULL_BEGIN
 // Common values used to to populate MPNowPlayingInfoLanguageOption's
 // characteristics property.
 // See the AVMediaSelectionOption documentation about Media Characteristics for more details.
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicIsMainProgramContent NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicIsAuxiliaryContent NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicTranscribesSpokenDialog NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicDescribesMusicAndSound NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicEasyToRead NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicDescribesVideo NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicLanguageTranslation NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicDubbedTranslation NS_AVAILABLE(10_12_2, 9_0);
-MP_EXTERN NSString *const MPLanguageOptionCharacteristicVoiceOverTranslation NS_AVAILABLE(10_12_2, 9_0);
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicIsMainProgramContent MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicIsAuxiliaryContent MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicContainsOnlyForcedSubtitles MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicTranscribesSpokenDialog MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicDescribesMusicAndSound MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicEasyToRead MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicDescribesVideo MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicLanguageTranslation MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicDubbedTranslation MP_API(ios(9.0), macos(10.12.2));
+MP_EXTERN NSString * const MPLanguageOptionCharacteristicVoiceOverTranslation MP_API(ios(9.0), macos(10.12.2));
 
 typedef NS_ENUM(NSUInteger, MPNowPlayingInfoLanguageOptionType) {
     MPNowPlayingInfoLanguageOptionTypeAudible,
     MPNowPlayingInfoLanguageOptionTypeLegible,
-} NS_ENUM_AVAILABLE(10_12_2, 9_0);
+} MP_API(ios(9.0), macos(10.12.2));
 
 // -----------------------------------------------------------------------------
 

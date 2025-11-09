@@ -11,6 +11,7 @@
 #include <math.h>
 #include "port.h"
 #include "vvector.h"
+#include <OpenGL/OpenGLAvailability.h>
 
 #define BACKWARDS_INTERSECT (2)
 

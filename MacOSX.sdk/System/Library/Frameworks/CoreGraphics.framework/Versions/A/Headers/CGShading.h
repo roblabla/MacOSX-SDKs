@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGShading *CGShadingRef;
+typedef struct CF_BRIDGED_TYPE(id) CGShading *CGShadingRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGColorSpace.h>

@@ -1,7 +1,7 @@
 /*
  NSStackView.h
  Application Kit
- Copyright (c) 2012-2016, Apple Inc.
+ Copyright (c) 2012-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, NSStackViewDistribution) {
  - clippingResistancePriority
  - detachedViews
  */
-typedef float NSStackViewVisibilityPriority NS_AVAILABLE_MAC(10_9);
+typedef float NSStackViewVisibilityPriority NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE_MAC(10_9);
 
 static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityMustHold NS_AVAILABLE_MAC(10_9) = 1000; //Maximum, default - the view will never be detached
 static const NSStackViewVisibilityPriority NSStackViewVisibilityPriorityDetachOnlyIfNecessary NS_AVAILABLE_MAC(10_9) = 900;

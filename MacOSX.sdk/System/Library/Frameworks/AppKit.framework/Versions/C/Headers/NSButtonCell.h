@@ -1,7 +1,7 @@
 /*
 	NSButtonCell.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -239,8 +239,8 @@ static const NSBezelStyle NSRoundedDisclosureBezelStyle = NSBezelStyleRoundedDis
 static const NSBezelStyle NSInlineBezelStyle = NSBezelStyleInline;
 
 static const NSBezelStyle NSSmallIconButtonBezelStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "This bezel style is obsolete and should not be used.") = (NSBezelStyle)2;
-static const NSBezelStyle NSThickSquareBezelStyle API_DEPRECATED_WITH_REPLACEMENT("NSBezelStyleRegularSquare", macosx(10.0, 10.12)) = (NSBezelStyle)3;
-static const NSBezelStyle NSThickerSquareBezelStyle API_DEPRECATED_WITH_REPLACEMENT("NSBezelStyleRegularSquare", macosx(10.0, 10.12)) = (NSBezelStyle)4;
+static const NSBezelStyle NSThickSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRegularSquare", 10.0, 10.12) = (NSBezelStyle)3;
+static const NSBezelStyle NSThickerSquareBezelStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSBezelStyleRegularSquare", 10.0, 10.12) = (NSBezelStyle)4;
 
 @interface NSButtonCell(NSDeprecated)
 

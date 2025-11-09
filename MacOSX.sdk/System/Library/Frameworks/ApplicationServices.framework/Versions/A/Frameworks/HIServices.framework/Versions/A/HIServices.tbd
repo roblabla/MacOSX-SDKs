@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: DDEC2821-3E0D-389D-8078-C6CB952DD06F', 'x86_64: 34C950CC-1084-354A-BCE6-9396EDB29DF8' ]
+uuids:           [ 'i386: FFD40A1C-CFCD-3681-A764-699CFF6086B4', 'x86_64: FFCEC402-5D5A-36E4-878E-7088A8797722' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices
-current-version: 591.0
-objc-constraint: none
+current-version: 620
 parent-umbrella: ApplicationServices
 exports:         
   - archs:           [ i386 ]
@@ -140,16 +139,16 @@ exports:
                        _HIS_XPC_CFNotificationCenterPostNotification, _HIS_XPC_CFPreferencesCopyValue, 
                        _HIS_XPC_CFPreferencesSetValue, _HIS_XPC_CFPreferencesSynchronize, 
                        _HIS_XPC_CopyMacManagerPrefs, _HIS_XPC_GetCapsLockModifierState, 
-                       _HIS_XPC_PostDeleteKeyEvent, _HIS_XPC_SendAppleEventToSystemProcess, 
-                       _HIS_XPC_SetCapsLockDelayOverride, _HIS_XPC_SetCapsLockLEDInhibit, 
-                       _HIS_XPC_SetCapsLockModifierState, _HIS_XPC_SetNetworkLocation, 
-                       _HIShapeContainsPoint, _HIShapeCreateCopy, _HIShapeCreateCopyAsQDRgn, 
-                       _HIShapeCreateDifference, _HIShapeCreateEmpty, _HIShapeCreateIntersection, 
-                       _HIShapeCreateMutable, _HIShapeCreateMutableCopy, _HIShapeCreateMutableWithRect, 
-                       _HIShapeCreateUnion, _HIShapeCreateWithQDRgn, _HIShapeCreateWithRect, 
-                       _HIShapeCreateXor, _HIShapeDifference, _HIShapeEnumerate, 
-                       _HIShapeGetAsQDRgn, _HIShapeGetBounds, _HIShapeGetTypeID, 
-                       _HIShapeInset, _HIShapeIntersect, _HIShapeIntersectsRect, 
+                       _HIS_XPC_PostDeleteKeyEvent, _HIS_XPC_RevealFileInFinder, 
+                       _HIS_XPC_SendAppleEventToSystemProcess, _HIS_XPC_SetCapsLockDelayOverride, 
+                       _HIS_XPC_SetCapsLockLED, _HIS_XPC_SetCapsLockLEDInhibit, _HIS_XPC_SetCapsLockModifierState, 
+                       _HIS_XPC_SetNetworkLocation, _HIShapeContainsPoint, _HIShapeCreateCopy, 
+                       _HIShapeCreateCopyAsQDRgn, _HIShapeCreateDifference, _HIShapeCreateEmpty, 
+                       _HIShapeCreateIntersection, _HIShapeCreateMutable, _HIShapeCreateMutableCopy, 
+                       _HIShapeCreateMutableWithRect, _HIShapeCreateUnion, _HIShapeCreateWithQDRgn, 
+                       _HIShapeCreateWithRect, _HIShapeCreateXor, _HIShapeDifference, 
+                       _HIShapeEnumerate, _HIShapeGetAsQDRgn, _HIShapeGetBounds, 
+                       _HIShapeGetTypeID, _HIShapeInset, _HIShapeIntersect, _HIShapeIntersectsRect, 
                        _HIShapeIsEmpty, _HIShapeIsRectangular, _HIShapeOffset, _HIShapeReplacePathInCGContext, 
                        _HIShapeSetEmpty, _HIShapeSetWithShape, _HIShapeUnion, _HIShapeUnionWithRect, 
                        _HIShapeXor, _ICAddMapEntry, _ICAddProfile, _ICBegin, _ICCountMapEntries, 
@@ -196,15 +195,17 @@ exports:
                        __AXInterfaceSetReduceMotionEnabled, __AXInterfaceSetReduceTransparencyEnabled, 
                        __AXInterfaceSetRichmondEnabled, __AXShouldElementBeIgnoredForNavigation, 
                        __AXUIElementCopyElementAtPositionIncludeIgnored, __AXUIElementCreateApplicationWithPresenterPid, 
-                       __AXUIElementCreateWithData, __AXUIElementCreateWithDataAndPresenterPid, 
-                       __AXUIElementCreateWithPtr, __AXUIElementCreateWithRemoteToken, 
-                       __AXUIElementGetActualPid, __AXUIElementGetData, __AXUIElementGetIsProcessSuspended, 
+                       __AXUIElementCreateWithData, __AXUIElementCreateWithDataAndPid, 
+                       __AXUIElementCreateWithDataAndPresenterPid, __AXUIElementCreateWithPtr, 
+                       __AXUIElementCreateWithRemoteToken, __AXUIElementGetActualPid, 
+                       __AXUIElementGetData, __AXUIElementGetIsProcessSuspended, 
                        __AXUIElementGetWindow, __AXUIElementNotifyProcessSuspendStatus, 
                        __AXUIElementPostNotification, __AXUIElementPostNotificationForObservedElement, 
                        __AXUIElementPostNotificationWithInfo, __AXUIElementRegisterServerWithRunLoop, 
                        __AXUIElementRemoteTokenCreate, __AXUIElementUnregisterServer, 
-                       __AddLabelsChangedCallback, __GDBIconsCGCacheList, __GetApplicationDesiresAttention, 
-                       __GetFrontUIProcess, __HIShapeCreateWithCGImage, __HIShapeCreateWithCGSRegionObj, 
+                       __AddLabelsChangedCallback, __CopyProcessBundleLocationURL, 
+                       __GDBIconsCGCacheList, __GetApplicationDesiresAttention, __GetFrontUIProcess, 
+                       __HIShapeCreateWithCGImage, __HIShapeCreateWithCGSRegionObj, 
                        __HIShapeGetNative, __HIShapeOutsetToPixelBoundary, __HIShapeSetImmutable, 
                        __HIShapeSetShapeWithOffset, __HideOtherApplications, __ICCopyMailHostName, 
                        __ICCopyMailUserName, __ISCreateCGImageForType, __ISCreateCGImageForTypeAtScale, 
@@ -239,6 +240,6 @@ exports:
                        _kAXUIElementCopyHierarchyResultCountKey, _kAXUIElementCopyHierarchyResultErrorKey, 
                        _kAXUIElementCopyHierarchyResultValueKey, _kAXUIElementCopyHierarchyReturnAttributeErrorsKey, 
                        _kAXUIElementCopyHierarchySkipInspectionForAttributesKey, 
-                       _kAXUnderlineColorTextAttribute, _kAXUnderlineTextAttribute, 
-                       _kAXVisibleNameKey, _kAXVisualTextAlignmentKey ]
+                       _kAXUIElementCopyHierarchyTruncateStringsKey, _kAXUnderlineColorTextAttribute, 
+                       _kAXUnderlineTextAttribute, _kAXVisibleNameKey, _kAXVisualTextAlignmentKey ]
 ...

@@ -66,10 +66,10 @@
 */
 @protocol IMServicePlugInFileTransferSessionSupport
 
-- (oneway void) startOutgoingFileTransferSession:(IMServicePlugInOutgoingFileTransferSession *)session toHandle:(NSString *)handle;
+- (oneway void) startOutgoingFileTransferSession:(IMServicePlugInOutgoingFileTransferSession *)session toHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);;
 
-- (oneway void) acceptIncomingFileTransferSession:(IMServicePlugInIncomingFileTransferSession *)session;
-- (oneway void) cancelFileTransferSession:(IMServicePlugInFileTransferSession *)session;
+- (oneway void) acceptIncomingFileTransferSession:(IMServicePlugInIncomingFileTransferSession *)session NS_DEPRECATED_MAC(10_7, 10_13);;
+- (oneway void) cancelFileTransferSession:(IMServicePlugInFileTransferSession *)session NS_DEPRECATED_MAC(10_7, 10_13);;
 
 @end
 
@@ -79,11 +79,11 @@
 #pragma mark -
 
 @protocol IMServiceApplicationFileTransferSessionSupport <IMServiceApplication>
-- (oneway void) plugInDidReceiveIncomingFileTransferSession:(IMServicePlugInIncomingFileTransferSession *)session fromHandle:(NSString *)handle;
+- (oneway void) plugInDidReceiveIncomingFileTransferSession:(IMServicePlugInIncomingFileTransferSession *)session fromHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);;
 
-- (oneway void) plugInDidAcceptOutgoingFileTransferSession:(IMServicePlugInOutgoingFileTransferSession *)session;
+- (oneway void) plugInDidAcceptOutgoingFileTransferSession:(IMServicePlugInOutgoingFileTransferSession *)session NS_DEPRECATED_MAC(10_7, 10_13);;
 
-- (oneway void) plugInDidFinishFileTransferSession:(IMServicePlugInFileTransferSession *)session error:(NSError *)error;
+- (oneway void) plugInDidFinishFileTransferSession:(IMServicePlugInFileTransferSession *)session error:(NSError *)error NS_DEPRECATED_MAC(10_7, 10_13);;
 
 @end
 

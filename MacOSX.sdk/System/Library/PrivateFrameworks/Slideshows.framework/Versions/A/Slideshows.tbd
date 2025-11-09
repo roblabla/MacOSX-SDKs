@@ -1,11 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BE830E40-D123-331D-B3A9-E9D5A3D2068A' ]
+uuids:           [ 'x86_64: 055BC896-B566-334C-AD34-B6854096E92F' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Slideshows.framework/Versions/A/Slideshows
 current-version: 4.5
 compatibility-version: 4.5
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _Antialias1D, _AppendIntToString, _Bounce, _CGPointFromCAMLString, 

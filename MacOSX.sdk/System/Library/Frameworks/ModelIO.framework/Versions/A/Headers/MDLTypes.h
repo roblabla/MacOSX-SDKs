@@ -54,6 +54,12 @@ typedef NS_ENUM(NSInteger, MDLProbePlacement) {
     MDLProbePlacementIrradianceDistribution
 };
 
+typedef NS_ENUM(NSUInteger, MDLDataPrecision) {
+    MDLDataPrecisionUndefined,
+    MDLDataPrecisionFloat,
+    MDLDataPrecisionDouble
+};
+
 NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
 @protocol MDLNamed
@@ -74,6 +80,9 @@ MDL_EXPORT
 
 - (void)addObject:(MDLObject*)object;
 - (void)removeObject:(MDLObject*)object;
+- (MDLObject *)objectAtIndexedSubscript:(NSUInteger)index;
+
+@property (readonly) NSUInteger count;
 
 // returns an array of this object's contained objects, aka children
 @property (nonatomic, readonly, retain) NSArray<MDLObject*> *objects;

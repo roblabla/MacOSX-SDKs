@@ -1,7 +1,7 @@
 /*
    NSHapticFeedback.h
    Application Kit
-   Copyright (c) 2015-2016, Apple Inc.
+   Copyright (c) 2015-2017, Apple Inc.
    All rights reserved.
 */
 
@@ -33,7 +33,7 @@ NS_CLASS_AVAILABLE(10_11, NA)
 @interface NSHapticFeedbackManager : NSObject
 /* The most appropriate feedback performer for the current input device, accessibility settings and user preferences. Note: This device may change during the life of your application. Always request the defaultPerformer when you need perform feedback.
  */
-+ (id<NSHapticFeedbackPerformer>)defaultPerformer;
+@property (class, readonly, strong) id<NSHapticFeedbackPerformer> defaultPerformer;
 @end
 
 NS_ASSUME_NONNULL_END

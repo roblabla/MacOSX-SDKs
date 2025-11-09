@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 8FE4F93B-04FC-36E1-9077-7D87635BB7F6' ]
+uuids:           [ 'x86_64: E6498E23-9CCD-3CE0-9B6E-8AB3B8D5D635' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/NetworkMenusCommon.framework/NetworkMenusCommon
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _const_notificationName_NC, _easeFunction, _gEnableLogs, _kConnectionTimerInterval, 

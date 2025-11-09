@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2015 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  * 
@@ -196,7 +196,7 @@ extern int nfs_ticks;
 #define NFS_MFLAG_MUTEJUKEBOX		8	/* don't treat jukebox errors as unresponsive */
 #define NFS_MFLAG_EPHEMERAL		9	/* ephemeral (mirror) mount */
 #define NFS_MFLAG_NOCALLBACK		10	/* don't provide callback RPC service */
-#define NFS_MFLAG_NONAMEDATTR		11	/* don't use named attributes */
+#define NFS_MFLAG_NAMEDATTR		11	/* don't use named attributes */
 #define NFS_MFLAG_NOACL			12	/* don't support ACLs */
 #define NFS_MFLAG_ACLONLY		13	/* only support ACLs - not mode */
 #define NFS_MFLAG_NFC			14	/* send NFC strings */
@@ -528,14 +528,19 @@ struct nfsstats {
 #include <sys/_types/_guid_t.h> /* for guid_t below */
 #define MAXIDNAMELEN		1024
 struct nfs_testmapid {
-	uint32_t		ntm_name2id;	/* lookup name 2 id or id 2 name */
+	uint32_t		ntm_lookup;	/* lookup name 2 id or id 2 name */
 	uint32_t		ntm_grpflag;	/* Is this a group or user maping */
 	uint32_t		ntm_id;		/* id to map or return */
 	uint32_t		pad;	
 	guid_t			ntm_guid;	/* intermidiate guid used in conversion */
 	char			ntm_name[MAXIDNAMELEN]; /* name to map or return */
 };
-	
+
+#define NTM_ID2NAME	0
+#define NTM_NAME2ID	1
+#define NTM_NAME2GUID	2
+#define NTM_GUID2NAME	3
+
 /*
  * fs.nfs sysctl(3) identifiers
  */

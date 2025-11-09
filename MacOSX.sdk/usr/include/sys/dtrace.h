@@ -333,6 +333,10 @@ typedef enum dtrace_probespec {
 #define DIF_VAR_DISPATCHQADDR	0x0201	/* Apple specific dispatch queue addr */
 #define DIF_VAR_MACHTIMESTAMP	0x0202	/* mach_absolute_timestamp() */
 #define DIF_VAR_CPU		0x0203	/* cpu number */
+#define DIF_VAR_CPUINSTRS	0x0204	/* cpu instructions */
+#define DIF_VAR_CPUCYCLES	0x0205	/* cpu cycles */
+#define DIF_VAR_VINSTRS		0x0206	/* virtual instructions */
+#define DIF_VAR_VCYCLES		0x0207	/* virtual cycles */
 #endif /* __APPLE __ */
 
 #define	DIF_SUBR_RAND			0

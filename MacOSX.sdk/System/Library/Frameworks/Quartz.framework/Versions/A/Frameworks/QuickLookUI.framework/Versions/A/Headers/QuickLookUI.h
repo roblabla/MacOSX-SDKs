@@ -15,5 +15,6 @@
 #import <QuickLookUI/QLPreviewItem.h>
 #import <QuickLookUI/QLPreviewPanel.h>
 #import <QuickLookUI/QLPreviewView.h>
+#import <QuickLookUI/QLPreviewingController.h>
 
 #endif /* __QUICKLOOKUI_QUICKLOOKUI__ */

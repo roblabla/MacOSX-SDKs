@@ -11,7 +11,7 @@
 
 /* The type used to represent a CoreGraphics font. */
 
-typedef struct CGFont *CGFontRef;
+typedef struct CF_BRIDGED_TYPE(id) CGFont *CGFontRef;
 
 /* A type to represent indexes in a CGFontRef. */
 
@@ -245,14 +245,14 @@ CG_EXTERN bool CGFontCanCreatePostScriptSubset(CGFontRef cg_nullable font,
 CG_EXTERN CFDataRef __nullable CGFontCreatePostScriptSubset(
     CGFontRef cg_nullable font, CFStringRef cg_nullable subsetName,
     CGFontPostScriptFormat format, const CGGlyph * __nullable glyphs,
-    size_t count, const CGGlyph encoding[256])
+    size_t count, const CGGlyph encoding[CG_NONNULL_ARRAY 256])
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return a PostScript encoding of `font' containing glyphs in
    `encoding'. */
 
 CG_EXTERN CFDataRef __nullable CGFontCreatePostScriptEncoding(
-    CGFontRef cg_nullable font, const CGGlyph encoding[256])
+    CGFontRef cg_nullable font, const CGGlyph encoding[CG_NONNULL_ARRAY 256])
     CG_AVAILABLE_STARTING(__MAC_10_4, __IPHONE_2_0);
 
 /* Return an array of font table tags in `font'. Each entry in the array is

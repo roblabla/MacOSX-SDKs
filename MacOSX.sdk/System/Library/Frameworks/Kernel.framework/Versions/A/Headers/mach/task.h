@@ -49,7 +49,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	task_MSG_COUNT
-#define	task_MSG_COUNT	51
+#define	task_MSG_COUNT	52
 #endif	/* task_MSG_COUNT */
 
 #include <mach/std_types.h>
@@ -100,7 +100,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_threads
 (
-	task_t target_task,
+	task_inspect_t target_task,
 	thread_act_array_t *act_list,
 	mach_msg_type_number_t *act_listCnt
 );
@@ -189,7 +189,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_special_port
 (
-	task_t task,
+	task_inspect_t task,
 	int which_port,
 	mach_port_t *special_port
 );
@@ -257,7 +257,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_exception_ports
 (
-	task_t task,
+	task_inspect_t task,
 	exception_mask_t exception_mask,
 	exception_mask_array_t masks,
 	mach_msg_type_number_t *masksCnt,
@@ -693,7 +693,7 @@ extern
 #endif	/* mig_external */
 kern_return_t task_get_dyld_image_infos
 (
-	task_t task,
+	task_inspect_t task,
 	dyld_kernel_image_info_array_t *dyld_images,
 	mach_msg_type_number_t *dyld_imagesCnt
 );
@@ -748,6 +748,20 @@ kern_return_t task_map_corpse_info_64
 	task_t corspe_task,
 	mach_vm_address_t *kcd_addr_begin,
 	mach_vm_size_t *kcd_size
+);
+
+/* Routine task_inspect */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t task_inspect
+(
+	task_inspect_t task,
+	task_inspect_flavor_t flavor,
+	task_inspect_info_t info_out,
+	mach_msg_type_number_t *info_outCnt
 );
 
 __END_DECLS
@@ -924,7 +938,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		thread_state_flavor_t flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[224];
+		natural_t new_state[614];
 	} __Request__thread_create_running_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1233,7 +1247,7 @@ __END_DECLS
 		NDR_record_t NDR;
 		thread_state_flavor_t flavor;
 		mach_msg_type_number_t new_stateCnt;
-		natural_t new_state[224];
+		natural_t new_state[614];
 	} __Request__task_set_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -1438,6 +1452,19 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		task_inspect_flavor_t flavor;
+		mach_msg_type_number_t info_outCnt;
+	} __Request__task_inspect_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Request__task_subsystem__defined */
 
 /* union of all requests */
@@ -1496,6 +1523,7 @@ union __RequestUnion__task_subsystem {
 	__Request__task_register_dyld_set_dyld_state_t Request_task_register_dyld_set_dyld_state;
 	__Request__task_register_dyld_get_process_state_t Request_task_register_dyld_get_process_state;
 	__Request__task_map_corpse_info_64_t Request_task_map_corpse_info_64;
+	__Request__task_inspect_t Request_task_inspect;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 /* typedefs for all replies */
@@ -1959,7 +1987,7 @@ union __RequestUnion__task_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_msg_type_number_t old_stateCnt;
-		natural_t old_state[224];
+		natural_t old_state[614];
 	} __Reply__task_get_state_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -2187,6 +2215,20 @@ union __RequestUnion__task_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack()
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_msg_type_number_t info_outCnt;
+		integer_t info_out[4];
+	} __Reply__task_inspect_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack()
+#endif
 #endif /* !__Reply__task_subsystem__defined */
 
 /* union of all replies */
@@ -2245,6 +2287,7 @@ union __ReplyUnion__task_subsystem {
 	__Reply__task_register_dyld_set_dyld_state_t Reply_task_register_dyld_set_dyld_state;
 	__Reply__task_register_dyld_get_process_state_t Reply_task_register_dyld_get_process_state;
 	__Reply__task_map_corpse_info_64_t Reply_task_map_corpse_info_64;
+	__Reply__task_inspect_t Reply_task_inspect;
 };
 #endif /* !__RequestUnion__task_subsystem__defined */
 
@@ -2300,7 +2343,8 @@ union __ReplyUnion__task_subsystem {
     { "task_register_dyld_shared_cache_image_info", 3447 },\
     { "task_register_dyld_set_dyld_state", 3448 },\
     { "task_register_dyld_get_process_state", 3449 },\
-    { "task_map_corpse_info_64", 3450 }
+    { "task_map_corpse_info_64", 3450 },\
+    { "task_inspect", 3451 }
 #endif
 
 #ifdef __AfterMigUserHeader

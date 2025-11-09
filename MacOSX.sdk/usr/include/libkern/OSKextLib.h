@@ -227,6 +227,12 @@ __BEGIN_DECLS
  */
 #define kOSKextReturnStopping                        libkern_kext_err(0x1a)
 
+/*!
+ * @define   kOSKextReturnSystemPolicy
+ * @abstract The kext was prevented from loading due to system policy.
+ */
+#define kOSKextReturnSystemPolicy                    libkern_kext_err(0x1b)
+
 #if PRAGMA_MARK
 #pragma mark -
 /********************************************************************/

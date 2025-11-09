@@ -102,6 +102,7 @@ protected:
 #endif
     IOReturn setDeviceASPMBits(IOPCIDevice * device, uint32_t bits);
     IOReturn setDeviceL1PMBits(IOPCIDevice * device, uint32_t bits);
+    IOReturn setDeviceCLKREQBits(IOPCIDevice * device, uint32_t bits);
 
     IOReturn setDevicePowerState(IOPCIDevice * device, IOOptionBits options,
 								 unsigned long prevState, unsigned long newState);
@@ -389,6 +390,8 @@ public:
     virtual void probeBus( IOService * provider, UInt8 busNum );
 
     virtual IOReturn requestProbe( IOOptionBits options );
+
+    virtual void systemWillShutdown(IOOptionBits specifier);
 
     virtual void saveBridgeState( void );
 

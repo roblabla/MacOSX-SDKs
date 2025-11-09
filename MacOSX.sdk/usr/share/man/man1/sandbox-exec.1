@@ -1,12 +1,12 @@
 .\" 
-.\" Copyright (c) 2006-2012 Apple Inc. All rights reserved.
+.\" Copyright (c) 2006-2017 Apple Inc. All rights reserved.
 .\" 
-.Dd February 14, 2012
+.Dd March 9, 2017
 .Dt SANDBOX-EXEC 1
 .Os "Mac OS X"
 .Sh NAME
 .Nm sandbox-exec
-.Nd execute within a sandbox
+.Nd execute within a sandbox (DEPRECATED)
 .Sh SYNOPSIS
 .Nm
 .Op Fl f Ar profile-file
@@ -16,6 +16,12 @@
 .Ar command
 .Op Ar arguments ...
 .Sh DESCRIPTION
+The
+.Nm
+command is
+.Sy DEPRECATED .
+Developers who wish to sandbox an app should instead adopt the App Sandbox feature described in the App Sandbox Design Guide.
+
 The
 .Nm
 command enters a sandbox using a profile specified by the

@@ -11,16 +11,16 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CK_EXTERN NSString * const CKRecordTypeShare NS_AVAILABLE(10_12, 10_0);
+CK_EXTERN NSString * const CKRecordTypeShare API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 /* Predefined keys in the CKRecordTypeShare schema.  They're used by the out of process UI flow to send a share, and as part of the share acceptance flow.  These are optional */
 
 /* Value is a string.  Example for a recipe sharing app: "Pot Roast" */
-CK_EXTERN NSString * const CKShareTitleKey NS_AVAILABLE(10_12, 10_0);
+CK_EXTERN NSString * const CKShareTitleKey API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 /* Value is a data blob suitable to pass into -[NSImage imageWithData:] or -[UIImage imageWithData:] */
-CK_EXTERN NSString * const CKShareThumbnailImageDataKey NS_AVAILABLE(10_12, 10_0);
+CK_EXTERN NSString * const CKShareThumbnailImageDataKey API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 /* Value is a string representing a UTI.  Example for a recipe sharing app: "com.mycompany.recipe" */
-CK_EXTERN NSString * const CKShareTypeKey NS_AVAILABLE(10_12, 10_0);
+CK_EXTERN NSString * const CKShareTypeKey API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 /*
  Like CKRecords, CKShares can store arbitrary key-value pairs.  They are modified and fetched in the same manner.
@@ -29,7 +29,7 @@ CK_EXTERN NSString * const CKShareTypeKey NS_AVAILABLE(10_12, 10_0);
  A CKShare will appear in a CKFetchRecordChangesOperation's results set whenever the participant list is updated.  For that reason, you shouldn't place heavy key-value pairs in it.
  */
 
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKShare : CKRecord
 
 - (instancetype)init NS_UNAVAILABLE;

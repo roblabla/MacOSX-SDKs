@@ -1,7 +1,7 @@
 //
 //  SCNPhysicsField.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -17,17 +17,17 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SCNPhysicsFieldScope) {
     SCNPhysicsFieldScopeInsideExtent,
     SCNPhysicsFieldScopeOutsideExtent,
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 /*!
  @class SCNPhysicsField
  @abstract SCNPhysicsField is an abstract class that describes a force field that applies in the physics world.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsField : NSObject <NSCopying, NSSecureCoding>
 
 // The following properties control the behavior of the field
-@property(nonatomic) CGFloat strength;                               // The strength factor of the force field. default 1.0.
+@property(nonatomic) CGFloat strength;                               // The strength factor of the force field. Defaults to 1.0.
 @property(nonatomic) CGFloat falloffExponent;                        // Changes the power of the force based on the distance from the center of the field (1 / distance ^ falloffExponent). Defaults to 0.0.
 @property(nonatomic) CGFloat minimumDistance;                        // Distance from the center of the field where the effect is at full strength. Defaults to 1e-6.
 
@@ -35,18 +35,18 @@ API_AVAILABLE(macosx(10.10))
 @property(nonatomic, getter=isExclusive) BOOL exclusive;             // If YES, it suppresses any other field in its area. Defaults to NO.
 
 // The following properties control the area of effect
-@property(nonatomic) SCNVector3 halfExtent;                          // Specifies the half extent of the area of effect. default is FLT_MAX.
+@property(nonatomic) SCNVector3 halfExtent;                          // Specifies the half extent of the area of effect. Defaults to FLT_MAX.
 @property(nonatomic) BOOL usesEllipsoidalExtent;                     // YES means that the area of effect is rounded within the extent. Defaults to NO.
 @property(nonatomic) SCNPhysicsFieldScope scope;                     // Controls whether the force field should apply inside or outside of the area. Defaults to inside.
 
-@property(nonatomic) SCNVector3 offset;                              // Offset of origin effect within the area
-@property(nonatomic) SCNVector3 direction;                           // Direction of the field. Only applies to linear gravity and vortex fields. Defaults to (0,-1,0)
+@property(nonatomic) SCNVector3 offset;                              // Offset of origin effect within the area.
+@property(nonatomic) SCNVector3 direction;                           // Direction of the field. Only applies to linear gravity and vortex fields. Defaults to (0,-1,0).
 
 /*!
  @property categoryBitMask
- @abstract Determines the node categories that will be influenced by the receiver. Defaults to all bit set.
+ @abstract Determines the node physicsBody's categories that will be influenced by the receiver. Defaults to all bit set.
  */
-@property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macosx(10.10));
+@property(nonatomic) NSUInteger categoryBitMask API_AVAILABLE(macos(10.10));
 
 
 /**

@@ -671,9 +671,19 @@ typedef CF_OPTIONS(UInt32, AudioUnitRenderActionFlags)
 					audio unit is not authorised, that it cannot be used. A host can then present 
 					a UI to notify the user the audio unit is not able to be used in its current 
 					state.
+	@constant		kAudioUnitErr_MIDIOutputBufferFull
+					Returned during the render call, if the audio unit produces more MIDI output,
+					than the default allocated buffer. The audio unit can provide a size hint, in
+					case it needs a larger buffer. See the documentation for AUAudioUnit's
+					MIDIOutputBufferSizeHint property.
     @constant   kAudioComponentErr_InstanceInvalidated
-        the component instance's implementation is not available, most likely because the process
-        that published it is no longer running
+        The component instance's implementation is not available, most likely because the process
+        that published it is no longer running.
+	@constant	kAudioUnitErr_RenderTimeout
+		The audio unit did not satisfy the render request in time.
+	@constant kAudioUnitErr_ExtensionNotFound
+		The specified identifier did not match any Audio Unit Extensions.
+	
 */
 CF_ENUM(OSStatus) {
 	kAudioUnitErr_InvalidProperty			= -10879,
@@ -695,8 +705,10 @@ CF_ENUM(OSStatus) {
 	kAudioUnitErr_Initialized				= -10849,
 	kAudioUnitErr_InvalidOfflineRender		= -10848,
 	kAudioUnitErr_Unauthorized				= -10847,
+    kAudioUnitErr_MIDIOutputBufferFull		= -66753,
     kAudioComponentErr_InstanceInvalidated  = -66749,
-	kAudioUnitErr_RenderTimeout				= -66745
+	kAudioUnitErr_RenderTimeout				= -66745,
+	kAudioUnitErr_ExtensionNotFound			= -66744
 };
 
 
@@ -1423,7 +1435,40 @@ AudioUnitReset(						AudioUnit			inUnit,
 												__OSX_AVAILABLE_STARTING(__MAC_10_0,__IPHONE_2_0);
 
 
+#if defined(__LP64__) || TARGET_OS_IPHONE
+/*!
+	@function		AudioUnitExtensionSetComponentList
+	@abstract		Allows the implementor of an audio unit extension to dynamically modify the
+					list of component registrations for the extension.
+	@param			extensionIdentifier
+						The bundle ID of the audio unit extension.
+	@param			audioComponentInfo
+						An array of dictionaries, one for each component, in the same format as
+						described in AudioComponent.h for the Info.plist key "AudioComponents".
+    @result         An OSStatus result code.
+	@discussion
+					Note that the bundle ID of the process calling this API must prefix (or match)
+					the provided extension identifier.
+*/
+extern OSStatus
+AudioUnitExtensionSetComponentList(CFStringRef extensionIdentifier, __nullable CFArrayRef audioComponentInfo)
+								API_AVAILABLE(macos(10.13), ios(11.0))
+								__TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
+/*!
+	@function		AudioUnitExtensionCopyComponentList
+	@abstract		Returns the component registrations for a given audio unit extension.
+	@param			extensionIdentifier
+						The bundle ID of the audio unit extension.
+	@result			An array of dictionaries, one for each component, in the same format as
+					described in AudioComponent.h for the Info.plist key "AudioComponents".
+					The caller should release this value when done with it.
+*/
+extern __nullable CFArrayRef
+AudioUnitExtensionCopyComponentList(CFStringRef extensionIdentifier)
+								API_AVAILABLE(macos(10.13), ios(11.0))
+								__TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+#endif
 
 
 /*!

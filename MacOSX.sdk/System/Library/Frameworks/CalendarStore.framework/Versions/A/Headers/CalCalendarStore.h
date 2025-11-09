@@ -1,15 +1,19 @@
 //	
 //	CalCalendarStore.h
-//	Calendar Store Framework
+//	CalendarStore Framework
 //	
 //  Copyright 2006 Apple Inc. All rights reserved.
 //	
 //	Allows the client to access the user's calendars, events, and tasks. Clients can also save changes to an event, task,
 //  or calendar.
 //
-//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead. 
+//  The CalendarStore framework is deprecated.  Please use the EventKit framework instead. 
 
-@class CalCalendar, CalEvent, CalTask;
+#import <Foundation/Foundation.h>
+
+@class CalCalendar;
+@class CalEvent;
+@class CalTask;
 
 //  CalSpan
 //  This enumerated type is used to indicate the scope of a change being made to a repeating event. CalSpanThisEvent 
@@ -142,7 +146,7 @@ typedef enum {
 
 @end
 
-//  The Calendar Store frameworks posts notifications when any application, including yours, makes changes to the user's 
+//  The CalendarStore frameworks posts notifications when any application, including yours, makes changes to the user's 
 //  calendar data. Your application will not receive these notification until you have called defaultCalendarStore at 
 //  least once.
 

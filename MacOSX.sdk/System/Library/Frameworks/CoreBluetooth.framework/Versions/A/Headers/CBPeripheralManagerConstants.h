@@ -32,7 +32,7 @@ CB_EXTERN NSString * const CBPeripheralManagerOptionShowPowerAlertKey NS_AVAILAB
  *  @seealso	centralManager:willRestoreState:
  *
  */
-CB_EXTERN NSString * const CBPeripheralManagerOptionRestoreIdentifierKey NS_AVAILABLE(NA, 7_0);
+CB_EXTERN NSString * const CBPeripheralManagerOptionRestoreIdentifierKey NS_AVAILABLE(10_9, 7_0);
 
 /*!
  *  @const  CBPeripheralManagerRestoredStateServicesKey
@@ -45,7 +45,7 @@ CB_EXTERN NSString * const CBPeripheralManagerOptionRestoreIdentifierKey NS_AVAI
  *  @seealso	addService:
  *
  */
-CB_EXTERN NSString * const CBPeripheralManagerRestoredStateServicesKey NS_AVAILABLE(NA, 7_0);
+CB_EXTERN NSString * const CBPeripheralManagerRestoredStateServicesKey NS_AVAILABLE(10_9, 7_0);
 
 /*!
  *  @const  CBPeripheralManagerRestoredStateAdvertisementDataKey
@@ -56,6 +56,6 @@ CB_EXTERN NSString * const CBPeripheralManagerRestoredStateServicesKey NS_AVAILA
  *  @seealso	startAdvertising:
  *
  */
-CB_EXTERN NSString * const CBPeripheralManagerRestoredStateAdvertisementDataKey NS_AVAILABLE(NA, 7_0);
+CB_EXTERN NSString * const CBPeripheralManagerRestoredStateAdvertisementDataKey NS_AVAILABLE(10_9, 7_0);
 
 NS_ASSUME_NONNULL_END

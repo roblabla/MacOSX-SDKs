@@ -1,7 +1,7 @@
 /*
         NSInterfaceStyle.h
         Application Kit
-        Copyright (c) 1995-2016, Apple Inc.
+        Copyright (c) 1995-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -9,11 +9,11 @@
 #import <AppKit/AppKitDefines.h>
 
 enum {
-    NSNoInterfaceStyle = 0,    // Default value for a window's interfaceStyle
-    NSNextStepInterfaceStyle = 1, 
-    NSWindows95InterfaceStyle = 2,
-    NSMacintoshInterfaceStyle = 3
-} NS_ENUM_DEPRECATED_MAC(10_0, 10_8);
+    NSNoInterfaceStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_8) = 0,    // Default value for a window's interfaceStyle
+    NSNextStepInterfaceStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_8) = 1,
+    NSWindows95InterfaceStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_8) = 2,
+    NSMacintoshInterfaceStyle NS_ENUM_DEPRECATED_MAC(10_0, 10_8) = 3
+};
 typedef NSUInteger NSInterfaceStyle NS_DEPRECATED_MAC(10_0, 10_8); // Deprecated in 10.8
 
 APPKIT_EXTERN NSInterfaceStyle NSInterfaceStyleForKey(NSString *key, NSResponder *responder) NS_DEPRECATED_MAC(10_0, 10_8);

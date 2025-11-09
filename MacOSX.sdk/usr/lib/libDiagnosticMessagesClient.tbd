@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 6D00EEF3-EF16-3B1B-AB18-B8F797B468A2', 'x86_64: 422911A4-E273-3E88-BFC4-DF6470E48242' ]
+uuids:           [ 'i386: 6829B180-2556-3A7E-A2E6-BD4859DF30A7', 'x86_64: 9712E980-76EE-3A89-AEA6-DF4BAF5C0574' ]
 platform:        macosx
 install-name:    /usr/lib/libDiagnosticMessagesClient.dylib
 objc-constraint: none

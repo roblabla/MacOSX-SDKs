@@ -1,7 +1,7 @@
 /*
 	NSButton.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property BOOL imageHugsTitle API_AVAILABLE(macosx(10.12));
 
 - (void)setButtonType:(NSButtonType)type;
-@property NSInteger state;
+@property NSControlStateValue state;
 @property (getter=isBordered) BOOL bordered;
 @property (getter=isTransparent) BOOL transparent;
 - (void)setPeriodicDelay:(float)delay interval:(float)interval;
@@ -79,7 +79,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param action The action message sent by the control.
  @return An initialized button object.
  */
-+ (instancetype)checkboxWithTitle:(NSString *)title target:(nullable id)target action:(nullable SEL)action NS_SWIFT_NAME(init(checkboxWithTitle:target:action:)) NS_AVAILABLE_MAC(10_12);
++ (instancetype)checkboxWithTitle:(NSString *)title target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
 
 /*!
  Creates a standard radio button with the provided title.
@@ -88,7 +88,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param action The action message sent by the control.
  @return An initialized button object.
  */
-+ (instancetype)radioButtonWithTitle:(NSString *)title target:(nullable id)target action:(nullable SEL)action NS_SWIFT_NAME(init(radioButtonWithTitle:target:action:)) NS_AVAILABLE_MAC(10_12);
++ (instancetype)radioButtonWithTitle:(NSString *)title target:(nullable id)target action:(nullable SEL)action NS_AVAILABLE_MAC(10_12);
 
 @end
 

@@ -1,11 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F2ECF6E5-6B8E-3385-9446-AA8F2C4CF421', 'x86_64: C36B13D0-3E4E-30FA-B6B3-07589401D37D' ]
+uuids:           [ 'i386: 9E7AC0A4-3DEE-35FA-A21B-2FFA6D3BA48F', 'x86_64: 4D00A0CE-1B8A-3EC8-A4A9-B56FE3846594' ]
 platform:        macosx
-flags:           [ flat_namespace ]
 install-name:    /usr/lib/libnetsnmpagent.25.dylib
 current-version: 26.2
-compatibility-version: 26.0
+compatibility-version: 26
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
@@ -277,86 +276,4 @@ exports:
                        _vacm_parse_rwuser, _vacm_parse_setaccess, _vacm_parse_view, 
                        _vacm_standard_views, _vacm_warn_if_not_configured, _version_sysoid, 
                        _version_sysoid_len ]
-undefineds:      
-  - archs:           [ i386 ]
-    symbols:         [ ___udivdi3, '_chmod$UNIX2003', '_close$UNIX2003', '_fopen$UNIX2003', 
-                       '_fputs$UNIX2003', '_fwrite$UNIX2003', '_open$UNIX2003', '_popen$UNIX2003', 
-                       '_read$UNIX2003', '_select$UNIX2003', '_system$UNIX2003', 
-                       '_waitpid$UNIX2003', '_write$UNIX2003' ]
-  - archs:           [ x86_64 ]
-    symbols:         [ _chmod, _close, _fopen, _fputs, _fwrite, _open, _popen, _read, 
-                       '_select$1050', _system, _waitpid, _write ]
-  - archs:           [ i386, x86_64 ]
-    symbols:         [ __DefaultRuneLocale, ___bzero, ___error, ___maskrune, ___memcpy_chk, 
-                       ___snprintf_chk, ___sprintf_chk, ___stack_chk_fail, ___stack_chk_guard, 
-                       ___strcpy_chk, ___strlcpy_chk, _atime_newMarker, _atime_ready, 
-                       _atime_setMarker, _atoi, _build_oid, _build_oid_noalloc, _calloc, 
-                       _chown, _clear_callback, _clear_sec_mod, _clear_snmp_enum, 
-                       _clear_user_list, _config_perror, _config_pwarn, _copy_nword, 
-                       _count_varbinds, _debug_indent_add, _debug_indent_get, _debug_is_token_registered, 
-                       _debugmsg, _debugmsg_hex, _debugmsg_oid, _debugmsg_oidrange, 
-                       _debugmsg_var, _debugmsgtoken, _dup, _endpwent, _execv, _exit, 
-                       _fclose, _find_sec_mod, _find_varbind_in_list, _fork, _fprintf, 
-                       _fread, _free, _free_config, _fscanf, _get_configuration_directory, 
-                       _get_myaddr, _get_tree, _get_tree_head, _getdtablesize, _getgrnam, 
-                       _getpwnam, _gettimeofday, _init_usm_conf, _malloc, _memchr, 
-                       _memcmp, _memcpy, _memdup, _memmove, _memset_pattern16, _mib_to_asn_type, 
-                       _netsnmpUDPDomain, _netsnmp_TCPIPv6Domain, _netsnmp_UDPIPv6Domain, 
-                       _netsnmp_UnixDomain, _netsnmp_add_list_data, _netsnmp_callback_open, 
-                       _netsnmp_clear_callback_list, _netsnmp_clear_tdomain_list, 
-                       _netsnmp_compare_netsnmp_index, _netsnmp_config_error, _netsnmp_container_find, 
-                       _netsnmp_container_free_list, _netsnmp_container_init_list, 
-                       _netsnmp_create_data_list, _netsnmp_ds_get_boolean, _netsnmp_ds_get_int, 
-                       _netsnmp_ds_get_string, _netsnmp_ds_register_config, _netsnmp_ds_register_premib, 
-                       _netsnmp_ds_set_boolean, _netsnmp_ds_set_int, _netsnmp_ds_set_string, 
-                       _netsnmp_free_all_list_data, _netsnmp_free_list_data, _netsnmp_get_list_data, 
-                       _netsnmp_get_list_node, _netsnmp_get_version, _netsnmp_gethostbyname_v4, 
-                       _netsnmp_mktemp, _netsnmp_ncompare_netsnmp_index, _netsnmp_oid_compare_ll, 
-                       _netsnmp_oid_equals, _netsnmp_oid_find_prefix, _netsnmp_oid_stash_add_data, 
-                       _netsnmp_oid_stash_free, _netsnmp_oid_stash_get_data, _netsnmp_oid_stash_getnext_node, 
-                       _netsnmp_parse_args, _netsnmp_query_get_default_session_unchecked, 
-                       _netsnmp_query_set_default_session, _netsnmp_register_default_domain, 
-                       _netsnmp_register_default_target, _netsnmp_remove_list_node, 
-                       _netsnmp_sess_config_and_open_transport, _netsnmp_sess_config_transport, 
-                       _netsnmp_sess_log_error, _netsnmp_snmpTCPDomain, _netsnmp_sprint_realloc_objid, 
-                       _netsnmp_str_to_gid, _netsnmp_str_to_uid, _netsnmp_strdup_and_null, 
-                       _netsnmp_tdomain_transport_full, _netsnmp_transport_free, 
-                       _netsnmp_transport_open_client, _netsnmp_transport_open_server, 
-                       _netsnmp_udp6_agent_config_tokens_register, _netsnmp_udp6_getSecName, 
-                       _netsnmp_udp6_parse_security, _netsnmp_udp_agent_config_tokens_register, 
-                       _netsnmp_udp_getSecName, _netsnmp_udp_parse_security, _netsnmp_unix_agent_config_tokens_register, 
-                       _netsnmp_unix_create_path_with_mode, _netsnmp_unix_dont_create_path, 
-                       _netsnmp_unix_getSecName, _netsnmp_unix_parse_security, _optarg, 
-                       _parse_oid_indexes, _parse_one_oid_index, _parse_secLevel_conf, 
-                       _pclose, _perror, _pipe, _printf, _puts, _read_app_config_store, 
-                       _read_config_read_memory, _read_configs, _realloc, _register_app_config_handler, 
-                       _register_config_handler, _rewind, _run_alarms, _se_add_pair_to_slist, 
-                       _se_find_label_in_slist, _se_find_value_in_slist, _sigaction, 
-                       _signal, _skip_token, _snmp_add, _snmp_add_full, _snmp_add_null_var, 
-                       _snmp_add_var, _snmp_alarm_register, _snmp_alarm_unregister, 
-                       _snmp_async_send, _snmp_call_callbacks, _snmp_callback_available, 
-                       _snmp_clone_mem, _snmp_clone_pdu, _snmp_clone_var, _snmp_clone_varbind, 
-                       _snmp_close, _snmp_duplicate_objid, _snmp_errno, _snmp_error, 
-                       _snmp_free_pdu, _snmp_free_var, _snmp_free_varbind, _snmp_get_do_debugging, 
-                       _snmp_get_do_logging, _snmp_get_next_sessid, _snmp_get_next_transid, 
-                       _snmp_get_statistic, _snmp_increment_statistic, _snmp_increment_statistic_by, 
-                       _snmp_log, _snmp_log_perror, _snmp_oid_compare, _snmp_oidtree_compare, 
-                       _snmp_parse_oid, _snmp_pdu_add_variable, _snmp_pdu_create, 
-                       _snmp_perror, _snmp_read, _snmp_realloc, _snmp_register_callback, 
-                       _snmp_replace_var_types, _snmp_reset_var_buffers, _snmp_select_info, 
-                       _snmp_send, _snmp_sess_init, _snmp_sess_perror, _snmp_sess_pointer, 
-                       _snmp_sess_session, _snmp_sess_session_lookup, _snmp_sess_transport, 
-                       _snmp_set_var_objid, _snmp_set_var_typed_value, _snmp_set_var_value, 
-                       _snmp_store_if_needed, _snmp_synch_response_cb, _snmp_timeout, 
-                       _snmp_unregister_callback, _snmp_varlist_add_variable, _snmpv3_get_engineID, 
-                       _snprint_objid, _sprint_realloc_asciistring, _sprint_realloc_by_type, 
-                       _sprint_realloc_objid, _sscanf, _strcasecmp, _strchr, _strcmp, 
-                       _strcpy, _strdup, _strlen, _strncasecmp, _strncmp, _strtok_r, 
-                       _strtol, _strtoul, _uatime_hdiff, _unlink, _unregister_app_config_handler, 
-                       _unregister_config_handler, _vacm_checkSubtree, _vacm_createAccessEntry, 
-                       _vacm_createGroupEntry, _vacm_createViewEntry, _vacm_destroyAllAccessEntries, 
-                       _vacm_destroyAllGroupEntries, _vacm_destroyAllViewEntries, 
-                       _vacm_getAccessEntry, _vacm_getGroupEntry, _vacm_getViewEntry, 
-                       _vacm_is_configured, _vacm_parse_config_access, _vacm_parse_config_auth_access, 
-                       _vacm_parse_config_group, _vacm_parse_config_view, dyld_stub_binder ]
 ...

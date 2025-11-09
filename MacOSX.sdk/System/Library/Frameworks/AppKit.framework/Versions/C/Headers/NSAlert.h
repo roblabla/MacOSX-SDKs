@@ -1,13 +1,15 @@
 /*
 	NSAlert.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSArray.h>
+
 #import <AppKit/NSApplication.h>
+#import <AppKit/NSHelpManager.h>
 #import <AppKit/NSGraphics.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -23,6 +25,20 @@ typedef NS_ENUM(NSUInteger, NSAlertStyle) {
     NSAlertStyleInformational = 1,
     NSAlertStyleCritical = 2
 };
+
+/* These are additional NSModalResponse values used by NSAlert's -runModal and -beginSheetModalForWindow:completionHandler:.
+
+ By default, NSAlert return values are position dependent, with this mapping:
+ first (rightmost) button = NSAlertFirstButtonReturn
+ second button = NSAlertSecondButtonReturn
+ third button = NSAlertThirdButtonReturn
+ buttonPosition 3+x = NSAlertThirdButtonReturn + x
+
+ Note that these return values do not apply to an NSAlert created via +alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:, which instead uses the same return values as NSRunAlertPanel.  See NSAlertDefaultReturn, etc. in NSPanel.h
+ */
+static const NSModalResponse NSAlertFirstButtonReturn = 1000;
+static const NSModalResponse NSAlertSecondButtonReturn = 1001;
+static const NSModalResponse NSAlertThirdButtonReturn = 1002;
 
 @interface NSAlert : NSObject
 {
@@ -81,22 +97,6 @@ typedef NS_ENUM(NSUInteger, NSAlertStyle) {
 */
 @property (readonly, copy) NSArray<NSButton *> *buttons;
 
-/* These are additional NSModalResponse values used by NSAlert's -runModal and -beginSheetModalForWindow:completionHandler:.
- 
-   By default, NSAlert return values are position dependent, with this mapping:
-       first (rightmost) button = NSAlertFirstButtonReturn
-       second button = NSAlertSecondButtonReturn
-       third button = NSAlertThirdButtonReturn
-       buttonPosition 3+x = NSAlertThirdButtonReturn + x
- 
-   Note that these return values do not apply to an NSAlert created via +alertWithMessageText:defaultButton:alternateButton:otherButton:informativeTextWithFormat:, which instead uses the same return values as NSRunAlertPanel.  See NSAlertDefaultReturn, etc. in NSPanel.h
-*/
-enum {
-	NSAlertFirstButtonReturn	= 1000,
-	NSAlertSecondButtonReturn	= 1001,
-	NSAlertThirdButtonReturn	= 1002
-};
-
 /* In order to customize a return value for a button:
    setTag:(NSInteger)tag;	setting a tag on a button will cause that tag to be the button's return value
    
@@ -112,7 +112,7 @@ enum {
 */
 @property BOOL showsHelp;
 
-@property (nullable, copy) NSString *helpAnchor;
+@property (nullable, copy) NSHelpAnchorName helpAnchor;
 
 @property NSAlertStyle alertStyle;
 
@@ -177,9 +177,9 @@ enum {
 
 @end
 
-static const NSAlertStyle NSWarningAlertStyle API_DEPRECATED_WITH_REPLACEMENT("NSAlertStyleWarning", macosx(10.3, 10.12)) = NSAlertStyleWarning;
-static const NSAlertStyle NSInformationalAlertStyle API_DEPRECATED_WITH_REPLACEMENT("NSAlertStyleInformational", macosx(10.3, 10.12)) = NSAlertStyleInformational;
-static const NSAlertStyle NSCriticalAlertStyle API_DEPRECATED_WITH_REPLACEMENT("NSAlertStyleCritical", macosx(10.3, 10.12)) = NSAlertStyleCritical;
+static const NSAlertStyle NSWarningAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleWarning", 10.3, 10.12) = NSAlertStyleWarning;
+static const NSAlertStyle NSInformationalAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleInformational", 10.3, 10.12) = NSAlertStyleInformational;
+static const NSAlertStyle NSCriticalAlertStyle NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSAlertStyleCritical", 10.3, 10.12) = NSAlertStyleCritical;
 
 NS_ASSUME_NONNULL_END
 

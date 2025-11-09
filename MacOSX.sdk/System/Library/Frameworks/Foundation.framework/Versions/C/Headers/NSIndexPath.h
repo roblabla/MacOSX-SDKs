@@ -1,5 +1,5 @@
 /*  NSIndexPath.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -18,9 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 + (instancetype)indexPathWithIndex:(NSUInteger)index;
-+ (instancetype)indexPathWithIndexes:(const NSUInteger [])indexes length:(NSUInteger)length;
++ (instancetype)indexPathWithIndexes:(const NSUInteger [_Nullable])indexes length:(NSUInteger)length;
 
-- (instancetype)initWithIndexes:(const NSUInteger [])indexes length:(NSUInteger)length NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIndexes:(const NSUInteger [_Nullable])indexes length:(NSUInteger)length NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)initWithIndex:(NSUInteger)index;
 
@@ -38,7 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     It is the developer’s responsibility to allocate the memory for the C array.
  */
-- (void)getIndexes:(NSUInteger *)indexes range:(NSRange)positionRange NS_AVAILABLE(10_9, 7_0);
+- (void)getIndexes:(NSUInteger *)indexes range:(NSRange)positionRange API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 	// comparison support
 - (NSComparisonResult)compare:(NSIndexPath *)otherObject; // sorting an array of indexPaths using this comparison results in an array representing nodes in depth-first traversal order

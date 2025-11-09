@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 77D8B141-A478-3B4C-AFF2-93F497BA073B', 'x86_64: 4184959F-DB37-3A3F-A642-CE261E20B62B' ]
+uuids:           [ 'i386: FB7F2247-2E9E-31C1-8A75-98243868C813', 'x86_64: B2178A32-5A74-3C0E-BE3E-3F0D7E884B16' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Collaboration.framework/Versions/A/Collaboration
-current-version: 78.0
-objc-constraint: none
+current-version: 80
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _CBIdentity._reserved, _CBIdentityQuery._csQuery, _CBIdentityQuery._delegate, 

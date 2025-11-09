@@ -1,7 +1,7 @@
 /*
 	NSSpeechSynthesizer.h
 	Application Kit
-	Copyright (c) 2003-2016, Apple Inc.
+	Copyright (c) 2003-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -16,22 +16,55 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSString, NSURL, NSError;
 @protocol NSSpeechSynthesizerDelegate;
 
-APPKIT_EXTERN NSString * const NSVoiceName;
-APPKIT_EXTERN NSString * const NSVoiceIdentifier;
-APPKIT_EXTERN NSString * const NSVoiceAge;
-APPKIT_EXTERN NSString * const NSVoiceGender;
-APPKIT_EXTERN NSString * const NSVoiceDemoText;
-APPKIT_EXTERN NSString * const NSVoiceLocaleIdentifier NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString * const NSVoiceSupportedCharacters NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString * const NSVoiceIndividuallySpokenCharacters NS_AVAILABLE_MAC(10_5);
+typedef NSString * NSSpeechSynthesizerVoiceName NS_STRING_ENUM;
+
+typedef NSString * NSVoiceAttributeKey NS_STRING_ENUM;
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceName;
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceIdentifier;
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceAge;
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceGender;
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceDemoText;
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceLocaleIdentifier NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceSupportedCharacters NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceIndividuallySpokenCharacters NS_AVAILABLE_MAC(10_5);
+
+// Use with addSpeechDictionary:
+typedef NSString * NSSpeechDictionaryKey NS_STRING_ENUM;
+APPKIT_EXTERN NSSpeechDictionaryKey const NSSpeechDictionaryLocaleIdentifier NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechDictionaryKey const NSSpeechDictionaryModificationDate NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechDictionaryKey const NSSpeechDictionaryPronunciations NS_AVAILABLE_MAC(10_5);  // NSArray
+APPKIT_EXTERN NSSpeechDictionaryKey const NSSpeechDictionaryAbbreviations NS_AVAILABLE_MAC(10_5);  // NSArray
+APPKIT_EXTERN NSSpeechDictionaryKey const NSSpeechDictionaryEntrySpelling NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechDictionaryKey const NSSpeechDictionaryEntryPhonemes NS_AVAILABLE_MAC(10_5);  // NSString
 
 // Values for NSVoiceGender voice attribute
-APPKIT_EXTERN NSString * const NSVoiceGenderNeuter;
-APPKIT_EXTERN NSString * const NSVoiceGenderMale;
-APPKIT_EXTERN NSString * const NSVoiceGenderFemale;
+typedef NSString * NSVoiceGenderName NS_STRING_ENUM;
+APPKIT_EXTERN NSVoiceGenderName const NSVoiceGenderNeuter;
+APPKIT_EXTERN NSVoiceGenderName const NSVoiceGenderMale;
+APPKIT_EXTERN NSVoiceGenderName const NSVoiceGenderFemale;
+
+// Synthesizer Properties (including object type)
+typedef NSString * NSSpeechPropertyKey NS_STRING_ENUM;
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechStatusProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechErrorsProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechInputModeProperty NS_AVAILABLE_MAC(10_5);  // NSString: NSSpeechModeTextProperty or NSSpeechModePhonemeProperty
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechCharacterModeProperty NS_AVAILABLE_MAC(10_5); // NSString: NSSpeechModeNormalProperty or NSSpeechModeLiteralProperty
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechNumberModeProperty NS_AVAILABLE_MAC(10_5); // NSString: NSSpeechModeNormalProperty or NSSpeechModeLiteralProperty
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechRateProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechPitchBaseProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechPitchModProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechVolumeProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechSynthesizerInfoProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechRecentSyncProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechPhonemeSymbolsProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechCurrentVoiceProperty NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechCommandDelimiterProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechResetProperty NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSSpeechPropertyKey const NSSpeechOutputToFileURLProperty NS_AVAILABLE_MAC(10_5);  // NSURL
+
 
 // NSVoiceLanguage has been replaced by NSVoiceLocaleIdentifier
-APPKIT_EXTERN NSString * const NSVoiceLanguage NS_DEPRECATED_MAC(10_0, 10_5);
+APPKIT_EXTERN NSVoiceAttributeKey const NSVoiceLanguage NS_DEPRECATED_MAC(10_0, 10_5);
 
 // Values for NSSpeechBoundary
 typedef NS_ENUM(NSUInteger, NSSpeechBoundary) {
@@ -46,7 +79,7 @@ typedef NS_ENUM(NSUInteger, NSSpeechBoundary) {
     id	_privateNSSpeechSynthesizerVars;
 }
 
-- (nullable instancetype)initWithVoice:(nullable NSString *)voice;
+- (nullable instancetype)initWithVoice:(nullable NSSpeechSynthesizerVoiceName)voice;
 
 - (BOOL)startSpeakingString:(NSString *)string;
 - (BOOL)startSpeakingString:(NSString *)string toURL:(NSURL *)url;
@@ -57,23 +90,23 @@ typedef NS_ENUM(NSUInteger, NSSpeechBoundary) {
 - (void)pauseSpeakingAtBoundary:(NSSpeechBoundary)boundary NS_AVAILABLE_MAC(10_5);
 - (void)continueSpeaking NS_AVAILABLE_MAC(10_5);
 
-@property (nullable, assign) id<NSSpeechSynthesizerDelegate> delegate;
-- (nullable NSString *)voice;
-- (BOOL)setVoice:(nullable NSString *)voice;
+@property (nullable, weak) id<NSSpeechSynthesizerDelegate> delegate;
+- (nullable NSSpeechSynthesizerVoiceName)voice;
+- (BOOL)setVoice:(nullable NSSpeechSynthesizerVoiceName)voice;
 @property float rate NS_AVAILABLE_MAC(10_5);
 @property float volume NS_AVAILABLE_MAC(10_5);
 @property BOOL usesFeedbackWindow;
 
-- (void)addSpeechDictionary:(NSDictionary<NSString *, id> *)speechDictionary NS_AVAILABLE_MAC(10_5);
+- (void)addSpeechDictionary:(NSDictionary<NSSpeechDictionaryKey, id> *)speechDictionary NS_AVAILABLE_MAC(10_5);
 - (NSString *)phonemesFromText:(NSString *)text NS_AVAILABLE_MAC(10_5);
 
-- (nullable id)objectForProperty:(NSString *)property error:(NSError **)outError NS_AVAILABLE_MAC(10_5);
-- (BOOL)setObject:(nullable id)object forProperty:(NSString *)property error:(NSError **)outError NS_AVAILABLE_MAC(10_5);
+- (nullable id)objectForProperty:(NSSpeechPropertyKey)property error:(NSError **)outError NS_AVAILABLE_MAC(10_5);
+- (BOOL)setObject:(nullable id)object forProperty:(NSSpeechPropertyKey)property error:(NSError **)outError NS_AVAILABLE_MAC(10_5);
 
-+ (BOOL)isAnyApplicationSpeaking;
-+ (NSString *)defaultVoice;
-+ (NSArray<NSString *> *)availableVoices;
-+ (NSDictionary<NSString *, id> *)attributesForVoice:(NSString *)voice;
+@property (class, readonly, getter=isAnyApplicationSpeaking) BOOL anyApplicationSpeaking;
+@property (class, readonly, copy) NSSpeechSynthesizerVoiceName defaultVoice;
+@property (class, readonly, copy) NSArray<NSSpeechSynthesizerVoiceName> *availableVoices;
++ (NSDictionary<NSVoiceAttributeKey, id> *)attributesForVoice:(NSSpeechSynthesizerVoiceName)voice;
 
 @end
 
@@ -86,67 +119,46 @@ typedef NS_ENUM(NSUInteger, NSSpeechBoundary) {
 - (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didEncounterSyncMessage:(NSString *)message NS_AVAILABLE_MAC(10_5);
 @end
 
-// Synthesizer Properties (including object type)
-APPKIT_EXTERN NSString * const NSSpeechStatusProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
-APPKIT_EXTERN NSString * const NSSpeechErrorsProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
-APPKIT_EXTERN NSString * const NSSpeechInputModeProperty NS_AVAILABLE_MAC(10_5);  // NSString: NSSpeechModeTextProperty or NSSpeechModePhonemeProperty
-APPKIT_EXTERN NSString * const NSSpeechCharacterModeProperty NS_AVAILABLE_MAC(10_5); // NSString: NSSpeechModeNormalProperty or NSSpeechModeLiteralProperty
-APPKIT_EXTERN NSString * const NSSpeechNumberModeProperty NS_AVAILABLE_MAC(10_5); // NSString: NSSpeechModeNormalProperty or NSSpeechModeLiteralProperty
-APPKIT_EXTERN NSString * const NSSpeechRateProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechPitchBaseProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechPitchModProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechVolumeProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechSynthesizerInfoProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
-APPKIT_EXTERN NSString * const NSSpeechRecentSyncProperty NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechPhonemeSymbolsProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
-APPKIT_EXTERN NSString * const NSSpeechCurrentVoiceProperty NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechCommandDelimiterProperty NS_AVAILABLE_MAC(10_5);  // NSDictionary, see keys below
-APPKIT_EXTERN NSString * const NSSpeechResetProperty NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString * const NSSpeechOutputToFileURLProperty NS_AVAILABLE_MAC(10_5);  // NSURL
-
+typedef NSString * NSSpeechMode NS_STRING_ENUM;
 // Speaking Modes for NSSpeechInputModeProperty
-APPKIT_EXTERN NSString * const NSSpeechModeText NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString * const NSSpeechModePhoneme NS_AVAILABLE_MAC(10_5);
-
+APPKIT_EXTERN NSSpeechMode const NSSpeechModeText NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSSpeechMode const NSSpeechModePhoneme NS_AVAILABLE_MAC(10_5);
 // Speaking Modes for NSSpeechInputModeProperty and NSSpeechNumberModeProperty
-APPKIT_EXTERN NSString * const NSSpeechModeNormal NS_AVAILABLE_MAC(10_5);
-APPKIT_EXTERN NSString * const NSSpeechModeLiteral NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSSpeechMode const NSSpeechModeNormal NS_AVAILABLE_MAC(10_5);
+APPKIT_EXTERN NSSpeechMode const NSSpeechModeLiteral NS_AVAILABLE_MAC(10_5);
 
 // Dictionary keys returned by NSSpeechStatusProperty
-APPKIT_EXTERN NSString * const NSSpeechStatusOutputBusy NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechStatusOutputPaused NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechStatusNumberOfCharactersLeft NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechStatusPhonemeCode NS_AVAILABLE_MAC(10_5);  // NSNumber
+typedef NSString * NSSpeechStatusKey NS_STRING_ENUM;
+APPKIT_EXTERN NSSpeechStatusKey const NSSpeechStatusOutputBusy NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechStatusKey const NSSpeechStatusOutputPaused NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechStatusKey const NSSpeechStatusNumberOfCharactersLeft NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechStatusKey const NSSpeechStatusPhonemeCode NS_AVAILABLE_MAC(10_5);  // NSNumber
 
 // Dictionary keys returned by NSSpeechErrorProperty
-APPKIT_EXTERN NSString * const NSSpeechErrorCount NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechErrorOldestCode NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechErrorOldestCharacterOffset NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechErrorNewestCode NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechErrorNewestCharacterOffset NS_AVAILABLE_MAC(10_5);  // NSNumber
+typedef NSString * NSSpeechErrorKey NS_STRING_ENUM;
+APPKIT_EXTERN NSSpeechErrorKey const NSSpeechErrorCount NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechErrorKey const NSSpeechErrorOldestCode NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechErrorKey const NSSpeechErrorOldestCharacterOffset NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechErrorKey const NSSpeechErrorNewestCode NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechErrorKey const NSSpeechErrorNewestCharacterOffset NS_AVAILABLE_MAC(10_5);  // NSNumber
 
 // Dictionary keys returned by NSSpeechSynthesizerInfoProperty
-APPKIT_EXTERN NSString * const NSSpeechSynthesizerInfoIdentifier NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechSynthesizerInfoVersion NS_AVAILABLE_MAC(10_5);  // NSString
+typedef NSString * NSSpeechSynthesizerInfoKey NS_STRING_ENUM;
+APPKIT_EXTERN NSSpeechSynthesizerInfoKey const NSSpeechSynthesizerInfoIdentifier NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechSynthesizerInfoKey const NSSpeechSynthesizerInfoVersion NS_AVAILABLE_MAC(10_5);  // NSString
 
 // Dictionary keys returned by NSSpeechPhonemeSymbolsProperty
-APPKIT_EXTERN NSString * const NSSpeechPhonemeInfoOpcode NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechPhonemeInfoSymbol NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechPhonemeInfoExample NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechPhonemeInfoHiliteStart NS_AVAILABLE_MAC(10_5);  // NSNumber
-APPKIT_EXTERN NSString * const NSSpeechPhonemeInfoHiliteEnd NS_AVAILABLE_MAC(10_5);  // NSNumber
+typedef NSString * NSSpeechPhonemeInfoKey NS_STRING_ENUM;
+APPKIT_EXTERN NSSpeechPhonemeInfoKey const NSSpeechPhonemeInfoOpcode NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechPhonemeInfoKey const NSSpeechPhonemeInfoSymbol NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechPhonemeInfoKey const NSSpeechPhonemeInfoExample NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechPhonemeInfoKey const NSSpeechPhonemeInfoHiliteStart NS_AVAILABLE_MAC(10_5);  // NSNumber
+APPKIT_EXTERN NSSpeechPhonemeInfoKey const NSSpeechPhonemeInfoHiliteEnd NS_AVAILABLE_MAC(10_5);  // NSNumber
 
 // Dictionary keys returned by NSSpeechCommandDelimiterProperty
-APPKIT_EXTERN NSString * const NSSpeechCommandPrefix NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechCommandSuffix NS_AVAILABLE_MAC(10_5);  // NSString
-
-// Use with addSpeechDictionary:
-APPKIT_EXTERN NSString * const NSSpeechDictionaryLocaleIdentifier NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechDictionaryModificationDate NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechDictionaryPronunciations NS_AVAILABLE_MAC(10_5);  // NSArray
-APPKIT_EXTERN NSString * const NSSpeechDictionaryAbbreviations NS_AVAILABLE_MAC(10_5);  // NSArray
-APPKIT_EXTERN NSString * const NSSpeechDictionaryEntrySpelling NS_AVAILABLE_MAC(10_5);  // NSString
-APPKIT_EXTERN NSString * const NSSpeechDictionaryEntryPhonemes NS_AVAILABLE_MAC(10_5);  // NSString
+typedef NSString * NSSpeechCommandDelimiterKey NS_STRING_ENUM;
+APPKIT_EXTERN NSSpeechCommandDelimiterKey const NSSpeechCommandPrefix NS_AVAILABLE_MAC(10_5);  // NSString
+APPKIT_EXTERN NSSpeechCommandDelimiterKey const NSSpeechCommandSuffix NS_AVAILABLE_MAC(10_5);  // NSString
 
 NS_ASSUME_NONNULL_END
 

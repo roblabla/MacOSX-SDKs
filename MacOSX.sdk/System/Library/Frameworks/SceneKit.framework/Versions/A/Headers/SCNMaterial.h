@@ -1,7 +1,7 @@
 //
 //  SCNMaterial.h
 //
-//  Copyright (c) 2012-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2012-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -88,7 +88,12 @@ FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelPhong;
 FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelBlinn;
 FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelLambert;
 FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelConstant;
-FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelPhysicallyBased API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+FOUNDATION_EXTERN SCNLightingModel const SCNLightingModelPhysicallyBased API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+
+typedef NS_ENUM(NSUInteger, SCNFillMode) {
+    SCNFillModeFill  = 0,
+    SCNFillModeLines = 1
+} API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 typedef NS_ENUM(NSInteger, SCNCullMode) {
 	SCNCullModeBack  = 0,
@@ -99,8 +104,11 @@ typedef NS_ENUM(NSInteger, SCNCullMode) {
 #define SCNCullFront SCNCullModeFront
 
 typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
-	SCNTransparencyModeAOne    = 0, 
-	SCNTransparencyModeRGBZero = 1
+    SCNTransparencyModeAOne                                                                         = 0, // Takes the transparency information from the alpha channel. The value 1.0 is opaque.
+    SCNTransparencyModeRGBZero                                                                      = 1,
+    SCNTransparencyModeSingleLayer API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = 2, // Ensures that one layer of transparency is draw correctly.
+    SCNTransparencyModeDualLayer   API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = 3, // Ensures that two layers of transparency are ordered and drawn correctly. This should be used for transparent convex objects like cubes and spheres, when you want to see both front and back faces.
+    SCNTransparencyModeDefault     API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = SCNTransparencyModeAOne
 };
 
 /*! 
@@ -108,13 +116,14 @@ typedef NS_ENUM(NSInteger, SCNTransparencyMode) {
  @abstract  Blend modes that SCNMaterial uses to compose with the framebuffer to produce blended colors.
  */
 typedef NS_ENUM(NSInteger, SCNBlendMode) {
-    SCNBlendModeAlpha        = 0, // Blends the source and destination colors by adding the source multiplied by source alpha and the destination multiplied by one minus source alpha.
-    SCNBlendModeAdd          = 1, // Blends the source and destination colors by adding them up.
-    SCNBlendModeSubtract     = 2, // Blends the source and destination colors by subtracting the source from the destination.
-    SCNBlendModeMultiply     = 3, // Blends the source and destination colors by multiplying them.
-    SCNBlendModeScreen       = 4, // Blends the source and destination colors by multiplying one minus the source with the destination and adding the source.
-    SCNBlendModeReplace      = 5  // Replaces the destination with the source (ignores alpha).
-} API_AVAILABLE(macosx(10.11), ios(9.0));
+    SCNBlendModeAlpha                                                                     = 0, // Blends the source and destination colors by adding the source multiplied by source alpha and the destination multiplied by one minus source alpha.
+    SCNBlendModeAdd                                                                       = 1, // Blends the source and destination colors by adding them up.
+    SCNBlendModeSubtract                                                                  = 2, // Blends the source and destination colors by subtracting the source from the destination.
+    SCNBlendModeMultiply                                                                  = 3, // Blends the source and destination colors by multiplying them.
+    SCNBlendModeScreen                                                                    = 4, // Blends the source and destination colors by multiplying one minus the source with the destination and adding the source.
+    SCNBlendModeReplace                                                                   = 5, // Replaces the destination with the source (ignores alpha).
+    SCNBlendModeMax      API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = 6  // Max the destination with the source (ignores alpha).
+} API_AVAILABLE(macos(10.11), ios(9.0));
 
 @class SCNMaterialProperty;
 @class SCNProgram;
@@ -139,6 +148,8 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
  @abstract Determines the name of the receiver.
  */
 @property(nonatomic, copy, nullable) NSString *name;
+
+// MARK: - Material Properties
 
 /*! 
  @property diffuse
@@ -193,28 +204,37 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
 @property(nonatomic, readonly) SCNMaterialProperty *normal;
 
 /*!
+ @property displacement
+ @abstract <TODO>
+ @discussion <TODO, Needs tessellation>
+ */
+@property(nonatomic, readonly) SCNMaterialProperty *displacement API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+/*!
  @property ambientOcclusion
  @abstract The ambientOcclusion property specifies the ambient occlusion of the surface. The ambient occlusion is multiplied with the ambient light, then the result is added to the lighting contribution. This property has no visual impact on scenes that have no ambient light. When an ambient occlusion map is set, the ambient property is ignored.
  */
-@property(nonatomic, readonly) SCNMaterialProperty *ambientOcclusion API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic, readonly) SCNMaterialProperty *ambientOcclusion API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property selfIllumination
  @abstract The selfIllumination property specifies a texture or a color that is added to the lighting contribution of the surface. When a selfIllumination is set, the emission property is ignored.
  */
-@property(nonatomic, readonly) SCNMaterialProperty *selfIllumination API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic, readonly) SCNMaterialProperty *selfIllumination API_AVAILABLE(macos(10.11), ios(9.0));
 
 /*!
  @property metalness
  @abstract The metalness property specifies how metallic the material's surface appears. Lower values (darker colors) cause the material to appear more like a dielectric surface. Higher values (brighter colors) cause the surface to appear more metallic. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
  */
-@property(nonatomic, readonly) SCNMaterialProperty *metalness API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+@property(nonatomic, readonly) SCNMaterialProperty *metalness API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
 
 /*!
  @property roughness
  @abstract The roughness property specifies the apparent smoothness of the surface. Lower values (darker colors) cause the material to appear shiny, with well-defined specular highlights. Higher values (brighter colors) cause specular highlights to spread out and the diffuse property of the material to become more retroreflective. This property is only used when 'lightingModelName' is 'SCNLightingModelPhysicallyBased'.
  */
-@property(nonatomic, readonly) SCNMaterialProperty *roughness API_AVAILABLE(macosx(10.12), ios(10.0), tvos(10.0));
+@property(nonatomic, readonly) SCNMaterialProperty *roughness API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0));
+
+// MARK: -
 
 /*! 
  @property shininess
@@ -247,6 +267,12 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
  */
 @property(nonatomic, getter=isDoubleSided) BOOL doubleSided;
 
+/*!
+ @property fillMode
+ @abstract Determines of to how to rasterize the receiver's primitives. Defaults to SCNFillModeFill.
+ */
+@property(nonatomic) SCNFillMode fillMode API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
 /*! 
  @property cullMode
  @abstract Determines the culling mode of the receiver. Defaults to SCNCullBack. Animatable.
@@ -255,9 +281,7 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
 
 /*! 
  @property transparencyMode
- @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeAOne.
- @discussion SCNTransparencyModeAOne takes the transparency information from the color's alpha channel. The value 1.0 is opaque. 
- SCNTransparencyModeRGBZero takes the transparency information from the color's red, green, and blue channels. The value 0.0 is opaque, with each channel modulated independently. With SCNTransparencyModeRGBZero, the alpha value of the transparent property is ignored.
+ @abstract Determines the transparency mode of the receiver. See above for the transparency modes. Defaults to SCNTransparencyModeDefault.
  */
 @property(nonatomic) SCNTransparencyMode transparencyMode;
 
@@ -274,23 +298,28 @@ typedef NS_ENUM(NSInteger, SCNBlendMode) {
 @property(nonatomic) BOOL writesToDepthBuffer;
 
 /*!
+ @abstract Determines whether the receiver writes to the color buffer when rendered. Defaults to SCNColorMaskAll.
+ */
+@property(nonatomic) SCNColorMask colorBufferWriteMask API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
+
+/*!
  @property readsFromDepthBuffer
  @abstract Determines whether the receiver reads from the depth buffer when rendered. Defaults to YES.
  */
-@property(nonatomic) BOOL readsFromDepthBuffer API_AVAILABLE(macosx(10.9));
+@property(nonatomic) BOOL readsFromDepthBuffer API_AVAILABLE(macos(10.9));
 
 /*!
  @property fresnelExponent
  @abstract Specifies the receiver's fresnel exponent value. Defaults to 0.0. Animatable.
  @discussion The effect of the reflectivity property is modulated by this property. The fresnelExponent changes the exponent of the reflectance. The bigger the exponent, the more concentrated the reflection is around the edges.
  */
-@property(nonatomic) CGFloat fresnelExponent API_AVAILABLE(macosx(10.9));
+@property(nonatomic) CGFloat fresnelExponent API_AVAILABLE(macos(10.9));
 
 /*!
  @property blendMode
  @abstract Specifies the receiver's blend mode. Defaults to SCNBlendModeAlpha.
  */
-@property(nonatomic) SCNBlendMode blendMode API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic) SCNBlendMode blendMode API_AVAILABLE(macos(10.11), ios(9.0));
 
 @end
     

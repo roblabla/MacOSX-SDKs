@@ -1,16 +1,16 @@
 /*
 	NSDockTile.h
 	Application Kit
-	Copyright (c) 2006-2016, Apple Inc.
+	Copyright (c) 2006-2017, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSGeometry.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSString.h>
+#import <AppKit/NSApplication.h>
 
-#define NSAppKitVersionNumberWithDockTilePlugInSupport 1001.0
-
+static const NSAppKitVersion NSAppKitVersionNumberWithDockTilePlugInSupport = 1001.0;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSDockTile : NSObject {
     @private
-    id _owner;
+    __weak id _owner;
     void *_dockContextRef;
     NSView *_contentView;
     NSView *_frameView;
@@ -56,7 +56,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 /* -owner will return NSApp for the application dock tile, or the NSWindow for a mini window dock tile.
 */
-@property (readonly, assign) id owner;
+@property (readonly, weak) id owner;
 
 @end
 

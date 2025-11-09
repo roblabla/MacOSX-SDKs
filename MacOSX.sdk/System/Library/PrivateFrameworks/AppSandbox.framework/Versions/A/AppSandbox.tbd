@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 25F95DD6-924F-3C41-99C9-2512192865D2', 'x86_64: D2C978EB-F4F1-3E79-9DB1-BEE2A92590CE' ]
+uuids:           [ 'i386: 53675C72-5E49-3F2F-844D-B29E57D0B965', 'x86_64: C9DAE9DF-F9CB-3C13-95D0-8B657926F63E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AppSandbox.framework/Versions/A/AppSandbox
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _AppSandboxEntitlements._appSandboxOnce, _AppSandboxEntitlements._entitlements, 
@@ -22,10 +21,9 @@ exports:
                        _AppSandboxUtilMessageTraceFileReference, _AppSandboxUtilRealPathForPath, 
                        _AppSandboxUtilRealPathForUTF8StringPath, _AppSandboxUtilVersionStringToNumber, 
                        _ContainerRepairClientRepairResultCString, ___AppSandboxVersionNumber, 
-                       ___AppSandboxVersionString, _kASBContainerIdentityKey, _kASBContainerSandboxProfileDataKey, 
-                       _kASBContainerSandboxProfileDataValidationInfoKey, _kASBContainerVersionKey, 
-                       _kAppSandboxEnableEntitlement, _kAppSandboxInheritSandboxEntitlement, 
-                       _kAppSandboxOptionalSandboxEntitlement, _updatedDescriptionForError ]
+                       ___AppSandboxVersionString, _kAppSandboxEnableEntitlement, 
+                       _kAppSandboxInheritSandboxEntitlement, _kAppSandboxOptionalSandboxEntitlement, 
+                       _updatedDescriptionForError ]
     objc-classes:    [ _AppSandboxEntitlements, _AppSandboxFolderRedirector, _AppSandboxRequest, 
                        _ContainerRepairClient ]
 ...

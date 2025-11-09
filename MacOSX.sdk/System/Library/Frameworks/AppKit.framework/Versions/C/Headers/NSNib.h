@@ -1,7 +1,7 @@
 /*
 	NSNib.h
 	Application Kit
-	Copyright (c) 2003-2016, Apple Inc.
+	Copyright (c) 2003-2017, Apple Inc.
 	All rights reserved.
 
 NSNib serves as a wrapper around a single InterfaceBuilder nib.  When an NSNib instance is created from a nib file, all of the data needed to instantiate the nib (the object graph as well as images and sounds that might be in the nib bundle) are read from the disk, however the nib is not instantiated until you call one of the instantiation methods.
@@ -19,6 +19,8 @@ As are all NSObjects, instantiated nib objects are allocated in a memory zone (N
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * NSNibName NS_EXTENSIBLE_STRING_ENUM;
+
 @class NSIBObjectData;
 
 @interface NSNib : NSObject <NSCoding> {
@@ -34,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
         unsigned int _reserved:29;
     } _flags;
     NSString *_path;
-    id reserved2 __unused;
+    id _reusableDecoder;
 }
 
 
@@ -43,7 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 // The resulting bundle is used for locating resources such as images and localized
 // strings.
 //
-- (nullable instancetype)initWithNibNamed:(NSString *)nibName bundle:(nullable NSBundle *)bundle;
+- (nullable instancetype)initWithNibNamed:(NSNibName)nibName bundle:(nullable NSBundle *)bundle;
 
 // Initializes an instance with nib data and specified bundle for locating resources
 // such as images and localized strings. If bundle is nil, the main bundle is assumed.
@@ -57,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 // objects should be strong (retain) to demonstrate ownership and prevent deallocation.
 // Alternatively, one may hold a strong reference to the top level objects array.
 //
-- (BOOL)instantiateWithOwner:(nullable id)owner topLevelObjects:(NSArray * __nonnull * __nullable)topLevelObjects NS_AVAILABLE_MAC(10_8);
+- (BOOL)instantiateWithOwner:(nullable id)owner topLevelObjects:(NSArray * __nullable * __nullable)topLevelObjects NS_AVAILABLE_MAC(10_8);
 
 @end
 

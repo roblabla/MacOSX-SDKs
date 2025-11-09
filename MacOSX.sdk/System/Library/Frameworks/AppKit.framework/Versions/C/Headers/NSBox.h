@@ -1,7 +1,7 @@
 /*
     NSBox.h
     Application Kit
-    Copyright (c) 1994-2016, Apple Inc.
+    Copyright (c) 1994-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -66,7 +66,7 @@ typedef NS_ENUM(NSUInteger, NSBoxType) {
 
 /* Get and set the content view for the box. Note that subviews added to the NSBox will be really added as subviews of the contentView.
  */
-@property (nullable, assign) __kindof NSView *contentView;
+@property (nullable, strong) __kindof NSView *contentView;
 
 /* Transparent boxes do not draw anything.  Subview drawing is unaffected.  The 'transparent' property corresponds to the binding 'NSTransparentBinding'.
  */

@@ -34,6 +34,7 @@
 #ifndef IOUSBHostFamily_IOUSBHostIOSource_h
 #define IOUSBHostFamily_IOUSBHostIOSource_h
 
+#include <sys/queue.h>
 #include <libkern/c++/OSObject.h>
 #include <IOKit/IOCommandGate.h>
 #include <IOKit/IOTimerEventSource.h>
@@ -42,7 +43,7 @@
 
 class AppleUSBHostController;
 class IOUSBHostDevice;
-class AppleUSBHostRequestPool;
+class AppleUSBRequestPool;
 
 typedef void (*IOUSBHostCompletionAction)(void* owner, void* parameter, IOReturn status, uint32_t bytesTransferred);
 
@@ -90,6 +91,16 @@ struct IOUSBHostIsochronousCompletion
     void* owner;
     IOUSBHostIsochronousCompletionAction action;
     void* parameter;
+};
+
+typedef LIST_HEAD (IOUSBHostIOSourceClientRecordList, IOUSBHostIOSourceClientRecord) IOUSBHostIOSourceClientRecordList;
+typedef LIST_ENTRY (IOUSBHostIOSourceClientRecord) IOUSBHostIOSourceClientRecordLink;
+
+struct IOUSBHostIOSourceClientRecord
+{
+    IOService*                  forClient;
+    UInt32                      outstandingIO;
+    IOUSBHostIOSourceClientRecordLink link;
 };
 
 /*!
@@ -190,8 +201,12 @@ public:
     
 protected:
     // Protected pad slots for future expansion
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 20);
-    OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 21);
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 20);
+    virtual UInt32 getOutstandingIO(IOService* forClient);
+
+    OSMetaClassDeclareReservedUsed(IOUSBHostIOSource, 21);
+    virtual UInt32 adjustOutstandingIO(IOService* forClient, SInt32 increment);
+
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 22);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 23);
     OSMetaClassDeclareReservedUnused(IOUSBHostIOSource, 24);
@@ -210,7 +225,7 @@ protected:
 
     virtual void synchronousCompletion(void* parameter, IOReturn status, uint32_t bytesTransferred);
     virtual void synchronousIsochronousCompletion(void* parameter, IOReturn status, IOUSBHostIsochronousFrame* pFrames);
-
+    
     virtual IOReturn getStateGated(tState& state);
 
     virtual IOReturn close();
@@ -227,7 +242,7 @@ protected:
     IOWorkLoop*              _workloop;
     IOCommandGate*           _commandGate;
     IOTimerEventSource*      _timer;
-    AppleUSBHostRequestPool* _requestPool;
+    AppleUSBRequestPool*     _requestPool;
 
     tState                  _state;
     UInt32                  _outstandingIO;
@@ -300,6 +315,7 @@ protected:
     
     struct tExpansionData
     {
+        IOUSBHostIOSourceClientRecordList _ioRecordList;
     };
     
     tExpansionData* _expansionData;

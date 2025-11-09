@@ -1,8 +1,8 @@
-.TH "MPSImageIntegral" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSImageIntegral" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSImageIntegral \- 
+MPSImageIntegral
 .SH SYNOPSIS
 .br
 .PP
@@ -29,7 +29,9 @@ sumRect.size = dest_position - MPSUnaryImageKernel.clipRect.origin
 .fi
 .PP
 .PP
-If the channels in the source image are normalized, half-float or floating values, the destination image is recommended to be a 32-bit floating-point image\&. If the channels in the source image are integer values, it is recommended that an appropriate 32-bit integer image destination format is used\&. 
+If the channels in the source image are normalized, half-float or floating values, the destination image is recommended to be a 32-bit floating-point image\&. If the channels in the source image are integer values, it is recommended that an appropriate 32-bit integer image destination format is used\&.
+.PP
+This kernel accepts uint and int textures in addition to unorm and floating-point textures\&. 
 
 .SH "Author"
 .PP 

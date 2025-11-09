@@ -1,7 +1,7 @@
 /*
 	NSFontPanel.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -12,8 +12,22 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSFontPanel, NSMutableDictionary, NSFontManager, NSMutableArray, NSTableView, NSFontDescriptor, NSFont;
 
 
+typedef NS_OPTIONS(NSUInteger, NSFontPanelModeMask) {
+    NSFontPanelModeMaskFace = 1 << 0,
+    NSFontPanelModeMaskSize = 1 << 1,
+    NSFontPanelModeMaskCollection = 1 << 2,
+    NSFontPanelModeMaskUnderlineEffect = 1<<8,
+    NSFontPanelModeMaskStrikethroughEffect = 1<<9,
+    NSFontPanelModeMaskTextColorEffect = 1<< 10,
+    NSFontPanelModeMaskDocumentColorEffect = 1<<11,
+    NSFontPanelModeMaskShadowEffect = 1<<12,
+    NSFontPanelModeMaskAllEffects = 0XFFF00,
+    NSFontPanelModesMaskStandardModes = 0xFFFF,
+    NSFontPanelModesMaskAllModes = 0xFFFFFFFF
+} NS_ENUM_AVAILABLE_MAC(10_13);
+
 @interface NSObject (NSFontPanelValidationAdditions)
-- (NSUInteger) validModesForFontPanel: (NSFontPanel *) fontPanel;
+- (NSFontPanelModeMask)validModesForFontPanel:(NSFontPanel *)fontPanel;
 @end
 
 
@@ -95,8 +109,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 #endif /* !__LP64__ */
 }
 
-+ (NSFontPanel *)sharedFontPanel;
-+ (BOOL)sharedFontPanelExists;
+@property (class, readonly, strong) NSFontPanel *sharedFontPanel;
+@property (class, readonly) BOOL sharedFontPanelExists;
 
 @property (nullable, strong) NSView *accessoryView;
 - (void)setPanelFont:(NSFont *)fontObj isMultiple:(BOOL)flag;
@@ -111,6 +125,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 @end
 
 
+// The following enum items are deprecated. Use NSFontPanelModeMask instead
 enum {
     NSFontPanelFaceModeMask = 1 << 0,
     NSFontPanelSizeModeMask = 1 << 1,

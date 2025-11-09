@@ -1,5 +1,5 @@
 /*	NSArchiver.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSCoder.h>
@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /************		Archiving: Writing	****************/
 
+API_DEPRECATED("Use NSKeyedArchiver instead", macos(10.0,10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 @interface NSArchiver : NSCoder {
 @private
     void		*mdata;
@@ -42,6 +43,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /************		Archiving: Reading		****************/
 
+API_DEPRECATED("Use NSKeyedUnarchiver instead", macos(10.0,10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 @interface NSUnarchiver : NSCoder {
 @private
     void *		datax;
@@ -93,7 +95,8 @@ FOUNDATION_EXPORT NSExceptionName const NSInconsistentArchiveException;
 @interface NSObject (NSArchiverCallback)
 
 @property (nullable, readonly) Class classForArchiver;
-- (nullable id)replacementObjectForArchiver:(NSArchiver *)archiver;
+
+- (nullable id)replacementObjectForArchiver:(NSArchiver *)archiver API_DEPRECATED_WITH_REPLACEMENT("replacementObjectForCoder:", macos(10.0,10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0));
 
 @end
 

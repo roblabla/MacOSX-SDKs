@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2002-2008 by Apple Inc.. All rights reserved.
+ * Copyright (c) 2002-2017 by Apple Inc.. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  * 
@@ -213,11 +213,11 @@
    #ifdef KERNEL
       #include <libkern/libkern.h>
       #define DEBUG_ASSERT_MESSAGE(name, assertion, label, message, file, line, value) \
-                                  printf( "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
+                                  printf( "AssertMacros: %s, %s file: %s, line: %d, value: %ld\n", assertion, (message!=0) ? message : "", file, line, (long) (value));
    #else
       #include <stdio.h>
       #define DEBUG_ASSERT_MESSAGE(name, assertion, label, message, file, line, value) \
-                                  fprintf(stderr, "AssertMacros: %s, %s file: %s, line: %d\n", assertion, (message!=0) ? message : "", file, line);
+                                  fprintf(stderr, "AssertMacros: %s, %s file: %s, line: %d, value: %ld\n", assertion, (message!=0) ? message : "", file, line, (long) (value));
    #endif
 #endif
 
@@ -1230,13 +1230,11 @@
  *	could collide with similarly named functions or macros in user code, including new functionality in
  *	Boost and the C++ standard library.
  *
- *	A future release of Mac OS X will no longer do this, and will require that clients move to the
- *  new macros as defined above.  However, in the interim both the new and old macros will work, unless
- *  clients define a macro __ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES before this file is included
- *  in their compilations.  Clients who do not want the older macros defined can accomplish this by adding
- *    #define __ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES 0
- *  at the top of their sources, or my adding -D__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES=0 to the
- *  gcc compilation options.
+ *  macOS High Sierra and iOS 11 will now require that clients move to the new macros as defined above.
+ *
+ *  If you would like to enable the macros for use within your own project, you can define the
+ *  __ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES macro via an Xcode Build Configuration.
+ *  See "Add a build configuration (xcconfig) file" in Xcode Help. 
  *
  *  To aid users of these macros in converting their sources, the following tops script will convert usages
  *  of the old macros into the new equivalents.  To do so, in Terminal go into the directory containing the
@@ -1281,8 +1279,12 @@
  */
 
 #ifndef __ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES
-	/* If we haven't set this yet, it defaults to on.  In the next release, this will default to off. */
-	#define	__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES	1
+    #if __has_include(<AssertMacrosInternal.h>)
+        #include <AssertMacrosInternal.h>
+    #else 
+        /* In  macOS High Sierra and iOS 11, if we haven't set this yet, it now defaults to off. */
+        #define	__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES	0
+    #endif
 #endif
 
 #if	__ASSERT_MACROS_DEFINE_VERSIONS_WITHOUT_UNDERSCORES

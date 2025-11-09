@@ -1,5 +1,5 @@
 /*      NSEnergyFormatter.h
-        Copyright (c) 2014-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2014-2017, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
@@ -11,7 +11,7 @@ typedef NS_ENUM(NSInteger, NSEnergyFormatterUnit) {
     NSEnergyFormatterUnitKilojoule = 14,
     NSEnergyFormatterUnitCalorie = (7 << 8) + 1,       // chemistry "calories", abbr "cal"
     NSEnergyFormatterUnitKilocalorie = (7 << 8) + 2,   // kilocalories in general, abbr “kcal”, or “C” in some locales (e.g. US) when usesFoodEnergy is set to YES
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface NSEnergyFormatter : NSFormatter {

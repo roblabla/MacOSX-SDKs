@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F7F0D527-95D5-343A-B742-0A481FF8E433', 'x86_64: 4765DC2E-CF05-38CF-9564-1FBACB7E167C' ]
+uuids:           [ 'i386: 5076B06B-30AD-37B6-8514-E802348189E1', 'x86_64: 528D8285-AF3C-33B6-B0EE-7F621DCEAA64' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/RemoteViewServices.framework/Versions/A/RemoteViewServices
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _NSLocalTitlebarRenamingWindow._session, _NSRemotePanel._alertInformationMessage, 

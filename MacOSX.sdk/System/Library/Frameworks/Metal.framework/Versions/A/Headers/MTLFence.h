@@ -9,7 +9,7 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLDevice.h>
 
-NS_AVAILABLE(NA, 10_0)
+NS_AVAILABLE(10_13, 10_0)
 @protocol MTLFence <NSObject>
 @property (nonnull, readonly) id <MTLDevice> device;
 

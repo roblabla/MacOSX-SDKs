@@ -140,6 +140,9 @@ ulmin(u_int32_t a, u_int32_t b)
 
 /* Prototypes for non-quad routines. */
 extern int	ffs(int);
+extern int	ffsll(unsigned long long);
+extern int	fls(int);
+extern int	flsll(unsigned long long);
 extern u_int32_t	random(void);
 extern int	scanc(u_int, u_char *, const u_char *, int);
 extern int	skpc(int, int, char *);
@@ -149,11 +152,12 @@ extern quad_t	strtoq(const char *, char **, int);
 extern u_quad_t strtouq(const char *, char **, int);
 extern char	*strsep(char **, const char *);
 extern void	*memchr(const void *, int, size_t);
+extern void	url_decode(char *str);
 
 int	snprintf(char *, size_t, const char *, ...) __printflike(3,4);
 
 /* sprintf() is being deprecated. Please use snprintf() instead. */
-int	sprintf(char *bufp, const char *, ...) __deprecated;
+int	sprintf(char *bufp, const char *, ...) __deprecated __printflike(2,3);
 int	sscanf(const char *, char const *, ...) __scanflike(2,3);
 int	printf(const char *, ...) __printflike(1,2);
 
@@ -173,12 +177,12 @@ int	copyout(const void *kaddr, user_addr_t udaddr, size_t len);
 
 int vsscanf(const char *, char const *, va_list);
 
-extern int	vprintf(const char *, va_list);
-extern int	vsnprintf(char *, size_t, const char *, va_list);
+extern int	vprintf(const char *, va_list) __printflike(1,0);
+extern int	vsnprintf(char *, size_t, const char *, va_list) __printflike(3,0);
 
 
 /* vsprintf() is being deprecated. Please use vsnprintf() instead. */
-extern int	vsprintf(char *bufp, const char *, va_list) __deprecated;
+extern int	vsprintf(char *bufp, const char *, va_list) __deprecated __printflike(2,0);
 
 extern void invalidate_icache(vm_offset_t, unsigned, int);
 extern void flush_dcache(vm_offset_t, unsigned, int);

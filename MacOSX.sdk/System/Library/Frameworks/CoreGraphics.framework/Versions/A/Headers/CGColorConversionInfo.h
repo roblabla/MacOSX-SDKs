@@ -41,8 +41,14 @@ CG_EXTERN CGColorConversionInfoRef __nullable CGColorConversionInfoCreateFromLis
   (CFDictionaryRef __nullable options, cg_nullable CGColorSpaceRef, CGColorConversionInfoTransformType, CGColorRenderingIntent, ...)
   CG_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
 
+CG_EXTERN CGColorConversionInfoRef __nullable CGColorConversionInfoCreateFromListWithArguments
+  (CFDictionaryRef __nullable options, cg_nullable CGColorSpaceRef, CGColorConversionInfoTransformType, CGColorRenderingIntent, va_list)
+  CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
+
 /* CFBooleanRef which can be used as option to create CGColorConversionInfoRef, when Black Point Compensation is desired */
 CG_EXTERN const CFStringRef kCGColorConversionBlackPointCompensation CG_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+
+CG_EXTERN const CFStringRef kCGColorConversionTRCSize CG_AVAILABLE_STARTING(__MAC_10_13, __IPHONE_11_0);
 
 CF_ASSUME_NONNULL_END
 

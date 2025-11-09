@@ -2,7 +2,7 @@
 //  GKTurnBasedMatch.h
 //  Game Center
 //
-//  Copyright 2010-2016 Apple Inc. All rights reserved.
+//  Copyright 2010-2017 Apple Inc. All rights reserved.
 //
 
 #import <GameKit/GKPlayer.h>
@@ -227,7 +227,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
              localizableMessageKey:(NSString *)key
                          arguments:(NSArray<NSString *> *)arguments
                            timeout:(NSTimeInterval)timeout
-                 completionHandler:(void(^__nullable)(GKTurnBasedExchange *exchange, NSError *error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
+                 completionHandler:(void(^__nullable)(GKTurnBasedExchange * __nullable exchange, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0)  __WATCHOS_AVAILABLE(3_0);
 
 // Send a reminder to one or more participants.  Each recipient will receive a push notification using supplied localizable message.  This allows a game to send reminders that a turn or exchange request needs action.  On the receiver side this will generate a turn event for the match.
 - (void)sendReminderToParticipants:(NSArray<GKTurnBasedParticipant *> *)participants

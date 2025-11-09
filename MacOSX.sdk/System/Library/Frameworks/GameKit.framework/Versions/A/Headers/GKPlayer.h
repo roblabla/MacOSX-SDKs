@@ -2,7 +2,7 @@
 //  GKPlayer.h
 //  Game Center
 //
-//  Copyright 2010-2016 Apple Inc. All rights reserved.
+//  Copyright 2010-2017 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -41,11 +41,10 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @interface GKPlayer (UI)
 
 // Available photo sizes.  Actual pixel dimensions will vary on different devices.
-enum {
+typedef NS_ENUM(NSInteger, GKPhotoSize) {
     GKPhotoSizeSmall = 0,
     GKPhotoSizeNormal,
 };
-typedef NSInteger GKPhotoSize;
 
 // Asynchronously load the player's photo. Error will be nil on success.
 // Possible reasons for error:
@@ -60,7 +59,7 @@ typedef NSInteger GKPhotoSize;
 
 
 // Notification will be posted whenever the player details changes. The object of the notification will be the player.
-GK_EXTERN_WEAK NSString * __nonnull GKPlayerDidChangeNotificationName;
+GK_EXTERN_WEAK NSNotificationName __nonnull GKPlayerDidChangeNotificationName;
 
 @interface GKPlayer (Deprecated)
 

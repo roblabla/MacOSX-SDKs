@@ -1,13 +1,15 @@
 /*
     NSCollectionViewTransitionLayout.h
     Application Kit
-    Copyright (c) 2015-2016, Apple Inc.
+    Copyright (c) 2015-2017, Apple Inc.
     All rights reserved.
 */
 
 #import <AppKit/NSCollectionViewLayout.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * NSCollectionViewTransitionLayoutAnimatedKey NS_EXTENSIBLE_STRING_ENUM;
 
 NS_CLASS_AVAILABLE_MAC(10_11)
 @interface NSCollectionViewTransitionLayout : NSCollectionViewLayout
@@ -43,8 +45,8 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 // Designated initializer
 - (instancetype)initWithCurrentLayout:(NSCollectionViewLayout *)currentLayout nextLayout:(NSCollectionViewLayout *)newLayout;
 
-- (void)updateValue:(CGFloat)value forAnimatedKey:(NSString *)key;
-- (CGFloat)valueForAnimatedKey:(NSString *)key;
+- (void)updateValue:(CGFloat)value forAnimatedKey:(NSCollectionViewTransitionLayoutAnimatedKey)key;
+- (CGFloat)valueForAnimatedKey:(NSCollectionViewTransitionLayoutAnimatedKey)key;
 
 @end
 

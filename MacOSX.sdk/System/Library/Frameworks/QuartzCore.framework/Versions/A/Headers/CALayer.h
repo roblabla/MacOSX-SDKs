@@ -1,6 +1,6 @@
 /* CoreAnimation - CALayer.h
 
-   Copyright (c) 2006-2016, Apple Inc.
+   Copyright (c) 2006-2017, Apple Inc.
    All rights reserved. */
 
 #import <QuartzCore/CAMediaTiming.h>
@@ -39,10 +39,20 @@ typedef NS_OPTIONS (unsigned int, CAEdgeAntialiasingMask)
   kCALayerTopEdge       = 1U << 3,      /* Maximum Y edge. */
 };
 
+/* Bit definitions for `maskedCorners' property. */
+
+typedef NS_OPTIONS (NSUInteger, CACornerMask)
+{
+  kCALayerMinXMinYCorner = 1U << 0,
+  kCALayerMaxXMinYCorner = 1U << 1,
+  kCALayerMinXMaxYCorner = 1U << 2,
+  kCALayerMaxXMaxYCorner = 1U << 3,
+};
+
 /** The base layer class. **/
 
 CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
-@interface CALayer : NSObject <NSCoding, CAMediaTiming>
+@interface CALayer : NSObject <NSSecureCoding, CAMediaTiming>
 {
 @private
   struct _CALayerIvars {
@@ -50,7 +60,7 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
     uint32_t magic;
     void *layer;
 #if TARGET_OS_MAC && !TARGET_RT_64_BIT
-    void *unused1[8];
+    void * _Nonnull unused1[8];
 #endif
   } _attr;
 }
@@ -467,6 +477,12 @@ CA_CLASS_AVAILABLE (10.5, 2.0, 9.0, 2.0)
  * `masksToBounds' property. Defaults to zero. Animatable. */
 
 @property CGFloat cornerRadius;
+
+/* Defines which of the four corners receives the masking when using
+ * `cornerRadius' property. Defaults to all four corners. */
+
+@property CACornerMask maskedCorners
+  CA_AVAILABLE_STARTING (10.13, 11.0, 11.0, 4.0);
 
 /* The width of the layer's border, inset from the layer bounds. The
  * border is composited above the layer's content and sublayers and

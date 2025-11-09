@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2015 Apple Inc. All Rights Reserved.
+ * Copyright (c) 2000-2016 Apple Inc. All Rights Reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -26,12 +26,16 @@
 #ifndef _CSSMAPPLE_H_
 #define _CSSMAPPLE_H_  1
 
+#include <Security/SecBase.h>
+
+#if SEC_OS_OSX_INCLUDES
 #include <Security/cssmerr.h>
 #include <Security/cssmtype.h>
 #include <Security/x509defs.h>			/* for CSSM_APPLE_TP_CERT_REQUEST fields */
 #include <Security/certextensions.h>	/* ditto */
 #include <sys/types.h>					/* for the BSD *_t types */
 #include <stdbool.h>
+#endif /* SEC_OS_OSX */
 
 #ifdef __cplusplus
 extern "C" {
@@ -40,6 +44,7 @@ extern "C" {
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdeprecated-declarations"
 
+#if SEC_OS_OSX
 /* Guids for standard Apple addin modules. */
 
 /* CSSM itself: {87191ca0-0fc9-11d4-849a-000502b52122} */
@@ -89,6 +94,7 @@ enum
 	CSSM_WORDID_PREAUTH_SOURCE,
 	CSSM_WORDID_ASYMMETRIC_KEY,
 	CSSM_WORDID_PARTITION,
+	CSSM_WORDID_KEYBAG_KEY,
 	CSSM_WORDID__FIRST_UNUSED
 };
 
@@ -116,7 +122,8 @@ enum
 	CSSM_SAMPLE_TYPE_RETRY_ID = CSSM_WORDID_PROPAGATE,
 	CSSM_SAMPLE_TYPE_SYMMETRIC_KEY = CSSM_WORDID_SYMMETRIC_KEY,
 	CSSM_SAMPLE_TYPE_PREAUTH = CSSM_WORDID_PREAUTH,
-	CSSM_SAMPLE_TYPE_ASYMMETRIC_KEY = CSSM_WORDID_ASYMMETRIC_KEY
+	CSSM_SAMPLE_TYPE_ASYMMETRIC_KEY = CSSM_WORDID_ASYMMETRIC_KEY,
+	CSSM_SAMPLE_TYPE_KEYBAG_KEY = CSSM_WORDID_KEYBAG_KEY,
 	// there is no CSSM_SAMPLE_TYPE_PREAUTH_SOURCE
 };
 
@@ -403,7 +410,8 @@ enum {
 /* UNLOCK_REFERRAL "type" attribute values */
 enum {
 	CSSM_APPLE_UNLOCK_TYPE_KEY_DIRECT			= 1,	// master secret key stored directly
-	CSSM_APPLE_UNLOCK_TYPE_WRAPPED_PRIVATE		= 2		// master key wrapped by public key
+	CSSM_APPLE_UNLOCK_TYPE_WRAPPED_PRIVATE		= 2,	// master key wrapped by public key
+	CSSM_APPLE_UNLOCK_TYPE_KEYBAG				= 3		// master key wrapped via keybag
 };
 
 /* Apple DL private error codes. */
@@ -1041,6 +1049,8 @@ typedef struct {
  * Same number of these as in the cert group in Evidence[1].
  */
 
+#endif /* SEC_OS_OSX */
+
 /* First, an array of bits indicating various status of the cert. */
 typedef uint32 CSSM_TP_APPLE_CERT_STATUS;
 enum
@@ -1077,7 +1087,13 @@ typedef struct {
 	CSSM_DL_DB_HANDLE			DlDbHandle;
 	CSSM_DB_UNIQUE_RECORD_PTR	UniqueRecord;
 
+#if SEC_OS_IPHONE
+    /* CRLReason code if cert is revoked */
+    sint32                      CrlReason;
+#endif /* SEC_OS_IPHONE */
 } CSSM_TP_APPLE_EVIDENCE_INFO;
+
+#if SEC_OS_OSX
 
 /*
  * CSSM_TP_VERIFY_CONTEXT_RESULT.Evidence[0], basically defines which version/flavor
@@ -1168,7 +1184,6 @@ typedef struct {
 #define kSystemKeychainName		"System.keychain"
 #define kSystemKeychainDir		"/Library/Keychains/"
 #define kSystemUnlockFile		"/var/db/SystemKey"
-	
 
 /*
  * CSSM ACL tags used to store partition/integrity data in ACLs
@@ -1190,6 +1205,8 @@ const CSSM_OID *cssmAlgToOid(CSSM_ALGORITHMS algId);
  */
 #define errSecErrnoBase			100000
 #define errSecErrnoLimit		100255
+
+#endif /* SEC_OS_OSX */
 
 #pragma clang diagnostic pop
 

@@ -1,6 +1,6 @@
 /* 
 	NSTypesetter.h
-	Copyright (c) 1994-2016, Apple Inc.  All rights reserved. 
+	Copyright (c) 1994-2017, Apple Inc.  All rights reserved. 
 
 	An abstract class to lay glyphs out in horizontal or vertical boxes	
 */
@@ -14,15 +14,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
-    NSTypesetterZeroAdvancementAction = (1 << 0), // glyphs with this action are flitered out from layout (notShownAttribute == YES)
-    NSTypesetterWhitespaceAction = (1 << 1), // the width for glyphs with this action are determined by -boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex: if the method is implemented; otherwise, same as NSTypesetterZeroAdvancementAction
-    NSTypesetterHorizontalTabAction = (1 << 2), // Treated as tab character
-    NSTypesetterLineBreakAction = (1 << 3), // Causes line break
-    NSTypesetterParagraphBreakAction = (1 << 4), // Causes paragraph break; firstLineIndent will be used for the following glyph
-    NSTypesetterContainerBreakAction = (1 << 5) // Causes container break
-};
-    
 @interface NSTypesetter : NSObject {
 #if __LP64__
     void *_reserved;
@@ -95,13 +86,9 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 /* Extra line fragment handling */
 /* This method returns the attributes used to layout the extra line fragment. The default implementation tries to use -[NSTextView typingAttributes] if possible; otherwise, uses attributes for the last character.
 */
-@property (nullable, readonly, copy) NSDictionary<NSString *, id> *attributesForExtraLineFragment;
+@property (readonly, copy) NSDictionary<NSAttributedStringKey, id> *attributesForExtraLineFragment;
 
 /* Control/format character handling */
-/* This method returns the action associated with a control character.
-*/
-- (NSTypesetterControlCharacterAction)actionForControlCharacterAtIndex:(NSUInteger)charIndex;
-
 /* Cocoa Text System specific interface methods */
 /* Friend class accessors */
 @property (nullable, readonly, assign) NSLayoutManager *layoutManager;
@@ -129,9 +116,9 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 
 
 /* Factory methods */
-+ (id)sharedSystemTypesetter;
+@property (class, readonly, strong) __kindof NSTypesetter *sharedSystemTypesetter;
 + (id)sharedSystemTypesetterForBehavior:(NSTypesetterBehavior)behavior;
-+ (NSTypesetterBehavior)defaultTypesetterBehavior;
+@property (class, readonly) NSTypesetterBehavior defaultTypesetterBehavior;
 @end
 
 /* NSLayoutPhaseInterface declares various subclass override points that are invoked if implemented */
@@ -155,7 +142,6 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 - (NSRange)glyphRangeForCharacterRange:(NSRange)charRange actualCharacterRange:(nullable NSRangePointer)actualCharRange;
 
 // Glyph data
-- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer bidiLevels:(null_unspecified unsigned char *)bidiLevelBuffer;
 
 // NSTextContainer attribute
 /* Calculates line fragment rect, line fragment used rect, and remaining rect for a line fragment starting at glyph index startingGlyphIndex with proposedRect. The height is determined using lineSpacing, paragraphSpacingBefore, and paragraphSpacingAfter as well as proposedRect. The width for lineFragmentUsedRect is set to the lineFragmentRect width. In the standard implementation, paragraph spacing is included in the line fragment rect but not the line fragment used rect; line spacing is included in both.
@@ -164,14 +150,30 @@ typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
 
 // Layout storage
 - (void)setLineFragmentRect:(NSRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect)usedRect baselineOffset:(CGFloat)baselineOffset;
-- (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(null_unspecified NSGlyph *)glyphs;
-- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex;
-- (void)deleteGlyphsInRange:(NSRange)glyphRange;
 - (void)setNotShownAttribute:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
 - (void)setDrawsOutsideLineFragment:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
 - (void)setLocation:(NSPoint)location withAdvancements:(null_unspecified const CGFloat *)advancements forStartOfGlyphRange:(NSRange)glyphRange;
 - (void)setAttachmentSize:(NSSize)attachmentSize forGlyphRange:(NSRange)glyphRange;
 - (void)setBidiLevels:(null_unspecified const uint8_t *)levels forGlyphRange:(NSRange)glyphRange;
+@end
+
+typedef NS_OPTIONS(NSUInteger, NSTypesetterControlCharacterAction) {
+    NSTypesetterZeroAdvancementAction = (1 << 0), // glyphs with this action are flitered out from layout (notShownAttribute == YES)
+    NSTypesetterWhitespaceAction = (1 << 1), // the width for glyphs with this action are determined by -boundingBoxForControlGlyphAtIndex:forTextContainer:proposedLineFragment:glyphPosition:characterIndex: if the method is implemented; otherwise, same as NSTypesetterZeroAdvancementAction
+    NSTypesetterHorizontalTabAction = (1 << 2), // Treated as tab character
+    NSTypesetterLineBreakAction = (1 << 3), // Causes line break
+    NSTypesetterParagraphBreakAction = (1 << 4), // Causes paragraph break; firstLineIndent will be used for the following glyph
+    NSTypesetterContainerBreakAction = (1 << 5) // Causes container break
+}; // Deprecated. Use NSControlCharacterAction instead
+
+
+@interface NSTypesetter (NSTypesetter_Deprecated)
+- (NSTypesetterControlCharacterAction)actionForControlCharacterAtIndex:(NSUInteger)charIndex; // Deprecated. Use -layoutManager:shouldUseAction:forControlCharacterAtIndex: instead
+- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer bidiLevels:(null_unspecified unsigned char *)bidiLevelBuffer NS_DEPRECATED_MAC(10_3, 10_13);
+
+- (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(null_unspecified NSGlyph *)glyphs  NS_DEPRECATED_MAC(10_3, 10_13);
+- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex NS_DEPRECATED_MAC(10_3, 10_13);
+- (void)deleteGlyphsInRange:(NSRange)glyphRange NS_DEPRECATED_MAC(10_3, 10_13);
 @end
 
 NS_ASSUME_NONNULL_END

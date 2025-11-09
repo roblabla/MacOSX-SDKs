@@ -15,6 +15,8 @@
 #ifndef __LSOPENDEPRECATED__
 #define __LSOPENDEPRECATED__
 
+#include <LaunchServices/LSOpen.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

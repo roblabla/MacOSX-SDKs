@@ -1,5 +1,5 @@
 /*	NSObject.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #include <TargetConditionals.h>
@@ -40,11 +40,7 @@ NS_ASSUME_NONNULL_BEGIN
 @required
 // This property must return YES on all classes that allow secure coding. Subclasses of classes that adopt NSSecureCoding and override initWithCoder: must also override this method and return YES.
 // The Secure Coding Guide should be consulted when writing methods that decode data.
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly) BOOL supportsSecureCoding;
-#else
-+ (BOOL)supportsSecureCoding;
-#endif
 @end
 
 /***********	Base class		***********/
@@ -62,7 +58,7 @@ NS_ASSUME_NONNULL_BEGIN
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 @interface NSObject (NSDeprecatedMethods)
 
-+ (void)poseAsClass:(Class)aClass NS_DEPRECATED(10_0, 10_5, 2_0, 2_0)
++ (void)poseAsClass:(Class)aClass API_DEPRECATED("Posing no longer supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0))
 #if __OBJC2__
 UNAVAILABLE_ATTRIBUTE
 #endif
@@ -83,16 +79,17 @@ UNAVAILABLE_ATTRIBUTE
 @end
 
 @interface NSObject (NSDiscardableContentProxy)
-@property (readonly, retain) id autoContentAccessingProxy NS_AVAILABLE(10_6, 4_0);
+@property (readonly, retain) id autoContentAccessingProxy API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 @end
 
 /***********	Object Allocation / Deallocation		*******/
-    
+
+// For ARC code that needs this functionality, consider using class_createInstance directly.
 FOUNDATION_EXPORT id NSAllocateObject(Class aClass, NSUInteger extraBytes, NSZone * _Nullable zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
 FOUNDATION_EXPORT void NSDeallocateObject(id object) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 
-FOUNDATION_EXPORT id NSCopyObject(id object, NSUInteger extraBytes, NSZone * _Nullable zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE NS_DEPRECATED(10_0, 10_8, 2_0, 6_0);
+FOUNDATION_EXPORT id NSCopyObject(id object, NSUInteger extraBytes, NSZone * _Nullable zone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE API_DEPRECATED("Not supported", macos(10.0,10.8), ios(2.0,6.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 FOUNDATION_EXPORT BOOL NSShouldRetainWithZone(id anObject, NSZone * _Nullable requestedZone) NS_AUTOMATED_REFCOUNT_UNAVAILABLE;
 

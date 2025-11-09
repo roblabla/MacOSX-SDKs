@@ -76,7 +76,14 @@ subsystem
 #include <mach/mach_types.defs>
 #include <mach_debug/mach_debug_types.defs>
 
+#define CONCAT(a,b) a ## b
 #define PREFIX(NAME) NAME
+
+#if	KERNEL_SERVER
+#define KERNEL_SERVER_SUFFIX(NAME) CONCAT(NAME, _external)
+#else
+#define KERNEL_SERVER_SUFFIX(NAME) NAME
+#endif
 
 /*
  *	Allocate zero-filled memory in the address space
@@ -86,7 +93,7 @@ subsystem
  *	allocation actually took place is returned.
  */
 #if !defined(_MACH_VM_PUBLISH_AS_LOCAL_)
-routine PREFIX(mach_vm_allocate) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(mach_vm_allocate)) (
 		target		: vm_task_entry_t;
 	inout	address		: mach_vm_address_t;
 		size		: mach_vm_size_t;
@@ -94,7 +101,7 @@ routine PREFIX(mach_vm_allocate) (
 
 #else
 
-routine PREFIX(vm_allocate) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(vm_allocate)) (
 		target		: vm_task_entry_t;
 	inout	address		: mach_vm_address_t;
 		size		: mach_vm_size_t;
@@ -317,9 +324,9 @@ routine vm_behavior_set(
  *	for further consistency.]
  */
 #if !defined(_MACH_VM_PUBLISH_AS_LOCAL_)
-routine PREFIX(mach_vm_map) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(mach_vm_map)) (
 #else
-routine PREFIX(vm_map) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(vm_map)) (
 #endif
 		target_task	: vm_task_entry_t;
 	inout	address		: mach_vm_address_t;
@@ -353,9 +360,9 @@ routine vm_machine_attribute(
  *      Map portion of a task's address space.
  */
 #if !defined(_MACH_VM_PUBLISH_AS_LOCAL_)
-routine PREFIX(mach_vm_remap) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(mach_vm_remap)) (
 #else
-routine PREFIX(vm_remap) (
+routine PREFIX(KERNEL_SERVER_SUFFIX(vm_remap)) (
 #endif
 		target_task	: vm_map_t;
 	inout	target_address	: mach_vm_address_t;
@@ -468,6 +475,17 @@ routine mach_vm_page_info(
 			address			: mach_vm_address_t;
 			flavor			: vm_page_info_flavor_t;
 	out		info			: vm_page_info_t, CountInOut);
+#else
+skip;
+#endif
+
+#if !defined(_MACH_VM_PUBLISH_AS_LOCAL_)
+routine mach_vm_page_range_query(
+                target_map		: vm_map_t;
+                address			: mach_vm_offset_t;
+                size			: mach_vm_size_t;
+                dispositions		: mach_vm_address_t;
+	inout	dispositions_count	: mach_vm_size_t);
 #else
 skip;
 #endif

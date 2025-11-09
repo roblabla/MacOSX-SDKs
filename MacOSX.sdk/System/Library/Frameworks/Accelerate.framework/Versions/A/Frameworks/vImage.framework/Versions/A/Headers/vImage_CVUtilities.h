@@ -45,24 +45,7 @@
 
 #include <vImage/vImage_Utilities.h>
 #include <vImage/Conversion.h>
-#if defined __ASSERTMACROS__
-	/*	If __ASSERTMACROS__ is defined, indicating AssertMacros.h has been
-		previously included, simply include <CoreVideo/CVPixelBuffer.h>
-		normally.
-	*/
-	#include <CoreVideo/CVPixelBuffer.h>  /* #define vImage_CVUtilities_h 1 before including Accelerate headers to turn this header off */
-#else
-	/*	If __ASSERTMACROS__ is not defined, we define it so that AssertMacros.h
-		is suppressed while we include <CoreVideo/CVPixelBuffer.h>, and we
-		undefine it afterward to restore the prior state.  This works around a
-		problem caused by AssertMacros.h defining a "check" symbol, which can
-		interfere with clients (source files that include vImage headers) that
-		use "check" for their own purposes.
-	*/
-	#define __ASSERTMACROS__
-	#include <CoreVideo/CVPixelBuffer.h>  /* #define vImage_CVUtilities_h 1 before including Accelerate headers to turn this header off */
-	#undef __ASSERTMACROS__
-#endif
+#include <CoreVideo/CVPixelBuffer.h>  /* #define vImage_CVUtilities_h 1 before including Accelerate headers to turn this header off */
 
 #ifdef __cplusplus
 extern "C" {

@@ -74,17 +74,17 @@ NS_CLASS_AVAILABLE(10_4, 5_0)
  * The value of the NSString will be the same each time it is called. */
 @property (readonly) NSString *stringRepresentation;
 
-// Some convenience methods to create CIColors in the sRGB colorspace.
-+ (instancetype)blackColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)whiteColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)grayColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)redColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)greenColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)blueColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)cyanColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)magentaColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)yellowColor NS_AVAILABLE(10_12, 10_0);
-+ (instancetype)clearColor NS_AVAILABLE(10_12, 10_0);
+/* Convenience constant CIColors in the sRGB colorspace. */
+@property (class, strong, readonly) CIColor *blackColor   NS_SWIFT_NAME(black)   NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *whiteColor   NS_SWIFT_NAME(white)   NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *grayColor    NS_SWIFT_NAME(gray)    NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *redColor     NS_SWIFT_NAME(red)     NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *greenColor   NS_SWIFT_NAME(green)   NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *blueColor    NS_SWIFT_NAME(blue)    NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *cyanColor    NS_SWIFT_NAME(cyan)    NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *magentaColor NS_SWIFT_NAME(magenta) NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *yellowColor  NS_SWIFT_NAME(yellow)  NS_AVAILABLE(10_12, 10_0);
+@property (class, strong, readonly) CIColor *clearColor   NS_SWIFT_NAME(clear)   NS_AVAILABLE(10_12, 10_0);
 
 @end
 

@@ -1,7 +1,7 @@
 /*
     NSPersistentStoreCoordinator.h
     Core Data
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -109,45 +109,50 @@ COREDATA_EXTERN NSString * const NSPersistentStoreOSCompatibility API_AVAILABLE(
 */
 COREDATA_EXTERN NSString * const NSPersistentStoreConnectionPoolMaxSizeKey API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
 
-// Spotlight indexing and external record support keys
+/* Spotlight indexing and external record support keys */
+
+COREDATA_EXTERN NSString * const NSCoreDataCoreSpotlightExporter API_AVAILABLE(macosx(10.13),ios(11.0)) API_UNAVAILABLE(tvos,watchos);
 
 /* Values to be passed with NSExternalRecordsFileFormatOption indicating the format used when writing external records. 
    The files are serialized dictionaries. 
 */
-COREDATA_EXTERN NSString * const NSXMLExternalRecordType API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
-COREDATA_EXTERN NSString * const NSBinaryExternalRecordType API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
+COREDATA_EXTERN NSString * const NSXMLExternalRecordType API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
+COREDATA_EXTERN NSString * const NSBinaryExternalRecordType API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* option indicating the file format used when writing external records.The default is NSXMLExternalRecordType if this options isn't specified. */
-COREDATA_EXTERN NSString * const NSExternalRecordsFileFormatOption API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
+COREDATA_EXTERN NSString * const NSExternalRecordsFileFormatOption API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* option indicating the directory URL where external records are stored. External records are files that can be used by 
    Spotlight to index the contents of the store. They can also contain a serialized dictionary representation of the instances.
    The location specified with this option must be somewhere under the path ~/Library/Caches/Metadata/CoreData or ~/Library/CoreData
    This option must be set together with NSExternalRecordExtensionOption
 */
-COREDATA_EXTERN NSString * const NSExternalRecordsDirectoryOption API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
+COREDATA_EXTERN NSString * const NSExternalRecordsDirectoryOption API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* option indicating the extension used in the external record files. This option must be set together with NSExternalRecordsDirectoryOption */
-COREDATA_EXTERN NSString * const NSExternalRecordExtensionOption API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);    
+COREDATA_EXTERN NSString * const NSExternalRecordExtensionOption API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* Dictionary key for the entity name extracted from an external record file URL */
-COREDATA_EXTERN NSString * const NSEntityNameInPathKey API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);    
+COREDATA_EXTERN NSString * const NSEntityNameInPathKey API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* Dictionary key for the store UUID extracted from an external record file URL */
-COREDATA_EXTERN NSString * const NSStoreUUIDInPathKey API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);    
+COREDATA_EXTERN NSString * const NSStoreUUIDInPathKey API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* Dictionary key for the store URL extracted from an external record file URL */
-COREDATA_EXTERN NSString * const NSStorePathKey API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);    
+COREDATA_EXTERN NSString * const NSStorePathKey API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* Dictionary key for the managed object model URL extracted from an external record file URL */
-COREDATA_EXTERN NSString * const NSModelPathKey API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);    
+COREDATA_EXTERN NSString * const NSModelPathKey API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* Dictionary key for the object URI extracted from an external record file URL */
-COREDATA_EXTERN NSString * const NSObjectURIKey API_AVAILABLE(macosx(10.6)) API_UNAVAILABLE(ios);
+COREDATA_EXTERN NSString * const NSObjectURIKey API_DEPRECATED("Spotlight integration is deprecated. Use CoreSpotlight integration instead.", macosx(10.6,10.13)) API_UNAVAILABLE(ios);
 
 /* store option for the destroy... and replace... to indicate that the store file should be destroyed even if the operation might be unsafe (overriding locks
  */
 COREDATA_EXTERN NSString * const NSPersistentStoreForceDestroyOption API_AVAILABLE(macosx(10.8),ios(6.0));
+
+/* Dictionary key for enabling persistent history - default is NO */
+COREDATA_EXTERN NSString * const NSPersistentHistoryTrackingKey API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
 
 API_AVAILABLE(macosx(10.4),ios(3.0))
 @interface NSPersistentStoreCoordinator : NSObject <NSLocking> {
@@ -219,7 +224,7 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 
 /* Registers the specified NSPersistentStore subclass for the specified store type string.  This method must be invoked before a custom subclass of NSPersistentStore can be loaded into a persistent store coordinator.  Passing nil for the store class argument will unregister the specified store type.
 */
-+ (void)registerStoreClass:(Class)storeClass forStoreType:(NSString *)storeType API_AVAILABLE(macosx(10.5),ios(3.0));
++ (void)registerStoreClass:(Class _Nullable)storeClass forStoreType:(NSString *)storeType API_AVAILABLE(macosx(10.5),ios(3.0));
 
 /* Allows to access the metadata stored in a persistent store without warming up a CoreData stack; the guaranteed keys in this dictionary are NSStoreTypeKey and NSStoreUUIDKey. If storeType is nil, Core Data will guess which store class should be used to get/set the store file's metadata. 
  */
@@ -255,10 +260,10 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 - (BOOL)replacePersistentStoreAtURL:(NSURL *)destinationURL destinationOptions:(nullable NSDictionary *)destinationOptions withPersistentStoreFromURL:(NSURL *)sourceURL sourceOptions:(nullable NSDictionary *)sourceOptions storeType:(NSString *)storeType error:(NSError**)error API_AVAILABLE(macosx(10.11),ios(9.0));
 
 /* asynchronously performs the block on the coordinator's queue.  Encapsulates an autorelease pool. */
-- (void)performBlock:(void (^)())block  API_AVAILABLE(macosx(10.10),ios(8.0));
+- (void)performBlock:(void (^)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
 
 /* synchronously performs the block on the coordinator's queue.  May safely be called reentrantly. Encapsulates an autorelease pool. */
-- (void)performBlockAndWait:(void (^)())block  API_AVAILABLE(macosx(10.10),ios(8.0));
+- (void)performBlockAndWait:(void (NS_NOESCAPE ^)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
 
 /*
     Deprecated

@@ -1,5 +1,5 @@
 /*	NSExpression.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -19,14 +19,14 @@ typedef NS_ENUM(NSUInteger, NSExpressionType) {
     NSVariableExpressionType, // Expression that always returns whatever is stored at 'variable' in the bindings dictionary
     NSKeyPathExpressionType, // Expression that returns something that can be used as a key path
     NSFunctionExpressionType, // Expression that returns the result of evaluating a symbol
-    NSUnionSetExpressionType NS_ENUM_AVAILABLE(10_5, 3_0), // Expression that returns the result of doing a unionSet: on two expressions that evaluate to flat collections (arrays or sets)
-    NSIntersectSetExpressionType NS_ENUM_AVAILABLE(10_5, 3_0), // Expression that returns the result of doing an intersectSet: on two expressions that evaluate to flat collections (arrays or sets)
-    NSMinusSetExpressionType NS_ENUM_AVAILABLE(10_5, 3_0), // Expression that returns the result of doing a minusSet: on two expressions that evaluate to flat collections (arrays or sets)
-    NSSubqueryExpressionType NS_ENUM_AVAILABLE(10_5, 3_0) = 13,
-    NSAggregateExpressionType NS_ENUM_AVAILABLE(10_5, 3_0) = 14,
-    NSAnyKeyExpressionType NS_ENUM_AVAILABLE(10_9, 7_0) = 15,
+    NSUnionSetExpressionType API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)), // Expression that returns the result of doing a unionSet: on two expressions that evaluate to flat collections (arrays or sets)
+    NSIntersectSetExpressionType API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)), // Expression that returns the result of doing an intersectSet: on two expressions that evaluate to flat collections (arrays or sets)
+    NSMinusSetExpressionType API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)), // Expression that returns the result of doing a minusSet: on two expressions that evaluate to flat collections (arrays or sets)
+    NSSubqueryExpressionType API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)) = 13,
+    NSAggregateExpressionType API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)) = 14,
+    NSAnyKeyExpressionType API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)) = 15,
     NSBlockExpressionType = 19,
-    NSConditionalExpressionType NS_ENUM_AVAILABLE(10_11, 9_0) = 20
+    NSConditionalExpressionType API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) = 20
 
 };
 
@@ -43,9 +43,9 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
     NSExpressionType _expressionType;
 }
 
-+ (NSExpression *)expressionWithFormat:(NSString *)expressionFormat argumentArray:(NSArray *)arguments NS_AVAILABLE(10_6,4_0);
-+ (NSExpression *)expressionWithFormat:(NSString *)expressionFormat, ...  NS_AVAILABLE(10_6,4_0);
-+ (NSExpression *)expressionWithFormat:(NSString *)expressionFormat arguments:(va_list)argList NS_AVAILABLE(10_6,4_0);
++ (NSExpression *)expressionWithFormat:(NSString *)expressionFormat argumentArray:(NSArray *)arguments API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
++ (NSExpression *)expressionWithFormat:(NSString *)expressionFormat, ...  API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
++ (NSExpression *)expressionWithFormat:(NSString *)expressionFormat arguments:(va_list)argList API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 + (NSExpression *)expressionForConstantValue:(nullable id)obj;    // Expression that returns a constant value
 + (NSExpression *)expressionForEvaluatedObject;    // Expression that returns the object being evaluated
@@ -93,47 +93,43 @@ NS_CLASS_AVAILABLE(10_4, 3_0)
     //                   two NSExpression instances representing CLLocations    NSNumber
     // length:           an NSExpression instance representing a string         NSNumber
 
-+ (NSExpression *)expressionForAggregate:(NSArray *)subexpressions NS_AVAILABLE(10_5, 3_0); // Expression that returns a collection containing the results of other expressions
-+ (NSExpression *)expressionForUnionSet:(NSExpression *)left with:(NSExpression *)right NS_AVAILABLE(10_5, 3_0); // return an expression that will return the union of the collections expressed by left and right
-+ (NSExpression *)expressionForIntersectSet:(NSExpression *)left with:(NSExpression *)right NS_AVAILABLE(10_5, 3_0); // return an expression that will return the intersection of the collections expressed by left and right
-+ (NSExpression *)expressionForMinusSet:(NSExpression *)left with:(NSExpression *)right NS_AVAILABLE(10_5, 3_0); // return an expression that will return the disjunction of the collections expressed by left and right
-+ (NSExpression *)expressionForSubquery:(NSExpression *)expression usingIteratorVariable:(NSString *)variable predicate:(id)predicate NS_AVAILABLE(10_5, 3_0); // Expression that filters a collection by storing elements in the collection in the variable variable and keeping the elements for which qualifer returns true; variable is used as a local variable, and will shadow any instances of variable in the bindings dictionary, the variable is removed or the old value replaced once evaluation completes
-+ (NSExpression *)expressionForFunction:(NSExpression *)target selectorName:(NSString *)name arguments:(nullable NSArray *)parameters NS_AVAILABLE(10_5, 3_0);    // Expression that invokes the selector on target with parameters. Will throw at runtime if target does not implement selector or if parameters are wrong.
-+ (NSExpression *)expressionForAnyKey NS_AVAILABLE(10_9, 7_0);
-+ (NSExpression *)expressionForBlock:(id (^)(id _Nullable evaluatedObject, NSArray *expressions, NSMutableDictionary * _Nullable context))block arguments:(nullable NSArray<NSExpression *> *)arguments NS_AVAILABLE(10_6, 4_0); // Expression that invokes the block with the parameters; note that block expressions are not encodable or representable as parseable strings.
-+ (NSExpression *)expressionForConditional:(NSPredicate *)predicate trueExpression:(NSExpression *)trueExpression falseExpression:(NSExpression *)falseExpression  NS_AVAILABLE(10_11, 9_0); // Expression that will return the result of trueExpression or falseExpression depending on the value of predicate
++ (NSExpression *)expressionForAggregate:(NSArray<NSExpression *> *)subexpressions API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // Expression that returns a collection containing the results of other expressions
++ (NSExpression *)expressionForUnionSet:(NSExpression *)left with:(NSExpression *)right API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // return an expression that will return the union of the collections expressed by left and right
++ (NSExpression *)expressionForIntersectSet:(NSExpression *)left with:(NSExpression *)right API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // return an expression that will return the intersection of the collections expressed by left and right
++ (NSExpression *)expressionForMinusSet:(NSExpression *)left with:(NSExpression *)right API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // return an expression that will return the disjunction of the collections expressed by left and right
++ (NSExpression *)expressionForSubquery:(NSExpression *)expression usingIteratorVariable:(NSString *)variable predicate:(NSPredicate *)predicate API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // Expression that filters a collection by storing elements in the collection in the variable variable and keeping the elements for which qualifer returns true; variable is used as a local variable, and will shadow any instances of variable in the bindings dictionary, the variable is removed or the old value replaced once evaluation completes
++ (NSExpression *)expressionForFunction:(NSExpression *)target selectorName:(NSString *)name arguments:(nullable NSArray *)parameters API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));    // Expression that invokes the selector on target with parameters. Will throw at runtime if target does not implement selector or if parameters are wrong.
++ (NSExpression *)expressionForAnyKey API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
++ (NSExpression *)expressionForBlock:(id (^)(id _Nullable evaluatedObject, NSArray<NSExpression *> *expressions, NSMutableDictionary * _Nullable context))block arguments:(nullable NSArray<NSExpression *> *)arguments API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0)); // Expression that invokes the block with the parameters; note that block expressions are not encodable or representable as parseable strings.
++ (NSExpression *)expressionForConditional:(NSPredicate *)predicate trueExpression:(NSExpression *)trueExpression falseExpression:(NSExpression *)falseExpression  API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); // Expression that will return the result of trueExpression or falseExpression depending on the value of predicate
 
 - (instancetype)initWithExpressionType:(NSExpressionType)type NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 // accessors for individual parameters - raise if not applicable
 @property (readonly) NSExpressionType expressionType;
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(6)
 @property (nullable, readonly, retain) id constantValue;
-#endif
 @property (readonly, copy) NSString *keyPath;
 @property (readonly, copy) NSString *function;
 @property (readonly, copy) NSString *variable;
 @property (readonly, copy) NSExpression *operand;    // the object on which the selector will be invoked (the result of evaluating a key path or one of the defined functions)
 @property (nullable, readonly, copy) NSArray<NSExpression *> *arguments;    // array of expressions which will be passed as parameters during invocation of the selector on the operand of a function expression
 
-@property (readonly, retain) id collection NS_AVAILABLE(10_5, 3_0);
-@property (readonly, copy) NSPredicate *predicate NS_AVAILABLE(10_5, 3_0);
-@property (readonly, copy) NSExpression *leftExpression NS_AVAILABLE(10_5, 3_0); // expression which represents the left side of a set expression
-@property (readonly, copy) NSExpression *rightExpression NS_AVAILABLE(10_5, 3_0); // expression which represents the right side of a set expression
+@property (readonly, retain) id collection API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
+@property (readonly, copy) NSPredicate *predicate API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0));
+@property (readonly, copy) NSExpression *leftExpression API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // expression which represents the left side of a set expression
+@property (readonly, copy) NSExpression *rightExpression API_AVAILABLE(macos(10.5), ios(3.0), watchos(2.0), tvos(9.0)); // expression which represents the right side of a set expression
 
 
-@property (readonly, copy) NSExpression *trueExpression NS_AVAILABLE(10_11, 9_0); // expression which will be evaluated if a conditional expression's predicate evaluates to true
-@property (readonly, copy) NSExpression *falseExpression NS_AVAILABLE(10_11, 9_0); // expression which will be evaluated if a conditional expression's predicate evaluates to false
+@property (readonly, copy) NSExpression *trueExpression API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); // expression which will be evaluated if a conditional expression's predicate evaluates to true
+@property (readonly, copy) NSExpression *falseExpression API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)); // expression which will be evaluated if a conditional expression's predicate evaluates to false
 
-@property (readonly, copy) id (^expressionBlock)(id _Nullable, NSArray *, NSMutableDictionary * _Nullable) NS_AVAILABLE(10_6, 4_0);
+@property (readonly, copy) id (^expressionBlock)(id _Nullable, NSArray<NSExpression *> *, NSMutableDictionary * _Nullable) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 // evaluate the expression using the object and bindings- note that context is mutable here and can be used by expressions to store temporary state for one predicate evaluation
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(6)
 - (nullable id)expressionValueWithObject:(nullable id)object context:(nullable NSMutableDictionary *)context;
-#endif
 
-- (void)allowEvaluation NS_AVAILABLE(10_9, 7_0); // Force an expression which was securely decoded to allow evaluation
+- (void)allowEvaluation API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); // Force an expression which was securely decoded to allow evaluation
 
 @end
 

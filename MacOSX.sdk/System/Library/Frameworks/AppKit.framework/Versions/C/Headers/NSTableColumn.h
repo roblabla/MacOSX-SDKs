@@ -1,7 +1,7 @@
 /*
     NSTableColumn.h
     Application Kit
-    Copyright (c) 1995-2016, Apple Inc.
+    Copyright (c) 1995-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -27,7 +27,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
     CGFloat	_width;
     CGFloat	_minWidth;
     CGFloat	_maxWidth;
-    NSTableView *_tableView;
+    __weak NSTableView *_tableView;
     NSCell	*_headerCell;
     NSCell	*_dataCell;
     struct __colFlags {
@@ -45,14 +45,14 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 
 /* Designated initializer for NSTableColumns. Prior to 10.7, the parameter type was 'id', but it is now an 'NSString *'. See also -setIdentifier: and -identifier, and NSUserInterfaceItemIdentification.
  */
-- (instancetype)initWithIdentifier:(NSString *)identifier NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithIdentifier:(NSUserInterfaceItemIdentifier)identifier NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Gets and sets the string identifier associated with the NSTableColumn. 'identifier' will be copied. Prior to 10.7, the type was 'id', but was changed to 'NSString *' for NSUserInterfaceItemIdentification.
  */
-@property (copy) NSString *identifier;
+@property (copy) NSUserInterfaceItemIdentifier identifier;
 
-@property (nullable, assign) NSTableView *tableView;
+@property (nullable, weak) NSTableView *tableView;
 
 /* Gets and sets the current width of the NSTableColumn. The default for is 100.0. Calling setWidth: with a width that is less than the minWidth or larger than the maxWidth will automatically be constrained to minWidth or maxWidth as appropriate.
  */
@@ -80,7 +80,7 @@ typedef NS_OPTIONS(NSUInteger, NSTableColumnResizingOptions) {
 
 - (void)sizeToFit;
 
-/* A column is considered sortable if it has a sortDescriptorPrototype. This prototype defines several things about the columns sorting.  he prototype's ascending value defines the default sorting direction. Its key defines an arbitrary attribute which helps clients identify what to sort, while the selector defines how to sort. Note that, it is not required that the key be the same as the identifier. However, the key must be unique from the key used by other columns. The sortDescriptor is archived.
+/* A column is considered sortable if it has a sortDescriptorPrototype. This prototype defines several things about the columns sorting. The prototype's ascending value defines the default sorting direction. Its key defines an arbitrary attribute which helps clients identify what to sort, while the selector defines how to sort. Note that, it is not required that the key be the same as the identifier. However, the key must be unique from the key used by other columns. The sortDescriptor is archived.
  */
 @property (nullable, copy) NSSortDescriptor *sortDescriptorPrototype;
 

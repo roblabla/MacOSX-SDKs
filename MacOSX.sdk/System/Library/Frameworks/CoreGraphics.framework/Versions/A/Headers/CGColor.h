@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGColor *CGColorRef;
+typedef struct CF_BRIDGED_TYPE(id) CGColor *CGColorRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGColorSpace.h>

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 2B722E90-E30D-3FC8-B791-28BCC1DD5745', 'x86_64: DC6A8650-C6B6-3FD6-9BF9-9A027EB6D902' ]
+uuids:           [ 'i386: 638CFC18-8CBD-3029-874B-E94E9100CCC8', 'x86_64: 2AE21FCC-F416-3728-8B08-8F5C146396FF' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/DiskManagement.framework/Versions/A/DiskManagement
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _DMDiskManagementToolDiedNotification, _DMLocalizedUserErrorString, 

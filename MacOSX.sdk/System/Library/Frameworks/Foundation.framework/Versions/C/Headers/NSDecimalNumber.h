@@ -1,5 +1,5 @@
 /*	NSDecimalNumber.h
-	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSValue.h>
@@ -61,13 +61,11 @@ FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException;
 + (NSDecimalNumber *)decimalNumberWithString:(nullable NSString *)numberValue;
 + (NSDecimalNumber *)decimalNumberWithString:(nullable NSString *)numberValue locale:(nullable id)locale;
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, copy) NSDecimalNumber *zero;
 @property (class, readonly, copy) NSDecimalNumber *one;
 @property (class, readonly, copy) NSDecimalNumber *minimumDecimalNumber;
 @property (class, readonly, copy) NSDecimalNumber *maximumDecimalNumber;
 @property (class, readonly, copy) NSDecimalNumber *notANumber;
-#endif
 
 - (NSDecimalNumber *)decimalNumberByAdding:(NSDecimalNumber *)decimalNumber;
 - (NSDecimalNumber *)decimalNumberByAdding:(NSDecimalNumber *)decimalNumber withBehavior:(nullable id <NSDecimalNumberBehaviors>)behavior;
@@ -94,9 +92,7 @@ FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException;
 - (NSComparisonResult)compare:(NSNumber *)decimalNumber;
     // compare two NSDecimalNumbers
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, strong) id <NSDecimalNumberBehaviors> defaultBehavior;
-#endif
     // One behavior per thread - The default behavior is
     //   rounding mode: NSRoundPlain
     //   scale: No defined scale (full precision)
@@ -126,7 +122,7 @@ FOUNDATION_EXPORT NSExceptionName const NSDecimalNumberDivideByZeroException;
     void *_reserved;
 }
 
-+ (NSDecimalNumberHandler *)defaultDecimalNumberHandler;
+@property (class, readonly, strong) NSDecimalNumberHandler *defaultDecimalNumberHandler;
     // rounding mode: NSRoundPlain
     // scale: No defined scale (full precision)
     // ignore exactnessException (return nil)

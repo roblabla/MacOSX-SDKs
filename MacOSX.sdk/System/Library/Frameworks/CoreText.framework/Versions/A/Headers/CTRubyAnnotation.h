@@ -37,7 +37,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTRubyAnnotation * CTRubyAnnotationRe
     @abstract	Returns the CFType of the ruby annotation object
 */
 
-CFTypeID CTRubyAnnotationGetTypeID( void ) CT_AVAILABLE(10_10, 8_0);
+CFTypeID CTRubyAnnotationGetTypeID( void ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -79,7 +79,7 @@ typedef CF_ENUM(uint8_t, CTRubyAlignment) {
     kCTRubyAlignmentDistributeLetter = 4,
     kCTRubyAlignmentDistributeSpace = 5,
     kCTRubyAlignmentLineEdge = 6
-} CT_AVAILABLE(10_10, 8_0);
+} CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -109,7 +109,7 @@ typedef CF_ENUM(uint8_t, CTRubyOverhang) {
     kCTRubyOverhangStart = 1,
     kCTRubyOverhangEnd = 2,
     kCTRubyOverhangNone = 3
-} CT_AVAILABLE(10_10, 8_0);
+} CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -139,7 +139,7 @@ typedef CF_ENUM(uint8_t, CTRubyPosition) {
     kCTRubyPositionInterCharacter = 2,
     kCTRubyPositionInline = 3,
     kCTRubyPositionCount
-} CT_AVAILABLE(10_10, 8_0);
+} CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -172,7 +172,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreate(
     CTRubyAlignment alignment,
     CTRubyOverhang overhang,
     CGFloat sizeFactor,
-    CFStringRef text[kCTRubyPositionCount] ) CT_AVAILABLE(10_10, 8_0);
+    CFStringRef __nullable text[_Nonnull kCTRubyPositionCount] ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /*!
     @const      kCTRubyAnnotationSizeFactorAttributeName
@@ -181,7 +181,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreate(
     @discussion Value must be a CFNumberRef.
 */
 
-CT_EXPORT const CFStringRef kCTRubyAnnotationSizeFactorAttributeName CT_AVAILABLE(10_12, 10_0);
+CT_EXPORT const CFStringRef kCTRubyAnnotationSizeFactorAttributeName CT_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
     @const      kCTRubyAnnotationScaleToFitAttributeName
@@ -193,7 +193,7 @@ CT_EXPORT const CFStringRef kCTRubyAnnotationSizeFactorAttributeName CT_AVAILABL
     @discussion Value must be a CFBooleanRef. Default is false.
 */
 
-CT_EXPORT const CFStringRef kCTRubyAnnotationScaleToFitAttributeName CT_AVAILABLE(10_12, 10_0);
+CT_EXPORT const CFStringRef kCTRubyAnnotationScaleToFitAttributeName CT_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
     @function   CTRubyAnnotationCreateWithAttributes
@@ -228,7 +228,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreateWithAttributes(
     CTRubyOverhang overhang,
     CTRubyPosition position,
     CFStringRef string,
-    CFDictionaryRef attributes ) CT_AVAILABLE(10_12, 10_0);
+    CFDictionaryRef attributes ) CT_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
     @function   CTRubyAnnotationCreateCopy
@@ -244,7 +244,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreateWithAttributes(
 */
 
 CTRubyAnnotationRef CTRubyAnnotationCreateCopy(
-    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(10_10, 8_0);
+    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -259,7 +259,7 @@ CTRubyAnnotationRef CTRubyAnnotationCreateCopy(
 */
 
 CTRubyAlignment CTRubyAnnotationGetAlignment(
-    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(10_10, 8_0);
+    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -274,7 +274,7 @@ CTRubyAlignment CTRubyAnnotationGetAlignment(
 */
 
 CTRubyOverhang CTRubyAnnotationGetOverhang(
-    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(10_10, 8_0);
+    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   CTRubyAnnotationGetSizeFactor
@@ -288,7 +288,7 @@ CTRubyOverhang CTRubyAnnotationGetOverhang(
 */
 
 CGFloat CTRubyAnnotationGetSizeFactor(
-    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(10_10, 8_0);
+    CTRubyAnnotationRef rubyAnnotation ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -307,7 +307,7 @@ CGFloat CTRubyAnnotationGetSizeFactor(
 
 CFStringRef __nullable CTRubyAnnotationGetTextForPosition(
     CTRubyAnnotationRef rubyAnnotation,
-    CTRubyPosition position ) CT_AVAILABLE(10_10, 8_0);
+    CTRubyPosition position ) CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 //  INSearchForMessagesIntentResponse.h
 //  Intents
 //
-//  Copyright © 2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2017 Apple Inc. All rights reserved.
 //
 
 #import <Intents/INIntentResponse.h>
@@ -17,11 +17,12 @@ typedef NS_ENUM(NSInteger, INSearchForMessagesIntentResponseCode) {
     INSearchForMessagesIntentResponseCodeFailure,
     INSearchForMessagesIntentResponseCodeFailureRequiringAppLaunch,
     INSearchForMessagesIntentResponseCodeFailureMessageServiceNotAvailable,
-} API_AVAILABLE(macosx(10.12), ios(10.0));
+    INSearchForMessagesIntentResponseCodeFailureMessageTooManyResults,
+} API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12));
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macosx(10.12), ios(10.0))
+API_AVAILABLE(ios(10.0), watchos(3.2), macosx(10.12))
 @interface INSearchForMessagesIntentResponse : INIntentResponse
 
 - (id)init NS_UNAVAILABLE;

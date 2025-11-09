@@ -1,7 +1,7 @@
 /*
 	NSClipView.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -55,7 +55,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (copy) NSColor *backgroundColor;
 @property BOOL drawsBackground;
-@property (nullable, assign) __kindof NSView *documentView;
+@property (nullable, strong) __kindof NSView *documentView;
 @property (readonly) NSRect documentRect;
 @property (nullable, strong) NSCursor *documentCursor;
 @property (readonly) NSRect documentVisibleRect;

@@ -62,13 +62,22 @@ typedef void (*thread_call_func_t)(
  threads.
  @constant THREAD_CALL_PRIORITY_USER Importance similar to that of normal user threads.
  @constant THREAD_CALL_PRIORITY_LOW Very low importance.
+ @constant THREAD_CALL_PRIORITY_KERNEL_HIGH Importance higher than most kernel
+ threads.
  */
 typedef enum {
-	THREAD_CALL_PRIORITY_HIGH   = 0,
-	THREAD_CALL_PRIORITY_KERNEL = 1,
-	THREAD_CALL_PRIORITY_USER   = 2,
-	THREAD_CALL_PRIORITY_LOW    = 3
+	THREAD_CALL_PRIORITY_HIGH        = 0,
+	THREAD_CALL_PRIORITY_KERNEL      = 1,
+	THREAD_CALL_PRIORITY_USER        = 2,
+	THREAD_CALL_PRIORITY_LOW         = 3,
+	THREAD_CALL_PRIORITY_KERNEL_HIGH = 4
 } thread_call_priority_t;
+
+enum {
+	/* if call is re-submitted while the call is executing on a call thread, then delay the re-enqueue until it returns */
+	THREAD_CALL_OPTIONS_ONCE   = 0x00000001,
+};
+typedef uint32_t thread_call_options_t;
 
 __BEGIN_DECLS
 
@@ -189,6 +198,24 @@ extern thread_call_t	thread_call_allocate_with_priority(
 						thread_call_func_t	func,
 						thread_call_param_t	param0,
 						thread_call_priority_t  pri);
+
+ /*!
+  @function thread_call_allocate_with_options
+  @abstract Allocate a thread call to execute with a specified priority.
+  @discussion Identical to thread_call_allocate, except that priority
+  and options are specified by caller.
+  @param func Callback to invoke when thread call is scheduled.
+  @param param0 First argument to pass to callback.
+  @param pri Priority of item.
+  @param options Options for item.
+  @result Thread call which can be passed to thread_call_enter variants.
+  */
+extern thread_call_t	thread_call_allocate_with_options(
+						thread_call_func_t	func,
+						thread_call_param_t	param0,
+						thread_call_priority_t  pri,
+						thread_call_options_t   options);
+
 
 /*!
  @function thread_call_free

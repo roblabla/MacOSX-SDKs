@@ -1,7 +1,7 @@
 /*
 	NSArrayController.h
 	Application Kit
-	Copyright (c) 2002-2016, Apple Inc.
+	Copyright (c) 2002-2017, Apple Inc.
 	All rights reserved.
  */
 
@@ -87,12 +87,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)addSelectedObjects:(NSArray *)objects;
 - (BOOL)removeSelectedObjects:(NSArray *)objects;
 
-- (void)add:(nullable id)sender;    // overridden to add a new object to the content objects and to the arranged objects
-- (void)remove:(nullable id)sender;    // overridden to remove the selected objects
-- (void)insert:(nullable id)sender;
+- (IBAction)add:(nullable id)sender;    // overridden to add a new object to the content objects and to the arranged objects
+- (IBAction)remove:(nullable id)sender;    // overridden to remove the selected objects
+- (IBAction)insert:(nullable id)sender;
 @property (readonly) BOOL canInsert;    // can be used in bindings controlling the enabling of buttons, for example
-- (void)selectNext:(nullable id)sender;
-- (void)selectPrevious:(nullable id)sender;
+- (IBAction)selectNext:(nullable id)sender;
+- (IBAction)selectPrevious:(nullable id)sender;
 @property (readonly) BOOL canSelectNext;
 @property (readonly) BOOL canSelectPrevious;
 

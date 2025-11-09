@@ -20,7 +20,7 @@
                 dictionary is keyed off of the attribute ID of each attribute represented as an NSNumber.
 */
 
-@interface IOBluetoothSDPServiceRecord : NSObject <NSCoding> {
+@interface IOBluetoothSDPServiceRecord : NSObject <NSCoding, NSSecureCoding> {
     NSDictionary		*mAttributeDictionary;
     IOBluetoothDevice	*mDeviceForService;
     

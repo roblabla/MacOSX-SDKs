@@ -3,7 +3,7 @@
  
      Contains:   TextEncoding-related types and constants, and prototypes for related functions
  
-     Copyright:  © 1995-2015 Apple Inc. All rights reserved.
+     Copyright:  © 1995-2017 Apple Inc. All rights reserved.
  
      Bugs?:      For bug reports, consult the following page on
                  the World Wide Web:
@@ -171,7 +171,9 @@ enum {
   kTextEncodingUnicodeV6_0      = 0x010D, /* Adds many symbols, including emoji support.*/
   kTextEncodingUnicodeV6_1      = 0x010E, /* Adds emoji variation sequences, properties changes.*/
   kTextEncodingUnicodeV6_3      = 0x0110, /* Adds new bidi controls.*/
-  kTextEncodingUnicodeV7_0      = 0x0111  /* Adds RUBLE SIGN, symbols from Wingdings/Webdings.*/
+  kTextEncodingUnicodeV7_0      = 0x0111, /* Adds RUBLE SIGN, symbols from Wingdings/Webdings.*/
+  kTextEncodingUnicodeV8_0      = 0x0112, /* Adds LARI SIGN, lowercase Cherokee, emoji modifiers, CJK Ext E, 6 scripts.*/
+  kTextEncodingUnicodeV9_0      = 0x0113  /* Adds Tangut and 5 other scripts, 72 emoji.*/
 };
 
 /* ISO 8-bit and 7-bit encodings begin at 0x200*/

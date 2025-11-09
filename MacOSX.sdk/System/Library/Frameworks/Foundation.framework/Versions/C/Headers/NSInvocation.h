@@ -1,5 +1,5 @@
 /*	NSInvocation.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -63,10 +63,10 @@ enum _NSObjCValueType {
     NSObjCArrayType = '[',
     NSObjCUnionType = '(',
     NSObjCBitfield = 'b'
-} NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
+} API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 typedef struct {
-    NSInteger type NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
+    NSInteger type API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
     union {
     	char charValue;
 	short shortValue;
@@ -80,8 +80,8 @@ typedef struct {
 	void *pointerValue;
 	void *structLocation;
 	char *cStringLocation;
-    } value NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
-} NSObjCValue NS_DEPRECATED(10_0, 10_5, 2_0, 2_0);
+    } value API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
+} NSObjCValue API_DEPRECATED("Not supported", macos(10.0,10.5), ios(2.0,2.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
 #endif
 #endif

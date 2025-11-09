@@ -12,6 +12,16 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
 
 /*!
+ * @brief Describes how a resource will be used by a shader through an argument buffer
+ */
+typedef NS_OPTIONS(NSUInteger, MTLResourceUsage)
+{
+	MTLResourceUsageRead   = 1 << 0,
+	MTLResourceUsageWrite  = 1 << 1,
+	MTLResourceUsageSample = 1 << 2
+} NS_ENUM_AVAILABLE(10_13, 11_0);
+
+/*!
  @protocol MTLCommandEncoder
  @abstract MTLCommandEncoder is the common interface for objects that write commands into MTLCommandBuffers.
  */

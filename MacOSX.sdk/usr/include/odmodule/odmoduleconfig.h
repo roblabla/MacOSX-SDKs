@@ -26,8 +26,8 @@
 
 __BEGIN_DECLS
 
-extern const CFStringRef kODModuleConfigServerCategoryPrimary;
-extern const CFStringRef kODModuleConfigServerCategorySecondary;
+OS_EXPORT const CFStringRef kODModuleConfigServerCategoryPrimary;
+OS_EXPORT const CFStringRef kODModuleConfigServerCategorySecondary;
 
 /*!
  * @function odmoduleconfig_create
@@ -47,7 +47,7 @@ extern const CFStringRef kODModuleConfigServerCategorySecondary;
  * @result
  * an od_moduleconfig_t object created or NULL on failure
  */
-OD_WARN_RESULT OD_NOTHROW OD_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_moduleconfig_t
 odmoduleconfig_create(od_module_t module, CFDictionaryRef options, CFStringRef options_uuid);
 
@@ -63,7 +63,7 @@ odmoduleconfig_create(od_module_t module, CFDictionaryRef options, CFStringRef o
  * @result
  * is a CFDictionaryRef with moduleconfig options
  */
-OD_WARN_RESULT OD_NOTHROW CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFDictionaryRef
 odmoduleconfig_copy_options(od_moduleconfig_t moduleconfig);
 
@@ -82,7 +82,7 @@ odmoduleconfig_copy_options(od_moduleconfig_t moduleconfig);
  * @result 
  * is a CFTypeRef value
  */
-OD_WARN_RESULT OD_NOTHROW CF_RETURNS_RETAINED
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFTypeRef
 odmoduleconfig_copy_dynamicdata(od_moduleconfig_t moduleconfig, CFStringRef key);
 
@@ -101,7 +101,7 @@ odmoduleconfig_copy_dynamicdata(od_moduleconfig_t moduleconfig, CFStringRef key)
  * @param data
  * is a CFTypeRef value
  */
-OD_NOTHROW
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_set_dynamicdata(od_moduleconfig_t moduleconfig, CFStringRef key, CFTypeRef data);
 
@@ -117,7 +117,7 @@ odmoduleconfig_set_dynamicdata(od_moduleconfig_t moduleconfig, CFStringRef key, 
  * @result
  * is a void*
  */
-OD_WARN_RESULT OD_NOTHROW
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 void *
 odmoduleconfig_get_context(od_moduleconfig_t moduleconfig);
 
@@ -139,7 +139,7 @@ odmoduleconfig_get_context(od_moduleconfig_t moduleconfig);
  * @param dealloc
  * is a od_context_dealloc_fn_t function invoked with context when clearing the context
  */
-OD_NOTHROW
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_set_context(od_moduleconfig_t moduleconfig, void *context, od_context_dealloc_fn_t dealloc);
 
@@ -155,6 +155,7 @@ odmoduleconfig_set_context(od_moduleconfig_t moduleconfig, void *context, od_con
  * @param applier
  * is block applied to every subnode
  */
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_apply_subnodes(od_moduleconfig_t moduleconfig, void (^applier)(od_moduleconfig_t subnode, CFStringRef nodename));
 
@@ -170,6 +171,7 @@ odmoduleconfig_apply_subnodes(od_moduleconfig_t moduleconfig, void (^applier)(od
  * @result
  * is a CFStringRef name
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odmoduleconfig_copy_nodename(od_moduleconfig_t moduleconfig);
 
@@ -194,6 +196,7 @@ odmoduleconfig_copy_nodename(od_moduleconfig_t moduleconfig);
  * @result
  * is a CFTypeRef object
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFTypeRef
 odmoduleconfig_copy_option_type_ext(od_moduleconfig_t moduleconfig,
                                     od_module_t module,
@@ -212,6 +215,7 @@ odmoduleconfig_copy_option_type_ext(od_moduleconfig_t moduleconfig,
  * @result
  * is a CFDictionaryRef object
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFDictionaryRef
 odmoduleconfig_copy_preferred(od_moduleconfig_t moduleconfig);
 
@@ -227,6 +231,7 @@ odmoduleconfig_copy_preferred(od_moduleconfig_t moduleconfig);
  * @result
  * is a CFDictionaryRef object
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFDictionaryRef
 odmoduleconfig_copy_lastused_server(od_moduleconfig_t moduleconfig);
 
@@ -242,6 +247,7 @@ odmoduleconfig_copy_lastused_server(od_moduleconfig_t moduleconfig);
  * @result
  * is an od_moduleconfig_t object
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_moduleconfig_t
 odmoduleconfig_copy_rootconfig(od_moduleconfig_t moduleconfig);
 
@@ -263,6 +269,7 @@ odmoduleconfig_copy_rootconfig(od_moduleconfig_t moduleconfig);
  * @result
  * is a CFArrayRef object
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFArrayRef
 odmoduleconfig_copy_servers(od_moduleconfig_t moduleconfig, bool isGlobal, CFStringRef listCategory);
 
@@ -278,6 +285,7 @@ odmoduleconfig_copy_servers(od_moduleconfig_t moduleconfig, bool isGlobal, CFStr
  * @result
  * is an od_credential_t object
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_credential_t
 odmoduleconfig_copy_trustcredential(od_moduleconfig_t moduleconfig);
 
@@ -287,7 +295,7 @@ odmoduleconfig_copy_trustcredential(od_moduleconfig_t moduleconfig);
  * @abstract
  * create a subnode
  *
- * @param moduleconfig
+ * @param parent_config
  * is an od_moduleconfig_t object to modify
  *
  * @param request
@@ -296,7 +304,7 @@ odmoduleconfig_copy_trustcredential(od_moduleconfig_t moduleconfig);
  * @param requester
  * is an od_moduleconfig_t object that requested the subnode
  *
- * @param option
+ * @param options
  * is a CFDictionaryRef object with moduleconfig options
  *
  * @param subname
@@ -308,6 +316,7 @@ odmoduleconfig_copy_trustcredential(od_moduleconfig_t moduleconfig);
  * @result
  * is an od_moduleconfig_t object
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_moduleconfig_t
 odmoduleconfig_create_subnode(od_moduleconfig_t parent_config,
                               od_request_t request,
@@ -340,6 +349,7 @@ odmoduleconfig_create_subnode(od_moduleconfig_t parent_config,
  * @result
  * is a bool
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 odmoduleconfig_store_password(od_moduleconfig_t moduleconfig,
                               bool isGlobal,
@@ -368,6 +378,7 @@ odmoduleconfig_store_password(od_moduleconfig_t moduleconfig,
  * @result
  * is a bool
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 odmoduleconfig_delete_password(od_moduleconfig_t moduleconfig,
                                bool isGlobal,
@@ -396,6 +407,7 @@ odmoduleconfig_delete_password(od_moduleconfig_t moduleconfig,
  * @result
  * is a CFStringRef
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT CF_RETURNS_RETAINED
 CFStringRef
 odmoduleconfig_copy_password(od_moduleconfig_t moduleconfig,
                              bool isGlobal,
@@ -429,6 +441,7 @@ odmoduleconfig_copy_password(od_moduleconfig_t moduleconfig,
  * @result
  * is a bool
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 odmoduleconfig_fetch_password_timestamps(od_moduleconfig_t moduleconfig,
                                          bool isGlobal,
@@ -455,6 +468,7 @@ odmoduleconfig_fetch_password_timestamps(od_moduleconfig_t moduleconfig,
  * @result
  * is a bool
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 odmoduleconfig_get_option_bool(od_moduleconfig_t moduleconfig,
                                od_module_t module,
@@ -475,12 +489,13 @@ odmoduleconfig_get_option_bool(od_moduleconfig_t moduleconfig,
  * @param key
  * is a CFStringRef object
  *
- * @param defauleValue
+ * @param defaultValue
  * is an int32_t that is returned if option is not present
  *
  * @result
  * is a int32
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 int32_t
 odmoduleconfig_get_option_int32(od_moduleconfig_t moduleconfig,
                                 od_module_t module,
@@ -502,6 +517,7 @@ odmoduleconfig_get_option_int32(od_moduleconfig_t moduleconfig,
  * @result
  * is a bool
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 odmoduleconfig_is_online(od_moduleconfig_t moduleconfig, od_request_t request);
 
@@ -517,6 +533,7 @@ odmoduleconfig_is_online(od_moduleconfig_t moduleconfig, od_request_t request);
  * @result
  * is a bool
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT
 bool
 odmoduleconfig_is_rootconfig(od_moduleconfig_t moduleconfig);
 
@@ -535,6 +552,7 @@ odmoduleconfig_is_rootconfig(od_moduleconfig_t moduleconfig);
  * @param destination
  * is a CFDictionaryRef designating the server address
  */
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_set_preferred(od_moduleconfig_t moduleconfig, od_request_t request,
                              CFDictionaryRef destination);
@@ -557,6 +575,7 @@ odmoduleconfig_set_preferred(od_moduleconfig_t moduleconfig, od_request_t reques
  * @param list
  * is a CFArrayRef of servers for this moduleconfig
  */
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_set_servers(od_moduleconfig_t moduleconfig,
                            od_request_t request,
@@ -575,6 +594,7 @@ odmoduleconfig_set_servers(od_moduleconfig_t moduleconfig,
  * @param request
  * is an od_request_t object that triggered this change.
  */
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_set_state_unknown(od_moduleconfig_t moduleconfig, od_request_t request);
 
@@ -590,6 +610,7 @@ odmoduleconfig_set_state_unknown(od_moduleconfig_t moduleconfig, od_request_t re
  * @param visible
  * is a boolean
  */
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_set_subnode_visibility(od_moduleconfig_t moduleconfig, bool visible);
 
@@ -605,6 +626,7 @@ odmoduleconfig_set_subnode_visibility(od_moduleconfig_t moduleconfig, bool visib
  * @param netBIOSName
  * is a CFStringRef name
  */
+OS_EXPORT OS_NOTHROW
 void
 odmoduleconfig_set_netbiosname(od_moduleconfig_t moduleconfig, CFStringRef netBIOSName);
 
@@ -626,7 +648,7 @@ odmoduleconfig_set_netbiosname(od_moduleconfig_t moduleconfig, CFStringRef netBI
  * @param name
  * is a CStringRef name for this connection
  *
- * @param credentials
+ * @param credential
  * is an od_credential_t object for this connection
  *
  * @param flags
@@ -641,6 +663,7 @@ odmoduleconfig_set_netbiosname(od_moduleconfig_t moduleconfig, CFStringRef netBI
  * @result
  * an od_connection_t object created or NULL on failure
  */
+OS_EXPORT OS_NOTHROW OS_WARN_RESULT OD_RETURNS_RETAINED
 od_connection_t
 odmoduleconfig_create_connection(od_moduleconfig_t moduleconfig, od_request_t request,
                                  CFStringRef name, od_credential_t credential,

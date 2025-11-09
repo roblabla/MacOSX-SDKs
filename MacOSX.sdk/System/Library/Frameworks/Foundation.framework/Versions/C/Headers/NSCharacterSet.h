@@ -1,5 +1,5 @@
 /*	NSCharacterSet.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <CoreFoundation/CFCharacterSet.h>
@@ -17,7 +17,6 @@ enum {
 
 @interface NSCharacterSet : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (readonly, class, copy) NSCharacterSet *controlCharacterSet;
 @property (readonly, class, copy) NSCharacterSet *whitespaceCharacterSet;
 @property (readonly, class, copy) NSCharacterSet *whitespaceAndNewlineCharacterSet;
@@ -32,8 +31,7 @@ enum {
 @property (readonly, class, copy) NSCharacterSet *punctuationCharacterSet;
 @property (readonly, class, copy) NSCharacterSet *capitalizedLetterCharacterSet;
 @property (readonly, class, copy) NSCharacterSet *symbolCharacterSet;
-@property (readonly, class, copy) NSCharacterSet *newlineCharacterSet NS_AVAILABLE(10_5, 2_0);
-#endif
+@property (readonly, class, copy) NSCharacterSet *newlineCharacterSet API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 + (NSCharacterSet *)characterSetWithRange:(NSRange)aRange;
 + (NSCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;
@@ -77,7 +75,7 @@ enum {
 + (NSMutableCharacterSet *)punctuationCharacterSet;
 + (NSMutableCharacterSet *)capitalizedLetterCharacterSet;
 + (NSMutableCharacterSet *)symbolCharacterSet;
-+ (NSMutableCharacterSet *)newlineCharacterSet NS_AVAILABLE(10_5, 2_0);
++ (NSMutableCharacterSet *)newlineCharacterSet API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 + (NSMutableCharacterSet *)characterSetWithRange:(NSRange)aRange;
 + (NSMutableCharacterSet *)characterSetWithCharactersInString:(NSString *)aString;

@@ -1,7 +1,7 @@
 /*
 	NSDocumentController.h
 	Application Kit
-	Copyright (c) 1997-2016, Apple Inc.
+	Copyright (c) 1997-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
     1) Instantiate your NSDocumentController subclass in the application's main nib, or
     2) Allocate and initialize an instance of your subclass in your application delegate's applicationWillFinishLaunching: method.
 */
-+ (__kindof NSDocumentController *)sharedDocumentController;
+@property (class, readonly, strong) __kindof NSDocumentController *sharedDocumentController;
 
 /* The designated initializer. The first instance of NSDocumentController to be allocate and initialized during application launch is used as the shared document controller.
 */
@@ -105,7 +105,7 @@ If you override -[NSDocumentController openDocument:], you would typically want 
 */
 - (void)beginOpenPanelWithCompletionHandler:(void (^)(NSArray<NSURL *> * __nullable))completionHandler NS_AVAILABLE_MAC(10_8);
 
-/* Present an open panel, which may or may not be application-modal, to the user, specifying a list of UTIs for openable files. Invoke the completion handler with NSOKButton or NSCancelButton depending on how the user dismisses the panel.
+/* Present an open panel, which will always be non-modal, to the user, specifying a list of UTIs for openable files. Invoke the completion handler with NSOKButton or NSCancelButton depending on how the user dismisses the panel.
 
 You typically would not invoke this method directly. You can override it though if you need to customize the open panel before it gets displayed.
 */
@@ -192,6 +192,20 @@ You can override this method to customize how documents are duplicated. It is in
 We don't anticipate any uses for your application to invoke this method directly, but you may discover one.
 */
 - (nullable __kindof NSDocument *)duplicateDocumentWithContentsOfURL:(NSURL *)url copying:(BOOL)duplicateByCopying displayName:(nullable NSString *)displayNameOrNil error:(NSError **)outError NS_AVAILABLE_MAC(10_7);
+
+#pragma mark *** Document Sharing ***
+
+/* If YES, allows automatic insertion of a Share menu in the File menu.
+ 
+ By default, this will be YES if your application has any NSDocument subclasses for which autosavesInPlace is YES. To disable the Share menu entirely, or to enable custom placement or construction of the Share menu, applications can explicitly opt out of automatic share menu insertion by overriding this property to return NO.
+ 
+ Be aware that even if allowsAutomaticShareMenu is YES, NSDocumentController may choose not to insert the Share menu if it detects that the application already has a Share menu.
+ */
+@property (readonly) BOOL allowsAutomaticShareMenu NS_AVAILABLE_MAC(10_13);
+
+/* A menu item that can be used for sharing the current document. You would typically only use this if you make your NSDocument subclass return NO for allowsAutomaticShareMenu to do custom placement of the Share menu.
+ */
+- (NSMenuItem *)standardShareMenuItem NS_AVAILABLE_MAC(10_13);
 
 #pragma mark *** Error Presentation ***
 

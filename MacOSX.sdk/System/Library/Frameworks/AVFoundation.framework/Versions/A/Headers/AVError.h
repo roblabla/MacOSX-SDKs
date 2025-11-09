@@ -3,7 +3,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2014 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
  */
 
@@ -101,4 +101,10 @@ typedef NS_ENUM(NSInteger, AVError) {
 #endif
     AVErrorUnsupportedOutputSettings NS_AVAILABLE(10_12, 10_0) = -11861,
 	AVErrorOperationNotAllowed NS_AVAILABLE(10_12, 10_0) = -11862,
+	AVErrorContentIsUnavailable NS_AVAILABLE(10_13, 11_0) = -11863,
+	AVErrorFormatUnsupported NS_AVAILABLE(10_13, 11_0)  = -11864,
+	AVErrorMalformedDepth NS_AVAILABLE(10_13, 11_0)     = -11865,
+	AVErrorContentNotUpdated NS_AVAILABLE(10_13, 11_0)	= -11866,
+	AVErrorNoLongerPlayable	 NS_AVAILABLE(10_13, 11_0)	= -11867,
+	AVErrorNoCompatibleAlternatesForExternalDisplay API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED = -11868,
 };

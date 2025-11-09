@@ -63,6 +63,18 @@ uint32_t PE_i_can_has_debugger(
 	uint32_t *);
 
 
+/* Return the offset of the specified address into the panic region */
+uint32_t PE_get_offset_into_panic_region(
+	char *location);
+
+/* Zeroes the panic header, sets the panic magic and initializes the header to be used */
+void PE_init_panicheader(
+	void);
+
+/* Updates the panic header during a nested panic */
+void PE_update_panicheader_nestedpanic(
+	void);
+
 
 void PE_init_kprintf(
 	boolean_t vm_initialized);

@@ -1,16 +1,19 @@
 /*
- NSPersistentContainer.h
- Core Data
- Copyright (c) 2016, Apple Inc.
- All rights reserved.
- */
+    NSPersistentContainer.h
+    Core Data
+    Copyright (c) 2016-2017, Apple Inc.
+    All rights reserved.
+*/
 
 #import <Foundation/NSArray.h>
-#import <Foundation/NSURL.h>
+#import <Foundation/NSDictionary.h>
+#import <Foundation/NSError.h>
 #import <CoreData/NSManagedObjectContext.h>
 #import <CoreData/NSPersistentStoreCoordinator.h>
 #import <CoreData/NSManagedObjectModel.h>
 #import <CoreData/NSPersistentStoreDescription.h>
+
+@class NSURL;
 
 NS_ASSUME_NONNULL_BEGIN
 

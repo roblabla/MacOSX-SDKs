@@ -160,6 +160,11 @@ struct in6_ifstat {
 					/* NOTE: increment on final dst if */
 	u_quad_t ifs6_in_mcast;		/* # of inbound multicast datagrams */
 	u_quad_t ifs6_out_mcast;	/* # of outbound multicast datagrams */
+
+	u_quad_t ifs6_cantfoward_icmp6;	/* # of ICMPv6 packets received for unreachable dest */
+	u_quad_t ifs6_addr_expiry_cnt;	/* # of address expiry events (excluding privacy addresses) */
+	u_quad_t ifs6_pfx_expiry_cnt;	/* # of prefix expiry events */
+	u_quad_t ifs6_defrtr_expiry_cnt;	/* # of default router expiry events */
 };
 
 /*

@@ -123,6 +123,11 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
             HRTF (Head Related Transfer Function) is a high quality algorithm using filtering to 
             emulate 3 dimensional space in headphones. HRTF is a cpu intensive algorithm.
  
+        AVAudio3DMixingRenderingAlgorithmHRTFHQ
+            Higher quality HRTF rendering algorithm compared to AVAudio3DMixingRenderingAlgorithmHRTF.
+            Improvements have been made to the overall frequency response and localization of
+            sources in a 3D space.
+ 
         AVAudio3DMixingRenderingAlgorithmSoundField
             SoundField is designed for rendering to multi channel hardware. The mixer takes data 
             being rendered with SoundField and distributes it amongst all the output channels with 
@@ -141,7 +146,8 @@ typedef NS_ENUM(NSInteger, AVAudio3DMixingRenderingAlgorithm) {
     AVAudio3DMixingRenderingAlgorithmSphericalHead          = 1,
     AVAudio3DMixingRenderingAlgorithmHRTF                   = 2,
     AVAudio3DMixingRenderingAlgorithmSoundField             = 3,
-    AVAudio3DMixingRenderingAlgorithmStereoPassThrough      = 5
+    AVAudio3DMixingRenderingAlgorithmStereoPassThrough      = 5,
+    AVAudio3DMixingRenderingAlgorithmHRTFHQ                 = 6
 } NS_ENUM_AVAILABLE(10_10, 8_0);
 
 
@@ -233,6 +239,8 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @private
 	void *_impl;
 }
+
+- (instancetype)init NS_UNAVAILABLE;
 
 /*! @property connectionPoint
 	@abstract Returns the underlying mixer connection point

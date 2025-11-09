@@ -150,7 +150,8 @@ kern_return_t memory_object_upl_request
 	upl_t *upl,
 	upl_page_info_array_t page_list,
 	mach_msg_type_number_t *page_listCnt,
-	integer_t cntrl_flags
+	integer_t cntrl_flags,
+	integer_t tag
 );
 
 /* Routine memory_object_super_upl_request */
@@ -168,7 +169,8 @@ kern_return_t memory_object_super_upl_request
 	upl_t *upl,
 	upl_page_info_array_t page_list,
 	mach_msg_type_number_t *page_listCnt,
-	integer_t cntrl_flags
+	integer_t cntrl_flags,
+	integer_t tag
 );
 
 /* Routine memory_object_cluster_size */
@@ -336,6 +338,7 @@ __END_DECLS
 		upl_size_t size;
 		mach_msg_type_number_t page_listCnt;
 		integer_t cntrl_flags;
+		integer_t tag;
 	} __Request__memory_object_upl_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()
@@ -352,6 +355,7 @@ __END_DECLS
 		upl_size_t super_size;
 		mach_msg_type_number_t page_listCnt;
 		integer_t cntrl_flags;
+		integer_t tag;
 	} __Request__memory_object_super_upl_request_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack()

@@ -1,7 +1,7 @@
 /*
         NSStatusBar.h
         Application Kit
-        Copyright (c) 1997-2016, Apple Inc.
+        Copyright (c) 1997-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -27,7 +27,7 @@ static const CGFloat NSSquareStatusItemLength = -2.0;
     NSInteger      _registeredForNote;
 }
 
-+ (NSStatusBar*)systemStatusBar;
+@property (class, readonly, strong) NSStatusBar *systemStatusBar;
 
 - (NSStatusItem*)statusItemWithLength:(CGFloat)length;
 - (void)removeStatusItem:(NSStatusItem*)item;

@@ -124,6 +124,14 @@ extern int __mb_cur_max;
 #define	MB_CUR_MAX_L(x)	(___mb_cur_max_l(x))
 #endif
 
+#ifndef __alloc_size
+#if __has_attribute(alloc_size)
+#define __alloc_size(...) __attribute__((alloc_size(__VA_ARGS__)))
+#else
+#define __alloc_size(...)
+#endif
+#endif // __alloc_size
+
 __BEGIN_DECLS
 void	 abort(void) __dead2;
 int	 abs(int) __pure2;
@@ -137,7 +145,7 @@ long long
 #endif /* !__DARWIN_NO_LONG_LONG */
 void	*bsearch(const void *__key, const void *__base, size_t __nel,
 	    size_t __width, int (* _Nonnull __compar)(const void *, const void *));
-void	*calloc(size_t __count, size_t __size) __result_use_check;
+void	*calloc(size_t __count, size_t __size) __result_use_check __alloc_size(1,2);
 div_t	 div(int, int) __pure2;
 void	 exit(int) __dead2;
 void	 free(void *);
@@ -149,7 +157,7 @@ long long
 	 llabs(long long);
 lldiv_t	 lldiv(long long, long long);
 #endif /* !__DARWIN_NO_LONG_LONG */
-void	*malloc(size_t __size) __result_use_check;
+void	*malloc(size_t __size) __result_use_check __alloc_size(1);
 int	 mblen(const char *__s, size_t __n);
 size_t	 mbstowcs(wchar_t * __restrict , const char * __restrict, size_t);
 int	 mbtowc(wchar_t * __restrict, const char * __restrict, size_t);
@@ -157,7 +165,7 @@ int 	 posix_memalign(void **__memptr, size_t __alignment, size_t __size) __OSX_A
 void	 qsort(void *__base, size_t __nel, size_t __width,
 	    int (* _Nonnull __compar)(const void *, const void *));
 int	 rand(void) __swift_unavailable("Use arc4random instead.");
-void	*realloc(void *__ptr, size_t __size) __result_use_check;
+void	*realloc(void *__ptr, size_t __size) __result_use_check __alloc_size(2);
 void	 srand(unsigned) __swift_unavailable("Use arc4random instead.");
 double	 strtod(const char *, char **) __DARWIN_ALIAS(strtod);
 float	 strtof(const char *, char **) __DARWIN_ALIAS(strtof);
@@ -182,7 +190,7 @@ unsigned long long
 #endif
 
 __swift_unavailable_on("Use posix_spawn APIs or NSTask instead.", "Process spawning is unavailable")
-__OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0,__MAC_NA,__IPHONE_2_0,__IPHONE_8_0, "Use posix_spawn APIs instead.")
+__API_AVAILABLE(macos(10.0)) __IOS_PROHIBITED
 __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 int	 system(const char *) __DARWIN_ALIAS_C(system);
 
@@ -323,7 +331,7 @@ int	 sradixsort(const unsigned char **__base, int __nel, const unsigned char *__
 	    unsigned __endbyte);
 void	 sranddev(void);
 void	 srandomdev(void);
-void	*reallocf(void *__ptr, size_t __size);
+void	*reallocf(void *__ptr, size_t __size) __alloc_size(2);
 #if !__DARWIN_NO_LONG_LONG
 long long
 	 strtoq(const char *__str, char **__endptr, int __base);
@@ -331,7 +339,7 @@ unsigned long long
 	 strtouq(const char *__str, char **__endptr, int __base);
 #endif /* !__DARWIN_NO_LONG_LONG */
 extern char *suboptarg;		/* getsubopt(3) external variable */
-void	*valloc(size_t);
+void	*valloc(size_t) __alloc_size(1);
 #endif	/* !_ANSI_SOURCE && !_POSIX_SOURCE */
 
 /* Poison the following routines if -fshort-wchar is set */

@@ -1,6 +1,6 @@
 /*
 	NSObjectScripting.h
-	Copyright (c) 2002-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2002-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Given an object specifier return the specified object or objects in the receiving container. This might successfully return an object, an array of objects, or nil, depending on the kind of object specifier. Because nil is a valid value, failure is signaled by sending the object specifier -setEvaluationError: before returning. Your override doesn't also have to invoke any of the NSScriptCommand error signaling methods, though it can, to record very specific error information. The NSUnknownKeySpecifierError and NSInvalidIndexSpecifierError numbers are special, in that Cocoa may continue evaluating an outer specifier if they're encountered, for the convenience of scripters.
 */
-- (nullable id)scriptingValueForSpecifier:(NSScriptObjectSpecifier *)objectSpecifier NS_AVAILABLE(10_5, NA);
+- (nullable id)scriptingValueForSpecifier:(NSScriptObjectSpecifier *)objectSpecifier API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 /* Getter: */
@@ -26,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Create one or more scripting objects to be inserted into the relationship identified by the key by copying the passed-in value, set the properties in the copied object or objects, and return it or them. The value is, for example, derived from the receivers of a Duplicate command. Its type must match the type of the property identified by the key. For example, if the property is an ordered to-many relationship, the value will always be an array of objects to be copied, and an array of objects must therefore be returned. The properties are derived from the "with properties" parameter of a Duplicate command. When this method is invoked by Cocoa neither the value nor the properties will have yet been coerced using scripting key-value coding's -coerceValue:forKey: method. In .sdef-declared scriptability the types of the passed-in objects reliably match the relevant .sdef declarations however.
 */
-- (nullable id)copyScriptingValue:(id)value forKey:(NSString *)key withProperties:(NSDictionary<NSString *, id> *)properties NS_AVAILABLE(10_5, NA);
+- (nullable id)copyScriptingValue:(id)value forKey:(NSString *)key withProperties:(NSDictionary<NSString *, id> *)properties API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /* Create a new instance of a scriptable class to be inserted into the relationship identified by the key, set the contentsValue and properties of it, and return it. Or return nil for failure. The contentsValue and properties are derived from the "with contents" and "with properties" parameters of a Make command. The contentsValue may be nil. When this method is invoked by Cocoa neither the contentsValue nor the properties will have yet been coerced using scripting key-value coding's -coerceValue:forKey: method. In .sdef-declared scriptability the types of the passed-in objects reliably match the relevant .sdef declarations however.
 */
-- (nullable id)newScriptingObjectOfClass:(Class)objectClass forValueForKey:(NSString *)key withContentsValue:(nullable id)contentsValue properties:(NSDictionary<NSString *, id> *)properties NS_AVAILABLE(10_5, NA);
+- (nullable id)newScriptingObjectOfClass:(Class)objectClass forValueForKey:(NSString *)key withContentsValue:(nullable id)contentsValue properties:(NSDictionary<NSString *, id> *)properties API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 @end

@@ -1,5 +1,5 @@
 /*	NSDateFormatter.h
-	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSFormatter.h>
@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
     NSUInteger _counter;
 }
 
-@property NSFormattingContext formattingContext NS_AVAILABLE(10_10, 8_0); // default is NSFormattingContextUnknown
+@property NSFormattingContext formattingContext API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0)); // default is NSFormattingContextUnknown
 
 // - (id)init; // designated initializer
 
@@ -60,15 +60,13 @@ typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
 };
 
 
-+ (NSString *)localizedStringFromDate:(NSDate *)date dateStyle:(NSDateFormatterStyle)dstyle timeStyle:(NSDateFormatterStyle)tstyle NS_AVAILABLE(10_6, 4_0);
++ (NSString *)localizedStringFromDate:(NSDate *)date dateStyle:(NSDateFormatterStyle)dstyle timeStyle:(NSDateFormatterStyle)tstyle API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-+ (nullable NSString *)dateFormatFromTemplate:(NSString *)tmplate options:(NSUInteger)opts locale:(nullable NSLocale *)locale NS_AVAILABLE(10_6, 4_0);
++ (nullable NSString *)dateFormatFromTemplate:(NSString *)tmplate options:(NSUInteger)opts locale:(nullable NSLocale *)locale API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 	// no options defined, pass 0 for now
 
 // Attributes of an NSDateFormatter
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class) NSDateFormatterBehavior defaultFormatterBehavior;
-#endif
 
 /*
  A convenient way to generate an appropriate localized date format, and set it, in a single operation.
@@ -79,7 +77,7 @@ typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
  Note that the template string is used only to specify which date format components should be included. Ordering and other text will not be preserved.
  The parameter is also not stored, or updated when the locale or other options change, just as with the ‘dateFormat’ property.
  */
-- (void) setLocalizedDateFormatFromTemplate:(NSString *)dateFormatTemplate NS_AVAILABLE(10_10, 8_0);
+- (void) setLocalizedDateFormatFromTemplate:(NSString *)dateFormatTemplate API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 @property (null_resettable, copy) NSString *dateFormat;
 @property NSDateFormatterStyle dateStyle;
@@ -99,28 +97,28 @@ typedef NS_ENUM(NSUInteger, NSDateFormatterBehavior) {
 @property (null_resettable, copy) NSArray<NSString *> *shortWeekdaySymbols;
 @property (null_resettable, copy) NSString *AMSymbol;
 @property (null_resettable, copy) NSString *PMSymbol;
-@property (null_resettable, copy) NSArray<NSString *> *longEraSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *veryShortMonthSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *standaloneMonthSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *shortStandaloneMonthSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *veryShortStandaloneMonthSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *veryShortWeekdaySymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *standaloneWeekdaySymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *shortStandaloneWeekdaySymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *veryShortStandaloneWeekdaySymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *quarterSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *shortQuarterSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *standaloneQuarterSymbols NS_AVAILABLE(10_5, 2_0);
-@property (null_resettable, copy) NSArray<NSString *> *shortStandaloneQuarterSymbols NS_AVAILABLE(10_5, 2_0);
-@property (nullable, copy) NSDate *gregorianStartDate NS_AVAILABLE(10_5, 2_0);
-@property BOOL doesRelativeDateFormatting NS_AVAILABLE(10_6, 4_0);
+@property (null_resettable, copy) NSArray<NSString *> *longEraSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *veryShortMonthSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *standaloneMonthSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *shortStandaloneMonthSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *veryShortStandaloneMonthSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *veryShortWeekdaySymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *standaloneWeekdaySymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *shortStandaloneWeekdaySymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *veryShortStandaloneWeekdaySymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *quarterSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *shortQuarterSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *standaloneQuarterSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (null_resettable, copy) NSArray<NSString *> *shortStandaloneQuarterSymbols API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property (nullable, copy) NSDate *gregorianStartDate API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+@property BOOL doesRelativeDateFormatting API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
 @interface NSDateFormatter (NSDateFormatterCompatibility)
 
-- (id)initWithDateFormat:(NSString *)format allowNaturalLanguage:(BOOL)flag NS_CALENDAR_DEPRECATED_MAC(10_4, 10_9, "Use -setDateFormat: as of OS X 10.9 to set the date format of a 10.0-style date formatter; but expect 10.0-style date formatting to be deprecated in the future as well");
+- (id)initWithDateFormat:(NSString *)format allowNaturalLanguage:(BOOL)flag NS_CALENDAR_DEPRECATED_MAC(10_4, 10_9, "Create an NSDateFormatter with `init` and set the dateFormat property instead.");
 - (BOOL)allowsNaturalLanguage NS_CALENDAR_DEPRECATED_MAC(10_4, 10_9, "There is no replacement");
 
 @end

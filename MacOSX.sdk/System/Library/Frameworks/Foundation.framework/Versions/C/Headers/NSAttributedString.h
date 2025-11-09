@@ -1,5 +1,5 @@
 /*	NSAttributedString.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 
@@ -8,27 +8,29 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+typedef NSString * NSAttributedStringKey NS_EXTENSIBLE_STRING_ENUM;
+
 NS_CLASS_AVAILABLE(10_0, 3_2)
 @interface NSAttributedString : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
 @property (readonly, copy) NSString *string;
-- (NSDictionary<NSString *, id> *)attributesAtIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range;
+- (NSDictionary<NSAttributedStringKey, id> *)attributesAtIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range;
 
 @end
 
 @interface NSAttributedString (NSExtendedAttributedString)
 
 @property (readonly) NSUInteger length;
-- (nullable id)attribute:(NSString *)attrName atIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range;
+- (nullable id)attribute:(NSAttributedStringKey)attrName atIndex:(NSUInteger)location effectiveRange:(nullable NSRangePointer)range;
 - (NSAttributedString *)attributedSubstringFromRange:(NSRange)range;
 
-- (NSDictionary<NSString *, id> *)attributesAtIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit;
-- (nullable id)attribute:(NSString *)attrName atIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit;
+- (NSDictionary<NSAttributedStringKey, id> *)attributesAtIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit;
+- (nullable id)attribute:(NSAttributedStringKey)attrName atIndex:(NSUInteger)location longestEffectiveRange:(nullable NSRangePointer)range inRange:(NSRange)rangeLimit;
 
 - (BOOL)isEqualToAttributedString:(NSAttributedString *)other;
 
 - (instancetype)initWithString:(NSString *)str;
-- (instancetype)initWithString:(NSString *)str attributes:(nullable NSDictionary<NSString *, id> *)attrs;
+- (instancetype)initWithString:(NSString *)str attributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs;
 - (instancetype)initWithAttributedString:(NSAttributedString *)attrStr;
 
 typedef NS_OPTIONS(NSUInteger, NSAttributedStringEnumerationOptions) {
@@ -36,8 +38,8 @@ typedef NS_OPTIONS(NSUInteger, NSAttributedStringEnumerationOptions) {
   NSAttributedStringEnumerationLongestEffectiveRangeNotRequired = (1UL << 20)
 };
 
-- (void)enumerateAttributesInRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSDictionary<NSString *, id> *attrs, NSRange range, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
-- (void)enumerateAttribute:(NSString *)attrName inRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(id _Nullable value, NSRange range, BOOL *stop))block NS_AVAILABLE(10_6, 4_0);
+- (void)enumerateAttributesInRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(NSDictionary<NSAttributedStringKey, id> *attrs, NSRange range, BOOL *stop))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+- (void)enumerateAttribute:(NSAttributedStringKey)attrName inRange:(NSRange)enumerationRange options:(NSAttributedStringEnumerationOptions)opts usingBlock:(void (NS_NOESCAPE ^)(id _Nullable value, NSRange range, BOOL *stop))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -45,7 +47,7 @@ NS_CLASS_AVAILABLE(10_0, 3_2)
 @interface NSMutableAttributedString : NSAttributedString
 
 - (void)replaceCharactersInRange:(NSRange)range withString:(NSString *)str;
-- (void)setAttributes:(nullable NSDictionary<NSString *, id> *)attrs range:(NSRange)range;
+- (void)setAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs range:(NSRange)range;
 
 @end
 
@@ -53,9 +55,9 @@ NS_CLASS_AVAILABLE(10_0, 3_2)
 
 @property (readonly, retain) NSMutableString *mutableString;
 
-- (void)addAttribute:(NSString *)name value:(id)value range:(NSRange)range;
-- (void)addAttributes:(NSDictionary<NSString *, id> *)attrs range:(NSRange)range;
-- (void)removeAttribute:(NSString *)name range:(NSRange)range;
+- (void)addAttribute:(NSAttributedStringKey)name value:(id)value range:(NSRange)range;
+- (void)addAttributes:(NSDictionary<NSAttributedStringKey, id> *)attrs range:(NSRange)range;
+- (void)removeAttribute:(NSAttributedStringKey)name range:(NSRange)range;
 
 - (void)replaceCharactersInRange:(NSRange)range withAttributedString:(NSAttributedString *)attrString;
 - (void)insertAttributedString:(NSAttributedString *)attrString atIndex:(NSUInteger)loc;

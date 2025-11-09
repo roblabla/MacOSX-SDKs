@@ -45,6 +45,8 @@ typedef UInt32 AudioFileTypeID;
 					Audio Interchange File Format Compressed (AIFF-C)
     @constant   kAudioFileWAVEType
 					Microsoft WAVE
+    @constant   kAudioFileRF64Type
+                    File Format specified in EBU Tech 3306
     @constant   kAudioFileSoundDesigner2Type
 					Sound Designer II
     @constant   kAudioFileNextType
@@ -63,12 +65,18 @@ typedef UInt32 AudioFileTypeID;
     @constant   kAudioFileM4AType
     @constant   kAudioFileM4BType
     @constant   kAudioFileCAFType
-					CoreAudio File Format.
+                    CoreAudio File Format
+    @constant   kAudioFile3GPType
+    @constant   kAudioFile3GP2Type
+    @constant   kAudioFileAMRType
+    @constant   kAudioFileFLACType
+                    Free Lossless Audio Codec
 */
 CF_ENUM(AudioFileTypeID) {
         kAudioFileAIFFType				= 'AIFF',
         kAudioFileAIFCType				= 'AIFC',
         kAudioFileWAVEType				= 'WAVE',
+        kAudioFileRF64Type              = 'RF64',
         kAudioFileSoundDesigner2Type	= 'Sd2f',
         kAudioFileNextType				= 'NeXT',
         kAudioFileMP3Type				= 'MPG3',	// mpeg layer 3
@@ -82,7 +90,8 @@ CF_ENUM(AudioFileTypeID) {
 		kAudioFileCAFType				= 'caff',
 		kAudioFile3GPType				= '3gpp',
 		kAudioFile3GP2Type				= '3gp2',		
-		kAudioFileAMRType				= 'amrf'		
+		kAudioFileAMRType				= 'amrf',
+		kAudioFileFLACType				= 'flac'
 };
 
 /*!
@@ -481,28 +490,28 @@ typedef struct AudioFilePacketTableInfo AudioFilePacketTableInfo;
 
 // Get key values from the InfoDictionary by making CFStrings from the following constants
 
-#define kAFInfoDictionary_Artist                        "artist"
 #define kAFInfoDictionary_Album							"album"
-#define kAFInfoDictionary_Tempo							"tempo"
+#define kAFInfoDictionary_ApproximateDurationInSeconds  "approximate duration in seconds"
+#define kAFInfoDictionary_Artist                        "artist"
+#define kAFInfoDictionary_ChannelLayout					"channel layout"
+#define kAFInfoDictionary_Comments						"comments"
+#define kAFInfoDictionary_Composer						"composer"
+#define kAFInfoDictionary_Copyright						"copyright"
+#define kAFInfoDictionary_EncodingApplication           "encoding application"
+#define kAFInfoDictionary_Genre							"genre"
+#define kAFInfoDictionary_ISRC							"ISRC"					// International Standard Recording Code
 #define kAFInfoDictionary_KeySignature					"key signature"
+#define kAFInfoDictionary_Lyricist						"lyricist"
+#define kAFInfoDictionary_NominalBitRate                "nominal bit rate"
+#define kAFInfoDictionary_RecordedDate					"recorded date"
+#define kAFInfoDictionary_SourceBitDepth				"source bit depth"
+#define kAFInfoDictionary_SourceEncoder					"source encoder"
+#define kAFInfoDictionary_SubTitle						"subtitle"
+#define kAFInfoDictionary_Tempo							"tempo"
 #define kAFInfoDictionary_TimeSignature					"time signature"
+#define kAFInfoDictionary_Title							"title"
 #define kAFInfoDictionary_TrackNumber                   "track number"
 #define kAFInfoDictionary_Year							"year"
-#define kAFInfoDictionary_Composer						"composer"
-#define kAFInfoDictionary_Lyricist						"lyricist"
-#define kAFInfoDictionary_Genre							"genre"
-#define kAFInfoDictionary_Title							"title"
-#define kAFInfoDictionary_RecordedDate					"recorded date"
-#define kAFInfoDictionary_Comments						"comments"
-#define kAFInfoDictionary_Copyright						"copyright"
-#define kAFInfoDictionary_SourceEncoder					"source encoder"
-#define kAFInfoDictionary_EncodingApplication           "encoding application"
-#define kAFInfoDictionary_NominalBitRate                "nominal bit rate"
-#define kAFInfoDictionary_ChannelLayout					"channel layout"
-#define kAFInfoDictionary_ApproximateDurationInSeconds  "approximate duration in seconds"
-#define kAFInfoDictionary_SourceBitDepth				"source bit depth"
-#define kAFInfoDictionary_ISRC							"ISRC"					// International Standard Recording Code
-#define kAFInfoDictionary_SubTitle						"subtitle"
 
 //=============================================================================
 //	Routines

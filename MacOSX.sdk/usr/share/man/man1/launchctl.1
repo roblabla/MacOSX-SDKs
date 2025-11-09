@@ -78,13 +78,29 @@ process on the system will have a PID domain associated with it that consists of
 the XPC services visible to that process which can be reached with
 .Xr xpc_connection_create 3 .
 .El
+.Pp
+For instance, when referring to a service with the identifier
+.Nm com.apple.example
+loaded into the GUI domain of a user with UID 501,
+.Nm domain-target
+is
+.Nm gui/501/ ,
+.Nm service-name
+is
+.Nm com.apple.example ,
+and
+.Nm service-target
+is
+.Nm gui/501/com.apple.example .
 .Sh SUBCOMMANDS
 .Bl -tag -width -indent
 .It Xo Ar bootstrap | bootout Ar domain-target Op Ar service-path service-path2 ...
 .Ar | service-target
 .Xc
-Bootstraps or removes domains and services. Services may be specified as a
-series of paths or a service identifier. Paths may point to XPC service bundles,
+Bootstraps or removes domains and services. When service arguments are present,
+bootstraps and correspondingly removes their definitions into the domain.
+Services may be specified as a series of paths or a service identifier.
+Paths may point to XPC service bundles,
 .Xr launchd.plist 5 s,
 or a directories containing a collection of either. If there were one or more
 errors while bootstrapping or removing a collection of services, the problematic
@@ -115,7 +131,8 @@ of production workflow.
 .Xc
 Instructs
 .Nm launchd
-to kickstart the specified service.
+to run the specified service immediately, regardless of its configured launch
+conditions.
 .Bl -tag -width -indent
 .It Fl k
 If the service is already running, kill the running instance before restarting

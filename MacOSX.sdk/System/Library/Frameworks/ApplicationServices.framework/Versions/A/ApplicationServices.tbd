@@ -1,9 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: F804B425-A9AE-37B6-A7F8-6EAFD51EA2AC', 'x86_64: A29F0B74-33C1-3062-B68D-12BC3881C399' ]
+uuids:           [ 'i386: D018CAD1-9F5C-392F-8C93-773FC986033A', 'x86_64: B6E2ACD3-D319-3D15-B350-B76D89FD2DD4' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices
-current-version: 48.0
+current-version: 50
 objc-constraint: none
 exports:         
   - archs:           [ i386 ]
@@ -161,12 +161,13 @@ exports:
                        '$ld$add$os10.4$_vAEBuildParameters' ]
   - archs:           [ i386, x86_64 ]
     re-exports:      [ /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ATS.framework/Versions/A/ATS, 
-                       /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSync.framework/Versions/A/ColorSync, 
+                       /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/ColorSyncLegacy.framework/Versions/A/ColorSyncLegacy, 
                        /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices, 
                        /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/LangAnalysis.framework/Versions/A/LangAnalysis, 
                        /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore, 
                        /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/QD.framework/Versions/A/QD, 
                        /System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/SpeechSynthesis.framework/Versions/A/SpeechSynthesis, 
+                       /System/Library/Frameworks/ColorSync.framework/Versions/A/ColorSync, 
                        /System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics, 
                        /System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices, 
                        /System/Library/Frameworks/CoreText.framework/Versions/A/CoreText, 

@@ -1,11 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 4E75AA22-4AC1-3624-BFC1-8E8C58C8332C', 'x86_64: B6EEDF8F-56BF-3E9D-A615-175E03E6A547' ]
+uuids:           [ 'i386: D2BF1439-92C2-31FE-8BEA-9DB53DD23A17', 'x86_64: 8A3FE534-B8F5-3725-AA0D-75F78B13ACB3' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/SafariServices.framework/Versions/A/SafariServices
-current-version: 602.3.12
-compatibility-version: 535.0
-objc-constraint: none
+current-version: 604.1.31
+compatibility-version: 535
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SFErrorDomain, __SFContentBlockerExtensionPointIdentifier, 
@@ -25,5 +24,5 @@ exports:
     symbols:         [ _SSGetApplicationNameForUserAgent, _SSGetFullySimplifiedStringForURL, 
                        _SSGetSafariDateOfLastActiveUse, _SSGetSyncedDataClasses, 
                        _SSHasDefaultBookmarks, _SSRemoveSyncedKeychainData, _SSSyncedTabsServiceEnableStateChanged, 
-                       __SFSafariServicesAvailable ]
+                       __SFSafariServicesAvailable, __SFSafariServicesVersion ]
 ...

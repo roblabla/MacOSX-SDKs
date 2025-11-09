@@ -1,4 +1,4 @@
-.Dd June 30, 2016
+.Dd July 07, 2017
 .Dt fdesetup 8 
 .Os macOS
 .Sh NAME
@@ -70,7 +70,7 @@ option to specify either a mount path (e.g. /Volumes/myvolume), a bsd name ident
 .Sy list
 command, or using diskutil(8)).   If you specify a device parameter and it finds the institutional recovery key, a hex representation of the public key hash will be returned in lieu of "true".
 .Pp
-If a user currently has the system unlocked using the recovery key, the
+On CoreStorage volumes, if a user currently has the system unlocked using the recovery key, the
 .Sy usingrecoverykey
 command will return "true".
 .Pp
@@ -122,9 +122,9 @@ Shows abbreviated help
 .Pp
 .\"             -- list --
 .It Sy list
-.Op Fl -extended
-.Op Fl -offline
-.Op Fl -verbose
+.Op Fl extended
+.Op Fl offline
+.Op Fl verbose
 .br
 List enabled users, or locked volumes.
 .Pp
@@ -166,9 +166,10 @@ Disables FileVault.
 .Pp
 .\"             -- status --
 .It Sy status
+.Op Fl extended
 .Op Fl verbose
 .br
-Returns current status about FileVault.
+Returns current status about FileVault.   On APFS volumes, the -extended option will give continuous updates and estimated completion times during encryption and decryption phases.
 .Pp
 .\"             -- sync --
 .It Sy sync
@@ -250,7 +251,7 @@ Returns the string "true" if FileVault contains a personal recovery key.
 .Op Fl device
 .Op Fl verbose
 .br
-By default, this will return the string "true" if FileVault contains an institutional recovery key.   On volumes specified using the --device option, this will return the hex representation of the public key hash.   This will return "false" if there is no institutional recovery key installed.
+By default, this will return the string "true" if FileVault contains an institutional recovery key.   On CoreStorage volumes specified using the --device option, this will return the hex representation of the public key hash instead of "true".   The hash option is not supported for APFS volumes.   This will return "false" if there is no institutional recovery key installed.
 .Pp
 .\"             -- usingrecoverykey --
 .It Sy usingrecoverykey
@@ -304,7 +305,7 @@ Acquire configuration information from stdin when enabling or adding users to Fi
 Always prompt for information.
 .Pp
 .It Fl forcerestart
-Force a normal restart after FileVault has been successfully configured.
+Force a normal restart after FileVault has been successfully configured.   Only valid for CoreStorage volumes.
 .Pp
 .It Fl authrestart
 Do an authenticated restart after a successful enable occurs.
@@ -333,13 +334,13 @@ to cancel and bypass enabling FileVault before it will be required to log in.   
 When using the -defer option, the default action will be to prompt the designated user at user logout time for their password in order to enable FileVault.  If this option is used, the logout enablement window is not shown.  The assumption is that you are instead using the -forceatlogin option to prompt at user login time to enable FileVault.
 .Pp
 .It Fl extended
-Return extended output information for certain commands.  Currently only used for the list command.
+Return extended output information for certain commands.   When using this while checking status on enabling or disabling FileVault on APFS volumes, a rough estimate of the time remaining will be displayed.  This value may take a few minutes to initially calculate.   Hit Ctrl-C to stop the status display.
 .Pp
 .It Fl offline
 Display the current offline and locked FileVault volumes. Currently only used for the list command.
 .Pp
 .It Fl device Ar bsd_name_or_mount_path_or_lvf_or_lv_UUID
-Device location to be applied for the command.  This can be in the form "disk1", "/Volumes/MyVolume" or a UUID for the Logical Volume or Logical Volume Family of a volume.
+Device location to be applied for the command.  This can be in the form "disk1", "/Volumes/MyVolume", or when asking for a CoreStorage recovery user, a UUID for the Logical Volume or Logical Volume Family of a volume.   Not all commands can use this option.
 .Pp
 .It Fl delayminutes Ar number_of_minutes_to_delay
 The integer number of minutes to delay the authenticated restart.  If this option is not set or the value is 0, the auth restart will happen immediately.   A value of -1 will never attempt to automatically restart; instead the auth restart operation will occur whenever the user next restarts.
@@ -517,6 +518,10 @@ Did not find FileVault information at the specified location.
 Unable to add user to FileVault because user record could not be found.
 .It 31
 Unable to enable FileVault due to management settings.
+.It 32
+FileVault is already active.
+.It 33
+Command option is unsupported on this file system.
 .It 99
 Internal error.
 .El

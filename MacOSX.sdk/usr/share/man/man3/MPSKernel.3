@@ -1,17 +1,17 @@
-.TH "MPSKernel" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSKernel" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSKernel \- 
+MPSKernel
 .SH SYNOPSIS
 .br
 .PP
 .PP
 \fC#import <MPSKernel\&.h>\fP
 .PP
-Inherits NSObject, and <NSCopying>\&.
+Inherits NSObject, <NSCopying>, and <NSSecureCoding>\&.
 .PP
-Inherited by \fBMPSBinaryImageKernel\fP, \fBMPSCNNKernel\fP, \fBMPSImageHistogram\fP, \fBMPSMatrixMultiplication\fP, and \fBMPSUnaryImageKernel\fP\&.
+Inherited by \fBMPSBinaryImageKernel\fP, \fBMPSCNNBinaryKernel\fP, \fBMPSCNNKernel\fP, \fBMPSImageCopyToMatrix\fP, \fBMPSImageFindKeypoints\fP, \fBMPSImageHistogram\fP, \fBMPSMatrixBinaryKernel\fP, \fBMPSMatrixCopy\fP, \fBMPSMatrixMultiplication\fP, \fBMPSMatrixUnaryKernel\fP, \fBMPSNNGraph\fP, \fBMPSRNNMatrixInferenceLayer\fP, and \fBMPSUnaryImageKernel\fP\&.
 .SS "Instance Methods"
 
 .in +1c
@@ -20,6 +20,12 @@ Inherited by \fBMPSBinaryImageKernel\fP, \fBMPSCNNKernel\fP, \fBMPSImageHistogra
 .br
 .ti -1c
 .RI "(nonnull instancetype) \- \fBcopyWithZone:device:\fP"
+.br
+.ti -1c
+.RI "(nullable instancetype) \- \fBinitWithCoder:\fP"
+.br
+.ti -1c
+.RI "(nullable instancetype) \- \fBinitWithCoder:device:\fP"
 .br
 .ti -1c
 .RI "() \- \fBMPSCopyAllocator\fP"
@@ -36,7 +42,7 @@ Inherited by \fBMPSBinaryImageKernel\fP, \fBMPSCNNKernel\fP, \fBMPSImageHistogra
 
 .in +1c
 .ti -1c
-.RI "MPSKernelOptions \fBoptions\fP"
+.RI "\fBMPSKernelOptions\fP \fBoptions\fP"
 .br
 .ti -1c
 .RI "id< MTLDevice > \fBdevice\fP"
@@ -47,6 +53,15 @@ Inherited by \fBMPSBinaryImageKernel\fP, \fBMPSCNNKernel\fP, \fBMPSImageHistogra
 .in -1c
 .SH "Detailed Description"
 .PP 
+\fBMPSKernel\&.h\fP  MPSCore\&.framework 
+.PP
+\fBCopyright:\fP
+.RS 4
+Copyright (c) 2015-2017 Apple Inc\&. All rights reserved\&.
+.RE
+.PP
+\fBMPSKernel\fP objects encode tuned image processing operations into a MTLCommandBuffer\&.
+.PP
 This depends on Metal\&.framework  The \fBMPSKernel\fP class is the base class for all MPS objects\&. It defines a standard interface for MPS kernels\&. You should not use the \fBMPSKernel\fP class directly\&. Instead, a number of \fBMPSKernel\fP subclasses are available in MetalPerformanceShaders\&.framework that define specific high-performance image processing operations\&.
 .PP
 The basic sequence for applying a \fBMPSKernel\fP to an image is as follows:
@@ -70,9 +85,6 @@ sobel\&.options = \&.\&.\&.;
 [sobel encodeToCommandBuffer: commandBuffer
                sourceTexture: inputImage
           destinationTexture: resultImage ];
-
-if( returnVal < 0 )
-    MyShowError( returnVal );
 
 .fi
 .PP
@@ -103,9 +115,10 @@ After encoding any additional work to the command buffer using other encoders, s
 
 .fi
 .PP
- 
-.PP
 
+.PP
+.PP
+A \fBMPSKernel\fP can be saved to disk / network using NSCoders such as NSKeyedArchiver\&. When decoding, the system default MTLDevice will be chosen unless the NSCoder adopts the <MPSDeviceProvider> protocol\&. To accomplish this, subclass or extend your unarchiver to add this method\&. 
 .SH "Method Documentation"
 .PP 
 .SS "\- (nonnull instancetype) copyWithZone: (nullable NSZone *) zone(nullable id< MTLDevice >) device"
@@ -124,7 +137,29 @@ a pointer to a copy of this \fBMPSKernel\fP\&. This will fail, returning nil if 
 .RE
 .PP
 
-.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) NS_DESIGNATED_INITIALIZER"
+.PP
+Reimplemented in \fBMPSRNNMatrixInferenceLayer\fP, and \fBMPSRNNImageInferenceLayer\fP\&.
+.SS "\- (nullable instancetype) initWithCoder: (NSCoder *__nonnull) aDecoder"
+Called by NSCoder to decode MPSKernels  This isn't the right interface to decode a \fBMPSKernel\fP, but it is the one that NSCoder uses\&. To enable your NSCoder (e\&.g\&. NSKeyedUnarchiver) to set which device to use extend the object to adopt the \fBMPSDeviceProvider\fP protocol\&. Otherwise, the Metal system default device will be used\&. 
+.SS "\- (nullable instancetype) \fBinitWithCoder:\fP (NSCoder *__nonnull) aDecoder(nonnull id< MTLDevice >) device"
+\fBNSSecureCoding\fP compatability  While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly\&. To avoid that problem, use initWithCoder:device instead\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIaDecoder\fP The NSCoder subclass with your serialized \fBMPSKernel\fP 
+.br
+\fIdevice\fP The MTLDevice on which to make the \fBMPSKernel\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A new \fBMPSKernel\fP object, or nil if failure\&. 
+.RE
+.PP
+
+.PP
+Reimplemented in \fBMPSCNNBinaryConvolution\fP, \fBMPSCNNBinaryFullyConnected\fP, \fBMPSCNNConvolutionTranspose\fP, \fBMPSRNNMatrixInferenceLayer\fP, \fBMPSCNNConvolution\fP, \fBMPSCNNFullyConnected\fP, \fBMPSRNNImageInferenceLayer\fP, \fBMPSCNNNeuron\fP, \fBMPSImagePyramid\fP, \fBMPSCNNBinaryKernel\fP, \fBMPSBinaryImageKernel\fP, \fBMPSCNNDilatedPoolingMax\fP, \fBMPSImageSobel\fP, \fBMPSCNNPoolingAverage\fP, \fBMPSCNNPoolingL2Norm\fP, \fBMPSCNNCrossChannelNormalization\fP, \fBMPSCNNPooling\fP, \fBMPSCNNPoolingMax\fP, \fBMPSImageHistogramSpecification\fP, \fBMPSImageThresholdToZeroInverse\fP, \fBMPSCNNKernel\fP, \fBMPSImageThresholdToZero\fP, \fBMPSCNNLocalContrastNormalization\fP, \fBMPSImageHistogramEqualization\fP, \fBMPSImageBox\fP, \fBMPSImageGaussianBlur\fP, \fBMPSUnaryImageKernel\fP, \fBMPSMatrixCopy\fP, \fBMPSImageStatisticsMean\fP, \fBMPSImageThresholdBinary\fP, \fBMPSImageThresholdTruncate\fP, \fBMPSImageDilate\fP, \fBMPSImageScale\fP, \fBMPSImageLanczosScale\fP, \fBMPSImageBilinearScale\fP, \fBMPSImageStatisticsMeanAndVariance\fP, \fBMPSImageConvolution\fP, \fBMPSImageThresholdBinaryInverse\fP, \fBMPSImageHistogram\fP, \fBMPSCNNSpatialNormalization\fP, \fBMPSImageCopyToMatrix\fP, \fBMPSImageFindKeypoints\fP, \fBMPSImageStatisticsMinAndMax\fP, \fBMPSImageMedian\fP, \fBMPSImageAreaMax\fP, and \fBMPSNNGraph\fP\&.
+.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) device"
 Standard init with default properties per filter type 
 .PP
 \fBParameters:\fP
@@ -139,8 +174,15 @@ a pointer to the newly initialized object\&. This will fail, returning nil if th
 .PP
 
 .PP
-Reimplemented in \fBMPSCNNCrossChannelNormalization\fP, \fBMPSCNNLocalContrastNormalization\fP, \fBMPSCNNSpatialNormalization\fP, \fBMPSCNNPooling\fP, \fBMPSCNNConvolution\fP, \fBMPSCNNFullyConnected\fP, \fBMPSImagePyramid\fP, \fBMPSCNNNeuronTanH\fP, \fBMPSCNNNeuronAbsolute\fP, \fBMPSImageSobel\fP, \fBMPSCNNNeuronReLU\fP, \fBMPSCNNNeuronSigmoid\fP, \fBMPSCNNNeuronLinear\fP, \fBMPSImageThresholdToZeroInverse\fP, \fBMPSImageBox\fP, \fBMPSImageGaussianBlur\fP, \fBMPSImageThresholdToZero\fP, \fBMPSImageThresholdTruncate\fP, \fBMPSImageDilate\fP, \fBMPSImageThresholdBinary\fP, \fBMPSMatrixMultiplication\fP, \fBMPSImageThresholdBinaryInverse\fP, \fBMPSImageMedian\fP, and \fBMPSImageAreaMax\fP\&.
+Reimplemented in \fBMPSCNNBinaryConvolution\fP, \fBMPSCNNBinaryFullyConnected\fP, \fBMPSCNNKernel\fP, \fBMPSCNNConvolutionTranspose\fP, \fBMPSRNNMatrixInferenceLayer\fP, \fBMPSCNNConvolution\fP, \fBMPSCNNFullyConnected\fP, \fBMPSRNNImageInferenceLayer\fP, \fBMPSBinaryImageKernel\fP, \fBMPSImagePyramid\fP, \fBMPSImageSobel\fP, \fBMPSCNNNeuronELU\fP, \fBMPSCNNCrossChannelNormalization\fP, \fBMPSCNNPooling\fP, \fBMPSImageThresholdToZeroInverse\fP, \fBMPSCNNNeuronSoftPlus\fP, \fBMPSCNNNeuronSoftSign\fP, \fBMPSCNNBinaryKernel\fP, \fBMPSImageThresholdToZero\fP, \fBMPSCNNLocalContrastNormalization\fP, \fBMPSCNNNeuronTanH\fP, \fBMPSCNNNeuronAbsolute\fP, \fBMPSImageBox\fP, \fBMPSImageGaussianBlur\fP, \fBMPSUnaryImageKernel\fP, \fBMPSCNNNeuronHardSigmoid\fP, \fBMPSImageStatisticsMean\fP, \fBMPSImageThresholdBinary\fP, \fBMPSImageThresholdTruncate\fP, \fBMPSImageDilate\fP, \fBMPSImageScale\fP, \fBMPSCNNNeuronReLU\fP, \fBMPSCNNNeuronSigmoid\fP, \fBMPSImageLanczosScale\fP, \fBMPSImageBilinearScale\fP, \fBMPSImageStatisticsMeanAndVariance\fP, \fBMPSMatrixMultiplication\fP, \fBMPSMatrixVectorMultiplication\fP, \fBMPSImageThresholdBinaryInverse\fP, \fBMPSImageArithmetic\fP, \fBMPSImageAdd\fP, \fBMPSImageSubtract\fP, \fBMPSImageMultiply\fP, \fBMPSImageDivide\fP, \fBMPSCNNNeuronLinear\fP, \fBMPSCNNSpatialNormalization\fP, \fBMPSImageFindKeypoints\fP, \fBMPSCNNUpsampling\fP, \fBMPSImageStatisticsMinAndMax\fP, \fBMPSImageMedian\fP, \fBMPSImageAreaMax\fP, and \fBMPSMatrixCopy\fP\&.
 .SS "\- MPSCopyAllocator"
+\fBMPSImageKernel\&.h\fP  MetalPerformanceShaders\&.framework
+.PP
+\fBCopyright:\fP
+.RS 4
+Copyright (c) 2015 Apple Inc\&. All rights reserved\&.  MetalPerformanceShaders filter base classes
+.RE
+.PP
 A block to make a copy of sourceTexture for MPSKernels that can only execute out of place\&.  Some \fBMPSKernel\fP objects may not be able to operate in place\&. When that occurs, and in-place operation is requested, MPS will call back to this block to get a new texture to return instead\&. To avoid spending long periods of time allocating pages to back the MTLTexture, the block should attempt to reuse textures\&. The texture returned from the MPSCopyAllocator will be returned instead of the sourceTexture from the \fBMPSKernel\fP method on return\&. 
 .PP
 .nf
@@ -177,21 +219,21 @@ MPSCopyAllocator myAllocator = ^id <MTLTexture>( MPSKernel * __nonnull filter,
     //        MTLCommandEncoder so that the MTLCommandBuffer has no active encoder
     //        before returning\&.
 
-    // CAUTION: The next command placed on the MTLCommandBuffer after the MPSCopyAllocator 
-    //          returns is almost assuredly going to be encoded with a MTLComputeCommandEncoder\&. 
+    // CAUTION: The next command placed on the MTLCommandBuffer after the MPSCopyAllocator
+    //          returns is almost assuredly going to be encoded with a MTLComputeCommandEncoder\&.
     //          Creating any other type of encoder in the MPSCopyAllocator will probably cost
-    //          an additional 0\&.5 ms of both CPU _AND_ GPU time (or more!) due to a double 
+    //          an additional 0\&.5 ms of both CPU _AND_ GPU time (or more!) due to a double
     //          mode switch penalty\&.
 
     // CAUTION: If other objects (in addition to the caller of -encodeToCommandBuffer:inPlaceTexture:\&.\&.\&.)
     //          own a reference to sourceTexture, they may need to be notified that
     //          sourceTexture has been replaced so that they can release that resource
-    //          and adopt the new texture\&. 
+    //          and adopt the new texture\&.
 
     //          The reference to sourceTexture owned by the caller of
-    //          -encodeToCommandBuffer:inPlaceTexture\&.\&.\&. will be released by 
-    //          -encodeToCommandBuffer:inPlaceTexture:\&.\&.\&. after the kernel is encoded if 
-    //          and only if the MPSCopyAllocator is called, and the operation is successfully 
+    //          -encodeToCommandBuffer:inPlaceTexture\&.\&.\&. will be released by
+    //          -encodeToCommandBuffer:inPlaceTexture:\&.\&.\&. after the kernel is encoded if
+    //          and only if the MPSCopyAllocator is called, and the operation is successfully
     //          encoded out of place\&.
 
     return result;

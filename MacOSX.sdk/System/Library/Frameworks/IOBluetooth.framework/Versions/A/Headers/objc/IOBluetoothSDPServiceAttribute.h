@@ -15,7 +15,7 @@
     @discussion A service attribute contains two components: an attribute ID and a data element.
 */
 
-@interface IOBluetoothSDPServiceAttribute : NSObject <NSCoding> {
+@interface IOBluetoothSDPServiceAttribute : NSObject <NSCoding, NSSecureCoding> {
     BluetoothSDPServiceAttributeID	mAttributeID;
     IOBluetoothSDPDataElement		*mAttributeDataElement;
     IOBluetoothSDPDataElement		*mAttributeIDDataElement;

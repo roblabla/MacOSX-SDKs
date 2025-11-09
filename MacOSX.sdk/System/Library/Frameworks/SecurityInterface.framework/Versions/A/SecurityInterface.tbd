@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 5068BCBF-5ABD-33A6-9800-AD9F17FC8390', 'x86_64: D5B9D6B0-E3D6-32A7-ABAB-3F005B3ED81D' ]
+uuids:           [ 'i386: 9B6788A2-F543-35D1-B09C-F8F737699DC6', 'x86_64: 7E79A51E-A3A9-3152-9D84-82D75708DDBC' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/SecurityInterface.framework/Versions/A/SecurityInterface
-current-version: 55079.30.2
-objc-constraint: none
+current-version: 55109
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _AuthorizationSpecialEngineRef.mAuthPluginView, _AuthorizationSpecialEngineRef.mEngineRef ]
@@ -14,11 +13,11 @@ exports:
                        '$ld$add$os10.5$.objc_class_name_SFCertificateData', '$ld$add$os10.5$_OBJC_CLASS_$_SFCertificateData', 
                        '$ld$add$os10.6$.objc_class_name_SFCertificateData', '$ld$add$os10.6$_OBJC_CLASS_$_SFCertificateData', 
                        _SFAuthorizationPluginViewUserNameKey, _SFAuthorizationPluginViewUserShortNameKey, 
-                       _SFDisplayViewException, __CommonCocoaPanels_ChooseIdentity, 
-                       __CommonCocoaPanels_ChooseIdentitySheet, __CommonCocoaPanels_CreateKeychainPanel, 
-                       __CommonCocoaPanels_DisplayCertificate, __CommonCocoaPanels_DisplayCertificateGroup, 
-                       __CommonCocoaPanels_KeychainSettingsPanel, __CommonCocoaPanels_SecEditTrust, 
-                       __CommonCocoaPanels_SecEditTrustSheet ]
+                       _SFCertificateViewDisclosureStateDidChange, _SFDisplayViewException, 
+                       __CommonCocoaPanels_ChooseIdentity, __CommonCocoaPanels_ChooseIdentitySheet, 
+                       __CommonCocoaPanels_CreateKeychainPanel, __CommonCocoaPanels_DisplayCertificate, 
+                       __CommonCocoaPanels_DisplayCertificateGroup, __CommonCocoaPanels_KeychainSettingsPanel, 
+                       __CommonCocoaPanels_SecEditTrust, __CommonCocoaPanels_SecEditTrustSheet ]
     objc-classes:    [ _AuthorizationSpecialEngineRef, _SFAnimatedLockButton, _SFAuthorizationPluginView, 
                        _SFAuthorizationView, _SFAutoLockTextValue, _SFBasicTLV, _SFButtonNotBecomeKey, 
                        _SFCertificateGroupView, _SFCertificateImportManager, _SFCertificatePanel, 

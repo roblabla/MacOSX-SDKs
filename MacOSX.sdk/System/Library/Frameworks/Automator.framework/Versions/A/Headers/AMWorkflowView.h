@@ -14,8 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class AMWorkflowController;
 
 @interface AMWorkflowView : NSView {
-@private
-	AMWorkflowController *_workflowController;
+   @private
+	__weak AMWorkflowController *_workflowController;
 	NSMutableArray *_actionViewControllers;
 	NSArray *_draggedActionViews;
 	NSString *_messageString;
@@ -23,19 +23,20 @@ NS_ASSUME_NONNULL_BEGIN
 	id _variablesEditorController;
 	AM_UNUSED_FOR_ANALYZER id _showWhenRunController;
 	struct __AMWorkflowViewFlags {
-		BOOL ignoreSubviewFrameChanges:1;
-		BOOL editingEnabled:1;
-        NSUInteger reserved:30;
-    } _flags;
+		NSUInteger ignoreSubviewFrameChanges : 1;
+		NSUInteger editingEnabled : 1;
+		NSUInteger reserved : 30;
+	} _flags;
 	NSUInteger _draggingIndex;
 	NSRect _selectionRect;
-	
+
 	id _future[4];
 }
 
-@property (getter=isEditable) BOOL editable;
+@property (getter=isEditable, atomic) BOOL editable;
 
-@property (nullable, strong) AMWorkflowController *workflowController;
+// This property was labeled "strong" in 10.12, even though it was really implemented as "assign". In 10.3 and above, this is now labeled and correctly implemented as "weak".
+@property (nullable, weak, nonatomic) AMWorkflowController *workflowController;
 
 @end
 

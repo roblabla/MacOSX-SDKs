@@ -1,10 +1,12 @@
 //
 //  CalendarErrors.h
-//  Calendar Store Framework
+//  CalendarStore Framework
 //
 //  Copyright 2006 Apple Inc. All rights reserved.
 //
-//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
+//  The CalendarStore framework is deprecated.  Please use the EventKit framework instead.
+
+#import <Foundation/Foundation.h>
 
 extern NSString *const CalCalendarStoreErrorDomain NS_DEPRECATED_MAC(10_5, 10_8);
 

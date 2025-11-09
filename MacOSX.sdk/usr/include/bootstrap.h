@@ -5,12 +5,6 @@
 #define __XPC_INDIRECT__
 #endif // __XPC_INDIRECT__
 
-#if XPC_BUILDING_LAUNCHD
-// Temporary hack to resolve conflicting availability with launchd's existing
-// internal headers.
-#pragma GCC diagnostic ignored "-Wavailability"
-#endif // XPC_BUILDING_LAUNCHD
-
 #include <xpc/base.h>
 #include <Availability.h>
 

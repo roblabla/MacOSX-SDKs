@@ -122,6 +122,7 @@ protected:
 	Is this event source enabled to deliver requests to the work-loop. */
     bool enabled;
 
+
 /*! @var workLoop What is the work-loop for this event source. */
     IOWorkLoop *workLoop;
 
@@ -147,9 +148,7 @@ protected:
     @abstract Primary initialiser for the IOEventSource class.
     @param owner
 	Owner of this instance of an event source.  Used as the first parameter
-of the action callout.	Owner will generally be an OSObject it doesn't have to
-be as no member functions will be called directly in it.  It can just be a
-refcon for a client routine.
+of the action callout.	Owner must be an OSObject.
     @param action
 	Pointer to C call out function.	 Action is a pointer to a C function
 that gets called when this event source has outstanding work.  It will usually

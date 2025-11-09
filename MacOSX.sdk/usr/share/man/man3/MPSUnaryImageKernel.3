@@ -1,8 +1,8 @@
-.TH "MPSUnaryImageKernel" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSUnaryImageKernel" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSUnaryImageKernel \- 
+MPSUnaryImageKernel
 .SH SYNOPSIS
 .br
 .PP
@@ -11,15 +11,24 @@ MPSUnaryImageKernel \-
 .PP
 Inherits \fBMPSKernel\fP\&.
 .PP
-Inherited by \fBMPSImageAreaMax\fP, \fBMPSImageBox\fP, \fBMPSImageConversion\fP, \fBMPSImageConvolution\fP, \fBMPSImageDilate\fP, \fBMPSImageGaussianBlur\fP, \fBMPSImageHistogramEqualization\fP, \fBMPSImageHistogramSpecification\fP, \fBMPSImageIntegral\fP, \fBMPSImageIntegralOfSquares\fP, \fBMPSImageLanczosScale\fP, \fBMPSImageLaplacian\fP, \fBMPSImageMedian\fP, \fBMPSImagePyramid\fP, \fBMPSImageSobel\fP, \fBMPSImageThresholdBinary\fP, \fBMPSImageThresholdBinaryInverse\fP, \fBMPSImageThresholdToZero\fP, \fBMPSImageThresholdToZeroInverse\fP, \fBMPSImageThresholdTruncate\fP, and \fBMPSImageTranspose\fP\&.
+Inherited by \fBMPSImageAreaMax\fP, \fBMPSImageBox\fP, \fBMPSImageConversion\fP, \fBMPSImageConvolution\fP, \fBMPSImageDilate\fP, \fBMPSImageGaussianBlur\fP, \fBMPSImageHistogramEqualization\fP, \fBMPSImageHistogramSpecification\fP, \fBMPSImageIntegral\fP, \fBMPSImageIntegralOfSquares\fP, \fBMPSImageLaplacian\fP, \fBMPSImageMedian\fP, \fBMPSImagePyramid\fP, \fBMPSImageScale\fP, \fBMPSImageSobel\fP, \fBMPSImageStatisticsMean\fP, \fBMPSImageStatisticsMeanAndVariance\fP, \fBMPSImageStatisticsMinAndMax\fP, \fBMPSImageThresholdBinary\fP, \fBMPSImageThresholdBinaryInverse\fP, \fBMPSImageThresholdToZero\fP, \fBMPSImageThresholdToZeroInverse\fP, \fBMPSImageThresholdTruncate\fP, and \fBMPSImageTranspose\fP\&.
 .SS "Instance Methods"
 
 .in +1c
+.ti -1c
+.RI "(nonnull instancetype) \- \fBinitWithDevice:\fP"
+.br
+.ti -1c
+.RI "(nullable instancetype) \- \fBinitWithCoder:device:\fP"
+.br
 .ti -1c
 .RI "(BOOL) \- \fBencodeToCommandBuffer:inPlaceTexture:fallbackCopyAllocator:\fP"
 .br
 .ti -1c
 .RI "(void) \- \fBencodeToCommandBuffer:sourceTexture:destinationTexture:\fP"
+.br
+.ti -1c
+.RI "(void) \- \fBencodeToCommandBuffer:sourceImage:destinationImage:\fP"
 .br
 .ti -1c
 .RI "(\fBMPSRegion\fP) \- \fBsourceRegionForDestinationSize:\fP"
@@ -35,23 +44,16 @@ Inherited by \fBMPSImageAreaMax\fP, \fBMPSImageBox\fP, \fBMPSImageConversion\fP,
 .RI "MTLRegion \fBclipRect\fP"
 .br
 .ti -1c
-.RI "MPSImageEdgeMode \fBedgeMode\fP"
+.RI "\fBMPSImageEdgeMode\fP \fBedgeMode\fP"
 .br
 .in -1c
 .SS "Additional Inherited Members"
 .SH "Detailed Description"
 .PP 
-\fBMPSImageKernel\&.h\fP  MetalPerformanceShaders\&.framework
-.PP
-\fBCopyright:\fP
-.RS 4
-Copyright (c) 2015 Apple Inc\&. All rights reserved\&.  MetalPerformanceShaders filter base classes
-.RE
-.PP
 This depends on Metal\&.framework  A \fBMPSUnaryImageKernel\fP consumes one MTLTexture and produces one MTLTexture\&. 
 .SH "Method Documentation"
 .PP 
-.SS "\- (BOOL) encodeToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(__nonnull id< MTLTexture > __strong *__nonnull) texture(encode(commandBuffer:inPlaceTexture:fallbackCopyAllocator:)) MPS_SWIFT_NAME"
+.SS "\- (BOOL) encodeToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(__nonnull id< MTLTexture > __strong *__nonnull) texture(nullable \fBMPSCopyAllocator\fP) copyAllocator"
 This method attempts to apply the \fBMPSKernel\fP in place on a texture\&. 
 .PP
 .nf
@@ -131,7 +133,20 @@ On success, YES is returned\&. The texture may have been replaced with a new tex
 .RE
 .PP
 
-.SS "\- (void) encodeToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(nonnull id< MTLTexture >) sourceTexture(encode(commandBuffer:sourceTexture:destinationTexture:)) MPS_SWIFT_NAME"
+.SS "\- (void) encodeToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(nonnull \fBMPSImage\fP *) sourceImage(nonnull \fBMPSImage\fP *) destinationImage"
+Encode a \fBMPSKernel\fP into a command Buffer\&. The operation shall proceed out-of-place\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIcommandBuffer\fP A valid MTLCommandBuffer to receive the encoded filter 
+.br
+\fIsourceImage\fP A valid \fBMPSImage\fP containing the source image\&. 
+.br
+\fIdestinationImage\fP A valid \fBMPSImage\fP to be overwritten by result image\&. DestinationImage may not alias sourceImage\&. 
+.RE
+.PP
+
+.SS "\- (void) encodeToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(nonnull id< MTLTexture >) sourceTexture(nonnull id< MTLTexture >) destinationTexture"
 Encode a \fBMPSKernel\fP into a command Buffer\&. The operation shall proceed out-of-place\&. 
 .PP
 \fBParameters:\fP
@@ -144,7 +159,45 @@ Encode a \fBMPSKernel\fP into a command Buffer\&. The operation shall proceed ou
 .RE
 .PP
 
-.SS "\- (\fBMPSRegion\fP) sourceRegionForDestinationSize: (sourceRegion(destinationSize:)) MPS_SWIFT_NAME"
+.SS "\- (nullable instancetype) \fBinitWithCoder:\fP (NSCoder *__nonnull) aDecoder(nonnull id< MTLDevice >) device"
+\fBNSSecureCoding\fP compatability  While the standard NSSecureCoding/NSCoding method -initWithCoder: should work, since the file can't know which device your data is allocated on, we have to guess and may guess incorrectly\&. To avoid that problem, use initWithCoder:device instead\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIaDecoder\fP The NSCoder subclass with your serialized \fBMPSKernel\fP 
+.br
+\fIdevice\fP The MTLDevice on which to make the \fBMPSKernel\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A new \fBMPSKernel\fP object, or nil if failure\&. 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBMPSKernel\fP\&.
+.PP
+Reimplemented in \fBMPSImagePyramid\fP, \fBMPSImageSobel\fP, \fBMPSImageHistogramSpecification\fP, \fBMPSImageThresholdToZeroInverse\fP, \fBMPSImageThresholdToZero\fP, \fBMPSImageHistogramEqualization\fP, \fBMPSImageBox\fP, \fBMPSImageGaussianBlur\fP, \fBMPSImageStatisticsMean\fP, \fBMPSImageThresholdBinary\fP, \fBMPSImageThresholdTruncate\fP, \fBMPSImageDilate\fP, \fBMPSImageScale\fP, \fBMPSImageLanczosScale\fP, \fBMPSImageBilinearScale\fP, \fBMPSImageStatisticsMeanAndVariance\fP, \fBMPSImageConvolution\fP, \fBMPSImageThresholdBinaryInverse\fP, \fBMPSImageStatisticsMinAndMax\fP, \fBMPSImageMedian\fP, and \fBMPSImageAreaMax\fP\&.
+.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) device"
+Standard init with default properties per filter type 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdevice\fP The device that the filter will be used on\&. May not be NULL\&. 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+a pointer to the newly initialized object\&. This will fail, returning nil if the device is not supported\&. Devices must be MTLFeatureSet_iOS_GPUFamily2_v1 or later\&. 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBMPSKernel\fP\&.
+.PP
+Reimplemented in \fBMPSImagePyramid\fP, \fBMPSImageSobel\fP, \fBMPSImageThresholdToZeroInverse\fP, \fBMPSImageThresholdToZero\fP, \fBMPSImageBox\fP, \fBMPSImageGaussianBlur\fP, \fBMPSImageStatisticsMean\fP, \fBMPSImageThresholdBinary\fP, \fBMPSImageThresholdTruncate\fP, \fBMPSImageDilate\fP, \fBMPSImageScale\fP, \fBMPSImageLanczosScale\fP, \fBMPSImageBilinearScale\fP, \fBMPSImageStatisticsMeanAndVariance\fP, \fBMPSImageThresholdBinaryInverse\fP, \fBMPSImageStatisticsMinAndMax\fP, \fBMPSImageMedian\fP, and \fBMPSImageAreaMax\fP\&.
+.SS "\- (\fBMPSRegion\fP) sourceRegionForDestinationSize: (MTLSize) destinationSize"
 sourceRegionForDestinationSize: is used to determine which region of the sourceTexture will be read by encodeToCommandBuffer:sourceTexture:destinationTexture (and similar) when the filter runs\&. This information may be needed if the source image is broken into multiple textures\&. The size of the full (untiled) destination image is provided\&. The region of the full (untiled) source image that will be read is returned\&. You can then piece together an appropriate texture containing that information for use in your tiled context\&.
 .PP
 The function will consult the \fBMPSUnaryImageKernel\fP offset and clipRect parameters, to determine the full region read by the function\&. Other parameters such as sourceClipRect, kernelHeight and kernelWidth will be consulted as necessary\&. All properties should be set to intended values prior to calling sourceRegionForDestinationSize:\&. 
@@ -178,15 +231,15 @@ The area in the virtual source image that will be read\&.
 .SS "\- clipRect\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 An optional clip rectangle to use when writing data\&. Only the pixels in the rectangle will be overwritten\&.  A MTLRegion that indicates which part of the destination to overwrite\&. If the clipRect does not lie completely within the destination image, the intersection between clip rectangle and destination bounds is used\&. Default: MPSRectNoClip (\fBMPSKernel::MPSRectNoClip\fP) indicating the entire image\&.
 .PP
-See Also: \fBMPSKernel clipRect\fP 
+See Also: \fBMetalPerformanceShaders\&.h\fP subsubsection_clipRect 
 .SS "\- edgeMode\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 The MPSImageEdgeMode to use when texture reads stray off the edge of an image  Most \fBMPSKernel\fP objects can read off the edge of the source image\&. This can happen because of a negative offset property, because the offset + clipRect\&.size is larger than the source image or because the filter looks at neighboring pixels, such as a Convolution or morphology filter\&. Default: usually MPSImageEdgeModeZero\&. (Some \fBMPSKernel\fP types default to MPSImageEdgeModeClamp, because MPSImageEdgeModeZero is either not supported or would produce unexpected results\&.)
 .PP
-See Also: \fBMPSKernelEdgeMode\fP 
+See Also: \fBMetalPerformanceShaders\&.h\fP subsubsection_edgemode 
 .SS "\- offset\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 The position of the destination clip rectangle origin relative to the source buffer\&.  The offset is defined to be the position of clipRect\&.origin in source coordinates\&. Default: {0,0,0}, indicating that the top left corners of the clipRect and source image align\&.
 .PP
-See Also: \fBsubsubsection_mpsoffset\fP 
+See Also: \fBMetalPerformanceShaders\&.h\fP subsubsection_mpsoffset 
 
 .SH "Author"
 .PP 

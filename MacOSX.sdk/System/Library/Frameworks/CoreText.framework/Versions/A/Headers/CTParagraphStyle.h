@@ -2,7 +2,7 @@
  *  CTParagraphStyle.h
  *  CoreText
  *
- *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -37,7 +37,7 @@ typedef const struct CF_RELATED_TYPE(NSParagraphStyle,,) __CTParagraphStyle * CT
     @abstract   Returns the CFType of the paragraph style object
 */
 
-CFTypeID CTParagraphStyleGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTParagraphStyleGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -66,17 +66,22 @@ CFTypeID CTParagraphStyleGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 typedef CF_ENUM(uint8_t, CTTextAlignment) {
-    kCTTextAlignmentLeft      CT_ENUM_AVAILABLE(10_8, 6_0) = 0,
-    kCTTextAlignmentRight     CT_ENUM_AVAILABLE(10_8, 6_0) = 1,
-    kCTTextAlignmentCenter    CT_ENUM_AVAILABLE(10_8, 6_0) = 2,
-    kCTTextAlignmentJustified CT_ENUM_AVAILABLE(10_8, 6_0) = 3,
-    kCTTextAlignmentNatural   CT_ENUM_AVAILABLE(10_8, 6_0) = 4,
+    kCTTextAlignmentLeft      = 0,
+    kCTTextAlignmentRight     = 1,
+    kCTTextAlignmentCenter    = 2,
+    kCTTextAlignmentJustified = 3,
+    kCTTextAlignmentNatural   = 4,
 
-    kCTLeftTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentLeft,
-    kCTRightTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentRight,
-    kCTCenterTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentCenter,
-    kCTJustifiedTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentJustified,
-    kCTNaturalTextAlignment CT_ENUM_DEPRECATED(10_5, 10_11, 3_2, 9_0) = kCTTextAlignmentNatural
+    kCTLeftTextAlignment CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTTextAlignmentLeft,
+    kCTRightTextAlignment CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+    = kCTTextAlignmentRight,
+    kCTCenterTextAlignment CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTTextAlignmentCenter,
+    kCTJustifiedTextAlignment CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTTextAlignmentJustified,
+    kCTNaturalTextAlignment CT_ENUM_DEPRECATED("Deprecated", macos(10.5, 10.11), ios(3.2, 9.0)) CT_ENUM_UNAVAILABLE(watchos, tvos)
+        = kCTTextAlignmentNatural
 };
 
 
@@ -339,7 +344,7 @@ typedef CF_ENUM(uint32_t, CTParagraphStyleSpecifier) {
     kCTParagraphStyleSpecifierLineHeightMultiple = 7,
     kCTParagraphStyleSpecifierMaximumLineHeight = 8,
     kCTParagraphStyleSpecifierMinimumLineHeight = 9,
-    kCTParagraphStyleSpecifierLineSpacing CT_ENUM_DEPRECATED(10_5, 10_8, 3_2, 6_0) = 10,
+    kCTParagraphStyleSpecifierLineSpacing CT_ENUM_DEPRECATED("See documentation for replacements", macos(10.5, 10.8), ios(3.2, 6.0)) CT_ENUM_UNAVAILABLE(watchos, tvos) = 10,
     kCTParagraphStyleSpecifierParagraphSpacing = 11,
     kCTParagraphStyleSpecifierParagraphSpacingBefore = 12,
     kCTParagraphStyleSpecifierBaseWritingDirection = 13,
@@ -413,7 +418,7 @@ typedef struct CTParagraphStyleSetting
 
 CTParagraphStyleRef CTParagraphStyleCreate(
     const CTParagraphStyleSetting * __nullable settings,
-    size_t settingCount ) CT_AVAILABLE(10_5, 3_2);
+    size_t settingCount ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -430,7 +435,7 @@ CTParagraphStyleRef CTParagraphStyleCreate(
 */
 
 CTParagraphStyleRef CTParagraphStyleCreateCopy(
-    CTParagraphStyleRef paragraphStyle ) CT_AVAILABLE(10_5, 3_2);
+    CTParagraphStyleRef paragraphStyle ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -476,7 +481,7 @@ bool CTParagraphStyleGetValueForSpecifier(
     CTParagraphStyleRef paragraphStyle,
     CTParagraphStyleSpecifier spec,
     size_t valueBufferSize,
-    void * valueBuffer ) CT_AVAILABLE(10_5, 3_2);
+    void * valueBuffer ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

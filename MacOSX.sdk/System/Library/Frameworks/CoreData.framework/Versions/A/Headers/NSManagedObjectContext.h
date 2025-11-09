@@ -1,7 +1,7 @@
 /*
     NSManagedObjectContext.h
     Core Data
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -103,7 +103,9 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
       unsigned int _deleteInaccessible:1;
       unsigned int _priority:2;
       unsigned int _autoMerge:1;
-      unsigned int _reservedFlags:6;
+      unsigned int _isXPCServerContext:1;
+      unsigned int _pushSecureDelete:1;
+      unsigned int _reservedFlags:4;
   } _flags;
   NSMutableSet *_unprocessedChanges;
   NSMutableSet *_unprocessedDeletes;
@@ -137,10 +139,10 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 - (instancetype)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_DESIGNATED_INITIALIZER  API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* asynchronously performs the block on the context's queue.  Encapsulates an autorelease pool and a call to processPendingChanges */
-- (void)performBlock:(void (^)())block API_AVAILABLE(macosx(10.7),ios(5.0));
+- (void)performBlock:(void (^)(void))block API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* synchronously performs the block on the context's queue.  May safely be called reentrantly.  */
-- (void)performBlockAndWait:(void (^)())block API_AVAILABLE(macosx(10.7),ios(5.0));
+- (void)performBlockAndWait:(void (NS_NOESCAPE ^)(void))block API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* coordinator which provides model and handles persistency (multiple contexts can share a coordinator) */
 @property (nullable, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
@@ -279,6 +281,10 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 /* Whether the context automatically merges changes saved to its coordinator or parent context. Setting this property to YES when the context is pinned to a non-current query generation is not supported.
  */
 @property (nonatomic) BOOL automaticallyMergesChangesFromParent API_AVAILABLE(macosx(10.12),ios(10.0),tvos(10.0),watchos(3.0));
+
+/* Set the author for the context, this will be used as an identifier in the Persistent History Transactions (NSPersistentHistoryTransaction)
+ */
+@property (nullable, copy) NSString *transactionAuthor API_AVAILABLE(macosx(10.13),ios(11.0),tvos(11.0),watchos(4.0));
 
 @end
 

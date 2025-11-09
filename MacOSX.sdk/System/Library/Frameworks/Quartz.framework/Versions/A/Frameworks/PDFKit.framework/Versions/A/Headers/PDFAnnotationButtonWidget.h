@@ -1,35 +1,21 @@
-// =====================================================================================================================
+//
 //  PDFAnnotationButtonWidget.h
-// =====================================================================================================================
-
+//  Copyright © 2016 Apple. All rights reserved.
+//
+//  Deprecated annotation class. Use PDFAnnotation directly to create this
+//  kind of annotation by setting the subtype to "/Widget" and assign the key-
+//  value pair { @"/FT" : @"/Btn" }. Use the helper methods in PDFAnnotationUtilities.h
+//  to quickly build an appropriate dictionary for this annotation type.
+//
 
 #import <PDFKit/PDFKitPlatform.h>
-
 #import <PDFKit/PDFAnnotation.h>
 
+#import <PDFKit/PDFAnnotationUtilities.h>
 
 @class PDFAnnotationButtonWidgetPrivateVars;
 
-
-// Type of control.
-NS_ENUM_DEPRECATED_MAC(10_4, 10_12)
-typedef NS_ENUM(NSInteger, PDFWidgetControlType)
-{
-	kPDFWidgetUnknownControl = -1, 
-    kPDFWidgetPushButtonControl = 0, 
-    kPDFWidgetRadioButtonControl = 1, 
-    kPDFWidgetCheckBoxControl = 2
-};
-
-// Cell state.
-typedef NS_ENUM(NSInteger, PDFWidgetCellState)
-{
-    kPDFWidgetMixedState = -1,
-    kPDFWidgetOffState = 0,
-    kPDFWidgetOnState = 1,
-};
-
-NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, setting properties via kPDFAnnotationKey_* keys using method [setValue:forAnnotationKey:]")
+PDFKIT_CLASS_DEPRECATED(10_4, 10_12, NA, NA)
 @interface PDFAnnotationButtonWidget : PDFAnnotation <NSCopying>
 {
 @private
@@ -37,6 +23,7 @@ NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, sett
 }
 
 // -------- accessors
+
 - (PDFWidgetControlType) controlType;
 
 - (void) setControlType: (PDFWidgetControlType) type;
@@ -44,9 +31,6 @@ NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, sett
 - (NSInteger) state;
 - (void) setState: (NSInteger) value;
 
-- (BOOL) isHighlighted;
-
-- (void) setHighlighted: (BOOL) flag;
 - (PDFKitPlatformColor *) backgroundColor;
 - (void) setBackgroundColor: (PDFKitPlatformColor *) color;
 
@@ -60,17 +44,17 @@ NS_CLASS_DEPRECATED_MAC(10_4, 10_12, "Use the PDFAnnotation class directly, sett
 - (PDFKitPlatformColor *) fontColor;
 - (void) setFontColor: (PDFKitPlatformColor *) color;
 
-// Label for the button.  Applies to kPDFWidgetPushButtonControl only.
+// Label for the button. Applies to kPDFWidgetPushButtonControl only.
 - (NSString *) caption;
 - (void) setCaption: (NSString *) name;
 
-// Internal name for the field (optional).  Used for ResetForm actions.
+// Internal name for the field (optional). Used for ResetForm actions.
 - (NSString *) fieldName;
 - (void) setFieldName: (NSString *) name;
 
 // String required for kPDFWidgetRadioButtonControl and kPDFWidgetCheckBoxControl Widgets. This string is the label for 
-// the 'on' state for the widget (the 'off' state is always labeled "Off").  For a single checkbox, a value of "On" is 
-// adequate.  With multiple grouped radio buttons however you want to assign unique names such as "Married", "Single", 
+// the 'on' state for the widget (the 'off' state is always labeled "Off"). For a single checkbox, a value of "On" is 
+// adequate. With multiple grouped radio buttons however you want to assign unique names such as "Married", "Single", 
 // and "Widowed" (for example - and for this example, all radio buttons would share a field name such as 
 // "MaritalStatus").
 - (NSString *) onStateValue;

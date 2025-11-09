@@ -15,6 +15,7 @@ typedef CF_ENUM (int32_t, CGPDFDataFormat) {
     CGPDFDataFormatRaw, CGPDFDataFormatJPEGEncoded, CGPDFDataFormatJPEG2000
 };
 
+#include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGPDFDictionary.h>
 #include <CoreGraphics/CGPDFStream.h>
 #include <CoreFoundation/CFData.h>

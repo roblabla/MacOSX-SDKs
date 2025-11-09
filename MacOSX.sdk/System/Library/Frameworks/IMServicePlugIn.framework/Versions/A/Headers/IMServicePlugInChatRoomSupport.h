@@ -49,7 +49,7 @@
                 
     @param      roomName  The name of the room which the user wishes to join.
 */
-- (oneway void) joinChatRoom:(NSString *)roomName;
+- (oneway void) joinChatRoom:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -63,7 +63,7 @@
 
     @param      roomName  The name of the room which the user wishes to leave.
 */
-- (oneway void) leaveChatRoom:(NSString *)roomName;
+- (oneway void) leaveChatRoom:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -76,7 +76,7 @@
     @param      roomName  The name of the room which the user wishes to leave
     @param      message   The invitation message
 */
-- (oneway void) inviteHandles:(NSArray *)handles toChatRoom:(NSString *)roomName withMessage:(IMServicePlugInMessage *)message;
+- (oneway void) inviteHandles:(NSArray *)handles toChatRoom:(NSString *)roomName withMessage:(IMServicePlugInMessage *)message NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -98,7 +98,7 @@
     @param      message  The message to send.
     @param      roomName The recipient chat room.
 */
-- (oneway void) sendMessage:(IMServicePlugInMessage *)message toChatRoom:(NSString *)roomName;
+- (oneway void) sendMessage:(IMServicePlugInMessage *)message toChatRoom:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -112,7 +112,7 @@
 
     @param      roomName  The name of the room which the user has declined.
 */
-- (oneway void) declineChatRoomInvitation:(NSString *)roomName;
+- (oneway void) declineChatRoomInvitation:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -136,7 +136,7 @@
     @param      roomName   The name of the chat room.
     @param      handle     The handle of the inviter.
 */
-- (oneway void) plugInDidReceiveInvitation:(IMServicePlugInMessage *)invitation forChatRoom:(NSString *)roomName fromHandle:(NSString *)handle;
+- (oneway void) plugInDidReceiveInvitation:(IMServicePlugInMessage *)invitation forChatRoom:(NSString *)roomName fromHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -152,7 +152,7 @@
     @param      roomName   The name of the chat room.
     @param      handle     The sender of the message.
 */
-- (oneway void) plugInDidReceiveMessage:(IMServicePlugInMessage *)message forChatRoom:(NSString *)roomName fromHandle:(NSString *)handle;
+- (oneway void) plugInDidReceiveMessage:(IMServicePlugInMessage *)message forChatRoom:(NSString *)roomName fromHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -168,7 +168,7 @@
     @param      notice    An informational message to be displayed.
     @param      roomName  The name of the chat room.
 */
-- (oneway void) plugInDidReceiveNotice:(NSString *)notice forChatRoom:(NSString *)roomName;
+- (oneway void) plugInDidReceiveNotice:(NSString *)notice forChatRoom:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -184,7 +184,7 @@
     @param      roomName   The name of the chat room.
     @param      error      An error, if one occurred during message delivery.
 */
-- (oneway void) plugInDidSendMessage:(IMServicePlugInMessage *)message toChatRoom:(NSString *)roomName error:(NSError *)error;
+- (oneway void) plugInDidSendMessage:(IMServicePlugInMessage *)message toChatRoom:(NSString *)roomName error:(NSError *)error NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -198,7 +198,7 @@
 
     @param      roomName   The name of the chat room
 */
-- (oneway void) plugInDidJoinChatRoom:(NSString *)roomName;
+- (oneway void) plugInDidJoinChatRoom:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -215,7 +215,7 @@
     @param      error      An error, if any, which caused the user to be removed from the chat room,
                            or prevented the user from joining the chat room.
 */
-- (oneway void) plugInDidLeaveChatRoom:(NSString *)roomName error:(NSError *)error;
+- (oneway void) plugInDidLeaveChatRoom:(NSString *)roomName error:(NSError *)error NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -230,7 +230,7 @@
     @param      handles   An NSArray of NSString objects, corresponding to the handles which joined the room.
     @param      roomName  The name of the chat room.
 */
-- (oneway void) handles:(NSArray *)handles didJoinChatRoom:(NSString *)roomName;
+- (oneway void) handles:(NSArray *)handles didJoinChatRoom:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -242,7 +242,7 @@
     @param      handles   An NSArray of NSString objects, corresponding to the handles which left the room.
     @param      roomName  The name of the chat room.
 */
-- (oneway void) handles:(NSArray *)handles didLeaveChatRoom:(NSString *)roomName;
+- (oneway void) handles:(NSArray *)handles didLeaveChatRoom:(NSString *)roomName NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 @end

@@ -1,5 +1,5 @@
 /*	NSXMLElement.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -86,7 +86,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeAttributeForName:(NSString *)name; //primitive
 
 /*!
-    @method setAttributes
     @abstract Set the attributes. In the case of duplicate names, the first attribute with the name is used.
 */
 @property (nullable, copy) NSArray<NSXMLNode *> *attributes;
@@ -126,7 +125,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)removeNamespaceForPrefix:(NSString *)name; //primitive
 
 /*!
-    @method namespaces
     @abstract Set the namespaces. In the case of duplicate names, the first namespace with the name is used.
 */
 @property (nullable, copy) NSArray<NSXMLNode *> *namespaces; //primitive

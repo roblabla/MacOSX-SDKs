@@ -1,7 +1,13 @@
-// =====================================================================================================================
+//
 //  PDFActionNamed.h
-// =====================================================================================================================
-
+//  Copyright © 2016 Apple. All rights reserved.
+//
+//  PDFActionNamed is an interaction event tied with an annotation. This action
+//  allows the user to change their navigation stack or their current view. This
+//  can manipulate the user's navigation stack (move to the previous page, next page etc.),
+//  trigger some other forms of interactions (string search, printing, etc.), and
+//  manipulate the current view (change zoom factors).
+//
 
 #import <PDFKit/PDFKitPlatform.h>
 
@@ -12,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PDFActionNamedPrivateVars;
 
 // Action names.
-NS_ENUM_AVAILABLE_MAC(10_5)
+PDFKIT_ENUM_AVAILABLE(10_5, 11_0)
 typedef NS_ENUM(NSInteger, PDFActionNamedName)
 {
     kPDFActionNamedNone = 0, 
@@ -29,16 +35,16 @@ typedef NS_ENUM(NSInteger, PDFActionNamedName)
     kPDFActionNamedZoomOut = 11
 };
 
-NS_CLASS_AVAILABLE_MAC(10_5)
+PDFKIT_CLASS_AVAILABLE(10_5, 11_0)
 @interface PDFActionNamed : PDFAction <NSCopying>
 {
 @private
     PDFActionNamedPrivateVars *_private2;
 }
 
-- (instancetype) initWithName: (PDFActionNamedName) name;
+- (instancetype)initWithName:(PDFActionNamedName)name NS_DESIGNATED_INITIALIZER;
 
-@property(nonatomic, assign) PDFActionNamedName name;
+@property (nonatomic) PDFActionNamedName name;
 
 @end
 

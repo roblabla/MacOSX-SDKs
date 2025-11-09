@@ -1,9 +1,9 @@
 /*
-	CoreDataErrors.h
-	Core Data
-    Copyright (c) 2004-2016, Apple Inc.
-	All rights reserved.
- */
+    CoreDataErrors.h
+    Core Data
+    Copyright (c) 2004-2017, Apple Inc.
+    All rights reserved.
+*/
 
 #import <Foundation/NSObject.h>
 
@@ -45,6 +45,7 @@ enum : NSInteger {
     NSValidationStringTooLongError                   = 1660,   // some string value is too long
     NSValidationStringTooShortError                  = 1670,   // some string value is too short
     NSValidationStringPatternMatchingError           = 1680,   // some string value fails to match some pattern
+    NSValidationInvalidURIError                      = 1690,   // some URI value cannot be represented as a string
     
     NSManagedObjectContextLockingError               = 132000, // can't acquire a lock in a managed object context
     NSPersistentStoreCoordinatorLockingError         = 132010, // can't acquire a lock in a persistent store coordinator
@@ -80,8 +81,9 @@ enum : NSInteger {
     NSSQLiteError                                    = 134180,  // general SQLite error 
 
     NSInferredMappingModelError                      = 134190, // inferred mapping model creation error
-    NSExternalRecordImportError                      = 134200 // general error encountered while importing external records
-
+    NSExternalRecordImportError                      = 134200, // general error encountered while importing external records
+    
+    NSPersistentHistoryTokenExpiredError             = 134301 // The history token passed to NSPersistentChangeRequest was invalid
 };
 
 NS_ASSUME_NONNULL_END

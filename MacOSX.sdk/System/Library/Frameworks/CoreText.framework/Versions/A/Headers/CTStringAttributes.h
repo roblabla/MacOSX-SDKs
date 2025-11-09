@@ -2,7 +2,7 @@
  *  CTStringAttributes.h
  *  CoreText
  *
- *  Copyright (c) 2004-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2004-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -34,7 +34,7 @@ CF_ASSUME_NONNULL_BEGIN
     @discussion Value must be a CTFontRef. Default is Helvetica 12.
 */
 
-CT_EXPORT const CFStringRef kCTFontAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTFontAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -52,7 +52,7 @@ CT_EXPORT const CFStringRef kCTFontAttributeName CT_AVAILABLE(10_5, 3_2);
                 overrides the foreground color.
 */
 
-CT_EXPORT const CFStringRef kCTForegroundColorFromContextAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTForegroundColorFromContextAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -69,7 +69,7 @@ CT_EXPORT const CFStringRef kCTForegroundColorFromContextAttributeName CT_AVAILA
                 set to 0.0, no kerning will be done at all.
 */
 
-CT_EXPORT const CFStringRef kCTKernAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTKernAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -95,7 +95,7 @@ CT_EXPORT const CFStringRef kCTKernAttributeName CT_AVAILABLE(10_5, 3_2);
                 shaping tables (or the lack thereof) are treated as definitive.
 */
 
-CT_EXPORT const CFStringRef kCTLigatureAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTLigatureAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -105,7 +105,7 @@ CT_EXPORT const CFStringRef kCTLigatureAttributeName CT_AVAILABLE(10_5, 3_2);
     @discussion Value must be a CGColorRef. Default value is black.
 */
 
-CT_EXPORT const CFStringRef kCTForegroundColorAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTForegroundColorAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @const      kCTBackgroundColorAttributeName
@@ -114,7 +114,7 @@ CT_EXPORT const CFStringRef kCTForegroundColorAttributeName CT_AVAILABLE(10_5, 3
     @discussion Value must be a CGColorRef. Default is no background color.
 */
 
-CT_EXPORT const CFStringRef kCTBackgroundColorAttributeName CT_AVAILABLE(10_12, 10_0);
+CT_EXPORT const CFStringRef kCTBackgroundColorAttributeName CT_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 
 
 /*!
@@ -130,7 +130,7 @@ CT_EXPORT const CFStringRef kCTBackgroundColorAttributeName CT_AVAILABLE(10_12, 
     @seealso    CFStringGetParagraphBounds
 */
 
-CT_EXPORT const CFStringRef kCTParagraphStyleAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTParagraphStyleAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -144,7 +144,7 @@ CT_EXPORT const CFStringRef kCTParagraphStyleAttributeName CT_AVAILABLE(10_5, 3_
                 typical value for outlined text is 3.0.
 */
 
-CT_EXPORT const CFStringRef kCTStrokeWidthAttributeName CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTStrokeWidthAttributeName CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -154,7 +154,7 @@ CT_EXPORT const CFStringRef kCTStrokeWidthAttributeName CT_AVAILABLE(10_6, 3_2);
     @discussion Value must be a CGColorRef. Default is the foreground color.
 */
 
-CT_EXPORT const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -169,7 +169,7 @@ CT_EXPORT const CFStringRef kCTStrokeColorAttributeName CT_AVAILABLE(10_6, 3_2);
                 will be determined by the text's foreground color.
 */
 
-CT_EXPORT const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -181,7 +181,7 @@ CT_EXPORT const CFStringRef kCTUnderlineStyleAttributeName CT_AVAILABLE(10_5, 3_
                 value of -1 enables subscripting.
 */
 
-CT_EXPORT const CFStringRef kCTSuperscriptAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTSuperscriptAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -191,7 +191,7 @@ CT_EXPORT const CFStringRef kCTSuperscriptAttributeName CT_AVAILABLE(10_5, 3_2);
     @discussion Value must be a CGColorRef. Default is the foreground color.
 */
 
-CT_EXPORT const CFStringRef kCTUnderlineColorAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTUnderlineColorAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -203,7 +203,8 @@ CT_EXPORT const CFStringRef kCTUnderlineColorAttributeName CT_AVAILABLE(10_5, 3_
                 indicates that vertical glyph forms are to be used.
 */
 
-CT_EXPORT const CFStringRef kCTVerticalFormsAttributeName CT_AVAILABLE(10_5, 4_3);
+CT_EXPORT const CFStringRef kCTVerticalFormsAttributeName CT_AVAILABLE(macos(10.5), ios(4.3), watchos(2.0), tvos(9.0));
+
 
 /*!
     @const      kCTHorizontalInVerticalFormsAttributeName
@@ -216,7 +217,8 @@ CT_EXPORT const CFStringRef kCTVerticalFormsAttributeName CT_AVAILABLE(10_5, 4_3
                 to true.
 */
 
-CT_EXPORT const CFStringRef kCTHorizontalInVerticalFormsAttributeName CT_AVAILABLE(10_12, 10_0);
+CT_EXPORT const CFStringRef kCTHorizontalInVerticalFormsAttributeName CT_AVAILABLE(macos(10.12), ios(10.0), watchos(3.0), tvos(10.0));
+
 
 /*!
     @const      kCTGlyphInfoAttributeName
@@ -229,7 +231,7 @@ CT_EXPORT const CFStringRef kCTHorizontalInVerticalFormsAttributeName CT_AVAILAB
                 kCTFontAttributeName. See CTGlyphInfo.h for more information.
 */
 
-CT_EXPORT const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -242,7 +244,7 @@ CT_EXPORT const CFStringRef kCTGlyphInfoAttributeName CT_AVAILABLE(10_5, 3_2);
                 an attribute value of 1 corresponds to kTraditionalCharactersSelector.
 */
 
-CT_EXPORT const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED(10_5, 10_11, 3_2, 9_0);
+CT_EXPORT const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED("Use feature type kCharacterShapeType with the appropriate selector", macos(10.5, 10.11), ios(3.2, 9.0)) CT_UNAVAILABLE(watchos, tvos);
 
 
 /*!
@@ -255,7 +257,7 @@ CT_EXPORT const CFStringRef kCTCharacterShapeAttributeName CT_DEPRECATED(10_5, 1
                 locale-specific line breaking rules.
 */
 
-CT_EXPORT const CFStringRef kCTLanguageAttributeName CT_AVAILABLE(10_9, 7_0);
+CT_EXPORT const CFStringRef kCTLanguageAttributeName CT_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -274,7 +276,7 @@ CT_EXPORT const CFStringRef kCTLanguageAttributeName CT_AVAILABLE(10_9, 7_0);
                 CTRunDelegate.h for more information.
 */
 
-CT_EXPORT const CFStringRef kCTRunDelegateAttributeName CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTRunDelegateAttributeName CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -329,7 +331,7 @@ typedef CF_OPTIONS(int32_t, CTUnderlineStyleModifiers) {
     @seealso    kCTBaselineClassMath
 */
 
-CT_EXPORT const CFStringRef kCTBaselineClassAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineClassAttributeName CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -351,7 +353,7 @@ CT_EXPORT const CFStringRef kCTBaselineClassAttributeName CT_AVAILABLE(10_8, 6_0
     @seealso    kCTBaselineClassMath
 */
 
-CT_EXPORT const CFStringRef kCTBaselineInfoAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineInfoAttributeName CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -375,7 +377,25 @@ CT_EXPORT const CFStringRef kCTBaselineInfoAttributeName CT_AVAILABLE(10_8, 6_0)
     @seealso    kCTBaselineReferenceFont
 */
 
-CT_EXPORT const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+
+
+/*!
+    @const      kCTBaselineOffsetAttributeName
+    @abstract   Controls vertical text positioning.
+
+    @discussion Value must be a CFNumberRef float. Default is standard positioning.
+                The baseline attribute indicates how many points the characters
+                should be shifted perpendicular to their baseline. A positive
+                baseline value indicates a shift above (or to the right for vertical
+                text) the text baseline and a negative baseline value indicates a
+                shift below (or to the left for vertical text) the text baseline.
+                If this value is set to 0.0, no baseline shift will be performed.
+
+    @seealso    NSBaselineOffsetAttributeName
+*/
+
+CT_EXPORT const CFStringRef kCTBaselineOffsetAttributeName CT_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 
 /*!
@@ -405,7 +425,7 @@ CT_EXPORT const CFStringRef kCTBaselineReferenceInfoAttributeName CT_AVAILABLE(1
     @seealso    kCTWritingDirectionOverride
 */
 
-CT_EXPORT const CFStringRef kCTWritingDirectionAttributeName CT_AVAILABLE(10_8, 6_0);
+CT_EXPORT const CFStringRef kCTWritingDirectionAttributeName CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -432,7 +452,7 @@ enum {
                 more information.
  */
 
-CT_EXPORT const CFStringRef kCTRubyAnnotationAttributeName CT_AVAILABLE(10_10, 8_0);
+CT_EXPORT const CFStringRef kCTRubyAnnotationAttributeName CT_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

@@ -1,6 +1,6 @@
 /*	
      NSUserNotification.h
-     Copyright (c) 2011-2016, Apple Inc. All rights reserved.
+     Copyright (c) 2011-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -15,8 +15,8 @@ typedef NS_ENUM(NSInteger, NSUserNotificationActivationType) {
     NSUserNotificationActivationTypeNone = 0,
     NSUserNotificationActivationTypeContentsClicked = 1,
     NSUserNotificationActivationTypeActionButtonClicked = 2,
-    NSUserNotificationActivationTypeReplied NS_AVAILABLE(10_9, NA) = 3,
-    NSUserNotificationActivationTypeAdditionalActionClicked NS_AVAILABLE(10_10, NA) = 4,
+    NSUserNotificationActivationTypeReplied API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos) = 3,
+    NSUserNotificationActivationTypeAdditionalActionClicked API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos) = 4,
 } NS_ENUM_AVAILABLE(10_8, NA);
 
 NS_CLASS_AVAILABLE(10_8, NA)
@@ -76,24 +76,24 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @property (copy) NSString *otherButtonTitle;
 
 // This identifier is used to uniquely identify a notification. A notification delivered with the same identifier as an existing notification will replace that notification, rather then display a new one.
-@property (nullable, copy) NSString *identifier NS_AVAILABLE(10_9, NA);
+@property (nullable, copy) NSString *identifier API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // NSImage shown in the content of the notification.
-@property (nullable, copy) NSImage *contentImage NS_AVAILABLE(10_9, NA);
+@property (nullable, copy) NSImage *contentImage API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Set to YES if the notification has a reply button. The default value is NO. If both this and hasActionButton are YES, the reply button will be shown.
-@property BOOL hasReplyButton NS_AVAILABLE(10_9, NA);
+@property BOOL hasReplyButton API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Optional placeholder for inline reply field.
-@property (nullable, copy) NSString *responsePlaceholder NS_AVAILABLE(10_9, NA);
+@property (nullable, copy) NSString *responsePlaceholder API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // When a notification has been responded to, the NSUserNotificationCenter delegate didActivateNotification: will be called with the notification with the activationType set to NSUserNotificationActivationTypeReplied and the response set on the response property
-@property (nullable, readonly, copy) NSAttributedString *response NS_AVAILABLE(10_9, NA);
+@property (nullable, readonly, copy) NSAttributedString *response API_AVAILABLE(macos(10.9)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // An array of NSUserNotificationAction objects that describe the different actions that can be taken on a notification in addition to the default action described by actionButtonTitle
-@property (nullable, copy) NSArray<NSUserNotificationAction *> *additionalActions NS_AVAILABLE(10_10, NA);
+@property (nullable, copy) NSArray<NSUserNotificationAction *> *additionalActions API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 // When a user selects an additional action that action will be set on the notification's additionalActivationAction property when passed into the delegate callback didActivateNotification
-@property (nullable, readonly, copy) NSUserNotificationAction *additionalActivationAction NS_AVAILABLE(10_10, NA);
+@property (nullable, readonly, copy) NSUserNotificationAction *additionalActivationAction API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -110,7 +110,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 @end
 
-FOUNDATION_EXPORT NSString * const NSUserNotificationDefaultSoundName NS_AVAILABLE(10_8, NA);
+FOUNDATION_EXPORT NSString * const NSUserNotificationDefaultSoundName API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, watchos, tvos);
 
 NS_CLASS_AVAILABLE(10_8, NA)
 @interface NSUserNotificationCenter : NSObject {
@@ -119,9 +119,7 @@ NS_CLASS_AVAILABLE(10_8, NA)
 }
 
 // Get a singleton user notification center that posts notifications for this process.
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
 @property (class, readonly, strong) NSUserNotificationCenter *defaultUserNotificationCenter;
-#endif
 
 @property (nullable, assign) id <NSUserNotificationCenterDelegate> delegate;
 

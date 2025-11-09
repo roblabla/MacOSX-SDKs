@@ -1,6 +1,6 @@
 /*
 	NSAppleEventDescriptor.h
-	Copyright (c) 1997-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1997-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -44,13 +44,13 @@ typedef NS_OPTIONS(NSUInteger, NSAppleEventSendOptions) {
 + (NSAppleEventDescriptor *)descriptorWithBoolean:(Boolean)boolean;
 + (NSAppleEventDescriptor *)descriptorWithEnumCode:(OSType)enumerator;
 + (NSAppleEventDescriptor *)descriptorWithInt32:(SInt32)signedInt;
-+ (NSAppleEventDescriptor *)descriptorWithDouble:(double)doubleValue NS_AVAILABLE_MAC(10_11);
++ (NSAppleEventDescriptor *)descriptorWithDouble:(double)doubleValue API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 + (NSAppleEventDescriptor *)descriptorWithTypeCode:(OSType)typeCode;
 
 // Given a string, date, or file URL object, respectively, create and return an autoreleased NSAppleEventDescriptor that contains that value.
 + (NSAppleEventDescriptor *)descriptorWithString:(NSString *)string;
-+ (NSAppleEventDescriptor *)descriptorWithDate:(NSDate *)date NS_AVAILABLE_MAC(10_11);
-+ (NSAppleEventDescriptor *)descriptorWithFileURL:(NSURL *)fileURL NS_AVAILABLE_MAC(10_11);
++ (NSAppleEventDescriptor *)descriptorWithDate:(NSDate *)date API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
++ (NSAppleEventDescriptor *)descriptorWithFileURL:(NSURL *)fileURL API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Create and return an autoreleased event, list, or record NSAppleEventDescriptor, respectively.
 + (NSAppleEventDescriptor *)appleEventWithEventClass:(AEEventClass)eventClass eventID:(AEEventID)eventID targetDescriptor:(nullable NSAppleEventDescriptor *)targetDescriptor returnID:(AEReturnID)returnID transactionID:(AETransactionID)transactionID;
@@ -58,10 +58,10 @@ typedef NS_OPTIONS(NSUInteger, NSAppleEventSendOptions) {
 + (NSAppleEventDescriptor *)recordDescriptor;
 
 // Create and return an autoreleased application address descriptor using the current process, a pid, a url referring to an application, or an application bundle identifier, respectively.  The result is suitable for use as the "targetDescriptor" parameter of +appleEventWithEventClass:/initWithEventClass:.
-+ (NSAppleEventDescriptor *)currentProcessDescriptor NS_AVAILABLE_MAC(10_11);
-+ (NSAppleEventDescriptor *)descriptorWithProcessIdentifier:(pid_t)processIdentifier NS_AVAILABLE_MAC(10_11);
-+ (NSAppleEventDescriptor *)descriptorWithBundleIdentifier:(NSString *)bundleIdentifier NS_AVAILABLE_MAC(10_11);
-+ (NSAppleEventDescriptor *)descriptorWithApplicationURL:(NSURL *)applicationURL NS_AVAILABLE_MAC(10_11);
++ (NSAppleEventDescriptor *)currentProcessDescriptor API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
++ (NSAppleEventDescriptor *)descriptorWithProcessIdentifier:(pid_t)processIdentifier API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
++ (NSAppleEventDescriptor *)descriptorWithBundleIdentifier:(NSString *)bundleIdentifier API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
++ (NSAppleEventDescriptor *)descriptorWithApplicationURL:(NSURL *)applicationURL API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // The designated initializer.  The initialized object takes ownership of the passed-in AEDesc, and will call AEDisposeDesc() on it at deallocation time.
 - (instancetype)initWithAEDescNoCopy:(const AEDesc *)aeDesc NS_DESIGNATED_INITIALIZER;
@@ -84,13 +84,13 @@ typedef NS_OPTIONS(NSUInteger, NSAppleEventSendOptions) {
 @property (readonly) Boolean booleanValue;
 @property (readonly) OSType enumCodeValue;
 @property (readonly) SInt32 int32Value;
-@property (readonly) double doubleValue NS_AVAILABLE_MAC(10_11);
+@property (readonly) double doubleValue API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 @property (readonly) OSType typeCodeValue;
 
 // Return the contents of a descriptor, after coercing the descriptor's contents to a string, date, or file URL, respectively.
 @property (nullable, readonly, copy) NSString *stringValue;
-@property (nullable, readonly, copy) NSDate *dateValue NS_AVAILABLE_MAC(10_11);
-@property (nullable, readonly, copy) NSURL *fileURLValue NS_AVAILABLE_MAC(10_11);
+@property (nullable, readonly, copy) NSDate *dateValue API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nullable, readonly, copy) NSURL *fileURLValue API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Accessors for an event descriptor.
 @property (readonly) AEEventClass eventClass;
@@ -108,10 +108,10 @@ typedef NS_OPTIONS(NSUInteger, NSAppleEventSendOptions) {
 - (nullable NSAppleEventDescriptor *)attributeDescriptorForKeyword:(AEKeyword)keyword;
 
 // Send an Apple event.
-- (nullable NSAppleEventDescriptor *)sendEventWithOptions:(NSAppleEventSendOptions)sendOptions timeout:(NSTimeInterval)timeoutInSeconds error:(NSError **)error NS_AVAILABLE_MAC(10_11);
+- (nullable NSAppleEventDescriptor *)sendEventWithOptions:(NSAppleEventSendOptions)sendOptions timeout:(NSTimeInterval)timeoutInSeconds error:(NSError **)error API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Return whether or not a descriptor is a record-like descriptor.  Record-like descriptors function as records, but may have a descriptorType other than typeAERecord, such as typeObjectSpecifier.
-@property (readonly) BOOL isRecordDescriptor NS_AVAILABLE_MAC(10_11);
+@property (readonly) BOOL isRecordDescriptor API_AVAILABLE(macos(10.11)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // Return the number of items inside a list or record descriptor.
 @property (readonly) NSInteger numberOfItems;

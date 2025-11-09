@@ -21,7 +21,11 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#import <Foundation/NSObjCRuntime.h> // FOUNDATION_EXPORT
+#import <objc/NSObject.h> // NSObject
+
 @class SFAuthorization;
+@class NSDictionary, NSError, NSArray;
 
 /*!
     @const      ODSessionProxyAddress

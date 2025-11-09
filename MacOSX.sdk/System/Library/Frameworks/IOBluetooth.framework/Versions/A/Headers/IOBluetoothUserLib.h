@@ -47,7 +47,7 @@ typedef unsigned long								IOBluetoothObjectID;
 /*!
     @function	IOBluetoothGetObjectIDFromArguments
 	@abstract	Returns the BluetoothObjectID passed as an argument to an auto-launched app.
-	@discussion	When an application gets auto-launched by the blued process (as a result of an incoming connection
+	@discussion	When an application gets auto-launched by the bluetoothd process (as a result of an incoming connection
 				to an appropriately configured service), it has a BluetoothObjectID passed to it on the command
 				line.  To get the BluetoothObjectID, simply pass the argc and argv parameters received in main()
 				to this function.  The returned BluetoothObjectID can then be used to find the appropriate

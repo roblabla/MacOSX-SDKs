@@ -101,7 +101,7 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  * @param identifier The identifier of the contact to fetch.
  * @param keys The properties to fetch into the returned CNContact object. Should only fetch the properties that will be used. Can combine contact keys and contact key descriptors.
  * @param error If an error occurs, contains error information.
- * @return The unified contact matching or linked to the identifier. If no contact with the given identifier is found, nil is returned abd error is set to CNErrorCodeRecordDoesNotExist.
+ * @return The unified contact matching or linked to the identifier. If no contact with the given identifier is found, nil is returned and error is set to CNErrorCodeRecordDoesNotExist.
  */
 - (nullable CNContact *)unifiedContactWithIdentifier:(NSString *)identifier keysToFetch:(NSArray<id<CNKeyDescriptor>> *)keys error:(NSError *__nullable *__nullable)error;
 
@@ -172,9 +172,9 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
  *
  *  @discussion This identifier can be used to fetch the default container.
  *
- *  @return The identifier of the default container.
+ *  @return The identifier of the default container. If the caller lacks Contacts authorization or an error occurs, nil is returned.
  */
-- (NSString *)defaultContainerIdentifier;
+- (nullable NSString *)defaultContainerIdentifier;
 
 @end
 

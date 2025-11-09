@@ -1,15 +1,14 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 66247669-96D2-3282-AAA8-EFD04409CF52' ]
+uuids:           [ 'x86_64: F0D5A8A7-663D-37B0-BFCD-0F4F3FDD8758' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Notes.framework/Versions/A/Notes
-current-version: 351.0
-objc-constraint: none
+current-version: 351
 exports:         
   - archs:           [ x86_64 ]
     allowable-clients: [ Notes, NotesAccountNotificationPlugin, NotesAccountSetup, 
-                         NotesIAAccountMigratorPlugin, NotesImporter, NotesTests, 
-                         com.apple.NotesMigratorService ]
+                         NotesIAAccountMigratorPlugin, NotesImporter, NotesShared, 
+                         NotesTests, NotesUI, com.apple.NotesMigratorService ]
     symbols:         [ _DefaultsKeyUserOptedIntoAttachmentSending, _ICNFMCAccountAccountID, 
                        _ICNFMCAccountAccountIDv2Format, _ICNFMCAccountAccounts, _ICNFMCAccountAuthenticationScheme, 
                        _ICNFMCAccountBecameReachableNotification, _ICNFMCAccountClass, 
@@ -26,8 +25,8 @@ exports:
                        _ICNFMCAccountTypeSMTP, _ICNFMCAccountUserNameIsEmailAddress, 
                        _ICNFMCAccountUserNameMatchesEmailAddress, _ICNFMCAccountVersion, 
                        _ICNFMCAddressesWithNoContactsKey, _ICNFMCArchiveNameMailDropImages, 
-                       _ICNFMCAttachmentDataDidChangeNotification, _ICNFMCAttachmentDidFinishReadingNotification, 
-                       _ICNFMCAttachmentFullResolutionDataDidBecomeAvailableNotification, 
+                       _ICNFMCAttachmentAttributeName, _ICNFMCAttachmentDataDidChangeNotification, 
+                       _ICNFMCAttachmentDidFinishReadingNotification, _ICNFMCAttachmentFullResolutionDataDidBecomeAvailableNotification, 
                        _ICNFMCAuthSchemeAPop, _ICNFMCAuthSchemeAppleToken, _ICNFMCAuthSchemeClearText, 
                        _ICNFMCAuthSchemeCramMd5, _ICNFMCAuthSchemeExternal, _ICNFMCAuthSchemeGSSAPI, 
                        _ICNFMCAuthSchemeKPop, _ICNFMCAuthSchemeKerberos4, _ICNFMCAuthSchemeNTLM, 

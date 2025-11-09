@@ -29,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 SK_EXPORT @interface SKLabelNode : SKNode
 
 + (instancetype)labelNodeWithText:(nullable NSString *)text;
-
++ (instancetype)labelNodeWithAttributedText:(nullable NSAttributedString *)attributedText NS_AVAILABLE(10_13, 11);
 + (instancetype)labelNodeWithFontNamed:(nullable NSString *)fontName;
 
 - (instancetype)initWithFontNamed:(nullable NSString *)fontName;
@@ -37,9 +37,26 @@ SK_EXPORT @interface SKLabelNode : SKNode
 @property (nonatomic) SKLabelVerticalAlignmentMode verticalAlignmentMode;
 @property (nonatomic) SKLabelHorizontalAlignmentMode horizontalAlignmentMode;
 
+/**Determines the number of lines to draw. The default value is 1 (single line). A value of 0 means no limit.
+   If the height of the text reaches the # of lines the text will be truncated using the line break mode.
+ */
+@property(nonatomic) NSInteger numberOfLines NS_AVAILABLE(10_13, 11);
+
+/**Determines the line break mode for multiple lines.
+   Default is NSLineBreakByTruncatingTail
+ */
+@property(nonatomic) NSLineBreakMode lineBreakMode NS_AVAILABLE(10_13, 11);
+
+/**If nonzero, this is used when determining layout width for multiline labels.
+   Default is zero.
+ */
+@property(nonatomic) CGFloat preferredMaxLayoutWidth NS_AVAILABLE(10_13, 11);
+
 @property (nonatomic, copy, nullable) NSString *fontName;
 @property (nonatomic, copy, nullable) NSString *text;
+@property (nonatomic, copy, nullable) NSAttributedString *attributedText NS_AVAILABLE(10_13, 11);
 @property (nonatomic) CGFloat fontSize;
+
 
 /**
  Base color that the text is rendered with (if supported by the font)

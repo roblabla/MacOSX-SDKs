@@ -1,7 +1,7 @@
 /*
 	NSSplitView.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSLayoutConstraint.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * NSSplitViewAutosaveName NS_EXTENSIBLE_STRING_ENUM;
 
 @class NSNotification;
 @protocol NSSplitViewDelegate;
@@ -36,7 +38,7 @@ typedef NS_ENUM(NSInteger, NSSplitViewDividerStyle) {
 
 /* The name to use when autosaving the positions of dividers, and whether or not subviews are collapsed, to preferences. If this value is nil or the string is empty no autosaving is done.
 */
-@property (nullable, copy) NSString *autosaveName NS_AVAILABLE_MAC(10_5);
+@property (nullable, copy) NSSplitViewAutosaveName autosaveName NS_AVAILABLE_MAC(10_5);
 
 
 /* Set or get the delegate of the split view. The delegate will be sent NSSplitViewDelegate messages to which it responds. 

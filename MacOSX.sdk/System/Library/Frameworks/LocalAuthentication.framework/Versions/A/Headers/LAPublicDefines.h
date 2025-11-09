@@ -17,9 +17,7 @@
 #define kLAOptionAuthenticationReason                       2
 
 // Credential types
-#define kLACredentialTypePasscode                          -1
-#define kLACredentialTypePassphrase                        -2
-#define kLACredentialCTKPIN                                -3
+#define kLACredentialTypeApplicationPassword                0
 
 // Error codes
 #define kLAErrorAuthenticationFailed                       -1
@@ -32,6 +30,8 @@
 #define kLAErrorTouchIDLockout                             -8
 #define kLAErrorAppCancel                                  -9
 #define kLAErrorInvalidContext                            -10
+#define kLAErrorNotInteractive                          -1004
+
 
 // Error domain
 #define kLAErrorDomain        "com.apple.LocalAuthentication"

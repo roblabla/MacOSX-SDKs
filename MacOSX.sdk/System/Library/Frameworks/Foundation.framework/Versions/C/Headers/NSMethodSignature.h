@@ -1,5 +1,5 @@
 /*	NSMethodSignature.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -10,7 +10,8 @@ NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 @interface NSMethodSignature : NSObject {
 @private
     void *_private;
-    void *_reserved[6];
+    void *_reserved[5];
+    unsigned long _flags;
 }
 
 + (nullable NSMethodSignature *)signatureWithObjCTypes:(const char *)types;

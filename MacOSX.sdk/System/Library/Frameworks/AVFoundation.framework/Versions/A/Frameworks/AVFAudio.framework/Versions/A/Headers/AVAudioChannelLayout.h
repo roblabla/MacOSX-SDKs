@@ -31,8 +31,11 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	@abstract Initialize from a layout tag.
 	@param layoutTag
 		The tag.
+	@discussion
+		Returns nil if the tag is either kAudioChannelLayoutTag_UseChannelDescriptions or
+		kAudioChannelLayoutTag_UseChannelBitmap.
 */
-- (instancetype)initWithLayoutTag:(AudioChannelLayoutTag)layoutTag;
+- (nullable instancetype)initWithLayoutTag:(AudioChannelLayoutTag)layoutTag;
 
 /*!	@method initWithLayout:
 	@abstract Initialize from an AudioChannelLayout.

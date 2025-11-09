@@ -253,6 +253,7 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
  *	queue instead of the active queue.  In other words, they are not
  *	cached so that they will be stolen first if memory runs low.
  */
+
 #define VM_FLAGS_FIXED		0x0000
 #define VM_FLAGS_ANYWHERE	0x0001
 #define VM_FLAGS_PURGABLE	0x0002
@@ -302,6 +303,10 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 #define VM_FLAGS_SUPERPAGE_SIZE_ANY (SUPERPAGE_SIZE_ANY << VM_FLAGS_SUPERPAGE_SHIFT)
 #define SUPERPAGE_SIZE_2MB		2
 #define VM_FLAGS_SUPERPAGE_SIZE_2MB (SUPERPAGE_SIZE_2MB<<VM_FLAGS_SUPERPAGE_SHIFT)
+
+
+
+
 
 #define VM_MEMORY_MALLOC 1
 #define VM_MEMORY_MALLOC_SMALL 2
@@ -373,6 +378,7 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 
 /* JavaScriptCore heaps */
 #define VM_MEMORY_JAVASCRIPT_CORE 63
+#define VM_MEMORY_WEBASSEMBLY VM_MEMORY_JAVASCRIPT_CORE
 /* memory allocated for the JIT */
 #define VM_MEMORY_JAVASCRIPT_JIT_EXECUTABLE_ALLOCATOR 64
 #define VM_MEMORY_JAVASCRIPT_JIT_REGISTER_FILE 65
@@ -441,12 +447,19 @@ typedef struct vm_purgeable_info	*vm_purgeable_info_t;
 /* memory allocated by skywalk networking */
 #define VM_MEMORY_SKYWALK 87
 
+#define VM_MEMORY_IOSURFACE 88
+
+#define VM_MEMORY_LIBNETWORK 89
+
+#define VM_MEMORY_AUDIO 90
+
+#define VM_MEMORY_VIDEOBITSTREAM 91
+
 /* Reserve 240-255 for application */
 #define VM_MEMORY_APPLICATION_SPECIFIC_1 240
 #define VM_MEMORY_APPLICATION_SPECIFIC_16 255
 
 #define VM_MAKE_TAG(tag) ((tag) << 24)
-
 
 
 

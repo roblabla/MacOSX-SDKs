@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 4292849D-6D30-3317-A8CA-59AB1BBAF820', 'x86_64: 438B53F8-ED3F-38D3-B8A1-F0E5426A72DD' ]
+uuids:           [ 'i386: 2C8EF7D5-4D44-3EF0-A1BB-D5193C7FBB9C', 'x86_64: A86F11B5-198E-35DC-9715-4628EF8FFDA3' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/OpenGL.framework/Versions/A/Libraries/Legacy/libLLVMContainer.dylib
 objc-constraint: none
@@ -5421,6 +5421,7 @@ exports:
                         __ZNK4llvm8LoopBaseINS_17MachineBasicBlockENS_11MachineLoopEE9block_endEv, 
                         __ZNK4llvm8LoopBaseINS_17MachineBasicBlockENS_11MachineLoopEE9getBlocksEv, 
                         __ZNK4llvm8LoopBaseINS_17MachineBasicBlockENS_11MachineLoopEE9getHeaderEv, 
+                        __ZNSt3__112__cxx03_bool12__true_valueEv, __ZNSt3__12wsIcNS_11char_traitsIcEEEERNS_13basic_istreamIT_T0_EES7_, 
                         __ZTIN4llvm10ConstantFPE, __ZTIN4llvm10FoldingSetINS_17AttributeListImplEEE, 
                         __ZTIN4llvm10FoldingSetINS_22LoopDependenceAnalysis14DependencePairEEE, 
                         __ZTIN4llvm10FoldingSetINS_4SCEVEEE, __ZTIN4llvm10FoldingSetINS_6MDNodeEEE, 

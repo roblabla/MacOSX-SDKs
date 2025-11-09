@@ -1,7 +1,7 @@
 /*
         NSMenuItem.h
         Application Kit
-        Copyright (c) 1996-2016, Apple Inc.
+        Copyright (c) 1996-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -69,8 +69,7 @@ NS_ASSUME_NONNULL_BEGIN
     } _miFlags;
 }
 
-+ (void)setUsesUserKeyEquivalents:(BOOL)flag;
-+ (BOOL)usesUserKeyEquivalents;
+@property (class) BOOL usesUserKeyEquivalents;
 
 + (NSMenuItem *)separatorItem;
 
@@ -99,11 +98,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (readonly, copy) NSString *userKeyEquivalent;
 
-- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand;
+/* By default, when a menu item is hidden, its key equivalent is ignored. By setting this property to YES, you allow a hidden item's key equivalent to be considered when searching for a menu item that matches a key event. This is useful to provide a keyboard shortcut when it's not necessary to have a visible menu item in the menubar. Note that Apple HI guidelines generally recommend that keyboard shortcuts should be clearly indicated in a menu, so this property should be used only rarely. */
+@property BOOL allowsKeyEquivalentWhenHidden NS_AVAILABLE_MAC(10_13);
 
 @property (nullable, strong) NSImage *image;
 
-@property NSInteger state;
+@property NSControlStateValue state;
 @property (null_resettable, strong) NSImage *onStateImage; // checkmark by default
 @property (nullable, strong) NSImage *offStateImage; // none by default
 @property (null_resettable, strong) NSImage *mixedStateImage; // horizontal line by default?
@@ -159,6 +159,7 @@ NS_DEPRECATED_MAC(10_0, 10_6)
 - (void)setMnemonicLocation:(NSUInteger)location NS_DEPRECATED_MAC(10_0, 10_6);
 - (NSUInteger)mnemonicLocation NS_DEPRECATED_MAC(10_0, 10_6);
 - (null_unspecified NSString *)mnemonic NS_DEPRECATED_MAC(10_0, 10_6);
+- (void)setTitleWithMnemonic:(NSString *)stringWithAmpersand NS_DEPRECATED_WITH_REPLACEMENT_MAC("setTitle:", 10_0, 10_13);
 
 @end
 

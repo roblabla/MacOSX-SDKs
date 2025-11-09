@@ -1540,7 +1540,7 @@ typedef struct vImage_MultidimensionalTableData * vImage_MultidimensionalTable;
 /* Hints to describe use of vImage_MultidimensionalTableData look up table. */
 typedef enum
 {
-    kvImageMDTableHint_16Q12 = 1,           
+    kvImageMDTableHint_16Q12 = 1,
     kvImageMDTableHint_Float = 2,
 }vImageMDTableUsageHint;
     

@@ -1,9 +1,10 @@
 /*	NSFormatter.h
-	Copyright (c) 1995-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1995-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSRange.h>
+#import <Foundation/NSAttributedString.h>
 
 @class NSString;
 @class NSAttributedString;
@@ -31,7 +32,7 @@ typedef NS_ENUM(NSInteger, NSFormattingContext) {
     // The capitalization context if a date or date symbol is to be formatted with capitalization appropriate for the middle of a sentence.
     NSFormattingContextMiddleOfSentence = 5,
     
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 /*
  * There are 3 widths: long, medium, and short.
@@ -42,13 +43,13 @@ typedef NS_ENUM(NSInteger, NSFormattingUnitStyle) {
     NSFormattingUnitStyleShort = 1,
     NSFormattingUnitStyleMedium,
     NSFormattingUnitStyleLong,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 @interface NSFormatter : NSObject <NSCopying, NSCoding>
 
 - (nullable NSString *)stringForObjectValue:(nullable id)obj;
 
-- (nullable NSAttributedString *)attributedStringForObjectValue:(id)obj withDefaultAttributes:(nullable NSDictionary<NSString *, id> *)attrs;
+- (nullable NSAttributedString *)attributedStringForObjectValue:(id)obj withDefaultAttributes:(nullable NSDictionary<NSAttributedStringKey, id> *)attrs;
 
 - (nullable NSString *)editingStringForObjectValue:(id)obj;
 

@@ -1,6 +1,6 @@
 /* CoreAnimation - CARenderer.h
 
-   Copyright (c) 2007-2016, Apple Inc.
+   Copyright (c) 2007-2017, Apple Inc.
    All rights reserved. */
 
 /* This class lets an application manually drive the rendering of a
@@ -34,6 +34,7 @@
 #import <Foundation/NSObject.h>
 
 @class NSDictionary, CALayer;
+@protocol MTLTexture;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -49,6 +50,12 @@ CA_CLASS_AVAILABLE (10.5)
 
 + (CARenderer *)rendererWithCGLContext:(void *)ctx
     options:(nullable NSDictionary *)dict;
+
+/* Create a new renderer object. Its render target is the specified
+ * texture. 'dict' is an optional dictionary of parameters.  */
+
++ (CARenderer *)rendererWithMTLTexture:(id<MTLTexture>)tex
+    options:(nullable NSDictionary *)dict CA_AVAILABLE_STARTING(10.13, 11.0, 11.0, 4.0);
 
 /* The root layer associated with the renderer. */
 
@@ -90,5 +97,12 @@ CA_CLASS_AVAILABLE (10.5)
 - (void)endFrame;
 
 @end
+
+/** Options for the renderer options dictionary. **/
+
+/* The CGColorSpaceRef object defining the output color space. */
+
+CA_EXTERN NSString * const kCARendererColorSpace
+    CA_AVAILABLE_STARTING (10.6, 2.0, 9.0, 2.0);
 
 NS_ASSUME_NONNULL_END

@@ -1,8 +1,8 @@
 /*
-        NSDrawer.h
-        Application Kit
-        Copyright (c) 1999-2016, Apple Inc.
-        All rights reserved.
+    NSDrawer.h
+    Application Kit
+    Copyright (c) 1999-2017, Apple Inc.
+    All rights reserved.
 */
 
 #import <CoreFoundation/CFDate.h>
@@ -23,15 +23,16 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol NSDrawerDelegate;
 
 typedef NS_ENUM(NSUInteger, NSDrawerState) {
-    NSDrawerClosedState			= 0,
-    NSDrawerOpeningState 		= 1,
-    NSDrawerOpenState 			= 2,
-    NSDrawerClosingState 		= 3
+    NSDrawerClosedState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 0,
+    NSDrawerOpeningState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 1,
+    NSDrawerOpenState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 2,
+    NSDrawerClosingState NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController") = 3
 };
 
+NS_CLASS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController")
 @interface NSDrawer : NSResponder <NSAccessibilityElement, NSAccessibility>
 {
-    /*All instance variables are private*/
+    /* All instance variables are private */
     NSDrawerState 	_drawerState;
     NSDrawerState	_drawerNextState;
     NSRectEdge 		_drawerEdge;
@@ -82,42 +83,29 @@ typedef NS_ENUM(NSUInteger, NSDrawerState) {
 
 @end
 
-@interface NSWindow(Drawers)
+@interface NSWindow(NSDrawers)
 
-@property (nullable, readonly, copy) NSArray<NSDrawer *> *drawers;
+@property (nullable, readonly, copy) NSArray<NSDrawer *> *drawers NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
 
 @end
 
 @protocol NSDrawerDelegate <NSObject>
 @optional
-- (BOOL)drawerShouldOpen:(NSDrawer *)sender;
-- (BOOL)drawerShouldClose:(NSDrawer *)sender;
-- (NSSize)drawerWillResizeContents:(NSDrawer *)sender toSize:(NSSize)contentSize;
+- (BOOL)drawerShouldOpen:(NSDrawer *)sender NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+- (BOOL)drawerShouldClose:(NSDrawer *)sender NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+- (NSSize)drawerWillResizeContents:(NSDrawer *)sender toSize:(NSSize)contentSize NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
 
-/* Notifications */
-- (void)drawerWillOpen:(NSNotification *)notification;
-- (void)drawerDidOpen:(NSNotification *)notification;
-- (void)drawerWillClose:(NSNotification *)notification;
-- (void)drawerDidClose:(NSNotification *)notification;
+- (void)drawerWillOpen:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+- (void)drawerDidOpen:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+- (void)drawerWillClose:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+- (void)drawerDidClose:(NSNotification *)notification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
 
 @end
 
-/* Notifications */
-APPKIT_EXTERN NSNotificationName NSDrawerWillOpenNotification;
-APPKIT_EXTERN NSNotificationName NSDrawerDidOpenNotification;
-APPKIT_EXTERN NSNotificationName NSDrawerWillCloseNotification;
-APPKIT_EXTERN NSNotificationName NSDrawerDidCloseNotification;
+APPKIT_EXTERN NSNotificationName NSDrawerWillOpenNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+APPKIT_EXTERN NSNotificationName NSDrawerDidOpenNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+APPKIT_EXTERN NSNotificationName NSDrawerWillCloseNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
+APPKIT_EXTERN NSNotificationName NSDrawerDidCloseNotification NS_DEPRECATED_MAC(10_0, 10_13, "Drawers are deprecated; consider using NSSplitViewController");
 
 NS_ASSUME_NONNULL_END
 
-/* Note that the size of a drawer is determined partly by its content, partly by
-the size of its parent window.  The size in the direction of the drawer's motion
-is determined by the drawer's content size, and may be manually changed by the
-user within the limits determined by the min and max content sizes (programmatic
-changes are not so limited.)  The size in the transverse direction is determined
-by the size of the parent window, combined with the drawer's leading and trailing
-offsets.  For finer control over the size of the drawer in the transverse direction,
-listen for the parent window's NSWindowDidResizeNotification and then reset the
-leading and/or trailing offsets accordingly.  The one overriding restriction is
-that a drawer can never be larger than its parent, and the sizes of both drawer
-and parent are constrained by this. */

@@ -28,7 +28,8 @@ extern "C" {
 #endif
     
 /* CVMetalTextureRef is only available to Objective C code */
-#if defined(__OBJC__) && COREVIDEO_SUPPORTS_METAL
+#if COREVIDEO_SUPPORTS_METAL
+#if defined(__OBJC__)
 @protocol MTLTexture;
     
 #pragma mark CVMetalTexture
@@ -39,8 +40,8 @@ extern "C" {
 
 */
 typedef CVImageBufferRef CVMetalTextureRef;
-
-CV_EXPORT CFTypeID CVMetalTextureGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
+	
+CV_EXPORT CFTypeID CVMetalTextureGetTypeID(void) API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 /*!
     @function   CVMetalTextureGetTexture
@@ -48,7 +49,7 @@ CV_EXPORT CFTypeID CVMetalTextureGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_
     @param      image Target CVMetalTexture
     @result     Metal texture
 */
-CV_EXPORT id <MTLTexture> CV_NULLABLE CVMetalTextureGetTexture( CVMetalTextureRef CV_NONNULL image ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
+CV_EXPORT id <MTLTexture> CV_NULLABLE CVMetalTextureGetTexture( CVMetalTextureRef CV_NONNULL image ) API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 /*!
     @function   CVMetalTextureIsFlipped
@@ -56,7 +57,7 @@ CV_EXPORT id <MTLTexture> CV_NULLABLE CVMetalTextureGetTexture( CVMetalTextureRe
     @param      image Target CVMetalTexture
     @result     True if 0,0 in the texture is upper left, false if 0,0 is lower left
 */
-CV_EXPORT Boolean CVMetalTextureIsFlipped( CVMetalTextureRef CV_NONNULL image ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
+CV_EXPORT Boolean CVMetalTextureIsFlipped( CVMetalTextureRef CV_NONNULL image ) API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0)) __WATCHOS_PROHIBITED;
 
 /*!
     @function   CVMetalTextureGetCleanTexCoords 
@@ -72,10 +73,16 @@ CV_EXPORT void CVMetalTextureGetCleanTexCoords( CVMetalTextureRef CV_NONNULL ima
                                                    float lowerLeft[2],
                                                    float lowerRight[2],
                                                    float upperRight[2],
-                                                   float upperLeft[2] ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);
-    
-#endif
-    
+                                                   float upperLeft[2] ) API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0)) __WATCHOS_PROHIBITED;
+#endif // defined(__OBJC__)
+	
+/*!
+    @discussion kCVMetalTextureUsage is a property that can be placed on a CVMetalTextureCache to instruct the MTLTextureUsage of the created MTLTexture. Values for this can can be read from MTLTexture.h
+ */
+CV_EXPORT const CFStringRef CV_NONNULL kCVMetalTextureUsage API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+
+#endif // COREVIDEO_SUPPORTS_METAL
+	
 #if defined(__cplusplus)
 }
 #endif

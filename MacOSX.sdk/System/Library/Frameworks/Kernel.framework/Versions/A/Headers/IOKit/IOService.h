@@ -131,6 +131,7 @@ extern const OSSymbol *     gIOFirstPublishNotification;
 extern const OSSymbol *     gIOMatchedNotification;
 extern const OSSymbol *     gIOFirstMatchNotification;
 extern const OSSymbol *     gIOTerminatedNotification;
+extern const OSSymbol *     gIOWillTerminateNotification;
 
 extern const OSSymbol *     gIOGeneralInterest;
 extern const OSSymbol *     gIOBusyInterest;
@@ -639,6 +640,8 @@ public:
     
     virtual void unlockForArbitration( void );
 
+
+
 /*! @function terminateClient
     @abstract Passes a termination up the stack.
     @discussion When an IOService object is made inactive the default behavior is to also make any of its clients that have it as their only provider inactive, in this way recursing the termination up the driver stack. This method allows a terminated  IOService object to override this behavior. Note the client may also override this behavior by overriding its @link terminate terminate@/link method.
@@ -727,7 +730,8 @@ public:
 <br>    <code>gIOFirstPublishNotification</code> Delivered when an IOService object is registered, but only once per IOService instance. Some IOService objects may be reregistered when their state is changed.
 <br>    <code>gIOMatchedNotification</code> Delivered when an IOService object has been matched with all client drivers, and they have been probed and started.
 <br>    <code>gIOFirstMatchNotification</code> Delivered when an IOService object has been matched with all client drivers, but only once per IOService instance. Some IOService objects may be reregistered when their state is changed.
-<br>    <code>gIOTerminatedNotification</code> Delivered after an IOService object has been terminated, during its finalize stage.
+<br>    <code>gIOWillTerminateNotification</code> Delivered after an IOService object has been terminated, during its finalize stage. Delivered after any matching on the service has finished.
+<br>    <code>gIOTerminatedNotification</code> Delivered immediately when an IOService object has been terminated, making it inactive.
     @param matching A matching dictionary to restrict notifications to only matching IOService objects. The dictionary will be released when the notification is removed, consuming the passed-in reference.
     @param handler A C function callback to deliver notifications.
     @param target An instance reference for the callback's use.
@@ -750,7 +754,8 @@ public:
 <br>    <code>gIOFirstPublishNotification</code> Delivered when an IOService object is registered, but only once per IOService instance. Some IOService objects may be reregistered when their state is changed.
 <br>    <code>gIOMatchedNotification</code> Delivered when an IOService object has been matched with all client drivers, and they have been probed and started.
 <br>    <code>gIOFirstMatchNotification</code> Delivered when an IOService object has been matched with all client drivers, but only once per IOService instance. Some IOService objects may be reregistered when their state is changed.
-<br>    <code>gIOTerminatedNotification</code> Delivered after an IOService object has been terminated, during its finalize stage.
+<br>    <code>gIOWillTerminateNotification</code> Delivered after an IOService object has been terminated, during its finalize stage. Delivered after any matching on the service has finished.
+<br>    <code>gIOTerminatedNotification</code> Delivered immediately when an IOService object has been terminated, making it inactive.
     @param matching A matching dictionary to restrict notifications to only matching IOService objects. The dictionary is retained while the notification is installed. (Differs from addNotification).
     @param handler A C function callback to deliver notifications.
     @param target An instance reference for the callback's use.
@@ -1330,7 +1335,11 @@ private:
     void deliverNotification( const OSSymbol * type,
                               IOOptionBits orNewState, IOOptionBits andNewState );
 
-    bool invokeNotifer( class _IOServiceNotifier * notify );
+    OSArray * copyNotifiers(const OSSymbol * type,
+                            IOOptionBits orNewState, IOOptionBits andNewState);
+
+    bool invokeNotifiers(OSArray ** willSend);
+    bool invokeNotifier( class _IOServiceNotifier * notify );
 
     APPLE_KEXT_COMPATIBILITY_VIRTUAL
         void unregisterAllInterest( void );

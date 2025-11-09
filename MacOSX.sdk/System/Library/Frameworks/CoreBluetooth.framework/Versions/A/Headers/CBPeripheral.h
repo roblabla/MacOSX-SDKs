@@ -7,13 +7,17 @@
  *	@copyright 2011 Apple, Inc. All rights reserved.
  */
 
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
+
 #import <CoreBluetooth/CBDefines.h>
+#import <CoreBluetooth/CBPeer.h>
+#import <CoreBluetooth/CBL2CAPChannel.h>
 
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
-@class CBCentralManager;
 
 /*!
  *  @enum CBPeripheralState
@@ -25,6 +29,7 @@ typedef NS_ENUM(NSInteger, CBPeripheralState) {
 	CBPeripheralStateDisconnected = 0,
 	CBPeripheralStateConnecting,
 	CBPeripheralStateConnected,
+	CBPeripheralStateDisconnecting NS_AVAILABLE(10_13, 9_0),
 } NS_AVAILABLE(10_9, 7_0);
 
 /*!
@@ -47,53 +52,14 @@ typedef NS_ENUM(NSInteger, CBCharacteristicWriteType) {
  *  @discussion Represents a peripheral.
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
-CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
-{
-@private
-	id<CBPeripheralDelegate>	 _delegate;
-	
-	CFUUIDRef					 _UUID;
-	NSUUID						*_identifier;
-	
-	NSString					*_name;
-	NSNumber					*_RSSI;
-	CBPeripheralState			 _state;
-	NSMutableArray				*_services;
-	
-	CBCentralManager			*_centralManager;
-	
-    NSUInteger                  mtuLength;
-    
-	NSMutableDictionary			*_attributes;
-	BOOL						 _isPaired;
-	BOOL						 _isConnectedToSystem;
-    NSInteger                    role;
-}
+CB_EXTERN_CLASS @interface CBPeripheral : CBPeer
 
 /*!
  *  @property delegate
  *
  *  @discussion The delegate object that will receive peripheral events.
  */
-@property(assign, nonatomic, nullable) id<CBPeripheralDelegate> delegate;
-
-/*!
- *  @property UUID
- *
- *  @discussion Once a peripheral has been connected at least once by the system, it is assigned a UUID. This UUID can be stored and later provided to a
- *              <code>CBCentralManager</code> to retrieve the peripheral.
- *
- *	@deprecated Use the {@link identifier} property instead.
- */
-@property(readonly, nonatomic) CFUUIDRef UUID NS_DEPRECATED(10_7, 10_9, 5_0, 7_0);
-
-/*!
- *  @property identifier
- *
- *  @discussion The unique identifier associated with the peripheral. This identifier can be stored and later provided to a <code>CBCentralManager</code>
- *				to retrieve the peripheral.
- */
-@property(readonly, nonatomic) NSUUID *identifier;
+@property(weak, nonatomic, nullable) id<CBPeripheralDelegate> delegate;
 
 /*!
  *  @property name
@@ -106,17 +72,10 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  *  @property RSSI
  *
  *  @discussion The most recently read RSSI, in decibels.
- */
-@property(retain, readonly, nullable) NSNumber *RSSI;
-
-/*!
- *  @property isConnected
  *
- *  @discussion Whether or not the peripheral is currently connected.
- *              
- *	@deprecated Use the {@link state} property instead.
+ *  @deprecated Use {@link peripheral:didReadRSSI:error:} instead.
  */
-@property(readonly) BOOL isConnected NS_DEPRECATED(10_7, 10_9, 5_0, 7_0);
+@property(retain, readonly, nullable) NSNumber *RSSI NS_DEPRECATED(10_7, 10_13, 5_0, 8_0);
 
 /*!
  *  @property state
@@ -133,11 +92,20 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
 @property(retain, readonly, nullable) NSArray<CBService *> *services;
 
 /*!
+ *  @property canSendWriteWithoutResponse
+ *
+ *  @discussion YES if the remote device has space to send a write without response.  If this value is NO,
+ *				the value will be set to YES after the current writes have been flushed, and
+ *				<link>peripheralIsReadyToSendWriteWithoutResponse:</link> will be called.
+ */
+@property(readonly) BOOL canSendWriteWithoutResponse;
+
+/*!
  *  @method readRSSI
  *
- *	@discussion While connected, retrieves the current RSSI of the link.
+ *  @discussion While connected, retrieves the current RSSI of the link.
  *
- *	@see		peripheralDidUpdateRSSI:error:
+ *  @see        peripheral:didReadRSSI:error:
  */
 - (void)readRSSI;
 
@@ -145,7 +113,7 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  *  @method discoverServices:
  *
  *  @param serviceUUIDs A list of <code>CBUUID</code> objects representing the service types to be discovered. If <i>nil</i>,
- *						all services will be discovered, which is considerably slower and not recommended.
+ *						all services will be discovered.
  *
  *  @discussion			Discovers available service(s) on the peripheral.
  *
@@ -170,7 +138,7 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  *  @method discoverCharacteristics:forService:
  *
  *  @param characteristicUUIDs	A list of <code>CBUUID</code> objects representing the characteristic types to be discovered. If <i>nil</i>,
- *								all characteristics of <i>service</i> will be discovered, which is considerably slower and not recommended.
+ *								all characteristics of <i>service</i> will be discovered.
  *  @param service				A GATT service.
  *
  *  @discussion					Discovers the specified characteristic(s) of <i>service</i>.
@@ -206,10 +174,15 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  *  @param characteristic	The characteristic whose characteristic value will be written.
  *  @param type				The type of write to be executed.
  *
- *  @discussion				Writes <i>value</i> to <i>characteristic</i>'s characteristic value. If the <code>CBCharacteristicWriteWithResponse</code>
- *							type is specified, {@link peripheral:didWriteValueForCharacteristic:error:} is called with the result of the write request.
+ *  @discussion				Writes <i>value</i> to <i>characteristic</i>'s characteristic value.
+ *							If the <code>CBCharacteristicWriteWithResponse</code> type is specified, {@link peripheral:didWriteValueForCharacteristic:error:}
+ *							is called with the result of the write request.
+ *							If the <code>CBCharacteristicWriteWithoutResponse</code> type is specified, and canSendWriteWithoutResponse is false, the delivery
+ * 							of the data is best-effort and may not be guaranteed.
  *
  *  @see					peripheral:didWriteValueForCharacteristic:error:
+ *  @see					peripheralIsReadyToSendWriteWithoutResponse:
+ *	@see					canSendWriteWithoutResponse
  *	@see					CBCharacteristicWriteType
  */
 - (void)writeValue:(NSData *)data forCharacteristic:(CBCharacteristic *)characteristic type:(CBCharacteristicWriteType)type;
@@ -266,6 +239,16 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  */
 - (void)writeValue:(NSData *)data forDescriptor:(CBDescriptor *)descriptor;
 
+/*!
+ *  @method openL2CAPChannel:
+ *
+ *  @param PSM			The PSM of the channel to open
+ *
+ *  @discussion			Attempt to open an L2CAP channel to the peripheral using the supplied PSM.  
+ *
+ *  @see				peripheral:didWriteValueForCharacteristic:error:
+ */
+- (void)openL2CAPChannel:(CBL2CAPPSM)PSM NS_AVAILABLE(NA, 11_0);
 @end
 
 
@@ -290,22 +273,10 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
 - (void)peripheralDidUpdateName:(CBPeripheral *)peripheral NS_AVAILABLE(10_9, 6_0);
 
 /*!
- *  @method peripheralDidInvalidateServices:
- *
- *  @param peripheral	The peripheral providing this update.
- *
- *  @discussion			This method is invoked when the @link services @/link of <i>peripheral</i> have been changed. At this point, 
- *						all existing <code>CBService</code> objects are invalidated. Services can be re-discovered via @link discoverServices: @/link.
- *
- *	@deprecated			Use {@link peripheral:didInvalidateServices:} instead.
- */
-- (void)peripheralDidInvalidateServices:(CBPeripheral *)peripheral NS_DEPRECATED(NA, NA, 6_0, 7_0);
-
-/*!
  *  @method peripheral:didModifyServices:
  *
- *  @param peripheral	The peripheral providing this update.
- *  @param services		The services that have been invalidated
+ *  @param peripheral			The peripheral providing this update.
+ *  @param invalidatedServices	The services that have been invalidated
  *
  *  @discussion			This method is invoked when the @link services @/link of <i>peripheral</i> have been changed.
  *						At this point, the designated <code>CBService</code> objects have been invalidated.
@@ -320,8 +291,21 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  *	@param error		If an error occurred, the cause of the failure.
  *
  *  @discussion			This method returns the result of a @link readRSSI: @/link call.
+ *
+ *  @deprecated			Use {@link peripheral:didReadRSSI:error:} instead.
  */
-- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(nullable NSError *)error;
+- (void)peripheralDidUpdateRSSI:(CBPeripheral *)peripheral error:(nullable NSError *)error NS_DEPRECATED(10_7, 10_13, 5_0, 8_0);
+
+/*!
+ *  @method peripheral:didReadRSSI:error:
+ *
+ *  @param peripheral	The peripheral providing this update.
+ *  @param RSSI			The current RSSI of the link.
+ *  @param error		If an error occurred, the cause of the failure.
+ *
+ *  @discussion			This method returns the result of a @link readRSSI: @/link call.
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didReadRSSI:(NSNumber *)RSSI error:(nullable NSError *)error NS_AVAILABLE(10_13, 8_0);
 
 /*!
  *  @method peripheral:didDiscoverServices:
@@ -425,6 +409,29 @@ CB_EXTERN_CLASS @interface CBPeripheral : NSObject <NSCopying>
  *  @discussion				This method returns the result of a @link writeValue:forDescriptor: @/link call.
  */
 - (void)peripheral:(CBPeripheral *)peripheral didWriteValueForDescriptor:(CBDescriptor *)descriptor error:(nullable NSError *)error;
+
+/*!
+ *  @method peripheralIsReadyToSendWriteWithoutResponse:
+ *
+ *  @param peripheral   The peripheral providing this update.
+ *
+ *  @discussion         This method is invoked after a failed call to @link writeValue:forCharacteristic:type: @/link, when <i>peripheral</i> is again
+ *                      ready to send characteristic value updates.
+ *
+ */
+- (void)peripheralIsReadyToSendWriteWithoutResponse:(CBPeripheral *)peripheral;
+
+/*!
+ *  @method peripheral:didOpenL2CAPChannel:error:
+ *
+ *  @param peripheral		The peripheral providing this information.
+ *  @param channel			A <code>CBL2CAPChannel</code> object.
+ *	@param error			If an error occurred, the cause of the failure.
+ *
+ *  @discussion				This method returns the result of a @link openL2CAPChannel: @link call.
+ */
+- (void)peripheral:(CBPeripheral *)peripheral didOpenL2CAPChannel:(nullable CBL2CAPChannel *)channel error:(nullable NSError *)error;
+
 
 @end
 

@@ -1,7 +1,7 @@
 /*
 	NSTextInputContext.h
 	Application Kit
-	Copyright (c) 2008-2016, Apple Inc.
+	Copyright (c) 2008-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,6 +13,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSEvent;
+
+typedef NSString * NSTextInputSourceIdentifier NS_EXTENSIBLE_STRING_ENUM;
 
 NS_CLASS_AVAILABLE(10_6, NA)
 @interface NSTextInputContext : NSObject {
@@ -59,7 +61,7 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* The current activated text input context object. The Cocoa Text Input system communicates primarily with the client of the activated input context via the NSTextInputClient protocol.
  */
-+ (nullable NSTextInputContext *)currentInputContext;
+@property (class, readonly, nullable, strong) NSTextInputContext *currentInputContext;
 
 /* The designated initializer.
  */
@@ -106,17 +108,17 @@ NS_CLASS_AVAILABLE(10_6, NA)
 
 /* The array of keyboard text input source identifier strings available to the receiver.
  */
-@property(nullable, readonly) NSArray<NSString *> *keyboardInputSources;
+@property(nullable, readonly) NSArray<NSTextInputSourceIdentifier> *keyboardInputSources;
 
 /* The identifier string for the selected keyboard text input source.
  */
-@property(nullable, copy) NSString *selectedKeyboardInputSource;
+@property(nullable, copy) NSTextInputSourceIdentifier selectedKeyboardInputSource;
 
 
 /**** Text Input source attributes ****/
 /* Returns the display name for inputSourceIdentifier.
  */
-+ (nullable NSString *)localizedNameForInputSource:(NSString *)inputSourceIdentifier;
++ (nullable NSString *)localizedNameForInputSource:(NSTextInputSourceIdentifier)inputSourceIdentifier;
 @end
 
 /**** Notifications ****/

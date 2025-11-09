@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2017 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -409,6 +409,51 @@ struct	tcpstat {
 	u_int32_t	tcps_mss_to_low;	/* Change MSS to low using link status report */
 	u_int32_t	tcps_ecn_fallback_droprst; /* ECN fallback caused by connection drop due to RST */
 	u_int32_t	tcps_ecn_fallback_droprxmt; /* ECN fallback due to drop after multiple retransmits */
+	u_int32_t	tcps_ecn_fallback_synrst; /* ECN fallback due to rst after syn */
+
+	u_int32_t	tcps_mptcp_rcvmemdrop;	/* MPTCP packets dropped for lack of memory */
+	u_int32_t	tcps_mptcp_rcvduppack;	/* MPTCP duplicate-only packets received */
+	u_int32_t	tcps_mptcp_rcvpackafterwin; /* MPTCP packets with data after window */
+
+	/* TCP timer statistics */
+	u_int32_t	tcps_timer_drift_le_1_ms;	/* Timer drift less or equal to 1 ms */
+	u_int32_t	tcps_timer_drift_le_10_ms;	/* Timer drift less or equal to 10 ms */
+	u_int32_t	tcps_timer_drift_le_20_ms;	/* Timer drift less or equal to 20 ms */
+	u_int32_t	tcps_timer_drift_le_50_ms;	/* Timer drift less or equal to 50 ms */
+	u_int32_t	tcps_timer_drift_le_100_ms;	/* Timer drift less or equal to 100 ms */
+	u_int32_t	tcps_timer_drift_le_200_ms;	/* Timer drift less or equal to 200 ms */
+	u_int32_t	tcps_timer_drift_le_500_ms;	/* Timer drift less or equal to 500 ms */
+	u_int32_t	tcps_timer_drift_le_1000_ms;	/* Timer drift less or equal to 1000 ms */
+	u_int32_t	tcps_timer_drift_gt_1000_ms;	/* Timer drift greater than 1000 ms */
+
+	u_int32_t	tcps_mptcp_handover_attempt;	/* Total number of MPTCP-attempts using handover mode */
+	u_int32_t	tcps_mptcp_interactive_attempt;	/* Total number of MPTCP-attempts using interactive mode */
+	u_int32_t	tcps_mptcp_aggregate_attempt;	/* Total number of MPTCP-attempts using aggregate mode */
+	u_int32_t	tcps_mptcp_fp_handover_attempt; /* Same as previous three but only for first-party apps */
+	u_int32_t	tcps_mptcp_fp_interactive_attempt;
+	u_int32_t	tcps_mptcp_fp_aggregate_attempt;
+	u_int32_t	tcps_mptcp_heuristic_fallback;	/* Total number of MPTCP-connections that fell back due to heuristics */
+	u_int32_t	tcps_mptcp_fp_heuristic_fallback;	/* Same as previous but for first-party apps */
+	u_int32_t	tcps_mptcp_handover_success_wifi;	/* Total number of successfull handover-mode connections that *started* on WiFi */
+	u_int32_t	tcps_mptcp_handover_success_cell;	/* Total number of successfull handover-mode connections that *started* on Cell */
+	u_int32_t	tcps_mptcp_interactive_success;		/* Total number of interactive-mode connections that negotiated MPTCP */
+	u_int32_t	tcps_mptcp_aggregate_success;		/* Same as previous but for aggregate */
+	u_int32_t	tcps_mptcp_fp_handover_success_wifi;	/* Same as previous four, but for first-party apps */
+	u_int32_t	tcps_mptcp_fp_handover_success_cell;
+	u_int32_t	tcps_mptcp_fp_interactive_success;
+	u_int32_t	tcps_mptcp_fp_aggregate_success;
+	u_int32_t	tcps_mptcp_handover_cell_from_wifi;	/* Total number of connections that use cell in handover-mode (coming from WiFi) */
+	u_int32_t	tcps_mptcp_handover_wifi_from_cell;	/* Total number of connections that use WiFi in handover-mode (coming from cell) */
+	u_int32_t	tcps_mptcp_interactive_cell_from_wifi;	/* Total number of connections that use cell in interactive mode (coming from WiFi) */
+	u_int64_t	tcps_mptcp_handover_cell_bytes;		/* Total number of bytes sent on cell in handover-mode (on new subflows, ignoring initial one) */
+	u_int64_t	tcps_mptcp_interactive_cell_bytes;	/* Same as previous but for interactive */
+	u_int64_t	tcps_mptcp_aggregate_cell_bytes;
+	u_int64_t	tcps_mptcp_handover_all_bytes;		/* Total number of bytes sent in handover */
+	u_int64_t	tcps_mptcp_interactive_all_bytes;
+	u_int64_t	tcps_mptcp_aggregate_all_bytes;
+	u_int32_t	tcps_mptcp_back_to_wifi;	/* Total number of connections that succeed to move traffic away from cell (when starting on cell) */
+	u_int32_t	tcps_mptcp_wifi_proxy;		/* Total number of new subflows that fell back to regular TCP on cell */
+	u_int32_t	tcps_mptcp_cell_proxy;		/* Total number of new subflows that fell back to regular TCP on WiFi */
 };
 
 

@@ -19,6 +19,7 @@
 #import <MapKit/MKMapView.h>
 #import <MapKit/MKPinAnnotationView.h>
 #import <MapKit/MKUserLocation.h>
+#import <MapKit/MKClusterAnnotation.h>
 #import <MapKit/MKOverlay.h>
 #import <MapKit/MKShape.h>
 #import <MapKit/MKPointAnnotation.h>
@@ -49,11 +50,15 @@
 
 #if TARGET_OS_IPHONE
 #import <MapKit/MKReverseGeocoder.h>
+#import <MapKit/MKMarkerAnnotationView.h>
 #import <MapKit/MKOverlayView.h>
 #import <MapKit/MKOverlayPathView.h>
 #import <MapKit/MKPolygonView.h>
 #import <MapKit/MKPolylineView.h>
 #import <MapKit/MKCircleView.h>
+#import <MapKit/MKScaleView.h>
+#import <MapKit/MKCompassButton.h>
+#import <MapKit/MKUserTrackingButton.h>
 #import <MapKit/MKUserTrackingBarButtonItem.h>
 #endif
 

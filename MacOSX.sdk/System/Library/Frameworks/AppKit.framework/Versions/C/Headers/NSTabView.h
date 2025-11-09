@@ -1,7 +1,7 @@
 /*
         NSTabView.h
         Application Kit
-        Copyright (c) 2000-2016, Apple Inc.
+        Copyright (c) 2000-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -9,13 +9,14 @@
 #import <AppKit/NSView.h>
 #import <AppKit/NSCell.h>
 #import <AppKit/NSLayoutConstraint.h>
+#import <AppKit/NSApplication.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSFont, NSTabViewItem;
 @protocol NSTabViewDelegate;
 
-#define NSAppKitVersionNumberWithDirectionalTabs 631.0
+static const NSAppKitVersion NSAppKitVersionNumberWithDirectionalTabs = 631.0;
 
 // Use tabPosition and tabViewBorderType instead
 typedef NS_ENUM(NSUInteger, NSTabViewType) {
@@ -47,30 +48,30 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
 @private
     	/* Persistent properties */
     
-    id	_tabViewItems;                          	// array of NSTabViewItem
-    NSTabViewItem	*_selectedTabViewItem;		// nil only if _tabViewItems is empty
-    NSFont		*_font;				// font use to display the tab label
+    id                           _tabViewItems;                 // array of NSTabViewItem
+    NSTabViewItem	        *_selectedTabViewItem;		// nil only if _tabViewItems is empty
+    NSFont		        *_font;				// font use to display the tab label
     struct __NSTabViewTypeFlags {
         unsigned int tabViewBorderType:3;
         unsigned int tabPosition:5;
         unsigned int reserved:24;
     } _typeFlags;
-    BOOL		_allowTruncatedLabels;
-    id                  _delegate;
+    BOOL		         _allowTruncatedLabels;
+    __weak id<NSTabViewDelegate> _delegate;
 
     	/* Non-Persistent properties */
 
-    BOOL		_tabViewUnusedBOOL1 __unused;
+    BOOL		         _tabViewUnusedBOOL1 __unused;
     
-    BOOL		_drawsBackground;		// YES if we draw the background when borderless
-    NSTabViewItem	*_pressedTabViewItem;		// using during tracking
-    NSInteger		_endTabWidth;			// Width of the end tab. It depends on the font used.
-    NSInteger		_maxOverlap;			// Maximum tab overlap. Function of _enTabWidth
-    CGFloat		_tabHeight;			// Cache height of tabs
-    NSTabViewItem	*_tabViewItemWithKeyView;	// the tabViewItem with the keyView "outline"
-    NSView 		*_originalNextKeyView;		// Original nextKeyView of the tabView. Needed to restore the keyViewLoop.
+    BOOL		         _drawsBackground;		// YES if we draw the background when borderless
+    NSTabViewItem	        *_pressedTabViewItem;		// using during tracking
+    NSInteger		         _endTabWidth;			// Width of the end tab. It depends on the font used.
+    NSInteger		         _maxOverlap;			// Maximum tab overlap. Function of _enTabWidth
+    CGFloat		         _tabHeight;			// Cache height of tabs
+    NSTabViewItem	        *_tabViewItemWithKeyView;	// the tabViewItem with the keyView "outline"
+    NSView 		        *_originalNextKeyView;		// Original nextKeyView of the tabView. Needed to restore the keyViewLoop.
 #if __LP64__
-    NSLayoutConstraint  *_tabViewMinimumSizeConstraint; // Width constraint for the tab view based on its minimum size
+    NSLayoutConstraint          *_tabViewMinimumSizeConstraint; // Width constraint for the tab view based on its minimum size
 #endif
     
     struct __NSTabViewDelegateRespondTo {
@@ -135,7 +136,7 @@ typedef NS_ENUM(NSUInteger, NSTabViewBorderType) {
 
 	/* Delegate */
 
-@property (nullable, assign) id<NSTabViewDelegate> delegate;
+@property (nullable, weak) id<NSTabViewDelegate> delegate;
 
 	/* Hit testing */
 

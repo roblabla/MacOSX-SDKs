@@ -38,12 +38,10 @@
  * fsctl (vnop_ioctl) to detroy the callers credentials associated with the vnode's mount
  */
 #define NFS_IOC_DESTROY_CRED		_IO('n', 1)
-#define NFS_FSCTL_DESTROY_CRED		IOCBASECMD(NFS_IOC_DESTROY_CRED)
+
 /*
- * fsclt (vnop_ioctl) to set the callers credentials associated with the vnode's mount
+ * fsctl (vnop_ioctl) to set the callers credentials associated with the vnode's mount
  */
-
-
 struct nfs_gss_principal
 {
 	uint32_t	princlen;	/* length of data */
@@ -58,8 +56,6 @@ struct nfs_gss_principal
 #define NFS_IOC_INVALID_CRED_FLAG	2	/* Found a credential, but its not valid */
 
 #define NFS_IOC_SET_CRED		_IOW('n', 2, struct nfs_gss_principal)
-#define NFS_FSCTL_SET_CRED		IOCBASECMD(NFS_IOC_SET_CRED)
 
 #define NFS_IOC_GET_CRED		_IOWR('n', 3, struct nfs_gss_principal)
-#define NFS_FSCTL_GET_CRED		IOCBASECMD(NFS_IOC_GET_CRED)
 #endif

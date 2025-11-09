@@ -2,7 +2,7 @@
  *	CTTypesetter.h
  *	CoreText
  *
- *	Copyright (c) 2003-2015 Apple Inc. All rights reserved.
+ *	Copyright (c) 2003-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -36,7 +36,7 @@ typedef const struct CF_BRIDGED_TYPE(id) __CTTypesetter * CTTypesetterRef;
 	@abstract	Returns the CFType of the typesetter object
 */
 
-CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -53,7 +53,7 @@ CFTypeID CTTypesetterGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 				performed and any directional control characters are ignored.
 */
 
-CT_EXPORT const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_DEPRECATED(10_5, 10_8, 3_2, 6_0);
+CT_EXPORT const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_DEPRECATED("Deprecated", macos(10.5, 10.8), ios(3.2, 6.0)) CT_UNAVAILABLE(watchos, tvos);
 
 /*!
 	@const		kCTTypesetterOptionForcedEmbeddingLevel
@@ -64,7 +64,7 @@ CT_EXPORT const CFStringRef kCTTypesetterOptionDisableBidiProcessing CT_DEPRECAT
 				level and any directional control characters are ignored.
 */
 
-CT_EXPORT const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE(10_5, 3_2);
+CT_EXPORT const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -88,7 +88,7 @@ CT_EXPORT const CFStringRef kCTTypesetterOptionForcedEmbeddingLevel CT_AVAILABLE
 */
 
 CTTypesetterRef CTTypesetterCreateWithAttributedString(
-	CFAttributedStringRef string ) CT_AVAILABLE(10_5, 3_2);
+	CFAttributedStringRef string ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -112,7 +112,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedString(
 
 CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 	CFAttributedStringRef string,
-	CFDictionaryRef __nullable options ) CT_AVAILABLE(10_5, 3_2);
+	CFDictionaryRef __nullable options ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -145,7 +145,7 @@ CTTypesetterRef CTTypesetterCreateWithAttributedStringAndOptions(
 CTLineRef CTTypesetterCreateLineWithOffset(
 	CTTypesetterRef typesetter,
 	CFRange stringRange,
-	double offset ) CT_AVAILABLE(10_6, 3_2);
+	double offset ) CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	CTTypesetterCreateLine
@@ -154,7 +154,7 @@ CTLineRef CTTypesetterCreateLineWithOffset(
 
 CTLineRef CTTypesetterCreateLine(
 	CTTypesetterRef typesetter,
-	CFRange stringRange ) CT_AVAILABLE(10_5, 3_2);
+	CFRange stringRange ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -191,7 +191,7 @@ CFIndex CTTypesetterSuggestLineBreakWithOffset(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
 	double width,
-	double offset ) CT_AVAILABLE(10_6, 3_2);
+	double offset ) CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	CTTypesetterSuggestLineBreak
@@ -201,7 +201,7 @@ CFIndex CTTypesetterSuggestLineBreakWithOffset(
 CFIndex CTTypesetterSuggestLineBreak(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
-	double width ) CT_AVAILABLE(10_5, 3_2);
+	double width ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -239,7 +239,7 @@ CFIndex CTTypesetterSuggestClusterBreakWithOffset(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
 	double width,
-	double offset ) CT_AVAILABLE(10_6, 3_2);
+	double offset ) CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -250,7 +250,7 @@ CFIndex CTTypesetterSuggestClusterBreakWithOffset(
 CFIndex CTTypesetterSuggestClusterBreak(
 	CTTypesetterRef typesetter,
 	CFIndex startIndex,
-	double width ) CT_AVAILABLE(10_5, 3_2);
+	double width ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 CF_ASSUME_NONNULL_END

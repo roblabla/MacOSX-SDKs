@@ -8,6 +8,7 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLDevice.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
@@ -72,6 +73,19 @@ typedef NS_ENUM(NSUInteger, MTLVertexFormat)
     MTLVertexFormatInt1010102Normalized = 40,
     MTLVertexFormatUInt1010102Normalized = 41,
     
+    MTLVertexFormatUChar4Normalized_BGRA NS_ENUM_AVAILABLE(10_13, 11_0) = 42,
+    
+    MTLVertexFormatUChar NS_ENUM_AVAILABLE(10_13, 11_0) = 45,
+    MTLVertexFormatChar NS_ENUM_AVAILABLE(10_13, 11_0) = 46,
+    MTLVertexFormatUCharNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 47,
+    MTLVertexFormatCharNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 48,
+    
+    MTLVertexFormatUShort NS_ENUM_AVAILABLE(10_13, 11_0) = 49,
+    MTLVertexFormatShort NS_ENUM_AVAILABLE(10_13, 11_0) = 50,
+    MTLVertexFormatUShortNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 51,
+    MTLVertexFormatShortNormalized NS_ENUM_AVAILABLE(10_13, 11_0) = 52,
+    
+    MTLVertexFormatHalf NS_ENUM_AVAILABLE(10_13, 11_0) = 53,
     
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 

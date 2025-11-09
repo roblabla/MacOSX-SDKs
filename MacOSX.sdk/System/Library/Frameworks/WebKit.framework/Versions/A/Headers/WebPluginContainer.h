@@ -29,6 +29,7 @@
 #import <Foundation/Foundation.h>
 
 #import <AppKit/AppKit.h>
+@class WebFrame;
 
 /*!
     This informal protocol enables a plug-in to request that its containing application

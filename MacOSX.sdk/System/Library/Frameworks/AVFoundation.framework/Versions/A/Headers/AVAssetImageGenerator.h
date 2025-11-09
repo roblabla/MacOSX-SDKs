@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -32,12 +32,19 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /*!
+ @typedef AVAssetImageGeneratorApertureMode
+ @abstract
+    The type of an aperture mode.
+*/
+typedef NSString * AVAssetImageGeneratorApertureMode NS_STRING_ENUM;
+
+/*!
 	@constant		AVAssetImageGeneratorApertureModeCleanAperture
 	@abstract		Both pixel aspect ratio and clean aperture will be applied.
 	@discussion
 		An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
 */
-AVF_EXPORT NSString *const AVAssetImageGeneratorApertureModeCleanAperture NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeCleanAperture NS_AVAILABLE(10_7, 4_0);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeProductionAperture
@@ -45,7 +52,7 @@ AVF_EXPORT NSString *const AVAssetImageGeneratorApertureModeCleanAperture NS_AVA
 	@discussion
 		The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
 */
-AVF_EXPORT NSString *const AVAssetImageGeneratorApertureModeProductionAperture NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeProductionAperture NS_AVAILABLE(10_7, 4_0);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeEncodedPixels
@@ -53,7 +60,7 @@ AVF_EXPORT NSString *const AVAssetImageGeneratorApertureModeProductionAperture N
 	@discussion
 		The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
 */
-AVF_EXPORT NSString *const AVAssetImageGeneratorApertureModeEncodedPixels NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT AVAssetImageGeneratorApertureMode const AVAssetImageGeneratorApertureModeEncodedPixels NS_AVAILABLE(10_7, 4_0);
 
 typedef NS_ENUM(NSInteger, AVAssetImageGeneratorResult)
 {
@@ -83,7 +90,7 @@ AV_INIT_UNAVAILABLE
 @property (nonatomic) CGSize maximumSize;
 
 /* Specifies the aperture mode for the generated image.  Default is AVAssetImageGeneratorApertureModeCleanAperture. */
-@property (nonatomic, copy, nullable) NSString *apertureMode;
+@property (nonatomic, copy, nullable) AVAssetImageGeneratorApertureMode apertureMode;
 
 /* Specifies the video composition to use when extracting images from assets with multiple video tracks.
    If no videoComposition is specified, only the first enabled video track will be used.

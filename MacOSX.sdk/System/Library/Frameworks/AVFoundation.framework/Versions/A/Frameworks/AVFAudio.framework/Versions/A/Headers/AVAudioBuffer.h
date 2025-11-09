@@ -74,8 +74,13 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		The capacity of the buffer in PCM sample frames.
 	@discussion
 		An exception is raised if the format is not PCM.
+ 
+		Returns nil in the following cases:
+		- if the format has zero bytes per frame (format.streamDescription->mBytesPerFrame == 0)
+		- if the buffer byte capacity (frameCapacity * format.streamDescription->mBytesPerFrame)
+		  cannot be represented by an uint32_t
 */
-- (instancetype)initWithPCMFormat:(AVAudioFormat *)format frameCapacity:(AVAudioFrameCount)frameCapacity NS_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithPCMFormat:(AVAudioFormat *)format frameCapacity:(AVAudioFrameCount)frameCapacity NS_DESIGNATED_INITIALIZER;
 
 /*! @property frameCapacity
 	@abstract
@@ -198,6 +203,20 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 	@abstract Access the buffer's data bytes.
 */
 @property (nonatomic, readonly) void *data;
+
+/*!
+	@property byteCapacity
+	@abstract The buffer's capacity in bytes
+*/
+@property (nonatomic, readonly) uint32_t byteCapacity API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
+/*!
+	@property byteLength
+	@abstract The current number of valid bytes in the buffer.
+	@discussion
+		Can be changed as part of an operation that modifies the contents.
+*/
+@property (nonatomic) uint32_t byteLength API_AVAILABLE(macosx(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /*! @property packetDescriptions
 	@abstract Access the buffer's array of packet descriptions, if any.

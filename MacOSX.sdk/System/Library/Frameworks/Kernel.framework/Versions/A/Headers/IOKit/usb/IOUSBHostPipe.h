@@ -204,6 +204,8 @@ protected:
     virtual IOReturn closeGated();
     virtual IOReturn destroyGated();
     virtual IOReturn abortGated(IOOptionBits options, IOReturn withError, IOService* forClient);
+    virtual UInt32 getOutstandingIO(IOService* forClient);
+    virtual UInt32 adjustOutstandingIO(IOService* forClient, SInt32 increment);
 
     // Protected pad slots for IOUSBHostIOSource overrides
     OSMetaClassDeclareReservedUnused(IOUSBHostPipe, 0);

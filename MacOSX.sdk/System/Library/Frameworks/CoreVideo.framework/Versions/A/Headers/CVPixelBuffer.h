@@ -80,6 +80,7 @@ enum
   kCVPixelFormatType_OneComponent8  = 'L008',     /* 8 bit one component, black is zero */
   kCVPixelFormatType_TwoComponent8  = '2C08',     /* 8 bit two component, black is zero */
   kCVPixelFormatType_30RGBLEPackedWideGamut = 'w30r', /* little-endian RGB101010, 2 MSB are zero, wide-gamut (384-895) */
+  kCVPixelFormatType_ARGB2101010LEPacked = 'l10r',     /* little-endian ARGB2101010 full-range ARGB */
   kCVPixelFormatType_OneComponent16Half  = 'L00h',     /* 16 bit one component IEEE half-precision float, 16-bit little-endian samples */
   kCVPixelFormatType_OneComponent32Float = 'L00f',     /* 32 bit one component IEEE float, 32-bit little-endian samples */
   kCVPixelFormatType_TwoComponent16Half  = '2C0h',     /* 16 bit two component IEEE half-precision float, 16-bit little-endian samples */
@@ -90,6 +91,16 @@ enum
   kCVPixelFormatType_14Bayer_RGGB        = 'rgg4',     /* Bayer 14-bit Little-Endian, packed in 16-bits, ordered R G R G... alternating with G B G B... */
   kCVPixelFormatType_14Bayer_BGGR        = 'bgg4',     /* Bayer 14-bit Little-Endian, packed in 16-bits, ordered B G B G... alternating with G R G R... */
   kCVPixelFormatType_14Bayer_GBRG        = 'gbr4',     /* Bayer 14-bit Little-Endian, packed in 16-bits, ordered G B G B... alternating with R G R G... */
+  kCVPixelFormatType_DisparityFloat16	 = 'hdis',     /* IEEE754-2008 binary16 (half float), describing the normalized shift when comparing two images. Units are 1/meters: ( pixelShift / (pixelFocalLength * baselineInMeters) ) */
+  kCVPixelFormatType_DisparityFloat32	 = 'fdis',     /* IEEE754-2008 binary32 float, describing the normalized shift when comparing two images. Units are 1/meters: ( pixelShift / (pixelFocalLength * baselineInMeters) ) */
+  kCVPixelFormatType_DepthFloat16	     = 'hdep',     /* IEEE754-2008 binary16 (half float), describing the depth (distance to an object) in meters */
+  kCVPixelFormatType_DepthFloat32	     = 'fdep',     /* IEEE754-2008 binary32 float, describing the depth (distance to an object) in meters */
+  kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange = 'x420', /* 2 plane YCbCr10 4:2:0, each 10 bits in the MSBs of 16bits, video-range (luma=[64,940] chroma=[64,960]) */
+  kCVPixelFormatType_422YpCbCr10BiPlanarVideoRange = 'x422', /* 2 plane YCbCr10 4:2:2, each 10 bits in the MSBs of 16bits, video-range (luma=[64,940] chroma=[64,960]) */
+  kCVPixelFormatType_444YpCbCr10BiPlanarVideoRange = 'x444', /* 2 plane YCbCr10 4:4:4, each 10 bits in the MSBs of 16bits, video-range (luma=[64,940] chroma=[64,960]) */
+  kCVPixelFormatType_420YpCbCr10BiPlanarFullRange  = 'xf20', /* 2 plane YCbCr10 4:2:0, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
+  kCVPixelFormatType_422YpCbCr10BiPlanarFullRange  = 'xf22', /* 2 plane YCbCr10 4:2:2, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
+  kCVPixelFormatType_444YpCbCr10BiPlanarFullRange  = 'xf44', /* 2 plane YCbCr10 4:4:4, each 10 bits in the MSBs of 16bits, full-range (Y range 0-1023) */
 };
 
 	
@@ -134,24 +145,24 @@ struct CVPlanarPixelBufferInfo_YCbCrBiPlanar {
 typedef struct CVPlanarPixelBufferInfo_YCbCrBiPlanar   CVPlanarPixelBufferInfo_YCbCrBiPlanar;
 
 #pragma mark BufferAttributeKeys
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPixelFormatTypeKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // A single CFNumber or a CFArray of CFNumbers (OSTypes)
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMemoryAllocatorKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFAllocatorRef
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferWidthKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferHeightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);			    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsLeftKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsTopKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);		    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsRightKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsBottomKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferBytesPerRowAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGBitmapContextCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);  // CFBoolean
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGImageCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);	    // CFBoolean
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPlaneAlignmentKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);		    // CFNumber
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfacePropertiesKey __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);     // CFDictionary; presence requests buffer allocation via IOSurface
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_6_0);	    // CFBoolean
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMetalCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_8_0);	    // CFBoolean
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLTextureCacheCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_NA);
-CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESTextureCacheCompatibilityKey __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_9_0);    
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPixelFormatTypeKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));		    // A single CFNumber or a CFArray of CFNumbers (OSTypes)
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMemoryAllocatorKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));		    // CFAllocatorRef
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferWidthKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));			    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferHeightKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));			    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsLeftKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsTopKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));		    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsRightKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferExtendedPixelsBottomKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferBytesPerRowAlignmentKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));	    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGBitmapContextCompatibilityKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));  // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferCGImageCompatibilityKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));	    // CFBoolean
+	CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLCompatibilityKey API_AVAILABLE(macosx(10.4), ios(4.0), tvos(9.0), watchos(4.0));   // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferPlaneAlignmentKey API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));		    // CFNumber
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferIOSurfacePropertiesKey API_AVAILABLE(macosx(10.6), ios(4.0), tvos(9.0), watchos(4.0));     // CFDictionary; presence requests buffer allocation via IOSurface
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESCompatibilityKey API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macosx) __WATCHOS_PROHIBITED;	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferMetalCompatibilityKey API_AVAILABLE(macosx(10.11), ios(8.0), tvos(9.0), watchos(4.0));	    // CFBoolean
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLTextureCacheCompatibilityKey API_AVAILABLE(macosx(10.11)) API_UNAVAILABLE(ios, tvos, watchos);
+CV_EXPORT const CFStringRef CV_NONNULL kCVPixelBufferOpenGLESTextureCacheCompatibilityKey API_AVAILABLE(ios(9.0), tvos(9.0)) API_UNAVAILABLE(macosx) __WATCHOS_PROHIBITED;
 
 /*!
     @typedef	CVPixelBufferRef
@@ -445,8 +456,10 @@ CV_EXPORT CVReturn CVPixelBufferFillExtendedPixels( CVPixelBufferRef CV_NONNULL 
 }
 #endif
 
-#if (COREVIDEO_SUPPORTS_IOSURFACE && ! TARGET_OS_IPHONE && ! TARGET_OS_EMBEDDED)
+#if COREVIDEO_SUPPORTS_IOSURFACE
+#if __has_include(<CoreVideo/CVPixelBufferIOSurface.h>)
 #include <CoreVideo/CVPixelBufferIOSurface.h>
+#endif
 #endif
 
 #endif

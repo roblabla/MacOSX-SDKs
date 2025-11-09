@@ -36,11 +36,15 @@ WK_EXTERN NSString * const WKErrorDomain API_AVAILABLE(macosx(10.10), ios(8.0));
 
 /*! @enum WKErrorCode
  @abstract Constants used by NSError to indicate errors in the WebKit domain.
- @constant WKErrorUnknown                           Indicates that an unknown error occurred.
- @constant WKErrorWebContentProcessTerminated       Indicates that the Web Content process was terminated.
- @constant WKErrorWebViewInvalidated                Indicates that the WKWebView was invalidated.
- @constant WKErrorJavaScriptExceptionOccurred       Indicates that a JavaScript exception occurred.
- @constant WKErrorJavaScriptResultTypeIsUnsupported Indicates that the result of JavaScript execution could not be returned.
+ @constant WKErrorUnknown                              Indicates that an unknown error occurred.
+ @constant WKErrorWebContentProcessTerminated          Indicates that the Web Content process was terminated.
+ @constant WKErrorWebViewInvalidated                   Indicates that the WKWebView was invalidated.
+ @constant WKErrorJavaScriptExceptionOccurred          Indicates that a JavaScript exception occurred.
+ @constant WKErrorJavaScriptResultTypeIsUnsupported    Indicates that the result of JavaScript execution could not be returned.
+ @constant WKErrorContentRuleListStoreCompileFailed    Indicates that compiling a WKUserContentRuleList failed.
+ @constant WKErrorContentRuleListStoreLookUpFailed     Indicates that looking up a WKUserContentRuleList failed.
+ @constant WKErrorContentRuleListStoreRemoveFailed     Indicates that removing a WKUserContentRuleList failed.
+ @constant WKErrorContentRuleListStoreVersionMismatch  Indicates that the WKUserContentRuleList version did not match the latest.
  */
 typedef NS_ENUM(NSInteger, WKErrorCode) {
     WKErrorUnknown = 1,
@@ -48,6 +52,10 @@ typedef NS_ENUM(NSInteger, WKErrorCode) {
     WKErrorWebViewInvalidated,
     WKErrorJavaScriptExceptionOccurred,
     WKErrorJavaScriptResultTypeIsUnsupported API_AVAILABLE(macosx(10.11), ios(9.0)),
+    WKErrorContentRuleListStoreCompileFailed API_AVAILABLE(macosx(10.13), ios(11.0)),
+    WKErrorContentRuleListStoreLookUpFailed API_AVAILABLE(macosx(10.13), ios(11.0)),
+    WKErrorContentRuleListStoreRemoveFailed API_AVAILABLE(macosx(10.13), ios(11.0)),
+    WKErrorContentRuleListStoreVersionMismatch API_AVAILABLE(macosx(10.13), ios(11.0)),
 } API_AVAILABLE(macosx(10.10), ios(8.0));
 
 NS_ASSUME_NONNULL_END

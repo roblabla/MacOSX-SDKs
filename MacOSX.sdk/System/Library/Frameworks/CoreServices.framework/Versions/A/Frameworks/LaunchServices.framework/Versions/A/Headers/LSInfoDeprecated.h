@@ -15,6 +15,8 @@
 #ifndef __LSINFODEPRECATED__
 #define __LSINFODEPRECATED__
 
+#include <LaunchServices/LSInfo.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif

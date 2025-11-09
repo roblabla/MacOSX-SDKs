@@ -55,7 +55,9 @@ NS_CLASS_AVAILABLE_MAC(10_6)
         void                    *_interfaceStore;
     
         BOOL                    _lastPowerState;
-    
+
+		dispatch_queue_t		_eventQueue;
+
         NSXPCConnection         *_xpcConnection;
 }
 
@@ -353,9 +355,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @abstract 
  * Sets the Wi-Fi interface power state.
- *
- * @discussion
- * Requires the <i>com.apple.wifi.set_power</i> entitlement.
  */
 - (BOOL)setPower:(BOOL)power error:(out NSError **)error NS_AVAILABLE_MAC(10_6);
 
@@ -379,7 +378,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion 
  * Setting the channel while the interface is associated to a Wi-Fi network is not permitted.
- * Requires the <i>com.apple.wifi.set_channel</i> entitlement.
  */
 - (BOOL)setWLANChannel:(CWChannel *)channel error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
@@ -402,9 +400,8 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @abstract 
  * Sets the Wi-Fi interface pairwise master key (PMK).
  *
- * @discussion 
+ * @discussion
  * The specified key must be exactly 32 octets. 
- * Requires the <i>com.apple.wifi.set_pmk</i> entitlement.
  */
 - (BOOL)setPairwiseMasterKey:(nullable NSData *)key error:(out NSError **)error NS_AVAILABLE_MAC(10_6);
 
@@ -430,9 +427,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @abstract 
  * Sets the Wi-Fi interface WEP key.
- *
- * @discussion
- * Requires the <i>com.apple.wifi.set_wep_key</i> entitlement.
  */
 - (BOOL)setWEPKey:(nullable NSData *)key flags:(CWCipherKeyFlags)flags index:(NSInteger)index error:(out NSError **)error NS_AVAILABLE_MAC(10_6);
 
@@ -458,9 +452,34 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion 
  * This method will block for the duration of the scan.
- * Requires the <i>com.apple.wifi.scan</i> entitlement.
  */
 - (nullable NSSet<CWNetwork *> *)scanForNetworksWithSSID:(nullable NSData *)ssid error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @method
+ *
+ * @param ssid
+ * Probe request SSID.
+ * Pass an SSID to perform a directed scan for hidden Wi-Fi networks.
+ * This parameter is optional.
+ *
+ * @param includeHidden
+ * Indicate whether or not hidden networks should not be filtered from the returned scan results.
+ *
+ * @param error
+ * An NSError object passed by reference, which upon return will contain the error if an error occurs.
+ * This parameter is optional.
+ *
+ * @result
+ * An NSSet of CWNetwork objects, or nil if an error occurs.
+ *
+ * @abstract
+ * Performs a scan for Wi-Fi networks and returns scan results to the caller.
+ *
+ * @discussion
+ * This method will block for the duration of the scan.
+ */
+- (nullable NSSet<CWNetwork *> *)scanForNetworksWithSSID:(nullable NSData *)ssid includeHidden:(BOOL)includeHidden error:(out NSError **)error NS_AVAILABLE_MAC(10_13);
 
 /*!
  * @method
@@ -482,9 +501,34 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * This method will block for the duration of the scan.
- * Requires the <i>com.apple.wifi.scan</i> entitlement.
  */
 - (nullable NSSet<CWNetwork *> *)scanForNetworksWithName:(nullable NSString *)networkName error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
+
+/*!
+ * @method
+ *
+ * @param networkName
+ * Probe request SSID, encoded as an UTF-8 string.
+ * Pass a networkName to perform a directed scan for hidden Wi-Fi networks.
+ * This parameter is optional.
+ *
+ * @param includeHidden
+ * Indicate whether or not hidden networks should not be filtered from the returned scan results.
+ *
+ * @param error
+ * An NSError object passed by reference, which upon return will contain the error if an error occurs.
+ * This parameter is optional.
+ *
+ * @result
+ * An NSSet of CWNetwork objects, or nil if an error occurs.
+ *
+ * @abstract
+ * Performs a scan for Wi-Fi networks and returns scan results to the caller.
+ *
+ * @discussion
+ * This method will block for the duration of the scan.
+ */
+- (nullable NSSet<CWNetwork *> *)scanForNetworksWithName:(nullable NSString *)networkName includeHidden:(BOOL)includeHidden error:(out NSError **)error NS_AVAILABLE_MAC(10_13);
 
 /*! @functiongroup Joining a Network */
 
@@ -509,7 +553,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion 
  * This method will block for the duration of the association.
- * Requires the <i>com.apple.wifi.associate</i> entitlement.
  */
 - (BOOL)associateToNetwork:(CWNetwork *)network password:(nullable NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
@@ -520,7 +563,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * Disassociates from the current Wi-Fi network.
  *
  * @discussion
- * Requires the <i>com.apple.wifi.associate</i> entitlement.
  */
 - (void)disassociate NS_AVAILABLE_MAC(10_6);
 
@@ -551,7 +593,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * This method will block for the duration of the association.
- * Requires the <i>com.apple.wifi.associate</i> entitlement.
  */
 - (BOOL)associateToEnterpriseNetwork:(CWNetwork *)network identity:(nullable SecIdentityRef)identity username:(nullable NSString *)username password:(nullable NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 
@@ -582,9 +623,6 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @abstract
  * Creates a computer-to-computer (IBSS) network.
- *
- * @discussion
- * Requires the <i>com.apple.wifi.ibss</i> entitlement.
  */
 - (BOOL)startIBSSModeWithSSID:(NSData *)ssidData security:(CWIBSSModeSecurity)security channel:(NSUInteger)channel password:(nullable NSString *)password error:(out NSError **)error NS_AVAILABLE_MAC(10_7);
 

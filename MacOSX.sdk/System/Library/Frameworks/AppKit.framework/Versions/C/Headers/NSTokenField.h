@@ -1,7 +1,7 @@
 /*
 	NSTokenField.h
 	Application Kit
-	Copyright (c) 2004-2016, Apple Inc.
+	Copyright (c) 2004-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -34,7 +34,7 @@ NS_ASSUME_NONNULL_BEGIN
 // editing string = display string = represented object
 - (nullable NSString *)tokenField:(NSTokenField *)tokenField displayStringForRepresentedObject:(id)representedObject;
 - (nullable NSString *)tokenField:(NSTokenField *)tokenField editingStringForRepresentedObject:(id)representedObject;
-- (id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString: (NSString *)editingString;
+- (nullable id)tokenField:(NSTokenField *)tokenField representedObjectForEditingString:(NSString *)editingString;
 
 // We put the string on the pasteboard before calling this delegate method.
 // By default, we write the NSStringPboardType as well as an array of NSStrings.
@@ -67,17 +67,17 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /* For apps linked against 10.12, this property has zeroing weak memory semantics. When linked against an older SDK, or with objects that do not support zeroing weak references this falls back to having `assign` semantics. */
-@property (nullable, assign) id<NSTokenFieldDelegate> delegate;
+@property (nullable, weak) id<NSTokenFieldDelegate> delegate;
 
 /* Sets the default token style used for each new token.  However, if the delegate implements tokenField:styleForRepresentedObject:, that return value will be used instead.
 */
 @property NSTokenStyle tokenStyle;
 
 @property NSTimeInterval completionDelay;
-+ (NSTimeInterval)defaultCompletionDelay;
+@property (class, readonly) NSTimeInterval defaultCompletionDelay;
 
 @property (null_resettable, copy) NSCharacterSet *tokenizingCharacterSet;
-+ (NSCharacterSet *)defaultTokenizingCharacterSet;
+@property (class, readonly, copy) NSCharacterSet *defaultTokenizingCharacterSet;
 
 @end
 

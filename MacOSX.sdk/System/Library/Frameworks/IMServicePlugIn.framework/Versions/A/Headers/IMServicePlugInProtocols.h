@@ -36,7 +36,7 @@
     @param      serviceApplication  Your service application interface, used
                 to communicate upwards to Messages.
 */
-- (id) initWithServiceApplication:(id<IMServiceApplication>)serviceApplication;
+- (id) initWithServiceApplication:(id<IMServiceApplication>)serviceApplication NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -54,7 +54,7 @@
                 IMPasswordAccountSetting       NSString - the password
                 IMUsesSSLAccountSetting        NSNumber - (YES = use SSL, NO = do not use SSL)
 */
-- (oneway void) updateAccountSettings:(NSDictionary *)accountSettings;
+- (oneway void) updateAccountSettings:(NSDictionary *)accountSettings NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -66,7 +66,7 @@
                 Messages will show your service in the "Connecting" state until
                 -plugInDidLogIn is called on the service application.
 */
-- (oneway void) login;
+- (oneway void) login NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -78,7 +78,7 @@
                 Messages will show your service in the "Disconnecting" state until
                 -plugInDidLogOutWithError: is called on the service application.
 */
-- (oneway void) logout;
+- (oneway void) logout NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 
@@ -104,7 +104,7 @@
     @discussion When the IMServicePlugIn instance calls this method on the service application, Messages
                 changes the connection state from "Connecting" to "Connected"
 */
-- (oneway void) plugInDidLogIn;
+- (oneway void) plugInDidLogIn NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -119,7 +119,7 @@
                            IMAccountSettingServerHost associated with the account becomes reachable.
                            reconnect should only be set to YES when a network error causes a log out.
 */
-- (oneway void) plugInDidLogOutWithError:(NSError *)error reconnect:(BOOL)reconnect;
+- (oneway void) plugInDidLogOutWithError:(NSError *)error reconnect:(BOOL)reconnect NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -129,7 +129,7 @@
                  the login process, Messages will re-request the user name and password. It will then call
                  updateAccountSettings: with the new settings or logout if the user cancels.
 */
-- (oneway void) plugInDidFailToAuthenticate;
+- (oneway void) plugInDidFailToAuthenticate NS_DEPRECATED_MAC(10_7, 10_13);
 
 
 /*!
@@ -162,7 +162,7 @@
                         IMHandlePropertyPictureIdentifier - A unique identifier for the handle's picture
                         IMHandlePropertyCapabilities      - The capabilities of the handle                
 */
-- (oneway void) plugInDidUpdateProperties:(NSDictionary *)changes ofHandle:(NSString *)handle;
+- (oneway void) plugInDidUpdateProperties:(NSDictionary *)changes ofHandle:(NSString *)handle NS_DEPRECATED_MAC(10_7, 10_13);
 
 @end
 

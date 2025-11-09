@@ -1042,7 +1042,7 @@
 /* #undef HAVE_SYS_POOL_H */
 
 /* Define to 1 if you have the <sys/proc.h> header file. */
-/* #undef HAVE_SYS_PROC_H */
+#define HAVE_SYS_PROC_H 1
 
 /* Define to 1 if you have the <sys/protosw.h> header file. */
 #define HAVE_SYS_PROTOSW_H 1
@@ -1262,7 +1262,7 @@
 #define NETSNMP_CAN_USE_SYSCTL 1
 
 /* configure options specified */
-#define NETSNMP_CONFIGURE_OPTIONS " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/etc' '--with-install-prefix=/Library/Caches/com.apple.xbs/Binaries/net_snmp/net_snmp-153~518/Root' '--with-default-snmp-version=2' '--with-persistent-directory=/var/db/net-snmp' '--with-defaults' '--without-rpm' '--with-sys-contact=postmaster@example.com' '--with-mib-modules=host ucd-snmp/diskio ucd-snmp/loadave ' '--disable-static' '--enable-ipv6' '--with-perl-modules' '--disable-perl-cc-checks' '--disable-embedded-perl' '--datarootdir=/usr/share' '--with-openssl=/usr/libressl/' '--without-kmem-usage' 'CC=/Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.12.xctoolchain/usr/bin/cc' 'CFLAGS=-arch x86_64 -arch i386 -g -Os -pipe -DBUILD=153 -DMACOSX_DEPLOYMENT_TARGET=10.12 -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.Internal.sdk/System/Library/PrivateFrameworks/ -F/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.Internal.sdk/System/Library/Frameworks/ -I/usr/local/libressl/include' 'LDFLAGS=-arch x86_64 -arch i386            '"
+#define NETSNMP_CONFIGURE_OPTIONS " '--prefix=/usr' '--mandir=/usr/share/man' '--infodir=/usr/share/info' '--disable-dependency-tracking' '--sysconfdir=/etc' '--with-install-prefix=/BuildRoot/Library/Caches/com.apple.xbs/Binaries/net_snmp/install/TempContent/Root' '--with-default-snmp-version=2' '--with-persistent-directory=/var/db/net-snmp' '--with-defaults' '--without-rpm' '--with-sys-contact=postmaster@example.com' '--with-mib-modules=host ucd-snmp/diskio ucd-snmp/loadave ' '--disable-static' '--enable-ipv6' '--with-perl-modules' '--disable-perl-cc-checks' '--disable-embedded-perl' '--datarootdir=/usr/share' '--with-openssl=/usr/libressl/' '--without-kmem-usage' 'CC=/BuildRoot/Applications/Xcode.app/Contents/Developer/Toolchains/OSX10.13.xctoolchain/usr/bin/cc' 'CFLAGS=-arch x86_64 -arch i386 -g -Os -pipe -DBUILD=156 -DMACOSX_DEPLOYMENT_TARGET=10.13 -F/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.Internal.sdk/System/Library/PrivateFrameworks/ -F/BuildRoot/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.13.Internal.sdk/System/Library/Frameworks/ -I/usr/local/libressl/include' 'LDFLAGS=-arch x86_64 -arch i386            '"
 
 /* default location to look for mibs to load using the above tokens and/or
    those in the MIBS envrionment variable */
@@ -1669,7 +1669,7 @@
 #define NETSNMP_MAX_PERSISTENT_BACKUPS 10
 
 /* define the system type include file here */
-#define NETSNMP_SYSTEM_INCLUDE_FILE "net-snmp/system/darwin16.h"
+#define NETSNMP_SYSTEM_INCLUDE_FILE "net-snmp/system/darwin17.h"
 
 /* define the machine (cpu) type include file here */
 #define NETSNMP_MACHINE_INCLUDE_FILE "net-snmp/machine/generic.h"

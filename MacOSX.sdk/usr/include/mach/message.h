@@ -648,6 +648,7 @@ typedef integer_t mach_msg_option_t;
 #define MACH_SEND_NOIMPORTANCE  0x00040000      /* msg won't carry importance */
 #define MACH_SEND_NODENAP	MACH_SEND_NOIMPORTANCE
 #define MACH_SEND_IMPORTANCE	0x00080000	/* msg carries importance - kernel only */
+#define MACH_SEND_SYNC_OVERRIDE	0x00100000	/* msg should do sync ipc override */
 
 
 #define MACH_RCV_TIMEOUT	0x00000100	/* timeout value applies to receive */	
@@ -655,6 +656,7 @@ typedef integer_t mach_msg_option_t;
 #define MACH_RCV_INTERRUPT	0x00000400	/* don't restart interrupted receive */
 #define MACH_RCV_VOUCHER	0x00000800	/* willing to receive voucher port */
 #define MACH_RCV_OVERWRITE	0x00001000	/* scatter receive (deprecated) */
+#define MACH_RCV_SYNC_WAIT	0x00004000	/* sync waiter waiting for rcv */
 
 
 /* 

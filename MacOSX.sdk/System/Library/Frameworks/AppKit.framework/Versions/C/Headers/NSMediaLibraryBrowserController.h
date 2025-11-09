@@ -1,7 +1,7 @@
 /* 
     NSMediaLibraryBrowserController.h
     Application Kit
-    Copyright (c) 2012-2016, Apple Inc.
+    Copyright (c) 2012-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -48,7 +48,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @property NSRect frame;
 @property NSMediaLibrary mediaLibraries;
 
-+ (NSMediaLibraryBrowserController*)sharedMediaLibraryBrowserController;
+@property (class, readonly, strong) NSMediaLibraryBrowserController *sharedMediaLibraryBrowserController;
 - (IBAction)togglePanel:(nullable id)sender;
 
 @end

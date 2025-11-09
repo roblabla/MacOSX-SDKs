@@ -36,6 +36,25 @@ NS_CLASS_AVAILABLE(NA, 9_0)
  * @discussion The flow's HTTP request URL. Will be nil if the flow did not originate from WebKit.
  */
 @property (readonly, nullable) NSURL *URL NS_AVAILABLE(NA, 9_0);
+
+/*!
+ * @property sourceAppUniqueIdentifier
+ * @discussion A byte string that uniquely identifies the binary for each build of the source application of the flow.
+ */
+@property (readonly, nullable) NSData *sourceAppUniqueIdentifier NS_AVAILABLE(NA, 11_0);
+
+/*!
+ * @property sourceAppIdentifier
+ * @discussion A string containing the identifier of the source application of the flow. This identifier stays the same for all versions and builds of the application. This identifier is unique among all applications.
+ */
+@property (readonly, nullable) NSString *sourceAppIdentifier NS_AVAILABLE(NA, 11_0);
+
+/*!
+ * @property sourceAppVersion
+ * @discussion The short version string of the source application. Will be nil if the app info is unavailable.
+ */
+@property (readonly, nullable) NSString *sourceAppVersion NS_AVAILABLE(NA, 11_0);
+
 @end
 
 /*!
@@ -48,13 +67,13 @@ NS_CLASS_AVAILABLE(NA, 9_0)
 @interface NEFilterBrowserFlow :  NEFilterFlow <NSSecureCoding,NSCopying>
 /*!
  *	@property request
- *	@discussion The NSURLRequest of the flow.
+ *	@discussion The NSURLRequest of the flow. This property is always nil for the control providers.
  */
-@property (readonly) NSURLRequest *request NS_AVAILABLE(10_11, 9_0);
+@property (readonly, nullable) NSURLRequest *request NS_AVAILABLE(10_11, 9_0);
 
 /*!
  *	@property response
- *	@discussion The NSURLResponse of the flow. This will be nil until the request is sent to the server and the response headers are received.
+ *	@discussion The NSURLResponse of the flow. This will be nil until the request is sent to the server and the response headers are received. And this property is always nil for the control providers.
  */
 @property (readonly, nullable) NSURLResponse *response NS_AVAILABLE(10_11, 9_0);
 /*!

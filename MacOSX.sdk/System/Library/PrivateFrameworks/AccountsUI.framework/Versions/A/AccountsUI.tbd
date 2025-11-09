@@ -1,14 +1,13 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E9D507B3-047D-35AA-BFC4-6B478220F25E' ]
+uuids:           [ 'x86_64: 4DACE3B5-F201-3A4A-B30B-F4B92BAB9068' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AccountsUI.framework/Versions/A/AccountsUI
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ACUICreateAccountInPreferencePane, _ACUIIsNetworkAvailable, 
                        _ACUIIsRunningInternetAccountsPref, _ACUILog, _ACUIOpenPreferencePaneWithArgs, 
-                       _ACUIRevealAccountInPreferencePane, _AccountsUIVersionNumber, 
+                       _ACUIRevealAccountInPreferencePane, _ACUIUID, _AccountsUIVersionNumber, 
                        _AccountsUIVersionString ]
     objc-classes:    [ _ACUIAccountDataclass, _ACUIAccountDataclassCellView, _ACUIAccountDataclassShareMenu, 
                        _ACUIAccountDetailsViewController, _ACUIAccountInfoViewController, 

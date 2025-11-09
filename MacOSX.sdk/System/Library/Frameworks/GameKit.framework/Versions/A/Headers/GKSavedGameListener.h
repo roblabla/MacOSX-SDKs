@@ -2,9 +2,13 @@
 //  GKSavedGameListener.h
 //  Game Center
 //
-//  Copyright 2010-2016 Apple Inc. All rights reserved.
+//  Copyright 2010-2017 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/NSObjCRuntime.h> // NS_ASSUME_NONNULL_BEGIN
+#import <objc/NSObject.h> // NSObject
+
+@class NSArray;
 @class GKPlayer;
 @class GKSavedGame;
 

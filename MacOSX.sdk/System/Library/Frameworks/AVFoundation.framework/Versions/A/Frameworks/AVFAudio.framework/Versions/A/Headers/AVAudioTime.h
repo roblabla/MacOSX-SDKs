@@ -91,6 +91,9 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 		and self is another timestamp where only one of the two is valid, this method
 		returns a new AVAudioTime copied from self and where any additional valid fields provided by
 		the anchor are also valid.
+ 
+		Note that the anchorTime must have both host and sample time valid, and self must have
+		sample rate and at least one of host or sample time valid. Otherwise this method returns nil.
 
 <pre>
 // time0 has a valid audio sample representation, but no host time representation.
@@ -101,7 +104,7 @@ AVAudioTime *anchor = [player playerTimeForNodeTime: player.lastRenderTime];
 AVAudioTime *fullTime0 = [time0 extrapolateTimeFromAnchor: anchor];
 </pre>
 */
-- (AVAudioTime *)extrapolateTimeFromAnchor:(AVAudioTime *)anchorTime;
+- (nullable AVAudioTime *)extrapolateTimeFromAnchor:(AVAudioTime *)anchorTime;
 
 
 /*! @property hostTimeValid

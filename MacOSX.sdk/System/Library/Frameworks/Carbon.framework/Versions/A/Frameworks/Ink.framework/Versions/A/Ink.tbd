@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 3F883447-0C91-3D72-A3F8-70A6A2E1EC72', 'x86_64: B44BA36D-7549-3EB2-8CF6-E171885194FB' ]
+uuids:           [ 'i386: 8D4A0C6B-DEFD-3C52-A3EA-2A7D3FC276FB', 'x86_64: A5193A86-7F78-3983-A0FE-03221D1F2968' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Carbon.framework/Versions/A/Frameworks/Ink.framework/Versions/A/Ink
-current-version: 219.0
-objc-constraint: none
+current-version: 220
 parent-umbrella: Carbon
 exports:         
   - archs:           [ i386, x86_64 ]

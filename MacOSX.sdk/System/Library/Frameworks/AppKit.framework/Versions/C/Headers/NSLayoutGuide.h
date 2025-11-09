@@ -1,14 +1,14 @@
 /*
 	NSLayoutGuide.h
 	Application Kit
-	Copyright (c) 2015-2016, Apple Inc.
+	Copyright (c) 2015-2017, Apple Inc.
 	All rights reserved.
  */
 
 #import <AppKit/NSView.h>
 #import <AppKit/NSLayoutConstraint.h>
 #import <AppKit/NSLayoutAnchor.h>
-
+#import <AppKit/NSUserInterfaceItemIdentification.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @class NSISVariable;
@@ -19,32 +19,31 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @interface NSLayoutGuide : NSObject <NSCoding, NSUserInterfaceItemIdentification>
 {
     @private
-    NSView       *_owningView;
+    id            _owningView;
     NSString     *_identifier;
     NSISVariable *_minYVariable;
     NSISVariable *_minXVariable;
     NSISVariable *_widthVariable;
     NSISVariable *_heightVariable;
-    NSLayoutXAxisAnchor *_left;
-    NSLayoutXAxisAnchor *_right;
-    NSLayoutXAxisAnchor *_leading;
-    NSLayoutXAxisAnchor *_trailing;
-    NSLayoutYAxisAnchor *_top;
-    NSLayoutYAxisAnchor *_bottom;
-    NSLayoutDimension   *_width;
-    NSLayoutDimension   *_height;
-    NSLayoutXAxisAnchor *_centerX;
-    NSLayoutYAxisAnchor *_centerY;
+    __weak NSLayoutXAxisAnchor *_left;
+    __weak NSLayoutXAxisAnchor *_right;
+    __weak NSLayoutXAxisAnchor *_leading;
+    __weak NSLayoutXAxisAnchor *_trailing;
+    __weak NSLayoutYAxisAnchor *_top;
+    __weak NSLayoutYAxisAnchor *_bottom;
+    __weak NSLayoutDimension   *_width;
+    __weak NSLayoutDimension   *_height;
+    __weak NSLayoutXAxisAnchor *_centerX;
+    __weak NSLayoutYAxisAnchor *_centerY;
     
     NSRect  _frame;
     id _aux;
     id  _reserved2 __unused;
 
     unsigned int    _shouldBeArchived:1;
-    unsigned int    _weakHelper:1;
     unsigned int    _frameNeedsUpdate:1;
     unsigned int    _frameIsObserved:1;
-    unsigned int    _reservedFlags:28 __unused;
+    unsigned int    _reservedFlags:29 __unused;
 }
 
 
@@ -55,7 +54,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 @property (weak, nullable) NSView *owningView;
 
 // For ease of debugging.  'NS' prefix is reserved for system-created layout guides.
-@property (copy) NSString *identifier;
+@property (copy) NSUserInterfaceItemIdentifier identifier;
 
 
 /* 

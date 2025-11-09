@@ -2,7 +2,7 @@
  *  CTLine.h
  *  CoreText
  *
- *  Copyright (c) 2003-2015 Apple Inc. All rights reserved.
+ *  Copyright (c) 2003-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -74,7 +74,7 @@ typedef CF_OPTIONS(CFOptionFlags, CTLineBoundsOptions) {
     kCTLineBoundsUseHangingPunctuation      = 1 << 2,
     kCTLineBoundsUseGlyphPathBounds         = 1 << 3,
     kCTLineBoundsUseOpticalBounds           = 1 << 4,
-    kCTLineBoundsIncludeLanguageExtents CT_ENUM_AVAILABLE(10_11, 8_0) = 1 << 5,
+    kCTLineBoundsIncludeLanguageExtents     = 1 << 5,
 };
 
 
@@ -109,7 +109,7 @@ typedef CF_ENUM(uint32_t, CTLineTruncationType) {
     @abstract   Returns the CFType of the line object
 */
 
-CFTypeID CTLineGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
+CFTypeID CTLineGetTypeID( void ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -134,7 +134,7 @@ CFTypeID CTLineGetTypeID( void ) CT_AVAILABLE(10_5, 3_2);
 */
 
 CTLineRef CTLineCreateWithAttributedString(
-    CFAttributedStringRef attrString ) CT_AVAILABLE(10_5, 3_2);
+    CFAttributedStringRef attrString ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -170,7 +170,7 @@ CTLineRef __nullable CTLineCreateTruncatedLine(
     CTLineRef line,
     double width,
     CTLineTruncationType truncationType,
-    CTLineRef __nullable truncationToken ) CT_AVAILABLE(10_5, 3_2);
+    CTLineRef __nullable truncationToken ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -200,7 +200,7 @@ CTLineRef __nullable CTLineCreateTruncatedLine(
 CTLineRef __nullable CTLineCreateJustifiedLine(
     CTLineRef line,
     CGFloat justificationFactor,
-    double justificationWidth ) CT_AVAILABLE(10_5, 3_2);
+    double justificationWidth ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -221,7 +221,7 @@ CTLineRef __nullable CTLineCreateJustifiedLine(
 */
 
 CFIndex CTLineGetGlyphCount(
-    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
+    CTLineRef line ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -235,7 +235,7 @@ CFIndex CTLineGetGlyphCount(
 */
 
 CFArrayRef CTLineGetGlyphRuns(
-    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
+    CTLineRef line ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -252,7 +252,7 @@ CFArrayRef CTLineGetGlyphRuns(
 */
 
 CFRange CTLineGetStringRange(
-    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
+    CTLineRef line ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -279,7 +279,7 @@ CFRange CTLineGetStringRange(
 double CTLineGetPenOffsetForFlush(
     CTLineRef line,
     CGFloat flushFactor,
-    double flushWidth ) CT_AVAILABLE(10_5, 3_2);
+    double flushWidth ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -288,9 +288,10 @@ double CTLineGetPenOffsetForFlush(
 
     @discussion This is a convenience call, since the line could be drawn
                 run-by-run by getting the glyph runs and accessing the glyphs out
-                of them. Note that this call may leave the graphics context in
-                any state and does not flush the context after the draw
-                operation.
+                of them. This call may leave the graphics context in any state and
+                does not flush the context after drawing. This call also expects
+                a text matrix with `y` values increasing from bottom to top; a
+                flipped text matrix may result in misplaced diacritics.
 
     @param      line
                 The line that you want to draw.
@@ -301,7 +302,7 @@ double CTLineGetPenOffsetForFlush(
 
 void CTLineDraw(
     CTLineRef line,
-    CGContextRef context ) CT_AVAILABLE(10_5, 3_2);
+    CGContextRef context ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -341,7 +342,7 @@ double CTLineGetTypographicBounds(
     CTLineRef line,
     CGFloat * __nullable ascent,
     CGFloat * __nullable descent,
-    CGFloat * __nullable leading ) CT_AVAILABLE(10_5, 3_2);
+    CGFloat * __nullable leading ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -362,7 +363,7 @@ double CTLineGetTypographicBounds(
 
 CGRect CTLineGetBoundsWithOptions(
     CTLineRef line,
-    CTLineBoundsOptions options ) CT_AVAILABLE(10_8, 6_0);
+    CTLineBoundsOptions options ) CT_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -382,7 +383,7 @@ CGRect CTLineGetBoundsWithOptions(
 */
 
 double CTLineGetTrailingWhitespaceWidth(
-    CTLineRef line ) CT_AVAILABLE(10_5, 3_2);
+    CTLineRef line ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -414,7 +415,7 @@ double CTLineGetTrailingWhitespaceWidth(
 
 CGRect CTLineGetImageBounds(
     CTLineRef line,
-    CGContextRef __nullable context ) CT_AVAILABLE(10_5, 3_2);
+    CGContextRef __nullable context ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /* --------------------------------------------------------------------------- */
@@ -446,7 +447,7 @@ CGRect CTLineGetImageBounds(
 
 CFIndex CTLineGetStringIndexForPosition(
     CTLineRef line,
-    CGPoint position ) CT_AVAILABLE(10_5, 3_2);
+    CGPoint position ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -484,7 +485,7 @@ CFIndex CTLineGetStringIndexForPosition(
 CGFloat CTLineGetOffsetForStringIndex(
     CTLineRef line,
     CFIndex charIndex,
-    CGFloat * __nullable secondaryOffset ) CT_AVAILABLE(10_5, 3_2);
+    CGFloat * __nullable secondaryOffset ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 
 
 #if defined(__BLOCKS__)
@@ -501,7 +502,7 @@ CGFloat CTLineGetOffsetForStringIndex(
 
 void CTLineEnumerateCaretOffsets(
     CTLineRef line,
-    void (^block)(double offset, CFIndex charIndex, bool leadingEdge, bool* stop) ) CT_AVAILABLE(10_11, 9_0);
+    void (^block)(double offset, CFIndex charIndex, bool leadingEdge, bool* stop) ) CT_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
 
 #endif // defined(__BLOCKS__)
 

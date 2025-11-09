@@ -1,25 +1,24 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 38ADC853-88DA-30C4-998A-040A502C2442' ]
+uuids:           [ 'x86_64: 67309F61-CE4C-38EB-9B22-04793939202C' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/CloudDocsDaemon.framework/Versions/A/CloudDocsDaemon
-current-version: 485.12
-compatibility-version: 0.0
-objc-constraint: none
+current-version: 550
+compatibility-version: 0
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _BRCBundleIDForProcessIdentifier, _BRCCopyQuarantineInfo, 
                        _BRCExecutableNameForProcessIdentifier, _BRCExtensionErrorPayloadReadFrom, 
-                       _BRCItemFieldsPrettyPrint, _BRCItemIDDocuments, _BRCItemIDZoneRoot, 
-                       _BRCPrettyPrintBitmapWithContext, _BRCPrettyPrintEnumWithContext, 
-                       _BRCSharingNoOverrideString, _BRCSizeInfoCompletedUnitCountKey, 
-                       _BRCSizeInfoTotalUnitCountKey, _BRCSyncContextDidBecomeBackground, 
-                       _BRCSyncContextDidBecomeForeground, _BRFieldCKInfoReadFrom, 
-                       _BRFieldFinderTagsReadFrom, _BRFieldPkgHeaderReadFrom, _BRFieldPkgItemReadFrom, 
-                       _BRFieldPkgLocalItemReadFrom, _BRFieldUserIdentityReadFrom, 
+                       _BRCFSSchedulerBaseDidUpdateHasWorkNotification, _BRCItemFieldsPrettyPrint, 
+                       _BRCItemIDDocuments, _BRCItemIDZoneRoot, _BRCPrettyPrintBitmapWithContext, 
+                       _BRCPrettyPrintEnumWithContext, _BRCSharingNoOverrideString, 
+                       _BRCSizeInfoCompletedUnitCountKey, _BRCSizeInfoTotalUnitCountKey, 
+                       _BRCSyncContextDidBecomeBackground, _BRCSyncContextDidBecomeForeground, 
+                       _BRFieldCKInfoReadFrom, _BRFieldFinderTagsReadFrom, _BRFieldPkgHeaderReadFrom, 
+                       _BRFieldPkgItemReadFrom, _BRFieldPkgLocalItemReadFrom, _BRFieldUserIdentityReadFrom, 
                        _BRFieldXattrBlobReadFrom, _BRFieldXattrReadFrom, _brc_task_tracker_async_with_logs, 
-                       _brc_task_tracker_cancel, _brc_task_tracker_create, _brc_task_tracker_wait, 
-                       _brc_task_tracker_wait_timeout, _brtest_setFSEventProcessingState, 
+                       _brc_task_tracker_cancel, _brc_task_tracker_create, _brc_task_tracker_is_cancelled, 
+                       _brc_task_tracker_wait, _brc_task_tracker_wait_timeout, _brtest_setFSEventProcessingState, 
                        _kBRCSyncThrottlePredicateFormatKey, _kBRCSyncThrottleSupportedPlatformsKey, 
                        _kBRCSyncThrottlesKey, _kBRCThrottleForgetAfter, _kBRCThrottleGiveUpAfter, 
                        _kBRCThrottleMaxElementCount, _kBRCThrottleStartAfter, _kBRCThrottleWaitAtLeast, 
@@ -29,20 +28,20 @@ exports:
                        _kBRRecordIDPrefixAlias, _kBRRecordIDPrefixContent, _kBRRecordIDPrefixDirectoryStructure, 
                        _kBRRecordIDPrefixDocumentStructure, _kBRRecordIDPrefixFinderBookmark, 
                        _kBRRecordIDPrefixShareAlias, _kBRRecordIDPrefixSymlink, _kBRRecordKeyBirthtime, 
-                       _kBRRecordKeyDontLearnPkgExtension, _kBRRecordKeyFileContent, 
-                       _kBRRecordKeyFilenameBaseHash, _kBRRecordKeyFilenameBounceNo, 
+                       _kBRRecordKeyDontLearnPkgExtension, _kBRRecordKeyFavoriteRank, 
+                       _kBRRecordKeyFileContent, _kBRRecordKeyFilenameBaseHash, _kBRRecordKeyFilenameBounceNo, 
                        _kBRRecordKeyFilenameEncryptedBasename, _kBRRecordKeyFilenameExtension, 
                        _kBRRecordKeyFinderBookmarkContent, _kBRRecordKeyFinderTags, 
                        _kBRRecordKeyHasHiddenExtension, _kBRRecordKeyIsExecutable, 
                        _kBRRecordKeyIsWritable, _kBRRecordKeyLastEditorDeviceNameJSON, 
-                       _kBRRecordKeyModificationTime, _kBRRecordKeyPackageContent, 
-                       _kBRRecordKeyPackageManifest, _kBRRecordKeyPackageSignature, 
-                       _kBRRecordKeyPackageXattrs, _kBRRecordKeyParentRef, _kBRRecordKeyQuarantineInfo, 
-                       _kBRRecordKeySize, _kBRRecordKeySymlinkTarget, _kBRRecordKeyTargetRef, 
-                       _kBRRecordKeyThumbnail1024x1024, _kBRRecordKeyThumbnailQuickLookMetadata, 
-                       _kBRRecordKeyTrashPutBackParent, _kBRRecordKeyTrashPutBackPath, 
-                       _kBRRecordKeyXattr, _kBRRecordTypeContent, _kBRRecordTypeStructure, 
-                       _prettyprintFSEventFlags ]
+                       _kBRRecordKeyLastUsedTime, _kBRRecordKeyModificationTime, 
+                       _kBRRecordKeyPackageContent, _kBRRecordKeyPackageManifest, 
+                       _kBRRecordKeyPackageSignature, _kBRRecordKeyPackageXattrs, 
+                       _kBRRecordKeyParentRef, _kBRRecordKeyQuarantineInfo, _kBRRecordKeySize, 
+                       _kBRRecordKeySymlinkTarget, _kBRRecordKeyTargetRef, _kBRRecordKeyThumbnail1024x1024, 
+                       _kBRRecordKeyThumbnailQuickLookMetadata, _kBRRecordKeyTrashPutBackParent, 
+                       _kBRRecordKeyTrashPutBackPath, _kBRRecordKeyXattr, _kBRRecordTypeContent, 
+                       _kBRRecordTypeStructure, _prettyprintFSEventFlags ]
     objc-classes:    [ _BRCAccountHandler, _BRCAccountSession, _BRCBackupSession, 
                        _BRCContainerScheduler, _BRCDaemon, _BRCDocumentItem, _BRCDumpContext, 
                        _BRCDumper, _BRCExtensionErrorPayload, _BRCFSEventsMonitor, 
@@ -62,15 +61,15 @@ exports:
                        _BRCAccountSession._miscOperations, _BRCAccountSession._syncContexts, 
                        _BRCDocumentItem._currentVersion, _BRCDocumentItem._desiredVersion, 
                        _BRCExtensionErrorPayload._minimumOSName, _BRCLocalItem._dbRowID, 
-                       _BRCLocalItem._inFlightDiffs, _BRCLocalItem._itemID, _BRCLocalItem._localDiffs, 
+                       _BRCLocalItem._isUserVisible, _BRCLocalItem._itemID, _BRCLocalItem._localDiffs, 
                        _BRCLocalItem._minimumSupportedOSRowID, _BRCLocalItem._notifsRank, 
-                       _BRCLocalItem._orig, _BRCLocalItem._ownerKey, _BRCLocalItem._sharingOptions, 
-                       _BRCLocalItem._st, _BRCLocalItem._syncUpState, _BRCServerItem._session, 
-                       _BRCServerItem._sharingOptions, _BRCServerItem._zone, _BRCServerZone._changeState, 
-                       _BRCServerZone._clientZone, _BRCServerZone._db, _BRCServerZone._dbRowID, 
-                       _BRCServerZone._session, _BRCServerZone._zoneName, _BRFieldCKInfo._etag, 
-                       _BRFieldCKInfo._etagBeforeCrossZoneMove, _BRFieldCKInfo._has, 
-                       _BRFieldCKInfo._knownToServer, _BRFieldCKInfo._wasCached, 
+                       _BRCLocalItem._orig, _BRCLocalItem._ownerKey, _BRCLocalItem._parentZoneRowID, 
+                       _BRCLocalItem._sharingOptions, _BRCLocalItem._st, _BRCLocalItem._syncUpState, 
+                       _BRCServerItem._db, _BRCServerItem._session, _BRCServerItem._sharingOptions, 
+                       _BRCServerItem._zone, _BRCServerZone._changeState, _BRCServerZone._clientZone, 
+                       _BRCServerZone._db, _BRCServerZone._dbRowID, _BRCServerZone._session, 
+                       _BRCServerZone._zoneName, _BRFieldCKInfo._etag, _BRFieldCKInfo._etagBeforeCrossZoneMove, 
+                       _BRFieldCKInfo._has, _BRFieldCKInfo._knownToServer, _BRFieldCKInfo._wasCached, 
                        _BRFieldFinderTags._tags, _BRFieldPkgHeader._version, _BRFieldPkgItem._has, 
                        _BRFieldPkgItem._isExecutable, _BRFieldPkgItem._isWritable, 
                        _BRFieldPkgItem._mtime, _BRFieldPkgItem._path, _BRFieldPkgItem._quarantineInfo, 

@@ -1,7 +1,7 @@
 /*
         NSATSTypesetter.h
         Application Kit
-        Copyright (c) 2002-2016, Apple Inc.
+        Copyright (c) 2002-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -39,7 +39,7 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 }
 
 // Factory methods
-+ (NSATSTypesetter *)sharedTypesetter;
+@property (class, readonly, strong) NSATSTypesetter *sharedTypesetter;
 @end
 
 @interface NSATSTypesetter (NSPantherCompatibility)
@@ -113,23 +113,8 @@ NS_AUTOMATED_REFCOUNT_WEAK_UNAVAILABLE
 
 /* NSGlyphStorageInterface declares all primitives interfacing to the glyph storage (usually NSLayoutManager). By overriding all the methods, you can implement an NSATSTypesetter subclass that interacts with custom glyph storage. */
 @interface NSATSTypesetter (NSGlyphStorageInterface)
-// Glyph/character range mappings
-- (NSRange)characterRangeForGlyphRange:(NSRange)glyphRange actualGlyphRange:(nullable NSRangePointer)actualGlyphRange;
-- (NSRange)glyphRangeForCharacterRange:(NSRange)charRange actualCharacterRange:(nullable NSRangePointer)actualCharRange;
-
 // Glyph data
-- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer;
-
-// Layout storage
-- (void)setLineFragmentRect:(NSRect)fragmentRect forGlyphRange:(NSRange)glyphRange usedRect:(NSRect)usedRect baselineOffset:(CGFloat)baselineOffset;
-- (void)substituteGlyphsInRange:(NSRange)glyphRange withGlyphs:(null_unspecified NSGlyph *)glyphs;
-- (void)insertGlyph:(NSGlyph)glyph atGlyphIndex:(NSUInteger)glyphIndex characterIndex:(NSUInteger)characterIndex;
-- (void)deleteGlyphsInRange:(NSRange)glyphRange;
-- (void)setNotShownAttribute:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
-- (void)setDrawsOutsideLineFragment:(BOOL)flag forGlyphRange:(NSRange)glyphRange;
-- (void)setLocation:(NSPoint)location withAdvancements:(null_unspecified const CGFloat *)advancements forStartOfGlyphRange:(NSRange)glyphRange;
-- (void)setAttachmentSize:(NSSize)attachmentSize forGlyphRange:(NSRange)glyphRange;
-- (void)setBidiLevels:(null_unspecified const uint8_t *)levels forGlyphRange:(NSRange)glyphRange;
+- (NSUInteger)getGlyphsInRange:(NSRange)glyphsRange glyphs:(null_unspecified NSGlyph *)glyphBuffer characterIndexes:(null_unspecified NSUInteger *)charIndexBuffer glyphInscriptions:(null_unspecified NSGlyphInscription *)inscribeBuffer elasticBits:(null_unspecified BOOL *)elasticBuffer NS_DEPRECATED_MAC(10_3, 10_13);
 @end
 
 NS_ASSUME_NONNULL_END

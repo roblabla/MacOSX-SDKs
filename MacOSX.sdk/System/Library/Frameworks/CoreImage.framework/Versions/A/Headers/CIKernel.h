@@ -4,6 +4,7 @@
    All rights reserved. */
 
 #import <CoreImage/CoreImageDefines.h>
+#import <CoreImage/CIImage.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,7 +29,7 @@ typedef CGRect (^CIKernelROICallback)(int index, CGRect destRect);
  * CIKernel is an object that encapsulates a Core Image Kernel Language
  * routine that generates a new images based on input images and agruments.
  *
- * General kernels functions are declared akin to this example:
+ * General kernel functions are declared akin to this example:
  *   kernel vec4 myColorKernel (sampler fore, sampler back, vec4 params)
  *
  * The function must take a sampler argument for each input image.
@@ -59,6 +60,21 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  * On iOS this returns a CIKernel, CIColorKernel, or CIWarpKernel object.
  */
 + (nullable instancetype)kernelWithString:(NSString *)string  NS_AVAILABLE(10_10, 8_0);
+
+/* The data argument should represent a metallib file compiled with the Core Image Standard Library
+ * and contain the given function written in the Metal Shading Language.
+ *
+ * An optional output pixel format can be specified, and would be used if the output of the kernel
+ * needs to be written to an intermediate texture.
+ */
++ (nullable instancetype)kernelWithFunctionName:(NSString *)name
+                           fromMetalLibraryData:(NSData *)data
+                                          error:(NSError **)error NS_AVAILABLE(10_13, 11_0);
+
++ (nullable instancetype)kernelWithFunctionName:(NSString *)name
+                           fromMetalLibraryData:(NSData *)data
+                              outputPixelFormat:(CIFormat)format
+                                          error:(NSError **)error NS_AVAILABLE(10_13, 11_0);
 
 /* The name of the kernel. */
 @property (atomic, readonly) NSString *name  NS_AVAILABLE(10_4, 8_0);
@@ -107,7 +123,7 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  * CIColorKernel is an object that encapsulates a Core Image Kernel Language
  * routine that processes only the color information in images.
  *
- * Color kernels functions are declared akin to this example:
+ * Color kernel functions are declared akin to this example:
  *   kernel vec4 myColorKernel (__sample fore, __sample back, vec4 params)
  *
  * The function must take a __sample argument for each input image.
@@ -146,7 +162,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * CIWarpKernel is an object that encapsulates a Core Image Kernel Language
  * function that processes only the geometry of an image.
  *
- * Warp kernels functions are declared akin to this example:
+ * Warp kernel functions are declared akin to this example:
  *   kernel vec2 myWarpKernel (vec4 params)
  *
  * Additional arguments can be of type float, vec2, vec3, vec4.
@@ -186,6 +202,105 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
                           roiCallback:(CIKernelROICallback)callback
                            inputImage:(CIImage*)image
                             arguments:(nullable NSArray<id> *)args;
+@end
+
+
+/* CIBlendKernel is a special type of color kernel that blends two images. 
+ *
+ * Blend kernel functions are declared akin to this example:
+ *   kernel vec4 myBlendKernel (__sample fore, __sample back)
+ *
+ * A blend kernel function must have exactly two arguments of type __sample.
+ * The first argument represents the value of the source pixel and the second 
+ * represents that of the old destination. The vec4 returned by the kernel will 
+ * be the new destination color.
+ * The kernel should not call sample(), sampleCoord(), or samplerTransform().
+ * The function must return a vec4 pixel color.
+ */
+NS_CLASS_AVAILABLE(10_13, 11_0)
+@interface CIBlendKernel : CIColorKernel
+{
+}
+
+/* The string argument should contain a program with one custom blend kernel. */
++ (nullable instancetype)kernelWithString:(NSString *)string;
+
+/* Apply the receiver CIBlendKernel to produce a new CIImage object
+ * by blending a foreground and background images.
+ *
+ * The 'extent' of the result image will be determined by the reciver and
+ * the extent of the forground and background images.  For most of the
+ * builtin blend kernels (as well as custom blend kernels) the result image
+ * extent will be the union of the forground and background image
+ * extents.
+ */
+- (nullable CIImage *)applyWithForeground:(CIImage*)foreground
+                               background:(CIImage*)background;
+
+@end
+
+@interface CIBlendKernel (BuiltIn)
+
+/* Core Image builtin blend kernels */
+
+/* Component-wise operators */
+
+@property (class, strong, readonly) CIBlendKernel *componentAdd;
+@property (class, strong, readonly) CIBlendKernel *componentMultiply;
+@property (class, strong, readonly) CIBlendKernel *componentMin;
+@property (class, strong, readonly) CIBlendKernel *componentMax;
+
+/* Porter Duff
+ * http://dl.acm.org/citation.cfm?id=808606
+ */
+@property (class, strong, readonly) CIBlendKernel *clear;
+@property (class, strong, readonly) CIBlendKernel *source;
+@property (class, strong, readonly) CIBlendKernel *destination;
+@property (class, strong, readonly) CIBlendKernel *sourceOver;
+@property (class, strong, readonly) CIBlendKernel *destinationOver;
+@property (class, strong, readonly) CIBlendKernel *sourceIn;
+@property (class, strong, readonly) CIBlendKernel *destinationIn;
+@property (class, strong, readonly) CIBlendKernel *sourceOut;
+@property (class, strong, readonly) CIBlendKernel *destinationOut;
+@property (class, strong, readonly) CIBlendKernel *sourceAtop;
+@property (class, strong, readonly) CIBlendKernel *destinationAtop;
+@property (class, strong, readonly) CIBlendKernel *exclusiveOr;
+
+/* PDF 1.7 blend modes
+ * http://wwwimages.adobe.com/content/dam/Adobe/en/devnet/pdf/pdfs/PDF32000_2008.pdf
+ */
+
+/* Standard separable blend modes */
+@property (class, strong, readonly) CIBlendKernel *multiply;
+@property (class, strong, readonly) CIBlendKernel *screen;
+@property (class, strong, readonly) CIBlendKernel *overlay;
+@property (class, strong, readonly) CIBlendKernel *darken;
+@property (class, strong, readonly) CIBlendKernel *lighten;
+@property (class, strong, readonly) CIBlendKernel *colorDodge;
+@property (class, strong, readonly) CIBlendKernel *colorBurn;
+@property (class, strong, readonly) CIBlendKernel *hardLight;
+@property (class, strong, readonly) CIBlendKernel *softLight;
+@property (class, strong, readonly) CIBlendKernel *difference;
+@property (class, strong, readonly) CIBlendKernel *exclusion;
+
+/* Standard nonseparable blend modes */
+@property (class, strong, readonly) CIBlendKernel *hue;
+@property (class, strong, readonly) CIBlendKernel *saturation;
+@property (class, strong, readonly) CIBlendKernel *color;
+@property (class, strong, readonly) CIBlendKernel *luminosity;
+
+/* Additional blend modes */
+@property (class, strong, readonly) CIBlendKernel *subtract;
+@property (class, strong, readonly) CIBlendKernel *divide;
+@property (class, strong, readonly) CIBlendKernel *linearBurn;
+@property (class, strong, readonly) CIBlendKernel *linearDodge;
+@property (class, strong, readonly) CIBlendKernel *vividLight;
+@property (class, strong, readonly) CIBlendKernel *linearLight;
+@property (class, strong, readonly) CIBlendKernel *pinLight;
+@property (class, strong, readonly) CIBlendKernel *hardMix;
+@property (class, strong, readonly) CIBlendKernel *darkerColor;
+@property (class, strong, readonly) CIBlendKernel *lighterColor;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A44D568D-5EAD-3CBD-B37D-CC8A0B8C0E50', 'x86_64: 8E7FAE94-37E0-3181-B2C4-9878FFF63851' ]
+uuids:           [ 'i386: B5EB6C0A-3D83-33C6-AFB3-42D9593D645C', 'x86_64: FA38E5CC-44D5-3AC1-9791-DB1B8813822C' ]
 platform:        macosx
 install-name:    /usr/lib/libcsfde.dylib
 objc-constraint: none

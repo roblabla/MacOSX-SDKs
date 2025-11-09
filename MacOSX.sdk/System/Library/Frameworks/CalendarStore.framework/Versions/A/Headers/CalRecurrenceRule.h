@@ -1,6 +1,6 @@
 //
 //  CalRecurrenceRule.h
-//	Calendar Store Framework
+//	CalendarStore Framework
 //
 //  Copyright 2006 Apple Inc. All rights reserved.
 //	
@@ -10,7 +10,7 @@
 //  setting an event to use the new rule. When a new recurrence rule is set on an CalEvent, that change is not saved 
 //  until the client has passed the modified event to CalCalendarStore's saveEvent: method.
 //
-//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
+//  The CalendarStore framework is deprecated.  Please use the EventKit framework instead.
 
 /*  Custom classes used by CalRecurrenceRule */
 
@@ -27,6 +27,8 @@
 //  
 //  A CalRecurrenceEnd initialized with an end date will return 0 for occurrenceCount. One initialized with a number of
 //  occurrences will return nil for its endDate.
+
+#import <Foundation/Foundation.h>
 
 @interface CalRecurrenceEnd : NSObject <NSCopying> {
     @private

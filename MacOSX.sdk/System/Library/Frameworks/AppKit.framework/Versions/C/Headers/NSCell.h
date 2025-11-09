@@ -1,7 +1,7 @@
 /*
 	NSCell.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -70,12 +70,15 @@ typedef NS_ENUM(NSUInteger, NSImageScaling) {
     NSScaleNone NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use NSImageScaleNone instead")
 } NS_ENUM_AVAILABLE_MAC(10_5);
 
-typedef NSInteger NSCellStateValue;
-enum {
-    NSMixedState = -1,
-    NSOffState   =  0,
-    NSOnState    =  1,
-};
+typedef NSInteger NSControlStateValue NS_TYPED_EXTENSIBLE_ENUM;
+static const NSControlStateValue NSControlStateValueMixed = -1;
+static const NSControlStateValue NSControlStateValueOff = 0;
+static const NSControlStateValue NSControlStateValueOn = 1;
+
+typedef NSControlStateValue NSCellStateValue /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValue", 10_0, 10_13)*/;
+static const NSControlStateValue NSMixedState /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueMixed", 10_0, 10_13)*/ = NSControlStateValueMixed;
+static const NSControlStateValue NSOffState /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueOff", 10_0, 10_13)*/ = NSControlStateValueOff;
+static const NSControlStateValue NSOnState /*NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlStateValueOn", 10_0, 10_13)*/ = NSControlStateValueOn;
 
 /* NSButtonCell highlightsBy and showsStateBy mask */
 typedef NS_OPTIONS(NSUInteger, NSCellStyleMask) {
@@ -99,9 +102,9 @@ typedef NS_ENUM(NSUInteger, NSControlSize) {
     NSControlSizeSmall,
     NSControlSizeMini,
 };
-static const NSControlSize NSRegularControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeRegular", macosx(10.0, 10.12)) = NSControlSizeRegular;
-static const NSControlSize NSSmallControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeSmall", macosx(10.0, 10.12)) = NSControlSizeSmall;
-static const NSControlSize NSMiniControlSize API_DEPRECATED_WITH_REPLACEMENT("NSControlSizeMini", macosx(10.0, 10.12)) = NSControlSizeMini;
+static const NSControlSize NSRegularControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeRegular", 10.0, 10.12) = NSControlSizeRegular;
+static const NSControlSize NSSmallControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeSmall", 10.0, 10.12) = NSControlSizeSmall;
+static const NSControlSize NSMiniControlSize NS_DEPRECATED_WITH_REPLACEMENT_MAC("NSControlSizeMini", 10.0, 10.12) = NSControlSizeMini;
 
 typedef struct __CFlags {
     unsigned int        state:1;
@@ -121,7 +124,7 @@ typedef struct __CFlags {
     unsigned int        invalidObjectValue:1;
     unsigned int        invalidFont:1;
     NSLineBreakMode     lineBreakMode:3;
-    unsigned int        weakTargetHelperFlag:1;
+    unsigned int        __reserved:1 __unused;
     unsigned int        allowsAppearanceEffects:1;
     unsigned int        singleLineMode:1;
     unsigned int        actOnMouseDragged:1;
@@ -169,7 +172,7 @@ typedef struct __CFlags {
 }
 
 
-+ (BOOL)prefersTrackingUntilMouseUp;
+@property (class, readonly) BOOL prefersTrackingUntilMouseUp;
 
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -179,7 +182,7 @@ typedef struct __CFlags {
 
 @property (nullable, assign) NSView *controlView; // Must be an NSControl subclass, non-control view subclasses not allowed!
 @property NSCellType type;
-@property NSInteger state;
+@property NSControlStateValue state;
 @property (nullable, weak) id target; // Target is weak for zeroing-weak compatible objects in apps linked on 10.10 or later. Otherwise the behavior of this property is 'assign'.
 @property (nullable) SEL action;
 @property NSInteger tag;
@@ -228,7 +231,7 @@ typedef struct __CFlags {
 - (NSRect)drawingRectForBounds:(NSRect)rect;
 @property (readonly) NSSize cellSize;
 - (NSSize)cellSizeForBounds:(NSRect)rect;
-- (NSColor *)highlightColorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
+- (nullable NSColor *)highlightColorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
 - (void)calcDrawInfo:(NSRect)rect;
 - (NSText *)setUpFieldEditorAttributes:(NSText *)textObj;
 - (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;
@@ -247,7 +250,7 @@ typedef struct __CFlags {
 
 @property (nullable, strong) NSMenu *menu;
 - (nullable NSMenu *)menuForEvent:(NSEvent *)event inRect:(NSRect)cellFrame ofView:(NSView *)view;
-+ (nullable NSMenu *)defaultMenu;
+@property (class, readonly, nullable, strong) NSMenu *defaultMenu;
 
 @property BOOL sendsActionOnEndEditing;
 
@@ -290,7 +293,7 @@ typedef struct __CFlags {
 - (void)performClick:(nullable id)sender;
 
 @property NSFocusRingType focusRingType;
-+ (NSFocusRingType)defaultFocusRingType;
+@property (class, readonly) NSFocusRingType defaultFocusRingType;
 
 - (void)drawFocusRingMaskWithFrame:(NSRect)cellFrame inView:(NSView *)controlView NS_AVAILABLE_MAC(10_7);
 - (NSRect)focusRingMaskBoundsForFrame:(NSRect)cellFrame inView:(NSView *)controlView NS_AVAILABLE_MAC(10_7);
@@ -411,13 +414,13 @@ APPKIT_EXTERN void NSDrawThreePartImage(NSRect frame, NSImage * __nullable start
 APPKIT_EXTERN void NSDrawNinePartImage(NSRect frame, NSImage * __nullable topLeftCorner, NSImage * __nullable topEdgeFill, NSImage * __nullable topRightCorner, NSImage * __nullable leftEdgeFill, NSImage * __nullable centerFill, NSImage * __nullable rightEdgeFill, NSImage * __nullable bottomLeftCorner, NSImage * __nullable bottomEdgeFill, NSImage * __nullable bottomRightCorner, NSCompositingOperation op, CGFloat alphaFraction, BOOL flipped) NS_AVAILABLE_MAC(10_5);
 
 enum {
-    NSAnyType				= 0,
-    NSIntType				= 1,
-    NSPositiveIntType			= 2,
-    NSFloatType				= 3,
-    NSPositiveFloatType		= 4,
-    NSDoubleType			= 6,
-    NSPositiveDoubleType		= 7
-} NS_ENUM_DEPRECATED_MAC(10_0, 10_10, "Use formatters instead");
+    NSAnyType NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "Use formatters instead") = 0,
+    NSIntType NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "Use formatters instead") = 1,
+    NSPositiveIntType NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "Use formatters instead") = 2,
+    NSFloatType NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "Use formatters instead") = 3,
+    NSPositiveFloatType NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "Use formatters instead") = 4,
+    NSDoubleType NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "Use formatters instead") = 6,
+    NSPositiveDoubleType NS_ENUM_DEPRECATED_MAC(10_0, 10_0, "Use formatters instead") = 7
+};
 
 NS_ASSUME_NONNULL_END

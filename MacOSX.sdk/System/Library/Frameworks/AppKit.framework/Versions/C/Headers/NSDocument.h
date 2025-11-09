@@ -1,19 +1,21 @@
 /*
 	NSDocument.h
 	Application Kit
-	Copyright (c) 1997-2016, Apple Inc.
+	Copyright (c) 1997-2017, Apple Inc.
 	All rights reserved.
 */
 
+#import <AppKit/NSNib.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSUserInterfaceValidation.h>
 #import <Foundation/NSArray.h>
 #import <Foundation/NSDictionary.h>
 #import <Foundation/NSFilePresenter.h>
+#import <AppKit/NSPrintInfo.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class NSData, NSDate, NSError, NSFileWrapper, NSMenuItem, NSPageLayout, NSPrintInfo, NSPrintOperation, NSSavePanel, NSUndoManager, NSURL, NSView, NSWindow, NSWindowController;
+@class NSData, NSDate, NSError, NSFileWrapper, NSMenuItem, NSPageLayout, NSPrintInfo, NSPrintOperation, NSSavePanel, NSSharingService, NSSharingServicePicker, NSUndoManager, NSURL, NSView, NSWindow, NSWindowController;
 
 typedef NS_ENUM(NSUInteger, NSDocumentChangeType) {
 
@@ -458,13 +460,13 @@ The default implementation of this method invokes [self hasUnautosavedChanges] a
  
 AppKit invokes this method at a variety of times, and not always on the main thread. For example, -autosaveWithImplicitCancellability:completionHandler: invokes this as part of determining whether the autosaving will be an NSAutosaveInPlaceOperation instead of an NSAutosaveElsewhereOperation. For another example, -canCloseDocumentWithDelegate:shouldCloseSelector:contextInfo: and NSDocumentController's machinery for handling unsaved changes at application termination time both invoke this as part of determining whether alerts about unsaved changes should be presented to the user.
 */
-+ (BOOL)autosavesInPlace NS_AVAILABLE_MAC(10_7);
+@property(class, readonly) BOOL autosavesInPlace NS_AVAILABLE_MAC(10_7);
 
 /* Return YES if the receiving subclass of NSDocument supports Mac OS 10.7 version preservation, NO otherwise. The default implementation of this method returns [self autosavesInPlace]. You can override it and return NO to declare that NSDocument should not preserve old document versions.
 
 Returning NO from this method will disable version browsing and -revertDocumentToSaved:, which rely on version preservation when autosaving in place. Returning YES from this method when +autosavesInPlace returns NO will result in undefined behavior.
  */
-+ (BOOL)preservesVersions NS_AVAILABLE_MAC(10_7);
+@property(class, readonly) BOOL preservesVersions NS_AVAILABLE_MAC(10_7);
 
 /* The action of the Browse Saved Versions menu item in a document-based application. The default implementation causes the document's main window, specified by [self windowForSheet], to enter the Versions browser.
 */
@@ -482,7 +484,7 @@ Returning NO from this method will disable version browsing and -revertDocumentT
 
 AppKit invokes this method at a variety of times. For example, when -updateChangeCount is called with NSChangeDone (without NSChangeDiscardable), NSDocument will the next autosave to use NSAutosaveAsOperation and return the document into a draft.
 */
-+ (BOOL)autosavesDrafts NS_AVAILABLE_MAC(10_8);
+@property(class, readonly) BOOL autosavesDrafts NS_AVAILABLE_MAC(10_8);
 
 /* Return the document type that should be used for an autosave operation. The default implementation just returns [self fileType].
 */
@@ -633,11 +635,11 @@ Starting in OS X 10.6, if the printSettings dictionary has an NSPrintJobDisposit
 
 For backward binary compatibility with Mac OS 10.3 and earlier, the default implementation of this method invokes [self printShowingPrintPanel:showPrintPanel] if -printShowingPrintPanel: is overridden. When doing this it uses private functionality to arrange for 1) the print settings to take effect despite the fact that the override of -printShowingPrintPanel: can't possibly know about them, and 2) getting notified when the print operation has been completed, so it can message the delegate at the correct time. Correct messaging of the delegate is necessary for correct handling of the Print Apple event.
 */
-- (void)printDocumentWithSettings:(NSDictionary<NSString *, id> *)printSettings showPrintPanel:(BOOL)showPrintPanel delegate:(nullable id)delegate didPrintSelector:(nullable SEL)didPrintSelector contextInfo:(nullable void *)contextInfo;
+- (void)printDocumentWithSettings:(NSDictionary<NSPrintInfoAttributeKey, id> *)printSettings showPrintPanel:(BOOL)showPrintPanel delegate:(nullable id)delegate didPrintSelector:(nullable SEL)didPrintSelector contextInfo:(nullable void *)contextInfo;
 
 /* Create a print operation that can be run to print the document's current contents, and return it if successful. If not successful, return nil after setting *outError to an NSError that encapsulates the reason why the print operation could not be created. The NSPrintInfo attributes in the passed-in printSettings dictionary should be added to a copy of the document's print info, and the resulting print info should be used for the operation. The default implementation of this method does nothing. You must override it to enable printing in your application.
 */
-- (nullable NSPrintOperation *)printOperationWithSettings:(NSDictionary<NSString *, id> *)printSettings error:(NSError **)outError;
+- (nullable NSPrintOperation *)printOperationWithSettings:(NSDictionary<NSPrintInfoAttributeKey, id> *)printSettings error:(NSError **)outError;
 
 /* Run a print operation, possibly with printing UI presented document-modally. When printing is completed, regardless of success or failure, or has been cancelled, send the message selected by didRunSelector to the delegate, with the contextInfo as the last argument. The method selected by didRunSelector must have the same signature as:
 
@@ -654,6 +656,28 @@ For backward binary compatibility with Mac OS 10.3 and earlier, the default impl
 /* Create a print operation that can be run to create a PDF representation of the document's current contents, and return it if successful. You typically should not use [self printInfo] when creating this print operation, but you should instead maintain a separate NSPrintInfo instance specifically for creating PDFs. The default implementation of this method simply invokes [self printOperationWithSettings:@{ NSPrintJobDisposition : NSPrintSaveJob } error:NULL], but you are highly encouraged to override it if your document subclass supports creating PDF representations.
  */
 @property (readonly, strong) NSPrintOperation *PDFPrintOperation NS_AVAILABLE_MAC(10_9);
+
+#pragma mark *** Sharing ***
+
+/* If YES, allows this instance to be shared via NSDocumentController's standard Share menu. If NO, the standard Share menu will be disabled when this document is targeted.
+ 
+ By default, this returns the same value as [[self class] autosavesInPlace].
+ */
+@property (readonly) BOOL allowsDocumentSharing NS_AVAILABLE_MAC(10_13);
+
+/* Share the document's file using the given NSSharingService. First, ensure the document is in a state where it can be properly shared by the given service by saving or relocating the receiver's file, if necessary. Then perform the given sharing service with 'self.fileURL' as the only item. When sharing is complete or fails, invoke the completion handler indicating whether the operation was successful.
+ 
+ The default implementation of this method first ensures the document is saved by autosaving the document if possible, or else presenting the user with a save panel. If the given sharing service has the name NSSharingServiceNameCloudSharing, then it also ensures that file is located in an appropriate container for sharing (e.g. iCloud Drive). When the sharing service finishes, it displays an errors returned by the NSSharingService, then invokes the completion handler, passing a boolean indicating whether sharing succeeded or not.
+ 
+ If the given sharing service had a delegate already set, the default implementation replaces it with its own delegate in order to get completion notifications. However, all NSSharingServiceDelegate methods will be forwarded to the original delegate as well.
+ 
+ When an NSDocument is the only item being used with NSSharingServicePicker or NSSharingServicePickerTouchBarItem, it will invoke this method instead of calling -[NSSharingService performWithItems:] directly.
+ */
+- (void)shareDocumentWithSharingService:(NSSharingService *)sharingService completionHandler:(void (^ _Nullable)(BOOL success))completionHandler NS_AVAILABLE_MAC(10_13);
+
+/* Given the NSSharingServicePicker used by an NSDocumentController-owned Share menu (either an automatically inserted one, or one returned by +[NSDocumentController standardShareMenuItem]), make any final changes before that menu is presented. Specifically, you may choose to set a custom NSSharingServicePickerDelegate to customize the construction of the resulting menu, or provide a custom NSSharingServiceDelegate for the chosen service.
+ */
+- (void)prepareSharingServicePicker:(NSSharingServicePicker *)sharingServicePicker NS_AVAILABLE_MAC(10_13);
 
 #pragma mark *** Change Management ***
 
@@ -713,7 +737,7 @@ You can customize the presentation of errors on a per-NSDocument-subclass basis 
 
 /* Return the name of the nib to be used by -makeWindowControllers. The default implementation returns nil. You can override this method to return the name of a nib in your application's resources; the class of the file's owner in that nib must match the class of this object, and the window outlet of the file's owner should be connected to a window. Virtually every subclass of NSDocument has to override either -makeWindowControllers or -windowNibName.
 */
-@property (nullable, readonly, copy) NSString *windowNibName;
+@property (nullable, readonly, copy) NSNibName windowNibName;
 
 /* Be notified that a window controller will or did load a nib with this document as the nib file's owner. The default implementations of these methods do nothing. You can override these methods to do additional setup during the creation of the document's user interface, especially when there's no other reason to create a custom subclass of NSWindowController, so you're not, and you're simply overriding -windowNibName instead of -makeWindowControllers.
 */
@@ -767,11 +791,11 @@ The default implementation of this method sends the window controller a -shouldC
 
 /* Return the names of the types for which this class can be instantiated for the application to play the Editor or Viewer role. The default implementation of this method returns information derived from the application's Info.plist. You must typically override it in document classes that are dynamically loaded from plugins. NSDocumentController uses this method when presenting an open panel and when trying to figure the NSDocument subclass to instantiate when opening a particular type of document.
 */
-+ (NSArray<NSString *> *)readableTypes;
+@property (class, readonly, copy) NSArray<NSString *> *readableTypes;
 
 /* Return the names of the types which this class can save. Typically this includes types for which the application can play the Editor role, plus types than can be merely exported by the application. The default implementation of this method returns information derived from the application's Info.plist. You must typically override it in document classes that are dynamically loaded from plugins.
 */
-+ (NSArray<NSString *> *)writableTypes;
+@property (class, readonly, copy) NSArray<NSString *> *writableTypes;
 
 /* Return YES if instances of this class can be instantiated for the application to play the Editor role, NO otherwise. The default implementation of this method returns information derived from the application's Info.plist. You must typically override it in document classes that are dynamically loaded from plugins. NSDocument uses this method when presenting a save panel; in that situation all types returned by -writableTypes are presented in the standard file format popup, except the ones for which -isNativeType returns NO.
 */
@@ -800,7 +824,7 @@ You can override this method to customize the appending of extensions to file na
 #pragma mark *** Ubiquitous Storage ***
 
 /* Return YES if instances of this class should allow the use of ubiquitous document storage. The default implementation of this method returns YES if the application has a valid ubiquity container entitlement. When this method returns YES, NSDocument may do things like add new menu items and other UI for ubiquitous documents and allow documents to be saved or moved into the default ubiquity container. You can override this method to return NO for document classes that should not include these features. */
-+ (BOOL)usesUbiquitousStorage NS_AVAILABLE_MAC(10_8);
+@property (class, readonly) BOOL usesUbiquitousStorage NS_AVAILABLE_MAC(10_8);
 
 @end
 

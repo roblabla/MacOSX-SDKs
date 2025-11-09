@@ -1,7 +1,7 @@
 /*
     NSOutlineView.h
     Application Kit
-    Copyright (c) 1997-2016, Apple Inc.
+    Copyright (c) 1997-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -114,7 +114,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     id                   _expandingItem;
     NSMutableArray       *_draggedItems;
     _OVFlags             _ovFlags;
-    id                   _ovLock;
+    id                   _unused_ovLock __unused;
     long                *_indentArray;
     long                 _originalWidth;
     id                   _expandSet;
@@ -125,9 +125,13 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
     id                   _ovReserved;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wincompatible-property-type"
 
 @property (nullable, weak) id <NSOutlineViewDelegate> delegate;
 @property (nullable, weak) id <NSOutlineViewDataSource> dataSource;
+
+#pragma clang diagnostic pop
 
 /* The 'outlineTableColumn' is the column that displays data in a hierarchical fashion, indented one identationlevel per level, decorated with indentation marker (disclosure triangle) on rows that are expandable. A nil 'outlineTableColumn' is silently ignored. On 10.5 and higher, this value is saved in encodeWithCoder: and restored in initWithCoder:.
 */
@@ -326,7 +330,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 
 /* Dragging Destination Support - NSOutlineView data source objects can support file promised drags via by adding  NSFilesPromisePboardType to the pasteboard in outlineView:writeItems:toPasteboard:.  NSOutlineView implements -namesOfPromisedFilesDroppedAtDestination: to return the results of this data source method.  This method should returns an array of filenames for the created files (filenames only, not full paths).  The URL represents the drop location.  For more information on file promise dragging, see documentation on the NSDraggingSource protocol and -namesOfPromisedFilesDroppedAtDestination:.
 */
-- (NSArray<NSString *> *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items;
+- (NSArray<NSString *> *)outlineView:(NSOutlineView *)outlineView namesOfPromisedFilesDroppedAtDestination:(NSURL *)dropDestination forDraggedItems:(NSArray *)items NS_DEPRECATED_MAC(10_0, 10_13, "Use NSFilePromiseReceiver objects instead");
 
 @end
 
@@ -378,7 +382,7 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
 - (void)outlineView:(NSOutlineView *)outlineView didDragTableColumn:(NSTableColumn *)tableColumn;
 
 /* Optional - Tool Tip support
-    When the user pauses over a cell, the value returned from this method will be displayed in a tooltip.  'point' represents the current mouse location in view coordinates.  If you don't want a tooltip at that location, return nil or the empty string.  On entry, 'rect' represents the proposed active area of the tooltip.  By default, rect is computed as [cell drawingRectForBounds:cellFrame].  To control the default active area, you can modify the 'rect' parameter.
+    When the user pauses over a cell, the value returned from this method will be displayed in a tooltip.  'point' represents the current mouse location in view coordinates.  If you don't want a tooltip at that location, return an empty string.  On entry, 'rect' represents the proposed active area of the tooltip.  By default, rect is computed as [cell drawingRectForBounds:cellFrame].  To control the default active area, you can modify the 'rect' parameter.
 */
 - (NSString *)outlineView:(NSOutlineView *)outlineView toolTipForCell:(NSCell *)cell rect:(NSRectPointer)rect tableColumn:(nullable NSTableColumn *)tableColumn item:(id)item mouseLocation:(NSPoint)mouseLocation;
 
@@ -477,8 +481,8 @@ enum { NSOutlineViewDropOnItemIndex = -1 };
  
  NOTE: These keys are backwards compatible to 10.7, however, the symbol is not exported prior to 10.9 and the regular string value must be used (i.e.: @"NSOutlineViewDisclosureButtonKey").
  */
-APPKIT_EXTERN NSString * const NSOutlineViewDisclosureButtonKey NS_AVAILABLE_MAC(10_9); // The normal triangle disclosure button
-APPKIT_EXTERN NSString * const NSOutlineViewShowHideButtonKey NS_AVAILABLE_MAC(10_9); // The show/hide button used in "Source Lists"
+APPKIT_EXTERN NSUserInterfaceItemIdentifier const NSOutlineViewDisclosureButtonKey NS_AVAILABLE_MAC(10_9); // The normal triangle disclosure button
+APPKIT_EXTERN NSUserInterfaceItemIdentifier const NSOutlineViewShowHideButtonKey NS_AVAILABLE_MAC(10_9); // The show/hide button used in "Source Lists"
 
 /* Notifications
 */

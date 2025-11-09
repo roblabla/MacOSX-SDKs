@@ -1,7 +1,7 @@
 //
 //  SCNPhysicsBehavior.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class SCNPhysicsBehavior
  @abstract SCNPhysicsBehavior is an abstract class that represents a behavior in the physics world.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsBehavior : NSObject <NSSecureCoding>
 @end
 
@@ -23,7 +23,7 @@ API_AVAILABLE(macosx(10.10))
  @class SCNPhysicsHingeJoint
  @abstract SCNPhysicsHingeJoint makes two bodies to move like they are connected by a hinge. It is for example suitable for doors, chains...
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsHingeJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics hinge joint.
@@ -48,7 +48,7 @@ API_AVAILABLE(macosx(10.10))
  @class SCNPhysicsBallSocketJoint
  @abstract SCNPhysicsBallSocketJoint makes two bodies to move like they are connected by a ball-and-socket joint (i.e it allows rotations around all axes).
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsBallSocketJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics ball-and-socket joint.
@@ -71,7 +71,7 @@ API_AVAILABLE(macosx(10.10))
  @class SCNPhysicsSliderJoint
  @abstract SCNPhysicsSliderJoint provides a linear sliding joint between two bodies.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsSliderJoint : SCNPhysicsBehavior
 
 //Initializes and returns a physics slider joint.
@@ -106,12 +106,40 @@ API_AVAILABLE(macosx(10.10))
 
 @end
 
+/*!
+ @class SCNPhysicsConeTwistJoint
+ */
+API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
+@interface SCNPhysicsConeTwistJoint : SCNPhysicsBehavior
+
+//Initializes and returns a physics cone-twist joint.
+//The joint attaches bodyA and bodyB on frameA and frameB respectively.
++ (instancetype)jointWithBodyA:(SCNPhysicsBody *)bodyA frameA:(SCNMatrix4)frameA bodyB:(SCNPhysicsBody *)bodyB frameB:(SCNMatrix4)frameB;
+
+//Initializes and returns a physics cone-twist joint.
+//The joint attaches "body" to the 3d location specified by "frame" and relative to the node that owns the body.
++ (instancetype)jointWithBody:(SCNPhysicsBody *)body frame:(SCNMatrix4)frame;
+
+@property(nonatomic, readonly) SCNPhysicsBody *bodyA; //the first body attached to the slider joint
+@property(nonatomic) SCNMatrix4 frameA;
+
+@property(nonatomic, readonly, nullable) SCNPhysicsBody *bodyB; //the second body attached to the slider joint
+@property(nonatomic) SCNMatrix4 frameB;
+
+//The maximum angular limits in radians in each cone tangent directions
+@property(nonatomic) CGFloat maximumAngularLimit1;
+@property(nonatomic) CGFloat maximumAngularLimit2;
+
+//Maximum twist angle alon the cone axis
+@property(nonatomic) CGFloat maximumTwistAngle;
+
+@end
 
 /*!
  @class SCNPhysicsVehicleWheel
  @abstract SCNPhysicsVehicleWheel represents a wheel that can be attached to a SCNPhysicsVehicle instance.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsVehicleWheel : NSObject <NSCopying, NSSecureCoding>
 
 //Initializes and returns a wheel.
@@ -159,7 +187,7 @@ API_AVAILABLE(macosx(10.10))
  @class SCNPhysicsVehicle
  @abstract SCNPhysicsVehicle provides a vehicle behavior.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsVehicle : SCNPhysicsBehavior
 
 // Initializes and returns a physics vehicle that applies on the physics body "chassisBody" with the given wheels.

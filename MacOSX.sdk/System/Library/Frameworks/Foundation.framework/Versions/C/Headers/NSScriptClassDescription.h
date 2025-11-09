@@ -1,6 +1,6 @@
 /*
 	NSScriptClassDescription.h
-	Copyright (c) 1997-2016, Apple Inc.
+	Copyright (c) 1997-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -86,10 +86,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Return whether the described class has a property identified by the key, whether it's a to-many relationship, whether it's readable, or whether it's writable, respectively.
 */
-- (BOOL)hasPropertyForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
-- (BOOL)hasOrderedToManyRelationshipForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
-- (BOOL)hasReadablePropertyForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
-- (BOOL)hasWritablePropertyForKey:(NSString *)key NS_AVAILABLE(10_5, NA);
+- (BOOL)hasPropertyForKey:(NSString *)key API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+- (BOOL)hasOrderedToManyRelationshipForKey:(NSString *)key API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+- (BOOL)hasReadablePropertyForKey:(NSString *)key API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+- (BOOL)hasWritablePropertyForKey:(NSString *)key API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

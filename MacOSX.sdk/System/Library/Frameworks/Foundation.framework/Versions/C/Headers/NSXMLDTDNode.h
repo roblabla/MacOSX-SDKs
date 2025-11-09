@@ -1,5 +1,5 @@
 /*	NSXMLDTDNode.h
-	Copyright (c) 2004-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2004-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSXMLNode.h>
@@ -64,31 +64,26 @@ typedef NS_ENUM(NSUInteger, NSXMLDTDNodeKind) {
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 
 /*!
-    @method DTDKind
     @abstract Sets the DTD sub kind.
 */
 @property NSXMLDTDNodeKind DTDKind; //primitive
 
 /*!
-    @method isExternal
     @abstract True if the system id is set. Valid for entities and notations.
 */
 @property (readonly, getter=isExternal) BOOL external; //primitive
 
 /*!
-    @method publicID
     @abstract Sets the public id. This identifier should be in the default catalog in /etc/xml/catalog or in a path specified by the environment variable XML_CATALOG_FILES. When the public id is set the system id must also be set. Valid for entities and notations.
 */
 @property (nullable, copy) NSString *publicID; //primitive
 
 /*!
-    @method systemID
     @abstract Sets the system id. This should be a URL that points to a valid DTD. Valid for entities and notations.
 */
 @property (nullable, copy) NSString *systemID; //primitive
 
 /*!
-    @method notationName
     @abstract Set the notation name. Valid for entities only.
 */
 @property (nullable, copy) NSString *notationName; //primitive

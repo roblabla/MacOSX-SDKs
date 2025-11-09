@@ -1,7 +1,7 @@
 /*
     NSCandidateListTouchBarItem.h
     Application Kit
-    Copyright (c) 2016, Apple Inc.
+    Copyright (c) 2016-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -14,7 +14,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/* NSCandidateListTouchBarItem is a touch bar item that shows the word completion candidates for assisting users typing with text input capable views. In addition to candidates supplied by its client, the touch bar item can show candidates coming from the active input method. NSCandidateListTouchBarItem has two states: expanded and collapsed. When expanded, the item replaces any touch bar items occupying its location on the bar.
+/* NSCandidateListTouchBarItem is an NSTouchBarItem that shows the word completion candidates for assisting users typing with text input capable views. In addition to candidates supplied by its client, the NSTouchBarItem can show candidates coming from the active input method. NSCandidateListTouchBarItem has two states: expanded and collapsed. When expanded, the item replaces any NSTouchBarItems occupying its location on the bar.
 */
 
 #pragma mark NSCandidateListTouchBarItem
@@ -46,10 +46,10 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @property (nullable, weak) id <NSCandidateListTouchBarItemDelegate> delegate;
 
 #pragma mark Appearance State
-// Controls the visible state of the receiver touch bar item. The default is YES.
+// Controls the visible state of the item. The default is YES.
 @property (getter=isCollapsed) BOOL collapsed;
 
-// When YES, the touch bar item is allowed to be collapsed. YES by default.
+// When YES, the item is allowed to be collapsed. YES by default.
 @property BOOL allowsCollapsing;
 
 // Returns the state of its native candidate list visibility. When -collapsed=NO and not obscured by UI from the text input system, this property returns YES. KVO compliant. Clients should set candidates when YES.
@@ -59,17 +59,17 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 - (void)updateWithInsertionPointVisibility:(BOOL)isVisible;
 
 #pragma mark Input Method support
-// When YES, the touch bar item displays candidates from input methods when available instead of -candidates. YES by default.
+// When YES, the item displays candidates from input methods when available instead of -candidates. YES by default.
 @property BOOL allowsTextInputContextCandidates;
 
 #pragma mark Candidates
-// A block function for converting a candidate object into an NSAttributedString that will be displayed in the candidate bar. nil by default. Not required for displaying NSString, NSAttributedString, and NSTextCheckingResult candidates. In absence of NSFontAttributeName and NSForegroundColorAttributeName in the returned string, the standard touch bar appearance font and color are used instead of Helvetica 12.0 and +[NSColor blackColor].
+// A block function for converting a candidate object into an NSAttributedString that will be displayed in the candidate bar. nil by default. Not required for displaying NSString, NSAttributedString, and NSTextCheckingResult candidates. In absence of NSFontAttributeName and NSForegroundColorAttributeName in the returned string, the standard bar appearance font and color are used instead of Helvetica 12.0 and +[NSColor blackColor].
 @property (nullable, copy) NSAttributedString * (^attributedStringForCandidate)(CandidateType candidate, NSInteger index);
 
 // Returns an array of candidate objects previously set via -setCandidates:forSelectedRange:inString:view:.
 @property (readonly, copy) NSArray<CandidateType> *candidates;
  
-// Sets an array of candidate objects to be displayed in the candidate list bar item. The candidate objects are interpreted by -attributedStringForCandidate if the property is non-nil. NSCandidateListTouchBarItem can format NSString, NSAttributedString, and NSTextCheckingResult without the formatting block specified. The touch bar item will decide which candidates to place in the candidates array and in which order. The selectedRange and originalString arguments tell the context the list of candidates was originally derived from. For NSTextCheckingResult candidates, the selectedRange and originalString arguments should match those passed in to NSSpellChecker. The touch bar item will also arrange to display candidates near the selection in the view when appropriate.
+// Sets an array of candidate objects to be displayed in the candidate list bar item. The candidate objects are interpreted by -attributedStringForCandidate if the property is non-nil. NSCandidateListTouchBarItem can format NSString, NSAttributedString, and NSTextCheckingResult without the formatting block specified. The NSTouchBarItem will decide which candidates to place in the candidates array and in which order. The selectedRange and originalString arguments tell the context the list of candidates was originally derived from. For NSTextCheckingResult candidates, the selectedRange and originalString arguments should match those passed in to NSSpellChecker. The NSTouchBarItem will also arrange to display candidates near the selection in the view when appropriate.
 - (void)setCandidates:(NSArray<CandidateType> *)candidates forSelectedRange:(NSRange)selectedRange inString:(nullable NSString *)originalString;
 
 // The label displayed in the customization panel. The default is an empty string.
@@ -98,7 +98,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @property (nullable, readonly, strong) NSCandidateListTouchBarItem *candidateListTouchBarItem NS_AVAILABLE_MAC(10_12_2);
 @end
 
-// The standard touch bar item identifier for NSCandidateListTouchBarItem. -[NSView candidateListTouchBarItem] concrete overrides should be using this identifier for instantiating the touch bar item.
+// The standard identifier for NSCandidateListTouchBarItem. -[NSView candidateListTouchBarItem] concrete overrides should be using this identifier for instantiating the NSTouchBarItem.
 APPKIT_EXTERN NSTouchBarItemIdentifier const NSTouchBarItemIdentifierCandidateList NS_AVAILABLE_MAC(10_12_2);
 
 NS_ASSUME_NONNULL_END

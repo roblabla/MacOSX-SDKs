@@ -42,8 +42,9 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
                 This is only settable when initially creating a calendar and then
                 effectively read-only after that. That is, you can create a calendar, 
                 but you cannot move it to another source.
+    @discussion This will be nil for new calendars until you set it.
 */
-@property(nonatomic, strong) EKSource        *source;
+@property(null_unspecified, nonatomic, strong) EKSource        *source;
 
 /*!
     @property   calendarIdentifier
@@ -92,14 +93,16 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
 /*!
     @property   color
     @abstract   Returns the calendar color as a CGColorRef.
+    @discussion This will be nil for new calendars until you set it.
 */
-@property(nonatomic) CGColorRef CGColor;
+@property(null_unspecified, nonatomic) CGColorRef CGColor;
 #else
 /*!
     @property   color
     @abstract   Returns the calendar color as a NSColor.
+    @discussion This will be nil for new calendars until you set it.
 */
-@property(nonatomic, copy) NSColor *color;
+@property(null_unspecified, nonatomic, copy) NSColor *color;
 #endif
 
 /*!

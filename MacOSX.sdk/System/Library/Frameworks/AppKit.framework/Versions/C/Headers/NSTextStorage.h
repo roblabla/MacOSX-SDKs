@@ -1,10 +1,11 @@
 /*
         NSTextStorage.h
-        Copyright (c) 1994-2015, Apple Inc.
+        Copyright (c) 1994-2017, Apple Inc.
         All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
+#import <Foundation/NSNotification.h>
 #import <AppKit/NSAttributedString.h>
 
 @class NSArray, NSLayoutManager, NSNotification;
@@ -14,8 +15,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, NSTextStorageEditActions) {
-    NSTextStorageEditedAttributes = (1 << 0),
-    NSTextStorageEditedCharacters = (1 << 1)
+    NSTextStorageEditedAttributes NS_ENUM_AVAILABLE(10_0, 7_0) = (1 << 0),
+    NSTextStorageEditedCharacters NS_ENUM_AVAILABLE(10_0, 7_0) = (1 << 1)
 } NS_ENUM_AVAILABLE(10_11, 7_0);
 
 
@@ -52,7 +53,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 /**************************** Layout manager ****************************/
 
 // NSLayoutManager objects owned by the receiver.
-@property(readonly, copy) NSArray<NSLayoutManager *> *layoutManagers;
+@property (readonly, copy) NSArray<NSLayoutManager *> *layoutManagers;
 
 // Adds aLayoutManager to the receiver.  Sends -[NSLayoutManager setTextStorage:] to aLayoutManager with the receiver.
 - (void)addLayoutManager:(NSLayoutManager *)aLayoutManager;
@@ -65,18 +66,18 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 // These methods return information about the editing status. Especially useful when there are outstanding beginEditing calls or during processEditing...
 
 // The NSTextStorageEditActions mask indicating that there are pending changes for attributes, characters, or both.
-@property(readonly) NSTextStorageEditActions editedMask;
+@property (readonly) NSTextStorageEditActions editedMask;
 
 // The range for pending changes. {NSNotFound, 0} when there is no pending changes.
-@property(readonly) NSRange editedRange;
+@property (readonly) NSRange editedRange;
 
 // The length delta for the pending changes.
-@property(readonly) NSInteger changeInLength;
+@property (readonly) NSInteger changeInLength;
 
 
 /**************************** Delegate ****************************/
 
-@property(nullable, assign) id <NSTextStorageDelegate> delegate;
+@property (nullable, weak) id <NSTextStorageDelegate> delegate;
 
 
 /**************************** Edit management ****************************/
@@ -91,7 +92,7 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 /**************************** Attribute fixing ****************************/
 
 // Indicates if the receiver fixes invalidated attributes lazily.  The concrete UIKit subclass fixes attributes lazily by default.  The abstract class (hence, all custom subclasses) is not lazy.
-@property(readonly) BOOL fixesAttributesLazily;
+@property (readonly) BOOL fixesAttributesLazily;
 
 // Notes the range of attributes that requires validation.  If the NSTextStorage is not lazy this just calls fixAttributesInRange:.  If it is lazy this instead just records the range needing fixing in order to do it later.
 - (void)invalidateAttributesInRange:(NSRange)range;
@@ -117,8 +118,8 @@ NS_CLASS_AVAILABLE(10_0, 7_0) @interface NSTextStorage : NSMutableAttributedStri
 
 /**** Notifications ****/
 
-APPKIT_EXTERN NSNotificationName NSTextStorageWillProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
-APPKIT_EXTERN NSNotificationName NSTextStorageDidProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
+APPKIT_EXTERN NSNotificationName  NSTextStorageWillProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
+APPKIT_EXTERN NSNotificationName  NSTextStorageDidProcessEditingNotification NS_AVAILABLE(10_0, 7_0);
 
 /**** Deprecations ****/
 // NSTextStorageEditedOptions is deprecated along with -[NSLayoutManager textStorage:edited:range:changeInLength:invalidatedRange:. Use NSTextStorageEditActions.

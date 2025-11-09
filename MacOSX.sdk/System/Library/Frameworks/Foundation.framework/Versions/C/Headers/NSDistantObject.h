@@ -1,5 +1,5 @@
 /*	NSDistantObject.h
-	Copyright (c) 1989-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1989-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSProxy.h>
@@ -8,6 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSDistantObject : NSProxy <NSCoding> {
     @private

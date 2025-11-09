@@ -9,6 +9,8 @@
 
 #if __OBJC2__
 
+#import <Foundation/Foundation.h>
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class SFSafariExtensionState;

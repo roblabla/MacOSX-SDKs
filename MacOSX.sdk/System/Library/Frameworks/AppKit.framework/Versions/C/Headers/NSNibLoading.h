@@ -1,12 +1,13 @@
 /*
 	NSNibLoading.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
 #import <Foundation/NSBundle.h>
+#import <AppKit/NSNib.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -14,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface NSBundle(NSNibLoading)
 
-- (BOOL)loadNibNamed:(NSString *)nibName owner:(nullable id)owner topLevelObjects:(NSArray * __nonnull * __nullable)topLevelObjects NS_AVAILABLE_MAC(10_8);
+- (BOOL)loadNibNamed:(NSNibName)nibName owner:(nullable id)owner topLevelObjects:(NSArray * __nullable * __nullable)topLevelObjects NS_AVAILABLE_MAC(10_8);
     /* Load a nib from this bundle with the specified file name and owner. Upon success, the method returns YES and the optional out-parameter topLevelObjects is populated with the top level objects of the nib. The objects adhere to the standard Cocoa memory management rules and are autoreleased. IBOutlet properties to top level objects should be strong (retain) to demonstrate ownership and prevent deallocation. Alternatively, one may hold a strong reference to the top level objects array. */
 
 @end

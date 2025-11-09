@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: D63A8DDE-FD86-3365-8D64-8F4F5CB5BC0C', 'x86_64: D1187AC4-A653-38DB-A92D-E9FB1DD26F13' ]
+uuids:           [ 'i386: 2AE8DB39-7E16-3324-9A55-3B2A0B2A6626', 'x86_64: 708604CC-C0B9-3B1C-AE0A-61F9B97EDB42' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/VideoDecodeAcceleration.framework/Versions/A/VideoDecodeAcceleration
 objc-constraint: none

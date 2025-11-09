@@ -35,6 +35,7 @@ NS_AVAILABLE_MAC(10_6)
  */
 @property(readonly) id previewItemDisplayState;
 
+
 @end
 
 /*!

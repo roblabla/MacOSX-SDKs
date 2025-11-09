@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 19AEF1A6-5D67-37DD-A992-D9F0E7414F67' ]
+uuids:           [ 'x86_64: 7DC6B1B2-70A7-31AD-9758-F83BBA6E2E14' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/InternetAccounts.framework/Versions/A/InternetAccounts
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AOSAccountsFramework, _AOSShimAccountCopyProperty, _AOSShimAccountRefreshLoggedIn, 

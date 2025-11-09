@@ -291,6 +291,21 @@ typedef struct  CF_BRIDGED_TYPE(id) __IOSurface *IOSurfaceRef __attribute__((swi
 #   define cg_nullable __nullable
 #endif
 
+#if __has_feature(nullability_on_arrays)
+# define CG_NONNULL_ARRAY __nonnull
+# define CG_NULLABLE_ARRAY __nullable
+#else
+# define CG_NONNULL_ARRAY
+# define CG_NULLABLE_ARRAY
+#endif
+
+/* Definition of the `CG_BOXABLE'. */
+
+#if defined(__has_attribute) && __has_attribute(objc_boxable)
+# define CG_BOXABLE __attribute__((objc_boxable))
+#else
+# define CG_BOXABLE
+#endif
 
 
 #endif /* CGBASE_H_ */

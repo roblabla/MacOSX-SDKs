@@ -16,12 +16,12 @@ CF_IMPLICIT_BRIDGING_ENABLED
 CF_ASSUME_NONNULL_BEGIN
 
 /* Points. */
-
-struct CGPoint {
+struct
+CGPoint {
     CGFloat x;
     CGFloat y;
 };
-typedef struct CGPoint CGPoint;
+typedef struct CG_BOXABLE CGPoint CGPoint;
 
 /* Sizes. */
 
@@ -29,7 +29,7 @@ struct CGSize {
     CGFloat width;
     CGFloat height;
 };
-typedef struct CGSize CGSize;
+typedef struct CG_BOXABLE CGSize CGSize;
 
 /* Vectors. */
 
@@ -39,7 +39,7 @@ struct CGVector {
     CGFloat dx;
     CGFloat dy;
 };
-typedef struct CGVector CGVector;
+typedef struct CG_BOXABLE CGVector CGVector;
 
 /* Rectangles. */
 
@@ -47,7 +47,7 @@ struct CGRect {
     CGPoint origin;
     CGSize size;
 };
-typedef struct CGRect CGRect;
+typedef struct CG_BOXABLE CGRect CGRect;
 
 /* Rectangle edges. */
 

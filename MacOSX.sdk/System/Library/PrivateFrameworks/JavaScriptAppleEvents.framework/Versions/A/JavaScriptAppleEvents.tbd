@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 7C775C87-1817-3C49-B3B6-DB6FD39052F4' ]
+uuids:           [ 'x86_64: F9810CF6-9EC6-3E5D-B250-5A518C59D6C4' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/JavaScriptAppleEvents.framework/Versions/A/JavaScriptAppleEvents
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AEApplicationSendMessage, _CreateAEObjectContainer, _CreateJSAEArray, 

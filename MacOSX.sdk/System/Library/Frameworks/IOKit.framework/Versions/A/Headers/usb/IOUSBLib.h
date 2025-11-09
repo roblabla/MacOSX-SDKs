@@ -4253,7 +4253,7 @@ typedef struct IOUSBInterfaceStruct800 {
     /*!
      @function SetDeviceIdlePolicy
      @abstract   Define an idling policy for the interface.
-     @discussion This method is called to enforce an an idle policy for the device. Note, the device does not have to be open to use this function.
+     @discussion This method is called to enforce an an idle policy for the device.  Note, the idle policy is only active while the interface is open and is reset when closed.
      @availability This function is only available with IOUSBInterfaceInterface800 and above.
      @param      self Pointer to the IOUSBInterfaceInterface.
      @param      deviceIdleTimeout The amount of time in ms a device is idle before it can be suspended.  Use 0 to prevent suspending an idle device.
@@ -4264,7 +4264,7 @@ typedef struct IOUSBInterfaceStruct800 {
     /*!
      @function SetPipeIdlePolicy
      @abstract   Define an idling policy for the interface.
-     @discussion This method is called to enforce an an idle policy for the pipes. Note, the device does not have to be open to use this function.
+     @discussion This method is called to enforce an an idle policy for the pipes. Note, the idle policy is only active while the interface is open and is reset when closed.
      @availability This function is only available with IOUSBInterfaceInterface800 and above.
      @param      self Pointer to the IOUSBInterfaceInterface.
      @param      pipeRef Index for the desired pipe (1 - GetNumEndpoints).

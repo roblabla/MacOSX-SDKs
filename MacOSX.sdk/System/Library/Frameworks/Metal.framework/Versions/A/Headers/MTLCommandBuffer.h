@@ -63,15 +63,35 @@ MTL_EXTERN NSString *const MTLCommandBufferErrorDomain;
 /*!
  @enum MTLCommandBufferError
  @abstract Error codes that can be found in MTLCommandBuffer.error
- @constant MTLCommandBufferErrorInternal An internal error that doesn't fit into the other categories. The actual low level error code is encoded in the local description.
- @constant MTLCommandBufferErrorTimeout Execution of this command buffer took too long, execution of this command was interrupted and aborted.
- @constant MTLCommandBufferErrorPageFault Execution of this command buffer generated an unserviceable GPU page fault. This can caused by buffer read write attribute mismatch or out of boundary access.
- @constant MTLCommandBufferErrorBlacklisted Access to this device has been revoked because this client has been responsible for too many timeouts or hangs.
- @constant MTLCommandBufferErrorNotPermitted This process does not have access to use this device.
- @constant MTLCommandBufferErrorOutOfMemory Insufficient memory was available to execute this command buffer.
- @constant MTLCommandBufferErrorInvalidResource The command buffer referenced an invalid resource.  This is most commonly caused when the caller deletes a resource before executing a command buffer that refers to it.
- @constant MTLCommandBufferErrorMemoryless One or more internal resources limits reached that prevent using memoryless render pass attachments. See error string for more detail.
+ 
+ @constant MTLCommandBufferErrorInternal
+ An internal error that doesn't fit into the other categories. The actual low level error code is encoded in the local description.
+ 
+ @constant MTLCommandBufferErrorTimeout
+ Execution of this command buffer took too long, execution of this command was interrupted and aborted.
+ 
+ @constant MTLCommandBufferErrorPageFault
+ Execution of this command buffer generated an unserviceable GPU page fault. This can caused by buffer read write attribute mismatch or out of boundary access.
+ 
+ @constant MTLCommandBufferErrorBlacklisted
+ Access to this device has been revoked because this client has been responsible for too many timeouts or hangs.
+ 
+ @constant MTLCommandBufferErrorNotPermitted
+ This process does not have access to use this device.
+ 
+ @constant MTLCommandBufferErrorOutOfMemory
+ Insufficient memory was available to execute this command buffer.
+ 
+ @constant MTLCommandBufferErrorInvalidResource
+ The command buffer referenced an invalid resource.  This is most commonly caused when the caller deletes a resource before executing a command buffer that refers to it.
+ 
+ @constant MTLCommandBufferErrorMemoryless
+ One or more internal resources limits reached that prevent using memoryless render pass attachments. See error string for more detail.
+ 
+ @constant MTLCommandBufferErrorDeviceRemoved
+ The device was physically removed before the command could finish execution
  */
+
 typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
 {
     MTLCommandBufferErrorNone = 0,
@@ -82,7 +102,8 @@ typedef NS_ENUM(NSUInteger, MTLCommandBufferError)
     MTLCommandBufferErrorNotPermitted = 7,
     MTLCommandBufferErrorOutOfMemory = 8,
     MTLCommandBufferErrorInvalidResource = 9,
-    MTLCommandBufferErrorMemoryless NS_AVAILABLE_IOS(10_0) = 10 ,
+    MTLCommandBufferErrorMemoryless NS_AVAILABLE_IOS(10_0) = 10,
+    MTLCommandBufferErrorDeviceRemoved NS_AVAILABLE_MAC(10_13) = 11,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 typedef void (^MTLCommandBufferHandler)(id <MTLCommandBuffer>);
@@ -118,6 +139,20 @@ NS_AVAILABLE(10_11, 8_0)
  */
 @property (nullable, copy, atomic) NSString *label;
 
+@property (readonly) CFTimeInterval kernelStartTime NS_AVAILABLE_IOS(10_3);
+@property (readonly) CFTimeInterval kernelEndTime NS_AVAILABLE_IOS(10_3);
+
+/*!
+ @property GPUStartTime
+ @abstract The host time in seconds that GPU starts exeucting this command buffer. Returns zero if it has not started. This usually can be called in command buffer completion handler.
+ */
+@property (readonly) CFTimeInterval GPUStartTime NS_AVAILABLE_IOS(10_3);
+/*!
+ @property GPUEndTime
+ @abstract The host time in seconds that GPU finishes exeucting this command buffer. Returns zero if CPU has not received completion notification. This usually can be called in command buffer completion handler.
+ */
+@property (readonly) CFTimeInterval GPUEndTime NS_AVAILABLE_IOS(10_3);
+
 /*!
  @method enqueue
  @abstract Append this command buffer to the end of its MTLCommandQueue.
@@ -139,13 +174,15 @@ NS_AVAILABLE(10_11, 8_0)
 /*!
  @method presentDrawable:
  @abstract Add a drawable present that will be invoked when this command buffer has been scheduled for execution.
+ @discussion The submission thread will be lock stepped with present call been serviced by window server
  */
 - (void)presentDrawable:(id <MTLDrawable>)drawable;
 
 /*!
  @method presentDrawable:atTime:
  @abstract Add a drawable present for a specific host time that will be invoked when this command buffer has been scheduled for execution.
- */
+ @discussion The submission thread will be lock stepped with present call been serviced by window server
+*/
 - (void)presentDrawable:(id <MTLDrawable>)drawable atTime:(CFTimeInterval)presentationTime;
 
 
@@ -183,26 +220,39 @@ NS_AVAILABLE(10_11, 8_0)
  @method blitCommandEncoder
  @abstract returns a blit command encoder to encode into this command buffer.
  */
-- (id <MTLBlitCommandEncoder>)blitCommandEncoder;
+- (nullable id <MTLBlitCommandEncoder>)blitCommandEncoder;
 
 /*!
  @method renderCommandEncoderWithDescriptor:
  @abstract returns a render command endcoder to encode into this command buffer.
  */
-- (id <MTLRenderCommandEncoder>)renderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;
+- (nullable id <MTLRenderCommandEncoder>)renderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;
 
 /*!
  @method computeCommandEncoder
  @abstract returns a compute command encoder to encode into this command buffer.
  */
-- (id <MTLComputeCommandEncoder>)computeCommandEncoder;
-
+- (nullable id <MTLComputeCommandEncoder>)computeCommandEncoder;
 
 /*!
  @method parallelRenderCommandEncoderWithDescriptor:
  @abstract returns a parallel render pass encoder to encode into this command buffer.
  */
-- (id <MTLParallelRenderCommandEncoder>)parallelRenderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;
+- (nullable id <MTLParallelRenderCommandEncoder>)parallelRenderCommandEncoderWithDescriptor:(MTLRenderPassDescriptor *)renderPassDescriptor;
+
+
+/*!
+ @method pushDebugGroup:
+ @abstract Push a new named string onto a stack of string labels.
+ */
+- (void)pushDebugGroup:(NSString *)string NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @method popDebugGroup
+ @abstract Pop the latest named string off of the stack.
+ */
+- (void)popDebugGroup NS_AVAILABLE(10_13, 11_0);
+
 
 @end
 NS_ASSUME_NONNULL_END

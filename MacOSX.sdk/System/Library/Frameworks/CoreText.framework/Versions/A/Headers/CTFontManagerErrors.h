@@ -20,14 +20,14 @@ CF_ASSUME_NONNULL_BEGIN
     @abstract   CFError domain for CTFontManager errors
     @discussion CFErrors with this domain will have error codes corresponding to one of the CTFontManagerErrors above.
 */
-CT_EXPORT const CFStringRef kCTFontManagerErrorDomain CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTFontManagerErrorDomain CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @constant   kCTFontManagerErrorFontURLsKey
     @abstract   User info key to be used with CFError references returned from registration functions.
     @discussion The value associated with this key in the user info dictionary of a CFError is a CFArray of font URLs that failed with given error.
 */
-CT_EXPORT const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(10_6, 3_2);
+CT_EXPORT const CFStringRef kCTFontManagerErrorFontURLsKey CT_AVAILABLE(macos(10.6), ios(3.2), watchos(2.0), tvos(9.0));
 
 /*!
     @enum

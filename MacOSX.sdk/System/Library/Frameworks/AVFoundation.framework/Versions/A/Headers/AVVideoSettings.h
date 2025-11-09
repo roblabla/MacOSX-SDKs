@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -33,12 +33,26 @@
 */
 
 AVF_EXPORT NSString *const AVVideoCodecKey /* NSString (CMVideoCodecType) */				NS_AVAILABLE(10_7, 4_0);
-	AVF_EXPORT NSString *const AVVideoCodecH264 /* @"avc1" */								NS_AVAILABLE(10_7, 4_0);
-    AVF_EXPORT NSString *const AVVideoCodecJPEG /* @"jpeg" */								NS_AVAILABLE(10_7, 4_0);
-    AVF_EXPORT NSString *const AVVideoCodecAppleProRes4444 /* @"ap4h" */					NS_AVAILABLE(10_7, NA);
-    AVF_EXPORT NSString *const AVVideoCodecAppleProRes422   /* @"apcn" */					NS_AVAILABLE(10_7, NA);
 
-// For best results, always use even number values for AVVideoWidthKey and AVVideoHeightKey when encoding to AVVideoCodecH264 or any other format that uses 4:2:0 downsampling
+/*!
+  @typedef      AVVideoCodecType
+  @abstract     The type of the strings used to specify a video codec type (for instance, as values for the AVVideoCodecKey key in a video settings dictionary).
+ */
+typedef NSString * AVVideoCodecType NS_STRING_ENUM;
+
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeHEVC /* @"hvc1" */                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeH264 /* @"avc1" */                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeJPEG /* @"jpeg" */                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes4444 /* @"ap4h" */         API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422 /* @"apcn" */          API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+
+	AVF_EXPORT NSString *const AVVideoCodecHEVC /* @"hvc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeHEVC", macos(10.13, 10.13), ios(11.0, 11.0), tvos(11.0, 11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT NSString *const AVVideoCodecH264 /* @"avc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeH264", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT NSString *const AVVideoCodecJPEG /* @"jpeg" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeJPEG", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) __WATCHOS_PROHIBITED;
+	AVF_EXPORT NSString *const AVVideoCodecAppleProRes4444 /* @"ap4h" */                    API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeAppleProRes4444", macos(10.7, 10.13)) API_UNAVAILABLE(ios, tvos, watchos);
+	AVF_EXPORT NSString *const AVVideoCodecAppleProRes422 /* @"apcn" */                     API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeAppleProRes422", macos(10.7, 10.13)) API_UNAVAILABLE(ios, tvos, watchos);
+
+// For best results, always use even number values for AVVideoWidthKey and AVVideoHeightKey when encoding to AVVideoCodecTypeH264 or any other format that uses 4:2:0 downsampling
 AVF_EXPORT NSString *const AVVideoWidthKey /* NSNumber (encoded pixels) */					NS_AVAILABLE(10_7, 4_0);
 AVF_EXPORT NSString *const AVVideoHeightKey /* NSNumber (encoded pixels) */					NS_AVAILABLE(10_7, 4_0);
 
@@ -123,6 +137,8 @@ AVF_EXPORT NSString *const AVVideoColorPropertiesKey /* NSDictionary, all 3 belo
 	AVF_EXPORT NSString *const AVVideoTransferFunctionKey /* NSString */                                     NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoTransferFunction_ITU_R_709_2                                       NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoTransferFunction_SMPTE_240M_1995                                   NS_AVAILABLE(10_7, NA);
+		AVF_EXPORT NSString *const AVVideoTransferFunction_SMPTE_ST_2084_PQ                                  NS_AVAILABLE(10_13, 11_0);
+		AVF_EXPORT NSString *const AVVideoTransferFunction_ITU_R_2100_HLG                                    NS_AVAILABLE(10_13, 11_0);
 	AVF_EXPORT NSString *const AVVideoYCbCrMatrixKey /* NSString */                                          NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_709_2                                            NS_AVAILABLE(10_7, 10_0);
 		AVF_EXPORT NSString *const AVVideoYCbCrMatrix_ITU_R_601_4                                            NS_AVAILABLE(10_7, 10_0);
@@ -148,7 +164,7 @@ AVF_EXPORT NSString *const AVVideoAllowWideColorKey /* NSNumber(BOOL)	*/					NS_
  */
 AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */                                NS_AVAILABLE(10_7, 4_0);
 	AVF_EXPORT NSString *const AVVideoAverageBitRateKey /* NSNumber (bits per second, H.264 only) */         NS_AVAILABLE(10_7, 4_0);
-	AVF_EXPORT NSString *const AVVideoQualityKey /* NSNumber (0.0-1.0, JPEG only) */                         NS_AVAILABLE(10_7, 5_0);
+	AVF_EXPORT NSString *const AVVideoQualityKey /* NSNumber (0.0-1.0, JPEG and HEIC only. With HEIC, 1.0 indicates lossless compression) */ NS_AVAILABLE(10_7, 5_0);
 	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalKey /* NSNumber (frames, 1 means key frames only, H.264 only) */ NS_AVAILABLE(10_7, 4_0);
 	AVF_EXPORT NSString *const AVVideoMaxKeyFrameIntervalDurationKey /* NSNumber (seconds, 0.0 means no limit, H.264 only) */ NS_AVAILABLE(10_9, 7_0);
 
@@ -165,7 +181,10 @@ AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */   
 	 */
 	AVF_EXPORT NSString *const AVVideoAllowFrameReorderingKey /* NSNumber (BOOL) */							 NS_AVAILABLE(10_10, 7_0);
 
-	AVF_EXPORT NSString *const AVVideoProfileLevelKey /* NSString, H.264 only, one of: */                    NS_AVAILABLE(10_8, 4_0);
+	AVF_EXPORT NSString *const AVVideoProfileLevelKey /* NSString, profile/level constants are specific to a particular encoder. See VideoToolbox/VTCompressionProperties.h for additional profiles/levels that can used as the value of this key. */               NS_AVAILABLE(10_8, 4_0);
+
+		/* HEVC profiles/levels are defined in VideoToolbox/VTCompressionProperties.h, e.g. kVTProfileLevel_HEVC_Main_AutoLevel. The constants defined there can be used as the value for the key AVVideoProfileLevelKey. */
+
 		AVF_EXPORT NSString *const AVVideoProfileLevelH264Baseline30 /* Baseline Profile Level 3.0 */        NS_AVAILABLE(10_8, 4_0);
 		AVF_EXPORT NSString *const AVVideoProfileLevelH264Baseline31 /* Baseline Profile Level 3.1 */        NS_AVAILABLE(10_8, 4_0);
         AVF_EXPORT NSString *const AVVideoProfileLevelH264Baseline41 /* Baseline Profile Level 4.1 */        NS_AVAILABLE(10_8, 5_0);
@@ -213,6 +232,17 @@ AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */   
 	AVF_EXPORT NSString *const AVVideoAverageNonDroppableFrameRateKey /* NSNumber (frames per second) */		NS_AVAILABLE(10_10, 7_0);
 
 /*!
+ @constant	AVVideoDecompressionPropertiesKey
+ @abstract
+ The value for this key is an instance of NSDictionary, containing properties to be passed down to the video decoder.
+ @discussion
+ Package the below keys in an instance of NSDictionary and use it as the value for AVVideoDecompressionPropertiesKey in the top-level AVVideoSettings dictionary.  In addition to the keys listed below, you can also include keys from VideoToolbox/VTDecompressionProperties.h.
+ 
+ Most keys can only be used for certain decoders.  Look at individual keys for details.
+ */
+AVF_EXPORT NSString *const AVVideoDecompressionPropertiesKey /* NSDictionary */   API_AVAILABLE(macos(10.13)) __IOS_PROHIBITED __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
+/*!
 	@constant AVVideoEncoderSpecificationKey
 	@abstract
 		The video encoder specification includes options for choosing a specific video encoder.
@@ -221,3 +251,29 @@ AVF_EXPORT NSString *const AVVideoCompressionPropertiesKey /* NSDictionary */   
 		The value for this key is a dictionary containing kVTVideoEncoderSpecification_* keys specified in the VideoToolbox framework.  This key should be specified at the top level of an AVVideoSettings dictionary.
  */
 AVF_EXPORT NSString *const AVVideoEncoderSpecificationKey /* NSDictionary */ NS_AVAILABLE(10_10, NA);
+
+typedef NSString * AVVideoApertureMode NS_STRING_ENUM;
+
+/*!
+ @constant	AVVideoApertureModeCleanAperture
+ @abstract	Both pixel aspect ratio and clean aperture will be applied.
+ @discussion
+	An image's clean aperture is a region of video free from transition artifacts caused by the encoding of the signal.
+ */
+AVF_EXPORT AVVideoApertureMode const AVVideoApertureModeCleanAperture API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+
+/*!
+ @constant	AVVideoApertureModeProductionAperture
+ @abstract	Only pixel aspect ratio will be applied.
+ @discussion
+	The image is not cropped to the clean aperture region, but it is scaled according to the pixel aspect ratio. Use this option when you want to see all the pixels in your video, including the edges.
+ */
+AVF_EXPORT AVVideoApertureMode const AVVideoApertureModeProductionAperture API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;
+
+/*!
+ @constant	AVVideoApertureModeEncodedPixels
+ @abstract	Neither pixel aspect ratio nor clean aperture will be applied.
+ @discussion
+	The image is not cropped to the clean aperture region and is not scaled according to the pixel aspect ratio. The encoded dimensions of the image description are displayed.
+ */
+AVF_EXPORT AVVideoApertureMode const AVVideoApertureModeEncodedPixels API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) __WATCHOS_PROHIBITED;

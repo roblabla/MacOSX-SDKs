@@ -21,4 +21,6 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
+#if TARGET_OS_OSX
 #include <SecurityFoundation/SFAuthorization.h>
+#endif

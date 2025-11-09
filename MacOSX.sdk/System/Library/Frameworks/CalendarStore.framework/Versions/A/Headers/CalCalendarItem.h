@@ -1,13 +1,15 @@
 //
 //  CalCalendarItem.h
-//	Calendar Store Framework
+//	CalendarStore Framework
 //
 //  Copyright 2006 Apple Inc. All rights reserved.
 //
 //  This class and its subclasses should be used to get information about CalEvent and CalTasks. Accessors for 
 //  properties common to both of these classes are included here.
 //
-//  The Calendar Store framework is deprecated.  Please use the Event Kit framework instead.
+//  The CalendarStore framework is deprecated.  Please use the EventKit framework instead.
+
+#import <Foundation/Foundation.h>
 
 @class CalAlarm;
 @class CalCalendar;

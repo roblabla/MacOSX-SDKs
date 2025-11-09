@@ -28,6 +28,8 @@
 .Fl k Ar device
 .Nm
 .Fl s Ar device
+.Nm
+.Fl B
 .Sh DESCRIPTION
 The
 .Nm
@@ -51,6 +53,16 @@ Return the UUID of the apfs volume on
 Set UUIDs for the container and the volume(s) on the
 .Ar device
 to new random values.
+.It Fl B
+Bootstrap root container by creating and mounting VM volume and
+mount preboot volume if one exists.
+.Pp
+.Fl B
+cannot be used with
+.Fl p ,
+.Fl s
+or
+.Fl k .
 .El
 .Sh SEE ALSO
 .Xr diskarbitrationd 8

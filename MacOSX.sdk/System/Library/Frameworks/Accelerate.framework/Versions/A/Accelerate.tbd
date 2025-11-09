@@ -1,10 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: DA12A954-CB02-3E28-A3B4-92C113B6878F', 'x86_64: BDDB2053-BB24-34E4-A452-50D1260BF672', 
-                   'x86_64h: D700DBDF-69AE-37A2-B9C7-0961CF0B6841' ]
+uuids:           [ 'i386: 65375A38-816E-3360-ADF5-F1D466EAE43B', 'x86_64: 6DCAB35B-1882-339A-A750-F9232C3078CB', 
+                   'x86_64h: 04FC5A30-0382-3FEB-BE8B-E14E9FF4EBD5' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/Accelerate.framework/Versions/A/Accelerate
-current-version: 4.0
+current-version: 4
 objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64, x86_64h ]

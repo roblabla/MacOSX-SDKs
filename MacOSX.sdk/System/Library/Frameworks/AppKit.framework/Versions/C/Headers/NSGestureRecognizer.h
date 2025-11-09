@@ -1,7 +1,7 @@
 /*
     NSGestureRecognizer.h
     Application Kit
-    Copyright (c) 2013-2016, Apple Inc.
+    Copyright (c) 2013-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -57,7 +57,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
      -(void)handleGesture;
      -(void)handleGesture:(NSGestureRecognizer*)gestureRecognizer;
 */
-- (instancetype)initWithTarget:(id)target action:(nullable SEL)action NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTarget:(nullable id)target action:(nullable SEL)action NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 @property (nullable, weak) id target;
@@ -146,7 +146,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 - (void)reset;
 
 // same behavior as the equivalent delegate methods, but can be used by subclasses to define class-wide prevention rules
-// for example, a NSTapGestureRecognizer never prevents another NSTapGestureRecognizer with a higher tap count
+// for example, a NSTapGestureRecognizer never prevents another NSClickGestureRecognizer with a higher click count
 - (BOOL)canPreventGestureRecognizer:(NSGestureRecognizer *)preventedGestureRecognizer;
 - (BOOL)canBePreventedByGestureRecognizer:(NSGestureRecognizer *)preventingGestureRecognizer;
 

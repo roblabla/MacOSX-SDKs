@@ -972,7 +972,7 @@ CF_ENUM(AudioObjectPropertySelector)
     kAudioDevicePropertyStreamConfiguration             = 'slay',
     kAudioDevicePropertyIOProcStreamUsage               = 'suse',
     kAudioDevicePropertyActualSampleRate                = 'asrt',
-	kAudioDevicePropertyClockDevice						= 'apcd'
+    kAudioDevicePropertyClockDevice                     = 'apcd'
 };
 
 /*!
@@ -1538,7 +1538,7 @@ CF_ENUM(AudioClassID)
                     AudioAggregateDevice. If the aggregate device includes both a master audio
                     device and a clock device, the clock device will control the master time base.
 */
-#define kAudioAggregateDeviceClockDeviceKey "clock"
+#define kAudioAggregateDeviceClockDeviceKey     "clock"
 
 /*!
     @defined        kAudioAggregateDeviceIsPrivateKey

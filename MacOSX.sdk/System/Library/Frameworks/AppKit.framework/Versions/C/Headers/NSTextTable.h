@@ -1,6 +1,6 @@
 /*
         NSTextTable.h
-        Copyright (c) 2004-2016, Apple Inc.
+        Copyright (c) 2004-2017, Apple Inc.
         All rights reserved.
 
         Classes to represent text tables and other text blocks.

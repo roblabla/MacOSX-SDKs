@@ -81,7 +81,7 @@ enum {
 
     // debug aids - change behaviour
     kIONoFreeObjects    =         0x00100000ULL,
-    kIOLogSynchronous   =         0x00200000ULL,  // IOLog completes synchronously
+//    kIOLogSynchronous   =         0x00200000ULL,  // IOLog completes synchronously -- obsolete
     kIOTracking         =         0x00400000ULL,
     kIOWaitQuietPanics  =         0x00800000ULL,
     kIOWaitQuietBeforeRoot =      0x01000000ULL,

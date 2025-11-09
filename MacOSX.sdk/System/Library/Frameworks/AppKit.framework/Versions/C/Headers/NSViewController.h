@@ -1,11 +1,12 @@
 /*
 	NSViewController.h
 	Application Kit
-	Copyright (c) 2006-2016, Apple Inc.
+	Copyright (c) 2006-2017, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSArray.h>
+#import <AppKit/NSNib.h>
 #import <AppKit/NSNibDeclarations.h>
 #import <AppKit/NSResponder.h>
 #import <AppKit/NSPopover.h>
@@ -44,7 +45,7 @@ typedef NS_OPTIONS(NSUInteger, NSViewControllerTransitionOptions) {
 NS_CLASS_AVAILABLE(10_5, NA)
 @interface NSViewController : NSResponder <NSCoding, NSSeguePerforming, NSUserInterfaceItemIdentification> {
 @private
-    NSString *_nibName;
+    NSNibName _nibName;
     NSBundle *_nibBundle;
     id _representedObject;
     NSString *_title;
@@ -65,13 +66,13 @@ NS_CLASS_AVAILABLE(10_5, NA)
 
 On 10.10 and higher, a nil nibName can be used, and NSViewController will automatically attempt to load a view with the same class name. See loadView for more information.
 */
-- (nullable instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithNibName:(nullable NSNibName)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_DESIGNATED_INITIALIZER;
 
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
 /* Return the name of the nib to be loaded to instantiate the view. The default implementation returns whatever value was passed to the initializer.
 */
-@property (nullable, copy, readonly) NSString *nibName;
+@property (nullable, copy, readonly) NSNibName nibName;
 
 /* Return the bundle that the nib will be loaded from. The default implementation returns whatever value was passed to the initializer.
 */

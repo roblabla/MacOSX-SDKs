@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: C2623FFE-24E7-3F03-A2DA-03DC0A2B6630', 'x86_64: 358948B8-7FCA-3F22-B0FD-2F4572D9585C' ]
+uuids:           [ 'i386: 635EA601-4847-3DBF-B5D0-A6975F119C4A', 'x86_64: 9998F208-A996-3908-AC45-187CA3A66CA6' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/SecItemShim.dylib
-current-version: 602.3.12
-objc-constraint: none
+current-version: 604.1.31
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _WebKitSecItemShimInitialize ]

@@ -1,7 +1,7 @@
 /*
  NSSliderTouchBarItem.h
  Application Kit
- Copyright (c) 2016-2016, Apple Inc.
+ Copyright (c) 2016-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSSliderAccessory, NSSlider;
 
-typedef CGFloat NSSliderAccessoryWidth _NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE_MAC(10_12_2);
+typedef CGFloat NSSliderAccessoryWidth NS_TYPED_EXTENSIBLE_ENUM NS_AVAILABLE_MAC(10_12_2);
 /// The default width for slider accessories.
 APPKIT_EXTERN const NSSliderAccessoryWidth NSSliderAccessoryWidthDefault NS_AVAILABLE_MAC(10_12_2);
 /// The standard "wide" width for slider accessories.

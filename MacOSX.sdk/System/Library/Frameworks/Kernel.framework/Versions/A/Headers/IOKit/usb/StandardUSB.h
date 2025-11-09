@@ -49,9 +49,12 @@
 #define HostToUSB64 OSSwapHostToLittleInt64
 
 #define StandardUSBBit(bit)                     ((uint32_t)(1) << bit)
-#define StandardUSBBitRange(start, end)         (~(((uint32_t)(1) << start) - 1) & ((1 << end) | ((1 << end) - 1)))
-#define StandardUSBBitRange64(start, end)       (~(((uint64_t)(1) << start) - 1) & ((1 << end) | ((1 << end) - 1)))
+#define StandardUSBBitRange(start, end)         (~(((uint32_t)(1) << start) - 1) & ((uint32_t)(1 << end) | ((uint32_t)(1 << end) - 1)))
+#define StandardUSBBitRange64(start, end)       (~(((uint64_t)(1) << start) - 1) & ((uint64_t)(1 << end) | ((uint64_t)(1 << end) - 1)))
 #define StandardUSBBitRangePhase(start, end)    (start)
+
+#define kUSB30Bitrate5Gbps  ( 5 * 1000 * 1000 * 1000ULL)
+#define kUSB30Bitrate10Gbps (10 * 1000 * 1000 * 1000ULL)
 
 #ifdef __cplusplus
 
@@ -117,7 +120,8 @@ namespace StandardUSB
         kDescriptorSizeSuperSpeedUSBEndpointCompanion = 6,
         kDescriptorSizeSuperSpeedPlusIsochronousEndpointCompanion = 8,
         kDescriptorSizeBillboardDeviceMinimum = 44,
-        kDescriptorSizeBillboardDeviceMaximum = 256
+        kDescriptorSizeBillboardDeviceMaximum = 256,
+        kDescriptorSizePlatformECIDCapability = 28
     };
     
     typedef enum tDescriptorSize tDescriptorSize;
@@ -393,7 +397,16 @@ namespace StandardUSB
     
     enum
     {
-        kUSB20ExtensionCapabilityLPM = StandardUSBBit(1)
+        kUSB20ExtensionCapabilityLPM = StandardUSBBit(1),
+        
+        // From USB 2.0 ECN Errata for Link Power Management.
+        kUSB20ExtensionCapabilityBESLSupport    = StandardUSBBit(2),
+        kUSB20ExtensionCapabilityBESLValid      = StandardUSBBit(3),
+        kUSB20ExtensionCapabilityBESLDValid     = StandardUSBBit(4),
+        kUSB20ExtensionCapabilityBESL           = StandardUSBBitRange( 8, 11),
+        kUSB20ExtensionCapabilityBESLPhase      = StandardUSBBitRangePhase( 8, 11),
+        kUSB20ExtensionCapabilityBESLD          = StandardUSBBitRange(12, 15),
+        kUSB20ExtensionCapabilityBESLDPhase     = StandardUSBBitRangePhase(12, 15)
     };
     
         
@@ -483,11 +496,25 @@ namespace StandardUSB
         kSuperSpeedPlusDeviceCapabilitySublinkSpeedId = StandardUSBBitRange(0, 3),
         kSuperSpeedPlusDeviceCapabilitySublinkSpeedIdPhase = StandardUSBBitRangePhase(0, 3),
         
-        kSuperSpeedPlusDeviceCapabilitySublinkLSE = StandardUSBBitRange(4, 5),
+        kSuperSpeedPlusDeviceCapabilitySublinkLSE      = StandardUSBBitRange(4, 5),
         kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase = StandardUSBBitRangePhase(4, 5),
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEBits  = (0 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEKbits = (1 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEMbits = (2 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkLSEGbits = (3 << kSuperSpeedPlusDeviceCapabilitySublinkLSEPhase),
         
         kSuperSpeedPlusDeviceCapabilitySublinkType = StandardUSBBitRange(6, 7),
         kSuperSpeedPlusDeviceCapabilitySublinkTypePhase = StandardUSBBitRangePhase(6, 7),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkSymmetry = StandardUSBBit(6),
+        kSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase = StandardUSBBitRangePhase(6, 6),
+        kSuperSpeedPlusDeviceCapabilitySublinkSymmetric  = (0 << kSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkAsymmetric = (1 << kSuperSpeedPlusDeviceCapabilitySublinkSymmetryPhase),
+        
+        kSuperSpeedPlusDeviceCapabilitySublinkDirection = StandardUSBBit(7),
+        kSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase = StandardUSBBitRangePhase(7, 7),
+        kSuperSpeedPlusDeviceCapabilitySublinkDirectionRx = (0 << kSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase),
+        kSuperSpeedPlusDeviceCapabilitySublinkDirectionTx = (1 << kSuperSpeedPlusDeviceCapabilitySublinkDirectionPhase),
         
         kSuperSpeedPlusDeviceCapabilitySublinkReserved = StandardUSBBitRange(8, 13),
         kSuperSpeedPlusDeviceCapabilitySublinkReservedPhase = StandardUSBBitRangePhase(8, 13),
@@ -517,6 +544,22 @@ namespace StandardUSB
         
     typedef struct ContainerIDCapabilityDescriptor ContainerIDCapabilityDescriptor;
 
+#ifdef __cplusplus
+    // USB 3.1 9.6.2.4: Platform Descriptor
+    struct PlatformCapabilityDescriptor : public DeviceCapabilityDescriptor
+    {
+#else
+    struct PlatformCapabilityDescriptor
+    {
+        uint8_t   bLength;
+        uint8_t   bDescriptorType;
+        uint8_t   bDevCapabilityType;
+#endif
+        uint8_t   bReserved;
+        uuid_t    PlatformCapabilityUUID;
+    }__attribute__((packed));
+
+    typedef struct PlatformCapabilityDescriptor PlatformCapabilityDescriptor;
 
     // USB Billboard 3.1.6.2: Billboard Capability Descriptor V1.2
     struct BillboardAltModeCapabilityCompatibility
@@ -578,8 +621,6 @@ namespace StandardUSB
     }__attribute__((packed));
 
     typedef struct BillboardAltModeCapabilityDescriptor BillboardAltModeCapabilityDescriptor;
-
-
 
 #ifdef __cplusplus
     // USB 3.0 9.6.4: Interface Association
@@ -832,6 +873,14 @@ namespace StandardUSB
      * @return      ContainerIDCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
      */
     const ContainerIDCapabilityDescriptor* getContainerIDDescriptor(const BOSDescriptor* bosDescriptor);
+
+    /*!
+     * @brief       Find the first PlatformCapabilityDescriptor in a BOS descriptor
+     * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first PlatformCapabilityDescriptor
+     * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @return      PlatformCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+     */
+    const PlatformCapabilityDescriptor* getPlatformCapabilityDescriptor(const BOSDescriptor* bosDescriptor);
         
     /*!
      * @brief       Find the first BillboardCapabilityDescriptor in a BOS descriptor
@@ -840,6 +889,7 @@ namespace StandardUSB
      * @return      BillboardCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
      */
     const BillboardCapabilityDescriptor* getBillboardDescriptor(const BOSDescriptor* bosDescriptor);
+
 
 #pragma mark Device descriptor parsing
     /*!
@@ -1087,6 +1137,17 @@ namespace StandardUSB
     } __attribute__((packed));
         
     typedef struct DeviceRequest DeviceRequest;
+        
+    // USB 3.0 9.4.12: Set SEL Standard Device Request
+    struct DeviceRequestSetSELData
+    {
+        uint8_t     u1Sel;              // Time in μs for U1 System Exit Latency
+        uint8_t     u1Pel;              // Time in μs for U1 Device to Host Exit Latency
+        uint16_t    u2Sel;              // Time in μs for U2 System Exit Latency
+        uint16_t    u2Pel;              // Time in μs for U2 Device to Host Exit Latency
+    } __attribute__((packed));
+        
+    typedef struct DeviceRequestSetSELData DeviceRequestSetSELData;
     
     enum
     {
@@ -1165,6 +1226,19 @@ namespace StandardUSB
         kInterfaceSuspendLowPower           = StandardUSBBit(0),
         kInterfaceSuspendRemoteWakeEnable   = StandardUSBBit(1)
     };
+        
+    // USB 3.0 Table 10-16: Hub Parameters
+    enum
+    {
+        kHubPort2PortExitLatencyNs          = 1000,
+        kHubDelayNs                         = 400
+    };
+        
+    // USB 3.0 Table 8-33: Timing Parameters
+    enum
+    {
+        kPingResponseTimeNs                 = 400
+    };
 
     enum tBusVoltage
     {
@@ -1179,8 +1253,10 @@ namespace StandardUSB20
 {
     enum tBusCurrent
     {
-        kBusCurrentMinimum = 100,
-        kBusCurrentDefault = 500
+        kBusCurrentMinimum       = 100,
+        kBusCurrentDefault       = 500,
+        kBusCurrentMaxPowerUnits = 2
+
     };
 }
 
@@ -1188,8 +1264,9 @@ namespace StandardUSB30
 {
     enum tBusCurrent
     {
-        kBusCurrentMinimum = 150,
-        kBusCurrentDefault = 900
+        kBusCurrentMinimum       = 150,
+        kBusCurrentDefault       = 900,
+        kBusCurrentMaxPowerUnits = 8
     };
 
     // USB 3.0 Table 6-21
@@ -1231,6 +1308,56 @@ namespace StandardUSB30
 
         // USB 3.0 7.5.9 and 7.5.10
         kLinkStateSSResumeDeadline              = (kLinkStateU3NoLFPSResponseTimeout + kLinkStateRecoveryActiveTimeout + kLinkStateRecoveryConfigurationTimeout + kLinkStateRecoveryIdleTimeout),
+    };
+    
+    // USB 3.1 Table 8-18
+    enum tDeviceNotificationType
+    {
+        kDeviceNotificationTypeFunctionWake             = 1,
+        kDeviceNotificationTypeLatencyTolerance         = 2,
+        kDeviceNotificationTypeBusIntervalAdjustment    = 3,
+        kDeviceNotificationTypeHostRoleRequest          = 4,
+        kDeviceNotificationTypeSublinkSpeed             = 5
+    };
+    
+    // USB 3.1 Table 8-36
+    enum tTimingParameters
+    {
+        kTimingParameterBELTDefaultNs = 1 * 1000 * 1000,
+        kTimingParameterBELTMinNs     =      125 * 1000
+    };
+    
+    // USB 3.1 Table 10-12 Port Status Type Codes
+    enum tHubPortStatusCode
+    {
+        tHubPortStatusCodeStandard = 0,
+        tHubPortStatusCodePD       = 1,
+        tHubPortStatusCodeExt      = 2,
+        tHubPortStatusCodeCount    = 3
+    };
+    
+    // USB 3.1 10.16.2.6 Get Port Status
+    struct tHubPortStatusExt
+    {
+        uint16_t wPortStatus;
+        uint16_t wPortChange;
+        uint32_t dwExtPortStatus;
+    } __attribute__((packed));
+    
+    // USB 3.1 Table 10-11.  Note, offsets are specific to dwExtPortStatus
+    enum tHubExtStatus
+    {
+        kHubExtStatusRxSublinkSpeedID      = StandardUSBBitRange(0, 3),
+        kHubExtStatusRxSublinkSpeedIDPhase = StandardUSBBitRangePhase(0,3),
+        
+        kHubExtStatusTxSublinkSpeedID      = StandardUSBBitRange(4, 7),
+        kHubExtStatusTxSublinkSpeedIDPhase = StandardUSBBitRangePhase(4, 7),
+        
+        kHubExtStatusRxLaneCount      = StandardUSBBitRange(8, 11),
+        kHubExtStatusRxLaneCountPhase = StandardUSBBitRangePhase(8, 11),
+        
+        kHubExtStatusTxLaneCount      = StandardUSBBitRange(12, 15),
+        kHubExtStatusTxLaneCountPhase = StandardUSBBitRangePhase(12, 15)
     };
 }
 #endif // __cplusplus

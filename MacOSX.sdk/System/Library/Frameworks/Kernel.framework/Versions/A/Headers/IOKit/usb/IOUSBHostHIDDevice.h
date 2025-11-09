@@ -265,6 +265,8 @@ public:
     virtual UInt32    getMaxReportSize (void) const;
     
     virtual OSString* newIndexedString (UInt8 index) const;
+
+    virtual OSNumber* newReportIntervalNumber() const;
     
     // Public pad slots for future expansion
     OSMetaClassDeclareReservedUnused(IOUSBHostHIDDevice, 10);

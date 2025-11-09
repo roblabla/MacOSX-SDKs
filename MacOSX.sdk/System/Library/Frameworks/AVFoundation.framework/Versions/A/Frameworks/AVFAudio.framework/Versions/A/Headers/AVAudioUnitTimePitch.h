@@ -34,7 +34,7 @@ NS_CLASS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED
     1 musical semitone  = 100 cents
  
     Range:      -2400 -> 2400
-    Default:    1.0
+    Default:    0.0
     Unit:       Cents
 */
 @property (nonatomic) float pitch;

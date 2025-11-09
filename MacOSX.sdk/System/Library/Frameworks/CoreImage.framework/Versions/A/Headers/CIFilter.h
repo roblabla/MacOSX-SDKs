@@ -157,6 +157,8 @@ CORE_IMAGE_EXPORT NSString * const kCIApplyOptionColorSpace NS_AVAILABLE_MAC(10_
 CORE_IMAGE_EXPORT NSString * const kCIOutputImageKey NS_AVAILABLE(10_5, 5_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputBackgroundImageKey NS_AVAILABLE(10_5, 5_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputImageKey NS_AVAILABLE(10_5, 5_0);
+CORE_IMAGE_EXPORT NSString * const kCIInputDepthImageKey NS_AVAILABLE(10_13, 11_0);
+CORE_IMAGE_EXPORT NSString * const kCIInputDisparityImageKey NS_AVAILABLE(10_13, 11_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputTimeKey NS_AVAILABLE(10_5, 7_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputTransformKey NS_AVAILABLE(10_5, 7_0);
 CORE_IMAGE_EXPORT NSString * const kCIInputScaleKey NS_AVAILABLE(10_5, 7_0);

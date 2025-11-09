@@ -3,12 +3,14 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVMediaFormat.h>
+#import <AVFoundation/AVAudioProcessingSettings.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
@@ -53,21 +55,31 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 /* These export options can be used to produce movie files with video size appropriate to the device.
-	The export will not scale the video up from a smaller size. The video will be compressed using
-	H.264 and the audio will be compressed using AAC.  */
+   The export will not scale the video up from a smaller size. The video will be compressed using
+   H.264 and the audio will be compressed using AAC.  */
+AVF_EXPORT NSString *const AVAssetExportPresetLowQuality         NS_AVAILABLE(10_11, 4_0);
+AVF_EXPORT NSString *const AVAssetExportPresetMediumQuality      NS_AVAILABLE(10_11, 4_0);
+AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality     NS_AVAILABLE(10_11, 4_0);
 
-AVF_EXPORT NSString *const AVAssetExportPresetLowQuality        NS_AVAILABLE(10_11, 4_0);
-AVF_EXPORT NSString *const AVAssetExportPresetMediumQuality     NS_AVAILABLE(10_11, 4_0);
-AVF_EXPORT NSString *const AVAssetExportPresetHighestQuality    NS_AVAILABLE(10_11, 4_0);
+/* These export options can be used to produce movie files with video size appropriate to the device.
+   The export will not scale the video up from a smaller size. The video will be compressed using
+   HEVC and the audio will be compressed using AAC.  */
+AVF_EXPORT NSString *const AVAssetExportPresetHEVCHighestQuality NS_AVAILABLE(10_13, 11_0);
 
 /* These export options can be used to produce movie files with the specified video size.
-	The export will not scale the video up from a smaller size. The video will be compressed using
-	H.264 and the audio will be compressed using AAC.  Some devices cannot support some sizes. */
-AVF_EXPORT NSString *const AVAssetExportPreset640x480			NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVAssetExportPreset960x540   		NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVAssetExportPreset1280x720  		NS_AVAILABLE(10_7, 4_0);
-AVF_EXPORT NSString *const AVAssetExportPreset1920x1080			NS_AVAILABLE(10_7, 5_0);
-AVF_EXPORT NSString *const AVAssetExportPreset3840x2160			NS_AVAILABLE(10_10, 9_0);
+   The export will not scale the video up from a smaller size. The video will be compressed using
+   H.264 and the audio will be compressed using AAC.  Some devices cannot support some sizes. */
+AVF_EXPORT NSString *const AVAssetExportPreset640x480           NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVAssetExportPreset960x540           NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVAssetExportPreset1280x720          NS_AVAILABLE(10_7, 4_0);
+AVF_EXPORT NSString *const AVAssetExportPreset1920x1080         NS_AVAILABLE(10_7, 5_0);
+AVF_EXPORT NSString *const AVAssetExportPreset3840x2160         NS_AVAILABLE(10_10, 9_0);
+
+/* These export options can be used to produce movie files with the specified video size.
+   The export will not scale the video up from a smaller size. The video will be compressed using
+   HEVC and the audio will be compressed using AAC.  Some devices cannot support some sizes. */
+AVF_EXPORT NSString *const AVAssetExportPresetHEVC1920x1080     NS_AVAILABLE(10_13, 11_0);
+AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160     NS_AVAILABLE(10_13, 11_0);
 
 /*  This export option will produce an audio-only .m4a file with appropriate iTunes gapless playback data */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			NS_AVAILABLE(10_7, 4_0);
@@ -152,7 +164,7 @@ AV_INIT_UNAVAILABLE
 /* Indicates the type of file to be written by the session.
    The value of this property must be set before you invoke -exportAsynchronouslyWithCompletionHandler:; otherwise -exportAsynchronouslyWithCompletionHandler: will raise an NSInternalInconsistencyException.
    Setting the value of this property to a file type that's not among the session's supported file types will result in an NSInvalidArgumentException. See supportedFileTypes. */
-@property (nonatomic, copy, nullable) NSString *outputFileType;
+@property (nonatomic, copy, nullable) AVFileType outputFileType;
 
 /* Indicates the URL of the export session's output. You may use UTTypeCopyPreferredTagWithClass(outputFileType, kUTTagClassFilenameExtension) to obtain an appropriate path extension for the outputFileType you have specified. For more information about UTTypeCopyPreferredTagWithClass and kUTTagClassFilenameExtension, on iOS see <MobileCoreServices/UTType.h> and on Mac OS X see <LaunchServices/UTType.h>.  */
 @property (nonatomic, copy, nullable) NSURL *outputURL;
@@ -231,10 +243,10 @@ AV_INIT_UNAVAILABLE
 								(such as adding or deleting tracks) should be made to the asset between retrieving compatible identifiers and performing the export operation.
 	@param presetName			An NSString specifying the name of the preset template for the export.
 	@param asset				An AVAsset object that is intended to be exported.
-	@param outputFileType		An NSString indicating a file type to check; or nil, to query whether there are any compatible types.
+	@param outputFileType		An AVFileType indicating a file type to check; or nil, to query whether there are any compatible types.
 	@param completionHandler	A block called with the compatibility result.
  */
-+ (void)determineCompatibilityOfExportPreset:(NSString *)presetName withAsset:(AVAsset *)asset outputFileType:(nullable NSString *)outputFileType completionHandler:(void (^)(BOOL compatible))handler NS_AVAILABLE(10_9, 6_0);
++ (void)determineCompatibilityOfExportPreset:(NSString *)presetName withAsset:(AVAsset *)asset outputFileType:(nullable AVFileType)outputFileType completionHandler:(void (^)(BOOL compatible))handler NS_AVAILABLE(10_9, 6_0);
 
 @end
 
@@ -242,7 +254,7 @@ AV_INIT_UNAVAILABLE
 
 /* Indicates the types of files the target can write, according to the preset the target was initialized with.
    Does not perform an inspection of the AVAsset to determine whether its contents are compatible with the supported file types. If you need to make that determination before initiating the export, use - (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray *compatibleFileTypes))handler:. */
-@property (nonatomic, readonly) NSArray<NSString *> *supportedFileTypes;
+@property (nonatomic, readonly) NSArray<AVFileType> *supportedFileTypes;
 
 /*!
 	@method						determineCompatibleFileTypesWithCompletionHandler:
@@ -251,7 +263,7 @@ AV_INIT_UNAVAILABLE
 								Called when the inspection completes with an array of file types the ExportSession can write.  Note that this may have a count of zero.
 	@discussion					This method is different than the supportedFileTypes property in that it performs an inspection of the AVAsset in order to determine its compatibility with each of the session's supported file types.
 */
-- (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray<NSString *> *compatibleFileTypes))handler NS_AVAILABLE(10_9, 6_0);
+- (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray<AVFileType> *compatibleFileTypes))handler NS_AVAILABLE(10_9, 6_0);
 
 @end
 
@@ -298,7 +310,7 @@ AV_INIT_UNAVAILABLE
 /* Indicates the processing algorithm used to manage audio pitch for scaled audio edits.
    Constants for various time pitch algorithms, e.g. AVAudioTimePitchAlgorithmSpectral, are defined in AVAudioProcessingSettings.h. An NSInvalidArgumentException will be raised if this property is set to a value other than the constants defined in that file.
    The default value is AVAudioTimePitchAlgorithmSpectral. */
-@property (nonatomic, copy) NSString *audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
+@property (nonatomic, copy) AVAudioTimePitchAlgorithm audioTimePitchAlgorithm NS_AVAILABLE(10_9, 7_0);
 
 /* Indicates whether non-default audio mixing is enabled for export and supplies the parameters for audio mixing.  Ignored when export preset is AVAssetExportPresetPassthrough. */
 @property (nonatomic, copy, nullable) AVAudioMix *audioMix;

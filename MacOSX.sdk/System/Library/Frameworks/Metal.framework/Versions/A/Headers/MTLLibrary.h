@@ -10,12 +10,18 @@
 #import <Metal/MTLResource.h>
 #import <Metal/MTLArgument.h>
 
+
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
 @protocol MTLFunction;
 @protocol MTLLibrary;
 @class MTLCompileOptions;
 @class MTLFunctionConstantValues;
+
+
+@protocol MTLArgumentEncoder;
+
+typedef __autoreleasing MTLArgument *__nullable MTLAutoreleasedArgument;
 
 typedef NS_ENUM(NSUInteger, MTLPatchType) {
     MTLPatchTypeNone = 0,
@@ -141,6 +147,21 @@ NS_AVAILABLE(10_11, 8_0)
  */
 @property (readonly) NSDictionary<NSString *, MTLFunctionConstant *> *functionConstantsDictionary NS_AVAILABLE(10_12, 10_0);
 
+
+/*!
+ * @method newArgumentEncoderWithBufferIndex:
+ * @abstract Creates an argument encoder which will encode arguments matching the layout of the argument buffer at the given bind point index.
+ */
+- (id <MTLArgumentEncoder>)newArgumentEncoderWithBufferIndex:(NSUInteger)bufferIndex NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ * @method newArgumentEncoderWithBufferIndex:
+ * @abstract Creates an argument encoder which will encode arguments matching the layout of the argument buffer at the given bind point index.
+ */
+- (id <MTLArgumentEncoder>)newArgumentEncoderWithBufferIndex:(NSUInteger)bufferIndex
+                                                                  reflection:(MTLAutoreleasedArgument * __nullable)reflection NS_AVAILABLE(10_13, 11_0);
+
+
 @end
 
 typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
@@ -148,8 +169,8 @@ typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
     MTLLanguageVersion1_0 NS_ENUM_AVAILABLE(NA, 9_0) = (1 << 16),
     MTLLanguageVersion1_1 NS_ENUM_AVAILABLE(10_11, 9_0) = (1 << 16) + 1,
     MTLLanguageVersion1_2 NS_ENUM_AVAILABLE(10_12, 10_0) = (1 << 16) + 2,
+    MTLLanguageVersion2_0 NS_ENUM_AVAILABLE(10_13, NA) = (2 << 16),
 } NS_ENUM_AVAILABLE(10_11, 9_0);
-
 
 NS_CLASS_AVAILABLE(10_11, 8_0)
 @interface MTLCompileOptions : NSObject <NSCopying>
@@ -199,19 +220,6 @@ typedef NS_ENUM(NSUInteger, MTLLibraryError) {
     MTLLibraryErrorFileNotFound NS_AVAILABLE(10_12, 10_0) = 6,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
-MTL_EXTERN NSString *const MTLRenderPipelineErrorDomain;
-
-/*!
- @enum MTLRenderPipelineError
- @abstract NSErrors raised when creating a pipeline or kernel.
- */
-typedef NS_ENUM(NSUInteger, MTLRenderPipelineError) {
-    MTLRenderPipelineErrorInternal          = 1,    
-    MTLRenderPipelineErrorUnsupported       = 2,
-    MTLRenderPipelineErrorInvalidInput      = 3,
-} NS_ENUM_AVAILABLE(10_11, 8_0);
-
-
 NS_AVAILABLE(10_11, 8_0)
 @protocol MTLLibrary <NSObject>
 
@@ -241,6 +249,7 @@ NS_AVAILABLE(10_11, 8_0)
  */
 - (nullable id <MTLFunction>) newFunctionWithName:(NSString *)name constantValues:(MTLFunctionConstantValues *)constantValues
 					error:(__autoreleasing NSError **)error NS_AVAILABLE(10_12, 10_0);
+
 
 /*!
  @method newFunctionWithName:constantValues:completionHandler:

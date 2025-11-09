@@ -386,6 +386,11 @@ CF_ENUM(AudioUnitParameterID) {
 };
 
 // Parameters for the AUDynamicsProcessor unit
+// Note that the dynamics processor does not have fixed compression ratios.
+// Instead, kDynamicsProcessorParam_HeadRoom adjusts the amount of compression.
+// Lower kDynamicsProcessorParam_HeadRoom values results in higher compression.
+// The compression ratio is automatically adjusted to not exceed kDynamicsProcessorParam_Threshold + kDynamicsProcessorParam_HeadRoom values.
+    
 CF_ENUM(AudioUnitParameterID) {
 		// Global, dB, -40->20, -20
 	kDynamicsProcessorParam_Threshold 			= 0,

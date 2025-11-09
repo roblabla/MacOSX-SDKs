@@ -1,5 +1,5 @@
 /*	NSHost.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -27,12 +27,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, readonly, copy) NSString *address;	// arbitrary choice
 @property (readonly, copy) NSArray<NSString *> *addresses;	// unordered list of IPv6 and IPv4 addresses
 
-@property (nullable, readonly, copy) NSString *localizedName NS_AVAILABLE(10_6, NA);
+@property (nullable, readonly, copy) NSString *localizedName API_AVAILABLE(macos(10.6)) API_UNAVAILABLE(ios, watchos, tvos);
 
 // NSHost does not implement any caching any longer
-+ (void)setHostCacheEnabled:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_7);
-+ (BOOL)isHostCacheEnabled NS_DEPRECATED_MAC(10_0, 10_7);
-+ (void)flushHostCache NS_DEPRECATED_MAC(10_0, 10_7);
++ (void)setHostCacheEnabled:(BOOL)flag API_DEPRECATED("Caching no longer supported", macos(10.0,10.7)) API_UNAVAILABLE(ios, watchos, tvos);
++ (BOOL)isHostCacheEnabled API_DEPRECATED("Caching no longer supported", macos(10.0,10.7)) API_UNAVAILABLE(ios, watchos, tvos);
++ (void)flushHostCache API_DEPRECATED("Caching no longer supported", macos(10.0,10.7)) API_UNAVAILABLE(ios, watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

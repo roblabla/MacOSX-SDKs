@@ -3,11 +3,12 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2016 Apple Inc. All rights reserved.
+	Copyright 2009-2017 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVMediaFormat.h>
 
 #import <AVFoundation/AVAsset.h>
 #import <AVFoundation/AVMovieTrack.h>
@@ -60,7 +61,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 	@abstract		Provides the file types the AVMovie class understands.
 	@result			An NSArray of UTIs identifying the file types the AVMovie class understands.
 */
-+ (NSArray<NSString *> *)movieTypes;
++ (NSArray<AVFileType> *)movieTypes;
 
 /*!
 	@method			movieWithURL:options:
@@ -185,7 +186,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 	@result			An NSData object.
 	@discussion     The movie header will be a pure reference movie, with no base URL, suitable for use on the pasteboard.
 */
-- (nullable NSData *)movieHeaderWithFileType:(NSString *)fileType error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
+- (nullable NSData *)movieHeaderWithFileType:(AVFileType)fileType error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
 
 /*!
 	@method			writeMovieHeaderToURL:fileType:options:error:
@@ -198,9 +199,9 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
                     An NSUInteger whose bits specify options for the writing of the movie header. See AVMovieWritingOptions above.
 	@param			outError
 					If an error occurs writing the movie header, describes the nature of the failure.
-	@discussion		Data references in the output movie header are adjusted to be relative to the destination URL. Note that modifications to instances of AVMutableMovie, to their constituent AVMutableMovieTracks, or to their collections of metadata are committed to storage when their movie headers are written.
+	@discussion		Note that modifications to instances of AVMutableMovie, to their constituent AVMutableMovieTracks, or to their collections of metadata are committed to storage when their movie headers are written.
 */
-- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(NSString *)fileType options:(AVMovieWritingOptions)options error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
+- (BOOL)writeMovieHeaderToURL:(NSURL *)URL fileType:(AVFileType)fileType options:(AVMovieWritingOptions)options error:(NSError * _Nullable * _Nullable)outError NS_AVAILABLE_MAC(10_11);
 
 /*!
 	@method			isCompatibleWithFileType:
@@ -209,7 +210,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 					A UTI indicating a movie file format (e.g. AVFileTypeQuickTimeMovie for a QuickTime movie).
 	@discussion     This method returns a BOOL that indicates whether a movie header of the specified type can be created for the receiver. For example, this method returns NO if the movie contains tracks whose media types or media subtypes are not allowed by the specified file type.
 */
-- (BOOL)isCompatibleWithFileType:(NSString *)fileType NS_AVAILABLE_MAC(10_11);
+- (BOOL)isCompatibleWithFileType:(AVFileType)fileType NS_AVAILABLE_MAC(10_11);
 
 @end
 
@@ -233,7 +234,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
   @result		An NSArray of AVMovieTracks; may be empty if no tracks of the specified media type are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVMovieTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+- (NSArray<AVMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
   @method		tracksWithMediaCharacteristic:
@@ -243,7 +244,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
   @result		An NSArray of AVMovieTracks; may be empty if no tracks with the specified characteristic are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVMovieTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (NSArray<AVMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 
 @end
 
@@ -417,7 +418,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 	@abstract       The default storage container for media data added to a movie.
 	@discussion     The value of this property is an AVMediaDataStorage object that indicates where sample data that is added to a movie should be written, for any track for whose mediaDataStorage property is nil.
 */
-@property (nonatomic, copy) AVMediaDataStorage *defaultMediaDataStorage;
+@property (nonatomic, copy, nullable) AVMediaDataStorage *defaultMediaDataStorage;
 
 /*!
 	@property		interleavingPeriod
@@ -510,7 +511,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 	@result			An AVMutableMovieTrack object
     @discussion		The trackID of the newly added track is a property of the returned instance of AVMutableMovieTrack.
 */
-- (AVMutableMovieTrack *)addMutableTrackWithMediaType:(NSString *)mediaType copySettingsFromTrack:(nullable AVAssetTrack *)track options:(nullable NSDictionary<NSString *, id> *)options;
+- (nullable AVMutableMovieTrack *)addMutableTrackWithMediaType:(AVMediaType)mediaType copySettingsFromTrack:(nullable AVAssetTrack *)track options:(nullable NSDictionary<NSString *, id> *)options;
 
 /*!
 	@method			addMutableTracksCopyingSettingsFromTracks:options:
@@ -566,7 +567,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
   @result		An NSArray of AVMutableMovieTracks; may be empty if no tracks of the specified media type are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVMutableMovieTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+- (NSArray<AVMutableMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
   @method		tracksWithMediaCharacteristic:
@@ -576,7 +577,7 @@ NS_CLASS_AVAILABLE_MAC(10_11)
   @result		An NSArray of AVMutableMovieTracks; may be empty if no tracks with the specified characteristic are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVMutableMovieTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (NSArray<AVMutableMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 
 @end
 
@@ -641,7 +642,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @interface AVFragmentedMovie : AVMovie <AVFragmentMinding>
 {
 @private
-	AVFragmentedMovieInternal	*_fragmentedMovie;
+	AVFragmentedMovieInternal	*_fragmentedMovie __attribute__((unused));
 }
 
 /*!
@@ -673,7 +674,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
   @result		An NSArray of AVFragmentedMovieTracks; may be empty if no tracks of the specified media type are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaType:(NSString *)mediaType;
+- (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType;
 
 /*!
   @method		tracksWithMediaCharacteristic:
@@ -683,7 +684,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
   @result		An NSArray of AVFragmentedMovieTracks; may be empty if no tracks with the specified characteristic are available.
   @discussion	Becomes callable without blocking when the key @"tracks" has been loaded
 */
-- (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaCharacteristic:(NSString *)mediaCharacteristic;
+- (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;
 
 @end
 

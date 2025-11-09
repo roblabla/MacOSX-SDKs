@@ -2,7 +2,7 @@
 //  PhotosTypes.h
 //  Photos
 //
-//  Copyright (c) 2014 Apple Inc. All rights reserved.
+//  Copyright (c) 2017 Apple Inc. All rights reserved.
 //
 
 #ifndef Photos_PhotosTypes_h
@@ -85,6 +85,8 @@ typedef NS_ENUM(NSInteger, PHAssetCollectionSubtype) {
     PHAssetCollectionSubtypeSmartAlbumUserLibrary = 209,
     PHAssetCollectionSubtypeSmartAlbumSelfPortraits NS_AVAILABLE(10_11, 9_0) = 210,
     PHAssetCollectionSubtypeSmartAlbumScreenshots NS_AVAILABLE(10_11, 9_0) = 211,
+    PHAssetCollectionSubtypeSmartAlbumDepthEffect NS_AVAILABLE(10_13, 10_2) = 212,
+    PHAssetCollectionSubtypeSmartAlbumLivePhotos NS_AVAILABLE(10_13, 10_3) = 213,
     
     // Used for fetching, if you don't care about the exact subtype
     PHAssetCollectionSubtypeAny = NSIntegerMax
@@ -97,6 +99,15 @@ typedef NS_ENUM(NSInteger, PHAssetEditOperation) {
     PHAssetEditOperationContent    = 2,
     PHAssetEditOperationProperties = 3,
 } NS_AVAILABLE(10_11, 8_0);
+
+typedef NS_ENUM(NSInteger, PHAssetPlaybackStyle) {
+    PHAssetPlaybackStyleUnsupported     = 0,
+    PHAssetPlaybackStyleImage           = 1,
+    PHAssetPlaybackStyleImageAnimated   = 2,
+    PHAssetPlaybackStyleLivePhoto       = 3,
+    PHAssetPlaybackStyleVideo           = 4,
+    PHAssetPlaybackStyleVideoLooping    = 5,
+} NS_ENUM_AVAILABLE(10_13, 11_0) NS_SWIFT_NAME(PHAsset.PlaybackStyle);
 
 typedef NS_ENUM(NSInteger, PHAssetMediaType) {
     PHAssetMediaTypeUnknown = 0,

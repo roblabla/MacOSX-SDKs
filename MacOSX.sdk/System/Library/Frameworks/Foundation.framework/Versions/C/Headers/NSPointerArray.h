@@ -1,6 +1,6 @@
 /*
  *  NSPointerArray.h
- *  Copyright (c) 2005-2016, Apple Inc. All rights reserved.
+ *  Copyright (c) 2005-2017, Apple Inc. All rights reserved.
  *
  */
  
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
    A PointerArray acts like a traditional array that slides elements on insertion or deletion.
    Unlike traditional arrays, it holds NULLs, which can be inserted or extracted (and contribute to count).
    Also unlike traditional arrays, the 'count' of the array may be set directly.
-   Using NSPointerFunctionsWeakMemory object references will turn to NULL on last release (or when collected under GC).
+   Using NSPointerFunctionsWeakMemory object references will turn to NULL on last release.
 
    The copying and archiving protocols are applicable only when NSPointerArray is configured for Object uses.
    The fast enumeration protocol (supporting the for..in statement) will yield NULLs if present.  It is defined for all types of pointers although the language syntax doesn't directly support this.
@@ -57,12 +57,12 @@ NS_CLASS_AVAILABLE(10_5, 6_0)
 
 // construction
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
-+ (id) pointerArrayWithStrongObjects NS_DEPRECATED_MAC(10_5, 10_8); // strong objects
-+ (id) pointerArrayWithWeakObjects NS_DEPRECATED_MAC(10_5, 10_8); // weak objects
++ (id) pointerArrayWithStrongObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos); // strong objects
++ (id) pointerArrayWithWeakObjects API_DEPRECATED("GC no longer supported", macos(10.5,10.8)) API_UNAVAILABLE(ios, watchos, tvos); // weak objects
 #endif
 
-+ (NSPointerArray *)strongObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
-+ (NSPointerArray *)weakObjectsPointerArray NS_AVAILABLE(10_8, 6_0);
++ (NSPointerArray *)strongObjectsPointerArray API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
++ (NSPointerArray *)weakObjectsPointerArray API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
 
 @property (readonly, copy) NSArray *allObjects;
 

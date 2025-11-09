@@ -1,7 +1,7 @@
 /*
  NSScrubber.h
  Application Kit
- Copyright (c) 2016, Apple Inc.
+ Copyright (c) 2016-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -86,7 +86,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 
 /*!
  * @class NSScrubber
- * @abstract @c NSScrubber is a control designed for the Touch Bar environment. 
+ * @abstract @c NSScrubber is a control designed for the NSTouchBar environment. 
  *
  * @c NSScrubber arranges a finite number of "items" (represented by views of type @c NSScrubberItemView ) according to a layout object (see @c NSScrubberLayout ), and provides several methods for navigating and selecting those items.
  *
@@ -96,8 +96,8 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubber : NSView {
 @private
-    id _delegate;
-    id _dataSource;
+    __weak id _delegate;
+    __weak id _dataSource;
     id _tx;
 
     NSScrollView *_scrollView;
@@ -126,8 +126,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
     unsigned int _continuous:1;
     unsigned int _ignoresTouches:1;
     unsigned int _trackingChangedItem:1;
-    unsigned int _setFloating:1;
-    unsigned int _reservedFlags:26 __unused;
+    unsigned int _reservedFlags:27 __unused;
     
 #ifndef __OBJC2__
     id _reserved __unused;
@@ -215,13 +214,13 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 #pragma mark Item Reuse Queue
 
 /// Registers a @c NSScrubberItemView class to be instantiated for the given @c itemIdentifier. Raises an exception if @c itemViewClass is not a subclass of @c NSScrubberItemView. Passing @c nil for @c itemViewClass removes a previous registration. Registrations made through this method do not persist through NSCoding.
-- (void)registerClass:(nullable Class)itemViewClass forItemIdentifier:(NSString *)itemIdentifier;
+- (void)registerClass:(nullable Class)itemViewClass forItemIdentifier:(NSUserInterfaceItemIdentifier)itemIdentifier;
 
 /// Register a nib to be instantiated for the given @c itemIdentifier. The nib must contain a top-level object which is a subclass of NSScrubberItemView; otherwise, @c -makeItemWithIdentifier: may return @c nil for this identifier. Passing @c nil for @c nib removes a previous registration.
-- (void)registerNib:(nullable NSNib *)nib forItemIdentifier:(NSString *)itemIdentifier;
+- (void)registerNib:(nullable NSNib *)nib forItemIdentifier:(NSUserInterfaceItemIdentifier)itemIdentifier;
 
 /// Creates or reuses a @c NSScrubberItemView corresponding to the provided @c itemIdentifier. @c NSScrubber searches, in order: the reuse queue, the list of registered classes, and then the list of registered nibs. If the reuse queue is empty, and there is no Class or Interface Builder archive registered for the @c itemIdentifier, this method returns @c nil.
-- (nullable __kindof NSScrubberItemView *)makeItemWithIdentifier:(NSString *)itemIdentifier owner:(nullable id)owner;
+- (nullable __kindof NSScrubberItemView *)makeItemWithIdentifier:(NSUserInterfaceItemIdentifier)itemIdentifier owner:(nullable id)owner;
 
 @end
 

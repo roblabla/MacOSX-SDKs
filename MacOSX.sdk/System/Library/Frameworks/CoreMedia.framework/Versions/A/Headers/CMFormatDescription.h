@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-    Copyright 2005-2015 Apple Inc. All rights reserved.
+    Copyright 2005-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -714,10 +714,14 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_UseGamma __OSX_
 #define kCMFormatDescriptionTransferFunction_ITU_R_709_2		kCVImageBufferTransferFunction_ITU_R_709_2		// CFString
 #define kCMFormatDescriptionTransferFunction_SMPTE_240M_1995	kCVImageBufferTransferFunction_SMPTE_240M_1995	// CFString
 #define kCMFormatDescriptionTransferFunction_UseGamma			kCVImageBufferTransferFunction_UseGamma			// CFString
-CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_2020										// same as kCVImageBufferTransferFunction_ITU_R_2020
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_2020										// same as kCVImageBufferTransferFunction_ITU_R_2020. note: semantically equivalent to kCMFormatDescriptionTransferFunction_ITU_R_709_2, which is preferred.
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_ST_428_1									// same as kCVImageBufferTransferFunction_SMPTE_ST_428_1
 							__OSX_AVAILABLE_STARTING(__MAC_10_12,__IPHONE_10_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_SMPTE_ST_2084_PQ								// same as kCVImageBufferTransferFunction_SMPTE_ST_2084_PQ
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG								// same as kCVImageBufferTransferFunction_ITU_R_2100_HLG
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_GammaLevel __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 #define kCMFormatDescriptionExtension_GammaLevel				kCVImageBufferGammaLevelKey						// CFNumber describing the gamma level, used in absence of (or ignorance of) kCMFormatDescriptionExtension_TransferFunction
@@ -830,6 +834,11 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_Vendor					// CFString
 CM_EXPORT const CFStringRef kCMFormatDescriptionVendor_Apple
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_MasteringDisplayColorVolume	// CFData(24 bytes); big-endian structure; same as kCVImageBufferMasteringDisplayColorVolumeKey; matches payload of ISO/IEC 23008-2:2015(E), D.2.28 Mastering display colour volume SEI message
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ContentLightLevelInfo			// CFData(4 bytes); big-endian structure; same as kCVImageBufferContentLightLevelInfoKey
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+
 CM_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
@@ -899,13 +908,55 @@ OSStatus CMVideoFormatDescriptionCreateFromH264ParameterSets(
 	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )	/*! @param formatDescriptionOut
 																				Returned newly-created video CMFormatDescription */
 							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
-
+	
+/*!
+	@function	CMVideoFormatDescriptionCreateFromHEVCParameterSets
+	@abstract	Creates a format description for a video media stream described by HEVC (H.265) parameter set NAL units.
+	@discussion	This function parses the dimensions provided by the parameter sets and creates a format description suitable for a raw H.265 stream.
+				The parameter sets' data can come from raw NAL units and must have any emulation prevention bytes needed.
+				The supported NAL unit types to be included in the format description are 32 (video parameter set), 33 (sequence parameter set), 34 (picture parameter set), 39 (prefix SEI) and 40 (suffix SEI). At least one of each parameter set must be provided.
+*/
+CM_EXPORT
+OSStatus CMVideoFormatDescriptionCreateFromHEVCParameterSets(
+	CFAllocatorRef CM_NULLABLE allocator,									/*! @param allocator
+																				 CFAllocator to be used when creating the CMFormatDescription. Pass NULL to use the default allocator. */
+	size_t parameterSetCount,												/*! @param parameterSetCount
+																				 The number of parameter sets to include in the format description. This parameter must be at least 3. */
+	const uint8_t * CM_NONNULL const * CM_NONNULL parameterSetPointers,		/*! @param parameterSetPointers
+																				 Points to a C array containing parameterSetCount pointers to parameter sets. */
+	const size_t * CM_NONNULL parameterSetSizes,							/*! @param parameterSetSizes
+																				 Points to a C array containing the size, in bytes, of each of the parameter sets. */
+	int NALUnitHeaderLength,												/*! @param NALUnitHeaderLength
+																				 Size, in bytes, of the NALUnitLength field in a HEVC video sample or HEVC parameter set sample. Pass 1, 2 or 4. */
+	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )	/*! @param formatDescriptionOut
+																				 Returned newly-created video CMFormatDescription */
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							
+CM_EXPORT
+OSStatus CMVideoFormatDescriptionCreateFromHEVCParameterSetsAndExtensions(
+	CFAllocatorRef CM_NULLABLE allocator,									/*! @param allocator
+																				 CFAllocator to be used when creating the CMFormatDescription. Pass NULL to use the default allocator. */
+	size_t parameterSetCount,												/*! @param parameterSetCount
+																				 The number of parameter sets to include in the format description. This parameter must be at least 3. */
+	const uint8_t * CM_NONNULL const * CM_NONNULL parameterSetPointers,		/*! @param parameterSetPointers
+																				 Points to a C array containing parameterSetCount pointers to parameter sets. */
+	const size_t * CM_NONNULL parameterSetSizes,							/*! @param parameterSetSizes
+																				 Points to a C array containing the size, in bytes, of each of the parameter sets. */
+	int NALUnitHeaderLength,												/*! @param NALUnitHeaderLength
+																				 Size, in bytes, of the NALUnitLength field in a HEVC video sample or HEVC parameter set sample. Pass 1, 2 or 4. */
+	CFDictionaryRef CM_NULLABLE extensions,									/*! @param extensions	Dictionary of extension key/value pairs. Keys are always CFStrings.
+																				Values are always property list objects (ie. CFData, CFString, CFArray,
+																				CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL. */
+	CM_RETURNS_RETAINED_PARAMETER CMFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut )	/*! @param formatDescriptionOut
+																				 Returned newly-created video CMFormatDescription */
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
+							
 CF_IMPLICIT_BRIDGING_ENABLED
 
 /*!
 	@function	CMVideoFormatDescriptionGetH264ParameterSetAtIndex
 	@abstract	Returns a parameter set contained in a H.264 format description.
-	@discussion	This function parses the AVC decoder configuration record contained in a H.264 video format description and returns the parameter set NAL unit at the given index from it.
+	@discussion	This function parses the AVC decoder configuration record contained in a H.264 video format description and returns the NAL unit at the given index from it.  These NAL units are typically parameter sets (e.g. SPS, PPS), but may contain others as specified by ISO/IEC 14496-15 (e.g. user-data SEI).
 				Both parameterSetPointerOut and parameterSetSizeOut may be NULL, parameterSetCountOut will return the total number of parameter set NAL units contained in the AVC decoder configuration record.
 				The parameter set NAL units returned will already have any emulation prevention bytes needed.
 				The pointer returned in parameterSetPointerOut points to internal memory of videoDesc, and may only be accessed as long as a retain on videoDesc is held.
@@ -925,6 +976,30 @@ OSStatus CMVideoFormatDescriptionGetH264ParameterSetAtIndex(
 		int * CM_NULLABLE NALUnitHeaderLengthOut )						/*! @param NALUnitHeaderLengthOut
 																			Points to an int to receive the size, in bytes, of the NALUnitLength field in an AVC video sample or AVC parameter set sample. Pass NULL if you do not want this information. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_7_0);
+	
+/*!
+	@function	CMVideoFormatDescriptionGetHEVCParameterSetAtIndex
+	@abstract	Returns a parameter set contained in a HEVC (H.265) format description.
+	@discussion	This function parses the HEVC decoder configuration record contained in a H.265 video format description and returns the NAL unit at the given index from it.  These NAL units are typically parameter sets (e.g. VPS, SPS, PPS), but may contain others as specified by ISO/IEC 14496-15 (e.g. user-data SEI).
+				Both parameterSetPointerOut and parameterSetSizeOut may be NULL, parameterSetCountOut will return the total number of parameter set NAL units contained in the HEVC decoder configuration record.
+				The parameter set NAL units returned will already have any emulation prevention bytes needed.
+				The pointer returned in parameterSetPointerOut points to internal memory of videoDesc, and may only be accessed as long as a retain on videoDesc is held.
+*/
+CM_EXPORT
+OSStatus CMVideoFormatDescriptionGetHEVCParameterSetAtIndex(
+		CMFormatDescriptionRef CM_NONNULL videoDesc,					/*! @param videoDesc
+																			 FormatDescription being interrogated. */
+		size_t parameterSetIndex,										/*! @param parameterSetIndex
+																			 Index of the parameter set to be returned in parameterSetPointerOut and parameterSetSizeOut. This parameter is ignored if both parameterSetPointerOut and parameterSetSizeOut are NULL. */
+		const uint8_t * CM_NULLABLE * CM_NULLABLE parameterSetPointerOut,	/*! @param parameterSetPointerOut
+																				Points to a pointer to receive the parameter set. Pass NULL if you do not want this information. */
+		size_t * CM_NULLABLE parameterSetSizeOut,						/*! @param parameterSetSizeOut
+																			 Points to a size_t to receive the size in bytes of the parameter set. Pass NULL if you do not want this information. */
+		size_t * CM_NULLABLE parameterSetCountOut,						/*! @param parameterSetCountOut
+																			 Number of parameter sets in the HEVC decoder configuration record contained in videoDesc. Pass NULL if you do not want this information. */
+		int * CM_NULLABLE NALUnitHeaderLengthOut )						/*! @param NALUnitHeaderLengthOut
+																			 Points to an int to receive the size, in bytes, of the NALUnitLength field in an HEVC video sample or HEVC parameter set sample. Pass NULL if you do not want this information. */
+							__OSX_AVAILABLE_STARTING(__MAC_10_13,__IPHONE_11_0);
 
 #define CMVideoFormatDescriptionGetCodecType(desc)  CMFormatDescriptionGetMediaSubType(desc)
 
@@ -1339,7 +1414,7 @@ OSStatus CMTextFormatDescriptionGetDefaultStyle(
 													Returned true if style includes Underline. May be NULL. */
 	CGFloat * CM_NULLABLE outFontSize,			/*! @param outFontSize
 													FontSize in points. May be NULL. */
-	/* CM_NULLABLE */ CGFloat outColorComponents[4])	/*! @param outColorComponents
+	CGFloat outColorComponents[CM_NULLABLE 4])	/*! @param outColorComponents
 													Components are in order red, green, blue, alpha. May be NULL. */
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 	

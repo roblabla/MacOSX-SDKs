@@ -1,7 +1,7 @@
 /*
  NSScrubberItemView.h
  Application Kit
- Copyright (c) 2016, Apple Inc.
+ Copyright (c) 2016-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -18,12 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberArrangedView : NSView {
 @private
+    id _cache __unused;
     os_unfair_lock _flagLock;
     unsigned int _selected:1;
     unsigned int _highlighted:1;
 #if !__OBJC2__
     unsigned int _reservedArrangedViewFlags:30 __unused;
-    void *_arrangedViewReserved[3] __unused;
+    id _arrangedViewReserved[2] __unused;
 #endif
 }
 
@@ -43,7 +44,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 NS_CLASS_AVAILABLE_MAC(10_12_2)
 @interface NSScrubberSelectionView : NSScrubberArrangedView {
 #if !__OBJC2__
-    void *_selectionViewReserved[4] __unused;
+    id _selectionViewReserved[4] __unused;
 #endif
 }
 @end
@@ -64,7 +65,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
     unsigned int _edge:2;
 #if !__OBJC2__
     unsigned int _scrubberItemViewReservedFlags:30 __unused;
-    void *_scrubberItemViewReserved[3] __unused;
+    id _scrubberItemViewReserved[3] __unused;
 #endif
 }
 
@@ -81,7 +82,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
 @private
     NSTextField *_textField;
 #if !__OBJC2__
-    void *_scrubberTextItemViewReserved[4] __unused;
+    id _scrubberTextItemViewReserved[4] __unused;
 #endif
 }
 
@@ -103,7 +104,7 @@ NS_CLASS_AVAILABLE_MAC(10_12_2)
     NSImageView *_imageView;
     NSImageAlignment _alignment;
 #if !__OBJC2__
-    void *_scrubberImageItemViewReserved[4] __unused;
+    id _scrubberImageItemViewReserved[4] __unused;
 #endif
 }
 

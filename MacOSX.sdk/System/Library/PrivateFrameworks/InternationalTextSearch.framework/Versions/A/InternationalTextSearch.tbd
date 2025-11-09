@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: BD4BAE53-0318-3012-95FA-3A050EE736D4' ]
+uuids:           [ 'x86_64: 0F105CDD-BFD3-3E6C-AF67-1E1EADF6C5C7' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/InternationalTextSearch.framework/Versions/A/InternationalTextSearch
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ITSCollationContextFreeContextForDatabaseHandle, _ITSCopyFTSTableCreateStatementUsingCurrentLanguage, 

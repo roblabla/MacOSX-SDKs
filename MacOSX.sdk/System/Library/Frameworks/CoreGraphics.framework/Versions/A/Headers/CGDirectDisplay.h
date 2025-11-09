@@ -12,13 +12,15 @@
 #include <CoreGraphics/CGContext.h>
 #include <CoreGraphics/CGError.h>
 #include <CoreGraphics/CGGeometry.h>
+#include <CoreGraphics/CGWindow.h>
+#include <CoreGraphics/CGWindowLevel.h>
 #include <mach/boolean.h>
 
 typedef uint32_t CGDirectDisplayID;
 typedef uint32_t CGOpenGLDisplayMask;
 typedef double CGRefreshRate;
 
-typedef struct CGDisplayMode *CGDisplayModeRef;
+typedef struct CF_BRIDGED_TYPE(id) CGDisplayMode *CGDisplayModeRef;
 
 #define kCGNullDirectDisplay ((CGDirectDisplayID)0)
 #define kCGDirectMainDisplay CGMainDisplayID()
@@ -366,13 +368,13 @@ CG_EXTERN CGError CGReleaseAllDisplays(void)
 /* Returns window ID of the shield window for the captured display `display',
    or NULL if the display is not not shielded. */
 
-CG_EXTERN uint32_t CGShieldingWindowID(CGDirectDisplayID display)
+CG_EXTERN CGWindowID CGShieldingWindowID(CGDirectDisplayID display)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /* Returns the window level of the shield window for the captured display
    `display'. */
 
-CG_EXTERN int32_t CGShieldingWindowLevel(void)
+CG_EXTERN CGWindowLevel CGShieldingWindowLevel(void)
     CG_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
 
 /* Return an image containing the contents of the display identified by

@@ -1,8 +1,8 @@
-.TH "MPSImagePyramid" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSImagePyramid" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSImagePyramid \- 
+MPSImagePyramid
 .SH SYNOPSIS
 .br
 .PP
@@ -23,6 +23,9 @@ Inherited by \fBMPSImageGaussianPyramid\fP\&.
 .br
 .ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:kernelWidth:kernelHeight:weights:\fP"
+.br
+.ti -1c
+.RI "(nullable instancetype) \- \fBinitWithCoder:device:\fP"
 .br
 .in -1c
 .SS "Properties"
@@ -73,6 +76,24 @@ h_n = max(1, floor(h_0 / 2^n)),
 
 .SH "Method Documentation"
 .PP 
+.SS "\- (nullable instancetype) \fBinitWithCoder:\fP (NSCoder *__nonnull) aDecoder(nonnull id< MTLDevice >) device"
+\fBNSSecureCoding\fP compatability  See \fBMPSKernel::initWithCoder\fP\&. 
+.PP
+\fBParameters:\fP
+.RS 4
+\fIaDecoder\fP The NSCoder subclass with your serialized \fBMPSCNNPooling\fP 
+.br
+\fIdevice\fP The MTLDevice on which to make the \fBMPSCNNPooling\fP 
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A new \fBMPSCNNPooling\fP object, or nil if failure\&. 
+.RE
+.PP
+
+.PP
+Reimplemented from \fBMPSUnaryImageKernel\fP\&.
 .SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) device"
 Initialize a downwards 5-tap image pyramid with the default filter kernel and device 
 .PP
@@ -90,7 +111,7 @@ A valid object or nil, if failure\&.
 .PP
 
 .PP
-Reimplemented from \fBMPSKernel\fP\&.
+Reimplemented from \fBMPSUnaryImageKernel\fP\&.
 .SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(float) centerWeight"
 Initialize a downwards 5-tap image pyramid with a central weight parameter and device 
 .PP
@@ -107,7 +128,7 @@ A valid object or nil, if failure\&.
 .RE
 .PP
 
-.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) kernelWidth(NSUInteger) kernelHeight(const float *__nonnull) NS_DESIGNATED_INITIALIZER"
+.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) kernelWidth(NSUInteger) kernelHeight(const float *__nonnull) kernelWeights"
 Initialize a downwards n-tap pyramid with a custom filter kernel and device 
 .PP
 \fBParameters:\fP

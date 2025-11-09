@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4158E0E4-EFB3-3A55-991D-02DFFA227E12' ]
+uuids:           [ 'x86_64: 9A076D6C-7EDA-3002-9922-44CF5D229760' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ExchangeWebServices.framework/Versions/A/ExchangeWebServices
-current-version: 267.0
-objc-constraint: none
+current-version: 281
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _EWSEmailAddressKeyEmailAddress1, _EWSEmailAddressKeyEmailAddress2, 
@@ -35,9 +34,10 @@ exports:
                        _EWSPropertyNameItemReminderSound, _EWSPropertyNameItemReminderURL, 
                        _EWSPropertyNameMessageJunkFlag, _EWSPropertyNameMessageJunkRecordedFlag, 
                        _EWSPropertyNameMessageNotJunkFlag, _EWSPropertyNameMessageRedirectedFlag, 
-                       _EWSPropertyNameStartLocation, _EWSPropertyNameStructuredLocation, 
-                       _EWSPropertyNameTaskOrder, _EWSPropertyNameTravelTime, _EWSPropertySetIdApple, 
-                       _EWSPropertySetIdNote, _EWSPropertyTAG_PR_ATTR_HIDDEN, _EWSPropertyTag_PR_ADDITIONAL_REN_ENTRYIDS, 
+                       _EWSPropertyNameOnlineMeetingExternalLink, _EWSPropertyNameStartLocation, 
+                       _EWSPropertyNameStructuredLocation, _EWSPropertyNameTaskOrder, 
+                       _EWSPropertyNameTravelTime, _EWSPropertySetIdApple, _EWSPropertySetIdNote, 
+                       _EWSPropertyTAG_PR_ATTR_HIDDEN, _EWSPropertyTag_PR_ADDITIONAL_REN_ENTRYIDS, 
                        _EWSPropertyTag_PR_ATTACHMENT_CONTACTPHOTO, _EWSPropertyTag_PR_ATTACHMENT_HIDDEN, 
                        _EWSPropertyTag_PR_BODY, _EWSPropertyTag_PR_COMMENT, _EWSPropertyTag_PR_DISPLAY_NAME_PREFIX, 
                        _EWSPropertyTag_PR_ENTRYID, _EWSPropertyTag_PR_FLAG_STATUS, 
@@ -173,18 +173,18 @@ exports:
                        _EWSPhoneNumberKeyTypeDefinition, _EWSPhysicalAddressDictionaryEntryType, 
                        _EWSPhysicalAddressDictionaryType, _EWSPhysicalAddressIndexType, 
                        _EWSPhysicalAddressKeyTypeDefinition, _EWSPostItemType, _EWSPostReplyItemBaseType, 
-                       _EWSPostReplyItemType, _EWSPullSubscription, _EWSPullSubscriptionRequestType, 
-                       _EWSPushSubscriptionRequestType, _EWSRecurrencePatternBaseType, 
-                       _EWSRecurrencePatternTypesDefinition, _EWSRecurrenceRangeBaseType, 
-                       _EWSRecurrenceRangeTypesDefinition, _EWSRecurrenceType, _EWSRecurringMasterItemIdType, 
-                       _EWSReferenceItemResponseType, _EWSRegeneratingPatternBaseType, 
-                       _EWSRelativeMonthlyRecurrencePatternType, _EWSRelativeYearlyRecurrencePatternType, 
-                       _EWSRemoveDelegateResponseMessageType, _EWSRemoveDelegateType, 
-                       _EWSRemoveItemType, _EWSReplyAllToItemType, _EWSReplyBodyType, 
-                       _EWSReplyToItemType, _EWSRequestAttachmentIdType, _EWSRequestServerVersion, 
-                       _EWSResolutionType, _EWSResolveNamesResponseMessageType, _EWSResolveNamesResponseType, 
-                       _EWSResolveNamesSearchScopeTypeDefinition, _EWSResolveNamesType, 
-                       _EWSResponseClassTypeDefinition, _EWSResponseCodeTypeDefinition, 
+                       _EWSPostReplyItemType, _EWSProposeNewTimeType, _EWSPullSubscription, 
+                       _EWSPullSubscriptionRequestType, _EWSPushSubscriptionRequestType, 
+                       _EWSRecurrencePatternBaseType, _EWSRecurrencePatternTypesDefinition, 
+                       _EWSRecurrenceRangeBaseType, _EWSRecurrenceRangeTypesDefinition, 
+                       _EWSRecurrenceType, _EWSRecurringMasterItemIdType, _EWSReferenceItemResponseType, 
+                       _EWSRegeneratingPatternBaseType, _EWSRelativeMonthlyRecurrencePatternType, 
+                       _EWSRelativeYearlyRecurrencePatternType, _EWSRemoveDelegateResponseMessageType, 
+                       _EWSRemoveDelegateType, _EWSRemoveItemType, _EWSReplyAllToItemType, 
+                       _EWSReplyBodyType, _EWSReplyToItemType, _EWSRequestAttachmentIdType, 
+                       _EWSRequestServerVersion, _EWSResolutionType, _EWSResolveNamesResponseMessageType, 
+                       _EWSResolveNamesResponseType, _EWSResolveNamesSearchScopeTypeDefinition, 
+                       _EWSResolveNamesType, _EWSResponseClassTypeDefinition, _EWSResponseCodeTypeDefinition, 
                        _EWSResponseMessageType, _EWSResponseObjectCoreType, _EWSResponseObjectType, 
                        _EWSResponseTypeTypeDefinition, _EWSRestrictionType, _EWSRootItemIdType, 
                        _EWSSRVLookup, _EWSSRVRecord, _EWSSearchExpressionDefinition, 

@@ -168,7 +168,7 @@ extern const CFStringRef kSecTrustRevocationValidUntilDate
 extern const CFStringRef kSecTrustCertificateTransparency
     __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
 extern const CFStringRef kSecTrustCertificateTransparencyWhiteList
-    __OSX_AVAILABLE_STARTING(__MAC_10_12, __IPHONE_10_0);
+    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_12, __MAC_10_13, __IPHONE_10_0, __IPHONE_11_0);
 
 #ifdef __BLOCKS__
 /*!
@@ -387,9 +387,9 @@ OSStatus SecTrustGetTrustResult(SecTrustRef trust,
     been evaluated.
     @param trust A reference to the trust object which has been evaluated.
     @result The certificate's public key, or NULL if it the public key could
-    not be extracted (this can happen with DSA certificate chains if the
-    parameters in the chain cannot be found).  The caller is responsible
-    for calling CFRelease on the returned key when it is no longer needed.
+    not be extracted (this can happen if the public key algorithm is not
+    supported).  The caller is responsible for calling CFRelease on the
+    returned key when it is no longer needed.
  */
 __nullable
 SecKeyRef SecTrustCopyPublicKey(SecTrustRef trust)
@@ -555,8 +555,7 @@ typedef SecTrustResultType SecTrustUserSetting
     @constant kSecTrustOptionImplicitAnchors Properly self-signed certs are
     treated as anchors implicitly.
  */
-typedef CF_OPTIONS(uint32_t, SecTrustOptionFlags)
-{
+typedef CF_OPTIONS(uint32_t, SecTrustOptionFlags) {
     kSecTrustOptionAllowExpired       = 0x00000001,
     kSecTrustOptionLeafIsCA           = 0x00000002,
     kSecTrustOptionFetchIssuerFromNet = 0x00000004,
@@ -604,13 +603,16 @@ OSStatus SecTrustSetParameters(SecTrustRef trustRef,
     @param keychainOrArray A reference to an array of keychains to search, a
     single keychain, or NULL to use the default keychain search list.
     @result A result code. See "Security Error Codes" (SecBase.h).
-    @discussion By default, the user's keychain search list and the system
-    anchors keychain are searched for certificates to complete the chain. You
-    can specify a zero-element array if you do not want any keychains searched.
-    Note: this function is not applicable to iOS.
+    @discussion This function is deprecated in macOS 10.13 and later. Beginning in
+    macOS 10.12, this function no longer affected the behavior of the trust
+    evaluation: the user's keychain search list and the system
+    anchors keychain are searched for certificates to complete the chain. To change
+    the keychains that are searched, callers must use SecKeychainSetSearchList to
+    change the user's keychain search list.
+    Note: this function was never applicable to iOS.
  */
 OSStatus SecTrustSetKeychains(SecTrustRef trust, CFTypeRef __nullable keychainOrArray)
-    __OSX_AVAILABLE_STARTING(__MAC_10_3, __IPHONE_NA);
+    __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_13, __IPHONE_NA, __IPHONE_NA);
 
 /*!
     @function SecTrustGetResult

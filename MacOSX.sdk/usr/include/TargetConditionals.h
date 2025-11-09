@@ -66,12 +66,22 @@
               TARGET_OS_IOS             - Generated code will run under iOS 
               TARGET_OS_TV              - Generated code will run under Apple TV OS
               TARGET_OS_WATCH           - Generated code will run under Apple Watch OS
-                 TARGET_OS_BRIDGE          - Generated code will run under Bridge devices
+              TARGET_OS_BRIDGE          - Generated code will run under Bridge devices
            TARGET_OS_SIMULATOR      - Generated code will run under a simulator
            TARGET_OS_EMBEDDED       - Generated code for firmware
        
         TARGET_IPHONE_SIMULATOR   - DEPRECATED: Same as TARGET_OS_SIMULATOR
         TARGET_OS_NANO            - DEPRECATED: Same as TARGET_OS_WATCH
+
+      +------------------------------------------------+
+      |                TARGET_OS_MAC                   |
+      | +---+  +-------------------------------------+ |
+      | |   |  |          TARGET_OS_IPHONE           | |
+      | |OSX|  | +-----+ +----+ +-------+ +--------+ | |
+      | |   |  | | IOS | | TV | | WATCH | | BRIDGE | | |
+      | |   |  | +-----+ +----+ +-------+ +--------+ | |
+      | +---+  +-------------------------------------+ |
+      +------------------------------------------------+
 
     TARGET_RT_* 
     These conditionals specify in which runtime the generated code will

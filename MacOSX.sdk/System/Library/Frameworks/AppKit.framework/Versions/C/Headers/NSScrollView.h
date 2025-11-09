@@ -1,7 +1,7 @@
 /*
 	NSScrollView.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 #import <Foundation/NSDate.h>
@@ -119,7 +119,7 @@ typedef struct __SFlags {
 
 @property (readonly) NSRect documentVisibleRect;
 @property (readonly) NSSize contentSize;
-@property (nullable, assign) __kindof NSView *documentView;
+@property (nullable, strong) __kindof NSView *documentView;
 @property (strong) NSClipView *contentView;
 @property (nullable, strong) NSCursor *documentCursor;
 @property NSBorderType borderType;
@@ -234,8 +234,7 @@ APPKIT_EXTERN NSNotificationName const NSScrollViewDidEndLiveScrollNotification 
 
 @interface NSScrollView(NSRulerSupport)
 
-+ (void)setRulerViewClass:(nullable Class)rulerViewClass;
-+ (Class)rulerViewClass;
+@property (class, null_resettable) Class rulerViewClass;
 
 @property BOOL rulersVisible;
 

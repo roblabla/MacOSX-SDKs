@@ -1,13 +1,12 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: AB76FEEC-B9BC-3743-AC71-6D7BFCB592F1' ]
+uuids:           [ 'x86_64: 2C437173-EF50-3E35-AEB4-D9010F24AE8B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/EmailAddressing.framework/Versions/A/EmailAddressing
-current-version: 3023.0
+current-version: 3441
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _EmailAddressingVersionNumber, _EmailAddressingVersionString ]
     objc-classes:    [ _EAEmailAddressGenerator, _EAEmailAddressLists, _EAEmailAddressParser, 
-                       _EmailAddressingFramework ]
+                       _EAEmailAddressSet ]
 ...

@@ -21,7 +21,12 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  */
 @property(nonatomic, readonly) NSString *UUID NS_DEPRECATED(NA, NA, 5_0, 6_0);
 
-@property(nonatomic, strong) EKCalendar *calendar;
+/*!
+    @property calendar
+    @abstract The calendar that this calendar item belongs to.
+    @discussion This will be nil for new calendar items until you set it.
+ */
+@property(nonatomic, strong, null_unspecified) EKCalendar *calendar;
 
 /*!
     @property   calendarItemIdentifier
@@ -52,13 +57,20 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
                 This identifier is the same for all occurrences of a recurring event. If you wish to differentiate
                 between occurrences, you may want to use the start date.
  
+                This may be nil for new calendar items that do not yet belong to a calendar.
+ 
                 In addition, there are two caveats for Exchange-based calendars:
                 - This identifier will be different between EventKit on iOS versus OS X
                 - This identifier will be different between devices for EKReminders
 */
-@property(nonatomic, readonly) NSString *calendarItemExternalIdentifier NS_AVAILABLE(10_8, 6_0);
+@property(nonatomic, readonly, null_unspecified) NSString *calendarItemExternalIdentifier NS_AVAILABLE(10_8, 6_0);
 
-@property(nonatomic, copy) NSString *title;
+/*!
+    @property title
+    @abstract The title of this calendar item.
+    @discussion This will be nill for new calendar items until you set it.
+ */
+@property(nonatomic, copy, null_unspecified) NSString *title;
 @property(nonatomic, copy, nullable) NSString *location;
 @property(nonatomic, copy, nullable) NSString *notes;
 @property(nonatomic, copy, nullable) NSURL *URL NS_AVAILABLE(10_8, 5_0);

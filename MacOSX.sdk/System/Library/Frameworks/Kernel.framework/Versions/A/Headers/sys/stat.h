@@ -326,7 +326,10 @@ struct stat64 __DARWIN_STRUCT_STAT64;
    notifications for deletes or renames for files which have UF_TRACKED set. */
 #define UF_TRACKED		0x00000040
 
-/* Bits 0x0080 through 0x4000 are currently undefined. */
+#define UF_DATAVAULT	0x00000080	/* entitlement required for reading */
+					/* and writing */
+
+/* Bits 0x0100 through 0x4000 are currently undefined. */
 #define UF_HIDDEN	0x00008000	/* hint that this item should not be */
 					/* displayed in a GUI */
 /*
@@ -337,7 +340,7 @@ struct stat64 __DARWIN_STRUCT_STAT64;
 #define	SF_ARCHIVED	0x00010000	/* file is archived */
 #define	SF_IMMUTABLE	0x00020000	/* file may not be changed */
 #define	SF_APPEND	0x00040000	/* writes to file may only append */
-#define SF_RESTRICTED	0x00080000	/* restricted access */
+#define SF_RESTRICTED	0x00080000	/* entitlement required for writing */
 #define SF_NOUNLINK	0x00100000	/* Item may not be removed, renamed or mounted on */
 
 /*

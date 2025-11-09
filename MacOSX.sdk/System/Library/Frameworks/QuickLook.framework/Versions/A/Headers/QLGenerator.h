@@ -318,7 +318,7 @@ QL_EXPORT CFBundleRef QLPreviewRequestGetGeneratorBundle(QLPreviewRequestRef pre
 /*!
  *      @function QLPreviewRequestSetDocumentObject
  *      @abstract Store some object in preview request.
- *      @param thumbnail The preview request.
+ *      @param preview The preview request.
  *      @param object The object representing the document
  *      @param callbacks Callbacks to retain/release/etc. the object.
  *      @discussion You can only call this function once per request.

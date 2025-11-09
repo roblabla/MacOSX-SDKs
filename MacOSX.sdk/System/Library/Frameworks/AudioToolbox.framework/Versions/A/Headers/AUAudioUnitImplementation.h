@@ -202,6 +202,25 @@ typedef AUAudioUnitStatus (^AUInternalRenderBlock)(
 /// Block which subclassers must provide (via a getter) to implement rendering.
 @property (nonatomic, readonly) AUInternalRenderBlock internalRenderBlock;
 
+/*! @property	MIDIOutputBufferSizeHint
+	@brief		Hint to control the size of the allocated buffer for outgoing MIDI events.
+	@discussion
+        This property allows the plug-in to provide a hint to the framework regarding the size of
+        its outgoing MIDI data buffer.
+
+        If the plug-in produces more MIDI output data than the default size of the allocated buffer,
+        then the plug-in can provide this property to increase the size of this buffer.
+
+        The value represents the number of 3-byte MIDI 1.0 messages that fit into the buffer.
+        This property is set to the default value by the framework.
+
+        In case of kAudioUnitErr_MIDIOutputBufferFull errors caused by producing too much MIDI
+        output in one render call, set this property to increase the buffer.
+
+        This only provides a recommendation to the framework.
+*/
+@property (NS_NONATOMIC_IOSONLY) NSInteger MIDIOutputBufferSizeHint API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
+
 /*!	@method	shouldChangeToFormat:forBus:
     @param format
         An AVAudioFormat which is proposed as the new format.

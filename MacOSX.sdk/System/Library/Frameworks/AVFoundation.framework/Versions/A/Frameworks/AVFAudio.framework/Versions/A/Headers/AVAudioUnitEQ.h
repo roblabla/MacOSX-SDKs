@@ -87,6 +87,8 @@ NS_CLASS_AVAILABLE(10_10, 8_0)
 	void *_impl;
 }
 
+- (instancetype)init NS_UNAVAILABLE;
+
 /*! @property filterType
     @abstract AVAudioUnitEQFilterType
     @discussion

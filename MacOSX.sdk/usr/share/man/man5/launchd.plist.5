@@ -89,6 +89,26 @@ Handle the SIGTERM signal, preferably with a
 source, and respond to this signal by unwinding any outstanding work quickly
 and then exiting.
 .El
+.Pp
+A daemon or agent launched by
+.Nm launchd
+.Em MUST :
+.Pp
+.Bl -bullet -offset indent -compact
+.It
+check in for any
+.Nm MachServices
+advertised in its plist, using
+.Xr xpc_connection_create_mach_service 3
+(or
+.Xr bootstrap_check_in 3 )
+if it uses MIG or raw Mach for communication
+.It
+check in for any
+.Nm LaunchEvents
+advertised in its plist, using
+.Xr xpc_set_event_stream_handler 3
+.El
 .Sh XML PROPERTY LIST KEYS
 The following keys can be used to describe the configuration details of your
 daemon or agent. Property lists are Apple's standard configuration file format.
@@ -149,8 +169,8 @@ This configuration file only applies to the hardware listed with this key. Each
 key in the dictionary defines a subdomain of the "hw"
 .Xr sysctl 3
 domain. Each value of the value defines valid values for the job to load. So a
-key of "machine" with an array specifying only "MacBookPro4,2" would only load
-on a machine whose "hw.machine" value was "MacBook4,2".
+key of "model" with an array specifying only "MacBookPro4,2" would only load
+on a machine whose "hw.model" value was "MacBookPro4,2".
 .It Sy Program <string>
 This key maps to the first argument of
 .Xr execv 3
@@ -333,7 +353,7 @@ This optional key is used to specify a directory to
 to before running the job.
 .It Sy EnvironmentVariables <dictionary of strings>
 This optional key is used to specify additional environmental variables to be
-set before running the job. Each value in the dictionary is the value of an
+set before running the job. Each key in the dictionary is the name of an
 environment variable, with the corresponding value being a string representing
 the desired value.
 .Em NOTE :

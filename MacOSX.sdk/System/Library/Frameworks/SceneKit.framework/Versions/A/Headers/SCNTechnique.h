@@ -1,7 +1,7 @@
 //
 //  SCNTechnique.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SCNShadable.h>
@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract SCNTechnique represents a rendering process that may require multiple passes.
  @discussion A technique is generally initialized from a Property List file. It can be set to any object that conforms to the SCNTechniqueSupport protocol.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNTechnique : NSObject <SCNAnimatable, NSCopying, NSSecureCoding>
 
 /*!
@@ -258,8 +258,8 @@ The values can be a single string referencing a symbol or a semantic or a target
  For example:
  myTechnique[@"myAmplitude"] = aValue;
  */
-- (nullable id)objectForKeyedSubscript:(id)key API_AVAILABLE(macosx(10.11), ios(9.0));
-- (void)setObject:(nullable id)obj forKeyedSubscript:(id <NSCopying>)key API_AVAILABLE(macosx(10.11), ios(9.0));
+- (nullable id)objectForKeyedSubscript:(id)key API_AVAILABLE(macos(10.11), ios(9.0));
+- (void)setObject:(nullable id)obj forKeyedSubscript:(id <NSCopying>)key API_AVAILABLE(macos(10.11), ios(9.0));
 
 @end
 
@@ -275,7 +275,7 @@ The values can be a single string referencing a symbol or a semantic or a target
  @property technique
  @abstract Specifies the technique of the receiver. Defaults to nil.
  */
-@property(nonatomic, copy, nullable) SCNTechnique *technique API_AVAILABLE(macosx(10.10));
+@property(nonatomic, copy, nullable) SCNTechnique *technique API_AVAILABLE(macos(10.10));
 
 @end
 

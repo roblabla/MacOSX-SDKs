@@ -25,9 +25,17 @@
 #import <CoreImage/CIFilterShape.h>
 #import <CoreImage/CISampler.h>
 #import <CoreImage/CIRAWFilter.h>
+#import <CoreImage/CIRenderDestination.h>
+#import <CoreImage/CIBarcodeDescriptor.h>
 #if !TARGET_OS_IPHONE
 #import <CoreImage/CIFilterGenerator.h>
 #import <CoreImage/CIPlugIn.h>
 #endif
 
 #endif /* __OBJC__ */
+
+#if __METAL_MACOS__ || __METAL_IOS__
+
+#import <CoreImage/CIKernelMetalLib.h>
+
+#endif /* __METAL_MACOS__ || __METAL_IOS__ */

@@ -1,7 +1,7 @@
 /*
     NSStatusItem.h
     Application Kit
-    Copyright (c) 1997-2016, Apple Inc.
+    Copyright (c) 1997-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -9,6 +9,8 @@
 #import <AppKit/NSEvent.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+typedef NSString * NSStatusItemAutosaveName NS_EXTENSIBLE_STRING_ENUM;
 
 @class NSAttributedString;
 @class NSStatusBarButton;
@@ -44,7 +46,7 @@ typedef NS_OPTIONS(NSUInteger, NSStatusItemBehavior) {
 
 /*  The status bar that the receiver is displayed in.
  */
-@property (readonly, assign) NSStatusBar *statusBar;
+@property (readonly, weak) NSStatusBar *statusBar;
 
 /*  The amount of space in the status bar that should be allocated to the receiver. \c NSVariableStatusItemLength will adjust the length to the size of the status item's contents and \c NSSquareStatusItemLength will keep the length the same as the status bar's height.
  */
@@ -68,7 +70,7 @@ typedef NS_OPTIONS(NSUInteger, NSStatusItemBehavior) {
 
 /*  Specifies a unique name for persisting visibility information. If none is specified, one is automatically chosen. Apps with multiple status bar items should set an autosave after creation. Setting to nil resets the automatically chosen name and clears saved information.
  */
-@property (null_resettable, copy) NSString *autosaveName NS_AVAILABLE_MAC(10_12);
+@property (null_resettable, copy) NSStatusItemAutosaveName autosaveName NS_AVAILABLE_MAC(10_12);
 
 @end
 

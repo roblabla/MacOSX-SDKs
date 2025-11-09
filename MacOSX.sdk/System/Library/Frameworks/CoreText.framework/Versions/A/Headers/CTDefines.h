@@ -2,7 +2,7 @@
  *  CTDefines.h
  *  CoreText
  *
- *  Copyright (c) 2010-2016 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2017 Apple Inc. All rights reserved.
  *
  */
 
@@ -20,35 +20,21 @@
 #endif
 
 #if defined(CT_BUILDING_CoreText) || TARGET_OS_WIN32
-# define CT_AVAILABLE(_mac, _ios)
-# define CT_AVAILABLE_MAC(_mac)
-# define CT_AVAILABLE_IOS(_ios)
-# define CT_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
-# define CT_DEPRECATED_MAC(_macIntro, _macDep)
-# define CT_DEPRECATED_IOS(_iosIntro, _iosDep)
+# define CT_AVAILABLE(...)
+# define CT_UNAVAILABLE(...)
+# define CT_DEPRECATED(...)
 #else /* defined(CT_BUILDING_CoreText) */
-# define CT_AVAILABLE(_mac, _ios) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_##_ios)
-# define CT_AVAILABLE_MAC(_mac) __OSX_AVAILABLE_STARTING(__MAC_##_mac, __IPHONE_NA)
-# define CT_AVAILABLE_IOS(_ios) __OSX_AVAILABLE_STARTING(__MAC_NA, __IPHONE_##_ios)
-# define CT_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
-# define CT_DEPRECATED_MAC(_macIntro, _macDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_##_macIntro, __MAC_##_macDep, __IPHONE_NA, __IPHONE_NA)
-# define CT_DEPRECATED_IOS(_iosIntro, _iosDep) __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_NA, __MAC_NA, __IPHONE_##_iosIntro, __IPHONE_##_iosDep)
+# define CT_AVAILABLE(...) API_AVAILABLE(__VA_ARGS__)
+# define CT_UNAVAILABLE(...) API_UNAVAILABLE(__VA_ARGS__)
+# define CT_DEPRECATED(...) API_DEPRECATED(__VA_ARGS__)
 #endif /* defined(CT_BUILDING_CoreText) */
 
 #if __has_feature(enumerator_attributes) && __has_attribute(availability)
-# define CT_ENUM_AVAILABLE(_mac, _ios) CT_AVAILABLE(_mac, _ios)
-# define CT_ENUM_AVAILABLE_MAC(_mac) CT_AVAILABLE_MAC(_mac)
-# define CT_ENUM_AVAILABLE_IOS(_ios) CT_AVAILABLE_IOS(_ios)
-# define CT_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep) CT_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
-# define CT_ENUM_DEPRECATED_MAC(_macIntro, _macDep) CT_DEPRECATED_MAC(_macIntro, _macDep)
-# define CT_ENUM_DEPRECATED_IOS(_iosIntro, _iosDep) CT_DEPRECATED_IOS(_iosIntro, _iosDep)
+# define CT_ENUM_DEPRECATED(...) CT_DEPRECATED(__VA_ARGS__)
+# define CT_ENUM_UNAVAILABLE(...) CT_UNAVAILABLE(__VA_ARGS__)
 #else
-# define CT_ENUM_AVAILABLE(_mac, _ios)
-# define CT_ENUM_AVAILABLE_MAC(_mac)
-# define CT_ENUM_AVAILABLE_IOS(_ios)
-# define CT_ENUM_DEPRECATED(_macIntro, _macDep, _iosIntro, _iosDep)
-# define CT_ENUM_DEPRECATED_MAC(_macIntro, _macDep)
-# define CT_ENUM_DEPRECATED_IOS(_iosIntro, _iosDep)
+# define CT_ENUM_DEPRECATED(...)
+# define CT_ENUM_UNAVAILABLE(...)
 #endif /* __has_feature(enumerator_attributes) && __has_attribute(availability) */
 
 #if __has_attribute(objc_bridge)
@@ -70,6 +56,7 @@
 
 #if TARGET_OS_WIN32
 #define __nullable
+#define _Nonnull
 
 #define CF_BRIDGED_TYPE(T)
 #define CF_BRIDGED_MUTABLE_TYPE(T)

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: AB39F6D6-7146-3740-AD27-17C40E32B110', 'x86_64: D93D7916-CDFA-30A6-A349-63E57778EA19' ]
+uuids:           [ 'i386: 733AE4C4-F530-38EA-9A04-10F39BA52C76', 'x86_64: 4A5D48C3-5317-3C7E-9D5C-F3168064001A' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/ScriptingBridge.framework/Versions/A/ScriptingBridge
-objc-constraint: none
 exports:         
   - archs:           [ i386 ]
     objc-classes:    [ _SBAppContext, _SBAppLocator, _SBFilePathAppLocator, _SBIdentifiedAppLocator, 

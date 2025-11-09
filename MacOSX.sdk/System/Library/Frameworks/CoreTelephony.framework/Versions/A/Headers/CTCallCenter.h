@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CORETELEPHONY_CLASS_AVAILABLE(4_0)
+CORETELEPHONY_CLASS_DEPRECATED(4_0, 10_0, "Replaced by CXCallObserver from CallKit.framework")
 @interface CTCallCenter : NSObject
 
 /*

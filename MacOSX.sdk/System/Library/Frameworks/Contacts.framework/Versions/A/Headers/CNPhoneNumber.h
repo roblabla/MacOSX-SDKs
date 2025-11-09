@@ -20,8 +20,11 @@ NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface CNPhoneNumber : NSObject <NSCopying, NSSecureCoding>
 
 /*! These will return nil if the stringValue is nil. */
-+ (instancetype)phoneNumberWithStringValue:(NSString *)stringValue;
-- (instancetype)initWithStringValue:(NSString *)string;
++ (nullable instancetype)phoneNumberWithStringValue:(NSString *)stringValue;
+- (nullable instancetype)initWithStringValue:(NSString *)string;
+
+- (instancetype)init NS_DEPRECATED(10_11, 10_13, 9_0, 11_0, "Use initWithStringValue:");
++ (instancetype)new  NS_DEPRECATED(10_11, 10_13, 9_0, 11_0, "Use phoneNumberWithStringValue:");
 
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *stringValue;
 

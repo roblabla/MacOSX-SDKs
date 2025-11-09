@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 1F52ED83-7432-3182-8DE6-DF44CDE14D2B', 'x86_64: 598812E8-78AC-3719-8ECA-18A4FB52B37D' ]
+uuids:           [ 'i386: 15865380-D8D4-3936-B755-392FAB4066E0', 'x86_64: 2AB55D35-35FB-3404-A0BE-6025FDB872D3' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SyncServicesUI.framework/Versions/A/SyncServicesUI
-current-version: 726.0
-objc-constraint: none
+current-version: 727
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _ISyncConcreteUIHelperProxy._cachedUIHelpersForClassNames, 

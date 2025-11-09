@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 13683466-B9CD-3F50-9F1F-5EA892FD16EC', 'x86_64: 21A5AA13-22C2-3EAA-ACC6-439A0DA9FA39' ]
+uuids:           [ 'i386: B1156326-FCCC-3BE5-A5BC-C5F2BE16DD38', 'x86_64: FB89DAB0-83F5-3E0B-A526-5CBA2D5F9D89' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/WhitePages.framework/Versions/A/WhitePages
-objc-constraint: none
 exports:         
   - archs:           [ i386 ]
     symbols:         [ _CreateRomanNamesFromKanjiName, _CreateRomanStringFromKatakana ]

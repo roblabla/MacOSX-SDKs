@@ -83,14 +83,6 @@ List all of the files installed under the \fIpackage-id\fP.
 Print all receipt information about the specified \fIpackage-id\fP in the standard Mac OS X 
 .Xr plist 5
 format.
-.It Cm --verify Ar package-id
-Run
-.Xr repair_packages 8
-to verify the specified \fIpackage-id\fP.
-.It Cm --repair Ar package-id
-Run
-.Xr repair_packages 8
-to repair the specified \fIpackage-id\fP.
 .It Cm --pkg-info Ar package-id
 Print extended information about the specified \fIpackage-id\fP.
 .It Cm --pkg-info-plist Ar package-id
@@ -169,8 +161,6 @@ In addition to the status of the signature, the associated certificate chain wil
 .Bl -item -compact
 .It
 .Xr installer 8
-.It
-.Xr repair_packages 8
 .It
 .Xr pkgbuild 1
 .It

@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 0AD6B8F4-47FF-3B6B-99FB-4AE76D361D2D' ]
+uuids:           [ 'x86_64: D4A4967B-04C3-31C7-AE5A-E81136EE45B6' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PodcastProducerKit.framework/Versions/A/PodcastProducerKit
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _PCPApplicationSupportDirectory, _PCPAuthenticationActionDidAuthenticateNotification, 

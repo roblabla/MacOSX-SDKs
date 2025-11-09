@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F819CB18-4A60-3594-AC24-5DDFB4172F4F' ]
+uuids:           [ 'x86_64: 3DB99739-33AF-3365-A54F-41B94A86AFB1' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/MobileAsset.framework/Versions/A/MobileAsset
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _ASAssetAccessCount, _ASAssetAccessingClients, _ASAssetDownloadOptions, 
@@ -31,29 +30,43 @@ exports:
                        _ASNonUserInitiatedDownloadsAllowed, _ASOperationCompleted, 
                        _ASOperationDownloadPaused, _ASOperationDownloadQueued, _ASOperationDownloadingAsset, 
                        _ASOperationStalled, _ASOperationUnarchivingAsset, _ASOperationVerifyingAsset, 
-                       _ASOperationWaitingToDownload, _ASProductVersion, _ASServerURLForAssetType, 
+                       _ASOperationWaitingToDownload, _ASProductVersion, _ASQueryAssets, 
+                       _ASQueryMetadata, _ASQueryMetadataReleaseDate, _ASServerURLForAssetType, 
                        _ASSetAssetServerURL, _ASSetAssetServerURLForAssetType, _ASSetDefaultAssetServerURLForAssetType, 
                        _ASSetLogLevel, _ASStateOperation, _ASStateOperationEstimatedTimeRemaining, 
                        _ASStateOperationProgress, _ASStatePausedOperation, _ASStateStallError, 
-                       _ASStateStallReason, _MobileAssetCancelDownload, _MobileAssetCopyAssetInfo, 
-                       _MobileAssetCopyAssetProperties, _MobileAssetCopyLocalURL, 
-                       _MobileAssetCreateForType, _MobileAssetDownload, _MobileAssetGetTypeID, 
-                       _MobileAssetPauseDownload, _MobileAssetPurge, _MobileAssetQueryCreate, 
-                       _MobileAssetQueryCreateArrayOfKnownAssets, _MobileAssetQueryGetMatchingAsset, 
-                       _MobileAssetQueryGetTypeID, _MobileAssetQueryRefreshAssetsAgainstLocalCache, 
-                       _MobileAssetQueryRefreshKnownAssets, _MobileAssetResumeDownload, 
-                       _MobileAssetSetLogLevel, __ForceMetadataUpdate, __MobileAssetGarbageCollectionBehaviorForAttributes, 
+                       _ASStateStallReason, _MASetPallasAudience, _MASetPallasUrl, 
+                       _MobileAssetCancelDownload, _MobileAssetCopyAssetInfo, _MobileAssetCopyAssetProperties, 
+                       _MobileAssetCopyLocalURL, _MobileAssetCreateForType, _MobileAssetDownload, 
+                       _MobileAssetGetTypeID, _MobileAssetPauseDownload, _MobileAssetPurge, 
+                       _MobileAssetQueryCreate, _MobileAssetQueryCreateArrayOfKnownAssets, 
+                       _MobileAssetQueryGetMatchingAsset, _MobileAssetQueryGetTypeID, 
+                       _MobileAssetQueryRefreshAssetsAgainstLocalCache, _MobileAssetQueryRefreshKnownAssets, 
+                       _MobileAssetResumeDownload, _MobileAssetSetLogLevel, __ForceMetadataUpdate, 
+                       __MAclientSendQueryNSUrlState, __MAensureExtension, __MAgetClientConnection, 
+                       __MAgetProgressHandlers, __MAsendCancelDownload, __MAsendDownloadMetaData, 
+                       __MAsendPurgeAsset, __MAsendQueryMetaData, __MAsendSetPallasAudience, 
+                       __MAsendSetPallasUrl, __MobileAssetGarbageCollectionBehaviorForAttributes, 
                        __MobileAssetLog, __MobileAssetReplaceProperties, ___DiscardDownloadQueueToken, 
                        ___GetDownloadQueueToken, ___MobileAssetVersionNumber, ___MobileAssetVersionString, 
                        ___RepositoryWasModified, ___RestartDownloads, ___RetryQueuedDownloads, 
                        ___SetAssetRepoURL, ___SetAssetTypeDescriptorDirectoryURL, 
                        ___SetCachedContentURLs, ___SetEnforceProductionSigning, ___SetLastDanglingReferenceCheckDate, 
                        ___SetPreinstalledAssetURLs, ___StartBackgroundedDownloads, 
-                       ___TerminateDaemon, ___TriggerAssetMigration, __hashCFDataOfLength, 
-                       __hashCFDictionary, __hashCFStringOfLength, _kMobileAssetEnforceProductionSigning, 
-                       _kMobileAssetInstallWithOSPreinstalledAssetsPath, _kMobileAssetLogLevel, 
-                       _kMobileAssetPreferencesDomain, _kMobileAssetRequiredByOSPreinstalledAssetsPath, 
+                       ___TerminateDaemon, ___TriggerAssetMigration, __getClientAsyncMessageQueue, 
+                       __getClientStateMessageQueue, __hashCFDataOfLength, __hashCFDictionary, 
+                       __hashCFStringOfLength, __isAssetTypeWhitelisted, _assembleTaskDescriptor, 
+                       _assetTypeFromNormalized, _disassembleTaskDescriptor, _doMADownloadReply, 
+                       _ensureAndIncrementNumberAtKey, _getAssetDirectoryName, _getAssetId, 
+                       _getAssetIdFromDict, _getAssetTypeFromTaskDescriptor, _getLocalUrlFromTypeAndId, 
+                       _getPathToAssetDirectory, _getPathToAssetFile, _getPathToStagedFile, 
+                       _kMobileAssetEnforceProductionSigning, _kMobileAssetInstallWithOSPreinstalledAssetsPath, 
+                       _kMobileAssetLogLevel, _kMobileAssetPreferencesDomain, _kMobileAssetRequiredByOSPreinstalledAssetsPath, 
                        _kMobileAssetRequiredOnlyByInternalOSPreinstalledAssetsPath, 
-                       _kMobileAssetSUAllowSameVersionFullReplacement, _kMobileAssetSUDisableBuildNumberComparison ]
-    objc-classes:    [ _ASAsset, _ASAssetQuery ]
+                       _kMobileAssetSUAllowSameVersionFullReplacement, _kMobileAssetSUDisableBuildNumberComparison, 
+                       _logDebug, _logError, _logInfo, _newCreateObjectWithKey, _normalizedAssetType, 
+                       _notifyClientsOfProgress, _sendAsync, _setClientConnectionHandler, 
+                       _shouldHashAttribute ]
+    objc-classes:    [ _ASAsset, _ASAssetQuery, _MAAsset, _MAAssetQuery, _MAProgressHandler, 
+                       _MAProgressNotification ]
 ...

@@ -1,14 +1,14 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4390D7D3-5677-3DCE-B724-CD66A4167D4D' ]
+uuids:           [ 'x86_64: FED086C5-E687-30C8-A211-C721F0960312' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PhotoLibrary.framework/Versions/A/PhotoLibrary
-current-version: 3130.0.240
-objc-constraint: none
+current-version: 3201.9.160
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _PHLAdjustmentsKey, _PHLImportedByTypeKey, _PHLIngestAssetMetadataPropertyKey, 
-                       _PHLIngestAssetURLDataKey, _PHLIngestRequestMetadataCreationDateKey, 
+    symbols:         [ _PHLAdjustmentsKey, _PHLAlternateMasterAssetKey, _PHLImportedByTypeKey, 
+                       _PHLIngestAssetMetadataPropertyKey, _PHLIngestAssetURLDataKey, 
+                       _PHLIngestRequestMetadataCreationDateKey, _PHLIngestRequestMetadataPlaybackVariationKey, 
                        _PHLIngestRequestMetadataVideoComplDurationKey, _PHLIngestRequestMetadataVideoComplImageDisplayKey, 
                        _PHLIngestRequestMetadataVideoComplMediaGroupIdKey, _PHLIngestRequestMetadataVideoComplPixelHeightKey, 
                        _PHLIngestRequestMetadataVideoComplPixelWidthKey, _PHLMasterAssetKey, 

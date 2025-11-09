@@ -307,13 +307,15 @@ AudioFileStreamOpen (
 	@discussion		This call is the means for streams to supply data to the parser. 
 					Data is expected to be passed in sequentially from the beginning of the file, without gaps.
 					In the course of parsing, the client's property and/or packets callbacks may be called.
+					At the end of the stream, this function must be called once with null data pointer and zero
+					data byte size to flush any remaining packets out of the parser.
 
 	@param			inAudioFileStream 
 						The file stream ID
 	@param			inDataByteSize 
-						The number of bytes passed in for parsing.
+						The number of bytes passed in for parsing. Must be zero when flushing the parser.
 	@param			inData 
-						The data passed in to be parsed. 
+						The data passed in to be parsed. Must be null when flushing the parser.
 	@param			inFlags 
 						If there is a data discontinuity, then kAudioFileStreamParseFlag_Discontinuity should be set true. 
 */
@@ -321,7 +323,7 @@ extern OSStatus
 AudioFileStreamParseBytes(	
 								AudioFileStreamID				inAudioFileStream,
 								UInt32							inDataByteSize,
-								const void *					inData,
+								const void * __nullable			inData,
 								AudioFileStreamParseFlags		inFlags)
 																		__OSX_AVAILABLE_STARTING(__MAC_10_5,__IPHONE_2_0);
 

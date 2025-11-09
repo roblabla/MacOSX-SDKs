@@ -1,6 +1,6 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 376EF52F-A55D-32BE-9950-201A7E17EB71', 'x86_64: 55C6A958-D52B-3D81-B230-EB949212B5D9' ]
+uuids:           [ 'i386: 95ED6B04-723E-3E82-9B1A-7052E2718B91', 'x86_64: 4B43CBFA-1426-3A90-8CC2-4B5BB1A26433' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/AudioUnit.framework/Versions/A/AudioUnit
 objc-constraint: none

@@ -126,7 +126,7 @@ VTDecompressionSessionCreate(
 	CM_NULLABLE CFDictionaryRef								videoDecoderSpecification,
 	CM_NULLABLE CFDictionaryRef                             destinationImageBufferAttributes,
 	const VTDecompressionOutputCallbackRecord * CM_NULLABLE outputCallback,
-	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTDecompressionSessionRef * CM_NONNULL decompressionSessionOut) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE VTDecompressionSessionRef * CM_NONNULL decompressionSessionOut) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 
 CF_IMPLICIT_BRIDGING_ENABLED
 	
@@ -141,18 +141,21 @@ CF_IMPLICIT_BRIDGING_ENABLED
     	Calling VTDecompressionSessionInvalidate ensures a deterministic, orderly teardown.
 */
 VT_EXPORT void 
-VTDecompressionSessionInvalidate( CM_NONNULL VTDecompressionSessionRef session ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+VTDecompressionSessionInvalidate( CM_NONNULL VTDecompressionSessionRef session ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 
 /*!
 	@function VTDecompressionSessionGetTypeID
 	@abstract Returns the CFTypeID for decompression sessions.  
 */
 VT_EXPORT CFTypeID 
-VTDecompressionSessionGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+VTDecompressionSessionGetTypeID(void) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 
 /*!
 	@function	VTDecompressionSessionDecodeFrame
 	@abstract	Decompresses a video frame.
+	@discussion
+		If an error is returned from this function, there will be no callback.  Otherwise
+		the callback provided during VTDecompressionSessionCreate will be called.
 	@param	session
 		The decompression session.
 	@param	sampleBuffer
@@ -183,7 +186,7 @@ VTDecompressionSessionDecodeFrame(
 	CM_NONNULL CMSampleBufferRef			sampleBuffer,
 	VTDecodeFrameFlags						decodeFlags, // bit 0 is enableAsynchronousDecompression
 	void * CM_NULLABLE						sourceFrameRefCon,
-	VTDecodeInfoFlags * CM_NULLABLE 		infoFlagsOut) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	VTDecodeInfoFlags * CM_NULLABLE 		infoFlagsOut) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 	
 #if __BLOCKS__
 /*!
@@ -192,6 +195,8 @@ VTDecompressionSessionDecodeFrame(
 	@discussion
 		When you decode a frame, you pass in a callback block to be called
 		for that decompressed frame.  This block will not necessarily be called in display order.
+		If the VTDecompressionSessionDecodeFrameWithOutputHandler call returns an error, the block
+		will not be called.
 	@param	status
 		noErr if decompression was successful; an error code if decompression was not successful.
 	@param	infoFlags
@@ -221,6 +226,8 @@ typedef void (^VTDecompressionOutputHandler)(
 	@abstract	Decompresses a video frame.
 	@discussion
 		Cannot be called with a session created with a VTDecompressionOutputCallbackRecord.
+		If the VTDecompressionSessionDecodeFrameWithOutputHandler call returns an error, the block
+		will not be called.
 	@param	session
 		The decompression session.
 	@param	sampleBuffer
@@ -241,7 +248,8 @@ typedef void (^VTDecompressionOutputHandler)(
 		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
 		Pass NULL if you do not want to receive this information.
 	@param	outputHandler
-		The block to be called when decoding the frame is completed.
+		The block to be called when decoding the frame is completed.  If the VTDecompressionSessionDecodeFrameWithOutputHandler
+		call returns an error, the block will not be called.
  */
 VT_EXPORT OSStatus
 VTDecompressionSessionDecodeFrameWithOutputHandler(
@@ -249,7 +257,7 @@ VTDecompressionSessionDecodeFrameWithOutputHandler(
 	CM_NONNULL CMSampleBufferRef			sampleBuffer,
 	VTDecodeFrameFlags						decodeFlags, // bit 0 is enableAsynchronousDecompression
 	VTDecodeInfoFlags * CM_NULLABLE			infoFlagsOut,
-	CM_NONNULL VTDecompressionOutputHandler	outputHandler ) __OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
+	CM_NONNULL VTDecompressionOutputHandler	outputHandler ) API_AVAILABLE(macosx(10.11), ios(9.0), tvos(10.2));
 #endif // __BLOCKS__
 
 /*!
@@ -264,7 +272,7 @@ VTDecompressionSessionDecodeFrameWithOutputHandler(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionFinishDelayedFrames(
-	CM_NONNULL VTDecompressionSessionRef		session) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	CM_NONNULL VTDecompressionSessionRef		session) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 
 /*!
 	@function VTDecompressionSessionCanAcceptFormatDescription
@@ -277,7 +285,7 @@ VTDecompressionSessionFinishDelayedFrames(
 VT_EXPORT Boolean 
 VTDecompressionSessionCanAcceptFormatDescription( 
 	CM_NONNULL VTDecompressionSessionRef		session,
-	CM_NONNULL CMFormatDescriptionRef			newFormatDesc ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	CM_NONNULL CMFormatDescriptionRef			newFormatDesc ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 
 /*!
 	@function VTDecompressionSessionWaitForAsynchronousFrames
@@ -288,7 +296,7 @@ VTDecompressionSessionCanAcceptFormatDescription(
 */
 VT_EXPORT OSStatus
 VTDecompressionSessionWaitForAsynchronousFrames(
-	CM_NONNULL VTDecompressionSessionRef       session) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+	CM_NONNULL VTDecompressionSessionRef       session) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
 
 CF_IMPLICIT_BRIDGING_DISABLED
 	
@@ -306,7 +314,20 @@ CF_IMPLICIT_BRIDGING_DISABLED
 VT_EXPORT OSStatus
 VTDecompressionSessionCopyBlackPixelBuffer(
    CM_NONNULL VTDecompressionSessionRef			session,
-   CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CVPixelBufferRef * CM_NONNULL pixelBufferOut ) __OSX_AVAILABLE_STARTING(__MAC_10_8,__IPHONE_8_0);
+   CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CVPixelBufferRef * CM_NONNULL pixelBufferOut ) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2));
+	
+/*!
+	@function VTIsHardwareDecodeSupported
+	@abstract Indicates whether the current system supports hardware decode for a given codec
+	@discussion
+		This routine reports whether the current system supports hardware decode.  Using
+		this information, clients can make informed decisions regarding remote assets to load,
+		favoring alternate encodings when hardware decode is not supported.
+		This call returning true does not guarantee that hardware decode resources will be
+		available at all times.
+ */
+VT_EXPORT Boolean
+VTIsHardwareDecodeSupported( CMVideoCodecType codecType ) API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0));
 	
 // See VTSession.h for property access APIs on VTDecompressionSessions.
 // See VTDecompressionProperties.h for standard property keys and values for decompression sessions.

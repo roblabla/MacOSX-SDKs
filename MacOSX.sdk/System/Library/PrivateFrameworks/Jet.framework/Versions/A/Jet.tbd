@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: FC4FD590-26F4-39D1-99EC-3FBF806322E7' ]
+uuids:           [ 'x86_64: 5BA46C0D-0D76-3F6E-B66B-5D1462F19C1E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/Jet.framework/Versions/A/Jet
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _JetVersionNumber, _JetVersionString, __Z10jet_assertbP8NSString, 
@@ -56,9 +55,9 @@ exports:
                        __ZN11jet_context22execute_command_bufferEP18jet_command_buffer, 
                        __ZN11jet_context24change_dest_color_formatE18jet_texture_format, 
                        __ZN11jet_context24change_dest_depth_formatE18jet_texture_format, 
-                       __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE15matrix_float2x2, 
-                       __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE15matrix_float3x3, 
-                       __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE15matrix_float4x4, 
+                       __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE13simd_float2x2, 
+                       __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE13simd_float3x3, 
+                       __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE13simd_float4x4, 
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv2_f, 
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv2_i, 
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv3_f, 
@@ -67,18 +66,18 @@ exports:
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv4_i, 
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEf, 
                        __ZN11jet_context25set_vertex_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEi, 
-                       __ZN11jet_context25set_vertex_constant_valueEj15matrix_float2x2, 
-                       __ZN11jet_context25set_vertex_constant_valueEj15matrix_float3x3, 
-                       __ZN11jet_context25set_vertex_constant_valueEj15matrix_float4x4, 
+                       __ZN11jet_context25set_vertex_constant_valueEj13simd_float2x2, 
+                       __ZN11jet_context25set_vertex_constant_valueEj13simd_float3x3, 
+                       __ZN11jet_context25set_vertex_constant_valueEj13simd_float4x4, 
                        __ZN11jet_context25set_vertex_constant_valueEjDv2_f, __ZN11jet_context25set_vertex_constant_valueEjDv2_i, 
                        __ZN11jet_context25set_vertex_constant_valueEjDv3_f, __ZN11jet_context25set_vertex_constant_valueEjDv3_i, 
                        __ZN11jet_context25set_vertex_constant_valueEjDv4_f, __ZN11jet_context25set_vertex_constant_valueEjDv4_i, 
                        __ZN11jet_context25set_vertex_constant_valueEjf, __ZN11jet_context25set_vertex_constant_valueEji, 
                        __ZN11jet_context26change_dest_stencil_formatE18jet_texture_format, 
                        __ZN11jet_context26submit_command_buffer_implEP18jet_command_buffer, 
-                       __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE15matrix_float2x2, 
-                       __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE15matrix_float3x3, 
-                       __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE15matrix_float4x4, 
+                       __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE13simd_float2x2, 
+                       __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE13simd_float3x3, 
+                       __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEE13simd_float4x4, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv2_f, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv2_i, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv3_f, 
@@ -87,9 +86,9 @@ exports:
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEDv4_i, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEf, 
                        __ZN11jet_context27set_fragment_constant_valueERKNSt3__112basic_stringIcNS0_11char_traitsIcEENS0_9allocatorIcEEEEi, 
-                       __ZN11jet_context27set_fragment_constant_valueEj15matrix_float2x2, 
-                       __ZN11jet_context27set_fragment_constant_valueEj15matrix_float3x3, 
-                       __ZN11jet_context27set_fragment_constant_valueEj15matrix_float4x4, 
+                       __ZN11jet_context27set_fragment_constant_valueEj13simd_float2x2, 
+                       __ZN11jet_context27set_fragment_constant_valueEj13simd_float3x3, 
+                       __ZN11jet_context27set_fragment_constant_valueEj13simd_float4x4, 
                        __ZN11jet_context27set_fragment_constant_valueEjDv2_f, __ZN11jet_context27set_fragment_constant_valueEjDv2_i, 
                        __ZN11jet_context27set_fragment_constant_valueEjDv3_f, __ZN11jet_context27set_fragment_constant_valueEjDv3_i, 
                        __ZN11jet_context27set_fragment_constant_valueEjDv4_f, __ZN11jet_context27set_fragment_constant_valueEjDv4_i, 

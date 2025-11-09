@@ -10,7 +10,7 @@
 @class CKRecordZoneID, CKServerChangeToken;
 
 NS_ASSUME_NONNULL_BEGIN
-NS_CLASS_AVAILABLE(10_12, 10_0)
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0))
 @interface CKFetchDatabaseChangesOperation : CKDatabaseOperation
 
 /* This operation will fetch changes to record zones within a database
@@ -36,6 +36,10 @@ NS_CLASS_AVAILABLE(10_12, 10_0)
 
 @property (nonatomic, copy, nullable) void (^recordZoneWithIDChangedBlock)(CKRecordZoneID *zoneID);
 @property (nonatomic, copy, nullable) void (^recordZoneWithIDWasDeletedBlock)(CKRecordZoneID *zoneID);
+
+/* If this block is set it will be called instead of recordZoneWithIDWasDeletedBlock if the user deleted this zone via the iCloud storage UI.
+   This is an indication that the user wanted all data deleted, so local cached data should be wiped and not re-uploaded to the server. */
+@property (nonatomic, copy, nullable) void (^recordZoneWithIDWasPurgedBlock)(CKRecordZoneID *zoneID) API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 
 @property (nonatomic, copy, nullable) void (^changeTokenUpdatedBlock)(CKServerChangeToken * serverChangeToken);
 

@@ -94,6 +94,7 @@
 #include <mach/exception_types.h>
 
 #include <kern/kern_types.h>
+#include <vm/vm_kern.h>
 
 #include <sys/cdefs.h>
 
@@ -114,7 +115,7 @@ __END_DECLS
 
 __BEGIN_DECLS
 
-extern uint64_t	 		thread_tid(thread_t thread);
+extern uint64_t			thread_tid(thread_t thread);
 
 __END_DECLS
 
@@ -136,6 +137,7 @@ extern kern_return_t	kernel_thread_start(
 							thread_continue_t	continuation,
 							void				*parameter,
 							thread_t			*new_thread);
+
 
 __END_DECLS
 

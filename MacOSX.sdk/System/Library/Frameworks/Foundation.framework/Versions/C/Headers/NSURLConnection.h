@@ -1,6 +1,6 @@
 /*    
     NSURLConnection.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -31,15 +31,11 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
     @class NSURLConnection
     
-    @abstract 
-        
-        An NSURLConnection object provides support to perform
+    @abstract An NSURLConnection object provides support to perform
         asynchronous loads of a URL request, providing data to a
         client supplied delegate.
     
-    @discussion
-
-        The interface for NSURLConnection is very sparse, providing
+    @discussion The interface for NSURLConnection is very sparse, providing
         only the controls to start and cancel asynchronous loads of a
         URL request.<p>
 
@@ -115,20 +111,20 @@ NS_ASSUME_NONNULL_BEGIN
 }
 
 /* Designated initializer */
-- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate startImmediately:(BOOL)startImmediately NS_DEPRECATED(10_5, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)") __WATCHOS_PROHIBITED;
+- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate startImmediately:(BOOL)startImmediately API_DEPRECATED("Use NSURLSession (see NSURLSession.h)", macos(10.5,10.11), ios(2.0,9.0), tvos(9.0,9.0)) __WATCHOS_PROHIBITED;
 
-- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)") __WATCHOS_PROHIBITED;
-+ (nullable NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use NSURLSession (see NSURLSession.h)") __WATCHOS_PROHIBITED;
+- (nullable instancetype)initWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate API_DEPRECATED("Use NSURLSession (see NSURLSession.h)", macos(10.3,10.11), ios(2.0,9.0), tvos(9.0,9.0)) __WATCHOS_PROHIBITED;
++ (nullable NSURLConnection*)connectionWithRequest:(NSURLRequest *)request delegate:(nullable id)delegate API_DEPRECATED("Use NSURLSession (see NSURLSession.h)", macos(10.3,10.11), ios(2.0,9.0), tvos(9.0,9.0)) __WATCHOS_PROHIBITED;
 
-@property (readonly, copy) NSURLRequest *originalRequest NS_AVAILABLE(10_8, 5_0);
-@property (readonly, copy) NSURLRequest *currentRequest NS_AVAILABLE(10_8, 5_0);
+@property (readonly, copy) NSURLRequest *originalRequest API_AVAILABLE(macos(10.8), ios(5.0), watchos(2.0), tvos(9.0));
+@property (readonly, copy) NSURLRequest *currentRequest API_AVAILABLE(macos(10.8), ios(5.0), watchos(2.0), tvos(9.0));
 
-- (void)start NS_AVAILABLE(10_5, 2_0);
+- (void)start API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 - (void)cancel;
 
-- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode NS_AVAILABLE(10_5, 2_0);
-- (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode NS_AVAILABLE(10_5, 2_0);
-- (void)setDelegateQueue:(nullable NSOperationQueue*) queue NS_AVAILABLE(10_7, 5_0);
+- (void)scheduleInRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+- (void)unscheduleFromRunLoop:(NSRunLoop *)aRunLoop forMode:(NSRunLoopMode)mode API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+- (void)setDelegateQueue:(nullable NSOperationQueue*) queue API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*! 
@@ -152,13 +148,10 @@ NS_ASSUME_NONNULL_BEGIN
     @param 
         request     The request to preflight.
 
-    @result
-
-        YES         if it is likely that the given request can be used to
+    @result         YES if it is likely that the given request can be used to
                     initialize a connection and the associated I/O can be
-                    started
-
-        NO            
+                    started, NO otherwise.
+ 
 */
 + (BOOL)canHandleRequest:(NSURLRequest *)request;
 
@@ -211,9 +204,9 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error;
 - (BOOL)connectionShouldUseCredentialStorage:(NSURLConnection *)connection;
 - (void)connection:(NSURLConnection *)connection willSendRequestForAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge;
-- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace NS_DEPRECATED(10_6, 10_10, 3_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead.");
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge NS_DEPRECATED(10_2, 10_10, 2_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead.");
-- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge NS_DEPRECATED(10_2, 10_10, 2_0, 8_0, "Use -connection:willSendRequestForAuthenticationChallenge: instead.");
+- (BOOL)connection:(NSURLConnection *)connection canAuthenticateAgainstProtectionSpace:(NSURLProtectionSpace *)protectionSpace API_DEPRECATED("Use -connection:willSendRequestForAuthenticationChallenge: instead.", macos(10.6,10.10), ios(3.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge API_DEPRECATED("Use -connection:willSendRequestForAuthenticationChallenge: instead.", macos(10.2,10.10), ios(2.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
+- (void)connection:(NSURLConnection *)connection didCancelAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge API_DEPRECATED("Use -connection:willSendRequestForAuthenticationChallenge: instead.", macos(10.2,10.10), ios(2.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
 @end
 
 /*!
@@ -405,7 +398,7 @@ NS_ASSUME_NONNULL_BEGIN
     @result      The content of the URL resulting from performing the load,
                  or nil if the load failed.
 */
-+ (nullable NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse * _Nullable * _Nullable)response error:(NSError **)error NS_DEPRECATED(10_3, 10_11, 2_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h") __WATCHOS_PROHIBITED;
++ (nullable NSData *)sendSynchronousRequest:(NSURLRequest *)request returningResponse:(NSURLResponse * _Nullable * _Nullable)response error:(NSError **)error API_DEPRECATED("Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h", macos(10.3,10.11), ios(2.0,9.0), tvos(9.0,9.0)) __WATCHOS_PROHIBITED;
 
 @end
 
@@ -456,7 +449,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 + (void)sendAsynchronousRequest:(NSURLRequest*) request
                           queue:(NSOperationQueue*) queue
-              completionHandler:(void (^)(NSURLResponse* _Nullable response, NSData* _Nullable data, NSError* _Nullable connectionError)) handler NS_DEPRECATED(10_7, 10_11, 5_0, 9_0, "Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h") __WATCHOS_PROHIBITED;
+              completionHandler:(void (^)(NSURLResponse* _Nullable response, NSData* _Nullable data, NSError* _Nullable connectionError)) handler API_DEPRECATED("Use [NSURLSession dataTaskWithRequest:completionHandler:] (see NSURLSession.h", macos(10.7,10.11), ios(5.0,9.0), tvos(9.0,9.0)) __WATCHOS_PROHIBITED;
            
 @end
 

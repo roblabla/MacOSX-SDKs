@@ -1,8 +1,8 @@
-.TH "MPSMatrixMultiplication" 3 "Wed Jul 20 2016" "Version MetalPerformanceShaders-60" "MetalPerformanceShaders.framework" \" -*- nroff -*-
+.TH "MPSMatrixMultiplication" 3 "Sun Jul 2 2017" "Version MetalPerformanceShaders-84.1" "MetalPerformanceShaders.framework" \" -*- nroff -*-
 .ad l
 .nh
 .SH NAME
-MPSMatrixMultiplication \- 
+MPSMatrixMultiplication
 .SH SYNOPSIS
 .br
 .PP
@@ -15,6 +15,9 @@ Inherits \fBMPSKernel\fP\&.
 .in +1c
 .ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:transposeLeft:transposeRight:resultRows:resultColumns:interiorColumns:alpha:beta:\fP"
+.br
+.ti -1c
+.RI "(nonnull instancetype) \- \fBinitWithDevice:resultRows:resultColumns:interiorColumns:\fP"
 .br
 .ti -1c
 .RI "(nonnull instancetype) \- \fBinitWithDevice:\fP"
@@ -34,6 +37,12 @@ Inherits \fBMPSKernel\fP\&.
 .br
 .ti -1c
 .RI "MTLOrigin \fBrightMatrixOrigin\fP"
+.br
+.ti -1c
+.RI "NSUInteger \fBbatchStart\fP"
+.br
+.ti -1c
+.RI "NSUInteger \fBbatchSize\fP"
 .br
 .in -1c
 .SS "Additional Inherited Members"
@@ -71,7 +80,7 @@ A \fBMPSMatrixMultiplication\fP object computes:
  
 .SH "Method Documentation"
 .PP 
-.SS "\- (void) encodeToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(\fBMPSMatrix\fP const *__nonnull) leftMatrix(\fBMPSMatrix\fP const *__nonnull) rightMatrix(encode(commandBuffer:leftMatrix:rightMatrix:resultMatrix:)) MPS_SWIFT_NAME"
+.SS "\- (void) encodeToCommandBuffer: (nonnull id< MTLCommandBuffer >) commandBuffer(\fBMPSMatrix\fP const *__nonnull) leftMatrix(\fBMPSMatrix\fP const *__nonnull) rightMatrix(\fBMPSMatrix\fP *__nonnull) resultMatrix"
 Encode a \fBMPSMatrixMultiplication\fP object to a command buffer\&.
 .PP
 \fBParameters:\fP
@@ -91,11 +100,33 @@ The left input matrix must be large enough to hold an array of size resultRows x
 .PP
 The right input matrix must be large enough to hold an array of size interiorColumns x resultColumns elements beginning at rightMatrixOrigin\&.
 .PP
-The result matrix must be large enough to hold an array of size resultRows x resultColumns elements beginning at resultMatrixOrigin\&. 
-.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) NS_UNAVAILABLE"
+The result matrix must be large enough to hold an array of size resultRows x resultColumns elements beginning at resultMatrixOrigin\&.
+.PP
+Each matrix within the range specified by batchStart and batchSize, which also specifies a valid set of matrices within leftMatrix, rightMatrix, and resultMatrix, will be processed\&. 
+.SS "\- (nonnull instancetype) initWithDevice: (nonnull id< MTLDevice >) device"
 Use the above initialization method instead\&. 
 .PP
 Reimplemented from \fBMPSKernel\fP\&.
+.SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(NSUInteger) resultRows(NSUInteger) resultColumns(NSUInteger) interiorColumns"
+Convenience initialization for a matrix-matrix multiplication with no transpositions, unit scaling of the product, and no accumulation of the result\&. The scaling factors alpha and beta are taken to be 1\&.0 and 0\&.0 respectively\&.
+.PP
+\fBParameters:\fP
+.RS 4
+\fIdevice\fP The device on which the kernel will execute\&.
+.br
+\fIresultRows\fP The number of rows in the result matrix, M in BLAS GEMM description\&.
+.br
+\fIresultColumns\fP The number of columns in the result matrix, N in BLAS GEMM description\&.
+.br
+\fIinteriorColumns\fP The number of columns of the left input matrix\&. K in BLAS GEMM description\&.
+.RE
+.PP
+\fBReturns:\fP
+.RS 4
+A valid \fBMPSMatrixMultiplication\fP object or nil, if failure\&. 
+.RE
+.PP
+
 .SS "\- (nonnull instancetype) \fBinitWithDevice:\fP (nonnull id< MTLDevice >) device(BOOL) transposeLeft(BOOL) transposeRight(NSUInteger) resultRows(NSUInteger) resultColumns(NSUInteger) interiorColumns(double) alpha(double) beta"
 Initialize an \fBMPSMatrixMultiplication\fP object on a device for a given size and desired transpose and scale values\&.
 .PP
@@ -126,6 +157,10 @@ A valid \fBMPSMatrixMultiplication\fP object or nil, if failure\&.
 
 .SH "Property Documentation"
 .PP 
+.SS "\- batchSize\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+The number of matrices in the batch to process\&. This property is modifiable and by default allows all matrices available at encoding time to be processed\&. 
+.SS "\- batchStart\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
+The index of the first matrix in the batch\&. This property is modifiable and defaults to 0 at initialization time\&. If batch processing should begin at a different matrix this value should be modified prior to encoding the kernel\&. 
 .SS "\- leftMatrixOrigin\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"
 The origin, relative to [0, 0] in the left input matrix, at which to start reading values\&. This property is modifiable and defaults to [0, 0] at initialization time\&. If a different origin is desired then this should be modified prior to encoding the kernel\&. The z value must be 0\&. 
 .SS "\- resultMatrixOrigin\fC [read]\fP, \fC [write]\fP, \fC [nonatomic]\fP, \fC [assign]\fP"

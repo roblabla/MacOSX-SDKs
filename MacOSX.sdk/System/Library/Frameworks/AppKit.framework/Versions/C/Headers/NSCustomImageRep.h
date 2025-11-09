@@ -1,7 +1,7 @@
 /*
 	NSCustomImageRep.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (instancetype)initWithDrawSelector:(SEL)selector delegate:(id)delegate;
 @property (nullable, readonly) SEL drawSelector;
-@property (nullable, readonly, assign) id delegate;
+@property (nullable, readonly, weak) id delegate;
 
 @end
 

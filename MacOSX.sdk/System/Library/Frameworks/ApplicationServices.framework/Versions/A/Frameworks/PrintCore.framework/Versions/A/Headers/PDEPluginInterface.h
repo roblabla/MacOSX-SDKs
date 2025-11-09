@@ -189,7 +189,7 @@ NS_ASSUME_NONNULL_BEGIN
  *				This method has "Get" semantics: any references owned by the
  *				PDE must be released by the PDE.
  */
-- (NSView*)panelView;
+- (NSView * _Nullable)panelView;
 
 /*!
  * @method		panelName
@@ -221,7 +221,7 @@ NS_ASSUME_NONNULL_BEGIN
  *				current user. For example a key in the dictionary for the copies and
  *				pages panel might have the key 'Page Range' and the value 'All'.
  */
-- (NSDictionary *)summaryInfo;
+- (NSDictionary * _Nullable)summaryInfo;
 
 /*!
  * @method		shouldShowHelp

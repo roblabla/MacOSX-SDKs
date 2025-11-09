@@ -31,7 +31,7 @@
 extern "C" {
 #endif
 
-#define IOGRAPHICSTYPES_REV     44
+#define IOGRAPHICSTYPES_REV     55
 
 typedef SInt32  IOIndex;
 typedef UInt32  IOSelect;
@@ -218,6 +218,11 @@ enum {
 
 //// CLUTs
 
+// IOFBSetGamma Sync Types
+#define kIOFBSetGammaSyncNotSpecified       -1
+#define kIOFBSetGammaSyncNoSync             0
+#define kIOFBSetGammaSyncVerticalBlankSync  1
+
 typedef UInt16 IOColorComponent;
 
 /*!
@@ -268,6 +273,29 @@ enum {
     kIOClamshellStateAttribute          = 'clam',
 
 	kIOFBDisplayPortTrainingAttribute   = 'dpta',
+
+    kIOFBDisplayState                   = 'dstt',
+
+    kIOFBVariableRefreshRate            = 'vrr?',
+
+    kIOFBLimitHDCPAttribute             = 'hdcp',
+
+    kIOFBStop                           = 'stop',
+
+    kIOFBRedGammaScaleAttribute         = 'gslr',    // as of IOGRAPHICSTYPES_REV 54
+    kIOFBGreenGammaScaleAttribute       = 'gslg',    // as of IOGRAPHICSTYPES_REV 54
+    kIOFBBlueGammaScaleAttribute        = 'gslb',    // as of IOGRAPHICSTYPES_REV 54
+};
+
+// <rdar://problem/29184178> IOGraphics: Implement display state attribute for deteriming display state post wake
+// kIOFBDisplayState
+enum {
+    kIOFBDisplayState_AlreadyActive     = (1 << 0),
+    kIOFBDisplayState_RestoredProfile   = (1 << 1),
+    kIOFBDisplayState_PipelineBlack     = (1 << 2),
+    kIOFBDisplayState_Mask              = (kIOFBDisplayState_AlreadyActive |
+                                           kIOFBDisplayState_RestoredProfile |
+                                           kIOFBDisplayState_PipelineBlack)
 };
 
 // values for kIOWindowServerActiveAttribute
@@ -361,6 +389,7 @@ typedef struct IODetailedTimingInformationV1 IODetailedTimingInformationV1;
  * @field verticalSyncConfig kIOSyncPositivePolarity for positive polarity vertical sync (0 for negative).
  * @field verticalSyncLevel Zero.
  * @field numLinks number of links to be used by a dual link timing, if zero, assume one link.
+ * @field verticalBlankingExtension maximum number of blanking extension lines that is available. (0 for none).
  * @field __reservedB Reserved set to zero.
  */
 
@@ -403,7 +432,9 @@ struct IODetailedTimingInformationV2 {
     UInt32      verticalSyncLevel;              // Future use (init to 0)
     UInt32      numLinks;
 
-    UInt32      __reservedB[7];                 // Init to 0
+    UInt32      verticalBlankingExtension;      // lines (AdaptiveSync: 0 for non-AdaptiveSync support)
+
+    UInt32      __reservedB[6];                 // Init to 0
 };
 typedef struct IODetailedTimingInformationV2 IODetailedTimingInformationV2;
 typedef struct IODetailedTimingInformationV2 IODetailedTimingInformation;
@@ -880,7 +911,8 @@ enum
 enum {
     // connection types for IOServiceOpen
     kIOFBServerConnectType              = 0,
-    kIOFBSharedConnectType              = 1
+    kIOFBSharedConnectType              = 1,
+    kIOFBDiagnoseConnectType            = 2,
 };
 
 enum {

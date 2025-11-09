@@ -3,11 +3,12 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2015 Apple Inc. All rights reserved.
+	Copyright 2010-2017 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
+#import <AVFoundation/AVMediaFormat.h>
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
 #import <CoreMedia/CMTimeRange.h>
@@ -59,9 +60,9 @@ AV_INIT_UNAVAILABLE
  
 	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey and AVSampleRateConverterAudioQualityKey.  When using this method to construct a new instance, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
  
-	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this method to construct a new instance, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
+	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this method to construct a new instance, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See +assetWriterInputWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecTypeH264 and AVVideoCodecTypeJPEG.  AVVideoCodecTypeH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
-+ (instancetype)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
++ (instancetype)assetWriterInputWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
 
 /*!
  @method assetWriterInputWithMediaType:outputSettings:sourceFormatHint:
@@ -82,7 +83,7 @@ AV_INIT_UNAVAILABLE
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-+ (instancetype)assetWriterInputWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
++ (instancetype)assetWriterInputWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0);
 
 /*!
  @method initWithMediaType:outputSettings:
@@ -103,9 +104,9 @@ AV_INIT_UNAVAILABLE
  
 	For AVMediaTypeAudio the following keys are not currently supported in the outputSettings dictionary: AVEncoderAudioQualityKey and AVSampleRateConverterAudioQualityKey.  When using this initializer, an audio settings dictionary must be fully specified, meaning that it must contain AVFormatIDKey, AVSampleRateKey, and AVNumberOfChannelsKey.  If no other channel layout information is available, a value of 1 for AVNumberOfChannelsKey will result in mono output and a value of 2 will result in stereo output.  If AVNumberOfChannelsKey specifies a channel count greater than 2, the dictionary must also specify a value for AVChannelLayoutKey.  For kAudioFormatLinearPCM, all relevant AVLinearPCM*Key keys must be included, and for kAudioFormatAppleLossless, AVEncoderBitDepthHintKey keys must be included.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.
  
-	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecH264 and AVVideoCodecJPEG.  AVVideoCodecH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
+	For AVMediaTypeVideo, any output settings dictionary must request a compressed video format.  This means that the value passed in for outputSettings must follow the rules for compressed video output, as laid out in AVVideoSettings.h.  When using this initializer, a video settings dictionary must be fully specified, meaning that it must contain AVVideoCodecKey, AVVideoWidthKey, and AVVideoHeightKey.  See -initWithMediaType:outputSettings:sourceFormatHint: for a way to avoid having to specify a value for each of those keys.  On iOS, the only values currently supported for AVVideoCodecKey are AVVideoCodecTypeH264 and AVVideoCodecTypeJPEG.  AVVideoCodecTypeH264 is not supported on iPhone 3G.  For AVVideoScalingModeKey, the value AVVideoScalingModeFit is not supported.
  */
-- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
+- (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings;
 
 /*!
  @method initWithMediaType:outputSettings:sourceFormatHint:
@@ -126,7 +127,7 @@ AV_INIT_UNAVAILABLE
  
 	An NSInvalidArgumentException will be thrown if the media type of the format description does not match the media type string passed into this method.
  */
-- (instancetype)initWithMediaType:(NSString *)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithMediaType:(AVMediaType)mediaType outputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings sourceFormatHint:(nullable CMFormatDescriptionRef)sourceFormatHint NS_AVAILABLE(10_8, 6_0) NS_DESIGNATED_INITIALIZER;
 
 /*!
  @property mediaType
@@ -136,7 +137,7 @@ AV_INIT_UNAVAILABLE
  @discussion
 	The value of this property is one of the media type strings defined in AVMediaFormat.h.
  */
-@property (nonatomic, readonly) NSString *mediaType;
+@property (nonatomic, readonly) AVMediaType mediaType;
 
 /*!
  @property outputSettings
@@ -449,6 +450,39 @@ AV_INIT_UNAVAILABLE
 	This property cannot be set after -startWriting has been called on the receiver.
  */
 @property (nonatomic, copy, nullable) NSURL *sampleReferenceBaseURL NS_AVAILABLE(10_10, 8_0);
+
+typedef NSString *AVAssetWriterInputMediaDataLocation NS_STRING_ENUM NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @constant AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData
+	Indicates that the media data should be interleaved with all other media data with this constant.
+ */
+AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @constant AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved
+	Indicates that the media data should be laid out before all the media data with AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData and not be interleaved.
+ */
+AVF_EXPORT AVAssetWriterInputMediaDataLocation const AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved NS_AVAILABLE(10_13, 11_0);
+
+/*!
+ @property mediaDataLocation
+ @abstract
+	Specifies where the media data will be laid out and whether the media data will be interleaved as the main media data.
+
+ @discussion
+	If this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter tries to write the media data for this track before all the media data for AVAssetWriterInputs with this property set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData.
+
+	Use of this property is recommended for optimizing tracks that contain a small amount of data that is needed all at once, independent of playback time, such as chapter name tracks and chapter image tracks.
+	Keep it set to AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData for tracks whose media data that's needed only as its presentation time is approaching and, when multiple inputs are present that supply media data that will be played concurrently, should be interleaved for optimal access.
+
+	For file types that support preloading media data such as QuickTime movie file, if this value is set to AVAssetWriterInputMediaDataLocationBeforeMainMediaDataNotInterleaved, AVAssetWriter will write an indication such as 'load' atom that the whole media data should be preloaded.
+
+	The default value is AVAssetWriterInputMediaDataLocationInterleavedWithMainMediaData, which means that the receiver will not write the indication and that the media data will be interleaved.
+
+	This property cannot be set after -startWriting has been called on the receiver.
+ */
+@property (nonatomic, copy) AVAssetWriterInputMediaDataLocation mediaDataLocation NS_AVAILABLE(10_13, 11_0);
 
 @end
 

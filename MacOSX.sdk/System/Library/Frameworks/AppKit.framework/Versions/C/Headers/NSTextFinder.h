@@ -1,7 +1,7 @@
 /*
         NSTextFinder.h
         Application Kit
-        Copyright (c) 2003-2016, Apple Inc.
+        Copyright (c) 2003-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -36,8 +36,9 @@ typedef NS_ENUM(NSInteger, NSTextFinderAction) {
 
 /* Values for communicating NSTextFinder search options via pasteboard. Use the NSPasteboardTypeTextFinderOptions type.
 */
-APPKIT_EXTERN NSString * const NSTextFinderCaseInsensitiveKey NS_AVAILABLE_MAC(10_7);       // BOOL
-APPKIT_EXTERN NSString * const NSTextFinderMatchingTypeKey NS_AVAILABLE_MAC(10_7);          // NSNumber containing NSTextFinderMatchingType
+typedef NSString * NSPasteboardTypeTextFinderOptionKey NS_STRING_ENUM;
+APPKIT_EXTERN NSPasteboardTypeTextFinderOptionKey const NSTextFinderCaseInsensitiveKey NS_AVAILABLE_MAC(10_7);       // BOOL
+APPKIT_EXTERN NSPasteboardTypeTextFinderOptionKey const NSTextFinderMatchingTypeKey NS_AVAILABLE_MAC(10_7);          // NSNumber containing NSTextFinderMatchingType
 
 typedef NS_ENUM(NSInteger, NSTextFinderMatchingType) {
     NSTextFinderMatchingTypeContains = 0,

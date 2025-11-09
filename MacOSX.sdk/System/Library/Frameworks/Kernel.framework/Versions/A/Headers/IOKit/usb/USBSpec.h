@@ -145,11 +145,12 @@ enum {
 	 @discussion Used with decoding the Device Capability descriptor
 	 */
 	enum {
-		kUSBDeviceCapabilityWirelessUSB		= 1,
-		kUSBDeviceCapabilityUSB20Extension	= 2,
-		kUSBDeviceCapabilitySuperSpeedUSB	= 3,
-		kUSBDeviceCapabilityContainerID		= 4,
-        kUSBDeviceCapabilityBillboard       = 13
+		kUSBDeviceCapabilityWirelessUSB		 = 1,
+		kUSBDeviceCapabilityUSB20Extension	 = 2,
+		kUSBDeviceCapabilitySuperSpeedUSB	 = 3,
+		kUSBDeviceCapabilityContainerID		 = 4,
+        kUSBDeviceCapabilityBillboard        = 13,
+        kUSBDeviceCapabilityBillboardAltMode = 15
 };
 
     /*!
@@ -513,6 +514,15 @@ enum {
         kUSBBillboardConfigNotAttempted   =   1,
         kUSBBillboardConfigUnsuccessful   =   2,
         kUSBBillboardAltModeConfigSuccess =   3
+    };
+
+    /*!
+     @enum USB Device Billboard Capability AdditionalFailureInfo constants
+     @ A bit field signifying additional failure information
+     */
+    enum {
+        kUSBBillboardAdditinalInfoNoPower =   1,
+        kUSBBillboardAdditinalInfoNoUSBPD =   2
     };
 
 	/*!

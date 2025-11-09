@@ -18,11 +18,14 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_11, 9_0)
 @interface CNContactFetchRequest : NSObject <NSSecureCoding>
 
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new  NS_UNAVAILABLE;
 
 /*!
- *  @abstract Use this initiliazer, using init raises an exception. Pass in the properties to fetch for the returned contacts.
+ *  @param      keysToFetch
+ *              The properties to fetch for the returned contacts.
  *
- *  @discussion Should only fetch the properties that will be used.
+ *  @discussion Only fetch the properties that will be used.
  */
 - (instancetype)initWithKeysToFetch:(NSArray <id<CNKeyDescriptor>>*)keysToFetch NS_DESIGNATED_INITIALIZER;
 

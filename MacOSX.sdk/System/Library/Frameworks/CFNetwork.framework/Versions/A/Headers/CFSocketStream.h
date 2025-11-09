@@ -416,23 +416,27 @@ CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelNone CF_AVAILABLE(10_2,
 
 /*
  *  kCFStreamSocketSecurityLevelSSLv2
+ *
+ *  Note: SSLv2 is DEPRECATED starting in OS X 10.12 and iOS 10.0.
  *  
  *  Discussion:
  *	Stream property value, for both set and copy operations.
  *	Indicates to use SSLv2 security.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelSSLv2 CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelSSLv2 CF_DEPRECATED(10_2, 10_12, 2_0, 10_0);
 
 /*
  *  kCFStreamSocketSecurityLevelSSLv3
+ *
+ *  Note: SSLv3 is DEPRECATED starting in OS X 10.12 and iOS 10.0.
  *  
  *  Discussion:
  *	Stream property value, for both set and copy operations.
  *	Indicates to use SSLv3 security.
  *  
  */
-CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelSSLv3 CF_AVAILABLE(10_2, 2_0);
+CFN_EXPORT const CFStringRef kCFStreamSocketSecurityLevelSSLv3 CF_DEPRECATED(10_2, 10_12, 2_0, 10_0);
 
 /*
  *  kCFStreamSocketSecurityLevelTLSv1

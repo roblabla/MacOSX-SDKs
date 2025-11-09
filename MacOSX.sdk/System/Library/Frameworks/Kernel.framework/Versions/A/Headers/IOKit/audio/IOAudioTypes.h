@@ -460,6 +460,9 @@ enum {
 };
 
 enum {
+#ifndef __OPEN_SOURCE__
+    kIOAudioBuiltInSystemClockDomain                = 0x737973,
+#endif
     kIOAudioNewClockDomain							= 0xffffffff
 };
 

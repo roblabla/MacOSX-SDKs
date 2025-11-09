@@ -1,7 +1,7 @@
 /*
  NSPageController.h
  Application Kit
- Copyright (c) 2011-2016, Apple Inc.
+ Copyright (c) 2011-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class NSMutableDictionary, NSView;
 @protocol NSPageControllerDelegate;
 
+typedef NSString * NSPageControllerObjectIdentifier NS_EXTENSIBLE_STRING_ENUM;
+
 typedef NS_ENUM(NSInteger, NSPageControllerTransitionStyle) {
     NSPageControllerTransitionStyleStackHistory, // Pages are stacked on top of each other. Pages animate out to the right to reveal the previous page. Next pages animate in from the right. (See Safari as an example)
     NSPageControllerTransitionStyleStackBook,	 // Pages are stacked on top of each other. Pages animate out to the left to reveal the next page. Previous pages animate in from the left. (See Preview as an example)
@@ -27,9 +29,9 @@ NS_CLASS_AVAILABLE(10_8, NA)
 @private
     NSView *_contentView;
     NSViewController *_selectedViewController;
-    NSString *_currentIdentifier;
+    NSPageControllerObjectIdentifier _currentIdentifier;
     NSPageControllerTransitionStyle _transitionStyle;
-    id<NSPageControllerDelegate> _delegate;
+    __weak id<NSPageControllerDelegate> _delegate;
     NSInteger _selectedIndex;
     NSMutableArray *_arrangedObjects;
     NSMutableArray *_snapshots;
@@ -56,13 +58,13 @@ NS_CLASS_AVAILABLE(10_8, NA)
     NSMutableDictionary *_templateCache;
     NSView *_transitionView;
     
-    id _animator;
+    __weak id _animator;
     NSDictionary *_animationsDictionary;
     
     id _private;
 }
 
-@property (nullable, assign) IBOutlet id<NSPageControllerDelegate> delegate;
+@property (nullable, weak) IBOutlet id<NSPageControllerDelegate> delegate;
 
 /* The viewController associated with the selected arrangedObject. May be nil if delegate is not supplying viewControllers.
  */
@@ -106,11 +108,11 @@ NS_CLASS_AVAILABLE(10_8, NA)
 
 /* Return the identifier of the view controller that owns a view to display the object. If NSPageController does not have an unused viewController for this identifier, then you will be asked to create one via pageController:viewControllerForIdentifier.
  */
-- (NSString *)pageController:(NSPageController *)pageController identifierForObject:(id)object;
+- (NSPageControllerObjectIdentifier)pageController:(NSPageController *)pageController identifierForObject:(id)object;
 
 /* NSPageController will cache as many viewControllers and views as necessary to maintain performance. This method is called whenever another instance is required. Note: The viewController may become the selectedViewController after a transition if necessary.
  */
-- (NSViewController *)pageController:(NSPageController *)pageController viewControllerForIdentifier:(NSString *)identifier;
+- (NSViewController *)pageController:(NSPageController *)pageController viewControllerForIdentifier:(NSPageControllerObjectIdentifier)identifier;
 
 /* NOTE: The following 2 methods are only useful if you also implement the above two methods.
  */

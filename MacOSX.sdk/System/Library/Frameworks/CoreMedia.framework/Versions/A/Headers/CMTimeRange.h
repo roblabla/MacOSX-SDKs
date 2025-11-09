@@ -257,14 +257,14 @@ CM_EXPORT CMTimeRange CMTimeRangeMakeFromDictionary(
 CM_ASSUME_NONNULL_BEGIN
 
 /*!
-	@defined kCMTimeRangeTimeKey
+	@constant kCMTimeRangeStartKey
 	@discussion CFDictionary key for start field of a CMTimeRange (CMTime)
 */
 CM_EXPORT const CFStringRef kCMTimeRangeStartKey
 							__OSX_AVAILABLE_STARTING(__MAC_10_7,__IPHONE_4_0);
 
 /*!
-	@defined kCMTimeRangeDurationKey
+	@constant kCMTimeRangeDurationKey
 	@discussion CFDictionary key for timescale field of a CMTimeRange (CMTime)
 */
 CM_EXPORT const CFStringRef kCMTimeRangeDurationKey
@@ -386,14 +386,14 @@ CM_EXPORT CMTimeMapping CMTimeMappingMakeFromDictionary(
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 CM_ASSUME_NONNULL_BEGIN
 /*!
-	@defined kCMTimeMappingSourceKey
+	@constant kCMTimeMappingSourceKey
 	@discussion CFDictionary key for source field of a CMTimeMapping (CMTimeRange)
 */
 CM_EXPORT const CFStringRef kCMTimeMappingSourceKey
 							__OSX_AVAILABLE_STARTING(__MAC_10_11,__IPHONE_9_0);
 
 /*!
-	@defined kCMTimeMappingTargetKey
+	@constant kCMTimeMappingTargetKey
 	@discussion CFDictionary key for target field of a CMTimeMapping (CMTimeRange)
 */
 CM_EXPORT const CFStringRef kCMTimeMappingTargetKey

@@ -7,9 +7,14 @@
  *	@copyright 2011 Apple, Inc. All rights reserved.
  */
 
-#import <CoreBluetooth/CBDefines.h>
+#ifndef _CORE_BLUETOOTH_H_
+#warning Please do not import this header file directly. Use <CoreBluetooth/CoreBluetooth.h> instead.
+#endif
+
 #import <CoreBluetooth/CBAdvertisementData.h>
 #import <CoreBluetooth/CBCentralManagerConstants.h>
+#import <CoreBluetooth/CBDefines.h>
+#import <CoreBluetooth/CBManager.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -28,13 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
  *
  */
 typedef NS_ENUM(NSInteger, CBCentralManagerState) {
-	CBCentralManagerStateUnknown = 0,
-	CBCentralManagerStateResetting,
-	CBCentralManagerStateUnsupported,
-	CBCentralManagerStateUnauthorized,
-	CBCentralManagerStatePoweredOff,
-	CBCentralManagerStatePoweredOn,
-};
+	CBCentralManagerStateUnknown = CBManagerStateUnknown,
+	CBCentralManagerStateResetting = CBManagerStateResetting,
+	CBCentralManagerStateUnsupported = CBManagerStateUnsupported,
+	CBCentralManagerStateUnauthorized = CBManagerStateUnauthorized,
+	CBCentralManagerStatePoweredOff = CBManagerStatePoweredOff,
+	CBCentralManagerStatePoweredOn = CBManagerStatePoweredOn,
+} NS_DEPRECATED(10_7, 10_13, 5_0, 10_0, "Use CBManagerState instead");
 
 @protocol CBCentralManagerDelegate;
 @class CBUUID, CBPeripheral;
@@ -46,16 +51,7 @@ typedef NS_ENUM(NSInteger, CBCentralManagerState) {
  *
  */
 NS_CLASS_AVAILABLE(10_7, 5_0)
-CB_EXTERN_CLASS @interface CBCentralManager : NSObject
-{
-@private
-	id<CBCentralManagerDelegate>	 _delegate;
-	CBCentralManagerState			 _state;
-	
-	NSMutableDictionary				*_peripherals;
-	BOOL							 _isScanning;
-	id                               _connection;
-}
+CB_EXTERN_CLASS @interface CBCentralManager : CBManager
 
 /*!
  *  @property delegate
@@ -63,16 +59,17 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *  @discussion The delegate object that will receive central events.
  *
  */
-@property(assign, nonatomic, nullable) id<CBCentralManagerDelegate> delegate;
+@property(nonatomic, weak, nullable) id<CBCentralManagerDelegate> delegate;
 
 /*!
- *  @property state
+ *  @property isScanning
  *
- *  @discussion The current state of the peripheral, initially set to <code>CBCentralManagerStateUnknown</code>. Updates are provided by required
- *              delegate method {@link centralManagerDidUpdateState:}.
+ *  @discussion Whether or not the central is currently scanning.
  *
  */
-@property(readonly) CBCentralManagerState state;
+@property(nonatomic, assign, readonly) BOOL isScanning NS_AVAILABLE(10_13, 9_0);
+
+- (instancetype)init;
 
 /*!
  *  @method initWithDelegate:queue:
@@ -84,7 +81,8 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *                  If <i>nil</i>, the main queue will be used.
  *
  */
-- (id)initWithDelegate:(nullable id<CBCentralManagerDelegate>)delegate queue:(nullable dispatch_queue_t)queue;
+- (instancetype)initWithDelegate:(nullable id<CBCentralManagerDelegate>)delegate
+						   queue:(nullable dispatch_queue_t)queue;
 
 /*!
  *  @method initWithDelegate:queue:options:
@@ -100,21 +98,9 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *	@seealso		CBCentralManagerOptionRestoreIdentifierKey
  *
  */
-- (id)initWithDelegate:(nullable id<CBCentralManagerDelegate>)delegate queue:(nullable dispatch_queue_t)queue options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0);
-
-/*!
- *  @method retrievePeripherals:
- *
- *  @param peripheralUUIDs  A list of <code>CFUUIDRef</code> objects.
- *
- *  @discussion             Attempts to retrieve the <code>CBPeripheral</code> object(s) that correspond to <i>peripheralUUIDs</i>.
- *
- *	@deprecated				Use {@link retrievePeripheralsWithIdentifiers:} instead.
- *
- *  @see                    centralManager:didRetrievePeripherals:
- *
- */
-- (void)retrievePeripherals:(NSArray *)peripheralUUIDs NS_DEPRECATED(10_7, 10_9, 5_0, 7_0);
+- (instancetype)initWithDelegate:(nullable id<CBCentralManagerDelegate>)delegate
+						   queue:(nullable dispatch_queue_t)queue
+						 options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER;
 
 /*!
  *  @method retrievePeripheralsWithIdentifiers:
@@ -127,19 +113,6 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *
  */
 - (NSArray<CBPeripheral *> *)retrievePeripheralsWithIdentifiers:(NSArray<NSUUID *> *)identifiers NS_AVAILABLE(10_9, 7_0);
-
-/*!
- *  @method retrieveConnectedPeripherals
- *
- *  @discussion Retrieves all peripherals that are connected to the system. Note that this set can include peripherals which were connected by other
- *              applications, which will need to be connected locally via {@link connectPeripheral:options:} before they can be used.
- *
- *	@deprecated	Use {@link retrieveConnectedPeripheralsWithServices:} instead.
- *
- *	@see        centralManager:didRetrieveConnectedPeripherals:
- *
- */
-- (void)retrieveConnectedPeripherals NS_DEPRECATED(10_7, 10_9, 5_0, 7_0);
 
 /*!
  *  @method retrieveConnectedPeripheralsWithServices
@@ -250,35 +223,18 @@ CB_EXTERN_CLASS @interface CBCentralManager : NSObject
  *  @method centralManager:willRestoreState:
  *
  *  @param central      The central manager providing this information.
- *  @param dict            
+ *  @param dict			A dictionary containing information about <i>central</i> that was preserved by the system at the time the app was terminated.
  *
- *  @discussion
+ *  @discussion			For apps that opt-in to state preservation and restoration, this is the first method invoked when your app is relaunched into
+ *						the background to complete some Bluetooth-related task. Use this method to synchronize your app's state with the state of the
+ *						Bluetooth system.
+ *
+ *  @seealso            CBCentralManagerRestoredStatePeripheralsKey;
+ *  @seealso            CBCentralManagerRestoredStateScanServicesKey;
+ *  @seealso            CBCentralManagerRestoredStateScanOptionsKey;
  *
  */
 - (void)centralManager:(CBCentralManager *)central willRestoreState:(NSDictionary<NSString *, id> *)dict;
-
-/*!
- *  @method centralManager:didRetrievePeripherals:
- *
- *  @param central      The central manager providing this information.
- *  @param peripherals  A list of <code>CBPeripheral</code> objects.
- *
- *  @discussion         This method returns the result of a {@link retrievePeripherals} call, with the peripheral(s) that the central manager was
- *                      able to match to the provided UUID(s).
- *
- */
-- (void)centralManager:(CBCentralManager *)central didRetrievePeripherals:(NSArray<CBPeripheral *> *)peripherals;
-
-/*!
- *  @method centralManager:didRetrieveConnectedPeripherals:
- *
- *  @param central      The central manager providing this information.
- *  @param peripherals  A list of <code>CBPeripheral</code> objects representing all peripherals currently connected to the system.
- *
- *  @discussion         This method returns the result of a {@link retrieveConnectedPeripherals} call.
- *
- */
-- (void)centralManager:(CBCentralManager *)central didRetrieveConnectedPeripherals:(NSArray<CBPeripheral *> *)peripherals;
 
 /*!
  *  @method centralManager:didDiscoverPeripheral:advertisementData:RSSI:

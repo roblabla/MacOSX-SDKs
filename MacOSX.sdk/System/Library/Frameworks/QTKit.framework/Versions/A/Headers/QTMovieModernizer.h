@@ -1,7 +1,7 @@
 /*
 	File:		QTMovieModernizer.h
 
-	Copyright:	(c) 2013-2015 by Apple Inc. All rights reserved.
+	Copyright:	(c) 2013-2016 by Apple Inc. All rights reserved.
 
 */
 
@@ -23,20 +23,22 @@
 
 #pragma mark constants
 /*!
-     @constant       QTMovieModernizerStatusUnknown
-     @abstract       The status of the modernizing operation is unknown.
-     @constant       QTMovieModernizerStatusPreparing
-     @abstract       The modernizing operation is preparing to run.
-     @constant       QTMovieModernizerStatusRunning
-     @abstract       The modernizing operation is running.
-     @constant       QTMovieModernizerStatusCancelled
-     @abstract       The modernizing operation was cancelled.
-     @constant       QTMovieModernizerStatusFailed
-     @abstract       The modernizing operation failed.
-     @constant       QTMovieModernizerStatusCompletedWithSuccess
-     @abstract       The modernizing operation completed successfully.
-     @constant       QTMovieModernizerStatusNotRequired
-     @abstract       The media resource indicated by the sourceURL does not require modernization.
+	@enum		QTMovieModernizerStatus
+
+	@constant       QTMovieModernizerStatusUnknown
+		The status of the modernizing operation is unknown.
+	@constant       QTMovieModernizerStatusPreparing
+		The modernizing operation is preparing to run.
+	@constant       QTMovieModernizerStatusRunning
+		The modernizing operation is running.
+	@constant       QTMovieModernizerStatusCancelled
+		The modernizing operation was cancelled.
+	@constant       QTMovieModernizerStatusFailed
+		The modernizing operation failed.
+	@constant       QTMovieModernizerStatusCompletedWithSuccess
+		The modernizing operation completed successfully.
+	@constant       QTMovieModernizerStatusNotRequired
+		The media resource indicated by the sourceURL does not require modernization.
  */
 typedef NS_ENUM(NSInteger, QTMovieModernizerStatus) {
     QTMovieModernizerStatusUnknown					= 0,
@@ -126,8 +128,8 @@ QTKIT_EXTERN NSString *const QTMovieModernizerOutputFormat_AppleProRes4444      
     @method         modernizeWithCompletionHandler:
     @abstract		Initiates a modernization operation to write a QuickTime movie file to the destination specified in the destinationURL property and returns.
     @discussion     This method runs the modernization operation asynchronously; the completion handler is executed when the modernization operation is complete or has failed.
-    @param			completionHandler
-                    The completionHandler is a block that will be called when the modernization operation is complete or has failed. The completion status is available by inspecting the status property of the modernizer.
+    @param			handler
+                    The handler is a block that will be called when the modernization operation is complete or has failed. The completion status is available by inspecting the status property of the modernizer.
  */
 - (void)modernizeWithCompletionHandler:(void (^)(void))handler AVAILABLE_QTKIT_VERSION_7_7_3_AND_LATER;
 

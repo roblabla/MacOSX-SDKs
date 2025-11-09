@@ -3,16 +3,15 @@
 	
 	Framework:  AVKit
 	
-	Copyright © 2014-2016 Apple Inc. All rights reserved.
+	Copyright © 2014-2017 Apple Inc. All rights reserved.
 	
  */
 
 #import <AppKit/AppKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
-@class AVCaptureSession;
-@class AVCaptureFileOutput;
 @protocol AVCaptureViewDelegate;
 
 /*!
@@ -20,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@abstract	AVCaptureView is a subclass of NSView that can be used to display standard user interface controls for capturing media data.
  */
 
-NS_CLASS_AVAILABLE_MAC(10_10)
+API_AVAILABLE(macosx(10.10))
 @interface AVCaptureView : NSView
 
 /*!
@@ -59,20 +58,20 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 
 /*!
 	@constant	AVCaptureViewControlsStyleInline
-	@abstract	The inline controls pane for media recording is associated with the view.
+				The inline controls pane for media recording is associated with the view.
 	@constant	AVCaptureViewControlsStyleFloating
-	@abstract	The floating controls pane for media recordings is associated with the view.
+				The floating controls pane for media recordings is associated with the view.
 	@constant	AVCaptureViewControlsStyleInlineDeviceSelection
-	@abstract	The inline controls pane for selection capture devices is associated with the view.
+				The inline controls pane for selection capture devices is associated with the view.
 	@constant	AVCaptureViewControlsStyleDefault
-	@abstract	The default controls pane is associated with the view.
+				The default controls pane is associated with the view.
  */
 typedef NS_ENUM(NSInteger, AVCaptureViewControlsStyle) {
 	AVCaptureViewControlsStyleInline,
 	AVCaptureViewControlsStyleFloating,
 	AVCaptureViewControlsStyleInlineDeviceSelection,
 	AVCaptureViewControlsStyleDefault = AVCaptureViewControlsStyleInline
-} NS_ENUM_AVAILABLE_MAC(10_10);
+} API_AVAILABLE(macosx(10.10));
 
 /*!
 	@property	controlsStyle

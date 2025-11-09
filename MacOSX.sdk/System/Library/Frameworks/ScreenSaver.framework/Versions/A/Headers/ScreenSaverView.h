@@ -24,7 +24,6 @@
 + (NSBackingStoreType)backingStoreType;
 + (BOOL)performGammaFade;
 
-- (nullable instancetype)initWithFrame:(NSRect)frame;
 - (nullable instancetype)initWithFrame:(NSRect)frame isPreview:(BOOL)isPreview NS_DESIGNATED_INITIALIZER;
 
 @property (NS_NONATOMIC_IOSONLY) NSTimeInterval animationTimeInterval;
@@ -36,8 +35,8 @@
 - (void)drawRect:(NSRect)rect;
 - (void)animateOneFrame;
 
-- (BOOL)hasConfigureSheet;
-- (nullable NSWindow*)configureSheet;
+@property (readonly) BOOL hasConfigureSheet;
+@property (readonly, strong) NSWindow * _Nullable configureSheet;
 
 @property (NS_NONATOMIC_IOSONLY, getter=isPreview, readonly) BOOL preview;
 

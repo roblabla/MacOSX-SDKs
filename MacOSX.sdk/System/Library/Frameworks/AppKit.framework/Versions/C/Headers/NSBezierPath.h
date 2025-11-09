@@ -1,7 +1,7 @@
 /*
         NSBezierPath.h
         Application Kit
-        Copyright (c) 1997-2016, Apple Inc.
+        Copyright (c) 1997-2017, Apple Inc.
         All rights reserved.
 */
 
@@ -83,19 +83,13 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 
 // Default path rendering parameters.
 
-+ (void)setDefaultMiterLimit:(CGFloat)limit;
-+ (CGFloat)defaultMiterLimit;
-+ (void)setDefaultFlatness:(CGFloat)flatness;
-+ (CGFloat)defaultFlatness;
+@property (class) CGFloat defaultMiterLimit;
+@property (class) CGFloat defaultFlatness;
 
-+ (void)setDefaultWindingRule:(NSWindingRule)windingRule;
-+ (NSWindingRule)defaultWindingRule;
-+ (void)setDefaultLineCapStyle:(NSLineCapStyle)lineCapStyle;
-+ (NSLineCapStyle)defaultLineCapStyle;
-+ (void)setDefaultLineJoinStyle:(NSLineJoinStyle)lineJoinStyle;
-+ (NSLineJoinStyle)defaultLineJoinStyle;
-+ (void)setDefaultLineWidth:(CGFloat)lineWidth;
-+ (CGFloat)defaultLineWidth;
+@property (class) NSWindingRule defaultWindingRule;
+@property (class) NSLineCapStyle defaultLineCapStyle;
+@property (class) NSLineJoinStyle defaultLineJoinStyle;
+@property (class) CGFloat defaultLineWidth;
 
 // Path construction.
 
@@ -181,10 +175,10 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 - (void)appendBezierPathWithArcFromPoint:(NSPoint)point1
 				 toPoint:(NSPoint)point2
 				  radius:(CGFloat)radius;
-- (void)appendBezierPathWithGlyph:(NSGlyph)glyph inFont:(NSFont *)font;
-- (void)appendBezierPathWithGlyphs:(NSGlyph *)glyphs count:(NSInteger)count
-			    inFont:(NSFont *)font;
-- (void)appendBezierPathWithPackedGlyphs:(const char *)packedGlyphs;
+
+- (void)appendBezierPathWithCGGlyph:(CGGlyph)glyph inFont:(NSFont *)font NS_AVAILABLE_MAC(10_13);
+- (void)appendBezierPathWithCGGlyphs:(const CGGlyph *)glyphs count:(NSInteger)count inFont:(NSFont *)font NS_AVAILABLE_MAC(10_13);
+
 // Appends paths for a rounded rectangle.
 - (void)appendBezierPathWithRoundedRect:(NSRect)rect xRadius:(CGFloat)xRadius yRadius:(CGFloat)yRadius NS_AVAILABLE_MAC(10_5);
 
@@ -195,6 +189,11 @@ typedef NS_ENUM(NSUInteger, NSBezierPathElement) {
 @interface NSBezierPath (NSBezierPathDeprecated)
 - (BOOL)cachesBezierPath NS_DEPRECATED_MAC(10_0, 10_0);
 - (void)setCachesBezierPath:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_0);
+
+// The following NSGlyph-related methods are deprecated. Use corresponding CGGlyph-based methods instead
+- (void)appendBezierPathWithGlyph:(NSGlyph)glyph inFont:(NSFont *)font; // Deprecated. Use -appendBezierPathWithCGGlyph:inFont: instead
+- (void)appendBezierPathWithGlyphs:(NSGlyph *)glyphs count:(NSInteger)count inFont:(NSFont *)font; // Deprecated. Use -appendBezierPathWithCGGlyphs:count:inFont: instead
+- (void)appendBezierPathWithPackedGlyphs:(const char *)packedGlyphs; // Deprecated. Use -appendBezierPathWithCGGlyphs:count:inFont: instead
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,6 +1,6 @@
 /*	
     NSHTTPCookie.h
-    Copyright (c) 2003-2016, Apple Inc. All rights reserved.    
+    Copyright (c) 2003-2017, Apple Inc. All rights reserved.    
     
     Public header file.
 */
@@ -126,7 +126,7 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
     All properties can handle an NSString value, but some can also
     handle other types.
 
-    <table border=1 cellspacing=2 cellpadding=4>
+    <table border="1" cellspacing="2" cellpadding="4">
     <tr>
         <th>Property key constant</th>
         <th>Type of value</th>
@@ -276,7 +276,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 + (NSArray<NSHTTPCookie *> *)cookiesWithResponseHeaderFields:(NSDictionary<NSString *, NSString *> *)headerFields forURL:(NSURL *)URL;
 
 /*!
-    @method properties
     @abstract Returns a dictionary representation of the receiver.
     @discussion This method returns a dictionary representation of the
     NSHTTPCookie which can be saved and passed to
@@ -290,7 +289,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (nullable, readonly, copy) NSDictionary<NSHTTPCookiePropertyKey, id> *properties;
 
 /*!
-    @method version
     @abstract Returns the version of the receiver.
     @discussion Version 0 maps to "old-style" Netscape cookies.
     Version 1 maps to RFC2965 cookies. There may be future versions.
@@ -299,21 +297,18 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (readonly) NSUInteger version;
 
 /*!
-    @method name
     @abstract Returns the name of the receiver.
     @result the name of the receiver.
 */
 @property (readonly, copy) NSString *name;
 
 /*!
-    @method value
     @abstract Returns the value of the receiver.
     @result the value of the receiver.
 */
 @property (readonly, copy) NSString *value;
 
 /*!
-    @method expiresDate
     @abstract Returns the expires date of the receiver.
     @result the expires date of the receiver.
     @discussion The expires date is the date when the cookie should be
@@ -324,7 +319,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (nullable, readonly, copy) NSDate *expiresDate;
 
 /*!
-    @method isSessionOnly
     @abstract Returns whether the receiver is session-only.
     @result YES if this receiver should be discarded at the end of the
     session (regardless of expiration date), NO if receiver need not
@@ -333,7 +327,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (readonly, getter=isSessionOnly) BOOL sessionOnly;
 
 /*!
-    @method domain
     @abstract Returns the domain of the receiver.
     @discussion This value specifies URL domain to which the cookie
     should be sent. A domain with a leading dot means the cookie
@@ -344,7 +337,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (readonly, copy) NSString *domain;
 
 /*!
-    @method path
     @abstract Returns the path of the receiver.
     @discussion This value specifies the URL path under the cookie's
     domain for which this cookie should be sent. The cookie will also
@@ -354,7 +346,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (readonly, copy) NSString *path;
 
 /*!
-    @method isSecure
     @abstract Returns whether the receiver should be sent only over
     secure channels
     @discussion Cookies may be marked secure by a server (or by a javascript).
@@ -367,7 +358,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (readonly, getter=isSecure) BOOL secure;
 
 /*!
-    @method isHTTPOnly
     @abstract Returns whether the receiver should only be sent to HTTP servers
     per RFC 2965
     @discussion Cookies may be marked as HTTPOnly by a server (or by a javascript).
@@ -381,7 +371,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (readonly, getter=isHTTPOnly) BOOL HTTPOnly;
 
 /*!
-    @method comment
     @abstract Returns the comment of the receiver.
     @discussion This value specifies a string which is suitable for
     presentation to the user explaining the contents and purpose of this
@@ -392,7 +381,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (nullable, readonly, copy) NSString *comment;
 
 /*!
-    @method commentURL
     @abstract Returns the comment URL of the receiver.
     @discussion This value specifies a URL which is suitable for
     presentation to the user as a link for further information about
@@ -403,7 +391,6 @@ FOUNDATION_EXPORT NSHTTPCookiePropertyKey const NSHTTPCookiePort;
 @property (nullable, readonly, copy) NSURL *commentURL;
 
 /*!
-    @method portList
     @abstract Returns the list ports to which the receiver should be
     sent.
     @discussion This value specifies an NSArray of NSNumbers

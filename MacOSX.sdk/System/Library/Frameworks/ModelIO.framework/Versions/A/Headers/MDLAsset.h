@@ -6,14 +6,18 @@
  */
 
 #import <ModelIO/ModelIOExports.h>
+#import <ModelIO/MDLAssetResolver.h>
 #import <ModelIO/MDLObject.h>
 #import <ModelIO/MDLVertexDescriptor.h>
 #import <ModelIO/MDLMeshBuffer.h>
+#import <ModelIO/MDLAnimation.h>
 #import <Foundation/NSURL.h>
 #import <simd/simd.h>
 
 @class MDLLightProbe;
 @class MDLTexture;
+
+NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @class MDLAsset
@@ -43,7 +47,6 @@
  */
 
 
-NS_ASSUME_NONNULL_BEGIN
 
 NS_CLASS_AVAILABLE(10_11, 9_0)
 MDL_EXPORT
@@ -60,6 +63,21 @@ MDL_EXPORT
              Submeshes will be converted to triangle topology.
  */
 - (instancetype)initWithURL:(NSURL *)URL;
+
+
+/*!
+ @method initWithURL:bufferAllocator:preserveIndexing:error
+ @abstract Initialize with contents of URL, preserving indexing in the original file
+ 
+ @discussion Some file formats allow independent indexing of vertex attritutes,
+ for example, there might be more data entries for vertex positions than
+ for normals. The vertex buffers and submesh index buffers will be
+ created exactly as they were in the originating file.
+ */
+- (instancetype)initWithURL:(NSURL *)URL
+            bufferAllocator:(nullable id<MDLMeshBufferAllocator>)bufferAllocator
+           preserveIndexing:(BOOL)preserveIndexing
+                      error:(NSError * __nullable * __nullable)error;
 
 /*!
  @method initWithURL:vertexDescriptor:bufferAllocator:
@@ -78,7 +96,7 @@ MDL_EXPORT
  
              Submeshes will be converted to triangle topology.
   */
-- (instancetype)initWithURL:(NSURL *)URL
+- (instancetype)initWithURL:(nullable NSURL *)URL
            vertexDescriptor:(nullable MDLVertexDescriptor*)vertexDescriptor
             bufferAllocator:(nullable id<MDLMeshBufferAllocator>)bufferAllocator;
 
@@ -109,7 +127,6 @@ MDL_EXPORT
            preserveTopology:(BOOL)preserveTopology
                       error:(NSError * __nullable * __nullable)error;
 
-
 /*!
  @method exportAssetToURL:
  @abstract Export an asset to the specified URL.
@@ -123,6 +140,11 @@ MDL_EXPORT
  @return YES is returned if exporting proceeded successfully,
  */
 - (BOOL)exportAssetToURL:(NSURL *)URL error:(NSError * __nullable * __nullable)error;
+
+/*!
+ @abstract Return the object at the specified path, or nil if none exists there
+ */
+- (MDLObject*)objectAtPath:(NSString*)path;
 
 /*!
  @method canImportFileExtension:
@@ -151,6 +173,14 @@ MDL_EXPORT
              raised.
  */
 - (NSArray<MDLObject*>*)childObjectsOfClass:(Class)objectClass;
+
+/*!
+ @method loadTextures
+ @abstract Iterates all material properties on all materials. If they are string 
+           values or NSURL values, and can be resolved as textures, then the string 
+           and NSURL values will be replaced by MDLTextureSampler values.
+ */
+- (void)loadTextures;
 
 /*!
  @method boundingBoxAtTime:
@@ -193,12 +223,27 @@ MDL_EXPORT
 @property (nonatomic, readwrite) NSTimeInterval endTime;
 
 /*!
+ @property upAxis
+ @abstract Scene up axis
+ @discussion Some imported formats specify a scene up axis. By default Y-axis (0, 1, 0) is used
+ but other values are supported.
+ */
+@property (nonatomic, readwrite) vector_float3 upAxis;
+
+/*!
  @property URL
  @abstract URL used to create the asset
- @discussion If no animation data was specified by resource or resource incapable 
-             of specifying animation data, this value defaults to 0
+ @discussion If the asset was not created with a URL, nil will be returned.
  */
 @property (nonatomic, readonly, retain, nullable) NSURL *URL;
+
+/*!
+ @property AssetResolver
+ @abstract Resolver asset that helps find associated files
+ @discussion The default asset resolver is the RelativeAssetResolver
+ */
+@property (nonatomic, retain, nullable) id<MDLAssetResolver> resolver;
+
 
 /*!
  @property bufferAllocator
@@ -248,11 +293,16 @@ MDL_EXPORT
 /*!
  @property masters
  @abstract Master objects that can be instanced into the asset's object hierarchy
- 
- @see MDLObjectContainerComponent
+ @discussion @see MDLObjectContainerComponent
  */
 @property (nonatomic, retain) id<MDLObjectContainerComponent> masters;
 
+/*!
+ @property animations
+ @abstract Animations that can be bound to MDLObjects (@see MDLAnimationBindComponent)
+ @discussion @see MDLObjectContainerComponent
+ */
+@property (nonatomic, retain) id<MDLObjectContainerComponent> animations;
 
 @end
 

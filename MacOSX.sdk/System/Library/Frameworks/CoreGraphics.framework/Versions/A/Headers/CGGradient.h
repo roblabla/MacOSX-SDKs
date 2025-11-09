@@ -5,12 +5,11 @@
 #ifndef CGGRADIENT_H_
 #define CGGRADIENT_H_
 
-typedef struct CGGradient *CGGradientRef;
-
-
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
+
+typedef struct CF_BRIDGED_TYPE(id) CGGradient *CGGradientRef;
 
 typedef CF_OPTIONS (uint32_t, CGGradientDrawingOptions) {
   kCGGradientDrawsBeforeStartLocation = (1 << 0),

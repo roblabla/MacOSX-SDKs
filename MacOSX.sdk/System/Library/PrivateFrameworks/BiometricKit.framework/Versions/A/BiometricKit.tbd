@@ -1,19 +1,12 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 6D9B9DD1-A67B-3D9F-8D5E-91DD16E9BD11' ]
+uuids:           [ 'x86_64: 7B78A3CF-32B9-317F-9706-B14B4973AC3A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/BiometricKit.framework/Versions/A/BiometricKit
 objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AppendCommentToPGM, _ComponentSetInit, _ComponentSetRelease, 
-                       _ComponentSetUpdate, _ConvertTransToNodeArea, _ConvertVectorForGUI, 
-                       _FindRectangleForComponent, _GenerateEnrollProgressInfo, _GenerateMatchTemplateTopology, 
-                       _GenerateTemplateTopology, _GenerateTemplateTopologyInfo, 
-                       _LoadRawImageAsPGM, _RIESAdd, _RIESClear, _RIESDelete, _RIESInit, 
-                       _RIESLoad, _RIESSave, _RIESUpdate, _SaveRawImageAsPGM, _absoluteToMiliseconds, 
-                       _absoluteToNanoseconds, _crc32ansi, _dictionaryGetBool, _dictionaryGetInteger, 
-                       _getSensorPatchVersion, _kBiometricKitEnrollProgressDetailExtendedComponentID, 
+    symbols:         [ _BKErrorDomain, _kBiometricKitEnrollProgressDetailExtendedComponentID, 
                        _kBiometricKitEnrollProgressDetailMergedInComponents, _kBiometricKitEnrollProgressDetailNewComponentID, 
                        _kBiometricKitEnrollProgressDetailNewNodeCoordinates, _kBiometricKitEnrollProgressDetailNewNodeID, 
                        _kBiometricKitEnrollProgressDetailReason, _kBiometricKitEnrollProgressDetailRedundantNode, 
@@ -25,11 +18,13 @@ exports:
                        _kBiometricKitIdentityUpdateCountKey, _kBiometricKitIdentityUserIDKey, 
                        _kBiometricKitTemplateDetailLargestComponentArea, _kBiometricKitTemplateDetailLargestComponentNodes, 
                        _kBiometricKitTemplateDetailTotalArea, _kBiometricKitTemplateDetailTotalNodes, 
-                       _kBiometricKitTemplateUpdated, _localizeAbsolute, _nanosecondsToAbsolute, 
-                       _rotateBitmap90Data16, _rotateBitmap90Data8, _roundMostSignificant, 
-                       _xpcTimeout ]
-    objc-classes:    [ _BiometricKit, _BiometricKitEnrollProgressCoordinates, _BiometricKitEnrollProgressInfo, 
-                       _BiometricKitEnrollProgressMergedComponent, _BiometricKitIdentity, 
-                       _BiometricKitMatchInfo, _BiometricKitStatistics, _BiometricKitTemplateInfo, 
-                       _BiometricKitXPCClient ]
+                       _kBiometricKitTemplateUpdated ]
+    objc-classes:    [ _BKDevice, _BKDeviceDescriptor, _BKDeviceManager, _BKDeviceTouchID, 
+                       _BKEnrollOperation, _BKEnrollTouchIDOperation, _BKExtendEnrollTouchIDOperation, 
+                       _BKFingerDetectOperation, _BKIdentity, _BKMatchOperation, 
+                       _BKMatchResultInfo, _BKMatchTouchIDOperation, _BKOperation, 
+                       _BKPresenceDetectOperation, _BKSystemProtectedConfiguration, 
+                       _BKUserProtectedConfiguration, _BiometricKit, _BiometricKitEnrollProgressCoordinates, 
+                       _BiometricKitEnrollProgressInfo, _BiometricKitEnrollProgressMergedComponent, 
+                       _BiometricKitIdentity, _BiometricKitMatchInfo, _BiometricKitTemplateInfo ]
 ...

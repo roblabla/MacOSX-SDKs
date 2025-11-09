@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGPSConverter *CGPSConverterRef;
+typedef struct CF_BRIDGED_TYPE(id) CGPSConverter *CGPSConverterRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreGraphics/CGDataConsumer.h>

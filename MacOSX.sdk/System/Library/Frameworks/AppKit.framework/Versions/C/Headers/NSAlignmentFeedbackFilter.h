@@ -1,7 +1,7 @@
 /*
  NSAlignmentFeedbackFilter.h
  Application Kit
- Copyright (c) 2015-2016, Apple Inc.
+ Copyright (c) 2015-2017, Apple Inc.
  All rights reserved.
  */
 
@@ -22,7 +22,7 @@ NS_CLASS_AVAILABLE(10_11, NA)
 
 /*  The event mask indicating which event types the filter accepts. Suitable for use in tracking loops.
  */
-+ (NSEventMask)inputEventMask;
+@property (class, readonly) NSEventMask inputEventMask;
 
 /*  Input a new event matching +inputEventMask.
  */

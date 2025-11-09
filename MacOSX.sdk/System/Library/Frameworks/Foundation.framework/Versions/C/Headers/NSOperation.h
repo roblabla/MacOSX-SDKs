@@ -1,5 +1,5 @@
 /*	NSOperation.h
-	Copyright (c) 2006-2016, Apple Inc. All rights reserved.
+	Copyright (c) 2006-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -37,7 +37,7 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 @property (readonly, getter=isExecuting) BOOL executing;
 @property (readonly, getter=isFinished) BOOL finished;
 @property (readonly, getter=isConcurrent) BOOL concurrent; // To be deprecated; use and override 'asynchronous' below
-@property (readonly, getter=isAsynchronous) BOOL asynchronous NS_AVAILABLE(10_8, 7_0);
+@property (readonly, getter=isAsynchronous) BOOL asynchronous API_AVAILABLE(macos(10.8), ios(7.0), watchos(2.0), tvos(9.0));
 @property (readonly, getter=isReady) BOOL ready;
 
 - (void)addDependency:(NSOperation *)op;
@@ -55,15 +55,15 @@ typedef NS_ENUM(NSInteger, NSOperationQueuePriority) {
 
 @property NSOperationQueuePriority queuePriority;
 
-@property (nullable, copy) void (^completionBlock)(void) NS_AVAILABLE(10_6, 4_0);
+@property (nullable, copy) void (^completionBlock)(void) API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-- (void)waitUntilFinished NS_AVAILABLE(10_6, 4_0);
+- (void)waitUntilFinished API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-@property double threadPriority NS_DEPRECATED(10_6, 10_10, 4_0, 8_0);
+@property double threadPriority API_DEPRECATED("Not supported", macos(10.6,10.10), ios(4.0,8.0), watchos(2.0,2.0), tvos(9.0,9.0));
 
-@property NSQualityOfService qualityOfService NS_AVAILABLE(10_10, 8_0);
+@property NSQualityOfService qualityOfService API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
-@property (nullable, copy) NSString *name NS_AVAILABLE(10_10, 8_0);
+@property (nullable, copy) NSString *name API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 @end
 
@@ -102,8 +102,8 @@ NS_SWIFT_UNAVAILABLE("NSInvocation and related APIs not available")
 
 @end
 
-FOUNDATION_EXPORT NSExceptionName const NSInvocationOperationVoidResultException NS_AVAILABLE(10_5, 2_0);
-FOUNDATION_EXPORT NSExceptionName const NSInvocationOperationCancelledException NS_AVAILABLE(10_5, 2_0);
+FOUNDATION_EXPORT NSExceptionName const NSInvocationOperationVoidResultException API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSExceptionName const NSInvocationOperationCancelledException API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0));
 
 static const NSInteger NSOperationQueueDefaultMaxConcurrentOperationCount = -1;
 
@@ -115,31 +115,29 @@ NS_CLASS_AVAILABLE(10_5, 2_0)
 }
 
 - (void)addOperation:(NSOperation *)op;
-- (void)addOperations:(NSArray<NSOperation *> *)ops waitUntilFinished:(BOOL)wait NS_AVAILABLE(10_6, 4_0);
+- (void)addOperations:(NSArray<NSOperation *> *)ops waitUntilFinished:(BOOL)wait API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-- (void)addOperationWithBlock:(void (^)(void))block NS_AVAILABLE(10_6, 4_0);
+- (void)addOperationWithBlock:(void (^)(void))block API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @property (readonly, copy) NSArray<__kindof NSOperation *> *operations;
-@property (readonly) NSUInteger operationCount NS_AVAILABLE(10_6, 4_0);
+@property (readonly) NSUInteger operationCount API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @property NSInteger maxConcurrentOperationCount;
 
 @property (getter=isSuspended) BOOL suspended;
 
-@property (nullable, copy) NSString *name NS_AVAILABLE(10_6, 4_0);
+@property (nullable, copy) NSString *name API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
-@property NSQualityOfService qualityOfService NS_AVAILABLE(10_10, 8_0);
+@property NSQualityOfService qualityOfService API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
-@property (nullable, assign /* actually retain */) dispatch_queue_t underlyingQueue NS_AVAILABLE(10_10, 8_0);
+@property (nullable, assign /* actually retain */) dispatch_queue_t underlyingQueue API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 - (void)cancelAllOperations;
 
 - (void)waitUntilAllOperationsAreFinished;
 
-#if FOUNDATION_SWIFT_SDK_EPOCH_AT_LEAST(8)
-@property (class, readonly, strong, nullable) NSOperationQueue *currentQueue NS_AVAILABLE(10_6, 4_0);
-@property (class, readonly, strong) NSOperationQueue *mainQueue NS_AVAILABLE(10_6, 4_0);
-#endif
+@property (class, readonly, strong, nullable) NSOperationQueue *currentQueue API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
+@property (class, readonly, strong) NSOperationQueue *mainQueue API_AVAILABLE(macos(10.6), ios(4.0), watchos(2.0), tvos(9.0));
 
 @end
 

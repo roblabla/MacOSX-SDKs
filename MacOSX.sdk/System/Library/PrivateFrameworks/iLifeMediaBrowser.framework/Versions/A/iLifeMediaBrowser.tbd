@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: 05AE161A-586D-39CC-9C51-4A0990AC0186', 'x86_64: BCE09862-8C3D-3750-AE4D-ED0303B96033' ]
+uuids:           [ 'i386: 1A0D7C6C-A65E-34D6-A35F-5108D8EE2F20', 'x86_64: B341DB5E-266C-305D-B640-929F9AC493ED' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/iLifeMediaBrowser.framework/Versions/A/iLifeMediaBrowser
-current-version: 733.0
-objc-constraint: none
+current-version: 750
 exports:         
   - archs:           [ x86_64 ]
     objc-ivars:      [ _ILChangeManager._groupToOperationMap, _ILChangeManager._operationQueue, 
@@ -231,14 +230,16 @@ exports:
                        _ILPhotosAlbumNameKey, _ILPhotosAlbumTypeIdentifier, _ILPhotosAlbumsGroupTypeIdentifier, 
                        _ILPhotosAllCollectionsGroupTypeIdentifier, _ILPhotosAllMomentsGroupTypeIdentifier, 
                        _ILPhotosAllPhotosAlbumTypeIdentifier, _ILPhotosAllYearsGroupTypeIdentifier, 
-                       _ILPhotosBurstGroupTypeIdentifier, _ILPhotosCollectionGroupTypeIdentifier, 
-                       _ILPhotosCommentKey, _ILPhotosDateAsTimerIntervalKey, _ILPhotosDepthEffectGroupTypeIdentifier, 
+                       _ILPhotosAnimatedGroupTypeIdentifier, _ILPhotosBurstGroupTypeIdentifier, 
+                       _ILPhotosCollectionGroupTypeIdentifier, _ILPhotosCommentKey, 
+                       _ILPhotosDateAsTimerIntervalKey, _ILPhotosDepthEffectGroupTypeIdentifier, 
                        _ILPhotosFacesAlbumTypeIdentifier, _ILPhotosFavoriteKey, _ILPhotosFavoritesGroupTypeIdentifier, 
                        _ILPhotosFolderTypeIdentifier, _ILPhotosFrontCameraGroupTypeIdentifier, 
-                       _ILPhotosHiddenKey, _ILPhotosImagePathKey, _ILPhotosKeyListKey, 
-                       _ILPhotosKeyListStringKey, _ILPhotosKeyPhotoKey, _ILPhotosKeywordsKey, 
-                       _ILPhotosLastImportGroupTypeIdentifier, _ILPhotosLatitudeKey, 
-                       _ILPhotosLongitudeKey, _ILPhotosMomentGroupTypeIdentifier, 
+                       _ILPhotosHiddenKey, _ILPhotosKeyListKey, _ILPhotosKeyListStringKey, 
+                       _ILPhotosKeyPhotoKey, _ILPhotosKeywordsKey, _ILPhotosLastImportGroupTypeIdentifier, 
+                       _ILPhotosLatitudeKey, _ILPhotosLivePhotosGroupTypeIdentifier, 
+                       _ILPhotosLongExposureGroupTypeIdentifier, _ILPhotosLongitudeKey, 
+                       _ILPhotosMediaCodecNameKey, _ILPhotosMomentGroupTypeIdentifier, 
                        _ILPhotosMyPhotoStreamTypeIdentifier, _ILPhotosOriginalPathKey, 
                        _ILPhotosPanoramasGroupTypeIdentifier, _ILPhotosParentKey, 
                        _ILPhotosPhotoCountKey, _ILPhotosPlacesAlbumTypeIdentifier, 
@@ -251,9 +252,10 @@ exports:
                        _ILPhotosSmartAlbumTypeIdentifier, _ILPhotosSpecialTypeKey, 
                        _ILPhotosThumbPathKey, _ILPhotosTimelapseGroupTypeIdentifier, 
                        _ILPhotosVideosGroupTypeIdentifier, _ILPhotosYearGroupTypeIdentifier, 
-                       _ILPluginAPIVersionKey, _ILPluginAddedMediaGroupsKey, _ILPluginAddedMediaObjectsKey, 
-                       _ILPluginDefaultLoadingStringKey, _ILPluginDefaultNoDataStringKey, 
-                       _ILPluginDeletedMediaGroupsKey, _ILPluginDeletedMediaObjectsKey, 
+                       _ILPhotsoImagePathKey, _ILPluginAPIVersionKey, _ILPluginAddedMediaGroupsKey, 
+                       _ILPluginAddedMediaObjectsKey, _ILPluginDefaultLoadingStringKey, 
+                       _ILPluginDefaultNoDataStringKey, _ILPluginDeletedMediaGroupsKey, 
+                       _ILPluginDeletedMediaObjectsKey, _ILPluginManagerEnableHeifAndHevcMediaKey, 
                        _ILPluginMediaGroupAttributesChangedKey, _ILPluginMediaGroupChildGroupsChangedKey, 
                        _ILPluginMediaGroupMediaObjectsChangedKey, _ILPluginMediaObjectAttributesChanged, 
                        _ILPluginSourceIdentifierKey, _ILPluginVersionKey, _ILRootMediaGroupKey, 

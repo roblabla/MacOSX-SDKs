@@ -17,24 +17,26 @@
  */
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_7)
-@interface CWNetworkProfile : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
-{
-	NSData          *_ssidData;
+@interface CWNetworkProfile : NSObject <NSCopying, NSMutableCopying, NSSecureCoding> {
+    
+    NSData          *_ssidData;
     
     NSString        *_ssid;
-	
+    
     NSUInteger      _securityType;
-	
+    
     BOOL            _disabled;
-	
+    
     BOOL            _systemMode;
-	
+    
     BOOL            _hiddenNetwork;
-	
+    
     NSDate          *_lastConnected;
-	
-    BOOL            _captiveNetwork;
-	
+    
+    NSInteger       _captiveNetworkStatus;
+    
+    BOOL            _wasCaptiveNetwork;
+    
     BOOL            _temporarilyDisabled;
     
     BOOL            _autoLogin;
@@ -56,12 +58,18 @@ NS_CLASS_AVAILABLE_MAC(10_7)
     NSSet           *_collocatedGroup;
     
     NSSet           *_channelHistory;
-        
+    
     NSInteger       _roamingProfileType;
     
     BOOL            _isPersonalHotspot;
     
     NSArray         *_bssidList;
+    
+    NSInteger       _shareMode;
+    
+    NSInteger       _userRole;
+    
+    NSString        *_payloadUUID;
 }
 
 /*!

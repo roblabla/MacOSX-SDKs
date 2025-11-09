@@ -234,9 +234,9 @@ The
 .Fn xpc_dictionary_apply
 function will return true if the
 .Fa applier
-block was called for all pairs, or false if it was not (i.e. the
+block was called and returned true for all pairs, or false if it was not (i.e. the
 .Fa applier
-returned false during the iteration).
+returned false during the iteration, which may have caused iteration to stop early).
 .Pp
 Note that the C language does not require an explicit return type to be declared
 for a block when the return expression is unambigous. Therefore the formal block

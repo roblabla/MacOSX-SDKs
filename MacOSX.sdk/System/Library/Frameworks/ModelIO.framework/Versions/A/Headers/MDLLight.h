@@ -119,6 +119,18 @@ MDL_EXPORT
 
 -(void)generateCubemapFromLight:(NSUInteger)textureSize;
 
+/*!
+ @method generateTexture
+ @abstract
+ Generate an IES compliant MDLTexture
+ 1D when the number of horizontal angles is one and the innerConeAngle is < 180
+ 2D when the previous statement fails and innerConeAngle < 89
+ 3D in all other cases
+ the parameter textureSize is the size in pixels of the texture image. For a size of N,
+ 1D generates an Nx1 image, 2D generates an NxN image, 3D generates an Nx(N*6) image (i.e. cubemap).
+ */
+-(MDLTexture*)generateTexture:(NSUInteger)textureSize;
+
 @property (nonatomic, retain, nullable, readonly) MDLTexture *lightCubeMap;
 
 @property (nonatomic, readonly) NSUInteger sphericalHarmonicsLevel;

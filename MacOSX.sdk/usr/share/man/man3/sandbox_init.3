@@ -1,4 +1,4 @@
-.\" Copyright (c) 2008-2011 Apple Inc.
+.\" Copyright (c) 2008-2017 Apple Inc.
 .\" All rights reserved.
 .\"
 .\" Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,7 @@
 .\" SUCH DAMAGE.
 .\"
 .\"
-.Dd November 15, 2011
+.Dd March 9, 2017
 .Dt SANDBOX_INIT 3
 .Os "Mac OS X"
 .Sh NAME
@@ -101,17 +101,22 @@ restrictions are typically enforced at resource acquisition time.
 .Bl -tag -width kSBXProfileNoWriteExceptTemporary
 .It Dv kSBXProfileNoInternet
 TCP/IP networking is prohibited.
+.Sy DEPRECATED .
 .It Dv kSBXProfileNoNetwork
 All sockets-based networking is prohibited.
+.Sy DEPRECATED .
 .It Dv kSBXProfileNoWrite
 File system writes are prohibited.
+.Sy DEPRECATED .
 .It Dv kSBXProfileNoWriteExceptTemporary
 File system writes are restricted to the temporary folder /var/tmp
 and the folder specified by the
 .Xr confstr 3
 configuration variable _CS_DARWIN_USER_TEMP_DIR.
+.Sy DEPRECATED .
 .It Dv kSBXProfilePureComputation
 All operating system services are prohibited.
+.Sy DEPRECATED .
 .El
 .Sh SEE ALSO
 .Xr sandbox-exec 1 ,

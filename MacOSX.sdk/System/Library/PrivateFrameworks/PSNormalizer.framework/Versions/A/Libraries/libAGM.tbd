@@ -1,11 +1,11 @@
 --- !tapi-tbd-v2
-archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: C91C05A9-3F2A-359F-8D1F-65069499A1CE', 'x86_64: 8C719AFE-2CBD-3313-9F85-10C4FCF07067' ]
+archs:           [ x86_64 ]
+uuids:           [ 'x86_64: 67C40798-A144-32E4-8DB2-D63F7920F425' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/PSNormalizer.framework/Versions/A/Libraries/libAGM.dylib
 objc-constraint: none
 exports:         
-  - archs:           [ i386, x86_64 ]
+  - archs:           [ x86_64 ]
     symbols:         [ _AGMApplyFunction, _AGMCleanup, _AGMColorSpaceAddRef, _AGMColorSpaceEqual, 
                        _AGMColorSpaceFillRange, _AGMColorSpaceGetBaseCs, _AGMColorSpaceGetComponents, 
                        _AGMColorSpaceGetDeviceN, _AGMColorSpaceGetFamily, _AGMColorSpaceGetICC, 

@@ -500,7 +500,7 @@ typedef ConstStr63Param                 ConstStrFileNameParam;
 #ifdef __cplusplus
 inline unsigned char StrLength(ConstStr255Param string) { return (*string); }
 #else
-#define StrLength(string) (*(unsigned char *)(string))
+#define StrLength(string) (*(const unsigned char *)(string))
 #endif  /* defined(__cplusplus) */
 
 #if OLDROUTINENAMES

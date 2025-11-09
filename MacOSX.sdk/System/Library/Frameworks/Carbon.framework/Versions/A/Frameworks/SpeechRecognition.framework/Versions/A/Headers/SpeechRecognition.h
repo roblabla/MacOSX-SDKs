@@ -1,25 +1,10 @@
 /*
      File:       SpeechRecognition/SpeechRecognition.h
  
-     Contains:   Apple Speech Recognition Toolbox Interfaces.
+     Note:       This API has been deprecated. Please use NSSpeechRecognizer class instead.
  
-     Copyright:  � 1992-2008 by Apple Computer, Inc., all rights reserved.
- 
-     Warning:    *** APPLE INTERNAL USE ONLY ***
-                 This file may contain unreleased API's
- 
-     BuildInfo:  Built by:            neeri
-                 On:                  Wed Sep 26 02:42:06 2012
-                 With Interfacer:     3.0d46   (Mac OS X for PowerPC)
-                 From:                SpeechRecognition.i
-                     Revision:        1.5
-                     Dated:           2007/05/31 21:02:39
-                     Last change by:  neerache
-                     Last comment:    Make SR work for Rosetta clients <rdar://problem/5156790>
- 
-     Bugs:       Report bugs to Radar component "System Interfaces", "Latest"
-                 List the version information (from above) in the Problem Description.
- 
+     Copyright:  1992-2017 by Apple Inc., all rights reserved.
+
 */
 #ifndef __SPEECHRECOGNITION__
 #define __SPEECHRECOGNITION__
@@ -123,7 +108,8 @@ typedef STACK_UPP_TYPE(SRCallBackProcPtr)                       SRCallBackUPP;
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern SRCallBackUPP
-NewSRCallBackUPP(SRCallBackProcPtr userRoutine)               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+NewSRCallBackUPP(SRCallBackProcPtr userRoutine)               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 /*
  *  DisposeSRCallBackUPP()
@@ -134,7 +120,8 @@ NewSRCallBackUPP(SRCallBackProcPtr userRoutine)               AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   available as macro/inline
  */
 extern void
-DisposeSRCallBackUPP(SRCallBackUPP userUPP)                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+DisposeSRCallBackUPP(SRCallBackUPP userUPP)                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 /*
  *  InvokeSRCallBackUPP()
@@ -147,7 +134,8 @@ DisposeSRCallBackUPP(SRCallBackUPP userUPP)                   AVAILABLE_MAC_OS_X
 extern void
 InvokeSRCallBackUPP(
   SRCallBackStruct *  param,
-  SRCallBackUPP       userUPP)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRCallBackUPP       userUPP)                                __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 #if __MACH__
   #ifdef __cplusplus
@@ -340,7 +328,9 @@ enum {
 extern OSErr 
 SROpenRecognitionSystem(
   SRRecognitionSystem *  system,
-  OSType                 systemID)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType                 systemID)                            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
+
 
 
 /*
@@ -352,7 +342,8 @@ SROpenRecognitionSystem(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRCloseRecognitionSystem(SRRecognitionSystem system)          AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRCloseRecognitionSystem(SRRecognitionSystem system)          __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /* Accessing Properties of any Speech Object */
@@ -369,7 +360,8 @@ SRSetProperty(
   SRSpeechObject   srObject,
   OSType           selector,
   const void *     property,
-  Size             propertyLen)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size             propertyLen)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -385,7 +377,8 @@ SRGetProperty(
   SRSpeechObject   srObject,
   OSType           selector,
   void *           property,
-  Size *           propertyLen)                               AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Size *           propertyLen)                               __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /* Any object obtained via New or Get type calls must be released */
@@ -398,7 +391,8 @@ SRGetProperty(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRReleaseObject(SRSpeechObject srObject)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRReleaseObject(SRSpeechObject srObject)                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -412,7 +406,8 @@ SRReleaseObject(SRSpeechObject srObject)                      AVAILABLE_MAC_OS_X
 extern OSErr 
 SRGetReference(
   SRSpeechObject    srObject,
-  SRSpeechObject *  newObjectRef)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRSpeechObject *  newObjectRef)                             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /* SRRecognizer Instance Functions */
@@ -428,7 +423,8 @@ extern OSErr
 SRNewRecognizer(
   SRRecognitionSystem   system,
   SRRecognizer *        recognizer,
-  OSType                sourceID)                             AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  OSType                sourceID)                             __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -440,7 +436,8 @@ SRNewRecognizer(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRStartListening(SRRecognizer recognizer)                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRStartListening(SRRecognizer recognizer)                     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -452,7 +449,8 @@ SRStartListening(SRRecognizer recognizer)                     AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRStopListening(SRRecognizer recognizer)                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRStopListening(SRRecognizer recognizer)                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -463,10 +461,11 @@ SRStopListening(SRRecognizer recognizer)                      AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRSetLanguageModel(
   SRRecognizer      recognizer,
-  SRLanguageModel   languageModel)                            AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRLanguageModel   languageModel)                            __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -477,10 +476,11 @@ SRSetLanguageModel(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRGetLanguageModel(
   SRRecognizer       recognizer,
-  SRLanguageModel *  languageModel)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRLanguageModel *  languageModel)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -492,7 +492,8 @@ SRGetLanguageModel(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRContinueRecognition(SRRecognizer recognizer)                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRContinueRecognition(SRRecognizer recognizer)                __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -504,7 +505,8 @@ SRContinueRecognition(SRRecognizer recognizer)                AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRCancelRecognition(SRRecognizer recognizer)                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRCancelRecognition(SRRecognizer recognizer)                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -516,7 +518,8 @@ SRCancelRecognition(SRRecognizer recognizer)                  AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRIdle(void)                                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRIdle(void)                                                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /* Language Model Building and Manipulation Functions */
@@ -533,7 +536,8 @@ SRNewLanguageModel(
   SRRecognitionSystem   system,
   SRLanguageModel *     model,
   const void *          name,
-  SInt32                nameLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                nameLength)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -544,10 +548,11 @@ SRNewLanguageModel(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRNewPath(
   SRRecognitionSystem   system,
-  SRPath *              path)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRPath *              path)                                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -563,7 +568,8 @@ SRNewPhrase(
   SRRecognitionSystem   system,
   SRPhrase *            phrase,
   const void *          text,
-  SInt32                textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                textLength)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -579,7 +585,8 @@ SRNewWord(
   SRRecognitionSystem   system,
   SRWord *              word,
   const void *          text,
-  SInt32                textLength)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32                textLength)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /* Operations on any object of the SRLanguageObject family */
@@ -591,10 +598,11 @@ SRNewWord(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRPutLanguageObjectIntoHandle(
   SRLanguageObject   languageObject,
-  Handle             lobjHandle)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle             lobjHandle)                              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -605,10 +613,11 @@ SRPutLanguageObjectIntoHandle(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRPutLanguageObjectIntoDataFile(
   SRLanguageObject   languageObject,
-  short              fRefNum)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short              fRefNum)                                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -623,7 +632,8 @@ extern OSErr
 SRNewLanguageObjectFromHandle(
   SRRecognitionSystem   system,
   SRLanguageObject *    languageObject,
-  Handle                lObjHandle)                           AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Handle                lObjHandle)                           __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -638,7 +648,8 @@ extern OSErr
 SRNewLanguageObjectFromDataFile(
   SRRecognitionSystem   system,
   SRLanguageObject *    languageObject,
-  short                 fRefNum)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  short                 fRefNum)                              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -650,7 +661,8 @@ SRNewLanguageObjectFromDataFile(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SREmptyLanguageObject(SRLanguageObject languageObject)        AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SREmptyLanguageObject(SRLanguageObject languageObject)        __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -665,7 +677,8 @@ extern OSErr
 SRChangeLanguageObject(
   SRLanguageObject   languageObject,
   const void *       text,
-  SInt32             textLength)                              AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32             textLength)                              __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -676,10 +689,11 @@ SRChangeLanguageObject(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRAddLanguageObject(
   SRLanguageObject   base,
-  SRLanguageObject   addon)                                   AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRLanguageObject   addon)                                   __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -695,7 +709,8 @@ SRAddText(
   SRLanguageObject   base,
   const void *       text,
   SInt32             textLength,
-  SRefCon            refCon)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRefCon            refCon)                                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -706,10 +721,11 @@ SRAddText(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRRemoveLanguageObject(
   SRLanguageObject   base,
-  SRLanguageObject   toRemove)                                AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SRLanguageObject   toRemove)                                __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /* Traversing SRRecognitionResults or SRLanguageObjects */
@@ -721,10 +737,11 @@ SRRemoveLanguageObject(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRCountItems(
   SRSpeechObject   container,
-  long *           count)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long *           count)                                     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -739,7 +756,8 @@ extern OSErr
 SRGetIndexedItem(
   SRSpeechObject    container,
   SRSpeechObject *  item,
-  long              index)                                    AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long              index)                                    __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -754,7 +772,8 @@ extern OSErr
 SRSetIndexedItem(
   SRSpeechObject   container,
   SRSpeechObject   item,
-  long             index)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long             index)                                     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -765,10 +784,11 @@ SRSetIndexedItem(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRRemoveIndexedItem(
   SRSpeechObject   container,
-  long             index)                                     AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  long             index)                                     __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /* Utilizing the System Feedback Window */
@@ -784,7 +804,8 @@ extern OSErr
 SRDrawText(
   SRRecognizer   recognizer,
   const void *   dispText,
-  SInt32         dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         dispLength)                                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -799,7 +820,8 @@ extern OSErr
 SRDrawRecognizedText(
   SRRecognizer   recognizer,
   const void *   dispText,
-  SInt32         dispLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         dispLength)                                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -814,7 +836,8 @@ extern OSErr
 SRSpeakText(
   SRRecognizer   recognizer,
   const void *   speakText,
-  SInt32         speakLength)                                 AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         speakLength)                                 __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -825,11 +848,12 @@ SRSpeakText(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRSpeakAndDrawText(
   SRRecognizer   recognizer,
   const void *   text,
-  SInt32         textLength)                                  AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  SInt32         textLength)                                  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -841,7 +865,8 @@ SRSpeakAndDrawText(
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern OSErr 
-SRStopSpeech(SRRecognizer recognizer)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRStopSpeech(SRRecognizer recognizer)                         __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -853,7 +878,8 @@ SRStopSpeech(SRRecognizer recognizer)                         AVAILABLE_MAC_OS_X
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
 extern Boolean 
-SRSpeechBusy(SRRecognizer recognizer)                         AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+SRSpeechBusy(SRRecognizer recognizer)                         __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -864,10 +890,11 @@ SRSpeechBusy(SRRecognizer recognizer)                         AVAILABLE_MAC_OS_X
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRProcessBegin(
   SRRecognizer   recognizer,
-  Boolean        failed)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        failed)                                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 /*
@@ -878,10 +905,11 @@ SRProcessBegin(
  *    CarbonLib:        in CarbonLib 1.0 and later
  *    Non-Carbon CFM:   in SpeechRecognitionLib 1.0 and later
  */
-extern OSErr 
+extern OSErr
 SRProcessEnd(
   SRRecognizer   recognizer,
-  Boolean        failed)                                      AVAILABLE_MAC_OS_X_VERSION_10_0_AND_LATER;
+  Boolean        failed)                                      __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_10_0, __MAC_10_13, __IPHONE_NA, __IPHONE_NA,
+                                                                                                 "Please use NSSpeechRecognizer class instead.");
 
 
 

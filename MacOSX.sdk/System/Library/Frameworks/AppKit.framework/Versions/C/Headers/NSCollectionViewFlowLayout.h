@@ -1,7 +1,7 @@
 /*
     NSCollectionViewFlowLayout.h
     Application Kit
-    Copyright (c) 2015-2016, Apple Inc.
+    Copyright (c) 2015-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -15,8 +15,8 @@ typedef NS_ENUM(NSInteger, NSCollectionViewScrollDirection) {
 
 NS_ASSUME_NONNULL_BEGIN
 
-APPKIT_EXTERN NSString *const NSCollectionElementKindSectionHeader NS_AVAILABLE_MAC(10_11);
-APPKIT_EXTERN NSString *const NSCollectionElementKindSectionFooter NS_AVAILABLE_MAC(10_11);
+APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElementKindSectionHeader NS_AVAILABLE_MAC(10_11);
+APPKIT_EXTERN NSCollectionViewSupplementaryElementKind const NSCollectionElementKindSectionFooter NS_AVAILABLE_MAC(10_11);
 
 NS_CLASS_AVAILABLE_MAC(10_11)
 @interface NSCollectionViewFlowLayoutInvalidationContext : NSCollectionViewLayoutInvalidationContext

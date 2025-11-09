@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: A9634860-F785-399D-9DBC-CFAC3EB3F055', 'x86_64: E1400999-1F08-35A1-9D07-27D80A2AF89A' ]
+uuids:           [ 'i386: 24D69CCD-FF41-30AE-855D-0FEF14C1256D', 'x86_64: 69176864-000C-38DA-945F-34F71F060095' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/CoreServices.framework/Versions/A/Frameworks/SharedFileList.framework/Versions/A/SharedFileList
-current-version: 38.0
-objc-constraint: none
+current-version: 67
 parent-umbrella: CoreServices
 exports:         
   - archs:           [ i386, x86_64 ]
@@ -22,33 +21,13 @@ exports:
                        _LSSharedFileListItemSetProperty, _LSSharedFileListItemUpdate, 
                        _LSSharedFileListRemoveAllItems, _LSSharedFileListRemoveObserver, 
                        _LSSharedFileListRemoveObserverOnQueue, _LSSharedFileListSetAuthorization, 
-                       _LSSharedFileListSetProperty, _SFLCopyIconsForFlattening, 
-                       _SFLItemGetSandboxExtension, _SFLItemGetURLRef, _SFLSetFlattenedIcons, 
-                       __LSSharedFileListIsURLSharePoint, __LSSharedFileListItemCopyBinding, 
+                       _LSSharedFileListSetProperty, _SFLListChangeNotification, 
+                       _SFLListLaunchNotification, __LSSharedFileListIsURLSharePoint, 
+                       __LSSharedFileListItemCopyBinding, __LSSharedFileListItemCopyURL, 
+                       __LSSharedFileListItemSetBookmarkData, __LSSharedFileListItemSetURL, 
                        __LSSharedFileListUpgrade, __LSSharedFileListVolumeIsVisibleInSidebar, 
-                       __SFLAddCallback, __SFLAddNewBookmarkItemToListWithProperties, 
-                       __SFLAddNewItemToListWithProperties, __SFLAddNewURLItemToListWithProperties, 
-                       __SFLAddObserver, __SFLAsyncGetSKServiceDescription, __SFLChangeBookmarkItemInList, 
-                       __SFLChangeItemInList, __SFLClearList, __SFLCopyListProperty, 
-                       __SFLCopyProperty, __SFLCreateSnapshot, __SFLGetCustomFileList, 
-                       __SFLGetFirstItem, __SFLGetMaxItemCount, __SFLGetNextItem, 
-                       __SFLGetPrefsAndListName, __SFLGetPrivilegedList, __SFLGetRestrictedCustomFileList, 
-                       __SFLGetSKServiceDescription, __SFLGetSharedSeedValue, __SFLGetSnapshotSeedValue, 
-                       __SFLGetVisibilityForSpecialVolumeItem, __SFLGetVolumesList, 
-                       __SFLGetVolumesListMask, __SFLInitializeSFLServer, __SFLInitializeSFLServerAsync, 
-                       __SFLIsFolderShareable, __SFLItemCheckType, __SFLItemCopyBookmarkData, 
-                       __SFLItemCopyCustomProperties, __SFLItemCopyDisplayName, __SFLItemCopyDisplayNameInternal, 
-                       __SFLItemCopyPrivilegedProperty, __SFLItemCopySandboxExtension, 
-                       __SFLItemGetAliasData, __SFLItemGetBookmarkDataRef, __SFLItemGetFlags, 
-                       __SFLItemGetID, __SFLItemGetISImageRef, __SFLItemGetVRefNum, 
-                       __SFLItemIsHandledBySFLManager, __SFLItemIsSpecial, __SFLItemSetProperty, 
-                       __SFLModifyItemFlags, __SFLModifyVolumesListMask, __SFLMoveItemInList, 
-                       __SFLPreferencesCopyMultiple, __SFLPreferencesCopyValue, __SFLPreferencesSetMultiple, 
-                       __SFLPreferencesSetValue, __SFLPrefsCopySharedPrefs, __SFLPrefsFlush, 
-                       __SFLPrefsNotifyServerPrefsWereWritten, __SFLRelease, __SFLReleaseSnapshot, 
-                       __SFLRemoveCallback, __SFLRemoveItemFromList, __SFLSetAuthorization, 
-                       __SFLSetMaxItemCount, __SFLSetProperty, __SFLSetVisibilityForSpecialVolumeItem, 
-                       __SFLVolumeIsVisibleInSidebar, __kLSSharedFileListFavoriteItems, 
+                       __SFLCreateSnapshot, __SFLGetRestrictedCustomFileList, __SFLIsFolderShareable, 
+                       __SFLRelease, __SFLReleaseSnapshot, __kLSSharedFileListFavoriteItems, 
                        __kLSSharedFileListFavoriteVolumes, __kLSSharedFileListGlobalLoginItems, 
                        __kLSSharedFileListItemBeforeFirst, __kLSSharedFileListItemHidden, 
                        __kLSSharedFileListItemLast, __kLSSharedFileListLoginItemHidden, 
@@ -100,6 +79,6 @@ exports:
                        _kLSSharedFileListVolumesShowHardDrives, _kLSSharedFileListVolumesShowHardDrivesExceptions, 
                        _kLSSharedFileListVolumesShowRemovableVolumes, _kLSSharedFileListVolumesShowRemovableVolumesExceptions, 
                        _kLSSharedFileListVolumesShowRepairing, _kSFLDefaultsDomain ]
-    objc-classes:    [ _SFLDefaults, _SFLList, _SFLListChange, _SFLListItem, _SFLListManager, 
-                       _SFLMutableListItem ]
+    objc-classes:    [ _SFLBookmark, _SFLDefaults, _SFLItem, _SFLManager, __SFLItem, 
+                       __SFLList ]
 ...

@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGImage *CGImageRef;
+typedef struct CF_BRIDGED_TYPE(id) CGImage *CGImageRef;
 
 #include <CoreGraphics/CGColorSpace.h>
 #include <CoreGraphics/CGDataProvider.h>

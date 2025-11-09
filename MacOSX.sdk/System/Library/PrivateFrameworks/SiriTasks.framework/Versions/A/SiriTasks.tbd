@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 2DD9DA03-12E7-39F5-BBB3-570248D62A92' ]
+uuids:           [ 'x86_64: 6812EAEE-24E1-312E-8561-A4773364A108' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SiriTasks.framework/Versions/A/SiriTasks
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _STStringFromGenericIntentResponseCode, _STWorkoutErrorDomain ]
@@ -12,10 +11,9 @@ exports:
                        _STGenericIntent, _STGenericIntentDateRange, _STGenericIntentGroup, 
                        _STGenericIntentHelper, _STGenericIntentLocation, _STGenericIntentPerson, 
                        _STGenericIntentRequest, _STGenericIntentResponse, _STGenericIntentTopic, 
-                       _STMapItem, _STMapViewport, _STMapViewportVertex, _STMediaChannel, 
-                       _STPromptManeuverRequest, _STReminderListObject, _STSendDraftMessageRequest, 
-                       _STSendEmailRequest, _STShowActivityRequest, _STShowAlarmAction, 
-                       _STShowChannelRequest, _STShowDailyWeatherForecastRequest, 
+                       _STMapItem, _STMapViewport, _STMapViewportVertex, _STPromptManeuverRequest, 
+                       _STReminderListObject, _STSendDraftMessageRequest, _STSendEmailRequest, 
+                       _STShowActivityRequest, _STShowAlarmAction, _STShowDailyWeatherForecastRequest, 
                        _STShowDraftMessageRequest, _STShowDraftMessageUsageResult, 
                        _STShowHourlyWeatherForecastRequest, _STShowMapPointRequest, 
                        _STShowMapsSearchResultsRequest, _STShowMessageRequest, _STShowStockOverviewRequest, 
@@ -23,7 +21,6 @@ exports:
                        _STShowWeatherForecastRequest, _STStartNavigationRequest, 
                        _STStartWorkoutRequest, _STStopNavigationRequest, _STStopwatchShowAndPerformStopwatchAction, 
                        _STTemperature, _STTimerShowTimerAndPerformAction, _STUpdateAlarmAction, 
-                       _STUpdateWatchListRequest, _STWatchFace, _STWeatherAttributes, 
-                       _STWeatherCurrentConditions, _STWeatherHourlyForecast, _STWeatherUnits, 
-                       _STWorkoutSetStateRequest ]
+                       _STWatchFace, _STWeatherAttributes, _STWeatherCurrentConditions, 
+                       _STWeatherHourlyForecast, _STWeatherUnits, _STWorkoutSetStateRequest ]
 ...

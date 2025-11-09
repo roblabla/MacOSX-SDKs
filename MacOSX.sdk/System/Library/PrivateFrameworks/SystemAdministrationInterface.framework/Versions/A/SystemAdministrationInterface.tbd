@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 90403A50-6311-3CFD-AF89-295C5FE9D58A' ]
+uuids:           [ 'x86_64: FD9B82B0-0240-3D39-A9D5-3A3A761D9341' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/SystemAdministrationInterface.framework/Versions/A/SystemAdministrationInterface
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _LAContextClass, _SecRequiresGracePeriod, _eEccountType, _isApplePayEnabled, 

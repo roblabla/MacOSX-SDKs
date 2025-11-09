@@ -3,6 +3,10 @@
  *  CoreVideo
  *
  *  Copyright (c) 2004-2014 Apple Inc. All rights reserved.
+ 
+ $ManualLog$
+	13jan2017 aballow
+	[28840287] Added CoreVideo Support for TiledCompressed IOSurfaces. <jsam>
  *
  */
  

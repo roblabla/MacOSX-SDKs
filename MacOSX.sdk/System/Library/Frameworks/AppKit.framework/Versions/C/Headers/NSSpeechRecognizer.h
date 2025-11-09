@@ -1,7 +1,7 @@
 /*
 	NSSpeechRecognizer.h
 	Application Kit
-	Copyright (c) 2003-2016, Apple Inc.
+	Copyright (c) 2003-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)startListening;
 - (void)stopListening;
 
-@property (nullable, assign) id<NSSpeechRecognizerDelegate> delegate;
+@property (nullable, weak) id<NSSpeechRecognizerDelegate> delegate;
 
 @property (nullable, copy) NSArray<NSString *> *commands;
 

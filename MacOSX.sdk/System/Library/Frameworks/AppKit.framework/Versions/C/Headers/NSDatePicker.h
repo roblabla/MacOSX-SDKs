@@ -1,7 +1,7 @@
 /*
 	NSDatePicker.h
 	Application Kit
-	Copyright (c) 2004-2016, Apple Inc.
+	Copyright (c) 2004-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -59,7 +59,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark *** Delegate ***
 
-@property (nullable, assign) id<NSDatePickerCellDelegate> delegate;
+@property (nullable, weak) id<NSDatePickerCellDelegate> delegate;
 
 @end
 

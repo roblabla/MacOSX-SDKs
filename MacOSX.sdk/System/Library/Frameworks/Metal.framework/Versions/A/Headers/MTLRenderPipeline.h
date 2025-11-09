@@ -12,6 +12,8 @@
 #import <Metal/MTLPixelFormat.h>
 #import <Metal/MTLArgument.h>
 #import <Metal/MTLFunctionConstantValues.h>
+#import <Metal/MTLPipeline.h>
+
 
 NS_ASSUME_NONNULL_BEGIN
 @class MTLVertexDescriptor;
@@ -32,10 +34,10 @@ typedef NS_ENUM(NSUInteger, MTLBlendFactor) {
     MTLBlendFactorOneMinusBlendColor = 12,
     MTLBlendFactorBlendAlpha = 13,
     MTLBlendFactorOneMinusBlendAlpha = 14,
-    MTLBlendFactorSource1Color              NS_AVAILABLE_MAC(10_12) = 15,
-    MTLBlendFactorOneMinusSource1Color      NS_AVAILABLE_MAC(10_12) = 16,
-    MTLBlendFactorSource1Alpha              NS_AVAILABLE_MAC(10_12) = 17,
-    MTLBlendFactorOneMinusSource1Alpha      NS_AVAILABLE_MAC(10_12) = 18,
+    MTLBlendFactorSource1Color              NS_AVAILABLE(10_12, NA) = 15,
+    MTLBlendFactorOneMinusSource1Color      NS_AVAILABLE(10_12, NA) = 16,
+    MTLBlendFactorSource1Alpha              NS_AVAILABLE(10_12, NA) = 17,
+    MTLBlendFactorOneMinusSource1Alpha      NS_AVAILABLE(10_12, NA) = 18,
 } NS_ENUM_AVAILABLE(10_11, 8_0);
 
 typedef NS_ENUM(NSUInteger, MTLBlendOperation) {
@@ -60,7 +62,7 @@ typedef NS_ENUM(NSUInteger, MTLPrimitiveTopologyClass) {
     MTLPrimitiveTopologyClassPoint = 1,
     MTLPrimitiveTopologyClassLine = 2,
     MTLPrimitiveTopologyClassTriangle = 3,
-} NS_ENUM_AVAILABLE_MAC(10_11);
+} NS_ENUM_AVAILABLE(10_11, NA);
 
 typedef NS_ENUM(NSUInteger, MTLTessellationPartitionMode) {
     MTLTessellationPartitionModePow2 = 0,
@@ -128,7 +130,6 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 
 @property (nullable, readonly) NSArray <MTLArgument *> *vertexArguments;
 @property (nullable, readonly) NSArray <MTLArgument *> *fragmentArguments;
-
 @end
 
 NS_CLASS_AVAILABLE(10_11, 8_0)
@@ -142,17 +143,20 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 @property (nullable, copy, nonatomic) MTLVertexDescriptor *vertexDescriptor;
 
 /* Rasterization and visibility state */
-@property (readwrite, nonatomic) NSUInteger sampleCount;
+@property (readwrite, nonatomic) NSUInteger sampleCount; //DEPRECATED - aliases rasterSampleCount property
+@property (readwrite, nonatomic) NSUInteger rasterSampleCount;
 @property (readwrite, nonatomic, getter = isAlphaToCoverageEnabled) BOOL alphaToCoverageEnabled;
 @property (readwrite, nonatomic, getter = isAlphaToOneEnabled) BOOL alphaToOneEnabled;
 @property (readwrite, nonatomic, getter = isRasterizationEnabled) BOOL rasterizationEnabled;
+
+
 
 @property (readonly) MTLRenderPipelineColorAttachmentDescriptorArray *colorAttachments;
 
 @property (nonatomic) MTLPixelFormat depthAttachmentPixelFormat;
 @property (nonatomic) MTLPixelFormat stencilAttachmentPixelFormat;
 
-@property (readwrite, nonatomic) MTLPrimitiveTopologyClass inputPrimitiveTopology NS_AVAILABLE_MAC(10_11);
+@property (readwrite, nonatomic) MTLPrimitiveTopologyClass inputPrimitiveTopology NS_AVAILABLE(10_11, NA);
 
 @property (readwrite, nonatomic) MTLTessellationPartitionMode tessellationPartitionMode NS_AVAILABLE(10_12, 10_0);
 @property (readwrite, nonatomic) NSUInteger maxTessellationFactor NS_AVAILABLE(10_12, 10_0);
@@ -161,6 +165,9 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 @property (readwrite, nonatomic) MTLTessellationControlPointIndexType tessellationControlPointIndexType NS_AVAILABLE(10_12, 10_0);
 @property (readwrite, nonatomic) MTLTessellationFactorStepFunction tessellationFactorStepFunction NS_AVAILABLE(10_12, 10_0);
 @property (readwrite, nonatomic) MTLWinding tessellationOutputWindingOrder NS_AVAILABLE(10_12, 10_0);
+
+@property (readonly) MTLPipelineBufferDescriptorArray *vertexBuffers NS_AVAILABLE(10_13, 11_0);
+@property (readonly) MTLPipelineBufferDescriptorArray *fragmentBuffers NS_AVAILABLE(10_13, 11_0);
 
 /*!
  @method reset
@@ -182,6 +189,9 @@ NS_AVAILABLE(10_11, 8_0)
 @property (nullable, readonly) NSString *label;
 @property (readonly) id <MTLDevice> device;
 
+
+
+
 @end
 
 NS_CLASS_AVAILABLE(10_11, 8_0)
@@ -194,6 +204,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
 - (void)setObject:(nullable MTLRenderPipelineColorAttachmentDescriptor *)attachment atIndexedSubscript:(NSUInteger)attachmentIndex;
 
 @end
+
 
 
 NS_ASSUME_NONNULL_END

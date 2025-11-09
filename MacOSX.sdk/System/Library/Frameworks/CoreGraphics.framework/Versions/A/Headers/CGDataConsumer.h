@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGDataConsumer *CGDataConsumerRef;
+typedef struct CF_BRIDGED_TYPE(id) CGDataConsumer *CGDataConsumerRef;
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFURL.h>

@@ -13,7 +13,7 @@
 
 /*!
     @header ICDeviceBrowser
-    @discussion The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer, shared by other computers, or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this.
+    @discussion The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this.
 */
 
 #import <ImageCaptureCore/ICDevice.h>
@@ -63,7 +63,7 @@ CF_ASSUME_NONNULL_BEGIN
   @abstract This message is sent when the sharing state of a device has changes.
   @discusson Any Image Capture client application can choose to share the device over the network using the sharing or webSharing facility in Image Capture.
 */
-- (void)deviceBrowser:( ICDeviceBrowser*)browser deviceDidChangeSharingState:( ICDevice*)device;
+- (void)deviceBrowser:( ICDeviceBrowser*)browser deviceDidChangeSharingState:( ICDevice*)device NS_DEPRECATED(10_4, 10_13, NA, NA);
 
 /*! 
   @method deviceBrowser:requestsSelectDevice:
@@ -85,7 +85,7 @@ CF_ASSUME_NONNULL_BEGIN
 //-------------------------------------------------------------------------------------------------------------- ICDeviceBrowser
 /*! 
   @class ICDeviceBrowser
-  @abstract The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer, shared by other computers, or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this.
+  @abstract The ICDeviceBrowser object is used to find devices such as digital cameras and scanners that are supported by Image Capture. These device may be directly attached to the USB or FireWire bus on the host computer, or available over a TCP/IP network. This object communicates with an Image Capture agent process asynchronously to accomplish this.
 */
 @interface ICDeviceBrowser : NSObject
 {

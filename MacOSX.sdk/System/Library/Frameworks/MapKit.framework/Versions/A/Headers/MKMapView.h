@@ -17,6 +17,7 @@
 
 @class MKUserLocation;
 @class MKMapCamera;
+@class MKClusterAnnotation;
 
 @protocol MKMapViewDelegate;
 
@@ -27,6 +28,9 @@ typedef NS_ENUM(NSInteger, MKUserTrackingMode) {
 	MKUserTrackingModeFollow, // the map follows the user's location
 	MKUserTrackingModeFollowWithHeading __TVOS_PROHIBITED, // the map follows the user's location and heading
 } NS_ENUM_AVAILABLE(NA, 5_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED;
+
+MK_EXTERN NSString * const MKMapViewDefaultAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
+MK_EXTERN NSString * const MKMapViewDefaultClusterAnnotationViewReuseIdentifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
 
 #if TARGET_OS_IPHONE
 NS_CLASS_AVAILABLE(NA, 3_0) __TVOS_AVAILABLE(9_2) __WATCHOS_PROHIBITED
@@ -133,8 +137,14 @@ NS_CLASS_AVAILABLE(10_9, NA)
 // Currently displayed view for an annotation; returns nil if the view for the annotation isn't being displayed.
 - (nullable MKAnnotationView *)viewForAnnotation:(id <MKAnnotation>)annotation;
 
-// Used by the delegate to acquire an already allocated annotation view, in lieu of allocating a new one.
+// Used by the delegate to acquire a reusable annotation view, or create a new view for registered class, in lieu of allocating a new one.
 - (nullable MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier;
+
+// Used by the delegate to acquire a reusable annotation view, or create a new view for registered class, in lieu of allocating a new one. Throws an exception if view could not be aquired.
+- (MKAnnotationView *)dequeueReusableAnnotationViewWithIdentifier:(NSString *)identifier forAnnotation:(id<MKAnnotation>)annotation;
+
+// Register a MKAnnotationView subclass to be instantiated when dequeueReusableAnnotationViewWithIdentifier: does not have a view to reuse.
+- (void)registerClass:(nullable Class)viewClass forAnnotationViewWithReuseIdentifier:(NSString *)identifier NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0);
 
 // Select or deselect a given annotation.  Asks the delegate for the corresponding annotation view if necessary.
 - (void)selectAnnotation:(id <MKAnnotation>)annotation animated:(BOOL)animated;
@@ -248,6 +258,9 @@ __WATCHOS_PROHIBITED
 // Prefer -mapView:didAddOverlayRenderers:
 - (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews NS_DEPRECATED_IOS(4_0, 7_0) __TVOS_PROHIBITED;
 #endif
+
+// Return nil for default MKClusterAnnotation, it is illegal to return a cluster annotation not containing the identical array of member annotations given.
+- (MKClusterAnnotation *)mapView:(MKMapView *)mapView clusterAnnotationForMemberAnnotations:(NSArray<id<MKAnnotation>>*)memberAnnotations NS_AVAILABLE(10_13, 11_0) __TVOS_AVAILABLE(11_0) __WATCHOS_PROHIBITED;
 
 @end
 

@@ -7,6 +7,7 @@
 #define _CORE_WLAN_UTIL_H_
 
 #import <Foundation/Foundation.h>
+#import <CoreWLAN/CoreWLANTypes.h>
 
 @class CWNetwork;
 

@@ -1,7 +1,7 @@
 /*
 	NSImageRep.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
@@ -13,12 +13,15 @@
 #import <AppKit/AppKitDefines.h>
 #import <AppKit/NSGraphics.h>
 #import <AppKit/NSColorSpace.h>
+#import <AppKit/NSPasteboard.h>
 #import <AppKit/NSUserInterfaceLayout.h>
 #import <ApplicationServices/ApplicationServices.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSPasteboard, NSGraphicsContext, NSURL;
+
+typedef NSString * NSImageHintKey NS_STRING_ENUM;
 
 /* NSImageRepMatchesDevice indicates the value is variable, depending on the output device. It can be passed in (or received back) as the value of bitsPerSample, pixelsWide, and pixelsHigh.
 */
@@ -46,7 +49,7 @@ typedef NS_ENUM(NSInteger, NSImageLayoutDirection) {
         unsigned int internalLayoutDirection:2;
 	unsigned int gsaved:14;
     } _repFlags;
-    NSString *_colorSpaceName;
+    NSColorSpaceName _colorSpaceName;
     NSSize _size;
     int _pixelsWide;
     int _pixelsHigh;
@@ -60,14 +63,14 @@ typedef NS_ENUM(NSInteger, NSImageLayoutDirection) {
 - (BOOL)draw;
 - (BOOL)drawAtPoint:(NSPoint)point;
 - (BOOL)drawInRect:(NSRect)rect;
-- (BOOL)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(nullable NSDictionary<NSString *, id> *)hints NS_AVAILABLE_MAC(10_6);
+- (BOOL)drawInRect:(NSRect)dstSpacePortionRect fromRect:(NSRect)srcSpacePortionRect operation:(NSCompositingOperation)op fraction:(CGFloat)requestedAlpha respectFlipped:(BOOL)respectContextIsFlipped hints:(nullable NSDictionary<NSImageHintKey, id> *)hints NS_AVAILABLE_MAC(10_6);
 
 /* Methods to return info about the image. NSImageRep provides storage for all of these; however, it's illegal to set them in some subclasses.
 */
 @property NSSize size;
 @property (getter=hasAlpha) BOOL alpha;
 @property (getter=isOpaque) BOOL opaque;
-@property (copy) NSString *colorSpaceName;
+@property (copy) NSColorSpaceName colorSpaceName;
 @property NSInteger bitsPerSample;
 @property NSInteger pixelsWide;
 @property NSInteger pixelsHigh;
@@ -80,9 +83,9 @@ typedef NS_ENUM(NSInteger, NSImageLayoutDirection) {
 */
 + (void)registerImageRepClass:(Class)imageRepClass;
 + (void)unregisterImageRepClass:(Class)imageRepClass;
-+ (NSArray<Class> *)registeredImageRepClasses;
+@property (class, readonly, copy) NSArray<Class> *registeredImageRepClasses;
 + (nullable Class)imageRepClassForFileType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageRepClassForType: instead");
-+ (nullable Class)imageRepClassForPasteboardType:(NSString *)type NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageRepClassForType: instead");
++ (nullable Class)imageRepClassForPasteboardType:(NSPasteboardType)type NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageRepClassForType: instead");
 + (nullable Class)imageRepClassForType:(NSString *)type NS_AVAILABLE_MAC(10_5);
 + (nullable Class)imageRepClassForData:(NSData *)data;
 	
@@ -93,21 +96,21 @@ typedef NS_ENUM(NSInteger, NSImageLayoutDirection) {
 /* Implemented by subclassers to indicate what data types they can deal with.
 */
 + (NSArray<NSString *> *)imageUnfilteredFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
-+ (NSArray<NSString *> *)imageUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
++ (NSArray<NSPasteboardType> *)imageUnfilteredPasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageUnfilteredTypes instead");
 
 /* These expand the unfiltered lists returned by imageUnfilteredFileTypes and imageUnfilteredPasteboardTypes.
 */
 + (NSArray<NSString *> *)imageFileTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
-+ (NSArray<NSString *> *)imagePasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
++ (NSArray<NSPasteboardType> *)imagePasteboardTypes NS_DEPRECATED_MAC(10_0, 10_10, "Use +imageTypes instead");
 
 
 /* Implemented by subclassers to indicate what UTI-identified data types they can deal with.
 */
-+ (NSArray<NSString *> *)imageUnfilteredTypes NS_AVAILABLE_MAC(10_5);
+@property (class, readonly, copy) NSArray<NSString *> *imageUnfilteredTypes NS_AVAILABLE_MAC(10_5);
 
 /* This expands the unfiltered list returned by imageUnfilteredTypes.
 */
-+ (NSArray<NSString *> *)imageTypes NS_AVAILABLE_MAC(10_5);
+@property (class, readonly, copy) NSArray<NSString *> *imageTypes NS_AVAILABLE_MAC(10_5);
 
 
 /* Convenience method: Checks to see if any of the types on the pasteboard can be understood by a registered imagerep class after filtering or if the pasteboard contains a filename that can be understood by a registered imagerep class after filtering. If sent to a subclass, does this for just the types understood by the subclass.
@@ -133,7 +136,7 @@ typedef NS_ENUM(NSInteger, NSImageLayoutDirection) {
  
  The CGImageRef returned is guaranteed to live as long as the current autorelease pool.  The caller should not release the CGImage.  This is the standard Cocoa convention, but people may not realize that it applies to CFTypes.
  */
-- (nullable CGImageRef)CGImageForProposedRect:(nullable NSRect *)proposedDestRect context:(nullable NSGraphicsContext *)context hints:(nullable NSDictionary<NSString *, id> *)hints NS_AVAILABLE_MAC(10_6) CF_RETURNS_NOT_RETAINED;
+- (nullable CGImageRef)CGImageForProposedRect:(nullable NSRect *)proposedDestRect context:(nullable NSGraphicsContext *)context hints:(nullable NSDictionary<NSImageHintKey, id> *)hints NS_AVAILABLE_MAC(10_6) CF_RETURNS_NOT_RETAINED;
 
 @end
 

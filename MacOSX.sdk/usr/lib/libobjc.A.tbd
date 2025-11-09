@@ -1,11 +1,10 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64, x86_64h ]
-uuids:           [ 'i386: 36E48972-15DA-37A0-939B-159296C7CD58', 'x86_64: 47104A1B-13E8-369F-BC36-27FF465809FD', 
-                   'x86_64h: F9AFE665-A3A2-3285-9495-19803A565861' ]
+uuids:           [ 'i386: A7D79F92-73BE-3A7C-BD27-30B91D517575', 'x86_64: 9A85D5B7-9095-326A-880B-F81766259EF6', 
+                   'x86_64h: 24CF160D-B78E-3BE8-A12E-A6D944D053DA' ]
 platform:        macosx
 install-name:    /usr/lib/libobjc.A.dylib
-current-version: 228.0
-objc-constraint: none
+current-version: 228
 exports:         
   - archs:           [ i386 ]
     symbols:         [ '$ld$hide$os10.0$.objc_class_name_NSObject', '$ld$hide$os10.1$.objc_class_name_NSObject', 
@@ -41,26 +40,27 @@ exports:
                        _OBJC_EHTYPE_id, ___objc_personality_v0, __objc_empty_vtable, 
                        __objc_getClassForTag, __objc_registerTaggedPointerClass, 
                        _gdb_objc_realized_classes, _objc_absolute_packed_isa_class_mask, 
-                       _objc_addExceptionHandler, _objc_begin_catch, _objc_debug_indexed_isa_index_mask, 
-                       _objc_debug_indexed_isa_index_shift, _objc_debug_indexed_isa_magic_mask, 
-                       _objc_debug_indexed_isa_magic_value, _objc_debug_isa_class_mask, 
-                       _objc_debug_isa_magic_mask, _objc_debug_isa_magic_value, _objc_debug_taggedpointer_classes, 
-                       _objc_debug_taggedpointer_ext_classes, _objc_debug_taggedpointer_ext_mask, 
-                       _objc_debug_taggedpointer_ext_payload_lshift, _objc_debug_taggedpointer_ext_payload_rshift, 
-                       _objc_debug_taggedpointer_ext_slot_mask, _objc_debug_taggedpointer_ext_slot_shift, 
-                       _objc_debug_taggedpointer_mask, _objc_debug_taggedpointer_payload_lshift, 
-                       _objc_debug_taggedpointer_payload_rshift, _objc_debug_taggedpointer_slot_mask, 
-                       _objc_debug_taggedpointer_slot_shift, _objc_ehtype_vtable, 
-                       _objc_end_catch, _objc_exception_rethrow, _objc_indexed_classes, 
-                       _objc_indexed_classes_count, _objc_msgLookup, _objc_msgLookupSuper2, 
-                       _objc_msgLookupSuper2_stret, _objc_msgLookup_fp2ret, _objc_msgLookup_fpret, 
-                       _objc_msgLookup_stret, _objc_msgSendSuper2, _objc_msgSendSuper2_debug, 
-                       _objc_msgSendSuper2_fixup, _objc_msgSendSuper2_stret, _objc_msgSendSuper2_stret_debug, 
-                       _objc_msgSendSuper2_stret_fixup, _objc_msgSend_debug, _objc_msgSend_fixup, 
-                       _objc_msgSend_fp2ret, _objc_msgSend_fp2ret_debug, _objc_msgSend_fp2ret_fixup, 
-                       _objc_msgSend_fpret_debug, _objc_msgSend_fpret_fixup, _objc_msgSend_noarg, 
-                       _objc_msgSend_stret_debug, _objc_msgSend_stret_fixup, _objc_readClassPair, 
-                       _objc_removeExceptionHandler, _objc_setExceptionMatcher, _objc_setExceptionPreprocessor, 
+                       _objc_addExceptionHandler, _objc_begin_catch, _objc_debug_class_rw_data_mask, 
+                       _objc_debug_indexed_isa_index_mask, _objc_debug_indexed_isa_index_shift, 
+                       _objc_debug_indexed_isa_magic_mask, _objc_debug_indexed_isa_magic_value, 
+                       _objc_debug_isa_class_mask, _objc_debug_isa_magic_mask, _objc_debug_isa_magic_value, 
+                       _objc_debug_taggedpointer_classes, _objc_debug_taggedpointer_ext_classes, 
+                       _objc_debug_taggedpointer_ext_mask, _objc_debug_taggedpointer_ext_payload_lshift, 
+                       _objc_debug_taggedpointer_ext_payload_rshift, _objc_debug_taggedpointer_ext_slot_mask, 
+                       _objc_debug_taggedpointer_ext_slot_shift, _objc_debug_taggedpointer_mask, 
+                       _objc_debug_taggedpointer_payload_lshift, _objc_debug_taggedpointer_payload_rshift, 
+                       _objc_debug_taggedpointer_slot_mask, _objc_debug_taggedpointer_slot_shift, 
+                       _objc_ehtype_vtable, _objc_end_catch, _objc_exception_rethrow, 
+                       _objc_indexed_classes, _objc_indexed_classes_count, _objc_msgLookup, 
+                       _objc_msgLookupSuper2, _objc_msgLookupSuper2_stret, _objc_msgLookup_fp2ret, 
+                       _objc_msgLookup_fpret, _objc_msgLookup_stret, _objc_msgSendSuper2, 
+                       _objc_msgSendSuper2_debug, _objc_msgSendSuper2_fixup, _objc_msgSendSuper2_stret, 
+                       _objc_msgSendSuper2_stret_debug, _objc_msgSendSuper2_stret_fixup, 
+                       _objc_msgSend_debug, _objc_msgSend_fixup, _objc_msgSend_fp2ret, 
+                       _objc_msgSend_fp2ret_debug, _objc_msgSend_fp2ret_fixup, _objc_msgSend_fpret_debug, 
+                       _objc_msgSend_fpret_fixup, _objc_msgSend_noarg, _objc_msgSend_stret_debug, 
+                       _objc_msgSend_stret_fixup, _objc_readClassPair, _objc_removeExceptionHandler, 
+                       _objc_setExceptionMatcher, _objc_setExceptionPreprocessor, 
                        _objc_setUncaughtExceptionHandler, _objc_terminate ]
     objc-ivars:      [ _NSObject.isa, _Object.isa ]
   - archs:           [ i386, x86_64, x86_64h ]
@@ -76,6 +76,7 @@ exports:
                        _NXResetMapTable, _NXStrHash, _NXStrIsEqual, _NXStrPrototype, 
                        _NXStrStructKeyPrototype, _NXStrValueMapPrototype, __class_getIvarMemoryManagement, 
                        __class_isFutureClass, __class_setIvarLayoutAccessor, __objcInit, 
+                       __objc_atfork_child, __objc_atfork_parent, __objc_atfork_prepare, 
                        __objc_autoreleasePoolPop, __objc_autoreleasePoolPrint, __objc_autoreleasePoolPush, 
                        __objc_deallocOnMainThreadHelper, __objc_empty_cache, __objc_flush_caches, 
                        __objc_getFreedObjectClass, __objc_init, __objc_msgForward, 

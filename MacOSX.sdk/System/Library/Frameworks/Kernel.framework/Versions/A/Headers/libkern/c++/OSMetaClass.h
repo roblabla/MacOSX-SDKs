@@ -916,12 +916,13 @@ public:
     * @abstract
     * Look up a metaclass in the run-time type information system.
     *
-    * @param name The name of the desired class's metaclass. 
+    * @param name The name of the desired class's metaclass.
     *
     * @result
     * A pointer to the metaclass object if found, <code>NULL</code> otherwise.
     */
     static const OSMetaClass * getMetaClassWithName(const OSSymbol * name);
+
 
 protected:
    /*!

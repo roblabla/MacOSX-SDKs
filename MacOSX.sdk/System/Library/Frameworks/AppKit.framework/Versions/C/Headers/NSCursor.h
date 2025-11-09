@@ -1,18 +1,19 @@
 /*
 	NSCursor.h
 	Application Kit
-	Copyright (c) 1994-2016, Apple Inc.
+	Copyright (c) 1994-2017, Apple Inc.
 	All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <AppKit/NSApplication.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class NSColor, NSEvent, NSImage;
 
-#define NSAppKitVersionNumberWithCursorSizeSupport 682.0
+static const NSAppKitVersion NSAppKitVersionNumberWithCursorSizeSupport = 682.0;
 
 @interface NSCursor : NSObject <NSCoding> {
     /*All instance variables are private*/
@@ -28,7 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /* Returns the application's current cursor. This is not necessarily the cursor that is currently being displayed on the system. If you need the currently displayed cursor, use currentSystemCursor.
 */
-+ (NSCursor *)currentCursor;
+@property (class, readonly, strong) NSCursor *currentCursor;
 
 /* Returns an NSCursor whose image and hot spot match those of the cursor that is currently being displayed on the system, regardless of which application set that cursor. For example, this allows an inactive application to examine the image and hot spot of a cursor set by the active application. This API doesn't care whether the cursor is hidden; it will return an NSCursor whose image matches the cursor you would see if it were visible.
  
@@ -36,26 +37,26 @@ NS_ASSUME_NONNULL_BEGIN
  
  This method returns nil if the currently displayed cursor could not be fetched.
  */
-+ (nullable NSCursor *)currentSystemCursor NS_AVAILABLE_MAC(10_6);
+@property (class, readonly, nullable, strong) NSCursor *currentSystemCursor NS_AVAILABLE_MAC(10_6);
 
-+ (NSCursor *)arrowCursor;
-+ (NSCursor *)IBeamCursor;
-+ (NSCursor *)pointingHandCursor;
-+ (NSCursor *)closedHandCursor;
-+ (NSCursor *)openHandCursor;
-+ (NSCursor *)resizeLeftCursor;
-+ (NSCursor *)resizeRightCursor;
-+ (NSCursor *)resizeLeftRightCursor;
-+ (NSCursor *)resizeUpCursor;
-+ (NSCursor *)resizeDownCursor;
-+ (NSCursor *)resizeUpDownCursor;
-+ (NSCursor *)crosshairCursor;
-+ (NSCursor *)disappearingItemCursor;
-+ (NSCursor *)operationNotAllowedCursor NS_AVAILABLE_MAC(10_5);
-+ (NSCursor *)dragLinkCursor NS_AVAILABLE_MAC(10_6);
-+ (NSCursor *)dragCopyCursor NS_AVAILABLE_MAC(10_6);
-+ (NSCursor *)contextualMenuCursor NS_AVAILABLE_MAC(10_6);
-+ (NSCursor *)IBeamCursorForVerticalLayout NS_AVAILABLE_MAC(10_7);
+@property (class, readonly, strong) NSCursor *arrowCursor;
+@property (class, readonly, strong) NSCursor *IBeamCursor;
+@property (class, readonly, strong) NSCursor *pointingHandCursor;
+@property (class, readonly, strong) NSCursor *closedHandCursor;
+@property (class, readonly, strong) NSCursor *openHandCursor;
+@property (class, readonly, strong) NSCursor *resizeLeftCursor;
+@property (class, readonly, strong) NSCursor *resizeRightCursor;
+@property (class, readonly, strong) NSCursor *resizeLeftRightCursor;
+@property (class, readonly, strong) NSCursor *resizeUpCursor;
+@property (class, readonly, strong) NSCursor *resizeDownCursor;
+@property (class, readonly, strong) NSCursor *resizeUpDownCursor;
+@property (class, readonly, strong) NSCursor *crosshairCursor;
+@property (class, readonly, strong) NSCursor *disappearingItemCursor;
+@property (class, readonly, strong) NSCursor *operationNotAllowedCursor NS_AVAILABLE_MAC(10_5);
+@property (class, readonly, strong) NSCursor *dragLinkCursor NS_AVAILABLE_MAC(10_6);
+@property (class, readonly, strong) NSCursor *dragCopyCursor NS_AVAILABLE_MAC(10_6);
+@property (class, readonly, strong) NSCursor *contextualMenuCursor NS_AVAILABLE_MAC(10_6);
+@property (class, readonly, strong) NSCursor *IBeamCursorForVerticalLayout NS_AVAILABLE_MAC(10_7);
 
 - (instancetype)initWithImage:(NSImage *)newImage hotSpot:(NSPoint)point NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -72,12 +73,12 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)push;
 - (void)pop;
 - (void)set;
-- (void)setOnMouseExited:(BOOL)flag;
-- (void)setOnMouseEntered:(BOOL)flag;
-@property (getter=isSetOnMouseExited, readonly) BOOL setOnMouseExited;
-@property (getter=isSetOnMouseEntered, readonly) BOOL setOnMouseEntered;
-- (void)mouseEntered:(NSEvent *)event;
-- (void)mouseExited:(NSEvent *)event;
+- (void)setOnMouseExited:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_13, "setOnMouseExited is unused and should not be called");
+- (void)setOnMouseEntered:(BOOL)flag NS_DEPRECATED_MAC(10_0, 10_13, "setOnMouseEntered is unused and should not be called");
+@property (getter=isSetOnMouseExited, readonly) BOOL setOnMouseExited NS_DEPRECATED_MAC(10_0, 10_13, "isSetOnMouseExited is unused");
+@property (getter=isSetOnMouseEntered, readonly) BOOL setOnMouseEntered NS_DEPRECATED_MAC(10_0, 10_13, "isSetOnMouseEntered is unused");
+- (void)mouseEntered:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "mouseEntered: is unused and should not be called");
+- (void)mouseExited:(NSEvent *)event NS_DEPRECATED_MAC(10_0, 10_13, "mouseExited: is unused and should not be called");
 
 @end
 

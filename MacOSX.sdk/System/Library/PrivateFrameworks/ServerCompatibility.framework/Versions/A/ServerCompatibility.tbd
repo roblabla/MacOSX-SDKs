@@ -1,9 +1,8 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: CD1B71EA-6D4F-337A-AB9E-F764E0442A80' ]
+uuids:           [ 'x86_64: 18DD3003-9B00-30B0-A7F8-279DE7AB082E' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/ServerCompatibility.framework/Versions/A/ServerCompatibility
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _SVCDSStdNotifyContactSearchPolicyChanged, _SVCDSStdNotifyDirectoryNodeAdded, 

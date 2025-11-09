@@ -1,13 +1,14 @@
 /*
     NSTouch.h
     Application Kit
-    Copyright (c) 2009-2016, Apple Inc.
+    Copyright (c) 2009-2017, Apple Inc.
     All rights reserved.
 */
 
 #import <Foundation/NSObjCRuntime.h>
 #import <Foundation/NSObject.h>
 #import <Foundation/NSGeometry.h>
+#import <Foundation/NSDate.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -53,9 +54,8 @@ NS_CLASS_AVAILABLE(10_6, NA)
     id _device;
     NSSize  _deviceSize;
     NSInteger _contextId;
+    NSTimeInterval _timestamp;
 #if ! __LP64__
-    id _reserved6;
-    id _reserved7;
     id _reserved8;
 #endif
 }

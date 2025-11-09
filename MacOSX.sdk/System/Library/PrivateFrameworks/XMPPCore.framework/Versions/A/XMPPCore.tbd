@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: A1E27B5C-F584-3FC2-9D9C-88217071FE6D' ]
+uuids:           [ 'x86_64: 5A3873FA-DAA4-3608-96A1-5DCFF15D0965' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/XMPPCore.framework/Versions/A/XMPPCore
-current-version: 800.0
-objc-constraint: none
+current-version: 800
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _AppleDoubleDataForFile, _AppleSingleDataForFile, _EFHBytesForHeader, 
@@ -44,10 +43,9 @@ exports:
                        _XMPPMultiUserChatExtension, _XMPPNode, _XMPPNodeStream, _XMPPNullNode, 
                        _XMPPPresenceExtension, _XMPPPresenceNode, _XMPPRawXMLContentNode, 
                        _XMPPRingBuffer, _XMPPRootNode, _XMPPRosterExtension, _XMPPSASLNode, 
-                       _XMPPServicePlugIn, _XMPPServiceRecordLookup, _XMPPSession, 
-                       _XMPPSharedServices, _XMPPSocketStream, _XMPPStreamManager, 
-                       _XMPPStreamNode, _XMPPStreamProtocol, _XMPPStreamSession, 
-                       _XMPPTLSNode, _XMPPTextContentNode, _XMPPToSuperParserContext, 
+                       _XMPPServiceRecordLookup, _XMPPSession, _XMPPSharedServices, 
+                       _XMPPSocketStream, _XMPPStreamManager, _XMPPStreamNode, _XMPPStreamProtocol, 
+                       _XMPPStreamSession, _XMPPTLSNode, _XMPPTextContentNode, _XMPPToSuperParserContext, 
                        _XMPPToSuper_Default_Frame, _XMPPToSuper_IMG_Frame, _XMPPTuneExtension, 
                        _XMPPXMLNode ]
     objc-ivars:      [ _EFHCataloguer._path, _EFHCataloguer._paths, _EFHCataloguer._totalBytes, 
@@ -171,16 +169,12 @@ exports:
                        _XMPPRosterExtension._cachedUnsubscriptionsToReply, _XMPPRosterExtension._cachedUpdateItems, 
                        _XMPPRosterExtension._delegate, _XMPPRosterExtension._rosterItems, 
                        _XMPPSASLNode._error, _XMPPSASLNode._mechanisms, _XMPPSASLNode._result, 
-                       _XMPPSASLNode._resultString, _XMPPServicePlugIn._application, 
-                       _XMPPServicePlugIn._cardExtension, _XMPPServicePlugIn._idleExtension, 
-                       _XMPPServicePlugIn._messageExtension, _XMPPServicePlugIn._presenceExtension, 
-                       _XMPPServicePlugIn._rosterExtension, _XMPPServicePlugIn._session, 
-                       _XMPPServiceRecordLookup._cfHost, _XMPPServiceRecordLookup._delegate, 
-                       _XMPPServiceRecordLookup._hostname, _XMPPSession._capabilityManager, 
-                       _XMPPSession._connection, _XMPPSession._connectionProps, _XMPPSession._delegate, 
-                       _XMPPSession._extensions, _XMPPSession._idToMessageMap, _XMPPSession._invisible, 
-                       _XMPPSession._lastMessageID, _XMPPSession._locationManager, 
-                       _XMPPSession._loginID, _XMPPSession._needToSendInvisible, 
+                       _XMPPSASLNode._resultString, _XMPPServiceRecordLookup._cfHost, 
+                       _XMPPServiceRecordLookup._delegate, _XMPPServiceRecordLookup._hostname, 
+                       _XMPPSession._capabilityManager, _XMPPSession._connection, 
+                       _XMPPSession._connectionProps, _XMPPSession._delegate, _XMPPSession._extensions, 
+                       _XMPPSession._idToMessageMap, _XMPPSession._invisible, _XMPPSession._lastMessageID, 
+                       _XMPPSession._locationManager, _XMPPSession._loginID, _XMPPSession._needToSendInvisible, 
                        _XMPPSession._needToSendStatus, _XMPPSession._priority, _XMPPSession._redirectPort, 
                        _XMPPSession._redirectServer, _XMPPSession._resource, _XMPPSession._serviceRecordLookup, 
                        _XMPPSession._serviceSession, _XMPPSession._state, _XMPPSession._status, 

@@ -3,7 +3,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2016 Apple Inc. All rights reserved.
+	Copyright 2009-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface AVMovieTrack : AVAssetTrack {
 @private
-    AVMovieTrackInternal    *_movieTrackInternal;
+    AVMovieTrackInternal    *_movieTrackInternal __attribute__((unused));
 }
 
 /*!
@@ -342,6 +342,23 @@ NS_CLASS_AVAILABLE_MAC(10_11)
 
 @end
 
+@interface AVMutableMovieTrack (AVMutableMovieTrackFormatDescriptions)
+
+/*!
+	@method			replaceFormatDescription:withFormatDescription:
+	@abstract		Replaces one of the receiver's format descriptions with another format description
+	@param			formatDescription
+					A CMFormatDescription occurring in the array returned by the -formatDescriptions method.
+	@param			newFormatDescription
+					A CMFormatDescription to replace the specified format description.
+	@discussion     You can use this method to make surgical changes to a track's format descriptions, such as adding format description extensions to a format description or changing the audio channel layout of an audio track. You should note that a format description can have extensions of type kCMFormatDescriptionExtension_VerbatimSampleDescription and kCMFormatDescriptionExtension_VerbatimISOSampleEntry; if you modify a copy of a format description, you should delete those extensions from the copy or your changes might be ignored.
+ 
+					An NSInvalidArgumentException will be thrown if the media type of the new format description does not match the media type of the receiver.
+*/
+- (void)replaceFormatDescription:(CMFormatDescriptionRef)formatDescription withFormatDescription:(CMFormatDescriptionRef)newFormatDescription API_AVAILABLE(macos(10.13)) API_UNAVAILABLE(ios, watchos, tvos);
+
+@end
+
 
 @interface AVMutableMovieTrack (AVMutableMovieTrackSampleLevelEditing)
 
@@ -429,7 +446,7 @@ NS_CLASS_AVAILABLE_MAC(10_10)
 @interface AVFragmentedMovieTrack : AVMovieTrack
 {
 @private
-	AVFragmentedMovieTrackInternal	*_fragmentedMovieTrack;
+	AVFragmentedMovieTrackInternal	*_fragmentedMovieTrack __attribute__((unused));
 }
 
 @end

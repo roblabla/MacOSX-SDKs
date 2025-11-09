@@ -31,7 +31,7 @@
 .Op Fl r Ar reason-string
 .Op Fl l Ar num-seconds
 .Op Fl n
-.Ar path-to-file
+.Op Ar path-to-file
 .\"
 .It Nm Cm symbolicate
 .Ar path-to-file
@@ -93,7 +93,7 @@ The minimum period allowed is 10 ms.
 .It Cm reset
 Remove all custom configuration of tailspin and reset to system default.
 .\" SAVE
-.It Cm save Oo Fl r Ar reason-string Oc Oo Fl l Ar num-seconds Oc Oo Fl n Oc Ar path-to-file
+.It Cm save Oo Fl r Ar reason-string Oc Oo Fl l Ar num-seconds Oc Oo Fl n Oc Oo Ar path-to-file Oc
 .Pp
 Save the current contents of the kernel trace buffer containing tailspin data to
 .Ar path-to-file .
@@ -134,11 +134,12 @@ The
 filter description enables events from all classes.
 .Sh VIEWING TAILSPIN DATA
 tailspin data can be viewed by
+.Xr ktrace 1 ,
 .Xr spindump 8 and
 .Xr fs_usage 1 .
 .Sh DIAGNOSTICS
 .Ex -std
 .Sh SEE ALSO
-.Xr trace 1 ,
+.Xr ktrace 1 ,
 .Xr fs_usage 1 ,
 .Xr spindump 8

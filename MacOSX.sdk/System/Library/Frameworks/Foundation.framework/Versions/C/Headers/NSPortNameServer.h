@@ -1,5 +1,5 @@
 /*	NSPortNameServer.h
-	Copyright (c) 1993-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1993-2017, Apple Inc. All rights reserved.
 */
 
 #import <Foundation/NSObject.h>
@@ -8,6 +8,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSPortNameServer : NSObject
 
@@ -24,6 +25,7 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSMachBootstrapServer : NSPortNameServer
 	// This port name server actually takes and
@@ -49,6 +51,7 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 #endif
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSMessagePortNameServer : NSPortNameServer
 	// This port name server actually takes and
@@ -70,6 +73,7 @@ NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 
 #if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || (TARGET_OS_WIN32)
 
+API_DEPRECATED("Use NSXPCConnection instead", macosx(10.0, 10.13), ios(2.0,11.0), watchos(2.0,4.0), tvos(9.0,11.0))
 NS_SWIFT_UNAVAILABLE("Use NSXPCConnection instead")
 @interface NSSocketPortNameServer : NSPortNameServer
 	// This port name server actually takes and

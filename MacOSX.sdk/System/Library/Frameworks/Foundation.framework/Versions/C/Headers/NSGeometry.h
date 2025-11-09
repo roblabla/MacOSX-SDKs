@@ -1,5 +1,5 @@
 /*	NSGeometry.h
-	Copyright (c) 1994-2016, Apple Inc. All rights reserved.
+	Copyright (c) 1994-2017, Apple Inc. All rights reserved.
 */
 
 #import <AvailabilityMacros.h>
@@ -129,7 +129,7 @@ typedef NS_OPTIONS(unsigned long long, NSAlignmentOptions) {
 FOUNDATION_EXPORT const NSPoint NSZeroPoint;
 FOUNDATION_EXPORT const NSSize NSZeroSize;
 FOUNDATION_EXPORT const NSRect NSZeroRect;
-FOUNDATION_EXPORT const NSEdgeInsets NSEdgeInsetsZero NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXPORT const NSEdgeInsets NSEdgeInsetsZero API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 NS_INLINE NSPoint NSMakePoint(CGFloat x, CGFloat y) {
     NSPoint p;
@@ -229,11 +229,11 @@ FOUNDATION_EXPORT BOOL NSEqualPoints(NSPoint aPoint, NSPoint bPoint);
 FOUNDATION_EXPORT BOOL NSEqualSizes(NSSize aSize, NSSize bSize);
 FOUNDATION_EXPORT BOOL NSEqualRects(NSRect aRect, NSRect bRect);
 FOUNDATION_EXPORT BOOL NSIsEmptyRect(NSRect aRect);
-FOUNDATION_EXPORT BOOL NSEdgeInsetsEqual(NSEdgeInsets aInsets, NSEdgeInsets bInsets) NS_AVAILABLE(10_10, 8_0);
+FOUNDATION_EXPORT BOOL NSEdgeInsetsEqual(NSEdgeInsets aInsets, NSEdgeInsets bInsets) API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 FOUNDATION_EXPORT NSRect NSInsetRect(NSRect aRect, CGFloat dX, CGFloat dY);
 FOUNDATION_EXPORT NSRect NSIntegralRect(NSRect aRect);
-FOUNDATION_EXPORT NSRect NSIntegralRectWithOptions(NSRect aRect, NSAlignmentOptions opts) NS_AVAILABLE(10_7, 5_0);
+FOUNDATION_EXPORT NSRect NSIntegralRectWithOptions(NSRect aRect, NSAlignmentOptions opts) API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 FOUNDATION_EXPORT NSRect NSUnionRect(NSRect aRect, NSRect bRect);
 FOUNDATION_EXPORT NSRect NSIntersectionRect(NSRect aRect, NSRect bRect);
 FOUNDATION_EXPORT NSRect NSOffsetRect(NSRect aRect, CGFloat dX, CGFloat dY);
@@ -255,12 +255,12 @@ FOUNDATION_EXPORT NSRect NSRectFromString(NSString *aString);
 + (NSValue *)valueWithPoint:(NSPoint)point;
 + (NSValue *)valueWithSize:(NSSize)size;
 + (NSValue *)valueWithRect:(NSRect)rect;
-+ (NSValue *)valueWithEdgeInsets:(NSEdgeInsets)insets NS_AVAILABLE(10_10, 8_0);
++ (NSValue *)valueWithEdgeInsets:(NSEdgeInsets)insets API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 @property (readonly) NSPoint pointValue;
 @property (readonly) NSSize sizeValue;
 @property (readonly) NSRect rectValue;
-@property (readonly) NSEdgeInsets edgeInsetsValue NS_AVAILABLE(10_10, 8_0);
+@property (readonly) NSEdgeInsets edgeInsetsValue API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 @end
 

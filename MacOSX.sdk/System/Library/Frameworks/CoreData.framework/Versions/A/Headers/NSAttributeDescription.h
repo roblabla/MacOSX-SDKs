@@ -1,7 +1,7 @@
 /*
     NSAttributeDescription.h
     Core Data
-    Copyright (c) 2004-2016, Apple Inc.
+    Copyright (c) 2004-2017, Apple Inc.
     All rights reserved.
 */
 
@@ -27,6 +27,8 @@ typedef NS_ENUM(NSUInteger, NSAttributeType) {
     NSBooleanAttributeType = 800,
     NSDateAttributeType = 900,
     NSBinaryDataAttributeType = 1000,
+    NSUUIDAttributeType API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = 1100,
+    NSURIAttributeType API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0), watchos(4.0)) = 1200,
     NSTransformableAttributeType API_AVAILABLE(macosx(10.5), ios(3.0)) = 1800, // If your attribute is of NSTransformableAttributeType, the attributeValueClassName must be set or attribute value class must implement NSCopying.
     NSObjectIDAttributeType API_AVAILABLE(macosx(10.6), ios(3.0)) = 2000
  };

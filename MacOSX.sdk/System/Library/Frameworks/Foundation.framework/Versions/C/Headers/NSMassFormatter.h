@@ -1,5 +1,5 @@
 /*      NSMassFormatter.h
-        Copyright (c) 2014-2016, Apple Inc. All rights reserved.
+        Copyright (c) 2014-2017, Apple Inc. All rights reserved.
  */
 
 #import <Foundation/NSFormatter.h>
@@ -14,7 +14,7 @@ typedef NS_ENUM(NSInteger, NSMassFormatterUnit) {
     NSMassFormatterUnitOunce = (6 << 8) + 1,
     NSMassFormatterUnitPound = (6 << 8) + 2,
     NSMassFormatterUnitStone = (6 << 8) + 3,
-} NS_ENUM_AVAILABLE(10_10, 8_0);
+} API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 
 NS_CLASS_AVAILABLE(10_10, 8_0)
 @interface NSMassFormatter : NSFormatter {

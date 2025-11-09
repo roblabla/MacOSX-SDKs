@@ -1,10 +1,9 @@
 --- !tapi-tbd-v2
 archs:           [ i386, x86_64 ]
-uuids:           [ 'i386: FD8240FE-CA8D-3962-B7F2-4C0DBB8C20FA', 'x86_64: DEB42099-6927-332C-8D3E-D45096318D25' ]
+uuids:           [ 'i386: D11AF4FA-7433-3186-B3BE-49F39B06E66F', 'x86_64: 0DD973CF-4742-3B88-B35D-0AD97C110C0A' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/FaceCore.framework/Versions/A/FaceCore
 current-version: 3.3.2
-objc-constraint: none
 exports:         
   - archs:           [ i386, x86_64 ]
     symbols:         [ _FCRDetectionParamDetectionRegion, _FCRDetectionParamEnhancedEyesAndMouthLocalization, 

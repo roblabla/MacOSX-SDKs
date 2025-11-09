@@ -863,7 +863,8 @@ AudioQueueNewOutputWithDispatchQueue(AudioQueueRef __nullable * __nonnull outAQ,
                                     const AudioStreamBasicDescription *inFormat,
                                     UInt32                          inFlags,
                                     dispatch_queue_t                inCallbackDispatchQueue,
-                                    AudioQueueOutputCallbackBlock   inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_10_0);
+                                    AudioQueueOutputCallbackBlock   inCallbackBlock)
+										API_AVAILABLE(macos(10.6), ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
     @function   AudioQueueNewInputWithDispatchQueue
@@ -897,7 +898,8 @@ AudioQueueNewInputWithDispatchQueue(AudioQueueRef __nullable * __nonnull outAQ,
                                     const AudioStreamBasicDescription *inFormat,
                                     UInt32                          inFlags,
                                     dispatch_queue_t                inCallbackDispatchQueue,
-                                    AudioQueueInputCallbackBlock    inCallbackBlock)        __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_10_0);
+                                    AudioQueueInputCallbackBlock    inCallbackBlock)
+										API_AVAILABLE(macos(10.6), ios(10.0), watchos(3.0), tvos(10.0));
 #endif // defined(__BLOCKS__)
 
 /*!

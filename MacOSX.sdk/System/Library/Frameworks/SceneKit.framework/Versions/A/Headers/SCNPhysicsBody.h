@@ -1,7 +1,7 @@
 //
 //  SCNPhysicsBody.h
 //
-//  Copyright (c) 2014-2016 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2017 Apple Inc. All rights reserved.
 //
 
 #import <SceneKit/SceneKitTypes.h>
@@ -15,20 +15,20 @@ typedef NS_ENUM(NSInteger, SCNPhysicsBodyType) {
 	SCNPhysicsBodyTypeStatic,
 	SCNPhysicsBodyTypeDynamic,
 	SCNPhysicsBodyTypeKinematic
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 //Collision default category
 typedef NS_OPTIONS(NSUInteger, SCNPhysicsCollisionCategory) {
 	SCNPhysicsCollisionCategoryDefault = 1 << 0,    // default collision group for dynamic and kinematic objects
 	SCNPhysicsCollisionCategoryStatic  = 1 << 1,    // default collision group for static objects
 	SCNPhysicsCollisionCategoryAll     = ~0UL       // default for collision mask
-} API_AVAILABLE(macosx(10.10));
+} API_AVAILABLE(macos(10.10));
 
 /*!
  @class SCNPhysicsBody
  @abstract The SCNPhysicsBody class describes the physics properties (such as mass, friction...) of a node.
  */
-API_AVAILABLE(macosx(10.10))
+API_AVAILABLE(macos(10.10))
 @interface SCNPhysicsBody : NSObject <NSCopying, NSSecureCoding>
 
 //Creates an instance of a static body with default properties.
@@ -50,10 +50,10 @@ API_AVAILABLE(macosx(10.10))
 @property(nonatomic) CGFloat mass;
 
 //Specifies the moment of inertia of the body as a vector in 3D. Disable usesDefaultMomentOfInertia for this value to be used instead of the default moment of inertia that is calculated from the shape geometry.
-@property(nonatomic) SCNVector3 momentOfInertia API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic) SCNVector3 momentOfInertia API_AVAILABLE(macos(10.11), ios(9.0));
 
 //Permits to disable the use of the default moment of inertia in favor of the one stored in momentOfInertia.
-@property(nonatomic) BOOL usesDefaultMomentOfInertia API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic) BOOL usesDefaultMomentOfInertia API_AVAILABLE(macos(10.11), ios(9.0));
 
 // Specifies the charge on the body. Charge determines the degree to which a body is affected by
 // electric and magnetic fields. Note that this is a unitless quantity, it is up to the developer to
@@ -106,10 +106,10 @@ API_AVAILABLE(macosx(10.10))
 
 //A mask that defines which categories of bodies cause intersection notifications with this physics body. Defaults to 0.
 //On iOS 8 and macOS 10.10 and lower the intersection notifications are always sent when a collision occurs.
-@property(nonatomic) NSUInteger contactTestBitMask API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic) NSUInteger contactTestBitMask API_AVAILABLE(macos(10.11), ios(9.0));
 
 //If set to YES this node will be affected by gravity. The default is YES.
-@property(nonatomic, getter=isAffectedByGravity) BOOL affectedByGravity API_AVAILABLE(macosx(10.11), ios(9.0));
+@property(nonatomic, getter=isAffectedByGravity) BOOL affectedByGravity API_AVAILABLE(macos(10.11), ios(9.0));
 
 //Applies a linear force in the specified direction. The linear force is applied on the center of mass of the receiver. If impulse is set to YES then the force is applied for just one frame, otherwise it applies a continuous force.
 - (void)applyForce:(SCNVector3)direction impulse:(BOOL)impulse;
@@ -117,7 +117,7 @@ API_AVAILABLE(macosx(10.10))
 //Applies a linear force with the specified position and direction. The position is relative to the node that owns the physics body.
 - (void)applyForce:(SCNVector3)direction atPosition:(SCNVector3)position impulse:(BOOL)impulse;
 
-//Applies an angular force (torque). If impulse is set to YES then the force is applied for just one frame, otherwise it applies a continuous force.
+//Applies an angular force (torque). If impulse is set to YES then the force is applied for just one frame, otherwise it applies a continuous force. The torque is specified as an axis angle.
 - (void)applyTorque:(SCNVector4)torque impulse:(BOOL)impulse;
 
 //Clears the forces applied one the receiver.

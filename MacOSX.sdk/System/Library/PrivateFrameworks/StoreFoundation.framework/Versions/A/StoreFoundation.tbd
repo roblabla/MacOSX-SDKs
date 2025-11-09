@@ -1,17 +1,18 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: E69B2CA5-B8B7-3C45-A417-0B7EACAF35A8' ]
+uuids:           [ 'x86_64: 565F6A62-3740-31D7-A2E8-E0811D164037' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/StoreFoundation.framework/Versions/A/StoreFoundation
-current-version: 379.0
-objc-constraint: none
+current-version: 379
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _CKAppStoreVersion, _CKCurrentUserIsGuestUser, _CKDefaultDownloadLocation, 
-                       _CKDownloadLocationForAdamID, _CKHumanReadableSerialNumber, 
-                       _CKIconLocationForAdamID, _CKInstallLocationForAdamID, _CKIsAppleInternal, 
-                       _CKIsClientAppAllowedToLaunch, _CKIsDarkWake, _CKLocalizedStringFromTableInBundle, 
-                       _CKLogASLMessage, _CKMakeDownloadLocationForAdamID, _CKNonSandboxHomeDirectory, 
+    symbols:         [ _CKAppStoreVersion, _CKConfiguratorAppVersion, _CKCurrentUserIsGuestUser, 
+                       _CKDefaultDownloadLocation, _CKDownloadLocationForAdamID, 
+                       _CKDownloadLocationForIdentifier, _CKHumanReadableSerialNumber, 
+                       _CKIconLocationForAdamID, _CKIconLocationForIdentifier, _CKInstallLocationForAdamID, 
+                       _CKIsAppleInternal, _CKIsClientAppAllowedToLaunch, _CKIsDarkWake, 
+                       _CKLocalizedStringFromTableInBundle, _CKLogASLMessage, _CKMakeDownloadLocationForAdamID, 
+                       _CKMakeDownloadLocationForIdentifier, _CKNonSandboxHomeDirectory, 
                        _CKOnRecoveryPartition, _CKPreflightLocationForAdamID, _CKProgressDownloadBytesDownloadedKey, 
                        _CKProgressDownloadTotalSizeKey, _CKProgressProductBundleIdentifierKey, 
                        _CKProgressProductInstallPathKey, _CKProgressProductItemIdentifierKey, 

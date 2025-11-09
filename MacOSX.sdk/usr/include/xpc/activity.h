@@ -174,9 +174,7 @@ const char *XPC_ACTIVITY_REQUIRE_HDD_SPINNING; // bool
 
 /*!
  * @define XPC_TYPE_ACTIVITY
- * A type representing a connection to a named service. This connection is
- * bidirectional and can be used to both send and receive messages. A
- * connection carries the credentials of the remote service provider.
+ * A type representing the XPC activity object.
  */
 #define XPC_TYPE_ACTIVITY (&_xpc_type_activity)
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
@@ -399,7 +397,7 @@ xpc_activity_set_state(xpc_activity_t activity, xpc_activity_state_t state);
  * Returns true if the activity should be deferred.
  */
 __OSX_AVAILABLE_STARTING(__MAC_10_9, __IPHONE_7_0)
-XPC_EXPORT XPC_NONNULL1
+XPC_EXPORT XPC_WARN_RESULT XPC_NONNULL1
 bool
 xpc_activity_should_defer(xpc_activity_t activity);
 
@@ -412,7 +410,7 @@ xpc_activity_should_defer(xpc_activity_t activity);
  * @discussion
  * A dynamically registered activity will be deleted in response to this call.
  * Statically registered activity (from a launchd property list) will be
- * reverted to its original criteria if any modifications were made.
+ * deleted until the job is next loaded (e.g. at next boot).
  *
  * Unregistering an activity has no effect on any outstanding xpc_activity_t
  * objects or any currently executing xpc_activity_handler_t blocks; however,

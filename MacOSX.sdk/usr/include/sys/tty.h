@@ -149,5 +149,4 @@ struct speedtab {
 #define	TTY_BI		0x08000000	/* Break condition */
 
 
-
 #endif /* !_SYS_TTY_H_ */

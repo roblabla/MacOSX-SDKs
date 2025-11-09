@@ -26,6 +26,7 @@ struct SCNSceneBuffer {
     float4x4    projectionTransform;
     float4x4    viewProjectionTransform;
     float4x4    viewToCubeTransform; // transform from view space to cube texture space (canonical Y Up space)
+    float4x4    lastFrameViewProjectionTransform;
     float4      ambientLightingColor;
     float4		fogColor;
     float3		fogParameters; // x:-1/(end-start) y:1-start*x z:exp
@@ -34,10 +35,14 @@ struct SCNSceneBuffer {
     float       sinTime;
     float       cosTime;
     float       random01;
+    float       motionBlurIntensity;
     // new in macOS 10.12 and iOS 10
     float       environmentIntensity;
     float4x4    inverseProjectionTransform;
     float4x4    inverseViewProjectionTransform;
+    // new in macOS 10.13 and iOS 11
+    float2      nearFar; // x: near, y: far
+    float4      viewportSize; // xy:size, zw:size / tan(fov/2)
 };
 
 // In custom shaders or in shader modifiers, you also have access to node relative information.

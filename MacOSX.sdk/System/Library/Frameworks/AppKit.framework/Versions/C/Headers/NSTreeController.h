@@ -1,7 +1,7 @@
 /*
 	NSTreeController.h
 	Application Kit
-	Copyright (c) 2003-2016, Apple Inc.
+	Copyright (c) 2003-2017, Apple Inc.
 	All rights reserved.
  */
 
@@ -45,8 +45,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)rearrangeObjects; // triggers rearranging the content objects for the user interface, including sorting (and filtering if provided by subclasses); subclasses can invoke this method if any parameter that affects the arranged objects changes
 
-// proxy for the root tree node responds to -childNodes and -descendantNodeAtIndexPath:(NSIndexPath *)indexPath
-@property (readonly, strong) id arrangedObjects; 
+@property (readonly, strong) NSTreeNode *arrangedObjects; // proxy for the root tree node
 @property (nullable, copy) NSString *childrenKeyPath; // key used to find the children of a model object.
 @property (nullable, copy) NSString *countKeyPath; // optional for performance
 @property (nullable, copy) NSString *leafKeyPath; // optional. inserting/adding children disabled for leaf nodes
@@ -55,11 +54,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, strong) id content;
 
-- (void)add:(nullable id)sender;    // adds a new sibling node to the end of the selected objects
-- (void)remove:(nullable id)sender; 	//removes the currently selected objects from the tree
-- (void)addChild:(nullable id)sender;    // adds a new child node to the end of the selected objects
-- (void)insert:(nullable id)sender;    // inserts a peer in front of first selected node
-- (void)insertChild:(nullable id)sender;    // inserts a new first child into the children array of the first selected node
+- (IBAction)add:(nullable id)sender;    // adds a new sibling node to the end of the selected objects
+- (IBAction)remove:(nullable id)sender; 	//removes the currently selected objects from the tree
+- (IBAction)addChild:(nullable id)sender;    // adds a new child node to the end of the selected objects
+- (IBAction)insert:(nullable id)sender;    // inserts a peer in front of first selected node
+- (IBAction)insertChild:(nullable id)sender;    // inserts a new first child into the children array of the first selected node
 
 @property (readonly) BOOL canInsert;
 @property (readonly) BOOL canInsertChild;

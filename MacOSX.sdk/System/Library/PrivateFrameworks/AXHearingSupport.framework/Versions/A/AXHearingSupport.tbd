@@ -1,15 +1,15 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: F55FA9B9-2C66-3055-8F65-94BA1D75E9A3' ]
+uuids:           [ 'x86_64: D3A8EF1E-FE3D-38E8-B790-F69E69A84C0B' ]
 platform:        macosx
 install-name:    /System/Library/PrivateFrameworks/AXHearingSupport.framework/Versions/A/AXHearingSupport
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
-    symbols:         [ _AXCloudKitContainerIdentifier, _AXCloudKitErrorDomain, _AXCloudKitMaxRecordDataBytes, 
-                       _AXCloudKitPushTopic, _AXCloudKitServerChangeTokenKey, _AXCloudKitZoneName, 
-                       _AXColorizeFormatLog, _AXHAMessageKeyIdentifier, _AXHAMessageKeyPayload, 
-                       _AXHANULL, _AXHATrustChainReady, _AXHearingAidAudioRoutesChangedNotification, 
+    symbols:         [ _AXCloudKitContainerIdentifier, _AXCloudKitErrorDomain, _AXCloudKitFinishedSchemaCheckKey, 
+                       _AXCloudKitMaxRecordDataBytes, _AXCloudKitPushTopic, _AXCloudKitServerChangeTokenKey, 
+                       _AXCloudKitZoneName, _AXColorizeFormatLog, _AXHAMessageKeyIdentifier, 
+                       _AXHAMessageKeyPayload, _AXHANULL, _AXHATrustChainReady, _AXHearingAidAudioRoutesChangedNotification, 
+                       _AXHearingAidControlCenterBundleID, _AXHearingAidControlCenterPath, 
                        _AXHearingAidServerName, _AXHearingAidServerReadyNotification, 
                        _AXLEHIAuthServiceUUIDString, _AXLEHIAuthVersionCharacteristicUUIDString, 
                        _AXLEHIDISFirmwareVersionCharacteristicUUIDString, _AXLEHIDISHardwareVersionCharacteristicUUIDString, 
@@ -23,8 +23,8 @@ exports:
                        _AXTTYMessageKeyConversationUpdates, _AXTTYMessageKeyDeleteAction, 
                        _AXTTYMessageKeyReadAction, _AXTTYMessageKeyResult, _AXTTYMessageKeySettingsKey, 
                        _AXTTYMessageKeyUUID, _AXTTYMessageKeyValue, _AXTTYMessageKeyWriteAction, 
-                       _AXTTYPreferredTransportMethodChangedNotification, _AXWillLogDebugWithFacility, 
-                       _AXWillLogInfoWithFacility, _HAPerformBlockAsynchronouslyOnMainThread, 
+                       _AXTTYPreferredTransportMethodChangedNotification, _AXUnitTestingException, 
+                       _AXWillLogDebugWithFacility, _AXWillLogInfoWithFacility, _HAPerformBlockAsynchronouslyOnMainThread, 
                        _HAPerformBlockOnMainThread, _HAPerformBlockOnMainThreadAfterDelay, 
                        _HAPerformBlockSynchronouslyOnMainThread, __AXAssert, __AXLogWithFacility, 
                        __AXLogWithFacilityV, __AXStringForArgs, _accessibilityHearingAidSupportBundle, 

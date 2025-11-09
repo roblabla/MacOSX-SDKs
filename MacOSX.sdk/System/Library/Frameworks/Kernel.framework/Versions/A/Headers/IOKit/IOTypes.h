@@ -181,7 +181,8 @@ enum {
     kIOWriteThruCache		= 2,
     kIOCopybackCache		= 3,
     kIOWriteCombineCache	= 4,
-    kIOCopybackInnerCache	= 5
+    kIOCopybackInnerCache	= 5,
+    kIOPostedWrite		= 6
 };
 
 // IOMemory mapping options
@@ -196,6 +197,7 @@ enum {
     kIOMapCopybackCache		= kIOCopybackCache      << kIOMapCacheShift,
     kIOMapWriteCombineCache	= kIOWriteCombineCache  << kIOMapCacheShift,
     kIOMapCopybackInnerCache	= kIOCopybackInnerCache << kIOMapCacheShift,
+    kIOMapPostedWrite		= kIOPostedWrite	<< kIOMapCacheShift,
 
     kIOMapUserOptionsMask	= 0x00000fff,
 

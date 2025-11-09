@@ -1,22 +1,19 @@
 --- !tapi-tbd-v2
 archs:           [ x86_64 ]
-uuids:           [ 'x86_64: 4276844A-54BD-3820-9FCE-557B6047BC54' ]
+uuids:           [ 'x86_64: ACBB8114-C8BD-37F6-9465-F16807D70C51' ]
 platform:        macosx
 install-name:    /System/Library/Frameworks/NotificationCenter.framework/Versions/A/NotificationCenter
-objc-constraint: none
 exports:         
   - archs:           [ x86_64 ]
     symbols:         [ _NCActiveDisplayID, _NCConsoleConnected, _NCDuration, _NCDurationCurrent, 
                        _NCEncodingDecodeNotification, _NCEncodingEncodeNotification, 
                        _NCFontWithName, _NCInitValueTransformers, _NCIsSystemRTL, 
-                       _NCLogView, _NCLogViewAutolayout, _NCMainDisplayNSScreen, 
-                       _NCMainThreadImageCache, _NCMaterialControlColor, _NCMaterialGetMediumLightAppearance, 
-                       _NCMaterialMakeCardLayers, _NCMaterialRegisterReducedTransparencyDelegate, 
-                       _NCMaterialUnRegisterReducedTransparencyDelegate, _NCNSScreenFromCGDisplayID, 
-                       _NCPerformWithAnimation, _NCPerformWithAnimationWithDuration, 
+                       _NCMainDisplayNSScreen, _NCMainThreadImageCache, _NCMaterialControlColor, 
+                       _NCMaterialGetMediumLightAppearance, _NCMaterialMakeCardLayers, 
+                       _NCMaterialRegisterReducedTransparencyDelegate, _NCMaterialUnRegisterReducedTransparencyDelegate, 
+                       _NCNSScreenFromCGDisplayID, _NCPerformWithAnimation, _NCPerformWithAnimationWithDuration, 
                        _NCPerformWithAnimationWithDurationAndCompletion, _NCPerformWithoutAnimation, 
-                       _NCPostDistributedNotification, _NCPostNotification, _NCRLogCanLog, 
-                       _NCRLogDebug, _NCRLogError, _NCRLogForceDisabled, _NCRLogForceEnabled, 
+                       _NCPostDistributedNotification, _NCPostNotification, _NCRLogDebugCheckEnabled, 
                        _NCRandomInteger, _NCRemoveCocoaBindingsForObject, _NCRemoveDistributedNotificationObserver, 
                        _NCRemoveNotificationHandler, _NCRemoveNotificationObserver, 
                        _NCSafeDecodeNotificationFromDictionary, _NCSafeDecodeNotificationsArray, 
@@ -36,12 +33,11 @@ exports:
                        _NCWidgetHostVerticalMargin, _NCWidgetHostWidth, _NotificationCenterVersionNumber, 
                        _NotificationCenterVersionString, __NCSetDefaultSharedAnimationParameters, 
                        __NCWeatherDebugStringForConditions, __NCWeatherImageForConditions, 
-                       __NCWeatherImageSunrise, __NCWeatherImageSunset, _cgImageFromMainBundle, 
-                       _kNCRemotePlugInExtensionInvalidatedNotification, _kNCRemotePlugInManagerNotificationExtension, 
-                       _kNCRemotePlugInManagerWidgetExtension, _kNotificationServiceBackgroundStyleKey, 
-                       _kNotificationServiceExpandedActionTitleKey, _kNotificationServiceFullCustomizationKey, 
-                       _kNotificationServicePinnedKey, _sNCBundleForPreferences, 
-                       _sNCShowDebugLogsKey ]
+                       __NCWeatherImageSunrise, __NCWeatherImageSunset, __OSLogRemoteViewLogging, 
+                       _cgImageFromMainBundle, _gNCRLogDebugEnabled, _kNCRemotePlugInExtensionInvalidatedNotification, 
+                       _kNCRemotePlugInManagerNotificationExtension, _kNCRemotePlugInManagerWidgetExtension, 
+                       _kNotificationServiceBackgroundStyleKey, _kNotificationServiceExpandedActionTitleKey, 
+                       _kNotificationServiceFullCustomizationKey, _kNotificationServicePinnedKey ]
     objc-classes:    [ _NCJSONTransformer, _NCLineView, _NCLinearDodgeImageView, 
                        _NCListItemViewController, _NCListViewDeleteButton, _NCMaterialLayer, 
                        _NCNotificationExtensionContext, _NCNotificationExtensionHostContext, 

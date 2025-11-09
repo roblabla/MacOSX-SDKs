@@ -42,6 +42,16 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 */
 @property (nonatomic, readonly, copy) NSArray<AVCompositionTrackSegment *> *segments;
 
+/*!
+	@method			segmentForTrackTime:
+	@abstract		Supplies the AVCompositionTrackSegment from the segments array with a target timeRange that either contains the specified track time or is the closest to it among the target timeRanges of the track's segments.
+	@param			trackTime
+					The trackTime for which an AVCompositionTrackSegment is requested.
+	@result			An AVCompositionTrackSegment.
+	@discussion		If the trackTime does not map to a sample presentation time (e.g. it's outside the track's timeRange), the segment closest in time to the specified trackTime is returned. 
+ */
+- (nullable AVCompositionTrackSegment *)segmentForTrackTime:(CMTime)trackTime;
+
 @end
 
 
@@ -57,7 +67,7 @@ NS_CLASS_AVAILABLE(10_7, 4_0)
 @interface AVMutableCompositionTrack : AVCompositionTrack
 {
 @private
-    AVMutableCompositionTrackInternal    *_mutablePriv;
+    AVMutableCompositionTrackInternal    *_mutablePriv __attribute__((unused));
 }
 
 /*!

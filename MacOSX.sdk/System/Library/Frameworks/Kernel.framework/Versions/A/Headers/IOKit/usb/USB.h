@@ -646,6 +646,22 @@ typedef IOUSBDescriptorHeader *			IOUSBDescriptorHeaderPtr;
     typedef struct IOUSBDeviceCapabilityBillboard		IOUSBDeviceCapabilityBillboard;
     typedef IOUSBDeviceCapabilityBillboard *			IOUSBDeviceCapabilityBillboardPtr;
 
+    /*!
+     @typedef IOUSBDeviceCapabilityBillboardAltMode
+     @discussion Device Capability Billboard Alternate mode
+     */
+    struct IOUSBDeviceCapabilityBillboardAltMode
+    {
+        uint8_t   bLength;
+        uint8_t   bDescriptorType;
+        uint8_t   bDevCapabilityType;
+        uint8_t   bIndex;
+        uint16_t  dwAlternateModeVdo;
+    };
+
+    typedef struct IOUSBDeviceCapabilityBillboardAltMode IOUSBDeviceCapabilityBillboardAltMode;
+    typedef IOUSBDeviceCapabilityBillboardAltMode *      IOUSBDeviceCapabilityBillboardAltModePtr;
+
 
 #pragma options align=reset
 	
@@ -1275,7 +1291,11 @@ enum {
     kUSBEndpointCountExceededNotificationType   = 7,
     kUSBUnsupportedNotificationType             = 8,
     kUSBHubCountExceededNotificationType        = 9,
-    kUSBTDMLowBatteryType                       = 10
+    kUSBTDMLowBatteryType                       = 10,
+    kUSBCTBNotEnoughPowerNotificationType       = 11,
+    kUSBCTBUnsupportedNotificationType          = 12,
+    kUSBCUnsupportedTBPortNotificationType      = 13,
+    kUSBCUnsupportedTBCableNotificationType     = 14
 };
 
 /*!
@@ -1300,6 +1320,7 @@ enum {
 #define kConfigurationDescriptorOverride		"ConfigurationDescriptorOverride"
 #define kOverrideIfAtLocationID					"OverrideIfAtLocationID"
 #define kOverrideAllowLowPower                  "kOverrideAllowLowPower"
+#define kUSBUserClientEntitlementRequired       "UsbUserClientEntitlementRequired"
 /*! @/defineblock */
 
 /*!

@@ -3,7 +3,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2014-2015 Apple Inc. All rights reserved.
+	Copyright 2014-2017 Apple Inc. All rights reserved.
 
 */
 
@@ -132,8 +132,8 @@ AV_INIT_UNAVAILABLE
 
 /*!
 	@property		currentSampleDuration
-	@abstract		Indicates the presentation duration of the sample at the receiver's current position.
-	@discussion		If the receiver must be advanced past its current position in order to determine the presentation duration of the current sample, the value of currentSampleDuration is equal to kCMTimeIndefinite. This can occur with streaming formats such as MPEG-2 transport streams.
+	@abstract		Indicates the decode duration of the sample at the receiver's current position.
+	@discussion		If the receiver must be advanced past its current position in order to determine the decode duration of the current sample, the value of currentSampleDuration is equal to kCMTimeIndefinite. This can occur with streaming formats such as MPEG-2 transport streams.
 */
 @property (nonatomic, readonly) CMTime currentSampleDuration;
 
