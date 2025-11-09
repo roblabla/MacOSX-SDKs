@@ -91,6 +91,7 @@ NS_ASSUME_NONNULL_BEGIN
                didSelectShippingMethod:(PKShippingMethod *)shippingMethod
                                handler:(void (^)(PKPaymentRequestShippingMethodUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0)) NS_SWIFT_UI_ACTOR;
 
+
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
               didSelectShippingContact:(PKContact *)contact
                                handler:(void (^)(PKPaymentRequestShippingContactUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0)) NS_SWIFT_UI_ACTOR;

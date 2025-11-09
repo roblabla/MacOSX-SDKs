@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebBookmarks.framework/Versions/A/WebBookmarks'
-current-version: 621.2.5
+current-version: 622.1.22
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -31,19 +31,19 @@ exports:
                        _WebBookmarksBookmarksMenuFolderTitle, _WebBookmarksChangedFolderIDKey, 
                        _WebBookmarksDatabaseResetReasonKey, _WebBookmarksDataclassDidChangeNotification, 
                        _WebBookmarksDetectedLocalMigrationStateTransitionNotification, 
-                       _WebBookmarksDidReloadNotification, _WebBookmarksDidVacuumDatabaseDistributedNotification, 
-                       _WebBookmarksExtraAttributeSelectedFavoritesFolderKey, _WebBookmarksFolderContentsDidChangeNotification, 
-                       _WebBookmarksFrequentlyVisitedSiteScoreKey, _WebBookmarksFromMigrationStateKey, 
-                       _WebBookmarksHistoryFolderTitle, _WebBookmarksIsBuiltinBookmarkAttributeKey, 
-                       _WebBookmarksIsBuiltinDeviceBookmarkAttributeKey, _WebBookmarksIsCarrierBookmarkAttributeKey, 
-                       _WebBookmarksOmitFromUIKey, _WebBookmarksReadingListFetchingNotification, 
-                       _WebBookmarksReadingListFolderTitle, _WebBookmarksResetCloudHistoryAccountDefaultsKey, 
-                       _WebBookmarksRootBookmarkTitle, _WebBookmarksSQLiteErrorDomain, 
-                       _WebBookmarksServerMachServiceName, _WebBookmarksShowIconOnlyAttributeKey, 
-                       _WebBookmarksSpecialFoldersDidChangeNotification, _WebBookmarksTabFolderContentsDidChangeNotification, 
-                       _WebBookmarksToMigrationStateKey, _WebBookmarksWebFilterAllowedSitesFolderTitle, 
-                       _WebBookmarksXPCConnectionErrorDomain, _WebNSStringFromBookmarkID, 
-                       _kBookmarksReadingListTitle, _kSafariFetcherClearAllReadingListArchivesMessageName, 
+                       _WebBookmarksDidReloadDistributedNotification, _WebBookmarksDidReloadNotification, 
+                       _WebBookmarksDidVacuumDatabaseDistributedNotification, _WebBookmarksExtraAttributeSelectedFavoritesFolderKey, 
+                       _WebBookmarksFolderContentsDidChangeNotification, _WebBookmarksFrequentlyVisitedSiteScoreKey, 
+                       _WebBookmarksFromMigrationStateKey, _WebBookmarksHistoryFolderTitle, 
+                       _WebBookmarksIsBuiltinBookmarkAttributeKey, _WebBookmarksIsBuiltinDeviceBookmarkAttributeKey, 
+                       _WebBookmarksIsCarrierBookmarkAttributeKey, _WebBookmarksOmitFromUIKey, 
+                       _WebBookmarksReadingListFetchingNotification, _WebBookmarksReadingListFolderTitle, 
+                       _WebBookmarksResetCloudHistoryAccountDefaultsKey, _WebBookmarksRootBookmarkTitle, 
+                       _WebBookmarksSQLiteErrorDomain, _WebBookmarksServerMachServiceName, 
+                       _WebBookmarksShowIconOnlyAttributeKey, _WebBookmarksSpecialFoldersDidChangeNotification, 
+                       _WebBookmarksTabFolderContentsDidChangeNotification, _WebBookmarksToMigrationStateKey, 
+                       _WebBookmarksWebFilterAllowedSitesFolderTitle, _WebBookmarksXPCConnectionErrorDomain, 
+                       _WebNSStringFromBookmarkID, _kBookmarksReadingListTitle, _kSafariFetcherClearAllReadingListArchivesMessageName, 
                        _kSafariFetcherClearReadingListArchiveMessageName, _kSafariFetcherDServiceName, 
                        _kSafariFetcherDidFinishFetchingMessageName, _kSafariFetcherDidStartFetchingItemMessageName, 
                        _kSafariFetcherDidStopFetchingItemMessageName, _kSafariFetcherDidUpdateProgressMessageName, 
@@ -81,7 +81,11 @@ exports:
                        _kWebBookmarksImportSandboxExtensionsKey, _kWebBookmarksImportURLsKey, 
                        _kWebBookmarksImportURLsResultKey, _kWebBookmarksItemKey, 
                        _kWebBookmarksNumberOfHistorySitesToBeExportedKey, _kWebBookmarksNumberOfHistorySitesToBeExportedProfileIdentifiersKey, 
-                       _kWebBookmarksPreviewTextKey, _kWebBookmarksProgressKey, _kWebBookmarksSaveImportedCreditCardExpirationMonthKey, 
+                       _kWebBookmarksOpenSafariExportSettings, _kWebBookmarksOpenSafariExportSettingsFailedKey, 
+                       _kWebBookmarksOpenSafariExportSettingsMissingEntitlementKey, 
+                       _kWebBookmarksOpenSafariExportSettingsNotRunningForegroundKey, 
+                       _kWebBookmarksOpenSafariExportSettingsTestingModeKey, _kWebBookmarksPreviewTextKey, 
+                       _kWebBookmarksProgressKey, _kWebBookmarksSaveImportedCreditCardExpirationMonthKey, 
                        _kWebBookmarksSaveImportedCreditCardExpirationYearKey, _kWebBookmarksSaveImportedCreditCardHolderNameKey, 
                        _kWebBookmarksSaveImportedCreditCardLastUsedDateKey, _kWebBookmarksSaveImportedCreditCardMessageName, 
                        _kWebBookmarksSaveImportedCreditCardNameKey, _kWebBookmarksSaveImportedCreditCardNumberKey, 

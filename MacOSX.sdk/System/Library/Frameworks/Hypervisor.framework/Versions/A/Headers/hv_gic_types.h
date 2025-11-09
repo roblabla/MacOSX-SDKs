@@ -40,7 +40,7 @@ typedef struct hv_gic_state_s *hv_gic_state_t;
     Note that HV_GIC_INT_MAINTENANCE and HV_GIC_INT_EL2_PHYSICAL_TIMER are
     only present when EL2 (nested virtualization) is enabled.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(15.0))
 OS_ENUM(hv_gic_intid, uint16_t,
     HV_GIC_INT_PERFORMANCE_MONITOR = 23,
     HV_GIC_INT_MAINTENANCE = 25,
@@ -52,7 +52,7 @@ OS_ENUM(hv_gic_intid, uint16_t,
 /*!
  @abstract Type of an ARM GIC distributor register.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(15.0))
 OS_ENUM(hv_gic_distributor_reg, uint16_t,
     HV_GIC_DISTRIBUTOR_REG_GICD_CTLR = 0x0000,
     HV_GIC_DISTRIBUTOR_REG_GICD_TYPER = 0x0004,
@@ -1632,7 +1632,7 @@ OS_ENUM(hv_gic_redistributor_reg, uint32_t,
 /*!
  @abstract Type of an ARM GIC ICC system control register.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(15.0))
 OS_ENUM(hv_gic_icc_reg, uint16_t,
     HV_GIC_ICC_REG_PMR_EL1 = 0xc230,
     HV_GIC_ICC_REG_BPR0_EL1 = 0xc643,
@@ -1650,7 +1650,7 @@ OS_ENUM(hv_gic_icc_reg, uint16_t,
 /*!
  @abstract Type of an ARM GIC virtualization control system register.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(15.0))
 OS_ENUM(hv_gic_ich_reg, uint16_t,
     HV_GIC_ICH_REG_AP0R0_EL2 = 0xe640,
     HV_GIC_ICH_REG_AP1R0_EL2 = 0xe648,
@@ -1681,7 +1681,7 @@ OS_ENUM(hv_gic_ich_reg, uint16_t,
 /*!
  @abstract Type of an ARM GIC ICV system control register.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(15.0))
 OS_ENUM(hv_gic_icv_reg, uint16_t,
     HV_GIC_ICV_REG_PMR_EL1 = 0xc230,
     HV_GIC_ICV_REG_BPR0_EL1 = 0xc643,

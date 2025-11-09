@@ -12,6 +12,7 @@
 #if defined(__OBJC__)
 
 #import <IOSurface/IOSurfaceTypes.h>
+#import <IOSurface/IOSurfaceRef.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -107,6 +108,7 @@ extern IOSurfacePropertyKey IOSurfacePropertyKeyName                        API_
 
 // Note: IOSurface objects are "toll free bridged" to IOSurfaceRef objects
 API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0))
+NS_SWIFT_SENDABLE
 @interface IOSurface : NSObject <NSSecureCoding>
 {
 @package
@@ -114,7 +116,7 @@ API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0))
 }
 
 /* Create a new IOSurface */
-- (nullable instancetype)initWithProperties:(NSDictionary <IOSurfacePropertyKey, id> *)properties;
+- (nullable instancetype)initWithProperties:(NSDictionary <IOSurfacePropertyKey, id NS_SWIFT_SENDABLE> *)properties;
 
 /* "Lock" or "Unlock" a IOSurface for reading or writing.
 
@@ -174,11 +176,11 @@ API_AVAILABLE(macos(10.12), ios(11.0), watchos(4.0), tvos(11.0))
 /* These calls let you attach property list types to a IOSurface buffer.  These calls are 
    expensive (they essentially must serialize the data into the kernel) and thus should be avoided whenever
    possible.   Note:  These functions can not be used to change the underlying surface properties. */
-- (void)setAttachment:(id)anObject forKey:(NSString *)key;
-- (nullable id)attachmentForKey:(NSString *)key;
+- (void)setAttachment:(id NS_SWIFT_SENDABLE)anObject forKey:(NSString *)key;
+- (nullable id NS_SWIFT_SENDABLE)attachmentForKey:(NSString *)key;
 - (void)removeAttachmentForKey:(NSString *)key;
-- (void)setAllAttachments:(NSDictionary<NSString *, id> *)dict;
-- (nullable NSDictionary<NSString *, id> *)allAttachments;
+- (void)setAllAttachments:(NSDictionary<NSString *, id NS_SWIFT_SENDABLE> *)dict;
+- (nullable NSDictionary<NSString *, id NS_SWIFT_SENDABLE> *)allAttachments;
 - (void)removeAllAttachments;
 
 /* There are cases where it is useful to know whether or not an IOSurface buffer is considered to be "in use"
@@ -220,6 +222,16 @@ value must be an exact match. */
 // This key was misnamed.
 extern IOSurfacePropertyKey IOSurfacePropertyAllocSizeKey
     API_DEPRECATED_WITH_REPLACEMENT("IOSurfacePropertyKeyAllocSize",macos(10.12,10.14),ios(11.0,12.0),watchos(4.0,5.0),tvos(11.0,12.0));
+
+static inline __attribute__((always_inline)) IOSurface *_IOSurfaceRefToObj(IOSurfaceRef ref) NS_SWIFT_NAME(IOSurface.init(_:))
+{
+    return (__bridge IOSurface *)ref;
+}
+
+static inline __attribute__((always_inline)) IOSurfaceRef _IOSurfaceObjToRef(IOSurface *obj) NS_SWIFT_NAME(IOSurfaceRef.init(_:))
+{
+    return (__bridge IOSurfaceRef)obj;
+}
 
 NS_ASSUME_NONNULL_END
 

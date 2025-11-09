@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIKitMacHelper.framework/Versions/A/UIKitMacHelper'
-current-version: 8506
+current-version: 9088.1.255
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -42,10 +42,12 @@ exports:
                        _UINSDefaultsWindowScaleFactor, _UINSDefaultsWindowScaleFactorKey, 
                        _UINSDefaultsZoomToFitSingleWindowFullScreenApps, _UINSDefaultsZoomToFitSingleWindowFullScreenAppsKey, 
                        _UINSDiscardPreviouslyPersistedScenesExcludingPersistentIdentifiers, 
-                       _UINSDragAndDropLog, _UINSEnsureApplicationInitializationContextIsLoaded, 
-                       _UINSEventFromUIEvent, _UINSExistingWindowSceneWithIdentifier, 
-                       _UINSExistingWindowSceneWithPersistentIdentifier, _UINSFBSSceneForUIScene, 
-                       _UINSFullScreenSceneSizeForUserInterfaceOrientation, _UINSGetTextInputContextKeyboardSelectionDidChangeNotification, 
+                       _UINSDragAndDropLog, _UINSDropActionDeferringGroupAddBlock, 
+                       _UINSDropActionDeferringGroupClose, _UINSDropActionDeferringGroupOpen, 
+                       _UINSEnsureApplicationInitializationContextIsLoaded, _UINSEventFromUIEvent, 
+                       _UINSExistingWindowSceneWithIdentifier, _UINSExistingWindowSceneWithPersistentIdentifier, 
+                       _UINSFBSSceneForUIScene, _UINSFullScreenSceneSizeForUserInterfaceOrientation, 
+                       _UINSGetTextInputContextKeyboardSelectionDidChangeNotification, 
                        _UINSInterfaceOrientationForFullScreenScene, _UINSIsBridgingConstraint, 
                        _UINSKeyWindow, _UINSKeyWindowForScene, _UINSLifecycleLog, 
                        _UINSLogSubsystem, _UINSMainScreenScale, _UINSMakeBridgingConstraintForWindow, 

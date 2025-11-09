@@ -5,9 +5,9 @@
 //  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVFoundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import <Foundation/Foundation.h>
 
 #import <ARKit/ARPlaneDetectionTypes.h>
 
@@ -18,14 +18,13 @@ NS_ASSUME_NONNULL_BEGIN
 @class ARVideoFormat;
 @class ARWorldMap;
 
-
 /**
 Option set indicating semantic understanding types of the image frame.
 */
 API_AVAILABLE(ios(13.0))
 typedef NS_OPTIONS(NSUInteger, ARFrameSemantics) {
     /** No semantic operation is run. */
-    ARFrameSemanticNone                                = 0,
+    ARFrameSemanticNone = 0,
 
     /**
      Person segmentation.
@@ -33,8 +32,8 @@ typedef NS_OPTIONS(NSUInteger, ARFrameSemantics) {
      @see -[ARFrame segmentationBuffer]
      @see ARSegmentationClass
     */
-    ARFrameSemanticPersonSegmentation                  = (1 << 0),
-    
+    ARFrameSemanticPersonSegmentation = (1 << 0),
+
     /**
      Person segmentation with depth.
      @discussion A pixel in the image frame that gets classified as person will have an intensity value equal to 'ARSegmentationClassPerson'.
@@ -42,30 +41,30 @@ typedef NS_OPTIONS(NSUInteger, ARFrameSemantics) {
      @see -[ARFrame estimatedDepthData]
      @see -[ARFrame segmentationBuffer]
      */
-    ARFrameSemanticPersonSegmentationWithDepth         = (1 << 1) | (1 << 0),
-    
+    ARFrameSemanticPersonSegmentationWithDepth = (1 << 1) | (1 << 0),
+
     /**
      Body detection.
      @discussion Once activated an ARFrame will contain information about a detected body.
      @see -[ARFrame detectedBody]
      @see ARBody2D
      */
-    ARFrameSemanticBodyDetection                       = (1 << 2),
-    
+    ARFrameSemanticBodyDetection = (1 << 2),
+
     /**
      Scene Depth.
      @discussion Each capturedImage will have an associated scene depth data.
      @see - [ARFrame sceneDepth]
     */
     ARFrameSemanticSceneDepth API_AVAILABLE(ios(14.0)) = (1 << 3),
-    
+
     /**
      Smoothed Scene Depth.
      @discussion Each capturedImage will have an associated scene depth data that is temporally smoothed.
      @see - [ARFrame smoothedSceneDepth]
     */
     ARFrameSemanticSmoothedSceneDepth API_AVAILABLE(ios(14.0)) = (1 << 4),
-    
+
 } NS_SWIFT_NAME(ARConfiguration.FrameSemantics);
 
 /**
@@ -75,15 +74,14 @@ API_AVAILABLE(ios(11.0))
 typedef NS_ENUM(NSInteger, ARWorldAlignment) {
     /** Aligns the world with gravity that is defined by vector (0, -1, 0). */
     ARWorldAlignmentGravity,
-    
+
     /** Aligns the world with gravity that is defined by the vector (0, -1, 0)
      and heading (w.r.t. True North) that is given by the vector (0, 0, -1). */
     ARWorldAlignmentGravityAndHeading,
-    
+
     /** Aligns the world with the camera’s orientation. */
     ARWorldAlignmentCamera
 } NS_SWIFT_NAME(ARConfiguration.WorldAlignment);
-
 
 /**
  Enum constants for indicating the mode of environment texturing to run.
@@ -92,15 +90,14 @@ API_AVAILABLE(ios(12.0))
 typedef NS_ENUM(NSInteger, AREnvironmentTexturing) {
     /** No texture information is gathered. */
     AREnvironmentTexturingNone,
-    
+
     /** Texture information is gathered for the environment.
      Environment textures will be generated for AREnvironmentProbes added to the session. */
     AREnvironmentTexturingManual,
-    
+
     /** Texture information is gathered for the environment and probes automatically placed in the scene. */
     AREnvironmentTexturingAutomatic
 } NS_SWIFT_NAME(ARWorldTrackingConfiguration.EnvironmentTexturing);
-
 
 /**
  Types of scene reconstruction.
@@ -108,15 +105,14 @@ typedef NS_ENUM(NSInteger, AREnvironmentTexturing) {
 API_AVAILABLE(ios(13.4))
 typedef NS_OPTIONS(NSUInteger, ARSceneReconstruction) {
     /** No scene reconstruction is run. */
-    ARSceneReconstructionNone                   = 0,
-    
+    ARSceneReconstructionNone = 0,
+
     /** Scene reconstruction generates a mesh of the world */
-    ARSceneReconstructionMesh                   = (1 << 0),
-    
+    ARSceneReconstructionMesh = (1 << 0),
+
     /** Scene reconstruction generates a mesh of the world with classification for each face. */
     ARSceneReconstructionMeshWithClassification = (1 << 1) | (1 << 0)
 } NS_SWIFT_NAME(ARConfiguration.SceneReconstruction);
-
 
 /**
  An object to describe and configure the Augmented Reality techniques to be used in an ARSession.
@@ -161,10 +157,9 @@ API_AVAILABLE(ios(11.0))
 /**
  The type of semantic understanding to provide with each frame.
 
- @discussion Use the `supportsFrameSemantics` class method to check if the configuration type you intend to run supports the set of frame semantics. For example, when running a session with
- a configuration of type ARWorldTrackingConfiguration one would need to use `+[ ARWorldTrackingConfiguration supportsFrameSemantics:]` to perform said check.
- An exception is thrown if the option
- is not supported. Defaults to ARFrameSemanticNone.
+ @discussion Use the `supportsFrameSemantics` class method to check if the configuration type you intend to run supports the set of frame semantics.
+ For example, when running a session with a configuration of type ARWorldTrackingConfiguration one would need to use `+[ ARWorldTrackingConfiguration
+ supportsFrameSemantics:]` to perform said check. An exception is thrown if the option is not supported. Defaults to ARFrameSemanticNone.
  @see ARFrameSemantics
  @see +[ARConfiguration supportsFrameSemantics:]
 */
@@ -173,20 +168,20 @@ API_AVAILABLE(ios(11.0))
 /**
  Determines whether the type of frame semantics is supported by the device and ARConfiguration class.
 
- @discussion Semantic frame understanding is not supported on all devices. Use the `supportsFrameSemantics` class method to check if the configuration type you intend to run supports the
- set of frame semantics. For example, when running a session with a configuration of type ARWorldTrackingConfiguration one would need to use
+ @discussion Semantic frame understanding is not supported on all devices. Use the `supportsFrameSemantics` class method to check if the configuration
+ type you intend to run supports the set of frame semantics. For example, when running a session with a configuration of type
+ ARWorldTrackingConfiguration one would need to use
  `+[ ARWorldTrackingConfiguration supportsFrameSemantics:]` to perform said check.
  @see ARFrameSemantics
 */
 + (BOOL)supportsFrameSemantics:(ARFrameSemantics)frameSemantics API_AVAILABLE(ios(13.0));
-
 
 /**
  Returns a pointer to the capture device of the camera that's used for rendering, so developers can adjust capture settings.
  @discussion May return nil if it is not recommended to modify capture settings, for example if the primary camera is used for tracking.
  */
 @property (class, nonatomic, nullable, readonly) AVCaptureDevice *configurableCaptureDeviceForPrimaryCamera
-API_AVAILABLE(ios(16.0));
+        API_AVAILABLE(ios(16.0));
 
 /**
  Returns a video format using a 4K resolution from the list of supported video formats.
@@ -195,8 +190,10 @@ API_AVAILABLE(ios(16.0));
 @property (class, nonatomic, nullable, readonly) ARVideoFormat *recommendedVideoFormatFor4KResolution API_AVAILABLE(ios(16.0));
 
 /**
- Returns a recommended video format that supports capturing high resolution frames with a significantly higher resolution than the streaming camera resolution.
- @discussion Using this format may consume more power. Other video formats may support capturing high resolution frames as well, albeit at a lower quality or resolution.
+ Returns a recommended video format that supports capturing high resolution frames with a significantly higher resolution than the streaming camera
+ resolution.
+ @discussion Using this format may consume more power. Other video formats may support capturing high resolution frames as well, albeit at a lower
+ quality or resolution.
  @see [ARSession captureHighResolutionFrameWithCompletion:]
  */
 @property (class, nonatomic, nullable, readonly) ARVideoFormat *recommendedVideoFormatForHighResolutionFrameCapturing API_AVAILABLE(ios(16.0));
@@ -212,10 +209,9 @@ API_AVAILABLE(ios(16.0));
 
 @end
 
-
 /**
  A configuration for running world tracking.
- 
+
  @discussion World tracking provides 6 degrees of freedom tracking of the device.
  By finding feature points in the scene, world tracking enables performing hit-tests against the frame.
  Tracking can no longer be resumed once the session is paused.
@@ -282,13 +278,14 @@ API_AVAILABLE(ios(11.0))
 
 /**
  Objects to detect in the scene.
- @discussion If set the session will attempt to detect the specified objects. When an object is detected an ARObjectAnchor will be added to the session.
+ @discussion If set the session will attempt to detect the specified objects. When an object is detected an ARObjectAnchor will be added to the
+ session.
  */
 @property (nonatomic, copy) NSSet<ARReferenceObject *> *detectionObjects API_AVAILABLE(ios(12.0));
 
 /**
  Enable/disable a collaborative session. Disabled by default.
- 
+
  @discussion When enabled, ARSession will output collaboration data for other participants using its delegate didOutputCollaborationData.
  It is the responsibility of the caller to send the data to each participant. When data is received by a participant, it
  should be passed to the ARSession by calling updateWithCollaborationData.
@@ -304,7 +301,7 @@ API_AVAILABLE(ios(11.0))
  Enable or disable running Face Tracking using the front facing camera. Disabled by default.
  When enabled, ARSession detects faces (if visible in the front-facing camera image) and adds to its list of anchors,
  an ARFaceAnchor object representing each face.
- 
+
  @discussion The transform of the ARFaceAnchor objects will be in the world coordinate space.
  @see ARFaceAnchor
  */
@@ -340,7 +337,7 @@ API_AVAILABLE(ios(11.0))
 
 /**
  A configuration for running orientation tracking.
- 
+
  @discussion Orientation tracking provides 3 degrees of freedom tracking of the device.
  */
 API_AVAILABLE(ios(11.0))
@@ -357,10 +354,9 @@ API_AVAILABLE(ios(11.0))
 
 @end
 
-
 /**
  A configuration for running face tracking.
- 
+
  @discussion Face tracking uses the front facing camera to track the face in 3D providing details on the topology and expression of the face.
  A detected face will be added to the session as an ARFaceAnchor object which contains information about head pose, mesh, eye pose, and blend shape
  coefficients. If light estimation is enabled the detected face will be treated as a light probe and used to estimate the direction of incoming light.
@@ -388,8 +384,9 @@ API_AVAILABLE(ios(11.0))
 
 /**
  Enable or disable World Tracking. Disabled by default.
- 
- @discussion When enabled, ARSession uses the back facing camera to track the device's orientation and position in the world. The camera transform and the ARFaceAnchor transform will be in the world coordinate space.
+
+ @discussion When enabled, ARSession uses the back facing camera to track the device's orientation and position in the world. The camera transform and
+ the ARFaceAnchor transform will be in the world coordinate space.
  */
 @property (nonatomic, assign, getter=isWorldTrackingEnabled) BOOL worldTrackingEnabled API_AVAILABLE(ios(13.0));
 
@@ -398,10 +395,9 @@ API_AVAILABLE(ios(11.0))
 
 @end
 
-
 /**
  A configuration for running image tracking.
- 
+
  @discussion Image tracking provides 6 degrees of freedom tracking of known images. Four images may be tracked simultaneously.
  */
 API_AVAILABLE(ios(12.0))
@@ -431,10 +427,9 @@ API_AVAILABLE(ios(12.0))
 
 @end
 
-
 /**
  A configuration for scanning objects.
- 
+
  @discussion The object scanning configuration runs world tracking, capturing additional detail in order to create reference objects.
  Running object scanning will consume additional power in order to provide more detailed features.
  The createReferenceObject method can be called on the session to capture a scan of an object in the world.
@@ -460,10 +455,9 @@ API_AVAILABLE(ios(12.0))
 
 @end
 
-
 /**
  A configuration for running body tracking.
- 
+
  @discussion Body tracking provides 6 degrees of freedom tracking of a detected body in the scene. By default, ARFrameSemanticBodyDetection will be
  enabled.
  @see ARBodyAnchor
@@ -553,8 +547,9 @@ Images to detect in the scene.
 
 /**
  A configuration for running positional tracking.
- 
- @discussion Positional tracking provides 6 degrees of freedom tracking of the device by running the camera at lowest possible resolution and frame rate.
+
+ @discussion Positional tracking provides 6 degrees of freedom tracking of the device by running the camera at lowest possible resolution and frame
+ rate.
  */
 API_AVAILABLE(ios(13.0))
 @interface ARPositionalTrackingConfiguration : ARConfiguration
@@ -580,7 +575,6 @@ API_AVAILABLE(ios(13.0))
 
 @end
 
-
 /**
  A configuration for running geographical world tracking.
 
@@ -590,7 +584,7 @@ API_AVAILABLE(ios(14.0))
 @interface ARGeoTrackingConfiguration : ARConfiguration
 
 /** Unavailable */
-@property(nonatomic, assign) ARWorldAlignment worldAlignment NS_UNAVAILABLE;
+@property (nonatomic, assign) ARWorldAlignment worldAlignment NS_UNAVAILABLE;
 
 /**
  The mode of environment texturing to run.
@@ -636,7 +630,8 @@ API_AVAILABLE(ios(14.0))
 
 /**
  Objects to detect in the scene.
- @discussion If set the session will attempt to detect the specified objects. When an object is detected an ARObjectAnchor will be added to the session.
+ @discussion If set the session will attempt to detect the specified objects. When an object is detected an ARObjectAnchor will be added to the
+ session.
  */
 @property (nonatomic, copy) NSSet<ARReferenceObject *> *detectionObjects;
 
@@ -655,26 +650,26 @@ API_AVAILABLE(ios(14.0))
 
  @discussion This method will attempt to acquire a location fix on a background thread, then check availability.
 
- @param completionHandler Completion handler that is called when availability has been determined. This handler is executed on an arbitrary serial queue. It takes the following parameters:
-        isAvailable - True if geo tracking is available at the current location, otherwise false.
-        error - An error that indicates why geo tracking is not available at the current location.
+ @param completionHandler Completion handler that is called when availability has been determined. This handler is executed on an arbitrary serial
+ queue. It takes the following parameters: isAvailable - True if geo tracking is available at the current location, otherwise false. error - An error
+ that indicates why geo tracking is not available at the current location.
  */
-+ (void)checkAvailabilityWithCompletionHandler:(void (^)(BOOL isAvailable, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC;
++ (void)checkAvailabilityWithCompletionHandler:(void (^)(BOOL isAvailable, NSError *_Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC;
 
 /**
 Determines the availability of geo tracking at the given location.
 
 @param coordinate Location at which to check.
-@param completionHandler Completion handler that is called when availability has been determined. This handler is executed on an arbitrary serial queue. It takes the following parameters:
-       isAvailable - True if geo tracking is available at the given location, otherwise false.
-       error - An error that indicates why geo tracking is not available at the given location.
+@param completionHandler Completion handler that is called when availability has been determined. This handler is executed on an arbitrary serial
+queue. It takes the following parameters: isAvailable - True if geo tracking is available at the given location, otherwise false. error - An error
+that indicates why geo tracking is not available at the given location.
 */
-+ (void)checkAvailabilityAtCoordinate:(CLLocationCoordinate2D)coordinate completionHandler:(void (^)(BOOL isAvailable, NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC;
++ (void)checkAvailabilityAtCoordinate:(CLLocationCoordinate2D)coordinate
+                    completionHandler:(void (^)(BOOL isAvailable, NSError *_Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC;
 
 - (instancetype)init;
 + (instancetype)new NS_SWIFT_UNAVAILABLE("Use init() instead");
 
 @end
-
 
 NS_ASSUME_NONNULL_END

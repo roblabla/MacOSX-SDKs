@@ -9,6 +9,7 @@ module XPC [system] {
 	header "xpc/listener.h"
 	header "xpc/debug.h"
 	header "xpc/endpoint.h"
+	header "xpc/peer_requirement.h"
 	export *
 }
 

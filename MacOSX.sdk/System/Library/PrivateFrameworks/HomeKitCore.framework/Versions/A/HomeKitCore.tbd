@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HomeKitCore.framework/Versions/A/HomeKitCore'
-current-version: 1278.6.31
+current-version: 1349.1.3
 compatibility-version: 0
 swift-abi-version: 7
 allowable-clients:
@@ -501,7 +501,7 @@ exports:
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO10wifiRouteryA2GmFWC', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO11airPurifieryA2GmFWC', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO13airHumidifieryA2GmFWC', 
-                       '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO13audioRecieveryA2GmFWC', 
+                       '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO13audioReceiveryA2GmFWC', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO13rangeExtenderyA2GmFWC', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO13videoDoorbellyA2GmFWC', 
                        '_$s11HomeKitCore10HomesStoreC9AccessoryV8CategoryO14airConditioneryA2GmFWC', 

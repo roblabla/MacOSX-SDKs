@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class         MXDisplayMetric
  @abstract      An MXMetric subclass that encapsulates display metrics.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
 @interface MXDisplayMetric : MXMetric
 
 /*!

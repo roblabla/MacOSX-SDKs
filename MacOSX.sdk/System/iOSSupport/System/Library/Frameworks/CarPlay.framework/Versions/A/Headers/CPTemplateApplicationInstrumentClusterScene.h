@@ -7,11 +7,13 @@
 
 #import <CarPlay/CarPlay.h>
 #import <CarPlay/CPInstrumentClusterController.h>
+#import <CarPlay/CPTemplate.h>
 
 NS_ASSUME_NONNULL_BEGIN
 @class CPTemplateApplicationInstrumentClusterScene;
 
 API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos, tvos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPTemplateApplicationInstrumentClusterSceneDelegate <UISceneDelegate>
 
 @optional

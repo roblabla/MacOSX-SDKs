@@ -63,11 +63,11 @@ typedef NS_ENUM(NSUInteger, MTLSamplerMipFilter) {
 */
 typedef NS_ENUM(NSUInteger, MTLSamplerAddressMode) {
     MTLSamplerAddressModeClampToEdge = 0,
-    MTLSamplerAddressModeMirrorClampToEdge API_AVAILABLE(macos(10.11), ios(14.0)) = 1,
+    MTLSamplerAddressModeMirrorClampToEdge API_AVAILABLE(macos(10.11), ios(14.0), tvos(16.0)) = 1,
     MTLSamplerAddressModeRepeat = 2,
     MTLSamplerAddressModeMirrorRepeat = 3,
     MTLSamplerAddressModeClampToZero = 4,
-    MTLSamplerAddressModeClampToBorderColor API_AVAILABLE(macos(10.12), ios(14.0)) = 5,
+    MTLSamplerAddressModeClampToBorderColor API_AVAILABLE(macos(10.12), ios(14.0), tvos(16.0)) = 5,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 /*!
@@ -87,8 +87,17 @@ typedef NS_ENUM(NSUInteger, MTLSamplerBorderColor) {
     MTLSamplerBorderColorTransparentBlack = 0,  // {0,0,0,0}
     MTLSamplerBorderColorOpaqueBlack = 1,       // {0,0,0,1}
     MTLSamplerBorderColorOpaqueWhite = 2,       // {1,1,1,1}
-} API_AVAILABLE(macos(10.12), ios(14.0));
+} API_AVAILABLE(macos(10.12), ios(14.0), tvos(16.0));
 
+/// Configures how the sampler aggregates contributing samples to a final value.
+typedef NS_ENUM(NSUInteger, MTLSamplerReductionMode) {
+    /// A reduction mode that adds together the product of each contributing sample value by its weight.
+    MTLSamplerReductionModeWeightedAverage = 0,
+    /// A reduction mode that finds the minimum contributing sample value by separately evaluating each channel.
+    MTLSamplerReductionModeMinimum = 1,
+    /// A reduction mode that finds the maximum contributing sample value by separately evaluating each channel.
+    MTLSamplerReductionModeMaximum = 2,
+} API_AVAILABLE(macos(26.0), ios(26.0));
 
 /*!
  @class MTLSamplerDescriptor
@@ -147,8 +156,17 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @property borderColor
  @abstract Set the color for the MTLSamplerAddressMode to one of the predefined in the MTLSamplerBorderColor enum.
  */
-@property (nonatomic) MTLSamplerBorderColor borderColor API_AVAILABLE(macos(10.12), ios(14.0));
+@property (nonatomic) MTLSamplerBorderColor borderColor API_AVAILABLE(macos(10.12), ios(14.0), tvos(16.0));
 
+/// Sets the reduction mode for filtering contributing samples.
+///
+/// The property's default value is ``MTLSamplerReductionModeWeightedAverage``.
+/// The sampler ignores this property if any of the following property values are equal to a specific value:
+///  - The sampler's ``mipFilter`` property is equal to ``MTLSamplerMipFilterNotMipmapped``.
+///  - The sampler's ``mipFilter`` property is equal to ``MTLSamplerMipFilterNearest``.
+///  - The sampler's ``minFilter`` property is equal to ``MTLSamplerMinMagFilterNearest``.
+///  - The sampler's ``magFilter`` property is equal to ``MTLSamplerMinMagFilterNearest``.
+@property (nonatomic) MTLSamplerReductionMode reductionMode API_AVAILABLE(macos(26.0), ios(26.0));
 
 /*!
  @property normalizedCoordinates.
@@ -179,6 +197,11 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (nonatomic) BOOL lodAverage API_AVAILABLE(ios(9.0), macos(11.0), macCatalyst(14.0));
 
 
+/// Sets the level-of-detail (lod) bias when sampling from a texture.
+///
+/// The property's default value is `0.0f`.
+/// The precision format is `S4.6`, and the range is `[-16.0, 15.999]`.
+@property (nonatomic) float lodBias API_AVAILABLE(macos(26.0), ios(26.0));
 
 /*!
  @property compareFunction
@@ -204,7 +227,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @protocol MTLSamplerState
  @abstract An immutable collection of sampler state compiled for a single device.
  */
-API_AVAILABLE(macos(10.11), ios(8.0))
+API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @protocol MTLSamplerState <NSObject>
 
 /*!

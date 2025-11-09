@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLVisibleFunctionTable;
 @protocol MTLAccelerationStructure;
 @protocol MTLIntersectionFunctionTable;
+@protocol MTLDepthStencilState;
 
 /*
  @brief
@@ -154,7 +155,7 @@ API_AVAILABLE(macos(10.13), ios(11.0))
  */
 - (void)setIndirectCommandBuffers:(const id <MTLIndirectCommandBuffer> __nullable [__nonnull])buffers withRange:(NSRange)range API_AVAILABLE(macos(10.14), ios(12.0));
 
-- (void)setAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atIndex:(NSUInteger)index  API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atIndex:(NSUInteger)index  API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  * @method newArgumentEncoderForBufferAtIndex:
@@ -171,27 +172,38 @@ API_AVAILABLE(macos(10.13), ios(11.0))
  * @method setVisibleFunctionTable:atIndex:
  * @brief Set a visible function table at the given buffer index
  */
-- (void)setVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)visibleFunctionTable atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)visibleFunctionTable atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  * @method setVisibleFunctionTables:withRange:
  * @brief Set visible function tables at the given buffer index range
  */
-- (void)setVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])visibleFunctionTables withRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])visibleFunctionTables withRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  * @method setIntersectionFunctionTable:atIndex:
  * @brief Set an intersection function table at the given buffer index
  */
-- (void)setIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atIndex:(NSUInteger)index API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  * @method setIntersectionFunctionTables:withRange:
  * @brief Set intersection function tables at the given buffer index range
  */
-- (void)setIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
+/*!
+ * @method setDepthStencilState:atIndex
+ * @brief Sets a depth stencil state at a given bind point index
+ */
+- (void)setDepthStencilState:(nullable id<MTLDepthStencilState>)depthStencilState atIndex:(NSUInteger)index API_AVAILABLE(macos(26.0), ios(26.0));
+
+/*!
+ * @method setDepthStencilStates:withRange:
+ * @brief Sets an array of depth stencil states at a given buffer index range
+ */
+- (void)setDepthStencilStates:(const id<MTLDepthStencilState> __nullable [__nonnull])depthStencilStates withRange:(NSRange)range API_AVAILABLE(macos(26.0), ios(26.0));
 
 @end
 

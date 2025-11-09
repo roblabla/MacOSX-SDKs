@@ -6,30 +6,51 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <ShazamKit/SHDefines.h>
 #import <ShazamKit/SHMediaItem.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-/// @brief @c SHMediaLibrary represents the user's synced Shazam library.
-/// @discussion You can add new @c SHMediaItem instances to the user's library.
+/// An object that represents the user's Shazam library.
+///
+/// Use `SHMediaLibrary` to add matched songs from the Shazam catalog to the user's Shazam library.
+///
+/// > Note:
+/// > There's no system permission necessary to write to the user's Shazam library. Consider requesting permission from the user before adding songs to the library.
 SH_EXPORT API_DEPRECATED("Use SHLibrary instead", macos(12.0, 15.0), ios(15.0, 18.0), tvos(15.0, 18.0), watchos(8.0, 11.0))
 @interface SHMediaLibrary : NSObject
 
-/// @brief Returns an instance of the default Shazam library.
+/// An instance of the user's default Shazam library.
 @property (class, NS_NONATOMIC_IOSONLY, strong, readonly) SHMediaLibrary *defaultLibrary;
 
-/// Adds an array of media items to the user's Shazam library.
+/// Adds an array of songs to the user's Shazam library.
 ///
-/// @discussion For each @c SHMediaItem instance passed in, the following @c SHMediaItemProperty keys will be saved:
-/// @c SHMediaItemShazamID, @c SHMediaItemTitle, @c SHMediaItemSubtitle.
-/// If @c SHMediaItemSubtitle is not set it may fallback to use @c SHMediaItemArtist if available.
+/// > Important:
+/// > You can call this method from synchronous code using a completion handler, as shown on this page, or you can call it as an asynchronous method that has the following declaration:
+/// >
+/// > ```swift
+/// > func add(_ mediaItems: [SHMediaItem]) async throws
+/// > ```
+/// >
+/// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 ///
-/// @note @c SHMediaItemShazamID is required for each @c SHMediaItem to be considered valid.
-/// @c SHMediaItemShazamID must be a numeric only string
+/// Saving a song to the user's Shazam library also saves the following media item properties and their associated values:
 ///
-/// @param mediaItems An array containing the @c SHMediaItem objects to be added to the library.
-/// @param completionHandler A block called after all valid @c SHMediaItem objects have been added to the library. If an error occurred, the error parameter will be populated.
+/// - ``SHMediaItemProperty/shazamID``
+/// - ``SHMediaItemProperty/title``
+/// - ``SHMediaItemProperty/subtitle``, or ``SHMediaItemProperty/artist`` if the subtitle is unavailable
+///
+/// > Note:
+/// > Saving to the user's Shazam library works only for songs with a valid ``SHMediaItemProperty/shazamID``.
+///
+/// - Parameters:
+///   - mediaItems: An array of media items that represents the songs to add to the library.
+///   - completionHandler: The system calls this completion block after adding the media items to the library.
+///
+///     This block takes the following parameters:
+///
+///     - term `error`: An error object if a problem occurs when adding any item; otherwise, `nil`.
 - (void)addMediaItems:(NSArray<SHMediaItem *> *)mediaItems completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * __nullable error))completionHandler;
 
 - (instancetype)init NS_UNAVAILABLE;

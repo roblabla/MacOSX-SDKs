@@ -26,8 +26,8 @@ typedef NS_ENUM(NSUInteger, MKErrorCode) {
     MKErrorLoadingThrottled,
     MKErrorPlacemarkNotFound,
     MKErrorDirectionsNotFound NS_ENUM_AVAILABLE(10_9, 7_0),
-    MKErrorDecodingFailed API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15)) API_UNAVAILABLE(watchos),
-} NS_ENUM_AVAILABLE(10_9, 3_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos);
+    MKErrorDecodingFailed API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15), watchos(6.0)),
+} API_AVAILABLE(macos(10.9), ios(3.0), tvos(9.2), watchos(1.0));
 
 typedef NS_ENUM(NSInteger, MKFeatureVisibility) {
     MKFeatureVisibilityAdaptive,
@@ -38,6 +38,6 @@ typedef NS_ENUM(NSInteger, MKFeatureVisibility) {
 typedef NS_ENUM(NSInteger, MKLocalSearchRegionPriority) {
     MKLocalSearchRegionPriorityDefault = 0,
     MKLocalSearchRegionPriorityRequired
-} API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0), watchos(11.0));
 
 NS_ASSUME_NONNULL_END

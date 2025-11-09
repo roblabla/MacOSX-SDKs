@@ -14,15 +14,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class ARSkeleton3D;
 
 
-#define AR_BODY_ANCHOR_PROTOCOLS <ARTrackable>
-
-
 /**
  An anchor representing a body in the world.
  */
 API_AVAILABLE(ios(13.0))
 NS_SWIFT_SENDABLE
-@interface ARBodyAnchor : ARAnchor AR_BODY_ANCHOR_PROTOCOLS
+@interface ARBodyAnchor : ARAnchor <ARTrackable>
 
 /**
  The tracked skeleton in 3D.
@@ -33,7 +30,7 @@ NS_SWIFT_SENDABLE
 /**
  The factor between estimated physical size and default size of the skeleton.
  @see -[ARSkeletonDefinition neutralBodySkeleton3D]
- 
+
  @discussion This value will be estimated if automaticSkeletonScaleEstimationEnabled is set to true on the ARBodyTrackingConfiguration.
  It is used to correct the transform's translation. Default value is 1.0.
  */

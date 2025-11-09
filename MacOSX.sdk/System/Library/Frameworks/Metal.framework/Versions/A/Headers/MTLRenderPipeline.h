@@ -13,6 +13,7 @@
 #import <Metal/MTLArgument.h>
 #import <Metal/MTLFunctionConstantValues.h>
 #import <Metal/MTLPipeline.h>
+#import <Metal/MTLAllocation.h>
 
 
 #import <Metal/MTLLinkedFunctions.h>
@@ -37,10 +38,16 @@ typedef NS_ENUM(NSUInteger, MTLBlendFactor) {
     MTLBlendFactorOneMinusBlendColor = 12,
     MTLBlendFactorBlendAlpha = 13,
     MTLBlendFactorOneMinusBlendAlpha = 14,
-    MTLBlendFactorSource1Color              API_AVAILABLE(macos(10.12), ios(10.11)) = 15,
-    MTLBlendFactorOneMinusSource1Color      API_AVAILABLE(macos(10.12), ios(10.11)) = 16,
-    MTLBlendFactorSource1Alpha              API_AVAILABLE(macos(10.12), ios(10.11)) = 17,
-    MTLBlendFactorOneMinusSource1Alpha      API_AVAILABLE(macos(10.12), ios(10.11)) = 18,
+    MTLBlendFactorSource1Color              API_AVAILABLE(macos(10.12), ios(11.0)) = 15,
+    MTLBlendFactorOneMinusSource1Color      API_AVAILABLE(macos(10.12), ios(11.0)) = 16,
+    MTLBlendFactorSource1Alpha              API_AVAILABLE(macos(10.12), ios(11.0)) = 17,
+    MTLBlendFactorOneMinusSource1Alpha      API_AVAILABLE(macos(10.12), ios(11.0)) = 18,
+    /// Defers assigning the blend factor.
+    ///
+    /// Until you specialize this value in the pipeline state, it:
+    /// * behaves as `MTLBlendFactorOne` for `sourceRGBBlendFactor` and `sourceAlphaBlendFactor`
+    /// * behaves as `MTLBlendFactorZero` for `destinationRGBBlendFactor` and `destinationAlphaBlendFactor`
+    MTLBlendFactorUnspecialized API_AVAILABLE(macos(26.0), ios(26.0)) = 19,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLBlendOperation) {
@@ -49,6 +56,11 @@ typedef NS_ENUM(NSUInteger, MTLBlendOperation) {
     MTLBlendOperationReverseSubtract = 2,
     MTLBlendOperationMin = 3,
     MTLBlendOperationMax = 4,
+    /// Defers assigning the blend operation.
+    ///
+    // Until you specialize this value in the pipeline state, it behaves as `MTLBlendOperationAdd`.
+    MTLBlendOperationUnspecialized API_AVAILABLE(macos(26.0), ios(26.0)) = 5,
+
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_OPTIONS(NSUInteger, MTLColorWriteMask) {
@@ -57,7 +69,11 @@ typedef NS_OPTIONS(NSUInteger, MTLColorWriteMask) {
     MTLColorWriteMaskGreen = 0x1 << 2,
     MTLColorWriteMaskBlue  = 0x1 << 1,
     MTLColorWriteMaskAlpha = 0x1 << 0,
-    MTLColorWriteMaskAll   = 0xf
+    MTLColorWriteMaskAll   = 0xf,
+    /// Defers assigning the color write mask.
+    ///
+    /// Until you specialize this value in the pipeline state, it behaves as `MTLColorWriteMaskAll`.
+    MTLColorWriteMaskUnspecialized API_AVAILABLE(macos(26.0), ios(26.0)) = 0x10,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 typedef NS_ENUM(NSUInteger, MTLPrimitiveTopologyClass) {
@@ -128,7 +144,26 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @end
 
 
-MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
+/// Allows you to easily specify color attachment remapping from logical to physical indices.
+MTL_EXPORT
+API_AVAILABLE(macos(26.0), ios(26.0))
+@interface MTLLogicalToPhysicalColorAttachmentMap : NSObject<NSCopying>
+
+/// Maps a physical color attachment index to a logical index.
+///
+/// - Parameters:
+///   - physicalIndex: index of the color attachment's physical mapping.
+///   - logicalIndex: index of the color attachment's logical mapping.
+- (void)setPhysicalIndex:(NSUInteger)physicalIndex forLogicalIndex:(NSUInteger)logicalIndex;
+
+/// Queries the physical color attachment index corresponding to a logical index.
+- (NSUInteger)getPhysicalIndexForLogicalIndex:(NSUInteger)logicalIndex;
+
+- (void)reset;
+@end
+
+
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @interface MTLRenderPipelineReflection : NSObject
 
 @property (nonnull, readonly) NSArray <id<MTLBinding>> *vertexBindings API_AVAILABLE(macos(13.0), ios(16.0));
@@ -159,7 +194,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (readwrite, nonatomic, getter = isRasterizationEnabled) BOOL rasterizationEnabled;
 
 
-@property (readwrite, nonatomic) NSUInteger maxVertexAmplificationCount API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+@property (readwrite, nonatomic) NSUInteger maxVertexAmplificationCount API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0));
 
 @property (readonly) MTLRenderPipelineColorAttachmentDescriptorArray *colorAttachments;
 
@@ -231,28 +266,28 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
  */
 @property (readwrite, nonatomic) BOOL supportAddingVertexBinaryFunctions
-API_AVAILABLE(macos(12.0), ios(15.0));
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @property supportFragmentAddingBinaryFunctions
  @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
  */
 @property (readwrite, nonatomic) BOOL supportAddingFragmentBinaryFunctions
-API_AVAILABLE(macos(12.0), ios(15.0));
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @property maxVertexCallStackDepth
  @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
  */
 @property (readwrite, nonatomic) NSUInteger maxVertexCallStackDepth
-API_AVAILABLE(macos(12.0), ios(15.0));
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @property maxFragmentCallStackDepth
  @abstract The maximum depth of the call stack in stack frames from the shader. Defaults to 1 additional stack frame.
  */
 @property (readwrite, nonatomic) NSUInteger maxFragmentCallStackDepth
-API_AVAILABLE(macos(12.0), ios(15.0));
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 
 
@@ -271,7 +306,7 @@ API_AVAILABLE(macos(12.0), ios(15.0));
 
 @end
 
-MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0))
+MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0))
 @interface MTLRenderPipelineFunctionsDescriptor : NSObject <NSCopying>
 
 /*!
@@ -293,17 +328,79 @@ MTL_EXPORT API_AVAILABLE(macos(12.0), ios(15.0))
 @property (nullable, nonatomic, copy) NSArray<id<MTLFunction>> *tileAdditionalBinaryFunctions;
 @end
 
+@class MTL4RenderPipelineBinaryFunctionsDescriptor;
+@class MTL4PipelineDescriptor;
+
 /*!
  @protocol MTLRenderPipelineState
  @abstract MTLRenderPipelineState represents a compiled render pipeline
  
  @discussion MTLRenderPipelineState is a compiled render pipeline and can be set on a MTLRenderCommandEncoder.
  */
-API_AVAILABLE(macos(10.11), ios(8.0))
-@protocol MTLRenderPipelineState <NSObject>
+API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
+@protocol MTLRenderPipelineState <MTLAllocation, NSObject>
 
 @property (nullable, readonly) NSString *label;
 @property (readonly) id <MTLDevice> device;
+
+/// Obtains a reflection object for this render pipeline.
+///
+/// When you create the pipeline through an ``MTLDevice`` instance, reflection is `nil`.
+@property (nullable, readonly) MTLRenderPipelineReflection* reflection API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Obtains a function handle for the a specific function this pipeline links at the Metal IR level.
+///
+/// - Parameters:
+///   - name: A string containing the name of the function.
+///   - stage: The shader stage that uses the function.
+///
+/// - Returns: a function handle representing the function if present, otherwise `nil`.
+- (nullable id<MTLFunctionHandle>)functionHandleWithName:(NSString*)name
+                                                   stage:(MTLRenderStages)stage API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Obtains the function handle for a specific function this pipeline state links at the binary level.
+///
+/// - Parameters:
+///   - function: a binary function to retrieve the handle.
+///   - stage: The shader stage that uses the function.
+///
+/// - Returns: a function handle representing the function if present, otherwise `nil`.
+- (nullable id<MTLFunctionHandle>)functionHandleWithBinaryFunction:(id<MTL4BinaryFunction>)function
+                                                             stage:(MTLRenderStages)stage API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Creates a new render pipeline state by adding binary functions to each stage of this pipeline
+/// state.
+///
+/// - Parameters:
+///   - binaryFunctionsDescriptor: A non-`nil` dynamic linking descriptor.
+///   - error: An optional pointer that Metal populates with information in case of an error.
+///
+/// - Returns: A new render pipeline state upon success, otherwise `nil`.
+///
+- (nullable id<MTLRenderPipelineState>)newRenderPipelineStateWithBinaryFunctions:(MTL4RenderPipelineBinaryFunctionsDescriptor*)binaryFunctionsDescriptor
+                                                                           error:(NSError**)error API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Creates a render pipeline descriptor from this pipeline that you can use for pipeline specialization.
+///
+/// Use this method to obtain a new ``MTL4PipelineDescriptor`` instance that you can use to specialize any unspecialized
+/// properties in this pipeline state object.
+///
+/// The returned descriptor contains every unspecialized field in the current pipeline state object, set to unspecialized.
+/// It may, however, not contain valid or accurate properties in any other field.
+///
+/// This descriptor is only valid for the purpose of calling specialization functions on the ``MTL4Compiler`` to
+/// specialize this pipeline, for example: ``MTL4Compiler/newRenderPipelineStateBySpecializationWithDescriptor:pipeline:error:``.
+///
+/// Although this method returns the ``MTL4PipelineDescriptor`` base class, the concrete instance this method returns
+/// corresponds to the specific descriptor type for the creation of this pipeline state, for example if a ``MTL4Compiler``
+/// instance creates this current pipeline form a ``MTLTileRenderPipelineDescriptor``, this method returns a concrete
+/// ``MTLTileRenderPipelineDescriptor`` instance.
+///
+/// - Returns: a new pipeline descriptor that you use for pipeline state specialization.
+///
+- (MTL4PipelineDescriptor*)newRenderPipelineDescriptorForSpecialization
+    API_AVAILABLE(macos(26.0), ios(26.0));
+
 
 /*!
  @property maxTotalThreadsPerThreadgroup
@@ -380,31 +477,51 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method functionHandleWithFunction:stage:
  @brief Gets the function handle for the specified function on the specified stage of the pipeline.
  */
-- (nullable id<MTLFunctionHandle>)functionHandleWithFunction:(id<MTLFunction>)function stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0));
+- (nullable id<MTLFunctionHandle>)functionHandleWithFunction:(id<MTLFunction>)function stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method newVisibleFunctionTableWithDescriptor:stage:
  @brief Allocate a visible function table for the specified stage of the pipeline with the provided descriptor.
  */
-- (nullable id<MTLVisibleFunctionTable>)newVisibleFunctionTableWithDescriptor:(MTLVisibleFunctionTableDescriptor * __nonnull)descriptor stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0));
+- (nullable id<MTLVisibleFunctionTable>)newVisibleFunctionTableWithDescriptor:(MTLVisibleFunctionTableDescriptor * __nonnull)descriptor stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method newIntersectionFunctionTableWithDescriptor:stage:
  @brief Allocate an intersection function table for the specified stage of the pipeline with the provided descriptor.
  */
-- (nullable id <MTLIntersectionFunctionTable>)newIntersectionFunctionTableWithDescriptor:(MTLIntersectionFunctionTableDescriptor * _Nonnull)descriptor stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0));
+- (nullable id <MTLIntersectionFunctionTable>)newIntersectionFunctionTableWithDescriptor:(MTLIntersectionFunctionTableDescriptor * _Nonnull)descriptor stage:(MTLRenderStages)stage API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method newRenderPipelineStateWithAdditionalBinaryFunctions:error:
  @brief Allocate a new render pipeline state by adding binary functions for each stage of this pipeline state.
  */
-- (nullable id <MTLRenderPipelineState>)newRenderPipelineStateWithAdditionalBinaryFunctions:(nonnull MTLRenderPipelineFunctionsDescriptor *)additionalBinaryFunctions error:(__autoreleasing NSError **)error API_AVAILABLE(macos(12.0), ios(15.0));
+- (nullable id <MTLRenderPipelineState>)newRenderPipelineStateWithAdditionalBinaryFunctions:(nonnull MTLRenderPipelineFunctionsDescriptor *)additionalBinaryFunctions error:(__autoreleasing NSError **)error API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @property shaderValidation
  @abstract Current state of Shader Validation for the pipeline.
  */
 @property (readonly, nonatomic) MTLShaderValidation shaderValidation API_AVAILABLE(macos(15.0), ios(18.0));
+
+/*!
+ @property requiredThreadsPerTileThreadgroup
+ @abstract The required size of every tile shader threadgroup.
+*/
+@property (readonly) MTLSize requiredThreadsPerTileThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
+
+/*!
+ @property requiredThreadsPerObjectThreadgroup
+ @abstract The required size of every object shader threadgroup.
+ @discussion This value is set in MTLMeshRenderPipelineDescriptor.
+*/
+@property (readonly) MTLSize requiredThreadsPerObjectThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
+
+/*!
+ @property requiredThreadsPerMeshThreadgroup
+ @abstract The required size of every mesh shader threadgroup.
+ @discussion This value is set in MTLMeshRenderPipelineDescriptor.
+*/
+@property (readonly) MTLSize requiredThreadsPerMeshThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
 
 @end
 
@@ -508,14 +625,14 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5))
  @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
  */
 @property (readwrite, nonatomic) BOOL supportAddingBinaryFunctions
-API_AVAILABLE(macos(12.0), ios(15.0));
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @property maxCallStackDepth
  @abstract The maximum depth of the call stack in stack frames from the tile function. Defaults to 1 additional stack frame.
  */
 @property (readwrite, nonatomic) NSUInteger maxCallStackDepth
-API_AVAILABLE(macos(12.0), ios(15.0));
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 
 - (void)reset;
@@ -526,6 +643,14 @@ API_AVAILABLE(macos(12.0), ios(15.0));
  @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
  */
 @property (readwrite, nonatomic) MTLShaderValidation shaderValidation API_AVAILABLE(macos(15.0), ios(18.0));
+
+/*!
+ @property requiredThreadsPerThreadgroup
+ @abstract Sets the required threads-per-threadgroup during tile dispatches. The `threadsPerTile` argument of any tile dispatch must match to this value if it is set.
+           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
+           Setting this to a size of 0 in every dimension disables this property
+*/
+@property(readwrite, nonatomic) MTLSize requiredThreadsPerThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
 
 @end
 
@@ -744,6 +869,22 @@ MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
  @discussion The value can be overridden using `MTL_SHADER_VALIDATION_ENABLE_PIPELINES` or `MTL_SHADER_VALIDATION_DISABLE_PIPELINES` Environment Variables.
  */
 @property (readwrite, nonatomic) MTLShaderValidation shaderValidation API_AVAILABLE(macos(15.0), ios(18.0));
+
+/*!
+ @property requiredThreadsPerObjectThreadgroup
+ @abstract Sets the required object threads-per-threadgroup during mesh draws. The `threadsPerObjectThreadgroup` argument of any draw must match to this value if it is set.
+           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
+           Setting this to a size of 0 in every dimension disables this property
+*/
+@property (readwrite, nonatomic) MTLSize requiredThreadsPerObjectThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
+
+/*!
+ @property requiredThreadsPerMeshThreadgroup
+ @abstract Sets the required mesh threads-per-threadgroup during mesh draws. The `threadsPerMeshThreadgroup` argument of any draw must match to this value if it is set.
+           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
+           Setting this to a size of 0 in every dimension disables this property
+*/
+@property (readwrite, nonatomic) MTLSize requiredThreadsPerMeshThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
 
 @end
 

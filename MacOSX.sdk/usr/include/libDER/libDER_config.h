@@ -63,14 +63,18 @@ __BEGIN_DECLS
 typedef uint8_t DERByte;
 typedef uint16_t DERShort;
 typedef uint32_t DERInt;
+typedef int32_t DERSignedInt;
 typedef uint64_t DERLong;
+typedef int64_t DERSignedLong;
 typedef size_t DERSize;
 typedef bool DERBool;
 #else
 typedef UINT8 DERByte;
 typedef UINT16 DERShort;
 typedef UINT32 DERInt;
+typedef INT32 DERSignedInt;
 typedef UINT64 DERLong;
+typedef INT64 DERSignedLong;
 typedef size_t DERSize;
 typedef BOOLEAN DERBool;
 #endif
@@ -112,8 +116,8 @@ int DERMemcmp(const void *s1, const void *s2, size_t n);
 #define DER_TAG_SIZE            8
 #endif
 
-/* firebloom-evo defines */
-#if !defined(_MSC_VER) && __has_feature(firebloom)
+/* bounds-safety defines */
+#if !defined(_MSC_VER) && __has_feature(bounds_attributes)
 
 #define DER_counted_by(x)		__attribute__((counted_by(x)))
 #define DER_sized_by(x)			__attribute__((sized_by(x)))
@@ -124,19 +128,19 @@ int DERMemcmp(const void *s1, const void *s2, size_t n);
 #define DER_unsafe_indexable	__attribute__((unsafe_indexable))
 #define DER_unsafe_forge_bidi_indexable(P, S)	__builtin_unsafe_forge_bidi_indexable(P, S)
 
-/* For some prototype patterns that firebloom-evo doesn't handle without
+/* For some prototype patterns that bounds-safety doesn't handle without
  * compromise, we ask adopters to use a different entry point. The old
- * entry point is marked unavailable _only_ in firebloom builds, since
+ * entry point is marked unavailable _only_ in bounds-safety builds, since
  * there's nothing wrong with it otherwise.
  */
-#define DER_firebloom_replaced_platform(P, REP)    \
+#define DER_bounds_safety_replaced_platform(P, REP)    \
     __attribute__((availability(P, unavailable, replacement=#REP)))
 
-#define DER_firebloom_replaced(REP) \
-    DER_firebloom_replaced_platform(macosx, REP) \
-    DER_firebloom_replaced_platform(ios, REP)
+#define DER_bounds_safety_replaced(REP) \
+    DER_bounds_safety_replaced_platform(macosx, REP) \
+    DER_bounds_safety_replaced_platform(ios, REP)
 
-#else // !__has_feature(firebloom)
+#else // !__has_feature(bounds_attributes)
 
 #define DER_counted_by(x)
 #define DER_sized_by(x)
@@ -147,9 +151,9 @@ int DERMemcmp(const void *s1, const void *s2, size_t n);
 #define DER_unsafe_indexable
 #define DER_unsafe_forge_bidi_indexable(P, S) (P)
 
-#define DER_firebloom_replaced(...)
+#define DER_bounds_safety_replaced(...)
 
-#endif // !__has_feature(firebloom)
+#endif // !__has_feature(bounds_attributes)
 
 /* ---------------------- Do not edit below this line ---------------------- */
 

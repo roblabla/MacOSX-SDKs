@@ -545,7 +545,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     When primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled is set to YES, this method controls the switching behavior and conditions, while a movie file is being recorded.
  
  @discussion
-    This controls the camera selection behavior used while recording a movie, when enabled through primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled. Setting the switching behavior to anything other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported when connected to an AVCaptureDevice that does not suport constituent device selection throws an NSInvalidArgumentException. Setting restrictedSwitchingBehaviorConditions to something other than AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone while setting switchingBehavior to something other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted throws an NSInvalidArgumentException exception.
+    This controls the camera selection behavior used while recording a movie, when enabled through primaryConstituentDeviceSwitchingBehaviorForRecordingEnabled. Setting the switching behavior to anything other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorUnsupported when connected to an AVCaptureDevice that does not support constituent device selection throws an NSInvalidArgumentException. Setting restrictedSwitchingBehaviorConditions to something other than AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone while setting switchingBehavior to something other than AVCapturePrimaryConstituentDeviceSwitchingBehaviorRestricted throws an NSInvalidArgumentException exception.
  */
 - (void)setPrimaryConstituentDeviceSwitchingBehaviorForRecording:(AVCapturePrimaryConstituentDeviceSwitchingBehavior)switchingBehavior restrictedSwitchingBehaviorConditions:(AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions)restrictedSwitchingBehaviorConditions API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
@@ -575,7 +575,6 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     Returns whether or not capturing spatial video to a file is supported. Note that in order to be supported, two conditions must be met. (1) The source AVCaptureDevice's activeFormat.spatialVideoCaptureSupported property must return YES. (2) The video AVCaptureConnection's activeVideoStabilizationMode property must return AVCaptureVideoStabilizationModeCinematic, AVCaptureVideoStabilizationModeCinematicExtended, or AVCaptureVideoStabilizationModeCinematicExtendedEnhanced.
  */
 @property(nonatomic, readonly, getter=isSpatialVideoCaptureSupported) BOOL spatialVideoCaptureSupported API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
-
 /*!
  @property spatialVideoCaptureEnabled
  @abstract
@@ -585,6 +584,10 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     This property enables capturing spatial video to a file. By default, this property is set to NO. Check spatialVideoCaptureSupported before setting this property, as setting to YES will throw an exception if the feature is not supported.
  
     On iOS, enabling spatial video will overwrite the connected AVCaptureDevice's `videoZoomFactor`, `minAvailableVideoZoomFactor`, and `maxAvailableVideoZoomFactor` to the field of view of the narrower camera in the pair.
+ 
+    When spatialVideoCaptureEnabled is true, setting -[AVCaptureDeviceInput activeVideoMinFrameDuration] or -[AVCaptureDeviceInput activeVideoMaxFrameDuration] throws an NSInvalidArgumentException.
+  
+    Enabling this property throws an NSInvalidArgumentException if -[AVCaptureDevice isVideoFrameDurationLocked] or -[AVCaptureDevice isFollowingExternalSyncDevice] is true.
  */
 @property(nonatomic, getter=isSpatialVideoCaptureEnabled) BOOL spatialVideoCaptureEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 

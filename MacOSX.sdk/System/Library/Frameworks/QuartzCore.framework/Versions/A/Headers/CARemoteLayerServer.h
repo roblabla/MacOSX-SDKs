@@ -1,6 +1,6 @@
 /* CoreAnimation - CARemoteLayerServer.h
 
-   Copyright (c) 2010-2022, Apple Inc.
+   Copyright (c) 2010-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__
@@ -11,7 +11,8 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(macos(10.7))
+API_AVAILABLE(macos(10.7), macCatalyst(13.1))
+API_UNAVAILABLE(ios, tvos, watchos, visionos)
 @interface CARemoteLayerServer : NSObject
 {
 }

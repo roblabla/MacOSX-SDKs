@@ -141,6 +141,14 @@ CV_EXPORT CFArrayRef CF_RETURNS_RETAINED CV_NULLABLE CVPixelFormatDescriptionArr
 CV_EXPORT void CVPixelFormatDescriptionRegisterDescriptionWithPixelFormatType(CFDictionaryRef CV_NONNULL description, OSType pixelFormat) __OSX_AVAILABLE_STARTING(__MAC_10_4,__IPHONE_4_0);
 
 /*!
+    @function CVPixelFormatTypeCopyFourCharCodeString
+    @abstract Creates a string with a formatted representation of a pixel format
+    @param pixelFormat The pixel format to convert
+    @result A string with a user displayable conversion of a pixel format.
+ */
+CV_EXPORT CFStringRef CV_NONNULL CVPixelFormatTypeCopyFourCharCodeString(OSType pixelFormat) CF_RETURNS_RETAINED API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0));
+
+/*!
 	@function   CVIsCompressedPixelFormatAvailable
 	@abstract   Checks if a compressed pixel format is supported on the current platform.
 	@param      pixelFormatType compressed pixel format.

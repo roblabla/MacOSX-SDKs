@@ -37,7 +37,8 @@ exports:
                        _VirtualGarageConfig_EVRoutingUseCarDisplaySimIdentifier, 
                        _VirtualGarageConfig_EVRoutingUseMapsSyncLiveUpdates, _VirtualGarageConfig_EnableAutomaticVehicleUnpairing, 
                        _VirtualGarageConfig_TimeThresholdForVehicleStateComparison, 
-                       _startHostingVirtualGarageServiceWithPersister, _stopHostingVirtualGarageService ]
+                       __vg_isInternalInstall, _startHostingVirtualGarageServiceWithPersister, 
+                       _stopHostingVirtualGarageService ]
     objc-classes:    [ VGChargingNetwork, VGChargingNetworkAvailabilityProvider, 
                        VGChargingNetworkStorage, VGChargingNetworksStorage, VGDataCoordinator, 
                        VGOEMApplication, VGOEMApplicationFinder, VGVehicle, VGVehicleDeduper, 

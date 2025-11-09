@@ -2,7 +2,7 @@
 /*!
 	@file		AVAudioSessionTypes.h
 	@framework	AudioSession.framework
-	@copyright	(c) 2009-2023 Apple Inc. All rights reserved.
+	@copyright	(c) 2009-2024 Apple Inc. All rights reserved.
 */
 
 #ifndef AudioSession_AVAudioSessionTypes_h
@@ -138,7 +138,7 @@ OS_EXPORT AVAudioSessionMode const AVAudioSessionModeDefault API_AVAILABLE(ios(5
 /*! Only valid with AVAudioSessionCategoryPlayAndRecord.  Appropriate for Voice over IP
  (VoIP) applications.  Reduces the number of allowable audio routes to be only those
  that are appropriate for VoIP applications and may engage appropriate system-supplied
- signal processing.  Has the side effect of setting AVAudioSessionCategoryOptionAllowBluetooth.
+ signal processing.  Has the side effect of setting AVAudioSessionCategoryOptionAllowBluetoothHFP.
  Using this mode without the VoiceProcessing IO unit or AVAudioEngine with voice processing enabled will result in the following:
 - Chat-specific signal processing such as echo cancellation or automatic gain correction will not be loaded
 - Dynamic processing on input and output will be disabled resulting in a lower output playback level. */
@@ -167,7 +167,7 @@ OS_EXPORT AVAudioSessionMode const AVAudioSessionModeMoviePlayback API_AVAILABLE
 /*! Only valid with kAudioSessionCategory_PlayAndRecord. Reduces the number of allowable audio
  routes to be only those that are appropriate for video chat applications. May engage appropriate
  system-supplied signal processing.  Has the side effect of setting
- AVAudioSessionCategoryOptionAllowBluetooth and AVAudioSessionCategoryOptionDefaultToSpeaker. 
+ AVAudioSessionCategoryOptionAllowBluetoothHFP and AVAudioSessionCategoryOptionDefaultToSpeaker. 
  Using this mode without the VoiceProcessing IO unit or AVAudioEngine with voice processing enabled will result in the following:
 - Chat-specific signal processing such as echo cancellation or automatic gain correction will not be loaded
 - Dynamic processing on input and output will be disabled resulting in a lower output playback level. */
@@ -184,6 +184,170 @@ OS_EXPORT AVAudioSessionMode const AVAudioSessionModeSpokenAudio API_AVAILABLE(i
  AVAudioSessionCategoryOptionDuckOthers and AVAudioSessionCategoryOptionInterruptSpokenAudioAndMixWithOthers */
 OS_EXPORT AVAudioSessionMode const AVAudioSessionModeVoicePrompt API_AVAILABLE(ios(12.0), watchos(5.0), tvos(12.0)) API_UNAVAILABLE(macos);
 
+
+/// Appropriate for applications playing short-form video content.
+///
+/// Only valid with ``AVAudioSessionCategoryPlayback``.
+/// Not applicable with ``AVAudioSessionRouteSharingPolicy/AVAudioSessionRouteSharingPolicyLongFormAudio``,
+/// or ``AVAudioSessionRouteSharingPolicy/AVAudioSessionRouteSharingPolicyLongFormVideo``.
+///
+/// When this mode is set:
+/// - system will make informed decisions to automatically unmute the output of the media if the user shows intention of unmuting.
+/// 	- When auto-unmuted, ``AVAudioSessionUserIntentToUnmuteOutputNotification`` and ``AVAudioSessionOutputMuteStateChangeNotification`` will be sent.
+/// - if the session is output muted, system may prevent interrupting other active audio apps.
+OS_EXPORT AVAudioSessionMode const AVAudioSessionModeShortFormVideo API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos, macos);
+
+
+#pragma mark-- Names for NSNotifications --
+
+/*!
+	@brief	Notification sent to registered listeners when the system has interrupted the audio
+			session and when the interruption has ended.
+
+	Check the notification's userInfo dictionary for the interruption type, which is either
+	Begin or End. In the case of an end interruption notification, check the userInfo dictionary
+	for AVAudioSessionInterruptionOptions that indicate whether audio playback should resume.
+	In the case of a begin interruption notification, the reason for the interruption can be found
+	within the info dictionary under the key AVAudioSessionInterruptionReasonKey.
+*/
+OS_EXPORT NSNotificationName const  AVAudioSessionInterruptionNotification API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/*!
+	@brief	Notification sent to registered listeners when an audio route change has occurred.
+
+	Check the notification's userInfo dictionary for the route change reason and for a description
+	of the previous audio route.
+*/
+OS_EXPORT NSNotificationName const  AVAudioSessionRouteChangeNotification API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/*!
+	@brief	Notification sent to registered listeners if the media server is killed.
+
+	In the event that the server is killed, take appropriate steps to handle requests that come in
+	before the server resets.  See Technical Q&A QA1749.
+*/
+OS_EXPORT NSNotificationName const  AVAudioSessionMediaServicesWereLostNotification API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/*!
+	@brief	Notification sent to registered listeners when the media server restarts.
+
+	In the event that the server restarts, take appropriate steps to re-initialize any audio objects
+	used by your application.  See Technical Q&A QA1749.
+*/
+OS_EXPORT NSNotificationName const  AVAudioSessionMediaServicesWereResetNotification API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/*!
+	@brief	Notification sent to registered listeners when they are in the foreground with an active
+		audio session and primary audio from other applications starts and stops.
+
+	Check the notification's userInfo dictionary for the notification type, which is either Begin or
+	End. Foreground applications may use this notification as a hint to enable or disable audio that
+	is secondary to the functionality of the application. For more information, see the related
+	property secondaryAudioShouldBeSilencedHint.
+*/
+OS_EXPORT NSNotificationName const  AVAudioSessionSilenceSecondaryAudioHintNotification API_AVAILABLE(ios(8.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/*!
+	@brief  Notification sent to registered listeners when spatial playback capabilities are changed due to a
+	change in user preference.
+
+	Check the notification's userInfo dictionary for AVAudioSessionSpatialAudioEnabledKey to check if spatial
+	audio is enabled.
+
+	Observers of this notification should also observe AVAudioSessionRouteChangeNotification since a route change
+	may also result in a change in the ability for the system to play spatial audio. Use
+	AVAudioSessionPortDescription's isSpatialAudioEnabled property to check if the current route supports
+	spatialized playback.
+*/
+OS_EXPORT NSNotificationName const  AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos) NS_SWIFT_NAME(AVAudioSession.spatialPlaybackCapabilitiesChangedNotification);
+
+/// Notification sent to registered listeners when the resolved rendering mode changes.
+OS_EXPORT NSNotificationName const  AVAudioSessionRenderingModeChangeNotification API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos) NS_SWIFT_NAME(AVAudioSession.renderingModeChangeNotification);
+
+/*!
+	 @brief Notification sent to registered listeners when the rendering capabilities change.
+ */
+OS_EXPORT NSNotificationName const AVAudioSessionRenderingCapabilitiesChangeNotification API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos) NS_SWIFT_NAME(AVAudioSession.renderingCapabilitiesChangeNotification);
+
+/*!
+     @brief Notification sent to registered listeners when the system's capability to inject audio into input stream is changed
+ 
+ Check the notification's userInfo dictionary for AVAudioSessionMicrophoneInjectionIsAvailableKey to check if microphone
+ injection is available. Use AVAudioSession's isMicrophoneInjectionAvailable property to check if microphone injection is available
+ */
+OS_EXPORT NSNotificationName const AVAudioSessionMicrophoneInjectionCapabilitiesChangeNotification API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos) NS_SWIFT_NAME(AVAudioSession.microphoneInjectionCapabilitiesChangeNotification);
+
+/// Notification sent to registered listeners when session's output mute state changes.
+///
+/// The userInfo dictionary will contain the updated output mute value as accessed by ``AVAudioSessionMuteStateKey``
+OS_EXPORT NSNotificationName const AVAudioSessionOutputMuteStateChangeNotification API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos, macos) NS_SWIFT_NAME(AVAudioSession.outputMuteStateChangeNotification);
+
+/// Keys for ``AVAudioSessionOutputMuteStateChangeNotification``
+/// Value is `NSNumber` type with boolean value 0 for unmuted or value 1 for muted (samples zeroed out)
+OS_EXPORT NSString *const AVAudioSessionMuteStateKey API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos, macos) NS_SWIFT_NAME(AVAudioSession.muteStateKey);
+
+/// Notification sent to registered listeners when the application's output is muted and user hints to unmute.
+OS_EXPORT NSNotificationName const AVAudioSessionUserIntentToUnmuteOutputNotification API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos, macos) NS_SWIFT_NAME(AVAudioSession.userIntentToUnmuteOutputNotification);
+
+#pragma mark-- Keys for NSNotification userInfo dictionaries --
+
+/// keys for AVAudioSessionSpatialPlaybackCapabilitiesChangedNotification
+/// value is an NSNumber whose boolean value indicates if spatial audio enabled.
+OS_EXPORT NSString *const AVAudioSessionSpatialAudioEnabledKey API_AVAILABLE(ios(15.0), watchos(8.0), tvos(15.0)) API_UNAVAILABLE(macos);
+
+/// keys for AVAudioSessionInterruptionNotification
+/// Value is an NSNumber representing an AVAudioSessionInterruptionType
+OS_EXPORT NSString *const AVAudioSessionInterruptionTypeKey API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/// Only present for end interruption events.  Value is of type AVAudioSessionInterruptionOptions.
+OS_EXPORT NSString *const AVAudioSessionInterruptionOptionKey API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/// Only present in begin interruption events. Value is of type AVAudioSessionInterruptionReason.
+OS_EXPORT NSString *const AVAudioSessionInterruptionReasonKey API_AVAILABLE(ios(14.5), watchos(7.3)) API_UNAVAILABLE(tvos, macos);
+
+/*!
+	Only present in begin interruption events, where the interruption is a direct result of the
+	application being suspended by the operating sytem. Value is a boolean NSNumber, where a true
+	value indicates that the interruption is the result of the application being suspended, rather
+	than being interrupted by another audio session.
+
+	Starting in iOS 10, the system will deactivate the audio session of most apps in response to the
+	app process being suspended. When the app starts running again, it will receive the notification
+	that its session has been deactivated by the system. Note that the notification is necessarily
+	delayed in time, due to the fact that the application was suspended at the time the session was
+	deactivated by the system and the notification can only be delivered once the app is running
+	again.
+*/
+OS_EXPORT NSString *const AVAudioSessionInterruptionWasSuspendedKey API_DEPRECATED("No longer supported - see AVAudioSessionInterruptionReasonKey", ios(10.3, 14.5), watchos(3.2, 7.3), tvos(10.3, 14.5));
+
+/// keys for AVAudioSessionRouteChangeNotification
+/// value is an NSNumber representing an AVAudioSessionRouteChangeReason
+OS_EXPORT NSString *const AVAudioSessionRouteChangeReasonKey API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+/// value is AVAudioSessionRouteDescription *
+OS_EXPORT NSString *const AVAudioSessionRouteChangePreviousRouteKey API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/// keys for AVAudioSessionSilenceSecondaryAudioHintNotification
+/// value is an NSNumber representing an AVAudioSessionSilenceSecondaryAudioHintType
+OS_EXPORT NSString *const AVAudioSessionSilenceSecondaryAudioHintTypeKey API_AVAILABLE(ios(8.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+
+/// keys for AVAudioSessionRenderingModeChangeNotification
+/// Contains a payload of NSInteger representing the new resolved rendering mode
+OS_EXPORT NSString *const AVAudioSessionRenderingModeNewRenderingModeKey API_AVAILABLE(ios(17.2), tvos(17.2)) API_UNAVAILABLE(watchos, macos, visionos);
+
+/*!
+    Keys for AVAudioSessionMicrophoneInjectionCapabilitiesChangeNotification
+*/
+/// Indicates if microphone injection is available.
+/// Value is an NSNumber whose boolean value indicates if microphone injection is available.
+OS_EXPORT NSString *const AVAudioSessionMicrophoneInjectionIsAvailableKey API_AVAILABLE(ios(18.2), visionos(2.2)) API_UNAVAILABLE(tvos, watchos, macos);
+
+/*!
+	@brief  Notification sent to registered listeners when there are changes in ``availableInputs``.
+
+	There is no payload (userInfo dictionary) associated with the ``AVAudioSessionAvailableInputsChangeNotification`` notification.
+*/
+OS_EXPORT NSNotificationName const AVAudioSessionAvailableInputsChangeNotification API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos, macos)
+NS_SWIFT_NAME(AVAudioSession.availableInputsChangeNotification);
 
 #pragma mark-- enumerations --
 
@@ -239,160 +403,172 @@ typedef NS_ENUM(NSUInteger, AVAudioSessionRouteChangeReason) {
     AVAudioSessionRouteChangeReasonRouteConfigurationChange = 8
 };
 
-/*!
-    @enum        AVAudioSessionCategoryOptions
-    @brief        Customization of various aspects of a category's behavior. Use with
-                setCategory:mode:options:error:.
 
-    Applications must be prepared for changing category options to fail as behavior may change
-    in future releases. If an application changes its category, it should reassert the options,
-    since they are not sticky across category changes. Introduced in iOS 6.0 / watchOS 2.0 /
-    tvOS 9.0.
-
-    @var AVAudioSessionCategoryOptionMixWithOthers
-        Controls whether other active audio apps will be interrupted or mixed with when your app's
-        audio session goes active. Details depend on the category.
-
-        AVAudioSessionCategoryPlayAndRecord or AVAudioSessionCategoryMultiRoute:
-             MixWithOthers defaults to false, but can be set to true, allowing other applications to
-             play in the background while your app has both audio input and output enabled.
-
-        AVAudioSessionCategoryPlayback:
-             MixWithOthers defaults to false, but can be set to true, allowing other applications to
-             play in the background. Your app will still be able to play regardless of the setting
-             of the ringer switch.
-
-        Other categories:
-             MixWithOthers defaults to false and cannot be changed.
-
-        MixWithOthers is only valid with AVAudioSessionCategoryPlayAndRecord,
-        AVAudioSessionCategoryPlayback, and AVAudioSessionCategoryMultiRoute.
-
-    @var AVAudioSessionCategoryOptionDuckOthers
-        Controls whether or not other active audio apps will be ducked when when your app's audio
-        session goes active. An example of this is a workout app, which provides periodic updates to
-        the user. It reduces the volume of any music currently being played while it provides its
-        status.
-
-        Defaults to off. Note that the other audio will be ducked for as long as the current session
-        is active. You will need to deactivate your audio session when you want to restore full
-        volume playback (un-duck) other sessions.
-
-        Setting this option will also make your session mixable with others
-        (AVAudioSessionCategoryOptionMixWithOthers will be set).
-
-        DuckOthers is only valid with AVAudioSessionCategoryAmbient,
-        AVAudioSessionCategoryPlayAndRecord, AVAudioSessionCategoryPlayback, and
-        AVAudioSessionCategoryMultiRoute.
-
-    @var AVAudioSessionCategoryOptionAllowBluetooth
-        Allows an application to change the default behavior of some audio session categories with
-        regard to whether Bluetooth Hands-Free Profile (HFP) devices are available for routing. The
-        exact behavior depends on the category.
-
-        AVAudioSessionCategoryPlayAndRecord:
-            AllowBluetooth defaults to false, but can be set to true, allowing a paired bluetooth
-            HFP device to appear as an available route for input, while playing through the
-            category-appropriate output.
-
-        AVAudioSessionCategoryRecord:
-            AllowBluetooth defaults to false, but can be set to true, allowing a paired Bluetooth
-            HFP device to appear as an available route for input
-
-        Other categories:
-            AllowBluetooth defaults to false and cannot be changed. Enabling Bluetooth for input in
-            these categories is not allowed.
-
-    @var AVAudioSessionCategoryOptionDefaultToSpeaker
-        Allows an application to change the default behavior of some audio session categories with
-        regard to the audio route. The exact behavior depends on the category.
-
-        AVAudioSessionCategoryPlayAndRecord:
-            DefaultToSpeaker will default to false, but can be set to true, routing to Speaker
-            (instead of Receiver) when no other audio route is connected.
-
-        Other categories:
-            DefaultToSpeaker is always false and cannot be changed.
-
-    @var AVAudioSessionCategoryOptionInterruptSpokenAudioAndMixWithOthers
-        When a session with InterruptSpokenAudioAndMixWithOthers set goes active, then if there is
-        another playing app whose session mode is AVAudioSessionModeSpokenAudio (for podcast
-        playback in the background, for example), then the spoken-audio session will be
-        interrupted. A good use of this is for a navigation app that provides prompts to its user:
-        it pauses any spoken audio currently being played while it plays the prompt.
-
-        InterruptSpokenAudioAndMixWithOthers defaults to off. Note that the other app's audio will
-        be paused for as long as the current session is active. You will need to deactivate your
-        audio session to allow the other session to resume playback. Setting this option will also
-        make your category mixable with others (AVAudioSessionCategoryOptionMixWithOthers will be
-        set). If you want other non-spoken audio apps to duck their audio when your app's session
-        goes active, also set AVAudioSessionCategoryOptionDuckOthers.
-
-        Only valid with AVAudioSessionCategoryPlayAndRecord, AVAudioSessionCategoryPlayback, and
-        AVAudioSessionCategoryMultiRoute. Introduced in iOS 9.0 / watchOS 2.0 / tvOS 9.0.
-
-    @var AVAudioSessionCategoryOptionAllowBluetoothA2DP
-        Allows an application to change the default behavior of some audio session categories with
-        regard to whether Bluetooth Advanced Audio Distribution Profile (A2DP) devices are
-        available for routing. The exact behavior depends on the category.
-
-        AVAudioSessionCategoryPlayAndRecord:
-            AllowBluetoothA2DP defaults to false, but can be set to true, allowing a paired
-            Bluetooth A2DP device to appear as an available route for output, while recording
-            through the category-appropriate input.
-
-        AVAudioSessionCategoryMultiRoute and AVAudioSessionCategoryRecord:
-            AllowBluetoothA2DP is false, and cannot be set to true.
-
-        Other categories:
-            AllowBluetoothA2DP is always implicitly true and cannot be changed; Bluetooth A2DP ports
-            are always supported in output-only categories.
-
-        Setting both AVAudioSessionCategoryOptionAllowBluetooth and
-        AVAudioSessionCategoryOptionAllowBluetoothA2DP is allowed. In cases where a single
-        Bluetooth device supports both HFP and A2DP, the HFP ports will be given a higher priority
-        for routing. For HFP and A2DP ports on separate hardware devices, the last-in wins rule
-        applies.
-
-        Introduced in iOS 10.0 / watchOS 3.0 / tvOS 10.0.
-
-    @var AVAudioSessionCategoryOptionAllowAirPlay
-        Allows an application to change the default behavior of some audio session categories
-        with regard to showing AirPlay devices as available routes. This option applies to
-        various categories in the same way as AVAudioSessionCategoryOptionAllowBluetoothA2DP;
-        see above for details.
-
-        Only valid with AVAudioSessionCategoryPlayAndRecord. Introduced in iOS 10.0 / tvOS 10.0.
-
-    @var AVAudioSessionCategoryOptionOverrideMutedMicrophoneInterruption
-        Some devices include a privacy feature that mutes the built-in microphone at a hardware level
-        under certain conditions e.g. when the Smart Folio of an iPad is closed. The default behavior is
-        to interrupt the session using the built-in microphone when that microphone is muted in hardware.
-        This option allows an application to opt out of the default behavior if it is using a category that
-        supports both input and output, such as AVAudioSessionCategoryPlayAndRecord, and wants to
-        allow its session to stay activated even when the microphone has been muted. The result would be
-        that playback continues as normal, and microphone sample buffers would continue to be produced
-        but all microphone samples would have a value of zero.
-
-        This may be useful if an application knows that it wants to allow playback to continue and
-        recording/monitoring a muted microphone will not lead to a poor user experience. Attempting to use
-        this option with a session category that doesn't support the use of audio input will result in an error.
-
-        Note that under the default policy, a session will be interrupted if it is running input at the time when
-        the microphone is muted in hardware. Similarly, attempting to start input when the microphone is
-        muted will fail.
-        Note that this option has no relation to the recordPermission property, which indicates whether or
-        not the user has granted permission to use microphone input.
-*/
+///		Customization of various aspects of a category's behavior.
+///		Use with ``AVAudioSession/setCategory:mode:options:error:``.
+///
+///    Applications must be prepared for changing category options to fail as behavior may change
+///    in future releases. If an application changes its category, it should reassert the options,
+///    since they are not sticky across category changes. Introduced in iOS 6.0 / watchOS 2.0 /
+///    tvOS 9.0.
 typedef NS_OPTIONS(NSUInteger, AVAudioSessionCategoryOptions) {
+
+	///		Controls whether other active audio apps will be interrupted or mixed with when your app's
+	///		audio session goes active. Details depend on the category.
+	///
+	///		- ``AVAudioSessionCategoryPlayAndRecord`` or ``AVAudioSessionCategoryMultiRoute``:
+	///			MixWithOthers defaults to false, but can be set to true, allowing other applications to
+	///			play in the background while your app has both audio input and output enabled.
+	///
+	///		- ``AVAudioSessionCategoryPlayback``:
+	///			MixWithOthers defaults to false, but can be set to true, allowing other applications to
+	///			play in the background. Your app will still be able to play regardless of the setting
+	///			of the ringer switch.
+	///
+	///		- Other categories:
+	///			MixWithOthers defaults to false and cannot be changed.
+	///
+	///		MixWithOthers is only valid with ``AVAudioSessionCategoryPlayAndRecord``,
+	///		``AVAudioSessionCategoryPlayback``, and ``AVAudioSessionCategoryMultiRoute``.
     AVAudioSessionCategoryOptionMixWithOthers            = 0x1,
+
+	///		Controls whether or not other active audio apps will be ducked when when your app's audio
+	///		session goes active. An example of this is a workout app, which provides periodic updates to
+	///		the user. It reduces the volume of any music currently being played while it provides its
+	///		status.
+	///
+	///		Defaults to off. Note that the other audio will be ducked for as long as the current session
+	///		is active. You will need to deactivate your audio session when you want to restore full
+	///		volume playback (un-duck) other sessions.
+	///
+	///		Setting this option will also make your session mixable with others
+	///		(``AVAudioSessionCategoryOptionMixWithOthers`` will be set).
+	///
+	///		DuckOthers is only valid with ``AVAudioSessionCategoryAmbient``,
+	///		``AVAudioSessionCategoryPlayAndRecord``, ``AVAudioSessionCategoryPlayback``, and
+	///		``AVAudioSessionCategoryMultiRoute``.
     AVAudioSessionCategoryOptionDuckOthers               = 0x2,
-    AVAudioSessionCategoryOptionAllowBluetooth API_AVAILABLE(tvos(17.0), watchos(11.0)) API_UNAVAILABLE(macos) = 0x4,
-    AVAudioSessionCategoryOptionDefaultToSpeaker API_UNAVAILABLE(tvos, watchos, macos) = 0x8,
-    AVAudioSessionCategoryOptionInterruptSpokenAudioAndMixWithOthers API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 0x11,
-    AVAudioSessionCategoryOptionAllowBluetoothA2DP API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0)) API_UNAVAILABLE(macos) = 0x20,
-    AVAudioSessionCategoryOptionAllowAirPlay API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos, macos) = 0x40,
-    AVAudioSessionCategoryOptionOverrideMutedMicrophoneInterruption API_AVAILABLE(ios(14.5), watchos(7.3)) API_UNAVAILABLE(tvos, macos) = 0x80,
+
+	/// Deprecated - please see ``AVAudioSessionCategoryOptionAllowBluetoothHFP``
+	AVAudioSessionCategoryOptionAllowBluetooth API_DEPRECATED_WITH_REPLACEMENT("AVAudioSessionCategoryOptionAllowBluetoothHFP", ios(1.0, 8.0), watchos(11.0, 11.0), tvos(17.0, 17.0), visionos(1.0, 1.0)) API_UNAVAILABLE(macos) = 0x4,
+
+	///		Allows an application to change the default behavior of some audio session categories with
+	///		regard to whether Bluetooth Hands-Free Profile (HFP) devices are available for routing. The
+	///		exact behavior depends on the category.
+	///
+	///		- ``AVAudioSessionCategoryPlayAndRecord``:
+	///			AllowBluetoothHFP defaults to false, but can be set to true, allowing a paired bluetooth
+	///			HFP device to appear as an available route for input, while playing through the
+	///			category-appropriate output.
+	///
+	///		- ``AVAudioSessionCategoryRecord``:
+	///			AllowBluetoothHFP defaults to false, but can be set to true, allowing a paired Bluetooth
+	///			HFP device to appear as an available route for input.
+	///
+	///		- Other categories:
+	///			AllowBluetoothHFP defaults to false and cannot be changed. Enabling Bluetooth for input in
+	///			these categories is not allowed.
+	AVAudioSessionCategoryOptionAllowBluetoothHFP API_AVAILABLE(ios(1.0), watchos(11.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(macos) = 0x4,
+
+	///		Allows an application to change the default behavior of some audio session categories with
+	///		regard to the audio route. The exact behavior depends on the category.
+	///
+	///		- ``AVAudioSessionCategoryPlayAndRecord``:
+	///			DefaultToSpeaker will default to false, but can be set to true, routing to Speaker
+	///			(instead of Receiver) when no other audio route is connected.
+	///
+	///		- Other categories:
+	///			DefaultToSpeaker is always false and cannot be changed.
+	AVAudioSessionCategoryOptionDefaultToSpeaker API_UNAVAILABLE(tvos, watchos, macos) = 0x8,
+
+	///		When a session with InterruptSpokenAudioAndMixWithOthers set goes active, then if there is
+	///		another playing app whose session mode is ``AVAudioSessionModeSpokenAudio`` (for podcast
+	///		playback in the background, for example), then the spoken-audio session will be
+	///		interrupted. A good use of this is for a navigation app that provides prompts to its user:
+	///		it pauses any spoken audio currently being played while it plays the prompt.
+	///
+	///		InterruptSpokenAudioAndMixWithOthers defaults to off. Note that the other app's audio will
+	///		be paused for as long as the current session is active. You will need to deactivate your
+	///		audio session to allow the other session to resume playback. Setting this option will also
+	///		make your category mixable with others (``AVAudioSessionCategoryOptionMixWithOthers``
+	///		will be set). If you want other non-spoken audio apps to duck their audio when your app's session
+	///		goes active, also set ``AVAudioSessionCategoryOptionDuckOthers``.
+	///
+	///		Only valid with ``AVAudioSessionCategoryPlayAndRecord``,
+	///		``AVAudioSessionCategoryPlayback``, and ``AVAudioSessionCategoryMultiRoute``.
+	AVAudioSessionCategoryOptionInterruptSpokenAudioAndMixWithOthers API_AVAILABLE(ios(9.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) = 0x11,
+
+	///		Allows an application to change the default behavior of some audio session categories with
+	///		regard to whether Bluetooth Advanced Audio Distribution Profile (A2DP) devices are
+	///		available for routing. The exact behavior depends on the category.
+	///
+	///		- ``AVAudioSessionCategoryPlayAndRecord``:
+	///			AllowBluetoothA2DP defaults to false, but can be set to true, allowing a paired
+	///			Bluetooth A2DP device to appear as an available route for output, while recording
+	///			through the category-appropriate input.
+	///
+	///		- ``AVAudioSessionCategoryMultiRoute`` and ``AVAudioSessionCategoryRecord``:
+	///			AllowBluetoothA2DP is false, and cannot be set to true.
+	///
+	///		- Other categories:
+	///			AllowBluetoothA2DP is always implicitly true and cannot be changed; Bluetooth A2DP ports
+	///			are always supported in output-only categories.
+	///
+	///		Setting both ``AVAudioSessionCategoryOptionAllowBluetoothHFP``
+	///		and ``AVAudioSessionCategoryOptionAllowBluetoothA2DP`` is
+	///		allowed. In cases where a single Bluetooth device supports both HFP and A2DP, the HFP
+	///		ports will be given a higher priority for routing. For HFP and A2DP ports on separate
+	///		hardware devices, the last-in wins rule applies.
+	AVAudioSessionCategoryOptionAllowBluetoothA2DP API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0)) API_UNAVAILABLE(macos) = 0x20,
+
+	///		Allows an application to change the default behavior of some audio session categories
+	///		with regard to showing AirPlay devices as available routes. This option applies to
+	///		various categories in the same way as ``AVAudioSessionCategoryOptionAllowBluetoothA2DP``;
+	///		see above for details. Only valid with ``AVAudioSessionCategoryPlayAndRecord``.
+	AVAudioSessionCategoryOptionAllowAirPlay API_AVAILABLE(ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos, macos) = 0x40,
+
+	///		Some devices include a privacy feature that mutes the built-in microphone at a hardware level
+	///		under certain conditions e.g. when the Smart Folio of an iPad is closed. The default behavior is
+	///		to interrupt the session using the built-in microphone when that microphone is muted in hardware.
+	///		This option allows an application to opt out of the default behavior if it is using a category that
+	///		supports both input and output, such as ``AVAudioSessionCategoryPlayAndRecord``, and wants to
+	///		allow its session to stay activated even when the microphone has been muted. The result would be
+	///		that playback continues as normal, and microphone sample buffers would continue to be produced
+	///		but all microphone samples would have a value of zero.
+	///
+	///		This may be useful if an application knows that it wants to allow playback to continue and
+	///		recording/monitoring a muted microphone will not lead to a poor user experience. Attempting to use
+	///		this option with a session category that doesn't support the use of audio input will result in an error.
+	///
+	///		- Note Under the default policy, a session will be interrupted if it is running input at the time when
+	///		the microphone is muted in hardware. Similarly, attempting to start input when the microphone is
+	///		muted will fail.
+	///		- Note This option has no relation to the recordPermission property, which indicates whether or
+	///		not the user has granted permission to use microphone input.
+	AVAudioSessionCategoryOptionOverrideMutedMicrophoneInterruption API_AVAILABLE(ios(14.5), watchos(7.3)) API_UNAVAILABLE(tvos, macos) = 0x80,
+
+	///		When this option is specified with a category that supports both input and output, the session
+	///		will enable full-bandwidth audio in both input & output directions, if the Bluetooth route supports
+	///		it (e.g. certain AirPods models). It is currently compatible only with mode ``AVAudioSessionModeDefault``.
+	///
+	///		- Support for this can be queried on input ports via the BluetoothMicrophone interface on a port,
+	///			via its member `highQualityRecording.isSupported`.
+	///
+	///		- Active sessions can see if full-bandwidth Bluetooth audio was successfully enabled by querying
+	///		the BluetoothMicrophone interface of the input port of the current route for:
+	///		`highQualityRecording.isEnabled`.
+	///
+	///		- When this option is provided alone, it will be enabled if the route supports it, otherwise the option
+	///		will be ignored. This option may be combined with ``AVAudioSessionCategoryOptionAllowBluetoothHFP``,
+	///		in which case HFP will be used as a fallback if the route does not support this
+	///		``AVAudioSessionCategoryOptionBluetoothHighQualityRecording`` option.
+	///
+	///		- Note This option may increase input latency when enabled and is therefore not recommended for
+	///			real-time communication usage.
+	///		- Note Apps using ``AVAudioSessionCategoryOptionBluetoothHighQualityRecording``
+	///		may want to consider setting ``AVAudioSession/setPrefersNoInterruptionsFromSystemAlerts:error:``
+	///		while recording, to avoid the recording session being interrupted by an incoming call ringtone.
+	AVAudioSessionCategoryOptionBluetoothHighQualityRecording API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, macCatalyst, visionos, macos) = 1 << 19
 };
 
 /// Values for AVAudioSessionInterruptionTypeKey in AVAudioSessionInterruptionNotification's
@@ -670,6 +846,81 @@ typedef NS_ENUM(NSInteger, AVAudioSessionMicrophoneInjectionMode) {
     /// Inject Spoken Audio, like synthesized speech, with microphone audio
     AVAudioSessionMicrophoneInjectionModeSpokenAudio = 1,
 } NS_SWIFT_NAME(AVAudioSession.MicrophoneInjectionMode);
+
+#if TARGET_OS_VISION
+/*!
+ The perceived "size" or "immersivity" of the sound. Use Small for least
+ immersive and Large for most immersive.
+ */
+typedef NS_ENUM(NSInteger, AVAudioSessionSoundStageSize) {
+	/// The audio session determines its own sound stage size based on
+	/// a handful of factors
+	AVAudioSessionSoundStageSizeAutomatic = 0,
+
+	/// A smaller, front-focused sound stage
+	AVAudioSessionSoundStageSizeSmall     = 1,
+
+	/// A medium-immersive sound stage
+	AVAudioSessionSoundStageSizeMedium    = 2,
+
+	/// A fully-immersive sound stage
+	AVAudioSessionSoundStageSizeLarge     = 3,
+} NS_SWIFT_NAME(AVAudioSession.SoundStageSize);
+
+/*!
+ When the intended spatial experience is HeadTracked, the anchoring strategy
+ provides additional information about the reference point for spatialization.
+ */
+typedef NS_ENUM(NSInteger, AVAudioSessionAnchoringStrategy) {
+	/// The audio session determines its own anchoring strategy based on
+	/// a handful of factors
+	AVAudioSessionAnchoringStrategyAutomatic   = 0,
+
+	/// The session is anchored to the developer-provided scene
+	/// identifier (i.e. UIScene.session.persistentIdentifier)
+	AVAudioSessionAnchoringStrategyScene       = 1,
+
+	/// The session is anchored to the user's concept of "front"
+	/// which the user can move with an intentional gesture.
+	AVAudioSessionAnchoringStrategyFront       = 2
+} NS_REFINED_FOR_SWIFT;
+
+typedef NS_ENUM(NSInteger, AVAudioSessionSpatialExperience) {
+	/// A fully head-tracked spatial experience parameterized by
+	/// a sound stage size and anchoring strategy
+	AVAudioSessionSpatialExperienceHeadTracked = 0,
+
+	/// An unanchored, non-head-tracked spatial experience parameterized
+	/// by a sound stage size
+	AVAudioSessionSpatialExperienceFixed       = 1,
+
+	/// An experience that bypasses any system-provided spatialization and
+	/// instead mixes the application's sound straight to the output
+	AVAudioSessionSpatialExperienceBypassed  = 2,
+} NS_REFINED_FOR_SWIFT;
+
+typedef NSString * const AVAudioSessionSpatialExperienceOption NS_TYPED_ENUM NS_REFINED_FOR_SWIFT;
+
+/// Associated value is NSNumber with AVAudioSessionSoundStageSize. Only used if
+/// SpatialExperience is HeadTracked or Fixed. If not provided for
+/// those SpatialExperiences, the default will be
+/// AVAudioSessionSoundStageSizeAutomatic.
+OS_EXPORT AVAudioSessionSpatialExperienceOption AVAudioSessionSpatialExperienceOptionSoundStageSize API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos, macos);
+
+/// Associated value is NSNumber with AVAudioSessionAnchoringStrategy. Only used if
+/// SpatialExperience is HeadTracked. If not provided for a head-tracked
+/// spatial experience, the default will be
+/// AVAudioSessionAnchoringStrategyAutomatic.
+OS_EXPORT AVAudioSessionSpatialExperienceOption AVAudioSessionSpatialExperienceOptionAnchoringStrategy API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos, macos);
+
+/// Associated value is NSString from UIScene.session.persistentIdentifier. Only
+/// used if SpatialExperience is HeadTracked and AnchoringStrategy is
+/// Scene. If not provided for a scene-anchored spatial experience, the
+/// session will fail to set the intended spatial experience and
+/// return an error.
+OS_EXPORT AVAudioSessionSpatialExperienceOption AVAudioSessionSpatialExperienceOptionSceneIdentifier API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos, macos);
+
+#endif // TARGET_OS_VISION
 
 #endif // AudioSession_AVAudioSessionTypes_h
 #else

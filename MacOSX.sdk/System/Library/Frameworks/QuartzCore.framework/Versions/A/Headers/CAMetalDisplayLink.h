@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMetalDisplayLink.h
 
-   Copyright (c) 2023, Apple Inc.
+   Copyright (c) 2023-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__

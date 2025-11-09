@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-    Copyright © 2013-2023 Apple Inc. All rights reserved.
+    Copyright © 2013-2025 Apple Inc. All rights reserved.
  
 */
 
@@ -200,7 +200,45 @@ CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataSegmentIdenti
 */
 CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataSceneIlluminance
 								API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
-	
+
+/*!
+	@const kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix
+		Data associated with a Spatial Audio capture that contains an analysis of a First Order Ambisonics audio stream which is used for playback.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataSpatialAudioMix
+								API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/*!
+       @const kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono
+               Display mask rectangle for monoscopic video
+               Expected data type is kCMMetadataBaseDataType_RasterRectangleValue.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleMono
+                                                               API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/*!
+       @const kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft
+               Display mask rectangle for stereoscopic video's left eye view
+               Expected data type is kCMMetadataBaseDataType_RasterRectangleValue or kCMMetadataBaseDataType_ExtendedRasterRectangleValue.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoLeft
+                                                               API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/*!
+       @const kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight
+               Display mask rectangle for stereoscopic video's right eye view
+               Expected data type is kCMMetadataBaseDataType_RasterRectangleValue or kCMMetadataBaseDataType_ExtendedRasterRectangleValue.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataDisplayMaskRectangleStereoRight
+                                                               API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/*!
+	   @const kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia
+			   Presentation data associated with Apple Immersive Video's video frames. Data is a JSON-encoding of ImmersiveMediaSupport framework's PresentationDescriptor object.
+			   Expected data type is kCMMetadataBaseDataType_RawData.
+*/
+CM_EXPORT const CFStringRef kCMMetadataIdentifier_QuickTimeMetadataPresentationImmersiveMedia API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
 CM_ASSUME_NONNULL_END
 
 CF_IMPLICIT_BRIDGING_DISABLED
@@ -381,6 +419,12 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		UTF-8 encoded JSON data.
 	@const kCMMetadataBaseDataType_PerspectiveTransformF64
 		A 3x3 matrix of 64-bit big endian floating point numbers stored in row-major order that specify a perspective transform.
+	@const kCMMetadataBaseDataType_RasterRectangleValue
+		Consists of six 16-bit big endian unsigned integer values of RasterRectangleValue in the following order: raster width, raster height, left, width, top, height.
+		Rectangle origin and dimension are normalized to raster rectangle coordinates to be pixel accurate but still retain the relative semantics when scaled.
+	@const kCMMetadataBaseDataType_ExtendedRasterRectangleValue
+		Consists of at least six 16-bit big endian unsigned integer values for RasterRectangleValue in the same order as kCMMetadataBaseDataType_RasterRectangleValue and then two 4-bit values for the number of left and right edge adjustment points. If edge adustment points are 2 or more, points would be pairs of 16-bit big endian unsigned integers alternating between x and y with left edge points first and right edge points afterwards.
+        Rectangle origin and dimension are normalized to raster rectangle coordinates to be pixel accurate but still retain the relative semantics when scaled.
 */
 CM_ASSUME_NONNULL_BEGIN
 
@@ -434,6 +478,10 @@ CM_EXPORT const CFStringRef kCMMetadataBaseDataType_JSON
 								API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(6.0), visionos(1.0));
 CM_EXPORT const CFStringRef kCMMetadataBaseDataType_PerspectiveTransformF64
 								API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
+CM_EXPORT const CFStringRef kCMMetadataBaseDataType_RasterRectangleValue
+								API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+CM_EXPORT const CFStringRef kCMMetadataBaseDataType_ExtendedRasterRectangleValue
+								API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
 /*!
 	@const kCMMetadataDataType_Location_ISO6709

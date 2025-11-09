@@ -20,12 +20,12 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), m
 /*!
  * Characteristic corresponding to mute setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *mute;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *mute;
 
 /*!
  * Characteristic corresponding to volume setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *volume;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *volume;
 
 @end
 

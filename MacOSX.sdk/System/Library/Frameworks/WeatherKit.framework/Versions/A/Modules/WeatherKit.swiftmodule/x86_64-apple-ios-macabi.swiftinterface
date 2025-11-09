@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 881 -module-name WeatherKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 948.0.1 -module-name WeatherKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreLocation
 import Foundation
 import Network
@@ -29,7 +29,9 @@ public struct WeatherAvailability {
     case temporarilyUnavailable
     case unsupported
     case unknown
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -47,6 +49,12 @@ extension WeatherKit.WeatherAvailability : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.WeatherAvailability : Swift.Sendable {
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.WeatherAvailability.AvailabilityKind : Swift.Sendable {
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct MinuteWeather {
   public var date: Foundation.Date
   public var precipitation: WeatherKit.Precipitation
@@ -61,6 +69,9 @@ extension WeatherKit.MinuteWeather : Swift.Equatable {
 extension WeatherKit.MinuteWeather : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.MinuteWeather : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct DayWeather {
@@ -127,6 +138,9 @@ extension WeatherKit.DayWeather : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.DayWeather : Swift.Sendable {
+}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct PrecipitationAmountByType : Swift.Codable, Swift.Equatable {
   public var hail: Foundation.Measurement<Foundation.UnitLength>
@@ -140,6 +154,9 @@ public struct PrecipitationAmountByType : Swift.Codable, Swift.Equatable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.PrecipitationAmountByType : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct Trend<Dimension> : Swift.Codable, Swift.Equatable where Dimension : Foundation.Dimension {
   public var baseline: WeatherKit.TrendBaseline<Dimension>
   public var currentValue: Foundation.Measurement<Dimension>
@@ -147,6 +164,9 @@ public struct Trend<Dimension> : Swift.Codable, Swift.Equatable where Dimension 
   public static func == (a: WeatherKit.Trend<Dimension>, b: WeatherKit.Trend<Dimension>) -> Swift.Bool
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.Trend : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct HistoricalComparisons : Swift.Codable, Swift.Equatable, Swift.RandomAccessCollection {
@@ -172,6 +192,9 @@ public struct HistoricalComparisons : Swift.Codable, Swift.Equatable, Swift.Rand
   public typealias SubSequence = Swift.Slice<WeatherKit.HistoricalComparisons>
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.HistoricalComparisons : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct DayTemperatureStatistics : Swift.Codable, Swift.Equatable, Swift.Sendable {
@@ -202,7 +225,9 @@ public struct UVIndex {
       get
     }
     public static func < (lhs: WeatherKit.UVIndex.ExposureCategory, rhs: WeatherKit.UVIndex.ExposureCategory) -> Swift.Bool
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     public typealias AllCases = [WeatherKit.UVIndex.ExposureCategory]
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -223,6 +248,9 @@ extension WeatherKit.UVIndex : Swift.Equatable {
 extension WeatherKit.UVIndex : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.UVIndex : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct WeatherChanges : Swift.RandomAccessCollection {
@@ -254,6 +282,9 @@ extension WeatherKit.WeatherChanges : Swift.Equatable {
 extension WeatherKit.WeatherChanges : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.WeatherChanges : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct HourWeather {
@@ -289,21 +320,32 @@ extension WeatherKit.HourWeather : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.HourWeather : Swift.Sendable {
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public enum WeatherError : Foundation.LocalizedError {
   case permissionDenied
   case unknown
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var helpAnchor: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recoverySuggestion: Swift.String? {
     get
   }
+  #endif
   public static func == (a: WeatherKit.WeatherError, b: WeatherKit.WeatherError) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -311,13 +353,16 @@ public enum WeatherError : Foundation.LocalizedError {
   }
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct DailyWeatherStatisticsQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable {
+public struct DailyWeatherStatisticsQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable, T : Swift.Sendable {
   public static var temperature: WeatherKit.DailyWeatherStatisticsQuery<WeatherKit.DayTemperatureStatistics> {
     get
   }
   public static var precipitation: WeatherKit.DailyWeatherStatisticsQuery<WeatherKit.DayPrecipitationStatistics> {
     get
   }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.DailyWeatherStatisticsQuery : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct SunEvents {
@@ -340,6 +385,9 @@ extension WeatherKit.SunEvents : Swift.Equatable {
 extension WeatherKit.SunEvents : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.SunEvents : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public enum WeatherCondition : Swift.String, Swift.CaseIterable, Swift.CustomStringConvertible, Swift.Hashable {
@@ -383,7 +431,9 @@ public enum WeatherCondition : Swift.String, Swift.CaseIterable, Swift.CustomStr
   public var accessibilityDescription: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.WeatherCondition]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -400,6 +450,9 @@ extension WeatherKit.WeatherCondition : Swift.Equatable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherCondition : Swift.Codable {
+}
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
+extension WeatherKit.WeatherCondition : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct WeatherAttribution {
@@ -437,6 +490,9 @@ extension WeatherKit.WeatherAttribution : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, *)
+extension WeatherKit.WeatherAttribution : Swift.Sendable {
+}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct CloudCoverByAltitude {
   public var low: Swift.Double
@@ -453,7 +509,10 @@ extension WeatherKit.CloudCoverByAltitude : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct MonthlyWeatherStatisticsQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable {
+extension WeatherKit.CloudCoverByAltitude : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct MonthlyWeatherStatisticsQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable, T : Swift.Sendable {
   public static var temperature: WeatherKit.MonthlyWeatherStatisticsQuery<WeatherKit.MonthTemperatureStatistics> {
     get
   }
@@ -461,34 +520,45 @@ public struct MonthlyWeatherStatisticsQuery<T> where T : Swift.Decodable, T : Sw
     get
   }
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.MonthlyWeatherStatisticsQuery : Swift.Sendable {
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct WeatherQuery<T> {
   public static var current: WeatherKit.WeatherQuery<WeatherKit.CurrentWeather> {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var minute: WeatherKit.WeatherQuery<WeatherKit.Forecast<WeatherKit.MinuteWeather>?> {
     get
   }
+  #endif
   public static var hourly: WeatherKit.WeatherQuery<WeatherKit.Forecast<WeatherKit.HourWeather>> {
     get
   }
   public static var daily: WeatherKit.WeatherQuery<WeatherKit.Forecast<WeatherKit.DayWeather>> {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var alerts: WeatherKit.WeatherQuery<[WeatherKit.WeatherAlert]?> {
     get
   }
+  #endif
   public static var availability: WeatherKit.WeatherQuery<WeatherKit.WeatherAvailability> {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public static var changes: WeatherKit.WeatherQuery<WeatherKit.WeatherChanges?> {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public static var historicalComparisons: WeatherKit.WeatherQuery<WeatherKit.HistoricalComparisons?> {
     get
   }
+  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherQuery where T == WeatherKit.Forecast<WeatherKit.DayWeather> {
@@ -497,6 +567,9 @@ extension WeatherKit.WeatherQuery where T == WeatherKit.Forecast<WeatherKit.DayW
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherQuery where T == WeatherKit.Forecast<WeatherKit.HourWeather> {
   public static func hourly(startDate: Foundation.Date, endDate: Foundation.Date) -> WeatherKit.WeatherQuery<T>
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.WeatherQuery : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public enum HistoricalComparison : Swift.Codable, Swift.Equatable {
@@ -509,13 +582,19 @@ public enum HistoricalComparison : Swift.Codable, Swift.Equatable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct DailyWeatherSummaryQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable {
+extension WeatherKit.HistoricalComparison : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+public struct DailyWeatherSummaryQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable, T : Swift.Sendable {
   public static var temperature: WeatherKit.DailyWeatherSummaryQuery<WeatherKit.DayTemperatureSummary> {
     get
   }
   public static var precipitation: WeatherKit.DailyWeatherSummaryQuery<WeatherKit.DayPrecipitationSummary> {
     get
   }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.DailyWeatherSummaryQuery : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct MoonEvents {
@@ -531,6 +610,9 @@ extension WeatherKit.MoonEvents : Swift.Equatable {
 extension WeatherKit.MoonEvents : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.MoonEvents : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct DayTemperatureSummary : Swift.Codable, Swift.Equatable, Swift.Sendable {
@@ -554,8 +636,11 @@ public struct SnowfallAmount : Swift.Codable, Swift.Equatable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.SnowfallAmount : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct TrendBaseline<Dimension> : Swift.Codable, Swift.Equatable where Dimension : Foundation.Dimension {
-  public enum Kind : Swift.Codable, Swift.Equatable {
+  public enum Kind : Swift.Codable, Swift.Equatable, Swift.Hashable {
     case mean
     public static func == (a: WeatherKit.TrendBaseline<Dimension>.Kind, b: WeatherKit.TrendBaseline<Dimension>.Kind) -> Swift.Bool
     public func encode(to encoder: any Swift.Encoder) throws
@@ -572,11 +657,17 @@ public struct TrendBaseline<Dimension> : Swift.Codable, Swift.Equatable where Di
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.TrendBaseline : Swift.Sendable {
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.TrendBaseline.Kind : Swift.Sendable {
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct WeatherMetadata {
   public var date: Foundation.Date
   public var expirationDate: Foundation.Date
-  public var location: CoreLocation.CLLocation {
+  public var location: _LocationEssentials.CLLocation {
     get
   }
 }
@@ -588,6 +679,9 @@ extension WeatherKit.WeatherMetadata : Swift.Equatable {
 extension WeatherKit.WeatherMetadata : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.WeatherMetadata : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct HourlyWeatherStatistics<T> : Swift.Codable, Swift.Equatable, Swift.Sendable, Swift.RandomAccessCollection where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable, T : Swift.Sendable {
@@ -632,6 +726,9 @@ extension WeatherKit.Weather : Swift.Equatable {
 extension WeatherKit.Weather : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.Weather : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct DailyWeatherStatistics<T> : Swift.Codable, Swift.Equatable, Swift.Sendable, Swift.RandomAccessCollection where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable, T : Swift.Sendable {
@@ -705,7 +802,7 @@ public struct MonthlyWeatherStatistics<T> : Swift.Codable, Swift.Equatable, Swif
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-public struct Forecast<Element> : Swift.RandomAccessCollection, Swift.Codable, Swift.Equatable where Element : Swift.Decodable, Element : Swift.Encodable, Element : Swift.Equatable {
+public struct Forecast<Element> : Swift.RandomAccessCollection, Swift.Codable, Swift.Equatable where Element : Swift.Decodable, Element : Swift.Encodable, Element : Swift.Equatable, Element : Swift.Sendable {
   public typealias Index = Swift.Int
   public var forecast: [Element]
   public var metadata: WeatherKit.WeatherMetadata
@@ -727,6 +824,9 @@ public struct Forecast<Element> : Swift.RandomAccessCollection, Swift.Codable, S
   public typealias SubSequence = Swift.Slice<WeatherKit.Forecast<Element>>
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.Forecast : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.Forecast where Element == WeatherKit.MinuteWeather {
@@ -762,7 +862,9 @@ public enum Precipitation : Swift.String, Swift.CaseIterable, Swift.CustomString
   public var accessibilityDescription: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.Precipitation]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -779,6 +881,9 @@ extension WeatherKit.Precipitation : Swift.Equatable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.Precipitation : Swift.Codable {
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.Precipitation : Swift.Sendable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct WeatherChange {
@@ -815,6 +920,9 @@ extension WeatherKit.WeatherChange.Direction : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.WeatherChange : Swift.Sendable {
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public enum PressureTrend : Swift.String, Swift.CaseIterable, Swift.CustomStringConvertible, Swift.Hashable {
   case rising
@@ -826,7 +934,9 @@ public enum PressureTrend : Swift.String, Swift.CaseIterable, Swift.CustomString
   public var accessibilityDescription: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.PressureTrend]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -843,6 +953,9 @@ extension WeatherKit.PressureTrend : Swift.Equatable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.PressureTrend : Swift.Codable {
+}
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.PressureTrend : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct Wind {
@@ -876,7 +989,9 @@ public struct Wind {
     public var accessibilityDescription: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
     public typealias AllCases = [WeatherKit.Wind.CompassDirection]
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -898,6 +1013,9 @@ extension WeatherKit.Wind : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.Wind : Swift.Sendable {
+}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct HourTemperatureStatistics : Swift.Codable, Swift.Equatable, Swift.Sendable {
   public var hour: Swift.Int
@@ -913,37 +1031,37 @@ final public class WeatherService : @unchecked Swift.Sendable {
     get async throws
   }
   convenience public init()
-  final public func weather(for location: CoreLocation.CLLocation) async throws -> WeatherKit.Weather
-  final public func weather<T>(for location: CoreLocation.CLLocation, including dataSet: WeatherKit.WeatherQuery<T>) async throws -> T
-  final public func weather<T1, T2>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>) async throws -> (T1, T2)
-  final public func weather<T1, T2, T3>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>) async throws -> (T1, T2, T3)
-  final public func weather<T1, T2, T3, T4>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>) async throws -> (T1, T2, T3, T4)
-  final public func weather<T1, T2, T3, T4, T5>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>, _ dataSet5: WeatherKit.WeatherQuery<T5>) async throws -> (T1, T2, T3, T4, T5)
-  final public func weather<T1, T2, T3, T4, T5, T6>(for location: CoreLocation.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>, _ dataSet5: WeatherKit.WeatherQuery<T5>, _ dataSet6: WeatherKit.WeatherQuery<T6>) async throws -> (T1, T2, T3, T4, T5, T6)
+  final public func weather(for location: _LocationEssentials.CLLocation) async throws -> WeatherKit.Weather
+  @preconcurrency final public func weather<T>(for location: _LocationEssentials.CLLocation, including dataSet: WeatherKit.WeatherQuery<T>) async throws -> T where T : Swift.Sendable
+  @preconcurrency final public func weather<T1, T2>(for location: _LocationEssentials.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>) async throws -> (T1, T2) where T1 : Swift.Sendable, T2 : Swift.Sendable
+  @preconcurrency final public func weather<T1, T2, T3>(for location: _LocationEssentials.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>) async throws -> (T1, T2, T3) where T1 : Swift.Sendable, T2 : Swift.Sendable, T3 : Swift.Sendable
+  @preconcurrency final public func weather<T1, T2, T3, T4>(for location: _LocationEssentials.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>) async throws -> (T1, T2, T3, T4) where T1 : Swift.Sendable, T2 : Swift.Sendable, T3 : Swift.Sendable, T4 : Swift.Sendable
+  @preconcurrency final public func weather<T1, T2, T3, T4, T5>(for location: _LocationEssentials.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>, _ dataSet5: WeatherKit.WeatherQuery<T5>) async throws -> (T1, T2, T3, T4, T5) where T1 : Swift.Sendable, T2 : Swift.Sendable, T3 : Swift.Sendable, T4 : Swift.Sendable, T5 : Swift.Sendable
+  @preconcurrency final public func weather<T1, T2, T3, T4, T5, T6>(for location: _LocationEssentials.CLLocation, including dataSet1: WeatherKit.WeatherQuery<T1>, _ dataSet2: WeatherKit.WeatherQuery<T2>, _ dataSet3: WeatherKit.WeatherQuery<T3>, _ dataSet4: WeatherKit.WeatherQuery<T4>, _ dataSet5: WeatherKit.WeatherQuery<T5>, _ dataSet6: WeatherKit.WeatherQuery<T6>) async throws -> (T1, T2, T3, T4, T5, T6) where T1 : Swift.Sendable, T2 : Swift.Sendable, T3 : Swift.Sendable, T4 : Swift.Sendable, T5 : Swift.Sendable, T6 : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func weather<each T>(for location: CoreLocation.CLLocation, including dataSet: repeat WeatherKit.WeatherQuery<each T>) async throws -> (repeat each T)
+  @preconcurrency final public func weather<each T>(for location: _LocationEssentials.CLLocation, including dataSet: repeat WeatherKit.WeatherQuery<each T>) async throws -> (repeat each T) where repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func dailyStatistics<each T>(for location: CoreLocation.CLLocation, forDaysIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func dailyStatistics<each T>(for location: _LocationEssentials.CLLocation, forDaysIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func dailyStatistics<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func dailyStatistics<each T>(for location: _LocationEssentials.CLLocation, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func dailyStatistics<each T>(for location: CoreLocation.CLLocation, startDay: Swift.Int, endDay: Swift.Int, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func dailyStatistics<each T>(for location: _LocationEssentials.CLLocation, startDay: Swift.Int, endDay: Swift.Int, including dataSets: repeat WeatherKit.DailyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func dailySummary<each T>(for location: CoreLocation.CLLocation, forDaysIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.DailyWeatherSummaryQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherSummary<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func dailySummary<each T>(for location: _LocationEssentials.CLLocation, forDaysIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.DailyWeatherSummaryQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherSummary<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func dailySummary<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.DailyWeatherSummaryQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherSummary<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func dailySummary<each T>(for location: _LocationEssentials.CLLocation, including dataSets: repeat WeatherKit.DailyWeatherSummaryQuery<each T>) async throws -> (repeat WeatherKit.DailyWeatherSummary<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func hourlyStatistics<each T>(for location: CoreLocation.CLLocation, forHoursIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func hourlyStatistics<each T>(for location: _LocationEssentials.CLLocation, forHoursIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func hourlyStatistics<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func hourlyStatistics<each T>(for location: _LocationEssentials.CLLocation, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func hourlyStatistics<each T>(for location: CoreLocation.CLLocation, startHour: Swift.Int, endHour: Swift.Int, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func hourlyStatistics<each T>(for location: _LocationEssentials.CLLocation, startHour: Swift.Int, endHour: Swift.Int, including dataSets: repeat WeatherKit.HourlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.HourlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func monthlyStatistics<each T>(for location: CoreLocation.CLLocation, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func monthlyStatistics<each T>(for location: _LocationEssentials.CLLocation, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func monthlyStatistics<each T>(for location: CoreLocation.CLLocation, forMonthsIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func monthlyStatistics<each T>(for location: _LocationEssentials.CLLocation, forMonthsIn interval: Foundation.DateInterval, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-  final public func monthlyStatistics<each T>(for location: CoreLocation.CLLocation, startMonth: Swift.Int, endMonth: Swift.Int, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
+  final public func monthlyStatistics<each T>(for location: _LocationEssentials.CLLocation, startMonth: Swift.Int, endMonth: Swift.Int, including dataSets: repeat WeatherKit.MonthlyWeatherStatisticsQuery<each T>) async throws -> (repeat WeatherKit.MonthlyWeatherStatistics<each T>) where repeat each T : Swift.Decodable, repeat each T : Swift.Encodable, repeat each T : Swift.Equatable, repeat each T : Swift.Sendable
   @objc deinit
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -1002,7 +1120,9 @@ public enum WeatherSeverity : Swift.String, Swift.CaseIterable, Swift.CustomStri
   public var accessibilityDescription: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.WeatherSeverity]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -1020,8 +1140,11 @@ extension WeatherKit.WeatherSeverity : Swift.Equatable {
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherSeverity : Swift.Codable {
 }
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.WeatherSeverity : Swift.Sendable {
+}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public enum Deviation : Swift.Codable, Swift.Equatable {
+public enum Deviation : Swift.Codable, Swift.Equatable, Swift.Hashable {
   case muchHigher
   case higher
   case normal
@@ -1034,6 +1157,9 @@ public enum Deviation : Swift.Codable, Swift.Equatable {
     get
   }
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.Deviation : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 @frozen public enum MoonPhase : Swift.String, Swift.CustomStringConvertible, Swift.CaseIterable {
@@ -1054,7 +1180,9 @@ public enum Deviation : Swift.Codable, Swift.Equatable {
   public var symbolName: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
   public typealias AllCases = [WeatherKit.MoonPhase]
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, macOS 13.0, *)
@@ -1073,10 +1201,13 @@ extension WeatherKit.MoonPhase : Swift.Equatable {
 extension WeatherKit.MoonPhase : Swift.Codable {
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-public struct HourlyWeatherStatisticsQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable {
+public struct HourlyWeatherStatisticsQuery<T> where T : Swift.Decodable, T : Swift.Encodable, T : Swift.Equatable, T : Swift.Sendable {
   public static var temperature: WeatherKit.HourlyWeatherStatisticsQuery<WeatherKit.HourTemperatureStatistics> {
     get
   }
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.HourlyWeatherStatisticsQuery : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct CurrentWeather {
@@ -1109,6 +1240,9 @@ extension WeatherKit.CurrentWeather : Swift.Codable {
   public func encode(to encoder: any Swift.Encoder) throws
   public init(from decoder: any Swift.Decoder) throws
 }
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
+extension WeatherKit.CurrentWeather : Swift.Sendable {
+}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
 public struct DayPartForecast {
   public var cloudCover: Swift.Double
@@ -1125,6 +1259,9 @@ public struct DayPartForecast {
   public var minimumVisibility: Foundation.Measurement<Foundation.UnitLength>
   public var wind: WeatherKit.Wind
   public var highWindSpeed: Foundation.Measurement<Foundation.UnitSpeed>
+}
+@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+extension WeatherKit.DayPartForecast : Swift.Sendable {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 public struct WeatherAlert {
@@ -1145,9 +1282,8 @@ extension WeatherKit.WeatherAlert : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension WeatherKit.WeatherAvailability.AvailabilityKind : Swift.Equatable {}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
-extension WeatherKit.WeatherAvailability.AvailabilityKind : Swift.Hashable {}
+extension WeatherKit.WeatherAlert : Swift.Sendable {
+}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherAvailability.AvailabilityKind : Swift.RawRepresentable {}
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -1170,8 +1306,6 @@ extension WeatherKit.WeatherError : Swift.Equatable {}
 extension WeatherKit.WeatherError : Swift.Hashable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherCondition : Swift.RawRepresentable {}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension WeatherKit.TrendBaseline.Kind : Swift.Hashable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.Precipitation : Swift.RawRepresentable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
@@ -1188,8 +1322,6 @@ extension WeatherKit.Wind.CompassDirection : Swift.Sendable {}
 extension WeatherKit.Wind.CompassDirection : Swift.BitwiseCopyable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.WeatherSeverity : Swift.RawRepresentable {}
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-extension WeatherKit.Deviation : Swift.Hashable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)
 extension WeatherKit.MoonPhase : Swift.Hashable {}
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, *)

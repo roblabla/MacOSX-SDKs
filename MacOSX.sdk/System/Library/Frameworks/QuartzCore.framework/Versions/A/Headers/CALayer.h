@@ -1,6 +1,6 @@
 /* CoreAnimation - CALayer.h
 
-   Copyright (c) 2006-2022, Apple Inc.
+   Copyright (c) 2006-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__
@@ -14,9 +14,7 @@
 
 @class NSEnumerator, CAAnimation, CALayerArray;
 @protocol CAAction, CALayerDelegate;
-
 @protocol CALayoutManager;
-
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -24,7 +22,6 @@ typedef NSString * CALayerContentsGravity NS_TYPED_ENUM API_AVAILABLE(macos(10.5
 typedef NSString * CALayerContentsFormat NS_TYPED_ENUM API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 typedef NSString * CALayerContentsFilter NS_TYPED_ENUM API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 typedef NSString * CALayerCornerCurve NS_TYPED_ENUM API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-
 
 /* Bit definitions for `autoresizingMask' property. */
 
@@ -37,9 +34,7 @@ typedef NS_OPTIONS (unsigned int, CAAutoresizingMask)
   kCALayerMinYMargin    = 1U << 3,
   kCALayerHeightSizable = 1U << 4,
   kCALayerMaxYMargin    = 1U << 5
-};
-
-
+} API_AVAILABLE(macCatalyst(13.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /* Options that control when to tone map CALayer contents and
    CAMetalLayer drawables. Defaults to CAToneMapModeAutomatic. */
@@ -59,6 +54,42 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
    and CAMetalLayers. */
 extern CAToneMapMode const CAToneMapModeIfSupported NS_SWIFT_NAME(ifSupported)
 API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/* Options that control how to tone map the CGColors and contents of the layer. */
+
+typedef NSString * CADynamicRange NS_TYPED_ENUM NS_SWIFT_NAME(CALayer.DynamicRange)
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
+
+/* Automatic dynamic range. The system will decide how much dynamic range to use.
+ * If you want to render the content in an SDR form, you should explicitly use
+ * CADynamicRangeStandard. If user will be primarily focused on this view, such
+ * as a fullscreen layer or an editing canvas, you may explicitly set
+ * CADynamicRangeHigh. */
+
+extern CADynamicRange const CADynamicRangeAutomatic NS_SWIFT_NAME(automatic)
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
+
+/* Standard dynamic range. Any tonemapped images or colors with headroom tagging
+ * will be tonemapped to a maximum pixel value of 1.0. */
+
+extern CADynamicRange const CADynamicRangeStandard NS_SWIFT_NAME(standard)
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
+
+/* Uses extended dynamic range, but brightness is modulated to optimize for
+ * co-existence with other composited content. For best results, images should
+ * contain contentAverageLightLevel metadata. Refer to CGImage API for more
+ * details. */
+
+extern CADynamicRange const CADynamicRangeConstrainedHigh NS_SWIFT_NAME(constrainedHigh)
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
+
+/* High dynamic range. Provides the best HDR quality. This should be reserved
+ * for situations where the user is expected to be focused on the media, such as
+ * larger views in an image editing/viewing app, or annotating/drawing with HDR colors. */
+
+extern CADynamicRange const CADynamicRangeHigh NS_SWIFT_NAME(high)
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
+
 
 /* Bit definitions for `edgeAntialiasingMask' property. */
 
@@ -128,24 +159,6 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 /** Property methods. **/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* CALayer implements the standard NSKeyValueCoding protocol for all
  * Objective C properties defined by the class and its subclasses. It
  * dynamically implements missing accessor methods for properties
@@ -160,9 +173,8 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  *      CGPoint                 NSValue
  *      CGSize                  NSValue
  *      CGRect                  NSValue
- *      CGAffineTransform       NSAffineTransform
+ *      CGAffineTransform       NSValue (NSAffineTransform on macOS)
  *      CATransform3D           NSValue  */
-
 
 /* Returns the default value of the named property, or nil if no
  * default value is known. Subclasses that override this method to
@@ -422,24 +434,51 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property(copy) CALayerContentsFormat contentsFormat
   API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
-
 /* If YES, contents of the layer can be displayed up to its NSScreen's
  * maximumExtendedDynamicRangeColorComponentValue or UIScreen's
  * currentEDRHeadroom. If NO, contents are clipped or tonemapped to 1.0 (SDR).
  * `contents` with a CGColorSpaceRef conforming to ITU-R 2100
- * (CGColorSpaceUsesITUR_2100TF) will be tonemapped. Setting this value to
- * YES may have a significant impact on power consumption and therefore
- * should only be set when displaying EDR contents. The default value is NO. */
+ * (CGColorSpaceUsesITUR_2100TF) will be tonemapped. This only effects the
+ * tonemapping of the receiving layer.
+ 
+ * Setting this value to YES may have a significant impact on power consumption
+ * and therefore should only be set when displaying EDR contents.
+ * It is recommended to migrate to 'preferredDynamicRange', which requires that
+ * the layer contain a CGColor or `contents' with headroom tagging greater
+ * than 1.0 in order to activate EDR. If 'preferredDynamicRange' is set to a
+ * value other than 'CADynamicRangeStandard', contents will not be tone mapped
+ * to SDR, even if 'wantsExtendedDynamicRangeContent' is set to NO.
+ *
+ * The default value is NO.
+ */
 
 @property BOOL wantsExtendedDynamicRangeContent
-  API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0)) API_UNAVAILABLE(tvos, watchos);
-
+API_DEPRECATED("Use preferredDynamicRange instead", macos(14.0, 26.0), ios(17.0, 26.0))
+API_UNAVAILABLE(tvos, watchos);
 
 /* Options that control when to tone map CALayer contents and
    CAMetalLayer drawables. */
 @property(copy) CAToneMapMode toneMapMode
 API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 
+/* Controls the dynamic range used to render CGColors and `contents' of the
+ * layer that have headroom tagging greater thah 1.0. This only effects the
+ * tonemapping of the receiving layer (not ancestors or descendants). Defaults
+ * to CADynamicRangeStandard. */
+
+@property(copy) CADynamicRange preferredDynamicRange
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
+
+/* The amount of EDR headroom used by `contents' of the layer. Setting this
+ * property can help reduce the power impact when using a limited amount of
+ * dynamic range. If the `contents' is a CGImageRef with content headroom, or
+ * an IOSurfaceRef with kIOSurfaceContentHeadroom, this property does not need
+ * to be set. CAMetalLayers can use this value to define how much headroom is
+ * needed by their MTLDrawables. Defaults to 0, which means untagged. Values
+ * greater than 0, and less than 1.0 are undefined. */
+
+@property CGFloat contentsHeadroom
+  API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
 
 /* If YES, allows the layer's content to render at arbitrary integer scales
    to preserve high-quality vector graphics. This only affects content drawn
@@ -448,8 +487,6 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @property BOOL wantsDynamicContentScaling
   API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(macos, ios, tvos, watchos);
-
-
 
 /* The filter types to use when rendering the `contents' property of
  * the layer. The minification filter is used when to reduce the size
@@ -535,23 +572,14 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @property CAEdgeAntialiasingMask edgeAntialiasingMask;
 
-
-
-
-
-
-
-
-
 /* When true this layer is allowed to antialias its edges, as requested
- * by the edgeAntialiasingMask.
+ * by the value of the edgeAntialiasingMask property.
  *
  * The default value is read from the CALayerAllowsEdgeAntialiasing
  * property in the main bundle's Info.plist. On iOS, if that property
  * is not found, the UIViewEdgeAntialiasing property will be used
  * instead. If no value is found in the Info.plist the default value is
  * YES on macOS and NO on iOS. */
-
 
 @property BOOL allowsEdgeAntialiasing
     API_AVAILABLE(macos(10.10), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -603,18 +631,6 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @property float opacity;
 
-
-
-
-
-
-
-
-
-
-
-
-
 /* When true, and the layer's opacity property is less than one, the
  * layer is allowed to composite itself as a group separate from its
  * parent. This gives the correct results when the layer contains
@@ -624,8 +640,8 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
  * property in the main bundle's Info.plist. On iOS, if that property
  * is not found, the UIViewGroupOpacity property will be used instead.
  * If no value is found in the Info.plist the default value is YES on
- * macOS and NO on iOS. */
-
+ * macOS and iOS applications linked against the iOS 7 SDK or later,
+ * and NO for iOS applications linked against an earlier SDK. */
 
 @property BOOL allowsGroupOpacity
     API_AVAILABLE(macos(10.10), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -709,22 +725,20 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 /** Layout methods. **/
 
-
 /* A bitmask defining how the layer is resized when the bounds of its
  * superlayer changes. See the CAAutoresizingMask enum for the bit
  * definitions. Default value is zero. */
 
-@property CAAutoresizingMask autoresizingMask;
-
-
+@property CAAutoresizingMask autoresizingMask
+  API_AVAILABLE(macCatalyst(13.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /* The object responsible for assigning frame rects to sublayers,
  * should implement methods from the CALayoutManager informal protocol.
  * When nil (the default value) only the autoresizing style of layout
  * is done (unless a subclass overrides -layoutSublayers). */
 
-@property(nullable, strong) id <CALayoutManager> layoutManager;
-
+@property(nullable, strong) id <CALayoutManager> layoutManager
+  API_AVAILABLE(macCatalyst(13.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /* Returns the preferred frame size of the layer in the coordinate
  * space of the superlayer. The default implementation calls the layout
@@ -764,16 +778,17 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 - (void)layoutSublayers;
 
-
 /* NSView-style springs and struts layout. -resizeSublayersWithOldSize:
  * is called when the layer's bounds rect is changed. It calls
  * -resizeWithOldSuperlayerSize: to resize the sublayer's frame to
  * match the new superlayer bounds based on the sublayer's autoresizing
  * mask. */
 
-- (void)resizeSublayersWithOldSize:(CGSize)size;
-- (void)resizeWithOldSuperlayerSize:(CGSize)size;
+- (void)resizeSublayersWithOldSize:(CGSize)size
+  API_AVAILABLE(macCatalyst(13.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
+- (void)resizeWithOldSuperlayerSize:(CGSize)size
+  API_AVAILABLE(macCatalyst(13.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /** Action methods. **/
 
@@ -899,9 +914,9 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 
 @end
 
-
 /** Layout manager protocol. **/
 
+API_AVAILABLE(macCatalyst(13.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 @protocol CALayoutManager <NSObject>
 @optional
 
@@ -923,7 +938,6 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE
 - (void)layoutSublayersOfLayer:(CALayer *)layer;
 
 @end
-
 
 /** Action (event handler) protocol. **/
 
@@ -1023,6 +1037,8 @@ CA_EXTERN CALayerContentsFormat const kCAContentsFormatRGBA16Float /* RGBA half-
   API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 CA_EXTERN CALayerContentsFormat const kCAContentsFormatGray8Uint /* Grayscale with alpha (if not opaque) UInt8 per component */
   API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
+CA_EXTERN CALayerContentsFormat const kCAContentsFormatAutomatic NS_SWIFT_NAME (automatic) /* Automatically choose optimal format for CG drawing commands */
+  API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
 
 /** Contents filter names. **/
 

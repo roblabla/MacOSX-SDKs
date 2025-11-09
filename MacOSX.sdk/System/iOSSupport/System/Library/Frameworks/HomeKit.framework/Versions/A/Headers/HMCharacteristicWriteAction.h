@@ -37,12 +37,12 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief The characteristic associated with the action.
  */
-@property (readonly, strong, nonatomic) HMCharacteristic *characteristic;
+@property (nonatomic, readonly, strong) HMCharacteristic *characteristic;
 
 /*!
  * @brief The target value for the action.
  */
-@property (readonly, copy, nonatomic) TargetValueType targetValue;
+@property (nonatomic, readonly, copy) TargetValueType targetValue;
 
 /*!
  * @brief This method is used to change target value for the characteristic.

@@ -2,7 +2,7 @@
 //  hv_vcpu_types.h
 //  Hypervisor
 //
-//  Copyright © 2018-2024 Apple Inc. All rights reserved.
+//  Copyright © 2018-2025 Apple Inc. All rights reserved.
 //
 
 #pragma once
@@ -179,7 +179,7 @@ OS_ENUM(hv_simd_fp_reg, uint32_t,
  @discussion
     streaming_sve_mode_enabled controls PSTATE.SM and za_storage_enabled controls PSTATE.ZA.
  */
-API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(15.2))
 typedef struct {
     bool streaming_sve_mode_enabled;
     bool za_storage_enabled;
@@ -221,7 +221,7 @@ OS_ENUM(hv_sme_z_reg, uint32_t,
     HV_SME_Z_REG_29,
     HV_SME_Z_REG_30,
     HV_SME_Z_REG_31,
-) API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos);
+) API_AVAILABLE(macos(15.2));
 
 /*!
  @abstract Type of an ARM SME P predicate register.
@@ -243,12 +243,12 @@ OS_ENUM(hv_sme_p_reg, uint32_t,
     HV_SME_P_REG_13,
     HV_SME_P_REG_14,
     HV_SME_P_REG_15,
-) API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos);
+) API_AVAILABLE(macos(15.2));
 
 /*!
  @abstract Type of the SME2 ZT0 register.
  */
-API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+API_AVAILABLE(macos(15.2))
 typedef __attribute__((ext_vector_type(64))) uint8_t hv_sme_zt0_uchar64_t;
 
 /*!
@@ -325,8 +325,8 @@ OS_ENUM(hv_sys_reg, uint16_t,
     HV_SYS_REG_MPIDR_EL1 = 0xc005,
     HV_SYS_REG_ID_AA64PFR0_EL1 = 0xc020,
     HV_SYS_REG_ID_AA64PFR1_EL1 = 0xc021,
-    HV_SYS_REG_ID_AA64ZFR0_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc024,
-    HV_SYS_REG_ID_AA64SMFR0_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc025,
+    HV_SYS_REG_ID_AA64ZFR0_EL1 API_AVAILABLE(macos(15.2)) = 0xc024,
+    HV_SYS_REG_ID_AA64SMFR0_EL1 API_AVAILABLE(macos(15.2)) = 0xc025,
     HV_SYS_REG_ID_AA64DFR0_EL1 = 0xc028,
     HV_SYS_REG_ID_AA64DFR1_EL1 = 0xc029,
     HV_SYS_REG_ID_AA64ISAR0_EL1 = 0xc030,
@@ -343,10 +343,10 @@ OS_ENUM(hv_sys_reg, uint16_t,
         will cause the vcpu to use a TSO memory model, whereas clearing it will cause the vcpu to use
         the default ARM64 memory model (weakly ordered loads / stores).
     */
-    HV_SYS_REG_ACTLR_EL1 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xc081,
+    HV_SYS_REG_ACTLR_EL1 API_AVAILABLE(macos(15.0)) = 0xc081,
     HV_SYS_REG_CPACR_EL1 = 0xc082,
-    HV_SYS_REG_SMPRI_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc094,
-    HV_SYS_REG_SMCR_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc096,
+    HV_SYS_REG_SMPRI_EL1 API_AVAILABLE(macos(15.2)) = 0xc094,
+    HV_SYS_REG_SMCR_EL1 API_AVAILABLE(macos(15.2)) = 0xc096,
     HV_SYS_REG_TTBR0_EL1 = 0xc100,
     HV_SYS_REG_TTBR1_EL1 = 0xc101,
     HV_SYS_REG_TCR_EL1 = 0xc102,
@@ -373,50 +373,50 @@ OS_ENUM(hv_sys_reg, uint16_t,
     HV_SYS_REG_VBAR_EL1 = 0xc600,
     HV_SYS_REG_CONTEXTIDR_EL1 = 0xc681,
     HV_SYS_REG_TPIDR_EL1 = 0xc684,
-    HV_SYS_REG_SCXTNUM_EL1 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xc687,
+    HV_SYS_REG_SCXTNUM_EL1 API_AVAILABLE(macos(15.2)) = 0xc687,
     HV_SYS_REG_CNTKCTL_EL1 = 0xc708,
     HV_SYS_REG_CSSELR_EL1 = 0xd000,
     HV_SYS_REG_TPIDR_EL0 = 0xde82,
     HV_SYS_REG_TPIDRRO_EL0 = 0xde83,
-    HV_SYS_REG_TPIDR2_EL0 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xde85,
-    HV_SYS_REG_SCXTNUM_EL0 API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos) = 0xde87,
+    HV_SYS_REG_TPIDR2_EL0 API_AVAILABLE(macos(15.2)) = 0xde85,
+    HV_SYS_REG_SCXTNUM_EL0 API_AVAILABLE(macos(15.2)) = 0xde87,
     HV_SYS_REG_CNTV_CTL_EL0 = 0xdf19,
     HV_SYS_REG_CNTV_CVAL_EL0 = 0xdf1a,
     HV_SYS_REG_SP_EL1 = 0xe208,
 
     // Physical timer registers.
     // These registers are only available if the VM was created with a GIC device (hv_gic_create).
-    HV_SYS_REG_CNTP_CTL_EL0 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xdf11,
-    HV_SYS_REG_CNTP_CVAL_EL0 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xdf12,
-    HV_SYS_REG_CNTP_TVAL_EL0 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xdf10,
+    HV_SYS_REG_CNTP_CTL_EL0 API_AVAILABLE(macos(15.0)) = 0xdf11,
+    HV_SYS_REG_CNTP_CVAL_EL0 API_AVAILABLE(macos(15.0)) = 0xdf12,
+    HV_SYS_REG_CNTP_TVAL_EL0 API_AVAILABLE(macos(15.0)) = 0xdf10,
 
     // Exception Level 2 (EL2) registers.
     // These registers are only available if EL2 was enabled in the VM configuration.
-    HV_SYS_REG_CNTHCTL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe708,
-    HV_SYS_REG_CNTHP_CTL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe711,
-    HV_SYS_REG_CNTHP_CVAL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe712,
-    HV_SYS_REG_CNTHP_TVAL_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe710,
-    HV_SYS_REG_CNTVOFF_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe703,
-    HV_SYS_REG_CPTR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe08a,
-    HV_SYS_REG_ELR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe201,
-    HV_SYS_REG_ESR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe290,
-    HV_SYS_REG_FAR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe300,
-    HV_SYS_REG_HCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe088,
-    HV_SYS_REG_HPFAR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe304,
-    HV_SYS_REG_MAIR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe510,
-    HV_SYS_REG_MDCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe019,
-    HV_SYS_REG_SCTLR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe080,
-    HV_SYS_REG_SPSR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe200,
-    HV_SYS_REG_SP_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xf208,
-    HV_SYS_REG_TCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe102,
-    HV_SYS_REG_TPIDR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe682,
-    HV_SYS_REG_TTBR0_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe100,
-    HV_SYS_REG_TTBR1_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe101,
-    HV_SYS_REG_VBAR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe600,
-    HV_SYS_REG_VMPIDR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe005,
-    HV_SYS_REG_VPIDR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe000,
-    HV_SYS_REG_VTCR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe10a,
-    HV_SYS_REG_VTTBR_EL2 API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos) = 0xe108,
+    HV_SYS_REG_CNTHCTL_EL2 API_AVAILABLE(macos(15.0)) = 0xe708,
+    HV_SYS_REG_CNTHP_CTL_EL2 API_AVAILABLE(macos(15.0)) = 0xe711,
+    HV_SYS_REG_CNTHP_CVAL_EL2 API_AVAILABLE(macos(15.0)) = 0xe712,
+    HV_SYS_REG_CNTHP_TVAL_EL2 API_AVAILABLE(macos(15.0)) = 0xe710,
+    HV_SYS_REG_CNTVOFF_EL2 API_AVAILABLE(macos(15.0)) = 0xe703,
+    HV_SYS_REG_CPTR_EL2 API_AVAILABLE(macos(15.0)) = 0xe08a,
+    HV_SYS_REG_ELR_EL2 API_AVAILABLE(macos(15.0)) = 0xe201,
+    HV_SYS_REG_ESR_EL2 API_AVAILABLE(macos(15.0)) = 0xe290,
+    HV_SYS_REG_FAR_EL2 API_AVAILABLE(macos(15.0)) = 0xe300,
+    HV_SYS_REG_HCR_EL2 API_AVAILABLE(macos(15.0)) = 0xe088,
+    HV_SYS_REG_HPFAR_EL2 API_AVAILABLE(macos(15.0)) = 0xe304,
+    HV_SYS_REG_MAIR_EL2 API_AVAILABLE(macos(15.0)) = 0xe510,
+    HV_SYS_REG_MDCR_EL2 API_AVAILABLE(macos(15.0)) = 0xe089,
+    HV_SYS_REG_SCTLR_EL2 API_AVAILABLE(macos(15.0)) = 0xe080,
+    HV_SYS_REG_SPSR_EL2 API_AVAILABLE(macos(15.0)) = 0xe200,
+    HV_SYS_REG_SP_EL2 API_AVAILABLE(macos(15.0)) = 0xf208,
+    HV_SYS_REG_TCR_EL2 API_AVAILABLE(macos(15.0)) = 0xe102,
+    HV_SYS_REG_TPIDR_EL2 API_AVAILABLE(macos(15.0)) = 0xe682,
+    HV_SYS_REG_TTBR0_EL2 API_AVAILABLE(macos(15.0)) = 0xe100,
+    HV_SYS_REG_TTBR1_EL2 API_AVAILABLE(macos(15.0)) = 0xe101,
+    HV_SYS_REG_VBAR_EL2 API_AVAILABLE(macos(15.0)) = 0xe600,
+    HV_SYS_REG_VMPIDR_EL2 API_AVAILABLE(macos(15.0)) = 0xe005,
+    HV_SYS_REG_VPIDR_EL2 API_AVAILABLE(macos(15.0)) = 0xe000,
+    HV_SYS_REG_VTCR_EL2 API_AVAILABLE(macos(15.0)) = 0xe10a,
+    HV_SYS_REG_VTTBR_EL2 API_AVAILABLE(macos(15.0)) = 0xe108,
 );
 
 /*!

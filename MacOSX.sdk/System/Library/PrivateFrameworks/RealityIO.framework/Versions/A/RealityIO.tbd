@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RealityIO.framework/Versions/A/RealityIO'
-current-version: 201.100.5
+current-version: 221.0.16
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -264,6 +264,12 @@ exports:
                        '_$s9RealityIO13EntityBuilderCMm', '_$s9RealityIO13EntityBuilderCMn', 
                        '_$s9RealityIO13EntityBuilderCMo', '_$s9RealityIO13EntityBuilderCN', 
                        '_$s9RealityIO13EntityBuilderCfD', '_$s9RealityIO13EntityBuilderCfd', 
+                       '_$s9RealityIO13EstimateErrorO28insufficientMemoryForTextureyA2CmFWC', 
+                       '_$s9RealityIO13EstimateErrorO2eeoiySbAC_ACtFZ', '_$s9RealityIO13EstimateErrorO4hash4intoys6HasherVz_tF', 
+                       '_$s9RealityIO13EstimateErrorO9hashValueSivg', '_$s9RealityIO13EstimateErrorO9hashValueSivpMV', 
+                       '_$s9RealityIO13EstimateErrorOMa', '_$s9RealityIO13EstimateErrorOMn', 
+                       '_$s9RealityIO13EstimateErrorON', '_$s9RealityIO13EstimateErrorOSHAAMc', 
+                       '_$s9RealityIO13EstimateErrorOSQAAMc', '_$s9RealityIO13EstimateErrorOs0D0AAMc', 
                        '_$s9RealityIO13ImportSessionC014getLoadSubdsAsG03urlSb10Foundation3URLV_tF', 
                        '_$s9RealityIO13ImportSessionC014setLoadSubdsAsG004loadH4SubdySb_tF', 
                        '_$s9RealityIO13ImportSessionC016gatherTexturesAsC10Operations08onlyUsedF0AC24TextureOperatorContainerCSb_tF', 
@@ -278,7 +284,7 @@ exports:
                        '_$s9RealityIO13ImportSessionC10rootEntity0A3Kit0F0Cvg', '_$s9RealityIO13ImportSessionC10rootEntity0A3Kit0F0CvpMV', 
                        '_$s9RealityIO13ImportSessionC11descriptionSSvg', '_$s9RealityIO13ImportSessionC11descriptionSSvpMV', 
                        '_$s9RealityIO13ImportSessionC11reloadAsset8assetURLy10Foundation0H0V_tKF', 
-                       '_$s9RealityIO13ImportSessionC13allComponentsSDySo19REComponentClassPtraSo8RETypeIDaGvgZ', 
+                       '_$s9RealityIO13ImportSessionC12setSkipAudioyySbF', '_$s9RealityIO13ImportSessionC13allComponentsSDySo19REComponentClassPtraSo8RETypeIDaGvgZ', 
                        '_$s9RealityIO13ImportSessionC13allComponentsSDySo19REComponentClassPtraSo8RETypeIDaGvpZMV', 
                        '_$s9RealityIO13ImportSessionC13getStatisticsSDySSypGyF', 
                        '_$s9RealityIO13ImportSessionC13instanceCounts5Int32VvgZ', 
@@ -532,7 +538,9 @@ exports:
                        '_$s9RealityIO14AudioConstantsO8MixGroupOMa', '_$s9RealityIO14AudioConstantsO8MixGroupOMn', 
                        '_$s9RealityIO14AudioConstantsO8MixGroupON', '_$s9RealityIO14AudioConstantsOMa', 
                        '_$s9RealityIO14AudioConstantsOMn', '_$s9RealityIO14AudioConstantsON', 
-                       '_$s9RealityIO14BehaviorSchemaMp', '_$s9RealityIO14CompileSessionC11compileSync10outputPathy10Foundation3URLV_tKFTj', 
+                       '_$s9RealityIO14BehaviorSchemaMp', '_$s9RealityIO14CompileSessionC011loadSubdsAsF0SbvM', 
+                       '_$s9RealityIO14CompileSessionC011loadSubdsAsF0Sbvg', '_$s9RealityIO14CompileSessionC011loadSubdsAsF0SbvpMV', 
+                       '_$s9RealityIO14CompileSessionC011loadSubdsAsF0Sbvs', '_$s9RealityIO14CompileSessionC11compileSync10outputPathy10Foundation3URLV_tKFTj', 
                        '_$s9RealityIO14CompileSessionC11compileSync10outputPathy10Foundation3URLV_tKFTq', 
                        '_$s9RealityIO14CompileSessionC11sourcePaths13exportOptions011compilationH0ACSay10Foundation3URLVG_0A3Kit15__REAssetBundleV06ExportH0VSDySSypGtcfC', 
                        '_$s9RealityIO14CompileSessionC11sourcePaths13exportOptionsACSay10Foundation3URLVG_0A3Kit15__REAssetBundleV06ExportH0VtcfC', 
@@ -2503,7 +2511,6 @@ exports:
                        '_$s9RealityIO5StageCs23CustomStringConvertibleAAMc', '_$s9RealityIO5StageCs28CustomDebugStringConvertibleAAMc', 
                        '_$s9RealityIO5UtilsC12relativePath4base4pathS2S_SStFZ', '_$s9RealityIO5UtilsC16getBundleVersions6UInt64VyFZ', 
                        '_$s9RealityIO5UtilsC27isCoreRIOBundleVersionValidSbyFZ', 
-                       '_$s9RealityIO5UtilsC9getDigest2of4salt6length8encodingSSSgSS_SSSiSS10FoundationE8EncodingVtFZ', 
                        '_$s9RealityIO5UtilsCMa', '_$s9RealityIO5UtilsCMm', '_$s9RealityIO5UtilsCMn', 
                        '_$s9RealityIO5UtilsCMo', '_$s9RealityIO5UtilsCMu', '_$s9RealityIO5UtilsCN', 
                        '_$s9RealityIO5UtilsCfD', '_$s9RealityIO5UtilsCfd', '_$s9RealityIO5XformMp', 

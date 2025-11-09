@@ -5,9 +5,15 @@ install-name:    '/System/Library/PrivateFrameworks/SiriTTSTraining.framework/Ve
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s15SiriTTSTraining13MobileGestaltV15isInternalBuildSbvgZ', 
-                       '_$s15SiriTTSTraining13MobileGestaltVMa', '_$s15SiriTTSTraining13MobileGestaltVMn', 
-                       '_$s15SiriTTSTraining13MobileGestaltVN', '_$s15SiriTTSTraining16InternalSettingsC34defaultToNonDiscretionaryDownloadsSbvMTj', 
+    symbols:         [ '_$s15SiriTTSTraining13MobileGestaltV12isAppleWatchSbvgZ', 
+                       '_$s15SiriTTSTraining13MobileGestaltV13isAppleVisionSbvgZ', 
+                       '_$s15SiriTTSTraining13MobileGestaltV14isAppleHomePodSbvgZ', 
+                       '_$s15SiriTTSTraining13MobileGestaltV15isInternalBuildSbvgZ', 
+                       '_$s15SiriTTSTraining13MobileGestaltV15isNaturalDeviceSbvgZ', 
+                       '_$s15SiriTTSTraining13MobileGestaltV15isVirtualDeviceSbvgZ', 
+                       '_$s15SiriTTSTraining13MobileGestaltV9isAppleTVSbvgZ', '_$s15SiriTTSTraining13MobileGestaltVMa', 
+                       '_$s15SiriTTSTraining13MobileGestaltVMn', '_$s15SiriTTSTraining13MobileGestaltVN', 
+                       '_$s15SiriTTSTraining16InternalSettingsC34defaultToNonDiscretionaryDownloadsSbvMTj', 
                        '_$s15SiriTTSTraining16InternalSettingsC34defaultToNonDiscretionaryDownloadsSbvMTq', 
                        '_$s15SiriTTSTraining16InternalSettingsC34defaultToNonDiscretionaryDownloadsSbvgTj', 
                        '_$s15SiriTTSTraining16InternalSettingsC34defaultToNonDiscretionaryDownloadsSbvgTq', 

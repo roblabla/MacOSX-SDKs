@@ -4,14 +4,23 @@ targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatal
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SessionFoundation.framework/Versions/A/SessionFoundation'
 swift-abi-version: 7
+allowable-clients:
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
+    clients:         [ ActivityKit, SessionAlert, SessionAssertion, SessionCore, 
+                       SessionCoreTests, SessionFoundationTests, SessionPushNotifications, 
+                       SessionPushNotificationsTests, SessionSyncEngine, liveactivitiesd ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s15ClientInterface17SessionFoundation22XPCInterfaceDefinitionPTl', 
                        '_$s15ServerInterface17SessionFoundation22XPCInterfaceDefinitionPTl', 
-                       '_$s17SessionFoundation11TaskRequestV11explanationSSvg', '_$s17SessionFoundation11TaskRequestV11explanationSSvpMV', 
+                       '_$s17SessionFoundation11TaskRequestV11explanationSSvM', '_$s17SessionFoundation11TaskRequestV11explanationSSvg', 
+                       '_$s17SessionFoundation11TaskRequestV11explanationSSvpMV', 
+                       '_$s17SessionFoundation11TaskRequestV11explanationSSvs', '_$s17SessionFoundation11TaskRequestV4date0B04DateVvM', 
                        '_$s17SessionFoundation11TaskRequestV4date0B04DateVvg', '_$s17SessionFoundation11TaskRequestV4date0B04DateVvpMV', 
-                       '_$s17SessionFoundation11TaskRequestV4date8wakeType11explanationAC0B04DateV_AC04WakeG0OSStcfC', 
+                       '_$s17SessionFoundation11TaskRequestV4date0B04DateVvs', '_$s17SessionFoundation11TaskRequestV4date8wakeType9keepAlive11explanationAC0B04DateV_AC04WakeG0OSbSStcfC', 
+                       '_$s17SessionFoundation11TaskRequestV8WakeTypeO13preciseWakingyA2EmFWC', 
                        '_$s17SessionFoundation11TaskRequestV8WakeTypeO2eeoiySbAE_AEtFZ', 
                        '_$s17SessionFoundation11TaskRequestV8WakeTypeO4hash4intoys6HasherVz_tF', 
                        '_$s17SessionFoundation11TaskRequestV8WakeTypeO6wakingyA2EmFWC', 
@@ -20,8 +29,12 @@ exports:
                        '_$s17SessionFoundation11TaskRequestV8WakeTypeO9nonWakingyA2EmFWC', 
                        '_$s17SessionFoundation11TaskRequestV8WakeTypeOMa', '_$s17SessionFoundation11TaskRequestV8WakeTypeOMn', 
                        '_$s17SessionFoundation11TaskRequestV8WakeTypeON', '_$s17SessionFoundation11TaskRequestV8WakeTypeOSHAAMc', 
-                       '_$s17SessionFoundation11TaskRequestV8WakeTypeOSQAAMc', '_$s17SessionFoundation11TaskRequestV8wakeTypeAC04WakeF0Ovg', 
+                       '_$s17SessionFoundation11TaskRequestV8WakeTypeOSQAAMc', '_$s17SessionFoundation11TaskRequestV8wakeTypeAC04WakeF0OvM', 
+                       '_$s17SessionFoundation11TaskRequestV8wakeTypeAC04WakeF0Ovg', 
                        '_$s17SessionFoundation11TaskRequestV8wakeTypeAC04WakeF0OvpMV', 
+                       '_$s17SessionFoundation11TaskRequestV8wakeTypeAC04WakeF0Ovs', 
+                       '_$s17SessionFoundation11TaskRequestV9keepAliveSbvM', '_$s17SessionFoundation11TaskRequestV9keepAliveSbvg', 
+                       '_$s17SessionFoundation11TaskRequestV9keepAliveSbvpMV', '_$s17SessionFoundation11TaskRequestV9keepAliveSbvs', 
                        '_$s17SessionFoundation11TaskRequestVMa', '_$s17SessionFoundation11TaskRequestVMn', 
                        '_$s17SessionFoundation11TaskRequestVN', '_$s17SessionFoundation14TaskSchedulingMp', 
                        '_$s17SessionFoundation14TaskSchedulingP08scheduleC07request7handler7Combine11Cancellable_pAA0C7RequestV_yyctFTj', 
@@ -62,6 +75,8 @@ exports:
                        '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorC4nextxSgyYaFTj', 
                        '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorC4nextxSgyYaFTjTu', 
                        '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorC4nextxSgyYaFTq', 
+                       '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorC6cancelyyFTj', 
+                       '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorC6cancelyyFTq', 
                        '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorCMa', 
                        '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorCMn', 
                        '_$s17SessionFoundation21BufferedAsyncSequenceV8IteratorCMo', 

@@ -43,11 +43,19 @@ CK_SUBCLASSING_DEPRECATED // should not be subclassed, or Sendable may no longer
 @property (assign) CKSharingParticipantPermissionOption allowedParticipantPermissionOptions;
 @property (assign) CKSharingParticipantAccessOption allowedParticipantAccessOptions;
 
+/// Default value is `NO`. If set, the system sharing UI will allow the user to choose whether added participants can invite others to the share.
+/// Shares with ``CloudKit/CKShareParticipantRole/CKShareParticipantRoleAdministrator`` participants will be returned as read-only to devices running OS versions prior to this role being introduced.
+/// Administrator participants on these read-only shares will be returned as ``CloudKit/CKShareParticipantRole/CKShareParticipantRolePrivateUser``.
+@property (assign) BOOL allowsParticipantsToInviteOthers API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
 /*!
  Standard allowed options are most permissive i.e. @c allowedParticipantPermissionOptions = @c CKSharingParticipantPermissionOptionAny
  and @c allowedParticipantAccessOptions = @c CKSharingParticipantAccessOptionAny
  */
 @property (class, readonly, strong, nonatomic) CKAllowedSharingOptions *standardOptions;
+
+/// Default value is `NO`. If set, the system sharing UI will allow the user to configure whether access requests are enabled on the share.
+@property (assign) BOOL allowsAccessRequests API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
+
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

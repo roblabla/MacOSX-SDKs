@@ -124,7 +124,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(8.0), watchos(1.0)) NS_SWIFT_SENDABLE
  * 		The slope at the current location towards the direction of travel measured in degrees.
  *      nil if the measurement is invalid.
  */
-@property(strong, nonatomic, readonly, nullable) NSNumber *slope NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(15.4), watchos(8.4));
+@property(strong, nonatomic, readonly, nullable) NSNumber *slope NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(17.0), watchos(10.0));
 /*
  *	maxAbsSlope
  *
@@ -132,7 +132,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(8.0), watchos(1.0)) NS_SWIFT_SENDABLE
  * 		The maximum absolute slope at current location towards all directions measured in degrees.
  *      nil if invalid due to low GPS accuracy.
  */
-@property(strong, nonatomic, readonly, nullable) NSNumber *maxAbsSlope NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(15.4), watchos(8.4));
+@property(strong, nonatomic, readonly, nullable) NSNumber *maxAbsSlope NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(17.0), watchos(10.0));
 
 
 @end

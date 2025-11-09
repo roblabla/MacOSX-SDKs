@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/VisionCore.framework/Versions/A/VisionCore'
-current-version: 8.0.78
+current-version: 9.0.34
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -21,7 +21,8 @@ exports:
                        _VisionCoreInferenceNetworkIdentifierSceneNet, _VisionCoreInferenceNetworkIdentifierSceneNetObjDetNetSliderNet, 
                        _VisionCoreInferenceNetworkIdentifierSemanticSegmentation, 
                        _VisionCoreInferenceNetworkIdentifierSemanticSegmentationEspressoV4, 
-                       _VisionCoreInferenceNetworkIdentifierSmartCam, _VisionCoreInferenceNetworkIdentifierStandaloneSceneprint, 
+                       _VisionCoreInferenceNetworkIdentifierSmartCam, _VisionCoreInferenceNetworkIdentifierSmudgeDetector, 
+                       _VisionCoreInferenceNetworkIdentifierStandaloneSceneprint, 
                        _VisionCoreM7O40ji7CJoQ5Tn050nVP_0, _VisionCoreM7O40ji7CJoQ5Tn050nVP_1, 
                        _VisionCoreM7O40ji7CJoQ5Tn050nVP_10, _VisionCoreM7O40ji7CJoQ5Tn050nVP_11, 
                        _VisionCoreM7O40ji7CJoQ5Tn050nVP_12, _VisionCoreM7O40ji7CJoQ5Tn050nVP_13, 
@@ -46,7 +47,8 @@ exports:
                        _VisionCoreSceneNetInferenceNetworkHeadIdentifierSceneClassification, 
                        _VisionCoreSceneNetInferenceNetworkHeadIdentifierSliderNet, 
                        _VisionCoreTensorDataTypeGetElementSize, _VisionCoreVerticallyFlippedImagePoint, 
-                       _VisionCoreVerticallyFlippedNormalizedPoint, _VisionCoreVideoSegmentationInitialFrameInferenceNetworkIdentifier320x576, 
+                       _VisionCoreVerticallyFlippedNormalizedPoint, _VisionCoreVideoSegmentationE5InferenceNetworkIdentifier, 
+                       _VisionCoreVideoSegmentationInitialFrameInferenceNetworkIdentifier320x576, 
                        _VisionCoreVideoSegmentationInitialFrameInferenceNetworkIdentifier384x512, 
                        _VisionCoreVideoSegmentationInitialFrameInferenceNetworkIdentifier512x384, 
                        _VisionCoreVideoSegmentationInitialFrameInferenceNetworkIdentifier576x320, 
@@ -77,10 +79,12 @@ exports:
                        VisionCoreRuntimeUtilities, VisionCoreSceneNetInferenceNetworkCustomClassifierDescriptor, 
                        VisionCoreSceneNetInferenceNetworkDescriptor, VisionCoreSemanticSegmentationEspressoInferenceNetworkDescriptorV4, 
                        VisionCoreSemanticSegmentationInferenceNetworkDescriptor, 
-                       VisionCoreSmartCam5InferenceNetworkDescriptor, VisionCoreSparseOpticalFlow, 
-                       VisionCoreSparseOpticalFlowResult, VisionCoreSparseOpticalFlowResultPoint, 
-                       VisionCoreSparseOpticalFlowSession, VisionCoreStandAloneSceneprintInferenceNetworkDescriptor, 
+                       VisionCoreSmartCam5InferenceNetworkDescriptor, VisionCoreSmudgeInferenceNetworkDescriptor, 
+                       VisionCoreSparseOpticalFlow, VisionCoreSparseOpticalFlowResult, 
+                       VisionCoreSparseOpticalFlowResultPoint, VisionCoreSparseOpticalFlowSession, 
+                       VisionCoreStandAloneSceneprintInferenceNetworkDescriptor, 
                        VisionCoreTensorDescriptor, VisionCoreTensorShape, VisionCoreTensorStrides, 
                        VisionCoreValidationUtilities, VisionCoreValueConfidenceCurve, 
-                       VisionCoreVideoSegmentationInferenceNetworkDescriptor, VisionCoreWarpTransform ]
+                       VisionCoreVideoSegmentationE5NetworkDescriptor, VisionCoreVideoSegmentationInferenceNetworkDescriptor, 
+                       VisionCoreWarpTransform ]
 ...

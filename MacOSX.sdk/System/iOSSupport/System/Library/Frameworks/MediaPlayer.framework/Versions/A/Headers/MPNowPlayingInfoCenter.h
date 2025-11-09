@@ -69,6 +69,12 @@ MP_INIT_UNAVAILABLE
 /// not work as expected.
 @property (nonatomic) MPNowPlayingPlaybackState playbackState MP_API(macos(10.12.2), ios(13.0), macCatalyst(13.0));
 
+/// Keys related to animated artwork that are supported by the current platform.
+///
+/// If you specify an instance of animated artwork (an `MPMediaItemAnimatedArtwork`) to
+/// `nowPlayingInfo` using any key not in this collection it will be ignored.
+@property (class, nonatomic, readonly) NSArray<NSString *> *supportedAnimatedArtworkKeys MP_API(ios(19.0), tvos(19.0), macos(16.0), watchos(12.0), visionos(3.0));
+
 @end
 
 // -----------------------------------------------------------------------------
@@ -177,5 +183,11 @@ MP_EXTERN NSString * const MPNowPlayingInfoPropertyInternationalStandardRecordin
 
 // A boolean denoting whether the now playing item should be excluded from content suggestions.
 MP_EXTERN NSString * const MPNowPlayingInfoPropertyExcludeFromSuggestions MP_API(ios(18.0), tvos(18.0), macos(15.0)); // NSNumber (BOOL)
+
+/// 1:1 (square) animated artwork for the current media item.
+MP_EXTERN NSString * const MPNowPlayingInfoProperty1x1AnimatedArtwork MP_API(ios(19.0), tvos(19.0), macos(16.0), watchos(12.0), visionos(3.0)); // MPMediaItemAnimatedArtwork
+
+/// 3:4 (tall) animated artwork for the current media item.
+MP_EXTERN NSString * const MPNowPlayingInfoProperty3x4AnimatedArtwork MP_API(ios(19.0), tvos(19.0), macos(16.0), watchos(12.0), visionos(3.0)); // MPMediaItemAnimatedArtwork
 
 NS_ASSUME_NONNULL_END

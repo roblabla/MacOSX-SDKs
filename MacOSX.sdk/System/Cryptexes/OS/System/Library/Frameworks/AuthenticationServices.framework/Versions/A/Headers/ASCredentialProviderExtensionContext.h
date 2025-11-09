@@ -60,6 +60,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
 - (void)completeOneTimeCodeRequestWithSelectedCredential:(ASOneTimeCodeCredential *)credential completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler NS_SWIFT_NAME(completeOneTimeCodeRequest(using:completionHandler:)) API_AVAILABLE(ios(18.0), macos(15.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos);
 
 
+
 /*! @abstract Complete the request to configure the extension.
  @discussion Calling this method will eventually dismiss the associated view controller.
  */

@@ -72,8 +72,13 @@ API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0), visionos(1.0))
 				A CMSampleBuffer with media type kCMMediaType_Metadata.
 	@result		An instance of AVTimedMetadataGroup.
 */
-- (nullable instancetype)initWithSampleBuffer:(CMSampleBufferRef)sampleBuffer API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
-
+- (nullable instancetype)initWithSampleBuffer:(CMSampleBufferRef)sampleBuffer
+#if defined(__swift__)
+API_DEPRECATED("Use init(sampleBuffer: CMReadySampleBuffer<CMSampleBuffer.DynamicContent>) instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0))
+#endif
+;
 /* indicates the time range of the timed metadata */
 @property (nonatomic, readonly) CMTimeRange timeRange;
 

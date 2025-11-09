@@ -746,17 +746,22 @@ CFStringRef _Nullable CTFontCopyName(
     @function   CTFontCopyLocalizedName
     @abstract   Returns a reference to a localized font name.
 
+    @discussion Localized names are necessary for presentation to a human but are rarely appropriate for programmatic use. CoreText provides localizations for common names but will not attempt any sort of automated translation.
+
     @param      font
                 The font reference.
 
     @param      nameKey
-                The name specifier. See name specifier constants.
+                A name specifier listed in "Font Constants", for example kCTFontStyleNameKey. Name keys present in dictionaries (such as those for axes or features) are handled not by this function but by the functions returning those dictionaries.
 
     @param      actualLanguage
                 Pointer to a CFStringRef to receive the language identifier of the returned name string. The format of the language identifier will conform to UTS #35.
                 If CoreText can supply its own localized string where the font cannot, this value will be NULL.
 
     @result     This function returns a specific localized name from the font reference. The name is localized based on the user's global language precedence. If the font does not have an entry for the requested name, NULL will be returned. The matched language will be returned in the caller's buffer.
+
+    @seealso    CTFontCopyVariationAxes
+    @seealso    CTFontCopyFeatures
 */
 CT_EXPORT
 CFStringRef _Nullable CTFontCopyLocalizedName(
@@ -1188,12 +1193,14 @@ CT_EXPORT const CFStringRef kCTFontVariationAxisHiddenKey CT_AVAILABLE(macos(10.
 /*!
     @function   CTFontCopyVariationAxes
     @abstract   Returns an array of variation axis dictionaries.
-    @discussion Each variation axis dictionary contains the five kCTFontVariationAxis* keys above, and kCTFontVariationAxisNameKey values will be localized when supported by the font.
+    @discussion Each variation axis dictionary contains the five kCTFontVariationAxis* keys above, and kCTFontVariationAxisNameKey values will be localized when supported by the font; for programmatic uses kCTFontVariationAxesAttribute may be used instead.
 
     @param      font
                 The font reference.
 
     @result     An array of variation axis dictionaries or null if the font does not support variations.
+
+    @seealso    kCTFontVariationAxesAttribute
 */
 CT_EXPORT
 CFArrayRef _Nullable CTFontCopyVariationAxes( CTFontRef font ) CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
@@ -1294,6 +1301,10 @@ CT_EXPORT const CFStringRef kCTFontFeatureTooltipTextKey CT_AVAILABLE(macos(10.1
 /*!
     @function   CTFontCopyFeatures
     @abstract   Returns an array of font features
+
+    @discussion The returned value describes the features available for the provided font. Each array value is a feature dictionary describing a feature type, with related selector dictionaries in an array under the kCTFontFeatureTypeSelectorsKey.
+                While CoreText supports AAT and OpenType font features, they are preferentially represented as AAT features owing to their more formal structure: individual feature types can be either exclusive or non-exclusive, which indicates whether one or more of its selectors can be simultaneously enabled. Where possible features are elaborated with their OpenType feature tag and value, which can occur within both type or selector dictionaries depending on the feature's mapping to an AAT type and selector pair.
+                Names are localized according to the preferred langauges of the caller and therefore are not appropriate for programmatically identifying features.
 
     @param      font
                 The font reference.

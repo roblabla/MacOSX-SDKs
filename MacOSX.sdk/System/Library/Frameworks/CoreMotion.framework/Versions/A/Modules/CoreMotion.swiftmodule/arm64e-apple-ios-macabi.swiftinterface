@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2964.0.4 -module-name CoreMotion
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3056.0.25.3.2 -module-name CoreMotion
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import CoreMotion
 import Foundation
 import Swift
@@ -11,14 +11,18 @@ import _SwiftConcurrencyShims
 import os.log
 import os
 extension CoreMotion.CMOdometerData {
-  @available(iOS 15.4, watchOS 8.4, *)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 17.0, watchOS 10.0, *)
   public var slope: Swift.Double? {
     get
   }
-  @available(iOS 15.4, watchOS 8.4, *)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS 17.0, watchOS 10.0, *)
   public var maxAbsSlope: Swift.Double? {
     get
   }
+  #endif
 }
 @available(watchOS 10.0, *)
 @available(iOS, unavailable)
@@ -28,7 +32,9 @@ extension CoreMotion.CMBatchedSensorManager {
   public struct AccelerometerUpdates : _Concurrency.AsyncSequence {
     public typealias Element = [CoreMotion.CMAccelerometerData]
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async throws -> CoreMotion.CMBatchedSensorManager.AccelerometerUpdates.Element?
+      #endif
       @available(watchOS 10.0, *)
       @available(iOS, unavailable)
       @available(tvOS, unavailable)
@@ -56,7 +62,9 @@ extension CoreMotion.CMBatchedSensorManager {
   public struct DeviceMotionUpdates : _Concurrency.AsyncSequence {
     public typealias Element = [CoreMotion.CMDeviceMotion]
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async throws -> CoreMotion.CMBatchedSensorManager.DeviceMotionUpdates.Element?
+      #endif
       @available(watchOS 10.0, *)
       @available(iOS, unavailable)
       @available(tvOS, unavailable)

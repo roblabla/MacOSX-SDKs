@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewShellKit.framework/Versions/A/PreviewShellKit'
-current-version: 22.40.1
+current-version: 23.0.52
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -124,6 +124,10 @@ exports:
                        '_$s15PreviewShellKit0A24AgentLaunchConfigurationV4role19PreviewsMessagingOS0aD4RoleOvpMV', 
                        '_$s15PreviewShellKit0A24AgentLaunchConfigurationV4role19PreviewsMessagingOS0aD4RoleOvs', 
                        '_$s15PreviewShellKit0A24AgentLaunchConfigurationV6bundle4role16injectionLibrary10binaryType11environment9arguments11pidCallbackAC19PreviewsMessagingOS0D10DescriptorV6BundleV_AK0aD4RoleOSSAK06BinaryL0VSDyS2SGSaySSGys5Int32VSgctcfC', 
+                       '_$s15PreviewShellKit0A24AgentLaunchConfigurationV6bundle4role16injectionLibrary10binaryType11environment9arguments11pidCallbackAC19PreviewsMessagingOS0D10DescriptorV6BundleV_AK0aD4RoleOSSAK06BinaryL0VSDyS2SGSaySSGys5Int32VSgctcfcfA1_', 
+                       '_$s15PreviewShellKit0A24AgentLaunchConfigurationV6bundle4role16injectionLibrary10binaryType11environment9arguments11pidCallbackAC19PreviewsMessagingOS0D10DescriptorV6BundleV_AK0aD4RoleOSSAK06BinaryL0VSDyS2SGSaySSGys5Int32VSgctcfcfA2_', 
+                       '_$s15PreviewShellKit0A24AgentLaunchConfigurationV6bundle4role16injectionLibrary10binaryType11environment9arguments11pidCallbackAC19PreviewsMessagingOS0D10DescriptorV6BundleV_AK0aD4RoleOSSAK06BinaryL0VSDyS2SGSaySSGys5Int32VSgctcfcfA3_', 
+                       '_$s15PreviewShellKit0A24AgentLaunchConfigurationV6bundle4role16injectionLibrary10binaryType11environment9arguments11pidCallbackAC19PreviewsMessagingOS0D10DescriptorV6BundleV_AK0aD4RoleOSSAK06BinaryL0VSDyS2SGSaySSGys5Int32VSgctcfcfA4_', 
                        '_$s15PreviewShellKit0A24AgentLaunchConfigurationV9argumentsSaySSGvM', 
                        '_$s15PreviewShellKit0A24AgentLaunchConfigurationV9argumentsSaySSGvg', 
                        '_$s15PreviewShellKit0A24AgentLaunchConfigurationV9argumentsSaySSGvpMV', 
@@ -174,6 +178,8 @@ exports:
                        '_$s15PreviewShellKit0aB15ServiceProtocolP11performKill7payload20PreviewsFoundationOS6FutureCyytG0i9MessagingK09ProcessIDO_tKFTq', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolP13performUpdate7payload20PreviewsFoundationOS6FutureCyAF12PropertyListVG0i9MessagingK00bG7PayloadV_tKFTj', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolP13performUpdate7payload20PreviewsFoundationOS6FutureCyAF12PropertyListVG0i9MessagingK00bG7PayloadV_tKFTq', 
+                       '_$s15PreviewShellKit0aB15ServiceProtocolP13sceneInjectorAA05SceneG0VvgTj', 
+                       '_$s15PreviewShellKit0aB15ServiceProtocolP13sceneInjectorAA05SceneG0VvgTq', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolP14updateComplete3fory19PreviewsMessagingOS15AgentDescriptorV6BundleV_tFTj', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolP14updateComplete3fory19PreviewsMessagingOS15AgentDescriptorV6BundleV_tFTq', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolP15getCapabilities19PreviewsMessagingOS14OSCapabilitiesVyFTj', 
@@ -195,6 +201,7 @@ exports:
                        '_$s15PreviewShellKit0aB15ServiceProtocolP8relaunch4with3for20PreviewsFoundationOS6FutureCy0i9MessagingK09ProcessIDOGAJ13LaunchPayloadV_AJ10DeviceTypeOtFTj', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolP8relaunch4with3for20PreviewsFoundationOS6FutureCy0i9MessagingK09ProcessIDOGAJ13LaunchPayloadV_AJ10DeviceTypeOtFTq', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolPAAE15activateServersyyF', 
+                       '_$s15PreviewShellKit0aB15ServiceProtocolPAAE21previewAgentConnector3forAA0agH0Vs5Int32V_tKF', 
                        '_$s15PreviewShellKit0aB15ServiceProtocolTL', '_$s15PreviewShellKit0aB5SceneMp', 
                        '_$s15PreviewShellKit0aB5SceneP20PreviewsFoundationOS13InvalidatableTb', 
                        '_$s15PreviewShellKit0aB5SceneTL', '_$s15PreviewShellKit0aB6PluginMp', 
@@ -214,9 +221,18 @@ exports:
                        '_$s15PreviewShellKit10ContentKeyVSQAAMc', '_$s15PreviewShellKit10ContentKeyVs23CustomStringConvertibleAAMc', 
                        '_$s15PreviewShellKit10JITManagerC10requestJIT3forAA17PreviewsJITLinkerCAA5AgentC_tYaKF', 
                        '_$s15PreviewShellKit10JITManagerC10requestJIT3forAA17PreviewsJITLinkerCAA5AgentC_tYaKFTu', 
-                       '_$s15PreviewShellKit10JITManagerC6sharedACvgZ', '_$s15PreviewShellKit10JITManagerC6sharedACvpZMV', 
-                       '_$s15PreviewShellKit10JITManagerC8setUpJIT5agent15bootstrapMethod19useAgentSymbolTable_xAA0L0C_AA012JITBootstrapL7ServiceV09BootstrapJ0OSbxAA17PreviewsJITLinkerCYaKXEtYaKlF', 
-                       '_$s15PreviewShellKit10JITManagerC8setUpJIT5agent15bootstrapMethod19useAgentSymbolTable_xAA0L0C_AA012JITBootstrapL7ServiceV09BootstrapJ0OSbxAA17PreviewsJITLinkerCYaKXEtYaKlFTu', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV13logAllSymbolsSbvM', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV13logAllSymbolsSbvg', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV13logAllSymbolsSbvpMV', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV13logAllSymbolsSbvs', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV19useAgentSymbolTableSbvM', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV19useAgentSymbolTableSbvg', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV19useAgentSymbolTableSbvpMV', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationV19useAgentSymbolTableSbvs', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationVMa', '_$s15PreviewShellKit10JITManagerC13ConfigurationVMn', 
+                       '_$s15PreviewShellKit10JITManagerC13ConfigurationVN', '_$s15PreviewShellKit10JITManagerC6sharedACvgZ', 
+                       '_$s15PreviewShellKit10JITManagerC6sharedACvpZMV', '_$s15PreviewShellKit10JITManagerC8setUpJIT5agent15bootstrapMethod13configuration_xAA5AgentC_AA012JITBootstrapL7ServiceV09BootstrapJ0OAC13ConfigurationVxAA17PreviewsJITLinkerCYaKXEtYaKlF', 
+                       '_$s15PreviewShellKit10JITManagerC8setUpJIT5agent15bootstrapMethod13configuration_xAA5AgentC_AA012JITBootstrapL7ServiceV09BootstrapJ0OAC13ConfigurationVxAA17PreviewsJITLinkerCYaKXEtYaKlFTu', 
                        '_$s15PreviewShellKit10JITManagerCMa', '_$s15PreviewShellKit10JITManagerCMm', 
                        '_$s15PreviewShellKit10JITManagerCMn', '_$s15PreviewShellKit10JITManagerCMo', 
                        '_$s15PreviewShellKit10JITManagerCMu', '_$s15PreviewShellKit10JITManagerCN', 
@@ -248,6 +264,7 @@ exports:
                        '_$s15PreviewShellKit11CategoryMapMp', '_$s15PreviewShellKit11CategoryMapP11entryPointsSDy19PreviewsMessagingOS07ContentD0V0H11OSSupportUI010EntryPointD0VGvgZTj', 
                        '_$s15PreviewShellKit11CategoryMapP11entryPointsSDy19PreviewsMessagingOS07ContentD0V0H11OSSupportUI010EntryPointD0VGvgZTq', 
                        '_$s15PreviewShellKit11CategoryMapPAAE17contentCategoriesSay19PreviewsMessagingOS07ContentD0VGvgZ', 
+                       '_$s15PreviewShellKit11CategoryMapPAAE17contentCategoriesSay19PreviewsMessagingOS07ContentD0VGvpZMV', 
                        '_$s15PreviewShellKit11CategoryMapPAAE9unhandledy20PreviewsFoundationOS18HumanReadableError_p0g9MessagingI007ContentD0VFZ', 
                        '_$s15PreviewShellKit11CategoryMapTL', '_$s15PreviewShellKit12AgentServiceMp', 
                        '_$s15PreviewShellKit12AgentServiceP05shellE017PreviewsOSSupport0bE0OvgZTj', 
@@ -765,6 +782,7 @@ exports:
                        '_$s15PreviewShellKit33CanvasControlConfigurationBuilderVMn', 
                        '_$s15PreviewShellKit33CanvasControlConfigurationBuilderVN', 
                        '_$s15PreviewShellKit37JITBootstrapAgentConnectionIdentifierV06stringG0ACSS_tcfC', 
+                       '_$s15PreviewShellKit37JITBootstrapAgentConnectionIdentifierV06stringG0ACSS_tcfcfA_', 
                        '_$s15PreviewShellKit37JITBootstrapAgentConnectionIdentifierV11descriptionSSvg', 
                        '_$s15PreviewShellKit37JITBootstrapAgentConnectionIdentifierV11descriptionSSvpMV', 
                        '_$s15PreviewShellKit37JITBootstrapAgentConnectionIdentifierV2eeoiySbAC_ACtFZ', 

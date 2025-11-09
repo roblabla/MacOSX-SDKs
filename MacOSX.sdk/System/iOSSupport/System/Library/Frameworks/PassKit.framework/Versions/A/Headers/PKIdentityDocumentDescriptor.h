@@ -47,6 +47,27 @@ API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 @end
 
+/// Used to request information from a user's photo ID (or equivalent document).
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos, tvos)
+@interface PKIdentityPhotoIDDescriptor: NSObject <PKIdentityDocumentDescriptor>
+
+@end
+
+/// Used to request information from multiple identity documents.
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos, tvos)
+@interface PKIdentityAnyOfDescriptor: NSObject <PKIdentityDocumentDescriptor>
+
+/// Set of requested descriptors for the composite document descriptor.
+@property (nonatomic, readonly) NSArray<id<PKIdentityDocumentDescriptor>> *descriptors;
+
+/// Returns a composite document descriptor with specified descriptors.
+- (instancetype)initWithDescriptors:(NSArray<id<PKIdentityDocumentDescriptor>> *)descriptors NS_DESIGNATED_INITIALIZER;
+
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
+
 NS_ASSUME_NONNULL_END
 
 #else

@@ -101,7 +101,7 @@ typedef struct
  @protocol MTLCounter
  @abstract A descriptor for a single counter.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0))
+MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0)) NS_SWIFT_SENDABLE
 @protocol MTLCounter <NSObject>
 @property (readonly, copy) NSString *name API_AVAILABLE(macos(10.15), ios(14.0));
 @end
@@ -111,7 +111,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0))
  @abstract A collection of MTLCounters that the device can capture in
  a single pass.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0))
+MTL_EXPORT API_AVAILABLE(macos(10.15), ios(14.0)) NS_SWIFT_SENDABLE
 @protocol MTLCounterSet <NSObject>
 /*!
  @property name The name of the counter set.

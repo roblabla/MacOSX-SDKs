@@ -6,9 +6,10 @@
 .Nd A tool used to control and get information about the Kerberos SSO extension.
 .Sh SYNOPSIS
 .Nm
+.Op kerberos|platform
 .Op command
 .Pp
-Commands:
+Kerberos Commands (default mode):
 .Bl -inset -compact -offset indent
 .It Fl a, Fl Fl authenticate Ar REALM Op Ar options Li "..."
 .Bl -inset -compact -offset indent
@@ -32,18 +33,30 @@ Commands:
 .It Fl j, Fl Fl json Ar REALM
 .It Fl h, Fl Fl help Ar REALM
 .El
+.Pp
+Platform SSO Commands:
+.Bl -inset -compact -offset indent
+.It Fl m, Fl Fl messages
+.It Fl s, Fl Fl state
+.El
 .Sh DESCRIPTION
 .Nm
-is used to control and get information about the Kerberos Single Sign-on (SSO) 
-extension via the command line. The Kerberos SSO extension simplifies using Kerberos
+is used to control and get information about both the Kerberos Single Sign-on (SSO)
+extension and Platform SSO via the command line.
+.Pp
+In Kerberos mode (default), the tool controls the Kerberos SSO extension which simplifies using Kerberos
 authentication with an Active Directory based Kerberos realm. It also allows the
 user to use Active Directory specific functions such as password changes and password
 expiration notifications.
 .Pp
+In Platform SSO mode, the tool provides diagnostic information about the current
+Platform SSO state and configuration, and can display sample messages using the
+current configuration.
+.Pp
 Note that
 .Nm
-cannot be used to completely configure the Kerberos SSO extension. Configuring
-the Kerberos SSO extension requires a user approved MDM enrollment, as well
+cannot be used to completely configure either the Kerberos SSO extension or Platform SSO.
+Configuration requires a user approved MDM enrollment, as well
 as an MDM solution that can build and deliver an appropriately configured
 Extensible SSO configuration profile payload. See your MDM vendor's
 documentation for additional information.
@@ -97,12 +110,30 @@ Format the output of this command as JSON instead of property list format.
 .It Fl h, Fl Fl help
 Print a synopsis of the above document.
 .El
+.Pp
+.Sh PLATFORM SSO COMMANDS
+.Pp
+.Bl -tag -width -indent
+.It Fl m, Fl Fl messages
+Display sample messages using the current Platform SSO configuration. This command
+is useful for testing and diagnostic purposes to verify that Platform SSO is
+properly configured and can generate authentication messages.
+.It Fl s, Fl Fl state
+Display the current Platform SSO state and configuration. This includes information
+about device configuration, login configuration, user configuration, and SSO token
+status including received and expiration dates. For diagnostic purposes only, not
+intended for scripting.
+.El
 .Sh EXAMPLES
 .Bl -tag -width -indent
 .It Print infomation about the PRETENDCO.COM realm:
 app-sso -i PRETENDCO.COM
 .It Authenticate to the PRETENDCO.COM realm as jappleseed:
 app-sso -a PRETENDCO.COM -u jappleseed
+.It Display Platform SSO state and configuration:
+app-sso platform -s
+.It Display Platform SSO test messages:
+app-sso platform -m
 .El
 .Sh Kerberos Extension UI Options
 .Bl -tag -width "XXX"

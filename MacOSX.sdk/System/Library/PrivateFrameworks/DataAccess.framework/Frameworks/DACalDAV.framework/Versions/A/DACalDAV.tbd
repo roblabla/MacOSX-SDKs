@@ -74,18 +74,18 @@ exports:
                        _kCalEventPropertyChangeRowid, _kCalEventPropertyEntityType, 
                        _kCalEventPropertyEventRef, _kCalEventPropertyExternalID, 
                        _kCalEventPropertyOldCalendarID, _kCalEventPropertySignificantAttributeChange, 
-                       _kCalEventPropertyUniqueIdentifier, _kEventSyncLookAheadYears, 
-                       _kMobileCalDAVPrincipalURL, _mobileCalDAVProdID ]
+                       _kCalEventPropertyUniqueIdentifier, _kDACalDAVContextDictionaryKey_DBHelper, 
+                       _kEventSyncLookAheadYears, _kMobileCalDAVPrincipalURL, _mobileCalDAVProdID ]
     objc-classes:    [ CalDAVAccountDelegatesRefreshOperation, CalDAVDBChangeTrackingHelper, 
                        CalDAVDBHelper, CalDAVHTTPTrafficLog, CalDAVKerberosHelper, 
                        CalDAVKerberosPrincipals, CalDAVMove, CalDAVPrincipalResult, 
                        CalDAVRefreshContext, DACalDAViCalItem, MobileCalDAVAccount, 
                        MobileCalDAVAccountRefreshActor, MobileCalDAVAccountRefreshActorAttachmentDownloadDelegate, 
-                       MobileCalDAVAttachmentUploadInfo, MobileCalDAVCalendar, MobileCalDAVDelegateUserInfo, 
-                       MobileCalDAVDeletedItemContext, MobileCalDAVInboxCalendar, 
-                       MobileCalDAVNotificationCalendar, MobileCalDAVPollCalendar, 
-                       MobileCalDAVPrincipal, MobileCalDAVSubscribedCalendar, MobileCalUserAddress ]
+                       MobileCalDAVAttachmentUploadInfo, MobileCalDAVCalendar, MobileCalDAVDAAccount, 
+                       MobileCalDAVDelegateUserInfo, MobileCalDAVDeletedItemContext, 
+                       MobileCalDAVInboxCalendar, MobileCalDAVNotificationCalendar, 
+                       MobileCalDAVPollCalendar, MobileCalDAVPrincipal, MobileCalDAVSubscribedCalendar, 
+                       MobileCalUserAddress ]
     objc-ivars:      [ CalDAVKerberosPrincipals.clientPrincipal, CalDAVKerberosPrincipals.servicePrincipal, 
-                       MobileCalDAVAccountRefreshActor._transaction, MobileCalDAVCalendar._calendarURLString, 
-                       MobileCalDAVSubscribedCalendar._properties ]
+                       MobileCalDAVCalendar._calendarURLString, MobileCalDAVSubscribedCalendar._properties ]
 ...

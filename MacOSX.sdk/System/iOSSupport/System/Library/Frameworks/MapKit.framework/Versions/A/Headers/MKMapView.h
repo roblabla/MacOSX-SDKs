@@ -80,7 +80,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 // Changing the map type or region can cause the map to start loading map content.
 // The loading delegate methods will be called as map content is loaded.
-@property (nonatomic) MKMapType mapType API_DEPRECATED_WITH_REPLACEMENT("Use respective MKMapConfiguration", macos(10.9, API_TO_BE_DEPRECATED), ios(3.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED));
+@property (nonatomic) MKMapType mapType API_DEPRECATED("Use respective MKMapConfiguration", macos(10.9, API_TO_BE_DEPRECATED), ios(3.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED));
 
 @property (nonatomic, copy) MKMapConfiguration *preferredConfiguration API_AVAILABLE(ios(16.0), macos(13.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
@@ -152,7 +152,7 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @property (nonatomic) BOOL showsCompass API_AVAILABLE(macos(10.9), ios(9.0)) API_UNAVAILABLE(tvos, watchos);
 @property (nonatomic) BOOL showsScale API_AVAILABLE(macos(10.9), ios(9.0), tvos(9.2)) API_UNAVAILABLE(watchos);
 
-@property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_DEPRECATED_WITH_REPLACEMENT("Use pointOfInterestFilter on respective MKMapConfiguration", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_DEPRECATED("Use pointOfInterestFilter on respective MKMapConfiguration", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 @property (nonatomic) BOOL showsPointsOfInterest
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos);
@@ -160,7 +160,7 @@ API_UNAVAILABLE(visionos);
 API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
 #endif
 @property (nonatomic) BOOL showsBuildings API_DEPRECATED("None", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard
-@property (nonatomic) BOOL showsTraffic API_DEPRECATED_WITH_REPLACEMENT("Use showsTraffic on respective MKMapConfiguration", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
+@property (nonatomic) BOOL showsTraffic API_DEPRECATED("Use showsTraffic on respective MKMapConfiguration", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
 
 // Set to YES to add the user location annotation to the map and start updating its location
 @property (nonatomic) BOOL showsUserLocation;
@@ -242,7 +242,7 @@ API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), 
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("-rendererForOverlay:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+API_DEPRECATED("Use -rendererForOverlay:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
 #endif
 #endif
 
@@ -325,7 +325,7 @@ API_UNAVAILABLE(watchos, tvos);
 
 #if TARGET_OS_IPHONE
 // Prefer -mapView:rendererForOverlay:
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay API_DEPRECATED_WITH_REPLACEMENT("-mapView:rendererForOverlay:", ios(4.0, 13.0))
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay API_DEPRECATED("Use -mapView:rendererForOverlay:", ios(4.0, 13.0))
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos);
 #else
@@ -337,7 +337,7 @@ API_UNAVAILABLE(macos, tvos, watchos);
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("-mapView:didAddOverlayRenderers:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+API_DEPRECATED("Use -mapView:didAddOverlayRenderers:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
 #endif
 #endif
 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/VideoSubscriberAccount.framework/Versions/A/VideoSubscriberAccount'
-current-version: 561.40.17
+current-version: 593.0.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -283,6 +283,35 @@ exports:
                        '_$s22VideoSubscriberAccount8debugLog2os6LoggerVvg', '_$s22VideoSubscriberAccount8errorLog2os6LoggerVvg', 
                        '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E12userAccounts7optionsSayAC0aB0VGSo0aB12QueryOptionsV_tYaKF', 
                        '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E12userAccounts7optionsSayAC0aB0VGSo0aB12QueryOptionsV_tYaKFTu', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15AutoSignInTokenV13authorizationAbCE0fgH13AuthorizationOvg', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15AutoSignInTokenV13authorizationAbCE0fgH13AuthorizationOvpMV', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15AutoSignInTokenV5valueSSSgvg', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15AutoSignInTokenV5valueSSSgvpMV', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15AutoSignInTokenVMa', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15AutoSignInTokenVMn', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15AutoSignInTokenVN', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15autoSignInTokenAbCE04AutoghI0Vvg', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15autoSignInTokenAbCE04AutoghI0VvgTu', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E15autoSignInTokenAbCE04AutoghI0VvpMV', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E21deleteAutoSignInTokenyyYaKF', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E21deleteAutoSignInTokenyyYaKFTu', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationO13notDeterminedyA2EmFWC', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationO2eeoiySbAE_AEtFZ', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationO4hash4intoys6HasherVz_tF', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationO6deniedyA2EmFWC', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationO7grantedyA2EmFWC', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationO9hashValueSivg', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationO9hashValueSivpMV', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationOMa', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationOMn', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationON', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationOSHACMc', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E23AutoSignInAuthorizationOSQACMc', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E28AutoSignInTokenUpdateContextV13authorizationAbCE0fgH13AuthorizationOvg', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E28AutoSignInTokenUpdateContextV13authorizationAbCE0fgH13AuthorizationOvpMV', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E28AutoSignInTokenUpdateContextVMa', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E28AutoSignInTokenUpdateContextVMn', 
+                       '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E28AutoSignInTokenUpdateContextVN', 
                        '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E6updateyyAC0aB0VYaKF', 
                        '_$sSo20VSUserAccountManagerC015VideoSubscriberB0E6updateyyAC0aB0VYaKFTu', 
                        _VSAMPProviderResponseAppsData, _VSAMPProviderResponseKeyApps, 
@@ -379,7 +408,7 @@ exports:
                        VSApplicationBootURLOperation, VSAsyncOperation, VSAuditToken, 
                        VSBackgroundTask, VSBlockBasedValueTransformer, VSBundleRecord, 
                        VSCasePreservingString, VSClassForFindingBundle, VSCompoundValueTransformer, 
-                       VSDelayOperation, VSDeveloperIdentityProviderChangeOperation, 
+                       VSCookieServer, VSDelayOperation, VSDeveloperIdentityProviderChangeOperation, 
                        VSDeveloperIdentityProviderFetchAllOperation, VSDeveloperSettings, 
                        VSDeveloperSettingsFetchOperation, VSDeveloperSettingsUpdateOperation, 
                        VSDevice, VSErrorRecoveryAttempterDelegate, VSErrorRecoveryOption, 
@@ -411,8 +440,9 @@ exports:
                        _VSPublicServiceTemporarilyUnavailableError, _VSPublicUnsupportedProviderError ]
     objc-classes:    [ VSAccountApplicationProvider, VSAccountManager, VSAccountManagerResult, 
                        VSAccountMetadata, VSAccountMetadataRequest, VSAccountProviderResponse, 
-                       VSAppleSubscription, VSIdentityProvider, VSIdentityProviderInfoCenter, 
-                       VSIdentityProviderInfoQueryResult, VSIdentityProviderStorefrontMetadata, 
-                       VSSetTopBoxInfoQueryResult, VSSubscription, VSSubscriptionRegistrationCenter, 
-                       VSUserAccount, VSUserAccountManager ]
+                       VSAppleSubscription, VSAutoSignInToken, VSIdentityProvider, 
+                       VSIdentityProviderInfoCenter, VSIdentityProviderInfoQueryResult, 
+                       VSIdentityProviderStorefrontMetadata, VSSetTopBoxInfoQueryResult, 
+                       VSSubscription, VSSubscriptionRegistrationCenter, VSUserAccount, 
+                       VSUserAccountManager ]
 ...

@@ -333,6 +333,8 @@ Tags:
   SwiftName: CKModifyRecordsOperation.RecordSavePolicy
 - Name: CKRecordZoneCapabilities
   SwiftName: CKRecordZone.Capabilities
+- Name: CKRecordZoneEncryptionScope
+  SwiftName: CKRecordZone.EncryptionScope
 - Name: CKReferenceAction
   SwiftName: CKRecord.ReferenceAction
 - Name: CKShareParticipantAcceptanceStatus

@@ -15,6 +15,7 @@
 #if __OBJC__
 #import <QuickLook/QLPreviewController.h>
 #import <QuickLook/QLPreviewItem.h>
+#import <QuickLook/ARQuickLookPreviewItem.h>
 #import <QuickLook/QLPreviewingController.h>
 #import <QuickLook/QLThumbnailProvider.h>
 #import <QuickLook/QLThumbnailRequest.h>

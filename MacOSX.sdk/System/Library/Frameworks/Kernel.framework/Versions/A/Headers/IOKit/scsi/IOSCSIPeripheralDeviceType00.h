@@ -83,7 +83,9 @@ public:
 	
 	
 private:
-	
+
+    void 				SATLSMARTCleanup 	( IOService * client );
+
 #if !TARGET_OS_IPHONE
 	// Space reserved for future expansion.
 	OSMetaClassDeclareReservedUnused ( IOSCSIPeripheralDeviceType00, 1 );

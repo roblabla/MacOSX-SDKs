@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macos15.5 -target-variant arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 251.2 -module-name DockKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macos26.0 -target-variant arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 303.3 -module-name DockKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AVFoundation
 @_exported import DockKit
 import Foundation
@@ -30,9 +30,11 @@ public enum DockKitError : Swift.Error {
 }
 @available(iOS 17, macOS 14, *)
 extension DockKit.DockKitError : Foundation.LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
 }
 @_hasMissingDesignatedInitializers @available(iOS 17, macOS 14, visionOS 1.0, *)
 public class DockAccessoryManager : @unchecked Swift.Sendable {
@@ -93,7 +95,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
     public let orientation: DockKit.DockAccessory.CameraOrientation
     public let cameraIntrinsics: simd.matrix_float3x3?
     public let referenceDimensions: CoreFoundation.CGSize?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(captureDevice: AVFoundation.AVCaptureDevice.DeviceType, cameraPosition: AVFoundation.AVCaptureDevice.Position, orientation: DockKit.DockAccessory.CameraOrientation, cameraIntrinsics: simd.matrix_float3x3?, referenceDimensions: CoreFoundation.CGSize?)
+    #endif
   }
   public enum State : Swift.Sendable, Swift.Equatable, Swift.Hashable, Swift.CustomDebugStringConvertible {
     case undocked
@@ -135,7 +139,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
     public let identifier: Swift.Int
     public let rect: CoreFoundation.CGRect
     public let faceYawAngle: Foundation.Measurement<Foundation.UnitAngle>?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(identifier: Swift.Int, type: DockKit.DockAccessory.Observation.ObservationType, rect: CoreFoundation.CGRect, faceYawAngle: Foundation.Measurement<Foundation.UnitAngle>? = nil)
+    #endif
   }
   public struct StateChange : Swift.Sendable {
     public let accessory: DockKit.DockAccessory?
@@ -145,7 +151,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
   public struct StateChanges : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.StateChange
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> DockKit.DockAccessory.StateChange?
+      #endif
       @available(iOS 17, macOS 14, *)
       public typealias Element = DockKit.DockAccessory.StateChange
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -166,7 +174,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
   public struct MotionStates : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.MotionState
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> DockKit.DockAccessory.MotionState?
+      #endif
       @available(iOS 17, macOS 14, *)
       public typealias Element = DockKit.DockAccessory.MotionState
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -212,7 +222,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
   public struct TrackingStates : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.TrackingState
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> DockKit.DockAccessory.TrackingState?
+      #endif
       @available(iOS 18.0, macOS 15.0, *)
       public typealias Element = DockKit.DockAccessory.TrackingState
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -240,7 +252,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
   public struct AccessoryEvents : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.AccessoryEvent
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> DockKit.DockAccessory.AccessoryEvent?
+      #endif
       @available(iOS 17.4, macOS 14.4, *)
       public typealias Element = DockKit.DockAccessory.AccessoryEvent
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -283,7 +297,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
   public struct BatteryStates : _Concurrency.AsyncSequence {
     public typealias Element = DockKit.DockAccessory.BatteryState
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> DockKit.DockAccessory.BatteryState?
+      #endif
       @available(iOS 18.0, macOS 15.0, *)
       public typealias Element = DockKit.DockAccessory.BatteryState
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -332,7 +348,9 @@ final public class DockAccessory : @unchecked Swift.Sendable, Swift.CustomDebugS
     public let yaw: DockKit.DockAccessory.Limits.Limit?
     public let pitch: DockKit.DockAccessory.Limits.Limit?
     public let roll: DockKit.DockAccessory.Limits.Limit?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(yaw: DockKit.DockAccessory.Limits.Limit?, pitch: DockKit.DockAccessory.Limits.Limit?, roll: DockKit.DockAccessory.Limits.Limit?)
+    #endif
   }
   final public var framingMode: DockKit.DockAccessory.FramingMode {
     get

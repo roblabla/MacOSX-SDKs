@@ -8,6 +8,7 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLDevice.h>
 #import <Metal/MTLVertexDescriptor.h>
+#import <Metal/MTLArgument.h>
 
 
 
@@ -92,13 +93,6 @@ typedef NS_ENUM(NSUInteger, MTLAttributeFormat)
     MTLAttributeFormatFloatRGB9E5 API_AVAILABLE(macos(14.0), ios(17.0)) = 55,
     
 } API_AVAILABLE(macos(10.12), ios(10.0));
-
-
-typedef NS_ENUM(NSUInteger, MTLIndexType) {
-    MTLIndexTypeUInt16 = 0,
-    MTLIndexTypeUInt32 = 1,
-} API_AVAILABLE(macos(10.11), ios(8.0));
-
 
 typedef NS_ENUM(NSUInteger, MTLStepFunction)
 {

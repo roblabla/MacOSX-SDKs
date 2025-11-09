@@ -30,17 +30,33 @@ typedef CF_ENUM(uint32_t, CGImageAlphaInfo) {
     kCGImageAlphaOnly                /* No color data, alpha data only */
 };
 
+typedef CF_ENUM(uint32_t, CGImageComponentInfo) {
+    kCGImageComponentInteger = (0 << 8),
+    kCGImageComponentFloat = (1 << 8)
+} API_AVAILABLE(macos(10.0), ios(2.0));
+
 typedef CF_ENUM(uint32_t, CGImageByteOrderInfo) {
-    kCGImageByteOrderMask     = 0x7000,
+    kCGImageByteOrderMask CG_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGBitmapByteOrderInfoMask)
+                              = 0x7000,
+    
     kCGImageByteOrderDefault  = (0 << 12),
     kCGImageByteOrder16Little = (1 << 12),
     kCGImageByteOrder32Little = (2 << 12),
     kCGImageByteOrder16Big    = (3 << 12),
-    kCGImageByteOrder32Big    = (4 << 12)
+    kCGImageByteOrder32Big    = (4 << 12),
+#ifdef __BIG_ENDIAN__
+    kCGImageByteOrder16Host   = kCGImageByteOrder16Big,
+    kCGImageByteOrder32Host   = kCGImageByteOrder32Big
+#else
+    kCGImageByteOrder16Host   = kCGImageByteOrder16Little,
+    kCGImageByteOrder32Host   = kCGImageByteOrder32Little
+#endif
 } API_AVAILABLE(macos(10.0), ios(2.0));
 
 typedef CF_ENUM(uint32_t, CGImagePixelFormatInfo) {
-    kCGImagePixelFormatMask      = 0xF0000,
+    kCGImagePixelFormatMask CG_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGBitmapPixelFormatInfoMask)
+                                 = 0xF0000,
+
     kCGImagePixelFormatPacked    = (0 << 16),
     kCGImagePixelFormatRGB555    = (1 << 16), /* Only for RGB 16 bits per pixel, alpha != alpha none */
     kCGImagePixelFormatRGB565    = (2 << 16), /* Only for RGB 16 bits per pixel, alpha none */
@@ -51,26 +67,34 @@ typedef CF_ENUM(uint32_t, CGImagePixelFormatInfo) {
 } API_AVAILABLE(macos(10.14), ios(12.0));
 
 typedef CF_OPTIONS(uint32_t, CGBitmapInfo) {
-    kCGBitmapAlphaInfoMask = 0x1F,
+    kCGBitmapAlphaInfoMask       = 0x1F,
+    kCGBitmapComponentInfoMask   = 0xF00,
+    kCGBitmapByteOrderInfoMask   = 0x7000,
+    kCGBitmapPixelFormatInfoMask = 0xF0000,
+    
+    kCGBitmapFloatInfoMask CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGBitmapComponentInfoMask),
+    kCGBitmapByteOrderMask CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGBitmapByteOrderInfoMask),
 
-    kCGBitmapFloatInfoMask = 0xF00,
-    kCGBitmapFloatComponents = (1 << 8),
-
-    kCGBitmapByteOrderMask     = kCGImageByteOrderMask,
-    kCGBitmapByteOrderDefault  = kCGImageByteOrderDefault,
-    kCGBitmapByteOrder16Little = kCGImageByteOrder16Little,
-    kCGBitmapByteOrder32Little = kCGImageByteOrder32Little,
-    kCGBitmapByteOrder16Big    = kCGImageByteOrder16Big,
-    kCGBitmapByteOrder32Big    = kCGImageByteOrder32Big
+    kCGBitmapFloatComponents CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageComponentFloat),
+    kCGBitmapByteOrderDefault CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageByteOrderDefault),
+    kCGBitmapByteOrder16Little CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageByteOrder16Little),
+    kCGBitmapByteOrder32Little CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageByteOrder32Little),
+    kCGBitmapByteOrder16Big CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageByteOrder16Big),
+    kCGBitmapByteOrder32Big CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageByteOrder32Big)
 } API_AVAILABLE(macos(10.0), ios(2.0));
 
-#ifdef __BIG_ENDIAN__
-static const CGBitmapInfo kCGBitmapByteOrder16Host = kCGBitmapByteOrder16Big;
-static const CGBitmapInfo kCGBitmapByteOrder32Host = kCGBitmapByteOrder32Big;
-#else    /* Little endian. */
-static const CGBitmapInfo kCGBitmapByteOrder16Host = kCGBitmapByteOrder16Little;
-static const CGBitmapInfo kCGBitmapByteOrder32Host = kCGBitmapByteOrder32Little;
-#endif
+static const CGBitmapInfo kCGBitmapByteOrder16Host CG_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageByteOrder16Host) = (CGBitmapInfo)kCGImageByteOrder16Host;
+static const CGBitmapInfo kCGBitmapByteOrder32Host CG_SOFT_DEPRECATED_WITH_REPLACEMENT(kCGImageByteOrder32Host) = (CGBitmapInfo)kCGImageByteOrder32Host;
+
+CF_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(10.14), ios(12.0))
+CG_INLINE CGBitmapInfo CGBitmapInfoMake(
+    CGImageAlphaInfo alpha,
+    CGImageComponentInfo component,
+    CGImageByteOrderInfo byteOrder,
+    CGImagePixelFormatInfo pixelFormat) {
+    return alpha | component | byteOrder | pixelFormat;
+}
 
 /* Return the CFTypeID for CGImageRefs. */
 
@@ -211,12 +235,8 @@ CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithColorSpace(
    clipped to [0.0, 1.0] range, and other bit depths will be treated as
    representing [0.0, 1.0] range, same as in the 'CGImageCreate' API.
    The headroom parameter must be either equal 0.0f or be greater or equal 1.0f.
-   When the headroom parameter is 0.0f and the color space is extended,
-   the image content headroom will be calculated from the image data.
-   When needed, the exisitng 'CGImageCreate' API will create an image with
-   content headroom equal 0.0f.
-   When the headroom parameter is 0.0f in case of PQ or HLG color spaces,
-   the image content headroom value will be estimated based on the color space.
+   The headroom value of 0.0f means "headroom unknown".
+   The image with unknown content headroom will be excluded  from tone mapping.
    When justified, kCGDefaultHDRImageContentHeadroom which is a typical content
    headroom for PQ and HLG images could be used to specify the content headroom.*/
 
@@ -231,11 +251,12 @@ CG_EXTERN CGImageRef __nullable CGImageCreateWithContentHeadroom(
     API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
 /* Create a copy of `image' adding or replacing the image's content headroom.
-   Returns NULL if `image' is an image mask, or if original is not using
-   extended color space, PQ or HLG.
+   Returns NULL if `image' is not using PQ, HLG or extended color space.
    The headroom parameter must be either equal 0.0f or be greater or equal 1.0f.
-   When the headroom parameter is 0.0f and the color space is extended,
-   the image content headroom will be calculated from the image data. */
+   The headroom value of 0.0f means "headroom unknown".
+   The image with unknown content headroom will be excluded from tone mapping.
+   When justified, kCGDefaultHDRImageContentHeadroom which is a typical content
+   headroom for PQ and HLG images could be used to specify the content headroom. */
 
 CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithContentHeadroom(
     float headroom, CGImageRef cg_nullable image)
@@ -244,10 +265,43 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 CG_EXTERN float kCGDefaultHDRImageContentHeadroom
 API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
-/* Return image content headroom */
+/* Return image content headroom if it is contained in the image metadata, and return 0.0f if unknown. */
 
 CG_EXTERN float CGImageGetContentHeadroom(CGImageRef cg_nullable image)
    API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+/* Calculate the image content headroom, and return 0.0f if unknown. Please note that because of image immutability, the image metadata cannot be updated.
+ Use CGImageCreateCopyWithContentHeadroom if applicable. */
+
+CG_EXTERN float CGImageCalculateContentHeadroom(CGImageRef cg_nullable image)
+   CF_SWIFT_NAME(getter:CGImage.calculatedContentHeadroom(self:))
+   API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0));
+
+/* Return the image content average light level value normalized by the reference white if the content average light level is contained in the image metadata, and return 0.0f if unknown. */
+
+CG_EXTERN float CGImageGetContentAverageLightLevel(CGImageRef cg_nullable image)
+   CF_SWIFT_NAME(getter:CGImage.contentAverageLightLevel(self:))
+   API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0));
+
+/* Calculate the image content average light level value normalized by the reference white, and return 0.0f if unknown. Please note that because of image immutability, the image metadata cannot be updated.
+ Use CGImageCreateCopyWithContentAverageLightLevel if applicable. */
+
+CG_EXTERN float CGImageCalculateContentAverageLightLevel(CGImageRef cg_nullable image)
+   CF_SWIFT_NAME(getter:CGImage.calculatedContentAverageLightLevel(self:))
+   API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0));
+
+/* Create a copy of `image' adding or replacing the image's content average light level.
+   Returns NULL if `image' is not using color space of RGB model.
+   The `avll' parameter must be greater or equal 0.0f.
+   The value of 0.0f means "content average light level unknown". */
+
+CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithContentAverageLightLevel(CGImageRef cg_nullable image, float avll)
+   CF_SWIFT_NAME(CGImage.copy(self:contentAverageLightLevel:))
+   API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0));
+
+CG_EXTERN CGImageRef __nullable CGImageCreateCopyWithCalculatedHDRStats(CGImageRef cg_nullable image)
+   CF_SWIFT_NAME(CGImage.copyWithCalculatedHDRStats(self:))
+   API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0));
 
 /* Equivalent to `CFRetain(image)'. */
 

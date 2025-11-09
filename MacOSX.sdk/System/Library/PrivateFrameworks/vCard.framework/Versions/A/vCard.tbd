@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/vCard.framework/Versions/A/vCard'
-current-version: 3770.255.1
+current-version: 3804.100.1
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -62,7 +62,7 @@ exports:
                        _CNVCardKeyOtherDateComponents, _CNVCardKeyParentGroups, _CNVCardKeyPhoneNumber, 
                        _CNVCardKeyPhonemeData, _CNVCardKeyPhoneticFirstName, _CNVCardKeyPhoneticLastName, 
                        _CNVCardKeyPhoneticMiddleName, _CNVCardKeyPhoneticOrganizationName, 
-                       _CNVCardKeyPostalAddress, _CNVCardKeyPreferredApplePersonaID, 
+                       _CNVCardKeyPostalAddress, _CNVCardKeyPosterIdentifier, _CNVCardKeyPreferredApplePersonaID, 
                        _CNVCardKeyPreferredLikenessSource, _CNVCardKeyPronunciationFirstName, 
                        _CNVCardKeyPronunciationLastName, _CNVCardKeyRelatedNames, 
                        _CNVCardKeySensitiveContentConfiguration, _CNVCardKeySharedPhotoDisplayPreference, 

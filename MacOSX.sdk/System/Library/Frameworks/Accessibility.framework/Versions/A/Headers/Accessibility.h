@@ -16,3 +16,4 @@
 #import <Accessibility/AXTechnology.h>
 #import <Accessibility/AXMathExpression.h>
 #import <Accessibility/AXFeatureOverrideSessionManager.h>
+#import <Accessibility/AXBrailleTranslator.h>

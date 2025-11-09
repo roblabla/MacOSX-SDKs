@@ -97,6 +97,11 @@ API_AVAILABLE(ios(13.0))
 /// All tool items within the picker.
 @property (nonatomic, readonly) NSArray<PKToolPickerItem *> *toolItems API_AVAILABLE(ios(18.0), visionos(2.0));
 
+/// The default tool items for new tool pickers.
+///
+/// These items are used when creating a new `PKToolPicker`.
+@property (class, nonatomic, nonnull, readonly) NSArray<PKToolPickerItem *> *defaultToolItems API_AVAILABLE(ios(26.0), visionos(26.0));
+
 /// Is the ruler toggled such that it should be active on canvases.
 @property (nonatomic, getter=isRulerActive) BOOL rulerActive;
 
@@ -165,6 +170,11 @@ API_AVAILABLE(ios(13.0))
 /// @param items the items in desired order that are used to set up the picker.  At least one item is required.
 ///        If `items` contains tools with the same identifier, only the first item is used to create the picker.
 - (instancetype)initWithToolItems:(NSArray<PKToolPickerItem *> *)items API_AVAILABLE(ios(18.0), visionos(2.0));
+
+/// Maximum linear exposure for the color picker used by the tool picker. Can be used to enable picking HDR colors.
+///
+/// Default value is 1.0 which means only SDR colors can be picked.
+@property (nonatomic, assign) CGFloat colorMaximumLinearExposure API_AVAILABLE(ios(26.0), visionos(26.0));
 
 @end
 NS_ASSUME_NONNULL_END

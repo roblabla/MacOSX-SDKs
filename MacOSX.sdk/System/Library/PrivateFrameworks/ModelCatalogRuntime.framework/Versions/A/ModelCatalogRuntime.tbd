@@ -3,23 +3,26 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ModelCatalogRuntime.framework/Versions/A/ModelCatalogRuntime'
-current-version: 162.255
+current-version: 218.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C14removeSideload14resourceBundle4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C14removeSideload8resource4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
+                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C14safetyFailures14userIdentifier4withys6UInt32V_y10Foundation4DataVSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C15releaseResource10identifier4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C15requestResource10identifier4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
+                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C16debugInformation7options4withySo8NSNumberC_y0aB005DebugG7WrapperCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C16releaseResources10requestKey4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C16requestResources0F3Key4withySS_ySo8NSNumberCSg_s5Error_pSgtctF', 
-                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17availableUseCases4withyy0aB009AvailablegH7WrapperCSg_s5Error_pSgtc_tF', 
+                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17availableUseCases24includeAssetsInformation4withySb_y0aB009AvailablegH7WrapperCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17regulatoryDomains4withyySaySSG_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C17resourceContainer10identifier4withySS_y0aB008ResourceG0CSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C18resourceContainers4withyySay0aB017ResourceContainerCGSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C18supportedArguments3for4withySS_ySaySDyS2SGGSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C19donateSafetyFailure06safetyH04withy0aB00gH7WrapperC_ySSSg_s5Error_pSgtctF', 
+                       '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C19enableTestResources4withyySo8NSNumberCSg_s5Error_pSgtc_tF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C19resourceInformation10identifier4withySS_y0aB008ResourceG0CSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C21acquireCoherenceToken11identifiers4withyShySSG_y0aB007AcquiregH8ResponseCSg_s5Error_pSgtctF', 
                        '_$s19ModelCatalogRuntime0B13ServiceServerC0E0C23resourceBundleContainer10identifier4withySS_y0aB008ResourcegH0CSg_s5Error_pSgtctF', 
@@ -118,6 +121,7 @@ exports:
                        '_$s19ModelCatalogRuntime6DaemonP5start5usingySo17OS_dispatch_queueC_tFZTj', 
                        '_$s19ModelCatalogRuntime6DaemonP5start5usingySo17OS_dispatch_queueC_tFZTq', 
                        '_$s19ModelCatalogRuntime6DaemonPAAE12enterSandboxyyFZ', '_$s19ModelCatalogRuntime6DaemonPAAE17sandboxParametersSDyS2SGvgZ', 
+                       '_$s19ModelCatalogRuntime6DaemonPAAE17sandboxParametersSDyS2SGvpZMV', 
                        '_$s19ModelCatalogRuntime6DaemonPAAE19withArrayOfCStringsyqd__SaySSG_qd__SaySPys4Int8VGSgGXEtlFZ', 
                        '_$s19ModelCatalogRuntime6DaemonPAAE4mainyyFZ', '_$s19ModelCatalogRuntime6DaemonPAAE7confstrySSSgs5Int32VFZ', 
                        '_$s19ModelCatalogRuntime6DaemonPAAE7flattenySaySSGSDyS2SGFZ', 

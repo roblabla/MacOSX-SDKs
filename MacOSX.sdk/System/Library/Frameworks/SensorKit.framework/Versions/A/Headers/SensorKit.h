@@ -33,3 +33,5 @@
 #import <SensorKit/SRElectrocardiogramSession.h>
 #import <SensorKit/SRElectrocardiogramSample.h>
 #import <SensorKit/SRPhotoplethysmogramSample.h>
+#import <SensorKit/SRAcousticSettings.h>
+#import <SensorKit/SRSleepSession.h>

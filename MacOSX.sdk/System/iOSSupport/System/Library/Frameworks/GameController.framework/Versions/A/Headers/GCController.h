@@ -17,7 +17,6 @@
 
 @class GCMotion;
 @class CHHapticEngine;
-@class GCDeviceHaptics;
 @class GCDeviceLight;
 @class GCDeviceBattery;
 @class GCGamepad;
@@ -249,9 +248,9 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0))
 /**
  Gets the haptics for the controller, if one exists.
  
- Use this property to create CHHapticEngine instances according to your needs. 
+ Use this property to create CHHapticEngine instances according to your needs.
  
- @note Haptics are a drain on the controller's battery, and can be distracting when used excessively. 
+ @note Haptics are a drain on the controller's battery, and can be distracting when used excessively.
  */
 @property (nonatomic, retain, readonly, nullable) GCDeviceHaptics *haptics API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 

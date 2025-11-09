@@ -168,11 +168,8 @@ exports:
                        _nw_protocol_boringssl_identifier, _rsa_default_sign_raw, 
                        _rsa_default_size, _sk_pop_free ]
     objc-ivars:      [ boringssl_concrete_boringssl_ctx.boringssl_handle, boringssl_concrete_boringssl_ctx.handshake_timer_fires, 
-                       boringssl_concrete_boringssl_ctx.max_allowed_dtls_version, 
-                       boringssl_concrete_boringssl_ctx.max_allowed_tls_version, 
                        boringssl_concrete_boringssl_ctx.peer_verified, boringssl_concrete_boringssl_ctx.received_certificate_request, 
                        boringssl_concrete_boringssl_ctx.recovered_session, boringssl_concrete_boringssl_ctx.ssl_ctx, 
                        boringssl_concrete_boringssl_ctx.ssl_session, boringssl_concrete_nw_protocol_boringssl.boringssl_bio, 
-                       boringssl_concrete_nw_protocol_boringssl.protocol, boringssl_concrete_nw_protocol_boringssl.read_func, 
-                       boringssl_concrete_nw_protocol_boringssl.write_func ]
+                       boringssl_concrete_nw_protocol_boringssl.read_func, boringssl_concrete_nw_protocol_boringssl.write_func ]
 ...

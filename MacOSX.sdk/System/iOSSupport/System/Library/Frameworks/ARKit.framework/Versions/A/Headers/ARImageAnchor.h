@@ -8,8 +8,6 @@
 #import <ARKit/ARAnchor.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-#define AR_IMAGE_ANCHOR_PROTOCOLS <ARTrackable>
-
 @class ARReferenceImage;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -19,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(ios(11.3))
 NS_SWIFT_SENDABLE
-@interface ARImageAnchor : ARAnchor AR_IMAGE_ANCHOR_PROTOCOLS
+@interface ARImageAnchor : ARAnchor <ARTrackable>
 
 /**
  Reference to the detected image.
@@ -28,7 +26,7 @@ NS_SWIFT_SENDABLE
 
 /**
  The factor between estimated physical size and provided size.
- 
+
  @discussion This value will be estimated if automaticImageScaleEstimationEnabled is set to true on the ARWorldTrackingConfiguration. It is used to
  correct the transform's translation. Default value is 1.0.
  */

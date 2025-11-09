@@ -68,7 +68,7 @@ AV_INIT_UNAVAILABLE
   @result		A CMSampleBuffer object referencing the output sample buffer.
   @discussion	If the AVSampleBufferGenerator was created with a NULL timebase, any associated AVSampleBufferRequest will default to using AVSampleBufferRequestModeImmediate.
 */
-- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0)) NS_SWIFT_NAME(makeSampleBuffer(for:));
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0), visionos(1.0)) NS_SWIFT_NAME(makeSampleBuffer(for:)) NS_SWIFT_SENDING;
 
 /* It is an error to use an AVSampleBufferRequest with mode set to AVSampleBufferRequestModeScheduled when the AVSampleBufferGenerator was created with a NULL timebase. */
 - (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED API_DEPRECATED("Use -createSampleBufferForRequest: error:, passing NULL for the error if not required", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);

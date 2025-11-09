@@ -21,9 +21,6 @@ from the NetBIOS network, making them available to the system through
 .Nm mDNSResponder.
 .Sh OPTIONS
 .Bl -tag -width -indent  \" Differs from above in tag removed
-.It Fl debug
-The service will log extensive debug information and may perform extra
-diagnostic checks. This option is typically only useful for debugging.
 .It Fl dump-packets
 Pretty-print all sent and received NetBIOS packets to the output log. This
 option is typically only useful for debugging.
@@ -33,10 +30,6 @@ Prints a usage message and exits.
 Maximum time (in seconds) between searches to refresh the workgroup list.
 .It Fl min-refresh
 Minimum time (in seconds) between searches to refresh the workgroup list.
-.It Fl stdout
-Causes
-.Nm
-to print log messages to standard output instead of the system log.
 .El
 .\" The following requests should be uncommented and used where appropriate.
 .\" This next request is for sections 2 and 3 function return values only.

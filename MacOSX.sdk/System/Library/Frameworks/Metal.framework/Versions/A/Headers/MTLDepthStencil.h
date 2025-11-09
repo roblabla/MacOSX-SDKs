@@ -74,7 +74,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 
 
 /* Device-specific compiled depth/stencil state object */
-API_AVAILABLE(macos(10.11), ios(8.0))
+API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @protocol MTLDepthStencilState <NSObject>
 
 /*!
@@ -89,5 +89,10 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (readonly) id <MTLDevice> device;
 
+/*!
+ @property gpuResourceID
+ @abstract Handle of the GPU resource suitable for storing in an Argument Buffer
+ */
+@property (readonly) MTLResourceID gpuResourceID API_AVAILABLE(macos(26.0), ios(26.0));
 @end
 NS_ASSUME_NONNULL_END

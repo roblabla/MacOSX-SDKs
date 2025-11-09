@@ -24,7 +24,7 @@ typedef NS_ENUM(NSInteger, GKErrorCode) {
     GKErrorNotSupported                         API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0)) = 16,
     GKErrorInvalidParameter                     API_AVAILABLE(ios(4.2), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0)) = 17,
     GKErrorUnexpectedConnection                 API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0)) = 18,
-    GKErrorChallengeInvalid                     API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0)) = 19,
+    GKErrorChallengeInvalid                     API_DEPRECATED_WITH_REPLACEMENT("Replaced by developer defined challenges, see ``GKChallengeDefinition``", ios(6.0,26.0), macos(10.8,26.0), tvos(9.0,26.0), visionos(1.0,26.0), watchos(3.0,26.0)) = 19,
     GKErrorTurnBasedMatchDataTooLarge           API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0)) = 20,
     GKErrorTurnBasedTooManySessions             API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0)) = 21,
     GKErrorTurnBasedInvalidParticipant          API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0)) = 22,

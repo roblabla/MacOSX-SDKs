@@ -156,7 +156,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
     distributed notification center whenever the accept cookies
     preference is changed
 */
-FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerAcceptPolicyChangedNotification API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSHTTPCookieManagerAcceptPolicyChangedNotification API_DEPRECATED("Notification is never posted", macos(10.2, 10.11), ios(2.0, 9.0), watchos(2.0, 2.0), tvos(9.0, 9.0), visionos(1.0, 1.0));
 
 /*!
     @const NSHTTPCookieManagerCookiesChangedNotification

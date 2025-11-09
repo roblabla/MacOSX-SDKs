@@ -267,14 +267,15 @@ exports:
                        _MTSDevicePairingAppleVendorID, _MTSDevicePairingSystemCommissionerVendorID, 
                        _MTSErrorDomain, _MTSXPCEntitlementNameAllowSetupPayload, 
                        _MTSXPCEntitlementNameDevicePairing, _MTSXPCEntitlementNamePrivateHomeKit, 
-                       _MTSXPCMachServiceName ]
+                       _MTSXPCEntitlementNameThreadCredentials, _MTSXPCMachServiceName ]
     objc-classes:    [ MTSAuthorization, MTSDeviceCredential, MTSDevicePairing, MTSDevicePairingEcosystem, 
                        MTSDevicePairingFabric, MTSDevicePairingManager, MTSDevicePairingVendor, 
                        MTSDeviceSetupDevicePredicate, MTSDeviceSetupExtensionMessenger, 
                        MTSDeviceSetupHome, MTSDeviceSetupRequest, MTSDeviceSetupRequestPairingDescription, 
                        MTSDeviceSetupRoom, MTSDeviceSetupTopology, MTSKeyValueStore, 
-                       MTSSystemCommissionerPairing, MTSSystemCommissionerPairingManager, 
-                       MTSThreadNetworkAssociation, MTSThreadScanResult, MTSWiFiNetworkAssociation, 
+                       MTSNetworkCredentialManager, MTSSystemCommissionerPairing, 
+                       MTSSystemCommissionerPairingManager, MTSThreadNetworkAssociation, 
+                       MTSThreadNetworkCredential, MTSThreadScanResult, MTSWiFiNetworkAssociation, 
                        MTSWiFiScanResult, MTSXPCClientProxy, MTSXPCConnection, MTSXPCServer, 
                        _TtC13MatterSupport38MatterAddDeviceExtensionRequestHandler ]
 ...

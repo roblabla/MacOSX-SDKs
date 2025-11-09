@@ -47,7 +47,9 @@ typedef enum {
 	/*! @const nw_error_domain_dns The error code will be a DNSServiceErrorType error as defined in <dns_sd.h> */
 	nw_error_domain_dns = 2,
 	/*! @const nw_error_domain_tls The error code will be a TLS error as defined in <Security/SecBase.h> */
-	nw_error_domain_tls = 3
+	nw_error_domain_tls = 3,
+	/*! @const nw_error_domain_wifi_aware The error code will be a Wi-Fi Aware error as defined in <WifiAware/errors.swift> */
+	nw_error_domain_wifi_aware API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0)) = 4,
 } nw_error_domain_t;
 
 /*!
@@ -102,6 +104,13 @@ extern const CFStringRef kNWErrorDomainDNS; // Values will be DNSServiceErrorTyp
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 extern const CFStringRef kNWErrorDomainTLS; // Values will be errSSL* errors
+
+/*!
+ * @const kNWErrorDomainWiFiAware
+ * @abstract CFErrorRef domain corresponding to nw_error_domain_wifi_aware.
+ */
+API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0))
+extern const CFStringRef kNWErrorDomainWiFiAware; // Values will be errors from <WifiAware/errors.swift>
 
 /*!
  * @function nw_error_copy_cf_error

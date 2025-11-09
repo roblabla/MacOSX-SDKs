@@ -60,6 +60,22 @@ API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 /// Duration from startDate during which this leaderboard instance accepts score submissions (only applicable to recurring leaderboards)
 @property (readonly, nonatomic) NSTimeInterval duration API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
 
+/// The description of this Leaderboard as configured by the developer in App Store Connect.
+@property (readonly, nonatomic, copy) NSString *leaderboardDescription API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0), watchos(26.0));
+
+/// The release state of the leaderboard in App Store Connect.
+@property(nonatomic, assign, readonly) GKReleaseState releaseState API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0), watchos(26.0));
+
+/// The identifier of the game activity associated with this leaderboard, as configured by the developer in App Store Connect.
+@property (readonly, nonatomic, copy) NSString *activityIdentifier API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0), watchos(26.0));
+
+/// The properties when associating this leaderboard with a game activity, as configured by the developer in App Store Connect.
+@property (readonly, nonatomic, strong) NSDictionary<NSString *, NSString *> *activityProperties API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0), watchos(26.0));
+
+/// A Boolean value that indicates whether the current leaderboard isn't visible in Game Center views.
+///
+/// You can still submit scores to a hidden leaderboard.
+@property (readonly, nonatomic) BOOL isHidden API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0), watchos(26.0));
 
 /// Loads classic and recurring leaderboards associated with the supplied App Store Connect leaderboard IDs.
 /// If leaderboardIDs is nil, this loads all classic and recurring leaderboards for this game.
@@ -176,10 +192,11 @@ NS_ASSUME_NONNULL_END
 
 @interface GKLeaderboard (UI)
  
- // Asynchronously load the image. Error will be nil on success.
 #if TARGET_OS_IPHONE
+/// Asynchronously load the image. Error will be nil on success.
 - (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.8), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #else
+/// Asynchronously load the image. Error will be nil on success.
 - (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.8), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #endif
 

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -target-variant x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1325.600.31 -module-name IdentityLookup
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -target-variant x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1367.100.1 -module-name IdentityLookup
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreData
 import ExtensionFoundation
 import Foundation
@@ -73,6 +73,11 @@ extension IdentityLookup.LiveCallerIDLookupProtocol {
 @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macCatalyst 18.0, macOS 15.0, *)
 public protocol LiveCallerIDLookupExtensionConfiguration : ExtensionFoundation.AppExtensionConfiguration {
 }
+public typealias BlockingInfoCoreDataPropertiesSet = Foundation.NSSet
+public typealias IdentityInfoCoreDataPropertiesSet = Foundation.NSSet
+public typealias LiveLookupDBExtensionCoreDataPropertiesSet = Foundation.NSSet
+public typealias LiveLookupStoreFoundationFrameworkSet = Foundation.NSSet
+public typealias LiveLookupStoreCoreDataFrameworkManagedObject = CoreData.NSManagedObject
 @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macCatalyst 18.0, macOS 15.0, *)
 extension IdentityLookup.CallLookupExtensionStatus : Swift.Equatable {}
 @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macCatalyst 18.0, macOS 15.0, *)

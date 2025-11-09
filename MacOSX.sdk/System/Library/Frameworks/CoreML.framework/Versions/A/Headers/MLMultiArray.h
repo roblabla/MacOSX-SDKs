@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, MLMultiArrayDataType) {
     MLMultiArrayDataTypeFloat16 API_AVAILABLE(macos(12.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0x10000 | 16,
     MLMultiArrayDataTypeFloat   API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 0x10000 | 32,
     MLMultiArrayDataTypeInt32   = 0x20000 | 32,
+    MLMultiArrayDataTypeInt8    API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0)) = 0x20000 | 8,
 } API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 /// Use `MLMultiArray` to store a multi-dimensional value.
@@ -157,7 +158,8 @@ ML_EXPORT
 ///
 /// The instance will own the pixel buffer and release it on the deallocation.
 ///
-/// The pixel buffer's pixel format type must be OneComponent16Half. As such, MLMultiArray's data type will be MLMultiArrayDataTypeFloat16.
+/// The pixel buffer's pixel format type must be either `kCVPixelFormatType_OneComponent16Half` for `MLMultiArrayDataTypeFloat16` or
+/// `kCVPixelFormatType_OneComponent8` for `MLMultiArrayDataTypeInt8`.
 ///
 /// ```objc
 /// CVPixelBufferRef pixelBuffer = NULL;

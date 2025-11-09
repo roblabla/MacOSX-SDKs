@@ -78,6 +78,12 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
  * @discussion A boolean indicating if the match domains should be appended to the search domain list.  Default is NO (match domains will be appended to the search domain list).
  */
 @property BOOL matchDomainsNoSearch API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ * @property allowFailover
+ * @discussion A boolean indicating if failover to the default system resolver is permitted on resolution failure.
+ */
+@property BOOL allowFailover API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0)) API_UNAVAILABLE(watchos);
 @end
 
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos)

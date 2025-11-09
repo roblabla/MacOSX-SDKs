@@ -6,9 +6,10 @@ install-name:    '/System/Library/PrivateFrameworks/CoreRecents.framework/Versio
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _CRAddressKindEmail, _CRAddressKindGroup, _CRAddressKindInstantMessage, 
-                       _CRAddressKindMapLocation, _CRAddressKindPhoneNumber, _CRAddressKindURL, 
-                       _CRIsInternalDevice, _CRRecentContactKeyAddress, _CRRecentContactKeyContactID, 
+    symbols:         [ _CRAcceptedIntroductionsDidChangeNotification, _CRAddressKindEmail, 
+                       _CRAddressKindGroup, _CRAddressKindInstantMessage, _CRAddressKindMapLocation, 
+                       _CRAddressKindPhoneNumber, _CRAddressKindURL, _CRIsInternalDevice, 
+                       _CRRecentContactKeyAddress, _CRRecentContactKeyContactID, 
                        _CRRecentContactKeyDisplayName, _CRRecentContactKeyKind, _CRRecentContactKeyLastSendingAddress, 
                        _CRRecentContactMetadataCreationTime, _CRRecentContactMetadataEventTime, 
                        _CRRecentContactMetadataFrom, _CRRecentContactMetadataFromAddress, 
@@ -21,10 +22,11 @@ exports:
                        _CRRecentWeightMailSentAddress, _CRRecentWeightMailViewedAddress, 
                        _CRRecentWeightMessagesReceivedAddress, _CRRecentWeightMessagesRespondedAddress, 
                        _CRRecentWeightMessagesSentAddress, _CRRecentWeightPassbookShippingAddress, 
-                       _CRRecentsAgentMachServiceName, _CRRecentsDomainCalendar, 
-                       _CRRecentsDomainEventKitContact, _CRRecentsDomainEventKitLocation, 
-                       _CRRecentsDomainFaceTime, _CRRecentsDomainMail, _CRRecentsDomainMaps, 
-                       _CRRecentsDomainMessages, _CRRecentsDomainPassbook, _CRRecentsDomainRemindersLocation, 
+                       _CRRecentsAgentMachServiceName, _CRRecentsDomainAcceptedIntroductions, 
+                       _CRRecentsDomainCalendar, _CRRecentsDomainEventKitContact, 
+                       _CRRecentsDomainEventKitLocation, _CRRecentsDomainFaceTime, 
+                       _CRRecentsDomainMail, _CRRecentsDomainMaps, _CRRecentsDomainMessages, 
+                       _CRRecentsDomainPassbook, _CRRecentsDomainRemindersLocation, 
                        _CRiCloudAccountChangedNotification, __CRAddressArchiveKey, 
                        __CRContactIDArchiveKey, __CRDisplayNameArchiveKey, __CRGroupKindArchiveKey, 
                        __CRGroupNameArchiveKey, __CRKindArchiveKey, __CRLastSendingAddressArchiveKey, 
@@ -33,7 +35,9 @@ exports:
                        __CRRecentsDomainArchiveKey, __CRWeightArchiveKey, _kCRRecentContactMaxDateEvents, 
                        _sCRRecentRecentIdentifier, _sCRRecentSyncKeyDict, _sCRSQLite3MPrintTransform ]
     objc-classes:    [ CRDRecentContactsLibraryInterface, CRLogging, CRRecentContact, 
-                       CRRecentContactsLibrary, CRSQLRow, CRSearchPredicate, CRSearchQuery, 
-                       _CRAndConjunctionPredicate, _CRMatchTextPredicate, _CROrConjunctionPredicate, 
-                       _CRSearchCollectionPredicate ]
+                       CRRecentContactSorting, CRRecentContactsDomainSupportedAccess, 
+                       CRRecentContactsLibrary, CRRecentContactsLibraryDiagnosticAccessDecorator, 
+                       CRRecentContactsLibraryRemoteAccess, CRRecentContactsLibraryUnavailableAccess, 
+                       CRSQLRow, CRSearchPredicate, CRSearchQuery, _CRAndConjunctionPredicate, 
+                       _CRMatchTextPredicate, _CROrConjunctionPredicate, _CRSearchCollectionPredicate ]
 ...

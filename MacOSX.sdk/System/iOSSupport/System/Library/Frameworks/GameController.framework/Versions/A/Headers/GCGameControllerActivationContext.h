@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import <GameController/GCExtern.h>
-
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(ios(18.0))

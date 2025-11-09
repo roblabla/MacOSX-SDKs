@@ -171,6 +171,7 @@ exports:
                        '_$s22AudioAnalyticsExternal20DurationSummaryStateCfD', '_$s22AudioAnalyticsExternal20DurationSummaryStateCfd', 
                        '_$s22AudioAnalyticsExternal20SessionSummaryWorkerC0aB4Base0F8ProtocolAAMc', 
                        '_$s22AudioAnalyticsExternal20SessionSummaryWorkerC0aB4Base19StartOnFirstMessageAAMc', 
+                       '_$s22AudioAnalyticsExternal20SessionSummaryWorkerC0dE4KeysO12ioPageFaultsyA2EmFWC', 
                        '_$s22AudioAnalyticsExternal20SessionSummaryWorkerC0dE4KeysO12isPrewarmingyA2EmFWC', 
                        '_$s22AudioAnalyticsExternal20SessionSummaryWorkerC0dE4KeysO12isRecoveringyA2EmFWC', 
                        '_$s22AudioAnalyticsExternal20SessionSummaryWorkerC0dE4KeysO18inputDeviceUIDListyA2EmFWC', 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/PhotosUI.framework/Versions/A/PhotosUI'
-current-version: 760.6.150
+current-version: 801.43.240
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -319,6 +319,8 @@ exports:
                        '_$s8PhotosUI14PHPickerFilterV15timelapseVideosACvgZ', '_$s8PhotosUI14PHPickerFilterV15timelapseVideosACvpZMV', 
                        '_$s8PhotosUI14PHPickerFilterV16_itemIdentifiersyACSaySSGFZ', 
                        '_$s8PhotosUI14PHPickerFilterV16screenRecordingsACvgZ', '_$s8PhotosUI14PHPickerFilterV16screenRecordingsACvpZMV', 
+                       '_$s8PhotosUI14PHPickerFilterV21_landscapeOrientationACvgZ', 
+                       '_$s8PhotosUI14PHPickerFilterV21_landscapeOrientationACvpZMV', 
                        '_$s8PhotosUI14PHPickerFilterV2eeoiySbAC_ACtFZ', '_$s8PhotosUI14PHPickerFilterV3all2ofACSayACG_tFZ', 
                        '_$s8PhotosUI14PHPickerFilterV3any2ofACSayACG_tFZ', '_$s8PhotosUI14PHPickerFilterV3notyA2CFZ', 
                        '_$s8PhotosUI14PHPickerFilterV4hash4intoys6HasherVz_tF', '_$s8PhotosUI14PHPickerFilterV6burstsACvgZ', 
@@ -338,6 +340,8 @@ exports:
                        '_$s8PhotosUI14PHPickerResultV22_preferredContentsRect10targetSizeSo6CGRectVSo6CGSizeV_tF', 
                        '_$s8PhotosUI14PHPickerResultV25_requestThumbnailImageURL13preferredSize13resultHandlerySo01_cdfJ0V_ys0D0Oy10Foundation0H0Vs5Error_pGctF', 
                        '_$s8PhotosUI14PHPickerResultV2eeoiySbAC_ACtFZ', '_$s8PhotosUI14PHPickerResultV4hash4intoys6HasherVz_tF', 
+                       '_$s8PhotosUI14PHPickerResultV9_metadataSo01_cD8MetadataCSgvg', 
+                       '_$s8PhotosUI14PHPickerResultV9_metadataSo01_cD8MetadataCSgvpMV', 
                        '_$s8PhotosUI14PHPickerResultV9hashValueSivg', '_$s8PhotosUI14PHPickerResultV9hashValueSivpMV', 
                        '_$s8PhotosUI14PHPickerResultVMa', '_$s8PhotosUI14PHPickerResultVMn', 
                        '_$s8PhotosUI14PHPickerResultVN', '_$s8PhotosUI14PHPickerResultVSHAAMc', 
@@ -354,7 +358,11 @@ exports:
                        '_$s8PhotosUI19PickerSuggestionAllCACycfc', '_$s8PhotosUI19PickerSuggestionAllCMa', 
                        '_$s8PhotosUI19PickerSuggestionAllCMn', '_$s8PhotosUI19PickerSuggestionAllCMo', 
                        '_$s8PhotosUI19PickerSuggestionAllCMu', '_$s8PhotosUI19PickerSuggestionAllCN', 
-                       '_$s8PhotosUI19PickerSuggestionAllCfD', '_$s8PhotosUI21PHPickerConfigurationV07_albumsD0AA01_c10CollectionD0VSgvM', 
+                       '_$s8PhotosUI19PickerSuggestionAllCfD', '_$s8PhotosUI21PHPickerConfigurationV017_sharedAlbumSheetD0So01_c5SharefgD0CSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV017_sharedAlbumSheetD0So01_c5SharefgD0CSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV017_sharedAlbumSheetD0So01_c5SharefgD0CSgvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV017_sharedAlbumSheetD0So01_c5SharefgD0CSgvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV07_albumsD0AA01_c10CollectionD0VSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV07_albumsD0AA01_c10CollectionD0VSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV07_albumsD0AA01_c10CollectionD0VSgvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV07_albumsD0AA01_c10CollectionD0VSgvs', 
@@ -458,7 +466,11 @@ exports:
                        '_$s8PhotosUI21PHPickerConfigurationV4hash4intoys6HasherVz_tF', 
                        '_$s8PhotosUI21PHPickerConfigurationV4modeAA0C4ModeVvM', '_$s8PhotosUI21PHPickerConfigurationV4modeAA0C4ModeVvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV4modeAA0C4ModeVvpMV', 
-                       '_$s8PhotosUI21PHPickerConfigurationV4modeAA0C4ModeVvs', '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV4modeAA0C4ModeVvs', '_$s8PhotosUI21PHPickerConfigurationV6UpdateV017_sharedAlbumSheetD0So01_c5ShareghD0CSgvM', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV017_sharedAlbumSheetD0So01_c5ShareghD0CSgvg', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV017_sharedAlbumSheetD0So01_c5ShareghD0CSgvpMV', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV017_sharedAlbumSheetD0So01_c5ShareghD0CSgvs', 
+                       '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvM', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvg', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvpMV', 
                        '_$s8PhotosUI21PHPickerConfigurationV6UpdateV14selectionLimitSiSgvs', 
@@ -526,6 +538,8 @@ exports:
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV16retailExperienceACvpZMV', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV16shuffleWallpaperACvgZ', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV16shuffleWallpaperACvpZMV', 
+                       '_$s8PhotosUI24_PHPickerSuggestionGroupV17backdropWallpaperACvgZ', 
+                       '_$s8PhotosUI24_PHPickerSuggestionGroupV17backdropWallpaperACvpZMV', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV17portraitWallpaperACvgZ', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV17portraitWallpaperACvpZMV', 
                        '_$s8PhotosUI24_PHPickerSuggestionGroupV18livePhotoWallpaperACvgZ', 
@@ -704,6 +718,21 @@ exports:
                        '_$s8PhotosUI34PickerGenerativeFeaturedSuggestionCMa', '_$s8PhotosUI34PickerGenerativeFeaturedSuggestionCMn', 
                        '_$s8PhotosUI34PickerGenerativeFeaturedSuggestionCMo', '_$s8PhotosUI34PickerGenerativeFeaturedSuggestionCMu', 
                        '_$s8PhotosUI34PickerGenerativeFeaturedSuggestionCN', '_$s8PhotosUI34PickerGenerativeFeaturedSuggestionCfD', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC20supportsSecureCodingSbvgZ', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC20supportsSecureCodingSbvpZMV', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC22shouldReverseSortOrderSbvg', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC22shouldReverseSortOrderSbvpMV', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC5coderACSgSo7NSCoderC_tcfC', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC5coderACSgSo7NSCoderC_tcfCTj', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC5coderACSgSo7NSCoderC_tcfCTq', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC5coderACSgSo7NSCoderC_tcfc', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC6encode4withySo7NSCoderC_tF', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionC7isEqualySbypSgF', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCACycfC', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCACycfc', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCMa', '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCMn', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCMo', '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCMu', 
+                       '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCN', '_$s8PhotosUI35PickerPhotoWithGyroPosterSuggestionCfD', 
                        '_$s8PhotosUI49PickerLivePhotoWithPossibleMotionEffectSuggestionC20supportsSecureCodingSbvgZ', 
                        '_$s8PhotosUI49PickerLivePhotoWithPossibleMotionEffectSuggestionC20supportsSecureCodingSbvpZMV', 
                        '_$s8PhotosUI49PickerLivePhotoWithPossibleMotionEffectSuggestionC22shouldReverseSortOrderSbvg', 
@@ -761,10 +790,10 @@ exports:
                        PUPickerCompoundFilter, PUPickerExtensionContext, PUPickerExtensionHostContext, 
                        PUPickerExtensionVendorContext, PUPickerGenerativeFeaturedSuggestion, 
                        PUPickerItemIdentifiersFilter, PUPickerLivePhotoWithPossibleMotionEffectSuggestion, 
-                       PUPickerOtherFilter, PUPickerPanoramasSuggestion, PUPickerSearchBasedSuggestion, 
-                       PUPickerSpatialSuggestion, PUPickerStyleablePhotoSuggestion, 
-                       PUPickerSuggestionAll, PUPickerSuggestionAvailableClasses, 
+                       PUPickerOtherFilter, PUPickerPanoramasSuggestion, PUPickerPhotoWithGyroPosterSuggestion, 
+                       PUPickerSearchBasedSuggestion, PUPickerSpatialSuggestion, 
+                       PUPickerStyleablePhotoSuggestion, PUPickerSuggestionAll, PUPickerSuggestionAvailableClasses, 
                        PUPickerUnavailableViewController, PUPickerWallpaperSuggestion, 
                        _PHPickerAspectRatio, _PHPickerCollectionConfiguration, _PHPickerResultMetadata, 
-                       _PHPickerSuggestionGroup ]
+                       _PHPickerShareAlbumSheetConfiguration, _PHPickerSuggestionGroup ]
 ...

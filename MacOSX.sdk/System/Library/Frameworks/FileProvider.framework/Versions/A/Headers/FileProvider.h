@@ -25,5 +25,6 @@
 #import <FileProvider/NSFileProviderItemDecoration.h>
 #import <FileProvider/NSFileProviderRequest.h>
 #import <FileProvider/NSFileProviderReplicatedExtension.h>
+#import <FileProvider/NSFileProviderSearch.h>
 #import <FileProvider/NSFileProviderTesting.h>
 #import <FileProvider/NSFileProviderKnownFolders.h>

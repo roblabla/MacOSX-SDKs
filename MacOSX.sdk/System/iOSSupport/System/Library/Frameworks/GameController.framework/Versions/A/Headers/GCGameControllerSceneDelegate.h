@@ -2,16 +2,20 @@
 //  GCGameControllerSceneDelegate.h
 //  GameControllerFramework
 //
-//  Created by Chris Donegan on 1/26/24.
+//  Copyright © 2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+
 #import <GameController/GCExtern.h>
 #import <GameController/GCGameControllerActivationContext.h>
 
+#import <UIKit/UISceneOptions.h>
+
+@class UIScene;
+
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-GAMECONTROLLER_EXPORT
 API_AVAILABLE(ios(18.0))
 API_UNAVAILABLE(macCatalyst, tvos, visionos)
 API_UNAVAILABLE(macos)
@@ -31,7 +35,6 @@ API_UNAVAILABLE(macos)
 @end
 
 
-GAMECONTROLLER_EXPORT
 API_AVAILABLE(ios(18.0))
 API_UNAVAILABLE(macCatalyst, tvos, visionos)
 API_UNAVAILABLE(macos)

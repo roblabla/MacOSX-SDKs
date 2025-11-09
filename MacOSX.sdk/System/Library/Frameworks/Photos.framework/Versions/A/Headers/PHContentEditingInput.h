@@ -12,6 +12,7 @@
 @class AVAsset;
 @class CLLocation;
 @class PHLivePhoto;
+@class UTType;
 #if TARGET_OS_IPHONE || TARGET_OS_MACCATALYST
 @class UIImage;
 #else
@@ -28,7 +29,10 @@ OS_EXPORT
 @property (readonly, assign) PHAssetMediaSubtype mediaSubtypes;
 @property (readonly, copy, nullable) NSDate *creationDate;
 @property (readonly, copy, nullable) CLLocation *location;
-@property (readonly, copy, nullable) NSString *uniformTypeIdentifier;
+
+/// The type of data provided as the asset's content editing input image or video.
+@property (readonly, copy, nullable) UTType *contentType API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
+@property (readonly, copy, nullable) NSString *uniformTypeIdentifier API_DEPRECATED("Use contentType instead", ios(8, API_TO_BE_DEPRECATED), macos(10.11, API_TO_BE_DEPRECATED), tvos(10, API_TO_BE_DEPRECATED), visionos(1, API_TO_BE_DEPRECATED));
 
 // Playback style describes how the content should be presented to the user.  Use this value to choose the type of view and the appropriate APIs on the content editing input to display this content.
 // When editing a live photo with a PHAssetPlaybackStyleLoopingVideo, you should provide an updated video that includes the looping video metadata on the PHContentEditingOutput's renderedContentURL.

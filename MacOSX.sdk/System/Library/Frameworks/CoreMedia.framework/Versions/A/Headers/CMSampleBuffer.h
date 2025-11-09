@@ -130,6 +130,7 @@ enum
 		
 */
 typedef struct CM_BRIDGED_TYPE(id) opaqueCMSampleBuffer *CMSampleBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
+CM_SWIFT_INIT_FOR_CF_TYPE(CMSampleBuffer, API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)))
 
 /*!
 	@typedef	CMSampleTimingInfo

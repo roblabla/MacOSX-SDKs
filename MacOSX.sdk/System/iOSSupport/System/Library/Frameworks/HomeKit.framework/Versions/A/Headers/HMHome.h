@@ -53,27 +53,27 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Delegate that receives updates on the state of the home.
  */
-@property (weak, nonatomic, nullable) id<HMHomeDelegate> delegate;
+@property (nullable, nonatomic, weak) id<HMHomeDelegate> delegate;
 
 /*!
  * @brief The name of the home.
  */
-@property (readonly, copy, nonatomic) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /*!
  * @brief Specifies whether this home is the primary home.
  */
-@property (readonly, getter=isPrimary, nonatomic) BOOL primary;
+@property (nonatomic, readonly, getter=isPrimary) BOOL primary;
 
 /*!
  * @brief Specifies the state of the home hub.
  */
-@property (readonly, nonatomic) HMHomeHubState homeHubState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nonatomic, readonly) HMHomeHubState homeHubState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief A unique identifier for the home.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief This method is used to change the name of the home.
@@ -94,7 +94,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Array of HMAccessory objects that represents all accessories added to the home. 
  */
-@property (readonly, copy, nonatomic) NSArray<HMAccessory *> *accessories;
+@property (nonatomic, readonly, copy) NSArray<HMAccessory *> *accessories;
 
 /*!
  * @brief Adds a new accessory to the home.
@@ -183,7 +183,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief True if this home supports all of the requirements for adding a network router.
  */
-@property (readonly, assign, nonatomic) BOOL supportsAddingNetworkRouter API_AVAILABLE(ios(13.2), watchos(6.1), tvos(13.2)) API_UNAVAILABLE(macCatalyst, macos);
+@property (nonatomic, readonly, assign) BOOL supportsAddingNetworkRouter API_AVAILABLE(ios(13.2), watchos(6.1), tvos(13.2)) API_UNAVAILABLE(macCatalyst, macos);
 
 @end
 
@@ -193,12 +193,12 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief HMUser object representing the current user of the home.
  */
-@property (readonly, strong, nonatomic) HMUser *currentUser API_AVAILABLE(ios(9.0), macCatalyst(14.0));
+@property (nonatomic, readonly, strong) HMUser *currentUser API_AVAILABLE(ios(9.0), macCatalyst(14.0));
 
 /*!
  * @brief Array of HMUser objects that represent all users associated with the home.
  */
-@property (readonly, copy, nonatomic) NSArray<HMUser *> *users API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos, macCatalyst);
+@property (nonatomic, readonly, copy) NSArray<HMUser *> *users API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos, macCatalyst);
 
 /*!
  * @brief Presents a view controller to manage users of the home.
@@ -249,7 +249,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Array of HMRoom objects that represents all rooms in the home.
  */
-@property (readonly, copy, nonatomic) NSArray<HMRoom *> *rooms;
+@property (nonatomic, readonly, copy) NSArray<HMRoom *> *rooms;
 
 /*!
  * @brief Adds a room to the home.
@@ -294,7 +294,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Array of HMZone objects that represents all the zones in the home.
  */
-@property (readonly, copy, nonatomic) NSArray<HMZone *> *zones;
+@property (nonatomic, readonly, copy) NSArray<HMZone *> *zones;
 
 /*!
  * @brief Adds a zone to the home.
@@ -327,7 +327,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Array of HMServiceGroup objects that represents all service groups in the home.
  */
-@property (readonly, copy, nonatomic) NSArray<HMServiceGroup *> *serviceGroups;
+@property (nonatomic, readonly, copy) NSArray<HMServiceGroup *> *serviceGroups;
 
 /*!
  * @brief Adds a service group to the home.
@@ -360,7 +360,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Array of HMActionSet objects that represents all the action sets in the home.
  */
-@property (readonly, copy, nonatomic) NSArray<HMActionSet *> *actionSets;
+@property (nonatomic, readonly, copy) NSArray<HMActionSet *> *actionSets;
 
 /*!
  * @brief Adds a new action set to the home.
@@ -415,7 +415,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Array of HMTrigger objects that represents all the triggers in the home.
  */
-@property (readonly, copy, nonatomic) NSArray<HMTrigger *> *triggers;
+@property (nonatomic, readonly, copy) NSArray<HMTrigger *> *triggers;
 
 /*!
  * @brief Adds a trigger to the home. Unless the trigger object is added to the home, it cannot be 
@@ -454,20 +454,20 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  *        This property can be passed as the first argument to +[MTRDeviceController sharedControllerWithId:xpcConnectBlock:] method
  *        to get a MTRDeviceController object.
  */
-@property (readonly, copy, nonatomic) NSString *matterControllerID API_AVAILABLE(ios(16.1));
+@property (nonatomic, readonly, copy) NSString *matterControllerID API_AVAILABLE(ios(16.1));
 
 /*!
  * @brief Block generating XPC connection on demand through which to access the Matter controller associated with this home.
  *        This property can be passed as the second argument to +[MTRDeviceController sharedControllerWithId:xpcConnectBlock:] method
  *        to get a MTRDeviceController object.
  */
-@property (readonly, strong, nonatomic) NSXPCConnection * (^matterControllerXPCConnectBlock)(void)API_AVAILABLE(ios(16.1));
+@property (nonatomic, readonly, strong) NSXPCConnection * (^matterControllerXPCConnectBlock)(void)API_AVAILABLE(ios(16.1));
 
 /*!
  * @brief Block generating XPC connection on demand through which to access the Matter controller associated with this home.
  *        This property can be passed as part of an MTRXPCDeviceControllerParameters to create an MTRDeviceController that will have access to the Apple Home Fabric.
  */
-@property (readonly, strong, nonatomic) NSXPCConnection * (^matterStartupParametersXPCConnectBlock)(void)API_AVAILABLE(ios(18.2));
+@property (nonatomic, readonly, strong) NSXPCConnection * (^matterStartupParametersXPCConnectBlock)(void)API_AVAILABLE(ios(18.2));
 
 @end
 

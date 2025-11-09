@@ -72,12 +72,7 @@ typedef NS_OPTIONS(NSUInteger, NSFileCoordinatorWritingOptions) {
 
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
-@interface NSFileAccessIntent : NSObject {
-@private
-    NSURL *_url;
-    NSInteger _options;
-    BOOL _isRead;
-}
+@interface NSFileAccessIntent : NSObject
 + (instancetype)readingIntentWithURL:(NSURL *)url options:(NSFileCoordinatorReadingOptions)options;
 + (instancetype)writingIntentWithURL:(NSURL *)url options:(NSFileCoordinatorWritingOptions)options;
 @property (readonly, copy) NSURL *URL; // Use this URL within the accessor block. This property may change from its original value in response to actions from other writers.

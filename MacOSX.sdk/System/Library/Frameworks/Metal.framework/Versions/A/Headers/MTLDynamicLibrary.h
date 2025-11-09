@@ -43,7 +43,7 @@ typedef NS_ENUM(NSUInteger, MTLDynamicLibraryError)
  If any unresolved symbols remain after searching the set, the creation of the MTLComputePipelineState fails.
  Otherwise, the MTLComputePipelineState creation succeeds, and the set of MTLDynamicLibraries used are retained by the MTLComputePipelineState.
  */
-API_AVAILABLE(macos(11.0), ios(14.0))
+API_AVAILABLE(macos(11.0), ios(14.0)) NS_SWIFT_SENDABLE
 @protocol MTLDynamicLibrary <NSObject>
 
 /*!

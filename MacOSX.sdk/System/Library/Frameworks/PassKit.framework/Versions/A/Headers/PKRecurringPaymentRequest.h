@@ -9,6 +9,8 @@
 #ifndef PKRecurringPaymentRequest_h
 #define PKRecurringPaymentRequest_h
 
+#import <Foundation/Foundation.h>
+
 @class PKRecurringPaymentSummaryItem;
 
 NS_ASSUME_NONNULL_BEGIN

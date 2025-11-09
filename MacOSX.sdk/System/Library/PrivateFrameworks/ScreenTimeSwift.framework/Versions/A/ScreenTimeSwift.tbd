@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSwift.framework/Versions/A/ScreenTimeSwift'
-current-version: 537.5.7
+current-version: 604.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -28,6 +28,17 @@ exports:
                        '_$s14DeviceActivity0aB4NameV15ScreenTimeSwiftE20usagelimit_weekday_7ACvgZ', 
                        '_$s14DeviceActivity0aB4NameV15ScreenTimeSwiftE24downtime_enable_overrideACvgZ', 
                        '_$s14DeviceActivity0aB4NameV15ScreenTimeSwiftE25downtime_disable_overrideACvgZ', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V12restrictionsACSo0D0C_tcfC', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V12restrictionsSo0D0CvM', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V12restrictionsSo0D0Cvg', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V12restrictionsSo0D0CvpMV', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V12restrictionsSo0D0Cvs', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V2eeoiySbAC_ACtFZ', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V4fromACs7Decoder_p_tKcfC', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0V6encode2toys7Encoder_p_tKF', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0VMa', '_$s15ScreenTimeSwift014STRestrictionsC0VMn', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0VN', '_$s15ScreenTimeSwift014STRestrictionsC0VSEAAMc', 
+                       '_$s15ScreenTimeSwift014STRestrictionsC0VSQAAMc', '_$s15ScreenTimeSwift014STRestrictionsC0VSeAAMc', 
                        '_$s15ScreenTimeSwift11STSwiftUserC06screenB7EnabledSbvMTj', 
                        '_$s15ScreenTimeSwift11STSwiftUserC06screenB7EnabledSbvMTq', 
                        '_$s15ScreenTimeSwift11STSwiftUserC06screenB7EnabledSbvgTj', 
@@ -175,6 +186,8 @@ exports:
                        '_$s15ScreenTimeSwift12DependenciesO4mock_2toyxm_xyctlFZ', 
                        '_$s15ScreenTimeSwift12DependenciesO6unMockyyFZ', '_$s15ScreenTimeSwift12DependenciesOMa', 
                        '_$s15ScreenTimeSwift12DependenciesOMn', '_$s15ScreenTimeSwift12DependenciesON', 
+                       '_$s15ScreenTimeSwift17LocalRestrictionsC015enableEyeReliefA16DistanceSampling0F0ySb_tFTj', 
+                       '_$s15ScreenTimeSwift17LocalRestrictionsC015enableEyeReliefA16DistanceSampling0F0ySb_tFTq', 
                        '_$s15ScreenTimeSwift17LocalRestrictionsC023updateDefaultWebContentE04withySo014CEMSystemBasichI17FilterDeclarationC_tFTj', 
                        '_$s15ScreenTimeSwift17LocalRestrictionsC023updateDefaultWebContentE04withySo014CEMSystemBasichI17FilterDeclarationC_tFTq', 
                        '_$s15ScreenTimeSwift17LocalRestrictionsC039denyiCloudLogoutAndRequireAutomaticDateiB04denyySb_tFTj', 
@@ -232,6 +245,7 @@ exports:
                        '_$s15ScreenTimeSwift19STUserNotificationsV16NotificationTypeO14manageContactsyA2EmFWC', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV16NotificationTypeO15appLimitWarningyAESS_SSSdtcAEmFWC', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV16NotificationTypeO15downtimeWarningyA2EmFWC', 
+                       '_$s15ScreenTimeSwift19STUserNotificationsV16NotificationTypeO16appRatingChangedyAESS_SaySSGtcAEmFWC', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV16NotificationTypeO21shareMyLocationLockedyA2EmFWC', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV16NotificationTypeO22locationServicesLockedyA2EmFWC', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV16NotificationTypeO23remoteManagementEnabledyA2EmFWC', 
@@ -270,5 +284,11 @@ exports:
                        '_$s15ScreenTimeSwift19STUserNotificationsV6remove12notificationyAC16NotificationTypeO_tYaKFZ', 
                        '_$s15ScreenTimeSwift19STUserNotificationsV6remove12notificationyAC16NotificationTypeO_tYaKFZTu', 
                        '_$s15ScreenTimeSwift19STUserNotificationsVMa', '_$s15ScreenTimeSwift19STUserNotificationsVMn', 
-                       '_$s15ScreenTimeSwift19STUserNotificationsVN' ]
+                       '_$s15ScreenTimeSwift19STUserNotificationsVN', '_$s15ScreenTimeSwift35RestrictionsRepresentationConverterO015convertToPresetE006screenbeD00jbE26ImageGenerationRestrictionSDySSypGAG_So020STContentPrivacySiriklM0VtFZ', 
+                       '_$s15ScreenTimeSwift35RestrictionsRepresentationConverterO03getabE26ImageGenerationRestriction09forPresetD0So020STContentPrivacySirihiJ0VSDySSypG_tFZ', 
+                       '_$s15ScreenTimeSwift35RestrictionsRepresentationConverterO03getabeD009forPresetD0SDySSypGAF_tFZ', 
+                       '_$s15ScreenTimeSwift35RestrictionsRepresentationConverterO09convertToabE006presetD0SDySSypG12restrictions_So46STContentPrivacySiriImageGenerationRestrictionV05imageoP0tAF_tFZ', 
+                       '_$s15ScreenTimeSwift35RestrictionsRepresentationConverterOMa', 
+                       '_$s15ScreenTimeSwift35RestrictionsRepresentationConverterOMn', 
+                       '_$s15ScreenTimeSwift35RestrictionsRepresentationConverterON' ]
 ...

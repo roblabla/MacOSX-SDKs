@@ -49,6 +49,20 @@ typedef NS_OPTIONS(NSUInteger, MTLStoreActionOptions) {
     MTLStoreActionOptionCustomSamplePositions = 1 << 0,
 } API_AVAILABLE(macos(10.13), ios(11.0));
 
+/// This enumeration controls if Metal accumulates visibility results between render encoders or resets them.
+///
+/// You can specify this property for ``MTLRenderCommandEncoders`` and for ``MTL4RenderCommandEncoders`` through
+/// their descriptors' ``MTLRenderCommandEncoder/visibilityResultType`` and ``MTL4RenderCommandEncoder/visibilityResultType``
+/// methods.
+typedef NS_ENUM(NSInteger, MTLVisibilityResultType)
+{
+    /// Reset visibility result data when you create a render command encoder.
+    MTLVisibilityResultTypeReset = 0,
+    
+    /// Accumulate visibility results data across multiple render passes.
+    MTLVisibilityResultTypeAccumulate = 1,
+} API_AVAILABLE(macos(26.0), ios(26.0));
+
 @protocol MTLTexture;
 @protocol MTLBuffer;
 
@@ -379,13 +393,19 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract The variable rasterization rate map to use when rendering this pass, or nil to not use variable rasterization rate.
  @discussion The default value is nil. Enabling variable rasterization rate allows for decreasing the rasterization rate in unimportant regions of screen space.
  */
-@property (nullable, nonatomic, strong) id<MTLRasterizationRateMap> rasterizationRateMap API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+@property (nullable, nonatomic, strong) id<MTLRasterizationRateMap> rasterizationRateMap API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0));
 
 /*!
  @property sampleBufferAttachments
  @abstract An array of sample buffers and associated sample indices.
  */
 @property (readonly) MTLRenderPassSampleBufferAttachmentDescriptorArray * sampleBufferAttachments API_AVAILABLE(macos(11.0), ios(14.0));
+
+/// Specifies if Metal accumulates visibility results between render encoders or resets them.
+@property (nonatomic) MTLVisibilityResultType visibilityResultType API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Specifies if the render pass should support color attachment mapping.
+@property (nonatomic) BOOL supportColorAttachmentMapping API_AVAILABLE(macos(26.0), ios(26.0));
 
 @end
 

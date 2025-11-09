@@ -236,13 +236,14 @@ enum tInternalUSBHostConnectionSpeed
 #define kUSBHostMessageDeviceConnected                iokit_usbhost_msg(0x105)      // 0xe0005105  Apple Internal use only.  AppleUSBRemovablePort -> clients after a connect.
 #define kUSBHostMessageDeviceDisconnected             iokit_usbhost_msg(0x106)      // 0xe0005106  Apple Internal use only.  AppleUSBRemovablePort -> clients after a disconnect.
 #define kUSBHostMessageControllerPoweredOn            iokit_usbhost_msg(0x107)      // 0xe0005107  Apple Internal use only.  AppleEmbeddedUSBXHCIFL1100 -> FL1100Boot after a stable power state is reached.
-#define kUSBHostMessageNonInterruptIsochFrame         iokit_usbhost_msg(0x108)      // 0xe0005108  Apple Internal use only. 
+#define kUSBHostMessageNonInterruptIsochFrame         iokit_usbhost_msg(0x108)      // 0xe0005108  Apple Internal use only.  An isochronous framelist timestamp can optionally be initialized with this macro to suppress an interrupt upon frame completion
 #define kUSBHostMessageInterfaceAlternateSetting      iokit_usbhost_msg(0x109)      // 0xe0005109  Apple Internal use only.  IOUSBHostInterface -> IOUSBInterface to update interface properties after an alternate setting is selected
 #define kUSBHostMessageDeviceLegacyCapture            iokit_usbhost_msg(0x10A)      // 0xe000510A  Apple Internal use only.  IOUSBHostDevice -> IOUSBDevice to relay user space re-enumeration for capturing/releasing devices
 #define kUSBHostMessageControllerInterrupt            iokit_usbhost_msg(0x10B)      // 0xe000510B  Apple Internal use only.  Source -> AppleUSBHostController to indicate an interrupt is ready for consumption
 #define kUSBHostMessageDeviceIdentify                 iokit_usbhost_msg(0x10C)      // 0xe000510C  Apple Internal use only.  AppleUSBHostPort -> IOUSBHostDevice to trigger the descriptor fetch phase of enumeration
 #define kUSBHostMessageDeviceRegister                 iokit_usbhost_msg(0x10D)      // 0xe000510D  Apple Internal use only.  AppleUSBHostPort -> IOUSBHostDevice to trigger a deferred registerService
 #define kUSBHostMessageDevicePreferredConfigurationChanged iokit_usbhost_msg(0x10E) // 0xe000510E  Apple Internal use only.  IOUSBHostDevice -> clients upon a change in the device's preferred configuration.  Argument is the new preferred configuration value.
+#define kUSBHostMessageInterruptIsochFrame            iokit_usbhost_msg(0x10F)      // 0xe000510F  Apple Internal use only.  An isochronous framelist timestamp can optionally be initialized with this macro to force an interrupt upon frame completion
 
 // User Message Support
 
@@ -266,7 +267,9 @@ enum tInternalUSBHostConnectionSpeed
  * @constant kUSBHostPortTypeCaptive The attached device cannot be physically disconnected from the port.
  * @constant kUSBHostPortTypeInternal The attached device cannot be physically disconnected from the host machine.
  * @constant kUSBHostPortTypeAccessory The attached device may require authentication before function drivers can access it.
- * @constant kUSBHostPortTypeCount The number of entries in this enum.
+ * @constant kUSBHostPortTypeExpressCard The attached device uses an ExpressCard slot
+ * @constant kUSBHostPortTypeC The attached device uses a USB-C port that may be capable of other transports
+ * @constant kUSBHostPortTypeUnknown Unhandled port type
  */
 enum tUSBHostPortType
 {
@@ -275,7 +278,8 @@ enum tUSBHostPortType
     kUSBHostPortTypeInternal    = kIOUSBHostPortTypeInternal,
     kUSBHostPortTypeAccessory   = kIOUSBHostPortTypeAccessory,
     kUSBHostPortTypeExpressCard = kIOUSBHostPortTypeExpressCard,
-    kUSBHostPortTypeCount       = kIOUSBHostPortTypeCount
+    kUSBHostPortTypeC           = kIOUSBHostPortTypeC,
+    kUSBHostPortTypeUnknown     = kIOUSBHostPortTypeUnknown
 };
 
 /*!

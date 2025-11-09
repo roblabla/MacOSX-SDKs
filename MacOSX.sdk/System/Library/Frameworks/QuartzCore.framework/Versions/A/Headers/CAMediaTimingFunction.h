@@ -1,6 +1,6 @@
 /* CoreAnimation - CAMediaTimingFunction.h
 
-   Copyright (c) 2006-2022, Apple Inc.
+   Copyright (c) 2006-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__

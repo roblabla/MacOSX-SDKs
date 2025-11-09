@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Apple Inc. All rights reserved.
+ * Copyright (c) 2023-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -83,6 +83,12 @@
 #define SPTM_FUNCTIONID_HIB_VERIFY_HASH_NON_WIRED 31
 #define SPTM_FUNCTIONID_HIB_FINALIZE_NON_WIRED    32
 #define SPTM_FUNCTIONID_IOFILTER_PROTECTED_WRITE  33
+#define SPTM_FUNCTIONID_SPTM_SYSCTL              37
+#define SPTM_FUNCTIONID_DISABLE_KERNEL_MODE_CPA2 38
+#define SPTM_FUNCTIONID_SET_SHARED_REGION        39
+#define SPTM_FUNCTIONID_BATCH_SIGN_USER_POINTER  40
+#define SPTM_FUNCTIONID_SURT_ALLOC               41
+#define SPTM_FUNCTIONID_SURT_FREE                42
 
 #ifndef __ASSEMBLER__
 
@@ -105,6 +111,7 @@
 #define SPTM_SWITCH_RCTX_FLUSH_SHIFT      31
 #define SPTM_SWITCH_ASID_TLBI_FLUSH_SHIFT 30
 #define SPTM_SWITCH_RETURN_CODE_MASK      0xF0000000
+
 enum : uint32_t {
 	SPTM_SUCCESS,
 
@@ -125,7 +132,8 @@ enum : uint32_t {
 };
 
 /* SPTM API Limits. This is used to limit the amount of looping in the SPTM. */
-#define SPTM_MAPPING_LIMIT 64U
+#define SPTM_BATCHED_OPS_LIMIT 64U
+#define SPTM_MAPPING_LIMIT     SPTM_BATCHED_OPS_LIMIT
 
 /**
  * Definitions for supported Page Table geometries.
@@ -136,26 +144,28 @@ enum : uint32_t {
  */
 #define SPTM_PT_GEOMETRY_16K                    0U
 #define SPTM_PT_GEOMETRY_4K                     1U
-#define SPTM_PT_GEOMETRY_STAGE2_16K_DEFAULT_IPA 2U
-#define SPTM_PT_GEOMETRY_STAGE2_16K_REDUCED_IPA 3U
-#define SPTM_PT_GEOMETRY_STAGE2_4K              4U
+#define SPTM_PT_GEOMETRY_16K_KERN               2U
+#define SPTM_PT_GEOMETRY_STAGE2_16K_DEFAULT_IPA 3U
+#define SPTM_PT_GEOMETRY_STAGE2_16K_REDUCED_IPA 4U
+#define SPTM_PT_GEOMETRY_STAGE2_4K              5U
 
-#define SPTM_PT_N_GEOMETRY_IDS                  5U
-#define SPTM_PT_N_STAGE1_GEOMETRY_IDS           2U
+#define SPTM_PT_N_GEOMETRY_IDS        6U
+#define SPTM_PT_N_STAGE1_GEOMETRY_IDS 3U
 
 /* Definitions for supported IOMMUs */
-#define IOMMU_ID_SHART        0U
-#define IOMMU_ID_SART         1U
-#define IOMMU_ID_NVME         2U
-#define IOMMU_ID_UAT          3U
-#define IOMMU_ID_DART_T8020   4U
-#define IOMMU_ID_DART_T8110   5U
-#define IOMMU_ID_DART_T6000   6U
+#define IOMMU_ID_SHART      0U
+#define IOMMU_ID_SART       1U
+#define IOMMU_ID_NVME       2U
+#define IOMMU_ID_UAT        3U
+#define IOMMU_ID_DART_T8020 4U
+#define IOMMU_ID_DART_T8110 5U
+#define IOMMU_ID_DART_T6000 6U
+#define IOMMU_ID_DART_GEN3 8U
 
-#define SPTM_IOMMUS_N_IDS     8U
+#define SPTM_IOMMUS_N_IDS 9U
 
 /* A placeholder ID to represent no/invalid IOMMU. */
-#define IOMMU_ID_INVALID      SPTM_IOMMUS_N_IDS
+#define IOMMU_ID_INVALID SPTM_IOMMUS_N_IDS
 
 /**
  * Definitions for flags associated with Root PT frames.
@@ -176,10 +186,37 @@ enum : uint32_t {
  * These are the fixed VA ranges for the commpage areas on all arm64 targets;
  * they are needed for TLB management during SPTM context switch.
  */
-#define SPTM_ARM64_COMMPAGE_REGION_START 0x0000000FC0000000ULL
-#define SPTM_ARM64_COMMPAGE_REGION_SIZE 0x40000000ULL
+#define SPTM_ARM64_COMMPAGE_REGION_START  0x0000000FC0000000ULL
+#define SPTM_ARM64_COMMPAGE_REGION_SIZE   0x40000000ULL
 #define SPTM_X86_64_COMMPAGE_REGION_START 0x00007FFFFFE00000ULL
-#define SPTM_X86_64_COMMPAGE_REGION_SIZE 0x0000000000200000ULL
+#define SPTM_X86_64_COMMPAGE_REGION_SIZE  0x0000000000200000ULL
+
+/**
+ * For arm64_32 processes, we only support 16K page size so the commpage
+ * nesting region is the 32MB block covering the commpage (0xFFFF4000).
+ */
+#define SPTM_ARM64_32_COMMPAGE_REGION_START 0x00000000FE000000ULL
+#define SPTM_ARM64_32_COMMPAGE_REGION_SIZE  0x0000000002000000ULL
+
+/**
+ * The number of TTEs in a subpage user root table.
+ */
+#define SUBPAGE_USER_ROOT_TABLE_TTES 8
+
+/**
+ * The size (in bytes) of a subpage user root table.
+ *
+ * Each SURT has 8 TTEs and 64 bytes of metadata.
+ */
+#define SUBPAGE_USER_ROOT_TABLE_SIZE (SUBPAGE_USER_ROOT_TABLE_TTES * sizeof(sptm_pte_t) + 64)
+
+/**
+ * The number of subpage user root tables in a frame, which is also the number
+ * of valid indexes into the array of subpage user root tables.
+ */
+#if XNU_CLIENT
+#define SUBPAGE_USER_ROOT_TABLE_INDEXES (PAGE_SIZE / SUBPAGE_USER_ROOT_TABLE_SIZE)
+#endif /* XNU_CLIENT */
 
 /**
  * Passed to XNU's entry point to describe why it is being entered from the
@@ -195,13 +232,15 @@ enum : uint32_t {
  * SPTM_CPU_PANIC: Passed when the SPTM is panicking and wants to jump to XNU's
  *                 panic handler.
  */
-__enum_closed_decl(xnu_entry_routine_t, uint8_t, {
-	SPTM_CPU_BOOT_COLD,
-	SPTM_CPU_BOOT_SECONDARY,
-	SPTM_CPU_BOOT_WARM,
-	SPTM_CPU_BOOT_HIB,
-	SPTM_CPU_PANIC,
-});
+__enum_closed_decl(xnu_entry_routine_t,
+    uint8_t,
+    {
+        SPTM_CPU_BOOT_COLD,
+        SPTM_CPU_BOOT_SECONDARY,
+        SPTM_CPU_BOOT_WARM,
+        SPTM_CPU_BOOT_HIB,
+        SPTM_CPU_PANIC,
+    });
 
 /**
  * Random seed length and prefix.
@@ -209,7 +248,7 @@ __enum_closed_decl(xnu_entry_routine_t, uint8_t, {
  * The random seed length is what the device tree uses. If that ever changes in the
  * EDT project, assert will fail and give opportunity to change the seed here.
  */
-static size_t const random_seed_length = 0x40;
+static size_t const random_seed_length = 0x100;
 static char const random_seed_prefix[] = "randseed";
 
 /**
@@ -269,15 +308,15 @@ typedef struct {
 	 *
 	 * It is xnu's duty to zero out this copy of the seed.
 	 */
-	uint8_t random_seed[sizeof(random_seed_prefix)-1 + random_seed_length];
+	uint8_t random_seed[sizeof(random_seed_prefix) - 1 + random_seed_length];
 	size_t random_seed_length;
 
 	
 	bool sk_bootstrapped;
+
 	
-    
 	uint64_t sk_carveout_size;
-	
+
 	/*
 	 * What variant of SPTM this is.
 	 */
@@ -310,6 +349,7 @@ typedef struct {
 	/* Early boot timestamps */
 	uint64_t timestamp_sk_bootstrap;
 	uint64_t timestamp_xnu_bootstrap;
+	uint64_t timestamp_txm_bootstrap;
 
 	void *reserved1;
 
@@ -338,21 +378,11 @@ typedef struct {
 	 */
 	sptm_papt_t sptm_pmap_io_filters;
 	unsigned int sptm_pmap_io_filters_count;
+
+	/* SPTM feature flags for use in XNU */
+	uint64_t feature_flags;
 } sptm_bootstrap_args_xnu_t;
 
-/*
- * Hibernation boot arguments passed from the SPTM to XNU.
- */
-typedef struct {
-	/* The physical address of the hibernation header. */
-	uint64_t hib_header_phys;
-
-	/* The total number of handoff pages recorded in the handoff_pages array, below. */
-	uint32_t handoff_page_count;
-
-	/* The array of physical page numbers (in sequence) storing the handoff region. */
-	sptm_ppnum_t handoff_pages[64];
-} sptm_hibernation_args_xnu_t;
 
 /**
  * Data structures used to dispatch to guest VCPU context. Contains all the
@@ -479,6 +509,16 @@ typedef struct {
 } xnu_saved_registers_t;
 
 /**
+ * Structure describing pmap I/O ranges, allowed I/O ranges and I/O ranges {addr, len, type}.
+ * Used by SEAR/LASER userspace tools, so keep in sync with them.
+ */
+typedef struct {
+	sptm_paddr_t addr;
+	size_t len;
+	sptm_frame_type_t type;
+} sptm_io_range_t;
+
+/**
  * Overridable "syscall" entry/exit hooks (weak symbols)
  *
  * @note Each hook is REQUIRED to preserve x0 through x7 and x16 if it clobbers
@@ -521,6 +561,12 @@ void sptm_lockdown_xnu(void);
 void sptm_init_xnu_fixups_complete(void);
 
 /**
+ * Function called by XNU to disable kernel-mode checked pointer arithmetic.
+ * This must be called prior to machine lockdown.
+ */
+void sptm_disable_kernel_mode_cpa2(void);
+
+/**
  * Function called by XNU if XNU ever enters a panic state. When this happens, a
  * global variable within the SPTM is latched to be true, with no possibility of this
  * ever changing back to false. XNU and other domains can then query this variable
@@ -529,15 +575,11 @@ void sptm_init_xnu_fixups_complete(void);
 void sptm_xnu_panic_begin(void);
 
 #if !USE_UNSAFE_TYPES
-sptm_return_t sptm_map_page(
-	sptm_paddr_t root_pt_paddr,
-	sptm_vaddr_t vaddr,
-	sptm_pte_t new_pte);
+sptm_return_t sptm_map_page(sptm_paddr_t root_pt_paddr, sptm_vaddr_t vaddr, sptm_pte_t new_pte);
 #else
-sptm_return_t sptm_map_page(
-	sptm_root_pt_u root_pt_U,
-	sptm_aligned_vaddr_u vaddr_U,
-	sptm_pte_u new_pte_U);
+sptm_return_t sptm_map_page(sptm_root_pt_u root_pt_U,
+    sptm_aligned_vaddr_u vaddr_U,
+    sptm_pte_u new_pte_U);
 #endif
 
 /**
@@ -557,19 +599,19 @@ sptm_return_t sptm_map_page(
  *          altered in any way by any other SPTM operation.
  *
  *       4K page table geometries come with additional restrictions. In such cases, XNU cannot
- *       target an arbirary TTE at a given level; instead, XNU must target a TTE whose index is divisible
- *       by the page ratio, which is the quotient of the native page size (16K) and the page size of the
- *       geometry at hand (in this case, 4K). Upon this request, the SPTM will then go ahead and create
- *       as many mappings of the requested geometry's size as required to completely map a 16K page. In
- *       addition to this, the physical address in the TTE provided by XNU must also be aligned to the
- *       native page size. For example, if XNU requests a mapping at a VA that targets TTE index 4 at a
- *       given level, the SPTM will create four mappings, at TTE indices 4, 5, 6 and 7, each of which
- *       maps a subset of the 16K page provided in the TTE's physical address field, resulting in the
- *       16K page getting mapped being fully utilized by all four mappings combined. In doing so, there
- *       is no memory wastage incurred by underutilized 16K pages when used as 4K page table pages,
- *       and there is also no need for individual FTE's for each of the 4K page table pages getting
- *       mapped, since their reference and in-flight counts are effectively common to all four at any given
- *       point in time.
+ *       target an arbirary TTE at a given level; instead, XNU must target a TTE whose index is
+ *       divisible by the page ratio, which is the quotient of the native page size (16K) and the
+ *       page size of the geometry at hand (in this case, 4K). Upon this request, the SPTM will then
+ *       go ahead and create as many mappings of the requested geometry's size as required to
+ *       completely map a 16K page. In addition to this, the physical address in the TTE provided by
+ *       XNU must also be aligned to the native page size. For example, if XNU requests a mapping at
+ *       a VA that targets TTE index 4 at a given level, the SPTM will create four mappings, at TTE
+ *       indices 4, 5, 6 and 7, each of which maps a subset of the 16K page provided in the TTE's
+ *       physical address field, resulting in the 16K page getting mapped being fully utilized by
+ *       all four mappings combined. In doing so, there is no memory wastage incurred by
+ *       underutilized 16K pages when used as 4K page table pages, and there is also no need for
+ *       individual FTE's for each of the 4K page table pages getting mapped, since their reference
+ *       and in-flight counts are effectively common to all four at any given point in time.
  *
  * @param root_pt_paddr Physical address of the Root Page Table to insert the mapping
  *                      into.
@@ -580,17 +622,15 @@ sptm_return_t sptm_map_page(
  * @param new_tte TTE to write into the page table.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_map_table(
-	sptm_paddr_t root_pt_paddr,
-	sptm_vaddr_t vaddr,
-	sptm_pt_level_t target_level,
-	sptm_tte_t new_tte);
+void sptm_map_table(sptm_paddr_t root_pt_paddr,
+    sptm_vaddr_t vaddr,
+    sptm_pt_level_t target_level,
+    sptm_tte_t new_tte);
 #else
-void sptm_map_table(
-	sptm_root_pt_u root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_pt_level_u target_level_U,
-	sptm_tte_u new_tte_U);
+void sptm_map_table(sptm_root_pt_u root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_pt_level_u target_level_U,
+    sptm_tte_u new_tte_U);
 #endif
 
 /**
@@ -609,19 +649,19 @@ void sptm_map_table(
  *         be the kernel root table.
  *
  *       4K page table geometries come with additional restrictions. In such cases, XNU cannot
- *       target an arbirary TTE at a given level; instead, XNU must target a TTE whose index is divisible
- *       by the page ratio, which is the quotient of the native page size (16K) and the page size of the
- *       geometry at hand (in this case, 4K). Upon this request, the SPTM will then go ahead and create
- *       as many mappings of the requested geometry's size as required to completely map a 16K page. In
- *       addition to this, the physical address in the TTE provided by XNU must also be aligned to the
- *       native page size. For example, if XNU requests a mapping at a VA that targets TTE index 4 at a
- *       given level, the SPTM will create four mappings, at TTE indices 4, 5, 6 and 7, each of which
- *       maps a subset of the 16K page provided in the TTE's physical address field, resulting in the
- *       16K page getting mapped being fully utilized by all four mappings combined. In doing so, there
- *       is no memory wastage incurred by underutilized 16K pages when used as 4K page table pages,
- *       and there is also no need for individual FTE's for each of the 4K page table pages getting
- *       mapped, since their reference and in-flight counts are effectively common to all four at any given
- *       point in time.
+ *       target an arbirary TTE at a given level; instead, XNU must target a TTE whose index is
+ *       divisible by the page ratio, which is the quotient of the native page size (16K) and the
+ *       page size of the geometry at hand (in this case, 4K). Upon this request, the SPTM will then
+ *       go ahead and create as many mappings of the requested geometry's size as required to
+ *       completely map a 16K page. In addition to this, the physical address in the TTE provided by
+ *       XNU must also be aligned to the native page size. For example, if XNU requests a mapping at
+ *       a VA that targets TTE index 4 at a given level, the SPTM will create four mappings, at TTE
+ *       indices 4, 5, 6 and 7, each of which maps a subset of the 16K page provided in the TTE's
+ *       physical address field, resulting in the 16K page getting mapped being fully utilized by
+ *       all four mappings combined. In doing so, there is no memory wastage incurred by
+ *       underutilized 16K pages when used as 4K page table pages, and there is also no need for
+ *       individual FTE's for each of the 4K page table pages getting mapped, since their reference
+ *       and in-flight counts are effectively common to all four at any given point in time.
  *
  * @param root_pt_paddr Physical address of the Root Page Table to remove the mapping
  *                      from.
@@ -630,15 +670,47 @@ void sptm_map_table(
  *                     For example, when unmapping an L3 table, [target_level] should be 2.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_unmap_table(
-	sptm_paddr_t root_pt_paddr,
-	sptm_vaddr_t vaddr,
-	sptm_pt_level_t target_level);
+void sptm_unmap_table(sptm_paddr_t root_pt_paddr, sptm_vaddr_t vaddr, sptm_pt_level_t target_level);
 #else
-void sptm_unmap_table(
-	sptm_root_pt_u root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_pt_level_u target_level_U);
+void sptm_unmap_table(sptm_root_pt_u root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_pt_level_u target_level_U);
+#endif
+
+/**
+ * Allocate a subpage user root table (SURT) in an XNU_SUBPAGE_USER_ROOT_TABLES frame.
+ *
+ * @param surt_frame The physical address of the XNU_SUBPAGE_USER_ROOT_TABLES frame.
+ * @param surt_index The index of the subpage user root table to allocate.
+ * @param attr_idx The attribute index corresponding to the page table geometry
+ *                 of the new user address space.
+ * @param flags The initial flags for the new user address space.
+ * @param asid The ASID for the new user address space.
+ */
+#if !USE_UNSAFE_TYPES
+void sptm_surt_alloc(sptm_paddr_t surt_frame,
+    uint8_t surt_index,
+    uint8_t attr_idx,
+    uint8_t flags,
+    sptm_asid_t asid);
+#else
+void sptm_surt_alloc(sptm_surt_frame_u surt_frame_U,
+    sptm_surt_index_u surt_index_U,
+    sptm_attr_idx_u attr_idx_U,
+    sptm_root_flags_u flags_U,
+    sptm_asid_u asid_U);
+#endif
+
+/**
+ * Free a subpage user root table (SURT) in an XNU_SUBPAGE_USER_ROOT_TABLES frame.
+ *
+ * @param surt_frame The physical address of the XNU_SUBPAGE_USER_ROOT_TABLES frame.
+ * @param surt_index The index of the subpage user root table to free.
+ */
+#if !USE_UNSAFE_TYPES
+void sptm_surt_free(sptm_paddr_t surt_frame, uint8_t surt_index);
+#else
+void sptm_surt_free(sptm_surt_frame_u surt_frame_U, sptm_surt_index_u surt_index_U);
 #endif
 
 /**
@@ -716,9 +788,9 @@ void sptm_unmap_table(
  * The caller can pass other option bits like SPTM_UPDATE_DEFER_TLBI
  * along with the mask bits.
  */
-#define SPTM_UPDATE_MASK (SPTM_UPDATE_MAIR | SPTM_UPDATE_SH | SPTM_UPDATE_AF | \
-						  SPTM_UPDATE_NG | SPTM_UPDATE_PERMS_AND_WAS_WRITABLE | \
-						  SPTM_UPDATE_SW_WIRED)
+#define SPTM_UPDATE_MASK                                                   \
+	(SPTM_UPDATE_MAIR | SPTM_UPDATE_SH | SPTM_UPDATE_AF | SPTM_UPDATE_NG | \
+	    SPTM_UPDATE_PERMS_AND_WAS_WRITABLE | SPTM_UPDATE_SW_WIRED)
 
 /**
  * Update a contiguous set of mappings within a single leaf page table.
@@ -752,19 +824,17 @@ void sptm_unmap_table(
  *       [start_vaddr].
  */
 #if !USE_UNSAFE_TYPES
-sptm_return_t sptm_update_region(
-	sptm_paddr_t root_pt_paddr,
-	sptm_vaddr_t start_vaddr,
-	unsigned int num_mappings,
-	sptm_paddr_t pte_templates_pa,
-	uint32_t options);
+sptm_return_t sptm_update_region(sptm_paddr_t root_pt_paddr,
+    sptm_vaddr_t start_vaddr,
+    unsigned int num_mappings,
+    sptm_paddr_t pte_templates_pa,
+    uint32_t options);
 #else
-sptm_return_t sptm_update_region(
-	sptm_root_pt_u root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_page_count_u page_count_U,
-	sptm_managed_addr_u pte_templates_U,
-	uint32_t options);
+sptm_return_t sptm_update_region(sptm_root_pt_u root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_page_count_u page_count_U,
+    sptm_managed_addr_u pte_templates_U,
+    uint32_t options);
 #endif
 
 /**
@@ -844,17 +914,15 @@ typedef struct {
  *       virtual address and root page table found in [disjoint_ops_pa].
  */
 #if !USE_UNSAFE_TYPES
-sptm_return_t sptm_update_disjoint(
-	sptm_paddr_t paddr,
-	sptm_paddr_t disjoint_ops_pa,
-	unsigned int num_mappings,
-	uint32_t options);
+sptm_return_t sptm_update_disjoint(sptm_paddr_t paddr,
+    sptm_paddr_t disjoint_ops_pa,
+    unsigned int num_mappings,
+    uint32_t options);
 #else
-sptm_return_t sptm_update_disjoint(
-	sptm_managed_page_u paddr_U,
-	sptm_managed_addr_u disjoint_ops_U,
-	sptm_page_count_u page_count_U,
-	uint32_t options);
+sptm_return_t sptm_update_disjoint(sptm_managed_page_u paddr_U,
+    sptm_managed_addr_u disjoint_ops_U,
+    sptm_page_count_u page_count_U,
+    uint32_t options);
 #endif
 
 /**
@@ -945,13 +1013,10 @@ _Static_assert(sizeof(sptm_update_disjoint_multipage_op_t) == sizeof(sptm_disjoi
  *
  */
 #if !USE_UNSAFE_TYPES
-sptm_return_t sptm_update_disjoint_multipage(
-	sptm_paddr_t multipage_ops_pa,
-	size_t num_entries);
+sptm_return_t sptm_update_disjoint_multipage(sptm_paddr_t multipage_ops_pa, size_t num_entries);
 #else
-sptm_return_t sptm_update_disjoint_multipage(
-	sptm_managed_addr_u multipage_ops_U,
-	sptm_multipage_num_entries_u num_entries_U);
+sptm_return_t sptm_update_disjoint_multipage(sptm_managed_addr_u multipage_ops_U,
+    sptm_multipage_num_entries_u num_entries_U);
 #endif
 
 /**
@@ -981,17 +1046,15 @@ sptm_return_t sptm_update_disjoint_multipage(
  *       [start_vaddr].
  */
 #if !USE_UNSAFE_TYPES
-void sptm_unmap_region(
-	sptm_paddr_t root_pt_paddr,
-	sptm_vaddr_t start_vaddr,
-	unsigned int num_mappings,
-	uint32_t options);
+void sptm_unmap_region(sptm_paddr_t root_pt_paddr,
+    sptm_vaddr_t start_vaddr,
+    unsigned int num_mappings,
+    uint32_t options);
 #else
-void sptm_unmap_region(
-	sptm_root_pt_u root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_page_count_u page_count_U,
-	uint32_t options);
+void sptm_unmap_region(sptm_root_pt_u root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_page_count_u page_count_U,
+    uint32_t options);
 #endif
 
 /**
@@ -1031,15 +1094,13 @@ void sptm_unmap_region(
  *       root page table found in [disjoint_ops_pa].
  */
 #if !USE_UNSAFE_TYPES
-void sptm_unmap_disjoint(
-	sptm_paddr_t paddr,
-	sptm_paddr_t disjoint_ops_pa,
-	unsigned int num_mappings);
+void sptm_unmap_disjoint(sptm_paddr_t paddr,
+    sptm_paddr_t disjoint_ops_pa,
+    unsigned int num_mappings);
 #else
-void sptm_unmap_disjoint(
-	sptm_managed_page_u paddr_U,
-	sptm_managed_addr_u disjoint_ops_U,
-	sptm_page_count_u page_count_U);
+void sptm_unmap_disjoint(sptm_managed_page_u paddr_U,
+    sptm_managed_addr_u disjoint_ops_U,
+    sptm_page_count_u page_count_U);
 #endif
 
 /* Maximum size allowed for a shared region is 64GB */
@@ -1049,20 +1110,12 @@ void sptm_unmap_disjoint(
  * Configure a shared region to be nested into one or more user address spaces.
  *
  * @note Once a page has been retyped to XNU_SHARED_ROOT_TABLE, this function must
- *       be called exactly once before the page may be used with sptm_nest_region()/
- *       sptm_unnest_region().
+ *       be called exactly once before the page may be used with
+ *       sptm_set_shared_region()/sptm_nest_region()/sptm_unnest_region().
  *
- * @note Once this function has been called, sptm_nest_region() may be called any
- *       number of times with the same [shared_root_pt_paddr] but different user
+ * @note Once this function has been called, sptm_set_shared_region() may be called
+ *       any number of times with the same [shared_root_pt_paddr] but different user
  *       root tables.
- *
- * @note Each subsequent call to sptm_nest_region() against the same
- *       [shared_root_pt_paddr] may specify a different VA range to be nested, as long
- *       as the range is entirely encompassed by the [start_vaddr, start_vaddr + size)
- *       region specified here.
- *
- * @note The VA range defined by [start_vaddr, start_vaddr + size) cannot span
- *       a twig table boundary.
  *
  * @param shared_root_pt_paddr Physical address of the Root Page Table representing the
  *                             region to be nested.  This page must already have been
@@ -1073,15 +1126,37 @@ void sptm_unmap_disjoint(
  * @param size Page-aligned maximum nesting size for this shared region.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_configure_shared_region(
-	sptm_paddr_t shared_root_pt_paddr,
-	sptm_vaddr_t start_vaddr,
-	unsigned int page_count);
+void sptm_configure_shared_region(sptm_paddr_t shared_root_pt_paddr,
+    sptm_vaddr_t start_vaddr,
+    unsigned int page_count);
 #else
-void sptm_configure_shared_region(
-	sptm_shared_root_pt_u shared_root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_page_count_u page_count_U);
+void sptm_configure_shared_region(sptm_shared_root_pt_u shared_root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_page_count_u page_count_U);
+#endif
+
+/**
+ * Associate a Shared Root with a User Root.
+ *
+ * @note sptm_configure_shared_region() must have been called on [shared_root_pt_paddr]
+ *       prior to this call.
+ *
+ * @note Once this function has been called, sptm_nest_region() may be called any
+ *       number of times with the same [user_root_pt_paddr] and [shared_root_pt_paddr]
+ *       but with different VA ranges to be nested, as long as each VA range is
+ *       entirely encompassed by the [start_vaddr, start_vaddr + size) region
+ *       specified in the original call to sptm_configure_shared_region().
+ *
+ * @param user_root_pt_paddr Physical address of the Root Page Table representing
+ *                           the user map.
+ * @param shared_root_pt_paddr Physical address of the Root Page Table representing
+ *                             the nested map.
+ */
+#if !USE_UNSAFE_TYPES
+void sptm_set_shared_region(sptm_paddr_t user_root_pt_paddr, sptm_paddr_t shared_root_pt_paddr);
+#else
+void sptm_set_shared_region(sptm_user_root_pt_u user_root_pt_U,
+    sptm_shared_root_pt_u shared_root_pt_U);
 #endif
 
 /**
@@ -1114,17 +1189,15 @@ void sptm_configure_shared_region(
  * @param size Size of the region to nest.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_nest_region(
-	sptm_paddr_t user_root_pt_paddr,
-	sptm_paddr_t shared_root_pt_paddr,
-	sptm_vaddr_t start_vaddr,
-	unsigned int page_count);
+void sptm_nest_region(sptm_paddr_t user_root_pt_paddr,
+    sptm_paddr_t shared_root_pt_paddr,
+    sptm_vaddr_t start_vaddr,
+    unsigned int page_count);
 #else
-void sptm_nest_region(
-	sptm_user_root_pt_u user_root_pt_U,
-	sptm_shared_root_pt_u shared_root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_page_count_u page_count_U);
+void sptm_nest_region(sptm_user_root_pt_u user_root_pt_U,
+    sptm_shared_root_pt_u shared_root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_page_count_u page_count_U);
 #endif
 
 /**
@@ -1143,17 +1216,15 @@ void sptm_nest_region(
  * @param size Size of the region to unnest.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_unnest_region(
-	sptm_paddr_t user_root_pt_paddr,
-	sptm_paddr_t shared_root_pt_paddr,
-	sptm_vaddr_t start_vaddr,
-	unsigned int page_count);
+void sptm_unnest_region(sptm_paddr_t user_root_pt_paddr,
+    sptm_paddr_t shared_root_pt_paddr,
+    sptm_vaddr_t start_vaddr,
+    unsigned int page_count);
 #else
-void sptm_unnest_region(
-	sptm_user_root_pt_u user_root_pt_U,
-	sptm_shared_root_pt_u shared_root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_page_count_u page_count_U);
+void sptm_unnest_region(sptm_user_root_pt_u user_root_pt_U,
+    sptm_shared_root_pt_u shared_root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_page_count_u page_count_U);
 #endif
 
 /**
@@ -1174,15 +1245,11 @@ void sptm_unnest_region(
  *             set, the corresponding bit in [flags] will be copied to the Root PT's flags.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_configure_root(
-	sptm_paddr_t root_pt_paddr,
-	uint8_t flags,
-	uint8_t mask);
+void sptm_configure_root(sptm_paddr_t root_pt_paddr, uint8_t flags, uint8_t mask);
 #else
-void sptm_configure_root(
-	sptm_user_root_pt_u user_root_pt_U,
-	sptm_root_config_u flags_U,
-	sptm_root_config_u mask_U);
+void sptm_configure_root(sptm_user_root_pt_u user_root_pt_U,
+    sptm_root_config_u flags_U,
+    sptm_root_config_u mask_U);
 #endif
 
 /**
@@ -1212,15 +1279,13 @@ void sptm_configure_root(
  *         of these values for details.
  */
 #if !USE_UNSAFE_TYPES
-sptm_return_t sptm_switch_root(
-	sptm_paddr_t root_pt_paddr,
-	uint8_t override_flags,
-	uint8_t override_mask);
+sptm_return_t sptm_switch_root(sptm_paddr_t root_pt_paddr,
+    uint8_t override_flags,
+    uint8_t override_mask);
 #else
-sptm_return_t sptm_switch_root(
-	sptm_root_pt_u root_pt_U,
-	sptm_root_config_u override_flags_U,
-	sptm_root_config_u override_mask_U);
+sptm_return_t sptm_switch_root(sptm_root_pt_u root_pt_U,
+    sptm_root_config_u override_flags_U,
+    sptm_root_config_u override_mask_U);
 #endif
 
 /**
@@ -1257,7 +1322,7 @@ uint64_t sptm_guest_va_to_ipa(sptm_stage2_root_pt_u stage2_root_pt_U, uint64_t g
  * (Note that these are the inner-shareable TLBI instructions trapped by
  * HCR_EL2.TTLB=1)
  */
-typedef enum: uint8_t {
+typedef enum : uint8_t {
 	SPTM_GUEST_S1_TLB_OP_ASIDE1IS,
 	SPTM_GUEST_S1_TLB_OP_VAE1IS,
 	SPTM_GUEST_S1_TLB_OP_VAAE1IS,
@@ -1287,15 +1352,13 @@ typedef enum: uint8_t {
  * @param param The argument, if necessary, to the TLB operation requested.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_guest_stage1_tlb_op(
-	sptm_paddr_t stage2_root_pt_paddr,
-	sptm_guest_stage1_tlb_op_t op,
-	uint64_t param);
+void sptm_guest_stage1_tlb_op(sptm_paddr_t stage2_root_pt_paddr,
+    sptm_guest_stage1_tlb_op_t op,
+    uint64_t param);
 #else
-void sptm_guest_stage1_tlb_op(
-	sptm_stage2_root_pt_u stage2_root_pt_U,
-	sptm_guest_stage1_tlb_op_t op,
-	uint64_t param);
+void sptm_guest_stage1_tlb_op(sptm_stage2_root_pt_u stage2_root_pt_U,
+    sptm_guest_stage1_tlb_op_t op,
+    uint64_t param);
 #endif
 
 /**
@@ -1317,17 +1380,15 @@ void sptm_guest_stage1_tlb_op(
  *                        of the translation table.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_guest_stage2_tlb_op(
-	sptm_paddr_t stage2_root_pt_paddr,
-	sptm_vaddr_t aligned_vaddr,
-	unsigned int num_mappings,
-	bool last_level_only);
+void sptm_guest_stage2_tlb_op(sptm_paddr_t stage2_root_pt_paddr,
+    sptm_vaddr_t aligned_vaddr,
+    unsigned int num_mappings,
+    bool last_level_only);
 #else
-void sptm_guest_stage2_tlb_op(
-	sptm_stage2_root_pt_u stage2_root_pt_U,
-	sptm_aligned_vaddr_u aligned_vaddr_U,
-	sptm_page_count_u num_mappings,
-	bool last_level_only);
+void sptm_guest_stage2_tlb_op(sptm_stage2_root_pt_u stage2_root_pt_U,
+    sptm_aligned_vaddr_u aligned_vaddr_U,
+    sptm_page_count_u num_mappings,
+    bool last_level_only);
 #endif
 
 /**
@@ -1378,11 +1439,14 @@ void sptm_guest_dispatch(sptm_managed_addr_u guest_state_paddr_U);
  *
  * @return Signed pointer.
  */
-void *sptm_sign_user_pointer(
-	void *value,
-	ptrauth_key key,
-	uint64_t discriminator,
-	uint64_t jop_key);
+#if !USE_UNSAFE_TYPES
+void *sptm_sign_user_pointer(void *value, ptrauth_key key, uint64_t discriminator, uint64_t jop_key);
+#else
+void *sptm_sign_user_pointer(void *value,
+    sptm_ptrauth_user_key_u key_U,
+    uint64_t discriminator,
+    uint64_t jop_key);
+#endif
 
 /**
  * Authenticate a pointer using the user keys.
@@ -1400,11 +1464,60 @@ void *sptm_sign_user_pointer(
  *         SPTM_AUTH_FAILURE on failure.
  */
 #define SPTM_AUTH_FAILURE (void *)-1
-void *sptm_auth_user_pointer(
-	void *value,
-	ptrauth_key key,
-	uint64_t discriminator,
-	uint64_t jop_key);
+#if !USE_UNSAFE_TYPES
+void *sptm_auth_user_pointer(void *value, ptrauth_key key, uint64_t discriminator, uint64_t jop_key);
+#else
+void *sptm_auth_user_pointer(void *value,
+    sptm_ptrauth_user_key_u key_U,
+    uint64_t discriminator,
+    uint64_t jop_key);
+#endif
+
+/**
+ * Structure to represent one user pointer signing operation in a batched user
+ * pointer signing request.
+ */
+typedef struct {
+	/* The value of the user pointer to be signed. */
+	uintptr_t value;
+
+	/* The discriminator for this op. */
+	uint64_t discriminator;
+
+#if !USE_UNSAFE_TYPES
+	/* The value of the key (IA or DA) for this op. */
+	ptrauth_key key;
+#else
+	sptm_ptrauth_user_key_u key_U;
+#endif
+} sptm_user_pointer_op_t;
+
+/**
+ * Sign an array of up to SPTM_BATCHED_OPS_LIMIT user pointers.
+ *
+ * @note This function is preferred when a client has many pointers to sign
+ *       in a batch to avoid the cost of multiple entries of SPTM and flips of
+ *       interrupt states and pointer authentication states.
+ *
+ * @note This function will panic if interrupts are enabled.
+ *
+ * @note This function does not have a return value. The signed pointers
+ *       are returned in the SPTM sratch page.
+ *
+ * @param user_pointer_ops_pa Physical address of the user pointer ops array.
+ * @param ops_count Number of ops contained in the ops array.
+ * @param jop_key JOP key to use to sign the pointer.
+ *
+ */
+#if !USE_UNSAFE_TYPES
+void sptm_batch_sign_user_pointer(sptm_paddr_t user_pointer_ops_pa,
+    uint64_t ops_count,
+    uint64_t jop_key);
+#else
+void sptm_batch_sign_user_pointer(sptm_managed_addr_u user_pointer_ops_pa_U,
+    sptm_user_pointer_ops_count_u ops_count_U,
+    uint64_t jop_key);
+#endif
 #endif /* HAS_APPLE_PAC */
 
 /* The SPTM sysreg RW API is only exposed in DEVELOPMENT || DEBUG builds. */
@@ -1418,19 +1531,21 @@ void *sptm_auth_user_pointer(
  * This feature is only enabled when BOARD_CONFIG_USERSPACE_TEST_ENV is defined,
  * and should never be observed by xny.
  */
-__enum_closed_decl(sptm_regid_t, uint8_t, {
-	SPTM_REG_VBAR_GL1 = 0,
+__enum_closed_decl(sptm_regid_t,
+    uint8_t,
+    {
+        SPTM_REG_VBAR_GL1 = 0,
 
-	/**
-	 * The following member is here to represent the number of supported
-	 * register IDs. It does not represent a valid register ID.
-	 */
-	SPTM_REGS_NUM
-});
+        /**
+         * The following member is here to represent the number of supported
+         * register IDs. It does not represent a valid register ID.
+         */
+        SPTM_REGS_NUM,
+    });
 
 /**
  * Read the content of an sptm-managed register.
- * 
+ *
  * @note If @regid is invalid, an sptm violation is generated.
  *
  * @note If @regid corresponds to a register that is not accessible in the
@@ -1441,12 +1556,11 @@ __enum_closed_decl(sptm_regid_t, uint8_t, {
  *
  * @return The content of the register.
  */
-uint64_t
-sptm_reg_read(sptm_regid_t regid);
+uint64_t sptm_reg_read(sptm_regid_t regid);
 
 /**
  * Write the content of an sptm-managed register.
- * 
+ *
  * @note If regid is invalid, an sptm violation is generated.
  *
  * @note If the write modifies non-writeable bits, an sptm violation
@@ -1455,8 +1569,7 @@ sptm_reg_read(sptm_regid_t regid);
  * @param regid Identifier of the register to read.
  * @param new_value Value to write.
  */
-void
-sptm_reg_write(sptm_regid_t regid, uint64_t new_value);
+void sptm_reg_write(sptm_regid_t regid, uint64_t new_value);
 
 /**
  * Maps all SK_DOMAIN pages into PAPT with permissions that allow XNU to read
@@ -1467,8 +1580,7 @@ sptm_reg_write(sptm_regid_t regid, uint64_t new_value);
  * @note Called late from XNU panic path when the system is running in single
  *       core mode with interrupts disabled (world is stopped).
  */
-void
-sptm_map_sk_domain(void);
+void sptm_map_sk_domain(void);
 
 #endif /* DEVELOPMENT */
 
@@ -1561,7 +1673,9 @@ uint16_t sptm_cpu_id(uint64_t physical_id);
 #if !USE_UNSAFE_TYPES
 void sptm_iofilter_protected_write(sptm_paddr_t paddr, uint64_t value, uint64_t width);
 #else
-void sptm_iofilter_protected_write(sptm_io_filter_protected_paddr_u paddr, uint64_t value, sptm_io_filter_protected_write_size_u width);
+void sptm_iofilter_protected_write(sptm_io_filter_protected_paddr_u paddr,
+    uint64_t value,
+    sptm_io_filter_protected_write_size_u width);
 #endif
 
 /**
@@ -1625,6 +1739,107 @@ __attribute__((noreturn)) void sk_resume(void);
 uint64_t sk_enter(uint32_t endpoint_id, sptm_call_regs_t *argsp);
 
 
+#if HAS_SPTM_SYSCTL
+/* Return values when sysctl op is SPTM_SYSCTL_SET. */
+typedef enum : uint64_t {
+	SPTM_SYSCTL_SET_SUCCESS,
+	SPTM_SYSCTL_SET_NOT_ALLOWED
+} sptm_sysctl_setter_return_t;
+
+/* Supported sysctls. */
+typedef enum : uint64_t {
+	SPTM_SYSCTL_DISARM_PROTECTED_IO = 0ULL,
+	SPTM_SYSCTL_NUM_SYSCTLS
+} sptm_sysctl_selector_t;
+
+/* Supported sysctl ops. */
+typedef enum : uint8_t {
+	SPTM_SYSCTL_SET = 0,
+	SPTM_SYSCTL_GET,
+	SPTM_SYSCTL_NUM_OPS
+} sptm_sysctl_op_t;
+
+/**
+ * Interface for xnu to set control variables on *development* builds to alter
+ * SPTM behaviors. This will be an empty endpoint on release builds.
+ *
+ * @param selector What sysctl is being operated on.
+ * @param op Whether the sysctl is being read or written.
+ * @param arg The value to write to the sysctl when the op is SPTM_SYSCTL_SET
+ *
+ * @return A value of type sptm_sysctl_setter_return_t when the op is SPTM_SYSCTL_SET.
+ *         The value of the sysctl when the op is SPTM_SYSCTL_GET.
+ *
+ */
+#if !USE_UNSAFE_TYPES
+uint64_t sptm_sysctl(sptm_sysctl_selector_t selector, sptm_sysctl_op_t op, uint64_t arg);
+#else
+uint64_t sptm_sysctl(sptm_sysctl_selector_u selector_U, sptm_sysctl_op_u op_U, uint64_t arg);
+#endif /* !USE_UNSAFE_TYPES */
+#endif /* HAS_SPTM_SYSCTL */
+
+/**
+ * Values that can be passed to sptm_get_info() to retrieve the corresponding
+ * information from SPTM.
+ */
+__enum_closed_decl(sptm_info_t,
+    uint8_t,
+    {
+        /**
+         * Retrieve SPTM allowed I/O range by index.
+         *
+         * arg: `unsigned int`
+         * pointer type: `sptm_io_range_t`
+         */
+        INFO_SPTM_ALLOWED_IO_RANGES,
+
+        /**
+         * Retrieve total number of SPTM allowed I/O ranges.
+         *
+         * arg: none
+         * pointer type: `unsigned int`
+         */
+        INFO_SPTM_ALLOWED_IO_RANGES_COUNT,
+
+        /**
+         * Retrieve SPTM pmap I/O range by index.
+         *
+         * arg: `unsigned int`
+         * pointer type: `sptm_io_range_t`
+         */
+        INFO_SPTM_PMAP_IO_RANGES,
+
+        /**
+         * Retrieve total number of SPTM pmap I/O ranges.
+         *
+         * arg: none
+         * type: `unsigned int`
+         */
+        INFO_SPTM_PMAP_IO_RANGES_COUNT,
+
+        /**
+         * Retrieve SPTM I/O range by index.
+         *
+         * arg: `unsigned int`
+         * pointer type: `sptm_io_range_t`
+         */
+        INFO_SPTM_IO_RANGES,
+
+        /**
+         * Retrieve total number of SPTM I/O ranges.
+         *
+         * arg: none
+         * pointer type: `unsigned int`
+         */
+        INFO_SPTM_IO_RANGES_COUNT,
+
+        /**
+         * Placeholder value indicating the current number of supported info,
+         * not actually a valid info.
+         */
+        MAX_SPTM_INFOS,
+    });
+
 /**
  * Libsptm library function for checking whether an SPTM operation on a given
  * page is in-flight.
@@ -1677,56 +1892,57 @@ libsptm_error_t sptm_prefetch_fte(sptm_paddr_t paddr);
 /**
  * Copy the number of requested traces from the per-CPU trace buffer into XNU memory.
  *
- * @note [num_traces_copied] might be smaller than [max_num_traces]. This will happen if the number of traces
- *        available is smaller than [max_num_traces].
+ * @note [num_traces_copied] might be smaller than [max_num_traces]. This will happen if the number
+ *        of traces available is smaller than [max_num_traces].
  *
- * @note This function copies traces starting from the oldest one. If the number of traces in the target trace buffer is larger
- *       than [max_num_traces], only the oldest [max_num_traces] will be copied.
+ * @note This function copies traces starting from the oldest one. If the number of traces in the
+ *       target trace buffer is larger than [max_num_traces], only the oldest [max_num_traces] will
+ *       be copied.
  *
- * @note Since the SPTM will overwrite old traces when the trace buffer is full, this function must be called often
- *       enough with large enough buffers in order for the SPTM to not drop old traces.
+ * @note Since the SPTM will overwrite old traces when the trace buffer is full, this function must
+ *       be called often enough with large enough buffers in order for the SPTM to not drop old
+ *       traces.
  *
  * @param sptm_cpu_id CPU ID of the CPU trace buffer to target.
- * @param dst_buffer Pointer to the buffer where the traces should be copied into. The underlying memory
- *                  must be XNU-writable.
- * @param max_num_traces Maximum number of traces that the caller wants to get copied into the buffer.
- * @param read_index Pointer to the read index associated with the CPU that owns the trace buffer being targeted.
- *                   This will be updated upon consuming traces.
- * @param num_traces_copied Pointer where the library will store the actual number of traces that were copied.
+ * @param dst_buffer Pointer to the buffer where the traces should be copied into. The underlying
+ *                  memory must be XNU-writable.
+ * @param max_num_traces Maximum number of traces that the caller wants to get copied into the
+ *                       buffer.
+ * @param read_index Pointer to the read index associated with the CPU that owns the trace buffer
+ *                   being targeted. This will be updated upon consuming traces.
+ * @param num_traces_copied Pointer where the library will store the actual number of traces that
+ *                          were copied.
  *
  * @return LIBPSPTM_SUCCESS if the passed in pointers were successfully set.
  *         LIBSPTM_INVALID_ARG if either of the passed in pointers is NULL.
  */
-libsptm_error_t
-sptm_trace_copy_traces(
-	uint16_t sptm_cpu_id,
-	sptm_trace_t *dst_buffer,
-	unsigned int max_num_traces,
-	uint64_t *read_index,
-	unsigned int *num_traces_copied);
+libsptm_error_t sptm_trace_copy_traces(uint16_t sptm_cpu_id,
+    sptm_trace_t *dst_buffer,
+    unsigned int max_num_traces,
+    uint64_t *read_index,
+    unsigned int *num_traces_copied);
 
 /**
- * Returns the number of new traces since [prev_state]. The SPTM populates [prev_state] every time this function
- * gets called, and XNU should pass that value in a subsequent call to calculate the delta.
+ * Returns the number of new traces since [prev_state]. The SPTM populates [prev_state] every time
+ * this function gets called, and XNU should pass that value in a subsequent call to calculate the
+ * delta.
  *
- * @note It is expected that in some cases XNU will call this function for the sole purpose of capturing [prev_state],
- *       prior to a subsequent call to get the number of traces that were generated between both calls. In such cases,
- *       XNU is free to ignore [num_new_traces].
+ * @note It is expected that in some cases XNU will call this function for the sole purpose of
+ *       capturing [prev_state], prior to a subsequent call to get the number of traces that were
+ *       generated between both calls. In such cases, XNU is free to ignore [num_new_traces].
  *
  * @param sptm_cpu_id CPU ID of the CPU trace buffer to target.
- * @param prev_state Pointer to where the library will store a handle that XNU can pass on a subsequent call
- *                  to obtain the delta for the number of traces generated.
- * @param num_new_traces Pointer to where the library will store the number of traces that have been generated since
- *                      the last call.
+ * @param prev_state Pointer to where the library will store a handle that XNU can pass on a
+ *                  subsequent call to obtain the delta for the number of traces generated.
+ * @param num_new_traces Pointer to where the library will store the number of traces that have been
+ *                      generated since the last call.
  *
  * @return LIBPSPTM_SUCCESS if the passed in pointers were successfully set.
  *         LIBSPTM_INVALID_ARG if either of the passed in pointers is NULL.
  */
-libsptm_error_t
-sptm_trace_num_new_traces(
-	uint16_t sptm_cpu_id,
-	uint64_t *prev_state,
-	unsigned int *num_new_traces);
+libsptm_error_t sptm_trace_num_new_traces(uint16_t sptm_cpu_id,
+    uint64_t *prev_state,
+    unsigned int *num_new_traces);
 
 /**
  * Retrieve the saved XNU state for a CPU which is in the panic loop.
@@ -1739,9 +1955,24 @@ sptm_trace_num_new_traces(
  *         CPU ID requested is invalid,
  *         LIBSPTM_FAILURE if the requested CPU is not in the panic loop.
  */
-libsptm_error_t
-sptm_copy_callee_saved_state(
-	uint64_t sptm_logical_cpu_id,
-	xnu_saved_registers_t *regp);
+libsptm_error_t sptm_copy_callee_saved_state(uint64_t sptm_logical_cpu_id,
+    xnu_saved_registers_t *regp);
 
+/**
+ * Returns the pointer to the requested SPTM information.
+ *
+ * @param info SPTM information to retrieve from the list of enums such
+ *             as pmap or allowed I/O ranges and their count.
+ * @param arg Input argument such as index to one of the I/O ranges, this
+ *            might be unused for other kinds of info such as I/O ranges count.
+ *            See definition of sptm_info_t for more details for what each info
+ *            expects as an argument.
+ * @param output Pointer to return output information. See definition of sptm_info_t
+ *               for more details for what each info expects as its pointer type.
+ *
+ * @return LIBSPTM_SUCCESS if the passed in output pointer is successfully set.
+ *         LIBSPTM_INVALID_ARG if the passed in input is invalid or the output pointer is NULL.
+ *         LIBSPTM_FAILURE if the requested SPTM info is invalid.
+ */
+libsptm_error_t sptm_get_info(sptm_info_t info, uint64_t arg, void *output);
 #endif /* __ASSEMBLER__ */

@@ -46,6 +46,27 @@ NS_AVAILABLE_IOS(11_0)
  */
 - (CGSize)contentSizeThatFits:(CGSize)size NS_AVAILABLE_IOS(11_0);
 
+/*!
+ @property   messageTintColor
+ @abstract   Override to provide a message tint color, e.g. to match the content of the message, or your app's brand color.
+ @discussion This color will be drawn either in a material or as a solid color, depending on transcript context. The default value is nil, which renders the plugin balloon with the system standard background color. This must be a simple RGB color - other color types such as displayP3 or pattern images are not supported. This also does not support dynamic colors. If your color needs to be dynamic, you must call `invalidateMessageTintColor` when the dynamic conditions change.
+*/
+@property (nonatomic, readonly, nullable) UIColor *messageTintColor API_AVAILABLE(ios(26.0));
+
+/*!
+ @property  messageCornerRadius
+ @abstract   The corner radius of the message when presented in the transcript. Use this value to create concentric rounded subviews inside your view. Use continuous corners (kCACornerCurveContinuous) on your view.
+ @discussion This property varies with dynamic type size. Use trait collection registration to trigger an updated layout when dynamic type size changes. To avoid the edges of the transcript view, use `layoutMargins`. This value is only valid when `presentationStyle` is `MSMessagesAppPresentationStyleTranscript`.
+ */
+@property (nonatomic, assign, readonly) CGFloat messageCornerRadius API_AVAILABLE(ios(26.0));
+
+/*!
+ @method     invalidateMessageTintColor
+ @abstract   Call this when `messageTintColor` changes, e.g. due to change in app state or trait collection.
+ @discussion The message will be updated to reflect the new color. This method will only work if the `presentationStyle` is `MSMessagesAppPresentationStyleTranscript`.
+*/
+- (void)invalidateMessageTintColor API_AVAILABLE(ios(26.0));
+
 @end
 
 

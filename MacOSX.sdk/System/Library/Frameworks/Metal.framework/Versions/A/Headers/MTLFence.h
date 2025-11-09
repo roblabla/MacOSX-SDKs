@@ -9,7 +9,7 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLDevice.h>
 
-API_AVAILABLE(macos(10.13), ios(10.0))
+API_AVAILABLE(macos(10.13), ios(10.0)) NS_SWIFT_SENDABLE
 @protocol MTLFence <NSObject>
 @property (nonnull, readonly) id <MTLDevice> device;
 

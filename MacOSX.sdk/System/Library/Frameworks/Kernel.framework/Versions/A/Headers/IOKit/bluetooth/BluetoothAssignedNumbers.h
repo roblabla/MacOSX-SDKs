@@ -568,7 +568,7 @@ enum
     kBluetoothL2CAPPSMAVCTP_Browsing			= 0x001B,	// AVTCP (AVRCP) Browsing
     kBluetoothL2CAPPSMUID_C_Plane				= 0x001D,	// Unrestricted Digital Information Profile (UDI)
     kBluetoothL2CAPPSMATT						= 0x001F,	// Attribute Protocol
-	
+
 	// Range < 0x1000 reserved.
     kBluetoothL2CAPPSMReservedStart				= 0x0001,
     kBluetoothL2CAPPSMReservedEnd				= 0x1000,

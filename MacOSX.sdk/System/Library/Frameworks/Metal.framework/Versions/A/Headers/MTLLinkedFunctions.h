@@ -37,7 +37,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
 * @property binaryFunctions
 * @abstract The array of functions compiled to binary to be linked.
 */
-@property (readwrite, nonatomic, copy, nullable) NSArray<id<MTLFunction>> *binaryFunctions API_AVAILABLE(macos(11.0), ios(14.0));
+@property (readwrite, nonatomic, copy, nullable) NSArray<id<MTLFunction>> *binaryFunctions API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
 * @property groups

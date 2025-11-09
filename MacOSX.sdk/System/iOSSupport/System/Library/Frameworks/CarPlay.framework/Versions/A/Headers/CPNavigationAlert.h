@@ -7,6 +7,7 @@
 
 #import <CarPlay/CPAlertAction.h>
 #import <CarPlay/CPImageSet.h>
+#import <CarPlay/CPTemplate.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
@@ -33,6 +34,7 @@ static NSTimeInterval const CPNavigationAlertMinimumDuration = 5;
  @c CPNavigationAlert is a banner alert that can display map or navigation-related information to the user.
 */
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNavigationAlert : NSObject <NSSecureCoding>
 
 /**

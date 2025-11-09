@@ -24,13 +24,15 @@ exports:
                        _CompanionServicesVersionString, _cps_daemon_log, _cps_service_connection_log, 
                        _cps_service_listener_log, _cps_service_log, _cps_session_log, 
                        _cps_signpost_log ]
-    objc-classes:    [ CASPasswordCredential, CPSAppSignInRequest, CPSAppSignInResponse, 
-                       CPSAuthenticationRequest, CPSAuthenticationResponse, CPSAuthenticationServiceInterface, 
-                       CPSAuthenticationSession, CPSDevice, CPSMetrics, CPSRestrictedAccessRequest, 
-                       CPSRestrictedAccessResponse, CPSSharingRequest, CPSSharingResponse, 
-                       CPSStoreAuthenticationRequest, CPSStoreAuthenticationResponse, 
-                       CPSStorePurchaseRequest, CPSStorePurchaseResponse, CPSSystemAuthenticationRequest, 
-                       CPSSystemAuthenticationResponse, CPSTVProviderButtonHandlingInterface, 
-                       CPSTVProviderRequest, CPSViewServiceInterface, CPSViewServicePresentationContext, 
+    objc-classes:    [ CASPasswordCredential, CPSAmbientSetupRequest, CPSAppSignInRequest, 
+                       CPSAppSignInResponse, CPSAuthenticationRequest, CPSAuthenticationResponse, 
+                       CPSAuthenticationServiceInterface, CPSAuthenticationSession, 
+                       CPSDevice, CPSMetrics, CPSRestrictedAccessRequest, CPSRestrictedAccessResponse, 
+                       CPSSharingRequest, CPSSharingResponse, CPSStoreAuthenticationRequest, 
+                       CPSStoreAuthenticationResponse, CPSStorePurchaseRequest, CPSStorePurchaseResponse, 
+                       CPSSystemAuthenticationRequest, CPSSystemAuthenticationResponse, 
+                       CPSTVProviderButtonHandlingInterface, CPSTVProviderRequest, 
+                       CPSUserDefaultsReadInfo, CPSUserDefaultsRequest, CPSUserDefaultsResponse, 
+                       CPSUserDefaultsWriteInfo, CPSViewServiceInterface, CPSViewServicePresentationContext, 
                        CPSWatchAlertPresentationContext ]
 ...

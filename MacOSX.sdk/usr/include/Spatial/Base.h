@@ -2,6 +2,7 @@
 #define Spatial_Base_h
 
 #define SPDefaultTolerance sqrt(__DBL_EPSILON__)
+#define SPDefaultToleranceFloat sqrt(__FLT_EPSILON__)
 
 // Returns `true` if `x` and `y` are equal within `SPDefaultTolerance`
 #define _sp_almost_equal(x, y) (fabs((x) - (y)) < SPDefaultTolerance)

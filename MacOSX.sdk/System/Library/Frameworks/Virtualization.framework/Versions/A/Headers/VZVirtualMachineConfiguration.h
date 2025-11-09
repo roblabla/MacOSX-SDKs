@@ -2,7 +2,7 @@
 //  VZVirtualMachineConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2024 Apple Inc. All rights reserved.
+//  Copyright © 2019-2025 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -222,25 +222,25 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 #endif
 
 /*!
- @abstract: Minimum amount of memory required by virtual machines.
+ @abstract Minimum amount of memory required by virtual machines.
  @see VZVirtualMachineConfiguration.memorySize
  */
 @property (class, readonly) uint64_t minimumAllowedMemorySize;
 
 /*!
- @abstract: Maximum amount of memory allowed for a virtual machine.
+ @abstract Maximum amount of memory allowed for a virtual machine.
  @see VZVirtualMachineConfiguration.memorySize
  */
 @property (class, readonly) uint64_t maximumAllowedMemorySize;
 
 /*!
- @abstract: Minimum number of CPUs for a virtual machine.
+ @abstract Minimum number of CPUs for a virtual machine.
  @see VZVirtualMachineConfiguration.CPUCount
  */
 @property (class, readonly) NSUInteger minimumAllowedCPUCount;
 
 /*!
- @abstract: Maximum number of CPUs for a virtual machine.
+ @abstract Maximum number of CPUs for a virtual machine.
  @see VZVirtualMachineConfiguration.CPUCount
  */
 @property (class, readonly) NSUInteger maximumAllowedCPUCount;

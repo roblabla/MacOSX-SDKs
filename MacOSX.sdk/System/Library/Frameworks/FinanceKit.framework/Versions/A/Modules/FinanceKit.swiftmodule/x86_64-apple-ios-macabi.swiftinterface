@@ -1,17 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 224.5.3 -module-name FinanceKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
-import CoreData
-import CoreGraphics
-@_exported import FinanceKit
-import Foundation
-import Swift
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
-import os.log
-import os
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 310.0.1 -module-name FinanceKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+public import ExtensionFoundation
+@_exported public import FinanceKit
+public import Foundation
+public import Swift
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
 @available(iOS 17, *)
 @available(tvOS, unavailable)
 @available(macOS, unavailable)
@@ -42,7 +39,50 @@ extension FinanceKit.FinanceStore {
 @available(macOS, unavailable)
 @available(watchOS, unavailable)
 extension FinanceKit.FinanceStore {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func containsOrder(matching fqoid: FinanceKit.FullyQualifiedOrderIdentifier, updatedDate: Foundation.Date? = nil) async throws -> FinanceKit.FinanceStore.ContainsOrderResult
+  #endif
+}
+@available(iOS 26.0, *)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+extension FinanceKit.FinanceStore {
+  public enum BackgroundDataType : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    case accounts
+    case accountBalances
+    case transactions
+    public static func == (a: FinanceKit.FinanceStore.BackgroundDataType, b: FinanceKit.FinanceStore.BackgroundDataType) -> Swift.Bool
+    public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: any Swift.Decoder) throws
+  }
+  public enum UpdateFrequency : Swift.Codable, Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    case hourly
+    case daily
+    case weekly
+    public static func == (a: FinanceKit.FinanceStore.UpdateFrequency, b: FinanceKit.FinanceStore.UpdateFrequency) -> Swift.Bool
+    public func encode(to encoder: any Swift.Encoder) throws
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+    public init(from decoder: any Swift.Decoder) throws
+  }
+}
+@available(iOS 26.0, *)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+extension FinanceKit.FinanceStore {
+  public func enableBackgroundDelivery(for types: [FinanceKit.FinanceStore.BackgroundDataType], frequency: FinanceKit.FinanceStore.UpdateFrequency)
+  public func disableBackgroundDelivery(for types: [FinanceKit.FinanceStore.BackgroundDataType])
+  public func disableAllBackgroundDelivery()
 }
 @available(iOS 17, *)
 @available(tvOS, unavailable)
@@ -82,6 +122,12 @@ extension FinanceKit.FinanceStore {
 extension FinanceKit.FinanceStore {
   public enum DataType : Swift.Equatable, Swift.Sendable {
     case orders
+    @available(iOS 17.4, *)
+    @available(tvOS, unavailable)
+    @available(macOS, unavailable)
+    @available(watchOS, unavailable)
+    @available(macCatalyst, unavailable)
+    case financialData
     public static func == (a: FinanceKit.FinanceStore.DataType, b: FinanceKit.FinanceStore.DataType) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -95,6 +141,22 @@ extension FinanceKit.FinanceStore {
 @available(watchOS, unavailable)
 extension FinanceKit.FinanceStore {
   public static func isDataAvailable(_ type: FinanceKit.FinanceStore.DataType) -> Swift.Bool
+}
+@available(iOS 26.0, *)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+public protocol BackgroundDeliveryExtensionProviding {
+  func didReceiveData(for types: [FinanceKit.FinanceStore.BackgroundDataType]) async
+  func willTerminate() async
+}
+@available(iOS 26.0, *)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+public protocol BackgroundDeliveryExtension : ExtensionFoundation.AppExtension, FinanceKit.BackgroundDeliveryExtensionProviding {
 }
 @available(iOS 17, *)
 @available(tvOS, unavailable)
@@ -150,12 +212,16 @@ public enum FinanceError : Foundation.CustomNSError, Foundation.LocalizedError, 
   public static var errorDomain: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
+  #endif
   public static func == (a: FinanceKit.FinanceError, b: FinanceKit.FinanceError) -> Swift.Bool
 }
 @available(iOS 17, *)

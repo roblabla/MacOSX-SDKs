@@ -62,6 +62,8 @@
 #define UTUN_OPT_KPIPE_TX_RING_SIZE                     25      /* Must be set before connecting */
 #define UTUN_OPT_KPIPE_RX_RING_SIZE                     26      /* Must be set before connecting */
 #define UTUN_OPT_ATTACH_FLOWSWITCH                      27      /* Must be set before connecting */
+#define UTUN_OPT_CHANNEL_BIND_UUID                      28      /* Must be set before connecting */
+#define UTUN_OPT_CHANNEL_BIND_PID                       29      /* Must be set before connecting */
 
 /*
  * Flags for by UTUN_OPT_FLAGS

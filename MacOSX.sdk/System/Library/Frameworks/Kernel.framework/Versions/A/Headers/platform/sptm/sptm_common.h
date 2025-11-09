@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023 Apple Inc. All rights reserved.
+ * Copyright (c) 2023-2024 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -53,107 +53,40 @@
 #define XNU_HIB_DOMAIN 4U
 #define MAX_DOMAINS    5U
 
-/* SPTM-owned type IDs */
-#define SPTM_UNTYPED                0U
-#define SPTM_UNUSED                 1U
-#define SPTM_DEFAULT                2U
-#define SPTM_RO                     3U
-#define SPTM_CODE                   4U
-#define SPTM_TXM_CODE               5U
-#define SPTM_XNU_CODE               6U
-#define SPTM_XNU_CODE_DBG_RW        7U   // Replaces SPTM_XNU_CODE if CTRR off.
-#define SPTM_KERNEL_ROOT_TABLE      8U
-#define SPTM_PAGE_TABLE             9U
-#define SPTM_IOMMU_BOOTSTRAP        10U
-
-/* XNU-owned type IDs */
-#define XNU_DEFAULT                 11U
-#define XNU_RO                      12U
-#define XNU_RO_DBG_RW               13U   // Replaces XNU_RO if CTRR off.
-#define XNU_USER_EXEC               14U
-#define XNU_USER_DEBUG              15U
-#define XNU_USER_JIT                16U
-#define XNU_USER_ROOT_TABLE         17U
-#define XNU_SHARED_ROOT_TABLE       18U
-#define XNU_PAGE_TABLE              19U
-#define XNU_PAGE_TABLE_SHARED       20U
-#define XNU_PAGE_TABLE_ROZONE       21U
-#define XNU_PAGE_TABLE_COMMPAGE     22U
-#define XNU_IOMMU                   23U
-#define XNU_ROZONE                  24U
-#define XNU_IO                      25U
-#define XNU_PROTECTED_IO            26U
-#define XNU_COMMPAGE_RW             27U
-#define XNU_COMMPAGE_RO             28U
-#define XNU_COMMPAGE_RX             29U
-#define XNU_TAG_STORAGE             30U
-#define XNU_STAGE2_ROOT_TABLE       31U
-#define XNU_STAGE2_PAGE_TABLE       32U
-#define XNU_KERNEL_RESTRICTED       33U
-#define XNU_RESERVED_1              34U
-#define XNU_RESERVED_2              35U
-#define XNU_RESTRICTED_IO           36U
-#define XNU_RESTRICTED_IO_TELEMETRY 37U
-
-/* TXM-owned type IDs */
-#define TXM_DEFAULT                 38U
-#define TXM_RO                      39U
-#define TXM_RW                      40U
-#define TXM_CPU_STACK               41U
-#define TXM_THREAD_STACK            42U
-#define TXM_ADDRESS_SPACE_TABLE     43U
-#define TXM_MALLOC_PAGE             44U
-#define TXM_FREE_LIST               45U
-#define TXM_SLAB_TRUST_CACHE        46U
-#define TXM_SLAB_PROFILE            47U
-#define TXM_SLAB_CODE_SIGNATURE     48U
-#define TXM_SLAB_CODE_REGION        49U
-#define TXM_SLAB_ADDRESS_SPACE      50U
-#define TXM_BUCKET_1024             51U
-#define TXM_BUCKET_2048             52U
-#define TXM_BUCKET_4096             53U
-#define TXM_BUCKET_8192             54U
-#define TXM_BULK_DATA               55U
-#define TXM_BULK_DATA_READ_ONLY     56U
-#define TXM_LOG                     57U
-#define TXM_SEP_SECURE_CHANNEL      58U
-
-/* SK-owned type IDs */
-#define SK_DEFAULT                  59U
-#define SK_SHARED_RO                60U
-#define SK_SHARED_RW                61U
-#define SK_IO                       62U
-
-#define N_FRAME_TYPES               63U
-#define FRAME_TYPE_INVALID          255U
+/* Invalid Domain ID to represent a non-panicking domain. */
+#define NO_PANICKING_DOMAIN 255U
 
 /* SPTM Dispatch Table IDs */
-#define SPTM_DISPATCH_TABLE_XNU_BOOTSTRAP         0
-#define SPTM_DISPATCH_TABLE_TXM_BOOTSTRAP         1
-#define SPTM_DISPATCH_TABLE_SK_BOOTSTRAP          2
-#define SPTM_DISPATCH_TABLE_T8110_DART_XNU        3
-#define SPTM_DISPATCH_TABLE_T8110_DART_SK         4
-#define SPTM_DISPATCH_TABLE_SART                  5
-#define SPTM_DISPATCH_TABLE_NVME                  6
-#define SPTM_DISPATCH_TABLE_UAT                   7
-#define SPTM_DISPATCH_TABLE_SHART                 8
-#define SPTM_DISPATCH_TABLE_RESERVED              9
-#define SPTM_DISPATCH_TABLE_HIB                   10
-#define SPTM_DISPATCH_TABLE_INVALID               11
+#define SPTM_DISPATCH_TABLE_XNU_BOOTSTRAP  0
+#define SPTM_DISPATCH_TABLE_TXM_BOOTSTRAP  1
+#define SPTM_DISPATCH_TABLE_SK_BOOTSTRAP   2
+#define SPTM_DISPATCH_TABLE_T8110_DART_XNU 3
+#define SPTM_DISPATCH_TABLE_T8110_DART_SK  4
+#define SPTM_DISPATCH_TABLE_SART           5
+#define SPTM_DISPATCH_TABLE_NVME           6
+#define SPTM_DISPATCH_TABLE_UAT            7
+#define SPTM_DISPATCH_TABLE_SHART          8
+#define SPTM_DISPATCH_TABLE_RESERVED 9
+#define SPTM_DISPATCH_TABLE_HIB           10
+#define SPTM_DISPATCH_TABLE_GEN3_DART_XNU 11
+#define SPTM_DISPATCH_TABLE_GEN3_DART_SK  12
+#define SPTM_DISPATCH_TABLE_INVALID       13
 
 #define SPTM_DISPATCH_TABLE_RETURN_TO_CALLER      0xFD
 #define SPTM_DISPATCH_TABLE_PANIC                 0xFE
 #define SPTM_DISPATCH_TABLE_EXCEPTION_STATE_SAVED 0xFF
 
 /* SPTM Feature Flags */
-#define SPTM_FEATURE_SYSREG                       4ULL
-#define SPTM_FEATURE_BTI                          8ULL
+#define SPTM_FEATURE_SYSREG                (1ULL << 2)
+#define SPTM_FEATURE_BTI                   (1ULL << 3)
+#define SPTM_FEATURE_LARGE_MEMORY          (1ULL << 4)
+#define SPTM_FEATURE_LARGE_MEMORY_KERNONLY (1ULL << 5)
 
 /**
-  * For drivers that support both XNU and SK-dedicated dispatch tables,
-  * offset from a given IOMMU driver's primary dispatch table at which to find the
-  * driver's SK-dedicated dispatch table.
-  */
+ * For drivers that support both XNU and SK-dedicated dispatch tables,
+ * offset from a given IOMMU driver's primary dispatch table at which to find the
+ * driver's SK-dedicated dispatch table.
+ */
 #define IOMMU_SK_DISPATCH_TABLE_ID_OFFSET 1
 
 /**
@@ -177,10 +110,15 @@
 /**
  * Make sure that any IOMMU SK-dedicated dispatch table IDs follow the XNU-dedicated counterpart.
  *
- * @note IOMMU Driver developers adding new SK-dedicated tables must add static asserts to enforce this invariant below.
+ * @note IOMMU Driver developers adding new SK-dedicated tables must add static asserts to enforce
+ *       this invariant below.
  */
-_Static_assert(SPTM_DISPATCH_TABLE_T8110_DART_SK == (SPTM_DISPATCH_TABLE_T8110_DART_XNU + IOMMU_SK_DISPATCH_TABLE_ID_OFFSET),
-    "DART Driver XNU and SK dispatch table IDs not [IOMMU_SK_DISPATCH_TABLE_ID_OFFSET] apart");
+_Static_assert(SPTM_DISPATCH_TABLE_T8110_DART_SK ==
+        (SPTM_DISPATCH_TABLE_T8110_DART_XNU + IOMMU_SK_DISPATCH_TABLE_ID_OFFSET),
+    "T8110 DART Driver XNU and SK dispatch table IDs not [IOMMU_SK_DISPATCH_TABLE_ID_OFFSET] apart");
+_Static_assert(SPTM_DISPATCH_TABLE_GEN3_DART_SK ==
+        (SPTM_DISPATCH_TABLE_GEN3_DART_XNU + IOMMU_SK_DISPATCH_TABLE_ID_OFFSET),
+    "GEN3 DART Driver XNU and SK dispatch table IDs not [IOMMU_SK_DISPATCH_TABLE_ID_OFFSET] apart");
 #endif
 
 /**
@@ -193,7 +131,7 @@ _Static_assert(SPTM_DISPATCH_TABLE_T8110_DART_SK == (SPTM_DISPATCH_TABLE_T8110_D
  * Set the specified [n] number of LSBs of an unsigned integer type.
  * The result type is the type of `SET_BIT(n)`.
  */
-#define _ONES(n) (SET_BIT(n)-1)
+#define _ONES(n) (SET_BIT(n) - 1)
 
 /**
  * Create a bitfield mask of length [bits] starting at LSB [shift]
@@ -205,7 +143,7 @@ _Static_assert(SPTM_DISPATCH_TABLE_T8110_DART_SK == (SPTM_DISPATCH_TABLE_T8110_D
  * Mask and shift to extract a bitfield.
  * The result type is the type of `val + SET_BIT(width)`.
  */
-#define EXTRACT_BITFIELD(width, shift, val) (((val) & BITFIELD_MASK((width),(shift))) >> shift)
+#define EXTRACT_BITFIELD(width, shift, val) (((val) & BITFIELD_MASK((width), (shift))) >> shift)
 
 /**
  * Mask and shift to pack a bitfield.
@@ -217,19 +155,20 @@ _Static_assert(SPTM_DISPATCH_TABLE_T8110_DART_SK == (SPTM_DISPATCH_TABLE_T8110_D
 #define DOMAIN_ID_SHIFT 48
 #define DOMAIN_ID_WIDTH 8
 #define EXTRACT_DOMAIN_ID(x) \
-    ((sptm_domain_t)EXTRACT_BITFIELD(DOMAIN_ID_WIDTH, DOMAIN_ID_SHIFT, (x)))
+	((sptm_domain_t)EXTRACT_BITFIELD(DOMAIN_ID_WIDTH, DOMAIN_ID_SHIFT, (x)))
 #define PACK_DOMAIN_ID(x) PACK_BITFIELD(DOMAIN_ID_WIDTH, DOMAIN_ID_SHIFT, (x))
 
 #define DISPATCH_TABLE_ID_SHIFT 32
 #define DISPATCH_TABLE_ID_WIDTH 8
-#define EXTRACT_TABLE_ID(x) \
-    ((sptm_dispatch_table_id_t)EXTRACT_BITFIELD(DISPATCH_TABLE_ID_WIDTH, DISPATCH_TABLE_ID_SHIFT, (x)))
+#define EXTRACT_TABLE_ID(x)                                                                       \
+	((sptm_dispatch_table_id_t)EXTRACT_BITFIELD(DISPATCH_TABLE_ID_WIDTH, DISPATCH_TABLE_ID_SHIFT, \
+	    (x)))
 #define PACK_TABLE_ID(x) PACK_BITFIELD(DISPATCH_TABLE_ID_WIDTH, DISPATCH_TABLE_ID_SHIFT, (x))
 
 #define ENDPOINT_ID_SHIFT 0
 #define ENDPOINT_ID_WIDTH 32
 #define EXTRACT_ENDPOINT_ID(x) \
-    ((sptm_dispatch_endpoint_id_t)EXTRACT_BITFIELD(ENDPOINT_ID_WIDTH, ENDPOINT_ID_SHIFT, (x)))
+	((sptm_dispatch_endpoint_id_t)EXTRACT_BITFIELD(ENDPOINT_ID_WIDTH, ENDPOINT_ID_SHIFT, (x)))
 #define PACK_ENDPOINT_ID(x) PACK_BITFIELD(ENDPOINT_ID_WIDTH, ENDPOINT_ID_SHIFT, (x))
 
 #define BUILD_DISPATCH_ID(domain, table, endpoint) \
@@ -237,9 +176,15 @@ _Static_assert(SPTM_DISPATCH_TABLE_T8110_DART_SK == (SPTM_DISPATCH_TABLE_T8110_D
 
 /* Helper macros for dispatch ID construction and stringification helpers for GEN_NAMED_STUB */
 #define _STRINGIFY(A) #A
-#define _XSTR(A) _STRINGIFY(A)
-#define GEN_DISPATCH_ID_STR(domain, table, endpoint) _XSTR(BUILD_DISPATCH_ID(domain, table, endpoint))
+#define _XSTR(A)      _STRINGIFY(A)
+#define GEN_DISPATCH_ID_STR(domain, table, endpoint) \
+	_XSTR(BUILD_DISPATCH_ID(domain, table, endpoint))
 
+/**
+ * Clang-format does not understand assembler macros, so disable formatting around all of the
+ * assembler-only code.
+ */
+/* clang-format off */
 #ifdef __ASSEMBLER__
 /**
  * Assembler macro for loading the SPTM call register with the dispatch ID
@@ -399,6 +344,8 @@ LEXT(\stub_name)
 #endif
 .endm
 
+/* clang-format on */
+
 #define SPTM_VECTOR_IRQ    0
 #define SPTM_VECTOR_FIQ    1
 #define SPTM_VECTOR_SERROR 2
@@ -418,7 +365,7 @@ __BEGIN_DECLS
  * The maximum number of shared regions that can exist at any single point in
  * time. TXM needs this define which is why it's in this file.
  */
-#define SHARED_REGION_MAX 255
+#define SHARED_REGION_MAX 255U
 
 /* User-facing SPTM-defined types */
 typedef uint64_t sptm_paddr_t;
@@ -430,7 +377,6 @@ typedef uint64_t sptm_vaddr_t;
 typedef uint64_t sptm_voff_t;
 typedef uint64_t sptm_papt_t;
 typedef uint8_t sptm_domain_t;
-typedef uint8_t sptm_frame_type_t;
 typedef uint32_t sptm_return_t;
 typedef uint64_t sptm_pte_t;
 typedef uint64_t sptm_tte_t;
@@ -438,6 +384,103 @@ typedef uint8_t sptm_pt_level_t;
 typedef uint8_t sptm_iommu_id_t;
 typedef uint16_t sptm_instance_id_t;
 typedef uint32_t sptm_iommu_retype_params_t;
+
+/**
+ * The heart of the SPTM is its type system; here's the exhaustive list :).
+ *
+ * @note For all types T, make sure there's an entry for T in the `type_strings`
+ *       array for debugging purposes.
+ */
+__enum_closed_decl(sptm_frame_type_t,
+    uint8_t,
+    {
+        /* SPTM-owned type IDs */
+        SPTM_UNTYPED,
+        SPTM_UNUSED,
+        SPTM_DEFAULT,
+        SPTM_RO,
+        SPTM_CODE,
+        SPTM_TXM_CODE,
+        SPTM_XNU_CODE,
+        SPTM_XNU_CODE_DBG_RW, // Replaces SPTM_XNU_CODE if CTRR off.
+        SPTM_KERNEL_ROOT_TABLE,
+        SPTM_PAGE_TABLE,
+        SPTM_IOMMU_BOOTSTRAP,
+
+        /* XNU-owned type IDs */
+        XNU_DEFAULT,
+        XNU_RO,
+        XNU_RO_DBG_RW, /* Replaces XNU_RO if CTRR off. */
+        XNU_USER_EXEC,
+        XNU_USER_DEBUG,
+        XNU_USER_JIT,
+        XNU_USER_ROOT_TABLE,
+        XNU_SHARED_ROOT_TABLE,
+        XNU_PAGE_TABLE,
+        XNU_PAGE_TABLE_SHARED,
+        XNU_PAGE_TABLE_ROZONE,
+        XNU_PAGE_TABLE_COMMPAGE,
+        XNU_IOMMU,
+        XNU_ROZONE,
+        XNU_IO,
+        XNU_PROTECTED_IO,
+        XNU_COMMPAGE_RW,
+        XNU_COMMPAGE_RO,
+        XNU_COMMPAGE_RX,
+        XNU_TAG_STORAGE,
+        XNU_STAGE2_ROOT_TABLE,
+        XNU_STAGE2_PAGE_TABLE,
+        XNU_KERNEL_RESTRICTED,
+        XNU_RESERVED_1,
+        XNU_RESERVED_2,
+        XNU_RESTRICTED_IO,
+        XNU_RESTRICTED_IO_TELEMETRY,
+        XNU_SUBPAGE_USER_ROOT_TABLES,
+
+        /* TXM-owned type IDs */
+        TXM_DEFAULT,
+        TXM_RO,
+        TXM_RW,
+        TXM_CPU_STACK,
+        TXM_THREAD_STACK,
+        TXM_ADDRESS_SPACE_TABLE,
+        TXM_MALLOC_PAGE,
+        TXM_FREE_LIST,
+        TXM_SLAB_TRUST_CACHE,
+        TXM_SLAB_PROFILE,
+        TXM_SLAB_CODE_SIGNATURE,
+        TXM_SLAB_CODE_REGION,
+        TXM_SLAB_ADDRESS_SPACE,
+        TXM_BUCKET_1024,
+        TXM_BUCKET_2048,
+        TXM_BUCKET_4096,
+        TXM_BUCKET_8192,
+        TXM_BULK_DATA,
+        TXM_BULK_DATA_READ_ONLY,
+        TXM_LOG,
+        TXM_SEP_SECURE_CHANNEL,
+
+        /* SK-owned type IDs */
+        SK_DEFAULT,
+        SK_SHARED_RO,
+        SK_SHARED_RW,
+        SK_IO,
+
+        /* Everything below this point is not a real type ID */
+
+        /* The number of real type IDs */
+        N_FRAME_TYPES,
+
+        FRAME_TYPE_INVALID,
+
+        /**
+         * A sentinel frame type used by some APIs. It may be passed by the caller
+         * as the source type when retyping entire regions of memory, and behaves as
+         * a catch-all value that will cause the entire region to be retyped,
+         * regardless of the source type.
+         */
+        FRAME_TYPE_ANY,
+    });
 
 /**
  * A bitmask type to represent all frame types.
@@ -487,19 +530,21 @@ typedef uint8_t sptm_dispatch_endpoint_id_t;
  * computing the offset of the XNU exception vector to hand control to when
  * an exception occurs during SPTM runtime.
  */
-__enum_closed_decl(sptm_vector_type_t, uint8_t, {
-	SPTM_VECTOR_IRQ,
-	SPTM_VECTOR_FIQ,
-	SPTM_VECTOR_SERROR,
-	SPTM_VECTOR_SYNC,
-	SPTM_N_VECTOR_TYPES,
-});
+__enum_closed_decl(sptm_vector_type_t,
+    uint8_t,
+    {
+        SPTM_VECTOR_IRQ,
+        SPTM_VECTOR_FIQ,
+        SPTM_VECTOR_SERROR,
+        SPTM_VECTOR_SYNC,
+        SPTM_N_VECTOR_TYPES,
+    });
 
 /**
  * SPTM Trace structure definition.
  */
-#define SPTM_TRACE_SIZE_SHIFT (6)
-#define SPTM_TRACE_SIZE       (1) << SPTM_TRACE_SIZE_SHIFT
+#define SPTM_TRACE_SIZE_SHIFT     (6)
+#define SPTM_TRACE_SIZE           (1) << SPTM_TRACE_SIZE_SHIFT
 
 typedef struct {
 	/* Unique trace identifier */
@@ -516,7 +561,7 @@ typedef struct {
 
 	/* Union  */
 	union {
-#define SPTM_TRACE_MAX_PARAMS 6
+#define SPTM_TRACE_MAX_PARAMS     6
 		uint64_t params[SPTM_TRACE_MAX_PARAMS];
 	};
 } sptm_trace_t __attribute__((aligned((SPTM_TRACE_SIZE))));
@@ -554,7 +599,9 @@ enum : uint32_t {
  *       as well, with an entry that maps the new violation ID with a description string.
  */
 #define VIOLATION_FIRST_PUBLIC_ID 0xFF000000U
-#define VIOLATION_PUBLIC_ID_MASK(violation_id) SET_BIT(((violation_id) & ~VIOLATION_FIRST_PUBLIC_ID))
+#define VIOLATION_PUBLIC_ID_MASK(violation_id) \
+	SET_BIT(((violation_id) & ~VIOLATION_FIRST_PUBLIC_ID))
+
 enum : uint32_t {
 	VIOLATION_INVALID_IO_PADDR = VIOLATION_FIRST_PUBLIC_ID,
 	VIOLATION_INVALID_DT_RANGE,
@@ -574,8 +621,7 @@ typedef struct {
 	sptm_trace_t buffer[SPTM_TRACE_N_TRACES_PER_BUFFER];
 } sptm_trace_buffer_t __attribute__((aligned((1 << 14))));
 
-_Static_assert(sizeof(sptm_trace_buffer_t) == (1 << 14),
-    "Unexpected size for sptm_trace_buffer_t.");
+_Static_assert(sizeof(sptm_trace_buffer_t) == (1 << 14), "Unexpected size for sptm_trace_buffer_t.");
 
 /**
  * Structure that must be passed to the libsptm library's initialization
@@ -589,14 +635,17 @@ _Static_assert(sizeof(sptm_trace_buffer_t) == (1 << 14),
  *       SPTM implementation detail. The library code will type-cast these
  *       values correctly as its built with the internal headers.
  */
-#define LIBSPTM_VERSION_1 1U
-#define LIBSPTM_VERSION_2 2U
-#define LIBSPTM_VERSION_3 3U
-#define LIBSPTM_VERSION_4 4U
-#define LIBSPTM_VERSION_5 5U
-#define LIBSPTM_VERSION_6 6U
-#define LIBSPTM_VERSION_7 7U
-#define LIBSPTM_VERSION LIBSPTM_VERSION_7
+#define LIBSPTM_VERSION_1              1U
+#define LIBSPTM_VERSION_2              2U
+#define LIBSPTM_VERSION_3              3U
+#define LIBSPTM_VERSION_4              4U
+#define LIBSPTM_VERSION_5              5U
+#define LIBSPTM_VERSION_6              6U
+#define LIBSPTM_VERSION_7              7U
+#define LIBSPTM_VERSION_8              8U
+#define LIBSPTM_VERSION_9              9U
+#define LIBSPTM_VERSION                LIBSPTM_VERSION_9
+
 typedef struct sptm_client_state {
 	/* Version number identifying the set of included fields */
 	int version;
@@ -639,7 +688,7 @@ typedef struct sptm_client_state {
 	 * LIBSPTM_CPU_FEATURE_USERAT: Set if the current system supports executing
 	 *                             the AT instruction in userspace.
 	 */
-	#define LIBSPTM_CPU_FEATURE_USERAT 1U
+#define LIBSPTM_CPU_FEATURE_USERAT     1U
 	uint64_t cpu_features;
 
 	/* Number of IO frame table ranges */
@@ -674,8 +723,22 @@ typedef struct sptm_client_state {
 	/* Version 7 fields: */
 	uint64_t feature_flags;
 
+	/* Version 8 fields: */
+	/* Virtual address of the allowed IO frame table and its size */
+	const void *allowed_io_frame_table;
+	unsigned int sptm_n_allowed_io_ranges;
+
+	/* Virtual address of the sptm_pmap_io_ranges table and its size */
+	const void *sptm_pmap_io_ranges;
+	unsigned int sptm_pmap_io_ranges_count;
+	/* End of Version 8 fields */
+
+	/* Version 9 fields: */
+	sptm_domain_t *sptm_panicking_domain_id;
+	/* End of Version 9 fields */
+
 	/* Padding for future expansion */
-	uint8_t reserved[136];
+	uint8_t reserved[96];
 } libsptm_state_t;
 
 /**
@@ -693,7 +756,7 @@ _Static_assert(sizeof(libsptm_state_t) == 312, "unexpected libsptm_state_t size"
  * to sptm_retype() depending on the type that a frame is
  * being transitioned to.
  */
- typedef struct {
+typedef struct {
 	union {
 		/* Retype parameters when retyping to a CPU root table. */
 		struct {
@@ -775,16 +838,16 @@ _Static_assert(sizeof(libsptm_state_t) == 312, "unexpected libsptm_state_t size"
 		uint64_t raw_U;
 #endif
 	};
- } sptm_retype_params_t;
+} sptm_retype_params_t;
 
 /* Use this value when no retyping parameters are needed. */
- #define SPTM_RETYPE_PARAMS_NULL (0ULL)
+#define SPTM_RETYPE_PARAMS_NULL (0ULL)
 
 /**
  * An sptm_retype_params_t object should fit in a register.
  */
 _Static_assert(sizeof(sptm_retype_params_t) == sizeof(uint64_t),
-	"sptm_retype_params_t does not fit in a single register");
+    "sptm_retype_params_t does not fit in a single register");
 
 /**
  * Arguments for a domain-specific call, passed to the stub that
@@ -808,21 +871,21 @@ typedef struct {
  * assert that each field is where we expect.
  */
 _Static_assert(offsetof(sptm_call_regs_t, x0) == (0 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 _Static_assert(offsetof(sptm_call_regs_t, x1) == (1 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 _Static_assert(offsetof(sptm_call_regs_t, x2) == (2 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 _Static_assert(offsetof(sptm_call_regs_t, x3) == (3 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 _Static_assert(offsetof(sptm_call_regs_t, x4) == (4 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 _Static_assert(offsetof(sptm_call_regs_t, x5) == (5 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 _Static_assert(offsetof(sptm_call_regs_t, x6) == (6 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 _Static_assert(offsetof(sptm_call_regs_t, x7) == (7 * sizeof(uint64_t)),
-	"Unexpected sptm_call_regs_t offset");
+    "Unexpected sptm_call_regs_t offset");
 
 /**
  * Instantiates an entry stub with the specified name with the specified dispatch information.
@@ -838,7 +901,10 @@ _Static_assert(offsetof(sptm_call_regs_t, x7) == (7 * sizeof(uint64_t)),
  *
  * @return If the stub's dispatch destination returns a value (or values), it
  *         is in accordance with the 64-bit AAPCS.
+ *
+ * Disable clang-format around this macro as it gets very confused by macro-ized assembly.
  */
+/* clang-format off */
 #define GEN_NAMED_STUB(location_directive, function_name, entry_stub_name, domain_ID, table_ID, endpoint_ID) \
 	__asm__ ( location_directive " \n" \
 			 ".align 2 \n" \
@@ -847,6 +913,7 @@ _Static_assert(offsetof(sptm_call_regs_t, x7) == (7 * sizeof(uint64_t)),
 			 "bti c\n" \
 			 GEN_LOAD_DISPATCH_ID_CODE_SEQUENCE(domain_ID, table_ID, endpoint_ID) \
 			 "b _" entry_stub_name "\n")
+/* clang-format on */
 
 #if defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SK_CLIENT) || defined(SPTM_INTERNAL)
 /**
@@ -876,8 +943,9 @@ _Static_assert(offsetof(sptm_call_regs_t, x7) == (7 * sizeof(uint64_t)),
  * @return If the stub's dispatch destination returns a value (or values), it
  *         is in accordance with the 64-bit AAPCS.
  */
-#define GEN_NAMED_SPTM_GUEST_STUB(function_name, table_ID, endpoint_ID) \
-	GEN_NAMED_STUB(".text", function_name, "sptm_guest_mode_enter", SPTM_DOMAIN, table_ID, endpoint_ID)
+#define GEN_NAMED_SPTM_GUEST_STUB(function_name, table_ID, endpoint_ID)                    \
+	GEN_NAMED_STUB(".text", function_name, "sptm_guest_mode_enter", SPTM_DOMAIN, table_ID, \
+	    endpoint_ID)
 
 /**
  * Instantiates a named SPTM entry stub with the specified dispatch information
@@ -899,9 +967,9 @@ _Static_assert(offsetof(sptm_call_regs_t, x7) == (7 * sizeof(uint64_t)),
  * @return If the stub's dispatch destination returns a value (or values), it
  *         is in accordance with the 64-bit AAPCS.
  */
-#define GEN_NAMED_SPTM_STUB_BOOTEXEC(function_name, table_ID, endpoint_ID) \
-	GEN_NAMED_STUB(".section __TEXT_BOOT_EXEC, __bootcode, regular, pure_instructions", function_name, "sptm_enter", \
-	    SPTM_DOMAIN, table_ID, endpoint_ID)
+#define GEN_NAMED_SPTM_STUB_BOOTEXEC(function_name, table_ID, endpoint_ID)              \
+	GEN_NAMED_STUB(".section __TEXT_BOOT_EXEC, __bootcode, regular, pure_instructions", \
+	    function_name, "sptm_enter", SPTM_DOMAIN, table_ID, endpoint_ID)
 #endif /* defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SK_CLIENT) || defined(SPTM_INTERNAL) */
 
 /**
@@ -920,17 +988,15 @@ _Static_assert(offsetof(sptm_call_regs_t, x7) == (7 * sizeof(uint64_t)),
  * @param retype_params Type-specific information set at retype time.
  */
 #if !USE_UNSAFE_TYPES
-void sptm_retype(
-	sptm_paddr_t paddr,
-	sptm_frame_type_t current_type,
-	sptm_frame_type_t new_type,
-	sptm_retype_params_t retype_params);
+void sptm_retype(sptm_paddr_t paddr,
+    sptm_frame_type_t current_type,
+    sptm_frame_type_t new_type,
+    sptm_retype_params_t retype_params);
 #else
-void sptm_retype(
-	sptm_managed_page_u managed_page_U,
-	sptm_frame_type_t current_type,
-	sptm_frame_type_u new_type_U,
-	sptm_retype_params_t retype_params_U);
+void sptm_retype(sptm_managed_page_u managed_page_U,
+    sptm_frame_type_t current_type,
+    sptm_frame_type_u new_type_U,
+    sptm_retype_params_t retype_params_U);
 #endif
 
 #if defined(TXM_CLIENT) || defined(SK_CLIENT) || defined(SPTM_INTERNAL)
@@ -966,15 +1032,13 @@ void sptm_retype(
  *                    permissions = SET_BIT(XNU_DOMAIN) | SET_BIT(TXM_DOMAIN);
  */
 #if !USE_UNSAFE_TYPES
-void sptm_register_dispatch_table(
-	sptm_dispatch_table_id_t table_id,
-	sptm_vaddr_t dispatch_entry,
-	uint64_t permissions);
+void sptm_register_dispatch_table(sptm_dispatch_table_id_t table_id,
+    sptm_vaddr_t dispatch_entry,
+    uint64_t permissions);
 #else
-void sptm_register_dispatch_table(
-	sptm_dispatch_table_id_u table_id_U,
-	sptm_dispatch_entry_addr_u dispatch_entry_U,
-	uint64_t permissions);
+void sptm_register_dispatch_table(sptm_dispatch_table_id_u table_id_U,
+    sptm_dispatch_entry_addr_u dispatch_entry_U,
+    uint64_t permissions);
 #endif
 
 /**
@@ -1010,55 +1074,60 @@ void __attribute__((noreturn)) sptm_return_to_caller(uint64_t return_value);
  *
  * @note This function does not return.
  */
-void __attribute__((noreturn)) sptm_exception_state_saved(
-	sptm_vector_type_t vector_type,
-	bool scheduler_interrupted);
+void __attribute__((noreturn)) sptm_exception_state_saved(sptm_vector_type_t vector_type,
+    bool scheduler_interrupted);
 #endif /* defined(TXM_CLIENT) || defined(SK_CLIENT) */
 
 /* Return values from the utility functions */
-__enum_closed_decl(libsptm_error_t, uint8_t, {
-	/* The libsptm call completed with no failures. */
-	LIBSPTM_SUCCESS = 0,
+__enum_closed_decl(libsptm_error_t,
+    uint8_t,
+    {
+        /* The libsptm call completed with no failures. */
+        LIBSPTM_SUCCESS = 0,
 
-	/* libsptm_init has not been called. */
-	LIBSPTM_NOT_INITTED = 1,
+        /* libsptm_init has not been called. */
+        LIBSPTM_NOT_INITTED = 1,
 
-	/* An invalid argument was passed into the library. */
-	LIBSPTM_INVALID_ARG = 2,
+        /* An invalid argument was passed into the library. */
+        LIBSPTM_INVALID_ARG = 2,
 
-	/* Physical frame type mismatch. */
-	LIBSPTM_TYPE_MISMATCH = 3,
+        /* Physical frame type mismatch. */
+        LIBSPTM_TYPE_MISMATCH = 3,
 
-	/* Non-specific failure. */
-	LIBSPTM_FAILURE = 4
-});
+        /* Non-specific failure. */
+        LIBSPTM_FAILURE = 4,
+    });
 
 /**
  * Refcounts types of frame types to use when interacting with the
  * refcount query API.
  */
-__enum_closed_decl(libsptm_refcnt_type_t, uint8_t, {
-	/* Caller doesn't have mapping. */
-	SPTM_REFCOUNT_NONE = 0,
-	/* Caller claims to have one read-only mapping of a cpu_page frame. */
-	SPTM_REFCOUNT_RO = 1,
-	/* Caller claims to have one write-exec mapping of a cpu_page frame. */
-	SPTM_REFCOUNT_WX = 2,
-	/* Caller claims to have one mapping to an XNU_IOMMU frame. */
-	SPTM_REFCOUNT_IOMMU = 3
-});
+__enum_closed_decl(libsptm_refcnt_type_t,
+    uint8_t,
+    {
+        /* Caller doesn't have mapping. */
+        SPTM_REFCOUNT_NONE = 0,
+        /* Caller claims to have one read-only mapping of a cpu_page frame. */
+        SPTM_REFCOUNT_RO = 1,
+        /* Caller claims to have one write-exec mapping of a cpu_page frame. */
+        SPTM_REFCOUNT_WX = 2,
+        /* Caller claims to have one mapping to an XNU_IOMMU frame. */
+        SPTM_REFCOUNT_IOMMU = 3,
+    });
 
 /**
  * SPTM CPU state types to use when interacting with the SPTM
  * CPU state query API.
  */
-__enum_closed_decl(libsptm_cpu_state_t, uint8_t, {
-	/* CPU is running in SPTM interrupted context. */
-	CPUSTATE_SPTM_INTERRUPTED = 0,
+__enum_closed_decl(libsptm_cpu_state_t,
+    uint8_t,
+    {
+        /* CPU is running in SPTM interrupted context. */
+        CPUSTATE_SPTM_INTERRUPTED = 0,
 
-	/* CPU is halted in an indefinite panic spin state. */
-	CPUSTATE_PANIC_SPIN = 1,
-});
+        /* CPU is halted in an indefinite panic spin state. */
+        CPUSTATE_PANIC_SPIN = 1,
+    });
 
 /* SPTM Library Utility Functions. */
 #if defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SPTM_INTERNAL)
@@ -1077,7 +1146,7 @@ __enum_closed_decl(libsptm_cpu_state_t, uint8_t, {
  * @return LIBSPTM_INVALID_ARG if [statep] is NULL, otherwise LIBPSTM_SUCCESS.
  */
 extern libsptm_error_t __attribute__((__warn_unused_result__)) libsptm_init(
-	const libsptm_state_t *statep);
+    const libsptm_state_t *statep);
 
 /**
  * Translates the specified kernel virtual address to a physical address.
@@ -1094,8 +1163,8 @@ extern libsptm_error_t __attribute__((__warn_unused_result__)) libsptm_init(
  *         LIBPSPTM_INVALID_ARG if [paddrp] is NULL.
  *         LIBSPTM_FAILURE otherwise.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_kvtophys(
-	sptm_papt_t vaddr, sptm_paddr_t *paddrp);
+extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_kvtophys(sptm_papt_t vaddr,
+    sptm_paddr_t *paddrp);
 
 /**
  * Translates the physical address given to a virtual address within the
@@ -1113,8 +1182,8 @@ extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_kvtophys(
  *         LIBPSPTM_INVALID_ARG if [vaddrp] is NULL.
  *         LIBSPTM_FAILURE otherwise.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_phystokv(
-	sptm_paddr_t paddr, sptm_papt_t *vaddrp);
+extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_phystokv(sptm_paddr_t paddr,
+    sptm_papt_t *vaddrp);
 
 /**
  * Returns the frame type of the physical page backing the specified virtual
@@ -1136,8 +1205,8 @@ extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_phystokv(
  *         LIBPSPTM_INVALID_ARG if [frame_typep] is NULL.
  *         LIBSPTM_FAILURE otherwise.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_vaddr_type(
-	sptm_vaddr_t vaddr, sptm_frame_type_t *frame_typep);
+extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_vaddr_type(sptm_vaddr_t vaddr,
+    sptm_frame_type_t *frame_typep);
 
 /**
  * Returns the frame type of the specified physical page.
@@ -1156,8 +1225,8 @@ extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_vaddr_ty
  *         LIBPSPTM_INVALID_ARG if [frame_typep] is NULL.
  *         LIBSPTM_FAILURE otherwise.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_paddr_type(
-	sptm_paddr_t paddr, sptm_frame_type_t *frame_typep);
+extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_paddr_type(sptm_paddr_t paddr,
+    sptm_frame_type_t *frame_typep);
 
 /**
  * Provides information on whether the number of mappings of a given physical
@@ -1193,22 +1262,22 @@ extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_paddr_ty
  *         LIBPSPTM_INVALID_ARG if [is_lastp] is NULL.
  *         LIBSPTM_FAILURE otherwise.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_paddr_is_last_mapping(
-	sptm_paddr_t paddr,
-	libsptm_refcnt_type_t refcnt_type,
-	bool *is_lastp);
+extern libsptm_error_t __attribute__((__warn_unused_result__))
+sptm_paddr_is_last_mapping(sptm_paddr_t paddr, libsptm_refcnt_type_t refcnt_type, bool *is_lastp);
 
 /**
- * Provides information on whether the SPTM has triggered a panic or not.
+ * Retrieves the domain ID of the source that triggered the SPTM panic.
  *
- * @note This is an SPTM library function which does not require a call into the
- *       SPTM to complete.
+ * @param panic_domain_id Pointer to store the domain ID of the panicking source.
  *
- * @return LIBSPTM_SUCCESS if the information is correctly returned
- *         LIBSPTM_FAILURE otherwise.
+ * @return LIBSPTM_SUCCESS if the `panic_domain_id` pointer is successfully set.
+ *         LIBSPTM_NOT_INITTED if libsptm is not yet initialized
+ *         LIBPSPTM_INVALID_ARG if the input parameter `panic_domain_id` pointer is NULL.
+ *         LIBSPTM_FAILURE if `libsptm_panicking_domain_id` pointer is NULL or
+ *                         if `libsptm_panicking_domain_id` is an invalid domain.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_triggered_panic(
-	bool *sptm_panicked);
+extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_panic_source(
+    sptm_domain_t *panic_domain_id);
 
 /**
  * Provides information on the current dispatch state of each SPTM CPU.
@@ -1232,10 +1301,25 @@ extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_triggered_pa
  * @return LIBSPTM_SUCCESS if the information is correctly returned
  *         LIBSPTM_FAILURE otherwise.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_cpu_state(
-	uint64_t sptm_logical_cpu_id,
-	libsptm_cpu_state_t state_type,
-	bool *state);
+extern libsptm_error_t __attribute__((__warn_unused_result__))
+sptm_get_cpu_state(uint64_t sptm_logical_cpu_id, libsptm_cpu_state_t state_type, bool *state);
+
+/**
+ * Provides information on the current SPTM panic state.
+ *
+ * @note This is an SPTM library function which does not require a call into the
+ *       SPTM to complete.
+ *
+ * @param sptm_logical_cpu_id Pointer to the SPTM logical CPU ID to
+ *       be returned.
+ *
+ * @return LIBSPTM_SUCCESS if the information is correctly returned
+ *         LIBSPTM_NOT_INITTED if libsptm is not yet initialized
+ *         LIBSPTM_INVALID_ARG if the input parameter is NULL
+ *         LIBSPTM_FAILURE if there is not a recorded panicking CPU
+ */
+extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_panicking_cpu_id(
+    uint64_t *sptm_logical_cpu_id);
 
 /**
  * Provides information on whether certain optional features are supported.
@@ -1251,9 +1335,8 @@ extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_get_cpu_stat
  * @return LIBSPTM_SUCCESS if the information is correctly returned
  *         LIBSPTM_FAILURE otherwise.
  */
-extern libsptm_error_t __attribute__((__warn_unused_result__)) sptm_features_available(
-	uint64_t features,
-	bool *available);
+extern libsptm_error_t __attribute__((__warn_unused_result__))
+sptm_features_available(uint64_t features, bool *available);
 
 #endif /* defined(XNU_CLIENT) || defined(TXM_CLIENT) || defined(SPTM_INTERNAL) */
 

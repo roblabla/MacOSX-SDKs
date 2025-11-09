@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSceneKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1.2 -module-name SceneKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftSceneKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1.2 -module-name SceneKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreGraphics
 import Foundation
 @_exported import SceneKit
@@ -71,19 +71,33 @@ extension SceneKit.SCNBoundingVolume {
 }
 @available(iOS 8.0, macOS 10.8, *)
 extension SceneKit.SCNSceneSource {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func entryWithIdentifier<T>(_ uid: Swift.String, withClass entryClass: T.Type) -> T? where T : AnyObject
+  #endif
 }
 extension SceneKit.SCNVector3 : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout SceneKit.SCNVector3?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout SceneKit.SCNVector3?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> SceneKit.SCNVector3
+  #endif
   public typealias _ObjectiveCType = Foundation.NSValue
 }
 extension SceneKit.SCNVector4 : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout SceneKit.SCNVector4?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout SceneKit.SCNVector4?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> SceneKit.SCNVector4
+  #endif
   public typealias _ObjectiveCType = Foundation.NSValue
 }

@@ -76,6 +76,7 @@ enum
 		
 */
 typedef struct CM_BRIDGED_TYPE(id) opaqueCMSimpleQueue *CMSimpleQueueRef API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
+CM_SWIFT_INIT_FOR_CF_TYPE(CMSimpleQueue, API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0), visionos(1.0)))
 
 //=============================================================================
 

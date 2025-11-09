@@ -125,7 +125,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@abstract		Provides a stateless factory interface for creating new MERAWProcessor instances.
 	@discussion		The MERAWProcessorExtension protocol provides a factory method to create a new MERAWProcessor instance for a codecType implemented by the extension. A single MERAWProcessorExtension is instantiated by the Video Toolbox, and will be called to create individual MERAWProcessor instances as needed. If the codecType or FormatDescription passed to processorWithCodecType is not compatible with the MERAWProcessor implementation, the factory call should fail and return MEErrorUnsupportedFeature.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 @protocol MERAWProcessorExtension <NSObject>
 
 - (instancetype)init;
@@ -153,7 +153,7 @@ API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
 	@abstract		Describes pixel buffer requirements and creates new pixel buffers.
 	@discussion		Contains the interfaces that the App Extension RAW processor uses for two tasks. First, to declare its set of requirements for output CVPixelBuffers in the form of a pixelBufferAttributes dictionary. Second, to create pixelBuffers which match processor output requirements but also satisfy VideoToolbox and client requirements.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 @interface MERAWProcessorPixelBufferManager : NSObject
 
 /*!
@@ -182,8 +182,8 @@ API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
 	@abstract		An object implementing this protocol is implemented by the RAW Processor to describe each processing parameter the Processor exposes.
 	@discussion		The MERAWProcessingParameter protocol provides an interface for the VideoToolbox to query descriptions of the different parameters that can be used to influence Processor operation.  A distinct MERAWProcessingParameter is created for each parameter supported by the Processor, and the set of supported parameters is returned by the MERAWProcessor's processingParameters interface.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
-@interface MERAWProcessingParameter : NSObject 
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
+@interface MERAWProcessingParameter : NSObject
 
 /*!
  @property		name
@@ -217,7 +217,7 @@ API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
 	@abstract		An object implementing this protocol is implemented by the RAW Processor to describe each processing parameter the Processor exposes.
 	@discussion		The MERAWProcessingListElementParameter protocol provides an interface for VideoToolbox to query descriptions of the different elements in a parameter list  for a List element in a MERAWProcessingParameter.  A distinct MERAWProcessingListElementParameter is created for each list element.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 NS_SWIFT_NAME(MERAWProcessingParameter.ListElement)
 @interface MERAWProcessingListElementParameter : MERAWProcessingParameter
 
@@ -232,7 +232,7 @@ NS_SWIFT_NAME(MERAWProcessingParameter.ListElement)
 
 @end
 
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 NS_SWIFT_NAME(MERAWProcessingParameter.Boolean)
 @interface MERAWProcessingBooleanParameter : MERAWProcessingParameter
 - (instancetype)initWithName:(NSString *)name key:(NSString*)key description:(NSString*)description initialValue:(BOOL)initialValue NS_REFINED_FOR_SWIFT;
@@ -271,7 +271,7 @@ NS_SWIFT_NAME(MERAWProcessingParameter.Boolean)
 
 @end
 
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 NS_SWIFT_NAME(MERAWProcessingParameter.Integer)
 @interface MERAWProcessingIntegerParameter : MERAWProcessingParameter
 - (instancetype)initWithName:(NSString *)name key:(NSString*)key description:(NSString*)description initialValue:(NSInteger)initialValue maximum:(NSInteger)maximum minimum:(NSInteger)minimum NS_REFINED_FOR_SWIFT;
@@ -321,7 +321,7 @@ NS_SWIFT_NAME(MERAWProcessingParameter.Integer)
 
 @end
 
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 NS_SWIFT_NAME(MERAWProcessingParameter.FloatingPoint)
 @interface MERAWProcessingFloatParameter : MERAWProcessingParameter
 
@@ -373,7 +373,7 @@ NS_SWIFT_NAME(MERAWProcessingParameter.FloatingPoint)
 @end
 
 
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 NS_SWIFT_NAME(MERAWProcessingParameter.List)
 @interface MERAWProcessingListParameter : MERAWProcessingParameter
 - (instancetype)initWithName:(NSString *)name key:(NSString*)key description:(NSString*)description list:(NSArray<MERAWProcessingListElementParameter *>*)listElements initialValue:(NSInteger)initialValue NS_REFINED_FOR_SWIFT;
@@ -418,7 +418,7 @@ NS_SWIFT_NAME(MERAWProcessingParameter.List)
 
 @end
 
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 NS_SWIFT_NAME(MERAWProcessingParameter.SubGroup)
 @interface MERAWProcessingSubGroupParameter : MERAWProcessingParameter
 - (instancetype)initWithName:(NSString *)name description:(NSString*)description parameters:(NSArray<MERAWProcessingParameter *>*)parameters;
@@ -430,17 +430,17 @@ NS_SWIFT_NAME(MERAWProcessingParameter.SubGroup)
 // This notification is used to notify the client that processor has changed the set of available MERAWProcessingParameters.
 // This includes changing the set of available parameters, changing the enabled state for parameters, or changing default values for parameters.
 // This may occur in response to incoming parameter changes, for example, a change in a selected MERAWProcessingListElementParameter, or due to metadata-driven changes.
-ME_EXPORT NSNotificationName const MERAWProcessorValuesDidChangeNotification API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos) NS_REFINED_FOR_SWIFT;
+ME_EXPORT NSNotificationName const MERAWProcessorValuesDidChangeNotification API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos) NS_REFINED_FOR_SWIFT;
 
 // This notification is used to notify the VideoToolbox that the value of the readyForMoreMediaData property has changed
-ME_EXPORT NSNotificationName const MERAWProcessorReadyForMoreMediaDataDidChangeNotification API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos) NS_REFINED_FOR_SWIFT;
+ME_EXPORT NSNotificationName const MERAWProcessorReadyForMoreMediaDataDidChangeNotification API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos) NS_REFINED_FOR_SWIFT;
 
 /*!
 	@protocol		MERAWProcessor
 	@abstract		The primary object for a MediaExtension RAW Processor, providing an interface for VideoToolbox to talk to the processor.
 	@discussion		The MERAWProcessor protocol provides an interface for the VideoToolbox to interact with MediaExtension RAW Processors. MERAWProcessor objects are always instantiated by the VideoToolbox. To create an MERAWProcessor, the VideoToolbox first creates an MERAWProcessorExtension object and calls its processorWithFormatDescription: method. MERAWProcessors should expect to run in a sandboxed process without access to the file system, network, or other kernel resources.
 */
-API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
+API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 @protocol MERAWProcessor <NSObject>
 
 @optional
@@ -458,6 +458,13 @@ API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos)
 	@discussion		This is an optional property. Only color-related keys from CVImageBuffer.h are permitted in the returned dictionary.
 */
 @property (readonly) NSDictionary<NSString *, id> *outputColorAttachments;
+
+/*!
+	@property       metadataForSidecarFile
+	@abstract       The metadata returned is a pre-formatted NSData that represents a fully-formed sidecar file, and should be compatible with the MediaExtension FormatReader.
+	@discussion     The metadata will contain the initial processing parameters from the sidecar file, along with any adjustments made on the RAW processor.
+*/
+@property (readonly) NSData *metadataForSidecarFile API_AVAILABLE(macos(26.0));
 
 @required
 

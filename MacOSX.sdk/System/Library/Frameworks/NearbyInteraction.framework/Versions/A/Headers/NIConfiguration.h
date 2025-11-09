@@ -137,6 +137,27 @@ Create a new nearby accessory configuration using data received from the accesso
 
 @end
 
+/**
+ A session configuration that enables UWB Down Link Time Difference of Arrival(DL-TDoA) ranging with nearby anchors.
+ */
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, macos, visionos, macCatalyst)
+NI_EXPORT
+@interface NIDLTDOAConfiguration : NIConfiguration
+/**
+ A unique identifier for a network supporting UWB Down Link Time Difference of Arrival(DL-TDoA).
+ */
+@property (nonatomic, assign) NSInteger networkIdentifier;
 
+/**
+ Initializes a new configuration with a network identifier
+ */
+- (instancetype)initWithNetworkIdentifier:(NSInteger)networkIdentifier;
+
+/** Unavailable  */
+- (instancetype)init NS_UNAVAILABLE;
++ (instancetype)new NS_UNAVAILABLE;
+
+@end
 
 NS_ASSUME_NONNULL_END

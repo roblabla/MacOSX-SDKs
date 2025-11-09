@@ -7,6 +7,7 @@ exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV10contributeACvgZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV10contributeACvpZMV', 
+                       '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV2eeoiySbAC_ACtFZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV3buyACvgZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV3buyACvpZMV', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV3tipACvgZ', 
@@ -40,8 +41,10 @@ exports:
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV9subscribeACvgZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelV9subscribeACvpZMV', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelVMa', '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelVMn', 
-                       '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelVN', '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV12whiteOutlineACvgZ', 
+                       '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelVN', '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonLabelVSQAAMc', 
+                       '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV12whiteOutlineACvgZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV12whiteOutlineACvpZMV', 
+                       '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV2eeoiySbAC_ACtFZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV5blackACvgZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV5blackACvpZMV', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV5whiteACvgZ', 
@@ -49,7 +52,8 @@ exports:
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV9automaticACvgZ', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleV9automaticACvpZMV', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleVMa', '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleVMn', 
-                       '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleVN', '_$s16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseO12didAuthorizeyACSo9PKPaymentC_ySo0nJ6ResultCctcACmFWC', 
+                       '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleVN', '_$s16_PassKit_SwiftUI012PayWithAppleE11ButtonStyleVSQAAMc', 
+                       '_$s16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseO12didAuthorizeyACSo9PKPaymentC_ySo0nJ6ResultCctcACmFWC', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseO13willAuthorizeyA2CmFWC', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseO9didFinishyA2CmFWC', 
                        '_$s16_PassKit_SwiftUI012PayWithAppleE31ButtonPaymentAuthorizationPhaseOMa', 
@@ -158,6 +162,8 @@ exports:
                        '_$s7SwiftUI4ViewP09_PassKit_aB0E30onApplePayShippingMethodChange7performQrSo016PKPaymentRequestiJ6UpdateCSo010PKShippingJ0CYac_tFQOMQ', 
                        '_$s7SwiftUI4ViewP09_PassKit_aB0E31onApplePayShippingContactChange7performQrSo016PKPaymentRequestiJ6UpdateCSo9PKContactCYac_tF', 
                        '_$s7SwiftUI4ViewP09_PassKit_aB0E31onApplePayShippingContactChange7performQrSo016PKPaymentRequestiJ6UpdateCSo9PKContactCYac_tFQOMQ', 
+                       '_$s7SwiftUI4ViewP09_PassKit_aB0E35payWithApplePayButtonDisableCardArtQryF', 
+                       '_$s7SwiftUI4ViewP09_PassKit_aB0E35payWithApplePayButtonDisableCardArtQryFQOMQ', 
                        '_$s7SwiftUI4ViewP09_PassKit_aB0E35verifyIdentityWithWalletButtonStyleyQrAD06VerifyghijK0VF', 
                        '_$s7SwiftUI4ViewP09_PassKit_aB0E35verifyIdentityWithWalletButtonStyleyQrAD06VerifyghijK0VFQOMQ' ]
     objc-classes:    [ PKPassKitSwiftUIObjcBridge ]

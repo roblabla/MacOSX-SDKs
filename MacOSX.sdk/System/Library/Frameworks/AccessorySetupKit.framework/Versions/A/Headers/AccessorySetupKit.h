@@ -16,5 +16,6 @@
 #import <AccessorySetupKit/ASAccessorySettings.h>
 #import <AccessorySetupKit/ASDiscoveryDescriptor.h>
 #import <AccessorySetupKit/ASPickerDisplayItem.h>
+#import <AccessorySetupKit/ASPickerDisplaySettings.h>
 
 #undef ACCESSORY_SETUP_KIT_INDIRECT_INCLUDES

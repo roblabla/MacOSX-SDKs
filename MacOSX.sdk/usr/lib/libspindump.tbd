@@ -13,8 +13,8 @@ exports:
                        _SPReportFileDescriptorExhaustion, _SPReportFileDescriptorExhaustion_FatalPort, 
                        _SPReportHIDResponseDelay, _SPReportKQWorkLoopExhaustion, 
                        _SPReportKQWorkLoopExhaustion_FatalPort, _SPReportPortExhaustion, 
-                       _SPReportPortExhaustion_FatalPort, _SPReportWorkflowResponsivenessDelay, 
-                       _SPResumeMonitoringHIDResponsiveness ]
+                       _SPReportPortExhaustion_FatalPort, _SPReportPowerException, 
+                       _SPReportWorkflowResponsivenessDelay, _SPResumeMonitoringHIDResponsiveness ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SPNotifyLeavingFullWake, _SPReportStuckProcess, _SPReportStuckProcessWithCallback, 
                        _SPReportUnstuckProcess ]

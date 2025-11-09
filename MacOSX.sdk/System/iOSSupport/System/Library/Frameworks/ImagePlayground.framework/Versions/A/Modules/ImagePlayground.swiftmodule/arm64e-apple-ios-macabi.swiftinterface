@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature InternalImportsByDefault -enable-bare-slash-regex -user-module-version 112 -module-name ImagePlayground
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -library-level api -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature IsolatedDefaultValues -enable-upcoming-feature GlobalConcurrency -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature RegionBasedIsolation -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 140.1 -module-name ImagePlayground
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 public import CoreGraphics
 public import Foundation
 public import ImageIO
@@ -15,26 +15,34 @@ public import _Concurrency
 public import _StringProcessing
 public import _SwiftConcurrencyShims
 extension SwiftUICore.View {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.1, macOS 15.1, visionOS 2.4, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func imagePlaygroundSheet(isPresented: SwiftUICore.Binding<Swift.Bool>, concepts: [ImagePlayground.ImagePlaygroundConcept] = [], sourceImage: SwiftUICore.Image? = nil, onCompletion: @escaping (Foundation.URL) -> Swift.Void, onCancellation: (() -> Swift.Void)? = nil) -> some SwiftUICore.View
   
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.1, macOS 15.1, visionOS 2.4, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func imagePlaygroundSheet(isPresented: SwiftUICore.Binding<Swift.Bool>, concepts: [ImagePlayground.ImagePlaygroundConcept] = [], sourceImageURL: Foundation.URL, onCompletion: @escaping (_ url: Foundation.URL) -> Swift.Void, onCancellation: (() -> Swift.Void)? = nil) -> some SwiftUICore.View
   
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.1, macOS 15.1, visionOS 2.4, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func imagePlaygroundSheet(isPresented: SwiftUICore.Binding<Swift.Bool>, concept: Swift.String, sourceImageURL: Foundation.URL, onCompletion: @escaping (_ url: Foundation.URL) -> Swift.Void, onCancellation: (() -> Swift.Void)? = nil) -> some SwiftUICore.View
   
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.1, macOS 15.1, visionOS 2.4, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
   @_Concurrency.MainActor @preconcurrency public func imagePlaygroundSheet(isPresented: SwiftUICore.Binding<Swift.Bool>, concept: Swift.String, sourceImage: SwiftUICore.Image? = nil, onCompletion: @escaping (_ url: Foundation.URL) -> Swift.Void, onCancellation: (() -> Swift.Void)? = nil) -> some SwiftUICore.View
   
+  #endif
   @available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
   @available(watchOS, unavailable)
   @available(tvOS, unavailable)
@@ -94,7 +102,15 @@ extension SwiftUICore.EnvironmentValues {
     get
     set
   }
-  @_Concurrency.MainActor @preconcurrency @objc required dynamic public init()
+  @_Concurrency.MainActor @preconcurrency @objc convenience dynamic public init()
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var modalPresentationStyle: UIKit.UIModalPresentationStyle {
+    @objc get
+    @objc set
+  }
+  @_Concurrency.MainActor @preconcurrency @objc override dynamic public var preferredContentSize: CoreFoundation.CGSize {
+    @objc get
+    @objc set
+  }
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public var isModalInPresentation: Swift.Bool {
     @objc get
     @objc set
@@ -139,6 +155,13 @@ extension ImagePlayground.ImageCreator {
     case unsupportedInputImage
     case backgroundCreationForbidden
     case creationFailed
+    @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+    @available(watchOS, unavailable)
+    @available(tvOS, unavailable)
+    case conceptsRequirePersonIdentity
+    public static var allCases: [ImagePlayground.ImageCreator.Error] {
+      get
+    }
     public static var errorDomain: Swift.String {
       get
     }
@@ -150,9 +173,6 @@ extension ImagePlayground.ImageCreator {
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     public typealias AllCases = [ImagePlayground.ImageCreator.Error]
-    nonisolated public static var allCases: [ImagePlayground.ImageCreator.Error] {
-      get
-    }
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
@@ -164,12 +184,16 @@ extension ImagePlayground.ImageCreator {
 @available(tvOS, unavailable)
 public struct ImagePlaygroundConcept {
   public static func text(_ text: Swift.String) -> ImagePlayground.ImagePlaygroundConcept
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func extracted(from text: Swift.String, title: Swift.String? = nil) -> ImagePlayground.ImagePlaygroundConcept
+  #endif
   public static func drawing(_ drawing: PencilKit.PKDrawing) -> ImagePlayground.ImagePlaygroundConcept
   public static func image(_ image: CoreGraphics.CGImage) -> ImagePlayground.ImagePlaygroundConcept
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func image(_ url: Foundation.URL) -> ImagePlayground.ImagePlaygroundConcept?
-  @available(*, deprecated, message: "Use extracted(from text: title:) instead.")
-  public static func extracted(from text: Swift.String) -> ImagePlayground.ImagePlaygroundConcept
+  #endif
+  @usableFromInline
+  internal static func extracted(from text: Swift.String) -> ImagePlayground.ImagePlaygroundConcept
 }
 @available(iOS 18.4, macOS 15.4, visionOS 2.4, *)
 @available(watchOS, unavailable)
@@ -178,6 +202,10 @@ public struct ImagePlaygroundStyle : Swift.Codable, Swift.Equatable, Swift.Hasha
   public static let animation: ImagePlayground.ImagePlaygroundStyle
   public static let illustration: ImagePlayground.ImagePlaygroundStyle
   public static let sketch: ImagePlayground.ImagePlaygroundStyle
+  @available(iOS 26.0, macOS 26.0, visionOS 26.0, *)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  public static let externalProvider: ImagePlayground.ImagePlaygroundStyle
   public static var all: [ImagePlayground.ImagePlaygroundStyle] {
     get
   }
@@ -207,7 +235,9 @@ public enum ImagePlaygroundPersonalizationPolicy : Swift.Int {
   case automatic
   case enabled
   case disabled
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   @available(iOS 18.4, visionOS 2.4, macOS 15.4, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)

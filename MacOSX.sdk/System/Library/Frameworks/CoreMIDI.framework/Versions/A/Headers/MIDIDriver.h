@@ -186,8 +186,9 @@ struct MIDIDriverInterface
 			Send a MIDIPacketList to the destination endpoint whose refCons are being passed as
 			arguments.
 	*/
-	OSStatus	(*Send)(MIDIDriverRef __nonnull self, const MIDIPacketList *pktlist, void *destRefCon1, void *destRefCon2);
-	
+	OSStatus	(*Send)(MIDIDriverRef __nonnull self, const MIDIPacketList* pktlist,
+					void* destRefCon1, void* destRefCon2) MIDI_REALTIME_API;
+
 	/*!
 		@fn EnableSource
 		@discussion
@@ -222,8 +223,9 @@ struct MIDIDriverInterface
 			cannot rely on the MIDI events arriving in order, due to MIDIServer's schedule-ahead
 			facilities.
 	*/
-	OSStatus	(*Monitor)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest, const MIDIPacketList *pktlist);
-    
+	OSStatus	(*Monitor)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest,
+					const MIDIPacketList* pktlist) MIDI_REALTIME_API;
+
 	/*!
 		@fn SendPackets
 		@discussion
@@ -232,17 +234,18 @@ struct MIDIDriverInterface
 			Send a MIDIEventList to the destination endpoint whose refCons are being passed as
 			arguments.
 	*/
-	OSStatus	(*SendPackets)(MIDIDriverRef __nonnull self, const MIDIEventList *pktlist, void *destRefCon1, void *destRefCon2);
-    
-    /*!
+	OSStatus	(*SendPackets)(MIDIDriverRef __nonnull self, const MIDIEventList* pktlist,
+					void* destRefCon1, void* destRefCon2) MIDI_REALTIME_API;
+
+	/*!
 		@fn MonitorEvents
 		@discussion
 			Only for version 3 drivers (new for macOS 12.0).
 
 			Same as Monitor but uses MIDEventList, whose protocol may vary from MIDI 1.0.
 	*/
-	OSStatus	(*MonitorEvents)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest, const MIDIEventList *pktlist);
-
+	OSStatus	(*MonitorEvents)(MIDIDriverRef __nonnull self, MIDIEndpointRef dest,
+					const MIDIEventList* pktlist) MIDI_REALTIME_API;
 };
 
 

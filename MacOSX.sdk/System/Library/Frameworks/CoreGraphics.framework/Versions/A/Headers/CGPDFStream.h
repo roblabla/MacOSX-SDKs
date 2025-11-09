@@ -5,7 +5,7 @@
 #ifndef CGPDFSTREAM_H_
 #define CGPDFSTREAM_H_
 
-typedef struct CGPDFStream *CGPDFStreamRef;
+typedef struct CGPDFStream *CGPDFStreamRef __attribute__((swift_wrapper(struct)));;
 
 #include <CoreFoundation/CFBase.h>
 #include <CoreFoundation/CFAvailability.h>

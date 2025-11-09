@@ -139,6 +139,10 @@ struct task_snapshot {
 	 * I/O Statistics
 	 * XXX: These fields must be together.
 	 */
+	/*
+	 * In microstackshots, `disk_reads_count` is actually
+	 * the full 64-bits of ss_flags.
+	 */
 	uint64_t                disk_reads_count;
 	uint64_t                disk_reads_size;
 	uint64_t                disk_writes_count;
@@ -278,6 +282,7 @@ __options_decl(stackshot_flags_t, uint64_t, {
 	STACKSHOT_ACTIVE_KERNEL_THREADS_ONLY       = 0x100,
 	STACKSHOT_GET_BOOT_PROFILE                 = 0x200,
 	STACKSHOT_DO_COMPRESS                      = 0x400,
+	/* Now on by default/unused */
 	STACKSHOT_SAVE_IMP_DONATION_PIDS           = 0x2000,
 	STACKSHOT_SAVE_IN_KERNEL_BUFFER            = 0x4000,
 	STACKSHOT_RETRIEVE_EXISTING_BUFFER         = 0x8000,

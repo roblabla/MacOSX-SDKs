@@ -27,17 +27,17 @@ API_UNAVAILABLE(macos)
 /*!
  * @brief The type of the characteristic, e.g. HMCharacteristicTypePowerState.
  */
-@property (readonly, copy, nonatomic) NSString *characteristicType;
+@property (nonatomic, readonly, copy) NSString *characteristicType;
 
 /*!
  * @brief The localized description of the characteristic.
  */
-@property (readonly, copy, nonatomic) NSString *localizedDescription API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSString *localizedDescription API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Service that contains this characteristic.
  */
-@property (weak, readonly, nonatomic) HMService *service;
+@property (nonatomic, readonly, weak) HMService *service;
 
 /*!
  * @brief Array that describes the properties of the characteristic.
@@ -45,12 +45,12 @@ API_UNAVAILABLE(macos)
  * @discussion This value corresponds to the properties associated with this characteristic.
  *             The contents of the array are one or more HMCharacteristicProperty constants.
  */
-@property (readonly, copy, nonatomic) NSArray<NSString *> *properties;
+@property (nonatomic, readonly, copy) NSArray<NSString *> *properties;
 
 /*!
  * @brief Meta data associated with the characteristic.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristicMetadata *metadata;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristicMetadata *metadata;
 
 /*!
  * @brief The value of the characteristic.
@@ -58,19 +58,19 @@ API_UNAVAILABLE(macos)
  * @discussion The value is a cached value that may have been updated as a result of prior
  *             interaction with the accessory.
  */
-@property (readonly, copy, nonatomic, nullable) id value;
+@property (nullable, nonatomic, readonly, copy) id value;
 
 /*!
  * @brief Specifies whether the characteristic has been enabled to send notifications.
  *
  * @discussion This property is reset to NO if the reachability of the accessory is NO.
  */
-@property (readonly, getter=isNotificationEnabled, nonatomic) BOOL notificationEnabled;
+@property (nonatomic, readonly, getter=isNotificationEnabled) BOOL notificationEnabled;
 
 /*!
  * @brief A unique identifier for the characteristic.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 
 /*!

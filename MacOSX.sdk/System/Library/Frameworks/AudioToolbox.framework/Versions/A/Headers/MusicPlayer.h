@@ -339,13 +339,14 @@ typedef struct OpaqueMusicEventIterator *MusicEventIterator;
 	@typedef MusicSequenceUserCallback
 	@discussion See MusicSequenceSetUserCallback
 */
-typedef void (*MusicSequenceUserCallback)(	void * __nullable			inClientData,
+typedef void (*MusicSequenceUserCallback)(
+											void * __nullable			inClientData,
 											MusicSequence				inSequence,
 											MusicTrack					inTrack,
 											MusicTimeStamp				inEventTime,
 											const MusicEventUserData *	inEventData,
 											MusicTimeStamp				inStartSliceBeat,
-											MusicTimeStamp				inEndSliceBeat);
+											MusicTimeStamp				inEndSliceBeat) CA_REALTIME_API;
 
 /*!
 	enum MusicPlayerErrors
@@ -549,7 +550,9 @@ MusicPlayerGetTime(		MusicPlayer 	inPlayer,
 extern OSStatus
 MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 								MusicTimeStamp	inBeats,
-								UInt64 *		outHostTime)					API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
+								UInt64 *		outHostTime)
+									CA_REALTIME_API
+									API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerGetBeatsForHostTime
@@ -567,7 +570,9 @@ MusicPlayerGetHostTimeForBeats(	MusicPlayer 	inPlayer,
 extern OSStatus
 MusicPlayerGetBeatsForHostTime(	MusicPlayer 	inPlayer,
 								UInt64			inHostTime,
-								MusicTimeStamp *outBeats)						API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
+								MusicTimeStamp *outBeats)
+									CA_REALTIME_API
+									API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicPlayerPreroll
@@ -986,7 +991,9 @@ MusicSequenceReverse(		MusicSequence	inSequence)							API_AVAILABLE(macos(10.0)
 extern OSStatus
 MusicSequenceGetSecondsForBeats(	MusicSequence		inSequence,
 									MusicTimeStamp		inBeats,
-									Float64 *			outSeconds)				API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
+									Float64 *			outSeconds)
+										CA_REALTIME_API
+										API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetBeatsForSeconds
@@ -999,7 +1006,9 @@ MusicSequenceGetSecondsForBeats(	MusicSequence		inSequence,
 extern OSStatus
 MusicSequenceGetBeatsForSeconds(	MusicSequence		inSequence,
 									Float64				inSeconds,
-									MusicTimeStamp *	outBeats)				API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
+									MusicTimeStamp *	outBeats)
+										CA_REALTIME_API
+										API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceSetUserCallback
@@ -1027,7 +1036,9 @@ MusicSequenceGetBeatsForSeconds(	MusicSequence		inSequence,
 extern OSStatus
 MusicSequenceSetUserCallback(	MusicSequence							inSequence,
 								MusicSequenceUserCallback __nullable	inCallback,
-								void * __nullable						inClientData)		API_AVAILABLE(macos(10.3), ios(5.0), watchos(2.0), tvos(9.0));
+								void * __nullable						inClientData)
+									CA_REALTIME_API
+									API_AVAILABLE(macos(10.3), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceBeatsToBarBeatTime
@@ -1044,7 +1055,9 @@ extern OSStatus
 MusicSequenceBeatsToBarBeatTime(MusicSequence				inSequence,
 								MusicTimeStamp				inBeats,
 								UInt32						inSubbeatDivisor,
-								CABarBeatTime *				outBarBeatTime)		API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
+								CABarBeatTime *				outBarBeatTime)
+									CA_REALTIME_API
+									API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceBarBeatTimeToBeats
@@ -1059,7 +1072,9 @@ MusicSequenceBeatsToBarBeatTime(MusicSequence				inSequence,
 extern OSStatus
 MusicSequenceBarBeatTimeToBeats(MusicSequence				inSequence,
 								const CABarBeatTime *		inBarBeatTime,
-								MusicTimeStamp *			outBeats)			API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
+								MusicTimeStamp *			outBeats)
+									CA_REALTIME_API
+									API_AVAILABLE(macos(10.5), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicSequenceGetInfoDictionary
@@ -1461,7 +1476,9 @@ DisposeMusicEventIterator(			MusicEventIterator	inIterator)				API_AVAILABLE(mac
 */
 extern OSStatus
 MusicEventIteratorSeek(				MusicEventIterator 	inIterator,
-									MusicTimeStamp 		inTimeStamp)			API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+									MusicTimeStamp 		inTimeStamp)
+										CA_REALTIME_API
+										API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorNextEvent
@@ -1474,7 +1491,9 @@ MusicEventIteratorSeek(				MusicEventIterator 	inIterator,
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)
+	CA_REALTIME_API
+	API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorPreviousEvent
@@ -1486,7 +1505,9 @@ MusicEventIteratorNextEvent(		MusicEventIterator 	inIterator)				API_AVAILABLE(m
 	@param		inIterator		the iterator
 */
 extern OSStatus
-MusicEventIteratorPreviousEvent(	MusicEventIterator 	inIterator)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+MusicEventIteratorPreviousEvent(	MusicEventIterator 	inIterator)
+	CA_REALTIME_API
+	API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorGetEventInfo
@@ -1508,7 +1529,9 @@ MusicEventIteratorGetEventInfo(		MusicEventIterator 		inIterator,
 									MusicTimeStamp *		outTimeStamp,
 									MusicEventType *		outEventType,
 									const void * __nullable * __nonnull outEventData,
-									UInt32 *				outEventDataSize)	API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+									UInt32 *				outEventDataSize)
+										CA_REALTIME_API
+										API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 	
 /*!
 	@function	MusicEventIteratorSetEventInfo
@@ -1531,7 +1554,7 @@ MusicEventIteratorSetEventInfo(		MusicEventIterator 		inIterator,
 	@abstract	Set a new time for an event
 	@discussion The iterator will still be pointing to the same event, but as the event will have moved, 
 				it may or may not have a next or previous event now (depending of course on the time
-				you moved it too).
+				you moved it to).
 				
 	@param		inIterator		the iterator
 	@param		inTimeStamp		the new time stamp of the event
@@ -1569,7 +1592,9 @@ MusicEventIteratorDeleteEvent(		MusicEventIterator	 	inIterator)			API_AVAILABLE
 */
 extern OSStatus
 MusicEventIteratorHasPreviousEvent(	MusicEventIterator 	inIterator,
-									Boolean	*			outHasPrevEvent)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+									Boolean	*			outHasPrevEvent)
+										CA_REALTIME_API
+										API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorHasNextEvent
@@ -1590,7 +1615,9 @@ MusicEventIteratorHasPreviousEvent(	MusicEventIterator 	inIterator,
 */
 extern OSStatus
 MusicEventIteratorHasNextEvent(		MusicEventIterator	inIterator,
-									Boolean	*			outHasNextEvent)		API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+									Boolean	*			outHasNextEvent)
+										CA_REALTIME_API
+										API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicEventIteratorHasCurrentEvent
@@ -1600,7 +1627,9 @@ MusicEventIteratorHasNextEvent(		MusicEventIterator	inIterator,
 */
 extern OSStatus
 MusicEventIteratorHasCurrentEvent(	MusicEventIterator	inIterator,
-									Boolean	*			outHasCurEvent)			API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
+									Boolean	*			outHasCurEvent)
+										CA_REALTIME_API
+										API_AVAILABLE(macos(10.2), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 

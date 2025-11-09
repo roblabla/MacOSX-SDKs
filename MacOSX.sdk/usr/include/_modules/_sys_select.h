@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2025 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -21,13 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _DARWIN_POSIX_SYS_SELECT_
-#define _DARWIN_POSIX_SYS_SELECT_
+#ifndef __SYS_SELECT_H_
+#define __SYS_SELECT_H_
 
-#if !__building_module(Darwin)
+#if !__building_module(sys_select)
 #error "Do not include this header directly, include <sys/select.h> instead"
 #endif
 
 #include <sys/select.h>
 
-#endif /* _DARWIN_POSIX_SYS_SELECT_ */
+#endif /* __SYS_SELECT_H_ */

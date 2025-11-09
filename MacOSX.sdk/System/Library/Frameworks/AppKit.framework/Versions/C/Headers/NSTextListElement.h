@@ -1,12 +1,12 @@
 #if (defined(USE_APPKIT_PUBLIC_HEADERS) && USE_APPKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSTextListElement.h>)
-#include <TargetConditionals.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
 //
 //  NSTextListElement.h
 //  Text Kit
 //
-//  Copyright (c) 2021-2024, Apple Inc. All rights reserved.
+//  Copyright (c) 2021-2025, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

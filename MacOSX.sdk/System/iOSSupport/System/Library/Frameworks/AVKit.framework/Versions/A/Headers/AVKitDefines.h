@@ -72,6 +72,13 @@
 #define AVKitPlatformColorClass NSColor
 #endif // TARGET_OS_IPHONE
 
+
+#if TARGET_OS_IPHONE
+#define AVKitPlatformFontClass UIFont
+#else
+#define AVKitPlatformFontClass NSFont
+#endif // TARGET_OS_IPHONE
+
 #else
 #import <AVKitCore/AVKitDefines.h>
 #endif

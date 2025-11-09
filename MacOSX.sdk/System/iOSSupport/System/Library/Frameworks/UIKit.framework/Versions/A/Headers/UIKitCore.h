@@ -44,6 +44,7 @@
 #import <UIKit/UIOrientation.h>
 #import <UIKit/UIBarButtonItem.h>
 #import <UIKit/UIBarButtonItemGroup.h>
+#import <UIKit/UIBarButtonItemBadge.h>
 #import <UIKit/UIBarItem.h>
 #import <UIKit/UIButton.h>
 #import <UIKit/UIButtonConfiguration.h>
@@ -78,6 +79,8 @@
 #import <UIKit/UIContentSizeCategoryAdjusting.h>
 #import <UIKit/UIContentSizeCategory.h>
 #import <UIKit/UIControl.h>
+#import <UIKit/UICornerConfiguration.h>
+#import <UIKit/UICornerRadius.h>
 #import <UIKit/UIDataDetectors.h>
 #import <UIKit/UIDatePicker.h>
 #import <UIKit/UIDevice.h>
@@ -91,8 +94,10 @@
 #import <UIKit/NSFileProviderExtension.h>
 #import <UIKit/UIVisualEffect.h>
 #import <UIKit/UIBlurEffect.h>
+#import <UIKit/UIGlassEffect.h>
 #import <UIKit/UIVibrancyEffect.h>
 #import <UIKit/UIVisualEffectView.h>
+#import <UIKit/UIBackgroundExtensionView.h>
 #import <UIKit/UIEvent.h>
 #import <UIKit/UIFontPickerViewController.h>
 #import <UIKit/UIFontPickerViewControllerConfiguration.h>
@@ -112,8 +117,11 @@
 #import <UIKit/UILargeContentViewer.h>
 #import <UIKit/UIApplicationShortcutItem.h>
 #import <UIKit/UIUserNotificationSettings.h>
+#import <UIKit/UIFocusDefines.h>
 #import <UIKit/UIFocus.h>
 #import <UIKit/UIFocusSystem.h>
+#import <UIKit/UIFocusSystem+UIKitAdditions.h>
+#import <UIKit/UIFocusUpdateContext+UIKitAdditions.h>
 #import <UIKit/UIFocusGuide.h>
 #import <UIKit/UIFocusAnimationCoordinator.h>
 #import <UIKit/UIFocusDebugger.h>
@@ -156,6 +164,7 @@
 #import <UIKit/UIScreenEdgePanGestureRecognizer.h>
 #import <UIKit/UIScreenMode.h>
 #import <UIKit/UIScrollView.h>
+#import <UIKit/UIScrollEdgeElementContainerInteraction.h>
 #import <UIKit/UISearchBar.h>
 #import <UIKit/UISearchContainerViewController.h>
 #import <UIKit/UISearchController.h>
@@ -163,7 +172,9 @@
 #import <UIKit/UISearchTextField.h>
 #import <UIKit/UISegmentedControl.h>
 #import <UIKit/UISlider.h>
+#import <UIKit/UISliderTrackConfiguration.h>
 #import <UIKit/UISplitViewController.h>
+#import <UIKit/UISplitViewControllerLayoutEnvironment.h>
 #import <UIKit/UIStandardTextCursorView.h>
 #import <UIKit/UIStepper.h>
 #import <UIKit/UIStoryboard.h>
@@ -173,6 +184,7 @@
 #import <UIKit/UISwipeGestureRecognizer.h>
 #import <UIKit/UISwitch.h>
 #import <UIKit/UISymbolEffectCompletion.h>
+#import <UIKit/UISymbolContentTransition.h>
 #import <UIKit/UITabBar.h>
 #import <UIKit/UITabBarController.h>
 #import <UIKit/UITabBarItem.h>
@@ -304,9 +316,13 @@
 #import <UIKit/UIScene+AVAudioSession.h>
 #import <UIKit/UISceneSystemProtectionManager.h>
 #import <UIKit/UIWindowScene.h>
+#import <UIKit/UISceneConfiguration.h>
 #import <UIKit/UISceneSession.h>
 #import <UIKit/UISceneSessionActivationRequest.h>
 #import <UIKit/UISceneActivationConditions.h>
+#import <UIKit/UISceneDestructionCondition.h>
+#import <UIKit/UISceneSizeRestrictions.h>
+#import <UIKit/UISceneWindowingControlStyle.h>
 #import <UIKit/UIWindowSceneGeometry.h>
 #import <UIKit/UIWindowSceneGeometryPreferences.h>
 #import <UIKit/UIWindowSceneGeometryPreferencesMac.h>
@@ -331,6 +347,8 @@
 #import <UIKit/UIMenuElement.h>
 #import <UIKit/UIDeferredMenuElement.h>
 #import <UIKit/UIMenuSystem.h>
+#import <UIKit/UIContextMenuSystem.h>
+#import <UIKit/UIMainMenuSystem.h>
 #import <UIKit/UIContextMenuInteraction.h>
 #import <UIKit/UIContextMenuConfiguration.h>
 #import <UIKit/UITextFormattingCoordinator.h>
@@ -375,7 +393,9 @@
 #import <UIKit/UISearchTab.h>
 #import <UIKit/UITabBarControllerSidebar.h>
 #import <UIKit/UITabSidebarItem.h>
+#import <UIKit/UITabAccessory.h>
 #import <UIKit/UIViewControllerTransition.h>
+#import <UIKit/UIViewLayoutRegion.h>
 #import <UIKit/UIZoomTransitionOptions.h>
 #import <UIKit/UIShadowProperties.h>
 #import <UIKit/UITextFormattingViewController.h>

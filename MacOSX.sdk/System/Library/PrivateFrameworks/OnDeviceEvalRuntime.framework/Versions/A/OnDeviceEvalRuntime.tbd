@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/OnDeviceEvalRuntime.framework/Versions/A/OnDeviceEvalRuntime'
-current-version: 1.0.20
+current-version: 1.0.24
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -944,8 +944,8 @@ exports:
                        '_$s19OnDeviceEvalRuntime6DomainOMn', '_$s19OnDeviceEvalRuntime6DomainON', 
                        '_$s19OnDeviceEvalRuntime6DomainOSEAAMc', '_$s19OnDeviceEvalRuntime6DomainOSHAAMc', 
                        '_$s19OnDeviceEvalRuntime6DomainOSQAAMc', '_$s19OnDeviceEvalRuntime6DomainOSYAAMc', 
-                       '_$s19OnDeviceEvalRuntime6DomainOSeAAMc', '_$s19OnDeviceEvalRuntime7IFAgentO6search5query8override14ignoreOverride0G2IdAA10IFResponseVSSSg_AKSbSStYaKFZ', 
-                       '_$s19OnDeviceEvalRuntime7IFAgentO6search5query8override14ignoreOverride0G2IdAA10IFResponseVSSSg_AKSbSStYaKFZTu', 
+                       '_$s19OnDeviceEvalRuntime6DomainOSeAAMc', '_$s19OnDeviceEvalRuntime7IFAgentO6search5query8override14ignoreOverride0G2Id18forceSearchRoutingAA10IFResponseVSSSg_ALSbSSSbtYaKFZ', 
+                       '_$s19OnDeviceEvalRuntime7IFAgentO6search5query8override14ignoreOverride0G2Id18forceSearchRoutingAA10IFResponseVSSSg_ALSbSSSbtYaKFZTu', 
                        '_$s19OnDeviceEvalRuntime7IFAgentO9predicateSSvgZ', '_$s19OnDeviceEvalRuntime7IFAgentO9predicateSSvpZMV', 
                        '_$s19OnDeviceEvalRuntime7IFAgentOMa', '_$s19OnDeviceEvalRuntime7IFAgentOMn', 
                        '_$s19OnDeviceEvalRuntime7IFAgentON', '_$s19OnDeviceEvalRuntime7LoggingO10httpClient2os6LoggerVvgZ', 

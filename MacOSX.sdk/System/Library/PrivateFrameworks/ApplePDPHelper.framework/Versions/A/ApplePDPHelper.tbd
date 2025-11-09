@@ -15,6 +15,7 @@ exports:
                        __ZN23ApplePDPHelperInterface16callStructMethodEjPKcPvjS2_Pj, 
                        __ZN23ApplePDPHelperInterface16ipcContextConfigERK31AppleIPAppenderIPCContextParams, 
                        __ZN23ApplePDPHelperInterface16isServicePresentEPKc, __ZN23ApplePDPHelperInterface17getTimeAdjustmentEP13mach_timespec, 
+                       __ZN23ApplePDPHelperInterface18completeFilterRuleEj41AppleIPAppenderFilterRuleCompletionResult, 
                        __ZN23ApplePDPHelperInterface18ipcInterfaceConfigERK38AppleIPAppenderIPCInterfaceInputParamsR39AppleIPAppenderIPCInterfaceOutputParams, 
                        __ZN23ApplePDPHelperInterface19setDormancyIntervalEjj, __ZN23ApplePDPHelperInterface20reportLinkThroughputEP27AppleIPAppenderThroughput_t, 
                        __ZN23ApplePDPHelperInterface20restartDormancyCheckEv, __ZN23ApplePDPHelperInterface20setLinkQualityMetricEi, 

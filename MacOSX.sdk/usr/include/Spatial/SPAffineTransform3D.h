@@ -260,7 +260,7 @@ bool SPAffineTransform3DIsUniform(SPAffineTransform3D transform)
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /*!
- @abstract Returns true if the transform scales equally over the specified dimensions.
+ @abstract Returns `true` if the transform scales equally over the specified dimensions.
  
  @discussion
  Passing @p dimensionFlags of @p SPAxisX|SPAxisY|SPAxisZ returns the same result as @p SPAffineTransform3DIsUniform .

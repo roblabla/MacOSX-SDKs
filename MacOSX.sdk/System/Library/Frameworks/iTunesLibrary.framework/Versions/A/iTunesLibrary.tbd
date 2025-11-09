@@ -4,6 +4,7 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/iTunesLibrary.framework/Versions/A/iTunesLibrary'
 current-version: 0
 compatibility-version: 0
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '$ld$install_name$os10.10$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
@@ -14,6 +15,14 @@ exports:
                        '$ld$install_name$os10.7$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.8$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
                        '$ld$install_name$os10.9$/Library/Frameworks/iTunesLibrary.framework/iTunesLibrary', 
+                       '_$s13iTunesLibrary09DidChangeB7MessageV04makeE0yACSg10Foundation12NotificationVFZ', 
+                       '_$s13iTunesLibrary09DidChangeB7MessageV16makeNotificationy10Foundation0G0VACFZ', 
+                       '_$s13iTunesLibrary09DidChangeB7MessageV4nameSo18NSNotificationNameavgZ', 
+                       '_$s13iTunesLibrary09DidChangeB7MessageV4nameSo18NSNotificationNameavpZMV', 
+                       '_$s13iTunesLibrary09DidChangeB7MessageVMa', '_$s13iTunesLibrary09DidChangeB7MessageVMn', 
+                       '_$s13iTunesLibrary09DidChangeB7MessageVN', '_$s13iTunesLibrary09DidChangeB7MessageVSo20NSNotificationCenterC10FoundationE09MainActorE0AAMc', 
+                       '_$sSo20NSNotificationCenterC10FoundationE17MessageIdentifierP13iTunesLibraryAbCE04BasedE0Vy_AF09DidChangegD0VGRszrlE03didJ0AKvgZ', 
+                       '_$sSo20NSNotificationCenterC10FoundationE17MessageIdentifierP13iTunesLibraryAbCE04BasedE0Vy_AF09DidChangegD0VGRszrlE03didJ0AKvpZMV', 
                        _ITLibAlbumArtistName, _ITLibAlbumPropertyAlbumArtist, _ITLibAlbumPropertyLastPlayedDate, 
                        _ITLibAlbumPropertyLibraryAddedDate, _ITLibAlbumPropertyReleaseDate, 
                        _ITLibAlbumPropertySortTitle, _ITLibAlbumPropertyTitle, _ITLibAlbumTrackCount, 

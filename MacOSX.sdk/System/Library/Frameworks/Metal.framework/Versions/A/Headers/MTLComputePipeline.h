@@ -10,6 +10,7 @@
 #import <Metal/MTLArgument.h>
 #import <Metal/MTLStageInputOutputDescriptor.h>
 #import <Metal/MTLPipeline.h>
+#import <Metal/MTLAllocation.h>
 
 #import <Metal/MTLLinkedFunctions.h>
 @protocol MTLFunctionHandle;
@@ -18,7 +19,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
+MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @interface MTLComputePipelineReflection : NSObject
 
 @property (nonnull, readonly) NSArray<id<MTLBinding>> *bindings API_AVAILABLE(macos(13.0), ios(16.0));
@@ -52,7 +53,6 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  @abstract Optional property. Set the maxTotalThreadsPerThreadgroup. If it is not set, returns zero.
  */
 @property (readwrite, nonatomic) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(10.14), ios(12.0));
-
 
 /*!
  @property computeDataDescriptor
@@ -124,7 +124,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  @abstract This flag makes this pipeline support creating a new pipeline by adding binary functions.
  */
 @property (readwrite, nonatomic) BOOL supportAddingBinaryFunctions
-    API_AVAILABLE(macos(11.0), ios(14.0));
+    API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
 /*!
@@ -132,7 +132,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  @abstract The maximum depth of the call stack in stack frames from the kernel. Defaults to 1 additional stack frame.
  */
 @property (readwrite, nonatomic) NSUInteger maxCallStackDepth
-    API_AVAILABLE(macos(11.0), ios(14.0));
+    API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
 
@@ -143,6 +143,14 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  */
 @property (readwrite, nonatomic) MTLShaderValidation shaderValidation API_AVAILABLE(macos(15.0), ios(18.0));
 
+/*!
+ @property requiredThreadsPerThreadgroup
+ @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set.
+           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
+           Setting this to a size of 0 in every dimension disables this property
+*/
+@property(readwrite, nonatomic) MTLSize requiredThreadsPerThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
+
 @end
 
 /*!
@@ -150,10 +158,43 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(9.0))
  @abstract A handle to compiled code for a compute function.
  @discussion MTLComputePipelineState is a single compute function.  It can only be used with the device that it was created against.
 */
-API_AVAILABLE(macos(10.11), ios(8.0))
-@protocol MTLComputePipelineState <NSObject>
+API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
+@protocol MTLComputePipelineState <MTLAllocation, NSObject>
 
 @property (nullable, readonly) NSString *label API_AVAILABLE(macos(10.13), ios(11.0));
+
+/// Provides access to this compute pipeline's reflection.
+///
+/// Reflection is `nil` if you create the pipeline state object directly from the ``MTLDevice`` protocol.
+@property (nullable, readonly) MTLComputePipelineReflection* reflection API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Gets the function handle for a function this pipeline links at the Metal IR level by name.
+///
+/// - Parameters:
+///   - name: A string representing the name of the function.
+///
+/// - Returns: A function handle corresponding to the function if the name matches a function in this pipeline state,
+/// otherwise `nil`.
+- (nullable id<MTLFunctionHandle>)functionHandleWithName:(NSString*)name API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Gets the function handle for a function this pipeline links at the binary level.
+///
+/// - Parameters:
+///   - function: A binary function object representing the function binary to find.
+///
+/// - Returns: A function handle corresponding to the function if the binary function mathces a function in this
+///            pipeline state, otherwise `nil`.
+- (nullable id<MTLFunctionHandle>)functionHandleWithBinaryFunction:(id<MTL4BinaryFunction>)function API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Allocates a new compute pipeline state by adding binary functions to this pipeline state.
+///
+/// - Parameters:
+///   - additionalBinaryFunctions: A non-`nil` array containing binary functions to add to this pipeline.
+///   - error: An optional parameter into which Metal stores information in case of an error.
+///
+/// - Returns: A new compute pipeline state upon success, otherwise `nil`.
+- (nullable id<MTLComputePipelineState>)newComputePipelineStateWithBinaryFunctions:(NSArray<id<MTL4BinaryFunction>>*)additionalBinaryFunctions
+                                                                             error:(NSError**)error API_AVAILABLE(macos(26.0), ios(26.0));
 
 /*!
  @property device
@@ -205,26 +246,26 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @method functionHandleWithFunction:
  @brief Get the function handle for the specified function from the pipeline state.
  */
-- (nullable id<MTLFunctionHandle>)functionHandleWithFunction:(id<MTLFunction>)function API_AVAILABLE(macos(11.0), ios(14.0));
+- (nullable id<MTLFunctionHandle>)functionHandleWithFunction:(id<MTLFunction>)function API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
 /*!
  @method newRenderPipelineStateWithAdditionalBinaryFunctions:stage:
  @brief Allocate a new compute pipeline state by adding binary functions to this pipeline state.
  */
-- (nullable id <MTLComputePipelineState>)newComputePipelineStateWithAdditionalBinaryFunctions:(nonnull NSArray<id<MTLFunction>> *)functions error:(__autoreleasing NSError **)error API_AVAILABLE(macos(11.0), ios(14.0));
+- (nullable id <MTLComputePipelineState>)newComputePipelineStateWithAdditionalBinaryFunctions:(nonnull NSArray<id<MTLFunction>> *)functions error:(__autoreleasing NSError **)error API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  @method newVisibleFunctionTableWithDescriptor:
  @brief Allocate a visible function table for the pipeline with the provided descriptor.
  */
-- (nullable id<MTLVisibleFunctionTable>)newVisibleFunctionTableWithDescriptor:(MTLVisibleFunctionTableDescriptor * __nonnull)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
+- (nullable id<MTLVisibleFunctionTable>)newVisibleFunctionTableWithDescriptor:(MTLVisibleFunctionTableDescriptor * __nonnull)descriptor API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  @method newIntersectionFunctionTableWithDescriptor:
  @brief Allocate an intersection function table for the pipeline with the provided descriptor.
  */
-- (nullable id <MTLIntersectionFunctionTable>)newIntersectionFunctionTableWithDescriptor:(MTLIntersectionFunctionTableDescriptor * _Nonnull)descriptor API_AVAILABLE(macos(11.0), ios(14.0));
+- (nullable id <MTLIntersectionFunctionTable>)newIntersectionFunctionTableWithDescriptor:(MTLIntersectionFunctionTableDescriptor * _Nonnull)descriptor API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
 /*!
@@ -232,6 +273,12 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @abstract Current state of Shader Validation for the pipeline.
  */
 @property (readonly, nonatomic) MTLShaderValidation shaderValidation API_AVAILABLE(macos(15.0), ios(18.0));
+
+/*!
+ @property requiredThreadsPerThreadgroup
+ @abstract The required size of every compute threadgroup.
+*/
+@property (readonly) MTLSize requiredThreadsPerThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
 @end
 
 NS_ASSUME_NONNULL_END

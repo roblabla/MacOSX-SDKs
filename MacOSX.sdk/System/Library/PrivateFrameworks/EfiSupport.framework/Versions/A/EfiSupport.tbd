@@ -11,5 +11,7 @@ exports:
                        _EdkiiVariablePolicyRegisterVariablePolicy, _EdkiiVariablePolicyRevision, 
                        _EfiVariableGetNextVariableName, _EfiVariableGetVariable, 
                        _EfiVariableQueryVariableInfo, _EfiVariableSetVariable, _EfiVariableStoreEnrollDefaultKeys, 
-                       _GetCurrentEfiVariableStoreRuntimeState, _SetEfiVariableStoreRuntimeState ]
+                       _GetCurrentEfiVariableStoreRuntimeState, _NvramOperationIsInvalid, 
+                       _NvramToc2Reply, _NvramToc2Request, _NvramToc2SizeWithReply, 
+                       _NvramToc2SizeWithRequest, _SetEfiVariableStoreRuntimeState ]
 ...

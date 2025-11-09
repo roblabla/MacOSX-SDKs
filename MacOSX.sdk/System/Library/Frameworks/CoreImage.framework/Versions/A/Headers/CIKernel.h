@@ -44,7 +44,7 @@ typedef CGRect (^CIKernelROICallback)(int index, CGRect destRect);
  * samplerCoord() or samplerTransform() to read pixel values from input images.
  * The function must return a vec4 pixel color.
  */
-NS_CLASS_AVAILABLE(10_4, 8_0)
+NS_CLASS_AVAILABLE(10_4, 8_0) NS_SWIFT_SENDABLE
 @interface CIKernel : NSObject
 {
     void *_priv;
@@ -151,7 +151,7 @@ NS_CLASS_AVAILABLE(10_4, 8_0)
  * The kernel should not call sample(), samplerCoord(), or samplerTransform().
  * The function must return a vec4 pixel color.
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0) NS_SWIFT_SENDABLE
 @interface CIColorKernel : CIKernel
 {
 }
@@ -189,7 +189,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * The kernel should not call sample(), samplerCoord(), or samplerTransform().
  * The function must return a vec2 source location.
  */
-NS_CLASS_AVAILABLE(10_11, 8_0)
+NS_CLASS_AVAILABLE(10_11, 8_0) NS_SWIFT_SENDABLE
 @interface CIWarpKernel : CIKernel
 {
 }
@@ -236,7 +236,7 @@ NS_CLASS_AVAILABLE(10_11, 8_0)
  * The kernel should not call sample(), samplerCoord(), or samplerTransform().
  * The function must return a vec4 pixel color.
  */
-NS_CLASS_AVAILABLE(10_13, 11_0)
+NS_CLASS_AVAILABLE(10_13, 11_0) NS_SWIFT_SENDABLE
 @interface CIBlendKernel : CIColorKernel
 {
 }

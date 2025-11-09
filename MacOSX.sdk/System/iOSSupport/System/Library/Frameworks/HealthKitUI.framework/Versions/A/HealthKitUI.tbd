@@ -11,6 +11,8 @@ exports:
                        '_$s7SwiftUI4ViewP09HealthKitB0E23healthDataAccessRequest5store10shareTypes04readL07trigger10completionQrSo13HKHealthStoreC_ShySo12HKSampleTypeCGShySo08HKObjectS0CGSgqd__ys6ResultOySbs5Error_pGctSQRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP09HealthKitB0E23healthDataAccessRequest5store9readTypes7trigger10completionQrSo13HKHealthStoreC_ShySo12HKObjectTypeCGqd__ys6ResultOySbs5Error_pGctSQRd__lF', 
                        '_$s7SwiftUI4ViewP09HealthKitB0E23healthDataAccessRequest5store9readTypes7trigger10completionQrSo13HKHealthStoreC_ShySo12HKObjectTypeCGqd__ys6ResultOySbs5Error_pGctSQRd__lFQOMQ', 
+                       '_$sSo24UISceneConnectionOptionsC11HealthKitUIE33shouldHandleActiveWorkoutRecoverySbvg', 
+                       '_$sSo24UISceneConnectionOptionsC11HealthKitUIE33shouldHandleActiveWorkoutRecoverySbvpMV', 
                        _HKHealthKitUIFrameworkBundle ]
     objc-classes:    [ HKActivityRingView ]
 ...

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2023 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -21,13 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _DARWIN_POSIX_UNISTD_
-#define _DARWIN_POSIX_UNISTD_
+#ifndef __UNISTD_H_
+#define __UNISTD_H_
 
-#if !__building_module(Darwin)
+#if !__building_module(unistd)
 #error "Do not include this header directly, include <unistd.h> instead"
 #endif
 
 #include <unistd.h>
 
-#endif /* _DARWIN_POSIX_UNISTD_ */
+#endif /* __UNISTD_H_ */

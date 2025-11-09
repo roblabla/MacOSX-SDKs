@@ -50,12 +50,27 @@ CG_EXTERN CFTypeID CGGradientGetTypeID(void)
    by `count'; the number of color components is the product of `count' and
    the number of color components of `space'. If no color is provided for 0 or 1,
    the gradient will use the color provided at the locations closest to 0 and 1
-   for those values. */
+   for those values. The gradient's content headroom will be based on the `space'
+   and determined by the system. */
 
 CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColorComponents(
     CGColorSpaceRef cg_nullable space, const CGFloat * cg_nullable components,
     const CGFloat * __nullable locations, size_t count)
     API_AVAILABLE(macos(10.5), ios(2.0));
+
+/* Creates a gradient with a specified content headroom. The value of the `headroom'
+   will be adjusted as follows:
+   (headroom < 0.0f) ? 0.0f : (headroom > 0.0f && headroom < 1.0f) ? 1.0f : headroom.
+   The `space' must support HDR (is either HDR or extended range RGB). Creating a gradient
+   with the content headroom of 0.0 means that the headroom is unspecified, and this will
+   prevent tone mapping of the gradient content to the destination. Meaning of other
+   parameters is the same as in CGGradientCreateWithColorComponents. */
+
+CG_EXTERN CGGradientRef __nullable CGGradientCreateWithContentHeadroom(
+    float headroom, CGColorSpaceRef cg_nullable space, const CGFloat * cg_nullable components,
+    const CGFloat * __nullable locations, size_t count)
+    CF_SWIFT_NAME(CGGradient.init(headroom:colorSpace:colorComponents:locations:count:))
+    API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
 /* Creates a gradient by pairing the colors provided in `colors' with the
    locations provided in `locations'. `colors' should be a non-empty array
@@ -72,7 +87,9 @@ CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColorComponents(
    1; the array of locations should should contain the same number of items
    as `colors'. If no color is provided for 0 or 1, the gradient will use
    the color provided at the locations closest to 0 and 1 for those
-   values. */
+   values. If the `space' supports headroom (is either HDR or extended range RGB)
+   and `colors' contain RGB CGColors with content headroom, the gradient will
+   have the content headroom equal to the maximum of the content headoom of 'colors'. */
 
 CG_EXTERN CGGradientRef __nullable CGGradientCreateWithColors(
     CGColorSpaceRef __nullable space, CFArrayRef cg_nullable colors,
@@ -91,6 +108,13 @@ CG_EXTERN CGGradientRef cg_nullable CGGradientRetain(
 
 CG_EXTERN void CGGradientRelease(CGGradientRef cg_nullable gradient)
     API_AVAILABLE(macos(10.5), ios(2.0));
+
+/* Return gradient's content headroom, and return 0.0f if unknown or unspecified.
+  Gradient's content headroom is a maximum headroom of HDR colors used by the gradient. */
+
+CG_EXTERN float CGGradientGetContentHeadroom(CGGradientRef cg_nullable gradient)
+   CF_SWIFT_NAME(getter:CGGradient.contentHeadroom(self:))
+   API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
 CF_ASSUME_NONNULL_END
 

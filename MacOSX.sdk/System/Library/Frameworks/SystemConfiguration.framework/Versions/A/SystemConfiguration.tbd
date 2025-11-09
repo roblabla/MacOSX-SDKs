@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/SystemConfiguration.framework/Versions/A/SystemConfiguration'
-current-version: 1351.120.3
+current-version: 1385.0.7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -227,9 +227,8 @@ exports:
                        __SCUnserialize, __SCUnserializeData, __SCUnserializeMultiple, 
                        __SCUnserializeString, __SCVLANInterfaceCopyActive, __SCVLANInterfaceUpdateConfiguration, 
                        __SC_CFBundleGet, __SC_CFMachPortCreateWithPort, __SC_CFStringIsValidDNSName, 
-                       __SC_CFStringIsValidNetBIOSName, __SC_IONetworkInterfaceBSDNameMatching, 
-                       __SC_LOG_DEFAULT, __SC_cfstring_to_cstring, __SC_checkMachPortReceive, 
-                       __SC_checkMachPortSend, __SC_checkResolverReachabilityByAddress, 
+                       __SC_CFStringIsValidNetBIOSName, __SC_LOG_DEFAULT, __SC_cfstring_to_cstring, 
+                       __SC_checkMachPortReceive, __SC_checkMachPortSend, __SC_checkResolverReachabilityByAddress, 
                        __SC_copyBacktrace, __SC_copyInterfaceUUID, __SC_crash, __SC_dlopen, 
                        __SC_domainEndsWithDomain, __SC_getApplicationBundleID, __SC_getconninfo, 
                        __SC_hostMatchesDomain, __SC_hw_model, __SC_isInstallEnvironment, 
@@ -292,7 +291,11 @@ exports:
                        _kSCPropNetAirPortPreferredNetwork, _kSCPropNetAirPortSavePasswords, 
                        _kSCPropNetCaptivePortalURL, _kSCPropNetCommCenterAllowNetworkAccess, 
                        _kSCPropNetCommCenterAvailable, _kSCPropNetDNSConfirmedServiceID, 
-                       _kSCPropNetDNSDomainName, _kSCPropNetDNSOptions, _kSCPropNetDNSSearchDomains, 
+                       _kSCPropNetDNSDomainName, _kSCPropNetDNSEncryptedServerALPN, 
+                       _kSCPropNetDNSEncryptedServerAddresses, _kSCPropNetDNSEncryptedServerAuthenticationDomainName, 
+                       _kSCPropNetDNSEncryptedServerDoHPath, _kSCPropNetDNSEncryptedServerPort, 
+                       _kSCPropNetDNSEncryptedServerServiceParameters, _kSCPropNetDNSEncryptedServerServicePriority, 
+                       _kSCPropNetDNSEncryptedServers, _kSCPropNetDNSOptions, _kSCPropNetDNSSearchDomains, 
                        _kSCPropNetDNSSearchOrder, _kSCPropNetDNSServerAddresses, 
                        _kSCPropNetDNSServerPort, _kSCPropNetDNSServerTimeout, _kSCPropNetDNSServiceIdentifier, 
                        _kSCPropNetDNSSortList, _kSCPropNetDNSSupplementalMatchDomains, 

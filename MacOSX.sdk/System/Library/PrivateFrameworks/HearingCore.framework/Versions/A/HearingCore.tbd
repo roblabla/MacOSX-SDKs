@@ -15,12 +15,12 @@ exports:
                        _HCHPLoggingQueue, _HCHealthBundleName, _HCHeardBundleName, 
                        _HCHeardProcessName, _HCLogHearingHandoff, _HCLogHearingLiveListen, 
                        _HCLogHearingNearby, _HCLogHearingNearbyIDS, _HCLogHearingXPC, 
-                       _HCLogSoundMeter, _HCMessageDeviceNameKey, _HCPerformSafeBlock, 
-                       _HCPreferencesBundleName, _HCProcessGetName, _HCRTTNotificationContentExtensionName, 
-                       _HCSpringBoardProcessName, _HearingCoreVersionNumber, _HearingCoreVersionString, 
-                       _HearingEngineeringLog, _HearingInitializeLogging, _HearingLoggingQueue, 
-                       _PAEngineeringLog, _PAInitializeLogging, _PALoggingQueue, 
-                       _kAdjust0DB, _messageIdentifierDescription ]
+                       _HCLogSoundMeter, _HCMessageDeviceNameKey, _HCMessageUUIDKey, 
+                       _HCPerformSafeBlock, _HCPreferencesBundleName, _HCProcessGetName, 
+                       _HCRTTNotificationContentExtensionName, _HCSpringBoardProcessName, 
+                       _HearingCoreVersionNumber, _HearingCoreVersionString, _HearingEngineeringLog, 
+                       _HearingInitializeLogging, _HearingLoggingQueue, _PAEngineeringLog, 
+                       _PAInitializeLogging, _PALoggingQueue, _kAdjust0DB, _messageIdentifierDescription ]
     objc-classes:    [ HCDatabaseManager, HCServer, HCSettings, HCSettingsListenerHelper, 
                        HCUtilities, HCXPCClient, HCXPCMessage ]
 ...

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotoFoundationLegacy.framework/Versions/A/PhotoFoundationLegacy'
-current-version: 760.6.150
+current-version: 801.43.240
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _LastAddRemoveTaskState, _PFCMTimeDescription, _PFCMTimeFromQTTimeString, 

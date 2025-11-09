@@ -1,6 +1,6 @@
 /* CoreAnimation - CADisplayLink.h
 
-   Copyright (c) 2009-2022, Apple Inc.
+   Copyright (c) 2009-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__

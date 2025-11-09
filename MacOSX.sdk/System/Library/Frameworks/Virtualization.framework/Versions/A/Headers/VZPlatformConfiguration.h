@@ -2,7 +2,7 @@
 //  VZPlatformConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//  Copyright © 2021-2024 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>

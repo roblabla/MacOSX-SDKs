@@ -113,6 +113,8 @@ typedef NS_ENUM(NSInteger, NSSegmentDistribution) {
 - (NSSize)minimumSizeWithPrioritizedCompressionOptions:(NSArray<NSUserInterfaceCompressionOptions *> *)prioritizedOptions API_AVAILABLE(macos(10.13));
 @property (readonly, copy) NSUserInterfaceCompressionOptions *activeCompressionOptions API_AVAILABLE(macos(10.13));
 
+@property NSControlBorderShape borderShape API_AVAILABLE(macos(26.0));
+
 @end
 
 @interface NSSegmentedControl (NSSegmentedControlConvenience)

@@ -104,7 +104,8 @@ may be set up using
 and should use a standard plist format. The file permissions must be world readable (644) and recommended ownership is root or a system administrator.
 .sp
 It may contain the following optional sections:
-.Bl -tag -width -indent  \" Begins a tagged list 
+
+.Bl -tag -width -indent  \" Begins a tagged list
 .It Em UserSelectorPath
 This string value points to the custom UserSelector process which is used for associating users with SmartCards. If this section is not found or the component at that path does not exist, the system UserSelector is used.
 .It Em TrustedAuthorities
@@ -130,7 +131,15 @@ OrganizationalUnit:2
 .It -
 OrganizationalUnit:3
 .It -
+OrganizationalUnit:4
+.It -
+OrganizationalUnit:5
+.It -
 Country
+.It -
+Serial
+.It -
+UserId
 .El
 .Pp
 .Em formatString
@@ -216,6 +225,16 @@ will join both values and the result will be
 This result will be compared to a directory attribute - in this case, the
 .Em dsAttrTypeNative:longName
 field. When a match is found, the corresponding user is considered associated with the SmartCard.
+.Sh OPENDIRECTORY CONFIGURATION
+By default, SmartCard authentication using public key hash mapping operates exclusively on local OpenDirectory nodes. This behavior ensures that local user accounts are properly authenticated without potential conflicts from network directory services. For attribute-based mapping, both local and network nodes are queried.
+
+To enable public key hash mapping to use network OpenDirectory nodes in addition to local nodes, use:
+.Bd -literal -offset indent
+sudo defaults write /Library/Preferences/com.apple.security.smartcard usePubkeyHashNetworkOd -bool YES
+.Ed
+
+This setting might be useful in environments where SmartCards need to authenticate against Active Directory or other directory services directly with public key hash mapping rather than attribute mapping.
+.sp
 .Sh OFFLINE SMARTCARD LOGIN VIA KERBEROS CACHING
 In environments where macOS clients may not always be able to reach Directory Servers, cached SmartCard login support is possible via Kerberos caching. This configuration allows users with network accounts to authenticate via SmartCard when operating outside the enterprise environment. Note: Initial account setup requires machine binding and access to the directory server.
 .Sh KERBEROS ATTRIBUTE MAPPING CONFIG EXAMPLE
@@ -323,10 +342,16 @@ AllowUnmappedUsers setting
 System-wide setting using defaults or MDM
 .El
 
+.Sh REMOTE ACCESS
+SmartCard authorization in login, unlock and security prompts is not available during remote access to the station. Some software may cause the station to be detected in remote access mode when this is not the case. You can disable remote access detection completely with the following command:
+.Bd -literal -offset indent
+defaults write com.apple.security.authorization ignoreArd -bool TRUE
+.Ed
+
 .Sh EXTENSIONS
 Extensions can be created using the Xcode SmartCard Token Extension template. Refer to the developer documentation for further details.
 .br
-To enable the app extension and make the token available to the system for authentication, launch the sc_auth command line tool with value of '‘com.apple.ctk.class-id’ from Info.plist:
+To enable the app extension and make the token available to the system for authentication, launch the sc_auth command line tool with value of ''com.apple.ctk.class-id' from Info.plist:
 .Bd -literal -offset indent
 sudo sc_auth enable_for_login -t  com.example.HostApp.TokenExtension
 .Ed

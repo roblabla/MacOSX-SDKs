@@ -922,6 +922,39 @@ AudioFileWritePackets (	AudioFileID							inAudioFile,
 
 
 /*!
+    @function   AudioFileWritePacketsWithDependencies
+    @abstract   Write packets of audio data with corresponding packet dependencies to an audio data file.
+    @discussion For all uncompressed formats, `packets == frames`.
+    @param inAudioFile          The audio file to write to.
+    @param inUseCache           Set to `true` if you want to cache the data. Otherwise, set to `false`.
+    @param inNumBytes           The number of bytes of audio data being written.
+    @param inPacketDescriptions A pointer to an array of packet descriptions for the audio data.
+                                Not all formats require packet descriptions. If no packet descriptions
+                                are required, for instance, if you are writing CBR data,  pass `NULL`.
+    @param inPacketDependencies A pointer to an array of packet dependencies for the audio data.
+                                This must not be `NULL`.  To write packets without dependencies,
+                                use ``AudioFileWritePackets`` instead.
+    @param inStartingPacket     The packet index for the placement of the first provided packet.
+    @param ioNumPackets         On input, a pointer to the number of packets to write.
+                                On output, a pointer to the number of packets actually written.
+    @param inBuffer             A pointer to user-allocated memory containing the new audio data
+                                to write to the audio data file.
+    @result                     A result code. See Result Codes.
+*/
+extern OSStatus
+AudioFileWritePacketsWithDependencies (
+    AudioFileID                                         inAudioFile,
+    Boolean                                             inUseCache,
+    UInt32                                              inNumBytes,
+    const AudioStreamPacketDescription * __nullable     inPacketDescriptions,
+    const AudioStreamPacketDependencyDescription *      inPacketDependencies,
+    SInt64                                              inStartingPacket,
+    UInt32 *                                            ioNumPackets,
+    const void *                                        inBuffer)
+API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
+
+/*!
     @function	AudioFileCountUserData
     @abstract   Get the number of user data items with a certain ID in the file
     @discussion		"User Data" refers to chunks in AIFF, CAF and WAVE files, or resources 

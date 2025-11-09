@@ -39,8 +39,7 @@ exports:
                        ADMUser.mIdentityRef, ADMUser.mIsLocal, ADMUser.mModifiedFields, 
                        ADMWebServerConfig._configurationDirectory, AdminAuthenticator._syncWaitDone, 
                        AdminAuthenticator._wantsClearTextAuthentication, AdminDSAuthenticator._didClearTextAuthentication, 
-                       AdminDirectoryService.mDirReference, AdminDirectoryService.mNameOfDefaultLocalNode, 
-                       AdminDirectoryService.mNameOfSearchNode, DOAsyncResult.mCompletionBlock, 
+                       AdminDirectoryService.mDirReference, DOAsyncResult.mCompletionBlock, 
                        DOAsyncResult.mContext, DOAsyncResult.mDone, DOAsyncResult.mResult, 
                        MCXPrefObject.mMCXDict, MCXPrefObject.mUnionPolicyKeys, WriteConfigClient._authorizationData, 
                        WriteConfigClient._connection, WriteConfigClient._onewayMessageDispatcher ]

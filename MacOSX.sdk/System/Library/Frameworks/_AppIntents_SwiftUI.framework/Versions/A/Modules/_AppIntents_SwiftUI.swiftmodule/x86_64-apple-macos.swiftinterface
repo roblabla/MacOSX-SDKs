@@ -1,25 +1,31 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 227.19 -module-name _AppIntents_SwiftUI
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
-@_exported import AppIntents
-import CoreSpotlight
-import DeveloperToolsSupport
-import Foundation
-import Swift
-import SwiftUI
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -target-min-inlining-version min -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 300.0.4.401 -module-name _AppIntents_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+@_exported public import AppIntents
+public import CoreSpotlight
+public import Swift
+public import SwiftUI
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameter {
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func requestConfirmation<ViewType>(for itemToConfirm: Value.ValueType, dialog: AppIntents.IntentDialog? = nil, @SwiftUICore.ViewBuilder view: () -> ViewType) async throws -> Swift.Bool where ViewType : SwiftUICore.View
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func requestConfirmation<ViewType>(for itemToConfirm: Value.ValueType, dialog: AppIntents.IntentDialog? = nil, view: ViewType) async throws -> Swift.Bool where ViewType : SwiftUICore.View
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentParameterContext {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func requestConfirmation<ViewType>(for itemToConfirm: Value.ValueType, dialog: AppIntents.IntentDialog? = nil, @SwiftUICore.ViewBuilder view: () -> ViewType) async throws -> Swift.Bool where ViewType : SwiftUICore.View
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func requestConfirmation<ViewType>(for itemToConfirm: Value.ValueType, dialog: AppIntents.IntentDialog? = nil, view: ViewType) async throws -> Swift.Bool where ViewType : SwiftUICore.View
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension AppIntents.IntentResult {
@@ -84,6 +90,11 @@ extension SwiftUI.Toggle {
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.Toggle where Label == SwiftUICore.Text {
   nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, isOn: Swift.Bool, intent: some AppIntent)
+  @_alwaysEmitIntoClient @_disfavoredOverload nonisolated public init(_ titleResource: Foundation.LocalizedStringResource, isOn: Swift.Bool, intent: some AppIntent) {
+        self.init(isOn: isOn, intent: intent) {
+            Text(titleResource)
+        }
+    }
   @_disfavoredOverload nonisolated public init<S>(_ title: S, isOn: Swift.Bool, intent: some AppIntent) where S : Swift.StringProtocol
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -96,6 +107,12 @@ extension SwiftUICore.View {
   nonisolated public func accessibilityAction<I>(_ actionKind: SwiftUI.AccessibilityActionKind = .default, intent: I) -> SwiftUICore.ModifiedContent<Self, SwiftUI.AccessibilityAttachmentModifier> where I : AppIntents.AppIntent
   nonisolated public func accessibilityAction<I>(named name: SwiftUICore.Text, intent: I) -> SwiftUICore.ModifiedContent<Self, SwiftUI.AccessibilityAttachmentModifier> where I : AppIntents.AppIntent
   nonisolated public func accessibilityAction<I>(named nameKey: SwiftUICore.LocalizedStringKey, intent: I) -> SwiftUICore.ModifiedContent<Self, SwiftUI.AccessibilityAttachmentModifier> where I : AppIntents.AppIntent
+  @_alwaysEmitIntoClient @_disfavoredOverload nonisolated public func accessibilityAction<I>(named nameResource: Foundation.LocalizedStringResource, intent: I) -> SwiftUICore.ModifiedContent<Self, SwiftUI.AccessibilityAttachmentModifier> where I : AppIntents.AppIntent {
+        return accessibilityAction(
+            named: Text(nameResource),
+            intent: intent
+        )
+    }
   @_disfavoredOverload nonisolated public func accessibilityAction<S, I>(named name: S, intent: I) -> SwiftUICore.ModifiedContent<Self, SwiftUI.AccessibilityAttachmentModifier> where S : Swift.StringProtocol, I : AppIntents.AppIntent
 }
 @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -103,11 +120,28 @@ extension SwiftUICore.ModifiedContent where Modifier == SwiftUI.AccessibilityAtt
   nonisolated public func accessibilityAction<I>(_ actionKind: SwiftUI.AccessibilityActionKind = .default, intent: I) -> SwiftUICore.ModifiedContent<Content, Modifier> where I : AppIntents.AppIntent
   nonisolated public func accessibilityAction<I>(named name: SwiftUICore.Text, intent: I) -> SwiftUICore.ModifiedContent<Content, Modifier> where I : AppIntents.AppIntent
   nonisolated public func accessibilityAction<I>(named nameKey: SwiftUICore.LocalizedStringKey, intent: I) -> SwiftUICore.ModifiedContent<Content, Modifier> where I : AppIntents.AppIntent
+  @_alwaysEmitIntoClient @_disfavoredOverload nonisolated public func accessibilityAction<I>(named nameResource: Foundation.LocalizedStringResource, intent: I) -> SwiftUICore.ModifiedContent<Content, Modifier> where I : AppIntents.AppIntent {
+        return accessibilityAction(
+            named: Text(nameResource),
+            intent: intent
+        )
+    }
   @_disfavoredOverload nonisolated public func accessibilityAction<S, I>(named name: S, intent: I) -> SwiftUICore.ModifiedContent<Content, Modifier> where S : Swift.StringProtocol, I : AppIntents.AppIntent
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension AppIntents.AppIntent {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func requestConfirmation<Content>(conditions: AppIntents.ConfirmationConditions = [], actionName: AppIntents.ConfirmationActionName = .`continue`, dialog: AppIntents.IntentDialog? = nil, showDialogAsPrompt: Swift.Bool = true, @SwiftUICore.ViewBuilder content: () -> Content) async throws where Content : SwiftUICore.View
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
+extension AppIntents.AppIntent {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func requestChoice<Content>(between options: [AppIntents.IntentChoiceOption], dialog: AppIntents.IntentDialog? = nil, @SwiftUICore.ViewBuilder content: () -> Content) async throws -> AppIntents.IntentChoiceOption where Content : SwiftUICore.View
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func requestChoice<Content>(between options: [AppIntents.IntentChoiceOption], dialog: AppIntents.IntentDialog? = nil, view: Content) async throws -> AppIntents.IntentChoiceOption where Content : SwiftUICore.View
+  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.Button {
@@ -116,26 +150,62 @@ extension SwiftUI.Button {
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.Button where Label == SwiftUICore.Text {
   nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, intent: some AppIntent)
+  @_alwaysEmitIntoClient @_disfavoredOverload nonisolated public init(_ titleResource: Foundation.LocalizedStringResource, intent: some AppIntent) {
+        self.init(intent: intent) { Text(titleResource) }
+    }
   @_disfavoredOverload nonisolated public init<S>(_ title: S, intent: some AppIntent) where S : Swift.StringProtocol
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.Button {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(role: SwiftUI.ButtonRole?, intent: some AppIntent, @SwiftUICore.ViewBuilder label: () -> Label)
+  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.Button where Label == SwiftUICore.Text {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, role: SwiftUI.ButtonRole?, intent: some AppIntent)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_alwaysEmitIntoClient @_disfavoredOverload nonisolated public init(_ titleResource: Foundation.LocalizedStringResource, role: SwiftUI.ButtonRole?, intent: some AppIntent) {
+        self.init(role: role, intent: intent) { Text(titleResource) }
+    }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload nonisolated public init(_ title: some StringProtocol, role: SwiftUI.ButtonRole?, intent: some AppIntent)
+  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.Button where Label == SwiftUI.Label<SwiftUICore.Text, SwiftUICore.Image> {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, systemImage: Swift.String, role: SwiftUI.ButtonRole? = nil, intent: some AppIntent)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_alwaysEmitIntoClient @_disfavoredOverload nonisolated public init(_ titleResource: Foundation.LocalizedStringResource, systemImage: Swift.String, role: SwiftUI.ButtonRole? = nil, intent: some AppIntent) {
+        self.init(role: role, intent: intent) {
+            SwiftUI.Label(titleResource, systemImage: systemImage)
+        }
+    }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload nonisolated public init(_ title: some StringProtocol, systemImage: Swift.String, role: SwiftUI.ButtonRole? = nil, intent: some AppIntent)
+  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension SwiftUI.Button where Label == SwiftUI.Label<SwiftUICore.Text, SwiftUICore.Image> {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ titleKey: SwiftUICore.LocalizedStringKey, image: DeveloperToolsSupport.ImageResource, role: SwiftUI.ButtonRole? = nil, intent: some AppIntent)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_alwaysEmitIntoClient @_disfavoredOverload nonisolated public init(_ titleResource: Foundation.LocalizedStringResource, image: DeveloperToolsSupport.ImageResource, role: SwiftUI.ButtonRole? = nil, intent: some AppIntent) {
+        self.init(role: role, intent: intent) {
+            SwiftUI.Label(titleResource, image: image)
+        }
+    }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_disfavoredOverload nonisolated public init(_ title: some StringProtocol, image: DeveloperToolsSupport.ImageResource, role: SwiftUI.ButtonRole? = nil, intent: some AppIntent)
+  #endif
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 @available(macOS, unavailable)
@@ -149,7 +219,9 @@ public struct SiriTipViewStyle {
 @available(macOS, unavailable)
 @available(macCatalyst, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct SiriTipView : SwiftUICore.View {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init<Intent>(intent: Intent, isVisible: SwiftUICore.Binding<Swift.Bool>? = nil) where Intent : AppIntents.AppIntent
+  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }

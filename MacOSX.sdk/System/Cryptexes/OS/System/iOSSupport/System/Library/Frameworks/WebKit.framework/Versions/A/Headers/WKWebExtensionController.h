@@ -43,7 +43,7 @@ WK_HEADER_AUDIT_BEGIN(nullability, sendability)
  @discussion You can have one or more extension controller instances, allowing different parts of the app to use different sets of extensions.
  A controller is associated with ``WKWebView`` via the ``webExtensionController`` property on ``WKWebViewConfiguration``.
  */
-WK_EXTERN API_AVAILABLE(macos(NA), ios(18.4), visionos(NA)) WK_SWIFT_UI_ACTOR
+WK_EXTERN API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4)) WK_SWIFT_UI_ACTOR
 @interface WKWebExtensionController : NSObject
 
 /*!

@@ -4,9 +4,12 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020,2022-2023 Apple Inc. All rights reserved.
+	Copyright 2010-2020,2022-2025 Apple Inc. All rights reserved.
  
 	$Log$
+	07jul2025 jbailey
+	<rdar://153021932> Update availability to 26.0 for all platforms. <dcasey, abhi>
+
 	1apr2024 dcasey
 	<rdar://125102733> AVF - Warning _TEMP_AVVideoTransferFunction_IEC_sRGB <jbailey>
 
@@ -55,6 +58,8 @@ typedef NSString * AVVideoCodecType NS_STRING_ENUM;
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422HQ /* @"apch" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422LT /* @"apcs" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422Proxy /* @"apco" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProResRAW /* @"aprn" */          API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos) NS_SWIFT_NAME(proResRAW);
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProResRAWHQ /* @"aprh" */        API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos) NS_SWIFT_NAME(proResRAWHQ);
 
 	/* IMPORTANT NOTE: this constant is used to select the appropriate encoder, but is NOT used on the encoded content, which is backwards compatible and hence uses 'hvc1' as its codec type. */
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeHEVCWithAlpha /* @"muxa" */           API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);

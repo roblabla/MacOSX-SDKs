@@ -40,7 +40,7 @@ WK_HEADER_AUDIT_BEGIN(nullability, sendability)
  can be used by a web extension to perform specific actions within a web extension context, such toggling features, or interacting with
  web content. These commands enhance the functionality of the extension by allowing users to invoke actions quickly.
  */
-WK_EXTERN API_AVAILABLE(macos(NA), ios(18.4), visionos(NA))
+WK_EXTERN API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4))
 WK_SWIFT_UI_ACTOR NS_SWIFT_NAME(WKWebExtension.Command)
 @interface WKWebExtensionCommand : NSObject
 

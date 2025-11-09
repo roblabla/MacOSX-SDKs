@@ -23,7 +23,7 @@ typedef NS_ENUM(NSUInteger, MTLSparseTextureMappingMode)
 {
     MTLSparseTextureMappingModeMap   = 0,
     MTLSparseTextureMappingModeUnmap = 1,
-} API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+} API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 
 /*!
  @enum MTLMapIndirectArguments
@@ -46,7 +46,7 @@ typedef struct {
     uint32_t sliceId;
 } MTLMapIndirectArguments;
 
-API_AVAILABLE(macos(10.15), ios(13.0))
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(16.0))
 @protocol MTLResourceStateCommandEncoder <MTLCommandEncoder>
 
 
@@ -60,7 +60,7 @@ API_AVAILABLE(macos(10.15), ios(13.0))
                       regions:(const MTLRegion[_Nonnull])regions
                     mipLevels:(const NSUInteger[_Nonnull])mipLevels
                        slices:(const NSUInteger[_Nonnull])slices
-                   numRegions:(NSUInteger)numRegions API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+                   numRegions:(NSUInteger)numRegions API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 
 /*!
  @method updateTextureMapping:region:mipLevel:slice:mode:
@@ -70,7 +70,7 @@ API_AVAILABLE(macos(10.15), ios(13.0))
                         mode:(const MTLSparseTextureMappingMode)mode
                       region:(const MTLRegion)region
                     mipLevel:(const NSUInteger)mipLevel
-                       slice:(const NSUInteger)slice API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+                       slice:(const NSUInteger)slice API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 
 /*!
  @method updateTextureMapping:indirectBuffer:indirectBufferOffset:
@@ -84,7 +84,7 @@ API_AVAILABLE(macos(10.15), ios(13.0))
 -(void) updateTextureMapping:(id<MTLTexture>) texture
                         mode:(const MTLSparseTextureMappingMode)mode
               indirectBuffer:(id<MTLBuffer>)indirectBuffer
-        indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+        indirectBufferOffset:(NSUInteger)indirectBufferOffset API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 
 /*!
  @method updateFence:
@@ -92,7 +92,7 @@ API_AVAILABLE(macos(10.15), ios(13.0))
  @discussion The fence is updated at kernel submission to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
-- (void)updateFence:(id <MTLFence>)fence API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+- (void)updateFence:(id <MTLFence>)fence API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 
 /*!
  @method waitForFence:
@@ -100,7 +100,7 @@ API_AVAILABLE(macos(10.15), ios(13.0))
  @discussion The fence is evaluated at kernel submission to maintain global order and prevent deadlock.
  Drivers may delay fence updates until the end of the encoder. Drivers may also wait on fences at the beginning of an encoder. It is therefore illegal to wait on a fence after it has been updated in the same encoder.
  */
-- (void)waitForFence:(id <MTLFence>)fence API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+- (void)waitForFence:(id <MTLFence>)fence API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 
 
 /*!

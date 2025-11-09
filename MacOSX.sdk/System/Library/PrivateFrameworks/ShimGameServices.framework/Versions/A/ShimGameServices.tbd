@@ -3,13 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ShimGameServices.framework/Versions/A/ShimGameServices'
-current-version: 819.4.46
+current-version: 820.0.79
 compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s12GameServices7ArtworkV04ShimaB0E11templateURL8metadataACSgSS_So17GKArtworkMetadataCtcfC', 
+                       '_$s12GameServices7ArtworkV04ShimaB0E12iconBundleIDACSgSS_tcfC', 
                        '_$s16ShimGameServices0A13FriendServiceV04listD11Suggestions6playerSay0bC03RefVyAF0D16SuggestionEntity_pGGAHyAF6Player_pG_tYaKF', 
                        '_$s16ShimGameServices0A13FriendServiceV04listD11Suggestions6playerSay0bC03RefVyAF0D16SuggestionEntity_pGGAHyAF6Player_pG_tYaKFTu', 
                        '_$s16ShimGameServices0A13FriendServiceV08describeD11Suggestions06friendG0Say0bC00D10SuggestionVSgGSayAF3RefVyAF0dI6Entity_pGG_tYaKF', 
@@ -79,8 +80,8 @@ exports:
                        '_$s16ShimGameServices0A18LeaderboardServiceV5reset12leaderboardsySay0bC03RefVyAF0D0_pGG_tYaKFTu', 
                        '_$s16ShimGameServices0A18LeaderboardServiceV6submit7entriesySay0bC00D5EntryVG_tYaKF', 
                        '_$s16ShimGameServices0A18LeaderboardServiceV6submit7entriesySay0bC00D5EntryVG_tYaKFTu', 
-                       '_$s16ShimGameServices0A18LeaderboardServiceV8describe12leaderboardsSay0bC00D11DescriptionVGSayAF3RefVyAF0D0_pGG_tYaKF', 
-                       '_$s16ShimGameServices0A18LeaderboardServiceV8describe12leaderboardsSay0bC00D11DescriptionVGSayAF3RefVyAF0D0_pGG_tYaKFTu', 
+                       '_$s16ShimGameServices0A18LeaderboardServiceV8describe12leaderboardsSay0bC00D11DescriptionVSgGSayAF3RefVyAF0D0_pGG_tYaKF', 
+                       '_$s16ShimGameServices0A18LeaderboardServiceV8describe12leaderboardsSay0bC00D11DescriptionVSgGSayAF3RefVyAF0D0_pGG_tYaKFTu', 
                        '_$s16ShimGameServices0A18LeaderboardServiceV8describe15leaderboardSetsSay0bC00D14SetDescriptionVSgGSayAF3RefVyAF0dI0_pGG_tYaKF', 
                        '_$s16ShimGameServices0A18LeaderboardServiceV8describe15leaderboardSetsSay0bC00D14SetDescriptionVSgGSayAF3RefVyAF0dI0_pGG_tYaKFTu', 
                        '_$s16ShimGameServices0A18LeaderboardServiceVMa', '_$s16ShimGameServices0A18LeaderboardServiceVMn', 
@@ -93,11 +94,19 @@ exports:
                        '_$s16ShimGameServices0B25SubLibraryServiceProtocolP9listGames2by6sortBy4upTo5after09belongingN00bC04PageVyAA23AnySortableKeyValuePairVyAJ3RefVyAJ0B0_pGGGAJ0B7FiltersV_AJ0B14SortDescriptorVSuSgAJ6CursorVSgAPyAJ6Player_pGtYaKFTq', 
                        '_$s16ShimGameServices0B25SubLibraryServiceProtocolTL', '_$s16ShimGameServices0aB23LibraryAggregateServiceV04listB9Histories2by6sortBy4upTo5after09belongingM00bC04PageVyAJ0B7HistoryVGAJ0B7FiltersVSg_AJ0B14SortDescriptorVSgSuSgAJ6CursorVSgAJ3RefVyAJ6Player_pGtYaKF', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceV04listB9Histories2by6sortBy4upTo5after09belongingM00bC04PageVyAJ0B7HistoryVGAJ0B7FiltersVSg_AJ0B14SortDescriptorVSgSuSgAJ6CursorVSgAJ3RefVyAJ6Player_pGtYaKFTu', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV04listB9Histories4with0bC04PageVyAF0B7HistoryVGAF16ListGamesRequestV_tYaKF', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV04listB9Histories4with0bC04PageVyAF0B7HistoryVGAF16ListGamesRequestV_tYaKFTu', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceV0bC00bdF8ProtocolAAMc', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV8describe4withSay0bC00B11DescriptionVSgGAF20DescribeGamesRequestV_tYaKF', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV8describe4withSay0bC00B11DescriptionVSgGAF20DescribeGamesRequestV_tYaKFTu', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV8describe5gamesSay0bC00B11DescriptionVSgGSayAF3RefVyAF0B0_pGG_tYaKF', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV8describe5gamesSay0bC00B11DescriptionVSgGSayAF3RefVyAF0B0_pGG_tYaKFTu', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceV9describe25gamesSay0bC00B11DescriptionVSgGSayAF3RefVyAF0B0_pGG_tYaKF', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceV9describe25gamesSay0bC00B11DescriptionVSgGSayAF3RefVyAF0B0_pGG_tYaKFTu', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceV9listGames2by6sortBy4upTo5after09belongingM00bC04PageVyAJ3RefVyAJ0B0_pGGAJ0B7FiltersVSg_AJ0B14SortDescriptorVSgSuSgAJ6CursorVSgANyAJ6Player_pGtYaKF', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceV9listGames2by6sortBy4upTo5after09belongingM00bC04PageVyAJ3RefVyAJ0B0_pGGAJ0B7FiltersVSg_AJ0B14SortDescriptorVSgSuSgAJ6CursorVSgANyAJ6Player_pGtYaKFTu', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV9listGames4with0bC04PageVyAF3RefVyAF0B0_pGGAF04ListH7RequestV_tYaKF', 
+                       '_$s16ShimGameServices0aB23LibraryAggregateServiceV9listGames4with0bC04PageVyAF3RefVyAF0B0_pGGAF04ListH7RequestV_tYaKFTu', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceVMa', '_$s16ShimGameServices0aB23LibraryAggregateServiceVMn', 
                        '_$s16ShimGameServices0aB23LibraryAggregateServiceVN', '_$s16ShimGameServices0abC4RootV0bC00b7ServiceD8ProtocolAAMc', 
                        '_$s16ShimGameServices0abC4RootV10activities0bC023ActivityServiceProtocol_pvg', 
@@ -117,6 +126,7 @@ exports:
                        '_$s16ShimGameServices0abC4RootV14authentication0bC029AuthenticationServiceProtocol_pvpMV', 
                        '_$s16ShimGameServices0abC4RootV14gameActivities0bC00B23ActivityServiceProtocol_pvg', 
                        '_$s16ShimGameServices0abC4RootV14gameActivities0bC00B23ActivityServiceProtocol_pvpMV', 
+                       '_$s16ShimGameServices0abC4RootV22makePreferencesService12serviceProxy0bC00fG8Protocol_pSo09GKServiceI0C_tKFZ', 
                        '_$s16ShimGameServices0abC4RootV37makeActivitiesMessageExtensionService12serviceProxy0bC00fghI8Protocol_pSo09GKServiceK0C_tKFZ', 
                        '_$s16ShimGameServices0abC4RootV5games0bC00B22LibraryServiceProtocol_pvg', 
                        '_$s16ShimGameServices0abC4RootV5games0bC00B22LibraryServiceProtocol_pvpMV', 

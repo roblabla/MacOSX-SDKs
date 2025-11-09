@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef void (^MKDirectionsHandler)(MKDirectionsResponse * __nullable response, NSError * __nullable error);
 typedef void (^MKETAHandler)(MKETAResponse * __nullable response, NSError * __nullable error);
 
-NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0))
 @interface MKDirections : NSObject
 
 // The request will be copied during initialization, so any changes made to the request

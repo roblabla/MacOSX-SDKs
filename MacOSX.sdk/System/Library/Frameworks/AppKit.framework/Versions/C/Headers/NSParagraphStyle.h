@@ -1,12 +1,12 @@
 #if (defined(USE_APPKIT_PUBLIC_HEADERS) && USE_APPKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSParagraphStyle.h>)
-#include <TargetConditionals.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
 #import <AppKit/AppKitDefines.h>
 
 /*
         NSParagraphStyle.h
-        Copyright (c) 1994-2024, Apple Inc.  All rights reserved.
+        Copyright (c) 1994-2025, Apple Inc.  All rights reserved.
  
 	NSParagraphStyle and NSMutableParagraphStyle hold paragraph style information
 	NSTextTab holds information about a single tab stop

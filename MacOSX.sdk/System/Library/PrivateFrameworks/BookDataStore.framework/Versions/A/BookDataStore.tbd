@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BookDataStore.framework/Versions/A/BookDataStore'
-current-version: 2248
+current-version: 2265
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -601,7 +601,7 @@ exports:
                        '_$s13BookDataStore17ReadingHistoryDayV9Coherence9CRCodableAAMc', 
                        '_$s13BookDataStore17ReadingHistoryDayVACycfC', '_$s13BookDataStore17ReadingHistoryDayVMa', 
                        '_$s13BookDataStore17ReadingHistoryDayVMn', '_$s13BookDataStore17ReadingHistoryDayVN', 
-                       '_$s13BookDataStore17ReadingHistoryDayVs23CustomStringConvertibleAAMc', 
+                       '_$s13BookDataStore17ReadingHistoryDayVSQAAMc', '_$s13BookDataStore17ReadingHistoryDayVs23CustomStringConvertibleAAMc', 
                        '_$s13BookDataStore18ObservableDelegateMp', '_$s13BookDataStore18ObservableDelegateP25observableCallbacksDidRun6targetyyXl_tFTj', 
                        '_$s13BookDataStore18ObservableDelegateP25observableCallbacksDidRun6targetyyXl_tFTq', 
                        '_$s13BookDataStore18ObservableDelegateP26observableCallbacksWillRun6targetyyXl_tFTj', 
@@ -738,7 +738,7 @@ exports:
                        '_$s13BookDataStore19ReadingHistoryModelV9Coherence9CRCodableAAMc', 
                        '_$s13BookDataStore19ReadingHistoryModelVACycfC', '_$s13BookDataStore19ReadingHistoryModelVMa', 
                        '_$s13BookDataStore19ReadingHistoryModelVMn', '_$s13BookDataStore19ReadingHistoryModelVN', 
-                       '_$s13BookDataStore19ReadingHistoryModelVs23CustomStringConvertibleAAMc', 
+                       '_$s13BookDataStore19ReadingHistoryModelVSQAAMc', '_$s13BookDataStore19ReadingHistoryModelVs23CustomStringConvertibleAAMc', 
                        '_$s13BookDataStore19ReadingHistoryModelVs28CustomDebugStringConvertibleAAMc', 
                        '_$s13BookDataStore19ReadingHistoryMonthV11descriptionSSvg', 
                        '_$s13BookDataStore19ReadingHistoryMonthV11descriptionSSvpMV', 
@@ -759,7 +759,7 @@ exports:
                        '_$s13BookDataStore19ReadingHistoryMonthV9Coherence9CRCodableAAMc', 
                        '_$s13BookDataStore19ReadingHistoryMonthVACycfC', '_$s13BookDataStore19ReadingHistoryMonthVMa', 
                        '_$s13BookDataStore19ReadingHistoryMonthVMn', '_$s13BookDataStore19ReadingHistoryMonthVN', 
-                       '_$s13BookDataStore19ReadingHistoryMonthVs23CustomStringConvertibleAAMc', 
+                       '_$s13BookDataStore19ReadingHistoryMonthVSQAAMc', '_$s13BookDataStore19ReadingHistoryMonthVs23CustomStringConvertibleAAMc', 
                        '_$s13BookDataStore19ReadingHistoryMonthVs28CustomDebugStringConvertibleAAMc', 
                        '_$s13BookDataStore20BDSXPCValueContainerMp', '_$s13BookDataStore20BDSXPCValueContainerPAA0dE4BaseTb', 
                        '_$s13BookDataStore20BDSXPCValueContainerTL', '_$s13BookDataStore20CRDTModelNameSupportMp', 
@@ -870,7 +870,7 @@ exports:
                        '_$s13BookDataStore21CRDTModelFileSyncInfoVyxG9Coherence9CRCodableAAMc', 
                        '_$s13BookDataStore21CRDTModelFileSyncInfoVyxGAA0D11NameSupportAAMc', 
                        '_$s13BookDataStore21CRDTModelFileSyncInfoVyxGAA0D11NameSupportAAWP', 
-                       '_$s13BookDataStore21CRDTModelFileSyncInfoVyxGs23CustomStringConvertibleAAMc', 
+                       '_$s13BookDataStore21CRDTModelFileSyncInfoVyxGSQAAMc', '_$s13BookDataStore21CRDTModelFileSyncInfoVyxGs23CustomStringConvertibleAAMc', 
                        '_$s13BookDataStore21CRDTModelRevisionInfoV11changeTokenQrSgvg', 
                        '_$s13BookDataStore21CRDTModelRevisionInfoV11changeTokenQrSgvpMV', 
                        '_$s13BookDataStore21CRDTModelRevisionInfoV11changeTokenQrSgvpQOMQ', 

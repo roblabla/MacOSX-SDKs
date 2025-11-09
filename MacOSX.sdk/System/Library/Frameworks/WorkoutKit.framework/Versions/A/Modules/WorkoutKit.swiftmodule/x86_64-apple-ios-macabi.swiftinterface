@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 907.15 -module-name WorkoutKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2026.0.6 -module-name WorkoutKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreLocation
 import Foundation
 import HealthKit
@@ -12,9 +12,11 @@ import _SwiftConcurrencyShims
 import os
 @available(iOS 17.0, macCatalyst 18.0, macOS 15.0, watchOS 10.0, *)
 extension HealthKit.HKWorkout {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var workoutPlan: WorkoutKit.WorkoutPlan? {
     get async throws
   }
+  #endif
 }
 @available(iOS 17.0, macCatalyst 18.0, macOS 15.0, watchOS 10.0, *)
 public struct HeartRateRangeAlert : WorkoutKit.WorkoutAlert {
@@ -70,7 +72,9 @@ public struct IntervalStep : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public var purpose: WorkoutKit.IntervalStep.Purpose
   public var step: WorkoutKit.WorkoutStep
   public init(_ purpose: WorkoutKit.IntervalStep.Purpose, step: WorkoutKit.WorkoutStep)
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ purpose: WorkoutKit.IntervalStep.Purpose, goal: WorkoutKit.WorkoutGoal = .open, alert: (any WorkoutKit.WorkoutAlert)? = nil)
+  #endif
   public static func == (lhs: WorkoutKit.IntervalStep, rhs: WorkoutKit.IntervalStep) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -103,7 +107,9 @@ public struct CustomWorkout : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(activity: HealthKit.HKWorkoutActivityType, location: HealthKit.HKWorkoutSessionLocationType = .unknown, displayName: Swift.String? = nil, warmup: WorkoutKit.WorkoutStep? = nil, blocks: [WorkoutKit.IntervalBlock] = [], cooldown: WorkoutKit.WorkoutStep? = nil)
+  #endif
   public static func == (a: WorkoutKit.CustomWorkout, b: WorkoutKit.CustomWorkout) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -138,7 +144,9 @@ extension WorkoutKit.WorkoutScheduler {
     case restricted
     case denied
     case authorized
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
     @available(iOS 17.0, watchOS 10.0, macOS 15.0, macCatalyst 18.0, *)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -284,9 +292,13 @@ public struct WorkoutStep : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public var alert: (any WorkoutKit.WorkoutAlert)?
   @available(iOS 18.0, watchOS 11.0, *)
   public var displayName: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(goal: WorkoutKit.WorkoutGoal = .open, alert: (any WorkoutKit.WorkoutAlert)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.0, watchOS 11.0, *)
   public init(goal: WorkoutKit.WorkoutGoal = .open, alert: (any WorkoutKit.WorkoutAlert)? = nil, displayName: Swift.String? = nil)
+  #endif
   public static func == (lhs: WorkoutKit.WorkoutStep, rhs: WorkoutKit.WorkoutStep) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -383,7 +395,9 @@ public struct SwimBikeRunWorkout : Swift.Equatable, Swift.Hashable, Swift.Sendab
     set
   }
   public var displayName: Swift.String?
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(activities: [WorkoutKit.SwimBikeRunWorkout.Activity], displayName: Swift.String? = nil)
+  #endif
   public static func == (a: WorkoutKit.SwimBikeRunWorkout, b: WorkoutKit.SwimBikeRunWorkout) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {

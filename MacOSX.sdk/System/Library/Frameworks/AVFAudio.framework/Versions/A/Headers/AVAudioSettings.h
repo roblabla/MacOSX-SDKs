@@ -39,6 +39,13 @@ extern NSString *const AVEncoderBitRatePerChannelKey                API_AVAILABL
 extern NSString *const AVEncoderBitRateStrategyKey                  API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* value is an AVAudioBitRateStrategy constant. see below. */
 extern NSString *const AVEncoderBitDepthHintKey					    API_AVAILABLE(macos(10.7), ios(3.0), watchos(3.0), tvos(9.0)); /* value is an integer from 8 to 32 */
 
+/* DRC/loudness encoder property keys */
+extern NSString *const AVEncoderDynamicRangeControlConfigurationKey        API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0)); /* value is an AVAudioDynamicRangeControlConfiguration constant - see below. */
+extern NSString *const AVEncoderContentSourceKey                    API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0)); /* value is an AVAudioContentSource constant - see below. */
+
+/* Audio Synchronization Packet encoder property keys */
+extern NSString *const AVEncoderASPFrequencyKey                     API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0)); /* value is an integer larger than 2. Recommended value is 75 */
+
 /* sample rate converter property keys */
 extern NSString *const AVSampleRateConverterAlgorithmKey            API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* value is an AVSampleRateConverterAlgorithm constant. see below. */
 extern NSString *const AVSampleRateConverterAudioQualityKey 		API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0)); /* value is an integer from enum AVAudioQuality */
@@ -68,3 +75,37 @@ typedef NS_ENUM(NSInteger, AVAudioQuality) {
 	AVAudioQualityMax    = 0x7F
 };
 
+typedef NS_ENUM(NSInteger, AVAudioDynamicRangeControlConfiguration) {
+    AVAudioDynamicRangeControlConfiguration_None    = 0,
+    AVAudioDynamicRangeControlConfiguration_Music   = 1,
+    AVAudioDynamicRangeControlConfiguration_Speech  = 2,
+    AVAudioDynamicRangeControlConfiguration_Movie   = 3,
+    AVAudioDynamicRangeControlConfiguration_Capture = 4
+};
+
+/*  Constants to be used with AVAudioContentSource to indicate the content type */
+typedef NS_ENUM(NSInteger, AVAudioContentSource) {
+    AVAudioContentSource_Unspecified                   = -1,
+    AVAudioContentSource_Reserved                      = 0,
+    AVAudioContentSource_AppleCapture_Traditional      = 1,  /* Traditional Apple device capture */
+    AVAudioContentSource_AppleCapture_Spatial          = 2,  /* Spatial Apple device capture */
+    AVAudioContentSource_AppleCapture_Spatial_Enhanced = 3,  /* Reserved for Apple use */
+    AVAudioContentSource_AppleMusic_Traditional        = 4,  /* Traditional Apple music and music video content such as stereo and multichannel */
+    AVAudioContentSource_AppleMusic_Spatial            = 5,  /* Spatial Apple music and music video content */
+    AVAudioContentSource_AppleAV_Traditional_Offline   = 6,  /* Traditional Apple professional AV offline encoded content such as stereo and multichannel */
+    AVAudioContentSource_AppleAV_Spatial_Offline       = 7,  /* Spatial Apple professional AV offline encoded content */
+    AVAudioContentSource_AppleAV_Traditional_Live      = 8,  /* Traditional Apple professional AV live content such as stereo and multichannel */
+    AVAudioContentSource_AppleAV_Spatial_Live          = 9,  /* Spatial Apple professional AV live content */
+    AVAudioContentSource_ApplePassthrough              = 10, /* Apple passthrough content (use only if source information is not available) */
+
+    AVAudioContentSource_Capture_Traditional           = 33, /* Traditional device capture */
+    AVAudioContentSource_Capture_Spatial               = 34, /* Spatial device capture */
+    AVAudioContentSource_Capture_Spatial_Enhanced      = 35, /* Reserved for future use */
+    AVAudioContentSource_Music_Traditional             = 36, /* Traditional music and music video content such as stereo and multichannel */
+    AVAudioContentSource_Music_Spatial                 = 37, /* Spatial music and music video content */
+    AVAudioContentSource_AV_Traditional_Offline        = 38, /* Traditional professional AV offline encoded content such as stereo and multichannel */
+    AVAudioContentSource_AV_Spatial_Offline            = 39, /* Spatial professional AV offline encoded content */
+    AVAudioContentSource_AV_Traditional_Live           = 40, /* Traditional professional AV live content such as stereo and multichannel */
+    AVAudioContentSource_AV_Spatial_Live               = 41, /* Spatial professional AV live content */
+    AVAudioContentSource_Passthrough                   = 42  /* Passthrough content (use only if source information is not available) */
+}   API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0));

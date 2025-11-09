@@ -228,5 +228,6 @@ exports:
                        _kODRecordTypeServices, _kODRecordTypeSharePoints, _kODRecordTypeUserAuthenticationData, 
                        _kODRecordTypeUsers, _kODRecordTypeWebServer, _kODSessionDefault, 
                        _kODSessionLocalPath, _kODSessionProxyAddress, _kODSessionProxyPassword, 
-                       _kODSessionProxyPort, _kODSessionProxyUsername, _kODVerifyPasswordOptionAdditionalACMData ]
+                       _kODSessionProxyPort, _kODSessionProxyUsername, _kODVerifyPasswordOptionAdditionalACMData, 
+                       _kODVerifyPasswordOptionSEPCredentialOnly ]
 ...

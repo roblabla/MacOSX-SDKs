@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <Metal/MTLDefines.h>
 
+#import <Metal/MTL4CommandQueue.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -80,6 +81,8 @@ MTL_EXTERN API_AVAILABLE(macos(10.13), ios(11.0))
 - (id<MTLCaptureScope>)newCaptureScopeWithDevice:(id<MTLDevice>)device;
 // Creates a new capture scope for the given command queue
 - (id<MTLCaptureScope>)newCaptureScopeWithCommandQueue:(id<MTLCommandQueue>)commandQueue;
+// Creates a new capture scope for the given Metal 4 command queue
+- (id<MTLCaptureScope>)newCaptureScopeWithMTL4CommandQueue:(id<MTL4CommandQueue>)commandQueue;
 
 // Checks if a given capture destination is supported.
 - (BOOL)supportsDestination:(MTLCaptureDestination)destination API_AVAILABLE(macos(10.15), ios(13.0));

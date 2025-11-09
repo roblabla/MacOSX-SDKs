@@ -19,8 +19,9 @@ OS_EXPORT
 // The filename for the resource. If not specified, one will be inferred from a fileURL if available, or else generated.
 @property (nonatomic, copy, nullable) NSString *originalFilename;
 
-// The uniform type identifier for the resource. If not specified, one will be inferred from the PHAssetResourceType.
-@property (nonatomic, copy, nullable) NSString *uniformTypeIdentifier;
+/// The type of data being provided for this asset resource. If not specified, one will be inferred from the PHAssetResourceType or file URL extension (if provided).
+@property (nonatomic, copy, nullable) UTType *contentType API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
+@property (nonatomic, copy, nullable) NSString *uniformTypeIdentifier API_DEPRECATED("Use contentType instead", ios(9, API_TO_BE_DEPRECATED), macos(10.15, API_TO_BE_DEPRECATED), tvos(10, API_TO_BE_DEPRECATED), visionos(1, API_TO_BE_DEPRECATED));
 
 // When enabled, the file passed to the creation request will be moved into the photo library without duplicating the file data (the original file is removed if the asset is created successfully), otherwise a copy of the file is created from the original. Defaults to NO.  Attempting to move a file that is open or hardlinked will fail.
 @property (nonatomic, assign) BOOL shouldMoveFile;

@@ -8,8 +8,9 @@ allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMFCore, FMFCoreTests, FMIPCore, FMIPCoreTests, FMNetworkingTests, 
-                       SPSharedTests, findmylocateagent, findmylocated, fmipcoretool, 
-                       searchpartyd, searchpartydTests, searchpartyuseragent, sptool ]
+                       SPSharedTests, findmylocateagent, findmylocated, findmylocatedTests, 
+                       fmipcoretool, searchpartyd, searchpartydTests, searchpartyuseragent, 
+                       sptool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

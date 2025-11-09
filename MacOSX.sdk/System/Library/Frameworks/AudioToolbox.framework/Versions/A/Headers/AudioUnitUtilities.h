@@ -328,7 +328,8 @@ AUParameterSet(                     AUParameterListenerRef __nullable inSendingL
                                     const AudioUnitParameter *        inParameter,
                                     AudioUnitParameterValue           inValue,
                                     UInt32                            inBufferOffsetInFrames)
-                                                                                    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
+                                    	CA_REALTIME_API
+										API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /*!
     @function   AUParameterListenerNotify
@@ -359,7 +360,9 @@ AUParameterSet(                     AUParameterListenerRef __nullable inSendingL
 extern OSStatus
 AUParameterListenerNotify(          AUParameterListenerRef __nullable inSendingListener,
                                     void * __nullable                 inSendingObject,
-                                    const AudioUnitParameter *        inParameter)    API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
+                                    const AudioUnitParameter *        inParameter)
+                                    	CA_REALTIME_API
+                                    	API_AVAILABLE(macos(10.2), ios(6.0), watchos(2.0), tvos(9.0));
 
 /* ============================================================================= */
 
@@ -512,7 +515,9 @@ AUEventListenerRemoveEventType(     AUEventListenerRef          inListener,
 extern OSStatus
 AUEventListenerNotify(              AUEventListenerRef __nullable  inSendingListener,
                                     void * __nullable              inSendingObject,
-                                    const AudioUnitEvent *         inEvent)        API_AVAILABLE(macos(10.3), ios(6.0), watchos(2.0), tvos(9.0));
+                                    const AudioUnitEvent *         inEvent)
+                                    	CA_REALTIME_API
+                                    	API_AVAILABLE(macos(10.3), ios(6.0), watchos(2.0), tvos(9.0));
                                     
 /* ============================================================================= */
 

@@ -21,8 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef __DARWIN_XLOCALE_
-#define __DARWIN_XLOCALE_
+#ifndef __DARWIN_XLOCALE_H_
+#define __DARWIN_XLOCALE_H_
 
 #if !__building_module(_Darwin_xlocale)
 #error "Do not include this header directly, include <langinfo.h>, <monetary.h>, <regex.h>, <xlocale.h> instead"
@@ -33,4 +33,4 @@
 #include <regex.h>
 #include <xlocale.h>
 
-#endif /* __DARWIN_XLOCALE_ */
+#endif /* __DARWIN_XLOCALE_H_ */

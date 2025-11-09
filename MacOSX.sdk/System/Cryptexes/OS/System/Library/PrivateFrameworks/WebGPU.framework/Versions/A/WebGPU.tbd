@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebGPU.framework/Versions/A/WebGPU'
-current-version: 621.2.5
+current-version: 622.1.22
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __Z15wgpuBufferUnmapP14WGPUBufferImpl, __Z15wgpuQueueSubmitP13WGPUQueueImplmPKP21WGPUCommandBufferImpl, 
@@ -136,10 +136,10 @@ exports:
                        __Z33wgpuCommandEncoderResolveQuerySetP22WGPUCommandEncoderImplP16WGPUQuerySetImpljjP14WGPUBufferImply, 
                        __Z33wgpuComputePassEncoderSetPipelineP26WGPUComputePassEncoderImplP23WGPUComputePipelineImpl, 
                        __Z33wgpuDeviceClearDeviceLostCallbackP14WGPUDeviceImpl, __Z33wgpuRenderPassEncoderDrawIndirectP25WGPURenderPassEncoderImplP14WGPUBufferImply, 
-                       __Z33wgpuRenderPassEncoderSetBindGroupP25WGPURenderPassEncoderImpljP17WGPUBindGroupImplmPKj, 
+                       __Z33wgpuRenderPassEncoderSetBindGroupP25WGPURenderPassEncoderImpljP17WGPUBindGroupImplONSt3__18optionalIN3WTF6VectorIjLm0ENS5_15CrashOnOverflowELm16ENS5_10FastMallocEEEEE, 
                        __Z34wgpuBindingCreateXRProjectionLayerP17WGPUXRBindingImpl17WGPUTextureFormatPS1_jd, 
                        __Z34wgpuCommandEncoderBeginComputePassP22WGPUCommandEncoderImplPK25WGPUComputePassDescriptor, 
-                       __Z34wgpuComputePassEncoderSetBindGroupP26WGPUComputePassEncoderImpljP17WGPUBindGroupImplmPKj, 
+                       __Z34wgpuComputePassEncoderSetBindGroupP26WGPUComputePassEncoderImpljP17WGPUBindGroupImplONSt3__18optionalIN3WTF6VectorIjLm0ENS5_15CrashOnOverflowELm16ENS5_10FastMallocEEEEE, 
                        __Z34wgpuRenderBundleEncoderDrawIndexedP27WGPURenderBundleEncoderImpljjjij, 
                        __Z34wgpuRenderBundleEncoderSetPipelineP27WGPURenderBundleEncoderImplP22WGPURenderPipelineImpl, 
                        __Z34wgpuRenderPassEncoderPopDebugGroupP25WGPURenderPassEncoderImpl, 
@@ -185,5 +185,6 @@ exports:
                        __Z40wgpuRenderPassEncoderSetStencilReferenceP25WGPURenderPassEncoderImplj, 
                        __Z42wgpuRenderBundleEncoderDrawIndexedIndirectP27WGPURenderBundleEncoderImplP14WGPUBufferImply, 
                        __Z48wgpuComputePassEncoderDispatchWorkgroupsIndirectP26WGPUComputePassEncoderImplP14WGPUBufferImply, 
-                       __Z53wgpuRenderBundleEncoderSetBindGroupWithDynamicOffsetsP27WGPURenderBundleEncoderImpljP17WGPUBindGroupImplONSt3__18optionalIN3WTF6VectorIjLm0ENS5_15CrashOnOverflowELm16ENS5_10FastMallocEEEEE ]
+                       __Z53wgpuRenderBundleEncoderSetBindGroupWithDynamicOffsetsP27WGPURenderBundleEncoderImpljP17WGPUBindGroupImplONSt3__18optionalIN3WTF6VectorIjLm0ENS5_15CrashOnOverflowELm16ENS5_10FastMallocEEEEE, 
+                       __ZN15WebGPU_Internal14LogWebGPUSwiftE ]
 ...

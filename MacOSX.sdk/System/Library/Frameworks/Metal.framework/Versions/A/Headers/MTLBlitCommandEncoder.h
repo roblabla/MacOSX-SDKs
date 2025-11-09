@@ -167,7 +167,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
                            slice:(NSUInteger)slice
                    resetCounters:(BOOL)resetCounters
                   countersBuffer:(id<MTLBuffer>)countersBuffer
-            countersBufferOffset:(NSUInteger)countersBufferOffset API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+            countersBufferOffset:(NSUInteger)countersBufferOffset API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 
 /*!
  @method resetTextureAccessCounters:region:mipLevel:slice:type:
@@ -176,7 +176,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 -(void) resetTextureAccessCounters:(id<MTLTexture>)texture
                             region:(MTLRegion)region
                           mipLevel:(NSUInteger)mipLevel
-                             slice:(NSUInteger)slice API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0));
+                             slice:(NSUInteger)slice API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0), tvos(16.0));
 @required
 
 
@@ -221,7 +221,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 
 /*!
  @method optimizeIndirectCommandBuffer:withRange:
- @abstract Optimizes a subset of the texture data to ensure the best possible performance when accessing content on the CPU at the expense of GPU-access performance.
+ @abstract Encodes a command that can improve the performance of a range of commands within an indirect command buffer.
  */
 - (void)optimizeIndirectCommandBuffer:(id <MTLIndirectCommandBuffer>)indirectCommandBuffer withRange:(NSRange)range API_AVAILABLE(macos(10.14), ios(12.0));
 
@@ -262,5 +262,23 @@ API_AVAILABLE(macos(10.11), ios(8.0))
                inRange:(NSRange)range
      destinationBuffer:(id<MTLBuffer>)destinationBuffer
      destinationOffset:(NSUInteger)destinationOffset API_AVAILABLE(macos(10.15), ios(14.0));
+
+/// Encodes a command to copy data from a slice of one tensor into a slice of another tensor.
+///
+/// This command applies reshapes if `sourceTensor` and `destinationTensor` are not aliasable.
+/// - Parameters:
+///    - sourceTensor: A tensor instance that this command copies data from.
+///    - sourceOrigin: An array of offsets, in elements, to the first element of the slice of `sourceTensor` that this command copies data from.
+///    - sourceDimensions: An array of sizes, in elements, of the slice `sourceTensor` that this command copies data from.
+///    - destinationTensor: A tensor instance that this command copies data to.
+///    - destinationOrigin: An array of offsets, in elements, to the first element of the slice of `destinationTensor` that this command copies data to.
+///    - destinationDimensions: An array of sizes, in elements, of the slice of `destinationTensor` that this command copies data to.
+- (void)copyFromTensor:(id<MTLTensor>)sourceTensor
+          sourceOrigin:(MTLTensorExtents *)sourceOrigin
+      sourceDimensions:(MTLTensorExtents *)sourceDimensions
+              toTensor:(id<MTLTensor>)destinationTensor
+     destinationOrigin:(MTLTensorExtents *)destinationOrigin
+ destinationDimensions:(MTLTensorExtents *)destinationDimensions API_AVAILABLE(macos(26.0), ios(26.0));
+
 @end
 NS_ASSUME_NONNULL_END

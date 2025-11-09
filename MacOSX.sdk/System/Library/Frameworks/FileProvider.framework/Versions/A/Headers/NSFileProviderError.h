@@ -183,6 +183,12 @@ typedef NS_ERROR_ENUM(NSFileProviderErrorDomain, NSFileProviderErrorCode) {
      `com.apple.fileprovider-nonui` application extension for this domain's app bundle.
      */
     NSFileProviderErrorApplicationExtensionNotFound FILEPROVIDER_API_AVAILABILITY_V6_0_IOS = -2014,
+
+    /*
+     Returned by the provider when a modifyItem with the failUploadOnConflict policy fails
+     because of a conflict with the server version.
+    */
+    NSFileProviderErrorLocalVersionConflictingWithServer FILEPROVIDER_API_AVAILABILITY_SYNC_CONTROLS = -2015,
 } FILEPROVIDER_API_AVAILABILITY_V2_V3;
 
 @interface NSError (NSFileProviderError)

@@ -2,12 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/NotificationCenter.framework/Versions/A/NotificationCenter'
-current-version: 1459.5.1
+current-version: 1553.0.4
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _NCMaterialComputedStyle, _NCMaterialControlColor, _NCMaterialGetCustomAppearance, 
-                       _NCMaterialGetMediumLightAppearance, _NCMaterialMakeCardLayers, 
-                       _NCMaterialRegisterDelegate, _NCMaterialUnRegisterDelegate, 
+    symbols:         [ _NCMaterialComputedStyle, _NCMaterialRegisterDelegate, _NCMaterialUnRegisterDelegate, 
                        _NCMaterialUpdateMaterialStyle, _NCPostDistributedNotification, 
                        _NCPostNotification, _NCRemoveCocoaBindingsForObject, _NCRemoveDistributedNotificationObserver, 
                        _NCRemoveNotificationHandler, _NCRemoveNotificationObserver, 
@@ -22,14 +20,7 @@ exports:
                        _NCViewLayoutMaxHeight, _NCViewLayoutMaxWidth, _NCViewLayoutMinHeight, 
                        _NCViewLayoutMinWidth, _NCViewLayoutSubview, _NCViewLayoutSubviewWithInsets, 
                        _NCViewLayoutSubviewWithInsetsAndSize, _NCViewLayoutTrailingWithPriority, 
-                       _NCViewLayoutWidthWithPriority, _kNCRemotePlugInExtensionInvalidatedNotification, 
-                       _kNCRemotePlugInManagerNotificationExtension, _kNCRemotePlugInManagerWidgetExtension ]
-    objc-classes:    [ NCMaterialLayer, NCNotificationExtensionContext, NCNotificationExtensionProvider, 
-                       NCRemoteNotificationPlugIn, NCRemotePlugIn, NCRemotePlugInManager, 
-                       NCRemoteViewHostViewController, NCTexturedView, NCVerticalListController, 
-                       NCWidgetController, NCWidgetFlippedView, NCWidgetHostViewController, 
-                       NCWidgetListView, NCWidgetListViewController, NCWidgetSearchView, 
-                       NCWidgetSearchViewController, _NCMachSendRight, _NCWidgetPreferences, 
-                       _NCWidgetPrefsItem ]
-    objc-ivars:      [ _NCMachSendRight._sendRight ]
+                       _NCViewLayoutWidthWithPriority ]
+    objc-classes:    [ NCMaterialLayer, NCWidgetController, NCWidgetListViewController, 
+                       NCWidgetSearchViewController ]
 ...

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NeutrinoKit.framework/Versions/A/NeutrinoKit'
-current-version: 760.6.150
+current-version: 801.43.240
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CATransform3DFromDouble4x4, _CATransform3DToDouble4x4, _Double4x4MakeRotation, 
@@ -14,5 +14,7 @@ exports:
                        NUMaskTransformer, NUMaskTransformerResult, NUMediaView, NUMediaViewRenderer, 
                        NURenderView, NUScrollView, NUTileLayer, NUTiledImageLayer, 
                        NUViewGeometry, NUViewport, NUViewportRegionPolicy, _NUAVPlayerItemObservation, 
-                       _NUClipView, _NUTiledBackfillLayer, _NUTiledROILayer ]
+                       _NUClipView, _NUMediaScreenSpaceOverlayView, _NUMediaViewOverlayView, 
+                       _NUMediaVisibleImageOverlayView, _NURenderViewContainerLayer, 
+                       _NUTiledBackfillLayer, _NUTiledROILayer ]
 ...

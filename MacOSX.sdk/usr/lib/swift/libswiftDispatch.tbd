@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftDispatch.dylib'
-current-version: 54
+current-version: 56
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -606,6 +606,7 @@ exports:
                        '_$sSo28OS_dispatch_source_mach_sendP8DispatchE6handles6UInt32VvpMV', 
                        '_$sSo31OS_dispatch_source_data_replaceP8DispatchE0E00D0ySu_tF', 
                        '_$sSo33OS_dispatch_queue_serial_executorC8DispatchE23asUnownedSerialExecutorSceyF', 
+                       '_$sSo33OS_dispatch_queue_serial_executorC8DispatchE25isIsolatingCurrentContextSbSgyF', 
                        '_$sSo33OS_dispatch_queue_serial_executorC8DispatchE7enqueueyys11ExecutorJobVnF', 
                        '_$sSo33OS_dispatch_queue_serial_executorCScf8DispatchMc', 
                        '_$sSo33OS_dispatch_source_memorypressureP8DispatchE4dataSo0a1_b1_C0CACE19MemoryPressureEventVvg', 

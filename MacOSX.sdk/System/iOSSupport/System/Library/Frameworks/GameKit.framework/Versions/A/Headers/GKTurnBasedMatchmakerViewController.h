@@ -13,18 +13,19 @@
 
 #import <GameKit/GKMatchmakerViewController.h>
 
-/// View controller to manage turn-based matches, invite friends and perform automatching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 
 #import <UIKit/UINavigationController.h> // UINavigationController
 
 NS_ASSUME_NONNULL_BEGIN
+/// View controller to manage turn-based matches, invite friends and perform automatching. Present modally from the top view controller.
 API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface GKTurnBasedMatchmakerViewController : UINavigationController
 @end
 #else
 #import <GameKit/GKDialogController.h>
 NS_ASSUME_NONNULL_BEGIN
+/// View controller to manage turn-based matches, invite friends and perform automatching. Present modally from the top view controller.
 API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface GKTurnBasedMatchmakerViewController : NSViewController <GKViewController>
 @end

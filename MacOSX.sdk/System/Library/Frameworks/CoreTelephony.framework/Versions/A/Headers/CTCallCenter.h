@@ -15,7 +15,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CORETELEPHONY_CLASS_DEPRECATED(4_0, 10_0, "Replaced by CXCallObserver from CallKit.framework")
+CORETELEPHONY_CLASS_DEPRECATED(4_0, 10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCallObserver.h>")
 @interface CTCallCenter : NSObject
 
 /*
@@ -26,7 +26,7 @@ CORETELEPHONY_CLASS_DEPRECATED(4_0, 10_0, "Replaced by CXCallObserver from CallK
  *   in progress. If no calls are active, this will be nil.
  *
  */
-@property(readonly, retain, nullable) NSSet<CTCall*> *currentCalls __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCallObserver.h>");
+@property(readonly, retain, nullable) NSSet<CTCall*> *currentCalls __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCallObserver.h>");
 
 /*
  * callEventHandler
@@ -36,7 +36,7 @@ CORETELEPHONY_CLASS_DEPRECATED(4_0, 10_0, "Replaced by CXCallObserver from CallK
  *   queue when a new call event occurs. Set this property to a block
  *   that is defined in your application to handle call events.
  */
-@property(nonatomic, copy, nullable) void (^callEventHandler)(CTCall*) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCallObserver.h>");
+@property(nonatomic, copy, nullable) void (^callEventHandler)(CTCall*) __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCallObserver.h>");
 
 @end
 

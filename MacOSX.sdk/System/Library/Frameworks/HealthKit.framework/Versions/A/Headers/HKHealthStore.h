@@ -2,7 +2,7 @@
 //  HKHealthStore.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2025 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -346,7 +346,7 @@ API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Recovers an active workout session after a client crash. If no session is available to be re-attached,
                 nil will be returned. If an error occurs, session will be nil and error will be set appropriately.
  */
-- (void)recoverActiveWorkoutSessionWithCompletion:(void (^NS_SWIFT_SENDABLE)(HKWorkoutSession * _Nullable_result session, NSError * _Nullable error))completion API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios, macCatalyst, macos);
+- (void)recoverActiveWorkoutSessionWithCompletion:(void (^NS_SWIFT_SENDABLE)(HKWorkoutSession * _Nullable_result session, NSError * _Nullable error))completion API_AVAILABLE(ios(26.0), watchos(5.0)) API_UNAVAILABLE(macCatalyst, macos, visionos);
 
 @end
 
@@ -396,7 +396,7 @@ HK_EXTERN NSString * const HKUserPreferencesDidChangeNotification API_AVAILABLE(
  
                 The returned dictionary will map HKQuantityType to HKUnit.
  */
-- (void)preferredUnitsForQuantityTypes:(NSSet<HKQuantityType *> *)quantityTypes completion:(void (^)(NSDictionary<HKQuantityType *, HKUnit *> *preferredUnits, NSError * _Nullable error))completion API_AVAILABLE(ios(8.2), watchos(2.0), macCatalyst(13.0), macos(13.0));
+- (void)preferredUnitsForQuantityTypes:(NSSet<HKQuantityType *> *)quantityTypes completion:(void (^ NS_SWIFT_SENDABLE)(NSDictionary<HKQuantityType *, HKUnit *> *preferredUnits, NSError * _Nullable error))completion API_AVAILABLE(ios(8.2), watchos(2.0), macCatalyst(13.0), macos(13.0));
 
 @end
 

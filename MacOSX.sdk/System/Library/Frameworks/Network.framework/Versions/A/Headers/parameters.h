@@ -430,7 +430,7 @@ nw_parameters_iterate_prohibited_interfaces(nw_parameters_t parameters,
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
 nw_parameters_set_required_interface_type(nw_parameters_t parameters,
-									 nw_interface_type_t interface_type);
+										  nw_interface_type_t interface_type);
 
 /*!
  * @function nw_parameters_get_required_interface_type
@@ -576,6 +576,38 @@ nw_parameters_set_prohibit_constrained(nw_parameters_t parameters,
 API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0))
 bool
 nw_parameters_get_prohibit_constrained(nw_parameters_t parameters);
+
+/*!
+ * @function nw_parameters_set_allow_ultra_constrained
+ *
+ * @abstract
+ *		Explicitly allow connectivity over ultra-constrained interfaces. Without
+ *		this being set, connections are not allowed to use these interfaces.
+ *
+ * @param parameters
+ *		The parameters to modify.
+ *
+ * @param allow_ultra_constrained
+ *		Whether or not ultra-constrained interfaces are allowed.
+ */
+API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0))
+void nw_parameters_set_allow_ultra_constrained(nw_parameters_t parameters, bool allow_ultra_constrained);
+
+/*!
+ * @function nw_parameters_get_allow_ultra_constrained
+ *
+ * @abstract
+ *		Check if the parameters explicitly allow connectivity over
+ *		ultra-constrained interfaces.
+ *
+ * @param parameters
+ *		The parameters to check.
+ *
+ * @result
+ *		Returns whether or not ultra-constrained interfaces are allowed.
+ */
+API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0))
+bool nw_parameters_get_allow_ultra_constrained(nw_parameters_t parameters);
 
 /*!
  * @function nw_parameters_set_reuse_local_address

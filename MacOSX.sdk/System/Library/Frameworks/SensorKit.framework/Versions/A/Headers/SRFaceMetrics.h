@@ -8,14 +8,9 @@
 #import <Foundation/Foundation.h>
 #import <SensorKit/SRDefines.h>
 
-#if TARGET_OS_VISION
-#if __has_include(<ARKitCore/ARKitCore.h>)
-#import <ARKitCore/ARKitCore.h>
+#if (TARGET_OS_VISION && __has_include(<ARKitCore/ARKitCore.h>)) || (TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_SIMULATOR)
 #define SR_ARKIT_SUPPORTED 1
-#endif
-#elif TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_SIMULATOR
-#import <ARKit/ARKit.h>
-#define SR_ARKIT_SUPPORTED 1
+@class ARFaceAnchor;
 #endif
 
 NS_ASSUME_NONNULL_BEGIN

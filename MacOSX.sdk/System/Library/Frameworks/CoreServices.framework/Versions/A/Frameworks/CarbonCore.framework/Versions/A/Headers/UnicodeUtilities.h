@@ -692,7 +692,7 @@ UCCompareTextNoLocale(
   const UniChar *    text2Ptr,
   UniCharCount       text2Length,
   Boolean *          equivalent,
-  SInt32 *           order)                                   __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_NA);
+  SInt32 *           order)                                   API_AVAILABLE(macos(10.0), ios(26.0));
 
 
 

@@ -45,7 +45,7 @@ __BEGIN_DECLS
     GIC MSI support is only provided if both an MSI region base address is
     configured and an MSI interrupt range is set.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_create(hv_gic_config_t gic_config);
 
 /*!
@@ -62,7 +62,7 @@ hv_return_t hv_gic_create(hv_gic_config_t gic_config);
     An interrupt identifier outside of hv_gic_get_spi_interrupt_range() or in
     the MSI interrupt range will return a HV_BAD_ARGUMENT error code.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_spi(uint32_t intid, bool level);
 
 /*!
@@ -73,7 +73,7 @@ hv_return_t hv_gic_set_spi(uint32_t intid, bool level);
  @discussion
     Use the address of the HV_GIC_REG_GICM_SET_SPI_NSR register in the MSI frame.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_send_msi(hv_ipa_t address, uint32_t intid);
 
 /*!
@@ -86,7 +86,7 @@ hv_return_t hv_gic_send_msi(hv_ipa_t address, uint32_t intid);
     offsets defined in the ARM GIC v3 specification. The client can use the
     offset alternatively, while looping through large register arrays.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_distributor_reg(hv_gic_distributor_reg_t reg, uint64_t *value);
 
 /*!
@@ -99,7 +99,7 @@ hv_return_t hv_gic_get_distributor_reg(hv_gic_distributor_reg_t reg, uint64_t *v
     offsets defined in the ARM GIC v3 specification. The client can use the
     offset alternatively, while looping through large register arrays.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_distributor_reg(hv_gic_distributor_reg_t reg, uint64_t value);
 
 /*!
@@ -110,7 +110,7 @@ hv_return_t hv_gic_set_distributor_reg(hv_gic_distributor_reg_t reg, uint64_t va
  @discussion
     Must be called after the affinity of the given vCPU has been set in its MPIDR_EL1 register.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_redistributor_base(hv_vcpu_t vcpu, hv_ipa_t *redistributor_base_address);
 
 /*!
@@ -126,7 +126,7 @@ hv_return_t hv_gic_get_redistributor_base(hv_vcpu_t vcpu, hv_ipa_t *redistributo
     offsets defined in the ARM GIC v3 specification. The client can use the
     offset alternatively, while looping through large register arrays.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_redistributor_reg(hv_vcpu_t vcpu, hv_gic_redistributor_reg_t reg, uint64_t *value);
 
 /*!
@@ -142,7 +142,7 @@ hv_return_t hv_gic_get_redistributor_reg(hv_vcpu_t vcpu, hv_gic_redistributor_re
     offsets defined in the ARM GIC v3 specification. The client can use the
     offset alternatively, while looping through large register arrays.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_redistributor_reg(hv_vcpu_t vcpu, hv_gic_redistributor_reg_t reg, uint64_t value);
 
 /*!
@@ -154,7 +154,7 @@ hv_return_t hv_gic_set_redistributor_reg(hv_vcpu_t vcpu, hv_gic_redistributor_re
  @discussion
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_icc_reg(hv_vcpu_t vcpu, hv_gic_icc_reg_t reg, uint64_t *value);
 
 /*!
@@ -166,7 +166,7 @@ hv_return_t hv_gic_get_icc_reg(hv_vcpu_t vcpu, hv_gic_icc_reg_t reg, uint64_t *v
  @discussion
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_icc_reg(hv_vcpu_t vcpu, hv_gic_icc_reg_t reg, uint64_t value);
 
 /*!
@@ -181,7 +181,7 @@ hv_return_t hv_gic_set_icc_reg(hv_vcpu_t vcpu, hv_gic_icc_reg_t reg, uint64_t va
 
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_ich_reg(hv_vcpu_t vcpu, hv_gic_ich_reg_t reg, uint64_t* value);
 
 /*!
@@ -196,7 +196,7 @@ hv_return_t hv_gic_get_ich_reg(hv_vcpu_t vcpu, hv_gic_ich_reg_t reg, uint64_t* v
 
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_ich_reg(hv_vcpu_t vcpu, hv_gic_ich_reg_t reg, uint64_t value);
 
 /*!
@@ -211,7 +211,7 @@ hv_return_t hv_gic_set_ich_reg(hv_vcpu_t vcpu, hv_gic_ich_reg_t reg, uint64_t va
 
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_icv_reg(hv_vcpu_t vcpu, hv_gic_icv_reg_t reg, uint64_t* value);
 
 /*!
@@ -226,7 +226,7 @@ hv_return_t hv_gic_get_icv_reg(hv_vcpu_t vcpu, hv_gic_icv_reg_t reg, uint64_t* v
 
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_icv_reg(hv_vcpu_t vcpu, hv_gic_icv_reg_t reg, uint64_t value);
 
 /*!
@@ -235,7 +235,7 @@ hv_return_t hv_gic_set_icv_reg(hv_vcpu_t vcpu, hv_gic_icv_reg_t reg, uint64_t va
  @param value Pointer to distributor MSI register value (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_msi_reg(hv_gic_msi_reg_t reg, uint64_t *value);
 
 /*!
@@ -244,7 +244,7 @@ hv_return_t hv_gic_get_msi_reg(hv_gic_msi_reg_t reg, uint64_t *value);
  @param value GIC distributor MSI register value to be written.
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_msi_reg(hv_gic_msi_reg_t reg, uint64_t value);
 
 /*!
@@ -261,7 +261,7 @@ hv_return_t hv_gic_set_msi_reg(hv_gic_msi_reg_t reg, uint64_t value);
     In some cases hv_gic_set_state() can fail if a software update has changed
     the host in a way that would be incompatible with the previous format.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_set_state(const void *gic_state_data, size_t gic_state_size);
 
 /*!
@@ -272,7 +272,7 @@ hv_return_t hv_gic_set_state(const void *gic_state_data, size_t gic_state_size);
     GIC distributor, redistributor registers and the internal state of the
     device.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_reset();
 
 __END_DECLS

@@ -29,7 +29,7 @@
 
 #else
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
 void* _Nonnull _MXSignpostMetricsSnapshot(void);
 #define _METRICS_SIGNPOST_TYPE_TOKEN "signpost:metrics"
 #define _MXSIGNPOST_METRICS_SNAPSHOT_FORMAT "\n%{public, " _METRICS_SIGNPOST_TYPE_TOKEN "}@"

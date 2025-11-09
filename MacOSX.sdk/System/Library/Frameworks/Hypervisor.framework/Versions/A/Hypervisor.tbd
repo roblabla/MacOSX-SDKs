@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/Hypervisor.framework/Versions/A/Hypervisor'
-current-version: 210.6.2
+current-version: 259.1.3
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ _hv_capability, _hv_tsc_clock, _hv_vcpu_apic_ctrl, _hv_vcpu_apic_get_state, 
@@ -35,13 +35,16 @@ exports:
                        _hv_vcpu_run, _hv_vm_allocate, _hv_vm_create, _hv_vm_deallocate, 
                        _hv_vm_destroy, _hv_vm_map, _hv_vm_protect, _hv_vm_unmap ]
   - targets:         [ arm64-macos, arm64e-macos ]
-    symbols:         [ __hv_capability, __hv_vcpu_config_get_fgt_enabled, __hv_vcpu_config_get_tlbi_workaround_enabled, 
+    symbols:         [ __hv_capability, __hv_vcpu_amx_prepare, __hv_vcpu_amx_query_active_context, 
+                       __hv_vcpu_config_get_fgt_enabled, __hv_vcpu_config_get_tlbi_workaround_enabled, 
                        __hv_vcpu_config_get_vmkey, __hv_vcpu_config_set_fgt_enabled, 
                        __hv_vcpu_config_set_tlbi_workaround_enabled, __hv_vcpu_config_set_vmkey, 
-                       __hv_vcpu_get_context, __hv_vcpu_get_control_field, __hv_vcpu_get_ext_reg, 
-                       __hv_vcpu_set_control_field, __hv_vcpu_set_space, __hv_vm_config_get_ipa_granule, 
-                       __hv_vm_config_get_isa, __hv_vm_config_set_ipa_granule, __hv_vm_config_set_isa, 
-                       __hv_vm_get_isa, __hv_vm_invalidate_tlb, __hv_vm_map_space, 
+                       __hv_vcpu_get_amx_state_t_el1, __hv_vcpu_get_amx_x_space, 
+                       __hv_vcpu_get_amx_y_space, __hv_vcpu_get_amx_z_space, __hv_vcpu_get_context, 
+                       __hv_vcpu_get_control_field, __hv_vcpu_get_ext_reg, __hv_vcpu_set_amx_state_t_el1, 
+                       __hv_vcpu_set_amx_x_space, __hv_vcpu_set_amx_y_space, __hv_vcpu_set_amx_z_space, 
+                       __hv_vcpu_set_control_field, __hv_vcpu_set_space, __hv_vm_config_get_isa, 
+                       __hv_vm_config_set_isa, __hv_vm_get_isa, __hv_vm_map_space, 
                        __hv_vm_protect_space, __hv_vm_space_config_create, __hv_vm_space_config_get_ipa_base, 
                        __hv_vm_space_config_get_ipa_granule, __hv_vm_space_config_get_ipa_size, 
                        __hv_vm_space_config_set_ipa_base, __hv_vm_space_config_set_ipa_granule, 
@@ -73,8 +76,10 @@ exports:
                        _hv_vcpu_set_sme_zt0_reg, _hv_vcpu_set_sys_reg, _hv_vcpu_set_trap_debug_exceptions, 
                        _hv_vcpu_set_trap_debug_reg_accesses, _hv_vcpu_set_vtimer_mask, 
                        _hv_vcpu_set_vtimer_offset, _hv_vcpus_exit, _hv_vm_config_create, 
-                       _hv_vm_config_get_default_ipa_size, _hv_vm_config_get_el2_enabled, 
-                       _hv_vm_config_get_el2_supported, _hv_vm_config_get_ipa_size, 
+                       _hv_vm_config_get_default_ipa_granule, _hv_vm_config_get_default_ipa_size, 
+                       _hv_vm_config_get_el2_enabled, _hv_vm_config_get_el2_supported, 
+                       _hv_vm_config_get_ipa_granule, _hv_vm_config_get_ipa_size, 
                        _hv_vm_config_get_max_ipa_size, _hv_vm_config_set_el2_enabled, 
-                       _hv_vm_config_set_ipa_size, _hv_vm_get_max_vcpu_count ]
+                       _hv_vm_config_set_ipa_granule, _hv_vm_config_set_ipa_size, 
+                       _hv_vm_get_max_vcpu_count ]
 ...

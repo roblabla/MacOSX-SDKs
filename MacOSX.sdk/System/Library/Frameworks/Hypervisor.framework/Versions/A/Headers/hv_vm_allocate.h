@@ -47,7 +47,7 @@ typedef uint64_t hv_allocate_flags_t;
     Memory returned by this API should be deallocated with
     hv_vm_deallocate
  */
-OS_EXPORT HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0))
 hv_return_t hv_vm_allocate(void * _Nullable * _Nonnull uvap, size_t size, hv_allocate_flags_t flags);
 
 /*!
@@ -56,7 +56,7 @@ hv_return_t hv_vm_allocate(void * _Nullable * _Nonnull uvap, size_t size, hv_all
  @param size Size in bytes of the region to be deallocated
  @result 0 on success or error code
  */
-OS_EXPORT HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT HV_API_AVAILABLE_ARM64(macos(12.1)) HV_API_AVAILABLE_X86_64(macos(12.0))
 hv_return_t hv_vm_deallocate(void *uva, size_t size);
 
 __END_DECLS

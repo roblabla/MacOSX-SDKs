@@ -1,4 +1,0 @@
-module TargetConditionals [system] {
-  header "TargetConditionals.h"
-  export *
-}

@@ -2,10 +2,13 @@
 //  Hypervisor.h
 //  Hypervisor
 //
-//  Copyright © 2019-2024 Apple Inc. All rights reserved.
+//  Copyright © 2019-2025 Apple Inc. All rights reserved.
 //
 
 #pragma once
+
+#include <Hypervisor/hv_base.h>
+#include <Hypervisor/hv_vm_allocate.h>
 
 #if defined(__arm64__)
 #include <Hypervisor/hv_gic.h>
@@ -22,10 +25,10 @@
 #include <Hypervisor/hv_vm_types.h>
 #elif defined(__x86_64__)
 #include <Hypervisor/hv.h>
+#include <Hypervisor/hv_arch_vmx.h>
+#include <Hypervisor/hv_arch_x86.h>
 #include <Hypervisor/hv_error.h>
 #include <Hypervisor/hv_intr.h>
 #include <Hypervisor/hv_types.h>
 #include <Hypervisor/hv_vmx.h>
 #endif
-
-#include <Hypervisor/hv_vm_allocate.h>

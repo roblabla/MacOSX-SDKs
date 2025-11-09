@@ -246,7 +246,6 @@ struct  tcpstat {
 	u_int32_t       tcps_pawsdrop;          /* segments dropped due to PAWS */
 	u_int32_t       tcps_predack;           /* times hdr predict ok for acks */
 	u_int32_t       tcps_preddat;           /* times hdr predict ok for data pkts */
-	u_int32_t       tcps_pcbcachemiss;
 	u_int32_t       tcps_cachedrtt;         /* times cached RTT in route updated */
 	u_int32_t       tcps_cachedrttvar;      /* times cached rttvar updated */
 	u_int32_t       tcps_cachedssthresh;    /* times cached ssthresh updated */
@@ -266,24 +265,11 @@ struct  tcpstat {
 	u_int32_t       tcps_sndrexmitbad;      /* unnecessary packet retransmissions */
 	u_int32_t       tcps_badrst;            /* ignored RSTs in the window */
 
-	u_int32_t       tcps_sc_added;          /* entry added to syncache */
-	u_int32_t       tcps_sc_retransmitted;  /* syncache entry was retransmitted */
-	u_int32_t       tcps_sc_dupsyn;         /* duplicate SYN packet */
 	u_int32_t       tcps_sc_dropped;        /* could not reply to packet */
 	u_int32_t       tcps_sc_completed;      /* successful extraction of entry */
-	u_int32_t       tcps_sc_bucketoverflow; /* syncache per-bucket limit hit */
-	u_int32_t       tcps_sc_cacheoverflow;  /* syncache cache limit hit */
-	u_int32_t       tcps_sc_reset;          /* RST removed entry from syncache */
-	u_int32_t       tcps_sc_stale;          /* timed out or listen socket gone */
 	u_int32_t       tcps_sc_aborted;        /* syncache entry aborted */
-	u_int32_t       tcps_sc_badack;         /* removed due to bad ACK */
-	u_int32_t       tcps_sc_unreach;        /* ICMP unreachable received */
-	u_int32_t       tcps_sc_zonefail;       /* zalloc() failed */
 	u_int32_t       tcps_sc_sendcookie;     /* SYN cookie sent */
 	u_int32_t       tcps_sc_recvcookie;     /* SYN cookie received */
-
-	u_int32_t       tcps_hc_added;          /* entry added to hostcache */
-	u_int32_t       tcps_hc_bucketoverflow; /* hostcache per bucket limit hit */
 
 	/* SACK related stats */
 	u_int32_t       tcps_sack_recovery_episode; /* SACK recovery episodes */
@@ -315,9 +301,6 @@ struct  tcpstat {
 	u_int32_t       tcps_snd_swcsum_bytes;  /* tcp swcksum (outbound), bytes */
 	u_int32_t       tcps_snd6_swcsum;       /* tcp6 swcksum (outbound), packets */
 	u_int32_t       tcps_snd6_swcsum_bytes; /* tcp6 swcksum (outbound), bytes */
-	u_int32_t       tcps_unused_1;
-	u_int32_t       tcps_unused_2;
-	u_int32_t       tcps_unused_3;
 
 	/* MPTCP Related stats */
 	u_int32_t       tcps_invalid_mpcap;     /* Invalid MPTCP capable opts */
@@ -326,8 +309,6 @@ struct  tcpstat {
 	u_int32_t       tcps_join_fallback;     /* No MPTCP in secondary */
 	u_int32_t       tcps_estab_fallback;    /* DSS option dropped */
 	u_int32_t       tcps_invalid_opt;       /* Catchall error stat */
-	u_int32_t       tcps_mp_outofwin;       /* Packet lies outside the
-	                                         *  shared recv window */
 	u_int32_t       tcps_mp_reducedwin;     /* Reduced subflow window */
 	u_int32_t       tcps_mp_badcsum;        /* Bad DSS csum */
 	u_int32_t       tcps_mp_oodata;         /* Out of order data */
@@ -350,14 +331,10 @@ struct  tcpstat {
 	u_int32_t       tcps_detect_reordering; /* Detect pkt reordering */
 	u_int32_t       tcps_delay_recovery;    /* Delay fast recovery */
 	u_int32_t       tcps_avoid_rxmt;        /* Retransmission was avoided */
-	u_int32_t       tcps_unnecessary_rxmt;  /* Retransmission was not needed */
-	u_int32_t       tcps_nostretchack;      /* disabled stretch ack algorithm on a connection */
-	u_int32_t       tcps_rescue_rxmt;       /* SACK rescue retransmit */
 	u_int32_t       tcps_pto_in_recovery;   /* rescue retransmit in fast recovery */
 	u_int32_t       tcps_pmtudbh_reverted;  /* PMTU Blackhole detection, segment size reverted */
 
 	/* DSACK related statistics */
-	u_int32_t       tcps_dsack_disable;     /* DSACK disabled due to n/w duplication */
 	u_int32_t       tcps_dsack_ackloss;     /* ignore DSACK due to ack loss */
 	u_int32_t       tcps_dsack_badrexmt;    /* DSACK based bad rexmt recovery */
 	u_int32_t       tcps_dsack_sent;        /* Sent DSACK notification */
@@ -365,10 +342,8 @@ struct  tcpstat {
 	u_int32_t       tcps_dsack_recvd_old;   /* Received an out of window DSACK option */
 
 	/* MPTCP Subflow selection stats */
-	u_int32_t       tcps_mp_sel_symtomsd;   /* By symptomsd */
 	u_int32_t       tcps_mp_sel_rtt;        /* By RTT comparison */
 	u_int32_t       tcps_mp_sel_rto;        /* By RTO comparison */
-	u_int32_t       tcps_mp_sel_peer;       /* By peer's output pattern */
 	u_int32_t       tcps_mp_num_probes;     /* Number of probes sent */
 	u_int32_t       tcps_mp_verdowngrade;   /* MPTCP version downgrade */
 	u_int32_t       tcps_drop_after_sleep;  /* drop after long AP sleep */

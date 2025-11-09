@@ -16,5 +16,6 @@ exports:
                        _DomainNameAppendString, _DomainNameDupEx, _DomainNameEqual, 
                        _DomainNameFromString, _DomainNameLabelCount, _DomainNameLength, 
                        _DomainNameToString, _OSLogCopyFormattedString, _mdns_memcmp_us_ascii_case_insensitive, 
-                       _mdns_memcpy_bits ]
+                       _mdns_memcpy_bits, _mdns_parse_length_prefixed_string, _mdns_parse_printable_ascii_run, 
+                       _mdns_parse_uint16_be ]
 ...

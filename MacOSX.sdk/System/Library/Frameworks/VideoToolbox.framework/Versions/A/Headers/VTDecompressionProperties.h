@@ -512,6 +512,30 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RequestRAWOutput API_AVA
  */
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
 
+#pragma mark Per-frame Decoder Option Keys
+/*!
+	@constant	kVTDecodeFrameOptionKey_ContentAnalyzerRotation
+	@abstract
+		Clockwise rotation (one of 0, 90, 180, 270) to be applied for proper display orientation.
+	@discussion
+		This value is used for content analysis to properly orient the image before analysis.
+		The value should be a CFNumber with values of 0, 90, 180, or 270, representing degrees of clockwise rotation.
+		This key is not used unless you have attached a ``SCVideoStreamAnalyzer`` to the decompression session.
+*/
+VT_EXPORT const CFStringRef kVTDecodeFrameOptionKey_ContentAnalyzerRotation API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos); // CFNumber, Optional
+
+/*!
+	@constant	kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle
+	@abstract
+		CGRect within the image to be used for content analysis, cropped before applying rotation.
+	@discussion
+		This value specifies a rectangle within the original frame that should be used for content analysis.
+		The cropping is applied before any rotation specified by kVTDecodeFrameOptionKey_ContentAnalyzerRotation.
+		The value should be a CFDictionary representing a CGRect created using CGRectCreateDictionaryRepresentation().
+		This key is not used unless you have attached a ``SCVideoStreamAnalyzer`` to the decompression session.
+*/
+VT_EXPORT const CFStringRef kVTDecodeFrameOptionKey_ContentAnalyzerCropRectangle API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos); // CGRect, Optional
+
 	
 CM_ASSUME_NONNULL_END
 

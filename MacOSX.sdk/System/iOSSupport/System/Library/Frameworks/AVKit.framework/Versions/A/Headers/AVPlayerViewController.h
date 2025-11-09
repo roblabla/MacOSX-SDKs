@@ -32,7 +32,6 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControllerSkippingBehavior) {
 } API_AVAILABLE(tvos(10.0)) API_UNAVAILABLE(macos, ios, watchos, visionos);
 
 
-
 @class AVContentProposal;
 @class AVGroupExperienceCoordinator;
 @class AVInterstitialTimeRange;
@@ -242,14 +241,14 @@ API_AVAILABLE(ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_U
 /*!
 	@property	playbackControlsIncludeTransportBar
 	@abstract	Whether or not the receiver shows the transport bar and related controls during user interaction. Default is YES.
-	@discussion	Clients can set this property to NO, and set showsPlaybackControls to YES, to selectively prevent the transport bar from being displayed duration user interaction. Changing the value of this property does not immediately change the visiblity of the transport bar.
+	@discussion	Clients can set this property to NO, and set showsPlaybackControls to YES, to selectively prevent the transport bar from being displayed duration user interaction. Changing the value of this property does not immediately change the visibility of the transport bar.
  */
 @property (nonatomic) BOOL playbackControlsIncludeTransportBar API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios, watchos, visionos);
 
 /*!
 	@property	playbackControlsIncludeInfoViews
 	@abstract	Whether or not the receiver shows the views for video metadata, navigation markers, and playback settings when requested by the user. Default is YES.
-	@discussion	Clients can set this property to NO, and showsPlaybackControls to YES, to selectively prevent the information and setting panels from being displayed. Changing the value of this property does not immediately change the visiblity of the info views.
+	@discussion	Clients can set this property to NO, and showsPlaybackControls to YES, to selectively prevent the information and setting panels from being displayed. Changing the value of this property does not immediately change the visibility of the info views.
  */
 @property (nonatomic) BOOL playbackControlsIncludeInfoViews API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios, watchos, visionos);
 
@@ -282,6 +281,14 @@ API_AVAILABLE(ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_U
  */
 @property (nonatomic) BOOL requiresMonoscopicViewingMode API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
 
+/*!
+ Describes how High Dynamic Range (HDR) video content renders.
+ 
+ Defaults to ``AVDisplayDynamicRangeAutomatic``.
+ 
+ - Note: This property will only have effect if the video content supports HDR.
+ */
+@property (nonatomic, assign, readwrite) AVDisplayDynamicRange preferredDisplayDynamicRange API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
 
 
 // MARK: - Contextual Actions
@@ -357,6 +364,15 @@ API_AVAILABLE(ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_U
 				Documentation on how to export a new copy of the asset via `AVAssetExportSession` after trimming can be found at https://developer.apple.com.
  */
 - (void)beginTrimmingWithCompletionHandler:(nullable void (^)(BOOL success))handler API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+
+
+// MARK: - Custom Media Selection Schemes
+
+/*!
+	@property	mediaCharacteristicsForSupportedCustomMediaSelectionSchemes
+	@abstract	Returns available AVKit supported media group types.
+ */
+@property (class, readonly) NSArray <AVMediaCharacteristic> *mediaCharacteristicsForSupportedCustomMediaSelectionSchemes API_AVAILABLE(ios(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos, watchos);
 
 @end
 

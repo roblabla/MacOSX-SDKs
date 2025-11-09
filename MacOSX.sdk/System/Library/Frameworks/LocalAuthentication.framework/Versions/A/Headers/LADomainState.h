@@ -6,7 +6,6 @@
 #import <LocalAuthentication/LABiometryType.h>
 #import <LocalAuthentication/LACompanionType.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(watchos, tvos)
@@ -92,4 +91,3 @@ API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos, visionos);
 @end
 
 NS_ASSUME_NONNULL_END
-

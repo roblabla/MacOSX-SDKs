@@ -21,7 +21,20 @@ exports:
                        '_$s2os6LoggerV14SyncedDefaultsE4testACvau', '_$s2os6LoggerV14SyncedDefaultsE4testACvgZ', 
                        '_$s2os6LoggerV14SyncedDefaultsE4testACvpZ', '_$s2os6LoggerV14SyncedDefaultsE6clientACvau', 
                        '_$s2os6LoggerV14SyncedDefaultsE6clientACvgZ', '_$s2os6LoggerV14SyncedDefaultsE6clientACvpZ', 
-                       '_$sSo27SYDClientToDaemonConnectionC14SyncedDefaultsE3set_6forKeyyypSg_SStKF', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE10auditTokenABSo0D8_token_ta_tcfC', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE10auditTokenABSo0D8_token_ta_tcfc', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE12bundleRecordABSo08LSBundleE0C_tcfC', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE12bundleRecordABSo08LSBundleE0C_tcfc', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE15storeIdentifierSSSgvg', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE15storeIdentifierSSSgvpMV', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE16storeIdentifiersSaySSGvg', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE16storeIdentifiersSaySSGvpMV', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE19relatedApplications3forSaySSGSS_tF', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE26additionalStoreIdentifiersSaySSGvg', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE26additionalStoreIdentifiersSaySSGvpMV', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsE5value3forypSgSS_tF', 
+                       '_$sSo15SYDEntitlementsC14SyncedDefaultsEABycfC', '_$sSo15SYDEntitlementsC14SyncedDefaultsEABycfc', 
+                       '_$sSo15SYDEntitlementsCMa', '_$sSo27SYDClientToDaemonConnectionC14SyncedDefaultsE3set_6forKeyyypSg_SStKF', 
                        '_$sSo27SYDClientToDaemonConnectionC14SyncedDefaultsE4syncyyYaKF', 
                        '_$sSo27SYDClientToDaemonConnectionC14SyncedDefaultsE4syncyyYaKFTu', 
                        '_$sSo27SYDClientToDaemonConnectionC14SyncedDefaultsE6object6forKeyxSgSS_tKlF', 
@@ -31,6 +44,6 @@ exports:
                        _SYDGetTCCLog, _SYDRemotePreferencesSourceConfigurationDidChangeNotification, 
                        _SYDRemotePreferencesSourceDidChangeNotification, _SYDUbiquitousKeyValueStoreDidChangeExternallyNotification, 
                        _SyncedDefaultsVersionNumber, _SyncedDefaultsVersionString ]
-    objc-classes:    [ SYDClientToDaemonConnection, SYDRemotePreferencesSource, SYDStoreConfiguration, 
-                       SYDStoreID, SYDTestConfiguration ]
+    objc-classes:    [ SYDClientToDaemonConnection, SYDEntitlements, SYDRemotePreferencesSource, 
+                       SYDStoreConfiguration, SYDStoreID, SYDTestConfiguration ]
 ...

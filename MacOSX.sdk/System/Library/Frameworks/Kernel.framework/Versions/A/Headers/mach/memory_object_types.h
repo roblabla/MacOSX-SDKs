@@ -373,8 +373,11 @@ typedef uint64_t upl_control_flags_t;
 #define UPL_NOZEROFILLIO        0x40000000ULL /* allow non zerofill pages present */
 #define UPL_REQUEST_FORCE_COHERENCY     0x80000000ULL
 
+
+
+#define UPL_CARRY_VA_TAG        0x10000000000ULL
 /* UPL flags known by this kernel */
-#define UPL_VALID_FLAGS         0xFFFFFFFFFFULL
+#define UPL_VALID_FLAGS         0x1FFFFFFFFFFULL
 
 
 /* upl abort error flags */

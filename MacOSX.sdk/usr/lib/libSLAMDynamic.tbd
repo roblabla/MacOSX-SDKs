@@ -4,5 +4,5 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libSLAMDynamic.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    objc-classes:    [ SLAMObjC ]
+    objc-classes:    [ ExecutionMessage, SLAMObjC, ScriptResult ]
 ...

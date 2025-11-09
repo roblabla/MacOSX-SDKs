@@ -6,7 +6,12 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s19RemindersAppIntents0A35InCalendarEditingReminderPropertiesV0E13UIKitInternalE5eventACSo7EKEventC_tcfC', 
-                       '_$s21CalendarUIKitInternal22PendingReminderTrackerC010optimisticE03forSo11REMReminderCSgSo7EKEventC_tFTj', 
+                       '_$s21CalendarUIKitInternal20ReminderDragProviderC16pasteboardWriter3forSo19NSPasteboardWriting_pSgSo7EKEventC_tFZ', 
+                       '_$s21CalendarUIKitInternal20ReminderDragProviderCACycfC', 
+                       '_$s21CalendarUIKitInternal20ReminderDragProviderCACycfc', 
+                       '_$s21CalendarUIKitInternal20ReminderDragProviderCMa', '_$s21CalendarUIKitInternal20ReminderDragProviderCMn', 
+                       '_$s21CalendarUIKitInternal20ReminderDragProviderCMo', '_$s21CalendarUIKitInternal20ReminderDragProviderCN', 
+                       '_$s21CalendarUIKitInternal20ReminderDragProviderCfD', '_$s21CalendarUIKitInternal22PendingReminderTrackerC010optimisticE03forSo11REMReminderCSgSo7EKEventC_tFTj', 
                        '_$s21CalendarUIKitInternal22PendingReminderTrackerC010optimisticE03forSo11REMReminderCSgSo7EKEventC_tFTq', 
                        '_$s21CalendarUIKitInternal22PendingReminderTrackerC013setOptimisticE05event14sequenceNumber010optimisticE0ySo7EKEventC_s5Int32VSo11REMReminderCtFTj', 
                        '_$s21CalendarUIKitInternal22PendingReminderTrackerC013setOptimisticE05event14sequenceNumber010optimisticE0ySo7EKEventC_s5Int32VSo11REMReminderCtFTq', 
@@ -110,7 +115,8 @@ exports:
                        _CUIKITriggerReminderSync, _CalendarUIKitInternalVersionNumber, 
                        _CalendarUIKitInternalVersionString ]
     objc-classes:    [ CUIKIPendingReminderTracker, CUIKIReminderColorDeserializer, 
-                       CUIKIReminderEditor, CUIKReminderEntityAnnotation, _TtC21CalendarUIKitInternal22PendingReminderTracker, 
+                       CUIKIReminderDragProvider, CUIKIReminderEditor, CUIKReminderEntityAnnotation, 
+                       _TtC21CalendarUIKitInternal20ReminderDragProvider, _TtC21CalendarUIKitInternal22PendingReminderTracker, 
                        _TtC21CalendarUIKitInternal24CUIKIReminderSyncTrigger, _TtC21CalendarUIKitInternal25ReminderColorDeserializer, 
                        _TtC21CalendarUIKitInternal33CUIKIReminderEditorImplementation ]
 ...

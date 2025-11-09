@@ -1,12 +1,12 @@
 #if (defined(USE_APPKIT_PUBLIC_HEADERS) && USE_APPKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSTextSelectionNavigation.h>)
-#include <TargetConditionals.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
 //
 //  NSTextSelectionNavigation.h
 //  Text Kit
 //
-//  Copyright (c) 2019-2024, Apple Inc. All rights reserved.
+//  Copyright (c) 2019-2025, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSObject.h>

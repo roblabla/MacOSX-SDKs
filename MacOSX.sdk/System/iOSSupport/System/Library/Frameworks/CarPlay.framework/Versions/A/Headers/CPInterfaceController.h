@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSString * const CarPlayErrorDomain;
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPInterfaceController : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -204,6 +205,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  the templates presented by your app.
  */
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPInterfaceControllerDelegate <NSObject>
 
 @optional

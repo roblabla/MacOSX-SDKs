@@ -350,6 +350,24 @@ BROWSERENGINE_EXPORT BROWSERENGINE_TEXTINPUT_AVAILABILITY
 
 #pragma mark Text selection
 
+@optional
+
+/**
+ *  If different than the text input view, one can return a container view here for selection views
+ *  that draw _below_ text. Includes the selection highlight view. If this is unimplemented or nil
+ *  is returned, views are to be installed onto the text input view.
+ */
+@property (nonatomic, nullable, readonly) UIView *selectionContainerViewBelowText API_AVAILABLE(ios(26.0));
+
+/**
+ *  If different than the text input view, one can return a container view here for selection views
+ *  that draw _above_ text. Includes selection range adjustment handles. If this is unimplemented
+ *  or nil is returned, views are to be installed onto the text input view.
+ */
+@property (nonatomic, nullable, readonly) UIView *selectionContainerViewAboveText API_AVAILABLE(ios(26.0));
+
+@required
+
 /**
  *  String representing the selected text.
  */

@@ -6,7 +6,4 @@ current-version: 1226
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/Frameworks/CoreServices.framework/Versions/A/CoreServices' ]
-exports:
-  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ _MobileCoreServicesVersionNumber, _MobileCoreServicesVersionString ]
 ...

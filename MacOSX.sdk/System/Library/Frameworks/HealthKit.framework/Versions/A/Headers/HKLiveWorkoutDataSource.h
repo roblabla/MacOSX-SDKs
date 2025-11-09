@@ -2,7 +2,7 @@
 //  HKLiveWorkoutDataSource.h
 //  HealthKit
 //
-//  Copyright © 2017 Apple. All rights reserved.
+//  Copyright © 2017-2025  Apple. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  */
 HK_EXTERN
 NS_SWIFT_SENDABLE
-API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(ios(26.0), watchos(5.0)) API_UNAVAILABLE(visionos)
 @interface HKLiveWorkoutDataSource : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -29,7 +29,7 @@ API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios)
  @property      typesToCollect
  @abstract      The quantity types the receiver is collecting.
  */
-@property (copy, readonly) NSSet<HKQuantityType *> *typesToCollect;
+@property (copy, readonly) NSSet<HKQuantityType *> *typesToCollect API_AVAILABLE(ios(26.0), watchos(5.0));
 
 /*!
  @method        initWithHealthStore:workoutConfiguration:

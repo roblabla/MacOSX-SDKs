@@ -13,22 +13,29 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSErrorDomain const SFSpeechErrorDomain
 API_AVAILABLE(macos(14), ios(17), tvos(18));
 
+/**
+ Error codes that can be thrown under the Speech framework's error domain.
+ */
 typedef NS_ERROR_ENUM (SFSpeechErrorDomain, SFSpeechErrorCode) {
-    /** Error may include `NSUnderlyingErrorKey` in `userInfo`.*/
+    /// There was an internal error.
     SFSpeechErrorCodeInternalServiceError = 1,
-    /** Failed to read audio file */
+
+    /// The audio file could not be read.
     SFSpeechErrorCodeAudioReadFailed = 2,
 
     // MARK: CustomLM data related errors
     
-    /** Templates were malformed */
+    /// The custom language model templates were malformed.
     SFSpeechErrorCodeUndefinedTemplateClassName = 7,
     
-    /** A custom language model file was malformed */
+    /// The custom language model file was malformed.
     SFSpeechErrorCodeMalformedSupplementalModel = 8,
     
-    /** Operation timed out */
-    SFSpeechErrorCodeTimeout = 10,
+    /// The operation timed out.
+    SFSpeechErrorCodeTimeout = 12,
+
+    /// A required parameter is missing/nil.
+    SFSpeechErrorCodeMissingParameter = 13,
 } API_AVAILABLE(macos(14), ios(17), tvos(18));
 
 NS_ASSUME_NONNULL_END

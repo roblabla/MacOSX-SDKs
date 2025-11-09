@@ -40,7 +40,7 @@
 
 WK_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(macos(NA), ios(18.4), visionos(NA)) WK_SWIFT_UI_ACTOR
+API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4)) WK_SWIFT_UI_ACTOR
 @protocol WKWebExtensionControllerDelegate <NSObject>
 @optional
 

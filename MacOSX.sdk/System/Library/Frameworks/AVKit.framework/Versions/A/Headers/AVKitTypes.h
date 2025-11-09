@@ -40,6 +40,20 @@ typedef NS_OPTIONS(NSUInteger, AVVideoFrameAnalysisType) {
 	
 } API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(tvos, watchos);
 
+/*!
+ Describes how High Dynamic Range (HDR) video content renders.
+ */
+typedef NS_ENUM(NSInteger, AVDisplayDynamicRange) {
+	/// Defines an automatic dynamic range. Indicates that the dynamic range will be set automatically.
+	AVDisplayDynamicRangeAutomatic 			= 0,
+	/// Defines a standard dynamic range. Restricts the video content dynamic range to the standard range regardless of the actual range of the video content.
+	AVDisplayDynamicRangeStandard 			= 1,
+	/// Defines a constrained high dynamic range. Allows for constrained High Dynamic Range (HDR) video content which is useful for mixing HDR and Standard Dynamic Range (SDR) content.
+	AVDisplayDynamicRangeConstrainedHigh	= 2,
+	/// Defines a high dynamic range. Allows video content to use extended dynamic range if it has dynamic range content.
+	AVDisplayDynamicRangeHigh 				= 3
+} API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
+
 #else
 #import <AVKitCore/AVKitTypes.h>
 #endif

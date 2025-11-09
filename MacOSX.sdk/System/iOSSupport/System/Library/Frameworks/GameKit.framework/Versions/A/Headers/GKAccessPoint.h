@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class UIWindow;
 #endif
 
+@class GKGameActivity;
+
 typedef NS_ENUM(NSInteger, GKAccessPointLocation) {
     GKAccessPointLocationTopLeading,
     GKAccessPointLocationTopTrailing,
@@ -41,22 +43,24 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (nonatomic, readonly) BOOL isPresentingGameCenter;        /// observable property that becomes true when user taps on the access point and it is showing Game Center UI.  Will become false when it is dismissed
 
 /// Set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
-@property (nonatomic, assign) BOOL showHighlights;
+@property (nonatomic, assign) BOOL showHighlights API_DEPRECATED("No longer supported", ios(14.0,26.0), macos(11.0,26.0), tvos(14.0,26.0), visionos(1.0,26.0));
 
 /// These properties control the placement of the widget
 @property (nonatomic, assign) GKAccessPointLocation location;       /// specifies the location on the screen that the developer wishes to place the access point
 
-/// observable property that contains the current frame needed to display the widget
 #if TARGET_OS_OSX && !TARGET_OS_MACCATALYST
+/// observable property that contains the current frame needed to display the widget
 @property (nonatomic, readonly) NSRect frameInScreenCoordinates;
 #else
+/// observable property that contains the current frame needed to display the widget
 @property (nonatomic, readonly) CGRect frameInScreenCoordinates;
 #endif
 
-/// the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
 #if TARGET_OS_OSX && !TARGET_OS_MACCATALYST
+/// the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
 @property (nonatomic, weak, nullable) NSWindow *parentWindow;
 #else
+/// the following is a platform specific window that you wish to have the access point in.  If not set then a best attempt will be made to choose the main window of the app.
 @property (nonatomic, weak, nullable) UIWindow *parentWindow;
 #endif
 
@@ -74,6 +78,27 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
                                     handler:(void (^ __nullable)(void))handler NS_SWIFT_NAME(trigger(leaderboardID:playerScope:timeScope:handler:)) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
 - (void)triggerAccessPointWithPlayer:(GKPlayer *)player
                              handler:(void (^ __nullable)(void))handler NS_SWIFT_NAME(trigger(player:handler:)) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+/// Displays the view that allows players to engage each other with activities and challenges.
+- (void)triggerAccessPointForPlayTogetherWithHandler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(triggerForPlayTogether(handler:)) NS_SWIFT_ASYNC(1) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
+
+/// Displays the view that allows players to engage each other with challenges.
+- (void)triggerAccessPointForChallengesWithHandler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(triggerForChallenges(handler:)) NS_SWIFT_ASYNC(1) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
+
+/// Displays the challenge creation view for the provided challenge definition ID.
+- (void)triggerAccessPointWithChallengeDefinitionID:(NSString *)challengeDefinitionID
+                                            handler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(trigger(challengeDefinitionID:handler:)) NS_SWIFT_ASYNC(2) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
+
+/// Displays the game activity creation view for the provided activity definition ID.
+- (void)triggerAccessPointWithGameActivityDefinitionID:(NSString *)gameActivityDefinitionID
+                                               handler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(trigger(gameActivityDefinitionID:handler:)) NS_SWIFT_ASYNC(2) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
+
+/// Displays the game activity view for the provided activity instance.
+- (void)triggerAccessPointWithGameActivity:(GKGameActivity *)gameActivity
+                                   handler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(trigger(gameActivity:handler:)) NS_SWIFT_ASYNC(2) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
+
+/// Brings up the invite friends view.
+- (void)triggerAccessPointForFriendingWithHandler:(void (^ _Nullable)(void))handler NS_SWIFT_NAME(triggerForFriending(handler:)) NS_SWIFT_ASYNC(1) API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, visionos, watchos);
 
 @end
 

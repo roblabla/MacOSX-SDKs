@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGPDFString *CGPDFStringRef;
+typedef struct CGPDFString *CGPDFStringRef __attribute__((swift_wrapper(struct)));
 
 #include <CoreGraphics/CGBase.h>
 #include <CoreFoundation/CFDate.h>

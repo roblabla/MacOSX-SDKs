@@ -40,6 +40,7 @@ API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 
 @end
 
+
 API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 @interface PKPaymentRequestUpdate : NSObject
 
@@ -107,6 +108,7 @@ API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 @interface PKPaymentRequestShippingMethodUpdate : PKPaymentRequestUpdate
 
 @end
+
 
 API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0))
 @interface PKPaymentRequestPaymentMethodUpdate : PKPaymentRequestUpdate

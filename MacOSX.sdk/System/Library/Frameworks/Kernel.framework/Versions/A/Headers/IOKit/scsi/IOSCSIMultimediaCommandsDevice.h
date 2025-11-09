@@ -213,6 +213,8 @@ private:
 	
 	static void		AsyncReadWriteComplete ( SCSITaskIdentifier completedTask );
 	
+    static void     AbortPMTransition ( thread_call_param_t whichDevice );
+
 protected:
 	
     // Reserve space for future expansion.
@@ -225,6 +227,9 @@ protected:
 		bool				fDeviceSupportsFastSpindown;
 		UInt8				fCDLoadingMechanism;
         bool                fDoNotLockMedia;
+        thread_call_t       fPMAbortThread;
+        UInt64              fCheckMediaPresenceDebugInfo;
+        UInt32              fByteToBlockShift;
 	};
     IOSCSIMultimediaCommandsDeviceExpansionData * fIOSCSIMultimediaCommandsDeviceReserved;
 	
@@ -235,6 +240,9 @@ protected:
 	#define fDeviceSupportsFastSpindown			fIOSCSIMultimediaCommandsDeviceReserved->fDeviceSupportsFastSpindown
 	#define fCDLoadingMechanism					fIOSCSIMultimediaCommandsDeviceReserved->fCDLoadingMechanism
     #define fDoNotLockMedia                     fIOSCSIMultimediaCommandsDeviceReserved->fDoNotLockMedia
+    #define fPMAbortThread                      fIOSCSIMultimediaCommandsDeviceReserved->fPMAbortThread
+    #define fCheckMediaPresenceDebugInfo        fIOSCSIMultimediaCommandsDeviceReserved->fCheckMediaPresenceDebugInfo
+    #define fByteToBlockShift                   fIOSCSIMultimediaCommandsDeviceReserved->fByteToBlockShift
 	
 	CDFeatures						fSupportedCDFeatures;
 	DVDFeatures						fSupportedDVDFeatures;

@@ -758,11 +758,21 @@ exports:
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE13pollingOption8delegate5queueABSgSo010NFCPollingG0V_AC0abC8Delegate_pSo012OS_dispatch_I0CSgtcfc', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE7connect2to17completionHandleryAC0A0O_ys5Error_pSgctF', 
                        '_$sSo19NFCTagReaderSessionC7CoreNFCE9upcastTagySo0A0_pAcEOF', 
-                       _NFCErrorDomain, _NFCISO15693TagResponseErrorKey, _NFCTagResponseUnexpectedLengthErrorKey, 
-                       '__swift_FORCE_LOAD_$_swiftCoreNFC' ]
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE09isPaymentD0SbyFZ', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE10__delegate5queueABSo06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfC', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE10__delegate5queueABSo06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfc', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE15__pollingOption8delegate5queueABSo010NFCPollingH0V_So06NFCTagcD8Delegate_pSo012OS_dispatch_J0CSgtcfC', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE15__pollingOption8delegate5queueABSo010NFCPollingH0V_So06NFCTagcD8Delegate_pSo012OS_dispatch_J0CSgtcfc', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE16readingAvailableSbvgZ', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate19sessionDelegateType5queue10pollMethod0hJ00H6ConfigAByp_So010NFCSessioniJ0VSo012OS_dispatch_K0CSgSo13PollingOptionVSo0eoJ0VSo0dN0VtcfC', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate19sessionDelegateType5queue10pollMethod0hJ00H6ConfigAByp_So010NFCSessioniJ0VSo012OS_dispatch_K0CSgSo13PollingOptionVSo0eoJ0VSo0dN0Vtcfc', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate5queueAbC06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfC', 
+                       '_$sSo26NFCPaymentTagReaderSessionC7CoreNFCE8delegate5queueAbC06NFCTagcD8Delegate_p_So012OS_dispatch_H0CSgtcfc', 
+                       '_$sSo26NFCPaymentTagReaderSessionCMa', _NFCErrorDomain, _NFCISO15693TagResponseErrorKey, 
+                       _NFCTagResponseUnexpectedLengthErrorKey, '__swift_FORCE_LOAD_$_swiftCoreNFC' ]
     objc-classes:    [ NFCISO15693CustomCommandConfiguration, NFCISO15693ReadMultipleBlocksConfiguration, 
                        NFCISO15693ReaderSession, NFCISO7816APDU, NFCNDEFMessage, 
-                       NFCNDEFPayload, NFCNDEFReaderSession, NFCReaderSession, NFCTagCommandConfiguration, 
-                       NFCTagReaderSession, NFCVASCommandConfiguration, NFCVASReaderSession, 
-                       NFCVASResponse ]
+                       NFCNDEFPayload, NFCNDEFReaderSession, NFCPaymentTagReaderSession, 
+                       NFCReaderSession, NFCTagCommandConfiguration, NFCTagReaderSession, 
+                       NFCVASCommandConfiguration, NFCVASReaderSession, NFCVASResponse ]
 ...

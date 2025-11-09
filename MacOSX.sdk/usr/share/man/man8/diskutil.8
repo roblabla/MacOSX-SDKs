@@ -16,7 +16,7 @@
 .\" Please see the License for the specific language governing rights and
 .\" limitations under the License.
 .\"
-.Dd 27 October 2021
+.Dd 11 June 2024
 .Dt DISKUTIL 8
 .Os "macOS"
 .Sh NAME
@@ -404,35 +404,6 @@ The repairs further include, but are not limited to, the repair or creation of a
 the integrity of any Core Storage Physical Volume partitions,
 and the provisioning of space for boot loaders.
 Ownership of the affected disk is required; it must be a whole disk and must have a partition map.
-.\"
-.\"             -- resetFusion --
-.It Sy resetFusion
-.br
-For Fusion Drive machines (two internal disk device hardware configurations), reset the disk devices in
-the machine to the factory-like state of one empty Fusion volume.
-.Pp
-This command will only run on a machine that contains exactly two internal disk devices:
-one solid-state device (SSD) and one rotational device (HDD),
-or, alternatively, two solid-state devices.
-This command must be able to make a positive identification thereof.
-If these requirements are met, you are prompted, and if you confirm, the erase and reset begins.
-.Pp
-Both internal disk devices are (re)-partitioned with GPT maps, and then they are
-turned into (used to create)
-an APFS Fusion Drive Container with one APFS Volume.
-.Pp
-All internal-disk data is lost. This includes any "extra" partitions (e.g. for
-Boot Camp or other "user" purposes).
-No system software is installed and no user data is restored.
-After running this command, you should (re)-install macOS on the machine (on the newly-created APFS Volume);
-otherwise, the machine will not be usable (bootable).
-.Pp
-You generally must be booted from the
-Internet Recovery System (CMD-OPT-R) or from an externally-connected macOS boot disk (e.g. a USB
-drive), because you cannot erase a disk that hosts the currently-running macOS.
-.Pp
-Externally-connected disk(s) are not affected.
-Ownership of the affected disks is required.
 .\"
 .\"             -- eraseDisk --
 .It Sy eraseDisk
@@ -955,12 +926,11 @@ IO Registry. While APFS Volume device identifiers appear to be of a related form
 you should never use the Container Reference as a basis to create device identifiers yourself;
 use the listing verbs with their plist options instead.
 .Pp
-An APFS Container has a certain fixed size (capacity) which, via its Physical Store(s), uses
+An APFS Container has a certain fixed size (capacity) which, via its Physical Store, uses
 physical space on a device. An APFS Container can be resized, but this is not a part of normal operation.
 .It
 Physical Store - An APFS Physical Store is a disk which is imported into (that is, which backs,
-indeed defines) an APFS Container. An APFS Container can import more than one Physical Store,
-e.g. for Fusion-style Containers.
+indeed defines) an APFS Container.
 .Pp
 An APFS Physical Store disk is not necessarily a disk from a partition map; it could be
 e.g. an AppleRAID Set disk. Therefore, you must never assume that
@@ -1103,7 +1073,7 @@ sub-verbs with their descriptions and individual arguments.
 .Op Ar containerReferenceDevice
 .br
 Display APFS objects as a tree. APFS Container(s) are shown with
-their imported Physical Store(s) and exported Volume(s).
+their imported Physical Store and exported Volume(s).
 .Pp
 All currently-attached APFS Containers in the system are listed unless you specify a
 .Ar containerReferenceDevice ,
@@ -1124,8 +1094,7 @@ Non-destructively convert an HFS volume to an APFS Container with a single (but 
 APFS Volume. The APFS Container can later be manipulated (e.g. adding and deleting APFS Volumes) as usual.
 This verb can be used to convert nonbootable "data"-only volumes as well as "macOS" volumes (see below).
 .Pp
-The source HFS volume can be located on a GPT partition or on an encrypted or non-encrypted, Fusion or non-Fusion
-CoreStorage logical volume (LV).
+The source HFS volume can be located on a GPT partition or on an encrypted or non-encrypted CoreStorage logical volume (LV).
 In the latter case, the CoreStorage logical volume group (LVG) is dismantled, including automatic removal
 of any related Boot Camp Assistant partition(s).
 .Pp
@@ -1149,56 +1118,30 @@ Ownership of the affected disks is required.
 .\"
 .\"             -- APFS > create  --
 .It Sy create Ar device
-.Op Ar device
 .Ar name
 .br
 Convenience verb which creates an empty APFS Container and then adds one APFS Volume with the given name.
 The APFS Volume will have default attributes such as no encryption, no capacity reserve nor quota, etc.
-If you specify more than one device, a Fusion Container is created, with the performance parts assigned automatically.
 This is a combination of the
 .Sy diskutil apfs createContainer
 and
 .Sy diskutil apfs addVolume
 verbs.
 .Pp
-Ownership of the affected disks is required.
+Ownership of the affected disk is required.
 .\"
 .\"             -- APFS > createContainer --
 .It Sy createContainer
-.Op Sy -main
 .Ar device
-.Op Sy -secondary
-.Op Ar device
 .br
 Create an empty APFS Container.
-The device(s) specified become APFS Physical Stores.
-If you specify more than one device, a Fusion Container is created.
-.Pp
-For Fusion cases, if you do not explicitly use the
-.Sy -main
-and
-.Sy -secondary
-options, the performance duties are assigned automatically; this is preferred.
-Rotational vs. solid-state hardware design must be detectable;
-this is often not the case for external disks. Solid-state hardware is welcome but
-not required; it is the identification which holds as a hard requirement with this usage.
-.Pp
-Alternatively, you can explicitly specify
-.Sy -main
-and
-.Sy -secondary
-devices; if you do so, you must specify both.
-The "main" device is assumed to be "faster" (you should use solid-state hardware if available),
-while the "secondary" device is assumed to be "slower" and is often used to store OS-associated
-"auxiliary" data such as a Boot Camp Assistant partition.
-.Pp
-You cannot mix the use of disks from a disk image and not from a disk image.
+The device specified becomes APFS Physical Stores.
 .Pp
 After running this command, you may add APFS Volumes with the
 .Sy diskutil apfs addVolume
 verb; you must do this at least once in order to "use" the new Container.
 .Pp
-Ownership of the affected disks is required.
+Ownership of the affected disk is required.
 .\"
 .\"             -- APFS > deleteContainer  --
 .It Sy deleteContainer
@@ -1211,7 +1154,7 @@ Destroy an existing APFS Container, including all of its APFS Volumes.
 Data on all of those volumes will be lost.
 .Pp
 You can identify the APFS Container by its Container Reference disk (preferred), or by one
-of its Physical Store disk(s).
+of its Physical Store disk.
 .Pp
 The APFS Volumes are unmounted first; this process may not succeed if one or more is busy,
 in which case deleteContainer is aborted and all data is left intact
@@ -1219,7 +1162,7 @@ in which case deleteContainer is aborted and all data is left intact
 .Pp
 Otherwise, all APFS Volumes are deleted, their encryption-store
 entries are removed as applicable, the parent APFS Container is deleted, and
-the APFS Container's former Physical Store(s) are disposed of as follows:
+the APFS Container's former Physical Store are disposed of as follows:
 .Pp
 If you did not specify a
 .Ar newName
@@ -1248,11 +1191,9 @@ of
 (fit-to-fill) is currently supported.
 .Pp
 If your APFS Container is damaged, a Container Reference for it might not exist or it might not
-be functional. In this case, you can reclaim your former APFS Physical Store disk(s) by specifying the
+be functional. In this case, you can reclaim your former APFS Physical Store disk by specifying the
 .Sy -force
-option; this activates an alternate last-resort mode. In this mode,
-if you had more than one Physical Store (e.g. the Fusion case) and the Container is sufficiently damaged,
-you might have to delete each Physical Store manually.
+option; this activates an alternate last-resort mode.
 You should normally avoid this mode.
 .Pp
 Ownership of the affected disks is required.
@@ -1272,9 +1213,6 @@ Resize an existing APFS Container by specifying either an APFS Container Referen
 or an APFS Physical Store partition, plus a proposed new size.
 Alternatively, take no action and print constraint information.
 The operation is live, non-destructive, and does not mount or unmount any APFS Volumes.
-.Pp
-If you specify an APFS Container Reference and that Container imports more than one Physical Store (in e.g. Fusion setups),
-the appropriate Physical Store will be chosen automatically.
 .Pp
 Specifying
 .Sy limits
@@ -2173,13 +2111,7 @@ To re-lock the volume, make it offline again by ejecting it, e.g. with
 .Ar diskimageverb 
 .br
 .Sy diskutil image verb
-uses DiskImages framework alongside with StorageKit framework to facilitate in manipulating disk images. Currently only
-.Sy attach
-,
-.Sy info
-and
-.Sy create
-are supported.
+uses DiskImages framework alongside with StorageKit framework to facilitate in manipulating disk images.
 .Pp
 Add 
 .Sy verbose
@@ -2193,7 +2125,7 @@ to produce output in a plist format. Intended for other programs to use this fla
 
 Add
 .Sy stdinpassphrase
-to read the passphrase from stdin instead of prompting for one.
+to read the passphrase from stdin instead of prompting for one. \fB\-\-stdinpass\fR is an alias for this option.
 .Pp
 The following is a list of
 .Sy diskutil image
@@ -2210,6 +2142,7 @@ sub-verbs with their descriptions and individual arguments.
 .Op Sy --mountOptions Ar opt[,opt]*
 .Op Sy --mountPolicy Ar mountPolicy
 .Op Sy --noMount
+.Op Sy --shadow Ar [<shadow-path0> [--shadow <shadow-path1>] ...]
 .Ar image-url
 .br
 Attach a disk image as a device. Upon success will return the disk identifier matching the attached disk image.
@@ -2264,6 +2197,30 @@ see mount(8). Can supply multiple options separated by ','. These options will b
 Lastly,
 .Sy nobrowse
 can be supplied to hide the mounted volume in the disk image from GUI applications (such as Finder).
+
+Use a
+.Sy shadow
+file(s) in conjunction with the data in the primary image file.
+This option prevents modification of the original image and allows read-only images to be attached read/write.
+When blocks are being read from the image, blocks present in the shadow file override blocks in the base image.
+All data written to an attached device will be redirected to the shadow file.
+If not specified, shadow-path defaults to <image-url>_shadow.
+When multiple shadow files are attached, the last
+.Ar <shadow-path>
+will be used as the active shadow file. The rest of the shadows will be read-only snapshots.
+When blocks are being read from the disk, data will be returned from the last shadow that contains the relevant data block.
+When writing to the disk, it will be written to the last shadow.
+Each intermediate
+.Ar <shadow-path>
+assumed to exist by initially creating it with a call to <attach>. Duplicate
+.Ar <shadow-path>'s are
+forbidden. In case an intermediate
+.Ar <shadow-path>
+or
+.Ar <image-url>
+is mounted,
+it has to be mounted as read-only for the command to succeed.
+
 .\"             -- DiskImage > info --
 .It Sy info
 .Op Sy --extra
@@ -2276,6 +2233,15 @@ The operation includes an attach operation of the image in order to retrieve var
 If
 .Sy --extra
 is specified, additional information will be retrieved for some image types.
+.\"
+.\"             -- DiskImage > chpass --
+.It Sy chpass
+.Ar image-url
+.br
+Change the passphrase of a given encrypted image.
+.br
+Upon success, the new passphrase will replace the given passphrase in encrypting the image. If the image is not encrypted, the operation will fail with Invalid Argument error.
+.br
 .\"
 .\"             -- DiskImage > create --
 .It Sy create
@@ -2305,6 +2271,7 @@ to create the disk image from source (e.g. disk3 / existing disk image).
 .Op Sy --format Ar format
 .Op Sy --size Ar size
 .Op Sy --volumeName Ar name
+.Op Sy -fs Ar filesystemFormat
 .Ar image-path
 .br
 Creates a blank disk image.
@@ -2318,19 +2285,27 @@ Should be a writable path.
 .It
 RAW     - RAW read-write format (previously known as UDRW)
 .It
+ASIF    - Apple sparse image. Note that this format replaces the legacy .sparseimage
+format. diskutil can be used to convert sparseimage to ASIF, for example:
+"diskutil image create from image.sparseimage image.asif"
+.It
 UDSB    - Sparse bundle
 .El
 
 .Sy name
-creates an APFS filesystem with the requested volume name on the image (default: untitled).
+creates a filesystem with the requested volume name on the image (default: untitled).
 
 .Sy size
 allows to specify the size of the newly created image, see SIZES.
+
+.Sy filesystemFormat
+creates a filesystem in the specified format, one of APFS / ExFAT / MS-DOS / None (default: APFS).
 
 .El
 .Bl -hang -width "create"
 .It Sy from
 .Op Sy --format Ar format
+.Op Sy --shadow Ar shadow-path
 .Sy source-path
 .Sy destination-path
 .br
@@ -2353,11 +2328,16 @@ ULFO    - UDIF read-only lzfse-compressed
 .It
 ULMO    - UDIF read-only lzma-compressed
 .It
+ASIF    - Apple sparse image
+.It
 UDSB    - Sparse bundle
 .El
 
 .Sy source-path
 should be the source for the disk image to be created from (e.g. disk3 / existing disk image).
+
+.Sy shadow-path
+path to the shadow file. This option is available only when creating a disk from another disk image.
 .El
 .\"
 .\"             -- DiskImage > resize --
@@ -2997,3 +2977,9 @@ regardless of the partitioning scheme. This is significant for MBR partition map
 appliances such as cameras. Free-space requests will not be aligned.
 .Pp
 Starting with macOS 11.0, certain Core Storage manipulation verbs have been removed.
+.Pp
+Starting with macOS 13.0, the verb "image" can be used to allow attaching disk images
+.Pp
+Starting with macOS 14.0, disk images can be created and resized.
+.Pp
+Starting with macOS 16.0, ASIF disk image format and shadow files can be used

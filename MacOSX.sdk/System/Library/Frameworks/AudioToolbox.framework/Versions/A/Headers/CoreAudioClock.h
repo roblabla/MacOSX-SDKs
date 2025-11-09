@@ -573,7 +573,9 @@ CAClockSetCurrentTime(		CAClockRef			inCAClock,
 extern OSStatus
 CAClockGetCurrentTime(		CAClockRef			inCAClock,
 							CAClockTimeFormat	inTimeFormat,
-							CAClockTime *		outTime)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+							CAClockTime *		outTime)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -623,7 +625,9 @@ extern OSStatus
 CAClockTranslateTime(		CAClockRef			inCAClock,
 							const CAClockTime *	inTime,
 							CAClockTimeFormat	inOutputTimeFormat,
-							CAClockTime *		outTime)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+							CAClockTime *		outTime)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -818,7 +822,9 @@ extern OSStatus
 CAClockSecondsToSMPTETime(	CAClockRef			inCAClock,
 							CAClockSeconds		inSeconds,
 							UInt16				inSubframeDivisor,
-							SMPTETime *			outSMPTETime)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+							SMPTETime *			outSMPTETime)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -843,7 +849,9 @@ CAClockSecondsToSMPTETime(	CAClockRef			inCAClock,
 extern OSStatus
 CAClockSMPTETimeToSeconds(	CAClockRef			inCAClock,
 							const SMPTETime *   inSMPTETime,
-							CAClockSeconds *	outSeconds)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+							CAClockSeconds *	outSeconds)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -879,7 +887,9 @@ extern OSStatus
 CAClockBeatsToBarBeatTime(	CAClockRef			inCAClock,
 							CAClockBeats		inBeats,
 							UInt16				inSubbeatDivisor,
-							CABarBeatTime *		outBarBeatTime)				API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+							CABarBeatTime *		outBarBeatTime)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -904,7 +914,9 @@ CAClockBeatsToBarBeatTime(	CAClockRef			inCAClock,
 extern OSStatus
 CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 							const CABarBeatTime *inBarBeatTime,
-							CAClockBeats *		outBeats)					API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
+							CAClockBeats *		outBeats)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(10.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 //  -----------------------------------------------------------------------------
 /*!
@@ -927,7 +939,9 @@ CAClockBarBeatTimeToBeats(	CAClockRef			inCAClock,
 */
 extern OSStatus
 CAClockParseMIDI(			CAClockRef			inCAClock,
-							const struct MIDIPacketList *inMIDIPacketList)	API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
+							const struct MIDIPacketList *inMIDIPacketList)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(10.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 #ifdef __cplusplus
 }

@@ -32,9 +32,11 @@ typedef NS_OPTIONS(NSUInteger, ASAuthorizationProviderExtensionRequestOptions) {
     // The registration is changing to or from shared device keys.
     ASAuthorizationProviderExtensionRequestOptionsRegistrationDeviceKeyMigration API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 3,
     // A stronger key is available for rotation.
-    ASAuthorizationProviderExtensionRequestOptionsStrongerKeyAvailable API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos) = 1 << 4,
+    ASAuthorizationProviderExtensionRequestOptionsStrongerKeyAvailable API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 4,
     // The user secure enclave key is invalid and must be replaced.
     ASAuthorizationProviderExtensionRequestOptionsUserKeyInvalid API_AVAILABLE(macos(14.4)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 5,
+    // Registration is running as part of setup assistant.
+    ASAuthorizationProviderExtensionRequestOptionsSetupAssistant API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 6,
 };
 
 typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionRegistrationResult)
@@ -137,6 +139,15 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
                      completion:(void (^)(BOOL success))completion API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
+/*!
+ @abstract Request the display names for the supplied group identifiers.  The completion key is the identifier and the value is the display name.
+ */
+- (void)displayNamesForGroups:(NSArray<NSString *> *)groups loginManager:(ASAuthorizationProviderExtensionLoginManager *)loginManager completion:(void (^)(NSDictionary<NSString *, NSString *> *fullNames))completion API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos) NS_SWIFT_NAME(displayNames(forGroups:using:completion:));
+
+/*!
+ @abstract Request the profile picture for the current user in jpeg format.
+ */
+- (void)profilePictureForUserUsingLoginManager:(ASAuthorizationProviderExtensionLoginManager *)loginManager completion:(void (^)(NSData *jpegData))completion API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

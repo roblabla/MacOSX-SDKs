@@ -19,6 +19,5 @@ exports:
                        _kAppleVirtualPlatformGuestStrongIdentityOptionSynchronous, 
                        _kAppleVirtualPlatformGuestStrongIdentityOptionSynchronousTimeoutNsec ]
     objc-classes:    [ AppleVirtualPlatformHostCertificate, AppleVirtualPlatformHostKey, 
-                       AppleVirtualPlatformHostKeyData, AppleVirtualPlatformHostKeyStorage, 
-                       AppleVirtualPlatformSysCfg ]
+                       AppleVirtualPlatformHostKeyData, AppleVirtualPlatformSysCfg ]
 ...

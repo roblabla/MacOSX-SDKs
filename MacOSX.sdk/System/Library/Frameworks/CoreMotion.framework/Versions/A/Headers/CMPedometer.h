@@ -20,11 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *      object contains a step count. On supported platforms it also contains
  *      distance, flights of stairs, pace, and cadence.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 COREMOTION_EXPORT API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(visionos)
-#else
-COREMOTION_EXPORT API_AVAILABLE(ios(8.0))
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMPedometerData : NSObject <NSSecureCoding, NSCopying>
 
 /*
@@ -181,12 +177,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(10.0), watchos(3.0))
  *      Typedef of block to be invoked when pedometer data is available. Error
  *      types are defined in "CMError.h".
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 typedef void (^CMPedometerHandler)(CMPedometerData * __nullable pedometerData, NSError * __nullable error) API_UNAVAILABLE(visionos);
-#else
-typedef void (^CMPedometerHandler)(CMPedometerData * __nullable pedometerData, NSError * __nullable error);
-
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  CMPedometerEventHandler
@@ -195,12 +186,7 @@ typedef void (^CMPedometerHandler)(CMPedometerData * __nullable pedometerData, N
  *      Typedef of block that will be invoked when pedometer event is available.
  *      Error types are defined in "CMError.h".
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 typedef void (^CMPedometerEventHandler)(CMPedometerEvent * __nullable pedometerEvent, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(10.0), watchos(3.0)) API_UNAVAILABLE(visionos);
-#else
-typedef void (^CMPedometerEventHandler)(CMPedometerEvent * __nullable pedometerEvent, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(10.0), watchos(3.0));
-
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  CMPedometer
@@ -218,11 +204,7 @@ typedef void (^CMPedometerEventHandler)(CMPedometerEvent * __nullable pedometerE
  *      updates can be stopped by calling stopPedometerUpdates.
  *
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 COREMOTION_EXPORT API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(visionos)
-#else
-COREMOTION_EXPORT API_AVAILABLE(ios(8.0))
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMPedometer : NSObject
 
 /*

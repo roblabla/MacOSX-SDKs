@@ -740,7 +740,7 @@ InstallDebugAssertOutputHandler(DebugAssertOutputHandlerUPP handler) __OSX_AVAIL
  *  @result a const char\* string corresponding to the given OSStatus
  */
 extern const char * 
-GetMacOSStatusErrorString(OSStatus err)                       API_AVAILABLE(macos(10.4), macCatalyst(11.0) ) API_UNAVAILABLE(ios, tvos, watchos );
+GetMacOSStatusErrorString(OSStatus err)                       API_AVAILABLE(macos(10.4), macCatalyst(11.0), ios(26.0)) API_UNAVAILABLE(tvos, watchos );
 
 /*!
  *	@abstract Returns a const char\* string which corresponds to the descriptive string for the given OSStatus code.
@@ -752,7 +752,7 @@ GetMacOSStatusErrorString(OSStatus err)                       API_AVAILABLE(maco
  *  @result a const char\* string corresponding to the given OSStatus
  */
 extern const char * 
-GetMacOSStatusCommentString(OSStatus err)                     API_AVAILABLE(macos(10.4), macCatalyst(11.0) ) API_UNAVAILABLE(ios, tvos, watchos ) ;
+GetMacOSStatusCommentString(OSStatus err)                     API_AVAILABLE(macos(10.4), macCatalyst(11.0), ios(26.0) ) API_UNAVAILABLE( tvos, watchos ) ;
 
 
 /*

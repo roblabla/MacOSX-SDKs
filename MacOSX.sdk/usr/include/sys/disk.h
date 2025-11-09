@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 1998-2014 Apple Computer, Inc. All rights reserved.
+ * Copyright (c) 1998-2025 Apple Computer, Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -31,7 +31,6 @@
 
 #include <stdint.h>
 #include <sys/ioctl.h>
-
 
 /*
  * Definitions
@@ -176,7 +175,6 @@ typedef struct{
 
 #define DK_LOCATION_INTERNAL                   0x00000000
 #define DK_LOCATION_EXTERNAL                   0x00000001
-
 
 #define DKIOCEJECT                            _IO('d', 21)
 #define DKIOCSYNCHRONIZE                      _IOW('d', 22, dk_synchronize_t)

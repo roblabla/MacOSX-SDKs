@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/_AppIntents_UIKit.framework/Versions/A/_AppIntents_UIKit'
-current-version: 227.19
+current-version: 300.0.4
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -32,7 +32,25 @@ exports:
                        '_$s17_AppIntents_UIKit01_A15IntentExecutionVN', '_$s17_AppIntents_UIKit01_A19IntentSceneDelegateMp', 
                        '_$s17_AppIntents_UIKit01_A19IntentSceneDelegateP5scene_11willPerformySo7UISceneC_AA01_aD9ExecutionVtFTj', 
                        '_$s17_AppIntents_UIKit01_A19IntentSceneDelegateP5scene_11willPerformySo7UISceneC_AA01_aD9ExecutionVtFTq', 
-                       '_$s17_AppIntents_UIKit01_A19IntentSceneDelegateTL', '_$s17_AppIntents_UIKit0A20EntityViewAnnotationC10entityType10identifier5stateACxm_2IDQz0aB00aD11VisualStateVtcAI0aD0RzlufC', 
+                       '_$s17_AppIntents_UIKit01_A19IntentSceneDelegateTL', '_$s17_AppIntents_UIKit07UISceneA6IntentMp', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentP0aB0022TargetContentProvidingE0Tb', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentP17performNavigation8forSceneySo0D0C_tFTj', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentP17performNavigation8forSceneySo0D0C_tFTq', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAA0aB004OpenE0RzrlE17contentIdentifierSSvg', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAA0aB004OpenE0RzrlE17contentIdentifierSSvpMV', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAA0aB004OpenE0RzrlE7performQryYaKF', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAA0aB004OpenE0RzrlE7performQryYaKFQOMQ', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAA0aB004OpenE0RzrlE7performQryYaKFTu', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAAE17performNavigation8forSceneySo0D0C_tF', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAAE7performQryYaKF', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAAE7performQryYaKFQOMQ', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAAE7performQryYaKFTu', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAAE7uiSceneSo0D0CSgvg', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentPAAE7uiSceneSo0D0CSgvpMV', 
+                       '_$s17_AppIntents_UIKit07UISceneA6IntentTL', '_$s17_AppIntents_UIKit0A19IntentSceneDelegateMp', 
+                       '_$s17_AppIntents_UIKit0A19IntentSceneDelegateP5scene_011willPerformaD0ySo7UISceneC_AA0jaD0_ptFTj', 
+                       '_$s17_AppIntents_UIKit0A19IntentSceneDelegateP5scene_011willPerformaD0ySo7UISceneC_AA0jaD0_ptFTq', 
+                       '_$s17_AppIntents_UIKit0A19IntentSceneDelegateTL', '_$s17_AppIntents_UIKit0A20EntityViewAnnotationC10entityType10identifier5stateACxm_2IDQz0aB00aD11VisualStateVtcAI0aD0RzlufC', 
                        '_$s17_AppIntents_UIKit0A20EntityViewAnnotationC10entityType10identifier5stateACxm_2IDQz0aB00aD11VisualStateVtcAI0aD0RzlufCTj', 
                        '_$s17_AppIntents_UIKit0A20EntityViewAnnotationC10entityType10identifier5stateACxm_2IDQz0aB00aD11VisualStateVtcAI0aD0RzlufCTq', 
                        '_$s17_AppIntents_UIKit0A20EntityViewAnnotationC10entityType10identifier5stateACxm_2IDQz0aB00aD11VisualStateVtcAI0aD0Rzlufc', 
@@ -186,6 +204,8 @@ exports:
                        '_$sSo16UICollectionViewC17_AppIntents_UIKitE20appEntityIdentifiers3forSDy21UIIntelligenceSupport26IntelligenceDataSourceItemO0cD00G10IdentifierVGAF0lmnO7RequestV_tF', 
                        '_$sSo24UISceneConnectionOptionsC17_AppIntents_UIKitE19_appIntentExecutionAC01_dhI0VSgvg', 
                        '_$sSo24UISceneConnectionOptionsC17_AppIntents_UIKitE19_appIntentExecutionAC01_dhI0VSgvpMV', 
+                       '_$sSo24UISceneConnectionOptionsC17_AppIntents_UIKitE9appIntentAC0adH0_pSgvg', 
+                       '_$sSo24UISceneConnectionOptionsC17_AppIntents_UIKitE9appIntentAC0adH0_pSgvpMV', 
                        '_$sSo5UITabC10AppIntents0B17EntityAnnotatable01_bC6_UIKitMc', 
                        '_$sSo5UITabC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvM', 
                        '_$sSo5UITabC17_AppIntents_UIKitE19appEntityIdentifier0bC00fG0VSgvg', 

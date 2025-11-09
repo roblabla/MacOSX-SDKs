@@ -88,9 +88,19 @@ typedef NS_ENUM( NSInteger, DDDeviceMediaPlaybackState )
 */
 typedef NS_OPTIONS( NSUInteger, DDDeviceSupports )
 {
-	DDDeviceSupportsBluetoothPairingLE			= ( 1U << 1 ),	/// Device supports Bluetooth Low Energy pairing.
-	DDDeviceSupportsBluetoothTransportBridging	= ( 1U << 2 ),	/// Device supports bring up of classic transport profiles when low energy transport for peripheral is connected.
+	DDDeviceSupportsBluetoothPairingLE								= ( 1U << 1 ),	/// Device supports Bluetooth Low Energy pairing.
+	DDDeviceSupportsBluetoothTransportBridging						= ( 1U << 2 ),	/// Device supports bring up of classic transport profiles when low energy transport for peripheral is connected.
+	DDDeviceSupportsBluetoothHID API_AVAILABLE( ios( 26.0 ) )		= ( 1U << 3 ),  /// Device supports Bluetooth Low Energy HID service.
 };
+
+//===========================================================================================================================
+/*!    @brief        Wi-Fi Aware Service's Role
+*/
+typedef NS_ENUM( NSInteger, DDDeviceWiFiAwareServiceRole )
+{
+	DDDeviceWiFiAwareServiceRoleSubscriber			= 10,
+	DDDeviceWiFiAwareServiceRolePublisher			= 20,
+} NS_SWIFT_NAME(DDDevice.WiFiAwareServiceRole);
 
 /// Converts a device media playback state to a string for logging, etc.
 DD_EXTERN
@@ -167,6 +177,21 @@ API_AVAILABLE( ios( 16.0 ) )
 /// The URL must have a valid hostname, no query parameters, and a maximum size of 100 bytes.
 @property (readwrite, copy, nonatomic) NSURL *url;
 
+/// Device's Wi-Fi Aware's service name.
+@property (readwrite, copy, nullable, nonatomic) NSString *wifiAwareServiceName
+API_AVAILABLE( ios( 26.0 ) );
+
+/// Device's Wi-Fi Aware's service. Default is `DDDeviceWiFiAwareServiceRoleSubscriber`
+@property (readwrite, assign, nonatomic) DDDeviceWiFiAwareServiceRole wifiAwareServiceRole
+API_AVAILABLE( ios( 26.0 ) );
+
+/// Device's Wi-Fi Aware model name.
+@property (readwrite, copy, nullable, nonatomic) NSString *wifiAwareModelName
+API_AVAILABLE( ios( 26.0 ) );
+
+/// Device's Wi-Fi Aware vendor name.
+@property (readwrite, copy, nullable, nonatomic) NSString *wifiAwareVendorName
+API_AVAILABLE( ios( 26.0 ) );
 
 @end
 

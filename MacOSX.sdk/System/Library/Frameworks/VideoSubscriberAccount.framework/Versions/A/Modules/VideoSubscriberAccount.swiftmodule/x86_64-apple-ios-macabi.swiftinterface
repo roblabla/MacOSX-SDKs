@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 561.40.17 -module-name VideoSubscriberAccount
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 593.0.2 -module-name VideoSubscriberAccount
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import DeveloperToolsSupport
 import Foundation
 import Swift
@@ -9,6 +9,33 @@ import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+@available(watchOS, unavailable)
+@available(macCatalyst, unavailable)
+extension VideoSubscriberAccount.VSUserAccountManager {
+  @available(iOS 26.0, tvOS 26.0, *)
+  @available(macOS, unavailable)
+  @available(visionOS, unavailable)
+  public struct AutoSignInTokenUpdateContext {
+    public var authorization: VideoSubscriberAccount.VSUserAccountManager.AutoSignInAuthorization {
+      get
+    }
+  }
+}
+@available(watchOS, unavailable)
+@available(macCatalyst, unavailable)
+extension VideoSubscriberAccount.VSUserAccountManager {
+  @available(iOS 26.0, tvOS 26.0, macOS 26.0, visionOS 26.0, *)
+  public struct AutoSignInToken {
+    public var authorization: VideoSubscriberAccount.VSUserAccountManager.AutoSignInAuthorization {
+      get
+    }
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var value: Swift.String? {
+      get
+    }
+    #endif
+  }
+}
 @available(iOS 17.4, tvOS 17.4, macOS 14.4, visionOS 1.1, *)
 @available(watchOS, unavailable)
 @available(macCatalyst, unavailable)
@@ -32,22 +59,28 @@ public struct VSAppleSubscription : Swift.Sendable, Swift.Hashable {
 @available(watchOS, unavailable)
 @available(macCatalyst, unavailable)
 public struct VSUserAccount : Swift.Sendable, Swift.Hashable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var updateURL: Foundation.URL? {
     get
     set
   }
+  #endif
   public var requiresSystemTrust: Swift.Bool {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var accountProviderIdentifier: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var identifier: Swift.String? {
     get
     set
   }
+  #endif
   public var accountType: VideoSubscriberAccount.VSUserAccount.AccountType {
     get
     set
@@ -56,22 +89,31 @@ public struct VSUserAccount : Swift.Sendable, Swift.Hashable {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var subscriptionBillingCycleEndDate: Foundation.Date? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var tierIdentifiers: [Swift.String]? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var billingIdentifier: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var authenticationData: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.4, tvOS 17.4, macOS 14.4, visionOS 1.1, *)
   @available(watchOS, unavailable)
   @available(macCatalyst, unavailable)
@@ -79,6 +121,7 @@ public struct VSUserAccount : Swift.Sendable, Swift.Hashable {
     get
     set
   }
+  #endif
   public var isFromCurrentDevice: Swift.Bool {
     get
     set
@@ -86,7 +129,9 @@ public struct VSUserAccount : Swift.Sendable, Swift.Hashable {
   public var deviceCategory: VideoSubscriberAccount.VSUserAccount.OriginatingDeviceCategory {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(accountType: VideoSubscriberAccount.VSUserAccount.AccountType = .free, updateURL: Foundation.URL?)
+  #endif
   public static func == (a: VideoSubscriberAccount.VSUserAccount, b: VideoSubscriberAccount.VSUserAccount) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -100,7 +145,9 @@ extension VideoSubscriberAccount.VSUserAccount {
   public enum AccountType : Swift.Int, Swift.Sendable {
     case free
     case paid
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
     @available(iOS 16.4, tvOS 16.4, macOS 13.3, *)
     @available(watchOS, unavailable)
     @available(macCatalyst, unavailable)
@@ -112,7 +159,9 @@ extension VideoSubscriberAccount.VSUserAccount {
   public enum OriginatingDeviceCategory : Swift.Int, Swift.Sendable {
     case mobile
     case other
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
     @available(iOS 16.4, tvOS 16.4, macOS 13.3, *)
     @available(watchOS, unavailable)
     @available(macCatalyst, unavailable)
@@ -128,6 +177,31 @@ extension VideoSubscriberAccount.VSUserAccount {
 extension VideoSubscriberAccount.VSUserAccountManager {
   public func update(_ account: VideoSubscriberAccount.VSUserAccount) async throws
   public func userAccounts(options: VideoSubscriberAccount.VSUserAccountManager.QueryOptions = []) async throws -> [VideoSubscriberAccount.VSUserAccount]
+}
+@available(watchOS, unavailable)
+@available(macCatalyst, unavailable)
+extension VideoSubscriberAccount.VSUserAccountManager {
+  @available(iOS 26.0, tvOS 26.0, macOS 26.0, visionOS 26.0, *)
+  public var autoSignInToken: VideoSubscriberAccount.VSUserAccountManager.AutoSignInToken {
+    get async throws
+  }
+  @available(iOS 26.0, tvOS 26.0, macOS 26.0, visionOS 26.0, *)
+  public func deleteAutoSignInToken() async throws
+}
+@available(watchOS, unavailable)
+@available(macCatalyst, unavailable)
+extension VideoSubscriberAccount.VSUserAccountManager {
+  @available(iOS 26.0, tvOS 26.0, macOS 26.0, visionOS 26.0, *)
+  public enum AutoSignInAuthorization {
+    case notDetermined
+    case granted
+    case denied
+    public static func == (a: VideoSubscriberAccount.VSUserAccountManager.AutoSignInAuthorization, b: VideoSubscriberAccount.VSUserAccountManager.AutoSignInAuthorization) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
 }
 @available(iOS 16.4, tvOS 16.4, macOS 13.3, *)
 @available(watchOS, unavailable)
@@ -153,3 +227,11 @@ extension VideoSubscriberAccount.VSUserAccount.OriginatingDeviceCategory : Swift
 @available(watchOS, unavailable)
 @available(macCatalyst, unavailable)
 extension VideoSubscriberAccount.VSUserAccount.OriginatingDeviceCategory : Swift.RawRepresentable {}
+@available(iOS 26.0, tvOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+@available(macCatalyst, unavailable)
+extension VideoSubscriberAccount.VSUserAccountManager.AutoSignInAuthorization : Swift.Equatable {}
+@available(iOS 26.0, tvOS 26.0, macOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+@available(macCatalyst, unavailable)
+extension VideoSubscriberAccount.VSUserAccountManager.AutoSignInAuthorization : Swift.Hashable {}

@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 #pragma mark AVCaptureVideoDataOutput
 
+@class AVMetadataItem;
 @class AVCaptureVideoDataOutputInternal;
 @protocol AVCaptureVideoDataOutputSampleBufferDelegate;
 
@@ -182,6 +183,26 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  */
 - (nullable NSDictionary<NSString *, id> *)recommendedVideoSettingsForVideoCodecType:(AVVideoCodecType)videoCodecType assetWriterOutputFileType:(AVFileType)outputFileType outputFileURL:(nullable NSURL *)outputFileURL API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
+/// Recommends movie-level metadata for a particular video codec type and output file type, to be used with an asset writer input.
+///
+/// - Parameter videoCodecType: The desired ``AVVideoCodecKey`` to be used for compression (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>).
+/// - Parameter outputFileType: Specifies the UTI of the file type to be written (see <doc://com.apple.documentation/documentation/avfoundation/avfiletype>).
+/// - Returns: A fully populated array of ``AVMetadataItem`` objects compatible with ``AVAssetWriter``.
+///
+/// The value of this property is an array of ``AVMetadataItem`` objects representing the collection of top-level metadata to be written in each output file. This array is suitable to use as the ``AVAssetWriter/metadata`` property before you have called ``AVAssetWriter/startWriting``. For more details see <doc://com.apple.documentation/documentation/avfoundation/avassetwriter/startwriting()>.
+///
+/// The ``videoCodecType`` string you provide must be present in ``availableVideoCodecTypesForAssetWriterWithOutputFileType:`` array, or an `NSInvalidArgumentException` is thrown.
+///
+/// For clients writing files using a ProRes Raw codec type, white balance must be locked (call ``AVCaptureDevice/setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:``) before querying this property, or an `NSIvalidArgumentException` is thrown.
+///
+/// - Note: The array of metadata is dependent on the current configuration of the receiver's ``AVCaptureSession`` and its inputs. The array may change when the session's configuration changes. As such, you should configure and start your session first, then query this method.
+- (nullable NSArray<AVMetadataItem *> *)recommendedMovieMetadataForVideoCodecType:(AVVideoCodecType)videoCodecType assetWriterOutputFileType:(AVFileType)outputFileType API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Indicates the recommended media timescale for the video track.
+///
+/// - Returns: The recommended media timescale based on the active capture session's inputs. It is never less than 600. It may or may not be a multiple of 600.
+@property(nonatomic, readonly) CMTimeScale recommendedMediaTimeScaleForAssetWriter API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
 /*!
  @property availableVideoCVPixelFormatTypes
  @abstract
@@ -239,8 +260,22 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0), visionos(1.0
  
  @discussion
     If you wish to manually set deliversPreviewSizedOutputBuffers, you must first set automaticallyConfiguresOutputBufferDimensions to NO. When deliversPreviewSizedOutputBuffers is set to YES, auto focus, exposure, and white balance changes are quicker. AVCaptureVideoDataOutput assumes that the buffers are being used for on-screen preview rather than recording.
+
+    When AVCaptureDevice.activeFormat supports ProRes Raw video, setting deliversPreviewSizedOutputBuffers gives out buffers with 422 format that can be used for proxy video recording.
  */
 @property(nonatomic) BOOL deliversPreviewSizedOutputBuffers API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/// Indicates whether the receiver should prepare the cellular radio for imminent network activity.
+///
+/// Apps that scan video data output buffers for information that will result in network activity (such as detecting a QRCode containing a URL) should set this property `true` to allow the cellular radio to prepare for an imminent network request. Enabling this property requires a lengthy reconfiguration of the capture render pipeline, so you should set this property to `true` before calling ``AVCaptureSession/startRunning``.
+///
+/// Using this API requires your app to adopt the entitlement `com.apple.developer.avfoundation.video-data-output-prepares-cellular-radio-for-machine-readable-code-scanning`.
+@property BOOL preparesCellularRadioForNetworkConnection API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/// Indicates whether the receiver should preserve dynamic HDR metadata as an attachment on the output sample buffer's underlying pixel buffer.
+///
+/// Set this property to `true` if you wish to use ``AVCaptureVideoDataOutput`` with ``AVAssetWriter`` to record HDR movies. You must also set ``kVTCompressionPropertyKey_PreserveDynamicHDRMetadata`` to `true` in the compression settings you pass to your ``AVAssetWriterInput``. These compression settings are represented under the ``AVVideoCompressionPropertiesKey`` sub-dictionary of your top-level AVVideoSettings (see <doc://com.apple.documentation/documentation/avfoundation/video-settings>). When you set this key to `true`, performance improves, as the encoder is able to skip HDR metadata calculation for every frame. The default value is `false`.
+@property BOOL preservesDynamicHDRMetadata API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0), macos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
 
 @end
 

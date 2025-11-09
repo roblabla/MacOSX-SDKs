@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/InputAccessoriesSettings.framework/Versions/A/InputAccessoriesSettings'
-current-version: 9.4.1
+current-version: 11
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -24,7 +24,8 @@ exports:
                        '_$s24InputAccessoriesSettingsAACfd', _ACMContextAddCredential, 
                        _ACMContextAddCredentialWithScope, _ACMContextContainsCredentialType, 
                        _ACMContextContainsCredentialTypeEx, _ACMContextContainsPassphraseCredentialWithPurpose, 
-                       _ACMContextCreate, _ACMContextCreateWithExternalForm, _ACMContextCredentialGetProperty, 
+                       _ACMContextCopyData, _ACMContextCreate, _ACMContextCreateWithExternalForm, 
+                       _ACMContextCreateWithFlags, _ACMContextCredentialGetProperty, 
                        _ACMContextDelete, _ACMContextGetData, _ACMContextGetDataEx, 
                        _ACMContextGetDataProperty, _ACMContextGetExternalForm, _ACMContextGetInfo, 
                        _ACMContextGetTrackingNumber, _ACMContextRemoveCredentialsByType, 
@@ -35,6 +36,7 @@ exports:
                        _ACMContextVerifyPolicy, _ACMContextVerifyPolicyEx, _ACMContextVerifyPolicyWithPreflight, 
                        _ACMCredentialCreate, _ACMCredentialDelete, _ACMCredentialGetProperty, 
                        _ACMCredentialGetPropertyData, _ACMCredentialGetType, _ACMCredentialSetProperty, 
+                       _ACMDecryptData, _ACMDecryptDataEx, _ACMEncryptData, _ACMEncryptDataEx, 
                        _ACMGetAclAuthMethod, _ACMGetEnvironmentVariable, _ACMGlobalContextAddCredential, 
                        _ACMGlobalContextCredentialGetProperty, _ACMGlobalContextRemoveCredentialsByType, 
                        _ACMGlobalContextVerifyPolicy, _ACMKernelControl, _ACMParseAclAndCopyConstraintCharacteristics, 
@@ -54,6 +56,7 @@ exports:
                        _GetSerializedReplacePassphraseCredentialSize, _GetSerializedRequirementSize, 
                        _GetSerializedVerifyAclConstraintSize, _GetSerializedVerifyPolicySize, 
                        _LibCall_ACMContexAddCredentialWithScope, _LibCall_ACMContexRemoveCredentialsByTypeAndScope, 
+                       _LibCall_ACMContextContainsCredentialTypeEx, _LibCall_ACMContextCopyData, 
                        _LibCall_ACMContextCreate, _LibCall_ACMContextCreateWithExternalForm, 
                        _LibCall_ACMContextCredentialGetProperty, _LibCall_ACMContextDelete, 
                        _LibCall_ACMContextGetData, _LibCall_ACMContextGetInfo, _LibCall_ACMContextLoadFromImage, 
@@ -76,15 +79,17 @@ exports:
                        _LibCall_ACMSEPControl, _LibCall_ACMSEPControl_Block, _LibCall_ACMSecContextGetUnlockSecret, 
                        _LibCall_ACMSecContextProcessAcl, _LibCall_ACMSecContextProcessAclAndCopyAuthMethod, 
                        _LibCall_ACMSecContextVerifyAclConstraintAndCopyRequirement, 
-                       _LibCall_ACMSecCredentialProviderEnrollmentStateChangedForUser, 
+                       _LibCall_ACMSecContextVerifyPolicyAndCopyRequirementEx, _LibCall_ACMSecCredentialProviderEnrollmentStateChangedForUser, 
                        _LibCall_ACMSecSetBiometryAvailability, _LibCall_ACMSecSetBuiltinBiometry, 
                        _LibCall_ACMSetEnvironmentVariable, _LibCall_ACMTRMLoadState, 
                        _LibCall_ACMTRMLoadState_Block, _LibCall_ACMTRMSaveState, 
-                       _LibCall_BuildCommand, _LibSer_ContextCredentialGetProperty_Deserialize, 
+                       _LibCall_BuildCommand, _LibSer_ACMDeserializeEnvironmentVariableType, 
+                       _LibSer_ACMDeserializeSEPControlCode, _LibSer_ContextCredentialGetProperty_Deserialize, 
                        _LibSer_ContextCredentialGetProperty_GetSize, _LibSer_ContextCredentialGetProperty_Serialize, 
                        _LibSer_DeleteContext_Deserialize, _LibSer_DeleteContext_GetSize, 
                        _LibSer_DeleteContext_Serialize, _LibSer_GetAclAuthMethod_Deserialize, 
                        _LibSer_GetAclAuthMethod_GetSize, _LibSer_GetAclAuthMethod_Serialize, 
+                       _LibSer_GetSerializedContainsCredential_GetSize, _LibSer_GetSerializedContainsCredential_Serialize, 
                        _LibSer_GetUnlockSecretResponse_Deserialize, _LibSer_GetUnlockSecretResponse_GetSize, 
                        _LibSer_GetUnlockSecretResponse_Serialize, _LibSer_GetUnlockSecret_Deserialize, 
                        _LibSer_GetUnlockSecret_GetSize, _LibSer_GetUnlockSecret_Serialize, 
@@ -107,6 +112,9 @@ exports:
                        _Util_WriteToBuffer, _Util_hexDumpToStrHelper, _Util_isNonNullEqualMemory, 
                        _Util_isNullOrZeroMemory, _acm_explicit_bzero, _acm_get_mem, 
                        _acm_mem_alloc, _acm_mem_alloc_data, _acm_mem_alloc_info, 
-                       _acm_mem_free, _acm_mem_free_data, _acm_mem_free_info, _gACMLoggingLevel, 
-                       _gAllocatedBytes, _verifyAclConstraintInternal ]
+                       _acm_mem_free, _acm_mem_free_data, _acm_mem_free_info, _crypto_decryptText, 
+                       _crypto_deriveKeyAndDecryptData, _crypto_deriveKeyAndEncryptData, 
+                       _crypto_encryptText, _crypto_encryptedTextLength, _crypto_generateKey, 
+                       _crypto_generateKeyFromSharedInfo, _crypto_generateRandomSaltLazily, 
+                       _crypto_plainTextLength, _gACMLoggingLevel, _verifyAclConstraintInternal ]
 ...

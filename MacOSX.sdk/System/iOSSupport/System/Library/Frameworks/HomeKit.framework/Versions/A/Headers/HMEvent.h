@@ -24,7 +24,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief A unique identifier for the event.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier;
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier;
 
 /*!
  * @brief Specifies whether the HMEvent can be added to HMEventTrigger on the given home.

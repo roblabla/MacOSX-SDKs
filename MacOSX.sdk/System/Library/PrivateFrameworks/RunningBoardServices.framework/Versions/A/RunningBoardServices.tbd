@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RunningBoardServices.framework/Versions/A/RunningBoardServices'
-current-version: 961.100.17
+current-version: 1008.0.2
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -76,11 +76,12 @@ exports:
                        RBSConditionAttribute, RBSConnection, RBSConstraintsAttribute, 
                        RBSDebugGrant, RBSDefineRelativeStartTimeGrant, RBSDextProcessIdentity, 
                        RBSDomainAttribute, RBSDurationAttribute, RBSEmbeddedAppProcessIdentity, 
-                       RBSEndowmentGrant, RBSEndowmentLink, RBSEndowmentTree, RBSForceRoleManageAttribute, 
-                       RBSGPUAccessGrant, RBSGrant, RBSHandshakeRequest, RBSHandshakeResponse, 
-                       RBSHereditaryGrant, RBSInheritance, RBSInheritanceChangeSet, 
-                       RBSInvalidateUnderConditionAttribute, RBSJetsamPriorityGrant, 
-                       RBSLaunchContext, RBSLaunchGrant, RBSLaunchRequest, RBSLaunchResponse, 
+                       RBSEndowmentGrant, RBSEndowmentLink, RBSEndowmentTree, RBSExtensionProcessIdentity, 
+                       RBSForceRoleManageAttribute, RBSGPUAccessGrant, RBSGrant, 
+                       RBSHandshakeRequest, RBSHandshakeResponse, RBSHereditaryGrant, 
+                       RBSInheritance, RBSInheritanceChangeSet, RBSInvalidateUnderConditionAttribute, 
+                       RBSJetsamPriorityGrant, RBSLaunchContext, RBSLaunchGrant, 
+                       RBSLaunchRequest, RBSLaunchResponse, RBSLaunchdJobDescriptor, 
                        RBSLegacyAttribute, RBSLimitation, RBSMacAppProcessIdentity, 
                        RBSMachEndpoint, RBSMachPort, RBSMachPortTaskNameRight, RBSMimicTaskSuspensionAttribute, 
                        RBSNotPredicate, RBSOSServiceProcessIdentity, RBSOpaqueProcessIdentity, 

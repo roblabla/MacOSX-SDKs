@@ -55,6 +55,7 @@
 #import <AVFoundation/AVMovieTrack.h>
 #import <AVFoundation/AVOutputSettingsAssistant.h>
 #import <AVFoundation/AVPlaybackCoordinator.h>
+#import <AVFoundation/AVPlaybackCoordinationMedium.h>
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerOutput.h>
 #import <AVFoundation/AVPlayerItem.h>
@@ -83,6 +84,7 @@
 #import <AVFoundation/AVTime.h>
 #import <AVFoundation/AVTimedMetadataGroup.h>
 #import <AVFoundation/AVUtilities.h>
+#import <AVFoundation/AVSpatialVideoConfiguration.h>
 #import <AVFoundation/AVVideoCompositing.h>
 #import <AVFoundation/AVVideoComposition.h>
 #import <AVFoundation/AVVideoPerformanceMetrics.h>

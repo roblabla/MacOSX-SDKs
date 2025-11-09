@@ -1,4 +1,4 @@
-framework module ClockKit [extern_c] {
+framework module ClockKit [system] {
   umbrella header "ClockKit.h"
   export *
   module * { export * }

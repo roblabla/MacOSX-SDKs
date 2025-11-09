@@ -363,4 +363,21 @@ exports:
                        _zher, _zher2, _zher2k, _zherk, _zhpmv, _zhpr, _zhpr2, _zrotg, 
                        _zscal, _zswap, _zsymm, _zsyr2k, _zsyrk, _ztbmv, _ztbsv, _ztpmv, 
                        _ztpsv, _ztrmm, _ztrmv, _ztrsm, _ztrsv ]
+  - targets:         [ arm64-macos, arm64e-macos ]
+    symbols:         [ '_cblas_cgemm_spi$NEWLAPACK', '_cblas_cgemm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_cgemm_spi_mem_requirement$NEWLAPACK', '_cblas_cgemm_spi_mem_requirement$NEWLAPACK$ILP64', 
+                       '_cblas_ctrsm_spi$NEWLAPACK', '_cblas_ctrsm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_ctrsm_spi_mem_requirement$NEWLAPACK', '_cblas_ctrsm_spi_mem_requirement$NEWLAPACK$ILP64', 
+                       '_cblas_dgemm_spi$NEWLAPACK', '_cblas_dgemm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_dgemm_spi_mem_requirement$NEWLAPACK', '_cblas_dgemm_spi_mem_requirement$NEWLAPACK$ILP64', 
+                       '_cblas_dtrsm_spi$NEWLAPACK', '_cblas_dtrsm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_dtrsm_spi_mem_requirement$NEWLAPACK', '_cblas_dtrsm_spi_mem_requirement$NEWLAPACK$ILP64', 
+                       '_cblas_sgemm_spi$NEWLAPACK', '_cblas_sgemm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_sgemm_spi_mem_requirement$NEWLAPACK', '_cblas_sgemm_spi_mem_requirement$NEWLAPACK$ILP64', 
+                       '_cblas_strsm_spi$NEWLAPACK', '_cblas_strsm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_strsm_spi_mem_requirement$NEWLAPACK', '_cblas_strsm_spi_mem_requirement$NEWLAPACK$ILP64', 
+                       '_cblas_zgemm_spi$NEWLAPACK', '_cblas_zgemm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_zgemm_spi_mem_requirement$NEWLAPACK', '_cblas_zgemm_spi_mem_requirement$NEWLAPACK$ILP64', 
+                       '_cblas_ztrsm_spi$NEWLAPACK', '_cblas_ztrsm_spi$NEWLAPACK$ILP64', 
+                       '_cblas_ztrsm_spi_mem_requirement$NEWLAPACK', '_cblas_ztrsm_spi_mem_requirement$NEWLAPACK$ILP64' ]
 ...

@@ -51,6 +51,8 @@ RK_API float4 screen_position(thread surface_data_t &data);
 RK_API float3 world_position(thread surface_data_t &data);
 RK_API float3 view_direction(thread surface_data_t &data);
 
+RK_API uint instance_id(thread surface_data_t &data) RK_AVAILABILITY_IOS_19 RK_AVAILABILITY_MACOS_16;
+
 RK_API float4 color(thread surface_data_t &data);
 
 RK_API float3 geometry_normal(thread surface_data_t &data);
@@ -253,6 +255,12 @@ struct geometry
     RK_INLINE float3 model_position() const thread
     {
         return surface::api::model_position(data);
+    }
+    
+    /// Returns the per-instance identifier, from the provoking vertex of the triangle.
+    RK_INLINE uint instance_id() const thread RK_AVAILABILITY_IOS_19 RK_AVAILABILITY_MACOS_16
+    {
+        return surface::api::instance_id(data);
     }
 
     /// Returns the fragment's interpolated vertex color.

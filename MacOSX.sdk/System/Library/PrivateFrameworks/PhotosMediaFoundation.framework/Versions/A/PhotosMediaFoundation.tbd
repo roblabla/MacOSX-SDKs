@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PhotosMediaFoundation.framework/Versions/A/PhotosMediaFoundation'
-current-version: 760.6.150
+current-version: 801.43.240
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

@@ -7,5 +7,5 @@ exports:
     symbols:         [ _HMEarLossArrayToData, _HMEarLossDataToArray, _HMOcclusionResultIsOverallPassing, 
                        _HMXPCGetNextClientID ]
     objc-classes:    [ HMAccessoryManager, HMDeviceConfigurations, HMDeviceDiagnosticRecord, 
-                       HMDeviceRecord, HMEnrollmentService, HMServiceClient ]
+                       HMDeviceRecord, HMEnrollmentService, HMInfo, HMServiceClient ]
 ...

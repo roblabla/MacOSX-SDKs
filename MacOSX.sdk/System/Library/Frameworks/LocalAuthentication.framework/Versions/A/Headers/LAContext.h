@@ -43,15 +43,6 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///             not end the authentication. Instead, it switches the authentication mechanism to user password.
     LAPolicyDeviceOwnerAuthentication API_AVAILABLE(ios(9.0), macos(10.11), watchos(3.0)) API_UNAVAILABLE(tvos) = kLAPolicyDeviceOwnerAuthentication,
     
-    /// Device owner will be authenticated by Watch.
-    ///
-    /// @discussion Watch authentication is required. If no nearby paired watch device can be found,
-    ///             LAErrorWatchNotAvailable is returned.
-    ///
-    ///             Watch authentication dialog looks and behaves similarly to the biometric variant. Users can
-    ///             confirm authentication by double-clicking the side button on their watch.
-    LAPolicyDeviceOwnerAuthenticationWithWatch API_DEPRECATED_WITH_REPLACEMENT("LAPolicyDeviceOwnerAuthenticationWithCompanion", macos(10.15, 15.0), macCatalyst(13.0, 18.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAPolicyDeviceOwnerAuthenticationWithWatch,
-    
     /// Device owner will be authenticated by a companion device e.g. Watch, Mac, etc.
     ///
     /// @discussion Companion authentication is required. If no nearby paired companion device can be found,
@@ -59,6 +50,32 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///
     ///             Users should follow instructions on the companion device to authenticate.
     LAPolicyDeviceOwnerAuthenticationWithCompanion API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos, visionos) = kLAPolicyDeviceOwnerAuthenticationWithCompanion,
+
+    /// Device owner will be authenticated by biometry or a companion device e.g. Watch, Mac, etc.
+    ///
+    /// @discussion Companion or biometric authentication is required. If no nearby paired companion device can be found,
+    ///             it behaves as LAPolicyDeviceOwnerAuthenticationWithBiometrics. Similarly, if biometry is
+    ///             unavailable it behaves as LAPolicyDeviceOwnerAuthenticationWithCompanion.
+    ///
+    ///             Depending on the companion type and biometry and companion availability,
+    ///             either a user is asked to authenticate with biometry and on a companion device in parallel
+    ///             or the companion authentication takes precedence
+    ///             and a user is asked to authenticate exclusively on the companion device if available.
+    ///             Users should follow instructions on the companion device to authenticate.
+    LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos, visionos) = kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion,
+
+    /// Device owner will be authenticated by device passcode. The authentication will also succeed if the wrist detection is enabled,
+    /// correct passcode was entered in the past and the watch has been on the wrist ever since.
+    LAPolicyDeviceOwnerAuthenticationWithWristDetection API_AVAILABLE(watchos(9.0)) API_UNAVAILABLE(macos, ios, tvos) = kLAPolicyDeviceOwnerAuthenticationWithWristDetection,
+    
+    /// Device owner will be authenticated by Watch.
+    ///
+    /// @discussion Watch authentication is required. If no nearby paired watch device can be found,
+    ///             LAErrorWatchNotAvailable is returned.
+    ///
+    ///             Watch authentication dialog looks and behaves similarly to the biometric variant. Users can
+    ///             confirm authentication by double-clicking the side button on their watch.
+    LAPolicyDeviceOwnerAuthenticationWithWatch API_DEPRECATED_WITH_REPLACEMENT("LAPolicyDeviceOwnerAuthenticationWithCompanion", macos(10.15, 15.0), macCatalyst(13.0, 18.0)) API_UNAVAILABLE(ios, watchos, tvos) = LAPolicyDeviceOwnerAuthenticationWithCompanion,
 
     /// Device owner will be authenticated by biometry or Watch.
     ///
@@ -69,21 +86,7 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///             Watch authentication dialog looks and behaves similarly to biometric variant. When both
     ///             mechanisms are available, user is asked to use biometry and watch authentication will run in
     ///             parallel.
-    LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch API_DEPRECATED_WITH_REPLACEMENT("LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion", macos(10.15, 15.0), macCatalyst(13.0, 18.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch,
-
-    /// Device owner will be authenticated by biometry or a companion device e.g. Watch, Mac, etc.
-    ///
-    /// @discussion Companion or biometric authentication is required. If no nearby paired companion device can be found,
-    ///             it behaves as LAPolicyDeviceOwnerAuthenticationWithBiometrics. Similarly, if biometry is
-    ///             unavailable it behaves as LAPolicyDeviceOwnerAuthenticationWithCompanion.
-    ///
-    ///             When both mechanisms are available, user is asked to use biometry and companion authentication
-    ///             will run in parallel. Users should follow instructions on the companion device to authenticate.
-    LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion API_AVAILABLE(macos(15.0), macCatalyst(18.0), ios(18.0)) API_UNAVAILABLE(watchos, tvos, visionos) = kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion,
-
-    /// Device owner will be authenticated by device passcode. The authentication will also succeed if the wrist detection is enabled,
-    /// correct passcode was entered in the past and the watch has been on the wrist ever since.
-    LAPolicyDeviceOwnerAuthenticationWithWristDetection API_AVAILABLE(watchos(9.0)) API_UNAVAILABLE(macos, ios, tvos) = kLAPolicyDeviceOwnerAuthenticationWithWristDetection,
+    LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch API_DEPRECATED_WITH_REPLACEMENT("LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion", macos(10.15, 15.0), macCatalyst(13.0, 18.0)) API_UNAVAILABLE(ios, watchos, tvos) = LAPolicyDeviceOwnerAuthenticationWithBiometricsOrCompanion,
 } API_AVAILABLE(ios(8.0), macos(10.10), watchos(3.0)) API_UNAVAILABLE(tvos);
 
 /// The maximum value for LAContext touchIDAuthenticationAllowableReuseDuration property.

@@ -15,6 +15,11 @@ NS_ASSUME_NONNULL_BEGIN
 extern CGSize const CPMaximumMessageItemImageSize;
 
 /**
+ Maximum size of an image for the detailed text leading image.
+ */
+extern CGSize const CPMaximumMessageItemLeadingDetailTextImageSize;
+
+/**
  Types of glyphs that may appear in the leading region of a message cell.
  */
 typedef NS_ENUM(NSInteger, CPMessageLeadingItem) {
@@ -197,6 +202,11 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  Any custom user info related to this item.
  */
 @property (nonatomic, strong, nullable) id userInfo;
+
+/**
+Image shown on the leading edge of the detail text.
+*/
+@property (nonatomic, copy, nullable) UIImage *leadingDetailTextImage API_AVAILABLE(ios(26.0));
 
 @end
 

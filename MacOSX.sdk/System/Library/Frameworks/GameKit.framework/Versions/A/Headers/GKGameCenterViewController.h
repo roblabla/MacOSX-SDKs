@@ -7,14 +7,14 @@
 
 API_UNAVAILABLE_BEGIN(watchos)
 
-API_AVAILABLE(ios(6.0), macos(10.8), tvos(9.0), visionos(1.0))
+API_DEPRECATED_WITH_REPLACEMENT("Replaced by ``GKAccessPoint``", ios(6.0,26.0), macos(10.8,26.0), tvos(9.0,26.0), visionos(1.0,26.0))
 @protocol GKGameCenterControllerDelegate;
 
 typedef NS_ENUM(NSInteger, GKGameCenterViewControllerState) {
     GKGameCenterViewControllerStateDefault = -1,
     GKGameCenterViewControllerStateLeaderboards,
     GKGameCenterViewControllerStateAchievements,
-    GKGameCenterViewControllerStateChallenges,
+    GKGameCenterViewControllerStateChallenges               API_DEPRECATED_WITH_REPLACEMENT("Replaced by developer defined challenges, see ``GKChallengeDefinition``", ios(6.0,26.0), macos(10.8,26.0), tvos(9.0,26.0), visionos(1.0,26.0)),
     GKGameCenterViewControllerStateLocalPlayerProfile       API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0)),
     GKGameCenterViewControllerStateDashboard                API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0)),
     GKGameCenterViewControllerStateLocalPlayerFriendsList   API_AVAILABLE(ios(15.0), macos(12.0), tvos(15.0), visionos(1.0))
@@ -29,17 +29,19 @@ typedef NS_ENUM(NSInteger, GKGameCenterViewControllerState) {
 #endif
 
 NS_ASSUME_NONNULL_BEGIN
-/// View controller that provides the standard user interface for leaderboards, achievements, and challenges. Present modally from the top view controller.
 #if TARGET_OS_WATCH
-API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0))
+/// View controller that provides the standard user interface for leaderboards, achievements, and challenges. Present modally from the top view controller.
+API_DEPRECATED_WITH_REPLACEMENT("Replaced by ``GKAccessPoint``", ios(6.0,26.0), macos(10.9,26.0), tvos(9.0,26.0), visionos(1.0,26.0))
 @interface GKGameCenterViewController
 @end
 #elif TARGET_OS_IPHONE
-API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0))
+/// View controller that provides the standard user interface for leaderboards, achievements, and challenges. Present modally from the top view controller.
+API_DEPRECATED_WITH_REPLACEMENT("Replaced by ``GKAccessPoint``", ios(6.0,26.0), macos(10.9,26.0), tvos(9.0,26.0), visionos(1.0,26.0))
 @interface GKGameCenterViewController : UINavigationController
 @end
 #else
-API_AVAILABLE(ios(6.0), macos(10.9), tvos(9.0), visionos(1.0))
+/// View controller that provides the standard user interface for leaderboards, achievements, and challenges. Present modally from the top view controller.
+API_DEPRECATED_WITH_REPLACEMENT("Replaced by ``GKAccessPoint``", ios(6.0,26.0), macos(10.9,26.0), tvos(9.0,26.0), visionos(1.0,26.0))
 @interface GKGameCenterViewController : NSViewController  <GKViewController>
 @end
 #endif

@@ -11,8 +11,6 @@
 
 #include <__config>
 #include <__cstddef/size_t.h>
-#include <__type_traits/is_class.h>
-#include <__type_traits/is_final.h>
 
 #if !defined(_LIBCPP_HAS_NO_PRAGMA_SYSTEM_HEADER)
 #  pragma GCC system_header
@@ -26,29 +24,16 @@
 
 _LIBCPP_BEGIN_NAMESPACE_STD
 
-#if __has_keyword(__datasizeof) || __has_extension(datasizeof)
+// TODO: Enable this again once #94816 is fixed.
+#if (__has_keyword(__datasizeof) || __has_extension(datasizeof)) && 0
 template <class _Tp>
 inline const size_t __datasizeof_v = __datasizeof(_Tp);
 #else
-// NOLINTNEXTLINE(readability-redundant-preprocessor) This is https://llvm.org/PR64825
-#  if __has_cpp_attribute(__no_unique_address__)
 template <class _Tp>
 struct _FirstPaddingByte {
-  [[__no_unique_address__]] _Tp __v_;
+  _LIBCPP_NO_UNIQUE_ADDRESS _Tp __v_;
   char __first_padding_byte_;
 };
-#  else
-template <class _Tp, bool = __libcpp_is_final<_Tp>::value || !is_class<_Tp>::value>
-struct _FirstPaddingByte : _Tp {
-  char __first_padding_byte_;
-};
-
-template <class _Tp>
-struct _FirstPaddingByte<_Tp, true> {
-  _Tp __v_;
-  char __first_padding_byte_;
-};
-#  endif // __has_cpp_attribute(__no_unique_address__)
 
 // _FirstPaddingByte<> is sometimes non-standard layout.
 // It is conditionally-supported to use __builtin_offsetof in that case, but GCC and Clang allow it.

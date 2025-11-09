@@ -18,6 +18,7 @@
 typedef NS_ENUM(NSInteger, MKScaleViewAlignment) {
     MKScaleViewAlignmentLeading,
     MKScaleViewAlignmentTrailing,
+    MKScaleViewAlignmentCenter API_AVAILABLE(ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos)
 } API_AVAILABLE(ios(11.0), tvos(11.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos);
 
 NS_ASSUME_NONNULL_BEGIN

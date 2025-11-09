@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2004, 2012-2016 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2004, 2012-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -148,7 +148,6 @@ struct sockaddr_ctl {
 };
 
 
-
 #include <sys/kpi_mbuf.h>
 
 /*!
@@ -186,7 +185,6 @@ typedef void * kern_ctl_ref;
  */
 #define CTL_FLAG_REG_SOCK_STREAM        0x4
 
-
 /* Data flags for controllers */
 /*!
  *       @defined CTL_DATA_NOWAKEUP
@@ -204,7 +202,6 @@ typedef void * kern_ctl_ref;
  *       data and enqueue mbuf functions to mark the end of a record.
  */
 #define CTL_DATA_EOR            0x2
-
 
 __BEGIN_DECLS
 
@@ -306,7 +303,14 @@ typedef errno_t (*ctl_setopt_func)(kern_ctl_ref kctlref, u_int32_t unit, void *u
 typedef errno_t (*ctl_getopt_func)(kern_ctl_ref kctlref, u_int32_t unit, void *unitinfo,
     int opt, void *data, size_t *len);
 
-
+#ifdef KERN_CTL_REG_OPAQUE
+/*!
+ *       @struct kern_ctl_reg
+ *       @discussion This structure defines the properties of a kernel
+ *               control being registered.
+ */
+struct kern_ctl_reg;
+#else
 /*!
  *       @struct kern_ctl_reg
  *       @discussion This structure defines the properties of a kernel
@@ -359,6 +363,7 @@ struct kern_ctl_reg {
 	ctl_setopt_func             ctl_setopt;
 	ctl_getopt_func             ctl_getopt;
 };
+#endif /* KERN_CTL_REG_OPAQUE */
 
 /*!
  *       @function ctl_register
@@ -428,7 +433,6 @@ errno_t
 errno_t
 ctl_enqueuembuf(kern_ctl_ref kctlref, u_int32_t unit, mbuf_t m, u_int32_t flags);
 
-
 /*!
  *       @function ctl_getenqueuespace
  *       @discussion Retrieve the amount of space currently available for data to be sent
@@ -458,7 +462,7 @@ ctl_getenqueuespace(kern_ctl_ref kctlref, u_int32_t unit, size_t *space);
 errno_t
 ctl_getenqueuereadable(kern_ctl_ref kctlref, u_int32_t unit, u_int32_t *difference);
 
-
 __END_DECLS
+
 
 #endif /* KPI_KERN_CONTROL_H */

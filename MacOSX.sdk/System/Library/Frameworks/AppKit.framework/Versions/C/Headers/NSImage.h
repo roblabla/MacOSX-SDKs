@@ -533,6 +533,26 @@ typedef NS_ENUM(NSInteger, NSImageSymbolScale) {
     NSImageSymbolScaleLarge = 3,
 } NS_SWIFT_NAME(NSImage.SymbolScale) API_AVAILABLE(macos(11.0));
 
+typedef NS_ENUM(NSInteger, NSImageSymbolVariableValueMode) {
+    /// Automatically selects an appropriate variable value mode for the symbol.
+    NSImageSymbolVariableValueModeAutomatic = 0,
+    /// The "color" variable value mode. Sets the opacity of each variable layer to
+    /// either on or off depending on how its threshold compared to the current value.
+    NSImageSymbolVariableValueModeColor,
+    /// The "draw" variable value mode. Changes the drawn length of each variable layer
+    /// to either based on how its range relates to the current value.
+    NSImageSymbolVariableValueModeDraw,
+} API_AVAILABLE(macos(26.0)) NS_SWIFT_NAME(NSImage.SymbolVariableValueMode) NS_SWIFT_SENDABLE;
+
+typedef NS_ENUM(NSInteger, NSImageSymbolColorRenderingMode) {
+    /// Automatically uses an appropriate color rendering mode for the symbol’s color layers.
+    NSImageSymbolColorRenderingModeAutomatic = 0,
+    /// Renders the symbol’s color layers using flat colors.
+    NSImageSymbolColorRenderingModeFlat,
+    /// Renders the symbol’s color layers using gradients.
+    NSImageSymbolColorRenderingModeGradient,
+} API_AVAILABLE(macos(26.0)) NS_SWIFT_NAME(NSImage.SymbolColorRenderingMode) NS_SWIFT_SENDABLE;
+
 API_AVAILABLE(macos(11.0)) NS_SWIFT_NAME(NSImage.SymbolConfiguration)
 @interface NSImageSymbolConfiguration : NSObject <NSCopying, NSSecureCoding>
 
@@ -590,6 +610,16 @@ API_AVAILABLE(macos(11.0)) NS_SWIFT_NAME(NSImage.SymbolConfiguration)
  If the symbol supports neither, the result will be a monochrome (templated) symbol.
  */
 + (instancetype)configurationPreferringMulticolor NS_SWIFT_NAME(preferringMulticolor()) API_AVAILABLE(macos(12.0));
+
+/**
+ Create a configuration with a specified variable value mode.
+ */
++ (instancetype)configurationWithVariableValueMode:(NSImageSymbolVariableValueMode)variableValueMode API_AVAILABLE(macos(26.0));
+
+/**
+ Create a configuration with a specific color rendering mode.
+ */
++ (instancetype)configurationWithColorRenderingMode:(NSImageSymbolColorRenderingMode)mode API_AVAILABLE(macos(26.0));
 
 #pragma mark - Instance Methods
 

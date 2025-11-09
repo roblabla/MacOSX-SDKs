@@ -22,7 +22,7 @@ API_UNAVAILABLE(macos)
 /*!
  * @brief Specifies if the user has administrative privileges for the home.
  */
-@property (readonly, getter=isAdministrator, nonatomic) BOOL administrator;
+@property (nonatomic, readonly, getter=isAdministrator) BOOL administrator;
 
 - (instancetype)init NS_UNAVAILABLE;
 

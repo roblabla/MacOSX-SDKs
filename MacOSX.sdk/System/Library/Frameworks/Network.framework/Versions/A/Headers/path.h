@@ -2,7 +2,7 @@
 //  path.h
 //  Network
 //
-//  Copyright (c) 2017-2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2025 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PATH_H__
@@ -196,6 +196,23 @@ bool
 nw_path_is_constrained(nw_path_t path);
 
 /*!
+ * @function nw_path_is_ultra_constrained
+ *
+ * @abstract
+ *		Checks if the path uses any network interfaces that are considered ultra-constrained.
+ *
+ * @param path
+ *		The path object to check.
+ *
+ * @result
+ *		Returns true if the path uses any network interface that is considered ultra-constrained,
+ *		false otherwise.
+ */
+API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0))
+bool
+nw_path_is_ultra_constrained(nw_path_t path);
+
+/*!
  * @function nw_path_has_ipv4
  *
  * @abstract
@@ -326,6 +343,46 @@ nw_path_enumerate_gateways(nw_path_t path,
 						   NW_NOESCAPE nw_path_enumerate_gateways_block_t enumerate_block);
 
 #endif // __BLOCKS__
+
+/*!
+ * @typedef nw_link_quality_t
+ * @abstract
+ *		Link quality measurement is a representation of the expected capabilities of the link layer network
+ *		attachment. Use this value to tune initial values for algorithms that can scale with the
+ *		capabilities of the network. Do not use this value to gate connection attempts or to override
+ *		adjustments that would be made based on actual network performance.
+ */
+typedef enum {
+	/*! @const nw_link_quality_unknown No link quality measurement is available */
+	nw_link_quality_unknown = 0,
+	/*! @const nw_link_quality_minimal Link quality is minimal */
+	nw_link_quality_minimal = 10,
+	/*! @const nw_link_quality_moderate Link quality is moderate */
+	nw_link_quality_moderate = 20,
+	/*! @const nw_link_quality_good Link quality is good */
+	nw_link_quality_good = 30
+} nw_link_quality_t;
+
+/*!
+ * @function nw_path_get_link_quality
+ *
+ * @abstract
+ *		Fetches the link quality measurement for the interface.
+ *		Link quality measurement is a representation of the expected capabilities of the link layer network
+ *		attachment. Use this value to tune initial values for algorithms that can scale with the
+ *		capabilities of the network. Do not use this value to gate connection attempts or to override
+ *		adjustments that would be made based on actual network performance.
+ *
+ * @param path
+ *		The path object to check.
+ *
+ * @result
+ *		Returns the link quality measurement of the link layer network attachment.
+ *		Returns nw_link_quality_unknown if there is no measurement available.
+ */
+API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0))
+nw_link_quality_t
+nw_path_get_link_quality(nw_path_t path);
 
 NW_ASSUME_NONNULL_END
 

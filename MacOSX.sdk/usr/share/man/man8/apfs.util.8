@@ -106,6 +106,14 @@ as purgeable with the various options specified.
 .br
 .Ar verb
 could be one or more of: -low -med -high -photo -music -mail -document -data -podcast -video -movie -message -book -fault -clear
+.br
+Marking the file with -low, -med, -high indicates its urgency.
+.br
+The urgency of a file dictates when it will be deleted. Low urgency files get deleted first.
+.br
+If no urgency is specified, the item will be marked as low-urgency.
+.br
+The -photo -music -mail -document -data -podcast -video -movie -message -book options indicate the type of data being marked as purgeable.
 .It Fl M Ar dir
 flag the named directory as "maintain-dir-stats".
 .It Fl O Ar path fs_name

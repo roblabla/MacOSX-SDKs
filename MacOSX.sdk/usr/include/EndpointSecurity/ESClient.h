@@ -256,7 +256,6 @@ OS_EXPORT
 API_AVAILABLE(macos(12.0))
 API_UNAVAILABLE(ios)
 API_UNAVAILABLE(tvos, watchos)
-
 void es_release_muted_processes(es_muted_processes_t *_Nonnull muted_processes);
 
 /**

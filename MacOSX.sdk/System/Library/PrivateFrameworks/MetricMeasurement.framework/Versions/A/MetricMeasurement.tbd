@@ -6,7 +6,8 @@ install-name:    '/System/Library/PrivateFrameworks/MetricMeasurement.framework/
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _MXMAttributeNameOSSignpostCategory, _MXMAttributeNameOSSignpostIdentifier, 
+    symbols:         [ _MXMAttributeNameOSSignpostAnimationContributingProcessName, 
+                       _MXMAttributeNameOSSignpostCategory, _MXMAttributeNameOSSignpostIdentifier, 
                        _MXMAttributeNameOSSignpostName, _MXMAttributeNameOSSignpostSubsystem, 
                        _MXMAttributeNameOSSignpostTelemetryNumber1Name, _MXMAttributeNameOSSignpostTelemetryNumber2Name, 
                        _MXMAttributeNameOSSignpostTelemetryString1Name, _MXMAttributeNameOSSignpostTelemetryString1Value, 
@@ -14,6 +15,7 @@ exports:
                        _MXMAttributeNameProcessIdentifier, _MXMAttributeNameProcessName, 
                        _MXMAttributeNameThreadIdentifier, _MXMAutomaticDefault, _MXMCPUMetricIdentifier, 
                        _MXMDiskMetricIdentifier, _MXMDisplayName, _MXMInstrumentOptionEnableParallelizedSampling, 
+                       _MXMInstrumentOptionFunctionCoverageConfiguration, _MXMInstrumentOptionFunctionCoverageEnabled, 
                        _MXMInstrumentOptionIterationCount, _MXMInstrumentOptionKickOffThreadIdentifier, 
                        _MXMInstrumentOptionPerfdataEnabled, _MXMInstrumentOptionPerfdataTestName, 
                        _MXMInstrumentOptionPerformanceTraceConfigurations, _MXMInstrumentOptionPerformanceTraceEnabled, 

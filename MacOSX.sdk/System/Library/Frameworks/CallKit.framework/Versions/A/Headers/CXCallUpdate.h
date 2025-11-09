@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAILABLE(macos, tvos)
 @interface CXCallUpdate : NSObject <NSCopying>
 
-/// Handle for the remote party (for an incoming call, the caller; for an outgoing call, the callee)
+/// Handle for the remote party (for an incoming call, the caller; for an outgoing call, the callee).
 @property (nonatomic, copy, nullable) CXHandle *remoteHandle;
 
 /// Override the computed caller name to a provider-defined value.

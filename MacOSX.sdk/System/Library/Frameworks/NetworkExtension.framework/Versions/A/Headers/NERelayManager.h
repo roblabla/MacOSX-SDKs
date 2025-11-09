@@ -141,6 +141,11 @@ API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @property (getter=isUIToggleEnabled) BOOL UIToggleEnabled;
 
 /*!
+ * @property allowDNSFailover
+ * @discussion Determines if DNS queries that fail over relay can fallback to default DNS */
+@property (getter=isDNSFailoverAllowed) BOOL allowDNSFailover API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0)) API_UNAVAILABLE(watchos);
+
+/*!
  * @property relays
  * @discussion An array of relay configurations describing one or more relay hops.
  */

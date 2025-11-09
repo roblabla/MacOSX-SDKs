@@ -190,6 +190,30 @@ typedef UInt32                          AudioConverterPropertyID;
                     outPropertyData is sizeof(AudioFormatListItem), then only the best format is returned.
                     This property may be used for example to discover all the data formats produced by the AAC_HE2
                     (AAC High Efficiency vers. 2) encoder.
+    @constant   kAudioConverterPropertyPerformDownmix
+                    A UInt32 with 1 meaning to perform a mix from input to output channels,
+                    and 0 meaning to not perform such a mix.  See kAudioConverterPropertyChannelMixMap
+                    for more information on how the mix maps inputs to outputs.
+                    Defaults to 0 (no channel mixing).
+                    Note #1: Mixing may be performed in any conversion where the number
+                    and/or layout of input and output channels are not the same, not only
+                    in PCM-to-PCM conversions, and also the number of output channels may
+                    be more or less than the number of input channels.
+                    Note #2: This property is not compatible with kAudioConverterChannelMap,
+                    which is used to map input to output channels without any mixing.
+                    The kAudioConverterChannelMap property cannot be set unless
+                    kAudioConverterPropertyPerformDownmix is first set to 0.
+    @constant   kAudioConverterPropertyChannelMixMap
+                    An array of Float32 values, size equal to the product of the numbers of
+                    input and output channels.  Each element's value is a gain to apply,
+                    from 0.0 to 1.0, to one input when mixing it into one output.
+                    The elements are ordered in row-major order, where each row holds the
+                    gains to apply for one input to each output.
+                    Unless explicitly set, a default mix map is used, based on other
+                    properties such as numbers of input and output channels as well as
+                    channel layouts, if known.
+                    This property should not be set unless and until
+                    kAudioConverterPropertyPerformDownmix is first set to 1 (enable channel mixing).
 */
 CF_ENUM(AudioConverterPropertyID)
 {
@@ -223,7 +247,9 @@ CF_ENUM(AudioConverterPropertyID)
     kAudioConverterCurrentInputStreamDescription        = 'acid',
     kAudioConverterPropertySettings                     = 'acps',
     kAudioConverterPropertyBitDepthHint                 = 'acbd',
-    kAudioConverterPropertyFormatList                   = 'flst'
+    kAudioConverterPropertyFormatList                   = 'flst',
+    kAudioConverterPropertyPerformDownmix               = 'dmix',
+    kAudioConverterPropertyChannelMixMap                = 'mmap'
 };
 
 #if !TARGET_OS_IPHONE
@@ -714,7 +740,9 @@ AudioConverterConvertBuffer(    AudioConverterRef               inAudioConverter
                                 UInt32                          inInputDataSize,
                                 const void *                    inInputData,
                                 UInt32 *                        ioOutputDataSize,
-                                void *                          outOutputData)  API_AVAILABLE(macos(10.1), ios(2.0), watchos(2.0), tvos(9.0));
+                                void *                          outOutputData)
+                        CA_REALTIME_API
+                        API_AVAILABLE(macos(10.1), ios(2.0), watchos(2.0), tvos(9.0));
 
 //-----------------------------------------------------------------------------
 /*!
@@ -782,6 +810,20 @@ typedef OSStatus
                                         AudioStreamPacketDescription * __nullable * __nullable outDataPacketDescription,
                                         void * __nullable               inUserData);
 
+/*!
+	@typedef	AudioConverterComplexInputDataProcRealtimeSafe
+	@abstract	Realtime-safe variant of AudioConverterComplexInputDataProc.
+	
+	See the discussions of AudioConverterComplexInputDataProc and AudioConverterFillComplexBuffer.
+*/
+typedef OSStatus
+(*AudioConverterComplexInputDataProcRealtimeSafe)(
+                                        AudioConverterRef               inAudioConverter,
+                                        UInt32 *                        ioNumberDataPackets,
+                                        AudioBufferList *               ioData,
+                                        AudioStreamPacketDescription * __nullable * __nullable outDataPacketDescription,
+                                        void * __nullable               inUserData) CA_REALTIME_API;
+
 //-----------------------------------------------------------------------------
 /*!
     @function   AudioConverterFillComplexBuffer
@@ -828,6 +870,74 @@ AudioConverterFillComplexBuffer(    AudioConverterRef                   inAudioC
                                     AudioStreamPacketDescription * __nullable outPacketDescription)
                                                                                 API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
 
+/*!
+    @function   AudioConverterFillComplexBufferRealtimeSafe
+    @abstract   Identical to AudioConverterFillComplexBuffer, with the addition of a realtime-safety
+    			guarantee.
+	
+	Conversions involving only PCM formats -- interleaving, deinterleaving, channel count changes,
+	sample rate conversions -- are realtime-safe. Such conversions may use this API in order to
+	obtain compiler checks involving the `CA_REALTIME_API` attributes.
+	
+	At runtime, this function returns `kAudioConverterErr_OperationNotSupported` if the conversion 
+	requires non-realtime-safe functionality.
+*/
+extern OSStatus
+AudioConverterFillComplexBufferRealtimeSafe(
+                                    AudioConverterRef                   inAudioConverter,
+                                    AudioConverterComplexInputDataProcRealtimeSafe inInputDataProc,
+                                    void * __nullable                   inInputDataProcUserData,
+                                    UInt32 *                            ioOutputDataPacketSize,
+                                    AudioBufferList *                   outOutputData,
+                                    AudioStreamPacketDescription * __nullable outPacketDescription)
+                                        CA_REALTIME_API
+                                        API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
+/*!
+    @function   AudioConverterFillComplexBufferWithPacketDependencies
+    @abstract   Converts audio data supplied by a callback function, supporting non-interleaved and
+                packetized formats, and also supporting packet dependency descriptions.
+    @discussion For output formats that use packet dependency descriptions, this must be used instead of
+                AudioConverterFillComplexBuffer, which will return an error for such formats.
+    @param inAudioConverter         The audio converter to use for format conversion.
+    @param inInputDataProc          A callback function that supplies audio data to convert.
+                                    This callback is invoked repeatedly as the converter is ready for
+                                    new input data.
+    @param inInputDataProcUserData  Custom data for use by your application when receiving a
+                                    callback invocation.
+    @param ioOutputDataPacketSize   On input, the size of the output buffer (in the `outOutputData`
+                                    parameter), expressed in number packets in the audio converter’s
+                                    output format.  On output, the number of packets of converted data
+                                    that were written to the output buffer.
+    @param outOutputData            The converted output data is written to this buffer. On entry, the
+                                    buffers' `mDataByteSize` fields (which must all be the same) reflect
+                                    buffer capacity.  On exit, `mDataByteSize` is set to the number of
+                                    bytes written.
+    @param outPacketDescriptions    If not `NULL`, and if the audio converter's output format uses packet
+                                    descriptions, this must point to a block of memory capable of holding
+                                    the number of packet descriptions specified in the `ioOutputDataPacketSize`
+                                    parameter.  (See _Audio Format Services Reference_ for functions that
+                                    let you determine whether an audio format uses packet descriptions).
+                                    If not `NULL` on output and if the audio converter's output format
+                                    uses packet descriptions, then this parameter contains an array of
+                                    packet descriptions.
+    @param outPacketDependencies    Should point to a memory block capable of holding the number of
+                                    packet dependency description structures specified in the
+                                    `ioOutputDataPacketSize` parameter.  Must not be `NULL`.  This array
+                                    will be filled out only by encoders that produce a format which has a
+                                    non-zero value for `kAudioFormatProperty_FormatEmploysDependentPackets`.
+    @result                         A result code.
+*/
+OSStatus
+AudioConverterFillComplexBufferWithPacketDependencies(
+    AudioConverterRef                            inAudioConverter,
+    AudioConverterComplexInputDataProc           inInputDataProc,
+    void * __nullable                            inInputDataProcUserData,
+    UInt32 *                                     ioOutputDataPacketSize,
+    AudioBufferList *                            outOutputData,
+    AudioStreamPacketDescription * __nullable    outPacketDescriptions,
+    AudioStreamPacketDependencyDescription *     outPacketDependencies)
+API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
 
 //-----------------------------------------------------------------------------
 /*!
@@ -855,7 +965,8 @@ AudioConverterConvertComplexBuffer( AudioConverterRef               inAudioConve
                                     UInt32                          inNumberPCMFrames,
                                     const AudioBufferList *         inInputData,
                                     AudioBufferList *               outOutputData)
-                                                                                API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
+                                    	CA_REALTIME_API
+										API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 
 // =================================================================================================
 // DEPRECATED

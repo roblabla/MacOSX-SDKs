@@ -10,8 +10,9 @@
 .Nd NETLOGON secure channel utility
 .Sh SYNOPSIS
 .Nm
-.Op Cm reconfigure
-status
+.Op Cm options
+reconfigure
+.Nm
 .Op Cm options
 status
 .Nm
@@ -28,13 +29,11 @@ can be used to manipulate and test the status of the NETLOGON channel.
 .Sh OPTIONS
 .Bl -tag -width -indent  \" Differs from above in tag removed
 .It Fl domain
-The service will log extensive debug information and may perform extra
-diagnostic checks. This option is typically only useful for debugging.
+Domain name.
 .It Fl help
 Prints a usage message and exits.
-.It Fl server Ar list
-The service will listen on each of the TCP ports specified in the
-comma-separated list. This option is typically only used for debugging.
+.It Fl server
+Server name.
 .El
 .Pp
 .Nm

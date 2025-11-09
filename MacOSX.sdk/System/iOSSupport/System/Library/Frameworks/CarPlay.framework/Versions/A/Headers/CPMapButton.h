@@ -5,11 +5,13 @@
 //  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
+#import <CarPlay/CPTemplate.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPMapButton : NSObject <NSSecureCoding>
 
 /**

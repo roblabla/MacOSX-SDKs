@@ -119,6 +119,8 @@ enum
     kSCSICmd_MODE_SENSE_6                   = 0x1A,
     kSCSICmd_MODE_SENSE_10                  = 0x5A,
     kSCSICmd_MOVE_MEDIUM_ATTACHED           = 0xA7,
+    kSCSICmd_ATA_PASS_THROUGH               = 0xA1,
+    kSCSICmd_ATA_PASS_THROUGH_EXT           = 0x85,
     kSCSICmd_PAUSE_RESUME                   = 0x4B,
     kSCSICmd_PERSISTENT_RESERVE_IN          = 0x5E,
     kSCSICmd_PERSISTENT_RESERVE_OUT         = 0x5F,

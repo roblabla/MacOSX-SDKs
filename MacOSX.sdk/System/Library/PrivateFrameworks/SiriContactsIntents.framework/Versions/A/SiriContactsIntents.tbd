@@ -1317,7 +1317,8 @@ exports:
                        '_$sSS19SiriContactsIntentsE23mapToNLContactTypeValue03forG0SSAA016ContactAttributeG0O_tF', 
                        '_$sSS19SiriContactsIntentsE30convertToContactAttributeLabelSSvg', 
                        '_$sSS19SiriContactsIntentsE30convertToContactAttributeLabelSSvpMV', 
-                       '_$sSo14CNLabeledValueC19SiriContactsIntentsSo15CNPostalAddressCRszrlE12buildMapsURL7contact10Foundation0J0VSgSo9CNContactC_tF' ]
+                       '_$sSo14CNLabeledValueC19SiriContactsIntentsSo15CNPostalAddressCRszrlE12buildMapsURL7contact10Foundation0J0VSgSo9CNContactC_tF', 
+                       '_$sSo9CNContactC19SiriContactsIntentsE12containsData3forSbAC16ContactAttributeC_tF' ]
     objc-classes:    [ AgeDateTime, AgeDateTimeResolutionResult, Contact, ContactAttribute, 
                        ContactAttributeResolutionResult, ContactAttributeTypeResolutionResult, 
                        ContactRelation, ContactRelationResolutionResult, ContactResolutionResult, 

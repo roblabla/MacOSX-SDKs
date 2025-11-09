@@ -2,14 +2,16 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/QuickLook.framework/Versions/A/QuickLook'
-current-version: 969.6
+current-version: 1016.200
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     libraries:       [ '/System/Library/PrivateFrameworks/QuickLookIosmac.framework/Versions/A/QuickLookIosmac' ]
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ '$ld$previous$/usr/lib/swift/libswiftQuickLook.dylib$$6$15.0$17.0$_$sSo14QLPreviewReplyC9QuickLookE11contextSize8isBitmap9drawUsingABSo6CGSizeV_SbySo12CGContextRefa_ABtKctcfC$', 
+    symbols:         [ '$ld$previous$/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit$$6$13.1$19$_OBJC_CLASS_$_ARQuickLookPreviewItem$', 
+                       '$ld$previous$/System/Library/Frameworks/ARKit.framework/Versions/A/ARKit$$6$13.1$19$_OBJC_METACLASS_$_ARQuickLookPreviewItem$', 
+                       '$ld$previous$/usr/lib/swift/libswiftQuickLook.dylib$$6$15.0$17.0$_$sSo14QLPreviewReplyC9QuickLookE11contextSize8isBitmap9drawUsingABSo6CGSizeV_SbySo12CGContextRefa_ABtKctcfC$', 
                        '$ld$previous$/usr/lib/swift/libswiftQuickLook.dylib$$6$15.0$17.0$_$sSo14QLPreviewReplyC9QuickLookE14stringEncodingSS10FoundationE0F0VvM$', 
                        '$ld$previous$/usr/lib/swift/libswiftQuickLook.dylib$$6$15.0$17.0$_$sSo14QLPreviewReplyC9QuickLookE14stringEncodingSS10FoundationE0F0Vvg$', 
                        '$ld$previous$/usr/lib/swift/libswiftQuickLook.dylib$$6$15.0$17.0$_$sSo14QLPreviewReplyC9QuickLookE14stringEncodingSS10FoundationE0F0VvpMV$', 
@@ -27,12 +29,14 @@ exports:
                        '_$sSo14QLPreviewReplyC9QuickLookE17dataOfContentType11contentSize15createDataUsingAB07UniformH11Identifiers6UTTypeV_So6CGSizeV10Foundation0L0VABKctcfc', 
                        '_$sSo14QLPreviewReplyC9QuickLookE18forPDFWithPageSize19createDocumentUsingABSo6CGSizeV_So11PDFDocumentCABKctcfC', 
                        '_$sSo14QLPreviewReplyC9QuickLookE18forPDFWithPageSize19createDocumentUsingABSo6CGSizeV_So11PDFDocumentCABKctcfc', 
-                       _QLDetachedSceneActivityType, _QLDetachedSceneActivityURLsKey, 
-                       _QLDetachedSceneEditingModesKey, _QLDetachedSceneSelectedIndexKey, 
-                       '__swift_FORCE_LOAD_$_swiftQuickLook' ]
-    objc-classes:    [ QLDetachedSceneDelegate, QLFilePreviewRequest, QLPreviewController, 
-                       QLPreviewMockScene, QLPreviewProvider, QLPreviewReply, QLPreviewReplyAttachment, 
-                       QLPreviewSceneActivationConfiguration, QLPreviewSceneOptions ]
+                       _ARQLAllowObjectScaling, _ARQLCanonicalWebPageURL, _ARQLForceIgnoreMuteSwitchKey, 
+                       _ARQLWantsStatusPillHiddenKey, _QLDetachedSceneActivityType, 
+                       _QLDetachedSceneActivityURLsKey, _QLDetachedSceneEditingModesKey, 
+                       _QLDetachedSceneSelectedIndexKey, '__swift_FORCE_LOAD_$_swiftQuickLook' ]
+    objc-classes:    [ ARQuickLookPreviewItem, QLDetachedSceneDelegate, QLFilePreviewRequest, 
+                       QLPreviewController, QLPreviewMockScene, QLPreviewProvider, 
+                       QLPreviewReply, QLPreviewReplyAttachment, QLPreviewSceneActivationConfiguration, 
+                       QLPreviewSceneOptions ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 

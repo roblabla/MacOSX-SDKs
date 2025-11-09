@@ -43,6 +43,7 @@ exports:
                        '_$s22FaceTimeFeatureControl0C11EligibilityOSHAAMc', '_$s22FaceTimeFeatureControl0C11EligibilityOSQAAMc', 
                        '_$s22FaceTimeFeatureControl0C11EligibilityOSeAAMc', '_$s22FaceTimeFeatureControl0C17EligibilityDomainO06remoteD0yA2CmFWC', 
                        '_$s22FaceTimeFeatureControl0C17EligibilityDomainO15drawToHighlightyA2CmFWC', 
+                       '_$s22FaceTimeFeatureControl0C17EligibilityDomainO25liveTranslationLockScreenyA2CmFWC', 
                        '_$s22FaceTimeFeatureControl0C17EligibilityDomainO2eeoiySbAC_ACtFZ', 
                        '_$s22FaceTimeFeatureControl0C17EligibilityDomainO4fromACs7Decoder_p_tKcfC', 
                        '_$s22FaceTimeFeatureControl0C17EligibilityDomainO4hash4intoys6HasherVz_tF', 

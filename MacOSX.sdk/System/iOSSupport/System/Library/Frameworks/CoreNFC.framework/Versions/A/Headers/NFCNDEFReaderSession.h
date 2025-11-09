@@ -10,6 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
+
 @class NFCReaderSession;
 @class NFCNDEFReaderSession;
 @class NFCNDEFMessage;

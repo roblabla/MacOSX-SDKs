@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGPDFArray *CGPDFArrayRef;
+typedef struct CGPDFArray *CGPDFArrayRef __attribute__((swift_wrapper(struct)));
 
 #include <CoreGraphics/CGPDFDictionary.h>
 #include <CoreGraphics/CGPDFObject.h>
@@ -110,7 +110,7 @@ typedef bool (^CGPDFArrayApplierBlock)(size_t index,
    early. */
 
 CG_EXTERN void CGPDFArrayApplyBlock(CGPDFArrayRef cg_nullable array,
-    CGPDFArrayApplierBlock cg_nullable block, void * __nullable info)
+    CF_NOESCAPE CGPDFArrayApplierBlock cg_nullable block, void * __nullable info)
     API_AVAILABLE(macos(10.14), ios(12.0));
 
 CF_ASSUME_NONNULL_END

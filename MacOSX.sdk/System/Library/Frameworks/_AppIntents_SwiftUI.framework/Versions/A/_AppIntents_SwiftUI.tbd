@@ -2,12 +2,18 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_AppIntents_SwiftUI.framework/Versions/A/_AppIntents_SwiftUI'
-current-version: 227.19
+current-version: 300.0.4
 compatibility-version: 0
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE19requestConfirmation10conditions10actionName6dialog18showDialogAsPrompt7contentyAA0G10ConditionsV_AA0g6ActionJ0VAA0cM0VSgSbqd__yXEtYaK0dE04ViewRd__lF', 
+    symbols:         [ '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE13requestChoice7between6dialog4viewAA0cG6OptionVSayAJG_AA0C6DialogVSgqd__tYaK0dE04ViewRd__lF', 
+                       '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE13requestChoice7between6dialog4viewAA0cG6OptionVSayAJG_AA0C6DialogVSgqd__tYaK0dE04ViewRd__lFTu', 
+                       '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE13requestChoice7between6dialog7contentAA0cG6OptionVSayAJG_AA0C6DialogVSgqd__yXEtYaK0dE04ViewRd__lF', 
+                       '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE13requestChoice7between6dialog7contentAA0cG6OptionVSayAJG_AA0C6DialogVSgqd__yXEtYaK0dE04ViewRd__lFTu', 
+                       '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE14_requestChoice7between6dialog7contentAA01_cG6OptionVSayAJG_AA0C6DialogVSgqd__yXEtYaK0dE04ViewRd__lF', 
+                       '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE14_requestChoice7between6dialog7contentAA01_cG6OptionVSayAJG_AA0C6DialogVSgqd__yXEtYaK0dE04ViewRd__lFTu', 
+                       '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE19requestConfirmation10conditions10actionName6dialog18showDialogAsPrompt7contentyAA0G10ConditionsV_AA0g6ActionJ0VAA0cM0VSgSbqd__yXEtYaK0dE04ViewRd__lF', 
                        '_$s10AppIntents0A6IntentP01_aB8_SwiftUIE19requestConfirmation10conditions10actionName6dialog18showDialogAsPrompt7contentyAA0G10ConditionsV_AA0g6ActionJ0VAA0cM0VSgSbqd__yXEtYaK0dE04ViewRd__lFTu', 
                        '_$s10AppIntents0A7ManagerC01_aB8_SwiftUIE08registerD7UIHooksyyFZ', 
                        '_$s10AppIntents12IntentResultP01_aB8_SwiftUIE6result05opensC04viewAA0cD9ContainerVys5NeverOAkA012_SnippetViewJ0VAKGqd_0__qd__tANRsz0eF00M0Rd__AA0aC0Rd_0_r0_lFZ', 
@@ -158,8 +164,8 @@ exports:
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction6intent5labelQrqd___qd_0_yXEt0dE00D6IntentRd__AaBRd_0_r0_lFQOMQ', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction_6intentAA15ModifiedContentVyxAA31AccessibilityAttachmentModifierVGAA0kG4KindV_qd__t0dE00D6IntentRd__lF', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19accessibilityAction_6intentAA15ModifiedContentVyxAA41AccessibilityArchivableAttachmentModifierVGAA0kG4KindV_qd__t0dE00D6IntentRd__lF', 
-                       '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifier16forSelectionType10identifierQrqd__m_0dE00gH0VSgqd__ctSHRd__lF', 
-                       '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifier16forSelectionType10identifierQrqd__m_0dE00gH0VSgqd__ctSHRd__lFQOMQ', 
+                       '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifier16forSelectionType10identifierQrqd__m_0dE00gH0VSgqd__YbctSHRd__lF', 
+                       '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifier16forSelectionType10identifierQrqd__m_0dE00gH0VSgqd__YbctSHRd__lFQOMQ', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifieryQr0dE00gH0VSgF', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityIdentifieryQr0dE00gH0VSgFQOMQ', 
                        '_$s7SwiftUI4ViewP012_AppIntents_aB0E19appEntityUIElementsyQrSay0dE00dG9UIElementVGAF0dgH7ContextVScMYccF', 

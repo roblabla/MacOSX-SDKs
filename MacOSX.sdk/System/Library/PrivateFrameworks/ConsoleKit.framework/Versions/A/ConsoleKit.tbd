@@ -2,15 +2,21 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ConsoleKit.framework/Versions/A/ConsoleKit'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CSKStreamArchiveSourceErrorDomain, _ConsoleKitVersionNumber, 
-                       _ConsoleKitVersionString, _HashBytes, _benchmarkBlock, _kCSKDBItemActivityID, 
-                       _kCSKDBItemCreatorAID, _kCSKDBItemCreatorPUID, _kCSKDBItemEventKind, 
-                       _kCSKDBItemIdentifier, _kCSKDBItemIsVolatile, _kCSKDBItemLibrary, 
-                       _kCSKDBItemLibraryImagePath, _kCSKDBItemMessageCategory, _kCSKDBItemMessageSubsystem, 
-                       _kCSKDBItemMessageType, _kCSKDBItemPID, _kCSKDBItemParentActivityID, 
-                       _kCSKDBItemProcess, _kCSKDBItemProcessImagePath, _kCSKDBItemThreadIdentifier, 
+    symbols:         [ '_$s10ConsoleKit23CSKReportTransformationC25transformDiagnosticReport7fileURLSS10Foundation0I0V_tKFZ', 
+                       '_$s10ConsoleKit23CSKReportTransformationCACycfC', '_$s10ConsoleKit23CSKReportTransformationCACycfc', 
+                       '_$s10ConsoleKit23CSKReportTransformationCMa', '_$s10ConsoleKit23CSKReportTransformationCMn', 
+                       '_$s10ConsoleKit23CSKReportTransformationCMo', '_$s10ConsoleKit23CSKReportTransformationCN', 
+                       '_$s10ConsoleKit23CSKReportTransformationCfD', _CSKStreamArchiveSourceErrorDomain, 
+                       _ConsoleKitVersionNumber, _ConsoleKitVersionString, _HashBytes, 
+                       _benchmarkBlock, _kCSKDBItemActivityID, _kCSKDBItemCreatorAID, 
+                       _kCSKDBItemCreatorPUID, _kCSKDBItemEventKind, _kCSKDBItemIdentifier, 
+                       _kCSKDBItemIsVolatile, _kCSKDBItemLibrary, _kCSKDBItemLibraryImagePath, 
+                       _kCSKDBItemMessageCategory, _kCSKDBItemMessageSubsystem, _kCSKDBItemMessageType, 
+                       _kCSKDBItemPID, _kCSKDBItemParentActivityID, _kCSKDBItemProcess, 
+                       _kCSKDBItemProcessImagePath, _kCSKDBItemThreadIdentifier, 
                        _kCSKDBItemTimestamp, _kCSKDBItemTimezone, _kCSKDBItemTitle, 
                        _kCSKDatabaseHandleBlobType, _kCSKDatabaseHandleCommitNotification, 
                        _kCSKDatabaseHandleDateType, _kCSKDatabaseHandleFloatType, 
@@ -56,5 +62,5 @@ exports:
                        CSKTableColumnLayout, CSKTableHeaderView, CSKTableViewController, 
                        CSKTextFinder, CSKTextRelationIndicatorTableCellView, CSKTextTableCellView, 
                        CSKTextViewController, CSKToken, CSKTokenAttachmentCell, CSKTokenField, 
-                       CSKTokenFieldCell, CSKTokenFieldController ]
+                       CSKTokenFieldCell, CSKTokenFieldController, _TtC10ConsoleKit23CSKReportTransformation ]
 ...

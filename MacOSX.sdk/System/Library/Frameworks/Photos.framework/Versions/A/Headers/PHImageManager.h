@@ -133,6 +133,7 @@ extern NSString *const PHImageErrorKey; // key (NSError): NSFileManager or iClou
 
 // Note that all sizes are in pixels
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHImageManager : NSObject
 
 + (PHImageManager *)defaultManager;
@@ -209,10 +210,10 @@ API_AVAILABLE_BEGIN(macos(10.15))
 #pragma mark - PHCachingImageManager - Preheating
 
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHCachingImageManager : PHImageManager
 
-// During fast scrolling clients should set this to improve responsiveness
-@property (nonatomic, assign) BOOL allowsCachingHighQualityImages; // Defaults to YES
+@property (nonatomic, assign) BOOL allowsCachingHighQualityImages API_DEPRECATED("This property is unused and will be removed in a future release", ios(8, 26.0), tvos(10, 26.0), macos(10.15, 26.0), visionos(1, 26.0));
 
 // Asynchronous image preheating (aka caching), note that only image sources are cached (no crop or exact resize is ever done on them at the time of caching, only at the time of delivery when applicable).
 // The options values shall exactly match the options values used in loading methods. If two or more caching requests are done on the same asset using different options or different targetSize the first

@@ -155,8 +155,8 @@ CH_EXPORT API_AVAILABLE(ios(13.0), macos(10.15), tvos(14.0), macCatalyst(13.0)) 
 		at any point before or during pattern playback.
     @discussion
         This rate factor scales the relative times of all events and parameters as they are played, as well as the
-        durations of Continuous events.  It does not affect the pitches of the events.  Any value greater than
-        0.0 is valid; all others are ignored.
+        durations of Continuous events and the `loopEnd` time.  It does not affect the pitches of the events.
+        Any value greater than 0.0 is valid; all others are ignored.
  */
 @property (readwrite) float playbackRate;
 

@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15), watchos(6.0))
 @interface MKPointOfInterestFilter : NSObject <NSSecureCoding, NSCopying>
 
 @property (nonatomic, class, readonly) MKPointOfInterestFilter *filterIncludingAllCategories;

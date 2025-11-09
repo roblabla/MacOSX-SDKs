@@ -69,6 +69,13 @@ API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 
 @property (readonly) pid_t pid API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
+/*!
+ @property      bundleIdentifier
+ @abstract      String representation of the bundle ID of the process.
+ */
+
+@property (readonly) NSString* bundleIdentifier API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(tvos, watchos);
+
 
 /*!
  @method        JSONRepresentation
@@ -82,14 +89,14 @@ API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
  @abstract      Convenience method to return a NSDictionary representation of this metadata.
  @result        An NSDictionary object containing the dictionary representation
  */
-- (NSDictionary *)DictionaryRepresentation API_DEPRECATED_WITH_REPLACEMENT("Use dictionaryRepresentation", ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos, tvos, watchos);
+- (NSDictionary *)DictionaryRepresentation API_DEPRECATED_WITH_REPLACEMENT("Use dictionaryRepresentation", ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos, tvos, watchos) NS_REFINED_FOR_SWIFT;
 
 /*!
 @method        dictionaryRepresentation
 @abstract      Convenience method to return a NSDictionary representation of this metadata.
 @result        An NSDictionary object containing the dictionary representation
 */
-- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos) NS_REFINED_FOR_SWIFT;
+- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

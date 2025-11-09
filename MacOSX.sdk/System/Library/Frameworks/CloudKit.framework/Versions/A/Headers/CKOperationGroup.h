@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, CKOperationGroupTransferSize) {
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0))
 CK_SUBCLASSING_DEPRECATED // should not be subclassed, or Sendable may no longer apply
 // NS_SWIFT_SENDABLE on macos(13.3), macCatalyst(16.4), ios(16.4), tvos(16.4), watchos(9.4)
-@interface CKOperationGroup : NSObject <NSSecureCoding>
+@interface CKOperationGroup : NSObject <NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (instancetype)initWithCoder:(NSCoder *)aDecoder NS_DESIGNATED_INITIALIZER;

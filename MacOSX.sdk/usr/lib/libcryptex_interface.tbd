@@ -2,10 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex_interface.dylib'
-current-version: 493.120.7
+current-version: 589.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ CryptexKit, cryptest, cryptex, cryptexctl, cryptexd, cryptexd.diagnostic ]
+    clients:         [ CryptexKit, cryptest, cryptex, cryptexctl, cryptexd ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_actor_init_invoke_cstr, __cryptex_actor_init_invoke_port, 
@@ -27,10 +27,11 @@ exports:
                        _daemon_async_reply_unpack, _daemon_async_unpack, _daemon_open_mountable_pack, 
                        _daemon_open_mountable_reply_pack, _daemon_open_mountable_reply_unpack, 
                        _daemon_open_mountable_unpack, _daemon_version_pack, _daemon_version_reply_pack, 
-                       _daemon_version_reply_unpack, _daemon_version_unpack, _mount_interface_create_mount_request, 
-                       _mount_interface_create_unmount_request, _remote_service_create_copy_installed_request, 
-                       _remote_service_create_install_request, _remote_service_create_nonce_handle_request, 
-                       _remote_service_create_nonce_index_request, _remote_service_create_personalization_identifiers_request, 
+                       _daemon_version_reply_unpack, _daemon_version_unpack, _endpoint_lookup_interface_create_request, 
+                       _mount_interface_create_mount_request, _mount_interface_create_unmount_request, 
+                       _remote_service_create_copy_installed_request, _remote_service_create_install_request, 
+                       _remote_service_create_nonce_handle_request, _remote_service_create_nonce_index_request, 
+                       _remote_service_create_personalization_identifiers_request, 
                        _remote_service_create_roll_nonce_handle_request, _remote_service_create_roll_nonce_index_request, 
                        _remote_service_create_uninstall_request, _remote_service_install_request_valid, 
                        _session_activate_pack, _session_activate_reply_pack, _session_activate_reply_unpack, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowAppIntentsPreviewToolSupport.framework/Versions/A/IntelligenceFlowAppIntentsPreviewToolSupport'
-current-version: 218.5
+current-version: 3500.32.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

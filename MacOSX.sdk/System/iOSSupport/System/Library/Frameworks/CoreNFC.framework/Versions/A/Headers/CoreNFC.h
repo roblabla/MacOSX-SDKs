@@ -27,4 +27,5 @@
 #import <CoreNFC/NFCNDEFPayload.h>
 #import <CoreNFC/NFCNDEFMessage.h>
 #import <CoreNFC/NFCVASReaderSession.h>
+#import <CoreNFC/NFCPaymentTagReaderSession.h>
 #endif

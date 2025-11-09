@@ -8,6 +8,5 @@ allowable-clients:
     clients:         [ MusicKit Playground Internal, _SonicKit_MusicKit ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s8MusicKit4SongV0aB15PlaybackSupportE11_esotericIDAA0a4ItemG0Vvg', 
-                       '_$s8MusicKit4SongV0aB15PlaybackSupportE11_esotericIDAA0a4ItemG0VvpMV' ]
+    symbols:         [ '_$s16MusicKitInternal3BagV0aB15PlaybackSupportE010underlyingD0ACSo8ICURLBagC_tcfC' ]
 ...

@@ -14,7 +14,7 @@
 #import <MapKit/MKOverlayView.h>
 
 // Prefer MKOverlayPathRenderer
-API_DEPRECATED_WITH_REPLACEMENT("MKOverlayPathRenderer", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_DEPRECATED("Use MKOverlayPathRenderer", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos)
 #if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos)
 #endif

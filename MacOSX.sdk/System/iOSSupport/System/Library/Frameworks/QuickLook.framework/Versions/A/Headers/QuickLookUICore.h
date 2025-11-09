@@ -9,3 +9,4 @@
 #import <QuickLook/QLBase.h>
 #import <QuickLook/QLPreviewItem.h>
 #import <QuickLook/QLPreviewingController.h>
+#import <QuickLook/ARQuickLookPreviewItem.h>

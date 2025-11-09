@@ -36,6 +36,8 @@ exports:
                        '_$s15NotesPreviewKit04NoteB8ProviderCMo', '_$s15NotesPreviewKit04NoteB8ProviderCN', 
                        '_$s15NotesPreviewKit04NoteB8ProviderCfD', '_$s15NotesPreviewKit12ThumbnailKeyC11descriptionSSvg', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC11thumbnailIdSSvg', '_$s15NotesPreviewKit12ThumbnailKeyC11thumbnailIdSSvpMV', 
+                       '_$s15NotesPreviewKit12ThumbnailKeyC12containerUrl10Foundation3URLVvg', 
+                       '_$s15NotesPreviewKit12ThumbnailKeyC12containerUrl10Foundation3URLVvpMV', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC14recentObjectIdSSvgZ', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC14recentObjectIdSSvpZMV', 
                        '_$s15NotesPreviewKit12ThumbnailKeyC4copy4withyp10ObjectiveC6NSZoneVSg_tF', 

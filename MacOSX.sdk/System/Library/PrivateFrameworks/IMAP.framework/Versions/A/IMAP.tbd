@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IMAP.framework/Versions/A/IMAP'
-current-version: 3826.255.51
+current-version: 3864.100.1
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ EmailFunctionalTests, EmailTestSupport, IMAPFunctionalTests, 
@@ -20,11 +20,12 @@ exports:
                        _IMAPMessageFlagColorBit0, _IMAPMessageFlagColorBit1, _IMAPMessageFlagColorBit2, 
                        _IMAPMessageFlagDeleted, _IMAPMessageFlagDollarForwarded, 
                        _IMAPMessageFlagDollarJunk, _IMAPMessageFlagDollarNotJunk, 
-                       _IMAPMessageFlagDraft, _IMAPMessageFlagFlagged, _IMAPMessageFlagForwarded, 
-                       _IMAPMessageFlagJunk, _IMAPMessageFlagJunkMailLevelRecorded, 
-                       _IMAPMessageFlagMDNSent, _IMAPMessageFlagNotJunk, _IMAPMessageFlagRecent, 
-                       _IMAPMessageFlagRedirected, _IMAPMessageFlagSeen, _IMAPMessageFlagSubmitPending, 
-                       _IMAPMessageFlagSubmitted, _IMAPMessageFlagsFromArray, _IMAPMessageInfoKeyDestinationUidSet, 
+                       _IMAPMessageFlagDollariCloudCleanup, _IMAPMessageFlagDraft, 
+                       _IMAPMessageFlagFlagged, _IMAPMessageFlagForwarded, _IMAPMessageFlagJunk, 
+                       _IMAPMessageFlagJunkMailLevelRecorded, _IMAPMessageFlagMDNSent, 
+                       _IMAPMessageFlagNotJunk, _IMAPMessageFlagRecent, _IMAPMessageFlagRedirected, 
+                       _IMAPMessageFlagSeen, _IMAPMessageFlagSubmitPending, _IMAPMessageFlagSubmitted, 
+                       _IMAPMessageFlagsFromArray, _IMAPMessageInfoKeyDestinationUidSet, 
                        _IMAPMessageInfoKeySourceUidSet, _IMAPMessageInfoKeyUIDValidity, 
                        _IMAPPermanentFlagsFromSet, _IMAPPowerLogKeyAttachments, _IMAPPowerLogKeyBodies, 
                        _IMAPPowerLogKeySkeletons, _IMAPPowerLogKeyTotalAttachmentSize, 

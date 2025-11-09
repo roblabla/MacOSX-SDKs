@@ -35,7 +35,6 @@ AVF_EXPORT AVCaptureReactionType AVCaptureReactionTypeThumbsUp API_AVAILABLE(mac
  */
 AVF_EXPORT AVCaptureReactionType AVCaptureReactionTypeThumbsDown API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
-
 /*!
  @constant AVCaptureReactionTypeBalloons
  @abstract
@@ -91,7 +90,7 @@ AVF_EXPORT NSString *AVCaptureReactionSystemImageNameForType(AVCaptureReactionTy
     Reports the state of a reaction performed on an AVCaptureDevice.
  
  @discussion
-    AVCaptureReactionEffectState may be obtained by calling -[AVCaptureDevice reactionEffectsInProgress].  When -[AVCaptureDevice canPerformReactionEffects] returns YES, new entries are added either by calling -[AVCaptureDevice performReactionEffect:], or by gesture detection in the capture stream when AVCaptureDevice.reactionEffectGesturesEnabled.  The effect rendering is done before frames are given to the capture client, and these status objects let you know when these effects are performed.
+    AVCaptureReactionEffectState may be obtained by calling -[AVCaptureDevice reactionEffectsInProgress].  When -[AVCaptureDevice canPerformReactionEffects] returns YES, new entries are added either by calling -[AVCaptureDevice performEffectForReaction:], or by gesture detection in the capture stream when AVCaptureDevice.reactionEffectGesturesEnabled.  The effect rendering is done before frames are given to the capture client, and these status objects let you know when these effects are performed.
  */
 API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
 @interface AVCaptureReactionEffectState : NSObject
@@ -124,7 +123,6 @@ API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAIL
 @property(nonatomic, readonly) CMTime endTime API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
-
 
 NS_ASSUME_NONNULL_END
 

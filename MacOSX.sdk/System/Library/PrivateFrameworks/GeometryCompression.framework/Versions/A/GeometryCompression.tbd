@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GeometryCompression.framework/Versions/A/GeometryCompression'
+current-version: 18
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__117bad_function_callE, __ZTISt11logic_error, __ZTISt12length_error, 
@@ -16,20 +17,13 @@ exports:
                        _GCLBufferListEnd, _GCLBufferListFromSource, _GCLBufferListGetBuffer, 
                        _GCLBufferListGetBufferById, _GCLBufferListIterNext, _GCLBufferListNew, 
                        _GCLBufferListRelease, _GCLBufferNumRows, _GCLBufferOffset, 
-                       _GCLBufferProperty, _GCLBufferSemanticName, _GCLBufferSetBase, 
-                       _GCLBufferSetElementType, _GCLBufferSetOffset, _GCLBufferSetProperty, 
-                       _GCLBufferStrideBytes, _GCLBufferTupleWidth, _GCLDecodeMeshFromSource, 
-                       _GCLDecodeMeshFromSourceWithOptions, _GCLEncodeMeshFromBufferList, 
-                       _GCLOptionsGet, _GCLOptionsNew, _GCLOptionsRelease, _GCLOptionsSet, 
+                       _GCLBufferProperty, _GCLBufferPropertyString, _GCLBufferSemanticName, 
+                       _GCLBufferSetBase, _GCLBufferSetElementType, _GCLBufferSetOffset, 
+                       _GCLBufferSetProperty, _GCLBufferSetPropertyString, _GCLBufferSetStrideElements, 
+                       _GCLBufferStrideBytes, _GCLBufferStrideElements, _GCLBufferTupleWidth, 
+                       _GCLDecodeMeshFromSource, _GCLDecodeMeshFromSourceWithOptions, 
+                       _GCLEncodeMeshFromBufferList, _GCLOptionsGet, _GCLOptionsGetString, 
+                       _GCLOptionsNew, _GCLOptionsRelease, _GCLOptionsSet, _GCLOptionsSetString, 
                        _GCLSourceFromData, _GCLSourceOptionSet, _GCLSourceRelease, 
-                       _kGCLAccurateBitEstimation, _kGCLAttributeBuffer, _kGCLBiTangentBuffer, 
-                       _kGCLBinarization, _kGCLBitDepth, _kGCLColorBuffer, _kGCLCompressionLevel, 
-                       _kGCLConditionBuffer, _kGCLConditionedBy, _kGCLConditionedByTag, 
-                       _kGCLDisableLastPivotPrediction, _kGCLFaceGroupBuffer, _kGCLFaceTopologyBuffer, 
-                       _kGCLFaceType, _kGCLIndexBuffer, _kGCLIndexedBy, _kGCLIndexedByTag, 
-                       _kGCLNormalBuffer, _kGCLPMeshAdaptiveConnectivityTraversal, 
-                       _kGCLPMeshGeometryBasedTraversal, _kGCLPMeshTFanSizeContext, 
-                       _kGCLPositionBuffer, _kGCLPredictionMode, _kGCLScope, _kGCLSubMeshId, 
-                       _kGCLTag, _kGCLTangentBuffer, _kGCLTextureCoordinateBuffer, 
-                       _kGCLUsePreallocatedBuffers, _kGCLVerifyIntegrity ]
+                       _GeometryCompressionVersionNumber, _GeometryCompressionVersionString ]
 ...

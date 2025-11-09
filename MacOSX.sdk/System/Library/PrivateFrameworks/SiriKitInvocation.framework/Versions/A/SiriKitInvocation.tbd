@@ -22,7 +22,7 @@ exports:
                        _SKIFitnessDirectInvocationPayloadKeyPredictionIdentifier, 
                        _SKIFitnessDirectInvocationPayloadKeySynchronousBurstIndex, 
                        _SKIFitnessDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
-                       _SKIFitnessDirectInvocationPayloadKeyWorkoutActivityType, 
+                       _SKIFitnessDirectInvocationPayloadKeyVoiceFeedbackData, _SKIFitnessDirectInvocationPayloadKeyWorkoutActivityType, 
                        _SKIFitnessDirectInvocationPayloadKeyWorkoutLocationType, 
                        _SKIFitnessDirectInvocationPayloadKeyWorkoutPredictionType, 
                        _SKIFitnessDirectInvocationPayloadKeyWorkoutSwimmingLocationType, 

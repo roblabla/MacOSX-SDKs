@@ -41,6 +41,18 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
 - (instancetype)initWithUpdateMode:(PHASEUpdateMode)updateMode NS_DESIGNATED_INITIALIZER;
 
 /*!
+    @method initWithUpdateMode:
+    @abstract Initialize a new engine with an update mode.
+    @param updateMode
+        Defines how the engine will be updated.
+    @param renderingMode
+        Defines where the engine applies rendering. See PHASERenderingMode for more info.
+*/
+- (instancetype)initWithUpdateMode:(PHASEUpdateMode)updateMode
+                     renderingMode:(PHASERenderingMode)renderingMode NS_DESIGNATED_INITIALIZER
+API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos) API_UNAVAILABLE( watchos);
+
+/*!
     @method startAndReturnError:
     @abstract Start or resume the engine.
     @return
@@ -170,6 +182,14 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
     @discussion Returns nil if there are no active group presets in the engine. Activate or Deactivate the preset via [PHASEGroupPreset activate] and [PHASEGroupPreset deactivate]
 */
 @property(nonatomic, readonly, strong, nullable) PHASEGroupPreset* activeGroupPreset;
+
+/*! @property lastRenderTime
+    @abstract Obtain the time for which the engine most recently rendered.
+    @discussion
+        Will return nil if the engine is not running
+*/
+@property (nonatomic, readonly, nullable) AVAudioTime* lastRenderTime
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE( watchos);
 
 @end  // PHASEEngine
 

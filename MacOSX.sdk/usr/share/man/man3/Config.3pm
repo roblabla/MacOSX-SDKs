@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "Config 3pm"
-.TH Config 3pm "2025-04-19" "perl v5.34.1" "Perl Programmers Reference Guide"
+.TH Config 3pm "2025-08-03" "perl v5.34.1" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -1771,6 +1771,14 @@ From \fId_fmin.U\fR:
 .Sp
 This variable conditionally defines the \f(CW\*(C`HAS_FMIN\*(C'\fR symbol, which
 indicates to the C program that the \fBfmin()\fR routine is available.
+.ie n .IP """d_fdopendir""" 4
+.el .IP "\f(CWd_fdopendir\fR" 4
+.IX Item "d_fdopendir"
+From \fId_fdopendir.U\fR:
+.Sp
+This variable conditionally defines the \f(CW\*(C`HAS_FORK\*(C'\fR symbol, which
+indicates that the fdopen routine is available to open a
+directory descriptor.
 .ie n .IP """d_fork""" 4
 .el .IP "\f(CWd_fork\fR" 4
 .IX Item "d_fork"

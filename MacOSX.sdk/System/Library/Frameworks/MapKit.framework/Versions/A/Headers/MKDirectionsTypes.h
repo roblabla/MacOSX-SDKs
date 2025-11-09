@@ -11,5 +11,6 @@ typedef NS_OPTIONS(NSUInteger, MKDirectionsTransportType) {
     MKDirectionsTransportTypeAutomobile = 1 << 0,
     MKDirectionsTransportTypeWalking = 1 << 1,
     MKDirectionsTransportTypeTransit NS_ENUM_AVAILABLE(10_11, 9_0) = 1 << 2, // Only supported for ETA calculations
+    MKDirectionsTransportTypeCycling API_AVAILABLE(ios(14.0), macos(11.0), watchos(7.0), tvos(14.0), visionos(1.0)) = 1 << 3,
     MKDirectionsTransportTypeAny = 0x0FFFFFFF
-} NS_ENUM_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0));

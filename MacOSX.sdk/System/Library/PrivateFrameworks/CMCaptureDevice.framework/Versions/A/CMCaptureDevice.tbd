@@ -6,16 +6,19 @@ install-name:    '/System/Library/PrivateFrameworks/CMCaptureDevice.framework/Ve
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AppleDarwinCamera, AppleH10DarwinCamera, AppleH16DarwinCamera, 
-                       CMCapture, CMCaptureTests-Desktop, CMCaptureTests-Embedded, 
+    clients:         [ AppleCVHWA, AppleDarwinCamera, AppleH10DarwinCamera, AppleH16DarwinCamera, 
+                       CMCapture, CMCaptureDarwin, CMCaptureTests-Desktop, CMCaptureTests-Embedded, 
                        CMImaging, FirstLight, H10ISP.mediacapture, H10ISPDarwin.mediacapture, 
                        H10ISPDarwinServices, H10ISPServices, H13ISP.mediacapture, 
                        H13ISPServices, H16ISP.mediacapture, H16ISPDarwin.mediacapture, 
-                       H16ISPDarwinServices, H16ISPServices, H9, RealityCamera, RealityCameraPrivate, 
-                       VideoStabilizationV2, appleh10camerad, appleh10darwincamerad, 
-                       appleh13camerad, appleh16camerad, appleh16darwincamerad, camtestdarwin, 
-                       figMotionTester, first-light, h10isp, h10ispdarwin, h13isp, 
-                       h16isp, h16ispdarwin, vcd.mediacapture ]
+                       H16ISPDarwinServices, H16ISPServices, H9, ISP.mediacapture, 
+                       ISPDarwin.mediacapture, ISPDarwinServices, ISPServices, RealityCamera, 
+                       RealityCameraPrivate, VideoStabilizationV2, VisionHWAccelerationServices, 
+                       appleh10camerad, appleh10darwincamerad, appleh13camerad, appleh16camerad, 
+                       appleh16darwincamerad, cameraispd, cameraispdarwind, camisp, 
+                       camispdarwin, camtestdarwin, figMotionTester, first-light, 
+                       h10isp, h10ispdarwin, h13isp, h16isp, h16ispdarwin, test_VIO_HWFeatureDetection, 
+                       vcd.mediacapture ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -62,11 +65,11 @@ exports:
                        _kFigCapturePropertyShouldBeSerializedKey, _kFigCapturePropertyTypeKey, 
                        _kFigCapturePropertyType_Allocator, _kFigCapturePropertyType_Boolean, 
                        _kFigCapturePropertyType_BufferQueue, _kFigCapturePropertyType_Clock, 
-                       _kFigCapturePropertyType_Collection, _kFigCapturePropertyType_Enumeration, 
-                       _kFigCapturePropertyType_FormatDescription, _kFigCapturePropertyType_Number, 
-                       _kFigCapturePropertyType_PixelBuffer, _kFigCapturePropertyType_String, 
-                       _kFigCapturePropertyType_Unused, _kFigCaptureProperty_SupportedPropertiesDictionary, 
-                       _kFigCaptureStreamNotificationCMIOExtensionPropertyKey_Attribute_MaxValue, 
+                       _kFigCapturePropertyType_Collection, _kFigCapturePropertyType_Data, 
+                       _kFigCapturePropertyType_Enumeration, _kFigCapturePropertyType_FormatDescription, 
+                       _kFigCapturePropertyType_Number, _kFigCapturePropertyType_PixelBuffer, 
+                       _kFigCapturePropertyType_String, _kFigCapturePropertyType_Unused, 
+                       _kFigCaptureProperty_SupportedPropertiesDictionary, _kFigCaptureStreamNotificationCMIOExtensionPropertyKey_Attribute_MaxValue, 
                        _kFigCaptureStreamNotificationCMIOExtensionPropertyKey_Attribute_MinValue, 
                        _kFigCaptureStreamNotificationCMIOExtensionPropertyKey_Attribute_Settable, 
                        _kFigCaptureStreamNotificationCMIOExtensionPropertyKey_Name, 

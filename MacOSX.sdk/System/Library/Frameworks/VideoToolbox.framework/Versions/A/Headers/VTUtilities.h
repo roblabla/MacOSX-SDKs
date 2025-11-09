@@ -67,7 +67,7 @@ VT_EXPORT void VTRegisterSupplementalVideoDecoderIfAvailable( CMVideoCodecType c
 		The format description for the video format for which information is being requested.
 	@param			mediaExtensionPropertiesOut
 		If a Media Extension video decoder will be used to decode the specified format, this pointer will return a dictionary with a set of properties describing the extension video decoder. The dictionary keys are VTExtensionPropertiesKey values.
-	@result			If the function succeeds and a Media Extension video decoder will be used to decode this format, the return value will be noErr. If the function succeeds but a Media Extension video decoder will not be used to decode this format, the return value will be kVTCouldNotFindExtensionErr. Otherwise, the return value will be an error code describing the failure.
+	@result			If the function succeeds and a Media Extension video decoder will be used to decode this format, the return value will be noErr. If the function succeeds but a Media Extension video decoder will not be used to decode this format, the return value will be kVTCouldNotFindExtensionErr. If a Media Extension video decoder for the format was found but is disabled, the function will return kVTExtensionDisabledErr. Otherwise, the return value will be an error code describing the failure.
 */
 VT_EXPORT OSStatus VTCopyVideoDecoderExtensionProperties( CMFormatDescriptionRef CM_NONNULL formatDesc, CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL mediaExtensionPropertiesOut ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
@@ -79,7 +79,7 @@ VT_EXPORT OSStatus VTCopyVideoDecoderExtensionProperties( CMFormatDescriptionRef
 		The format description for the video format for which information is being requested.
 	@param			mediaExtensionPropertiesOut
 		If a Media Extension RAW processor  will be used to process the specified format, this pointer will return a dictionary with a set of properties describing the extension RAW processor. The dictionary keys VTExtensionPropertiesKey values.
-	@result			If the function succeeds and a Media Extension RAW processor will be used to process this format, the return value will be noErr. If the function succeeds but a Media Extension RAW processor will not be used to process this format, the return value will be kVTCouldNotFindExtensionErr. Otherwise, the return value will be an error code describing the failure.
+	@result			If the function succeeds and a Media Extension RAW processor will be used to process this format, the return value will be noErr. If the function succeeds but a Media Extension RAW processor will not be used to process this format, the return value will be kVTCouldNotFindExtensionErr. If a Media Extension RAW processor for the format was found but is disabled, the function will return kVTExtensionDisabledErr. Otherwise, the return value will be an error code describing the failure.
 */
 VT_EXPORT OSStatus VTCopyRAWProcessorExtensionProperties( CMFormatDescriptionRef CM_NONNULL formatDesc, CM_RETURNS_RETAINED_PARAMETER CM_NULLABLE CFDictionaryRef * CM_NONNULL mediaExtensionPropertiesOut ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 

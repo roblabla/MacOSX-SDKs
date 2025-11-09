@@ -2,8 +2,7 @@
 //  hv_arch_vmx.h
 //  Hypervisor
 //
-//  Created by Sebastian Gregorzyk on 2/3/14.
-//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//  Copyright © 2021-2025 Apple Inc. All rights reserved.
 //
 
 #ifndef __HYPERVISOR_HV_ARCH_VMX__

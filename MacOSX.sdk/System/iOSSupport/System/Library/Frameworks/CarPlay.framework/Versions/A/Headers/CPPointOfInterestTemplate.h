@@ -15,6 +15,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPPointOfInterestTemplateDelegate <NSObject>
 @required
 
@@ -33,6 +34,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @end
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPPointOfInterestTemplate : CPTemplate <CPBarButtonProviding>
 
 /**

@@ -19,6 +19,7 @@
 #import <AppKit/NSAppearance.h>
 #import <AppKit/NSAppleScriptExtensions.h>
 #import <AppKit/NSApplication.h>
+#import <AppKit/NSBackgroundExtensionView.h>
 #import <AppKit/NSBox.h>
 #import <AppKit/NSButton.h>
 #import <AppKit/NSButtonCell.h>
@@ -44,6 +45,7 @@
 #import <AppKit/NSFontPanel.h>
 #import <AppKit/NSForm.h>
 #import <AppKit/NSFormCell.h>
+#import <AppKit/NSGlassEffectView.h>
 #import <AppKit/NSMatrix.h>
 #import <AppKit/NSMenu.h>
 #import <AppKit/NSMenuItem.h>
@@ -107,6 +109,7 @@
 #import <AppKit/NSSpellChecker.h>
 #import <AppKit/NSSplitView.h>
 #import <AppKit/NSSplitViewController.h>
+#import <AppKit/NSSplitViewItemAccessoryViewController.h>
 #import <AppKit/NSOpenPanel.h>
 #import <AppKit/NSPageLayout.h>
 #import <AppKit/NSPanel.h>
@@ -150,6 +153,7 @@
 #import <AppKit/NSUserActivity.h>
 #import <AppKit/NSView.h>
 #import <AppKit/NSViewController.h>
+#import <AppKit/NSViewLayoutRegion.h>
 #import <AppKit/NSWindow.h>
 #import <AppKit/NSWindowTab.h>
 #import <AppKit/NSWindowTabGroup.h>
@@ -254,6 +258,7 @@
 #import <AppKit/NSStoryboard.h>
 #import <AppKit/NSStoryboardSegue.h>
 #import <AppKit/NSVisualEffectView.h>
+#import <AppKit/NSItemBadge.h>
 #import <AppKit/NSItemProvider.h>
 #import <AppKit/NSTitlebarAccessoryViewController.h>
 #import <AppKit/NSDataAsset.h>

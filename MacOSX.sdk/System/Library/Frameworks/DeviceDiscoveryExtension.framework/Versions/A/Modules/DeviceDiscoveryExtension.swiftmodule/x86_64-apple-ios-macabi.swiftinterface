@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level spi -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 315.1 -module-name DeviceDiscoveryExtension
-// swift-module-flags-ignorable: -project-name DeviceAccess -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level spi -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 320.40 -module-name DeviceDiscoveryExtension
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -project-name DeviceAccess -interface-compiler-version 6.2
 @_exported import DeviceDiscoveryExtension
 import ExtensionFoundation
 import Foundation
@@ -12,14 +12,18 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import os
 extension DeviceDiscoveryExtension.DDDevice {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var networkEndpoint: Network.NWEndpoint? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var txtRecord: Network.NWTXTRecord? {
     get
     set
   }
+  #endif
 }
 @available(iOS 16.0, *)
 public protocol DDDiscoveryExtensionConfigurationProtocol : ExtensionFoundation.AppExtensionConfiguration {

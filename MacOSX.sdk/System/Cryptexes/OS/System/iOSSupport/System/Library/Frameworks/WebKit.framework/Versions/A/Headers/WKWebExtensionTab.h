@@ -64,10 +64,10 @@ typedef NS_OPTIONS(NSUInteger, WKWebExtensionTabChangedProperties) {
     WKWebExtensionTabChangedPropertiesTitle        = 1 << 7,
     WKWebExtensionTabChangedPropertiesURL          = 1 << 8,
     WKWebExtensionTabChangedPropertiesZoomFactor   = 1 << 9,
-} NS_SWIFT_NAME(WKWebExtension.TabChangedProperties) API_AVAILABLE(macos(NA), ios(18.4), visionos(NA));
+} NS_SWIFT_NAME(WKWebExtension.TabChangedProperties) API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4));
 
 /*! @abstract A class conforming to the ``WKWebExtensionTab`` protocol represents a tab to web extensions. */
-API_AVAILABLE(macos(NA), ios(18.4), visionos(NA)) WK_SWIFT_UI_ACTOR
+API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4)) WK_SWIFT_UI_ACTOR
 @protocol WKWebExtensionTab <NSObject>
 @optional
 

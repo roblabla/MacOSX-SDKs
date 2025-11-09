@@ -161,6 +161,15 @@ NS_SWIFT_UI_ACTOR
  */
 @property (nonatomic, readonly, nullable) MTLRenderPassDescriptor *currentRenderPassDescriptor;
 
+#if !TARGET_OS_SIMULATOR
+/*!
+ @property currentMTL4RenderPassDescriptor
+ @abstract A render pass descriptor generated from the currentDrawable's texture and the view's depth, stencil, and sample buffers and clear values.
+ @discussion This is a convience property.  The view does not use this descriptor and there is no requirement for an app to use this descriptor.
+ */
+@property (nonatomic, readonly, nullable) MTL4RenderPassDescriptor *currentMTL4RenderPassDescriptor API_AVAILABLE(macos(26.0), ios(26.0));
+#endif
+
 /*!
  @property preferredFramesPerSecond
  @abstract The rate you want the view to redraw its contents.

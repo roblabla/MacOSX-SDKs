@@ -2,7 +2,7 @@
 //  HKObjectType.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2025 Apple Inc. All rights reserved.
 //
 
 
@@ -20,10 +20,12 @@ NS_ASSUME_NONNULL_BEGIN
 @class HKCorrelationType;
 @class HKDocumentType;
 @class HKElectrocardiogramType;
+@class HKMedicationDoseEventType;
 @class HKQuantityType;
 @class HKSeriesType;
 @class HKStateOfMindType;
 @class HKUnit;
+@class HKUserAnnotatedMedicationType;
 @class HKPrescriptionType;
 @class HKWorkoutType;
 @class HKScoredAssessmentType;
@@ -66,8 +68,10 @@ API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 + (HKActivitySummaryType *)activitySummaryType API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0));
 + (HKAudiogramSampleType *)audiogramSampleType API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0));
 + (HKElectrocardiogramType *)electrocardiogramType API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0));
++ (HKMedicationDoseEventType *)medicationDoseEventType API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
 + (HKPrescriptionType *)visionPrescriptionType API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));
 + (HKStateOfMindType *)stateOfMindType API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos(2.0));
++ (HKUserAnnotatedMedicationType *)userAnnotatedMedicationType API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
 
 /*!
  @method        requiresPerObjectAuthorization
@@ -237,6 +241,15 @@ API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0))
 @interface HKElectrocardiogramType : HKSampleType
 @end
 
+/*!
+ @class         HKMedicationDoseEventType
+ @abstract      Represents a recorded log of a specific medication, represented by HKMedicationDoseEvent samples.
+ */
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0))
+@interface HKMedicationDoseEventType : HKSampleType
+@end
 
 /*!
  @class         HKPrescriptionType
@@ -269,4 +282,13 @@ API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(18.0), macos(15.0), visionos
 @end
 
 
+/*!
+ @class         HKUserAnnotatedMedicationType
+ @abstract      Represents the set of authorizeable HKUserAnnotatedMedications.
+ */
+HK_EXTERN
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0))
+@interface HKUserAnnotatedMedicationType : HKObjectType
+@end
 NS_ASSUME_NONNULL_END

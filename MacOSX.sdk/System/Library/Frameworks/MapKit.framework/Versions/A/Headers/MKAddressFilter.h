@@ -16,10 +16,10 @@ typedef NS_OPTIONS(NSUInteger, MKAddressFilterOption) {
     MKAddressFilterOptionLocality = 1 << 3,
     MKAddressFilterOptionSubLocality = 1 << 4,
     MKAddressFilterOptionPostalCode = 1 << 5
-} NS_SWIFT_NAME(MKAddressFilter.Options) API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos);
+} NS_SWIFT_NAME(MKAddressFilter.Options) API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0), watchos(11.0));
 
 
-API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0), watchos(11.0))
 @interface MKAddressFilter : NSObject <NSSecureCoding, NSCopying>
 
 @property (nonatomic, class, readonly) MKAddressFilter *filterIncludingAll NS_SWIFT_NAME(includingAll);

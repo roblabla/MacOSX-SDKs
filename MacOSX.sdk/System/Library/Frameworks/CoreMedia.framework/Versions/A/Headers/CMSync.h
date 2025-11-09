@@ -38,6 +38,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 */
 
 typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
+CM_SWIFT_INIT_FOR_CF_TYPE(CMClock, API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)))
 
 /*!
 	@typedef	CMTimebase
@@ -58,6 +59,7 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos
 */
 
 typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
+CM_SWIFT_INIT_FOR_CF_TYPE(CMTimebase, API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)))
 
 typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_SENDABLE; // used in argument lists and function results to indicate that either may be passed
 

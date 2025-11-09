@@ -16,13 +16,15 @@ NS_ASSUME_NONNULL_BEGIN
 @class ASPickerDisplayItem;
 
 //---------------------------------------------------------------------------------------------------------------------------
-/*!    @brief        Authorized Accessory State
-*/
+/// A type that defines values for the state of an accessory.
 typedef NS_ENUM( NSInteger, ASAccessoryState )
 {
-    ASAccessoryStateUnauthorized            = 0,    // Invalid or Unauthorized Accessory.
-    ASAccessoryStateAwaitingAuthorization   = 10,   // Selected by user but pending for full authorization.
-    ASAccessoryStateAuthorized              = 20,   // Authorized and available Accessory.
+    /// The accessory is invalid or unauthorized.
+    ASAccessoryStateUnauthorized            = 0,
+    /// The accessory is selected, but full authorization is still pending.
+    ASAccessoryStateAwaitingAuthorization   = 10,
+    /// The accessory is authorized and available.
+    ASAccessoryStateAuthorized              = 20,
 } NS_SWIFT_NAME(ASAccessory.AccessoryState);
 
 //---------------------------------------------------------------------------------------------------------------------------
@@ -49,6 +51,9 @@ typedef NS_OPTIONS( NSUInteger, ASAccessorySupportOptions )
     ASAccessorySupportBluetoothHID API_AVAILABLE( ios( 18.4 ) )    = ( 1U << 3 ),
 } NS_SWIFT_NAME(ASAccessory.SupportOptions);
 
+API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos)
+typedef uint64_t ASAccessoryWiFiAwarePairedDeviceID NS_SWIFT_NAME(ASAccessory.WiFiAwarePairedDeviceID);
+
 AS_EXTERN
 API_AVAILABLE( ios( 18.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos)
 NS_SWIFT_SENDABLE
@@ -72,6 +77,11 @@ NS_SWIFT_SENDABLE
 ///
 /// Use this identifier to establish a connection to the accessory.
 @property (readonly, copy, nullable, nonatomic) NSString *SSID;
+
+/// The accessory's Wi-Fi Aware Pairing Identifier.
+///
+/// Use this identifier to establish a connection to the accessory using Wi-Fi Aware Framework.
+@property (readonly, assign, nonatomic) ASAccessoryWiFiAwarePairedDeviceID wifiAwarePairedDeviceID API_AVAILABLE( ios( 26.0 ) );
 
 /// The descriptor used to discover the accessory.
 @property (readonly, copy, nonatomic) ASDiscoveryDescriptor *descriptor;

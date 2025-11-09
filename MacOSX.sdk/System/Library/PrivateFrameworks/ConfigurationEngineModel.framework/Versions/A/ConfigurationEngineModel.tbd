@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ConfigurationEngineModel.framework/Versions/A/ConfigurationEngineModel'
-current-version: 221.5.1
+current-version: 241
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CEMAccountLDAPDeclaration_LDAPSearchSettingsItem_LDAPSearchSettingScope_ldapSearchSettingScopeBase, 
@@ -507,7 +507,8 @@ exports:
                        CEMSystemAirPrintSettingsDeclaration, CEMSystemAirPrintSettingsDeclaration_Status, 
                        CEMSystemAirdropDeclaration, CEMSystemAirdropDeclaration_Status, 
                        CEMSystemAllowedMediaDeclaration, CEMSystemAllowedMediaDeclaration_MediaItems, 
-                       CEMSystemAllowedMediaDeclaration_Status, CEMSystemBasicWebContentFilterDeclaration, 
+                       CEMSystemAllowedMediaDeclaration_Status, CEMSystemAppExceptionsDeclaration, 
+                       CEMSystemAppExceptionsDeclaration_Status, CEMSystemBasicWebContentFilterDeclaration, 
                        CEMSystemBasicWebContentFilterDeclaration_SiteWhiteListItem, 
                        CEMSystemBasicWebContentFilterDeclaration_Status, CEMSystemCameraDeclaration, 
                        CEMSystemCameraDeclaration_Status, CEMSystemCarPlayDeclaration, 

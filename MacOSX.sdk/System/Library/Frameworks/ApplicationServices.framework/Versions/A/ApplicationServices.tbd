@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/ApplicationServices'
-current-version: 65
+current-version: 66
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -302,7 +302,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/HIServices.framework/Versions/A/HIServices'
-current-version: 807.3
+current-version: 815
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -558,7 +558,7 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ApplicationServices.framework/Versions/A/Frameworks/PrintCore.framework/Versions/A/PrintCore'
-current-version: 592.3
+current-version: 601
 parent-umbrella:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     umbrella:        ApplicationServices
@@ -694,7 +694,7 @@ exports:
                        _PMTicketSetCFString, _PMTicketSetCString, _PMTicketSetDouble, 
                        _PMTicketSetItem, _PMTicketSetPMRect, _PMTicketSetSInt32, 
                        _PMTicketSetTicket, _PMTicketSetUInt32, _PMTicketToLightXML, 
-                       _PMTicketToXML, _PMWorkflowCopyItems, _PMWorkflowSubmitPDFWithOptions, 
+                       _PMTicketToXML, _PMWatermarkDraw, _PMWorkflowCopyItems, _PMWorkflowSubmitPDFWithOptions, 
                        _PMWorkflowSubmitPDFWithSettings, _PMXMLToTicket, __PMLog, 
                        __PMLogLocalize, __PMLogPerf, __ZN12PMBaseObject14SetAppReadOnlyEh, 
                        __ZN12PMBaseObject15CopyObjectStateEPS_, __ZN12PMBaseObject16CreateEmptyArrayEv, 

@@ -24,12 +24,14 @@
 #ifndef _VMNET_H_
 #define _VMNET_H_
 
+#include <CoreFoundation/CoreFoundation.h>
 #include <dispatch/dispatch.h>
 #include <xpc/xpc.h>
 #include <objc/objc-api.h>
 #include <os/availability.h>
 #include <sys/cdefs.h>
 #include <netinet/in.h>
+#include <net/ethernet.h>
 
 __BEGIN_DECLS
 
@@ -98,6 +100,9 @@ typedef OBJC_ENUM(uint32_t, operating_modes_t) {
 	VMNET_BRIDGED_MODE API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)	= 1002
 };
 
+typedef operating_modes_t vmnet_mode_t
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
 /*!
  * @typedef interface_event_t
  *
@@ -114,7 +119,6 @@ typedef OBJC_ENUM(uint32_t, operating_modes_t) {
 typedef OBJC_OPTIONS(uint32_t, interface_event_t) {
 	VMNET_INTERFACE_PACKETS_AVAILABLE	= 1<<0,
 };
-
 
 /*!
  * @typedef vmnet_return_t
@@ -185,10 +189,10 @@ typedef struct vmnet_interface *interface_ref;
 /*!
  * @constant vmnet_operation_mode_key
  * The mode (uint64) in which the vmnet interface instance should run.
- * See operating_modes_t for the list of possible values.
+ * See vmnet_mode_t for the list of possible values.
  * The property is specified in the interface_desc dictionary.
  */
-extern const char *
+extern const char * const
 vmnet_operation_mode_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -197,7 +201,7 @@ vmnet_operation_mode_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watcho
  * interface is VMNET_BRIDGED_MODE. The property is specified in the
  * interface_desc dictionary.
  */
-extern const char *
+extern const char * const
 vmnet_shared_interface_name_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -205,7 +209,7 @@ vmnet_shared_interface_name_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios,
  * The MAC address (string) that the VM is expected to use when originating
  * traffic on the vmnet interface. Supplied in the interface_param dictionary.
  */
-extern const char *
+extern const char * const
 vmnet_mac_address_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
@@ -214,7 +218,7 @@ vmnet_mac_address_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, 
  * Allocate a MAC address for the VM to use (bool). Default value is true.
  * If set to false, no MAC address will be generated.
  */
-extern const char *
+extern const char * const
 vmnet_allocate_mac_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -226,15 +230,19 @@ vmnet_allocate_mac_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, 
  * dictionary. In bridged mode, specifying the MTU in the interface_desc
  * dictionary results in an error.
  */
-extern const char *
+extern const char * const
 vmnet_mtu_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_max_packet_size_key
  * The maximum packet size (uint64) on the interface. Supplied in the
  * interface_param dictionary.
+ *
+ * Note: if `vmnet_enable_virtio_header_key` is `true`, the maximum packet size
+ * expected in `vmnet_write()` and `vmnet_read()` is `vmnet_max_packet_size_key + 12`
+ * to accommodate the 12-byte `virtio_net_hdr`.
  */
-extern const char *
+extern const char * const
 vmnet_max_packet_size_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -242,7 +250,7 @@ vmnet_max_packet_size_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watch
  * The identifier (uuid) to uniquely identify the specific interface instance.
  * Supplied in the interface_desc and interface_param dictionaries.
  */
-extern const char *
+extern const char * const
 vmnet_interface_id_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -263,7 +271,7 @@ vmnet_interface_id_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos,
  *
  * May be present in the interface_desc and interface_param dictionaries.
  */
-extern const char *
+extern const char * const
 vmnet_start_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -279,7 +287,7 @@ vmnet_start_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos
  *
  * May be present in the interface_desc and interface_param dictionaries.
  */
-extern const char *
+extern const char * const
 vmnet_end_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -293,7 +301,7 @@ vmnet_end_address_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, 
  *
  * Supplied in the interface_desc and interface_param dictionaries.
  */
-extern const char *
+extern const char * const
 vmnet_subnet_mask_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -301,7 +309,7 @@ vmnet_subnet_mask_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, 
  * The IPv6 prefix (string) to use with VMNET_SHARED_MODE.
  * The prefix must be a ULA i.e. start with fd00::/8.
  */
-extern const char *
+extern const char * const
 vmnet_nat66_prefix_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -310,7 +318,7 @@ vmnet_nat66_prefix_key API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos,
  * The prefix_length must be 64, and hence use of this key is
  * deprecated.
  */
-extern const char *
+extern const char * const
 vmnet_nat66_prefix_length_key API_DEPRECATED("No longer supported", macos(10.15, 11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -318,7 +326,7 @@ vmnet_nat66_prefix_length_key API_DEPRECATED("No longer supported", macos(10.15,
  * The estimated number of packets available to read. Provided in the
  * event dictionary when the event_mask includes VMNET_PACKET_AVAILABLE.
  */
-extern const char *
+extern const char * const
 vmnet_estimated_packets_available_key API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -333,7 +341,7 @@ vmnet_estimated_packets_available_key API_AVAILABLE(macos(10.10)) API_UNAVAILABL
  *
  * No DHCP service is provided on this network.
  */
-extern const char *
+extern const char * const
 vmnet_network_identifier_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -343,7 +351,7 @@ vmnet_network_identifier_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, wat
  * This property is only applicable if vmnet_network_identifier_key
  * is also specified.
  */
-extern const char *
+extern const char * const
 vmnet_host_ip_address_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -352,7 +360,7 @@ vmnet_host_ip_address_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watcho
  *
  * Must be specified with vmnet_host_ip_address_key.
  */
-extern const char *
+extern const char * const
 vmnet_host_subnet_mask_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -362,7 +370,7 @@ vmnet_host_subnet_mask_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watch
  * This property is only applicable if vmnet_network_identifier_key
  * is also specified.
  */
-extern const char *
+extern const char * const
 vmnet_host_ipv6_address_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -371,7 +379,7 @@ vmnet_host_ipv6_address_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watc
  * interface may generate large (64K) TCP frames. It must also
  * be prepared to accept large TCP frames as well.
  */
-extern const char *
+extern const char * const
 vmnet_enable_tso_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -379,8 +387,12 @@ vmnet_enable_tso_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tv
  * Enable isolation for this interface. Interface isolation ensures that
  * network communication between multiple vmnet_interface instances is
  * not possible.
+ * If `vmnet_enable_isolation_key` is true in the `interface_desc` provided
+ * to `vmnet_interface_start_with_network()`, the `interface_ref` will not be
+ * able to communicate with any other `interface_ref` that also has this key
+ * set to true.
  */
-extern const char *
+extern const char * const
 vmnet_enable_isolation_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -404,7 +416,7 @@ vmnet_enable_isolation_key API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watch
  * to deal with fragmented IPv4/IPv6 packets. The VM client networking stack
  * must handle UDP and TCP checksums on fragmented packets itself.
  */
-extern const char *
+extern const char * const
 vmnet_enable_checksum_offload_key API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -412,8 +424,10 @@ vmnet_enable_checksum_offload_key API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios
  * Enable virtio headers in all packets.
  * - see "5.1.6 Device Operation" at
  *   https://docs.oasis-open.org/virtio/virtio/v1.1/virtio-v1.1.html
+ * This property must not be specified if `vmnet_enable_checksum_offload_key`
+ * is specified.
  */
-extern const char *
+extern const char * const
 vmnet_enable_virtio_header_key API_AVAILABLE(macos(15.4)) API_UNAVAILABLE(ios, watchos, tvos);
 #define vmnet_enable_virtio_header_key vmnet_enable_virtio_header_key
 
@@ -421,14 +435,14 @@ vmnet_enable_virtio_header_key API_AVAILABLE(macos(15.4)) API_UNAVAILABLE(ios, w
  * @constant vmnet_read_max_packets_key
  * The maximum value that *pktcnt may have in the call to vmnet_read().
  */
-extern const char *
+extern const char * const
 vmnet_read_max_packets_key API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @constant vmnet_write_max_packets_key
  * The maximum value that *pktcnt may have in the call to vmnet_write().
  */
-extern const char *
+extern const char * const
 vmnet_write_max_packets_key API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
@@ -457,7 +471,7 @@ typedef void (^vmnet_start_interface_completion_handler_t)
  *
  * @discussion
  * Attributes of the virtual interface are specified using the
- * interface_desc dictionary.
+ * `interface_desc` dictionary.
  *
  * @param interface_desc
  * A dictionary describing parameters to use when creating the interface.
@@ -552,8 +566,6 @@ vmnet_return_t
 vmnet_write(interface_ref interface, struct vmpktdesc *packets, int *pktcnt)
 	API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, watchos, tvos);
 
-
-
 /*!
  * @function vmnet_read
  *
@@ -608,7 +620,9 @@ typedef void (^vmnet_interface_completion_handler_t)
  *
  * @discussion
  * Once this function is called, subsequent calls to read/write packets
- * on this interface will fail.
+ * on this interface will fail. If the interface was created via
+ * `vmnet_interface_start_with_network`, this call releases the
+ * associated network object.
  *
  * @param interface
  * The interface to halt I/O on.
@@ -988,6 +1002,395 @@ vmnet_copy_shared_interface_list(void)
     API_AVAILABLE(macos(10.15))
     API_UNAVAILABLE(ios, watchos, tvos);
 
+typedef struct vmnet_network *vmnet_network_ref;
+typedef struct vmnet_network_configuration *vmnet_network_configuration_ref;
+
+/*!
+ * @function vmnet_network_configuration_create
+ *
+ * @abstract
+ * Creates a network configuration object with the specified operating mode.
+ *
+ * @discussion
+ * All other parameters are optional and have the following default value:
+ * - External interface: default interface per the routing table
+ * - NAT44: enabled
+ * - NAT66: enabled
+ * - DHCP: enabled
+ * - DNS proxy: enabled
+ * - Router advertisement: enabled
+ * - IPv4 subnet: a /24 under 192.168/16
+ * - IPv6 prefix: random ULA prefix
+ * - Port forwarding rule: none
+ * - DHCP reservation: none
+ * - MTU: 1500
+ * Use `CFRelease()` to release the network configuration object.
+ *
+ * @param mode
+ * Shared mode or host-only mode.
+ *
+ * @param status
+ * Optional output parameter, returns status.
+ *
+ * @result
+ * vmnet network handle on success, otherwise NULL.
+ */
+CF_RETURNS_RETAINED vmnet_network_configuration_ref __nullable
+vmnet_network_configuration_create(vmnet_mode_t mode, vmnet_return_t * __nullable status)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_create
+ *
+ * @abstract
+ * Creates a vmnet network based on the configuration.
+ *
+ * @discussion
+ * This API attempts to reserve the configuration such that subsequent
+ * interface start calls is guaranteed to not fail due to resource contention.
+ * The lifetime of such reservation is the same as that of `vmnet_network_ref`.
+ * Use `CFRelease()` to release the network object.
+ *
+ * @param configuration
+ * The vmnet network configuration.
+ *
+ * @result
+ * vmnet network handle on success, otherwise NULL.
+ */
+CF_RETURNS_RETAINED vmnet_network_ref __nullable
+vmnet_network_create(vmnet_network_configuration_ref configuration, vmnet_return_t * __nullable status)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_get_ipv4_subnet
+ *
+ * @abstract
+ * Queries the IPv4 subnet of a network.
+ *
+ * @discussion
+ * Gives the reserved IPv4 subnet when it was kept at default.
+ *
+ * @param network
+ * The network object.
+ */
+void
+vmnet_network_get_ipv4_subnet(vmnet_network_ref network, struct in_addr *subnet, struct in_addr *mask)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_get_ipv6_prefix
+ *
+ * @abstract
+ * Queries the IPv6 prefix of a network.
+ *
+ * @discussion
+ * Gives the reserved IPv6 prefix when it was kept at default.
+ *
+ * @param network
+ * The network object.
+ */
+void
+vmnet_network_get_ipv6_prefix(vmnet_network_ref network, struct in6_addr *prefix, uint8_t *prefix_len)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_copy_serialization
+ *
+ * @abstract
+ * Copy serializes a vmnet network to an xpc object. Use
+ * `vmnet_network_create_with_serialization` to create a new
+ * network object from such xpc object.
+ *
+ * @param network
+ * The network object to be copy serialized.
+ *
+ * @param status
+ * Optional output parameter, returns status.
+ *
+ * @result
+ * Serialized copy of network in `xpc_object_t`, NULL otherwise.
+ * Optionally, `status` will contain the error code.
+ */
+XPC_RETURNS_RETAINED xpc_object_t __nullable
+vmnet_network_copy_serialization(vmnet_network_ref network, vmnet_return_t * __nullable status)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_create_with_serialization
+ *
+ * @abstract
+ * Creates a vmnet_network from an xpc object obtained from `vmnet_network_copy_serialization`.
+ *
+ * @param network
+ * The xpc object from which to create the network
+ *
+ * @param status
+ * Optional output parameter, returns status.
+ *
+ * @result
+ * Network object in `vmnet_network_ref`, NULL otherwise.
+ * `status` will contain the error code.
+ */
+CF_RETURNS_RETAINED vmnet_network_ref __nullable
+vmnet_network_create_with_serialization(xpc_object_t network, vmnet_return_t * __nullable status)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_interface_start_with_network
+ *
+ * @abstract
+ * Starts a new virtual interface instance on a network.
+ *
+ * @discussion
+ * Attributes of the virtual interface are specified using the
+ * `interface_desc dictionary`. Namely,
+ * - `vmnet_allocate_mac_address_key`,
+ * - `vmnet_enable_tso_key`,
+ * - `vmnet_enable_isolation_key`,
+ * - `vmnet_enable_checksum_offload_key`.
+ * On success, this call retains the network object.
+ *
+ * @param network
+ * The network that the interface will be added to.
+ *
+ * @param interface_desc
+ * A dictionary describing parameters to use when creating the interface.
+ *
+ * @param queue
+ * The queue on which to schedule the completion handler.
+ *
+ * @param start_block
+ * The block to invoke when the start interface request completes.
+ *
+ * @result
+ * Returns a non-NULL interface handle on success, NULL otherwise.
+ */
+interface_ref __nullable
+vmnet_interface_start_with_network(vmnet_network_ref network, xpc_object_t interface_desc,
+    dispatch_queue_t queue, vmnet_start_interface_completion_handler_t start_block)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_set_external_interface
+ *
+ * @abstract
+ * Configures the external interface of a vmnet network.
+ *
+ * @discussion
+ * This is only applicable to networks of `VMNET_SHARED_MODE`.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ *
+ * @param interface_name
+ * The name of the external interface
+ *
+ * @result
+ * VMNET_SUCCESS on success, error otherwise.
+ */
+vmnet_return_t
+vmnet_network_configuration_set_external_interface(vmnet_network_configuration_ref config, char const * interface_name)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_disable_nat44
+ *
+ * @abstract
+ * Disables NAT44 on a network.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ */
+void
+vmnet_network_configuration_disable_nat44(vmnet_network_configuration_ref config)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_disable_nat66
+ *
+ * @abstract
+ * Disables NAT66 on a network.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ */
+void
+vmnet_network_configuration_disable_nat66(vmnet_network_configuration_ref config)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_disable_dhcp
+ *
+ * @abstract
+ * Disables DHCP server on a network.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ */
+void
+vmnet_network_configuration_disable_dhcp(vmnet_network_configuration_ref config)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_disable_dns_proxy
+ *
+ * @abstract
+ * Disables DNS proxy on a network.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ */
+void
+vmnet_network_configuration_disable_dns_proxy(vmnet_network_configuration_ref config)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_disable_router_advertisement
+ *
+ * @abstract
+ * Disables router advertisement on a network.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ */
+void
+vmnet_network_configuration_disable_router_advertisement(vmnet_network_configuration_ref config)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_set_ipv4_subnet
+ *
+ * @discussion
+ * Configures the IPv4 addresses for a vmnet network.
+ * Note that the first, second, and last addresses of the range are reserved.
+ * The second address is reserved for the host, the first and last are not
+ * assignable to any node.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ *
+ * @param subnet_addr
+ * The subnet address.
+ *
+ * @param subnet_mask
+ * The subnet mask.
+ *
+ * @result
+ * VMNET_SUCCESS on success, error otherwise.
+ */
+vmnet_return_t
+vmnet_network_configuration_set_ipv4_subnet(vmnet_network_configuration_ref config, struct in_addr const *subnet_addr,
+                                 struct in_addr const *subnet_mask)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_set_ipv6_prefix
+ *
+ * @discussion
+ * Configures the IPv6 prefix for a vmnet network object.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ *
+ * @param prefix
+ * The IPv6 prefix.
+ *
+ * @param len
+ * The IPv6 prefix length.
+ *
+ * @result
+ * VMNET_SUCCESS on success, error otherwise.
+ */
+vmnet_return_t
+vmnet_network_configuration_set_ipv6_prefix(vmnet_network_configuration_ref config, struct in6_addr const *prefix, uint8_t len)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_add_port_forwarding_rule
+ *
+ * @discussion
+ * Configures a new port forwarding rule for a vmnet network. These rules will
+ * not be able to be removed or queried until network has been started.
+ * To do that, use `vmnet_interface_remove_ip_forwarding_rule` or
+ * `vmnet_interface_get_ip_port_forwarding_rules` APIs, respectively.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ *
+ * @param protocol
+ * The protocol to apply the port forwarding rule to.
+ * Must be either IPPROTO_TCP or IPPROTO_UDP (see <netinet/in.h>).
+ *
+ * @param address_family
+ * The address family (AF_INET or AF_INET6) of 'internal_address'. If
+ * AF_INET, 'internal address' must point to a 'struct in_addr'. If
+ * AF_INET6, 'internal_address' must point to a "struct in6_addr'.
+ *
+ * @param external_port
+ * The TCP or UDP port on the outside network that should be redirected from.
+ * Must be in host byte order.
+ *
+ * @param internal_address
+ * Pointer to IPv4 or IPv6 address of the machine on the internal network that
+ * should receive the forwarded traffic.
+ *
+ * @param internal_port
+ * The TCP or UDP port that the forwarded traffic should be redirected to.
+ * Must be in host byte order.
+ *
+ * @result
+ * VMNET_SUCCESS on success, error otherwise.
+ */
+vmnet_return_t
+vmnet_network_configuration_add_port_forwarding_rule(vmnet_network_configuration_ref config, uint8_t protocol, sa_family_t address_family,
+                                       uint16_t internal_port, uint16_t external_port, void const *internal_address)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_add_dhcp_reservation
+ *
+ * @abstract
+ * Configures a new dhcp reservation for a vmnet network.
+ *
+ * @discussion
+ * Reserve a DHCP address for a client with certain MAC address.
+ * Note that modifying reservation is not allowed while a network is active.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ *
+ * @param client
+ * The mac address for which the DHCP address is reserved.
+ *
+ * @param reservation
+ * The DHCP address to be reserved.
+ *
+ * @result
+ * VMNET_SUCCESS on success, error otherwise.
+ */
+vmnet_return_t
+
+vmnet_network_configuration_add_dhcp_reservation(vmnet_network_configuration_ref config, ether_addr_t const *client, struct in_addr const *reservation)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ * @function vmnet_network_configuration_set_mtu
+ *
+ * @abstract
+ * Configures the maximum transmission unit (MTU) for a vmnet network.
+ *
+ * @param config
+ * The network configuration object to be modified.
+ *
+ * @param mtu
+ * The MTU.
+ *
+ * @result
+ * VMNET_SUCCESS on success, error otherwise.
+ */
+vmnet_return_t
+vmnet_network_configuration_set_mtu(vmnet_network_configuration_ref config, uint32_t mtu)
+API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 #if __has_feature(assume_nonnull)
 _Pragma("clang assume_nonnull end")

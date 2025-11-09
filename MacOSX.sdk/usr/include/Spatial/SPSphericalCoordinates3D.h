@@ -4,7 +4,6 @@
 #include <Spatial/Structures.h>
 #include <Spatial/SPAngle.h>
 
-
 // MARK: - SPSphericalCoordinates3D ⇋ SPPoint3D
 
 /*!
@@ -75,5 +74,7 @@ SPSphericalCoordinates3D SPSphericalCoordinates3DMakeWithCartesianVector(SPVecto
     
     return SPSphericalCoordinates3DMakeWithCartesianVector(xyz.vector);
 }
+
+
 
 #endif /* SPSphericalCoordinates3D_h */

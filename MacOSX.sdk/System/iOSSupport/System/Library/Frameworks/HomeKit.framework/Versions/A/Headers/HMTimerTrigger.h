@@ -62,9 +62,9 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  *
  * @note Should be at least 1 minute ahead for reliable firing.
  */
-@property (readonly, copy, nonatomic) NSDate *fireDate;
+@property (nonatomic, readonly, copy) NSDate *fireDate;
 
-@property (readonly, copy, nonatomic, nullable) NSTimeZone *timeZone API_DEPRECATED("Use HMEventTrigger with HMCalendarEvent for triggers based on a time-zone-relative time of day", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(10.0, 16.4), watchos(2.0, 9.4));
+@property (nullable, nonatomic, readonly, copy) NSTimeZone *timeZone API_DEPRECATED("Use HMEventTrigger with HMCalendarEvent for triggers based on a time-zone-relative time of day", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(10.0, 16.4), watchos(2.0, 9.4));
 
 /*!
  * @brief The date components that specify how a trigger is to be repeated. 
@@ -79,9 +79,9 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
  *             whole minutes. Examples are 5 minutes, 6 minutes, 1 day, 2 weeks.
  *
  */
-@property (readonly, copy, nonatomic, nullable) NSDateComponents *recurrence;
+@property (nullable, nonatomic, readonly, copy) NSDateComponents *recurrence;
 
-@property (readonly, copy, nonatomic, nullable) NSCalendar *recurrenceCalendar API_DEPRECATED("No longer supported", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(10.0, 16.4), watchos(2.0, 9.4));
+@property (nullable, nonatomic, readonly, copy) NSCalendar *recurrenceCalendar API_DEPRECATED("No longer supported", ios(8.0, 16.4), macos(10.14, 13.3), macCatalyst(14.0, 16.4), tvos(10.0, 16.4), watchos(2.0, 9.4));
 
 /*!
  * @brief This method is used to change the fire date of a timer trigger.

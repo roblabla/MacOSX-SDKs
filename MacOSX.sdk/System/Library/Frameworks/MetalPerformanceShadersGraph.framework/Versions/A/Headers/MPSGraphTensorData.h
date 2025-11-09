@@ -12,6 +12,8 @@
 #import <MetalPerformanceShadersGraph/MPSGraphCore.h>
 #import <MetalPerformanceShadersGraph/MPSGraphDevice.h>
 
+@protocol MTLTensor;
+
 NS_ASSUME_NONNULL_BEGIN
 
 /// The representation of a compute data type.
@@ -141,6 +143,17 @@ MPS_SWIFT_NAME( init(_:) );
 /// - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
 -(instancetype) initWithMPSImageBatch:(MPSImageBatch *) imageBatch
 MPS_SWIFT_NAME( init(_:) );
+
+/// Initializes an MPSGraphTensorData with an MTLTensor.
+///
+/// The internal storage of the MTLTensor will be aliased. Requires tensor to support MTLTensorUsageMachineLearning.
+///
+/// - Parameters:
+///   - tensor: MTLTensor to be used within the MPSGraphTensorData
+/// - Returns: A valid MPSGraphTensorData, or nil if allocation failure.
+- (instancetype)initWithMTLTensor:(id<MTLTensor>)tensor
+MPS_SWIFT_NAME(init(_:))
+MPS_AVAILABLE_STARTING(macos(16.0), ios(19.0), tvos(19.0));
 
 /// Return an mpsndarray object will copy contents if the contents are not stored in an MPS ndarray.
 ///

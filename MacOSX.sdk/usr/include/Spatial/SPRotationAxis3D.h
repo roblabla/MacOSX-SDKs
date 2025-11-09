@@ -89,4 +89,8 @@ bool SPRotationAxis3DEqualToRotationAxis(SPRotationAxis3D axis1, SPRotationAxis3
     return simd_equal(axis1.vector, axis2.vector);
 }
 
+
+
+
+
 #endif /* Spatial_SPRotationAxis3D_h */

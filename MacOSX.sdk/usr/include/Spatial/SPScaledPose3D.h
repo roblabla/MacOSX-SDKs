@@ -2,7 +2,6 @@
 #define SPScaledPose3D_h
 
 #include <Spatial/Structures.h>
-#include <stdio.h>
 
 // MARK: - Creating a scaled pose
 

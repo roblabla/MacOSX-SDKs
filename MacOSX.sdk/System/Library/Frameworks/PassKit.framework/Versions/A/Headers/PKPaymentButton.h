@@ -34,6 +34,11 @@ API_AVAILABLE(macos(11.0), ios(8.3))
 
 - (instancetype)initWithPaymentButtonType:(PKPaymentButtonType)type paymentButtonStyle:(PKPaymentButtonStyle)style API_AVAILABLE(macos(11.0), ios(9.0)) NS_DESIGNATED_INITIALIZER;
 
++ (instancetype)buttonWithType:(PKPaymentButtonType)buttonType style:(PKPaymentButtonStyle)buttonStyle disableCardArt:(BOOL)disableCardArt API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos) NS_SWIFT_UNAVAILABLE("Not available on macOS");
+
+- (instancetype)initWithPaymentButtonType:(PKPaymentButtonType)type paymentButtonStyle:(PKPaymentButtonStyle)style disableCardArt:(BOOL)disableCardArt API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos) NS_SWIFT_NAME(init(type:style:disableCardArt:));
+
+
 @property (nonatomic, assign) CGFloat cornerRadius API_AVAILABLE(macos(11.0), ios(12.0));
 
 @end

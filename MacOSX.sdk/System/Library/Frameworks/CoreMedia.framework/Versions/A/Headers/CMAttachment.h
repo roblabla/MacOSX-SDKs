@@ -87,7 +87,7 @@ CM_EXPORT void	CMRemoveAllAttachments(CMAttachmentBearerRef CM_NONNULL target) A
     @result     A CFDictionary with all buffer attachments identified by there keys. If no attachment is present, NULL is returned.  Returns NULL
 		for invalid attachment mode.
 */
-CM_EXPORT CFDictionaryRef CM_NULLABLE CMCopyDictionaryOfAttachments(CFAllocatorRef CM_NULLABLE allocator, CMAttachmentBearerRef CM_NONNULL target, CMAttachmentMode attachmentMode) API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
+CM_EXPORT CFDictionaryRef CM_NULLABLE CMCopyDictionaryOfAttachments(CFAllocatorRef CM_NULLABLE allocator, CMAttachmentBearerRef CM_NONNULL target, CMAttachmentMode attachmentMode) CM_SWIFT_SENDING_RETAINED_RESULT API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
     @function   CMSetAttachments

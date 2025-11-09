@@ -4,6 +4,9 @@
 //  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
+#include <TargetConditionals.h>
+
+
 #import <ARKit/ARSCNView.h>
 #import <ARKit/ARSCNFaceGeometry.h>
 #import <ARKit/ARSCNPlaneGeometry.h>
@@ -12,5 +15,4 @@
 #endif //__has_include(<ARKit/ARSKView.h>)
 
 #import <ARKit/ARCoachingOverlayView.h>
-#import <ARKit/ARQuickLookPreviewItem.h>
 

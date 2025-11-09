@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/WorkflowResponsiveness.framework/Versions/A/WorkflowResponsiveness'
-current-version: 383.8
+current-version: 407
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -16,9 +16,10 @@ exports:
                        _WRDiagnosticTriggerThresholdDurationSingleKey, _WRDiagnosticTriggerThresholdDurationSumKey, 
                        _WRDiagnosticTriggerThresholdDurationUnionKey, _WRErrorDomain, 
                        _WRIsDisabledWorkflow, _WRSanitizeForCA, _WRSignpostCategoryKey, 
-                       _WRSignpostDiagnosticsKey, _WRSignpostDiagnosticsThresholdCountKey, 
-                       _WRSignpostDiagnosticsThresholdIntervalKey, _WRSignpostEnvironmentFieldNamesKey, 
-                       _WRSignpostEventEndGroupKey, _WRSignpostEventEndKey, _WRSignpostEventIdentifierFieldNameKey, 
+                       _WRSignpostCustomEnvironmentCoreAnalyticsEventNameKey, _WRSignpostDiagnosticsKey, 
+                       _WRSignpostDiagnosticsThresholdCountKey, _WRSignpostDiagnosticsThresholdIntervalKey, 
+                       _WRSignpostEnvironmentFieldNamesKey, _WRSignpostEventEndGroupKey, 
+                       _WRSignpostEventEndKey, _WRSignpostEventIdentifierFieldNameKey, 
                        _WRSignpostEventOverallIntervalKey, _WRSignpostEventStartKey, 
                        _WRSignpostIndividuationFieldNameKey, _WRSignpostNameKey, 
                        _WRSignpostNetworkBoundKey, _WRSignpostSubsystemKey, _WRTaskingDictForWorkflow, 

@@ -2,10 +2,11 @@
 //  VZVirtualMachineView.h
 //  Virtualization
 //
-//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//  Copyright © 2019-2025 Apple Inc. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
+
 #import <Virtualization/VZDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -48,4 +49,3 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
 @end
 
 NS_ASSUME_NONNULL_END
-

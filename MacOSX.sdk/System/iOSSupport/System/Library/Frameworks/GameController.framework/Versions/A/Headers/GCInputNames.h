@@ -56,11 +56,20 @@ GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonX API_AVAILABLE(macos(11.0)
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputButtonY API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(y);
 
 GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputDirectionPad API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) NS_SWIFT_NAME(directionPad);
+
+GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputThumbstick API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
 GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputLeftThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXPORT GCInputDirectionPadName GCInputRightThumbstick API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputThumbstickButton API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightThumbstickButton API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+
+/*
+ * Grip Buttons
+ */
+
+GAMECONTROLLER_EXTERN GCInputButtonName GCInputGripButton API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
 
 /*
  * Shoulder Buttons
@@ -76,6 +85,7 @@ GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightShoulder API_AVAILABLE(macos
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightBumper API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1));
 
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputTrigger API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputLeftTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightTrigger API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
@@ -152,3 +162,13 @@ GAMECONTROLLER_EXPORT GCInputButtonName GCInputRightPaddle API_AVAILABLE(macos(1
 
 /// Gets the name of an arcade button at a certain position.
 GAMECONTROLLER_EXPORT GCInputButtonName GCInputArcadeButtonName(NSInteger row, NSInteger column) NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+
+
+#pragma mark - (Spatial) Stylus Buttons
+
+/** The stylus tip button used to detect contact with a surface.  */
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputStylusTip API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos);
+/** The stylus button used for interacting with virtual objects. */
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputStylusPrimaryButton API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos);
+/** The stylus button used for drawing and writing in air. */
+GAMECONTROLLER_EXPORT GCInputButtonName GCInputStylusSecondaryButton API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos);

@@ -11,6 +11,7 @@
 #include <ModelIO/ModelIOExports.h>
 #include <ModelIO/MDLAsset.h>
 
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0))
 MDL_EXPORT
 @interface MDLUtility : NSObject
 +(void)convertToUSDZ:(nonnull NSURL*)inputURL writeToURL:(nonnull NSURL*)outputURL;

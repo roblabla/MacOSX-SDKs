@@ -213,7 +213,9 @@ MusicDeviceMIDIEvent(	MusicDeviceComponent	inUnit,
 						UInt32					inStatus,
 						UInt32					inData1,
 						UInt32					inData2,
-						UInt32					inOffsetSampleFrame)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+						UInt32					inOffsetSampleFrame)
+							CA_REALTIME_API
+							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicDeviceSysEx
@@ -234,7 +236,9 @@ MusicDeviceMIDIEvent(	MusicDeviceComponent	inUnit,
 extern OSStatus
 MusicDeviceSysEx(		MusicDeviceComponent	inUnit,
 						const UInt8 *			inData,
-						UInt32					inLength)							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+						UInt32					inLength)
+							CA_REALTIME_API
+							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicDeviceMIDIEventList
@@ -267,7 +271,9 @@ MusicDeviceSysEx(		MusicDeviceComponent	inUnit,
 extern OSStatus
 MusicDeviceMIDIEventList(   MusicDeviceComponent			inUnit,
 							UInt32							inOffsetSampleFrame,
-							const struct MIDIEventList *	evtList)				API_AVAILABLE(macos(12), ios(15.0), tvos(15.0));
+							const struct MIDIEventList *	evtList)
+								CA_REALTIME_API
+								API_AVAILABLE(macos(12), ios(15.0), tvos(15.0));
 
 /*!
 	@function	MusicDeviceStartNote
@@ -314,7 +320,9 @@ MusicDeviceStartNote(	MusicDeviceComponent				inUnit,
 						MusicDeviceGroupID					inGroupID,
 						NoteInstanceID *					outNoteInstanceID,
 						UInt32								inOffsetSampleFrame,
-						const MusicDeviceNoteParams *	 	inParams)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+						const MusicDeviceNoteParams *	 	inParams)
+							CA_REALTIME_API
+							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 /*!
 	@function	MusicDeviceStopNote
@@ -338,7 +346,9 @@ extern OSStatus
 MusicDeviceStopNote(	MusicDeviceComponent	inUnit,
 						MusicDeviceGroupID		inGroupID,
 						NoteInstanceID			inNoteInstanceID,
-						UInt32					inOffsetSampleFrame)				API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
+						UInt32					inOffsetSampleFrame)
+							CA_REALTIME_API
+							API_AVAILABLE(macos(10.0), ios(5.0), watchos(2.0), tvos(9.0));
 
 
 /*!
@@ -386,7 +396,7 @@ typedef OSStatus
 								UInt32					inStatus,
 								UInt32					inData1,
 								UInt32					inData2,
-								UInt32					inOffsetSampleFrame);
+								UInt32					inOffsetSampleFrame) CA_REALTIME_API;
 
 /*!
 	@typedef		MusicDeviceSysExProc
@@ -403,7 +413,7 @@ typedef OSStatus
 typedef OSStatus
 (*MusicDeviceSysExProc)(	void *						self,
 							const UInt8 *				inData,
-							UInt32						inLength);
+							UInt32						inLength) CA_REALTIME_API;
 
 /*!
 	@typedef		MusicDeviceStartNoteProc
@@ -423,7 +433,7 @@ typedef OSStatus
 						MusicDeviceGroupID				inGroupID,
 						NoteInstanceID *				outNoteInstanceID,
 						UInt32							inOffsetSampleFrame,
-						const MusicDeviceNoteParams *	inParams);
+						const MusicDeviceNoteParams *	inParams) CA_REALTIME_API;
 
 /*!
 	@typedef		MusicDeviceStopNoteProc
@@ -441,7 +451,7 @@ typedef OSStatus
 (*MusicDeviceStopNoteProc)(	void *						self,
 						MusicDeviceGroupID				inGroupID,
 						NoteInstanceID					inNoteInstanceID,
-						UInt32							inOffsetSampleFrame);
+						UInt32							inOffsetSampleFrame) CA_REALTIME_API;
 
 
 //=====================================================================================================================

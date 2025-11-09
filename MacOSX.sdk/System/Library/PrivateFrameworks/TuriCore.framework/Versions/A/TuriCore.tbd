@@ -134,10 +134,6 @@ exports:
                        _tc_v1_variant_is_string, _tc_v1_variant_model, _tc_v1_variant_parameters, 
                        _tc_v1_variant_sarray, _tc_v1_variant_sframe, _tc_v1_variant_string_data, 
                        _tc_v1_variant_string_length ]
-    objc-classes:    [ TCActivityClassifierTrainer, TCActivityClassifierTrainerOptions, 
-                       TCComputeDevice, TCComputeDeviceManager, TCHumanActionRecognitionTrainer, 
-                       TCHumanActionRecognitionTrainerSTGCNOptions, TCModelTrainerBackendGraphs, 
-                       TCModelTrainerBackendGraphsWithSplitLoss, TCObjectDetectorTrainer, 
-                       TCObjectDetectorTrainerDarknetYOLOOptions, TCObjectDetectorTrainerSceneNetOptions, 
-                       TCPreferences ]
+    objc-classes:    [ TCComputeDevice, TCComputeDeviceManager, TCModelTrainerBackendGraphs, 
+                       TCModelTrainerBackendGraphsWithSplitLoss, TCPreferences ]
 ...

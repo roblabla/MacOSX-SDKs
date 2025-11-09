@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 4024.600.4 -module-name MusicKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 4025.140.2 -module-name MusicKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Combine
 import CoreGraphics
 import DeveloperToolsSupport
@@ -14,16 +14,22 @@ import _SwiftConcurrencyShims
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer {
   public class Queue : Combine.ObservableObject, Swift.ExpressibleByArrayLiteral {
+    #if compiler(>=5.3) && $NonescapableTypes
     required public init<S, PlayableMusicItemType>(for playableItems: S, startingAt startPlayableItem: S.Element? = nil) where S : Swift.Sequence, PlayableMusicItemType : MusicKit.PlayableMusicItem, PlayableMusicItemType == S.Element
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     required public init<S>(_ entries: S, startingAt startEntry: S.Element? = nil) where S : Swift.Sequence, S.Element == MusicKit.MusicPlayer.Queue.Entry
+    #endif
     @available(iOS 16.4, tvOS 16.4, visionOS 1.0, macOS 14.0, *)
     required public init(album: MusicKit.Album, startingAt startTrack: MusicKit.Track)
     @available(iOS 16.4, tvOS 16.4, visionOS 1.0, macOS 14.0, *)
     required public init(playlist: MusicKit.Playlist, startingAt startPlaylistEntry: MusicKit.Playlist.Entry)
+    #if compiler(>=5.3) && $NonescapableTypes
     public var currentEntry: MusicKit.MusicPlayer.Queue.Entry? {
       get
       set
     }
+    #endif
     public func insert<S, PlayableMusicItemType>(_ playableItems: S, position: MusicKit.MusicPlayer.Queue.EntryInsertionPosition) async throws where S : Swift.Sequence, PlayableMusicItemType : MusicKit.PlayableMusicItem, PlayableMusicItemType == S.Element
     public func insert<S>(_ entries: S, position: MusicKit.MusicPlayer.Queue.EntryInsertionPosition) async throws where S : Swift.Sequence, S.Element == MusicKit.MusicPlayer.Queue.Entry
     public func insert<PlayableMusicItemType>(_ playableItem: PlayableMusicItemType, position: MusicKit.MusicPlayer.Queue.EntryInsertionPosition) async throws where PlayableMusicItemType : MusicKit.PlayableMusicItem
@@ -76,25 +82,39 @@ public struct MusicLibrarySectionedRequest<SectionType, MusicItemType> where Sec
   public var limit: Swift.Int
   public var offset: Swift.Int
   public var includeOnlyDownloadedContent: Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filterItems<RelatedMusicItemType>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, MusicKit.MusicItemCollection<RelatedMusicItemType>?>, contains relatedItem: RelatedMusicItemType) where RelatedMusicItemType : MusicKit.MusicItem
+  #endif
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public mutating func filterItems(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Swift.String>, contains text: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   public mutating func filterItems(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Swift.String?>, contains text: Swift.String)
+  #endif
   public mutating func filterItems<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value>, equalTo value: Value) where Value : MusicKit.MusicLibraryRequestFilterValueEquatable
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filterItems<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value?>, equalTo value: Value?) where Value : MusicKit.MusicLibraryRequestFilterValueEquatable
+  #endif
   public mutating func filterItems<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value>, memberOf values: [Value]) where Value : MusicKit.MusicLibraryRequestFilterValueMembershipComparable
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filterItems<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value?>, memberOf values: [Value?]) where Value : MusicKit.MusicLibraryRequestFilterValueMembershipComparable
+  #endif
   public mutating func filterItems(text: Swift.String)
   public mutating func sortItems<Value>(by keyPath: Swift.KeyPath<MusicItemType.LibrarySortProperties, Value>, ascending: Swift.Bool)
   public mutating func filterSections(matching keyPath: Swift.KeyPath<SectionType.LibraryFilter, Swift.String>, contains text: Swift.String) where SectionType : MusicKit.MusicLibraryRequestable
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filterSections(matching keyPath: Swift.KeyPath<SectionType.LibraryFilter, Swift.String?>, contains text: Swift.String) where SectionType : MusicKit.MusicLibraryRequestable
+  #endif
   public mutating func filterSections<Value>(matching keyPath: Swift.KeyPath<SectionType.LibraryFilter, Value>, equalTo value: Value) where SectionType : MusicKit.MusicLibraryRequestable, Value : MusicKit.MusicLibraryRequestFilterValueEquatable
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filterSections<Value>(matching keyPath: Swift.KeyPath<SectionType.LibraryFilter, Value?>, equalTo value: Value?) where SectionType : MusicKit.MusicLibraryRequestable, Value : MusicKit.MusicLibraryRequestFilterValueEquatable
+  #endif
   public mutating func filterSections<Value>(matching keyPath: Swift.KeyPath<SectionType.LibraryFilter, Value>, memberOf values: [Value]) where SectionType : MusicKit.MusicLibraryRequestable, Value : MusicKit.MusicLibraryRequestFilterValueMembershipComparable
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filterSections<Value>(matching keyPath: Swift.KeyPath<SectionType.LibraryFilter, Value?>, memberOf values: [Value?]) where SectionType : MusicKit.MusicLibraryRequestable, Value : MusicKit.MusicLibraryRequestFilterValueMembershipComparable
+  #endif
   public mutating func filterSections(text: Swift.String) where SectionType : MusicKit.MusicLibraryRequestable
   public mutating func sortSections<Value>(by keyPath: Swift.KeyPath<SectionType.LibrarySortProperties, Value>, ascending: Swift.Bool) where SectionType : MusicKit.MusicLibraryRequestable
   public func response() async throws -> MusicKit.MusicLibrarySectionedResponse<SectionType, MusicItemType>
@@ -123,24 +143,32 @@ extension MusicKit.MusicItem where Self : MusicKit.MusicPropertyContainer, Self 
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 public struct Curator : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
   public var kind: MusicKit.Curator.Kind {
     get
   }
   public var name: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Curator, b: MusicKit.Curator) -> Swift.Bool
   @available(iOS 15.4, tvOS 15.4, watchOS 9.0, visionOS 1.0, macOS 12.3, *)
   public typealias ID = MusicKit.MusicItemID
@@ -151,18 +179,24 @@ public struct Curator : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swi
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Curator : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Curator, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Curator, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Curator, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Curator {
@@ -363,14 +397,18 @@ extension MusicKit.MusicPlayer {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var repeatMode: MusicKit.MusicPlayer.RepeatMode? {
       get
       set
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var shuffleMode: MusicKit.MusicPlayer.ShuffleMode? {
       get
       set
     }
+    #endif
     @available(iOS 16.0, tvOS 16.0, visionOS 1.0, *)
     public var audioVariant: MusicKit.AudioVariant? {
       get
@@ -387,36 +425,52 @@ extension MusicKit.MusicPlayer {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Station : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var contentRating: MusicKit.ContentRating? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var duration: Foundation.TimeInterval? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var episodeNumber: Swift.Int? {
     get
   }
+  #endif
   public var isLive: Swift.Bool {
     get
   }
   public var name: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playParameters: MusicKit.PlayParameters? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var stationProviderName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Station, b: MusicKit.Station) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -427,18 +481,24 @@ public struct Station : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swi
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Station : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Station, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Station, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Station, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
@@ -478,27 +538,39 @@ extension MusicKit.Station : Swift.CustomStringConvertible, Swift.CustomDebugStr
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct RecordLabel : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var shortDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var standardDescription: Swift.String? {
     get
   }
+  #endif
   public var name: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var latestReleases: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var topReleases: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.RecordLabel, b: MusicKit.RecordLabel) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -509,18 +581,24 @@ public struct RecordLabel : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable,
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.RecordLabel : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.RecordLabel, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.RecordLabel, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.RecordLabel, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.RecordLabel {
@@ -698,10 +776,14 @@ extension MusicKit.MusicCatalogChart : Swift.CustomStringConvertible, Swift.Cust
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 public struct MusicCatalogChartsRequest : Swift.Equatable, Swift.Hashable, Swift.Sendable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(genre: MusicKit.Genre? = nil, kinds: [MusicKit.MusicCatalogChartKind] = [.mostPlayed], types: [any MusicKit.MusicCatalogChartRequestable.Type])
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var genre: MusicKit.Genre? {
     get
   }
+  #endif
   public var kinds: [MusicKit.MusicCatalogChartKind] {
     get
   }
@@ -734,7 +816,7 @@ public class PartialMusicProperty<Root> : MusicKit.AnyMusicProperty, @unchecked 
 public class PartialMusicAsyncProperty<Root> : MusicKit.PartialMusicProperty<Root>, @unchecked Swift.Sendable {
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class MusicAttributeProperty<Root, Value> : MusicKit.PartialMusicProperty<Root>, Swift.CustomStringConvertible, @unchecked Swift.Sendable where Value : Swift.Decodable {
   @usableFromInline
   internal init(_ name: Swift.String)
@@ -743,7 +825,7 @@ public class MusicAttributeProperty<Root, Value> : MusicKit.PartialMusicProperty
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class MusicExtendedAttributeProperty<Root, Value> : MusicKit.PartialMusicAsyncProperty<Root>, Swift.CustomStringConvertible, @unchecked Swift.Sendable where Value : Swift.Decodable {
   @usableFromInline
   internal init(_ name: Swift.String)
@@ -755,7 +837,7 @@ public class MusicExtendedAttributeProperty<Root, Value> : MusicKit.PartialMusic
   }
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+@_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public class MusicRelationshipProperty<Root, RelatedMusicItemType> : MusicKit.PartialMusicAsyncProperty<Root>, Swift.CustomStringConvertible, @unchecked Swift.Sendable where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
   @usableFromInline
   internal init(_ name: Swift.String, kind: MusicKit.MusicRelationshipPropertyKind = .model)
@@ -817,33 +899,45 @@ public class MusicLibrary {
   @available(macCatalyst, unavailable)
   @discardableResult
   public func add<MusicItemType>(_ item: MusicItemType, to playlist: MusicKit.Playlist) async throws -> MusicKit.Playlist where MusicItemType : MusicKit.MusicPlaylistAddable
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   @discardableResult
   public func createPlaylist(name: Swift.String, description: Swift.String? = nil, authorDisplayName: Swift.String? = nil) async throws -> MusicKit.Playlist
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   @discardableResult
   public func createPlaylist<S, MusicPlaylistAddableType>(name: Swift.String, description: Swift.String? = nil, authorDisplayName: Swift.String? = nil, items: S) async throws -> MusicKit.Playlist where S : Swift.Sequence, MusicPlaylistAddableType : MusicKit.MusicPlaylistAddable, MusicPlaylistAddableType == S.Element
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   @discardableResult
   public func edit(_ playlist: MusicKit.Playlist, name: Swift.String? = nil, description: Swift.String? = nil, authorDisplayName: Swift.String? = nil) async throws -> MusicKit.Playlist
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, unavailable)
   @available(macCatalyst, unavailable)
   @discardableResult
   public func edit<S, MusicPlaylistAddableType>(_ playlist: MusicKit.Playlist, name: Swift.String? = nil, description: Swift.String? = nil, authorDisplayName: Swift.String? = nil, items: S) async throws -> MusicKit.Playlist where S : Swift.Sequence, MusicPlaylistAddableType : MusicKit.MusicPlaylistAddable, MusicPlaylistAddableType == S.Element
+  #endif
 }
 @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 public protocol PlayableMusicItem : MusicKit.MusicItem {
+  #if compiler(>=5.3) && $NonescapableTypes
   var playParameters: MusicKit.PlayParameters? { get }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicSubscription {
   public struct Updates : _Concurrency.AsyncSequence {
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> MusicKit.MusicSubscription?
+      #endif
       @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = MusicKit.MusicSubscription
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -897,7 +991,9 @@ public struct MusicPersonalRecommendationsRequest : Swift.Equatable, Swift.Hasha
 @available(visionOS, unavailable)
 extension MusicKit.MusicPlayer.Transition {
   public struct CrossfadeOptions : Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(duration: Foundation.TimeInterval? = nil)
+    #endif
     public static func == (a: MusicKit.MusicPlayer.Transition.CrossfadeOptions, b: MusicKit.MusicPlayer.Transition.CrossfadeOptions) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1028,24 +1124,34 @@ extension MusicKit.MusicDataRequest {
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 public struct RadioShow : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var hostName: Swift.String? {
     get
   }
+  #endif
   public var name: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.RadioShow, b: MusicKit.RadioShow) -> Swift.Bool
   @available(iOS 15.4, tvOS 15.4, watchOS 9.0, visionOS 1.0, macOS 12.3, *)
   public typealias ID = MusicKit.MusicItemID
@@ -1056,18 +1162,24 @@ public struct RadioShow : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, S
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.RadioShow : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.RadioShow, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.RadioShow, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.RadioShow, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.RadioShow {
@@ -1160,9 +1272,11 @@ extension MusicKit.MusicCatalogSearchResponse {
     public var id: MusicKit.MusicItemID {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artwork: MusicKit.Artwork? {
       get
     }
+    #endif
     public var title: Swift.String {
       get
     }
@@ -1218,19 +1332,29 @@ extension MusicKit.MusicSubscription {
     case unknown
     case permissionDenied
     case privacyAcknowledgementRequired
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var failureReason: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var helpAnchor: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -1310,7 +1434,9 @@ extension MusicKit.MusicPlayer {
     case none
     case crossfade(options: MusicKit.MusicPlayer.Transition.CrossfadeOptions)
     public static let crossfade: MusicKit.MusicPlayer.Transition
+    #if compiler(>=5.3) && $NonescapableTypes
     public static func crossfade(duration: Foundation.TimeInterval?) -> MusicKit.MusicPlayer.Transition
+    #endif
     public static func == (a: MusicKit.MusicPlayer.Transition, b: MusicKit.MusicPlayer.Transition) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -1339,7 +1465,9 @@ extension MusicKit.MusicAuthorization {
     case denied
     case restricted
     case authorized
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -1376,32 +1504,46 @@ extension MusicKit.MusicDataResponse : Swift.CustomStringConvertible, Swift.Cust
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue {
   public struct Entry : Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.CustomStringConvertible {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(_ playableMusicItem: any MusicKit.PlayableMusicItem, startTime: Foundation.TimeInterval? = nil, endTime: Foundation.TimeInterval? = nil)
+    #endif
     public let id: Swift.String
     public var title: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var subtitle: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artwork: MusicKit.Artwork? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var item: MusicKit.MusicPlayer.Queue.Entry.Item? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var transientItem: (any MusicKit.PlayableMusicItem)? {
       get
     }
+    #endif
     public var isTransient: Swift.Bool {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var startTime: Foundation.TimeInterval? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var endTime: Foundation.TimeInterval? {
       get
     }
+    #endif
     public var description: Swift.String {
       get
     }
@@ -1422,21 +1564,30 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
   public var id: MusicKit.MusicItemID {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var albumTitle: Swift.String? {
     get
   }
+  #endif
   public var artistName: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artistURL: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var contentRating: MusicKit.ContentRating? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public var discNumber: Swift.Int? {
     get {
         let discNumber: Int?
@@ -1451,60 +1602,91 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
         return discNumber
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var duration: Foundation.TimeInterval? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
   public var genreNames: [Swift.String] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var isrc: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var playCount: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playParameters: MusicKit.PlayParameters? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var previewAssets: [MusicKit.PreviewAsset]? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var releaseDate: Foundation.Date? {
     get
   }
+  #endif
   public var title: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var trackNumber: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var workName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var albums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Track, b: MusicKit.Track) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -1515,18 +1697,24 @@ public enum Track : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.I
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Track : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Track, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Track, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Track, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
@@ -1545,24 +1733,50 @@ extension MusicKit.Track : MusicKit.MusicLibraryRequestable {
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryTrackFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var albums: MusicKit.MusicItemCollection<MusicKit.Album>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var albumTitle: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artistName: Swift.String? { get }
+  #endif
   var title: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryTrackSortProperties {
+  #if compiler(>=5.3) && $NonescapableTypes
   var albumTitle: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artistName: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var discNumber: Swift.Int? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var duration: Foundation.TimeInterval? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var lastPlayedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var libraryAddedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var playCount: Swift.Int? { get }
+  #endif
   var title: Swift.String { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var trackNumber: Swift.Int? { get }
+  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Track : MusicKit.MusicRecentlyPlayedRequestable {
@@ -1591,7 +1805,9 @@ public struct Artwork : Swift.Equatable, Swift.Hashable, Swift.Sendable {
   public let secondaryTextColor: CoreGraphics.CGColor?
   public let tertiaryTextColor: CoreGraphics.CGColor?
   public let quaternaryTextColor: CoreGraphics.CGColor?
+  #if compiler(>=5.3) && $NonescapableTypes
   public func url(width: Swift.Int, height: Swift.Int) -> Foundation.URL?
+  #endif
   public static func == (a: MusicKit.Artwork, b: MusicKit.Artwork) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -1620,60 +1836,88 @@ extension MusicKit.Playlist.Entry {
     public var id: MusicKit.MusicItemID {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artwork: MusicKit.Artwork? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var albumTitle: Swift.String? {
       get
     }
+    #endif
     public var artistName: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artistURL: Foundation.URL? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var contentRating: MusicKit.ContentRating? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var duration: Foundation.TimeInterval? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var editorialNotes: MusicKit.EditorialNotes? {
       get
     }
+    #endif
     public var genreNames: [Swift.String] {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, macCatalyst 17.0, *)
     public var lastPlayedDate: Foundation.Date? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, macCatalyst 17.0, *)
     public var libraryAddedDate: Foundation.Date? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var isrc: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, macCatalyst 17.0, *)
     public var playCount: Swift.Int? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var playParameters: MusicKit.PlayParameters? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var previewAssets: [MusicKit.PreviewAsset]? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var releaseDate: Foundation.Date? {
       get
     }
+    #endif
     public var title: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var url: Foundation.URL? {
       get
     }
+    #endif
     public static func == (a: MusicKit.Playlist.Entry.Item, b: MusicKit.Playlist.Entry.Item) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = MusicKit.MusicItemID
@@ -1685,18 +1929,24 @@ extension MusicKit.Playlist.Entry {
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension MusicKit.Playlist.Entry.Item : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Playlist.Entry.Item, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Playlist.Entry.Item, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Playlist.Entry.Item, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 16.0, tvOS 16.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
@@ -1728,15 +1978,19 @@ extension MusicKit.MusicPersonalRecommendation {
     public var id: MusicKit.MusicItemID {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artwork: MusicKit.Artwork? {
       get
     }
+    #endif
     public var title: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var subtitle: Swift.String? {
       get
     }
+    #endif
     public static func == (a: MusicKit.MusicPersonalRecommendation.Item, b: MusicKit.MusicPersonalRecommendation.Item) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = MusicKit.MusicItemID
@@ -1911,8 +2165,12 @@ public class MusicPlayer {
 @available(watchOS, unavailable)
 extension MusicKit.ApplicationMusicPlayer {
   @_inheritsConvenienceInitializers public class Queue : MusicKit.MusicPlayer.Queue {
+    #if compiler(>=5.3) && $NonescapableTypes
     required public init<S, PlayableMusicItemType>(for playableItems: S, startingAt startPlayableItem: S.Element? = nil) where S : Swift.Sequence, PlayableMusicItemType : MusicKit.PlayableMusicItem, PlayableMusicItemType == S.Element
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     required public init<S>(_ entries: S, startingAt startEntry: S.Element? = nil) where S : Swift.Sequence, S.Element == MusicKit.MusicPlayer.Queue.Entry
+    #endif
     required public init(arrayLiteral elements: any MusicKit.PlayableMusicItem...)
     @available(iOS 16.4, tvOS 16.4, visionOS 1.0, macOS 14.0, *)
     required public init(album: MusicKit.Album, startingAt startTrack: MusicKit.Track)
@@ -1939,7 +2197,9 @@ extension MusicKit.ApplicationMusicPlayer {
         get
       }
       public func index(_ i: MusicKit.ApplicationMusicPlayer.Queue.Entries.Index, offsetBy distance: Swift.Int) -> MusicKit.ApplicationMusicPlayer.Queue.Entries.Index
+      #if compiler(>=5.3) && $NonescapableTypes
       public func index(_ i: MusicKit.ApplicationMusicPlayer.Queue.Entries.Index, offsetBy distance: Swift.Int, limitedBy limit: MusicKit.ApplicationMusicPlayer.Queue.Entries.Index) -> MusicKit.ApplicationMusicPlayer.Queue.Entries.Index?
+      #endif
       public func index(after i: MusicKit.ApplicationMusicPlayer.Queue.Entries.Index) -> MusicKit.ApplicationMusicPlayer.Queue.Entries.Index
       public func formIndex(after i: inout MusicKit.ApplicationMusicPlayer.Queue.Entries.Index)
       public func distance(from start: MusicKit.ApplicationMusicPlayer.Queue.Entries.Index, to end: MusicKit.ApplicationMusicPlayer.Queue.Entries.Index) -> Swift.Int
@@ -2025,22 +2285,32 @@ extension MusicKit.MusicLibrary {
     case addToPlaylistFailed
     case createPlaylistFailed
     case editPlaylistFailed
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var failureReason: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var helpAnchor: Swift.String? {
       get
     }
+    #endif
     public var description: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.String)
+    #endif
     @available(iOS 16.1, tvOS 16.1, watchOS 9.1, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
     public typealias RawValue = Swift.String
     public var rawValue: Swift.String {
@@ -2057,22 +2327,32 @@ public enum MusicTokenRequestError : Swift.String, Foundation.LocalizedError, Sw
   case privacyAcknowledgementRequired
   case developerTokenRequestFailed
   case userTokenRequestFailed
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recoverySuggestion: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var helpAnchor: Swift.String? {
     get
   }
+  #endif
   public var description: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias RawValue = Swift.String
   public var rawValue: Swift.String {
@@ -2082,93 +2362,141 @@ public enum MusicTokenRequestError : Swift.String, Foundation.LocalizedError, Sw
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var albumTitle: Swift.String? {
     get
   }
+  #endif
   public var artistName: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artistURL: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var contentRating: MusicKit.ContentRating? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var duration: Foundation.TimeInterval? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
   public var genreNames: [Swift.String] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var has4K: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var hasHDR: Swift.Bool? {
     get
   }
+  #endif
   public var isPreview: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var isrc: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var playCount: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playParameters: MusicKit.PlayParameters? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var previewAssets: [MusicKit.PreviewAsset]? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var releaseDate: Foundation.Date? {
     get
   }
+  #endif
   public var title: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var trackNumber: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var workName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var albums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var songs: MusicKit.MusicItemCollection<MusicKit.Song>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var moreByArtist: MusicKit.MusicItemCollection<MusicKit.MusicVideo>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var moreInGenre: MusicKit.MusicItemCollection<MusicKit.MusicVideo>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.MusicVideo, b: MusicKit.MusicVideo) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -2179,18 +2507,24 @@ public struct MusicVideo : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, 
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.MusicVideo, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.MusicVideo, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.MusicVideo, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.MusicVideo {
@@ -2215,7 +2549,9 @@ extension MusicKit.MusicVideo : MusicKit.MusicCatalogSearchable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol MusicVideoFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var isrc: Swift.String? { get }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicVideo : MusicKit.FilterableMusicItem {
@@ -2234,23 +2570,47 @@ extension MusicKit.MusicVideo : MusicKit.MusicLibraryRequestable {
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryMusicVideoFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var albums: MusicKit.MusicItemCollection<MusicKit.Album>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var albumTitle: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artistName: Swift.String? { get }
+  #endif
   var title: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryMusicVideoSortProperties {
+  #if compiler(>=5.3) && $NonescapableTypes
   var albumTitle: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artistName: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var duration: Foundation.TimeInterval? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var lastPlayedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var libraryAddedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var playCount: Swift.Int? { get }
+  #endif
   var title: Swift.String { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var trackNumber: Swift.Int? { get }
+  #endif
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.MusicVideo : MusicKit.MusicLibrarySearchable {
@@ -2347,13 +2707,17 @@ public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
   public var name: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var parent: MusicKit.Genre? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 15.2, macCatalyst 18.2, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Genre, b: MusicKit.Genre) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -2364,18 +2728,24 @@ public struct Genre : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Genre : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Genre, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Genre, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Genre, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol GenreFilter {
@@ -2400,7 +2770,9 @@ public protocol LibraryGenreFilter {
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryGenreSortProperties {
+  #if compiler(>=5.3) && $NonescapableTypes
   var libraryAddedDate: Foundation.Date? { get }
+  #endif
   var name: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.2, macCatalyst 17.2, *)
@@ -2423,75 +2795,117 @@ extension MusicKit.Genre : Swift.CustomStringConvertible, Swift.CustomDebugStrin
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   @_alwaysEmitIntoClient public var artwork: MusicKit.Artwork? {
     get {
         return try? self[property: .artwork]
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var genreNames: [Swift.String]? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
+  #endif
   public var name: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var albums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var musicVideos: MusicKit.MusicItemCollection<MusicKit.MusicVideo>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var station: MusicKit.Station? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var appearsOnAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var compilationAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var featuredAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var featuredPlaylists: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var fullAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var latestRelease: MusicKit.Album? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var liveAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var similarArtists: MusicKit.MusicItemCollection<MusicKit.Artist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var singles: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var topMusicVideos: MusicKit.MusicItemCollection<MusicKit.MusicVideo>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var topSongs: MusicKit.MusicItemCollection<MusicKit.Song>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Artist, b: MusicKit.Artist) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -2502,18 +2916,24 @@ public struct Artist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Artist : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Artist, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Artist, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Artist, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Artist {
@@ -2558,14 +2978,22 @@ extension MusicKit.Artist : MusicKit.MusicLibraryRequestable {
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryArtistFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var playlists: MusicKit.MusicItemCollection<MusicKit.Playlist>? { get }
+  #endif
   var name: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryArtistSortProperties {
+  #if compiler(>=5.3) && $NonescapableTypes
   var albumCount: Swift.Int? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var libraryAddedDate: Foundation.Date? { get }
+  #endif
   var name: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
@@ -2599,9 +3027,11 @@ extension MusicKit.MusicLibrarySearchResponse {
     public var id: MusicKit.MusicItemID {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artwork: MusicKit.Artwork? {
       get
     }
+    #endif
     public var title: Swift.String {
       get
     }
@@ -2636,18 +3066,24 @@ public enum RecentlyPlayedMusicItem : MusicKit.MusicItem, Swift.Equatable, Swift
   public var id: MusicKit.MusicItemID {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playParameters: MusicKit.PlayParameters? {
     get
   }
+  #endif
   public var title: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var subtitle: Swift.String? {
     get
   }
+  #endif
   public static func == (a: MusicKit.RecentlyPlayedMusicItem, b: MusicKit.RecentlyPlayedMusicItem) -> Swift.Bool
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -2680,65 +3116,99 @@ extension MusicKit.RecentlyPlayedMusicItem : MusicKit.MusicRecentlyPlayedRequest
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var curatorName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var isChart: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var kind: MusicKit.Playlist.Kind? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var lastModifiedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
+  #endif
   public var name: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playParameters: MusicKit.PlayParameters? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var shortDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var standardDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var curator: MusicKit.Curator? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var entries: MusicKit.MusicItemCollection<MusicKit.Playlist.Entry>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var radioShow: MusicKit.RadioShow? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var tracks: MusicKit.MusicItemCollection<MusicKit.Track>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var featuredArtists: MusicKit.MusicItemCollection<MusicKit.Artist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var moreByCurator: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Playlist, b: MusicKit.Playlist) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -2749,18 +3219,24 @@ public struct Playlist : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Sw
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Playlist : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Playlist, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Playlist, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Playlist, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Playlist {
@@ -2809,8 +3285,12 @@ public protocol LibraryPlaylistFilter {
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryPlaylistSortProperties {
+  #if compiler(>=5.3) && $NonescapableTypes
   var lastPlayedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var libraryAddedDate: Foundation.Date? { get }
+  #endif
   var name: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
@@ -2862,9 +3342,11 @@ extension MusicKit.MusicPlayer.Queue.Entry {
     public var id: MusicKit.MusicItemID {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var playParameters: MusicKit.PlayParameters? {
       get
     }
+    #endif
     public static func == (a: MusicKit.MusicPlayer.Queue.Entry.Item, b: MusicKit.MusicPlayer.Queue.Entry.Item) -> Swift.Bool
     @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
     @available(watchOS, unavailable)
@@ -2878,18 +3360,24 @@ extension MusicKit.MusicPlayer.Queue.Entry {
 @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
 extension MusicKit.MusicPlayer.Queue.Entry.Item : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.MusicPlayer.Queue.Entry.Item, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.MusicPlayer.Queue.Entry.Item, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.MusicPlayer.Queue.Entry.Item, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, tvOS 15.0, visionOS 1.0, macOS 14.0, *)
 @available(watchOS, unavailable)
@@ -2934,66 +3422,96 @@ public protocol MusicCatalogChartRequestable : MusicKit.MusicItem {
 extension MusicKit.Playlist {
   public struct Entry : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
     public let id: MusicKit.MusicItemID
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artwork: MusicKit.Artwork? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var albumTitle: Swift.String? {
       get
     }
+    #endif
     public var artistName: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var artistURL: Foundation.URL? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var contentRating: MusicKit.ContentRating? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var duration: Foundation.TimeInterval? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var editorialNotes: MusicKit.EditorialNotes? {
       get
     }
+    #endif
     public var genreNames: [Swift.String] {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, macCatalyst 17.0, *)
     public var lastPlayedDate: Foundation.Date? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, macCatalyst 17.0, *)
     public var libraryAddedDate: Foundation.Date? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 14.0, macCatalyst 17.0, *)
     public var playCount: Swift.Int? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var isrc: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var item: MusicKit.Playlist.Entry.Item? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var playParameters: MusicKit.PlayParameters? {
       get
     }
+    #endif
     public var position: Swift.Int {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var previewAssets: [MusicKit.PreviewAsset]? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var releaseDate: Foundation.Date? {
       get
     }
+    #endif
     public var title: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var url: Foundation.URL? {
       get
     }
+    #endif
     public static func == (a: MusicKit.Playlist.Entry, b: MusicKit.Playlist.Entry) -> Swift.Bool
     @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 13.0, *)
     public typealias ID = MusicKit.MusicItemID
@@ -3060,13 +3578,21 @@ public struct MusicLibraryRequest<MusicItemType> where MusicItemType : MusicKit.
   public var limit: Swift.Int
   public var offset: Swift.Int
   public var includeOnlyDownloadedContent: Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filter<RelatedMusicItemType>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, MusicKit.MusicItemCollection<RelatedMusicItemType>?>, contains relatedItem: RelatedMusicItemType) where RelatedMusicItemType : MusicKit.MusicItem
+  #endif
   public mutating func filter(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Swift.String>, contains text: Swift.String)
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filter(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Swift.String?>, contains text: Swift.String)
+  #endif
   public mutating func filter<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value>, equalTo value: Value) where Value : MusicKit.MusicLibraryRequestFilterValueEquatable
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filter<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value?>, equalTo value: Value?) where Value : MusicKit.MusicLibraryRequestFilterValueEquatable
+  #endif
   public mutating func filter<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value>, memberOf values: [Value]) where Value : MusicKit.MusicLibraryRequestFilterValueMembershipComparable
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func filter<Value>(matching keyPath: Swift.KeyPath<MusicItemType.LibraryFilter, Value?>, memberOf values: [Value?]) where Value : MusicKit.MusicLibraryRequestFilterValueMembershipComparable
+  #endif
   public mutating func filter(text: Swift.String)
   public mutating func sort<Value>(by keyPath: Swift.KeyPath<MusicItemType.LibrarySortProperties, Value>, ascending: Swift.Bool)
   public func response() async throws -> MusicKit.MusicLibraryResponse<MusicItemType>
@@ -3126,113 +3652,173 @@ public struct MusicSubscription : Swift.Equatable, Swift.Hashable, Swift.Sendabl
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var albumTitle: Swift.String? {
     get
   }
+  #endif
   public var artistName: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artistURL: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var attribution: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var audioVariants: [MusicKit.AudioVariant]? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var composerName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var contentRating: MusicKit.ContentRating? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var discNumber: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var duration: Foundation.TimeInterval? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
   public var genreNames: [Swift.String] {
     get
   }
   public var hasLyrics: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var isAppleDigitalMaster: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var isrc: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var movementCount: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var movementName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var movementNumber: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var playCount: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playParameters: MusicKit.PlayParameters? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var previewAssets: [MusicKit.PreviewAsset]? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var releaseDate: Foundation.Date? {
     get
   }
+  #endif
   public var title: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var trackNumber: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var workName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var albums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var station: MusicKit.Station? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var composers: MusicKit.MusicItemCollection<MusicKit.Artist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var musicVideos: MusicKit.MusicItemCollection<MusicKit.MusicVideo>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Song, b: MusicKit.Song) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -3243,18 +3829,24 @@ public struct Song : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Song : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Song, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Song, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Song, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Song {
@@ -3287,7 +3879,9 @@ extension MusicKit.Song : MusicKit.MusicCatalogSearchable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol SongFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var isrc: Swift.String? { get }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Song : MusicKit.FilterableMusicItem {
@@ -3306,26 +3900,56 @@ extension MusicKit.Song : MusicKit.MusicLibraryRequestable {
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibrarySongFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var albums: MusicKit.MusicItemCollection<MusicKit.Album>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var albumTitle: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artistName: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var composerName: Swift.String? { get }
+  #endif
   var title: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibrarySongSortProperties {
+  #if compiler(>=5.3) && $NonescapableTypes
   var albumTitle: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artistName: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var composerName: Swift.String? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var discNumber: Swift.Int? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var duration: Foundation.TimeInterval? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var lastPlayedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var libraryAddedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var playCount: Swift.Int? { get }
+  #endif
   var title: Swift.String { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var trackNumber: Swift.Int? { get }
+  #endif
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Song : MusicKit.MusicLibrarySearchable {
@@ -3380,97 +4004,147 @@ extension MusicKit.MusicDataRequest.Error.Source : Swift.CustomStringConvertible
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift.Identifiable, Swift.Sendable {
   public let id: MusicKit.MusicItemID
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artwork: MusicKit.Artwork? {
     get
   }
+  #endif
   public var artistName: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artistURL: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var audioVariants: [MusicKit.AudioVariant]? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var contentRating: MusicKit.ContentRating? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var copyright: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var editorialNotes: MusicKit.EditorialNotes? {
     get
   }
+  #endif
   public var genreNames: [Swift.String] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   public var isAppleDigitalMaster: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var isCompilation: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var isComplete: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var isSingle: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var lastPlayedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
   public var libraryAddedDate: Foundation.Date? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var playParameters: MusicKit.PlayParameters? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recordLabelName: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var releaseDate: Foundation.Date? {
     get
   }
+  #endif
   public var title: Swift.String {
     get
   }
   public var trackCount: Swift.Int {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var upc: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var url: Foundation.URL? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var tracks: MusicKit.MusicItemCollection<MusicKit.Track>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recordLabels: MusicKit.MusicItemCollection<MusicKit.RecordLabel>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var appearsOn: MusicKit.MusicItemCollection<MusicKit.Playlist>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var otherVersions: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var relatedAlbums: MusicKit.MusicItemCollection<MusicKit.Album>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var relatedVideos: MusicKit.MusicItemCollection<MusicKit.MusicVideo>? {
     get
   }
+  #endif
   public static func == (a: MusicKit.Album, b: MusicKit.Album) -> Swift.Bool
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = MusicKit.MusicItemID
@@ -3481,18 +4155,24 @@ public struct Album : MusicKit.MusicItem, Swift.Equatable, Swift.Hashable, Swift
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Album : MusicKit.MusicPropertyContainer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicAttributeProperty<MusicKit.Album, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<Value>(property property: MusicKit.MusicExtendedAttributeProperty<MusicKit.Album, Value>) -> Value? where Value : Swift.Decodable {
     get throws
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal subscript<RelatedMusicItemType>(property property: MusicKit.MusicRelationshipProperty<MusicKit.Album, RelatedMusicItemType>) -> MusicKit.MusicItemCollection<RelatedMusicItemType>? where RelatedMusicItemType : MusicKit.MusicItem, RelatedMusicItemType : Swift.Decodable {
     get throws
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.PartialMusicProperty where Root == MusicKit.Album {
@@ -3527,7 +4207,9 @@ extension MusicKit.Album : MusicKit.MusicCatalogSearchable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public protocol AlbumFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var upc: Swift.String? { get }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.Album : MusicKit.FilterableMusicItem {
@@ -3546,20 +4228,32 @@ extension MusicKit.Album : MusicKit.MusicLibraryRequestable {
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryAlbumFilter {
   var id: MusicKit.MusicItemID { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var isCompilation: Swift.Bool? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var artists: MusicKit.MusicItemCollection<MusicKit.Artist>? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var genres: MusicKit.MusicItemCollection<MusicKit.Genre>? { get }
+  #endif
   var title: Swift.String { get }
   var artistName: Swift.String { get }
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 public protocol LibraryAlbumSortProperties {
   var artistName: Swift.String { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var releaseDate: Foundation.Date? { get }
+  #endif
   var title: Swift.String { get }
   var trackCount: Swift.Int { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   var lastPlayedDate: Foundation.Date? { get }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   var libraryAddedDate: Foundation.Date? { get }
+  #endif
 }
 @available(iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, macOS 14.0, macCatalyst 17.0, *)
 extension MusicKit.Album : MusicKit.MusicLibrarySectionRequestable {
@@ -3596,8 +4290,12 @@ extension MusicKit.MusicItemCollection {
   public var hasNextBatch: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func nextBatch(limit: Swift.Int? = nil) async throws -> MusicKit.MusicItemCollection<MusicItemType>?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func nextBatch(limit: Swift.Int? = nil) async throws -> MusicKit.MusicItemCollection<MusicItemType>? where MusicItemType : Swift.Decodable
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension MusicKit.MusicItemCollection : Swift.ExpressibleByArrayLiteral {
@@ -3635,7 +4333,9 @@ extension MusicKit.MusicItemCollection : Swift.RandomAccessCollection {
   public func index(after i: MusicKit.MusicItemCollection<MusicItemType>.Index) -> MusicKit.MusicItemCollection<MusicItemType>.Index
   public func formIndex(after i: inout MusicKit.MusicItemCollection<MusicItemType>.Index)
   public func index(_ i: MusicKit.MusicItemCollection<MusicItemType>.Index, offsetBy distance: Swift.Int) -> MusicKit.MusicItemCollection<MusicItemType>.Index
+  #if compiler(>=5.3) && $NonescapableTypes
   public func index(_ i: MusicKit.MusicItemCollection<MusicItemType>.Index, offsetBy distance: Swift.Int, limitedBy limit: MusicKit.MusicItemCollection<MusicItemType>.Index) -> MusicKit.MusicItemCollection<MusicItemType>.Index?
+  #endif
   public func distance(from start: MusicKit.MusicItemCollection<MusicItemType>.Index, to end: MusicKit.MusicItemCollection<MusicItemType>.Index) -> Swift.Int
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias Iterator = Swift.IndexingIterator<MusicKit.MusicItemCollection<MusicItemType>>

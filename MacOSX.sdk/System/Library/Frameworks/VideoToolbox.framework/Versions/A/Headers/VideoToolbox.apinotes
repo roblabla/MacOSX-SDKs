@@ -33,8 +33,12 @@ Functions:
     SwiftName: "VTDecompressionSessionGetTypeID()"
   - Name: VTDecompressionSessionDecodeFrame
     SwiftName: "VTDecompressionSessionDecodeFrame(_:sampleBuffer:flags:frameRefcon:infoFlagsOut:)"
+  - Name: VTDecompressionSessionDecodeFrameWithOptions
+    SwiftName: "VTDecompressionSessionDecodeFrame(_:sampleBuffer:flags:frameOptions:frameRefcon:infoFlagsOut:)"
   - Name: VTDecompressionSessionDecodeFrameWithOutputHandler
     SwiftName: "VTDecompressionSessionDecodeFrame(_:sampleBuffer:flags:infoFlagsOut:outputHandler:)"
+  - Name: VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler
+    SwiftName: "VTDecompressionSessionDecodeFrame(_:sampleBuffer:flags:frameOptions:infoFlagsOut:outputHandler:)"
   - Name: VTDecompressionSessionFinishDelayedFrames
     SwiftName: "VTDecompressionSessionFinishDelayedFrames(_:)"
   - Name: VTDecompressionSessionCanAcceptFormatDescription

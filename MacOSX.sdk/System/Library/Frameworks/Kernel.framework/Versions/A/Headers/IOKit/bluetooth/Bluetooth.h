@@ -45,7 +45,8 @@ typedef uint16_t		BluetoothConnectionHandle;		// Upper 4 bits are reserved.
 typedef uint8_t		BluetoothLMPHandle;
 enum
 {
-    kBluetoothConnectionHandleNone	= 0xffff
+    kBluetoothConnectionHandleSerialDeviceReserved	= 0x0fff,
+    kBluetoothConnectionHandleNone					= 0xffff
 };
 
 typedef uint8_t		BluetoothReasonCode;

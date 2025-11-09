@@ -10,8 +10,10 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s14SecurityUICore0A2UIO16bundleIdentifierSSvgZ', '_$s14SecurityUICore0A2UIO16bundleIdentifierSSvpZMV', 
-                       '_$s14SecurityUICore0A2UIO5LinksO19emergencyAssistance10Foundation3URLVvgZ', 
-                       '_$s14SecurityUICore0A2UIO5LinksO19emergencyAssistance10Foundation3URLVvpZMV', 
+                       '_$s14SecurityUICore0A2UIO5LinksO12appleSupport10Foundation3URLVvgZ', 
+                       '_$s14SecurityUICore0A2UIO5LinksO12appleSupport10Foundation3URLVvpZMV', 
+                       '_$s14SecurityUICore0A2UIO5LinksO16learnMoreURL_mac10Foundation0G0VvgZ', 
+                       '_$s14SecurityUICore0A2UIO5LinksO16learnMoreURL_mac10Foundation0G0VvpZMV', 
                        '_$s14SecurityUICore0A2UIO5LinksOMa', '_$s14SecurityUICore0A2UIO5LinksOMn', 
                        '_$s14SecurityUICore0A2UIO5LinksON', '_$s14SecurityUICore0A2UIO7ScreensO14helpIdentifierSSvgZ', 
                        '_$s14SecurityUICore0A2UIO7ScreensO14helpIdentifierSSvpZMV', 

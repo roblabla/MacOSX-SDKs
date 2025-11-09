@@ -8,6 +8,7 @@
 #import <AppKit/NSControl.h>
 #import <AppKit/NSSliderCell.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSTintProminence.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
@@ -18,12 +19,18 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @property double minValue;
 @property double maxValue;
+
+/*! The value this slider will be filled from. This slider will be filled from its `neutralValue` to its current value. If `neutralValue` has not been explicitly set before, access to `neutralValue` will return `minValue`. */
+@property double neutralValue API_AVAILABLE(macos(26.0));
 @property double altIncrementValue;
 @property (readonly) CGFloat knobThickness;
 - (BOOL)acceptsFirstMouse:(nullable NSEvent *)event;
 @property (readwrite, getter=isVertical) BOOL vertical API_AVAILABLE(macos(10.12));
 
 @property (nullable, copy) NSColor *trackFillColor API_AVAILABLE(macos(10.12.2)); // The color of the filled portion of the track, in appearances that support it
+
+/*! The tint prominence of the slider. The automatic behavior for a regular slider tints its track fill, while a slider with tick marks is untinted. Setting the tint prominence will override this default behavior and choose an explicit track fill tint behavior. See ``NSTintProminence`` for a list of possible values. */
+@property NSTintProminence tintProminence API_AVAILABLE(macos(26.0));
 
 @end
 

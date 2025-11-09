@@ -28,7 +28,7 @@ exports:
                        _AVVolumeGlyphStateNameMuted, _AVVolumeGlyphStateNameVolumeZero, 
                        _AVWaveformDefaultNotificationInterval, _AVWaveformDefaultResolution, 
                        _AVWaveformFinishedLoadingNotification, _AVWaveformSamplesDidBecomeAvailableNotification, 
-                       __AVDebugLog, __AVLog, __AVMethodProem ]
+                       __AVDebugLog, __AVLog, __AVMethodProem, __isNetworkAvailable ]
     objc-classes:    [ AVAssetIdentifier, AVChapter, AVCustomMediaSelectionOption, 
                        AVKeyValueChange, AVKitGlobalSettings, AVMicaPackage, AVMutableValueTiming, 
                        AVObservationController, AVPhotosensitiveTimeRange, AVPlaybackRate, 

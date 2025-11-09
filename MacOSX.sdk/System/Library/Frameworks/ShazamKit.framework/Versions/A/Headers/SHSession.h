@@ -16,68 +16,111 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class SHSession;
 
-/// All communication about matches is performed through this delegate.
+/// Methods that the session calls with the result of a match request.
 SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @protocol SHSessionDelegate <NSObject>
 
 @optional
 
-/// @brief A match was found in the @c SHCatalog for the provided @c SHSignature
-/// @param session The @c SHSession that made the match
-/// @param match The @c SHMatch of the matching audio
+/// Tells the delegate that the query signature matches an item in the catalog.
+///
+/// - Parameters:
+///   - session: The session object that performs the match.
+///   - match: The matching items from the catalog.
 - (void)session:(SHSession *)session didFindMatch:(SHMatch *)match;
 
-/// @brief The @c SHSignature did not match anything
-/// @param session The @c SHSession that attempted to match the @c SHSignature
-/// @param signature The @c SHSignature that did not match
-/// @param error An optional error. If simply no match was found this will be set to nil. It will be populated if there was an issue performing the match
+/// Tells the delegate that the query signature doesn't match an item in the catalog, or that there's an error.
+///
+/// You can retry the match if the error indicates an issue in communicating with the catalog server, such as ``SHError/Code/matchAttemptFailed``.
+///
+/// - Parameters:
+///   - session: The session object that performs the match.
+///   - signature: The query signature to use for the match.
+///   - error: The error that occurs; otherwise, `nil`, which indicates that there's no match.
 - (void)session:(SHSession *)session didNotFindMatchForSignature:(SHSignature *)signature error:(nullable NSError *)error;
 
 @end
 
-/// @brief A @c SHSession matches instances of @c SHSignature against a @c SHCatalog
+/// An object that matches a specific audio recording when a segment of that recording is part of captured sound in the Shazam catalog or your custom catalog.
 ///
-/// @discussion A @c SHSession can be used in two distinct ways to match against a @c SHCatalog
+/// Prepare to make matches by:
 ///
-/// 1. Pass a @c SHSignature to the -[SHSession matchSignature:] method and respond to matches sent to the delegate
-///      There is a 1 to 1 relationship between calls to this method and calls to the delegate
-/// 2. Pass a continuous stream of @c AVAudioPCMBuffer to the -[SHSession matchStreamingBuffer:atTime:] method, matches are sent to the delegate.
-///        ShazamKit will convert the buffers in SHSignature objects internally and perform matches against the @c SHCatalog. The details of how the matching
-///        is performed is an implementation detail and is subject to change. As such there will be many callbacks to the delegate per stream of audio, and the same match
-///        may be reported multiple times in succession.
+/// - Creating a session for the catalog that contains the reference signatures
+/// - Adding your delegate that receives the match results
 ///
+/// Search for a match in one of two ways:
+///
+/// - Generate a signature for the captured audio and call ``match(_:)``
+/// - Call ``matchStreamingBuffer(_:at:)`` with a streaming audio buffer, and ShazamKit generates the signature for you
+///
+/// Searching the catalog is asynchronous. The session calls your delegate methods with the result.
+///
+/// Matching songs in Shazam music requires enabling your app to access the catalog. For more information on enabling your app, see [Enable ShazamKit for an App ID](https://developer.apple.com/help/account/configure-app-services/shazamkit).
+///
+/// The code below shows searching for a match in the Shazam catalog using an existing audio buffer:
+///
+/// ```swift
+///// Set up the session.
+///let session = SHSession()
+///
+///// Create a signature from the captured audio buffer.
+///let signatureGenerator = SHSignatureGenerator()
+///try signatureGenerator.append(buffer, at: audioTime)
+///let signature = signatureGenerator.signature()
+///
+///// Check for a match.
+///let result = await session.result(from: signature)
+///
+///// Use the result.
+///switch result {
+///  case .match(let match):
+///       // Match found.
+///  case .noMatch(let signature):
+///       // No match found.
+///  case .error(let error, let signature):
+///       // An error occurred.
+///}
+/// ```
 SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHSession : NSObject
 
-/// @brief The @c SHCatalog used to initialize this session and which all matches will be made against
+/// The catalog object containing the reference signatures and their associated metadata that the session uses to perform matches.
 @property (NS_NONATOMIC_IOSONLY, strong, readonly) SHCatalog *catalog;
 
-/// @brief A delegate for communicating the results of matching
+/// The object that the session calls with the result of a match request.
 @property (NS_NONATOMIC_IOSONLY, weak) id<SHSessionDelegate> delegate;
 
 
-/// Create A new @c SHSession that searches the Shazam Catalog
+/// Creates a new session object for matching songs in the Shazam Music catalog.
 - (instancetype)init;
 
 
-/// Create A new @c SHSession based upon the supplied @c SHCatalog
-/// @param catalog The store of signatures to match against
+/// Creates a new session object for matching audio in a custom catalog.
+/// 
+///  - Parameters:
+///     - catalog: The catalog that contains the reference audio signatures and their associated metadata.
 - (instancetype)initWithCatalog:(SHCatalog *)catalog;
 
-/// @brief Flow audio buffers for matching into the session
-/// @discussion Audio will be converted into signatures and matched against the @c SHCatalog. Results are communicated through the delegate.
-/// The initial buffer specifies the @c AVAudioFormat and all subsequent buffers must contain the same format otherwise an error will be communicated through
-/// the delegate.
+/// Converts the audio in the buffer to a signature, and searches the reference signatures in the session catalog.
 ///
-/// It is advisable but not required to pass an @c AVAudioTime along with the audio buffer. The audio provided must be contiguous, gaps in the audio will have adverse
-/// effects on the ability to match the audio. The time variable is validated by the session to ensure that the audio is contiguous and mitigate the effect of discontiguous audio.
-/// @param buffer A buffer of audio to be used for recognition
-/// @param time Where in the stream the audio occurs
-/// @note This method only accepts PCM audio formats. The following sample rates are recommended but not required: 48000, 44100, 32000, 16000.
+/// This method continues to generate signatures and perform searches until the audio in the buffer stops, which may result in multiple calls to the ``SHSession/delegate``.
+///
+/// The audio buffer must be in one of the supported formats. For the list of the supported audio formats, see ``SHSignatureGenerator/append(_:at:)``.
+///
+/// To use the microphone as input for the buffer, see <doc:matching-audio-using-the-built-in-microphone>.
+///
+/// > Note:
+/// > You must use the audio format of the first call to this method in the current session in all subsequent calls for the session.
+///
+/// - Parameters:
+///    - buffer: An audio buffer.
+///    - time: The start time of the audio to use for generating the signatures.
 - (void)matchStreamingBuffer:(AVAudioPCMBuffer *)buffer atTime:(nullable AVAudioTime *)time;
 
-/// Match the @c SHSignature against the provided @c SHCatalog
-/// @param signature a @c SHSignature to be matched
+/// Searches for the query signature in the reference signatures that the session catalog contains.
+///
+///- Parameters:
+///  - signature: The signature for searching the catalog of reference signatures.
 - (void)matchSignature:(SHSignature *)signature;
 
 @end

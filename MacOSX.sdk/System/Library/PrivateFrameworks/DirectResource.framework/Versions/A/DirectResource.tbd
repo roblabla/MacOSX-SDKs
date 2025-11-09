@@ -3,8 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DirectResource.framework/Versions/A/DirectResource'
-current-version: 0
-compatibility-version: 0
+current-version: 19.0.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -26,13 +25,15 @@ exports:
                        _DRContextConfigSetMode, _DRContextConfigSetReuseStrategy, 
                        _DRContextConfigSetUnusedResourceMaxAge, _DRContextCreate, 
                        _DRContextCreateBuffer, _DRContextCreateClient, _DRContextCreateCommitQueue, 
-                       _DRContextCreateMesh, _DRContextCreateTexture, _DRContextGetCommitUserPayload, 
-                       _DRContextHasOpenCommit, _DRContextSetChangeObserver, _DRContextSetCommitUserPayload, 
-                       _DRContextSetOnCommitBegan, _DRContextSetOnCommitComplete, 
-                       _DRFenceCreate, _DRFenceGetLabel, _DRFenceInvalidate, _DRMaterialAsResource, 
-                       _DRMaxVertexBuffers, _DRMemoryResourceCopyBuffer, _DRMemoryResourceCopyToXPC, 
-                       _DRMemoryResourceCreate, _DRMemoryResourceCreateFromXPC, _DRMemoryResourceDidUpdateBytes, 
-                       _DRMemoryResourceGetBytes, _DRMemoryResourceGetLength, _DRMemoryResourceIsPrivateToProcess, 
+                       _DRContextCreateMesh, _DRContextCreateTexture, _DRContextCreateTextureFromResource, 
+                       _DRContextGetCommitUserPayload, _DRContextHasOpenCommit, _DRContextSetChangeObserver, 
+                       _DRContextSetCommitUserPayload, _DRContextSetOnCommitBegan, 
+                       _DRContextSetOnCommitComplete, _DRFenceCreate, _DRFenceGetLabel, 
+                       _DRFenceInvalidate, _DRMaterialAsResource, _DRMaxVertexBuffers, 
+                       _DRMemoryResourceCopyBuffer, _DRMemoryResourceCopyToXPC, _DRMemoryResourceCreate, 
+                       _DRMemoryResourceCreateFromSharedTextureHandle, _DRMemoryResourceCreateFromXPC, 
+                       _DRMemoryResourceDidUpdateBytes, _DRMemoryResourceGetBytes, 
+                       _DRMemoryResourceGetLength, _DRMemoryResourceIsPrivateToProcess, 
                        _DRMeshAsResource, _DRMeshCopyDescriptor, _DRMeshCreateUnmanaged, 
                        _DRMeshDescriptorCalculateBufferSizes, _DRMeshDescriptorCreate, 
                        _DRMeshDescriptorGetIndexCapacity, _DRMeshDescriptorGetIndexType, 
@@ -65,6 +66,6 @@ exports:
                        _DRTextureDescriptorSetMipmapLevelCount, _DRTextureDescriptorSetPixelFormat, 
                        _DRTextureDescriptorSetSwizzle, _DRTextureDescriptorSetTextureType, 
                        _DRTextureDescriptorSetTextureUsage, _DRTextureDescriptorSetWidth, 
-                       _DRTextureReadTexture, _DRTextureReplaceTexture, _DRValidateIndices, 
-                       _kDRErrorDomain ]
+                       _DRTextureReadTexture, _DRTextureReplaceTexture, _DRTextureReplaceWithMemoryResource, 
+                       _DRTextureTryReplaceTexture, _DRValidateIndices, _kDRErrorDomain ]
 ...

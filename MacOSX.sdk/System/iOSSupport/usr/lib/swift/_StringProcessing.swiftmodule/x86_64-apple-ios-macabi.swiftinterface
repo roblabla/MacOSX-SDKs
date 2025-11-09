@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -user-module-version 6.1.2.1.2 -module-name _StringProcessing
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swift_StringProcessing -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -user-module-version 6.2.0.17.15 -module-name _StringProcessing
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Swift
 extension Swift.Collection where Self.Element : Swift.Equatable {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -18,16 +18,22 @@ extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substrin
   @_disfavoredOverload public func contains(_ regex: some RegexComponent) -> Swift.Bool
 }
 extension Swift.Collection where Self.Element : Swift.Equatable {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func firstRange<C>(of other: C) -> Swift.Range<Self.Index>? where C : Swift.Collection, Self.Element == C.Element
+  #endif
 }
 extension Swift.BidirectionalCollection where Self.Element : Swift.Comparable {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func firstRange<C>(of other: C) -> Swift.Range<Self.Index>? where C : Swift.Collection, Self.Element == C.Element
+  #endif
 }
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_disfavoredOverload public func firstRange(of regex: some RegexComponent) -> Swift.Range<Self.Index>?
+  #endif
 }
 extension Swift.Collection where Self.Element : Swift.Equatable {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -98,11 +104,13 @@ extension Swift.RangeReplaceableCollection where Self : Swift.BidirectionalColle
   @_disfavoredOverload public mutating func trimPrefix(_ regex: some RegexComponent)
 }
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @inlinable public func firstMatch<Output>(of r: some RegexComponent<Output>) -> _StringProcessing.Regex<Output>.Match? {
     let slice = self[...]
     return try? r.regex.firstMatch(in: slice)
   }
+  #endif
 }
 extension Swift.RangeReplaceableCollection where Self.SubSequence == Swift.Substring {
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -118,10 +126,12 @@ extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substrin
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public var _literalPattern: Swift.String? {
     get
   }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public struct AnyRegexOutput {
@@ -129,26 +139,36 @@ public struct AnyRegexOutput {
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.AnyRegexOutput {
   public init<Output>(_ match: _StringProcessing.Regex<Output>.Match)
+  #if compiler(>=5.3) && $NonescapableTypes
   public func extractValues<Output>(as outputType: Output.Type = Output.self) -> Output?
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.AnyRegexOutput : Swift.RandomAccessCollection {
   public struct Element {
+    #if compiler(>=5.3) && $NonescapableTypes
     public var range: Swift.Range<Swift.String.Index>? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var substring: Swift.Substring? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var value: Any? {
       get
     }
+    #endif
     public var type: any Any.Type {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var name: Swift.String? {
       get
     }
+    #endif
   }
   public var startIndex: Swift.Int {
     get
@@ -175,18 +195,22 @@ extension _StringProcessing.AnyRegexOutput : Swift.RandomAccessCollection {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.AnyRegexOutput {
+  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(name: Swift.String) -> _StringProcessing.AnyRegexOutput.Element? {
     get
   }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex.Match where Output == _StringProcessing.AnyRegexOutput {
   public subscript(dynamicMember _keyPath: Swift.KeyPath<(Swift.Substring, _doNotUse: ()), Swift.Substring>) -> Swift.Substring {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public subscript(name: Swift.String) -> _StringProcessing.AnyRegexOutput.Element? {
     get
   }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex where Output == _StringProcessing.AnyRegexOutput {
@@ -208,7 +232,9 @@ extension _StringProcessing.Regex.Match where Output == _StringProcessing.AnyReg
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(_ regex: _StringProcessing.Regex<_StringProcessing.AnyRegexOutput>, as outputType: Output.Type = Output.self)
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol RegexComponent<RegexOutput> {
@@ -234,7 +260,9 @@ extension _StringProcessing.Regex {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 public protocol CustomConsumingRegexComponent : _StringProcessing.RegexComponent {
+  #if compiler(>=5.3) && $NonescapableTypes
   func consuming(_ input: Swift.String, startingAt index: Swift.String.Index, in bounds: Swift.Range<Swift.String.Index>) throws -> (upperBound: Swift.String.Index, output: Self.RegexOutput)?
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.CustomConsumingRegexComponent {
@@ -262,21 +290,37 @@ extension _StringProcessing.Regex.Match {
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func wholeMatch(in string: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func prefixMatch(in string: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func firstMatch(in string: Swift.String) throws -> _StringProcessing.Regex<Output>.Match?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func wholeMatch(in string: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func prefixMatch(in string: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func firstMatch(in string: Swift.Substring) throws -> _StringProcessing.Regex<Output>.Match?
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func wholeMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent {
     try? regex.regex.wholeMatch(in: self[...])
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func prefixMatch<R>(of regex: R) -> _StringProcessing.Regex<R.RegexOutput>.Match? where R : _StringProcessing.RegexComponent {
     try? regex.regex.prefixMatch(in: self[...])
   }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension _StringProcessing.Regex {
@@ -347,16 +391,24 @@ public struct _RegexFactory {
   public func accumulate<Output>(_ left: some RegexComponent, _ right: some RegexComponent) -> _StringProcessing.Regex<Output>
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func accumulateAlternation<Output>(_ left: some RegexComponent, _ right: some RegexComponent) -> _StringProcessing.Regex<Output>
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func zeroOrOne<Output>(_ component: some RegexComponent, _ behavior: _StringProcessing.RegexRepetitionBehavior? = nil) -> _StringProcessing.Regex<Output>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func zeroOrMore<Output>(_ component: some RegexComponent, _ behavior: _StringProcessing.RegexRepetitionBehavior? = nil) -> _StringProcessing.Regex<Output>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func oneOrMore<Output>(_ component: some RegexComponent, _ behavior: _StringProcessing.RegexRepetitionBehavior? = nil) -> _StringProcessing.Regex<Output>
+  #endif
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func exactly<Output>(_ count: Swift.Int, _ component: some RegexComponent) -> _StringProcessing.Regex<Output>
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func repeating<Output>(_ range: Swift.Range<Swift.Int>, _ behavior: _StringProcessing.RegexRepetitionBehavior?, _ component: some RegexComponent) -> _StringProcessing.Regex<Output>
+  #endif
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func atomicNonCapturing<Output>(_ component: some RegexComponent) -> _StringProcessing.Regex<Output>
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -365,8 +417,12 @@ public struct _RegexFactory {
   public func capture<Output>(_ r: some RegexComponent) -> _StringProcessing.Regex<Output>
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func capture<Output>(_ component: some RegexComponent, _ reference: Swift.Int) -> _StringProcessing.Regex<Output>
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func capture<Output, W, NewCapture>(_ component: some RegexComponent, _ reference: Swift.Int? = nil, _ transform: @escaping (W) throws -> NewCapture) -> _StringProcessing.Regex<Output>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func captureOptional<Output, W, NewCapture>(_ component: some RegexComponent, _ reference: Swift.Int? = nil, _ transform: @escaping (W) throws -> NewCapture?) -> _StringProcessing.Regex<Output>
+  #endif
 }

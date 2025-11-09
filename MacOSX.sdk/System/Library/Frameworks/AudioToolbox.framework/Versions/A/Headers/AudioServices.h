@@ -390,6 +390,48 @@ AudioServicesRemoveSystemSoundCompletion(SystemSoundID inSystemSoundID)
                                                                     API_AVAILABLE(macos(10.5), ios(2.0), watchos(2.0), tvos(9.0))
                                                                     ;
 
+/*!
+    @enum AudioServicesPlaySystemSoundWithDetails Dictionary Keys
+    @abstract   Keys that are passed in a dictionary to AudioServicesPlaySystemSoundWithDetails
+    @constant   kAudioServicesDetailIntendedSpatialExperience
+                    Must be any non-nil CASpatialAudioExperience. The system sound
+                    will have this spatial experience for the duration of its
+                    playback and cannot change mid-playback.
+*/
+extern const CFStringRef kAudioServicesDetailIntendedSpatialExperience API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(ios, watchos, tvos, macos) CF_REFINED_FOR_SWIFT;
+
+/*!
+    @function       AudioServicesPlaySystemSoundWithDetails
+    @abstract       Play the sound designated by the provided SystemSoundID.
+    @param          inSystemSoundID
+                        A SystemSoundID for the system sound server to play.
+    @param            inDetails
+                        A set of details as described above.
+    @param          inCompletionBlock
+                        The completion block gets executed for every attempt to play a system sound irrespective
+                        of success or failure. The callbacks are issued on a serial queue and the client is
+                        responsible for handling thread safety.
+*/
+extern void AudioServicesPlaySystemSoundWithDetails(SystemSoundID inSystemSoundID,
+                                                    CFDictionaryRef _Nullable inDetails,
+                                                    void (^_Nullable inCompletionBlock)(void)) API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(ios, watchos, tvos, macos) CF_REFINED_FOR_SWIFT;
+
+/*!
+    @function       AudioServicesPlayAlertSoundWithDetails
+    @abstract       Play the alert designated by the provided SystemSoundID.
+    @param          inSystemSoundID
+                        A SystemSoundID for the system sound server to play with alert sound behavior.
+    @param            inDetails
+                        A set of details as described above.
+    @param          inCompletionBlock
+                        The completion block gets executed for every attempt to play a system sound irrespective
+                        of success or failure. The callbacks are issued on a serial queue and the client is
+                        responsible for handling thread safety.
+*/
+extern void AudioServicesPlayAlertSoundWithDetails(SystemSoundID inSystemSoundID,
+                                                   CFDictionaryRef _Nullable inDetails,
+                                                   void (^_Nullable inCompletionBlock)(void)) API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(ios, watchos, tvos, macos) CF_REFINED_FOR_SWIFT;
+
 CF_ASSUME_NONNULL_END
     
 #ifdef __cplusplus

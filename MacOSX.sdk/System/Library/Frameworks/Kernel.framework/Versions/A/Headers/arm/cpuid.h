@@ -158,11 +158,13 @@ typedef union {
 /* M10 e-Core (ARMv8 architecture) */
 #define CPU_PART_THUNDER_M10        0x26
 
-/* H13 e-Core */
-#define CPU_PART_ICESTORM           0x20
+/* H13P e-Core */
+#define CPU_PART_ICESTORM           0x20 /* Prefer CPU_PART_ICESTORM_SICILY. */
+#define CPU_PART_ICESTORM_SICILY    0x20
 
-/* H13 p-Core */
-#define CPU_PART_FIRESTORM          0x21
+/* H13P p-Core */
+#define CPU_PART_FIRESTORM          0x21 /* Prefer CPU_PART_FIRESTORM_SICILY. */
+#define CPU_PART_FIRESTORM_SICILY   0x21
 
 /* H13G e-Core */
 #define CPU_PART_ICESTORM_TONGA     0x22
@@ -178,11 +180,13 @@ typedef union {
 #define CPU_PART_FIRESTORM_JADE_CHOP   0x25
 #define CPU_PART_FIRESTORM_JADE_DIE    0x29
 
-/* H14 e-Core */
-#define CPU_PART_BLIZZARD           0x30
+/* H14P e-Core */
+#define CPU_PART_BLIZZARD           0x30 /* Prefer CPU_PART_BLIZZARD_ELLIS. */
+#define CPU_PART_BLIZZARD_ELLIS     0x30
 
-/* H14 p-Core */
-#define CPU_PART_AVALANCHE          0x31
+/* H14P p-Core */
+#define CPU_PART_AVALANCHE          0x31 /* Prefer CPU_PART_AVALANCHE_ELLIS. */
+#define CPU_PART_AVALANCHE_ELLIS    0x31
 
 /* H14G e-Core */
 #define CPU_PART_BLIZZARD_STATEN    0x32
@@ -267,6 +271,27 @@ typedef union {
 
 /* H17A Tupai p-Core. */
 #define CPU_PART_PCORE_TUPAI 0x6b
+
+
+
+
+
+
+/* H18P Thera e-Core. */
+#define CPU_PART_ECORE_THERA 0x70
+
+/* H18P Thera p-Core. */
+#define CPU_PART_PCORE_THERA 0x71
+
+
+
+/* H18P Thera e-Core. */
+#define CPU_PART_ECORE_TILOS 0x7a
+
+/* H18P Thera p-Core. */
+#define CPU_PART_PCORE_TILOS 0x7b
+
+
 
 
 

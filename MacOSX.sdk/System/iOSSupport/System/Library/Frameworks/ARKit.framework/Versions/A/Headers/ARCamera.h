@@ -5,11 +5,12 @@
 //  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import <UIKit/UIKit.h>
-#import <simd/simd.h>
+#import <TargetConditionals.h>
+
 #import <ARKit/ARTrackingStatusTypes.h>
+#import <CoreGraphics/CoreGraphics.h>
+#import <Foundation/Foundation.h>
+#import <simd/simd.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +28,7 @@ NS_SWIFT_SENDABLE
 
 /**
  The camera’s orientation defined as Euler angles.
- 
+
  @dicussion The order of components in this vector matches the axes of rotation:
                1. Pitch (the x component) is the rotation about the node’s x-axis (in radians)
                2. Yaw   (the y component) is the rotation about the node’s y-axis (in radians)
@@ -82,9 +83,12 @@ NS_SWIFT_SENDABLE
 */
 @property (nonatomic, readonly) simd_float4x4 projectionMatrix;
 
+
+typedef NS_ENUM(NSInteger, UIInterfaceOrientation);
+
 /**
  Creates a projection matrix for the camera given rendering parameters.
- 
+
  @discussion The projection matrix returned provides an aspect fill for the provided viewport size and orientation.
  If zFar is set to 0, an infinite projection matrix will be returned.
  @param orientation Viewport orientation.
@@ -92,11 +96,14 @@ NS_SWIFT_SENDABLE
  @param zNear Near depth limit.
  @param zFar Far depth limit.
  */
-- (simd_float4x4)projectionMatrixForOrientation:(UIInterfaceOrientation)orientation viewportSize:(CGSize)viewportSize zNear:(CGFloat)zNear zFar:(CGFloat)zFar;
+- (simd_float4x4)projectionMatrixForOrientation:(UIInterfaceOrientation)orientation
+                                   viewportSize:(CGSize)viewportSize
+                                          zNear:(CGFloat)zNear
+                                           zFar:(CGFloat)zFar;
 
 /**
  Project a 3D point in world coordinate system into 2D viewport space.
- 
+
  @param point 3D point in world coordinate system.
  @param orientation Viewport orientation.
  @param viewportSize Viewport (or image) size.
@@ -106,7 +113,7 @@ NS_SWIFT_SENDABLE
 
 /**
  Unproject a 2D point from the viewport onto a plane in 3D world coordinates.
- 
+
  @discussion A 2D point in the viewport coordinate space can refer to any point along a line segment
  in the 3D coordinate space. Unprojecting calculates the 3D position of the point along this line segment that intersects the provided plane.
  @param point A point in the viewport coordinate system with origin at top-left.
@@ -114,16 +121,19 @@ NS_SWIFT_SENDABLE
  The coordinate system’s positive Y axis is assumed to be the normal of the plane.
  @return 3D position in world coordinates or a NAN values if unprojection is not possible.
  */
-- (simd_float3)unprojectPoint:(CGPoint)point ontoPlaneWithTransform:(simd_float4x4)planeTransform orientation:(UIInterfaceOrientation)orientation viewportSize:(CGSize)viewportSize
-API_AVAILABLE(ios(12.0)) NS_REFINED_FOR_SWIFT;
+- (simd_float3)unprojectPoint:(CGPoint)point
+       ontoPlaneWithTransform:(simd_float4x4)planeTransform
+                  orientation:(UIInterfaceOrientation)orientation
+                 viewportSize:(CGSize)viewportSize API_AVAILABLE(ios(12.0))NS_REFINED_FOR_SWIFT;
 
 /**
  Returns the view matrix for the camera with a given interface orientation.
- 
+
  @discussion The view matrix can be used to transform geometry from world space into camera space for a given orientation.
  @param orientation The interface orientation that will be used to render the camera’s view.
  */
 - (simd_float4x4)viewMatrixForOrientation:(UIInterfaceOrientation)orientation;
+
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;

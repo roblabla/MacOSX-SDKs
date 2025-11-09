@@ -29,17 +29,17 @@ API_UNAVAILABLE(macos)
 /*!
  * @brief Accessory that provides this service.
  */
-@property (readonly, weak, nonatomic) HMAccessory *accessory;
+@property (nonatomic, readonly, weak) HMAccessory *accessory;
 
 /*!
  * @brief The type of the service, e.g. HMServiceTypeLightbulb.
  */
-@property (readonly, copy, nonatomic) NSString *serviceType;
+@property (nonatomic, readonly, copy) NSString *serviceType;
 
 /*!
  * @brief The localized description of the service.
  */
-@property (readonly, copy, nonatomic) NSString *localizedDescription API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSString *localizedDescription API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Name for the service.
@@ -47,7 +47,7 @@ API_UNAVAILABLE(macos)
  * @discussion Returns the service's name that is associated with HomeKit. The initial value is the value of
  *             the name characteristic of the service, if it has one.
  */
-@property (readonly, copy, nonatomic) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /*!
  * @brief For HMServiceTypeOutlet and HMServiceTypeSwitch, this is the type of the associated service.
@@ -55,18 +55,18 @@ API_UNAVAILABLE(macos)
  * @discussion This could be any of the HomeKit Accessory Profile defined services (except HMServiceTypeOutlet
  *             or HMServiceTypeSwitch) that supports HMCharacteristicTypePowerState characteristic.
  */
-@property (readonly, copy, nonatomic, nullable) NSString *associatedServiceType;
+@property (nullable, nonatomic, readonly, copy) NSString *associatedServiceType;
 
 /*!
  * @brief Array of HMCharacteristic objects that represents all the characteristics
  *        provided by the service.
  */
-@property (readonly, copy, nonatomic) NSArray<HMCharacteristic *> *characteristics;
+@property (nonatomic, readonly, copy) NSArray<HMCharacteristic *> *characteristics;
 
 /*!
  * @brief A unique identifier for the service.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Indicates if this service supports user interaction or not.
@@ -74,14 +74,14 @@ API_UNAVAILABLE(macos)
  * @discussion Applications should use this property to filter out services that the users
  *             should not directly interact with, e.g. HMServiceTypeAccessoryInformation.
  */
-@property (readonly, getter=isUserInteractive, nonatomic) BOOL userInteractive API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, getter=isUserInteractive) BOOL userInteractive API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Indicates if this services is the primary service.
  *
  * @discussion Applications should use this property to show the primary service on the accessory.
  */
-@property (readonly, getter=isPrimaryService, nonatomic) BOOL primaryService API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
+@property (nonatomic, readonly, getter=isPrimaryService) BOOL primaryService API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
  * @brief Array of HMService objects that represents all the services that the service links to.
@@ -89,14 +89,14 @@ API_UNAVAILABLE(macos)
  * @discussion Applications should use this property to show logical grouping of services on the accessory.
  *             linkedServices will be nil when the service does not link to any other services.
  */
-@property (readonly, copy, nonatomic) NSArray<HMService *> *__nullable linkedServices API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
+@property (nonatomic, readonly, copy) NSArray<HMService *> *__nullable linkedServices API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
  * @brief The Matter endpoint identifier that this service is mapped to.
  *
  * @discussion This property is nil for HAP accessories, and set to a valid value for Matter devices.
  */
-@property (nullable, readonly, copy, nonatomic) NSNumber *matterEndpointID NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), macCatalyst(18.0)) API_UNAVAILABLE(macos);
+@property (nullable, nonatomic, readonly, copy) NSNumber *matterEndpointID NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), macCatalyst(18.0)) API_UNAVAILABLE(macos);
 
 /*!
  * @brief This method is used to change the name of the service.

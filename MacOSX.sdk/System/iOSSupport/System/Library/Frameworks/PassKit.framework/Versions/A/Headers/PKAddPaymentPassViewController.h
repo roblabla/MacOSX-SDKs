@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKPaymentPass;
 
 API_AVAILABLE(ios(9.0))
-@protocol PKAddPaymentPassViewControllerDelegate<NSObject>
+@protocol PKAddPaymentPassViewControllerDelegate <NSObject>
 
 /* Certificates is an array of NSData, each a DER encoded X.509 certificate, with the leaf first and root last.
  * The continuation handler must be called within 20 seconds or an error will be displayed. 

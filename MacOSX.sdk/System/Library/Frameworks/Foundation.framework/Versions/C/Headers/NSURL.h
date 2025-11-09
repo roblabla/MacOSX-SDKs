@@ -415,7 +415,10 @@ typedef NSString * NSURLUbiquitousSharedItemPermissions NS_TYPED_ENUM;
 FOUNDATION_EXPORT NSURLUbiquitousSharedItemPermissions const NSURLUbiquitousSharedItemPermissionsReadOnly     API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is only allowed to read this item
 FOUNDATION_EXPORT NSURLUbiquitousSharedItemPermissions const NSURLUbiquitousSharedItemPermissionsReadWrite    API_AVAILABLE(macosx(10.12), ios(10.0)) API_UNAVAILABLE(watchos, tvos); // the current user is allowed to both read and write this item
 
-/* Working with Bookmarks and alias (bookmark) files 
+FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousItemSupportedSyncControlsKey API_AVAILABLE(ios(26.0), macos(26.0), watchos(26.0), tvos(26.0), visionos(26.0)); // returns the read-only value of the NSFileManagerSupportedSyncControls options as a NSNumber.
+FOUNDATION_EXPORT NSURLResourceKey const NSURLUbiquitousItemIsSyncPausedKey API_AVAILABLE(ios(26.0), macos(26.0), watchos(26.0), tvos(26.0), visionos(26.0)); // returns a boolean.
+
+/* Working with Bookmarks and alias (bookmark) files
  */
 
 typedef NS_OPTIONS(NSUInteger, NSURLBookmarkCreationOptions) {

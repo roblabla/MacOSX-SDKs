@@ -314,6 +314,11 @@ enum {
    * path, fileID, and docID.
    */
   kFSEventStreamCreateWithDocID __OSX_AVAILABLE_STARTING(__MAC_10_15, __IPHONE_13_0) = 0x00000100,
+ /*
+   * Return fsevents archive info for device
+   * only applicable to FSEventStreamCreateRelativeToDevice
+   */
+  kFSEventStreamCreateDeviceState __API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0)) = 0x00000200
 };
 
 /*

@@ -31,9 +31,12 @@ AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080				A
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC4320x2160				API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC7680x4320				API_AVAILABLE(macos(12.1), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC960x960				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC1440x1440			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC4320x4320			API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC7680x7680			API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
 
 @class AVOutputSettingsAssistantInternal;
 

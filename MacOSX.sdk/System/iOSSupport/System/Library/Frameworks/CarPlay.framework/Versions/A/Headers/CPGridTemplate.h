@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern NSUInteger const CPGridTemplateMaximumItems API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPGridTemplate : CPTemplate <CPBarButtonProviding>
 
 /**
@@ -29,6 +30,14 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
+
+/**
+ The expected image size for your @c CPGridButton.
+
+ To properly size your list images, your app should size them to the display scale of the car screen.
+ See -[CPInterfaceController carTraitCollection].
+ */
+@property (nonatomic, class, readonly) CGSize maximumGridButtonImageSize API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
 
 /**
  Array of grid buttons displayed on the template

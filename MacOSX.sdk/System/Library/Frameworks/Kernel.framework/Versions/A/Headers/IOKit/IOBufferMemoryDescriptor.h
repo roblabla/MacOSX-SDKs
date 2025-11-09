@@ -156,7 +156,7 @@ public:
 /*! @function inTaskWithOptions
  *   @abstract Creates a memory buffer with memory descriptor for that buffer.
  *   @discussion Added in Mac OS X 10.2, this method allocates a memory buffer with a given size and alignment in the task's address space specified, and returns a memory descriptor instance representing the memory. It is recommended that memory allocated for I/O or sharing via mapping be created via IOBufferMemoryDescriptor. Options passed with the request specify the kind of memory to be allocated - pageablity and sharing are specified with option bits. This function may block and so should not be called from interrupt level or while a simple lock is held.
- *   @param inTask The task the buffer will be allocated in.
+ *   @param inTask The task the buffer will be allocated in. Pass NULL to allocate unmapped memory.
  *   @param options Options for the allocation:<br>
  *   kIODirectionOut, kIODirectionIn - set the direction of the I/O transfer.<br>
  *   kIOMemoryPhysicallyContiguous - pass to request memory be physically contiguous. This option is heavily discouraged. The request may fail if memory is fragmented, may cause large amounts of paging activity, and may take a very long time to execute.<br>
@@ -180,7 +180,7 @@ public:
 /*! @function inTaskWithOptions
  *   @abstract Creates a memory buffer with memory descriptor for that buffer.
  *   @discussion Added in Mac OS X 10.2, this method allocates a memory buffer with a given size and alignment in the task's address space specified, and returns a memory descriptor instance representing the memory. It is recommended that memory allocated for I/O or sharing via mapping be created via IOBufferMemoryDescriptor. Options passed with the request specify the kind of memory to be allocated - pageablity and sharing are specified with option bits. This function may block and so should not be called from interrupt level or while a simple lock is held.
- *   @param inTask The task the buffer will be allocated in.
+ *   @param inTask The task the buffer will be allocated in. Pass NULL to allocate unmapped memory.
  *   @param options Options for the allocation:<br>
  *   kIODirectionOut, kIODirectionIn - set the direction of the I/O transfer.<br>
  *   kIOMemoryPhysicallyContiguous - pass to request memory be physically contiguous. This option is heavily discouraged. The request may fail if memory is fragmented, may cause large amounts of paging activity, and may take a very long time to execute.<br>

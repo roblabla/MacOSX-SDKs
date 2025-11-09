@@ -16,7 +16,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0))
 @interface MKDirectionsResponse : NSObject
 
 // Source and destination may be filled with additional details compared to the request object.
@@ -27,7 +27,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 @end
 
-NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0))
 @interface MKRoute : NSObject
 
 @property (nonatomic, readonly) NSString *name; // localized description of the route's significant feature, e.g. "US-101"
@@ -43,13 +43,13 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 @property (nonatomic, readonly) NSArray<MKRouteStep *> *steps;
 
-@property (nonatomic, readonly) BOOL hasTolls API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // indicates if the route contains tolls
+@property (nonatomic, readonly) BOOL hasTolls API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0), watchos(9.0)); // indicates if the route contains tolls
 
-@property (nonatomic, readonly) BOOL hasHighways API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // indicates if the route contains highways
+@property (nonatomic, readonly) BOOL hasHighways API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0), watchos(9.0)); // indicates if the route contains highways
 
 @end
 
-NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0))
 @interface MKRouteStep : NSObject
 
 @property (nonatomic, readonly) NSString *instructions; // localized written instructions
@@ -63,7 +63,7 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 @end
 
-NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0))
 @interface MKETAResponse : NSObject
 
 // Source and destination may be filled with additional details compared to the request object.

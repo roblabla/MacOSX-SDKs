@@ -2,12 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideoSubscriberAccountUI.framework/Versions/A/VideoSubscriberAccountUI'
-current-version: 561.40.17
+current-version: 593.0.2
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation3URLV24VideoSubscriberAccountUIE8vsStringACSgSS_tcfC', 
-                       '_$s24VideoSubscriberAccountUI13VSDestinationO16removeTVProvideryA2CmFWC', 
                        '_$s24VideoSubscriberAccountUI13VSDestinationO6signInyA2CmFWC', 
                        '_$s24VideoSubscriberAccountUI13VSDestinationO7signOutyA2CmFWC', 
                        '_$s24VideoSubscriberAccountUI13VSDestinationO8allCasesSayACGvgZ', 

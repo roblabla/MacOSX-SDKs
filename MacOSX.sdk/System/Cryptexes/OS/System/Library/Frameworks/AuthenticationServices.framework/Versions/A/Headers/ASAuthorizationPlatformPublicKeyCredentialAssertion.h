@@ -5,7 +5,6 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput.h>
 #import <Foundation/Foundation.h>
 
-
 @class ASAuthorizationPublicKeyCredentialPRFAssertionOutput;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)

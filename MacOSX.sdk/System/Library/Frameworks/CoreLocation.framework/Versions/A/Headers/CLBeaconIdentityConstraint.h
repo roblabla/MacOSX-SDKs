@@ -26,9 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
 CL_EXTERN
 API_DEPRECATED_WITH_REPLACEMENT("Use CLBeaconIdentityCondition", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED))
 API_UNAVAILABLE(watchos, tvos)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos)
-#endif
 @interface CLBeaconIdentityConstraint : CLBeaconIdentityCondition<NSCopying, NSSecureCoding>
 
 @end

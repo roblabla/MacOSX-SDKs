@@ -25,6 +25,7 @@ typedef NS_ENUM(NSInteger, CPInformationTemplateLayout) {
 } API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos);
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPInformationTemplate : CPTemplate <CPBarButtonProviding>
 
 /**

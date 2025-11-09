@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      An MXMetric subclass that encapsulates app runtime metrics.
  @discussion    Runtime metrics describe application time spent running in different modes, such as audio, location, etc.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
 @interface MXAppRunTimeMetric : MXMetric
 
 /*!

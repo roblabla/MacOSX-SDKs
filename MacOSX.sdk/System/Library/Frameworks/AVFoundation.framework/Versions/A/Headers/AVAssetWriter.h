@@ -61,6 +61,7 @@ typedef NS_ENUM(NSInteger, AVAssetWriterStatus) {
  
 	A single instance of AVAssetWriter can be used once to write to a single file. Clients that wish to write to files multiple times must use a new instance of AVAssetWriter each time.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriter : NSObject
 {
@@ -278,7 +279,14 @@ AV_INIT_UNAVAILABLE
 
 		*Passthrough is indicated when the input's output settings are nil.
  */
-- (void)addInput:(AVAssetWriterInput *)input;
+- (void)addInput:(AVAssetWriterInput *)input
+#if __swift__
+API_DEPRECATED("Use the appropriate AVAssetWriter.inputReceiver(for:...) overload for your input and optional adaptor instead", macos(10.7, API_TO_BE_DEPRECATED), ios(4.1, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
  @method startWriting
@@ -295,7 +303,14 @@ AV_INIT_UNAVAILABLE
  
 	On iOS, if the status of an AVAssetWriter is AVAssetWriterStatusWriting when the client app goes into the background, its status will change to AVAssetWriterStatusFailed and appending to any of its inputs will fail.  You may want to use -[UIApplication beginBackgroundTaskWithExpirationHandler:] to avoid being interrupted in the middle of a writing session and to finish writing the data that has already been appended.  For more information about executing code in the background, see the iOS Application Programming Guide.
  */
-- (BOOL)startWriting;
+- (BOOL)startWriting
+#if __swift__
+API_DEPRECATED("Use start() instead", macos(10.7, API_TO_BE_DEPRECATED), ios(4.1, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
  @method startSessionAtSourceTime:

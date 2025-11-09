@@ -66,6 +66,7 @@
 
 #include <machine/types.h>
 #include <stdint.h>
+#include <net/ethernet.h>
 
 #pragma pack(4)
 
@@ -589,7 +590,7 @@ struct ifnet_interface_advisory {
 #pragma pack(push, 1)
 
 /* Supported types */
-/* Reserving 1 for link layer */
+#define IFNET_TRAFFIC_DESCRIPTOR_TYPE_ETH  1
 #define IFNET_TRAFFIC_DESCRIPTOR_TYPE_INET 2
 
 /* Supported flags */
@@ -601,6 +602,16 @@ struct ifnet_traffic_descriptor_common {
 	uint8_t     _reserved;
 	uint16_t    itd_len; /* length of entire struct (common + td-specific) */
 	uint32_t    itd_flags;
+};
+
+#define IFNET_TRAFFIC_DESCRIPTOR_ETH_MASK_ETHER_TYPE  0x01
+#define IFNET_TRAFFIC_DESCRIPTOR_ETH_MASK_RADDR 0x02
+
+struct ifnet_traffic_descriptor_eth {
+	struct ifnet_traffic_descriptor_common eth_common;
+	ether_addr_t    eth_raddr;
+	uint16_t        eth_type;
+	uint8_t         eth_mask;
 };
 
 #define IFNET_TRAFFIC_DESCRIPTOR_INET_IPVER 0x01
@@ -642,6 +653,8 @@ struct ifnet_traffic_rule_action_steer {
 	struct ifnet_traffic_rule_action ras_common;
 	uint64_t    ras_qset_id;
 };
+
+
 #pragma pack(pop)
 
 #pragma pack()

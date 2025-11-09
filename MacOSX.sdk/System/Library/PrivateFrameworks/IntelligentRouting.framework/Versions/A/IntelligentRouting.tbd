@@ -8,14 +8,15 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _IRAppleTVControlEventSubTypeToString, _IRAppleTVControlEventTypeToString, 
                        _IRCandidateClassificationToString, _IRContextAppleTVControlKey, 
-                       _IRContextMediaControlKey, _IRContextMediaRouteKey, _IRErrorDomain, 
+                       _IRContextHomeKey, _IRContextMediaControlKey, _IRContextMediaRouteKey, 
+                       _IRErrorDomain, _IRHomeEventSubTypeToString, _IRHomeEventTypeToString, 
                        _IRLogObject, _IRLogObjectLongTerm, _IRLogObjectQE, _IRMakeXPCClientInterface, 
                        _IRMakeXPCServerInterface, _IRMediaBundleTypeToString, _IRMediaEventSubTypeToString, 
                        _IRMediaEventTypeToString, _IRServicePackageString, _IRSessionAvailableNotification, 
-                       _IRSetupLogging, _kIREventNameAppleTVControl, _kIREventNameMedia, 
-                       _kIRServiceLogPrefixKey ]
+                       _IRSetupLogging, _kIREventNameAppleTVControl, _kIREventNameHome, 
+                       _kIREventNameMedia, _kIRServiceLogPrefixKey ]
     objc-classes:    [ IRAppleTVControlEvent, IRBundle, IRCandidate, IRCandidateResult, 
-                       IRConfiguration, IRContext, IREvent, IRMediaBundle, IRMediaEvent, 
-                       IRNode, IRServiceParameters, IRServiceToken, IRSession, IRSessionSpotOnLocationParameters, 
-                       IRXPCSessionClient ]
+                       IRConfiguration, IRContext, IREvent, IRHomeEvent, IRMediaBundle, 
+                       IRMediaEvent, IRNode, IRServiceParameters, IRServiceToken, 
+                       IRSession, IRSessionSpotOnLocationParameters, IRXPCSessionClient ]
 ...

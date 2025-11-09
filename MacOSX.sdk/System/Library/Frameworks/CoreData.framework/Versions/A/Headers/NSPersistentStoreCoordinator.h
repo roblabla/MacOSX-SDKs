@@ -309,10 +309,10 @@ API_AVAILABLE(macosx(10.4),ios(3.0)) NS_SWIFT_SENDABLE
 - (BOOL)replacePersistentStoreAtURL:(NSURL *)destinationURL destinationOptions:(nullable NSDictionary *)destinationOptions withPersistentStoreFromURL:(NSURL *)sourceURL sourceOptions:(nullable NSDictionary *)sourceOptions storeType:(NSString *)storeType error:(NSError**)error API_AVAILABLE(macosx(10.11),ios(9.0));
 
 /* asynchronously performs the block on the coordinator's queue.  Encapsulates an autorelease pool. */
-- (void)performBlock:(void (^)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
+- (void)performBlock:(void (^NS_SWIFT_SENDABLE)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
 
 /* synchronously performs the block on the coordinator's queue.  May safely be called reentrantly. Encapsulates an autorelease pool. */
-- (void)performBlockAndWait:(void (NS_NOESCAPE ^)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
+- (void)performBlockAndWait:(void (^NS_NOESCAPE NS_SWIFT_SENDABLE)(void))block  API_AVAILABLE(macosx(10.10),ios(8.0));
 
 /* Constructs a combined NSPersistentHistoryToken given an array of persistent stores. If stores is nil or an empty array, the NSPersistentHistoryToken will be constructed with all of the persistent stores in the coordinator. */
 - (nullable NSPersistentHistoryToken *)currentPersistentHistoryTokenFromStores:(nullable NSArray*)stores API_AVAILABLE(macosx(10.14),ios(12.0),tvos(12.0),watchos(5.0));

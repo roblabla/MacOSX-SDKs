@@ -92,6 +92,8 @@ API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  
  @discussion
     AVCaptureMetadataOutput may detect and emit multiple metadata object types. For apps linked before iOS 7.0, the receiver defaults to capturing face metadata objects if supported (see -availableMetadataObjectTypes). For apps linked on or after iOS 7.0, the receiver captures no metadata objects by default. -setMetadataObjectTypes: throws an NSInvalidArgumentException if any elements in the array are not present in the -availableMetadataObjectTypes array.
+ 
+    If you've set your AVCaptureMetadataOutput's connected input's `cinematicVideoCaptureEnabled` property to YES, you must set your `metadataObjectTypes` property to `requiredMetadataObjectTypesForCinematicVideoCapture` or an NSInvalidArgumentException is thrown.
  */
 @property(nonatomic, copy, null_resettable) NSArray<AVMetadataObjectType> *metadataObjectTypes;
 
@@ -106,6 +108,11 @@ API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     As of iOS 13, this property can be set without requiring a lengthy rebuild of the session in which video preview is disrupted.
  */
 @property(nonatomic) CGRect rectOfInterest API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
+
+/// The required metadata object types when Cinematic Video capture is enabled.
+///
+/// Since the Cinematic Video algorithm requires a particular set of metadata objects to function optimally, you must set your ``metadataObjectTypes`` property to this property's returned value if you've set ``AVCaptureDeviceInput/cinematicVideoCaptureEnabled`` to `true` on the connected device input, otherwise an `NSInvalidArgumentException` is thrown.
+@property(nonatomic, readonly) NSArray<AVMetadataObjectType> *requiredMetadataObjectTypesForCinematicVideoCapture API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 

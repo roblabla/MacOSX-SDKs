@@ -1,15 +1,27 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 62 -module-name Accelerate
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAccelerate -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 75 -module-name Accelerate
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import Accelerate
 @_exported import Accelerate.vecLib.BNNS
 import Swift
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
-import os_availability
 import simd
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public func batchNorm(mean: some BNNSGraph.Builder.OperationParameter<T>, variance: some BNNSGraph.Builder.OperationParameter<T>, weight: some BNNSGraph.Builder.OperationParameter<T>, bias: some BNNSGraph.Builder.OperationParameter<T>, epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func batchNorm(mean: some BNNSGraph.Builder.OperationParameter<T>, variance: some BNNSGraph.Builder.OperationParameter<T>, epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func channelNorm(weight: some BNNSGraph.Builder.OperationParameter<T>, bias: some BNNSGraph.Builder.OperationParameter<T>, epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func channelNorm(epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func instanceNorm(weight: some BNNSGraph.Builder.OperationParameter<T>, bias: some BNNSGraph.Builder.OperationParameter<T>, epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func instanceNorm(epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func layerNorm(weight: some BNNSGraph.Builder.OperationParameter<T>, bias: some BNNSGraph.Builder.OperationParameter<T>, axes: [Swift.Int], epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func layerNorm(axes: [Swift.Int], epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func l2Norm(epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func rmsNorm(scale: some BNNSGraph.Builder.OperationParameter<T>, epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.InterleavedFx2 {
   public init(planarBuffers: [Accelerate.vImage.PixelBuffer<Accelerate.vImage.PlanarF>])
@@ -257,8 +269,10 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
   @usableFromInline
   internal typealias PiecewisePolynomialFunc = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutablePointer<Swift.UnsafePointer<Swift.Float>?>, Swift.UnsafePointer<Swift.Float>, Swift.UInt32, Swift.UInt32, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _applyPolynomial<T>(coefficientSegments: [[Swift.Float]], boundaries: [Swift.Float], destination: Accelerate.vImage.PixelBuffer<T>, polynomialFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutablePointer<Swift.UnsafePointer<Swift.Float>?>, Swift.UnsafePointer<Swift.Float>, Swift.UInt32, Swift.UInt32, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, widthMultiplier: Swift.Int) where T : Accelerate.SinglePlanePixelFormat
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP {
@@ -679,7 +693,9 @@ extension Accelerate.BNNS {
     public static func == (a: Accelerate.BNNS.Norm, b: Accelerate.BNNS.Norm) -> Swift.Bool
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class EmbeddingLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, dictionary: Accelerate.BNNSNDArrayDescriptor, paddingIndex: Swift.Int, maximumNorm: Swift.Float, normType: Accelerate.BNNS.Norm, scalesGradientByFrequency: Swift.Bool, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingWeightsGradient weightsGradient: Accelerate.BNNSNDArrayDescriptor) throws
     @objc deinit
@@ -687,7 +703,9 @@ extension Accelerate.BNNS {
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func transpose(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, firstTransposeAxis: Swift.Int, secondTransposeAxis: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP {
@@ -1196,20 +1214,28 @@ extension Accelerate.BNNS {
     }
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ActivationLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(function activationFunction: Accelerate.BNNS.ActivationFunction, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func applyActivation(activation: Accelerate.BNNS.ActivationFunction, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS.ActivationLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(function activationFunction: Accelerate.BNNS.ActivationFunction, axes: [Swift.Int], input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+  #endif
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func applyActivation(activation: Accelerate.BNNS.ActivationFunction, axes: [Swift.Int], input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 public enum BNNS {
@@ -1270,7 +1296,9 @@ extension Accelerate.BNNS {
   }
 }
 extension Accelerate.BNNSFilterParameters {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(options: Accelerate.BNNSFlags, threadCount: Swift.Int, allocator: Accelerate.BNNSAlloc?, deallocator: Accelerate.BNNSFree?)
+  #endif
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var options: Accelerate.BNNSFlags {
     get
@@ -1281,16 +1309,20 @@ extension Accelerate.BNNSFilterParameters {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var allocator: Accelerate.BNNSAlloc? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   public var deallocator: Accelerate.BNNSFree? {
     get
     set
   }
+  #endif
 }
 extension Accelerate.BNNSFlags : Swift.OptionSet {
   public typealias ArrayLiteralElement = Accelerate.BNNSFlags
@@ -1317,9 +1349,13 @@ extension Accelerate.BNNS {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PoolingLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(type poolingType: Accelerate.BNNS.PoolingType, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, activation: Accelerate.BNNS.ActivationFunction, kernelSize: (width: Swift.Int, height: Swift.Int), stride: (x: Swift.Int, y: Swift.Int), padding: Accelerate.BNNS.ConvolutionPadding, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
+    #if compiler(>=5.3) && $NonescapableTypes
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, generatingBiasGradient biasGradient: Accelerate.BNNSNDArrayDescriptor? = nil) throws
+    #endif
     @objc deinit
   }
 }
@@ -1327,8 +1363,12 @@ extension Accelerate.BNNS {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ConvolutionLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(type convolutionType: Accelerate.BNNS.ConvolutionType, input: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, padding: Accelerate.BNNS.ConvolutionPadding, activation: Accelerate.BNNS.ActivationFunction, groupCount: Swift.Int, stride: (x: Swift.Int, y: Swift.Int), dilationStride: (x: Swift.Int, y: Swift.Int), filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, generatingWeightsGradient weightsGradient: Accelerate.BNNSNDArrayDescriptor? = nil, generatingBiasGradient biasGradient: Accelerate.BNNSNDArrayDescriptor? = nil) throws
+    #endif
     @objc deinit
   }
   public enum ConvolutionPadding {
@@ -1379,6 +1419,56 @@ extension Accelerate.vDSP {
                    vDSP_Length(interleavedComplexVector.count))
     }
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public func sum(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func sumOfSquares(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func product(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func mean(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func minimum(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func maximum(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func l1Norm(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func l2Norm(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func logSum(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func logSumExp(axes: [Swift.Int], keepDimensions: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder {
+  public protocol SliceIndex {
+  }
+  public struct SliceRange : Accelerate.BNNSGraph.Builder.SliceIndex, Swift.Equatable, Swift.Sendable {
+    public let startIndex: Swift.Int
+    public let endIndex: Swift.Int
+    public static let fillAll: Accelerate.BNNSGraph.Builder.SliceRange
+    public init(startIndex: Swift.Int = 0, endIndex: Swift.Int)
+    public static func == (a: Accelerate.BNNSGraph.Builder.SliceRange, b: Accelerate.BNNSGraph.Builder.SliceRange) -> Swift.Bool
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public subscript(ranges: any Accelerate.BNNSGraph.Builder.SliceIndex...) -> Accelerate.BNNSGraph.Builder.Tensor<T> {
+    get
+    set(newValue)
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.Range : Accelerate.BNNSGraph.Builder.SliceIndex where Bound == Swift.Int {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.ClosedRange : Accelerate.BNNSGraph.Builder.SliceIndex where Bound == Swift.Int {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.PartialRangeFrom : Accelerate.BNNSGraph.Builder.SliceIndex where Bound == Swift.Int {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.PartialRangeThrough : Accelerate.BNNSGraph.Builder.SliceIndex where Bound == Swift.Int {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.PartialRangeUpTo : Accelerate.BNNSGraph.Builder.SliceIndex where Bound == Swift.Int {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.Int : Accelerate.BNNSGraph.Builder.SliceIndex {
+}
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
@@ -1401,13 +1491,45 @@ extension Accelerate.BNNS {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FusedConvolutionNormalizationLayer : Accelerate.BNNS.FusedLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, convolutionWeights: Accelerate.BNNSNDArrayDescriptor, convolutionBias: Accelerate.BNNSNDArrayDescriptor?, convolutionStride: (x: Swift.Int, y: Swift.Int), convolutionDilationStride: (x: Swift.Int, y: Swift.Int), convolutionPadding: Accelerate.BNNS.ConvolutionPadding, normalization: Accelerate.BNNS.NormalizationType, normalizationBeta: Accelerate.BNNSNDArrayDescriptor, normalizationGamma: Accelerate.BNNSNDArrayDescriptor, normalizationMomentum: Swift.Float, normalizationEpsilon: Swift.Float, normalizationActivation: Accelerate.BNNS.ActivationFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FusedFullyConnectedNormalizationLayer : Accelerate.BNNS.FusedLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fullyConnectedWeights: Accelerate.BNNSNDArrayDescriptor, fullyConnectedBias: Accelerate.BNNSNDArrayDescriptor?, normalization: Accelerate.BNNS.NormalizationType, normalizationBeta: Accelerate.BNNSNDArrayDescriptor, normalizationGamma: Accelerate.BNNSNDArrayDescriptor, normalizationMomentum: Swift.Float, normalizationEpsilon: Swift.Float, normalizationActivation: Accelerate.BNNS.ActivationFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.OperationParameter {
+  @_disfavoredOverload public static func * (lhs: Self, rhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  public static func * (lhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>, rhs: Self) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  @_disfavoredOverload public static func + (lhs: Self, rhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  public static func + (lhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>, rhs: Self) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  @_disfavoredOverload public static func / (lhs: Self, rhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  public static func / (lhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>, rhs: Self) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  @_disfavoredOverload public static func - (lhs: Self, rhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  public static func - (lhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>, rhs: Self) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  public static func % (lhs: Accelerate.BNNSGraph.Builder.Tensor<Self.Element>, rhs: Self) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor where T : Accelerate.BNNSGraph.Builder.OperationParameter {
+  public static func .== (lhs: Accelerate.BNNSGraph.Builder.Tensor<T>, rhs: Accelerate.BNNSGraph.Builder.Tensor<T>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .!= (lhs: Accelerate.BNNSGraph.Builder.Tensor<T>, rhs: Accelerate.BNNSGraph.Builder.Tensor<T>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .< (lhs: Accelerate.BNNSGraph.Builder.Tensor<T>, rhs: Accelerate.BNNSGraph.Builder.Tensor<T>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .<= (lhs: Accelerate.BNNSGraph.Builder.Tensor<T>, rhs: Accelerate.BNNSGraph.Builder.Tensor<T>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .> (lhs: Accelerate.BNNSGraph.Builder.Tensor<T>, rhs: Accelerate.BNNSGraph.Builder.Tensor<T>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .>= (lhs: Accelerate.BNNSGraph.Builder.Tensor<T>, rhs: Accelerate.BNNSGraph.Builder.Tensor<T>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor where T == Swift.Bool {
+  prefix public static func .! (rhs: Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .& (lhs: Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>, rhs: Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .| (lhs: Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>, rhs: Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
+  public static func .^ (lhs: Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>, rhs: Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Bool>
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
@@ -1500,16 +1622,22 @@ extension Accelerate.vImage {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func tile(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func tileBackward(outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func copyBandPart(_ source: Accelerate.BNNSNDArrayDescriptor, to destination: Accelerate.BNNSNDArrayDescriptor, lowerBandCount: Swift.Int?, upperBandCount: Swift.Int?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
@@ -1541,10 +1669,14 @@ extension Accelerate.BNNS {
     }
     @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
     public init(coordinatesAreNormalized: Swift.Bool, spatialScale: Swift.Float, extrapolationValue: Swift.Float = 0, samplingMode: Accelerate.BNNS.CropResizeLayer.LinearSamplingMode = .default, boxCoordinateMode: Accelerate.BNNS.CropResizeLayer.BoxCoordinateMode)
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
     public func apply(input: Accelerate.BNNSNDArrayDescriptor, regionOfInterest: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
     public func applyBackward(regionOfInterest: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+    #endif
     @objc deinit
   }
 }
@@ -1561,8 +1693,10 @@ extension Accelerate.BNNS {
       get
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func shuffle(_ shuffleType: Accelerate.BNNS.ShuffleType, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.BNNSNDArrayDescriptor {
@@ -1574,30 +1708,46 @@ extension Accelerate.BNNSNDArrayDescriptor {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func gather(input: Accelerate.BNNSNDArrayDescriptor, indices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func gatherND(input: Accelerate.BNNSNDArrayDescriptor, indices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func scatter(input: Accelerate.BNNSNDArrayDescriptor, indices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int, reductionFunction: Accelerate.BNNS.ReductionFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func scatterND(input: Accelerate.BNNSNDArrayDescriptor, indices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, reductionFunction: Accelerate.BNNS.ReductionFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func scatter(input: Accelerate.BNNSNDArrayDescriptor, indices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func scatterND(input: Accelerate.BNNSNDArrayDescriptor, indices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.BNNSNDArrayDescriptor {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func allocate<Scalar>(randomNormalUsing: Accelerate.BNNS.RandomGenerator, mean: Scalar, standardDeviation: Scalar, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor? where Scalar : Accelerate.BNNSScalar, Scalar : Swift.BinaryFloatingPoint
+  #endif
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   public struct FusedNormalizationParameters : Accelerate.FusableLayerParameters {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(type: Accelerate.BNNS.NormalizationType, beta: Accelerate.BNNSNDArrayDescriptor? = nil, gamma: Accelerate.BNNSNDArrayDescriptor? = nil, momentum: Swift.Float = 0, epsilon: Swift.Float, activation: Accelerate.BNNS.ActivationFunction)
+    #endif
     public var type: Accelerate.BNNS.NormalizationType
     public var beta: Accelerate.BNNSNDArrayDescriptor?
     public var gamma: Accelerate.BNNSNDArrayDescriptor?
@@ -1999,7 +2149,9 @@ extension Accelerate.vDSP {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_hasMissingDesignatedInitializers public class BroadcastMatrixMultiplyLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, transposed transposeA: Swift.Bool, isWeights aIsWeights: Swift.Bool, inputB: Accelerate.BNNSNDArrayDescriptor, transposed transposeB: Swift.Bool, isWeights bIsWeights: Swift.Bool, output: Accelerate.BNNSNDArrayDescriptor, alpha: Swift.Float, accumulatesToOutput: Swift.Bool, isQuadratic: Swift.Bool, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
     public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
     public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor) throws
@@ -2699,8 +2851,12 @@ extension Accelerate.vDSP {
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func applyTopK(k: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, bestValues: Accelerate.BNNSNDArrayDescriptor, bestIndices: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func applyInTopK(k: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, testIndices: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int, batchSize: Swift.Int, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.vDSP {
@@ -2913,6 +3069,7 @@ extension Accelerate.vDSP {
                 }
             }
     }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public static func compress<T, U>(_ vector: T, gatingVector: U, nonZeroGatingCount: Swift.Int?) -> [Swift.Float] where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Float, U.Element == Swift.Float {
             
             let resultCount: Int
@@ -2952,6 +3109,8 @@ extension Accelerate.vDSP {
             
             return result
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public static func compress<T, U>(_ vector: T, gatingVector: U, nonZeroGatingCount: Swift.Int?) -> [Swift.Double] where T : Accelerate.AccelerateBuffer, U : Accelerate.AccelerateBuffer, T.Element == Swift.Double, U.Element == Swift.Double {
             
             let resultCount: Int
@@ -2991,11 +3150,14 @@ extension Accelerate.vDSP {
             
             return result
     }
+  #endif
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS {
   public enum Shape {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(_ size: [Swift.Int], dataLayout: Accelerate.BNNS.DataLayout? = nil, stride: [Swift.Int]? = nil)
+    #endif
     case vector(_: Swift.Int, stride: Swift.Int = 0)
     case matrixColumnMajor(_: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int) = (0, 0))
     case matrixRowMajor(_: Swift.Int, _: Swift.Int, stride: (Swift.Int, Swift.Int) = (0, 0))
@@ -3045,7 +3207,9 @@ extension Accelerate.BNNS.Shape : Swift.ExpressibleByArrayLiteral {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PermuteLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, permutation: [Swift.Int], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
 }
@@ -3147,7 +3311,9 @@ extension Accelerate.vImage {
   public enum FloodFillConnectivity : Swift.Int32 {
     case edges
     case edgesAndCorners
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int32)
+    #endif
     @available(iOS 17.0, tvOS 17.0, watchOS 10.0, macOS 14.0, *)
     public typealias RawValue = Swift.Int32
     public var rawValue: Swift.Int32 {
@@ -3247,7 +3413,9 @@ extension Accelerate.BNNSGraph.Context : Swift.Sendable {
 public enum BNNSGraph {
   public protocol PointerArgument {
     associatedtype Element
+    #if compiler(>=5.3) && $NonescapableTypes
     var baseAddress: Swift.UnsafeMutablePointer<Self.Element>? { get }
+    #endif
     var count: Swift.Int { get }
   }
   public struct CompileOptions {
@@ -3279,26 +3447,57 @@ public enum BNNSGraph {
       set
     }
   }
-  public class Context {
+  @_hasMissingDesignatedInitializers public class Context {
     @objc deinit
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(compileFromPath path: Swift.String, functionName: Swift.String? = nil, options: Accelerate.BNNSGraph.CompileOptions = CompileOptions()) async throws
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+    public init(compileFromPath path: Swift.String, functionName: Swift.String? = nil, options: Accelerate.BNNSGraph.CompileOptions = CompileOptions()) throws
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func setDynamicShapes(_ shapes: [Accelerate.BNNSGraph.Shape], forFunction function: Swift.String? = nil) async throws -> [Accelerate.BNNSGraph.Shape]
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func setBatchSize(_ batchSize: Swift.Int, forFunction function: Swift.String? = nil) async
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+    public func setBatchSize(_ batchSize: Swift.Int, forFunction function: Swift.String? = nil)
+    #endif
     public var checkForNaNsAndInfinities: Swift.Bool {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public func executeFunction(_ function: Swift.String? = nil, arguments: inout [Accelerate.BNNSTensor]) async throws
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func executeFunction<T>(_ function: Swift.String? = nil, arguments: [T]) throws where T : Accelerate.BNNSGraph.PointerArgument
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func argumentPosition(forFunction function: Swift.String? = nil, argument: Swift.String) -> Swift.Int
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func tensor(forFunction function: Swift.String? = nil, argument: Swift.String, fillKnownDynamicShapes: Swift.Bool) -> Accelerate.BNNSTensor?
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func argumentCount(forFunction function: Swift.String? = nil) -> Swift.Int
+    #endif
     public var functionCount: Swift.Int {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public func argumentNames(forFunction function: Swift.String? = nil) -> [Swift.String]
+    #endif
     public var functionNames: [Swift.String] {
       get
+    }
+    @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+    public var streamingAdvanceCount: Swift.Int {
+      get
+      set
     }
   }
   public struct Shape : Swift.ExpressibleByArrayLiteral {
@@ -3314,11 +3513,8 @@ public enum BNNSGraph {
     case unableToCreateContext
     case unableToExecute
     case unableToSetDynamicShapes
-    public static func == (a: Accelerate.BNNSGraph.Error, b: Accelerate.BNNSGraph.Error) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
+    @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+    case unableToMakeGraph(_: Swift.String)
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -3454,7 +3650,9 @@ public protocol vDSP_DiscreteFourierTransformable {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 public protocol vDSP_DiscreteTransformLifecycleFunctions {
+  #if compiler(>=5.3) && $NonescapableTypes
   static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer?, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+  #endif
   static func destroySetup(_ setup: Swift.OpaquePointer)
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
@@ -3476,19 +3674,27 @@ extension Accelerate.DSPDoubleComplex : Accelerate.vDSP_DiscreteFourierTransform
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.vDSP {
   public struct DFTSinglePrecisionSplitComplexFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    #if compiler(>=5.3) && $NonescapableTypes
     public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    #endif
     public static func destroySetup(_ setup: Swift.OpaquePointer)
   }
   public struct DFTDoublePrecisionSplitComplexFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    #if compiler(>=5.3) && $NonescapableTypes
     public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    #endif
     public static func destroySetup(_ setup: Swift.OpaquePointer)
   }
   public struct DFTSinglePrecisionInterleavedFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    #if compiler(>=5.3) && $NonescapableTypes
     public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    #endif
     public static func destroySetup(_ setup: Swift.OpaquePointer)
   }
   public struct DFTDoublePrecisionInterleavedFunctions : Accelerate.vDSP_DiscreteTransformLifecycleFunctions {
+    #if compiler(>=5.3) && $NonescapableTypes
     public static func makeDiscreteFourierTransform(previous: Swift.OpaquePointer? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) throws -> Swift.OpaquePointer
+    #endif
     public static func destroySetup(_ setup: Swift.OpaquePointer)
   }
 }
@@ -3497,12 +3703,16 @@ extension Accelerate.vDSP {
   public enum DFTError : Swift.Error {
     case invalidSplitComplexCount(count: Swift.Int, transformType: Accelerate.vDSP.DFTTransformType)
     case invalidInterleavedCount(count: Swift.Int)
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
   }
   public class DiscreteFourierTransform<T> where T : Accelerate.vDSP_DiscreteFourierTransformable {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(previous: Accelerate.vDSP.DiscreteFourierTransform<Swift.Float>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType, ofType: T.Type) throws
+    #endif
     @objc deinit
   }
 }
@@ -3564,7 +3774,9 @@ extension Accelerate.BNNS {
     }
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class TernaryArithmeticLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputADescriptorType: Accelerate.BNNS.DescriptorType, inputB: Accelerate.BNNSNDArrayDescriptor, inputBDescriptorType: Accelerate.BNNS.DescriptorType, inputC: Accelerate.BNNSNDArrayDescriptor, inputCDescriptorType: Accelerate.BNNS.DescriptorType, output: Accelerate.BNNSNDArrayDescriptor, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticTernaryFunction, activation: Accelerate.BNNS.ActivationFunction = .identity, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
     public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputCGradient inputCGradient: Accelerate.BNNSNDArrayDescriptor) throws
     @objc deinit
@@ -3574,7 +3786,9 @@ extension Accelerate.BNNS {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class GramLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, alpha: Swift.Float, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
 }
@@ -3612,6 +3826,7 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func applyGamma(_ gamma: Accelerate.vImage.Gamma, intermediateBuffer: Accelerate.vImage.PixelBuffer<Accelerate.vImage.InterleavedFx4>? = nil, destination: Accelerate.vImage.PixelBuffer<Accelerate.vImage.Interleaved8x4>) {
         
         self._applyGamma(gamma,
@@ -3620,9 +3835,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                          widthMultiplier: Format.channelCount,
                          pixelFormat: vImage.Interleaved8x4.self)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x3 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func applyGamma(_ gamma: Accelerate.vImage.Gamma, intermediateBuffer: Accelerate.vImage.PixelBuffer<Accelerate.vImage.InterleavedFx3>? = nil, destination: Accelerate.vImage.PixelBuffer<Accelerate.vImage.Interleaved8x3>) {
         
         self._applyGamma(gamma,
@@ -3631,9 +3848,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                          widthMultiplier: Format.channelCount,
                          pixelFormat: vImage.Interleaved8x3.self)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x2 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func applyGamma(_ gamma: Accelerate.vImage.Gamma, intermediateBuffer: Accelerate.vImage.PixelBuffer<Accelerate.vImage.InterleavedFx2>? = nil, destination: Accelerate.vImage.PixelBuffer<Accelerate.vImage.Interleaved8x2>) {
         
         self._applyGamma(gamma,
@@ -3642,9 +3861,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                          widthMultiplier: Format.channelCount,
                          pixelFormat: vImage.Interleaved8x2.self)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func applyGamma(_ gamma: Accelerate.vImage.Gamma, intermediateBuffer: Accelerate.vImage.PixelBuffer<Accelerate.vImage.PlanarF>? = nil, destination: Accelerate.vImage.PixelBuffer<Accelerate.vImage.Planar8>) {
         
         self._applyGamma(gamma,
@@ -3653,11 +3874,14 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                          widthMultiplier: Format.channelCount,
                          pixelFormat: vImage.Planar8.self)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat, Format.ComponentType == Swift.UInt8 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _applyGamma<DEST, IB>(_ gamma: Accelerate.vImage.Gamma, intermediateBuffer: Accelerate.vImage.PixelBuffer<IB>? = nil, destination: Accelerate.vImage.PixelBuffer<DEST>, widthMultiplier: Swift.Int, pixelFormat: DEST.Type) where DEST : Accelerate.StaticPixelFormat, IB : Accelerate.StaticPixelFormat
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat, Format.ComponentType == Swift.Float {
@@ -3766,9 +3990,29 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFor
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   public struct FusedFullyConnectedParameters : Accelerate.FusableLayerParameters {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(weights: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?)
+    #endif
     public var weights: Accelerate.BNNSNDArrayDescriptor
     public var bias: Accelerate.BNNSNDArrayDescriptor?
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSTensor {
+  public func makeArray<T>(of scalarType: T.Type) -> [T] where T : Accelerate.BNNSScalar
+  public mutating func allocate<T>(initializingFrom source: some AccelerateBuffer<T>) where T : Accelerate.BNNSScalar
+  public mutating func allocate<T>(as scalarType: T.Type, count: Swift.Int) where T : Accelerate.BNNSScalar
+  public init<T>(initializingFrom source: some AccelerateBuffer<T>, shape: [Swift.Int], stride: [Swift.Int]) where T : Accelerate.BNNSScalar
+  public init(shape: [Swift.Int], stride: [Swift.Int], dataType: Accelerate.BNNSDataType)
+  public init(dataType: Accelerate.BNNSDataType, shape: [Swift.Int], stride: [Swift.Int])
+  public init(data: Swift.UnsafeMutableRawBufferPointer, shape: [Swift.Int], stride: [Swift.Int], dataType: Accelerate.BNNSDataType)
+  public init<T>(data: Swift.UnsafeMutableBufferPointer<T>, shape: [Swift.Int], stride: [Swift.Int]) where T : Accelerate.BNNSScalar
+  public static func allocateUninitialized(scalarType: any Accelerate.BNNSScalar.Type, shape: [Swift.Int], stride: [Swift.Int]) -> Accelerate.BNNSTensor
+  public static func allocate<C>(initializingFrom source: C, shape: [Swift.Int], stride: [Swift.Int]) -> Accelerate.BNNSTensor where C : Accelerate.AccelerateBuffer, C.Element : Accelerate.BNNSScalar
+  public static func allocate<T>(repeating repeatedValue: T, shape: [Swift.Int], stride: [Swift.Int]) -> Accelerate.BNNSTensor where T : Accelerate.BNNSScalar
+  public func deallocate()
+  public var count: Swift.Int {
+    get
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -4353,14 +4597,18 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 public protocol BNNSOptimizer {
+  #if compiler(>=5.3) && $NonescapableTypes
   func step(parameters: [Accelerate.BNNSNDArrayDescriptor], gradients: [Accelerate.BNNSNDArrayDescriptor], accumulators: [Accelerate.BNNSNDArrayDescriptor], filterParameters: Accelerate.BNNSFilterParameters?) throws
+  #endif
   var bnnsOptimizerFunction: Accelerate.BNNSOptimizerFunction { get }
   var accumulatorCountMultiplier: Swift.Int { get }
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNSOptimizer {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func step(parameters: [Accelerate.BNNSNDArrayDescriptor], gradients: [Accelerate.BNNSNDArrayDescriptor], accumulators: [Accelerate.BNNSNDArrayDescriptor], filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
@@ -4397,15 +4645,19 @@ extension Accelerate.BNNS {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var gradientBounds: Swift.ClosedRange<Swift.Float>? {
       get
       set
     }
+    #endif
     public var regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(learningRate: Swift.Float, beta1: Swift.Float, beta2: Swift.Float, timeStep: Swift.Float, epsilon: Swift.Float, gradientScale: Swift.Float, regularizationScale: Swift.Float, clipsGradientsTo gradientBounds: Swift.ClosedRange<Swift.Float>? = nil, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction)
+    #endif
     public var bnnsOptimizerFunction: Accelerate.BNNSOptimizerFunction {
       get
     }
@@ -4442,15 +4694,19 @@ extension Accelerate.BNNS {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var gradientBounds: Swift.ClosedRange<Swift.Float>? {
       get
       set
     }
+    #endif
     public var regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(learningRate: Swift.Float, alpha: Swift.Float, epsilon: Swift.Float, centered: Swift.Bool, momentum: Swift.Float, gradientScale: Swift.Float, regularizationScale: Swift.Float, clipsGradientsTo gradientBounds: Swift.ClosedRange<Swift.Float>? = nil, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction)
+    #endif
     public var bnnsOptimizerFunction: Accelerate.BNNSOptimizerFunction {
       get
     }
@@ -4475,10 +4731,12 @@ extension Accelerate.BNNS {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var gradientBounds: Swift.ClosedRange<Swift.Float>? {
       get
       set
     }
+    #endif
     @available(macOS, introduced: 11.0, deprecated: 12.0, renamed: "getter:usesNesterovMomentum(self:)")
     @available(iOS, introduced: 14.0, deprecated: 15.0, renamed: "getter:usesNesterovMomentum(self:)")
     @available(tvOS, introduced: 14.0, deprecated: 15.0, renamed: "getter:usesNesterovMomentum(self:)")
@@ -4501,18 +4759,26 @@ extension Accelerate.BNNS {
       get
       set
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS, introduced: 11.0, deprecated: 12.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
     @available(iOS, introduced: 14.0, deprecated: 15.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
     @available(tvOS, introduced: 14.0, deprecated: 15.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
     @available(watchOS, introduced: 7.0, deprecated: 8.0, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
     @available(*, deprecated, renamed: "init(learningRate:momentum:gradientScale:regularizationScale:clipsGradientsTo:usesNesterovMomentum:regularizationFunction:sgdMomentumVariant:)")
     public init(learningRate: Swift.Float, momentum: Swift.Float, gradientScale: Swift.Float, regularizationScale: Swift.Float, clipsGradientsTo gradientBounds: Swift.ClosedRange<Swift.Float>? = nil, usesNestrovMomentum: Swift.Bool, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction, sgdMomentumVariant: Accelerate.BNNSOptimizerSGDMomentumVariant)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
     public init(learningRate: Swift.Float, momentum: Swift.Float, gradientScale: Swift.Float, regularizationScale: Swift.Float, clipsGradientsTo gradientBounds: Swift.ClosedRange<Swift.Float>? = nil, usesNesterovMomentum: Swift.Bool, regularizationFunction: Accelerate.BNNSOptimizerRegularizationFunction, sgdMomentumVariant: Accelerate.BNNSOptimizerSGDMomentumVariant)
+    #endif
     public var bnnsOptimizerFunction: Accelerate.BNNSOptimizerFunction {
       get
     }
   }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public func pooling(_ function: Accelerate.BNNSGraph.Builder.PoolingFunction, kernelSize: [Swift.Int], strides: [Swift.Int], padding: Accelerate.BNNSGraph.Builder.PoolingPadding, ceilingMode: Accelerate.BNNSGraph.Builder.CeilingMode) -> Accelerate.BNNSGraph.Builder.Tensor<T>
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
@@ -4529,7 +4795,9 @@ extension Accelerate.BNNS {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS.FusedParametersLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [any Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+  #endif
   public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
   public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, inputC: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputCGradient inputCGradient: Accelerate.BNNSNDArrayDescriptor, generatingParameterGradients parameterGradients: [Accelerate.BNNSNDArrayDescriptor]) throws
 }
@@ -4537,9 +4805,13 @@ extension Accelerate.BNNS.FusedParametersLayer {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class NormalizationLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(type normalization: Accelerate.BNNS.NormalizationType, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, beta: Accelerate.BNNSNDArrayDescriptor, gamma: Accelerate.BNNSNDArrayDescriptor, momentum: Swift.Float = 0, epsilon: Swift.Float, activation: Accelerate.BNNS.ActivationFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
+    #if compiler(>=5.3) && $NonescapableTypes
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, generatingBetaGradient betaGradient: Accelerate.BNNSNDArrayDescriptor? = nil, generatingGammaGradient gammaGradient: Accelerate.BNNSNDArrayDescriptor? = nil) throws
+    #endif
     @objc deinit
   }
 }
@@ -4677,7 +4949,9 @@ extension Accelerate.vDSP {
   @available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
   @available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
   public class DFT<T> where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType, ofType: T.Type)
+    #endif
     public func transform<U>(inputReal: U, inputImaginary: U) -> (real: [T], imaginary: [T]) where T == U.Element, U : Accelerate.AccelerateBuffer
     public func transform<U, V>(inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where T == U.Element, U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == V.Element
     @objc deinit
@@ -4718,7 +4992,9 @@ extension Swift.Double : Accelerate.vDSP_FloatingPointDiscreteFourierTransformab
 @available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 public protocol vDSP_DFTFunctions {
   associatedtype Scalar
+  #if compiler(>=5.3) && $NonescapableTypes
   static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>?, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
+  #endif
   static func transform<U, V>(dftSetup: Swift.OpaquePointer, inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, Self.Scalar == U.Element, U.Element == V.Element
   static func destroySetup(_ setup: Swift.OpaquePointer)
 }
@@ -4729,7 +5005,9 @@ public protocol vDSP_DFTFunctions {
 @available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
 @available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_DFTFunctions {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
+  #endif
   public static func transform<U, V>(dftSetup: Swift.OpaquePointer, inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Float, V.Element == Swift.Float
   public static func destroySetup(_ setup: Swift.OpaquePointer)
 }
@@ -4740,7 +5018,9 @@ extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_DFTFunctions {
 @available(tvOS, deprecated, introduced: 13.0, message: "Use `vDSP.DiscreteFourierTransform`.")
 @available(*, deprecated, message: "Use `vDSP.DiscreteFourierTransform`.")
 extension Accelerate.vDSP.VectorizableDouble : Accelerate.vDSP_DFTFunctions {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func makeDFTSetup<T>(previous: Accelerate.vDSP.DFT<T>? = nil, count: Swift.Int, direction: Accelerate.vDSP.FourierTransformDirection, transformType: Accelerate.vDSP.DFTTransformType) -> Swift.OpaquePointer? where T : Accelerate.vDSP_FloatingPointDiscreteFourierTransformable
+  #endif
   public static func transform<U, V>(dftSetup: Swift.OpaquePointer, inputReal: U, inputImaginary: U, outputReal: inout V, outputImaginary: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Double, V.Element == Swift.Double
   public static func destroySetup(_ setup: Swift.OpaquePointer)
 }
@@ -5002,6 +5282,171 @@ extension Accelerate.BNNS.RMSPropOptimizer {
     get
     set
   }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder {
+  public enum ScatterMode : Swift.Hashable, Swift.Sendable {
+    case update
+    case add
+    case subtract
+    case multiply
+    case divide
+    case maximum
+    case minimum
+    public static func == (a: Accelerate.BNNSGraph.Builder.ScatterMode, b: Accelerate.BNNSGraph.Builder.ScatterMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Direction : Swift.Hashable, Swift.Sendable {
+    case forward
+    case reverse
+    public static func == (a: Accelerate.BNNSGraph.Builder.Direction, b: Accelerate.BNNSGraph.Builder.Direction) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Activation : Swift.Hashable, Swift.Sendable {
+    case hardSigmoid
+    case linear
+    case relu
+    case scaledTanh
+    case sigmoid
+    case tanh
+    public static func == (a: Accelerate.BNNSGraph.Builder.Activation, b: Accelerate.BNNSGraph.Builder.Activation) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum SortOrder : Swift.Hashable, Swift.Sendable {
+    case ascending
+    case descending
+    public static func == (a: Accelerate.BNNSGraph.Builder.SortOrder, b: Accelerate.BNNSGraph.Builder.SortOrder) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum PoolingFunction : Swift.Hashable, Swift.Sendable {
+    case average(includePadding: Swift.Bool)
+    case l2Norm
+    case max
+    public static func == (a: Accelerate.BNNSGraph.Builder.PoolingFunction, b: Accelerate.BNNSGraph.Builder.PoolingFunction) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum CeilingMode : Swift.Hashable, Swift.Sendable {
+    case floor
+    case ceiling
+    public static func == (a: Accelerate.BNNSGraph.Builder.CeilingMode, b: Accelerate.BNNSGraph.Builder.CeilingMode) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum Padding : Swift.Hashable, Swift.Sendable {
+    case constant(value: Swift.Float)
+    case reflection
+    case replication
+    public static func == (a: Accelerate.BNNSGraph.Builder.Padding, b: Accelerate.BNNSGraph.Builder.Padding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public typealias PoolingPadding = Accelerate.BNNSGraph.Builder.ConvolutionPadding
+  public enum ConvolutionPadding : Swift.Hashable, Swift.Sendable {
+    case valid
+    case custom(padding: [Swift.Int])
+    case same
+    case lower
+    public static func == (a: Accelerate.BNNSGraph.Builder.ConvolutionPadding, b: Accelerate.BNNSGraph.Builder.ConvolutionPadding) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public func matmul(transpose: Swift.Bool = false, other: some BNNSGraph.Builder.OperationParameter<T>, transposeOther: Swift.Bool = false, bias: some BNNSGraph.Builder.OperationParameter<T>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func matmul(transpose: Swift.Bool = false, other: some BNNSGraph.Builder.OperationParameter<T>, transposeOther: Swift.Bool = false) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func linear(weight: some BNNSGraph.Builder.OperationParameter<T>, bias: some BNNSGraph.Builder.OperationParameter<T>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func linear(weight: some BNNSGraph.Builder.OperationParameter<T>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func cast<U>(to type: U.Type) -> Accelerate.BNNSGraph.Builder.Tensor<U> where U : Accelerate.BNNSScalar
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func conv(weight: some BNNSGraph.Builder.OperationParameter<T>, strides: [Swift.Int], padding: Accelerate.BNNSGraph.Builder.ConvolutionPadding, dilations: [Swift.Int]? = nil, groupCount: Swift.Int = 1) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func conv(weight: some BNNSGraph.Builder.OperationParameter<T>, strides: [Swift.Int], bias: some BNNSGraph.Builder.OperationParameter<T>, padding: Accelerate.BNNSGraph.Builder.ConvolutionPadding, dilations: [Swift.Int]? = nil, groupCount: Swift.Int = 1) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func convTranspose(weight: some BNNSGraph.Builder.OperationParameter<T>, strides: [Swift.Int], padding: Accelerate.BNNSGraph.Builder.ConvolutionPadding, outputPaddingValues: [Swift.Int]? = nil, dilations: [Swift.Int]? = nil, groupCount: Swift.Int = 1) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func convTranspose(weight: some BNNSGraph.Builder.OperationParameter<T>, strides: [Swift.Int], bias: some BNNSGraph.Builder.OperationParameter<T>, padding: Accelerate.BNNSGraph.Builder.ConvolutionPadding, outputPaddingValues: [Swift.Int]? = nil, dilations: [Swift.Int]? = nil, groupCount: Swift.Int = 1) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  #endif
+  public func softmax(axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func logSoftmax(axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func softplus(alpha: Swift.Float) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func relu() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func relu6() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func leakyReLU(alpha: Swift.Float = 0.01) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func sigmoid() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func clampedReLU(alpha: Swift.Float, beta: Swift.Float) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func scaledTanh(alpha: Swift.Float, beta: Swift.Float) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func hardSigmoid(alpha: Swift.Float, beta: Swift.Float) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func softsign() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func elu(alpha: Swift.Float) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func thresholdedReLU(alpha: Swift.Float) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func hardSwish() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func silu() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func erf() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func gelu() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func geluTanhApproximation() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func geluSigmoidApproximation() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func prelu(alpha: [Swift.Float]) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func fma(y: some BNNSGraph.Builder.OperationParameter<T>, z: some BNNSGraph.Builder.OperationParameter<T>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func unsqueeze(axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func squeeze(axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func cos() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func cosh() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func sin() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func sinh() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func tan() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func tanh() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func acos() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func acosh() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func asin() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func asinh() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func atan() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func atanh() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func exp() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func exp2() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func log(epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func sqrt() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func rsqrt(epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func pow(y: some BNNSGraph.Builder.OperationParameter<T>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func max(y: some BNNSGraph.Builder.OperationParameter<T>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func min(y: some BNNSGraph.Builder.OperationParameter<T>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func abs() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func ceil() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func clip(to bounds: Swift.ClosedRange<Swift.Float>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func floor() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func reciprocal(epsilon: Swift.Float = .ulpOfOne.squareRoot()) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func round() -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func threshold(to lowerBound: Swift.Float) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor where T == Swift.Bool {
+  public func select<U>(_ valueIfTrue: Accelerate.BNNSGraph.Builder.Tensor<U>, _ valueIfFalse: Accelerate.BNNSGraph.Builder.Tensor<U>) -> Accelerate.BNNSGraph.Builder.Tensor<U> where U : Accelerate.BNNSScalar
+  public func select<U>(_ valueIfTrue: Accelerate.BNNSGraph.Builder.Tensor<U>, _ valueIfFalse: any Accelerate.BNNSGraph.Builder.OperationParameter<U>) -> Accelerate.BNNSGraph.Builder.Tensor<U> where U : Accelerate.BNNSScalar
+  public func select<U>(_ valueIfTrue: any Accelerate.BNNSGraph.Builder.OperationParameter<U>, _ valueIfFalse: Accelerate.BNNSGraph.Builder.Tensor<U>) -> Accelerate.BNNSGraph.Builder.Tensor<U> where U : Accelerate.BNNSScalar
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP {
@@ -5946,6 +6391,7 @@ extension Accelerate.vImage {
 }
 @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Float>, bias: Swift.Float? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_8888>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         precondition(self.vImageBuffer.data != destination.vImageBuffer.data,
@@ -5976,6 +6422,7 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
             }
         }
     }
+  #endif
   @inlinable public func separableConvolve(horizontalKernel: [Swift.Float], verticalKernel: [Swift.Float], bias: Swift.Float = 0, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_8888>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         precondition(self.size == destination.size,
@@ -6015,6 +6462,7 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Int16>, divisor: Swift.Int32?, bias: Swift.Int32? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_8888>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let div = divisor ?? kernel.values.map { Int32($0) }.reduce(0, +)
@@ -6034,9 +6482,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                        convolveFunc: vImageConvolve_ARGB8888,
                        convolveWithBiasFunc: vImageConvolveWithBias_ARGB8888)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Int16>, divisor: Swift.Int32?, bias: Swift.Int32? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_8>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let div = divisor ?? kernel.values.map { Int32($0) }.reduce(0, +)
@@ -6056,9 +6506,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                        convolveFunc: vImageConvolve_Planar8,
                        convolveWithBiasFunc: vImageConvolveWithBias_Planar8)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.MultiplePlanePixelFormat, Format.ComponentType == Swift.UInt8 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Int16>, divisor: Swift.Int32?, bias: Swift.Int32? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_8>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let div = divisor ?? kernel.values.map { Int32($0) }.reduce(0, +)
@@ -6085,9 +6537,11 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.MultiplePlaneP
             
         }
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.InterleavedFx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Float>, bias: Swift.Float? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_FFFF>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let backgroundColor: [Pixel_F]
@@ -6106,9 +6560,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                        convolveFunc: vImageConvolve_ARGBFFFF_wrapper,
                        convolveWithBiasFunc: vImageConvolveWithBias_ARGBFFFF_wrapper)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.PlanarF {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Float>, bias: Swift.Float? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_F>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let backgroundColor: Pixel_F
@@ -6127,9 +6583,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                        convolveFunc: vImageConvolve_PlanarF_wrapper,
                        convolveWithBiasFunc: vImageConvolveWithBias_PlanarF_wrapper)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Fx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Float>, bias: Swift.Float? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_ARGB_16F>, useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         precondition(self.vImageBuffer.data != destination.vImageBuffer.data,
@@ -6177,9 +6635,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
             }
         }
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar16F {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Float>, bias: Swift.Float? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_16F>, useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         precondition(self.vImageBuffer.data != destination.vImageBuffer.data,
@@ -6227,9 +6687,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
             }
         }
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.MultiplePlanePixelFormat, Format.ComponentType == Swift.Float {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func convolve(with kernel: Accelerate.vImage.ConvolutionKernel2D<Swift.Float>, bias: Swift.Float? = nil, edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_F>, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let backgroundColor: Pixel_F
@@ -6255,6 +6717,7 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.MultiplePlaneP
             
         }
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
@@ -6262,23 +6725,35 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFor
   internal typealias ConvolveFunc<K, BIAS_DIVISOR, BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.UnsafePointer<K>?, Swift.UInt32, Swift.UInt32, BIAS_DIVISOR, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
   @usableFromInline
   internal typealias ConvolveWithBiasFunc<K, BIAS_DIVISOR, BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.UnsafePointer<K>?, Swift.UInt32, Swift.UInt32, BIAS_DIVISOR, BIAS_DIVISOR, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _convolve<T, K, BIAS_DIVISOR, BG>(kernel: Accelerate.vImage.ConvolutionKernel2D<K>, divisor: BIAS_DIVISOR, bias: BIAS_DIVISOR? = nil, backgroundColor: BG, flags: Accelerate.vImage_Flags, destination: Accelerate.vImage.PixelBuffer<T>, convolveFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.UnsafePointer<K>?, Swift.UInt32, Swift.UInt32, BIAS_DIVISOR, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, convolveWithBiasFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.UnsafePointer<K>?, Swift.UInt32, Swift.UInt32, BIAS_DIVISOR, BIAS_DIVISOR, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error) where T : Accelerate.StaticPixelFormat
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format.ComponentType == Swift.Float {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func vImageConvolve_ARGBFFFF_wrapper(_ src: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ dest: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ tempBuffer: Swift.UnsafeMutableRawPointer!, _ srcOffsetToROI_X: Accelerate.vImagePixelCount, _ srcOffsetToROI_Y: Accelerate.vImagePixelCount, _ kernel: Swift.UnsafePointer<Swift.Float>!, _ kernel_height: Swift.UInt32, _ kernel_width: Swift.UInt32, unusedDivisor: Swift.Float, _ backgroundColor: Swift.UnsafePointer<Swift.Float>!, _ flags: Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func vImageConvolveWithBias_ARGBFFFF_wrapper(_ src: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ dest: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ tempBuffer: Swift.UnsafeMutableRawPointer!, _ srcOffsetToROI_X: Accelerate.vImagePixelCount, _ srcOffsetToROI_Y: Accelerate.vImagePixelCount, _ kernel: Swift.UnsafePointer<Swift.Float>!, _ kernel_height: Swift.UInt32, _ kernel_width: Swift.UInt32, unusedDivisor: Swift.Float, _ bias: Swift.Float, _ backgroundColor: Swift.UnsafePointer<Swift.Float>!, _ flags: Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func vImageConvolve_PlanarF_wrapper(_ src: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ dest: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ tempBuffer: Swift.UnsafeMutableRawPointer!, _ srcOffsetToROI_X: Accelerate.vImagePixelCount, _ srcOffsetToROI_Y: Accelerate.vImagePixelCount, _ kernel: Swift.UnsafePointer<Swift.Float>!, _ kernel_height: Swift.UInt32, _ kernel_width: Swift.UInt32, unusedDivisor: Swift.Float, _ backgroundColor: Swift.Float!, _ flags: Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func vImageConvolveWithBias_PlanarF_wrapper(_ src: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ dest: Swift.UnsafePointer<Accelerate.vImage_Buffer>, _ tempBuffer: Swift.UnsafeMutableRawPointer!, _ srcOffsetToROI_X: Accelerate.vImagePixelCount, _ srcOffsetToROI_Y: Accelerate.vImagePixelCount, _ kernel: Swift.UnsafePointer<Swift.Float>!, _ kernel_height: Swift.UInt32, _ kernel_width: Swift.UInt32, unusedDivisor: Swift.Float, _ bias: Swift.Float, _ backgroundColor: Swift.Float!, _ flags: Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func convolve(with kernels: (Accelerate.vImage.ConvolutionKernel2D<Swift.Int16>, Accelerate.vImage.ConvolutionKernel2D<Swift.Int16>, Accelerate.vImage.ConvolutionKernel2D<Swift.Int16>, Accelerate.vImage.ConvolutionKernel2D<Swift.Int16>), divisors: (Swift.Int32, Swift.Int32, Swift.Int32, Swift.Int32)?, biases: (Swift.Int32, Swift.Int32, Swift.Int32, Swift.Int32) = (0, 0, 0, 0), edgeMode: Accelerate.vImage.EdgeMode<Accelerate.Pixel_8888>, destination: Accelerate.vImage.PixelBuffer<Format>)
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage {
@@ -6291,10 +6766,12 @@ extension Accelerate.vImage {
     internal var vImageFlags: Accelerate.vImage_Flags {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     @usableFromInline
     internal var backgroundColor: PixelType? {
       get
     }
+    #endif
   }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
@@ -8009,14 +8486,20 @@ extension Accelerate.vDSP {
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func applyReduction(_ reductionFunction: Accelerate.BNNS.ReductionFunction, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ReductionLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(function reductionFunction: Accelerate.BNNS.ReductionFunction, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor, generatingWeightsGradient weightsGradient: Accelerate.BNNSNDArrayDescriptor? = nil) throws
+    #endif
     @objc deinit
   }
 }
@@ -8097,7 +8580,9 @@ extension Accelerate.vImage_PerpsectiveTransform : Swift.Equatable {
     }
   }
   public typealias QuadrilateralPoints = (CoreFoundation.CGPoint, CoreFoundation.CGPoint, CoreFoundation.CGPoint, CoreFoundation.CGPoint)
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(source: Accelerate.vImage_PerpsectiveTransform.QuadrilateralPoints, destination: Accelerate.vImage_PerpsectiveTransform.QuadrilateralPoints)
+  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8 {
@@ -8643,6 +9128,7 @@ extension Accelerate.vImage {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_8? = Pixel_8(0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         _rotate(rotation,
@@ -8652,9 +9138,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                 rotateFunc: vImageRotate_Planar8,
                 rotate90Func: vImageRotate90_Planar8)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_8888? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_8]?
@@ -8674,9 +9162,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                 rotateFunc: vImageRotate_ARGB8888,
                 rotate90Func: vImageRotate90_ARGB8888)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Ux4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_ARGB_16U? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_16U]?
@@ -8696,9 +9186,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                 rotateFunc: vImageRotate_ARGB16U,
                 rotate90Func: vImageRotate90_ARGB16U)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.InterleavedFx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_FFFF? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_F]?
@@ -8718,9 +9210,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                 rotateFunc: vImageRotate_ARGBFFFF,
                 rotate90Func: vImageRotate90_ARGBFFFF)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.PlanarF {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_F? = Pixel_F(0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         _rotate(rotation,
@@ -8730,9 +9224,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                 rotateFunc: vImageRotate_PlanarF,
                 rotate90Func: vImageRotate90_PlanarF)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar16F {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_16F? = Pixel_16F(0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         _rotate(rotation,
@@ -8743,9 +9239,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                 rotate90Func: vImageRotate90_Planar16F,
                 useFloat16Accumulator: useFloat16Accumulator)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Fx2 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_16F16F? = (0, 0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_16F]?
@@ -8764,9 +9262,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                 rotate90Func: vImageRotate90_CbCr16F,
                 useFloat16Accumulator: useFloat16Accumulator)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Fx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func rotate(_ rotation: Accelerate.vImage.Rotation, backgroundColor: Accelerate.Pixel_ARGB_16F? = (0, 0, 0, 0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_16F]?
@@ -8787,6 +9287,7 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                 rotate90Func: vImageRotate90_ARGB16F,
                 useFloat16Accumulator: useFloat16Accumulator)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
@@ -8794,8 +9295,10 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFor
   internal typealias RotateFunc<BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Swift.Float, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
   @usableFromInline
   internal typealias Rotate90Func<BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UInt8, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _rotate<T, BG>(_ rotation: Accelerate.vImage.Rotation, destination: Accelerate.vImage.PixelBuffer<T>, backgroundColor: BG?, nullBackgroundColor: BG, rotateFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Swift.Float, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, rotate90Func: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UInt8, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, useFloat16Accumulator: Swift.Bool = false) where T : Accelerate.StaticPixelFormat
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage {
@@ -8811,6 +9314,7 @@ extension Accelerate.vImage {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x2 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear(direction: Accelerate.vImage.ShearDirection, translate: Swift.Float, slope: Swift.Float, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_88? = (0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_8]?
@@ -8831,9 +9335,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                verticalShearFunc: vImageVerticalShear_CbCr8,
                horizontalShearFunc: vImageHorizontalShear_CbCr8)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar16U {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear(direction: Accelerate.vImage.ShearDirection, translate: Swift.Float, slope: Swift.Float, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_16U? = Pixel_16U(0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         _shear(direction: direction,
@@ -8846,16 +9352,20 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                verticalShearFunc: vImageVerticalShear_Planar16U,
                horizontalShearFunc: vImageHorizontalShear_Planar16U)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
   @usableFromInline
   internal typealias ShearFunc<BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.Float, Swift.Float, Accelerate.ResamplingFilter, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _shear<T, BG>(direction: Accelerate.vImage.ShearDirection, translate: Swift.Float, slope: Swift.Float, resamplingFilter: Accelerate.ResamplingFilter, destination: Accelerate.vImage.PixelBuffer<T>, backgroundColor: BG?, nullBackgroundColor: BG, verticalShearFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.Float, Swift.Float, Accelerate.ResamplingFilter, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, horizontalShearFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.Float, Swift.Float, Accelerate.ResamplingFilter, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, useFloat16Accumulator: Swift.Bool = false) where T : Accelerate.StaticPixelFormat
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Ux2 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_16U16U? = (0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             let bg: [Pixel_16U]?
@@ -8876,9 +9386,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     verticalShearFunc: vImageVerticalShearD_CbCr16U,
                     horizontalShearFunc: vImageHorizontalShearD_CbCr16U)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_8? = Pixel_8(0), destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             _shearD(direction: direction,
@@ -8891,9 +9403,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                     verticalShearFunc: vImageVerticalShearD_Planar8,
                     horizontalShearFunc: vImageHorizontalShearD_Planar8)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar16F {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_16F? = Pixel_16F(0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             _shearD(direction: direction,
@@ -8907,9 +9421,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                     horizontalShearFunc: vImageHorizontalShearD_Planar16F,
                     useFloat16Accumulator: useFloat16Accumulator)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Fx2 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_16F16F? = (0, 0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             let bg: [Pixel_16F]?
@@ -8931,9 +9447,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     horizontalShearFunc: vImageHorizontalShearD_CbCr16F,
                     useFloat16Accumulator: useFloat16Accumulator)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_8888? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             let bg: [Pixel_8]?
@@ -8956,9 +9474,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     verticalShearFunc: vImageVerticalShearD_ARGB8888,
                     horizontalShearFunc: vImageHorizontalShearD_ARGB8888)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Fx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_ARGB_16F? = (0, 0, 0, 0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             let bg: [Pixel_16F]?
@@ -8982,9 +9502,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     horizontalShearFunc: vImageHorizontalShearD_ARGB16F,
                     useFloat16Accumulator: useFloat16Accumulator)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Ux4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_ARGB_16U? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             let bg: [Pixel_16U]?
@@ -9007,9 +9529,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     verticalShearFunc: vImageVerticalShearD_ARGB16U,
                     horizontalShearFunc: vImageHorizontalShearD_ARGB16U)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.PlanarF {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_F? = Pixel_F(0), destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             _shearD(direction: direction,
@@ -9022,9 +9546,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                     verticalShearFunc: vImageVerticalShearD_PlanarF,
                     horizontalShearFunc: vImageHorizontalShearD_PlanarF)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.InterleavedFx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func shear<T>(direction: Accelerate.vImage.ShearDirection, translate: T, slope: T, resamplingFilter: Accelerate.ResamplingFilter, backgroundColor: Accelerate.Pixel_FFFF? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) where T : Swift.BinaryFloatingPoint {
             
             let bg: [Pixel_F]?
@@ -9047,13 +9573,16 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     verticalShearFunc: vImageVerticalShearD_ARGBFFFF,
                     horizontalShearFunc: vImageHorizontalShearD_ARGBFFFF)
         }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
   @usableFromInline
   internal typealias ShearFuncD<BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.Double, Swift.Double, Accelerate.ResamplingFilter, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _shearD<T, BG>(direction: Accelerate.vImage.ShearDirection, translate: Swift.Double, slope: Swift.Double, resamplingFilter: Accelerate.ResamplingFilter, destination: Accelerate.vImage.PixelBuffer<T>, backgroundColor: BG?, nullBackgroundColor: BG, verticalShearFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.Double, Swift.Double, Accelerate.ResamplingFilter, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, horizontalShearFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.Double, Swift.Double, Accelerate.ResamplingFilter, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, useFloat16Accumulator: Swift.Bool = false) where T : Accelerate.StaticPixelFormat
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage {
@@ -9401,6 +9930,7 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_8? = Pixel_8(0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         _affineWarp(transform,
@@ -9409,9 +9939,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                     nullBackgroundColor: Pixel_8(),
                     affineWarpFunc: vImageAffineWarpCG_Planar8)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar16F {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_16F? = Pixel_16F(0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         _affineWarpD(transform,
@@ -9421,9 +9953,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                      affineWarpFunc: vImageAffineWarpD_Planar16F,
                      useFloat16Accumulator: useFloat16Accumulator)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Fx2 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_16F16F? = (0, 0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_16F]?
@@ -9441,9 +9975,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                      affineWarpFunc: vImageAffineWarpD_CbCr16F,
                      useFloat16Accumulator: useFloat16Accumulator)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Fx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_ARGB_16F? = (0, 0, 0, 0), useFloat16Accumulator: Swift.Bool = false, destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_16F]?
@@ -9463,9 +9999,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                      affineWarpFunc: vImageAffineWarpD_ARGB16F,
                      useFloat16Accumulator: useFloat16Accumulator)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_8888? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_8]?
@@ -9484,9 +10022,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     nullBackgroundColor: [Pixel_8()],
                     affineWarpFunc: vImageAffineWarpCG_ARGB8888)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved16Ux4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_ARGB_16U? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_16U]?
@@ -9505,9 +10045,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     nullBackgroundColor: [Pixel_16U()],
                     affineWarpFunc: vImageAffineWarpCG_ARGB16U)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.PlanarF {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_F? = Pixel_F(0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         _affineWarp(transform,
@@ -9516,9 +10058,11 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
                     nullBackgroundColor: Pixel_F(),
                     affineWarpFunc: vImageAffineWarpCG_PlanarF)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.InterleavedFx4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transform(_ transform: CoreFoundation.CGAffineTransform, backgroundColor: Accelerate.Pixel_FFFF? = (0, 0, 0, 0), destination: Accelerate.vImage.PixelBuffer<Format>) {
         
         let bg: [Pixel_F]?
@@ -9537,17 +10081,22 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
                     nullBackgroundColor: [Pixel_F()],
                     affineWarpFunc: vImageAffineWarpCG_ARGBFFFF)
     }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
   @usableFromInline
   internal typealias AffineWarpFunc<BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Swift.UnsafePointer<Accelerate.vImage_CGAffineTransform>, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _affineWarp<BG>(_ transform: CoreFoundation.CGAffineTransform, destination: Accelerate.vImage.PixelBuffer<Format>, backgroundColor: BG?, nullBackgroundColor: BG, affineWarpFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Swift.UnsafePointer<Accelerate.vImage_CGAffineTransform>, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error)
+  #endif
   @usableFromInline
   internal typealias AffineWarpFuncD<BG> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Swift.UnsafePointer<Accelerate.vImage_AffineTransform_Double>, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _affineWarpD<BG>(_ transform: CoreFoundation.CGAffineTransform, destination: Accelerate.vImage.PixelBuffer<Format>, backgroundColor: BG?, nullBackgroundColor: BG, affineWarpFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Swift.UnsafePointer<Accelerate.vImage_AffineTransform_Double>, BG, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, useFloat16Accumulator: Swift.Bool = false)
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage_AffineTransform_Double {
@@ -9571,7 +10120,9 @@ extension Accelerate.BNNS {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS.FusedParametersLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [any Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+  #endif
   public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, for learningPhase: Accelerate.BNNS.LearningPhase) throws
   public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor, generatingParameterGradients parameterGradients: [Accelerate.BNNSNDArrayDescriptor]) throws
 }
@@ -9586,8 +10137,12 @@ public struct Quadrature {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func integrate(over interval: Swift.ClosedRange<Swift.Double>, integrand: (_ input: Swift.UnsafeBufferPointer<Swift.Double>, _ result: Swift.UnsafeMutableBufferPointer<Swift.Double>) -> ()) -> Swift.Result<(integralResult: Swift.Double, estimatedAbsoluteError: Swift.Double), Accelerate.Quadrature.Error>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func integrate(over interval: Swift.ClosedRange<Swift.Double>, integrand: (Swift.Double) -> Swift.Double) -> Swift.Result<(integralResult: Swift.Double, estimatedAbsoluteError: Swift.Double), Accelerate.Quadrature.Error>
+  #endif
   public enum Integrator {
     case qng
     public static let nonAdaptive: Accelerate.Quadrature.Integrator
@@ -9691,7 +10246,9 @@ extension Accelerate.vDSP {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   public struct FusedConvolutionParameters : Accelerate.FusableLayerParameters {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(type: Accelerate.BNNS.ConvolutionType, weights: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, stride: (x: Swift.Int, y: Swift.Int), dilationStride: (x: Swift.Int, y: Swift.Int), groupSize: Swift.Int, padding: Accelerate.BNNS.ConvolutionPadding)
+    #endif
     public var type: Accelerate.BNNS.ConvolutionType
     public var weights: Accelerate.BNNSNDArrayDescriptor
     public var bias: Accelerate.BNNSNDArrayDescriptor?
@@ -9717,14 +10274,18 @@ extension Accelerate.vDSP {
     }
   }
   public class FFT<T> where T : Accelerate.vDSP_FourierTransformable {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(log2n: Accelerate.vDSP_Length, radix: Accelerate.vDSP.Radix, ofType: T.Type)
+    #endif
     public func transform<T>(input: T, output: inout T, direction: Accelerate.vDSP.FourierTransformDirection) where T : Accelerate.vDSP_FourierTransformable
     public func forward(input: Accelerate.DSPSplitComplex, output: inout Accelerate.DSPSplitComplex)
     public func inverse(input: Accelerate.DSPSplitComplex, output: inout Accelerate.DSPSplitComplex)
     @objc deinit
   }
   public class FFT2D<T> : Accelerate.vDSP.FFT<T> where T : Accelerate.vDSP_FourierTransformable {
+    #if compiler(>=5.3) && $NonescapableTypes
     required public init?(width: Swift.Int, height: Swift.Int, ofType: T.Type)
+    #endif
     override public func transform<T>(input: T, output: inout T, direction: Accelerate.vDSP.FourierTransformDirection) where T : Accelerate.vDSP_FourierTransformable
     @objc deinit
   }
@@ -9732,7 +10293,9 @@ extension Accelerate.vDSP {
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol vDSP_FourierTransformFunctions {
   associatedtype SplitComplex
+  #if compiler(>=5.3) && $NonescapableTypes
   static func makeFFTSetup(log2n: Accelerate.vDSP_Length, radix: Accelerate.vDSP.Radix) -> Swift.OpaquePointer?
+  #endif
   static func transform(fftSetup: Swift.OpaquePointer, log2n: Accelerate.vDSP_Length, source: Swift.UnsafePointer<Self.SplitComplex>, destination: Swift.UnsafeMutablePointer<Self.SplitComplex>, direction: Accelerate.vDSP.FourierTransformDirection)
   static func transform2D(fftSetup: Swift.OpaquePointer, width: Swift.Int, height: Swift.Int, source: Swift.UnsafePointer<Self.SplitComplex>, destination: Swift.UnsafeMutablePointer<Self.SplitComplex>, direction: Accelerate.vDSP.FourierTransformDirection)
   static func destroySetup(_ setup: Swift.OpaquePointer)
@@ -9740,7 +10303,9 @@ public protocol vDSP_FourierTransformFunctions {
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public struct vDSP_SplitComplexFloat : Accelerate.vDSP_FourierTransformFunctions {
   public typealias SplitComplex = Accelerate.DSPSplitComplex
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func makeFFTSetup(log2n: Accelerate.vDSP_Length, radix: Accelerate.vDSP.Radix) -> Swift.OpaquePointer?
+  #endif
   public static func transform(fftSetup: Swift.OpaquePointer, log2n: Accelerate.vDSP_Length, source: Swift.UnsafePointer<Accelerate.vDSP_SplitComplexFloat.SplitComplex>, destination: Swift.UnsafeMutablePointer<Accelerate.vDSP_SplitComplexFloat.SplitComplex>, direction: Accelerate.vDSP.FourierTransformDirection)
   public static func transform2D(fftSetup: Swift.OpaquePointer, width: Swift.Int, height: Swift.Int, source: Swift.UnsafePointer<Accelerate.vDSP_SplitComplexFloat.SplitComplex>, destination: Swift.UnsafeMutablePointer<Accelerate.vDSP_SplitComplexFloat.SplitComplex>, direction: Accelerate.vDSP.FourierTransformDirection)
   public static func destroySetup(_ setup: Swift.OpaquePointer)
@@ -9748,7 +10313,9 @@ public struct vDSP_SplitComplexFloat : Accelerate.vDSP_FourierTransformFunctions
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public struct vDSP_SplitComplexDouble : Accelerate.vDSP_FourierTransformFunctions {
   public typealias SplitComplex = Accelerate.DSPDoubleSplitComplex
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func makeFFTSetup(log2n: Accelerate.vDSP_Length, radix: Accelerate.vDSP.Radix) -> Swift.OpaquePointer?
+  #endif
   public static func transform(fftSetup: Swift.OpaquePointer, log2n: Accelerate.vDSP_Length, source: Swift.UnsafePointer<Accelerate.vDSP_SplitComplexDouble.SplitComplex>, destination: Swift.UnsafeMutablePointer<Accelerate.vDSP_SplitComplexDouble.SplitComplex>, direction: Accelerate.vDSP.FourierTransformDirection)
   public static func transform2D(fftSetup: Swift.OpaquePointer, width: Swift.Int, height: Swift.Int, source: Swift.UnsafePointer<Accelerate.vDSP_SplitComplexDouble.SplitComplex>, destination: Swift.UnsafeMutablePointer<Accelerate.vDSP_SplitComplexDouble.SplitComplex>, direction: Accelerate.vDSP.FourierTransformDirection)
   public static func destroySetup(_ setup: Swift.OpaquePointer)
@@ -9803,7 +10370,9 @@ extension Accelerate.BNNS {
     @objc deinit
   }
   public class RandomGenerator {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(method: Accelerate.BNNS.RandomGeneratorMethod, seed: Swift.UInt64? = nil, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
     public var state: Accelerate.BNNS.RandomGeneratorState {
       get
@@ -9813,8 +10382,12 @@ extension Accelerate.BNNS {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNSNDArrayDescriptor {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func allocate<Scalar>(randomUniformUsing: Accelerate.BNNS.RandomGenerator, range: Swift.ClosedRange<Scalar>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor? where Scalar : Accelerate.BNNSScalar, Scalar : Swift.BinaryFloatingPoint
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func allocate<Scalar>(randomUniformUsing: Accelerate.BNNS.RandomGenerator, range: Swift.ClosedRange<Scalar>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor? where Scalar : Accelerate.BNNSScalar, Scalar : Swift.FixedWidthInteger
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat, Format.ComponentType == Swift.Float {
@@ -9846,7 +10419,9 @@ extension Accelerate.vImage {
     case unsupportedConversion
     case coreVideoIsAbsent
     public init(vImageError: Accelerate.vImage_Error)
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
@@ -9857,14 +10432,22 @@ extension Accelerate.vImage {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func quantize(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int? = nil, scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func dequantize(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axis: Swift.Int? = nil, scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func computeNorm(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axes: [Swift.Int]? = nil) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func computeNormBackward(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axes: [Swift.Int]? = nil, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor) throws
+  #endif
 }
 @available(macOS 15.0, *)
 public struct BLAS {
@@ -9883,8 +10466,12 @@ public struct BLAS {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vImageConverter {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func sourceBuffers(colorSpace: CoreGraphics.CGColorSpace) -> [Accelerate.vImage.BufferType?]
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func destinationBuffers(colorSpace: CoreGraphics.CGColorSpace) -> [Accelerate.vImage.BufferType?]
+  #endif
   public var sourceBufferCount: Swift.Int {
     get
   }
@@ -9927,7 +10514,9 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP {
   public struct Biquad<T> where T : Accelerate.vDSP_FloatingPointBiquadFilterable {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(coefficients: [Swift.Double], channelCount: Accelerate.vDSP_Length, sectionCount: Accelerate.vDSP_Length, ofType: T.Type)
+    #endif
     public mutating func apply<U>(input: U) -> [T] where T == U.Element, U : Accelerate.AccelerateBuffer
     public mutating func apply<U, V>(input: U, output: inout V) where T == U.Element, U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == V.Element
   }
@@ -9947,13 +10536,16 @@ extension Swift.Double : Accelerate.vDSP_FloatingPointBiquadFilterable {
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 public protocol vDSP_BiquadFunctions {
   associatedtype Scalar
+  #if compiler(>=5.3) && $NonescapableTypes
   static func makeBiquadSetup(channelCount: Accelerate.vDSP_Length, coefficients: [Swift.Double], sectionCount: Accelerate.vDSP_Length) -> Swift.OpaquePointer?
+  #endif
   static func applySingle<U, V>(source: U, destination: inout V, delays: Swift.UnsafeMutablePointer<Self.Scalar>, setup: Accelerate.vDSP_biquad_Setup, sectionCount: Accelerate.vDSP_Length, count: Accelerate.vDSP_Length) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, Self.Scalar == U.Element, U.Element == V.Element
   static func applyMulti(setup: Accelerate.vDSP_biquadm_SetupD, pInputs: Swift.UnsafeMutablePointer<Swift.UnsafePointer<Self.Scalar>>, pOutputs: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Self.Scalar>>, count: Accelerate.vDSP_Length)
   static func destroySetup(channelCount: Swift.UInt, biquadSetup: Swift.OpaquePointer)
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_BiquadFunctions {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public static func makeBiquadSetup(channelCount: Swift.UInt, coefficients: [Swift.Double], sectionCount: Swift.UInt) -> Swift.OpaquePointer? {
         if channelCount == 1 {
             return vDSP_biquad_CreateSetup(coefficients,
@@ -9964,6 +10556,7 @@ extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_BiquadFunctions {
                                             channelCount)
         }
     }
+  #endif
   @inlinable public static func applySingle<U, V>(source: U, destination: inout V, delays: Swift.UnsafeMutablePointer<Accelerate.vDSP.VectorizableFloat.Scalar>, setup: Accelerate.vDSP_biquad_Setup, sectionCount: Accelerate.vDSP_Length, count: Accelerate.vDSP_Length) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Float, V.Element == Swift.Float {
             
             destination.withUnsafeMutableBufferPointer { dest in
@@ -9992,6 +10585,7 @@ extension Accelerate.vDSP.VectorizableFloat : Accelerate.vDSP_BiquadFunctions {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.VectorizableDouble : Accelerate.vDSP_BiquadFunctions {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public static func makeBiquadSetup(channelCount: Accelerate.vDSP_Length, coefficients: [Swift.Double], sectionCount: Accelerate.vDSP_Length) -> Swift.OpaquePointer? {
         if channelCount == 1 {
             return vDSP_biquad_CreateSetupD(coefficients,
@@ -10002,6 +10596,7 @@ extension Accelerate.vDSP.VectorizableDouble : Accelerate.vDSP_BiquadFunctions {
                                              channelCount)
         }
     }
+  #endif
   @inlinable public static func applySingle<U, V>(source: U, destination: inout V, delays: Swift.UnsafeMutablePointer<Accelerate.vDSP.VectorizableDouble.Scalar>, setup: Accelerate.vDSP_biquad_Setup, sectionCount: Accelerate.vDSP_Length, count: Accelerate.vDSP_Length) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Double, V.Element == Swift.Double {
             
             destination.withUnsafeMutableBufferPointer { dest in
@@ -10032,7 +10627,9 @@ extension Accelerate.vDSP.VectorizableDouble : Accelerate.vDSP_BiquadFunctions {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class DropoutLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, rate: Swift.Float, seed: Swift.UInt32, control: Swift.UInt8, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
 }
@@ -10040,7 +10637,9 @@ extension Accelerate.BNNS {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FullyConnectedLayer : Accelerate.BNNS.ConvolutionLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor, bias: Accelerate.BNNSNDArrayDescriptor?, activation: Accelerate.BNNS.ActivationFunction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
 }
@@ -10257,11 +10856,15 @@ extension Accelerate.BNNSVectorDescriptor {
 @available(tvOS, introduced: 10.0, deprecated: 15.0, message: "BNNS switched to new Layer Parameters data structures.")
 @available(*, deprecated, message: "BNNS switched to new Layer Parameters data structures.")
 extension Accelerate.BNNSLayerData {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(data: Swift.UnsafeRawPointer?, data_type: Accelerate.BNNSDataType, data_scale: Swift.Float = 1, data_bias: Swift.Float = 0)
+  #endif
   public static var zero: Accelerate.BNNSLayerData {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func indexed8(data: Swift.UnsafePointer<Swift.Int8>?, data_table: Swift.UnsafePointer<Swift.Float>) -> Accelerate.BNNSLayerData
+  #endif
 }
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
@@ -10406,7 +11009,9 @@ extension Accelerate.AccelerateMutableBuffer where Self.Element == Swift.UInt16 
 @frozen public enum AccelerateMatrixOrder : Swift.Int {
   case rowMajor
   case columnMajor
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, macOS 15.0, *)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -10454,9 +11059,7 @@ extension Swift.Float : Accelerate.BNNSScalar {
     get
   }
 }
-@available(iOS 14, tvOS 14, watchOS 7, *)
-@available(macOS, unavailable)
-@available(macCatalyst, unavailable)
+@available(iOS 14, tvOS 14, watchOS 7, macOS 26.0, macCatalyst 26.0, *)
 extension Swift.Float16 : Accelerate.BNNSScalar {
   public static var bnnsDataType: Accelerate.BNNSDataType {
     get
@@ -10519,8 +11122,12 @@ extension Swift.UInt64 : Accelerate.BNNSScalar {
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNSNDArrayDescriptor {
   public init(dataType: Accelerate.BNNSDataType, shape: Accelerate.BNNS.Shape)
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: any Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?<T>(data: Swift.UnsafeMutableBufferPointer<T>, shape: Accelerate.BNNS.Shape) where T : Accelerate.BNNSScalar
+  #endif
   public static func allocateUninitialized(scalarType: any Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor
   public static func allocate<C>(initializingFrom source: C, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where C : Swift.Collection, C.Element : Accelerate.BNNSScalar
   public static func allocate<Scalar>(randomIn range: Swift.ClosedRange<Scalar>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where Scalar : Accelerate.BNNSScalar, Scalar : Swift.FixedWidthInteger
@@ -10528,7 +11135,9 @@ extension Accelerate.BNNSNDArrayDescriptor {
   public static func allocate<Scalar, Generator>(randomIn range: Swift.ClosedRange<Scalar>, using generator: inout Generator, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where Scalar : Accelerate.BNNSScalar, Scalar : Swift.FixedWidthInteger, Generator : Swift.RandomNumberGenerator
   public static func allocate<Scalar, Generator>(randomIn range: Swift.ClosedRange<Scalar>, using generator: inout Generator, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where Scalar : Accelerate.BNNSScalar, Scalar : Swift.BinaryFloatingPoint, Generator : Swift.RandomNumberGenerator, Scalar.RawSignificand : Swift.FixedWidthInteger
   public static func allocate<T>(repeating repeatedValue: T, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int = 1) -> Accelerate.BNNSNDArrayDescriptor where T : Accelerate.BNNSScalar
+  #if compiler(>=5.3) && $NonescapableTypes
   public func makeArray<T>(of scalarType: T.Type, batchSize: Swift.Int = 1) -> [T]?
+  #endif
   public var shape: Accelerate.BNNS.Shape {
     get
   }
@@ -10536,8 +11145,12 @@ extension Accelerate.BNNSNDArrayDescriptor {
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Accelerate.BNNSNDArrayDescriptor {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(data: Swift.UnsafeMutableRawBufferPointer, scalarType: any Accelerate.BNNSScalar.Type, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?<T>(data: Swift.UnsafeMutableBufferPointer<T>, shape: Accelerate.BNNS.Shape, batchSize: Swift.Int) where T : Accelerate.BNNSScalar
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.InterleavedFx3 {
@@ -10787,6 +11400,7 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func applyLookup(alphaTable: [Accelerate.Pixel_8]?, redTable: [Accelerate.Pixel_8]?, greenTable: [Accelerate.Pixel_8]?, blueTable: [Accelerate.Pixel_8]?, destination: Accelerate.vImage.PixelBuffer<Accelerate.vImage.Interleaved8x4>) {
         
         precondition(alphaTable?.count ?? 256 == 256,
@@ -10814,6 +11428,7 @@ extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interl
             }
         }
     }
+  #endif
 }
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.PlanarF {
@@ -10929,11 +11544,8 @@ extension Accelerate.BNNS {
       get
     }
     public static func == (a: Accelerate.BNNS.ArithmeticUnaryFunction, b: Accelerate.BNNS.ArithmeticUnaryFunction) -> Swift.Bool
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     @available(*, deprecated, message: "Use the BNNSGraph API instead.")
-    @available(iOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
-    @available(tvOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
-    @available(watchOS, introduced: 7.0, message: "Use the BNNSGraph API instead.")
-    @available(macOS, introduced: 11.0, message: "Use the BNNSGraph API instead.")
     public typealias AllCases = [Accelerate.BNNS.ArithmeticUnaryFunction]
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -10962,11 +11574,8 @@ extension Accelerate.BNNS {
       get
     }
     public static func == (a: Accelerate.BNNS.ArithmeticBinaryFunction, b: Accelerate.BNNS.ArithmeticBinaryFunction) -> Swift.Bool
+    @available(iOS 14.0, tvOS 14.0, watchOS 7.0, macOS 11.0, *)
     @available(*, deprecated, message: "Use the BNNSGraph API instead.")
-    @available(iOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
-    @available(tvOS, introduced: 14.0, message: "Use the BNNSGraph API instead.")
-    @available(watchOS, introduced: 7.0, message: "Use the BNNSGraph API instead.")
-    @available(macOS, introduced: 11.0, message: "Use the BNNSGraph API instead.")
     public typealias AllCases = [Accelerate.BNNS.ArithmeticBinaryFunction]
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -10978,13 +11587,17 @@ extension Accelerate.BNNS {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class UnaryArithmeticLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, inputDescriptorType: Accelerate.BNNS.DescriptorType, output: Accelerate.BNNSNDArrayDescriptor, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticUnaryFunction, activation: Accelerate.BNNS.ActivationFunction = .identity, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
     public func applyBackward(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor) throws
     @objc deinit
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class BinaryArithmeticLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(inputA: Accelerate.BNNSNDArrayDescriptor, inputADescriptorType: Accelerate.BNNS.DescriptorType, inputB: Accelerate.BNNSNDArrayDescriptor, inputBDescriptorType: Accelerate.BNNS.DescriptorType, output: Accelerate.BNNSNDArrayDescriptor, outputDescriptorType: Accelerate.BNNS.DescriptorType, function: Accelerate.BNNS.ArithmeticBinaryFunction, activation: Accelerate.BNNS.ActivationFunction = .identity, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     public func apply(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
     public func applyBackward(batchSize: Swift.Int, inputA: Accelerate.BNNSNDArrayDescriptor, inputB: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, outputGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputAGradient inputAGradient: Accelerate.BNNSNDArrayDescriptor, generatingInputBGradient inputBGradient: Accelerate.BNNSNDArrayDescriptor) throws
     @objc deinit
@@ -11138,7 +11751,9 @@ extension Accelerate.BNNS {
     }
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class ResizeLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(interpolationMethod: Accelerate.BNNS.InterpolationMethod, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, alignsCorners: Swift.Bool, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
 }
@@ -12995,8 +13610,10 @@ extension Accelerate.BNNS {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS.FullyConnectedLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
   public static func sparsify(batchSize: Swift.Int = 1, inputLayout layout: Accelerate.BNNS.SparseLayout, inputDenseShape: Accelerate.BNNSNDArrayDescriptor, inputValues: Accelerate.BNNSNDArrayDescriptor, output: inout Accelerate.BNNSNDArrayDescriptor, sparseParameters: Accelerate.BNNS.SparseParameters? = nil, workspace: Swift.UnsafeMutableRawBufferPointer? = nil, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
@@ -13334,7 +13951,9 @@ extension Accelerate.vImage.InterleavedFx4 {
 internal func convert<Src, Dest>(src: Src, dest: inout Dest, convertFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImage_Flags) -> Swift.Int, channelCount: Swift.Int)
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func copy(_ source: Accelerate.BNNSNDArrayDescriptor, to destination: Accelerate.BNNSNDArrayDescriptor, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Interleaved8x4 {
@@ -13418,8 +14037,10 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFor
   internal typealias MorphologyErodeDilateFunc<T> = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.UnsafePointer<T>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
   @usableFromInline
   internal typealias MorphologyMinMaxFunc = (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImage_Flags) -> Accelerate.vImage_Error
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal func _applyMorphology<T, U>(operation: Accelerate.vImage.MorphologyOperation<U>, destination: Accelerate.vImage.PixelBuffer<T>, erodeFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.UnsafePointer<U>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, dilateFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Swift.UnsafePointer<U>, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, minFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImage_Flags) -> Accelerate.vImage_Error, maxFunc: (Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafePointer<Accelerate.vImage_Buffer>, Swift.UnsafeMutableRawPointer?, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImagePixelCount, Accelerate.vImage_Flags) -> Accelerate.vImage_Error) where T : Accelerate.StaticPixelFormat, U == T.ComponentType
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage {
@@ -13429,9 +14050,11 @@ extension Accelerate.vImage {
     case minimize(kernelSize: Accelerate.vImage.Size)
     case dilate(structuringElement: Accelerate.vImage.ConvolutionKernel2D<ComponentType>)
     case erode(structuringElement: Accelerate.vImage.ConvolutionKernel2D<ComponentType>)
+    #if compiler(>=5.3) && $NonescapableTypes
     public var structuringElement: Accelerate.vImage.ConvolutionKernel2D<ComponentType>? {
       get
     }
+    #endif
     public var width: Accelerate.vImagePixelCount {
       get
     }
@@ -13443,24 +14066,49 @@ extension Accelerate.vImage {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func matrixMultiplicationWorkspaceSize(inputA: Accelerate.BNNSNDArrayDescriptor, transposed transposeA: Swift.Bool, inputB: Accelerate.BNNSNDArrayDescriptor, transposed transposeB: Swift.Bool, output: Accelerate.BNNSNDArrayDescriptor, alpha: Swift.Float, filterParameters: Accelerate.BNNSFilterParameters? = nil) -> Swift.Int?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func applyMatrixMultiplication(inputA: Accelerate.BNNSNDArrayDescriptor, transposed transposeA: Swift.Bool, inputB: Accelerate.BNNSNDArrayDescriptor, transposed transposeB: Swift.Bool, output: Accelerate.BNNSNDArrayDescriptor, alpha: Swift.Float, workspace: Swift.UnsafeMutableRawBufferPointer?, filterParameters: Accelerate.BNNSFilterParameters? = nil) throws
+  #endif
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   public struct FusedQuantizationParameters : Accelerate.FusableLayerParameters {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?)
+    #endif
     public var axis: Swift.Int?
     public var scale: Accelerate.BNNSNDArrayDescriptor?
     public var bias: Accelerate.BNNSNDArrayDescriptor?
   }
   public struct FusedDequantizationParameters : Accelerate.FusableLayerParameters {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(scale: Accelerate.BNNSNDArrayDescriptor?, bias: Accelerate.BNNSNDArrayDescriptor?)
+    #endif
     public var axis: Swift.Int?
     public var scale: Accelerate.BNNSNDArrayDescriptor?
     public var bias: Accelerate.BNNSNDArrayDescriptor?
   }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public func argMin(axis: Swift.Int, keepDimension: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Int32>
+  public func argMax(axis: Swift.Int, keepDimension: Swift.Bool) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Int32>
+  public func argSort(axis: Swift.Int, sortOrder: Accelerate.BNNSGraph.Builder.SortOrder) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Int32>
+  public func cumulativeSum(axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func pad(_ type: Accelerate.BNNSGraph.Builder.Padding, padding: [Swift.Int]) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func tensorShape() -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Int32>
+  public func reshape(to shape: some BNNSGraph.Builder.OperationParameter<Int32>) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func reshape(to shape: [Swift.Int]) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func transpose(axes: [Swift.Int]) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func topK(_ k: Swift.Int, axis: Swift.Int, findLargest: Swift.Bool) -> (values: Accelerate.BNNSGraph.Builder.Tensor<T>, indices: Accelerate.BNNSGraph.Builder.Tensor<Swift.Int32>)
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder {
+  public func concatenate<T>(_ tensors: [Accelerate.BNNSGraph.Builder.Tensor<T>], axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T> where T : Accelerate.BNNSScalar
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format.ComponentType == Swift.UInt8 {
@@ -13886,6 +14534,13 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.MultiplePlaneP
   @usableFromInline
   internal func _specifyHistogram(_ histogram: [[Accelerate.vImagePixelCount]], binCount: Swift.Int, destination: Accelerate.vImage.PixelBuffer<Format>)
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public func rnn(initialHiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>, inputHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, bias: Accelerate.BNNSGraph.Builder.Tensor<T>, direction: Accelerate.BNNSGraph.Builder.Direction, activation: Accelerate.BNNSGraph.Builder.Activation, outputSequence: Swift.Bool) -> (output: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>)
+  public func gru(initialHiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>, inputHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, bias: Accelerate.BNNSGraph.Builder.Tensor<T>, inputBias: Accelerate.BNNSGraph.Builder.Tensor<T>, direction: Accelerate.BNNSGraph.Builder.Direction, activation: Accelerate.BNNSGraph.Builder.Activation, recurrentActivation: Accelerate.BNNSGraph.Builder.Activation, applyResetGateAfterMatMul: Swift.Bool, outputSequence: Swift.Bool) -> (output: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>)
+  public func lstm(initialHiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>, initialCellStates: Accelerate.BNNSGraph.Builder.Tensor<T>, inputHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, bias: Accelerate.BNNSGraph.Builder.Tensor<T>, direction: Accelerate.BNNSGraph.Builder.Direction, activation: Accelerate.BNNSGraph.Builder.Activation, recurrentActivation: Accelerate.BNNSGraph.Builder.Activation, cellActivation: Accelerate.BNNSGraph.Builder.Activation, outputSequence: Swift.Bool) -> (output: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>, memoryStates: Accelerate.BNNSGraph.Builder.Tensor<T>)
+  public func bidirectionalLSTM(initialHiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>, initialCellStates: Accelerate.BNNSGraph.Builder.Tensor<T>, inputHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenHiddenWeight: Accelerate.BNNSGraph.Builder.Tensor<T>, bias: Accelerate.BNNSGraph.Builder.Tensor<T>, inputHiddenWeightBack: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenHiddenWeightBack: Accelerate.BNNSGraph.Builder.Tensor<T>, biasBack: Accelerate.BNNSGraph.Builder.Tensor<T>, activation: Accelerate.BNNSGraph.Builder.Activation, recurrentActivation: Accelerate.BNNSGraph.Builder.Activation, cellActivation: Accelerate.BNNSGraph.Builder.Activation, outputSequence: Swift.Bool) -> (output: Accelerate.BNNSGraph.Builder.Tensor<T>, hiddenStates: Accelerate.BNNSGraph.Builder.Tensor<T>, memoryStates: Accelerate.BNNSGraph.Builder.Tensor<T>)
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage {
   public struct PixelBuffer<Format> where Format : Accelerate.PixelFormat {
@@ -13933,7 +14588,9 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.SinglePlanePix
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(data: Swift.UnsafeMutableRawPointer, width: Swift.Int, height: Swift.Int, byteCountPerRow: Swift.Int? = nil, pixelFormat: Format.Type = Format.self)
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.MultiplePlanePixelFormat {
@@ -14019,11 +14676,15 @@ extension Accelerate.vImage.PixelBuffer where Format : Accelerate.InitializableF
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func makeCGImage(cgImageFormat: Accelerate.vImage_CGImageFormat) -> CoreGraphics.CGImage?
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format : Accelerate.SinglePlanePixelFormat {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(referencing lockedCVPixelBuffer: CoreVideo.CVPixelBuffer, planeIndex: Swift.Int, overrideSize: Accelerate.vImage.Size? = nil, pixelFormat: Format.Type = Format.self)
+  #endif
   public init(copying cvPixelBuffer: CoreVideo.CVPixelBuffer, cvImageFormat: Accelerate.vImageCVImageFormat, cgImageFormat: inout Accelerate.vImage_CGImageFormat, pixelFormat: Format.Type = Format.self) throws
   public init(referencing lockedCVPixelBuffer: CoreVideo.CVPixelBuffer, converter: Accelerate.vImageConverter, destinationPixelFormat: Format.Type = Format.self)
   public func copy(to cvPixelBuffer: CoreVideo.CVPixelBuffer, cvImageFormat: Accelerate.vImageCVImageFormat, cgImageFormat: Accelerate.vImage_CGImageFormat) throws
@@ -14043,24 +14704,41 @@ extension Accelerate.vImage.PixelBuffer : Accelerate.AccelerateBuffer, Accelerat
   public var rowStride: Swift.Int {
     get
   }
+  @_alwaysEmitIntoClient public var bytesPerRow: Swift.Int {
+    get {
+        return vImageBuffer.self.rowBytes
+    }
+  }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImageCVImageFormat {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func make(format: Accelerate.vImageCVImageFormat.Format, colorSpace: CoreGraphics.CGColorSpace, alphaIsOpaqueHint: Swift.Bool) -> Accelerate.vImageCVImageFormat?
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage {
   public struct Size : Swift.Equatable {
     public let width: Swift.Int
     public let height: Swift.Int
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?<T>(exactWidth: T, height: T) where T : Swift.BinaryInteger
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?<T>(exactWidth: T, height: T) where T : Swift.BinaryFloatingPoint
+    #endif
     public init(width: Swift.Int, height: Swift.Int)
     public init(width: Accelerate.vImagePixelCount, height: Accelerate.vImagePixelCount)
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(exactly size: CoreFoundation.CGSize)
+    #endif
     public init(cvPixelBuffer: CoreVideo.CVPixelBuffer)
     public static func == (a: Accelerate.vImage.Size, b: Accelerate.vImage.Size) -> Swift.Bool
   }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.vImage.PixelBuffer where Format : Accelerate.StaticPixelFormat, Format.ComponentType : Accelerate.BNNSScalar {
+  public func withBNNSTensor<R>(_ body: (Accelerate.BNNSTensor) throws -> R) rethrows -> R
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage {
@@ -14134,7 +14812,9 @@ public protocol FusableLayerParameters {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class FusedParametersLayer : Accelerate.BNNS.FusedLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, fusedLayerParameters: [any Accelerate.FusableLayerParameters], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
 }
@@ -14154,7 +14834,9 @@ extension Accelerate.BNNS {
     }
   }
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class PaddingLayer : Accelerate.BNNS.UnaryLayer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, mode: Accelerate.BNNS.PaddingMode, size: [(x: Swift.Int, y: Swift.Int)], filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     @objc deinit
   }
 }
@@ -14399,6 +15081,122 @@ extension Accelerate.vForce {
         
         return result
     }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Context {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func executeFunction(_ function: Swift.String? = nil, arguments: inout [Accelerate.BNNSTensor]) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func allocateTensor(forFunction function: Swift.String? = nil, argument: Swift.String, fillKnownDynamicShapes: Swift.Bool) -> Accelerate.BNNSTensor?
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph {
+  public protocol TensorDescriptor {
+    #if compiler(>=5.3) && $NonescapableTypes
+    var tensorData: Swift.UnsafeMutableRawPointer? { get }
+    #endif
+  }
+  public static func makeContext(options: Accelerate.BNNSGraph.CompileOptions = CompileOptions(), _ block: (inout Accelerate.BNNSGraph.Builder) -> [any Accelerate.BNNSGraph.TensorDescriptor]) throws -> Accelerate.BNNSGraph.Context
+  public struct Builder {
+    public struct Tensor<T> : Accelerate.BNNSGraph.TensorDescriptor, Swift.CustomStringConvertible where T : Accelerate.BNNSScalar {
+      #if compiler(>=5.3) && $NonescapableTypes
+      public var tensorData: Swift.UnsafeMutableRawPointer? {
+        get
+      }
+      #endif
+      public var description: Swift.String {
+        get
+      }
+      #if compiler(>=5.3) && $NonescapableTypes
+      public var dataType: Accelerate.BNNSDataType? {
+        get
+      }
+      #endif
+      #if compiler(>=5.3) && $NonescapableTypes
+      public var rank: Swift.Int? {
+        get
+      }
+      #endif
+      #if compiler(>=5.3) && $NonescapableTypes
+      public var shape: [Swift.Int]? {
+        get
+      }
+      #endif
+      #if compiler(>=5.3) && $NonescapableTypes
+      public var stride: [Swift.Int]? {
+        get
+      }
+      #endif
+    }
+    public enum Intent {
+      case input
+      case inputOutput
+      public static func == (a: Accelerate.BNNSGraph.Builder.Intent, b: Accelerate.BNNSGraph.Builder.Intent) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    #if compiler(>=5.3) && $NonescapableTypes
+    public func argument<T>(name: Swift.String? = nil, dataType: T.Type, shape: [Swift.Int], intent: Accelerate.BNNSGraph.Builder.Intent = .input) -> Accelerate.BNNSGraph.Builder.Tensor<T> where T : Accelerate.BNNSScalar
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public func constant<T>(name: Swift.String? = nil, value: T) -> Accelerate.BNNSGraph.Builder.Tensor<T> where T : Accelerate.BNNSScalar
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public func constant<T>(name: Swift.String? = nil, values: some AccelerateBuffer<T>, shape: [Swift.Int]? = nil) -> Accelerate.BNNSGraph.Builder.Tensor<T> where T : Accelerate.BNNSScalar
+    #endif
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder {
+  public func constant(values: Swift.Array<Swift.Array<Swift.Float16>>, rowMajor: Swift.Bool = false) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Float16>
+  public func constant(values: Swift.Array<Swift.Array<Swift.Float>>, rowMajor: Swift.Bool = false) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Float>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder {
+  public protocol OperationParameter<Element> {
+    associatedtype Element : Accelerate.BNNSScalar
+    func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Self.Element>
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor : Accelerate.BNNSGraph.Builder.OperationParameter {
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
+  public typealias Element = T
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.Array : Accelerate.BNNSGraph.Builder.OperationParameter where Element : Accelerate.BNNSScalar {
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Element>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.ContiguousArray : Accelerate.BNNSGraph.Builder.OperationParameter where Element : Accelerate.BNNSScalar {
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Element>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.ArraySlice : Accelerate.BNNSGraph.Builder.OperationParameter where Element : Accelerate.BNNSScalar {
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Element>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.UnsafeBufferPointer : Accelerate.BNNSGraph.Builder.OperationParameter where Element : Accelerate.BNNSScalar {
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Element>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.UnsafeMutableBufferPointer : Accelerate.BNNSGraph.Builder.OperationParameter where Element : Accelerate.BNNSScalar {
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Element>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.Float16 : Accelerate.BNNSGraph.Builder.OperationParameter {
+  public typealias Element = Swift.Float16
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Float16>
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Swift.Float : Accelerate.BNNSGraph.Builder.OperationParameter {
+  public typealias Element = Swift.Float
+  public func graphBuilderTensor(_ builder: Accelerate.BNNSGraph.Builder) -> Accelerate.BNNSGraph.Builder.Tensor<Swift.Float>
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP {
@@ -14674,6 +15472,15 @@ extension Accelerate.vDSP {
                 }
             }
     }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Tensor {
+  public func gather(indices: some BNNSGraph.Builder.OperationParameter<Int32>, axis: Swift.Int, batchDimensionCount: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func gatherAlongAxis(indices: some BNNSGraph.Builder.OperationParameter<Int32>, axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func gatherND(indices: some BNNSGraph.Builder.OperationParameter<Int32>, batchDimensionCount: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func scatter(updates: Accelerate.BNNSGraph.Builder.Tensor<T>, indices: some BNNSGraph.Builder.OperationParameter<Int32>, mode: Accelerate.BNNSGraph.Builder.ScatterMode, axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func scatterAlongAxis(updates: Accelerate.BNNSGraph.Builder.Tensor<T>, indices: some BNNSGraph.Builder.OperationParameter<Int32>, mode: Accelerate.BNNSGraph.Builder.ScatterMode, axis: Swift.Int) -> Accelerate.BNNSGraph.Builder.Tensor<T>
+  public func scatterND(updates: Accelerate.BNNSGraph.Builder.Tensor<T>, indices: some BNNSGraph.Builder.OperationParameter<Int32>, mode: Accelerate.BNNSGraph.Builder.ScatterMode) -> Accelerate.BNNSGraph.Builder.Tensor<T>
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8 {
@@ -15317,7 +16124,9 @@ extension Accelerate.vDSP {
   public enum SortOrder : Swift.Int32 {
     case ascending
     case descending
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int32)
+    #endif
     @available(iOS 13.0, tvOS 13.0, watchOS 6.0, macOS 10.15, *)
     public typealias RawValue = Swift.Int32
     public var rawValue: Swift.Int32 {
@@ -15544,8 +16353,12 @@ extension Accelerate.vDSP {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vImage_CGImageFormat {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(cgImage: CoreGraphics.CGImage)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(bitsPerComponent: Swift.Int, bitsPerPixel: Swift.Int, colorSpace: CoreGraphics.CGColorSpace, bitmapInfo: CoreGraphics.CGBitmapInfo, renderingIntent: CoreGraphics.CGColorRenderingIntent = .defaultIntent)
+  #endif
   public var componentCount: Swift.Int {
     get
   }
@@ -15804,7 +16617,9 @@ extension Accelerate.BNNS {
   public struct NearestNeighbors {
     public init(capacity: Swift.Int, dimensionCount: Swift.Int, neighborCount: Swift.Int, dataType: Accelerate.BNNSDataType)
     public func append(samples: Accelerate.BNNSNDArrayDescriptor)
+    #if compiler(>=5.3) && $NonescapableTypes
     public func apply(index: Swift.Int?, outputIndices: Accelerate.BNNSNDArrayDescriptor, outputDistances: Accelerate.BNNSNDArrayDescriptor)
+    #endif
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -15828,7 +16643,9 @@ extension Accelerate.vDSP {
     }
   }
   public class DCT {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(previous: Accelerate.vDSP.DCT? = nil, count: Swift.Int, transformType: Accelerate.vDSP.DCTTransformType)
+    #endif
     public func transform<U>(_ vector: U) -> [Swift.Float] where U : Accelerate.AccelerateBuffer, U.Element == Swift.Float
     public func transform<U, V>(_ vector: U, result: inout V) where U : Accelerate.AccelerateBuffer, V : Accelerate.AccelerateMutableBuffer, U.Element == Swift.Float, V.Element == Swift.Float
     @objc deinit
@@ -16476,8 +17293,12 @@ extension Accelerate.vImage_ARGBToYpCbCrMatrix {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vImageCVImageFormat {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func make(format: Accelerate.vImageCVImageFormat.Format, matrix: Accelerate.vImage_ARGBToYpCbCrMatrix, chromaSiting: Accelerate.vImageCVImageFormat.ChromaSiting, colorSpace: CoreGraphics.CGColorSpace, alphaIsOpaqueHint: Swift.Bool) -> Accelerate.vImageCVImageFormat?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func make(buffer: CoreVideo.CVPixelBuffer) -> Accelerate.vImageCVImageFormat?
+  #endif
   public var alphaIsOpaqueHint: Swift.Bool {
     get
     set
@@ -16488,15 +17309,21 @@ extension Accelerate.vImageCVImageFormat {
   public var channels: [Accelerate.vImage.BufferType] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func channelDescription(bufferType: Accelerate.vImage.BufferType) -> Accelerate.vImageChannelDescription?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var chromaSiting: Accelerate.vImageCVImageFormat.ChromaSiting? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var colorSpace: CoreGraphics.CGColorSpace? {
     get
     set
   }
+  #endif
   public var formatCode: Swift.UInt32 {
     get
   }
@@ -16527,8 +17354,12 @@ extension Accelerate.vImage {
     case xyzX
     case xyzY
     case xyzZ
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(bufferTypeCode: Swift.Int, model: CoreGraphics.CGColorSpaceModel?)
+    #endif
     public var bufferTypeCode: Accelerate.vImageBufferTypeCode {
       get
     }
@@ -16631,7 +17462,9 @@ extension Accelerate.vImageCVImageFormat {
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS {
   @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class LossLayer : Accelerate.BNNS.Layer {
+    #if compiler(>=5.3) && $NonescapableTypes
     convenience public init?(input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, lossFunction: Accelerate.BNNS.LossFunction, lossReduction: Accelerate.BNNS.LossReduction, filterParameters: Accelerate.BNNSFilterParameters? = nil)
+    #endif
     public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, labels: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor) throws
     @objc deinit
   }
@@ -16639,7 +17472,9 @@ extension Accelerate.BNNS {
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS.LossLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func apply(batchSize: Swift.Int, input: Accelerate.BNNSNDArrayDescriptor, labels: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, weights: Accelerate.BNNSNDArrayDescriptor?, broadcastsWeights: Swift.Bool, generatingInputGradient inputGradient: Accelerate.BNNSNDArrayDescriptor) throws
+  #endif
 }
 @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
@@ -16698,7 +17533,9 @@ extension Accelerate.BNNS {
 extension Accelerate.BNNS {
   public static func clipByGlobalNorm(threshold: Swift.Float, inputs: [Accelerate.BNNSNDArrayDescriptor], outputs: [Accelerate.BNNSNDArrayDescriptor], globalNorm: Swift.Float = 0) throws
   public static func clip(to bounds: Swift.ClosedRange<Swift.Float>, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor) throws
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func clipByNorm(threshold: Swift.Float, input: Accelerate.BNNSNDArrayDescriptor, output: Accelerate.BNNSNDArrayDescriptor, axes: [Swift.Int]? = nil) throws
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.PixelBuffer where Format == Accelerate.vImage.Planar8x3 {
@@ -16793,10 +17630,6 @@ extension Accelerate.vImage.FloodFillConnectivity : Swift.Equatable {}
 extension Accelerate.vImage.FloodFillConnectivity : Swift.Hashable {}
 @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
 extension Accelerate.vImage.FloodFillConnectivity : Swift.RawRepresentable {}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
-extension Accelerate.BNNSGraph.Error : Swift.Equatable {}
-@available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, *)
-extension Accelerate.BNNSGraph.Error : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @available(*, deprecated, message: "Use the BNNSGraph API instead.")
 extension Accelerate.BNNS.ArithmeticTernaryFunction : Swift.Equatable {}
@@ -16891,6 +17724,10 @@ extension Accelerate.BNNS.SparsityType : Swift.Hashable {}
 extension Accelerate.vImage.MultidimensionalLookupTable.InterpolationMethod : Swift.Equatable {}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
 extension Accelerate.vImage.MultidimensionalLookupTable.InterpolationMethod : Swift.Hashable {}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Intent : Swift.Equatable {}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension Accelerate.BNNSGraph.Builder.Intent : Swift.Hashable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Accelerate.vDSP.FourierTransformDirection : Swift.Equatable {}
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)

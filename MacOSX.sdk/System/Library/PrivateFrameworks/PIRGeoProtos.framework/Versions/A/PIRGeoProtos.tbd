@@ -2,10 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PIRGeoProtos.framework/Versions/A/PIRGeoProtos'
-current-version: 2333.50.1
+current-version: 2393.255
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ SpotlightKnowledgeDaemonTests, cslinguistics, spotlightknowledged ]
+    clients:         [ SpotlightKnowledgeDaemon, cslinguistics, spotlightknowledged ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PIRAspireResultReadFrom, _PIRGeoListSnippetReadFrom, _PIRGeoPoiReadFrom, 

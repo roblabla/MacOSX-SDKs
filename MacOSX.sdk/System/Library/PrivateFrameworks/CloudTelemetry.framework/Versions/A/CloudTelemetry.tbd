@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudTelemetry.framework/Versions/A/CloudTelemetry'
-current-version: 2250.14
+current-version: 2300.108
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -28,9 +28,22 @@ exports:
                        '_$s14CloudTelemetry10EventValueOs27ExpressibleByIntegerLiteralAAMc', 
                        '_$s14CloudTelemetry10EventValueOs33ExpressibleByUnicodeScalarLiteralAAMc', 
                        '_$s14CloudTelemetry10EventValueOs43ExpressibleByExtendedGraphemeClusterLiteralAAMc', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO10disallowedyA2CmFWC', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO13deterministicyACSbcACmFWC', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO13eventNotFoundyA2CmFWC', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO16nondeterministicyA2CmFWC', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO19storebagUnavailableyA2CmFWC', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO7unknownyA2CmFWC', '_$s14CloudTelemetry15SamplingOutcomeO8rawValueACSgSi_tcfC', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO8rawValueSivg', '_$s14CloudTelemetry15SamplingOutcomeO8rawValueSivpMV', 
+                       '_$s14CloudTelemetry15SamplingOutcomeO9throttledyA2CmFWC', 
+                       '_$s14CloudTelemetry15SamplingOutcomeOMa', '_$s14CloudTelemetry15SamplingOutcomeOMn', 
+                       '_$s14CloudTelemetry15SamplingOutcomeON', '_$s14CloudTelemetry15SamplingOutcomeOSHAAMc', 
+                       '_$s14CloudTelemetry15SamplingOutcomeOSQAAMc', '_$s14CloudTelemetry15SamplingOutcomeOSYAAMc', 
                        '_$s14CloudTelemetry22TransportConfigurationV19allowCellularAccess0e9ExpensiveG08bundleIDACSbSg_AGSSSgtcfC', 
                        '_$s14CloudTelemetry22TransportConfigurationVMa', '_$s14CloudTelemetry22TransportConfigurationVMn', 
                        '_$s14CloudTelemetry22TransportConfigurationVN', '_$s14CloudTelemetry8ReporterC12_privacyLogsSay10Foundation3URLVGyKFZ', 
+                       '_$s14CloudTelemetry8ReporterC16wouldSampleEvent6teamID9eventType0I022transportConfigurationAA15SamplingOutcomeOSS_SSSDySSAA0F5ValueOGAA09TransportL0VSgtYaKFZ', 
+                       '_$s14CloudTelemetry8ReporterC16wouldSampleEvent6teamID9eventType0I022transportConfigurationAA15SamplingOutcomeOSS_SSSDySSAA0F5ValueOGAA09TransportL0VSgtYaKFZTu', 
                        '_$s14CloudTelemetry8ReporterC25setupXpcServiceActivitiesyyYaKFZ', 
                        '_$s14CloudTelemetry8ReporterC25setupXpcServiceActivitiesyyYaKFZTu', 
                        '_$s14CloudTelemetry8ReporterC5startyyYaKFZ', '_$s14CloudTelemetry8ReporterC5startyyYaKFZTu', 
@@ -100,6 +113,10 @@ exports:
                        '_$s20CloudTelemetryShared11MessageKeysO14hierarchyTokenSSvgZ', 
                        '_$s20CloudTelemetryShared11MessageKeysO14hierarchyTokenSSvpZ', 
                        '_$s20CloudTelemetryShared11MessageKeysO14hierarchyTokenSSvpZMV', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvau', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvgZ', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvpZ', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvpZMV', 
                        '_$s20CloudTelemetryShared11MessageKeysO16overrideSamplingSSvau', 
                        '_$s20CloudTelemetryShared11MessageKeysO16overrideSamplingSSvgZ', 
                        '_$s20CloudTelemetryShared11MessageKeysO16overrideSamplingSSvpZ', 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/login'
-current-version: 259.5.1
+current-version: 264
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -21,8 +21,8 @@ exports:
                        _LFCFKeyboardTypeKey, _LFCFLogoutDictionaryKey, _LFCFLogoutDictionarySoftwareUpdateKey, 
                        _LFCFLogoutResultKey, _LFCFLogoutTypeKey, _LFCFNetworkMountPointKey, 
                        _LFCFNotificationKey, _LFCFNullDataIsEmptyPasswordKey, _LFCFOldPasswordKey, 
-                       _LFCFPSNHiKey, _LFCFPSNLowKey, _LFCFPasswordKey, _LFCFPortKey, 
-                       _LFCFProductIDKey, _LFCFSessionArrayKey, _LFCFSessionDictionaryTypeKey, 
+                       _LFCFPSNHiKey, _LFCFPSNLowKey, _LFCFPasswordKey, _LFCFPlatformSSOSessionAccountKey, 
+                       _LFCFPortKey, _LFCFProductIDKey, _LFCFSessionArrayKey, _LFCFSessionDictionaryTypeKey, 
                        _LFCFSessionDictionaryTypeSessionAgentPID, _LFCFSessionDictionaryTypeUninitialized, 
                        _LFCFSessionDictionaryTypeUser, _LFCFTransitionKey, _LFCFUUIDKey, 
                        _LFCFUserAttributesKey, _LFCFUserGUIDKey, _LFCFUserIDKey, 
@@ -80,9 +80,9 @@ exports:
                        _SASetAutologinPW, _SASetLaunchSoftwareUpdateTrigger, _SASetPreviousStartupWasPanic, 
                        _SASetSCDynamicStoreConsoleInformation, _SASetSessionAuthenticatedFlag, 
                        _SASetSessionHasConsoleAccessFlag, _SASetSessionState, _SASetSoftwareUpdateOption, 
-                       _SASetSwapCompaction, _SASystemNotifyPost, _SAWriteKeyboardType, 
-                       _SLOSetMessageHandler, _SLOStartLogoutOfType, _SOCloseSessionWithOptions, 
-                       _SOStartSessionWithOptions, _SessionAgentConnectionWithMessageHandler, 
+                       _SASetSwapCompaction, _SASystemNotifyPost, _SAWriteClockSettings, 
+                       _SAWriteKeyboardType, _SLOSetMessageHandler, _SLOStartLogoutOfType, 
+                       _SOCloseSessionWithOptions, _SOStartSessionWithOptions, _SessionAgentConnectionWithMessageHandler, 
                        _SessionAgentRemoteObjectProxy, _SessionLogoutRemoteObjectProxy, 
                        _SessionOwnerRemoteObjectProxy, _SharedSARemoteObjectProxy, 
                        __copyMiniBuddyItemQuery, _gLFSessionManagementEnabled, _gLFSessionManagementEnabledOnceToken, 
@@ -110,7 +110,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport'
-current-version: 259.5.1
+current-version: 264
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

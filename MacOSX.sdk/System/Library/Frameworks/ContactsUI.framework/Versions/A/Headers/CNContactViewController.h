@@ -20,7 +20,7 @@ NS_AVAILABLE_MAC(10_11)
  * @abstract Descriptor for all keys that must be fetched on a contact before setting it on the view controller.
  * @discussion Pass this descriptor to the keysToFetch of the @c CNContactFetchRequest if you want to display the contact in a @c CNContactViewController.
  */
-+ (id<CNKeyDescriptor>)descriptorForRequiredKeys;
++ (id<CNKeyDescriptor>)descriptorForRequiredKeys NS_SWIFT_NONISOLATED;
 
 /*!
  * @abstract A @c contact to display.

@@ -63,6 +63,13 @@ enum cpu_event {
 	CPU_DOWN,
 	CLUSTER_EXIT_REQUESTED,
 	CPU_EXITED,
+	PLATFORM_QUIESCE,
+	PLATFORM_ACTIVE,
+	PLATFORM_HALT_RESTART,
+	PLATFORM_PANIC,
+	PLATFORM_PANIC_SYNC,
+	PLATFORM_PRE_SLEEP,
+	PLATFORM_POST_RESUME,
 };
 
 typedef bool (*cpu_callback_t)(void *param, enum cpu_event event, unsigned int cpu_or_cluster);
@@ -82,6 +89,10 @@ void cpu_event_register_callback(cpu_callback_t fn, void *param);
  */
 void cpu_event_unregister_callback(cpu_callback_t fn);
 
+
+void cpu_event_debug_log(enum cpu_event event, unsigned int cpu_or_cluster);
+
+void dump_cpu_event_log(int (*printf_func)(const char * fmt, ...));
 
 /*!
  * @function      ml_io_read()
@@ -109,6 +120,7 @@ void ml_io_write8(uintptr_t vaddr, uint8_t val);
 void ml_io_write16(uintptr_t vaddr, uint16_t val);
 void ml_io_write32(uintptr_t vaddr, uint32_t val);
 void ml_io_write64(uintptr_t vaddr, uint64_t val);
+
 
 
 

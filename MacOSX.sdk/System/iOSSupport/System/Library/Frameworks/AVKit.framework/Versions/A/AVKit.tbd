@@ -24,11 +24,12 @@ exports:
                        _AVPlayerViewControllerDidShowInfoViewControllerKindKey, _AVPlayerViewControllerDidShowInfoViewControllerNotification, 
                        _AVPlayerViewControllerInfoViewControllerAudioKind, _AVPlayerViewControllerInfoViewControllerCustomKind, 
                        _AVPlayerViewControllerInfoViewControllerInfoKind, _AVPlayerViewControllerInfoViewControllerNavigationMarkersKind, 
-                       _AVPlayerViewControllerInfoViewControllerSubtitlesKind ]
+                       _AVPlayerViewControllerInfoViewControllerSubtitlesKind, _AVPlayerViewControllerMediaPresentationSettingAudioGroupMenuIdentifier ]
     objc-classes:    [ AVAppStoreBehavior, AVAppStoreBehaviorContext, AVAppStorePlayerView, 
                        AVBackgroundView, AVCaptureEvent, AVCaptureEventInteraction, 
-                       AVControlItem, AVEditBehavior, AVEditBehaviorContext, AVExternalPlaybackController, 
-                       AVHomeIPCameraBehavior, AVHomeIPCameraBehaviorContext, AVHomeLoadingButtonControlItem, 
+                       AVCaptureEventSound, AVControlItem, AVEditBehavior, AVEditBehaviorContext, 
+                       AVExternalPlaybackController, AVHomeIPCameraBehavior, AVHomeIPCameraBehaviorContext, 
+                       AVHomeLoadingButtonControlItem, AVInputPickerInteraction, 
                        AVMediaSelectionViewController, AVMusicAppBehavior, AVMusicAppBehaviorContext, 
                        AVNewsWidgetPlayerBehavior, AVNewsWidgetPlayerBehaviorContext, 
                        AVPictureInPictureController, AVPictureInPictureControllerContentSource, 
@@ -67,7 +68,7 @@ exports:
                        _AVVolumeGlyphStateNameMuted, _AVVolumeGlyphStateNameVolumeZero, 
                        _AVWaveformDefaultNotificationInterval, _AVWaveformDefaultResolution, 
                        _AVWaveformFinishedLoadingNotification, _AVWaveformSamplesDidBecomeAvailableNotification, 
-                       __AVDebugLog, __AVLog, __AVMethodProem ]
+                       __AVDebugLog, __AVLog, __AVMethodProem, __isNetworkAvailable ]
     objc-classes:    [ AVAssetIdentifier, AVChapter, AVCustomMediaSelectionOption, 
                        AVKeyValueChange, AVKitGlobalSettings, AVMicaPackage, AVMutableValueTiming, 
                        AVObservationController, AVPhotosensitiveTimeRange, AVPlaybackRate, 

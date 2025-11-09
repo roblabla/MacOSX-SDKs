@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macos15.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 7621.2.5.11.1 -module-name BrowserEngineKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 7622.1.19.2 -module-name BrowserEngineKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AVFoundation
 @_exported import BrowserEngineCore
 @_exported import BrowserEngineKit
@@ -53,10 +53,16 @@ extension BrowserEngineKit.WebContentExtension {
     @objc deinit
   }
   @objc(initWithSourceURL:destinationURL:observedProgress:liveActivityAccessToken:) public init(sourceURL: Foundation.URL, destinationURL: Foundation.URL, observedProgress: Foundation.Progress, liveActivityAccessToken: Foundation.Data)
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc(useDownloadsFolderWithPlaceholderType:finalFileCreatedHandler:) public func useDownloadsFolder(placeholderType: UniformTypeIdentifiers.UTType? = nil, finalFileCreatedHandler: @escaping @Sendable (BrowserEngineKit.BEDownloadMonitor.Location?) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc(beginMonitoring:) public func beginMonitoring() async throws -> BrowserEngineKit.BEDownloadMonitor.Location?
+  #endif
   @objc(resumeMonitoring:completionHandler:) public func resumeMonitoring(placeholderURL: Foundation.URL) async throws
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc(createAccessToken) public static func createAccessToken() -> Foundation.Data?
+  #endif
   @objc deinit
   @objc(identifier) final public let id: Foundation.UUID
   @objc final public let sourceURL: Foundation.URL
@@ -96,7 +102,9 @@ extension BrowserEngineKit.RenderingExtension {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public struct NetworkingProcess {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(bundleIdentifier: Swift.String? = nil, onInterruption: @escaping () -> Swift.Void) async throws
+  #endif
   public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   public func invalidate()
 }
@@ -105,7 +113,9 @@ public struct NetworkingProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public struct WebContentProcess {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(bundleIdentifier: Swift.String? = nil, onInterruption: @escaping () -> Swift.Void) async throws
+  #endif
   public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   public func invalidate()
 }
@@ -114,7 +124,9 @@ public struct WebContentProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public struct RenderingProcess {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(bundleIdentifier: Swift.String? = nil, onInterruption: @escaping () -> Swift.Void) async throws
+  #endif
   public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   public func invalidate()
 }
@@ -123,7 +135,9 @@ public struct RenderingProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 @objc(BEWebContentProcess) public class __BEWebContentProcess : ObjectiveC.NSObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc(webContentProcessWithInterruptionHandler:completion:) public static func webContentProcess(interruptionHandler: @escaping () -> Swift.Void, completion: @escaping (BrowserEngineKit.__BEWebContentProcess?, Foundation.NSError?) -> Swift.Void)
+  #endif
   @objc(invalidate) public func invalidate()
   @objc(makeLibXPCConnectionError:) public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   @objc deinit
@@ -133,7 +147,9 @@ public struct RenderingProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 @objc(BERenderingProcess) public class __BERenderingProcess : ObjectiveC.NSObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc(renderingProcessWithInterruptionHandler:completion:) public static func renderingProcess(interruptionHandler: @escaping () -> Swift.Void, completion: @escaping (BrowserEngineKit.__BERenderingProcess?, Foundation.NSError?) -> Swift.Void)
+  #endif
   @objc(invalidate) public func invalidate()
   @objc(makeLibXPCConnectionError:) public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   @objc deinit
@@ -143,7 +159,9 @@ public struct RenderingProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 @objc(BENetworkingProcess) public class __BENetworkingProcess : ObjectiveC.NSObject {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc(networkProcessWithInterruptionHandler:completion:) public static func networkProcess(interruptionHandler: @escaping () -> Swift.Void, completion: @escaping (BrowserEngineKit.__BENetworkingProcess?, Foundation.NSError?) -> Swift.Void)
+  #endif
   @objc(invalidate) public func invalidate()
   @objc(makeLibXPCConnectionError:) public func makeLibXPCConnection() throws -> XPC.xpc_connection_t
   @objc deinit
@@ -153,7 +171,15 @@ public struct RenderingProcess {
 @available(tvOS, unavailable)
 @available(visionOS, unavailable)
 public enum RestrictedSandboxRevision : Swift.CaseIterable, Swift.Comparable {
+  public static var allCases: [BrowserEngineKit.RestrictedSandboxRevision] {
+    get
+  }
   case revision1
+  @available(macOS 26.0, iOS 26.0, *)
+  @available(watchOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(visionOS, unavailable)
+  case revision2
   public static func < (lhs: BrowserEngineKit.RestrictedSandboxRevision, rhs: BrowserEngineKit.RestrictedSandboxRevision) -> Swift.Bool
   public static func == (a: BrowserEngineKit.RestrictedSandboxRevision, b: BrowserEngineKit.RestrictedSandboxRevision) -> Swift.Bool
   @available(iOS 17.4, macOS 14.3, *)
@@ -161,9 +187,6 @@ public enum RestrictedSandboxRevision : Swift.CaseIterable, Swift.Comparable {
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   public typealias AllCases = [BrowserEngineKit.RestrictedSandboxRevision]
-  nonisolated public static var allCases: [BrowserEngineKit.RestrictedSandboxRevision] {
-    get
-  }
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get

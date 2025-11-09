@@ -8,10 +8,11 @@ compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _BCLogDeviceController, _BCLogPowerSourceController, _BCLogSubsystem, 
-                       _BCLogWidget, _BCRegisterUserNotificationsLogging, _BCStringFromParts, 
-                       _BatteryCenterVersionNumber, _BatteryCenterVersionString, 
-                       _kBCBatteryDeviceA125ProductIdentifier, _kBCBatteryDeviceA149ProductIdentifier, 
+    symbols:         [ _BCCombinedLeftRightBatteryStatus, _BCLogDeviceController, 
+                       _BCLogPowerSourceController, _BCLogSubsystem, _BCLogWidget, 
+                       _BCRegisterUserNotificationsLogging, _BCStringFromParts, _BatteryCenterVersionNumber, 
+                       _BatteryCenterVersionString, _kBCBatteryDeviceA125ProductIdentifier, 
+                       _kBCBatteryDeviceA149ProductIdentifier, _kBCBatteryDeviceA173ProductIdentifier, 
                        _kBCBatteryDeviceB188ProductIdentifier, _kBCBatteryDeviceB222ProductIdentifier, 
                        _kBCBatteryDeviceB244ProductIdentifier, _kBCBatteryDeviceB282ProductIdentifier, 
                        _kBCBatteryDeviceB288ProductIdentifier, _kBCBatteryDeviceB298ProductIdentifier, 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/_SpriteKit_SwiftUI.framework/Versions/A/_SpriteKit_SwiftUI'
-current-version: 51.5.1
+current-version: 52.0.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

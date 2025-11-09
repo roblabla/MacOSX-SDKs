@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowContext.framework/Versions/A/IntelligenceFlowContext'
-current-version: 218.5
+current-version: 3500.32.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -875,9 +875,14 @@ exports:
                        '_$s23IntelligenceFlowContext9UIElementV19navigationSplitPane21UIIntelligenceSupport0A7ElementV010NavigationfG0V0G0OSgvg', 
                        '_$s23IntelligenceFlowContext9UIElementV19navigationSplitPane21UIIntelligenceSupport0A7ElementV010NavigationfG0V0G0OSgvpMV', 
                        '_$s23IntelligenceFlowContext9UIElementV19navigationSplitPane21UIIntelligenceSupport0A7ElementV010NavigationfG0V0G0OSgvs', 
+                       '_$s23IntelligenceFlowContext9UIElementV25processInstanceIdentifierSSSgvM', 
+                       '_$s23IntelligenceFlowContext9UIElementV25processInstanceIdentifierSSSgvg', 
+                       '_$s23IntelligenceFlowContext9UIElementV25processInstanceIdentifierSSSgvpMV', 
+                       '_$s23IntelligenceFlowContext9UIElementV25processInstanceIdentifierSSSgvs', 
                        '_$s23IntelligenceFlowContext9UIElementV2eeoiySbAC_ACtFZ', 
                        '_$s23IntelligenceFlowContext9UIElementV4fromACs7Decoder_p_tKcfC', 
                        '_$s23IntelligenceFlowContext9UIElementV5frame10screenSize7content11appBundleId10isSelected0L7Primary15fractionVisibleACSo6CGRectV_AlA14ElementContentOSgSSSgS2bSdSgtcfC', 
+                       '_$s23IntelligenceFlowContext9UIElementV5frame10screenSize7content11appBundleId25processInstanceIdentifier10isSelected0O7Primary15fractionVisibleACSo6CGRectV_AmA14ElementContentOSgSSSgAQS2bSdSgtcfC', 
                        '_$s23IntelligenceFlowContext9UIElementV5frame10screenSize7content11appBundleIdACSo6CGRectV_AiA14ElementContentOSgSSSgtcfC', 
                        '_$s23IntelligenceFlowContext9UIElementV5frameSo6CGRectVvM', 
                        '_$s23IntelligenceFlowContext9UIElementV5frameSo6CGRectVvg', 

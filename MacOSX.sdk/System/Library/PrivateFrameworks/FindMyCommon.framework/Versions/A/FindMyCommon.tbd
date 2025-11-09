@@ -9,7 +9,8 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyAutomationKit, FindMyCloudKit, FindMyCommonTests, FindMyCrypto, 
                        FindMyLocate, FindMyLocateObjCWrapper, FindMyServerInteraction, 
-                       FindMyStorage, findmybeaconingd, findmylocateagent, findmylocated, 
+                       FindMyStorage, FindMyUnsafeAsyncBridging, FindingUI, FindingUIAngel, 
+                       findmybeaconingd, findmydevicetool, findmylocateagent, findmylocated, 
                        findmylocatedTests, searchpartyd, searchpartydTests, searchpartyuseragent, 
                        sptool ]
 exports:
@@ -22,6 +23,7 @@ exports:
                        '_$s12FindMyCommon012StateCaptureD4DataV4type5title4dataAcA0dE8DateTypeO_SS10Foundation0F0VtcfC', 
                        '_$s12FindMyCommon012StateCaptureD4DataV4typeAA0dE8DateTypeOvg', 
                        '_$s12FindMyCommon012StateCaptureD4DataV4typeAA0dE8DateTypeOvpMV', 
+                       '_$s12FindMyCommon012StateCaptureD4DataV5title7codableACSS_SE_ptKcfC', 
                        '_$s12FindMyCommon012StateCaptureD4DataV5titleSSvg', '_$s12FindMyCommon012StateCaptureD4DataV5titleSSvpMV', 
                        '_$s12FindMyCommon012StateCaptureD4DataVMa', '_$s12FindMyCommon012StateCaptureD4DataVMn', 
                        '_$s12FindMyCommon012StateCaptureD4DataVN', '_$s12FindMyCommon012StateCaptureD4DataVs23CustomStringConvertibleAAMc', 
@@ -57,7 +59,11 @@ exports:
                        '_$s12FindMyCommon12StateCaptureCMn', '_$s12FindMyCommon12StateCaptureCMo', 
                        '_$s12FindMyCommon12StateCaptureCMu', '_$s12FindMyCommon12StateCaptureCN', 
                        '_$s12FindMyCommon12StateCaptureCfD', '_$s12FindMyCommon12StateCaptureCfd', 
-                       '_$s12FindMyCommon12StateCaptureCs12IdentifiableAAMc', '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVYaKccfC', 
+                       '_$s12FindMyCommon12StateCaptureCs12IdentifiableAAMc', '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVKccfC', 
+                       '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVKccfCTj', 
+                       '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVKccfCTq', 
+                       '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVKccfc', 
+                       '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVYaKccfC', 
                        '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVYaKccfCTj', 
                        '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVYaKccfCTq', 
                        '_$s12FindMyCommon12StateCaptureCyACSgAA0deD4DataVSgAA0dE4HintVYaKccfc', 
@@ -192,7 +198,7 @@ exports:
                        '_$s13NonModularSPI012StateCaptureD4DataV5titleSSvg', '_$s13NonModularSPI012StateCaptureD4DataV5titleSSvpMV', 
                        '_$s13NonModularSPI012StateCaptureD4DataVMa', '_$s13NonModularSPI012StateCaptureD4DataVMn', 
                        '_$s13NonModularSPI012StateCaptureD4DataVN', '_$s13NonModularSPI012StateCaptureD4DataVs23CustomStringConvertibleAAMc', 
-                       '_$s13NonModularSPI13SANDBOX_NAMEDs6UInt64Vvg', '_$s13NonModularSPI16StateCaptureHintV11descriptionSSvg', 
+                       '_$s13NonModularSPI16StateCaptureHintV11descriptionSSvg', 
                        '_$s13NonModularSPI16StateCaptureHintV11descriptionSSvpMV', 
                        '_$s13NonModularSPI16StateCaptureHintV3apiAA0deF3APIOvg', 
                        '_$s13NonModularSPI16StateCaptureHintV3apiAA0deF3APIOvpMV', 
@@ -253,5 +259,5 @@ exports:
                        '_$s13NonModularSPI20StateCaptureDateTypeOs23CustomStringConvertibleAAMc', 
                        '_$s13NonModularSPI20os_state_add_handler5queue5blockAA18StateCaptureHandleVSgSo012OS_dispatch_H0C_AA0jkJ4DataVSgAA0jK4HintVctF', 
                        '_$s13NonModularSPI23os_state_remove_handleryyAA18StateCaptureHandleVF', 
-                       '_$s13NonModularSPI24TMIsAutomaticTimeEnabledSbyF', '_$s13NonModularSPI28sandbox_init_with_parametersys5Int32VSPys4Int8VGSg_s6UInt64VSPyAHGSgSpySpyAFGSgGSgtF' ]
+                       '_$s13NonModularSPI24TMIsAutomaticTimeEnabledSbyF' ]
 ...

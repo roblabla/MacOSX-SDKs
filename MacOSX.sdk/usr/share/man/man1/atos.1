@@ -16,6 +16,7 @@
 .Op Fl offset
 .Op Fl printHeader
 .Op Fl fullPath
+.Op Fl dedup
 .Op Fl i
 .Op Fl d Ar <delimiter>
 .Op Fl f Ar <address-input-file>
@@ -92,6 +93,10 @@ Print the full path of the source files.
 Display inlined symbols.
 .It Fl d Ar <delimiter>
 Delimiter when outputting inline frames. Defaults to newline.
+.It Fl dedup
+Print all variants for
+.Nm <deduplicated_symbol>.
+Deduplicated symbols are the result of linker optimization that unites functions with identical instructions into one symbol, i.e. deduplicates them. The original function variants are deduced from the Nlist.
 
 .El
 .Sh EXAMPLE

@@ -26,30 +26,30 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Name of the trigger.
  */
-@property (readonly, copy, nonatomic) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /*!
  * @brief State of the trigger.
  *
  * @discussion TRUE if the trigger is enable, FALSE otherwise.
  */
-@property (readonly, getter=isEnabled, nonatomic) BOOL enabled;
+@property (nonatomic, readonly, getter=isEnabled) BOOL enabled;
 
 /*!
  * @abstract Array of HMActionSet objects that represent all the action sets associated
  *           with this trigger.
  */
-@property (readonly, copy, nonatomic) NSArray<HMActionSet *> *actionSets;
+@property (nonatomic, readonly, copy) NSArray<HMActionSet *> *actionSets;
 
 /*!
  * @brief The date that this trigger was most recently fired.
  */
-@property (readonly, copy, nonatomic, nullable) NSDate *lastFireDate API_DEPRECATED("No longer supported", macos(11.0, 14.0), ios(8.0, 17.0), watchos(2.0, 10.0), tvos(10.0, 17.0));
+@property (nullable, nonatomic, readonly, copy) NSDate *lastFireDate API_DEPRECATED("No longer supported", macos(11.0, 14.0), ios(8.0, 17.0), watchos(2.0, 10.0), tvos(10.0, 17.0));
 
 /*!
  * @brief A unique identifier for the trigger.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief This method is used to change the name of the trigger.

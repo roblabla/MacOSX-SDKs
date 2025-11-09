@@ -148,7 +148,7 @@ NS_SWIFT_SENDABLE // Immutable with no mutable subclasses
 
 - (BOOL)scanDecimal:(nullable NSDecimal *)dcm
 #if defined(__swift__) // Deprecated for Swift only:
-    API_DEPRECATED_WITH_REPLACEMENT("scanDecimal()", macosx(10.0,10.15), ios(2.0,13.0), watchos(2.0,13.0), tvos(9.0,13.0))
+    API_DEPRECATED_WITH_REPLACEMENT("scanDecimal()", macosx(10.0,10.15), ios(2.0,13.0), watchos(2.0,27.0), tvos(9.0,13.0))
 #endif
     ;
 

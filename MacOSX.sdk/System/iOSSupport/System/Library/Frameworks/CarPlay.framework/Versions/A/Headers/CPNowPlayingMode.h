@@ -5,12 +5,14 @@
 //  Copyright © 2024 Apple Inc. All rights reserved.
 //
 
+#import <CarPlay/CPTemplate.h>
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingMode : NSObject <NSSecureCoding>
 
 /**
@@ -32,6 +34,7 @@ API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  recorded playback of a sporting event that features exactly two teams.
  */
 API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingModeSports : CPNowPlayingMode <NSSecureCoding>
 
 /**
@@ -97,6 +100,7 @@ API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  in sports that have exactly two teams.
  */
 API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingSportsTeam : NSObject <NSSecureCoding>
 
 /**
@@ -168,6 +172,7 @@ API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  A representation of the status of a sporting event.
  */
 API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingSportsEventStatus : NSObject <NSSecureCoding>
 
 /**
@@ -234,6 +239,7 @@ API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  clock counts DOWN.
  */
 API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingSportsClock : NSObject <NSSecureCoding>
 
 /**
@@ -291,6 +297,7 @@ API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  or initialism for this team.
  */
 API_AVAILABLE(ios(18.4)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingSportsTeamLogo : NSObject <NSSecureCoding>
 
 /**

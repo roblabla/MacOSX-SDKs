@@ -2,6 +2,7 @@
 #define __ENDPOINT_SECURITY_TYPES_H
 
 #include <mach/message.h>
+#include <os/availability.h>
 #include <os/base.h>
 #include <stdint.h>
 #include <sys/types.h>
@@ -393,9 +394,11 @@ typedef enum {
 	/// Value to describe a path literal
 	ES_MUTE_PATH_TYPE_LITERAL,
 	/// Value to describe a target path prefix
-	ES_MUTE_PATH_TYPE_TARGET_PREFIX,
+	ES_MUTE_PATH_TYPE_TARGET_PREFIX
+	API_AVAILABLE(macos(13.0)),
 	/// Value to describe a target path literal
 	ES_MUTE_PATH_TYPE_TARGET_LITERAL
+	API_AVAILABLE(macos(13.0))
 } es_mute_path_type_t;
 
 /*
@@ -467,7 +470,7 @@ typedef enum {
 	ES_MUTE_INVERSION_TYPE_PATH,
 	ES_MUTE_INVERSION_TYPE_TARGET_PATH,
 	ES_MUTE_INVERSION_TYPE_LAST
-} es_mute_inversion_type_t;
+} es_mute_inversion_type_t API_AVAILABLE(macos(13.0));
 
 typedef enum {
 	/// The type of muted queried was inverted
@@ -615,5 +618,140 @@ typedef enum {
 	ES_TCC_IDENTITY_TYPE_POLICY_ID,
 	ES_TCC_IDENTITY_TYPE_FILE_PROVIDER_DOMAIN_ID,
 } es_tcc_identity_type_t;
+
+/**
+ * es_cs_validation_category
+ *
+ * Indicates the code signature validation policy that was applied to a binary
+ */
+typedef enum {
+	ES_CS_VALIDATION_CATEGORY_INVALID = 0,
+	ES_CS_VALIDATION_CATEGORY_PLATFORM = 1,
+	ES_CS_VALIDATION_CATEGORY_TESTFLIGHT = 2,
+	ES_CS_VALIDATION_CATEGORY_DEVELOPMENT = 3,
+	ES_CS_VALIDATION_CATEGORY_APP_STORE = 4,
+	ES_CS_VALIDATION_CATEGORY_ENTERPRISE = 5,
+	ES_CS_VALIDATION_CATEGORY_DEVELOPER_ID = 6,
+	ES_CS_VALIDATION_CATEGORY_LOCAL_SIGNING = 7,
+	ES_CS_VALIDATION_CATEGORY_ROSETTA = 8,
+	ES_CS_VALIDATION_CATEGORY_OOPJIT = 9,
+	ES_CS_VALIDATION_CATEGORY_NONE = 10,
+} es_cs_validation_category_t;
+
+/**
+ * es_auto_unlock_type_t
+ *
+ * See es_event_authentication_auto_unlock_t
+ */
+typedef enum {
+	/// Unlock the machine using Apple Watch.
+	ES_AUTO_UNLOCK_MACHINE_UNLOCK = 1,
+	/// Approve an authorization prompt using Apple Watch.
+	ES_AUTO_UNLOCK_AUTH_PROMPT = 2
+} es_auto_unlock_type_t;
+
+/**
+ * es_btm_item_type_t
+ *
+ * See es_btm_launch_item_t
+ */
+typedef enum {
+	ES_BTM_ITEM_TYPE_USER_ITEM,
+	ES_BTM_ITEM_TYPE_APP,
+	ES_BTM_ITEM_TYPE_LOGIN_ITEM,
+	ES_BTM_ITEM_TYPE_AGENT,
+	ES_BTM_ITEM_TYPE_DAEMON
+} es_btm_item_type_t;
+
+/**
+ * es_destination_type_t
+ *
+ * See es_event_create_t / es_event_rename_t
+ */
+typedef enum {
+	ES_DESTINATION_TYPE_EXISTING_FILE,
+	ES_DESTINATION_TYPE_NEW_PATH,
+} es_destination_type_t;
+
+/**
+ * es_get_task_type_t
+ *
+ * See es_event_get_task_t
+ */
+typedef enum {
+	// Task port obtained by calling e.g. task_for_pid(), where the caller
+	// obtains a task port for a process identified by pid.
+	ES_GET_TASK_TYPE_TASK_FOR_PID,
+	// Task port obtained by calling e.g. processor_set_tasks(), where the
+	// caller obtains a set of task ports.
+	ES_GET_TASK_TYPE_EXPOSE_TASK,
+	// Task port obtained by calling e.g. task_identity_token_get_task_port(),
+	// where the caller obtains a task port for a process identified by an
+	// identity token.  Task identity tokens generally have to be given up
+	// by the target process voluntarily prior to the conversion into task
+	// ports.
+	ES_GET_TASK_TYPE_IDENTITY_TOKEN,
+} es_get_task_type_t;
+
+/**
+ * es_openssh_login_result_type_t
+ *
+ * See es_event_openssh_login_t
+ */
+typedef enum {
+	ES_OPENSSH_LOGIN_EXCEED_MAXTRIES = 0,
+	ES_OPENSSH_LOGIN_ROOT_DENIED = 1,
+	ES_OPENSSH_AUTH_SUCCESS = 2,
+	ES_OPENSSH_AUTH_FAIL_NONE = 3,
+	ES_OPENSSH_AUTH_FAIL_PASSWD = 4,
+	ES_OPENSSH_AUTH_FAIL_KBDINT = 5,
+	ES_OPENSSH_AUTH_FAIL_PUBKEY = 6,
+	ES_OPENSSH_AUTH_FAIL_HOSTBASED = 7,
+	ES_OPENSSH_AUTH_FAIL_GSSAPI = 8,
+	ES_OPENSSH_INVALID_USER = 9,
+} es_openssh_login_result_type_t;
+
+/**
+ * es_mount_disposition_t
+ *
+ * See es_event_mount_t
+ */
+typedef enum {
+	ES_MOUNT_DISPOSITION_EXTERNAL, // device is external storage
+	ES_MOUNT_DISPOSITION_INTERNAL, // device is internal storage
+	ES_MOUNT_DISPOSITION_NETWORK,  // device is a network share
+	ES_MOUNT_DISPOSITION_VIRTUAL,  // device is virtual (dmg or file)
+	ES_MOUNT_DISPOSITION_NULLFS,   // mount uses nullfs, commonly for app translocation
+	ES_MOUNT_DISPOSITION_UNKNOWN   // unable to determine disposition
+} es_mount_disposition_t;
+
+/**
+ * @brief This enum describes the type of suspend/resume operations that are currently used.
+ */
+typedef enum {
+	ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND = 0,
+	ES_PROC_SUSPEND_RESUME_TYPE_RESUME = 1,
+	ES_PROC_SUSPEND_RESUME_TYPE_SHUTDOWN_SOCKETS = 3,
+} es_proc_suspend_resume_type_t;
+
+/**
+ * es_profile_source_t
+ *
+ * See es_profile_t
+ */
+typedef enum {
+	ES_PROFILE_SOURCE_MANAGED,
+	ES_PROFILE_SOURCE_INSTALL,
+} es_profile_source_t;
+
+/**
+ * es_touchid_mode_t
+ *
+ * See es_event_authentication_touchid_t
+ */
+typedef enum {
+	ES_TOUCHID_MODE_VERIFICATION,
+	ES_TOUCHID_MODE_IDENTIFICATION
+} es_touchid_mode_t;
 
 #endif /* __ENDPOINT_SECURITY_TYPES_H */

@@ -165,7 +165,6 @@ while(deviceCandidate != NULL)
 #include <USBDriverKit/IOUSBHostInterface.h>
 #endif
 
-#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
 /*!
 * @class       IOUSBInterface
 * @brief       A compatibility base class to faciliate service discovery for legacy projects.
@@ -176,18 +175,13 @@ class __IOUSBHOSTFAMILY_DEPRECATED IOUSBInterface : public IOService
     typedef IOService super;
     OSDeclareAbstractStructors(IOUSBInterface)
 };
-#endif
 
 /*!
  * @class       IOUSBHostInterface
  * @brief       The IOService object representing a USB interface
  * @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostPipe objects to transfer data.  Function drivers should not subclass IOUSBHostInterface.
  */
-#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
 class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostInterface : public IOUSBInterface
-#else
-class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostInterface : public IOService
-#endif
 {
 #if TARGET_OS_HAS_USBDRIVERKIT_IOUSBHOSTINTERFACE
     OSDeclareDefaultStructorsWithDispatch(IOUSBHostInterface)
@@ -533,9 +527,27 @@ public:
      */
     virtual IOBufferMemoryDescriptor* createIOBuffer(IOOptionBits options, mach_vm_size_t capacity);
     
+    /*!
+     * @brief       Return the current microframe number of the USB controller
+     * @discussion  This method will return the current microframe number of the USB controller and the time associated with the start of the microframe
+     * @param       microframe reference to uint64_t to be populated with current microframe number
+     * @param       microframeTime reference to uint64_t to be populated with the mach_absolute_time associated with the start of the returned microframe
+     * @return      IOReturn status
+     */
+    virtual IOReturn currentMicroframe(uint64_t& microframe, uint64_t& microframeTime);
+
+    /*!
+     * @brief       Return a recent microframe number of the USB controller
+     * @discussion  This method will return a recent microframe number of the USB controller and the time associated with the start of the microframe
+     * @param       microframe reference to uint64_t to be populated with a recent microframe number
+     * @param       microframeTime reference to uint64_t to be populated with the mach_absolute_time associated with the start of the returned microframe
+     * @return      IOReturn status
+     */
+    virtual IOReturn referenceMicroframe(uint64_t& microframe, uint64_t& microframeTime);
+
     // Public pad slots for miscellaneous
-    OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 80);
-    OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 81);
+    OSMetaClassDeclareReservedUsed(IOUSBHostInterface, 80);
+    OSMetaClassDeclareReservedUsed(IOUSBHostInterface, 81);
     OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 82);
     OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 83);
     OSMetaClassDeclareReservedUnused(IOUSBHostInterface, 84);

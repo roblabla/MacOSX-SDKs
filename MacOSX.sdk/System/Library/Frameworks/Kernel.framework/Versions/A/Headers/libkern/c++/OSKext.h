@@ -410,7 +410,6 @@ private:
 /* Sync with user space.
  */
 	static OSReturn pingIOKitDaemon(void);
-	static bool driverkitEnabled(void);
 
 /* Getting info about loaded kexts (kextstat).
  */
@@ -743,6 +742,7 @@ public:
 	}
 };
 
+extern "C" int OSKextIsInUserspaceReboot(void);
 extern "C" void OSKextResetAfterUserspaceReboot(void);
 
 #endif /* !_LIBKERN_OSKEXT_H */

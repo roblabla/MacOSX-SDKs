@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_9, 3_0) __TVOS_AVAILABLE(9_2)
+API_DEPRECATED("Use MKMapItem's location, address and addressRepresentations properties instead. Use MKAddressRepresentations for formatted address strings for MapKit provided MKMapItems", ios(3.0, 26.0), visionos(1.0, 26.0), tvos(9.2, 26.0), macos(10.9, 26.0), watchos(2.0, 26.0))
 @interface MKPlacemark : CLPlacemark <MKAnnotation>
 
 - (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate NS_AVAILABLE(10_12, 10_0) __TVOS_AVAILABLE(10_0) __WATCHOS_AVAILABLE(3_0);

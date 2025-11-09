@@ -24,7 +24,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class CXSetMutedCallAction;
 @class CXSetGroupCallAction;
 @class CXPlayDTMFCallAction;
-
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
+@class CXSetTranslatingCallAction;
+#endif
 @class AVAudioSession;
 
 typedef NS_ENUM(NSInteger, CXCallEndedReason) {
@@ -62,7 +64,9 @@ CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), watchos(9.0))  API_UNAVAIL
 - (void)provider:(CXProvider *)provider performSetMutedCallAction:(CXSetMutedCallAction *)action;
 - (void)provider:(CXProvider *)provider performSetGroupCallAction:(CXSetGroupCallAction *)action;
 - (void)provider:(CXProvider *)provider performPlayDTMFCallAction:(CXPlayDTMFCallAction *)action;
-
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
+- (void)provider:(CXProvider *)provider performSetTranslatingCallAction:(CXSetTranslatingCallAction *)action;
+#endif
 /// Called when an action was not performed in time and has been inherently failed. Depending on the action, this timeout may also force the call to end. An action that has already timed out should not be fulfilled or failed by the provider delegate
 - (void)provider:(CXProvider *)provider timedOutPerformingAction:(CXAction *)action;
 

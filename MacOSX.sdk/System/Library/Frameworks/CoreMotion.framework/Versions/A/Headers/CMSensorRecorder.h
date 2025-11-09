@@ -23,11 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *   Due to the large number of samples that can be processed, the
  *   enumeration should not be run on the main/UI thread.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 COREMOTION_EXPORT API_AVAILABLE(ios(9.0), watchos(2.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(visionos)
-#else
-COREMOTION_EXPORT API_AVAILABLE(ios(9.0), watchos(2.0)) API_UNAVAILABLE(macos)
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMSensorDataList : NSObject <NSFastEnumeration>
 @end
 
@@ -40,11 +36,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(9.0), watchos(2.0)) API_UNAVAILABLE(macos)
  *    available for later access (up to 3 days) when the application
  *    is run at a later time.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 COREMOTION_EXPORT API_AVAILABLE(ios(9.0), watchos(2.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(visionos)
-#else
-COREMOTION_EXPORT API_AVAILABLE(ios(9.0), watchos(2.0)) API_UNAVAILABLE(macos)
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMSensorRecorder : NSObject
 
 /*

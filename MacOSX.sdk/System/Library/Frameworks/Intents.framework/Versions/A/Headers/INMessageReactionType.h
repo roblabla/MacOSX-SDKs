@@ -2,7 +2,7 @@
 //  INMessageReactionType.h
 //  Intents
 //
-//  Copyright (c) 2016-2024 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2025 Apple Inc. All rights reserved.
 //
 
 #ifndef INMessageReactionType_h
@@ -11,7 +11,6 @@
 #import <Foundation/Foundation.h>
 #import <Intents/IntentsDefines.h>
 
-/// Constants that describe the type of the message reaction.
 typedef NS_ENUM(NSInteger, INMessageReactionType) {
     INMessageReactionTypeUnknown = 0,
     INMessageReactionTypeEmoji,

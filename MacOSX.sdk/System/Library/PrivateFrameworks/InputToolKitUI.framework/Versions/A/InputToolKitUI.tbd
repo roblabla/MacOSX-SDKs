@@ -9,14 +9,10 @@ exports:
                        __ZTSN10ClipperLib16clipperExceptionE, __ZTSN10ClipperLib8PolyNodeE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvMZ', 
-                       '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvau', 
                        '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvgZ', 
-                       '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvpZ', 
                        '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE17itk_flexibleWidthABvsZ', 
                        '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE18itk_flexibleHeightABvMZ', 
-                       '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE18itk_flexibleHeightABvau', 
                        '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE18itk_flexibleHeightABvgZ', 
-                       '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE18itk_flexibleHeightABvpZ', 
                        '_$sSo25NSAutoresizingMaskOptionsV14InputToolKitUIE18itk_flexibleHeightABvsZ', 
                        '_$sSo6CGRectV14InputToolKitUIE10itk_center4sizeABSo7CGPointV_So6CGSizeVtcfC', 
                        '_$sSo6CGRectV14InputToolKitUIE10itk_centerSo7CGPointVvg', 

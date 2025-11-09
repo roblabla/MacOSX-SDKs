@@ -59,6 +59,9 @@ typedef NS_OPTIONS(NSUInteger, NSColorPanelOptions) {
 - (void)setTarget:(nullable id)target;
 - (void)attachColorList:(NSColorList *)colorList;
 - (void)detachColorList:(NSColorList *)colorList;
+
+/// The maximum linear exposure that can be set on a color picked in the color panel. Defaults to 1 and ignores any value less than 1. If set to a value >= 2, the color picked by the panel may have a linear exposure applied to it.
+@property CGFloat maximumLinearExposure API_AVAILABLE(macos(26.0));
 @end
 
 @interface NSApplication(NSColorPanel)

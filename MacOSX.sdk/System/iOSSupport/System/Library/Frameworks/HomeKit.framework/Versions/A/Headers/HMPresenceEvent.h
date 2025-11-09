@@ -32,12 +32,12 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief presenceEventType The event type that will trigger the event.
  */
-@property (readonly, nonatomic) HMPresenceEventType presenceEventType;
+@property (nonatomic, readonly) HMPresenceEventType presenceEventType;
 
 /*!
  * @brief presenceUserType The user type whose presence will trigger the event.
  */
-@property (readonly, nonatomic) HMPresenceEventUserType presenceUserType;
+@property (nonatomic, readonly) HMPresenceEventUserType presenceUserType;
 
 @end
 
@@ -53,12 +53,12 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief presenceEventType The event type that will trigger the event.
  */
-@property (readwrite, nonatomic) HMPresenceEventType presenceEventType;
+@property (nonatomic, readwrite) HMPresenceEventType presenceEventType;
 
 /*!
  * @brief presenceUserType The user type whose presence will trigger the event.
  */
-@property (readwrite, nonatomic) HMPresenceEventUserType presenceUserType;
+@property (nonatomic, readwrite) HMPresenceEventUserType presenceUserType;
 
 @end
 

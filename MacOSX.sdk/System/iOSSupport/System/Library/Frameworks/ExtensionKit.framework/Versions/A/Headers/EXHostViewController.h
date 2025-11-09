@@ -6,7 +6,8 @@
 #import <ExtensionFoundation/ExtensionFoundation.h>
 #import <Foundation/Foundation.h>
 
-#if !TARGET_OS_WATCH
+
+#if TARGET_OS_OSX || __has_include(<UIKit/UIKit.h>)
 
 #if TARGET_OS_OSX
 #import <AppKit/AppKit.h>
@@ -18,11 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol EXHostViewControllerDelegate;
 
-API_AVAILABLE(macos(13.0))
-API_UNAVAILABLE(ios, watchos, tvos)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-API_UNAVAILABLE(visionos)
-#endif
+API_AVAILABLE(macos(13.0), ios(26.0))
+API_UNAVAILABLE(watchos, tvos, visionos)
 EXTENSIONKIT_EXPORT
 #if TARGET_OS_OSX
 /// A view controller that hosts remote views provided by an extension.
@@ -50,11 +48,8 @@ EXTENSIONKIT_EXPORT
 
 @end
 
-API_AVAILABLE(macos(13.0))
-API_UNAVAILABLE(ios, watchos, tvos)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-API_UNAVAILABLE(visionos)
-#endif
+API_AVAILABLE(macos(13.0), ios(26.0))
+API_UNAVAILABLE(watchos, tvos, visionos)
 /// The delegate for a hosted view controller.
 @protocol EXHostViewControllerDelegate <NSObject>
 @optional
@@ -88,4 +83,4 @@ API_UNAVAILABLE(visionos)
 
 NS_ASSUME_NONNULL_END
 
-#endif // !TARGET_OS_WATCH
+#endif

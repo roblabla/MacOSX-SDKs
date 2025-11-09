@@ -18,7 +18,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @brief Encrypts the given data
 /// @param data The data to encrypt.
 /// @param algorithm A @c SecKeyAlgorithm suitable for encrypting with this key –e.g: @c kSecKeyAlgorithmECIESEncryptionStandardVariableIVX963SHA256AESGCM .
-/// @param handler Completion handler with the ciphertext or an error on failure.
+/// @param handler Completion handler with the cipher text or an error on failure.
 - (void)encryptData:(NSData *)data secKeyAlgorithm:(SecKeyAlgorithm)algorithm completion:(void (NS_SWIFT_SENDABLE ^)(NSData *_Nullable, NSError *_Nullable))handler NS_SWIFT_NAME(encrypt(_:algorithm:completion:));
 
 /// @brief Checks if the the provided algorithm can be used for encryption with the key.
@@ -30,7 +30,7 @@ API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(watchos, tvos)
 /// @param signedData The signed data.
 /// @param signature The signature of the given data.
 /// @param algorithm One of @c SecKeyAlgorithm suitable for verifying signatures with this key –e.g: @c kSecKeyAlgorithmECDSASignatureMessageX962SHA256
-/// @param handler Completion hadnler with the signature of given data or an error on failure.
+/// @param handler Completion handler with the signature of given data or an error on failure.
 - (void)verifyData:(NSData *)signedData signature:(NSData *)signature secKeyAlgorithm:(SecKeyAlgorithm)algorithm completion:(void (NS_SWIFT_SENDABLE ^)(NSError *_Nullable))handler
 #pragma push_macro("verify")
 #undef verify

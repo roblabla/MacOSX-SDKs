@@ -2,7 +2,7 @@
 //  VZVirtualMachine.h
 //  Virtualization
 //
-//  Copyright © 2019-2024 Apple Inc. All rights reserved.
+//  Copyright © 2019-2025 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -99,6 +99,19 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     If the queue is not serial, the behavior is undefined.
  */
 - (instancetype)initWithConfiguration:(VZVirtualMachineConfiguration *)configuration queue:(dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER;
+
+/*!
+ @abstract The queue associated with this virtual machine.
+ @discussion
+    This property is a reference to the queue used to create the virtual machine.
+    If no queue was passed, the default queue is the main queue.
+
+    The property can be accessed from any queue or actor.
+
+    Other properties or function calls on the VZVirtualMachine must happen on this queue.
+    The completion handlers from the asynchronous functions are also invoked on this queue.
+ */
+@property (readonly, nonatomic) dispatch_queue_t queue NS_SWIFT_NONISOLATED API_AVAILABLE(macos(26.0));
 
 /*!
  @abstract Indicate whether or not virtualization is available.
@@ -205,7 +218,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param completionHandler Block called after the virtual machine has been successfully started or on error.
     The error parameter passed to the block is nil if the start was successful.
  */
-- (void)startWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(start());
+- (void)startWithCompletionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(start());
 
 /*!
  @abstract Start a virtual machine with options.
@@ -216,7 +229,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     The error parameter passed to the block is nil if the start was successful.
  @seealso VZMacOSVirtualMachineStartOptions
  */
-- (void)startWithOptions:(VZVirtualMachineStartOptions *)options completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(13.0)) NS_SWIFT_NAME(start(options:completionHandler:));
+- (void)startWithOptions:(VZVirtualMachineStartOptions *)options completionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(13.0)) NS_SWIFT_NAME(start(options:completionHandler:));
 
 /*!
  @abstract Stop a virtual machine.
@@ -227,7 +240,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @discussion This is a destructive operation. It stops the virtual machine without giving the guest a chance to stop cleanly.
  @seealso -[VZVirtualMachine requestStopWithError:]
  */
-- (void)stopWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(12.0));
+- (void)stopWithCompletionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler API_AVAILABLE(macos(12.0));
 
 /*!
  @abstract Pause a virtual machine.
@@ -236,7 +249,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param completionHandler Block called after the virtual machine has been successfully paused or on error.
     The error parameter passed to the block is nil if the pause was successful.
  */
-- (void)pauseWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(pause());
+- (void)pauseWithCompletionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(pause());
 
 /*!
  @abstract Resume a virtual machine.
@@ -245,7 +258,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param completionHandler Block called after the virtual machine has been successfully resumed or on error.
     The error parameter passed to the block is nil if the resumption was successful.
  */
-- (void)resumeWithCompletionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(resume());
+- (void)resumeWithCompletionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(resume());
 
 #if defined(__arm64__)
 /*!
@@ -274,7 +287,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     The error parameter passed to the block is nil if the restore was successful.
  @see -[VZVirtualMachineConfiguration validateSaveRestoreSupportWithError:]
  */
-- (void)restoreMachineStateFromURL:(NSURL *)saveFileURL completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(restoreMachineStateFrom(url:completionHandler:)) API_AVAILABLE(macos(14.0));
+- (void)restoreMachineStateFromURL:(NSURL *)saveFileURL completionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(restoreMachineStateFrom(url:completionHandler:)) API_AVAILABLE(macos(14.0));
 
 /*!
  @abstract Save a virtual machine.
@@ -294,7 +307,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
     The error parameter passed to the block is nil if the save was successful.
  @see -[VZVirtualMachineConfiguration validateSaveRestoreSupportWithError:]
  */
-- (void)saveMachineStateToURL:(NSURL *)saveFileURL completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(saveMachineStateTo(url:completionHandler:)) API_AVAILABLE(macos(14.0));
+- (void)saveMachineStateToURL:(NSURL *)saveFileURL completionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(saveMachineStateTo(url:completionHandler:)) API_AVAILABLE(macos(14.0));
 #endif
 
 /*!

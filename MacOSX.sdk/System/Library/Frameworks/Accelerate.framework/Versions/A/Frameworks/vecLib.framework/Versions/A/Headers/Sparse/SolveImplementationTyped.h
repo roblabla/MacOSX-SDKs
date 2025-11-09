@@ -28,18 +28,29 @@ API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
   extern _SPARSE_VARIANT(SparseMatrix) _SPARSE_VARIANT(_SparseConvertFromOpaque)(_SPARSE_OLDSTYLE(sparse_matrix) matrix);
 #endif /* defined __SPARSE_TYPES_H */
 
-API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
-extern _SPARSE_VARIANT(SparseOpaqueFactorization)
 #ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
-_SPARSE_VARIANT(_SparseNumericFactorSymmetric)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 #else
-_SPARSE_VARIANT(_SparseNumericFactorHermitian)
+API_AVAILABLE( macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0) )
 #endif
+extern _SPARSE_VARIANT(SparseOpaqueFactorization)
+_SPARSE_VARIANT(_SparseNumericFactorSymmetric)
 (SparseOpaqueSymbolicFactorization *symbolicFactor,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  const SparseNumericFactorOptions *options,
  void *factorStorage,
  void *workspace);
+
+#ifndef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) )
+extern _SPARSE_VARIANT(SparseOpaqueFactorization)
+_SPARSE_VARIANT(_SparseNumericFactorHermitian)
+(SparseOpaqueSymbolicFactorization *symbolicFactor,
+ const _SPARSE_VARIANT(SparseMatrix) *Matrix,
+ const SparseNumericFactorOptions *options,
+ void *factorStorage,
+ void *workspace);
+#endif
 
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumericFactorQR)
@@ -57,17 +68,27 @@ extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseNumeric
  void *factorStorage,
  void *workspace);
 
-API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
-extern _SPARSE_VARIANT(SparseOpaqueFactorization)
 #ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
-_SPARSE_VARIANT(_SparseFactorSymmetric)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 #else
-_SPARSE_VARIANT(_SparseFactorHermitian)
+API_AVAILABLE( macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0) )
 #endif
+extern _SPARSE_VARIANT(SparseOpaqueFactorization)
+_SPARSE_VARIANT(_SparseFactorSymmetric)
 (SparseFactorization_t factorType,
  const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  const SparseSymbolicFactorOptions *sfoptions,
  const SparseNumericFactorOptions *nfoptions);
+
+#ifndef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) )
+extern _SPARSE_VARIANT(SparseOpaqueFactorization)
+_SPARSE_VARIANT(_SparseFactorHermitian)
+(SparseFactorization_t factorType,
+ const _SPARSE_VARIANT(SparseMatrix) *Matrix,
+const SparseSymbolicFactorOptions *sfoptions,
+const SparseNumericFactorOptions *nfoptions);
+#endif
 
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFactorQR)
@@ -83,17 +104,25 @@ extern _SPARSE_VARIANT(SparseOpaqueFactorization) _SPARSE_VARIANT(_SparseFactorL
  const SparseSymbolicFactorOptions *sfoptions,
  const SparseNumericFactorOptions *nfoptions);
 
-API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
-extern void
 #ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
-_SPARSE_VARIANT(_SparseRefactorSymmetric)
+API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 #else
-_SPARSE_VARIANT(_SparseRefactorHermitian)
+API_AVAILABLE( macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0) )
 #endif
+extern void _SPARSE_VARIANT(_SparseRefactorSymmetric)
 (const _SPARSE_VARIANT(SparseMatrix) *Matrix,
  _SPARSE_VARIANT(SparseOpaqueFactorization) *Factorization,
  const SparseNumericFactorOptions *nfoptions,
  void *workspace);
+
+#ifndef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
+API_AVAILABLE( macos(15.5), ios(18.5), watchos(11.5), tvos(18.5), visionos(2.5) )
+extern void _SPARSE_VARIANT(_SparseRefactorHermitian)
+(const _SPARSE_VARIANT(SparseMatrix) *Matrix,
+ _SPARSE_VARIANT(SparseOpaqueFactorization) *Factorization,
+ const SparseNumericFactorOptions *nfoptions,
+ void *workspace);
+#endif
 
 API_AVAILABLE( macos(10.13), ios(11), watchos(4), tvos(11) )
 extern void _SPARSE_VARIANT(_SparseRefactorQR)
@@ -557,7 +586,11 @@ _SPARSE_VARIANT(SparseOpaqueFactorization) SparseFactor(SparseFactorization_t ty
     case SparseFactorizationLUUnpivoted:
     case SparseFactorizationLUSPP:
     case SparseFactorizationLUTPP:
-      return _SPARSE_VARIANT(_SparseFactorLU)(type, &Matrix, &options, &nfoptions);
+      if(__builtin_available(macOS 15.5, macCatalyst 18.5, iOS 18.5, watchOS 11.5, tvOS 18.5, visionOS 2.5, *)) {
+        return _SPARSE_VARIANT(_SparseFactorLU)(type, &Matrix, &options, &nfoptions);
+      } else {
+        __builtin_verbose_trap("unsupported", "LU factorization is not supported on this OS version");
+      }
 #endif // !TARGET_OS_BRIDGE
     default:
 #if (defined _SPARSE_IMPLEMENTATION_TYPE_IS_REAL) || 0
@@ -566,10 +599,18 @@ _SPARSE_VARIANT(SparseOpaqueFactorization) SparseFactor(SparseFactorization_t ty
                              "Cannot perform symmetric matrix factorization of non-symmetric matrix.\n");
       return _SPARSE_VARIANT(_SparseFactorSymmetric)(type, &Matrix, &options, &nfoptions);
 #else
-      SPARSE_PARAMETER_CHECK(Matrix.structure.attributes.kind == SparseHermitian,
-                             _SPARSE_VARIANT(_SparseFailedFactor)(SparseParameterError),
-                             "Cannot perform Hermitian matrix factorization of non-Hermitian matrix.\n");
-      return _SPARSE_VARIANT(_SparseFactorHermitian)(type, &Matrix, &options, &nfoptions);
+      if (Matrix.structure.attributes.kind == SparseSymmetric) {
+        if(__builtin_available(macOS 26.0, macCatalyst 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)) {
+          return _SPARSE_VARIANT(_SparseFactorSymmetric)(type, &Matrix, &options, &nfoptions);
+        } else {
+          __builtin_verbose_trap("unsupported", "Complex Symmetric matrices are not supported on this OS version");
+        }
+      } else {
+        SPARSE_PARAMETER_CHECK(Matrix.structure.attributes.kind == SparseHermitian,
+                               _SPARSE_VARIANT(_SparseFailedFactor)(SparseParameterError),
+                               "Cannot perform Hermitian matrix factorization of non-Hermitian matrix.\n");
+        return _SPARSE_VARIANT(_SparseFactorHermitian)(type, &Matrix, &options, &nfoptions);
+      }
 #endif
   }
 }
@@ -631,14 +672,26 @@ _SPARSE_VARIANT(SparseOpaqueFactorization) SparseFactor(SparseOpaqueSymbolicFact
     case SparseFactorizationLUUnpivoted:
     case SparseFactorizationLUSPP:
     case SparseFactorizationLUTPP:
-      result = _SPARSE_VARIANT(_SparseNumericFactorLU)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+      if(__builtin_available(macOS 15.5, macCatalyst 18.5, iOS 18.5, watchOS 11.5, tvOS 18.5, visionOS 2.5, *)) {
+        result = _SPARSE_VARIANT(_SparseNumericFactorLU)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+      } else {
+        __builtin_verbose_trap("unsupported", "LU factorization is not supported on this OS version");
+      }
       break;
 #endif // !TARGET_OS_BRIDGE
     default:
 #ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
       result = _SPARSE_VARIANT(_SparseNumericFactorSymmetric)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
 #else
-      result = _SPARSE_VARIANT(_SparseNumericFactorHermitian)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+      if (Matrix.structure.attributes.kind == SparseSymmetric) {
+        if(__builtin_available(macOS 26.0, macCatalyst 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)) {
+          result = _SPARSE_VARIANT(_SparseNumericFactorSymmetric)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+        } else {
+          __builtin_verbose_trap("unsupported", "Complex Symmetric matrices are not supported on this OS version");
+        }
+      } else {
+        result = _SPARSE_VARIANT(_SparseNumericFactorHermitian)(&symbolicFactor, &Matrix, &nfoptions, factorStorage, workspace);
+      }
 #endif
   }
   result.userFactorStorage = userFactorStorage; // Flag whether we should free memory on destruction or not
@@ -832,14 +885,26 @@ void SparseRefactor(_SPARSE_VARIANT(SparseMatrix) Matrix, _SPARSE_VARIANT(Sparse
     case SparseFactorizationLUUnpivoted:
     case SparseFactorizationLUSPP:
     case SparseFactorizationLUTPP:
-      _SPARSE_VARIANT(_SparseRefactorLU)(&Matrix, Factored, &nfoptions, workspace);
+      if(__builtin_available(macOS 15.5, macCatalyst 18.5, iOS 18.5, watchOS 11.5, tvOS 18.5, visionOS 2.5, *)) {
+        _SPARSE_VARIANT(_SparseRefactorLU)(&Matrix, Factored, &nfoptions, workspace);
+      } else {
+        __builtin_verbose_trap("unsupported", "LU factorization is not supported on this OS version");
+      }
       break;
 #endif // !TARGET_OS_BRIDGE
     default:
 #ifdef _SPARSE_IMPLEMENTATION_TYPE_IS_REAL
       _SPARSE_VARIANT(_SparseRefactorSymmetric)(&Matrix, Factored, &nfoptions, workspace);
 #else
-      _SPARSE_VARIANT(_SparseRefactorHermitian)(&Matrix, Factored, &nfoptions, workspace);
+      if (Matrix.structure.attributes.kind == SparseSymmetric) {
+        if(__builtin_available(macOS 26.0, macCatalyst 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)) {
+          _SPARSE_VARIANT(_SparseRefactorSymmetric)(&Matrix, Factored, &nfoptions, workspace);
+        } else {
+          __builtin_verbose_trap("unsupported", "Complex Symmetric matrices are not supported on this OS version");
+        }
+      } else {
+        _SPARSE_VARIANT(_SparseRefactorHermitian)(&Matrix, Factored, &nfoptions, workspace);
+      }
 #endif
   }
 }

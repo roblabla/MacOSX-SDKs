@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(18.0), visionos(2.0), tvos(18.0), macos(15.0), watchos(11.0))
 NS_SWIFT_NAME(MKMapItem.Identifier)
 @interface MKMapItemIdentifier : NSObject <NSCopying, NSSecureCoding>
 

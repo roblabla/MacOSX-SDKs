@@ -9,7 +9,7 @@
 #include <CoreFoundation/CFAvailability.h>
 #include <stdint.h>
 
-typedef struct CGPDFDictionary *CGPDFDictionaryRef;
+typedef struct CGPDFDictionary *CGPDFDictionaryRef __attribute__((swift_wrapper(struct)));
 
 #include <CoreGraphics/CGPDFArray.h>
 #include <CoreGraphics/CGPDFObject.h>
@@ -123,7 +123,7 @@ typedef bool (^CGPDFDictionaryApplierBlock)(const char * key,
    early. */
 
 CG_EXTERN void CGPDFDictionaryApplyBlock(CGPDFDictionaryRef cg_nullable dict,
-    CGPDFDictionaryApplierBlock cg_nullable block, void * __nullable info)
+    CF_NOESCAPE CGPDFDictionaryApplierBlock cg_nullable block, void * __nullable info)
     API_AVAILABLE(macos(10.14), ios(12.0));
 
 CF_ASSUME_NONNULL_END

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex_core.dylib'
-current-version: 493.120.7
+current-version: 589.0.19
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_asset_type_c411, __cryptex_asset_type_cpxd, __cryptex_asset_type_cx1p, 
@@ -26,14 +26,15 @@ exports:
                        _cryptex_core_cx1_properties_create, _cryptex_core_cx1_properties_create_with_xpc_dictionary, 
                        _cryptex_core_cx1_read_from_file, _cryptex_core_cx1_write_to_file, 
                        _cryptex_core_generate_identifier, _cryptex_core_generate_version, 
-                       _cryptex_core_get_asset, _cryptex_core_get_cryptex1_properties, 
-                       _cryptex_core_get_image_asset, _cryptex_core_get_info_asset, 
-                       _cryptex_core_get_nonce_domain, _cryptex_core_get_nonce_domain_handle, 
-                       _cryptex_core_get_num_assets, _cryptex_core_get_tc_asset, 
-                       _cryptex_core_get_volumehash_asset, _cryptex_core_image_authapfs_enabled, 
-                       _cryptex_core_is_cryptex1, _cryptex_core_metadata_matches, 
-                       _cryptex_core_metadata_matches_xattrs, _cryptex_core_name_is_system_cryptex, 
-                       _cryptex_core_open, _cryptex_core_parse_hdiid, _cryptex_core_parse_info_asset, 
+                       _cryptex_core_get_asset, _cryptex_core_get_asset_from_index, 
+                       _cryptex_core_get_cryptex1_properties, _cryptex_core_get_image_asset, 
+                       _cryptex_core_get_info_asset, _cryptex_core_get_nonce_domain, 
+                       _cryptex_core_get_nonce_domain_handle, _cryptex_core_get_num_assets, 
+                       _cryptex_core_get_tc_asset, _cryptex_core_get_volumehash_asset, 
+                       _cryptex_core_image_authapfs_enabled, _cryptex_core_is_cryptex1, 
+                       _cryptex_core_metadata_matches, _cryptex_core_metadata_matches_xattrs, 
+                       _cryptex_core_name_is_system_cryptex, _cryptex_core_open, 
+                       _cryptex_core_parse_hdiid, _cryptex_core_parse_info_asset, 
                        _cryptex_core_pop_asset, _cryptex_core_select_chip, _cryptex_core_set_asset, 
                        _cryptex_core_set_assets_from_directory, _cryptex_core_set_assets_from_fds, 
                        _cryptex_core_set_cryptex1_properties, _cryptex_core_set_install_persistence, 
@@ -44,9 +45,9 @@ exports:
                        _cryptex_magister_record_property, _cryptex_metadata_read_from_cryptex, 
                        _cryptex_metadata_read_from_file_xattrs, _cryptex_metadata_write_to_file_xattrs, 
                        _cryptex_queue_create_with_target, _cryptex_scrivener_create, 
-                       _cryptex_scrivener_read_signature, _cryptex_scrivener_set_nonce, 
-                       _cryptex_scrivener_set_socks_proxy, _cryptex_scrivener_set_url, 
-                       _cryptex_scrivener_sign, _cryptex_session_core_append_to_array, 
+                       _cryptex_scrivener_read_signature, _cryptex_scrivener_set_auth_token, 
+                       _cryptex_scrivener_set_nonce, _cryptex_scrivener_set_socks_proxy, 
+                       _cryptex_scrivener_set_url, _cryptex_scrivener_sign, _cryptex_session_core_append_to_array, 
                        _cryptex_session_core_copy_homedir, _cryptex_session_core_copy_name, 
                        _cryptex_session_core_copy_xpc_object, _cryptex_session_core_create_from_xpc, 
                        _cryptex_session_core_get_attributes, _cryptex_session_core_get_homedir_size, 

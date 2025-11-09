@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TranslationDaemon.framework/Versions/A/TranslationDaemon'
-current-version: 300.16
+current-version: 350
 compatibility-version: 0
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

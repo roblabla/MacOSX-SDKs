@@ -6,6 +6,7 @@
 //
 
 #import <CarPlay/CPBarButtonProviding.h>
+#import <CarPlay/CPGridButton.h>
 #import <CarPlay/CPListItemTypes.h>
 #import <CarPlay/CPListSection.h>
 #import <CarPlay/CPTemplate.h>
@@ -79,6 +80,7 @@ API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @end
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPListTemplate : CPTemplate <CPBarButtonProviding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -102,6 +104,14 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 - (instancetype)initWithTitle:(nullable NSString *)title
                      sections:(NSArray <CPListSection *> *)sections
    assistantCellConfiguration:(nullable CPAssistantCellConfiguration *)assistantCellConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos);
+
+/**
+ Initialize a list template with one or more grid buttons to displayed in a list header.
+ */
+- (instancetype)initWithTitle:(nullable NSString *)title
+                     sections:(NSArray <CPListSection *> *)sections
+   assistantCellConfiguration:(nullable CPAssistantCellConfiguration *)assistantCellConfiguration
+   headerGridButtons:(nullable NSArray<CPGridButton *> *)headerGridButtons API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
 
 /**
  The list template's delegate is informed of list selection events.
@@ -209,6 +219,30 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  app-specific actions.
  */
 @property (nonatomic, nullable, strong) CPAssistantCellConfiguration *assistantCellConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos);
+
+
+#pragma mark - Header Grid Buttons
+
+/**
+ The maximum number of grid buttons that may appear in a @c CPListTemplate.
+ 
+ @note Your list template will display the first @c maximumHeaderGridButtonCount buttons.
+ Any sections beyond that limit will be trimmed.
+ */
+@property (nonatomic, class, readonly) NSUInteger maximumHeaderGridButtonCount API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
+
+/**
+ The expected image size for your @c CPGridButton.
+
+ To properly size your list images, your app should size them to the display scale of the car screen.
+ See -[CPInterfaceController carTraitCollection].
+ */
+@property (nonatomic, class, readonly) CGSize maximumGridButtonImageSize API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
+
+/**
+ Assigning to this property will dynamically update the List Template and show the new header.
+ */
+@property (nonatomic, nullable, copy) NSArray<CPGridButton *> *headerGridButtons API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
 
 @end
 

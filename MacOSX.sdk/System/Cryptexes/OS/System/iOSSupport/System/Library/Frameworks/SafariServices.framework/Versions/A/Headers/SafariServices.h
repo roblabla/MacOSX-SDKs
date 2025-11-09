@@ -12,6 +12,7 @@
 #import <SafariServices/SFError.h>
 #import <SafariServices/SFFoundation.h>
 #import <SafariServices/SFSafariApplication.h>
+#import <SafariServices/SFSafariSettings.h>
 #import <SafariServices/SFSafariViewController.h>
 #import <SafariServices/SFSafariViewControllerActivityButton.h>
 #import <SafariServices/SFSafariViewControllerConfiguration.h>

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature ExistentialAny -user-module-version 1278.6.31.4.1 -module-name MatterSupport
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-upcoming-feature ExistentialAny -enable-experimental-feature DebugDescriptionMacro -user-module-version 1349.1.3.4.1 -module-name MatterSupport
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 public import Matter
 @_exported public import MatterSupport
 public import Swift
@@ -39,9 +39,13 @@ public struct MatterAddDeviceRequest {
   public var showDeviceCriteria: MatterSupport.MatterAddDeviceRequest.DeviceCriteria
   @available(iOS 16.4, *)
   public var shouldScanNetworks: Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(topology: MatterSupport.MatterAddDeviceRequest.Topology, setupPayload: Matter.MTRSetupPayload? = nil, showing deviceCriteria: MatterSupport.MatterAddDeviceRequest.DeviceCriteria = .allDevices)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.4, *)
   public init(topology: MatterSupport.MatterAddDeviceRequest.Topology, setupPayload: Matter.MTRSetupPayload? = nil, showing deviceCriteria: MatterSupport.MatterAddDeviceRequest.DeviceCriteria = .allDevices, shouldScanNetworks: Swift.Bool = true)
+  #endif
   public func perform() async throws
 }
 @available(iOS 16.1, macOS 14, *)
@@ -220,9 +224,15 @@ open class MatterAddDeviceExtensionRequestHandler : ObjectiveC.NSObject {
   open func validateDeviceCredential(_ deviceCredential: MatterSupport.MatterAddDeviceExtensionRequestHandler.DeviceCredential) async throws
   open func selectWiFiNetwork(from wifiScanResults: [MatterSupport.MatterAddDeviceExtensionRequestHandler.WiFiScanResult]) async throws -> MatterSupport.MatterAddDeviceExtensionRequestHandler.WiFiNetworkAssociation
   open func selectThreadNetwork(from threadScanResults: [MatterSupport.MatterAddDeviceExtensionRequestHandler.ThreadScanResult]) async throws -> MatterSupport.MatterAddDeviceExtensionRequestHandler.ThreadNetworkAssociation
+  #if compiler(>=5.3) && $NonescapableTypes
   open func commissionDevice(in home: MatterSupport.MatterAddDeviceRequest.Home?, onboardingPayload: Swift.String, commissioningID: Foundation.UUID) async throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   open func rooms(in home: MatterSupport.MatterAddDeviceRequest.Home?) async -> [MatterSupport.MatterAddDeviceRequest.Room]
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   open func configureDevice(named name: Swift.String, in room: MatterSupport.MatterAddDeviceRequest.Room?) async
+  #endif
   @objc override dynamic public init()
   @objc deinit
 }

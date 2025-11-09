@@ -78,13 +78,14 @@ exports:
                        __UTTypeApplicationsFolder, __UTTypeBlockSpecial, __UTTypeCharacterSpecial, 
                        __UTTypeComputer, __UTTypeDataContainer, __UTTypeDevice, __UTTypeDisplay, 
                        __UTTypeDropFolder, __UTTypeGenericPC, __UTTypeHEIFStandard, 
-                       __UTTypeHomePod, __UTTypeLibraryFolder, __UTTypeMac, __UTTypeMacBook, 
-                       __UTTypeMacBookAir, __UTTypeMacBookPro, __UTTypeMacLaptop, 
+                       __UTTypeHomePod, __UTTypeLibraryFolder, __UTTypeMXIFile, __UTTypeMac, 
+                       __UTTypeMacBook, __UTTypeMacBookAir, __UTTypeMacBookPro, __UTTypeMacLaptop, 
                        __UTTypeMacMini, __UTTypeMacPro, __UTTypeNamedPipeOrFIFO, 
                        __UTTypeNetworkNeighborhood, __UTTypePassBundle, __UTTypePassData, 
-                       __UTTypePassesData, __UTTypeServersFolder, __UTTypeSocket, 
-                       __UTTypeSpeaker, __UTTypeiMac, __UTTypeiOSDevice, __UTTypeiOSSimulator, 
-                       __UTTypeiPad, __UTTypeiPhone, __UTTypeiPodTouch, ___UNIFORM_TYPE_IDENTIFIER_WAS_NOT_DECLARED_IN_INFO_PLIST_OF_BUNDLE__, 
+                       __UTTypePassesData, __UTTypeRemoteApplicationPlaceholder, 
+                       __UTTypeServersFolder, __UTTypeSocket, __UTTypeSpeaker, __UTTypeiMac, 
+                       __UTTypeiOSDevice, __UTTypeiOSSimulator, __UTTypeiPad, __UTTypeiPhone, 
+                       __UTTypeiPodTouch, ___UNIFORM_TYPE_IDENTIFIER_WAS_NOT_DECLARED_IN_INFO_PLIST_OF_BUNDLE__, 
                        ___UTFindCoreTypesConstantWithIdentifier ]
     objc-classes:    [ UTType ]
 ...

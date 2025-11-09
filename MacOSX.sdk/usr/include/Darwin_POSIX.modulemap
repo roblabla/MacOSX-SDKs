@@ -119,12 +119,6 @@ module Darwin.POSIX {
 
   extern module netinet "netinet.modulemap"
 
-  // Deprecated, use top level nl_types
-  module nl_types {
-    header "_modules/_nl_types.h"
-    export *
-  }
-
   module poll {
     header "poll.h"
     header "sys/poll.h"
@@ -132,12 +126,6 @@ module Darwin.POSIX {
   }
 
   module pthread {
-    // Deprecated, use top level pthread
-    module pthread {
-      header "_modules/_pthread.h"
-      export *
-    }
-
     module spawn {
       header "pthread/spawn.h"
       export *
@@ -145,6 +133,12 @@ module Darwin.POSIX {
 
     module spis {
       header "pthread/pthread_spis.h"
+      export *
+    }
+
+    // Deprecated, use top level pthread
+    module pthread {
+      header "_modules/_darwin_posix_pthread_pthread.h"
       export *
     }
   }
@@ -163,12 +157,6 @@ module Darwin.POSIX {
     }
 
     header "_regex.h"
-    export *
-  }
-
-  // Deprecated, use pthread.sched
-  module sched {
-    header "_modules/_sched.h"
     export *
   }
 
@@ -207,18 +195,6 @@ module Darwin.POSIX {
 
     module msg {
       header "sys/msg.h"
-      export *
-    }
-
-    // Deprecated, use sys_resource
-    module resource {
-      header "_modules/_sys_resource.h"
-      export *
-    }
-
-    // Deprecated, use sys_select
-    module select {
-      header "_modules/_sys_select.h"
       export *
     }
 
@@ -365,14 +341,26 @@ module Darwin.POSIX {
       export *
     }
 
-    // Deprecated, use sys_wait
-    module wait {
-      header "_modules/_sys_wait.h"
+    module xattr {
+      header "sys/xattr.h"
       export *
     }
 
-    module xattr {
-      header "sys/xattr.h"
+    // Deprecated, use sys_resource
+    module resource {
+      header "_modules/_darwin_posix_sys_resource.h"
+      export *
+    }
+
+    // Deprecated, use sys_select
+    module select {
+      header "_modules/_darwin_posix_sys_select.h"
+      export *
+    }
+
+    // Deprecated, use sys_wait
+    module wait {
+      header "_modules/_darwin_posix_sys_wait.h"
       export *
     }
   }
@@ -399,12 +387,6 @@ module Darwin.POSIX {
     export *
   }
 
-  // Deprecated, use top level unistd
-  module unistd {
-    header "_modules/_unistd.h"
-    export *
-  }
-
   module utime {
     header "utime.h"
     export *
@@ -417,6 +399,24 @@ module Darwin.POSIX {
 
   module wordexp {
     header "wordexp.h"
+    export *
+  }
+
+  // Deprecated, use top level nl_types
+  module nl_types {
+    header "_modules/_darwin_posix_nl_types.h"
+    export *
+  }
+
+  // Deprecated, use pthread.sched
+  module sched {
+    header "_modules/_darwin_posix_sched.h"
+    export *
+  }
+
+  // Deprecated, use top level unistd
+  module unistd {
+    header "_modules/_darwin_posix_unistd.h"
     export *
   }
 }

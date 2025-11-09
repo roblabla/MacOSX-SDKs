@@ -151,11 +151,7 @@ API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_
  *      Return the user's location if available, otherwise returns nil.
  *
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @property (nonatomic, readonly) CLLocation * _Nullable location API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0), visionos(1.0));
-#else
-@property (nonatomic, readonly) CLLocation * _Nullable location API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
-#endif
 
 @end
 
@@ -188,11 +184,7 @@ API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_
  *
  */
 + (nullable instancetype)liveUpdaterWithQueue:(dispatch_queue_t)queue
-									  handler:(void(^)(CLUpdate *_Nullable update))handler API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(1.0)
-#endif
-) NS_REFINED_FOR_SWIFT;
+									  handler:(void(^)(CLUpdate *_Nullable update))handler API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0), visionos(1.0)) NS_REFINED_FOR_SWIFT;
 
 /*
  *  liveUpdaterWithConfiguration:queue:handler:
@@ -219,11 +211,7 @@ API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_
  */
 + (nullable instancetype)liveUpdaterWithConfiguration:(CLLiveUpdateConfiguration)configuration
 												queue:(dispatch_queue_t)queue
-											  handler:(void(^)(CLUpdate * _Nullable update))handler API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(1.0)
-#endif
-) NS_REFINED_FOR_SWIFT;
+											  handler:(void(^)(CLUpdate * _Nullable update))handler API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0), visionos(1.0)) NS_REFINED_FOR_SWIFT;
 																									
 /*
 *  resume
@@ -233,11 +221,7 @@ API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_
 *	  	was called. -resume must be called to start the flow of updates when
 *		a CLLocationUpdater is first obtained.
 */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 - (void)resume API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0), tvos(17.0), visionos(1.0));
-#else
-- (void)resume API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
-#endif
 
 /*
 *  pause
@@ -249,11 +233,7 @@ API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_
 *		updates where they were left off.
 *
 */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 - (void)pause API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0), visionos(1.0));
-#else
-- (void)pause API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
-#endif
 
 /*
 *  invalidate
@@ -263,11 +243,7 @@ API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_
 *      	instance after invalidation results in no-op.
 *
 */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 - (void)invalidate API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), visionos(1.0));
-#else
-- (void)invalidate API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
-#endif
 
 @end
 NS_ASSUME_NONNULL_END

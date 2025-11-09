@@ -5,6 +5,7 @@
 #import <GameKit/GKPlayer.h>
 #import <GameKit/GKDefines.h>
 #import <GameKit/GKEventListener.h>
+#import <GameKit/GKGameActivityListener.h>
 #import <GameKit/GKTurnBasedMatch.h>
 #import <GameKit/GKMatchmaker.h>
 #import <GameKit/GKSavedGameListener.h>
@@ -16,8 +17,6 @@
 @class NSViewController;
 @class NSWindow;
 #endif
-
-@protocol GKGameActivityListener;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -91,17 +90,18 @@ API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 
 @end
 
-
 #if TARGET_OS_TV || TARGET_OS_WATCH
 API_AVAILABLE(tvos(9.0), watchos(3.0))
 @protocol GKLocalPlayerListener <GKChallengeListener, GKInviteEventListener, GKTurnBasedEventListener>
 @end
-#else
-API_AVAILABLE(ios(7.0), macos(10.10), visionos(1.0))
-@protocol GKLocalPlayerListener <GKChallengeListener, GKInviteEventListener, GKTurnBasedEventListener, GKSavedGameListener>
-@end
-#endif
 
+#else
+
+API_AVAILABLE(ios(7.0), macos(10.10), visionos(1.0))
+@protocol GKLocalPlayerListener <GKChallengeListener, GKGameActivityListener, GKInviteEventListener, GKTurnBasedEventListener, GKSavedGameListener>
+@end
+
+#endif
 
 @interface GKLocalPlayer (GKLocalPlayerEvents)
 
@@ -262,6 +262,7 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
 /// observable property that becomes true when the friend request view controller is displayed.  It becomes false when it is dismissed
 @property (nonatomic, readonly) BOOL isPresentingFriendRequestViewController API_AVAILABLE(ios(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 
+#if TARGET_OS_IPHONE
 /**
  *  presentFriendRequestCreatorFromViewController:
  *
@@ -273,12 +274,23 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  *          - The local player user account is not allowed to add friends
  *            - The device is not allowing outgoing traffic at the time of the operation
 */
-#if TARGET_OS_IPHONE
 - (BOOL)presentFriendRequestCreatorFromViewController:(UIViewController *)viewController error:(NSError **)error API_AVAILABLE(ios(15.0), visionos(1.0))  API_UNAVAILABLE(macos, macCatalyst, watchos, tvos);
 #else
+/**
+ *  presentFriendRequestCreatorFromViewController:
+ *
+ *  Discussion:
+ *      iOS only. When invoked, a Messages sheet will be presented on the viewController passed in, using the existing flow of presentation on behalf of an application.
+ *      If an error is returned, control are returned directly to the application, without presentation.
+ *
+ *      Possible reasons for error:
+ *          - The local player user account is not allowed to add friends
+ *            - The device is not allowing outgoing traffic at the time of the operation
+*/
 - (BOOL)presentFriendRequestCreatorFromViewController:(NSViewController *)viewController error:(NSError **)error API_AVAILABLE(ios(15.0), visionos(1.0))  API_UNAVAILABLE(macos, macCatalyst, watchos, tvos);
 #endif
 
+#if TARGET_OS_OSX
 /**
  *  presentFriendRequestCreatorFromWindow:
  *
@@ -290,9 +302,19 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  *          - The local player user account is not allowed to add friends
  *            - The device is not allowing outgoing traffic at the time of the operation
 */
-#if TARGET_OS_OSX
 - (BOOL)presentFriendRequestCreatorFromWindow:(nullable NSWindow *)window error:(NSError **)error API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, visionos, watchos);
 #else
+/**
+ *  presentFriendRequestCreatorFromWindow:
+ *
+ *  Discussion:
+ *      MacOS only. When invoked, if no error is encountered, the caller application is backgrounded and the 'Messages' application is launched/foregrounded, with a formatted friend request message.
+ *      If an error occurs, controls are returned to the caller application, with an error describing the error.
+ *
+ *      Possible reasons for error:
+ *          - The local player user account is not allowed to add friends
+ *            - The device is not allowing outgoing traffic at the time of the operation
+*/
 - (BOOL)presentFriendRequestCreatorFromWindow:(nullable UIWindow *)window error:(NSError **)error API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, visionos, watchos);
 #endif
 

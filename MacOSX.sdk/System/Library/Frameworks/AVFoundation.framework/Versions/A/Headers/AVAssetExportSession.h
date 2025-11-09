@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2023 Apple Inc. All rights reserved.
+	Copyright 2010-2025 Apple Inc. All rights reserved.
 
 */
 
@@ -53,10 +53,13 @@ AVF_EXPORT NSString *const AVAssetExportPresetHEVC1920x1080				API_AVAILABLE(mac
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC1920x1080WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos);
-AVF_EXPORT NSString *const AVAssetExportPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
+AVF_EXPORT NSString *const AVAssetExportPresetHEVC4320x2160				API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetHEVC7680x4320				API_AVAILABLE(macos(12.1), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
 
 AVF_EXPORT NSString *const AVAssetExportPresetMVHEVC960x960				API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetMVHEVC1440x1440			API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetMVHEVC4320x4320			API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetMVHEVC7680x7680			API_AVAILABLE(macos(26.0), ios(26.0), visionos(26.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*  This export option will produce an audio-only .m4a file with appropriate iTunes gapless playback data */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);

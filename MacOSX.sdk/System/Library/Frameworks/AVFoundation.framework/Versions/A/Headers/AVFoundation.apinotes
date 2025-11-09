@@ -1011,6 +1011,8 @@ Globals:
   SwiftName: tif
 - Name: AVFileTypeWAVE
   SwiftName: wav
+- Name: AVFileTypeDICOM
+  SwiftName: dcm
 
 # AVMetadataExtraAttributeKey
 - Name: AVMetadataExtraAttributeValueURIKey
@@ -1341,6 +1343,38 @@ Globals:
   SwiftName: AVPlayerInterstitialEventMonitor.currentEventDidChangeNotification
 - Name: AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification
   SwiftName: AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification
+- Name: AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeEventKey
+  SwiftName: AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeEventKey
+- Name: AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeStatusKey
+  SwiftName: AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeStatusKey
+- Name: AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeErrorKey
+  SwiftName: AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeErrorKey
+- Name: AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeNotification
+  SwiftName: AVPlayerInterstitialEventMonitor.currentEventSkippableStateDidChangeNotification
+- Name: AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeEventKey
+  SwiftName: AVPlayerInterstitialEventMonitor.currentEventSkippableStateDidChangeEventKey
+- Name: AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeStateKey
+  SwiftName: AVPlayerInterstitialEventMonitor.currentEventSkippableStateDidChangeStateKey
+- Name: AVPlayerInterstitialEventMonitorCurrentEventSkippableStateDidChangeSkipControlLabelKey
+  SwiftName: AVPlayerInterstitialEventMonitor.currentEventSkippableStateDidChangeSkipControlLabelKey
+- Name: AVPlayerInterstitialEventMonitorCurrentEventSkippedNotification
+  SwiftName: AVPlayerInterstitialEventMonitor.currentEventSkippedNotification
+- Name: AVPlayerInterstitialEventMonitorCurrentEventSkippedEventKey
+  SwiftName: AVPlayerInterstitialEventMonitor.currentEventSkippedEventKey
+- Name: AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledNotification
+  SwiftName: AVPlayerInterstitialEventMonitor.interstitialEventWasUnscheduledNotification
+- Name: AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledEventKey
+  SwiftName: AVPlayerInterstitialEventMonitor.interstitialEventWasUnscheduledEventKey
+- Name: AVPlayerInterstitialEventMonitorInterstitialEventWasUnscheduledErrorKey
+  SwiftName: AVPlayerInterstitialEventMonitor.interstitialEventWasUnscheduledErrorKey
+- Name: AVPlayerInterstitialEventMonitorInterstitialEventDidFinishNotification
+  SwiftName: AVPlayerInterstitialEventMonitor.interstitialEventDidFinishNotification
+- Name: AVPlayerInterstitialEventMonitorInterstitialEventDidFinishEventKey
+  SwiftName: AVPlayerInterstitialEventMonitor.interstitialEventDidFinishEventKey
+- Name: AVPlayerInterstitialEventMonitorInterstitialEventDidFinishPlayoutTimeKey
+  SwiftName: AVPlayerInterstitialEventMonitor.interstitialEventDidFinishPlayoutTimeKey
+- Name: AVPlayerInterstitialEventMonitorInterstitialEventDidFinishDidPlayEntireEventKey
+  SwiftName: AVPlayerInterstitialEventMonitor.interstitialEventDidFinishDidPlayEntireEventKey
 
 # AVPlayerItemIntegratedTimeline
 - Name: AVPlayerIntegratedTimelineSnapshotsOutOfSyncNotification
@@ -2323,6 +2357,9 @@ SwiftVersions:
     SwiftName: AVFileTypeTIFF
   - Name: AVFileTypeWAVE
     SwiftName: AVFileTypeWAVE
+  - Name: AVFileTypeDICOM
+    SwiftName: AVFileTypeDICOM
+
 
   # AVMetadataExtraAttributeKey
   - Name: AVMetadataExtraAttributeValueURIKey

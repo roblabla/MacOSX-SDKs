@@ -125,6 +125,31 @@ API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 
 @end // AVAudioSessionDataSourceDescription
 
+/// Describes whether a specific capability is supported and if that capability is currently enabled
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(26.0), watchos(26.0), tvos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0))
+@interface AVAudioSessionCapability : NSObject
+
+/// A Boolean value that indicates whether the capability is supported.
+@property (readonly, nonatomic, getter=isSupported) BOOL supported;
+/// A Boolean value that indicates whether the capability is enabled.
+@property (readonly, nonatomic, getter=isEnabled) BOOL enabled;
+
+@end
+
+/// An object that describes capabilities of Bluetooth microphone ports.
+NS_SWIFT_SENDABLE
+API_AVAILABLE(ios(26.0), watchos(26.0), tvos(26.0), macCatalyst(26.0), visionos(26.0)) API_UNAVAILABLE(macos)
+@interface AVAudioSessionPortExtensionBluetoothMicrophone : NSObject
+
+/// Describes whether this port supports Bluetooth high-quality recording.
+///
+/// Please see ``AVAudioSessionCategoryOptions/AVAudioSessionCategoryOptionBluetoothHighQualityRecording`` for details.
+@property (readonly, strong, nonatomic, nonnull) AVAudioSessionCapability* highQualityRecording;
+/// Describes whether this port supports far-field input capture.
+@property (readonly, strong, nonatomic, nonnull) AVAudioSessionCapability* farFieldCapture;
+@end
+
 /// Information about a port, a physical connector or audio device.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) 
@@ -196,6 +221,15 @@ API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos)
 - (BOOL)setPreferredDataSource:(nullable AVAudioSessionDataSourceDescription *)dataSource error:(NSError **)outError API_AVAILABLE(ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos, macos);
 
 @end // AVAudioSessionPortDescription
+
+@interface AVAudioSessionPortDescription (BluetoothMicrophoneExtension)
+
+/// An optional port extension that describes capabilities relevant to Bluetooth microphone ports.
+///
+/// This property is optional and will be `nil` for all ports for which this capability set doesn't apply.
+@property (readonly, nonatomic, nullable) AVAudioSessionPortExtensionBluetoothMicrophone* bluetoothMicrophoneExtension API_AVAILABLE(ios(26.0), watchos(26.0), tvos(26.0), macCatalyst(26.0), visionos(26.0)) API_UNAVAILABLE(macos);
+
+@end
 
 /// A description of the input and output ports which comprise a route.
 NS_SWIFT_SENDABLE

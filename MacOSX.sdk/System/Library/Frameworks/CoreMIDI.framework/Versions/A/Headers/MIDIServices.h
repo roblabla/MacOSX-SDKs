@@ -89,6 +89,22 @@ extern "C" {
 #endif
 
 //=============================================================================
+
+/*!
+	@macro	MIDI_REALTIME_API
+	@brief	A function (type) which is guaranteed / required to be realtime safe.
+*/
+#if defined(__has_attribute) && __has_attribute(nonblocking)
+#  ifdef __cplusplus
+#    define MIDI_REALTIME_API [[clang::nonblocking]]
+#  else
+#    define MIDI_REALTIME_API __attribute__((nonblocking))
+#  endif
+#else
+#    define MIDI_REALTIME_API
+#endif
+
+//=============================================================================
 #pragma mark	Error Constants
 /*!
     @enum           Error Constants
@@ -348,7 +364,8 @@ typedef void
 						identifies the source of the data.
 */
 typedef void
-(^MIDIReceiveBlock)(const MIDIEventList *evtlist, void * __nullable srcConnRefCon);
+(^MIDIReceiveBlock)(const MIDIEventList *evtlist, void * __nullable srcConnRefCon)
+	MIDI_REALTIME_API;
 
 /*!
 	@typedef		MIDIReadProc
@@ -371,7 +388,10 @@ typedef void
 						identifies the source of the data.
 */
 typedef void
-(*MIDIReadProc)(const MIDIPacketList *pktlist, void * __nullable readProcRefCon, void * __nullable srcConnRefCon) API_DEPRECATED("use MIDIReceiveBlock and MIDIEventLists", macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+(*MIDIReadProc)(const MIDIPacketList *pktlist, void * __nullable readProcRefCon,
+	void * __nullable srcConnRefCon)
+		MIDI_REALTIME_API
+		API_DEPRECATED("use MIDIReceiveBlock and MIDIEventLists", macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
 	@typedef		MIDIReadBlock
@@ -391,7 +411,9 @@ typedef void
 						identifies the source of the data.
 */
 typedef void
-(^MIDIReadBlock)(const MIDIPacketList *pktlist, void * __nullable srcConnRefCon) API_DEPRECATED("use MIDIReceiveBlock and MIDIEventLists", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+(^MIDIReadBlock)(const MIDIPacketList *pktlist, void * __nullable srcConnRefCon)
+	MIDI_REALTIME_API
+	API_DEPRECATED("use MIDIReceiveBlock and MIDIEventLists", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
 	@typedef		MIDICompletionProc
@@ -2373,7 +2395,9 @@ MIDIObjectFindByUniqueID(	MIDIUniqueID 		inUniqueID,
 extern OSStatus
 MIDISendEventList(	MIDIPortRef 				port,
 					MIDIEndpointRef 			dest,
-					const MIDIEventList *		evtlist )	API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+					const MIDIEventList *		evtlist )
+						MIDI_REALTIME_API
+						API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@function		MIDISend
@@ -2396,9 +2420,10 @@ extern OSStatus
 MIDISend(	MIDIPortRef 			port,
 			MIDIEndpointRef 		dest,
 			const MIDIPacketList *	pktlist )
-	API_DEPRECATED_WITH_REPLACEMENT("MIDISendEventList",
-									macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
-    
+				MIDI_REALTIME_API
+				API_DEPRECATED_WITH_REPLACEMENT("MIDISendEventList",
+					macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+
 /*!
 	@function		MIDISendSysex
 
@@ -2489,7 +2514,9 @@ MIDIEventPacketSysexBytesForGroup(const MIDIEventPacket* pkt, UInt8 groupIndex, 
 */
 extern OSStatus
 MIDIReceivedEventList(	MIDIEndpointRef			src,
-						const MIDIEventList *	evtlist )	API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+						const MIDIEventList *	evtlist )
+							MIDI_REALTIME_API
+							API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@function		MIDIReceived
@@ -2515,8 +2542,9 @@ MIDIReceivedEventList(	MIDIEndpointRef			src,
 extern OSStatus
 MIDIReceived(	MIDIEndpointRef			src,
 				const MIDIPacketList * 	pktlist )
-		API_DEPRECATED_WITH_REPLACEMENT("MIDIReceivedEventList",
-										macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
+					MIDI_REALTIME_API
+					API_DEPRECATED_WITH_REPLACEMENT("MIDIReceivedEventList",
+						macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
 /*!
 	@function		MIDIFlushOutput
@@ -2584,7 +2612,9 @@ CF_INLINE MIDIEventPacket *MIDIEventPacketNext(const MIDIEventPacket *pkt)
 */
 extern MIDIEventPacket *
 MIDIEventListInit(	MIDIEventList *evtlist,
-					MIDIProtocolID protocol)			API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(8.0));
+					MIDIProtocolID protocol)
+						MIDI_REALTIME_API
+						API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(8.0));
 
 /*!
 	@function		MIDIEventListAdd
@@ -2622,7 +2652,9 @@ MIDIEventListAdd(	MIDIEventList *		evtlist,
 					MIDIEventPacket *	curPacket,
 					MIDITimeStamp		time,
 					ByteCount			wordCount,
-					const UInt32 *		words)			API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(8.0));
+					const UInt32 *		words)
+						MIDI_REALTIME_API
+						API_AVAILABLE(macos(11.0), ios(14.0), tvos(15.0), watchos(8.0));
 
 //==================================================================================================
 #pragma mark Packet Lists (Deprecated in favor of Event Lists)
@@ -2669,6 +2701,7 @@ CF_INLINE MIDIPacket *MIDIPacketNext(const MIDIPacket *pkt)
 */
 extern MIDIPacket *
 MIDIPacketListInit(	MIDIPacketList *pktlist )
+			MIDI_REALTIME_API
 			API_DEPRECATED_WITH_REPLACEMENT("MIDIEventListInit",
 											macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 
@@ -2707,6 +2740,7 @@ MIDIPacketListAdd(	MIDIPacketList *	pktlist,
 					MIDITimeStamp		time,
 					ByteCount			nData,
 					const Byte *		data)
+			MIDI_REALTIME_API
 			API_DEPRECATED_WITH_REPLACEMENT("MIDIEventListAdd",
 											macos(10.0, API_TO_BE_DEPRECATED), ios(4.2, API_TO_BE_DEPRECATED)) __TVOS_PROHIBITED __WATCHOS_PROHIBITED;
 

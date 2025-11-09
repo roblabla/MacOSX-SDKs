@@ -24,7 +24,7 @@ API_UNAVAILABLE(macos)
 /*!
  * @brief Represents the audio setting for the current stream.
  */
-@property (assign, nonatomic, readonly) HMCameraAudioStreamSetting audioStreamSetting API_AVAILABLE(tvos(14.5));
+@property (nonatomic, readonly, assign) HMCameraAudioStreamSetting audioStreamSetting API_AVAILABLE(tvos(14.5));
 
 /*!
  * @brief Sets the audio stream setting.

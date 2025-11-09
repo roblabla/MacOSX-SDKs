@@ -726,6 +726,61 @@ CF_ENUM(long) {
     kAUSoundIsolationSoundType_Voice API_AVAILABLE(macos(13.0), ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) = 1
 };
 
+// Parameters for AUAudioMix
+CF_ENUM(AudioUnitParameterID) {
+    // Global, Enum, 0->9, 0
+    kAUAudioMixParameter_Style API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 0,
+    // Global, float, 0->1, 0.5
+    kAUAudioMixParameter_RemixAmount API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 1,
+};
+
+/*!
+ @enum          AUAudioMix styles
+ @brief         Constants available as values for parameter kAUAudioMixParameter_Style.
+ 
+ @constant      kAudioMixRenderingStyle_Cinematic
+    Cinematic rendering style (default)
+
+ @constant      kAudioMixRenderingStyle_Studio
+    Studio rendering style
+ 
+ @constant      kAudioMixRenderingStyle_InFrame
+    In-Frame rendering style
+ 
+ @constant      kAudioMixRenderingStyle_CinematicBackgroundStem
+    Cinematic rendering style - background only
+ 
+ @constant      kAudioMixRenderingStyle_CinematicForegroundStem
+    Cinematic rendering style - foreground only
+ 
+ @constant      kAudioMixRenderingStyle_StudioForegroundStem
+    Studio rendering style - foreground only
+ 
+ @constant      kAudioMixRenderingStyle_InFrameForegroundStem
+    In-Frame rendering style - foreground only
+ 
+ @constant      kAudioMixRenderingStyle_Standard
+    Standard rendering style
+ 
+ @constant      kAudioMixRenderingStyle_StudioBackgroundStem
+    Studio rendering style - background only
+ 
+ @constant      kAudioMixRenderingStyle_InFrameBackgroundStem
+    In-Frame rendering style - background only
+ */
+typedef CF_ENUM( UInt32, AUAudioMixRenderingStyle ) {
+    kAudioMixRenderingStyle_Cinematic API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 0,
+    kAudioMixRenderingStyle_Studio API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 1,
+    kAudioMixRenderingStyle_InFrame API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 2,
+    kAudioMixRenderingStyle_CinematicBackgroundStem API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 3,
+    kAudioMixRenderingStyle_CinematicForegroundStem API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 4,
+    kAudioMixRenderingStyle_StudioForegroundStem API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 5,
+    kAudioMixRenderingStyle_InFrameForegroundStem API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 6,
+    kAudioMixRenderingStyle_Standard API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 7,
+    kAudioMixRenderingStyle_StudioBackgroundStem API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 8,
+    kAudioMixRenderingStyle_InFrameBackgroundStem API_AVAILABLE(macos(26.0), ios(26.0)) API_UNAVAILABLE(watchos, tvos, visionos) = 9,
+};
+
 #pragma mark Apple Specific - Desktop
 
 #if !TARGET_OS_IPHONE

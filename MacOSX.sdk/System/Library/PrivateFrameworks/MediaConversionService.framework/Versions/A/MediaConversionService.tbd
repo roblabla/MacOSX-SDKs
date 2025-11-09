@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MediaConversionService.framework/Versions/A/MediaConversionService'
-current-version: 760.6.150
+current-version: 801.43.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -53,8 +53,7 @@ exports:
                        _PAMediaConversionServiceOptionOutputFileTypeKey, _PAMediaConversionServiceOptionPowerEfficiencyKey, 
                        _PAMediaConversionServiceOptionPowerEfficiencyMinimumDurationKey, 
                        _PAMediaConversionServiceOptionProgressUpdateTimeIntervalKey, 
-                       _PAMediaConversionServiceOptionRasterizationDPIKey, _PAMediaConversionServiceOptionRequestReasonKey, 
-                       _PAMediaConversionServiceOptionRequiresBlastDoorAccessKey, 
+                       _PAMediaConversionServiceOptionRequestReasonKey, _PAMediaConversionServiceOptionRequiresBlastDoorAccessKey, 
                        _PAMediaConversionServiceOptionRotationAngleDegreesKey, _PAMediaConversionServiceOptionScaleFactorKey, 
                        _PAMediaConversionServiceOptionTargetFileSizeKey, _PAMediaConversionServiceOptionUnitTestSupportExtraEnvironmentVariablesKey, 
                        _PAMediaConversionServiceOptionUnitTestSupportServiceShouldExitAfterRequestKey, 
@@ -73,14 +72,8 @@ exports:
                        _PAMediaConversionTypeVideoStillExtraction, _PHMediaFormatConversionErrorDomain, 
                        _PHMediaFormatConversionUnknownFutureIdentifierPlaceholder ]
     objc-classes:    [ ConversionOptionSet, MediaConversionServiceCommandLineDriver, 
-                       PAImageConversionServiceClient, PAMediaConversionServiceAddPFMetadataPolicy, 
-                       PAMediaConversionServiceCompositeImageMetadataPolicy, PAMediaConversionServiceDefaultImageMetadataPolicy, 
-                       PAMediaConversionServiceImageMetadataPolicy, PAMediaConversionServiceImagingUtilities, 
+                       PAImageConversionServiceClient, PAMediaConversionServiceImagingUtilities, 
                        PAMediaConversionServiceResourceURLCollection, PAMediaConversionServiceResourceURLReference, 
-                       PAMediaConversionServiceSetAccessibilityDescriptionImageMetadataPolicy, 
-                       PAMediaConversionServiceSetCaptionImageMetadataPolicy, PAMediaConversionServiceSetCreationDateImageMetadataPolicy, 
-                       PAMediaConversionServiceSetLocationImageMetadataPolicy, PAMediaConversionServiceSharedPhotoStreamImageMetadataPolicy, 
-                       PAMediaConversionServiceiCloudPhotoLibraryImageMetadataPolicy, 
                        PAVideoConversionServiceClient, PHMediaFormatAssetBundleConversionRequest, 
                        PHMediaFormatChainedConversionRequest, PHMediaFormatConversionAssetBundleSource, 
                        PHMediaFormatConversionCompositeRequest, PHMediaFormatConversionContent, 

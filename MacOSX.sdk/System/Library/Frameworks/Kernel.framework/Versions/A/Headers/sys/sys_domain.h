@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2005, 2012, 2014 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2005, 2012, 2014, 2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -34,7 +34,6 @@
 #include <sys/cdefs.h>
 #include <sys/types.h>
 
-
 /* Kernel Events Protocol */
 #define SYSPROTO_EVENT          1       /* kernel events protocol */
 
@@ -49,7 +48,6 @@ struct sockaddr_sys {
 	u_int16_t       ss_sysaddr;     /* protocol address in AF_SYSTEM */
 	u_int32_t       ss_reserved[7]; /* reserved to the protocol use */
 };
-
 
 
 #endif /* _SYSTEM_DOMAIN_H_ */

@@ -15,6 +15,7 @@
 #import <BrowserEngineKit/BEDragInteraction.h>
 #import <BrowserEngineKit/BEScrollView.h>
 
+#import <BrowserEngineKit/BEExtensionProcess.h>
 #import <BrowserEngineKit/BEWebContentProcess.h>
 #import <BrowserEngineKit/BENetworkingProcess.h>
 #import <BrowserEngineKit/BERenderingProcess.h>
@@ -42,5 +43,6 @@
 #import <BrowserEngineKit/BEAccessibility.h>
 #import <BrowserEngineKit/BEAccessibilityTextMarker.h>
 #import <BrowserEngineKit/BEAccessibilityConstants.h>
+#import <BrowserEngineKit/BEAccessibilityRemoteElement.h>
 
 #import <BrowserEngineKit/BEDownloads.h>

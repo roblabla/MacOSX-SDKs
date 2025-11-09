@@ -17,430 +17,274 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVMetricEvent;
 
-/*!
- @protocol AVMetricEventStreamPublisher
- @abstract This protocol needs to be implemented by interfaces intending to publish metric events to the event stream.
- */
+/// This protocol needs to be implemented by interfaces intending to publish metric events to the event stream.
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @protocol AVMetricEventStreamPublisher
 @end
 
-/*!
- @protocol AVMetricEventStreamSubscriber
- @abstract This protocol needs to be implemented by the subscriber delegate to receive subscribed metric events.
- */
+/// This protocol needs to be implemented by the subscriber delegate to receive subscribed metric events.
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @protocol AVMetricEventStreamSubscriber
 
-/*!
- @method publisher:didReceiveEvent:
- @abstract Delegate callback to receive metric events.
- @param event The metric event.
- @param publisher The publisher which generated the current event.
- */
+/// Delegate callback to receive metric events.
+/// 
+/// - Parameter event: The metric event.
+/// - Parameter publisher: The publisher which generated the current event.
 - (void)publisher:(id<AVMetricEventStreamPublisher>)publisher didReceiveEvent:(AVMetricEvent *)event;
 @end
 
-/*!
- @class AVMetricEventStream
- @abstract AVMetricEventStream allows clients to add publishers and then subscribe to specific metric event classes from those publishers. Publishers are AVFoundation instances implementing AVMetricEventStreamPublisher. The interface allows clients to receive metric events via a subscriber delegate which implements AVMetricEventStreamSubscriber.
- */
+/// AVMetricEventStream allows clients to add publishers and then subscribe to specific metric event classes from those publishers. Publishers are AVFoundation instances implementing AVMetricEventStreamPublisher. The interface allows clients to receive metric events via a subscriber delegate which implements AVMetricEventStreamSubscriber.
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricEventStream : NSObject 
 
 AV_INIT_UNAVAILABLE
 
-/*!
- @method eventStream
- @abstract Returns an autoreleased instance.
- */
+/// Returns an autoreleased instance.
 + (instancetype)eventStream;
 
-/*!
- @method addPublisher:
- @abstract The publisher should be an AVFoundation instance conforming to AVMetricEventStreamPublisher.
- */
+/// The publisher should be an AVFoundation instance conforming to AVMetricEventStreamPublisher.
 - (BOOL)addPublisher:(id<AVMetricEventStreamPublisher>)publisher;
 
-/*!
- @method setSubscriber:queue:
- @abstract Set a subscriber delegate.
- @param subscriber A subscriber delegate object conforming to AVMetricEventStreamSubscriber.
- @param queue Dispatch queue for the delegate callbacks.
- */
+/// Set a subscriber delegate.
+/// 
+/// - Parameter subscriber: A subscriber delegate object conforming to AVMetricEventStreamSubscriber.
+/// - Parameter queue: Dispatch queue for the delegate callbacks.
 - (BOOL)setSubscriber:(id<AVMetricEventStreamSubscriber>)subscriber queue:(nullable dispatch_queue_t)queue;
 
-/*!
- @method subscribeToMetricEvent:
- @abstract Subscribe to a specific metric event class.
- @param metricEventClass Type of metric event class to subscribe to.
- */
+/// Subscribe to a specific metric event class.
+/// 
+/// - Parameter metricEventClass: Type of metric event class to subscribe to.
 - (void)subscribeToMetricEvent:(Class)metricEventClass;
 
-/*!
- @method subscribeToMetricEvents:
- @abstract Subscribe to set of metric event classes.
- @param metricEventClasses Set of metric event classes to subscribe to.
- */
+/// Subscribe to set of metric event classes.
+/// 
+/// - Parameter metricEventClasses: Set of metric event classes to subscribe to.
 - (void)subscribeToMetricEvents:(NSArray<Class> *)metricEventClasses;
 
-/*!
- @method subscribeToAllMetricEvents:
- @abstract Subscribe to all metric event classes.
- */
+/// Subscribe to all metric event classes.
 - (void)subscribeToAllMetricEvents;
 
 @end
 
 #pragma mark - Base class -
 
-/*!
- @class AVMetricEvent
- @abstract An abstract base class representing metric events.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// An abstract base class representing metric events.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricEvent : NSObject <NSSecureCoding>
 AV_INIT_UNAVAILABLE
 
-/*!
- @property date
- @abstract Returns the date when the event occurred.
- */
+/// Returns the date when the event occurred.
 @property (readonly) NSDate *date;
 
-/*!
- @property mediaTime
- @abstract Returns the time in the media timeline when the event occured.
- */
+/// Returns the time in the media timeline when the event occured.
 @property (readonly) CMTime mediaTime;
 
-/*!
- @property sessionID
- @abstract A GUID that identifies the media session. If not available, value is nil.
- */
+/// A GUID that identifies the media session. If not available, value is nil.
 @property (readonly, nullable) NSString *sessionID;
 
 @end
 
 #pragma mark - Error Event -
 
-/*!
- @class AVMetricErrorEvent
- @abstract Represents a metric event when an error occurred.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when an error occurred.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricErrorEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property didRecover
- @abstract Returns whether the error was recoverable.
- */
+/// Returns whether the error was recoverable.
 @property (readonly) BOOL didRecover;
 
-/*!
- @property error
- @abstract Returns the error encountered.
- */
+/// Returns the error encountered.
 @property (readonly) NSError *error;
 @end
 
 #pragma mark - Resource Request Event -
 
-/*!
- @class AVMetricMediaResourceRequestEvent
- @abstract Represents a metric event associated with media resource requests.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event associated with media resource requests.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricMediaResourceRequestEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property url
- @abstract Returns the URL of the resource request. If no value is available, returns nil.
- */
+/// Returns the URL of the resource request. If no value is available, returns nil.
 @property (readonly, nullable) NSURL *url;
 
-/*!
- @property serverAddress
- @abstract The IP address of the server. If not available, the value is nil. 
- */
+/// The IP address of the server. If not available, the value is nil.
 @property (readonly, nullable) NSString *serverAddress;
 
-/*!
- @property requestStartTime
- @abstract Returns the start time of the resource request.
- */
+/// Returns the start time of the resource request.
 @property (readonly) NSDate *requestStartTime;
 
-/*!
- @property requestEndTime
- @abstract Returns the end time of the resource request.
- */
+/// Returns the end time of the resource request.
 @property (readonly) NSDate *requestEndTime;
 
-/*!
- @property responseStartTime
- @abstract Returns the start time of the resource request response.
- */
+/// Returns the start time of the resource request response.
 @property (readonly) NSDate *responseStartTime;
 
-/*!
- @property responseEndTime
- @abstract Returns the end time of the resource request response.
- */
+/// Returns the end time of the resource request response.
 @property (readonly) NSDate *responseEndTime;
 
-/*!
- @property byteRange
- @abstract Returns the byte range downloaded for the resource request. If not available, the range start and end will be 0.
- */
+/// Returns the byte range downloaded for the resource request. If not available, the range start and end will be 0.
 @property (readonly) NSRange byteRange;
 
-/*!
- @property readFromCache
- @abstract Returns true if the resource was read from the cache.
- */
+/// Returns true if the resource was read from the cache.
 @property (readonly, getter=wasReadFromCache) BOOL readFromCache;
 
-/*!
- @property errorEvent
- @abstract Returns the error event, if any, encountered during the resource request. If no value is present, returns nil.
- */
+/// Returns the error event, if any, encountered during the resource request. If no value is present, returns nil.
 @property (readonly, nullable) AVMetricErrorEvent *errorEvent;
 
-/*!
- @property networkTransactionMetrics
- @abstract Returns the NSURLSessionTaskMetrics associated with the resource request. If no value is present, returns nil
- */
+/// Returns the NSURLSessionTaskMetrics associated with the resource request. If no value is present, returns nil
 @property (readonly, nullable) NSURLSessionTaskMetrics *networkTransactionMetrics;
 @end
 
-/*!
- @class AVMetricHLSPlaylistRequestEvent
- @abstract Represents a metric event associated with a HLS playlist resource request.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event associated with a HLS playlist resource request.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricHLSPlaylistRequestEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property url
- @abstract Returns the URL of the playlist. If no value is available, returns nil.
- */
+/// Returns the URL of the playlist. If no value is available, returns nil.
 @property (readonly, nullable) NSURL *url;
 
-/*!
- @property isMultivariantPlaylist
- @abstract Returns true if the playlist request is for a multivariant playlist.
- */
+/// Returns true if the playlist request is for a multivariant playlist.
 @property (readonly) BOOL isMultivariantPlaylist;
 
-/*!
- @property mediaType
- @abstract Returns the media type.  If the value cannot be determined, returns AVMediaTypeMuxed.
- */
+/// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 @property (readonly) AVMediaType mediaType;
 
-/*!
- @property mediaResourceRequestEvent
- @abstract Returns the media resource request event which was used to satisfy the playlist.
- */
+/// Returns the media resource request event which was used to satisfy the playlist.
 @property (readonly, nullable) AVMetricMediaResourceRequestEvent *mediaResourceRequestEvent;
 @end
 
-/*!
- @class AVMetricHLSMediaSegmentRequestEvent
- @abstract Represents a metric event associated with a HLS media segment resource request.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event associated with a HLS media segment resource request.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricHLSMediaSegmentRequestEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property url
- @abstract Returns the URL of the media segment. If no value is available, returns nil.
- */
+/// Returns the URL of the media segment. If no value is available, returns nil.
 @property (readonly, nullable) NSURL *url;
 
-/*!
- @property isMapSegment
- @abstract Returns true if the media segment request is for a map segment.
- */
+/// Returns true if the media segment request is for a map segment.
 @property (readonly) BOOL isMapSegment;
 
-/*!
- @property mediaType
- @abstract Returns the media type.  If the value cannot be determined, returns AVMediaTypeMuxed.
- */
+/// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 @property (readonly) AVMediaType mediaType;
 
-/*!
- @property byteRange
- @abstract Returns the byte range for the media segment. If not available, the range start and end will be 0.
- */
+/// Returns the byte range for the media segment. If not available, the range start and end will be 0.
 @property (readonly) NSRange byteRange;
 
-/*!
- @property indexFileURL
- @abstract Returns the URL of the index file in which this segment was declared. If not available, returns nil.
- */
+/// Returns the URL of the index file in which this segment was declared. If not available, returns nil.
 @property (readonly) NSURL *indexFileURL;
 
-/*!
- @property mediaResourceRequestEvent
- @abstract Returns the media resource request event which was used to satisfy the media segment.
- */
+/// Returns the duration of segment in seconds.
+@property (readonly) NSTimeInterval segmentDuration;
+
+/// Returns the media resource request event which was used to satisfy the media segment.
 @property (readonly, nullable) AVMetricMediaResourceRequestEvent *mediaResourceRequestEvent;
 @end
 
-/*!
- @class AVMetricContentKeyRequestEvent
- @abstract Represents a metric event associated with a HLS content key resource request.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event associated with a HLS content key resource request.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricContentKeyRequestEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property contentKeySpecifier
- @abstract Returns the content key specifier for the request.
- */
+/// Returns the content key specifier for the request.
 @property (readonly) AVContentKeySpecifier *contentKeySpecifier;
 
-/*!
- @property mediaType
- @abstract Returns the media type.  If the value cannot be determined, returns AVMediaTypeMuxed.
- */
+/// Returns the media type. If the value cannot be determined, returns AVMediaTypeMuxed.
 @property (readonly) AVMediaType mediaType;
 
-/*!
- @property isClientInitiated
- @abstract Returns whether the content key resource request was initiated by the client.
- */
+/// Returns whether the content key resource request was initiated by the client.
 @property (readonly) BOOL isClientInitiated;
 
-/*!
- @property mediaResourceRequestEvent
- @abstract Returns the media resource request event which was used to satisfy the content key.
- */
+/// Returns the media resource request event which was used to satisfy the content key.
 @property (readonly, nullable) AVMetricMediaResourceRequestEvent *mediaResourceRequestEvent;
 @end
 
 #pragma mark - Likely To Keep Up Events -
 
-/*!
- @class AVMetricPlayerItemLikelyToKeepUpEvent
- @abstract Represents a metric event when playback was likely to play through without stalling.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when playback was likely to play through without stalling.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemLikelyToKeepUpEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property variant
- @abstract Returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
- */
+/// Returns the variant selected at the time likely to keep up is achieved. If no value is present, returns nil.
 @property (readonly, nullable) AVAssetVariant *variant;
 
-/*!
- @property timeTaken
- @abstract Returns the total time taken to reach likely to keep up.
- */
+/// Returns the total time taken to reach likely to keep up.
 @property (readonly) NSTimeInterval timeTaken;
 
-/*!
- @property loadedTimeRanges
- @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
- @discussion Returns an NSArray of NSValues containing CMTimeRanges.
- */
+/// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
+/// 
+/// Returns an NSArray of NSValues containing CMTimeRanges.
 @property (readonly) NSArray<NSValue *> *loadedTimeRanges NS_REFINED_FOR_SWIFT;
 
 @end
 
-/*!
- @class AVMetricPlayerItemInitialLikelyToKeepUpEvent
- @abstract Represents a metric event when playback was first likely to play through without stalling.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when playback was first likely to play through without stalling.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemInitialLikelyToKeepUpEvent : AVMetricPlayerItemLikelyToKeepUpEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property playlistRequestEvents
- @abstract Returns the playlist request events required to reach likely to keep up.
- */
+/// Returns the playlist request events required to reach likely to keep up.
 @property (readonly) NSArray <AVMetricHLSPlaylistRequestEvent *> *playlistRequestEvents;
 
-/*!
- @property mediaSegmentRequestEvents
- @abstract Returns the media segment request events required to reach likely to keep up.
- */
+/// Returns the media segment request events required to reach likely to keep up.
 @property (readonly) NSArray <AVMetricHLSMediaSegmentRequestEvent *> *mediaSegmentRequestEvents;
 
-/*!
- @property contentKeyRequestEvents
- @abstract Returns the content key request required to reach likely to keep up.
- */
+/// Returns the content key request required to reach likely to keep up.
 @property (readonly) NSArray <AVMetricContentKeyRequestEvent *> *contentKeyRequestEvents;
 
 @end
 
 #pragma mark - Rate Change Events -
 
-/*!
- @class AVMetricPlayerItemRateChangeEvent
- @abstract Represents a metric event when playback rate change occurred.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when playback rate change occurred.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemRateChangeEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property rate
- @abstract Returns the playback rate after the rate change event.
- */
+/// Returns the playback rate after the rate change event.
 @property (readonly) double rate;
 
-/*!
- @property previousRate
- @abstract Returns the playback rate before the rate change event.
- */
+/// Returns the playback rate before the rate change event.
 @property (readonly) double previousRate;
 
-/*!
- @property variant
- @abstract Returns the variant being played at the time of rate change. If no value is present, returns nil.
- */
+/// Returns the variant being played at the time of rate change. If no value is present, returns nil.
 @property (readonly, nullable) AVAssetVariant *variant;
 
 @end
 
-/*!
- @class AVMetricPlayerItemStallEvent
- @abstract Represents a metric event when playback stalled.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when playback stalled.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemStallEvent : AVMetricPlayerItemRateChangeEvent
@@ -448,11 +292,9 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-/*!
- @class AVMetricPlayerItemSeekEvent
- @abstract Represents a metric event when playback seeked.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when playback seeked.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemSeekEvent : AVMetricPlayerItemRateChangeEvent
@@ -460,165 +302,190 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-/*!
- @class AVMetricPlayerItemSeekDidCompleteEvent
- @abstract Represents a metric event when playback seek completed.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when playback seek completed.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemSeekDidCompleteEvent : AVMetricPlayerItemRateChangeEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property didSeekInBuffer
- @abstract Returns whether the seek was performed within the available buffer.
- */
+/// Returns whether the seek was performed within the available buffer.
 @property (readonly) BOOL didSeekInBuffer;
 
 @end
 
 #pragma mark - Variant Change Event -
 
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0))
+@interface AVMetricMediaRendition : NSObject <NSSecureCoding>
+AV_INIT_UNAVAILABLE
+
 /*!
- @class AVMetricPlayerItemVariantSwitchEvent
- @abstract Represents a metric event when variant switch was completed.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+ @property stableID
+ @abstract Provides ID corresponding to the rendition. This is equivalent to the
+				STABLE-RENDITION-ID in the HLS playlist. If not available, value is nil.
  */
+@property (readonly, nullable) NSString *stableID;
+
+/*!
+ @property URL
+ @abstract Provides URL corresponding to the rendition's HLS playlist. If not available,
+				value is nil.
+ */
+@property (readonly, nullable) NSURL *URL;
+@end
+
+/// Represents a metric event when variant switch was completed.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemVariantSwitchEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property fromVariant
- @abstract Returns the variant before the switch. If no value is available, returns nil
- */
+/// Returns the variant before the switch. If no value is available, returns nil
 @property (readonly, nullable) AVAssetVariant *fromVariant;
 
-/*!
- @property toVariant
- @abstract Returns the variant after the switch.
- */
+/// Returns the variant after the switch.
 @property (readonly) AVAssetVariant *toVariant;
 
-/*!
- @property loadedTimeRanges
- @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
- @discussion Returns an NSArray of NSValues containing CMTimeRanges.
- */
+/// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
+/// 
+/// Returns an NSArray of NSValues containing CMTimeRanges.
 @property (readonly) NSArray<NSValue *> *loadedTimeRanges NS_REFINED_FOR_SWIFT;
 
-/*!
- @property didSucceed
- @abstract Returns if the switch did succeed.
- */
+/// Represents the currently selected video rendition's identifiers.
+///
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+@property (readonly) AVMetricMediaRendition *videoRendition API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// Represents the currently selected video rendition's identifiers.
+///
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+@property (readonly) AVMetricMediaRendition *audioRendition API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// Represents the currently selected audio rendition's identifiers.
+///
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+@property (readonly) AVMetricMediaRendition *subtitleRendition API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// Returns if the switch did succeed.
 @property (readonly) BOOL didSucceed;
 @end
 
 #pragma mark - Variant Switch Start Event -
 
-/*!
- @class AVMetricPlayerItemVariantSwitchStartEvent
- @abstract Represents a metric event when variant switch was attempted.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a metric event when variant switch was attempted.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemVariantSwitchStartEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property fromVariant
- @abstract Returns the variant from which the switch is attempted. If no value is available, returns nil
- */
+/// Returns the variant from which the switch is attempted. If no value is available, returns nil
 @property (readonly, nullable) AVAssetVariant *fromVariant;
 
-/*!
- @property toVariant
- @abstract Returns the variant to which the switch is attempted.
- */
+/// Returns the variant to which the switch is attempted.
 @property (readonly) AVAssetVariant *toVariant;
 
-/*!
- @property loadedTimeRanges
- @abstract This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
- @discussion Returns an NSArray of NSValues containing CMTimeRanges.
- */
+/// This property provides a collection of time ranges for which the player has the media data readily available. The ranges provided might be discontinuous.
+/// 
+/// Returns an NSArray of NSValues containing CMTimeRanges.
 @property (readonly) NSArray<NSValue *> *loadedTimeRanges NS_REFINED_FOR_SWIFT;
+
+/*!
+ @property videoRendition
+ @abstract Contains information corresponding to the currently selected video rendition.
+ */
+@property (readonly) AVMetricMediaRendition *videoRendition API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/*!
+ @property audioRendition
+ @abstract Contains information corresponding to the currently selected audio rendition.
+ */
+@property (readonly) AVMetricMediaRendition *audioRendition API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/*!
+ @property subtitleRendition
+ @abstract Contains information corresponding to the currently selected subtitle rendition.
+ */
+@property (readonly) AVMetricMediaRendition *subtitleRendition API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 @end
 
-#pragma mark - Summary Event -
+#pragma mark - Playback Summary Event -
 
-/*!
- @class AVMetricPlayerItemPlaybackSummaryEvent
- @abstract Represents a summary metric event with aggregated metrics for the entire playback session.
- @discussion Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
- */
+/// Represents a summary metric event with aggregated metrics for the entire playback session.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
 @interface AVMetricPlayerItemPlaybackSummaryEvent : AVMetricEvent
 AV_INIT_UNAVAILABLE
 
-/*!
- @property errorEvent
- @abstract Returns the error event if any. If no value is available, returns nil.
- */
+/// Returns the error event if any. If no value is available, returns nil.
 @property (readonly, nullable) AVMetricErrorEvent *errorEvent;
 
-/*!
- @property recoverableErrorCount
- @abstract Returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
- */
+/// Returns the total count of recoverable errors encountered during playback. If no errors were encountered, returns 0.
 @property (readonly) NSInteger recoverableErrorCount;
 
-/*!
- @property stallCount
- @abstract Returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
- */
+/// Returns the total count of stalls encountered during playback. If no stalls were encountered, returns 0.
 @property (readonly) NSInteger stallCount;
 
-/*!
- @property variantSwitchCount
- @abstract Returns the total count of variant switch encountered during playback.
- */
+/// Returns the total count of variant switch encountered during playback.
 @property (readonly) NSInteger variantSwitchCount;
 
-/*!
- @property playbackDuration
- @abstract Returns the total duration of playback in seconds.
- */
+/// Returns the total duration of playback in seconds.
 @property (readonly) NSInteger playbackDuration;
 
-/*!
- @property mediaResourceRequestCount
- @abstract Returns the total number of media requests performed by the player.
- */
+/// Returns the total number of media requests performed by the player. This includes playlist requests, media segment requests, and content key requests.
 @property (readonly) NSInteger mediaResourceRequestCount;
 
-/*!
- @property timeSpentRecoveringFromStall
- @abstract Returns the total time spent recovering from a stall event.
- */
+/// Returns the total time spent recovering from a stall event.
 @property (readonly) NSTimeInterval timeSpentRecoveringFromStall;
 
-/*!
- @property timeSpentInInitialStartup
- @abstract Returns the total time spent in initial startup of playback.
- */
+/// Returns the total time spent in initial startup of playback.
 @property (readonly) NSTimeInterval timeSpentInInitialStartup;
 
-/*!
- @property timeWeightedAverageBitrate
- @abstract Returns the playtime weighted average bitrate played in bits / second.
- */
+/// Returns the playtime weighted average bitrate played in bits / second.
 @property (readonly) NSInteger timeWeightedAverageBitrate;
 
-/*!
- @property timeWeightedPeakBitrate
- @abstract Returns the playtime weighted peak bitrate played in bits / second.
- */
+/// Returns the playtime weighted peak bitrate played in bits / second.
 @property (readonly) NSInteger timeWeightedPeakBitrate;
+
+@end
+
+#pragma mark - Download Summary Event -
+
+/// Represents a summary metric event with aggregated metrics for the entire download task.
+/// 
+/// Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(15), ios(18), tvos(18), watchos(11), visionos(2))
+@interface AVMetricDownloadSummaryEvent : AVMetricEvent
+AV_INIT_UNAVAILABLE
+
+/// Returns the error event if any. If no value is available, returns nil.
+@property (readonly, nullable) AVMetricErrorEvent *errorEvent;
+
+/// Returns the total count of recoverable errors encountered during the download. If no errors were encountered, returns 0.
+/// 
+/// Error counts may not be consistent across OS versions. Comparisons should be made within a given OS version, as error reporting is subject to change with OS updates.
+@property (readonly) NSInteger recoverableErrorCount;
+
+/// Returns the total number of media requests performed by the download task. This includes playlist requests, media segment requests, and content key requests.
+@property (readonly) NSInteger mediaResourceRequestCount;
+
+/// Returns the total number of bytes downloaded by the download task.
+@property (readonly) NSInteger bytesDownloadedCount;
+
+/// Returns the total duration of the download in seconds.
+@property (readonly) NSTimeInterval downloadDuration;
+
+/// Returns the variants that were downloaded.
+@property (readonly) NSArray<AVAssetVariant *> *variants;
 
 @end
 

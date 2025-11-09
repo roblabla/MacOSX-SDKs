@@ -329,7 +329,19 @@ HK_EXTERN NSString * const HKVisionPrescriptionTypeIdentifier API_AVAILABLE(ios(
 // Mindfulness
 HK_EXTERN NSString * const HKDataTypeIdentifierStateOfMind API_AVAILABLE(ios(18.0), watchos(11.0), macCatalyst(17.0), macos(14.0), visionos(2.0));
 
+/*---------------------------------------*/
+/*   HKMedicationDoseEvent Identifiers   */
+/*---------------------------------------*/
 
+// Medication Tracking
+HK_EXTERN NSString * const HKMedicationDoseEventTypeIdentifierMedicationDoseEvent API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
+
+/*-------------------------------------------*/
+/*   HKUserAnnotatedMedication Identifiers   */
+/*-------------------------------------------*/
+
+// Medication Tracking
+HK_EXTERN NSString * const HKDataTypeIdentifierUserAnnotatedMedicationConcept API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0));
 
 /*----------------*/
 /*   Deprecated   */

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -79,12 +79,12 @@
 
 #include <stdint.h>
 
+#include <net/if.h>
 #include <sys/param.h>
 #include <sys/appleapiopts.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/cdefs.h>
-
 
 
 /* BSD style release date */
@@ -112,7 +112,6 @@ struct bpf_program {
 	struct bpf_insn *bf_insns;
 };
 
-
 /*
  * Struct returned by BIOCGSTATS.
  */
@@ -136,7 +135,6 @@ struct bpf_version {
 	u_short bv_major;
 	u_short bv_minor;
 };
-
 
 #if defined(__LP64__)
 #include <sys/_types/_timeval32.h>
@@ -521,7 +519,6 @@ struct bpf_hdr {
 #define DLT_USER13              160
 #define DLT_USER14              161
 #define DLT_USER15              162
-
 
 /*
  * For future use with 802.11 captures - defined by AbsoluteValue

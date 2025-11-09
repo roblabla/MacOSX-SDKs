@@ -18,28 +18,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- @enum MTLAccelerationStructureRefitOptions
- @abstract Controls the acceleration structure refit operation
- */
-typedef NS_OPTIONS(NSUInteger, MTLAccelerationStructureRefitOptions) {
-    /**
-     * @brief Refitting shall result in updated vertex data from the provided geometry descriptor.
-     * If not set, vertex buffers shall be ignored on the geometry descriptor and vertex data previously
-     * encoded shall be copied.
-     */
-    MTLAccelerationStructureRefitOptionVertexData = (1 << 0),
-
-    /**
-     * @brief Refitting shall result in updated per primitive data from the provided geometry descriptor.
-     * If not set, per primitive data buffers shall be ignored on the geometry descriptor and per primitive
-     * data previously encoded shall be copied.
-     */
-    MTLAccelerationStructureRefitOptionPerPrimitiveData = (1 << 1),
-} API_AVAILABLE(macos(13.0), ios(16.0));
-
-
-API_AVAILABLE(macos(11.0), ios(14.0))
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0))
 @protocol MTLAccelerationStructureCommandEncoder <MTLCommandEncoder>
 
 /*!
@@ -185,7 +164,7 @@ API_AVAILABLE(macos(11.0), ios(14.0))
 - (void)writeCompactedAccelerationStructureSize:(id <MTLAccelerationStructure>)accelerationStructure
                                        toBuffer:(id <MTLBuffer>)buffer
                                          offset:(NSUInteger)offset
-                                   sizeDataType:(MTLDataType)sizeDataType API_AVAILABLE(macos(12.0), ios(15.0));
+                                   sizeDataType:(MTLDataType)sizeDataType API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  * @brief Copy and compact an acceleration structure. The source and destination acceleration structures
@@ -267,7 +246,7 @@ API_AVAILABLE(macos(11.0), ios(14.0))
  */
 -(void)sampleCountersInBuffer:(id<MTLCounterSampleBuffer>)sampleBuffer
                 atSampleIndex:(NSUInteger)sampleIndex
-                  withBarrier:(BOOL)barrier API_AVAILABLE(macos(11.0), ios(14.0));
+                  withBarrier:(BOOL)barrier API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 @end
 

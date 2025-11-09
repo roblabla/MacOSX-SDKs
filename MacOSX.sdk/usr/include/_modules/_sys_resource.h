@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2025 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -21,13 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _DARWIN_POSIX_SYS_RESOURCE_
-#define _DARWIN_POSIX_SYS_RESOURCE_
+#ifndef __SYS_RESOURCE_H_
+#define __SYS_RESOURCE_H_
 
-#if !__building_module(Darwin)
+#if !__building_module(sys_resource)
 #error "Do not include this header directly, include <sys/resource.h> instead"
 #endif
 
 #include <sys/resource.h>
 
-#endif /* _DARWIN_POSIX_SYS_RESOURCE_ */
+#endif /* __SYS_RESOURCE_H_ */

@@ -93,6 +93,26 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
 - (void)startWithCompletion:(void (^_Nullable)(PHASESoundEventStartHandlerReason reason))handler;
 
 /*!
+    @method startAtTime:completion
+    @abstract Start the sound event
+    @param when
+        The desired start time based on the engine time retrieved from [PHASEEngine lastRenderTime]
+        If the sound event starts immediately with an audible sound, it will begin rendering at this time.  The sound event will otherwise begin operating at this time.
+        A nil value will start the sound event immediately
+        This time is not scaled by unitsPerSecond.
+    @param handler
+        The block that will be called when the sound event has stopped.
+    @discussion
+        This function notifies the engine to start the sound event, then returns immediately.
+        Once the sound event is playing (or has failed to start), you will receive a callback via the completion.
+        Playback will begin at the requested time if the sound event has finished preparing in time.
+        You may wait for preparation to finish with the [PHASESoundEvent prepare:completion] method before calling startAtTime, to ensure that the sound event will start at the desired time.
+        However if the desired time is far enough into the future to allow for preparation to happen, you may skip calling prepare entirely and just call startAtTime.
+ */
+- (void)startAtTime:(nullable AVAudioTime*)when completion:(void (^_Nullable)(PHASESoundEventStartHandlerReason reason))handler
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE( watchos);
+
+/*!
     @method seekToTime:completion
     @abstract Seeks all leaf nodes in a PHASESoundEvent to a specified time relative to the start of the sound event.
     @discussion
@@ -108,6 +128,26 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watc
 NS_SWIFT_NAME(seek(to:completion:));
 
 /*!
+    @method seekToTime:resumeAtEngineTime:completion
+    @abstract Seeks all leaf nodes in a PHASESoundEvent to the specified time, and automatically resumes playback at the specified engine time.
+    @param time The desired time position in seconds to seek the nodes to.
+    @param engineTime The engine time to resume playback.
+    @param handler The completion callback that will be called when seeking is complete.
+    @discussion
+        This is a low latency convenience method that allows for tight deadlines to be met.  However if the seek fails the node state will not be changed.  You should check the callback and handle the failure appropriately.
+        The time parameter will seek the nodes to the equivalent sample position based on the sample rate of the asset.
+        The engineTime parameter is the engine timestamp to resume rendering at, based off of [PHASEEngine lastRenderTime].
+        If any leaf nodes do not support seeking, those nodes will ignore this command.
+        Nodes that have finished playing or have stopped will not seek.
+        The time parameter is in seconds and will be scaled by unitsPerSecond.
+        The time in the AVAudioTime structure is not scaled by unitsPerSecond.
+        The engineTime parameter will use the sample time if valid, if not, then the host time if valid.
+*/
+- (void)seekToTime:(double)time resumeAtEngineTime:(AVAudioTime*)engineTime completion:(nullable void (^)(PHASESoundEventSeekHandlerReason reason))handler
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE( watchos)
+NS_SWIFT_NAME(seek(to:resumeAt:completion:));
+
+/*!
     @method pause
     @abstract Pause the sound event.
  */
@@ -118,6 +158,18 @@ NS_SWIFT_NAME(seek(to:completion:));
     @abstract Resume the sound event.
  */
 - (void)resume;
+
+/*!
+    @method resumeAtTime
+    @abstract Resume the sound event at a specific time
+    @param time The desired start time based on the engine time retrieved from [PHASEEngine lastRenderTime]
+    @discussion
+        A nil time parameter will resume immediately.
+        The device time is not scaled by UnitsPerSecond and is in seconds.
+ */
+- (void)resumeAtTime:(nullable AVAudioTime*)time
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE( watchos)
+NS_SWIFT_NAME(resume(at:));
 
 /*!
     @method stopAndInvalidate

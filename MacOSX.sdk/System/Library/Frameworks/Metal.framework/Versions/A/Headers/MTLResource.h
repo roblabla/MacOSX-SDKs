@@ -187,6 +187,68 @@ typedef NS_OPTIONS(NSUInteger, MTLResourceOptions)
     MTLResourceOptionCPUCacheModeWriteCombined API_DEPRECATED_WITH_REPLACEMENT("MTLResourceCPUCacheModeWriteCombined", macos(10.11, 13.0), ios(8.0, 16.0)) = MTLResourceCPUCacheModeWriteCombined,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
+/*!
+ @enum MTLSparsePageSize
+ @abstract Physical size of sparse resource page in KBs.
+ */
+typedef NS_ENUM(NSInteger, MTLSparsePageSize)
+{
+    MTLSparsePageSize16 = 101,
+    MTLSparsePageSize64 = 102,
+    MTLSparsePageSize256 = 103,
+} API_AVAILABLE(macos(13.0), ios(16.0));
+
+
+/// Enumerates the different support levels for sparse buffers.
+typedef NS_ENUM(NSInteger, MTLBufferSparseTier)
+{
+    /// Indicates that the buffer is not sparse.
+    MTLBufferSparseTierNone = 0,
+    
+    /// Indicates support for sparse buffers tier 1.
+    ///
+    /// Tier 1 sparse buffers allow the following:
+    /// * Partial memory backing at sparse page granularity.
+    /// * Defined behavior for accessing an *unbacked* buffer range.
+    ///
+    /// An unbacked buffer range indicates a range within the buffer that doesn't
+    /// have memory backing at a given point in time. Accessing an unbacked buffer
+    /// range of a sparse buffer produces the following results:
+    /// * Reading return zero.
+    /// * Writing produces no result.
+    MTLBufferSparseTier1 = 1,
+} API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Enumerates the different support levels for sparse textures.
+typedef NS_ENUM(NSInteger, MTLTextureSparseTier)
+{
+    /// Indicates that the texture is not sparse.
+    MTLTextureSparseTierNone = 0,
+    
+    /// Indicates support for sparse textures tier 1.
+    ///
+    /// Tier 1 sparse textures allow the following:
+    /// * Partial memory backing at sparse tile granularity.
+    /// * Defined behavior for accessing an unbacked texture region.
+    /// * Shader feedback on texture access to determine memory backing.
+    ///
+    /// An unbacked texture region indicates a region within the texture that doesn't
+    /// have memory backing at a given point in time. Accessing an unbacked texture
+    /// region produces the following results:
+    /// * Reading returns zero (transparent black) for pixel formats with an alpha (A) channel.
+    /// * Reading return zero in RGB and one in alpha (A) channels (opaque black) otherwise.
+    /// * Writing produces no result.
+    MTLTextureSparseTier1 = 1,
+    
+    /// Indicates support for sparse textures tier 2.
+    ///
+    /// In addition to the guarantees tier 1 sparse textures provide,
+    /// tier 2 sparse textures allow the following:
+    /// * Obtain per-tile activity counters.
+    MTLTextureSparseTier2 = 2,
+} API_AVAILABLE(macos(26.0), ios(26.0));
+
+
 @protocol MTLDevice;
 
 @protocol MTLHeap;

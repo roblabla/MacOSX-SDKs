@@ -29,6 +29,6 @@ exports:
                        DKMutableDiagnosticResult, DKReport, DKReportHostContext, 
                        DKReportManager, DKReportPlanner, DKReporterAttributes, DKReporterContext, 
                        DKReporterController, DKReporterRegistry, DKReportingConcurrentRequest, 
-                       DKReportingConcurrentRequestGroup, DKRequestContext, DKUtilities, 
-                       DiagnosticsKit_Subsystem ]
+                       DKReportingConcurrentRequestGroup, DKRequestContext, DKResourceMonitor, 
+                       DKResourceMonitorQueueItem, DKUtilities, DiagnosticsKit_Subsystem ]
 ...

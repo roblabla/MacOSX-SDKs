@@ -1,22 +1,30 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 2330.7.1 -module-name AVFoundation
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2360.79.5.2 -module-name AVFoundation
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+@_exported import AVFAudio.AVAudioSession
+@_exported import AVFAudio
 @_exported import AVFoundation
 import CoreGraphics
+import CoreImage
 import CoreMedia
 import Dispatch
 import Foundation
 import Swift
+import Synchronization
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPlayerInterstitialEvent {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
   convenience public init(primaryItem: AVFoundation.AVPlayerItem, identifier: Swift.String?, time: CoreMedia.CMTime, templateItems: [AVFoundation.AVPlayerItem], restrictions: AVFoundation.AVPlayerInterstitialEvent.Restrictions = [], resumptionOffset: CoreMedia.CMTime = .indefinite, playoutLimit: CoreMedia.CMTime = .invalid, userDefinedAttributes: [Swift.String : Any] = [:])
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
   convenience public init(primaryItem: AVFoundation.AVPlayerItem, identifier: Swift.String?, date: Foundation.Date, templateItems: [AVFoundation.AVPlayerItem], restrictions: AVFoundation.AVPlayerInterstitialEvent.Restrictions = [], resumptionOffset: CoreMedia.CMTime = .indefinite, playoutLimit: CoreMedia.CMTime = .invalid, userDefinedAttributes: [Swift.String : Any] = [:])
+  #endif
 }
 extension Foundation.NSNotification.Name {
   @available(macOS, introduced: 13.3, deprecated: 14.0, renamed: "AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification")
@@ -32,27 +40,39 @@ extension Foundation.NSNotification.Name {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMetadataItem {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var extraAttributes: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVMetadataExtraAttributeKey : Any]?> {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var value: AVFoundation.AVAsyncProperty<Root, (any Foundation.NSCopying & ObjectiveC.NSObjectProtocol)?> {
     get
   }
+  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMetadataItem {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var stringValue: AVFoundation.AVAsyncProperty<Root, Swift.String?> {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var numberValue: AVFoundation.AVAsyncProperty<Root, Foundation.NSNumber?> {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var dateValue: AVFoundation.AVAsyncProperty<Root, Foundation.Date?> {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var dataValue: AVFoundation.AVAsyncProperty<Root, Foundation.Data?> {
     get
   }
+  #endif
 }
 @available(macOS 12, iOS 15, watchOS 8, visionOS 1, *)
 @available(tvOS, unavailable)
@@ -61,12 +81,105 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMutabl
     get
   }
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetReaderOutput {
+  @_hasMissingDesignatedInitializers public class RandomAccessController {
+    public func resetForReading(timeRanges: [CoreMedia.CMTimeRange])
+    public func markConfigurationAsFinal()
+    @objc deinit
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetReaderOutput {
+  public protocol SupportedPayload {
+  }
+  @_hasMissingDesignatedInitializers public class Provider<Payload> where Payload : AVFoundation.AVAssetReaderOutput.SupportedPayload {
+    #if compiler(>=5.3) && $NonescapableTypes && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public func next() async throws -> Payload?
+    #endif
+    @objc deinit
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension CoreMedia.CMReadySampleBuffer : AVFoundation.AVAssetReaderOutput.SupportedPayload where Content == CoreMedia.CMSampleBuffer.DynamicContent {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetReader {
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func outputProvider(for output: AVFoundation.AVAssetReaderOutput) -> sending AVFoundation.AVAssetReaderOutput.Provider<CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>>
+  #else
+  public func outputProvider(for output: AVFoundation.AVAssetReaderOutput) -> AVFoundation.AVAssetReaderOutput.Provider<CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>>
+  #endif
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func outputProviderWithRandomAccess(for output: AVFoundation.AVAssetReaderOutput) -> sending (AVFoundation.AVAssetReaderOutput.Provider<CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>>, AVFoundation.AVAssetReaderOutput.RandomAccessController)
+  #else
+  public func outputProviderWithRandomAccess(for output: AVFoundation.AVAssetReaderOutput) -> (AVFoundation.AVAssetReaderOutput.Provider<CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>>, AVFoundation.AVAssetReaderOutput.RandomAccessController)
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVTimedMetadataGroup : AVFoundation.AVAssetReaderOutput.SupportedPayload {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetReader {
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func outputMetadataProvider(for output: AVFoundation.AVAssetReaderTrackOutput) -> sending AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVTimedMetadataGroup>
+  #else
+  public func outputMetadataProvider(for output: AVFoundation.AVAssetReaderTrackOutput) -> AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVTimedMetadataGroup>
+  #endif
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func outputMetadataProviderWithRandomAccess(for output: AVFoundation.AVAssetReaderTrackOutput) -> sending (AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVTimedMetadataGroup>, AVFoundation.AVAssetReaderOutput.RandomAccessController)
+  #else
+  public func outputMetadataProviderWithRandomAccess(for output: AVFoundation.AVAssetReaderTrackOutput) -> (AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVTimedMetadataGroup>, AVFoundation.AVAssetReaderOutput.RandomAccessController)
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVCaptionGroup : AVFoundation.AVAssetReaderOutput.SupportedPayload {
+}
+@available(macOS 26.0, iOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVAssetReader {
+  #if compiler(>=5.3) && $NonescapableTypes
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func outputCaptionProvider(for output: AVFoundation.AVAssetReaderTrackOutput, validationDelegate: (any AVFoundation.AVAssetReaderCaptionValidationHandling)? = nil) -> sending AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVCaptionGroup>
+  #else
+  public func outputCaptionProvider(for output: AVFoundation.AVAssetReaderTrackOutput, validationDelegate: (any AVFoundation.AVAssetReaderCaptionValidationHandling)? = nil) -> AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVCaptionGroup>
+  #endif
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func outputCaptionProviderWithRandomAccess(for output: AVFoundation.AVAssetReaderTrackOutput, validationDelegate: (any AVFoundation.AVAssetReaderCaptionValidationHandling)? = nil) -> sending (AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVCaptionGroup>, AVFoundation.AVAssetReaderOutput.RandomAccessController)
+  #else
+  public func outputCaptionProviderWithRandomAccess(for output: AVFoundation.AVAssetReaderTrackOutput, validationDelegate: (any AVFoundation.AVAssetReaderCaptionValidationHandling)? = nil) -> (AVFoundation.AVAssetReaderOutput.Provider<AVFoundation.AVCaptionGroup>, AVFoundation.AVAssetReaderOutput.RandomAccessController)
+  #endif
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVAssetReaderOutput.Provider where Payload == AVFoundation.AVCaptionGroup {
+  public func captionsNotPresentInPreviousGroups(in captionGroup: AVFoundation.AVCaptionGroup) -> [AVFoundation.AVCaption]
+}
 @available(watchOS 6.0, *)
 extension AVFoundation.AVError {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift, obsoleted: 4.2, message: "Use `device: AVCaptureDevice?` instead")
   public var device: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 4.2)
   @available(macCatalyst 14.0, tvOS 17.0, *)
   @available(visionOS, unavailable)
@@ -74,51 +187,72 @@ extension AVFoundation.AVError {
   public var device: AVFoundation.AVCaptureDevice? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS 6.0, *)
   public var time: CoreMedia.CMTime? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS 6.0, *)
   public var fileSize: Swift.Int64? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS 6.0, *)
   public var processID: Swift.Int? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS 6.0, *)
   public var recordingSuccessfullyFinished: Swift.Bool? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS 6.0, *)
   @available(swift, obsoleted: 4.2)
   public var mediaType: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 4.2)
   @available(watchOS 6.0, *)
   public var mediaType: AVFoundation.AVMediaType? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS 6.0, *)
   public var mediaSubtypes: [Swift.Int]? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 4.2)
   @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, visionOS 1.0, *)
   public var presentationTimeStamp: CoreMedia.CMTime? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 4.2)
   @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, visionOS 1.0, *)
   public var persistentTrackID: CoreMedia.CMPersistentTrackID? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(swift 4.2)
   @available(macOS 10.10, iOS 8.0, tvOS 9.0, watchOS 6.0, visionOS 1.0, *)
   public var fileType: AVFoundation.AVFileType? {
     get
   }
+  #endif
 }
 @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, *)
 @available(visionOS, unavailable)
@@ -126,10 +260,52 @@ extension AVFoundation.AVError {
 extension AVFoundation.AVCaptureIndexPicker {
   @nonobjc public func setActionQueue(_ actionQueue: Dispatch.DispatchQueue, action: @escaping (Swift.Int) -> ())
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVPlayerLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func displayedReadOnlyPixelBuffer() -> CoreVideo.CVReadOnlyPixelBuffer?
+  #endif
+}
 @available(macOS 12, iOS 15, watchOS 8, visionOS 1, *)
 @available(tvOS, unavailable)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVFragmentedMovie {
   public static var tracks: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVFragmentedMovieTrack]> {
+    get
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriterInput {
+  @_hasMissingDesignatedInitializers public class MetadataReceiver {
+    #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public func append(_ timedMetadataGroup: AVFoundation.AVTimedMetadataGroup) async throws
+    #endif
+    public func appendImmediately(_ timedMetadataGroup: AVFoundation.AVTimedMetadataGroup) throws -> Swift.Bool
+    public func finish()
+    @objc deinit
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriter {
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputMetadataReceiver(for input: AVFoundation.AVAssetWriterInput) -> sending AVFoundation.AVAssetWriterInput.MetadataReceiver
+  #else
+  public func inputMetadataReceiver(for input: AVFoundation.AVAssetWriterInput) -> AVFoundation.AVAssetWriterInput.MetadataReceiver
+  #endif
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputMetadataReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput) -> sending (AVFoundation.AVAssetWriterInput.MetadataReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #else
+  public func inputMetadataReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput) -> (AVFoundation.AVAssetWriterInput.MetadataReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVRenderedCaptionImage {
+  public var readOnlyPixelBuffer: CoreVideo.CVReadOnlyPixelBuffer {
     get
   }
 }
@@ -144,11 +320,55 @@ extension AVFoundation.AVDepthData {
 	}
   }
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension CoreMedia.CMReadySampleBuffer {
+  public mutating func attach(contentKey: AVFoundation.AVContentKey) throws
+}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVComposition {
   public static var tracks: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVCompositionTrack]> {
     get
   }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension AVFoundation.AVTimedMetadataGroup {
+  #if compiler(>=5.3) && $NonescapableTypes
+  convenience public init?(sampleBuffer: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>)
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVAssetWriterInput {
+  @_hasMissingDesignatedInitializers public class CaptionReceiver {
+    #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public func append(_ caption: AVFoundation.AVCaption) async throws
+    #endif
+    #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public func append(_ captionGroup: AVFoundation.AVCaptionGroup) async throws
+    #endif
+    public func appendImmediately(_ caption: AVFoundation.AVCaption) throws -> Swift.Bool
+    public func appendImmediately(_ captionGroup: AVFoundation.AVCaptionGroup) throws -> Swift.Bool
+    public func finish()
+    @objc deinit
+  }
+}
+@available(macOS 26.0, iOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVAssetWriter {
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputCaptionReceiver(for input: AVFoundation.AVAssetWriterInput) -> sending AVFoundation.AVAssetWriterInput.CaptionReceiver
+  #else
+  public func inputCaptionReceiver(for input: AVFoundation.AVAssetWriterInput) -> AVFoundation.AVAssetWriterInput.CaptionReceiver
+  #endif
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputCaptionReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput) -> sending (AVFoundation.AVAssetWriterInput.CaptionReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #else
+  public func inputCaptionReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput) -> (AVFoundation.AVAssetWriterInput.CaptionReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #endif
 }
 extension Foundation.NSNotification.Name {
   @available(macOS, introduced: 10.7, deprecated: 15.0, renamed: "AVCaptureSession.runtimeErrorNotification")
@@ -207,11 +427,68 @@ extension Foundation.NSNotification.Name {
 	}
   }
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+public struct AVSpatialVideoConfiguration : Swift.Sendable {
+  public var cameraCalibrationDataLensCollection: CoreMedia.CMFormatDescription.Extensions.Value.CameraCalibrationDataLensCollection?
+  public var horizontalFieldOfView: Swift.UInt32?
+  public var cameraSystemBaseline: Swift.UInt32?
+  public var disparityAdjustment: Swift.Int32?
+  public init()
+  public init(formatDescription: CoreMedia.CMFormatDescription)
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVSpatialVideoConfiguration {
+  public static var nonSpatial: AVFoundation.AVSpatialVideoConfiguration {
+    get
+  }
+}
 extension AVFoundation.AVAsynchronousKeyValueLoading {
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
   public func status<T>(of property: AVFoundation.AVAsyncProperty<Self, T>) -> AVFoundation.AVAsyncProperty<Self, T>.Status
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<T>(_ property: AVFoundation.AVAsyncProperty<Self, T>) async throws -> T
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd__AC15AVAsyncPropertyCyxqd__GYaKlF")
+  internal func __loadForABI<T>(_ property: AVFoundation.AVAsyncProperty<Self, T>) async throws -> T
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
+  public func load<T>(_ property: AVFoundation.AVAsyncProperty<Self, T>, isolation: isolated (any _Concurrency.Actor)? = #isolation) async throws -> T {
+		await loadValues(forKeys: [property.backDeployedKey])
+		let status = try value(of: property)
+		return status
+	}
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
+  public func load<A, B, each C>(_ firstProperty: AVFoundation.AVAsyncProperty<Self, A>, _ secondProperty: AVFoundation.AVAsyncProperty<Self, B>, _ properties: repeat AVFoundation.AVAsyncProperty<Self, each C>, isolation: isolated (any _Concurrency.Actor)? = #isolation) async throws -> (A, B, repeat each C) {
+		var stringKeys: [String] = [firstProperty.backDeployedKey, secondProperty.backDeployedKey]
+		for p in repeat each properties {
+			stringKeys.append(p.backDeployedKey)
+		}
+		await loadValues(forKeys: stringKeys)
+		let firstStatus = try value(of: firstProperty)
+		let secondStatus = try value(of: secondProperty)
+		let statuses = (firstStatus, secondStatus, repeat try value(of: each properties))
+		return statuses
+	}
+  #endif
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
+  @usableFromInline
+  internal func value<T>(of loadedProperty: AVFoundation.AVAsyncProperty<Self, T>) throws -> T {
+		let status = status(of: loadedProperty)
+		switch status {
+		case .loaded(let value):
+			return value
+		case .failed(let error):
+			throw error
+		default:
+			fatalError("Unexpected status (\(status))")
+		}
+	}
 }
 @_hasMissingDesignatedInitializers @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 public class AVAnyAsyncProperty : Swift.CustomStringConvertible, @unchecked Swift.Sendable {
@@ -222,6 +499,36 @@ public class AVAnyAsyncProperty : Swift.CustomStringConvertible, @unchecked Swif
 }
 @_hasMissingDesignatedInitializers @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 public class AVPartialAsyncProperty<Root> : AVFoundation.AVAnyAsyncProperty {
+  @usableFromInline
+  final internal let key: Swift.String
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+  @usableFromInline
+  internal var usableFromInlineKey: Swift.String {
+    get
+  }
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
+  @usableFromInline
+  final internal var keyFromDescription: Swift.String {
+    get {
+		guard let keySubstring = description.split(separator: ".").last else {
+			fatalError("Could not extract property name from async property description (\(description))")
+		}
+		return String(keySubstring)
+	}
+  }
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0)
+  @usableFromInline
+  final internal var backDeployedKey: Swift.String {
+    get {
+		if #available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *) {
+			return usableFromInlineKey
+		} else {
+			return keyFromDescription
+		}
+	}
+  }
   override public var description: Swift.String {
     get
   }
@@ -255,19 +562,59 @@ extension AVFoundation.AVAsyncProperty.Status : Swift.CustomStringConvertible {
 }
 extension AVFoundation.AVAsynchronousKeyValueLoading {
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<A, B>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>) async throws -> (A, B)
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GtYaKr0_lF")
+  internal func __loadForABI<A, B>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>) async throws -> (A, B)
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<A, B, C>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>) async throws -> (A, B, C)
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_qd_1_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GAFyxqd_1_GtYaKr1_lF")
+  internal func __loadForABI<A, B, C>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>) async throws -> (A, B, C)
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<A, B, C, D>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>) async throws -> (A, B, C, D)
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_qd_1_qd_2_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GAFyxqd_1_GAFyxqd_2_GtYaKr2_lF")
+  internal func __loadForABI<A, B, C, D>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>) async throws -> (A, B, C, D)
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<A, B, C, D, E>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>) async throws -> (A, B, C, D, E)
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_qd_1_qd_2_qd_3_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GAFyxqd_1_GAFyxqd_2_GAFyxqd_3_GtYaKr3_lF")
+  internal func __loadForABI<A, B, C, D, E>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>) async throws -> (A, B, C, D, E)
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<A, B, C, D, E, F>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>, _ propertyF: AVFoundation.AVAsyncProperty<Self, F>) async throws -> (A, B, C, D, E, F)
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_qd_1_qd_2_qd_3_qd_4_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GAFyxqd_1_GAFyxqd_2_GAFyxqd_3_GAFyxqd_4_GtYaKr4_lF")
+  internal func __loadForABI<A, B, C, D, E, F>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>, _ propertyF: AVFoundation.AVAsyncProperty<Self, F>) async throws -> (A, B, C, D, E, F)
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<A, B, C, D, E, F, G>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>, _ propertyF: AVFoundation.AVAsyncProperty<Self, F>, _ propertyG: AVFoundation.AVAsyncProperty<Self, G>) async throws -> (A, B, C, D, E, F, G)
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GAFyxqd_1_GAFyxqd_2_GAFyxqd_3_GAFyxqd_4_GAFyxqd_5_GtYaKr5_lF")
+  internal func __loadForABI<A, B, C, D, E, F, G>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>, _ propertyF: AVFoundation.AVAsyncProperty<Self, F>, _ propertyG: AVFoundation.AVAsyncProperty<Self, G>) async throws -> (A, B, C, D, E, F, G)
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
-  public func load<A, B, C, D, E, F, G, H>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>, _ propertyF: AVFoundation.AVAsyncProperty<Self, F>, _ propertyG: AVFoundation.AVAsyncProperty<Self, G>, _ propertyH: AVFoundation.AVAsyncProperty<Self, H>) async throws -> (A, B, C, D, E, F, G, H)
+  @usableFromInline
+  @_silgen_name("$sSo29AVAsynchronousKeyValueLoadingP12AVFoundationE4loadyqd___qd_0_qd_1_qd_2_qd_3_qd_4_qd_5_qd_6_tAC15AVAsyncPropertyCyxqd__G_AFyxqd_0_GAFyxqd_1_GAFyxqd_2_GAFyxqd_3_GAFyxqd_4_GAFyxqd_5_GAFyxqd_6_GtYaKr6_lF")
+  internal func __loadForABI<A, B, C, D, E, F, G, H>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>, _ propertyF: AVFoundation.AVAsyncProperty<Self, F>, _ propertyG: AVFoundation.AVAsyncProperty<Self, G>, _ propertyH: AVFoundation.AVAsyncProperty<Self, H>) async throws -> (A, B, C, D, E, F, G, H)
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriterInput {
+  @_hasMissingDesignatedInitializers public class SampleBufferReceiver {
+    #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public func append(_ sampleBuffer: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>) async throws
+    #endif
+    public func appendImmediately(_ sampleBuffer: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>) throws -> Swift.Bool
+    public func finish()
+    @objc deinit
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriter {
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputReceiver(for input: AVFoundation.AVAssetWriterInput) -> sending AVFoundation.AVAssetWriterInput.SampleBufferReceiver
+  #else
+  public func inputReceiver(for input: AVFoundation.AVAssetWriterInput) -> AVFoundation.AVAssetWriterInput.SampleBufferReceiver
+  #endif
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput) -> sending (AVFoundation.AVAssetWriterInput.SampleBufferReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #else
+  public func inputReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput) -> (AVFoundation.AVAssetWriterInput.SampleBufferReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #endif
 }
 @available(macOS 11.0, iOS 7.0, macCatalyst 14.0, tvOS 17.0, *)
 @available(watchOS, unavailable)
@@ -276,6 +623,11 @@ extension AVFoundation.AVMetadataMachineReadableCodeObject {
   @nonobjc public var corners: [CoreFoundation.CGPoint] {
     get
   }
+}
+@available(macOS 26.0, iOS 26.0, watchOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+extension AVFoundation.AVMutableMovieTrack {
+  public func append(_ sampleBuffer: CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>) throws -> (decodeTime: CoreMedia.CMTime, presentationTime: CoreMedia.CMTime)
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAsset {
@@ -309,12 +661,16 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAsset 
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAsset {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var creationDate: AVFoundation.AVAsyncProperty<Root, AVFoundation.AVMetadataItem?> {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var lyrics: AVFoundation.AVAsyncProperty<Root, Swift.String?> {
     get
   }
+  #endif
   public static var commonMetadata: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVMetadataItem]> {
     get
   }
@@ -407,103 +763,13 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAsset 
     get
   }
 }
-@available(iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1, *)
-@available(macOS, unavailable)
-extension AVFAudio.AVAudioSession.Location {
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.top")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.top")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.top")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.Orientation.top")
-  @_alwaysEmitIntoClient public static var orientationTop: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.Orientation.top.rawValue)
-    }
-  }
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.bottom")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.bottom")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.bottom")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.Orientation.bottom")
-  @_alwaysEmitIntoClient public static var orientationBottom: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.Orientation.bottom.rawValue)
-    }
-  }
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.front")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.front")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.front")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.Orientation.front")
-  @_alwaysEmitIntoClient public static var orientationFront: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.Orientation.front.rawValue)
-    }
-  }
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.Orientation.back")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.back")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.back")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.Orientation.back")
-  @_alwaysEmitIntoClient public static var orientationBack: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.Orientation.back.rawValue)
-    }
-  }
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 8.0, renamed: "AVAudioSession.Orientation.left")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.left")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.left")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.Orientation.left")
-  @_alwaysEmitIntoClient public static var orientationLeft: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.Orientation.left.rawValue)
-    }
-  }
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 8.0, renamed: "AVAudioSession.Orientation.right")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.Orientation.right")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.Orientation.right")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.Orientation.right")
-  @_alwaysEmitIntoClient public static var orientationRight: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.Orientation.right.rawValue)
-    }
-  }
-}
-@available(iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, *)
-@available(macOS, unavailable)
-extension AVFAudio.AVAudioSession.Location {
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.PolarPattern.cardioid")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.PolarPattern.cardioid")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.PolarPattern.cardioid")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.PolarPattern.cardioid")
-  @_alwaysEmitIntoClient public static var polarPatternCardioid: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.PolarPattern.cardioid.rawValue)
-    }
-  }
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.PolarPattern.omnidirectional")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.PolarPattern.omnidirectional")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.PolarPattern.omnidirectional")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.PolarPattern.omnidirectional")
-  @_alwaysEmitIntoClient public static var polarPatternOmnidirectional: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.PolarPattern.omnidirectional.rawValue)
-    }
-  }
-  @available(macOS, unavailable)
-  @available(iOS, deprecated, introduced: 7.0, renamed: "AVAudioSession.PolarPattern.subcardioid")
-  @available(tvOS, deprecated, introduced: 9.0, renamed: "AVAudioSession.PolarPattern.subcardioid")
-  @available(watchOS, deprecated, introduced: 2.0, renamed: "AVAudioSession.PolarPattern.subcardioid")
-  @available(visionOS, deprecated, introduced: 1.0, renamed: "AVAudioSession.PolarPattern.subcardioid")
-  @_alwaysEmitIntoClient public static var polarPatternSubcardioid: AVFAudio.AVAudioSession.Location {
-    get {
-        Self(rawValue: AVAudioSession.PolarPattern.subcardioid.rawValue)
-    }
-  }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVPlayerItemVideoOutput {
+  convenience public init(pixelBufferAttributes: CoreVideo.CVPixelBufferAttributes)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func pixelBufferAndDisplayTime(forItemTime itemTime: CoreMedia.CMTime) -> (pixelBuffer: CoreVideo.CVReadOnlyPixelBuffer?, itemTimeForDisplay: CoreMedia.CMTime)
+  #endif
 }
 @available(macOS 15, iOS 18, tvOS 18, visionOS 2, *)
 @available(watchOS, unavailable)
@@ -529,18 +795,27 @@ extension AVFoundation.AVAssetResourceLoadingContentInformationRequest : @unchec
 @available(watchOS, unavailable)
 extension AVFoundation.AVAssetResourceLoadingDataRequest : @unchecked Swift.Sendable {
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension AVFoundation.AVPlayerItemTrack : Observation.Observable {
+}
 @available(macOS 12.0, iOS 18.0, macCatalyst 15.0, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension AVFoundation.AVCaption {
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func textColor(at index: Swift.String.Index) -> (CoreGraphics.CGColor?, Swift.Range<Swift.String.Index>)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func backgroundColor(at index: Swift.String.Index) -> (CoreGraphics.CGColor?, Swift.Range<Swift.String.Index>)
+  #endif
   @nonobjc public func fontWeight(at index: Swift.String.Index) -> (AVFoundation.AVCaption.FontWeight, Swift.Range<Swift.String.Index>)
   @nonobjc public func fontStyle(at index: Swift.String.Index) -> (AVFoundation.AVCaption.FontStyle, Swift.Range<Swift.String.Index>)
   @nonobjc public func decoration(at index: Swift.String.Index) -> (AVFoundation.AVCaption.Decoration, Swift.Range<Swift.String.Index>)
   @nonobjc public func textCombine(at index: Swift.String.Index) -> (AVFoundation.AVCaption.TextCombine, Swift.Range<Swift.String.Index>)
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func ruby(at index: Swift.String.Index) -> (AVFoundation.AVCaption.Ruby?, Swift.Range<Swift.String.Index>)
+  #endif
 }
 @available(macOS 12.0, iOS 18.0, macCatalyst 15.0, *)
 @available(tvOS, unavailable)
@@ -572,7 +847,9 @@ public struct AVMetrics<MetricEvent> : _Concurrency.AsyncSequence, @unchecked Sw
   public func makeAsyncIterator() -> AVFoundation.AVMetrics<MetricEvent>.AsyncIterator
   public typealias Element = MetricEvent
   public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() async throws -> MetricEvent?
+    #endif
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
     public typealias Element = MetricEvent
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
@@ -587,7 +864,9 @@ public struct AVMergedMetrics<MetricEvent1, MetricEvent2, each MetricEventPack> 
   public func makeAsyncIterator() -> AVFoundation.AVMergedMetrics<MetricEvent1, MetricEvent2, repeat each MetricEventPack>.AsyncIterator
   public typealias Element = (AVFoundation.AVMetricEvent, any AVFoundation.AVMetricEventStreamPublisher)
   public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() async throws -> (AVFoundation.AVMetricEvent, any AVFoundation.AVMetricEventStreamPublisher)?
+    #endif
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
     public typealias Element = (AVFoundation.AVMetricEvent, any AVFoundation.AVMetricEventStreamPublisher)
     @available(iOS 18, tvOS 18, watchOS 11, visionOS 2, macOS 15, *)
@@ -614,11 +893,253 @@ extension AVFoundation.AVMetricPlayerItemVariantSwitchStartEvent {
     get
   }
 }
-@available(macOS 14, iOS 17, visionOS 1, *)
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, visionOS 1, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoComposition {
+  @objc(_sourceSampleDataTrackIDs) dynamic public var sourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID] {
+    @objc get
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(watchOS, unavailable)
+  public var outputBufferDescription: [[CoreMedia.CMTag]]? {
+    get
+  }
+  #endif
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+  @available(watchOS, unavailable)
+  public var spatialVideoConfigurations: [AVFoundation.AVSpatialVideoConfiguration] {
+    get
+  }
+}
+@available(macOS 12.0, iOS 15.0, tvOS 15.0, visionOS 1, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVMutableVideoComposition {
+  @objc(_sourceSampleDataTrackIDs) override dynamic public var sourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID] {
+    @objc get
+    @objc set
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+public struct AVCIImageFilteringParameters {
+  public let sourceImage: CoreImage.CIImage
+  public let compositionTime: CoreMedia.CMTime
+  public let renderSize: CoreFoundation.CGSize
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+public struct AVCIImageFilteringResult {
+  public let resultImage: CoreImage.CIImage
+  public let ciContext: CoreImage.CIContext?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(resultImage: CoreImage.CIImage, ciContext: CoreImage.CIContext? = nil)
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoComposition : @unchecked Swift.Sendable {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoComposition {
+  #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+  nonisolated(nonsending) convenience public init(applyingFiltersTo asset: AVFoundation.AVAsset, applier: @escaping @Sendable (AVFoundation.AVCIImageFilteringParameters) async throws -> AVFoundation.AVCIImageFilteringResult) async throws
+  #endif
+  public struct Configuration : Swift.Sendable {
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var animationTool: AVFoundation.AVVideoCompositionCoreAnimationTool? {
+      get
+      set
+    }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var colorPrimaries: Swift.String? {
+      get
+      set
+    }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var colorTransferFunction: Swift.String? {
+      get
+      set
+    }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var colorYCbCrMatrix: Swift.String? {
+      get
+      set
+    }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var customVideoCompositorClass: (any AVFoundation.AVVideoCompositing.Type)? {
+      get
+      set
+    }
+    #endif
+    public var frameDuration: CoreMedia.CMTime {
+      get
+      set
+    }
+    public var instructions: [any AVFoundation.AVVideoCompositionInstructionProtocol] {
+      get
+      set
+    }
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var outputBufferDescription: [[CoreMedia.CMTag]]? {
+      get
+      set
+    }
+    #endif
+    public var spatialVideoConfigurations: [AVFoundation.AVSpatialVideoConfiguration] {
+      get
+      set
+    }
+    @available(tvOS, unavailable)
+    public var perFrameHDRDisplayMetadataPolicy: AVFoundation.AVVideoComposition.PerFrameHDRDisplayMetadataPolicy {
+      get
+      set
+    }
+    public var renderScale: Swift.Float {
+      get
+      set
+    }
+    public var renderSize: CoreFoundation.CGSize {
+      get
+      set
+    }
+    public var sourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID] {
+      get
+      set
+    }
+    public var sourceTrackIDForFrameTiming: CoreMedia.CMPersistentTrackID {
+      get
+      set
+    }
+    #if compiler(>=5.3) && $NonescapableTypes && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public init(for asset: AVFoundation.AVAsset, prototypeInstruction: AVFoundation.AVVideoCompositionInstruction? = nil) async throws
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    @available(tvOS, unavailable)
+    public init(animationTool: AVFoundation.AVVideoCompositionCoreAnimationTool? = nil, colorPrimaries: Swift.String? = nil, colorTransferFunction: Swift.String? = nil, colorYCbCrMatrix: Swift.String? = nil, customVideoCompositorClass: (any AVFoundation.AVVideoCompositing.Type)? = nil, frameDuration: CoreMedia.CMTime = CMTime.zero, instructions: [any AVFoundation.AVVideoCompositionInstructionProtocol] = [any AVVideoCompositionInstructionProtocol](), outputBufferDescription: [[CoreMedia.CMTag]]? = nil, perFrameHDRDisplayMetadataPolicy: AVFoundation.AVVideoComposition.PerFrameHDRDisplayMetadataPolicy = .propagate, renderScale: Swift.Float = 1.0, renderSize: CoreFoundation.CGSize = .zero, sourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID] = [CMPersistentTrackID](), sourceTrackIDForFrameTiming: Swift.Int32 = CMPersistentTrackID.zero, spatialVideoConfigurations: [AVFoundation.AVSpatialVideoConfiguration] = [])
+    #endif
+  }
+  convenience public init(configuration: AVFoundation.AVVideoComposition.Configuration)
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoCompositionInstruction {
+  public struct Configuration : Swift.Sendable {
+    public var backgroundColor: CoreGraphics.CGColor?
+    public var enablePostProcessing: Swift.Bool
+    public var layerInstructions: [AVFoundation.AVVideoCompositionLayerInstruction] {
+      get
+      set
+    }
+    public var requiredSourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID]
+    public var timeRange: CoreMedia.CMTimeRange
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init(backgroundColor: CoreGraphics.CGColor? = nil, enablePostProcessing: Swift.Bool = true, layerInstructions: [AVFoundation.AVVideoCompositionLayerInstruction] = [], requiredSourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID] = [], timeRange: CoreMedia.CMTimeRange = .zero)
+    #endif
+  }
+  convenience public init(configuration: AVFoundation.AVVideoCompositionInstruction.Configuration)
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoCompositionLayerInstruction {
+  public struct Configuration : Swift.Sendable {
+    public var trackID: CoreMedia.CMPersistentTrackID {
+      get
+      set
+    }
+    public init(trackID: CoreMedia.CMPersistentTrackID = .zero)
+    public init(assetTrack: AVFoundation.AVAssetTrack)
+    #if compiler(>=5.3) && $NonescapableTypes
+    public func cropRectangleRamp(at time: CoreMedia.CMTime) -> AVFoundation.AVVideoCompositionLayerInstruction.CropRectangleRamp?
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public func opacityRamp(at time: CoreMedia.CMTime) -> AVFoundation.AVVideoCompositionLayerInstruction.OpacityRamp?
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public func transformRamp(at time: CoreMedia.CMTime) -> AVFoundation.AVVideoCompositionLayerInstruction.TransformRamp?
+    #endif
+    public mutating func setOpacity(_ opacity: Swift.Float, at time: CoreMedia.CMTime)
+    public mutating func addOpacityRamp(_ ramp: AVFoundation.AVVideoCompositionLayerInstruction.OpacityRamp)
+    public mutating func setTransform(_ transform: CoreFoundation.CGAffineTransform, at time: CoreMedia.CMTime)
+    public mutating func addTransformRamp(_ ramp: AVFoundation.AVVideoCompositionLayerInstruction.TransformRamp)
+    public mutating func setCropRectangle(_ rect: CoreFoundation.CGRect, at time: CoreMedia.CMTime)
+    public mutating func addCropRectangleRamp(_ ramp: AVFoundation.AVVideoCompositionLayerInstruction.CropRectangleRamp)
+  }
+  convenience public init(configuration: AVFoundation.AVVideoCompositionLayerInstruction.Configuration)
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoCompositionLayerInstruction {
+  public struct CropRectangleRamp : Swift.Equatable, Swift.Sendable {
+    public var timeRange: CoreMedia.CMTimeRange
+    public var start: CoreFoundation.CGRect
+    public var end: CoreFoundation.CGRect
+    public init(timeRange: CoreMedia.CMTimeRange, start: CoreFoundation.CGRect, end: CoreFoundation.CGRect)
+    public static func == (a: AVFoundation.AVVideoCompositionLayerInstruction.CropRectangleRamp, b: AVFoundation.AVVideoCompositionLayerInstruction.CropRectangleRamp) -> Swift.Bool
+  }
+  public struct OpacityRamp : Swift.Equatable, Swift.Sendable {
+    public var timeRange: CoreMedia.CMTimeRange
+    public var start: Swift.Float
+    public var end: Swift.Float
+    public init(timeRange: CoreMedia.CMTimeRange, start: Swift.Float, end: Swift.Float)
+    public static func == (a: AVFoundation.AVVideoCompositionLayerInstruction.OpacityRamp, b: AVFoundation.AVVideoCompositionLayerInstruction.OpacityRamp) -> Swift.Bool
+  }
+  public struct TransformRamp : Swift.Equatable, Swift.Sendable {
+    public var timeRange: CoreMedia.CMTimeRange
+    public var start: CoreFoundation.CGAffineTransform
+    public var end: CoreFoundation.CGAffineTransform
+    public init(timeRange: CoreMedia.CMTimeRange, start: CoreFoundation.CGAffineTransform, end: CoreFoundation.CGAffineTransform)
+    public static func == (a: AVFoundation.AVVideoCompositionLayerInstruction.TransformRamp, b: AVFoundation.AVVideoCompositionLayerInstruction.TransformRamp) -> Swift.Bool
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func cropRectangleRamp(at time: CoreMedia.CMTime) -> AVFoundation.AVVideoCompositionLayerInstruction.CropRectangleRamp?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func opacityRamp(at time: CoreMedia.CMTime) -> AVFoundation.AVVideoCompositionLayerInstruction.OpacityRamp?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func transformRamp(at time: CoreMedia.CMTime) -> AVFoundation.AVVideoCompositionLayerInstruction.TransformRamp?
+  #endif
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoCompositionCoreAnimationTool {
+  public struct Configuration {
+    public var layers: [QuartzCore.CALayer]
+    public var containingLayer: QuartzCore.CALayer
+    public init(postProcessingAsVideoLayers layers: [QuartzCore.CALayer], containingLayer: QuartzCore.CALayer)
+    public init(postProcessingAsVideoLayer layer: QuartzCore.CALayer, containingLayer: QuartzCore.CALayer)
+  }
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  convenience public init(configuration: sending AVFoundation.AVVideoCompositionCoreAnimationTool.Configuration)
+  #else
+  convenience public init(configuration: __owned AVFoundation.AVVideoCompositionCoreAnimationTool.Configuration)
+  #endif
+}
+@available(macOS, introduced: 14, deprecated: 26.0, message: "Use AVAssetWriterInput.TaggedPixelBufferGroupReceiver.append(_:with:isolation:) instead")
+@available(iOS, introduced: 17, deprecated: 26.0, message: "Use AVAssetWriterInput.TaggedPixelBufferGroupReceiver.append(_:with:isolation:) instead")
+@available(visionOS, introduced: 1, deprecated: 26.0, message: "Use AVAssetWriterInput.TaggedPixelBufferGroupReceiver.append(_:with:isolation:) instead")
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension AVFoundation.AVAssetWriterInputTaggedPixelBufferGroupAdaptor {
   public func appendTaggedBuffers(_ taggedBuffers: [CoreMedia.CMTaggedBuffer], withPresentationTime: CoreMedia.CMTime) -> Swift.Bool
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriterInput {
+  @_hasMissingDesignatedInitializers public class MultiPassController {
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var passDescriptions: (some _Concurrency.AsyncSequence<AVFoundation.AVAssetWriterInputPassDescription, Swift.Never>)? {
+      get
+    }
+    #endif
+    @objc deinit
+  }
 }
 @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, *)
 @available(visionOS, unavailable)
@@ -640,35 +1161,60 @@ extension AVFoundation.AVAsynchronousVideoCompositionRequest {
     get
   }
 }
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, visionOS 1, *)
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
-extension AVFoundation.AVVideoComposition {
-  @objc(_sourceSampleDataTrackIDs) dynamic public var sourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID] {
-    @objc get
-  }
+extension AVFoundation.AVAsynchronousVideoCompositionRequest {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func sourceTaggedDynamicBuffers(byTrackID trackID: CoreMedia.CMPersistentTrackID) -> [CoreMedia.CMTaggedDynamicBuffer]?
+  #endif
 }
-@available(macOS 12.0, iOS 15.0, tvOS 15.0, visionOS 1, *)
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
 @available(watchOS, unavailable)
-extension AVFoundation.AVMutableVideoComposition {
-  @objc(_sourceSampleDataTrackIDs) override dynamic public var sourceSampleDataTrackIDs: [CoreMedia.CMPersistentTrackID] {
-    @objc get
-    @objc set
-  }
+extension AVFoundation.AVAsynchronousVideoCompositionRequest {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func sourceReadOnlyPixelBuffer(byTrackID trackID: CoreMedia.CMPersistentTrackID) -> CoreVideo.CVReadOnlyPixelBuffer?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(watchOS, unavailable)
+  public func sourceReadySampleBuffer(byTrackID trackID: CoreMedia.CMPersistentTrackID) -> CoreMedia.CMReadySampleBuffer<CoreMedia.CMSampleBuffer.DynamicContent>?
+  #endif
+  public func finish(withComposedPixelBuffer readOnlyPixelBuffer: CoreVideo.CVReadOnlyPixelBuffer)
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(watchOS, unavailable)
+  public func finish(withComposedTaggedBuffers taggedBuffers: [CoreMedia.CMTaggedDynamicBuffer])
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(watchOS, unavailable)
+  public func attach(_ spatialVideoConfiguration: AVFoundation.AVSpatialVideoConfiguration, to pixelBuffer: inout CoreVideo.CVMutablePixelBuffer) throws
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVVideoCompositionRenderContext {
+  public func makeMutablePixelBuffer() throws -> CoreVideo.CVMutablePixelBuffer
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension AVFoundation.AVPlayer : Observation.Observable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVAssetVariant {
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public var peakBitRate: Swift.Double? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public var averageBitRate: Swift.Double? {
     get
   }
+  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVAssetVariant.VideoAttributes {
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public var nominalFrameRate: Swift.Double? {
     get
   }
+  #endif
   @nonobjc public var codecTypes: [CoreMedia.CMVideoCodecType] {
     get
   }
@@ -681,12 +1227,54 @@ extension AVFoundation.AVAssetVariant.AudioAttributes {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVAssetVariant.AudioAttributes.RenditionSpecificAttributes {
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public var channelCount: Swift.Int? {
     get
   }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension AVFoundation.AVAssetVariant.VideoAttributes : @unchecked Swift.Sendable {
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriterInput {
+  @_hasMissingDesignatedInitializers public class PixelBufferReceiver {
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var sourcePixelBufferAttributes: CoreVideo.CVPixelBufferCreationAttributes? {
+      get
+    }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var pixelBufferPool: CoreVideo.CVMutablePixelBuffer.Pool? {
+      get
+    }
+    #endif
+    #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public func append(_ pixelBuffer: CoreVideo.CVReadOnlyPixelBuffer, with presentationTime: CoreMedia.CMTime) async throws
+    #endif
+    public func appendImmediately(_ pixelBuffer: CoreVideo.CVReadOnlyPixelBuffer, with presentationTime: CoreMedia.CMTime) throws -> Swift.Bool
+    public func finish()
+    @objc deinit
+  }
+}
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriter {
+  #if compiler(>=5.3) && $NonescapableTypes
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputPixelBufferReceiver(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> sending AVFoundation.AVAssetWriterInput.PixelBufferReceiver
+  #else
+  public func inputPixelBufferReceiver(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> AVFoundation.AVAssetWriterInput.PixelBufferReceiver
+  #endif
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputPixelBufferReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> sending (AVFoundation.AVAssetWriterInput.PixelBufferReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #else
+  public func inputPixelBufferReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> (AVFoundation.AVAssetWriterInput.PixelBufferReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #endif
+  #endif
 }
 @available(macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2.0, *)
 extension AVFoundation.AVPlayerItemSegment {
@@ -706,7 +1294,9 @@ extension AVFoundation.AVPlayerItemIntegratedTimeline {
     public typealias Element = CoreMedia.CMTime
     public func makeAsyncIterator() -> AVFoundation.AVPlayerItemIntegratedTimeline.PeriodicTimes.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> AVFoundation.AVPlayerItemIntegratedTimeline.PeriodicTimes.Element?
+      #endif
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
       public typealias Element = AVFoundation.AVPlayerItemIntegratedTimeline.PeriodicTimes.Element
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
@@ -721,7 +1311,9 @@ extension AVFoundation.AVPlayerItemIntegratedTimeline {
     public typealias Element = CoreMedia.CMTime
     public func makeAsyncIterator() -> AVFoundation.AVPlayerItemIntegratedTimeline.BoundaryTimes.Iterator
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> AVFoundation.AVPlayerItemIntegratedTimeline.BoundaryTimes.Element?
+      #endif
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
       public typealias Element = AVFoundation.AVPlayerItemIntegratedTimeline.BoundaryTimes.Element
       @available(iOS 18, tvOS 18, watchOS 11, visionOS 2.0, macOS 15, *)
@@ -742,7 +1334,9 @@ extension AVFoundation.AVPlayerItemIntegratedTimeline {
 extension AVFoundation.AVCaptureSynchronizedDataCollection : Swift.Sequence {
   public func makeIterator() -> AVFoundation.AVCaptureSynchronizedDataCollection.Iterator
   public struct Iterator : Swift.IteratorProtocol {
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() -> AVFoundation.AVCaptureSynchronizedData?
+    #endif
     @available(iOS 11.0, tvOS 17.0, macCatalyst 18.0, *)
     @available(watchOS, unavailable)
     @available(visionOS, unavailable)
@@ -831,14 +1425,23 @@ extension Foundation.NSNotification.Name {
     }
   }
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension AVFoundation.AVPlayerItem : Observation.Observable {
+}
 @available(watchOS, unavailable)
 extension AVFoundation.AVAssetImageGenerator {
   @available(macOS 13, iOS 16, tvOS 16, visionOS 1, *)
   @available(watchOS, unavailable)
   public func image(at time: CoreMedia.CMTime) async throws -> (image: CoreGraphics.CGImage, actualTime: CoreMedia.CMTime)
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  @available(macOS 13, iOS 16, tvOS 16, visionOS 1, *)
+  @available(watchOS, unavailable)
+  public func images(for times: [CoreMedia.CMTime]) -> sending AVFoundation.AVAssetImageGenerator.Images
+  #else
   @available(macOS 13, iOS 16, tvOS 16, visionOS 1, *)
   @available(watchOS, unavailable)
   public func images(for times: [CoreMedia.CMTime]) -> AVFoundation.AVAssetImageGenerator.Images
+  #endif
   @available(macOS 13, iOS 16, tvOS 16, visionOS 1, *)
   @available(watchOS, unavailable)
   public struct Images : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol {
@@ -847,7 +1450,9 @@ extension AVFoundation.AVAssetImageGenerator {
       case failure(requestedTime: CoreMedia.CMTime, error: any Swift.Error)
     }
     public func makeAsyncIterator() -> AVFoundation.AVAssetImageGenerator.Images
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() async -> AVFoundation.AVAssetImageGenerator.Images.Element?
+    #endif
     @available(iOS 16, tvOS 16, visionOS 1, macOS 13, *)
     @available(watchOS, unavailable)
     public typealias AsyncIterator = AVFoundation.AVAssetImageGenerator.Images
@@ -872,12 +1477,103 @@ extension AVFoundation.AVAssetImageGenerator.Images.Element {
     get throws
   }
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriter {
+  public func start() throws
+}
+@available(macOS 26.0, iOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriterInput {
+  @_hasMissingDesignatedInitializers public class TaggedPixelBufferGroupReceiver {
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var sourcePixelBufferAttributes: CoreVideo.CVPixelBufferCreationAttributes? {
+      get
+    }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public var pixelBufferPool: CoreVideo.CVMutablePixelBuffer.Pool? {
+      get
+    }
+    #endif
+    #if compiler(>=5.3) && $AsyncExecutionBehaviorAttributes
+    nonisolated(nonsending) public func append(_ taggedPixelBufferGroup: [CoreMedia.CMTaggedDynamicBuffer], with presentationTime: CoreMedia.CMTime) async throws
+    #endif
+    public func appendImmediately(_ taggedPixelBufferGroup: [CoreMedia.CMTaggedDynamicBuffer], with presentationTime: CoreMedia.CMTime) throws -> Swift.Bool
+    public func finish()
+    @objc deinit
+  }
+}
+@available(macOS 26.0, iOS 26.0, visionOS 26.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriter {
+  #if compiler(>=5.3) && $NonescapableTypes
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputTaggedPixelBufferGroupReceiver(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> sending AVFoundation.AVAssetWriterInput.TaggedPixelBufferGroupReceiver
+  #else
+  public func inputTaggedPixelBufferGroupReceiver(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> AVFoundation.AVAssetWriterInput.TaggedPixelBufferGroupReceiver
+  #endif
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  #if compiler(>=5.3) && $SendingArgsAndResults
+  public func inputTaggedPixelBufferGroupReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> sending (AVFoundation.AVAssetWriterInput.TaggedPixelBufferGroupReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #else
+  public func inputTaggedPixelBufferGroupReceiverRequestingMultiPass(for input: AVFoundation.AVAssetWriterInput, pixelBufferAttributes attributes: CoreVideo.CVPixelBufferCreationAttributes?) -> (AVFoundation.AVAssetWriterInput.TaggedPixelBufferGroupReceiver, AVFoundation.AVAssetWriterInput.MultiPassController)
+  #endif
+  #endif
+}
+@available(macOS 10.15, iOS 13.0, tvOS 13.0, visionOS 1.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetExportSession {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @backDeployed(before: macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0)
+  final public func export(to url: Foundation.URL, as fileType: AVFoundation.AVFileType, isolation: isolated (any _Concurrency.Actor)? = #isolation) async throws {
+		nonisolated(unsafe) let exportSessionForCancellingOnly = self
+		outputURL = url
+		outputFileType = fileType
+		try await withTaskCancellationHandler {
+			
+			 
+			
+			guard status != .cancelled else {
+				 
+				 
+				 
+				throw CancellationError()
+			}
+			await export()
+			
+			 
+
+			switch status {
+			case .completed:
+				 
+				break
+			case .failed:
+				throw self.error!
+			case .cancelled:
+				throw CancellationError()
+			case .unknown:
+				fallthrough
+			case .waiting:
+				fallthrough
+			default:
+				fatalError("Unexpected terminal status \(status)")
+			}
+		} onCancel: {
+			
+			 
+
+			exportSessionForCancellingOnly.cancelExport()
+		}
+	}
+  #endif
+}
 @available(macOS 15, iOS 18, tvOS 18, visionOS 2.0, *)
 @available(watchOS, unavailable)
 extension AVFoundation.AVAssetExportSession {
-  public func export(to url: Foundation.URL, as fileType: AVFoundation.AVFileType, isolation: isolated (any _Concurrency.Actor)? = #isolation) async throws
-  @usableFromInline
-  @_unsafeInheritExecutor internal func export(to url: Foundation.URL, as fileType: AVFoundation.AVFileType) async throws
   public enum State : Swift.Sendable {
     case pending
     case waiting
@@ -898,6 +1594,7 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMutabl
 }
 @available(macOS 13, iOS 16, tvOS 16, watchOS 9, visionOS 1, *)
 extension AVFoundation.AVMutableComposition {
+  #if compiler(>=5.3) && $NonescapableTypes
   @backDeployed(before: macOS 15, iOS 18, tvOS 18, watchOS 11, visionOS 2)
   final public func insertTimeRange(_ timeRange: CoreMedia.CMTimeRange, of asset: AVFoundation.AVAsset, at time: CoreMedia.CMTime, isolation: isolated (any _Concurrency.Actor)? = #isolation) async throws {
 		 
@@ -914,6 +1611,7 @@ extension AVFoundation.AVMutableComposition {
 			try insertTimeRange(timeRange, of: asset, at: time)
 		}()
 	}
+  #endif
 }
 @available(macOS 11.0, iOS 10.0, macCatalyst 14.0, tvOS 17.0, *)
 @available(visionOS, unavailable)
@@ -963,10 +1661,14 @@ extension AVFoundation.AVCapturePhotoSettings {
 @available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension AVFoundation.AVCapturePhoto {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable, message: "Use 'cgImageRepresentation() -> CGImage?' instead")
   @nonobjc public func cgImageRepresentation() -> Swift.Unmanaged<CoreGraphics.CGImage>?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(*, unavailable, message: "Use 'previewCGImageRepresentation() -> CGImage?' instead")
   @nonobjc public func previewCGImageRepresentation() -> Swift.Unmanaged<CoreGraphics.CGImage>?
+  #endif
 }
 @available(macOS 14.4, iOS 17.4, tvOS 17.4, macCatalyst 17.4, visionOS 1.1, *)
 @available(watchOS, unavailable)
@@ -981,24 +1683,49 @@ extension AVFoundation.AVSampleBufferVideoRenderer {
     get
     set
   }
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+  @available(watchOS, unavailable)
+  public var recommendedPixelBufferAttributes: CoreVideo.CVPixelBufferAttributes {
+    get
+  }
 }
 @available(macOS 14.2, iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
 extension AVFoundation.AVPlayerVideoOutput {
-  @available(macOS 14.2, iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS, introduced: 14.2, deprecated: 100000, message: "Use AVPlayerVideoOutput.sample instead")
+  @available(iOS, introduced: 17.2, deprecated: 100000, message: "Use AVPlayerVideoOutput.sample instead")
+  @available(tvOS, introduced: 17.2, deprecated: 100000, message: "Use AVPlayerVideoOutput.sample instead")
+  @available(watchOS, introduced: 10.2, deprecated: 100000, message: "Use AVPlayerVideoOutput.sample instead")
+  @available(visionOS, introduced: 1.1, deprecated: 100000, message: "Use AVPlayerVideoOutput.sample instead")
   public func taggedBuffers(forHostTime hostTime: CoreMedia.CMTime) -> (taggedBufferGroup: [CoreMedia.CMTaggedBuffer], presentationTime: CoreMedia.CMTime, activeConfiguration: AVFoundation.AVPlayerVideoOutput.Configuration)?
+  #endif
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+  public struct Sample : Swift.Sendable {
+    public let taggedBuffers: [CoreMedia.CMTaggedDynamicBuffer]
+    public let presentationTime: CoreMedia.CMTime
+    public let activeConfiguration: AVFoundation.AVPlayerVideoOutput.Configuration
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 26.0, iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+  public func sample(forHostTime hostTime: CoreMedia.CMTime) -> AVFoundation.AVPlayerVideoOutput.Sample?
+  #endif
 }
 @available(macOS 14.2, iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
 extension AVFoundation.AVVideoOutputSpecification {
   @available(macOS 14.2, iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
   convenience public init(tagCollections: [[CoreMedia.CMTag]])
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 14.2, deprecated: 100000, message: "Use setOutputSettings instead")
   @available(iOS, introduced: 17.2, deprecated: 100000, message: "Use setOutputSettings instead")
   @available(tvOS, introduced: 17.2, deprecated: 100000, message: "Use setOutputSettings instead")
   @available(watchOS, introduced: 10.2, deprecated: 100000, message: "Use setOutputSettings instead")
   @available(visionOS, introduced: 1.1, deprecated: 100000, message: "Use setOutputSettings instead")
   public func setOutputPixelBufferAttributes(_ pixelBufferAttributes: [Swift.String : Any]?, for tagCollection: [CoreMedia.CMTag])
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
   public func setOutputSettings(_ outputSettings: [Swift.String : any Swift.Sendable]?, for tagCollection: [CoreMedia.CMTag])
+  #endif
   @available(macOS 14.2, iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
   public var preferredTagCollections: [[CoreMedia.CMTag]] {
     get
@@ -1066,12 +1793,16 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAssetT
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAssetTrack {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var languageCode: AVFoundation.AVAsyncProperty<Root, Swift.String?> {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var extendedLanguageTag: AVFoundation.AVAsyncProperty<Root, Swift.String?> {
     get
   }
+  #endif
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, visionOS 1, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVAssetTrack {
@@ -1142,27 +1873,45 @@ extension AVFoundation.AVAssetDownloadStorageManager : @unchecked Swift.Sendable
 @available(watchOS 6.0, *)
 extension CoreMedia.CMTime : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout CoreMedia.CMTime?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout CoreMedia.CMTime?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> CoreMedia.CMTime
+  #endif
   @available(iOS 4.0, watchOS 6.0, macCatalyst 13.1, *)
   public typealias _ObjectiveCType = Foundation.NSValue
 }
 @available(watchOS 6.0, *)
 extension CoreMedia.CMTimeRange : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout CoreMedia.CMTimeRange?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout CoreMedia.CMTimeRange?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> CoreMedia.CMTimeRange
+  #endif
   @available(iOS 4.0, watchOS 6.0, macCatalyst 13.1, *)
   public typealias _ObjectiveCType = Foundation.NSValue
 }
 @available(watchOS 6.0, *)
 extension CoreMedia.CMTimeMapping : Swift._ObjectiveCBridgeable {
   public func _bridgeToObjectiveC() -> Foundation.NSValue
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout CoreMedia.CMTimeMapping?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue, result: inout CoreMedia.CMTimeMapping?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> CoreMedia.CMTimeMapping
+  #endif
   @available(iOS 4.0, watchOS 6.0, macCatalyst 13.1, *)
   public typealias _ObjectiveCType = Foundation.NSValue
 }
@@ -1232,18 +1981,22 @@ extension AVFoundation.AVCaptureDevice.Format {
 @available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension AVFoundation.AVCaptureDevice.Format {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, *)
   @available(visionOS, unavailable)
   @available(watchOS, unavailable)
   @nonobjc public var systemRecommendedVideoZoomRange: Swift.ClosedRange<CoreFoundation.CGFloat>? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, macCatalyst 18.0, tvOS 18.0, *)
   @available(visionOS, unavailable)
   @available(watchOS, unavailable)
   @nonobjc public var systemRecommendedExposureBiasRange: Swift.ClosedRange<Swift.Float>? {
     get
   }
+  #endif
 }
 extension Foundation.NSNotification.Name {
   @available(macOS, introduced: 10.7, deprecated: 15.0, renamed: "AVCaptureDevice.wasConnectedNotification")
@@ -1286,6 +2039,17 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVFragme
     get
   }
 }
+@available(macOS 26.0, iOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetReader {
+  public func start() throws
+}
+@available(macOS 15.0, iOS 18.0, macCatalyst 15.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVCaptionGroup : @unchecked Swift.Sendable {
+}
 extension AVFoundation.AVMovie {
   @available(macOS 10.10, iOS 13.0, watchOS 6.0, visionOS 1.0, *)
   @available(tvOS, unavailable)
@@ -1311,4 +2075,16 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVURLAss
   public static var tracks: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVAssetTrack]> {
     get
   }
+}
+@available(macOS 26.0, *)
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVURLAsset {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static var sidecarURL: AVFoundation.AVAsyncProperty<Root, Foundation.URL?> {
+    get
+  }
+  #endif
 }

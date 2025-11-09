@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libEndpointSecuritySystem.dylib'
-current-version: 511.120.2
+current-version: 589.0.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ess_authorize_file_provider_materialize, _ess_authorize_file_provider_update, 

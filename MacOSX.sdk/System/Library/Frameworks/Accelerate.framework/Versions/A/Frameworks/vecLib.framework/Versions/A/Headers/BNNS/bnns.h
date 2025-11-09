@@ -378,21 +378,21 @@ __API_DEPRECATED("Use BNNSGraph* APIs", macos(11.0, 15.0), ios(14.0, 18.0), watc
   filter0 is convolution and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
   filter_type: [BNNSConvolution, BNNSQuantization]
   layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersQuantization]
-  input and ouput descriptor data pointers in BNNSLayerParametersQuantization are ignored
+  input and output descriptor data pointers in BNNSLayerParametersQuantization are ignored
   Note that if the quantization layer uses batch as an axis with scale and/or bias, the batch size is encoded in the quantization layer parameters. In this case, if the batch size changes, the filter must be destroyed and recreated.
  
   Configuration 5: FullyConnected -> Quantization
   filter0 is fully connected and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
   filter_type: [BNNSFullyConnected, BNNSQuantization]
   layer_params: [pointer to BNNSLayerParametersFullyConnected, pointer to BNNSLayerParametersQuantization]
-  input and ouput descriptor data pointers in BNNSLayerParametersQuantization are ignored
+  input and output descriptor data pointers in BNNSLayerParametersQuantization are ignored
   Note that if the quantization layer uses batch as an axis with scale and/or bias, the batch size is encoded in the quantization layer parameters. In this case, if the batch size changes, the filter must be destroyed and recreated.
  
   Configuration 6: Transposed Convolution -> Quantization
   filter0 is transposed convolution and filter1 is quantization. The filter_type and layer_params arrays should be as follows:
   filter_type: [BNNSTransposedConvolution, BNNSQuantization]
   layer_params: [pointer to BNNSLayerParametersConvolution, pointer to BNNSLayerParametersQuantization]
-  input and ouput descriptor data pointers in BNNSLayerParametersQuantization are ignored
+  input and output descriptor data pointers in BNNSLayerParametersQuantization are ignored
   Note that if the quantization layer uses batch as an axis with scale and/or bias, the batch size is encoded in the quantization layer parameters. In this case, if the batch size changes, the filter must be destroyed and recreated.
  
   Configuration 7: Arithmetic -> Normalization
@@ -1755,7 +1755,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 #if !0
 
 /*!
- * @abstract Returns required workspace size for a call to BNNSMatMul() with the given parameters.
+ * @abstract Returns required workspace size for a call to BNNSMatMul() with the given paramters.
  *
  * @discussion
  * This routine does not access the data pointers on the array descriptors, so they need not point to actual data.
@@ -1768,7 +1768,7 @@ __API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
  * @param output - descriptor for tensor C
  * @param filter_params - filter runtime parameters, may be NULL for default parameters
  *
- * @returns Required allocation size for workspace parameter to BNNSMatMul, in bytes.
+ * @returns Required allocation size for workspace paramter to BNNSMatMul, in bytes.
  *          If parameters are invalid, a negative value is returned.
  */
 ssize_t BNNSMatMulWorkspaceSize(const bool transA,

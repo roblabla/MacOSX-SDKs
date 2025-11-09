@@ -8,3 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #import <SensitiveContentAnalysis/SCSensitivityAnalyzer.h>
+
+#if !TARGET_OS_WATCH
+#import <SensitiveContentAnalysis/SCVideoStreamAnalyzer.h>
+#endif

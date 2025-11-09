@@ -34,6 +34,9 @@
 #include <AudioToolbox/AudioWorkInterval.h>
 #include <AudioToolbox/CAFFile.h>
 #include <AudioToolbox/CAShow.h>
+#if !TARGET_OS_OSX && !TARGET_OS_MACCATALYST
+#include <AudioToolbox/CASpatialAudioExperience.h>
+#endif
 #include <AudioToolbox/ExtendedAudioFile.h>
 #include <AudioToolbox/MusicDevice.h>
 #include <AudioToolbox/MusicPlayer.h>

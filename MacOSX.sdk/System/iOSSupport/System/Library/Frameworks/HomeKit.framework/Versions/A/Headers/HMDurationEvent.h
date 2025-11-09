@@ -33,7 +33,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief duration The duration of time in seconds.
  */
-@property (readonly, nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic, readonly, assign) NSTimeInterval duration;
 
 @end
 
@@ -49,7 +49,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief duration The duration of time in seconds.
  */
-@property (readwrite, nonatomic, assign) NSTimeInterval duration;
+@property (nonatomic, readwrite, assign) NSTimeInterval duration;
 
 @end
 

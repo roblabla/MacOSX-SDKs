@@ -3,15 +3,13 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftDarwin.dylib'
-current-version: 310.100.8
+current-version: 347.0.12
 swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    libraries:       [ '/usr/lib/swift/libswift_Builtin_float.dylib', '/usr/lib/swift/libswift_errno.dylib', 
-                       '/usr/lib/swift/libswift_math.dylib', '/usr/lib/swift/libswift_signal.dylib', 
-                       '/usr/lib/swift/libswift_stdio.dylib', '/usr/lib/swift/libswift_time.dylib', 
-                       '/usr/lib/swift/libswiftsys_time.dylib', '/usr/lib/swift/libswiftunistd.dylib' ]
+    libraries:       [ '/usr/lib/swift/libswift_Builtin_float.dylib', '/usr/lib/swift/libswift_DarwinFoundation1.dylib', 
+                       '/usr/lib/swift/libswift_DarwinFoundation2.dylib', '/usr/lib/swift/libswift_DarwinFoundation3.dylib' ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -38,7 +36,8 @@ exports:
                        '_$s6Darwin13TIOCMGDTRWAITSuvg', '_$s6Darwin13TIOCMSDTRWAITSuvg', 
                        '_$s6Darwin13TIOCTIMESTAMPSuvg', '_$s6Darwin14TIOCGDRAINWAITSuvg', 
                        '_$s6Darwin14TIOCSDRAINWAITSuvg', '_$s6Darwin16TIOCDCDTIMESTAMPSuvg', 
-                       '_$s6Darwin16TIOCDSIMICROCODESuvg', '_$s6Darwin4openys5Int32VSPys4Int8VG_ADs6UInt16VtF', 
+                       '_$s6Darwin16TIOCDSIMICROCODESuvg', '_$s6Darwin24KERNEL_AUDIT_TOKEN_VALUEs6UInt32V_A7Dtvg', 
+                       '_$s6Darwin25INVALID_AUDIT_TOKEN_VALUEs6UInt32V_A7Dtvg', '_$s6Darwin4openys5Int32VSPys4Int8VG_ADs6UInt16VtF', 
                        '_$s6Darwin4openys5Int32VSPys4Int8VG_ADtF', '_$s6Darwin5fcntlys5Int32VAD_A2DtF', 
                        '_$s6Darwin5fcntlys5Int32VAD_ADSvtF', '_$s6Darwin5fcntlys5Int32VAD_ADtF', 
                        '_$s6Darwin5ioctlys5Int32VAD_SuADtF', '_$s6Darwin5ioctlys5Int32VAD_SuSvtF', 
@@ -78,5 +77,11 @@ exports:
                        '_$s6Darwin9TIOCSETAFSuvg', '_$s6Darwin9TIOCSETAWSuvg', '_$s6Darwin9TIOCSPGRPSuvg', 
                        '_$s6Darwin9TIOCSTARTSuvg', '_$s6Darwin9TIOCUCNTLSuvg', '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvM', 
                        '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvg', '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvpMV', 
-                       '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvs', '__swift_FORCE_LOAD_$_swiftDarwin' ]
+                       '_$sSo11extern_procV6DarwinE11p_starttimeSo7timevalVvs', '_$sSo13audit_token_ta6DarwinE2eeoiySbAB_ABtFZ', 
+                       '_$sSo13audit_token_ta6DarwinE4fromABs7Decoder_p_tKcfC', '_$sSo13audit_token_ta6DarwinE4hash4intoys6HasherVz_tF', 
+                       '_$sSo13audit_token_ta6DarwinE6encode2toys7Encoder_p_tKF', 
+                       '_$sSo13audit_token_ta6DarwinE9hashValueSivg', '_$sSo13audit_token_ta6DarwinE9hashValueSivpMV', 
+                       '_$sSo13audit_token_taSE6DarwinMc', '_$sSo13audit_token_taSH6DarwinMc', 
+                       '_$sSo13audit_token_taSQ6DarwinMc', '_$sSo13audit_token_taSe6DarwinMc', 
+                       '__swift_FORCE_LOAD_$_swiftDarwin' ]
 ...

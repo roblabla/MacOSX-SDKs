@@ -44,7 +44,7 @@ typedef float (^SCNActionTimingFunction)(float time);
  @method runAction:forKey:completionHandler:
  @abstract Adds an identifiable action to the list of actions executed by the node. Your block is called when the action completes.
  */
-- (void)runAction:(SCNAction *)action forKey:(nullable NSString *)key completionHandler:(nullable void (^)(void))block API_AVAILABLE(macos(10.10));
+- (void)runAction:(SCNAction *)action forKey:(nullable NSString *)key completionHandler:(nullable void (NS_SWIFT_SENDABLE ^)(void))block API_AVAILABLE(macos(10.10));
 
 /*!
  @property hasActions
@@ -176,14 +176,14 @@ SCN_EXPORT API_AVAILABLE(macos(10.10))
 + (SCNAction *)removeFromParentNode;
 
 //Creates an action that executes a block.
-+ (SCNAction *)runBlock:(void (^)(SCNNode *node))block;
-+ (SCNAction *)runBlock:(void (^)(SCNNode *node))block queue:(dispatch_queue_t)queue;
++ (SCNAction *)runBlock:(void (NS_SWIFT_SENDABLE ^)(SCNNode *node))block;
++ (SCNAction *)runBlock:(void (NS_SWIFT_SENDABLE ^)(SCNNode *node))block queue:(dispatch_queue_t)queue;
 
 //Creates an action that runs a javascript script over a duration. the node can be accessed from javascript via the "node" symbol and the elapsed time (between 0 and 1 relative to the duration) via the "elapsedTime" symbol.
 + (SCNAction *)javaScriptActionWithScript:(NSString *)script duration:(NSTimeInterval)seconds;
 
 //Creates an action that executes a block over a duration.
-+ (SCNAction *)customActionWithDuration:(NSTimeInterval)seconds actionBlock:(void (^)(SCNNode *node, CGFloat elapsedTime))block;
++ (SCNAction *)customActionWithDuration:(NSTimeInterval)seconds actionBlock:(void (NS_SWIFT_SENDABLE ^)(SCNNode *node, CGFloat elapsedTime))block;
 
 /** Creates an action that plays a sound
  @param source The audio source to play (see SCNAudioSource.h)

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServicesUI.framework/Versions/A/PreviewsServicesUI'
-current-version: 22.40.1
+current-version: 23.0.52
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -17,8 +17,6 @@ exports:
                        '_$s18PreviewsServicesUI12SceneMessageP18payloadDescriptionSSSgvgTq', 
                        '_$s18PreviewsServicesUI12SceneMessageP7payloadSDySSypGSgvgTj', 
                        '_$s18PreviewsServicesUI12SceneMessageP7payloadSDySSypGSgvgTq', 
-                       '_$s18PreviewsServicesUI12SceneMessagePAAE07unknownE5Errors0G0_pvg', 
-                       '_$s18PreviewsServicesUI12SceneMessagePAAE07unknownE5Errors0G0_pvpMV', 
                        '_$s18PreviewsServicesUI12SceneMessagePAAE10requireNil_3forySo13UVFenceHandleCSg_0E4TypeQztKFZ', 
                        '_$s18PreviewsServicesUI12SceneMessagePAAE11descriptionSSvg', 
                        '_$s18PreviewsServicesUI12SceneMessagePAAE11descriptionSSvpMV', 

@@ -30,5 +30,5 @@ exports:
                        _mrc_record_cache_flush_invalidate, _mrc_record_cache_flush_set_key_tag, 
                        _mrc_record_cache_flush_set_queue, _mrc_record_cache_flush_set_record_name, 
                        _mrc_record_cache_flush_set_result_handler, _mrc_release, 
-                       _mrc_retain ]
+                       _mrc_retain, _mrc_shared_assist_cache_set_enable ]
 ...

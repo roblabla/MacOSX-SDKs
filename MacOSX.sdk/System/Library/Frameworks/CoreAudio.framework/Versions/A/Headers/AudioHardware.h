@@ -790,7 +790,7 @@ typedef OSStatus
                         const AudioTimeStamp*   inInputTime,
                         AudioBufferList*        outOutputData,
                         const AudioTimeStamp*   inOutputTime,
-                        void* __nullable        inClientData);
+                        void* __nullable        inClientData) CA_REALTIME_API;
 
 /*!
     @typedef        AudioDeviceIOBlock
@@ -833,7 +833,7 @@ typedef void
                         const AudioBufferList*  inInputData,
                         const AudioTimeStamp*   inInputTime,
                         AudioBufferList*        outOutputData,
-                        const AudioTimeStamp*   inOutputTime);
+                        const AudioTimeStamp*   inOutputTime) CA_REALTIME_API;
 
 /*!
     @typedef        AudioDeviceIOProcID
@@ -1285,6 +1285,14 @@ CF_ENUM(AudioObjectPropertySelector)
                         the state rather than continuously poll the value.
                         NOTE: If input audio is not active/runnning or the voice activity detection is disabled,
                         then it is not analyzed and this will provide 0.
+    @constant       kAudioDevicePropertyWantsControlsRestored
+                        A UInt32 where a value of 0 indicates that the controls for the device should not be
+                        saved/restored when the device is first published. If the device doesn't implement
+                        this property, it is assumed that the settings should be saved and restored.
+    @constant       kAudioDevicePropertyWantsStreamFormatsRestored
+                        A UInt32 where a value of 0 indicates that the stream formats for the device should
+                        not be saved/restored when the device is first published. If the device doesn't
+                        implement this property, it is assumed that the settings should be saved and restored.
 */
 CF_ENUM(AudioObjectPropertySelector)
 {
@@ -1336,8 +1344,9 @@ CF_ENUM(AudioObjectPropertySelector)
     kAudioDevicePropertySubVolumeDecibelsToScalar                       = 'sd2v',
     kAudioDevicePropertySubMute                                         = 'smut',
     kAudioDevicePropertyVoiceActivityDetectionEnable                    = 'vAd+',
-    kAudioDevicePropertyVoiceActivityDetectionState                     = 'vAdS'
-
+    kAudioDevicePropertyVoiceActivityDetectionState                     = 'vAdS',
+    kAudioDevicePropertyWantsControlsRestored                           = 'resc',
+    kAudioDevicePropertyWantsStreamFormatsRestored                      = 'resf'
 };
 
 //==================================================================================================
@@ -1480,7 +1489,7 @@ AudioDeviceStop(    AudioObjectID                   inDevice,
 */
 extern OSStatus
 AudioDeviceGetCurrentTime(  AudioObjectID   inDevice,
-                            AudioTimeStamp* outTime)                                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+                            AudioTimeStamp* outTime) CA_REALTIME_API                                __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioDeviceTranslateTime
@@ -1501,7 +1510,7 @@ AudioDeviceGetCurrentTime(  AudioObjectID   inDevice,
 extern OSStatus
 AudioDeviceTranslateTime(   AudioObjectID           inDevice,
                             const AudioTimeStamp*   inTime,
-                            AudioTimeStamp*         outTime)                                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+                            AudioTimeStamp*         outTime) CA_REALTIME_API                        __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioDeviceGetNearestStartTime
@@ -1942,7 +1951,7 @@ CF_ENUM(AudioClassID)
     @enum           Process Properties
     @abstract       Processes AudioObjectPropertySelector values provided by the Process class.
     @constant       kAudioProcessPropertyPID
-                        A pid_t indicating the process ID associated with the process.
+                        A pid\_t indicating the process ID associated with the process.
     @constant       kAudioProcessPropertyBundleID
                         A CFString that contains the bundle ID of the process. The caller is
                         responsible for releasing the returned CFObject.

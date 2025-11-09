@@ -38,6 +38,7 @@ NS_ASSUME_NONNULL_BEGIN
 	
 	IMPORTANT PERFORMANCE NOTE: Make sure to set the alwaysCopiesSampleData property to NO if you do not need to modify the sample data in-place, to avoid unnecessary and inefficient copying.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReaderOutput : NSObject
 {
@@ -67,7 +68,14 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(w
  
 	This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
  */
-@property (nonatomic) BOOL alwaysCopiesSampleData API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL alwaysCopiesSampleData
+#if __swift__
+API_DEPRECATED("It is not necessary to copy the sample data in order to make it safe to use the vended buffer", macos(10.8, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
  @method copyNextSampleBuffer
@@ -84,7 +92,12 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(w
  
 	This method throws an exception if this output is not added to an instance of AVAssetReader (using -addOutput:) and -startReading is not called on that asset reader.
  */
-- (nullable CMSampleBufferRef)copyNextSampleBuffer CF_RETURNS_RETAINED;
+- (nullable CMSampleBufferRef)copyNextSampleBuffer CF_RETURNS_RETAINED
+#if __swift__
+API_DEPRECATED("Use AVAssetReaderOutput.Provider.next() instead", macos(10.7, API_TO_BE_DEPRECATED), ios(4.1, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#endif
+;
 
 @end
 
@@ -102,9 +115,16 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(
  
 	The default value is NO, which means that the asset reader output may not be reconfigured once reading has begun.  When the value of this property is NO, AVAssetReader may be able to read media data more efficiently, particularly when multiple asset reader outputs are attached.
  
-	This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown).
+	This property throws an exception if a value is set after reading has started (the asset reader has progressed beyond AVAssetReaderStatusUnknown) or after an AVAssetReaderOutput.Provider is attached.
  */
-@property (nonatomic) BOOL supportsRandomAccess API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL supportsRandomAccess
+#if __swift__
+API_DEPRECATED("Use AVAssetReader.outputProviderWithRandomAccess(for:) instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
  @method resetForReadingTimeRanges:
@@ -135,7 +155,14 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(
 		- cannot be called without setting "supportsRandomAccess" to YES
 		- cannot be called after calling -markConfigurationAsFinal
  */
-- (void)resetForReadingTimeRanges:(NSArray<NSValue *> *)timeRanges API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+- (void)resetForReadingTimeRanges:(NSArray<NSValue *> *)timeRanges
+#if __swift__
+API_DEPRECATED("Use RandomAccessController.resetForReading(timeRanges:) instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
  @method markConfigurationAsFinal
@@ -149,7 +176,14 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(
  
 	Once this method has been called, further invocations of -resetForReadingTimeRanges: are disallowed.
  */
-- (void)markConfigurationAsFinal API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+- (void)markConfigurationAsFinal
+#if __swift__
+API_DEPRECATED("Use RandomAccessController.markConfigurationAsFinal() instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 @end
 
@@ -529,8 +563,13 @@ AV_INIT_UNAVAILABLE
  @abstract
 	Defines an interface for reading metadata, packaged as instances of AVTimedMetadataGroup, from a single AVAssetReaderTrackOutput object.
  */
-
+NS_SWIFT_NONSENDABLE
+#if __swift__
+API_DEPRECATED("Use AVAssetReader.outputMetadataProvider(for:) instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
 API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
 @interface AVAssetReaderOutputMetadataAdaptor : NSObject
 {
 @private
@@ -608,7 +647,13 @@ AV_INIT_UNAVAILABLE
 	An adaptor class for reading instances of AVCaptionGroup from a track containing timed text (i.e. subtitles or closed captions).
 	
  */
+NS_SWIFT_NONSENDABLE
+#if __swift__
+API_DEPRECATED("Use AVAssetReader.outputCaptionProvider(for:validationDelegate:) instead", macos(12.0, API_TO_BE_DEPRECATED), ios(18.0, API_TO_BE_DEPRECATED), macCatalyst(15.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(tvos, watchos, visionos)
+#else
 API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, watchos, visionos)
+#endif
 @interface AVAssetReaderOutputCaptionAdaptor : NSObject
 {
 @private
@@ -674,7 +719,7 @@ AV_INIT_UNAVAILABLE
 	The returned array contains the set of captions in the given group whose time ranges have the same start time as the group.  This method is provided as a convenience for clients who want to process captions one-by-one and do not need a complete view of the set of captions active at a given time.
  */
 - (NSArray<AVCaption *> *)captionsNotPresentInPreviousGroupsInCaptionGroup:(AVCaptionGroup *)captionGroup;
-								
+
 @end
 
 /*!
@@ -717,7 +762,7 @@ API_AVAILABLE(macos(12.0), ios(18.0), macCatalyst(15.0)) API_UNAVAILABLE(tvos, w
  @param syntaxElements Array of NSString to represent the skipped syntax.
 
  @discussion
-	While the reported string content is human readable, it is highly technical and probably meaningful only to clients who are familiar with the source caption format. It is primarily designed for logging purpose and would not be suitable for UI purpose.
+	While the reported string content is human readable, it is highly technical and probably meaningful only to clients who are familiar with the source caption format. It is primarily designed for logging purposes and would not be suitable for UI purposes.
  */
 - (void)captionAdaptor:(AVAssetReaderOutputCaptionAdaptor *)adaptor didVendCaption:(AVCaption *)caption skippingUnsupportedSourceSyntaxElements:(NSArray<NSString *> *)syntaxElements;
 

@@ -5,7 +5,7 @@
 #import <GameKit/GKDefines.h>
 
 API_AVAILABLE(ios(10.0), macos(10.12), tvos(10.0), visionos(1.0), watchos(3.0))
-@interface GKBasePlayer : NSObject
+@interface GKBasePlayer : NSObject<NSCopying>
 
 @property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY) NSString *playerID API_DEPRECATED_WITH_REPLACEMENT("Use ``GKPlayer/gamePlayerID`` or ``GKPlayer/teamPlayerID`` instead.", ios(10.0,13.0), macos(10.12,10.15), tvos(10.0,13.0), visionos(1.0,1.0), watchos(3.0,6.0));
 

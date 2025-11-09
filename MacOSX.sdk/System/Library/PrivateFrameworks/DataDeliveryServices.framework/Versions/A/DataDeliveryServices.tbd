@@ -7,7 +7,8 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AggregatedDurationAnalyticKey, _AllowCellularOverride, _AllowExpensiveAccessOverride, 
                        _AnalyticKeyPrefix, _AssetCenterQueueName, _AssetDownloadAnalytic, 
-                       _AssetNameAnalyticKey, _AssetUpdatedNotificationSuffix, _AutoAssetErrorCodeUpdateFailed, 
+                       _AssetNameAnalyticKey, _AssetUpdatePostCacheClearNotificationPrefix, 
+                       _AssetUpdatedNotificationSuffix, _AutoAssetErrorCodeUpdateFailed, 
                        _AutoAssetLog, _CompatibilityVersionAnalyticKey, _ContentVersionAnalyticKey, 
                        _DDSAssetDataDirectoryName, _DDSAssetDownloadUIError, _DDSAssetDownloadUIErrorDomain, 
                        _DDSAssetInfoListKeyMobileAssetProperties, _DDSAttributeAssetLocale, 

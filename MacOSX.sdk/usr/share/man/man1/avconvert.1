@@ -1,5 +1,5 @@
-.\"Copyright (c) 2021 Apple Inc. All Rights Reserved.
-.Dd October 08, 2021
+.\"Copyright (c) 2021-2025 Apple Inc. All Rights Reserved.
+.Dd February 2025
 .Dt AVCONVERT 1
 .Os "macOS"
 .Sh NAME
@@ -73,6 +73,14 @@ A high quality preset with H.264 video and AAC audio.
 A low quality, smaller than Standard Definition, preset with H.264 video and AAC audio.
 .It Sy PresetMediumQuality
 A medium quality, smaller than Standard Definition, preset with H.264 video and AAC audio.
+.It Sy PresetMVHEVC960x960
+A preset with low-resolution MV-HEVC video and AAC audio.
+.It Sy PresetMVHEVC1440x1440
+A preset with MV-HEVC video and AAC audio.
+.It Sy PresetMVHEVC4320x4320
+A preset with Ultra High Resolution MV-HEVC video and AAC audio.
+.It Sy PresetMVHEVC7680x7680
+A preset with 8K MV-HEVC video and AAC audio.
 .It Sy PresetPassthrough
 A preset that passes through the video and audio tracks, without conversion.
 .Ed
@@ -96,6 +104,8 @@ Display progress during the conversion (default with -v).
 Overwrite the output file, if it already exists.
 .It Fl \-start Ar num
 Skip the first num seconds (decimal allowed) of the source movie.  Default is beginning of file.
+.It Fl \-disableSpatialConversion
+Disable the automatic conversion of certain spatial, spherical, and/or immersive formats, including frame-packed to multiview codec and recognition of spherical signaling in order to produce output signaled as projected media profile.
 .It Fl \-verbose | v
 Print additional information about the conversion.
 .El

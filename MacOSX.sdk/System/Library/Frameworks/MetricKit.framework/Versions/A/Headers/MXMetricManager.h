@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  @typedef       MXLaunchTaskID
  @abstract      Describes the general purpose of a specific launch task.
  */
-API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(16.0), macos(13.0)) API_UNAVAILABLE(tvos, watchos)
 typedef const NSString *const MXLaunchTaskID NS_TYPED_EXTENSIBLE_ENUM;
 
 /*!
@@ -36,7 +36,7 @@ API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
  @property      pastPayloads
  @abstract      A list of past metric payloads received.
  */
-@property (readonly, nonnull, strong) NSArray<MXMetricPayload *> *pastPayloads API_UNAVAILABLE(macos);
+@property (readonly, nonnull, strong) NSArray<MXMetricPayload *> *pastPayloads;
 
 /*!
  @property      pastDiagnosticPayloads
@@ -87,7 +87,7 @@ API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
  @result        Returns @c YES if the measurement started successfully and @c NO otherwise.
  */
 
-+ (BOOL)extendLaunchMeasurementForTaskID:(MXLaunchTaskID)taskID error:(NSError **)error API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
++ (BOOL)extendLaunchMeasurementForTaskID:(MXLaunchTaskID)taskID error:(NSError **)error API_AVAILABLE(ios(16.0), macos(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @method        finishExtendedLaunchMeasurementForTaskID:error:
@@ -98,7 +98,7 @@ API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
  @result        Returns @c YES if the measurement for the task finished successfully and @c NO otherwise.
  */
 
-+ (BOOL)finishExtendedLaunchMeasurementForTaskID:(MXLaunchTaskID)taskID error:(NSError **)error API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, tvos, watchos);
++ (BOOL)finishExtendedLaunchMeasurementForTaskID:(MXLaunchTaskID)taskID error:(NSError **)error API_AVAILABLE(ios(16.0), macos(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 
@@ -123,7 +123,7 @@ API_AVAILABLE(ios(13.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
  @discussion    Atleast one subscriber must be available to receive metrics.
  @discussion    This method is invoked on a background queue.
  */
-- (void)didReceiveMetricPayloads:(NSArray<MXMetricPayload *> * _Nonnull)payloads API_UNAVAILABLE(macos);
+- (void)didReceiveMetricPayloads:(NSArray<MXMetricPayload *> * _Nonnull)payloads API_AVAILABLE(macos(10.15));
 
 /*!
  @method        didReceiveDiagnosticPayloads:payloads

@@ -188,16 +188,26 @@ extern "C" {
 #define COREMEDIA_TRUE (1 && 1)
 #define COREMEDIA_FALSE (0 && 1)
 
+#ifndef COREMEDIA_EXPORTS_USE_EXPLICIT_VISIBILITY
+	#define  COREMEDIA_EXPORTS_USE_EXPLICIT_VISIBILITY 0
+#endif
+
+#if COREMEDIA_EXPORTS_USE_EXPLICIT_VISIBILITY
+	#define COREMEDIA_EXPORT_VISIBILITY __attribute__((visibility("default")))
+#else
+	#define COREMEDIA_EXPORT_VISIBILITY
+#endif
+
 #if TARGET_OS_WIN32
 	#define CM_EXPORT __declspec( dllimport ) extern
 	#define VT_EXPORT __declspec( dllimport ) extern
 	#define MT_EXPORT __declspec( dllimport ) extern
 	#define ME_EXPORT __declspec( dllimport ) extern
 #else
-	#define CM_EXPORT extern
-	#define VT_EXPORT extern
-	#define MT_EXPORT extern
-	#define ME_EXPORT extern
+	#define CM_EXPORT extern COREMEDIA_EXPORT_VISIBILITY
+	#define VT_EXPORT extern COREMEDIA_EXPORT_VISIBILITY
+	#define MT_EXPORT extern COREMEDIA_EXPORT_VISIBILITY
+	#define ME_EXPORT extern COREMEDIA_EXPORT_VISIBILITY
 #endif
 
 // These have 32-bit range in a 32-bit build, and 64-bit range in a 64-bit build.
@@ -309,8 +319,10 @@ typedef CFIndex CMItemIndex;
 	
 #if COREMEDIA_DECLARE_BRIDGED_TYPES
 #define CM_BRIDGED_TYPE(type)	CF_BRIDGED_TYPE(type)
+#define CM_BRIDGED_MUTABLE_TYPE(type) CF_BRIDGED_MUTABLE_TYPE(type)
 #else
 #define CM_BRIDGED_TYPE(type)
+#define CM_BRIDGED_MUTABLE_TYPE(type)
 #endif
 
 // Marks functions returning a CoreFoundation object that the caller is responsible for releasing. Blocks are Objective-C objects and functions returning them use CM_RETURNS_RETAINED_BLOCK instead.
@@ -380,11 +392,35 @@ enum
 	#define CM_SWIFT_NONSENDABLE
 #endif // __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
 
+#if __has_attribute(__swift_attr__) && __SWIFT_ATTR_SUPPORTS_SENDING
+	#define CM_SWIFT_SENDING __attribute__((swift_attr("sending")))
+#else
+	#define CM_SWIFT_SENDING
+#endif
+
+#define CM_SWIFT_SENDING_RETAINED_PARAMETER CM_SWIFT_SENDING CM_RETURNS_RETAINED_PARAMETER
+#define CM_SWIFT_SENDING_RELEASED_PARAMETER CM_SWIFT_SENDING CM_RELEASES_ARGUMENT
+#define CM_SWIFT_SENDING_RETAINED_RESULT CM_SWIFT_SENDING CM_RETURNS_RETAINED
+
 // Swift macros not available on Windows builds
 #if TARGET_OS_WINDOWS
 #define CF_SWIFT_UNAVAILABLE(_unused)
 #define CF_REFINED_FOR_SWIFT
 #endif // TARGET_OS_WINDOWS
+
+// CM_SWIFT_INIT_FOR_CF_TYPE creates a Swift init function for CF type that has the signature `init(referencing: Self)`
+// This "trampoline" init is used to provide convenient initializers for the type. This is a workaround for Swift
+// error - convenience initializers are not supported in extensions of CF types.
+// See https://github.com/swiftlang/swift/commit/1593c2aeeb17fda181485bd6dc33d9909c600139
+#if __SWIFT_COMPILER_VERSION
+#define CM_SWIFT_INIT_FOR_CF_TYPE(type, availability) \
+CM_INLINE CM_RETURNS_RETAINED_PARAMETER type##Ref CM_NONNULL _swiftInitFor##type(type##Ref CM_NONNULL object) \
+  CF_SWIFT_NAME(type.init(referencing:)) CF_REFINED_FOR_SWIFT availability ;\
+CM_INLINE CM_RETURNS_RETAINED_PARAMETER type##Ref CM_NONNULL _swiftInitFor##type(type##Ref CM_NONNULL object) \
+{ return (type##Ref)CFRetain(object); }
+#else
+#define CM_SWIFT_INIT_FOR_CF_TYPE(type, availability)
+#endif // __SWIFT__
 
 #pragma pack(pop)
     

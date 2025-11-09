@@ -13,7 +13,7 @@
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
-@class NSViewController;
+@class NSViewController, NSSplitViewItemAccessoryViewController;
 
 typedef NS_ENUM(NSInteger, NSSplitViewItemBehavior) {
     NSSplitViewItemBehaviorDefault,
@@ -135,6 +135,24 @@ API_AVAILABLE(macos(10.10))
 /// For this value to be applicable, the item's view must be associated with its own titlebar section (see `NSTrackingSeparatorToolbarItem` for more info).
 /// The default value is NSTitlebarSeparatorStyleAutomatic. This value is subject to the containing window's preference and can be overridden.
 @property NSTitlebarSeparatorStyle titlebarSeparatorStyle API_AVAILABLE(macos(11.0));
+
+/// When YES, other items such as sidebars or inspectors may appear overlaid on top of this item's `viewController` and this item's `safeAreaInsets` will be adjusted with respect to overlaid content. Defaults to `NO`.
+@property BOOL automaticallyAdjustsSafeAreaInsets API_AVAILABLE(macos(26.0));
+
+/// The following methods allow you to add accessory views to the top/bottom of this splitViewItem. See `NSSplitViewItemAccessoryViewController` for more details.
+@property (copy) NSArray<NSSplitViewItemAccessoryViewController *> *topAlignedAccessoryViewControllers API_AVAILABLE(macos(26.0));
+- (void)addTopAlignedAccessoryViewController:(NSSplitViewItemAccessoryViewController *)childViewController API_AVAILABLE(macos(26.0));
+- (void)insertTopAlignedAccessoryViewController:(NSSplitViewItemAccessoryViewController *)childViewController atIndex:(NSInteger)index API_AVAILABLE(macos(26.0));
+
+/// NOTE: you can use this method, or `-removeFromParentViewController:`, whichever is easier.
+- (void)removeTopAlignedAccessoryViewControllerAtIndex:(NSInteger)index API_AVAILABLE(macos(26.0));
+
+@property (copy) NSArray<NSSplitViewItemAccessoryViewController *> *bottomAlignedAccessoryViewControllers API_AVAILABLE(macos(26.0));
+- (void)addBottomAlignedAccessoryViewController:(NSSplitViewItemAccessoryViewController *)childViewController API_AVAILABLE(macos(26.0));
+- (void)insertBottomAlignedAccessoryViewController:(NSSplitViewItemAccessoryViewController *)childViewController atIndex:(NSInteger)index API_AVAILABLE(macos(26.0));
+
+/// NOTE: you can use this method, or `-removeFromParentViewController:`, whichever is easier.
+- (void)removeBottomAlignedAccessoryViewControllerAtIndex:(NSInteger)index API_AVAILABLE(macos(26.0));
 
 @end
 

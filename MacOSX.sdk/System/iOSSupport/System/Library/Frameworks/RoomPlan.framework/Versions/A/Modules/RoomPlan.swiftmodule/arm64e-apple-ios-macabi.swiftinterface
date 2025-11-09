@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2.15 -module-name RoomPlan
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2.16 -module-name RoomPlan
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import ARKit
 import CoreGraphics
 import CoreVideo
@@ -23,19 +23,31 @@ extension RoomPlan.CapturedRoom {
     public enum Error : Foundation.LocalizedError {
       case attributeCombinationNotSupported
       case nonExistingFile(url: Foundation.URL)
+      #if compiler(>=5.3) && $NonescapableTypes
       public var errorDescription: Swift.String? {
         get
       }
+      #endif
     }
     public var modelFileURLs: [Foundation.URL] {
       get
     }
     public init()
+    #if compiler(>=5.3) && $NonescapableTypes
     public func modelFileURL(for object: RoomPlan.CapturedRoom.Object) throws -> Foundation.URL?
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func modelFileURL(for attributes: [any RoomPlan.CapturedRoomAttribute]) throws -> Foundation.URL?
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func modelFileURL(for category: RoomPlan.CapturedRoom.Object.Category) throws -> Foundation.URL?
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func setModelFileURL(_ url: Foundation.URL?, for attributes: [any RoomPlan.CapturedRoomAttribute]) throws
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func setModelFileURL(_ url: Foundation.URL?, for category: RoomPlan.CapturedRoom.Object.Category) throws
+    #endif
   }
 }
 @available(iOS 17.0, *)
@@ -50,8 +62,10 @@ extension RoomPlan.CapturedRoom.Object.Category {
 public class RoomCaptureSession {
   @available(iOS 16.0, *)
   public init()
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, *)
   @_disfavoredOverload public init(arSession: ARKit.ARSession? = nil)
+  #endif
   public func run(configuration: RoomPlan.RoomCaptureSession.Configuration)
   public func stop()
   @available(iOS 17.0, *)
@@ -67,9 +81,11 @@ public class RoomCaptureSession {
     case deviceTooHot
     case deviceNotSupported
     case internalError
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
     public static func == (a: RoomPlan.RoomCaptureSession.CaptureError, b: RoomPlan.RoomCaptureSession.CaptureError) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -105,7 +121,9 @@ public protocol RoomCaptureSessionDelegate : AnyObject {
   func captureSession(_ session: RoomPlan.RoomCaptureSession, didRemove room: RoomPlan.CapturedRoom)
   func captureSession(_ session: RoomPlan.RoomCaptureSession, didProvide instruction: RoomPlan.RoomCaptureSession.Instruction)
   func captureSession(_ session: RoomPlan.RoomCaptureSession, didStartWith configuration: RoomPlan.RoomCaptureSession.Configuration)
+  #if compiler(>=5.3) && $NonescapableTypes
   func captureSession(_ session: RoomPlan.RoomCaptureSession, didEndWith data: RoomPlan.CapturedRoomData, error: (any Swift.Error)?)
+  #endif
 }
 @available(iOS 16.0, *)
 @available(visionOS, deprecated: 1.0)
@@ -116,7 +134,9 @@ extension RoomPlan.RoomCaptureSessionDelegate {
   public func captureSession(_ session: RoomPlan.RoomCaptureSession, didRemove room: RoomPlan.CapturedRoom)
   public func captureSession(_ session: RoomPlan.RoomCaptureSession, didProvide instruction: RoomPlan.RoomCaptureSession.Instruction)
   public func captureSession(_ session: RoomPlan.RoomCaptureSession, didStartWith configuration: RoomPlan.RoomCaptureSession.Configuration)
+  #if compiler(>=5.3) && $NonescapableTypes
   public func captureSession(_ session: RoomPlan.RoomCaptureSession, didEndWith data: RoomPlan.CapturedRoomData, error: (any Swift.Error)?)
+  #endif
 }
 @available(iOS 16.0, *)
 @available(visionOS, deprecated: 1.0)
@@ -143,9 +163,11 @@ public class RoomBuilder {
     case exceedSceneSizeLimit
     case deviceNotSupported
     case internalError
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
     public static func == (a: RoomPlan.RoomBuilder.BuildError, b: RoomPlan.RoomBuilder.BuildError) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -170,20 +192,30 @@ public struct CapturedRoomData : Swift.Codable, Swift.Sendable {
   @_Concurrency.MainActor @preconcurrency @objc override dynamic public init(frame: CoreFoundation.CGRect)
   @available(iOS 17.0, *)
   @_Concurrency.MainActor @preconcurrency public init(frame: CoreFoundation.CGRect, arSession: ARKit.ARSession)
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
   @objc deinit
 }
 @available(iOS 16.0, *)
 @available(visionOS, deprecated: 1.0)
 public protocol RoomCaptureViewDelegate : Foundation.NSCoding {
+  #if compiler(>=5.3) && $NonescapableTypes
   func captureView(shouldPresent roomDataForProcessing: RoomPlan.CapturedRoomData, error: (any Swift.Error)?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   func captureView(didPresent processedResult: RoomPlan.CapturedRoom, error: (any Swift.Error)?)
+  #endif
 }
 @available(iOS 16.0, *)
 @available(visionOS, deprecated: 1.0)
 extension RoomPlan.RoomCaptureViewDelegate {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func captureView(shouldPresent roomDataForProcessing: RoomPlan.CapturedRoomData, error: (any Swift.Error)?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func captureView(didPresent processedResult: RoomPlan.CapturedRoom, error: (any Swift.Error)?)
+  #endif
 }
 @available(iOS 17.0, *)
 @available(visionOS, deprecated: 1.0)
@@ -198,9 +230,11 @@ public class StructureBuilder {
     case exceedSceneSizeLimit
     case deviceNotSupported
     case internalError
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
     public static func == (a: RoomPlan.StructureBuilder.BuildError, b: RoomPlan.StructureBuilder.BuildError) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -249,7 +283,9 @@ public struct CapturedStructure : Swift.Codable, Swift.Sendable {
   }
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
+  #if compiler(>=5.3) && $NonescapableTypes
   public func export(to url: Foundation.URL, metadataURL: Foundation.URL? = nil, modelProvider: RoomPlan.CapturedStructure.ModelProvider? = nil, exportOptions: RoomPlan.CapturedStructure.USDExportOptions = .mesh) throws
+  #endif
 }
 @available(iOS 16.0, *)
 public struct CapturedRoom : Swift.Codable, Swift.Sendable {
@@ -291,17 +327,21 @@ public struct CapturedRoom : Swift.Codable, Swift.Sendable {
   public func encode(to encoder: any Swift.Encoder) throws
   @available(iOS 16.0, *)
   public func export(to url: Foundation.URL, exportOptions: RoomPlan.CapturedRoom.USDExportOptions = .mesh) throws
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, *)
   @_disfavoredOverload public func export(to url: Foundation.URL, metadataURL: Foundation.URL? = nil, modelProvider: RoomPlan.CapturedRoom.ModelProvider? = nil, exportOptions: RoomPlan.CapturedRoom.USDExportOptions = .mesh) throws
+  #endif
   public enum Error : Foundation.LocalizedError {
     case urlInvalidScheme
     case urlInvalidFilePath
     case urlMissingFileExtension
     case urlInvalidFileExtension
     case deviceNotSupported
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
     public static func == (a: RoomPlan.CapturedRoom.Error, b: RoomPlan.CapturedRoom.Error) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -332,7 +372,9 @@ public struct CapturedRoom : Swift.Codable, Swift.Sendable {
       case kitchen
       case diningRoom
       case unidentified
+      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.String)
+      #endif
       @available(iOS 17.0, *)
       public typealias RawValue = Swift.String
       public var rawValue: Swift.String {
@@ -500,8 +542,10 @@ public struct CapturedRoom : Swift.Codable, Swift.Sendable {
       }
       public init(from decoder: any Swift.Decoder) throws
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 17.0, *)
     public func attribute<T>(of attributeType: T.Type) -> T? where T : RoomPlan.CapturedRoomAttribute
+    #endif
   }
   public struct USDExportOptions : Swift.OptionSet {
     public let rawValue: Swift.Int32
@@ -527,7 +571,9 @@ public enum CapturedElementCategory : Swift.Sendable, Swift.Codable, Swift.Equat
 }
 @available(iOS 17.0, *)
 public protocol CapturedRoomAttribute : Swift.CaseIterable, Swift.RawRepresentable, Swift.Sendable where Self.RawValue == Swift.String {
+  #if compiler(>=5.3) && $NonescapableTypes
   static var parentCategory: RoomPlan.CapturedElementCategory? { get }
+  #endif
   var shortIdentifier: Swift.String { get }
 }
 @available(iOS 17.0, *)
@@ -541,9 +587,11 @@ extension RoomPlan.CapturedRoom {
 }
 @available(iOS 17.0, *)
 public enum ChairType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case dining
   case stool
   case swivel
@@ -551,7 +599,9 @@ public enum ChairType : Swift.String, RoomPlan.CapturedRoomAttribute {
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.ChairType]
   @available(iOS 17.0, *)
@@ -565,16 +615,20 @@ public enum ChairType : Swift.String, RoomPlan.CapturedRoomAttribute {
 }
 @available(iOS 17.0, *)
 public enum ChairLegType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case four
   case star
   case unidentified
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.ChairLegType]
   @available(iOS 17.0, *)
@@ -588,15 +642,19 @@ public enum ChairLegType : Swift.String, RoomPlan.CapturedRoomAttribute {
 }
 @available(iOS 17.0, *)
 public enum ChairArmType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case existing
   case missing
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.ChairArmType]
   @available(iOS 17.0, *)
@@ -610,15 +668,19 @@ public enum ChairArmType : Swift.String, RoomPlan.CapturedRoomAttribute {
 }
 @available(iOS 17.0, *)
 public enum ChairBackType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case existing
   case missing
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.ChairBackType]
   @available(iOS 17.0, *)
@@ -632,9 +694,11 @@ public enum ChairBackType : Swift.String, RoomPlan.CapturedRoomAttribute {
 }
 @available(iOS 17.0, *)
 public enum SofaType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case rectangular
   case lShaped
   case lShapedExtension
@@ -643,7 +707,9 @@ public enum SofaType : Swift.String, RoomPlan.CapturedRoomAttribute {
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.SofaType]
   @available(iOS 17.0, *)
@@ -657,16 +723,20 @@ public enum SofaType : Swift.String, RoomPlan.CapturedRoomAttribute {
 }
 @available(iOS 17.0, *)
 public enum TableType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case coffee
   case dining
   case unidentified
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.TableType]
   @available(iOS 17.0, *)
@@ -680,9 +750,11 @@ public enum TableType : Swift.String, RoomPlan.CapturedRoomAttribute {
 }
 @available(iOS 17.0, *)
 public enum TableShapeType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case rectangular
   case circularElliptic
   case lShaped
@@ -690,7 +762,9 @@ public enum TableShapeType : Swift.String, RoomPlan.CapturedRoomAttribute {
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.TableShapeType]
   @available(iOS 17.0, *)
@@ -704,15 +778,19 @@ public enum TableShapeType : Swift.String, RoomPlan.CapturedRoomAttribute {
 }
 @available(iOS 17.0, *)
 public enum StorageType : Swift.String, RoomPlan.CapturedRoomAttribute {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var parentCategory: RoomPlan.CapturedElementCategory? {
     get
   }
+  #endif
   case cabinet
   case shelf
   public var shortIdentifier: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.String)
+  #endif
   @available(iOS 17.0, *)
   public typealias AllCases = [RoomPlan.StorageType]
   @available(iOS 17.0, *)

@@ -5,6 +5,7 @@ install-name:    '/System/Library/PrivateFrameworks/EAFirmwareUpdater.framework/
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AUSandboxPlatformInit, _AUSandboxPlatformInitWithBundleIdentifier, 
+                       _AUSandboxPlatformInitWithBundleIdentifierHomeDirectory, _AUSandboxPlatformInitWithHomeDirectory, 
                        _generateBase64HashForDataAtLocation, _generateHashForDataAtLocation, 
                        _generateHashForDataAtLocationAsData, _generateSHA256HashForDataAtLocation, 
                        _generateSHA256HashForDataAtLocationAsData ]

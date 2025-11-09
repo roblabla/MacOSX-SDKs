@@ -7,8 +7,9 @@ allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Agora, AudioFlowDelegatePlugin, AudioFlowDelegatePluginTests, 
                        AudioInternalIntentExtension, AudioSuggestionsPlugin, AudioSuggestionsPluginTests, 
-                       AudioUIPlugin, CloudMediaServicesQueueController, IntentsServices, 
-                       MediaPlaybackCore, Search, SearchUI, ShazamUIPlugin, SiriAudioHeavyweightTests, 
+                       AudioUIPlugin, CloudMediaServicesQueueController, IntelligenceFlowRuntime, 
+                       IntelligenceFlowRuntimeTests, IntentsServices, MediaPlaybackCore, 
+                       Search, SearchUI, ShazamUIPlugin, SiriAudioHeavyweightTests, 
                        SiriAudioInternal, SiriAudioInternalTests, SiriAudioSupport, 
                        SiriAudioSupportIntegrationTests, SiriAudioSupportTests, SiriMediaFlowDelegatePlugin, 
                        SiriSuggestionsBaseModel, SiriSuggestionsBaseModelTests, Spotlight, 

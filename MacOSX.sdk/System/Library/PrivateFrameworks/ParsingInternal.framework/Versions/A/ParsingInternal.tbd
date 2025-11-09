@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ParsingInternal.framework/Versions/A/ParsingInternal'
-current-version: 103.2
-compatibility-version: 103.2
+current-version: 112
+compatibility-version: 112
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -1121,6 +1121,7 @@ exports:
                        '_$s7Context15ParsingInternal16ContextfulParserPTl', '_$sSS15ParsingInternalE7parsersAA13StringParsersVvgZ', 
                        '_$sSS15ParsingInternalE7parsersAA13StringParsersVvpZMV', 
                        '_$sSY15ParsingInternals17FixedWidthInteger8RawValueRpzrlE7parsersAA0F20RepresentableParsersVyxGvgZ', 
+                       '_$sSY15ParsingInternals17FixedWidthInteger8RawValueRpzrlE7parsersAA0F20RepresentableParsersVyxGvpZMV', 
                        '_$sSi15ParsingInternal20PlatformWidthIntegerAAMc', '_$sSi15ParsingInternal20PlatformWidthIntegerAAWP', 
                        '_$sSu15ParsingInternal20PlatformWidthIntegerAAMc', '_$sSu15ParsingInternal20PlatformWidthIntegerAAWP', 
                        '_$sSz15ParsingInternalE18throwingOnOverflowxqd___tKcSzRd__lufC', 
@@ -1135,6 +1136,7 @@ exports:
                        '_$ss17FixedWidthIntegerP15ParsingInternalE29subtractingThrowingOnOverflowyxxKF', 
                        '_$ss17FixedWidthIntegerP15ParsingInternalE31formRemainderThrowingOnOverflow10dividingByyx_tKF', 
                        '_$ss17FixedWidthIntegerP15ParsingInternalE7parsersAC0abC7ParsersVyxGvgZ', 
+                       '_$ss17FixedWidthIntegerP15ParsingInternalE7parsersAC0abC7ParsersVyxGvpZMV', 
                        '_$ss4Int8V15ParsingInternal17SingleByteIntegerACMc', '_$ss4Int8V15ParsingInternal17SingleByteIntegerACWP', 
                        '_$ss5Int16V15ParsingInternal16MultiByteIntegerACMc', '_$ss5Int16V15ParsingInternal16MultiByteIntegerACWP', 
                        '_$ss5Int32V15ParsingInternal16MultiByteIntegerACMc', '_$ss5Int32V15ParsingInternal16MultiByteIntegerACWP', 

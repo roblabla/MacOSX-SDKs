@@ -23,7 +23,9 @@ NS_ASSUME_NONNULL_BEGIN
 	@abstract   AVPlayerVideoOutput offers a way to attach to an AVPlayer and receive video frames and video-related data vended through CMTaggedBufferGroups.
 	@discussion AVPlayerVideoOutput can be attached to an AVPlayer using AVPlayer's method addVideoOutput:
 				Note:  An AVPlayerVideoOutput can only be attached to a single player at a time, attempting to attach to multiple player will result in an exception being thrown.
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(14.2), ios(17.2), tvos(17.2), watchos(10.2), visionos(1.1))
 @interface AVPlayerVideoOutput : NSObject
 AV_INIT_UNAVAILABLE
@@ -147,7 +149,7 @@ AV_INIT_UNAVAILABLE
  						- The settings do not honor the requirements list above for outputSettings.
  						- tagCollection does not match with any tag collection in -preferredTagCollections.
  */
-- (void)setOutputSettings:(nullable NSDictionary<NSString *, id > *)outputSettings forTagCollection:(CMTagCollectionRef)tagCollection NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+- (void)setOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings forTagCollection:(CMTagCollectionRef)tagCollection NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 /*!
  	@property		preferredTagCollections
@@ -184,7 +186,9 @@ AV_INIT_UNAVAILABLE
 /*!
 	@class		AVPlayerVideoOutputConfiguration
 	@abstract	An AVPlayerVideoOutputConfiguration carries an identifier for the AVPlayerItem the configuration is associated with as well as presentation settings for that item.
+ 	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(14.2), ios(17.2), tvos(17.2), watchos(10.2), visionos(1.1))
 @interface AVPlayerVideoOutputConfiguration : NSObject
 AV_INIT_UNAVAILABLE

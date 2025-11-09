@@ -25,8 +25,5 @@
 
 #if !0
 #import <ShazamKit/SHMediaLibrary.h>
-#endif
-
-#if __has_include(<UniformTypeIdentifiers/UniformTypeIdentifiers.h>)
 #import <ShazamKit/UTType+SHShazamAdditions.h>
 #endif

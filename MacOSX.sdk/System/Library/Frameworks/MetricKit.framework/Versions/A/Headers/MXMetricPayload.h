@@ -22,6 +22,7 @@
 #import <MetricKit/MXDisplayMetric.h>
 #import <MetricKit/MXAnimationMetric.h>
 #import <MetricKit/MXAppExitMetric.h>
+#import <MetricKit/MXDiskSpaceUsageMetric.h>
 #import <MetricKit/MXSignpostMetric.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -34,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion    An MXMetricPayload contains data that covers a 24 hour period of application usage. The properties timeStampBegin and timeStampEnd should be used to determine which time range the payload covers.
  @discussion    It is possible for an MXMetricPayload to cover regions of time where an application was updated, and thus had multiple different app version strings. The property latestApplicationVersion will always reflect the latest appVersion at the time the metric payload was created. Use includesMultipleApplicationVersions to determine if an application changed versions during the time range the payload covers.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
 @interface MXMetricPayload : NSObject <NSSecureCoding>
 
 /*!
@@ -135,14 +136,20 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @property      animationMetrics
  @abstract      An object containing animation metrics for this application.
  */
-@property (readonly, strong, nullable) MXAnimationMetric *animationMetrics API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (readonly, strong, nullable) MXAnimationMetric *animationMetrics API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @property      applicationExitMetrics
  @abstract      An object containing exit metrics for this application.
  */
-@property (readonly, strong, nullable) MXAppExitMetric *applicationExitMetrics API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (readonly, strong, nullable) MXAppExitMetric *applicationExitMetrics API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos);
 
+/*!
+ @property      diskSpaceUsageMetrics
+ @abstract      An object containing disk space usage metrics for this application.
+ */
+@property (readonly, strong, nullable) MXDiskSpaceUsageMetric *diskSpaceUsageMetrics
+API_AVAILABLE(ios(26.0), macos(26.0)) API_UNAVAILABLE(tvos, watchos);
 /*!
  @property      signpostMetrics
  @abstract      An array containing signpost metrics for this application.
@@ -167,14 +174,14 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @abstract      Convenience method to return a NSDictionary representation of this payload.
  @result        An NSDictionary object containing the dictionary representation
  */
-- (NSDictionary *)DictionaryRepresentation API_DEPRECATED_WITH_REPLACEMENT("Use dictionaryRepresentation", ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos, tvos, watchos);
+- (NSDictionary *)DictionaryRepresentation API_DEPRECATED_WITH_REPLACEMENT("Use dictionaryRepresentation", ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(macos, tvos, watchos) NS_REFINED_FOR_SWIFT;
 
 /*!
 @method        dictionaryRepresentation
 @abstract      Convenience method to return a NSDictionary representation of this payload.
 @result        An NSDictionary object containing the dictionary representation
 */
-- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos) NS_REFINED_FOR_SWIFT;
+- (NSDictionary *)dictionaryRepresentation API_AVAILABLE(ios(13.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos);
 @end
 
 NS_ASSUME_NONNULL_END

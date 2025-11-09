@@ -26,6 +26,7 @@ extern NSString * const PHLivePhotoInfoCancelledKey; // key : NSNumber containin
 
 
 OS_EXPORT API_AVAILABLE(macos(10.12))
+NS_SWIFT_SENDABLE
 @interface PHLivePhoto : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;

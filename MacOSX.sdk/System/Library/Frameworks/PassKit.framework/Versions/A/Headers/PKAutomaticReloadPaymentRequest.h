@@ -8,6 +8,8 @@
 #ifndef PKAutomaticReloadPaymentRequest_h
 #define PKAutomaticReloadPaymentRequest_h
 
+#import <Foundation/Foundation.h>
+
 @class PKAutomaticReloadPaymentSummaryItem;
 
 NS_ASSUME_NONNULL_BEGIN

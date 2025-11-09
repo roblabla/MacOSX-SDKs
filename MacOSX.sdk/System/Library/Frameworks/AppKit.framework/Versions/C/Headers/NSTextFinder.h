@@ -62,7 +62,7 @@ API_AVAILABLE(macos(10.7))
 - (void)performAction:(NSTextFinderAction)op;
 - (BOOL)validateAction:(NSTextFinderAction)op;
 
-/* This property must be set to support the find bar. When the find bar is requested to be shown, NSTextFinder will call -showFindBarView: on the container, passing the view for the find bar, which it should display somewhere that is easily associated with the content being searched. NSScrollView already implements NSTextFinderBarContainer and is an excellent place to display the find bar, in most circumstances. The container may freely modify the find bar view's width and origin, but not its height. If this property is not set, then the find bar cannot be shown. */
+/* This property must be set to support the find bar. When an NSTextFinder instance is requested to display the find bar, it will create a view for the find bar and assign it to the findBarView property of its findBarContainer. The container then owns that view and should make it visible when the container’s findBarVisible property is set to true. The container should implement the findBarViewDidChangeHeight method so it can reposition the find bar when its height changes, usually in response to user action. NSScrollView already implements NSTextFinderBarContainer and is an excellent place to display the find bar, in most circumstances. The container may freely modify the find bar view's width and origin, but not its height. If this property is not set, then the find bar cannot be shown. */
 @property (nullable, assign) IBOutlet id <NSTextFinderBarContainer> findBarContainer;
 
 

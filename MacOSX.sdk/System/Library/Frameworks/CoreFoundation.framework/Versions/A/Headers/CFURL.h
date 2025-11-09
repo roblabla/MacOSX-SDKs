@@ -1210,6 +1210,14 @@ CF_EXPORT
 const CFStringRef kCFURLUbiquitousItemDownloadingStatusCurrent API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0));
     /* there is a local version of this item and it is the most up-to-date version known to this device. */
 
+CF_EXPORT
+const CFStringRef kCFURLUbiquitousItemSupportedSyncControlsKey API_AVAILABLE(ios(26.0), macos(26.0), watchos(26.0), tvos(26.0));
+    /* returns the read-only value of the NSFileManagerSupportedSyncControls options. */
+
+CF_EXPORT
+const CFStringRef kCFURLUbiquitousItemIsSyncPausedKey API_AVAILABLE(ios(26.0), macos(26.0), watchos(26.0), tvos(26.0));
+    /* returns true if the sync of the item has been paused. */
+
 typedef CF_OPTIONS(CFOptionFlags, CFURLBookmarkCreationOptions) {
     kCFURLBookmarkCreationMinimalBookmarkMask = ( 1UL << 9 ), // creates bookmark data with "less" information, which may be smaller but still be able to resolve in certain ways
     kCFURLBookmarkCreationSuitableForBookmarkFile = ( 1UL << 10 ), // include the properties required by CFURLWriteBookmarkDataToFile() in the bookmark data created

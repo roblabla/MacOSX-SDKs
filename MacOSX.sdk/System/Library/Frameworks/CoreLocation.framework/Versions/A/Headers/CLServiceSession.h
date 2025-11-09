@@ -10,22 +10,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos)
+API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos)
 typedef NS_ENUM(NSInteger, CLServiceSessionAuthorizationRequirement) {
 	CLServiceSessionAuthorizationRequirementNone = 0,
 	CLServiceSessionAuthorizationRequirementWhenInUse,
 	CLServiceSessionAuthorizationRequirementAlways API_UNAVAILABLE(tvos),
 } NS_REFINED_FOR_SWIFT;
 
-API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos) NS_REFINED_FOR_SWIFT
+API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos) NS_REFINED_FOR_SWIFT
 @interface CLServiceSessionDiagnostic : NSObject
 /*
  *  authorizationDenied
@@ -108,11 +100,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
 @end
 
 CL_EXTERN
-API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos) NS_REFINED_FOR_SWIFT
+API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos) NS_REFINED_FOR_SWIFT
 @interface CLServiceSession : NSObject
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
@@ -151,11 +139,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
  *     after background termination.
  *
  */
-+ (CLServiceSession *)sessionRequiringAuthorization:(CLServiceSessionAuthorizationRequirement)authorizationRequirement API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos);
++ (CLServiceSession *)sessionRequiringAuthorization:(CLServiceSessionAuthorizationRequirement)authorizationRequirement API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
 
 /* sessionRequiringAuthorization:queue:handler:
  *  Discussion:
@@ -170,11 +154,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
  */
 + (CLServiceSession *)sessionRequiringAuthorization:(CLServiceSessionAuthorizationRequirement)authorizationRequirement
 											  queue:(dispatch_queue_t)queue
-											handler:(void(^)(CLServiceSessionDiagnostic *diagnostic))handler API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos);
+											handler:(void(^)(CLServiceSessionDiagnostic *diagnostic))handler API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
 
 
 /*
@@ -197,11 +177,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
  *
  */
 + (CLServiceSession *)sessionRequiringAuthorization:(CLServiceSessionAuthorizationRequirement)authorizationRequirement
-							 fullAccuracyPurposeKey:(nonnull NSString *)purposeKey API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos);
+							 fullAccuracyPurposeKey:(nonnull NSString *)purposeKey API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
 
 
 
@@ -218,11 +194,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
 + (CLServiceSession *)sessionRequiringAuthorization:(CLServiceSessionAuthorizationRequirement)authorizationRequirement
 							 fullAccuracyPurposeKey:(nonnull NSString *)purposeKey
 											  queue:(dispatch_queue_t)queue
-											handler:(void(^)(CLServiceSessionDiagnostic *diagnostic))handler API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos);
+											handler:(void(^)(CLServiceSessionDiagnostic *diagnostic))handler API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
 
 
 /*
@@ -232,11 +204,7 @@ API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
  *      Ends the session immediately. Once the session is
  *      invalidated it cannot become active again.
  */
-- (void)invalidate API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(2.0)
-#endif
-) API_UNAVAILABLE(macos);
+- (void)invalidate API_AVAILABLE(ios(18.0), watchos(11.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(macos);
 
 @end
 

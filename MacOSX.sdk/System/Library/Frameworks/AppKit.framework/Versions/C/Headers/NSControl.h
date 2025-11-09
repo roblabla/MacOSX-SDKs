@@ -53,7 +53,6 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 - (void)takeObjectValueFrom:(nullable id)sender;
 - (void)takeIntegerValueFrom:(nullable id)sender API_AVAILABLE(macos(10.5));
 
-- (void)mouseDown:(NSEvent *)event;
 - (void)performClick:(nullable id)sender;
 
 /* The following methods apply only to controls with apparent textual content of some sort (buttons with labels, textfields, etc.).
@@ -149,6 +148,14 @@ APPKIT_EXTERN NSNotificationName NSControlTextDidChangeNotification;		//	@"NSFie
 - (void)controlTextDidChange:(NSNotification *)obj API_DEPRECATED("This is now an optional method of the NSControlTextEditingDelegate protocol.", macos(10.0, 11.0));
 @end
 #endif
+
+typedef NS_ENUM(NSInteger, NSControlBorderShape) {
+    /// The control will resolve this to an appropriate shape for the given control size and context
+    NSControlBorderShapeAutomatic,
+    NSControlBorderShapeCapsule,
+    NSControlBorderShapeRoundedRectangle,
+    NSControlBorderShapeCircle
+} API_AVAILABLE(macos(26.0)) NS_SWIFT_NAME(NSControl.BorderShape);
 
 API_UNAVAILABLE_END
 NS_HEADER_AUDIT_END(nullability, sendability)

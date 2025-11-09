@@ -74,11 +74,7 @@ typedef void (^CMDeviceMotionHandler)(CMDeviceMotion * __nullable motion, NSErro
  *  Discussion:
  *    Typedef of block to be invoked when magnetometer data is available.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 typedef void (^CMMagnetometerHandler)(CMMagnetometerData * __nullable magnetometerData, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos, visionos);
-#else
-typedef void (^CMMagnetometerHandler)(CMMagnetometerData * __nullable magnetometerData, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  CMMotionManager
@@ -241,12 +237,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *    timestamps on the delivered CMMagnetometerData instances to determine the
  *    true update interval.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @property(assign, nonatomic) NSTimeInterval magnetometerUpdateInterval COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, visionos);
-#else
-@property(assign, nonatomic) NSTimeInterval magnetometerUpdateInterval COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
-
 
 /*
  *  magnetometerAvailable
@@ -254,11 +245,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *  Discussion:
  *    Determines whether magetometer is available.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @property(readonly, nonatomic, getter=isMagnetometerAvailable) BOOL magnetometerAvailable COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, visionos);
-#else
-@property(readonly, nonatomic, getter=isMagnetometerAvailable) BOOL magnetometerAvailable COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  magnetometerActive
@@ -266,11 +253,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *  Discussion:
  *    Determines whether the CMMotionManager is currently providing magnetometer updates.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @property(readonly, nonatomic, getter=isMagnetometerActive) BOOL magnetometerActive COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, visionos);
-#else
-@property(readonly, nonatomic, getter=isMagnetometerActive) BOOL magnetometerActive COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  magnetometerData
@@ -278,11 +261,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *  Discussion:
  *    Returns the latest sample of magnetometer data, or nil if none is available.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @property(readonly, nullable) CMMagnetometerData *magnetometerData COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, visionos);
-#else
-@property(readonly, nullable) CMMagnetometerData *magnetometerData COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  startMagnetometerUpdates
@@ -291,11 +270,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *    Starts magnetometer updates with no handler. To receive the latest magnetometer data
  *    when desired, examine the magnetometerData property.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 - (void)startMagnetometerUpdates COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, visionos);
-#else
-- (void)startMagnetometerUpdates COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  startMagnetometerUpdatesToQueue:withHandler:
@@ -303,11 +278,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *  Discussion:
  *    Starts magnetometer updates, providing data to the given handler through the given queue.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 - (void)startMagnetometerUpdatesToQueue:(NSOperationQueue *)queue withHandler:(CMMagnetometerHandler)handler COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, visionos);
-#else
-- (void)startMagnetometerUpdatesToQueue:(NSOperationQueue *)queue withHandler:(CMMagnetometerHandler)handler COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  stopMagnetometerUpdates
@@ -315,12 +286,7 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(macos)
  *  Discussion:
  *    Stops magnetometer updates.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 - (void)stopMagnetometerUpdates COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, visionos);
-#else
-- (void)stopMagnetometerUpdates COREMOTION_EXPORT API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos);
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
-
 
 /*
  *  deviceMotionUpdateInterval

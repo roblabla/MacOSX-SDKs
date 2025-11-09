@@ -60,7 +60,9 @@
 #define kLAErrorDomain        "com.apple.LocalAuthentication"
 
 // Companion types
+#define kLACompanionTypeNone            0
 #define kLACompanionTypeWatch           1 << 0
 #define kLACompanionTypeMac             1 << 1
+#define kLACompanionTypeVision          1 << 2
 
 #endif

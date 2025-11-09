@@ -20,10 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    A circular geographic area.
  */
 CL_EXTERN
-API_DEPRECATED_WITH_REPLACEMENT("Use CLCircularGeographicCondition", macos(10.10, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED))
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-API_UNAVAILABLE(visionos)
-#endif
+API_DEPRECATED_WITH_REPLACEMENT("Use CLCircularGeographicCondition", macos(10.10, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos)
 @interface CLCircularRegion : CLRegion
 
 /*

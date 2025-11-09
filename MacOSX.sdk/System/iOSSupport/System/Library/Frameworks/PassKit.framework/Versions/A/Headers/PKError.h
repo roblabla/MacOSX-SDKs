@@ -67,7 +67,7 @@ extern NSString * const PKAddSecureElementPassErrorDomain API_AVAILABLE(ios(13.4
 
 typedef NS_ERROR_ENUM(PKAddSecureElementPassErrorDomain, PKAddSecureElementPassErrorCode) {
     PKAddSecureElementPassGenericError API_AVAILABLE(ios(18.0)) = 0,
-    PKAddSecureElementPassUnknownError API_DEPRECATED("Use PKAddSecureElementPassGeneralError instead.", ios(13.4, 18.0)) = PKAddSecureElementPassGenericError,
+    PKAddSecureElementPassUnknownError API_DEPRECATED("Use PKAddSecureElementPassGenericError instead.", ios(13.4, 18.0)) = PKAddSecureElementPassGenericError,
     PKAddSecureElementPassUserCanceledError,
     PKAddSecureElementPassUnavailableError,
     PKAddSecureElementPassInvalidConfigurationError,

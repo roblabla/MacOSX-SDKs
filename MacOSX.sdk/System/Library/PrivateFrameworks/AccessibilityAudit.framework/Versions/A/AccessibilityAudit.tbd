@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityAudit.framework/Versions/A/AccessibilityAudit'
+current-version: 186
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AXAuditAddInformationToCrashTracerLog, _AXAuditAttributeWithPrefixLocString, 
@@ -24,30 +25,31 @@ exports:
                        __AXHumanReadableClassNameAttribute, __AXHumanReadableDescriptionAttribute, 
                        __AXHumanReadableRoleDescriptionAttribute, __AXIOSMACContainerTypeAttribute, 
                        __AXIOSMACHintAttribute, __AXIOSMACLabelAttribute, __AXIOSMACTraitsAttribute, 
-                       __AXIOSMACValueAttribute, __AXSiblingElementsAttribute, _kAXAuditInspectorMoveAllowNonAXKey, 
-                       _kAXAuditInspectorMoveDirectionKey, _kAXAuditInspectorMoveIncludeContainersKey, 
-                       _kAXAuditNotificationDictKeyHint, _kAXAuditNotificationDictKeyIdentifier, 
-                       _kAXAuditNotificationDictKeyLabel, _kAXAuditNotificationDictKeyNotification, 
-                       _kAXAuditNotificationDictKeyRole, _kAXAuditNotificationDictKeyTitle, 
-                       _kAXAuditNotificationDictKeyTraits, _kAXAuditNotificationDictKeyValue, 
-                       _kXDMScreenshotBorderFrame, _kXDMScreenshotDisplayBounds, 
-                       _kXDMScreenshotImageData, _kXDMScreenshotImageIndex, _kXDMScreenshotResolutionMultiplier, 
-                       _kXDMScreenshotRotation, _kXDMScreenshotShouldFlipOutline, 
-                       _totalFrameForAllWindowsOfAppElement ]
+                       __AXIOSMACValueAttribute, __AXSiblingElementsAttribute, _isAppleInternalBuild, 
+                       _kAXAuditInspectorMoveAllowNonAXKey, _kAXAuditInspectorMoveDirectionKey, 
+                       _kAXAuditInspectorMoveIncludeContainersKey, _kAXAuditNotificationDictKeyHint, 
+                       _kAXAuditNotificationDictKeyIdentifier, _kAXAuditNotificationDictKeyLabel, 
+                       _kAXAuditNotificationDictKeyNotification, _kAXAuditNotificationDictKeyRole, 
+                       _kAXAuditNotificationDictKeyTitle, _kAXAuditNotificationDictKeyTraits, 
+                       _kAXAuditNotificationDictKeyValue, _kXDMScreenshotBorderFrame, 
+                       _kXDMScreenshotDisplayBounds, _kXDMScreenshotImageData, _kXDMScreenshotImageIndex, 
+                       _kXDMScreenshotResolutionMultiplier, _kXDMScreenshotRotation, 
+                       _kXDMScreenshotShouldFlipOutline, _totalFrameForAllWindowsOfAppElement ]
     objc-classes:    [ AXAuditApplication, AXAuditAssetManager, AXAuditAutomationSupport, 
                        AXAuditCaseResult, AXAuditCategory, AXAuditCategoryResult, 
                        AXAuditContrastDetectionManager, AXAuditContrastInput, AXAuditContrastResult, 
                        AXAuditDeduplicator, AXAuditDeduplicatorHeuristics, AXAuditDeduplicatorModels, 
                        AXAuditDetectionResult, AXAuditDeviceSetting, AXAuditDeviceSettingsManager, 
-                       AXAuditDocumentationManager, AXAuditElement, AXAuditElementAttribute, 
-                       AXAuditImageDetectionManager, AXAuditInspectorFocus, AXAuditInspectorSection, 
-                       AXAuditIssue, AXAuditIssueDescriptionManager, AXAuditNode, 
-                       AXAuditObjectTransportInfo, AXAuditObjectTransportInfoMasquerade, 
-                       AXAuditObjectTransportInfoPropertyBased, AXAuditObjectTransportManager, 
-                       AXAuditObjectTransportPropertyEntry, AXAuditPSN, AXAuditPlugin, 
-                       AXAuditPluginManager, AXAuditPoint, AXAuditPreferenceController, 
-                       AXAuditRange, AXAuditRect, AXAuditReportGenerator, AXAuditResult, 
-                       AXAuditScreenshotManager, AXAuditService, AXAuditSize, AXAuditTextMarker, 
-                       AXAuditTextMarkerRange, AXAuditTheme, AXAuditThrottler, AXAuditTimedResult, 
-                       AXAuditer, XRCInspectorProperty ]
+                       AXAuditDevicesAppRemoteServer, AXAuditDocumentationManager, 
+                       AXAuditElement, AXAuditElementAttribute, AXAuditImageDetectionManager, 
+                       AXAuditInspectorFocus, AXAuditInspectorSection, AXAuditIssue, 
+                       AXAuditIssueDescriptionManager, AXAuditNode, AXAuditObjectTransportInfo, 
+                       AXAuditObjectTransportInfoMasquerade, AXAuditObjectTransportInfoPropertyBased, 
+                       AXAuditObjectTransportManager, AXAuditObjectTransportPropertyEntry, 
+                       AXAuditPSN, AXAuditPlugin, AXAuditPluginManager, AXAuditPoint, 
+                       AXAuditPreferenceController, AXAuditRange, AXAuditRect, AXAuditRemoteDevice, 
+                       AXAuditReportGenerator, AXAuditResult, AXAuditScreenshotManager, 
+                       AXAuditService, AXAuditSize, AXAuditTextMarker, AXAuditTextMarkerRange, 
+                       AXAuditTheme, AXAuditThrottler, AXAuditTimedResult, AXAuditer, 
+                       XRCInspectorProperty ]
 ...

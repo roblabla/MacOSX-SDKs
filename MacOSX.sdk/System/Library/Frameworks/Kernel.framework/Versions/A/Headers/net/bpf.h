@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -79,12 +79,12 @@
 
 #include <stdint.h>
 
+#include <net/if.h>
 #include <sys/param.h>
 #include <sys/appleapiopts.h>
 #include <sys/types.h>
 #include <sys/time.h>
 #include <sys/cdefs.h>
-
 
 #include <sys/kernel_types.h>
 
@@ -135,7 +135,6 @@ struct bpf_program {
 	struct bpf_insn *bf_insns;
 };
 
-
 /*
  * Struct returned by BIOCGSTATS.
  */
@@ -159,7 +158,6 @@ struct bpf_version {
 	u_short bv_major;
 	u_short bv_minor;
 };
-
 
 #if defined(__LP64__)
 #include <sys/_types/_timeval32.h>
@@ -551,7 +549,6 @@ struct bpf_hdr {
 #define DLT_USER13              160
 #define DLT_USER14              161
 #define DLT_USER15              162
-
 
 /*
  * For future use with 802.11 captures - defined by AbsoluteValue
@@ -1237,7 +1234,6 @@ struct bpf_dltlist {
 #pragma pack()
 
 
-
 #ifndef BPF_TAP_MODE_T
 #define BPF_TAP_MODE_T
 /*!
@@ -1356,35 +1352,6 @@ extern void bpf_tap_in(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
 extern void bpf_tap_out(ifnet_t interface, u_int32_t dlt, mbuf_t packet,
     void *__sized_by(header_len) header, size_t header_len);
 
-#if SKYWALK
-/*!
- *       @function bpf_tap_packet_in
- *       @discussion Call this function when your interface receives a
- *               packet. This function will check if any bpf devices need a
- *               a copy of the packet.
- *       @param interface The interface the packet was received on.
- *       @param dlt The data link type of the packet.
- *       @param packet The packet received.
- *       @param header An optional pointer to a header that will be prepended.
- *       @param header_len If the header was specified, the length of the header.
- */
-extern void bpf_tap_packet_in(ifnet_t interface, u_int32_t dlt,
-    kern_packet_t packet, void *__sized_by(header_len) header, size_t header_len);
 
-/*!
- *       @function bpf_tap_packet_out
- *       @discussion Call this function when your interface transmits a
- *               packet. This function will check if any bpf devices need a
- *               a copy of the packet.
- *       @param interface The interface the packet was or will be transmitted on.
- *       @param dlt The data link type of the packet.
- *       @param packet The packet received.
- *       @param header An optional pointer to a header that will be prepended.
- *       @param header_len If the header was specified, the length of the header.
- */
-extern void bpf_tap_packet_out(ifnet_t interface, u_int32_t dlt,
-    kern_packet_t packet, void *__sized_by(header_len) header, size_t header_len);
-
-#endif /* SKYWALK */
 
 #endif /* _NET_BPF_H_ */

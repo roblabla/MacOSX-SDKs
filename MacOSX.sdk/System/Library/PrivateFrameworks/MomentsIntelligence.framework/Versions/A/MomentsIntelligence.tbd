@@ -2,9 +2,10 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MomentsIntelligence.framework/Versions/A/MomentsIntelligence'
-current-version: 206.0.7
+current-version: 296
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    objc-classes:    [ MOMomentsIntelligenceServiceManager ]
+    symbols:         [ _MOErrorDomain ]
+    objc-classes:    [ MOConnection, MOConnectionManager, MOMomentsIntelligenceServiceManager ]
 ...

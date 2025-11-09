@@ -51,10 +51,11 @@ NS_ASSUME_NONNULL_END
 
 @interface GKLeaderboardSet (UI)
 
-// Asynchronously load the image. Error will be nil on success.
 #if TARGET_OS_IPHONE
+/// Asynchronously load the image. Error will be nil on success.
 - (void)loadImageWithCompletionHandler:(void(^__nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #else
+/// Asynchronously load the image. Error will be nil on success.
 - (void)loadImageWithCompletionHandler:(void(^__nullable)(NSImage * __nullable image, NSError * __nullable error))completionHandler API_AVAILABLE(ios(7.0), macos(10.10), visionos(1.0)) API_UNAVAILABLE(tvos, watchos);
 #endif
 

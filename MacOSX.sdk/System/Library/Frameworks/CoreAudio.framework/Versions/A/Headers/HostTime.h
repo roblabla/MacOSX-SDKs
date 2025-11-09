@@ -50,7 +50,7 @@ extern "C"
     @result         A UInt64 containing the current host time.
 */
 extern UInt64
-AudioGetCurrentHostTime(void)                                                                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioGetCurrentHostTime(void) CA_REALTIME_API                                                       __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioGetHostClockFrequency
@@ -58,7 +58,7 @@ AudioGetCurrentHostTime(void)                                                   
     @result         A Float64 containing the number of ticks per second in the host time base.
 */
 extern Float64
-AudioGetHostClockFrequency(void)                                                                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioGetHostClockFrequency(void) CA_REALTIME_API                                                    __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioGetHostClockMinimumTimeDelta
@@ -68,7 +68,7 @@ AudioGetHostClockFrequency(void)                                                
                     ever differ.
 */
 extern UInt32
-AudioGetHostClockMinimumTimeDelta(void)                                                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioGetHostClockMinimumTimeDelta(void) CA_REALTIME_API                                             __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioConvertHostTimeToNanos
@@ -78,7 +78,7 @@ AudioGetHostClockMinimumTimeDelta(void)                                         
     @result         A UInt64 containining the converted host time.
 */
 extern UInt64
-AudioConvertHostTimeToNanos(UInt64 inHostTime)                                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioConvertHostTimeToNanos(UInt64 inHostTime) CA_REALTIME_API                                      __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 /*!
     @function       AudioConvertNanosToHostTime
@@ -88,7 +88,7 @@ AudioConvertHostTimeToNanos(UInt64 inHostTime)                                  
     @result         A UInt64 containining the converted nanosecond time.
 */
 extern UInt64
-AudioConvertNanosToHostTime(UInt64 inNanos)                                                         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
+AudioConvertNanosToHostTime(UInt64 inNanos) CA_REALTIME_API                                         __OSX_AVAILABLE_STARTING(__MAC_10_0, __IPHONE_2_0);
 
 //==================================================================================================
 

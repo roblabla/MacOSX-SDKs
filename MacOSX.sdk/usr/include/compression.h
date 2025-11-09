@@ -50,7 +50,7 @@ extern "C" {
  you will still want to use those algorithms in the situations described.
 
  Brotli is a widely adopted content-encoding-method for the web. Thus, Brotli
- is included in libcompression escpecially to provide decoding capabilities.
+ is included in libcompression especially to provide decoding capabilities.
  In many other use-cases, one of the above mentioned algorithms is probably a
  better choice.
 

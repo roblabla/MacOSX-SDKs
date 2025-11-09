@@ -12,12 +12,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_9, 4_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2), watchos(1.0))
 @interface MKPointAnnotation : MKShape
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
-- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15)) API_UNAVAILABLE(watchos);
-- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(nullable NSString *)title subtitle:(nullable NSString *)subtitle NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15)) API_UNAVAILABLE(watchos);
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15), watchos(6.0));
+- (instancetype)initWithCoordinate:(CLLocationCoordinate2D)coordinate title:(nullable NSString *)title subtitle:(nullable NSString *)subtitle API_AVAILABLE(ios(13.0), tvos(13.0), macos(10.15), watchos(6.0));
 
 @property (nonatomic, assign) CLLocationCoordinate2D coordinate;
 

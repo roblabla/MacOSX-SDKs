@@ -17,8 +17,8 @@ CK_SUBCLASSING_DEPRECATED // should not be subclassed, or Sendable may no longer
 // NS_SWIFT_SENDABLE on macos(14.0), ios(17.0), tvos(17.0), watchos(10.0)
 @interface CKShareMetadata : NSObject <NSCopying, NSSecureCoding>
 
-- (instancetype)init CK_UNAVAILABLE("Obtain `CKShareMetadata` from `CKFetchShareMetadataOperation` or platform-specific scene / app delegate callbacks.");
-+ (instancetype)new CK_UNAVAILABLE("Obtain `CKShareMetadata` from `CKFetchShareMetadataOperation` or platform-specific scene / app delegate callbacks.");
+- (instancetype)init CK_UNAVAILABLE("Obtain `CKShareMetadata` from ``CKFetchShareMetadataOperation`` or platform-specific scene / app delegate callbacks.");
++ (instancetype)new CK_UNAVAILABLE("Obtain `CKShareMetadata` from ``CKFetchShareMetadataOperation`` or platform-specific scene / app delegate callbacks.");
 
 @property (readonly, copy) NSString *containerIdentifier;
 @property (readonly, copy) CKShare *share;
@@ -34,7 +34,7 @@ CK_SUBCLASSING_DEPRECATED // should not be subclassed, or Sendable may no longer
 /*! This is only present if the share metadata was returned from a CKFetchShareMetadataOperation with shouldFetchRootRecord set to YES */  
 @property (nullable, readonly, copy) CKRecord *rootRecord;
 
-@property (readonly, assign) CKShareParticipantType participantType API_DEPRECATED_WITH_REPLACEMENT("participantRole", macos(10.12, 10.14), ios(10.0, 12.0), tvos(10.0, 12.0), watchos(3.0, 5.0));
+@property (readonly, assign) CKShareParticipantType participantType API_OBSOLETED_WITH_REPLACEMENT("role", macos(10.12, 10.14, 16.0), ios(10.0, 12.0, 19.0), tvos(10.0, 12.0, 19.0), watchos(3.0, 5.0, 12.0));
 @property (readonly, copy) CKRecordID *rootRecordID API_DEPRECATED_WITH_REPLACEMENT("hierarchicalRootRecordID", macos(10.12, 13.0), ios(10.0, 16.0), tvos(10.0, 16.0), watchos(3.0, 9.0));
 
 @end

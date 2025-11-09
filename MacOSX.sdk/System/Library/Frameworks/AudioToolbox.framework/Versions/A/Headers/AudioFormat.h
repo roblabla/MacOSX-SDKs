@@ -249,7 +249,7 @@ typedef struct ExtendedAudioFormatInfo ExtendedAudioFormatInfo;
 					The specifier is an AudioFormatInfo struct. At a minimum formatID member of the ASBD struct must filled in. Other fields
 					may be filled in. If there is no magic cookie, then the number of channels and sample rate should be filled in. 
 	@constant	kAudioFormatProperty_FirstPlayableFormatFromList
-					The specifier is a list of 1 or more AudioFormatListItem. Generally it is the list of these items returned from kAudioFormatProperty_FormatList. The property value retrieved is an UInt32 that specifies an index into that list. The list that the caller provides is generally sorted with the first item as the best format (most number of channels, highest sample rate), and the returned index represents the first item in that list that can be played by the system. 
+					The specifier is a list of 1 or more AudioFormatListItem. Generally it is the list of these items returned from kAudioFormatProperty_FormatList. The property value retrieved is an UInt32 that specifies an index into that list. The list that the caller provides is generally sorted with the first item as the best format (most number of channels, highest sample rate), and the returned index represents the first item in that list that can be played by the system.
 					Thus, the property is typically used to determine the best playable format for a given (layered) audio stream
 	@constant   kAudioFormatProperty_ValidateChannelLayout
 					The specifier is an AudioChannelLayout. The property value and size are not used and must be set to NULL.

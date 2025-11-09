@@ -3,14 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreMediaStream.framework/Versions/A/CoreMediaStream'
-current-version: 760.6.150
+current-version: 801.43.240
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CreateDirectoryAtPathIfNonNil, _MPSStateRequestReadFrom, 
                        _MPSStateResponseReadFrom, _MSASInitialize, _MSASPlatform, 
-                       _MSASPlatformIsDebugLoggingEnabled, _MSCFCopyLocalizedString, 
-                       _MSCFCreateLocalizedFormat, _MSCoreMediaStreamInitialize, 
+                       _MSASPlatformIsDebugLoggingEnabled, _MSASPlatformIsInitialized, 
+                       _MSCFCopyLocalizedString, _MSCFCreateLocalizedFormat, _MSCoreMediaStreamInitialize, 
                        _MSDSPCSendDeletionRequestAsync, _MSLog, _MSLogFile, _MSLogSqliteError, 
                        _MSMMCSHashForData, _MSMMCSHashForFD, _MSMMCSHashForFileAtPath, 
                        _MSMediaStreamDir, _MSObjectsAreEquivalent, _MSPCUCreateBase64StringFromData, 
@@ -47,11 +47,11 @@ exports:
                        __MSSPCForcedProtocolVersionString, _createSHA1StringOfUDID, 
                        _kMMCSKitErrorDomain, _kMSASAccessControlGUIDKey, _kMSASAccessControlKey, 
                        _kMSASAlbumGUIDKey, _kMSASAlbumKey, _kMSASAlbumMetadataAllowMultipleContributorsKey, 
-                       _kMSASAlbumMetadataCreationDateKey, _kMSASAlbumMetadataInviterAddressKey, 
-                       _kMSASAlbumMetadataIsPublicKey, _kMSASAlbumMetadataNameKey, 
-                       _kMSASAlbumMetadataPhoneTokenKey, _kMSASAlbumStateKey, _kMSASAlbumsKey, 
-                       _kMSASAssetCollectionGUIDKey, _kMSASAssetCollectionGUIDsKey, 
-                       _kMSASAssetCollectionKey, _kMSASAssetCollectionMediaAssetTypeUnknown, 
+                       _kMSASAlbumMetadataCreationDateKey, _kMSASAlbumMetadataCreatorBundleIDKey, 
+                       _kMSASAlbumMetadataInviterAddressKey, _kMSASAlbumMetadataIsPublicKey, 
+                       _kMSASAlbumMetadataNameKey, _kMSASAlbumMetadataPhoneTokenKey, 
+                       _kMSASAlbumStateKey, _kMSASAlbumsKey, _kMSASAssetCollectionGUIDKey, 
+                       _kMSASAssetCollectionGUIDsKey, _kMSASAssetCollectionKey, _kMSASAssetCollectionMediaAssetTypeUnknown, 
                        _kMSASAssetCollectionMediaAssetTypeVideo, _kMSASAssetCollectionMetadataBatchDateCreated, 
                        _kMSASAssetCollectionMetadataBatchGUID, _kMSASAssetCollectionMetadataDateCreated, 
                        _kMSASAssetCollectionMetadataIrisGroupIdentifier, _kMSASAssetCollectionMetadataIrisStillDisplayTime, 

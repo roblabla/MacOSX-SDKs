@@ -106,7 +106,8 @@ exports:
                        _CSDBSqliteUtilitiesGetSchemaVersionAtPathWithProtection, 
                        _CSDBStringMethods, _CSDBThreadedRecordStoreEnsureDatabaseSetup, 
                        _CSDBThreadedRecordStoreEnsureDatabaseSetupWithProtection, 
-                       _CSDBThreadedRecordStoreGetSequenceNumber, _CSDBThreadedRecordStoreOwnsCurrentThread, 
-                       _CSDBThreadedRecordStoreRegisterClass, _CSDBThreadedRecordStoreTeardownDatabase, 
-                       _kCSDBRecordErrorDomain, _kCSDBRecordSQLiteErrorDomain ]
+                       _CSDBThreadedRecordStoreGetQueue, _CSDBThreadedRecordStoreGetSequenceNumber, 
+                       _CSDBThreadedRecordStoreOwnsCurrentThread, _CSDBThreadedRecordStoreRegisterClass, 
+                       _CSDBThreadedRecordStoreTeardownDatabase, _kCSDBRecordErrorDomain, 
+                       _kCSDBRecordSQLiteErrorDomain ]
 ...

@@ -331,4 +331,28 @@ SR_EXTERN SRSensor const SRSensorElectrocardiogram API_AVAILABLE(ios(17.4)) API_
  */
 SR_EXTERN SRSensor const SRSensorPhotoplethysmogram API_AVAILABLE(ios(17.4)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
+/*!
+ * @const SRSensorAcousticSettings
+ *
+ * @brief
+ * Sensor stream for Acoustic Settings
+ *
+ * @discussion
+ * This stream stores samples of the Acoustic Settings sensor
+ * Fetches from this stream return objects of type \c SRAcousticSettings
+ */
+SR_EXTERN SRSensor const SRSensorAcousticSettings API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
+
+/*!
+ * @const SRSensorSleepSessions
+ *
+ * @brief
+ * Sesnor stream for sleep sessions collection
+ *
+ * @discussion
+ * This stream stores samples of the Sleep Sessions sensor
+ * Fetches from this stream return objects of type \c SRSleepSession
+ */
+SR_EXTERN SRSensor const SRSensorSleepSessions API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
+
 NS_ASSUME_NONNULL_END

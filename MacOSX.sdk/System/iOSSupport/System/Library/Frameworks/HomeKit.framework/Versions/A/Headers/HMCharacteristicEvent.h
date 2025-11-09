@@ -40,13 +40,13 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief The characteristic associated with the event.
  */
-@property (readonly, strong, nonatomic) HMCharacteristic *characteristic;
+@property (nonatomic, readonly, strong) HMCharacteristic *characteristic;
 
 /*!
  * @brief The value of the characteristic that triggers the event.
  *        A value of nil corresponds to any change in the value of the characteristic.
  */
-@property (readonly, copy, nonatomic, nullable) TriggerValueType triggerValue;
+@property (nullable, nonatomic, readonly, copy) TriggerValueType triggerValue;
 
 /*!
  * @brief This method is used to change trigger value for the characteristic.
@@ -75,13 +75,13 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief The characteristic associated with the event.
  */
-@property (readwrite, strong, nonatomic) HMCharacteristic *characteristic;
+@property (nonatomic, readwrite, strong) HMCharacteristic *characteristic;
 
 /*!
  * @brief The value of the characteristic that triggers the event.
  *        A value of nil corresponds to any change in the value of the characteristic.
  */
-@property (readwrite, copy, nonatomic, nullable) TriggerValueType triggerValue;
+@property (nullable, nonatomic, readwrite, copy) TriggerValueType triggerValue;
 
 @end
 

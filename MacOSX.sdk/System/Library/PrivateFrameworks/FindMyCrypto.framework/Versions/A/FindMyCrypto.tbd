@@ -7,10 +7,10 @@ swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ FMFCore, FMIPCore, FindMy, FindMyCryptoTests, FindMyLocateTests, 
-                       SPSharedTests, findmybeaconingd, findmylocateagent, findmylocated, 
-                       findmylocatedTests, fmltool, searchpartyd, searchpartydTests, 
-                       searchpartyuseragent ]
+    clients:         [ FMFCore, FMIPCore, FindMy, FindMyBluetooth, FindMyCryptoTests, 
+                       FindMyLocateTests, FindingUI, FindingUIAngel, SPSharedTests, 
+                       findmybeaconingd, findmylocateagent, findmylocated, findmylocatedTests, 
+                       fmltool, searchpartyd, searchpartydTests, searchpartyuseragent ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -51,8 +51,24 @@ exports:
                        '_$s12FindMyCrypto10PrivateKeyVMn', '_$s12FindMyCrypto10PrivateKeyVN', 
                        '_$s12FindMyCrypto10PrivateKeyVSEAAMc', '_$s12FindMyCrypto10PrivateKeyVSHAAMc', 
                        '_$s12FindMyCrypto10PrivateKeyVSQAAMc', '_$s12FindMyCrypto10PrivateKeyVSYAAMc', 
-                       '_$s12FindMyCrypto10PrivateKeyVSeAAMc', '_$s12FindMyCrypto12TimeBasedKeyV11descriptionSSvg', 
-                       '_$s12FindMyCrypto12TimeBasedKeyV11descriptionSSvpMV', '_$s12FindMyCrypto12TimeBasedKeyV11keyMaterialAA19DiversifiedRootKeysVvg', 
+                       '_$s12FindMyCrypto10PrivateKeyVSeAAMc', '_$s12FindMyCrypto11LongTermKeyV3keyAA0F21RepresentableInternalVvg', 
+                       '_$s12FindMyCrypto11LongTermKeyV3keyAA0F21RepresentableInternalVvpMV', 
+                       '_$s12FindMyCrypto11LongTermKeyV3keyAcA0F21RepresentableInternalV_tcfC', 
+                       '_$s12FindMyCrypto11LongTermKeyV4data10Foundation4DataVvg', 
+                       '_$s12FindMyCrypto11LongTermKeyV4data10Foundation4DataVvpMV', 
+                       '_$s12FindMyCrypto11LongTermKeyV4dataAC10Foundation4DataV_tKcfC', 
+                       '_$s12FindMyCrypto11LongTermKeyV4fromACs7Decoder_p_tKcfC', 
+                       '_$s12FindMyCrypto11LongTermKeyV6encode2toys7Encoder_p_tKF', 
+                       '_$s12FindMyCrypto11LongTermKeyV6lengthSivgZ', '_$s12FindMyCrypto11LongTermKeyV6lengthSivpZMV', 
+                       '_$s12FindMyCrypto11LongTermKeyVAA0F12RepresentingAAMc', '_$s12FindMyCrypto11LongTermKeyVAA0F12RepresentingAAWP', 
+                       '_$s12FindMyCrypto11LongTermKeyVAA0F13RepresentableAAMc', 
+                       '_$s12FindMyCrypto11LongTermKeyVAA0F13RepresentableAAWP', 
+                       '_$s12FindMyCrypto11LongTermKeyVMa', '_$s12FindMyCrypto11LongTermKeyVMn', 
+                       '_$s12FindMyCrypto11LongTermKeyVN', '_$s12FindMyCrypto11LongTermKeyVSEAAMc', 
+                       '_$s12FindMyCrypto11LongTermKeyVSHAAMc', '_$s12FindMyCrypto11LongTermKeyVSQAAMc', 
+                       '_$s12FindMyCrypto11LongTermKeyVSYAAMc', '_$s12FindMyCrypto11LongTermKeyVSeAAMc', 
+                       '_$s12FindMyCrypto12TimeBasedKeyV11descriptionSSvg', '_$s12FindMyCrypto12TimeBasedKeyV11descriptionSSvpMV', 
+                       '_$s12FindMyCrypto12TimeBasedKeyV11keyMaterialAA19DiversifiedRootKeysVvg', 
                        '_$s12FindMyCrypto12TimeBasedKeyV11keyMaterialAA19DiversifiedRootKeysVvpMV', 
                        '_$s12FindMyCrypto12TimeBasedKeyV12dateInterval10Foundation04DateH0Vvg', 
                        '_$s12FindMyCrypto12TimeBasedKeyV12dateInterval10Foundation04DateH0VvpMV', 

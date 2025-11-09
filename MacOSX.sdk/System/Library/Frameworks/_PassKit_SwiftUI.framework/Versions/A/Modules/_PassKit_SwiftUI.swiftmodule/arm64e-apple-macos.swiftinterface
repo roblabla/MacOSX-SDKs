@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macos15.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1591.6.5.1 -module-name _PassKit_SwiftUI
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1632.3.3 -module-name _PassKit_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Foundation
 @_exported import PassKit
 import Swift
@@ -15,16 +15,24 @@ import _SwiftConcurrencyShims
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.AddPassToWalletButton {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(carKeyPassword: Swift.String, supportedRadioTechnologies: PassKit.PKRadioTechnology, issuerIdentifier: Swift.String, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void, @SwiftUICore.ViewBuilder fallback: () -> Fallback)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ configuration: PassKit.PKAddSecureElementPassConfiguration, onCompletion: @escaping (Swift.Result<[PassKit.PKSecureElementPass], any Swift.Error>) -> Swift.Void, @SwiftUICore.ViewBuilder fallback: () -> Fallback)
+  #endif
 }
 @available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.AddPassToWalletButton where Fallback == SwiftUICore.EmptyView {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(carKeyPassword: Swift.String, supportedRadioTechnologies: PassKit.PKRadioTechnology, issuerIdentifier: Swift.String, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ configuration: PassKit.PKAddSecureElementPassConfiguration, onCompletion: @escaping (Swift.Result<[PassKit.PKSecureElementPass], any Swift.Error>) -> Swift.Void)
+  #endif
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
@@ -154,7 +162,9 @@ extension SwiftUICore.View {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.AddPassToWalletButton {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ configuration: PassKit.PKAddPaymentPassRequestConfiguration, onRequest: @escaping (_PassKit_SwiftUI.AddPassToWalletButtonResponse) async -> PassKit.PKAddPaymentPassRequest, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void, @SwiftUICore.ViewBuilder fallback: () -> Fallback)
+  #endif
 }
 @available(iOS 16.0, *)
 @available(macOS, unavailable)
@@ -170,11 +180,13 @@ public struct AddPassToWalletButtonResponse {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.AddPassToWalletButton where Fallback == SwiftUICore.EmptyView {
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(_ configuration: PassKit.PKAddPaymentPassRequestConfiguration, onRequest: @escaping (_PassKit_SwiftUI.AddPassToWalletButtonResponse) async -> PassKit.PKAddPaymentPassRequest, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void)
+  #endif
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-public struct PayWithApplePayButtonLabel {
+public struct PayWithApplePayButtonLabel : Swift.Equatable {
   public static let plain: _PassKit_SwiftUI.PayWithApplePayButtonLabel
   public static let buy: _PassKit_SwiftUI.PayWithApplePayButtonLabel
   public static let addMoney: _PassKit_SwiftUI.PayWithApplePayButtonLabel
@@ -192,14 +204,16 @@ public struct PayWithApplePayButtonLabel {
   public static let support: _PassKit_SwiftUI.PayWithApplePayButtonLabel
   public static let tip: _PassKit_SwiftUI.PayWithApplePayButtonLabel
   public static let topUp: _PassKit_SwiftUI.PayWithApplePayButtonLabel
+  public static func == (a: _PassKit_SwiftUI.PayWithApplePayButtonLabel, b: _PassKit_SwiftUI.PayWithApplePayButtonLabel) -> Swift.Bool
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
-public struct PayWithApplePayButtonStyle {
+public struct PayWithApplePayButtonStyle : Swift.Equatable {
   public static let white: _PassKit_SwiftUI.PayWithApplePayButtonStyle
   public static let whiteOutline: _PassKit_SwiftUI.PayWithApplePayButtonStyle
   public static let black: _PassKit_SwiftUI.PayWithApplePayButtonStyle
   public static let automatic: _PassKit_SwiftUI.PayWithApplePayButtonStyle
+  public static func == (a: _PassKit_SwiftUI.PayWithApplePayButtonStyle, b: _PassKit_SwiftUI.PayWithApplePayButtonStyle) -> Swift.Bool
 }
 @available(iOS 16.0, macOS 13.0, watchOS 9.0, *)
 @available(tvOS, unavailable)
@@ -221,16 +235,24 @@ public struct AddPassToWalletButtonFilter {
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.AddPassToWalletButton {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ encryptionScheme: PassKit.PKEncryptionScheme, cardholderName: Swift.String, passStyle: PassKit.PKAddPaymentPassStyle = .payment, primaryAccountSuffix: Swift.String? = nil, cardDetails: [PassKit.PKLabeledValue]? = nil, description: Swift.String? = nil, filters: [_PassKit_SwiftUI.AddPassToWalletButtonFilter] = [], onRequest: @escaping (_PassKit_SwiftUI.AddPassToWalletButtonResponse) async -> PassKit.PKAddPaymentPassRequest, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void, @SwiftUICore.ViewBuilder fallback: () -> Fallback)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ encryptionScheme: PassKit.PKEncryptionScheme, primaryAccountSuffix: Swift.String, passStyle: PassKit.PKAddPaymentPassStyle = .payment, cardDetails: [PassKit.PKLabeledValue]? = nil, description: Swift.String? = nil, filters: [_PassKit_SwiftUI.AddPassToWalletButtonFilter] = [], onRequest: @escaping (_PassKit_SwiftUI.AddPassToWalletButtonResponse) async -> PassKit.PKAddPaymentPassRequest, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void, @SwiftUICore.ViewBuilder fallback: () -> Fallback)
+  #endif
 }
 @available(iOS 16.0, *)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension _PassKit_SwiftUI.AddPassToWalletButton where Fallback == SwiftUICore.EmptyView {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ encryptionScheme: PassKit.PKEncryptionScheme, cardholderName: Swift.String, passStyle: PassKit.PKAddPaymentPassStyle = .payment, primaryAccountSuffix: Swift.String? = nil, cardDetails: [PassKit.PKLabeledValue]? = nil, description: Swift.String? = nil, filters: [_PassKit_SwiftUI.AddPassToWalletButtonFilter] = [], onRequest: @escaping (_PassKit_SwiftUI.AddPassToWalletButtonResponse) async -> PassKit.PKAddPaymentPassRequest, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public init(_ encryptionScheme: PassKit.PKEncryptionScheme, primaryAccountSuffix: Swift.String, passStyle: PassKit.PKAddPaymentPassStyle = .payment, cardDetails: [PassKit.PKLabeledValue]? = nil, description: Swift.String? = nil, filters: [_PassKit_SwiftUI.AddPassToWalletButtonFilter] = [], onRequest: @escaping (_PassKit_SwiftUI.AddPassToWalletButtonResponse) async -> PassKit.PKAddPaymentPassRequest, onCompletion: @escaping (Swift.Result<PassKit.PKSecureElementPass, any Swift.Error>) -> Swift.Void)
+  #endif
 }
 @available(iOS 16.0, *)
 @available(macOS, unavailable)

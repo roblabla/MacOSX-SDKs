@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
 @protocol MTLCommandQueue;
 
+@protocol MTL4CommandQueue;
+
 API_AVAILABLE(macos(10.13), ios(11.0))
 @protocol MTLCaptureScope <NSObject>
 
@@ -34,6 +36,10 @@ API_AVAILABLE(macos(10.13), ios(11.0))
 /** If set, this scope will only capture Metal commands from the associated command queue. Defaults to nil (all command queues from the associated device are captured).
  */
 @property (nullable, readonly, nonatomic) id<MTLCommandQueue> commandQueue;
+
+/** If set, this scope will only capture Metal commands from the associated Metal 4 command queue. Defaults to nil (all command queues from the associated device are captured).
+ */
+@property (nullable, readonly, nonatomic) id<MTL4CommandQueue> mtl4CommandQueue;
 
 @end
 

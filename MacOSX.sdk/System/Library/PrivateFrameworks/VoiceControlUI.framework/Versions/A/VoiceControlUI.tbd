@@ -158,6 +158,10 @@ exports:
                        '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE011representedB0So18NSAttributedStringCvpMV', 
                        '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE09displayedB0So18NSAttributedStringCvg', 
                        '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE09displayedB0So18NSAttributedStringCvpMV', 
+                       '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE11labelNumberSivg', 
+                       '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE11labelNumberSivpMV', 
+                       '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE11labelNumberSivpWvd', 
+                       '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE11labelNumberSivs', 
                        '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE12isWhiteSpaceSbvg', 
                        '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE12isWhiteSpaceSbvpMV', 
                        '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE12isWhiteSpaceSbvpWvd', 
@@ -184,6 +188,6 @@ exports:
                        '_$sSo26VCUIBadgedTextSegmentModelC14VoiceControlUIE7nsRangeSo8_NSRangeVvpMV', 
                        '_$sSo26VCUIBadgedTextSegmentModelCMa', _VoiceControlUIVersionNumber, 
                        _VoiceControlUIVersionString ]
-    objc-classes:    [ SL_SODictationSetup, VCUIBadgeViewShim, VCUIBadgedTextOverlayController, 
-                       VCUIBadgedTextSegmentModel, _TtC14VoiceControlUI37VCUIBadgedTextOverlayController_Swift ]
+    objc-classes:    [ VCUIBadgeViewShim, VCUIBadgedTextOverlayController, VCUIBadgedTextSegmentModel, 
+                       _TtC14VoiceControlUI37VCUIBadgedTextOverlayController_Swift ]
 ...

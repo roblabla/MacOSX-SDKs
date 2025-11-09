@@ -18,6 +18,18 @@ Classes:
   SwiftName: SRDeviceUsageReport.WebUsage
 - Name: SREmpiricalCharacteristicFunctionValue
   SwiftName: SRKeyboardMetrics.EmpiricalCharacteristicFunctionValue
+- Name: SRAcousticSettingsMusicEQ
+  SwiftName: SRAcousticSettings.MusicEQ
+- Name: SRAcousticSettingsAccessibility
+  SwiftName: SRAcousticSettings.Accessibility
+- Name: SRAcousticSettingsAccessibilityBackgroundSounds
+  SwiftName: SRAcousticSettingsAccessibility.BackgroundSounds
+- Name: SRAcousticSettingsAccessibilityHeadphoneAccommodations
+  SwiftName: SRAcousticSettingsAccessibility.HeadphoneAccommodations
+- Name: SRAcousticSettings
+  Properties:
+    - Name: headphoneSafetyAudioLevel
+      SwiftPrivate: true
 Typedefs:
 - Name: SRAbsoluteTime
   SwiftWrapper: struct
@@ -75,6 +87,20 @@ Tags:
   SwiftName: SRPhotoplethysmogramOpticalSample.Flags
 - Name: SRPhotoplethysmogramUsage
   SwiftName: SRPhotoplethysmogramSample.Usage
+- Name: SRAcousticSettingsSampleLifetime
+  SwiftName: SRAcousticSettings.SampleLifetime
+- Name: SRAcousticSettingsAccessibilityBackgroundSoundsName
+  SwiftName: SRAcousticSettingsAccessibilityBackgroundSounds.Name
+- Name: SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceTuning
+  SwiftName: SRAcousticSettingsAccessibilityHeadphoneAccommodations.MediaEnhanceTuning
+- Name: SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceBoosting
+  SwiftName: SRAcousticSettingsAccessibilityHeadphoneAccommodations.MediaEnhanceBoosting
+- Name: SRAcousticSettingsAccessibilityHeadphoneAccommodationsMediaEnhanceApplication
+  SwiftName: SRAcousticSettingsAccessibilityHeadphoneAccommodations.MediaEnhanceApplication
+- Name: SRSleepSessionStartReason
+  SwiftName: SRSleepSession.StartReason
+- Name: SRSleepSessionEndReason
+  SwiftName: SRSleepSession.EndReason
 # Local Variables:
 # mode: yaml
 # End:

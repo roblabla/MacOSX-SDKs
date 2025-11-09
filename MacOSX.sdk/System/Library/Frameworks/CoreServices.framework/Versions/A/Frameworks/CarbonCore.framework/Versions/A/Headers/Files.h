@@ -10,13 +10,17 @@
 #ifndef __FILES__
 #define __FILES__
 
+#include <Availability.h>
+
 #ifndef __MACTYPES__
 #include <MacTypes.h>
 #endif
 
+#if TARGET_OS_OSX
 #ifndef __MIXEDMODE__
 #include <CarbonCore/MixedMode.h>
 #endif
+#endif // TARGET_OS_OSX
 
 #ifndef __OSUTILS__
 #include <CarbonCore/OSUtils.h>
@@ -36,7 +40,6 @@
 #include <CarbonCore/Finder.h>
 #endif
 
-
 #ifndef __CFURL__
 #include <CoreFoundation/CFURL.h>
 #endif
@@ -55,8 +58,6 @@
 #include <sys/acl.h>
 #include <DiskArbitration/DADisk.h>
 #include <hfs/hfs_unistr.h>
-
-#include <Availability.h>
 
 #if PRAGMA_ONCE
 #pragma once
@@ -5356,7 +5357,7 @@ extern OSStatus  FSCopyDiskIDForVolume(FSVolumeRefNum vRefNum, CFStringRef *disk
  *    CarbonLib:        not available in CarbonLib 1.x
  *    Non-Carbon CFM:   not available
  */
-extern OSStatus  FSCopyURLForVolume(FSVolumeRefNum vRefNum, CFURLRef *url)             __OSX_AVAILABLE_BUT_DEPRECATED(__MAC_10_3, __MAC_10_8, __IPHONE_NA, __IPHONE_NA);
+extern OSStatus  FSCopyURLForVolume(FSVolumeRefNum vRefNum, CFURLRef *url)             API_DEPRECATED("", macos(10.3, 10.8), ios(26.0, 26.0));
 
 
 /*

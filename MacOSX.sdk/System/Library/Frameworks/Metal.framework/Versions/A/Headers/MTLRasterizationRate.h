@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  @interface MTLRasterizationRateSampleArray
  @abstract A helper object for convient access to samples stored in an array.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
+MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0))
 @interface MTLRasterizationRateSampleArray : NSObject
 
 /*!
@@ -42,7 +42,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
  MTLRasterizationRateLayerDescriptor instances will be stored inside a MTLRasterizationRateMapDescriptor which in turn is compiled by MTLDevice into a MTLRasterizationRateMap.
  Because MTLDevice may not support the requested granularity, the provided samples may be rounded up (towards higher quality) during compilation.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
+MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0))
 @interface MTLRasterizationRateLayerDescriptor : NSObject <NSCopying>
 
 /*!
@@ -73,13 +73,13 @@ MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
  @property sampleCount
  @return The number of quality samples that this descriptor uses to describe its current function, for the horizontal and vertical axis. The depth component of the returned MTLSize is always 0.
  */
-@property (readonly, nonatomic) MTLSize sampleCount API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+@property (readonly, nonatomic) MTLSize sampleCount API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0));
 
 /*!
  @property maxSampleCount
  @return The maximum number of quality samples that this descriptor can use to describe its function, for the horizontal and vertical axis, this is the sampleCount that the descriptor was initialized with. The depth component of the returned MTLSize is always 0.
  */
-@property (readonly, nonatomic) MTLSize maxSampleCount API_AVAILABLE(macos(12.0), ios(15.0));
+@property (readonly, nonatomic) MTLSize maxSampleCount API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @property horizontalSampleStorage
@@ -118,14 +118,14 @@ MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
  @abstract This declaration adds a setter to the previously (prior to macOS 12.0 and iOS 15.0) read-only property.
  @discussion Setting a value (must be <= maxSampleCount) to allow MTLRasterizationRateLayerDescriptor to be re-used with a different number of samples without having to be recreated.
  */
-@property (readwrite, nonatomic) MTLSize sampleCount API_AVAILABLE(macos(12.0), ios(15.0));
+@property (readwrite, nonatomic) MTLSize sampleCount API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 @end
 
 /*!
  @interface MTLRasterizationRateLayerArray
  @abstract Mutable array of MTLRasterizationRateLayerDescriptor
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
+MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0))
 @interface MTLRasterizationRateLayerArray : NSObject
 
 /*!
@@ -149,7 +149,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
  @abstract Describes a MTLRasterizationRateMap containing an arbitrary number of MTLRasterizationRateLayerDescriptor instances.
  @discussion An MTLRasterizationRateMapDescriptor is compiled into an MTLRasterizationRateMap using MTLDevice.
  */
-MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
+MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0))
 @interface MTLRasterizationRateMapDescriptor : NSObject <NSCopying>
 
 /*!
@@ -240,7 +240,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
  Because a smaller area of the framebuffer is populated, less fragment shader invocations are required to render content, and less bandwidth is consumed to store the shaded values.
  Use a rasterization rate map to reduce rendering quality in less-important or less-sampled regions of the framebuffer, such as the periphery of a VR/AR display or a far-away cascade of a shadow map.
  */
-API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4))
+API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0)) NS_SWIFT_SENDABLE
 @protocol MTLRasterizationRateMap <NSObject>
 
 /*!

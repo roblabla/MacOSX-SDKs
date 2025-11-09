@@ -183,3 +183,5 @@
 #import <PassKit/PKPayLaterValidator.h>
 #endif
 #endif // TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#import <PassKit/PKPassRelevantDate.h>
+#import <PassKit/PKPaymentAuthorizationViewControllerDelegate.h>

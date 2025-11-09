@@ -6,5 +6,6 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MetricKitServicesVersionNumber, _MetricKitServicesVersionString ]
     objc-classes:    [ MXHangTracerService, MXPowerlogService, MXReportCrashService, 
-                       MXService, MXSpinTracerService, MXUtilities ]
+                       MXService, MXSpaceAttributionService, MXSpinTracerService, 
+                       MXUtilities ]
 ...

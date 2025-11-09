@@ -6,7 +6,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(7.0), macos(10.10), tvos(9.0), visionos(1.0), watchos(3.0))
+API_DEPRECATED_WITH_REPLACEMENT("Replaced by developer defined challenges, see ``GKChallengeDefinition``", ios(7.0, 26.0), macos(10.10, 26.0), tvos(9.0, 26.0), visionos(1.0, 26.0), watchos(3.0, 26.0))
 @protocol GKChallengeListener <NSObject>
 @optional
 

@@ -160,6 +160,15 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
  */
 - (void)setMagnification:(CGFloat)magnification centeredAtPoint:(CGPoint)point API_AVAILABLE(macos(13.0));
 
+/*!
+ Describes how High Dynamic Range (HDR) video content renders.
+ 
+ Defaults to ``AVDisplayDynamicRangeAutomatic``.
+ 
+ - Note: This property will only have effect if the video content supports HDR.
+ */
+@property (nonatomic, assign, readwrite) AVDisplayDynamicRange preferredDisplayDynamicRange API_AVAILABLE(macos(26.0));
+
 @end
 
 

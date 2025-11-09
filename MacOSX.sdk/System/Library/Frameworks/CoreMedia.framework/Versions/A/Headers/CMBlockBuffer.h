@@ -114,6 +114,7 @@ enum
 	deallocated. These operations are recursive, so one release could result in many follow on releses.
 */
 typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)) CM_SWIFT_NONSENDABLE;
+CM_SWIFT_INIT_FOR_CF_TYPE(CMBlockBuffer, API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0)))
 
 /*!
 	@typedef CMBlockBufferCustomBlockSource
@@ -174,7 +175,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateEmpty(
 		CFAllocatorRef CM_NULLABLE structureAllocator,
 		uint32_t subBlockCapacity, 
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
+		CM_SWIFT_SENDING_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
@@ -219,7 +220,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithMemoryBlock(
 		size_t offsetToData, 
 		size_t dataLength,
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
+		CM_SWIFT_SENDING_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
@@ -247,7 +248,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateWithBufferReference(
 		size_t offsetToData,
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
+		CM_SWIFT_SENDING_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 /*!
@@ -285,7 +286,7 @@ CM_EXPORT OSStatus	CMBlockBufferCreateContiguous(
 		size_t offsetToData, 
 		size_t dataLength, 
 		CMBlockBufferFlags flags, 
-		CM_RETURNS_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
+		CM_SWIFT_SENDING_RETAINED_PARAMETER CMBlockBufferRef CM_NULLABLE * CM_NONNULL blockBufferOut)
 							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0), visionos(1.0));
 
 

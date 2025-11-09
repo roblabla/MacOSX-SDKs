@@ -292,7 +292,8 @@ exports:
                        _kXPCTransportListContainsItemsStr, _kXPCTransportStr, _kXPCUSBDeviceIDStr, 
                        _kXPCUSBHostHIDComponentInfoStr, _kXPCUUIDDStr, _kXPCUserInfoStr, 
                        _kXPCVehicleStatusDictionaryStr, _kXPCVehicleStatusGetDataStr, 
-                       _kXPCVoiceOverStr, _kXPCWaitSendDoneStr ]
+                       _kXPCVoiceOverStr, _kXPCWaitSendDoneStr, _nsIap2dServiceName, 
+                       _nsIapdServiceName, _nsIaptransportdServiceName ]
     objc-classes:    [ IAPAudioCallbackInfo, IAPClientPort, IAPClientPortManager, 
                        IAPNavigation, IAPNavigationAccessory, IAPNavigationAccessoryComponent ]
 ...

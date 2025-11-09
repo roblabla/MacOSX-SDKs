@@ -26,34 +26,34 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief The name of the action set.
  */
-@property (readonly, copy, nonatomic) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /*!
  * @brief Set of HMAction objects that represent the individual items of the action set.
  */
-@property (readonly, copy, nonatomic) NSSet<HMAction *> *actions;
+@property (nonatomic, readonly, copy) NSSet<HMAction *> *actions;
 
 /*!
  * @brief Specifies whether the action set is currently executing or not.
  */
-@property (readonly, getter=isExecuting, nonatomic) BOOL executing;
+@property (nonatomic, readonly, getter=isExecuting) BOOL executing;
 
 /*!
  * @brief Specifies the action set type - user-defined, trigger-owned or one of the builtin types.
  *        Builtin action sets cannot be removed from the home. trigger-owned action sets cannot
  *        be executed, renamed or associated with another trigger.
  */
-@property (readonly, copy, nonatomic) NSString *actionSetType API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSString *actionSetType API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief A unique identifier for the action set.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Specifies the last execution date for the action set.
  */
-@property (readonly, copy, nonatomic, nullable) NSDate *lastExecutionDate API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
+@property (nullable, nonatomic, readonly, copy) NSDate *lastExecutionDate API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
 
 /*!
  * @brief This method is used to change the name of the action set.

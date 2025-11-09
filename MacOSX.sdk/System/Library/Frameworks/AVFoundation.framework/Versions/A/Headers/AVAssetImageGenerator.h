@@ -123,6 +123,7 @@ AV_INIT_UNAVAILABLE
 					- "renderSize" width or height is less than zero
 					- "frameDuration" is invalid or less than or equal to zero
 					- "sourceTrackIDForFrameTiming" is less than zero
+					- "outputBufferDescription" is non-nil
  */
 @property (nonatomic, copy, nullable) AVVideoComposition *videoComposition;
 

@@ -20,7 +20,6 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos)
  */
 @property (nonatomic, readonly, copy) NSData *credentialID;
 
-
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

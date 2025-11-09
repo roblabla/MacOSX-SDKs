@@ -2,14 +2,14 @@
 //  VZMacGraphicsDisplayConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//  Copyright © 2021-2025 Apple Inc. All rights reserved.
 //
-
-#import <AppKit/AppKit.h>
 
 #import <Virtualization/VZGraphicsDisplayConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
+
+@class NSScreen;
 
 /*!
  @abstract Configuration for a display attached to a Mac graphics device.

@@ -253,6 +253,13 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 */
 @property (nonatomic, readonly, nullable) AudioStreamPacketDescription *packetDescriptions;
 
+/*! @property packetDependencies
+	@abstract Access the buffer's array of packet dependencies, if any.
+	@discussion
+		If the format doesn't employ packet dependencies, this will be nil.
+*/
+@property (nonatomic, readonly, nullable) AudioStreamPacketDependencyDescription *packetDependencies NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

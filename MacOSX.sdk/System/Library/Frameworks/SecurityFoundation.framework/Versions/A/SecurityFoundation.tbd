@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/SecurityFoundation.framework/Versions/A/SecurityFoundation'
-current-version: 55290
+current-version: 55293
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -54,8 +54,9 @@ exports:
     objc-classes:    [ CAAdditionalCertInfo, CACertInfo, CAIdentityName, CAKeyPairAttributes, 
                        SFAuthorization, SFCSR, SFCertAuthorityInvitationSigner, SFCertificateAuthority, 
                        SFCertificateAuthorityClient, SFMachPort, SFSyncManager, SPAKE2Prover, 
-                       SPAKE2Verifier, _SFAESKey, _SFAESKeySpecifier, _SFAccessPolicy, 
-                       _SFAsymmetricKeySpecifier, _SFAuthenticatedCiphertext, _SFAuthenticatedEncryptionOperation, 
+                       SPAKE2Verifier, SPAKE2WebProver, SPAKE2WebVerifier, _SFAESKey, 
+                       _SFAESKeySpecifier, _SFAccessPolicy, _SFAsymmetricKeySpecifier, 
+                       _SFAuthenticatedCiphertext, _SFAuthenticatedEncryptionOperation, 
                        _SFCiphertext, _SFECDHKeySource, _SFECDHOperation, _SFECKeyPair, 
                        _SFECKeySpecifier, _SFECPublicKey, _SFEC_X962SigningOperation, 
                        _SFIESCiphertext, _SFIESOperation, _SFIdentity, _SFKey, _SFKeyPair, 

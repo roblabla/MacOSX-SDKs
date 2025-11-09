@@ -5,7 +5,15 @@ typedef metal::packed_float3 MTLPackedFloat3;
 typedef metal::packed_float4 MTLPackedFloatQuaternion;
 #else
 #include <math.h>
+#include <stdint.h>
+
+#ifndef _WIN32
 #import <Metal/MTLDefines.h>
+#else
+#include <Metal/MTLDefines.h>
+#endif // _WIN32
+
+#include <Metal/MTL4BufferRange.h>
 
 typedef struct _MTLPackedFloat3 {
     union {

@@ -545,4 +545,6 @@ SPPoint3D SPPoint3DMakeWithSphericalCoordinates(SPSphericalCoordinates3D coords)
     return SPPoint3DMake(x, y, z);
 }
 
+
+
 #endif /* Spatial_SPPoint3D_h */

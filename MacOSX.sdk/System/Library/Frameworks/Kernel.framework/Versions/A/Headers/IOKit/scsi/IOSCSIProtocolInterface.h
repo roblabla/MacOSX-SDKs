@@ -373,6 +373,27 @@ enum
     */
     kSCSIProtocolFeature_ProtocolSpecificLinkRetrain        = 17,
 
+    /*!
+    kSCSIProtocolFeature_AbortAllTasks:
+    SCSI Protocol Services layer should abort all tasks outstanding with it.
+    */
+    kSCSIProtocolFeature_AbortAllTasks                      = 18,
+
+	/*!
+    kSCSIProtocolFeature_SMARTStatus
+    If the SCSI Protocol Service layer want to allow ATA SMART commands,
+	then the protocol layer sould return true.
+	*/
+	kSCSIProtocolFeature_SMARTStatus						= 19,
+
+    /*!
+    kSCSIProtocolFeature_HighThroughputOptions If
+    the SCSI Protocol Services Driver has high throughput options
+    it will return true to this query and return the options in the UInt32 pointer
+    that is passed in as the serviceValue.
+    */
+    kSCSIProtocolFeature_HighThroughputOptions              = 20,
+
 };
 
 

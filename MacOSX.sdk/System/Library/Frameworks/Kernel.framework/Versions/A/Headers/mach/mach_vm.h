@@ -52,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_vm_MSG_COUNT
-#define	mach_vm_MSG_COUNT	28
+#define	mach_vm_MSG_COUNT	29
 #endif	/* mach_vm_MSG_COUNT */
 
 #include <Availability.h>
@@ -420,6 +420,7 @@ kern_return_t mach_vm_deferred_reclamation_buffer_allocate
 (
 	task_t target_task,
 	mach_vm_address_t *address,
+	uint64_t *sampling_period,
 	uint32_t len,
 	uint32_t max_len
 );
@@ -433,19 +434,8 @@ extern
 kern_return_t mach_vm_deferred_reclamation_buffer_flush
 (
 	task_t target_task,
-	uint32_t num_entries_to_reclaim
-);
-
-/* Routine mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes */
-#ifdef	mig_external
-mig_external
-#else
-extern
-#endif	/* mig_external */
-kern_return_t mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes
-(
-	task_t target_task,
-	mach_vm_size_t reclaimable_bytes
+	uint32_t num_entries_to_reclaim,
+	mach_vm_size_t *bytes_reclaimed
 );
 
 /* Routine mach_vm_range_create */
@@ -471,7 +461,8 @@ extern
 kern_return_t mach_vm_deferred_reclamation_buffer_resize
 (
 	task_t target_task,
-	uint32_t size
+	uint32_t new_len,
+	mach_vm_size_t *bytes_reclaimed
 );
 
 /* Routine mach_vm_update_pointers_with_remote_tags */
@@ -487,6 +478,19 @@ kern_return_t mach_vm_update_pointers_with_remote_tags
 	mach_msg_type_number_t in_pointer_listCnt,
 	mach_vm_offset_list_t out_pointer_list,
 	mach_msg_type_number_t *out_pointer_listCnt
+);
+
+/* Routine mach_vm_deferred_reclamation_buffer_query */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_vm_deferred_reclamation_buffer_query
+(
+	task_read_t target,
+	mach_vm_address_t *addr,
+	mach_vm_size_t *size
 );
 
 __END_DECLS
@@ -879,18 +883,6 @@ __END_DECLS
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
-		mach_vm_size_t reclaimable_bytes;
-	} __Request__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack(pop)
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(push, 4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
 		mach_vm_range_flavor_t flavor;
 		mach_msg_type_number_t recipesCnt;
 		uint8_t recipes[1024];
@@ -905,7 +897,7 @@ __END_DECLS
 	typedef struct {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
-		uint32_t size;
+		uint32_t new_len;
 	} __Request__mach_vm_deferred_reclamation_buffer_resize_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -921,6 +913,16 @@ __END_DECLS
 		mach_vm_offset_t in_pointer_list[512];
 		mach_msg_type_number_t out_pointer_listCnt;
 	} __Request__mach_vm_update_pointers_with_remote_tags_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__mach_vm_deferred_reclamation_buffer_query_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
@@ -955,10 +957,10 @@ union __RequestUnion__mach_vm_subsystem {
 	__Request__mach_vm_remap_new_t Request_mach_vm_remap_new;
 	__Request__mach_vm_deferred_reclamation_buffer_allocate_t Request_mach_vm_deferred_reclamation_buffer_allocate;
 	__Request__mach_vm_deferred_reclamation_buffer_flush_t Request_mach_vm_deferred_reclamation_buffer_flush;
-	__Request__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t Request_mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes;
 	__Request__mach_vm_range_create_t Request_mach_vm_range_create;
 	__Request__mach_vm_deferred_reclamation_buffer_resize_t Request_mach_vm_deferred_reclamation_buffer_resize;
 	__Request__mach_vm_update_pointers_with_remote_tags_t Request_mach_vm_update_pointers_with_remote_tags;
+	__Request__mach_vm_deferred_reclamation_buffer_query_t Request_mach_vm_deferred_reclamation_buffer_query;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 /* typedefs for all replies */
@@ -1275,6 +1277,7 @@ union __RequestUnion__mach_vm_subsystem {
 		NDR_record_t NDR;
 		kern_return_t RetCode;
 		mach_vm_address_t address;
+		uint64_t sampling_period;
 	} __Reply__mach_vm_deferred_reclamation_buffer_allocate_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -1287,19 +1290,8 @@ union __RequestUnion__mach_vm_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
+		mach_vm_size_t bytes_reclaimed;
 	} __Reply__mach_vm_deferred_reclamation_buffer_flush_t __attribute__((unused));
-#ifdef  __MigPackStructs
-#pragma pack(pop)
-#endif
-
-#ifdef  __MigPackStructs
-#pragma pack(push, 4)
-#endif
-	typedef struct {
-		mach_msg_header_t Head;
-		NDR_record_t NDR;
-		kern_return_t RetCode;
-	} __Reply__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
@@ -1323,6 +1315,7 @@ union __RequestUnion__mach_vm_subsystem {
 		mach_msg_header_t Head;
 		NDR_record_t NDR;
 		kern_return_t RetCode;
+		mach_vm_size_t bytes_reclaimed;
 	} __Reply__mach_vm_deferred_reclamation_buffer_resize_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
@@ -1338,6 +1331,20 @@ union __RequestUnion__mach_vm_subsystem {
 		mach_msg_type_number_t out_pointer_listCnt;
 		mach_vm_offset_t out_pointer_list[512];
 	} __Reply__mach_vm_update_pointers_with_remote_tags_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		mach_vm_address_t addr;
+		mach_vm_size_t size;
+	} __Reply__mach_vm_deferred_reclamation_buffer_query_t __attribute__((unused));
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
@@ -1372,10 +1379,10 @@ union __ReplyUnion__mach_vm_subsystem {
 	__Reply__mach_vm_remap_new_t Reply_mach_vm_remap_new;
 	__Reply__mach_vm_deferred_reclamation_buffer_allocate_t Reply_mach_vm_deferred_reclamation_buffer_allocate;
 	__Reply__mach_vm_deferred_reclamation_buffer_flush_t Reply_mach_vm_deferred_reclamation_buffer_flush;
-	__Reply__mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes_t Reply_mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes;
 	__Reply__mach_vm_range_create_t Reply_mach_vm_range_create;
 	__Reply__mach_vm_deferred_reclamation_buffer_resize_t Reply_mach_vm_deferred_reclamation_buffer_resize;
 	__Reply__mach_vm_update_pointers_with_remote_tags_t Reply_mach_vm_update_pointers_with_remote_tags;
+	__Reply__mach_vm_deferred_reclamation_buffer_query_t Reply_mach_vm_deferred_reclamation_buffer_query;
 };
 #endif /* !__RequestUnion__mach_vm_subsystem__defined */
 
@@ -1405,10 +1412,10 @@ union __ReplyUnion__mach_vm_subsystem {
     { "mach_vm_remap_new", 4821 },\
     { "mach_vm_deferred_reclamation_buffer_allocate", 4822 },\
     { "mach_vm_deferred_reclamation_buffer_flush", 4823 },\
-    { "mach_vm_deferred_reclamation_buffer_update_reclaimable_bytes", 4824 },\
     { "mach_vm_range_create", 4825 },\
     { "mach_vm_deferred_reclamation_buffer_resize", 4826 },\
-    { "mach_vm_update_pointers_with_remote_tags", 4827 }
+    { "mach_vm_update_pointers_with_remote_tags", 4827 },\
+    { "mach_vm_deferred_reclamation_buffer_query", 4828 }
 #endif
 
 #ifdef __AfterMigUserHeader

@@ -122,6 +122,11 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
 	AVErrorToneMappingFailed API_AVAILABLE(macos(15.0), ios(18.0))  API_UNAVAILABLE(tvos, watchos, visionos) = -11885,
 	AVErrorMediaExtensionDisabled API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos) = -11886,
 	AVErrorMediaExtensionConflict API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos) = -11887,
+	AVErrorContentKeyRequestPlaybackDestinationDoesNotSupportDeviceIdentifierRandomization API_UNAVAILABLE(macos, ios, tvos, watchos, visionos) = -11888,
+	AVErrorContentKeyInvalid API_UNAVAILABLE(macos, ios, tvos, watchos, visionos) = -11889,
+	AVErrorNoSmartFramingsEnabled API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos) = -11890,
+	AVErrorAutoWhiteBalanceNotLocked API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, watchos, visionos) = -11891,
+	AVErrorFollowExternalSyncDeviceTimedOut API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, watchos, visionos) = -11892,
 };
 
 #else

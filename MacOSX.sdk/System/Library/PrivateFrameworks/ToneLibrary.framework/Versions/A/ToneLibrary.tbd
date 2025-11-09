@@ -43,7 +43,7 @@ exports:
                        _TLServiceCommunicationErrorDomain, _TLServicePersistenceErrorDomain, 
                        _TLServiceValidationErrorDomain, _TLToneAnalyticsKindAlarmWakeUp, 
                        _TLToneAnalyticsKindOther, _TLToneAnalyticsKindSystemRingtone, 
-                       _TLToneIdentifierNone, _TLTonePreferencesDidChangeNotification, 
+                       _TLToneIdentifierNone, _TLToneImportErrorDomain, _TLTonePreferencesDidChangeNotification, 
                        __TLAlertOverridePolicyDidChangeNotification, __TLAlertTargetDeviceGetHumanReadableDescription, 
                        __TLAlertTopicClassroomDeemphasized, __TLAlertTopicIncomingCallDeemphasized, 
                        __TLAlertTypeGetHumanReadableDescription, __TLAlertTypeValidateConsistencyOfEnumeration, 

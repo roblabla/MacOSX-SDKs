@@ -1,12 +1,12 @@
 #if (defined(USE_APPKIT_PUBLIC_HEADERS) && USE_APPKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSTextList.h>)
-#include <TargetConditionals.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
 //
 //  NSTextList.h
 //  Text Kit
 //
-//  Copyright (c) 2004-2024, Apple Inc. All rights reserved.
+//  Copyright (c) 2004-2025, Apple Inc. All rights reserved.
 
 #import <Foundation/NSObject.h>
 #import <AppKit/AppKitDefines.h>
@@ -61,6 +61,10 @@ API_AVAILABLE(macos(10.0), ios(7.0), tvos(9.0), watchos(2.0), visionos(1.0))
 // Returns the marker corresponding to itemNumber. itemNumber is ignored if < 1 or isOrdered==NO.
 - (NSString *)markerForItemNumber:(NSInteger)itemNumber;
 
+#pragma mark Marker handling
+// When YES, TextKit includes text list marker in the contents.
+// It is NO by default.
+@property (readonly, class) BOOL includesTextListMarkers API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

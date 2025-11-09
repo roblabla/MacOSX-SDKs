@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightDaemon.framework/Versions/A/SpotlightDaemon'
-current-version: 2333.50.1
+current-version: 2393.255
 exports:
   - targets:         [ x86_64-macos ]
     symbols:         [ __Z22isSpellCorrectionReadyP8NSStringa, __Z22skipAppSpellCorrectionP8NSStringS0_a ]
@@ -27,34 +27,37 @@ exports:
                        _SpotlightDaemonVersionNumber, _SpotlightDaemonVersionString, 
                        __Z12getAppTokensP8NSString, _appErrorScore, _blockRoutine, 
                        _delayedOpBlockCompleteCallback, _duet_log_activity_start, 
-                       _duet_log_activity_stop, _gIsSystemOnBattery, _getAppCorrectionIfAny, 
-                       _getSystemVersionString, _isAppPrefixMatch, _isCandidate, 
-                       _json_char_table, _json_parse, _json_utf8_string, _kSecEntitlementCSAllowMessagesContent, 
+                       _duet_log_activity_stop, _gDASManager, _gIsSystemOnBattery, 
+                       _getAppCorrectionIfAny, _getSystemVersionString, _isAppPrefixMatch, 
+                       _isCandidate, _isDebugVerboseMode, _json_char_table, _json_parse, 
+                       _json_utf8_string, _kSecEntitlementCSAllowMessagesContent, 
                        _kSecEntitlementCSAllowNotifications, _kSecEntitlementCSDisableQuota, 
                        _logForCSLogCategoryDaemonClient, _logForCSLogCategoryDefault, 
-                       _logForCSLogCategoryIndex, _logForCSLogCategoryPersonalization, 
+                       _logForCSLogCategoryDeleteAll, _logForCSLogCategoryIndex, 
+                       _logForCSLogCategoryItems, _logForCSLogCategoryPersonalization, 
                        _logForCSLogCategoryPhotosQU, _logForCSLogCategoryQuery, _logForCSLogCategoryRecs, 
-                       _logForCSLogCategoryUA, _resumeAllAgents, _sClintServiceDisabledBitMap, 
-                       _sDrainedLock, _sSpotlightSenderState, _startAgents, _startAllAgents, 
-                       _startIndexAgent, _suspendAllAgents, _syncContextCreate, _syncFinished, 
-                       _unpauseCallback, _verifyCandidateLength, _weightedDistance ]
+                       _logForCSLogCategoryUA, _logForCSSignpostPhotosNilCS, _resumeAllAgents, 
+                       _sClintServiceDisabledBitMap, _sDrainedLock, _startAgents, 
+                       _startAllAgents, _startIndexAgent, _suspendAllAgents, _syncContextCreate, 
+                       _syncFinished, _unpauseCallback, _verifyCandidateLength, _weightedDistance ]
     objc-classes:    [ CSDecryptInfo, CSImportInfo, CSIndexAgent, CSIndexClientConnection, 
                        CSIndexClientConnectionKey, CSRecieverState, CSSearchAgent, 
-                       CSSearchClientConnection, CSSearchClientConnectionKey, CSThresholdedTrigger, 
-                       MDAgent, MDSearchableIndexService, SDConnectionConfiguration, 
-                       SDDirtyIdleTimer, SDEventMonitor, SDLockHandler, SDMigrationMonitor, 
-                       SDPommesFeature, SDPommesSynonyms, SDSignalHandler, SDTrace, 
-                       SDTraceItem, SDXPCClientConnection, SPConcreteCoreSpotlightIndexer, 
-                       SPCoreSpotlightContactsUpdater, SPCoreSpotlightExtensionsTask, 
-                       SPCoreSpotlightIndexer, SPCoreSpotlightIndexerTask, SPCoreSpotlightLiveQueryTask, 
-                       SPCoreSpotlightTask, SPCorrectionHandler, SPHistoricalReport, 
+                       CSSearchClientConnection, CSSearchClientConnectionKey, MDAgent, 
+                       MDSearchableIndexService, SDConnectionConfiguration, SDDirtyIdleTimer, 
+                       SDEventMonitor, SDLockHandler, SDMigrationMonitor, SDPommesFeature, 
+                       SDPommesSynonyms, SDSignalHandler, SDTrace, SDTraceItem, SDXPCClientConnection, 
+                       SPConcreteCoreSpotlightIndexer, SPCoreSpotlightContactsUpdater, 
+                       SPCoreSpotlightExtensionsTask, SPCoreSpotlightIndexer, SPCoreSpotlightIndexerTask, 
+                       SPCoreSpotlightInteractionHandler, SPCoreSpotlightLiveQueryTask, 
+                       SPCoreSpotlightTask, SPCorrectionHandler, SPDASManager, SPHistoricalReport, 
                        SPHistoricalReportManager, SPIndexStorageUsageCollector, SPQueryJob, 
                        SPQueryResultsQueue, SPUAProgressItem, SpotlightDaemonServer, 
-                       SpotlightReceiverConnection, SpotlightSender, SpotlightSenderState, 
-                       _SPBucketSet ]
-    objc-ivars:      [ SDTrace._items, SPConcreteCoreSpotlightIndexer._assertedBundleIds, 
-                       SPConcreteCoreSpotlightIndexer._assertionEndTime, SPConcreteCoreSpotlightIndexer._cancelPtr, 
-                       SPConcreteCoreSpotlightIndexer._checkedInClients, SPConcreteCoreSpotlightIndexer._createCount, 
+                       SpotlightReceiverConfig, SpotlightReceiverConnection, SpotlightReceiverConnectionManager, 
+                       SpotlightSender, SpotlightSenderState, _SPBucketSet ]
+    objc-ivars:      [ SDTrace._items, SPConcreteCoreSpotlightIndexer._aggregateWipeCount, 
+                       SPConcreteCoreSpotlightIndexer._assertedBundleIds, SPConcreteCoreSpotlightIndexer._assertionEndTime, 
+                       SPConcreteCoreSpotlightIndexer._cancelPtr, SPConcreteCoreSpotlightIndexer._checkedInClients, 
+                       SPConcreteCoreSpotlightIndexer._createCount, SPConcreteCoreSpotlightIndexer._creationDate, 
                        SPConcreteCoreSpotlightIndexer._hasAssertion, SPConcreteCoreSpotlightIndexer._lastPreheat, 
                        SPConcreteCoreSpotlightIndexer._lastTTLPass, SPConcreteCoreSpotlightIndexer._maintenanceOperations, 
                        SPConcreteCoreSpotlightIndexer._readOnly, SPConcreteCoreSpotlightIndexer._reindexAllDelegateBundleIDs, 

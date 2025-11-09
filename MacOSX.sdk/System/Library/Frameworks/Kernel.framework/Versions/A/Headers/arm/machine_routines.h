@@ -93,6 +93,7 @@ void machine_switch_perfcontrol_siq(thread_t thread);
 /* Type for the Time Base Enable function */
 typedef void (*time_base_enable_t)(cpu_id_t cpu_id, boolean_t enable);
 
+
 #define CacheConfig                     0x00000000UL
 #define CacheControl                    0x00000001UL
 #define CacheClean                      0x00000002UL
@@ -183,9 +184,10 @@ ex_cb_action_t ex_cb_invoke(
 	vm_offset_t         far);
 
 typedef enum {
-	CLUSTER_TYPE_SMP = 0,
-	CLUSTER_TYPE_E   = 1,
-	CLUSTER_TYPE_P   = 2,
+	CLUSTER_TYPE_INVALID = -1,
+	CLUSTER_TYPE_SMP     = 0,
+	CLUSTER_TYPE_E       = 1,
+	CLUSTER_TYPE_P       = 2,
 	MAX_CPU_TYPES,
 } cluster_type_t;
 
@@ -279,7 +281,9 @@ struct ml_processor_info {
 	uint32_t                        log_id;
 	uint32_t                        l2_access_penalty; /* unused */
 	uint32_t                        cluster_id;
+
 	cluster_type_t                  cluster_type;
+
 	uint32_t                        l2_cache_id;
 	uint32_t                        l2_cache_size;
 	uint32_t                        l3_cache_id;

@@ -89,7 +89,15 @@ API_AVAILABLE(macos(10.6));
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityContainsProtectedContentAttribute API_AVAILABLE(macos(10.9));   // (NSNumber *) - (boolValue) contains protected content?
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityAlternateUIVisibleAttribute API_AVAILABLE(macos(10.10));  //(NSNumber *) - (boolValue)
 APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityRequiredAttribute API_AVAILABLE(macos(10.12));  //(NSNumber *) - (boolValue) whether a form field is required to have content for successful submission of the form
-
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityAutoInteractableAttribute;  //(NSNumber *) - (boolValue)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityDateTimeComponentsAttribute;    //(NSNumber *) - NSAccessibilityDateTimeComponentsFlags
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityEmbeddedImageDescriptionAttribute API_AVAILABLE(macos(12.0));  //(NSString *) Image Description from IPCT section of metadata
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityPathAttribute API_AVAILABLE(macos(10.9));  //(NSBezierPath *)
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityTextInputMarkedRangeAttribute API_AVAILABLE(macos(10.6));  //(NSValue *)  - (rangeValue) range of visible text
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityBlockQuoteLevelAttribute API_AVAILABLE(macos(26.0));  //(NSNumber *) - 1-based
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityHeadingLevelAttribute API_AVAILABLE(macos(26.0));  //(NSNumber *) - 1-based
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityLanguageAttribute API_AVAILABLE(macos(26.0));  //(NSString *) - BCP-47 langugage code for the whole object
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityVisitedAttribute API_AVAILABLE(macos(26.0));  //(NSNumber *) - (boolValue) indicates if a link has been visited
 
 /* Linkage attributes
  */
@@ -140,6 +148,14 @@ APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAttachmentTextAttribute
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityLinkTextAttribute;			//id - corresponding element
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAutocorrectedTextAttribute API_AVAILABLE(macos(10.7));		//(NSNumber *)	    - (boolValue)
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityTextAlignmentAttribute API_AVAILABLE(macos(10.12));		//(NSNumber *) - (NSTextAlignment)
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityFontBoldAttribute API_AVAILABLE(macos(26.0));                  //(NSNumber *) - (boolValue)
+APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityFontItalicAttribute API_AVAILABLE(macos(26.0));                //(NSNumber *) - (boolValue)
+
+/* Advanced children-related attribute and parameterized attributes
+ */
+APPKIT_EXTERN NSAccessibilityAttributeName const NSAccessibilityChildrenInNavigationOrderAttribute API_AVAILABLE(macos(10.12));  //(NSArray *)  - ordered children elements for navigation
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityIndexForChildUIElementAttribute API_AVAILABLE(macos(26.0));  //(NSNumber *) - 0-based index in NSAccessibilityChildrenAttribute or -1 if not found; param:(id) UIElement
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityIndexForChildUIElementInNavigationOrderAttribute API_AVAILABLE(macos(26.0));  //(NSNumber *) - 0-based index in NSAccessibilityChildrenInNavigationOrderAttribute or -1 if not found; param:(id) UIElement
 
 /* Textual list attributes and constants. Examples: unordered or ordered lists in a document.
  */
@@ -171,6 +187,11 @@ APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityCustomTextAttribute API
     NSAccessibilityAnnotationLocation: The position where the annotation applies.  Generally, this is the entire range.  But in the case where the annotation, like a comment arrow, points to a position between two characters, the range is zero.  Since NSAttributedString requires adding an attribute to string of length greater than zero, the string nearest the annotation with at least length of one needs to be returned.  So NSAccessibilityAnnotationLocation is a way to indicate exactly which end of that range the annotation is intended.
  */
 APPKIT_EXTERN NSAttributedStringKey const NSAccessibilityAnnotationTextAttribute API_AVAILABLE(macos(10.13));   //(NSArray *) - (NSDictionary<NSAccessibilityAnnotationAttributeKey, id> *)
+
+/*
+ Inline Completion
+ */
+APPKIT_EXTERN NSString *const NSAccessibilityTextCompletionAttribute API_AVAILABLE(macos(14.0));
 
 typedef NSString * NSAccessibilityAnnotationAttributeKey NS_TYPED_ENUM;
 APPKIT_EXTERN NSAccessibilityAnnotationAttributeKey const NSAccessibilityAnnotationLabel API_AVAILABLE(macos(10.13)); // required (NSString *)
@@ -379,6 +400,7 @@ APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityCancelAction;
 APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityRaiseAction;
 APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityShowMenuAction;
 APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityDeleteAction;
+APPKIT_EXTERN NSAccessibilityActionName const NSAccessibilityScrollToVisibleAction API_AVAILABLE(macos(26.0));
 
 /* Actions that allow the developer to present either alternative or original UI. There may be new UI elements that appear. There may be UI elements that disappear. There may be changes to existing UI elements. Or a combination of them. Currently this is typically seen during a mouse hovering event.
  */
@@ -440,6 +462,24 @@ APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedColum
 APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityRowExpandedNotification API_AVAILABLE(macos(10.6));
 APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityRowCollapsedNotification API_AVAILABLE(macos(10.6));
 
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityAutocorrectionOccurredNotification API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityTextInputMarkingSessionBeganNotification API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityTextInputMarkingSessionEndedNotification API_AVAILABLE(macos(10.6));
+
+/* Dragging notifications
+ */
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityDraggingSourceDragBeganNotification
+    API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityDraggingSourceDragEndedNotification
+    API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityDraggingDestinationDropAllowedNotification
+    API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityDraggingDestinationDropNotAllowedNotification
+    API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityDraggingDestinationDragAcceptedNotification API_AVAILABLE(macos(10.6));
+APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityDraggingDestinationDragNotAcceptedNotification
+    API_AVAILABLE(macos(10.6));
+
 /* Cell-table notifications
  */
 APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedCellsChangedNotification API_AVAILABLE(macos(10.6));
@@ -452,7 +492,6 @@ APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilitySelectedChild
 /* This notification allows an application to request that an announcement be made to the user by an assistive application such as VoiceOver.  The notification requires a user info dictionary with the key NSAccessibilityAnnouncementKey and the announcement as a localized string.  In addition, the key NSAccessibilityAnnouncementPriorityKey should also be used to help an assistive application determine the importance of this announcement.  This notification should be posted for the application element.
  */
 APPKIT_EXTERN NSAccessibilityNotificationName const NSAccessibilityAnnouncementRequestedNotification API_AVAILABLE(macos(10.7));
-
 
 /* Roles
  */
@@ -506,10 +545,14 @@ APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLinkRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityDisclosureTriangleRole API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityGridRole API_AVAILABLE(macos(10.5));
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityRelevanceIndicatorRole;
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityDateTimeAreaRole;
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityLevelIndicatorRole API_AVAILABLE(macos(10.6));
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityCellRole API_AVAILABLE(macos(10.6)); // As found in a cell-based table
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityPopoverRole API_AVAILABLE(macos(10.7));
 APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityPageRole API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityHeadingRole API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityListMarkerRole API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilityRole const NSAccessibilityWebAreaRole API_AVAILABLE(macos(26.0));
 
 /* Layout-area roles
  */
@@ -552,6 +595,7 @@ APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityDescriptionListSubrole
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityTabButtonSubrole API_AVAILABLE(macos(10.13));
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilityCollectionListSubrole API_AVAILABLE(macos(10.13));
 APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySectionListSubrole API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSAccessibilitySubrole const NSAccessibilitySuggestionSubrole API_AVAILABLE(macos(26.0));
 
 /* Below are keys used for the user info dictionary of the NSAccessibilityPostNotificationWithUserInfo API */
 typedef NSString * NSAccessibilityNotificationUserInfoKey NS_TYPED_ENUM;
@@ -585,6 +629,114 @@ typedef NS_ENUM(NSInteger, NSAccessibilityPriorityLevel) {
 
 // token type for loading search element
 typedef id<NSSecureCoding, NSObject> NSAccessibilityLoadingToken;
+
+
+/* Searching for elements matching a predicate
+ */
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute API_AVAILABLE(macos(26.0));  //(NSArray *) - UIElements matching search predicate; param:(NSDictionary *) with NSAccessibilitySearch*Key keys
+
+/*
+ Returns a dictionary with search results for a given search predicate dictionary. The return
+ dictionary uses NSAccessibilitySearchResultElementKey to return a UI element and uses
+ NSAccessibilitySearchResultRangeKey to return a range (NSValue). The search predicate
+ dictionary has several different keys to perform and filter searches. An example of a key is
+ NSAccessibilitySearchIdentifiersKey, which is the name of the category to search.
+ */
+APPKIT_EXTERN NSAccessibilityParameterizedAttributeName const NSAccessibilityResultsForSearchPredicateParameterizedAttribute API_AVAILABLE(macos(10.12));
+
+/*
+ Keys for the search predicate dictionary for use by
+ NSAccessibilityResultsForSearchPredicateParameterizedAttribute
+ */
+// Array of strings of the name of the category to search (e.g. ["Headings", "Bold Text"])
+APPKIT_EXTERN NSString *const NSAccessibilitySearchIdentifiersKey API_AVAILABLE(macos(10.12));
+// UI element that is used as the current item to search before or after
+APPKIT_EXTERN NSString *const NSAccessibilitySearchCurrentElementKey API_AVAILABLE(macos(10.12));
+// Range (NSValue) that is used as the current place to search before or after
+APPKIT_EXTERN NSString *const NSAccessibilitySearchCurrentRangeKey API_AVAILABLE(macos(10.12));
+// String of the direction to search (e.g. NSAccessibilitySearchDirectionNext)
+APPKIT_EXTERN NSString *const NSAccessibilitySearchDirectionKey API_AVAILABLE(macos(10.12));
+// Unsigned integer (NSNumber) of the number of search results to fetch
+APPKIT_EXTERN NSString *const NSAccessibilitySearchResultsLimitKey API_AVAILABLE(macos(10.12));
+// String of the text to filter against. This is used to get type-ahead results. For example,
+// given a list of primary colors and the search text "Re", "Red" could be returned as a result
+APPKIT_EXTERN NSString *const NSAccessibilitySearchTextKey API_AVAILABLE(macos(10.12));
+
+// Values for the NSAccessibilitySearchDirectionKey
+APPKIT_EXTERN NSString *const NSAccessibilitySearchDirectionNext API_AVAILABLE(macos(10.12));
+APPKIT_EXTERN NSString *const NSAccessibilitySearchDirectionPrevious API_AVAILABLE(macos(10.12));
+
+/*
+ Keys for the return search result dictionary for use by
+ NSAccessibilityResultsForSearchPredicateParameterizedAttribute
+ */
+APPKIT_EXTERN NSString *const NSAccessibilitySearchResultElementKey API_AVAILABLE(macos(10.12));
+APPKIT_EXTERN NSString *const NSAccessibilitySearchResultRangeKey API_AVAILABLE(macos(10.12));
+APPKIT_EXTERN NSString *const NSAccessibilitySearchResultDescriptionOverrideKey API_AVAILABLE(macos(10.13));
+APPKIT_EXTERN NSString *const NSAccessibilitySearchResultLoaderKey API_AVAILABLE(macos(10.13));
+
+/* Values for the NSAccessibilitySearchKey key used in
+ NSAccessibilityResultsForSearchPredicateParameterizedAttribute
+ and NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute
+ */
+
+typedef NSString * NSAccessibilitySearchKey NS_TYPED_ENUM;
+
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityAnyTypeSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityArticleSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityBlockquoteSameLevelSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityBlockquoteSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityBoldFontSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityButtonSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityCheckBoxSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityControlSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityDifferentTypeSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityFontChangeSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityFontColorChangeSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityFrameSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityGraphicSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingLevel1SearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingLevel2SearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingLevel3SearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingLevel4SearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingLevel5SearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingLevel6SearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingSameLevelSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityHeadingSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityItalicFontSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityKeyboardFocusableSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityLandmarkSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityLinkSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityListSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityLiveRegionSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityMisspelledWordSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityOutlineSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityPlainTextSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityRadioGroupSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilitySameTypeSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityStaticTextSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityStyleChangeSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityTableSameLevelSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityTableSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityTextFieldSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityTextStateChangeTypeKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityTextStateSyncKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityUnderlineSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityUnvisitedLinkSearchKey API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSAccessibilitySearchKey const NSAccessibilityVisitedLinkSearchKey API_AVAILABLE(macos(26.0));
+
+/* Returned by NSAccessibilityDateTimeComponentsAttribute
+ */
+typedef NSUInteger NSAccessibilityDateTimeComponentsFlags;
+enum {
+    /* Time Components */
+    NSAccessibilityHourMinuteDateTimeComponentsFlag       = 0x000c,
+    NSAccessibilityHourMinuteSecondDateTimeComponentsFlag = 0x000e,
+
+    /* Date Components */
+    NSAccessibilityYearMonthDateTimeComponentsFlag        = 0x00c0,
+    NSAccessibilityYearMonthDayDateTimeComponentsFlag        = 0x00e0,
+};
 
 /* Deprecated
  */

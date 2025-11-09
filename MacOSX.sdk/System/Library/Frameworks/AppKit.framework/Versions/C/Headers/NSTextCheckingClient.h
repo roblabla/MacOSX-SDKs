@@ -54,6 +54,9 @@ typedef NS_OPTIONS(NSUInteger, NSWritingToolsResultOptions) {
 
     // implies `RichText`, and Writing Tools may provide attributes for tabular layout
     NSWritingToolsResultTable = 1 << 3,
+    
+    // implies `RichText`, `List`, and `Table`, and Writing Tools may provide text with presentation intent attributes. Writing Tools will use `NSPresentationIntent` instead of `NSTextList` and `NSTextTable` to represent lists and tables.
+    NSWritingToolsResultPresentationIntent API_AVAILABLE(macos(26.0)) = 1 << 4,
 } API_AVAILABLE(macos(15.0));
 
 @protocol NSTextInputTraits

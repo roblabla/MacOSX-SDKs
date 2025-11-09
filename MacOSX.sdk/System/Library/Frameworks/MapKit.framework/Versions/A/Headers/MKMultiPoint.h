@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_9, 4_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(4.0), tvos(9.2), watchos(1.0))
 @interface MKMultiPoint : MKShape
 
 - (MKMapPoint *)points NS_RETURNS_INNER_POINTER;
@@ -24,8 +24,8 @@ NS_CLASS_AVAILABLE(10_9, 4_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 // Conveniences for determining the location/fraction (0.0 -> 1.0) distance-wise
 // at which a point or set of points exists on the shape
-- (CGFloat)locationAtPointIndex:(NSUInteger)index API_AVAILABLE(ios(14.0), tvos(14.0), macos(11.0)) API_UNAVAILABLE(watchos);
-- (NSArray<NSNumber *> *)locationsAtPointIndexes:(NSIndexSet *)indexes NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.0), tvos(14.0), macos(11.0)) API_UNAVAILABLE(watchos);
+- (CGFloat)locationAtPointIndex:(NSUInteger)index API_AVAILABLE(ios(14.0), tvos(14.0), macos(11.0), watchos(7.0));
+- (NSArray<NSNumber *> *)locationsAtPointIndexes:(NSIndexSet *)indexes NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(14.0), tvos(14.0), macos(11.0), watchos(7.0));
 
 @end
 

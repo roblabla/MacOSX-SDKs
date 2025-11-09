@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class ASAccessorySession;
 @class ASMigrationDisplayItem;
 @class ASPickerDisplayItem;
+@class ASPickerDisplaySettings;
 
 //===========================================================================================================================
 /// Manages accessories.
@@ -32,6 +33,12 @@ NS_SWIFT_SENDABLE
 ///
 /// To monitor for changes in this list, use your event handler to watch for the events ``ASAccessoryEventType/accessoryAdded``, ``ASAccessoryEventType/accessoryChanged``, and ``ASAccessoryEventType/accessoryRemoved``.
 @property (readonly, copy, nonatomic) NSArray<ASAccessory *> *accessories;
+
+/// Settings that affect the display of the accessory picker.
+///
+/// Use this property to configure settings like the picker timeout.
+@property (readwrite, copy, nullable, nonatomic) ASPickerDisplaySettings *pickerDisplaySettings
+API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
 
 /// Activate the session and start delivering events to an event handler.
 /// - Parameters:
@@ -102,6 +109,20 @@ NS_SWIFT_NAME(removeAccessory(_:completionHandler:));
                  options:(ASAccessoryRenameOptions) renameOptions
        completionHandler:(void(^)(NSError * _Nullable error)) completionHandler
 NS_SWIFT_NAME(renameAccessory(_:options:completionHandler:));
+
+/// Displays a view to upgrade an accessory with additional technology permissions.
+///
+/// Call this method to upgrade previously-added SSID-based accessories to use WiFi Aware.
+///
+/// - Parameters:
+///   - accessory: The accessory to update.
+///   - descriptor: An updated descriptor that the picker uses to add new technology authorization for the provided accessory.
+///   - completionHandler: A block or closure that executes after the picker is shown. The completion handler receives an <doc://com.apple.documentation/documentation/Foundation/NSError> instance if the upgrade operation encounters an error. In Swift, you can omit the completion handler by calling the method asynchronously and catching any error thrown by the method.
+- (void) updateAuthorization:(ASAccessory *) accessory
+                  descriptor:(ASDiscoveryDescriptor *) descriptor
+           completionHandler:(void(^)(NSError * _Nullable error)) completionHandler
+NS_SWIFT_NAME(updateAuthorization(for:descriptor:completionHandler:))
+API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
 
 @end
 

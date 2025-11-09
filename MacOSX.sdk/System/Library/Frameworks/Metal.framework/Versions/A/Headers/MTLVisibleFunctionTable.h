@@ -11,7 +11,7 @@
 #import <Metal/MTLResource.h>
 #import <Metal/MTLFunctionHandle.h>
 
-MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0))
 @interface MTLVisibleFunctionTableDescriptor : NSObject <NSCopying>
 
 /*!
@@ -28,7 +28,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
 
 @end
 
-API_AVAILABLE(macos(11.0), ios(14.0))
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0))
 @protocol MTLVisibleFunctionTable <MTLResource>
 
 /*!

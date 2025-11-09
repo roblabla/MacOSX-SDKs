@@ -26,42 +26,42 @@ API_UNAVAILABLE(macos)
 /*!
  * @brief The minimum value for the characteristic if it has a format of "int" or "float".
  */
-@property (readonly, nonatomic, nullable) NSNumber *minimumValue;
+@property (nullable, nonatomic, readonly) NSNumber *minimumValue;
 
 /*!
  * @brief The maximum value for the characteristic if it has a format of "int" or "float".
  */
-@property (readonly, nonatomic, nullable) NSNumber *maximumValue;
+@property (nullable, nonatomic, readonly) NSNumber *maximumValue;
 
 /*!
  * @brief Step value for the characteristic that indicates the minimum step value allowed if it has a format of "int" or "float".
  */
-@property (readonly, nonatomic, nullable) NSNumber *stepValue;
+@property (nullable, nonatomic, readonly) NSNumber *stepValue;
 
 /*!
  * @brief Max length value for the characteristic that indicates the maximum number of UTF-8 characters allowed if it has a format of "string".
  */
-@property (readonly, nonatomic, nullable) NSNumber *maxLength;
+@property (nullable, nonatomic, readonly) NSNumber *maxLength;
 
 /*!
  * @brief The format of the value. Refer to HMCharacteristicMetadataFormat constants for supported units.
  */
-@property (readonly, copy, nonatomic, nullable) NSString *format;
+@property (nullable, nonatomic, readonly, copy) NSString *format;
 
 /*!
  * @brief The units of the value. Refer to HMCharacteristicMetadataUnits constants for supported units.
  */
-@property (readonly, copy, nonatomic, nullable) NSString *units;
+@property (nullable, nonatomic, readonly, copy) NSString *units;
 
 /*!
  * @brief Manufacturer provided description for the characteristic to present to the user.
  */
-@property (readonly, copy, nonatomic, nullable) NSString *manufacturerDescription;
+@property (nullable, nonatomic, readonly, copy) NSString *manufacturerDescription;
 
 /*!
  * @brief The subset of valid values supported by the characteristic when the format is unsigned integral type.
  */
-@property (readonly, copy, nonatomic, nullable) NSArray<NSNumber *> *validValues API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
+@property (nullable, nonatomic, readonly, copy) NSArray<NSNumber *> *validValues API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0));
 
 @end
 

@@ -260,14 +260,6 @@ extern uint64_t         max_mem;                /* 64-bit size of memory - limit
  */
 #define MALLOC_MEDIUM_CHUNK_SIZE (8ULL * 1024 * 1024) /* 8 MB */
 
-/**
- * The size of the largest allocation which can be used in the kernel without
- * special accessors/attributes. When using accessors/attributes, this limit can
- * be overridden when making allocations/mappings through various APIs by
- * setting the "no soft limit" option.
- */
-#define VM_KERNEL_SIMPLE_MAX_SIZE (1ULL << 30) /* 1GB */
-
 
 
 extern vm_size_t        page_size;

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2695.255.71
+current-version: 2732.100.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -15,6 +15,24 @@ exports:
                        '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOSHAAMc', 
                        '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOSQAAMc', 
                        '_$s10ContactsUI030ContactHeaderViewWrapperActionE5StyleOSYAAMc', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC07workingC0So9CNContactCvgTj', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC07workingC0So9CNContactCvgTq', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC07workingC0So9CNContactCvpMV', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC17hostingControllerSo06NSViewH0CvMTj', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC17hostingControllerSo06NSViewH0CvMTq', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC17hostingControllerSo06NSViewH0CvgTj', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC17hostingControllerSo06NSViewH0CvgTq', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC17hostingControllerSo06NSViewH0CvpMV', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC17hostingControllerSo06NSViewH0CvsTj', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC17hostingControllerSo06NSViewH0CvsTq', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC7contact15actionsProvider4isMeACSo9CNContactC_So011CNUIContactd7ActionsI0_pSbtcfC', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC7contact15actionsProvider4isMeACSo9CNContactC_So011CNUIContactd7ActionsI0_pSbtcfCTj', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC7contact15actionsProvider4isMeACSo9CNContactC_So011CNUIContactd7ActionsI0_pSbtcfCTq', 
+                       '_$s10ContactsUI22ContactCardViewWrapperC7contact15actionsProvider4isMeACSo9CNContactC_So011CNUIContactd7ActionsI0_pSbtcfc', 
+                       '_$s10ContactsUI22ContactCardViewWrapperCACycfC', '_$s10ContactsUI22ContactCardViewWrapperCACycfc', 
+                       '_$s10ContactsUI22ContactCardViewWrapperCMa', '_$s10ContactsUI22ContactCardViewWrapperCMn', 
+                       '_$s10ContactsUI22ContactCardViewWrapperCMo', '_$s10ContactsUI22ContactCardViewWrapperCMu', 
+                       '_$s10ContactsUI22ContactCardViewWrapperCN', '_$s10ContactsUI22ContactCardViewWrapperCfD', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvMTj', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvMTq', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC011quickActionE5StyleAA0cdefheI0OvgTj', 
@@ -133,8 +151,8 @@ exports:
                        CNUIDatabaseFetcher, CNUIEnvironment, CNUIFaultingParentContainerCache, 
                        CNUIMemoizingParentContainerCache, CNUIMutableEnvironment, 
                        CNUISeededParentContainerCache, CNUISymbolRepository, CNUIVCardSharingItem, 
-                       CNUIVCardSharingTask, CNUserActionTouchBar, _TtC10ContactsUI24ContactHeaderViewWrapper, 
-                       _TtC10ContactsUI27CNAvatarPickerViewInterface ]
+                       CNUIVCardSharingTask, CNUserActionTouchBar, _TtC10ContactsUI22ContactCardViewWrapper, 
+                       _TtC10ContactsUI24ContactHeaderViewWrapper, _TtC10ContactsUI27CNAvatarPickerViewInterface ]
     objc-ivars:      [ ABCNContactNameFormatter._sortOrder, CNUIEnvironment._avatarPickerExtensionManager, 
                        CNUIEnvironment._contactStoreWithAllContacts, CNUIEnvironment._contactStoreWithLocalAndDonatedContacts, 
                        CNUIEnvironment._defaultContactStore, CNUIEnvironment._editingPolicy, 

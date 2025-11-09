@@ -109,6 +109,8 @@ SwiftVersions:
       SwiftName: kCAContentsFormatRGBA16Float
     - Name: kCAContentsFormatGray8Uint
       SwiftName: kCAContentsFormatGray8Uint
+    - Name: kCAContentsFormatAutomatic
+      SwiftName: kCAContentsFormatAutomatic
 #
 # CAMediaTimingFillMode
 #
@@ -219,6 +221,8 @@ Globals:
   SwiftName: RGBA16Float
 - Name: kCAContentsFormatGray8Uint
   SwiftName: gray8Uint
+- Name: kCAContentsFormatAutomatic
+  SwiftName: automatic
 #
 #CAMediaTimingFillMode
 - Name: kCAFillModeForwards

@@ -4,7 +4,7 @@
 
     Framework:  AVFoundation
  
-    Copyright 2014-2019 Apple Inc. All rights reserved.
+    Copyright 2014-2025 Apple Inc. All rights reserved.
 
 */
 
@@ -153,61 +153,91 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataConte
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0), visionos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataIsMontage                       API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
-/*!
- @constant AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent
- @abstract A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0).
- @discussion
-   Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
-*/
+/// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0).
+/// 
+/// Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataFullFrameRatePlaybackIntent     API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
-/*!
- @constant AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto
- @abstract A value of type kCMMetadataBaseDataType_UInt8 indicating whether this Live Photo movie was captured in "Auto" mode.
- @discussion
-   Clients capturing LivePhoto content may add this movie-level metadata to signify that the movie content should only be used (when swiping between photos, or force-touching a photo) if it's sufficiently dynamic. For instance, photos of static scenes or documents are to be excluded from the Live Photo experience.
-*/
+/// A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0).
+/// 
+/// This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCinematicVideoIntent            API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCameraISOSensitivity            API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCameraWhiteBalance              API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTWhiteBalanceFactors     API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataWhiteBalanceByCCTColorMatrices  API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedAngle         API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCameraShutterSpeedTime          API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8").
+/// 
+/// This is track-level metadata for video track that is associated with the camera.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCameraLensIrisFNumber           API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78").
+/// 
+/// This is track-level metadata for video track that is associated with the camera.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCameraLensModel                 API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm").
+/// 
+/// This is track-level metadata for video track that is associated with the camera.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataCameraFocalLength35mmEquivalent API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this Live Photo movie was captured in "Auto" mode.
+/// 
+/// Clients capturing LivePhoto content may add this movie-level metadata to signify that the movie content should only be used (when swiping between photos, or force-touching a photo) if it's sufficiently dynamic. For instance, photos of static scenes or documents are to be excluded from the Live Photo experience.
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto                   API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
-/*!
- @constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore
- @abstract A value of type kCMMetadataBaseDataType_Float32.
- @discussion
-    Live Photo movies may be algorithmically scored from 0. to 1. on their level of vitality. A Live Photo movie with a low vitality score offers little dynamism to the still photo it accompanies. The vitality score is normalized and independent of the vitality scoring version of the algorithm (see AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion). If a Live Photo movie contains the AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto key and its value is non-zero, apps should read the AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore value and only display the movie's content if the score is 0.5 or higher.
-    If the capture session includes a metadata output configured to provide face, dog, or cat metadata objects, their presence will greatly increase the vitality score.
-*/
+
+/// A value of type kCMMetadataBaseDataType_Float32.
+/// 
+/// Live Photo movies may be algorithmically scored from 0. to 1. on their level of vitality. A Live Photo movie with a low vitality score offers little dynamism to the still photo it accompanies. The vitality score is normalized and independent of the vitality scoring version of the algorithm (see AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion). If a Live Photo movie contains the AVMetadataIdentifierQuickTimeMetadataAutoLivePhoto key and its value is non-zero, apps should read the AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore value and only display the movie's content if the score is 0.5 or higher.
+/// If the capture session includes a metadata output configured to provide face, dog, or cat metadata objects, their presence will greatly increase the vitality score.
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScore          API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
-/*!
- @constant AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion
- @abstract A value of type kCMMetadataBaseDataType_UInt32.
- @discussion
-    The version of the algorithm that scored the Live Photo movie for vitality.
-*/
+/// A value of type kCMMetadataBaseDataType_UInt32.
+/// 
+/// The version of the algorithm that scored the Live Photo movie for vitality.
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataLivePhotoVitalityScoringVersion API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
-/*!
- @constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore
- @abstract A value of type kCMMetadataBaseDataType_Float32.
- @discussion
-    The video may be scored by a heuristic which considers factors such as exposure and focus.  The value ranges from 0-1, where a score below 0.5 indicates the asset has serious flaws.
-*/
+/// A value of type kCMMetadataBaseDataType_Float32.
+/// 
+/// The video may be scored by a heuristic which considers factors such as exposure and focus. The value ranges from 0-1, where a score below 0.5 indicates the asset has serious flaws.
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScore          API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
-/*!
- @constant AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion
- @abstract A value of type kCMMetadataBaseDataType_UInt32.
- @discussion
-    The version of the algorithm that provided the spatial over capture quality score.
-*/
+/// A value of type kCMMetadataBaseDataType_UInt32.
+/// 
+/// The version of the algorithm that provided the spatial over capture quality score.
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataSpatialOverCaptureQualityScoringVersion API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
-/*!
- @constant AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters
- @abstract A value of type kCMMetadataBaseDataType_Float32.
- @discussion
-    The horizontal accuracy of the provided location data (usually specified by AVMetadataIdentifierQuickTimeMetadataLocationISO6709).
-*/
+/// A value of type kCMMetadataBaseDataType_Float32.
+/// 
+/// The horizontal accuracy of the provided location data (usually specified by AVMetadataIdentifierQuickTimeMetadataLocationISO6709).
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataLocationHorizontalAccuracyInMeters API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0), visionos(1.0));
+
+/// A value of type kCMMetadataBaseDataType_RawData
+/// 
+/// The static presentation metadata, Apple Immersive Media Embedded (AIME), for Apple Immersive Video that originates from ImmersiveMediaSupport framework's VenueDescriptor.aimeData.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataAIMEData API_AVAILABLE(macos(26.0), visionos(26.0)) API_UNAVAILABLE(ios, tvos, watchos);
+
+/// A value of type kCMMetadataBaseDataType_RawData
+/// 
+/// The presentation timed metadata for Apple Immerisve Video. Value is a JSON-encoding of ImmersiveMediaSupport framework's PresentationDescriptor object.
+AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierQuickTimeMetadataPresentationImmersiveMedia API_AVAILABLE(macos(26.0), visionos(26.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
 // iTunesMetadata
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifieriTunesMetadataAlbum                              API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
@@ -356,7 +386,6 @@ AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierID3MetadataUserURL    
 
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierIcyMetadataStreamTitle                           API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 AVF_EXPORT AVMetadataIdentifier const AVMetadataIdentifierIcyMetadataStreamURL                             API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
-
 
 #else
 #import <AVFCore/AVMetadataIdentifiers.h>

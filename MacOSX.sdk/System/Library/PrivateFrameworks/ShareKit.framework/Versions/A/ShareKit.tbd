@@ -19,7 +19,8 @@ exports:
                        _SHKSharingServiceParametersSessionIDKey, _SHKSupportsCollaborationKey, 
                        _SHK_AlwaysAllowPerformingServices, _SHK_AlwaysAllowQueryingServices, 
                        _SHK_DocumentTypeNameFromShareType, _SHK_DocumentTypeNameFromURL, 
-                       _SHK_GladeEnabled, _SHK_InitialExtensionViewFrameInWindowCoordinatesForAnimationIn, 
+                       _SHK_GladeEnabled, _SHK_IconImageIdentifierForExtensionIdentifier, 
+                       _SHK_ImageForExtensionImageIdentifier, _SHK_InitialExtensionViewFrameInWindowCoordinatesForAnimationIn, 
                        _SHK_MediumScaleSymbolImageWithName, _SHK_RunningInPlugin, 
                        _SHK_SharedItemSourceFrameInWindowCoordinatesForExtensionItem, 
                        _SHK_anyAncestorWindowIsFullscreen, _SHK_anyAncestorWindowIsMovable, 
@@ -39,8 +40,9 @@ exports:
                        SHKDefaults, SHKDurationFormatter, SHKImageViewNoAccessibility, 
                        SHKMessagesLaunchEventContext, SHKSandbox, SHKServiceCompletionInfo, 
                        SHKShareBox, SHKShareCounterFieldCell, SHKShareImageView, 
-                       SHKShareSheetTransport, SHKShareSheetViewModel, SHKShareSmallTextFieldCell, 
-                       SHKShareTitleFieldCell, SHKShareWindow, SHKShareWindowBackgroundView, 
-                       SHKSharingService, SHKSharingServicePicker, SHKSharingViewService ]
+                       SHKShareSheetHEICOptionsModel, SHKShareSheetTransport, SHKShareSheetViewModel, 
+                       SHKShareSmallTextFieldCell, SHKShareTitleFieldCell, SHKShareWindow, 
+                       SHKShareWindowBackgroundView, SHKSharingService, SHKSharingServicePicker, 
+                       SHKSharingViewService ]
     objc-ivars:      [ SHKShareWindow._isClosing ]
 ...

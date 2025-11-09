@@ -10,10 +10,11 @@ exports:
                        _STAEAExtractorOptionsArchiveID, _STAEAExtractorOptionsAsymmetricDecryptionKey, 
                        _STAEAExtractorOptionsSigningPublicKey, _STAEAExtractorOptionsSourceDirectory, 
                        _STAEAExtractorOptionsSourceDirectorySandboxExtension, _STAEAExtractorOptionsSymmetricDecryptionKey, 
-                       _STExtractorErrorDomain, _STRemoteExtractorEntitlementPrivileged, 
+                       _STExtractorErrorDomain, _STRemoteExtractorEntitlement, _STRemoteExtractorEntitlementPrivileged, 
                        _STRemoteExtractorOptionsDoesConsumeExtractedData, _STRemoteExtractorOptionsPluginBundleName, 
                        _STRemoteExtractorOptionsPluginBundlePath, _STRemoteExtractorOptionsPluginDirectory, 
                        _STRemoteExtractorOptionsSessionID, _STRemoteExtractorOptionsSuppressCompletionsDuringShutdown, 
+                       _STRemoteExtractorOptionsUsesReservePolicy, _STReservableSpacePolicyErrorDomain, 
                        _StreamingExtractorVersionNumber, _StreamingExtractorVersionString ]
-    objc-classes:    [ STRemoteExtractor ]
+    objc-classes:    [ STRemoteExtractor, STReservableSpacePolicy ]
 ...

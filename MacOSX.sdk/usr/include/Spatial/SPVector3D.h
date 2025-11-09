@@ -6,7 +6,7 @@
 #include <Spatial/SPProjectiveTransform3D.h>
 #include <Spatial/SPPoint3D.h>
 
-// MARK: - SPPoint3DMakeWithRotationAxis
+// MARK: - SPVector3DMakeWithRotationAxis
 
 /*!
  @abstract Creates a vector with elements specified as dimensions of a rotation axis structure.
@@ -25,7 +25,7 @@ SPVector3D SPVector3DMakeWithRotationAxis(SPRotationAxis3D axis) {
     return SPVector3DMake(axis.vector.x, axis.vector.y, axis.vector.z);
 }
 
-// MARK: - SPPoint3DMakeWithSize
+// MARK: - SPVector3DMakeWithSize
 
 /*!
  @abstract Creates a vector with elements specified as dimensions of a size structure.
@@ -44,7 +44,7 @@ SPVector3D SPVector3DMakeWithSize(SPSize3D size) {
     return SPVector3DMake(size.vector.x, size.vector.y, size.vector.z);
 }
 
-// MARK: - SPPoint3DMakeWithPoint
+// MARK: - SPVector3DMakeWithPoint
 
 /*!
  @abstract Creates a vector with elements specified a coordinates of a point structure.
@@ -585,6 +585,50 @@ SPVector3D SPVector3DMakeWithSphericalCoordinates(SPSphericalCoordinates3D coord
     SPPoint3D point = SPPoint3DMakeWithSphericalCoordinates(coords);
     
     return SPVector3DMakeWithPoint(point);
+}
+
+/*!
+ @abstract Returns a Spatial vector that represents the linear interpolation at @p t between two vectors.
+ 
+ @param from The starting vector.
+ @param to The ending vector.
+ @param t The value, between @p 0 and @p 1, that the function interpolates at.
+ 
+ @returns A new rotation. When @p t=0, the result is the @p from vector. When @p t=1.0, the result
+ is the @p to vector. For any other value of @p t, the result is a linear linear interpolation between the
+ two vectors.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DLerp(SPVector3D from, SPVector3D to, SPVector3D t)
+__API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DLerp(SPVector3D from, SPVector3D to, SPVector3D t) {
+    
+    return SPVector3DMakeWithVector(simd_mix(from.vector, to.vector, t.vector));
+}
+
+/*!
+ @abstract Returns a Spatial vector that represents the smooth interpolation at @p x between two vectors.
+ 
+ @param edge0 The lower edge of the interpolation function.
+ @param edge1 The upper edge of the interpolation function.
+ @param x The value that the function interpolates at.
+ 
+ @returns A new vector with each element set to `0` if `x <= edge0`, `1` if `x >= edge1`, and a Hermite interpolation between `0` and `1` if `edge0 < x < edge1`.
+ */
+SPATIAL_INLINE
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DSmoothstep(SPVector3D edge0, SPVector3D edge1, SPVector3D x)
+__API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
+SPATIAL_REFINED_FOR_SWIFT
+SPATIAL_OVERLOADABLE
+SPVector3D SPVector3DSmoothstep(SPVector3D edge0, SPVector3D edge1, SPVector3D x) {
+    
+    return SPVector3DMakeWithVector(simd_smoothstep(edge0.vector, edge1.vector, x.vector));
 }
 
 #endif /* SPVector3D_h */

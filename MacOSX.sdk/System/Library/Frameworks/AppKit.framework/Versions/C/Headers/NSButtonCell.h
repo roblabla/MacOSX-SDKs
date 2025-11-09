@@ -62,7 +62,10 @@ typedef NS_ENUM(NSUInteger, NSBezelStyle) {
     
     /// A bezel style that is typically used in table rows to display information about the row, such as a count.
     NSBezelStyleBadge API_AVAILABLE(macos(10.7)) = 15,
-    
+
+    /// A bezel style with a glass effect
+    NSBezelStyleGlass API_AVAILABLE(macos(26.0)) = 16,
+
     NSBezelStyleShadowlessSquare API_DEPRECATED_WITH_REPLACEMENT("NSBezelStyleSmallSquare", macos(10.0, API_TO_BE_DEPRECATED)) = 6,
     NSBezelStyleTexturedSquare API_DEPRECATED_WITH_REPLACEMENT("NSBezelStyleSmallSquare", macos(10.0, API_TO_BE_DEPRECATED)) = 8,
     

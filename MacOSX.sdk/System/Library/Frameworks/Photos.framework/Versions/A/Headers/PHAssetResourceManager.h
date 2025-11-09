@@ -30,6 +30,7 @@ OS_EXPORT
 
 
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHAssetResourceManager : NSObject
 
 + (PHAssetResourceManager *)defaultManager;

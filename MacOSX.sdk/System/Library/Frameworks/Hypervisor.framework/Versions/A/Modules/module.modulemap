@@ -1,5 +1,8 @@
 framework module Hypervisor [system] {
-  umbrella "Headers"
-  module * { export * }
-  export *
+    requires !maccatalyst
+
+    umbrella header "Hypervisor.h"
+
+    export *
+    module * { export * }
 }

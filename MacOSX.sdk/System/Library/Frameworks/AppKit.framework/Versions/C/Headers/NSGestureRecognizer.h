@@ -9,6 +9,7 @@
 #import <CoreGraphics/CoreGraphics.h>
 #import <AppKit/NSTouch.h>
 #import <AppKit/AppKitDefines.h>
+#import <AppKit/NSEvent.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
@@ -72,6 +73,9 @@ API_AVAILABLE(macos(10.10)) NS_SWIFT_UI_ACTOR
 
 /* individual NSGestureRecognizer subclasses may provide subclass-specific location information. see individual subclasses for details */
 - (NSPoint)locationInView:(nullable NSView*)view;
+
+@property (nullable, copy) NSString *name API_AVAILABLE(macos(26.0));
+@property (readonly) NSEventModifierFlags modifierFlags API_AVAILABLE(macos(26.0));
 
 @end
 
@@ -147,6 +151,7 @@ API_AVAILABLE(macos(10.10)) NS_SWIFT_UI_ACTOR
 - (void)mouseDragged:(NSEvent *)event;
 - (void)rightMouseDragged:(NSEvent *)event;
 - (void)otherMouseDragged:(NSEvent *)event;
+- (void)mouseCancelled:(NSEvent *)event API_AVAILABLE(macos(26.0)) NS_SWIFT_NAME(mouseCancelled(with:));
 - (void)keyDown:(NSEvent *)event;
 - (void)keyUp:(NSEvent *)event;
 - (void)flagsChanged:(NSEvent *)event;

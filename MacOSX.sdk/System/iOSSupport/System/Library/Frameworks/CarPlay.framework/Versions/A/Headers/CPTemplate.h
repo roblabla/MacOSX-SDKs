@@ -10,10 +10,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define CARPLAY_TEMPLATE_UI_ACTOR NS_SWIFT_UI_ACTOR __attribute__((annotate ("main-thread-only")))
+
 /**
  Abstract superclass for a template object.
  */
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPTemplate : NSObject <NSSecureCoding>
 
 /**

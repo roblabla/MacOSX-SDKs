@@ -8,11 +8,11 @@
 #import <MapKit/MKGeometry.h>
 #import <MapKit/MKPointOfInterestFilter.h>
 
-MK_EXTERN const CLLocationDistance MKPointsOfInterestRequestMaxRadius API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+MK_EXTERN const CLLocationDistance MKPointsOfInterestRequestMaxRadius API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0));
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), watchos(7.0))
 @interface MKLocalPointsOfInterestRequest : NSObject <NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

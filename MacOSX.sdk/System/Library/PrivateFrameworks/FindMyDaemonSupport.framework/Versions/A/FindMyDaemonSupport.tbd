@@ -8,9 +8,9 @@ allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FindMyCloudKit, FindMyDaemonSupportTests, FindMyServerInteraction, 
-                       SPShared, SPSharedTests, findmybeaconingd, findmylocateagent, 
-                       findmylocated, findmylocatedTests, searchpartyd, searchpartydTests, 
-                       searchpartyuseragent, sptool ]
+                       FindingUI, FindingUIAngel, SPShared, SPSharedTests, findmybeaconingd, 
+                       findmydevicetool, findmylocateagent, findmylocated, findmylocatedTests, 
+                       searchpartyd, searchpartydTests, searchpartyuseragent, sptool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -105,6 +105,7 @@ exports:
                        '_$s19FindMyDaemonSupport05ActorC0PAAE16bundleIdentifierSSvg', 
                        '_$s19FindMyDaemonSupport05ActorC0PAAE16bundleIdentifierSSvpMV', 
                        '_$s19FindMyDaemonSupport05ActorC0PAAE17sandboxParametersSDyS2SGvgZ', 
+                       '_$s19FindMyDaemonSupport05ActorC0PAAE17sandboxParametersSDyS2SGvpZMV', 
                        '_$s19FindMyDaemonSupport05ActorC0PAAE8_confstrySSSgs5Int32VFZ', 
                        '_$s19FindMyDaemonSupport05ActorC0PAAE8_flattenySaySSGSDyS2SGFZ', 
                        '_$s19FindMyDaemonSupport05ActorC0PScATb', '_$s19FindMyDaemonSupport05ActorC0Ps23CustomStringConvertibleTb', 

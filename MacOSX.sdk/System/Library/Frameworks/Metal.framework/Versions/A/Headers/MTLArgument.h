@@ -9,126 +9,15 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLTexture.h>
 #import <Metal/MTLCommandEncoder.h>
+#import <Metal/MTLDataType.h>
+#import <Metal/MTLTensor.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
-typedef NS_ENUM(NSUInteger, MTLDataType) {
 
-    MTLDataTypeNone = 0,
-
-    MTLDataTypeStruct = 1,
-    MTLDataTypeArray  = 2,
-
-    MTLDataTypeFloat  = 3,
-    MTLDataTypeFloat2 = 4,
-    MTLDataTypeFloat3 = 5,
-    MTLDataTypeFloat4 = 6,
-
-    MTLDataTypeFloat2x2 = 7,
-    MTLDataTypeFloat2x3 = 8,
-    MTLDataTypeFloat2x4 = 9,
-
-    MTLDataTypeFloat3x2 = 10,
-    MTLDataTypeFloat3x3 = 11,
-    MTLDataTypeFloat3x4 = 12,
-
-    MTLDataTypeFloat4x2 = 13,
-    MTLDataTypeFloat4x3 = 14,
-    MTLDataTypeFloat4x4 = 15,
-
-    MTLDataTypeHalf  = 16,
-    MTLDataTypeHalf2 = 17,
-    MTLDataTypeHalf3 = 18,
-    MTLDataTypeHalf4 = 19,
-
-    MTLDataTypeHalf2x2 = 20,
-    MTLDataTypeHalf2x3 = 21,
-    MTLDataTypeHalf2x4 = 22,
-
-    MTLDataTypeHalf3x2 = 23,
-    MTLDataTypeHalf3x3 = 24,
-    MTLDataTypeHalf3x4 = 25,
-
-    MTLDataTypeHalf4x2 = 26,
-    MTLDataTypeHalf4x3 = 27,
-    MTLDataTypeHalf4x4 = 28,
-
-    MTLDataTypeInt  = 29,
-    MTLDataTypeInt2 = 30,
-    MTLDataTypeInt3 = 31,
-    MTLDataTypeInt4 = 32,
-
-    MTLDataTypeUInt  = 33,
-    MTLDataTypeUInt2 = 34,
-    MTLDataTypeUInt3 = 35,
-    MTLDataTypeUInt4 = 36,
-
-    MTLDataTypeShort  = 37,
-    MTLDataTypeShort2 = 38,
-    MTLDataTypeShort3 = 39,
-    MTLDataTypeShort4 = 40,
-
-    MTLDataTypeUShort = 41,
-    MTLDataTypeUShort2 = 42,
-    MTLDataTypeUShort3 = 43,
-    MTLDataTypeUShort4 = 44,
-
-    MTLDataTypeChar  = 45,
-    MTLDataTypeChar2 = 46,
-    MTLDataTypeChar3 = 47,
-    MTLDataTypeChar4 = 48,
-
-    MTLDataTypeUChar  = 49,
-    MTLDataTypeUChar2 = 50,
-    MTLDataTypeUChar3 = 51,
-    MTLDataTypeUChar4 = 52,
-
-    MTLDataTypeBool  = 53,
-    MTLDataTypeBool2 = 54,
-    MTLDataTypeBool3 = 55,
-    MTLDataTypeBool4 = 56,
-
-    MTLDataTypeTexture API_AVAILABLE(macos(10.13), ios(11.0)) = 58,
-    MTLDataTypeSampler API_AVAILABLE(macos(10.13), ios(11.0)) = 59,
-    MTLDataTypePointer API_AVAILABLE(macos(10.13), ios(11.0)) = 60,
-
-    MTLDataTypeR8Unorm         API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 62,
-    MTLDataTypeR8Snorm         API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 63,
-    MTLDataTypeR16Unorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 64,
-    MTLDataTypeR16Snorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 65,
-    MTLDataTypeRG8Unorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 66,
-    MTLDataTypeRG8Snorm        API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 67,
-    MTLDataTypeRG16Unorm       API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 68,
-    MTLDataTypeRG16Snorm       API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 69,
-    MTLDataTypeRGBA8Unorm      API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 70,
-    MTLDataTypeRGBA8Unorm_sRGB API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 71,
-    MTLDataTypeRGBA8Snorm      API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 72,
-    MTLDataTypeRGBA16Unorm     API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 73,
-    MTLDataTypeRGBA16Snorm     API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 74,
-    MTLDataTypeRGB10A2Unorm    API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 75,
-    MTLDataTypeRG11B10Float    API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 76,
-    MTLDataTypeRGB9E5Float     API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5)) = 77,
-    MTLDataTypeRenderPipeline  API_AVAILABLE(macos(10.14), ios(13.0)) = 78,
-    MTLDataTypeComputePipeline API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(13.0)) = 79,
-    MTLDataTypeIndirectCommandBuffer   API_AVAILABLE(macos(10.14), ios(12.0)) = 80,
-    MTLDataTypeLong  API_AVAILABLE(macos(12.0), ios(14.0)) = 81,
-    MTLDataTypeLong2 API_AVAILABLE(macos(12.0), ios(14.0)) = 82,
-    MTLDataTypeLong3 API_AVAILABLE(macos(12.0), ios(14.0)) = 83,
-    MTLDataTypeLong4 API_AVAILABLE(macos(12.0), ios(14.0)) = 84,
-
-    MTLDataTypeULong  API_AVAILABLE(macos(12.0), ios(14.0)) = 85,
-    MTLDataTypeULong2 API_AVAILABLE(macos(12.0), ios(14.0)) = 86,
-    MTLDataTypeULong3 API_AVAILABLE(macos(12.0), ios(14.0)) = 87,
-    MTLDataTypeULong4 API_AVAILABLE(macos(12.0), ios(14.0)) = 88,
-    MTLDataTypeVisibleFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 115,
-    MTLDataTypeIntersectionFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 116,
-    MTLDataTypePrimitiveAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 117,
-    MTLDataTypeInstanceAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 118,
-    MTLDataTypeBFloat  API_AVAILABLE(macos(14.0), ios(17.0)) = 121,
-    MTLDataTypeBFloat2 API_AVAILABLE(macos(14.0), ios(17.0)) = 122,
-    MTLDataTypeBFloat3 API_AVAILABLE(macos(14.0), ios(17.0)) = 123,
-    MTLDataTypeBFloat4 API_AVAILABLE(macos(14.0), ios(17.0)) = 124,
-    
+typedef NS_ENUM(NSUInteger, MTLIndexType) {
+    MTLIndexTypeUInt16 = 0,
+    MTLIndexTypeUInt32 = 1,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
 @class MTLArgument;
@@ -169,6 +58,9 @@ typedef NS_ENUM(NSUInteger, MTLDataType) {
  
  @constant MTLBindingTypeObjectPayload
  This binding represents an object payload.
+ 
+ @constant MTLBindingTypeTensor
+ This binding represents a tensor object.
 */
 typedef NS_ENUM(NSInteger, MTLBindingType) {
     MTLBindingTypeBuffer = 0,
@@ -182,6 +74,7 @@ typedef NS_ENUM(NSInteger, MTLBindingType) {
     MTLBindingTypeInstanceAccelerationStructure = 26,
     MTLBindingTypeIntersectionFunctionTable = 27,
     MTLBindingTypeObjectPayload = 34,
+    MTLBindingTypeTensor API_AVAILABLE(macos(26.0), ios(26.0)) = 37,
 } API_AVAILABLE(macos(11.0), ios(14.0));
 
 /*!
@@ -209,10 +102,10 @@ typedef NS_ENUM(NSUInteger, MTLArgumentType) {
 
     MTLArgumentTypeImageblockData API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5))     = 16,
     MTLArgumentTypeImageblock API_AVAILABLE(macos(11.0), macCatalyst(14.0), ios(11.0), tvos(14.5))         = 17,
-    MTLArgumentTypeVisibleFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 24,
-    MTLArgumentTypePrimitiveAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 25,
-    MTLArgumentTypeInstanceAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0)) = 26,
-    MTLArgumentTypeIntersectionFunctionTable API_AVAILABLE(macos(11.0), ios(14.0)) = 27,
+    MTLArgumentTypeVisibleFunctionTable API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0)) = 24,
+    MTLArgumentTypePrimitiveAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0)) = 25,
+    MTLArgumentTypeInstanceAccelerationStructure API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0)) = 26,
+    MTLArgumentTypeIntersectionFunctionTable API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0)) = 27,
 } API_DEPRECATED_WITH_REPLACEMENT("MTLBindingType", macos(10.11, 13.0), ios(8.0, 16.0));
 
 
@@ -232,6 +125,7 @@ typedef MTLBindingAccess MTLArgumentAccess API_DEPRECATED_WITH_REPLACEMENT("MTLB
 @class MTLArrayType;
 @class MTLTextureReferenceType;
 @class MTLPointerType;
+@class MTLTensorReferenceType;
 
 MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 @interface MTLType : NSObject
@@ -251,6 +145,10 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 
 - (nullable MTLTextureReferenceType *)textureReferenceType  API_AVAILABLE(macos(10.13), ios(11.0));
 - (nullable MTLPointerType *)pointerType  API_AVAILABLE(macos(10.13), ios(11.0));
+/// Provides a description of the underlying tensor type when this struct member holds a tensor.
+///
+/// - Returns: A description of the tensor type that this struct member holds, or `nil` if this struct member doesn't hold a tensor.
+- (nullable MTLTensorReferenceType *)tensorReferenceType API_AVAILABLE(macos(26.0), ios(26.0));
 
 @property (readonly) NSUInteger argumentIndex API_AVAILABLE(macos(10.13), ios(11.0));
 
@@ -278,6 +176,10 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 - (nullable MTLArrayType *)elementArrayType;
 - (nullable MTLTextureReferenceType *)elementTextureReferenceType  API_AVAILABLE(macos(10.13), ios(11.0));
 - (nullable MTLPointerType *)elementPointerType  API_AVAILABLE(macos(10.13), ios(11.0));
+/// Provides a description of the underlying tensor type when this array holds tensors as its elements.
+///
+/// - Returns: A description of the tensor type that this array holds, or `nil` if this struct member doesn't hold a tensor.
+- (nullable MTLTensorReferenceType *)elementTensorReferenceType API_AVAILABLE(macos(26.0), ios(26.0));
 
 
 @end
@@ -307,10 +209,30 @@ MTL_EXPORT API_AVAILABLE(macos(10.13), ios(11.0))
 
 @end
 
+/// An object that represents a tensor in the shading language in a struct or array.
+MTL_EXPORT API_AVAILABLE(macos(26.0), ios(26.0))
+@interface MTLTensorReferenceType : MTLType
+
+/// The underlying data format of the tensor.
+@property (readonly) MTLTensorDataType tensorDataType;
+
+/// The data format you use for indexing into the tensor.
+@property (readonly) MTLDataType indexType;
+
+/// The array of sizes, in elements, one for each dimension of this tensor.
+///
+/// Because shader-bound tensors have dynamic extents, the ``MTLTensorExtents/rank`` of `dimensions` corresponds to the rank the shader function specifies, and ``MTLTensorExtents/extentsAtDimensionIndex:`` always returns a value of -1.
+@property (nullable, readonly) MTLTensorExtents *dimensions;
+
+/// A value that represents the read/write permissions of the tensor.
+@property (readonly) MTLBindingAccess access;
+
+@end
+
 /*!
  MTLArgument
 */
-MTL_EXPORT
+MTL_EXPORT NS_SWIFT_SENDABLE
 API_DEPRECATED_WITH_REPLACEMENT("MTLBinding", macos(10.11, 13.0), ios(8.0, 16.0))
 @interface MTLArgument : NSObject
 
@@ -340,7 +262,7 @@ API_DEPRECATED_WITH_REPLACEMENT("MTLBinding", macos(10.11, 13.0), ios(8.0, 16.0)
 
 @end
 
-MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
+MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0)) NS_SWIFT_SENDABLE
 @protocol MTLBinding<NSObject>
 @property (readonly) NSString *name;
 @property (readonly) MTLBindingType type;
@@ -378,6 +300,24 @@ MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
 @protocol MTLObjectPayloadBinding<MTLBinding>
 @property (readonly) NSUInteger      objectPayloadAlignment;        // min alignment of starting offset in the buffer
 @property (readonly) NSUInteger      objectPayloadDataSize;         // sizeof(T) for T *argName
+@end
+
+/// An object that represents a tensor bound to a graphics or compute function or a machine learning function.
+MTL_EXPORT API_AVAILABLE(macos(26.0), ios(26.0))
+@protocol MTLTensorBinding<MTLBinding>
+
+/// The underlying data format of this tensor.
+@property (readonly) MTLTensorDataType tensorDataType;
+
+/// The data format you use for indexing into the tensor.
+@property (readonly) MTLDataType indexType;
+
+/// The array of sizes, in elements, one for each dimension of this tensor.
+///
+/// Because shader-bound tensors have dynamic extents, if this tensor is shader bound, the ``MTLTensorExtents/rank`` of `dimensions` corresponds to the rank the shader function specifies, and ``MTLTensorExtents/extentsAtDimensionIndex:`` always returns a value of -1.
+/// In the case of functions used with machine learning pipelines, `dimensions` corresponds to the default shape, if you provide one. Otherwise, it's `nil` in the case of an undefined shape.
+@property (nullable, readonly) MTLTensorExtents *dimensions;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -91,7 +91,14 @@ exports:
                        _kNWStatsSelectTCP, _kNWStatsSelectTuneSkipNoChangeConnOnClose, 
                        _kNWStatsSelectTuneSkipNoChangeConnOnRefresh, _kNWStatsSelectTuneTargetOpimization, 
                        _kNWStatsSelectUDP, _kNWStatsSelectUDPSubFlows, _kNWStatsSelectUserlandConnections, 
-                       _kNWStatsTuneMaxConsecutiveReads ]
+                       _kNWStatsThresholdPDPInterfaces, _kNWStatsTuneMaxConsecutiveReads, 
+                       _kNtstatMetricClientAdded, _kNtstatMetricClientName, _kNtstatMetricClientPid, 
+                       _kNtstatMetricClientWatching, _kNtstatMetricId, _kNtstatMetricIdPretty, 
+                       _kNtstatMetricItemName, _kNtstatMetricItemPretty, _kNtstatMetricItemValue, 
+                       _kNtstatMetricItems, _kNtstatMetricsCurrent, _kNtstatMetricsGlobal, 
+                       _kNtstatMetricsGrandTotal, _kNtstatMetricsPid, _kNtstatMetricsPrevious, 
+                       _kNtstatMetricsProcessName, _kNtstatMetricsReportZeroCounts, 
+                       _kNtstatMetricsSelf ]
     objc-classes:    [ NWSInterfaceSnapshot, NWSProtocolSnapshot, NWSQUICSnapshot, 
                        NWSRouteSnapshot, NWSRouteSnapshotter, NWSSnapshot, NWSSnapshotSource, 
                        NWSSnapshotter, NWSTCPSnapshot, NWSUDPSnapshot, NWStatisticsInterfaceSource, 

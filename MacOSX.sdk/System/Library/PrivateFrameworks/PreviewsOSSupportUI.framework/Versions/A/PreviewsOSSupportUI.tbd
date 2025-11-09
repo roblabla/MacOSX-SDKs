@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsOSSupportUI.framework/Versions/A/PreviewsOSSupportUI'
-current-version: 22.40.1
+current-version: 23.0.52
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -167,6 +167,13 @@ exports:
                        '_$s19PreviewsOSSupportUI20SceneUpdateHandshakeVMa', '_$s19PreviewsOSSupportUI20SceneUpdateHandshakeVMn', 
                        '_$s19PreviewsOSSupportUI20SceneUpdateHandshakeVN', '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO0A11MessagingOS18TransportInterfaceAAMc', 
                        '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO0aB00D19ConnectionInterfaceAAMc', 
+                       '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13OneWayMessageO0A12FoundationOS25PropertyListRepresentableAAMc', 
+                       '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13OneWayMessageO17propertyListValue0A12FoundationOS08PropertyM0Vvg', 
+                       '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13OneWayMessageO17propertyListValue0A12FoundationOS08PropertyM0VvpMV', 
+                       '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13OneWayMessageO17propertyListValueAE0A12FoundationOS08PropertyM0V_tKcfC', 
+                       '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13OneWayMessageOMa', 
+                       '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13OneWayMessageOMn', 
+                       '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13OneWayMessageON', 
                        '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13TwoWayMessageO0A12FoundationOS25PropertyListRepresentableAAMc', 
                        '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13TwoWayMessageO17propertyListValue0A12FoundationOS08PropertyM0Vvg', 
                        '_$s19PreviewsOSSupportUI24ShellToPreviewNonUIAgentO13TwoWayMessageO17propertyListValue0A12FoundationOS08PropertyM0VvpMV', 
@@ -220,8 +227,10 @@ exports:
                        '_$s7SwiftUI20InterfaceOrientationV017PreviewsOSSupportB0E07previewD00E11MessagingOS13PreviewTraitsV0D0OvpMV', 
                        '_$sSo13CATransactionC19PreviewsOSSupportUIE11afterCommit0B12FoundationOS6FutureCyytGyFZ', 
                        '_$sSo13CATransactionC19PreviewsOSSupportUIE11afterCommit2on_y0B12FoundationOS13ExecutionLaneV_yyctFZ', 
+                       '_$sSo13CATransactionC19PreviewsOSSupportUIE11afterCommit2on_y0B12FoundationOS13ExecutionLaneV_yyctFZfA_', 
                        '_$sSo13CATransactionC19PreviewsOSSupportUIE16afterSynchronize0B12FoundationOS6FutureCyytGyFZ', 
                        '_$sSo13CATransactionC19PreviewsOSSupportUIE16afterSynchronize2on_y0B12FoundationOS13ExecutionLaneV_yyctFZ', 
+                       '_$sSo13CATransactionC19PreviewsOSSupportUIE16afterSynchronize2on_y0B12FoundationOS13ExecutionLaneV_yyctFZfA_', 
                        '_$sSo13CATransactionC19PreviewsOSSupportUIE16afterSynchronizeyyYaFZ', 
                        '_$sSo13CATransactionC19PreviewsOSSupportUIE16afterSynchronizeyyYaFZTu', 
                        _PreviewsOSSupportUIVersionNumber, _PreviewsOSSupportUIVersionString, 

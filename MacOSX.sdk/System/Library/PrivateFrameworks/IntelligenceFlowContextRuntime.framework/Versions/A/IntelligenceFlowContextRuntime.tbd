@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IntelligenceFlowContextRuntime.framework/Versions/A/IntelligenceFlowContextRuntime'
-current-version: 218.5
+current-version: 3500.32.1
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -19,6 +19,7 @@ exports:
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV14detectEntities4text11appBundleIdSay0abC008DetectedF0OGSS_SSSgtKF', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV17supportedEntitiesShy0abC0010DetectableF4TypeOGvg', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV17supportedEntitiesShy0abC0010DetectableF4TypeOGvpMV', 
+                       '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorV7prewarmyyF', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorVAA04TextfH8ProtocolAAMc', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorVAA04TextfH8ProtocolAAWP', 
                        '_$s30IntelligenceFlowContextRuntime017SiriEntityMatcherF8DetectorVMa', 

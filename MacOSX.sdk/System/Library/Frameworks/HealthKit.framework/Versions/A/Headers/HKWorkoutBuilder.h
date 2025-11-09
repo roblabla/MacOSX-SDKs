@@ -107,7 +107,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
  @param         startDate   The start date of the workout.
  @param         completion  Called once data collection has started or has failed to start.
  */
-- (void)beginCollectionWithStartDate:(NSDate *)startDate completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(beginCollection(at:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)beginCollectionWithStartDate:(NSDate *)startDate completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(beginCollection(at:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        addSamples:completion:
@@ -123,7 +123,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
                             to the builder successfully. If success is NO, error will be non-nil and contain the error
                             encountered while adding the new samples.
  */
-- (void)addSamples:(NSArray<HKSample *> *)samples completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addSamples(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)addSamples:(NSArray<HKSample *> *)samples completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addSamples(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        addWorkoutEvents:completion:
@@ -137,7 +137,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
                                 YES, the events were added to the builder successfully. If success is NO, error will be
                                 non-null and will contain the error encountered during the insertion operation.
  */
-- (void)addWorkoutEvents:(NSArray<HKWorkoutEvent *> *)workoutEvents completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addWorkoutEvents(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)addWorkoutEvents:(NSArray<HKWorkoutEvent *> *)workoutEvents completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addWorkoutEvents(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        addMetadata:completion:
@@ -152,7 +152,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
                             be non-null and will contain the error encountered during the insertion operation. When an
                             error occurs, the builder's metadata property will remain unchanged.
  */
-- (void)addMetadata:(NSDictionary<NSString *, id> *)metadata completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addMetadata(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)addMetadata:(NSDictionary<NSString *, id> *)metadata completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addMetadata(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        addWorkoutActivity:completion:
@@ -167,7 +167,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
                                     non-null and will contain the error encountered during the insertion operation.
  */
 - (void)addWorkoutActivity:(HKWorkoutActivity *)workoutActivity
-                completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_SWIFT_ASYNC_NAME(addWorkoutActivity(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+                completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_SWIFT_ASYNC_NAME(addWorkoutActivity(_:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        updateActivityWithUUID:endDate:completion:
@@ -183,7 +183,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
  */
 - (void)updateActivityWithUUID:(NSUUID *)UUID
                        endDate:(NSDate *)endDate
-                    completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_SWIFT_NAME(updateActivity(uuid:end:completion:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+                    completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_SWIFT_NAME(updateActivity(uuid:end:completion:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        updateActivityWithUUID:addMetadata:completion:
@@ -202,7 +202,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
  */
 - (void)updateActivityWithUUID:(NSUUID *)UUID
                    addMedatata:(NSDictionary<NSString *, id> *)metadata
-                    completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_SWIFT_NAME(updateActivity(uuid:adding:completion:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+                    completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_SWIFT_NAME(updateActivity(uuid:adding:completion:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        endCollectionWithEndDate:error:
@@ -212,7 +212,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
  @param         endDate     The end date of the workout.
  @param         completion  Called once data collection has stopped or has failed to stop.
  */
-- (void)endCollectionWithEndDate:(NSDate *)endDate completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(endCollection(at:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)endCollectionWithEndDate:(NSDate *)endDate completion:(void (^NS_SWIFT_SENDABLE)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(endCollection(at:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 /*!
  @method        finishWorkoutWithCompletion:
@@ -223,7 +223,7 @@ API_AVAILABLE(ios(12.0), watchos(5.0))
                             workout and error are nil then finishing the workout succeeded but the workout sample
                             is not available because the device is locked.
  */
-- (void)finishWorkoutWithCompletion:(void (^)(HKWorkout * _Nullable_result workout, NSError * _Nullable error))completion;
+- (void)finishWorkoutWithCompletion:(void (^NS_SWIFT_SENDABLE)(HKWorkout * _Nullable_result workout, NSError * _Nullable error))completion;
 
 /*!
  @method        discardWorkout

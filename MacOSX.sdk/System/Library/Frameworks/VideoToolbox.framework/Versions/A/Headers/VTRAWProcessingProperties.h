@@ -58,6 +58,14 @@ VT_EXPORT const CFStringRef kVTRAWProcessingPropertyKey_MetalDeviceRegistryID CF
 */
 VT_EXPORT const CFStringRef kVTRAWProcessingPropertyKey_OutputColorAttachments API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos); // Read Only, CFDictionaryRef
 
+/*!
+	@constant   kVTRAWProcessingPropertyKey_MetadataForSidecarFile
+	@abstract
+		This property, if supported, returns the current processing metadata on the RAW Processor. The returned value can be used by the caller to create, or overwrite an existing sidecar file.
+	@discussion
+		This property is not supported by all RAWProcessors. The metadata returned represents a fully-formed sidecar file, and should be compatible with the MediaExtension FormatReader.
+*/
+VT_EXPORT const CFStringRef kVTRAWProcessingPropertyKey_MetadataForSidecarFile API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos); // Read Only, CFData
 
 #pragma pack(pop)
     

@@ -9,7 +9,7 @@ allowable-clients:
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ Cling-iOS, Cling-macOS, StickerFoundation, StickerKit, StickerKit-iOS, 
                        StickerKit-macOS, StickerKitInternal, StickerKitInternal-iOS, 
-                       StickerKitInternal-macOS ]
+                       StickerKitInternal-macOS, StickerPickerService ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

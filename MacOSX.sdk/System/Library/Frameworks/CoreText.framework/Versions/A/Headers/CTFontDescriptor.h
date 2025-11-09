@@ -97,8 +97,10 @@ CT_EXPORT const CFStringRef kCTFontTraitsAttribute CT_AVAILABLE(macos(10.5), ios
 CT_EXPORT const CFStringRef kCTFontVariationAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
     @defined    kCTFontVariationAxesAttribute
-    @discussion An array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis* keys.
+    @discussion An array of variation axis dictionaries or null if the font does not support variations. Each variation axis dictionary contains the five kCTFontVariationAxis-prefixed keys.
+                Unlike the result of CTFontCopyVariationAxes(), kCTFontVariationAxisNameKey values for this attribute are not localized.
                 Before macOS 13.0 and iOS 16.0 this attribute is not accurate and CTFontCopyVariationAxes() should be used instead.
+
     @seealso    CTFontCopyVariationAxes
 */
 CT_EXPORT const CFStringRef kCTFontVariationAxesAttribute CT_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
@@ -147,7 +149,10 @@ CT_EXPORT const CFStringRef kCTFontMacintoshEncodingsAttribute CT_AVAILABLE(maco
 /*!
     @defined    kCTFontFeaturesAttribute
     @abstract   The array of font features.
-    @discussion This key is used to specify or obtain the font features for a font reference. The value associated with this key is a CFArrayRef of font feature dictionaries. This features list contains the feature information from the 'feat' table of the font. See the CTFontCopyFeatures() API in   CTFont.h.
+    @discussion This key is used to specify or obtain the font features for a font reference. The value associated with this key is a CFArrayRef of font feature dictionaries as documented for CTFontCopyFeatures() in <CoreText/CTFont.h>.
+                Unlike the result of CTFontCopyFeatures(), this attribute does not contain localized names.
+
+    @seealso    CTFontCopyFeatures
 */
 CT_EXPORT const CFStringRef kCTFontFeaturesAttribute CT_AVAILABLE(macos(10.5), ios(3.2), watchos(2.0), tvos(9.0));
 /*!
@@ -336,8 +341,9 @@ CTFontDescriptorRef CTFontDescriptorCreateWithAttributes(
                 A CFDictionaryRef of arbitrary attributes.
 
     @result     This function creates a new copy of the original font descriptor with attributes augmented by those specified. If there are conflicts between attributes, the new attributes will replace existing ones, except for kCTFontVariationAttribute and kCTFontFeatureSettingsAttribute which will be merged.
-
                 Starting with macOS 10.12 and iOS 10.0, setting the value of kCTFontFeatureSettingsAttribute to kCFNull will clear the feature settings of the original font descriptor. Setting the value of any individual feature settings pair in the kCTFontFeatureSettingsAttribute value array to kCFNull will clear that feature setting alone. For example, an element like @{ (id)kCTFontFeatureTypeIdentifierKey: @(kLigaturesType), (id)kCTFontFeatureSelectorIdentifierKey: (id)kCFNull } means clear the kLigatureType feature set in the original font descriptor. An element like @[ @"liga", (id)kCFNull ] will have the same effect.
+
+    @seealso    kCTFontFeatureSettingsAttribute
 */
 CT_EXPORT
 CTFontDescriptorRef CTFontDescriptorCreateCopyWithAttributes(
@@ -419,6 +425,9 @@ CTFontDescriptorRef CTFontDescriptorCreateCopyWithVariation(
                 The feature selector identifier.
 
     @result     A copy of the original font descriptor modified with the given feature settings.
+
+    @seealso    CTFontDescriptorCreateCopyWithAttributes
+    @seealso    kCTFontFeatureSettingsAttribute
 */
 CT_EXPORT
 CTFontDescriptorRef CTFontDescriptorCreateCopyWithFeature(

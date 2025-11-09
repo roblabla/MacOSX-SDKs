@@ -369,13 +369,10 @@ SPATIAL_REFINED_FOR_SWIFT
 SPATIAL_OVERLOADABLE
 SPPose3D SPPose3DConcatenation(SPPose3D lhs, SPPose3D rhs) {
     
-    simd_quatd q = simd_mul(lhs.rotation.quaternion, rhs.rotation.quaternion);
-    q = simd_normalize(q);
+    simd_double4x4 m = simd_mul(SPPose3DGet4x4Matrix(lhs),
+                                SPPose3DGet4x4Matrix(rhs));
     
-    simd_double3 p = simd_act(rhs.rotation.quaternion, lhs.position.vector);
-    p += rhs.position.vector;
-    
-    return SPPose3DMakeWithVector(p, q);
+    return SPPose3DMakeWith4x4Matrix(m);
 }
 
 // MARK: - Rotation
@@ -528,5 +525,6 @@ SPPose3D SPPose3DFlip(SPPose3D pose,
     t = SPAffineTransform3DFlip(t, flipAxis);
     return SPPose3DMakeWithAffineTransform(t);
 }
+
 
 #endif /* SPPose3D_h */

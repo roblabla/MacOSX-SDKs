@@ -23,6 +23,8 @@
 #import <CloudKit/CKReference.h>
 #import <CloudKit/CKServerChangeToken.h>
 #import <CloudKit/CKShare.h>
+#import <CloudKit/CKShareAccessRequester.h>
+#import <CloudKit/CKShareBlockedIdentity.h>
 #import <CloudKit/CKShareMetadata.h>
 #import <CloudKit/CKShareParticipant.h>
 #import <CloudKit/CKSubscription.h>
@@ -52,6 +54,7 @@
 #import <CloudKit/CKOperation.h>
 #import <CloudKit/CKOperationGroup.h>
 #import <CloudKit/CKQueryOperation.h>
+#import <CloudKit/CKShareRequestAccessOperation.h>
 
 #pragma mark - Sharing Support
 #import <CloudKit/NSItemProvider+CKSharingSupport.h>

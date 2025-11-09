@@ -63,6 +63,12 @@ tessellationFactorBufferOffset:(NSUInteger)offset tessellationFactorBufferInstan
 - (void)clearBarrier API_AVAILABLE(macos(14.0), ios(17.0), tvos(18.1), visionos(2.1));
 
 
+- (void)setDepthStencilState:(nullable id<MTLDepthStencilState>)depthStencilState API_AVAILABLE(macos(26.0), ios(26.0));
+- (void)setDepthBias:(float)depthBias slopeScale:(float)slopeScale clamp:(float)clamp API_AVAILABLE(macos(26.0), ios(26.0));
+- (void)setDepthClipMode:(MTLDepthClipMode)depthClipMode API_AVAILABLE(macos(26.0), ios(26.0));
+- (void)setCullMode:(MTLCullMode)cullMode API_AVAILABLE(macos(26.0), ios(26.0));
+- (void)setFrontFacingWinding:(MTLWinding)frontFacingWindning API_AVAILABLE(macos(26.0), ios(26.0));
+- (void)setTriangleFillMode:(MTLTriangleFillMode)fillMode API_AVAILABLE(macos(26.0), ios(26.0));
 
 - (void)reset;
 

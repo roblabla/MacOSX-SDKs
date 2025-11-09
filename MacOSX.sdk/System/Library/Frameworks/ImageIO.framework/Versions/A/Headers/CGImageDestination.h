@@ -189,8 +189,29 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationDateTime IMAGEIO_AVAILABLE_S
  */
 IMAGEIO_EXTERN const CFStringRef kCGImageDestinationOrientation IMAGEIO_AVAILABLE_STARTING(10.8, 7.0);
 
+/*  For KTX files:
+ *  The key 'kCGImagePropertyEncoder' can be used with CGImageDestinationAddImage...() to specify the encoder to be used.
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyEncoder        IMAGEIO_AVAILABLE_STARTING(10.12, 10.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyASTCEncoder    IMAGEIO_AVAILABLE_STARTING(10.12, 10.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyPVREncoder     IMAGEIO_AVAILABLE_STARTING(10.12, 10.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyBCEncoder      IMAGEIO_AVAILABLE_STARTING(10.14, 12.0);
 
-/* Losslessly copies the contents of the image source, 'isrc', to the 
+/* For BC / KTX(BC) / DDS files:
+ * Specifies the specific pixel format to be encoded.
+ * The value of this key must be an integer CFNumberRef, containing a OpenGL format enum.
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyBCFormat          IMAGEIO_AVAILABLE_STARTING(10.14, 12.0);
+
+/* For ASTC / KTX(ASTC) files:
+ * Specifies ASTC block size.
+ * The value of this key must be either kCGImagePropertyASTCBlockSize4x4 or kCGImagePropertyASTCBlockSize8x8.
+ */
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyASTCBlockSize          IMAGEIO_AVAILABLE_STARTING(10.12, 10.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyASTCBlockSize4x4       IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+IMAGEIO_EXTERN const CFStringRef kCGImagePropertyASTCBlockSize8x8       IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+
+/* Losslessly copies the contents of the image source, 'isrc', to the
  * destination, 'idst'. The image data will not be modified. The image's 
  * metadata can be modified by adding the keys and values defined above to 
  * 'options'. No other images should be added to the image destination. 
@@ -222,10 +243,18 @@ IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeToISOGainmap    IMAGEI
 
 /* kCGImageSourceEncodeRequestOptions - CFDictionaryRef to specify additional options
  */
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeRequestOptions  IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeBaseIsSDR       IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
-IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeTonemapMode     IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeRequestOptions                IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeBaseIsSDR                     IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeTonemapMode                   IMAGEIO_AVAILABLE_STARTING(15, 18.0, 18.0, 11.0);
 
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeIsBaseImage                   IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeBaseColorSpace                IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeBasePixelFormatRequest        IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeGenerateGainMapWithBaseImage  IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeGainMapPixelFormatRequest     IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeGainMapSubsampleFactor        IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
+IMAGEIO_EXTERN const CFStringRef kCGImageDestinationEncodeAlternateColorSpace           IMAGEIO_AVAILABLE_STARTING(16, 19.0, 19.0, 12.0);
 
 CF_ASSUME_NONNULL_END
 

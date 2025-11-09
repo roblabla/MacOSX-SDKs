@@ -83,8 +83,7 @@ nw_tcp_options_set_no_delay(nw_protocol_options_t options,
  *		A TCP protocol options object.
  *
  * @param no_push
- *		A boolean indicating that TCP should be set into
- *		no-push mode.
+ *		A boolean indicating that TCP should use no-push mode.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void
@@ -101,8 +100,7 @@ nw_tcp_options_set_no_push(nw_protocol_options_t options,
  *		A TCP protocol options object.
  *
  * @param no_options
- *		A boolean indicating that TCP should be set into
- *		no-options mode.
+ *		A boolean indicating that TCP should use no-options mode.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 void

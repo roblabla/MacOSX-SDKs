@@ -1,10 +1,10 @@
-.\""Copyright (c) 2001-2023, Apple Inc. All Rights Reserved.
+.\""Copyright (c) 2001-2025, Apple Inc. All Rights Reserved.
 .Dd Nov 3, 2003 
 .Dt DEFAULTS 1
-.Os "Mac OS X"
+.Os "macOS"
 .Sh NAME
 .Nm defaults
-.Nd access the Mac OS X user defaults system
+.Nd access the macOS user defaults system
 .Sh SYNOPSIS
 .Nm
 .Op Fl currentHost | Fl host Ar hostname
@@ -47,7 +47,7 @@ delete
 .Pp
 .Sh DESCRIPTION
 .Nm Defaults
-allows users to read, write, and delete Mac OS X user defaults from a command-line shell. Mac OS X applications and other programs use the defaults system to record user preferences and other information that must be maintained when the applications aren't running (such as default font for new documents, or the position of an Info panel). Much of this information is accessible through an application's Preferences panel, but some of it isn't, such as the position of the Info panel. You can access this information with
+allows users to read, write, and delete macOS user defaults from a command-line shell. Applications and other programs on macOS use the defaults system to record user preferences and other information that must be maintained when the applications aren't running (such as default font for new documents, or the position of an Info panel). Much of this information is accessible through an application's Preferences panel, but some of it isn't, such as the position of the Info panel. You can access this information with
 .Nm
 .Pp
 .Sy Note:
@@ -184,7 +184,7 @@ will assume the value is a string. For best results, use one of the type flags, 
 Allows the user to specify a string as the value for the given preference key.
 .It Fl data
 Allows the user to specify a bunch of raw data bytes as the value for the given preference key. 
-The data must be provided in hexidecimal.
+The data must be provided in hexadecimal.
 .It Fl int[eger]
 Allows the user to specify an integer as the value for the given preference key.
 .It Fl float

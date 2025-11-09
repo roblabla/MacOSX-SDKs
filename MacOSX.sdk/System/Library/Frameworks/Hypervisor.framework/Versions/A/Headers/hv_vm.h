@@ -21,7 +21,7 @@ __BEGIN_DECLS
  @param max_vcpu_count Pointer to the max vcpu count (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vm_get_max_vcpu_count(uint32_t *max_vcpu_count);
 
 /*!
@@ -29,7 +29,7 @@ hv_return_t hv_vm_get_max_vcpu_count(uint32_t *max_vcpu_count);
  @param config Configuration. Pass NULL for the default configuration.
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vm_create(hv_vm_config_t _Nullable config);
 
 /*!
@@ -38,7 +38,7 @@ hv_return_t hv_vm_create(hv_vm_config_t _Nullable config);
  @discussion
     Requires all vCPUs be destroyed.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vm_destroy(void);
 
 /*!
@@ -49,7 +49,7 @@ hv_return_t hv_vm_destroy(void);
  @param flags READ, WRITE and EXECUTE permissions of the region
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vm_map(void *addr, hv_ipa_t ipa, size_t size, hv_memory_flags_t flags);
 
 /*!
@@ -58,7 +58,7 @@ hv_return_t hv_vm_map(void *addr, hv_ipa_t ipa, size_t size, hv_memory_flags_t f
  @param size Size in bytes of the region to be unmapped (must be a multiple of the page size)
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vm_unmap(hv_ipa_t ipa, size_t size);
 
 /*!
@@ -68,7 +68,7 @@ hv_return_t hv_vm_unmap(hv_ipa_t ipa, size_t size);
  @param flags New READ, WRITE and EXECUTE permissions of the region
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vm_protect(hv_ipa_t ipa, size_t size, hv_memory_flags_t flags);
 
 __END_DECLS

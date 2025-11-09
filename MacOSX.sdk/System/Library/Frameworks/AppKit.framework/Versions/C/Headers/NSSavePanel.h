@@ -50,7 +50,7 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @property (nullable, copy) NSUserInterfaceItemIdentifier identifier;
 
 /**
- `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asyncronously be set, if required.
+ `NSSavePanel`/`NSOpenPanel`: Sets and returns the directory that is displayed. Set to `nil` to display the default directory. This method will not block to resolve the URL, and the directory will asynchronously be set, if required.
  - Note: Can only be set during the configuration phase.
  */
 @property (nullable, copy) NSURL *directoryURL API_AVAILABLE(macos(10.6));
@@ -75,7 +75,11 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 @property (nullable, copy) UTType *currentContentType API_AVAILABLE(macos(15.0));
 
 /**
- Sets and returns the accessory view shown in the panel. For applications that link on SnowLeopard and higher, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height).
+ Sets and returns the accessory view shown in the panel.
+
+ For applications that link on 10.6 and later, the accessoryView's frame will be observed, and any changes the programmer makes to the frame will automatically be reflected in the panel (including animated changes to the frame height).
+
+ For applications that link on 26.0 and later and use the Liquid Glass design, the accessoryView's control metrics will be the larger Liquid Glass metrics.
  */
 @property (nullable, strong) NSView *accessoryView;
 
@@ -170,8 +174,8 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 /**
  `NSSavePanel`: Whether or not to show a control for selecting the type of the saved file.
  The control shows the types in `allowedContentTypes`. Default is `NO`.
- - Note: If @c allowedContentTypes is empty, the control is not displayed.
  `NSOpenPanel`: Not used.
+ - Note: If `allowedContentTypes` is empty, the control is not displayed.
  */
 @property BOOL showsContentTypes API_AVAILABLE(macos(15.0));
 

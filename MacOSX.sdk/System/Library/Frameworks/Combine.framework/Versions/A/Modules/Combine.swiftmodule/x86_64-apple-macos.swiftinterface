@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3022 -module-name Combine
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -target-variant x86_64-apple-ios18.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-library-evolution -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 3023 -module-name Combine
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Darwin
 import Swift
 import _Concurrency
@@ -70,7 +70,9 @@ extension Combine.Cancellable {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func subscribe<S>(on scheduler: S, options: S.SchedulerOptions? = nil) -> Combine.Publishers.SubscribeOn<Self, S> where S : Combine.Scheduler
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -80,13 +82,17 @@ extension Combine.Publishers {
     public let upstream: Upstream
     public let scheduler: Context
     public let options: Context.SchedulerOptions?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, scheduler: Context, options: Context.SchedulerOptions?)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func measureInterval<S>(using scheduler: S, options: S.SchedulerOptions? = nil) -> Combine.Publishers.MeasureInterval<Self, S> where S : Combine.Scheduler
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -191,7 +197,9 @@ extension Combine.Publishers.TryFilter {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func breakpoint(receiveSubscription: ((any Combine.Subscription) -> Swift.Bool)? = nil, receiveOutput: ((Self.Output) -> Swift.Bool)? = nil, receiveCompletion: ((Combine.Subscribers.Completion<Self.Failure>) -> Swift.Bool)? = nil) -> Combine.Publishers.Breakpoint<Self>
+  #endif
   public func breakpointOnError() -> Combine.Publishers.Breakpoint<Self>
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
@@ -203,7 +211,9 @@ extension Combine.Publishers {
     public let receiveSubscription: ((any Combine.Subscription) -> Swift.Bool)?
     public let receiveOutput: ((Upstream.Output) -> Swift.Bool)?
     public let receiveCompletion: ((Combine.Subscribers.Completion<Combine.Publishers.Breakpoint<Upstream>.Failure>) -> Swift.Bool)?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, receiveSubscription: ((any Combine.Subscription) -> Swift.Bool)? = nil, receiveOutput: ((Upstream.Output) -> Swift.Bool)? = nil, receiveCompletion: ((Combine.Subscribers.Completion<Combine.Publishers.Breakpoint<Upstream>.Failure>) -> Swift.Bool)? = nil)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
@@ -386,6 +396,7 @@ extension Combine.Subscribers {
         }
     }
   public init<S>(_ s: S) where Input == S.Output, Failure == S.Failure, S : Combine.Subject
+  #if compiler(>=5.3) && $NonescapableTypes
   @inline(__always) @inlinable public init(receiveSubscription: ((any Combine.Subscription) -> Swift.Void)? = nil, receiveValue: ((Input) -> Combine.Subscribers.Demand)? = nil, receiveCompletion: ((Combine.Subscribers.Completion<Failure>) -> Swift.Void)? = nil) {
         box = ClosureBasedAnySubscriber(
             receiveSubscription ?? { _ in },
@@ -406,6 +417,7 @@ extension Combine.Subscribers {
             return "Anonymous AnySubscriber"
         }
     }
+  #endif
   @inline(__always) @inlinable public func receive(subscription: any Combine.Subscription) {
         box.receive(subscription: subscription)
     }
@@ -502,9 +514,13 @@ extension Combine.Just where Output : Swift.Equatable {
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Just {
   public func allSatisfy(_ predicate: (Output) -> Swift.Bool) -> Combine.Just<Swift.Bool>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryAllSatisfy(_ predicate: (Output) throws -> Swift.Bool) -> Swift.Result<Swift.Bool, any Swift.Error>.Publisher
+  #endif
   public func collect() -> Combine.Just<[Output]>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func compactMap<T>(_ transform: (Output) -> T?) -> Swift.Optional<T>.Publisher
+  #endif
   public func min(by areInIncreasingOrder: (Output, Output) -> Swift.Bool) -> Combine.Just<Output>
   public func max(by areInIncreasingOrder: (Output, Output) -> Swift.Bool) -> Combine.Just<Output>
   public func prepend(_ elements: Output...) -> Combine.Publishers.Sequence<[Output], Combine.Just<Output>.Failure>
@@ -512,33 +528,69 @@ extension Combine.Just {
   public func append(_ elements: Output...) -> Combine.Publishers.Sequence<[Output], Combine.Just<Output>.Failure>
   public func append<S>(_ elements: S) -> Combine.Publishers.Sequence<[Output], Combine.Just<Output>.Failure> where Output == S.Element, S : Swift.Sequence
   public func contains(where predicate: (Output) -> Swift.Bool) -> Combine.Just<Swift.Bool>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryContains(where predicate: (Output) throws -> Swift.Bool) -> Swift.Result<Swift.Bool, any Swift.Error>.Publisher
+  #endif
   public func count() -> Combine.Just<Swift.Int>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func dropFirst(_ count: Swift.Int = 1) -> Swift.Optional<Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func drop(while predicate: (Output) -> Swift.Bool) -> Swift.Optional<Output>.Publisher
+  #endif
   public func first() -> Combine.Just<Output>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func first(where predicate: (Output) -> Swift.Bool) -> Swift.Optional<Output>.Publisher
+  #endif
   public func last() -> Combine.Just<Output>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func last(where predicate: (Output) -> Swift.Bool) -> Swift.Optional<Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func filter(_ isIncluded: (Output) -> Swift.Bool) -> Swift.Optional<Output>.Publisher
+  #endif
   public func ignoreOutput() -> Combine.Empty<Output, Combine.Just<Output>.Failure>
   public func map<T>(_ transform: (Output) -> T) -> Combine.Just<T>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryMap<T>(_ transform: (Output) throws -> T) -> Swift.Result<T, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func mapError<E>(_ transform: (Combine.Just<Output>.Failure) -> E) -> Swift.Result<Output, E>.Publisher where E : Swift.Error
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func output(at index: Swift.Int) -> Swift.Optional<Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func output<R>(in range: R) -> Swift.Optional<Output>.Publisher where R : Swift.RangeExpression, R.Bound == Swift.Int
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func prefix(_ maxLength: Swift.Int) -> Swift.Optional<Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func prefix(while predicate: (Output) -> Swift.Bool) -> Swift.Optional<Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func reduce<T>(_ initialResult: T, _ nextPartialResult: (T, Output) -> T) -> Swift.Result<T, Combine.Just<Output>.Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryReduce<T>(_ initialResult: T, _ nextPartialResult: (T, Output) throws -> T) -> Swift.Result<T, any Swift.Error>.Publisher
+  #endif
   public func removeDuplicates(by predicate: (Output, Output) -> Swift.Bool) -> Combine.Just<Output>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryRemoveDuplicates(by predicate: (Output, Output) throws -> Swift.Bool) -> Swift.Result<Output, any Swift.Error>.Publisher
+  #endif
   public func replaceError(with output: Output) -> Combine.Just<Output>
   public func replaceEmpty(with output: Output) -> Combine.Just<Output>
   public func retry(_ times: Swift.Int) -> Combine.Just<Output>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func scan<T>(_ initialResult: T, _ nextPartialResult: (T, Output) -> T) -> Swift.Result<T, Combine.Just<Output>.Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryScan<T>(_ initialResult: T, _ nextPartialResult: (T, Output) throws -> T) -> Swift.Result<T, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func setFailureType<E>(to failureType: E.Type) -> Swift.Result<Output, E>.Publisher where E : Swift.Error
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 final public class PassthroughSubject<Output, Failure> : Combine.Subject where Failure : Swift.Error {
@@ -640,7 +692,9 @@ extension Combine.Publishers {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func print(_ prefix: Swift.String = "", to stream: (any Swift.TextOutputStream)? = nil) -> Combine.Publishers.Print<Self>
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -650,7 +704,9 @@ extension Combine.Publishers {
     public let prefix: Swift.String
     public let upstream: Upstream
     public let stream: (any Swift.TextOutputStream)?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, prefix: Swift.String, to stream: (any Swift.TextOutputStream)? = nil)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
@@ -731,6 +787,7 @@ extension Combine.Publishers {
 extension Combine.Publishers.SetFailureType : Swift.Equatable where Upstream : Swift.Equatable {
   public static func == (lhs: Combine.Publishers.SetFailureType<Upstream, Failure>, rhs: Combine.Publishers.SetFailureType<Upstream, Failure>) -> Swift.Bool
 }
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional {
   @available(macOS 11.0, iOS 14.0, tvOS 14.0, watchOS 7.0, *)
@@ -746,48 +803,111 @@ extension Swift.Optional {
     public func receive<S>(subscriber: S) where Wrapped == S.Input, S : Combine.Subscriber, S.Failure == Swift.Never
   }
 }
+#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional.Publisher : Swift.Equatable where Wrapped : Swift.Equatable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func == (lhs: Swift.Optional<Wrapped>.Publisher, rhs: Swift.Optional<Wrapped>.Publisher) -> Swift.Bool
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional.Publisher where Wrapped : Swift.Equatable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func contains(_ output: Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Optional<Swift.Bool>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func removeDuplicates() -> Swift.Optional<Wrapped>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional.Publisher where Wrapped : Swift.Comparable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func min() -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func max() -> Swift.Optional<Wrapped>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Optional.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func allSatisfy(_ predicate: (Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Swift.Bool>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func collect() -> Swift.Optional<[Swift.Optional<Wrapped>.Publisher.Output]>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func compactMap<T>(_ transform: (Swift.Optional<Wrapped>.Publisher.Output) -> T?) -> Swift.Optional<T>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func min(by areInIncreasingOrder: (Swift.Optional<Wrapped>.Publisher.Output, Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func max(by areInIncreasingOrder: (Swift.Optional<Wrapped>.Publisher.Output, Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func contains(where predicate: (Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Swift.Bool>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func count() -> Swift.Optional<Swift.Int>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func dropFirst(_ count: Swift.Int = 1) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func drop(while predicate: (Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func first() -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func first(where predicate: (Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func last() -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func last(where predicate: (Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func filter(_ isIncluded: (Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func ignoreOutput() -> Combine.Empty<Swift.Optional<Wrapped>.Publisher.Output, Swift.Optional<Wrapped>.Publisher.Failure>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func map<T>(_ transform: (Swift.Optional<Wrapped>.Publisher.Output) -> T) -> Swift.Optional<T>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func output(at index: Swift.Int) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func output<R>(in range: R) -> Swift.Optional<Wrapped>.Publisher where R : Swift.RangeExpression, R.Bound == Swift.Int
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func prefix(_ maxLength: Swift.Int) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func prefix(while predicate: (Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func reduce<T>(_ initialResult: T, _ nextPartialResult: (T, Swift.Optional<Wrapped>.Publisher.Output) -> T) -> Swift.Optional<T>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func removeDuplicates(by predicate: (Swift.Optional<Wrapped>.Publisher.Output, Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Bool) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func replaceError(with output: Swift.Optional<Wrapped>.Publisher.Output) -> Swift.Optional<Swift.Optional<Wrapped>.Publisher.Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func replaceEmpty(with output: Swift.Optional<Wrapped>.Publisher.Output) -> Combine.Just<Wrapped>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func retry(_ times: Swift.Int) -> Swift.Optional<Wrapped>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func scan<T>(_ initialResult: T, _ nextPartialResult: (T, Swift.Optional<Wrapped>.Publisher.Output) -> T) -> Swift.Optional<T>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
@@ -879,7 +999,9 @@ extension Combine.Publishers {
 extension Combine.Publisher {
   public func collect() -> Combine.Publishers.Collect<Self>
   public func collect(_ count: Swift.Int) -> Combine.Publishers.CollectByCount<Self>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func collect<S>(_ strategy: Combine.Publishers.TimeGroupingStrategy<S>, options: S.SchedulerOptions? = nil) -> Combine.Publishers.CollectByTime<Self, S> where S : Combine.Scheduler
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -893,7 +1015,9 @@ extension Combine.Publishers {
     public let upstream: Upstream
     public let strategy: Combine.Publishers.TimeGroupingStrategy<Context>
     public let options: Context.SchedulerOptions?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, strategy: Combine.Publishers.TimeGroupingStrategy<Context>, options: Context.SchedulerOptions?)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, S.Input == [Upstream.Output]
   }
   public struct Collect<Upstream> : Combine.Publisher where Upstream : Combine.Publisher {
@@ -922,7 +1046,9 @@ extension Combine.Publishers.CollectByCount : Swift.Equatable where Upstream : S
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func receive<S>(on scheduler: S, options: S.SchedulerOptions? = nil) -> Combine.Publishers.ReceiveOn<Self, S> where S : Combine.Scheduler
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -932,7 +1058,9 @@ extension Combine.Publishers {
     public let upstream: Upstream
     public let scheduler: Context
     public let options: Context.SchedulerOptions?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, scheduler: Context, options: Context.SchedulerOptions?)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
@@ -1202,6 +1330,7 @@ extension Combine.Subscribers {
                 return numericCast(rhs.rawValue) != lhs
             }
         }
+    #if compiler(>=5.3) && $NonescapableTypes
     @inline(__always) @inlinable public var max: Swift.Int? {
       get {
             if self == .unlimited {
@@ -1211,6 +1340,7 @@ extension Combine.Subscribers {
             }
         }
     }
+    #endif
     public init(from decoder: any Swift.Decoder) throws
     public func encode(to encoder: any Swift.Encoder) throws
     public static func == (a: Combine.Subscribers.Demand, b: Combine.Subscribers.Demand) -> Swift.Bool
@@ -1309,7 +1439,9 @@ extension Combine.Publisher {
 public struct AsyncPublisher<P> : _Concurrency.AsyncSequence where P : Combine.Publisher, P.Failure == Swift.Never {
   public typealias Element = P.Output
   public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() async -> P.Output?
+    #endif
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias Element = P.Output
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -1326,7 +1458,9 @@ public struct AsyncPublisher<P> : _Concurrency.AsyncSequence where P : Combine.P
 public struct AsyncThrowingPublisher<P> : _Concurrency.AsyncSequence where P : Combine.Publisher {
   public typealias Element = P.Output
   public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $NonescapableTypes
     public mutating func next() async throws -> P.Output?
+    #endif
     @available(iOS 15.0, tvOS 15.0, watchOS 8.0, macOS 12.0, *)
     public typealias Element = P.Output
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -1394,8 +1528,12 @@ extension Combine.Publishers {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func compactMap<T>(_ transform: @escaping (Self.Output) -> T?) -> Combine.Publishers.CompactMap<Self, T>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryCompactMap<T>(_ transform: @escaping (Self.Output) throws -> T?) -> Combine.Publishers.TryCompactMap<Self, T>
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -1403,25 +1541,33 @@ extension Combine.Publishers {
     public typealias Failure = Upstream.Failure
     public let upstream: Upstream
     public let transform: (Upstream.Output) -> Output?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, transform: @escaping (Upstream.Output) -> Output?)
+    #endif
     public func receive<S>(subscriber: S) where Output == S.Input, S : Combine.Subscriber, Upstream.Failure == S.Failure
   }
   public struct TryCompactMap<Upstream, Output> : Combine.Publisher where Upstream : Combine.Publisher {
     public typealias Failure = Swift.Error
     public let upstream: Upstream
     public let transform: (Upstream.Output) throws -> Output?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, transform: @escaping (Upstream.Output) throws -> Output?)
+    #endif
     public func receive<S>(subscriber: S) where Output == S.Input, S : Combine.Subscriber, S.Failure == any Swift.Error
   }
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.CompactMap {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func compactMap<T>(_ transform: @escaping (Output) -> T?) -> Combine.Publishers.CompactMap<Upstream, T>
+  #endif
   public func map<T>(_ transform: @escaping (Output) -> T) -> Combine.Publishers.CompactMap<Upstream, T>
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.TryCompactMap {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func compactMap<T>(_ transform: @escaping (Output) throws -> T?) -> Combine.Publishers.TryCompactMap<Upstream, T>
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
@@ -1576,6 +1722,7 @@ extension Combine.Publishers.Merge8 : Swift.Equatable where A : Swift.Equatable,
 extension Combine.Publishers.MergeMany : Swift.Equatable where Upstream : Swift.Equatable {
   public static func == (lhs: Combine.Publishers.MergeMany<Upstream>, rhs: Combine.Publishers.MergeMany<Upstream>) -> Swift.Bool
 }
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result {
   public var publisher: Swift.Result<Success, Failure>.Publisher {
@@ -1591,51 +1738,114 @@ extension Swift.Result {
     public func receive<S>(subscriber: S) where Success == S.Input, Failure == S.Failure, S : Combine.Subscriber
   }
 }
+#endif
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result.Publisher : Swift.Equatable where Success : Swift.Equatable, Failure : Swift.Equatable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func == (lhs: Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher, rhs: Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher) -> Swift.Bool
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result.Publisher where Success : Swift.Equatable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func contains(_ output: Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Result<Swift.Bool, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func removeDuplicates() -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result.Publisher where Success : Swift.Comparable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func min() -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func max() -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func allSatisfy(_ predicate: (Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Bool) -> Swift.Result<Swift.Bool, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryAllSatisfy(_ predicate: (Swift.Result<Success, Failure>.Publisher.Output) throws -> Swift.Bool) -> Swift.Result<Swift.Bool, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func collect() -> Swift.Result<[Swift.Result<Success, Failure>.Publisher.Output], Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func min(by areInIncreasingOrder: (Swift.Result<Success, Failure>.Publisher.Output, Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Bool) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryMin(by areInIncreasingOrder: (Swift.Result<Success, Failure>.Publisher.Output, Swift.Result<Success, Failure>.Publisher.Output) throws -> Swift.Bool) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func max(by areInIncreasingOrder: (Swift.Result<Success, Failure>.Publisher.Output, Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Bool) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryMax(by areInIncreasingOrder: (Swift.Result<Success, Failure>.Publisher.Output, Swift.Result<Success, Failure>.Publisher.Output) throws -> Swift.Bool) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func contains(where predicate: (Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Bool) -> Swift.Result<Swift.Bool, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryContains(where predicate: (Swift.Result<Success, Failure>.Publisher.Output) throws -> Swift.Bool) -> Swift.Result<Swift.Bool, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func count() -> Swift.Result<Swift.Int, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func first() -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func last() -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func ignoreOutput() -> Combine.Empty<Swift.Result<Success, Failure>.Publisher.Output, Failure>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func map<T>(_ transform: (Swift.Result<Success, Failure>.Publisher.Output) -> T) -> Swift.Result<T, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryMap<T>(_ transform: (Swift.Result<Success, Failure>.Publisher.Output) throws -> T) -> Swift.Result<T, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func mapError<E>(_ transform: (Failure) -> E) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, E>.Publisher where E : Swift.Error
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func reduce<T>(_ initialResult: T, _ nextPartialResult: (T, Swift.Result<Success, Failure>.Publisher.Output) -> T) -> Swift.Result<T, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryReduce<T>(_ initialResult: T, _ nextPartialResult: (T, Swift.Result<Success, Failure>.Publisher.Output) throws -> T) -> Swift.Result<T, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func removeDuplicates(by predicate: (Swift.Result<Success, Failure>.Publisher.Output, Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Bool) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryRemoveDuplicates(by predicate: (Swift.Result<Success, Failure>.Publisher.Output, Swift.Result<Success, Failure>.Publisher.Output) throws -> Swift.Bool) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func replaceError(with output: Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Swift.Never>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func replaceEmpty(with output: Swift.Result<Success, Failure>.Publisher.Output) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func retry(_ times: Swift.Int) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func scan<T>(_ initialResult: T, _ nextPartialResult: (T, Swift.Result<Success, Failure>.Publisher.Output) -> T) -> Swift.Result<T, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryScan<T>(_ initialResult: T, _ nextPartialResult: (T, Swift.Result<Success, Failure>.Publisher.Output) throws -> T) -> Swift.Result<T, any Swift.Error>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Swift.Result.Publisher where Failure == Swift.Never {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func setFailureType<E>(to failureType: E.Type) -> Swift.Result<Swift.Result<Success, Failure>.Publisher.Output, E>.Publisher where E : Swift.Error
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
@@ -1674,7 +1884,9 @@ public struct ImmediateScheduler : Combine.Scheduler {
       public init(_ value: Swift.Int)
       public init(integerLiteral value: Swift.Int)
       public init(floatLiteral value: Swift.Double)
+      #if compiler(>=5.3) && $NonescapableTypes
       public init?<T>(exactly source: T) where T : Swift.BinaryInteger
+      #endif
       public static func < (lhs: Combine.ImmediateScheduler.SchedulerTimeType.Stride, rhs: Combine.ImmediateScheduler.SchedulerTimeType.Stride) -> Swift.Bool
       public static func * (lhs: Combine.ImmediateScheduler.SchedulerTimeType.Stride, rhs: Combine.ImmediateScheduler.SchedulerTimeType.Stride) -> Combine.ImmediateScheduler.SchedulerTimeType.Stride
       public static func + (lhs: Combine.ImmediateScheduler.SchedulerTimeType.Stride, rhs: Combine.ImmediateScheduler.SchedulerTimeType.Stride) -> Combine.ImmediateScheduler.SchedulerTimeType.Stride
@@ -1694,16 +1906,22 @@ public struct ImmediateScheduler : Combine.Scheduler {
   }
   public typealias SchedulerOptions = Swift.Never
   public static let shared: Combine.ImmediateScheduler
+  #if compiler(>=5.3) && $NonescapableTypes
   public func schedule(options: Combine.ImmediateScheduler.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
+  #endif
   public var now: Combine.ImmediateScheduler.SchedulerTimeType {
     get
   }
   public var minimumTolerance: Combine.ImmediateScheduler.SchedulerTimeType.Stride {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func schedule(after date: Combine.ImmediateScheduler.SchedulerTimeType, tolerance: Combine.ImmediateScheduler.SchedulerTimeType.Stride, options: Combine.ImmediateScheduler.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @discardableResult
   public func schedule(after date: Combine.ImmediateScheduler.SchedulerTimeType, interval: Combine.ImmediateScheduler.SchedulerTimeType.Stride, tolerance: Combine.ImmediateScheduler.SchedulerTimeType.Stride, options: Combine.ImmediateScheduler.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> any Combine.Cancellable
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
@@ -1821,9 +2039,15 @@ public protocol Scheduler<SchedulerTimeType> {
   associatedtype SchedulerOptions
   var now: Self.SchedulerTimeType { get }
   var minimumTolerance: Self.SchedulerTimeType.Stride { get }
+  #if compiler(>=5.3) && $NonescapableTypes
   func schedule(options: Self.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   func schedule(after date: Self.SchedulerTimeType, tolerance: Self.SchedulerTimeType.Stride, options: Self.SchedulerOptions?, _ action: @escaping () -> Swift.Void)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   func schedule(after date: Self.SchedulerTimeType, interval: Self.SchedulerTimeType.Stride, tolerance: Self.SchedulerTimeType.Stride, options: Self.SchedulerOptions?, _ action: @escaping () -> Swift.Void) -> any Combine.Cancellable
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Scheduler {
@@ -1870,7 +2094,9 @@ extension Combine.Publishers {
     public typealias Failure = Upstream.Failure
     public let upstream: Upstream
     public let retries: Swift.Int?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, retries: Swift.Int?)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
@@ -1959,7 +2185,9 @@ extension Combine.Publishers {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func replaceNil<T>(with output: T) -> Combine.Publishers.Map<Self, T> where Self.Output == T?
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
@@ -2031,7 +2259,9 @@ extension Combine.Publishers.DropUntilOutput : Swift.Equatable where Upstream : 
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func handleEvents(receiveSubscription: ((any Combine.Subscription) -> Swift.Void)? = nil, receiveOutput: ((Self.Output) -> Swift.Void)? = nil, receiveCompletion: ((Combine.Subscribers.Completion<Self.Failure>) -> Swift.Void)? = nil, receiveCancel: (() -> Swift.Void)? = nil, receiveRequest: ((Combine.Subscribers.Demand) -> Swift.Void)? = nil) -> Combine.Publishers.HandleEvents<Self>
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -2044,7 +2274,9 @@ extension Combine.Publishers {
     public var receiveCompletion: ((Combine.Subscribers.Completion<Combine.Publishers.HandleEvents<Upstream>.Failure>) -> Swift.Void)?
     public var receiveCancel: (() -> Swift.Void)?
     public var receiveRequest: ((Combine.Subscribers.Demand) -> Swift.Void)?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, receiveSubscription: ((any Combine.Subscription) -> Swift.Void)? = nil, receiveOutput: ((Combine.Publishers.HandleEvents<Upstream>.Output) -> Swift.Void)? = nil, receiveCompletion: ((Combine.Subscribers.Completion<Combine.Publishers.HandleEvents<Upstream>.Failure>) -> Swift.Void)? = nil, receiveCancel: (() -> Swift.Void)? = nil, receiveRequest: ((Combine.Subscribers.Demand) -> Swift.Void)?)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
@@ -2097,7 +2329,9 @@ extension Combine.CustomCombineIdentifierConvertible where Self : AnyObject {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func debounce<S>(for dueTime: S.SchedulerTimeType.Stride, scheduler: S, options: S.SchedulerOptions? = nil) -> Combine.Publishers.Debounce<Self, S> where S : Combine.Scheduler
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -2108,7 +2342,9 @@ extension Combine.Publishers {
     public let dueTime: Context.SchedulerTimeType.Stride
     public let scheduler: Context
     public let options: Context.SchedulerOptions?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, dueTime: Context.SchedulerTimeType.Stride, scheduler: Context, options: Context.SchedulerOptions?)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
@@ -2221,7 +2457,9 @@ extension Combine.Publishers.TryMap {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func timeout<S>(_ interval: S.SchedulerTimeType.Stride, scheduler: S, options: S.SchedulerOptions? = nil, customError: (() -> Self.Failure)? = nil) -> Combine.Publishers.Timeout<Self, S> where S : Combine.Scheduler
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -2233,7 +2471,9 @@ extension Combine.Publishers {
     public let scheduler: Context
     public let options: Context.SchedulerOptions?
     public let customError: (() -> Combine.Publishers.Timeout<Upstream, Context>.Failure)?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, interval: Context.SchedulerTimeType.Stride, scheduler: Context, options: Context.SchedulerOptions?, customError: (() -> Combine.Publishers.Timeout<Upstream, Context>.Failure)?)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }
@@ -2285,18 +2525,36 @@ extension Combine.Publishers {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Failure == Swift.Never {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func min(by areInIncreasingOrder: (Combine.Publishers.Sequence<Elements, Failure>.Output, Combine.Publishers.Sequence<Elements, Failure>.Output) -> Swift.Bool) -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func max(by areInIncreasingOrder: (Combine.Publishers.Sequence<Elements, Failure>.Output, Combine.Publishers.Sequence<Elements, Failure>.Output) -> Swift.Bool) -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func first(where predicate: (Combine.Publishers.Sequence<Elements, Failure>.Output) -> Swift.Bool) -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func allSatisfy(_ predicate: (Combine.Publishers.Sequence<Elements, Failure>.Output) -> Swift.Bool) -> Swift.Result<Swift.Bool, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryAllSatisfy(_ predicate: (Combine.Publishers.Sequence<Elements, Failure>.Output) throws -> Swift.Bool) -> Swift.Result<Swift.Bool, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func collect() -> Swift.Result<[Combine.Publishers.Sequence<Elements, Failure>.Output], Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func compactMap<T>(_ transform: (Combine.Publishers.Sequence<Elements, Failure>.Output) -> T?) -> Combine.Publishers.Sequence<[T], Failure>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func contains(where predicate: (Combine.Publishers.Sequence<Elements, Failure>.Output) -> Swift.Bool) -> Swift.Result<Swift.Bool, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryContains(where predicate: (Combine.Publishers.Sequence<Elements, Failure>.Output) throws -> Swift.Bool) -> Swift.Result<Swift.Bool, any Swift.Error>.Publisher
+  #endif
   public func drop(while predicate: (Elements.Element) -> Swift.Bool) -> Combine.Publishers.Sequence<Swift.DropWhileSequence<Elements>, Failure>
   public func dropFirst(_ count: Swift.Int = 1) -> Combine.Publishers.Sequence<Swift.DropFirstSequence<Elements>, Failure>
   public func filter(_ isIncluded: (Combine.Publishers.Sequence<Elements, Failure>.Output) -> Swift.Bool) -> Combine.Publishers.Sequence<[Combine.Publishers.Sequence<Elements, Failure>.Output], Failure>
@@ -2304,40 +2562,64 @@ extension Combine.Publishers.Sequence {
   public func map<T>(_ transform: (Elements.Element) -> T) -> Combine.Publishers.Sequence<[T], Failure>
   public func prefix(_ maxLength: Swift.Int) -> Combine.Publishers.Sequence<Swift.PrefixSequence<Elements>, Failure>
   public func prefix(while predicate: (Elements.Element) -> Swift.Bool) -> Combine.Publishers.Sequence<[Elements.Element], Failure>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func reduce<T>(_ initialResult: T, _ nextPartialResult: @escaping (T, Combine.Publishers.Sequence<Elements, Failure>.Output) -> T) -> Swift.Result<T, Failure>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func tryReduce<T>(_ initialResult: T, _ nextPartialResult: @escaping (T, Combine.Publishers.Sequence<Elements, Failure>.Output) throws -> T) -> Swift.Result<T, any Swift.Error>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func replaceNil<T>(with output: T) -> Combine.Publishers.Sequence<[Combine.Publishers.Sequence<Elements, Failure>.Output], Failure> where Elements.Element == T?
+  #endif
   public func scan<T>(_ initialResult: T, _ nextPartialResult: @escaping (T, Combine.Publishers.Sequence<Elements, Failure>.Output) -> T) -> Combine.Publishers.Sequence<[T], Failure>
   public func setFailureType<E>(to error: E.Type) -> Combine.Publishers.Sequence<Elements, E> where E : Swift.Error
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements.Element : Swift.Equatable {
   public func removeDuplicates() -> Combine.Publishers.Sequence<[Combine.Publishers.Sequence<Elements, Failure>.Output], Failure>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func contains(_ output: Elements.Element) -> Swift.Result<Swift.Bool, Failure>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Failure == Swift.Never, Elements.Element : Swift.Comparable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func min() -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func max() -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements : Swift.Collection, Failure == Swift.Never {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func first() -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func output(at index: Elements.Index) -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements : Swift.Collection {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func count() -> Swift.Result<Swift.Int, Failure>.Publisher
+  #endif
   public func output(in range: Swift.Range<Elements.Index>) -> Combine.Publishers.Sequence<[Combine.Publishers.Sequence<Elements, Failure>.Output], Failure>
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements : Swift.BidirectionalCollection, Failure == Swift.Never {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func last() -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func last(where predicate: (Combine.Publishers.Sequence<Elements, Failure>.Output) -> Swift.Bool) -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements : Swift.RandomAccessCollection, Failure == Swift.Never {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func output(at index: Elements.Index) -> Swift.Optional<Combine.Publishers.Sequence<Elements, Failure>.Output>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements : Swift.RandomAccessCollection {
@@ -2349,7 +2631,9 @@ extension Combine.Publishers.Sequence where Elements : Swift.RandomAccessCollect
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements : Swift.RandomAccessCollection {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func count() -> Swift.Result<Swift.Int, Failure>.Publisher
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers.Sequence where Elements : Swift.RangeReplaceableCollection {
@@ -2489,7 +2773,9 @@ extension Combine.Publishers {
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publisher {
+  #if compiler(>=5.3) && $NonescapableTypes
   public func delay<S>(for interval: S.SchedulerTimeType.Stride, tolerance: S.SchedulerTimeType.Stride? = nil, scheduler: S, options: S.SchedulerOptions? = nil) -> Combine.Publishers.Delay<Self, S> where S : Combine.Scheduler
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 6.0, *)
 extension Combine.Publishers {
@@ -2501,7 +2787,9 @@ extension Combine.Publishers {
     public let tolerance: Context.SchedulerTimeType.Stride
     public let scheduler: Context
     public let options: Context.SchedulerOptions?
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(upstream: Upstream, interval: Context.SchedulerTimeType.Stride, tolerance: Context.SchedulerTimeType.Stride, scheduler: Context, options: Context.SchedulerOptions? = nil)
+    #endif
     public func receive<S>(subscriber: S) where S : Combine.Subscriber, Upstream.Failure == S.Failure, Upstream.Output == S.Input
   }
 }

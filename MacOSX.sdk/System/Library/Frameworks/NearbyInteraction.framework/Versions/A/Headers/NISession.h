@@ -10,6 +10,7 @@
 #import <NearbyInteraction/NIConfiguration.h>
 #import <NearbyInteraction/NIDeviceCapability.h>
 #import <NearbyInteraction/NIExport.h>
+#import <NearbyInteraction/NIDLTDOAMeasurement.h>
 #import <simd/simd.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -207,6 +208,15 @@ the -[session:didRemoveNearbyObjects:reason:] delegate callback. To restart the 
  */
 - (void)session:(NISession *)session didUpdateAlgorithmConvergence:(NIAlgorithmConvergence *)convergence forObject:(NINearbyObject * _Nullable)object API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(tvos, macos) NS_SWIFT_NAME(session(_:didUpdateAlgorithmConvergence:for:));
 
+/**
+ This is called when new updates about DL-TDOA measurement are available.
+ 
+ @note this will only be called after successfully running an NISession with an NIDLTDOAConfiguration.
+
+ @param session The session that updated NI DL-TDOA measurement.
+ @param measurements The measurements update from a NI DL-TDOA session
+ */
+- (void)session:(NISession *)session didUpdateDLTDOAMeasurements:(NSArray<__kindof NIDLTDOAMeasurement *> *)measurements NS_SWIFT_NAME(session(_:didUpdateDLTDOA:)) API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, macos, visionos, macCatalyst);
 
 /**
  The delegate may implement this method to be informed that the session started running.
@@ -222,6 +232,6 @@ the -[session:didRemoveNearbyObjects:reason:] delegate callback. To restart the 
  Note that #2 and #3 can be monitored by other delegate methods such as -sessionWasSuspended: and -session:didInvalidateWithError:
  */
 - (void)sessionDidStartRunning:(NISession *)session API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(tvos, macos);
-@end
 
+@end
 NS_ASSUME_NONNULL_END

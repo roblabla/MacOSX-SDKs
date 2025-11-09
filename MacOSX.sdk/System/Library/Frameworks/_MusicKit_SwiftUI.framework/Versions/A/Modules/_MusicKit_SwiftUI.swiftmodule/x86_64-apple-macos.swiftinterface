@@ -1,13 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 4024.600.4 -module-name _MusicKit_SwiftUI
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-concurrency -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 4025.140.2 -module-name _MusicKit_SwiftUI
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import CoreGraphics
 import Foundation
 @_exported import MusicKit
 import Swift
 import SwiftUI
 import _Concurrency
+@_exported import _MusicKit_SwiftUI
 import _StringProcessing
 import _SwiftConcurrencyShims
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
@@ -32,8 +33,10 @@ public struct MusicSubscriptionOffer {
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
 extension SwiftUICore.View {
+  #if compiler(>=5.3) && $NonescapableTypes
   nonisolated public func musicSubscriptionOffer(isPresented: SwiftUICore.Binding<Swift.Bool>, options: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options = .default, onLoadCompletion: @escaping ((any Swift.Error)?) -> Swift.Void = { _ in }) -> some SwiftUICore.View
   
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
@@ -71,7 +74,9 @@ extension _MusicKit_SwiftUI.MusicSubscriptionOffer {
     public var affiliateToken: Swift.String?
     public var campaignToken: Swift.String?
     public static let `default`: _MusicKit_SwiftUI.MusicSubscriptionOffer.Options
+    #if compiler(>=5.3) && $NonescapableTypes
     public init(action: _MusicKit_SwiftUI.MusicSubscriptionOffer.Action = .subscribe, messageIdentifier: _MusicKit_SwiftUI.MusicSubscriptionOffer.MessageIdentifier = .join, itemID: MusicKit.MusicItemID? = nil, affiliateToken: Swift.String? = nil, campaignToken: Swift.String? = nil)
+    #endif
   }
 }
 @available(iOS 15.0, macOS 12.0, *)

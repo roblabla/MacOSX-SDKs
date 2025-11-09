@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  before the user may return to using the app.
  */
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPActionSheetTemplate : CPTemplate
 
 /**

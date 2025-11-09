@@ -31,6 +31,25 @@
     #define CA_CANONICAL_DEPRECATED
 #endif
 
+
+/*!
+	@macro	CA_REALTIME_API
+	@brief	A function (type) which is guaranteed / required to be realtime safe.
+	
+	In C++11 and later, use the bracketed form of the attribute for compatibility with the syntax of
+	a `using` typealias.
+*/
+#if defined(__has_attribute) && __has_attribute(nonblocking)
+#  if defined(__cplusplus) && __cplusplus > 199711L
+#    define CA_REALTIME_API [[clang::nonblocking]]
+#  else
+#    define CA_REALTIME_API __attribute__((nonblocking))
+#  endif
+#else
+#    define CA_REALTIME_API
+#endif
+
+
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wold-style-cast"
 
@@ -653,6 +672,49 @@ struct  AudioStreamPacketDescription
     UInt32  mDataByteSize;
 };
 typedef struct AudioStreamPacketDescription AudioStreamPacketDescription;
+
+
+/*!
+    @struct         AudioStreamPacketDependencyDescription
+    @abstract       A structure to provide a description of the dependencies of one audio packet on other audio packets.
+
+    @var            mIsIndependentlyDecodable
+                        1 if the packet is independently decodable, 0 otherwise.
+    @var            mPreRollCount
+                        The count of packets that must be decoded after this packet in order to refresh the decoder,
+                        if the packet is independently decodable.  This value should be ignored if
+                        ``mIsIndependentlyDecodable`` is 0.
+    @var            mFlags
+                        Currently unused.
+    @var            mReserved
+                        Reserved for future use.
+
+    @discussion
+        For independently decodable packets, the ``mPreRollCount`` indicates how many additional packets need
+        to be decoded after this packet in order for the decoder to start returning optimal output,
+        if this is the first packet decoded since the decoder was initialized.
+
+        For example, if this packet is packet #123 of some given packet stream, and ``mIsIndependentlyDecodable``
+        is 0, or ``mIsIndependentlyDecodable`` is 1 and ``mPreRollCount`` is non-zero, and the client desires optimal
+        output starting with the output corresponding with packet #123 (because for example the client
+        is an audio player whose user seeks to a starting playback position corresponding with packet #123),
+        the client would scan back, starting at packet #122, searching for an independently decodable
+        packet with a preroll not intersecting packet #123.  If for packet #122 ``mIsIndependentlyDecodable``
+        is 0, or ``mIsIndependentlyDecodable`` is 1 but ``mPreRollCount`` is 2 or more, the client would still not
+        get optimal output for packet #123 if starting here, so the client continues to scan back.
+        If for packet #121 ``mIsIndependentlyDecodable`` is 1 and ``mPreRollCount`` is 2 or less, the client would
+        start decoding from this point, but discard the output equivalent of the two extra input packets
+        (desired first output packet - actual first decoded packet, or 122 - 120 == 2).
+*/
+struct  AudioStreamPacketDependencyDescription
+{
+    UInt32  mIsIndependentlyDecodable;
+    UInt32  mPreRollCount;
+    UInt32  mFlags;
+    UInt32  mReserved;
+};
+typedef struct AudioStreamPacketDependencyDescription AudioStreamPacketDependencyDescription;
+
 
 //==================================================================================================
 #pragma mark -

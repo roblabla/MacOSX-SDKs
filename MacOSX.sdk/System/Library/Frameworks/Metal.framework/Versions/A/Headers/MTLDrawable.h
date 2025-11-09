@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract The presented callback function protocol
  @discussion Be careful when you use delta between this presentedTime and previous frame's presentedTime to animate next frame. If the frame was presented using presentAfterMinimumDuration or presentAtTime, the presentedTime might includes delays to meet your specified present time. If you want to measure how much frame you can achieve, use GPUStartTime in the first command buffer of your frame rendering and GPUEndTime of your last frame rendering to calculate the frame interval.
 */
-typedef void (^MTLDrawablePresentedHandler)(id<MTLDrawable>);
+typedef void (^ NS_SWIFT_SENDABLE MTLDrawablePresentedHandler)(id<MTLDrawable>);
 
 /*!
  @protocol MTLDrawable

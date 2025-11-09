@@ -28,21 +28,21 @@ typedef NS_ENUM(NSInteger, MTLLogLevel)
 }
 API_AVAILABLE(macos(15.0), ios(18.0));
 
-API_AVAILABLE(macos(15.0), ios(18.0))
+API_AVAILABLE(macos(15.0), ios(18.0)) NS_SWIFT_SENDABLE
 @protocol MTLLogState <NSObject>
 /*!
 @method addLogHandler
 @abstract Add a function block to handle log message output.
 In the absence of any handlers, log messages go through the default handler.
 */
-- (void)addLogHandler:(void(^)(NSString* __nullable subSystem, NSString* __nullable category, MTLLogLevel logLevel, NSString* message))block;
+- (void)addLogHandler:(void(^ NS_SWIFT_SENDABLE)(NSString* __nullable subSystem, NSString* __nullable category, MTLLogLevel logLevel, NSString* message))block;
 @end
 
 MTL_EXPORT API_AVAILABLE(macos(15.0), ios(18.0))
 @interface MTLLogStateDescriptor : NSObject <NSCopying>
 /*!
 @abstract level indicates the minimum level of the logs that will be printed.
-@description All the logs with level less than given level will be skipped on the GPU Side.
+@discussion All the logs with level less than given level will be skipped on the GPU Side.
  */
 @property (assign, readwrite) MTLLogLevel level;
 

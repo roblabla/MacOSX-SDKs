@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TextUnderstandingShared.framework/Versions/A/TextUnderstandingShared'
-current-version: 73.18
+current-version: 116.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -186,12 +186,7 @@ exports:
                        '_$sSS23TextUnderstandingSharedE24looksLikeAPhoneShortCodeSbvpMV', 
                        '_$sSS23TextUnderstandingSharedE5slice4from2toSSSi_SitF', 
                        '_$sSS23TextUnderstandingSharedE6tokensSaySSGyF', '_$sSo13NSProcessInfoC23TextUnderstandingSharedE17processNameForPIDySSSgs5Int32VFZ', 
-                       _BurstTrieDictionaryNotFound, _TextUnderstandingSharedVersionNumber, 
-                       _TextUnderstandingSharedVersionString ]
-    objc-classes:    [ BundleIdResolver, BundleIdResolverGuardedData, BurstTrieDictionary, 
-                       OVSResolverObjC, TokenizerOutputObjc, WordPieceTokenizerObjc ]
-    objc-ivars:      [ BundleIdResolverGuardedData.bundleIdOrProcName, BundleIdResolverGuardedData.isProcessName, 
-                       WordPieceTokenizerObjc._endId, WordPieceTokenizerObjc._padId, 
-                       WordPieceTokenizerObjc._startId, WordPieceTokenizerObjc._unkId, 
-                       WordPieceTokenizerObjc._vocab ]
+                       _BurstTrieDictionaryNotFound ]
+    objc-classes:    [ BundleIdResolver, BurstTrieDictionary, OVSResolverObjC, TokenizerOutputObjc, 
+                       WordPieceTokenizerObjc, _TXHtmlParser, _TXHtmlParserHyperlink ]
 ...

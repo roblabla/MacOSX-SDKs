@@ -5,9 +5,7 @@ install-name:    '/System/Library/PrivateFrameworks/InfoQueryPersonalizationFeat
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0C011augmentWithC8Entities07pegasusF00E3API026Apple_Parsec_Siri_V2alpha_neF0VAH_tFTj', 
-                       '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0C011augmentWithC8Entities07pegasusF00E3API026Apple_Parsec_Siri_V2alpha_neF0VAH_tFTq', 
-                       '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0C04mapsC6RankerACSo07IQFMapscH0C_tcfC', 
+    symbols:         [ '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0C04mapsC6RankerACSo07IQFMapscH0C_tcfC', 
                        '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0C04mapsC6RankerACSo07IQFMapscH0C_tcfCTj', 
                        '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0C04mapsC6RankerACSo07IQFMapscH0C_tcfCTq', 
                        '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0C04mapsC6RankerACSo07IQFMapscH0C_tcfc', 
@@ -22,8 +20,6 @@ exports:
                        '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0CN', 
                        '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0CfD', 
                        '_$s32InfoQueryPersonalizationFeatures014PegasusRequestcD0Cfd', 
-                       '_$s32InfoQueryPersonalizationFeatures015PegasusResponsecD0C019rankedMapsEventsForeF007pegasusF0SaySo07IQFMapsC6ResultCG0E3API026Apple_Parsec_Siri_V2alpha_qeF0V_tFTj', 
-                       '_$s32InfoQueryPersonalizationFeatures015PegasusResponsecD0C019rankedMapsEventsForeF007pegasusF0SaySo07IQFMapsC6ResultCG0E3API026Apple_Parsec_Siri_V2alpha_qeF0V_tFTq', 
                        '_$s32InfoQueryPersonalizationFeatures015PegasusResponsecD0C04mapsC6RankerACSo07IQFMapscH0C_tcfC', 
                        '_$s32InfoQueryPersonalizationFeatures015PegasusResponsecD0C04mapsC6RankerACSo07IQFMapscH0C_tcfCTj', 
                        '_$s32InfoQueryPersonalizationFeatures015PegasusResponsecD0C04mapsC6RankerACSo07IQFMapscH0C_tcfCTq', 

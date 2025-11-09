@@ -63,10 +63,10 @@
 #ifndef _NETINET_UDP_VAR_H_
 #define _NETINET_UDP_VAR_H_
 
-#include <sys/appleapiopts.h>
-#include <sys/sysctl.h>
 #include <netinet/ip_var.h>
 #include <netinet/udp.h>
+#include <sys/appleapiopts.h>
+#include <sys/sysctl.h>
 
 /*
  * UDP kernel structures and variables.

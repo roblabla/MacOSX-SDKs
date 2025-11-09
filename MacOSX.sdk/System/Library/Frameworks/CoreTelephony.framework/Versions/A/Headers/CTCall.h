@@ -13,12 +13,12 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-CORETELEPHONY_EXTERN NSString * const CTCallStateDialing  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCall.h> properties");
-CORETELEPHONY_EXTERN NSString * const CTCallStateIncoming  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCall.h> properties");
-CORETELEPHONY_EXTERN NSString * const CTCallStateConnected  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCall.h> properties");
-CORETELEPHONY_EXTERN NSString * const CTCallStateDisconnected  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCall.h> properties");
+CORETELEPHONY_EXTERN NSString * const CTCallStateDialing  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCall.h> properties");
+CORETELEPHONY_EXTERN NSString * const CTCallStateIncoming  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCall.h> properties");
+CORETELEPHONY_EXTERN NSString * const CTCallStateConnected  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCall.h> properties");
+CORETELEPHONY_EXTERN NSString * const CTCallStateDisconnected  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCall.h> properties");
 
-CORETELEPHONY_CLASS_AVAILABLE(4_0)
+CORETELEPHONY_CLASS_DEPRECATED(4_0, 10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCall.h> properties")
 @interface CTCall : NSObject
 {
 @private
@@ -35,7 +35,7 @@ CORETELEPHONY_CLASS_AVAILABLE(4_0)
  *     to CTCallStateConnected when the call is established with all parties 
  *     involved and will move to CTCallStateDisconnected when this call is terminated.
  */
-@property(nonatomic, readonly, copy) NSString *callState  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCall.h> properties");
+@property(nonatomic, readonly, copy) NSString *callState  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCall.h> properties");
 
 /*
  * callID
@@ -44,7 +44,7 @@ CORETELEPHONY_CLASS_AVAILABLE(4_0)
  *     A unique identifier for this call to be used by clients to differentiate
  *     multiple active calls.
  */
-@property(nonatomic, readonly, copy) NSString *callID  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Replaced by <CallKit/CXCall.h> properties");
+@property(nonatomic, readonly, copy) NSString *callID  __OSX_AVAILABLE_BUT_DEPRECATED_MSG(__MAC_NA, __MAC_NA, __IPHONE_4_0, __IPHONE_10_0, "Obsolete and will be a useless stub before final removal. Replaced by <CallKit/CXCall.h> properties");
 
 @end
 

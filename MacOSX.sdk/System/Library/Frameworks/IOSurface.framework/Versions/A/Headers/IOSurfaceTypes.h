@@ -24,7 +24,7 @@ typedef CF_OPTIONS(uint32_t, IOSurfaceLockOptions)
     // when you lock the buffer, you may include this flag.   If locking the buffer requires a readback, the lock will
     // fail with an error return of kIOReturnCannotLock.
     kIOSurfaceLockAvoidSync =   0x00000002,
-};
+} IOSFC_SWIFT_SENDABLE;
 
 typedef CF_OPTIONS(uint32_t, IOSurfacePurgeabilityState)
 {
@@ -32,7 +32,7 @@ typedef CF_OPTIONS(uint32_t, IOSurfacePurgeabilityState)
     kIOSurfacePurgeableVolatile    = 1,   // Mark the IOSurface as volatile (contents may be thrown away)
     kIOSurfacePurgeableEmpty       = 2,   // Throw away the contents of the IOSurface immediately
     kIOSurfacePurgeableKeepCurrent = 3,   // Keep the current setting (useful for returning current status info)
-};
+} IOSFC_SWIFT_SENDABLE;
 
 /*
 ** Note: Write-combined memory is optimized for resources that the CPU writes into, but never reads. 

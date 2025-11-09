@@ -105,9 +105,9 @@ MTL_INLINE MTLCoordinate2D MTLCoordinate2DMake(float x, float y)
 
 /*!
  @typedef MTLResourceID
- @abstract Handle of the GPU resource suitable for storing in an Argument Buffer
+ @abstract Handle of the GPU resource used for binding resources to argument tables, navigating resource view pools and storing resources in an argument buffer
  @discussion
- A MTLResourceID represents a specific GPU resource, mutating this handle is undefined unless the mutation results in the value equalling an already existing handle of the same resource type.
+ MTLResourceID represents a specific GPU resource. This handle can be mutated by modifying textureID or samplerID values to get to individual resource views in a resource view pool.
  */
 typedef struct MTLResourceID
 {

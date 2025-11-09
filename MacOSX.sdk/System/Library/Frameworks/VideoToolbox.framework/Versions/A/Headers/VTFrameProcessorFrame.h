@@ -10,87 +10,73 @@
 #ifndef VTFRAMEPROCESSORFRAME_H
 #define VTFRAMEPROCESSORFRAME_H
 
+#ifdef __OBJC__
+
+#import <CoreMedia/CMBase.h>
 #import <CoreVideo/CoreVideo.h>
 #import <CoreMedia/CMTime.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-/*!
-	@class     VTFrameProcessorFrame
-	@abstract  Helper class to wrap video frames that will be sent to the processor, as source frames, reference frames, or output frames.  Instances retain the buffer backing them.
-*/
-API_AVAILABLE(macos(15.4)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos, visionos)
-__attribute__((objc_subclassing_restricted))
 
+/// Helper class to wrap pixel buffers as video frames.
+///
+/// You can use the frames as source frames, reference frames, or output frames of a processor. Frame instances retain
+/// the backing pixel buffer.
+API_AVAILABLE(macos(15.4), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos)
 @interface VTFrameProcessorFrame : NSObject
-
-/*!
-	@method    initWithBuffer
-	@abstract  initialize class with a CVPixelBufferRef and a presentation time. Buffer is retained.  Returns nil if no CVPixelBuffer is provided or CVPixelBuffer is not IOSurface backed.
-	@param     buffer The CVPixelBufferRef that this VTFrameProcessorFrame will wrap.  Must not be nil and must be IOSurface backed.
-	@param     presentationTimeStamp   The presentation timestamp of the buffer.
-*/
+/// Creates a new instance of frame with a pixel buffer and presentation timestamp.
+///
+/// The `CVPixelBuffer` is retained in this object.
+/// Returns `nil` if the ``CVPixelBuffer`` you provided is NULL or the ``CVPixelBuffer`` is not backed by ``IOSurface``.
+///
+/// - Parameters:
+///   - buffer: The ``CVPixelBuffer`` that this frame wraps; it must not be `nil` and must be ``IOSurface`` backed.
+///   - presentationTimeStamp: The presentation timestamp of the buffer.
 - (nullable instancetype)initWithBuffer:(CVPixelBufferRef)buffer
          presentationTimeStamp:(CMTime)presentationTimeStamp;
 
 - (instancetype) init NS_UNAVAILABLE;
 + (instancetype) new NS_UNAVAILABLE;
 
-/*!
-	@property buffer
-	@abstract Returns the CVPixelBufferRef  that was provided when the object was initialized with.
-*/
-
+/// Pixel buffer that you provided when you initialized the object.
 @property(nonatomic,readonly) CVPixelBufferRef buffer;
 
-/*!
-	@property presentationTimeStamp
-	@abstract Returns the presentation timestamp that was provided when the object was initialized with
-*/
+/// Presentation timestamp that you provided when you initialized the object.
 @property(nonatomic,readonly) CMTime presentationTimeStamp;
-
 
 @end
 
-
-/*!
-	@class     VTFrameProcessorOpticalFlow
-	@abstract  Helper class to wrap optical flow that will be sent to the processor.   Instances retain the buffers backing them.
-*/
-API_AVAILABLE(macos(15.4)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos, watchos, visionos)
-__attribute__((objc_subclassing_restricted))
-
+/// Helper class to wrap optical flow.
+///
+/// Instances retain the backing pixel buffers that you provide.
+API_AVAILABLE(macos(15.4), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos)
 @interface VTFrameProcessorOpticalFlow : NSObject
-
-/*!
-	@method    initWithForwardFlow
-	@abstract  initialize class with forward and backward optical flow CVPixelBufferRefs. Instances retain the buffers backing them. Returns nil if a nil CVPixelBuffer is provided or CVPixelBuffers are not IOSurface backed.
-	@param     forwardFlow CVPixelBufferRef that contains forward optical flow. Must not be nil and must be IOSurface backed.
-	@param     backwardFlow CVPixelBufferRef that contains backward optical flow. Must not be nil and must be IOSurface backed.
-*/
+/// Creates a new instance of forward and backward optical flow with pixel buffers.
+///
+/// Create a new instance with forward and backward optical flow ``CVPixelBuffer``s. Instances retain the pixel buffers
+/// you provide to this method. Returns `nil` if either `CVPixelBuffer` is NULL or the `CVPixelBuffer`s are not `IOSurface` backed.
+///
+/// - Parameters:
+///   - forwardFlow: `CVPixelBuffer` that contains forward optical flow; it must not be `nil` and must be `IOSurface` backed.
+///   - backwardFlow: `CVPixelBuffer` that contains backward optical flow; it must not be `nil` and must be `IOSurface` backed.
 - (nullable instancetype)initWithForwardFlow:(CVPixelBufferRef)forwardFlow
                        backwardFlow:(CVPixelBufferRef)backwardFlow;
 
 - (instancetype) init NS_UNAVAILABLE;
 + (instancetype) new NS_UNAVAILABLE;
 
-/*!
-	@property forwardFlow
-	@abstract Returns the forward optical flow CVPixelBufferRef that was provided when the object was initialized.
-*/
-
+/// Returns the forward optical flow `CVPixelBuffer` that you provided when you initialized the object.
 @property(nonatomic, readonly) CVPixelBufferRef forwardFlow;
 
-/*!
-	@property backwardFlow
-	@abstract Returns the backward optical flow CVPixelBufferRef that was provided when the object was initialized.
-*/
-
+/// Returns the backward optical flow `CVPixelBuffer` that you provided when you initialized the object.
 @property(nonatomic, readonly) CVPixelBufferRef backwardFlow;
 
 @end
 
 
 NS_HEADER_AUDIT_END(nullability, sendability)
+
+#endif // __OBJC__
 
 #endif // VTFRAMEPROCESSORFRAME_H

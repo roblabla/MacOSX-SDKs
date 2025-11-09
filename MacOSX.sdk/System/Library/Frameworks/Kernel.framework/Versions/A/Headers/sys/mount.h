@@ -491,7 +491,8 @@ struct netfs_status {
 #define VQ_DESIRED_DISK         0x4000  /* the desired disk space */
 #define VQ_FREE_SPACE_CHANGE    0x8000  /* free disk space has significantly changed */
 #define VQ_PURGEABLE_SPACE_CHANGE  0x10000  /* purgeable disk space has significantly changed */
-#define VQ_FLAG20000    0x20000  /* placeholder */
+#define VQ_IDLE_PURGE_NOTIFY       0x20000  /* Above nearlowdisk and below desired disk space */
+#define VQ_FLAG40000               0x40000  /* placeholder */
 
 
 
@@ -1298,7 +1299,7 @@ OS_ENUM(graftdmg_type, uint32_t,
     GRAFTDMG_CRYPTEX_BOOT = 1,
     GRAFTDMG_CRYPTEX_PREBOOT = 2,
     GRAFTDMG_CRYPTEX_DOWNLEVEL = 3,
-    // Reserved: CRYPTEX1_AUTH_ENV_GENERIC = 4,
+    GRAFTDMG_CRYPTEX_AUTH_ENV_GENERIC = 4,
     // Reserved: CRYPTEX1_AUTH_ENV_GENERIC_SUPPLEMENTAL = 5,
     GRAFTDMG_CRYPTEX_PDI_NONCE = 6,
     GRAFTDMG_CRYPTEX_EFFECTIVE_AP = 7,

@@ -6,8 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <UIKit/UIKit.h>
 #import <simd/simd.h>
+
+@class UIImage;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -21,7 +22,7 @@ FOUNDATION_EXTERN NSString *const ARReferenceObjectArchiveExtension NS_SWIFT_NAM
  */
 API_AVAILABLE(ios(12.0))
 NS_SWIFT_SENDABLE
-@interface ARReferenceObject : NSObject<NSSecureCoding>
+@interface ARReferenceObject : NSObject <NSSecureCoding>
 
 /**
  An optional name used to identify the object.
@@ -58,7 +59,7 @@ NS_SWIFT_SENDABLE
 
 /**
  Returns the set of ARReferenceObjects in the specified resource group and bundle.
- 
+
  @param name The name of the resource group.
  @param bundle The bundle containing the image file or asset catalog. Specify nil to search the app’s main bundle.
  @return The set of reference objects or nil on error.
@@ -74,7 +75,7 @@ NS_SWIFT_SENDABLE
 
 /**
  Exports the object as an archive at the given URL.
- 
+
  @discussion The URL path should use ARReferenceObjectArchiveExtension (.arobject) for the file extension.
  If serialization across devices is desired, NSKeyedArchiver should be used instead.
  @param url The URL at which to write the exported object.

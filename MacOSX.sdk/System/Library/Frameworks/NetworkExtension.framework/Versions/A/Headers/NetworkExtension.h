@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2014-2015, 2017-2022 Apple Inc.
+ * Copyright (c) 2014-2015, 2017-2022, 2025 Apple Inc.
  * All rights reserved.
  */
 
@@ -69,5 +69,6 @@
 #import <NetworkExtension/NWTCPConnection.h>
 #import <NetworkExtension/NWUDPSession.h>
 #import <NetworkExtension/NWTLSParameters.h>
+#import <NetworkExtension/NEURLFilter.h>
 
 #undef __NE_INDIRECT__

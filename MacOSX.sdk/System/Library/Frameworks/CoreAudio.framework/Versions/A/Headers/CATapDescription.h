@@ -124,9 +124,16 @@ API_AVAILABLE(macos(12.0), ios(15.0))
 
 /*!	@property processes
  @abstract
- An NSArray of NSNumbers where each NSNumber holds the AudioObjectID of the process object to tap or exclude.
+ An NSArray of NSNumbers where each NSNumber holds the AudioObjectID of a process object to tap or exclude.
  */
 @property (atomic, copy, readwrite) NSArray<NSNumber*>* processes NS_REFINED_FOR_SWIFT;
+
+/*!	@property bundleIDs
+ @abstract
+ An Array of Strings where each String holds the bundle ID of a process to tap or exclude.
+ */
+@property (atomic, copy, readwrite) NSArray<NSString*>* bundleIDs
+API_AVAILABLE(macos(26.0));
 
 /*!	@property mono
  @abstract
@@ -151,6 +158,13 @@ API_AVAILABLE(macos(12.0), ios(15.0))
  True if this tap is only visible to the client process that created the tap.
  */
 @property (atomic, readwrite, getter=isPrivate, setter=setPrivate:) BOOL privateTap;
+
+/*!	@property processRestoreEnabled
+ @abstract
+ True if this tap should save tapped processes by bundle ID when they exit, and restore them to the tap when they start up again.
+ */
+@property (atomic, readwrite, getter=isProcessRestoreEnabled) BOOL processRestoreEnabled
+API_AVAILABLE(macos(26.0));
 
 /*!	@property muteBehavior
  @abstract

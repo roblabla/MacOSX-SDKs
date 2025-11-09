@@ -8,54 +8,46 @@
 #import <Foundation/Foundation.h>
 #import <ShazamKit/SHDefines.h>
 
+/// The error domain for specific errors for ShazamKit.
 SH_EXPORT NSErrorDomain const SHErrorDomain API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
 
-/// Error codes returned when generating and matching signatures
+/// An error type that you create, or the system creates, to indicate problems with a catalog, match attempt, or signature, or when saving to a user's Shazam library.
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 typedef NS_ERROR_ENUM(SHErrorDomain, SHErrorCode) {
     
-    /// The @c AVAudioFormat is not supported
-    /// @discussion ShazamKit only accepts certain audio formats
-    /// @see -[SHSignatureGenerator appendBuffer:atTime:error] for valid formats
+    /// The error code to indicate an unsupported audio format.
+    ///
+    /// For the list of the supported audio formats, see ``SHSignatureGenerator/append(_:at:)``.
     SHErrorCodeInvalidAudioFormat = 100,
     
-    /// The audio provided was not contiguous
-    /// @discussion Shazam requires audio to be contiguous in order
-    /// to match.
+    /// The error code to indicate the use of noncontiguous audio to request a match.
     SHErrorCodeAudioDiscontinuity = 101,
     
-    /// Failed to create a signature from the provided audio
-    /// @discussion Validate the audio you are supplying, it may be silence.
+    /// The error code to indicate that the system is unable to generate a signature from the audio.
+    ///
+    /// The most common cause of this error is silent audio input.
     SHErrorCodeSignatureInvalid = 200,
     
-    /// The signature duration is outside the valid range
-    /// @discussion The signature is valid but is too long/short for
-    /// the service attempting to match it
+    /// The error code to indicate that the length of the generated signature is too long or too short to make a match in the catalog.
+    ///
+    /// This error occurs when the length of the generated signature is less than ``SHCatalog/minimumQuerySignatureDuration`` or greater than ``SHCatalog/maximumQuerySignatureDuration`` for the session ``SHSession/catalog``.
     SHErrorCodeSignatureDurationInvalid = 201,
     
-    /// The request to match the signature failed
-    /// @discussion The attempt failed and was not matched, trying again may result in success
-    /// @note This code does not indicate a 'No Match'
+    /// The error code to indicate when a Shazam Music catalog server issue prevents finding a match.
     SHErrorCodeMatchAttemptFailed = 202,
     
-    /// Failed to load the Custom Catalog
-    /// @discussion Validate the structure of the Catalog file
+    /// The error code to indicate when the custom catalog fails to load due to an invalid format.
     SHErrorCodeCustomCatalogInvalid = 300,
     
-    /// The Custom Catalog URL was invalid
-    /// @discussion The URL must be a filePath URL that contains a valid Catalog
+    /// The error code to indicate that the format for the custom catalog URL is invalid.
     SHErrorCodeCustomCatalogInvalidURL = 301,
     
-    /// Failed to sync some content to the user's library
-    /// @discussion Failed to sync the user's library, trying again may result in success
-    /// Underlying error may contain more details about the failure
+    /// The error code that indicates when the system fails to add media items to or remove items from the user's Shazam library.
     SHErrorCodeMediaLibrarySyncFailed = 400,
     
-    /// Internal Error
-    /// @discussion ShazamKit encountered an internal error
+    /// The error code to indicate a generic framework error.
     SHErrorCodeInternalError API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = 500,
     
-    /// Failed to fetch @c SHMediaItem
-    /// @discussion There was an error fetching the @c SHMediaItem or the provided @c shazamID is invalid.
+    /// The error code to indicate when the system fails to fetch one or more media items.
     SHErrorCodeMediaItemFetchFailed API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0)) = 600
 };

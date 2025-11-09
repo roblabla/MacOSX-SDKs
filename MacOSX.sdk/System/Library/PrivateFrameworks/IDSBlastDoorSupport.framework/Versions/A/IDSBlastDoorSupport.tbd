@@ -5,7 +5,8 @@ install-name:    '/System/Library/PrivateFrameworks/IDSBlastDoorSupport.framewor
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s19IDSBlastDoorSupport0aB9InterfaceC6unpack13clientMessage7context13resultHandlerySDySSypG_AHySo8NSObjectCSg_s5Error_pSgtctFTj', 
+    symbols:         [ '_$s10Foundation4DataV19IDSBlastDoorSupportE24_idsOptionallyDecompressACyF', 
+                       '_$s19IDSBlastDoorSupport0aB9InterfaceC6unpack13clientMessage7context13resultHandlerySDySSypG_AHySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s19IDSBlastDoorSupport0aB9InterfaceC6unpack13clientMessage7context13resultHandlerySDySSypG_AHySo8NSObjectCSg_s5Error_pSgtctFTq', 
                        '_$s19IDSBlastDoorSupport0aB9InterfaceC6unpack17payloadDictionary13resultHandlerySDySSypG_ySo8NSObjectCSg_s5Error_pSgtctFTj', 
                        '_$s19IDSBlastDoorSupport0aB9InterfaceC6unpack17payloadDictionary13resultHandlerySDySSypG_ySo8NSObjectCSg_s5Error_pSgtctFTq', 

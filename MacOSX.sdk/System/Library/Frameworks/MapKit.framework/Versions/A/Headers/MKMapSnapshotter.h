@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^MKMapSnapshotCompletionHandler)(MKMapSnapshot * __nullable snapshot, NSError * __nullable error);
 
-NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0))
 @interface MKMapSnapshotter : NSObject
 
 - (instancetype)initWithOptions:(MKMapSnapshotOptions *)options NS_DESIGNATED_INITIALIZER;

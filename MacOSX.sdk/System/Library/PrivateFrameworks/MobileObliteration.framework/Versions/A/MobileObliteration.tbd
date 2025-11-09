@@ -14,12 +14,14 @@ exports:
                        _kObliterationCompletedOK, _kObliterationCompletedWithWarning, 
                        _kObliterationDelayAfterReplyKey, _kObliterationExclusionPathsKey, 
                        _kObliterationFailedOSBroken, _kObliterationFailedOSValid, 
-                       _kObliterationIgnoreMissingPathKey, _kObliterationManagedDeviceWipeKey, 
+                       _kObliterationIgnoreMissingPathKey, _kObliterationMDMSkipRestoreMarkerFile, 
+                       _kObliterationManagedDeviceSkipRestoreKey, _kObliterationManagedDeviceWipeKey, 
                        _kObliterationMessageKey, _kObliterationOptionsFilePathKey, 
                        _kObliterationPreservedItemsDictKey, _kObliterationPreservedVolumeGroupUUID, 
                        _kObliterationResultStateKey, _kObliterationResultStringKey, 
                        _kObliterationReturnDictKey, _kObliterationTypeBrickOnly, 
-                       _kObliterationTypeKey, _kObliterationTypeMarkStart, _kObliterationTypeMarkerCreate, 
-                       _kObliterationTypeSafeWipe, _kObliterationTypeWipeAndBrick, 
+                       _kObliterationTypeKey, _kObliterationTypeMarkDirect, _kObliterationTypeMarkStart, 
+                       _kObliterationTypeMarkerCreate, _kObliterationTypeRRTS, _kObliterationTypeSafeWipe, 
+                       _kObliterationTypeWipeAndBrick, _kRRTSBootStrapTokenKey, _kRRTSRevertToSnapshotNameKey, 
                        _kSkipDataObliteration ]
 ...

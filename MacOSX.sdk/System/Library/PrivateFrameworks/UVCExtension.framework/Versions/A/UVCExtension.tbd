@@ -4,11 +4,11 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UVCExtension.framework/Versions/A/UVCExtension'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _CMIOExtensionPropertyStreamCenterStageFramingMode, _CMIOExtensionPropertyStreamCenterStageRectOfInterest, 
-                       _CMIOExtensionPropertyStreamDeviceHasUltraWideCamera, _CMIOExtensionPropertyStreamManualFramingDeviceType, 
-                       _CMIOExtensionPropertyStreamManualFramingSupported, _CMIOExtensionPropertyStreamPanWithTranslation, 
-                       _CMIOExtensionPropertyStreamStartPanningAtPoint, _CMIOExtensionPropertyStreamZoom, 
-                       _CMIOExtensionPropertyStreamZoomFactorConstantsByManualFramingDeviceType, 
+    symbols:         [ _CMIOExtensionPropertyCenterStageEnabled, _CMIOExtensionPropertyStreamCenterStageFramingMode, 
+                       _CMIOExtensionPropertyStreamCenterStageRectOfInterest, _CMIOExtensionPropertyStreamDeviceHasUltraWideCamera, 
+                       _CMIOExtensionPropertyStreamManualFramingDeviceType, _CMIOExtensionPropertyStreamManualFramingSupported, 
+                       _CMIOExtensionPropertyStreamPanWithTranslation, _CMIOExtensionPropertyStreamStartPanningAtPoint, 
+                       _CMIOExtensionPropertyStreamZoom, _CMIOExtensionPropertyStreamZoomFactorConstantsByManualFramingDeviceType, 
                        _ManualFramingZoomFactorConstantsKey_DefaultValue, _ManualFramingZoomFactorConstantsKey_MaxValue, 
                        _ManualFramingZoomFactorConstantsKey_MinValue, _UVCExtensionLog, 
                        _UVCExtensionSMCreateTransitionsFromStateToDestinationOnEvents, 
@@ -20,8 +20,8 @@ exports:
                        _getCMIOClassIDForExtensionUnitControl, _getCMIOClassIDFromControlName, 
                        _getColorAttributesForFormat, _getDeviceUUID, _getInvertedRollAngle, 
                        _getPixelColorAttributesForFormatColorAttributes, _getPixelFormatFromGUID, 
-                       _getStringFromDict, _isH264Format, _isMJPEGFormat, _isUncompressedFormat, 
-                       _kCMIOStreamFormat, _kUVCAppleCinematicFramingExtensionUnitControlGUID, 
+                       _getStringFromDict, _isH264Format, _isH265Format, _isMJPEGFormat, 
+                       _isUncompressedFormat, _kCMIOStreamFormat, _kUVCAppleCinematicFramingExtensionUnitControlGUID, 
                        _kUVCDeviceGUID, _kUVCDevicePowerLogEventName, _kUVCDevicePowerState, 
                        _kUVCExtensionAnalyticsAttributeModelName, _kUVCExtensionAnalyticsAttributeProductID, 
                        _kUVCExtensionAnalyticsAttributeVendorID, _kUVCExtensionAnalyticsEventCameraCapability, 

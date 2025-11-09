@@ -35,7 +35,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
  * @brief Region on which events are triggered based on the properties notifyOnEntry and notifyOnExit.
  *        This property will be nil when an application is not authorized for location services.
  */
-@property (readonly, strong, nonatomic, nullable) CLRegion *region;
+@property (nullable, nonatomic, readonly, strong) CLRegion *region;
 
 /*!
  * @brief Updates the region
@@ -64,7 +64,7 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
  * @brief Region on which events are triggered based on the properties notifyOnEntry and notifyOnExit.
  *        This property will be nil when an application is not authorized for location services.
  */
-@property (readwrite, strong, nonatomic, nullable) CLRegion *region;
+@property (nullable, nonatomic, readwrite, strong) CLRegion *region;
 
 @end
 

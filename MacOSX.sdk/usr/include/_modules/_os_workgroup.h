@@ -21,8 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _OS_WORKGROUP_
-#define _OS_WORKGROUP_
+#ifndef __OS_WORKGROUP_H_
+#define __OS_WORKGROUP_H_
 
 #if !__building_module(os)
 #error "Do not include this header directly, include <os/workgroup.h> instead"
@@ -30,4 +30,4 @@
 
 #include <os/workgroup.h>
 
-#endif /* _OS_WORKGROUP_ */
+#endif /* __OS_WORKGROUP_H_ */

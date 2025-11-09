@@ -10,6 +10,7 @@
 @protocol GCPhysicalInputElement;
 @protocol GCPhysicalInputSource;
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -74,6 +75,8 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  the device before the event was transmitted to the host.
  */
 @property (readonly) NSTimeInterval lastValueLatency;
+
+
 
 /**
  An object describing the physical action(s) the user performs to manipulate

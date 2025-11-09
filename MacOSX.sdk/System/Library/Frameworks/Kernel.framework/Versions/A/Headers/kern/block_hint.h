@@ -29,6 +29,10 @@
 #ifndef _KERN_BLOCK_HINT_H_
 #define _KERN_BLOCK_HINT_H_
 
+#include <sys/cdefs.h>
+
+__BEGIN_DECLS
+
 typedef enum thread_snapshot_wait_flags {
 	kThreadWaitNone                 = 0x00,
 	kThreadWaitKernelMutex          = 0x01,
@@ -67,5 +71,7 @@ typedef enum thread_snapshot_wait_flags {
 _Static_assert(sizeof(block_hint_t) <= sizeof(short),
     "block_hint_t must fit within a short");
 
+
+__END_DECLS
 
 #endif /* !_KERN_BLOCK_HINT_H_ */

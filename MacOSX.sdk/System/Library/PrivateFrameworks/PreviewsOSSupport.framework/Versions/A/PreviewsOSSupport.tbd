@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsOSSupport.framework/Versions/A/PreviewsOSSupport'
-current-version: 22.40.1
+current-version: 23.0.52
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -101,6 +101,7 @@ exports:
                        '_$s17PreviewsOSSupport15JITSetupPayloadVs23CustomStringConvertibleAAMc', 
                        '_$s17PreviewsOSSupport15ShellConnectionC10makeSender3forAA0cdF0Vyqd__Gqd__m_tYaKAA0cD9InterfaceRd__lF', 
                        '_$s17PreviewsOSSupport15ShellConnectionC10makeSender3forAA0cdF0Vyqd__Gqd__m_tYaKAA0cD9InterfaceRd__lFTu', 
+                       '_$s17PreviewsOSSupport15ShellConnectionC10makeSender3forAA0cdF0Vyqd__Gqd__m_tYaKAA0cD9InterfaceRd__lFfA_', 
                        '_$s17PreviewsOSSupport15ShellConnectionC11descriptionSSvg', 
                        '_$s17PreviewsOSSupport15ShellConnectionC11descriptionSSvpMV', 
                        '_$s17PreviewsOSSupport15ShellConnectionC18invalidationHandle0A12FoundationOS022ConcurrentInvalidationF0Cvg', 
@@ -113,10 +114,12 @@ exports:
                        '_$s17PreviewsOSSupport15ShellConnectionC8activate12forReceivingScSyAA0cD7MessageOyqd__GGqd__m_tAA0cD9InterfaceRd__lF', 
                        '_$s17PreviewsOSSupport15ShellConnectionC8activate8receiver19interruptionHandleryy0A11MessagingOS16LazyPropertyListO_AG14TransportReplyVSgtYbc_yyYbctF', 
                        '_$s17PreviewsOSSupport15ShellConnectionC8activateyyF', '_$s17PreviewsOSSupport15ShellConnectionCA2A10ClientRoleVRszrlE16createByEndpoint_3for13clientContextACyAEGSo09BSServicedI0C_AA0C7ServiceO0A12FoundationOS12PropertyListVtKFZ', 
+                       '_$s17PreviewsOSSupport15ShellConnectionCA2A10ClientRoleVRszrlE16createByEndpoint_3for13clientContextACyAEGSo09BSServicedI0C_AA0C7ServiceO0A12FoundationOS12PropertyListVtKFZfA1_', 
                        '_$s17PreviewsOSSupport15ShellConnectionCA2A10ClientRoleVRszrlE16serverAuditTokenSo07BSAuditI0Cvg', 
                        '_$s17PreviewsOSSupport15ShellConnectionCA2A10ClientRoleVRszrlE16serverAuditTokenSo07BSAuditI0CvgTu', 
                        '_$s17PreviewsOSSupport15ShellConnectionCA2A10ClientRoleVRszrlE16serverAuditTokenSo07BSAuditI0CvpMV', 
                        '_$s17PreviewsOSSupport15ShellConnectionCA2A10ClientRoleVRszrlE18createByMachLookup3for7variant13clientContextACyAEGAA0C7ServiceO_0A8Services0aO0O7VariantO0A12FoundationOS12PropertyListVtKFZ', 
+                       '_$s17PreviewsOSSupport15ShellConnectionCA2A10ClientRoleVRszrlE18createByMachLookup3for7variant13clientContextACyAEGAA0C7ServiceO_0A8Services0aO0O7VariantO0A12FoundationOS12PropertyListVtKFZfA1_', 
                        '_$s17PreviewsOSSupport15ShellConnectionCA2A10ServerRoleVRszrlE10connection7context7serviceACyAEGSo09BSServiceD4Host_So0jD0CXc_So13BSXPCDecoding_pAA0C7ServiceOtcfC', 
                        '_$s17PreviewsOSSupport15ShellConnectionCA2A10ServerRoleVRszrlE13clientContext0A12FoundationOS12PropertyListVvg', 
                        '_$s17PreviewsOSSupport15ShellConnectionCA2A10ServerRoleVRszrlE13clientContext0A12FoundationOS12PropertyListVvpMV', 
@@ -239,9 +242,11 @@ exports:
                        '_$s17PreviewsOSSupport21ShellConnectionSenderV20transportDescriptionSSvpMV', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable17BSEndpointContextRpzrlE4send8endpoint7context5replyySo09BSServiceD8EndpointC_AG0a9MessagingG014TransportReplyVtF', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable17BSEndpointContextRpzrlE4send8endpoint7context9expectingScTyqd__s5Error_pGSo09BSServiceD8EndpointC_AGqd__mtAdERd__s8SendableRd__lF', 
+                       '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable17BSEndpointContextRpzrlE4send8endpoint7context9expectingScTyqd__s5Error_pGSo09BSServiceD8EndpointC_AGqd__mtAdERd__s8SendableRd__lFfA1_', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable17BSEndpointContextRpzrlE4send8endpoint7contextScTyyts5Error_pGSo09BSServiceD8EndpointC_AGtF', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable18XPCEndpointContextRpzrlE4send8endpoint7context5replyySo21NSXPCListenerEndpointC_AG0a9MessagingG014TransportReplyVtF', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable18XPCEndpointContextRpzrlE4send8endpoint7context9expectingScTyqd__s5Error_pGSo21NSXPCListenerEndpointC_AGqd__mtAdERd__s8SendableRd__lF', 
+                       '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable18XPCEndpointContextRpzrlE4send8endpoint7context9expectingScTyqd__s5Error_pGSo21NSXPCListenerEndpointC_AGqd__mtAdERd__s8SendableRd__lFfA1_', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVAA0A12FoundationOS25PropertyListRepresentable18XPCEndpointContextRpzrlE4send8endpoint7contextScTyyts5Error_pGSo21NSXPCListenerEndpointC_AGtF', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVMa', '_$s17PreviewsOSSupport21ShellConnectionSenderVMn', 
                        '_$s17PreviewsOSSupport21ShellConnectionSenderVyxG0A11MessagingOS09TransportE8ProtocolAAMc', 
@@ -252,6 +257,7 @@ exports:
                        '_$s17PreviewsOSSupport22ShellConnectionMessageOMa', '_$s17PreviewsOSSupport22ShellConnectionMessageOMn', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerC010takeActivecD03for0A12FoundationOS17CancellationTokenVs5Int32V_tF', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerC022takeSubordinateProcessD03forys5Int32V_tF', 
+                       '_$s17PreviewsOSSupport23PreviewAssertionManagerC024takeFrontBoardVisibilityD03forys5Int32V_tF', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerC6sharedACvgZ', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerC6sharedACvpZMV', 
                        '_$s17PreviewsOSSupport23PreviewAssertionManagerCMa', '_$s17PreviewsOSSupport23PreviewAssertionManagerCMm', 

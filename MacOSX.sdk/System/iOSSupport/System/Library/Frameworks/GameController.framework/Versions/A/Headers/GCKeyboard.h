@@ -10,7 +10,6 @@
 #import <GameController/GCExtern.h>
 #import <GameController/GCDevice.h>
 
-@class GCKeyboard;
 @class GCKeyboardInput;
 
 NS_ASSUME_NONNULL_BEGIN

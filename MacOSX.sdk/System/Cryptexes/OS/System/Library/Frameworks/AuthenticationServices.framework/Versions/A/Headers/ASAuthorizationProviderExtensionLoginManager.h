@@ -10,6 +10,7 @@
 
 @class ASAuthorizationProviderExtensionLoginConfiguration;
 @class ASAuthorizationProviderExtensionUserLoginConfiguration;
+typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionAuthenticationMethod);
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -47,6 +48,11 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 
 /// @abstract Returns the device registration token from the MDM profile.
 @property (nonatomic, nullable, readonly, copy) NSString *registrationToken;
+
+
+/// @abstract Returns the authentication method used for the device.
+@property (nonatomic, readonly) ASAuthorizationProviderExtensionAuthenticationMethod authenticationMethod API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
 
 
 /// @abstract Returns the extension data from the MDM profile.

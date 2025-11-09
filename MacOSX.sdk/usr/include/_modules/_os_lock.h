@@ -21,8 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _OS_LOCK_
-#define _OS_LOCK_
+#ifndef __OS_LOCK_H
+#define __OS_LOCK_H
 
 #if !__building_module(os)
 #error "Do not include this header directly, include <os/lock.h> instead"
@@ -30,4 +30,4 @@
 
 #include <os/lock.h>
 
-#endif /* _OS_LOCK_ */
+#endif /* __OS_LOCK_H */

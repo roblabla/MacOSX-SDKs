@@ -23,7 +23,7 @@ __BEGIN_DECLS
  @discussion
     Create the GIC configuration after the virtual machine has been created.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 OS_OBJECT_RETURNS_RETAINED OS_WARN_RESULT
 hv_gic_config_t hv_gic_config_create(void);
 
@@ -36,7 +36,7 @@ hv_gic_config_t hv_gic_config_create(void);
     Guest physical address for distributor base aligned to byte value
     returned by hv_gic_get_distributor_base_alignment.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_config_set_distributor_base(hv_gic_config_t config, hv_ipa_t distributor_base_address);
 
 /*!
@@ -50,7 +50,7 @@ hv_return_t hv_gic_config_set_distributor_base(hv_gic_config_t config, hv_ipa_t 
     region will contain redistributors for all vCPUs supported by the
     virtual machine.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_config_set_redistributor_base(hv_gic_config_t config, hv_ipa_t redistributor_base_address);
 
 /*!
@@ -65,7 +65,7 @@ hv_return_t hv_gic_config_set_redistributor_base(hv_gic_config_t config, hv_ipa_
     For MSI support, you also need to set the interrupt range with
     hv_gic_config_set_msi_interrupt_range().
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_config_set_msi_region_base(hv_gic_config_t config, hv_ipa_t msi_region_base_address);
 
 /*!
@@ -82,7 +82,7 @@ hv_return_t hv_gic_config_set_msi_region_base(hv_gic_config_t config, hv_ipa_t m
     For MSI support, you also need to set the region base address with
     hv_gic_config_set_msi_region_base().
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_config_set_msi_interrupt_range(hv_gic_config_t config, uint32_t msi_intid_base, uint32_t msi_intid_count);
 
 __END_DECLS

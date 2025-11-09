@@ -2,7 +2,7 @@
 //  HKQuery.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2024 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2025 Apple Inc. All rights reserved.
 //
 
 
@@ -11,6 +11,7 @@
 #import <HealthKit/HKDefines.h>
 #import <HealthKit/HKElectrocardiogram.h>
 #import <HealthKit/HKFHIRResource.h>
+#import <HealthKit/HKMedicationDoseEvent.h>
 #import <HealthKit/HKStateOfMind.h>
 #import <HealthKit/HKWorkout.h>
 
@@ -626,5 +627,95 @@ typedef NS_OPTIONS(NSUInteger, HKQueryOptions) {
 
 @end
 
+@interface HKQuery (HKMedicationDoseEvent)
+
+/*!
+ @method        predicateForMedicationDoseEventWithStatus:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that have the status specified.
+ 
+ @param         status    The logged status of the medication dose event to match.
+ */
++ (NSPredicate *)predicateForMedicationDoseEventWithStatus:(HKMedicationDoseEventLogStatus)status API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForMedicationDoseEvent(status:));
+
+/*!
+ @method        predicateForMedicationDoseEventWithStatuses:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the statuses specified.
+ 
+ @param         statuses    The logged statuses of the medication dose event to match.
+ */
++ (NSPredicate *)predicateForMedicationDoseEventWithStatuses:(NSSet<NSNumber *> *)statuses API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForMedicationDoseEvent(statuses:)) NS_REFINED_FOR_SWIFT;
+
+/*!
+ @method        predicateForMedicationDoseEventWithScheduledDate:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that have the exact scheduled date specified.
+ 
+ @param         scheduledDate    The exact scheduled date of the medication dose event to match.
+ */
++ (NSPredicate *)predicateForMedicationDoseEventWithScheduledDate:(NSDate *)scheduledDate API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForMedicationDoseEvent(scheduledDate:));
+
+/*!
+ @method        predicateForMedicationDoseEventWithScheduledDates:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that have any of the exact scheduled dates specified.
+ 
+ @param         scheduledDates    The exact scheduled dates of any medication dose event to match.
+ */
++ (NSPredicate *)predicateForMedicationDoseEventWithScheduledDates:(NSSet<NSDate *> *)scheduledDates API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForMedicationDoseEvent(scheduledDates:));
+
+/*!
+ @method        predicateForMedicationDoseEventWithScheduledStartDate:endDate:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that have a scheduled date within a window of scheduled times. If nil is provided to either parameter, the respective side of the window is unbound.
+ 
+ @param         startDate    The beginning of the window for scheduled dates of any medication dose event to match.
+ @param         endDate    The beginning of the window for scheduled dates of any medication dose event to match.
+ */
++ (NSPredicate *)predicateForMedicationDoseEventWithScheduledStartDate:(nullable NSDate *)startDate
+                                                               endDate:(nullable NSDate *)endDate API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForMedicationDoseEvent(scheduledStart:end:));
+
+/*!
+ @method        predicateForMedicationDoseEventWithMedicationConceptIdentifier:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples that match a medication's concept identifier.
+ 
+ @param         medicationConceptIdentifier    The identifier of the medication that a dose event was created for.
+ */
++ (NSPredicate *)predicateForMedicationDoseEventWithMedicationConceptIdentifier:(HKHealthConceptIdentifier *)medicationConceptIdentifier API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForMedicationDoseEvent(medicationConceptIdentifier:));
+
+/*!
+ @method        predicateForMedicationDoseEventWithMedicationConceptIdentifiers:
+ @abstract      Creates a predicate for use with HKQuery subclasses.
+ @discussion    Creates a query predicate that matches HKMedicationDoseEvent samples generated by any medication in a set of medication concept identifiers.
+ 
+ @param         medicationConceptIdentifiers    Any identifier of a medication that a dose event was created for.
+ */
++ (NSPredicate *)predicateForMedicationDoseEventWithMedicationConceptIdentifiers:(NSSet<HKHealthConceptIdentifier *> *)medicationConceptIdentifiers API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForMedicationDoseEvent(medicationConceptIdentifiers:));
+
+@end
+
+@interface HKQuery (HKUserAnnotatedMedications)
+
+/*!
+ @method        predicateForUserAnnotatedMedicationsWithIsArchived:
+ @abstract      Creates a predicate for use with HKUserAnnotatedMedicationQuery.
+ @discussion    Creates a query predicate that matches HKUserAnnotatedMedication objects that have the archived status specified.
+ 
+ @param         isArchived    The archived status of the medication. Ex: True will match medications in the archived section in the Health App.
+ */
++ (NSPredicate *)predicateForUserAnnotatedMedicationsWithIsArchived:(BOOL)isArchived API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForUserAnnotatedMedications(isArchived:));
+
+/*!
+ @method        predicateForUserAnnotatedMedicationsWithHasSchedule:
+ @abstract      Creates a predicate for use with HKUserAnnotatedMedicationQuery.
+ @discussion    Creates a query predicate that matches HKUserAnnotatedMedication objects that match the schedule status specified.
+ 
+ @param         hasSchedule    The schedule status of the medication. Ex: True will match medications that have a reminders schedule set up in the Health App.
+ */
++ (NSPredicate *)predicateForUserAnnotatedMedicationsWithHasSchedule:(BOOL)hasSchedule API_AVAILABLE(ios(26.0), watchos(26.0), macCatalyst(26.0), macos(26.0), visionos(26.0)) NS_SWIFT_NAME(predicateForUserAnnotatedMedications(hasSchedule:));
+
+@end
 
 NS_ASSUME_NONNULL_END

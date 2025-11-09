@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -target-variant arm64e-apple-macos15.5 -enable-objc-interop -enable-library-evolution -module-link-name hvf -O -user-module-version 4.2 -module-name hvf
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -target-variant arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -module-link-name hvf -O -user-module-version 9 -module-name hvf
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=swift-6 -interface-compiler-version 6.2
 import Swift
 import _Concurrency
 import _StringProcessing
@@ -12,7 +12,9 @@ public let hvfLibraryVersion: (major: Swift.Int, minor: Swift.Int, patch: Swift.
 public enum AxisExtremum : Swift.Int {
   case minimum
   case maximum
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   @available(iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, macOS 15.4, *)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -26,7 +28,9 @@ public enum SegmentBlendType : Swift.UInt8 {
   case tangent
   case tangentTangent1
   case tangentTangent2
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.UInt8)
+  #endif
   @available(iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, macOS 15.4, *)
   public typealias RawValue = Swift.UInt8
   public var rawValue: Swift.UInt8 {
@@ -47,7 +51,9 @@ public protocol ShapeWriter {
 public enum SegmentPoint : Swift.Int {
   case on
   case off
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   @available(iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, macOS 15.4, *)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -58,7 +64,9 @@ public enum SegmentPoint : Swift.Int {
 public enum PointCoordinate : Swift.Int {
   case xOrParallel
   case yOrZero
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   @available(iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, macOS 15.4, *)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
@@ -155,7 +163,9 @@ public class HVGLPartLoader {
   public var partCount: Swift.Int {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(hvglTable: Swift.UnsafeRawBufferPointer, hvpmTable: Swift.UnsafeRawBufferPointer? = nil)
+  #endif
   @objc deinit
 }
 @available(macOS 15.4, iOS 18.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)

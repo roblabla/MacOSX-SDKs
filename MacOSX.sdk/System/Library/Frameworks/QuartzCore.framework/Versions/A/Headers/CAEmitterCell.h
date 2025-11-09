@@ -1,6 +1,6 @@
 /* CoreAnimation - CAEmitterCell.h
 
-   Copyright (c) 2007-2022, Apple Inc.
+   Copyright (c) 2007-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__

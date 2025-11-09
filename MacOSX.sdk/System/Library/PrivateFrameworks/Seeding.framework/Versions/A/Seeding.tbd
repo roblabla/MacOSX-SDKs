@@ -22,15 +22,15 @@ exports:
                        _SDSeedProgramStringCustomerSeed, _SDSeedProgramStringDeveloperSeed, 
                        _SDSeedProgramStringInternal, _SDSeedProgramStringOtherSeed, 
                        _SDSeedProgramStringPublicSeed, _SDSeedingPreferencesDomain, 
-                       _SDStringArrayFromPlatforms, _SDStringForPlatform, _SDUpdateAssetType, 
-                       _SeedingDefaults, _SeedingVersionNumber, _SeedingVersionString, 
-                       __allowListedXPCClientInterface, __allowListedXPCServerInterface, 
+                       _SDStringArrayFromPlatforms, _SDStringForPlatform, _SDTransactionCreate, 
+                       _SDUpdateAssetType, _SeedingDefaults, _SeedingVersionNumber, 
+                       _SeedingVersionString, __allowListedXPCClientInterface, __allowListedXPCServerInterface, 
                        _kSeedEnrollmentCookiePath ]
     objc-classes:    [ SDAnalytics, SDBetaEnrollmentDaemon, SDBetaEnrollmentDaemonProxy, 
                        SDBetaEnrollmentService, SDBetaEnrollmentServiceProxy, SDBetaManager, 
                        SDBetaProgram, SDBuildInfo, SDCatalogUtilities, SDConstants, 
-                       SDDevice, SDHTTPClient, SDKeyValueStore, SDLegalDoc, SDMDMConfiguration, 
-                       SDMDMConfigurator, SDMDMConfiguratorImplementation, SDPersistence, 
-                       SDProfileUtilities, SDSUPreferences, SDSeedProgramManager, 
+                       SDDevice, SDHTTPClient, SDKeyValueStore, SDLanguageUtils, 
+                       SDLegalDoc, SDMDMConfiguration, SDMDMConfigurator, SDMDMConfiguratorImplementation, 
+                       SDPersistence, SDProfileUtilities, SDSUPreferences, SDSeedProgramManager, 
                        SDSeedProgramMigrator, SDSeedingConfiguration, SDSeedingLogging ]
 ...

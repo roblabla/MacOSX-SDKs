@@ -48,4 +48,5 @@ exports:
                        '_$sSo17OS_dispatch_groupC18BusinessFoundationE9bf_notify5queue7executexSo0a1_b1_H0C_xyYaKctYaKlFTu', 
                        '_$sSo17OS_dispatch_queueC18BusinessFoundationE8bf_async7executexxyKc_tYaKlF', 
                        '_$sSo17OS_dispatch_queueC18BusinessFoundationE8bf_async7executexxyKc_tYaKlFTu' ]
+    objc-classes:    [ BFPhoneNumberNormalizer ]
 ...

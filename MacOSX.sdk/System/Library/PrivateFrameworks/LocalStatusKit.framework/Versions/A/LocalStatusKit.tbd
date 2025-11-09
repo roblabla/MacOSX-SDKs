@@ -7,6 +7,7 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Foundation11FormatStyleP14LocalStatusKitAD18OSLogDateFormatterVRszrlE5oslogyA2F0C0OFZ', 
                        '_$s10Foundation11FormatStyleP14LocalStatusKitAD22TinyDateRangeFormatterVRszrlE4tinyAFvgZ', 
+                       '_$s10Foundation11FormatStyleP14LocalStatusKitAD22TinyDateRangeFormatterVRszrlE4tinyAFvpZMV', 
                        '_$s14LocalStatusKit012LSKPublishedB0V13pendingDeviesSayAA20LSKDestinationDeviceVGvg', 
                        '_$s14LocalStatusKit012LSKPublishedB0V13pendingDeviesSayAA20LSKDestinationDeviceVGvpMV', 
                        '_$s14LocalStatusKit012LSKPublishedB0V16debugDescriptionSSvg', 
@@ -298,7 +299,6 @@ exports:
                        '_$s14LocalStatusKit9LSKDomainOSHAAMc', '_$s14LocalStatusKit9LSKDomainOSQAAMc', 
                        '_$s14LocalStatusKit9LSKDomainOSYAAMc', '_$s14LocalStatusKit9LSKDomainOSeAAMc', 
                        '_$s14LocalStatusKit9LSKDomainOs12CaseIterableAAMc', '_$s14LocalStatusKit9LSKDomainOs12IdentifiableAAMc', 
-                       '_$s2os6LoggerV14LocalStatusKitE05localD0ACvgZ', _LocalStatusKitVersionNumber, 
-                       _LocalStatusKitVersionString ]
+                       '_$s2os6LoggerV14LocalStatusKitE05localD0ACvgZ' ]
     objc-classes:    [ LocalStatusInvocation, PublishStatusInvocation, SubscribeStatusInvocation ]
 ...

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macos15.5 -target-variant arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 860.0.16 -module-name SensorKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macos26.0 -target-variant arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 958 -module-name SensorKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Foundation
 @_exported import SensorKit
 import Swift
@@ -25,12 +25,16 @@ extension SensorKit.SRPhotoplethysmogramOpticalSample {
     public let backgroundNoise: Swift.Double
     public let backgroundNoiseOffset: Swift.Double
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var noiseTerms: SensorKit.SRPhotoplethysmogramOpticalSample.NoiseTerms? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var normalizedReflectance: Swift.Double? {
     get
   }
+  #endif
 }
 @available(iOS 17.0, *)
 @available(watchOS, unavailable)
@@ -41,4 +45,16 @@ extension SensorKit.SRWristTemperatureSession {
   public var temperatures: some Swift.Sequence<SensorKit.SRWristTemperature> {
     get
   }
+}
+@available(iOS 26.0, *)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+extension SensorKit.SRAcousticSettings {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var headphoneSafetyAudioLevel: Swift.Double? {
+    get
+  }
+  #endif
 }

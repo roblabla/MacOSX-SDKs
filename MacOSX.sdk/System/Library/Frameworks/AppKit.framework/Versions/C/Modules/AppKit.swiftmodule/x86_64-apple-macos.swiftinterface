@@ -1,24 +1,28 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -target-variant x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2575.60.5 -module-name AppKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -target-variant x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2685.10.108 -module-name AppKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import Accessibility
 @_exported import AppKit
 @_exported import CoreGraphics
 import CoreText
 import CoreTransferable
+import Darwin
 import DataDetection
 @_exported import DeveloperToolsSupport
 import Foundation
+import AppKit.NSBackgroundExtensionView
 import OSLog
 import OpenGL
 import Swift
+import SwiftUICore
 import Symbols
 import UniformTypeIdentifiers.UTType
 import UniformTypeIdentifiers
 @_exported import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
+import Darwin.Mach.message
 @available(macCatalyst 18.0, macOS 15.0, *)
 @frozen public enum NSHorizontalDirection : Swift.Int8, Swift.CaseIterable, Swift.Codable {
   case left
@@ -35,7 +39,9 @@ import _SwiftConcurrencyShims
     @available(macOS 15.0, macCatalyst 18.0, *)
     public typealias ArrayLiteralElement = AppKit.NSHorizontalDirection.Set.Element
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
+  #endif
   @available(macOS 15.0, macCatalyst 18.0, *)
   public typealias AllCases = [AppKit.NSHorizontalDirection]
   @available(macOS 15.0, macCatalyst 18.0, *)
@@ -53,12 +59,16 @@ extension AppKit.NSHorizontalDirection.Set {
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func insert(_ newMember: __owned AppKit.NSHorizontalDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSHorizontalDirection)
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func remove(_ member: AppKit.NSHorizontalDirection) -> AppKit.NSHorizontalDirection?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func update(with newMember: __owned AppKit.NSHorizontalDirection) -> AppKit.NSHorizontalDirection?
+  #endif
 }
 extension AppKit.NSHorizontalDirection {
   @available(macOS 15.0, *)
@@ -82,7 +92,9 @@ extension AppKit.NSHorizontalDirection {
     @available(macOS 15.0, macCatalyst 18.0, *)
     public typealias ArrayLiteralElement = AppKit.NSVerticalDirection.Set.Element
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int8)
+  #endif
   @available(macOS 15.0, macCatalyst 18.0, *)
   public typealias AllCases = [AppKit.NSVerticalDirection]
   @available(macOS 15.0, macCatalyst 18.0, *)
@@ -100,15 +112,47 @@ extension AppKit.NSVerticalDirection.Set {
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func insert(_ newMember: __owned AppKit.NSVerticalDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSVerticalDirection)
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func remove(_ member: AppKit.NSVerticalDirection) -> AppKit.NSVerticalDirection?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func update(with newMember: __owned AppKit.NSVerticalDirection) -> AppKit.NSVerticalDirection?
+  #endif
 }
 @available(macOS 14.0, *)
 extension AppKit.NSShadow : @unchecked Swift.Sendable {
+}
+@available(macOS 26.0, *)
+extension AppKit.NSView {
+  public struct LayoutRegion : Swift.Hashable, Swift.Equatable {
+    public enum AdaptivityAxis : Swift.Equatable {
+      case horizontal
+      case vertical
+      public static func == (a: AppKit.NSView.LayoutRegion.AdaptivityAxis, b: AppKit.NSView.LayoutRegion.AdaptivityAxis) -> Swift.Bool
+      public func hash(into hasher: inout Swift.Hasher)
+      public var hashValue: Swift.Int {
+        get
+      }
+    }
+    #if compiler(>=5.3) && $NonescapableTypes
+    public static func safeArea(cornerAdaptation: AppKit.NSView.LayoutRegion.AdaptivityAxis? = nil) -> AppKit.NSView.LayoutRegion
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
+    public static func margins(cornerAdaptation: AppKit.NSView.LayoutRegion.AdaptivityAxis? = nil) -> AppKit.NSView.LayoutRegion
+    #endif
+    public static func == (a: AppKit.NSView.LayoutRegion, b: AppKit.NSView.LayoutRegion) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  @_Concurrency.MainActor @preconcurrency public func layoutGuide(for region: AppKit.NSView.LayoutRegion) -> AppKit.NSLayoutGuide
+  @_Concurrency.MainActor @preconcurrency public func edgeInsets(for region: AppKit.NSView.LayoutRegion) -> Foundation.NSEdgeInsets
+  @_Concurrency.MainActor @preconcurrency public func rect(for region: AppKit.NSView.LayoutRegion) -> Foundation.NSRect
 }
 @available(swift 5.1)
 @available(macOS 12, *)
@@ -230,6 +274,7 @@ extension AppKit.NSView.Invalidations.RestorableState : Swift.Sendable {
 extension AppKit.NSView.Invalidations.Tuple : Swift.Sendable {
 }
 extension AppKit.NSPopUpButton {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.10, *)
   @_alwaysEmitIntoClient @_Concurrency.MainActor @preconcurrency internal func _configurePullDown(title: Swift.String?, image: AppKit.NSImage?, pullDownMenu: AppKit.NSMenu) {
         pullsDown = true
@@ -270,6 +315,8 @@ extension AppKit.NSPopUpButton {
         displayItem.image = image
         popupCell?.menuItem = displayItem
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.10, *)
   @backDeployed(before: macOS 15.0)
   @_Concurrency.MainActor @preconcurrency convenience public init(title: Swift.String, image: AppKit.NSImage? = nil, pullDownMenu: AppKit.NSMenu) {
@@ -277,6 +324,7 @@ extension AppKit.NSPopUpButton {
         _configurePullDown(title: title, image: image, pullDownMenu: pullDownMenu)
         sizeToFit()
     }
+  #endif
   @available(macOS 10.10, *)
   @backDeployed(before: macOS 15.0)
   @_Concurrency.MainActor @preconcurrency convenience public init(image: AppKit.NSImage, pullDownMenu: AppKit.NSMenu) {
@@ -284,6 +332,7 @@ extension AppKit.NSPopUpButton {
         _configurePullDown(title: nil, image: image, pullDownMenu: pullDownMenu)
         sizeToFit()
     }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.10, *)
   @backDeployed(before: macOS 15.0)
   @_Concurrency.MainActor @preconcurrency convenience public init(popUpMenu: AppKit.NSMenu, target: Swift.AnyObject?, action: ObjectiveC.Selector?) {
@@ -313,6 +362,7 @@ extension AppKit.NSPopUpButton {
         self.action = action
         sizeToFit()
     }
+  #endif
 }
 @available(macOS 10.15.1, *)
 public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType> where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
@@ -331,10 +381,18 @@ public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifier
   }
   public func numberOfItems(inSection identifier: SectionIdentifierType) -> Swift.Int
   public func itemIdentifiers(inSection identifier: SectionIdentifierType) -> [ItemIdentifierType]
+  #if compiler(>=5.3) && $NonescapableTypes
   public func sectionIdentifier(containingItem identifier: ItemIdentifierType) -> SectionIdentifierType?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func indexOfItem(_ identifier: ItemIdentifierType) -> Swift.Int?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func indexOfSection(_ identifier: SectionIdentifierType) -> Swift.Int?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public mutating func appendItems(_ identifiers: [ItemIdentifierType], toSection sectionIdentifier: SectionIdentifierType? = nil)
+  #endif
   public mutating func insertItems(_ identifiers: [ItemIdentifierType], beforeItem beforeIdentifier: ItemIdentifierType)
   public mutating func insertItems(_ identifiers: [ItemIdentifierType], afterItem afterIdentifier: ItemIdentifierType)
   public mutating func deleteItems(_ identifiers: [ItemIdentifierType])
@@ -353,14 +411,22 @@ public struct NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifier
 @available(macOS 10.15.1, *)
 extension AppKit.NSDiffableDataSourceSnapshot : Swift._ObjectiveCBridgeable {
   @_semantics("convertToObjectiveC") public func _bridgeToObjectiveC() -> AppKit.NSDiffableDataSourceSnapshotReference
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _forceBridgeFromObjectiveC(_ input: AppKit.NSDiffableDataSourceSnapshotReference, result: inout AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func _conditionallyBridgeFromObjectiveC(_ input: AppKit.NSDiffableDataSourceSnapshotReference, result: inout AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>?) -> Swift.Bool
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_effects(readonly) public static func _unconditionallyBridgeFromObjectiveC(_ snapshot: AppKit.NSDiffableDataSourceSnapshotReference?) -> AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
+  #endif
   @available(macOS 10.15.1, *)
   public typealias _ObjectiveCType = AppKit.NSDiffableDataSourceSnapshotReference
 }
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, *)
 public func NSApplicationMain(_ argc: Swift.Int32, _ argv: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.CChar>?>) -> Swift.Int32
+#endif
 extension AppKit.NSApplicationDelegate {
   @_alwaysEmitIntoClient public static func main() {
         exit(NSApplicationMain(CommandLine.argc, CommandLine.unsafeArgv))
@@ -370,6 +436,42 @@ extension AppKit.NSApplication {
   @available(swift 4)
   @available(macOS 10.9, *)
   @_Concurrency.MainActor @preconcurrency public static func loadApplication()
+}
+extension AppKit.NSApplication {
+  @available(macOS 26.0, *)
+  public struct ShouldBeginSuppressingHighDynamicRangeContent : Foundation.NotificationCenter.MainActorMessage {
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public typealias Subject = AppKit.NSApplication
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSApplication.ShouldBeginSuppressingHighDynamicRangeContent?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSApplication.ShouldBeginSuppressingHighDynamicRangeContent) -> Foundation.Notification
+  }
+  @available(macOS 26.0, *)
+  public struct ShouldEndSuppressingHighDynamicRangeContent : Foundation.NotificationCenter.MainActorMessage {
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public typealias Subject = AppKit.NSApplication
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSApplication.ShouldEndSuppressingHighDynamicRangeContent?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSApplication.ShouldEndSuppressingHighDynamicRangeContent) -> Foundation.Notification
+  }
+}
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSApplication.ShouldBeginSuppressingHighDynamicRangeContent> {
+  @available(macOS 26.0, *)
+  public static var shouldBeginSuppressingHighDynamicRangeContent: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSApplication.ShouldBeginSuppressingHighDynamicRangeContent> {
+    get
+  }
+}
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSApplication.ShouldEndSuppressingHighDynamicRangeContent> {
+  @available(macOS 26.0, *)
+  public static var shouldEndSuppressingHighDynamicRangeContent: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSApplication.ShouldEndSuppressingHighDynamicRangeContent> {
+    get
+  }
 }
 @available(macOS 10.9, *)
 extension AppKit.NSAppKitVersion {
@@ -412,13 +514,383 @@ open class NSTableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierTy
   public var defaultRowAnimation: AppKit.NSTableView.AnimationOptions
   public init(tableView: AppKit.NSTableView, cellProvider: @escaping AppKit.NSTableViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.CellProvider)
   public func snapshot() -> AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
+  #if compiler(>=5.3) && $NonescapableTypes
   public func apply(_ snapshot: AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool, completion: (() -> Swift.Void)? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func itemIdentifier(forRow row: Swift.Int) -> ItemIdentifierType?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func row(forItemIdentifier identifier: ItemIdentifierType) -> Swift.Int?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func sectionIdentifier(forRow row: Swift.Int) -> SectionIdentifierType?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func row(forSectionIdentifier identifier: SectionIdentifierType) -> Swift.Int?
+  #endif
   @_Concurrency.MainActor @preconcurrency @objc public func numberOfRows(in tableView: AppKit.NSTableView) -> Swift.Int
   @objc deinit
+}
+@available(macOS 26.0, *)
+extension AppKit.NSWorkspace {
+  public struct DidHideApplicationMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var application: AppKit.NSRunningApplication
+    public init(application: AppKit.NSRunningApplication)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidHideApplicationMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidHideApplicationMessage) -> Foundation.Notification
+  }
+  public struct DidUnhideApplicationMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var application: AppKit.NSRunningApplication
+    public init(application: AppKit.NSRunningApplication)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidUnhideApplicationMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidUnhideApplicationMessage) -> Foundation.Notification
+  }
+  public struct WillLaunchApplicationMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var application: AppKit.NSRunningApplication
+    public init(application: AppKit.NSRunningApplication)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.WillLaunchApplicationMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.WillLaunchApplicationMessage) -> Foundation.Notification
+  }
+  public struct DidLaunchApplicationMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var application: AppKit.NSRunningApplication
+    public init(application: AppKit.NSRunningApplication)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidLaunchApplicationMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidLaunchApplicationMessage) -> Foundation.Notification
+  }
+  public struct WillSleepMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.WillSleepMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.WillSleepMessage) -> Foundation.Notification
+  }
+  public struct DidWakeMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidWakeMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidWakeMessage) -> Foundation.Notification
+  }
+  public struct DidTerminateApplicationMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var application: AppKit.NSRunningApplication
+    public init(application: AppKit.NSRunningApplication)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidTerminateApplicationMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidTerminateApplicationMessage) -> Foundation.Notification
+  }
+  public struct DidMountVolumeMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var localizedVolumeName: Swift.String
+    public var volumeURL: Foundation.URL
+    public init(localizedVolumeName: Swift.String, volumeURL: Foundation.URL)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidMountVolumeMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidMountVolumeMessage) -> Foundation.Notification
+  }
+  public struct WillUnmountVolumeMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var localizedVolumeName: Swift.String
+    public var volumeURL: Foundation.URL
+    public init(localizedVolumeName: Swift.String, volumeURL: Foundation.URL)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.WillUnmountVolumeMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.WillUnmountVolumeMessage) -> Foundation.Notification
+  }
+  public struct DidUnmountVolumeMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var localizedVolumeName: Swift.String
+    public var volumeURL: Foundation.URL
+    public init(localizedVolumeName: Swift.String, volumeURL: Foundation.URL)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidUnmountVolumeMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidUnmountVolumeMessage) -> Foundation.Notification
+  }
+  public struct DidActivateApplicationMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var application: AppKit.NSRunningApplication
+    public init(application: AppKit.NSRunningApplication)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidActivateApplicationMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidActivateApplicationMessage) -> Foundation.Notification
+  }
+  public struct DidDeactivateApplicationMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var application: AppKit.NSRunningApplication
+    public init(application: AppKit.NSRunningApplication)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidDeactivateApplicationMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidDeactivateApplicationMessage) -> Foundation.Notification
+  }
+  public struct DidRenameVolumeMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public var localizedVolumeName: Swift.String
+    public var volumeURL: Foundation.URL
+    public var oldLocalizedVolumeName: Swift.String
+    public var oldVolumeURL: Foundation.URL
+    public init(localizedVolumeName: Swift.String, volumeURL: Foundation.URL, oldLocalizedVolumeName: Swift.String, oldVolumeURL: Foundation.URL)
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidRenameVolumeMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidRenameVolumeMessage) -> Foundation.Notification
+  }
+  public struct SessionDidBecomeActiveMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.SessionDidBecomeActiveMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.SessionDidBecomeActiveMessage) -> Foundation.Notification
+  }
+  public struct SessionDidResignActiveMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.SessionDidResignActiveMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.SessionDidResignActiveMessage) -> Foundation.Notification
+  }
+  public struct DidChangeFileLabelsMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.DidChangeFileLabelsMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.DidChangeFileLabelsMessage) -> Foundation.Notification
+  }
+  public struct ScreensDidSleepMessage : Foundation.NotificationCenter.AsyncMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.ScreensDidSleepMessage?
+    #endif
+    public static func makeNotification(_ message: AppKit.NSWorkspace.ScreensDidSleepMessage) -> Foundation.Notification
+  }
+  public struct ScreensDidWakeMessage : Foundation.NotificationCenter.AsyncMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.ScreensDidWakeMessage?
+    #endif
+    public static func makeNotification(_ message: AppKit.NSWorkspace.ScreensDidWakeMessage) -> Foundation.Notification
+  }
+  public struct ActiveSpaceDidChangeMessage : Foundation.NotificationCenter.AsyncMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.ActiveSpaceDidChangeMessage?
+    #endif
+    public static func makeNotification(_ message: AppKit.NSWorkspace.ActiveSpaceDidChangeMessage) -> Foundation.Notification
+  }
+  public struct AccessibilityDisplayOptionsDidChangeMessage : Foundation.NotificationCenter.MainActorMessage {
+    public typealias Subject = AppKit.NSWorkspace
+    public static var name: Foundation.Notification.Name {
+      get
+    }
+    public init()
+    #if compiler(>=5.3) && $NonescapableTypes
+    @_Concurrency.MainActor public static func makeMessage(_ notification: Foundation.Notification) -> AppKit.NSWorkspace.AccessibilityDisplayOptionsDidChangeMessage?
+    #endif
+    @_Concurrency.MainActor public static func makeNotification(_ message: AppKit.NSWorkspace.AccessibilityDisplayOptionsDidChangeMessage) -> Foundation.Notification
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidHideApplicationMessage> {
+  @_alwaysEmitIntoClient public static var didHideApplication: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidHideApplicationMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidUnhideApplicationMessage> {
+  @_alwaysEmitIntoClient public static var didUnhideApplication: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidUnhideApplicationMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.WillLaunchApplicationMessage> {
+  @_alwaysEmitIntoClient public static var willLaunchApplication: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.WillLaunchApplicationMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidLaunchApplicationMessage> {
+  @_alwaysEmitIntoClient public static var didLaunchApplication: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidLaunchApplicationMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.WillSleepMessage> {
+  @_alwaysEmitIntoClient public static var willSleep: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.WillSleepMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidWakeMessage> {
+  @_alwaysEmitIntoClient public static var didWake: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidWakeMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidTerminateApplicationMessage> {
+  @_alwaysEmitIntoClient public static var didTerminateApplication: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidTerminateApplicationMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidMountVolumeMessage> {
+  @_alwaysEmitIntoClient public static var didMountVolume: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidMountVolumeMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.WillUnmountVolumeMessage> {
+  @_alwaysEmitIntoClient public static var willUnmountVolume: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.WillUnmountVolumeMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidUnmountVolumeMessage> {
+  @_alwaysEmitIntoClient public static var didUnmountVolume: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidUnmountVolumeMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidActivateApplicationMessage> {
+  @_alwaysEmitIntoClient public static var didActivateApplication: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidActivateApplicationMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidDeactivateApplicationMessage> {
+  @_alwaysEmitIntoClient public static var didDeactivateApplication: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidDeactivateApplicationMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidRenameVolumeMessage> {
+  @_alwaysEmitIntoClient public static var didRenameVolume: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidRenameVolumeMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.SessionDidBecomeActiveMessage> {
+  @_alwaysEmitIntoClient public static var sessionDidBecomeActive: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.SessionDidBecomeActiveMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.SessionDidResignActiveMessage> {
+  @_alwaysEmitIntoClient public static var sessionDidResignActive: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.SessionDidResignActiveMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidChangeFileLabelsMessage> {
+  @_alwaysEmitIntoClient public static var didChangeFileLabels: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.DidChangeFileLabelsMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.ScreensDidSleepMessage> {
+  @_alwaysEmitIntoClient public static var screensDidSleep: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.ScreensDidSleepMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.ScreensDidWakeMessage> {
+  @_alwaysEmitIntoClient public static var screensDidWake: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.ScreensDidWakeMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.ActiveSpaceDidChangeMessage> {
+  @_alwaysEmitIntoClient public static var activeSpaceDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.ActiveSpaceDidChangeMessage> {
+    get { .init() }
+  }
+}
+@available(macOS 26.0, *)
+extension Foundation.NotificationCenter.MessageIdentifier where Self == Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.AccessibilityDisplayOptionsDidChangeMessage> {
+  @_alwaysEmitIntoClient public static var accessibilityDisplayOptionsDidChange: Foundation.NotificationCenter.BaseMessageIdentifier<AppKit.NSWorkspace.AccessibilityDisplayOptionsDidChangeMessage> {
+    get { .init() }
+  }
 }
 @available(macOS 14.0, *)
 extension AppKit.NSImage {
@@ -431,9 +903,11 @@ extension AppKit.NSImage : Swift._ExpressibleByImageLiteral {
 public typealias _ImageLiteralType = AppKit.NSImage
 @available(macOS 14.0, *)
 extension AppKit.NSMenuItemBadge {
+  #if compiler(>=5.3) && $NonescapableTypes
   @objc dynamic public var stringValue: Swift.String? {
     @objc get
   }
+  #endif
 }
 @available(macOS 15.0, *)
 extension AppKit.NSMenuItemBadge : Swift.Codable {
@@ -445,7 +919,9 @@ public struct NSSuggestionItemSection<SuggestionItemType> {
   public typealias Item = AppKit.NSSuggestionItem<SuggestionItemType>
   public var title: Swift.String?
   public var items: [AppKit.NSSuggestionItemSection<SuggestionItemType>.Item]
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(title: Swift.String?, items: [AppKit.NSSuggestionItemSection<SuggestionItemType>.Item])
+  #endif
   public init(items: [AppKit.NSSuggestionItemSection<SuggestionItemType>.Item])
 }
 @available(macOS 15.0, *)
@@ -509,7 +985,7 @@ extension Foundation.AttributeDynamicLookup {
   }
 }
 @available(macOS 12, *)
-extension AppKit.NSUnderlineStyle : Swift.Hashable {
+extension AppKit.NSUnderlineStyle : @retroactive Swift.Hashable {
 }
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes {
@@ -640,9 +1116,11 @@ extension Foundation.AttributeScopes.AppKitAttributes {
     public typealias ObjectiveCValue = AppKit.NSAdaptiveImageGlyph
     public static let name: Swift.String
     public static var inheritedByAddedText: Swift.Bool
+    #if compiler(>=5.3) && $NonescapableTypes
     public static var runBoundaries: Foundation.AttributedString.AttributeRunBoundaries? {
       get
     }
+    #endif
     public static func objectiveCValue(for value: Foundation.AttributedString.AdaptiveImageGlyph) throws -> AppKit.NSAdaptiveImageGlyph
     public static func value(for object: AppKit.NSAdaptiveImageGlyph) throws -> Foundation.AttributedString.AdaptiveImageGlyph
     public static func encode(_ value: Foundation.AttributedString.AdaptiveImageGlyph, to encoder: any Swift.Encoder) throws
@@ -672,33 +1150,63 @@ extension Foundation.IndexPath {
 }
 @available(macOS 10.9, *)
 extension Foundation.URLResourceValues {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   public var thumbnail: AppKit.NSImage? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var labelColor: AppKit.NSColor? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var effectiveIcon: Swift.AnyObject? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var customIcon: AppKit.NSImage? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 10.10, deprecated: 12.0, message: "Use the QuickLookThumbnailing framework and extension point instead")
   public var thumbnailDictionary: [Foundation.URLThumbnailDictionaryItem : AppKit.NSImage]? {
     get
   }
+  #endif
 }
 extension AppKit.NSScreen {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12, *)
   public var auxiliaryTopLeftArea: Foundation.NSRect? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 12, *)
   public var auxiliaryTopRightArea: Foundation.NSRect? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 26.0, *)
+  public var cgDirectDisplayID: CoreGraphics.CGDirectDisplayID? {
+    get
+  }
+  #endif
+}
+@available(macOS 26.0, *)
+public struct NSItemBadge : Swift.Equatable {
+  public static func count(_ count: Swift.Int) -> AppKit.NSItemBadge
+  public static func text(_ text: Swift.String) -> AppKit.NSItemBadge
+  public static var indicator: AppKit.NSItemBadge
+  public var text: Swift.String {
+    get
+  }
+  public static func == (lhs: AppKit.NSItemBadge, rhs: AppKit.NSItemBadge) -> Swift.Bool
 }
 extension AppKit.NSImageView {
   @available(macOS 14.0, *)
@@ -735,25 +1243,35 @@ extension AppKit.NSSound : CoreTransferable.Transferable {
   public typealias Representation = @_opaqueReturnTypeOf("$sSo7NSSoundC6AppKitE22transferRepresentationQrvpZ", 0) __
 }
 extension AppKit.NSTextField {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, *)
   @_Concurrency.MainActor @preconcurrency weak public var suggestionsDelegate: (any AppKit.NSTextSuggestionsDelegate)? {
     get
     set
   }
+  #endif
 }
 @available(macOS 10.15.1, *)
 open class NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType> : ObjectiveC.NSObject, AppKit.NSCollectionViewDataSource where SectionIdentifierType : Swift.Hashable, ItemIdentifierType : Swift.Hashable {
   public typealias ItemProvider = (AppKit.NSCollectionView, Foundation.IndexPath, ItemIdentifierType) -> AppKit.NSCollectionViewItem?
   public typealias SupplementaryViewProvider = (AppKit.NSCollectionView, Swift.String, Foundation.IndexPath) -> (any AppKit.NSView & AppKit.NSCollectionViewElement)?
+  #if compiler(>=5.3) && $NonescapableTypes
   public var supplementaryViewProvider: AppKit.NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.SupplementaryViewProvider? {
     get
     set
   }
+  #endif
   public init(collectionView: AppKit.NSCollectionView, itemProvider: @escaping AppKit.NSCollectionViewDiffableDataSource<SectionIdentifierType, ItemIdentifierType>.ItemProvider)
+  #if compiler(>=5.3) && $NonescapableTypes
   open func apply(_ snapshot: AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>, animatingDifferences: Swift.Bool = true, completion: (() -> Swift.Void)? = nil)
+  #endif
   open func snapshot() -> AppKit.NSDiffableDataSourceSnapshot<SectionIdentifierType, ItemIdentifierType>
+  #if compiler(>=5.3) && $NonescapableTypes
   open func itemIdentifier(for indexPath: Foundation.IndexPath) -> ItemIdentifierType?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   open func indexPath(for itemIdentifier: ItemIdentifierType) -> Foundation.IndexPath?
+  #endif
   @_Concurrency.MainActor @preconcurrency @objc open func numberOfSections(in collectionView: AppKit.NSCollectionView) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, numberOfItemsInSection section: Swift.Int) -> Swift.Int
   @_Concurrency.MainActor @preconcurrency @objc open func collectionView(_ collectionView: AppKit.NSCollectionView, itemForRepresentedObjectAt indexPath: Foundation.IndexPath) -> AppKit.NSCollectionViewItem
@@ -855,8 +1373,12 @@ extension AppKit.NSView : Swift.__DefaultCustomPlaygroundQuickLookable {
 }
 @available(macOS 14.0, *)
 extension DeveloperToolsSupport.Preview {
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSView)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public init(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., body: @escaping @_Concurrency.MainActor () -> AppKit.NSViewController)
+  #endif
 }
 @available(macOS 14.0, *)
 @freestanding(declaration) public macro Preview(_ name: Swift.String? = nil, traits: DeveloperToolsSupport.PreviewTrait<DeveloperToolsSupport.Preview.ViewTraits>..., @DeveloperToolsSupport.PreviewMacroBodyBuilder<AppKit.NSView> body: @escaping @_Concurrency.MainActor () -> AppKit.NSView) = #externalMacro(module: "PreviewsMacros", type: "KitViewMacro")
@@ -873,14 +1395,18 @@ public struct NSSuggestionItem<SuggestionItemType> {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var secondaryTitle: Swift.String? {
     get
     set
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var attributedSecondaryTitle: Foundation.AttributedString? {
     get
     set
   }
+  #endif
   public var toolTip: Swift.String?
   public var image: AppKit.NSImage?
   public init(representedValue: SuggestionItemType, title: Swift.String)
@@ -948,18 +1474,28 @@ extension AppKit.NSWindowController {
 }
 @available(macOS 10.9, *)
 extension AppKit.NSGradient {
+  #if compiler(>=5.3) && $NonescapableTypes
   convenience public init?(colorsAndLocations objects: (AppKit.NSColor, CoreFoundation.CGFloat)...)
+  #endif
 }
 @available(macOS 10.10, *)
 extension AppKit.NSStoryboard {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, *)
   public func instantiateInitialController<Controller>(creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller? where Controller : AppKit.NSViewController
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, *)
   public func instantiateInitialController<Controller>(creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller? where Controller : AppKit.NSWindowController
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, *)
   public func instantiateController<Controller>(identifier: AppKit.NSStoryboard.SceneIdentifier, creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller where Controller : AppKit.NSViewController
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 10.15, *)
   public func instantiateController<Controller>(identifier: AppKit.NSStoryboard.SceneIdentifier, creator: ((Foundation.NSCoder) -> Controller?)? = nil) -> Controller where Controller : AppKit.NSWindowController
+  #endif
 }
 @available(macCatalyst 18.0, macOS 15.0, *)
 extension AppKit.NSCursor {
@@ -980,7 +1516,9 @@ extension AppKit.NSCursor {
       @available(macOS 15.0, macCatalyst 18.0, *)
       public typealias ArrayLiteralElement = AppKit.NSCursor.FrameResizeDirection.Set.Element
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(rawValue: Swift.Int8)
+    #endif
     @available(macOS 15.0, macCatalyst 18.0, *)
     public typealias AllCases = [AppKit.NSCursor.FrameResizeDirection]
     @available(macOS 15.0, macCatalyst 18.0, *)
@@ -1000,12 +1538,16 @@ extension AppKit.NSCursor.FrameResizeDirection.Set {
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func insert(_ newMember: __owned AppKit.NSCursor.FrameResizeDirection) -> (inserted: Swift.Bool, memberAfterInsert: AppKit.NSCursor.FrameResizeDirection)
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func remove(_ member: AppKit.NSCursor.FrameResizeDirection) -> AppKit.NSCursor.FrameResizeDirection?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macCatalyst 18.0, macOS 15.0, *)
   @discardableResult
   public mutating func update(with newMember: __owned AppKit.NSCursor.FrameResizeDirection) -> AppKit.NSCursor.FrameResizeDirection?
+  #endif
 }
 @available(macCatalyst 18.0, macOS 15.0, *)
 extension AppKit.NSCursor.FrameResizePosition : Swift.CaseIterable {
@@ -1047,9 +1589,11 @@ extension AppKit.NSEvent {
     @available(macOS 10.9, *)
     public typealias RawValue = Swift.Int
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var specialKey: AppKit.NSEvent.SpecialKey? {
     get
   }
+  #endif
 }
 @available(macOS 10.9, *)
 extension AppKit.NSEvent.SpecialKey {
@@ -1143,12 +1687,16 @@ extension AppKit.NSEvent.SpecialKey {
   typealias ItemSection = AppKit.NSSuggestionItemSection<Self.SuggestionItemType>
   typealias ItemResponse = AppKit.NSSuggestionItemResponse<Self.SuggestionItemType>
   @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, provideUpdatedSuggestions responseHandler: @escaping (Self.ItemResponse) -> Swift.Void)
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
+  #endif
   @_Concurrency.MainActor func textField(_ textField: AppKit.NSTextField, didSelect item: Self.Item)
 }
 extension AppKit.NSTextSuggestionsDelegate {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, *)
   @_Concurrency.MainActor public func textField(_ textField: AppKit.NSTextField, textCompletionFor item: Self.Item) -> Swift.String?
+  #endif
   @available(macOS 15.0, *)
   @_Concurrency.MainActor public func textField(_ textField: AppKit.NSTextField, didSelect item: Self.Item)
 }
@@ -1408,7 +1956,9 @@ extension AppKit.NSTextSuggestionsDelegate where Self.SuggestionItemType : Swift
 }
 @available(macOS 14.0, *)
 extension AppKit.NSMenu {
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func palette(colors: [AppKit.NSColor], titles: [Swift.String] = [], template: AppKit.NSImage? = nil, onSelectionChange: ((AppKit.NSMenu) -> Swift.Void)? = nil) -> AppKit.NSMenu
+  #endif
 }
 @available(macOS 10.12.2, *)
 extension AppKit.NSTouchBar : Swift.__DefaultCustomPlaygroundQuickLookable {
@@ -1497,9 +2047,11 @@ extension AppKit.NSPasteboard {
     public var probableWebSearch: Swift.String {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var number: Swift.Double? {
       get
     }
+    #endif
     public var links: [DataDetection.DDMatchLink] {
       get
     }
@@ -1532,9 +2084,11 @@ extension AppKit.NSPasteboard {
     public var metadataTypes: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedMetadata>> {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public var contentType: UniformTypeIdentifiers.UTType? {
       get
     }
+    #endif
   }
 }
 extension AppKit.NSPasteboard {
@@ -1544,6 +2098,15 @@ extension AppKit.NSPasteboard {
   public func detectedValues(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedValues>>) async throws -> AppKit.NSPasteboard.DetectedValues
   @available(macOS 15.4, *)
   public func detectedMetadata(for keyPaths: Swift.Set<Swift.PartialKeyPath<AppKit.NSPasteboard.DetectedMetadata>>) async throws -> AppKit.NSPasteboard.DetectedMetadata
+}
+@available(macOS 26.0, *)
+extension AppKit.NSToolbarItem {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency public var badge: AppKit.NSItemBadge? {
+    get
+    set
+  }
+  #endif
 }
 extension AppKit.NSPasteboardItem {
   @available(macOS 15.4, *)
@@ -1585,6 +2148,8 @@ extension AppKit.NSVerticalDirection : Swift.BitwiseCopyable {}
 extension AppKit.NSVerticalDirection.Set : Swift.Sendable {}
 @available(macCatalyst 18.0, macOS 15.0, *)
 extension AppKit.NSVerticalDirection.Set : Swift.BitwiseCopyable {}
+@available(macOS 26.0, *)
+extension AppKit.NSView.LayoutRegion.AdaptivityAxis : Swift.Hashable {}
 @available(macOS 12, *)
 extension Foundation.AttributeScopes.AppKitAttributes.FontAttribute : Swift.Sendable {}
 @available(macOS 12, *)

@@ -108,14 +108,16 @@ nw_endpoint_create_host(const char *hostname, const char *port);
  *
  * @abstract
  *		Retrieves the hostname string for a network endpoint with
- *		the type nw_endpoint_type_host or nw_endpoint_type_url.
+ *		the type nw_endpoint_type_host, nw_endpoint_type_address,
+ *		or nw_endpoint_type_url.
  *
  * @param endpoint
  *		The endpoint object.
  *
  * @result
  *		Returns the hostname string for the endpoint, or NULL
- *		if the endpoint is not of type nw_endpoint_type_host.
+ *		if the endpoint is not of type nw_endpoint_type_host,
+ *		nw_endpoint_type_address, or nw_endpoint_type_url.
  */
 API_AVAILABLE(macos(10.14), ios(12.0), watchos(5.0), tvos(12.0))
 const char *

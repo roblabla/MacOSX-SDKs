@@ -4,5 +4,5 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libSCLM.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    objc-classes:    [ LibSCLM, ScriptInfo ]
+    objc-classes:    [ LibSCLM, SCLMMessage, SCLMResult, ScriptInfo ]
 ...

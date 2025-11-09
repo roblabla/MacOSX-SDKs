@@ -30,7 +30,7 @@ API_UNAVAILABLE(watchos)
 /*!
  * @brief Represents the camera source.
  */
-@property (strong, nonatomic, nullable) HMCameraSource *cameraSource;
+@property (nullable, nonatomic, strong) HMCameraSource *cameraSource;
 
 @end
 

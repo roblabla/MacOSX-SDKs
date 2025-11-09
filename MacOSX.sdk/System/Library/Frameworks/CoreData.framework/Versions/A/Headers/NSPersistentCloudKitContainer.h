@@ -38,7 +38,7 @@ typedef NS_OPTIONS(NSUInteger, NSPersistentCloudKitContainerSchemaInitialization
  
  As NSPersistentCloudKitContainer is a subclass of NSPersistentContainer, it can manage both CloudKit backed and non-cloud stores.
  */
-#ifndef __swift__
+#if (!defined(__swift__) && (__has_include(<CloudKit/CKDatabase.h>)))
 @class CKRecord;
 @class CKRecordID;
 #endif
@@ -66,11 +66,13 @@ API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_SENDABLE
 /**
  These methods provide access to the underlying CKRecord, or CKRecordID, backing a given NSManagedObjectID.
  */
-#ifndef __swift__
+#if (!defined(__swift__) && (__has_include(<CloudKit/CKDatabase.h>)))
+
 - (nullable CKRecord *)recordForManagedObjectID:(NSManagedObjectID *)managedObjectID;
 - (NSDictionary<NSManagedObjectID *, CKRecord *> *)recordsForManagedObjectIDs:(NSArray<NSManagedObjectID *> *)managedObjectIDs;
 - (nullable CKRecordID *)recordIDForManagedObjectID:(NSManagedObjectID *)managedObjectID;
 - (NSDictionary<NSManagedObjectID *, CKRecordID *> *)recordIDsForManagedObjectIDs:(NSArray<NSManagedObjectID *> *)managedObjectIDs;
+
 #endif
 
 /*

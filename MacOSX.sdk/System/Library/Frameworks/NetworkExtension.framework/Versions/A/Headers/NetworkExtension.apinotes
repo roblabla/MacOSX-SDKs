@@ -178,6 +178,16 @@ Classes:
     - Name: defaultPath
       PropertyKind: Instance
       SwiftPrivate: true
+- Name: NEVPNIKEv2SecurityAssociationParameters
+  Properties:
+    - Name: postQuantumKeyExchangeMethods
+      PropertyKind: Instance
+      SwiftPrivate: true
+- Name: NEURLFilter
+  Methods:
+    - Selector: "verdictForURL:completionHandler:"
+      MethodKind: Class
+      SwiftPrivate: true
 - Name: NWPath
   SwiftPrivate: true
 - Name: NWEndpoint

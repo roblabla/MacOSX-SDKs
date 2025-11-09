@@ -2,7 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SummarizationKit.framework/Versions/A/SummarizationKit'
-current-version: 1.5.5
+current-version: 2.0.22
+compatibility-version: 2
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -35,6 +36,8 @@ exports:
                        '_$s16SummarizationKit0A14RequestHandlerC017isTextEligibleForA0_7options11requestInfoSbSS_4Sage0A6ClientC0f9AssistantA7OptionsVAC0cK0VtYaKFTu', 
                        '_$s16SummarizationKit0A14RequestHandlerC021isLanguageEligibleForA0_7options11requestInfoSb10Foundation6LocaleV0F0V_4Sage0A6ClientC013TextAssistantA7OptionsVAC0cK0VtYaKF', 
                        '_$s16SummarizationKit0A14RequestHandlerC021isLanguageEligibleForA0_7options11requestInfoSb10Foundation6LocaleV0F0V_4Sage0A6ClientC013TextAssistantA7OptionsVAC0cK0VtYaKFTu', 
+                       '_$s16SummarizationKit0A14RequestHandlerC0C4InfoV11requestUUID10Foundation0G0Vvg', 
+                       '_$s16SummarizationKit0A14RequestHandlerC0C4InfoV11requestUUID10Foundation0G0VvpMV', 
                        '_$s16SummarizationKit0A14RequestHandlerC0C4InfoV17requestIdentifier07useCaseG0017clientApplicationG00j7ProcessG0011originatingkG00mklG0AESS_S2Ss5Int32VSSAMtcfC', 
                        '_$s16SummarizationKit0A14RequestHandlerC0C4InfoV17requestIdentifier07useCaseG0017clientApplicationG00j7ProcessG0AESS_S2Ss5Int32VtcfC', 
                        '_$s16SummarizationKit0A14RequestHandlerC0C4InfoV17requestIdentifierSSvM', 
@@ -117,15 +120,12 @@ exports:
                        '_$s16SummarizationKit0A5StyleOSQAAMc', '_$s16SummarizationKit0A5StyleOSYAAMc', 
                        '_$s16SummarizationKit0A5StyleOSeAAMc', '_$s16SummarizationKit0A5StyleOs12CaseIterableAAMc', 
                        '_$s16SummarizationKit0A7SessionC010makeSharedC4Data11contentType6styles11requestInfo14maxTokenLength15signalCollectorAA0ecF0VAA12Summarizable_pXp_SayAA0A5StyleOGAA07RequestK0_pSiAA015TelemetrySignalP0CSgtF', 
-                       '_$s16SummarizationKit0A7SessionC11contextSizeSiyKF', '_$s16SummarizationKit0A7SessionC11countTokens2inSiSS_tYaKF', 
-                       '_$s16SummarizationKit0A7SessionC11countTokens2inSiSS_tYaKFTu', 
-                       '_$s16SummarizationKit0A7SessionC13ConfigurationV21modelBundleIdentifier24handlesProactiveRequests0H13SensitiveDataAeA05ModelfG0O_S2btcfC', 
+                       '_$s16SummarizationKit0A7SessionC13ConfigurationV21modelBundleIdentifier6locale24handlesProactiveRequests0I13SensitiveDataAeA05ModelfG0O_10Foundation6LocaleVSgS2btcfC', 
                        '_$s16SummarizationKit0A7SessionC13ConfigurationVMa', '_$s16SummarizationKit0A7SessionC13ConfigurationVMn', 
                        '_$s16SummarizationKit0A7SessionC13ConfigurationVN', '_$s16SummarizationKit0A7SessionC13configuration11sessionInfoA2C13ConfigurationV_AA0cF0_ptKcfC', 
                        '_$s16SummarizationKit0A7SessionC16canHandleRequestySbAA0F4Info_pF', 
                        '_$s16SummarizationKit0A7SessionC16partialSummaries3for11requestInfo15signalCollectorScsy4Sage0A6ClientC27TextAssistantPartialSummaryVy_SSGs5Error_pGAA6SKTextV_AA07RequestH0_pAA015TelemetrySignalJ0CSgtYaKF', 
                        '_$s16SummarizationKit0A7SessionC16partialSummaries3for11requestInfo15signalCollectorScsy4Sage0A6ClientC27TextAssistantPartialSummaryVy_SSGs5Error_pGAA6SKTextV_AA07RequestH0_pAA015TelemetrySignalJ0CSgtYaKFTu', 
-                       '_$s16SummarizationKit0A7SessionC23overestimatedTokenCount3forSiSS_tF', 
                        '_$s16SummarizationKit0A7SessionC7prewarmyyYaKF', '_$s16SummarizationKit0A7SessionC7prewarmyyYaKFTu', 
                        '_$s16SummarizationKit0A7SessionC9summarize_6styles11requestInfo15signalCollector4Sage7SummaryVAA12Summarizable_p_SayAA0A5StyleOGAA07RequestG0_pAA015TelemetrySignalI0CSgtYaKF', 
                        '_$s16SummarizationKit0A7SessionC9summarize_6styles11requestInfo15signalCollector4Sage7SummaryVAA12Summarizable_p_SayAA0A5StyleOGAA07RequestG0_pAA015TelemetrySignalI0CSgtYaKFTu', 
@@ -147,7 +147,9 @@ exports:
                        '_$s16SummarizationKit11FilterRulesCMn', '_$s16SummarizationKit11FilterRulesCMo', 
                        '_$s16SummarizationKit11FilterRulesCMu', '_$s16SummarizationKit11FilterRulesCN', 
                        '_$s16SummarizationKit11FilterRulesCfD', '_$s16SummarizationKit11FilterRulesCfd', 
-                       '_$s16SummarizationKit11RequestInfoMp', '_$s16SummarizationKit11RequestInfoP17requestIdentifierSSvgTj', 
+                       '_$s16SummarizationKit11RequestInfoMp', '_$s16SummarizationKit11RequestInfoP11requestUUID10Foundation0F0VvgTj', 
+                       '_$s16SummarizationKit11RequestInfoP11requestUUID10Foundation0F0VvgTq', 
+                       '_$s16SummarizationKit11RequestInfoP17requestIdentifierSSvgTj', 
                        '_$s16SummarizationKit11RequestInfoP17requestIdentifierSSvgTq', 
                        '_$s16SummarizationKit11RequestInfoPAA07SessionD0Tb', '_$s16SummarizationKit11RequestInfoPAAE07sessionD0AA07SessionD0_pvg', 
                        '_$s16SummarizationKit11RequestInfoPAAE07sessionD0AA07SessionD0_pvpMV', 
@@ -203,9 +205,14 @@ exports:
                        '_$s16SummarizationKit12SummarizableP10preprocess17sharedSessionDataSSAA06SharedfG0V_tYaKFTq', 
                        '_$s16SummarizationKit12SummarizableP11postprocess7content17sharedSessionDataS2S_AA06SharedgH0VtKFTj', 
                        '_$s16SummarizationKit12SummarizableP11postprocess7content17sharedSessionDataS2S_AA06SharedgH0VtKFTq', 
+                       '_$s16SummarizationKit12SummarizableP22checkSupportedLanguage13modelBundleID11requestInfo6styles10Foundation6LocaleVAA05ModelH10IdentifierO_AA07RequestK0_pSayAA0A5StyleOGtYaKFTj', 
+                       '_$s16SummarizationKit12SummarizableP22checkSupportedLanguage13modelBundleID11requestInfo6styles10Foundation6LocaleVAA05ModelH10IdentifierO_AA07RequestK0_pSayAA0A5StyleOGtYaKFTjTu', 
+                       '_$s16SummarizationKit12SummarizableP22checkSupportedLanguage13modelBundleID11requestInfo6styles10Foundation6LocaleVAA05ModelH10IdentifierO_AA07RequestK0_pSayAA0A5StyleOGtYaKFTq', 
                        '_$s16SummarizationKit12SummarizableP26preprocessForLanguageCheckSSyKFTj', 
                        '_$s16SummarizationKit12SummarizableP26preprocessForLanguageCheckSSyKFTq', 
                        '_$s16SummarizationKit12SummarizablePAAE11postprocess7content17sharedSessionDataS2S_AA06SharedgH0VtKF', 
+                       '_$s16SummarizationKit12SummarizablePAAE22checkSupportedLanguage13modelBundleID11requestInfo6styles10Foundation6LocaleVAA05ModelH10IdentifierO_AA07RequestK0_pSayAA0A5StyleOGtYaKF', 
+                       '_$s16SummarizationKit12SummarizablePAAE22checkSupportedLanguage13modelBundleID11requestInfo6styles10Foundation6LocaleVAA05ModelH10IdentifierO_AA07RequestK0_pSayAA0A5StyleOGtYaKFTu', 
                        '_$s16SummarizationKit12SummarizableTL', '_$s16SummarizationKit13SKMailMessageV10preprocess17sharedSessionDataSSAA06SharedgH0V_tYaKF', 
                        '_$s16SummarizationKit13SKMailMessageV10preprocess17sharedSessionDataSSAA06SharedgH0V_tYaKFTu', 
                        '_$s16SummarizationKit13SKMailMessageV26preprocessForLanguageCheckSSyF', 
@@ -387,6 +394,8 @@ exports:
                        '_$s16SummarizationKit27ClassificationConfigurationCMn', '_$s16SummarizationKit27ClassificationConfigurationCMo', 
                        '_$s16SummarizationKit27ClassificationConfigurationCMu', '_$s16SummarizationKit27ClassificationConfigurationCN', 
                        '_$s16SummarizationKit27ClassificationConfigurationCfD', '_$s16SummarizationKit27ClassificationConfigurationCfd', 
+                       '_$s16SummarizationKit28ClassificationRequestHandlerC0D4InfoV11requestUUID10Foundation0H0Vvg', 
+                       '_$s16SummarizationKit28ClassificationRequestHandlerC0D4InfoV11requestUUID10Foundation0H0VvpMV', 
                        '_$s16SummarizationKit28ClassificationRequestHandlerC0D4InfoV17requestIdentifier07useCaseH0017clientApplicationH00k7ProcessH0AESS_S2Ss5Int32VtcfC', 
                        '_$s16SummarizationKit28ClassificationRequestHandlerC0D4InfoV17requestIdentifierSSvM', 
                        '_$s16SummarizationKit28ClassificationRequestHandlerC0D4InfoV17requestIdentifierSSvg', 
@@ -1432,7 +1441,9 @@ exports:
                        '_$s16SummarizationKit6SKTextVN', '_$s16SummarizationKit6SKTextVyACSScfC', 
                        '_$s16SummarizationKit9DateUtilsO05parseC11FromMessage7message09referenceC00I8TimeZone10Foundation0C0VSgSS_AjH0jK0VtFZ', 
                        '_$s16SummarizationKit9DateUtilsOMa', '_$s16SummarizationKit9DateUtilsOMn', 
-                       '_$s16SummarizationKit9DateUtilsON', '_$s4Sage7SummaryV16SummarizationKitE11stringValue3forSSSgAD0C5StyleO_tF', 
+                       '_$s16SummarizationKit9DateUtilsON', '_$s4Sage27SummarySafetyClassificationV16SummarizationKitE5mergeyyACF', 
+                       '_$s4Sage27SummarySafetyClassificationV16SummarizationKitE7mergingyA2CF', 
+                       '_$s4Sage7SummaryV16SummarizationKitE11stringValue3forSSSgAD0C5StyleO_tF', 
                        '_$s4Sage7SummaryV16SummarizationKitE14setStringValue_3forySSSg_AD0C5StyleOtF', 
                        '_$s4Sage7SummaryV16SummarizationKitE16stringArrayValue3forSaySSGSgAD0C5StyleO_tF', 
                        '_$s4Sage7SummaryV16SummarizationKitE21attributedStringValue3for10Foundation010AttributedF0VSgAD0C5StyleO_tF', 

@@ -11,12 +11,20 @@
 #include <TargetConditionals.h>
 #if TARGET_OS_OSX
 
+#include <CoreServices/CoreServices.h>
 #if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <Carbon/Carbon.h>
+	// rdar://145069574 (Please have AudioUnitCarbonView.h __has_include Carbon.h for serverOS SDK)
+	#if __has_include(<Carbon/Carbon.h>)
+		#include <Carbon/Carbon.h>
+	#endif
 	#include <AudioToolbox/AUComponent.h>
 #else
-	#include <MacWindows.h>
-	#include <Controls.h>
+	#if __has_include(<MacWindows.h>)
+		#include <MacWindows.h>
+	#endif
+	#if __has_include(<Controls.h>)
+		#include <Controls.h>
+	#endif
 	#include <AUComponent.h>
 #endif
 

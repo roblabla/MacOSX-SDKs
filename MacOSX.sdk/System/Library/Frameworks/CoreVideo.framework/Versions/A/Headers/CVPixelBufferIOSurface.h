@@ -2,12 +2,12 @@
  *  CVPixelBufferIOSurface.h
  *  CoreVideo
  *
- *  Copyright (c) 2010-2017 Apple Inc. All rights reserved.
+ *  Copyright (c) 2010-2025 Apple Inc. All rights reserved.
  *
  */
  
   /*! @header CVPixelBufferIOSurface.h
-	@copyright 2010-2017 Apple Inc. All rights reserved.
+	@copyright 2010-2025 Apple Inc. All rights reserved.
 	@availability Mac OS X 10.4 or later; iOS 11 or later
     @discussion routines for accessing and manipulating IOSurface backings for CVPixelBuffers
 		   
@@ -82,7 +82,7 @@ CV_EXPORT CVReturn CVPixelBufferCreateWithIOSurface(
 		CFDictionaryRef CV_NULLABLE pixelBufferAttributes,
 		CVPixelBufferRef CV_NULLABLE * CV_NONNULL pixelBufferOut) __OSX_AVAILABLE_STARTING(__MAC_10_6,__IPHONE_4_0);
 
-#endif
+#endif // COREVIDEO_INCLUDED_IOSURFACE_HEADER_FILE
 #endif // COREVIDEO_SUPPORTS_IOSURFACE
 
 

@@ -92,7 +92,8 @@ typedef NS_ENUM(NSUInteger, NSControlSize) {
     NSControlSizeRegular = 0,
     NSControlSizeSmall = 1,
     NSControlSizeMini = 2,
-    NSControlSizeLarge API_AVAILABLE(macos(11.0)) = 3
+    NSControlSizeLarge API_AVAILABLE(macos(11.0)) = 3,
+    NSControlSizeExtraLarge API_AVAILABLE(macos(26.0)) = 4,
 };
 
 NS_SWIFT_UI_ACTOR
@@ -153,6 +154,7 @@ NS_SWIFT_UI_ACTOR
 - (NSRect)imageRectForBounds:(NSRect)rect;
 - (NSRect)titleRectForBounds:(NSRect)rect;
 - (NSRect)drawingRectForBounds:(NSRect)rect;
++ (NSString *)_bulletStringForString:(NSString *)string bulletCharacter:(unichar)bulletChar;
 @property (readonly) NSSize cellSize;
 - (NSSize)cellSizeForBounds:(NSRect)rect;
 - (nullable NSColor *)highlightColorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView;

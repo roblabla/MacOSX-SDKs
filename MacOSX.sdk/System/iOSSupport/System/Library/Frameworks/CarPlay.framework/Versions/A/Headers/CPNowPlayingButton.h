@@ -5,6 +5,7 @@
 //  Copyright © 2019 Apple Inc. All rights reserved.
 //
 
+#import <CarPlay/CPTemplate.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -12,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 extern CGSize const CPNowPlayingButtonMaximumImageSize;
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingButton : NSObject <NSSecureCoding>
 
 + (instancetype)new NS_UNAVAILABLE;
@@ -48,6 +50,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  A now playing button that indicates the current shuffle mode for your app.
  */
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingShuffleButton : CPNowPlayingButton
 @end
 
@@ -56,6 +59,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  playing item to a collection, like their library.
  */
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingAddToLibraryButton : CPNowPlayingButton
 @end
 
@@ -65,6 +69,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  when the user taps this button.
  */
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingMoreButton : CPNowPlayingButton
 @end
 
@@ -73,6 +78,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  the user to cycle between different playback rates provided by your app.
  */
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingPlaybackRateButton : CPNowPlayingButton
 @end
 
@@ -81,6 +87,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  or "all".
  */
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingRepeatButton : CPNowPlayingButton
 @end
 
@@ -89,6 +96,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  for any other custom actions on the now playing screen.
  */
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNowPlayingImageButton : CPNowPlayingButton
 
 /**

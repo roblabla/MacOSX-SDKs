@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPSearchTemplate : CPTemplate
 
 @property (nullable, nonatomic, weak) id<CPSearchTemplateDelegate> delegate;
@@ -21,6 +22,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @end
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPSearchTemplateDelegate <NSObject>
 
 /**

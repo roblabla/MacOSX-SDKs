@@ -20,9 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  To set a different description for VoiceOver to read, set this object's `accessibilityLabel` property.
  */
 SF_EXTERN API_AVAILABLE(ios(15.0))
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_UNAVAILABLE(visionos)
-#endif
 NS_SWIFT_NAME(SFSafariViewController.ActivityButton)
 @interface SFSafariViewControllerActivityButton : NSObject <NSCopying, NSSecureCoding>
 

@@ -17,11 +17,6 @@ runs on a server machine to service SMB protocol requests from SMB client
 machines.
 .Sh OPTIONS
 .Bl -tag -width -indent  \" Differs from above in tag removed
-.It Fl debug
-The service will log extensive debug information and may perform extra
-diagnostic checks. In debug mode,
-.Nm
-will not exit when idle.
 .It Fl help
 Prints a usage message and exits.
 .It Fl ports Ar list
@@ -31,10 +26,6 @@ comma-separated list. This option is typically only used for debugging, since
 is normally launched by
 .Xr launchd 8
 on port 445.
-.It Fl stdout
-Causes
-.Nm
-to print log messages to standard output instead of the system log.
 .It Fl no-symlinks
 In normal operation,
 .Nm

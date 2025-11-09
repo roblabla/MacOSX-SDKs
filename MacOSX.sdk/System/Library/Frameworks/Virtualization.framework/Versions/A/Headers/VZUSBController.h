@@ -2,7 +2,7 @@
 //  VZUSBController.h
 //  Virtualization
 //
-//  Copyright © 2023-2024 Apple Inc. All rights reserved.
+//  Copyright © 2023-2025 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -43,7 +43,7 @@ VZ_EXPORT API_AVAILABLE(macos(15.0))
     It will be also invoked on an virtual machine's queue.
  @see VZUSBDevice
  */
-- (void)attachDevice:(id <VZUSBDevice>)device completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(attach(device:completionHandler:));
+- (void)attachDevice:(id <VZUSBDevice>)device completionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(attach(device:completionHandler:));
 
 /*!
  @abstract Detach a USB device.
@@ -59,7 +59,7 @@ VZ_EXPORT API_AVAILABLE(macos(15.0))
     It will be also invoked on an virtual machine's queue.
  @see VZUSBDevice
  */
-- (void)detachDevice:(id <VZUSBDevice>)device completionHandler:(void (^)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(detach(device:completionHandler:));
+- (void)detachDevice:(id <VZUSBDevice>)device completionHandler:(void (^ NS_SWIFT_NONSENDABLE)(NSError * _Nullable errorOrNil))completionHandler NS_SWIFT_NAME(detach(device:completionHandler:));
 
 /*!
  @abstract Return a list of USB devices attached to controller.

@@ -2,9 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VisionKitCore.framework/Versions/A/VisionKitCore'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _VKAnalysisDidUpdateNotification, _VKAnalysisUpdatedTypesKey, 
+    symbols:         [ '_$sSo6NSViewC13VisionKitCoreE21vk_setGlassBackgroundyyF', 
+                       _VKAnalysisDidUpdateNotification, _VKAnalysisUpdatedTypesKey, 
                        _VKCDistanceSquared, _VKCFlipPoint, _VKCImageRemoveBackgroundMaxAspectRatio, 
                        _VKCImageRemoveBackgroundMaxLength, _VKCImageRemoveBackgroundMaxResolution, 
                        _VKCImageRemoveBackgroundMinAspectRatio, _VKCNormalizedPointInRect, 
@@ -27,10 +29,11 @@ exports:
                        VKAnalyticsMRCEvent, VKAnalyticsQuickActionEvent, VKAnalyticsSubjectEvent, 
                        VKAnalyticsTextEvent, VKAnalyticsVisualSearchEvent, VKCFormRegion, 
                        VKCImageAnalysis, VKCImageAnalysisOverlayView, VKCImageAnalysisTranslation, 
-                       VKCImageAnalyzer, VKCImageAnalyzerRequest, VKCRemoveBackgroundRequest, 
-                       VKCRemoveBackgroundRequestHandler, VKCRemoveBackgroundResult, 
-                       VKCTextRecognitionResult, VKCTranslatedParagraph, VKCVisualSearchResultInfo, 
-                       VKFeedbackAttachment, VKFeedbackProvider, VKImageAnalysis, 
-                       VKImageAnalysisOverlayView, VKImageAnalyzer, VKImageAnalyzerRequest, 
-                       VKQuad, VKWKDataDetectorInfo, VKWKLineInfo, VKWKTextInfo ]
+                       VKCImageAnalyzer, VKCImageAnalyzerRequest, VKCImageAnalyzerRequestVIConfiguration, 
+                       VKCRemoveBackgroundRequest, VKCRemoveBackgroundRequestHandler, 
+                       VKCRemoveBackgroundResult, VKCTextRecognitionResult, VKCTranslatedParagraph, 
+                       VKCVisualSearchResultInfo, VKFeedbackAttachment, VKFeedbackProvider, 
+                       VKImageAnalysis, VKImageAnalysisOverlayView, VKImageAnalyzer, 
+                       VKImageAnalyzerRequest, VKQuad, VKWKDataDetectorInfo, VKWKLineInfo, 
+                       VKWKTextInfo ]
 ...

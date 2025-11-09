@@ -10,25 +10,46 @@
 #if __METAL_VERSION__
 
 #ifndef __CIKERNEL_METAL_VERSION__ // if not explicitly defined already
-    #if !defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__) && \
+    #if !defined(__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__)  && \
         !defined(__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__) && \
-        !defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)
+        !defined(__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__)     && \
+        !defined(__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__)  && \
+        !defined(__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__)
         #define __CIKERNEL_METAL_VERSION__ 200 // the includer of this didn't specify a MIN_REQUIRED compatibility
-    #elif (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 120000 || \
-        __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 150000 || \
-        __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= 150000)
-        #if __METAL_CIKERNEL__
-            #define __CIKERNEL_METAL_VERSION__ 200
-        #else
-            #define __CIKERNEL_METAL_VERSION__ 300
-        #endif
-    #elif (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= 101400 || \
-         __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 120000 || \
-         __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= 120000)
+    #elif (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__  >= 160000 || \
+           __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 190000 || \
+           __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__     >= 190000 || \
+           __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__  >= 110000 || \
+           (__is_target_os(visionos) && __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__==3000))
+        #define __CIKERNEL_METAL_VERSION__ 400 // compatible w/ macOS 16/iOS 19/tvOS 19 or later
+    #elif (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__  >= 120000  || \
+           __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 150000  || \
+           __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__     >= 150000  || \
+           __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__  >=  80000  || \
+           __is_target_os(visionos))
+        #define __CIKERNEL_METAL_VERSION__ 300
+    #elif (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__  >= 101400 || \
+           __ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= 120000 || \
+           __ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__     >= 120000 || \
+           __ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__  >=  50000)
         #define __CIKERNEL_METAL_VERSION__ 200 // compatible w/ macOS 10.14/iOS 12.0/tvOS 12.0 or later
     #else
         #define __CIKERNEL_METAL_VERSION__ 100 // compatible w/ macOS 10.13/iOS 11.0/tvOS 11.0 or later
     #endif
+#endif
+
+
+#if __METAL_CIKERNEL__ // If Metal CIKernel is compiled with -fcikernel
+#if  __CIKERNEL_METAL_VERSION__ >= 200
+    #undef __CIKERNEL_METAL_VERSION__
+    #define __CIKERNEL_METAL_VERSION__ 200
+#endif
+#endif
+
+#if __CIKERNEL_METAL_VERSION__ >= 200
+#define __CIKERNEL_METAL_SUPPORTS_HALF__ 1
+#define __CIKERNEL_METAL_SUPPORTS_GATHER__ 1
+#define __CIKERNEL_METAL_SUPPORTS_GROUP_DESTINATION__ 1
 #endif
 
 #include <metal_stdlib>
@@ -39,23 +60,17 @@ namespace coreimage
     
     typedef float4 sample_t;
     
-#if __CIKERNEL_METAL_VERSION__ >= 200
+#ifdef __CIKERNEL_METAL_SUPPORTS_HALF__
     typedef half4 sample_h;
 #endif
     
     //MARK: - Sampler
     
-#if __CIKERNEL_METAL_VERSION__ >= 300
-    typedef struct Sampler
-    {
-        friend Sampler make_sampler(texture2d<float, access::sample> t, metal::sampler s, constant float4x4& m, float2 dc );
-    private:
-        Sampler(texture2d<float, access::sample> t_, metal::sampler s_, constant float4x4& m_, float2 dc_):t(t_), s(s_),m(m_), dc(dc_){}
-    public:
-#else
     typedef struct
+    #if __CIKERNEL_METAL_VERSION__ >= 300
+    Sampler
+    #endif
     {
-#endif
         // Returns the pixel value produced from sampler at the position p, where p is specified in sampler space.
         float4 sample(float2 p) const;
         
@@ -73,7 +88,7 @@ namespace coreimage
         inline float2 origin() const { return extent().xy; }
         inline float2 size() const { return extent().zw; }
         
-#if __CIKERNEL_METAL_VERSION__ >= 200
+#ifdef __CIKERNEL_METAL_SUPPORTS_GATHER__
         // Returns four samples (placed in CCW order starting with sample to the lower left) that would be used for bilinear interpolation when sampling at the position p,
         // where p is specified in sampler space.
         float4 gatherX(float2 p) const;
@@ -89,6 +104,12 @@ namespace coreimage
 #endif
         
     private:
+        #if __CIKERNEL_METAL_VERSION__ >= 300
+        friend Sampler make_sampler(texture2d<float, access::sample> t, metal::sampler s, constant float4x4& m, float2 dc );
+        Sampler(texture2d<float, access::sample> t_, metal::sampler s_, constant float4x4& m_, float2 dc_)
+            : t(t_), s(s_),m(m_), dc(dc_) {}
+        #endif
+        
         texture2d<float, access::sample> t;
         metal::sampler s;
         constant float4x4& m;
@@ -96,18 +117,12 @@ namespace coreimage
         
     } sampler;
     
-#if __CIKERNEL_METAL_VERSION__ >= 200
-#if __CIKERNEL_METAL_VERSION__ >= 300
-    typedef struct Sampler_h
-    {
-        friend Sampler_h make_sampler_h(texture2d<half, access::sample> t, metal::sampler s, constant float4x4& m, float2 dc );
-    private:
-        Sampler_h(texture2d<half, access::sample> t_, metal::sampler s_, constant float4x4& m_, float2 dc_):t(t_), s(s_),m(m_), dc(dc_){}
-    public:
-#else
+#ifdef __CIKERNEL_METAL_SUPPORTS_HALF__
     typedef struct
+    #if __CIKERNEL_METAL_VERSION__ >= 300
+    Sampler_h
+    #endif
     {
-#endif //__CIKERNEL_METAL_VERSION__ >= 300
         // Returns the pixel value produced from sampler at the position p, where p is specified in sampler space.
         half4 sample(float2 p) const;
         
@@ -139,6 +154,12 @@ namespace coreimage
         half4 gatherW_unordered(float2 p) const;
         
     private:
+        #if __CIKERNEL_METAL_VERSION__ >= 300
+        friend Sampler_h make_sampler(texture2d<half, access::sample> t, metal::sampler s, constant float4x4& m, float2 dc );
+        Sampler_h(texture2d<half, access::sample> t_, metal::sampler s_, constant float4x4& m_, float2 dc_)
+            : t(t_), s(s_),m(m_), dc(dc_) {}
+        #endif
+        
         texture2d<half, access::sample> t;
         metal::sampler s;
         constant float4x4& m;
@@ -180,17 +201,14 @@ namespace coreimage
         
     } destination;
     
-#if __CIKERNEL_METAL_VERSION__ >= 200
+#ifdef __CIKERNEL_METAL_SUPPORTS_GROUP_DESTINATION__
     namespace group
     {
-#if __CIKERNEL_METAL_VERSION__ >= 300
-        typedef struct Destination
-        {
-                Destination(float2 c_, uint2 gid_, float4 r_, float4x4 m_, texture2d<float, access::write> t_):c(c_), gid(gid_), r(r_), m(m_), t(t_) {}
-#else
         typedef struct
+        #if __CIKERNEL_METAL_VERSION__ >= 300
+        Destination
+        #endif
         {
-#endif //__CIKERNEL_METAL_VERSION__ >= 300
             // Returns the position, in working space coordinates, of the pixel currently being computed.
             // The destination space refers to the coordinate space of the image you are rendering.
             inline float2 coord() const { return c; }
@@ -199,6 +217,11 @@ namespace coreimage
             void write(float4 v0, float4 v1, float4 v2, float4 v3);
             
         private:
+            #if __CIKERNEL_METAL_VERSION__ >= 300
+            friend group::Destination make_destination (float2 c, uint2 gid, float4 r, float4x4 m, metal::texture2d<float, access::write> t );
+            Destination(float2 c_, uint2 gid_, float4 r_, float4x4 m_, texture2d<float, access::write> t_) : c(c_), gid(gid_), r(r_), m(m_), t(t_) {}
+            #endif
+            
             float2 c;
             uint2 gid;
             float4 r;
@@ -207,14 +230,11 @@ namespace coreimage
             
         } __attribute__((packed)) destination;
         
-#if __CIKERNEL_METAL_VERSION__ >= 300
-        typedef struct Destination_h
-        {
-                Destination_h(float2 c_, uint2 gid_, float4 r_, float4x4 m_, texture2d<half, access::write> t_):c(c_), gid(gid_), r(r_), m(m_), t(t_) {}
-#else
         typedef struct
+        #if __CIKERNEL_METAL_VERSION__ >= 300
+        Destination_h
+        #endif
         {
-#endif //__CIKERNEL_METAL_VERSION__ >= 300
             // Returns the position, in working space coordinates, of the pixel currently being computed.
             // The destination space refers to the coordinate space of the image you are rendering.
             inline float2 coord() const { return c; }
@@ -223,6 +243,11 @@ namespace coreimage
             void write(half4 v0, half4 v1, half4 v2, half4 v3);
             
         private:
+            #if __CIKERNEL_METAL_VERSION__ >= 300
+            friend group::Destination_h make_destination (float2 c, uint2 gid, float4 r, float4x4 m, metal::texture2d<half, access::write> t );
+            Destination_h(float2 c_, uint2 gid_, float4 r_, float4x4 m_, texture2d<half, access::write> t_) : c(c_), gid(gid_), r(r_), m(m_), t(t_) {}
+            #endif
+            
             float2 c;
             uint2 gid;
             float4 r;
@@ -243,7 +268,8 @@ namespace coreimage
         
     float3 linear_to_srgb(float3 s);
     float4 linear_to_srgb(float4 s);
-#if __CIKERNEL_METAL_VERSION__ >= 200
+    
+#ifdef __CIKERNEL_METAL_SUPPORTS_HALF__
     half4 premultiply(half4 s);
     half4 unpremultiply(half4 s);
 
@@ -262,7 +288,7 @@ namespace coreimage
     float3 compare(float3 x, float3 y, float3 z);
     float4 compare(float4 x, float4 y, float4 z);
     
-#if __CIKERNEL_METAL_VERSION__ >= 200
+#ifdef __CIKERNEL_METAL_SUPPORTS_HALF__
     half   compare(half   x, half   y, half   z);
     half2  compare(half2  x, half2  y, half2  z);
     half3  compare(half3  x, half3  y, half3  z);

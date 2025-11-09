@@ -41,7 +41,7 @@ API_AVAILABLE(macos(10.10))
 */
 @property CGFloat fullScreenMinHeight;
 
-/* Indicates whether the accessory view is actually visible in the window. This property only applies to controllers set with the top or bottom layoutAtribute. When set, this property will collapse the accessory view to 0 height (animatable) but NOT remove it from the window. That way, you can easily show and hide it without difficulty. Set through the animator object to animate it. */
+/* Indicates whether the accessory view is actually visible in the window. This property only applies to controllers set with the top or bottom layoutAttribute. When set, this property will collapse the accessory view to 0 height (animatable) but NOT remove it from the window. That way, you can easily show and hide it without difficulty. Set through the animator object to animate it. */
 @property (getter=isHidden) BOOL hidden API_AVAILABLE(macos(10.12));
 
 /* Whether the accessory should automatically size to the standard system default sizing over the view's current frame size.

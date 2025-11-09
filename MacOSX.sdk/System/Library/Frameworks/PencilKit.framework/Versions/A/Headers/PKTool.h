@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Should not be subclassed outside of the PencilKit framework.
 NS_REFINED_FOR_SWIFT
 API_AVAILABLE(ios(13.0), macos(10.15))
+NS_SWIFT_SENDABLE
 @interface PKTool : NSObject <NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

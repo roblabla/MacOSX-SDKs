@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftCoreAudio.dylib'
-current-version: 328.255
+current-version: 411.106
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -157,9 +157,10 @@ exports:
                        '_$s9CoreAudio0B13HardwareClockCfd', '_$s9CoreAudio0B13HardwareErrorV10Foundation09LocalizedD0AAMc', 
                        '_$s9CoreAudio0B13HardwareErrorV16errorDescriptionSSSgvg', 
                        '_$s9CoreAudio0B13HardwareErrorV16errorDescriptionSSSgvpMV', 
+                       '_$s9CoreAudio0B13HardwareErrorV5errors5Int32Vvg', '_$s9CoreAudio0B13HardwareErrorV5errors5Int32VvpMV', 
                        '_$s9CoreAudio0B13HardwareErrorVMa', '_$s9CoreAudio0B13HardwareErrorVMn', 
                        '_$s9CoreAudio0B13HardwareErrorVN', '_$s9CoreAudio0B13HardwareErrorVs0D0AAMc', 
-                       '_$s9CoreAudio0B14HardwareDeviceC017canBeDefaultInputD0SbvgTj', 
+                       '_$s9CoreAudio0B13HardwareErrorVyACs5Int32VcfC', '_$s9CoreAudio0B14HardwareDeviceC017canBeDefaultInputD0SbvgTj', 
                        '_$s9CoreAudio0B14HardwareDeviceC017canBeDefaultInputD0SbvgTq', 
                        '_$s9CoreAudio0B14HardwareDeviceC017canBeDefaultInputD0SbvpMV', 
                        '_$s9CoreAudio0B14HardwareDeviceC018canBeDefaultOutputD0SbvgTj', 

@@ -28,7 +28,8 @@ allowable-clients:
                        WorkflowUIServices ]
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
-    symbols:         [ _MTCompareBlurInputQualities, _MTCoreMaterialPlatformColorsStyleNameForUserInterfaceStyle, 
+    symbols:         [ _MTCGColorByApplyingCAColorMatrix, _MTCompareBlurInputQualities, 
+                       _MTCoreMaterialPlatformColorsStyleNameForUserInterfaceStyle, 
                        _MTCoreMaterialRecipeForMaterialRecipe, _MTCoreMaterialRecipeForMaterialRecipeAndUserInterfaceStyle, 
                        _MTCoreMaterialRecipeForMaterialRecipeAndUserInterfaceStyleInShadow, 
                        _MTCoreMaterialVisualStyleCategoryForVisualStyleCategory, 
@@ -47,6 +48,6 @@ exports:
                        MTMaterialShadowView, MTMaterialView, MTPillView, MTShadowView, 
                        MTStaticColorPillView, MTStylingProvidingSolidColorView, MTVisualStyling, 
                        MTVisualStylingProvider, _MTClientDemarcatedCurrentContainerPathProvider, 
-                       _MTLumaDodgePillLowQualityEffectView, _MTStaticVisualStylingMaterialView, 
-                       _MTVisualStylingVibrancyEffect ]
+                       _MTLumaDodgePillCustomShapeLowQualityEffectView, _MTLumaDodgePillLowQualityEffectView, 
+                       _MTStaticVisualStylingMaterialView, _MTVisualStylingVibrancyEffect ]
 ...

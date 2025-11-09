@@ -12,6 +12,7 @@
 #import <StoreKit/SKCloudServiceController.h>
 #import <StoreKit/SKCloudServiceSetupViewController.h>
 #import <StoreKit/SKDownload.h>
+#import <StoreKit/SKDownloaderExtension.h>
 #import <StoreKit/SKError.h>
 #import <StoreKit/SKOverlay.h>
 #import <StoreKit/SKOverlayConfiguration.h>

@@ -35,7 +35,7 @@ NS_CLASS_AVAILABLE(10_7, 5_0)
 
  The detector may do image processing in this context and if the image is on the GPU and the specified context is a GPU context this may avoid additional upload to / download from the GPU. If the input image is on the CPU (or the output from a CPU based context) specifying a GPU based context (or vice versa) may reduce performance.
 
- The options parameter lets you optinally specify a accuracy / performance tradeoff. Can be nil or an empty dictionary. */
+//  The options parameter lets you optionally specify a accuracy / performance tradeoff. Can be nil or an empty dictionary. */
 + (nullable CIDetector *)detectorOfType:(NSString*)type
                                 context:(nullable CIContext *)context
                                 options:(nullable NSDictionary<NSString *,id> *)options
@@ -68,9 +68,7 @@ CORE_IMAGE_EXPORT NSString* const CIDetectorTypeRectangle NS_AVAILABLE(10_10, 8_
 CORE_IMAGE_EXPORT NSString* const CIDetectorTypeQRCode NS_AVAILABLE(10_10, 8_0);
 
 /* Specifies a detector type for text detection. */
-#if __OBJC2__
 CORE_IMAGE_EXPORT NSString* const CIDetectorTypeText NS_AVAILABLE(10_11, 9_0);
-#endif
 
 // Options that can be used with +[CIDetector detectorOfType:context:options:]
 
@@ -79,7 +77,7 @@ CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracy NS_AVAILABLE(10_7, 5_0);
 
 /* These are values to be used with the CIDetectorAccuracy key when created a CIDetector.
  There is a performance / accuracy tradeoff to be made. The default value will work well for most
- situations, but using these the detector will favour performance over accuracy or
+ situations, but using these the detector will favor performance over accuracy or
  accuracy over performance. */
 CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracyLow NS_AVAILABLE(10_7, 5_0); /* Lower accuracy, higher performance */
 CORE_IMAGE_EXPORT NSString* const CIDetectorAccuracyHigh NS_AVAILABLE(10_7, 5_0); /* Lower performance, higher accuracy */
@@ -113,31 +111,106 @@ CORE_IMAGE_EXPORT NSString* const CIDetectorMaxFeatureCount NS_AVAILABLE(10_12, 
 /* The key in the options dictionary used to specify number of angles, the value for this key is one of 1, 3, 5, 7, 9, 11.*/
 CORE_IMAGE_EXPORT NSString* const CIDetectorNumberOfAngles NS_AVAILABLE(10_11, 9_0);
 
+
 // Options that can be used with -[CIDetector featuresInImage:options:]
 
-/* The value for this key is an integer NSNumber from 1..8 such as that
- found in kCGImagePropertyOrientation.  If present, the detection will be done
- based on that orientation but the coordinates in the returned features will
- still be based on those of the image. */
+/// A dictionary key that configures a Core Image feature detection operation 
+/// to account for the orientation the image.
+/// 
+/// This option is used with ``/CIDetector/featuresInImage:options:``
+/// 
+/// The value of this key is an number object whose value is an integer between 1 and 8. 
+/// The TIFF and EXIF specifications define the orientation values that describe how the image should be displayed. 
+/// The default value is 1. For further details, see `CGImagePropertyOrientation`.
+/// 
+/// The ``CIDetectorTypeFace`` and ``CIDetectorTypeText`` can use this option to correctly find faces or text.
+/// 
+/// Regardless of the orientation values the ``/CIFeature/bounds-property`` which is always measured in 
+/// the cartesean coordinates system of the image that you pass to the detector.
+/// 
 CORE_IMAGE_EXPORT NSString *const CIDetectorImageOrientation NS_AVAILABLE(10_8, 5_0);
 
-/* The value for this key is a bool NSNumber. If true, facial expressions, such as blinking and closed eyes are extracted */
+/// A dictionary key that configures a Core Image face feature detection operation 
+/// to perform additional processing to recognize closed eyes in detected faces.
+///
+/// This option is used with ``/CIDetector/featuresInImage:options:``
+/// 
+/// If the value of the key is true, then facial expressions such as blinking and smiles are extracted.
+/// This is needed for the ``/CIFaceFeature/leftEyeClosed-property`` and ``/CIFaceFeature/rightEyeClosed-property`` to function.
+/// 
 CORE_IMAGE_EXPORT NSString *const CIDetectorEyeBlink NS_AVAILABLE(10_9, 7_0);
 
-
-/* The value for this key is a bool NSNumber. If true, facial expressions, such as smile are extracted */
+/// A dictionary key that configures a Core Image face feature detection operation 
+/// to perform additional processing to recognize smiles in detected faces.
+///
+/// This option is used with ``/CIDetector/featuresInImage:options:``
+/// 
+/// If the value of the key is true, then facial expressions such as blinking and smiles eyes are extracted.
+/// This is needed for the ``/CIFaceFeature/hasSmile-property`` to function.
+/// 
 CORE_IMAGE_EXPORT NSString *const CIDetectorSmile NS_AVAILABLE(10_9, 7_0);
 
-/* The value for this key is a float NSNumber. Specifies the per frame focal length.  */
+/// A dictionary key that configures a Core Image rectangle feature detection operation 
+/// to account for the focal length of the camera used for the image.
+/// 
+/// This option is used with ``/CIDetector/featuresInImage:options:``
+/// 
+/// The value of this key is an NSNumber object whose value is a floating-point number. Use this option with the CIDetectorTypeRectangle 
+/// detector type to control the effect of the CIDetectorAspectRatio option on feature detection.
+/// 
+/// This option’s value can be 0.0, -1.0, or any positive value:
+/// * The special value of -1.0 (the default) disables the aspect ratio test for the returned rectangle.
+/// * The special value of 0.0 enables a less precise test of aspect ratio that approximates an orthographic (non-perspective) projection. 
+///   Use this value if you want to specify the aspect ratio of the rectangle via the CIDetectorAspectRatio option, but have no means of 
+///   determining the value for the focal length in pixels. See below for a method to compute an approximate value for the focal length in pixels.
+/// * Any other value specifies the camera focal length, in pixels, allowing the aspect ratio specification to account for perspective distortion 
+///   of rectangles in the input image. 
+///   
+/// If you know the diagonal field of view of the camera (the scene angle subtended by the diagonal corners of an image), you can use the 
+/// following formula to compute an approximate focal length in pixels:
+/// 
+/// `focal_length_pixels = (image_diagonal_pixels/2)/tan(FOV/2)`
+/// 
+/// In this formula, `image_diagonal_pixels` is the length (in pixels) of the image diagonal of the maximum resolution of the camera sensor. 
+/// For example, this value is:
+/// * `4080` pixels for a `3264 x 2448` (8 megapixel) sensor
+/// * `5000` pixels for a `4096 x 3024` (12 megapixel) sensor.
+///
+/// To measure diagonal field of view, put the camera on a tripod so that it is perpendicular to a surface and the center of the image is 
+/// oriented on a mark on the surface. Measure the distance from the mark to one of the corner points of the image (Y). Measure the distance 
+/// from the camera to the surface (Z). The field of view is then `2*arctan(Y/Z)`.
+/// 
+/// You must specify this value in terms of the maximum sensor resolution. If the supplied CIImage has been scaled relative relative to the 
+/// maximum sensor resolution, the supplied focal length must also be similarly scaled.
+/// 
 CORE_IMAGE_EXPORT NSString* const CIDetectorFocalLength NS_AVAILABLE(10_10, 8_0);
 
-/* The value for this key is a float NSNumber. Specifies the aspect ratio of the rectangle detected.  */
+/// A dictionary key that configures a Core Image rectangle feature detection operation 
+/// to search for a rectangle of a desired aspect ratio (width divided by height).
+/// 
+/// This option is used with ``/CIDetector/featuresInImage:options:``
+/// 
+/// The value for this key needs to be is a positive float number. 
+/// Use this option with a ``CIDetectorTypeRectangle`` detector to fine-tune the accuracy of the detector. 
+/// 
+/// For example, to more accurately find a business card (3.5 x 2 inches) in an image, specify an aspect ratio of 1.75.
+/// 
+/// If this key is not specified, the a default value of 1.6 is used.
+///
 CORE_IMAGE_EXPORT NSString* const CIDetectorAspectRatio NS_AVAILABLE(10_10, 8_0);
 
-#if __OBJC2__
-/* The value for this key is a bool NSNumber. Controls whether the text detector should detect subfeatures or not. The default value is NO */
+/// A dictionary key that configures a Core Image text feature detection operation 
+/// to return feature information for components of detected features.
+///
+/// This option is used with ``/CIDetector/featuresInImage:options:``
+/// 
+/// If the value for this option configures the ``CIDetectorTypeText`` detector as follows:
+/// * False: detect only in regions likely to contain text.
+/// * True: detect in regions likely to contain individual characters.
+/// 
+/// If this key is not specified, the a default is False.
+///
 CORE_IMAGE_EXPORT NSString* const CIDetectorReturnSubFeatures __OSX_AVAILABLE_STARTING(__MAC_10_11, __IPHONE_9_0);
-#endif
 
 NS_ASSUME_NONNULL_END
 

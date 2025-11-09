@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @protocol MTLCommandQueue
  @brief A serial queue of command buffers to be executed by the device.
  */
-API_AVAILABLE(macos(10.11), ios(8.0))
+API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @protocol MTLCommandQueue <NSObject>
 
 /*! @brief A string to help identify this object */

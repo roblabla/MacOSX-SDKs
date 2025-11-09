@@ -12,5 +12,5 @@
 #import <NearbyInteraction/NIDeviceCapability.h>
 #import <NearbyInteraction/NINearbyObject.h>
 #import <NearbyInteraction/NISession.h>
-
+#import <NearbyInteraction/NIDLTDOAMeasurement.h>
 #import <NearbyInteraction/NIExport.h>

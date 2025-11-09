@@ -44,8 +44,22 @@ exports:
                        '_$s22WebContentRestrictions15BloomFilterShimCN', '_$s22WebContentRestrictions15BloomFilterShimCfD', 
                        '_$s22WebContentRestrictions16MembershipFilterMp', '_$s22WebContentRestrictions16MembershipFilterPSETb', 
                        '_$s22WebContentRestrictions16MembershipFilterPSeTb', '_$s22WebContentRestrictions16MembershipFilterPs23CustomStringConvertibleTb', 
-                       '_$s22WebContentRestrictions16MembershipFilterTL', _WebContentRestrictionsVersionNumber, 
-                       _WebContentRestrictionsVersionString ]
-    objc-classes:    [ WCRAppleAllowList, WCRAutoAssetClient, WCRBloomFilter, WCRCipherMLClient, 
-                       WCRLogging, WCRURLList, _TtC22WebContentRestrictions15BloomFilterShim ]
+                       '_$s22WebContentRestrictions16MembershipFilterTL', _FCEvaluatePageContent, 
+                       _FCGetPageDump, _FCIsAppAllowed, _FCOverrideWebBlock, _FCWebPageWasBlocked, 
+                       _FCWebPageWasVisited, _WebContentRestrictionsVersionNumber, 
+                       _WebContentRestrictionsVersionString, __FCMIGAppCanLaunch, 
+                       __FCMIGAppCanSublaunch, __FCMIGAppLaunchBlocked, __FCMIGAppSublaunchBlocked, 
+                       __FCMIGClearLogsForUser, __FCMIGContentFilterPageWasBlocked, 
+                       __FCMIGContentFilterPageWasVisited, __FCMIGCreateMOCProxyForUser, 
+                       __FCMIGExecuteRequestForUser, __FCMIGHasAppLaunchRestrictions, 
+                       __FCMIGLaunch, __FCMIGListeningStatusChanged, __FCMIGMailAddContactsToWhiteList, 
+                       __FCMIGMailRemoveContactFromWhiteList, __FCMIGNextForcedUserLogout, 
+                       __FCMIGNotifyKernelOfDetachedSignature, __FCMIGOverrideTimeControls, 
+                       __FCMIGOverrideWebBlock, __FCMIGReadOverrides, __FCMIGReadSettings, 
+                       __FCMIGReleaseMOCProxyForUser, __FCMIGResetUsageData, __FCMIGSafariReadExistingBookmarks, 
+                       __FCMIGSafariVisitedPage, __FCMIGSafariWriteBookmarks, __FCMIGSaveUsageData, 
+                       __FCMIGUserCanLogin, __FCMIGiChatSaveChatLog, ___WCRDefaultLog ]
+    objc-classes:    [ WCRAppleAllowList, WCRAutoAssetClient, WCRBlockPage, WCRBloomFilter, 
+                       WCRBrowserEngineClient, WCRCipherMLClient, WCRLogging, WCRURLList, 
+                       _TtC22WebContentRestrictions15BloomFilterShim ]
 ...

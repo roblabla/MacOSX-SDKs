@@ -28,6 +28,16 @@ typedef NS_ENUM( NSInteger, ASDiscoveryDescriptorRange )
     ASDiscoveryDescriptorRangeImmediate          = 10,
 } NS_SWIFT_NAME(ASDiscoveryDescriptor.Range);
 
+//---------------------------------------------------------------------------------------------------------------------------
+/// A type that defines service roles for Wi-Fi Aware accessories.
+typedef NS_ENUM( NSInteger, ASDiscoveryDescriptorWiFiAwareServiceRole )
+{
+    /// The subscriber service role.
+    ASDiscoveryDescriptorWiFiAwareServiceRoleSubscriber       = 10,
+    /// The publisher service role.
+    ASDiscoveryDescriptorWiFiAwareServiceRolePublisher        = 20,
+} NS_SWIFT_NAME(ASDiscoveryDescriptor.WiFiAwareServiceRole);
+
 AS_EXTERN
 API_AVAILABLE( ios( 18.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos)
 NS_SWIFT_SENDABLE
@@ -69,6 +79,24 @@ API_AVAILABLE( ios( 18.2 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, 
 
 /// The prefix string of SSID of the accessory's Wi-Fi network.
 @property (readwrite, copy, nullable, nonatomic) NSString *SSIDPrefix;
+
+/// The accessory's Wi-Fi Aware's service name if available.
+@property (readwrite, copy, nullable, nonatomic) NSString *wifiAwareServiceName
+API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
+
+/// The role of the accessory's Wi-Fi Aware's service.
+///
+/// This property defaults to ``ASDiscoveryDescriptor/WiFiAwareServiceRole/subscriber``
+@property (readwrite, assign, nonatomic) ASDiscoveryDescriptorWiFiAwareServiceRole wifiAwareServiceRole
+API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
+
+/// The accessory's Wi-Fi Aware model name and matching options.
+@property (readwrite, copy, nullable, nonatomic) ASPropertyCompareString *wifiAwareModelNameMatch
+API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
+
+/// The accessory's Wi-Fi Aware vendor name and matching options.
+@property (readwrite, copy, nullable, nonatomic) ASPropertyCompareString *wifiAwareVendorNameMatch
+API_AVAILABLE( ios( 26.0 ) ) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
 
 @end
 

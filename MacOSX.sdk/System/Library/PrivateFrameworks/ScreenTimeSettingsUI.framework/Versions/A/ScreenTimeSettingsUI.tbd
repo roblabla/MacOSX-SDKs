@@ -2,14 +2,14 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeSettingsUI.framework/Versions/A/ScreenTimeSettingsUI'
-current-version: 537.5.7
+current-version: 604.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbAA014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfC', 
-                       '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbAA014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfCTj', 
-                       '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbAA014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfCTq', 
-                       '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbAA014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfc', 
+    symbols:         [ '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfC', 
+                       '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N10DataSource19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0wqrX0_pAA05STAgetuX0_ptcfc', 
+                       '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N20DefaultValueProvider19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0xqrsY0_pAA05STAgeuvY0_ptcfC', 
+                       '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4dsid8childAge14isInitialSetup014restrictionsToe7MappingfG00N20DefaultValueProvider19agePresetsAnalyticsACSo8NSNumberC_AKSgSbSo014STRestrictionsoepfG8Protocol_pSgSo0xqrsY0_pAA05STAgeuvY0_ptcfc', 
                        '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4loadyyYaF', 
                        '_$s20ScreenTimeSettingsUI0C15PresetViewModelC4loadyyYaFTu', 
                        '_$s20ScreenTimeSettingsUI0C15PresetViewModelC7Combine16ObservableObjectAAMc', 
@@ -85,13 +85,7 @@ exports:
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCMn', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCMo', 
                        '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCN', 
-                       '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCfD', 
-                       _STAgePresetKeyAllowAppRemoval, _STAgePresetKeyAllowAssistantUserGeneratedContent, 
-                       _STAgePresetKeyAllowBookstoreErotica, _STAgePresetKeyAllowExplicitContent, 
-                       _STAgePresetKeyAllowMusicArtistActivity, _STAgePresetKeyAllowMusicVideos, 
-                       _STAgePresetKeyForceAssistantProfanityFilter, _STAgePresetKeyPresetOnlyImageGeneration, 
-                       _STAgePresetKeyRatingApps, _STAgePresetKeyRatingMovies, _STAgePresetKeyRatingTVShows, 
-                       _STAgePresetKeySTCustomRestrictionWebFilterState ]
+                       '_$s20ScreenTimeSettingsUI36STIntroductionViewControllersFactoryCfD' ]
     objc-classes:    [ STActivityIndicatingWebView, STAlwaysAllowedController, STAlwaysAllowedItem, 
                        STChildSetupController, STContentAndPrivacyController, STControlProtection, 
                        STDeviceBedtime, STDowntimeCommunicationViewController, STKeyValuePair, 

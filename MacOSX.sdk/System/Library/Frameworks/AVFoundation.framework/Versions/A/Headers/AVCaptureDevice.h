@@ -372,18 +372,35 @@ AV_INIT_UNAVAILABLE
  */
 @property(nonatomic) CMTime activeVideoMaxFrameDuration API_AVAILABLE(macos(10.9), ios(7.0), macCatalyst(14.0), tvos(17.0), visionos(1.0));
 
-/*!
- @property autoVideoFrameRateEnabled
- @abstract
-    Indicates whether the receiver should enable auto video frame rate.
+/// Whether the device's video frame rate (expressed as a duration) is currently locked.
+///
+/// Returns `true` when an ``AVCaptureDeviceInput`` associated with the device has its ``AVCaptureDeviceInput/activeLockedVideoFrameDuration`` property set to something other than `kCMTimeInvalid`. See ``AVCaptureDeviceInput/activeLockedVideoFrameDuration`` for more information on video frame duration locking.
+@property(nonatomic, readonly, getter=isVideoFrameDurationLocked) BOOL videoFrameDurationLocked API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
-@discussion
-    When enabled the receiver automatically adjusts the active frame rate, depending on light level. Under low light conditions, frame rate is decreased to properly expose the scene. For formats with a maximum frame rate of 30 fps, the frame rate switches between 30 - 24. For formats with a maximum frame rate of 60 fps, the frame rate switches between 60 - 30 - 24.
+/// The maximum frame rate (expressed as a minimum duration) that can be set on an input associated with this device.
+///
+/// `kCMTimeInvalid` is returned when the device or its current configuration does not support locked frame rate. Use ``AVCaptureDeviceInput/activeLockedVideoFrameDuration`` to set the locked frame rate on the input.
+@property(nonatomic, readonly) CMTime minSupportedLockedVideoFrameDuration API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
-    Setting this property throws an NSInvalidArgumentException if the active format's -isAutoVideoFrameRateSupported returns NO. Changing the device's active format resets isAutoVideoFrameRateEnabled to its default value of NO.
+/// Whether the device is following an external sync device.
+///
+/// See ``AVCaptureDeviceInput/followExternalSyncDevice:videoFrameDuration:delegate:`` for more information on external sync.
+@property(nonatomic, readonly, getter=isFollowingExternalSyncDevice) BOOL followingExternalSyncDevice API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
-    When autoVideoFrameRateEnabled is true, setting activeVideoMinFrameDuration or activeVideoMaxFrameDuration throws an NSInvalidArgumentException.
- */
+/// The minimum frame duration that can be passed as the `videoFrameDuration` when directing your device input to follow an external sync device.
+///
+/// Use this property as the minimum allowable frame duration to pass to ``AVCaptureDeviceInput/follow:externalSyncDevice:videoFrameDuration:delegate:`` when you want to follow an external sync device. This property returns `kCMTimeInvalid` when the device's' current configuration does not support external sync device following.
+@property(nonatomic, readonly) CMTime minSupportedExternalSyncFrameDuration API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Indicates whether the receiver should enable auto video frame rate.
+///
+/// When you enable this property, the device automatically adjusts the active frame rate, depending on light level. Under low light conditions, it decreases the frame rate to properly expose the scene. For formats with a maximum frame rate of 30 fps, the device switches the frame rate between 30 - 24. For formats with a maximum frame rate of 60 fps, the device switches the frame rate between 60 - 30 - 24.
+///
+/// Setting this property throws an `NSInvalidArgumentException` if the active format's ``AVCaptureDeviceFormat/autoVideoFrameRateSupported`` returns `false`. When you change the device's active format, this property resets to its default value of `false`.
+///
+/// If you set this property to `true`, frame rate is under device control, and you may not set ``activeVideoMinFrameDuration`` or ``activeVideoMaxFrameDuration``. Doing so throws an `NSInvalidArgumentException`.
+///
+/// - Note: Setting this property to `true` throws an `NSInvalidArgumentException` if ``videoFrameDurationLocked`` or ``followingExternalSyncDevice`` are `true`.
 @property(nonatomic, getter=isAutoVideoFrameRateEnabled) BOOL autoVideoFrameRateEnabled API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
@@ -462,7 +479,7 @@ typedef NSString *AVCaptureDeviceType NS_TYPED_ENUM API_AVAILABLE(macos(10.15), 
         <true/>
     Otherwise, external cameras on Mac Catalyst report that their device type is AVCaptureDeviceTypeBuiltInWideAngleCamera.
  
-     On visionOS, your app must have the `com.apple.developer.avfoundation.uvc-device-access` entitlement in order to discover and use devices of type `AVCaptureDeviceTypeExternal`.
+    Prior to visionOS 3.0, your app must have the `com.apple.developer.avfoundation.uvc-device-access` entitlement in order to discover and use devices of type `AVCaptureDeviceTypeExternal` on visionOS.
  */
 AVF_EXPORT AVCaptureDeviceType const AVCaptureDeviceTypeExternal API_AVAILABLE(macos(14.0), ios(17.0), macCatalyst(17.0), tvos(17.0), visionos(2.1)) API_UNAVAILABLE(watchos);
 
@@ -817,7 +834,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     The active constituent device restricted  switching behavior.
  
  @discussion
-    For virtual devices with multiple constituent devices, this property returns the active restricted switching behavior conditions. This is equal to primaryConstituentDeviceRestrictedSwitchingBehaviorConditions except while recording using an AVCaptureMovieFileOutput configured with different retricted switching behavior conditions (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions]). Devices that do not support constituent device switching return AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone. This property is key-value observable.
+    For virtual devices with multiple constituent devices, this property returns the active restricted switching behavior conditions. This is equal to primaryConstituentDeviceRestrictedSwitchingBehaviorConditions except while recording using an AVCaptureMovieFileOutput configured with different restricted switching behavior conditions (see -[AVCaptureMovieFileOutput setPrimaryConstituentDeviceSwitchingBehaviorForRecording:restrictedSwitchingBehaviorConditions]). Devices that do not support constituent device switching return AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditionNone. This property is key-value observable.
  */
 @property(nonatomic, readonly) AVCapturePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions activePrimaryConstituentDeviceRestrictedSwitchingBehaviorConditions API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
@@ -1139,6 +1156,34 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  */
 @property(nonatomic) CGPoint focusPointOfInterest;
 
+/// Whether the receiver supports focus rectangles of interest.
+///
+/// You may only set the device's ``focusRectOfInterest`` property if this property returns `true`.
+@property(nonatomic, readonly, getter=isFocusRectOfInterestSupported) BOOL focusRectOfInterestSupported API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The minimum size you may use when specifying a rectangle of interest.
+///
+/// The size returned is in normalized coordinates, and depends on the current ``AVCaptureDevice/activeFormat``. If ``focusRectOfInterestSupported`` returns `false`, this property returns { 0, 0 }.
+@property(nonatomic, readonly) CGSize minFocusRectOfInterestSize API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The device's current focus rectangle of interest, if it has one.
+///
+/// The value of this property is a ``CGRect`` determining the device's focus rectangle of interest. Use this as an alternative to setting ``focusPointOfInterest``, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the focus, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting ``focusRectOfInterest`` throws an `NSInvalidArgumentException` if ``focusRectOfInterestSupported`` returns `false`. Setting ``focusRectOfInterest`` throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the ``minFocusRectOfInterestSize``. Setting ``focusRectOfInterest`` throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using ``AVCaptureDevice/lockForConfiguration:``. Setting ``focusRectOfInterest`` updates the device's ``focusPointOfInterest`` to the center of your provided rectangle of interest. If you later set the device's ``focusPointOfInterest``, the ``focusRectOfInterest`` resets to the default sized rectangle of interest for the new focus point of interest. If you change your ``AVCaptureDevice/activeFormat``, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's ``focusRectOfInterest`` by key-value observing this property.
+///
+/// - Note: Setting ``focusRectOfInterest`` alone does not initiate a focus operation. After setting ``focusRectOfInterest``, set ``focusMode`` to apply the new rectangle of interest.
+@property(nonatomic) CGRect focusRectOfInterest API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The default rectangle of interest used for a given focus point of interest.
+///
+/// - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest.
+///
+/// For example, pass `(0.5, 0.5)` to get the focus rectangle of interest used for the default focus point of interest at `(0.5, 0.5)`.
+///
+/// - Note: The particular default rectangle returned depends on the current focus mode.
+///
+/// This method returns `CGRectNull` if ``focusRectOfInterestSupported`` returns `false`.
+- (CGRect)defaultRectForFocusPointOfInterest:(CGPoint)pointOfInterest API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
 /*!
  @property adjustingFocus
  @abstract
@@ -1235,7 +1280,7 @@ AVF_EXPORT const float AVCaptureLensPositionCurrent API_AVAILABLE(ios(8.0), macC
  @param lensPosition
     The lens position, as described in the documentation for the lensPosition property. A value of AVCaptureLensPositionCurrent can be used to indicate that the caller does not wish to specify a value for lensPosition.
  @param handler
-    A block to be called when lensPosition has been set to the value specified and focusMode is set to AVCaptureFocusModeLocked. If setFocusModeLockedWithLensPosition:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the master clock prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. The client may pass nil for the handler parameter if knowledge of the operation's completion is not required.
+    A block to be called when lensPosition has been set to the value specified and focusMode is set to AVCaptureFocusModeLocked. If setFocusModeLockedWithLensPosition:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the `AVCaptureSession/synchronizationClock` prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. The client may pass nil for the handler parameter if knowledge of the operation's completion is not required.
  
  @discussion
     This is the only way of setting lensPosition. This method throws an NSRangeException if lensPosition is set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
@@ -1251,6 +1296,36 @@ AVF_EXPORT const float AVCaptureLensPositionCurrent API_AVAILABLE(ios(8.0), macC
     The minimum focus distance is given in millimeters, -1 if unknown. For virtual cameras (AVCaptureDeviceTypeBuiltInDualCamera, AVCaptureDeviceTypeBuiltInTripleCamera, etc.), the value reported is the smallest minimum focus distance of the auto-focus-capable cameras that it sources.
  */
 @property(nonatomic, readonly) NSInteger minimumFocusDistance API_AVAILABLE(macos(12.0), ios(15.0), macCatalyst(15.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Constants indicating the focus behavior when recording a Cinematic Video.
+typedef NS_ENUM(NSInteger, AVCaptureCinematicVideoFocusMode) {
+    /// Indicates that no focus mode is specified, in which case weak focus is used as default.
+    AVCaptureCinematicVideoFocusModeNone   = 0,
+    /// Indicates that the subject should remain in focus until it exits the scene.
+    AVCaptureCinematicVideoFocusModeStrong = 1,
+    /// Indicates that the Cinematic Video algorithm should automatically adjust focus according to the prominence of the subjects in the scene.
+    AVCaptureCinematicVideoFocusModeWeak   = 2,
+} NS_SWIFT_NAME(AVCaptureDevice.CinematicVideoFocusMode) API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Focus on and start tracking a detected object.
+///
+/// - Parameter detectedObjectID: The ID of the detected object.
+/// - Parameter focusMode: Specify whether to focus strongly or weakly.
+- (void)setCinematicVideoTrackingFocusWithDetectedObjectID:(NSInteger)detectedObjectID focusMode:(AVCaptureCinematicVideoFocusMode)focusMode NS_SWIFT_NAME(setCinematicVideoTrackingFocus(detectedObjectID:focusMode:)) API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Focus on and start tracking an object if it can be detected at the region specified by the point.
+///
+/// - Parameter point: A normalized point of interest (i.e., [0,1]) in the coordinate space of the device.
+/// - Parameter focusMode: Specify whether to focus strongly or weakly.
+- (void)setCinematicVideoTrackingFocusAtPoint:(CGPoint)point focusMode:(AVCaptureCinematicVideoFocusMode)focusMode NS_SWIFT_NAME(setCinematicVideoTrackingFocus(at:focusMode:)) API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Fix focus at a distance.
+///
+/// - Parameter point: A normalized point of interest (i.e., [0,1]) in the coordinate space of the device.
+/// - Parameter focusMode: Specify whether to focus strongly or weakly.
+///
+/// The distance at which focus is set is determined internally using signals such as depth data.
+- (void)setCinematicVideoFixedFocusAtPoint:(CGPoint)point focusMode:(AVCaptureCinematicVideoFocusMode)focusMode NS_SWIFT_NAME(setCinematicVideoFixedFocus(at:focusMode:)) API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -1324,6 +1399,32 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
     The value of this property is a CGPoint that determines the receiver's exposure point of interest, if it has adjustable exposure. A value of (0,0) indicates that the camera should adjust exposure based on the top left corner of the image, while a value of (1,1) indicates that it should adjust exposure based on the bottom right corner. The default value is (0.5,0.5). -setExposurePointOfInterest: throws an NSInvalidArgumentException if isExposurePointOfInterestSupported returns NO. -setExposurePointOfInterest: throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. Note that setting exposurePointOfInterest alone does not initiate an exposure operation. After setting exposurePointOfInterest, call -setExposureMode: to apply the new point of interest.
  */
 @property(nonatomic) CGPoint exposurePointOfInterest;
+
+/// Whether the device supports exposure rectangles of interest.
+///
+/// You may only set the device's ``exposureRectOfInterest`` property if this property returns `true`.
+@property(nonatomic, readonly, getter=isExposureRectOfInterestSupported) BOOL exposureRectOfInterestSupported API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The minimum size you may use when specifying a rectangle of interest.
+///
+/// The size returned is in normalized coordinates, and depends on the current ``AVCaptureDevice/activeFormat``. If ``exposureRectOfInterestSupported`` returns `false`, this property returns { 0, 0 }.
+@property(nonatomic, readonly) CGSize minExposureRectOfInterestSize API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The device's current exposure rectangle of interest, if it has one.
+///
+/// The value of this property is a ``CGRect`` determining the device's exposure rectangle of interest. Use this as an alternative to setting ``exposurePointOfInterest``, as it allows you to specify both a location and size. For example, a value of `CGRectMake(0, 0, 1, 1)` tells the device to use the entire field of view when determining the exposure, while `CGRectMake(0, 0, 0.25, 0.25)` indicates the top left sixteenth, and `CGRectMake(0.75, 0.75, 0.25, 0.25)` indicates the bottom right sixteenth. Setting ``exposureRectOfInterest`` throws an `NSInvalidArgumentException` if ``exposureRectOfInterestSupported`` returns `false`. Setting ``exposureRectOfInterest`` throws an `NSInvalidArgumentException` if your provided rectangle's size is smaller than the ``minExposureRectOfInterestSize``. Setting ``exposureRectOfInterest`` throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using ``AVCaptureDevice/lockForConfiguration:``. Setting ``exposureRectOfInterest`` updates the device's ``exposurePointOfInterest`` to the center of your provided rectangle of interest. If you later set the device's ``exposurePointOfInterest``, the ``exposureRectOfInterest`` resets to the default sized rectangle of interest for the new exposure point of interest. If you change your ``AVCaptureDevice/activeFormat``, the point of interest and rectangle of interest both revert to their default values. You can observe automatic changes to the device's ``exposureRectOfInterest`` by key-value observing this property.
+///
+/// - Note: Setting ``exposureRectOfInterest`` alone does not initiate an exposure operation. After setting ``exposureRectOfInterest``, set ``exposureMode`` to apply the new rectangle of interest.
+@property(nonatomic) CGRect exposureRectOfInterest API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The default rectangle of interest used for a given exposure point of interest.
+///
+/// - Parameter pointOfInterest: The point of interest for which you want the default rectangle of interest.
+///
+/// For example, pass `(0.5, 0.5)` to get the exposure rectangle of interest used for the default exposure point of interest at `(0.5, 0.5)`.
+///
+/// This method returns `CGRectNull` if ``exposureRectOfInterestSupported`` returns `false`.
+- (CGRect)defaultRectForExposurePointOfInterest:(CGPoint)pointOfInterest API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
 /*!
  @property automaticallyAdjustsFaceDrivenAutoExposureEnabled
@@ -1419,7 +1520,7 @@ AVF_EXPORT const float AVCaptureISOCurrent API_AVAILABLE(ios(8.0), macCatalyst(1
  @param ISO
     The exposure ISO value, as described in the documentation for the ISO property. A value of AVCaptureISOCurrent can be used to indicate that the caller does not wish to specify a value for ISO.
  @param handler
-    A block to be called when both exposureDuration and ISO have been set to the values specified and exposureMode is set to AVCaptureExposureModeCustom. If setExposureModeCustomWithDuration:ISO:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the master clock prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. The client may pass nil for the handler parameter if knowledge of the operation's completion is not required.
+    A block to be called when both exposureDuration and ISO have been set to the values specified and exposureMode is set to AVCaptureExposureModeCustom. If setExposureModeCustomWithDuration:ISO:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the `AVCaptureSession/synchronizationClock` prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. The client may pass nil for the handler parameter if knowledge of the operation's completion is not required.
  
  @discussion
     This is the only way of setting exposureDuration and ISO. This method throws an NSRangeException if either exposureDuration or ISO is set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:. When using AVCapturePhotoOutput to capture photos, note that the photoQualityPrioritization property of AVCapturePhotoSettings defaults to AVCapturePhotoQualityPrioritizationBalanced, which allows photo capture to temporarily override the capture device's ISO and exposureDuration values if the scene is dark enough to warrant some form of multi-image fusion to improve quality. To ensure that the receiver's ISO and exposureDuration values are honored while in AVCaptureExposureModeCustom or AVCaptureExposureModeLocked, you must set your AVCapturePhotoSettings.photoQualityPrioritization property to AVCapturePhotoQualityPrioritizationSpeed. The same rule applies if you use the deprecated AVCapturePhotoSettings.autoStillImageStabilizationEnabled property or AVCaptureStillImageOutput.automaticallyEnablesStillImageStabilizationWhenAvailable property. You must set them to NO to preserve your custom or locked exposure settings.
@@ -1480,7 +1581,7 @@ AVF_EXPORT const float AVCaptureExposureTargetBiasCurrent API_AVAILABLE(ios(8.0)
  @param bias
     The bias to be applied to the exposure target value, as described in the documentation for the exposureTargetBias property.
  @param handler
-    A block to be called when exposureTargetBias has been set to the value specified. If setExposureTargetBias:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which the setting has been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the master clock prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. The client may pass nil for the handler parameter if knowledge of the operation's completion is not required.
+    A block to be called when exposureTargetBias has been set to the value specified. If setExposureTargetBias:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which the setting has been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the `AVCaptureSession/synchronizationClock` prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. The client may pass nil for the handler parameter if knowledge of the operation's completion is not required.
  
  @discussion
     This is the only way of setting exposureTargetBias. This method throws an NSRangeException if exposureTargetBias is set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
@@ -1571,6 +1672,21 @@ typedef struct {
     float tint;
 } AVCaptureWhiteBalanceTemperatureAndTintValues API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 
+/// Temperature and tint values ideal for scenes illuminated with a tungsten light source.
+AVF_EXPORT AVCaptureWhiteBalanceTemperatureAndTintValues const AVCaptureWhiteBalanceTemperatureAndTintValuesTungsten NS_SWIFT_NAME(AVCaptureWhiteBalanceTemperatureAndTintValues.tungsten) API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/// Temperature and tint values ideal for scenes illuminated with a fluorescent light source.
+AVF_EXPORT AVCaptureWhiteBalanceTemperatureAndTintValues const AVCaptureWhiteBalanceTemperatureAndTintValuesFluorescent NS_SWIFT_NAME(AVCaptureWhiteBalanceTemperatureAndTintValues.fluorescent) API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/// Temperature and tint values ideal for scenes illuminated with natural daylight.
+AVF_EXPORT AVCaptureWhiteBalanceTemperatureAndTintValues const AVCaptureWhiteBalanceTemperatureAndTintValuesDaylight NS_SWIFT_NAME(AVCaptureWhiteBalanceTemperatureAndTintValues.daylight) API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/// Temperature and tint values ideal for scenes illuminated with natural cloudy daylight.
+AVF_EXPORT AVCaptureWhiteBalanceTemperatureAndTintValues const AVCaptureWhiteBalanceTemperatureAndTintValuesCloudy NS_SWIFT_NAME(AVCaptureWhiteBalanceTemperatureAndTintValues.cloudy) API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
+/// Temperature and tint values ideal for scenes illuminated with daylight but in heavy shade.
+AVF_EXPORT AVCaptureWhiteBalanceTemperatureAndTintValues const AVCaptureWhiteBalanceTemperatureAndTintValuesShadow NS_SWIFT_NAME(AVCaptureWhiteBalanceTemperatureAndTintValues.shadow) API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
 
 API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
 @interface AVCaptureDevice (AVCaptureDeviceWhiteBalance)
@@ -1656,6 +1772,15 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  */
 AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 
+/// Sets white balance to locked mode with explicit temperature and tint values.
+///
+/// - Parameter whiteBalanceTemperatureAndTintValues: The white balance temperature and tint values, as computed from ``temperatureAndTintValuesForDeviceWhiteBalanceGains:`` method, ``AVCaptureWhiteBalanceTemperatureAndTintValues`` presets or manual input.
+///
+/// - Parameter handler: A block to be called when white balance values have been set to the values specified and ``whiteBalanceMode`` is set to ``AVCaptureWhiteBalanceModeLocked``. If ``setWhiteBalanceModeLockedWithDeviceWhiteBalanceTemperatureAndTintValues:completionHandler:`` is called multiple times, the completion handlers are called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the ``AVCaptureSession/synchronizationClock`` prior to comparison with the timestamps of buffers delivered via an ``AVCaptureVideoDataOutput``. This parameter may be `nil` if synchronization is not required.
+///
+/// This method takes a ``AVCaptureWhiteBalanceTemperatureAndTintValues`` struct and applies the appropriate ``AVCaptureWhiteBalanceGains``. This method throws an `NSRangeException` if any of the values are set to an unsupported level. This method throws an `NSGenericException` if called without first obtaining exclusive access to the device using ``AVCaptureDevice/lockForConfiguration:``.
+- (void)setWhiteBalanceModeLockedWithDeviceWhiteBalanceTemperatureAndTintValues:(AVCaptureWhiteBalanceTemperatureAndTintValues)whiteBalanceTemperatureAndTintValues completionHandler:(nullable void (^)(CMTime syncTime))handler NS_SWIFT_NAME(setWhiteBalanceModeLocked(whiteBalanceTemperatureAndTintValues:handler:)) API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
+
 /*!
  @method setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler:
  @abstract
@@ -1664,10 +1789,10 @@ AVF_EXPORT const AVCaptureWhiteBalanceGains AVCaptureWhiteBalanceGainsCurrent AP
  @param whiteBalanceGains
     The white balance gain values, as described in the documentation for the deviceWhiteBalanceGains property. A value of AVCaptureWhiteBalanceGainsCurrent can be used to indicate that the caller does not wish to specify a value for deviceWhiteBalanceGains.
  @param handler
-    A block to be called when white balance gains have been set to the values specified and whiteBalanceMode is set to AVCaptureWhiteBalanceModeLocked. If setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the master clock prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. This parameter may be nil if synchronization is not required.
+    A block to be called when white balance gains have been set to the values specified and whiteBalanceMode is set to AVCaptureWhiteBalanceModeLocked. If setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:completionHandler: is called multiple times, the completion handlers will be called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the `AVCaptureSession/synchronizationClock` prior to comparison with the timestamps of buffers delivered via an AVCaptureVideoDataOutput. This parameter may be nil if synchronization is not required.
  
  @discussion
-    For each channel in the whiteBalanceGains struct, only values between 1.0 and -maxWhiteBalanceGain are supported. Gain values are normalized to the minimum channel value to avoid brightness changes (e.g. R:2 G:2 B:4 will be normalized to R:1 G:1 B:2). This method throws an NSRangeException if any of the whiteBalanceGains are set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
+    Gain values are normalized to the minimum channel value to avoid brightness changes (e.g. R:2 G:2 B:4 will be normalized to R:1 G:1 B:2). For each channel in the whiteBalanceGains struct, only values between 1.0 and maxWhiteBalanceGain after nomalization are supported.  This method throws an NSRangeException if any of the whiteBalanceGains are set to an unsupported level. This method throws an NSGenericException if called without first obtaining exclusive access to the receiver using lockForConfiguration:.
  */
 - (void)setWhiteBalanceModeLockedWithDeviceWhiteBalanceGains:(AVCaptureWhiteBalanceGains)whiteBalanceGains completionHandler:(nullable void (^)(CMTime syncTime))handler API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos);
 
@@ -2039,27 +2164,19 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
 
 @end
 
-/*!
- @enum AVCaptureColorSpace
- @abstract
-    Constants indicating active or supported video color space.
- 
- @constant AVCaptureColorSpace_sRGB
-    The sRGB color space ( https://www.w3.org/Graphics/Color/srgb )
- @constant AVCaptureColorSpace_P3_D65
-    The P3 D65 wide color space which uses Illuminant D65 as the white point.
- @constant AVCaptureColorSpace_HLG_BT2020
-    The BT2020 wide color space which uses Illuminant D65 as the white point and Hybrid Log-Gamma as the transfer function.
- @constant AVCaptureColorSpace_AppleLog
-    The Apple Log Color space, which uses BT2020 as the color primaries, and an Apple defined Log curve as a transfer function. When this is set as the active color space on an AVCaptureDevice, any AVCapturePhotoOutput or AVCaptureStillImageOutput connected to the same AVCaptureDevice will have its video connection disabled.
- */
+/// Constants indicating active or supported video color space.
 typedef NS_ENUM(NSInteger, AVCaptureColorSpace) {
+    /// The sRGB color space ( https://www.w3.org/Graphics/Color/srgb ).
     AVCaptureColorSpace_sRGB       = 0,
+    /// The P3 D65 wide color space which uses Illuminant D65 as the white point.
     AVCaptureColorSpace_P3_D65     = 1,
+    /// The BT2020 wide color space which uses Illuminant D65 as the white point and Hybrid Log-Gamma as the transfer function.
     AVCaptureColorSpace_HLG_BT2020 API_AVAILABLE(ios(14.1), macCatalyst(14.1), tvos(17.0)) API_UNAVAILABLE(macos, visionos) = 2,
+    /// The Apple Log Color space, which uses BT2020 as the color primaries, and an Apple defined Log curve as a transfer function. When you set this as the active color space on an ``AVCaptureDevice``, any ``AVCapturePhotoOutput`` or ``AVCaptureStillImageOutput`` connected to the same ``AVCaptureDevice`` is made inactive (its ``AVCaptureConnection/active`` property returns `false`).
     AVCaptureColorSpace_AppleLog API_AVAILABLE(ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) = 3,
+    /// The Apple Log 2 Color space, which uses Apple Gamut as the color primaries, and an Apple defined Log curve as a transfer function. When you set this as the active color space on an ``AVCaptureDevice``, any ``AVCapturePhotoOutput`` or ``AVCaptureStillImageOutput`` connected to the same ``AVCaptureDevice`` is made inactive (its ``AVCaptureConnection/active`` property returns `false`).
+    AVCaptureColorSpace_AppleLog2 API_AVAILABLE(ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(macos, visionos) = 4,
 } API_AVAILABLE(macos(10.15), ios(10.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
-
 
 API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
 @interface AVCaptureDevice (AVCaptureDeviceColorSpaceSupport)
@@ -2145,9 +2262,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @property geometricDistortionCorrectionSupported
  @abstract
     Indicates that geometric distortion correction is supported by the receiver.
- 
+
  @discussion
-    Some AVCaptureDevices benefit from geometric distortion correction (GDC), such as devices with a very wide field of view. GDC lessens the fisheye effect at the outer edge of the frame at the cost of losing a small amount of vertical and horizontal field of view. When GDC is enabled on the AVCaptureDevice (see geometricDistortionEnabled), the corrected image is upscaled to the original image size when needed.  With respect to the AVCaptureDevice.videoZoomFactor API, the full viewable field of view is always represented with a videoZoomFactor of 1.0. Thus, when GDC is enabled, the AVCaptureDevice.activeFormat's field of view at videoZoomFactor = 1.0 will be different than when GDC is disabled. The smaller field of view is reported through the activeFormat's geometricDistortionCorrectedVideoFieldOfView property. Beware though that RAW photo captures never have GDC applied, regardless of the value of AVCaptureDevice.geometricDistortionCorrectionEnabled.
+    Some AVCaptureDevices benefit from geometric distortion correction (GDC), such as devices with a very wide field of view. GDC lessens the fisheye effect at the outer edge of the frame at the cost of losing a small amount of vertical and horizontal field of view. When GDC is enabled on the AVCaptureDevice (see geometricDistortionCorrectionEnabled), the corrected image is upscaled to the original image size when needed.  With respect to the AVCaptureDevice.videoZoomFactor API, the full viewable field of view is always represented with a videoZoomFactor of 1.0. Thus, when GDC is enabled, the AVCaptureDevice.activeFormat's field of view at videoZoomFactor = 1.0 will be different than when GDC is disabled. The smaller field of view is reported through the activeFormat's geometricDistortionCorrectedVideoFieldOfView property. Beware though that RAW photo captures never have GDC applied, regardless of the value of AVCaptureDevice.geometricDistortionCorrectionEnabled.
  */
 @property(nonatomic, readonly, getter=isGeometricDistortionCorrectionSupported) BOOL geometricDistortionCorrectionSupported API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 
@@ -2155,9 +2272,16 @@ API_AVAILABLE(macos(10.7), ios(4.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  @property geometricDistortionCorrectionEnabled
  @abstract
     Indicates whether geometric distortion correction is enabled by the receiver.
- 
+
  @discussion
     Where supported, the default value is YES. The receiver must be locked for configuration using lockForConfiguration: before clients can set this method, otherwise an NSGenericException is thrown.
+
+    In the case of ProRes RAW, when geometricDistortionCorrectionEnabled is YES, GDC is applied to your outputs in different ways:
+    - It is always applied to AVCaptureVideoPreviewLayer.
+    - It is applied to AVCaptureVideoDataOutput only if deliversPreviewSizedOutputBuffers is set to YES.
+    - It is never applied to AVCaptureMovieFileOutput.
+
+    When GDC is enabled, AVCaptureVideoDataOutput buffers contain GDC metadata attachments, and AVCaptureMovieFileOutput movies contain GDC metadata which an application supporting ProRes RAW can optionally apply at playback time using the ProRes RAW SDK. To learn more about the ProRes RAW SDK, refer to the Apple ProRes and ProRes RAW Authorized Products article at https://support.apple.com/en-us/118584.
  */
 @property(nonatomic, getter=isGeometricDistortionCorrectionEnabled) BOOL geometricDistortionCorrectionEnabled API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 
@@ -2548,9 +2672,156 @@ AVF_EXPORT AVSpatialCaptureDiscomfortReason const AVSpatialCaptureDiscomfortReas
     Indicates whether or not the current environmental conditions are amenable to a spatial capture that is comfortable to view.
  
  @discussion
-    This property can be monitored in order to determine the presentation of U/I elements to inform the user that they should reframe their scene for a more pleasing spatial capture ("subject is too close", "scene is too dark").
+    This property can be monitored in order to determine the presentation of UI elements to inform the user that they should reframe their scene for a more pleasing spatial capture ("subject is too close", "scene is too dark").
  */
 @property(nonatomic, readonly) NSSet<AVSpatialCaptureDiscomfortReason> *spatialCaptureDiscomfortReasons API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+@end
+
+/// An informative status about the scene observed by the device.
+///
+/// Some features have certain requirements on the scene (lighting condition for Cinematic Video, for example) to produce optimal results; these ``AVCaptureSceneMonitoringStatus`` string constants are used to represent such scene statuses for a given feature.
+typedef NSString *AVCaptureSceneMonitoringStatus NS_TYPED_ENUM API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The light level of the current scene is insufficient for the current set of features to function optimally.
+AVF_EXPORT AVCaptureSceneMonitoringStatus const AVCaptureSceneMonitoringStatusNotEnoughLight API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (AVCaptureDeviceCinematicVideoCapture)
+
+/// The current scene monitoring statuses related to Cinematic Video capture.
+///
+/// Monitor this property via key-value observation to present a UI informing the user that they should reframe their scene for a better Cinematic Video experience ("scene is too dark").
+@property(nonatomic, readonly) NSSet<AVCaptureSceneMonitoringStatus> *cinematicVideoCaptureSceneMonitoringStatuses;
+
+@end
+
+/// String constants describing the different video aspect ratios you can configure for a particular device.
+typedef NSString *AVCaptureAspectRatio NS_TYPED_ENUM NS_SWIFT_NAME(AVCaptureDevice.AspectRatio) API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+/// An aspect ratio of 1x1.
+AVF_EXPORT AVCaptureAspectRatio const AVCaptureAspectRatio1x1 API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+/// An aspect ratio of 16x9.
+AVF_EXPORT AVCaptureAspectRatio const AVCaptureAspectRatio16x9 API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+/// An aspect ratio of 9x16.
+AVF_EXPORT AVCaptureAspectRatio const AVCaptureAspectRatio9x16 API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+/// An aspect ratio of 4x3.
+AVF_EXPORT AVCaptureAspectRatio const AVCaptureAspectRatio4x3 API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+/// An aspect ratio of 3x4.
+AVF_EXPORT AVCaptureAspectRatio const AVCaptureAspectRatio3x4 API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (DynamicAspectRatio)
+
+/// A key-value observable property indicating the current aspect ratio for a device.
+///
+/// This property is initialized to the first ``AVCaptureAspectRatio`` listed in the device's activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios`` property. If the activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios`` is an empty array, this property returns nil.
+@property(readonly, nullable) AVCaptureAspectRatio dynamicAspectRatio;
+
+/// A key-value observable property describing the output dimensions of the video buffer based on the device's dynamic aspect ratio.
+///
+/// If the device's activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios`` is an empty array, this property returns {0,0}.
+@property(readonly) CMVideoDimensions dynamicDimensions;
+
+/// Updates the dynamic aspect ratio of the device.
+///
+/// - Parameter dynamicAspectRatio: The new ``AVCaptureAspectRatio`` the device should output.
+/// - Parameter handler: A block called by the device when `dynamicAspectRatio` is set to the value specified. If you call ``setDynamicAspectRatio:completionHandler:`` multiple times, the completion handlers are called in FIFO order. The block receives a timestamp which matches that of the first buffer to which all settings have been applied. Note that the timestamp is synchronized to the device clock, and thus must be converted to the ``AVCaptureSession/synchronizationClock`` prior to comparison with the timestamps of buffers delivered via an ``AVCaptureVideoDataOutput``. You may pass `nil` for the `handler` parameter if you do not need to know when the operation completes.
+///
+/// This is the only way of setting ``dynamicAspectRatio``. This method throws an `NSInvalidArgumentException` if `dynamicAspectRatio` is not a supported aspect ratio found in the device's activeFormat's ``AVCaptureDeviceFormat/supportedDynamicAspectRatios``. This method throws an `NSGenericException` if you call it without first obtaining exclusive access to the device using ``AVCaptureDevice/lockForConfiguration:``.
+- (void)setDynamicAspectRatio:(AVCaptureAspectRatio)dynamicAspectRatio completionHandler:(nullable void (^)(CMTime syncTime, NSError * _Nullable error))handler;
+
+@end
+
+@class AVCaptureSmartFramingMonitor;
+
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (AVCaptureDeviceSmartFraming)
+
+/// A monitor owned by the device that recommends an optimal framing based on the content in the scene.
+///
+/// An ultra wide camera device that supports dynamic aspect ratio configuration may also support "smart framing monitoring". If this property returns non `nil`, you may use it to listen for framing recommendations by configuring its ``AVCaptureSmartFramingMonitor/enabledFramings`` and calling ``AVCaptureSmartFramingMonitor/startMonitoringWithError:``. The smart framing monitor only makes recommendations when the current ``AVCaptureDevice/activeFormat`` supports smart framing (see ``AVCaptureDeviceFormat/smartFramingSupported``).
+@property(nonatomic, readonly, nullable) AVCaptureSmartFramingMonitor *smartFramingMonitor;
+
+@end
+
+@class AVCaptureFraming;
+
+/// An object associated with a capture device that monitors the scene and suggests an optimal framing.
+///
+/// A smart framing monitor observes its associated device for objects of interest entering and exiting the camera's field of view and recommends an optimal framing for good photographic composition. This framing recommendation consists of an aspect ratio and zoom factor. You may respond to the device's framing recommendation by calling ``AVCaptureDevice/setDynamicAspectRatio:completionHandler:`` and setting ``AVCaptureDevice/videoZoomFactor`` on the associated device in whatever order best matches your animation between old and new framings.
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureSmartFramingMonitor : NSObject
+
+AV_INIT_UNAVAILABLE
+
+/// An array of framings supported by the monitor in its current configuration.
+///
+/// The monitor is capable of recommending any of the framings in this array. This property is key-value observable and may change as the target capture device's ``AVCaptureDevice/activeFormat`` property changes. This array contains the full set of framings supported by the monitor in the device's current configuration. You must tell the monitor which smart framings you are interested in having recommended to you by setting the ``enabledFramings`` property.
+@property(nonatomic, readonly) NSArray<AVCaptureFraming *> *supportedFramings;
+
+/// An array of framings that the monitor is allowed to suggest.
+///
+/// The monitor is capable of recommending any of the framings in the ``supportedFramings`` array. This property contains the subset of ``supportedFramings`` you would like to have recommended to you. You may set this property at any time while running your ``AVCaptureSession``. This property's default value is the empty array.
+@property(nonatomic, copy) NSArray<AVCaptureFraming *> *enabledFramings;
+
+/// The latest recommended framing from the monitor.
+///
+/// While your ``AVCaptureSession`` is running, the monitor continuously observes its device's scene to recommend the best framing. This recommended framing is always one of the values in ``enabledFramings``. This property may return `nil` if smart framing isn't supported for the device in its current configuration. Its default value is `nil`. This property is key-value observable, and when you observe a change, you may respond to the new recommendation by calling ``AVCaptureDevice/setDynamicAspectRatio:completionHandler:`` and setting ``AVCaptureDevice/videoZoomFactor`` on the associated device in whatever order best matches your animation between old and new framings.
+@property(nonatomic, readonly, nullable) AVCaptureFraming *recommendedFraming;
+
+/// Begins monitoring the device's active scene and making framing recommendations.
+///
+/// - Parameter outError: A pointer to an ``NSError`` indicating why ``startMonitoringWithError:`` failed, or to a `nil` ``NSError`` on success.
+/// - Returns: `true` if successful, `false` if monitoring could not be started.
+///
+/// The monitor's ``recommendedFraming`` is `nil` when it is not actively running. Call this method to start monitoring. You may start monitoring before or after calling ``AVCaptureSession/startRunning``,  and you may stop active monitoring without stopping the capture session by calling ``stopMonitoring`` at any time, but you must set ``enabledFramings`` before running your capture session so that the monitor is prepared for your desired framing recommendations. While the monitor is running, you may set ``enabledFramings`` at any time to change the framing choices the monitor should consider in its recommendations.
+- (BOOL)startMonitoringWithError:(NSError **)outError;
+
+/// Stops monitoring the device's active scene and making framing recommendations.
+///
+/// The monitor's ``recommendedFraming`` is `nil` when it is not actively running. Call this method to stop actively monitoring the scene and making framing recommendations. You may start monitoring before or after calling ``AVCaptureSession/startRunning``, and may stop active monitoring without stopping the capture session by calling ``stopMonitoring`` at any time.
+- (void)stopMonitoring;
+
+/// Yes when the receiver is actively monitoring.
+///
+/// See ``startMonitoringWithError:`` and ``stopMonitoring``.
+@property(nonatomic, readonly, getter=isMonitoring) BOOL monitoring;
+
+@end
+
+/// A framing, consisting of an aspect ratio and a zoom factor.
+///
+/// An ``AVCaptureSmartFramingMonitor`` provides framing recommendations using this object.
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureFraming : NSObject
+
+AV_INIT_UNAVAILABLE
+
+/// An aspect ratio.
+///
+/// One of the enumerated aspect ratios  suitable for use with the ``AVCaptureDevice`` dynamic aspect ratio APIs.
+@property(atomic, readonly) AVCaptureAspectRatio aspectRatio;
+
+/// A zoom factor.
+///
+/// Suitable for use with the ``AVCaptureDevice/videoZoomFactor`` property or ``AVCaptureDevice/rampToVideoZoomFactor:withRate:``.
+@property(atomic, readonly) float zoomFactor;
+
+@end
+
+@interface AVCaptureDevice (AVCaptureDeviceNominalFocalLengthIn35mmFilm)
+
+/// The nominal 35mm equivalent focal length of the capture device's lens.
+///
+/// This value represents a nominal measurement of the device's field of view, expressed as a 35mm equivalent focal length, measured diagonally. The value is similar to the `FocalLengthIn35mmFormat` EXIF entry (see <doc://com.apple.documentation/documentation/imageio/kcgimagepropertyexiffocallenin35mmfilm>) for a photo captured using the device's format where ``AVCaptureDeviceFormat/highestPhotoQualitySupported`` is `true` or when you've configured the session with the ``AVCaptureSessionPresetPhoto`` preset.
+///
+/// This property value is `0` for virtual devices and external cameras.
+@property(nonatomic, readonly) float nominalFocalLengthIn35mmFilm API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
 @end
 
 
@@ -2686,7 +2957,6 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-
 #pragma mark - AVExposureBiasRange
 
 /*!
@@ -2732,6 +3002,7 @@ AV_INIT_UNAVAILABLE
 - (BOOL)containsExposureBias:(float)exposureBias;
 
 @end
+
 
 #pragma mark - AVFrameRateRange
 
@@ -2843,34 +3114,23 @@ AV_INIT_UNAVAILABLE
 
 @end
 
-
-/*!
- @enum AVCaptureVideoStabilizationMode
- @abstract
-    Constants indicating the modes of video stabilization supported by the device's format.
- 
- @constant AVCaptureVideoStabilizationModeOff
-    Indicates that video should not be stabilized.
- @constant AVCaptureVideoStabilizationModeStandard
-    Indicates that video should be stabilized using the standard video stabilization algorithm introduced with iOS 5.0. Standard video stabilization has a reduced field of view. Enabling video stabilization may introduce additional latency into the video capture pipeline.
- @constant AVCaptureVideoStabilizationModeCinematic
-    Indicates that video should be stabilized using the cinematic stabilization algorithm for more dramatic results. Cinematic video stabilization has a reduced field of view compared to standard video stabilization. Enabling cinematic video stabilization introduces much more latency into the video capture pipeline than standard video stabilization and consumes significantly more system memory. Use narrow or identical min and max frame durations in conjunction with this mode.
- @constant AVCaptureVideoStabilizationModeCinematicExtended
-    Indicates that the video should be stabilized using the extended cinematic stabilization algorithm. Enabling extended cinematic stabilization introduces longer latency into the video capture pipeline compared to the AVCaptureVideoStabilizationModeCinematic and consumes more memory, but yields improved stability. It is recommended to use identical or similar min and max frame durations in conjunction with this mode.
- @constant AVCaptureVideoStabilizationModePreviewOptimized
-    Indicates that video should be stabilized using the preview optimized stabilization algorithm. Preview stabilization is a low latency and low power algorithm which is supported only on connections which either have an associated preview layer or have a preview-sized VideoDataOutput.
- @constant AVCaptureVideoStabilizationModeCinematicExtendedEnhanced
-    Indicates that the video should be stabilized using the enhanced extended cinematic stabilization algorithm. Enhanced extended cinematic has a reduced field of view compared to extended cinematic, without any noticeable increase in latency, and it yields improved stability. It is recommended to use identical or similar min and max frame durations in conjunction with this mode.
- @constant AVCaptureVideoStabilizationModeAuto
-    Indicates that the most appropriate video stabilization mode for the device and format should be chosen.
- */
+/// Constants indicating the modes of video stabilization supported by the device's format.
 typedef NS_ENUM(NSInteger, AVCaptureVideoStabilizationMode) {
+    /// Indicates that video should not be stabilized.
     AVCaptureVideoStabilizationModeOff       = 0,
+    /// Indicates that video should be stabilized using the standard video stabilization algorithm introduced with iOS 5.0. Standard video stabilization has a reduced field of view. Enabling video stabilization may introduce additional latency into the video capture pipeline.
     AVCaptureVideoStabilizationModeStandard  = 1,
+    /// Indicates that video should be stabilized using the cinematic stabilization algorithm for more dramatic results. Cinematic video stabilization has a reduced field of view compared to standard video stabilization. Enabling cinematic video stabilization introduces much more latency into the video capture pipeline than standard video stabilization and consumes significantly more system memory. Use narrow or identical min and max frame durations in conjunction with this mode.
     AVCaptureVideoStabilizationModeCinematic = 2,
+    /// Indicates that the video should be stabilized using the extended cinematic stabilization algorithm. Enabling extended cinematic stabilization introduces longer latency into the video capture pipeline compared to the ``AVCaptureVideoStabilizationModeCinematic`` and consumes more memory, but yields improved stability. It is recommended to use identical or similar min and max frame durations in conjunction with this mode. Cinematic extended mode is face aware when enabled on a front-facing ultra wide camera on iPhone, and prioritizes stabilization of the subject of the frame rather than the background.
     AVCaptureVideoStabilizationModeCinematicExtended API_AVAILABLE(ios(13.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) = 3,
+    /// Indicates that video should be stabilized using the preview optimized stabilization algorithm. Preview stabilization is a low latency and low power algorithm which is supported only on connections which either have an associated preview layer or have a preview-sized ``AVCaptureVideoDataOutput``.
     AVCaptureVideoStabilizationModePreviewOptimized API_AVAILABLE(ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) = 4,
+    /// Indicates that the video should be stabilized using the enhanced extended cinematic stabilization algorithm. Enhanced extended cinematic has a reduced field of view compared to extended cinematic, without any noticeable increase in latency, and it yields improved stability. It is recommended to use identical or similar min and max frame durations in conjunction with this mode. Cinematic extended enhanced mode is face aware when enabled on a front-facing ultra wide camera on iPhone, and prioritizes stabilization of the subject of the frame rather than the background.
     AVCaptureVideoStabilizationModeCinematicExtendedEnhanced API_AVAILABLE(ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAILABLE(macos, visionos) = 5,
+    /// Indicates that video should be stabilized using the low latency stabilization algorithm. Low Latency stabilization has a reduced field of view. Enabling low latency stabilization introduces no additional latency into the video capture pipeline.
+    AVCaptureVideoStabilizationModeLowLatency API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) = 6,
+    /// Indicates that the most appropriate video stabilization mode for the device and format should be chosen.
     AVCaptureVideoStabilizationModeAuto      = -1,
 } API_AVAILABLE(ios(8.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(macos, visionos) API_UNAVAILABLE(watchos);
 
@@ -3326,7 +3586,7 @@ API_AVAILABLE(macos(10.7), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILA
  */
 @property(nonatomic, readonly, getter=isCenterStageSupported) BOOL centerStageSupported API_AVAILABLE(macos(12.3), ios(14.5), macCatalyst(14.5), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
 
-/*
+/*!
  @property videoMinZoomFactorForCenterStage
  @abstract
     Indicates the minimum zoom factor available for the AVCaptureDevice's videoZoomFactor property when centerStageActive is YES.
@@ -3489,6 +3749,122 @@ API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAIL
 
 @end
 
+API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (AVCaptureDeviceFormatCinematicVideoSupport)
+
+/// Indicates whether the format supports Cinematic Video capture.
+///
+///This property returns `true` if the format supports Cinematic Video that produces a controllable, simulated depth of field and adds beautiful focus transitions for a cinema-grade look.
+@property(nonatomic, readonly, getter=isCinematicVideoCaptureSupported) BOOL cinematicVideoCaptureSupported API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Default shallow depth of field simulated aperture.
+///
+/// This property return a non-zero value on devices that support the shallow depth of field effect.
+@property(nonatomic, readonly) float defaultSimulatedAperture API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Minimum supported shallow depth of field simulated aperture.
+///
+/// On devices that do not support changing the simulated aperture value, this returns a value of `0`.
+@property(nonatomic, readonly) float minSimulatedAperture API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Maximum supported shallow depth of field simulated aperture.
+///
+/// On devices that do not support changing the simulated aperture value, this returns a value of `0`.
+@property(nonatomic, readonly) float maxSimulatedAperture API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Indicates the minimum zoom factor available for the ``AVCaptureDevice/videoZoomFactor`` property when Cinematic Video capture is enabled on the device input.
+///
+/// Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
+@property(nonatomic, readonly) CGFloat videoMinZoomFactorForCinematicVideo API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Indicates the maximum zoom factor available for the ``AVCaptureDevice/videoZoomFactor`` property when Cinematic Video capture is enabled on the device input.
+///
+/// Devices support a limited zoom range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `1.0`.
+@property(nonatomic, readonly) CGFloat videoMaxZoomFactorForCinematicVideo API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Indicates the minimum / maximum frame rates available when Cinematic Video capture is enabled on the device input.
+///
+/// Devices may support a limited frame rate range when Cinematic Video capture is active. If this device format does not support Cinematic Video capture, this property returns `nil`.
+@property(nonatomic, readonly, nullable) AVFrameRateRange *videoFrameRateRangeForCinematicVideo API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (DynamicAspectRatio)
+
+/// Indicates the supported aspect ratios for the device format.
+///
+/// An array that describes the aspect ratios that are supported for this format. If this device format does not support dynamic aspect ratio, this property returns an empty array.
+@property(readonly, copy) NSArray<AVCaptureAspectRatio> *supportedDynamicAspectRatios;
+
+/// Indicates the horizontal field of view for an aspect ratio, either uncorrected or corrected for geometric distortion.
+///
+/// A float indicating the field of view for the corresponding ``AVCaptureAspectRatio``. Set ``AVCaptureDevice/geometricDistortionCorrected`` to `true` to receive the field of view corrected for geometric distortion. If this device format does not support dynamic aspect ratio, this function returns `0`.
+- (float)videoFieldOfViewForAspectRatio:(AVCaptureAspectRatio)aspectRatio geometricDistortionCorrected:(BOOL)geometricDistortionCorrected NS_SWIFT_NAME(videoFieldOfView(for:geometricDistortionCorrected:));
+
+@end
+
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (AVCaptureDeviceFormatSmartFraming)
+
+/// Returns `true` if smart framing is supported by the current format.
+///
+/// An ultra wide camera device that supports dynamic aspect ratio configuration may also support "smart framing monitoring" on particular formats.
+@property(nonatomic, readonly, getter=isSmartFramingSupported) BOOL smartFramingSupported;
+
+@end
+
+API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDeviceFormat (CameraLensSmudgeDetection)
+
+/// Whether camera lens smudge detection is supported.
+///
+/// This property returns `true` if the session's current configuration supports lens smudge detection. When switching cameras or formats, this property may change. When this property changes from `true` to `false`, ``AVCaptureDevice/cameraLensSmudgeDetectionEnabled`` also reverts to `false`. If you opt in for lens smudge detection and then change configurations, you should set ``AVCaptureDevice/cameraLensSmudgeDetectionEnabled`` to `true` again.
+@property(nonatomic, readonly, getter=isCameraLensSmudgeDetectionSupported) BOOL cameraLensSmudgeDetectionSupported API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+@end
+
+API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
+@interface AVCaptureDevice (CameraLensSmudgeDetection)
+
+/// Specify whether to enable camera lens smudge detection, and the interval time between each run of detections.
+///
+/// - Parameter cameraLensSmudgeDetectionEnabled: Specify whether camera lens smudge detection should be enabled.
+/// - Parameter detectionInterval: The detection running interval if detection is enabled.
+///
+/// Each run of detection processes frames over a short period, and produces one detection result. Use `detectionInterval` to specify the interval time between each run of detections. For example, when ``cameraLensSmudgeDetectionEnabled`` is set to `true` and `detectionInterval` is set to 1 minute, detection runs once per minute, and updates ``AVCaptureCameraLensSmudgeDetectionStatus``. If `detectionInterval` is set to ``kCMTimeInvalid``, detection runs only once after the session starts. If `detectionInterval` is set to ``kCMTimeZero``, detection runs continuously.
+///
+/// ``AVCaptureDevice`` throws an `NSInvalidArgumentException` if the ``AVCaptureDeviceFormat/cameraLensSmudgeDetectionSupported`` property on the current active format returns `false`. Enabling detection requires a lengthy reconfiguration of the capture render pipeline, so you should enable detection before calling ``AVCaptureSession/startRunning`` or within ``AVCaptureSession/beginConfiguration`` and ``AVCaptureSession/commitConfiguration`` while running.
+- (void)setCameraLensSmudgeDetectionEnabled:(BOOL)cameraLensSmudgeDetectionEnabled detectionInterval:(CMTime)detectionInterval API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Whether camera lens smudge detection is enabled.
+///
+/// You enable lens smudge detection by calling ``setCameraLensSmudgeDetectionEnabled:detectionInterval:``. By default, this property is returns `false`.
+@property(nonatomic, readonly, getter=isCameraLensSmudgeDetectionEnabled) BOOL cameraLensSmudgeDetectionEnabled API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// The camera lens smudge detection interval.
+///
+/// ``cameraLensSmudgeDetectionInterval`` is set by calling ``setCameraLensSmudgeDetectionEnabled:detectionInterval:``. By default, this property returns `kCMTimeInvalid`.
+@property(nonatomic, readonly) CMTime cameraLensSmudgeDetectionInterval API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// Constants indicating the current camera lens smudge detection status.
+typedef NS_ENUM(NSInteger, AVCaptureCameraLensSmudgeDetectionStatus) {
+    /// Indicates that the detection is not enabled.
+    AVCaptureCameraLensSmudgeDetectionStatusDisabled            = 0,
+    /// Indicates that the most recent detection found no smudge on the camera lens.
+    AVCaptureCameraLensSmudgeDetectionStatusSmudgeNotDetected   = 1,
+    /// Indicates that the most recent detection found the camera lens to be smudged.
+    AVCaptureCameraLensSmudgeDetectionStatusSmudged             = 2,
+    /// Indicates that the detection result has not settled, commonly caused by excessive camera movement or the content of the scene.
+    AVCaptureCameraLensSmudgeDetectionStatusUnknown             = 3,
+} API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// A value specifying the status of camera lens smudge detection.
+///
+/// During initial detection execution, ``cameraLensSmudgeDetectionStatus`` returns ``AVCaptureCameraLensSmudgeDetectionStatusUnknown`` until the detection result settles. Once a detection result is produced, ``cameraLensSmudgeDetectionStatus`` returns the most recent detection result. This property can be key-value observed.
+@property(nonatomic, readonly) AVCaptureCameraLensSmudgeDetectionStatus cameraLensSmudgeDetectionStatus API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+@end
 
 #pragma mark - AVCaptureDeviceInputSource
 

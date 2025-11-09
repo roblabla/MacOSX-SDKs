@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/WebInspector.framework/Versions/A/WebInspector'
-current-version: 621.2.5
+current-version: 622.1.22
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromRWIDebuggerAvailability, _RWIAutomationAvailabilityFromString, 
@@ -35,9 +35,10 @@ exports:
                        RWIProtocolDOMDomainEventDispatcher, RWIProtocolDOMEventListener, 
                        RWIProtocolDOMFlexOverlayConfig, RWIProtocolDOMGridOverlayConfig, 
                        RWIProtocolDOMHighlightConfig, RWIProtocolDOMMediaStats, RWIProtocolDOMNode, 
-                       RWIProtocolDOMRGBAColor, RWIProtocolDOMStorageDomainEventDispatcher, 
-                       RWIProtocolDOMStorageStorageId, RWIProtocolDOMStyleable, RWIProtocolDOMVideoColorSpace, 
-                       RWIProtocolDOMVideoMediaStats, RWIProtocolDOMVideoPlaybackQuality, 
+                       RWIProtocolDOMRGBAColor, RWIProtocolDOMSpatialVideoMetadata, 
+                       RWIProtocolDOMStorageDomainEventDispatcher, RWIProtocolDOMStorageStorageId, 
+                       RWIProtocolDOMStyleable, RWIProtocolDOMVideoColorSpace, RWIProtocolDOMVideoMediaStats, 
+                       RWIProtocolDOMVideoPlaybackQuality, RWIProtocolDOMVideoProjectionMetadata, 
                        RWIProtocolDOMViewportSize, RWIProtocolDebuggerAssertPauseReason, 
                        RWIProtocolDebuggerBreakpointAction, RWIProtocolDebuggerBreakpointOptions, 
                        RWIProtocolDebuggerBreakpointPauseReason, RWIProtocolDebuggerCSPViolationPauseReason, 

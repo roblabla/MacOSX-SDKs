@@ -975,14 +975,12 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0))
 
 -(instancetype) init NS_UNAVAILABLE;
 
-/*!
- @brief `isUtility` represents images that are not necessarily of poor image quality but may not have memorable or exciting content. `isUtility` can be true or false.
- */
+/// A Boolean value that represents images that are not necessarily of poor image quality, but may not have memorable or exciting content.
 @property (readonly, nonatomic, assign) BOOL isUtility;
 
-/*!
- @brief A score which incorporates aesthetic score, failure score and utility labels. `overallScore` is within the range [-1, 1] where 1 is most desirable and -1 is not desirable.
- */
+/// A score which incorporates aesthetic score, failure score, and utility labels.
+///
+/// This returns a value within the range of `-1` and `1`, where `-1` is least desirable and `1` is most desirable.
 @property (readonly, nonatomic, assign) float overallScore;
 
 @end

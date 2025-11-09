@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-	Copyright © 2023 Apple Inc. All rights reserved.
+	Copyright © 2023-2024 Apple Inc. All rights reserved.
  
 */
 
@@ -238,11 +238,12 @@ CM_EXPORT const CMTag kCMTagStereoInterpretationOrderReversed CF_REFINED_FOR_SWI
 
 /*!
 	@abstract Constants used with kCMTagCategory_ProjectionType to signal the nature of a video projection carried in a buffer or channel.
-	@discussion A video projection can be one of several types. Examples include 360 degree equirectangular, 180 degree half equirectangular, or a fisheye.  A CMTag having a CMTagCategory of kCMTagCategory_ProjectionType has a value that is an OSType indicating the kind of projection using a kCMProjectionType_* constant.  The kCMProjectionType_Rectangular projection type can signal that there is no projection other than the default 2D view. This is provided so it is possible to still signal a kCMTagCategory_ProjectionType CMTag but indicates it has no effect. If a kCMTagCategory_ProjectionType CMTag is not signaled, a rectangular projection is implied.  The kCMTagCategory_ProjectionType tag may be associated with other tags if projection related parameters are also signaled. What is carried will be defined for the specific type of projection.
+	@discussion A video projection can be one of several types. Examples include 360 degree equirectangular, 180 degree half equirectangular, or a fisheye.  A CMTag having a CMTagCategory of kCMTagCategory_ProjectionType has a value that is an OSType indicating the kind of projection using a kCMProjectionType_* constant.  The kCMProjectionType_Rectangular projection type can signal that there is no projection other than the default 2D view. This is provided so it is possible to still signal a kCMTagCategory_ProjectionType CMTag but indicates it has no effect. 	The kCMProjectionType_ParametricImmersive projection type indicates a projection described mathematically by a model of camera lens calibration parameters. Parameters may be found in lens calibration metadata in kCMFormatDescriptionExtension_CameraCalibrationDataLensCollection with algorithm_kind parametric. If a kCMTagCategory_ProjectionType CMTag is not signaled, a rectangular projection is implied.  The kCMTagCategory_ProjectionType tag may be associated with other tags if projection related parameters are also signaled. What is carried will be defined for the specific type of projection.
 	@constant kCMProjectionType_Rectangular There is no projection.This is a traditional 2D texture. Default if no projection type tag is signaled.
 	@constant kCMProjectionType_Equirectangular The projection is a 360 degree equirectangular projection.
 	@constant kCMProjectionType_HalfEquirectangular The projection is a 180 degree equirectangular projection.
-	@constant kCMProjectionType_Fisheye The projection is a fisheye projection.
+	@constant kCMProjectionType_Fisheye This projection is used by Apple Immersive Video (AIV) video and requires AIME metadata to provide the projection details.  Only use this projection when working with AIV content.
+	@constant kCMProjectionType_ParametricImmersive The projection is defined with a parametric description of lens distortion and image dewarping parameters. 
  */
 typedef CF_ENUM(uint64_t, CMProjectionType)
 {
@@ -250,6 +251,7 @@ typedef CF_ENUM(uint64_t, CMProjectionType)
 	kCMProjectionType_Equirectangular 		= 'equi',
 	kCMProjectionType_HalfEquirectangular 	= 'hequ',
 	kCMProjectionType_Fisheye 				= 'fish',
+	kCMProjectionType_ParametricImmersive API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0))	= 'prim',
 } API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
 /*!
@@ -277,11 +279,18 @@ CM_EXPORT const CMTag kCMTagProjectionTypeHalfEquirectangular
  */
 CM_EXPORT const CMTag kCMTagProjectionTypeFisheye CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
+/*!
+	@constant kCMTagProjectionTypeParametricImmersive
+	@abstract A CMTag of category kCMTagCategory_ProjectionType and the value kCMTagProjectionType_ParametricImmersive (OSType).
+ */
+CM_EXPORT const CMTag kCMTagProjectionTypeParametricImmersive CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+
 #pragma mark - PackingType data types and convenience tags
 
 /*!
 	@abstract Constants used with kCMTagCategory_PackingType to signal the nature of any packing applied in a buffer or channel.
-	@discussion A video packing can be one of several types including frame-packing for stereo views or texture atlasing. A CMTag having a CMTagCategory of kCMTagCategory_ProjectionType has a value that is an OSType indicating the kind of packing using a kCMPackingType_* constant.  Examples of frame-packing include side-by-side and over-under packing, There may be related CMTags if a kind of packing requires additional parameters. The requirements will be documented with the specific kind of packing.
+	@discussion A video packing can be one of several types including frame-packing for stereo views or texture atlasing. A CMTag having a CMTagCategory of kCMTagCategory_PackingType has a value that is an OSType indicating the kind of packing using a kCMPackingType_* constant.  Examples of frame-packing include side-by-side and over-under packing, There may be related CMTags if a kind of packing requires additional parameters. The requirements will be documented with the specific kind of packing.
 	@constant kCMPackingType_None There is no packing. This is a traditional 2D texture. For this case no packing tag needs to be used.
 	@constant kCMPackingType_SideBySide The packing uses a horizontal side-by-side packing of two views. By default, the left stereo eye view is to the left of the right stereo eye view. If the view order is reversed, indicated by kCMTagCategory_StereoViewInterpretation/kCMStereoViewInterpretation_StereoOrderReversed, then the right view is to the left of the left stereo view.
 	@constant kCMPackingType_OverUnder The packing uses a vertical over-under (or top-and-bottom) packing of two views. By default, the left stereo eye view is above the right stereo eye view. If the view order is reversed, indicated by kCMTagCategory_StereoViewInterpretation/kCMStereoViewInterpretation_StereoOrderReversed, then the right view is above the left stereo view.

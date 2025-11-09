@@ -59,6 +59,20 @@ APPKIT_API_UNAVAILABLE_BEGIN_MACCATALYST
 
 @property BOOL allowsWritingTools API_AVAILABLE(macos(15.2)); // Default is YES. Configures its field editor to work with Writing Tools.
 @property BOOL allowsWritingToolsAffordance API_AVAILABLE(macos(15.4)); // Default is NO.
+
+/* An array of NSStrings that will be animated to cycle through one by one when the textField is first responder. No animation happend when there is only string in the array, or when text field is not first responder. The text field's placeholderString property points to the first string in placeholderStrings.
+ */
+@property (copy) NSArray<NSString *> *placeholderStrings API_AVAILABLE(macos(26.0));
+
+/* An array of NSStrings that will be animated to cycle through one by one when the textField is first responder. No animation happend when there is only string in the array, or when text field is not first responder. The text field's placeholderString property points to the first string in placeholderStrings.
+ */
+@property (copy) NSArray<NSAttributedString *> *placeholderAttributedStrings API_AVAILABLE(macos(26.0));
+
+/// Specifies the behavior for resolving ``NSTextAlignment.natural`` to the visual alignment.
+///
+/// When set to ``true``, the resolved visual alignment is determined by the resolved base writing direction; otherwise, it is using the user’s preferred language.
+/// The default value is ``false``.
+@property BOOL resolvesNaturalAlignmentWithBaseWritingDirection API_AVAILABLE(macos(26.0));
 @end
 
 #pragma mark NSTextField NSTouchBar Properties

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-upcoming-feature StrictConcurrency -enable-bare-slash-regex -user-module-version 631 -module-name ARKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftARKit -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 746.0.0.0.1 -module-name ARKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import ARKit
 import Swift
 import _Concurrency
@@ -86,15 +86,23 @@ extension ARKit.ARPlaneGeometry {
 }
 @available(iOS 12.0, *)
 extension ARKit.ARSCNView {
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc @_Concurrency.MainActor @preconcurrency public func unprojectPoint(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.simd_float4x4) -> simd.simd_float3?
+  #endif
 }
 @available(iOS 14.0, *)
 extension ARKit.ARGeoAnchor {
-  @nonobjc convenience public init(coordinate: CoreLocation.CLLocationCoordinate2D, altitude: CoreLocation.CLLocationDistance? = nil)
-  @nonobjc convenience public init(name: Swift.String, coordinate: CoreLocation.CLLocationCoordinate2D, altitude: CoreLocation.CLLocationDistance? = nil)
-  @nonobjc public var altitude: CoreLocation.CLLocationDistance? {
+  #if compiler(>=5.3) && $NonescapableTypes
+  @nonobjc convenience public init(coordinate: _LocationEssentials.CLLocationCoordinate2D, altitude: _LocationEssentials.CLLocationDistance? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @nonobjc convenience public init(name: Swift.String, coordinate: _LocationEssentials.CLLocationCoordinate2D, altitude: _LocationEssentials.CLLocationDistance? = nil)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @nonobjc public var altitude: _LocationEssentials.CLLocationDistance? {
     get
   }
+  #endif
 }
 @available(iOS 13.0, *)
 extension ARKit.ARSkeletonDefinition {
@@ -111,15 +119,21 @@ extension ARKit.ARSkeleton3D {
   @nonobjc public var jointLocalTransforms: [simd.simd_float4x4] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func modelTransform(for jointName: ARKit.ARSkeleton.JointName) -> simd.simd_float4x4?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func localTransform(for jointName: ARKit.ARSkeleton.JointName) -> simd.simd_float4x4?
+  #endif
 }
 @available(iOS 13.0, *)
 extension ARKit.ARSkeleton2D {
   @nonobjc public var jointLandmarks: [simd.simd_float2] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @nonobjc public func landmark(for jointName: ARKit.ARSkeleton.JointName) -> simd.simd_float2?
+  #endif
 }
 @available(iOS 11.0, *)
 extension ARKit.ARFaceGeometry {
@@ -155,8 +169,10 @@ extension ARKit.ARCamera {
   public var trackingState: ARKit.ARCamera.TrackingState {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 12.0, *)
   @nonobjc public func unprojectPoint(_ point: CoreFoundation.CGPoint, ontoPlane planeTransform: simd.simd_float4x4, orientation: UIKit.UIInterfaceOrientation, viewportSize: CoreFoundation.CGSize) -> simd.simd_float3?
+  #endif
 }
 @available(iOS 16.0, *)
 extension ARKit.ARCamera.TrackingState : Swift.Equatable {

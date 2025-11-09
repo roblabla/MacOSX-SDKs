@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 221.5.1
+current-version: 241
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -138,6 +138,7 @@ exports:
                        DMFCommunicationPolicyMonitor, DMFConfigurationOrganization, 
                        DMFConfigurationSource, DMFConfigurationSourceClient, DMFConnection, 
                        DMFControlGroupIdentifier, DMFControlSessionIdentifier, DMFCreateConfigurationOrganizationRequest, 
+                       DMFDDMStartManagingAppRequest, DMFDDMStartManagingAppResultObject, 
                        DMFDeactivateConfigurationOrganizationRequest, DMFDeleteUserRequest, 
                        DMFDevice, DMFDevicePropertiesResultObject, DMFDevicePropertyNotificationSubscriptionRequest, 
                        DMFDisableLostModeRequest, DMFEchoRequest, DMFEchoResultObject, 
@@ -214,14 +215,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 11.5
+current-version: 15
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s7Element8Catalyst21CATAsyncStreamVendingPTl', '_$s7Element8Catalyst22CATAsyncPromiseReadingPTl', 
                        '_$s7Element8Catalyst22CATAsyncPromiseWritingPTl', '_$s8Catalyst13CATSerializerC14cancelAllTasksyyF', 
-                       '_$s8Catalyst13CATSerializerC7enqueue19respectingCancelAll_ScTyxs5Error_pGSb_xyYaYbKcts8SendableRzlF', 
+                       '_$s8Catalyst13CATSerializerC20cancelAllQueuedTasksyyF', '_$s8Catalyst13CATSerializerC7enqueue19respectingCancelAll_ScTyxs5Error_pGSb_xyYaYbKcts8SendableRzlF', 
                        '_$s8Catalyst13CATSerializerCACycfC', '_$s8Catalyst13CATSerializerCACycfCTj', 
                        '_$s8Catalyst13CATSerializerCACycfCTq', '_$s8Catalyst13CATSerializerCACycfc', 
                        '_$s8Catalyst13CATSerializerCMa', '_$s8Catalyst13CATSerializerCMm', 

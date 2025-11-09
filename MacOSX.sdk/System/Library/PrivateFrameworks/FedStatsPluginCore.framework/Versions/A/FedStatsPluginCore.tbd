@@ -8,10 +8,11 @@ exports:
                        _FedStatsPluginErrorDomain, _FedStatsPluginSQLQueryValidatorAllowListFilename, 
                        _FedStatsPluginSQLQueryValidatorBlockListFilename, _kFedStatsCohortMissingField, 
                        _kFedStatsCohortQueryLengthCappedFieldPad, _kFedStatsDataCohortAllowList, 
-                       _kFedStatsDataCohortSafetyDataVersionCap, _kFedStatsDataCohortValueAllowList, 
-                       _kFedStatsDataCohortValueBlockList, _kFedStatsDataEncoderCollectionKeyPrefix, 
-                       _kFedStatsPluginExperimentRetentionPeriod, _kFedStatsPluginMaskingDataSignifierKey, 
-                       _kFedStatsPluginUserDefaultsDomain, _kFedStatsPluginUserDefaultsKeyExperimentList ]
+                       _kFedStatsDataCohortSafetyDataVersionCap, _kFedStatsDataCohortUseCaseIDCap, 
+                       _kFedStatsDataCohortValueAllowList, _kFedStatsDataCohortValueBlockList, 
+                       _kFedStatsDataEncoderCollectionKeyPrefix, _kFedStatsPluginExperimentRetentionPeriod, 
+                       _kFedStatsPluginMaskingDataSignifierKey, _kFedStatsPluginUserDefaultsDomain, 
+                       _kFedStatsPluginUserDefaultsKeyExperimentList ]
     objc-classes:    [ FedStatsCohortFactory, FedStatsCohortGeohash, FedStatsCohortQueryDeviceType, 
                        FedStatsCohortQueryFieldGeneric, FedStatsCohortQueryInstalledApps, 
                        FedStatsCohortQueryInstalledAppsMedia, FedStatsCohortQueryInstalledAppsPhone, 

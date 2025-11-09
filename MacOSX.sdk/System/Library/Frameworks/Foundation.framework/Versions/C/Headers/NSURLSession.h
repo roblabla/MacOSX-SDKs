@@ -860,6 +860,37 @@ API_AVAILABLE(macos(10.9), ios(7.0), watchos(2.0), tvos(9.0))
  */
 @property BOOL usesClassicLoadingMode API_AVAILABLE(macos(15.4), ios(18.4), watchos(11.4), tvos(18.4), visionos(2.4));
 
+/*
+ * Enables HTTP/3 0-RTT early data transmission of safe requests (GET or HEAD
+ * requests).
+ *
+ * WARNING: Inclusion in TLS early data changes the security guarantees offered
+ * by TLS.
+ *
+ * Requests sent in early data are not covered by anti-replay security
+ * protections. Early data must be idempotent and the impact of adversarial
+ * replays must be carefully evaluated, as the data may be replayed. Early data
+ * also does not provide full forward secrecy; data transmitted is more
+ * susceptible to data breach and security compromise of the server, even if
+ * the breach happens after the data was transmitted.
+ *
+ * See Section 8 of RFC8446 for more details.
+ *
+ * https://datatracker.ietf.org/doc/html/rfc8446#section-8
+ *
+ * See RFC8470 for additional discussion and security considerations.
+ *
+ * https://datatracker.ietf.org/doc/html/rfc8470
+ *
+ * If these risks are acceptable for your use case, set this property to YES.
+ * If unsure, NO is the safest option.
+ *
+ * NOTE: Not supported in the classic loading mode.
+ *
+ * Defaults to NO.
+ */
+@property BOOL enablesEarlyData API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
 
 - (instancetype)init API_DEPRECATED("Please use NSURLSessionConfiguration.defaultSessionConfiguration or other class methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));
 + (instancetype)new API_DEPRECATED("Please use NSURLSessionConfiguration.defaultSessionConfiguration or other class methods to create instances", macos(10.9,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0));

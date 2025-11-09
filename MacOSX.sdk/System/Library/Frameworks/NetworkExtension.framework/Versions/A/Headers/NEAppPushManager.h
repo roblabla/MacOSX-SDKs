@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2021 Apple Inc.
+ * Copyright (c) 2020-2021, 2025 Apple Inc.
  * All rights reserved.
  */
 
@@ -83,17 +83,26 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 
 /*!
  * @property matchSSIDs
- * @discussion An array of Wi-Fi SSID strings. If the SSID string of current Wi-Fi network matches with one of these strings then the NEAppPushProvider
- *	is started. The upper limit of number of SSIDs is 10.
+ * @discussion An array of Wi-Fi SSID strings. If the SSID string of current Wi-Fi network matches with one of these strings and the Wi-Fi network is the primary route
+ *  on the device then the NEAppPushProvider is started. The upper limit of number of SSIDs is 10.
  */
 @property (copy) NSArray<NSString *> *matchSSIDs API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property matchPrivateLTENetworks
- * @discussion An array of NEPrivateLTENetwork objects. If the properties of current private LTE network match with properties of one of these NEPrivateLTENetwork objects then the
- * NEAppPushProvider is started. The upper limit of number of private LTE networks is 10. For private LTE networks that are not band 48, the device must be supervised in order to perform the match
+ * @discussion An array of NEPrivateLTENetwork objects. If the properties of current private LTE network match with properties of one of these NEPrivateLTENetwork
+ *  objects and the private LTE network is the primary route on the device then the NEAppPushProvider is started. The upper limit of number of private LTE networks is 10.
+ *  For private LTE networks that are not band 48, the device must be supervised in order to perform the match
  */
 @property (copy) NSArray<NEPrivateLTENetwork *> *matchPrivateLTENetworks API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
+ * @property matchEthernet
+ * @discussion If set to YES NEAppPushProvider is started when iOS device is connected to an Ethernet network and the ethernet network is the primary route
+ *  on the device. NEAppPushProvider must determine viability of its functionality on the network. If the network does not support its operation it must call
+ *  [NEAppPushProvider unmatchEthernet:] method to stop itself.
+ */
+@property BOOL matchEthernet API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos, tvos, visionos);
 
 /*!
  * @property providerConfiguration

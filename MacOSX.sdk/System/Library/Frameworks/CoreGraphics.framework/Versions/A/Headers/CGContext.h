@@ -665,8 +665,9 @@ CG_EXTERN void CGContextSetRenderingIntent(CGContextRef cg_nullable c,
     API_AVAILABLE(macos(10.0), ios(2.0));
 
 /* Set target EDR headroom on a context to be used when rendering HDR content to the context.
-   Context 'c' has to be a bitmap context using either extended or HDR color space and
-   'headroom' has to be a value greater than 1.0f. Return true on success and false on failure */
+   The value of the 'headroom' will be adjusted as follows: (headroom < 0.0f) ? 0.0f : (headroom > 0.0f && headroom < 1.0f) ? 1.0f : headroom.
+   Please note that the headroom value of 0.0f means "headroom unknown" which prevents tone mapping.
+   Context 'c' needs to be a valid context. Return true on success and false on failure */
 
 CG_EXTERN bool CGContextSetEDRTargetHeadroom(CGContextRef __nonnull c, float headroom) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
@@ -698,6 +699,22 @@ CG_EXTERN void CGContextDrawTiledImage(CGContextRef cg_nullable c, CGRect rect,
    `c' applying the specified tone mapping method and options. See CGToneMapping.h for more info. Same as in CGContextDrawImage, the image is scaled, if necessary, to fit into `rect'. */
 
 CG_EXTERN bool CGContextDrawImageApplyingToneMapping(CGContextRef __nonnull c, CGRect r, CGImageRef image, CGToneMapping method, CFDictionaryRef __nullable options) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
+
+/* Return the CGContentToneMappingInfo for rendering HDR content in `context'. The
+   content tone mapping info is a gstate parameter which defines the method and method's
+   options performed when rendering HDR CGColors and CGImages.
+   Note that CGContextDrawImageApplyingToneMapping (described above) will override the
+   context's content tone mapping info. */
+
+CG_EXTERN CGContentToneMappingInfo CGContextGetContentToneMappingInfo(CGContextRef __nonnull c)
+    CF_REFINED_FOR_SWIFT
+    API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/* Set the content tone mapping info of `context' to `info'. */
+
+CG_EXTERN void CGContextSetContentToneMappingInfo(CGContextRef __nonnull c, CGContentToneMappingInfo info)
+    CF_REFINED_FOR_SWIFT
+    API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
 /* Return the interpolation quality for image rendering of `context'. The
    interpolation quality is a gstate parameter which controls the level of
@@ -882,15 +899,21 @@ CG_EXTERN CGContextRef cg_nullable CGContextRetain(CGContextRef cg_nullable c)
 CG_EXTERN void CGContextRelease(CGContextRef cg_nullable c)
     API_AVAILABLE(macos(10.0), ios(2.0));
 
-/* Flush all drawing to the destination. */
+/* Flush all drawings to the destination. */
 
 CG_EXTERN void CGContextFlush(CGContextRef cg_nullable c)
     API_AVAILABLE(macos(10.0), ios(2.0));
 
-/* Synchronized drawing. */
+/* Synchronize drawing. */
 
 CG_EXTERN void CGContextSynchronize(CGContextRef cg_nullable c)
     API_AVAILABLE(macos(10.0), ios(2.0));
+
+/* Synchronize destination attributes with the context. */
+
+CG_EXTERN void CGContextSynchronizeAttributes(CGContextRef c)
+  CF_SWIFT_NAME(CGContext.synchronizeAttributes(self:))
+  API_AVAILABLE(macos(26.0), ios(26.0));
 
 /** Antialiasing functions. **/
 

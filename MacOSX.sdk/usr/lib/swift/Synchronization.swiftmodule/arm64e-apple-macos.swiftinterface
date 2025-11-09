@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macosx15.5 -target-variant arm64e-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.1.2.1.2 -enable-builtin-module -module-name Synchronization
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macosx26.0 -target-variant arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSynchronization -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature RawLayout -enable-experimental-feature StaticExclusiveOnly -enable-experimental-feature Extern -user-module-version 6.2.0.17.15 -enable-builtin-module -module-name Synchronization
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -strict-memory-safety -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Builtin
 import Darwin
 import Swift
@@ -225,6 +225,22 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
     Double(bitPattern: UInt64.decodeAtomicRepresentation(representation))
   }
 }
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@frozen @_staticExclusiveOnly @safe public struct AtomicLazyReference<Instance> : ~Swift.Copyable where Instance : AnyObject {
+  @usableFromInline
+  internal let storage: Synchronization.Atomic<Swift.Unmanaged<Instance>?>
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @inlinable public init() {
+    storage = Atomic<Unmanaged<Instance>?>(nil)
+  }
+  @inlinable deinit {
+    if let unmanaged = storage.load(ordering: .acquiring) {
+      unmanaged.release()
+    }
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 @frozen @_staticExclusiveOnly public struct AtomicLazyReference<Instance> : ~Swift.Copyable where Instance : AnyObject {
   @usableFromInline
@@ -239,12 +255,15 @@ extension Swift.Double : Synchronization.AtomicRepresentable {
     }
   }
 }
+#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLazyReference {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public func storeIfNil(_ desired: consuming Instance) -> Instance
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public func load() -> Instance?
+  #endif
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.AtomicLazyReference : @unchecked Swift.Sendable where Instance : Swift.Sendable {
@@ -461,13 +480,18 @@ extension Synchronization.AtomicLoadOrdering {
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public protocol AtomicOptionalRepresentable : Synchronization.AtomicRepresentable {
   associatedtype AtomicOptionalRepresentation : Swift.BitwiseCopyable
+  #if compiler(>=5.3) && $NonescapableTypes
   static func encodeAtomicOptionalRepresentation(_ value: consuming Self?) -> Self.AtomicOptionalRepresentation
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   static func decodeAtomicOptionalRepresentation(_ representation: consuming Self.AtomicOptionalRepresentation) -> Self?
+  #endif
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.RawRepresentable where Self : Synchronization.AtomicOptionalRepresentable, Self.RawValue : Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Self.RawValue.AtomicOptionalRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Self?) -> Self.RawValue.AtomicOptionalRepresentation {
      
@@ -480,13 +504,17 @@ extension Swift.RawRepresentable where Self : Synchronization.AtomicOptionalRepr
 
     return RawValue.encodeAtomicOptionalRepresentation(nil)
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Self.RawValue.AtomicOptionalRepresentation) -> Self? {
     RawValue.decodeAtomicOptionalRepresentation(representation).flatMap {
       Self(rawValue: $0)
     }
   }
+  #endif
 }
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Optional : Synchronization.AtomicRepresentable where Wrapped : Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -500,6 +528,26 @@ extension Swift.Optional : Synchronization.AtomicRepresentable where Wrapped : S
     Wrapped.decodeAtomicOptionalRepresentation(representation)
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafePointer : @unsafe Synchronization.AtomicRepresentable where Pointee : ~Copyable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>) -> Swift.UnsafePointer<Pointee>.AtomicRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicRepresentation) -> Swift.UnsafePointer<Pointee> {
+    UnsafePointer<Pointee>(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )!
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafePointer : Synchronization.AtomicRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -517,23 +565,71 @@ extension Swift.UnsafePointer : Synchronization.AtomicRepresentable where Pointe
     )!
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
+extension Swift.UnsafePointer : @unsafe Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>?) -> Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafePointer<Pointee>? {
     UnsafePointer<Pointee>(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
+  #endif
 }
+#else
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafePointer<Pointee>?) -> Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafePointer<Pointee>? {
+    UnsafePointer<Pointee>(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )
+  }
+  #endif
+}
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeMutablePointer : @unsafe Synchronization.AtomicRepresentable where Pointee : ~Copyable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>) -> Swift.UnsafeMutablePointer<Pointee>.AtomicRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicRepresentation) -> Swift.UnsafeMutablePointer<Pointee> {
+    UnsafeMutablePointer<Pointee>(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )!
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutablePointer : Synchronization.AtomicRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -551,23 +647,71 @@ extension Swift.UnsafeMutablePointer : Synchronization.AtomicRepresentable where
     )!
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutablePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
+extension Swift.UnsafeMutablePointer : @unsafe Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>?) -> Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafeMutablePointer<Pointee>? {
     UnsafeMutablePointer<Pointee>(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
+  #endif
 }
+#else
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeMutablePointer : Synchronization.AtomicOptionalRepresentable where Pointee : ~Copyable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutablePointer<Pointee>?) -> Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutablePointer<Pointee>.AtomicOptionalRepresentation) -> Swift.UnsafeMutablePointer<Pointee>? {
+    UnsafeMutablePointer<Pointee>(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )
+  }
+  #endif
+}
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeRawPointer : @unsafe Synchronization.AtomicRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeRawPointer) -> Swift.UnsafeRawPointer.AtomicRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeRawPointer.AtomicRepresentation) -> Swift.UnsafeRawPointer {
+    UnsafeRawPointer(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )!
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeRawPointer : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -585,23 +729,71 @@ extension Swift.UnsafeRawPointer : Synchronization.AtomicRepresentable {
     )!
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeRawPointer : Synchronization.AtomicOptionalRepresentable {
+extension Swift.UnsafeRawPointer : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeRawPointer?) -> Swift.UnsafeRawPointer.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeRawPointer? {
     UnsafeRawPointer(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
+  #endif
 }
+#else
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeRawPointer : Synchronization.AtomicOptionalRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeRawPointer?) -> Swift.UnsafeRawPointer.AtomicOptionalRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeRawPointer? {
+    UnsafeRawPointer(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )
+  }
+  #endif
+}
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeMutableRawPointer : @unsafe Synchronization.AtomicRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutableRawPointer) -> Swift.UnsafeMutableRawPointer.AtomicRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutableRawPointer.AtomicRepresentation) -> Swift.UnsafeMutableRawPointer {
+    UnsafeMutableRawPointer(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )!
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableRawPointer : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -619,23 +811,71 @@ extension Swift.UnsafeMutableRawPointer : Synchronization.AtomicRepresentable {
     )!
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.UnsafeMutableRawPointer : Synchronization.AtomicOptionalRepresentable {
+extension Swift.UnsafeMutableRawPointer : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutableRawPointer?) -> Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeMutableRawPointer? {
     UnsafeMutableRawPointer(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
+  #endif
 }
+#else
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeMutableRawPointer : Synchronization.AtomicOptionalRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.UnsafeMutableRawPointer?) -> Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.UnsafeMutableRawPointer.AtomicOptionalRepresentation) -> Swift.UnsafeMutableRawPointer? {
+    UnsafeMutableRawPointer(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )
+  }
+  #endif
+}
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.Unmanaged : @unsafe Synchronization.AtomicRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.Unmanaged<Instance>) -> Swift.Unmanaged<Instance>.AtomicRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value.toOpaque())
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.Unmanaged<Instance>.AtomicRepresentation) -> Swift.Unmanaged<Instance> {
+    Unmanaged<Instance>.fromOpaque(
+      UnsafeRawPointer.decodeAtomicRepresentation(representation)
+    )
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.Unmanaged : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -653,10 +893,13 @@ extension Swift.Unmanaged : Synchronization.AtomicRepresentable {
     )
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.Unmanaged : Synchronization.AtomicOptionalRepresentable {
+extension Swift.Unmanaged : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.Unmanaged<Instance>?) -> Swift.Unmanaged<Instance>.AtomicOptionalRepresentation {
      
@@ -671,13 +914,66 @@ extension Swift.Unmanaged : Synchronization.AtomicOptionalRepresentable {
 
     return Int.AtomicRepresentation(0._value)
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.Unmanaged<Instance>.AtomicOptionalRepresentation) -> Swift.Unmanaged<Instance>? {
     UnsafeRawPointer.decodeAtomicOptionalRepresentation(representation).map {
       Unmanaged.fromOpaque($0)
     }
   }
+  #endif
 }
+#else
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.Unmanaged : Synchronization.AtomicOptionalRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.Unmanaged<Instance>?) -> Swift.Unmanaged<Instance>.AtomicOptionalRepresentation {
+     
+     
+     
+
+    if let unmanaged = value {
+      return Int.encodeAtomicRepresentation(
+        Int(bitPattern: unmanaged.toOpaque())
+      )
+    }
+
+    return Int.AtomicRepresentation(0._value)
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.Unmanaged<Instance>.AtomicOptionalRepresentation) -> Swift.Unmanaged<Instance>? {
+    UnsafeRawPointer.decodeAtomicOptionalRepresentation(representation).map {
+      Unmanaged.fromOpaque($0)
+    }
+  }
+  #endif
+}
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.OpaquePointer : @unsafe Synchronization.AtomicRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Swift.Int.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.OpaquePointer) -> Swift.OpaquePointer.AtomicRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.OpaquePointer.AtomicRepresentation) -> Swift.OpaquePointer {
+    OpaquePointer(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )!
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.OpaquePointer : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -695,23 +991,52 @@ extension Swift.OpaquePointer : Synchronization.AtomicRepresentable {
     )!
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
-extension Swift.OpaquePointer : Synchronization.AtomicOptionalRepresentable {
+extension Swift.OpaquePointer : @unsafe Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.OpaquePointer?) -> Swift.OpaquePointer.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
       Int(bitPattern: value)
     )
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.OpaquePointer.AtomicOptionalRepresentation) -> Swift.OpaquePointer? {
     OpaquePointer(
       bitPattern: Int.decodeAtomicRepresentation(representation)
     )
   }
+  #endif
 }
+#else
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.OpaquePointer : Synchronization.AtomicOptionalRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.OpaquePointer?) -> Swift.OpaquePointer.AtomicOptionalRepresentation {
+    Int.encodeAtomicRepresentation(
+      Int(bitPattern: value)
+    )
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.OpaquePointer.AtomicOptionalRepresentation) -> Swift.OpaquePointer? {
+    OpaquePointer(
+      bitPattern: Int.decodeAtomicRepresentation(representation)
+    )
+  }
+  #endif
+}
+#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.ObjectIdentifier : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -735,6 +1060,7 @@ extension Swift.ObjectIdentifier : Synchronization.AtomicRepresentable {
 extension Swift.ObjectIdentifier : Synchronization.AtomicOptionalRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   public typealias AtomicOptionalRepresentation = Swift.Int.AtomicRepresentation
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func encodeAtomicOptionalRepresentation(_ value: consuming Swift.ObjectIdentifier?) -> Swift.ObjectIdentifier.AtomicOptionalRepresentation {
     Int.encodeAtomicRepresentation(
@@ -743,6 +1069,8 @@ extension Swift.ObjectIdentifier : Synchronization.AtomicOptionalRepresentable {
       unsafeBitCast(value, to: Int.self)
     )
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public static func decodeAtomicOptionalRepresentation(_ representation: consuming Swift.ObjectIdentifier.AtomicOptionalRepresentation) -> Swift.ObjectIdentifier? {
      
@@ -751,7 +1079,35 @@ extension Swift.ObjectIdentifier : Synchronization.AtomicOptionalRepresentable {
       to: ObjectIdentifier?.self
     )
   }
+  #endif
 }
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeBufferPointer : @unsafe Synchronization.AtomicRepresentable where Element : ~Copyable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeBufferPointer<Element>) -> Swift.UnsafeBufferPointer<Element>.AtomicRepresentation {
+    let valueCopy = value
+
+    return WordPair.encodeAtomicRepresentation(
+      WordPair(
+        first: UInt(bitPattern: valueCopy.baseAddress),
+        second: UInt(truncatingIfNeeded: valueCopy.count)
+      )
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeBufferPointer<Element>.AtomicRepresentation) -> Swift.UnsafeBufferPointer<Element> {
+    let wp = WordPair.decodeAtomicRepresentation(representation)
+
+    return UnsafeBufferPointer<Element>(
+      start: UnsafePointer<Element>(bitPattern: wp.first),
+      count: Int(truncatingIfNeeded: wp.second)
+    )
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeBufferPointer : Synchronization.AtomicRepresentable where Element : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -777,6 +1133,34 @@ extension Swift.UnsafeBufferPointer : Synchronization.AtomicRepresentable where 
     )
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeMutableBufferPointer : @unsafe Synchronization.AtomicRepresentable where Element : ~Copyable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutableBufferPointer<Element>) -> Swift.UnsafeMutableBufferPointer<Element>.AtomicRepresentation {
+    let valueCopy = value
+
+    return WordPair.encodeAtomicRepresentation(
+      WordPair(
+        first: UInt(bitPattern: valueCopy.baseAddress),
+        second: UInt(truncatingIfNeeded: valueCopy.count)
+      )
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutableBufferPointer<Element>.AtomicRepresentation) -> Swift.UnsafeMutableBufferPointer<Element> {
+    let wp = WordPair.decodeAtomicRepresentation(representation)
+
+    return UnsafeMutableBufferPointer<Element>(
+      start: UnsafeMutablePointer<Element>(bitPattern: wp.first),
+      count: Int(truncatingIfNeeded: wp.second)
+    )
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableBufferPointer : Synchronization.AtomicRepresentable where Element : ~Copyable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -802,6 +1186,34 @@ extension Swift.UnsafeMutableBufferPointer : Synchronization.AtomicRepresentable
     )
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeRawBufferPointer : @unsafe Synchronization.AtomicRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeRawBufferPointer) -> Swift.UnsafeRawBufferPointer.AtomicRepresentation {
+    let valueCopy = value
+
+    return WordPair.encodeAtomicRepresentation(
+      WordPair(
+        first: UInt(bitPattern: valueCopy.baseAddress),
+        second: UInt(truncatingIfNeeded: valueCopy.count)
+      )
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeRawBufferPointer.AtomicRepresentation) -> Swift.UnsafeRawBufferPointer {
+    let wp = WordPair.decodeAtomicRepresentation(representation)
+
+    return UnsafeRawBufferPointer(
+      start: UnsafeRawPointer(bitPattern: wp.first),
+      count: Int(truncatingIfNeeded: wp.second)
+    )
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeRawBufferPointer : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -827,6 +1239,34 @@ extension Swift.UnsafeRawBufferPointer : Synchronization.AtomicRepresentable {
     )
   }
 }
+#endif
+#if compiler(>=5.3) && $MemorySafetyAttributes
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+extension Swift.UnsafeMutableRawBufferPointer : @unsafe Synchronization.AtomicRepresentable {
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  public typealias AtomicRepresentation = Synchronization.WordPair.AtomicRepresentation
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func encodeAtomicRepresentation(_ value: consuming Swift.UnsafeMutableRawBufferPointer) -> Swift.UnsafeMutableRawBufferPointer.AtomicRepresentation {
+    let valueCopy = value
+
+    return WordPair.encodeAtomicRepresentation(
+      WordPair(
+        first: UInt(bitPattern: valueCopy.baseAddress),
+        second: UInt(truncatingIfNeeded: valueCopy.count)
+      )
+    )
+  }
+  @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+  @_alwaysEmitIntoClient @_transparent public static func decodeAtomicRepresentation(_ representation: consuming Swift.UnsafeMutableRawBufferPointer.AtomicRepresentation) -> Swift.UnsafeMutableRawBufferPointer {
+    let wp = WordPair.decodeAtomicRepresentation(representation)
+
+    return UnsafeMutableRawBufferPointer(
+      start: UnsafeMutableRawPointer(bitPattern: wp.first),
+      count: Int(truncatingIfNeeded: wp.second)
+    )
+  }
+}
+#else
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Swift.UnsafeMutableRawBufferPointer : Synchronization.AtomicRepresentable {
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
@@ -852,6 +1292,7 @@ extension Swift.UnsafeMutableRawBufferPointer : Synchronization.AtomicRepresenta
     )
   }
 }
+#endif
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 public protocol AtomicRepresentable {
   associatedtype AtomicRepresentation : Swift.BitwiseCopyable
@@ -1069,6 +1510,7 @@ extension Synchronization.Mutex where Value : ~Copyable {
     return try body(&value._address.pointee)
   }
   #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   #if compiler(>=5.3) && $SendingArgsAndResults
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent public borrowing func withLockIfAvailable<Result, E>(_ body: (inout sending Value) throws(E) -> sending Result) throws(E) -> sending Result? where E : Swift.Error, Result : ~Copyable {
@@ -1096,6 +1538,7 @@ extension Synchronization.Mutex where Value : ~Copyable {
     return try body(&value._address.pointee)
   }
   #endif
+  #endif
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization.Mutex where Value == () {
@@ -1114,7 +1557,7 @@ extension Synchronization.Mutex where Value == () {
 }
 @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension Synchronization._MutexHandle {
-  #if compiler(>=5.3) && $AllowUnsafeAttribute
+  #if compiler(>=5.3) && $MemorySafetyAttributes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeLock() {
     _lock()
@@ -1125,7 +1568,7 @@ extension Synchronization._MutexHandle {
     _lock()
   }
   #endif
-  #if compiler(>=5.3) && $AllowUnsafeAttribute
+  #if compiler(>=5.3) && $MemorySafetyAttributes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeTryLock() -> Swift.Bool {
     _tryLock()
@@ -1136,7 +1579,7 @@ extension Synchronization._MutexHandle {
     _tryLock()
   }
   #endif
-  #if compiler(>=5.3) && $AllowUnsafeAttribute
+  #if compiler(>=5.3) && $MemorySafetyAttributes
   @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
   @_alwaysEmitIntoClient @_transparent @unsafe public borrowing func unsafeUnlock() {
     _unlock()

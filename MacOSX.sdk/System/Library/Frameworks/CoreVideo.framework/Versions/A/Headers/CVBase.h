@@ -136,8 +136,10 @@ extern "C" {
 
 #if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature) && __has_feature(attribute_cf_returns_retained)
     #define CV_RETURNS_RETAINED CF_RETURNS_RETAINED
+    #define CV_RETURNS_NOT_RETAINED CF_RETURNS_NOT_RETAINED
 #else
-    #define CV_RETURNS_RETAINED 
+    #define CV_RETURNS_RETAINED
+    #define CV_RETURNS_NOT_RETAINED
 #endif
 
 #if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature) && __has_feature(attribute_cf_returns_on_parameters)
@@ -196,6 +198,17 @@ extern "C" {
 	#define COREVIDEO_GL_DEPRECATED(platform, from, to) API_DEPRECATED("OpenGL/OpenGLES is no longer supported. Use Metal APIs instead. (Define COREVIDEO_SILENCE_GL_DEPRECATION to silence these warnings)", platform(from, to))
 #endif // COREVIDEO_SILENCE_GL_DEPRECATION
 
+// These defines are copied over from CFNSObjCRuntime.h
+#if __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
+	// The typedef or struct should be imported as 'Sendable' in Swift
+	#define CV_SWIFT_SENDABLE __attribute__((swift_attr("@Sendable")))
+	// The struct should *not* be imported as 'Sendable' in Swift even if it normally would be
+	#define CV_SWIFT_NONSENDABLE __attribute__((swift_attr("@_nonSendable")))
+#else
+	#define CV_SWIFT_SENDABLE
+	#define CV_SWIFT_NONSENDABLE
+#endif // __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
+
 /*!
     @typedef	CVOptionFlags
     @abstract   Flags to be used for the display and render call back functions.
@@ -236,7 +249,7 @@ struct CVSMPTETime
     SInt16  minutes;
     SInt16  seconds;
     SInt16  frames;
-};
+} CV_SWIFT_SENDABLE;
 typedef struct CVSMPTETime    CVSMPTETime;
 
 /*!
@@ -269,7 +282,7 @@ typedef CF_ENUM(uint32_t, CVSMPTETimeType)
     kCVSMPTETimeType2997Drop  = 5,
     kCVSMPTETimeType60        = 6,
     kCVSMPTETimeType5994      = 7
-};
+} CV_SWIFT_SENDABLE;
 
 /*!
     @enum           SMPTE State Flags
@@ -283,19 +296,22 @@ typedef CF_OPTIONS(uint32_t, CVSMPTETimeFlags)
 {
     kCVSMPTETimeValid     = (1L << 0),
     kCVSMPTETimeRunning   = (1L << 1)
-};
-
+} CV_SWIFT_SENDABLE;
 
 typedef CF_OPTIONS(int32_t, CVTimeFlags) {
     kCVTimeIsIndefinite = 1 << 0
-};
+} CV_SWIFT_SENDABLE;
 
 typedef struct
 {
     int64_t	    timeValue;
     int32_t	    timeScale;
     int32_t	    flags;
-} CVTime;
+} CVTime CV_SWIFT_SENDABLE;
+
+
+CV_EXPORT const CVTime kCVZeroTime;
+CV_EXPORT const CVTime kCVIndefiniteTime;
 
 /*!
     @struct CVTimeStamp
@@ -335,7 +351,7 @@ typedef struct
     CVSMPTETime			smpteTime;
     uint64_t			flags;
     uint64_t			reserved;
-} CVTimeStamp; 
+} CVTimeStamp CV_SWIFT_SENDABLE; 
 
 // Flags for the CVTimeStamp structure
 typedef CF_OPTIONS(uint64_t, CVTimeStampFlags)
@@ -353,24 +369,9 @@ typedef CF_OPTIONS(uint64_t, CVTimeStampFlags)
     // Some commonly used combinations of timestamp flags
     kCVTimeStampVideoHostTimeValid          = (kCVTimeStampVideoTimeValid | kCVTimeStampHostTimeValid),
     kCVTimeStampIsInterlaced                = (kCVTimeStampTopField | kCVTimeStampBottomField)
-};
-
-CV_EXPORT const CVTime kCVZeroTime;
-CV_EXPORT const CVTime kCVIndefiniteTime;
-
-// These defines are copied over from CFNSObjCRuntime.h
-#if __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
-    // The typedef or struct should be imported as 'Sendable' in Swift
-    #define CV_SWIFT_SENDABLE __attribute__((swift_attr("@Sendable")))
-    // The struct should *not* be imported as 'Sendable' in Swift even if it normally would be
-    #define CV_SWIFT_NONSENDABLE __attribute__((swift_attr("@_nonSendable")))
-#else
-    #define CV_SWIFT_SENDABLE
-    #define CV_SWIFT_NONSENDABLE
-#endif // __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
+} CV_SWIFT_SENDABLE;
 
 #if defined(__cplusplus)
 }
 #endif
-
-#endif
+#endif // __COREVIDEO_CVBASE_H__

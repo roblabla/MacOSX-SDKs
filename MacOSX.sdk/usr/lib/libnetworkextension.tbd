@@ -44,6 +44,7 @@ exports:
                        _ne_filter_send_message, _ne_filter_set_test_crypto_state, 
                        _ne_filter_set_test_provider_factory, _ne_filter_sign_data, 
                        _ne_filter_stats_report_register, _ne_filter_stats_report_unregister, 
-                       _ne_filter_unregister_flow ]
-    objc-classes:    [ NEDiagnosticReport ]
+                       _ne_filter_unregister_flow, _ne_url_filter_check ]
+    objc-classes:    [ NEBitVector, NEBloomFilter, NEDiagnosticReport, NEFNVHash, 
+                       NEMurmurHash3, NEURLParser ]
 ...

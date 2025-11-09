@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomAnalytics.framework/Versions/A/SymptomAnalytics'
-current-version: 2022.120.2
+current-version: 2153
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -19,17 +19,17 @@ exports:
                        _kSymptomActivityBitmapShowConciseFormat, _kSymptomActivityBitmapShowExtensions, 
                        _kSymptomActivityBitmapShowIntermediateFormat, _kSymptomActivityBitmapStartTime, 
                        _kSymptomActivityBitmapWiFiAWDLInterface, _kSymptomActivityBitmapWiFiInterface, 
-                       _kSymptomActivityBitmapsActualStartTimeKey, _kSymptomActivityBitmapsBitmapKey, 
-                       _kSymptomActivityBitmapsValidBitsCountKey, _kSymptomAnalyticsFrameworkModelName, 
-                       _kSymptomAnalyticsHelperServiceEndpoint, _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, 
-                       _kSymptomAnalyticsNetworkAdvisoryDefiniteNotUse, _kSymptomAnalyticsNetworkAdvisoryDefiniteUse, 
-                       _kSymptomAnalyticsNetworkAdvisoryError, _kSymptomAnalyticsNetworkAdvisoryInconclusive, 
-                       _kSymptomAnalyticsNetworkAdvisoryInterfaceNotReady, _kSymptomAnalyticsNetworkAdvisoryKey, 
-                       _kSymptomAnalyticsNetworkAdvisoryNoImprovement, _kSymptomAnalyticsNetworkAdvisoryNotSupported, 
-                       _kSymptomAnalyticsNetworkAdvisoryWeakImprovement, _kSymptomAnalyticsNetworkAdvisoryWeakNotUse, 
-                       _kSymptomAnalyticsNetworkAdvisoryWeakUse, _kSymptomAnalyticsRootDefaultDirectory, 
-                       _kSymptomAnalyticsServiceCalendarUsageToggle, _kSymptomAnalyticsServiceCopyRelationship, 
-                       _kSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
+                       _kSymptomActivityBitmapWiFiNonInfraInterface, _kSymptomActivityBitmapsActualStartTimeKey, 
+                       _kSymptomActivityBitmapsBitmapKey, _kSymptomActivityBitmapsValidBitsCountKey, 
+                       _kSymptomAnalyticsFrameworkModelName, _kSymptomAnalyticsHelperServiceEndpoint, 
+                       _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, _kSymptomAnalyticsNetworkAdvisoryDefiniteNotUse, 
+                       _kSymptomAnalyticsNetworkAdvisoryDefiniteUse, _kSymptomAnalyticsNetworkAdvisoryError, 
+                       _kSymptomAnalyticsNetworkAdvisoryInconclusive, _kSymptomAnalyticsNetworkAdvisoryInterfaceNotReady, 
+                       _kSymptomAnalyticsNetworkAdvisoryKey, _kSymptomAnalyticsNetworkAdvisoryNoImprovement, 
+                       _kSymptomAnalyticsNetworkAdvisoryNotSupported, _kSymptomAnalyticsNetworkAdvisoryWeakImprovement, 
+                       _kSymptomAnalyticsNetworkAdvisoryWeakNotUse, _kSymptomAnalyticsNetworkAdvisoryWeakUse, 
+                       _kSymptomAnalyticsRootDefaultDirectory, _kSymptomAnalyticsServiceCalendarUsageToggle, 
+                       _kSymptomAnalyticsServiceCopyRelationship, _kSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
                        _kSymptomAnalyticsServiceDomainTrackingClearHistoryEndDate, 
                        _kSymptomAnalyticsServiceDomainTrackingClearHistoryKey, _kSymptomAnalyticsServiceDomainTrackingClearHistoryStartDate, 
                        _kSymptomAnalyticsServiceDomainTrackingContext, _kSymptomAnalyticsServiceDomainTrackingContextVerificationType, 
@@ -95,9 +95,10 @@ exports:
                        _kSymptomForcePreferCellOverWiFiAutoDisableTimestampKey, _kSymptomForcePreferCellOverWiFiEnableKey ]
     objc-classes:    [ AggregatePropertyDescriptor, AnalyticsWorkspace, AnalyticsWorkspaceRetrievalCallback, 
                        AppAnalytics, FetchRequestPropertiesDescriptor, LiveUsage, 
-                       NWActivityFragment, NWActivityMetricData, NWActivityXPC, NetworkAttachmentAnalytics, 
-                       ObjectAnalytics, Process, ProcessAnalytics, SFApp, SFAppCalendarUsage, 
-                       SFAppDomainUsage, SFAppEndpoint, SFAppExperience, SFAppRun, 
-                       SFAppTypicalUsage, SFFlow, SFLiveFlowPerf, SFLiveRoutePerf, 
-                       SFNetworkAttachment, SFProvisioningData, UsageAnalytics ]
+                       NDFDeviceRecord, NWActivityFragment, NWActivityMetricData, 
+                       NWActivityXPC, NetworkAttachmentAnalytics, ObjectAnalytics, 
+                       Process, ProcessAnalytics, SFApp, SFAppCalendarUsage, SFAppDomainUsage, 
+                       SFAppEndpoint, SFAppExperience, SFAppRun, SFAppTypicalUsage, 
+                       SFFlow, SFLiveFlowPerf, SFLiveRoutePerf, SFNetworkAttachment, 
+                       SFProvisioningData, UsageAnalytics ]
 ...

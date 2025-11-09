@@ -23,47 +23,47 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), m
 /*!
  *  Characteristic corresponding to night vision setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *nightVision;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *nightVision;
 
 /*!
  * Characteristic corresponding to current horizontal tilt setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *currentHorizontalTilt;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *currentHorizontalTilt;
 
 /*!
  * Characteristic corresponding to target horizontal tilt setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *targetHorizontalTilt;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *targetHorizontalTilt;
 
 /*!
  * Characteristic corresponding to current vertical tilt setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *currentVerticalTilt;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *currentVerticalTilt;
 
 /*!
  * Characteristic corresponding to target vertical tilt setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *targetVerticalTilt;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *targetVerticalTilt;
 
 /*!
  * Characteristic corresponding to optical zoom setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *opticalZoom;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *opticalZoom;
 
 /*!
  * Characteristic corresponding to digital zoom setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *digitalZoom;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *digitalZoom;
 
 /*!
  * Characteristic corresponding to image rotation setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *imageRotation;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *imageRotation;
 
 /*!
  * Characteristic corresponding to image mirroring setting on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCharacteristic *imageMirroring;
+@property (nullable, nonatomic, readonly, strong) HMCharacteristic *imageMirroring;
 
 @end
 

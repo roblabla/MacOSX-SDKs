@@ -44,7 +44,7 @@ API_UNAVAILABLE(macos)
 /*!
  *  @abstract   Delegate that receives updates on the collection of homes.
  */
-@property (weak, nonatomic, nullable) id<HMHomeManagerDelegate> delegate;
+@property (nullable, nonatomic, weak) id<HMHomeManagerDelegate> delegate;
 
 /*!
  *  @abstract   The current authorization status of the application.
@@ -55,7 +55,7 @@ API_UNAVAILABLE(macos)
 /*!
  *  @abstract   The primary home for this collection.
  */
-@property (readonly, strong, nonatomic, nullable) HMHome *primaryHome API_DEPRECATED("No longer supported.", ios(8.0, 16.1), macos(10.14, 13.0), tvos(10.0, 16.1), watchos(2.0, 9.1));
+@property (nullable, nonatomic, readonly, strong) HMHome *primaryHome API_DEPRECATED("No longer supported.", ios(8.0, 16.1), macos(10.14, 13.0), tvos(10.0, 16.1), watchos(2.0, 9.1));
 
 /*!
  *  @abstract   Array of HMHome objects that represents the homes associated with the home manager.
@@ -64,7 +64,7 @@ API_UNAVAILABLE(macos)
  *              not guaranteed to be filled with the list of homes, represented as HMHome objects,
  *              until the homeManagerDidUpdateHomes: delegate method has been invoked.
  */
-@property (readonly, copy, nonatomic) NSArray<HMHome *> *homes;
+@property (nonatomic, readonly, copy) NSArray<HMHome *> *homes;
 
 /*!
  *  @abstract   This method is used to change the primary home.

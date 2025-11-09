@@ -204,6 +204,10 @@ APPKIT_EXTERN __kindof NSApplication * _Null_unspecified NSApp NS_SWIFT_UI_ACTOR
 @property (getter=isHidden, readonly) BOOL hidden;
 @property (getter=isRunning, readonly) BOOL running;
 
+/// A boolean value indicating whether your application should suppress HDR content based on established policy.
+/// Built-in AppKit components such as NSImageView will automatically behave correctly with HDR content. You should use this value in conjunction with notifications (`NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification` and `NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification`) to suppress HDR content in your application when signaled to do so.
+@property (readonly) BOOL applicationShouldSuppressHighDynamicRangeContent API_AVAILABLE(macos(26.0));
+
 #pragma mark - Activation and Deactivation
 
 - (void)deactivate;
@@ -643,6 +647,9 @@ APPKIT_EXTERN NSNotificationName NSApplicationWillTerminateNotification;
 APPKIT_EXTERN NSNotificationName NSApplicationDidChangeScreenParametersNotification;
 APPKIT_EXTERN NSNotificationName NSApplicationProtectedDataWillBecomeUnavailableNotification API_AVAILABLE(macos(12.0));
 APPKIT_EXTERN NSNotificationName NSApplicationProtectedDataDidBecomeAvailableNotification API_AVAILABLE(macos(12.0));
+// Notifications that tell an app that it should either begin or end suppressing high dynamic range content.
+APPKIT_EXTERN NSNotificationName NSApplicationShouldBeginSuppressingHighDynamicRangeContentNotification API_AVAILABLE(macos(26.0));
+APPKIT_EXTERN NSNotificationName NSApplicationShouldEndSuppressingHighDynamicRangeContentNotification API_AVAILABLE(macos(26.0));
 
 #pragma mark - User info keys for NSApplicationDidFinishLaunchingNotification
 

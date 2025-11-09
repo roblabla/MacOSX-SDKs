@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, MTLIOStatus) {
     MTLIOStatusComplete = 3,
 } API_AVAILABLE(macos(13.0), ios(16.0));
 
-typedef void (^MTLIOCommandBufferHandler)(id<MTLIOCommandBuffer>);
+typedef void (^ NS_SWIFT_SENDABLE MTLIOCommandBufferHandler)(id<MTLIOCommandBuffer>);
 
 /*!
  @protocol MTLIOCommandBuffer

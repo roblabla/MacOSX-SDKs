@@ -392,6 +392,9 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_UI_ACTOR
 /// consideration when determining this value.
 @property (readonly) NSWritingToolsResultOptions resultOptions; // Returns a nonzero value after considering system information along with the value of preferredResultOptions
 
+// When YES, the Writing Tools subsystem interprets and generates the text list paragraph incorporating the text list marker string. By default, it employs ``NSTextList.includesTextListMarkers`` as the value.
+@property BOOL includesTextListMarkers API_AVAILABLE(macos(26.0));
+
 /// Informs the coordinator about changes your app made to the text
 /// in the specified context object.
 ///
@@ -1001,7 +1004,7 @@ API_AVAILABLE(macos(15.2)) NS_SWIFT_NAME(NSWritingToolsCoordinator.Delegate)
 /// starts at character `100` in your text storage, and an interaction occurs
 /// with the character at location `102`, specify a range with a location of
 /// `2` and a length of `1`.
-- (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator requestsRangeInContextWithIdentifierForPoint:(NSPoint)point completion:(void(^)(NSRange range, NSUUID *contextID))completion API_DEPRECATED("Not used anymore", macos(15.2, 15.4)) NS_SWIFT_ASYNC_NAME(writingToolsCoordinator(_:rangeInContextWithIdentifierFor:));
+- (void)writingToolsCoordinator:(NSWritingToolsCoordinator *)writingToolsCoordinator requestsRangeInContextWithIdentifierForPoint:(NSPoint)point completion:(void(^)(NSRange range, NSUUID *contextID))completion API_DEPRECATED("In macOS 15.4 and later, NSWritingToolsCoordinator automatically determines the location of the character at the specified point in your view's coordinate system and no longer calls this method.", macos(15.2, 15.4)) NS_SWIFT_ASYNC_NAME(writingToolsCoordinator(_:rangeInContextWithIdentifierFor:));
 @end
 
 #pragma mark NSTextPreview

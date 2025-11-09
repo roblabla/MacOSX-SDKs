@@ -153,6 +153,7 @@ exports:
                        __ZN3awd7metrics45CommCenterCellularPlanMonitorModeType_IsValidEi, 
                        __ZN3awd7metrics45CommCenter_Instruments_CellularLteRrcMsgEventC1Ev, 
                        __ZN3awd7metrics45CommCenter_Instruments_CellularLteRrcMsgEventD1Ev, 
+                       __ZN3awd7metrics46CommCenterCellularPlanTransferFlowType_IsValidEi, 
                        __ZN3awd7metrics46CommCenterSubscriptionImeiChangeReason_IsValidEi, 
                        __ZN3awd7metrics47CommCenterCellularPlanInternetTransport_IsValidEi, 
                        __ZN3awd7metrics47CommCenterTransferPlanListingStatus_ListingInfoC1Ev, 

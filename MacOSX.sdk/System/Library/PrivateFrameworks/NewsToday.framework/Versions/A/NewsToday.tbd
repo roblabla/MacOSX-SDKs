@@ -48,7 +48,8 @@ exports:
                        _NTNewsEdgeTagRecordOverrideKeys, _NTNewsSourceIdentifier, 
                        _NTPBTodaySectionConfigGenerateArticle, _NTPBTodaySectionConfigGenerateArticles, 
                        _NTPBTodaySectionConfigGenerateItems, _NTPossiblySimulateCrashWithError, 
-                       _NTSectionFeedItemsLimit, _NTSharedLog, _NTUnknownSourceIdentifier, 
+                       _NTSectionFeedItemsLimit, _NTSharedLog, _NTTodaySectionReadArticlesFilterMethodToNSString, 
+                       _NTTodaySectionSeenArticlesFilterMethodToNSString, _NTUnknownSourceIdentifier, 
                        _NTXPCSuitableError, _NewsTodayVersionNumber, _NewsTodayVersionString ]
     objc-classes:    [ FRRingBuffer, NTAggregationBudgetInfo, NTArticleIDsSectionFetchDescriptor, 
                        NTArticleListSectionFetchDescriptor, NTBestOfSectionTransformation, 
@@ -72,6 +73,7 @@ exports:
                        NTSectionPlaceholderDescriptor, NTSourceAvailabilityManager, 
                        NTTagSectionFetchDescriptor, NTTodayBanner, NTTodayConfigConversionOperation, 
                        NTTodayConfigOperation, NTTodayContext, NTTodayHeadlineProtoitem, 
-                       NTTodayItemOperation, NTTodayModuleDescriptorsOperation, NTTodayResultOperation, 
-                       NTTodayResults, NTTodayResultsSource, NTWidgetConfigDataOperation ]
+                       NTTodayItemOperation, NTTodayModuleDescriptorsOperation, NTTodayPrivateData, 
+                       NTTodayResultOperation, NTTodayResults, NTTodayResultsSource, 
+                       NTWidgetConfigDataOperation ]
 ...

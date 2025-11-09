@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 760.6.150
+current-version: 801.43.240
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -57,9 +57,9 @@ exports:
                        _CPAnalyticsMediaPropertySharedLibraryScope, _CPAnalyticsMediaPropertySubject, 
                        _CPAnalyticsMediaPropertySyndicationProcessingValue, _CPAnalyticsMediaPropertySyndicationProcessingVersion, 
                        _CPAnalyticsMediaPropertySyndicationState, _CPAnalyticsMediaPropertyUUID, 
-                       _CPAnalyticsMemoryCreationDatasetNameKey, _CPAnalyticsMemoryCreationIsUserPromptUnSafeKey, 
-                       _CPAnalyticsMemoryCreationMemoryAssetCountKey, _CPAnalyticsMemoryCreationMemoryIsGeneratedKey, 
-                       _CPAnalyticsMemoryCreationMemoryPromptSuggestionSourceKey, 
+                       _CPAnalyticsMemoryCreationDatasetNameKey, _CPAnalyticsMemoryCreationDoesRegionPolicyAllowDonationKey, 
+                       _CPAnalyticsMemoryCreationIsUserPromptUnSafeKey, _CPAnalyticsMemoryCreationMemoryAssetCountKey, 
+                       _CPAnalyticsMemoryCreationMemoryIsGeneratedKey, _CPAnalyticsMemoryCreationMemoryPromptSuggestionSourceKey, 
                        _CPAnalyticsMemoryCreationQueryHasActivityKey, _CPAnalyticsMemoryCreationQueryHasArtistKey, 
                        _CPAnalyticsMemoryCreationQueryHasGenreKey, _CPAnalyticsMemoryCreationQueryHasLocationKey, 
                        _CPAnalyticsMemoryCreationQueryHasMoodKey, _CPAnalyticsMemoryCreationQueryHasPersonKey, 
@@ -78,7 +78,8 @@ exports:
                        _CPAnalyticsPayloadViewIDKey, _CPAnalyticsPhotosActivityType, 
                        _CPAnalyticsPhotosDeleteKey, _CPAnalyticsPhotosEditKey, _CPAnalyticsPhotosEngagementKey, 
                        _CPAnalyticsPhotosFavoritesKey, _CPAnalyticsPhotosSearchPrefixKey, 
-                       _CPAnalyticsPhotosSearchSession, _CPAnalyticsPhotosSearchSessionPrefixKey, 
+                       _CPAnalyticsPhotosSearchSession, _CPAnalyticsPhotosSearchSessionLibraryPercentIndexed, 
+                       _CPAnalyticsPhotosSearchSessionLibrarySize, _CPAnalyticsPhotosSearchSessionPrefixKey, 
                        _CPAnalyticsPhotosSearchSessionPresentedAssetsKey, _CPAnalyticsPhotosSearchSessionQueryKey, 
                        _CPAnalyticsPhotosShareActivityTypeAddToAlbumKey, _CPAnalyticsPhotosShareActivityTypeAddToSharedAlbumKey, 
                        _CPAnalyticsPhotosShareActivityTypeAirDropKey, _CPAnalyticsPhotosShareActivityTypeAirPlayKey, 

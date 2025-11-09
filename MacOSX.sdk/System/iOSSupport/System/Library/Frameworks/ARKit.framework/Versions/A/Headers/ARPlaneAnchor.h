@@ -7,7 +7,6 @@
 
 #import <ARKit/ARAnchor.h>
 
-#define AR_PLANE_ANCHOR_PROTOCOLS
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,10 +19,10 @@ API_AVAILABLE(ios(11.0))
 typedef NS_ENUM(NSInteger, ARPlaneAnchorAlignment) {
     /** A plane that is horizontal with respect to gravity. */
     ARPlaneAnchorAlignmentHorizontal,
-    
+
     /** A plane that is vertical with respect to gravity. */
     ARPlaneAnchorAlignmentVertical API_AVAILABLE(ios(11.3)),
-    
+
 } NS_SWIFT_NAME(ARPlaneAnchor.Alignment);
 
 /**
@@ -87,7 +86,7 @@ NS_SWIFT_SENDABLE
  */
 API_AVAILABLE(ios(11.0))
 NS_SWIFT_SENDABLE
-@interface ARPlaneAnchor : ARAnchor AR_PLANE_ANCHOR_PROTOCOLS
+@interface ARPlaneAnchor : ARAnchor
 
 /**
  Determines whether plane classification is supported on this device.

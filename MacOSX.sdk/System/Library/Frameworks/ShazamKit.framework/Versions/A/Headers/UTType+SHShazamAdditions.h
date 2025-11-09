@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 #import <ShazamKit/SHDefines.h>
 #import <UniformTypeIdentifiers/UniformTypeIdentifiers.h>
 
@@ -23,3 +24,4 @@ SH_EXPORT API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0))
 @end
 
 NS_HEADER_AUDIT_END(nullability)
+

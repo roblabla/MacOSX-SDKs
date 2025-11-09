@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *    information such as the country, state, city, and street address.
  */
 CL_EXTERN
-NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.8), ios(5.0))
+NS_SWIFT_SENDABLE API_DEPRECATED("Use either GeoToolbox.PlaceDescriptor or MapKit", ios(5.0, API_TO_BE_DEPRECATED), macos(10.8, API_TO_BE_DEPRECATED))
 @interface CLPlacemark : NSObject <NSCopying, NSSecureCoding>
 {
 @private
@@ -56,11 +56,7 @@ NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.8), ios(5.0))
  *  Discussion:
  *    Returns the geographic region associated with the placemark.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @property (nonatomic, readonly, copy, nullable) CLRegion *region API_UNAVAILABLE(visionos);
-#else
-@property (nonatomic, readonly, copy, nullable) CLRegion *region;
-#endif
 
 /*
  *  timeZone
@@ -77,11 +73,7 @@ NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.8), ios(5.0))
  *    This dictionary can be formatted as an address using ABCreateStringWithAddressDictionary,
  *    defined in the AddressBookUI framework.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @property (nonatomic, readonly, copy, nullable) NSDictionary *addressDictionary API_DEPRECATED("Use @properties", macos(10.8, 10.13), ios(5.0, 11.0), watchos(1.0, 4.0)) API_UNAVAILABLE(visionos);
-#else
-@property (nonatomic, readonly, copy, nullable) NSDictionary *addressDictionary API_DEPRECATED("Use @properties", macos(10.8, 10.13), ios(5.0, 11.0), watchos(1.0, 4.0));
-#endif
 
 // address dictionary properties
 @property (nonatomic, readonly, copy, nullable) NSString *name; // eg. Apple Inc.
@@ -100,7 +92,7 @@ NS_SWIFT_SENDABLE API_AVAILABLE(macos(10.8), ios(5.0))
 @end
 
 @interface CLPlacemark (ContactsAdditions)
-@property (nonatomic, nullable, readonly) CNPostalAddress *postalAddress API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic, nullable, readonly) CNPostalAddress *postalAddress API_DEPRECATED("Use either GeoToolbox.PlaceDescriptor or MapKit", macos(10.13, API_TO_BE_DEPRECATED), ios(11.0, API_TO_BE_DEPRECATED), watchos(4.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos);
 @end
 
 NS_ASSUME_NONNULL_END

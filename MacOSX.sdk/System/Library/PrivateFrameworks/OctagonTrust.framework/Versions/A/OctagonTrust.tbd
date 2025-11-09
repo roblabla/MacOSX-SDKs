@@ -15,10 +15,11 @@ exports:
                        _OctagonTrustVersionNumber, _OctagonTrustVersionString ]
     objc-classes:    [ OTAccountSettings, OTCDPRecoveryInformation, OTCurrentSecureElementIdentities, 
                        OTCustodianRecoveryKey, OTEscrowAuthenticationInformation, 
-                       OTEscrowMoveRequestContext, OTEscrowRecord, OTEscrowRecordMetadata, 
-                       OTEscrowRecordMetadataClientMetadata, OTEscrowRecordMetadataPasscodeGeneration, 
-                       OTEscrowTranslation, OTICDPRecordContext, OTICDPRecordSilentContext, 
-                       OTInheritanceKey, OTSecureElementPeerIdentity, OTWalrus, OTWebAccess ]
+                       OTEscrowCheckCallResult, OTEscrowMoveRequestContext, OTEscrowRecord, 
+                       OTEscrowRecordMetadata, OTEscrowRecordMetadataClientMetadata, 
+                       OTEscrowRecordMetadataPasscodeGeneration, OTEscrowTranslation, 
+                       OTICDPRecordContext, OTICDPRecordSilentContext, OTInheritanceKey, 
+                       OTSecureElementPeerIdentity, OTWalrus, OTWebAccess ]
     objc-ivars:      [ OTAccountSettings._walrus, OTAccountSettings._webAccess, OTCDPRecoveryInformation._containsIcdpData, 
                        OTCDPRecoveryInformation._has, OTCDPRecoveryInformation._nonViableRepair, 
                        OTCDPRecoveryInformation._recoveryKey, OTCDPRecoveryInformation._recoverySecret, 

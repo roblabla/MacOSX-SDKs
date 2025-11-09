@@ -35,10 +35,10 @@ FSKIT_API_AVAILABILITY_V1
 /// Implement this method to indicate whether the resource is recognizable and usable.
 /// - Parameters:
 ///   - resource: The ``FSResource`` to probe.
-///   - replyHandler: A block or closure that your implementation invokes when it finishes the probe or encounters an error. Pass an instance of ``FSProbeResult`` with probe results as the first parameter if your probe operation succeeds. If probing fails, pass an error as the second parameter.
+///   - reply: A block or closure that your implementation invokes when it finishes the probe or encounters an error. Pass an instance of ``FSProbeResult`` with probe results as the first parameter if your probe operation succeeds. If probing fails, pass an error as the second parameter.
 -(void)probeResource:(FSResource *)resource
         replyHandler:(void(^)(FSProbeResult * _Nullable result,
-                              NSError * _Nullable error))replyHandler FSKIT_API_AVAILABILITY_V1 NS_SWIFT_NAME(probeResource(resource:replyHandler:));
+                              NSError * _Nullable error))reply FSKIT_API_AVAILABILITY_V1 NS_SWIFT_NAME(probeResource(resource:replyHandler:));
 
 /// Requests that the file system load a resource and present it as a volume.
 ///
@@ -49,11 +49,11 @@ FSKIT_API_AVAILABILITY_V1
 /// - Parameters:
 ///   - resource: An ``FSResource`` to load.
 ///   - options: An ``FSTaskOptions`` object specifying options to apply when loading the resource. An ``FSUnaryFileSystem`` supports two options: `-f` for "force" and `--rdonly` for read-only. The file system must remember if the read-only option is present.
-///   - replyHandler: A block or closure that your implementation invokes when it finishes setting up or encounters an error. Pass a subclass of `FSVolume` as the first parameter if loading succeeds. If loading fails, pass an error as the second parameter.
+///   - reply: A block or closure that your implementation invokes when it finishes setting up or encounters an error. Pass a subclass of `FSVolume` as the first parameter if loading succeeds. If loading fails, pass an error as the second parameter.
 -(void)loadResource:(FSResource *)resource
             options:(FSTaskOptions *)options
        replyHandler:(void (^)(FSVolume * _Nullable volume,
-                              NSError * _Nullable err))replyHandler NS_SWIFT_NAME(loadResource(resource:options:replyHandler:)) FSKIT_API_AVAILABILITY_V1;
+                              NSError * _Nullable err))reply NS_SWIFT_NAME(loadResource(resource:options:replyHandler:)) FSKIT_API_AVAILABILITY_V1;
 
 /// Requests that the file system unload the specified resource.
 ///

@@ -200,7 +200,7 @@ typedef AUAudioUnitStatus (^AUInternalRenderBlock)(
 	NSInteger												outputBusNumber,
 	AudioBufferList *										outputData,
 	const AURenderEvent *__nullable 						realtimeEventListHead,
-	AURenderPullInputBlock __nullable __unsafe_unretained	pullInputBlock);
+	AURenderPullInputBlock __nullable __unsafe_unretained	pullInputBlock) CA_REALTIME_API;
 
 // =================================================================================================
 

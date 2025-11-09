@@ -195,12 +195,15 @@ API_AVAILABLE(macos(12.3), macCatalyst(18.2))
  @constant SCStreamConfigurationPresetCaptureHDRCanonicalDisplay using this preset will help client set suggested values for captureDynamicRange, pixelFormat, ColorSpace, colorMatrix in order to get HDR capture output with SCStream, optimized for rendering on canonical HDR display
  @constant SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay using this preset will help client set suggested values for captureDynamicRange, pixelFormat, ColorSpace in order to get HDR screenshot with SCScreenshotManager, optimized for rendering on the local captured display.
  @constant SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay using this preset will help client set suggested values for captureDynamicRange, pixelFormat, ColorSpace in order to get HDR screenshot with SCScreenshotManager, optimized for rendering on canonical HDR display
+ @constant SCStreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10 using this preset will help client set suggested values for captureDynamicRange, pixelFormat, and colorSpace intended for a stream recording in HDR10, optimized for rendering on the canonical HDR display.  This preset will also add HDR10 metadata to the video recording that is designed to preserve the SDR range during video playback.
+
 */
 typedef NS_ENUM(NSInteger, SCStreamConfigurationPreset) {
     SCStreamConfigurationPresetCaptureHDRStreamLocalDisplay,
     SCStreamConfigurationPresetCaptureHDRStreamCanonicalDisplay,
     SCStreamConfigurationPresetCaptureHDRScreenshotLocalDisplay,
-    SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay
+    SCStreamConfigurationPresetCaptureHDRScreenshotCanonicalDisplay,
+    SCStreamConfigurationPresetCaptureHDRRecordingPreservedSDRHDR10 API_AVAILABLE(macos(26.0), macCatalyst(26.0))
 } NS_SWIFT_NAME(SCStreamConfiguration.Preset) API_AVAILABLE(macos(15.0), macCatalyst(18.2));
 
 /*!

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/MailCore.framework/Versions/A/MailCore'
-current-version: 3826.255.51
+current-version: 3864.100.1
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ CoreSuggestionsTests, DebugBundle, EmailAuthenticationPlugin, 
@@ -52,7 +52,8 @@ exports:
                        _MCFlagKeyParentalControlState, _MCFlagKeyPartsHaveBeenCached, 
                        _MCFlagKeyPriorityLevel, _MCFlagKeyRead, _MCFlagKeyRedirected, 
                        _MCFlagKeyReplied, _MCFlagKeySigned, _MCFlagKeySignedByExtension, 
-                       _MCFlagKeyWasActedOnByExtension, _MCFlagsObjectForFlags, _MCFullScreenComposeFinishedIdentifier, 
+                       _MCFlagKeyTouchedByCleanup, _MCFlagKeyWasActedOnByExtension, 
+                       _MCFlagsObjectForFlags, _MCFullScreenComposeFinishedIdentifier, 
                        _MCGetFlagsAndMaskForFlagChange, _MCGetFlagsAndMaskForFlagChangeDictionary, 
                        _MCHeaderDictionaryKeyLabel, _MCHeaderDictionaryKeyOrderedKeys, 
                        _MCHeaderDictionaryKeyValueList, _MCHeaderDictionaryKeyValueString, 

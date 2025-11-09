@@ -112,6 +112,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(14.0), ios(17.0), tvos(17.0))
 ///
 /// An `MPSGraphExecutable` is a compiled graph for specific feeds for specific target tensors and target operations.
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+NS_SWIFT_SENDABLE
 @interface MPSGraphExecutable : MPSGraphObject
 
 /// Options for the graph executable.

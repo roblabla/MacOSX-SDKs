@@ -165,6 +165,9 @@ typedef NS_ENUM(NSInteger, CKErrorCode) {
     /*! The current account is in a state that may need user intervention to recover from. The user should be directed to check the Settings app. Listen for CKAccountChangedNotifications to know when to re-check account status and retry. */
     CKErrorAccountTemporarilyUnavailable  API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0)) = 36,
     
+    /// The user is already an invited participant on this share. They must accept the existing share invitation before continuing.
+    CKErrorParticipantAlreadyInvited      API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0)) = 37,
+    
 
 };
 

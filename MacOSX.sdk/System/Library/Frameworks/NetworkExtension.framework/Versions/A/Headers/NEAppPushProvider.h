@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020-2022 Apple Inc.
+ * Copyright (c) 2020-2022, 2025 Apple Inc.
  * All rights reserved.
  */
 
@@ -73,6 +73,14 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  * @discussion This method is called by the framework periodically after every 60 seconds. Subclasses must override this method to perform necessary tasks.
  */
 - (void)handleTimerEvent API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+/*!
+ * @method unmatchEthernet
+ * @discussion This method is called by the provider when it does not require runtime while the device is connected to the current Ethernet network.
+ * This method is applicable only when NEAppPushManager has set matchEthernet property to YES and the provider is running because the device is connected to an
+ * Ethernet network.
+*/
+- (void)unmatchEthernet API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos, tvos, visionos);
 
 @end
 

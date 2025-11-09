@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/IMTranscoderAgent.framework/Versions/A/IMTranscoderAgent'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _IMTranscodeErrorDomain, __IMTranscoderLinkFile ]

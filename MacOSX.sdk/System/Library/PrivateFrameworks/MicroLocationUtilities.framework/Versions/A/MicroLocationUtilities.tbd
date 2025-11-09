@@ -7,6 +7,8 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ULEnterSandbox ]
-    objc-classes:    [ ULDarwinNotificationHelper, ULFuture, ULPlatform, ULPromise, 
-                       ULScheduler, ULTapToRadar, ULUserNotification, ULWeakProxy ]
+    objc-classes:    [ ULBidirectionalDictionary, ULDarwinNotificationHelper, ULEvent, 
+                       ULEventMonitor, ULFuture, ULNumericUtilities, ULObjectCacheNSString, 
+                       ULPair, ULPlatform, ULPromise, ULSameSpaceUtilities, ULScheduler, 
+                       ULTapToRadar, ULUserNotification, ULWeakProxy ]
 ...

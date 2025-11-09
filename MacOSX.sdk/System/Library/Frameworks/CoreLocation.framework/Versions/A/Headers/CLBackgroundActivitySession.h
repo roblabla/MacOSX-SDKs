@@ -86,11 +86,7 @@ API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos) NS_REFINED_FOR_SW
 *     	to this background session will also be terminated. Once the
 *     	session is invalidated it cannot become active again.
 */
-- (void)invalidate API_AVAILABLE(ios(17.0), watchos(10.0)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-, visionos(1.0)
-#endif
-) API_UNAVAILABLE(macos);
+- (void)invalidate API_AVAILABLE(ios(17.0), watchos(10.0), visionos(1.0)) API_UNAVAILABLE(macos);
 
 /* backgroundActivitySession
  *  Discussion:

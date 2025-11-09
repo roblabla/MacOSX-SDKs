@@ -8,9 +8,9 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AESLubyRackoffContextSize, _CryptoKitCBridgingVersionNumber, 
                        _CryptoKitCBridgingVersionString, _SPAKE2Alishaz0Size, _SPAKE2CtxSize, 
-                       _ccrng_generate_bridge, _ccss_sizeof_parameters_fix, _getCMACContextSize, 
-                       _getContextSizeForECBMode, _getDigestSizeForDigestInfo, _getGCMCtxSize, 
-                       _getHMACContextSizeForDigestInfo, _getccec_full_ctx_size, 
+                       _SPAKE2GetSessionKey, _ccrng_generate_bridge, _ccss_sizeof_parameters_fix, 
+                       _getCMACContextSize, _getContextSizeForECBMode, _getDigestSizeForDigestInfo, 
+                       _getGCMCtxSize, _getHMACContextSizeForDigestInfo, _getccec_full_ctx_size, 
                        _getccec_pub_ctx_size, _init_ccec_ctx_full, _init_ccec_ctx_pub, 
                        _keyIsCompactRepresentable ]
     objc-classes:    [ CKCBCorecryptoECPoint, CKCBCorecryptoECScalar, CKSSShare, 

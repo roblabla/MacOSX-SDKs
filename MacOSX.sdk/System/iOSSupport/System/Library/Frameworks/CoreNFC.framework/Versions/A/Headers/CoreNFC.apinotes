@@ -203,6 +203,21 @@ Classes:
         SwiftPrivate: true
   - Name: NFCISO15693ReaderSession
     SwiftPrivate: true
+  - Name: NFCPaymentTagReaderSession
+    Methods:
+      - Selector: "connectToTag:completionHandler:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "initWithPollingOption:delegate:queue:"
+        MethodKind: Instance
+        SwiftPrivate: true
+      - Selector: "initWithDelegate:queue:"
+        MethodKind: Instance
+        SwiftPrivate: true
+    Properties:
+      - Name: connectedTag
+        PropertyKind: Instance
+        SwiftPrivate: true
 
 Tags:
   - Name: NFCVASMode

@@ -5,8 +5,6 @@
 //  Copyright (c) 2021 Apple Inc. All rights reserved.
 //
 
-#if __has_include(<UIKit/UIControl.h>)
-
 /*
  *  CLLocationButtonIcon
  *
@@ -15,6 +13,7 @@
  *
  */
 
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(visionos, watchos)
 /// Constants that specify styles for the location arrow icon on the button.
 typedef NS_ENUM(NSInteger, CLLocationButtonIcon) {
 	
@@ -38,6 +37,7 @@ typedef NS_ENUM(NSInteger, CLLocationButtonIcon) {
  *
  */
 
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(visionos, watchos)
 /// Constants that specify the text of the button label.
 typedef NS_ENUM(NSInteger, CLLocationButtonLabel) {
 	
@@ -62,11 +62,7 @@ typedef NS_ENUM(NSInteger, CLLocationButtonLabel) {
 	CLLocationButtonLabelShareMyCurrentLocation,
 };
 
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-API_AVAILABLE(ios(15.0),watchos(8.0)) API_UNAVAILABLE(visionos)
-#else
-API_AVAILABLE(ios(15.0),watchos(8.0))
-#endif
+API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(visionos, watchos)
 /// A button that grants one-time location authorization.
 ///
 /// `CLLocationButton` simplifies requesting one-time authorization to access
@@ -138,5 +134,3 @@ API_AVAILABLE(ios(15.0),watchos(8.0))
 /// The corner radius of the button.
 @property (nonatomic, readwrite) CGFloat cornerRadius;
 @end
-
-#endif

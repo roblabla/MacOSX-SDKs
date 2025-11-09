@@ -43,7 +43,7 @@ typedef NS_ERROR_ENUM(MTLIOErrorDomain, MTLIOError) {
  @abstract Represents a queue that schedules command buffers containing command that
  read from handle objects and write to MTLResource objects.
  */
-API_AVAILABLE(macos(13.0), ios(16.0))
+API_AVAILABLE(macos(13.0), ios(16.0)) NS_SWIFT_SENDABLE
 @protocol MTLIOCommandQueue <NSObject>
 
 
@@ -172,7 +172,7 @@ MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
  @abstract Represents a  file (raw or compressed) that can be used as a source
  for load commands encoded in a MTLIOCommandBuffer.
  */
-MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0))
+MTL_EXPORT API_AVAILABLE(macos(13.0), ios(16.0)) NS_SWIFT_SENDABLE
 @protocol MTLIOFileHandle <NSObject>
 
 /*!

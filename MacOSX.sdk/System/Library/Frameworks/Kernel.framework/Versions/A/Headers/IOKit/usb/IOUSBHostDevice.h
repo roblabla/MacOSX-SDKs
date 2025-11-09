@@ -240,7 +240,6 @@ class AppleUSBHostPort;
 class AppleUSBDescriptorCache;
 class AppleUSBHostResources;
 
-#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
 /*!
 * @class       IOUSBDevice
 * @brief       A compatibility base class to faciliate service discovery for legacy projects.
@@ -261,18 +260,13 @@ public:
 protected:
     static const IORegistryPlane* gIOUSBPlane;
 };
-#endif
 
 /*!
 * @class       IOUSBHostDevice
 * @brief       The IOService object representing a USB device
 * @discussion  This class provides functionality to send control requests to the default control endpoint, as well as create IOUSBHostInterface objects to represent the interfaces contained in the selected configuration.  Function drivers should not subclass IOUSBHostDevice.
 */
-#if TARGET_CPU_ARM64 || TARGET_CPU_ARM
 class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostDevice : public IOUSBDevice
-#else
-class __IOUSBHOSTFAMILY_DEPRECATED IOUSBHostDevice : public IOService
-#endif
 {
     friend class AppleUSBHostController;
     friend class IOUSBHostInterface;
@@ -346,6 +340,7 @@ public:
 
     virtual bool attach(IOService* provider);
     virtual bool start(IOService* provider);
+    virtual void registerService(IOOptionBits options = 0);
     virtual bool terminate(IOOptionBits options = 0);
     virtual void stop(IOService* provider);
     virtual void free(void);
@@ -794,10 +789,28 @@ public:
      */
     virtual IOReturn getLPMExitLatency(tUSBLinkState linkState, tUSBLPMExitLatency latencyType, uint32_t& latencyNs);
 
+    /*!
+     * @brief       Return the current microframe number of the USB controller
+     * @discussion  This method will return the current microframe number of the USB controller and the time associated with the start of the microframe
+     * @param       microframe reference to uint64_t to be populated with current microframe number
+     * @param       microframeTime reference to uint64_t to be populated with the mach_absolute_time associated with the start of the returned microframe
+     * @return      IOReturn status
+     */
+    virtual IOReturn currentMicroframe(uint64_t& microframe, uint64_t& microframeTime);
+
+    /*!
+     * @brief       Return a recent microframe number of the USB controller
+     * @discussion  This method will return a recent microframe number of the USB controller and the time associated with the start of the microframe
+     * @param       microframe reference to uint64_t to be populated with a recent microframe number
+     * @param       microframeTime reference to uint64_t to be populated with the mach_absolute_time associated with the start of the returned microframe
+     * @return      IOReturn status
+     */
+    virtual IOReturn referenceMicroframe(uint64_t& microframe, uint64_t& microframeTime);
+
     // Public pad slots for miscellaneous
     OSMetaClassDeclareReservedUsed(IOUSBHostDevice, 80);
-    OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 81);
-    OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 82);
+    OSMetaClassDeclareReservedUsed(IOUSBHostDevice, 81);
+    OSMetaClassDeclareReservedUsed(IOUSBHostDevice, 82);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 83);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 84);
     OSMetaClassDeclareReservedUnused(IOUSBHostDevice, 85);

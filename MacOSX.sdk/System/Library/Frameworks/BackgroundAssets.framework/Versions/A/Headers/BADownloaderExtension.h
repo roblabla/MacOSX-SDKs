@@ -24,7 +24,7 @@ NS_REFINED_FOR_SWIFT
  During the invocation of this method, `BADownloadManager` will prohibit the ability to schedule additional downloads
  until this method exits scope. Therefore, all downloads needing to be scheduled should be returned here.
  If a download fails, it can be rescheduled using `BADownloadManager` in any other method in this protocol.
- @param contentRequest The content request event that occured that caused this method to be invoked.
+ @param contentRequest The content request event that occurred that caused this method to be invoked.
  @param manifestURL A file URL to the local manifest that was pre-downloaded and specified in your App's Info.plist under the `BAManifestURL`.
  The file is read-only and will be deleted after this method returns. If you wish to keep it, you must copy it out.
  @param extensionInfo Information about your extension that may be useful for making a decision about
@@ -59,7 +59,7 @@ NS_REFINED_FOR_SWIFT
 - (void)backgroundDownload:(BADownload *)download finishedWithFileURL:(NSURL *)fileURL;
 
 /// @brief This method may be called shortly before the extension is terminated.
-/// @discussion This method is invoked if all extension callbacks have returned or if the extension has run over it's alotted runtime.
+/// @discussion This method is invoked if all extension callbacks have returned or if the extension has run over its allotted runtime.
 /// This callback provides a last chance to tidy up state before process termination.
 /// @warning This method is advisory only, there will be instances where the extension is terminated before this method is invoked.
 /// Do not rely on this method being invoked before the extension is terminated.

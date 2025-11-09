@@ -9,5 +9,5 @@ exports:
                        _AFKEndpointInterfaceUserClientOOBThreshold, _AFKUserVersionNumber, 
                        _AFKUserVersionString, __AFKUserLog, _kAFKEventCancel, _kAFKEventError ]
     objc-classes:    [ AFKBufferMemoryDescriptor, AFKEndpointInterface, AFKMemoryDescriptor, 
-                       AFKMemoryDescriptorManager ]
+                       AFKMemoryDescriptorManager, AFKUserSystemService ]
 ...

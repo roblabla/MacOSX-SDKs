@@ -18,6 +18,7 @@
 
 @class ASPasskeyCredentialRequest;
 
+
 NS_ASSUME_NONNULL_BEGIN
 
 
@@ -208,6 +209,82 @@ API_DEPRECATED_WITH_REPLACEMENT("prepareInterfaceToProvideCredentialForRequest:"
 ///                 ├─ SupportsConditionalPasskeyRegistration => true
 - (void)performPasskeyRegistrationWithoutUserInteractionIfPossible:(ASPasskeyCredentialRequest *)registrationRequest NS_SWIFT_NAME(performWithoutUserInteractionIfPossible(passkeyRegistration:)) AS_API_AVAILABLE(macos(15.0), ios(18.0), visionos(2.0)) API_UNAVAILABLE(tvos, watchos);
 
+/// Receive report when a relying party indicates that a passkey's user name was updated.
+///
+/// This method will be called for handling passkey updates when a relying party reports an update using the `ASCredentialUpdater` API.
+/// This update should be handled in the background, so no blocking UI or error should ever be shown.
+///
+/// - Parameter relyingParty: Relying party (website) that the crendential is saved for.
+/// - Parameter userHandle: User identifier.
+/// - Parameter newName: The new user name for the credential.
+///
+/// To indicate support for this feature, add `SupportsCredentialUpdate` under the
+/// `ASCredentialProviderExtensionCapabilities` dictionary.
+///
+///     Info.plist
+///     ├─ NSExtension
+///         ├─ NSExtensionAttributes
+///             ├─ ASCredentialProviderExtensionCapabilities
+///                 ├─ SupportsCredentialUpdate => true
+- (void)reportPublicKeyCredentialUpdateForRelyingParty:(NSString *)relyingParty userHandle:(NSData *)userHandle newName:(NSString *)newName;
+
+/// Receive report when a relying party indicates an invalid passkey credential.
+///
+/// This method will be called for handling passkey updates when a relying party reports the credential is no longer valid using the `ASCredentialUpdater` API.
+/// You may hide or remove this credential.
+/// This update should be handled in the background, so no blocking UI or error should ever be shown.
+///
+/// - Parameter relyingParty: Relying party (website) that the crendential is saved for.
+/// - Parameter credentialID: An identifier that uniquely identifies the passkey.
+///
+/// To indicate support for this feature, add `SupportsCredentialUpdate` under the
+/// `ASCredentialProviderExtensionCapabilities` dictionary.
+///
+///     Info.plist
+///     ├─ NSExtension
+///         ├─ NSExtensionAttributes
+///             ├─ ASCredentialProviderExtensionCapabilities
+///                 ├─ SupportsCredentialUpdate => true
+- (void)reportUnknownPublicKeyCredentialForRelyingParty:(NSString *)relyingParty credentialID:(NSData *)credentialID;
+
+/// Receive report when relying party sends a snapshot of all the accepted credentials for an account.
+///
+/// This method will be called for handling passkey updates when a relying party sends a list of accepted credentials using the `ASCredentialUpdater` API.
+/// You may hide or remove any credential not present in the accepted credentials list.
+/// This update should be handled in the background, so no blocking UI or error should ever be shown.
+///
+/// - Parameter relyingParty: Relying party (website) that the crendential is saved for.
+/// - Parameter userHandle: User identifier.
+/// - Parameter acceptedCredentialIDs: An array of identifiers that uniquely identifies the accepted credentials.
+///
+/// To indicate support for this feature, add `SupportsCredentialUpdate` under the
+/// `ASCredentialProviderExtensionCapabilities` dictionary.
+///
+///     Info.plist
+///     ├─ NSExtension
+///         ├─ NSExtensionAttributes
+///             ├─ ASCredentialProviderExtensionCapabilities
+///                 ├─ SupportsCredentialUpdate => true
+- (void)reportAllAcceptedPublicKeyCredentialsForRelyingParty:(NSString *)relyingParty userHandle:(NSData *)userHandle acceptedCredentialIDs:(NSArray<NSData *> *)acceptedCredentialIDs;
+
+/// Receive report when relying party indicates a password credential is no longer needed for a given user name.
+///
+/// This method will be called for handling password credential updates when a relying party indicates a password is no longer needed using the `ASCredentialUpdater` API.
+/// You may hide or remove the credential.
+/// This update should be handled in the background, so no blocking UI or error should ever be shown.
+///
+/// - Parameter domain: The website domain that the credential is saved for.
+/// - Parameter userName: The account user name.
+///
+/// To indicate support for this feature, add `SupportsCredentialUpdate` under the
+/// `ASCredentialProviderExtensionCapabilities` dictionary.
+///
+///     Info.plist
+///     ├─ NSExtension
+///         ├─ NSExtensionAttributes
+///             ├─ ASCredentialProviderExtensionCapabilities
+///                 ├─ SupportsCredentialUpdate => true
+- (void)reportUnusedPasswordCredentialForDomain:(NSString *)domain userName:(NSString *)userName;
 
 @end
 

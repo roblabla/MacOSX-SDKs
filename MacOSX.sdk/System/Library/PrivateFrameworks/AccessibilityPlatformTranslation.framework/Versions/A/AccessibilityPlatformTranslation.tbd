@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilityPlatformTranslation.framework/Versions/A/AccessibilityPlatformTranslation'
+current-version: 544
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AXPConvertValue, _AXPCustomActionIdentifier, _AXPCustomActionName, 
@@ -14,8 +15,8 @@ exports:
                        _AXPParametersDictAttributesKey, _AXPProcessAttributedString, 
                        _AXPSearchStartElementKey, _AXPShadowAttributeName, _AXPTextAlternativesAttributeName, 
                        _AXPTextEffectAttributeName, _AXPTreeDumpTypeAdditionalData, 
-                       _AXPTreeDumpTypeInitialDump, __AXPActionToString, __AXPAttributeToString, 
-                       __AXPNotificationToString ]
+                       _AXPTreeDumpTypeInitialDump, _AXPTreeDumpTypeTreeDestroyed, 
+                       __AXPActionToString, __AXPAttributeToString, __AXPNotificationToString ]
     objc-classes:    [ AXPHostCacheManager, AXPHostCacheOverlayView, AXPMacPlatformElement, 
                        AXPTranslationObject, AXPTranslator, AXPTranslatorRequest, 
                        AXPTranslatorResponse ]

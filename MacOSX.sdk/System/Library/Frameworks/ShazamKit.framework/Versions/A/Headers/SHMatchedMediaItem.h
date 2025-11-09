@@ -21,30 +21,30 @@ SH_EXPORT SHMediaItemProperty const SHMediaItemFrequencySkew;
 API_AVAILABLE(macos(15.4), ios(18.4), tvos(18.4), watchos(11.4), visionos(2.4))
 SH_EXPORT SHMediaItemProperty const SHMediaItemConfidence;
 
-/// @brief @c SHMatchedMediaItem represents metadata that has been matched against a @c SHCatalog
-/// @discussion Extra information is presented that can only be generated from a match. The properties provided here
-/// that are not available on @c SHMediaItem are ephemeral and can differ each time there is a match of the @c SHSignature that this
-/// object represents
+/// An object that represents the metadata for a matched reference signature.
 ///
-/// @note @c SHMatchedMediaItem is not intended to be subclassed
+/// To access properties for custom media items, use subscripting. For more information, see ``SHMediaItem``.
 SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface SHMatchedMediaItem : SHMediaItem <NSSecureCoding>
 
-/// The frequency difference between the reference and sample audio
-/// @discussion A value of 0.0 indicates the matched audio at the original frequency,
-/// a value of 0.1 indicates 100hz is now 110hz
+/// A multiple for the difference in frequency between the matched audio and the query audio.
+///
+/// A value of `0.0` indicates that the query and matched audio are at the same frequency. Other values indicate that the query audio is playing at a different frequency. For example, if the original recording plays at `100` Hz, a value of `0.05` indicates that the query recording plays at `105` Hz.
+///
+/// No match returns if the frequency skew is too large.
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) float frequencySkew;
 
-/// @brief The difference between the start of the reference audio and the start of the sample audio
-/// @note This value can be negative if the source audio starts before the reference audio
+/// The timecode in the reference recording that matches the start of the query, in seconds.
+///
+/// The value can be negative if the query signature contains unrecognizable data before the data that corresponds to the start of the matched reference item.
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) NSTimeInterval matchOffset;
 
-/// @brief The auto updating playback position in the reference signature
+/// The updated timecode in the reference recording that matches the current playback position of the query audio, in seconds.
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) NSTimeInterval predictedCurrentMatchOffset;
 
 /// The level of confidence in the match result.
-/// @note This may be fetched using the key @c SHMediaItemConfidence
-/// @discussion The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
+///
+/// The value ranges from 0.0 to 1.0, where 1.0 indicates the highest level of confidence.
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) float confidence API_AVAILABLE(macos(15.4), ios(18.4), tvos(18.4), watchos(11.4), visionos(2.4));
 
 @end

@@ -93,34 +93,34 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(9.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief The events associated with the trigger.
  */
-@property (readonly, copy, nonatomic) NSArray<HMEvent *> *events;
+@property (nonatomic, readonly, copy) NSArray<HMEvent *> *events;
 
 /*!
  * @brief The events that correspond to executing the restore of the scene before the trigger was executed.
  *        E.g. Execute the scene for 10 mins and restore original state is achieved by specifying a corresponding
  *        HMDurationEvent in the list of endEvents.
  */
-@property (readonly, copy, nonatomic) NSArray<HMEvent *> *endEvents API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nonatomic, readonly, copy) NSArray<HMEvent *> *endEvents API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief The predicate to evaluate before executing the action sets associated with the trigger.
  */
-@property (readonly, copy, nonatomic, nullable) NSPredicate *predicate;
+@property (nullable, nonatomic, readonly, copy) NSPredicate *predicate;
 
 /*!
  * @brief recurrences Specifies the recurrences for when the trigger is evaluated. This only supports days of the week.
  */
-@property (readonly, copy, nonatomic, nullable) NSArray<NSDateComponents *> *recurrences API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nullable, nonatomic, readonly, copy) NSArray<NSDateComponents *> *recurrences API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief Specifies whether this trigger is executed only once after which the trigger is disabled.
  */
-@property (readonly, nonatomic) BOOL executeOnce API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nonatomic, readonly) BOOL executeOnce API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  * @brief Specifies the current activation state of the trigger.
  */
-@property (readonly, assign, nonatomic) HMEventTriggerActivationState triggerActivationState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nonatomic, readonly, assign) HMEventTriggerActivationState triggerActivationState API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 
 /*!

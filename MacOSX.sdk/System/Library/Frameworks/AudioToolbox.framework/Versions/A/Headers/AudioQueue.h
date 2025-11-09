@@ -256,6 +256,12 @@ CF_ENUM(OSStatus) {
     @constant   kAudioQueueProperty_TimePitchBypass
         A read/write property whose value is a UInt32 describing whether the time/pitch unit
         has been bypassed (1=bypassed, 0=not bypassed).
+    @constant   kAudioQueueProperty_IntendedSpatialExperience
+        A read/write property whose value is an CASpatialAudioExperience describing this specific
+        AudioQueue's intended spatial experience. Only useful for output AudioQueue's not configured
+        in offline mode. Setting this property on an input AudioQueue or an offline AudioQueue is
+        a no-op. The default value of CAAutomaticSpatialAudio value means the AudioQueue uses its
+        AVAudioSession's intended spatial experience. See CASpatialAudioExperience for more details.
 */
 CF_ENUM(AudioQueuePropertyID) {
     kAudioQueueProperty_IsRunning               = 'aqrn',       //!< value is UInt32
@@ -279,6 +285,8 @@ CF_ENUM(AudioQueuePropertyID) {
     kAudioQueueProperty_EnableTimePitch         = 'q_tp',       // value is UInt32, 0/1
     kAudioQueueProperty_TimePitchAlgorithm      = 'qtpa',       // value is UInt32. See values below.
     kAudioQueueProperty_TimePitchBypass         = 'qtpb',       // value is UInt32, 1=bypassed
+    
+    kAudioQueueProperty_IntendedSpatialExperience API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(ios, watchos, tvos, macos) CF_REFINED_FOR_SWIFT = 'iseo', // value is CASpatialAudioExperience*
 };
 
 /*!

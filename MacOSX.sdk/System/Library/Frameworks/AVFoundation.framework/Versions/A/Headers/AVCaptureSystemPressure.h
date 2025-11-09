@@ -50,6 +50,7 @@ AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelCritic
  */
 AVF_EXPORT AVCaptureSystemPressureLevel const AVCaptureSystemPressureLevelShutdown API_AVAILABLE(ios(11.1), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos);
 
+
 /*!
  @enum AVCaptureSystemPressureFactors
  @abstract
@@ -73,6 +74,7 @@ typedef NS_OPTIONS(NSUInteger, AVCaptureSystemPressureFactors) {
     AVCaptureSystemPressureFactorDepthModuleTemperature = (1UL << 2),
     AVCaptureSystemPressureFactorCameraTemperature API_AVAILABLE(ios(17.0), macCatalyst(17.0), tvos(17.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos) = (1UL << 3),
 } API_AVAILABLE(ios(11.1), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos);
+
 
 @class AVCaptureSystemPressureStateInternal;
 

@@ -23,15 +23,15 @@ typedef NSString *CKRecordFieldKey;
 /*! Use this constant for the recordType parameter when fetching User Records. */
 CK_EXTERN CKRecordType const CKRecordTypeUserRecord API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0));
 
-/*! For use in queries to match on record properties.  Matches `record.recordID`.  Value is a `CKRecordID` */
+/*! For use in queries to match on record properties.  Matches `record.recordID`.  Value is a ``CKRecordID`` */
 CK_EXTERN CKRecordFieldKey const CKRecordRecordIDKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) NS_REFINED_FOR_SWIFT;
 
-/*! For use in queries to match on record properties.  Matches `record.creatorUserRecordID`.  Value is a `CKRecordID` */
+/*! For use in queries to match on record properties.  Matches `record.creatorUserRecordID`.  Value is a ``CKRecordID`` */
 CK_EXTERN CKRecordFieldKey const CKRecordCreatorUserRecordIDKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) NS_REFINED_FOR_SWIFT;
 /*! For use in queries to match on record properties.  Matches `record.creationDate`.  Value is a `NSDate` */
 CK_EXTERN CKRecordFieldKey const CKRecordCreationDateKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) NS_REFINED_FOR_SWIFT;
 
-/*! For use in queries to match on record properties.  Matches `record.lastModifiedUserRecordID`.  Value is a `CKRecordID` */
+/*! For use in queries to match on record properties.  Matches `record.lastModifiedUserRecordID`.  Value is a ``CKRecordID`` */
 CK_EXTERN CKRecordFieldKey const CKRecordLastModifiedUserRecordIDKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) NS_REFINED_FOR_SWIFT;
 /*! For use in queries to match on record properties.  Matches `record.modificationDate`.  Value is a `NSDate` */
 CK_EXTERN CKRecordFieldKey const CKRecordModificationDateKey API_AVAILABLE(macos(10.10), ios(8.0), watchos(3.0)) NS_REFINED_FOR_SWIFT;

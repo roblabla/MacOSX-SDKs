@@ -7,8 +7,6 @@
 
 #import <ARKit/ARAnchor.h>
 
-#define AR_APPCLIPCODE_ANCHOR_PROTOCOLS <ARTrackable>
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -18,10 +16,10 @@ API_AVAILABLE(ios(14.3))
 typedef NS_ENUM(NSInteger, ARAppClipCodeURLDecodingState) {
     /** App clip code tracking is attempting to decode the URL. */
     ARAppClipCodeURLDecodingStateDecoding,
-	
+
     /** App clip code tracking failed to decode the URL. */
     ARAppClipCodeURLDecodingStateFailed,
-    
+
     /** App clip code tracking decoded the URL. */
     ARAppClipCodeURLDecodingStateDecoded
 } NS_SWIFT_NAME(ARAppClipCodeAnchor.URLDecodingState);
@@ -31,7 +29,7 @@ typedef NS_ENUM(NSInteger, ARAppClipCodeURLDecodingState) {
  */
 API_AVAILABLE(ios(14.3))
 NS_SWIFT_SENDABLE
-@interface ARAppClipCodeAnchor : ARAnchor AR_APPCLIPCODE_ANCHOR_PROTOCOLS
+@interface ARAppClipCodeAnchor : ARAnchor <ARTrackable>
 
 
 /**

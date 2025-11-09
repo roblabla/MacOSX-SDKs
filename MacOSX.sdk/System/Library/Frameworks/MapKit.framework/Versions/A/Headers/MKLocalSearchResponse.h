@@ -12,7 +12,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_9, 6_1) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(6.1), tvos(9.2), watchos(1.0))
 @interface MKLocalSearchResponse : NSObject
 
 // An array of MKMapItems sorted by relevance in descending order

@@ -463,7 +463,7 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
  @abstract Returns a rectangle that's transformed by the specified affine transform.
  
  @param rect The source rectangle.
- @param transform The affine transform that the function applies to the size.
+ @param transform The affine transform that the function applies to the rectangle.
  @returns The transformed rectangle.
  @discussion Because affine transforms do not preserve rectangles in general, this function returns the smallest rectangle that contains the transformed corner points of the `rect` parameter. If the affine transform `transform` consists solely of scaling and translation operations, then the returned rectangle coincides with the rectangle constructed from the eight transformed corners.
  */
@@ -476,7 +476,7 @@ __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
  @abstract Returns a rectangle that's transformed by the specified projective transform.
  
  @param rect The source rectangle.
- @param transform The projective transform that the function applies to the size.
+ @param transform The projective transform that the function applies to the rectangle.
  @returns The transformed rectangle.
  @discussion Because affine transforms do not preserve rectangles in general, this function returns the smallest rectangle that contains the transformed corner points of the `rect` parameter. If the affine transform `transform` consists solely of scaling and translation operations, then the returned rectangle coincides with the rectangle constructed from the eight transformed corners.
  */

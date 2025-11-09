@@ -48,6 +48,7 @@ typedef NS_ENUM(NSUInteger, CPTripEstimateStyle) {
 @protocol CPMapTemplateDelegate;
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPMapTemplate : CPTemplate <CPBarButtonProviding>
 
 /**
@@ -180,6 +181,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @end
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPMapTemplateDelegate <NSObject>
 @optional
 
@@ -254,6 +256,89 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  Called when a pan gesture ends. May not be called when connected to some CarPlay systems.
  */
 - (void)mapTemplate:(CPMapTemplate *)mapTemplate didEndPanGestureWithVelocity:(CGPoint)velocity;
+
+#pragma mark - Pinching
+
+/// Tells the delegate that the zoom gesture started.
+///
+/// - Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///
+- (void)mapTemplateDidBeginZoomGesture:(CPMapTemplate *)mapTemplate API_AVAILABLE(ios(26.0));
+
+/// Tells the delegate that a person is zooming on the map.
+///
+/// - Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///     - center: A ``CGPoint`` that indicates the center point of the zoom.
+///     - scale: A ``CGFloat`` that indicates the scale factor relative to the zoom gesture in screen coordinates.
+///     - velocity: The velocity of the zoom gesture in scale factor per second.
+///
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate didUpdateZoomGestureWithCenter:(CGPoint)center scale:(CGFloat)scale velocity:(CGFloat)velocity API_AVAILABLE(ios(26.0));
+
+///
+/// Tells the delegate that a person stopped zooming the map.
+///
+///- Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///     - velocity: The velocity of the zoom gesture in scale factor per second.
+///
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate didEndZoomGestureWithVelocity:(CGFloat)velocity API_AVAILABLE(ios(26.0));
+
+#pragma mark - Rotation Gesture
+/// Tells the delegate that the rotation gesture started.
+///
+/// - Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///
+- (void)mapTemplateDidBeginRotationGesture:(CPMapTemplate *)mapTemplate API_AVAILABLE(ios(26.0));
+
+/// Tells the delegate that a person is rotating the map.
+///
+/// - Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///     - center: A ``CGPoint`` that indicates the center between two fingers performing the rotation gesture.
+///     - rotation: A ``CGFloat`` that indicates the rotation of the gesture in radians.
+///     - velocity: The velocity of the rotation gesture in radians per second.
+///
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate didRotateWithCenter:(CGPoint)center rotation:(CGFloat)rotation velocity:(CGFloat)velocity API_AVAILABLE(ios(26.0));
+
+///
+/// Tells the delegate that a person stopped rotating the map.
+///
+///- Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///     - velocity: The velocity of the rotation gesture in radians per second.
+///
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate rotationDidEndWithVelocity:(CGFloat)velocity API_AVAILABLE(ios(26.0));
+
+#pragma mark - Pitch Gesture
+/// Tells the delegate that the pitch gesture started.
+///
+/// - Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///
+- (void)mapTemplateDidBeginPitchGesture:(CPMapTemplate *)mapTemplate API_AVAILABLE(ios(26.0));
+
+/**
+ Called when a pitch gesture changes. May not be called when connected to some CarPlay systems
+ */
+/// Tells the delegate that a person is pitching the map.
+///
+/// - Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///     - center: A ``CGPoint`` that indicates the center between two fingers performing the pitch gesture.
+///
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate pitchWithCenter:(CGPoint)center API_AVAILABLE(ios(26.0));
+
+///
+/// Tells the delegate that a person stopped pitching the map.
+///
+///- Parameters:
+///     - mapTemplate: The ``CPMapTemplate`` the gesture applies to.
+///     - center: A ``CGPoint`` that indicates the center between two fingers performing the pitch gesture.
+///
+- (void)mapTemplate:(CPMapTemplate *)mapTemplate pitchEndedWithCenter:(CGPoint)center API_AVAILABLE(ios(26.0));
 
 #pragma mark - Alerts
 

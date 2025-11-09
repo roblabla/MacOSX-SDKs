@@ -81,6 +81,7 @@ typedef NS_ENUM(NSUInteger, NSManagedObjectContextConcurrencyType) {
 } API_AVAILABLE(macosx(10.7), ios(5.0));
 
 API_AVAILABLE(macosx(10.4),ios(3.0))
+NS_SWIFT_NONISOLATED NS_SWIFT_SENDABLE
 @interface NSManagedObjectContext : NSObject <NSCoding, NSLocking> {
 }
 
@@ -89,10 +90,10 @@ API_AVAILABLE(macosx(10.4),ios(3.0))
 - (instancetype)initWithConcurrencyType:(NSManagedObjectContextConcurrencyType)ct NS_DESIGNATED_INITIALIZER  API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* asynchronously performs the block on the context's queue.  Encapsulates an autorelease pool and a call to processPendingChanges */
-- (void)performBlock:(void (^)(void))block API_AVAILABLE(macosx(10.7),ios(5.0));
+- (void)performBlock:(void (^NS_SWIFT_SENDABLE)(void))block API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* synchronously performs the block on the context's queue.  May safely be called reentrantly.  */
-- (void)performBlockAndWait:(void (NS_NOESCAPE ^)(void))block API_AVAILABLE(macosx(10.7),ios(5.0));
+- (void)performBlockAndWait:(void (NS_NOESCAPE NS_SWIFT_SENDABLE^)(void))block API_AVAILABLE(macosx(10.7),ios(5.0));
 
 /* coordinator which provides model and handles persistency (multiple contexts can share a coordinator) */
 @property (nullable, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;

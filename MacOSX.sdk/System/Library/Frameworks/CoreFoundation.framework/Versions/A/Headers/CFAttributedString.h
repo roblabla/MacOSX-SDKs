@@ -154,6 +154,10 @@ CF_EXPORT void CFAttributedStringEndEditing(CFMutableAttributedStringRef aStr);
 Fills bidiLevels by applying the Unicode Bidi Algorithm (P, X, W, N, and I) to the characters in range. Returns true if the result is not uni-level LTR (in other words, needing further Bidi processing). baseDirection is NSWritingDirection (NSWritingDirectionNatural, NSWritingDirectionLeftToRight, and NSWritingDirectionRightToLeft).  Understands NSWritingDirectionAttributeName values.
 */
 CF_EXPORT bool CFAttributedStringGetBidiLevelsAndResolvedDirections(CFAttributedStringRef attributedString, CFRange range, int8_t baseDirection, uint8_t *bidiLevels, uint8_t *baseDirections);
+
+/// @function CFAttributedStringGetStatisticalWritingDirections
+/// @discussion If baseDirection is not NSWritingDirectionNatural, result comes from CFAttributedStringGetBidiLevelsAndResolvedDirections; otherwise, it fills bidiLevels by applying a statistical approach (a paragraph is RTL if 40% or more of its words are RTL) to the characters in range. Returns true if the result is not uni-level LTR (in other words, needing further Bidi processing). baseDirection is NSWritingDirection (NSWritingDirectionNatural, NSWritingDirectionLeftToRight, and NSWritingDirectionRightToLeft).  Understands NSWritingDirectionAttributeName values.
+CF_EXPORT bool CFAttributedStringGetStatisticalWritingDirections(CFAttributedStringRef attributedString, CFRange range, int8_t baseDirection, uint8_t *bidiLevels, uint8_t *baseDirections) API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
 #endif
 
 CF_EXTERN_C_END

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 840.8
+current-version: 876.2.200
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -212,6 +212,7 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV17filenameExtension12conformingToACSgSS_ACtcfC', 
                        '_$s22UniformTypeIdentifiers6UTTypeV17preferredMIMETypeSSSgvg', 
                        '_$s22UniformTypeIdentifiers6UTTypeV17preferredMIMETypeSSSgvpMV', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV17setDefaultHandler2to010completionG0ySo19LSApplicationRecordCSg_ySb_s5Error_pSgtctF', 
                        '_$s22UniformTypeIdentifiers6UTTypeV17spotlightImporterACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV17spotlightImporterACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV18_appCategorySportsACvgZ', 
@@ -272,6 +273,8 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV21_localizedDescription5usingSSSgSaySSG_tF', 
                        '_$s22UniformTypeIdentifiers6UTTypeV21_preferredHFSTypeCodes6UInt32VSgvg', 
                        '_$s22UniformTypeIdentifiers6UTTypeV21_preferredHFSTypeCodes6UInt32VSgvpMV', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV21referenceAccessoryURL10Foundation0G0VSgvg', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV21referenceAccessoryURL10Foundation0G0VSgvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV21systemPreferencesPaneACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV21systemPreferencesPaneACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV22_appCategoryBoardGamesACvgZ', 
@@ -348,6 +351,8 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV28_appCategorySocialNetworkingACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV29_appCategoryHealthcareFitnessACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV29_appCategoryHealthcareFitnessACvpZMV', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV29_remoteApplicationPlaceholderACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV29_remoteApplicationPlaceholderACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV2eeoiySbAC_ACtFZ', '_$s22UniformTypeIdentifiers6UTTypeV31_localizedDescriptionDictionarySDyS2SGvg', 
                        '_$s22UniformTypeIdentifiers6UTTypeV31_localizedDescriptionDictionarySDyS2SGvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV31_namedConstants_UTCoreTypesPrivSayACGvgZ', 
@@ -439,6 +444,7 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV8_homePodACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_homePodACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8_macBookACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_macBookACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8_macMiniACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_macMiniACvpZMV', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV8_mxiFileACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_mxiFileACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8_speakerACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8_speakerACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8bookmarkACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV8bookmarkACvpZMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV8conforms2toSbAC_tF', 

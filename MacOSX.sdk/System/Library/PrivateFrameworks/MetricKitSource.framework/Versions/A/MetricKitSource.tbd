@@ -7,5 +7,5 @@ exports:
     symbols:         [ _MetricKitSourceVersionNumber, _MetricKitSourceVersionString ]
     objc-classes:    [ MXHangTracerData, MXPowerlogData, MXReportCrashData, MXSampleAnalysisParser, 
                        MXSourceData, MXSourceManager, MXSourceUtilities, MXSourceXPCPayload, 
-                       MXSpinTracerData ]
+                       MXSpaceAttributionData, MXSpinTracerData ]
 ...

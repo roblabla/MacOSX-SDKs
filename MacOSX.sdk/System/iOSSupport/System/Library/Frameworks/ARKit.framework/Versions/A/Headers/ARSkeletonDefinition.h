@@ -9,16 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-typedef NSString *ARSkeletonJointName NS_TYPED_ENUM NS_SWIFT_NAME(ARSkeleton.JointName)        API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRoot                            API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameHead                            API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameLeftHand                        API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRightHand                       API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameLeftFoot                        API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRightFoot                       API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameLeftShoulder                    API_AVAILABLE(ios(13.0));
-FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRightShoulder                   API_AVAILABLE(ios(13.0));
+typedef NSString *ARSkeletonJointName NS_TYPED_ENUM NS_SWIFT_NAME(ARSkeleton.JointName) API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRoot API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameHead API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameLeftHand API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRightHand API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameLeftFoot API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRightFoot API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameLeftShoulder API_AVAILABLE(ios(13.0));
+FOUNDATION_EXTERN ARSkeletonJointName const ARSkeletonJointNameRightShoulder API_AVAILABLE(ios(13.0));
 
 
 @class ARSkeleton2D;
@@ -74,7 +73,7 @@ NS_SWIFT_SENDABLE
 
 /**
  Returns the index for a given joint identifier.
- 
+
  @param jointName Name of a given joint.
  @discussion This function returns NSNotFound if an invalid joint name is passed.
  @return Joint index.
@@ -88,4 +87,3 @@ NS_SWIFT_SENDABLE
 @end
 
 NS_ASSUME_NONNULL_END
-

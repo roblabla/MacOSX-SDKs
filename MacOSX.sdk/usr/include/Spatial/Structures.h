@@ -353,10 +353,10 @@ union {
         /// The distance to the origin.
         double radius;
         
-        /// The inclination angle, in radians.
+        /// The inclination angle.
         SPAngle inclination;
         
-        /// The azimuthal angle, in radians.
+        /// The azimuthal angle.
         SPAngle azimuth;
         
         /// The explicit padding.
@@ -390,25 +390,6 @@ SPSphericalCoordinates3D SPSphericalCoordinates3DMake(double radius, SPAngle inc
         azimuth,
         1.0 };
 }
-
-// MARK: - Shear enumeration
-
-/// Enumerations that describe an axis.
-typedef enum : uint32_t {
-    
-    /// The operation is along the x-axis.
-    SPAxisX SPATIAL_REFINED_FOR_SWIFT __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0x0001,
-    
-    /// The operation is along the y-axis.
-    SPAxisY SPATIAL_REFINED_FOR_SWIFT __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0x0002,
-    
-    /// The operation is along the z-axis.
-    SPAxisZ SPATIAL_REFINED_FOR_SWIFT __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) = 0x0004
- 
-}
-SPAxis
-SPATIAL_SWIFT_NAME(Axis3D);
-
 
 // MARK: - Special Values
 
@@ -553,7 +534,7 @@ static const SPRect3D SPRect3DInfinity = {
         }
 };
 
-/// The null rectangle, representing an invalid value.
+/// The null rectangle, represents an invalid value.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_REFINED_FOR_SWIFT
 static const SPRect3D SPRect3DNull = {
@@ -568,7 +549,7 @@ static const SPRect3D SPRect3DNull = {
     .size = { 0 }
 };
 
-/// The identity transform.
+/// The identity affine transform.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(AffineTransform3D.identity)
 static const SPAffineTransform3D SPAffineTransform3DIdentity = {
@@ -590,7 +571,7 @@ static const SPAffineTransform3D SPAffineTransform3DInvalid = {
     (simd_double3) {INFINITY, INFINITY, INFINITY}
 };
 
-/// The identity transform.
+/// The identity projective transform.
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 SPATIAL_SWIFT_NAME(ProjectiveTransform3D.identity)
 static const SPProjectiveTransform3D SPProjectiveTransform3DIdentity = {

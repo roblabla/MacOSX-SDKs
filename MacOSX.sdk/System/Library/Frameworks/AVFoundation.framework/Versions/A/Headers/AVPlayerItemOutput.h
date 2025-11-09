@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2024 Apple Inc. All rights reserved.
+	Copyright 2011-2025 Apple Inc. All rights reserved.
 
 */
 
@@ -33,10 +33,13 @@ NS_ASSUME_NONNULL_BEGIN
 		• removeOutput:
 		
 		When an AVPlayerItemOutput is associated with an AVPlayerItem, samples are provided for a media type in accordance with the rules for mixing, composition, or exclusion that the AVPlayer honors among multiple enabled tracks of that media type for its own rendering purposes. For example, video media will be composed according to the instructions provided via AVPlayerItem.videoComposition, if present.
+
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
 
 @class AVPlayerItemOutputInternal;
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVPlayerItemOutput : NSObject
 {
@@ -106,6 +109,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0))
 	@discussion
 		It is best to use a AVPlayerItemVideoOutput in conjunction with the services of a CADisplayLink to accurately synchronize with screen device refreshes. For optimum efficiency there are opportunities to quiesce these services. Examples include when playback is paused or during playback of empty edits. Below is sample code that illustrates how you might quiesce a CADisplayLink when used with a AVPlayerItemVideoOutput.
  
+ ```
  #if MACOS
 	myDisplayLink = [[NSScreen mainScreen]/ displayLinkWithTarget:self selector:@selector(displayLinkCallback:)]; // or use - [NSView displayLinkWithTarget:selector:] / -[NSWindow displayLinkWithTarget:selector:]
  #else
@@ -148,12 +152,16 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0), visionos(1.0))
 		myLastHostTime = CMTimeGetSeconds(CMClockGetTime(CMClockGetHostTimeClock()));
 		[myDisplayLink setPaused:NO];
 	}
+ ```
+
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
  
 @protocol AVPlayerItemOutputPullDelegate;
 
 @class AVPlayerItemVideoOutputInternal;
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemVideoOutput : AVPlayerItemOutput
 {
@@ -169,7 +177,11 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(w
 	@result			An instance of AVPlayerItemVideoOutput.
  */
 
-- (instancetype)initWithPixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)pixelBufferAttributes NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithPixelBufferAttributes:(nullable NSDictionary<NSString *, id> * NS_SWIFT_SENDABLE)pixelBufferAttributes NS_DESIGNATED_INITIALIZER
+#if __swift__
+API_DEPRECATED("Use init(pixelBufferAttributes: CVPixelBuffer.Attributes) instead", macos(10.8, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
 	@method			initWithOutputSettings:
@@ -190,7 +202,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(w
 					- the settings do not honor the requirements listed above for outputSettings
  */
 
-- (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> *)outputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), visionos(1.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithOutputSettings:(nullable NSDictionary<NSString *, id> * NS_SWIFT_SENDABLE)outputSettings API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), visionos(1.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method			hasNewPixelBufferForItemTime:
@@ -219,7 +231,11 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(w
 					A CMTime pointer whose value will contain the true display deadline for the copied pixel buffer. Can be NULL.
  */
 
-- (nullable CVPixelBufferRef)copyPixelBufferForItemTime:(CMTime)itemTime itemTimeForDisplay:(nullable CMTime *)outItemTimeForDisplay CF_RETURNS_RETAINED;
+- (nullable CVPixelBufferRef)copyPixelBufferForItemTime:(CMTime)itemTime itemTimeForDisplay:(nullable CMTime *)outItemTimeForDisplay CF_RETURNS_RETAINED
+#if __swift__
+API_DEPRECATED("Use pixelBufferAndDisplayTime(forItemTime:) instead", macos(10.8, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
 	@method			setDelegate:queue:
@@ -261,6 +277,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(w
 /*!
 	@protocol		AVPlayerItemOutputPullDelegate
 	@abstract		Defines common delegate methods for objects participating in AVPlayerItemOutput pull sample output acquisition.
+	@discussion		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
 
 NS_SWIFT_SENDABLE
@@ -296,7 +313,10 @@ NS_SWIFT_SENDABLE
 	@abstract		A subclass of AVPlayerItemOutput that can vend media with a legible characteristic as NSAttributedStrings.
 	@discussion
 		An instance of AVPlayerItemLegibleOutput is typically initialized using the -init method.
+
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlayerItemLegibleOutput : AVPlayerItemOutput
 {
@@ -401,6 +421,7 @@ AVF_EXPORT AVPlayerItemLegibleOutputTextStylingResolution const AVPlayerItemLegi
 /*!
 	@protocol		AVPlayerItemLegibleOutputPushDelegate
 	@abstract		Extends AVPlayerItemOutputPushDelegate to provide additional methods specific to attributed string output.
+	@discussion		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
 NS_SWIFT_SENDABLE
 @protocol AVPlayerItemLegibleOutputPushDelegate <AVPlayerItemOutputPushDelegate>
@@ -429,6 +450,7 @@ NS_SWIFT_SENDABLE
 /*!
  @protocol		AVPlayerItemOutputPushDelegate
  @abstract		Defines common delegate methods for objects participating in AVPlayerItemOutput push sample output acquisition.
+ @discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
 NS_SWIFT_SENDABLE
 @protocol AVPlayerItemOutputPushDelegate <NSObject>
@@ -455,7 +477,10 @@ NS_SWIFT_SENDABLE
  
 	@discussion
 		Setting the value of suppressesPlayerRendering on an instance of AVPlayerItemMetadataOutput has no effect.
+
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0))
 @interface AVPlayerItemMetadataOutput : AVPlayerItemOutput
 {
@@ -536,7 +561,7 @@ NS_SWIFT_SENDABLE
 		Note that if the item carries multiple metadata tracks containing metadata with the same metadata identifiers, this method can be invoked for each one separately, each with reference to the associated AVPlayerItemTrack.
 		Note that the associated AVPlayerItemTrack parameter can be nil which implies that the metadata describes the asset as a whole, not just a single track of the asset.
  */
-- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)groups fromPlayerItemTrack:(nullable AVPlayerItemTrack *)track API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
+- (void)metadataOutput:(AVPlayerItemMetadataOutput *)output didOutputTimedMetadataGroups:(NSArray<AVTimedMetadataGroup *> *)NS_SWIFT_SENDING groups fromPlayerItemTrack:(nullable AVPlayerItemTrack *)track API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 @end
 
@@ -548,7 +573,10 @@ NS_SWIFT_SENDABLE
 	@abstract		A subclass of AVPlayerItemOutput that can vend media with a legible characteristic as rendered CVPixelBufferRefs.
 	@discussion
 		An instance of AVPlayerItemRenderedLegibleOutput is initialized using the -init method.
+
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(15.0), ios(18.0)) API_UNAVAILABLE(tvos, watchos, visionos)
 @interface AVPlayerItemRenderedLegibleOutput : AVPlayerItemOutput
 AV_INIT_UNAVAILABLE

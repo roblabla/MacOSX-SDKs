@@ -13,7 +13,6 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
  */
 @property (nonatomic, readonly, nullable, copy) NSData *rawAttestationObject;
 
-
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

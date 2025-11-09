@@ -34,18 +34,18 @@ API_UNAVAILABLE(ios, macos, watchos, tvos, macCatalyst)
 /*!
  * @brief The category of the accessory to be added.
  */
-@property (nonatomic, strong, readonly) HMAccessoryCategory *accessoryCategory;
+@property (nonatomic, readonly, strong) HMAccessoryCategory *accessoryCategory;
 
 /*!
  * @brief Indication if the setup URL needs to be updated for this request. If this is true,
  *        payloadWithURL:ownershipToken: must be used to create the HMAccessorySetupPayload.
  */
-@property (nonatomic, assign, readonly) BOOL requiresSetupPayloadURL;
+@property (nonatomic, readonly, assign) BOOL requiresSetupPayloadURL;
 
 /*!
  * @brief Indication if the ownership token needs to be updated for this request.
  */
-@property (nonatomic, assign, readonly) BOOL requiresOwnershipToken API_DEPRECATED("No longer supported", ios(13.0, 13.0));
+@property (nonatomic, readonly, assign) BOOL requiresOwnershipToken API_DEPRECATED("No longer supported", ios(13.0, 13.0));
 
 /*!
  * @brief Creates an accessory setup payload with ownership token

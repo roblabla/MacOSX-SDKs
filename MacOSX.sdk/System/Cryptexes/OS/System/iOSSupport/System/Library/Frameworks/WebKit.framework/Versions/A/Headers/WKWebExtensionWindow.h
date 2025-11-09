@@ -39,7 +39,7 @@ WK_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, WKWebExtensionWindowType) {
     WKWebExtensionWindowTypeNormal,
     WKWebExtensionWindowTypePopup,
-} NS_SWIFT_NAME(WKWebExtension.WindowType) API_AVAILABLE(macos(NA), ios(18.4), visionos(NA));
+} NS_SWIFT_NAME(WKWebExtension.WindowType) API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4));
 
 /*!
  @abstract Constants used by ``WKWebExtensionWindow`` to indicate possible states of a window.
@@ -53,10 +53,10 @@ typedef NS_ENUM(NSInteger, WKWebExtensionWindowState) {
     WKWebExtensionWindowStateMinimized,
     WKWebExtensionWindowStateMaximized,
     WKWebExtensionWindowStateFullscreen,
-} NS_SWIFT_NAME(WKWebExtension.WindowState) API_AVAILABLE(macos(NA), ios(18.4), visionos(NA));
+} NS_SWIFT_NAME(WKWebExtension.WindowState) API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4));
 
 /*! @abstract A class conforming to the ``WKWebExtensionWindow`` protocol represents a window to web extensions. */
-API_AVAILABLE(macos(NA), ios(18.4), visionos(NA)) WK_SWIFT_UI_ACTOR
+API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4)) WK_SWIFT_UI_ACTOR
 @protocol WKWebExtensionWindow <NSObject>
 @optional
 

@@ -12,6 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol CPTabBarTemplateDelegate;
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPTabBarTemplate : CPTemplate
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -76,6 +77,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @end
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPTabBarTemplateDelegate <NSObject>
 
 /**

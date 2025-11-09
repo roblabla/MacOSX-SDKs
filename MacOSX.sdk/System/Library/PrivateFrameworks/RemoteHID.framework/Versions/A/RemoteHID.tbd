@@ -6,6 +6,6 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RemoteHIDLog, _RemoteHIDLogPackets, _RemoteHIDVersionNumber, 
                        _RemoteHIDVersionString ]
-    objc-classes:    [ HIDRemoteDevice, HIDRemoteDeviceAACPServer, HIDRemoteDeviceServer, 
-                       HIDRemoteEndpoint ]
+    objc-classes:    [ HIDAACPRemoteEndpoint, HIDRemoteDevice, HIDRemoteDeviceAACPServer, 
+                       HIDRemoteDeviceServer, HIDRemoteEndpoint ]
 ...

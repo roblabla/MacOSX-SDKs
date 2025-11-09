@@ -25,6 +25,8 @@ NS_CLASS_AVAILABLE(12_0, 15_0)
 
 typedef NSString* CIRAWDecoderVersion NS_TYPED_ENUM;
 CORE_IMAGE_EXPORT CIRAWDecoderVersion const CIRAWDecoderVersionNone;
+CORE_IMAGE_EXPORT CIRAWDecoderVersion const CIRAWDecoderVersion9;
+CORE_IMAGE_EXPORT CIRAWDecoderVersion const CIRAWDecoderVersion9DNG;
 CORE_IMAGE_EXPORT CIRAWDecoderVersion const CIRAWDecoderVersion8;
 CORE_IMAGE_EXPORT CIRAWDecoderVersion const CIRAWDecoderVersion8DNG;
 CORE_IMAGE_EXPORT CIRAWDecoderVersion const CIRAWDecoderVersion7;
@@ -79,6 +81,11 @@ CORE_IMAGE_EXPORT CIRAWDecoderVersion const CIRAWDecoderVersion6DNG;
    A value less than 1 will darken the shadows.  A value greater than 1 will lighten the shadows.
    The value should be the range of 0...2.  The default value is 1. */
 @property(readwrite) float boostShadowAmount;
+
+/* A boolean value to control if highlight recovery is enabled or not.
+   The default value is true. */
+@property(readonly, getter= isHighlightRecoverySupported) BOOL highlightRecoverySupported NS_AVAILABLE(16_0,19_0);
+@property(readwrite, getter= isHighlightRecoveryEnabled) BOOL highlightRecoveryEnabled NS_AVAILABLE(16_0,19_0);
 
 /* A boolean value to control if gamut mapping is enabled or not.
    The default value is true. */

@@ -21,10 +21,19 @@
 #include <VideoToolbox/VTRAWProcessingSession.h>
 #include <VideoToolbox/VTRAWProcessingProperties.h>
 #include <VideoToolbox/VTProfessionalVideoWorkflow.h>
-#ifdef __OBJC__
-#include <VideoToolbox/VTFrameProcessor.h>
-#endif // __OBJC__
 #endif // ( !TARGET_OS_IPHONE || TARGET_OS_MACCATALYST )
-#if ( TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_VISION )
 #include <VideoToolbox/VTHDRPerFrameMetadataGenerationSession.h>
-#endif // ( TARGET_OS_OSX || TARGET_OS_IOS || TARGET_OS_TVOS || TARGET_OS_XR )
+#include <VideoToolbox/VTMotionEstimationSession.h>
+#include <VideoToolbox/VTMotionEstimationSessionProperties.h>
+#include <VideoToolbox/VTFrameProcessor.h>
+#include <VideoToolbox/VTFrameProcessorConfiguration.h>
+#include <VideoToolbox/VTFrameProcessorErrors.h>
+#include <VideoToolbox/VTFrameProcessorFrame.h>
+#include <VideoToolbox/VTFrameProcessorParameters.h>
+#include <VideoToolbox/VTFrameProcessor_FrameRateConversion.h>
+#include <VideoToolbox/VTFrameProcessor_MotionBlur.h>
+#include <VideoToolbox/VTFrameProcessor_OpticalFlow.h>
+#include <VideoToolbox/VTFrameProcessor_TemporalNoiseFilter.h>
+#include <VideoToolbox/VTFrameProcessor_SuperResolutionScaler.h>
+#include <VideoToolbox/VTFrameProcessor_LowLatencySuperResolutionScaler.h>
+#include <VideoToolbox/VTFrameProcessor_LowLatencyFrameInterpolation.h>

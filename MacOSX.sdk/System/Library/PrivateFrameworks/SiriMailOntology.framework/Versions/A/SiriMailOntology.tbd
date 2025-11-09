@@ -7796,6 +7796,7 @@ exports:
                        '_$s16SiriMailOntology6CommonO14AttachmentTypeV12DefinedValueO5movieyA2GmFWC', 
                        '_$s16SiriMailOntology6CommonO14AttachmentTypeV12DefinedValueO5photoyA2GmFWC', 
                        '_$s16SiriMailOntology6CommonO14AttachmentTypeV12DefinedValueO5videoyA2GmFWC', 
+                       '_$s16SiriMailOntology6CommonO14AttachmentTypeV12DefinedValueO6resultyA2GmFWC', 
                        '_$s16SiriMailOntology6CommonO14AttachmentTypeV12DefinedValueO6screenyA2GmFWC', 
                        '_$s16SiriMailOntology6CommonO14AttachmentTypeV12DefinedValueO6windowyA2GmFWC', 
                        '_$s16SiriMailOntology6CommonO14AttachmentTypeV12DefinedValueO7articleyA2GmFWC', 

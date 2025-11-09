@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015, 2018, 2020 Apple Inc.
+ * Copyright (c) 2015, 2018, 2020, 2025 Apple Inc.
  * All rights reserved.
  */
 
@@ -375,7 +375,8 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *   Deliver the NEHotspotHelperResponse to the HotspotHelper infrastructure.
  */
 - (void)deliver
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+	API_DEPRECATED("Use handleCommand in NEHotspotEvaluationProvider or NEHotspotAuthenticationProvider API", ios(9.0, 26.0))
+	API_UNAVAILABLE(macos, watchos, tvos);
 @end
 
 /*!
@@ -413,7 +414,8 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
  *   The NEHotspotHelper class allows an application to register itself as a
  *   HotspotHelper.
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
+API_DEPRECATED("Use NEHotspotManager API", ios(9.0, 26.0))
+API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEHotspotHelper : NSObject
 
 /*!
@@ -451,7 +453,8 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 + (BOOL)registerWithOptions:(nullable NSDictionary<NSString *,NSObject *> *)options
 					  queue:(dispatch_queue_t)queue
 					handler:(NEHotspotHelperHandler)handler
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+	API_DEPRECATED("Use NEHotspotManager API", ios(9.0, 26.0))
+	API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method logoff:
@@ -477,7 +480,8 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *   kNEHotspotHelperResultSuccess, the Wi-Fi network is disassociated.
  */
 + (BOOL)logoff:(NEHotspotNetwork *)network
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+	API_DEPRECATED("Use NEHotspotManager API", ios(9.0, 26.0))
+	API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method supportedNetworkInterfaces
@@ -499,7 +503,8 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
  *   non-nil NSArray of NEHotspotNetwork objects otherwise.
  */
 + (NSArray *_Nullable)supportedNetworkInterfaces /* of NEHotspotNetwork */
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
+	API_DEPRECATED("Use NEHotspotManager API", ios(9.0, 26.0))
+	API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

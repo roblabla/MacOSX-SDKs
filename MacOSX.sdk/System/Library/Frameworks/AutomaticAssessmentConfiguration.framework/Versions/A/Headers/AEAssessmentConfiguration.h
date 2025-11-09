@@ -33,6 +33,7 @@ typedef NS_OPTIONS(NSUInteger, AEAutocorrectMode) {
 @property (nonatomic, assign) BOOL allowsActivityContinuation API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, macCatalyst);
 @property (nonatomic, assign) BOOL allowsDictation API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, macCatalyst);
 @property (nonatomic, assign) BOOL allowsAccessibilitySpeech API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, macCatalyst);
+@property (nonatomic, assign) BOOL allowsAccessibilityTypingFeedback API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst);
 @property (nonatomic, assign) BOOL allowsPasswordAutoFill API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, macCatalyst);
 @property (nonatomic, assign) BOOL allowsContinuousPathKeyboard API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, macCatalyst);
 

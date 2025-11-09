@@ -9,6 +9,7 @@
 #define __PKPAYMENT_H
 
 #import <TargetConditionals.h>
+#import <Foundation/Foundation.h>
 
 #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && __has_include(<AddressBook/ABRecord.h>)
 #import <AddressBook/ABRecord.h>
@@ -51,6 +52,7 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // The shipping method that the user chose.  This property is only set when the
 // application has set the shippingMethods property of the PKPaymentRequest.
 @property (nonatomic, strong, readonly, nullable) PKShippingMethod *shippingMethod;
+
 
 @end
 

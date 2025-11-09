@@ -191,17 +191,17 @@ FOUNDATION_EXPORT NSNotificationName const NSUserDefaultsSizeLimitExceededNotifi
  
  This is not necessarily an error: ubiquitous defaults set when no iCloud user is logged in will be uploaded the next time one is available if configured to do so.
  */
-FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsNoCloudAccountNotification API_AVAILABLE(ios(9.3), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsNoCloudAccountNotification API_DEPRECATED("Notification is never posted", ios(9.3, 9.3), watchos(2.0, 2.0), tvos(9.0, 9.0)) API_UNAVAILABLE(macos);
 
 /*!
  NSUbiquitousUserDefaultsDidChangeAccountsNotification is posted on the main queue to the default notification center when the user changes the primary iCloud account. The keys and values in the local key-value store have been replaced with those from the new account, regardless of the relative timestamps.
  */
-FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsDidChangeAccountsNotification API_AVAILABLE(ios(9.3), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsDidChangeAccountsNotification API_DEPRECATED("Notification is never posted", ios(9.3, 9.3), watchos(2.0, 2.0), tvos(9.0, 9.0)) API_UNAVAILABLE(macos);
 
 /*!
  NSUbiquitousUserDefaultsCompletedInitialSyncNotification is posted on the main queue when ubiquitous defaults finish downloading the first time a device is connected to an iCloud account, and when a user switches their primary iCloud account.
  */
-FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsCompletedInitialSyncNotification API_AVAILABLE(ios(9.3), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
+FOUNDATION_EXPORT NSNotificationName const NSUbiquitousUserDefaultsCompletedInitialSyncNotification API_DEPRECATED("Notification is never posted", ios(9.3, 9.3), watchos(2.0, 2.0), tvos(9.0, 9.0)) API_UNAVAILABLE(macos);
 
 /*!
  NSUserDefaultsDidChangeNotification is posted whenever any user defaults changed within the current process, but is not posted when ubiquitous defaults change, or when an outside process changes defaults. Using key-value observing to register observers for the specific keys of interest will inform you of all updates, regardless of where they're from.

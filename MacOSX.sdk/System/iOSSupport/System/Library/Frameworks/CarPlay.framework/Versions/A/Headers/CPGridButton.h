@@ -9,6 +9,31 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/**
+ @c CPMessageGridItemConfiguration encapsulates the message configuration options for the grid item.
+ */
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos)
+@interface CPMessageGridItemConfiguration : NSObject
+
+/**
+ Initialize a @c CPMessageGridItemConfiguration for use in a @c CPListTemplate.
+
+ @param conversationIdentifier A value meaningful to your app to identify this conversation.
+ This identifier is not directly displayed to the user; rather, when the user selects this grid item,
+ SiriKit will pass this identifier back to your app for your own use.
+ @param unread  A Boolean value indicating whether the item shows an unread indicator. The default value of this property is @c NO.
+
+*/
+- (instancetype)initWithConversationIdentifier:(NSString *)conversationIdentifier
+                                        unread:(BOOL)unread;
+
+@property (nonatomic, getter=isUnread) BOOL unread;
+
+@property (nonatomic, readonly) NSString *conversationIdentifier;
+
+@end
+
+
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
 @interface CPGridButton : NSObject <NSSecureCoding>
 
@@ -27,14 +52,23 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  @discussion To properly size your images, your app should size them to the display scale of the car screen.
  See -[CPInterfaceController carTraitCollection].
  */
-- (instancetype)initWithTitleVariants:(NSArray <NSString *> *)titleVariants image:(UIImage *)image handler:(void (^ _Nullable)(CPGridButton *barButton))handler NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithTitleVariants:(NSArray <NSString *> *)titleVariants image:(UIImage *)image handler:(void (^ _Nullable)(CPGridButton *gridButton))handler;
 
+/**
+ Initialize a button with a title, image, and message configuration.
+ */
+- (instancetype)initWithTitleVariants:(NSArray <NSString *> *)titleVariants
+                                image:(UIImage *)image
+                 messageConfiguration:(nullable CPMessageGridItemConfiguration *)messageConfiguration
+                              handler:(void (^ _Nullable)(CPGridButton *gridButton))handler NS_SWIFT_NAME(init(titleVariants:image:messageConfiguration:handler:)) API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos) NS_DESIGNATED_INITIALIZER;
 /**
  A Boolean value indicating whether the button is enabled.
 
  @discussion Set the value of this property to @c YES to enable the button or @c NO to disable it. The default value of this property is @c YES.
  */
 @property (nonatomic, assign, getter=isEnabled) BOOL enabled;
+
+@property (nonatomic, readonly, nullable) CPMessageGridItemConfiguration *messageConfiguration API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
 
 /**
  The image displayed on the button.
@@ -45,12 +79,16 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
  */
 @property (nonatomic, readonly) UIImage *image;
 
+- (void)updateImage:(UIImage *)image API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
+
 /**
  An array of title variants for this button, arranged from most to least preferred.
  The system will select a title from your list of provided variants that fits the available space.
  The variant strings should be provided as localized, displayable content.
  */
 @property (nonatomic, readonly) NSArray <NSString *> *titleVariants;
+
+- (void)updateTitleVariants:(NSArray <NSString *> *)titleVariants API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, watchos);
 
 @end
 

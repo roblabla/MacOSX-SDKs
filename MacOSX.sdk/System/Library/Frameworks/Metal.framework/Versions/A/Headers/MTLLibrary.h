@@ -9,6 +9,7 @@
 #import <Metal/MTLDefines.h>
 #import <Metal/MTLResource.h>
 #import <Metal/MTLArgument.h>
+#import <Metal/MTLTypes.h>
 
 
 #import <Metal/MTLFunctionDescriptor.h>
@@ -21,6 +22,29 @@ NS_ASSUME_NONNULL_BEGIN
 @class MTLFunctionConstantValues;
 @class MTLIntersectionFunctionDescriptor;
 @protocol MTLDynamicLibrary;
+
+@class MTLRenderPipelineReflection;
+@class MTLComputePipelineReflection;
+
+@protocol MTLLibrary;
+@protocol MTLRenderPipelineState;
+@protocol MTLComputePipelineState;
+
+/* Convenience typedefs that make it easy to declare storage for certain return types. */
+typedef __autoreleasing MTLRenderPipelineReflection * __nullable MTLAutoreleasedRenderPipelineReflection;
+typedef __autoreleasing MTLComputePipelineReflection * __nullable MTLAutoreleasedComputePipelineReflection;
+
+typedef void (^MTLNewLibraryCompletionHandler)(id <MTLLibrary> __nullable library, NSError * __nullable error);
+
+typedef void (^MTLNewRenderPipelineStateCompletionHandler)(id <MTLRenderPipelineState> __nullable renderPipelineState, NSError * __nullable error);
+
+typedef void (^MTLNewRenderPipelineStateWithReflectionCompletionHandler)(id <MTLRenderPipelineState> __nullable renderPipelineState, MTLRenderPipelineReflection * _Nullable_result reflection, NSError * __nullable error);
+
+typedef void (^MTLNewComputePipelineStateCompletionHandler)(id <MTLComputePipelineState> __nullable computePipelineState, NSError * __nullable error);
+
+typedef void (^MTLNewComputePipelineStateWithReflectionCompletionHandler)(id <MTLComputePipelineState> __nullable computePipelineState, MTLComputePipelineReflection * _Nullable_result reflection, NSError * __nullable error);
+
+typedef void (^MTLNewDynamicLibraryCompletionHandler)(id<MTLDynamicLibrary> __nullable library, NSError* __nullable error);
 
 
 @protocol MTLArgumentEncoder;
@@ -76,7 +100,7 @@ typedef NS_ENUM(NSUInteger, MTLFunctionType) {
     MTLFunctionTypeFragment = 2,
     MTLFunctionTypeKernel = 3,
     MTLFunctionTypeVisible API_AVAILABLE(macos(11.0), ios(14.0)) = 5,
-    MTLFunctionTypeIntersection API_AVAILABLE(macos(11.0), ios(14.0)) = 6,
+    MTLFunctionTypeIntersection API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0)) = 6,
     MTLFunctionTypeMesh API_AVAILABLE(macos(13.0), ios(16.0)) = 7,
     MTLFunctionTypeObject API_AVAILABLE(macos(13.0), ios(16.0)) = 8,
 } API_AVAILABLE(macos(10.11), ios(8.0));
@@ -101,7 +125,7 @@ MTL_EXPORT API_AVAILABLE(macos(10.12), ios(10.0))
  @abstract A handle to intermediate code used as inputs for either a MTLComputePipelineState or a MTLRenderPipelineState.
  @discussion MTLFunction is a single vertex shader, fragment shader, or compute function.  A Function can only be used with the device that it was created against.
 */
-API_AVAILABLE(macos(10.11), ios(8.0))
+API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @protocol MTLFunction <NSObject>
 
 /*!
@@ -175,7 +199,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  @property options
  @abstract The options this function was created with.
  */
-@property (readonly) MTLFunctionOptions options API_AVAILABLE(macos(11.0), ios(14.0));
+@property (readonly) MTLFunctionOptions options API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
 @end
@@ -195,6 +219,8 @@ typedef NS_ENUM(NSUInteger, MTLLanguageVersion) {
     (3 << 16) + 1,
     MTLLanguageVersion3_2 API_AVAILABLE(macos(15.0), ios(18.0)) =
     (3 << 16) + 2,
+    MTLLanguageVersion4_0 API_AVAILABLE(macos(26.0), ios(26.0)) =
+    (4 << 16) + 0,
 } API_AVAILABLE(macos(10.11), ios(9.0));
 
 typedef NS_ENUM(NSInteger, MTLLibraryType) {
@@ -366,10 +392,28 @@ MTL_EXPORT API_AVAILABLE(macos(10.11), ios(8.0))
 @property (readwrite, nonatomic) NSUInteger maxTotalThreadsPerThreadgroup API_AVAILABLE(macos(13.3), ios(16.4));
 
 /*!
+ @property requiredThreadsPerThreadgroup
+ @abstract Sets the required threads-per-threadgroup during dispatches. The `threadsPerThreadgroup` argument of any dispatch must match this value if it is set.
+           Optional, unless the pipeline is going to use CooperativeTensors in which case this must be set.
+           Setting this to a size of 0 in every dimension disables this property
+*/
+@property(readwrite, nonatomic) MTLSize requiredThreadsPerThreadgroup API_AVAILABLE(macos(26.0), ios(26.0));
+
+/*!
  @property enableLogging
  @abstract If YES,  set the compiler to enable any logging in the shader. The default is false.
  */
 @property (readwrite, nonatomic) BOOL enableLogging API_AVAILABLE(macos(15.0), ios(18.0));
+@end
+
+/// Represents a reflection object containing information about a function in a Metal library.
+MTL_EXPORT
+API_AVAILABLE(macos(26.0), ios(26.0)) NS_SWIFT_SENDABLE
+@interface MTLFunctionReflection : NSObject
+
+/// Provides a list of inputs and outputs of the function.
+@property (nonnull, readonly) NSArray<id<MTLBinding>> *bindings;
+
 @end
 
 /*!
@@ -392,7 +436,7 @@ typedef NS_ENUM(NSUInteger, MTLLibraryError) {
     MTLLibraryErrorFileNotFound API_AVAILABLE(macos(10.12), ios(10.0)) = 6,
 } API_AVAILABLE(macos(10.11), ios(8.0));
 
-API_AVAILABLE(macos(10.11), ios(8.0))
+API_AVAILABLE(macos(10.11), ios(8.0)) NS_SWIFT_SENDABLE
 @protocol MTLLibrary <NSObject>
 
 /*!
@@ -432,6 +476,16 @@ API_AVAILABLE(macos(10.11), ios(8.0))
 			completionHandler:(void (^)(id<MTLFunction> __nullable function, NSError* __nullable error))completionHandler API_AVAILABLE(macos(10.12), ios(10.0));
 
 
+/// Returns a reflection object for a matching function name in this library instance.
+///
+/// - Parameters:
+///   - functionName: The name of the function.
+///
+/// - Returns: An object containing the reflection information, or `nil` if no function in the library matches the name.
+///
+- (nullable MTLFunctionReflection *)reflectionForFunctionWithName:(NSString *)functionName API_AVAILABLE(macos(26.0), ios(26.0));
+
+
 /*!
  @method newFunctionWithDescriptor:completionHandler:
  @abstract Create a new MTLFunction object asynchronously.
@@ -454,7 +508,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (void)newIntersectionFunctionWithDescriptor:(nonnull MTLIntersectionFunctionDescriptor *)descriptor
                             completionHandler:(void (^)(id<MTLFunction> __nullable function, NSError* __nullable error))completionHandler
-    API_AVAILABLE(macos(11.0), ios(14.0));
+    API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  @method newIntersectionFunctionWithDescriptor:error:
@@ -462,7 +516,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 - (nullable id <MTLFunction>)newIntersectionFunctionWithDescriptor:(nonnull MTLIntersectionFunctionDescriptor *)descriptor
                                                              error:(__autoreleasing NSError **)error
-    API_AVAILABLE(macos(11.0), ios(14.0));
+    API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
 
@@ -489,5 +543,7 @@ API_AVAILABLE(macos(10.11), ios(8.0))
  */
 @property (readonly, nullable) NSString* installName API_AVAILABLE(macos(11.0), ios(14.0));
 
+
 @end
+
 NS_ASSUME_NONNULL_END

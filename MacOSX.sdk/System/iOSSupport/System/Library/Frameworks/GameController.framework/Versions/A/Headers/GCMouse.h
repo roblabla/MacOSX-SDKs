@@ -5,10 +5,12 @@
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
-#import <GameController/GameController.h>
-#import <GameController/GCExtern.h>
-
 #import <Foundation/Foundation.h>
+
+#import <GameController/GCExtern.h>
+#import <GameController/GCDevice.h>
+
+@class GCMouseInput;
 
 NS_ASSUME_NONNULL_BEGIN
 

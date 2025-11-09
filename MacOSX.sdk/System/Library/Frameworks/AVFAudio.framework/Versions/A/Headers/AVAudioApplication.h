@@ -2,7 +2,7 @@
 /*!
 	@file		AVAudioApplication.h
 	@framework	AudioSession.framework
-	@copyright	(c) 2009-2023 Apple Inc. All rights reserved.
+	@copyright	(c) 2009-2024 Apple Inc. All rights reserved.
 */
 
 #ifndef AVAudioApplication_h
@@ -53,18 +53,18 @@ typedef NS_ENUM(NSInteger, AVAudioApplicationMicrophoneInjectionPermission) {
 	@brief	Notification sent to registered listeners when the application's input is muted
 			or unmuted.
 
-	Check the notification's userInfo dictionary for the mute state AVAudioApplicationInputMuteStateKey
+	Check the notification's userInfo dictionary for the mute state `AVAudioApplicationMuteStateKey`
 	which will have a boolean value 0 for unmuted or value 1 for muted.
 	@note this notification will only be dispatched for state changes when there is an active record session (i.e. record or playAndRecord category).
 		Setting the `inputMuted` state while the record session is not active is allowed and will be stored, but it will not trigger a notification for the
 		state change. When the record session subsequently goes active, the `inputMuted` state will be applied, and this notification will be dispatched
 		with the latest input muted state.
 */
-OS_EXPORT NSNotificationName const AVAudioApplicationInputMuteStateChangeNotification API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0)) NS_SWIFT_NAME(AVAudioApplication.inputMuteStateChangeNotification);
+OS_EXPORT NSNotificationName const AVAudioApplicationInputMuteStateChangeNotification API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0), visionos(26.0)) NS_SWIFT_NAME(AVAudioApplication.inputMuteStateChangeNotification);
 
 /// Keys for AVAudioApplicationInputMuteStateChangeNotification
 /// Value is NSNumber type with boolean value 0 for unmuted or value 1 for muted (samples zeroed out)
-OS_EXPORT NSString *const AVAudioApplicationMuteStateKey API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0)) NS_SWIFT_NAME(AVAudioApplication.muteStateKey);
+OS_EXPORT NSString *const AVAudioApplicationMuteStateKey API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0), visionos(26.0)) NS_SWIFT_NAME(AVAudioApplication.muteStateKey);
 
 
 /// Class containing methods that relate to an application bundle's audio (i.e. a collection of one or more AVAudioSession instances)
@@ -81,9 +81,9 @@ API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0))
 /// @brief Set the muted/unmuted state of the application's audio input. When set true, inputs
 /// (microphone etc.) of all audio clients relating to this application will have their samples zeroed out.
 /// @note - this is per-application input muting and doesn't affect the hardware mute state.
-- (BOOL)setInputMuted:(BOOL)muted error:(NSError**)outError API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0));
+- (BOOL)setInputMuted:(BOOL)muted error:(NSError**)outError API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0), visionos(26.0));
 /// Get the input muted state - return value is boolean 0 for unmuted or value 1 for muted (input samples zeroed out)
-@property(readonly, nonatomic, getter=isInputMuted) BOOL inputMuted API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0));
+@property(readonly, nonatomic, getter=isInputMuted) BOOL inputMuted API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0), visionos(26.0));
 
 
 /*!
@@ -101,7 +101,7 @@ API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0), macos(14.0))
 			perform your input muting logic within this block, and to perform your UI updates for input mute state changes within the handler
 			for AVAudioApplicationInputMuteStateChangeNotification. This handler should be set by the process doing the call's audio I/O.
  */
-- (BOOL)setInputMuteStateChangeHandler:(BOOL (^_Nullable)(BOOL inputShouldBeMuted))inputMuteHandler error:(NSError**)outError API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst);
+- (BOOL)setInputMuteStateChangeHandler:(BOOL (^_Nullable)(BOOL inputShouldBeMuted))inputMuteHandler error:(NSError**)outError API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos, macCatalyst, visionos);
 
 
 /// Returns an enum indicating whether the user has granted or denied permission to record, or has

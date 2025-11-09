@@ -14,16 +14,17 @@
 @class GKPlayer;
 
 
-/// Standard view controller for sending friend requests to other players. Present modally from the top view controller.
 #if TARGET_OS_IPHONE || TARGET_OS_MACCATALYST
 NS_ASSUME_NONNULL_BEGIN
 
+/// Standard view controller for sending friend requests to other players. Present modally from the top view controller.
 API_DEPRECATED("No longer supported.", ios(4.2,10.0), macos(10.8,10.12), visionos(1.0,1.0)) API_UNAVAILABLE(tvos, watchos)
 @interface GKFriendRequestComposeViewController : UINavigationController
 @end
 #else
 #import <GameKit/GKDialogController.h>
 NS_ASSUME_NONNULL_BEGIN
+/// Standard view controller for sending friend requests to other players. Present modally from the top view controller.
 API_DEPRECATED("No longer supported.", ios(4.2,10.0), macos(10.8,10.12), visionos(1.0,1.0)) API_UNAVAILABLE(tvos, watchos)
 @interface GKFriendRequestComposeViewController : NSViewController <GKViewController>
 @end

@@ -51,6 +51,17 @@ CG_EXTERN CGColorRef  CGColorCreateGenericGrayGamma2_2(CGFloat gray, CGFloat alp
 CG_EXTERN CGColorRef  CGColorCreateSRGB(CGFloat red, CGFloat green,
                                         CGFloat blue, CGFloat alpha) API_AVAILABLE(macos(10.15), ios(13.0));
 
+/* Create a color with a specified content headroom. Color space is required to be either HDR or extended range RGB.
+   The content value of 0.0f means 'unknown headroom'. If the color space is HDR, passing a headroom of 0.0f
+   is a request to use a default headroom implied by the color space. */
+
+CG_EXTERN CGColorRef __nullable CGColorCreateWithContentHeadroom(float headroom, CGColorSpaceRef cg_nullable space, CGFloat red, CGFloat green,
+                                                                 CGFloat blue, CGFloat alpha) API_AVAILABLE(macos(26.0), ios(26.0));
+
+/* Return content headroom of the color. Returned value is 0.0f if the content headroom of the color is unknown */
+
+CG_EXTERN float CGColorGetContentHeadroom(CGColorRef cg_nullable color) API_AVAILABLE(macos(26.0), ios(26.0));
+
 /* Return a constant color. As `CGColorGetConstantColor' is not a "Copy" or
    "Create" function, it does not necessarily return a new reference each
    time it's called. As a consequence, you should not release the returned

@@ -17,12 +17,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(13.0))
-API_UNAVAILABLE(ios)
-API_UNAVAILABLE(watchos, tvos)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_AVAILABLE(macos(13.0), ios(18))
+API_UNAVAILABLE(watchos)
+API_UNAVAILABLE(tvos)
 API_UNAVAILABLE(visionos)
-#endif
 EXTENSIONKIT_EXPORT
 #if TARGET_OS_OSX
 /// A view controller that allows users to enable and disable extensions.

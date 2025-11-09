@@ -47,12 +47,12 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief The minimum value of the range.
  */
-@property (nullable, readonly, strong, nonatomic) NSNumber *minValue;
+@property (nullable, nonatomic, readonly, strong) NSNumber *minValue;
 
 /*!
  * @brief The maximum value of the range.
  */
-@property (nullable, readonly, strong, nonatomic) NSNumber *maxValue;
+@property (nullable, nonatomic, readonly, strong) NSNumber *maxValue;
 
 @end
 

@@ -248,6 +248,7 @@ exports:
                        '_$s9SwiftASN10B20IntegerRepresentablePAA21DERImplicitlyTaggableTb', 
                        '_$s9SwiftASN10B20IntegerRepresentablePAAE10derEncoded14withIdentifierxAA0B4NodeV_AA0bH0VtKcfC', 
                        '_$s9SwiftASN10B20IntegerRepresentablePAAE17defaultIdentifierAA0bF0VvgZ', 
+                       '_$s9SwiftASN10B20IntegerRepresentablePAAE17defaultIdentifierAA0bF0VvpZMV', 
                        '_$s9SwiftASN10B20IntegerRepresentablePAAE9serialize4into14withIdentifieryAA3DERO10SerializerVz_AA0bH0VtKF', 
                        '_$s9SwiftASN10B20IntegerRepresentablePAAs010FixedWidthC0RzrlE013withBigEndianC5Bytesyqd__qd__AA0cJ10CollectionVyxGKXEKs8SendableRzlF', 
                        '_$s9SwiftASN10B20IntegerRepresentablePAAs010FixedWidthC0RzrlE03derC5Bytesxs10ArraySliceVys5UInt8VG_tKcfC', 

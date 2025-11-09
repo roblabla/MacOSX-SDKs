@@ -24,6 +24,7 @@ static const NSUInteger NSUndoCloseGroupingRunLoopOrdering = 350000;
 typedef NSString * NSUndoManagerUserInfoKey NS_TYPED_EXTENSIBLE_ENUM NS_SWIFT_NAME(UndoManager.UserInfoKey) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0));
 
 API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0))
+NS_SWIFT_UI_ACTOR
 @interface NSUndoManager : NSObject
 
 /// Marks the beginning of an undo group.
@@ -157,7 +158,7 @@ API_AVAILABLE(macos(10.0), ios(3.0), watchos(2.0), tvos(9.0))
 /// 
 /// - Parameter target: The target of the undo operation.
 /// - Parameter undoHandler: The block to be executed when an operation is undone. The block takes a single argument, the target of the undo operation.
-- (void)registerUndoWithTarget:(id)target handler:(void (NS_SWIFT_SENDABLE ^)(id target))undoHandler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_REFINED_FOR_SWIFT;
+- (void)registerUndoWithTarget:(id)target handler:(void (NS_SWIFT_UI_ACTOR ^)(id target))undoHandler API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0)) NS_REFINED_FOR_SWIFT;
 
 /// Sets whether the next undo or redo action is discardable.
 ///
@@ -200,7 +201,7 @@ FOUNDATION_EXPORT NSString * const NSUndoManagerGroupIsDiscardableKey API_AVAILA
 /// If actionName is an empty string, the action name currently associated with the menu command is removed. There is no effect if actionName is nil.
 /// 
 /// - Parameter actionName: The name of the action.
-- (void)setActionName:(NSString *)actionName;
+- (void)setActionName:(NSString *)actionName  __attribute__((swift_attr("@_disfavoredOverload")));
 
 /// Get a value from the undo action's user info
 ///

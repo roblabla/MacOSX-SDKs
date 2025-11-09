@@ -1,17 +1,18 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macosx15.5 -target-variant x86_64-apple-ios14.5-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftObservation -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature AllowUnsafeAttribute -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature ExtensionImportVisiblity -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -user-module-version 6.1.2.1.2 -module-name Observation
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macosx26.0 -target-variant x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftObservation -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -target-min-inlining-version min -enable-experimental-feature NoncopyableGenerics2 -enable-experimental-feature SuppressedAssociatedTypes -enable-experimental-feature SE427NoInferenceOnExtension -enable-experimental-feature NonescapableTypes -enable-experimental-feature LifetimeDependence -enable-experimental-feature InoutLifetimeDependence -enable-experimental-feature LifetimeDependenceMutableAccessors -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature Macros -enable-experimental-feature ExtensionMacros -user-module-version 6.2.0.17.15 -module-name Observation
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -enable-ossa-modules -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Swift
+import _Concurrency
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public protocol Observable {
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-@attached(member, names: named(_$observationRegistrar), named(access), named(withMutation)) @attached(memberAttribute) @attached(extension, conformances: Observation.Observable) public macro Observable() = #externalMacro(module: "ObservationMacros", type: "ObservableMacro")
+@attached(member, names: named(_$observationRegistrar), named(access), named(withMutation), named(shouldNotifyObservers)) @attached(memberAttribute) @attached(extension, conformances: Observation.Observable) public macro Observable() = #externalMacro(module: "ObservationMacros", type: "ObservableMacro")
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 @attached(accessor, names: named(init), named(get), named(set), named(_modify)) @attached(peer, names: prefixed(`_`)) public macro ObservationTracked() = #externalMacro(module: "ObservationMacros", type: "ObservationTrackedMacro")
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
-@attached(accessor, names: named(willSet)) public macro ObservationIgnored() = #externalMacro(module: "ObservationMacros", type: "ObservationIgnoredMacro")
+@attached(accessor) public macro ObservationIgnored() = #externalMacro(module: "ObservationMacros", type: "ObservationIgnoredMacro")
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public struct ObservationRegistrar : Swift.Sendable {
   public init()
@@ -35,3 +36,36 @@ extension Observation.ObservationRegistrar : Swift.Hashable {
 }
 @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
 public func withObservationTracking<T>(_ apply: () -> T, onChange: @autoclosure () -> @Sendable () -> Swift.Void) -> T
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@usableFromInline
+@_silgen_name("swift_task_addCancellationHandler")
+internal func _taskAddCancellationHandler(handler: () -> Swift.Void) -> Swift.UnsafeRawPointer
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+@usableFromInline
+@_silgen_name("swift_task_removeCancellationHandler")
+internal func _taskRemoveCancellationHandler(record: Swift.UnsafeRawPointer)
+@available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
+public struct Observations<Element, Failure> : _Concurrency.AsyncSequence, Swift.Sendable where Element : Swift.Sendable, Failure : Swift.Error {
+  public enum Iteration : Swift.Sendable {
+    case next(Element)
+    case finish
+  }
+  #if compiler(>=5.3) && $IsolatedAny
+  public init(@_inheritActorContext _ emit: @escaping @isolated(any) @Sendable () throws(Failure) -> Element)
+  #endif
+  #if compiler(>=5.3) && $IsolatedAny
+  public static func untilFinished(@_inheritActorContext _ emit: @escaping @isolated(any) @Sendable () throws(Failure) -> Observation.Observations<Element, Failure>.Iteration) -> Observation.Observations<Element, Failure>
+  #endif
+  public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $NonescapableTypes
+    public mutating func next(isolation iterationIsolation: isolated (any _Concurrency.Actor)? = #isolation) async throws(Failure) -> Element?
+    #endif
+    @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
+    @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = Failure
+  }
+  public func makeAsyncIterator() -> Observation.Observations<Element, Failure>.Iterator
+  @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
+  public typealias AsyncIterator = Observation.Observations<Element, Failure>.Iterator
+  @available(iOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, *)
+  @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = Failure
+}

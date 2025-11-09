@@ -1,8 +1,7 @@
 /* CoreAnimation - CARenderer.h
 
-   Copyright (c) 2007-2022, Apple Inc.
+   Copyright (c) 2007-2025, Apple Inc.
    All rights reserved. */
-
 
 /* This class lets an application manually drive the rendering of a
  * layer tree into an OpenGL rendering context. This is _not_ the
@@ -30,7 +29,6 @@
  *    from the -render method, the default values will be preserved.
  */
 
-
 #ifdef __OBJC__
 
 #import <QuartzCore/CABase.h>
@@ -49,19 +47,18 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
   struct CARendererPriv *_priv;
 }
 
-
 /* Create a new renderer object. Its render target is the specified
  * Core OpenGL context. 'dict' is an optional dictionary of parameters.  */
 
 + (CARenderer *)rendererWithCGLContext:(void *)ctx
     options:(nullable NSDictionary *)dict
 #ifndef GL_SILENCE_DEPRECATION
-    API_DEPRECATED("+rendererWithMTLTexture", macos(10.5, 10.14));
+    API_DEPRECATED("OpenGL is deprecated. (Define GL_SILENCE_DEPRECATION to silence these warnings)",
+        macos(10.5, 10.14), macCatalyst(13.1, 13.1))
 #else
-    API_AVAILABLE(macos(10.5));
+    API_AVAILABLE(macos(10.5), macCatalyst(13.1))
 #endif
-
-
+    API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /* Create a new renderer object. Its render target is the specified
  * texture. 'dict' is an optional dictionary of parameters.  */

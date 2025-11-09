@@ -1,10 +1,11 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 93.5.5 -module-name SensitiveContentAnalysis
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 125.0.3.1 -module-name SensitiveContentAnalysis
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Foundation
 @_exported import SensitiveContentAnalysis
 import Swift
+import SwiftData
 import _Concurrency
 import _StringProcessing
 import _SwiftConcurrencyShims
@@ -18,4 +19,18 @@ extension SensitiveContentAnalysis.SCSensitivityAnalyzer {
     @objc deinit
   }
   public func videoAnalysis(forFileAt fileURL: Foundation.URL) -> SensitiveContentAnalysis.SCSensitivityAnalyzer.VideoAnalysisHandler
+}
+@available(iOS 26.0, *)
+@available(visionOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@available(macCatalyst, unavailable)
+@available(macCatalyst, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@available(visionOS, unavailable)
+extension SensitiveContentAnalysis.SCVideoStreamAnalyzer {
+  public var analysisChanges: some _Concurrency.AsyncSequence<SensitiveContentAnalysis.SCSensitivityAnalysis, any Swift.Error> {
+    get
+  }
 }

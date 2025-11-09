@@ -1083,12 +1083,11 @@ typedef struct {
 /*! Contains a dense `rowCount` x `columnCount` matrix of double
  *            values stored in column-major order.
  *
- *  @field rowCount     Number of rows in the matrix.
- *  @field columnCount  Number of columns in the matrix.
- *  @field columnStride The column stride of the matrix.
- *  @field attributes   The attributes of the matrix, for example whether the
- *                      matrix is symmetrical (Hermitian) or triangular.
- *  @field data         The array of double values in column-major order.     */
+ *  - term `rowCount`:   Number of rows in the matrix.
+ *  - term `columnCount`:  Number of columns in the matrix.
+ *  - term `columnStride`: The column stride of the matrix.
+ *  - term `attributes`:  The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular.
+ *  - term `data` :        The array of double values in column-major order.     */
 typedef struct {
   int rowCount;
   int columnCount;
@@ -1100,12 +1099,11 @@ typedef struct {
 /*! Contains a dense `rowCount` x `columnCount` matrix of float
  *            values stored in column-major order.
  *
- *  @field rowCount     Number of rows in the matrix.
- *  @field columnCount  Number of columns in the matrix.
- *  @field columnStride The column stride of the matrix.
- *  @field attributes   The attributes of the matrix, for example whether the
- *                      matrix is symmetrical (Hermitian) or triangular.
- *  @field data         The array of float values in column-major order.      */
+ *  - term `rowCount`:   Number of rows in the matrix.
+ *  - term `columnCount`:  Number of columns in the matrix.
+ *  - term `columnStride`:  The column stride of the matrix.
+ *  - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular.
+ *  - term `data`: The array of float values in column-major order.      */
 typedef struct {
   int rowCount;
   int columnCount;
@@ -1117,12 +1115,11 @@ typedef struct {
 /*! Contains a dense `rowCount` x `columnCount` matrix of complex double
  *            values stored in column-major order.
  *
- *  @field rowCount     Number of rows in the matrix.
- *  @field columnCount  Number of columns in the matrix.
- *  @field columnStride The column stride of the matrix.
- *  @field attributes   The attributes of the matrix, for example whether the
- *                      matrix is symmetrical (Hermitian) or triangular.
- *  @field data         The array of float values in column-major order.      */
+ *  - term `rowCount`:     Number of rows in the matrix.
+ *  - term `columnCount`:  Number of columns in the matrix.
+ *  - term `columnStride`: The column stride of the matrix.
+ *  - term `attributes`:   The attributes of the matrix, for example whether the matrix is symmetrical (Hermitian) or triangular.
+ *  - term `data`: The array of float values in column-major order.      */
 typedef struct {
   int rowCount;
   int columnCount;
@@ -1134,12 +1131,11 @@ typedef struct {
 /*! Contains a dense `rowCount` x `columnCount` matrix of complex float
  *            values stored in column-major order.
  *
- *  @field rowCount     Number of rows in the matrix.
- *  @field columnCount  Number of columns in the matrix.
- *  @field columnStride The column stride of the matrix.
- *  @field attributes   The attributes of the matrix, for example whether the
- *                      matrix is symmetrical (Hermitian) or triangular.
- *  @field data         The array of float values in column-major order.      */
+ *  - term `rowCount`:     Number of rows in the matrix.
+ *  - term `columnCount`:  Number of columns in the matrix.
+ *  - term `columnStride`:  The column stride of the matrix.
+ *  - term `attributes`: The attributes of the matrix, for example whether the  matrix is symmetrical (Hermitian) or triangular.
+ *  - term `data`: The array of float values in column-major order.      */
 typedef struct {
   int rowCount;
   int columnCount;
@@ -1239,9 +1235,9 @@ SPARSE_ENUM(SparseControl, uint32_t,
  *  reason, COLAMD cannot be used for symmetric (Hermitian) factorizations.
  *
  *  - term  `SparseOrderDefault`:
- *              Default ordering (AMD for symmetric and COLAMD for unsymmetric
- *              factorizations, but this may change if better algorithms become
- *              available).
+ *              Default ordering (AMD for symmetric factorizations, COLAMD for QR/CholeskyAtA,
+ *              and MT-METIS for LU. Defaults may change in future releases if better algorithms
+ *              become available).
  *  - term  `SparseOrderUser`:
  *              User-supplied ordering, or identity if options->order is NULL
  *  - term  `SparseOrderAMD`:
@@ -1250,15 +1246,20 @@ SPARSE_ENUM(SparseControl, uint32_t,
  *  - term  `SparseOrderMetis`:
  *              MeTiS Nested Dissection ordering. Large overhead cost if used
  *              for QR-based factorization due to explicit formation of `A^T A`.
+ *  - term `SparseOrderMTMetis`:
+ *              MT-MeTiS Nested Dissection ordering. Similar to `SparseOrderMetis`,
+ *              but uses multiple threads to increase performance at cost of slightly worse
+ *              ordering quality.
  *  - term  `SparseOrderCOLAMD`:
  *              Column AMD ordering for `A^T A`. Not valid for symmetric (Hermitian)
  *              factorizations (use AMD instead).                             */
 SPARSE_ENUM(SparseOrder, uint8_t,
-  SparseOrderDefault = 0,
-  SparseOrderUser = 1,
-  SparseOrderAMD = 2,
-  SparseOrderMetis = 3,
-  SparseOrderCOLAMD = 4,
+  SparseOrderDefault  API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 0,
+  SparseOrderUser     API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 1,
+  SparseOrderAMD      API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 2,
+  SparseOrderMetis    API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 3,
+  SparseOrderCOLAMD   API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 4,
+  SparseOrderMTMetis  API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0))  = 5,
 );
 
 /*! Specifies type of scaling to be performed.
@@ -1278,11 +1279,22 @@ SPARSE_ENUM(SparseOrder, uint8_t,
  *              scaling.
  *  - term  `SparseScalingEquilibriationInf`:
  *              Norm equilibriation scaling using inf norm.
- * */
+ *  - term `SparseScalingHungarianScalingOnly`:
+ *              Scaling using the Hungarian algorithm (similar to MC64).
+ *  - term `SparseScalingHungarianScalingAndOrdering`:
+ *              Scaling using the Hungarian algorithm (similar to MC64).
+ *              Further, the associated matching is used to place large entries on the diagonal.
+ *              This option is only valid if a combined symbolic and numeric call to SparseFactor()
+ *              is used.
+ *              This option is only supported for LU factorizations.
+ *
+ */
 SPARSE_ENUM(SparseScaling, uint8_t,
-  SparseScalingDefault = 0,
-  SparseScalingUser = 1,
-  SparseScalingEquilibriationInf = 2,
+  SparseScalingDefault                     API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 0,
+  SparseScalingUser                        API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 1,
+  SparseScalingEquilibriationInf           API_AVAILABLE(macos(10.13), ios(11), watchos(4), tvos(11)) = 2,
+  SparseScalingHungarianScalingOnly        API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0))  = 3,
+  SparseScalingHungarianScalingAndOrdering API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0))  = 4,
 );
 
 /*! SparseSymbolicFactorOptions
@@ -1893,7 +1905,7 @@ typedef struct {
 /*! Low-rank update algorithm selector
  *
  *  
- *  See headerdoc for `SparseUpdateFactor()` for a full description of these updates.
+ *  See `SparseUpdateFactor()` for a full description of these updates.
  *
  *  - term `SparseUpdatePartialRefactor`:
  *    Perform update using a partial refactorization of the matrix
@@ -5946,7 +5958,7 @@ SparseOpaquePreconditioner_Complex_Float SparseCreatePreconditioner(
 /******************************************************************************
  *  @group Sparse Iterative Methods
  ******************************************************************************
- * 
+ *
  * Sparse Iterative methods solve Ax=b through an iterative process that only
  * requires multiplication by A or A^T. However, if A is numerically difficult,
  * the iterative process may fail to converge to a solution. Further, even for
@@ -5993,8 +6005,8 @@ SPARSE_ENUM(SparseIterativeStatus, int,
  *
  *  \@callback reportError Function to use to report parameter errors.
  *    \- Parameter message
- *    \ If NULL, errors are logged via <os/log.h> and execution is
- *      halted via __builtin_trap().  If non-NULL, the provided function is
+ *    \ If NULL, errors are logged via `<os/log.h>` and execution is
+ *      halted via `__builtin_trap()`.  If non-NULL, the provided function is
  *      called with a human-readable string describing the error condition.
  *      If the callback returns, control will be returned to the caller with
  *      any outputs in a safe but undefined state (i.e. they may hold partial
@@ -6170,7 +6182,7 @@ typedef struct {
  *    ```
  *    || A^T (b-Ax) ||_2 < atol * || A ||_2 * || A-bx ||_2
  *    ```
- *    or Estimated condition of matrix >= conditionLimit
+ *    or Estimated condition of `matrix >= conditionLimit`.
  *    */
 SPARSE_ENUM(SparseLSMRConvergenceTest, int,
   SparseLSMRCTDefault = 0,
@@ -8047,7 +8059,7 @@ void SparseIterate(SparseIterativeMethod method, int iteration,
 /******************************************************************************
  *  @group Memory Management
  ******************************************************************************
- *  
+ *
  *  Underlying many object in sparse is a private data type references by a
  *  void* component on an opaque type. These are reference counted so that more
  *  than one opaque type can reference the same private object. For example,

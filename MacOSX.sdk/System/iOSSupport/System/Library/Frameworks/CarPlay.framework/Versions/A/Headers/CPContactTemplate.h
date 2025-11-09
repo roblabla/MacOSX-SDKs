@@ -13,6 +13,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPContactTemplate : CPTemplate <CPBarButtonProviding>
 
 - (instancetype)init NS_UNAVAILABLE;

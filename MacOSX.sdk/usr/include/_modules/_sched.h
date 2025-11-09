@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2025 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -21,13 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _DARWIN_POSIX_SCHED_
-#define _DARWIN_POSIX_SCHED_
+#ifndef __SCHED_H_
+#define __SCHED_H_
 
-#if !__building_module(Darwin)
-#error "Do not include this header directly, include <pthread/sched.h> instead"
+#if !__building_module(sched)
+#error "Do not include this header directly, include <sched.h> instead"
 #endif
 
-#include <pthread/sched.h>
+#include <sched.h>
 
-#endif /* _DARWIN_POSIX_SCHED_ */
+#endif /* __SCHED_H_ */

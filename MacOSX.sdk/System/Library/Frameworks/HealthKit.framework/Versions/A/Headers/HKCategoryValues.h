@@ -2,7 +2,7 @@
 //  HKCategoryValues.h
 //  HealthKit
 //
-//  Copyright © 2022-2024 Apple, Inc. All rights reserved.
+//  Copyright © 2022-2025 Apple, Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

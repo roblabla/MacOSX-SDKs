@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AppleFSCompression.framework/Versions/A/AppleFSCompression'
-current-version: 170
+current-version: 174
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -16,8 +16,8 @@ exports:
                        _fqueryCompressionInfo, _fqueryCompressionType, _kAFSCAllowLargeResourceForks, 
                        _kAFSCAllowStoringDataInXattr, _kAFSCCompressionLevel, _kAFSCCompressionRulesKey, 
                        _kAFSCCompressionSystemRulesKey, _kAFSCCompressionTypes, _kAFSCDispatchQueuePriority, 
-                       _kAFSCFlagsKey, _kAFSCIgnoreXattrErrors, _kAFSCInverseFlags, 
-                       _kAFSCMaxCompressionPercentage, _kAFSCPathBeginsWithStringKey, 
+                       _kAFSCFlagsKey, _kAFSCForceAsynchronous, _kAFSCIgnoreXattrErrors, 
+                       _kAFSCInverseFlags, _kAFSCMaxCompressionPercentage, _kAFSCPathBeginsWithStringKey, 
                        _kAFSCPathContainsStringKey, _kAFSCPathEndsWithStringKey, 
                        _kAFSCPathExactlyEqualsStringKey, _kAFSCRuleTypeExclude, _kAFSCRuleTypeInclude, 
                        _kAFSCRuleTypeKey, _kAFSCSkipMachOFileTypes, _kAFSCSkipMachOOverridePaths, 

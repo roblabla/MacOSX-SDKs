@@ -10,6 +10,7 @@
 #ifndef VTBASE_H
 #define VTBASE_H
 
+#include <TargetConditionals.h>
 #include <Availability.h>
 #include <stdint.h>
 

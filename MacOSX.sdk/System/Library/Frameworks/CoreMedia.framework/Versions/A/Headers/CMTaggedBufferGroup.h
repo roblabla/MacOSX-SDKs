@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-	Copyright © 2023 Apple Inc. All rights reserved.
+	Copyright © 2023-2025 Apple Inc. All rights reserved.
  
 */
 
@@ -198,6 +198,32 @@ OSStatus CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup(
 	CMTaggedBufferGroupRef CM_NONNULL taggedBufferGroup,
 	CM_RETURNS_RETAINED_PARAMETER CMTaggedBufferGroupFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0), visionos(1.0));
 
+/*!
+	@function	CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions
+	@abstract	Creates a format description for a CMTaggedBufferGroup with extensions.
+	@param	allocator
+		CFAllocator to be used when creating the CMFormatDescription. Pass kCFAllocatorDefault to use the default allocator.
+	@param	taggedBufferGroup
+		The tagged buffer group for which we are creating the format description.
+	@param	extensions
+		Dictionary of extension key/value pairs.  Keys are always CFStrings. Values are always property list objects (ie. CFData, CFString, CFArray, CFDictionary, CFDate, CFBoolean, or CFNumber). Can be NULL.
+	@param	formatDescriptionOut
+		Returned newly-created tagged buffer group CMFormatDescription
+	@discussion
+		The returned CMTaggedBufferGroupFormatDescription could be used to create a CMSampleBuffer
+		wrapping the CMTaggedBufferGroup using CMSampleBufferCreateForTaggedBufferGroup.
+		If you are going to call CMSampleBufferCreateForTaggedBufferGroup on a series of matching
+		CMTaggedBufferGroups, it is more efficient to create the CMTaggedBufferGroupFormatDescription
+		once and use it for all of the CMSampleBuffers.
+		The caller owns the returned CMFormatDescription, and must release it when done with it.
+		All input parameters are copied (the extensions are deep-copied).  The caller can deallocate them or re-use them after making this call.
+*/
+CM_EXPORT
+OSStatus CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroupWithExtensions(
+	CFAllocatorRef CM_NULLABLE allocator,
+	CMTaggedBufferGroupRef CM_NONNULL taggedBufferGroup,
+	CFDictionaryRef CM_NULLABLE extensions,
+	CM_RETURNS_RETAINED_PARAMETER CMTaggedBufferGroupFormatDescriptionRef CM_NULLABLE * CM_NONNULL formatDescriptionOut) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 /*!
 	@function	CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup
 	@abstract	Checks to see if a given format description matches a tagged buffer group.

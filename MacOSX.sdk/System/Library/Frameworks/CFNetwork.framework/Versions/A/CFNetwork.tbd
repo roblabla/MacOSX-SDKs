@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/CFNetwork.framework/Versions/A/CFNetwork'
-current-version: 3826.255.131
+current-version: 3860.100.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -211,8 +211,9 @@ exports:
                        __CFHTTPServerSetDispatchQueue, __CFHTTPServerSetProperty, 
                        __CFHostGetTopLevelDomain, __CFHostIsDomainTopLevel, __CFHostIsDomainTopLevelForCertificatePolicy, 
                        __CFHostIsDomainTopLevelForCookiePolicy, __CFHostStartInfoResolutionForInterface, 
-                       __CFNetServiceCreateFromServiceName, __CFNetServiceCreateFromURL, 
-                       __CFNetworkCopyATSContext, __CFNetworkCopyDefaultUserAgentString, 
+                       __CFN_isSafeRequestForBackgroundDownload, __CFN_isSafeResumeDataForBackgroundDownload, 
+                       __CFN_requestFromResumeData, __CFNetServiceCreateFromServiceName, 
+                       __CFNetServiceCreateFromURL, __CFNetworkCopyATSContext, __CFNetworkCopyDefaultUserAgentString, 
                        __CFNetworkCopyHSTSPolicies, __CFNetworkCopyPreferredLanguageCode, 
                        __CFNetworkErrorCopyLocalizedDescriptionWithHostname, __CFNetworkErrorGetLocalizedDescription, 
                        __CFNetworkErrorGetLocalizedFailureReason, __CFNetworkErrorGetLocalizedRecoverySuggestion, 

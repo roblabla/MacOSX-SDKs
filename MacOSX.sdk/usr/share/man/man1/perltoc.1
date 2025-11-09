@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PERLTOC 1"
-.TH PERLTOC 1 "2025-04-19" "perl v5.34.1" "Perl Programmers Reference Guide"
+.TH PERLTOC 1 "2025-08-03" "perl v5.34.1" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -6405,32 +6405,32 @@ or greater \- full with checks, \f(CW\*(C`require_pv\*(C'\fR , \f(CW\*(C`UVf\*(C
 , \f(CW\*(C`FLEXFILENAMES\*(C'\fR , \f(CW\*(C`HAS_DIR_DD_FD\*(C'\fR
 , \f(CW\*(C`HAS_DUP2\*(C'\fR , \f(CW\*(C`HAS_DUP3\*(C'\fR ,
 \&\f(CW\*(C`HAS_FAST_STDIO\*(C'\fR , \f(CW\*(C`HAS_FCHDIR\*(C'\fR ,
-\&\f(CW\*(C`HAS_FCNTL\*(C'\fR , \f(CW\*(C`HAS_FDCLOSE\*(C'\fR , \f(CW\*(C`HAS_FPATHCONF\*(C'\fR
-, \f(CW\*(C`HAS_FPOS64_T\*(C'\fR , \f(CW\*(C`HAS_FSTATFS\*(C'\fR
-, \f(CW\*(C`HAS_FSTATVFS\*(C'\fR , \f(CW\*(C`HAS_GETFSSTAT\*(C'\fR
-, \f(CW\*(C`HAS_GETMNT\*(C'\fR , \f(CW\*(C`HAS_GETMNTENT\*(C'\fR
-, \f(CW\*(C`HAS_HASMNTOPT\*(C'\fR , \f(CW\*(C`HAS_LSEEK_PROTO\*(C'\fR
-, \f(CW\*(C`HAS_MKDIR\*(C'\fR , \f(CW\*(C`HAS_OFF64_T\*(C'\fR
-, \f(CW\*(C`HAS_OPEN3\*(C'\fR , \f(CW\*(C`HAS_OPENAT\*(C'\fR ,
-\&\f(CW\*(C`HAS_POLL\*(C'\fR , \f(CW\*(C`HAS_READDIR\*(C'\fR , \f(CW\*(C`HAS_READDIR64_R\*(C'\fR
-, \f(CW\*(C`HAS_REWINDDIR\*(C'\fR , \f(CW\*(C`HAS_RMDIR\*(C'\fR
-, \f(CW\*(C`HAS_SEEKDIR\*(C'\fR , \f(CW\*(C`HAS_SELECT\*(C'\fR ,
-\&\f(CW\*(C`HAS_SETVBUF\*(C'\fR , \f(CW\*(C`HAS_STDIO_STREAM_ARRAY\*(C'\fR
-, \f(CW\*(C`HAS_STRUCT_FS_DATA\*(C'\fR ,
-\&\f(CW\*(C`HAS_STRUCT_STATFS\*(C'\fR , \f(CW\*(C`HAS_STRUCT_STATFS_F_FLAGS\*(C'\fR
-, \f(CW\*(C`HAS_TELLDIR\*(C'\fR , \f(CW\*(C`HAS_USTAT\*(C'\fR
-, \f(CW\*(C`I_FCNTL\*(C'\fR , \f(CW\*(C`I_SYS_DIR\*(C'\fR ,
-\&\f(CW\*(C`I_SYS_FILE\*(C'\fR , \f(CW\*(C`I_SYS_NDIR\*(C'\fR , \f(CW\*(C`I_SYS_STATFS\*(C'\fR
-, \f(CW\*(C`LSEEKSIZE\*(C'\fR , \f(CW\*(C`NO_NETWORK_LIBRARY_PERL_FILE\*(C'\fR
-, \f(CW\*(C`RD_NODATA\*(C'\fR ,
-\&\f(CW\*(C`READDIR64_R_PROTO\*(C'\fR , \f(CW\*(C`STDCHAR\*(C'\fR ,
-\&\f(CW\*(C`STDIO_CNT_LVALUE\*(C'\fR , \f(CW\*(C`STDIO_PTR_LVALUE\*(C'\fR
-, \f(CW\*(C`STDIO_PTR_LVAL_NOCHANGE_CNT\*(C'\fR
+\&\f(CW\*(C`HAS_FCNTL\*(C'\fR , \f(CW\*(C`HAS_FDCLOSE\*(C'\fR , \f(CW\*(C`HAS_FDOPENDIR\*(C'\fR
+, \f(CW\*(C`HAS_FPATHCONF\*(C'\fR , \f(CW\*(C`HAS_FPOS64_T\*(C'\fR
+, \f(CW\*(C`HAS_FSTATFS\*(C'\fR , \f(CW\*(C`HAS_FSTATVFS\*(C'\fR
+, \f(CW\*(C`HAS_GETFSSTAT\*(C'\fR , \f(CW\*(C`HAS_GETMNT\*(C'\fR
+, \f(CW\*(C`HAS_GETMNTENT\*(C'\fR , \f(CW\*(C`HAS_HASMNTOPT\*(C'\fR
+, \f(CW\*(C`HAS_LSEEK_PROTO\*(C'\fR , \f(CW\*(C`HAS_MKDIR\*(C'\fR
+, \f(CW\*(C`HAS_OFF64_T\*(C'\fR , \f(CW\*(C`HAS_OPEN3\*(C'\fR ,
+\&\f(CW\*(C`HAS_OPENAT\*(C'\fR , \f(CW\*(C`HAS_POLL\*(C'\fR , \f(CW\*(C`HAS_READDIR\*(C'\fR
+, \f(CW\*(C`HAS_READDIR64_R\*(C'\fR , \f(CW\*(C`HAS_REWINDDIR\*(C'\fR
+, \f(CW\*(C`HAS_RMDIR\*(C'\fR , \f(CW\*(C`HAS_SEEKDIR\*(C'\fR ,
+\&\f(CW\*(C`HAS_SELECT\*(C'\fR , \f(CW\*(C`HAS_SETVBUF\*(C'\fR ,
+\&\f(CW\*(C`HAS_STDIO_STREAM_ARRAY\*(C'\fR , \f(CW\*(C`HAS_STRUCT_FS_DATA\*(C'\fR
+, \f(CW\*(C`HAS_STRUCT_STATFS\*(C'\fR ,
+\&\f(CW\*(C`HAS_STRUCT_STATFS_F_FLAGS\*(C'\fR , \f(CW\*(C`HAS_TELLDIR\*(C'\fR
+, \f(CW\*(C`HAS_USTAT\*(C'\fR , \f(CW\*(C`I_FCNTL\*(C'\fR ,
+\&\f(CW\*(C`I_SYS_DIR\*(C'\fR , \f(CW\*(C`I_SYS_FILE\*(C'\fR , \f(CW\*(C`I_SYS_NDIR\*(C'\fR
+, \f(CW\*(C`I_SYS_STATFS\*(C'\fR , \f(CW\*(C`LSEEKSIZE\*(C'\fR ,
+\&\f(CW\*(C`NO_NETWORK_LIBRARY_PERL_FILE\*(C'\fR ,
+\&\f(CW\*(C`RD_NODATA\*(C'\fR , \f(CW\*(C`READDIR64_R_PROTO\*(C'\fR ,
+\&\f(CW\*(C`STDCHAR\*(C'\fR , \f(CW\*(C`STDIO_CNT_LVALUE\*(C'\fR ,
+\&\f(CW\*(C`STDIO_PTR_LVALUE\*(C'\fR , \f(CW\*(C`STDIO_PTR_LVAL_NOCHANGE_CNT\*(C'\fR
 , \f(CW\*(C`STDIO_PTR_LVAL_SETS_CNT\*(C'\fR
 , \f(CW\*(C`STDIO_STREAM_ARRAY\*(C'\fR ,
 \&\f(CW\*(C`ST_INO_SIGN\*(C'\fR , \f(CW\*(C`ST_INO_SIZE\*(C'\fR , \f(CW\*(C`VAL_EAGAIN\*(C'\fR
 , \f(CW\*(C`VAL_O_NONBLOCK\*(C'\fR , \f(CW\*(C`VOID_CLOSEDIR\*(C'\fR
-.IX Xref "DIRNAMLEN DOSUID EOF_NONBLOCK FCNTL_CAN_LOCK FFLUSH_ALL FFLUSH_NULL FILE_base FILE_bufsiz FILE_cnt FILE_ptr FLEXFILENAMES HAS_DIR_DD_FD HAS_DUP2 HAS_DUP3 HAS_FAST_STDIO HAS_FCHDIR HAS_FCNTL HAS_FDCLOSE HAS_FPATHCONF HAS_FPOS64_T HAS_FSTATFS HAS_FSTATVFS HAS_GETFSSTAT HAS_GETMNT HAS_GETMNTENT HAS_HASMNTOPT HAS_LSEEK_PROTO HAS_MKDIR HAS_OFF64_T HAS_OPEN3 HAS_OPENAT HAS_POLL HAS_READDIR HAS_READDIR64_R HAS_REWINDDIR HAS_RMDIR HAS_SEEKDIR HAS_SELECT HAS_SETVBUF HAS_STDIO_STREAM_ARRAY HAS_STRUCT_FS_DATA HAS_STRUCT_STATFS HAS_STRUCT_STATFS_F_FLAGS HAS_TELLDIR HAS_USTAT I_FCNTL I_SYS_DIR I_SYS_FILE I_SYS_NDIR I_SYS_STATFS LSEEKSIZE NO_NETWORK_LIBRARY_PERL_FILE RD_NODATA READDIR64_R_PROTO STDCHAR STDIO_CNT_LVALUE STDIO_PTR_LVALUE STDIO_PTR_LVAL_NOCHANGE_CNT STDIO_PTR_LVAL_SETS_CNT STDIO_STREAM_ARRAY ST_INO_SIGN ST_INO_SIZE VAL_EAGAIN VAL_O_NONBLOCK VOID_CLOSEDIR"
+.IX Xref "DIRNAMLEN DOSUID EOF_NONBLOCK FCNTL_CAN_LOCK FFLUSH_ALL FFLUSH_NULL FILE_base FILE_bufsiz FILE_cnt FILE_ptr FLEXFILENAMES HAS_DIR_DD_FD HAS_DUP2 HAS_DUP3 HAS_FAST_STDIO HAS_FCHDIR HAS_FCNTL HAS_FDCLOSE HAS_FDOPENDIR HAS_FPATHCONF HAS_FPOS64_T HAS_FSTATFS HAS_FSTATVFS HAS_GETFSSTAT HAS_GETMNT HAS_GETMNTENT HAS_HASMNTOPT HAS_LSEEK_PROTO HAS_MKDIR HAS_OFF64_T HAS_OPEN3 HAS_OPENAT HAS_POLL HAS_READDIR HAS_READDIR64_R HAS_REWINDDIR HAS_RMDIR HAS_SEEKDIR HAS_SELECT HAS_SETVBUF HAS_STDIO_STREAM_ARRAY HAS_STRUCT_FS_DATA HAS_STRUCT_STATFS HAS_STRUCT_STATFS_F_FLAGS HAS_TELLDIR HAS_USTAT I_FCNTL I_SYS_DIR I_SYS_FILE I_SYS_NDIR I_SYS_STATFS LSEEKSIZE NO_NETWORK_LIBRARY_PERL_FILE RD_NODATA READDIR64_R_PROTO STDCHAR STDIO_CNT_LVALUE STDIO_PTR_LVALUE STDIO_PTR_LVAL_NOCHANGE_CNT STDIO_PTR_LVAL_SETS_CNT STDIO_STREAM_ARRAY ST_INO_SIGN ST_INO_SIZE VAL_EAGAIN VAL_O_NONBLOCK VOID_CLOSEDIR"
 .IP "Floating point configuration values" 4
 .IX Item "Floating point configuration values"
 \&\f(CW\*(C`CASTFLAGS\*(C'\fR , \f(CW\*(C`CASTNEGFLOAT\*(C'\fR ,
@@ -20715,27 +20715,28 @@ Example 1, Example 2, Example 3
 \&\f(CW\*(C`d_fchmod\*(C'\fR, \f(CW\*(C`d_fchmodat\*(C'\fR, \f(CW\*(C`d_fchown\*(C'\fR, \f(CW\*(C`d_fcntl\*(C'\fR, \f(CW\*(C`d_fcntl_can_lock\*(C'\fR,
 \&\f(CW\*(C`d_fd_macros\*(C'\fR, \f(CW\*(C`d_fd_set\*(C'\fR, \f(CW\*(C`d_fdclose\*(C'\fR, \f(CW\*(C`d_fdim\*(C'\fR, \f(CW\*(C`d_fds_bits\*(C'\fR,
 \&\f(CW\*(C`d_fegetround\*(C'\fR, \f(CW\*(C`d_fgetpos\*(C'\fR, \f(CW\*(C`d_finite\*(C'\fR, \f(CW\*(C`d_finitel\*(C'\fR, \f(CW\*(C`d_flexfnam\*(C'\fR,
-\&\f(CW\*(C`d_flock\*(C'\fR, \f(CW\*(C`d_flockproto\*(C'\fR, \f(CW\*(C`d_fma\*(C'\fR, \f(CW\*(C`d_fmax\*(C'\fR, \f(CW\*(C`d_fmin\*(C'\fR, \f(CW\*(C`d_fork\*(C'\fR,
-\&\f(CW\*(C`d_fp_class\*(C'\fR, \f(CW\*(C`d_fp_classify\*(C'\fR, \f(CW\*(C`d_fp_classl\*(C'\fR, \f(CW\*(C`d_fpathconf\*(C'\fR,
-\&\f(CW\*(C`d_fpclass\*(C'\fR, \f(CW\*(C`d_fpclassify\*(C'\fR, \f(CW\*(C`d_fpclassl\*(C'\fR, \f(CW\*(C`d_fpgetround\*(C'\fR,
-\&\f(CW\*(C`d_fpos64_t\*(C'\fR, \f(CW\*(C`d_freelocale\*(C'\fR, \f(CW\*(C`d_frexpl\*(C'\fR, \f(CW\*(C`d_fs_data_s\*(C'\fR, \f(CW\*(C`d_fseeko\*(C'\fR,
-\&\f(CW\*(C`d_fsetpos\*(C'\fR, \f(CW\*(C`d_fstatfs\*(C'\fR, \f(CW\*(C`d_fstatvfs\*(C'\fR, \f(CW\*(C`d_fsync\*(C'\fR, \f(CW\*(C`d_ftello\*(C'\fR,
-\&\f(CW\*(C`d_ftime\*(C'\fR, \f(CW\*(C`d_futimes\*(C'\fR, \f(CW\*(C`d_gai_strerror\*(C'\fR, \f(CW\*(C`d_Gconvert\*(C'\fR,
-\&\f(CW\*(C`d_gdbm_ndbm_h_uses_prototypes\*(C'\fR, \f(CW\*(C`d_gdbmndbm_h_uses_prototypes\*(C'\fR,
-\&\f(CW\*(C`d_getaddrinfo\*(C'\fR, \f(CW\*(C`d_getcwd\*(C'\fR, \f(CW\*(C`d_getenv_preserves_other_thread\*(C'\fR,
-\&\f(CW\*(C`d_getespwnam\*(C'\fR, \f(CW\*(C`d_getfsstat\*(C'\fR, \f(CW\*(C`d_getgrent\*(C'\fR, \f(CW\*(C`d_getgrent_r\*(C'\fR,
-\&\f(CW\*(C`d_getgrgid_r\*(C'\fR, \f(CW\*(C`d_getgrnam_r\*(C'\fR, \f(CW\*(C`d_getgrps\*(C'\fR, \f(CW\*(C`d_gethbyaddr\*(C'\fR,
-\&\f(CW\*(C`d_gethbyname\*(C'\fR, \f(CW\*(C`d_gethent\*(C'\fR, \f(CW\*(C`d_gethname\*(C'\fR, \f(CW\*(C`d_gethostbyaddr_r\*(C'\fR,
-\&\f(CW\*(C`d_gethostbyname_r\*(C'\fR, \f(CW\*(C`d_gethostent_r\*(C'\fR, \f(CW\*(C`d_gethostprotos\*(C'\fR,
-\&\f(CW\*(C`d_getitimer\*(C'\fR, \f(CW\*(C`d_getlogin\*(C'\fR, \f(CW\*(C`d_getlogin_r\*(C'\fR, \f(CW\*(C`d_getmnt\*(C'\fR,
-\&\f(CW\*(C`d_getmntent\*(C'\fR, \f(CW\*(C`d_getnameinfo\*(C'\fR, \f(CW\*(C`d_getnbyaddr\*(C'\fR, \f(CW\*(C`d_getnbyname\*(C'\fR,
-\&\f(CW\*(C`d_getnent\*(C'\fR, \f(CW\*(C`d_getnetbyaddr_r\*(C'\fR, \f(CW\*(C`d_getnetbyname_r\*(C'\fR, \f(CW\*(C`d_getnetent_r\*(C'\fR,
-\&\f(CW\*(C`d_getnetprotos\*(C'\fR, \f(CW\*(C`d_getpagsz\*(C'\fR, \f(CW\*(C`d_getpbyname\*(C'\fR, \f(CW\*(C`d_getpbynumber\*(C'\fR,
-\&\f(CW\*(C`d_getpent\*(C'\fR, \f(CW\*(C`d_getpgid\*(C'\fR, \f(CW\*(C`d_getpgrp\*(C'\fR, \f(CW\*(C`d_getpgrp2\*(C'\fR, \f(CW\*(C`d_getppid\*(C'\fR,
-\&\f(CW\*(C`d_getprior\*(C'\fR, \f(CW\*(C`d_getprotobyname_r\*(C'\fR, \f(CW\*(C`d_getprotobynumber_r\*(C'\fR,
-\&\f(CW\*(C`d_getprotoent_r\*(C'\fR, \f(CW\*(C`d_getprotoprotos\*(C'\fR, \f(CW\*(C`d_getprpwnam\*(C'\fR, \f(CW\*(C`d_getpwent\*(C'\fR,
-\&\f(CW\*(C`d_getpwent_r\*(C'\fR, \f(CW\*(C`d_getpwnam_r\*(C'\fR, \f(CW\*(C`d_getpwuid_r\*(C'\fR, \f(CW\*(C`d_getsbyname\*(C'\fR,
-\&\f(CW\*(C`d_getsbyport\*(C'\fR, \f(CW\*(C`d_getsent\*(C'\fR, \f(CW\*(C`d_getservbyname_r\*(C'\fR, \f(CW\*(C`d_getservbyport_r\*(C'\fR,
+\&\f(CW\*(C`d_flock\*(C'\fR, \f(CW\*(C`d_flockproto\*(C'\fR, \f(CW\*(C`d_fma\*(C'\fR, \f(CW\*(C`d_fmax\*(C'\fR, \f(CW\*(C`d_fmin\*(C'\fR,
+\&\f(CW\*(C`d_fdopendir\*(C'\fR, \f(CW\*(C`d_fork\*(C'\fR, \f(CW\*(C`d_fp_class\*(C'\fR, \f(CW\*(C`d_fp_classify\*(C'\fR, \f(CW\*(C`d_fp_classl\*(C'\fR,
+\&\f(CW\*(C`d_fpathconf\*(C'\fR, \f(CW\*(C`d_fpclass\*(C'\fR, \f(CW\*(C`d_fpclassify\*(C'\fR, \f(CW\*(C`d_fpclassl\*(C'\fR,
+\&\f(CW\*(C`d_fpgetround\*(C'\fR, \f(CW\*(C`d_fpos64_t\*(C'\fR, \f(CW\*(C`d_freelocale\*(C'\fR, \f(CW\*(C`d_frexpl\*(C'\fR,
+\&\f(CW\*(C`d_fs_data_s\*(C'\fR, \f(CW\*(C`d_fseeko\*(C'\fR, \f(CW\*(C`d_fsetpos\*(C'\fR, \f(CW\*(C`d_fstatfs\*(C'\fR, \f(CW\*(C`d_fstatvfs\*(C'\fR,
+\&\f(CW\*(C`d_fsync\*(C'\fR, \f(CW\*(C`d_ftello\*(C'\fR, \f(CW\*(C`d_ftime\*(C'\fR, \f(CW\*(C`d_futimes\*(C'\fR, \f(CW\*(C`d_gai_strerror\*(C'\fR,
+\&\f(CW\*(C`d_Gconvert\*(C'\fR, \f(CW\*(C`d_gdbm_ndbm_h_uses_prototypes\*(C'\fR,
+\&\f(CW\*(C`d_gdbmndbm_h_uses_prototypes\*(C'\fR, \f(CW\*(C`d_getaddrinfo\*(C'\fR, \f(CW\*(C`d_getcwd\*(C'\fR,
+\&\f(CW\*(C`d_getenv_preserves_other_thread\*(C'\fR, \f(CW\*(C`d_getespwnam\*(C'\fR, \f(CW\*(C`d_getfsstat\*(C'\fR,
+\&\f(CW\*(C`d_getgrent\*(C'\fR, \f(CW\*(C`d_getgrent_r\*(C'\fR, \f(CW\*(C`d_getgrgid_r\*(C'\fR, \f(CW\*(C`d_getgrnam_r\*(C'\fR,
+\&\f(CW\*(C`d_getgrps\*(C'\fR, \f(CW\*(C`d_gethbyaddr\*(C'\fR, \f(CW\*(C`d_gethbyname\*(C'\fR, \f(CW\*(C`d_gethent\*(C'\fR,
+\&\f(CW\*(C`d_gethname\*(C'\fR, \f(CW\*(C`d_gethostbyaddr_r\*(C'\fR, \f(CW\*(C`d_gethostbyname_r\*(C'\fR,
+\&\f(CW\*(C`d_gethostent_r\*(C'\fR, \f(CW\*(C`d_gethostprotos\*(C'\fR, \f(CW\*(C`d_getitimer\*(C'\fR, \f(CW\*(C`d_getlogin\*(C'\fR,
+\&\f(CW\*(C`d_getlogin_r\*(C'\fR, \f(CW\*(C`d_getmnt\*(C'\fR, \f(CW\*(C`d_getmntent\*(C'\fR, \f(CW\*(C`d_getnameinfo\*(C'\fR,
+\&\f(CW\*(C`d_getnbyaddr\*(C'\fR, \f(CW\*(C`d_getnbyname\*(C'\fR, \f(CW\*(C`d_getnent\*(C'\fR, \f(CW\*(C`d_getnetbyaddr_r\*(C'\fR,
+\&\f(CW\*(C`d_getnetbyname_r\*(C'\fR, \f(CW\*(C`d_getnetent_r\*(C'\fR, \f(CW\*(C`d_getnetprotos\*(C'\fR, \f(CW\*(C`d_getpagsz\*(C'\fR,
+\&\f(CW\*(C`d_getpbyname\*(C'\fR, \f(CW\*(C`d_getpbynumber\*(C'\fR, \f(CW\*(C`d_getpent\*(C'\fR, \f(CW\*(C`d_getpgid\*(C'\fR,
+\&\f(CW\*(C`d_getpgrp\*(C'\fR, \f(CW\*(C`d_getpgrp2\*(C'\fR, \f(CW\*(C`d_getppid\*(C'\fR, \f(CW\*(C`d_getprior\*(C'\fR,
+\&\f(CW\*(C`d_getprotobyname_r\*(C'\fR, \f(CW\*(C`d_getprotobynumber_r\*(C'\fR, \f(CW\*(C`d_getprotoent_r\*(C'\fR,
+\&\f(CW\*(C`d_getprotoprotos\*(C'\fR, \f(CW\*(C`d_getprpwnam\*(C'\fR, \f(CW\*(C`d_getpwent\*(C'\fR, \f(CW\*(C`d_getpwent_r\*(C'\fR,
+\&\f(CW\*(C`d_getpwnam_r\*(C'\fR, \f(CW\*(C`d_getpwuid_r\*(C'\fR, \f(CW\*(C`d_getsbyname\*(C'\fR, \f(CW\*(C`d_getsbyport\*(C'\fR,
+\&\f(CW\*(C`d_getsent\*(C'\fR, \f(CW\*(C`d_getservbyname_r\*(C'\fR, \f(CW\*(C`d_getservbyport_r\*(C'\fR,
 \&\f(CW\*(C`d_getservent_r\*(C'\fR, \f(CW\*(C`d_getservprotos\*(C'\fR, \f(CW\*(C`d_getspnam\*(C'\fR, \f(CW\*(C`d_getspnam_r\*(C'\fR,
 \&\f(CW\*(C`d_gettimeod\*(C'\fR, \f(CW\*(C`d_gmtime64\*(C'\fR, \f(CW\*(C`d_gmtime_r\*(C'\fR, \f(CW\*(C`d_gnulibc\*(C'\fR, \f(CW\*(C`d_grpasswd\*(C'\fR,
 \&\f(CW\*(C`d_has_C_UTF8\*(C'\fR, \f(CW\*(C`d_hasmntopt\*(C'\fR, \f(CW\*(C`d_htonl\*(C'\fR, \f(CW\*(C`d_hypot\*(C'\fR, \f(CW\*(C`d_ilogb\*(C'\fR,

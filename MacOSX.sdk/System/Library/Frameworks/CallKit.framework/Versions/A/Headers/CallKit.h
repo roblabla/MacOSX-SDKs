@@ -21,6 +21,9 @@
 #import <CallKit/CXSetMutedCallAction.h>
 #import <CallKit/CXSetGroupCallAction.h>
 #import <CallKit/CXPlayDTMFCallAction.h>
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && !TARGET_OS_VISION
+#import <CallKit/CXSetTranslatingCallAction.h>
+#endif
 #import <CallKit/CXProvider.h>
 #import <CallKit/CXProviderConfiguration.h>
 #import <CallKit/CXCall.h>

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, CLKWatchFaceLibraryErrorCode)  {
     CLKWatchFaceLibraryErrorCodeInvalidFile = 2,
     CLKWatchFaceLibraryErrorCodePermissionDenied = 3,
     CLKWatchFaceLibraryErrorCodeFaceNotAvailable = 4,
+    CLKWatchFaceLibraryErrorCodeNoURL = 5,
 } API_AVAILABLE(watchos(7.0), ios(14.0)) NS_SWIFT_NAME(CLKWatchFaceLibrary.ErrorCode);
 
 API_AVAILABLE(watchos(7.0), ios(14.0))

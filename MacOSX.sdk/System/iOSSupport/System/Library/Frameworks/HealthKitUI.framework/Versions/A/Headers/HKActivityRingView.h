@@ -13,7 +13,6 @@
 @class HKActivitySummary;
 
 NS_ASSUME_NONNULL_BEGIN
-#if __has_include(<UIKit/UIView.h>)
 
 HK_EXTERN API_AVAILABLE(ios(9.3), macCatalyst(13.0), macos(13.0)) API_UNAVAILABLE(watchos)
 @interface HKActivityRingView : UIView
@@ -29,5 +28,4 @@ HK_EXTERN API_AVAILABLE(ios(9.3), macCatalyst(13.0), macos(13.0)) API_UNAVAILABL
 
 @end
 
-#endif
 NS_ASSUME_NONNULL_END

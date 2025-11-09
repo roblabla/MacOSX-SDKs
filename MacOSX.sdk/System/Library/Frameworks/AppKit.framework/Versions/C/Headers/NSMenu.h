@@ -199,13 +199,17 @@ typedef NS_ENUM(NSInteger, NSMenuSelectionMode) {
 
 /// Creates a palette menu displaying user-selectable color
 /// tags using the provided array of colors and optional titles.
+///
+/// Note that the palette menu is configured for display as an inline menu; you must set it as the submenu of another menu item, contained in a standard menu.
+/// The palette menu cannot be used to invoke the `popUpMenuPositioningItem` method, or attached directly to a popup button or toolbar item.
+///
 /// @return An autoconfigured palette menu.
 + (instancetype)paletteMenuWithColors:(NSArray<NSColor *> *)colors
                                titles:(NSArray<NSString *> *)itemTitles
                      selectionHandler:(nullable void (^)(NSMenu *))onSelectionChange
 API_AVAILABLE(macos(14.0)) NS_REFINED_FOR_SWIFT;
 
-/// Creates an palette menu displaying user-selectable color tags
+/// Creates a palette menu displaying user-selectable color tags
 /// using the provided template image, tinted using the specified
 /// array of colors.
 ///
@@ -213,6 +217,9 @@ API_AVAILABLE(macos(14.0)) NS_REFINED_FOR_SWIFT;
 /// the compact menu. The block is invoked after the selection
 /// has been updated. Currently selected items can be retrieved
 /// from the `selectedItems` property.
+///
+/// Note that the palette menu is configured for display as an inline menu; you must set it as the submenu of another menu item, contained in a standard menu.
+/// The palette menu cannot be used to invoke the `popUpMenuPositioningItem` method, or attached directly to a popup button or toolbar item.
 ///
 /// @return An autoconfigured palette menu.
 + (instancetype)paletteMenuWithColors:(NSArray<NSColor *> *)colors

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -56,7 +56,11 @@
 
 #ifndef _NETINET6_ND6_H_
 #define _NETINET6_ND6_H_
+
 #include <sys/appleapiopts.h>
+#include <sys/types.h>
+#include <netinet/in.h>
+#include <netinet6/in6_var.h>
 #include <net/net_kev.h>
 
 /* see net/route.h, or net/if_inarp.h */
@@ -187,6 +191,14 @@ struct  in6_ndifreq {
 
 #define MAX_RTR_SOLICITATION_DELAY      1       /* 1sec */
 #define RTR_SOLICITATION_INTERVAL       4       /* 4sec */
+
+
+struct  in6_route_info {
+	struct in6_addr prefix;
+	u_int8_t prefixlen;
+	u_short defrtrs; /* number of default routers */
+	/* struct in6_defrouter defrtr[] */
+} __attribute__((aligned(8)));
 
 
 /* Prefix status */

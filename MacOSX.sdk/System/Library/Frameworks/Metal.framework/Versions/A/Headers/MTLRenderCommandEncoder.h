@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol MTLTexture;
 @protocol MTLRenderPipelineState;
 
+@class MTLLogicalToPhysicalColorAttachmentMap;
+
 typedef NS_ENUM(NSUInteger, MTLPrimitiveType) {
     MTLPrimitiveTypePoint = 0,
     MTLPrimitiveTypeLine = 1,
@@ -86,7 +88,7 @@ typedef struct {
 typedef struct {
     uint32_t viewportArrayIndexOffset;
     uint32_t renderTargetArrayIndexOffset;
-} MTLVertexAmplificationViewMapping API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+} MTLVertexAmplificationViewMapping API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0));
 
 typedef struct {
     uint32_t patchCount;
@@ -246,38 +248,37 @@ API_AVAILABLE(macos(14.0), ios(17.0));
  @method setVertexVisibleFunctionTable:atBufferIndex:
  @brief Set a global visible function table for all vertex shaders at the given buffer bind point index.
  */
-- (void)setVertexVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setVertexVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setVertexVisibleFunctionTables:withBufferRange:
  @brief Set an array of global visible function tables for all vertex shaders with the given buffer bind point range.
  */
-- (void)setVertexVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setVertexVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setVertexIntersectionFunctionTable:atBufferIndex:
  @brief Set a global intersection function table for all vertex shaders at the given buffer bind point index.
  */
-- (void)setVertexIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setVertexIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setVertexIntersectionFunctionTables:withBufferRange:
  @brief Set an array of global intersection function tables for all vertex shaders with the given buffer bind point range.
  */
-- (void)setVertexIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setVertexIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setVertexAccelerationStructure:atBufferIndex:
  @brief Set a global acceleration structure for all vertex shaders at the given buffer bind point index.
  */
-- (void)setVertexAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setVertexAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setViewport:
  @brief Set the viewport, which is used to transform vertexes from normalized device coordinates to window coordinates.  Fragments that lie outside of the viewport are clipped, and optionally clamped for fragments outside of znear/zfar.
  */
 - (void)setViewport:(MTLViewport)viewport;
-
 
 /*!
  @method setViewports:
@@ -298,7 +299,7 @@ API_AVAILABLE(macos(14.0), ios(17.0));
  @param viewMappings an array of mapping elements.
  @discussion Each mapping element describes how to route the corresponding amplification ID to a specific viewport and render target array index by using offsets from the base array index provided by the [[render_target_array_index]] and/or [[viewport_array_index]] output attributes in the vertex shader. This allows a modicum of programmability for each amplified vertex to be routed to a different [[render_target_array_index]] and [[viewport_array_index]] even though these attribytes cannot be amplified themselves.
  */
-- (void)setVertexAmplificationCount:(NSUInteger)count viewMappings:(nullable const MTLVertexAmplificationViewMapping *)viewMappings API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4));
+- (void)setVertexAmplificationCount:(NSUInteger)count viewMappings:(nullable const MTLVertexAmplificationViewMapping *)viewMappings API_AVAILABLE(macos(10.15.4), ios(13.0), macCatalyst(13.4), tvos(16.0));
 
 /*!
  @method setCullMode:
@@ -318,6 +319,17 @@ API_AVAILABLE(macos(14.0), ios(17.0));
  */
 - (void)setDepthBias:(float)depthBias slopeScale:(float)slopeScale clamp:(float)clamp;
 
+/// Configures the minimum and maximum bounds for depth bounds testing.
+///
+/// The render command encoder disables depth bounds testing by default.
+/// The render command encoder also disables depth bounds testing when all of the following properties equal a specific value:
+/// - The `minBound` property is equal to `0.0f`.
+/// - The `maxBound` property is equal to `1.0f`.
+/// Both `minBound` and `maxBound` need to be within `[0.0f, 1.0f]`, and `minBound` needs to be less than or equal to `maxBound`.
+/// - Parameters:
+///   - minBound: A minimum bound for depth testing, which discards fragments with a stored depth that is less than `minBound`.
+///   - maxBound: A maximum bound for depth testing, which discards fragments with a stored depth that is greater than `maxBound`.
+- (void)setDepthTestMinBound:(float)minBound maxBound:(float)maxBound API_AVAILABLE(macos(26.0), ios(26.0));
 
 /*!
  @method setScissorRect:
@@ -404,31 +416,31 @@ API_AVAILABLE(macos(14.0), ios(17.0));
  @method setFragmentVisibleFunctionTable:atBufferIndex:
  @brief Set a global visible function table for all fragment shaders at the given buffer bind point index.
  */
-- (void)setFragmentVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setFragmentVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setFragmentVisibleFunctionTables:withBufferRange:
  @brief Set an array of global visible function tables for all fragment shaders with the given buffer bind point range.
  */
-- (void)setFragmentVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setFragmentVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setFragmentIntersectionFunctionTable:atBufferIndex:
  @brief Set a global intersection function table for all fragment shaders at the given buffer bind point index.
  */
-- (void)setFragmentIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setFragmentIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setFragmentIntersectionFunctionTables:withBufferRange:
  @brief Set an array of global intersection function tables for all fragment shaders with the given buffer bind point range.
  */
-- (void)setFragmentIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setFragmentIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setFragmentAccelerationStructure:atBufferIndex:
  @brief Set a global acceleration structure for all fragment shaders at the given buffer bind point index.
  */
-- (void)setFragmentAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setFragmentAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /* Constant Blend Color */
 /*!
@@ -890,32 +902,32 @@ API_AVAILABLE(macos(13.0), ios(16.0));
  @method setTileVisibleFunctionTable:atBufferIndex:
  @brief Set a global visible function table for all tile shaders at the given buffer bind point index.
  */
-- (void)setTileVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setTileVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)functionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setTileVisibleFunctionTables:withBufferRange:
  @brief Set an array of global visible function tables for all tile shaders with the given buffer bind point range.
  */
-- (void)setTileVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setTileVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])functionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setTileIntersectionFunctionTable:atBufferIndex:
  @brief Set a global intersection function table for all tile shaders at the given buffer bind point index.
  */
 - (void)setTileIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex
-    API_AVAILABLE(macos(12.0), ios(15.0));
+    API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setTileIntersectionFunctionTables:withBufferRange:
  @brief Set an array of global intersection function tables for all tile shaders with the given buffer bind point range.
  */
-- (void)setTileIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setTileIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method setTileAccelerationStructure:atBufferIndex:
  @brief Set a global acceleration structure for all tile shaders at the given buffer bind point index.
  */
-- (void)setTileAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0));
+- (void)setTileAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0));
 
 /*!
  @method dispatchThreadsPerTile:
@@ -1050,5 +1062,21 @@ API_AVAILABLE(macos(13.0), ios(16.0));
 -(void)sampleCountersInBuffer:(id<MTLCounterSampleBuffer>)sampleBuffer
                 atSampleIndex:(NSUInteger)sampleIndex
                   withBarrier:(BOOL)barrier API_AVAILABLE(macos(10.15), ios(14.0));
+
+
+/// Sets the mapping from logical shader color output to physical render pass color attachments.
+///
+/// Use this method to define how the physical color attachments you specify via ``MTLRenderPassDescriptor/colorAttachments``
+/// map to the logical color output the fragment shader writes to.
+///
+/// To use this feature, make sure to set ``MTLRenderPassDescriptor/supportColorAttachmentMapping`` to
+/// <doc://com.apple.documentation/documentation/swift/true>.
+///
+/// - Parameter mapping: Mapping from logical shader outputs to physical outputs.
+- (void)setColorAttachmentMap:(nullable MTLLogicalToPhysicalColorAttachmentMap *)mapping
+API_AVAILABLE(macos(26.0), ios(26.0));
+
+
+
 @end
 NS_ASSUME_NONNULL_END

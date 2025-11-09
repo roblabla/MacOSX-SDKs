@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SmartRepliesServer.framework/Versions/A/SmartRepliesServer'
-current-version: 73.18
+current-version: 116.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -31,7 +31,6 @@ exports:
                        '_$s18SmartRepliesServer22MultiHeadEspressoModelCMa', '_$s18SmartRepliesServer22MultiHeadEspressoModelCMm', 
                        '_$s18SmartRepliesServer22MultiHeadEspressoModelCMn', '_$s18SmartRepliesServer22MultiHeadEspressoModelCMo', 
                        '_$s18SmartRepliesServer22MultiHeadEspressoModelCMu', '_$s18SmartRepliesServer22MultiHeadEspressoModelCN', 
-                       '_$s18SmartRepliesServer22MultiHeadEspressoModelCfD', '_$s18SmartRepliesServer22MultiHeadEspressoModelCfd', 
-                       _SmartRepliesServerVersionNumber, _SmartRepliesServerVersionString ]
+                       '_$s18SmartRepliesServer22MultiHeadEspressoModelCfD', '_$s18SmartRepliesServer22MultiHeadEspressoModelCfd' ]
     objc-classes:    [ SRSStringPreprocessor, _TtC18SmartRepliesServer30SRSSmartRepliesServerXPCServer ]
 ...

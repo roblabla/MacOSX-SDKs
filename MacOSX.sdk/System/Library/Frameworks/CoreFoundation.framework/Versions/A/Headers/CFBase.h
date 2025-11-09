@@ -44,11 +44,11 @@
 #error Do not know the endianess of this architecture
 #endif
 
-#if !__BIG_ENDIAN__ && !__LITTLE_ENDIAN__
+#if !(defined(__BIG_ENDIAN__) && __BIG_ENDIAN__) && !(defined(__LITTLE_ENDIAN__) && __LITTLE_ENDIAN__)
 #error Both __BIG_ENDIAN__ and __LITTLE_ENDIAN__ cannot be false
 #endif
 
-#if __BIG_ENDIAN__ && __LITTLE_ENDIAN__
+#if (defined(__BIG_ENDIAN__) && __BIG_ENDIAN__) && (defined(__LITTLE_ENDIAN__) && __LITTLE_ENDIAN__)
 #error Both __BIG_ENDIAN__ and __LITTLE_ENDIAN__ cannot be true
 #endif
 
@@ -88,17 +88,34 @@
 // from <malloc/malloc.h>
 typedef unsigned long long CFAllocatorTypeID;
 
-#if TARGET_OS_MAC && (defined(CF_BUILDING_CF) || defined(NSBUILDINGFOUNDATION))
+#if TARGET_OS_MAC
     #include <malloc/_malloc.h>
     #if defined(_MALLOC_TYPE_ENABLED) && _MALLOC_TYPE_ENABLED && defined(_MALLOC_TYPED)
-        #define _CF_TYPED_ALLOC(override, type_param_pos) _MALLOC_TYPED(override, type_param_pos)
-        #define CF_HAS_TYPED_ALLOCATOR 1
+        #if defined(CF_BUILDING_CF) || defined(NSBUILDINGFOUNDATION)
+            // Enable TMO internally to Foundation/CoreFoundation whenever the system allocator enables it
+            #define CF_ENABLE_TYPED_MEMORY_OPERATIONS 1
+        #elif defined(__ENVIRONMENT_OS_VERSION_MIN_REQUIRED__) && \
+            ((TARGET_OS_IOS && __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ >= 190000) || \
+                (TARGET_OS_OSX && __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ >= 160000) || \
+                (TARGET_OS_VISION && __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ >= 30000) || \
+                (TARGET_OS_WATCH && __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ >= 120000) || \
+                (TARGET_OS_TV && __ENVIRONMENT_OS_VERSION_MIN_REQUIRED__ >= 190000))
+            // Only enable TMO if we're building with a deployment target >= iOS 19.0 (and aligned trains)
+            #define CF_ENABLE_TYPED_MEMORY_OPERATIONS 1
+        #endif
     #endif /* defined(_MALLOC_TYPE_ENABLED) && _MALLOC_TYPE_ENABLED && defined(_MALLOC_TYPED) */
-#endif /* TARGET_OS_MAC && (defined(CF_BUILDING_CF) || defined(NSBUILDINGFOUNDATION)) */
+#endif /* TARGET_OS_MAC */
 
-#if !defined(_CF_TYPED_ALLOC)
-#define _CF_TYPED_ALLOC(override, type_param_pos)
-#define CF_HAS_TYPED_ALLOCATOR 0
+#if defined(CF_ENABLE_TYPED_MEMORY_OPERATIONS) && CF_ENABLE_TYPED_MEMORY_OPERATIONS
+    #define _CF_TYPED_ALLOC(override, type_param_pos) _MALLOC_TYPED(override, type_param_pos)
+    #define CF_HAS_TYPED_ALLOCATOR 1
+#else
+    #define _CF_TYPED_ALLOC(override, type_param_pos)
+    #define CF_HAS_TYPED_ALLOCATOR 0
+#endif
+
+#if TARGET_OS_MAC
+    struct _malloc_zone_t;
 #endif
 
 #if !defined(__MACTYPES__)
@@ -491,7 +508,7 @@ CF_EXPORT double kCFCoreFoundationVersionNumber;
 #define kCFCoreFoundationVersionNumber_iOS_9_x_Max 1299
 #endif
 
-#if __LLP64__
+#if defined(__LLP64__) && __LLP64__
 typedef unsigned long long CFTypeID;
 typedef unsigned long long CFOptionFlags;
 typedef unsigned long long CFHashCode;
@@ -663,6 +680,9 @@ CFAllocatorRef CFAllocatorGetDefault(void);
 
 CF_EXPORT
 CFAllocatorRef CFAllocatorCreate(CFAllocatorRef allocator, CFAllocatorContext *context);
+
+CF_EXPORT
+CFAllocatorRef CFAllocatorCreateWithZone(CFAllocatorRef allocator, struct _malloc_zone_t *zone) API_UNAVAILABLE(macos, ios, watchos, tvos, visionos);
 
 /* Typed allocator interfaces
 

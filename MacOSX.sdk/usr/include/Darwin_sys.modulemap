@@ -230,12 +230,6 @@ module Darwin.sys {
     export *
   }
 
-  // Deprecated, use signal_h
-  module signal {
-    header "_modules/_sys_signal.h"
-    export *
-  }
-
   module signalvar {
     header "sys/signalvar.h"
     export *
@@ -338,6 +332,12 @@ module Darwin.sys {
 
   module vnode {
     header "sys/vnode.h"
+    export *
+  }
+
+  // Deprecated, use signal_h
+  module signal {
+    header "_modules/_darwin_sys_signal.h"
     export *
   }
 }

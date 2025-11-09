@@ -93,7 +93,7 @@ CG_EXTERN const CFStringRef kCGColorSpaceAdobeRGB1998
 CG_EXTERN const CFStringRef kCGColorSpaceSRGB
   API_AVAILABLE(macos(10.5), ios(9.0));
 
-/* The "Generic" gray color space with γ = 2.2. */
+/* The "Generic" gray color space with γ = 1.8. */
 
 CG_EXTERN const CFStringRef kCGColorSpaceGenericGrayGamma2_2
   API_AVAILABLE(macos(10.6), ios(9.0));

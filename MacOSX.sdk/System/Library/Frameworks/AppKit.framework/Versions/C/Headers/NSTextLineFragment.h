@@ -1,12 +1,12 @@
 #if (defined(USE_APPKIT_PUBLIC_HEADERS) && USE_APPKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSTextLineFragment.h>)
-#include <TargetConditionals.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
 //
 //  NSTextLineFragment.h
 //  Text Kit
 //
-//  Copyright (c) 2017-2024, Apple Inc. All rights reserved.
+//  Copyright (c) 2017-2025, Apple Inc. All rights reserved.
 //
 
 #import <Foundation/NSArray.h>

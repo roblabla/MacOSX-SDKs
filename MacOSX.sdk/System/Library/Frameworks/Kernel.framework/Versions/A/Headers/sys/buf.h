@@ -1078,6 +1078,33 @@ void buf_markstatic(buf_t bp);
  */
 int     buf_static(buf_t bp);
 
+__options_decl(vnode_verify_kind_t, uint32_t, {
+	VK_HASH_NONE = 0x00,
+	VK_HASH_SHA3_256 = 0x01,
+	VK_HASH_SHA3_384 = 0x02,
+	VK_HASH_SHA3_512 = 0x03,
+});
+
+#define NUM_VERIFY_KIND 4
+
+/*!
+ *  @function buf_verify_enable
+ *  @abstract Set up buf to retrieve hashes alongwith data.
+ *  @param bp buf pointer.
+ *  @param verify_kind specific algorithm to be used for the hash calculation.
+ *  @return 0 if successful, error otherwise.
+ */
+errno_t buf_verify_enable(buf_t bp, vnode_verify_kind_t verify_kind);
+
+/*!
+ *  @function buf_verifyptr
+ *  @abstract Gets pointer to the buffer to store the hash calculated for the data.
+ *  @param bp buf pointer.
+ *  @param len pointer to uint32_t variable to store the length.
+ *  @return Pointer to a buffer (of length passed in second argument), NULL if there is no hash needed.
+ */
+uint8_t * buf_verifyptr(buf_t bp, uint32_t *len);
+
 /*!
  *  @function bufattr_markiosched
  *  @abstract Mark a buffer as belonging to an io scheduled mount point

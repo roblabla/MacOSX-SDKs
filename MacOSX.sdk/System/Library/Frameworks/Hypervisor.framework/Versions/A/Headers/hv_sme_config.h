@@ -26,7 +26,7 @@ __BEGIN_DECLS
 
     Returns HV_UNSUPPORTED if SME is not supported.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_sme_config_get_max_svl_bytes(size_t *value);
 
 __END_DECLS

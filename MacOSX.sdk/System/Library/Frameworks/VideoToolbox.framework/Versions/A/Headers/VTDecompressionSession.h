@@ -466,7 +466,7 @@ typedef void (^VTDecompressionMultiImageCapableOutputHandler)(
 		asynchronously.
 		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
 		Pass NULL if you do not want to receive this information.
-	@param	multiImageCapableHandler
+	@param	multiImageCapableOutputHandler
 		The block to be called when decoding the frame is completed.  If the
 		VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler call returns an error,
 		the block will not be called.
@@ -480,8 +480,95 @@ VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(
 	CM_NONNULL VTDecompressionMultiImageCapableOutputHandler	multiImageCapableOutputHandler )  API_AVAILABLE(macos(14.0), ios(17.0), visionos(1.0)) API_UNAVAILABLE(tvos, watchos) CF_REFINED_FOR_SWIFT;
 #endif // __BLOCKS__
 
+/*!
+	@function	VTDecompressionSessionDecodeFrameWithOptions
+	@abstract	Decompresses a video frame.
+	@discussion
+		If an error is returned from this function, there will be no callback.  Otherwise
+		the callback provided during VTDecompressionSessionCreate will be called.
+	@param	session
+		The decompression session.
+	@param	sampleBuffer
+		A CMSampleBuffer containing one or more video frames.
+	@param	decodeFlags
+		A bitfield of directives to the decompression session and decoder.
+		The kVTDecodeFrame_EnableAsynchronousDecompression bit indicates whether the video decoder
+		may decompress the frame asynchronously.
+		The kVTDecodeFrame_EnableTemporalProcessing bit indicates whether the decoder may delay calls to the output callback
+		so as to enable processing in temporal (display) order.
+		If both flags are clear, the decompression shall complete and your output callback function will be called
+		before VTDecompressionSessionDecodeFrameWithOptions returns.
+		If either flag is set, VTDecompressionSessionDecodeFrameWithOptions may return before the output callback function is called.
+	@param	frameOptions
+		Contains key/value pairs specifying additional options for decoding this frame.
+		Only keys with `kVTDecodeFrameOptionKey_` prefix should be used in this dictionary.
+	@param	sourceFrameRefCon
+		Your reference value for the frame.
+		Note that if sampleBuffer contains multiple frames, the output callback function will be called
+		multiple times with this sourceFrameRefCon.
+	@param	infoFlagsOut
+		Points to a VTDecodeInfoFlags to receive information about the decode operation.
+		The kVTDecodeInfo_Asynchronous bit may be set if the decode is (or was) running
+		asynchronously.
+		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
+		Pass NULL if you do not want to receive this information.
+*/
+VT_EXPORT OSStatus
+VTDecompressionSessionDecodeFrameWithOptions(
+	CM_NONNULL VTDecompressionSessionRef	session,
+	CM_NONNULL CMSampleBufferRef			sampleBuffer,
+	VTDecodeFrameFlags						decodeFlags, // bit 0 is enableAsynchronousDecompression
+	CM_NULLABLE CFDictionaryRef				frameOptions,
+	void * CM_NULLABLE						sourceFrameRefCon,
+	VTDecodeInfoFlags * CM_NULLABLE 		infoFlagsOut) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+
+#if __BLOCKS__
+/*!
+	@function	VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler
+	@abstract	Decompresses a video frame.
+	@discussion
+		Cannot be called with a session created with a VTDecompressionOutputCallbackRecord.
+		If the VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler call returns an error,
+		the block will not be called.
+	@param	session
+		The decompression session.
+	@param	sampleBuffer
+		A CMSampleBuffer containing one or more video frames.
+	@param	decodeFlags
+		A bitfield of directives to the decompression session and decoder.
+		The kVTDecodeFrame_EnableAsynchronousDecompression bit indicates whether the video decoder
+		may decompress the frame asynchronously.
+		The kVTDecodeFrame_EnableTemporalProcessing bit indicates whether the decoder may delay calls to the output callback
+		so as to enable processing in temporal (display) order.
+		If both flags are clear, the decompression shall complete and your output callback function will be called
+		before VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler returns.
+		If either flag is set, VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler may return before the output
+		callback function is called.
+	@param	frameOptions
+		Contains key/value pairs specifying additional options for decoding this frame.
+		Only keys with `kVTDecodeFrameOptionKey_` prefix should be used in this dictionary.
+	@param	infoFlagsOut
+		Points to a VTDecodeInfoFlags to receive information about the decode operation.
+		The kVTDecodeInfo_Asynchronous bit may be set if the decode is (or was) running
+		asynchronously.
+		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
+		Pass NULL if you do not want to receive this information.
+	@param	outputHandler
+		The block to be called when decoding the frame is completed.  If the VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler
+		call returns an error, the block will not be called.
+ */
+VT_EXPORT OSStatus
+VTDecompressionSessionDecodeFrameWithOptionsAndOutputHandler(
+	CM_NONNULL VTDecompressionSessionRef	session,
+	CM_NONNULL CMSampleBufferRef			sampleBuffer,
+	VTDecodeFrameFlags						decodeFlags, // bit 0 is enableAsynchronousDecompression
+	CM_NULLABLE CFDictionaryRef				frameOptions,
+	VTDecodeInfoFlags * CM_NULLABLE			infoFlagsOut,
+	CM_NONNULL VTDecompressionOutputHandler	outputHandler ) API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(2.0)) API_UNAVAILABLE(watchos);
+#endif // __BLOCKS__
+
 #pragma pack(pop)
-    
+
 #if defined(__cplusplus)
 }
 #endif

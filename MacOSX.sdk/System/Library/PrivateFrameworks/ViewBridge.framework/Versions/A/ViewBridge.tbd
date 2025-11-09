@@ -20,7 +20,8 @@ exports:
                        NSPreviewHostViewController, NSPreviewHostViewControllerParameters, 
                        NSPreviewTargetController, NSRemoteView, NSRemoteViewController, 
                        NSRemoteViewControllerParameters, NSRemoteViewControllerParametersForService, 
-                       NSRemoteViewControllerParametersForServiceBase, NSServiceViewController, 
+                       NSRemoteViewControllerParametersForServiceBase, NSRemoteViewControllerWithDelegate, 
+                       NSRemoteViewControllerWithDelegateParameters, NSServiceViewController, 
                        NSVBKeyboardEventSpecification, NSViewBridge, NSViewService, 
                        NSViewServiceAccessoryView, NSViewServiceApplication, NSViewServiceBridge, 
                        NSXPCSharedListener ]

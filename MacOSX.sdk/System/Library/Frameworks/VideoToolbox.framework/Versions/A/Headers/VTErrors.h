@@ -69,6 +69,7 @@ enum
 	kVTCouldNotOutputTaggedBufferGroupErr	= -17699,
 	kVTCouldNotFindExtensionErr				= -19510,
 	kVTExtensionConflictErr					= -19511,
+	kVTVideoEncoderAutoWhiteBalanceNotLockedErr = -19512,
 };
 
 /*!
@@ -114,12 +115,17 @@ typedef CF_OPTIONS(uint32_t, VTDecodeFrameFlags) {
 		frames following the sync frame that cannot be decoded due to missing references.  Dropping these frames 
 		has no impact to playback since the non-decodeable frames will not be rendered.
 		If kVTDecodeInfo_SkippedLeadingFrameDropped is set, kVTDecodeInfo_FrameDropped will also be set.
+	@constant kVTDecodeInfo_FrameInterrupted
+		The kVTDecodeInfo_FrameInterrupted bit may be set if the frame was decoded successfully but the decoded
+		content was not provided in the output callback. When this bit is set, the imageBuffer provided to the output
+		handler may either be NULL or contain only black pixels.
 */
 typedef CF_OPTIONS(UInt32, VTDecodeInfoFlags) {
 	kVTDecodeInfo_Asynchronous = 1UL << 0,
 	kVTDecodeInfo_FrameDropped = 1UL << 1,
 	kVTDecodeInfo_ImageBufferModifiable = 1UL << 2,
 	kVTDecodeInfo_SkippedLeadingFrameDropped = 1UL << 3,
+	kVTDecodeInfo_FrameInterrupted = 1UL << 4,
 };
 
 // Informational status for encoding -- non-error flags 

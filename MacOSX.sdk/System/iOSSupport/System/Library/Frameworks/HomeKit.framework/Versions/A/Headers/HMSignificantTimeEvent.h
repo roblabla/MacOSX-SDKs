@@ -34,14 +34,14 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief significantEvent The significant event for the trigger.
  */
-@property (readonly, strong, nonatomic) HMSignificantEvent significantEvent;
+@property (nonatomic, readonly, strong) HMSignificantEvent significantEvent;
 
 /*!
- * @brief offset An offset from the time of the signficant event. To specify an offset before the significant event, the
+ * @brief offset An offset from the time of the significant event. To specify an offset before the significant event, the
  *               properties of the NSDateComponents must be negative value. e.g. To specify 30 mins before sunset, the
  *               'minute' property must be set to -30.
  */
-@property (readonly, strong, nonatomic, nullable) NSDateComponents *offset;
+@property (nullable, nonatomic, readonly, strong) NSDateComponents *offset;
 
 @end
 
@@ -55,14 +55,14 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0), m
 /*!
  * @brief significantEvent The significant event for the trigger.
  */
-@property (readwrite, strong, nonatomic) HMSignificantEvent significantEvent;
+@property (nonatomic, readwrite, strong) HMSignificantEvent significantEvent;
 
 /*!
  * @brief offset An offset from the time of the significant event. To specify an offset before the significant event, the
  *               properties of the NSDateComponents must be negative value. e.g. To specify 30 mins before sunset, the
  *               'minute' property must be set to -30.
  */
-@property (readwrite, strong, nonatomic) NSDateComponents *offset;
+@property (nonatomic, readwrite, strong) NSDateComponents *offset;
 
 @end
 

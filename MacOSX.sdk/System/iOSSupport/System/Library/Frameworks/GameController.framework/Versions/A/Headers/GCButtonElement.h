@@ -34,6 +34,14 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  */
 @property (readonly, nullable) id<GCTouchedStateInput> touchedInput;
 
+/**
+ Get the input containing the measured force applied to the button.
+ 
+ Some buttons feature load cells (also known as button force transducers)
+ capable of measuring applied mechanical force.
+ */
+@property (readonly, nullable) id<GCLinearInput> forceInput API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

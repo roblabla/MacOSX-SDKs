@@ -39,6 +39,7 @@ CM_ASSUME_NONNULL_BEGIN
 		The session reference is a reference-counted CF object.
 */
 typedef struct CM_BRIDGED_TYPE(id) OpaqueVTRAWProcessingSession*  VTRAWProcessingSessionRef API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos) CM_SWIFT_NONSENDABLE;
+CM_SWIFT_INIT_FOR_CF_TYPE(VTRAWProcessingSession, API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos));
 
 /*!
 	@typedef	VTRAWProcessingParameterChangeHandler
@@ -98,9 +99,8 @@ VTRAWProcessingSessionInvalidate( VTRAWProcessingSessionRef session ) CF_REFINED
 VT_EXPORT CFTypeID 
 VTRAWProcessingSessionGetTypeID(void) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
-
 /*!
-	@function	VTRAWProcessingSessionSetParameterChangedHander
+	@function	VTRAWProcessingSessionSetParameterChangedHandler
 	@abstract	Provides a block which will be called when the VTRAWProcessingPlugin changes the set of processing parameters..
 	@discussion
 		This block will be called the VTRAWProcessingPlugin either changes the set of available processing parameters, or changes the current value of parameters.
@@ -113,9 +113,14 @@ VTRAWProcessingSessionGetTypeID(void) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(1
 		 Setting this to NULL removes the current handler.
 */
 VT_EXPORT OSStatus
+VTRAWProcessingSessionSetParameterChangedHandler(
+	VTRAWProcessingSessionRef							session,
+	CM_NULLABLE VTRAWProcessingParameterChangeHandler	parameterChangeHandler ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
+
+VT_EXPORT OSStatus
 VTRAWProcessingSessionSetParameterChangedHander(
 	VTRAWProcessingSessionRef							session,
-	CM_NULLABLE VTRAWProcessingParameterChangeHandler	parameterChangeHandler ) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
+	CM_NULLABLE VTRAWProcessingParameterChangeHandler	parameterChangeHandler ) CF_REFINED_FOR_SWIFT API_DEPRECATED_WITH_REPLACEMENT("VTRAWProcessingSessionSetParameterChangedHandler", macos(15.0, 26.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /*!
 	@typedef	VTRAWProcessingOutputHandler

@@ -42,6 +42,7 @@
 #define kMEFormatReaderFileNameExtensionArrayKey			@"MTFileNameExtensionArray"
 #define kMEFormatReaderObjectNameKey						@"ObjectName"
 
+
 /*!
 	@abstract		Extension attribute field keys for MediaExtension video decoder plugin bundles.
 	@constant		kMEVideoDecoderClassImplementationIDKey
@@ -54,13 +55,32 @@
 		A user-readable string describing the name of the codec format. This string might be displayed as format information for the video track in a player application.
 	@constant		kMEVideoDecoderObjectNameKey
 		A user-readable string describing the video decoder. This string is used for uniquely identifying video decoders and possibly for debug logging but is typically not visible to users.
-		
 */
 #define kMEVideoDecoderClassImplementationIDKey				@"ClassImplementationID"
 #define kMEVideoDecoderCodecInfoKey							@"CodecInfo"
 #define kMEVideoDecoderCodecTypeKey							@"CodecType"
 #define kMEVideoDecoderCodecNameKey							@"CodecName"
 #define kMEVideoDecoderObjectNameKey						@"ObjectName"
+
+
+/*!
+	@abstract		Extension attribute field keys for MediaExtension RAW processor plugin bundles.
+	@constant		kMERAWProcessorClassImplementationIDKey
+		A string that uniquely identifies the RAW processor. It should start with the reverse domain identifier of the developer and for clarity contain ".rawprocessor." and the name of the codec.
+	@constant		kMERAWProcessorProcessorInfoKey
+		An array of one or more dictionaries describing the codecs that the RAW processor supports. Each dictionary will have entries for at least the kMERAWProcessorCodecTypeKey and kMERAWProcessorCodecNameKey.
+	@constant		kMERAWProcessorCodecTypeKey
+		A string describing the four-character code of the codec that the RAW processor supports. Each string should be exactly four characters long and use ASCII character set encoding.
+	@constant		kMERAWProcessorCodecNameKey
+		A user-readable string describing the name of the codec format. This string might be displayed as format information for the video track in a player application.
+	@constant		kMERAWProcessorObjectNameKey
+		A user-readable string describing the RAW processor. This string is used for uniquely identifying RAW processors and possibly for debug logging but is typically not visible to users.
+*/
+#define kMERAWProcessorClassImplementationIDKey				@"ClassImplementationID"
+#define kMERAWProcessorProcessorInfoKey						@"ProcessorInfo"
+#define kMERAWProcessorCodecTypeKey							@"CodecType"
+#define kMERAWProcessorCodecNameKey							@"CodecName"
+#define kMERAWProcessorObjectNameKey						@"ObjectName"
 
 
 #endif /* MEExtensionPlugin_h */

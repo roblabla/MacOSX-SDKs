@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/GamePolicyServices.framework/Versions/A/GamePolicyServices'
-current-version: 2.5.2
+current-version: 3.0.25
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

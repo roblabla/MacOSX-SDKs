@@ -52,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	mach_vm_MSG_COUNT
-#define	mach_vm_MSG_COUNT	28
+#define	mach_vm_MSG_COUNT	29
 #endif	/* mach_vm_MSG_COUNT */
 
 #include <Availability.h>

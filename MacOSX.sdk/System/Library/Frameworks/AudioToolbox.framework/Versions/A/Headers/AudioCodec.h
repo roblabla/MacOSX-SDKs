@@ -444,7 +444,7 @@ CF_ENUM(AudioCodecPropertyID)
 						unreliable IP networks where the encoder needs to adapt immediately to network condition changes.
 						Escape property ID's start with a '^' symbol as the first char code. This bypasses the initilization check.
     @constant		kAudioCodecPropertyDynamicRangeControlMode
-						A UInt32 specifying the DRC mode. Supported modes are defined as enum with the
+						A UInt32 specifying the decoder DRC mode. Supported modes are defined as enum with the
 						prefix kDynamicRangeControlMode (see below). For certain legacy metadata this property controls which
 						dynamic range compression scheme is applied if the information is present in
 						the bitstream. The default is kDynamicRangeControlMode_None.
@@ -472,6 +472,18 @@ CF_ENUM(AudioCodecPropertyID)
                         A Float32 specifying the program target loudness in LKFS for decoders. It has the same effect
                         as kAudioCodecPropertyProgramTargetLevel, but this property can also be set on an initialized decoder
                         object. It will be applied immediately, if supported.
+    @constant        kAudioCodecPropertyDynamicRangeControlConfiguration
+                        A UInt32 specifying the encoder DRC configuration. Configurations are defined as enum with the prefix
+                        kAudioCodecDynamicRangeControlConfiguration_. When supported by the encoder, this property controls which
+                        configuration is applied when a bitstream is generated. The default configuration for an APAC
+                        encoder is kAudioCodecDynamicRangeControlConfiguration_Capture, otherwise it is kAudioCodecDynamicRangeControlConfiguration_None.
+    @constant        kAudioCodecPropertyContentSource
+                        An SInt32 index to select a pre-defined content source type that describes the content type and how it was generated.
+                        This is an encoder property with read/write access, if supported.  Supported values are defined with a prefix kAudioCodecContentSource_.
+    @constant        kAudioCodecPropertyASPFrequency
+                        A UInt32 to set the frequency of Audio Sync Packets (ASP). The value must be larger than 2.
+                        A recommended value is 75 so that each 75th packet is an ASP.
+                        This is an encoder property with read/write access, if supported.
 */
 CF_ENUM(AudioCodecPropertyID)
 {
@@ -512,6 +524,9 @@ CF_ENUM(AudioCodecPropertyID)
     kAudioCodecPropertyAdjustTargetLevelConstant                                = '^tlc',
     kAudioCodecPropertyProgramTargetLevel                                       = 'pptl',
     kAudioCodecPropertyAdjustTargetLevel                                        = '^ptl',
+    kAudioCodecPropertyDynamicRangeControlConfiguration                         = 'cdrc',
+    kAudioCodecPropertyContentSource                                            = 'csrc',
+    kAudioCodecPropertyASPFrequency                                             = 'aspf',
 };
 
 
@@ -685,6 +700,109 @@ CF_ENUM(UInt32)
     kDynamicRangeCompressionProfile_NoisyEnvironment        = 2,
     kDynamicRangeCompressionProfile_LimitedPlaybackRange    = 3,
     kDynamicRangeCompressionProfile_GeneralCompression      = 6
+};
+
+/*!
+    @enum            AudioCodecDynamicRangeControlConfiguration
+
+    @discussion     Constants to be used with kAudioCodecPropertyDynamicRangeControlConfiguration for encoding
+
+    @constant       kAudioCodecDynamicRangeControlConfiguration_None
+                        Dynamic range compression disabled
+    @constant       kAudioCodecDynamicRangeControlConfiguration_Music
+                        Dynamic range compression for music
+    @constant       kAudioCodecDynamicRangeControlConfiguration_Speech
+                        Dynamic range compression for speech
+    @constant       kAudioCodecDynamicRangeControlConfiguration_Movie
+                        Dynamic range compression for movie sound tracks
+    @constant       kAudioCodecDynamicRangeControlConfiguration_Capture
+                        Dynamic range compression for capture (live encoding)
+*/
+CF_ENUM(UInt32)
+{
+    kAudioCodecDynamicRangeControlConfiguration_None     = 0,
+    kAudioCodecDynamicRangeControlConfiguration_Music    = 1,
+    kAudioCodecDynamicRangeControlConfiguration_Speech   = 2,
+    kAudioCodecDynamicRangeControlConfiguration_Movie    = 3,
+    kAudioCodecDynamicRangeControlConfiguration_Capture  = 4
+};
+
+/*!
+    @enum           AudioCodecContentSource
+
+    @discussion     Constants to be used with kAudioCodecPropertyContentSource to indicate the content type.
+
+    @constant       kAudioCodecContentSource_Unspecified
+                        Unspecified content source
+    @constant       kAudioCodecContentSource_Reserved
+                        Reserved index
+    @constant       kAudioCodecContentSource_AppleCapture_Traditional
+                        Traditional Apple device capture
+    @constant       kAudioCodecContentSource_AppleCapture_Spatial
+                        Spatial Apple device capture
+    @constant       kAudioCodecContentSource_AppleCapture_Spatial_Enhanced
+                        Reserved for Apple use
+    @constant       kAudioCodecContentSource_AppleMusic_Traditional
+                        Traditional Apple music and music video content such as stereo and multichannel
+    @constant       kAudioCodecContentSource_AppleMusic_Spatial
+                        Spatial Apple music and music video content
+    @constant       kAudioCodecContentSource_AppleAV_Traditional_Offline
+                        Traditional Apple professional AV offline encoded content such as stereo and multichannel
+    @constant       kAudioCodecContentSource_AppleAV_Spatial_Offline
+                        Spatial Apple professional AV offline encoded content
+    @constant       kAudioCodecContentSource_AppleAV_Traditional_Live
+                        Traditional Apple professional AV live content such as stereo and multichannel
+    @constant       kAudioCodecContentSource_AppleAV_Spatial_Live
+                        Spatial Apple professional AV live content
+    @constant       kAudioCodecContentSource_ApplePassthrough
+                        Apple passthrough content (use only if source information is not available)
+
+    @constant       kAudioCodecContentSource_Capture_Traditional
+                        Traditional device capture
+    @constant       kAudioCodecContentSource_Capture_Spatial
+                        Spatial device capture
+    @constant       kAudioCodecContentSource_Capture_Spatial_Enhanced
+                        Reserved for future use
+    @constant       kAudioCodecContentSource_Music_Traditional
+                        Traditional music and music video content such as stereo and multichannel
+    @constant       kAudioCodecContentSource_Music_Spatial
+                        Spatial music and music video content
+    @constant       kAudioCodecContentSource_AV_Traditional_Offline
+                        Traditional professional AV offline encoded content such as stereo and multichannel
+    @constant       kAudioCodecContentSource_AV_Spatial_Offline
+                        Spatial professional AV offline encoded content
+    @constant       kAudioCodecContentSource_AV_Traditional_Live
+                        Traditional professional AV live content such as stereo and multichannel
+    @constant       kAudioCodecContentSource_AV_Spatial_Live
+                        Spatial professional AV live content
+    @constant       kAudioCodecContentSource_Passthrough
+                        Passthrough content (use only if source information is not available)
+*/
+CF_ENUM(SInt32)
+{
+    kAudioCodecContentSource_Unspecified                    = -1,
+    kAudioCodecContentSource_Reserved                       = 0,
+    kAudioCodecContentSource_AppleCapture_Traditional       = 1,
+    kAudioCodecContentSource_AppleCapture_Spatial           = 2,
+    kAudioCodecContentSource_AppleCapture_Spatial_Enhanced  = 3,
+    kAudioCodecContentSource_AppleMusic_Traditional         = 4,
+    kAudioCodecContentSource_AppleMusic_Spatial             = 5,
+    kAudioCodecContentSource_AppleAV_Traditional_Offline    = 6,
+    kAudioCodecContentSource_AppleAV_Spatial_Offline        = 7,
+    kAudioCodecContentSource_AppleAV_Traditional_Live       = 8,
+    kAudioCodecContentSource_AppleAV_Spatial_Live           = 9,
+    kAudioCodecContentSource_ApplePassthrough               = 10,
+    
+    kAudioCodecContentSource_Capture_Traditional            = 33,
+    kAudioCodecContentSource_Capture_Spatial                = 34,
+    kAudioCodecContentSource_Capture_Spatial_Enhanced       = 35,
+    kAudioCodecContentSource_Music_Traditional              = 36,
+    kAudioCodecContentSource_Music_Spatial                  = 37,
+    kAudioCodecContentSource_AV_Traditional_Offline         = 38,
+    kAudioCodecContentSource_AV_Spatial_Offline             = 39,
+    kAudioCodecContentSource_AV_Traditional_Live            = 40,
+    kAudioCodecContentSource_AV_Spatial_Live                = 41,
+    kAudioCodecContentSource_Passthrough                    = 42
 };
 
 /*!

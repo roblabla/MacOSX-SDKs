@@ -84,8 +84,8 @@ exports:
                        SCDisplayStreamCaptureInfo, SCEventConnection, SCHotKeyListener, 
                        SCMachPort, SCObjectList, SCObjectListEntry, SCPreview, SCPreviewAttributes, 
                        SCRecordingOutput, SCRecordingOutputConfiguration, SCRemoteQueueXPCObject, 
-                       SCRunningApplication, SCScreenshotManager, SCShareableContent, 
-                       SCShareableContentInfo, SCShareableContentInformation, SCStatusItem, 
-                       SCStream, SCStreamConfiguration, SCStreamInfo, SCStreamManager, 
-                       SCWindow, SharingSessionSerialized ]
+                       SCRunningApplication, SCScreenshotConfiguration, SCScreenshotManager, 
+                       SCScreenshotOutput, SCShareableContent, SCShareableContentInfo, 
+                       SCShareableContentInformation, SCStatusItem, SCStream, SCStreamConfiguration, 
+                       SCStreamInfo, SCStreamManager, SCWindow, SharingSessionSerialized ]
 ...

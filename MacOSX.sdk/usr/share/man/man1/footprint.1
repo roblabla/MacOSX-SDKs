@@ -1,4 +1,4 @@
-.\" Copyright (c) 2022, Apple, Inc.  All rights reserved.
+.\" Copyright (c) 2025, Apple, Inc. All rights reserved.
 .\"
 .Dd April 15, 2022
 .Dt FOOTPRINT 1
@@ -34,9 +34,15 @@ The
 utility gathers and displays memory consumption information for the specified processes or memory graph files.
 .Pp
 .Nm
-will display all addressable memory used by the specified processes, but it emphasizes memory considered 'dirty' by the kernel for purposes of accounting.  If multiple processes are specified,
+will display all addressable memory used by the specified processes, but it emphasizes memory considered
+.Qq dirty
+by the kernel for purposes of accounting. If multiple processes are specified,
 .Nm
-will de-duplicate multiply mapped objects and will display shared objects separately from private ones.
+will de-duplicate multiply-mapped objects and will display shared objects separately from private ones. It will also print a summary of total de-duplicated footprint. Currently,
+.Nm
+does not de-duplicate wired memory shared between
+.Ar kernel_task
+and user space processes.
 .Pp
 .Nm
 must be run as root when inspecting processes that are not owned by the current user.
@@ -45,7 +51,7 @@ Processes are specified using a PID, exact process name, or partial process name
 .Sh OPTIONS
 .Bl -tag -width Ds
 .It Fl a , Fl -all
-target all processes (will take much longer)
+target all processes and report system-level auxiliary data
 .It Fl j , Fl -json Ar path
 also save a JSON representation of the data to the specified path
 .It Fl f , Fl -format Ar bytes|formatted|pages
@@ -93,7 +99,7 @@ show swapped/compressed column
 .It Fl -wired
 show wired memory column
 .It Fl -vmObjectDirty
-interpret dirty memory as viewed by VM objects in the kernel, rather than the default behavior which interprets dirty memory through the pmap. This mode may calculate a total footprint that does not match what is shown in other tools such as
+interpret dirty memory as viewed by Virtual Memory subssytem (VM) objects in the kernel, rather than the default behavior which interprets dirty memory through the pmap. This mode may calculate a total footprint that does not match what is shown in other tools such as
 .Xr top 1
 or Activity Monitor.app. However, it can provide insight into dirty memory that is by design not included in the default mode, such as dirty file-backed memory or a VM region mapped into a process that is normally accounted to only the process that created it.
 .br
@@ -150,9 +156,10 @@ Next, focus on reducing "Reclaimable" memory, especially purgeable volatile memo
 "Clean" memory can also be cheaply taken by the kernel, but unlike "Reclaimable" it can be restored automatically by the kernel without the help of a user process. For example, clean file backed data can be automatically evicted from memory and re-read from disk on-demand. Having too much clean memory can still be a performance problem, since large working sets can cause thrashing when loading and unloading various parts of a process under low memory situations.
 .br
 Lastly, avoid using "Wired" memory as much as possible since it cannot be paged out or reclaimed.
+.Ss Memory Categories
 .Pp
-.Bl -tag -width Ds
-.It Malloc memory
+.Bl -ohang
+.It Sy malloc(3) memory
 Memory allocated by
 .Xr malloc 3
 is one of the most common forms of memory, making up what is usually referred to as the 'heap'. This memory will have a category prefixed with 'MALLOC_'.
@@ -162,24 +169,18 @@ allocates VM regions on a process's behalf; the contents of those regions will b
 tool to further categorize the objects contained within a malloc memory region, or
 .Xr leaks 1
 to detect a subset of heap memory that is no longer reachable.
-.It Binary segments
+.It Sy Binary segments
 Loaded binaries will be visible as an entry with both the segment type and the path to the binary, most often __TEXT, __DATA, or __LINKEDIT segments. Non-shared cache binaries and pages in the __DATA segment (such as those that contain modified global variables) can often have dirty memory.
-.It Mapped files
+.It Sy Mapped files
 File-backed memory allocated using
 .Xr mmap 2
 will show up as 'mapped file' along with the path to the file.
-.It VM allocations
+.It Sy VM allocations
 Most other types of memory can be tagged with a name that indicates what subsystem allocated the region (see
 .Xr mmap 2
 for more information). For instance, Foundation.framework may allocate memory and tag it with VM_MEMORY_FOUNDATION, which appears in
 .Nm footprint Ap s
 output as 'Foundation'. Processes are able to allocate memory with their own tags by using an appropriate tag in the range VM_MEMORY_APPLICATION_SPECIFIC_1-VM_MEMORY_APPLICATION_SPECIFIC_16. Memory which does not fall into one of the previous categories and has not been explicitly tagged will be marked 'untagged (VM_ALLOCATE)'.
-.It Kernel memory
-In the special case of analyzing kernel_task,
-.Nm footprint Ap s
-output and categories will mirror much of the data also available via
-.Xr zprint 1 .
-This is memory allocated by the kernel or a kernel extension and is generally unavailable to userspace directly. Despite the restricted access, userspace programs often influence when and how much memory the kernel allocates (e.g., for resources allocated on behalf of a user process).
 .El
 .Pp
 For malloc and VM allocated memory, details about when and where the memory was allocated can often be obtained by enabling MallocStackLogging and using
@@ -223,9 +224,75 @@ aims to present an accurate memory breakdown that matches the value reported by 
 the 'Memory' column in Activity Monitor.app, and the Memory Debug Gauge in Xcode.app, query this ledger to populate their metrics.
 .Pp
 Physical footprint can be potentially be split into multiple subcategories, such as network related memory, graphics, etc. When a memory allocation (either directly mapped into a process, or owned but unmapped) has such a classification, footprint will append it to the category name such as 'IOKit (graphics)' or 'Owned physical footprint (unmapped) (media)'.
+.Ss Kernel Memory
+.Pp
+.Nm
+approximates
+.Ar kernel_task
+memory by reporting system wired memory broken down by kernel VM tag. This is the same approach taken by
+.Xr zprint 1 Ns ,
+except that
+.Nm
+does not count
+.Qq VM_KERN_MEMORY_MLOCK
+memory towards
+.Ar kernel_task Ap s
+estimated footprint. Notably,
+.Nm
+ignores any unwired memory private to
+.Ar kernel_task Ns .
+.Pp
+When wired memory is
+.Qq owned by
+a user space process,
+.Nm
+will also report it as part of the footprint for that process. If
+.Nm
+is reporting on a user space process and
+.Ar kernel_task Ns ,
+any wired memory owned by the user space process will be counted twice in the Summary. This behavior means that
+.Sq Nm Fl a
+double counts wired memory owned by user space processes.
+.Sh AUXILIARY DATA
+.Nm
+reports the following
+.Qq Auxiliary data
+for processes:
+.Bl -inset -offset "1234"
+.It Sy phys_footprint
+- the current value of the kernel ledger tracking the amount of dirty memory owned by a process
+.It Sy phys_footprint_peak
+- the maximum value of
+.Sy phys_footprint
+over a
+.Ns process Ap s
+lifetime
+.El
+.Pp
+.Sq Nm Fl a
+reports the following
+.Qq System auxiliary data:
+.Bl -inset -offset "1234"
+.It Sy boot_carveout
+- the amount of memory allocated by the booter prior to kernel startup
+.It Sy sys_wired
+- total system wired memory
+.It Sy sys_unwired
+- remaining
+.Qq Dirty
+memory
+.It Sy sys_footprint
+- total of the above. Because of the way
+.Nm
+estimates
+.Ar kernel_task
+footprint, this measurement generally differs from the Summary TOTAL footprint reported by
+.Nm Fl a Ns .
+.El
 .Sh SEE ALSO
 .Xr vmmap 1 ,
 .Xr heap 1 ,
 .Xr leaks 1 ,
 .Xr malloc_history 1 ,
+.Xr vm_stat 1 ,
 .Xr zprint 1

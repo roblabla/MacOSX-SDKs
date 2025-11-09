@@ -28,6 +28,7 @@
 #import <MetricKit/MXMemoryMetric.h>
 #import <MetricKit/MXNetworkTransferMetric.h>
 #import <MetricKit/MXSignpostMetric.h>
+#import <MetricKit/MXDiskSpaceUsageMetric.h>
 #import <MetricKit/MXSignpost.h>
 #import <MetricKit/MXCPUExceptionDiagnostic.h>
 #import <MetricKit/MXDiskWriteExceptionDiagnostic.h>

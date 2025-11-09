@@ -525,14 +525,15 @@ struct vnode_attr {
 /*
  * Flags for va_vaflags.
  */
-#define VA_UTIMES_NULL          0x010000        /* utimes argument was NULL */
-#define VA_EXCLUSIVE            0x020000        /* exclusive create request */
-#define VA_NOINHERIT            0x040000        /* Don't inherit ACLs from parent */
-#define VA_NOAUTH               0x080000
-#define VA_64BITOBJIDS          0x100000        /* fileid/linkid/parentid are 64 bit */
-#define VA_REALFSID             0x200000        /* Return real fsid */
-#define VA_USEFSID              0x400000        /* Use fsid from filesystem  */
-#define VA_FILESEC_ACL          0x800000        /* ACL is interior to filesec */
+#define VA_UTIMES_NULL          0x0010000        /* utimes argument was NULL */
+#define VA_EXCLUSIVE            0x0020000        /* exclusive create request */
+#define VA_NOINHERIT            0x0040000        /* Don't inherit ACLs from parent */
+#define VA_NOAUTH               0x0080000
+#define VA_64BITOBJIDS          0x0100000        /* fileid/linkid/parentid are 64 bit */
+#define VA_REALFSID             0x0200000        /* Return real fsid */
+#define VA_USEFSID              0x0400000        /* Use fsid from filesystem  */
+#define VA_FILESEC_ACL          0x0800000        /* ACL is interior to filesec */
+#define VA_VAFILEID             0x1000000        /* Verify fileid and fsid */
 
 /*
  *  Modes.  Some values same as Ixxx entries from inode.h for now.
@@ -571,7 +572,7 @@ extern int              vttoif_tab[];
 #define REVOKEALL       0x0001          /* vnop_revoke: revoke all aliases */
 
 /* VNOP_REMOVE/unlink flags */
-#define VNODE_REMOVE_NODELETEBUSY                       0x0001 /* Don't delete busy files (Carbon) */
+#define VNODE_REMOVE_NODELETEBUSY               0x0001 /* Don't delete busy files */
 #define VNODE_REMOVE_SKIP_NAMESPACE_EVENT       0x0002 /* Do not upcall to userland handlers */
 #define VNODE_REMOVE_NO_AUDIT_PATH              0x0004 /* Do not audit the path */
 #define VNODE_REMOVE_DATALESS_DIR               0x0008 /* Special handling for removing a dataless directory without materialization */

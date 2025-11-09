@@ -103,12 +103,24 @@ enum {
 #define kIOPMRootDomainBatPowerCString      "BatPower"
 
 /*
+ * String constants to use as keys for a dictionary passed to IOPMRootDomain::claimSystemShutdownEvent
+ */
+#define kIOPMRootDomainShutdownTime         "IOPMShutdownTime"
+
+/*
  * Supported Feature bitfields for IOPMrootDomain::publishFeature()
  */
 enum {
 	kIOPMSupportedOnAC      = (1 << 0),
 	kIOPMSupportedOnBatt    = (1 << 1),
 	kIOPMSupportedOnUPS     = (1 << 2)
+};
+
+/*
+ * Supported run mode bitfields for IOPMrootDomain::requestRunMode()
+ */
+enum {
+	kIOPMRunModeFullWake = UINT64_MAX,
 };
 
 typedef IOReturn (*IOPMSettingControllerCallback)
@@ -325,7 +337,6 @@ public:
  */
 	IOReturn restartWithStackshot();
 
-	IOReturn    setWakeTime(uint64_t wakeContinuousTime);
 
 
 	void        copyWakeReasonString( char * outBuf, size_t bufSize );

@@ -37,29 +37,29 @@ API_UNAVAILABLE(macos)
  * @discussion Returns the accessory's name that is associated with HomeKit. The initial value is the name
  *             provided by the accessory information service of the accessory.
  */
-@property (readonly, copy, nonatomic) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /*!
  * @brief A unique identifier for the accessory.
  *
  * @discussion Use uniqueIdentifier to obtain the identifier for this object.
  */
-@property (readonly, copy, nonatomic) NSUUID *identifier API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, copy) NSUUID *identifier API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief A unique identifier for the accessory.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Delegate object that receives updates on the state of the accessory.
  */
-@property (weak, nonatomic, nullable) id<HMAccessoryDelegate> delegate;
+@property (nullable, nonatomic, weak) id<HMAccessoryDelegate> delegate;
 
 /*!
  * @brief TRUE if the accessory is currently reachable, FALSE otherwise.
  */
-@property (readonly, getter=isReachable, nonatomic) BOOL reachable;
+@property (nonatomic, readonly, getter=isReachable) BOOL reachable;
 
 /*!
  * @brief This property indicates whether this accessory is behind a bridge. If it is TRUE,
@@ -67,7 +67,7 @@ API_UNAVAILABLE(macos)
  *        this accessory can be removed and removing the bridge will remove this accessory
  *        from the home.
  */
-@property (readonly, getter=isBridged, nonatomic) BOOL bridged;
+@property (nonatomic, readonly, getter=isBridged) BOOL bridged;
 
 /*!
  * @brief If this accessory is a bridge, this property is an array of NSUUID objects that,
@@ -76,7 +76,7 @@ API_UNAVAILABLE(macos)
  * @discussion Use uniqueIdentifiersForBridgedAccessories to obtain the identifiers for the
  *             bridged accessories.
  */
-@property (readonly, copy, nonatomic, nullable) NSArray<NSUUID *> *identifiersForBridgedAccessories API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nullable, nonatomic, readonly, copy) NSArray<NSUUID *> *identifiersForBridgedAccessories API_DEPRECATED("No longer supported.", ios(8.0, 9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @brief If this accessory is a bridge, this property is an array of NSUUID objects that,
@@ -90,22 +90,22 @@ API_UNAVAILABLE(macos)
  *                  - An accessory behind a bridge would have its 'bridged' property set to TRUE and
  *                    its 'uniqueIdentifiersForBridgedAccessories' property set to nil.
  */
-@property (readonly, copy, nonatomic, nullable) NSArray<NSUUID *> *uniqueIdentifiersForBridgedAccessories API_AVAILABLE(ios(9.0));
+@property (nullable, nonatomic, readonly, copy) NSArray<NSUUID *> *uniqueIdentifiersForBridgedAccessories API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Category information for the accessory. 
  */
-@property (readonly, strong, nonatomic) HMAccessoryCategory *category API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, strong) HMAccessoryCategory *category API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief Room containing the accessory.
  */
-@property (readonly, weak, nonatomic) HMRoom *room;
+@property (nonatomic, readonly, weak) HMRoom *room;
 
 /*!
  * @brief Array of HMService objects that represent all the services provided by the accessory.
  */
-@property (readonly, copy, nonatomic) NSArray<HMService *> *services;
+@property (nonatomic, readonly, copy) NSArray<HMService *> *services;
 
 /*!
  *  @abstract   Accessory profiles of the receiver.
@@ -116,22 +116,22 @@ API_UNAVAILABLE(macos)
  * @brief TRUE if the accessory is blocked, FALSE otherwise.
  */
 
-@property (readonly, getter=isBlocked, nonatomic) BOOL blocked;
+@property (nonatomic, readonly, getter=isBlocked) BOOL blocked;
 
 /*!
  *  @abstract   Model of the accessory.
  */
-@property (nullable, readonly, copy, nonatomic) NSString *model API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nullable, nonatomic, readonly, copy) NSString *model API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  *  @abstract   Manufacturer of the accessory.
  */
-@property (nullable, readonly, copy, nonatomic) NSString *manufacturer API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nullable, nonatomic, readonly, copy) NSString *manufacturer API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  *  @abstract   Accessory's firmware version.
  */
-@property (nullable, readonly, copy, nonatomic) NSString *firmwareVersion API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
+@property (nullable, nonatomic, readonly, copy) NSString *firmwareVersion API_AVAILABLE(ios(11.0), watchos(4.0), tvos(11.0));
 
 /*!
  *  @abstract   Indicates if the accessory supports the identify action.
@@ -141,7 +141,7 @@ API_UNAVAILABLE(macos)
 /*!
  *  @abstract   The node identifier used to identify the device on Apple’s Matter fabric.
  */
-@property (nullable, readonly, copy, nonatomic) NSNumber *matterNodeID NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.1), watchos(9.1), tvos(16.1), macCatalyst(16.1), macos(13.0));
+@property (nullable, nonatomic, readonly, copy) NSNumber *matterNodeID NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(16.1), watchos(9.1), tvos(16.1), macCatalyst(16.1), macos(13.0));
 
 /*!
  * @brief This method is used to change the name of the accessory.

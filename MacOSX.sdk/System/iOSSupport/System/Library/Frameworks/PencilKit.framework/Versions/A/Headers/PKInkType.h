@@ -15,4 +15,5 @@ API_AVAILABLE(ios(13.0), macos(10.15)) FOUNDATION_EXPORT PKInkType const PKInkTy
 API_AVAILABLE(ios(17.0), macos(14.0))  FOUNDATION_EXPORT PKInkType const PKInkTypeMonoline;
 API_AVAILABLE(ios(17.0), macos(14.0))  FOUNDATION_EXPORT PKInkType const PKInkTypeFountainPen;
 API_AVAILABLE(ios(17.0), macos(14.0))  FOUNDATION_EXPORT PKInkType const PKInkTypeWatercolor;
+API_AVAILABLE(ios(26.0), macos(26.0), visionos(26.0))  FOUNDATION_EXPORT PKInkType const PKInkTypeReed;
 API_AVAILABLE(ios(17.0), macos(14.0))  FOUNDATION_EXPORT PKInkType const PKInkTypeCrayon;

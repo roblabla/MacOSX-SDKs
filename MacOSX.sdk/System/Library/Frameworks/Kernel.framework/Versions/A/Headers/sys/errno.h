@@ -238,12 +238,17 @@
 
 #if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 #define EQFULL          106             /* Interface output queue is full */
-#define ELAST           106             /* Must be equal largest errno */
+#endif
+
+#define ENOTCAPABLE     107             /* Capabilities insufficient */
+
+#if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
+#define ELAST           107             /* Must be equal largest errno */
 #endif
 
 /* pseudo-errors returned inside kernel to modify return to process */
 #define ERESTART        (-1)            /* restart syscall */
 #define EJUSTRETURN     (-2)            /* don't modify regs, just return */
 
-/* -5, -6 and -7 and -106 are reserved for kernel internal use */
+/* -5, -6 and -7 and -106 and -108 are reserved for kernel internal use */
 #endif /* _SYS_ERRNO_H_ */

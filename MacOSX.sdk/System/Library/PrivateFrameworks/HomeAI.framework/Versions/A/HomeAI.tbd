@@ -159,16 +159,15 @@ exports:
                        HMIVideoAnalyzerState, HMIVideoAnalyzerTrack, HMIVideoAnnotationParser, 
                        HMIVideoAnnotator, HMIVideoAssetReader, HMIVideoAssetWriter, 
                        HMIVideoAssetWriterDelegateAdapter, HMIVideoCommandBuffer, 
-                       HMIVideoCommandBufferDelegateAdapter, HMIVideoDecoder, HMIVideoDecoderDelegateAdapter, 
-                       HMIVideoEncoder, HMIVideoEncoderDelegateAdapter, HMIVideoEventBuffer, 
-                       HMIVideoEventEntry, HMIVideoFragment, HMIVideoFrame, HMIVideoFrameAnalyzer, 
-                       HMIVideoFrameAnalyzerDelegateAdapter, HMIVideoFrameAnalyzerResult, 
-                       HMIVideoFrameGenerator, HMIVideoFrameIntervalSampler, HMIVideoFrameSampler, 
-                       HMIVideoFrameSamplerDelegateAdapter, HMIVideoFrameSelector, 
-                       HMIVideoFrameSelectorDelegateAdapter, HMIVideoFrameTracker, 
-                       HMIVideoFrameTrackerDelegateAdapter, HMIVideoNode, HMIVideoProcessingNode, 
-                       HMIVideoRetimer, HMIVideoRetimerDelegateAdapter, HMIVideoTemporalEventFilter, 
-                       HMIVideoTimeline, HMIVideoTimelineProfiler, HMIVisionSession, 
-                       HMIVisionUtilities, MovingAverage ]
+                       HMIVideoDecoder, HMIVideoDecoderDelegateAdapter, HMIVideoEncoder, 
+                       HMIVideoEncoderDelegateAdapter, HMIVideoEventBuffer, HMIVideoEventEntry, 
+                       HMIVideoFragment, HMIVideoFrame, HMIVideoFrameAnalyzer, HMIVideoFrameAnalyzerDelegateAdapter, 
+                       HMIVideoFrameAnalyzerResult, HMIVideoFrameGenerator, HMIVideoFrameIntervalSampler, 
+                       HMIVideoFrameSampler, HMIVideoFrameSamplerDelegateAdapter, 
+                       HMIVideoFrameSelector, HMIVideoFrameSelectorDelegateAdapter, 
+                       HMIVideoFrameTracker, HMIVideoFrameTrackerDelegateAdapter, 
+                       HMIVideoNode, HMIVideoProcessingNode, HMIVideoRetimer, HMIVideoRetimerDelegateAdapter, 
+                       HMIVideoTemporalEventFilter, HMIVideoTimeline, HMIVideoTimelineProfiler, 
+                       HMIVisionSession, HMIVisionUtilities, MovingAverage ]
     objc-ivars:      [ HMIVideoNode._error, HMIVideoNode._status ]
 ...

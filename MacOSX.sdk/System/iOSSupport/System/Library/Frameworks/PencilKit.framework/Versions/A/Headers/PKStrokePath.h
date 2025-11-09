@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// A uniform cubic B-spline representing the point data of a `PKStroke`.
 API_AVAILABLE(ios(14.0), macos(11.0))
+NS_SWIFT_SENDABLE
 @interface PKStrokePath : NSObject <NSCopying>
 
 /// Create a stroke path value with the given cubic B-spline control points.

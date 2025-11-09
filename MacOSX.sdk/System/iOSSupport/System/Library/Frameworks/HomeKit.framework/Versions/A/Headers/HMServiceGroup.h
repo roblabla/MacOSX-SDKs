@@ -27,17 +27,17 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Name of the service group.
  */
-@property (readonly, copy, nonatomic) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /*!
  * @brief Array of HMService objects that correspond to the services contained in this group.
  */
-@property (readonly, copy, nonatomic) NSArray<HMService *> *services;
+@property (nonatomic, readonly, copy) NSArray<HMService *> *services;
 
 /*!
  * @brief A unique identifier for the service group.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief This method is used to change the name of the service group.

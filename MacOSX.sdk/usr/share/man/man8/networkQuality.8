@@ -1,4 +1,4 @@
-.\" Copyright (c) 2020-2023 Apple Computer, Inc.  All rights reserved.
+.\" Copyright (c) 2020-2025 Apple Computer, Inc.  All rights reserved.
 .Dd 9/22/20
 .Dt networkQuality 8
 .Os Darwin
@@ -13,6 +13,7 @@
 .Op Fl c Ar filename \" [-c filename]
 .Op Fl f Ar protocol selection \" [-f h1,h2,h3]
 .Op Fl I Ar interface \" [-I interface]
+.Op Fl M Ar max run time \" [-M max run time]
 .Op Fl r Ar host \" [-r host]
 .Op Fl S Ar port \" [-S port]
 .Sh DESCRIPTION
@@ -57,6 +58,8 @@ Force usage of a specific protocol selection:
 Bind test to interface (e.g., en0, pdp_ip0,...)
 .Pp
 If not specified, the default interface will be used.
+.It Fl M Ar max run time
+Maximum runtime in seconds
 .It Fl r Ar host
 Connect to host or IP, overriding DNS for initial config request
 .It Fl S Ar port
@@ -96,7 +99,7 @@ The downlink responsiveness score (in RPM)
 .Pp
 (only available when -s is specified).
 .It Ft dl_throughput
-The measured downlink throughput (in bytes per second).
+The measured downlink throughput (in bits per second).
 .It Ft end_date
 Time when test run was completed (in local time).
 .It Ft il_h2_req_resp
@@ -170,7 +173,7 @@ The uplink responsiveness score (in RPM)
 .Pp
 (only available when -s is specified).
 .It Ft ul_throughput
-The measured uplink throughput (in bytes per second).
+The measured uplink throughput (in bits per second).
 .It Ft error_code
 Error domain specific error code
 .Pp

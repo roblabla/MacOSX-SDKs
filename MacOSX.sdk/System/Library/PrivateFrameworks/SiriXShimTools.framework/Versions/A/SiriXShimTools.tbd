@@ -26,6 +26,7 @@ exports:
                        '_$s14SiriXShimTools8ShimToolP16actionDefinition16IntelligenceFlow12ClientActionV0G0VvgZTq', 
                        '_$s14SiriXShimTools8ShimToolP4nameSSvgZTj', '_$s14SiriXShimTools8ShimToolP4nameSSvgZTq', 
                        '_$s14SiriXShimTools8ShimToolPAAE010orchSchemaD6ActionSo018ORCHSchemaORCHShimH0VvgZ', 
+                       '_$s14SiriXShimTools8ShimToolPAAE010orchSchemaD6ActionSo018ORCHSchemaORCHShimH0VvpZMV', 
                        '_$s14SiriXShimTools8ShimToolTL', _SiriXShimToolsVersionNumber, 
                        _SiriXShimToolsVersionString ]
     objc-classes:    [ SXSTShimRegistry ]

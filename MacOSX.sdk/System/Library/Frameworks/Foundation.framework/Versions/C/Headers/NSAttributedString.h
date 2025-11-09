@@ -341,6 +341,11 @@ FOUNDATION_EXPORT NSAttributedStringKey const NSLocalizedNumberFormatAttributeNa
     NS_SWIFT_NAME(localizedNumberFormat)
     API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 
+// an NSString representing the delimiter used when declaring the current list item
+FOUNDATION_EXTERN const NSAttributedStringKey NSListItemDelimiterAttributeName
+    NS_SWIFT_NAME(listItemDelimiter)
+    API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
 FOUNDATION_EXTERN
 const NSAttributedStringKey NSPresentationIntentAttributeName API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0), tvos(15.0));
 

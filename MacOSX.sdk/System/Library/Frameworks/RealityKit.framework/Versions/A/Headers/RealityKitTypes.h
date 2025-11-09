@@ -22,11 +22,15 @@
 
 #define RK_AVAILABILITY_IOS_18 __attribute__((availability(ios, introduced=18.0, strict)))
 #define RK_AVAILABILITY_MACOS_15  __attribute__((availability(macos, introduced=15.0, strict)))
+#define RK_AVAILABILITY_IOS_19 __attribute__((availability(ios, introduced=19.0, strict)))
+#define RK_AVAILABILITY_MACOS_16  __attribute__((availability(macos, introduced=16.0, strict)))
 
 #else
 
 #define RK_AVAILABILITY_IOS_18
 #define RK_AVAILABILITY_MACOS_15
+#define RK_AVAILABILITY_IOS_19
+#define RK_AVAILABILITY_MACOS_16
 
 #endif
 namespace realitykit

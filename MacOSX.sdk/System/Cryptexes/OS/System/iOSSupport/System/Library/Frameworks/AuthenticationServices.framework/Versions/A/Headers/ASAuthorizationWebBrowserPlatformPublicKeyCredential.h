@@ -26,8 +26,8 @@ AS_EXTERN API_AVAILABLE(macos(13.3), macCatalyst(16.4), ios(17.4)) API_UNAVAILAB
 /// A unique identifier for the user account associated with this credential. One account may have multiple associated credentials.
 @property (nonatomic, readonly) NSData *userHandle;
 
-/// The localized name of the credential provider that provided this passkey, either the name of a third party app or "iCloud Keychain".
-@property (nonatomic, readonly) NSString *providerName;
+/// The localized name of the credential provider that provided this passkey.
+@property (nonatomic, readonly) NSString *providerName API_AVAILABLE(macos(14.0), macCatalyst(17.0));
 
 @end
 

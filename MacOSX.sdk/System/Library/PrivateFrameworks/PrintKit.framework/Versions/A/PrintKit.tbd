@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PrintKit.framework/Versions/A/PrintKit'
-current-version: 306.3
+current-version: 319
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -27,9 +27,10 @@ exports:
                        _PKPageScaleOff, _PKPageScaleUpAndDown, _PKPageStackOrderKey, 
                        _PKPaper3_5x5, _PKPaper4x6, _PKPaperA4, _PKPaperA6, _PKPaperHagaki, 
                        _PKPaperKey, _PKPaperLegal, _PKPaperLetter, _PKPaperPRC32K, 
-                       _PKPresetDocument, _PKPresetKey, _PKPresetPhoto, _PKPrinterDisplayNameKey, 
-                       _PKPrinterEndPointsKey, _PKPrinterEndpointKey, _PKPrinterImageDataKey, 
-                       _PKPrinterInfoURLKey, _PKPrinterIsFromMCProfileKey, _PKPrinterJobTypesSupportedKey, 
+                       _PKPresetDocument, _PKPresetKey, _PKPresetPhoto, _PKPrinterCustomLocationKey, 
+                       _PKPrinterCustomNameKey, _PKPrinterDisplayNameKey, _PKPrinterEndPointsKey, 
+                       _PKPrinterEndpointKey, _PKPrinterImageDataKey, _PKPrinterInfoURLKey, 
+                       _PKPrinterIsFromMCProfileKey, _PKPrinterJobTypesSupportedKey, 
                        _PKPrinterKey, _PKPrinterLastUsedDateKey, _PKPrinterLastUsedDocumentSizeKey, 
                        _PKPrinterLastUsedPhotoSizeKey, _PKPrinterLastUsedSize, _PKPrinterLocationKey, 
                        _PKPrinterNameKey, _PKPrinterNetworksKey, _PKPrinterReasonsChangedNotification, 
@@ -39,7 +40,8 @@ exports:
                        _PKPrinterWasLastUsedPrinterForDocumentKey, _PKPrinterWasLastUsedPrinterForPhotoKey, 
                        _PKQualityDraft, _PKQualityHigh, _PKQualityKey, _PKQualityNormal, 
                        _PKResolutionKey, _PKSupportsPrintColorModeKey, _PKThumbnailPositionCenter, 
-                       _PKThumbnailPositionKey, _PKThumbnailPositionTop, _PKiCloudPrintersChangedNotification ]
+                       _PKThumbnailPositionKey, _PKThumbnailPositionTop, _PKiCloudPrintersChangedNotification, 
+                       _PrinterTooliCloudPrintersChangedNotification ]
     objc-classes:    [ PKAuthNotification, PKCollectionSpecialization, PKDefaults, 
                        PKFinishBailing, PKFinishBinding, PKFinishCoating, PKFinishCovering, 
                        PKFinishFinishingTemplate, PKFinishFolding, PKFinishImpositionTemplate, 

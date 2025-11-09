@@ -5,6 +5,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CryptoTokenKit/TKSmartCardATR.h>
+#import <CryptoTokenKit/TKSmartCardSlotNFCSession.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,11 +26,29 @@ API_AVAILABLE(macos(10.10))
 @property (readonly) NSArray<NSString *> *slotNames;
 
 /// Instantiates smartcard reader slot of specified name.  If specified name is not registered, reports nil.
-- (void)getSlotWithName:(NSString *)name reply:(void(^)(TKSmartCardSlot *__nullable slot))reply;
+- (void)getSlotWithName:(NSString *)name reply:(void(^)(TKSmartCardSlot *__nullable slot))reply NS_SWIFT_NAME(getSlot(withName:reply:));
 
 /// Gets SmartCard reader slot with specified name.  If reader slot with this name does not exist, returns nil.
 - (nullable TKSmartCardSlot *)slotNamed:(NSString *)name
 API_AVAILABLE(macos(10.13));
+
+/// Creates an NFC smart card slot using the device's hardware and presents a system UI.
+/// @param message Message shown in the system-presented UI
+/// @param completion Completion handler which returns the NFC session of the created slot or an error on failure.
+///                   If an NFC slot already exists and current caller is not the initial creator `TKErrorCodeObjectNotFound` error is returned.
+///
+/// @discussion To finish the NFC session and dismiss the system-presented UI use `TKSmartCardSlotNFCSession.endSession`.
+///
+/// @warning Caller requires `com.apple.developer.nfc.readersession.iso7816.select-identifiers` Info.plist record which specifies application identifiers of the NFC cards @link https://developer.apple.com/documentation/bundleresources/information-property-list/com.apple.developer.nfc.readersession.iso7816.select-identifiers
+- (void)createNFCSlotWithMessage:(NSString *_Nullable)message completion:(void(^ NS_SWIFT_SENDABLE)(TKSmartCardSlotNFCSession *_Nullable session, NSError *_Nullable error))completion
+NS_SWIFT_NAME(createNFCSlot(message:completion:))
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, watchos, tvos, visionos);
+
+/// Determines whether NFC (Near Field Communication) is supported on this device.
+///
+/// @return `YES` if NFC is supported and available for use, NO otherwise.
+- (BOOL)isNFCSupported
+API_AVAILABLE(ios(26.0), macCatalyst(26.0)) API_UNAVAILABLE(macos, watchos, tvos, visionos);
 
 @end
 

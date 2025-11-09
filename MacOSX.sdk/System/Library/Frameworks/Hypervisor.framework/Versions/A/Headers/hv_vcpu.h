@@ -24,7 +24,7 @@ __BEGIN_DECLS
  @result 0 on success or error code
  @discussion Each thread can only have one vCPU associated at a time.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_create(hv_vcpu_t *vcpu, hv_vcpu_exit_t * _Nullable * _Nonnull exit,
     hv_vcpu_config_t _Nullable config);
 
@@ -35,7 +35,7 @@ hv_return_t hv_vcpu_create(hv_vcpu_t *vcpu, hv_vcpu_exit_t * _Nullable * _Nonnul
  @discussion
     Must be called by the owning thread
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_destroy(hv_vcpu_t vcpu);
 
 /*!
@@ -47,7 +47,7 @@ hv_return_t hv_vcpu_destroy(hv_vcpu_t vcpu);
  @discussion
     Must be called by the owning thread
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t *value);
 
 /*!
@@ -59,7 +59,7 @@ hv_return_t hv_vcpu_get_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t *value);
  @discussion
     Must be called by the owning thread
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_set_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t value);
 
 /*!
@@ -74,7 +74,7 @@ hv_return_t hv_vcpu_set_reg(hv_vcpu_t vcpu, hv_reg_t reg, uint64_t value);
     In streaming SVE mode, the SIMD Q registers are aliased to the bottom 128 bits of the
     corresponding Z register, and any modification will reflect on the Z register state.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_simd_fp_uchar16_t *value);
 
 /*!
@@ -89,7 +89,7 @@ hv_return_t hv_vcpu_get_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_sim
     In streaming SVE mode, the SIMD Q registers are aliased to the bottom 128 bits of the
     corresponding Z register, and any modification will reflect on the Z register state.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 
 hv_return_t hv_vcpu_set_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_simd_fp_uchar16_t value);
 
@@ -106,7 +106,7 @@ hv_return_t hv_vcpu_set_simd_fp_reg(hv_vcpu_t vcpu, hv_simd_fp_reg_t reg, hv_sim
 
     Returns HV_UNSUPPORTED if SME is not supported.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_get_sme_state(hv_vcpu_t vcpu, hv_vcpu_sme_state_t *sme_state);
 
 /*!
@@ -132,7 +132,7 @@ hv_return_t hv_vcpu_get_sme_state(hv_vcpu_t vcpu, hv_vcpu_sme_state_t *sme_state
 
     Returns HV_UNSUPPORTED if SME is not supported.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_set_sme_state(hv_vcpu_t vcpu, const hv_vcpu_sme_state_t *sme_state);
 
 /*!
@@ -148,7 +148,7 @@ hv_return_t hv_vcpu_set_sme_state(hv_vcpu_t vcpu, const hv_vcpu_sme_state_t *sme
     Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
     or if the provided value storage is not maximum SVL bytes.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_get_sme_z_reg(hv_vcpu_t vcpu, hv_sme_z_reg_t reg, uint8_t *value, size_t length);
 
 /*!
@@ -164,7 +164,7 @@ hv_return_t hv_vcpu_get_sme_z_reg(hv_vcpu_t vcpu, hv_sme_z_reg_t reg, uint8_t *v
     Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
     or if the value length is not maximum SVL bytes.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_set_sme_z_reg(hv_vcpu_t vcpu, hv_sme_z_reg_t reg, const uint8_t *value, size_t length);
 
 /*!
@@ -180,7 +180,7 @@ hv_return_t hv_vcpu_set_sme_z_reg(hv_vcpu_t vcpu, hv_sme_z_reg_t reg, const uint
     Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
     or if the provided value storage is not maximum SVL / 8 bytes.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_get_sme_p_reg(hv_vcpu_t vcpu, hv_sme_p_reg_t reg, uint8_t *value, size_t length);
 
 /*!
@@ -196,7 +196,7 @@ hv_return_t hv_vcpu_get_sme_p_reg(hv_vcpu_t vcpu, hv_sme_p_reg_t reg, uint8_t *v
     Returns an error if not in streaming SVE mode (i.e. streaming_sve_mode_enabled is false),
     or if the value length is not the maximum SVL / 8 bytes.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_set_sme_p_reg(hv_vcpu_t vcpu, hv_sme_p_reg_t reg, const uint8_t *value, size_t length);
 
 /*!
@@ -213,7 +213,7 @@ hv_return_t hv_vcpu_set_sme_p_reg(hv_vcpu_t vcpu, hv_sme_p_reg_t reg, const uint
 
     Does not require streaming SVE mode enabled.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_get_sme_za_reg(hv_vcpu_t vcpu, uint8_t *value, size_t length);
 
 /*!
@@ -230,7 +230,7 @@ hv_return_t hv_vcpu_get_sme_za_reg(hv_vcpu_t vcpu, uint8_t *value, size_t length
 
     Does not require streaming SVE mode enabled.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_set_sme_za_reg(hv_vcpu_t vcpu, const uint8_t *value, size_t length);
 
 /*!
@@ -245,7 +245,7 @@ hv_return_t hv_vcpu_set_sme_za_reg(hv_vcpu_t vcpu, const uint8_t *value, size_t 
 
     Does not require streaming SVE mode enabled.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_get_sme_zt0_reg(hv_vcpu_t vcpu, hv_sme_zt0_uchar64_t *value);
 
 /*!
@@ -260,7 +260,7 @@ hv_return_t hv_vcpu_get_sme_zt0_reg(hv_vcpu_t vcpu, hv_sme_zt0_uchar64_t *value)
 
     Does not require streaming SVE mode enabled.
  */
-OS_EXPORT API_AVAILABLE(macos(15.2)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.2))
 hv_return_t hv_vcpu_set_sme_zt0_reg(hv_vcpu_t vcpu, const hv_sme_zt0_uchar64_t *value);
 
 /*!
@@ -272,7 +272,7 @@ hv_return_t hv_vcpu_set_sme_zt0_reg(hv_vcpu_t vcpu, const hv_sme_zt0_uchar64_t *
  @discussion
     Must be called by the owning thread
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t *value);
 
 /*!
@@ -284,7 +284,7 @@ hv_return_t hv_vcpu_get_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t *valu
  @discussion
     Must be called by the owning thread
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_set_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t value);
 
 /*!
@@ -295,7 +295,7 @@ hv_return_t hv_vcpu_set_sys_reg(hv_vcpu_t vcpu, hv_sys_reg_t reg, uint64_t value
  @discussion
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t type, bool *pending);
 
 /*!
@@ -308,7 +308,7 @@ hv_return_t hv_vcpu_get_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t ty
     The pending interrupts automatically cleared after hv_vcpu_run returns. It is expected that
     hv_vcpu_set_pending_interrupt be called before every hv_vcpu_run to set pending interrupts.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_set_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t type, bool pending);
 
 /*!
@@ -318,7 +318,7 @@ hv_return_t hv_vcpu_set_pending_interrupt(hv_vcpu_t vcpu, hv_interrupt_type_t ty
  @discussion
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_trap_debug_exceptions(hv_vcpu_t vcpu, bool *value);
 
 /*!
@@ -328,7 +328,7 @@ hv_return_t hv_vcpu_get_trap_debug_exceptions(hv_vcpu_t vcpu, bool *value);
  @discussion
     Must be called by the owning thread.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_set_trap_debug_exceptions(hv_vcpu_t vcpu, bool value);
 
 /*!
@@ -340,7 +340,7 @@ hv_return_t hv_vcpu_set_trap_debug_exceptions(hv_vcpu_t vcpu, bool value);
     This includes the DBGBCR<n>_EL1, DBGBVR<n>_EL1, DBGWCR<n>_EL1,
     DBGWVR<n>_EL1 and MDSCR_EL1 registers.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool *value);
 
 /*!
@@ -352,7 +352,7 @@ hv_return_t hv_vcpu_get_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool *value);
     This includes the DBGBCR<n>_EL1, DBGBVR<n>_EL1, DBGWCR<n>_EL1,
     DBGWVR<n>_EL1 and MDSCR_EL1 registers.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_set_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool value);
 
 /*!
@@ -365,7 +365,7 @@ hv_return_t hv_vcpu_set_trap_debug_reg_accesses(hv_vcpu_t vcpu, bool value);
 
     Must be called by the owning thread
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_run(hv_vcpu_t vcpu);
 
 /*!
@@ -377,7 +377,7 @@ hv_return_t hv_vcpu_run(hv_vcpu_t vcpu);
     If a vcpu is not running, the next time hv_vcpu_run is called for the corresponding
     vcpu, it will return immediately without entering the guest.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpus_exit(hv_vcpu_t *vcpus, uint32_t vcpu_count);
 
 /*!
@@ -388,7 +388,7 @@ hv_return_t hv_vcpus_exit(hv_vcpu_t *vcpus, uint32_t vcpu_count);
  @discussion
     Must be called by the owning thread
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_exec_time(hv_vcpu_t vcpu, uint64_t *time);
 
 /*!
@@ -397,7 +397,7 @@ hv_return_t hv_vcpu_get_exec_time(hv_vcpu_t vcpu, uint64_t *time);
  @param vtimer_is_masked Value of the mask.
  @result 0 on success or error code.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_vtimer_mask(hv_vcpu_t vcpu, bool *vtimer_is_masked);
 
 /*!
@@ -422,7 +422,7 @@ hv_return_t hv_vcpu_get_vtimer_mask(hv_vcpu_t vcpu, bool *vtimer_is_masked);
     when emulating a GIC, this function should be called when
     deactivating an interrupt whose ID matches that of the VTimer.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_set_vtimer_mask(hv_vcpu_t vcpu, bool vtimer_is_masked);
 
 /*!
@@ -432,7 +432,7 @@ hv_return_t hv_vcpu_set_vtimer_mask(hv_vcpu_t vcpu, bool vtimer_is_masked);
  @result 0 on success or error code.
  @seealso hv_vcpu_set_vtimer_offset
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_get_vtimer_offset(hv_vcpu_t vcpu, uint64_t *vtimer_offset);
 
 /*!
@@ -445,7 +445,7 @@ hv_return_t hv_vcpu_get_vtimer_offset(hv_vcpu_t vcpu, uint64_t *vtimer_offset);
 
     CNTVCT_EL0 = mach_absolute_time() - vtimer_offset.
  */
-OS_EXPORT API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(11.0))
 hv_return_t hv_vcpu_set_vtimer_offset(hv_vcpu_t vcpu, uint64_t vtimer_offset);
 
 __END_DECLS

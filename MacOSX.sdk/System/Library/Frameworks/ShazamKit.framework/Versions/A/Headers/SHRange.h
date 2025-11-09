@@ -17,19 +17,21 @@ SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), wa
 /// The lowerBound of this time range
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) double lowerBound;
 
-/// The upperBound of this time range, not included in this range
+/// The range's upper bound.
 @property (NS_NONATOMIC_IOSONLY, assign, readonly) double upperBound;
 
-/// Convenience constructor for creating a range
-/// @param lowerBound The lower bound of this range
-/// @param upperBound The upper bound of this range
-/// @note lowerBound should be less than or equal to upperBound
+/// Creates a range with the bounds you specify.
+///
+/// - Parameters:
+///   - lowerBound: The lower bound of the range.
+///   - upperBound: The upper bound of the range.
 + (instancetype)rangeWithLowerBound:(double)lowerBound upperBound:(double)upperBound;
 
-/// Convenience constructor for creating a range
-/// @param lowerBound The lower bound of this range
-/// @param upperBound The upper bound of this range
-/// @note lowerBound should be less than or equal to upperBound
+/// Creates a range with the bounds you specify.
+///
+/// - Parameters:
+///   - lowerBound: The lower bound of the range.
+///   - upperBound: The upper bound of the range.
 - (instancetype)initWithLowerBound:(double)lowerBound upperBound:(double)upperBound NS_DESIGNATED_INITIALIZER;
 
 - (instancetype)init NS_UNAVAILABLE;

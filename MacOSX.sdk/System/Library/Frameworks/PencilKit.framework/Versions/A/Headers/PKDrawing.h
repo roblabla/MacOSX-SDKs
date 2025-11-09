@@ -30,6 +30,7 @@ extern const CFStringRef PKAppleDrawingTypeIdentifier API_AVAILABLE(ios(13.0), m
 
 /// The data model object for storing drawing data created from PKCanvasView.
 API_AVAILABLE(ios(13.0), macos(10.15))
+NS_SWIFT_SENDABLE
 @interface PKDrawing : NSObject <NSCopying, NSSecureCoding>
 
 /// Initializes and returns a blank drawing.

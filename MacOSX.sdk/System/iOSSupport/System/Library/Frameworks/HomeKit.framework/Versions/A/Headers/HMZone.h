@@ -28,17 +28,17 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), ma
 /*!
  * @brief Name of the zone.
  */
-@property (readonly, copy, nonatomic) NSString *name;
+@property (nonatomic, readonly, copy) NSString *name;
 
 /*!
  * @brief Array of HMRoom objects that correspond to the rooms contained in this zone.
  */
-@property (readonly, copy, nonatomic) NSArray<HMRoom *> *rooms;
+@property (nonatomic, readonly, copy) NSArray<HMRoom *> *rooms;
 
 /*!
  * @brief A unique identifier for the zone.
  */
-@property (readonly, copy, nonatomic) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
+@property (nonatomic, readonly, copy) NSUUID *uniqueIdentifier API_AVAILABLE(ios(9.0));
 
 /*!
  * @brief This method is used to change the name of the zone.

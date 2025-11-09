@@ -57,6 +57,21 @@ typedef NS_ENUM(uint64_t, MPSGraphExecutionStage)
     MPSGraphExecutionStageCompleted                        MPS_ENUM_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0)) MPS_SWIFT_NAME(completed) =   0L,
 };
 
+
+///  MPSGraph could use these reduced precision paths to deliver faster math, but it is not guaranteed.
+typedef NS_OPTIONS(NSUInteger, MPSGraphReducedPrecisionFastMath)
+{
+    /// Full precision math with maximum accuracy.
+    MPSGraphReducedPrecisionFastMathNone                                               MPS_SWIFT_NAME(none) = 0,
+    /// Execute winograd transform intermediate as FP16.
+    MPSGraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate                            = 1 << 1,
+    /// Curated list allowing intermediates for multi-pass GPU kernels to be FP16.
+    MPSGraphReducedPrecisionFastMathAllowFP16Intermediates                                                  = MPSGraphReducedPrecisionFastMathAllowFP16Conv2DWinogradTransformIntermediate,
+    /// Default selection.
+    MPSGraphReducedPrecisionFastMathDefault                                                                 = MPSGraphReducedPrecisionFastMathNone,
+} MPS_AVAILABLE_STARTING(macos(26.0), ios(26.0));
+
+
 /// A dictionary of tensors and corresponding tensor data.
 MPS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 typedef NSDictionary<MPSGraphTensor*, MPSGraphTensorData *> MPSGraphTensorDataDictionary;
@@ -125,6 +140,9 @@ MPS_AVAILABLE_STARTING_BUT_DEPRECATED("MPSGraph will automatically provide the b
 
 /// The dictionary used during runtime to lookup the ``MPSGraphExecutable`` which correspond to the ``symbolName``.
 @property (readwrite, atomic, nullable) MPSGraphCallableMap *callables MPS_AVAILABLE_STARTING(macos(14.1), ios(17.1), tvos(17.1));
+
+/// Across the executable allow reduced precision fast math optimizations.
+@property (readwrite, atomic) MPSGraphReducedPrecisionFastMath reducedPrecisionFastMath MPS_AVAILABLE_STARTING(macos(26.0), ios(26.0));
 
 @end
 

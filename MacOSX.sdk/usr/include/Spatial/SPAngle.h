@@ -40,6 +40,9 @@ double SPAngleGetDegrees(SPAngle angle)
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /// Returns @p true if both rotation angles are equal.
+///
+/// Note that this function compares the raw value of each angle and doesn't
+/// normalize the values. For example, 360° does **not** equal 0°.
 SPATIAL_INLINE
 SPATIAL_OVERLOADABLE
 bool SPAngleEqualToAngle(SPAngle angle1, SPAngle angle2)
@@ -371,7 +374,7 @@ SPAngle SPAngleNormalize(SPAngle angle) {
 // MARK: - Negation
 
 /*!
- @abstract Returns the  additive inverse of the specified angle.
+ @abstract Returns the additive inverse of the specified angle.
  
  @param angle The source angle.
  @returns  The normalized angle.
@@ -386,5 +389,6 @@ SPATIAL_OVERLOADABLE
 SPAngle SPAngleNegate(SPAngle angle) {
     return SPAngleMakeWithRadians(-angle.radians);
 }
+
 
 #endif /* Spatial_SPAngle_h */

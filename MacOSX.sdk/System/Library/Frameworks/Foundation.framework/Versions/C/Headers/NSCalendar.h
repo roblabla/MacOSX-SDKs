@@ -44,7 +44,17 @@ FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierRepublicOfChina
 FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierIslamicTabular      API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
 // The Islamic Umm al-Qura calendar used in Saudi Arabia. This is based on astronomical calculation, instead of tabular behavior.
 FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierIslamicUmmAlQura    API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0));
-
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierBangla              API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierGujarati            API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierKannada             API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierMalayalam           API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierMarathi             API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierOdia                API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierTamil               API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierTelugu              API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierVikram              API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierDangi               API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+FOUNDATION_EXPORT NSCalendarIdentifier const NSCalendarIdentifierVietnamese          API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
 
 typedef NS_OPTIONS(NSUInteger, NSCalendarUnit) {
         NSCalendarUnitEra                = kCFCalendarUnitEra,
@@ -64,6 +74,8 @@ typedef NS_OPTIONS(NSUInteger, NSCalendarUnit) {
         NSCalendarUnitDayOfYear          API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0)) = kCFCalendarUnitDayOfYear,
         NSCalendarUnitCalendar           API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)) = (1 << 20),
         NSCalendarUnitTimeZone           API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0)) = (1 << 21),
+        NSCalendarUnitIsLeapMonth API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0)) = (1 << 30),
+        NSCalendarUnitIsRepeatedDay API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0)) = (1UL << 31),
     #if !0
         NSEraCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitEra", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitEra,
         NSYearCalendarUnit API_DEPRECATED_WITH_REPLACEMENT("NSCalendarUnitYear", macos(10.4, 10.10), ios(2.0, 8.0), watchos(2.0, 2.0), tvos(9.0, 9.0)) = NSCalendarUnitYear,
@@ -435,6 +447,7 @@ NS_ENUM(NSInteger) {
 @property NSInteger yearForWeekOfYear API_AVAILABLE(macos(10.7), ios(5.0), watchos(2.0), tvos(9.0));
 @property NSInteger dayOfYear API_AVAILABLE(macos(15.0), ios(18.0), watchos(11.0), tvos(18.0));
 @property (getter=isLeapMonth) BOOL leapMonth API_AVAILABLE(macos(10.8), ios(6.0), watchos(2.0), tvos(9.0));
+@property (getter=isRepeatedDay) BOOL repeatedDay API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
 @property (nullable, readonly, copy) NSDate *date API_AVAILABLE(macos(10.7), ios(4.0), watchos(2.0), tvos(9.0));
 
 - (NSInteger)week API_DEPRECATED("Use -weekOfMonth or -weekOfYear, depending on which you mean", macos(10.4, 10.9), ios(2.0, 7.0), watchos(2.0, 2.0), tvos(9.0, 9.0));

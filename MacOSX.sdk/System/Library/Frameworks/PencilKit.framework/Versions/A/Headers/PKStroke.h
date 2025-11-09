@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /// The data model value representing a stroke in a `PKDrawing`.
 API_AVAILABLE(ios(14.0), macos(11.0))
+NS_SWIFT_SENDABLE
 @interface PKStroke : NSObject <NSCopying>
 
 /// Create a new stroke.

@@ -289,6 +289,9 @@
    // Indicates that a specific member of an 'NS_SWIFT_UI_ACTOR'-isolated type is "threadsafe" and should be callable from outside the main actor.
 #  define NS_SWIFT_NONISOLATED __attribute__((swift_attr("nonisolated")))
 
+// Indicates that a specific member of an 'NS_SWIFT_UI_ACTOR'-isolated type does its own data isolation management and does not participate in Swift concurrency checking.
+#  define NS_SWIFT_NONISOLATED_UNSAFE __attribute__((swift_attr("nonisolated(unsafe)")))
+
 #  define __NS_HEADER_AUDIT_BEGIN_sendability \
     _Pragma("clang diagnostic push") \
     _Pragma("clang diagnostic ignored \"-Wpragma-clang-attribute\"") \
@@ -300,6 +303,7 @@
 #  define NS_SWIFT_SENDABLE
 #  define NS_SWIFT_NONSENDABLE
 #  define NS_SWIFT_NONISOLATED
+#  define NS_SWIFT_NONISOLATED_UNSAFE
 
 #  define __NS_HEADER_AUDIT_BEGIN_sendability
 #  define __NS_HEADER_AUDIT_END_sendability

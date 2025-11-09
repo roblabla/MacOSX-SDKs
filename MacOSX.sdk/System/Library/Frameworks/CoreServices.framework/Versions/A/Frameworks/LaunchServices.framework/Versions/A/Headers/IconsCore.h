@@ -15,6 +15,10 @@
 #ifndef __ICONSCORE__
 #define __ICONSCORE__
 
+#ifndef _CDEFS_H_
+#include <sys/cdefs.h>
+#endif
+
 #ifndef __CARBONCORE__
 #include <CarbonCore/CarbonCore.h>
 #endif

@@ -140,17 +140,17 @@ extern kern_return_t    thread_wakeup_nthreads_prim(
 	uint32_t                        nthreads,
 	wait_result_t                   result);
 
-#define thread_wakeup(x)                                        \
-	                thread_wakeup_prim((x), FALSE, THREAD_AWAKENED)
-#define thread_wakeup_with_result(x, z)         \
-	                thread_wakeup_prim((x), FALSE, (z))
-#define thread_wakeup_one(x)                            \
-	                thread_wakeup_prim((x), TRUE, THREAD_AWAKENED)
+#define thread_wakeup(x) \
+	thread_wakeup_prim((x), FALSE, THREAD_AWAKENED)
+#define thread_wakeup_with_result(x, z) \
+	thread_wakeup_prim((x), FALSE, (z))
+#define thread_wakeup_one(x) \
+	thread_wakeup_prim((x), TRUE, THREAD_AWAKENED)
 
 #define thread_wakeup_nthreads(x, nthreads) \
-	                thread_wakeup_nthreads_prim((x), (nthreads), THREAD_AWAKENED)
+	thread_wakeup_nthreads_prim((x), (nthreads), THREAD_AWAKENED)
 #define thread_wakeup_nthreads_with_result(x, nthreads, z) \
-	                thread_wakeup_nthreads_prim((x), (nthreads), (z))
+	thread_wakeup_nthreads_prim((x), (nthreads), (z))
 
 /* Wakeup the specified thread if it is waiting on this event */
 extern kern_return_t thread_wakeup_thread(event_t event, thread_t thread);

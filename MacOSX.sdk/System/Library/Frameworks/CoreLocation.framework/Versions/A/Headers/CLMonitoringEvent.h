@@ -20,11 +20,7 @@ typedef NS_ENUM(NSUInteger, CLMonitoringState) {
 	CLMonitoringStateUnknown,
 	CLMonitoringStateSatisfied,
 	CLMonitoringStateUnsatisfied,
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 	CLMonitoringStateUnmonitored API_AVAILABLE(macos(14.2), ios(17.2)) API_UNAVAILABLE(tvos, watchos, visionos),
-#else
-	CLMonitoringStateUnmonitored API_AVAILABLE(macos(14.2), ios(17.2)) API_UNAVAILABLE(tvos, watchos),
-#endif
 } NS_REFINED_FOR_SWIFT;
 
 /*
@@ -37,11 +33,7 @@ typedef NS_ENUM(NSUInteger, CLMonitoringState) {
  */
 NS_REFINED_FOR_SWIFT
 CL_EXTERN
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos, visionos)
-#else
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos)
-#endif
 @interface CLMonitoringEvent : NSObject<NSSecureCoding>
 
 /*

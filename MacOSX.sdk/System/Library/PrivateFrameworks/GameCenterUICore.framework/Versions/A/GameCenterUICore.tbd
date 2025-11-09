@@ -368,6 +368,8 @@ exports:
                        '_$s16GameCenterUICore20GCUILocalizedStringsC47SETTINGS_FRIEND_REQUESTS_CONTACTS_TOGGLE_FOOTERSSvgZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC47SETTINGS_FRIEND_REQUESTS_CONTACTS_TOGGLE_FOOTERSSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC48INVITE_FRIENDS_SHEET_SEARCH_EMPTY_STATE_SUBTITLE10searchTermS2S_tFZ', 
+                       '_$s16GameCenterUICore20GCUILocalizedStringsC48SETTINGS_RESET_ANALYTICS_IDENTIFIER_BUTTON_TITLESSvgZ', 
+                       '_$s16GameCenterUICore20GCUILocalizedStringsC48SETTINGS_RESET_ANALYTICS_IDENTIFIER_BUTTON_TITLESSvpZMV', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC49OVERLAY_ACHIEVEMENT_HIGHLIGHT_SUBTITLE_INPROGRESS9completed5totalSSSi_SitFZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC50OVERLAY_LEADERBOARD_HIGHLIGHT_SUBTITLE_FRIEND_RANK4rank5totalSSSi_SitFZ', 
                        '_$s16GameCenterUICore20GCUILocalizedStringsC50OVERLAY_LEADERBOARD_HIGHLIGHT_SUBTITLE_GET_STARTED15leaderboardNameS2S_tFZ', 

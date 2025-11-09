@@ -17,3 +17,5 @@
 #import <CryptoTokenKit/TKSmartCard.h>
 #import <CryptoTokenKit/TKSmartCardToken.h>
 #import <CryptoTokenKit/TKSmartCardATR.h>
+#import <CryptoTokenKit/TKSmartCardSlotNFCSession.h>
+#import <CryptoTokenKit/TKSmartCardTokenRegistrationManager.h>

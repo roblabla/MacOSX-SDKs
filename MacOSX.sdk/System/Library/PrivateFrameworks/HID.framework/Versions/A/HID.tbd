@@ -5,5 +5,6 @@ install-name:    '/System/Library/PrivateFrameworks/HID.framework/Versions/A/HID
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _HIDVersionNumber, _HIDVersionString, _kHIDUserDevicePropertyCreateInactiveKey ]
-    objc-classes:    [ HIDEventSystemClient, HIDManager, HIDUserDevice, HIDVirtualEventService ]
+    objc-classes:    [ HIDEventSystemClient, HIDManager, HIDTimeSync, HIDUserDevice, 
+                       HIDVirtualEventService ]
 ...

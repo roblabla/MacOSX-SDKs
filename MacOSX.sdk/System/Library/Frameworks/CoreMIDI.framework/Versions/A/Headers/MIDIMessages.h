@@ -740,42 +740,17 @@ typedef struct MIDIUniversalMessage {
 } MIDIUniversalMessage;
 
 
-/*!
-	@typedef	MIDIEventVisitor
+/**
+A callback function which receives a single MIDIUniversalMessage.
 
-	@abstract	A callback function which receives a single MIDIUniversalMessage.
+This callback function is called by MIDIEventListForEachEvent on every UMP
+that has been parsed from a MIDIEventList. From the provided `MIDIUniversalMessage`
+the MIDI information can be accessed, e.g.:
 
-	@discussion
-		This callback function is called by MIDIEventListForEachEvent on every UMP
-		that has been parsed from a MIDIEventList. From the provided `MIDIUniversalMessage`
-		the MIDI information can be accessed, e.g.:
-		```
-		void myMIDIMessageVisitor(void* context, MIDITimeStamp timeStamp, MIDIUniversalMessage message) {
-			switch (message.type) {
-			case kMIDIMessageTypeSystem:
-				...
-			case kMIDIMessageTypeChannelVoice2:
-				switch (message.channelVoice2.status) {
-				case kMIDICVStatusNoteOff:
-					// access message.channelVoice2.note.number, etc.
-					...
-				case kMIDICVStatusNoteOn:
-					...
-				case kMIDICVStatusPerNotePitchBend:
-					...
-				}
-			}
-		}
-		```
-
-	@param		context
-		A context provided by the client via call to MIDIEventListForEachEvent.
-
-	@param		timeStamp
-		The timestamp of the current UMP.
-
-	@param		message
-		A filled MIDIUniversalMessage struct that has been parsed from a single UMP.
+- Parameters:
+ - context: A context provided by the client via call to MIDIEventListForEachEvent.
+ - timeStamp: The timestamp of the current UMP.
+ - message: A filled MIDIUniversalMessage struct that has been parsed from a single UMP.
 */
 typedef void (*MIDIEventVisitor)(void* context, MIDITimeStamp timeStamp, MIDIUniversalMessage message);
 

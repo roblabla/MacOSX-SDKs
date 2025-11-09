@@ -28,7 +28,7 @@ typedef CGFloat CGPDFReal;
 
 /* A type to hold any object. */
 
-typedef struct CGPDFObject *CGPDFObjectRef;
+typedef struct CGPDFObject *CGPDFObjectRef __attribute__((swift_wrapper(struct)));
 
 /* An identifier to describe an object's type. */
 

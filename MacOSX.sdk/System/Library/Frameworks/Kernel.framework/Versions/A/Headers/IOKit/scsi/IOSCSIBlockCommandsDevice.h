@@ -98,6 +98,10 @@ private:
 
     static void             AbortPMTransition ( thread_call_param_t whichDevice );
 
+#if !TARGET_OS_IPHONE
+	bool                    IsSMARTSupported ( UInt8 passThroughOpcode );
+#endif
+
 protected:
 
 	// Reserve space for future expansion.
@@ -120,6 +124,9 @@ protected:
 		bool				fUnmapAllowed;
         bool                fUseWriteSame;
         thread_call_t       fPMAbortThread;
+        bool                fDarkWakeProcessed;
+        UInt64              fVerifyMediaDebugInfo;
+        UInt32              fByteToBlockShift;
 	};
     IOSCSIBlockCommandsDeviceExpansionData * fIOSCSIBlockCommandsDeviceReserved;
 
@@ -131,6 +138,9 @@ protected:
     #define fLBPRZ                              fIOSCSIBlockCommandsDeviceReserved->fLBPRZ
 	#define fUnmapAllowed						fIOSCSIBlockCommandsDeviceReserved->fUnmapAllowed
     #define fUseWriteSame						fIOSCSIBlockCommandsDeviceReserved->fUseWriteSame
+    #define fDarkWakeProcessed                  fIOSCSIBlockCommandsDeviceReserved->fDarkWakeProcessed
+    #define fVerifyMediaDebugInfo               fIOSCSIBlockCommandsDeviceReserved->fVerifyMediaDebugInfo
+    #define fByteToBlockShift                   fIOSCSIBlockCommandsDeviceReserved->fByteToBlockShift
 
 	// The fDeviceIsShared is used to indicate whether this device exists on a Physical
 	// Interconnect that allows multiple initiators to access it.  This is used mainly
@@ -521,7 +531,7 @@ protected:
 	 @result Returns the initial power state desired when power management is initialized.
 	 */
 	virtual UInt32		GetInitialPowerState ( void ) APPLE_KEXT_OVERRIDE;
-
+    
 	/*!
 	 @function GetNumberOfPowerStateTransitions
 	 @abstract Called by power management to determine this class's total

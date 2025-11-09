@@ -1,12 +1,12 @@
 #if (defined(USE_APPKIT_PUBLIC_HEADERS) && USE_APPKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSTextAttachment.h>)
-#include <TargetConditionals.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
 #import <AppKit/AppKitDefines.h>
 
 /*
         NSTextAttachment.h
-        Copyright (c) 1994-2024, Apple Inc.
+        Copyright (c) 1994-2025, Apple Inc.
         All rights reserved.
 */
 
@@ -29,7 +29,6 @@ enum {
 @protocol NSTextLocation;
 @class NSTextAttachmentCell;
 @protocol NSTextAttachmentCell;
-
 
 // This protocol defines the interface to attachment objects from NSTextLayoutManager
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0))
@@ -128,7 +127,6 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), visionos(1.0)) API_UNAVAILABLE
 // Invoked from -[NSTextAttachment attachmentBoundsForAttributes:location:textContainer:proposedLineFragment:position:]
 - (CGRect)attachmentBoundsForAttributes:(NSDictionary<NSAttributedStringKey, id> *)attributes location:(id <NSTextLocation>)location textContainer:(nullable NSTextContainer *)textContainer proposedLineFragment:(CGRect)proposedLineFragment position:(CGPoint)position;
 @end
-
 
 @interface NSMutableAttributedString (NSMutableAttributedStringAttachmentConveniences)
 

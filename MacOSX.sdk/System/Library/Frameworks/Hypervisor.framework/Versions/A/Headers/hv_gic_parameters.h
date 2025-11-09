@@ -22,7 +22,7 @@ __BEGIN_DECLS
  @param distributor_size Pointer to GIC distributor region size (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_distributor_size(size_t *distributor_size);
 
 /*!
@@ -30,7 +30,7 @@ hv_return_t hv_gic_get_distributor_size(size_t *distributor_size);
  @param distributor_base_alignment Pointer to GIC distributor base address alignment (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_distributor_base_alignment(size_t *distributor_base_alignment);
 
 /*!
@@ -42,7 +42,7 @@ hv_return_t hv_gic_get_distributor_base_alignment(size_t *distributor_base_align
     redistributor is two 64 kilobyte frames per vCPU and is contiguously
     placed.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_redistributor_region_size(size_t *redistributor_region_size);
 
 /*!
@@ -50,7 +50,7 @@ hv_return_t hv_gic_get_redistributor_region_size(size_t *redistributor_region_si
  @param redistributor_size Pointer to GIC redistributor region size (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_redistributor_size(size_t *redistributor_size);
 
 /*!
@@ -58,7 +58,7 @@ hv_return_t hv_gic_get_redistributor_size(size_t *redistributor_size);
  @param redistributor_base_alignment Pointer to GIC redistributor base address alignment (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_redistributor_base_alignment(size_t *redistributor_base_alignment);
 
 /*!
@@ -66,7 +66,7 @@ hv_return_t hv_gic_get_redistributor_base_alignment(size_t *redistributor_base_a
  @param msi_region_size Pointer to GIC MSI region size (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_msi_region_size(size_t *msi_region_size);
 
 /*!
@@ -74,7 +74,7 @@ hv_return_t hv_gic_get_msi_region_size(size_t *msi_region_size);
  @param msi_region_base_alignment Pointer to GIC MSI region base address alignment (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_msi_region_base_alignment(size_t *msi_region_base_alignment);
 
 /*!
@@ -83,7 +83,7 @@ hv_return_t hv_gic_get_msi_region_base_alignment(size_t *msi_region_base_alignme
  @param spi_intid_count Pointer to the number of SPIs supported (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_spi_interrupt_range(uint32_t *spi_intid_base, uint32_t *spi_intid_count);
 
 /*!
@@ -95,7 +95,7 @@ hv_return_t hv_gic_get_spi_interrupt_range(uint32_t *spi_intid_base, uint32_t *s
     Provides the interrupt id for interrupts that are reserved by the
     hypervisor framework.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_get_intid(hv_gic_intid_t interrupt, uint32_t *intid);
 
 __END_DECLS

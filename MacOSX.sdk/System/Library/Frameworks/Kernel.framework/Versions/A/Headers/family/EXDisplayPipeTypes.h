@@ -26,6 +26,8 @@ typedef enum {
     INDICATOR_CAM = 0,
     INDICATOR_MIC = 1,
     INDICATOR_MIC_ALT_ACCESSIBILITY = 2,
+    INDICATOR_CAM_ALT_FACEID = 3,
+    INDICATOR_CAM_ALT_FACEID_DELAYED = 4,
     INDICATOR_COUNT
 } EXDisplayPipeIndicator;
 
@@ -99,6 +101,22 @@ typedef struct
     } errorInfo[SECURE_TE_INFO_MAX_LENGTH];
     int errorInfoCount;
 } EXDisplayPipeSecureTEStatus;
+
+typedef struct
+{
+    uint64_t globalhealth;
+    uint64_t scldriver;
+    uint64_t scadriver;
+    uint64_t scaalgorithm;
+    uint64_t pipe;
+    uint64_t link;
+    uint64_t brightness;
+    uint64_t tconcrc;
+    uint64_t tconhealth;
+    uint64_t tconhpd;
+    uint64_t dcptransporthealth;
+    uint64_t silhealth;
+} EXDisplayPipeHealthStats;
 
 // kEXBrightMessageFunction API
 // callPlatformFunction( kEXBrightMessageFunction, false,

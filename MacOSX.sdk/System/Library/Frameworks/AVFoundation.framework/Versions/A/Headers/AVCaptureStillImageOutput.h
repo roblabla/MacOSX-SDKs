@@ -109,6 +109,24 @@ API_DEPRECATED("Use AVCapturePhotoOutput instead.", macos(10.7, 10.15), ios(4.0,
 @property(nonatomic, getter=isHighResolutionStillImageOutputEnabled) BOOL highResolutionStillImageOutputEnabled API_AVAILABLE(macos(10.14), ios(8.0), macCatalyst(14.0)) API_UNAVAILABLE(visionos);
 
 /*!
+ @property cameraSensorOrientationCompensationSupported
+ @abstract
+    A read-only BOOL value indicating whether still image buffers may be rotated to match the sensor orientation of earlier generation hardware.
+ @discussion
+    Value is YES for camera configurations which support compensation for the sensor orientation, which is applied to HEIC, JPEG, and uncompressed processed photos only; compensation is never applied to Bayer RAW or Apple ProRaw captures.
+ */
+@property(nonatomic, readonly, getter=isCameraSensorOrientationCompensationSupported) BOOL cameraSensorOrientationCompensationSupported API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+/*!
+ @property cameraSensorOrientationCompensationEnabled
+ @abstract
+    A BOOL value indicating that still image buffers will be rotated to match the sensor orientation of earlier generation hardware.
+ @discussion
+    Default is YES when cameraSensorOrientationCompensationSupported is YES. Set to NO if your app does not require sensor orientation compensation.
+ */
+@property(nonatomic, getter=isCameraSensorOrientationCompensationEnabled) BOOL cameraSensorOrientationCompensationEnabled API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(macos, macCatalyst, tvos, visionos) API_UNAVAILABLE(watchos);
+
+/*!
  @property capturingStillImage
  @abstract
     A boolean value that becomes true when a still image is being captured.

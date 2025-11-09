@@ -8,7 +8,9 @@
 #import <Foundation/Foundation.h>
 #import <CloudKit/CKRecord.h>
 
-@class CKRecordZone, CKRecordZoneID, CKSyncEngineAccountChangeEvent, CKSyncEngineDidFetchChangesEvent, CKSyncEngineDidFetchRecordZoneChangesEvent, CKSyncEngineDidSendChangesEvent, CKSyncEngineFailedRecordSave, CKSyncEngineFailedZoneSave, CKSyncEngineFetchChangesContext, CKSyncEngineFetchedDatabaseChangesEvent, CKSyncEngineFetchedRecordDeletion, CKSyncEngineFetchedRecordZoneChangesEvent, CKSyncEngineFetchedZoneDeletion, CKSyncEngineSendChangesContext, CKSyncEngineSentDatabaseChangesEvent, CKSyncEngineSentRecordZoneChangesEvent, CKSyncEngineStateSerialization, CKSyncEngineStateUpdateEvent, CKSyncEngineWillFetchChangesEvent, CKSyncEngineWillFetchRecordZoneChangesEvent, CKSyncEngineWillSendChangesEvent;
+@class CKRecordZone, CKRecordZoneID;
+@class CKSyncEngineAccountChangeEvent, CKSyncEngineDidFetchChangesEvent, CKSyncEngineDidFetchRecordZoneChangesEvent, CKSyncEngineDidSendChangesEvent, CKSyncEngineFetchedDatabaseChangesEvent, CKSyncEngineFetchedRecordDeletion, CKSyncEngineFetchedRecordZoneChangesEvent, CKSyncEngineSentDatabaseChangesEvent, CKSyncEngineSentRecordZoneChangesEvent, CKSyncEngineStateUpdateEvent, CKSyncEngineWillFetchChangesEvent, CKSyncEngineWillFetchRecordZoneChangesEvent, CKSyncEngineWillSendChangesEvent;
+@class CKSyncEngineFailedRecordSave, CKSyncEngineFailedZoneSave, CKSyncEngineFetchChangesContext, CKSyncEngineFetchedZoneDeletion, CKSyncEngineSendChangesContext, CKSyncEngineStateSerialization;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -122,15 +124,18 @@ NS_SWIFT_SENDABLE
 // These will crash if used for the wrong event type.
 @property (readonly, strong, nonatomic) CKSyncEngineStateUpdateEvent *stateUpdateEvent;
 @property (readonly, strong, nonatomic) CKSyncEngineAccountChangeEvent *accountChangeEvent;
+
+@property (readonly, strong, nonatomic) CKSyncEngineWillFetchChangesEvent *willFetchChangesEvent;
 @property (readonly, strong, nonatomic) CKSyncEngineFetchedDatabaseChangesEvent *fetchedDatabaseChangesEvent;
+@property (readonly, strong, nonatomic) CKSyncEngineDidFetchChangesEvent *didFetchChangesEvent;
+
+@property (readonly, strong, nonatomic) CKSyncEngineWillFetchRecordZoneChangesEvent *willFetchRecordZoneChangesEvent;
 @property (readonly, strong, nonatomic) CKSyncEngineFetchedRecordZoneChangesEvent *fetchedRecordZoneChangesEvent;
+@property (readonly, strong, nonatomic) CKSyncEngineDidFetchRecordZoneChangesEvent *didFetchRecordZoneChangesEvent;
+
+@property (readonly, strong, nonatomic) CKSyncEngineWillSendChangesEvent *willSendChangesEvent;
 @property (readonly, strong, nonatomic) CKSyncEngineSentDatabaseChangesEvent *sentDatabaseChangesEvent;
 @property (readonly, strong, nonatomic) CKSyncEngineSentRecordZoneChangesEvent *sentRecordZoneChangesEvent;
-@property (readonly, strong, nonatomic) CKSyncEngineWillFetchChangesEvent *willFetchChangesEvent;
-@property (readonly, strong, nonatomic) CKSyncEngineWillFetchRecordZoneChangesEvent *willFetchRecordZoneChangesEvent;
-@property (readonly, strong, nonatomic) CKSyncEngineDidFetchRecordZoneChangesEvent *didFetchRecordZoneChangesEvent;
-@property (readonly, strong, nonatomic) CKSyncEngineDidFetchChangesEvent *didFetchChangesEvent;
-@property (readonly, strong, nonatomic) CKSyncEngineWillSendChangesEvent *willSendChangesEvent;
 @property (readonly, strong, nonatomic) CKSyncEngineDidSendChangesEvent *didSendChangesEvent;
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -141,7 +146,7 @@ NS_SWIFT_SENDABLE
 /// The sync engine state was updated, and you should persist it locally.
 ///
 /// In order to function properly and efficiently, `CKSyncEngine` tracks some state internally.
-/// When the sync engine state changes, it will give you the latest serialized version in a `CKSyncEngineStateUpdateEvent`.
+/// When the sync engine state changes, it will give you the latest serialized version in a ``CKSyncEngine/Event/StateUpdate``.
 /// This event will happen occasionally when the sync engine modifies the state internally during normal sync operation.
 /// This event will also happen when you change the state yourself.
 ///
@@ -270,7 +275,7 @@ NS_SWIFT_SENDABLE
 
 /// The sync engine finished sending a batch of record zone changes to the server.
 ///
-/// If a record save succeeded, you should encode the system fields of this record to use the next time you save. See `encodeSystemFields` on `CKRecord`.
+/// If a record save succeeded, you should encode the system fields of this record to use the next time you save. See `encodeSystemFields` on ``CKRecord``.
 ///
 /// If a record deletion succeeded, you should remove any local system fields for that record.
 ///

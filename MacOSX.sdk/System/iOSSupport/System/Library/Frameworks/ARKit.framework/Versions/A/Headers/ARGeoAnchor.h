@@ -9,8 +9,6 @@
 #import <ARKit/ARGeoTrackingTypes.h>
 #import <CoreLocation/CoreLocation.h>
 
-#define AR_GEO_ANCHOR_PROTOCOLS <ARTrackable>
-
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -20,30 +18,31 @@ NS_ASSUME_NONNULL_BEGIN
  */
 API_AVAILABLE(ios(14.0))
 NS_SWIFT_SENDABLE
-@interface ARGeoAnchor : ARAnchor AR_GEO_ANCHOR_PROTOCOLS
+@interface ARGeoAnchor : ARAnchor <ARTrackable>
 
 /**
  The coordinate where this anchor will be placed.
- 
+
  @discussion The anchor's transform will be automatically updated by the session when ARGeoTrackingConfiguration is set.
  */
 @property (nonatomic, readonly) CLLocationCoordinate2D coordinate;
 
 /**
  The distance to mean sea level, in meters (negative values indicate it's below sea level).
- 
+
  @discussion Only valid when altitudeSource is not ARAltitudeSourceUnknown.
  */
 @property (nonatomic, readonly) CLLocationDistance altitude NS_REFINED_FOR_SWIFT;
 
 /**
- The source of altitude information. If the user did not provide the altitude, ARKit populates this property to indicate the expected accuracy depending on the available altitude data.
+ The source of altitude information. If the user did not provide the altitude, ARKit populates this property to indicate the expected accuracy
+ depending on the available altitude data.
  */
 @property (nonatomic, readonly) ARAltitudeSource altitudeSource;
 
 /**
  Initializes a new ARGeoAnchor with the given coordinates.
- 
+
  @discussion ARKit will query the ground level altitude during runtime, and populate the altitude as soon as that information becomes available.
  @param coordinate Coordinates.
  */

@@ -47,7 +47,6 @@
 // Build includes
 #include <TargetConditionals.h>
 
-
 //-----------------------------------------------------------------------------
 //	Constants
 //-----------------------------------------------------------------------------
@@ -82,6 +81,19 @@ enum
 // The command should be tried 5 times.  The original attempt 
 // plus 4 retries.
 #define kDefaultRetryCount		4
+
+struct CmdErrLogInfo
+{
+    UInt8               fOpcode;
+    UInt8               fSenseKey;
+    UInt8               fSenseCode;
+    UInt8               fSenseCodeQual;
+    UInt8               fSenseValid;
+    UInt16              fErrCount;
+    SCSIServiceResponse fServiceResponse;
+    SCSITaskStatus      fTaskStatus;
+    UInt64              flogAbsTS;
+};
 
 // Forward declarations for internal use only classes
 class SCSIPrimaryCommands;
@@ -142,6 +154,26 @@ protected:
         UInt32                      fNumCommandsExecuting;
         int                         fMaxPollRetries;
         int                         fPollDebounceRetriesLeft;
+        UInt64                      fPowerOnResetDebugInfo;
+        UInt64                      fClearNotReadyDebugInfo;
+        SInt32                      fPMAborted;
+        UInt64                      fSSGHandle;
+        UInt64                      fUpdateSSGStatsTime;
+        UInt64                      fReadBlockCount;
+        UInt64                      fWriteBlockCount;
+        UInt64                      fPowerEventLatencyLog;
+        UInt32                      fStartMaxLatency;
+        UInt32                      fStopMaxLatency;
+        UInt32                      fPowerEventLog;
+        UInt32                      fMaxPowerCPORLatency;
+        UInt32                      fMaxPowerCNRSLatency;
+        UInt32                      fMaxPowerVMPLatency;
+        UInt32                      fMaxPowerIOWaitLatency;
+        UInt32                      fMaxPowerOnLatency;
+        UInt32                      fMaxPowerOffLatency;
+        CmdErrLogInfo               fCmdErrInfo;
+        bool                        fTurErrorOccurred;
+        UInt8                       fNoSyncAfterWrite;
 	};
 	IOSCSIPrimaryCommandsDeviceExpansionData * fIOSCSIPrimaryCommandsDeviceReserved;
 	
@@ -151,6 +183,26 @@ protected:
     #define	fNumCommandsExecuting       fIOSCSIPrimaryCommandsDeviceReserved->fNumCommandsExecuting
     #define fMaxPollRetries             fIOSCSIPrimaryCommandsDeviceReserved->fMaxPollRetries
     #define fPollDebounceRetriesLeft    fIOSCSIPrimaryCommandsDeviceReserved->fPollDebounceRetriesLeft
+    #define fPowerOnResetDebugInfo      fIOSCSIPrimaryCommandsDeviceReserved->fPowerOnResetDebugInfo
+    #define fClearNotReadyDebugInfo     fIOSCSIPrimaryCommandsDeviceReserved->fClearNotReadyDebugInfo
+    #define fPMAborted                  fIOSCSIPrimaryCommandsDeviceReserved->fPMAborted
+    #define fSSGHandle                  fIOSCSIPrimaryCommandsDeviceReserved->fSSGHandle
+    #define fUpdateSSGStatsTime         fIOSCSIPrimaryCommandsDeviceReserved->fUpdateSSGStatsTime
+    #define fReadBlockCount             fIOSCSIPrimaryCommandsDeviceReserved->fReadBlockCount
+    #define fWriteBlockCount            fIOSCSIPrimaryCommandsDeviceReserved->fWriteBlockCount
+    #define fPowerEventLatencyLog       fIOSCSIPrimaryCommandsDeviceReserved->fPowerEventLatencyLog
+    #define fStartMaxLatency            fIOSCSIPrimaryCommandsDeviceReserved->fStartMaxLatency
+    #define fStopMaxLatency             fIOSCSIPrimaryCommandsDeviceReserved->fStopMaxLatency
+    #define fPowerEventLog              fIOSCSIPrimaryCommandsDeviceReserved->fPowerEventLog
+    #define fMaxPowerCPORLatency        fIOSCSIPrimaryCommandsDeviceReserved->fMaxPowerCPORLatency
+    #define fMaxPowerCNRSLatency        fIOSCSIPrimaryCommandsDeviceReserved->fMaxPowerCNRSLatency
+    #define fMaxPowerVMPLatency         fIOSCSIPrimaryCommandsDeviceReserved->fMaxPowerVMPLatency
+    #define fMaxPowerIOWaitLatency      fIOSCSIPrimaryCommandsDeviceReserved->fMaxPowerIOWaitLatency
+    #define fMaxPowerOnLatency          fIOSCSIPrimaryCommandsDeviceReserved->fMaxPowerOnLatency
+    #define fMaxPowerOffLatency         fIOSCSIPrimaryCommandsDeviceReserved->fMaxPowerOffLatency
+    #define fCmdErrInfo                 fIOSCSIPrimaryCommandsDeviceReserved->fCmdErrInfo
+    #define fTurErrorOccurred           fIOSCSIPrimaryCommandsDeviceReserved->fTurErrorOccurred
+    #define fNoSyncAfterWrite           fIOSCSIPrimaryCommandsDeviceReserved->fNoSyncAfterWrite
 
 	UInt8							fDefaultInquiryCount;
 	OSDictionary *					fDeviceCharacteristicsDictionary;
@@ -368,10 +420,23 @@ protected:
 	virtual void					HandleIncrementOutstandingCommandsCount ( void );	
 	
 
+    void StartSCSIStats ( );
+    void UpdateSCSIDeviceInfoStats ( );
+    void StopSCSIStats ( );
+    void UpdateSCSIStats ( const char * param, UInt64 value = 1, bool setValue = false );
+    void UpdateSCSIStats ( const char * param, const char * value );
+    void UpdateSCSICommandsStats ( bool terminate );
+    void UpdateSCSICommandsStats ( UInt64 startTS, UInt64 completeTS, SCSITaskIdentifier request );
+    void UpdateSCSIMaxLatency ( UInt32 latency, UInt32 * maxLatency, const char * param );
+    UInt32 getTimeElapsedUS ( UInt64 beginAbsTime );
+    UInt64 getCurrentTimeMS ( );
+    
 	// This static member routine provides a mechanism for retrieving a pointer to
 	// the object that is claimed as the owner of the specified SCSITask.
 	static OSObject *				sGetOwnerForTask ( SCSITaskIdentifier request );
 	
+    bool                            isPMAborted ( );
+
 public:
 	
 	bool				init ( OSDictionary * propTable ) APPLE_KEXT_OVERRIDE;
@@ -702,6 +767,12 @@ public:
     OSMetaClassDeclareReservedUsed ( IOSCSIPrimaryCommandsDevice,  2 );
     
     virtual void        ReleasePowerStateClamp ( void );
+
+protected:
+
+    bool    CheckForSufficientTimeForPMCommand ( UInt32 commandTimeoutInMS );
+
+    void LogCommandError ( SCSITaskIdentifier task );
 
 private:
 

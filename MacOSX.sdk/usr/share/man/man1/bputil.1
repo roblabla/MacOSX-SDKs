@@ -6,7 +6,7 @@
 .Nd Utility to precisely modify the security settings on Apple Silicon Macs.
 .Sh SYNOPSIS
 .Nm
-.Op Fl ldejfgnmkcas                    \" [-ldejfgnmkcas]
+.Op Fl ldejfgnmkcasz                   \" [-ldejfgnmkcasz]
 .Op Fl u Ar username                   \" [-u username]
 .Op Fl p Ar password                   \" [-p password]
 .Op Fl v Ar APFS Volume Group UUID     \" [-v APFS Volume Group UUID]
@@ -61,6 +61,14 @@ Switch display mode to JSON. Can only be combined with --display-policy and --di
 .It Fl r, -remove Ar AABBCCDD-EEFF-0011-2233-445566778899
 .Pp
 Remove macOS and paired recoveryOS local policies for a given Volume Group UUID.
+.Pp
+Boot environment requirements: software-launched recoveryOS or 1TR.
+.br
+Pairing requirements: None.
+.It Fl z, -cleanup
+.Pp
+Remove macOS and paired recoveryOS local policies for all Volume Group UUIDs of volumes not currently present on the system.
+Warning: this will also remove local policies for bootable volumes on external drives that are not currently connected to the system.
 .Pp
 Boot environment requirements: software-launched recoveryOS or 1TR.
 .br

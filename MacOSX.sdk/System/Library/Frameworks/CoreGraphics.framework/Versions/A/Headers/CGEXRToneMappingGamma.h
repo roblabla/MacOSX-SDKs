@@ -5,7 +5,7 @@
 #ifndef CGEXRTONEMAPPINGGAMMA_H
 #define CGEXRTONEMAPPINGGAMMA_H
 
-#include <CoreFoundation/CFAvailability.h>
+#include <CoreFoundation/CoreFoundation.h>
 #include <CoreGraphics/CGBase.h>
 
 CF_IMPLICIT_BRIDGING_ENABLED
@@ -24,6 +24,10 @@ CG_EXTERN const CFStringRef kCGEXRToneMappingGammaKneeLow  API_AVAILABLE(macos(1
 /* kCGEXRToneMappingGammaKneeHigh allows for specifying custom "knee high" value to override system defaults when applying kCGToneMappingEXRGamma tone mapping method */
 CG_EXTERN const CFStringRef kCGEXRToneMappingGammaKneeHigh API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0)); /* default value: 5.0f range [3.5f, 7.5f]    */
 
+/* Return a dictionary with default options for tone mapping using EXR Gamma method */
+CG_EXTERN CFDictionaryRef CGEXRToneMappingGammaGetDefaultOptions(void)
+    CF_REFINED_FOR_SWIFT
+    API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
 CF_ASSUME_NONNULL_END
 

@@ -3,8 +3,8 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CollectionsInternal.framework/Versions/A/CollectionsInternal'
-current-version: 103.2
-compatibility-version: 103.2
+current-version: 112
+compatibility-version: 112
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -300,7 +300,8 @@ exports:
                        '_$s19CollectionsInternal10OrderedSetV9_elementss15ContiguousArrayVyxGvg', 
                        '_$s19CollectionsInternal10OrderedSetV9_elementss15ContiguousArrayVyxGvpMV', 
                        '_$s19CollectionsInternal10OrderedSetV9_elementss15ContiguousArrayVyxGvs', 
-                       '_$s19CollectionsInternal10OrderedSetV9_isUniqueSbyF', '_$s19CollectionsInternal10OrderedSetV9formIndex5afterySiz_tF', 
+                       '_$s19CollectionsInternal10OrderedSetV9_isUniqueSbyF', '_$s19CollectionsInternal10OrderedSetV9appending10contentsOfACyxGqd__n_t7ElementQyd__RszSTRd__lF', 
+                       '_$s19CollectionsInternal10OrderedSetV9formIndex5afterySiz_tF', 
                        '_$s19CollectionsInternal10OrderedSetV9formIndex6beforeySiz_tF', 
                        '_$s19CollectionsInternal10OrderedSetV9formUnionyyAC13UnorderedViewVyx_GnF', 
                        '_$s19CollectionsInternal10OrderedSetV9formUnionyyACyxGnF', 
@@ -425,7 +426,8 @@ exports:
                        '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV4words6UInt64VSi_tcig', 
                        '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV4words6UInt64VSi_tcipMV', 
                        '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV4words6UInt64VSi_tcis', 
-                       '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV5_find_2inSiSg5index_AC6BucketV6buckett7ElementQz_xtSkRzSHANRQlF', 
+                       '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV5_find_2inSiSg5index_AC6BucketV6buckettx_SRyxGtSHRzlF', 
+                       '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV5_find_2inSiSg5index_AC6BucketV6buckettx_s15ContiguousArrayVyxGtSHRzlF', 
                        '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV5clearyyF', 
                        '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV5scaleSivg', 
                        '_$s19CollectionsInternal10_HashTableV12UnsafeHandleV5scaleSivpMV', 
@@ -562,8 +564,10 @@ exports:
                        '_$s19CollectionsInternal11RopeElementPAAE9rebalance12prevNeighborSbxz_tF', 
                        '_$s19CollectionsInternal11RopeElementTL', '_$s19CollectionsInternal11RopeSummaryMp', 
                        '_$s19CollectionsInternal11RopeSummaryPAAE11minNodeSizeSivgZ', 
+                       '_$s19CollectionsInternal11RopeSummaryPAAE11minNodeSizeSivpZMV', 
                        '_$s19CollectionsInternal11RopeSummaryPAAE11subtractingyxxF', 
                        '_$s19CollectionsInternal11RopeSummaryPAAE16nodeSizeBitWidthSivgZ', 
+                       '_$s19CollectionsInternal11RopeSummaryPAAE16nodeSizeBitWidthSivpZMV', 
                        '_$s19CollectionsInternal11RopeSummaryPAAE6addingyxxF', '_$s19CollectionsInternal11RopeSummaryPSQTb', 
                        '_$s19CollectionsInternal11RopeSummaryTL', '_$s19CollectionsInternal11_FindResultOMa', 
                        '_$s19CollectionsInternal11_FindResultOMn', '_$s19CollectionsInternal11_FindResultON', 
@@ -613,7 +617,6 @@ exports:
                        '_$s19CollectionsInternal11_UnsafePathVSHAAMc', '_$s19CollectionsInternal11_UnsafePathVSLAAMc', 
                        '_$s19CollectionsInternal11_UnsafePathVSQAAMc', '_$s19CollectionsInternal11_UnsafePathV___8itemSlotAcA10_HashLevelV_AA09_AncestorG5SlotsVAA010_UnmanagedG4NodeVAA01_gF0VtcfC', 
                        '_$s19CollectionsInternal11_UnsafePathVs23CustomStringConvertibleAAMc', 
-                       '_$s19CollectionsInternal11_specialize_3forq_Sgx_q_mtr0_lF', 
                        '_$s19CollectionsInternal12BigSubstringV10_unchecked2inAcA0C6StringV_SnyAG5IndexVGtcfC', 
                        '_$s19CollectionsInternal12BigSubstringV10startIndexAA0C6StringV0F0Vvg', 
                        '_$s19CollectionsInternal12BigSubstringV10startIndexAA0C6StringV0F0VvpMV', 
@@ -1805,6 +1808,7 @@ exports:
                        '_$s19CollectionsInternal4HeapV8_storages15ContiguousArrayVyxGvg', 
                        '_$s19CollectionsInternal4HeapV8_storages15ContiguousArrayVyxGvpMV', 
                        '_$s19CollectionsInternal4HeapV8_storages15ContiguousArrayVyxGvs', 
+                       '_$s19CollectionsInternal4HeapV9removeAll5whereySbxKXE_tKF', 
                        '_$s19CollectionsInternal4HeapV9removeMaxxyF', '_$s19CollectionsInternal4HeapV9removeMinxyF', 
                        '_$s19CollectionsInternal4HeapV9unorderedSayxGvg', '_$s19CollectionsInternal4HeapV9unorderedSayxGvpMV', 
                        '_$s19CollectionsInternal4HeapVACyxGycfC', '_$s19CollectionsInternal4HeapVMa', 
@@ -3542,7 +3546,8 @@ exports:
                        '_$sSD4KeysVyxq__G19CollectionsInternal17_UniqueCollectionADWP', 
                        '_$sSM19CollectionsInternalSkRzSH7ElementSTRpzrlE10_partition4with2by8callback5IndexSlQzAA10_HashTableV12UnsafeHandleV_SbACKXEySi_SitXEtKF', 
                        '_$sSN19CollectionsInternalAA9_HeapNodeVRszrlE8_forEachyyyACXEF', 
-                       '_$sSR19CollectionsInternalE4_ptr2atSPyxGSi_tF', '_$sSS19CollectionsInternalEySSAA12BigSubstringV17UnicodeScalarViewVcfC', 
+                       '_$sSR19CollectionsInternalE4_ptr2atSPyxGSi_tF', '_$sSR19CollectionsInternalSQRzlE11_firstIndex2ofSiSgx_tF', 
+                       '_$sSS19CollectionsInternalEySSAA12BigSubstringV17UnicodeScalarViewVcfC', 
                        '_$sSS19CollectionsInternalEySSAA12BigSubstringVcfC', '_$sSS19CollectionsInternalEySSAA9BigStringV17UnicodeScalarViewVcfC', 
                        '_$sSS19CollectionsInternalEySSAA9BigStringVcfC', '_$sST19CollectionsInternalAA9_RopeItem7ElementRpzrlE4_sumAC_7SummaryQZyF', 
                        '_$sShyxG19CollectionsInternal17_UniqueCollectionABMc', '_$sShyxG19CollectionsInternal17_UniqueCollectionABWP', 
@@ -3565,7 +3570,8 @@ exports:
                        '_$sSu19CollectionsInternalE9_reversedSuvpMV', '_$sSz19CollectionsInternalE18truncatingIfNeededxAA8BitArrayV_tcfC', 
                        '_$sSz19CollectionsInternalE7exactlyxSgAA8BitArrayV_tcfC', 
                        '_$sSz19CollectionsInternalE8_convertyx5value_Sb10isNegativetAA8BitArrayVFZ', 
-                       '_$sSz19CollectionsInternalEyxAA8BitArrayVcfC', '_$ss17FixedWidthIntegerP19CollectionsInternalE16_nonzeroBitCountxvg', 
+                       '_$sSz19CollectionsInternalEyxAA8BitArrayVcfC', '_$ss15ContiguousArrayV19CollectionsInternalSQRzlE9_containsySbxF', 
+                       '_$ss17FixedWidthIntegerP19CollectionsInternalE16_nonzeroBitCountxvg', 
                        '_$ss17FixedWidthIntegerP19CollectionsInternalE16_nonzeroBitCountxvpMV', 
                        '_$ss17FixedWidthIntegerP19CollectionsInternalE20_roundUpToPowerOfTwoxyF', 
                        '_$ss17FixedWidthIntegerP19CollectionsInternalE5_rank5ofBitSiSu_tF', 

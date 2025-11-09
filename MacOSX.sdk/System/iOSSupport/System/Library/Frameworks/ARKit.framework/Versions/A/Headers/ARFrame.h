@@ -5,14 +5,13 @@
 //  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <CoreVideo/CoreVideo.h>
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import <simd/simd.h>
-#import <ARKit/ARHitTestResult.h>
-#import <ARKit/ARRaycastQuery.h>
 
 #import <ARKit/ARGeoTrackingTypes.h>
+#import <ARKit/ARHitTestResult.h>
+#import <ARKit/ARRaycastQuery.h>
 
 @class ARAnchor;
 @class ARCamera;
@@ -35,12 +34,11 @@ NS_ASSUME_NONNULL_BEGIN
 */
 API_AVAILABLE(ios(13.0))
 typedef NS_ENUM(uint8_t, ARSegmentationClass) {
-
-     /* Pixel has been not been classified. */
-    ARSegmentationClassNone      = 0,
+    /* Pixel has been not been classified. */
+    ARSegmentationClassNone = 0,
 
     /* Pixel has been classified as person. */
-    ARSegmentationClassPerson    = 255
+    ARSegmentationClassPerson = 255
 
 } NS_SWIFT_NAME(ARFrame.SegmentationClass);
 
@@ -51,15 +49,15 @@ API_AVAILABLE(ios(12.0))
 typedef NS_ENUM(NSInteger, ARWorldMappingStatus) {
     /** World mapping is not available. */
     ARWorldMappingStatusNotAvailable,
-    
+
     /** World mapping is available but has limited features.
      For the device's current position, the session’s world map is not recommended for relocalization. */
     ARWorldMappingStatusLimited,
-    
+
     /** World mapping is actively extending the map with the user's motion.
      The world map will be relocalizable for previously visited areas but is still being updated for the current space. */
     ARWorldMappingStatusExtending,
-    
+
     /** World mapping has adequately mapped the visible area.
      The map can be used to relocalize for the device's current position. */
     ARWorldMappingStatusMapped
@@ -91,7 +89,7 @@ NS_SWIFT_SENDABLE
 /**
  A tileable texture that contains image noise matching the current camera streams
  noise properties.
- 
+
  @discussion A camera stream depicts image noise that gives the captured image
     a grainy look and varies with light conditions.
  The variations are stored along the depth dimension of the camera grain texture
@@ -101,7 +99,7 @@ NS_SWIFT_SENDABLE
 
 /**
  The frame’s camera grain intensity in range 0 to 1.
- 
+
  @discussion A camera stream depicts image noise that gives the captured image
  a grainy look and varies with light conditions.
  The camera grain intensity can be used to select a texture slice from the frames
@@ -194,7 +192,7 @@ NS_SWIFT_SENDABLE
 
 /**
  Searches the frame for objects corresponding to a point in the captured image.
- 
+
  @discussion A 2D point in the captured image’s coordinate space can refer to any point along a line segment
  in the 3D coordinate space. Hit-testing is the process of finding objects in the world located along this line segment.
  @param point A point in the image-space coordinate system of the captured image.
@@ -206,17 +204,23 @@ NS_SWIFT_SENDABLE
 
 /**
  Creates a raycast query originating from the point on the captured image, aligned along the center of the field of view of the camera.
- @discussion A 2D point in the captured image’s coordinate space and the field of view of the frame's camera is used to create a ray in the 3D cooridnate space originating at the point.
+ @discussion A 2D point in the captured image’s coordinate space and the field of view of the frame's camera is used to create a ray in the 3D
+ cooridnate space originating at the point.
  @param point A point in the image-space coordinate system of the captured image.
  Values should range from (0,0) - upper left corner to (1,1) - lower right corner.
  @param target Type of target where the ray should terminate.
  @param alignment Alignment of the target.
  */
-- (ARRaycastQuery *)raycastQueryFromPoint:(CGPoint)point allowingTarget:(ARRaycastTarget)target alignment:(ARRaycastTargetAlignment)alignment API_AVAILABLE(ios(13.0));
+- (ARRaycastQuery *)raycastQueryFromPoint:(CGPoint)point
+                           allowingTarget:(ARRaycastTarget)target
+                                alignment:(ARRaycastTargetAlignment)alignment API_AVAILABLE(ios(13.0));
+
+
+typedef NS_ENUM(NSInteger, UIInterfaceOrientation);
 
 /**
  Returns a display transform for the provided viewport size and orientation.
- 
+
  @discussion The display transform can be used to convert normalized points in the image-space coordinate system
  of the captured image to normalized points in the view’s coordinate space. The transform provides the correct rotation
  and aspect-fill for presenting the captured image in the given orientation and size.
@@ -224,6 +228,7 @@ NS_SWIFT_SENDABLE
  @param viewportSize The size of the viewport.
  */
 - (CGAffineTransform)displayTransformForOrientation:(UIInterfaceOrientation)orientation viewportSize:(CGSize)viewportSize;
+
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;

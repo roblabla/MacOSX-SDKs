@@ -13,14 +13,14 @@ exports:
                        _kBiometricKitCAEventCanceled, _kBiometricKitCALogPath, _kBiometricKitCALogPrefix, 
                        _kBiometricKitCAPasscodeSet, _kBiometricKitCAPreviousEventDate, 
                        _kBiometricKitCATimeSinceLastEnrollment, _kBiometricKitCATimeSinceLastEnrollmentBinned, 
-                       _kBiometricKitCATimeSinceLastEvent ]
+                       _kBiometricKitCATimeSinceLastEvent, _kBiometricKitCoreAnalyticsLockStateEventName ]
     objc-classes:    [ ActivityTracker, BKCatacomb, BKLocalization, BiometricAutoBugCapture, 
                        BiometricEnrollOperation, BiometricKitCoreAnalyticsEvent, 
-                       BiometricKitXPCExportedClientObject, BiometricKitXPCExportedObject, 
-                       BiometricKitXPCServer, BiometricMatchOperation, BiometricOperation, 
-                       BiometricPresenceDetectOperation, BiometricSupportUserNotification, 
+                       BiometricKitCoreAnalyticsLockState, BiometricKitXPCExportedClientObject, 
+                       BiometricKitXPCExportedObject, BiometricKitXPCServer, BiometricMatchOperation, 
+                       BiometricOperation, BiometricPresenceDetectOperation, BiometricSupportUserNotification, 
                        CatacombComponent, CatacombStateCache, SystemProtectedConfig, 
-                       UserProtectedConfig ]
+                       UserProtectedConfig, WatchdogTimer ]
     objc-ivars:      [ BiometricKitCoreAnalyticsEvent._boundedFieldLimits, BiometricKitCoreAnalyticsEvent._eventName, 
                        BiometricKitCoreAnalyticsEvent._privateProperties ]
 --- !tapi-tbd

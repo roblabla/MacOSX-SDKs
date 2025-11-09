@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/EmailFoundation.framework/Versions/A/EmailFoundation'
-current-version: 3826.255.51
+current-version: 3864.100.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -58,6 +58,7 @@ exports:
                        _EFContentProtectionStateDescription, _EFContentProtectionValidateObservedStateIsUnlocked, 
                        _EFCopyResponseDataForURLRequest, _EFDataAreEqual, _EFDecodeCacheableInstance, 
                        _EFDefaultsKeyLogWithPII, _EFDeviceUnlockedSinceBoot, _EFDictionarysAreEqual, 
+                       _EFDirectionalLeftToRightMark, _EFDirectionalRightToLeftMark, 
                        _EFEmailMessageUTType, _EFEncodeCacheableInstance, _EFErrorDomain, 
                        _EFFetchSignpostLog, _EFFrameworkVersion, _EFGetFileIsPurgeableFD, 
                        _EFHEICImageUTType, _EFInt64RangeMax, _EFIsCustomerBuild, 
@@ -84,12 +85,12 @@ exports:
                        _ef_xpc_activity_run_if_necessary, _kEFSQLQueryGeneratorAdditionalMapperSpecialKey, 
                        _operatorDescriptionForPredicate, _test_setUse32BitMurmurHash3, 
                        _test_unsetUse32BitMurmurHash3 ]
-    objc-classes:    [ EFAutoBugCaptureReporter, EFAutoCancelationToken, EFBloomFilter, 
-                       EFByteSet, EFCancelationToken, EFCoalescer, EFDeallocInvocationToken, 
-                       EFDebouncer, EFDevice, EFFileCompression, EFFileProtectionHandler, 
-                       EFFileWrapper, EFFuture, EFHTMLUtilities, EFImmediateScheduler, 
-                       EFInt64Set, EFInvocationToken, EFLRUCache, EFLazyCache, EFLazyFuture, 
-                       EFLinearFunction, EFListStateCapturer, EFLocked, EFMainThreadScheduler, 
+    objc-classes:    [ EFAutoBugCaptureReporter, EFBloomFilter, EFByteSet, EFCancelationToken, 
+                       EFCoalescer, EFDeallocInvocationToken, EFDebouncer, EFDevice, 
+                       EFFileCompression, EFFileLogger, EFFileWrapper, EFFuture, 
+                       EFHTMLUtilities, EFImmediateScheduler, EFInt64Set, EFInvocationToken, 
+                       EFLRUCache, EFLazyCache, EFLazyFuture, EFLinearFunction, EFListStateCapturer, 
+                       EFLocked, EFMainThreadScheduler, EFManualCancelationToken, 
                        EFMeasuredObject, EFMutableBloomFilter, EFMutableByteSet, 
                        EFMutableIndexMap, EFMutableInt64Set, EFMutableOrderedDictionary, 
                        EFNSSetDifference, EFNetworkDomainUtilities, EFNetworkStatus, 
@@ -97,10 +98,10 @@ exports:
                        EFOrderedCollectionGroupedInsertionByObject, EFOrderedDictionary, 
                        EFPair, EFParenthesizedSQLExpression, EFPathComponent, EFPriorityDesignator, 
                        EFPrivacy, EFProcessTransaction, EFPromise, EFProtectedFile, 
-                       EFProtectedFileGroup, EFQueue, EFQueueScheduler, EFResource, 
-                       EFResourcePool, EFSQLAggregateFunction, EFSQLAndExpression, 
-                       EFSQLBetweenExpression, EFSQLBinaryExpression, EFSQLBinding, 
-                       EFSQLBitExpression, EFSQLBlockValueSource, EFSQLCaseExpression, 
+                       EFProtectedFileGroup, EFQueryLogger, EFQueryStatistics, EFQueue, 
+                       EFQueueScheduler, EFResource, EFResourcePool, EFSQLAggregateFunction, 
+                       EFSQLAndExpression, EFSQLBetweenExpression, EFSQLBinaryExpression, 
+                       EFSQLBinding, EFSQLBitExpression, EFSQLBlockValueSource, EFSQLCaseExpression, 
                        EFSQLColumn, EFSQLColumnExpression, EFSQLColumnSchema, EFSQLColumnValueSource, 
                        EFSQLConnection, EFSQLDeleteStatement, EFSQLDisqualifiedColumnExpression, 
                        EFSQLFunction, EFSQLGeneratorComparisonPredicateNode, EFSQLGeneratorCompoundPredicateNode, 
@@ -125,5 +126,6 @@ exports:
                        _EFSQLInsertStatementValue, _EFSQLInt64Binding, _EFSQLJoinExpression, 
                        _EFSQLStringBinding, _EFSamplingObservable, _EFURLConnectionDelegate ]
     objc-ivars:      [ EFBloomFilter._indexes, EFInt64Set._underlying, EFOrderedDictionary._objectsByKey, 
-                       EFOrderedDictionary._orderedKeys ]
+                       EFOrderedDictionary._orderedKeys, EFQueryLogger._didFlushLogs, 
+                       EFQueryLogger._lookasideFileHandle, EFQueryLogger._lookasideFilePath ]
 ...

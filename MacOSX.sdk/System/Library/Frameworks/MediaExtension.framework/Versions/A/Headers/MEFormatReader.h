@@ -221,7 +221,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)loadFileInfoWithCompletionHandler:(void (^)(MEFileInfo* _Nullable fileInfo, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:fileInfo());
+- (void)loadFileInfoWithCompletionHandler:(void (^)(MEFileInfo* _Nullable fileInfo, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(fileInfo());
 
 /*!
 	@method			loadMetadataWithCompletionHandler
@@ -234,7 +234,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)loadMetadataWithCompletionHandler:(void (^)(NSArray< AVMetadataItem * > * _Nullable metadata, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:metadata());
+- (void)loadMetadataWithCompletionHandler:(void (^)(NSArray< AVMetadataItem * > * _Nullable metadata, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(metadata());
 
 /*!
 	@method			loadTrackReadersWithCompletionHandler
@@ -247,7 +247,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)loadTrackReadersWithCompletionHandler:(void (^)(NSArray< id<METrackReader> > * _Nullable trackReaders, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:trackReaders());
+- (void)loadTrackReadersWithCompletionHandler:(void (^)(NSArray< id<METrackReader> > * _Nullable trackReaders, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(trackReaders());
 
 @optional
 
@@ -290,6 +290,13 @@ NS_SWIFT_SENDABLE API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos,
 */
 @property (nonatomic) MEFileInfoFragmentsStatus fragmentsStatus;
 
+/*!
+	@property		sidecarFileName
+	@abstract		The sidecar filename used by the MediaExtension.
+	@discussion		Represents a new or existing sidecar file located in the same directory as the primary media file. The filename should include the file extension, and should not contain the file path, or contain any slashes. The file extension should be supported by the format reader, and present in the EXAppExtensionAttributes and UTExportedTypeDeclarations dictionaries in the MediaExtension format reader Info.plist.
+*/
+@property (nonatomic, copy, nullable) NSString* sidecarFileName API_AVAILABLE(macos(26.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
+
 @end
 
 
@@ -314,7 +321,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
  */
-- (void)loadTrackInfoWithCompletionHandler:(void (^)(METrackInfo* _Nullable trackInfo, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:trackInfo());
+- (void)loadTrackInfoWithCompletionHandler:(void (^)(METrackInfo* _Nullable trackInfo, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(trackInfo());
 
 /*!
 	@method			generateSampleCursorAtPresentationTimeStamp
@@ -342,7 +349,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)generateSampleCursorAtFirstSampleInDecodeOrderWithCompletionHandler:(void (^)(id<MESampleCursor> _Nullable sampleCursor, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:sampleCursorAtFirstSampleInDecodeOrder());
+- (void)generateSampleCursorAtFirstSampleInDecodeOrderWithCompletionHandler:(void (^)(id<MESampleCursor> _Nullable sampleCursor, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(sampleCursorAtFirstSampleInDecodeOrder());
 
 /*!
 	@method			generateSampleCursorAtLastSampleInDecodeOrderWithCompletionHandler
@@ -355,7 +362,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)generateSampleCursorAtLastSampleInDecodeOrderWithCompletionHandler:(void (^)(id<MESampleCursor> _Nullable sampleCursor, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:sampleCursorAtLastSampleInDecodeOrder());
+- (void)generateSampleCursorAtLastSampleInDecodeOrderWithCompletionHandler:(void (^)(id<MESampleCursor> _Nullable sampleCursor, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(sampleCursorAtLastSampleInDecodeOrder());
 
 @optional
 
@@ -370,7 +377,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)loadUneditedDurationWithCompletionHandler:(void (^)(CMTime uneditedDuration, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:uneditedDuration());
+- (void)loadUneditedDurationWithCompletionHandler:(void (^)(CMTime uneditedDuration, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(uneditedDuration());
 
 /*!
 	@method			loadTotalSampleDataLengthWithCompletionHandler
@@ -383,7 +390,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)loadTotalSampleDataLengthWithCompletionHandler:(void (^)(int64_t totalSampleDataLength, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:totalSampleDataLength());
+- (void)loadTotalSampleDataLengthWithCompletionHandler:(void (^)(int64_t totalSampleDataLength, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(totalSampleDataLength());
 
 /*!
 	@method			loadEstimatedDataRateWithCompletionHandler
@@ -395,7 +402,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)loadEstimatedDataRateWithCompletionHandler:(void (^)(Float32 estimatedDataRate, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:estimatedDataRate());
+- (void)loadEstimatedDataRateWithCompletionHandler:(void (^)(Float32 estimatedDataRate, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(estimatedDataRate());
 
 /*!
 	@method			loadMetadataWithCompletionHandler
@@ -408,7 +415,7 @@ API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos)
 		'error'
 			An NSError object that will contain error information if the method fails, otherwise nil.
 */
-- (void)loadMetadataWithCompletionHandler:(void (^)(NSArray< AVMetadataItem * > * _Nullable metadata, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(getter:metadata());
+- (void)loadMetadataWithCompletionHandler:(void (^)(NSArray< AVMetadataItem * > * _Nullable metadata, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(metadata());
 
 @end
 

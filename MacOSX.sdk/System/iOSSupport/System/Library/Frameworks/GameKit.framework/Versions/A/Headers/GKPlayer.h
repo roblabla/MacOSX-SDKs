@@ -49,12 +49,15 @@ typedef NS_ENUM(NSInteger, GKPhotoSize) {
     GKPhotoSizeNormal,
 } API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0));
 
-// Asynchronously load the player's photo. Error will be nil on success.
-// Possible reasons for error:
-// 1. Communications failure
 #if TARGET_OS_IPHONE
+/// Asynchronously load the player's photo. Error will be nil on success.
+/// Possible reasons for error:
+/// 1. Communications failure
 - (void)loadPhotoForSize:(GKPhotoSize)size withCompletionHandler:(void(^__nullable)(UIImage * __nullable photo, NSError * __nullable error))completionHandler API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 #else
+/// Asynchronously load the player's photo. Error will be nil on success.
+/// Possible reasons for error:
+/// 1. Communications failure
 - (void)loadPhotoForSize:(GKPhotoSize)size withCompletionHandler:(void(^__nullable)(NSImage * __nullable photo, NSError * __nullable error))completionHandler API_AVAILABLE(ios(5.0), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0));
 #endif
 

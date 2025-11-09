@@ -13,11 +13,11 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _NSGetNextSearchPathEnumeration, _NSStartSearchPathEnumeration, 
                        _NSStartSearchPathEnumerationPrivate, ___user_local_dirname, 
-                       ___user_relative_dirname, __append_relative_path_component, 
-                       __dirhelper, __dirhelper_relative, __get_user_dir_suffix, 
-                       __libcoreservices_fork_child, __set_user_dir_suffix, _sysdir_get_next_search_path_enumeration, 
-                       _sysdir_start_search_path_enumeration, _sysdir_start_search_path_enumeration_private ]
+                       ___user_relative_dirname, __dirhelper, __dirhelper_relative, 
+                       __get_user_dir_suffix, __libcoreservices_fork_child, __set_user_dir_suffix, 
+                       _sysdir_get_next_search_path_enumeration, _sysdir_start_search_path_enumeration, 
+                       _sysdir_start_search_path_enumeration_private ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ ___user_relative_dirname_with_hints, __dirhelper_relative_with_hints, 
-                       __idle_exit ]
+                       __dirhelper_remove_test, __dirhelper_test, __idle_exit ]
 ...

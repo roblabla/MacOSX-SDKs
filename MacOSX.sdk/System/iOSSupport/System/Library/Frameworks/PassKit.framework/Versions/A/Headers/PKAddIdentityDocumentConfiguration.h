@@ -11,6 +11,12 @@
 #import <PassKit/PKAddSecureElementPassConfiguration.h>
 
 
+typedef NS_ENUM(NSInteger, PKAddIdentityDocumentType) {
+    PKAddIdentityDocumentTypeIDCard NS_SWIFT_NAME(idCard),
+    PKAddIdentityDocumentTypeMDL NS_SWIFT_NAME(mDL),
+    PKAddIdentityDocumentTypePhotoID
+}; API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos);
+
 API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(watchos, tvos)
 @interface PKIdentityDocumentMetadata: NSObject
 
@@ -30,6 +36,35 @@ API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(watchos, tvos)
 /// serverEnvironmentIdentifier: Identifier referencing the target server environment Apple Pay servers should reach out to to provision this pass.
 /// If not present, the default Apply Pay server environment will be used and an empty string will be returned.
 @property (nonatomic, strong, nonnull) NSString *serverEnvironmentIdentifier;
+///  issuingCountryCode: identifies the issuing country of the identity document
+@property (nonatomic, strong, readonly, nonnull) NSString *issuingCountryCode API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos);
+///identityDocumentType: identifies the type of the identity document
+@property(nonatomic, readonly) PKAddIdentityDocumentType documentType API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos);
+
+@end
+
+API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos)
+@interface PKAddIdentityDocumentMetadata: PKIdentityDocumentMetadata
+
+/// Initialize with parameters configured by issuer's server to indicate the specific product instance to provision.
+/// - Properties:
+///   - provisioningCredentialIdentifier: Identifies this user's instance for provisioning.
+///   - sharingInstanceIdentifier: A short lived token to prevent replay-ability.
+///   - cardTemplateIdentifier: An identifier for a legacy product on our Apple Pay servers.
+///   - preview: Object containing information to represent the pass to provision in our UI.
+///   - issuingCountryCode:  identifies the issuing country of the identity document
+///   - identityDocumentType: identifies the type of the identity document
+///   - preview: Object containing information to represent the pass to provision in our UI.
+- (nonnull instancetype)initWithProvisioningCredentialIdentifier:(NSString * _Nonnull)credentialIdentifier
+                                       sharingInstanceIdentifier:(NSString * _Nonnull)sharingInstanceIdentifier
+                                          cardTemplateIdentifier:(NSString * _Nonnull)templateIdentifier
+                                              issuingCountryCode:(NSString * _Nonnull)issuingCountryCode
+                                                    documentType:(PKAddIdentityDocumentType)documentType
+                                                         preview:(PKAddPassMetadataPreview * _Nonnull)preview;
+// Display Properties
+
+/// preview: A preview object containing the necessary information to represent the pass during provisioning.
+@property (nonatomic, strong, readonly, nonnull) PKAddPassMetadataPreview *preview;
 
 @end
 
@@ -56,7 +91,7 @@ API_AVAILABLE(ios(18.0)) API_UNAVAILABLE(watchos, tvos)
 ///   - preview: Object containing information to represent the pass to provision in our UI.
 - (nonnull instancetype)initWithProvisioningCredentialIdentifier:(NSString * _Nonnull)credentialIdentifier
                                        sharingInstanceIdentifier:(NSString * _Nonnull)sharingInstanceIdentifier
-                                     cardConfigurationIdentifier:(NSString * _Nonnull)templateIdentifier
+                                     cardConfigurationIdentifier:(NSString * _Nonnull)cardConfigurationIdentifier
                                                          preview:(PKAddPassMetadataPreview * _Nonnull)preview;
 
 // Configuration Properties

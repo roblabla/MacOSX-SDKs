@@ -370,6 +370,38 @@ completionHandler:(void(^)(size_t actuallyWritten,
 
 @end
 
+/// A resource representing an abstract URL
+///
+FSKIT_API_AVAILABILITY_V2
+@interface FSGenericURLResource : FSResource
+
+@property (readonly, copy)              NSURL *    url;
+
+- (instancetype)initWithURL:(NSURL *)url;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@end
+
+/// A resource representing a path
+///
+/// Represents a file path (possibly security scoped URL).
+///
+FSKIT_API_AVAILABILITY_V2
+@interface FSPathURLResource : FSResource
+
+@property (readonly, copy)              NSURL *    url;
+
+- (instancetype)initWithURL:(NSURL *)URL
+                   writable:(BOOL)writable;
+
+- (instancetype)init NS_UNAVAILABLE;
+
+@property (readonly, getter=isWritable)
+                                BOOL            writable;
+
+@end
+
 /// Maintenance operations for a file system's resources.
 ///
 /// This protocol includes operations to check and format a resource for an ``FSUnaryFileSystem``.

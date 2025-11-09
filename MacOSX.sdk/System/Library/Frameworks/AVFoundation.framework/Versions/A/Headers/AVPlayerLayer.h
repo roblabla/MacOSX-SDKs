@@ -108,8 +108,13 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(w
  			
  					Do not write to the returned CVPixelBuffer's attachments or pixel data.
  */
-- (nullable CVPixelBufferRef)copyDisplayedPixelBuffer CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos);
-
+- (nullable CVPixelBufferRef)copyDisplayedPixelBuffer CF_RETURNS_RETAINED 
+#if defined(__swift__)
+API_DEPRECATED_WITH_REPLACEMENT("displayedReadOnlyPixelBuffer", macos(13.0, API_TO_BE_DEPRECATED), ios(16.0, API_TO_BE_DEPRECATED), tvos(16.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+#else
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 @end
 
 NS_ASSUME_NONNULL_END

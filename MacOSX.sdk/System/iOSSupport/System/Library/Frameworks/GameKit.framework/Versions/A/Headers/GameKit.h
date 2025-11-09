@@ -39,6 +39,7 @@
 #import <GameKit/GKAchievementViewController.h>
 #import <GameKit/GKBasePlayer.h>
 #import <GameKit/GKChallenge.h>
+#import <GameKit/GKChallengeDefinition.h>
 #import <GameKit/GKChallengeEventHandler.h>
 #import <GameKit/GKChallengesViewController.h>
 #import <GameKit/GKCloudPlayer.h>
@@ -47,6 +48,11 @@
 #import <GameKit/GKError.h>
 #import <GameKit/GKEventListener.h>
 #import <GameKit/GKFriendRequestComposeViewController.h>
+#import <GameKit/GKGameActivity.h>
+#import <GameKit/GKGameActivityDefinition.h>
+#import <GameKit/GKGameActivityListener.h>
+#import <GameKit/GKGameActivityPlayStyle.h>
+#import <GameKit/GKGameActivityState.h>
 #import <GameKit/GKGameCenterViewController.h>
 #import <GameKit/GKGameSession.h>
 #import <GameKit/GKGameSessionError.h>

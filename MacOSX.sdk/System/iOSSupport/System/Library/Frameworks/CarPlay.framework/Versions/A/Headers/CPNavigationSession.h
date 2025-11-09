@@ -7,6 +7,7 @@
 
 #import <CarPlay/CPManeuver.h>
 #import <CarPlay/CPRouteInformation.h>
+#import <CarPlay/CPTemplate.h>
 #import <CarPlay/CPTravelEstimates.h>
 #import <CarPlay/CPTrip.h>
 #import <Foundation/Foundation.h>
@@ -26,6 +27,7 @@ typedef NS_ENUM(NSUInteger, CPTripPauseReason) {
  when calling startNavigationSessionForTrip: on @c CYMapTemplate
  */
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPNavigationSession : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

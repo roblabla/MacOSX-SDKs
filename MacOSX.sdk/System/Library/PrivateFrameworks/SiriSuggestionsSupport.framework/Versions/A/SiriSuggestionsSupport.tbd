@@ -81,6 +81,7 @@ exports:
                        '_$s22SiriSuggestionsSupport08StatefulB6ClientC11DefaultKeysO15salientEntitiesyA2EmFWC', 
                        '_$s22SiriSuggestionsSupport08StatefulB6ClientC11DefaultKeysO16dialogIdentifieryA2EmFWC', 
                        '_$s22SiriSuggestionsSupport08StatefulB6ClientC11DefaultKeysO16intentPropertiesyA2EmFWC', 
+                       '_$s22SiriSuggestionsSupport08StatefulB6ClientC11DefaultKeysO16intentsToSuggestyA2EmFWC', 
                        '_$s22SiriSuggestionsSupport08StatefulB6ClientC11DefaultKeysO19catGlobalPropertiesyA2EmFWC', 
                        '_$s22SiriSuggestionsSupport08StatefulB6ClientC11DefaultKeysO5owneryA2EmFWC', 
                        '_$s22SiriSuggestionsSupport08StatefulB6ClientC11DefaultKeysO8rawValueAESgSS_tcfC', 

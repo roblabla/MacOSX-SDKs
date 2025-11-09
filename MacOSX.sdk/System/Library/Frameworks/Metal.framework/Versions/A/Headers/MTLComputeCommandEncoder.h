@@ -29,6 +29,11 @@ typedef struct {
 } MTLDispatchThreadgroupsIndirectArguments;
 
 typedef struct {
+    uint32_t threadsPerGrid[3];
+    uint32_t threadsPerThreadgroup[3];
+} MTLDispatchThreadsIndirectArguments;
+
+typedef struct {
 	uint32_t  stageInOrigin[3];
 	uint32_t  stageInSize[3];
 } MTLStageInRegionIndirectArguments API_AVAILABLE(macos(10.14), ios(12.0));
@@ -124,32 +129,32 @@ API_AVAILABLE(macos(14.0), ios(17.0));
  * @method setVisibleFunctionTable:atBufferIndex:
  * @brief Set a visible function table at the given buffer index
  */
-- (void)setVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)visibleFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setVisibleFunctionTable:(nullable id <MTLVisibleFunctionTable>)visibleFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  * @method setVisibleFunctionTables:withBufferRange:
  * @brief Set visible function tables at the given buffer index range
  */
-- (void)setVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])visibleFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setVisibleFunctionTables:(const id <MTLVisibleFunctionTable> __nullable [__nonnull])visibleFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  * @method setIntersectionFunctionTable:atBufferIndex:
  * @brief Set a visible function table at the given buffer index
  */
-- (void)setIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setIntersectionFunctionTable:(nullable id <MTLIntersectionFunctionTable>)intersectionFunctionTable atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  * @method setIntersectionFunctionTables:withBufferRange:
  * @brief Set visible function tables at the given buffer index range
  */
-- (void)setIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setIntersectionFunctionTables:(const id <MTLIntersectionFunctionTable> __nullable [__nonnull])intersectionFunctionTables withBufferRange:(NSRange)range API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 
 /*!
  @method setAccelerationStructure:atBufferIndex:
  @brief Set a global raytracing acceleration structure for all compute kernels at the given buffer bind point index.
  */
-- (void)setAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(11.0), ios(14.0));
+- (void)setAccelerationStructure:(nullable id <MTLAccelerationStructure>)accelerationStructure atBufferIndex:(NSUInteger)bufferIndex API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 /*!
  @method setTexture:atIndex:

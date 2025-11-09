@@ -44,6 +44,7 @@ exports:
                        '_$s12CoreAudioKit21AUGenericViewInternalCMa', '_$s12CoreAudioKit21AUGenericViewInternalCMn', 
                        '_$s12CoreAudioKit21AUGenericViewInternalCMo', '_$s12CoreAudioKit21AUGenericViewInternalCMu', 
                        '_$s12CoreAudioKit21AUGenericViewInternalCN', '_$s12CoreAudioKit21AUGenericViewInternalCfD', 
+                       _CAUI_fetchRemoteAUv2ViewController, _CAUI_fetchRemoteAUv3ViewController, 
                        _kEQViewGraphSizeChangedNotification, _kEQViewParameterChangedNotification, 
                        _kFilterControlSelectedNotification, _kGraphViewBeginGestureNotification, 
                        _kGraphViewEndGestureNotification, _kTooltipTextBeganEditingNotification, 

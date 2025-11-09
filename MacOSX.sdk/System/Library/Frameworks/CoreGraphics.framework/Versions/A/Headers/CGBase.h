@@ -368,5 +368,12 @@ __attribute__((swift_name("IOSurfaceRef")))
 # define CG_BOXABLE
 #endif
 
+#define CG_ENUM_SOFT_DEPRECATED_WITH_REPLACEMENT(repl) __attribute__(( \
+availability(macos,deprecated=API_TO_BE_DEPRECATED,replacement=#repl), \
+availability(ios,deprecated=API_TO_BE_DEPRECATED,replacement=#repl))) = repl
+
+#define CG_SOFT_DEPRECATED_WITH_REPLACEMENT(repl) __attribute__(( \
+availability(macos,deprecated=API_TO_BE_DEPRECATED,replacement=#repl), \
+availability(ios,deprecated=API_TO_BE_DEPRECATED,replacement=#repl)))
 
 #endif /* CGBASE_H_ */

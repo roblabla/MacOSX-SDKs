@@ -44,7 +44,6 @@ enum {
 {
 @private
     id _delegate;
-    NSString *_exceptionLoggingConnectionName;
     struct {
         unsigned int exceptionHandlingMask:10;
         unsigned int reserved:10;

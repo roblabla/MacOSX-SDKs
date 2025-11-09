@@ -8,7 +8,7 @@
 #import <Foundation/NSArray.h>
 
 
-#ifndef __swift__
+#if (!defined(__swift__) && (__has_include(<CloudKit/CKDatabase.h>)))
 #import <CloudKit/CKDatabase.h>
 #endif
 
@@ -32,7 +32,7 @@ API_AVAILABLE(macosx(10.15),ios(13.0),tvos(13.0),watchos(6.0))
  Default Value: CKDatabaseScopePrivate
  Currently only CKDatabaseScopePrivate and CKDatabaseScopePublic are supported.
  */
-#ifndef __swift__
+#if (!defined(__swift__) && (__has_include(<CloudKit/CKDatabase.h>)))
 @property(nonatomic) CKDatabaseScope databaseScope API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0));
 #else
 @property(nonatomic) NSInteger databaseScope API_AVAILABLE(macosx(11.0),ios(14.0),tvos(14.0),watchos(7.0)) NS_REFINED_FOR_SWIFT;

@@ -133,7 +133,7 @@
 .\" ========================================================================
 .\"
 .IX Title "PERLAPI 1"
-.TH PERLAPI 1 "2025-04-19" "perl v5.34.1" "Perl Programmers Reference Guide"
+.TH PERLAPI 1 "2025-08-03" "perl v5.34.1" "Perl Programmers Reference Guide"
 .\" For nroff, turn off justification.  Always turn off hyphenation; it makes
 .\" way too many mistakes in technical documents.
 .if n .ad l
@@ -5879,6 +5879,12 @@ the \f(CW\*(C`fcntl()\*(C'\fR function exists.
 This symbol, if defined, indicates that the \f(CW\*(C`fdclose\*(C'\fR routine is
 available to free a \f(CW\*(C`FILE\*(C'\fR structure without closing the underlying
 file descriptor.  This function appeared in \f(CW\*(C`FreeBSD\*(C'\fR 10.2.
+.ie n .IP """HAS_FDOPENDIR""" 4
+.el .IP "\f(CWHAS_FDOPENDIR\fR" 4
+.IX Xref "HAS_FDOPENDIR"
+.IX Item "HAS_FDOPENDIR"
+This symbol, if defined, indicates that the fdopen routine is
+available to open a directory descriptor.
 .ie n .IP """HAS_FPATHCONF""" 4
 .el .IP "\f(CWHAS_FPATHCONF\fR" 4
 .IX Xref "HAS_FPATHCONF"

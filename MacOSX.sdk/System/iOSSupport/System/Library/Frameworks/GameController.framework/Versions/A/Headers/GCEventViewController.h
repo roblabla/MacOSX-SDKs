@@ -1,13 +1,15 @@
-//
+//  
 //  GCEventViewController.h
 //  GameController
 //
-//  Copyright © 2018 Apple Inc. All rights reserved.
+//  Copyright © 2024 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
 #import <UIKit/UIViewController.h>
+
+NS_ASSUME_NONNULL_BEGIN
 
 /**
  A view controller subclass that allows fine grained control of the user interface system's handling
@@ -35,9 +37,10 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
  
  Note that unlike UIView.userInteractionEnabled this only controls the flow of game controller events.
  
- @see GCController
  @see UIView.userInteractionEnabled
  */
 @property (nonatomic) BOOL controllerUserInteractionEnabled;
 
 @end
+
+NS_ASSUME_NONNULL_END

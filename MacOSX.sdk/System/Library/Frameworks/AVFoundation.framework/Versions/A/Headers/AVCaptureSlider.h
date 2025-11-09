@@ -112,7 +112,6 @@ API_AVAILABLE(macos(15.0), ios(18.0), macCatalyst(18.0), tvos(18.0)) API_UNAVAIL
  */
 @property(nonatomic, copy, nullable) NSString *localizedValueFormat;
 
-
 /*!
  @property prominentValues
  @abstract

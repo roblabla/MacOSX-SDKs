@@ -253,6 +253,8 @@ IMAGEIO_EXTERN const CFStringRef kCGImageSourceGenerateImageSpecificLumaScaling 
  */
 IMAGEIO_EXTERN const CFStringRef kCGImageSourceDecodeRequestOptions     IMAGEIO_AVAILABLE_STARTING(14.0, 17.0, 17.0, 10.0);
 
+// HDR statistics
+IMAGEIO_EXTERN const CFStringRef kCGComputeHDRStats                     IMAGEIO_AVAILABLE_STARTING(16.0, 19.0, 19.0, 12.0);
 
 /* To limit the image formats that ImageIO can decode, you can call 'CGImageSourceSetAllowableTypes' with
  * an array of type identifiers.

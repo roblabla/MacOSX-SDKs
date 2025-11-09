@@ -115,6 +115,14 @@ API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE
 */
 - (void)resetUpcomingSampleBufferPresentationTimeExpectations NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos);
 
+/*!
+	@property		recommendedPixelBufferAttributes
+	@abstract		Recommended pixel buffer attributes for optimal performance when using CMSampleBuffers containing CVPixelBuffers.
+	@discussion		The returned dictionary does not contain all of the attributes needed for creating pixel buffers.
+					Use ``CVPixelBufferCreateResolvedAttributesDictionary()`` to reconcile these attributes with the pixel buffer creation attributes.
+*/
+@property (readonly, nonnull) NSDictionary<NSString*, NS_SWIFT_SENDABLE id> *recommendedPixelBufferAttributes NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0)) API_UNAVAILABLE(watchos);
+
 @end
 
 API_AVAILABLE(macos(14.4), ios(17.4), tvos(17.4), visionos(1.1)) API_UNAVAILABLE(watchos)

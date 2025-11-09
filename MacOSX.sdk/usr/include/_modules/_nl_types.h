@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2025 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -21,13 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _DARWIN_POSIX_NL_TYPES_
-#define _DARWIN_POSIX_NL_TYPES_
+#ifndef __NL_TYPES_H_
+#define __NL_TYPES_H_
 
-#if !__building_module(Darwin)
+#if !__building_module(nl_types)
 #error "Do not include this header directly, include <nl_types.h> instead"
 #endif
 
 #include <nl_types.h>
 
-#endif /* _DARWIN_POSIX_NL_TYPES_ */
+#endif /* __NL_TYPES_H_ */

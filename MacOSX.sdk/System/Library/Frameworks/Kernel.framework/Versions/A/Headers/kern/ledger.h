@@ -39,8 +39,9 @@
 #define LEDGER_ENTRY_INFO       1
 #define LEDGER_TEMPLATE_INFO    2
 #define LEDGER_LIMIT            3
+#define LEDGER_ENTRY_INFO_V2    4
 /* LEDGER_MAX_CMD always tracks the index of the last ledger command. */
-#define LEDGER_MAX_CMD          LEDGER_LIMIT
+#define LEDGER_MAX_CMD          LEDGER_ENTRY_INFO_V2
 
 #define LEDGER_NAME_MAX 32
 
@@ -64,6 +65,17 @@ struct ledger_entry_info {
 	uint64_t        lei_limit;
 	uint64_t        lei_refill_period;      /* In nanoseconds */
 	uint64_t        lei_last_refill;        /* Time since last refill */
+};
+
+struct ledger_entry_info_v2 {
+	int64_t         lei_balance;
+	int64_t         lei_credit;
+	int64_t         lei_debit;
+	uint64_t        lei_limit;
+	uint64_t        lei_refill_period;      /* In nanoseconds */
+	uint64_t        lei_last_refill;        /* Time since last refill */
+	int64_t         lei_lifetime_max;       /* for phys_footprint/neural_nofootprint_lifetime_max */
+	uint64_t        lei_reserved[4];
 };
 
 struct ledger_limit_args {

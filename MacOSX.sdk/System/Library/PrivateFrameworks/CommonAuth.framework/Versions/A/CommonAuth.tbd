@@ -6,11 +6,11 @@ install-name:    '/System/Library/PrivateFrameworks/CommonAuth.framework/Version
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ ___crashreporter_info__, __heim_scram_pairs_free, __heim_scram_parse, 
-                       __heim_scram_unparse, _heim_apop_create, _heim_apop_verify, 
-                       _heim_cram_md5_create, _heim_cram_md5_export, _heim_cram_md5_free, 
-                       _heim_cram_md5_import, _heim_cram_md5_verify, _heim_cram_md5_verify_ctx, 
-                       _heim_digest_create, _heim_digest_create_response, _heim_digest_generate_challenge, 
+    symbols:         [ __heim_scram_pairs_free, __heim_scram_parse, __heim_scram_unparse, 
+                       _heim_apop_create, _heim_apop_verify, _heim_cram_md5_create, 
+                       _heim_cram_md5_export, _heim_cram_md5_free, _heim_cram_md5_import, 
+                       _heim_cram_md5_verify, _heim_cram_md5_verify_ctx, _heim_digest_create, 
+                       _heim_digest_create_response, _heim_digest_generate_challenge, 
                        _heim_digest_get_key, _heim_digest_get_session_key, _heim_digest_parse_challenge, 
                        _heim_digest_parse_response, _heim_digest_release, _heim_digest_server_response, 
                        _heim_digest_set_key, _heim_digest_userhash, _heim_digest_verify, 

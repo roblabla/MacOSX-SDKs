@@ -6,8 +6,9 @@ install-name:    '/System/Library/PrivateFrameworks/AudioServerApplication.frame
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    objc-classes:    [ ASAAudioDevice, ASAAudioFormat, ASABooleanControl, ASABox, 
-                       ASAClockDevice, ASAControl, ASACoreAudio, ASALevelControl, 
-                       ASAObject, ASAPlaythrough, ASAPlugin, ASASelectorControl, 
-                       ASASliderControl, ASAStereoPanControl, ASAStream ]
+    objc-classes:    [ ASAAggregateDevice, ASAAudioDevice, ASAAudioFormat, ASABooleanControl, 
+                       ASABox, ASAClockDevice, ASAControl, ASACoreAudio, ASALevelControl, 
+                       ASAObject, ASAPlaythrough, ASAPlugin, ASASampleRateRange, 
+                       ASASelectorControl, ASASliderControl, ASAStereoPanControl, 
+                       ASAStream ]
 ...

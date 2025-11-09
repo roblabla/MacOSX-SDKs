@@ -8,6 +8,7 @@ framework module CoreNFC [system] {
     header "NFCISO15693Tag.h"
     header "NFCISO15693ReaderSession.h"
     header "NFCTagReaderSession.h"
+    header "NFCPaymentTagReaderSession.h"
     header "NFCVASReaderSession.h"
     header "NFCNDEFPayload.h"
     header "NFCNDEFMessage.h"

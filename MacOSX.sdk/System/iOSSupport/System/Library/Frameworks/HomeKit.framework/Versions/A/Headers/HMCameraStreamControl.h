@@ -28,17 +28,17 @@ API_UNAVAILABLE(macos)
 /*!
  * @brief Delegate that receives updates on the camera stream changes.
  */
-@property (weak, nonatomic) id<HMCameraStreamControlDelegate> delegate;
+@property (nonatomic, weak) id<HMCameraStreamControlDelegate> delegate;
 
 /*!
  * @brief Represents the current streaming state.
  */
-@property (readonly, assign, nonatomic) HMCameraStreamState streamState;
+@property (nonatomic, readonly, assign) HMCameraStreamState streamState;
 
 /*!
  * @brief Represents the current camera stream.
  */
-@property (readonly, strong, nonatomic, nullable) HMCameraStream *cameraStream;
+@property (nullable, nonatomic, readonly, strong) HMCameraStream *cameraStream;
 
 /*!
  * @brief Starts the camera stream. 'currentCameraStream' will be updated upon 

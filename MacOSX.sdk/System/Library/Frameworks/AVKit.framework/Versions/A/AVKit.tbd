@@ -2,6 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/AVKit.framework/Versions/A/AVKit'
+swift-abi-version: 7
 reexported-libraries:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     libraries:       [ '/System/Library/PrivateFrameworks/AVKitCore.framework/Versions/A/AVKitCore' ]
@@ -17,9 +18,11 @@ exports:
                        _AVStringFromMargin ]
     objc-classes:    [ AVAudioLevelIndicatorView, AVAudioView, AVCaptureView, AVControlsContainerViewController, 
                        AVControlsPresentationContext, AVControlsViewController, AVDesktopGestureController, 
-                       AVOutputDeviceMenuController, AVPictureInPictureController, 
-                       AVPictureInPictureControllerContentSource, AVPlayerControlsViewController, 
-                       AVPlayerView, AVRoutePickerView, AVShareController, AVStatusOverlayView, 
+                       AVMediaTimelineControl, AVMediaTimelineControlConfiguration, 
+                       AVMediaTimelineControlLabelsConfiguration, AVOutputDeviceMenuController, 
+                       AVPictureInPictureController, AVPictureInPictureControllerContentSource, 
+                       AVPlayerControlsViewController, AVPlayerView, AVRoutePickerView, 
+                       AVShareController, AVStatusOverlayView, AVTimeRangeMark, AVTimeRangeMarkUIProxy, 
                        AVTouchBarCaptureInputSourceItem, AVTouchBarPlaybackControlsProvider, 
                        AVTouchBarRecordingControlsProvider, AVTouchBarScrubber, AVTrimControlsViewController, 
                        AVTrimView, AVVolumeControlSlider, AVVolumeControlView ]
@@ -53,7 +56,7 @@ exports:
                        _AVVolumeGlyphStateNameMuted, _AVVolumeGlyphStateNameVolumeZero, 
                        _AVWaveformDefaultNotificationInterval, _AVWaveformDefaultResolution, 
                        _AVWaveformFinishedLoadingNotification, _AVWaveformSamplesDidBecomeAvailableNotification, 
-                       __AVDebugLog, __AVLog, __AVMethodProem ]
+                       __AVDebugLog, __AVLog, __AVMethodProem, __isNetworkAvailable ]
     objc-classes:    [ AVAssetIdentifier, AVChapter, AVCustomMediaSelectionOption, 
                        AVKeyValueChange, AVKitGlobalSettings, AVMicaPackage, AVMutableValueTiming, 
                        AVObservationController, AVPhotosensitiveTimeRange, AVPlaybackRate, 

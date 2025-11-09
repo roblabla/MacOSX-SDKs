@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2015-2016 Apple Inc. All rights reserved.
+	Copyright 2015-2025 Apple Inc. All rights reserved.
 
  */
 
@@ -116,7 +116,7 @@ NS_SWIFT_SENDABLE
 	@discussion
 		This method will be invoked whenever new AVDateRangeMetadataGroups are added to metadataGroups or whenever any AVDateRangeMetadataGroups in metadataGroups have been modified since previous invocations. The initial invocation will have indexesOfNewGroup referring to every index in metadataGroups. Subsequent invocations may not contain all previously collected metadata groups if they no longer refer to a region in the AVPlayerItem's seekableTimeRanges.
 */
-- (void)metadataCollector:(AVPlayerItemMetadataCollector *)metadataCollector didCollectDateRangeMetadataGroups:(NSArray<AVDateRangeMetadataGroup *> *)metadataGroups indexesOfNewGroups:(NSIndexSet *)indexesOfNewGroups indexesOfModifiedGroups:(NSIndexSet *)indexesOfModifiedGroups;
+- (void)metadataCollector:(AVPlayerItemMetadataCollector *)metadataCollector didCollectDateRangeMetadataGroups:(NSArray<AVDateRangeMetadataGroup *> *) NS_SWIFT_SENDING metadataGroups indexesOfNewGroups:(NSIndexSet *)indexesOfNewGroups indexesOfModifiedGroups:(NSIndexSet *)indexesOfModifiedGroups;
 
 @end
 

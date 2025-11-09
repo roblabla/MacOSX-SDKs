@@ -37,13 +37,13 @@ NS_SWIFT_SENDABLE
  */
 @interface CKDatabase (ConvenienceMethods)
 
-#pragma mark Record Convenience Methods
+#pragma mark - Record Convenience Methods
 /*! @c CKFetchRecordsOperation and @c CKModifyRecordsOperation are the more configurable, @c CKOperation -based alternatives to these methods */
 - (void)fetchRecordWithID:(CKRecordID *)recordID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecord * _Nullable record, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(record(for:));
 - (void)saveRecord:(CKRecord *)record completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecord * _Nullable record, NSError * _Nullable error))completionHandler;
 - (void)deleteRecordWithID:(CKRecordID *)recordID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordID * _Nullable recordID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(deleteRecord(withID:));
 
-#pragma mark Query Convenience Method
+#pragma mark - Query Convenience Method
 /*! @discussion @c CKQueryOperation is the more configurable, @c CKOperation -based alternative to this method
  *  Queries can potentially return a large number of records, and the server will return those records in batches. This convenience API will only fetch the first batch of results (equivalent to using @c CKQueryOperationMaximumResults).
  *  If you would like to fetch all results, use @c CKQueryOperation and its @c CKQueryCursor instead.
@@ -53,14 +53,14 @@ NS_SWIFT_SENDABLE
 - (void)performQuery:(CKQuery *)query inZoneWithID:(nullable CKRecordZoneID *)zoneID completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKRecord *> * _Nullable results, NSError * _Nullable error))completionHandler
 CK_SWIFT_DEPRECATED("renamed to fetch(withQuery:inZoneWith:desiredKeys:resultsLimit:completionHandler:)", macos(10.10, 12.0), ios(8.0, 15.0), tvos(9.0, 15.0), watchos(3.0, 8.0));
 
-#pragma mark Record Zone Convenience Methods
+#pragma mark - Record Zone Convenience Methods
 /*! @c CKFetchRecordZonesOperation and @c CKModifyRecordZonesOperation are the more configurable, @c CKOperation -based alternatives to these methods */
 - (void)fetchAllRecordZonesWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKRecordZone *> * _Nullable zones, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(allRecordZones());
 - (void)fetchRecordZoneWithID:(CKRecordZoneID *)zoneID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordZone * _Nullable zone, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(recordZone(for:));
 - (void)saveRecordZone:(CKRecordZone *)zone completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordZone * _Nullable zone, NSError * _Nullable error))completionHandler;
 - (void)deleteRecordZoneWithID:(CKRecordZoneID *)zoneID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKRecordZoneID * _Nullable zoneID, NSError * _Nullable error))completionHandler NS_SWIFT_ASYNC_NAME(deleteRecordZone(withID:));
 
-#pragma mark Subscription Convenience Methods
+#pragma mark - Subscription Convenience Methods
 /*! @c CKFetchSubscriptionsOperation and @c CKModifySubscriptionsOperation are the more configurable, @c CKOperation -based alternative to these methods */
 - (void)fetchSubscriptionWithID:(CKSubscriptionID)subscriptionID completionHandler:(void (NS_SWIFT_SENDABLE ^)(CKSubscription * _Nullable subscription, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_REFINED_FOR_SWIFT_ASYNC(2);
 - (void)fetchAllSubscriptionsWithCompletionHandler:(void (NS_SWIFT_SENDABLE ^)(NSArray<CKSubscription *> * _Nullable subscriptions, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(6.0)) NS_SWIFT_ASYNC_NAME(allSubscriptions());

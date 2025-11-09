@@ -8,11 +8,14 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _BGSystemTaskCustomCheckpointMax, _BGSystemTaskCustomCheckpointMin, 
                        _BGSystemTaskSchedulerErrorDomain, __BGSTAssetsRateLimitConfigurationName, 
-                       __BGSTPECRateLimitConfigurationName, _kBGSTKeyFeatureCode, 
-                       _kBGSTKeyInvolvedProcesses, _kBGSTKeyPaused, _kBGSTKeyTaskName ]
+                       __BGSTBirdRateLimitConfigurationName, __BGSTPECRateLimitConfigurationName, 
+                       _kBGSTKeyFeatureCode, _kBGSTKeyInvolvedProcesses, _kBGSTKeyPaused, 
+                       _kBGSTKeyTaskName ]
     objc-classes:    [ BGFastPassSystemTask, BGFastPassSystemTaskRequest, BGNonRepeatingSystemTask, 
                        BGNonRepeatingSystemTaskRequest, BGRepeatingSystemTask, BGRepeatingSystemTaskRequest, 
                        BGSystemTask, BGSystemTaskCheckpoints, BGSystemTaskCompletionDependency, 
+                       BGSystemTaskPerformanceMetadata, BGSystemTaskProgressMetrics, 
                        BGSystemTaskRequest, BGSystemTaskResult, BGSystemTaskResultDependency, 
-                       BGSystemTaskScheduler, BGSystemTaskStatus, BGSystemTaskWorkload ]
+                       BGSystemTaskScheduler, BGSystemTaskStatus, BGSystemTaskThroughputMetrics, 
+                       BGSystemTaskWorkload ]
 ...

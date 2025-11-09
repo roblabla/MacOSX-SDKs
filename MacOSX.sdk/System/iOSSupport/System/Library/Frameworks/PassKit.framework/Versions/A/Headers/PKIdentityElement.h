@@ -29,6 +29,24 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /// The address on record with the issuer.
 @property (class, nonatomic, readonly) PKIdentityElement *addressElement;
 
+/// The user's height on record with the issuer.
+@property (nonatomic, class, readonly) PKIdentityElement *heightElement API_AVAILABLE(ios(26.0));
+
+/// The user's weight on record with the issuer.
+@property (nonatomic, class, readonly) PKIdentityElement *weightElement API_AVAILABLE(ios(26.0));
+
+/// The user's eye color on record with the issuer.
+@property (nonatomic, class, readonly) PKIdentityElement *eyeColorElement API_AVAILABLE(ios(26.0));
+
+/// The user's hair color on record with the issuer.
+@property (nonatomic, class, readonly) PKIdentityElement *hairColorElement API_AVAILABLE(ios(26.0));
+
+/// The user's organ donor status on record with the issuer.
+@property (nonatomic, class, readonly) PKIdentityElement *organDonorStatusElement API_AVAILABLE(ios(26.0));
+
+/// The user's veteran status on record with the issuer.
+@property (nonatomic, class, readonly) PKIdentityElement *veteranStatusElement API_AVAILABLE(ios(26.0));
+
 /// The state or government that issued the identity document.
 @property (class, nonatomic, readonly) PKIdentityElement *issuingAuthorityElement;
 
@@ -45,7 +63,7 @@ API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /// This is also known as the document's "REAL ID status".
 @property (class, nonatomic, readonly) PKIdentityElement *documentDHSComplianceStatusElement API_AVAILABLE(ios(17.2));
 
-/// The doument's number, as defined by the document's issuing authority.
+/// The document's number, as defined by the document's issuing authority.
 @property (class, nonatomic, readonly) PKIdentityElement *documentNumberElement;
 
 /// The user's driving privileges.

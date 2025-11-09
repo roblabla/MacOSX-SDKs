@@ -35,7 +35,7 @@ NS_SWIFT_SENDABLE
  Tracking state for a given joint.
  
  @param jointIndex The index of the joint.
- @return True if the joint is tracked. False otherwise.
+ @return YES if the joint is tracked. NO otherwise.
  */
 - (BOOL)isJointTracked:(NSInteger)jointIndex;
 

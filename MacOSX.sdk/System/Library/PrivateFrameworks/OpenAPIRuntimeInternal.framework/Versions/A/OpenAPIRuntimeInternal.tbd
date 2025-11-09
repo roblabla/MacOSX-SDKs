@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/OpenAPIRuntimeInternal.framework/Versions/A/OpenAPIRuntimeInternal'
-current-version: 1.8
+current-version: 1.8.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -295,7 +295,9 @@ exports:
                        '_$s22OpenAPIRuntimeInternal14DateTranscoderP6encodeySS10Foundation0D0VKFTj', 
                        '_$s22OpenAPIRuntimeInternal14DateTranscoderP6encodeySS10Foundation0D0VKFTq', 
                        '_$s22OpenAPIRuntimeInternal14DateTranscoderPA2A07ISO8601dE0VRszrlE28iso8601WithFractionalSecondsAEvgZ', 
+                       '_$s22OpenAPIRuntimeInternal14DateTranscoderPA2A07ISO8601dE0VRszrlE28iso8601WithFractionalSecondsAEvpZMV', 
                        '_$s22OpenAPIRuntimeInternal14DateTranscoderPA2A07ISO8601dE0VRszrlE7iso8601AEvgZ', 
+                       '_$s22OpenAPIRuntimeInternal14DateTranscoderPA2A07ISO8601dE0VRszrlE7iso8601AEvpZMV', 
                        '_$s22OpenAPIRuntimeInternal14DateTranscoderTL', '_$s22OpenAPIRuntimeInternal14ParameterStyleO10deepObjectyA2CmFWC', 
                        '_$s22OpenAPIRuntimeInternal14ParameterStyleO2eeoiySbAC_ACtFZ', 
                        '_$s22OpenAPIRuntimeInternal14ParameterStyleO4formyA2CmFWC', 
@@ -546,7 +548,9 @@ exports:
                        '_$s22OpenAPIRuntimeInternal26MultipartBoundaryGeneratorP04makeE0SSyFTj', 
                        '_$s22OpenAPIRuntimeInternal26MultipartBoundaryGeneratorP04makeE0SSyFTq', 
                        '_$s22OpenAPIRuntimeInternal26MultipartBoundaryGeneratorPA2A06RandomdeF0VRszrlE6randomAEvgZ', 
+                       '_$s22OpenAPIRuntimeInternal26MultipartBoundaryGeneratorPA2A06RandomdeF0VRszrlE6randomAEvpZMV', 
                        '_$s22OpenAPIRuntimeInternal26MultipartBoundaryGeneratorPA2A08ConstantdeF0VRszrlE8constantAEvgZ', 
+                       '_$s22OpenAPIRuntimeInternal26MultipartBoundaryGeneratorPA2A08ConstantdeF0VRszrlE8constantAEvpZMV', 
                        '_$s22OpenAPIRuntimeInternal26MultipartBoundaryGeneratorTL', 
                        '_$s22OpenAPIRuntimeInternal27ServerSentEventWithJSONDataV2eeoiySbACyxG_AEtFZ', 
                        '_$s22OpenAPIRuntimeInternal27ServerSentEventWithJSONDataV2idSSSgvM', 

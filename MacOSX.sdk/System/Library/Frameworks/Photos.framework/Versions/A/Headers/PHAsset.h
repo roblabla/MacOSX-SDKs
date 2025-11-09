@@ -13,7 +13,7 @@
 #import <ImageIO/ImageIO.h>
 #import <CoreLocation/CLLocation.h>
 
-
+@class UTType;
 @class PHFetchOptions;
 @class PHAssetCollection;
 
@@ -32,11 +32,20 @@ NS_SWIFT_SENDABLE
 @property (nonatomic, assign, readonly) PHAssetMediaType mediaType;
 @property (nonatomic, assign, readonly) PHAssetMediaSubtype mediaSubtypes;
 
+/// The type of image or video data that is presented for the asset
+@property (nonatomic, copy, readonly) UTType *contentType API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
+
 @property (nonatomic, assign, readonly) NSUInteger pixelWidth;
 @property (nonatomic, assign, readonly) NSUInteger pixelHeight;
 
+/// The date and time of this asset's creation (can be updated by the user)
 @property (nonatomic, strong, readonly, nullable) NSDate *creationDate;
+
+/// The date and time of the last modification to this asset or one of its properties
 @property (nonatomic, strong, readonly, nullable) NSDate *modificationDate;
+
+/// The date and time this asset was added to the photo library (from the device that was used to add this asset)
+@property (nonatomic, strong, readonly) NSDate *addedDate API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), visionos(26.0));
 
 @property (nonatomic, strong, readonly, nullable) CLLocation *location;
 

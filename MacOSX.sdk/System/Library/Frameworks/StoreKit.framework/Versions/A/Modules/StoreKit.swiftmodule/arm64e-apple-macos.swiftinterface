@@ -1,8 +1,9 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macos15.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 814.5.3 -module-name StoreKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 815.0.49 -module-name StoreKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AppKit
+import BackgroundAssets
 import Combine
 import CoreFoundation
 import CryptoKit
@@ -18,6 +19,16 @@ import _StringProcessing
 import _SwiftConcurrencyShims
 import os.log
 import os
+@available(iOS 16.0, macCatalyst 16.0, tvOS 16.4, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+public enum ExternalLinkAccount : Swift.Sendable {
+  public static var canOpen: Swift.Bool {
+    get async
+  }
+  public static func open() async throws
+}
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 extension StoreKit.Product.SubscriptionInfo.RenewalInfo {
   @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
@@ -76,15 +87,21 @@ public struct PaymentMethodBinding : Swift.Sendable, Swift.Hashable, Swift.Ident
     case notEligible
     case invalidPinningID
     case failed
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var failureReason: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
+    #endif
     public static func == (a: StoreKit.PaymentMethodBinding.PaymentMethodBindingError, b: StoreKit.PaymentMethodBinding.PaymentMethodBindingError) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -154,6 +171,10 @@ public struct Transaction : Swift.Identifiable {
       public static let freeTrial: StoreKit.Transaction.Offer.PaymentMode
       public static let payAsYouGo: StoreKit.Transaction.Offer.PaymentMode
       public static let payUpFront: StoreKit.Transaction.Offer.PaymentMode
+      @backDeployed(before: iOS 19.0, macOS 16.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+      public static var oneTime: StoreKit.Transaction.Offer.PaymentMode {
+        get { Self(rawValue: "ONE_TIME") }
+      }
       @available(iOS 17.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, macOS 14.2, *)
       public typealias RawValue = Swift.String
     }
@@ -186,6 +207,7 @@ public struct Transaction : Swift.Identifiable {
   public let isUpgraded: Swift.Bool
   @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
   public let offer: StoreKit.Transaction.Offer?
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.type", message: "Use the offer property instead")
   @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.type", message: "Use the offer property instead")
   @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.type", message: "Use the offer property instead")
@@ -194,6 +216,8 @@ public struct Transaction : Swift.Identifiable {
   public var offerType: StoreKit.Transaction.OfferType? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.id", message: "Use the offer property instead")
   @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.id", message: "Use the offer property instead")
   @available(tvOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.id", message: "Use the offer property instead")
@@ -202,6 +226,8 @@ public struct Transaction : Swift.Identifiable {
   public var offerID: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @backDeployed(before: iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2)
   @available(iOS, introduced: 15.0, deprecated: 17.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
   @available(macOS, introduced: 12.0, deprecated: 14.2, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
@@ -222,6 +248,8 @@ public struct Transaction : Swift.Identifiable {
         }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @backDeployed(before: iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
   @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead")
   @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the offer property instead")
@@ -239,6 +267,7 @@ public struct Transaction : Swift.Identifiable {
         )
     }
   }
+  #endif
   public let revocationDate: Foundation.Date?
   public let revocationReason: StoreKit.Transaction.RevocationReason?
   public let productType: StoreKit.Product.ProductType
@@ -315,6 +344,7 @@ public struct Transaction : Swift.Identifiable {
   @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
   @usableFromInline
   internal let priceStorage: Foundation.Decimal?
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
   @backDeployed(before: iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1)
   public var price: Foundation.Decimal? {
@@ -334,9 +364,11 @@ public struct Transaction : Swift.Identifiable {
         }
     }
   }
+  #endif
   @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
   @usableFromInline
   internal let currencyStorage: Foundation.Locale.Currency?
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
   @backDeployed(before: iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1)
   public var currency: Foundation.Locale.Currency? {
@@ -353,6 +385,8 @@ public struct Transaction : Swift.Identifiable {
         }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0)
   @available(iOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead")
   @available(macOS, introduced: 12.0, deprecated: 13.0, renamed: "currency.identifier", message: "Use the currency property instead")
@@ -373,6 +407,7 @@ public struct Transaction : Swift.Identifiable {
         }
     }
   }
+  #endif
   @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
   @usableFromInline
   internal let appTransactionIDStorage: Swift.String
@@ -426,7 +461,9 @@ extension StoreKit.Transaction {
   public struct Transactions : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.VerificationResult<StoreKit.Transaction>
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> StoreKit.VerificationResult<StoreKit.Transaction>?
+      #endif
       @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = StoreKit.VerificationResult<StoreKit.Transaction>
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -442,13 +479,17 @@ extension StoreKit.Transaction {
   public static var currentEntitlements: StoreKit.Transaction.Transactions {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the currentEntitlements(for:) method instead.")
   @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the currentEntitlements(for:) method instead.")
   @available(tvOS, introduced: 15.0, deprecated: 18.4, message: "Use the currentEntitlements(for:) method instead.")
   @available(watchOS, introduced: 8.0, deprecated: 11.4, message: "Use the currentEntitlements(for:) method instead.")
   @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the currentEntitlements(for:) method instead.")
   public static func currentEntitlement(for productID: Swift.String) async -> StoreKit.VerificationResult<StoreKit.Transaction>?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func latest(for productID: Swift.String) async -> StoreKit.VerificationResult<StoreKit.Transaction>?
+  #endif
   public static var unfinished: StoreKit.Transaction.Transactions {
     get
   }
@@ -502,6 +543,7 @@ extension StoreKit.Transaction {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Transaction {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
   @backDeployed(before: iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0)
   public var subscriptionStatus: StoreKit.Product.SubscriptionInfo.Status? {
@@ -515,6 +557,7 @@ extension StoreKit.Transaction {
             .first { $0.transaction.unsafePayloadValue.originalID == originalID }
         }
   }
+  #endif
 }
 @available(iOS 15.0, macCatalyst 15.0, tvOS 17.0, macOS 12.0, watchOS 10.0, visionOS 1.0, *)
 extension StoreKit.Transaction.RefundRequestError : Swift.Sendable {
@@ -542,9 +585,11 @@ public enum AppStore {
   public static var canMakePayments: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var deviceVerificationID: Foundation.UUID? {
     get
   }
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.AppStore {
@@ -601,22 +646,80 @@ extension StoreKit.AppStore {
     get async throws
   }
 }
+@available(iOS 26.0, tvOS 26.0, *)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+public struct AppStoreMerchandisingKind : Swift.Sendable {
+  public enum PresentationResult : Swift.Sendable {
+    case dismissed
+    case purchaseCompleted(StoreKit.Product.PurchaseResult)
+  }
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  public static func subscriptionBundle(_ productIDs: [StoreKit.Product.ID]) -> StoreKit.AppStoreMerchandisingKind
+  public static func subscriptionBundle(_ groupID: Swift.String) -> StoreKit.AppStoreMerchandisingKind
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  public static func subscriptionBundle(_ products: [StoreKit.Product]) -> StoreKit.AppStoreMerchandisingKind
+}
+@available(iOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+public struct AppStoreOfferKind : Swift.Sendable {
+  public enum PresentationResult : Swift.Sendable {
+    case dismissed
+    case purchaseCompleted(StoreKit.Product.PurchaseResult)
+  }
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  public static func subscriptionBundle(_ productIDs: [StoreKit.Product.ID]) -> StoreKit.AppStoreOfferKind
+  public static func subscriptionBundle(_ groupID: Swift.String) -> StoreKit.AppStoreOfferKind
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  @available(macOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  public static func subscriptionBundle(_ products: [StoreKit.Product]) -> StoreKit.AppStoreOfferKind
+}
 @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 @available(visionOS, unavailable)
-public struct PurchaseIntent : Swift.Equatable, Swift.Identifiable, Swift.Sendable {
+public struct PurchaseIntent : Swift.Equatable, Swift.Sendable {
   public let product: StoreKit.Product
   @available(iOS 18.0, macOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
   public let offer: StoreKit.Product.SubscriptionOffer?
+  @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
+  @backDeployed(before: iOS 18.0, macOS 15.0, macCatalyst 18.0)
+  @available(tvOS, unavailable)
+  @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   public var id: StoreKit.Product.ID {
-    get
+    get { product.id }
   }
   public static func == (a: StoreKit.PurchaseIntent, b: StoreKit.PurchaseIntent) -> Swift.Bool
-  @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
+}
+@available(iOS 18.0, macOS 15.0, macCatalyst 18.0, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+@available(visionOS, unavailable)
+extension StoreKit.PurchaseIntent : Swift.Identifiable {
+  @available(iOS 18.0, macOS 15.0, macCatalyst 18.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
   @available(visionOS, unavailable)
@@ -630,7 +733,9 @@ extension StoreKit.PurchaseIntent {
   public struct PurchaseIntents : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.PurchaseIntent
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> StoreKit.PurchaseIntent.PurchaseIntents.Element?
+      #endif
       @available(iOS 16.4, macOS 14.4, macCatalyst 16.4, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -653,6 +758,96 @@ extension StoreKit.PurchaseIntent {
     get
   }
 }
+@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
+extension StoreKit.VerificationResult where SignedType == StoreKit.AppTransaction {
+  public var jwsRepresentation: Swift.String {
+    get
+  }
+  public var headerData: Foundation.Data {
+    get
+  }
+  public var payloadData: Foundation.Data {
+    get
+  }
+  public var signatureData: Foundation.Data {
+    get
+  }
+  public var signature: CryptoKit.P256.Signing.ECDSASignature {
+    get
+  }
+  public var signedData: Foundation.Data {
+    get
+  }
+  public var signedDate: Foundation.Date {
+    get
+  }
+  public var deviceVerification: Foundation.Data {
+    get
+  }
+  public var deviceVerificationNonce: Foundation.UUID {
+    get
+  }
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+extension StoreKit.VerificationResult where SignedType == StoreKit.Transaction {
+  public var jwsRepresentation: Swift.String {
+    get
+  }
+  public var headerData: Foundation.Data {
+    get
+  }
+  public var payloadData: Foundation.Data {
+    get
+  }
+  public var signatureData: Foundation.Data {
+    get
+  }
+  public var signature: CryptoKit.P256.Signing.ECDSASignature {
+    get
+  }
+  public var signedData: Foundation.Data {
+    get
+  }
+  public var signedDate: Foundation.Date {
+    get
+  }
+  public var deviceVerification: Foundation.Data {
+    get
+  }
+  public var deviceVerificationNonce: Foundation.UUID {
+    get
+  }
+}
+@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+extension StoreKit.VerificationResult where SignedType == StoreKit.Product.SubscriptionInfo.RenewalInfo {
+  public var jwsRepresentation: Swift.String {
+    get
+  }
+  public var headerData: Foundation.Data {
+    get
+  }
+  public var payloadData: Foundation.Data {
+    get
+  }
+  public var signatureData: Foundation.Data {
+    get
+  }
+  public var signature: CryptoKit.P256.Signing.ECDSASignature {
+    get
+  }
+  public var signedData: Foundation.Data {
+    get
+  }
+  public var signedDate: Foundation.Date {
+    get
+  }
+  public var deviceVerification: Foundation.Data {
+    get
+  }
+  public var deviceVerificationNonce: Foundation.UUID {
+    get
+  }
+}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public struct Storefront : Swift.Identifiable, Swift.Sendable {
   public let countryCode: Swift.String
@@ -660,17 +855,21 @@ public struct Storefront : Swift.Identifiable, Swift.Sendable {
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0, *)
   @usableFromInline
   internal let localeStorage: Foundation.Locale
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0, visionOS 1.0, *)
   @backDeployed(before: iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
   public var currency: Foundation.Locale.Currency? {
     get { localeStorage.currency }
   }
+  #endif
   @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0, *)
   @usableFromInline
   internal init(iso3ACountryCode countryCode: Swift.String, id: Swift.String, locale: Foundation.Locale)
+  #if compiler(>=5.3) && $NonescapableTypes
   public static var current: StoreKit.Storefront? {
     get async
   }
+  #endif
   @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
   public typealias ID = Swift.String
 }
@@ -679,7 +878,9 @@ extension StoreKit.Storefront {
   public struct Storefronts : _Concurrency.AsyncSequence, Swift.Sendable {
     public typealias Element = StoreKit.Storefront
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> StoreKit.Storefront?
+      #endif
       @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = StoreKit.Storefront
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -692,6 +893,10 @@ extension StoreKit.Storefront {
   public static var updates: StoreKit.Storefront.Storefronts {
     get
   }
+}
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, visionOS 26.0, *)
+@available(watchOS, unavailable)
+public protocol StoreDownloaderExtension : BackgroundAssets.ManagedDownloaderExtension {
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 public typealias SubscriptionPeriod = StoreKit.Product.SubscriptionPeriod
@@ -890,9 +1095,7 @@ extension StoreKit.Product.SubscriptionPeriod.Unit : Swift.Comparable {
 @available(iOS 15.4, macOS 14.4, macCatalyst 15.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
 public enum ExternalPurchase : Swift.Sendable {
   public enum NoticeResult : Swift.Hashable, Swift.Sendable {
-    @available(iOS, introduced: 15.4, obsoleted: 17.4, renamed: "continuedWithExternalPurchaseToken")
     @available(macOS, unavailable)
-    @available(macCatalyst, introduced: 15.4, obsoleted: 17.4, renamed: "continuedWithExternalPurchaseToken")
     @available(tvOS, unavailable)
     @available(watchOS, unavailable)
     @available(visionOS, unavailable)
@@ -960,7 +1163,11 @@ extension StoreKit.Product.SubscriptionOffer.OfferType : Swift.Sendable {
 extension StoreKit.Product.SubscriptionOffer.PaymentMode : Swift.Sendable {
 }
 extension StoreKit.Product.SubscriptionOffer {
-  @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
+  @available(iOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
+  @available(macOS, introduced: 14.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
+  @available(tvOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
+  @available(watchOS, introduced: 10.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
+  @available(visionOS, introduced: 1.1, deprecated: 26.0, message: "Sign promotional offers with JWS and use PurchaseOption.promotionalOffer(_:compactJWS:) instead")
   public struct Signature : Swift.Equatable, Swift.Hashable, Swift.Sendable {
     public var keyID: Swift.String
     public var nonce: Foundation.UUID
@@ -979,58 +1186,15 @@ public enum ExternalPurchaseLink : Swift.Sendable {
   public static var canOpen: Swift.Bool {
     get async
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 17.5, macOS 14.5, macCatalyst 17.5, tvOS 17.5, watchOS 10.5, visionOS 1.2, *)
   public static var eligibleURLs: [Foundation.URL]? {
     get async
   }
+  #endif
   public static func open() async throws
   @available(iOS 17.5, macOS 14.5, macCatalyst 17.5, tvOS 17.5, watchOS 10.5, visionOS 1.2, *)
   public static func open(url: Foundation.URL) async throws
-}
-@available(iOS 16.0, macCatalyst 16.0, tvOS 16.4, *)
-@available(macOS, unavailable)
-@available(watchOS, unavailable)
-@available(visionOS, unavailable)
-public enum ExternalLinkAccount : Swift.Sendable {
-  public static var canOpen: Swift.Bool {
-    get async
-  }
-  public static func open() async throws
-}
-@available(iOS 18.1, macOS 15.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, *)
-public enum ExternalPurchaseCustomLink : Swift.Sendable {
-  public enum NoticeResult : Swift.Hashable, Swift.Sendable {
-    case cancelled
-    case continued
-    public static func == (a: StoreKit.ExternalPurchaseCustomLink.NoticeResult, b: StoreKit.ExternalPurchaseCustomLink.NoticeResult) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public enum NoticeType : Swift.Int, Swift.Hashable, Swift.Sendable {
-    case withinApp
-    case browser
-    public init?(rawValue: Swift.Int)
-    @available(iOS 18.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, macOS 15.1, *)
-    public typealias RawValue = Swift.Int
-    public var rawValue: Swift.Int {
-      get
-    }
-  }
-  public struct Token : Swift.Hashable, Swift.Sendable {
-    public let value: Swift.String
-    public static func == (a: StoreKit.ExternalPurchaseCustomLink.Token, b: StoreKit.ExternalPurchaseCustomLink.Token) -> Swift.Bool
-    public func hash(into hasher: inout Swift.Hasher)
-    public var hashValue: Swift.Int {
-      get
-    }
-  }
-  public static var isEligible: Swift.Bool {
-    get async
-  }
-  public static func showNotice(type: StoreKit.ExternalPurchaseCustomLink.NoticeType) async throws -> StoreKit.ExternalPurchaseCustomLink.NoticeResult
-  public static func token(for tokenType: Swift.String) async throws -> StoreKit.ExternalPurchaseCustomLink.Token?
 }
 extension Foundation.Date {
   @_alwaysEmitIntoClient internal init(unixEpochMS: Swift.Int64) {
@@ -1040,51 +1204,75 @@ extension Foundation.Date {
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, visionOS 1.0, *)
 extension StoreKit.StoreKitError : Foundation.LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recoverySuggestion: Swift.String? {
     get
   }
+  #endif
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, visionOS 1.0, *)
 extension StoreKit.Product.PurchaseError : Foundation.LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recoverySuggestion: Swift.String? {
     get
   }
+  #endif
 }
 @available(iOS 15.4, macCatalyst 15.4, macOS 12.3, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension StoreKit.Transaction.RefundRequestError : Foundation.LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recoverySuggestion: Swift.String? {
     get
   }
+  #endif
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, visionOS 1.0, *)
 extension StoreKit.VerificationResult.VerificationError : Foundation.LocalizedError {
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var failureReason: Swift.String? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var recoverySuggestion: Swift.String? {
     get
   }
+  #endif
 }
 @available(iOS 15.4, macOS 12.3, tvOS 15.4, watchOS 8.5, visionOS 1.0, *)
 extension StoreKit.Product.ProductType {
@@ -1205,6 +1393,7 @@ extension StoreKit.Product.SubscriptionInfo {
     public let gracePeriodExpirationDate: Foundation.Date?
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     public let offer: StoreKit.Transaction.Offer?
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead")
     @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.id", message: "Use the offer property instead")
     @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.id", message: "Use the offer property instead")
@@ -1213,6 +1402,8 @@ extension StoreKit.Product.SubscriptionInfo {
     public var offerID: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead")
     @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.type", message: "Use the offer property instead")
     @available(tvOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.type", message: "Use the offer property instead")
@@ -1221,6 +1412,8 @@ extension StoreKit.Product.SubscriptionInfo {
     public var offerType: StoreKit.Transaction.OfferType? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
     @available(iOS, introduced: 15.0, deprecated: 18.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
     @available(macOS, introduced: 12.0, deprecated: 15.0, renamed: "offer.paymentMode.rawValue", message: "Use the offer property instead")
@@ -1241,6 +1434,8 @@ extension StoreKit.Product.SubscriptionInfo {
             }
         }
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @backDeployed(before: iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
     @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the offer property instead")
     @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the offer property instead")
@@ -1258,6 +1453,7 @@ extension StoreKit.Product.SubscriptionInfo {
             )
         }
     }
+    #endif
     @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
     public let environment: StoreKit.AppStore.Environment
     @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, macCatalyst 16.0)
@@ -1303,6 +1499,7 @@ extension StoreKit.Product.SubscriptionInfo {
     @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
     @usableFromInline
     internal let renewalDateStorage: Foundation.Date?
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, macCatalyst 15.0, visionOS 1.0, *)
     @backDeployed(before: iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, macCatalyst 17.0)
     public var renewalDate: Foundation.Date? {
@@ -1319,9 +1516,11 @@ extension StoreKit.Product.SubscriptionInfo {
             }
         }
     }
+    #endif
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     @usableFromInline
     internal let renewalPriceStorage: Foundation.Decimal?
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
     @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
     public var renewalPrice: Foundation.Decimal? {
@@ -1341,9 +1540,11 @@ extension StoreKit.Product.SubscriptionInfo {
             }
         }
     }
+    #endif
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     @usableFromInline
     internal let currencyStorage: Foundation.Locale.Currency?
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
     @backDeployed(before: iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0)
     public var currency: Foundation.Locale.Currency? {
@@ -1360,6 +1561,8 @@ extension StoreKit.Product.SubscriptionInfo {
             }
         }
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0)
     @available(iOS, introduced: 15.0, deprecated: 16.0, renamed: "currency.identifier", message: "Use the currency property instead")
     @available(macOS, introduced: 12.0, deprecated: 13.0, renamed: "currency.identifier", message: "Use the currency property instead")
@@ -1380,6 +1583,7 @@ extension StoreKit.Product.SubscriptionInfo {
             }
         }
     }
+    #endif
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
     public let eligibleWinBackOfferIDs: [Swift.String]
     public let deviceVerification: Foundation.Data
@@ -1390,6 +1594,7 @@ extension StoreKit.Product.SubscriptionInfo {
     @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
     @usableFromInline
     internal let appAccountTokenStorage: Foundation.UUID?
+    #if compiler(>=5.3) && $NonescapableTypes
     @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
     @backDeployed(before: iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4)
     public var appAccountToken: Foundation.UUID? {
@@ -1406,6 +1611,7 @@ extension StoreKit.Product.SubscriptionInfo {
             }
         }
     }
+    #endif
     @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
     @usableFromInline
     internal let appTransactionIDStorage: Swift.String
@@ -1442,15 +1648,19 @@ extension StoreKit.Product.SubscriptionInfo {
         }
   }
   public static func status(for groupID: Swift.String) async throws -> [StoreKit.Product.SubscriptionInfo.Status]
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
   public static func status(transactionID: Swift.UInt64) async throws -> StoreKit.SubscriptionStatus?
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product.SubscriptionInfo.Status {
   public struct Statuses : _Concurrency.AsyncSequence {
     public typealias Element = StoreKit.Product.SubscriptionInfo.Status
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> StoreKit.Product.SubscriptionInfo.Status.Statuses.Element?
+      #endif
       @available(iOS 15.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, macOS 12.0, *)
       public typealias Element = StoreKit.Product.SubscriptionInfo.Status.Statuses.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, *)
@@ -1572,7 +1782,9 @@ extension StoreKit.Product {
       case appStoreConnectDefault
       case visible
       case hidden
+      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.Int)
+      #endif
       @available(iOS 16.4, *)
       @available(tvOS, unavailable, introduced: 15.0)
       @available(watchOS, unavailable, introduced: 8.0)
@@ -1595,6 +1807,45 @@ extension StoreKit.Product {
     public static func == (a: StoreKit.Product.PromotionInfo, b: StoreKit.Product.PromotionInfo) -> Swift.Bool
   }
 }
+@available(iOS 18.1, macOS 15.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, *)
+public enum ExternalPurchaseCustomLink : Swift.Sendable {
+  public enum NoticeResult : Swift.Hashable, Swift.Sendable {
+    case cancelled
+    case continued
+    public static func == (a: StoreKit.ExternalPurchaseCustomLink.NoticeResult, b: StoreKit.ExternalPurchaseCustomLink.NoticeResult) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public enum NoticeType : Swift.Int, Swift.Hashable, Swift.Sendable {
+    case withinApp
+    case browser
+    #if compiler(>=5.3) && $NonescapableTypes
+    public init?(rawValue: Swift.Int)
+    #endif
+    @available(iOS 18.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, macOS 15.1, *)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
+  public struct Token : Swift.Hashable, Swift.Sendable {
+    public let value: Swift.String
+    public static func == (a: StoreKit.ExternalPurchaseCustomLink.Token, b: StoreKit.ExternalPurchaseCustomLink.Token) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static var isEligible: Swift.Bool {
+    get async
+  }
+  public static func showNotice(type: StoreKit.ExternalPurchaseCustomLink.NoticeType) async throws -> StoreKit.ExternalPurchaseCustomLink.NoticeResult
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func token(for tokenType: Swift.String) async throws -> StoreKit.ExternalPurchaseCustomLink.Token?
+  #endif
+}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 public enum StoreKitError : Swift.Error {
   case unknown
@@ -1613,6 +1864,11 @@ extension StoreKit.StoreKitError : Swift.Sendable {
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.BackingValue : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *)
+extension StoreKit.BackingValue : Swift.Encodable {
+  @usableFromInline
+  internal func encode(to encoder: any Swift.Encoder) throws
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 @usableFromInline
@@ -1640,10 +1896,12 @@ internal enum BackingValue : Swift.Equatable, Swift.Hashable {
   internal var foundation: Any {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal var xpcAllowed: ObjectiveC.NSObject? {
     get
   }
+  #endif
   @usableFromInline
   internal var type: any Any.Type {
     get
@@ -1679,6 +1937,7 @@ extension StoreKit.BackingValue : Swift.Sendable {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.BackingValue {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, macCatalyst 15.0, visionOS 1.0, *)
   @backDeployed(before: iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, macCatalyst 16.0)
   @usableFromInline
@@ -1692,6 +1951,7 @@ extension StoreKit.BackingValue {
         }
         return transform(current) ?? sentinel()
     }
+  #endif
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 public struct InvalidRequestError : Swift.Error {
@@ -1804,11 +2064,13 @@ extension StoreKit.AdvancedCommerceProduct {
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 extension StoreKit.AdvancedCommerceProduct {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var latestTransaction: StoreKit.VerificationResult<StoreKit.Transaction>? {
     get async {
             await Transaction.latest(for: id)
         }
   }
+  #endif
   public var allTransactions: StoreKit.Transaction.Transactions {
     get
   }
@@ -2063,7 +2325,9 @@ extension StoreKit.Message {
   public struct Messages : _Concurrency.AsyncSequence, Swift.Sendable {
     public typealias Element = StoreKit.Message
     public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async -> StoreKit.Message.Messages.Element?
+      #endif
       @available(iOS 16.0, visionOS 1.0, macCatalyst 16.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -2097,9 +2361,27 @@ extension StoreKit.Product {
     public static func custom(key: Swift.String, value: Swift.Bool) -> StoreKit.Product.PurchaseOption
     public static func custom(key: Swift.String, value: Foundation.Data) -> StoreKit.Product.PurchaseOption
     @preconcurrency public static func onStorefrontChange(shouldContinuePurchase: @escaping @Sendable (StoreKit.Storefront) -> Swift.Bool) -> StoreKit.Product.PurchaseOption
+    @available(iOS, introduced: 15.0, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(macOS, introduced: 12.0, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(tvOS, introduced: 15.0, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(watchOS, introduced: 8.0, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(visionOS, introduced: 1.0, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
     public static func promotionalOffer(offerID: Swift.String, keyID: Swift.String, nonce: Foundation.UUID, signature: Foundation.Data, timestamp: Swift.Int) -> StoreKit.Product.PurchaseOption
-    @available(iOS 17.4, macOS 14.4, tvOS 17.4, watchOS 10.4, visionOS 1.1, *)
+    @available(iOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(macOS, introduced: 14.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(tvOS, introduced: 17.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(watchOS, introduced: 10.4, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
+    @available(visionOS, introduced: 1.1, deprecated: 26.0, message: "Sign promotional offers with JWS and use promotionalOffer(_:compactJWS:) instead")
     public static func promotionalOffer(offerID: Swift.String, signature: StoreKit.Product.SubscriptionOffer.Signature) -> StoreKit.Product.PurchaseOption
+    @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
+    @backDeployed(before: iOS 19.0, macOS 16.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+    public static func promotionalOffer(_ offerID: Swift.String, compactJWS: Swift.String) -> [StoreKit.Product.PurchaseOption] {
+            return [
+                .custom(key: "adHocOfferId", value: offerID),
+                 
+                .custom(key: "adHocSignature", value: Data(compactJWS.utf8).base64EncodedString())
+            ]
+        }
     public static func quantity(_ quantity: Swift.Int) -> StoreKit.Product.PurchaseOption
     public static func simulatesAskToBuyInSandbox(_ simulateAskToBuy: Swift.Bool) -> StoreKit.Product.PurchaseOption
     @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
@@ -2144,7 +2426,6 @@ extension StoreKit.Product {
     }
   }
   @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, *)
-  @available(visionOS, unavailable, message: "Use @Environment(\\.purchase) to get a PurchaseAction value to call. If your app uses UIKit, use purchase(confirmIn:options:).")
   @available(visionOS, unavailable)
   @_Concurrency.MainActor public func purchase(options: Swift.Set<StoreKit.Product.PurchaseOption> = []) async throws -> StoreKit.Product.PurchaseResult
   @available(macOS 15.2, *)
@@ -2215,15 +2496,33 @@ extension StoreKit.Product {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var latestTransaction: StoreKit.VerificationResult<StoreKit.Transaction>? {
     get async {
             await Transaction.latest(for: id)
         }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @available(iOS, introduced: 15.0, deprecated: 18.4, message: "Use the currentEntitlements property instead.")
+  @available(macOS, introduced: 12.0, deprecated: 15.4, message: "Use the currentEntitlements property instead.")
+  @available(tvOS, introduced: 15.0, deprecated: 18.4, message: "Use the currentEntitlements property instead.")
+  @available(watchOS, introduced: 8.0, deprecated: 11.4, message: "Use the currentEntitlements property instead.")
+  @available(visionOS, introduced: 1.0, deprecated: 2.4, message: "Use the currentEntitlements property instead.")
   @inlinable public var currentEntitlement: StoreKit.VerificationResult<StoreKit.Transaction>? {
     get async {
             await Transaction.currentEntitlement(for: id)
         }
+  }
+  #endif
+}
+extension StoreKit.Product {
+  @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
+  @backDeployed(before: iOS 19.0, macOS 16.0, tvOS 19.0, watchOS 12.0, visionOS 3.0)
+  @inlinable public var currentEntitlements: StoreKit.Transaction.Transactions {
+    get {
+        Transaction.currentEntitlements(for: id)
+    }
   }
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
@@ -2293,188 +2592,136 @@ extension StoreKit.Product {
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Swift.BinaryInteger {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Swift.BinaryFloatingPoint {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Foundation.Date {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Foundation.Data {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Swift.String {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Foundation.Decimal {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Swift.Bool {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Foundation.UUID {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Swift.Array where Element == StoreKit.BackingValue {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension Swift.Dictionary where Key == Swift.String, Value == StoreKit.BackingValue {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
 extension StoreKit.AppStore.Environment {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
 extension StoreKit.Transaction.Reason {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
 extension StoreKit.Transaction.Offer.PaymentMode {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 17.2, macOS 14.2, tvOS 17.2, watchOS 10.2, visionOS 1.1, *)
 extension Foundation.Locale.Currency {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 extension StoreKit.Product.SubscriptionPeriod {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 extension StoreKit.BackingValue {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.4, macOS 13.3, tvOS 16.4, watchOS 9.4, visionOS 1.0, *)
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 extension StoreKit.Transaction.AdvancedCommerceInfo.Offer.Reason {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 extension StoreKit.Transaction.AdvancedCommerceInfo.Refund.Reason {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
+  #endif
 }
 @available(iOS 18.4, macOS 15.4, tvOS 18.4, watchOS 11.4, visionOS 2.4, *)
 extension StoreKit.Transaction.AdvancedCommerceInfo.Refund.RefundType {
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
   internal init?(_ value: StoreKit.BackingValue)
-}
-@available(iOS 16.0, macOS 13.0, tvOS 16.0, watchOS 9.0, visionOS 1.0, *)
-extension StoreKit.VerificationResult where SignedType == StoreKit.AppTransaction {
-  public var jwsRepresentation: Swift.String {
-    get
-  }
-  public var headerData: Foundation.Data {
-    get
-  }
-  public var payloadData: Foundation.Data {
-    get
-  }
-  public var signatureData: Foundation.Data {
-    get
-  }
-  public var signature: CryptoKit.P256.Signing.ECDSASignature {
-    get
-  }
-  public var signedData: Foundation.Data {
-    get
-  }
-  public var signedDate: Foundation.Date {
-    get
-  }
-  public var deviceVerification: Foundation.Data {
-    get
-  }
-  public var deviceVerificationNonce: Foundation.UUID {
-    get
-  }
-}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.VerificationResult where SignedType == StoreKit.Transaction {
-  public var jwsRepresentation: Swift.String {
-    get
-  }
-  public var headerData: Foundation.Data {
-    get
-  }
-  public var payloadData: Foundation.Data {
-    get
-  }
-  public var signatureData: Foundation.Data {
-    get
-  }
-  public var signature: CryptoKit.P256.Signing.ECDSASignature {
-    get
-  }
-  public var signedData: Foundation.Data {
-    get
-  }
-  public var signedDate: Foundation.Date {
-    get
-  }
-  public var deviceVerification: Foundation.Data {
-    get
-  }
-  public var deviceVerificationNonce: Foundation.UUID {
-    get
-  }
-}
-@available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
-extension StoreKit.VerificationResult where SignedType == StoreKit.Product.SubscriptionInfo.RenewalInfo {
-  public var jwsRepresentation: Swift.String {
-    get
-  }
-  public var headerData: Foundation.Data {
-    get
-  }
-  public var payloadData: Foundation.Data {
-    get
-  }
-  public var signatureData: Foundation.Data {
-    get
-  }
-  public var signature: CryptoKit.P256.Signing.ECDSASignature {
-    get
-  }
-  public var signedData: Foundation.Data {
-    get
-  }
-  public var signedDate: Foundation.Date {
-    get
-  }
-  public var deviceVerification: Foundation.Data {
-    get
-  }
-  public var deviceVerificationNonce: Foundation.UUID {
-    get
-  }
+  #endif
 }
 @available(iOS 16.4, visionOS 1.0, *)
 @available(macOS, unavailable)
@@ -2494,8 +2741,6 @@ extension StoreKit.Transaction.RefundRequestError : Swift.Hashable {}
 extension StoreKit.Transaction.RefundRequestStatus : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 17.0, watchOS 10.0, visionOS 1.0, *)
 extension StoreKit.Transaction.RefundRequestStatus : Swift.Hashable {}
-@available(iOS 18.1, macOS 15.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, *)
-extension StoreKit.ExternalPurchaseCustomLink.NoticeType : Swift.RawRepresentable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
 extension StoreKit.Product.PurchaseError : Swift.Equatable {}
 @available(iOS 15.0, macOS 12.0, tvOS 15.0, watchOS 8.0, visionOS 1.0, *)
@@ -2512,3 +2757,5 @@ extension StoreKit.Product.SubscriptionInfo.RenewalInfo.PriceIncreaseStatus : Sw
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 extension StoreKit.Product.PromotionInfo.Visibility : Swift.RawRepresentable {}
+@available(iOS 18.1, macOS 15.1, tvOS 18.1, watchOS 11.1, visionOS 2.1, *)
+extension StoreKit.ExternalPurchaseCustomLink.NoticeType : Swift.RawRepresentable {}

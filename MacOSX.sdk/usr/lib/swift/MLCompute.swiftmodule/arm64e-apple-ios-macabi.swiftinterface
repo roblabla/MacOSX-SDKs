@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 82 -module-name MLCompute
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMLCompute -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-concurrency -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 84 -module-name MLCompute
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import MLCompute
 import Swift
 import _Concurrency
@@ -21,26 +21,35 @@ extension MLCompute.MLCEmbeddingDescriptor {
         Int(exactly: __embeddingDimension)!
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var paddingIndex: Swift.Int? {
     get {
         __paddingIndex.map { Int(exactly: $0)! }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var maximumNorm: Swift.Float? {
     get {
         __maximumNorm.map { Float(exactly: $0)! }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var pNorm: Swift.Float? {
     get {
         __pNorm.map { Float(exactly: $0)! }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(embeddingCount: Swift.Int, embeddingDimension: Swift.Int) {
         self.init(
             __embeddingCount: embeddingCount as NSNumber,
             embeddingDimension: embeddingDimension as NSNumber)
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(embeddingCount: Swift.Int, embeddingDimension: Swift.Int, paddingIndex: Swift.Int?, maximumNorm: Swift.Float?, pNorm: Swift.Float?, scalesGradientByFrequency: Swift.Bool) {
         self.init(
             __embeddingCount: embeddingCount as NSNumber,
@@ -50,6 +59,7 @@ extension MLCompute.MLCEmbeddingDescriptor {
             pNorm: pNorm as NSNumber?,
             scalesGradientByFrequency: scalesGradientByFrequency)
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
@@ -77,6 +87,7 @@ extension MLCompute.MLCLayerNormalizationLayer {
         __normalizedShape.map { Int(exactly: $0)! }
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(normalizedShape: [Swift.Int], beta: MLCompute.MLCTensor, gamma: MLCompute.MLCTensor, varianceEpsilon: Swift.Float) {
         self.init(
             __normalizedShape: normalizedShape as [NSNumber],
@@ -84,6 +95,8 @@ extension MLCompute.MLCLayerNormalizationLayer {
             gamma: gamma,
             varianceEpsilon: varianceEpsilon)
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS, introduced: 11.3, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
   @available(iOS, introduced: 14.5, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
   @available(tvOS, introduced: 14.5, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
@@ -94,22 +107,29 @@ extension MLCompute.MLCLayerNormalizationLayer {
             gamma: gamma,
             varianceEpsilon: varianceEpsilon)
     }
+  #endif
 }
 @available(macOS, introduced: 12.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 extension MLCompute.MLCInferenceGraph {
+  #if compiler(>=5.3) && $NonescapableTypes
   @discardableResult
   public func execute(inputsData: [Swift.String : MLCompute.MLCTensorData], lossLabelsData: [Swift.String : MLCompute.MLCTensorData]? = nil, lossLabelWeightsData: [Swift.String : MLCompute.MLCTensorData]? = nil, outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil, batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = []) async throws -> (result: MLCompute.MLCTensor?, executionTime: Foundation.TimeInterval)
+  #endif
 }
 @available(macOS, introduced: 12.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(tvOS, introduced: 15.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 extension MLCompute.MLCTrainingGraph {
+  #if compiler(>=5.3) && $NonescapableTypes
   @discardableResult
   public func executeForward(batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = [], outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil) async throws -> (result: MLCompute.MLCTensor?, executionTime: Foundation.TimeInterval)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @discardableResult
   public func executeGradient(batchSize: Swift.Int, options: MLCompute.MLCExecutionOptions = [], outputsData: [Swift.String : MLCompute.MLCTensorData]? = nil) async throws -> Foundation.TimeInterval
+  #endif
   @discardableResult
   public func executeOptimizerUpdate(options: MLCompute.MLCExecutionOptions = []) async throws -> Foundation.TimeInterval
 }
@@ -117,11 +137,13 @@ extension MLCompute.MLCTrainingGraph {
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 extension MLCompute.MLCSplitLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var splitSectionLengths: [Swift.Int]? {
     get {
         __splitSectionLengths?.map { Int(exactly: $0)! }
     }
   }
+  #endif
   @inlinable convenience public init(splitSectionLengths: [Swift.Int], dimension: Swift.Int) {
         self.init(
             __splitSectionLengths: splitSectionLengths as [NSNumber],
@@ -137,15 +159,19 @@ extension MLCompute.MLCUpsampleLayer {
         __shape.map { Int(exactly: $0)! }
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(shape: [Swift.Int]) {
         self.init(__shape: shape as [NSNumber])
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(shape: [Swift.Int], sampleMode: MLCompute.MLCSampleMode, alignsCorners: Swift.Bool) {
         self.init(
             __shape: shape as [NSNumber],
             sampleMode: sampleMode,
             alignsCorners: alignsCorners)
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
@@ -161,17 +187,21 @@ extension MLCompute.MLCSliceLayer {
         __end.map { Int(exactly: $0)! }
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var stride: [Swift.Int]? {
     get {
         __stride?.map { Int(exactly: $0)! }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(start: [Swift.Int], end: [Swift.Int], stride: [Swift.Int]?) {
         self.init(
             __start: start as [NSNumber],
             end: end as [NSNumber],
             stride: stride as [NSNumber]?)
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
@@ -225,9 +255,11 @@ extension MLCompute.MLCReductionLayer {
         __dimensions.map { Int(exactly: $0)! }
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(reductionType: MLCompute.MLCReductionType, dimensions: [Swift.Int]) {
         self.init(__reductionType: reductionType, dimensions: dimensions as [NSNumber])
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
@@ -238,9 +270,11 @@ extension MLCompute.MLCTransposeLayer {
         __dimensions.map { Int(exactly: $0)! }
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(dimensions: [Swift.Int]) {
         self.init(__dimensions: dimensions as [NSNumber])
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
@@ -260,12 +294,14 @@ public enum MLCPaddingPolicy {
         }
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable internal var objcSizes: [Foundation.NSNumber]? {
     get {
         guard case let .sized(y, x) = self else { return nil }
         return [y, x] as [NSNumber]
     }
   }
+  #endif
   @inlinable public var debugDescription: Swift.String {
     get {
         let objcDescription = __MLCPaddingPolicyDebugDescription(objcPolicy)
@@ -299,6 +335,7 @@ extension MLCompute.MLCTensor {
   @inlinable convenience public init(shape: [Swift.Int], fillWithData fillData: Foundation.NSNumber, dataType: MLCompute.MLCDataType) {
         self.init(__shape: shape as [NSNumber], fillWithData: fillData, dataType: dataType)
     }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(sequenceLengths: [Swift.Int], sortedSequences: Swift.Bool, featureChannelCount: Swift.Int, batchSize: Swift.Int, randomInitializerType: MLCompute.MLCRandomInitializerType) {
         self.init(
             __sequenceLengths: sequenceLengths as [NSNumber],
@@ -308,6 +345,8 @@ extension MLCompute.MLCTensor {
             randomInitializerType: randomInitializerType
         )
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(sequenceLengths: [Swift.Int], sortedSequences: Swift.Bool, featureChannelCount: Swift.Int, batchSize: Swift.Int, data: MLCompute.MLCTensorData? = nil) {
         self.init(
             __sequenceLengths: sequenceLengths as [NSNumber],
@@ -317,31 +356,40 @@ extension MLCompute.MLCTensor {
             data: data
         )
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 extension MLCompute.MLCGraph {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func split(source: MLCompute.MLCTensor, splitSectionLengths: [Swift.Int], dimension: Swift.Int) -> [MLCompute.MLCTensor]? {
         __split(
             withSource: source,
             splitSectionLengths: splitSectionLengths as [NSNumber],
             dimension: dimension)
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func reshape(shape: [Swift.Int], source: MLCompute.MLCTensor) -> MLCompute.MLCTensor? {
         __reshape(withShape: shape as [NSNumber], source: source)
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public func transpose(dimensions: [Swift.Int], source: MLCompute.MLCTensor) -> MLCompute.MLCTensor? {
         __transpose(withDimensions: dimensions as [NSNumber], source: source)
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(tvOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 extension MLCompute.MLCReshapeLayer {
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(shape: [Swift.Int]) {
         self.init(__shape: shape as [NSNumber])
     }
+  #endif
 }
 @available(macOS, introduced: 11.3, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.5, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
@@ -367,19 +415,26 @@ extension MLCompute.MLCTensorDescriptor {
         __stride.map { Int(exactly: $0)! }
     }
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var sequenceLengths: [Swift.Int]? {
     get {
         __sequenceLengths?.map { Int(exactly: $0)! }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable public var batchSizePerSequenceStep: [Swift.Int]? {
     get {
         __batchSizePerSequenceStep?.map { Int(exactly: $0)! }
     }
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(shape: [Swift.Int], dataType: MLCompute.MLCDataType) {
         self.init(__shape: shape as [NSNumber], dataType: dataType)
     }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @inlinable convenience public init?(shape: [Swift.Int], sequenceLengths: [Swift.Int], sortedSequences: Swift.Bool, dataType: MLCompute.MLCDataType) {
         self.init(
             __shape: shape as [NSNumber],
@@ -387,6 +442,7 @@ extension MLCompute.MLCTensorDescriptor {
             sortedSequences: sortedSequences,
             dataType: dataType)
     }
+  #endif
 }
 @available(macOS, introduced: 11.0, deprecated: 14.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")
 @available(iOS, introduced: 14.0, deprecated: 17.0, message: "Use Metal Performance Shaders Graph or BNNS instead.")

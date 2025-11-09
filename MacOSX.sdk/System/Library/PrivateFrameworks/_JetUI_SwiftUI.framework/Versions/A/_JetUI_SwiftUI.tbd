@@ -61,7 +61,8 @@ exports:
                        '_$s18_JetEngine_SwiftUI15ShelfCollectionV01_ad1_cD0E9shelvesOf7spacing7contentACySayqd__Gq_G6AppKit28NSDiffableDataSourceSnapshotVy0aB012DiffableLensVyqd__GAOyAM14ComponentModel_pGG_12CoreGraphics7CGFloatVSgq_AHctcAHRszAM0eT0Rd__lufC', 
                        '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9component15onSelectPerformQry5StateQzzc_tFZ', 
                        '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9component15onSelectPerformQry5StateQzzc_tFZQOMQ', 
-                       '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvgZ', '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvpZQOMQ', 
+                       '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvgZ', '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvpZMV', 
+                       '_$s5JetUI11JUComponentP01_ab6_SwiftB0E9componentQrvpZQOMQ', 
                        '_$s7SwiftUI4ViewP04_Jetb1_aB0E16visualizeMetrics4isOnQrAA7BindingVySbG_tF', 
                        '_$s7SwiftUI4ViewP04_Jetb1_aB0E16visualizeMetrics4isOnQrAA7BindingVySbG_tFQOMQ', 
                        '_$s8ViewType012_JetUI_SwiftD00cA13RepresentablePTl' ]

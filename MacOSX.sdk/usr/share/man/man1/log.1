@@ -47,6 +47,7 @@
 .Op Fl -[no-]debug
 .Op Fl -[no-]pager
 .Op Fl -[no-]signpost
+.Op Fl -[no-]loss
 .Op Fl -last Ar time Op m|h|d
 .Op Fl -timezone Ar local | timezone
 .Pp
@@ -112,7 +113,7 @@ Collect system logs from paired device with the given name.
 .It Fl -device-udid Ar UDID
 Collect system logs from paired device with the given UDID.
 .It Fl -predicate Ar predicate
-Collect system logs using a given predicate following NSPredicate format. This option can significantly
+Collect system logs using a given predicate following NSPredicate format or shorthand. This option can significantly
 increase the time and memory usage required to collect an archive.
 Example: "--predicate "process=='kernel.development'"
 .El
@@ -172,7 +173,7 @@ In order to be decoded, the file must be contained within a valid
 .It Fl -[no-]pager
 Enable or disable pagination of output via less.
 .It Fl -predicate Ar filter
-Filters messages based on the provided predicate, based on NSPredicate.
+Filters messages based on the provided predicate, based on NSPredicate or shorthand.
 A compound predicate or multiple predicates can be provided.
 See section \fB"PREDICATE-BASED FILTERING"\fR below.
 .It Fl -process Ar pid | process
@@ -245,6 +246,9 @@ Disable or enable debug level messages in the output.
 .It Fl -[no-]signpost
 Disable or enable display of signposts in the output.
 (By default signposts are not displayed.)
+.It Fl -[no-]loss
+Disable or enable display of loss event messages in the output.
+(By default loss event messages are not displayed.)
 .El
 .It Cm stats
 Shows a breakdown of the events contained within a log datastore or archive.
@@ -301,7 +305,7 @@ Shows messages at specified level and below.
 The level is a hierarchy.
 Specifying debug implies debug, info and default.
 .It Fl -predicate Ar filter
-Filters messages using the provided predicate based on NSPredicate.
+Filters messages using the provided predicate based on NSPredicate or shorthand.
 A compound predicate or multiple predicates can be provided.
 See section \fB"PREDICATE-BASED FILTERING"\fR below.
 .It Fl -process Ar pid | process
@@ -323,6 +327,29 @@ By default all types are streamed unless otherwise specified.
 Pass an appropriate
 .Fl -type
 for each requested type of event.
+.El
+.It Cm diagnose
+Print various diagnostic information for a given archive.
+Running without options is the same as using --all.
+.Bl -tag -width "--archive path "
+.It Fl -archive Ar archive
+Archive to be diagnosed.
+.It Fl -verbose
+Output additional debugging information.
+.It Fl -json
+Output in JSON.
+.It Fl -process Ar process
+Only print relevant quarantine information for the given process.
+.It Fl -all
+Print all available diagnostics.
+.It Fl -erase
+Print timestamps emitted when `logd` purged the archive.
+.It Fl -logd-starts
+Print timestamps emitted when `logd` starts.
+.It Fl -time
+Print the beginning capture time for each given log book.
+.It Fl -quarantine
+Print detailed quarantine information per process.
 .El
 .It Cm repack
 Repack all logs in a logarchive matching a predicate into a new logarchive
@@ -351,7 +378,7 @@ Using predicate-based filters via the
 .Fl -predicate
 option allows users to focus on messages based on the provided filter criteria.
 For detailed information on the use of predicate based filtering, please refer to the
-.Lk https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html "Predicate Programming Guide"
+.Lk https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/Predicates/Articles/pSyntax.html "Predicate Programming Guide".
 .Pp
 The
 .Ar filter
@@ -366,7 +393,7 @@ The pattern within the message text, or activity name of a log/trace entry.
 .It \fBmessageType\fR
 For logEvent and traceEvent, the type of the message itself: \fBdefault\fR, \fBinfo\fR, \fBdebug\fR, \fBerror\fR or \fBfault\fR.
 .It \fBprocess\fR
-The name of the process the originated the event.
+The name of the process that originated the event.
 .It \fBprocessImagePath\fR
 The full path of the process that originated the event.
 .It \fBsender\fR
@@ -419,6 +446,69 @@ Timestamp                       Thread     Type        Activity     PID
 Timestamp                       Thread     Type        Activity     PID
 2016-06-10 13:54:34.593220-0700 0x250      Info        0x0          113    hidd: (IOKit) [com.apple.iohid.default] Loaded 6 HID plugins
 .Pp
+.fi
+.Sh SHORTHAND-BASED FILTERING
+Use shorthand filters via the
+.Fl -predicate
+option as an alternative to NSPredicate-based syntax. See \fBlog help shorthand\fR for the full list of supported keys.
+Supported keys include:
+.Bl -tag -width "message, m, or omit "
+.It \fBmessage\fR, \fBm\fR, or omit
+The pattern within the message text.
+.It \fBprocess\fR, \fBp\fR
+The name of the process that originated the event.
+.It \fBpid\fR
+The identifier of the process that originated the event.
+.It \fBsubsystem\fR, \fBs\fR
+The subsystem used to log an event.  Only works with log messages generated with os_log(3) APIs.
+.It \fBcategory\fR, \fBc\fR
+The category used to log an event.  Only works with log messages generated with os_log(3) APIs.
+.It \fBtype\fR
+A type of message: \fBdefault\fR, \fBinfo\fR, \fBdebug\fR, \fBerror\fR, \fBfault\fR,
+\fBsignpost\fR, \fBstatedump\fR, or \fBactivity\fR.
+.El
+.Pp
+Supported operators include
+.Bl -tag -width ":, contains "
+.It \fB=\fR, \fBis\fR
+Equality.
+.It \fB!=\fR, \fB<>\fR
+Inequality.
+.It \fB:\fR, \fBcontains\fR
+Contains a substring.
+.It \fB!:\fR
+Does not contain a substring.
+.It \fB:^\fR
+Starts with.
+.It \fBendswith\fR
+Ends with.
+.It \fB<=\fR, \fB>=\fR
+Numerical comparison.
+.It \fB~/regex/\fR
+Regular expression.
+.El
+.Sh VALUES
+Values can be grouped together using a vertical bar as a logical OR operator.
+When a vertical bar is used on the right hand side of an equality operator, the comparison becomes case-sensitive.
+.Sh SHORTHAND-BASED FILTERING EXAMPLES
+Filter for specific subsystem:
+.nf
+ \fBlog show --predicate 's=com.example.my_subsystem'\fR
+.fi
+.Pp
+Filter for categories containing "network" with messages containing certain text:
+.nf
+ \fBlog show --predicate 'c:network and "subtext to find"'\fR
+.fi
+.Pp
+Filter for specific subsystem and categories:
+.nf
+ \fBlog show --predicate 's=com.example.my_subsystem and category=category1|category2'\fR
+.fi
+.Pp
+Filter for errors from processes:
+.nf
+ \fBlog show --predicate 'p=myprocess|yourprocess and type=error'\fR
 .fi
 .Sh ENVIRONMENT
 The following environment variables affect the execution of \fBlog\fR:

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/libtailspin.dylib'
-current-version: 218.2
+current-version: 241
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -43,14 +43,15 @@ exports:
                        _TSPMetadata_NumVnodesFreeKey, _TSPMetadata_NumVnodesMaxKey, 
                        _TSPMetadata_OSCryptexFileExtents_Key, _TSPMetadata_OSProductNameKey, 
                        _TSPMetadata_OSProductVersionExtraKey, _TSPMetadata_OSProductVersionKey, 
-                       _TSPMetadata_OSVersionKey, _TSPMetadata_PowerModeTransitionTimestampKey, 
+                       _TSPMetadata_OSVersionKey, _TSPMetadata_PowerManagementMitigationKey, 
+                       _TSPMetadata_PowerManagementMitigationLevelKey, _TSPMetadata_PowerModeTransitionTimestampKey, 
                        _TSPMetadata_PreferredLanguagesKey, _TSPMetadata_SharedCacheInfo, 
                        _TSPMetadata_SharedCacheResidentSize, _TSPMetadata_SharedCacheVirtualSize, 
-                       _TSPMetadata_SystemAdvisoryLevelsBatteryLevelKey, _TSPMetadata_SystemAdvisoryLevelsCombinedLevelKey, 
-                       _TSPMetadata_SystemAdvisoryLevelsKey, _TSPMetadata_SystemAdvisoryLevelsThermalPressureKey, 
-                       _TSPMetadata_SystemAdvisoryLevelsUserLevelKey, _TSPMetadata_TailspinConfigurationKey, 
-                       _TSPMetadata_TailspinDumpReasonKey, _TSPMetadata_TargetPID, 
-                       _TSPMetadata_VMPageSizeKey, _TSPMetadata_VnodeDeallocLevelKey, 
+                       _TSPMetadata_SubProductTypeKey, _TSPMetadata_SystemAdvisoryLevelsBatteryLevelKey, 
+                       _TSPMetadata_SystemAdvisoryLevelsCombinedLevelKey, _TSPMetadata_SystemAdvisoryLevelsKey, 
+                       _TSPMetadata_SystemAdvisoryLevelsThermalPressureKey, _TSPMetadata_SystemAdvisoryLevelsUserLevelKey, 
+                       _TSPMetadata_TailspinConfigurationKey, _TSPMetadata_TailspinDumpReasonKey, 
+                       _TSPMetadata_TargetPID, _TSPMetadata_VMPageSizeKey, _TSPMetadata_VnodeDeallocLevelKey, 
                        _TSPMetadata_VnodeInfoKey, _TSPProcessInfo_LoadInfosKey, _TSPProcessInfo_PidKey, 
                        _TSPSymbols_BinaryContainsTextExecKey, _TSPSymbols_BinaryNameKey, 
                        _TSPSymbols_BinaryPathKey, _TSPSymbols_BinaryTextSizeKey, 

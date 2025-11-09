@@ -39,6 +39,7 @@ exports:
                        FMDEraseOptions, FMDEraseProxy, FMDFMIPAccountInfo, FMDFMMAccountInfo, 
                        FMDFMMManager, FMDIdentitySigningRequest, FMDLocalFindableAccessory, 
                        FMDRepairDevice, FMDRepairDeviceContext, FMDRepairDeviceResult, 
-                       FMDSharedConfiguration, FMDSharedConfigurationEntry, FMDVolatileMetaDataRecord, 
-                       FMNSXPCConnection, FMNSXPCConnectionCache, FMNSXPCConnectionConfiguration ]
+                       FMDSharedConfiguration, FMDSharedConfigurationEntry, FMDSharedConfigurationFollowUpEntry, 
+                       FMDVolatileMetaDataRecord, FMNSXPCConnection, FMNSXPCConnectionCache, 
+                       FMNSXPCConnectionConfiguration ]
 ...

@@ -50,7 +50,8 @@ exports:
                        _MIDIUMPEndpointObjectKey, _MIDIUMPEndpointWasAddedNotification, 
                        _MIDIUMPEndpointWasRemovedNotification, _MIDIUMPEndpointWasUpdatedNotification, 
                        _MIDIUMPFunctionBlockObjectKey, _MIDIUMPFunctionBlockWasUpdatedNotification, 
-                       _UMPCIDiscover, _UMPCIGlobalState, __ZN4MIDI11StreamState22update_with_v1_packetsENSt3__14spanIKjLm18446744073709551615EEE, 
+                       _UMPCIDiscover, _UMPCIGlobalState, _UMPCIServerSideMIDICITransaction, 
+                       __ZN4MIDI11StreamState22update_with_v1_packetsENSt3__14spanIKjLm18446744073709551615EEE, 
                        __ZN4MIDI11StreamState5chaseERNS_10PacketizerE, __ZN4MIDI11StreamState5clearEv, 
                        __ZN4MIDI11StreamState5resetERNS_10PacketizerE, __ZN4MIDI11StreamStateC1Ej, 
                        __ZN4MIDI11StreamStateC2Ej, __ZN4MIDI16LegacyPacketList4dumpEPKS0_, 
@@ -81,10 +82,11 @@ exports:
                        _kMIDIPropertyUMPCanTransmitGroupless, _kMIDIPropertyUniqueID ]
     objc-classes:    [ BLEMIDIAccessor, MIDI2DeviceInfo, MIDICIDevice, MIDICIDeviceInfo, 
                        MIDICIDeviceManager, MIDICIDiscoveredNode, MIDICIDiscoveryManager, 
-                       MIDICIProfile, MIDICIProfileState, MIDICIResponder, MIDICISession, 
-                       MIDINetworkConnection, MIDINetworkHost, MIDINetworkSession, 
+                       MIDICIMutableDevice, MIDICIProfile, MIDICIProfileState, MIDICIResponder, 
+                       MIDICISession, MIDINetworkConnection, MIDINetworkHost, MIDINetworkSession, 
                        MIDIUMPCIProfile, MIDIUMPEndpoint, MIDIUMPEndpointManager, 
-                       MIDIUMPFunctionBlock, MIDIUMPMutableEndpoint, MIDIUMPMutableFunctionBlock ]
+                       MIDIUMPFunctionBlock, MIDIUMPMutableCIProfile, MIDIUMPMutableEndpoint, 
+                       MIDIUMPMutableFunctionBlock ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MIDIDeviceDBGetManufModelProperties, _MIDIDeviceDBGetManufacturers, 
                        _MIDIDeviceDBGetModels, _MIDIDriverEnableMonitoring, _MIDIGet32BitOnlyDrivers, 

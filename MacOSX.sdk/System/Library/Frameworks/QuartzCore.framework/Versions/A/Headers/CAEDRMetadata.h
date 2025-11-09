@@ -1,12 +1,10 @@
 /* CoreAnimation - CAEDRMetadata.h
 
- Copyright (c) 2018-2022, Apple Inc.
+ Copyright (c) 2018-2025, Apple Inc.
  All rights reserved. */
 
 #ifndef CAEDRMetadata_h
 #define CAEDRMetadata_h
-
-
 
 #ifdef __OBJC__
 
@@ -14,7 +12,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(macos(10.15), ios(16.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.15), ios(16.0)) API_UNAVAILABLE(tvos, watchos)
 @interface CAEDRMetadata : NSObject<NSCopying, NSSecureCoding>
 {
 @private
@@ -115,7 +113,5 @@ API_AVAILABLE(macos(10.15), ios(16.0)) API_UNAVAILABLE(watchos)
 NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif /* __OBJC__ */
-
-
 
 #endif /* CAEDRMetadata_h */

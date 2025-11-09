@@ -1,17 +1,22 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 55.4 -module-name CarKey
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
-import Foundation
-import Swift
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
-import os
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 60.35 -module-name CarKey
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+public import Foundation
+public import Swift
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
 @_hasMissingDesignatedInitializers @available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
 open class CarKeyRemoteControl {
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
   open class func start(delegate: any CarKey.CarKeyRemoteControlSessionDelegate, subscriptionRange subscriptionFunctionIDRange: Swift.ClosedRange<Swift.Int>? = nil, with delegateCallbackQueue: Dispatch.DispatchQueue? = nil) async throws -> CarKey.CarKeyRemoteControlSession
+  #endif
+  @available(iOS 26.0, watchOS 26.0, macOS 26.0, *)
+  open class func registerForLaunchOnCarKeyEvent() throws
+  @available(iOS 26.0, watchOS 26.0, macOS 26.0, *)
+  open class func unregisterForLaunchOnCarKeyEvent() throws
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
@@ -78,8 +83,12 @@ public struct VehicleReport {
   public var supportedFunctions: [CarKey.FunctionIdentifier] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func status(for function: CarKey.FunctionIdentifier) throws -> CarKey.FunctionStatus?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func proprietaryData(for function: CarKey.FunctionIdentifier) throws -> Foundation.Data?
+  #endif
 }
 @available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
 public struct RemoteKeylessEntryAction {
@@ -99,10 +108,19 @@ public struct RemoteKeylessEntryConfigurableEnduringAction {
   public let recipientVehicleID: Swift.String
   public init(functionID: CarKey.FunctionIdentifier, actionID: CarKey.ActionIdentifier, vehicleID: Swift.String)
   @objc @_hasMissingDesignatedInitializers final public class EnduringExecutionRequest : ObjectiveC.NSObject {
+    final public var eventStream: _Concurrency.AsyncStream<CarKey.RemoteKeylessEntryConfigurableEnduringAction.EnduringExecutionRequest.Event> {
+      get
+    }
     final public func results() async throws -> CarKey.ExecutionStatus
     final public func stop() throws
     public struct ContinuationRequest {
+      public let data: Foundation.Data?
+      #if compiler(>=5.3) && $NonescapableTypes
       public func confirm(_ data: Foundation.Data? = nil) throws
+      #endif
+    }
+    public enum Event {
+      case receivedContinuationRequest(_: CarKey.RemoteKeylessEntryConfigurableEnduringAction.EnduringExecutionRequest.ContinuationRequest)
     }
     @objc deinit
   }

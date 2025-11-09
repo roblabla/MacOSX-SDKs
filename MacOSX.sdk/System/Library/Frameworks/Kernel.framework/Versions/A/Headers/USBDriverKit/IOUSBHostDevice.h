@@ -1,4 +1,4 @@
-/* iig(DriverKit-427.120.2) generated from IOUSBHostDevice.iig */
+/* iig(DriverKit-445) generated from IOUSBHostDevice.iig */
 
 /* IOUSBHostDevice.iig:1-43 */
 /*
@@ -44,7 +44,7 @@
 
 class IOUSBHostInterface;
 
-/* source class IOUSBHostDevice IOUSBHostDevice.iig:44-381 */
+/* source class IOUSBHostDevice IOUSBHostDevice.iig:44-406 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -324,15 +324,40 @@ public:
 
     /*!
      * @brief       Return the current frame number of the USB controller
-     * @description This method will return the current frame number of the USB controller, omitting microframe.
+     * @discussion  This method will return the current frame number of the USB controller, omitting microframe.
      *              This is most useful for scheduling future isochronous requests.
      * @param       frameNumber uint64_t pointer to be updated with the current frame number
      * @param       theTime If not NULL, this will be updated with the current system time
      * @return      KERN_SUCCESS is successful see IOReturn.h for error codes.
      */
     virtual kern_return_t
-    GetFrameNumber (uint64_t     *frameNumber,
+    GetFrameNumber (uint64_t *frameNumber,
                     uint64_t *theTime);
+
+    /*!
+     * @brief       Return the current microframe number of the USB controller.
+     * @discussion  This method will return the current microframe number of the USB controller
+     *              This is most useful for scheduling future isochronous requests.
+     * @param       microframeNumber uint64_t pointer to be updated with the current microframe number
+     * @param       theTime If not NULL, this will be updated with the system time assosiated with the returned microframe
+     * @return      KERN_SUCCESS is successful see IOReturn.h for error codes.
+     */
+    virtual kern_return_t
+    CurrentMicroframe (uint64_t *microframeNumber,
+                       uint64_t *theTime);
+    
+    /*!
+     * @brief       Return a recent microframe number of the USB controller.
+     * @discussion  This method will return a recent microframe number of the USB controller
+     *              with a timestamp captured near the microframe boundary.
+     *              This is most useful for scheduling future isochronous requests.
+     * @param       microframeNumber uint64_t pointer to be updated with the current frame number
+     * @param       theTime If not NULL, this will be updated with the system time assosiated with the returned microframe
+     * @return      KERN_SUCCESS is successful see IOReturn.h for error codes.
+     */
+    virtual kern_return_t
+    ReferenceMicroframe (uint64_t *microframeNumber,
+                         uint64_t *theTime);
 
     /*!
      * @brief       Return the current port status
@@ -386,7 +411,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUSBHostDevice IOUSBHostDevice.iig:44-381 */
+/* generated class IOUSBHostDevice IOUSBHostDevice.iig:44-406 */
 
 #define IOUSBHostDevice__GetDescriptor_ID            0xc769617535436f0eULL
 #define IOUSBHostDevice_Open_ID            0xe139dec6668972a6ULL
@@ -400,6 +425,8 @@ public:
 #define IOUSBHostDevice_GetAddress_ID            0xb682fa0b4e80b1d3ULL
 #define IOUSBHostDevice_GetSpeed_ID            0xa2715c4284f99e61ULL
 #define IOUSBHostDevice_GetFrameNumber_ID            0xc660b158ed52fa93ULL
+#define IOUSBHostDevice_CurrentMicroframe_ID            0xc458b7d93f101168ULL
+#define IOUSBHostDevice_ReferenceMicroframe_ID            0xcc5d33ef131ccf20ULL
 #define IOUSBHostDevice_GetPortStatus_ID            0xa04ec9e19b0a96b7ULL
 #define IOUSBHostDevice_Reset_ID            0xd0fbe57a84270361ULL
 #define IOUSBHostDevice_CreateInterfaceIterator_ID            0xa7d9f292889bbb05ULL
@@ -473,6 +500,14 @@ public:
 
 #define IOUSBHostDevice_GetFrameNumber_Args \
         uint64_t * frameNumber, \
+        uint64_t * theTime
+
+#define IOUSBHostDevice_CurrentMicroframe_Args \
+        uint64_t * microframeNumber, \
+        uint64_t * theTime
+
+#define IOUSBHostDevice_ReferenceMicroframe_Args \
+        uint64_t * microframeNumber, \
         uint64_t * theTime
 
 #define IOUSBHostDevice_GetPortStatus_Args \
@@ -595,6 +630,18 @@ public:\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
+    CurrentMicroframe(\
+        uint64_t * microframeNumber,\
+        uint64_t * theTime,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    ReferenceMicroframe(\
+        uint64_t * microframeNumber,\
+        uint64_t * theTime,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
     GetPortStatus(\
         uint32_t * portStatus,\
         OSDispatchMethod supermethod = NULL);\
@@ -705,6 +752,18 @@ public:\
         OSMetaClassBase * target,\
         GetFrameNumber_Handler func);\
 \
+    typedef kern_return_t (*CurrentMicroframe_Handler)(OSMetaClassBase * target, IOUSBHostDevice_CurrentMicroframe_Args);\
+    static kern_return_t\
+    CurrentMicroframe_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        CurrentMicroframe_Handler func);\
+\
+    typedef kern_return_t (*ReferenceMicroframe_Handler)(OSMetaClassBase * target, IOUSBHostDevice_ReferenceMicroframe_Args);\
+    static kern_return_t\
+    ReferenceMicroframe_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        ReferenceMicroframe_Handler func);\
+\
     typedef kern_return_t (*GetPortStatus_Handler)(OSMetaClassBase * target, IOUSBHostDevice_GetPortStatus_Args);\
     static kern_return_t\
     GetPortStatus_Invoke(const IORPC rpc,\
@@ -774,6 +833,12 @@ protected:\
 \
     kern_return_t\
     GetFrameNumber_Impl(IOUSBHostDevice_GetFrameNumber_Args);\
+\
+    kern_return_t\
+    CurrentMicroframe_Impl(IOUSBHostDevice_CurrentMicroframe_Args);\
+\
+    kern_return_t\
+    ReferenceMicroframe_Impl(IOUSBHostDevice_ReferenceMicroframe_Args);\
 \
     kern_return_t\
     GetPortStatus_Impl(IOUSBHostDevice_GetPortStatus_Args);\
@@ -962,10 +1027,10 @@ IOUSBHostDevice_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUSBHostDevice.iig:383-384 */
+/* IOUSBHostDevice.iig:408-409 */
 
 
-/* IOUSBHostDevice.iig:397- */
+/* IOUSBHostDevice.iig:422- */
 
 
 #endif /* ! _IOKIT_IOUSBHOSTDEVICE_H */

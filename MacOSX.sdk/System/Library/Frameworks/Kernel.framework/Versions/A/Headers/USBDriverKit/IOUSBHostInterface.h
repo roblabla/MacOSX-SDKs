@@ -1,4 +1,4 @@
-/* iig(DriverKit-427.120.2) generated from IOUSBHostInterface.iig */
+/* iig(DriverKit-445) generated from IOUSBHostInterface.iig */
 
 /* IOUSBHostInterface.iig:1-44 */
 /*
@@ -45,7 +45,7 @@
 #include <USBDriverKit/IOUSBHostDevice.h>  /* .iig include */
 #include <DriverKit/IOBufferMemoryDescriptor.h>  /* .iig include */
 
-/* source class IOUSBHostInterface IOUSBHostInterface.iig:45-265 */
+/* source class IOUSBHostInterface IOUSBHostInterface.iig:45-290 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -90,8 +90,33 @@ public:
      * @return      KERN_SUCCESS is successful see IOReturn.h for error codes.
      */
     virtual kern_return_t
-    GetFrameNumber (uint64_t     *frameNumber,
+    GetFrameNumber (uint64_t *frameNumber,
                     uint64_t *theTime);
+
+    /*!
+     * @brief       Return the current microframe number of the USB controller
+     * @discussion  This method will return the current microframe number of the USB controller.
+     *              This is most useful for scheduling future isochronous requests.
+     * @param       microframeNumber uint64_t pointer to be updated with the current frame number
+     * @param       theTime If not NULL, this will be updated with the system time assosiated with the returned microframe
+     * @return      KERN_SUCCESS is successful see IOReturn.h for error codes.
+     */
+    virtual kern_return_t
+    CurrentMicroframe (uint64_t *microframeNumber,
+                       uint64_t *theTime);
+
+    /*!
+     * @brief       Return a recent microframe number of the USB controller.
+     * @discussion  This method will return a recent microframe number of the USB controller
+     *              with a timestamp captured near the microframe boundary.
+     *              This is most useful for scheduling future isochronous requests.
+     * @param       microframeNumber uint64_t pointer to be updated with the current frame number
+     * @param       theTime If not NULL, this will be updated with the system time assosiated with the returned microframe
+     * @return      KERN_SUCCESS is successful see IOReturn.h for error codes.
+     */
+    virtual kern_return_t
+    ReferenceMicroframe (uint64_t *microframeNumber,
+                         uint64_t *theTime);
 
     /*!
      * @brief       Retrieve the configuration descriptor in which this interface is defined
@@ -271,12 +296,14 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUSBHostInterface IOUSBHostInterface.iig:45-265 */
+/* generated class IOUSBHostInterface IOUSBHostInterface.iig:45-290 */
 
 #define IOUSBHostInterface__GetInterfaceDescriptorHeader_ID            0x9434ede8968ad899ULL
 #define IOUSBHostInterface_Open_ID            0xe1d4ddd5e2cbe425ULL
 #define IOUSBHostInterface_Close_ID            0xcc4d8955a6ca402dULL
 #define IOUSBHostInterface_GetFrameNumber_ID            0xa54dc3018b39ad1dULL
+#define IOUSBHostInterface_CurrentMicroframe_ID            0xcc9c6aa4a51a8b60ULL
+#define IOUSBHostInterface_ReferenceMicroframe_ID            0xa9c5097fdc49755fULL
 #define IOUSBHostInterface_CopyPipe_ID            0x86bb6756a5becea0ULL
 #define IOUSBHostInterface_SelectAlternateSetting_ID            0xbf28ca8ee6edc0d3ULL
 #define IOUSBHostInterface_GetPortStatus_ID            0xbed0143a5a239d9cULL
@@ -298,6 +325,14 @@ public:
 
 #define IOUSBHostInterface_GetFrameNumber_Args \
         uint64_t * frameNumber, \
+        uint64_t * theTime
+
+#define IOUSBHostInterface_CurrentMicroframe_Args \
+        uint64_t * microframeNumber, \
+        uint64_t * theTime
+
+#define IOUSBHostInterface_ReferenceMicroframe_Args \
+        uint64_t * microframeNumber, \
         uint64_t * theTime
 
 #define IOUSBHostInterface_CopyPipe_Args \
@@ -350,6 +385,18 @@ public:\
     kern_return_t\
     GetFrameNumber(\
         uint64_t * frameNumber,\
+        uint64_t * theTime,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    CurrentMicroframe(\
+        uint64_t * microframeNumber,\
+        uint64_t * theTime,\
+        OSDispatchMethod supermethod = NULL);\
+\
+    kern_return_t\
+    ReferenceMicroframe(\
+        uint64_t * microframeNumber,\
         uint64_t * theTime,\
         OSDispatchMethod supermethod = NULL);\
 \
@@ -416,6 +463,18 @@ public:\
         OSMetaClassBase * target,\
         GetFrameNumber_Handler func);\
 \
+    typedef kern_return_t (*CurrentMicroframe_Handler)(OSMetaClassBase * target, IOUSBHostInterface_CurrentMicroframe_Args);\
+    static kern_return_t\
+    CurrentMicroframe_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        CurrentMicroframe_Handler func);\
+\
+    typedef kern_return_t (*ReferenceMicroframe_Handler)(OSMetaClassBase * target, IOUSBHostInterface_ReferenceMicroframe_Args);\
+    static kern_return_t\
+    ReferenceMicroframe_Invoke(const IORPC rpc,\
+        OSMetaClassBase * target,\
+        ReferenceMicroframe_Handler func);\
+\
     typedef kern_return_t (*CopyPipe_Handler)(OSMetaClassBase * target, IOUSBHostInterface_CopyPipe_Args);\
     static kern_return_t\
     CopyPipe_Invoke(const IORPC rpc,\
@@ -470,6 +529,12 @@ protected:\
 \
     kern_return_t\
     GetFrameNumber_Impl(IOUSBHostInterface_GetFrameNumber_Args);\
+\
+    kern_return_t\
+    CurrentMicroframe_Impl(IOUSBHostInterface_CurrentMicroframe_Args);\
+\
+    kern_return_t\
+    ReferenceMicroframe_Impl(IOUSBHostInterface_ReferenceMicroframe_Args);\
 \
     kern_return_t\
     CopyPipe_Impl(IOUSBHostInterface_CopyPipe_Args);\
@@ -694,10 +759,10 @@ IOUSBHostInterface_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUSBHostInterface.iig:267-268 */
+/* IOUSBHostInterface.iig:292-293 */
 
 
-/* IOUSBHostInterface.iig:275- */
+/* IOUSBHostInterface.iig:300- */
 
 #endif /* ! _IOKIT_IOUSBHOSTINTERFACE_H */
 

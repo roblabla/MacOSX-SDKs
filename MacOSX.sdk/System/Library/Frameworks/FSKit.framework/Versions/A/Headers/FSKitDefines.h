@@ -39,4 +39,8 @@
 // Unavailable in original API
 #define FSKIT_API_UNAVAILABLE_V1 API_UNAVAILABLE(macos, ios, visionos) API_UNAVAILABLE(watchos, tvos)
 
+// macOS 16 API
+#define FSKIT_API_AVAILABILITY_V2 API_AVAILABLE(macos(26.0)) \
+    API_UNAVAILABLE(ios, visionos) API_UNAVAILABLE(watchos, tvos)
+
 #endif /* FSKitDefines_h */

@@ -1,109 +1,118 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 5200.5.1 -module-name HealthKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
-import CoreLocation
-import Foundation
-@_exported import HealthKit
-import Swift
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
-import os.log
-import notify
-import os
+// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature AccessLevelOnImport -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 6106 -module-name HealthKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+public import CoreLocation
+@_exported public import HealthKit
+public import Swift
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
+public import os.log
+public import os
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-public struct HKSampleQueryDescriptor<Sample> where Sample : HealthKit.HKSample {
-  public var predicates: [HKSamplePredicate<Sample>] {
+public struct HKSampleQueryDescriptor<Sample> : Swift.Sendable where Sample : HealthKit.HKSample {
+  public var predicates: [HealthKit.HKSamplePredicate<Sample>] {
     get
     set
   }
-  public var sortDescriptors: [SortDescriptor<Sample>]
-  public var limit: Int?
-  public init(predicates: [HKSamplePredicate<Sample>], sortDescriptors: [SortDescriptor<Sample>], limit: Int? = nil)
+  public var sortDescriptors: [Foundation.SortDescriptor<Sample>]
+  public var limit: Swift.Int?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(predicates: [HealthKit.HKSamplePredicate<Sample>], sortDescriptors: [Foundation.SortDescriptor<Sample>], limit: Swift.Int? = nil)
+  #endif
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKSampleQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> [Sample]
+extension HealthKit.HKSampleQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> [Sample]
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Output = [Sample]
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public struct HKStatisticsCollectionQueryDescriptor {
-  public var predicate: HKSamplePredicate<HKQuantitySample>
-  public var options: HKStatisticsOptions
-  public var anchorDate: Date
-  public var intervalComponents: DateComponents
-  public init(predicate: HKSamplePredicate<HKQuantitySample>, options: HKStatisticsOptions, anchorDate: Date, intervalComponents: DateComponents)
+  public var predicate: HealthKit.HKSamplePredicate<HealthKit.HKQuantitySample>
+  public var options: HealthKit.HKStatisticsOptions
+  public var anchorDate: Foundation.Date
+  public var intervalComponents: Foundation.DateComponents
+  public init(predicate: HealthKit.HKSamplePredicate<HealthKit.HKQuantitySample>, options: HealthKit.HKStatisticsOptions, anchorDate: Foundation.Date, intervalComponents: Foundation.DateComponents)
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKStatisticsCollectionQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> HKStatisticsCollection
+extension HealthKit.HKStatisticsCollectionQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> HealthKit.HKStatisticsCollection
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Output = HealthKit.HKStatisticsCollection
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKStatisticsCollectionQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Result {
-    public let statisticsCollection: HKStatisticsCollection
-    public let updatedStatistics: [HKStatistics]?
+extension HealthKit.HKStatisticsCollectionQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Result : Swift.Sendable {
+    public let statisticsCollection: HealthKit.HKStatisticsCollection
+    public let updatedStatistics: [HealthKit.HKStatistics]?
   }
-  public struct Results : AsyncSequence {
-    public typealias Element = HKStatisticsCollectionQueryDescriptor.Result
-    public struct Iterator : AsyncIteratorProtocol {
-      public mutating func next() async throws -> Element?
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = HealthKit.HKStatisticsCollectionQueryDescriptor.Result
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
+      public mutating func next() async throws -> HealthKit.HKStatisticsCollectionQueryDescriptor.Results.Element?
+      #endif
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKStatisticsCollectionQueryDescriptor.Results.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKStatisticsCollectionQueryDescriptor.Results.Iterator
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKStatisticsCollectionQueryDescriptor.Results.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKStatisticsCollectionQueryDescriptor.Results
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Sequence = HealthKit.HKStatisticsCollectionQueryDescriptor.Results
 }
 @available(iOS 15.4, macCatalyst 15.4, macOS 13.0, *)
 @available(watchOS, unavailable)
 public struct HKVerifiableClinicalRecordQueryDescriptor {
-  public var recordTypes: [HKVerifiableClinicalRecordCredentialType]
-  public var sourceTypes: [HKVerifiableClinicalRecordSourceType]
-  public var predicate: NSPredicate?
-  public init(recordTypes: [HKVerifiableClinicalRecordCredentialType], sourceTypes: [HKVerifiableClinicalRecordSourceType], predicate: NSPredicate? = nil)
+  public var recordTypes: [HealthKit.HKVerifiableClinicalRecordCredentialType]
+  public var sourceTypes: [HealthKit.HKVerifiableClinicalRecordSourceType]
+  public var predicate: Foundation.NSPredicate?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(recordTypes: [HealthKit.HKVerifiableClinicalRecordCredentialType], sourceTypes: [HealthKit.HKVerifiableClinicalRecordSourceType], predicate: Foundation.NSPredicate? = nil)
+  #endif
 }
 @available(iOS 15.4, macCatalyst 15.4, macOS 13.0, *)
 @available(watchOS, unavailable)
-extension HKVerifiableClinicalRecordQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> [HKVerifiableClinicalRecord]
+extension HealthKit.HKVerifiableClinicalRecordQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> [HealthKit.HKVerifiableClinicalRecord]
   @available(iOS 15.4, macOS 13.0, macCatalyst 15.4, *)
   @available(watchOS, unavailable)
   public typealias Output = [HealthKit.HKVerifiableClinicalRecord]
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKAttachmentStore {
-  public func addAttachment(to object: HKObject, name: String, contentType: UTType, url: URL, metadata: [String : Any] = [:], completion: @escaping (HKAttachment?, Error?) -> Void)
-  public func addAttachment(to object: HKObject, name: String, contentType: UTType, url: URL, metadata: [String : Any] = [:]) async throws -> HKAttachment
-  public func dataReader(for attachment: HKAttachment) -> HKAttachmentDataReader
+extension HealthKit.HKAttachmentStore {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func addAttachment(to object: HealthKit.HKObject, name: Swift.String, contentType: UniformTypeIdentifiers.UTType, url: Foundation.URL, metadata: [Swift.String : Any] = [:], completion: @escaping (HealthKit.HKAttachment?, (any Swift.Error)?) -> Swift.Void)
+  #endif
+  public func addAttachment(to object: HealthKit.HKObject, name: Swift.String, contentType: UniformTypeIdentifiers.UTType, url: Foundation.URL, metadata: [Swift.String : Any] = [:]) async throws -> HealthKit.HKAttachment
+  public func dataReader(for attachment: HealthKit.HKAttachment) -> HealthKit.HKAttachmentDataReader
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public struct HKWorkoutRouteQueryDescriptor {
-  public var workoutRoute: HKWorkoutRoute
-  public init(_ workoutRoute: HKWorkoutRoute)
+  public var workoutRoute: HealthKit.HKWorkoutRoute
+  public init(_ workoutRoute: HealthKit.HKWorkoutRoute)
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKWorkoutRouteQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Results : AsyncSequence {
-    public typealias Element = CLLocation
-    public struct Iterator : AsyncIteratorProtocol {
+extension HealthKit.HKWorkoutRouteQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = _LocationEssentials.CLLocation
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       @usableFromInline
-      internal var locationIterator: Array<CLLocation>.Iterator?
+      internal var locationIterator: Swift.Array<_LocationEssentials.CLLocation>.Iterator?
+      #if compiler(>=5.3) && $NonescapableTypes
       @usableFromInline
-      internal mutating func nextLocationIterator() async throws -> Array<CLLocation>.Iterator?
-      @inlinable public mutating func next() async throws -> Element? {
+      internal mutating func nextLocationIterator() async throws -> Swift.Array<_LocationEssentials.CLLocation>.Iterator?
+      #endif
+      #if compiler(>=5.3) && $NonescapableTypes
+      @inlinable public mutating func next() async throws -> HealthKit.HKWorkoutRouteQueryDescriptor.Results.Element? {
                  
                  
                 guard let next = locationIterator?.next() else {
@@ -112,45 +121,49 @@ extension HKWorkoutRouteQueryDescriptor : HKAsyncSequenceQuery {
                 }
                 return next
             }
+      #endif
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKWorkoutRouteQueryDescriptor.Results.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKWorkoutRouteQueryDescriptor.Results.Iterator
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKWorkoutRouteQueryDescriptor.Results.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKWorkoutRouteQueryDescriptor.Results
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Sequence = HealthKit.HKWorkoutRouteQueryDescriptor.Results
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public struct HKHeartbeatSeriesQueryDescriptor {
-  public var sample: HKHeartbeatSeriesSample
-  public init(_ sample: HKHeartbeatSeriesSample)
+  public var sample: HealthKit.HKHeartbeatSeriesSample
+  public init(_ sample: HealthKit.HKHeartbeatSeriesSample)
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKHeartbeatSeriesQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Heartbeat : Equatable, Hashable {
-    public let timeIntervalSinceStart: TimeInterval
-    public let precededByGap: Bool
+extension HealthKit.HKHeartbeatSeriesQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Heartbeat : Swift.Equatable, Swift.Hashable {
+    public let timeIntervalSinceStart: Foundation.TimeInterval
+    public let precededByGap: Swift.Bool
     public static func == (a: HealthKit.HKHeartbeatSeriesQueryDescriptor.Heartbeat, b: HealthKit.HKHeartbeatSeriesQueryDescriptor.Heartbeat) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
   }
-  public struct Results : AsyncSequence {
-    public typealias Element = Heartbeat
-    public struct Iterator : AsyncIteratorProtocol {
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = HealthKit.HKHeartbeatSeriesQueryDescriptor.Heartbeat
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       @usableFromInline
-      internal var heartbeatIterator: HeartbeatIterator?
+      internal var heartbeatIterator: HealthKit.HKHeartbeatSeriesQueryDescriptor.Results.HeartbeatIterator?
+      #if compiler(>=5.3) && $NonescapableTypes
       @usableFromInline
-      internal mutating func nextHeartbeatIterator() async throws -> HeartbeatIterator?
-      @inlinable public mutating func next() async throws -> Element? {
+      internal mutating func nextHeartbeatIterator() async throws -> HealthKit.HKHeartbeatSeriesQueryDescriptor.Results.HeartbeatIterator?
+      #endif
+      #if compiler(>=5.3) && $NonescapableTypes
+      @inlinable public mutating func next() async throws -> HealthKit.HKHeartbeatSeriesQueryDescriptor.Results.Element? {
                  
                  
                 guard let next = heartbeatIterator?.next() else {
@@ -159,16 +172,19 @@ extension HKHeartbeatSeriesQueryDescriptor : HKAsyncSequenceQuery {
                 }
                 return next
             }
+      #endif
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKHeartbeatSeriesQueryDescriptor.Results.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKHeartbeatSeriesQueryDescriptor.Results.Iterator
     @usableFromInline
-    internal struct HeartbeatIterator : IteratorProtocol {
+    internal struct HeartbeatIterator : Swift.IteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       @usableFromInline
-      internal mutating func next() -> HKHeartbeatSeriesQueryDescriptor.Heartbeat?
+      internal mutating func next() -> HealthKit.HKHeartbeatSeriesQueryDescriptor.Heartbeat?
+      #endif
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       @usableFromInline
       internal typealias Element = HealthKit.HKHeartbeatSeriesQueryDescriptor.Heartbeat
@@ -178,83 +194,96 @@ extension HKHeartbeatSeriesQueryDescriptor : HKAsyncSequenceQuery {
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKHeartbeatSeriesQueryDescriptor.Results
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Sequence = HealthKit.HKHeartbeatSeriesQueryDescriptor.Results
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKSamplePredicate {
-  public static func stateOfMind(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKStateOfMind>
+extension HealthKit.HKSamplePredicate {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func stateOfMind(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKStateOfMind>
+  #endif
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKStateOfMind.ValenceClassification {
-  public init?(valence: Double)
+extension HealthKit.HKStateOfMind.ValenceClassification {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(valence: Swift.Double)
+  #endif
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKStateOfMind {
-  public var labels: [HKStateOfMind.Label] {
+extension HealthKit.HKStateOfMind {
+  public var labels: [HealthKit.HKStateOfMind.Label] {
     get
   }
-  public var associations: [HKStateOfMind.Association] {
+  public var associations: [HealthKit.HKStateOfMind.Association] {
     get
   }
-  convenience public init(date: Date, kind: HKStateOfMind.Kind, valence: Double, labels: [HKStateOfMind.Label], associations: [HKStateOfMind.Association], metadata: [String : Any]? = [:])
+  #if compiler(>=5.3) && $NonescapableTypes
+  convenience public init(date: Foundation.Date, kind: HealthKit.HKStateOfMind.Kind, valence: Swift.Double, labels: [HealthKit.HKStateOfMind.Label], associations: [HealthKit.HKStateOfMind.Association], metadata: [Swift.String : Any]? = [:])
+  #endif
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public struct HKStatisticsQueryDescriptor {
-  public var predicate: HKSamplePredicate<HKQuantitySample>
-  public var options: HKStatisticsOptions
-  public init(predicate: HKSamplePredicate<HKQuantitySample>, options: HKStatisticsOptions)
+  public var predicate: HealthKit.HKSamplePredicate<HealthKit.HKQuantitySample>
+  public var options: HealthKit.HKStatisticsOptions
+  public init(predicate: HealthKit.HKSamplePredicate<HealthKit.HKQuantitySample>, options: HealthKit.HKStatisticsOptions)
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKStatisticsQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> HKStatistics?
+extension HealthKit.HKStatisticsQueryDescriptor : HealthKit.HKAsyncQuery {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> HealthKit.HKStatistics?
+  #endif
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Output = HealthKit.HKStatistics?
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public struct HKActivitySummaryQueryDescriptor {
-  public var predicate: NSPredicate?
-  public init(predicate: NSPredicate?)
+  public var predicate: Foundation.NSPredicate?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(predicate: Foundation.NSPredicate?)
+  #endif
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKActivitySummaryQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> [HKActivitySummary]
+extension HealthKit.HKActivitySummaryQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> [HealthKit.HKActivitySummary]
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Output = [HealthKit.HKActivitySummary]
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKActivitySummaryQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Results : AsyncSequence {
-    public typealias Element = [HKActivitySummary]
-    public struct Iterator : AsyncIteratorProtocol {
-      public mutating func next() async throws -> Element?
+extension HealthKit.HKActivitySummaryQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = [HealthKit.HKActivitySummary]
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
+      public mutating func next() async throws -> HealthKit.HKActivitySummaryQueryDescriptor.Results.Element?
+      #endif
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKActivitySummaryQueryDescriptor.Results.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKActivitySummaryQueryDescriptor.Results.Iterator
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKActivitySummaryQueryDescriptor.Results.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKActivitySummaryQueryDescriptor.Results
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Sequence = HealthKit.HKActivitySummaryQueryDescriptor.Results
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public struct HKElectrocardiogramQueryDescriptor {
-  public var electrocardiogram: HKElectrocardiogram
-  public init(_ electrocardiogram: HKElectrocardiogram)
+  public var electrocardiogram: HealthKit.HKElectrocardiogram
+  public init(_ electrocardiogram: HealthKit.HKElectrocardiogram)
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKElectrocardiogramQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Results : AsyncSequence {
-    public typealias Element = HKElectrocardiogram.VoltageMeasurement
-    public struct Iterator : AsyncIteratorProtocol {
-      @inlinable public mutating func next() async throws -> Element? {
+extension HealthKit.HKElectrocardiogramQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = HealthKit.HKElectrocardiogram.VoltageMeasurement
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
+      @inlinable public mutating func next() async throws -> HealthKit.HKElectrocardiogramQueryDescriptor.Results.Element? {
                  
                  
                 guard let next = nextMeasurement() else {
@@ -263,8 +292,11 @@ extension HKElectrocardiogramQueryDescriptor : HKAsyncSequenceQuery {
                 }
                 return next
             }
+      #endif
+      #if compiler(>=5.3) && $NonescapableTypes
       @usableFromInline
-      internal func nextMeasurement() -> HKElectrocardiogram.VoltageMeasurement?
+      internal func nextMeasurement() -> HealthKit.HKElectrocardiogram.VoltageMeasurement?
+      #endif
       @usableFromInline
       internal mutating func awaitMeasurementEnumerator() async throws
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
@@ -272,148 +304,173 @@ extension HKElectrocardiogramQueryDescriptor : HKAsyncSequenceQuery {
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKElectrocardiogramQueryDescriptor.Results.Iterator
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKElectrocardiogramQueryDescriptor.Results.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKElectrocardiogramQueryDescriptor.Results
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Sequence = HealthKit.HKElectrocardiogramQueryDescriptor.Results
-}
-public enum HKMCPregnancyDatesConstants {
-  public static let physiologicalWashoutDuration: Swift.Int
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public protocol HKAsyncQuery {
   associatedtype Output
-  func result(for healthStore: HKHealthStore) async throws -> Output
+  func result(for healthStore: HealthKit.HKHealthStore) async throws -> Self.Output
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public protocol HKAsyncSequenceQuery {
   associatedtype Sequence : _Concurrency.AsyncSequence
-  func results(for healthStore: HKHealthStore) -> Sequence
+  func results(for healthStore: HealthKit.HKHealthStore) -> Self.Sequence
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-public struct HKAnchoredObjectQueryDescriptor<Sample> where Sample : HealthKit.HKSample {
-  public var predicates: [HKSamplePredicate<Sample>] {
+public struct HKAnchoredObjectQueryDescriptor<Sample> : Swift.Sendable where Sample : HealthKit.HKSample {
+  public var predicates: [HealthKit.HKSamplePredicate<Sample>] {
     get
     set
   }
-  public var anchor: HKQueryAnchor?
-  public var limit: Int?
+  public var anchor: HealthKit.HKQueryAnchor?
+  public var limit: Swift.Int?
   public struct Result {
     public let addedSamples: [Sample]
-    public let deletedObjects: [HKDeletedObject]
-    public let newAnchor: HKQueryAnchor
+    public let deletedObjects: [HealthKit.HKDeletedObject]
+    public let newAnchor: HealthKit.HKQueryAnchor
   }
-  public init(predicates: [HKSamplePredicate<Sample>], anchor: HKQueryAnchor?, limit: Int? = nil)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(predicates: [HealthKit.HKSamplePredicate<Sample>], anchor: HealthKit.HKQueryAnchor?, limit: Swift.Int? = nil)
+  #endif
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKAnchoredObjectQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> Result
+extension HealthKit.HKAnchoredObjectQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Result
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Output = HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Result
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKAnchoredObjectQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Results : AsyncSequence {
-    public typealias Element = HKAnchoredObjectQueryDescriptor.Result
-    public struct Iterator : AsyncIteratorProtocol {
-      public mutating func next() async throws -> Element?
+extension HealthKit.HKAnchoredObjectQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Result
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
+      public mutating func next() async throws -> HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results.Element?
+      #endif
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results.Iterator
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Sequence = HealthKit.HKAnchoredObjectQueryDescriptor<Sample>.Results
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKAttachment {
-  public struct AsyncBytes : AsyncSequence {
-    public typealias Element = UInt8
-    public func makeAsyncIterator() -> BufferedAsyncByteIterator
+extension HealthKit.HKAttachment {
+  public struct AsyncBytes : _Concurrency.AsyncSequence {
+    public typealias Element = Swift.UInt8
+    public func makeAsyncIterator() -> HealthKit.BufferedAsyncByteIterator
     @available(iOS 16.0, watchOS 9.0, macOS 13.0, macCatalyst 16.0, *)
     public typealias AsyncIterator = HealthKit.BufferedAsyncByteIterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 16.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
 }
-extension HKHealthStore {
+extension HealthKit.HKHealthStore {
   @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-  public func requestAuthorization(toShare typesToShare: Set<HKSampleType>, read typesToRead: Set<HKObjectType>) async throws
+  public func requestAuthorization(toShare typesToShare: Swift.Set<HealthKit.HKSampleType>, read typesToRead: Swift.Set<HealthKit.HKObjectType>) async throws
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, *)
 public struct HKWorkoutEffortRelationshipQueryDescriptor {
-  public var predicate: NSPredicate?
-  public var anchor: HKQueryAnchor?
-  public var option: HKWorkoutEffortRelationshipQueryOptions
+  public var predicate: Foundation.NSPredicate?
+  public var anchor: HealthKit.HKQueryAnchor?
+  public var option: HealthKit.HKWorkoutEffortRelationshipQueryOptions
   public struct Result {
-    public let relationships: [HKWorkoutEffortRelationship]
-    public let newAnchor: HKQueryAnchor
+    public let relationships: [HealthKit.HKWorkoutEffortRelationship]
+    public let newAnchor: HealthKit.HKQueryAnchor
   }
-  public init(predicate: NSPredicate?, anchor: HKQueryAnchor?, option: HKWorkoutEffortRelationshipQueryOptions)
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(predicate: Foundation.NSPredicate?, anchor: HealthKit.HKQueryAnchor?, option: HealthKit.HKWorkoutEffortRelationshipQueryOptions)
+  #endif
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, *)
-extension HKWorkoutEffortRelationshipQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> Result
+extension HealthKit.HKWorkoutEffortRelationshipQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Result
   @available(iOS 18.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
   public typealias Output = HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Result
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, *)
-extension HKWorkoutEffortRelationshipQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Results : AsyncSequence {
-    public typealias Element = HKWorkoutEffortRelationshipQueryDescriptor.Result
-    public struct Iterator : AsyncIteratorProtocol {
-      public mutating func next() async throws -> Element?
+extension HealthKit.HKWorkoutEffortRelationshipQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Result
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
+      public mutating func next() async throws -> HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results.Element?
+      #endif
       @available(iOS 18.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
       public typealias Element = HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results.Iterator
     @available(iOS 18.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
     public typealias AsyncIterator = HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results
   @available(iOS 18.0, watchOS 11.0, macOS 15.0, macCatalyst 18.0, *)
   public typealias Sequence = HealthKit.HKWorkoutEffortRelationshipQueryDescriptor.Results
 }
 @available(iOS 14.0, watchOS 7.0, macCatalyst 14.0, macOS 13.0, *)
-extension HKElectrocardiogramQuery {
+extension HealthKit.HKElectrocardiogramQuery {
   public enum Result {
-    case measurement(HKElectrocardiogram.VoltageMeasurement)
-    case error(Error)
+    case measurement(HealthKit.HKElectrocardiogram.VoltageMeasurement)
+    case error(any Swift.Error)
     case done
   }
-  convenience public init(_ ecg: HKElectrocardiogram, dataHandler: @escaping (HKElectrocardiogramQuery, HKElectrocardiogramQuery.Result) -> Void)
+  convenience public init(_ ecg: HealthKit.HKElectrocardiogram, dataHandler: @escaping (HealthKit.HKElectrocardiogramQuery, HealthKit.HKElectrocardiogramQuery.Result) -> Swift.Void)
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-public struct HKSamplePredicate<Sample> : Equatable, Hashable where Sample : HealthKit.HKSample {
-  public let sampleType: HKSampleType
-  public let nsPredicate: NSPredicate?
-  public static func audiogram(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKAudiogramSample>
-  public static func categorySample(type categoryType: HKCategoryType, predicate: NSPredicate? = nil) -> HKSamplePredicate<HKCategorySample>
+public struct HKSamplePredicate<Sample> : Swift.Equatable, Swift.Hashable, Swift.Sendable where Sample : HealthKit.HKSample {
+  public let sampleType: HealthKit.HKSampleType
+  nonisolated(unsafe) public let nsPredicate: Foundation.NSPredicate?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func audiogram(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKAudiogramSample>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func categorySample(type categoryType: HealthKit.HKCategoryType, predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKCategorySample>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS, unavailable)
-  public static func clinicalRecord(type clinicalType: HKClinicalType, predicate: NSPredicate? = nil) -> HKSamplePredicate<HKClinicalRecord>
-  public static func correlation(type correlationType: HKCorrelationType, predicate: NSPredicate? = nil) -> HKSamplePredicate<HKCorrelation>
-  public static func electrocardiogram(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKElectrocardiogram>
-  public static func heartbeatSeries(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKHeartbeatSeriesSample>
-  public static func quantitySample(type quantityType: HKQuantityType, predicate: NSPredicate? = nil) -> HKSamplePredicate<HKQuantitySample>
-  public static func sample(type sampleType: HKSampleType, predicate: NSPredicate? = nil) -> HKSamplePredicate<HKSample>
-  public static func workout(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKWorkout>
-  public static func workoutRoute(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKWorkoutRoute>
+  public static func clinicalRecord(type clinicalType: HealthKit.HKClinicalType, predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKClinicalRecord>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func correlation(type correlationType: HealthKit.HKCorrelationType, predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKCorrelation>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func electrocardiogram(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKElectrocardiogram>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func heartbeatSeries(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKHeartbeatSeriesSample>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func quantitySample(type quantityType: HealthKit.HKQuantityType, predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKQuantitySample>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func sample(type sampleType: HealthKit.HKSampleType, predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKSample>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func workout(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKWorkout>
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func workoutRoute(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKWorkoutRoute>
+  #endif
   public static func == (a: HealthKit.HKSamplePredicate<Sample>, b: HealthKit.HKSamplePredicate<Sample>) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
@@ -421,34 +478,38 @@ public struct HKSamplePredicate<Sample> : Equatable, Hashable where Sample : Hea
   }
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKSamplePredicate {
-  public static func visionPrescription(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKVisionPrescription>
+extension HealthKit.HKSamplePredicate {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func visionPrescription(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKVisionPrescription>
+  #endif
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKAppleSleepingBreathingDisturbancesClassification {
-  public init?(classifying appleSleepingBreathingDisturbances: HKQuantity)
+extension HealthKit.HKAppleSleepingBreathingDisturbancesClassification {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init?(classifying appleSleepingBreathingDisturbances: HealthKit.HKQuantity)
+  #endif
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKAppleSleepingBreathingDisturbancesClassification : CaseIterable {
-  public static var allCases: [HKAppleSleepingBreathingDisturbancesClassification] {
+extension HealthKit.HKAppleSleepingBreathingDisturbancesClassification : Swift.CaseIterable {
+  public static var allCases: [HealthKit.HKAppleSleepingBreathingDisturbancesClassification] {
     get
   }
   @available(iOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 18.0, *)
   public typealias AllCases = [HealthKit.HKAppleSleepingBreathingDisturbancesClassification]
 }
 @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-extension HKAppleWalkingSteadinessClassification {
-  public init(for appleWalkingSteadiness: HKQuantity) throws
-  public var minimum: HKQuantity {
+extension HealthKit.HKAppleWalkingSteadinessClassification {
+  public init(for appleWalkingSteadiness: HealthKit.HKQuantity) throws
+  public var minimum: HealthKit.HKQuantity {
     get
   }
-  public var maximum: HKQuantity {
+  public var maximum: HealthKit.HKQuantity {
     get
   }
 }
 @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-extension HKAppleWalkingSteadinessClassification : CaseIterable {
-  public static var allCases: [HKAppleWalkingSteadinessClassification] {
+extension HealthKit.HKAppleWalkingSteadinessClassification : Swift.CaseIterable {
+  public static var allCases: [HealthKit.HKAppleWalkingSteadinessClassification] {
     get
   }
   @available(iOS 15.0, watchOS 8.0, macOS 13.0, macCatalyst 15.0, *)
@@ -456,12 +517,12 @@ extension HKAppleWalkingSteadinessClassification : CaseIterable {
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
 public struct HKQuantitySeriesSampleQueryDescriptor {
-  public var predicate: HKSamplePredicate<HKQuantitySample>
-  public struct Options : OptionSet {
+  public var predicate: HealthKit.HKSamplePredicate<HealthKit.HKQuantitySample>
+  public struct Options : Swift.OptionSet, Swift.Sendable {
     public static let includeSample: HealthKit.HKQuantitySeriesSampleQueryDescriptor.Options
     public static let orderByQuantitySampleStartDate: HealthKit.HKQuantitySeriesSampleQueryDescriptor.Options
-    public let rawValue: Int
-    public init(rawValue: Int)
+    public let rawValue: Swift.Int
+    public init(rawValue: Swift.Int)
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias ArrayLiteralElement = HealthKit.HKQuantitySeriesSampleQueryDescriptor.Options
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
@@ -469,27 +530,28 @@ public struct HKQuantitySeriesSampleQueryDescriptor {
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias RawValue = Swift.Int
   }
-  public var options: Options
-  public init(predicate: HKSamplePredicate<HKQuantitySample>, options: Options = [])
+  public var options: HealthKit.HKQuantitySeriesSampleQueryDescriptor.Options
+  public init(predicate: HealthKit.HKSamplePredicate<HealthKit.HKQuantitySample>, options: HealthKit.HKQuantitySeriesSampleQueryDescriptor.Options = [])
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKQuantitySeriesSampleQueryDescriptor : HKAsyncSequenceQuery {
-  public struct Result : Equatable, Hashable {
-    public let quantity: HKQuantity
-    public let dateInterval: DateInterval
-    public let sample: HKQuantitySample?
+extension HealthKit.HKQuantitySeriesSampleQueryDescriptor : HealthKit.HKAsyncSequenceQuery {
+  public struct Result : Swift.Equatable, Swift.Hashable, Swift.Sendable {
+    public let quantity: HealthKit.HKQuantity
+    public let dateInterval: Foundation.DateInterval
+    public let sample: HealthKit.HKQuantitySample?
     public static func == (a: HealthKit.HKQuantitySeriesSampleQueryDescriptor.Result, b: HealthKit.HKQuantitySeriesSampleQueryDescriptor.Result) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
   }
-  public struct Results : AsyncSequence {
-    public typealias Element = Result
-    public struct Iterator : AsyncIteratorProtocol {
+  public struct Results : _Concurrency.AsyncSequence {
+    public typealias Element = HealthKit.HKQuantitySeriesSampleQueryDescriptor.Result
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
       @usableFromInline
-      internal var resultIterator: Array<Result>.Iterator?
-      @inlinable public mutating func next() async throws -> Element? {
+      internal var resultIterator: Swift.Array<HealthKit.HKQuantitySeriesSampleQueryDescriptor.Result>.Iterator?
+      #if compiler(>=5.3) && $NonescapableTypes
+      @inlinable public mutating func next() async throws -> HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results.Element? {
                  
                  
                 guard let next = resultIterator?.next() else {
@@ -498,20 +560,23 @@ extension HKQuantitySeriesSampleQueryDescriptor : HKAsyncSequenceQuery {
                 }
                 return next
             }
+      #endif
+      #if compiler(>=5.3) && $NonescapableTypes
       @usableFromInline
-      internal mutating func nextResultIterator() async throws -> Array<Result>.Iterator?
+      internal mutating func nextResultIterator() async throws -> Swift.Array<HealthKit.HKQuantitySeriesSampleQueryDescriptor.Result>.Iterator?
+      #endif
       @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
       public typealias Element = HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results.Element
       @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
       @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
     }
-    public func makeAsyncIterator() -> Iterator
+    public func makeAsyncIterator() -> HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results.Iterator
     @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
     public typealias AsyncIterator = HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results.Iterator
     @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 15.4, *)
     @_implements(_Concurrency.AsyncSequence, Failure) public typealias __AsyncSequence_Failure = any Swift.Error
   }
-  public func results(for healthStore: HKHealthStore) -> Results
+  public func results(for healthStore: HealthKit.HKHealthStore) -> HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Sequence = HealthKit.HKQuantitySeriesSampleQueryDescriptor.Results
 }
@@ -519,69 +584,72 @@ extension HKQuantitySeriesSampleQueryDescriptor : HKAsyncSequenceQuery {
 public protocol HKCategoryValuePredicateProviding : Swift.Hashable, Swift.RawRepresentable {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValuePredicateProviding where Self.RawValue == Swift.Int {
-  public static func predicateForSamples(_ operatorType: NSComparisonPredicate.Operator, value: Self) -> NSPredicate
-  public static func predicateForSamples(equalTo values: Set<Self>) -> NSPredicate
+extension HealthKit.HKCategoryValuePredicateProviding where Self.RawValue == Swift.Int {
+  public static func predicateForSamples(_ operatorType: Foundation.NSComparisonPredicate.Operator, value: Self) -> Foundation.NSPredicate
+  public static func predicateForSamples(equalTo values: Swift.Set<Self>) -> Foundation.NSPredicate
 }
 @_hasMissingDesignatedInitializers @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
 public class HKAttachmentDataReader {
-  public var attachment: HKAttachment {
+  public var attachment: HealthKit.HKAttachment {
     get
   }
-  public var progress: Progress {
+  public var progress: Foundation.Progress {
     get
   }
-  public var data: Data {
+  public var data: Foundation.Data {
     get async throws
   }
-  public var bytes: HKAttachment.AsyncBytes {
+  public var bytes: HealthKit.HKAttachment.AsyncBytes {
     get
   }
   @objc deinit
 }
-extension HKCategoryType {
+extension HealthKit.HKCategoryType {
   @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-  convenience public init(_ identifier: HKCategoryTypeIdentifier)
+  convenience public init(_ identifier: HealthKit.HKCategoryTypeIdentifier)
 }
-extension HKCharacteristicType {
+extension HealthKit.HKCharacteristicType {
   @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-  convenience public init(_ identifier: HKCharacteristicTypeIdentifier)
+  convenience public init(_ identifier: HealthKit.HKCharacteristicTypeIdentifier)
 }
 @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-extension HKClinicalType {
+extension HealthKit.HKClinicalType {
   @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-  convenience public init(_ identifier: HKClinicalTypeIdentifier)
+  convenience public init(_ identifier: HealthKit.HKClinicalTypeIdentifier)
 }
-extension HKCorrelationType {
+extension HealthKit.HKCorrelationType {
   @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-  convenience public init(_ identifier: HKCorrelationTypeIdentifier)
+  convenience public init(_ identifier: HealthKit.HKCorrelationTypeIdentifier)
 }
-extension HKDocumentType {
+extension HealthKit.HKDocumentType {
   @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-  convenience public init(_ identifier: HKDocumentTypeIdentifier)
+  convenience public init(_ identifier: HealthKit.HKDocumentTypeIdentifier)
 }
-extension HKQuantityType {
+extension HealthKit.HKQuantityType {
   @available(iOS 15.0, watchOS 8.0, macCatalyst 15.0, macOS 13.0, *)
-  convenience public init(_ identifier: HKQuantityTypeIdentifier)
+  convenience public init(_ identifier: HealthKit.HKQuantityTypeIdentifier)
 }
-extension HKScoredAssessmentType {
+extension HealthKit.HKScoredAssessmentType {
   @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-  convenience public init(_ identifier: HKScoredAssessmentTypeIdentifier)
+  convenience public init(_ identifier: HealthKit.HKScoredAssessmentTypeIdentifier)
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
 @usableFromInline
 @frozen internal struct _AsyncBytesBuffer {
-  internal var storage: AnyObject?
+  internal var storage: Swift.AnyObject?
   @usableFromInline
-  internal var nextPointer: UnsafeRawPointer
+  internal var nextPointer: Swift.UnsafeRawPointer
   @usableFromInline
-  internal var endPointer: UnsafeRawPointer
+  internal var endPointer: Swift.UnsafeRawPointer
   internal var totalBytesRead: Swift.Int = 0
   @usableFromInline
-  internal init(capacity: Int, readFunction: @escaping (UnsafeMutableRawBufferPointer, Int) async throws -> Int)
+  internal init(capacity: Swift.Int, readFunction: @escaping (Swift.UnsafeMutableRawBufferPointer, Swift.Int) async throws -> Swift.Int)
+  #if compiler(>=5.3) && $NonescapableTypes
   @usableFromInline
-  @inline(never) internal mutating func reloadBufferAndNext() async throws -> UInt8?
-  @inlinable @inline(__always) internal mutating func next() async throws -> UInt8? {
+  @inline(never) internal mutating func reloadBufferAndNext() async throws -> Swift.UInt8?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @inlinable @inline(__always) internal mutating func next() async throws -> Swift.UInt8? {
         if _fastPath(nextPointer != endPointer) {
             let byte = nextPointer.load(fromByteOffset: 0, as: UInt8.self)
             nextPointer += 1
@@ -589,109 +657,150 @@ extension HKScoredAssessmentType {
         }
         return try await reloadBufferAndNext()
     }
+  #endif
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-public struct BufferedAsyncByteIterator : AsyncIteratorProtocol {
-  public typealias Element = UInt8
+public struct BufferedAsyncByteIterator : _Concurrency.AsyncIteratorProtocol {
+  public typealias Element = Swift.UInt8
   @usableFromInline
-  internal var buffer: _AsyncBytesBuffer
-  @inlinable @inline(__always) public mutating func next() async throws -> UInt8? {
+  internal var buffer: HealthKit._AsyncBytesBuffer
+  #if compiler(>=5.3) && $NonescapableTypes
+  @inlinable @inline(__always) public mutating func next() async throws -> Swift.UInt8? {
         return try await buffer.next()
     }
+  #endif
   @available(iOS 18.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, macOS 15.0, macCatalyst 16.0, *)
   @_implements(_Concurrency.AsyncIteratorProtocol, Failure) public typealias __AsyncIteratorProtocol_Failure = any Swift.Error
 }
-@available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-public struct HKSourceQueryDescriptor<Sample> where Sample : HealthKit.HKSample {
-  public var predicate: HKSamplePredicate<Sample>
-  public init(predicate: HKSamplePredicate<Sample>)
+@available(iOS 26.0, watchOS 26.0, macCatalyst 26.0, macOS 26.0, visionOS 26.0, *)
+extension HealthKit.HKActivitySummary : @unchecked Swift.Sendable {
+}
+@available(iOS 26.0, watchOS 26.0, macCatalyst 26.0, macOS 26.0, visionOS 26.0, *)
+extension HealthKit.HKMedicationDoseEvent {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var doseQuantity: Swift.Double? {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  public var scheduledDoseQuantity: Swift.Double? {
+    get
+  }
+  #endif
 }
 @available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
-extension HKSourceQueryDescriptor : HKAsyncQuery {
-  public func result(for healthStore: HKHealthStore) async throws -> [HKSource]
+public struct HKSourceQueryDescriptor<Sample> where Sample : HealthKit.HKSample {
+  public var predicate: HealthKit.HKSamplePredicate<Sample>
+  public init(predicate: HealthKit.HKSamplePredicate<Sample>)
+}
+@available(iOS 15.4, watchOS 8.5, macCatalyst 15.4, macOS 13.0, *)
+extension HealthKit.HKSourceQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> [HealthKit.HKSource]
   @available(iOS 15.4, watchOS 8.5, macOS 13.0, macCatalyst 15.4, *)
   public typealias Output = [HealthKit.HKSource]
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKSamplePredicate {
-  public static func gad7Assessment(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKGAD7Assessment>
+extension HealthKit.HKSamplePredicate {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func gad7Assessment(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKGAD7Assessment>
+  #endif
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKGAD7Assessment {
-  convenience public init(date: Date, answers: [HKGAD7Assessment.Answer], metadata: [String : Any]? = [:])
-  public var answers: [HKGAD7Assessment.Answer] {
+extension HealthKit.HKGAD7Assessment {
+  #if compiler(>=5.3) && $NonescapableTypes
+  convenience public init(date: Foundation.Date, answers: [HealthKit.HKGAD7Assessment.Answer], metadata: [Swift.String : Any]? = [:])
+  #endif
+  public var answers: [HealthKit.HKGAD7Assessment.Answer] {
     get
   }
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValue : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValue : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueAppetiteChanges : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueAppetiteChanges : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueAppleStandHour : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueAppleStandHour : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueAppleWalkingSteadinessEvent : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueAppleWalkingSteadinessEvent : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueCervicalMucusQuality : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueCervicalMucusQuality : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueContraceptive : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueContraceptive : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueEnvironmentalAudioExposureEvent : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueEnvironmentalAudioExposureEvent : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueHeadphoneAudioExposureEvent : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueHeadphoneAudioExposureEvent : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueLowCardioFitnessEvent : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueLowCardioFitnessEvent : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS, introduced: 16.0, deprecated: 18.0, renamed: "HKCategoryValueVaginalBleeding")
 @available(watchOS, introduced: 9.0, deprecated: 11.0, renamed: "HKCategoryValueVaginalBleeding")
 @available(macCatalyst, introduced: 16.0, deprecated: 18.0, renamed: "HKCategoryValueVaginalBleeding")
 @available(macOS, introduced: 13.0, deprecated: 15.0, renamed: "HKCategoryValueVaginalBleeding")
 @available(visionOS, introduced: 1.0, deprecated: 2.0, renamed: "HKCategoryValueVaginalBleeding")
-extension HKCategoryValueMenstrualFlow : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueMenstrualFlow : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueOvulationTestResult : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueOvulationTestResult : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValuePregnancyTestResult : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValuePregnancyTestResult : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValuePresence : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValuePresence : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueProgesteroneTestResult : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueProgesteroneTestResult : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueSeverity : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueSeverity : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueSleepAnalysis : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueSleepAnalysis : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKCategoryValueVaginalBleeding : HKCategoryValuePredicateProviding {
+extension HealthKit.HKCategoryValueVaginalBleeding : HealthKit.HKCategoryValuePredicateProviding {
 }
 @available(iOS 16.0, watchOS 9.0, macCatalyst 16.0, macOS 13.0, *)
-extension HKCategoryValueSleepAnalysis {
-  public static var allAsleepValues: Set<HKCategoryValueSleepAnalysis> {
+extension HealthKit.HKCategoryValueSleepAnalysis {
+  public static var allAsleepValues: Swift.Set<HealthKit.HKCategoryValueSleepAnalysis> {
     get
   }
 }
-@available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKSamplePredicate {
-  public static func phq9Assessment(_ predicate: NSPredicate? = nil) -> HKSamplePredicate<HKPHQ9Assessment>
+@available(iOS 26.0, watchOS 26.0, macCatalyst 26.0, macOS 26.0, visionOS 26.0, *)
+public struct HKUserAnnotatedMedicationQueryDescriptor {
+  public var predicate: Foundation.NSPredicate?
+  public var limit: Swift.Int?
+  #if compiler(>=5.3) && $NonescapableTypes
+  public init(predicate: Foundation.NSPredicate? = nil, limit: Swift.Int? = nil)
+  #endif
+}
+@available(iOS 26.0, watchOS 26.0, macCatalyst 26.0, macOS 26.0, visionOS 26.0, *)
+extension HealthKit.HKUserAnnotatedMedicationQueryDescriptor : HealthKit.HKAsyncQuery {
+  public func result(for healthStore: HealthKit.HKHealthStore) async throws -> [HealthKit.HKUserAnnotatedMedication]
+  @available(iOS 26.0, watchOS 26.0, visionOS 26.0, macOS 26.0, macCatalyst 26.0, *)
+  public typealias Output = [HealthKit.HKUserAnnotatedMedication]
 }
 @available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
-extension HKPHQ9Assessment {
-  convenience public init(date: Date, answers: [HKPHQ9Assessment.Answer], metadata: [String : Any]? = [:])
-  public var answers: [HKPHQ9Assessment.Answer] {
+extension HealthKit.HKSamplePredicate {
+  #if compiler(>=5.3) && $NonescapableTypes
+  public static func phq9Assessment(_ predicate: Foundation.NSPredicate? = nil) -> HealthKit.HKSamplePredicate<HealthKit.HKPHQ9Assessment>
+  #endif
+}
+@available(iOS 18.0, watchOS 11.0, macCatalyst 18.0, macOS 15.0, visionOS 2.0, *)
+extension HealthKit.HKPHQ9Assessment {
+  #if compiler(>=5.3) && $NonescapableTypes
+  convenience public init(date: Foundation.Date, answers: [HealthKit.HKPHQ9Assessment.Answer], metadata: [Swift.String : Any]? = [:])
+  #endif
+  public var answers: [HealthKit.HKPHQ9Assessment.Answer] {
     get
   }
 }

@@ -37,9 +37,7 @@ typedef NS_ENUM(NSInteger, AVAssetSegmentType) {
 /*!
 	@class		AVAssetSegmentReport
 	@abstract	This class provides information on a segment data.
-	@discussion	Clients may get an instance of AVAssetSegmentReport through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: delegate method, which is defined in AVAssetWriter.h.
-
-				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+	@discussion	Clients may get an instance of AVAssetSegmentReport through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: delegate method, which is defined in AVAssetWriter.h. Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos)

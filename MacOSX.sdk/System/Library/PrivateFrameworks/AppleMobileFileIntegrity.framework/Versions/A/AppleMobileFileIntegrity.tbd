@@ -9,7 +9,8 @@ exports:
                        _AMFIGetSEPDeviceState, _AMFIGetSecurityBootMode, _AMFIGetSecurityBootModeArmed, 
                        _AMFIInitiateDataMigration, _AMFIIsDeveloperModeEnabled, _AMFIMDMModeEnroll, 
                        _AMFIMDMModeRemove, _AMFIProfileCommitProfile, _AMFIProfileGetScheduledProfile, 
-                       _AMFIProfileRemoveTrust, _AMFIProfileRequiresReboot, _AMFIProfileScheduleTrust, 
+                       _AMFIProfileRemoveTeamIDTrust, _AMFIProfileRemoveTrust, _AMFIProfileRequiresReboot, 
+                       _AMFIProfileScheduleTrust, _AMFIProfileSetTeamIDTrustWithOptions, 
                        _AMFIProfileSetTrust, _AMFIProfileSetTrustWithOptions, _AMFIShouldShowDeveloperModeSettings, 
                        _AMFIShowOverridePath, _AMFISupervisedModeSetState, _AppleMobileFileIntegrityVersionNumber, 
                        _AppleMobileFileIntegrityVersionString, _LWCRTypeVerificationBackend_errorStringForCode, 
@@ -25,8 +26,8 @@ exports:
                        _amfi_restricted_execution_mode_enable, _amfi_restricted_execution_mode_status, 
                        _appSandboxEntitlements, _developerModeEntitlements, _entitlementsThatForceHardening, 
                        _errorCodeForMISError, _errorCodeForProfileManagerError, _errorStringForAMFIErrorCode, 
-                       _forceRuntimeAndLVEntitlements, _hardenedRuntimeEntitlements, 
-                       _hardenedRuntimeJITEntitlement, _hexStringForData, _kAMFILockdownErrHasPasscode, 
+                       _hardenedRuntimeEntitlements, _hardenedRuntimeJITEntitlement, 
+                       _hexStringForData, _iCloudForceHardeningEntitlements, _kAMFILockdownErrHasPasscode, 
                        _kAMFILockdownErrKey, _kAMFILockdownErrNotADict, _kAMFILockdownErrUnknown, 
                        _kAMFIPreflightOptionsCpuSubType, _kAMFIPreflightOptionsCpuType, 
                        _kAMFIPreflightOptionsFlags, _kAMFIPreflightOptionsSliceOffset, 
@@ -37,8 +38,8 @@ exports:
                        _kKnownOperatorArrayOperators, _kKnownOperatorArrayOperatorsSize, 
                        _kKnownQueryFacts, _kKnownQueryFactsSize, _matchIn, _restrictionExemptEntitlements, 
                        _softRestrictedEntitlements, _systemExtensionEntitlements, 
-                       _systemExtensionEntitlementsThatAllowJit, _unrestrictedEntitlements, 
-                       _unrestrictedWhenSIPisOff ]
+                       _systemExtensionEntitlementsThatAllowJit, _tccForceHardeningEntitlements, 
+                       _unrestrictedEntitlements, _unrestrictedWhenSIPisOff ]
     objc-classes:    [ AMFIConnection, AMFIError, AMFIFMKLog, AMFIPathValidator_ios, 
                        AMFIPathValidator_macos, AMFIRequirementsManager, LWCRTypeErrorContext, 
                        ValidationMetrics ]

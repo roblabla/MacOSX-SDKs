@@ -137,7 +137,7 @@ typedef NS_ENUM(NSUInteger, CIRenderDestinationAlphaMode) {
     CIRenderDestinationAlphaUnpremultiplied = 2
 };
 
-// This property will defualt to an appropriate value given
+// This property will default to an appropriate value given
 // the object that the CIRenderDestination was initialized with.
 // This property can be set to a different value if desired.
 @property CIRenderDestinationAlphaMode alphaMode;
@@ -168,7 +168,7 @@ typedef NS_ENUM(NSUInteger, CIRenderDestinationAlphaMode) {
 // This property is initialized to false if the destination's format supports extended range
 @property (getter=isClamped) BOOL clamped;
 
-// This property will defualt to an appropriate value given
+// This property will default to an appropriate value given
 // the object that the CIRenderDestination was initialized with.
 // This property can be  set to a different colorSpace if desired.
 // This property can be set to nil to disable color matching
@@ -183,6 +183,13 @@ typedef NS_ENUM(NSUInteger, CIRenderDestinationAlphaMode) {
 // If false, then the blendKernel is applied in the CIContext's working colorspace.
 // This is false by default.
 @property BOOL blendsInDestinationColorSpace;
+
+/// Tell the next render using this destination to capture a Metal trace.
+/// 
+/// If this property is set to a file-based URL, then the next render using this 
+/// destination will capture a Metal trace, deleting any existing file if present.
+/// This property is nil by default.
+@property (nullable, nonatomic, retain) NSURL* captureTraceURL NS_AVAILABLE(16_0, 19_0);
 
 @end
 

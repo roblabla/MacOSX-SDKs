@@ -104,6 +104,11 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // identifiers in the application's entitlement.
 @property (nonatomic, copy) NSString *merchantIdentifier;
 
+// An indentifier which should be used by partners that support "inline provisioning" (the
+// addition of a Wallet pass without leaving a third-party app). The identifier can be used to
+// identify the partner whose app experience has lead to the successful provisioning.
+@property (nonatomic, copy, nullable) NSString *attributionIdentifier API_AVAILABLE(ios(26.0));
+
 // The merchant's ISO country code.
 @property (nonatomic, copy) NSString *countryCode;
 
@@ -156,6 +161,7 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 
 // Shipping methods supported by the merchant.
 @property (nonatomic, copy, nullable) NSArray<PKShippingMethod *> *shippingMethods;
+
 
 // Indicates the display mode for the shipping (e.g, "Pick Up", "Ship To", "Deliver To"). Localized.
 // The default is PKShippingTypeShipping

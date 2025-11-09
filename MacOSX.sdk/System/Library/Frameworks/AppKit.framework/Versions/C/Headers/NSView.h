@@ -574,6 +574,13 @@ APPKIT_EXTERN NSDefinitionPresentationType const NSDefinitionPresentationTypeDic
 
 @end
 
+@interface NSView (NSCompactControlSizeMetrics)
+/// When this property is true, any NSControls in the view or its descendants will be sized with compact
+/// metrics compatible with macOS 15 and earlier.
+/// Defaults to false
+@property BOOL prefersCompactControlSizeMetrics API_AVAILABLE(macos(26.0));
+@end
+
 @interface NSView(NSTrackingArea)
 /* The following methods are meant to be invoked, and probably don't need to be overridden
 */

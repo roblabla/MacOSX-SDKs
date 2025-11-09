@@ -72,6 +72,36 @@ MTL_EXPORT API_AVAILABLE(macos(10.14), ios(12.0))
  */
 @property (readwrite, nonatomic) BOOL inheritBuffers;
 
+/// Configures whether the indirect command buffer inherits the depth stencil state from the encoder.
+///
+/// The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+@property (readwrite, nonatomic) BOOL inheritDepthStencilState API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Configures whether the indirect command buffer inherits the depth bias from the encoder.
+///
+/// The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+@property (readwrite, nonatomic) BOOL inheritDepthBias API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Configures whether the indirect command buffer inherits the depth clip mode from the encoder.
+///
+/// The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+@property (readwrite, nonatomic) BOOL inheritDepthClipMode API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Configures whether the indirect command buffer inherits the cull mode from the encoder.
+///
+/// The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+@property (readwrite, nonatomic) BOOL inheritCullMode API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Configures whether the indirect command buffer inherits the front facing winding from the encoder.
+///
+/// The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+@property (readwrite, nonatomic) BOOL inheritFrontFacingWinding API_AVAILABLE(macos(26.0), ios(26.0));
+
+/// Configures whether the indirect command buffer inherits the triangle fill mode from the encoder.
+///
+/// The property's default value is <doc://com.apple.documentation/documentation/swift/true>.
+@property (readwrite, nonatomic) BOOL inheritTriangleFillMode API_AVAILABLE(macos(26.0), ios(26.0));
+
 
 /*!
  @abstract
@@ -131,6 +161,9 @@ MTL_EXPORT API_AVAILABLE(macos(10.14), ios(12.0))
     calls
 */
 @property (readwrite, nonatomic) BOOL supportDynamicAttributeStride API_AVAILABLE(macos(14.0), ios(17.0));
+
+/// Specifies if the indirect command buffer should support color attachment mapping.
+@property (nonatomic) BOOL supportColorAttachmentMapping API_AVAILABLE(macos(26.0), ios(26.0));
 
 @end
 

@@ -18,5 +18,16 @@ exports:
                        '_$s24SiriSuggestionsBaseModel0cB22OwnerDefinitionFactoryCN', 
                        '_$s24SiriSuggestionsBaseModel0cB22OwnerDefinitionFactoryCfD', 
                        '_$s24SiriSuggestionsBaseModel0cB22OwnerDefinitionFactoryCfd', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryC06createG11Definitions07builderI0Say0aB3Kit0gH0_pGAF010SuggestiongH7BuilderCAF0G0_pYaXE_tYaFZ', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryC06createG11Definitions07builderI0Say0aB3Kit0gH0_pGAF010SuggestiongH7BuilderCAF0G0_pYaXE_tYaFZTu', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryC0aB3Kit0ghI0AAMc', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCMa', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCMm', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCMn', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCMo', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCMu', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCN', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCfD', 
+                       '_$s24SiriSuggestionsBaseModel34DeviceExpertOwnerDefinitionFactoryCfd', 
                        _SiriSuggestionsBaseModelVersionNumber, _SiriSuggestionsBaseModelVersionString ]
 ...

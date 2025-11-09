@@ -23,6 +23,7 @@ exports:
                        '_$s12LockdownMode0aB7ManagerC16enabledInAccountSbvg', '_$s12LockdownMode0aB7ManagerC16enabledInAccountSbvpMV', 
                        '_$s12LockdownMode0aB7ManagerC19getEnabledInAccount11synchronize10completionySb_ySbctF', 
                        '_$s12LockdownMode0aB7ManagerC24notifyRestrictionChangedyySSF', 
+                       '_$s12LockdownMode0aB7ManagerC28setManagedConfigurationState7enabled10completionySb_ySo7NSErrorCSgctF', 
                        '_$s12LockdownMode0aB7ManagerC6sharedACvgZ', '_$s12LockdownMode0aB7ManagerC6sharedACvpZMV', 
                        '_$s12LockdownMode0aB7ManagerC7enabledSbvg', '_$s12LockdownMode0aB7ManagerC7enabledSbvpMV', 
                        '_$s12LockdownMode0aB7ManagerCACycfC', '_$s12LockdownMode0aB7ManagerCACycfc', 

@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 225.600.1 -module-name _GroupActivities_UIKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 267.100.2 -module-name _GroupActivities_UIKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Combine
 import CoreGraphics
 import Foundation
@@ -48,6 +48,31 @@ public enum GroupActivitySharingResult {
   @objc deinit
 }
 prefix operator >>
+@objc @available(visionOS 26.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+@_Concurrency.MainActor public class GroupActivityAssociationInteraction : ObjectiveC.NSObject, UIKit.UIInteraction {
+  @_Concurrency.MainActor @preconcurrency @objc weak public var view: UIKit.UIView?
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor public init(associationKind: GroupActivities.GroupActivityAssociationKind?)
+  #endif
+  @_Concurrency.MainActor public var associationKind: GroupActivities.GroupActivityAssociationKind? {
+    get
+    set
+  }
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc public func willMove(to view: UIKit.UIView?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @_Concurrency.MainActor @preconcurrency @objc public func didMove(to newView: UIKit.UIView?)
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
+  @objc(_didMoveFromWindow:toWindow:) @_Concurrency.MainActor public func _didMove(from oldWindow: UIKit.UIWindow?, to newWindow: UIKit.UIWindow?)
+  #endif
+  @objc deinit
+}
 @available(iOS 15.4, macCatalyst 15.4, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -58,3 +83,9 @@ extension _GroupActivities_UIKit.GroupActivitySharingResult : Swift.Equatable {}
 @available(tvOS, unavailable)
 @available(macOS, unavailable)
 extension _GroupActivities_UIKit.GroupActivitySharingResult : Swift.Hashable {}
+@available(visionOS 26.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+extension _GroupActivities_UIKit.GroupActivityAssociationInteraction : Swift.Sendable {}

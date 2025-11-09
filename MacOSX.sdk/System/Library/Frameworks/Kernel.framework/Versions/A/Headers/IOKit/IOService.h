@@ -1892,6 +1892,13 @@ public:
 
 	UInt32 getPowerState( void );
 
+/*! @function getDesiredPowerState
+ *   @abstract Determines a device's desired power state.
+ *   @discussion A device's "desired power state" is updated at the start of each power state transition (e.g. transition from state 1 to state 0, or state 0 to state 2).
+ *   @result The desired power state's index into the device's power state array. */
+
+	UInt32 getDesiredPowerState( void );
+
 /*! @function setPowerState
  *   @abstract Requests a power managed driver to change the power state of its device.
  *   @discussion A power managed driver must override <code>setPowerState</code> to take part in system power management. After a driver is registered with power management, the system uses <code>setPowerState</code> to power the device off and on for system sleep and wake.

@@ -2,7 +2,7 @@
 //  PGDisplay.h
 //  ParavirtualizedGraphics
 //
-//  Copyright © 2019-2024 Apple Inc. All rights reserved.
+//  Copyright © 2019-2025 Apple Inc. All rights reserved.
 //
 
 #ifndef PGDisplay_h
@@ -11,7 +11,12 @@
 #import <Foundation/Foundation.h>
 #import <dispatch/dispatch.h>
 #import <IOSurface/IOSurface.h>
-#import <AppKit/NSBitmapImageRep.h>
+#if TARGET_OS_OSX && __has_include(<AppKit/NSBitmapImageRep.h>)
+    #import <AppKit/NSBitmapImageRep.h>
+    #define HAS_NS_BITMAP_HEADER    1
+#else
+    #define HAS_NS_BITMAP_HEADER    0
+#endif
 #import <CoreVideo/CoreVideo.h>
 #import <Metal/Metal.h>
 #import <ParavirtualizedGraphics/PGDefines.h>
@@ -45,6 +50,7 @@ typedef void (^PGDisplayModeChangeHandler)(PGDisplayCoord_t sizeInPixels, OSType
  */
 typedef void (^PGDisplayNewFrameEventHandler)(void) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
+#if TARGET_OS_OSX && HAS_NS_BITMAP_HEADER
 /*!
  @typedef PGDisplayCursorGlyphHandler
  @abstract A block that will be invoked to handle cursor glyph updates.
@@ -52,6 +58,7 @@ typedef void (^PGDisplayNewFrameEventHandler)(void) API_AVAILABLE(macos(11.0)) A
  @param hotSpot Top,left relative location of hotSpot.
  */
 typedef void (^PGDisplayCursorGlyphHandler)(NSBitmapImageRep * _Nonnull glyph, PGDisplayCoord_t hotSpot) API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
+#endif
 
 /*!
  @typedef PGDisplayCursorShowHandler_t
@@ -109,12 +116,14 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
  */
 @property(readwrite, nonatomic, nullable, copy) PGDisplayNewFrameEventHandler newFrameEventHandler API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
+#if TARGET_OS_OSX && HAS_NS_BITMAP_HEADER
 /*!
  @property cursorGlyphHandler
  @abstract The block to invoke to handle cursor glyph updates.
  @discussion Handler invocation indicative of new cursor image for display.  If this block is not set, cursor will be precomposited in presented image.
  */
 @property(readwrite, nonatomic, nullable, copy) PGDisplayCursorGlyphHandler cursorGlyphHandler API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
+#endif
 
 /*!
  @property cursorShowHandler
@@ -202,11 +211,13 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos)
  */
 @property(readonly, nonatomic, nullable) PGDisplayNewFrameEventHandler newFrameEventHandler API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
 
+#if TARGET_OS_OSX && HAS_NS_BITMAP_HEADER
 /*!
  @property cursorGlyphHandler
  @abstract The block to invoke to handle cursor glyph updates.
  */
 @property(readonly, nonatomic, nullable) PGDisplayCursorGlyphHandler cursorGlyphHandler API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios);
+#endif
 
 /*!
  @property cursorShowHandler

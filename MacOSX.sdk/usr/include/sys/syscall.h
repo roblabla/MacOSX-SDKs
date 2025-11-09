@@ -201,7 +201,7 @@
 #define	SYS_getfh          161
 			/* 162  old getdomainname */
 			/* 163  old setdomainname */
-			/* 164  */
+#define	SYS_funmount       164
 #define	SYS_quotactl       165
 			/* 166  old exportfs */
 #define	SYS_mount          167

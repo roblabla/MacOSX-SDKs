@@ -14,6 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class ASAuthorization;
 @class ASAuthorizationRequest;
 @class ASAuthorizationController;
+@class ASCPublicKeyAccountRegistrationOptions;
 
 NS_SWIFT_UI_ACTOR
 AS_EXTERN API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0), watchos(6.0))
@@ -40,8 +41,8 @@ NS_SWIFT_UI_ACTOR
 @end
 
 typedef NS_OPTIONS(NSUInteger, ASAuthorizationControllerRequestOptions) {
-    /*! @abstract Tell the authorization controller that it should prefer credentials that are immediately available on the local device.
-     */
+    /// When used for sign-in requests, tell the authorization controller that it should only be presented if there are credentials immediately available on the local device.
+    /// When used for registration requests, tell the authorization controller that it should only be presented if the local device is currently set up to fulfill at least one of the request types.
     ASAuthorizationControllerRequestOptionPreferImmediatelyAvailableCredentials API_UNAVAILABLE(tvos, watchos) = 1 << 0,
 } NS_SWIFT_NAME(ASAuthorizationController.RequestOptions) API_AVAILABLE(ios(16.0), macos(13.0)) API_UNAVAILABLE(tvos, watchos);
 

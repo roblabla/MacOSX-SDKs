@@ -16,18 +16,19 @@ exports:
                        MXAverage, MXBackgroundExitData, MXCPUExceptionDiagnostic, 
                        MXCPUMetric, MXCallStackFrame, MXCallStackThread, MXCallStackTree, 
                        MXCellularConditionMetric, MXCrashDiagnostic, MXCrashDiagnosticObjectiveCExceptionReason, 
-                       MXDiagnostic, MXDiagnosticPayload, MXDiskIOMetric, MXDiskWriteExceptionDiagnostic, 
-                       MXDisplayMetric, MXForegroundExitData, MXGPUMetric, MXHangDiagnostic, 
-                       MXHistogram, MXHistogramBucket, MXLocationActivityMetric, 
-                       MXMemoryMetric, MXMetaData, MXMetric, MXMetricManager, MXMetricPayload, 
-                       MXNetworkTransferMetric, MXSignpostIntervalData, MXSignpostMetric, 
-                       MXSignpostRecord, MXUnitAveragePixelLuminance, MXUnitSignalBars ]
+                       MXDiagnostic, MXDiagnosticPayload, MXDiskIOMetric, MXDiskSpaceUsageMetric, 
+                       MXDiskWriteExceptionDiagnostic, MXDisplayMetric, MXForegroundExitData, 
+                       MXGPUMetric, MXHangDiagnostic, MXHistogram, MXHistogramBucket, 
+                       MXLocationActivityMetric, MXMemoryMetric, MXMetaData, MXMetric, 
+                       MXMetricManager, MXMetricPayload, MXNetworkTransferMetric, 
+                       MXSignpostIntervalData, MXSignpostMetric, MXSignpostRecord, 
+                       MXUnitAveragePixelLuminance, MXUnitSignalBars ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SignpostMetrics.framework/Versions/A/SignpostMetrics'
-current-version: 151.8
+current-version: 173
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

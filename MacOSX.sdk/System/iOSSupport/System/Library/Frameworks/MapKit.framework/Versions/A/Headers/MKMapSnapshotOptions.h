@@ -17,10 +17,10 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(1.0))
 @interface MKMapSnapshotOptions : NSObject <NSCopying>
 
-@property (nonatomic, copy) MKMapConfiguration *preferredConfiguration API_AVAILABLE(ios(17.0), macos(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, copy) MKMapConfiguration *preferredConfiguration API_AVAILABLE(ios(17.0), macos(14.0), tvos(17.0), watchos(10.0));
 
 @property (nonatomic, copy) MKMapCamera *camera;
 @property (nonatomic, assign) MKMapRect mapRect;

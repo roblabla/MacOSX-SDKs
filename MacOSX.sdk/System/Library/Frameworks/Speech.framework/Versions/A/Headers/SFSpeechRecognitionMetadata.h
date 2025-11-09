@@ -10,21 +10,35 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class SFVoiceAnalytics;
 
+/**
+ The metadata of speech in the audio of a speech recognition request.
+ */
 API_AVAILABLE(ios(14.5), macos(11.3), tvos(18))
 @interface SFSpeechRecognitionMetadata : NSObject <NSCopying, NSSecureCoding>
 
-// Measures the number of words spoken per minute
+/**
+ The number of words spoken per minute.
+ */
 @property (nonatomic, readonly) double speakingRate;
 
-// Measures average pause between words (in seconds)
+/**
+ The average pause duration between words, measured in seconds.
+ */
 @property (nonatomic, readonly) NSTimeInterval averagePauseDuration;
 
-// Timestamp of start of speech in audio
+/**
+ The start timestamp of speech in the audio.
+ */
 @property (nonatomic, readonly) NSTimeInterval speechStartTimestamp;
 
-// Duration of speech in audio
+/**
+ The duration in seconds of speech in the audio.
+ */
 @property (nonatomic, readonly) NSTimeInterval speechDuration;
 
+/**
+ An analysis of the transcription segment's vocal properties.
+ */
 @property (nonatomic, nullable, readonly) SFVoiceAnalytics *voiceAnalytics;
 
 @end

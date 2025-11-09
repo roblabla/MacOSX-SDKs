@@ -11,6 +11,8 @@ Globals:
   SwiftName: BGRA8
 - Name: kCIFormatRGBA8
   SwiftName: RGBA8
+- Name: kCIFormatRGBX8
+  SwiftName: RGBX8
 - Name: kCIFormatABGR8
   SwiftName: ABGR8
 - Name: kCIFormatRGBAh
@@ -69,8 +71,6 @@ Globals:
   SwiftName: XRGB8
 - Name: kCIFormatBGRX8
   SwiftName: BGRX8
-- Name: kCIFormatRGBX8
-  SwiftName: RGBX8
 - Name: kCIFormatARGB16
   SwiftName: ARGB16
 - Name: kCIFormatARGBf
@@ -151,10 +151,16 @@ Globals:
   SwiftName: auxiliaryHDRGainMap
 - Name: kCIImageContentHeadroom
   SwiftName: contentHeadroom
+- Name: kCIImageContentAverageLightLevel
+  SwiftName: contentAverageLightLevel
+- Name: kCIImageApplyCleanAperture
+  SwiftName: applyCleanAperture
 
 # CIImageRepresentationOption
 - Name: kCIImageRepresentationHDRGainMapImage
   SwiftName: hdrGainMapImage
+- Name: kCIImageRepresentationHDRGainMapAsRGB
+  SwiftName: hdrGainMapAsRGB
 
 # CIImageOptions - Private
 - Name: kCIImageFlipped
@@ -452,9 +458,18 @@ Classes:
   - Selector: "imageByInsertingIntermediate:"
     MethodKind: Instance
     SwiftName: "insertingIntermediate(cache:)"
+  - Selector: "imageByInsertingTiledIntermediate"
+    MethodKind: Instance
+    SwiftName: "insertingTiledIntermediate()"
   - Selector: "imageByTaggingWithColorSpace:"
     MethodKind: Instance
     SwiftName: "tagged(with:)"
+  - Selector: "imageBySettingContentHeadroom:"
+    MethodKind: Instance
+    SwiftName: "settingContentHeadroom(_:)"
+  - Selector: "imageBySettingContentAverageLightLevel:"
+    MethodKind: Instance
+    SwiftName: "settingContentAverageLightLevel(_:)"
 - Name: CIKernel
   Methods:
   - Selector: "kernelsWithString:"
@@ -643,6 +658,8 @@ SwiftVersions:
     SwiftName: kCIFormatBGRA8
   - Name: kCIFormatRGBA8
     SwiftName: kCIFormatRGBA8
+  - Name: kCIFormatRGBX8
+    SwiftName: kCIFormatRGBX8
   - Name: kCIFormatABGR8
     SwiftName: kCIFormatABGR8
   - Name: kCIFormatRGBAh
@@ -651,6 +668,10 @@ SwiftVersions:
     SwiftName: kCIFormatRGBA16
   - Name: kCIFormatRGBAf
     SwiftName: kCIFormatRGBAf
+  - Name: kCIFormatRGBXh
+    SwiftName: kCIFormatRGBXh
+  - Name: kCIFormatRGBXf
+    SwiftName: kCIFormatRGBXf
   - Name: kCIFormatA8
     SwiftName: kCIFormatA8
   - Name: kCIFormatA16
@@ -701,8 +722,6 @@ SwiftVersions:
     SwiftName: kCIFormatXRGB8
   - Name: kCIFormatBGRX8
     SwiftName: kCIFormatBGRX8
-  - Name: kCIFormatRGBX8
-    SwiftName: kCIFormatRGBX8
   - Name: kCIFormatARGB16
     SwiftName: kCIFormatARGB16
   - Name: kCIFormatARGBf

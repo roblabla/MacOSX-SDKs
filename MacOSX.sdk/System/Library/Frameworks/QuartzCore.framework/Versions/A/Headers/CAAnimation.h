@@ -1,6 +1,6 @@
 /* CoreAnimation - CAAnimation.h
 
-   Copyright (c) 2006-2022, Apple Inc.
+   Copyright (c) 2006-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__
@@ -342,7 +342,6 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property float startProgress;
 @property float endProgress;
 
-
 /* An optional filter object implementing the transition. When set the
  * `type' and `subtype' properties are ignored. The filter must
  * implement `inputImage', `inputTargetImage' and `inputTime' input
@@ -350,8 +349,8 @@ API_AVAILABLE(macos(10.5), ios(2.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  * the `inputExtent' key, which will be set to a rectangle describing
  * the region in which the transition should run. Defaults to nil. */
 
-@property(nullable, strong) id filter;
-
+@property(nullable, strong) id filter
+  API_AVAILABLE(macCatalyst(13.1)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 @end
 

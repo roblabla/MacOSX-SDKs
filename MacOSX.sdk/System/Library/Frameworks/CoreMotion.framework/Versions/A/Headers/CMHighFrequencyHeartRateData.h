@@ -27,11 +27,7 @@ typedef NS_ENUM(NSInteger, CMHighFrequencyHeartRateDataConfidence) {
  *  CMHighFrequencyHeartRateData
  *  Heart rate data collected at 1Hz.
  */
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 COREMOTION_EXPORT API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(visionos)
-#else
-COREMOTION_EXPORT API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos, tvos)
-#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMHighFrequencyHeartRateData : CMLogItem
 
 /*

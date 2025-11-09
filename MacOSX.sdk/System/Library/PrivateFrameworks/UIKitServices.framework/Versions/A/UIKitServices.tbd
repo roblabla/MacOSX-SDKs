@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UIKitServices.framework/Versions/A/UIKitServices'
-current-version: 8506
+current-version: 9088.1.255
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -15,6 +15,7 @@ exports:
                        _UISCreateImageFromDrawing, _UISDeviceContextDeviceClassKey, 
                        _UISDeviceContextDeviceCornerRadiusKey, _UISDeviceContextDeviceIdiomKey, 
                        _UISDeviceContextHomeButtonTypeKey, _UISDidCreateWindowForSceneNotification, 
+                       _UISDisplayConfigurationChangedNotification, _UISDisplayConfigurationForContextID, 
                        _UISFontWeightForIndex, _UISGetColorSRGBComponents, _UISGetCurrentTextStylePlatform, 
                        _UISGetFontContentSizeCategory, _UISIndexForFontWeight, _UISIsColorInDisplayP3Gamut, 
                        _UISLocalizedStringForSecureName, _UISMainHostWindowDidBecomeKeyNotification, 
@@ -22,9 +23,11 @@ exports:
                        _UISOpenApplicationOptionAppBasedViewService, _UISOpenApplicationOptionClickAttribution, 
                        _UISOpenApplicationOptionKeySceneSessionPersistentIdentifier, 
                        _UISOpenApplicationOptionKeyTargetContentIdentifier, _UISOpenApplicationOptionPasteSharingToken, 
-                       _UISSecureControlServiceInterface, _UISSecureControlServiceName, 
-                       _UISSecureControlServiceSharedRemoteInterface, _UISServiceContextDidBecomeInsecureNotification, 
-                       _UISServiceContextDidBecomeSecureNotification, _UISSlotMachineErrorDomain, 
+                       _UISRequestDisplayConfigurationForContextID, _UISSDisplayConfigurationAffectedContextIDsKey, 
+                       _UISSceneConnectionValueErrorDomain, _UISSecureControlServiceInterface, 
+                       _UISSecureControlServiceName, _UISSecureControlServiceSharedRemoteInterface, 
+                       _UISServiceContextDidBecomeInsecureNotification, _UISServiceContextDidBecomeSecureNotification, 
+                       _UISSetDisplayConfigurationDataSource, _UISSlotMachineErrorDomain, 
                        _UISSlotMachineInterface, _UISSystemReferenceAngleAffectedContextIDsKey, 
                        _UISSystemReferenceAngleChangedNotification, _UISSystemReferenceAngleForContextID, 
                        _UISSystemReferenceAngleKey, _UISSystemReferenceAngleModeForContextID, 
@@ -47,7 +50,9 @@ exports:
                        UISMutableDeviceContext, UISMutableDisplayContext, UISMutableSlotStyle, 
                        UISNotificationResponseAction, UISOpenURLAction, UISPasteSharingToken, 
                        UISPasteVariant, UISPathDrawing, UISSceneBackgroundPlacementConfiguration, 
-                       UISSceneFullscreenPlacementConfiguration, UISSceneOrderedPlacementConfiguration, 
+                       UISSceneConnectionValueAction, UISSceneFullscreenPlacementConfiguration, 
+                       UISSceneHostingExternalSettingsModifierClient, UISSceneHostingExternalSettingsModifierService, 
+                       UISSceneHostingSettingsModifier, UISSceneOrderedPlacementConfiguration, 
                        UISSceneOverlayPlacementConfiguration, UISScenePlacementConfiguration, 
                        UISScenePreservedPlacementConfiguration, UISSceneProminentPlacementConfiguration, 
                        UISScenePushPlacementConfiguration, UISSceneReplacePlacementConfiguration, 

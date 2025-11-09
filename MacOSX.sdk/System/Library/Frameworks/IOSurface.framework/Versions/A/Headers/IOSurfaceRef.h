@@ -126,7 +126,7 @@ typedef CF_ENUM(int32_t, IOSurfaceComponentName) {
     kIOSurfaceComponentNameLuma         = 5,
     kIOSurfaceComponentNameChromaRed    = 6,
     kIOSurfaceComponentNameChromaBlue   = 7,
-};
+} IOSFC_SWIFT_SENDABLE;
 
 /* kIOSurfacePlaneComponentNames   - CFArray[CFNumber] for IOSurfaceComponentName of each component in this plane. 
     For example 'BGRA' would be {4, 3, 2, 1} */
@@ -138,7 +138,7 @@ typedef CF_ENUM(int32_t, IOSurfaceComponentType) {
     kIOSurfaceComponentTypeSignedInteger    = 2,
     kIOSurfaceComponentTypeFloat            = 3,
     kIOSurfaceComponentTypeSignedNormalized = 4,
-};
+} IOSFC_SWIFT_SENDABLE;
 
 /* kIOSurfacePlaneComponentTypes   - CFArray[CFNumber] for IOSurfaceComponentType of each component in this plane. */
 extern const CFStringRef kIOSurfacePlaneComponentTypes                      API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
@@ -148,7 +148,7 @@ typedef CF_ENUM(int32_t, IOSurfaceComponentRange) {
     kIOSurfaceComponentRangeFullRange   = 1,
     kIOSurfaceComponentRangeVideoRange  = 2,
     kIOSurfaceComponentRangeWideRange   = 3,
-};
+} IOSFC_SWIFT_SENDABLE;
 
 /* kIOSurfacePlaneComponentRanges   - CFArray[CFNumber] for IOSurfaceComponentRange of each component in this plane. */
 extern const CFStringRef kIOSurfacePlaneComponentRanges                     API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
@@ -159,7 +159,7 @@ typedef CF_ENUM(int32_t, IOSurfaceSubsampling) {
     kIOSurfaceSubsampling422        = 2, // Chroma downsampled by 2x1
     kIOSurfaceSubsampling420        = 3, // Chroma downsampled by 2x2
     kIOSurfaceSubsampling411        = 4, // Chroma downsampled by 4x1
-};
+} IOSFC_SWIFT_SENDABLE;
 
 /* kIOSurfaceSubsampling   - CFNumber(IOSurfaceSubsampling) describing the chroma subsampling. */
 extern const CFStringRef kIOSurfaceSubsampling                              API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
@@ -455,12 +455,12 @@ typedef CF_ENUM(int, IOSurfaceMemoryLedgerTags) {
     kIOSurfaceMemoryLedgerTagMedia       = 0x00000003,
     kIOSurfaceMemoryLedgerTagGraphics    = 0x00000004,
     kIOSurfaceMemoryLedgerTagNeural      = 0x00000005,
-};
+} IOSFC_SWIFT_SENDABLE;
 
 // Memory ledger flags.
 typedef CF_OPTIONS(uint32_t, IOSurfaceMemoryLedgerFlags) {
     kIOSurfaceMemoryLedgerFlagNoFootprint = (1 << 0),
-};
+} IOSFC_SWIFT_SENDABLE;
 
 
 kern_return_t IOSurfaceSetOwnershipIdentity(IOSurfaceRef buffer, task_id_token_t task_id_token, int newLedgerTag, uint32_t newLedgerOptions) API_AVAILABLE(ios(17.4), watchos(10.4), tvos(17.4), macos(14.4));

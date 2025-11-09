@@ -27,7 +27,7 @@ typedef NS_ENUM(NSUInteger, NSBoxType) {
     /* Group subviews with a standard look. This is the default style. */
     NSBoxPrimary = 0,
 
-    /* Vertical or horizontal separtor line.  Not used with subviews. */
+    /* Vertical or horizontal separator line.  Not used with subviews. */
     NSBoxSeparator = 2,
 
     /* Custom boxes draw based entirely on user parameters; see the fillColor, borderColor, borderWidth, and cornerRadius properties for more information. */
@@ -73,7 +73,7 @@ typedef NS_ENUM(NSUInteger, NSBoxType) {
 
 @property NSBorderType borderType API_DEPRECATED("borderType is only applicable to NSBoxOldStyle, which is deprecated. To replace a borderType of NSNoBorder, use the `transparent` property.", macos(10.0, 10.15));
 
-/* Mnemonics are deprecated in 10.8. Historically they have not done anything. For compatability, this method still calls setTitle: with the ampersand stripped from it. */
+/* Mnemonics are deprecated in 10.8. Historically they have not done anything. For compatibility, this method still calls setTitle: with the ampersand stripped from it. */
 - (void)setTitleWithMnemonic:(null_unspecified NSString *)stringWithAmpersand API_DEPRECATED("", macos(10.0,10.8));
 @end
 

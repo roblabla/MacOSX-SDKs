@@ -430,6 +430,66 @@ API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0)) 
 
 @end
 
+#pragma mark - DrawOn Effect
+
+/// A symbol effect that applies the DrawOn animation to symbol images.
+///
+/// The DrawOn animation makes the symbol visible either as a whole, or
+/// one motion group at a time, animating parts of the symbol with draw data.
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0)) NS_REFINED_FOR_SWIFT
+@interface NSSymbolDrawOnEffect : NSSymbolEffect
+
+/// The default draw on effect, determined by the system.
++ (instancetype)effect;
+
+/// Returns a copy of the effect requesting an animation that
+/// applies separately to each motion group.
+- (instancetype)effectWithByLayer;
+
+/// Returns a copy of the effect requesting an animation that
+/// applies to all motion groups simultaneously.
+- (instancetype)effectWithWholeSymbol;
+
+/// Returns a copy of the effect requesting an animation that
+/// applies separately to each motion group, where only
+/// one motion group is active at a time.
+- (instancetype)effectWithIndividually;
+
+@end
+
+#pragma mark - DrawOff Effect
+
+/// A symbol effect that applies the DrawOff animation to symbol images.
+///
+/// The DrawOff animation makes the symbol hidden either as a whole, or
+/// one motion group at a time, animating parts of the symbol with draw data.
+API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0)) NS_REFINED_FOR_SWIFT
+@interface NSSymbolDrawOffEffect : NSSymbolEffect
+
+/// The default draw off effect, determined by the system.
++ (instancetype)effect;
+
+/// Returns a copy of the effect requesting an animation that
+/// applies separately to each motion group.
+- (instancetype)effectWithByLayer;
+
+/// Returns a copy of the effect requesting an animation that
+/// applies to all motion groups simultaneously.
+- (instancetype)effectWithWholeSymbol;
+
+/// Returns a copy of the effect requesting an animation that
+/// applies separately to each motion group, where only
+/// one motion group is active at a time.
+- (instancetype)effectWithIndividually;
+
+/// Returns a copy of the effect that animates in reverse. This cancels the nonReversed variant.
+- (instancetype)effectWithReversed;
+
+/// Returns a copy of the effect that only animates forwards. This cancels the reversed variant.
+- (instancetype)effectWithNonReversed;
+
+@end
+
 #pragma mark - Base Content Transitions
 
 /// An abstract base class for transitions that can be applied to both NSImageViews and

@@ -78,6 +78,7 @@ exports:
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO12actionButtonyAcA0ab6ActiongC5ModelVcACmFWC', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO12alternativesyAcA0ab11AlternativeC5ModelVcACmFWC', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO12confirmationyAcA0ab12ConfirmationC5ModelVcACmFWC', 
+                       '_$s19SiriAudioSnippetKit0aB8SnippetsO13snippetHidden3for5idiomSb0A9Utilities12ResponseModeV_AG11DeviceIdiomOtF', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO14disambiguationyAcA0ab14DisambiguationC5ModelVcACmFWC', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO4fromACs7Decoder_p_tKcfC', 
                        '_$s19SiriAudioSnippetKit0aB8SnippetsO6encode2toys7Encoder_p_tKF', 

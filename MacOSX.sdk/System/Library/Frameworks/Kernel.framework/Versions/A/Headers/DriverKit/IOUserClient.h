@@ -1,4 +1,4 @@
-/* iig(DriverKit-427.120.2) generated from IOUserClient.iig */
+/* iig(DriverKit-445) generated from IOUserClient.iig */
 
 /* IOUserClient.iig:1-156 */
 /*

@@ -655,6 +655,7 @@ exports:
                        '_$s27LightweightCodeRequirements5anyOf11requirementAA16LaunchConstraint_pSayAaD_pGyXE_tF', 
                        '_$s27LightweightCodeRequirements5anyOf11requirementAA16OnDiskConstraint_pSayAaD_pGyXE_tF', 
                        '_$s27LightweightCodeRequirements5anyOf11requirementAA17ProcessConstraint_pSayAaD_pGyXE_tF', 
+                       '_$s3XPC18XPCPeerRequirementV27LightweightCodeRequirementsE04codeC0yAcD07ProcesseC0VFZ', 
                        '_$sSo6NSTaskC27LightweightCodeRequirementsE17launchRequirementAC06LaunchcF0VSgvM', 
                        '_$sSo6NSTaskC27LightweightCodeRequirementsE17launchRequirementAC06LaunchcF0VSgvg', 
                        '_$sSo6NSTaskC27LightweightCodeRequirementsE17launchRequirementAC06LaunchcF0VSgvpMV', 

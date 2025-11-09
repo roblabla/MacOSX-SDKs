@@ -112,8 +112,9 @@ and this signature encryption key.
 .El
 .Sh EXAMPLES
 Encrypt \fIfoo\fR into \fIfoo.aea\fR using a new random symmetric key stored in \fIfoo.key\fR
+.Pp
 .Rs
-\ aea encrypt -profile hkdf_sha256_aesctr_hmac__symmetric__none -i foo -o foo.aea -key foo.key
+\  aea encrypt -profile hkdf_sha256_aesctr_hmac__symmetric__none -i foo -o foo.aea -key foo.key
 .Re
 .Pp
 Decrypt \fIfoo.aea\fR into \fIbar\fR
@@ -133,3 +134,5 @@ Bob decrypts \fIfoo.aea\fR into \fIbar\fR using his private key, and at the same
 .Rs
 \  aea decrypt -i foo.aea -o bar -sign-pub alice.pub -recipient-priv bob.priv
 .Re
+.Sh SEE ALSO
+.Xr aa 1

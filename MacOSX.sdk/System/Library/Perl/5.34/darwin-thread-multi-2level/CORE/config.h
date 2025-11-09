@@ -103,6 +103,12 @@
  */
 #define HAS_FCNTL		/**/
 
+/* HAS_FDOPENDIR:
+ * This symbol, if defined, indicates that the fdopen routine is
+ * available to open a directory descriptor.
+ */
+#define HAS_FDOPENDIR		/**/
+
 /* HAS_FGETPOS:
  *	This symbol, if defined, indicates that the fgetpos routine is
  *	available to get the file position indicator, similar to ftell().
@@ -1379,7 +1385,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "24.0"		/**/
+#define OSVERS "25.0"		/**/
 
 /* CAT2:
  *	This macro concatenates 2 tokens together.

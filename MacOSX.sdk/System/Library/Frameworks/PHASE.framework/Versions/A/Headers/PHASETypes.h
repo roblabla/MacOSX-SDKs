@@ -39,6 +39,26 @@ typedef NS_ENUM(NSInteger, PHASEUpdateMode) {
 NS_SWIFT_NAME(PHASEEngine.UpdateMode);
 
 /*!
+    @enum PHASERenderingMode
+    @abstract Rendering Mode for a PHASE Engine.
+        @constant PHASERenderingModeLocal
+        A local engine is connected to an audio device and renders audio in real-time in the application process.
+        In this mode the engine receives all its inputs from the client such as acoustic configuration.
+        Updating an engine configured with `PHASERenderingModeLocal` executes any pending API commands locally.
+    @constant PHASERenderingModeClient
+        A client engine is connected to an audio device and renders audio in real-time in a secure process.
+        In this mode the engine receives inputs from the client and renders in a server.
+        In supported platforms this allows the server to apply privacy sensitive effects such as room virtual acoustics, low latency head-tracking and personalized Spatial Audio.
+        Updating an engine configured with `PHASERenderingModeClient` syncs any pending API commands to the server for processing.
+ */
+typedef NS_ENUM(NSInteger, PHASERenderingMode) {
+    PHASERenderingModeLocal = 0,
+    PHASERenderingModeClient = 1,
+}
+NS_SWIFT_NAME(PHASEEngine.RenderingMode)
+API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(macos, ios, tvos) API_UNAVAILABLE( watchos);
+
+/*!
     @enum PHASERenderingState
     @abstract Rendering state for sound events.
     @constant PHASERenderingStateStopped
@@ -326,10 +346,13 @@ typedef NS_ENUM(NSInteger, PHASECalibrationMode) {
     @abstract Automatic Head-Tracking flags.
     @constant PHASEAutomaticHeadTrackingFlagOrientation
         On capable devices, listener orientation will be automatically rotated based on user's head-orientation.
+    @constant PHASEAutomaticHeadTrackingFlagPosition
+        On capable devices, listener position will be automatically set based on user's position.
  */
 typedef NS_OPTIONS(NSUInteger, PHASEAutomaticHeadTrackingFlags) {
-        PHASEAutomaticHeadTrackingFlagOrientation = 1UL << 0,
+    PHASEAutomaticHeadTrackingFlagOrientation = 1UL << 0,
+    PHASEAutomaticHeadTrackingFlagPosition = 1UL << 1,
 }
-API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0)) API_UNAVAILABLE( watchos, visionos);
+API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), visionos(26.0)) API_UNAVAILABLE( watchos);
 
 #endif /* PHASETypes_h */

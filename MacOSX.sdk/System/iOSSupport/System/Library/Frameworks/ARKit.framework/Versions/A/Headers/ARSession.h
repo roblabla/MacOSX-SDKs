@@ -5,10 +5,9 @@
 //  Copyright © 2016-2021 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <ARKit/ARConfiguration.h>
 #import <ARKit/ARGeoTrackingTypes.h>
-
+#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -22,8 +21,6 @@ NS_ASSUME_NONNULL_BEGIN
 @class ARRaycastResult;
 @class ARTrackedRaycast;
 
-
-
 @protocol ARSessionDelegate;
 
 /**
@@ -35,16 +32,16 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE(ios(11.0))
 typedef NS_OPTIONS(NSUInteger, ARSessionRunOptions) {
     /** The session will reset tracking. */
-    ARSessionRunOptionResetTracking           = (1 << 0),
-    
+    ARSessionRunOptionResetTracking = (1 << 0),
+
     /** The session will remove existing anchors. */
-    ARSessionRunOptionRemoveExistingAnchors   = (1 << 1),
-    
+    ARSessionRunOptionRemoveExistingAnchors = (1 << 1),
+
     /** The session will stop currently active tracked raycasts. */
-    ARSessionRunOptionStopTrackedRaycasts     = (1 << 2),
+    ARSessionRunOptionStopTrackedRaycasts = (1 << 2),
 
     /** The session will reset scene reconstruction. */
-    ARSessionRunOptionResetSceneReconstruction     = (1 << 3)
+    ARSessionRunOptionResetSceneReconstruction = (1 << 3)
 } NS_SWIFT_NAME(ARSession.RunOptions);
 
 /**
@@ -55,7 +52,7 @@ API_AVAILABLE(ios(11.0))
 
 /**
  Unique identifier of the running session.
- 
+
  @discussion The identifier may change after calling runWithConfiguration.
  */
 @property (atomic, strong, readonly) NSUUID *identifier API_AVAILABLE(ios(13.0));
@@ -63,7 +60,7 @@ API_AVAILABLE(ios(11.0))
 /**
  A delegate for receiving ARSession updates.
  */
-@property (nonatomic, weak, nullable) id <ARSessionDelegate> delegate;
+@property (nonatomic, weak, nullable) id<ARSessionDelegate> delegate;
 
 /**
  The dispatch queue on which the delegate calls are performed.
@@ -81,8 +78,6 @@ API_AVAILABLE(ios(11.0))
  */
 @property (nonatomic, copy, nullable, readonly) ARConfiguration *configuration;
 
-
-
 /**
  Runs the session with the provided configuration.
  @discussion Calling run on a session that has already started will
@@ -91,7 +86,6 @@ API_AVAILABLE(ios(11.0))
  */
 
 - (void)runWithConfiguration:(ARConfiguration *)configuration NS_SWIFT_UNAVAILABLE("Use run(_:options:) instead");
-
 
 /**
  Runs the session with the provided configuration and options.
@@ -140,11 +134,12 @@ API_AVAILABLE(ios(11.0))
  worldMap - The current world map or nil if unavailable.
  error - An error that indicates why the world map is unavailable, or nil if a world map was provided.
  */
-- (void)getCurrentWorldMapWithCompletionHandler:(void (^)(ARWorldMap * _Nullable worldMap, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(12.0));
+- (void)getCurrentWorldMapWithCompletionHandler:(void (^)(ARWorldMap *_Nullable worldMap, NSError *_Nullable error))completionHandler
+    API_AVAILABLE(ios(12.0));
 
 /**
  Creates a new reference object from scanned features within the provided bounds.
- 
+
  @discussion Reference objects can be stored and used to track 3D objects from previously scanned data.
  Creation requires that an ARObjectScanningConfiguration is used so that sufficient features are scanned.
  @param transform The transformation matrix that defines the rotation and translation of the bounds in
@@ -159,10 +154,10 @@ API_AVAILABLE(ios(11.0))
  error - An error that indicates why creation failed, or nil if a reference object was provided.
  */
 - (void)createReferenceObjectWithTransform:(simd_float4x4)transform
-                                     center:(simd_float3)center
-                                     extent:(simd_float3)extent
-                          completionHandler:(void (^)(ARReferenceObject * _Nullable referenceObject, NSError * _Nullable error))completionHandler
-NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:)) API_AVAILABLE(ios(12.0));
+                                    center:(simd_float3)center
+                                    extent:(simd_float3)extent
+                         completionHandler:(void (^)(ARReferenceObject *_Nullable referenceObject, NSError *_Nullable error))completionHandler
+    NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:)) API_AVAILABLE(ios(12.0));
 
 #pragma mark - Raycasting
 
@@ -183,19 +178,16 @@ NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:))
  @return Tracked raycast object used to update or stop raycasting. This could be nil if the raycast fails or if the
          configuration is not `ARWorldTrackingConfiguration` or its subclasses.
  */
-- (nullable ARTrackedRaycast *)trackedRaycast:(ARRaycastQuery *)query updateHandler:(void (^)(NSArray<ARRaycastResult *> *))updateHandler API_AVAILABLE(ios(13.0));
-
-
-#pragma mark - Scene Graph Query
-
+- (nullable ARTrackedRaycast *)trackedRaycast:(ARRaycastQuery *)query
+                                updateHandler:(void (^)(NSArray<ARRaycastResult *> *))updateHandler API_AVAILABLE(ios(13.0));
 
 #pragma mark - Collaboration
 
 /**
  Update session with collaboration data.
- 
+
  @discussion Use this to update the session with collaboration data received from other participants.
- 
+
  @param collaborationData Collaboration data for updating the session.
  @see ARCollaborationData
  */
@@ -205,32 +197,45 @@ NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:))
 
 /**
  Converts a position in world coordinate system into latitude, longitude and altitude.
- 
- @discussion This method requires the session to be running a geo tracking configuration which is in state ARGeoTrackingStateLocalized.
- 
- @param position Position in world coordinate system to be converted.
- @param completionHandler Completion handler to be called with the result. This handler is executed on the session's delegate queue. It has the parameters:
-        coordinate - Location coordinates.
-        altitude - Altitude.
-        error - Error if conversion is not available.
- */
-- (void)getGeoLocationForPoint:(simd_float3)position completionHandler:(void (^)(CLLocationCoordinate2D coordinate, CLLocationDistance altitude, NSError * _Nullable error))completionHandler API_AVAILABLE(ios(14.0));
 
+ @discussion This method requires the session to be running a geo tracking configuration which is in state ARGeoTrackingStateLocalized.
+
+ @param position Position in world coordinate system to be converted.
+ @param completionHandler Completion handler to be called with the result. This handler is executed on the session's delegate queue. It has the
+ parameters: coordinate - Location coordinates. altitude - Altitude. error - Error if conversion is not available.
+ */
+- (void)getGeoLocationForPoint:(simd_float3)position
+             completionHandler:(void (^)(CLLocationCoordinate2D coordinate, CLLocationDistance altitude, NSError *_Nullable error))completionHandler
+    API_AVAILABLE(ios(14.0));
 
 #pragma mark - High Resolution Frame Capturing
 
 /**
- Requests a single, high resolution frame be captured at that moment in time.
- @discussion Some video formats do not support a significantly higher resolution than the streaming camera resolution. Use the @c isRecommendedForHighResolutionFrameCapturing method on the video format to check if the format is recommended.
+ Requests a single, high resolution frame to be captured.
+ @discussion Some video formats do not support a significantly higher still image resolution than the streaming camera resolution. Use the @c
+ isRecommendedForHighResolutionFrameCapturing method on the video format to check if the format is recommended.
  @see -[ARVideoFormat isRecommendedForHighResolutionFrameCapturing]
  @param completion Block being called when the call completes.
  */
 - (void)captureHighResolutionFrameWithCompletion:(void (^)(ARFrame *_Nullable frame, NSError *_Nullable error))completion API_AVAILABLE(ios(16.0));
 
+/**
+ Requests a single, high resolution frame to be captured.
+ @discussion Some video formats do not support a significantly higher still image resolution than the streaming camera resolution. Use the @c
+ isRecommendedForHighResolutionFrameCapturing method on the video format to check if the format is recommended. For passing customized photo settings
+ to this method, obtain a @c defaultPhotoSettings object from the video format and modify it.
+ @see -[ARVideoFormat isRecommendedForHighResolutionFrameCapturing]
+ @see -[ARVideoFormat defaultPhotoSettings]
+ @param photoSettings Custom AVCapturePhotoSettings to be used.
+ @param completion Block being called when the call completes.
+ */
+- (void)captureHighResolutionFrameUsingPhotoSettings:(nullable AVCapturePhotoSettings *)photoSettings
+                                          completion:(void (^)(ARFrame *_Nullable frame, NSError *_Nullable error))completion
+    API_AVAILABLE(ios(26.0));
+
 @end
 
 #pragma mark - ARSessionObserver
-
 
 API_AVAILABLE(ios(11.0))
 @protocol ARSessionObserver <NSObject>
@@ -239,26 +244,24 @@ API_AVAILABLE(ios(11.0))
 
 /**
  This is called when a session fails.
- 
+
  @discussion On failure the session will be paused.
  @param session The session that failed.
  @param error The error being reported (see ARError.h).
  */
 - (void)session:(ARSession *)session didFailWithError:(NSError *)error;
 
-
 /**
  This is called when the camera’s tracking state has changed.
- 
+
  @param session The session being run.
  @param camera The camera that changed tracking states.
  */
 - (void)session:(ARSession *)session cameraDidChangeTrackingState:(ARCamera *)camera;
 
-
 /**
  This is called when a session is interrupted.
- 
+
  @discussion A session will be interrupted and no longer able to track when
  it fails to receive required sensor data. This happens when video capture is interrupted,
  for example when the application is sent to the background or when there are
@@ -270,7 +273,7 @@ API_AVAILABLE(ios(11.0))
 
 /**
  This is called when a session interruption has ended.
- 
+
  @discussion A session will continue running from the last known state once
  the interruption has ended. If the device has moved, anchors will be misaligned.
  To avoid this, some applications may want to reset tracking (see ARSessionRunOptions)
@@ -282,7 +285,7 @@ API_AVAILABLE(ios(11.0))
 /**
  This is called after a session resumes from a pause or interruption to determine
  whether or not the session should attempt to relocalize.
- 
+
  @discussion To avoid misaligned anchors, apps may wish to attempt a relocalization after
  a session pause or interruption. If YES is returned: the session will begin relocalizing
  and tracking state will switch to limited with reason relocalizing. If successful, the
@@ -296,7 +299,7 @@ API_AVAILABLE(ios(11.0))
 
 /**
  This is called when the session outputs a new audio sample buffer.
- 
+
  @param session The session being run.
  @param audioSampleBuffer The captured audio sample buffer.
  */
@@ -304,9 +307,9 @@ API_AVAILABLE(ios(11.0))
 
 /**
  This is called when the session generated new collaboration data.
- 
+
  @discussion This data should be sent to all participants.
- 
+
  @param session The session that produced world tracking collaboration data.
  @param data Collaboration data to be sent to participants.
  @see ARCollaborationData
@@ -319,13 +322,11 @@ API_AVAILABLE(ios(11.0))
  @param session The session being run.
  @param geoTrackingStatus Latest geo tracking status.
  */
-- (void)session:(ARSession *)session didChangeGeoTrackingStatus:(ARGeoTrackingStatus*)geoTrackingStatus API_AVAILABLE(ios(14.0));
-
+- (void)session:(ARSession *)session didChangeGeoTrackingStatus:(ARGeoTrackingStatus *)geoTrackingStatus API_AVAILABLE(ios(14.0));
 
 @end
 
 #pragma mark - ARSessionDelegate
-
 
 API_AVAILABLE(ios(11.0))
 @protocol ARSessionDelegate <ARSessionObserver>
@@ -334,7 +335,7 @@ API_AVAILABLE(ios(11.0))
 
 /**
  This is called when a new frame has been updated.
- 
+
  @param session The session being run.
  @param frame The frame that has been updated.
  */
@@ -342,29 +343,27 @@ API_AVAILABLE(ios(11.0))
 
 /**
  This is called when new anchors are added to the session.
- 
+
  @param session The session being run.
  @param anchors An array of added anchors.
  */
-- (void)session:(ARSession *)session didAddAnchors:(NSArray<__kindof ARAnchor*>*)anchors;
+- (void)session:(ARSession *)session didAddAnchors:(NSArray<__kindof ARAnchor *> *)anchors;
 
 /**
  This is called when anchors are updated.
- 
+
  @param session The session being run.
  @param anchors An array of updated anchors.
  */
-- (void)session:(ARSession *)session didUpdateAnchors:(NSArray<__kindof ARAnchor*>*)anchors;
+- (void)session:(ARSession *)session didUpdateAnchors:(NSArray<__kindof ARAnchor *> *)anchors;
 
 /**
  This is called when anchors are removed from the session.
- 
+
  @param session The session being run.
  @param anchors An array of removed anchors.
  */
-- (void)session:(ARSession *)session didRemoveAnchors:(NSArray<__kindof ARAnchor*>*)anchors;
-
-
+- (void)session:(ARSession *)session didRemoveAnchors:(NSArray<__kindof ARAnchor *> *)anchors;
 
 @end
 

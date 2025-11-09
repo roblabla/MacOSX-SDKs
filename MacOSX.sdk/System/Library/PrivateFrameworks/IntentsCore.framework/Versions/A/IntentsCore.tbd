@@ -11,7 +11,7 @@ exports:
                        _INCGetCurrentGroupDeviceUIDs, _INCNativeMessagesAppBundleIdentifier, 
                        _INCRouteAudioToAirplayOutputDevices, _INCRouteAudioToAirplayOutputDevicesForAudioSession, 
                        _INCSerializeNSUserActivity, _IntentsCoreVersionNumber, _IntentsCoreVersionString ]
-    objc-classes:    [ INCAppLaunchRequest, INCAppProxy, INCChronoIntentProvider, 
+    objc-classes:    [ INCAppLaunchRequest, INCAppProxy, INCCarPlayUtils, INCChronoIntentProvider, 
                        INCChronoOptions, INCDisplayLayoutMonitor, INCExecutionInfo, 
                        INCExecutionInfoResolver, INCExtensionConnection, INCExtensionError, 
                        INCExtensionManager, INCExtensionPlugInBundleManager, INCExtensionProxy, 

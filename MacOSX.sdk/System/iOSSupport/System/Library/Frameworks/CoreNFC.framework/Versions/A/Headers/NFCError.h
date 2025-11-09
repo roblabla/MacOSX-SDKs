@@ -25,6 +25,8 @@ extern NSErrorDomain const NFCErrorDomain;
  * @constant    NFCReaderErrorInvalidParameterLength                            Length of input parameter is invalid, i.e. size of data container.
  * @constant    NFCReaderErrorParameterOutOfBound                               Parameter value is outside of the acceptable boundary / range.
  * @constant    NFCReaderErrorRadioDisabled                                     NFC Radio is disabled.
+ * @constant    NFCReaderErrorIneligible                                        The current system setting or hardware configuation isn’t eligible to use the requested reader service.
+ * @constant    NFCReaderErrorAccessNotAccepted                                 The person using the app hasn’t yet accepted or declined your app’s request to use the selected service.
  * @constant    NFCReaderTransceiveErrorTagConnectionLost                       Connection to the tag is lost.
  * @constant    NFCReaderTransceiveErrorRetryExceeded                           Maximum data transmission retry has reached.
  * @constant    NFCReaderTransceiveErrorTagResponseError                        Tag response is invalid or tag does not provide a response.  Additional error information may be contain in the underlying user info dictionary.
@@ -50,7 +52,9 @@ typedef NS_ERROR_ENUM(NFCErrorDomain, NFCReaderError) {
     NFCReaderErrorInvalidParameterLength API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos),
     NFCReaderErrorParameterOutOfBound API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos),
     NFCReaderErrorRadioDisabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos),
-
+    NFCReaderErrorIneligible API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos),
+    NFCReaderErrorAccessNotAccepted API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos),
+    
     NFCReaderTransceiveErrorTagConnectionLost API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos)                    = 100,
     NFCReaderTransceiveErrorRetryExceeded API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos),
     NFCReaderTransceiveErrorTagResponseError API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos, visionos),

@@ -166,11 +166,10 @@ of the event handler will honor the new one set.
 Each connection has an associated target queue. All connection-related activity
 will happen on an internal queue which is synchronized with the target queue.
 Event handler invocations are included in connection-related activity. The
-target queue may be changed while the connection is processing events using the
+target queue may be changed prior to activating the connection using the
 .Fn xpc_connection_set_target_queue
-API. Setting of the target queue on a connection is asynchronous, and the caller
-should not assume that when this API returns, the new target queue is in effect.
-The actual change will take place at a later time.
+API. Once a connection is activated or processing events, the queue may no
+longer be changed.
 .Pp
 By default, all connections target the
 .Xr DISPATCH_TARGET_QUEUE_DEFAULT 3

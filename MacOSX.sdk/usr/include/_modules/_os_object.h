@@ -21,8 +21,8 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _OS_OBJECT_
-#define _OS_OBJECT_
+#ifndef __OS_OBJECT_H_
+#define __OS_OBJECT_H_
 
 #if !__building_module(os)
 #error "Do not include this header directly, include <os/object.h> instead"
@@ -30,4 +30,4 @@
 
 #include <os/object.h>
 
-#endif /* _OS_OBJECT_ */
+#endif /* __OS_OBJECT_H_ */

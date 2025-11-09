@@ -19,5 +19,7 @@ exports:
                        __log_mdns_protocol_to_string, __log_mdns_session_event_to_string, 
                        __log_mdns_termination_reason_to_string, _dnssec_insecure_validation_state_to_description, 
                        _dnssec_result_to_description, _mdns_dns_service_type_description, 
-                       _mdns_memcmp_us_ascii_case_insensitive, _mdns_memcpy_bits ]
+                       _mdns_memcmp_us_ascii_case_insensitive, _mdns_memcpy_bits, 
+                       _mdns_parse_length_prefixed_string, _mdns_parse_printable_ascii_run, 
+                       _mdns_parse_uint16_be ]
 ...

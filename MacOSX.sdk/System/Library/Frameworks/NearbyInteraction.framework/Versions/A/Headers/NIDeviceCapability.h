@@ -34,6 +34,12 @@ NI_EXPORT
  */
 @property (nonatomic, readonly) BOOL supportsExtendedDistanceMeasurement API_AVAILABLE(ios(17.0), watchos(10.0), macos(14.0), tvos(17.0));
 
+
+/**
+ Whether or not this device is capable of participating in a nearby interaction DL-TDOA ranging.
+ */
+@property (nonatomic, readonly) BOOL supportsDLTDOAMeasurement API_AVAILABLE(ios(26.0)) API_UNAVAILABLE(watchos, tvos, macos, visionos, macCatalyst);
+
 @end
 
 NS_ASSUME_NONNULL_END

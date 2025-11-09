@@ -10,6 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(watchos(7.0)) API_UNAVAILABLE(ios)
 @interface CLKComplicationDescriptor : NSObject
 

@@ -35,6 +35,7 @@ NS_SWIFT_UI_ACTOR
 - (void)otherMouseUp:(NSEvent *)event;
 - (void)mouseMoved:(NSEvent *)event;
 - (void)mouseDragged:(NSEvent *)event;
+- (void)mouseCancelled:(NSEvent *)event API_AVAILABLE(macos(26.0)) NS_SWIFT_NAME(mouseCancelled(with:));
 - (void)scrollWheel:(NSEvent *)event;
 - (void)rightMouseDragged:(NSEvent *)event;
 - (void)otherMouseDragged:(NSEvent *)event;

@@ -357,8 +357,7 @@ os_log_create(const char *subsystem, const char *category);
  * debugging tools for display or aggregation.
  *
  * Note that faults should only be used for unexpected error conditions in
- * which there's a clear and safe recovery path.  If such a path does not
- * exist, consider the os_crash(3) family of APIs instead.
+ * which there's a clear and safe recovery path. 
  *
  * When an os_activity_id_t is present, the log message will also be scoped by
  * that identifier.  Activities provide granular filtering of log messages

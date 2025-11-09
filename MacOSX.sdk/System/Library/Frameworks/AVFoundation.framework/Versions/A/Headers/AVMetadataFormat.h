@@ -4,7 +4,7 @@
 
     Framework:  AVFoundation
  
-    Copyright 2010-2017 Apple Inc. All rights reserved.
+    Copyright 2010-2025 Apple Inc. All rights reserved.
 
 */
 
@@ -97,11 +97,9 @@ AVF_EXPORT AVMetadataKeySpace const AVMetadataKeySpaceISOUserData               
 AVF_EXPORT AVMetadataKey const AVMetadataISOUserDataKeyCopyright                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataISOUserDataKeyTaggedCharacteristic                  API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
-/*!
- @constant		AVMetadataISOUserDataKeyDate
- @abstract		ISO User data key for the content creation date/time.
- @discussion	The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
-*/
+/// ISO User data key for the content creation date/time.
+/// 
+/// The value is date and time, formatted according to ISO 8601, when the content was created. For clips captured by recording devices, this is typically the date and time when the clip’s recording started. When stored in AV(Mutable)MetadataItem, the value type must be either NSDate or NSString. When NSString is used, the value uses one of ISO 8601 formats such as "2016-01-11T17:31:10Z".
 AVF_EXPORT AVMetadataKey const AVMetadataISOUserDataKeyDate                                  API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0), visionos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataISOUserDataKeyAccessibilityDescription              API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0), visionos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadata3GPUserDataKeyCopyright                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0));
@@ -169,13 +167,50 @@ AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyContentIdentifier  
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyAccessibilityDescription        API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0), visionos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyIsMontage                       API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
-/*!
- @constant AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent
- @abstract A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0).
- @discussion
-   Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
-*/
+/// A value of type kCMMetadataBaseDataType_UInt8 indicating whether this movie is intended to be played back at the full frame rate (1), or at a slow motion rate (0).
+/// 
+/// Historically, some apps have played movies recorded at frame rates of 120fps or higher in slow motion by default. With the introduction of this metadata, apps that record high-frame-rate movies may add this movie-level metadata to indicate whether the movie is intended to be played at the full frame rate (1) or at a slow motion rate (0). Apps that play movies may use this metadata, when present, to guide their behavior.
 AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyFullFrameRatePlaybackIntent     API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0));
+
+/// A value of type `kCMMetadataBaseDataType_UInt8` indicating whether this movie is intended as a Cinematic Video (1) or not (0).
+/// 
+/// This movie-level metadata is automatically added (with a value of 1) to a movie recorded using the Cinematic Video API. Clients can override it with a value of 0 to signal that this movie is not to be treated as a Cinematic Video by Apple's software like Photos.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCinematicVideoIntent            API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the sensitivity of the camera to light in terms of ISO exposure index (e.g. "800"). See SMPTE RDD 18.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCameraISOSensitivity            API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the white balance value defined by the temperature in Kelvin units (e.g. "5500K" or "5500"). See SMPTE RDD 18.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCameraWhiteBalance              API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_RawData indicating the reference white balance multiplication factor data for ProRes RAW.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTWhiteBalanceFactors       API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_RawData indicating the reference color translation matrix data for ProRes RAW.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyWhiteBalanceByCCTColorMatrices  API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as an angle in minutes (1/60 degree) (e.g. "21600" or "360.00deg"").
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCameraShutterSpeedAngle                    API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the exposure period expressed as a time per one frame/field period in seconds.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCameraShutterSpeedTime          API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating measure of the amount of light transmitted through the lens. It is the focal length divided by the effective lens aperture diameter (e.g. "F2.8" or "2.8").
+/// 
+/// This is track-level metadata for video track that is associated with the camera.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCameraLensIrisFNumber           API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating the lens model (e.g. "iPhone 16 Pro back camera 6.765mm f/1.78").
+/// 
+/// This is track-level metadata for video track that is associated with the camera.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCameraLensModel                 API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
+
+/// A value of type kCMMetadataBaseDataType_UTF8 indicating focal length normalized to the 35mm film equivalent value (e.g. "50.00mm").
+/// 
+/// This is track-level metadata for video track that is associated with the camera.
+AVF_EXPORT AVMetadataKey const AVMetadataQuickTimeMetadataKeyCameraFocalLength35mmEquivalent API_AVAILABLE(macos(26.0), ios(26.0), tvos(26.0), watchos(26.0), visionos(26.0));
 
 // iTunesMetadata
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatiTunesMetadata                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0));
@@ -330,50 +365,38 @@ AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyPayment                  
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyOfficialPublisherWebpage              /* WPUB Publishers official webpage */                          API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyUserURL                               /* WXXX User defined URL link frame */                          API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
-// Icecast/ShoutCAST streaming metadata
+/// Icecast/ShoutCAST streaming metadata
 AVF_EXPORT AVMetadataKeySpace const AVMetadataKeySpaceIcy                                    API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
 AVF_EXPORT AVMetadataKey const AVMetadataIcyMetadataKeyStreamTitle                           API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataIcyMetadataKeyStreamURL                             API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
-// HTTP Live Streaming metadata
+/// HTTP Live Streaming metadata
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatHLSMetadata                                API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
-// HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
+/// HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
 AVF_EXPORT AVMetadataKeySpace const AVMetadataKeySpaceHLSDateRange                           API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3), visionos(1.0));
 
-// Keys for metadata provided by AudioToolbox's AudioFile interface. See <AudioToolbox/AudioFile.h>
+/// Keys for metadata provided by AudioToolbox's AudioFile interface. See <AudioToolbox/AudioFile.h>
 AVF_EXPORT AVMetadataKeySpace const AVMetadataKeySpaceAudioFile                              API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
-// Metadata format for AVMetadataItems of unknown provenance. This can occur when metadata is provided generically by an intermediate interface, such as AudioToolbox's AudioFile interface.
+/// Metadata format for AVMetadataItems of unknown provenance. This can occur when metadata is provided generically by an intermediate interface, such as AudioToolbox's AudioFile interface.
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatUnknown                                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0), visionos(1.0));
 
-// Extra attribute keys
+/// Extra attribute keys
 typedef NSString * AVMetadataExtraAttributeKey NS_EXTENSIBLE_STRING_ENUM;
 
-/*!
- @constant		AVMetadataExtraAttributeValueURIKey
- @abstract
-	When present in an item's extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
-*/
+/// When present in an item's extraAttributes dictionary, identifies the resource to be used as the item's value. Values for this key are of type NSString.
 AVF_EXPORT AVMetadataExtraAttributeKey const AVMetadataExtraAttributeValueURIKey             API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
-/*!
- @constant		AVMetadataExtraAttributeBaseURIKey
- @abstract
-	When present in an item's extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
-*/
+/// When present in an item's extraAttributes dictionary, identifies the base URI against which other URIs related to the item are to be resolved, e.g. AVMetadataExtraAttributeValueURIKey. Values for this key are of type NSString.
 AVF_EXPORT AVMetadataExtraAttributeKey const AVMetadataExtraAttributeBaseURIKey              API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0), visionos(1.0));
 
-/*!
-	@constant		AVMetadataExtraAttributeInfoKey
-	@abstract		More information about the item; specific to the 
-					item keySpace & key.
-	@discussion		For example, this key is used with the following ID3 tags:
-					TXXX, WXXX, APIC, GEOB: carries the Description
-					PRIV: carries the Owner Identifier
- */
+/// More information about the item; specific to the item keySpace & key.
+/// 
+/// For example, this key is used with the following ID3 tags:
+/// TXXX, WXXX, APIC, GEOB: carries the Description
+/// PRIV: carries the Owner Identifier
 AVF_EXPORT AVMetadataExtraAttributeKey const AVMetadataExtraAttributeInfoKey                 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0), visionos(1.0));
-
 
 #else
 #import <AVFCore/AVMetadataFormat.h>

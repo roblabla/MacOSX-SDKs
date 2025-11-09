@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class         MXCPUMetric
  @abstract      An MXMetric subclass that encapsulates CPU metrics.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
 @interface MXCPUMetric : MXMetric
 
 /*!
@@ -32,7 +32,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @discussion    The data here represents the total number of CPU instructions an application retired over the date range of the containing payload.
  @discussion    Dimensionless.
  */
-@property (readonly, strong, nonnull) NSMeasurement<NSUnit *> *cumulativeCPUInstructions API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (readonly, strong, nonnull) NSMeasurement<NSUnit *> *cumulativeCPUInstructions API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

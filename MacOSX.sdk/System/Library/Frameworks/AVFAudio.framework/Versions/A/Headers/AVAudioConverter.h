@@ -7,6 +7,7 @@
 
 #import <AVFAudio/AVAudioFormat.h>
 #import <AVFAudio/AVAudioBuffer.h>
+#import <AVFAudio/AVAudioSettings.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -150,13 +151,14 @@ typedef NS_ENUM(NSInteger, AVAudioConverterOutputStatus) {
 		convertToBuffer:error:withInputFromBlock: will return as much output as could be converted
 		with the input already supplied.
 */
-typedef AVAudioBuffer * __nullable (^AVAudioConverterInputBlock)(AVAudioPacketCount inNumberOfPackets, AVAudioConverterInputStatus* outStatus);
+typedef AVAudioBuffer * __nullable (^ NS_SWIFT_SENDABLE AVAudioConverterInputBlock)(AVAudioPacketCount inNumberOfPackets, AVAudioConverterInputStatus* outStatus);
 
 /*!
 	@class AVAudioConverter
 	@abstract
 		Converts streams of audio between various formats.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 @interface AVAudioConverter : NSObject {
 @private
@@ -238,6 +240,34 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
     @abstract	Indicates the the number of priming frames.
 */
 @property (nonatomic) AVAudioConverterPrimeInfo primeInfo;
+
+/*! @property	audioSyncPacketFrequency
+    @abstract	Number of packets between consecutive sync packets.
+    @discussion
+		A sync packet is an independently-decodable packet that completely refreshes the decoder without
+		needing to decode other packets.  When compressing to a format which supports it (such as APAC),
+		the audio sync packet frequency indicates the distance in packets between two sync packets, with
+		non-sync packets between.  This is useful to set when saving compressed packets to a file and
+		efficient random access is desired.  Note: Separating sync packets by at least one second of
+		encoded audio (e.g. 75 packets) is recommended.
+*/
+@property (nonatomic) NSInteger audioSyncPacketFrequency API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
+/*! @property	contentSource
+    @abstract	Index to select a pre-defined content source type that describes the content type and
+    			how it was generated.  Note: This is only supported when compressing audio to formats
+    			which support it.
+*/
+@property (nonatomic) AVAudioContentSource contentSource API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
+
+/*! @property	dynamicRangeControlConfiguration
+    @abstract	Encoder Dynamic Range Control (DRC) configuration.
+    @discussion
+		When supported by the encoder, this property controls which configuration is applied when a
+		bitstream is generated.  Note: This is only supported when compressing audio to formats
+		which support it.
+*/
+@property (nonatomic) AVAudioDynamicRangeControlConfiguration dynamicRangeControlConfiguration API_AVAILABLE(macos(26.0), ios(26.0), watchos(26.0), tvos(26.0), visionos(26.0));
 
 
 /*! @method convertToBuffer:fromBuffer:error:

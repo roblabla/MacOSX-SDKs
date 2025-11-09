@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/MetalPerformanceShaders'
-current-version: 128.5.2
+current-version: 129.0.19
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -25,7 +25,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSBenchmarkLoop.framework/Versions/A/MPSBenchmarkLoop'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -44,7 +44,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSCore.framework/Versions/A/MPSCore'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -249,6 +249,7 @@ exports:
                        __ZN16MPSDevice_CommonC2EPU19objcproto9MTLDevice11objc_object, 
                        __ZN16MPSKernelUserDAG10addOpToDAGEP18MPSKernelUserDAGOp, 
                        __ZN16MPSKernelUserDAG10constantOpEf11MPSDataType, __ZN16MPSKernelUserDAG10constantOpEx11MPSDataType, 
+                       __ZN16MPSKernelUserDAG10reciprocalEP20MPSKernelUserDAGNode11MPSDataType, 
                        __ZN16MPSKernelUserDAG11assignStateEP20MPSKernelUserDAGNodeS1_S1_11MPSDataType, 
                        __ZN16MPSKernelUserDAG11greaterThanEP20MPSKernelUserDAGNodeS1_11MPSDataType, 
                        __ZN16MPSKernelUserDAG11subtractionEP20MPSKernelUserDAGNodeS1_11MPSDataType, 
@@ -367,7 +368,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSFunctions.framework/Versions/A/MPSFunctions'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -381,7 +382,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -422,7 +423,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSMatrix.framework/Versions/A/MPSMatrix'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -442,7 +443,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNDArray.framework/Versions/A/MPSNDArray'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -461,15 +462,15 @@ exports:
                        MPSNDArrayAbsolute, MPSNDArrayAbsoluteGradient, MPSNDArrayAddition, 
                        MPSNDArrayAdditionPrimaryGradient, MPSNDArrayAdditionSecondaryGradient, 
                        MPSNDArrayAffineInt4Dequantize, MPSNDArrayAffineQuantizationDescriptor, 
-                       MPSNDArrayArgSort, MPSNDArrayBandPart, MPSNDArrayBinaryKernel, 
-                       MPSNDArrayBinaryPrimaryGradientKernel, MPSNDArrayBinarySecondaryGradientKernel, 
-                       MPSNDArrayCeil, MPSNDArrayCeilGradient, MPSNDArrayClamp, MPSNDArrayClampPrimaryGradient, 
-                       MPSNDArrayClampSecondaryGradient, MPSNDArrayClampTertiaryGradient, 
-                       MPSNDArrayCol2imKernel, MPSNDArrayConvolution2D, MPSNDArrayConvolution2DDescriptor, 
-                       MPSNDArrayConvolution2DGradientWithInput, MPSNDArrayConvolution2DGradientWithWeights, 
-                       MPSNDArrayConvolution3D, MPSNDArrayConvolution3DGradientWithInput, 
-                       MPSNDArrayConvolution3DGradientWithWeights, MPSNDArrayCos, 
-                       MPSNDArrayCosGradient, MPSNDArrayCosh, MPSNDArrayCoshGradient, 
+                       MPSNDArrayArgSort, MPSNDArrayAutoTuneRecorderObj, MPSNDArrayBandPart, 
+                       MPSNDArrayBinaryKernel, MPSNDArrayBinaryPrimaryGradientKernel, 
+                       MPSNDArrayBinarySecondaryGradientKernel, MPSNDArrayCeil, MPSNDArrayCeilGradient, 
+                       MPSNDArrayClamp, MPSNDArrayClampPrimaryGradient, MPSNDArrayClampSecondaryGradient, 
+                       MPSNDArrayClampTertiaryGradient, MPSNDArrayCol2imKernel, MPSNDArrayConvolution2D, 
+                       MPSNDArrayConvolution2DDescriptor, MPSNDArrayConvolution2DGradientWithInput, 
+                       MPSNDArrayConvolution2DGradientWithWeights, MPSNDArrayConvolution3D, 
+                       MPSNDArrayConvolution3DGradientWithInput, MPSNDArrayConvolution3DGradientWithWeights, 
+                       MPSNDArrayCos, MPSNDArrayCosGradient, MPSNDArrayCosh, MPSNDArrayCoshGradient, 
                        MPSNDArrayCostVolume, MPSNDArrayCostVolumeDescriptor, MPSNDArrayCropResize, 
                        MPSNDArrayDecompositionLU, MPSNDArrayDecompositionQR, MPSNDArrayDepthwiseConvolution2DDescriptor, 
                        MPSNDArrayDepthwiseConvolutionKernel, MPSNDArrayDivision, 
@@ -553,21 +554,24 @@ exports:
                        MPSNDArrayXNORPrimaryGradient, MPSNDArrayXNORSecondaryGradient, 
                        MPSNDArrayXOR, MPSNDArrayXORPrimaryGradient, MPSNDArrayXORSecondaryGradient, 
                        MPSPluginNDArrayConvolutionDescriptor ]
-    objc-ivars:      [ MPSNDArrayConvolution2D._autoTuneIteration, MPSNDArrayConvolution2D._autoTuningParams, 
+    objc-ivars:      [ MPSNDArrayConvolution2D._allowFP16WinogradTransformIntermediate, 
+                       MPSNDArrayConvolution2D._autoTuneIteration, MPSNDArrayConvolution2D._autoTuningParams, 
                        MPSNDArrayConvolution2D._autoTuningTarget, MPSNDArrayConvolution2D._logNextAutoTuneParams, 
                        MPSNDArrayConvolution2D._nextAutoTuneIteration, MPSNDArrayConvolution2DGradientWithInput._autoTuningParams, 
                        MPSNDArrayConvolution2DGradientWithInput._autoTuningTarget, 
                        MPSNDArrayConvolution2DGradientWithWeights._autoTuning, MPSNDArrayConvolution2DGradientWithWeights._autoTuningParams, 
                        MPSNDArrayGatherGradientState._axis, MPSNDArrayGradientState._provenance, 
                        MPSNDArrayGradientState._srcCount, MPSNDArrayGradientState._srcInfo, 
-                       MPSNDArrayMatrixMultiplication._autoTuningParams, MPSNDArrayMatrixMultiplication._autoTuningTarget, 
-                       MPSNDArrayMatrixMultiplication._normFusionDescriptor, MPSNDArrayMatrixMultiplication._normScaleArray ]
+                       MPSNDArrayMatrixMultiplication._autoTuneIteration, MPSNDArrayMatrixMultiplication._autoTuningParams, 
+                       MPSNDArrayMatrixMultiplication._autoTuningTarget, MPSNDArrayMatrixMultiplication._logNextAutoTuneParams, 
+                       MPSNDArrayMatrixMultiplication._nextAutoTuneIteration, MPSNDArrayMatrixMultiplication._normFusionDescriptor, 
+                       MPSNDArrayMatrixMultiplication._normScaleArray ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSNeuralNetwork.framework/Versions/A/MPSNeuralNetwork'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -685,7 +689,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSRayIntersector.framework/Versions/A/MPSRayIntersector'
-current-version: 128.5.2
+current-version: 129.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

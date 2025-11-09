@@ -5,9 +5,9 @@ install-name:    '/System/Library/PrivateFrameworks/CoreAccessibility.framework/
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ACSEntryPointIsAttributeSettable, _ACSEntryPointIsAttributeSupported, 
-                       _ACSEntryPointParameterizedAttributeNames, _ACSEntryPointSetValueForAttribute, 
-                       _ACSEntryPointValueForAttribute, _ACSEntryPointValueForAttributeWithParameter, 
+    symbols:         [ _CAXEntryPointIsAttributeSettable, _CAXEntryPointIsAttributeSupported, 
+                       _CAXEntryPointParameterizedAttributeNames, _CAXEntryPointSetValueForAttribute, 
+                       _CAXEntryPointValueForAttribute, _CAXEntryPointValueForAttributeWithParameter, 
                        _CoreAccessibilityAppKitAdditionsVersionNumber, _CoreAccessibilityAppKitAdditionsVersionString, 
                        __NSAccessibilityAttributedDescriptionAttribute, __NSAccessibilityContainerTypeAttribute, 
                        __NSAccessibilityContentIdentifierAttribute, __NSAccessibilityHeadingLevelAttribute, 
@@ -16,7 +16,7 @@ exports:
                        __NSAccessibilityTraitsAttribute, __NSAccessibilityUIElementForContentIdentifierParameterizedAttribute, 
                        __NSAccessibilityUIElementsForSearchPredicateParameterizedAttribute, 
                        __NSAccessibilityVisibilityAttribute, __appkitAccessibilityPropertiesKeyProtocolDescriptor ]
-    objc-classes:    [ ACSAppKitAdditionsLoader, NSCellAccessibility__CoreAccessibility__AppKit, 
+    objc-classes:    [ CAXAppKitAdditionsLoader, NSCellAccessibility__CoreAccessibility__AppKit, 
                        NSCollectionViewAccessibility__CoreAccessibility__AppKit, 
                        NSCollectionViewItemAccessibility__CoreAccessibility__AppKit, 
                        NSCollectionViewSectionAccessibilityAccessibility__CoreAccessibility__AppKit, 

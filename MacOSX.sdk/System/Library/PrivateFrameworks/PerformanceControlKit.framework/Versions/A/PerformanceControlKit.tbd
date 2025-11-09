@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PerformanceControlKit.framework/Versions/A/PerformanceControlKit'
-current-version: 1175.120.17
+current-version: 1449.0.58
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTINSt3__110__function6__baseIFbN4clpc4user8ioreport7ChannelEEEE, 
@@ -43,14 +43,23 @@ exports:
     objc-classes:    [ CLPCPolicyClient, CLPCPolicyInterface, CLPCReportingClient, 
                        CLPCReportingInterface, CLPCReportingReadResult, CLPCReportingRows, 
                        CLPCReportingSchema, CLPCReportingSchemaColumn, CLPCReportingStatSelection, 
-                       CLPCUserClient ]
-    objc-ivars:      [ CLPCReportingClient.available_stat_ids, CLPCReportingClient.channel_to_cluster_map, 
-                       CLPCReportingClient.channel_to_stat_map, CLPCReportingClient.compactedSchemas, 
-                       CLPCReportingClient.configured_stat_ids, CLPCReportingClient.num_ane_clusters, 
+                       CLPCUserClient, CLPCUtils ]
+    objc-ivars:      [ CLPCPolicyClient.clpc_policy_client, CLPCPolicyClient.previous_lpgm_info, 
+                       CLPCReportingClient.agx_service, CLPCReportingClient.available_stat_ids, 
+                       CLPCReportingClient.channel_to_cluster_map, CLPCReportingClient.channel_to_stat_map, 
+                       CLPCReportingClient.compactedSchemas, CLPCReportingClient.configured_stat_ids, 
+                       CLPCReportingClient.curr_report_acc, CLPCReportingClient.curr_report_cluster_acc, 
+                       CLPCReportingClient.lostperf_to_index_map, CLPCReportingClient.num_ane_clusters, 
                        CLPCReportingClient.num_cpu_clusters, CLPCReportingClient.num_cpu_cores, 
-                       CLPCReportingClient.num_package_zones, CLPCReportingClient.prev_sample_list, 
+                       CLPCReportingClient.num_package_zones, CLPCReportingClient.num_thread_groups, 
+                       CLPCReportingClient.powerlog_lostperf_reasons, CLPCReportingClient.prev_report_acc, 
+                       CLPCReportingClient.prev_report_cluster_acc, CLPCReportingClient.prev_sample_list, 
+                       CLPCReportingClient.previous_timestamp, CLPCReportingClient.report_info, 
                        CLPCReportingClient.reporting_channels, CLPCReportingClient.reporting_subscription, 
                        CLPCReportingClient.schema_column_maps, CLPCReportingClient.schemas, 
+                       CLPCReportingClient.stat_to_format_map, CLPCReportingClient.stat_to_name_map, 
+                       CLPCReportingClient.stat_to_type_map, CLPCReportingClient.tg_sorting_metric, 
+                       CLPCReportingClient.thread_group_stats, CLPCReportingClient.thread_group_stats_requested, 
                        CLPCUserClient.clpc ]
     weak-symbols:    [ __ZNSt3__119piecewise_constructE ]
 ...

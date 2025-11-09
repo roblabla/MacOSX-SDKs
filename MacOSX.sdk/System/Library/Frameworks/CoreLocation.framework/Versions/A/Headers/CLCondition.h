@@ -37,10 +37,7 @@ CL_EXTERN
  *
  */
 NS_REFINED_FOR_SWIFT NS_SWIFT_SENDABLE
-API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos)
-#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
-API_UNAVAILABLE(visionos)
-#endif
+API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(watchos, tvos, visionos)
 @interface CLCondition : NSObject<NSSecureCoding, NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

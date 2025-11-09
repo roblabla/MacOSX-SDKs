@@ -44,7 +44,7 @@ CORETELEPHONY_CLASS_AVAILABLE(7_0) API_UNAVAILABLE(macCatalyst, watchos) API_UNA
  */
 @property (nonatomic, readonly, retain, nullable) NSData* carrierToken
 API_UNAVAILABLE(macos, tvos, visionos)
-API_AVAILABLE(ios(7.0), watchos(12.0))
+API_AVAILABLE(ios(7.0), watchos(26.0))
 ;
 
 /*
@@ -63,7 +63,7 @@ API_AVAILABLE(ios(7.0), watchos(12.0))
  */
 - (BOOL)refreshCarrierToken
 API_UNAVAILABLE(macos, tvos, visionos)
-API_AVAILABLE(ios(6.0),watchos(12.0))
+API_AVAILABLE(ios(6.0),watchos(26.0))
 ;
 
 /*

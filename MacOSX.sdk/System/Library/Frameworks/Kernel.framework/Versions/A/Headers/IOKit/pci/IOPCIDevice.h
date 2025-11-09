@@ -249,6 +249,7 @@ enum
     kIOPCIEventNonFatalError    = 2,
     kIOPCIEventFatalError       = 3,
     kIOPCIEventLinkEnableChange = 4,
+    kIOPCIEventIOMMUError       = 5,
 };
 
 
@@ -377,6 +378,7 @@ class __kpi_deprecated("Use PCIDriverKit") IOPCIDevice : public IOService
     friend class IOPCIMessagedInterruptController;
     friend class IOPCIConfigurator;
     friend class IOPCIHostBridgeData;
+	friend class IOPCIEventSource;
 
 protected:
     IOPCIBridge *       parent;
@@ -1138,6 +1140,24 @@ protected:
 	bool isDownstreamFacing(void);
 	bool shouldSkipReset(void);
 	static bool hasL1Errata(IOPCIDevice *nub);
+
+protected:
+	bool serializeLinkStatus(void *ref __unused, OSSerialize *serializer);
+private:
+	bool isFunctionAccessible(IOPCIDevice *function);
+    void republishTimerHandler(IOTimerEventSource * es);
+
+	void pauseTimerHandler(IOTimerEventSource * es);
+	static IOReturn busyStateChange(void * target, void * refCon,
+									UInt32 messageType, IOService * service,
+									void * messageArgument, vm_size_t argSize);
+	bool isInitializing(void);
+protected:
+	void initiatePause(void);
+
+private:
+	void handlePCIEvent(IOPCIEventSource * es, const IOPCIEvent * event);
+	IOReturn handleIOMMUEvent(void *arg0, void *arg1, void *arg2, void *arg3);
 };
 __exported_pop
 

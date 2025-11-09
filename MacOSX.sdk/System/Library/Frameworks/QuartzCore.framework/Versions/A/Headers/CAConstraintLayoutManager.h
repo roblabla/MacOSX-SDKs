@@ -1,11 +1,14 @@
 /* CoreAnimation - CAConstraintLayoutManager.h
 
-   Copyright (c) 2006-2022, Apple Inc.
+   Copyright (c) 2006-2025, Apple Inc.
    All rights reserved. */
 
 #ifdef __OBJC__
 
 #import <QuartzCore/CALayer.h>
+
+API_AVAILABLE_BEGIN(macCatalyst(13.1))
+API_UNAVAILABLE_BEGIN(ios, tvos, watchos, visionos)
 
 /* The constraint-based layout manager add a `constraints' layer
  * property, an array of CAConstraint objects. Each object describes
@@ -112,5 +115,8 @@ API_AVAILABLE(macos(10.5))
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)
+
+API_UNAVAILABLE_END
+API_AVAILABLE_END
 
 #endif

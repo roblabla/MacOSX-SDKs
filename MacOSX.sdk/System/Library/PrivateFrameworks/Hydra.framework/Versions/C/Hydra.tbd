@@ -18,5 +18,5 @@ exports:
     objc-classes:    [ HYDAxisAlignedBounds, HYDBlitter, HYDCamera, HYDExportParams, 
                        HYDExporter, HYDLoadingProgressRenderer, HYDPrimNode, HYDRenderParams, 
                        HYDRenderer, HYDRenderingServiceProxy, HYDSceneNode, HYDStageInfo, 
-                       HYDStageTransformParams, HYDUSDAppIntents ]
+                       HYDStageLoadParams, HYDStageTransformParams, HYDUSDAppIntents ]
 ...

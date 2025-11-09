@@ -31,7 +31,7 @@
 WK_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @abstract Indicates a ``WKWebExtensionDataRecord`` error. */
-API_AVAILABLE(macos(NA), ios(18.4), visionos(NA))
+API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4))
 WK_EXTERN NSErrorDomain const WKWebExtensionDataRecordErrorDomain NS_SWIFT_NAME(WKWebExtensionDataRecord.errorDomain) NS_SWIFT_NONISOLATED;
 
 /*!
@@ -46,13 +46,13 @@ typedef NS_ERROR_ENUM(WKWebExtensionDataRecordErrorDomain, WKWebExtensionDataRec
     WKWebExtensionDataRecordErrorLocalStorageFailed,
     WKWebExtensionDataRecordErrorSessionStorageFailed,
     WKWebExtensionDataRecordErrorSynchronizedStorageFailed,
-} NS_SWIFT_NAME(WKWebExtensionDataRecord.Error) API_AVAILABLE(macos(NA), ios(18.4), visionos(NA));
+} NS_SWIFT_NAME(WKWebExtensionDataRecord.Error) API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4));
 
 /*!
  @abstract A ``WKWebExtensionDataRecord`` object represents a record of stored data for a specific web extension context.
  @discussion Contains properties and methods to query the data types and sizes.
 */
-WK_EXTERN API_AVAILABLE(macos(NA), ios(18.4), visionos(NA))
+WK_EXTERN API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4))
 WK_SWIFT_UI_ACTOR NS_SWIFT_NAME(WKWebExtension.DataRecord)
 @interface WKWebExtensionDataRecord : NSObject
 

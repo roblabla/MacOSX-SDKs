@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomPresentationLite.framework/Versions/A/SymptomPresentationLite'
-current-version: 2022.120.2
+current-version: 2153
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _kPerformanceFlowAvgUsecsEstabTime, _kPerformanceFlowConnAttempts, 
@@ -36,16 +36,16 @@ exports:
                        _kSymptomActivityBitmapShowConciseFormat, _kSymptomActivityBitmapShowExtensions, 
                        _kSymptomActivityBitmapShowIntermediateFormat, _kSymptomActivityBitmapStartTime, 
                        _kSymptomActivityBitmapWiFiAWDLInterface, _kSymptomActivityBitmapWiFiInterface, 
-                       _kSymptomActivityBitmapsActualStartTimeKey, _kSymptomActivityBitmapsBitmapKey, 
-                       _kSymptomActivityBitmapsValidBitsCountKey, _kSymptomAnalyticsHelperServiceEndpoint, 
-                       _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, _kSymptomAnalyticsNetworkAdvisoryDefiniteNotUse, 
-                       _kSymptomAnalyticsNetworkAdvisoryDefiniteUse, _kSymptomAnalyticsNetworkAdvisoryError, 
-                       _kSymptomAnalyticsNetworkAdvisoryInconclusive, _kSymptomAnalyticsNetworkAdvisoryInterfaceNotReady, 
-                       _kSymptomAnalyticsNetworkAdvisoryKey, _kSymptomAnalyticsNetworkAdvisoryNoImprovement, 
-                       _kSymptomAnalyticsNetworkAdvisoryNotSupported, _kSymptomAnalyticsNetworkAdvisoryWeakImprovement, 
-                       _kSymptomAnalyticsNetworkAdvisoryWeakNotUse, _kSymptomAnalyticsNetworkAdvisoryWeakUse, 
-                       _kSymptomAnalyticsServiceCalendarUsageToggle, _kSymptomAnalyticsServiceCopyRelationship, 
-                       _kSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
+                       _kSymptomActivityBitmapWiFiNonInfraInterface, _kSymptomActivityBitmapsActualStartTimeKey, 
+                       _kSymptomActivityBitmapsBitmapKey, _kSymptomActivityBitmapsValidBitsCountKey, 
+                       _kSymptomAnalyticsHelperServiceEndpoint, _kSymptomAnalyticsNetworkAdvisoryDefiniteImprovement, 
+                       _kSymptomAnalyticsNetworkAdvisoryDefiniteNotUse, _kSymptomAnalyticsNetworkAdvisoryDefiniteUse, 
+                       _kSymptomAnalyticsNetworkAdvisoryError, _kSymptomAnalyticsNetworkAdvisoryInconclusive, 
+                       _kSymptomAnalyticsNetworkAdvisoryInterfaceNotReady, _kSymptomAnalyticsNetworkAdvisoryKey, 
+                       _kSymptomAnalyticsNetworkAdvisoryNoImprovement, _kSymptomAnalyticsNetworkAdvisoryNotSupported, 
+                       _kSymptomAnalyticsNetworkAdvisoryWeakImprovement, _kSymptomAnalyticsNetworkAdvisoryWeakNotUse, 
+                       _kSymptomAnalyticsNetworkAdvisoryWeakUse, _kSymptomAnalyticsServiceCalendarUsageToggle, 
+                       _kSymptomAnalyticsServiceCopyRelationship, _kSymptomAnalyticsServiceDomainTrackingClearHistoryBundleIDs, 
                        _kSymptomAnalyticsServiceDomainTrackingClearHistoryEndDate, 
                        _kSymptomAnalyticsServiceDomainTrackingClearHistoryKey, _kSymptomAnalyticsServiceDomainTrackingClearHistoryStartDate, 
                        _kSymptomAnalyticsServiceDomainTrackingContext, _kSymptomAnalyticsServiceDomainTrackingContextVerificationType, 

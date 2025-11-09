@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteServiceDiscovery.framework/Versions/A/RemoteServiceDiscovery'
-current-version: 172.100.9
+current-version: 202.0.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _bridge_version_compare, _bridge_version_copy_current_string, 
@@ -27,7 +27,7 @@ exports:
                        _remote_device_copy_bridge_version_string, _remote_device_copy_build_version, 
                        _remote_device_copy_device_with_name, _remote_device_copy_device_with_uuid, 
                        _remote_device_copy_device_with_uuid_and_trust_level, _remote_device_copy_internal_build, 
-                       _remote_device_copy_local_service_names, _remote_device_copy_os_build, 
+                       _remote_device_copy_local_services, _remote_device_copy_os_build, 
                        _remote_device_copy_os_version, _remote_device_copy_product_type, 
                        _remote_device_copy_properties, _remote_device_copy_property, 
                        _remote_device_copy_service, _remote_device_copy_service_names, 

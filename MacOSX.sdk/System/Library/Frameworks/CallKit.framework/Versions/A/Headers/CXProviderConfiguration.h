@@ -28,6 +28,8 @@ CX_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(11.0), watchos(9.0))
 
 @property (nonatomic) BOOL supportsVideo; // Default NO
 
+@property (nonatomic) BOOL supportsAudioTranslation API_AVAILABLE(ios(26.0));
+
 // Numbers are of type CXHandleType
 @property (nonatomic, copy) NSSet<NSNumber *> *supportedHandleTypes;
 

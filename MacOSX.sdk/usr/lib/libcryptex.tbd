@@ -2,19 +2,20 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex.dylib'
-current-version: 493.120.7
+current-version: 589.0.19
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __cryptex_copy_list, __cryptex_copy_list_lossy, __cryptex_create, 
-                       __cryptex_get_core, __cryptex_install_core, __cryptex_set_actor, 
-                       __cryptex_signing_service_image_spec_certificate, __cryptex_signing_service_image_spec_url, 
-                       __cryptex_version, _collation_copy_mount_point_for_cryptex_bundle_id, 
-                       _collation_copy_search_path, _collation_create, _collation_create_for_user, 
-                       _collation_element_scope_get_description, _collation_foreach, 
-                       _collation_get_description, _collation_get_id, _cryptex_attach_personalized_manifest, 
-                       _cryptex_attr_create, _cryptex_attr_set_authentication, _cryptex_attr_set_limit_load_to_rem, 
-                       _cryptex_attr_set_mount_flags, _cryptex_attr_set_nonce_persistence, 
-                       _cryptex_attr_set_persistence, _cryptex_attr_set_personalization_flags, 
+                       __cryptex_get_core, __cryptex_install_core, __cryptex_signing_service_image_spec_certificate, 
+                       __cryptex_signing_service_image_spec_url, __cryptex_version, 
+                       _collation_copy_mount_point_for_cryptex_bundle_id, _collation_copy_search_path, 
+                       _collation_create, _collation_create_for_user, _collation_element_scope_get_description, 
+                       _collation_foreach, _collation_get_description, _collation_get_id, 
+                       _cryptex_attach_personalized_manifest, _cryptex_attr_create, 
+                       _cryptex_attr_set_auth_token, _cryptex_attr_set_authentication, 
+                       _cryptex_attr_set_limit_load_to_rem, _cryptex_attr_set_mount_flags, 
+                       _cryptex_attr_set_nonce_persistence, _cryptex_attr_set_persistence, 
+                       _cryptex_attr_set_personalization_flags, _cryptex_attr_set_read_write, 
                        _cryptex_attr_set_socks_proxy, _cryptex_attr_set_tss_url, 
                        _cryptex_attr_set_uninstall_flags, _cryptex_bundle_copy_build_manifest, 
                        _cryptex_bundle_copy_build_manifest2, _cryptex_bundle_copy_cryptex, 
@@ -25,10 +26,11 @@ exports:
                        _cryptex_bundle_update_build_manifest2, _cryptex_bundle_write, 
                        _cryptex_bundle_write2, _cryptex_copy_installed_cryptex, _cryptex_copy_list_4MSM, 
                        _cryptex_event_subscribe_with_name, _cryptex_event_subscriber_cancel, 
-                       _cryptex_fcopy_personalized_manifest, _cryptex_fcopy_personalized_manifest2, 
-                       _cryptex_get_identity, _cryptex_get_image_type, _cryptex_get_variant, 
-                       _cryptex_identity_set_chip, _cryptex_identity_set_host_identity, 
-                       _cryptex_install, _cryptex_install2, _cryptex_install_4MSM, 
+                       _cryptex_fcopy_info_plist, _cryptex_fcopy_personalized_manifest, 
+                       _cryptex_fcopy_personalized_manifest2, _cryptex_get_identity, 
+                       _cryptex_get_image_type, _cryptex_get_variant, _cryptex_identity_set_chip, 
+                       _cryptex_identity_set_host_identity, _cryptex_install, _cryptex_install2, 
+                       _cryptex_install_4MSM, _cryptex_inventory_lookup_endpoint, 
                        _cryptex_lockdown, _cryptex_mount, _cryptex_msm_array_destroy, 
                        _cryptex_msm_destroy, _cryptex_msm_get_int, _cryptex_msm_get_string, 
                        _cryptex_personalize, _cryptex_personalize2, _cryptex_remote_array_apply, 

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2024 Apple Inc. All rights reserved.
+ * Copyright (c) 2025 Apple Inc. All rights reserved.
  *
  * @APPLE_LICENSE_HEADER_START@
  *
@@ -21,13 +21,13 @@
  * @APPLE_LICENSE_HEADER_END@
  */
 
-#ifndef _DARWIN_POSIX_SYS_WAIT_
-#define _DARWIN_POSIX_SYS_WAIT_
+#ifndef __SYS_WAIT_H_
+#define __SYS_WAIT_H_
 
-#if !__building_module(Darwin)
+#if !__building_module(sys_wait)
 #error "Do not include this header directly, include <sys/wait.h> instead"
 #endif
 
 #include <sys/wait.h>
 
-#endif /* _DARWIN_POSIX_SYS_WAIT_ */
+#endif /* __SYS_WAIT_H_ */

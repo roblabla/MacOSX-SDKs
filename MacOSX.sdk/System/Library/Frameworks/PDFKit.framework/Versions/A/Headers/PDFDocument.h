@@ -168,6 +168,7 @@ PDFKIT_CLASS_AVAILABLE(10_4, 11_0)
 // in a bogus password.  Returns YES if the document is now unlocked, NO otherwise ([self isLocked] == NO).
 - (BOOL)unlockWithPassword:(NSString *)password;
 
+
 // Even unlocked, encrypted PDF's may have certain restrictions regarding printing, copying, etc. placed upon them. These
 // indicate the current state.
 // Based on Adobe PDF Specification (1.7) Table 3.20: User access permissions

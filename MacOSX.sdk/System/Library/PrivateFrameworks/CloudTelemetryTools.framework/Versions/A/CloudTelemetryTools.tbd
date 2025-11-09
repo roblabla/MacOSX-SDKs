@@ -3,16 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CloudTelemetryTools.framework/Versions/A/CloudTelemetryTools'
-current-version: 2250.14
+current-version: 2300.108
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s19CloudTelemetryTools08StorebagA9KitSourceC15setContainerPtr6objectySo8NSObjectC_tFZ', 
-                       '_$s19CloudTelemetryTools08StorebagA9KitSourceCMa', '_$s19CloudTelemetryTools08StorebagA9KitSourceCMm', 
-                       '_$s19CloudTelemetryTools08StorebagA9KitSourceCMn', '_$s19CloudTelemetryTools08StorebagA9KitSourceCN', 
-                       '_$s19CloudTelemetryTools08StorebagA9KitSourceCfD', '_$s19CloudTelemetryTools08StorebagA9KitSourceCfd', 
-                       '_$s19CloudTelemetryTools11RawStorebagVMa', '_$s19CloudTelemetryTools11RawStorebagVMn', 
+    symbols:         [ '_$s19CloudTelemetryTools11RawStorebagVMa', '_$s19CloudTelemetryTools11RawStorebagVMn', 
                        '_$s19CloudTelemetryTools11RawStorebagVN', '_$s19CloudTelemetryTools14RequestOptionsC06globaldE0ACvMZ', 
                        '_$s19CloudTelemetryTools14RequestOptionsC06globaldE0ACvau', 
                        '_$s19CloudTelemetryTools14RequestOptionsC06globaldE0ACvgZ', 
@@ -26,6 +22,9 @@ exports:
                        '_$s19CloudTelemetryTools14RequestOptionsCMa', '_$s19CloudTelemetryTools14RequestOptionsCMm', 
                        '_$s19CloudTelemetryTools14RequestOptionsCMn', '_$s19CloudTelemetryTools14RequestOptionsCN', 
                        '_$s19CloudTelemetryTools14RequestOptionsCfD', '_$s19CloudTelemetryTools14RequestOptionsCfd', 
+                       '_$s19CloudTelemetryTools14StorebagSourceCMa', '_$s19CloudTelemetryTools14StorebagSourceCMm', 
+                       '_$s19CloudTelemetryTools14StorebagSourceCMn', '_$s19CloudTelemetryTools14StorebagSourceCN', 
+                       '_$s19CloudTelemetryTools14StorebagSourceCfD', '_$s19CloudTelemetryTools14StorebagSourceCfd', 
                        '_$s19CloudTelemetryTools19StorebagCoordinatorC15unownedExecutorScevg', 
                        '_$s19CloudTelemetryTools19StorebagCoordinatorC15unownedExecutorScevpMV', 
                        '_$s19CloudTelemetryTools19StorebagCoordinatorC16mockAvailabilityAA20SessionConfigurationV0G0OSgvMZ', 
@@ -52,7 +51,15 @@ exports:
                        '_$s19CloudTelemetryTools20SessionConfigurationVMa', '_$s19CloudTelemetryTools20SessionConfigurationVMn', 
                        '_$s19CloudTelemetryTools20SessionConfigurationVN', '_$s19CloudTelemetryTools21AllEventFieldProviderV17getProjectVersionSSyFZ', 
                        '_$s19CloudTelemetryTools21AllEventFieldProviderVMa', '_$s19CloudTelemetryTools21AllEventFieldProviderVMn', 
-                       '_$s19CloudTelemetryTools21AllEventFieldProviderVN', '_$s19CloudTelemetryTools4ModeO21__derived_enum_equalsySbAC_ACtFZ', 
+                       '_$s19CloudTelemetryTools21AllEventFieldProviderVN', '_$s19CloudTelemetryTools22ServiceSamplingOutcomeO1loiySbAC_ACtFZ', 
+                       '_$s19CloudTelemetryTools22ServiceSamplingOutcomeO8rawValueACSgSi_tcfC', 
+                       '_$s19CloudTelemetryTools22ServiceSamplingOutcomeO8rawValueSivg', 
+                       '_$s19CloudTelemetryTools22ServiceSamplingOutcomeO8rawValueSivpMV', 
+                       '_$s19CloudTelemetryTools22ServiceSamplingOutcomeOMa', '_$s19CloudTelemetryTools22ServiceSamplingOutcomeOMn', 
+                       '_$s19CloudTelemetryTools22ServiceSamplingOutcomeON', '_$s19CloudTelemetryTools22ServiceSamplingOutcomeOSLAAMc', 
+                       '_$s19CloudTelemetryTools22ServiceSamplingOutcomeOSQAAMc', 
+                       '_$s19CloudTelemetryTools22ServiceSamplingOutcomeOSYAAMc', 
+                       '_$s19CloudTelemetryTools4ModeO21__derived_enum_equalsySbAC_ACtFZ', 
                        '_$s19CloudTelemetryTools4ModeO4hash4intoys6HasherVz_tF', 
                        '_$s19CloudTelemetryTools4ModeO9hashValueSivg', '_$s19CloudTelemetryTools4ModeO9hashValueSivpMV', 
                        '_$s19CloudTelemetryTools4ModeOMa', '_$s19CloudTelemetryTools4ModeOMn', 
@@ -149,6 +156,10 @@ exports:
                        '_$s20CloudTelemetryShared11MessageKeysO14hierarchyTokenSSvgZ', 
                        '_$s20CloudTelemetryShared11MessageKeysO14hierarchyTokenSSvpZ', 
                        '_$s20CloudTelemetryShared11MessageKeysO14hierarchyTokenSSvpZMV', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvau', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvgZ', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvpZ', 
+                       '_$s20CloudTelemetryShared11MessageKeysO15samplingOutcomeSSvpZMV', 
                        '_$s20CloudTelemetryShared11MessageKeysO16overrideSamplingSSvau', 
                        '_$s20CloudTelemetryShared11MessageKeysO16overrideSamplingSSvgZ', 
                        '_$s20CloudTelemetryShared11MessageKeysO16overrideSamplingSSvpZ', 

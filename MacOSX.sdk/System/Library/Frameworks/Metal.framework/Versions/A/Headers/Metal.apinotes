@@ -11,6 +11,10 @@ Tags:
   NSErrorDomain: MTLDynamicLibraryDomain
 - Name: MTLBinaryArchiveError
   NSErrorDomain: MTLBinaryArchiveDomain
+- Name: MTL4CommandQueueError
+  NSErrorDomain: MTL4CommandQueueErrorDomain
+- Name: MTLTensorError
+  NSErrorDomain: MTLTensorDomain
 Globals:
 - Name: MTLDeviceWasAddedNotification
   SwiftName: wasAdded
@@ -20,6 +24,16 @@ Globals:
   SwiftName: wasRemoved
 - Name: NSDeviceCertificationiPhonePerformanceGaming
   SwiftName: iPhonePerformanceGaming
+#if MTL_SUPPORT_DEVICE_CERTIFICATION_3
+- Name: NSDeviceCertificationiPadPerformanceGamingTier1
+  SwiftName: iPadPerformanceGamingTier1
+- Name: NSDeviceCertificationiPadPerformanceGamingTier2
+  SwiftName: iPadPerformanceGamingTier2
+- Name: NSDeviceCertificationMacPerformanceGamingTier1
+  SwiftName: MacPerformanceGamingTier1
+- Name: NSDeviceCertificationMacPerformanceGamingTier2
+  SwiftName: MacPerformanceGamingTier2
+#endif
 Functions:
 - Name: MTLCopyAllDevicesWithObserver
   SwiftPrivate: true
@@ -393,6 +407,15 @@ Enumerators:
   SwiftName: lzma
 - Name: MTLIOCompressionMethodLZBitmap
   SwiftName: lzBitmap
+- Name: MTLTensorDataTypeBFloat16
+  SwiftName: bfloat16
+- Name: MTLTensorDataTypeUInt8
+  SwiftName: uint8
+- Name: MTLTensorDataTypeUInt16
+  SwiftName: uint16
+- Name: MTLTensorDataTypeUInt32
+  SwiftName: uint32
+
 Classes:
 - Name: MTLCaptureManager
   Methods:
@@ -400,6 +423,9 @@ Classes:
     SwiftName: makeCaptureScope(device:)
     MethodKind: Instance
   - Selector: 'newCaptureScopeWithCommandQueue:'
+    SwiftName: makeCaptureScope(commandQueue:)
+    MethodKind: Instance
+  - Selector: 'newCaptureScopeWithMTL4CommandQueue:'
     SwiftName: makeCaptureScope(commandQueue:)
     MethodKind: Instance
   - Selector: 'startCaptureWithDevice:'
@@ -481,6 +507,53 @@ Classes:
   - Selector: 'isDeviceCertifiedFor:'
     SwiftName: isDeviceCertified(for:)
     MethodKind: Instance
+- Name: MTL4RenderPassDescriptor
+  Methods:
+  - Selector: 'setSamplePositions:count:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'getSamplePositions:count:'
+    MethodKind: Instance
+    SwiftPrivate: true
+
+- Name: MTLLogicalToPhysicalColorAttachmentMap
+  Methods:
+  - Selector: 'setPhysicalIndex:forLogicalIndex:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'getPhysicalIndexForLogicalIndex:'
+    MethodKind: Instance
+    SwiftPrivate: true
+    
+- Name: MTLTensorExtents
+  Methods:
+  - Selector: 'initWithRank:values:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'extentAtDimensionIndex:'
+    MethodKind: Instance
+    SwiftPrivate: true
+
+- Name: MTL4MachineLearningPipelineDescriptor
+  Methods:
+  - Selector: 'setInputDimensions:atBufferIndex:'
+    MethodKind: Instance
+    SwiftName: setInputDimensions(_:bufferIndex:)
+  - Selector: 'setInputDimensions:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'inputDimensionsAtBufferIndex:'
+    MethodKind: Instance
+    SwiftName: inputDimensions(bufferIndex:)
+    
+- Name: MTLTextureViewDescriptor
+  Properties:
+  - Name: 'levelRange'
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: 'sliceRange'
+    PropertyKind: Instance
+    SwiftPrivate: true
 
 Protocols:
 - Name: MTLIOScratchBufferAllocator
@@ -562,6 +635,13 @@ Protocols:
   - Selector: 'newRemoteBufferViewForDevice:'
     SwiftName: makeRemoteBufferView(_:)
     MethodKind: Instance
+  - Selector: 'newTensorWithDescriptor:offset:error:'
+    SwiftName: makeTensor(descriptor:offset:)
+    MethodKind: Instance
+  - Selector: 'tensorSizeAndAlignWithDescriptor:'
+    SwiftName: tensorSizeAndAlign(descriptor:)
+    MethodKind: Instance
+
   Properties:
   - Name: remoteStorageBuffer
     SwiftName: remoteStorageBuffer
@@ -767,6 +847,13 @@ Protocols:
   - Selector: 'newIntersectionFunctionTableWithDescriptor:'
     SwiftName: makeIntersectionFunctionTable(descriptor:)
     MethodKind: Instance
+  - Selector: 'functionHandleWithBinaryFunction:'
+    SwiftName: functionHandle(function:)
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithBinaryFunctions:error:'
+    SwiftName: makeComputePipelineState(additionalBinaryFunctions:)
+    MethodKind: Instance
+
 - Name: MTLRenderPipelineState
   Methods:
   - Selector: 'functionHandleWithFunction:stage:'
@@ -781,6 +868,16 @@ Protocols:
   - Selector: 'newIntersectionFunctionTableWithDescriptor:stage:'
     SwiftName: makeIntersectionFunctionTable(descriptor:stage:)
     MethodKind: Instance
+  - Selector: 'functionHandleWithBinaryFunction:stage:'
+    SwiftName: functionHandle(function:stage:)
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithBinaryFunctions:error:'
+    SwiftName: makeRenderPipelineState(additionalBinaryFunctions:)
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineDescriptorForSpecialization'
+    SwiftName: makeRenderPipelineDescriptorForSpecialization()
+    MethodKind: Instance
+
 - Name: MTLDevice
   Methods:
   - Selector: 'getDefaultSamplePositions:count:'
@@ -987,6 +1084,54 @@ Protocols:
   - Selector: 'newResidencySetWithDescriptor:error:'
     SwiftName: makeResidencySet(descriptor:)
     MethodKind: Instance
+  - Selector: 'newTextureViewPoolWithDescriptor:error:'
+    SwiftName: makeTextureViewPool(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newArgumentTableWithDescriptor:error:'
+    SwiftName: makeArgumentTable(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newCompilerWithDescriptor:error:'
+    SwiftName: makeCompiler(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newArchiveWithURL:error:'
+    SwiftName: makeArchive(url:)
+    MethodKind: Instance
+  - Selector: 'newPipelineDataSetSerializerWithDescriptor:'
+    SwiftName: makePipelineDataSetSerializer(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newCommandAllocator'
+    SwiftName: makeCommandAllocator()
+    MethodKind: Instance
+  - Selector: 'newCommandAllocatorWithDescriptor:error:'
+    SwiftName: makeCommandAllocator(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newCommandBuffer'
+    SwiftName: makeCommandBuffer()
+    MethodKind: Instance
+  - Selector: 'newMTL4CommandQueue'
+    SwiftName: makeMTL4CommandQueue()
+    MethodKind: Instance
+  - Selector: 'newMTL4CommandQueueWithDescriptor:error:'
+    SwiftName: makeMTL4CommandQueue(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newBufferWithLength:options:placementSparsePageSize:'
+    SwiftName: makeBuffer(length:options:placementSparsePageSize:)
+    MethodKind: Instance
+  - Selector: 'newCounterHeapWithDescriptor:error:'
+    SwiftName: makeCounterHeap(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newTensorWithDescriptor:error:'
+    SwiftName: makeTensor(descriptor:)
+    MethodKind: Instance
+  - Selector: 'tensorSizeAndAlignWithDescriptor:'
+    SwiftName: tensorSizeAndAlign(descriptor:)
+    MethodKind: Instance
+  - Selector: 'functionHandleWithFunction:'
+    SwiftName: functionHandle(function:)
+    MethodKind: Instance
+  - Selector: 'functionHandleWithBinaryFunction:'
+    SwiftName: functionHandle(function:)
+    MethodKind: Instance
 
 - Name: MTLDrawable
   Methods:
@@ -1095,6 +1240,13 @@ Protocols:
     SwiftName: __setIntersectionFunctionTables(_:withBufferRange:)
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'setDepthStencilState:atIndex:'
+    SwiftName: setDepthStencilState(_:index:)
+    MethodKind: Instance
+  - Selector: 'setDepthStencilStates:withRange:'
+    SwiftPrivate: true
+    MethodKind: Instance
+
 - Name: MTLLibrary
   Methods:
   - Selector: 'newFunctionWithName:'
@@ -1117,6 +1269,9 @@ Protocols:
     MethodKind: Instance
   - Selector: 'newIntersectionFunctionWithDescriptor:completionHandler:'
     SwiftName: makeIntersectionFunction(descriptor:completionHandler:)
+    MethodKind: Instance
+  - Selector: 'reflectionForFunctionWithName:'
+    SwiftName: reflection(functionName:)
     MethodKind: Instance
 - Name: MTLFunction
   Methods:
@@ -1155,6 +1310,11 @@ Protocols:
   - Selector: 'mapPhysicalToScreenCoordinates:forLayer:'
     MethodKind: Instance
     SwiftName: screenCoordinates(physicalCoordinates:layer:)
+- Name: MTLCommandEncoder
+  Methods:
+  - Selector: 'barrierAfterQueueStages:beforeStages:'
+    SwiftName: barrier(afterQueueStages:beforeStages:)
+    MethodKind: Instance
 - Name: MTLRenderCommandEncoder
   Methods:
   - Selector: 'setViewports:count:'
@@ -1163,6 +1323,9 @@ Protocols:
   - Selector: 'setScissorRects:count:'
     MethodKind: Instance
     SwiftPrivate: true
+  - Selector: 'setDepthTestMinBound:maxBound:'
+    SwiftPrivate: true
+    MethodKind: Instance
   - Selector: 'setVertexBytes:length:atIndex:'
     SwiftName: setVertexBytes(_:length:index:)
     MethodKind: Instance
@@ -1710,6 +1873,435 @@ Protocols:
   - Selector: 'addLibraryWithDescriptor:error:'
     SwiftName: addLibrary(descriptor:)
     MethodKind: Instance
+- Name: MTLTensor
+  Methods:
+  - Selector: 'replaceSliceOrigin:sliceDimensions:withBytes:strides:'
+    SwiftName: replace(sliceOrigin:sliceDimensions:withBytes:strides:)
+    MethodKind: Instance
+  - Selector: 'getBytes:strides:fromSliceOrigin:sliceDimensions:'
+    SwiftName: getBytes(_:strides:sliceOrigin:sliceDimensions:)
+    MethodKind: Instance
+
+- Name: MTLTextureViewPool
+  Methods:
+  - Selector: 'setTextureView:atIndex:'
+    SwiftName: setTextureView(texture:index:)
+    MethodKind: Instance
+  - Selector: 'setTextureView:descriptor:atIndex:'
+    SwiftName: setTextureView(texture:descriptor:index:)
+    MethodKind: Instance
+  - Selector: 'setTextureViewFromBuffer:descriptor:offset:bytesPerRow:atIndex:'
+    SwiftName: setTextureView(buffer:descriptor:offset:bytesPerRow:index:)
+    MethodKind: Instance
+- Name: MTL4ArgumentTable
+  Methods:
+  - Selector: 'setAddress:atIndex:'
+    SwiftName: setAddress(_:index:)
+    MethodKind: Instance
+  - Selector: 'setAddress:attributeStride:atIndex:'
+    SwiftName: setAddress(_:attributeStride:index:)
+    MethodKind: Instance
+  - Selector: 'setResource:atBufferIndex:'
+    SwiftName: setResource(_:bufferIndex:)
+    MethodKind: Instance
+  - Selector: 'setTexture:atIndex:'
+    SwiftName: setTexture(_:index:)
+    MethodKind: Instance
+  - Selector: 'setSamplerState:atIndex:'
+    SwiftName: setSamplerState(_:index:)
+    MethodKind: Instance
+    
+- Name: MTL4CommandEncoder
+  Methods:
+  - Selector: 'barrierAfterQueueStages:beforeStages:visibilityOptions:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'barrierAfterStages:beforeQueueStages:visibilityOptions:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'barrierAfterEncoderStages:beforeEncoderStages:visibilityOptions:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'updateFence:afterEncoderStages:'
+    SwiftName: updateFence(_:afterEncoderStages:)
+    MethodKind: Instance
+  - Selector: 'waitForFence:beforeEncoderStages:'
+    SwiftName: waitForFence(_:beforeEncoderStages:)
+    MethodKind: Instance
+    
+- Name: MTL4ComputeCommandEncoder
+  Methods:
+  - Selector: 'executeCommandsInBuffer:withRange:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'resetCommandsInBuffer:withRange:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyIndirectCommandBuffer:sourceRange:destination:destinationIndex:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'optimizeIndirectCommandBuffer:withRange:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'fillBuffer:range:value:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyFromTexture:toTexture:'
+    SwiftName: copy(sourceTexture:destinationTexture:)
+    MethodKind: Instance
+  - Selector: 'copyFromTexture:sourceSlice:sourceLevel:toTexture:destinationSlice:destinationLevel:sliceCount:levelCount:'
+    SwiftName: copy(sourceTexture:sourceSlice:sourceLevel:destinationTexture:destinationSice:destinationLevel:sliceCount:levelCount:)
+    MethodKind: Instance
+  - Selector: 'copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:'
+    SwiftName: copy(sourceTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:destinationTexture:destinationSlice:destinationLevel:destinationOrigin:)
+    MethodKind: Instance
+  - Selector: 'copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toBuffer:destinationOffset:destinationBytesPerRow:destinationBytesPerImage:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyFromTexture:sourceSlice:sourceLevel:sourceOrigin:sourceSize:toBuffer:destinationOffset:destinationBytesPerRow:destinationBytesPerImage:options:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyFromBuffer:sourceOffset:toBuffer:destinationOffset:size:'
+    SwiftName: copy(sourceBuffer:sourceOffset:destinationBuffer:destinationOffset:size:)
+    MethodKind: Instance
+  - Selector: 'copyFromBuffer:sourceOffset:sourceBytesPerRow:sourceBytesPerImage:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyFromBuffer:sourceOffset:sourceBytesPerRow:sourceBytesPerImage:sourceSize:toTexture:destinationSlice:destinationLevel:destinationOrigin:options:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyFromTensor:sourceOrigin:sourceDimensions:toTensor:destinationOrigin:destinationDimensions:'
+    SwiftName: copy(sourceTensor:sourceOrigin:sourceDimensions:destinationTensor:destinationOrigin:destinationDimensions:)
+    MethodKind: Instance
+  - Selector: 'copyAccelerationStructure:toAccelerationStructure:'
+    SwiftName: copy(sourceAccelerationStructure:destinationAccelerationStructure:)
+    MethodKind: Instance
+  - Selector: 'copyAndCompactAccelerationStructure:toAccelerationStructure:'
+    SwiftName: copyAndCompact(sourceAccelerationStructure:destinationAccelerationStructure:)
+    MethodKind: Instance
+  - Selector: 'refitAccelerationStructure:descriptor:destination:scratchBuffer:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'refitAccelerationStructure:descriptor:destination:scratchBuffer:options:'
+    SwiftName: refit(sourceAccelerationStructure:descriptor:destinationAccelerationStructure:scratchBuffer:options:)
+    MethodKind: Instance
+  - Selector: 'buildAccelerationStructure:descriptor:scratchBuffer:'
+    SwiftName: build(destinationAccelerationStructure:descriptor:scratchBuffer:)
+    MethodKind: Instance
+  - Selector: 'writeCompactedAccelerationStructureSize:toBuffer:'
+    SwiftName: writeCompactedSize(sourceAccelerationStructure:destinationBuffer:)
+    MethodKind: Instance
+  - Selector: 'setThreadgroupMemoryLength:atIndex:'
+    SwiftName: setThreadgroupMemoryLength(_:index:)
+    MethodKind: Instance
+  - Selector: 'setImageblockWidth:height:'
+    SwiftName: setImageblockSize(width:height:)
+    MethodKind: Instance
+  - Selector: 'dispatchThreads:threadsPerThreadgroup:'
+    SwiftName: dispatchThreads(threadsPerGrid:threadsPerThreadgroup:)
+    MethodKind: Instance
+  - Selector: 'dispatchThreadgroups:threadsPerThreadgroup:'
+    SwiftName: dispatchThreadgroups(threadgroupsPerGrid:threadsPerThreadgroup:)
+    MethodKind: Instance
+  - Selector: 'dispatchThreadgroupsWithIndirectBuffer:threadsPerThreadgroup:'
+    SwiftName: dispatchThreadgroups(indirectBuffer:threadsPerThreadgroup:)
+    MethodKind: Instance
+  - Selector: 'dispatchThreadsWithIndirectBuffer:'
+    SwiftName: dispatchThreads(indirectBuffer:)
+    MethodKind: Instance
+  - Selector: 'executeCommandsInBuffer:indirectBuffer:'
+    SwiftName: executeCommands(buffer:indirectBuffer:)
+    MethodKind: Instance
+  - Selector: 'generateMipmapsForTexture:'
+    SwiftName: generateMipmaps(texture:)
+    MethodKind: Instance
+  - Selector: 'writeTimestampWithGranularity:intoHeap:atIndex:'
+    SwiftName: writeTimestamp(granularity:counterHeap:index:)
+    MethodKind: Instance
+    
+- Name: MTL4RenderCommandEncoder
+  Methods:
+  - Selector: 'setArgumentTable:atStages:'
+    SwiftName: setArgumentTable(_:stages:)
+    MethodKind: Instance
+  - Selector: 'setViewports:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'setScissorRects:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'setVertexAmplificationCount:viewMappings:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'executeCommandsInBuffer:withRange:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'executeCommandsInBuffer:indirectBuffer:'
+    SwiftName: executeCommands(buffer:indirectBuffer:)
+    MethodKind: Instance
+  - Selector: 'setBlendColorRed:green:blue:alpha:'
+    SwiftName: setBlendColor(red:green:blue:alpha:)
+    MethodKind: Instance
+  - Selector: 'setStencilFrontReferenceValue:backReferenceValue:'
+    SwiftName: setStencilReferenceValue(front:back:)
+    MethodKind: Instance
+  - Selector: 'setColorStoreAction:atIndex:'
+    SwiftName: setColorStoreAction(_:index:)
+    MethodKind: Instance
+  - Selector: 'setObjectThreadgroupMemoryLength:atIndex:'
+    SwiftName: setObjectThreadgroupMemoryLength(_:index:)
+    MethodKind: Instance
+  - Selector: 'setThreadgroupMemoryLength:offset:atIndex:'
+    SwiftName: setThreadgroupMemoryLength(_:offset:index:)
+    MethodKind: Instance
+  - Selector: 'drawPrimitives:vertexStart:vertexCount:'
+    SwiftName: drawPrimitives(primitiveType:vertexStart:vertexCount:)
+    MethodKind: Instance
+  - Selector: 'drawPrimitives:vertexStart:vertexCount:instanceCount:'
+    SwiftName: drawPrimitives(primitiveType:vertexStart:vertexCount:instanceCount:)
+    MethodKind: Instance
+  - Selector: 'drawPrimitives:vertexStart:vertexCount:instanceCount:baseInstance:'
+    SwiftName: drawPrimitives(primitiveType:vertexStart:vertexCount:instanceCount:baseInstance:)
+    MethodKind: Instance
+  - Selector: 'drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferLength:'
+    SwiftName: drawIndexedPrimitives(primitiveType:indexCount:indexType:indexBuffer:indexBufferLength:)
+    MethodKind: Instance
+  - Selector: 'drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferLength:instanceCount:'
+    SwiftName: drawIndexedPrimitives(primitiveType:indexCount:indexType:indexBuffer:indexBufferLength:instanceCount:)
+    MethodKind: Instance
+  - Selector: 'drawIndexedPrimitives:indexCount:indexType:indexBuffer:indexBufferLength:instanceCount:baseVertex:baseInstance:'
+    SwiftName: drawIndexedPrimitives(primitiveType:indexCount:indexType:indexBuffer:indexBufferLength:instanceCount:baseVertex:baseInstance:)
+    MethodKind: Instance
+  - Selector: 'drawPrimitives:indirectBuffer:'
+    SwiftName: drawPrimitives(primitiveType:indirectBuffer:)
+    MethodKind: Instance
+  - Selector: 'drawIndexedPrimitives:indexType:indexBuffer:indexBufferLength:indirectBuffer:'
+    SwiftName: drawIndexedPrimitives(primitiveType:indexType:indexBuffer:indexBufferLength:indirectBuffer:)
+    MethodKind: Instance
+  - Selector: 'drawMeshThreadgroups:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:'
+    SwiftName: drawMeshThreadgroups(threadgroupsPerGrid:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:)
+    MethodKind: Instance
+  - Selector: 'drawMeshThreads:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:'
+    SwiftName: drawMeshThreads(threadsPerGrid:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:)
+    MethodKind: Instance
+  - Selector: 'drawMeshThreadgroupsWithIndirectBuffer:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:'
+    SwiftName: drawMeshThreadgroups(indirectBuffer:threadsPerObjectThreadgroup:threadsPerMeshThreadgroup:)
+    MethodKind: Instance
+  - Selector: 'writeTimestampWithGranularity:afterStage:intoHeap:atIndex:'
+    SwiftName: writeTimestamp(granularity:after:counterHeap:index:)
+    MethodKind: Instance
+  - Selector: 'setDepthTestMinBound:maxBound:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  
+- Name: MTL4MachineLearningCommandEncoder
+  Methods:
+  - Selector: 'dispatchNetworkWithIntermediatesHeap:'
+    SwiftName: dispatchNetwork(intermediatesHeap:)
+    MethodKind: Instance
+    
+- Name: MTL4CounterHeap
+  Methods:
+  - Selector: 'resolveCounterRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'invalidateCounterRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+
+- Name: MTL4CommandBuffer
+  Methods:
+  - Selector: 'beginCommandBufferWithAllocator:'
+    SwiftName: beginCommandBuffer(allocator:)
+    MethodKind: Instance
+  - Selector: 'beginCommandBufferWithAllocator:options:'
+    SwiftName: beginCommandBuffer(allocator:options:)
+    MethodKind: Instance
+  - Selector: 'endCommandBuffer'
+    SwiftName: endCommandBuffer()
+    MethodKind: Instance
+  - Selector: 'renderCommandEncoderWithDescriptor:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'renderCommandEncoderWithDescriptor:options:'
+    SwiftName: makeRenderCommandEncoder(descriptor:options:)
+    MethodKind: Instance
+  - Selector: 'computeCommandEncoder'
+    SwiftName: makeComputeCommandEncoder()
+    MethodKind: Instance
+  - Selector: 'machineLearningCommandEncoder'
+    SwiftName: makeMachineLearningCommandEncoder()
+    MethodKind: Instance
+  - Selector: 'useResidencySet:'
+    SwiftName: useResidencySet(_:)
+    MethodKind: Instance
+  - Selector: 'useResidencySets:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'writeTimestampIntoHeap:atIndex:'
+    SwiftName: writeTimestamp(counterHeap:index:)
+    MethodKind: Instance
+  - Selector: 'resolveCounterHeap:withRange:intoBuffer:waitFence:updateFence:'
+    SwiftPrivate: true
+    MethodKind: Instance
+
+- Name: MTL4CommandQueue
+  Methods:
+  - Selector: 'commit:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'commit:count:options:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'addResidencySets:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'removeResidencySets:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'addResidencySet:'
+    SwiftName: addResidencySet(_:)
+    MethodKind: Instance
+  - Selector: 'removeResidencySet:'
+    SwiftName: removeResidencySet(_:)
+    MethodKind: Instance
+  - Selector: 'signalEvent:value:'
+    SwiftName: signalEvent(_:value:)
+    MethodKind: Instance
+  - Selector: 'waitForEvent:value:'
+    SwiftName: waitForEvent(_:value:)
+    MethodKind: Instance
+  - Selector: 'signalDrawable:'
+    SwiftName: signalDrawable(_:)
+    MethodKind: Instance
+  - Selector: 'waitForDrawable:'
+    SwiftName: waitForDrawable(_:)
+    MethodKind: Instance
+  - Selector: 'updateTextureMappings:heap:operations:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'updateBufferMappings:heap:operations:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyTextureMappingsFromTexture:toTexture:operations:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'copyBufferMappingsFromBuffer:toBuffer:operations:count:'
+    SwiftPrivate: true
+    MethodKind: Instance
+    
+- Name: MTL4Compiler
+  Methods:
+  - Selector: 'newLibraryWithDescriptor:error:'
+    SwiftName: makeLibrary(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newDynamicLibrary:error:'
+    SwiftName: makeDynamicLibrary(library:)
+    MethodKind: Instance
+  - Selector: 'newDynamicLibraryWithURL:error:'
+    SwiftName: makeDynamicLibrary(url:)
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithDescriptor:compilerTaskOptions:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithDescriptor:dynamicLinkingDescriptor:compilerTaskOptions:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithDescriptor:compilerTaskOptions:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithDescriptor:dynamicLinkingDescriptor:compilerTaskOptions:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateBySpecializationWithDescriptor:pipeline:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newBinaryFunctionWithDescriptor:compilerTaskOptions:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newLibraryWithDescriptor:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newDynamicLibrary:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newDynamicLibraryWithURL:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithDescriptor:compilerTaskOptions:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithDescriptor:dynamicLinkingDescriptor:compilerTaskOptions:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithDescriptor:compilerTaskOptions:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithDescriptor:dynamicLinkingDescriptor:compilerTaskOptions:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateBySpecializationWithDescriptor:pipeline:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newBinaryFunctionWithDescriptor:compilerTaskOptions:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newMachineLearningPipelineStateWithDescriptor:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newMachineLearningPipelineStateWithDescriptor:completionHandler:'
+    SwiftPrivate: true
+    MethodKind: Instance
+    
+- Name: MTL4Archive
+  Methods:
+  - Selector: 'newComputePipelineStateWithDescriptor:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithDescriptor:dynamicLinkingDescriptor:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithDescriptor:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithDescriptor:dynamicLinkingDescriptor:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newBinaryFunctionWithDescriptor:error:'
+    SwiftName: makeBinaryFunction(descriptor:)
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithName:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newComputePipelineStateWithName:dynamicLinkingDescriptor:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithName:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newRenderPipelineStateWithName:dynamicLinkingDescriptor:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  - Selector: 'newBinaryFunctionWithName:error:'
+    SwiftPrivate: true
+    MethodKind: Instance
+
+    
+- Name: MTL4PipelineDataSetSerializer
+  Methods:
+  - Selector: 'serializeAsArchiveAndFlushToURL:error:'
+    SwiftName: serializeAsArchiveAndFlush(url:)
+    MethodKind: Instance
+  - Selector: 'serializeAsPipelinesScriptWithError:'
+    SwiftName: serializeAsPipelinesScript()
+    MethodKind: Instance
+    
+- Name: MTLResourceViewPool
+  Methods:
+  - Selector: 'copyResourceViewsFromPool:sourceRange:destinationIndex:'
+    SwiftPrivate: true
+    MethodKind: Instance
+  
 
 SwiftVersions:
 - Version: 3
@@ -1955,6 +2547,7 @@ SwiftVersions:
     - Selector: 'setIndirectCommandBuffers:withRange:'
       MethodKind: Instance
       SwiftPrivate: true
+  
   - Name: MTLParallelRenderCommandEncoder
     Methods:
     - Selector: 'renderCommandEncoder'

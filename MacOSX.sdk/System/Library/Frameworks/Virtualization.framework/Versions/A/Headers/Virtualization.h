@@ -2,7 +2,7 @@
 //  Virtualization.h
 //  Virtualization
 //
-//  Copyright © 2019-2024 Apple Inc. All rights reserved.
+//  Copyright © 2019-2025 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZAudioDeviceConfiguration.h>
@@ -117,6 +117,10 @@
 #import <Virtualization/VZVirtualMachineConfiguration.h>
 #import <Virtualization/VZVirtualMachineDelegate.h>
 #import <Virtualization/VZVirtualMachineStartOptions.h>
-#import <Virtualization/VZVirtualMachineView.h>
+#import <Virtualization/VZVmnetNetworkDeviceAttachment.h>
 #import <Virtualization/VZXHCIController.h>
 #import <Virtualization/VZXHCIControllerConfiguration.h>
+
+#if __has_include(<Cocoa/Cocoa.h>)
+#import <Virtualization/VZVirtualMachineView.h>
+#endif

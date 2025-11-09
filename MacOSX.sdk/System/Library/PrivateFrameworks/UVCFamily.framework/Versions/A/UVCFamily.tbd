@@ -30,11 +30,11 @@ exports:
                        _kUVCServiceCameraAssistantConfiguration, _kUVCServiceKeyAppleCameraSupport, 
                        _kUVCServiceKeyBundleID, _kUVCStreamFormatAttributeColorPrimaries, 
                        _kUVCStreamFormatAttributeMatrixCoefficients, _kUVCStreamFormatAttributeTransferCharacteristics, 
-                       _kUVCStreamFormatGUID, _kUVCStreamFormatGUIDH264, _kUVCStreamFormatGUIDMJPEG, 
-                       _kUVCStreamFormatGUIDYUV420_420v, _kUVCStreamFormatGUIDYUV422_2vuy, 
-                       _kUVCStreamFormatGUIDYUV422_yuvs, _kUVCStreamFormatHeight, 
-                       _kUVCStreamFormatWidth, _toStringFromFormatGUID, _toStringFromSelector, 
-                       _uvcDebugLogEnabled ]
+                       _kUVCStreamFormatGUID, _kUVCStreamFormatGUIDH264, _kUVCStreamFormatGUIDH265, 
+                       _kUVCStreamFormatGUIDMJPEG, _kUVCStreamFormatGUIDYUV420_420v, 
+                       _kUVCStreamFormatGUIDYUV422_2vuy, _kUVCStreamFormatGUIDYUV422_yuvs, 
+                       _kUVCStreamFormatHeight, _kUVCStreamFormatWidth, _toStringFromFormatGUID, 
+                       _toStringFromSelector, _uvcDebugLogEnabled, _uvcDeviceIsAppleDisplay ]
     objc-classes:    [ UVCDeviceConfiguration, UVCDeviceControl, UVCDeviceExtensionUnitControl, 
                        UVCDeviceStreamFormat, UVCDeviceStreamInterfaceData, UVCInterfaceConfiguration, 
                        UVCStreamInterfaceConfiguration, UVCUSBDevice, UVCUSBDeviceControlInterface, 

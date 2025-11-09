@@ -1,29 +1,29 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftDarwin -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -user-module-version 310.100.8.0.1 -module-name Darwin
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftDarwin -swift-version 6 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -user-module-version 347.0.12 -module-name Darwin
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import Darwin
 import Swift
 @_exported import _Builtin_float
-@_exported import _errno
-@_exported import _math
-@_exported import _signal
-@_exported import _stdio
-@_exported import _time
-@_exported import sys_time
-@_exported import unistd
+@_exported import _DarwinFoundation1
+@_exported import _DarwinFoundation2
+@_exported import _DarwinFoundation3
+import Darwin.Mach.message
+@_exported import sys_types
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public var environ: Swift.UnsafeMutablePointer<Swift.UnsafeMutablePointer<Swift.CChar>?> {
   get
 }
+#endif
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Swift.Int32
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: sys_types.mode_t) -> Swift.Int32
+public func open(_ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: _DarwinFoundation2.mode_t) -> Swift.Int32
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func openat(_ fd: Swift.Int32, _ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Swift.Int32
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public func openat(_ fd: Swift.Int32, _ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: sys_types.mode_t) -> Swift.Int32
+public func openat(_ fd: Swift.Int32, _ path: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: _DarwinFoundation2.mode_t) -> Swift.Int32
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func fcntl(_ fd: Swift.Int32, _ cmd: Swift.Int32) -> Swift.Int32
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
@@ -84,13 +84,29 @@ public func fcntl(_ fd: Swift.Int32, _ cmd: Swift.Int32, _ ptr: Swift.UnsafeMuta
   case operationTimedOut = 49
   case codesignError = 50
   case policyStatic = 51
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int32)
+  #endif
   @available(iOS 7.0, tvOS 9.0, watchOS 2.0, visionOS 1.0, macOS 10.9, *)
   public typealias RawValue = Swift.Int32
   public var rawValue: Swift.Int32 {
     get
   }
 }
+@available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
+extension Darwin.audit_token_t : Swift.Codable, Swift.Equatable, Swift.Hashable {
+  public func encode(to encoder: any Swift.Encoder) throws
+  public init(from decoder: any Swift.Decoder) throws
+  public static func == (lhs: Darwin.audit_token_t, rhs: Darwin.audit_token_t) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
+public let INVALID_AUDIT_TOKEN_VALUE: (Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32)
+@available(macOS 26.0, iOS 26.0, watchOS 26.0, tvOS 26.0, visionOS 26.0, *)
+public let KERNEL_AUDIT_TOKEN_VALUE: (Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32, Swift.UInt32)
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public var noErr: Darwin.OSStatus {
   get
@@ -140,14 +156,20 @@ extension Darwin.DarwinBoolean : Swift.Equatable {
     return x.boolValue
 }
 public typealias Semaphore = Swift.UnsafeMutablePointer<Darwin.sem_t>
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public var SEM_FAILED: Darwin.Semaphore? {
   get
 }
+#endif
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32) -> Darwin.Semaphore?
+#endif
+#if compiler(>=5.3) && $NonescapableTypes
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: sys_types.mode_t, _ value: Swift.CUnsignedInt) -> Darwin.Semaphore?
+public func sem_open(_ name: Swift.UnsafePointer<Swift.CChar>, _ oflag: Swift.Int32, _ mode: _DarwinFoundation2.mode_t, _ value: Swift.CUnsignedInt) -> Darwin.Semaphore?
+#endif
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 public func ioctl(_ fd: Swift.CInt, _ request: Swift.UInt, _ value: Swift.CInt) -> Swift.CInt
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
@@ -206,121 +228,121 @@ public var TIOCGLTC: Swift.UInt {
 nonisolated(unsafe) public let MAP_FAILED: Swift.UnsafeMutableRawPointer!
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
 extension Darwin.extern_proc {
-  @_transparent public var p_starttime: sys_time.timeval {
+  @_transparent public var p_starttime: _DarwinFoundation2.timeval {
     @_transparent get { return self.p_un.__p_starttime }
     @_transparent set { self.p_un.__p_starttime = newValue }
   }
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFMT: sys_types.mode_t {
+public var S_IFMT: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFIFO: sys_types.mode_t {
+public var S_IFIFO: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFCHR: sys_types.mode_t {
+public var S_IFCHR: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFDIR: sys_types.mode_t {
+public var S_IFDIR: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFBLK: sys_types.mode_t {
+public var S_IFBLK: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFREG: sys_types.mode_t {
+public var S_IFREG: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFLNK: sys_types.mode_t {
+public var S_IFLNK: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFSOCK: sys_types.mode_t {
+public var S_IFSOCK: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IFWHT: sys_types.mode_t {
+public var S_IFWHT: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IRWXU: sys_types.mode_t {
+public var S_IRWXU: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IRUSR: sys_types.mode_t {
+public var S_IRUSR: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IWUSR: sys_types.mode_t {
+public var S_IWUSR: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IXUSR: sys_types.mode_t {
+public var S_IXUSR: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IRWXG: sys_types.mode_t {
+public var S_IRWXG: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IRGRP: sys_types.mode_t {
+public var S_IRGRP: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IWGRP: sys_types.mode_t {
+public var S_IWGRP: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IXGRP: sys_types.mode_t {
+public var S_IXGRP: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IRWXO: sys_types.mode_t {
+public var S_IRWXO: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IROTH: sys_types.mode_t {
+public var S_IROTH: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IWOTH: sys_types.mode_t {
+public var S_IWOTH: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IXOTH: sys_types.mode_t {
+public var S_IXOTH: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_ISUID: sys_types.mode_t {
+public var S_ISUID: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_ISGID: sys_types.mode_t {
+public var S_ISGID: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_ISVTX: sys_types.mode_t {
+public var S_ISVTX: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_ISTXT: sys_types.mode_t {
+public var S_ISTXT: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IREAD: sys_types.mode_t {
+public var S_IREAD: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IWRITE: sys_types.mode_t {
+public var S_IWRITE: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)
-public var S_IEXEC: sys_types.mode_t {
+public var S_IEXEC: _DarwinFoundation2.mode_t {
   get
 }
 @available(macOS 10.9, iOS 7.0, watchOS 2.0, tvOS 9.0, visionOS 1.0, *)

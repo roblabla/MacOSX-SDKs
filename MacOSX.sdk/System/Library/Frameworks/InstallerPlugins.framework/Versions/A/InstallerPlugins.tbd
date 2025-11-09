@@ -52,12 +52,13 @@ exports:
                        IFXLogDataSource._lineNumbers, IFXLogDataSource._lnCol, IFXLogDataSource._logView, 
                        IFXLogDataSource._longestStrlen, IFXLogDataSource._msgCol, 
                        IFXLogDataSource._rootChildren, IFXLogDataSource._searchString, 
-                       IFXLogDataSource._widestStringPx, IFXLogWindowController._closeWatcherObj, 
-                       IFXLogWindowController._closeWatcherSel, IFXLogWindowController._filterField, 
-                       IFXLogWindowController._logDataSource, IFXLogWindowController._logDetailLevelPopUpButton, 
-                       IFXLogWindowController._resourcesBundle, IFXLogWindowController._toolbarIDList, 
-                       IFXLogWindowController._toolbarItems, IFXLogWindowController.sendLogCommentTxt, 
-                       IFXLogWindowController.sendLogContactTxt, IFXLogWindowController.sendLogSheet, 
-                       IFXLogWindowController.uiLogView, IFXLogWindowController.window, 
-                       IFXOpaqueContentView._backgroundOpacity, IFXOpaqueContentView._drawsBorder ]
+                       IFXLogDataSource._widestLineStringPx, IFXLogDataSource._widestStringPx, 
+                       IFXLogWindowController._closeWatcherObj, IFXLogWindowController._closeWatcherSel, 
+                       IFXLogWindowController._filterField, IFXLogWindowController._logDataSource, 
+                       IFXLogWindowController._logDetailLevelPopUpButton, IFXLogWindowController._resourcesBundle, 
+                       IFXLogWindowController._toolbarIDList, IFXLogWindowController._toolbarItems, 
+                       IFXLogWindowController.sendLogCommentTxt, IFXLogWindowController.sendLogContactTxt, 
+                       IFXLogWindowController.sendLogSheet, IFXLogWindowController.uiLogView, 
+                       IFXLogWindowController.window, IFXOpaqueContentView._backgroundOpacity, 
+                       IFXOpaqueContentView._drawsBorder ]
 ...

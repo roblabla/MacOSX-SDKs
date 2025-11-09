@@ -32,6 +32,12 @@ API_AVAILABLE(ios(4.1), macos(10.8), tvos(9.0), visionos(1.0), watchos(3.0))
 @property(copy, readonly, nullable) NSNumber *rarityPercent API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_SWIFT;
 /// The release state of the achievement in App Store Connect.
 @property(nonatomic, assign, readonly) GKReleaseState releaseState API_AVAILABLE(ios(18.4), macos(15.4), watchos(11.4), tvos(18.4), visionos(2.4));
+
+/// The identifier of the game activity associated with this achievement, as configured by the developer in App Store Connect.
+@property (readonly, nonatomic, copy) NSString *activityIdentifier API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0), watchos(26.0));
+
+/// The properties when associating this achievement with a game activity, as configured by the developer in App Store Connect.
+@property (readonly, nonatomic, strong) NSDictionary<NSString *, NSString *> *activityProperties API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), visionos(26.0), watchos(26.0));
 @end
 NS_ASSUME_NONNULL_END
 

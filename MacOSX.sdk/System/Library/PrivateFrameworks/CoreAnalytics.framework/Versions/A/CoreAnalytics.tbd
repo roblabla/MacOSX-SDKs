@@ -86,6 +86,7 @@ exports:
                        _analytics_send_event, _analytics_send_event_lazy, _analytics_send_event_lazy_high_priority, 
                        _analytics_send_event_lazy_with_options, _analytics_send_event_with_options, 
                        _analytics_send_exploding_event_lazy, _analytics_set_callback_for_queried_event, 
-                       _analytics_set_callback_for_queried_event_with_queue, _report_locale_prefs_to_analyticsd ]
+                       _analytics_set_callback_for_queried_event_with_queue, _getObjectForKey, 
+                       _report_locale_prefs_to_analyticsd, _setObjectForKey ]
     objc-classes:    [ AnalyticsConfigurationObserver, AnalyticsEventObserver ]
 ...

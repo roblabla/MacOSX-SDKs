@@ -93,6 +93,21 @@
  */
 
 /**
+ * A note on syscall events:
+ *
+ * Events which aren't submitted by usermode processes are broadly, but not exclusively, emitted by the kernel when a syscall is
+ * called. The names of events don't always match the names of syscalls exactly, for example the signal event is emitted when
+ * kill(2) is called.
+ *
+ * Some events are macOS specific and don't map to any unix syscall, like kextload and get_task.
+ * Some events have names that are both concepts and syscalls for example: truncate(2) and copyfile.
+ * Such events refer to these specific syscalls ONLY.
+ * A truncate event does not indicate that a file is being truncated generally (for example by calling open(2)
+ * with the O_TRUNC flag), only specifically that truncate(2) was called. This is true for EXCHANGEDATA, CLONE, COPYFILE, SEARCHFS
+ * etc. ES events always describe specific operations, not broad concepts.
+ */
+
+/**
  * @brief es_file_t provides the stat information and path to a file that relates to a security
  * event. The path may be truncated, which is indicated by the path_truncated flag.
  *
@@ -148,15 +163,12 @@ typedef struct {
  *        associated TTY.  The TTY is a property of the POSIX session the process belongs to.
  *        A process' session may be associated with a TTY independently from whether its stdin
  *        or any other file descriptors point to a TTY device (as per isatty(3), tty(1)).
- *        Field available only if message version >= 2.
  * @field start_time Process start time, i.e. time of fork creating this process.
- *        Field available only if message version >= 3.
  * @field responsible_audit_token audit token of the process responsible for this process, which
  *        may be the process itself in case there is no responsible process or the responsible
  *        process has already exited.
- *        Field available only if message version >= 4.
  * @field parent_audit_token The audit token of the parent process
- *        Field available only if message version >= 4.
+ * @field cs_validation_category Indicates the codesigning validation policy that authorized this binary
  *
  * @discussion
  * - Values such as pid, pidversion, uid, gid, etc. can be extracted from audit tokens using API
@@ -202,10 +214,11 @@ typedef struct {
 	es_string_token_t signing_id;
 	es_string_token_t team_id;
 	es_file_t *_Nonnull executable;
-	es_file_t *_Nullable tty;              /* field available only if message version >= 2 */
-	struct timeval start_time;             /* field available only if message version >= 3 */
-	audit_token_t responsible_audit_token; /* field available only if message version >= 4 */
-	audit_token_t parent_audit_token;      /* field available only if message version >= 4 */
+	es_file_t *_Nullable tty;                           /* field available only if message version >= 2 */
+	struct timeval start_time;                          /* field available only if message version >= 3 */
+	audit_token_t responsible_audit_token;              /* field available only if message version >= 4 */
+	audit_token_t parent_audit_token;                   /* field available only if message version >= 4 */
+	es_cs_validation_category_t cs_validation_category; /* field available only if message version >= 10 */
 } es_process_t;
 
 /**
@@ -244,14 +257,6 @@ typedef struct {
 	};
 } es_fd_t;
 
-typedef enum {
-	ES_BTM_ITEM_TYPE_USER_ITEM,
-	ES_BTM_ITEM_TYPE_APP,
-	ES_BTM_ITEM_TYPE_LOGIN_ITEM,
-	ES_BTM_ITEM_TYPE_AGENT,
-	ES_BTM_ITEM_TYPE_DAEMON
-} es_btm_item_type_t;
-
 /**
  * @brief Structure describing a BTM launch item
  *
@@ -272,11 +277,6 @@ typedef struct {
 	es_string_token_t item_url;
 	es_string_token_t app_url;
 } es_btm_launch_item_t;
-
-typedef enum {
-	ES_PROFILE_SOURCE_MANAGED,
-	ES_PROFILE_SOURCE_INSTALL,
-} es_profile_source_t;
 
 /**
  * @brief Structure describing a Profile event
@@ -304,23 +304,17 @@ typedef struct {
  * @field dyld_exec_path The exec path passed up to dyld, before symlink resolution.
  *        This is the path argument to execve(2) or posix_spawn(2), or the interpreter
  *        from the shebang line for scripts run through the shell script image activator.
- *        Field available only if message version >= 7.
  * @field script Script being executed by interpreter. This field is only valid if a script was
  *        executed directly and not as an argument to the interpreter (e.g. `./foo.sh` not `/bin/sh ./foo.sh`)
- *        Field available only if message version >= 2.
  * @field cwd Current working directory at exec time.
- *        Field available only if message version >= 3.
  * @field last_fd Highest open file descriptor after the exec completed.
  *        This number is equal to or larger than the highest number of file descriptors available
  *        via `es_exec_fd_count` and `es_exec_fd`, in which case EndpointSecurity has capped the
  *        number of file descriptors available in the message.  File descriptors for open files are
  *        not necessarily contiguous.  The exact number of open file descriptors is not available.
- *        Field available only if message version >= 4.
  * @field image_cputype The CPU type of the executable image which is being executed.
  *        In case of translation, this may be a different architecture than the one of the system.
- *        Field available only if message version >= 6.
  * @field image_cpusubtype The CPU subtype of the executable image.
- *        Field available only if message version >= 6.
  *
  * @note Process arguments, environment variables and file descriptors are packed, use API functions
  * to access them: `es_exec_arg`, `es_exec_arg_count`, `es_exec_env`, `es_exec_env_count`,
@@ -499,16 +493,6 @@ typedef struct {
 	uint8_t reserved[64];
 } es_event_link_t;
 
-// The following types are used in mount events
-typedef enum {
-	ES_MOUNT_DISPOSITION_EXTERNAL, // device is external storage
-	ES_MOUNT_DISPOSITION_INTERNAL, // device is internal storage
-	ES_MOUNT_DISPOSITION_NETWORK,  // device is a network share
-	ES_MOUNT_DISPOSITION_VIRTUAL,  // device is virtual (dmg or file)
-	ES_MOUNT_DISPOSITION_NULLFS,   // mount uses nullfs, commonly for app translocation
-	ES_MOUNT_DISPOSITION_UNKNOWN   // unable to determine disposition
-} es_mount_disposition_t;
-
 /**
  * @brief Mount a file system
  *
@@ -609,14 +593,9 @@ typedef struct {
 typedef struct {
 	int sig;
 	es_process_t *_Nonnull target;
-	es_process_t *_Nullable instigator;
+	es_process_t *_Nullable instigator; /* field available only if message version >= 9 */
 	uint8_t reserved[56];
 } es_event_signal_t;
-
-typedef enum {
-	ES_DESTINATION_TYPE_EXISTING_FILE,
-	ES_DESTINATION_TYPE_NEW_PATH,
-} es_destination_type_t;
 
 /**
  * @brief Rename a file system object
@@ -753,7 +732,6 @@ typedef struct {
  * @field target The file that is being closed
  * @field was_mapped_writable Indicates that at some point in the lifetime of the
  *        target file vnode it was mapped into a process as writable.
- *        Field available only if message version >= 6.
  *
  * @note This event type does not support caching (notify-only).
  *
@@ -794,7 +772,6 @@ typedef struct {
  *        out of bounds memory access. To obtain a acl_t struct that is able to be
  *        used with all functions within <sys/acl.h>, please use a combination of
  *        `acl_copy_ext(3)` followed by `acl_copy_int(3)`.
- *        Field available only if message version >= 2.
  *
  * @note If an object is being created but has not yet been created, the
  * `destination_type` will be `ES_DESTINATION_TYPE_NEW_PATH`.
@@ -934,6 +911,11 @@ typedef struct {
  *        created, interpreted only by the IOService's family.
  *        This field corresponds to the type argument to IOServiceOpen().
  * @field user_client_class Meta class name of the user client instance.
+ * @field parent_registry_id The IOKit registry ID of the parent of the user class. Conceptually this is what the user class is
+ * connecting to. It can be resolved to a an `io_service_t` with by calling `IORegistryEntryIDMatching` then
+ * `IOServiceGetMatchingService`
+ * @field parent_path The path in the IOKit device tree to the class being opened. It can be resolved to an `io_registry_entry_t`
+ * by calling `IORegistryEntryFromPath`
  *
  * This event is fired when a process calls IOServiceOpen() in order to open
  * a communications channel with an I/O Kit driver.  The event does not
@@ -945,23 +927,10 @@ typedef struct {
 typedef struct {
 	uint32_t user_client_type;
 	es_string_token_t user_client_class;
-	uint8_t reserved[64];
+	uint64_t parent_registry_id;   /* field available only if message version >= 10 */
+	es_string_token_t parent_path; /* field available only if message version >= 10 */
+	uint8_t reserved[40];
 } es_event_iokit_open_t;
-
-typedef enum {
-	// Task port obtained by calling e.g. task_for_pid(), where the caller
-	// obtains a task port for a process identified by pid.
-	ES_GET_TASK_TYPE_TASK_FOR_PID,
-	// Task port obtained by calling e.g. processor_set_tasks(), where the
-	// caller obtains a set of task ports.
-	ES_GET_TASK_TYPE_EXPOSE_TASK,
-	// Task port obtained by calling e.g. task_identity_token_get_task_port(),
-	// where the caller obtains a task port for a process identified by an
-	// identity token.  Task identity tokens generally have to be given up
-	// by the target process voluntarily prior to the conversion into task
-	// ports.
-	ES_GET_TASK_TYPE_IDENTITY_TOKEN,
-} es_get_task_type_t;
 
 /**
  * @brief Get a process's task control port
@@ -969,7 +938,6 @@ typedef enum {
  * @field target The process for which the task control port will be retrieved.
  * @field type Type indicating how the process is obtaining the task port for
  *        the target process.
- *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task control
  * port (e.g. task_for_pid(), task_identity_token_get_task_port(),
@@ -1000,7 +968,6 @@ typedef struct {
  * @field target The process for which the task read port will be retrieved.
  * @field type Type indicating how the process is obtaining the task port for
  *        the target process.
- *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task read
  * port (e.g. task_read_for_pid(), task_identity_token_get_task_port()).
@@ -1020,7 +987,6 @@ typedef struct {
  * @field target The process for which the task inspect port will be retrieved.
  * @field type Type indicating how the process is obtaining the task port for
  *        the target process.
- *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task inspect
  * port (e.g. task_inspect_for_pid(), task_identity_token_get_task_port()).
@@ -1039,7 +1005,6 @@ typedef struct {
  * @field target The process for which the task name port will be retrieved.
  * @field type Type indicating how the process is obtaining the task port for
  *        the target process.
- *        Field available only if message version >= 5.
  *
  * This event is fired when a process obtains a send right to a task name
  * port (e.g. task_name_for_pid(), task_identity_token_get_task_port()).
@@ -1397,15 +1362,6 @@ typedef struct {
 } es_event_searchfs_t;
 
 /**
- * @brief This enum describes the type of suspend/resume operations that are currently used.
- */
-typedef enum {
-	ES_PROC_SUSPEND_RESUME_TYPE_SUSPEND = 0,
-	ES_PROC_SUSPEND_RESUME_TYPE_RESUME = 1,
-	ES_PROC_SUSPEND_RESUME_TYPE_SHUTDOWN_SOCKETS = 3,
-} es_proc_suspend_resume_type_t;
-
-/**
  * @brief Fired when one of pid_suspend, pid_resume or pid_shutdown_sockets
  * is called on a process.
  *
@@ -1572,11 +1528,6 @@ typedef struct {
 	audit_token_t instigator_token; // Available in msg versions >= 8.
 } es_event_authentication_od_t;
 
-typedef enum {
-	ES_TOUCHID_MODE_VERIFICATION,
-	ES_TOUCHID_MODE_IDENTIFICATION
-} es_touchid_mode_t;
-
 /**
  * @brief TouchID authentication data for type ES_AUTHENTICATION_TYPE_TOUCHID.
  *
@@ -1620,15 +1571,8 @@ typedef struct {
 	audit_token_t instigator_token; // Available in msg versions >= 8.
 } es_event_authentication_token_t;
 
-typedef enum {
-	/// Unlock the machine using Apple Watch.
-	ES_AUTO_UNLOCK_MACHINE_UNLOCK = 1,
-	/// Approve an authorization prompt using Apple Watch.
-	ES_AUTO_UNLOCK_AUTH_PROMPT = 2
-} es_auto_unlock_type_t;
-
 /**
- * @brief Auto Unlock authentication data for type ES_AUTHENTICATION_TYPE_TOKEN.
+ * @brief Auto Unlock authentication data for type ES_AUTHENTICATION_TYPE_AUTO_UNLOCK.
  *
  * @field username          Username for which the authentication was attempted.
  * @field type              Purpose of the authentication.
@@ -1675,6 +1619,8 @@ typedef struct {
  * @field detected_path         Path where malware was detected.  This path is not
  *                              necessarily a malicious binary, it can also be a
  *                              legitimate file containing a malicious portion.
+ * @field detected_executable   Path to malicious binary. This can differ from
+ *                              detected_path when the detected path is an app bundle.
  *
  * @note For any given malware incident, XProtect may emit zero or more
  *       xp_malware_detected events, and zero or more xp_malware_remediated events.
@@ -1686,6 +1632,7 @@ typedef struct {
 	es_string_token_t malware_identifier;
 	es_string_token_t incident_identifier;
 	es_string_token_t detected_path;
+	es_string_token_t detected_executable; /* field available only if message version >= 10 */
 } es_event_xp_malware_detected_t;
 
 /**
@@ -1847,19 +1794,6 @@ typedef struct {
 	es_string_token_t viewer_appleid;
 	es_graphical_session_id_t graphical_session_id;
 } es_event_screensharing_detach_t;
-
-typedef enum {
-	ES_OPENSSH_LOGIN_EXCEED_MAXTRIES = 0,
-	ES_OPENSSH_LOGIN_ROOT_DENIED = 1,
-	ES_OPENSSH_AUTH_SUCCESS = 2,
-	ES_OPENSSH_AUTH_FAIL_NONE = 3,
-	ES_OPENSSH_AUTH_FAIL_PASSWD = 4,
-	ES_OPENSSH_AUTH_FAIL_KBDINT = 5,
-	ES_OPENSSH_AUTH_FAIL_PUBKEY = 6,
-	ES_OPENSSH_AUTH_FAIL_HOSTBASED = 7,
-	ES_OPENSSH_AUTH_FAIL_GSSAPI = 8,
-	ES_OPENSSH_INVALID_USER = 9,
-} es_openssh_login_result_type_t;
 
 /**
  * @brief Notification for OpenSSH login event.
@@ -2790,7 +2724,6 @@ typedef struct {
  *        indicates the number of events that had to be dropped.
  *        Dropped events generally indicate that more events were generated in
  *        the kernel than the client was able to handle.
- *        Field available only if message version >= 2.
  *        @see global_seq_num
  * @field action_type Indicates if the action field is an auth or notify action.
  * @field action For auth events, contains the opaque auth ID that must be
@@ -2803,7 +2736,6 @@ typedef struct {
  *        the traced process calling ptrace(PT_TRACE_ME) or for cs invalidated
  *        events that are a result of another process calling
  *        csops(CS_OPS_MARKINVALID).
- *        Field available only if message version >= 4.
  * @field global_seq_num Per-client sequence number that can be inspected to
  *        detect whether the kernel had to drop events for this client. When no
  *        events are dropped for this client, global_seq_num increments by 1 for
@@ -2812,7 +2744,6 @@ typedef struct {
  *        received message indicates the number of events that had to be dropped.
  *        Dropped events generally indicate that more events were generated in
  *        the kernel than the client was able to handle.
- *        Field available only if message version >= 4.
  *        @see seq_num
  * @field opaque Opaque data that must not be accessed directly.
  *

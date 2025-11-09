@@ -40,12 +40,12 @@ AVKIT_EXTERN NSString * const AVKitErrorDomain API_AVAILABLE(ios(9.0), tvos(13.0
 				The recording failed.
  */
 typedef NS_ENUM(NSInteger, AVKitError) {
-	AVKitErrorUnknown																					= -1000,
-	AVKitErrorPictureInPictureStartFailed API_UNAVAILABLE(watchos)										= -1001,
-	
+	AVKitErrorUnknown																						= -1000,
+	AVKitErrorPictureInPictureStartFailed API_UNAVAILABLE(watchos)											= -1001,
+
 	AVKitErrorContentRatingUnknown API_AVAILABLE(tvos(13.0)) API_UNAVAILABLE(ios, visionos, watchos)		= -1100,
 	AVKitErrorContentDisallowedByPasscode API_AVAILABLE(tvos(13.0)) API_UNAVAILABLE(ios, visionos, watchos)	= -1101,
 	AVKitErrorContentDisallowedByProfile API_AVAILABLE(tvos(13.0)) API_UNAVAILABLE(ios, visionos, watchos)	= -1102,
-	
+
 	AVKitErrorRecordingFailed API_UNAVAILABLE(watchos) API_UNAVAILABLE(ios, tvos, visionos)				= -1200,
 } API_AVAILABLE(ios(9.0), tvos(13.0), visionos(1.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);

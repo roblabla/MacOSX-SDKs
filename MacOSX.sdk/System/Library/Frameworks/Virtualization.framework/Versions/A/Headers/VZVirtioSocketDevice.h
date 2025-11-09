@@ -2,7 +2,7 @@
 //  VZVirtioSocketDevice.h
 //  Virtualization
 //
-//  Copyright © 2020-2023 Apple Inc. All rights reserved.
+//  Copyright © 2020-2025 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZSocketDevice.h>
@@ -52,7 +52,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @param completionHandler Block called after the connection has been successfully established or on error.
     The error parameter passed to the block is nil if the connection was successful.
  */
-- (void)connectToPort:(uint32_t)port completionHandler:(void (^)(VZVirtioSocketConnection * _Nullable connection, NSError * _Nullable error))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(connect(toPort:));
+- (void)connectToPort:(uint32_t)port completionHandler:(void (^ NS_SWIFT_NONSENDABLE)(VZVirtioSocketConnection * _Nullable connection, NSError * _Nullable error))completionHandler NS_REFINED_FOR_SWIFT NS_SWIFT_ASYNC_NAME(connect(toPort:));
 
 @end
 

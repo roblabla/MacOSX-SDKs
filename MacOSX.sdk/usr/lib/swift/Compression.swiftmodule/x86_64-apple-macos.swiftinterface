@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -target-variant x86_64-apple-ios18.5-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCompression -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 8 -module-name Compression
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -target-variant x86_64-apple-ios26.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftCompression -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 8 -module-name Compression
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 @_exported import Compression
 import Darwin
 import Foundation
@@ -17,7 +17,9 @@ public enum Algorithm : Swift.CaseIterable, Swift.RawRepresentable {
   case lzma
   case lzbitmap
   case brotli
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Compression.compression_algorithm)
+  #endif
   public var rawValue: Compression.compression_algorithm {
     get
   }
@@ -33,7 +35,9 @@ public enum Algorithm : Swift.CaseIterable, Swift.RawRepresentable {
 public enum FilterOperation : Swift.RawRepresentable {
   case compress
   case decompress
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Compression.compression_stream_operation)
+  #endif
   public var rawValue: Compression.compression_stream_operation {
     get
   }
@@ -52,15 +56,23 @@ public enum FilterError : Swift.Error {
 }
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public class OutputFilter {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ operation: Compression.FilterOperation, using algorithm: Compression.Algorithm, bufferCapacity: Swift.Int = 65536, writingTo writeFunc: @escaping (Foundation.Data?) throws -> Swift.Void) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func write<D>(_ data: D?) throws where D : Foundation.DataProtocol
+  #endif
   public func finalize() throws
   @objc deinit
 }
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public class InputFilter<D> where D : Foundation.DataProtocol {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(_ operation: Compression.FilterOperation, using algorithm: Compression.Algorithm, bufferCapacity: Swift.Int = 65536, readingFrom readFunc: @escaping (Swift.Int) throws -> D?) throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func readData(ofLength count: Swift.Int) throws -> Foundation.Data?
+  #endif
   @objc deinit
 }
 @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 603.255
+current-version: 608
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DIOCreateCStringFromCFString, 

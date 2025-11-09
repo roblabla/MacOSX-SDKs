@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 236
+current-version: 239
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 

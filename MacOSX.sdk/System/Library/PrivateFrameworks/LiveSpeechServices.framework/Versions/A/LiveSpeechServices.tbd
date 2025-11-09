@@ -7,20 +7,17 @@ swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s18LiveSpeechServices0A11CaptionsLog2os6LoggerVvM', '_$s18LiveSpeechServices0A11CaptionsLog2os6LoggerVvg', 
-                       '_$s18LiveSpeechServices0A11CaptionsLog2os6LoggerVvs', '_$s18LiveSpeechServices0aB14CaptionsClientC11serviceNameSSvg', 
+    symbols:         [ '_$s18LiveSpeechServices0aB14CaptionsClientC11serviceNameSSvg', 
                        '_$s18LiveSpeechServices0aB14CaptionsClientC11serviceNameSSvpMV', 
                        '_$s18LiveSpeechServices0aB14CaptionsClientC6sharedACvgZ', 
                        '_$s18LiveSpeechServices0aB14CaptionsClientC6sharedACvpZMV', 
                        '_$s18LiveSpeechServices0aB14CaptionsClientCMa', '_$s18LiveSpeechServices0aB14CaptionsClientCMn', 
                        '_$s18LiveSpeechServices0aB14CaptionsClientCMo', '_$s18LiveSpeechServices0aB14CaptionsClientCN', 
-                       '_$s18LiveSpeechServices0aB14CaptionsClientCfD', '_$s18LiveSpeechServices0aB3Log2os6LoggerVvM', 
-                       '_$s18LiveSpeechServices0aB3Log2os6LoggerVvg', '_$s18LiveSpeechServices0aB3Log2os6LoggerVvs', 
-                       '_$s18LiveSpeechServices0aB5ErrorV11descriptionSSvg', '_$s18LiveSpeechServices0aB5ErrorV11descriptionSSvpMV', 
-                       '_$s18LiveSpeechServices0aB5ErrorV7messageSSvg', '_$s18LiveSpeechServices0aB5ErrorV7messageSSvpMV', 
-                       '_$s18LiveSpeechServices0aB5ErrorVMa', '_$s18LiveSpeechServices0aB5ErrorVMn', 
-                       '_$s18LiveSpeechServices0aB5ErrorVN', '_$s18LiveSpeechServices0aB5ErrorVs0D0AAMc', 
-                       '_$s18LiveSpeechServices0aB5ErrorVs23CustomStringConvertibleAAMc', 
+                       '_$s18LiveSpeechServices0aB14CaptionsClientCfD', '_$s18LiveSpeechServices0aB5ErrorV11descriptionSSvg', 
+                       '_$s18LiveSpeechServices0aB5ErrorV11descriptionSSvpMV', '_$s18LiveSpeechServices0aB5ErrorV7messageSSvg', 
+                       '_$s18LiveSpeechServices0aB5ErrorV7messageSSvpMV', '_$s18LiveSpeechServices0aB5ErrorVMa', 
+                       '_$s18LiveSpeechServices0aB5ErrorVMn', '_$s18LiveSpeechServices0aB5ErrorVN', 
+                       '_$s18LiveSpeechServices0aB5ErrorVs0D0AAMc', '_$s18LiveSpeechServices0aB5ErrorVs23CustomStringConvertibleAAMc', 
                        '_$s18LiveSpeechServices0aB5ErrorVyACSScfC', '_$s18LiveSpeechServices0aB7ServiceC015observeFavoriteaB14PhrasesChangesyyXlyycF', 
                        '_$s18LiveSpeechServices0aB7ServiceC04liveB7PhrasesSaySDySSypGGvg', 
                        '_$s18LiveSpeechServices0aB7ServiceC04liveB7PhrasesSaySDySSypGGvpMV', 
@@ -57,8 +54,6 @@ exports:
                        '_$s18LiveSpeechServices0aB9InputModeOSHAAMc', '_$s18LiveSpeechServices0aB9InputModeOSQAAMc', 
                        '_$s18LiveSpeechServices0aB9InputModeOSYAAMc', '_$s18LiveSpeechServices0aB9InputModeOSeAAMc', 
                        '_$s18LiveSpeechServices0ab8CaptionsC9LocStringyS2SF', '_$s18LiveSpeechServices0abC9LocStringyS2SF', 
-                       '_$s18LiveSpeechServices13LSLCCommonLog2os6LoggerVvM', '_$s18LiveSpeechServices13LSLCCommonLog2os6LoggerVvg', 
-                       '_$s18LiveSpeechServices13LSLCCommonLog2os6LoggerVvs', _LiveSpeechServicesVersionNumber, 
-                       _LiveSpeechServicesVersionString ]
+                       _LiveSpeechServicesVersionNumber, _LiveSpeechServicesVersionString ]
     objc-classes:    [ LiveSpeechCaptionsClient, LiveSpeechServices, LiveSpeechServicesObjc ]
 ...

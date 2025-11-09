@@ -119,7 +119,7 @@ API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0))
     @abstract This notification is sent on the main thread whenever
     the set of stored credentials changes.
 */
-FOUNDATION_EXPORT NSNotificationName const NSURLCredentialStorageChangedNotification API_AVAILABLE(macos(10.2), ios(2.0), watchos(2.0), tvos(9.0));
+FOUNDATION_EXPORT NSNotificationName const NSURLCredentialStorageChangedNotification API_DEPRECATED("Notification is never posted", macos(10.2, 10.14), ios(2.0, 12.0), watchos(2.0, 5.0), tvos(9.0, 12.0));
 
 /*
  *  NSURLCredentialStorageRemoveSynchronizableCredentials - (NSNumber value)

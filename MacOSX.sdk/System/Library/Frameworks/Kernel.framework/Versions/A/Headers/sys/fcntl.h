@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2022 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -125,9 +125,10 @@
 #define O_TRUNC         0x00000400      /* truncate to zero length */
 #define O_EXCL          0x00000800      /* error if already exists */
 #define O_RESOLVE_BENEATH 0x00001000    /* only for open(2), same value as FMARK */
+#define O_UNIQUE        0x00002000      /* only for open(2), same value as FDEFER */
 
 #define FMARK           0x00001000      /* mark during gc(), same value as O_RESOLVE_BENEATH */
-#define FDEFER          0x00002000      /* defer for next gc pass */
+#define FDEFER          0x00002000      /* defer for next gc pass, same value as O_UNIQUE */
 #define FWASLOCKED      0x00004000      /* has or has had an advisory fcntl lock */
 #define FHASLOCK        FWASLOCKED      /* obsolete compatibility name */
 
@@ -195,6 +196,8 @@
 #define AT_REALDEV              0x0200  /* Return real device inodes resides on for fstatat(2) */
 #define AT_FDONLY               0x0400  /* Use only the fd and Ignore the path for fstatat(2) */
 #define AT_SYMLINK_NOFOLLOW_ANY 0x0800  /* Path should not contain any symlinks */
+#define AT_RESOLVE_BENEATH      0x2000  /* Path must reside in the hierarchy beneath the starting directory */
+#define AT_NODELETEBUSY         0x4000  /* Don't delete busy files */
 #endif
 #endif
 
@@ -282,9 +285,7 @@
 #define F_THAW_FS       54              /* "thaw" all fs operations */
 #define F_GLOBAL_NOCACHE 55             /* turn data caching off/on (globally) for this file */
 
-
 #define F_ADDSIGS       59              /* add detached signatures */
-
 
 #define F_ADDFILESIGS   61              /* add signature from same file (used by dyld for shared libs) */
 
@@ -306,7 +307,6 @@
 
 /* See F_DUPFD_CLOEXEC below for 67 */
 
-
 #define F_SETBACKINGSTORE       70      /* Mark the file as being the backing store for another filesystem */
 #define F_GETPATH_MTMINFO       71      /* return the full path of the FD, but error in specific mtmd circumstances */
 
@@ -324,9 +324,7 @@
 
 #define F_FINDSIGS              78      /* Add detached code signatures (used by dyld for shared libs) */
 
-
 #define F_ADDFILESIGS_FOR_DYLD_SIM 83   /* Add signature from same file, only if it is signed by Apple (used by dyld for simulator) */
-
 
 #define F_BARRIERFSYNC          85      /* fsync + issue barrier to drive */
 
@@ -337,7 +335,6 @@
 
 #define F_OFD_SETLKWTIMEOUT     93      /* (as F_OFD_SETLKW but return if timeout) */
 #endif
-
 
 #define F_ADDFILESIGS_RETURN    97      /* Add signature from same file, return end offset in structure on success */
 #define F_CHECK_LV              98      /* Check if Library Validation allows this Mach-O file to be mapped into the calling process */
@@ -359,10 +356,10 @@
 
 #define F_SETLEASE_ARG(t, oc)   ((t) | ((oc) << 2))
 
-
 #define F_TRANSFEREXTENTS       110      /* Transfer allocated extents beyond leof to a different file */
 
 #define F_ATTRIBUTION_TAG       111      /* Based on flags, query/set/delete a file's attribution tag */
+#define F_NOCACHE_EXT           112      /* turn data caching off/on for this fd and relax size and alignment restrictions for write */
 
 #define F_ADDSIGS_MAIN_BINARY   113             /* add detached signatures for main binary -- development only */
 
@@ -391,7 +388,6 @@
 #define F_OFD_LOCK      0x400           /* Use "OFD" semantics for lock */
 #define F_TRANSFER      0x800           /* Transfer the lock to new proc */
 #define F_CONFINED      0x1000          /* fileglob cannot leave curproc */
-
 
 /*
  * [XSI] The values used for l_whence shall be defined as described
@@ -432,6 +428,7 @@ struct flock {
 };
 
 #include <sys/_types/_timespec.h>
+#include <sys/_types/_user32_timespec.h>
 
 #if __DARWIN_C_LEVEL >= __DARWIN_C_FULL
 /*
@@ -441,6 +438,11 @@ struct flock {
 struct flocktimeout {
 	struct flock    fl;             /* flock passed for file locking */
 	struct timespec timeout;        /* timespec struct for timeout */
+};
+
+struct user32_flocktimeout {
+	struct flock           fl;      /* flock passed for file locking */
+	struct user32_timespec timeout; /* timespec struct for timeout */
 };
 #endif /* __DARWIN_C_LEVEL >= __DARWIN_C_FULL */
 
@@ -608,7 +610,6 @@ typedef struct fspecread {
 	off_t fsr_length;        /* IN: size of the region */
 } fspecread_t;
 
-
 /* fattributiontag_t used by F_ATTRIBUTION_TAG */
 #define ATTRIBUTION_NAME_MAX 255
 typedef struct fattributiontag {
@@ -660,8 +661,8 @@ struct log2phys {
 #define O_POPUP    0x80000000   /* force window to popup on open */
 #define O_ALERT    0x20000000   /* small, clean popup window */
 
-
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
+
 
 
 #endif /* !_SYS_FCNTL_H_ */

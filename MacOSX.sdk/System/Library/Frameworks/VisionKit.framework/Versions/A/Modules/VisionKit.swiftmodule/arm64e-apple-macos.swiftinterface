@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macos15.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 281.402.1 -module-name VisionKit
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 319 -module-name VisionKit -package-name com.apple.VisionKit
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AppKit
 import Foundation
 import Swift
@@ -55,7 +55,9 @@ final public class ImageAnalyzer : @unchecked Swift.Sendable {
 @_Concurrency.MainActor public protocol ImageAnalysisOverlayViewDelegate : AnyObject {
   @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldBeginAt point: CoreFoundation.CGPoint, forAnalysisType analysisType: VisionKit.ImageAnalysisOverlayView.InteractionTypes) -> Swift.Bool
   @_Concurrency.MainActor func contentsRect(for overlayView: VisionKit.ImageAnalysisOverlayView) -> CoreFoundation.CGRect
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor func contentView(for overlayView: VisionKit.ImageAnalysisOverlayView) -> AppKit.NSView?
+  #endif
   @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldHandleKeyDownEvent event: AppKit.NSEvent) -> Swift.Bool
   @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldShowMenuForEvent event: AppKit.NSEvent, atPoint point: CoreFoundation.CGPoint) -> Swift.Bool
   @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, liveTextButtonDidChangeToVisible visible: Swift.Bool)
@@ -70,14 +72,18 @@ final public class ImageAnalyzer : @unchecked Swift.Sendable {
   @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, willOpen menu: AppKit.NSMenu)
   @available(macOS 14.0, *)
   @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, didClose menu: AppKit.NSMenu)
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(macOS 14.0, *)
   @_Concurrency.MainActor func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, menu: AppKit.NSMenu, willHighlight menuItem: AppKit.NSMenuItem?)
+  #endif
 }
 @available(macOS 13.0, *)
 extension VisionKit.ImageAnalysisOverlayViewDelegate {
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldBeginAt point: CoreFoundation.CGPoint, forAnalysisType analysisType: VisionKit.ImageAnalysisOverlayView.InteractionTypes) -> Swift.Bool
   @_Concurrency.MainActor public func contentsRect(for overlayView: VisionKit.ImageAnalysisOverlayView) -> CoreFoundation.CGRect
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func contentView(for overlayView: VisionKit.ImageAnalysisOverlayView) -> AppKit.NSView?
+  #endif
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldHandleKeyDownEvent event: AppKit.NSEvent) -> Swift.Bool
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, shouldShowMenuForEvent event: AppKit.NSEvent, atPoint point: CoreFoundation.CGPoint) -> Swift.Bool
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, updatedMenuFor menu: AppKit.NSMenu, for event: AppKit.NSEvent, at point: CoreFoundation.CGPoint) -> AppKit.NSMenu
@@ -87,7 +93,9 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, needsUpdate menu: AppKit.NSMenu)
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, willOpen menu: AppKit.NSMenu)
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, didClose menu: AppKit.NSMenu)
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor public func overlayView(_ overlayView: VisionKit.ImageAnalysisOverlayView, menu: AppKit.NSMenu, willHighlight menuItem: AppKit.NSMenuItem?)
+  #endif
 }
 @objc @_inheritsConvenienceInitializers @available(macOS 13.0, *)
 @_Concurrency.MainActor final public class ImageAnalysisOverlayView : AppKit.NSView {
@@ -117,7 +125,9 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
     public static let recommendedAppItems: Swift.Int
   }
   @_Concurrency.MainActor @objc override dynamic public init(frame frameRect: Foundation.NSRect)
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @objc required dynamic public init?(coder: Foundation.NSCoder)
+  #endif
   @_Concurrency.MainActor convenience public init(_ delegate: any VisionKit.ImageAnalysisOverlayViewDelegate)
   @_Concurrency.MainActor weak final public var delegate: (any VisionKit.ImageAnalysisOverlayViewDelegate)? {
     get
@@ -139,10 +149,12 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor weak final public var trackingImageView: AppKit.NSImageView? {
     get
     set
   }
+  #endif
   @_Concurrency.MainActor final public var hasActiveTextSelection: Swift.Bool {
     get
   }
@@ -185,10 +197,12 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public var supplementaryInterfaceFont: AppKit.NSFont? {
     get
     set
   }
+  #endif
   public enum SubjectUnavailable : Swift.Error {
     case imageUnavailable
     public static func == (a: VisionKit.ImageAnalysisOverlayView.SubjectUnavailable, b: VisionKit.ImageAnalysisOverlayView.SubjectUnavailable) -> Swift.Bool
@@ -218,7 +232,9 @@ extension VisionKit.ImageAnalysisOverlayViewDelegate {
     get
     set
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor final public func subject(at point: CoreFoundation.CGPoint) async -> VisionKit.ImageAnalysisOverlayView.Subject?
+  #endif
   @_Concurrency.MainActor final public func image(for subjects: Swift.Set<VisionKit.ImageAnalysisOverlayView.Subject>) async throws -> AppKit.NSImage
   @objc deinit
 }

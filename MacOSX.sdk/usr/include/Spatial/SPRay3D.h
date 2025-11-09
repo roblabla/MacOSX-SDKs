@@ -581,4 +581,6 @@ SPRay3D SPRay3DRotateByQuaternionAroundPoint(SPRay3D ray, simd_quatd quaternion,
     return SPRay3DMake(origin, SPVector3DMakeWithPoint(direction));
 }
 
+
+
 #endif /* SPRay3D_h */

@@ -23,7 +23,7 @@ typedef NS_OPTIONS(NSUInteger, MTLFunctionOptions) {
      * @brief Compiles the found function. This enables dynamic linking of this `MTLFunction`.
      * Only supported for `visible` functions.
      */
-    MTLFunctionOptionCompileToBinary API_AVAILABLE(macos(11.0), ios(14.0)) = 1 << 0,
+    MTLFunctionOptionCompileToBinary API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0)) = 1 << 0,
     /**
      * @brief stores and tracks this function in a Metal Pipelines Script
      * This flag is optional and only supported in the context of binary archives.
@@ -38,6 +38,12 @@ typedef NS_OPTIONS(NSUInteger, MTLFunctionOptions) {
          * - The function has not been found in the archive
          */
          MTLFunctionOptionFailOnBinaryArchiveMiss API_AVAILABLE(macos(15.0), ios(18.0)) = 1 << 2,
+    /**
+     * @brief Compiles the function to have its function handles return a constant MTLResourceID across
+     * all pipeline states. The function needs to be linked to the pipeline that will use this function.
+     * This function option can only be used for functions that are compiled with `MTLFunctionOptionCompileToBinary`.
+     */
+    MTLFunctionOptionPipelineIndependent API_AVAILABLE(macos(26.0), ios(26.0)) = 1 << 3,
 } API_AVAILABLE(macos(11.0), ios(14.0));
 
 MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
@@ -82,7 +88,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
 
 @end
 
-MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0))
 @interface MTLIntersectionFunctionDescriptor : MTLFunctionDescriptor <NSCopying>
 
 @end

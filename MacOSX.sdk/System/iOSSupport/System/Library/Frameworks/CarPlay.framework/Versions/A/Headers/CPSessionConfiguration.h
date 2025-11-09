@@ -5,6 +5,7 @@
 //  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
+#import <CarPlay/CPTemplate.h>
 #import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -39,6 +40,7 @@ API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @end
 
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(macos, watchos, tvos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @protocol CPSessionConfigurationDelegate <NSObject>
 
 @optional

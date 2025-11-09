@@ -113,6 +113,7 @@ enum {
 	    | kIOSleepWakeWdogOff
 	    | kIOKextSpinDump
 	    | kIOWaitQuietPanics
+	    | kIOLogExclaves
 };
 
 enum {
@@ -143,6 +144,7 @@ enum {
 	kIODKDisableCDHashChecking  = 0x00004000ULL,
 	kIODKDisableEntitlementChecking = 0x00008000ULL,
 	kIODKDisableCheckInTokenVerification = 0x00010000ULL,
+	kIODKDisableIOPMSystemOffPhase2Allow = 0x00020000ULL,
 };
 
 

@@ -417,8 +417,13 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILA
                         - the sample buffer contains image buffers (must contain encoded video)
                         - the sample buffer contains caption groups (must contain encoded media data)
 */
-- (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos);
-
+- (BOOL)appendSampleBuffer:(CMSampleBufferRef)sampleBuffer decodeTime:(nullable CMTime *)outDecodeTime presentationTime:(nullable CMTime *)outPresentationTime error:(NSError * _Nullable * _Nullable)outError
+#if defined(__swift__)
+API_DEPRECATED("Use append(_:) instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos)
+#else
+API_AVAILABLE(macos(10.12), ios(13.0), watchos(6.0), visionos(1.0)) API_UNAVAILABLE(tvos)
+#endif
+;
 /*!
 	@method			insertMediaTimeRange:intoTimeRange:
 	@abstract		Inserts a reference to a media time range into a track.

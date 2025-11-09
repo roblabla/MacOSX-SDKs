@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class         MXUnitSignalBars
  @abstract      An NSUnit subclass representing the number of signal bars for signal strength.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
 @interface MXUnitSignalBars : NSDimension
 /*
  Base unit - bars
@@ -25,7 +25,7 @@ API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
  @class         MXUnitAveragePixelLuminance
  @abstract      An NSUnit subclass representing the linear space Display APL.
  */
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos)
 @interface MXUnitAveragePixelLuminance : NSDimension
 /*
  Base unit - apl

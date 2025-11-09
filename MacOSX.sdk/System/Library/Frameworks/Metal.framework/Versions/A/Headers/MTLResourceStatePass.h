@@ -16,7 +16,7 @@
 NS_ASSUME_NONNULL_BEGIN
 @protocol MTLDevice;
 
-MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0))
 @interface MTLResourceStatePassSampleBufferAttachmentDescriptor : NSObject<NSCopying>
 /*!
 @property sampleBuffer
@@ -50,7 +50,7 @@ will be taken for that action.
 
 @end
 
-MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0))
 @interface MTLResourceStatePassSampleBufferAttachmentDescriptorArray : NSObject
 /* Individual attachment state access */
 - (MTLResourceStatePassSampleBufferAttachmentDescriptor *)objectAtIndexedSubscript:(NSUInteger)attachmentIndex;
@@ -64,7 +64,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
  @class MTLResourceStatePassDescriptor
  @abstract MTLResourceStatePassDescriptor represents a collection of attachments to be used to create a concrete resourceState command encoder
  */
-MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
+MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0))
 @interface MTLResourceStatePassDescriptor : NSObject <NSCopying>
 
 /*!
@@ -78,7 +78,7 @@ MTL_EXPORT API_AVAILABLE(macos(11.0), ios(14.0))
  @property sampleBufferAttachments
  @abstract An array of sample buffers and associated sample indices.
  */
-@property (readonly) MTLResourceStatePassSampleBufferAttachmentDescriptorArray * sampleBufferAttachments API_AVAILABLE(macos(11.0), ios(14.0));
+@property (readonly) MTLResourceStatePassSampleBufferAttachmentDescriptorArray * sampleBufferAttachments API_AVAILABLE(macos(11.0), ios(14.0), tvos(16.0));
 
 @end
 

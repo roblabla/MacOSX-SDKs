@@ -17,6 +17,7 @@
 #include <CarbonCore/MixedMode.h>
 #endif
 
+#if TARGET_OS_OSX
 /*  HandToHand and other memory utilties were moved to MacMemory.h */
 #ifndef __MACMEMORY__
 #include <CarbonCore/MacMemory.h>
@@ -26,6 +27,7 @@
 #ifndef __DATETIMEUTILS__
 #include <CarbonCore/DateTimeUtils.h>
 #endif
+#endif // TARGET_OS_OSX
 
 #ifndef __CFSTRING__
 #include <CoreFoundation/CFString.h>

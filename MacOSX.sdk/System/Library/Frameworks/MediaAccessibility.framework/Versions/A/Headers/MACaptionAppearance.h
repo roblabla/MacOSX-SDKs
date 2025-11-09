@@ -362,9 +362,44 @@ CGFloat MACaptionAppearanceGetRelativeCharacterSize(MACaptionAppearanceDomain do
 MA_EXPORT
 MACaptionAppearanceTextEdgeStyle MACaptionAppearanceGetTextEdgeStyle(MACaptionAppearanceDomain domain, MACaptionAppearanceBehavior * __nullable behavior) CF_AVAILABLE(10_9, 7_0);
 
+/*!
+ @function MACaptionAppearanceCopyProfileIDs
+ @abstract Copies all system and user defined profiles, each represented by a CFString containing a non-human-readable ID
+ @result An array of strings where each string represents a unique caption profile ID.
+ */
+MA_EXPORT CFArrayRef MACaptionAppearanceCopyProfileIDs(void) CF_AVAILABLE(16_0, 19_0) CF_RETURNS_RETAINED;
+
+/*!
+ @function MACaptionAppearanceSetActiveProfileID
+ @abstract Sets the currently-selected caption drawing profileID system wide. Behavior is undefined if NULL or an invalid profileID is provided
+ @param profileID The profileID to make active.
+ */
+MA_EXPORT void MACaptionAppearanceSetActiveProfileID(CFStringRef profileID) CF_AVAILABLE(16_0, 19_0);
+
+/*!
+ @function MACaptionAppearanceCopyActiveProfileID
+ @abstract Gets the currently-selected caption drawing profileID system wide.
+ @result The currently-selected profileID.
+ */
+MA_EXPORT CFStringRef MACaptionAppearanceCopyActiveProfileID(void) CF_AVAILABLE(16_0, 19_0) CF_RETURNS_RETAINED;
+
+/*!
+ @function MACaptionAppearanceCopyProfileName
+ @abstract Copies the human-readable name of a profileID
+ @param profileID The profileID to copy the name of
+ @result A human-readable name of the provided profileID
+ */
+MA_EXPORT CFStringRef MACaptionAppearanceCopyProfileName(CFStringRef profileID) CF_AVAILABLE(16_0, 19_0) CF_RETURNS_RETAINED;
+
+/*!
+ @function MACaptionAppearanceExecuteBlockForProfileID
+ @abstract Executes a block of code as if the provided profileID was active. This is used in cases such as a need to get the fonts and colors of a profileID without changing the currently selected profileID.
+ @param profileID The profileID which will appear active when executing the block
+ @param aBlock the block of code to execute
+ */
+MA_EXPORT void MACaptionAppearanceExecuteBlockForProfileID(CFStringRef profileID, void (^aBlock)(void)) CF_AVAILABLE(16_0, 19_0);
+
 CF_ASSUME_NONNULL_END
-
-
 MA_EXTERN_C_END
 
 #endif /* MediaAccessibility_MACaptionAppearance_h */

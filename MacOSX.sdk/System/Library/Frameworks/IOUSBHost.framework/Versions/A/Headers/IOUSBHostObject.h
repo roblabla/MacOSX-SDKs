@@ -360,6 +360,26 @@ NS_ASSUME_NONNULL_BEGIN
 - (uint64_t)frameNumberWithTime:(nullable IOUSBHostTime*)time NS_REFINED_FOR_SWIFT;
 
 /*!
+ * @brief       Return the current microframe number of the USB controller
+ * @discussion  This method will return the current microframe number of the USB controller.
+ *              This is most useful for scheduling future isochronous requests.
+ * @param       time If not nil, this will be updated with system time associated with the microframe.
+ * @return      The current microframe number. Returns 0 on failure, with NSError populated with the IOReturn error code.
+ */
+- (uint64_t)currentMicroframeWithTime:(nullable IOUSBHostTime*)time
+                                error:(NSError* _Nullable*)error NS_REFINED_FOR_SWIFT;
+
+/*!
+ * @brief       Return a recent microframe number of the USB controller
+ * @discussion  This method will return a recent microframe number of the USB controller.
+ *              This is most useful for scheduling future isochronous requests.
+ * @param       time If not nil, this will be updated with system time associated with the microframe.
+ * @return      A recent microframe number. Returns 0 on failure, with NSError populated with the IOReturn error code.
+ */
+- (uint64_t)referenceMicroframeWithTime:(nullable IOUSBHostTime*)time
+                                  error:(NSError* _Nullable*)error NS_REFINED_FOR_SWIFT;
+
+/*!
  * @brief       Allocate a buffer to be used for I/O
  * @discussion  This method will allocate and map an IOBufferMemoryDescriptor optimized for use
  *              by the underlying controller hardware. A buffer allocated by this method will not

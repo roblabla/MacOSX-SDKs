@@ -723,6 +723,11 @@ NS_SWIFT_NAME(createItem(basedOn:fields:contents:options:request:completionHandl
  the colliding items. When the collision is resolved, the system will call
  modifyItem again.
 
+ In case the NSFileProviderModifyItemFailOnConflict option is passed, the provider should
+ fail the modification if the baseVersion does not match the version on the server. It
+ will be up to the system to merge the conflict and call modifyItem again with an
+ updated baseVersion.
+
  The extension can also report NSFileProviderErrorNotAuthenticated,
  NSFileProviderErrorCannotSynchronize, or NSFileProviderErrorExcludedFromSync,
  in case the modification cannot be applied because of the current state of the

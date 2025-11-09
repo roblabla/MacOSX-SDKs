@@ -114,4 +114,10 @@
 #  define _LIBCXXABI_PTRAUTH_RESTRICTED_INTPTR(__key, __address_discriminated, __discriminator)
 #endif
 
+#if __cplusplus < 201103L
+#  define _LIBCXXABI_NOEXCEPT throw()
+#else
+#  define _LIBCXXABI_NOEXCEPT noexcept
+#endif
+
 #endif // ____CXXABI_CONFIG_H

@@ -230,6 +230,7 @@ exports:
                        '_$s7FMFCore11FMFLocationV4fromACs7Decoder_p_tKcfC', '_$s7FMFCore11FMFLocationV5isOldSbvg', 
                        '_$s7FMFCore11FMFLocationV5isOldSbvpMV', '_$s7FMFCore11FMFLocationV5labelAA8FMFLabelVSgvg', 
                        '_$s7FMFCore11FMFLocationV5labelAA8FMFLabelVSgvpMV', '_$s7FMFCore11FMFLocationV6encode2toys7Encoder_p_tKF', 
+                       '_$s7FMFCore11FMFLocationV6labels4withSayAA8FMFLabelVGSgAA0E10SourceTypeO_tF', 
                        '_$s7FMFCore11FMFLocationV7addressAA10FMFAddressVSgvg', '_$s7FMFCore11FMFLocationV7addressAA10FMFAddressVSgvpMV', 
                        '_$s7FMFCore11FMFLocationV8locationSo10CLLocationCSgvg', '_$s7FMFCore11FMFLocationV8locationSo10CLLocationCSgvpMV', 
                        '_$s7FMFCore11FMFLocationVMa', '_$s7FMFCore11FMFLocationVMn', 

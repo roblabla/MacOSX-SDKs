@@ -323,7 +323,7 @@ MT_EXPORT OSStatus MTAudioProcessingTapCreate(
 		CFAllocatorRef CM_NULLABLE allocator,
 		const MTAudioProcessingTapCallbacks * CM_NONNULL callbacks,
 		MTAudioProcessingTapCreationFlags flags,
-		MTAudioProcessingTapRef CM_NULLABLE * CM_NONNULL tapOut) API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+		CM_RETURNS_RETAINED_PARAMETER MTAudioProcessingTapRef CM_NULLABLE * CM_NONNULL tapOut) API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@function	MTAudioProcessingTapGetStorage

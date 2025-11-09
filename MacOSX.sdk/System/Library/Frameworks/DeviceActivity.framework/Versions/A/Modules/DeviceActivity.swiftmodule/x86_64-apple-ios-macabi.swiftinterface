@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 377.5.1 -module-name DeviceActivity
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 392.1 -module-name DeviceActivity
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Foundation
 import ManagedSettings
 import Swift
@@ -29,22 +29,28 @@ public struct DeviceActivityName : Swift.RawRepresentable, Swift.Equatable, Swif
 @available(tvOS, unavailable)
 @available(watchOS, unavailable)
 public struct DeviceActivitySchedule : Swift.Equatable {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(intervalStart: Foundation.DateComponents, intervalEnd: Foundation.DateComponents, repeats: Swift.Bool, warningTime: Foundation.DateComponents? = nil)
+  #endif
   public var intervalStart: Foundation.DateComponents {
     get
   }
   public var intervalEnd: Foundation.DateComponents {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var nextInterval: Foundation.DateInterval? {
     get
   }
+  #endif
   public var repeats: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var warningTime: Foundation.DateComponents? {
     get
   }
+  #endif
   public static func == (a: DeviceActivity.DeviceActivitySchedule, b: DeviceActivity.DeviceActivitySchedule) -> Swift.Bool
 }
 @available(iOS 15.0, *)
@@ -129,7 +135,9 @@ public struct DeviceActivityCenter {
   public var activities: [DeviceActivity.DeviceActivityName] {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func schedule(for activity: DeviceActivity.DeviceActivityName) -> DeviceActivity.DeviceActivitySchedule?
+  #endif
   @available(watchOS, unavailable)
   public func events(for activity: DeviceActivity.DeviceActivityName) -> [DeviceActivity.DeviceActivityEvent.Name : DeviceActivity.DeviceActivityEvent]
   public enum MonitoringError : Foundation.LocalizedError {
@@ -139,12 +147,16 @@ public struct DeviceActivityCenter {
     case intervalTooShort
     case invalidDateComponents
     case unauthorized
+    #if compiler(>=5.3) && $NonescapableTypes
     public var errorDescription: Swift.String? {
       get
     }
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public var recoverySuggestion: Swift.String? {
       get
     }
+    #endif
     public static func == (a: DeviceActivity.DeviceActivityCenter.MonitoringError, b: DeviceActivity.DeviceActivityCenter.MonitoringError) -> Swift.Bool
     public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
@@ -230,7 +242,9 @@ extension DeviceActivity.DeviceActivityData {
       case iPod
       case iPad
       case mac
+      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.Int)
+      #endif
       @available(iOS 16.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -258,7 +272,9 @@ extension DeviceActivity.DeviceActivityData {
     public enum FamilyRole : Swift.Int, Swift.Hashable {
       case individual
       case child
+      #if compiler(>=5.3) && $NonescapableTypes
       public init?(rawValue: Swift.Int)
+      #endif
       @available(iOS 16.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -336,7 +352,9 @@ public struct DeviceActivityFilter : Swift.Equatable {
   public var categories: Swift.Set<ManagedSettings.ActivityCategoryToken>
   public var webDomains: Swift.Set<ManagedSettings.WebDomainToken>
   public init(segment segmentInterval: DeviceActivity.DeviceActivityFilter.SegmentInterval = .hourly(), users: DeviceActivity.DeviceActivityFilter.Users, devices: DeviceActivity.DeviceActivityFilter.Devices, applications: Swift.Set<ManagedSettings.ApplicationToken> = [], categories: Swift.Set<ManagedSettings.ActivityCategoryToken> = [], webDomains: Swift.Set<ManagedSettings.WebDomainToken> = [])
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(segment segmentInterval: DeviceActivity.DeviceActivityFilter.SegmentInterval = .hourly(), devices: DeviceActivity.DeviceActivityFilter.Devices? = nil, applications: Swift.Set<ManagedSettings.ApplicationToken> = [], categories: Swift.Set<ManagedSettings.ActivityCategoryToken> = [], webDomains: Swift.Set<ManagedSettings.WebDomainToken> = [])
+  #endif
   public static func == (a: DeviceActivity.DeviceActivityFilter, b: DeviceActivity.DeviceActivityFilter) -> Swift.Bool
 }
 @_inheritsConvenienceInitializers @available(iOS 15.0, *)

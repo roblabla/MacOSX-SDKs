@@ -19,6 +19,7 @@
 				There are also functions for converting between big-endian buffers and the host-endian layouts exposed in QuickTime APIs.
 */
 
+#include <CoreMedia/CMBase.h>
 #include <CoreMedia/CMFormatDescription.h>
 #include <CoreMedia/CMBlockBuffer.h>
 

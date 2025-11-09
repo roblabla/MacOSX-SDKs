@@ -58,6 +58,7 @@ typedef NS_ENUM(NSInteger, AVAssetReaderStatus) {
 	
 	AVAssetReaderAudioMixOutput mixes multiple audio tracks of the asset after reading them, while AVAssetReaderVideoCompositionOutput composites multiple video tracks after reading them.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetReader : NSObject
 {
@@ -177,7 +178,14 @@ AV_INIT_UNAVAILABLE
 	
 	This method throws an exception if the output has already been added to an AVAssetReader or if reading has started (`status` has progressed beyond AVAssetReaderStatusUnknown).
  */
-- (void)addOutput:(AVAssetReaderOutput *)output;
+- (void)addOutput:(AVAssetReaderOutput *)output
+#if __swift__
+API_DEPRECATED("Use the appropriate AVAssetReader.outputProvider(for:...) overload for your output and optional adaptor instead", macos(10.7, API_TO_BE_DEPRECATED), ios(4.1, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
  @method startReading
@@ -194,7 +202,14 @@ AV_INIT_UNAVAILABLE
  
 	This method throws an exception if reading has already started (`status` has progressed beyond AVAssetReaderStatusUnknown).
  */
-- (BOOL)startReading;
+- (BOOL)startReading
+#if __swift__
+API_DEPRECATED("Use start() instead", macos(10.7, API_TO_BE_DEPRECATED), ios(4.1, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED))
+API_UNAVAILABLE(watchos)
+#else
+API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0), visionos(1.0)) API_UNAVAILABLE(watchos)
+#endif
+;
 
 /*!
  @method cancelReading

@@ -577,6 +577,10 @@ struct getfh_args {
 };
 #else
 #endif
+struct funmount_args {
+	char fd_l_[PADL_(int)]; int fd; char fd_r_[PADR_(int)];
+	char flags_l_[PADL_(int)]; int flags; char flags_r_[PADR_(int)];
+};
 struct quotactl_args {
 	char path_l_[PADL_(user_addr_t)]; user_addr_t path; char path_r_[PADR_(user_addr_t)];
 	char cmd_l_[PADL_(int)]; int cmd; char cmd_r_[PADR_(int)];
@@ -2693,6 +2697,7 @@ int unmount(struct proc *, struct unmount_args *, int *);
 int getfh(struct proc *, struct getfh_args *, int *);
 #else
 #endif
+int funmount(struct proc *, struct funmount_args *, int *);
 int quotactl(struct proc *, struct quotactl_args *, int *);
 int mount(struct proc *, struct mount_args *, int *);
 int csops(struct proc *, struct csops_args *, int *);

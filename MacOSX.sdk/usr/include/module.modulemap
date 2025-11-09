@@ -39,17 +39,17 @@ extern module Darwin "Darwin.modulemap"
 
 // Interfaces above the C standard library.
 extern module libunwind "libunwind.modulemap"
-extern module unwind_h "DarwinBasic.modulemap"
+extern module unwind_h "c_standard_library.modulemap"
 
 // Interfaces above the C standard library that are used by libc++. When
 // building with C++, these modules are intermingled with the libc++ and
 // C standard library modules.
-extern module gethostuuid "DarwinBasic.modulemap"
-extern module nl_types "DarwinBasic.modulemap"
-extern module pthread "DarwinBasic.modulemap"
-extern module sys_select "DarwinBasic.modulemap"
-extern module unistd "DarwinBasic.modulemap"
-extern module xlocale "DarwinBasic.modulemap"
+extern module nl_types "DarwinFoundation2.modulemap"
+extern module pthread "DarwinFoundation3.modulemap"
+extern module sched "DarwinFoundation3.modulemap"
+extern module sys_select "DarwinFoundation3.modulemap"
+extern module unistd "DarwinFoundation3.modulemap"
+extern module xlocale "DarwinFoundation3.modulemap"
 
 // C Standard Library. When building with C++, these modules will also
 // import the corresponding C++ library modules.
@@ -82,57 +82,48 @@ extern module wchar_h "c_standard_library.modulemap"
 extern module wctype_h "c_standard_library.modulemap"
 
 // Interfaces that are intermingled with the C standard library.
-extern module alloca "DarwinBasic.modulemap"
-extern module runetype "DarwinBasic.modulemap"
-extern module _strings "DarwinBasic.modulemap"
-extern module sys_resource "DarwinBasic.modulemap"
-extern module sys_types "DarwinBasic.modulemap"
-extern module sys_wait "DarwinBasic.modulemap"
+extern module alloca "DarwinFoundation2.modulemap"
+extern module runetype "DarwinFoundation2.modulemap"
+extern module sys_resource "DarwinFoundation3.modulemap"
+extern module sys_types "DarwinFoundation2.modulemap"
+extern module sys_wait "DarwinFoundation3.modulemap"
 
 // Base interfaces below the C standard library.
-extern module mach "DarwinFoundation.modulemap"
-extern module netinet_in "DarwinFoundation.modulemap"
-extern module _sys_select "DarwinFoundation.modulemap"
-extern module sys_time "DarwinFoundation.modulemap"
-extern module _useconds_t "DarwinFoundation.modulemap"
-extern module uuid "DarwinFoundation.modulemap"
-extern module DarwinFoundation "DarwinFoundation.modulemap"
-extern module os_availability "os_availability.modulemap"
-extern module TargetConditionals "TargetConditionals.modulemap"
-// Deprecated, use os_availability
-extern module AvailabilityMacros "os_availability.modulemap"
-// Implementation detail, use os_availability.
-extern module os_availability_internal "os_availability.modulemap"
+extern module os_availability "DarwinFoundation1.modulemap"
+extern module sys_appleapiopts "DarwinFoundation1.modulemap"
+extern module sys_cdefs "DarwinFoundation1.modulemap"
+extern module sys_qos "DarwinFoundation1.modulemap"
+extern module TargetConditionals "DarwinFoundation1.modulemap"
 
-// unwind.h implementation. This header is augmented by the compiler.
-// This module should never be directly imported, unwind_h should be
-// used instead.
+// Cross import modules to support xlocale. These are imported automatically
+// in Swift when the crossed modules are imported. e.g. when both ctype_h and
+// xlocale are imported in Swift, _xlocale_ctype_h will automatically be imported.
+// clang doesn't currently support cross imports; these modules can be imported
+// directly instead.
+extern module _Darwin_xlocale "DarwinBasic.modulemap"
+extern module _xlocale_ctype_h "DarwinBasic.modulemap"
+extern module _xlocale_inttypes_h "DarwinBasic.modulemap"
+extern module _xlocale_stdio_h "DarwinBasic.modulemap"
+extern module _xlocale_stdlib_h "DarwinBasic.modulemap"
+extern module _xlocale_string_h "DarwinBasic.modulemap"
+extern module _xlocale_time_h "DarwinBasic.modulemap"
+extern module _xlocale_wchar_h "DarwinBasic.modulemap"
+extern module _xlocale_wctype_h "DarwinBasic.modulemap"
+
+
+// Implementation detail modules. The names and contents of these modules
+// are not stable, and they should never be directly imported. The modules
+// above should be used instead.
 extern module unwind "libunwind.modulemap"
 
-// C Standard Library implementation. Most of these headers are augmented,
-// or even replaced, by the compiler or C++ library. These modules should
-// never be directly imported, the modules above should be used instead.
-extern module _assert "c_standard_library.modulemap"
-extern module _complex "c_standard_library.modulemap"
-extern module _ctype "c_standard_library.modulemap"
-extern module _errno "c_standard_library.modulemap"
-extern module _fenv "c_standard_library.modulemap"
-extern module _float "c_standard_library.modulemap"
-extern module _inttypes "c_standard_library.modulemap"
-extern module _iso646 "c_standard_library.modulemap"
-extern module _limits "c_standard_library.modulemap"
-extern module _locale "c_standard_library.modulemap"
-extern module _math "c_standard_library.modulemap"
-extern module _setjmp "c_standard_library.modulemap"
 extern module _signal "c_standard_library.modulemap"
-extern module _stdarg "c_standard_library.modulemap"
-extern module _stddef "c_standard_library.modulemap"
-extern module _stdint "c_standard_library.modulemap"
-extern module _stdio "c_standard_library.modulemap"
-extern module _stdlib "c_standard_library.modulemap"
-extern module _string "c_standard_library.modulemap"
-extern module _tgmath "c_standard_library.modulemap"
-extern module _time "c_standard_library.modulemap"
-extern module _wchar "c_standard_library.modulemap"
-extern module _wctype "c_standard_library.modulemap"
-extern module __wctype "c_standard_library.modulemap"
+
+extern module _DarwinFoundation3 "DarwinFoundation3.modulemap"
+extern module _DarwinFoundation2 "DarwinFoundation2.modulemap"
+extern module _DarwinFoundation1 "DarwinFoundation1.modulemap"
+extern module _AvailabilityInternal "DarwinFoundation1.modulemap"
+
+// Obsolete C Standard Library headers replaced by the compiler. This module
+// is here to generate early errors if client search paths are set up
+// incorrectly.
+extern module _c_standard_library_obsolete "DarwinFoundation1.modulemap"

@@ -549,5 +549,6 @@ exports:
                        '_$s2os6LoggerV25HomeAutomationUIFrameworkE5debug6output4test6callerySS_SbSStF', 
                        '_$s2os6LoggerV25HomeAutomationUIFrameworkE5error6output4test4file8function4lineySS_SbS2SSitF', 
                        '_$s7SwiftUI5ColorV25HomeAutomationUIFrameworkEyACSgSDySSSdGSgcfC', 
+                       '_$s9SnippetUI7ContextC25HomeAutomationUIFrameworkE7perform16directInvocation18isAwaitingResponseSbSo31SAIntentGroupRunSiriKitExecutorC_05SwiftB07BindingVySbGtF', 
                        _HomeAutomationUIFrameworkVersionNumber, _HomeAutomationUIFrameworkVersionString ]
 ...

@@ -39,6 +39,7 @@ exports:
                        _UIAccessibilityDecrementAction, _UIAccessibilityDevicePointerDidEnterElementNotification, 
                        _UIAccessibilityDictationRequestCompleteNotification, _UIAccessibilityElementMovedNotification, 
                        _UIAccessibilityElementPreviewActionNotification, _UIAccessibilityElementPreviewNotification, 
+                       _UIAccessibilityEyeTrackingCalibrationEndNotification, _UIAccessibilityEyeTrackingCalibrationStartNotification, 
                        _UIAccessibilityFKAArrowNavigationNotification, _UIAccessibilityFirstResponderChangedNotification, 
                        _UIAccessibilityInMemoryStringBasedTreeLoggerDefaultDescriptionKey, 
                        _UIAccessibilityInMemoryStringBasedTreeLoggerDefaultPrefix, 

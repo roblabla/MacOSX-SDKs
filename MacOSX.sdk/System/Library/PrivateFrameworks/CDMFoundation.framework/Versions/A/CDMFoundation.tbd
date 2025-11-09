@@ -63,6 +63,8 @@ exports:
                        '_$s13CDMFoundation11TurnSummaryV15actionCancelledSbSgvpMV', 
                        '_$s13CDMFoundation11TurnSummaryV15executionSourceAC09ExecutionE0OSgvg', 
                        '_$s13CDMFoundation11TurnSummaryV15executionSourceAC09ExecutionE0OSgvpMV', 
+                       '_$s13CDMFoundation11TurnSummaryV19turnRoutingDecision16SiriMessageTypes09NLRoutingfH0C0eF0OSgvg', 
+                       '_$s13CDMFoundation11TurnSummaryV19turnRoutingDecision16SiriMessageTypes09NLRoutingfH0C0eF0OSgvpMV', 
                        '_$s13CDMFoundation11TurnSummaryV2eeoiySbAC_ACtFZ', '_$s13CDMFoundation11TurnSummaryV4fromACs7Decoder_p_tKcfC', 
                        '_$s13CDMFoundation11TurnSummaryV6encode2toys7Encoder_p_tKF', 
                        '_$s13CDMFoundation11TurnSummaryVMa', '_$s13CDMFoundation11TurnSummaryVMn', 

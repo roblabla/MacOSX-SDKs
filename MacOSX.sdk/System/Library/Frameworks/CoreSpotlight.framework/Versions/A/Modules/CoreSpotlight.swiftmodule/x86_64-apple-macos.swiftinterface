@@ -1,13 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target x86_64-apple-macos15.5 -target-variant x86_64-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2333.50.1 -module-name CoreSpotlight
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
-@_exported import CoreSpotlight
-import Foundation
-import Swift
-import _Concurrency
-import _StringProcessing
-import _SwiftConcurrencyShims
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target x86_64-apple-macos26.0 -target-variant x86_64-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-upcoming-feature ConciseMagicFile -enable-upcoming-feature ForwardTrailingClosures -enable-upcoming-feature StrictConcurrency -enable-upcoming-feature DeprecateApplicationMain -enable-upcoming-feature ImportObjcForwardDeclarations -enable-upcoming-feature DisableOutwardActorInference -enable-upcoming-feature IsolatedDefaultValues -enable-upcoming-feature GlobalConcurrency -enable-upcoming-feature InferSendableFromCaptures -enable-upcoming-feature ImplicitOpenExistentials -enable-upcoming-feature RegionBasedIsolation -enable-upcoming-feature DynamicActorIsolation -enable-upcoming-feature NonfrozenEnumExhaustivity -enable-upcoming-feature GlobalActorIsolatedTypesUsability -enable-upcoming-feature InternalImportsByDefault -enable-upcoming-feature MemberImportVisibility -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 2393.405 -module-name CoreSpotlight
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
+@_exported public import CoreSpotlight
+public import Swift
+public import _Concurrency
+public import _StringProcessing
+public import _SwiftConcurrencyShims
 @available(macOS 13.0, iOS 16.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -33,7 +32,9 @@ extension CoreSpotlight.CSSearchQuery {
     public typealias AsyncIterator = CoreSpotlight.CSSearchQuery.Results.Iterator
     public typealias Element = CoreSpotlight.CSSearchQuery.Results.Item
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async throws -> CoreSpotlight.CSSearchQuery.Results.Item?
+      #endif
       @available(iOS 16.0, macOS 13.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -119,7 +120,9 @@ extension CoreSpotlight.CSUserQuery {
     public typealias AsyncIterator = CoreSpotlight.CSUserQuery.Responses.Iterator
     public typealias Element = CoreSpotlight.CSUserQuery.Responses.Response
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async throws -> CoreSpotlight.CSUserQuery.Responses.Element?
+      #endif
       @available(iOS 16.0, macOS 13.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)
@@ -139,7 +142,9 @@ extension CoreSpotlight.CSUserQuery {
     public typealias AsyncIterator = CoreSpotlight.CSUserQuery.Suggestions.Iterator
     public typealias Element = CoreSpotlight.CSUserQuery.Suggestion
     public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $NonescapableTypes
       public mutating func next() async throws -> CoreSpotlight.CSUserQuery.Suggestions.Element?
+      #endif
       @available(iOS 16.0, macOS 13.0, *)
       @available(tvOS, unavailable)
       @available(watchOS, unavailable)

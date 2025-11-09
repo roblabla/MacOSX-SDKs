@@ -60,6 +60,8 @@ typedef NS_ENUM(NSUInteger, NSEventType) {        /* various types of events */
     NSEventTypeDirectTouch API_AVAILABLE(macos(10.10)) = 37,
 
     NSEventTypeChangeMode API_AVAILABLE(macos(10.15)) = 38,
+    
+    NSEventTypeMouseCancelled API_AVAILABLE(macos(26.0)) = 40,
 };
 
 static const NSEventType NSLeftMouseDown 	API_DEPRECATED_WITH_REPLACEMENT("NSEventTypeLeftMouseDown", macos(10.0,10.12)) = NSEventTypeLeftMouseDown;
@@ -127,6 +129,8 @@ typedef NS_OPTIONS(unsigned long long, NSEventMask) { /* masks for the types of 
     NSEventMaskDirectTouch API_AVAILABLE(macos(10.12.2)) = 1ULL << NSEventTypeDirectTouch,
 
     NSEventMaskChangeMode API_AVAILABLE(macos(10.15)) = 1ULL << NSEventTypeChangeMode,
+    
+    NSEventMaskMouseCancelled API_AVAILABLE(macos(26.0)) = 1ULL << NSEventTypeMouseCancelled,
     
     NSEventMaskAny              = NSUIntegerMax,
     

@@ -38,7 +38,7 @@
 WK_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! @abstract Indicates a ``WKWebExtension`` error. */
-API_AVAILABLE(macos(NA), ios(18.4), visionos(NA))
+API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4))
 WK_EXTERN NSErrorDomain const WKWebExtensionErrorDomain NS_SWIFT_NAME(WKWebExtension.errorDomain) NS_SWIFT_NONISOLATED;
 
 /*!
@@ -63,13 +63,13 @@ typedef NS_ERROR_ENUM(WKWebExtensionErrorDomain, WKWebExtensionError) {
     WKWebExtensionErrorInvalidDeclarativeNetRequestEntry,
     WKWebExtensionErrorInvalidBackgroundPersistence,
     WKWebExtensionErrorInvalidArchive,
-} NS_SWIFT_NAME(WKWebExtension.Error) API_AVAILABLE(macos(NA), ios(18.4), visionos(NA));
+} NS_SWIFT_NAME(WKWebExtension.Error) API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4));
 
 /*!
  @abstract A ``WKWebExtension`` object encapsulates a web extension’s resources that are defined by a `manifest.json`` file.
  @discussion This class handles the reading and parsing of the manifest file along with the supporting resources like icons and localizations.
  */
-WK_EXTERN API_AVAILABLE(macos(NA), ios(18.4), visionos(NA)) WK_SWIFT_UI_ACTOR
+WK_EXTERN API_AVAILABLE(macos(15.4), ios(18.4), visionos(2.4)) WK_SWIFT_UI_ACTOR
 @interface WKWebExtension : NSObject
 
 + (instancetype)new NS_UNAVAILABLE;

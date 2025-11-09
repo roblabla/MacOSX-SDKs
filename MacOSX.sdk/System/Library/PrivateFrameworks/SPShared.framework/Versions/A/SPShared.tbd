@@ -8,7 +8,8 @@ allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     clients:         [ FMNetworking, FindMy, SPSharedTests, findmylocateagent, findmylocated, 
-                       searchpartyd, searchpartydTests, searchpartyuseragent, sptool ]
+                       findmylocatedTests, searchpartyd, searchpartydTests, searchpartyuseragent, 
+                       sptool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

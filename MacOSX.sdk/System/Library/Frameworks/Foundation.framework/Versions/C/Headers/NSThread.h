@@ -67,9 +67,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @end
 
-FOUNDATION_EXPORT NSNotificationName const NSWillBecomeMultiThreadedNotification;
-FOUNDATION_EXPORT NSNotificationName const NSDidBecomeSingleThreadedNotification;
-FOUNDATION_EXPORT NSNotificationName const NSThreadWillExitNotification;
+FOUNDATION_EXPORT NSNotificationName const NSWillBecomeMultiThreadedNotification API_DEPRECATED("This notification does not protect against data races", macos(10.0, 26.0), ios(2.0, 26.0), watchos(2.0, 26.0), tvos(9.0, 26.0), visionos(1.0, 26.0));
+FOUNDATION_EXPORT NSNotificationName const NSDidBecomeSingleThreadedNotification API_DEPRECATED("Programs no longer transition to single-threaded mode from threaded environments", macos(10.0, 26.0), ios(2.0, 26.0), watchos(2.0, 26.0), tvos(9.0, 26.0), visionos(1.0, 26.0));
+FOUNDATION_EXPORT NSNotificationName const NSThreadWillExitNotification API_DEPRECATED("This notification does not protect against data races", macos(10.0, 26.0), ios(2.0, 26.0), watchos(2.0, 26.0), tvos(9.0, 26.0), visionos(1.0, 26.0));
 
 @interface NSObject (NSThreadPerformAdditions)
 

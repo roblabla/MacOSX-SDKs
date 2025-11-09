@@ -2,7 +2,7 @@
 //  HealthKit.h
 //  HealthKit
 //
-//  Copyright (c) 2013-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2013-2025 Apple Inc. All rights reserved.
 //
 
 #import <HealthKit/HKActivitySummary.h>
@@ -21,6 +21,7 @@
 #import <HealthKit/HKCDADocumentSample.h>
 #import <HealthKit/HKCharacteristicObjects.h>
 #import <HealthKit/HKCharacteristicValues.h>
+#import <HealthKit/HKClinicalCoding.h>
 #import <HealthKit/HKClinicalRecord.h>
 #import <HealthKit/HKClinicalType.h>
 #import <HealthKit/HKContactsLensSpecification.h>
@@ -44,12 +45,15 @@
 #import <HealthKit/HKGlassesLensSpecification.h>
 #import <HealthKit/HKGlassesPrescription.h>
 #import <HealthKit/HKHealthStore.h>
+#import <HealthKit/HKHealthConceptIdentifier.h>
 #import <HealthKit/HKHeartbeatSeriesBuilder.h>
 #import <HealthKit/HKHeartbeatSeriesQuery.h>
 #import <HealthKit/HKHeartbeatSeriesSample.h>
 #import <HealthKit/HKLensSpecification.h>
 #import <HealthKit/HKLiveWorkoutBuilder.h>
 #import <HealthKit/HKLiveWorkoutDataSource.h>
+#import <HealthKit/HKMedicationConcept.h>
+#import <HealthKit/HKMedicationDoseEvent.h>
 #import <HealthKit/HKMetadata.h>
 #import <HealthKit/HKObject.h>
 #import <HealthKit/HKObjectType.h>
@@ -76,6 +80,8 @@
 #import <HealthKit/HKStatisticsQuery.h>
 #import <HealthKit/HKTypeIdentifiers.h>
 #import <HealthKit/HKUnit.h>
+#import <HealthKit/HKUserAnnotatedMedication.h>
+#import <HealthKit/HKUserAnnotatedMedicationQuery.h>
 #import <HealthKit/HKVerifiableClinicalRecord.h>
 #import <HealthKit/HKVerifiableClinicalRecordQuery.h>
 #import <HealthKit/HKVerifiableClinicalRecordSubject.h>

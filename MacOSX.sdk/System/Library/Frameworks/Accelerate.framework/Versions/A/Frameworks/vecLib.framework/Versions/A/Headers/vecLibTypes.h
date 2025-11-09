@@ -3,7 +3,7 @@
  
      Contains:   Master include for vecLib framework
  
-     Version:    vecLib-1068.100
+     Version:    vecLib-1121.0
  
      Copyright:  Copyright (c) 2000-2025 by Apple Inc. All rights reserved.
  
@@ -119,6 +119,7 @@ typedef __m128                          vFloat;
 	typedef unsigned long long 	vUInt64 __attribute__((__vector_size__(16), __aligned__(16)));
 	typedef long long      		vSInt64 __attribute__((__vector_size__(16), __aligned__(16)));
 	typedef float          		vFloat  __attribute__((__vector_size__(16), __aligned__(16)));
+    typedef float          		vFloatPacked  __attribute__((__vector_size__(16), __aligned__(4)));
 	typedef double         		vDouble __attribute__((__vector_size__(16), __aligned__(16)));
 	typedef unsigned int   		vBool32 __attribute__((__vector_size__(16), __aligned__(16)));
 

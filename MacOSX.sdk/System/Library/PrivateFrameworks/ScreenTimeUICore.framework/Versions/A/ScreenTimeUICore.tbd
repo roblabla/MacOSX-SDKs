@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ScreenTimeUICore.framework/Versions/A/ScreenTimeUICore'
-current-version: 537.5.7
+current-version: 604.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -36,6 +36,19 @@ exports:
                        '_$s16ScreenTimeUICore030STCommunicationSafetyViewChildE15ResourcesFooterVMa', 
                        '_$s16ScreenTimeUICore030STCommunicationSafetyViewChildE15ResourcesFooterVMn', 
                        '_$s16ScreenTimeUICore030STCommunicationSafetyViewChildE15ResourcesFooterVN', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeO2eeoiySbAE_AEtFZ', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeO4hash4intoys6HasherVz_tF', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeO5largeyA2EmFWC', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeO6mediumyA2EmFWC', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeO9hashValueSivg', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeO9hashValueSivpMV', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeOMa', '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeOMn', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeON', '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeOSHAAMc', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV0D4SizeOSQAAMc', '_$s16ScreenTimeUICore0aB8IconViewV4bodyQrvg', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV4bodyQrvpMV', '_$s16ScreenTimeUICore0aB8IconViewV4bodyQrvpQOMQ', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV6utType4sizeACSS_AC0D4SizeOtcfC', 
+                       '_$s16ScreenTimeUICore0aB8IconViewV7SwiftUI0E0AAMc', '_$s16ScreenTimeUICore0aB8IconViewVMa', 
+                       '_$s16ScreenTimeUICore0aB8IconViewVMn', '_$s16ScreenTimeUICore0aB8IconViewVN', 
                        '_$s16ScreenTimeUICore11DetailChartV4HourV2eeoiySbAE_AEtFZ', 
                        '_$s16ScreenTimeUICore11DetailChartV4HourV2id10Foundation4DateVvg', 
                        '_$s16ScreenTimeUICore11DetailChartV4HourV2id10Foundation4DateVvpMV', 
@@ -337,7 +350,7 @@ exports:
                        '_$s16ScreenTimeUICore24NotificationsDetailChartV4bodyQrvpQOMQ', 
                        '_$s16ScreenTimeUICore24NotificationsDetailChartV7SwiftUI4ViewAAMc', 
                        '_$s16ScreenTimeUICore24NotificationsDetailChartVMa', '_$s16ScreenTimeUICore24NotificationsDetailChartVMn', 
-                       '_$s16ScreenTimeUICore24NotificationsDetailChartVN', '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV10helpAnchor11userAltDSID15lastUpdatedDate16showDevicePicker9limitInfo05usageR7Options013selectedUsageR0ACSS_SSSg7SwiftUI7BindingVySSGSbSDySSAA017MostUsedTableAppsE10CategoriesV05LimitU0VGSayAA0yR6OptionOGANyAVGtcfC', 
+                       '_$s16ScreenTimeUICore24NotificationsDetailChartVN', '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV10helpAnchor11userAltDSID15lastUpdatedDate16showDevicePicker9limitInfo05usageR7Options013selectedUsageR00X15SegmentIntervalACSS_SSSg7SwiftUI7BindingVySSGSbSDySSAA017MostUsedTableAppsE10CategoriesV05LimitU0VGSayAA0yR6OptionOGAOyAWGAOy0rG00rG6FilterV0Z8IntervalOGtcfC', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV4bodyQrvg', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV4bodyQrvpMV', 
                        '_$s16ScreenTimeUICore25AppAndWebsiteActivityViewV4bodyQrvpQOMQ', 

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/TailspinSymbolication.framework/Versions/A/TailspinSymbolication'
-current-version: 218.2
+current-version: 241
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _SymbolicationServerOptionKey_HasTextExec, _SymbolicationServerOptionKey_ShouldCacheSymbols, 

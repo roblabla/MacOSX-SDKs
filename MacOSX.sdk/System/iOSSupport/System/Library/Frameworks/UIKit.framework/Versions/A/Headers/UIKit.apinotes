@@ -117,6 +117,8 @@ Classes:
   SwiftPrivate: true
 - Name: UITraitImageDynamicRange
   SwiftPrivate: true
+- Name: UITraitResolvesNaturalAlignmentWithBaseWritingDirection
+  SwiftPrivate: true
 - Name: UITraitTypesettingLanguage
   SwiftPrivate: true
 - Name: UICollectionViewCompositionalLayout
@@ -988,6 +990,8 @@ Classes:
   SwiftName: UIScene.CollectionJoinBehavior
 - Name: UITraitCollection
   Properties:
+  - Name: 'resolvesNaturalAlignmentWithBaseWritingDirection'
+    SwiftPrivate: true
   - Name: 'systemTraitsAffectingColorAppearance'
     PropertyKind: Class
     SwiftPrivate: true
@@ -1038,6 +1042,9 @@ Classes:
     SwiftPrivate: true
   - Selector: 'changedTraitsFromTraitCollection:'
     MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'traitCollectionWithResolvesNaturalAlignmentWithBaseWritingDirection:'
+    MethodKind: Class
     SwiftPrivate: true
   - Selector: 'traitCollectionWithTypesettingLanguage:'
     MethodKind: Class
@@ -2447,8 +2454,6 @@ Globals:
   Availability: nonswift
 - Name: UISceneWillConnectNotification
   SwiftName: UIScene.willConnectNotification
-- Name: UISceneWillDisconnectNotification
-  SwiftName: UIScene.willDisconnectNotification
 - Name: UISceneDidDisconnectNotification
   SwiftName: UIScene.didDisconnectNotification
 - Name: UISceneDidActivateNotification
@@ -2471,6 +2476,8 @@ Globals:
   SwiftName: windowExternalDisplayNonInteractive
 - Name: UIWindowSceneSessionRoleVolumetricApplication
   SwiftName: windowApplicationVolumetric
+- Name: UIWindowSceneSessionRoleAssistiveAccessApplication
+  SwiftName: windowAssistiveAccessApplication
 - Name: UISheetPresentationControllerDetentInactive
   SwiftPrivate: true
 - Name: UISheetPresentationControllerAutomaticDimension

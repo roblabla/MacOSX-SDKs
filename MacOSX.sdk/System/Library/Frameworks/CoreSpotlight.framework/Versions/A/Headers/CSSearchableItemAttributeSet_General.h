@@ -126,4 +126,3 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @property(nullable, copy) NSArray<NSString *> *providerInPlaceFileTypeIdentifiers CS_AVAILABLE(10_13, 11_0) CS_TVOS_UNAVAILABLE;
 
 @end
-

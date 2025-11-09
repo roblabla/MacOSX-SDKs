@@ -30,27 +30,27 @@ HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), m
 /*!
  * @brief Object that can be used to control the camera stream.
  */
-@property (readonly, strong, nonatomic, nullable) HMCameraStreamControl *streamControl;
+@property (nullable, nonatomic, readonly, strong) HMCameraStreamControl *streamControl;
 
 /*!
  * @brief Object that can be used to take image snapshots from the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCameraSnapshotControl *snapshotControl;
+@property (nullable, nonatomic, readonly, strong) HMCameraSnapshotControl *snapshotControl;
 
 /*!
  * @brief Object that can be used to control the settings on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCameraSettingsControl *settingsControl;
+@property (nullable, nonatomic, readonly, strong) HMCameraSettingsControl *settingsControl;
 
 /*!
  * @brief Object that can be used to control the speaker settings on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCameraAudioControl *speakerControl;
+@property (nullable, nonatomic, readonly, strong) HMCameraAudioControl *speakerControl;
 
 /*!
  * @brief Object that can be used to control the microphone settings on the camera.
  */
-@property (readonly, strong, nonatomic, nullable) HMCameraAudioControl *microphoneControl;
+@property (nullable, nonatomic, readonly, strong) HMCameraAudioControl *microphoneControl;
 
 @end
 

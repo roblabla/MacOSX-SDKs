@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-macos15.5 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 436.120.4 -module-name Cinematic
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-macos26.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 492 -module-name Cinematic
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import AVFoundation
 @_exported import Cinematic
 import CoreMedia
@@ -28,8 +28,12 @@ public class CNDetectionTrack {
   public var isDiscrete: Swift.Bool {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public func detection(atOrBefore time: CoreMedia.CMTime) -> Cinematic.CNDetection?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public func detection(nearest time: CoreMedia.CMTime) -> Cinematic.CNDetection?
+  #endif
   public func detections(in timeRange: CoreMedia.CMTimeRange) -> [Cinematic.CNDetection]
   @objc deinit
 }
@@ -40,9 +44,11 @@ public class CNFixedDetectionTrack : Cinematic.CNDetectionTrack {
   public var focusDisparity: Swift.Float {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var originalDetection: Cinematic.CNDetection? {
     get
   }
+  #endif
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
@@ -61,8 +67,12 @@ public class CNRenderingSession {
   }
   @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
   public struct FrameAttributes {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(sampleBuffer: CoreMedia.CMSampleBuffer, sessionAttributes: Cinematic.CNRenderingSession.Attributes)
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(timedMetadataGroup metadataGroup: AVFoundation.AVTimedMetadataGroup, sessionAttributes: Cinematic.CNRenderingSession.Attributes)
+    #endif
     public var focusDisparity: Swift.Float
     public var fNumber: Swift.Float
   }
@@ -97,14 +107,20 @@ public struct CNDetection : Swift.Sendable {
   public var focusDisparity: Swift.Float {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public var detectionID: Cinematic.CNDetectionID? {
     get
   }
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   public var detectionGroupID: Cinematic.CNDetectionGroupID? {
     get
   }
+  #endif
   public static func accessibilityLabel(for detectionType: Cinematic.CNDetectionType) -> Swift.String
+  #if compiler(>=5.3) && $NonescapableTypes
   public static func disparity(in normalizedRect: CoreFoundation.CGRect, sourceDisparity: CoreVideo.CVPixelBuffer, detectionType: Cinematic.CNDetectionType, priorDisparity: Swift.Float? = nil) -> Swift.Float
+  #endif
 }
 @_hasMissingDesignatedInitializers @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
 public class CNAssetInfo {
@@ -195,11 +211,40 @@ public class CNObjectTracker {
     get
   }
   public init(commandQueue: any Metal.MTLCommandQueue)
+  #if compiler(>=5.3) && $NonescapableTypes
   public func findObject(at point: CoreFoundation.CGPoint, sourceImage: CoreVideo.CVPixelBuffer) -> Cinematic.CNBoundsPrediction?
+  #endif
   public func startTracking(at time: CoreMedia.CMTime, within normalizedBounds: CoreFoundation.CGRect, sourceImage: CoreVideo.CVPixelBuffer, sourceDisparity: CoreVideo.CVPixelBuffer) -> Swift.Bool
+  #if compiler(>=5.3) && $NonescapableTypes
   public func continueTracking(at time: CoreMedia.CMTime, sourceImage: CoreVideo.CVPixelBuffer, sourceDisparity: CoreVideo.CVPixelBuffer) -> Cinematic.CNBoundsPrediction?
+  #endif
   public func finishDetectionTrack() -> Cinematic.CNDetectionTrack
   public func resetDetectionTrack()
+  @objc deinit
+}
+@_hasMissingDesignatedInitializers @available(macOS 26.0, iOS 26.0, tvOS 26.0, *)
+public class CNAssetSpatialAudioInfo {
+  public static var isSupported: Swift.Bool {
+    get
+  }
+  public class func assetContainsSpatialAudio(asset: AVFoundation.AVAsset) async -> Swift.Bool
+  public class func checkIfContainsSpatialAudio(asset: AVFoundation.AVAsset, completionHandler: @escaping (Swift.Bool) -> Swift.Void)
+  public init(asset: AVFoundation.AVAsset) async throws
+  public var defaultSpatialAudioTrack: AVFoundation.AVAssetTrack {
+    get
+  }
+  public var defaultRenderingStyle: Cinematic.CNSpatialAudioRenderingStyle {
+    get
+  }
+  public var defaultEffectIntensity: Swift.Float32 {
+    get
+  }
+  public var spatialAudioMixMetadata: Foundation.Data {
+    get
+  }
+  public func audioMix(effectIntensity: Swift.Float32, renderingStyle: Cinematic.CNSpatialAudioRenderingStyle) -> AVFoundation.AVAudioMix
+  public func assetReaderOutputSettings(for contentType: Cinematic.CNSpatialAudioContentType) -> Swift.Dictionary<Swift.String, Any>
+  public func assetWriterInputSettings(for contentType: Cinematic.CNSpatialAudioContentType) -> Swift.Dictionary<Swift.String, Any>
   @objc deinit
 }
 @_hasMissingDesignatedInitializers @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
@@ -218,30 +263,54 @@ final public class CNScript : Swift.Sendable {
     public var allDetections: [Cinematic.CNDetection] {
       get
     }
+    #if compiler(>=5.3) && $NonescapableTypes
     public func detection(for detectionID: Cinematic.CNDetectionID) -> Cinematic.CNDetection?
+    #endif
+    #if compiler(>=5.3) && $NonescapableTypes
     public func bestDetection(for detectionGroupID: Cinematic.CNDetectionGroupID) -> Cinematic.CNDetection?
+    #endif
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init(asset: AVFoundation.AVAsset, changes: Cinematic.CNScript.Changes? = nil, progress: Foundation.Progress? = nil) async throws
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func reload(changes: Cinematic.CNScript.Changes?)
+  #endif
   final public func changes() -> Cinematic.CNScript.Changes
   final public func changes(trimmedBy timeRange: CoreMedia.CMTimeRange) -> Cinematic.CNScript.Changes
   final public var timeRange: CoreMedia.CMTimeRange {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func frame(at time: CoreMedia.CMTime, tolerance: CoreMedia.CMTime) -> Cinematic.CNScript.Frame?
+  #endif
   final public func frames(in timeRange: CoreMedia.CMTimeRange) -> [Cinematic.CNScript.Frame]
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func decision(at time: CoreMedia.CMTime, tolerance: CoreMedia.CMTime) -> Cinematic.CNDecision?
+  #endif
   final public func decisions(in timeRange: CoreMedia.CMTimeRange) -> [Cinematic.CNDecision]
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func decision(after time: CoreMedia.CMTime) -> Cinematic.CNDecision?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func decision(before time: CoreMedia.CMTime) -> Cinematic.CNDecision?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func primaryDecision(at time: CoreMedia.CMTime) -> Cinematic.CNDecision?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func secondaryDecision(at time: CoreMedia.CMTime) -> Cinematic.CNDecision?
+  #endif
   final public func timeRangeOfTransition(after decision: Cinematic.CNDecision) -> CoreMedia.CMTimeRange
   final public func timeRangeOfTransition(before decision: Cinematic.CNDecision) -> CoreMedia.CMTimeRange
   final public func userDecisions(in timeRange: CoreMedia.CMTimeRange) -> [Cinematic.CNDecision]
   final public func baseDecisions(in timeRange: CoreMedia.CMTimeRange) -> [Cinematic.CNDecision]
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func detectionTrack(for detectionID: Cinematic.CNDetectionID) -> Cinematic.CNDetectionTrack?
+  #endif
+  #if compiler(>=5.3) && $NonescapableTypes
   final public func detectionTrack(for decision: Cinematic.CNDecision) -> Cinematic.CNDetectionTrack?
+  #endif
   final public var fNumber: Swift.Float {
     get
     set
@@ -255,7 +324,9 @@ final public class CNScript : Swift.Sendable {
     get
   }
   public struct Changes {
+    #if compiler(>=5.3) && $NonescapableTypes
     public init?(dataRepresentation: Foundation.Data)
+    #endif
     public var dataRepresentation: Foundation.Data {
       get
     }

@@ -52,7 +52,7 @@ typedef function_table_entry   *function_table_t;
 #endif /* AUTOTEST */
 
 #ifndef	memory_entry_MSG_COUNT
-#define	memory_entry_MSG_COUNT	3
+#define	memory_entry_MSG_COUNT	4
 #endif	/* memory_entry_MSG_COUNT */
 
 #include <Availability.h>
@@ -109,6 +109,20 @@ kern_return_t mach_memory_entry_ownership
 	task_t owner,
 	int ledger_tag,
 	int ledger_flags
+);
+
+/* Routine mach_memory_entry_get_page_counts */
+#ifdef	mig_external
+mig_external
+#else
+extern
+#endif	/* mig_external */
+kern_return_t mach_memory_entry_get_page_counts
+(
+	mem_entry_name_port_t mem_entry,
+	uint64_t *resident_cnt,
+	uint64_t *dirty_cnt,
+	uint64_t *swapped_cnt
 );
 
 __END_DECLS
@@ -170,6 +184,16 @@ __END_DECLS
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+	} __Request__mach_memory_entry_get_page_counts_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Request__memory_entry_subsystem__defined */
 
 /* union of all requests */
@@ -180,6 +204,7 @@ union __RequestUnion__memory_entry_subsystem {
 	__Request__mach_memory_entry_purgable_control_t Request_mach_memory_entry_purgable_control;
 	__Request__mach_memory_entry_access_tracking_t Request_mach_memory_entry_access_tracking;
 	__Request__mach_memory_entry_ownership_t Request_mach_memory_entry_ownership;
+	__Request__mach_memory_entry_get_page_counts_t Request_mach_memory_entry_get_page_counts;
 };
 #endif /* !__RequestUnion__memory_entry_subsystem__defined */
 /* typedefs for all replies */
@@ -226,6 +251,21 @@ union __RequestUnion__memory_entry_subsystem {
 #ifdef  __MigPackStructs
 #pragma pack(pop)
 #endif
+
+#ifdef  __MigPackStructs
+#pragma pack(push, 4)
+#endif
+	typedef struct {
+		mach_msg_header_t Head;
+		NDR_record_t NDR;
+		kern_return_t RetCode;
+		uint64_t resident_cnt;
+		uint64_t dirty_cnt;
+		uint64_t swapped_cnt;
+	} __Reply__mach_memory_entry_get_page_counts_t __attribute__((unused));
+#ifdef  __MigPackStructs
+#pragma pack(pop)
+#endif
 #endif /* !__Reply__memory_entry_subsystem__defined */
 
 /* union of all replies */
@@ -236,6 +276,7 @@ union __ReplyUnion__memory_entry_subsystem {
 	__Reply__mach_memory_entry_purgable_control_t Reply_mach_memory_entry_purgable_control;
 	__Reply__mach_memory_entry_access_tracking_t Reply_mach_memory_entry_access_tracking;
 	__Reply__mach_memory_entry_ownership_t Reply_mach_memory_entry_ownership;
+	__Reply__mach_memory_entry_get_page_counts_t Reply_mach_memory_entry_get_page_counts;
 };
 #endif /* !__RequestUnion__memory_entry_subsystem__defined */
 
@@ -243,7 +284,8 @@ union __ReplyUnion__memory_entry_subsystem {
 #define subsystem_to_name_map_memory_entry \
     { "mach_memory_entry_purgable_control", 4900 },\
     { "mach_memory_entry_access_tracking", 4901 },\
-    { "mach_memory_entry_ownership", 4902 }
+    { "mach_memory_entry_ownership", 4902 },\
+    { "mach_memory_entry_get_page_counts", 4903 }
 #endif
 
 #ifdef __AfterMigUserHeader

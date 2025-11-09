@@ -85,6 +85,7 @@ NS_ASSUME_NONNULL_BEGIN
                    didSelectShippingMethod:(PKShippingMethod *)shippingMethod
                                    handler:(void (^)(PKPaymentRequestShippingMethodUpdate *update))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
 
+
 // Sent when the user has selected a new shipping address.  The delegate should inspect the
 // address and must invoke the completion block with an updated array of PKPaymentSummaryItem objects.
 //

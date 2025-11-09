@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SmartReplies.framework/Versions/A/SmartReplies'
-current-version: 73.18
+current-version: 116.3
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -541,11 +541,11 @@ exports:
                        '_$s12SmartReplies35ExtractiveSummarizationStrategyTypeOs12CaseIterableAAMc', 
                        '_$sSS12SmartRepliesE10navigateToSSvgZ', '_$sSS12SmartRepliesE20highPrecisionActionsSSvgZ', 
                        '_$sSS12SmartRepliesE4noSRSSvgZ', '_$sSS12SmartRepliesE7repliesSSvgZ', 
-                       '_$sSS12SmartRepliesE9embeddingSSvgZ', '_$sSo8NSBundleC12SmartRepliesE028isBundleDisallowedForDynamicC0SbyFZ', 
+                       '_$sSS12SmartRepliesE9embeddingSSvgZ', '_$sSo11CFStringRefaSH12SmartRepliesMc', 
+                       '_$sSo11CFStringRefaSQ12SmartRepliesMc', '_$sSo8NSBundleC12SmartRepliesE028isBundleDisallowedForDynamicC0SbyFZ', 
                        '_$sSo8NSBundleC12SmartRepliesE02isbC6TesterSbyFZ', '_$sSo8NSBundleC12SmartRepliesE05smartC6BundleABSgyFZ', 
                        '_$sSo8NSBundleC12SmartRepliesE16bundleIdentifierSSSgyFZ', 
-                       '_$sSo8NSBundleC12SmartRepliesE20isDonatingBundleOnlySbyFZ', 
-                       _SmartRepliesVersionNumber, _SmartRepliesVersionString ]
+                       '_$sSo8NSBundleC12SmartRepliesE20isDonatingBundleOnlySbyFZ' ]
     objc-classes:    [ SROSmartRepliesActionMetadata, SROSmartRepliesActionSuggestion, 
                        SROSmartRepliesManager, SROSmartRepliesMessage, SROSmartRepliesObjCCompatibilityUtils, 
                        SROSmartRepliesSuggestion, SROSmartRepliesSuggestionRequest, 

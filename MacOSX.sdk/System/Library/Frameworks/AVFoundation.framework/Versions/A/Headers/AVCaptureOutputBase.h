@@ -114,7 +114,24 @@ AV_INIT_UNAVAILABLE
  */
 - (CGRect)rectForMetadataOutputRectOfInterest:(CGRect)rectInMetadataOutputCoordinates API_AVAILABLE(macos(10.15), ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
+/// A `BOOL` value that indicates whether the output supports deferred start.
+///
+/// You can only set the ``deferredStartEnabled`` property value to `true` if the output supports deferred start.
+@property(nonatomic, readonly, getter=isDeferredStartSupported) BOOL deferredStartSupported API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
+/// A `BOOL` value that indicates whether to defer starting this capture output.
+///
+/// When this value is `true`, the session does not prepare the output's resources until some time after ``AVCaptureSession/startRunning`` returns. You can start the visual parts of your user interface (e.g. preview) prior to other parts (e.g. photo/movie capture, metadata output, etc..) to improve startup performance. Set this value to `false` for outputs that your app needs for startup, and `true` for the ones it does not need to start immediately. For example, an ``AVCaptureVideoDataOutput`` that you intend to use for displaying preview should set this value to `false`, so that the frames are available as soon as possible.
+///
+/// By default, for apps that are linked on or after iOS 26, this property value is `true` for ``AVCapturePhotoOutput`` and ``AVCaptureFileOutput`` subclasses if supported, and `false` otherwise. When set to `true` for ``AVCapturePhotoOutput``, if you want to support multiple capture requests before running deferred start, set ``AVCapturePhotoOutput/responsiveCaptureEnabled`` to `true` on that output.
+///
+/// If ``deferredStartSupported`` is `false`, setting this property value to `true` results in the system throwing an `NSInvalidArgumentException`.
+///
+/// - Note: Set this value before calling ``AVCaptureSession/commitConfiguration`` as it requires a lengthy reconfiguration of the capture render pipeline.
+@property(nonatomic, getter=isDeferredStartEnabled) BOOL deferredStartEnabled API_AVAILABLE(macos(26.0), ios(26.0), macCatalyst(26.0), tvos(26.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos);
+
 @end
+
 
 
 /*!
@@ -137,6 +154,7 @@ typedef NS_ENUM(NSInteger, AVCaptureOutputDataDroppedReason) {
     AVCaptureOutputDataDroppedReasonOutOfBuffers  = 2,
     AVCaptureOutputDataDroppedReasonDiscontinuity = 3,
 } API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(14.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(watchos);
+
 
 NS_ASSUME_NONNULL_END
 

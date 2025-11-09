@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  *             an HMCameraProfile object. If the accessory does not contain a camera, this property
  *             will be nil.
  */
-@property (readonly, copy, nonatomic, nullable) NSArray<HMCameraProfile *> *cameraProfiles API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
+@property (nullable, nonatomic, readonly, copy) NSArray<HMCameraProfile *> *cameraProfiles API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
 @end
 

@@ -25,7 +25,7 @@ __BEGIN_DECLS
 
     The virtual machine must be in a stopped state prior to calling this function.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 OS_OBJECT_RETURNS_RETAINED OS_WARN_RESULT
 hv_gic_state_t hv_gic_state_create(void);
 
@@ -35,7 +35,7 @@ hv_gic_state_t hv_gic_state_create(void);
  @param gic_state_size Pointer to GIC data size (written on success).
  @result HV_SUCCESS on success, an error code otherwise.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_state_get_size(hv_gic_state_t state, size_t *gic_state_size);
 
 /*!
@@ -53,7 +53,7 @@ hv_return_t hv_gic_state_get_size(hv_gic_state_t state, size_t *gic_state_size);
     GIC CPU system registers can be read separately, and saved to restore the
     cpu state for the virtual machine.
  */
-OS_EXPORT API_AVAILABLE(macos(15.0)) API_UNAVAILABLE(ios, tvos)
+OS_EXPORT API_AVAILABLE(macos(15.0))
 hv_return_t hv_gic_state_get_data(hv_gic_state_t state, void *gic_state_data);
 
 __END_DECLS

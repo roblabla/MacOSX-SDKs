@@ -11,13 +11,13 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0), watchos(9.0))
 typedef NS_ENUM(NSInteger, MKDirectionsRoutePreference) {
     MKDirectionsRoutePreferenceAny = 0,
     MKDirectionsRoutePreferenceAvoid
 };
 
-NS_CLASS_AVAILABLE(10_9, 6_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.2), watchos(1.0))
 @interface MKDirectionsRequest : NSObject
 
 @property (nonatomic, strong, nullable) MKMapItem *source;
@@ -38,8 +38,8 @@ NS_CLASS_AVAILABLE(10_9, 6_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 @property (nonatomic, copy, nullable) NSDate *departureDate NS_AVAILABLE(10_9, 7_0);
 @property (nonatomic, copy, nullable) NSDate *arrivalDate NS_AVAILABLE(10_9, 7_0);
 
-@property (nonatomic) MKDirectionsRoutePreference tollPreference API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // Default is MKDirectionsRoutePreferenceAny
-@property (nonatomic) MKDirectionsRoutePreference highwayPreference API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0)) API_UNAVAILABLE(watchos); // Default is MKDirectionsRoutePreferenceAny
+@property (nonatomic) MKDirectionsRoutePreference tollPreference API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0), watchos(9.0)); // Default is MKDirectionsRoutePreferenceAny
+@property (nonatomic) MKDirectionsRoutePreference highwayPreference API_AVAILABLE(ios(16.0), tvos(16.0), macos(13.0), watchos(9.0)); // Default is MKDirectionsRoutePreferenceAny
 
 @end
 

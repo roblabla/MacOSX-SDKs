@@ -11,6 +11,6 @@ exports:
                        _kObliterationDelayAfterReplyKey, _kObliterationExclusionPathsKey, 
                        _kObliterationIgnoreMissingPathKey, _kObliterationManagedDeviceWipeKey, 
                        _kObliterationMessageKey, _kObliterationTypeBrickOnly, _kObliterationTypeKey, 
-                       _kObliterationTypeMarkStart, _kObliterationTypeWipeAndBrick, 
-                       _kSkipDataObliteration ]
+                       _kObliterationTypeMarkStart, _kObliterationTypeRRTS, _kObliterationTypeWipeAndBrick, 
+                       _kRRTSBootStrapTokenKey, _kRRTSRevertToSnapshotNameKey, _kSkipDataObliteration ]
 ...

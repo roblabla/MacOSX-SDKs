@@ -21,6 +21,7 @@
 .Op Fl saveSignature Ar path
 .Op Fl symbolsPackageDir Ar path
 .Op Fl lookup Ar (0x1234 | symbol) ...
+.Op Fl dedup
 file...
 pid...
 process-name...
@@ -92,6 +93,10 @@ Print the entire source path for each source info
 Print the path of the dSYM file (if found) used when creating symbol information
 .It Fl lookup Ar (0x1234 | symbol)
 Find one or more addresses or symbols in the targets. Symbols may contain simple shell globbing style patterns.
+.It Fl dedup
+Print all variants for
+.Nm <deduplicated_symbol>.
+Deduplicated symbols are the result of linker optimization that unites functions with identical instructions into one symbol, i.e. deduplicates them. The original function variants are deduced from the Nlist.
 .El
 .Sh OUTPUT
 Output from
@@ -204,6 +209,8 @@ This symbol was found in Dwarf data
 This symbol was found in DebugMap data
 .It FunctionStarts
 This symbol was found in function starts data
+.It DEDUP
+This symbol the outcome of code deduplication linker optimization
 .El
 .Sh SOURCES OF SYMBOL INFORMATION
 .Nm

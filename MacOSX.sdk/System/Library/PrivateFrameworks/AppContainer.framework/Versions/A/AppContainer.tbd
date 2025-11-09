@@ -10,18 +10,18 @@ exports:
                        _ASBContainerErrorsIsPermissionsError, _ASBContainerErrorsRecordPermissionsError, 
                        _ASBContainerErrorsUpdateError, _containerSetError, _kASBContainerErrorDomain, 
                        _kASBContainerErrorsHasPermissionsDataKey, _kASBContainerIdentityKey, 
-                       _kASBContainerManagerErrorDomain, _kASBContainerSandboxProfileDataKey, 
-                       _kASBContainerSandboxProfileDataValidationInfoKey, _recordPermissionsError, 
-                       _restorePermissions ]
-    objc-classes:    [ ASBContainer, ASBContainerACL, ASBContainerAction, ASBContainerActionMove, 
+                       _kASBContainerManagerErrorDomain, _kASBContainerOwnersKey, 
+                       _kASBContainerSandboxProfileDataKey, _kASBContainerSandboxProfileDataValidationInfoKey, 
+                       _recordPermissionsError, _restorePermissions ]
+    objc-classes:    [ ASBContainer, ASBContainerAction, ASBContainerActionMove, 
                        ASBContainerActionMoveContents, ASBContainerActionSymlink, 
                        ASBContainerActionUnlink, ASBContainerFileManager, ASBContainerUpgradeScript, 
-                       ASBMutableContainer, ASBMutableContainerSynchronization ]
-    objc-ivars:      [ ASBContainer._acl, ASBContainer._containerPath, ASBContainer._dataPath, 
-                       ASBContainer._homeDirPath, ASBContainer._metadata, ASBContainer._personaVolume, 
-                       ASBContainerACL._requirements, ASBContainerActionMove._destSpec, 
+                       ASBLegacyContainerACL, ASBMutableContainer, ASBMutableContainerSynchronization ]
+    objc-ivars:      [ ASBContainer._containerPath, ASBContainer._dataPath, ASBContainer._homeDirPath, 
+                       ASBContainer._legacyACL, ASBContainer._metadata, ASBContainer._owners, 
+                       ASBContainer._personaVolume, ASBContainerActionMove._destSpec, 
                        ASBContainerActionMove._sourceSpec, ASBContainerActionMoveContents._destSpec, 
                        ASBContainerActionMoveContents._sourceSpec, ASBContainerActionSymlink._destSpec, 
                        ASBContainerActionSymlink._linkSpec, ASBContainerActionUnlink._pathSpec, 
-                       ASBContainerUpgradeScript._actions ]
+                       ASBContainerUpgradeScript._actions, ASBLegacyContainerACL._requirements ]
 ...

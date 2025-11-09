@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1204.4.5 -module-name FamilyControls
-// swift-module-flags-ignorable:  -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 1216 -module-name FamilyControls
+// swift-module-flags-ignorable:  -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Combine
 import CoreServices
 import DeveloperToolsSupport
@@ -16,7 +16,9 @@ import _SwiftConcurrencyShims
 import os.log
 import os
 @available(iOS 15.0, macOS 13.0, *)
+@available(macCatalyst, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 public enum FamilyControlsError : Foundation.LocalizedError {
   case restricted
@@ -27,16 +29,23 @@ public enum FamilyControlsError : Foundation.LocalizedError {
   case authorizationCanceled
   case networkError
   @available(iOS 16.0, *)
+  @available(macCatalyst, unavailable)
   case authenticationMethodUnavailable
+  #if compiler(>=5.3) && $NonescapableTypes
   public var errorDescription: Swift.String? {
     get
   }
+  #endif
 }
 @available(iOS 16.4, macOS 13.3, *)
+@available(macCatalyst, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyControlsError : Swift.RawRepresentable, Foundation.CustomNSError {
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   public var rawValue: Swift.Int {
     get
   }
@@ -46,11 +55,15 @@ extension FamilyControls.FamilyControlsError : Swift.RawRepresentable, Foundatio
   @available(iOS 16.4, macOS 13.3, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
+  @available(macCatalyst, unavailable)
   public typealias RawValue = Swift.Int
 }
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 public enum AuthorizationStatus : Swift.Int, Swift.Codable, Swift.CustomStringConvertible {
   case notDetermined
@@ -59,19 +72,25 @@ public enum AuthorizationStatus : Swift.Int, Swift.Codable, Swift.CustomStringCo
   public var description: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   @available(macOS, unavailable)
+  @available(macCatalyst, unavailable)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
 }
 @available(iOS 15.2, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, Icon == FamilyControls.FamilyActivityIconView {
   public init(_ applicationToken: ManagedSettings.ApplicationToken)
@@ -79,8 +98,10 @@ extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, I
   public init(_ webDomainToken: ManagedSettings.WebDomainToken)
 }
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct FamilyActivityTitleView : SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
@@ -89,12 +110,16 @@ extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, I
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   @available(macOS, unavailable)
+  @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A17ActivityTitleViewV4bodyQrvp", 0) __
 }
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct FamilyActivityIconView : SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
@@ -103,15 +128,20 @@ extension SwiftUI.Label where Title == FamilyControls.FamilyActivityTitleView, I
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   @available(macOS, unavailable)
+  @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A16ActivityIconViewV4bodyQrvp", 0) __
 }
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 public struct FamilyActivitySelection : Swift.Codable, Swift.Equatable {
   @available(iOS 15.2, *)
+  @available(macCatalyst, unavailable)
   public let includeEntireCategory: Swift.Bool
   public var applicationTokens: Swift.Set<ManagedSettings.ApplicationToken>
   public var categoryTokens: Swift.Set<ManagedSettings.ActivityCategoryToken>
@@ -132,36 +162,50 @@ public struct FamilyActivitySelection : Swift.Codable, Swift.Equatable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct FamilyActivityPicker : SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public init(selection: SwiftUICore.Binding<FamilyControls.FamilyActivitySelection>)
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
+  @available(macCatalyst, unavailable)
   @_Concurrency.MainActor @preconcurrency public init(headerText: Swift.String? = nil, footerText: Swift.String? = nil, selection: SwiftUICore.Binding<FamilyControls.FamilyActivitySelection>)
+  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   @available(macOS, unavailable)
+  @available(macCatalyst, unavailable)
   public typealias Body = @_opaqueReturnTypeOf("$s14FamilyControls0A14ActivityPickerV4bodyQrvp", 0) __
 }
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public func familyActivityPicker(isPresented: SwiftUICore.Binding<Swift.Bool>, selection: SwiftUICore.Binding<FamilyControls.FamilyActivitySelection>) -> some SwiftUICore.View
   
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS 16.0, *)
+  @available(macCatalyst, unavailable)
   @_Concurrency.MainActor @preconcurrency public func familyActivityPicker(headerText: Swift.String? = nil, footerText: Swift.String? = nil, isPresented: SwiftUICore.Binding<Swift.Bool>, selection: SwiftUICore.Binding<FamilyControls.FamilyActivitySelection>) -> some SwiftUICore.View
   
+  #endif
 }
 @available(iOS 16.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 @objc public enum FamilyControlsMember : Swift.Int, Swift.Codable, Swift.CustomStringConvertible {
   case child
@@ -169,19 +213,25 @@ extension SwiftUICore.View {
   public var description: Swift.String {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   public init?(rawValue: Swift.Int)
+  #endif
   @available(iOS 16.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   @available(macOS, unavailable)
+  @available(macCatalyst, unavailable)
   public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
 }
 @_hasMissingDesignatedInitializers @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 public class AuthorizationCenter : Combine.ObservableObject {
   public static let shared: FamilyControls.AuthorizationCenter
@@ -191,71 +241,100 @@ public class AuthorizationCenter : Combine.ObservableObject {
   public var $authorizationStatus: Combine.Published<FamilyControls.AuthorizationStatus>.Publisher {
     get
   }
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(iOS, deprecated: 16.0, message: "Use requestAuthorization(for:) instead")
   @available(watchOS, unavailable)
   public func requestAuthorization(completionHandler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
+  #endif
   @available(iOS 16.0, *)
+  @available(macCatalyst, unavailable)
   @available(watchOS, unavailable)
   public func requestAuthorization(for member: FamilyControls.FamilyControlsMember) async throws
+  #if compiler(>=5.3) && $NonescapableTypes
   @available(watchOS, unavailable)
   public func revokeAuthorization(completionHandler: @escaping (Swift.Result<Swift.Void, any Swift.Error>) -> Swift.Void)
+  #endif
   @available(iOS 15.0, *)
   @available(tvOS, unavailable)
   @available(watchOS, unavailable)
+  @available(visionOS, unavailable)
   @available(macOS, unavailable)
+  @available(macCatalyst, unavailable)
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
 }
 @available(iOS 15.0, macOS 13.0, *)
+@available(macCatalyst, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyControlsError : Swift.Equatable {}
 @available(iOS 15.0, macOS 13.0, *)
+@available(macCatalyst, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyControlsError : Swift.Hashable {}
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.AuthorizationStatus : Swift.Equatable {}
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.AuthorizationStatus : Swift.Hashable {}
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.AuthorizationStatus : Swift.RawRepresentable {}
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyActivityTitleView : Swift.Sendable {}
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyActivityIconView : Swift.Sendable {}
 @available(iOS 15.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyActivityPicker : Swift.Sendable {}
 @available(iOS 16.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyControlsMember : Swift.Equatable {}
 @available(iOS 16.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyControlsMember : Swift.Hashable {}
 @available(iOS 16.0, *)
+@available(macCatalyst, unavailable)
 @available(macOS, unavailable)
 @available(tvOS, unavailable)
+@available(visionOS, unavailable)
 @available(watchOS, unavailable)
 extension FamilyControls.FamilyControlsMember : Swift.RawRepresentable {}

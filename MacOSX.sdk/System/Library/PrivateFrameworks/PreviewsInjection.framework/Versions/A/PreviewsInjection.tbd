@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsInjection.framework/Versions/A/PreviewsInjection'
-current-version: 22.40.1
+current-version: 23.0.52
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -11,12 +11,16 @@ exports:
                        '_$s12StaticOutput17PreviewsInjection10EntryPointPTl', '_$s12UpdateInputs17PreviewsInjection15SceneEntryPointPTl', 
                        '_$s13UpdatePayload17PreviewsInjection10EntryPointPTl', '_$s14ViewController17PreviewsInjection15HostingParadigmPTl', 
                        '_$s15HostingViewable17PreviewsInjection0A8ParadigmPTl', '_$s16PreviewsServices13RegistryEntryP0A9InjectionE15typeDescriptionSSvgZ', 
+                       '_$s16PreviewsServices13RegistryEntryP0A9InjectionE15typeDescriptionSSvpZMV', 
                        '_$s17PreviewsInjection010__previewsB17JITLinkEntrypoint4argc4argv0C9DylibPath0cH14EntryPointNameys5Int32V_SpySpys4Int8VGSgGSgA2LtF', 
                        '_$s17PreviewsInjection010__previewsB17RunUserEntryPoints5Int32VyF', 
                        '_$s17PreviewsInjection010__previewsB19PerformFirstJITLink4argc4argvs5Int32VAF_SpySpys4Int8VGSgGSgtF', 
                        '_$s17PreviewsInjection010__previewsB34RegisterSwiftExtensionEntrySeciont4argc4argvs5Int32VAF_SpySpys4Int8VGSgGSgtF', 
                        '_$s17PreviewsInjection010__previewsB40GetDebugPseudodylibSwiftEntrySectionDataSVyF', 
-                       '_$s17PreviewsInjection10EntryPointMp', '_$s17PreviewsInjection10EntryPointP14handleEndpoint_7contextySo013NSXPCListenerF0C_0A12FoundationOS12PropertyListVtFTj', 
+                       '_$s17PreviewsInjection10EntryPointMp', '_$s17PreviewsInjection10EntryPointP12cancelUpdateyyYaFTj', 
+                       '_$s17PreviewsInjection10EntryPointP12cancelUpdateyyYaFTjTu', 
+                       '_$s17PreviewsInjection10EntryPointP12cancelUpdateyyYaFTq', 
+                       '_$s17PreviewsInjection10EntryPointP14handleEndpoint_7contextySo013NSXPCListenerF0C_0A12FoundationOS12PropertyListVtFTj', 
                        '_$s17PreviewsInjection10EntryPointP14handleEndpoint_7contextySo013NSXPCListenerF0C_0A12FoundationOS12PropertyListVtFTq', 
                        '_$s17PreviewsInjection10EntryPointP23handleHostMessageStream_8instanceSb0A11MessagingOS0gH0V_AF0gH18InstanceIdentifierVtFTj', 
                        '_$s17PreviewsInjection10EntryPointP23handleHostMessageStream_8instanceSb0A11MessagingOS0gH0V_AF0gH18InstanceIdentifierVtFTq', 
@@ -39,6 +43,8 @@ exports:
                        '_$s17PreviewsInjection10EntryPointPAA0A12FoundationOS25PropertyListRepresentable13UpdatePayloadRpzrlE6decode06updateK0AgD0gH0V_tKFZ', 
                        '_$s17PreviewsInjection10EntryPointPAAE11descriptionSSvg', 
                        '_$s17PreviewsInjection10EntryPointPAAE11descriptionSSvpMV', 
+                       '_$s17PreviewsInjection10EntryPointPAAE12cancelUpdateyyYaF', 
+                       '_$s17PreviewsInjection10EntryPointPAAE12cancelUpdateyyYaFTu', 
                        '_$s17PreviewsInjection10EntryPointPAAE14handleEndpoint_7contextySo013NSXPCListenerF0C_0A12FoundationOS12PropertyListVtF', 
                        '_$s17PreviewsInjection10EntryPointPAAE23handleHostMessageStream_8instanceSb0A11MessagingOS0gH0V_AF0gH18InstanceIdentifierVtF', 
                        '_$s17PreviewsInjection10EntryPointPAAE24handleShellMessageStreamyy0A11MessagingOS0gH0VF', 
@@ -272,7 +278,8 @@ exports:
                        '_$s17PreviewsInjection23PlaygroundRegistryEntryVN', '_$s17PreviewsInjection24SelectableRegionProviderMp', 
                        '_$s17PreviewsInjection24SelectableRegionProviderP22_forEachIdentifiedView4bodyyy7SwiftUI01_hI5ProxyVXE_tFTj', 
                        '_$s17PreviewsInjection24SelectableRegionProviderP22_forEachIdentifiedView4bodyyy7SwiftUI01_hI5ProxyVXE_tFTq', 
-                       '_$s17PreviewsInjection24SelectableRegionProviderTL', '_$s17PreviewsInjection52___abort_timed_out_waiting_for_previews_jit_executoryyF', 
+                       '_$s17PreviewsInjection24SelectableRegionProviderTL', '_$s17PreviewsInjection52___abort_timed_out_waiting_for_previews_jit_executors5NeverOyF', 
+                       '_$s17PreviewsInjection61___abort_timed_out_waiting_for_previews_jit_first_link_signals5NeverOyF', 
                        '_$s19PreviewsMessagingOS20PreviewSpecificationV0A9InjectionE06locateD0AD07LocatedD0OyKF', 
                        '_$s21DeveloperToolsSupport11_PlaygroundV16PreviewsServices18RegistryExecutable0E9InjectionMc', 
                        '_$s21DeveloperToolsSupport11_PlaygroundV17PreviewsInjectionE3runScSy0E11MessagingOS0D5EventOGyF', 
@@ -293,6 +300,7 @@ exports:
                        '_$s7SwiftUI19NSHostingControllerCyxG17PreviewsInjection16_HostingViewableAEWP', 
                        _PreviewsInjectionVersionNumber, _PreviewsInjectionVersionString, 
                        _UVMakeAppActive, ___SERVICEHUB_ATTACH_POINT__, ____abort_timed_out_waiting_for_previews_jit_executor, 
+                       ____abort_timed_out_waiting_for_previews_jit_first_link_signal, 
                        ___previews_injection_get_debug_dodylib_swift_entry_section_data, 
                        ___previews_injection_jit_link_entrypoint, ___previews_injection_perform_first_jit_link, 
                        ___previews_injection_register_swift_extension_entry_section, 

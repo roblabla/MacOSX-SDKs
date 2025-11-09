@@ -57,6 +57,7 @@ RK_API metal::float4x4 projection_to_view(thread geometry_data_t &data);
 // Geometry
 
 RK_API uint vertex_id(thread geometry_data_t &data);
+RK_API uint instance_id(thread geometry_data_t &data) RK_AVAILABILITY_IOS_19 RK_AVAILABILITY_MACOS_16;
 RK_API float3 position(thread geometry_data_t &data);
 
 RK_API float3 model_position_offset(thread geometry_data_t &data);
@@ -288,6 +289,14 @@ struct geometry
     RK_INLINE uint vertex_id() const thread
     {
         return geometry_modifier::api::vertex_id(data);
+    }
+    
+    /// Returns per-instance identifier, as specified by Metal.
+    ///
+    /// See `instance_id` in Metal Shading Language Section 5.2.3.1
+    RK_INLINE uint instance_id() const thread RK_AVAILABILITY_IOS_19 RK_AVAILABILITY_MACOS_16
+    {
+        return geometry_modifier::api::instance_id(data);
     }
 
     /// Position of this vertex in model-space. This will be the value originally

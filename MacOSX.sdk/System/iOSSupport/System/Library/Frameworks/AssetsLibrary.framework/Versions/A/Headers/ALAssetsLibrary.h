@@ -15,8 +15,9 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-#define AL_DEPRECATED(x,msg) API_DEPRECATED(msg, ios(x,9)) API_UNAVAILABLE(macos)
-#warning AssetsLibrary will be removed from the iOS SDK in the next major release
+
+#define AL_DEPRECATED(x,msg) API_OBSOLETED(msg, ios(x,9,19.0)) API_UNAVAILABLE(macos)
+
 
 @class ALAsset;
 @class ALAssetsGroup;

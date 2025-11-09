@@ -105,7 +105,9 @@ typedef NS_ENUM(NSInteger, AUAudioUnitBusType) {
 		An AUAudioUnitStatus result code. If an error is returned, the input data should be assumed 
 		to be invalid.
 */
-typedef AUAudioUnitStatus (^AURenderPullInputBlock)(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger inputBusNumber, AudioBufferList *inputData);
+typedef AUAudioUnitStatus (^AURenderPullInputBlock)(AudioUnitRenderActionFlags *actionFlags,
+	const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger inputBusNumber,
+	AudioBufferList *inputData) CA_REALTIME_API;
 
 /*!	@typedef	AURenderBlock
 	@brief		Block to render the audio unit.
@@ -138,7 +140,9 @@ typedef AUAudioUnitStatus (^AURenderPullInputBlock)(AudioUnitRenderActionFlags *
 		An `AUAudioUnitStatus` result code. If an error is returned, the output data should be assumed
 		to be invalid.
 */
-typedef AUAudioUnitStatus (^AURenderBlock)(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger outputBusNumber, AudioBufferList *outputData, AURenderPullInputBlock __nullable pullInputBlock);
+typedef AUAudioUnitStatus (^AURenderBlock)(AudioUnitRenderActionFlags *actionFlags,
+	const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger outputBusNumber,
+	AudioBufferList *outputData, AURenderPullInputBlock __nullable pullInputBlock) CA_REALTIME_API;
 
 /*!	@typedef	AURenderObserver
 	@brief		Block called when an audio unit renders.
@@ -149,7 +153,9 @@ typedef AUAudioUnitStatus (^AURenderBlock)(AudioUnitRenderActionFlags *actionFla
 		
 		The parameters are identical to those of AURenderBlock.
 */
-typedef void (^AURenderObserver)(AudioUnitRenderActionFlags actionFlags, const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger outputBusNumber);
+typedef void (^AURenderObserver)(AudioUnitRenderActionFlags actionFlags,
+	const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger outputBusNumber)
+	CA_REALTIME_API;
 
 /*!	@typedef	AUScheduleParameterBlock
 	@brief		Block to schedule parameter changes.
@@ -172,7 +178,9 @@ typedef void (^AURenderObserver)(AudioUnitRenderActionFlags actionFlags, const A
 		The parameter's new value if the ramp duration is 0; otherwise, the value at the end
 		of the scheduled ramp.
 */
-typedef void (^AUScheduleParameterBlock)(AUEventSampleTime eventSampleTime, AUAudioFrameCount rampDurationSampleFrames, AUParameterAddress parameterAddress, AUValue value);
+typedef void (^AUScheduleParameterBlock)(AUEventSampleTime eventSampleTime,
+	AUAudioFrameCount rampDurationSampleFrames, AUParameterAddress parameterAddress, AUValue value)
+	CA_REALTIME_API;
 
 /*!	@typedef	AUScheduleMIDIEventBlock
 	@brief		Block to schedule MIDI events.
@@ -189,7 +197,8 @@ typedef void (^AUScheduleParameterBlock)(AUEventSampleTime eventSampleTime, AUAu
 		One or more valid MIDI 1.0 events, except sysex which must always be sent as the only event
 		in the chunk. Also, running status is not allowed.
 */
-typedef void (^AUScheduleMIDIEventBlock)(AUEventSampleTime eventSampleTime, uint8_t cable, NSInteger length, const uint8_t *midiBytes);
+typedef void (^AUScheduleMIDIEventBlock)(AUEventSampleTime eventSampleTime, uint8_t cable,
+	NSInteger length, const uint8_t *midiBytes) CA_REALTIME_API;
 
 /*!	@typedef	AUMIDIOutputEventBlock
 	@brief		Block to provide MIDI output events to the host.
@@ -203,7 +212,8 @@ typedef void (^AUScheduleMIDIEventBlock)(AUEventSampleTime eventSampleTime, uint
 		One or more valid MIDI 1.0 events, except sysex which must always be sent as the only event
 		in the chunk.
 */
-typedef OSStatus (^AUMIDIOutputEventBlock)(AUEventSampleTime eventSampleTime, uint8_t cable, NSInteger length, const uint8_t *midiBytes);
+typedef OSStatus (^AUMIDIOutputEventBlock)(AUEventSampleTime eventSampleTime, uint8_t cable,
+	NSInteger length, const uint8_t *midiBytes) CA_REALTIME_API;
 
 /*!	@typedef	AUHostMusicalContextBlock
 	@brief		Block by which hosts provide musical tempo, time signature, and beat position.
@@ -230,7 +240,10 @@ typedef OSStatus (^AUMIDIOutputEventBlock)(AUEventSampleTime eventSampleTime, ui
 		Any of the provided parameters may be null to indicate that the audio unit is not interested
 		in that particular piece of information.
 */
-typedef BOOL (^AUHostMusicalContextBlock)(double * __nullable currentTempo, double * __nullable timeSignatureNumerator, NSInteger * __nullable timeSignatureDenominator, double * __nullable currentBeatPosition, NSInteger * __nullable sampleOffsetToNextBeat, double * __nullable currentMeasureDownbeatPosition);
+typedef BOOL (^AUHostMusicalContextBlock)(double * __nullable currentTempo,
+	double * __nullable timeSignatureNumerator, NSInteger * __nullable timeSignatureDenominator,
+	double * __nullable currentBeatPosition, NSInteger * __nullable sampleOffsetToNextBeat,
+	double * __nullable currentMeasureDownbeatPosition) CA_REALTIME_API;
 
 /*!	@typedef	AUMIDICIProfileChangedBlock
 	@brief		Block by which hosts are informed of an audio unit having enabled or disabled a
@@ -286,7 +299,9 @@ typedef NS_OPTIONS(NSUInteger, AUHostTransportStateFlags) {
 		Any of the provided parameters may be null to indicate that the audio unit is not interested
 		in that particular piece of information.
 */
-typedef BOOL (^AUHostTransportStateBlock)(AUHostTransportStateFlags * __nullable transportStateFlags, double * __nullable currentSamplePosition, double * __nullable cycleStartBeatPosition, double * __nullable cycleEndBeatPosition);
+typedef BOOL (^AUHostTransportStateBlock)(AUHostTransportStateFlags * __nullable transportStateFlags,
+	double * __nullable currentSamplePosition, double * __nullable cycleStartBeatPosition,
+	double * __nullable cycleEndBeatPosition) CA_REALTIME_API;
 
 // =================================================================================================
 
@@ -1207,7 +1222,9 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0))
 				The AUAudioUnit is not provided since it is not safe to message an Objective C 
 				object in a real time context.
 */
-typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags, const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger inputBusNumber);
+typedef void (^AUInputHandler)(AudioUnitRenderActionFlags *actionFlags,
+	const AudioTimeStamp *timestamp, AUAudioFrameCount frameCount, NSInteger inputBusNumber)
+	CA_REALTIME_API;
 
 /*!	@brief		Additional methods for audio units which can do input/output.
 	@discussion	These methods will fail if the audio unit is not an input/output audio unit.
@@ -1580,6 +1597,20 @@ API_AVAILABLE(macos(13.0), ios(16.0)) __WATCHOS_PROHIBITED __TVOS_PROHIBITED
 
 @end
 
+@class CASpatialAudioExperience;
+
+API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(ios, watchos, tvos, macos)
+@interface AUAudioUnit (IntendedSpatialExperience)
+
+/// The AUAudioUnit's intended spatial experience.
+///
+/// Only useful for output AUAudioUnits - setting on a non-output AU is a
+/// no-op. The default value of CAAutomaticSpatialAudio means the output AUAudioUnit
+/// uses its AVAudioSession's spatial experience. See CASpatialAudioExperience for
+/// more details.
+@property (nonnull, copy) CASpatialAudioExperience *intendedSpatialExperience NS_REFINED_FOR_SWIFT;
+
+@end
 
 NS_ASSUME_NONNULL_END
 

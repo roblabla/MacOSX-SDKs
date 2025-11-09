@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class NSData, NSURL, NSError;
 @class AVAudioSessionChannelDescription;
+@class CASpatialAudioExperience;
 @protocol AVAudioPlayerDelegate;
 
 API_AVAILABLE(macos(10.7), ios(2.2), watchos(3.0), tvos(9.0))
@@ -114,6 +115,10 @@ Any negative number will loop indefinitely until stopped.
 /* This property is nil valued until set. */
 /* The array must have the same number of channels as returned by the numberOfChannels property. */
 @property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(ios(7.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos) ; /* Array of AVAudioSessionChannelDescription objects */
+
+/* The AVAudioPlayer's intended CASpatialAudioExperience. */
+/* If unspecified, the property value defaults to CAAutomaticSpatialAudio. */
+@property (nonnull, copy) CASpatialAudioExperience *intendedSpatialExperience API_AVAILABLE(visionos(26.0)) API_UNAVAILABLE(ios, watchos, tvos, macos) NS_REFINED_FOR_SWIFT;
 
 @end
 

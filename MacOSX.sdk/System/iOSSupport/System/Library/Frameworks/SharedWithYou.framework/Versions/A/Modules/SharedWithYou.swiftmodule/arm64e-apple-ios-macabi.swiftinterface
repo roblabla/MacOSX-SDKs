@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 6.1.2 effective-5.10 (swiftlang-6.1.2.1.2 clang-1700.0.13.5)
-// swift-module-flags: -target arm64e-apple-ios18.5-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 175.500.141 -module-name SharedWithYou
-// swift-module-flags-ignorable: -no-verify-emitted-module-interface -interface-compiler-version 6.1.2
+// swift-compiler-version: Apple Swift version 6.2 effective-5.10 (swiftlang-6.2.0.17.14 clang-1700.3.17.1)
+// swift-module-flags: -target arm64e-apple-ios26.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -enable-experimental-feature DebugDescriptionMacro -enable-bare-slash-regex -user-module-version 192.100.1 -module-name SharedWithYou
+// swift-module-flags-ignorable: -no-verify-emitted-module-interface -formal-cxx-interoperability-mode=off -interface-compiler-version 6.2
 import Combine
 import CoreTransferable
 import Foundation
@@ -39,7 +39,9 @@ extension SharedWithYou.SWCollaborationView {
 @available(tvOS, unavailable)
 @_Concurrency.MainActor @preconcurrency public struct _CollaborationDetailView<ListContent> : SwiftUICore.View where ListContent : SwiftUICore.View {
   @_Concurrency.MainActor @preconcurrency public init(itemProvider: Foundation.NSItemProvider, @SwiftUICore.ViewBuilder listContent: () -> ListContent)
+  #if compiler(>=5.3) && $NonescapableTypes
   @_Concurrency.MainActor @preconcurrency public init(itemProvider: Foundation.NSItemProvider, contentTitle: Swift.String, collaborators: [SharedWithYouCore.SWPerson]?, @SwiftUICore.ViewBuilder listContent: () -> ListContent)
+  #endif
   @_Concurrency.MainActor @preconcurrency public var body: some SwiftUICore.View {
     get
   }

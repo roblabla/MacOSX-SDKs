@@ -16,13 +16,21 @@
 #import <Foundation/Foundation.h>
 #import <Foundation/NSGeometry.h>
 
+// Visual styles for the toolbar item.
+typedef NS_ENUM(NSInteger, NSToolbarItemStyle) {
+    // A plain style maintains the item’s standard appearance.
+    NSToolbarItemStylePlain,
+    // A prominent style enhances the item’s relevance and visibility, akin to a “Done” button
+    NSToolbarItemStyleProminent,
+} NS_SWIFT_NAME(NSToolbarItem.Style) API_AVAILABLE(macos(26.0), ios(26.0));
+
 #if TARGET_OS_IPHONE
-@class UIImage;
+@class UIImage, UIColor;
 #endif
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-@class NSMenuItem, NSView, NSImage, CKShare;
+@class NSMenuItem, NSView, NSImage, CKShare, NSItemBadge;
 
 typedef NSInteger NSToolbarItemVisibilityPriority NS_TYPED_EXTENSIBLE_ENUM API_AVAILABLE(ios(13.0));
 static const NSToolbarItemVisibilityPriority NSToolbarItemVisibilityPriorityStandard API_AVAILABLE(ios(13.0)) = 0;
@@ -128,6 +136,22 @@ API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (getter=isBordered) BOOL bordered API_AVAILABLE(macos(10.15), ios(13.0));
 
 /**
+ A color applied to tint the background of the toolbar item only if the item's style is prominent.
+ */
+#if !TARGET_OS_IPHONE
+@property (nullable, copy) NSColor* backgroundTintColor API_AVAILABLE(macos(26.0));
+#else
+@property (nullable, copy) UIColor* backgroundTintColor API_AVAILABLE(ios(26.0));
+#endif
+
+/**
+ Defines the toolbar item’s appearance. The default style is plain.
+ Prominent style tints the background. If a background tint color is set, it uses it; otherwise, it uses the app’s or system’s accent color. If grouped with other items,
+ it moves to its own to avoid tinting other items' background.
+ */
+@property NSToolbarItemStyle style API_AVAILABLE(macos(26.0), ios(26.0));
+
+/**
  Whether or not the item behaves as a navigation item (i.e. back/forward) in the toolbar.
  Navigation items may be specially positioned by the system outside the normal list of items of the toolbar in the order specified by `-toolbarDefaultItemIdentifiers:`.
  Defaults to NO.
@@ -170,6 +194,8 @@ API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
  */
 @property NSToolbarItemVisibilityPriority visibilityPriority;
 
+/// A badge that can be attached to an NSToolbarItem. This provides a way to display small visual indicators that can be used to highlight important information, such as unread notifications or status indicators.
+@property (nullable, copy) NSItemBadge* badge API_AVAILABLE(macos(26.0)) NS_REFINED_FOR_SWIFT;
 
 # pragma mark - Validation of the items
 

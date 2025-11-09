@@ -194,11 +194,13 @@ exports:
                        NIAcwgM3Msg, NIAcwgM4Msg, NIAcwgRangingSessionResumeResponseMsg, 
                        NIAcwgSFZoneUpdate, NIAlgorithmConvergence, NIAlgorithmConvergenceState, 
                        NIBluetoothHostTimeSyncResponse, NIBluetoothSample, NICarKeyConfiguration, 
-                       NICarKeyEventNotifier, NIConfiguration, NIDevicePresenceConfiguration, 
+                       NICarKeyEventNotifier, NIConfiguration, NIDLTDOAConfiguration, 
+                       NIDLTDOACoordinatesUpdate, NIDLTDOAMeasurement, NIDevicePresenceConfiguration, 
                        NIDevicePresenceNotifier, NIDiscoveryToken, NIFindingConfiguration, 
-                       NIFindingNotifier, NIHeading, NIHomeDeviceConfiguration, NIItemLocalizerConfiguration, 
-                       NILocation, NINearbyAccessoryConfiguration, NINearbyObject, 
-                       NINearbyPeerConfiguration, NIRangingAuthConfiguration, NIRegionPredicate, 
-                       NISession, NISpatialBrowsingConfiguration, NISystemConfiguration, 
-                       NISystemEventNotifier, NISystemState, NIVisionInput, _NIWiFiRangingTestConfiguration ]
+                       NIFindingNotifier, NIHeading, NIHomeDeviceConfiguration, NIHomePassiveSensingConfiguration, 
+                       NIItemLocalizerConfiguration, NILocation, NINearbyAccessoryConfiguration, 
+                       NINearbyObject, NINearbyPeerConfiguration, NIRangingAuthConfiguration, 
+                       NIRegionPredicate, NISession, NISpatialBrowsingConfiguration, 
+                       NISystemConfiguration, NISystemEventNotifier, NISystemState, 
+                       NIVisionInput, _NIWiFiRangingTestConfiguration ]
 ...

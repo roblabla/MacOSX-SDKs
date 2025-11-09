@@ -1,12 +1,12 @@
 #if (defined(USE_APPKIT_PUBLIC_HEADERS) && USE_APPKIT_PUBLIC_HEADERS) || !__has_include(<UIFoundation/NSAttributedString.h>)
-#include <TargetConditionals.h>
+#import <TargetConditionals.h>
 
 #if !TARGET_OS_IPHONE
 #import <AppKit/AppKitDefines.h>
 
 /*
         NSAttributedString.h
-        Copyright (c) 1994-2024, Apple Inc.
+        Copyright (c) 1994-2025, Apple Inc.
         All rights reserved.
  
         This file defines Application Kit extensions to NSAttributedString and NSMutableAttributedString.
@@ -54,7 +54,7 @@ APPKIT_EXTERN NSAttributedStringKey const NSTextHighlightColorSchemeAttributeNam
 APPKIT_EXTERN NSAttributedStringKey const NSAdaptiveImageGlyphAttributeName API_AVAILABLE(macos(15.0), ios(18.0), tvos(18.0), watchos(11.0), visionos(2.0)); // NSAdaptiveImageGlyph, default nil
 
 // NSNumber (Boolean) value. Default is false. The range of text with NSWritingToolsExclusionAttributeName=true is excluded from the WritingTools processing and preserved.
-APPKIT_EXTERN NSAttributedStringKey const NSWritingToolsExclusionAttributeName API_AVAILABLE(ios(18.2), macos(15.2)) API_UNAVAILABLE(visionos, tvos, watchos);
+APPKIT_EXTERN NSAttributedStringKey const NSWritingToolsExclusionAttributeName API_AVAILABLE(ios(18.2), macos(15.2), visionos(2.4)) API_UNAVAILABLE(tvos, watchos);
 
 /************************ Attribute values ************************/
 // This defines currently supported values for NSUnderlineStyleAttributeName and NSStrikethroughStyleAttributeName. These values are or'ed together to produce an underline style.

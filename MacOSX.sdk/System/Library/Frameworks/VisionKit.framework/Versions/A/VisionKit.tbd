@@ -243,9 +243,11 @@ exports:
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DocumentCamera.framework/Versions/A/DocumentCamera'
+swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _DCScanWasDeletedNotification, _DCTransformFromImageOrientation, 
+    symbols:         [ '_$s2os6LoggerV14DocumentCameraE11liquidGlassACvgZ', '_$s2os6LoggerV14DocumentCameraE11liquidGlassACvpZMV', 
+                       _DCScanWasDeletedNotification, _DCTransformFromImageOrientation, 
                        _dc_clockwiseRotationsFromUpToMatchOrientation, _dc_counterClockwiseRotationsFromUpToMatchOrientation, 
                        _dc_nonLocalizedOrientationNameForType, _dc_orientationByRotatingLeft, 
                        _dc_orientationByRotatingRight, _dc_orientationFromNonLocalizedName, 

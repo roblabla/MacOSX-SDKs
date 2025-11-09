@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2025 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -242,6 +242,5 @@ struct kev_vendor_code {
  *               exist.
  */
 #define SIOCGKEVVENDOR  _IOWR('e', 4, struct kev_vendor_code)
-
 
 #endif /* SYS_KERN_EVENT_H */

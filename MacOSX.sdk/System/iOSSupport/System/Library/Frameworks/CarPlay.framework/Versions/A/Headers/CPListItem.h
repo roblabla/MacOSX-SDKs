@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
 #import <CarPlay/CPListItemTypes.h>
+#import <CarPlay/CPTemplate.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -18,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  Each @c CPListItem is displayed as a single cell in the list.
  */
 API_AVAILABLE(ios(12.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)
+CARPLAY_TEMPLATE_UI_ACTOR
 @interface CPListItem : NSObject <CPSelectableListItem>
 
 API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(macos, watchos)

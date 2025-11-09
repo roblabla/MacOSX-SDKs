@@ -2,11 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 760.6.150
+current-version: 801.43.240
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUICore, 
-                       PhotosUICoreProtoApp, PhotosUIPrivate ]
+    clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosTests, PhotosUI, 
+                       PhotosUICore, PhotosUICoreProtoApp, PhotosUIPrivate ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSImageDynamicRangeFromUXImageDynamicRange, _NSStringFromUXCollectionViewLayoutDropPosition, 
@@ -14,18 +14,22 @@ exports:
                        _UXCollectionElementKindSectionHeader, _UXCollectionViewDraggingPasteboardItemType, 
                        _UXCollectionViewDraggingPasteboardOptionWasPressed, _UXCollectionViewElementKindCell, 
                        _UXCollectionViewElementKindDecorationView, _UXCollectionViewElementKindSectionFooter, 
-                       _UXCollectionViewElementKindSectionHeader, _UXEdgeInsetsZero, 
-                       _UXFlowLayoutCommonRowHorizontalAlignmentKey, _UXFlowLayoutLastRowHorizontalAlignmentKey, 
-                       _UXFlowLayoutRowVerticalAlignmentKey, _UXLocalizedString, 
-                       _UXNavigationControllerOperationToString, _UXNavigationDestinationIsEqualToDestination, 
-                       _UXNavigationItemSubtitleKey, _UXNavigationItemTitleKey, _UXSourceControllerForceSelectionKey, 
-                       _UXSourceControllerSenderIdentifierKey, _UXSourceControllerShouldForceSelectionForNavigationDestination, 
+                       _UXCollectionViewElementKindSectionHeader, _UXEdgeInsetsNull, 
+                       _UXEdgeInsetsZero, _UXFlowLayoutCommonRowHorizontalAlignmentKey, 
+                       _UXFlowLayoutLastRowHorizontalAlignmentKey, _UXFlowLayoutRowVerticalAlignmentKey, 
+                       _UXLocalizedString, _UXNavigationControllerOperationToString, 
+                       _UXNavigationDestinationIsEqualToDestination, _UXNavigationItemCenterToolbarItemGroupKey, 
+                       _UXNavigationItemHidesGlobalTrailingViewKey, _UXNavigationItemLeftBarButtonItemsKey, 
+                       _UXNavigationItemProgressButtonItemKey, _UXNavigationItemRightBarButtonItemsKey, 
+                       _UXNavigationItemSubtitleKey, _UXNavigationItemTitleKey, _UXNavigationItemUseWindowForTitleOutputKey, 
+                       _UXSourceControllerForceSelectionKey, _UXSourceControllerSenderIdentifierKey, 
+                       _UXSourceControllerShouldForceSelectionForNavigationDestination, 
                        _UXSourceControllerSkipDestinationRemovalKey, _UXTransitionContextFromViewControllerKey, 
                        _UXTransitionContextToViewControllerKey, _UXWindowToolbarCenteredItemIdentifier, 
-                       __UXApplyTintColorWithViewController, __UXCollectionElementIsClone, 
-                       __UXCollectionElementIsOriginal, __UXDebugFramesOfView, __UXDefaultTintColor, 
-                       __UXImageBackChevron, __UXImageCheckmark, __UXImageForwardChevron, 
-                       __UXImageLeftChevron, __UXImageRightChevron, __animationForViewFromValueToValueKeyPath, 
+                       __UXCollectionElementIsClone, __UXCollectionElementIsOriginal, 
+                       __UXDebugFramesOfView, __UXImageBackChevron, __UXImageCheckmark, 
+                       __UXImageForwardChevron, __UXImageLeftChevron, __UXImageRightChevron, 
+                       __UXSolariumEnabled, __animationForViewFromValueToValueKeyPath, 
                        __transitionControllerClassForTransition, __uxImageFromRect, 
                        _kDefaultHeaderHeight, _kDefaultRowHeight, _kDefaultTransitionDuration, 
                        _parametersOfSpringAnimation ]
@@ -52,16 +56,13 @@ exports:
                        _UXButton, _UXButtonCell, _UXCollectionDocumentView, _UXCollectionSnapshotView, 
                        _UXCollectionView, _UXCollectionViewItemKey, _UXCollectionViewLayoutProxy, 
                        _UXCollectionViewRearrangingCoordinator, _UXCollectionViewSectionItemIndexes, 
-                       _UXContainerView, _UXContentUnavailableView, _UXFlowLayoutInfo, 
-                       _UXFlowLayoutItem, _UXFlowLayoutRow, _UXFlowLayoutSection, 
-                       _UXLayoutSpacer, _UXNavigationDestination, _UXNavigationItemContainerView, 
+                       _UXContainerView, _UXContentUnavailableView, _UXDetailViewController, 
+                       _UXFlowLayoutInfo, _UXFlowLayoutItem, _UXFlowLayoutRow, _UXFlowLayoutSection, 
+                       _UXInspectorViewController, _UXLayoutSpacer, _UXNavigationItemContainerView, 
                        _UXNavigationRequest, _UXResizableImage, _UXSettings, _UXSettingsGroup, 
-                       _UXSinglePixelLine, _UXSourceSplitItemView, _UXSourceSplitView, 
-                       _UXSourceSplitViewFullScreenOverlayContentView, _UXSourceSplitViewFullScreenOverlayWindow, 
-                       _UXSourceSplitViewShadowView, _UXSourceSplitViewSpringLoadingView, 
-                       _UXTableHeaderView, _UXToolbarItemsContainer, _UXViewControllerOneToOneTransitionContext, 
-                       _UXViewControllerTransitionContext, _UXViewControllerTransitionCoordinator, 
-                       _UXWindow, _UXWindowState ]
+                       _UXSinglePixelLine, _UXTableHeaderView, _UXToolbarItemsContainer, 
+                       _UXViewControllerOneToOneTransitionContext, _UXViewControllerTransitionContext, 
+                       _UXViewControllerTransitionCoordinator, _UXWindow, _UXWindowState ]
     objc-ivars:      [ UXCollectionViewAnimation._animationBlock, UXCollectionViewAnimation._collectionViewAnimationFlags, 
                        UXCollectionViewAnimation._completionHandlers, UXCollectionViewAnimation._endFraction, 
                        UXCollectionViewAnimation._finalLayoutAttributes, UXCollectionViewAnimation._startFraction, 

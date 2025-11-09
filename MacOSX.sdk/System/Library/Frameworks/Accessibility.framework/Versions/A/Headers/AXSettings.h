@@ -37,7 +37,10 @@ typedef NS_ENUM(NSInteger, AXSettingsFeature) {
     // Jump to the setting for "Allow Apps to Request to Use" in Personal Voice. This is relevant for the AVSpeechSynthesis.personalVoiceAuthorizationStatus API.
     AXSettingsFeaturePersonalVoiceAllowAppsToRequestToUse = 1,
     // Jump to the setting for "Allow Apps to Add Audio to Calls." This is relevant for the AVAudioSession.preferredMicrophoneInjectionMode API.
-    AXSettingsFeatureAllowAppsToAddAudioToCalls API_AVAILABLE(ios(18.2), macos(15.2), tvos(18.2), watchos(11.2), visionos(2.2))
+    AXSettingsFeatureAllowAppsToAddAudioToCalls API_AVAILABLE(ios(18.2), macos(15.2), tvos(18.2), watchos(11.2), visionos(2.2)),
+    AXSettingsFeatureAssistiveTouch API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), watchos(26.0), visionos(26.0)),
+    AXSettingsFeatureAssistiveTouchDevices API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), watchos(26.0), visionos(26.0)),
+    AXSettingsFeatureDwellControl API_AVAILABLE(ios(26.0), macos(26.0), tvos(26.0), watchos(26.0), visionos(26.0))
 } NS_SWIFT_NAME(AccessibilitySettings.Feature) API_AVAILABLE(ios(18.0), macos(15.0), tvos(18.0), watchos(11.0), visionos(2.0));
 
 // Open the Settings app to a specific section.

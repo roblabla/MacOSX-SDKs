@@ -31,7 +31,7 @@
 #include <stddef.h>
 #include <stdint.h>
 
-static uint32_t const DEBUG_HEADER_MAGIC_VAL = 'GBED'; // "DEBG" in little endian
+static uint32_t const DEBUG_HEADER_MAGIC_VAL = 'GBED'; /* "DEBG" in little endian */
 static uint32_t const DEBUG_HEADER_CURRENT_VERSION = 0x2UL;
 
 typedef void *debug_header_entry;
@@ -110,11 +110,12 @@ static int const DEBUG_HEADER_ENTRY_TXM = 2;
  * Adjust CONSISTENT_DEBUG_PANIC_LEN if required when adding any new panic strings.
  */
 static size_t const CONSISTENT_DEBUG_PANIC_LEN = 1088;
+
 typedef struct __attribute__((__packed__)) sptm_consistent_debug {
 	uint64_t magic;
 	uint64_t version;
 	uint64_t is_panic;
-	uint64_t exception_number;    // 0 if it's a regular panic, not an early exception.
+	uint64_t exception_number; /* 0 if it's a regular panic, not an early exception. */
 	uint64_t first_esr;
 	uint64_t first_elr;
 	uint64_t first_far;
@@ -132,5 +133,5 @@ static uint64_t const CONSISTENT_DEBUG_PANIC_SOURCE_SPTM = 0;
 static uint64_t const CONSISTENT_DEBUG_PANIC_SOURCE_TXM = 1;
 static uint64_t const CONSISTENT_DEBUG_PANIC_SOURCE_SK = 2;
 
-static int const CONSISTENT_DEBUG_MAGIC_VAL = 'MTPS'; // "SPTM" in little endian
+static int const CONSISTENT_DEBUG_MAGIC_VAL = 'MTPS'; /* "SPTM" in little endian */
 static int const CONSISTENT_DEBUG_VERSION_VAL = 2;
