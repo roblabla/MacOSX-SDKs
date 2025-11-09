@@ -20,6 +20,9 @@
 #include "../Frameworks/vecLib.framework/Headers/vecLib.h"
 #endif
 
+#include <TargetConditionals.h>
+
+
 #ifndef VIMAGE_H
 #include <vImage/vImage.h>
 #endif

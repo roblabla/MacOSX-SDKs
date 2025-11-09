@@ -10,7 +10,7 @@ typedef NS_ENUM(NSInteger, UITextItemInteraction) {
     UITextItemInteractionInvokeDefaultAction,
     UITextItemInteractionPresentActions,
     UITextItemInteractionPreview,
-} API_AVAILABLE(ios(10.0));
+} API_DEPRECATED("UITextItemInteraction has been replaced by text item methods on UITextViewDelegate", ios(10.0, 17.0), visionos(1.0, 1.0));
 
 #else
 #import <UIKitCore/UITextItemInteraction.h>

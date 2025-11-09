@@ -9,7 +9,7 @@ exports:
                        _RPTCGPointAdvanceInDirectionByAmount, _RPTCGRectGetMidpoint, 
                        _RPTCGRectGetMidpointAlongSide, _RPTContentOffsetOf, _RPTContentSizeAlongAxis, 
                        _RPTContentSizeInDirection, _RPTConvertPointInViewToScreenSpace, 
-                       _RPTDefaultScrollDirection, _RPTExcludeSystemRegionsFromRect, 
+                       _RPTDefaultScrollDirection, _RPTErrorDomain, _RPTExcludeSystemRegionsFromRect, 
                        _RPTExcludeSystemRegionsFromView, _RPTGetBoundsForView, _RPTOppositeDirectionFrom, 
                        _RPTPredominantAxisOfContentOf, _RPTSizeAlongAxis, _RPTViewFrameInScreenSpace, 
                        __RPTAmplitudeFromPagesOfView, __RPTAxisFromScrollDirection, 
@@ -18,6 +18,7 @@ exports:
                        RPTCoordinateSpaceConverter, RPTDirectionalCrownTestParameters, 
                        RPTDirectionalSwipeTestParameters, RPTDockGestureInteraction, 
                        RPTDragInteraction, RPTDragTestParameters, RPTGroupScrollTestParameters, 
-                       RPTInteractionOptions, RPTPagingScrollTestParameters, RPTResizeInteraction, 
-                       RPTResizeTestParameters, RPTScrollViewTestParameters, RPTTestRunner ]
+                       RPTInteractionOptions, RPTInteractionTestParameters, RPTPagingScrollTestParameters, 
+                       RPTResizeInteraction, RPTResizeTestParameters, RPTScrollViewTestParameters, 
+                       RPTTestRunner, RPTWaitTestParameters ]
 ...

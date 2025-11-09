@@ -121,6 +121,12 @@ IMAGECAPTURE_EXTERN ICDeviceTransport const ICTransportTypeExFAT IC_AVAILABLE(io
  */
 IMAGECAPTURE_EXTERN ICDeviceTransport const ICTransportTypeTCPIP IC_AVAILABLE(macos(10.4),ios(13.0));
 
+/*!
+ @const      ICTransportTypeProximity
+ @abstract   Indicates that the device transport is based on proximity instead of a predefined phyiscal layer.
+ */
+IMAGECAPTURE_EXTERN ICDeviceTransport const ICTransportTypeProximity IC_AVAILABLE(macos(14.0),ios(17.0));
+
 typedef NSString* ICDeviceStatus NS_TYPED_ENUM;
 
 //------------------------------------------------------------------------------------------------------------------------------
@@ -368,6 +374,7 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 /*!
  @property autolaunchApplicationPath
  @abstract ￼Filesystem path of an application that is to be automatically launched when this device is added.
+ @discussion This property is unavailable for devices of ICTransportTypeProximity.
  */
 @property (nonatomic, readwrite, copy, nullable) NSString* autolaunchApplicationPath IC_AVAILABLE(macos(10.4)) IC_UNAVAILABLE(ios);
 

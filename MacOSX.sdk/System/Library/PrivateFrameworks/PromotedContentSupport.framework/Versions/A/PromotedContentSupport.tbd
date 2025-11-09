@@ -9,5 +9,5 @@ exports:
     symbols:         [ _PromotedContentSupportVersionNumber, _PromotedContentSupportVersionString ]
     objc-classes:    [ PCAdPolicyFormat, PCConfiguration, PCNewsSegmentation, PCRingBuffer, 
                        PCRuntimeParameters, PCStatusConditionRateLimitedObject, PCStatusConditions, 
-                       PCStatusConditionsImpl, PCSupportRequester, PlaceholderCache ]
+                       PCStatusConditionsImpl, PCSupportRequester ]
 ...

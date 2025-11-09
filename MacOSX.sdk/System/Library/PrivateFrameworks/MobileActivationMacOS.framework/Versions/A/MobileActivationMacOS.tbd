@@ -1,16 +1,19 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MobileActivationMacOS.framework/Versions/A/MobileActivationMacOS'
 current-version: 0
 compatibility-version: 0
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _MAEActivateMacOSWithError, _MAEActivationIsSupportedMacOS, 
-                       _MAECopyDCRTMacOSWithError, _MAECreateActivationRequestMacOSWithError, 
-                       _MAEDeactivateDeviceMacOSWithError, _MAEDeactivateDeviceMacOSWithOptions, 
-                       _MAEGetActivationStateMacOSWithError, _MAEGetActivationStateMacOSWithOptions, 
-                       _MAEGetDCRTStateMacOSWithError, _MAEGetUCRTActivationLockStateMacOSWithError, 
+                       _MAECopyDCRTMacOSWithError, _MAECopyDCRTMacOSWithOptions, 
+                       _MAECreateActivationRequestMacOSWithError, _MAEDeactivateDeviceMacOSWithError, 
+                       _MAEDeactivateDeviceMacOSWithOptions, _MAEGetActivationStateMacOSWithError, 
+                       _MAEGetActivationStateMacOSWithOptions, _MAEGetDCRTStateMacOSWithError, 
+                       _MAEGetDCRTStateMacOSWithOptions, _MAEGetUCRTActivationLockStateMacOSWithError, 
                        _MAEGetUCRTDEPEnrollmentStateMacOSWithError, _MAEGetUCRTOSVersionInfoMacOSWithError, 
                        _MAEIssueDCRTMacOSWithCallback, _MAEIssueDCRTMacOSWithCompletion, 
                        _MAEReissueUCRTMacOSWithCallback, _MobileActivationErrorDomain, 
@@ -22,8 +25,8 @@ exports:
                        _kMAOptionsActivationResponseHeaders, _kMAOptionsDEPEnrolled, 
                        _kMAOptionsDeleteLocalPolicy, _kMAOptionsForceUCRTUpgrade, 
                        _kMAOptionsIgnoreExistingDCRT, _kMAOptionsIgnoreExistingUCRT, 
-                       _kMAOptionsNetworkTimeoutInterval, _kMAOptionsUserAdminCredentials, 
-                       _kMAOptionsValidateOIK, _kMAUCRTActivationLocked, _kMAUCRTActivationUnlocked, 
-                       _kMAUCRTDEPStateEnrolled, _kMAUCRTDEPStateUnavailable, _kMAUCRTDEPStateUnenrolled, 
-                       _kMAUCRTUnavailable, _mobileactivationErrorHasDomainAndErrorCode ]
+                       _kMAOptionsNetworkTimeoutInterval, _kMAOptionsSDCRTAttestation, 
+                       _kMAOptionsUserAdminCredentials, _kMAOptionsValidateOIK, _kMAUCRTActivationLocked, 
+                       _kMAUCRTActivationUnlocked, _kMAUCRTDEPStateEnrolled, _kMAUCRTDEPStateUnavailable, 
+                       _kMAUCRTDEPStateUnenrolled, _kMAUCRTUnavailable, _mobileactivationErrorHasDomainAndErrorCode ]
 ...

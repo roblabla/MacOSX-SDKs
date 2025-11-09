@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol GCPhysicalInputElement;
+@protocol GCPhysicalInputSource;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -27,7 +28,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  The amount that the input has changed since the last time
  \c deltaDidChangeHandler fired.
  */
-@property (copy, nullable) void (^deltaDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCRelativeInput> input, float delta);
+@property (atomic, copy, nullable) void (^deltaDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCRelativeInput> input, float delta);
 
 /**
  The last reported delta for the input.
@@ -59,6 +60,12 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  the device before the event was transmitted to the host.
  */
 @property (readonly) NSTimeInterval lastDeltaLatency;
+
+/**
+ An object describing the physical action(s) the user performs to manipulate
+ this input.
+ */
+@property (copy, readonly) NSSet<id<GCPhysicalInputSource>> *sources API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 @end
 

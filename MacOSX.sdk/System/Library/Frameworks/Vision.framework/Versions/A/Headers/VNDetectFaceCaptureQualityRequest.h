@@ -37,4 +37,10 @@ static const NSUInteger VNDetectFaceCaptureQualityRequestRevision1 = 1;
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 static const NSUInteger VNDetectFaceCaptureQualityRequestRevision2 = 2;
 
+/*!
+ @brief The revision shows better correlation with human judgement on a larger and more diverse dataset. It is also more stable with respect to minor image variations.
+ */
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0))
+static const NSUInteger VNDetectFaceCaptureQualityRequestRevision3 = 3;
+
 NS_ASSUME_NONNULL_END

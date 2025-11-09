@@ -45,6 +45,11 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 */
 @property (readwrite, nonatomic, copy) NSArray<VNBarcodeSymbology> *symbologies;
 
+/*!
+ @discussion An option to coalesce multiple codes if applicable based on the symbology
+ */
+@property (readwrite, nonatomic) BOOL coalesceCompositeSymbologies API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
 
 /*!
 	@discussion VNBarcodeObservation results.
@@ -54,7 +59,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @end
 
 
-API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
+API_DEPRECATED_WITH_REPLACEMENT("VNDetectBarcodesRequestRevision3", macos(10.14, 14.0), ios(12.0, 17.0), tvos(12.0, 17.0))
 static const NSUInteger VNDetectBarcodesRequestRevision1 = 1;
 
 /*
@@ -68,6 +73,13 @@ static const NSUInteger VNDetectBarcodesRequestRevision2 = 2;
  */
 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
 static const NSUInteger VNDetectBarcodesRequestRevision3 = 3;
+
+/*
+    @brief expands set of detected symbologies, improves accuracy, offers supplemental payloads,
+    adds inverted color support, and may produce observations outside image bounds in comparision to prior revisions
+ */
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0))
+static const NSUInteger VNDetectBarcodesRequestRevision4 = 4;
 
 
 NS_ASSUME_NONNULL_END

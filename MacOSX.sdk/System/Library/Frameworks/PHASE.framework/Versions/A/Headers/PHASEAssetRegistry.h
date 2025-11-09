@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASEAsset
     @abstract An object that represents a registered asset in the asset registry.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEAsset : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -45,7 +45,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASESoundAsset
     @abstract An object that represents a registered sound asset in the asset registry.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESoundAsset : PHASEAsset
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -78,7 +78,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASESoundEventNodeAsset
     @abstract An object that represents a registered sound event asset in the asset registry.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESoundEventNodeAsset : PHASEAsset
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -93,7 +93,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEGlobalMetaParameterAsset
     @abstract An object that represents a registered global metaparameter asset in the asset registry.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEGlobalMetaParameterAsset : PHASEAsset
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -108,7 +108,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEAssetRegistry
     @abstract Asset registry
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEAssetRegistry : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

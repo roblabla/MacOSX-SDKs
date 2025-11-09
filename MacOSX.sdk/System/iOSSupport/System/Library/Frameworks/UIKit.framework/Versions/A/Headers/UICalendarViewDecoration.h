@@ -27,7 +27,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 /**
  * @abstract Creates a new image-based decoration with the specified image, color, and size.
  *
- * @param image The image of the decoration, defaults to @c circlebadge.fill if nil.
+ * @param image The image of the decoration, defaults to @c circ lebadge.fill if nil.
  * @param color The color of the the decoration. defaults to @c UIColor.systemFillColor if nil.
  * @param size  The preferred size of the decoration. The default is UICalendarViewDecorationSizeMedium
  */

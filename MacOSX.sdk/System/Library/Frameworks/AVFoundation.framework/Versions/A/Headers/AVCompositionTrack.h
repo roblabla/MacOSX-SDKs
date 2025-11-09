@@ -242,6 +242,12 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 @end
 
+/*!
+ @class         AVCompositionTrackFormatDescriptionReplacement
+ @abstract      A format description and its replacement.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 @interface AVCompositionTrackFormatDescriptionReplacement : NSObject <NSSecureCoding>
 

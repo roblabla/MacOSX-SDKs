@@ -1,6 +1,6 @@
-/* iig(DriverKit-256.100.8) generated from IOCommandPool.iig */
+/* iig(DriverKit-324.0.10) generated from IOCommandPool.iig */
 
-/* IOCommandPool.iig:1-41 */
+/* IOCommandPool.iig:1-37 */
 /*
  * Copyright (c) 2020-2020 Apple Inc. All rights reserved.
  *
@@ -35,14 +35,10 @@
 #include <DriverKit/IOCommand.h>  /* .iig include */
 
 
-#define LIBKERN_CONSUMED
-#define LIBKERN_RETURNS_NOT_RETAINED
-
-
 class IOCommandPool;
 typedef IOCommandPool * IOCommandPoolPtr;
 
-/* source class IOCommandPool IOCommandPool.iig:42-128 */
+/* source class IOCommandPool IOCommandPool.iig:38-124 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -139,7 +135,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOCommandPool IOCommandPool.iig:42-128 */
+/* generated class IOCommandPool IOCommandPool.iig:38-124 */
 
 
 #define IOCommandPool_Methods \
@@ -295,6 +291,6 @@ IOCommandPool_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOCommandPool.iig:130- */
+/* IOCommandPool.iig:126- */
 
 #endif /* ! _IOKIT_UIOCOMMANDPOOL_H */

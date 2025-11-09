@@ -60,7 +60,7 @@ NS_SWIFT_NAME(PHASESpatialPipeline.Flags);
     @class PHASESpatialPipelineEntry
     @abstract Spatial Pipeline Entry.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESpatialPipelineEntry : NSObject
 
 /*!
@@ -86,7 +86,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @class PHASESpatialPipeline
     @abstract Spatial Pipeline.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESpatialPipeline : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

@@ -165,7 +165,7 @@ AV_INIT_UNAVAILABLE
                 Once the secure token is ready, this block will be called with the token or an error describing the failure.
  */
 - (void)makeSecureTokenForExpirationDateOfPersistableContentKey:(NSData *)persistableContentKeyData
-											  completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(11.0), watchos(7.0)) API_UNAVAILABLE(tvos);
+											  completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(11.0), tvos(17.0), watchos(7.0));
 
 /*!
  @typedef       AVContentKeySessionServerPlaybackContextKey
@@ -179,13 +179,13 @@ typedef NSString * AVContentKeySessionServerPlaybackContextOption NS_STRING_ENUM
  @constant      AVContentKeySessionServerPlaybackContextOptionProtocolVersions
  @abstract      Specifies the versions of the content protection protocol supported by the application as an NSArray of one or more NSNumber objects. If not specified default protocol version of 1 is assumed.
  */
-AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySessionServerPlaybackContextOptionProtocolVersions API_AVAILABLE(macos(10.15), ios(12.2), watchos(7.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySessionServerPlaybackContextOptionProtocolVersions API_AVAILABLE(macos(10.15), ios(12.2), tvos(17.0), watchos(7.0));
 
 /*!
  @constant      AVContentKeySessionServerPlaybackContextOptionServerChallenge
  @abstract      Specifies a nonce as a 8-byte NSData object to be included in the secure server playback context (SPC) in order to prevent replay attacks. If not specified default server challenge of 0 is assumed.
  */
-AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySessionServerPlaybackContextOptionServerChallenge API_AVAILABLE(macos(10.15), ios(12.2), watchos(7.0)) API_UNAVAILABLE(tvos);
+AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySessionServerPlaybackContextOptionServerChallenge API_AVAILABLE(macos(10.15), ios(12.2), tvos(17.0), watchos(7.0));
 
 /*!
  @method        invalidatePersistableContentKey:options:completionHandler:
@@ -200,7 +200,7 @@ AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySess
  */
 - (void)invalidatePersistableContentKey:(NSData *)persistableContentKeyData
 								options:(nullable NSDictionary<AVContentKeySessionServerPlaybackContextOption, id> *)options
-					  completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(12.2), watchos(7.0)) API_UNAVAILABLE(tvos);
+					  completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(12.2), tvos(17.0), watchos(7.0));
 
 /*!
  @method        invalidateAllPersistableContentKeysForApp:options:completionHandler:
@@ -215,7 +215,7 @@ AVF_EXPORT AVContentKeySessionServerPlaybackContextOption const AVContentKeySess
  */
 - (void)invalidateAllPersistableContentKeysForApp:(NSData *)appIdentifier
 										  options:(nullable NSDictionary<AVContentKeySessionServerPlaybackContextOption, id> *)options
-								completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(12.2), watchos(7.0)) API_UNAVAILABLE(tvos);
+								completionHandler:(void (^)(NSData * _Nullable secureTokenData, NSError * _Nullable error))handler API_AVAILABLE(macos(10.15), ios(12.2), tvos(17.0), watchos(7.0));
 
 @end
 
@@ -347,7 +347,7 @@ API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(7.0))
  @discussion    If the content key session provides an updated persistable content key data, the previous key data is no longer valid and cannot be used to answer future loading requests.
  */
 @optional
-- (void)contentKeySession:(AVContentKeySession *)session didUpdatePersistableContentKey:(NSData *)persistableContentKey forContentKeyIdentifier:(id)keyIdentifier API_AVAILABLE(macos(10.15), ios(11.0), watchos(7.0)) API_UNAVAILABLE(tvos);
+- (void)contentKeySession:(AVContentKeySession *)session didUpdatePersistableContentKey:(NSData *)persistableContentKey forContentKeyIdentifier:(id)keyIdentifier API_AVAILABLE(macos(10.15), ios(11.0), tvos(17.0), watchos(7.0));
 
 /*!
  @method        contentKeySession:contentKeyRequest:didFailWithError:
@@ -539,7 +539,7 @@ AVF_EXPORT NSString *const AVContentKeyRequestRequiresValidationDataInSecureToke
  @abstract      Informs the receiver to process a persistable content key request.
  @discussion    When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want the resulting key response to produce a key that can persist across multiple playback sessions, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. NSInternalInconsistencyException will be raised, if you are attempting to create and use a persistable key but your AVContentKeySession delegate does not respond to contentKeySession:didProvidePersistableContentKeyRequest:.
  */
-- (void)respondByRequestingPersistableContentKeyRequest API_DEPRECATED_WITH_REPLACEMENT("respondByRequestingPersistableContentKeyRequestAndReturnError:", ios(10.3, 11.2)) API_UNAVAILABLE(macos, tvos, watchos);
+- (void)respondByRequestingPersistableContentKeyRequest API_DEPRECATED_WITH_REPLACEMENT("respondByRequestingPersistableContentKeyRequestAndReturnError:", ios(10.3, 11.2)) API_UNAVAILABLE(macos, tvos, watchos, visionos);
 /*
  @method		respondByRequestingPersistableContentKeyRequestAndReturnError:
  @abstract		Informs the receiver to process a persistable content key request.
@@ -548,11 +548,11 @@ AVF_EXPORT NSString *const AVContentKeyRequestRequiresValidationDataInSecureToke
  @result		YES if sucessful. If NO, this request should be responded to via processContentKeyResponse: or processContentKeyResponseError:.
  @discussion	When you receive an AVContentKeyRequest via -contentKeySession:didProvideContentKeyRequest: and you want the resulting key response to produce a key that can persist across multiple playback sessions, you must invoke -respondByRequestingPersistableContentKeyRequest on that AVContentKeyRequest in order to signal that you want to process an AVPersistableContentKeyRequest instead. If the underlying protocol supports persistable content keys, in response your delegate will receive an AVPersistableContentKeyRequest via -contentKeySession:didProvidePersistableContentKeyRequest:. NSInternalInconsistencyException will be raised, if you are attempting to create and use a persistable key but your AVContentKeySession delegate does not respond to contentKeySession:didProvidePersistableContentKeyRequest:.
 */
-- (BOOL)respondByRequestingPersistableContentKeyRequestAndReturnError:(NSError **)outError API_AVAILABLE(macos(10.15), ios(11.2), watchos(7.0)) API_UNAVAILABLE(tvos);
+- (BOOL)respondByRequestingPersistableContentKeyRequestAndReturnError:(NSError **)outError API_AVAILABLE(macos(10.15), ios(11.2), tvos(17.0), watchos(7.0));
 
 @end
 
-API_AVAILABLE(macos(10.15), ios(10.3), tvos(10.3), watchos(7.0))
+API_AVAILABLE(macos(10.15), ios(10.3), tvos(10.2), watchos(7.0))
 @interface AVPersistableContentKeyRequest : AVContentKeyRequest
 
 /*!
@@ -588,7 +588,9 @@ API_AVAILABLE(macos(10.15), ios(10.3), tvos(10.3), watchos(7.0))
 /*!
  @class         AVContentKeyResponse
  @abstract      AVContentKeyResponse is used to represent the data returned from the key server when requesting a key for decrypting content.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.12.4), ios(10.3), tvos(10.2), watchos(7.0))
 @interface AVContentKeyResponse : NSObject
 {

@@ -8,5 +8,6 @@
 #include <MediaAccessibility/MAAudibleMedia.h>
 #include <MediaAccessibility/MAImageCaptioning.h>
 #include <MediaAccessibility/MAVideoAccommodations.h>
+#include <MediaAccessibility/MAFlashingLightsProcessing.h>
 
 #endif

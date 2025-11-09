@@ -1,4 +1,4 @@
-framework module CryptoTokenKit [extern_c] {
+framework module CryptoTokenKit  {
   umbrella header "CryptoTokenKit.h"
   export *
   module * { export * }

@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftsimd -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name simd
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 9.100.1
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target arm64e-apple-ios17.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftsimd -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name simd
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 18
 import Darwin
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @_exported import simd
 extension Swift.SIMD {
   @available(swift, deprecated: 5, renamed: "init(repeating:)")
@@ -3295,6 +3296,26 @@ public func matrix_from_rows(_ row0: Swift.SIMD4<Swift.Double>, _ row1: Swift.SI
 public func matrix_transpose(_ x: simd.simd_double4x4) -> simd.double4x4
 @available(swift, deprecated: 4, renamed: "==")
 public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4) -> Swift.Bool
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_double2) -> (sin: simd.simd_double2, cos: simd.simd_double2) {
+    
+    var sinResult = simd_double2()
+    var cosResult = simd_double2()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_double2) -> (sin: simd.simd_double2, cos: simd.simd_double2) {
+    
+    var sinResult = simd_double2()
+    var cosResult = simd_double2()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_double2) -> simd.simd_double2 {
   return __tg_cos(x)
@@ -3454,6 +3475,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func isnormal(_ x: simd.simd_double2) -> simd.simd_long2 {
   return __tg_isnormal(x)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_double3) -> (sin: simd.simd_double3, cos: simd.simd_double3) {
+    
+    var sinResult = simd_double3()
+    var cosResult = simd_double3()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_double3) -> (sin: simd.simd_double3, cos: simd.simd_double3) {
+    
+    var sinResult = simd_double3()
+    var cosResult = simd_double3()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_double3) -> simd.simd_double3 {
@@ -3615,6 +3656,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @_transparent public func isnormal(_ x: simd.simd_double3) -> simd.simd_long3 {
   return __tg_isnormal(x)
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_double4) -> (sin: simd.simd_double4, cos: simd.simd_double4) {
+    
+    var sinResult = simd_double4()
+    var cosResult = simd_double4()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_double4) -> (sin: simd.simd_double4, cos: simd.simd_double4) {
+    
+    var sinResult = simd_double4()
+    var cosResult = simd_double4()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_double4) -> simd.simd_double4 {
   return __tg_cos(x)
@@ -3774,6 +3835,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func isnormal(_ x: simd.simd_double4) -> simd.simd_long4 {
   return __tg_isnormal(x)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_double8) -> (sin: simd.simd_double8, cos: simd.simd_double8) {
+    
+    var sinResult = simd_double8()
+    var cosResult = simd_double8()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_double8) -> (sin: simd.simd_double8, cos: simd.simd_double8) {
+    
+    var sinResult = simd_double8()
+    var cosResult = simd_double8()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_double8) -> simd.simd_double8 {
@@ -3935,6 +4016,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @_transparent public func isnormal(_ x: simd.simd_double8) -> simd.simd_long8 {
   return __tg_isnormal(x)
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_float2) -> (sin: simd.simd_float2, cos: simd.simd_float2) {
+    
+    var sinResult = simd_float2()
+    var cosResult = simd_float2()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_float2) -> (sin: simd.simd_float2, cos: simd.simd_float2) {
+    
+    var sinResult = simd_float2()
+    var cosResult = simd_float2()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_float2) -> simd.simd_float2 {
   return __tg_cos(x)
@@ -4094,6 +4195,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func isnormal(_ x: simd.simd_float2) -> simd.simd_int2 {
   return __tg_isnormal(x)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_float3) -> (sin: simd.simd_float3, cos: simd.simd_float3) {
+    
+    var sinResult = simd_float3()
+    var cosResult = simd_float3()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_float3) -> (sin: simd.simd_float3, cos: simd.simd_float3) {
+    
+    var sinResult = simd_float3()
+    var cosResult = simd_float3()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_float3) -> simd.simd_float3 {
@@ -4255,6 +4376,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @_transparent public func isnormal(_ x: simd.simd_float3) -> simd.simd_int3 {
   return __tg_isnormal(x)
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_float4) -> (sin: simd.simd_float4, cos: simd.simd_float4) {
+    
+    var sinResult = simd_float4()
+    var cosResult = simd_float4()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_float4) -> (sin: simd.simd_float4, cos: simd.simd_float4) {
+    
+    var sinResult = simd_float4()
+    var cosResult = simd_float4()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_float4) -> simd.simd_float4 {
   return __tg_cos(x)
@@ -4415,6 +4556,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @_transparent public func isnormal(_ x: simd.simd_float4) -> simd.simd_int4 {
   return __tg_isnormal(x)
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_float8) -> (sin: simd.simd_float8, cos: simd.simd_float8) {
+    
+    var sinResult = simd_float8()
+    var cosResult = simd_float8()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_float8) -> (sin: simd.simd_float8, cos: simd.simd_float8) {
+    
+    var sinResult = simd_float8()
+    var cosResult = simd_float8()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_float8) -> simd.simd_float8 {
   return __tg_cos(x)
@@ -4574,6 +4735,26 @@ public func matrix_equal(_ lhs: simd.simd_double4x4, _ rhs: simd.simd_double4x4)
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func isnormal(_ x: simd.simd_float8) -> simd.simd_int8 {
   return __tg_isnormal(x)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincos(_ x: simd.simd_float16) -> (sin: simd.simd_float16, cos: simd.simd_float16) {
+    
+    var sinResult = simd_float16()
+    var cosResult = simd_float16()
+    
+    __tg_sincos(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+@_transparent public func sincospi(_ x: simd.simd_float16) -> (sin: simd.simd_float16, cos: simd.simd_float16) {
+    
+    var sinResult = simd_float16()
+    var cosResult = simd_float16()
+    
+    __tg_sincospi(x, &sinResult, &cosResult)
+    
+    return(sinResult, cosResult)
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 @_transparent public func cos(_ x: simd.simd_float16) -> simd.simd_float16 {
@@ -4812,6 +4993,15 @@ extension simd.simd_quatf : Swift.Equatable {
     return lhs.vector == rhs.vector
   }
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+extension simd.simd_quatf : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension simd.simd_quatf : @unchecked Swift.Sendable {
+}
 extension simd.simd_quatf {
   @_transparent public static func + (lhs: simd.simd_quatf, rhs: simd.simd_quatf) -> simd.simd_quatf {
     return simd_add(lhs, rhs)
@@ -4939,6 +5129,15 @@ extension simd.simd_quatd : Swift.Equatable {
   @_transparent public static func == (lhs: simd.simd_quatd, rhs: simd.simd_quatd) -> Swift.Bool {
     return lhs.vector == rhs.vector
   }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+extension simd.simd_quatd : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+extension simd.simd_quatd : @unchecked Swift.Sendable {
 }
 extension simd.simd_quatd {
   @_transparent public static func + (lhs: simd.simd_quatd, rhs: simd.simd_quatd) -> simd.simd_quatd {

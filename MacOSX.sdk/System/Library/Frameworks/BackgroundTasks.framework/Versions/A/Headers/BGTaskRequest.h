@@ -6,7 +6,6 @@
 //
 
 #import <Foundation/Foundation.h>
-
 #import <BackgroundTasks/BGDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -97,6 +96,20 @@ BG_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, watchos)
 
 @end
 
+/// A request to launch your app in the background to execute a health research task for studies a user has opted into and
+/// that can take minutes to complete.
+BG_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(macos, watchos)
+@interface BGHealthResearchTaskRequest : BGProcessingTaskRequest
+/*!
+ @abstract What file protection state is required to access data relevant to this task.
+ @discussion Update this property to indicate what type of data needs to be accessible when the task is run.
+ The default value is `NSFileProtectionCompleeUntilFirstUserAuthentication`.
+ */
+
+/// A String indicating file protection availability required for processing.
+@property (assign) NSFileProtectionType protectionTypeOfRequiredData;
+
+@end
 
 NS_ASSUME_NONNULL_END
 

@@ -11,16 +11,19 @@ exports:
                        _BSServiceBootstrapLog, _BSServiceConnectionEndpointInstanceKey, 
                        _BSServiceConnectionEndpointServiceKey, _BSServiceConnectionEndpointTargetDescriptionForAnonymousDomain, 
                        _BSServiceConnectionEndpointTargetDescriptionForMachName, 
+                       _BSServiceConnectionEndpointTargetDescriptionForServiceListener, 
+                       _BSServiceConnectionEndpointTargetDescriptionForServiceLookup, 
                        _BSServiceConnectionErrorCreate, _BSServiceConnectionErrorCreateWithInfo, 
                        _BSServiceConnectionErrorDomain, _BSServiceEndpointGrantNamespace, 
                        _BSServiceInjectionLog, _BSServiceLog, _BSServiceMethodNameErrorKey, 
-                       _BSServiceXPCErrorsLog, _BSServiceXPCLog, _BSXPCServiceConnectionExecuteCallOut, 
-                       _NSStringFromBSServiceConnectionErrorCode, _NSStringFromBSServiceDomainStartType ]
+                       _BSServiceXPCErrorsLog, _BSServiceXPCLog, _BSSetServiceFeatureFlagResolver, 
+                       _BSXPCServiceConnectionExecuteCallOut, _NSStringFromBSServiceConnectionErrorCode, 
+                       _NSStringFromBSServiceDomainStartType ]
     objc-classes:    [ BSMutableServiceInterface, BSNSXPCTransport, BSService, BSServiceConnection, 
                        BSServiceConnectionEndpoint, BSServiceConnectionEndpointInjector, 
                        BSServiceConnectionEndpointMonitor, BSServiceConnectionListener, 
-                       BSServiceDomain, BSServiceDomainSpecification, BSServiceInterface, 
-                       BSServiceManager, BSServiceQuality, BSServiceSpecification, 
+                       BSServiceDomain, BSServiceDomainSpecification, BSServiceFeatureFlag, 
+                       BSServiceInterface, BSServiceManager, BSServiceQuality, BSServiceSpecification, 
                        BSServicesConfiguration, BSXPCServiceConnection, BSXPCServiceConnectionActivationMessage, 
                        BSXPCServiceConnectionChildContext, BSXPCServiceConnectionContext, 
                        BSXPCServiceConnectionEventHandler, BSXPCServiceConnectionListener, 
@@ -32,6 +35,7 @@ exports:
                        _BSServiceDispatchingQueueImpl, _BSServiceOutgoingEndpoint ]
     objc-ivars:      [ BSServiceInterface._client, BSServiceInterface._clientWaitsForActivation, 
                        BSServiceInterface._identifier, BSServiceInterface._server, 
+                       BSXPCServiceConnectionMessage._activationGeneration, BSXPCServiceConnectionMessage._auditTokenUpdater, 
                        BSXPCServiceConnectionMessage._handshake, BSXPCServiceConnectionMessage._sendFlag, 
                        BSXPCServiceConnectionMessage._targetQueue ]
 ...

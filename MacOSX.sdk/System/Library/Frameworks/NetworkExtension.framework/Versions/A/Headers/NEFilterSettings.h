@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * NEFilterSettings is used by NEFilterDataProviders to communicate the desired settings for the filter to the framework. The framework takes care of applying the contained settings to the system.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NEFilterSettings : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -33,7 +33,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  *     and have an action of NEFilterActionFilterData.
  * @return the newly-initialized NEFilterSettings object.
  */
-- (instancetype)initWithRules:(NSArray<NEFilterRule *> *)rules defaultAction:(NEFilterAction)defaultAction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (instancetype)initWithRules:(NSArray<NEFilterRule *> *)rules defaultAction:(NEFilterAction)defaultAction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property rules
@@ -43,13 +43,13 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  *         NEFilterActionDrop: Drop the flow without consulting this provider.
  *         NEFilterActionFilterData: Call this provider's handleNewFlow: method with the flow.
  */
-@property (readonly, copy) NSArray<NEFilterRule *> *rules API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly, copy) NSArray<NEFilterRule *> *rules API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property defaultAction
  * @discussion An NEFilterAction containing the default action to take for flows of network data that do not match any of the specified rules.
  */
-@property (readonly) NEFilterAction defaultAction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NEFilterAction defaultAction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

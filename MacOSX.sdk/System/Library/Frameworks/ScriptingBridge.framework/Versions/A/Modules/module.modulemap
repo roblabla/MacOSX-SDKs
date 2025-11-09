@@ -1,4 +1,4 @@
-framework module ScriptingBridge [extern_c] {
+framework module ScriptingBridge [system] {
 	umbrella header "ScriptingBridge.h"
 	export *
 	module * { export * }

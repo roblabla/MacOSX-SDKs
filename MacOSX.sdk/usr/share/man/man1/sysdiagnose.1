@@ -1,10 +1,10 @@
 .Dd January 24, 1984   \" DATE
-.Dt sysdiagnose 1      \" Program name and manual section number 
+.Dt sysdiagnose 1      \" Program name and manual section number
 .Os OS X
 .Sh NAME               \" Section Header - required - don't modify
 .Nm sysdiagnose
 .\" The following lines are read in generating the apropos(man -k) database. Use only key
-.\" words here as the database is built based on the words here and in the .ND line. 
+.\" words here as the database is built based on the words here and in the .ND line.
 .\" Use .Nm macro to designate other names for the documented program.
 .Nd gathers system-wide diagnostic information helpful in investigating system performance issues
 .\" ============================================================================
@@ -13,11 +13,13 @@
 .Nm
 .Fl h
 .Nm
+.Op Fl H
+.Op Fl v
 .Op Fl f Ar results_directory
 .Op Fl A Ar archive_name
 .Op Fl V Ar volume_path
-.Op Fl n
 .Op Fl C, -compression Ar compression_type
+.Op Fl n
 .Op Fl k
 .Op Fl F
 .Op Fl S
@@ -26,6 +28,8 @@
 .Op Fl b
 .Op Fl p
 .Op Fl P
+.Op Fl g
+.Op Fl G
 .Op Fl d
 .Op Fl D
 .Op Fl r
@@ -54,13 +58,11 @@ is automatically triggered when the following key chord is pressed: Control-Opti
 .It
 A spindump of the system
 .It
-Several seconds of fs_usage ouput 
-.It
 Several seconds of top output
 .It
 Data about kernel zones
 .It
-Status of loaded kernel extensions 
+Status of loaded kernel extensions
 .It
 Resident memory usage of user processes
 .It
@@ -78,7 +80,7 @@ Network status
 .It
 If a specific process is supplied as an argument: list of malloc-allocated buffers in the process's heap is collected
 .It
-If a specific process is supplied as an argument: data about unreferenced malloc buffers in the process's memory is collected 
+If a specific process is supplied as an argument: data about unreferenced malloc buffers in the process's memory is collected
 .It
 If a specific process is supplied as an argument: data about the virtual memory regions allocated in the process
 .El
@@ -91,9 +93,11 @@ If a specific process is supplied as an argument: data about the virtual memory 
 .\" ============================================================================
 .\" =========================== BEGIN OPTIONS SECTION ==========================
 .Sh OPTIONS
-.Bl -tag -width -indent 
+.Bl -tag -width -indent
 .It Fl h
 Display help.
+.It Fl H
+Print the path to the default sysdiagnose output directory.
 .It Fl v
 Enable verbose mode to display the container information as it executes.
 .It Fl f Ar results_directory
@@ -102,10 +106,10 @@ Specify the directory where the results will be stored. The default results dire
 Specify the name of the archive created in the results directory.
 .It Fl V Ar volume_path
 Specify the root volume for sysdiagnose to run on.
-.It Fl n
-Do not tar the resulting sysdiagnose directory.
 .It Fl C, -compression Ar compression_type Op tar|yaa|default|no-compression
 Specify the compression type for the resulting sysdiagnose directory.
+.It Fl n
+Do not tar the resulting sysdiagnose directory.
 .It Fl k
 Do not remove the temporary directory.
 .It Fl F
@@ -116,20 +120,22 @@ Disable streaming to tarball.
 Disable UI feedback.
 .It Fl Q
 Skip footprint.
+.It Fl q
+Same as -Q
 .It Fl b
 Do NOT show the resulting archive in a Finder window upon completion.
 .It Fl p
-Collect only time-sensitive data. Disregards previous -d or -r flags.
+Only run time-sensitive collections; disregards previous -d or -r flags.
 .It Fl P
-Do not collect time-sensitive data.
-.It Fl d
-Collect only log collection data. Disregards previous -p or -r flags.
-.It Fl D
-Do not collect log collection data.
+Do not run time-sensitive collections.
 .It Fl g
-Collect only log generation data. Disregards previous -p or -r flags.
+Only run log generation collections; disregards previous -p or -r flags.
 .It Fl G
-Do not collect log generation data.
+Do not run log generation collections.
+.It Fl d
+Only run log copying collections; disregards previous -p or -r flags.
+.It Fl D
+Do not run log copying collections.
 .It Fl r
 Collect only log archive. Disregards previous -p or -d flags.
 .It Fl R

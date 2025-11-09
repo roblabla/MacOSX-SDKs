@@ -2,7 +2,7 @@
 //  AVBConstants.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef AudioVideoBridging_AVBConstants_h
@@ -943,55 +943,55 @@ typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 	 */
 	AVB17221AEMCommandTypeOperationStatus								= 0x0036,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateAddKey
+		@constant	AVB17221AEMCommandTypeAuthenticationAddKey
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_KEY command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateAddKey							= 0x0037,
+	AVB17221AEMCommandTypeAuthenticationAddKey							= 0x0037,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateDeleteKey
+		@constant	AVB17221AEMCommandTypeAuthenticationDeleteKey
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_KEY command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateDeleteKey							= 0x0038,
+	AVB17221AEMCommandTypeAuthenticationDeleteKey						= 0x0038,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateGetKeyList
+		@constant	AVB17221AEMCommandTypeAuthenticationGetKeyList
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEY_LIST command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateGetKeyList						= 0x0039,
+	AVB17221AEMCommandTypeAuthenticationGetKeyList						= 0x0039,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateGetKey
+		@constant	AVB17221AEMCommandTypeAuthenticationGetKey
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEY command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateGetKey							= 0x003a,
+	AVB17221AEMCommandTypeAuthenticationGetKey							= 0x003a,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateAddKeyToChain
+		@constant	AVB17221AEMCommandTypeAuthenticationAddKeyToChain
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_KEY_TO_CHAIN command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateAddKeyToChain						= 0x003b,
+	AVB17221AEMCommandTypeAuthenticationAddKeyToChain					= 0x003b,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateDeleteKeyFromChain
+		@constant	AVB17221AEMCommandTypeAuthenticationDeleteKeyFromChain
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_KEY_FROM_CHAIN command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateDeleteKeyFromChain				= 0x003c,
+	AVB17221AEMCommandTypeAuthenticationDeleteKeyFromChain				= 0x003c,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateGetKeychainList
+		@constant	AVB17221AEMCommandTypeAuthenticationGetKeychainList
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_KEYCHAIN_LIST command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateGetKeychainList					= 0x003d,
+	AVB17221AEMCommandTypeAuthenticationGetKeychainList					= 0x003d,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateGetIdentity
+		@constant	AVB17221AEMCommandTypeAuthenticationGetIdentity
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_GET_IDENTITY command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateGetIdentity						= 0x003e,
+	AVB17221AEMCommandTypeAuthenticationGetIdentity						= 0x003e,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateAddToken
+		@constant	AVB17221AEMCommandTypeAuthenticationAddToken
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_ADD_TOKEN command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateAddToken							= 0x003f,
+	AVB17221AEMCommandTypeAuthenticationAddToken						= 0x003f,
 	/*!
-		@constant	AVB17221AEMCommandTypeAuthenticateDeleteToken
+		@constant	AVB17221AEMCommandTypeAuthenticationDeleteToken
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTH_DELETE_TOKEN command.
 	 */
-	AVB17221AEMCommandTypeAuthenticateDeleteToken						= 0x0040,
+	AVB17221AEMCommandTypeAuthenticationDeleteToken						= 0x0040,
 	/*!
 		@constant	AVB17221AEMCommandTypeAuthenticate
 		@abstract	The command code for the IEEE Std 1722.1™-2013 AEM AUTHENTICATE command.
@@ -1179,6 +1179,16 @@ typedef NS_ENUM(uint16_t, AVB17221AEMCommandType)
 	 @abstract	The command code for the IEEE Std 1722.1™-2021 AEM GET_PATH_LATENCY command.
 	 */
 	AVB17221AEMCommandTypeGetPathLatency API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos)		= 0x0066,
+	/*!
+	 @constant	AVB17221AEMCommandTypeAuthenticationGetNonce
+	 @abstract	The command code for the IEEE Std 1722.1™-2021 AEM AUTH_GET_NONCE command.
+	 */
+	AVB17221AEMCommandTypeAuthenticationGetNonce API_AVAILABLE(macos(14)) API_UNAVAILABLE(ios, tvos)		= 0x0067,
+	/*!
+	 @constant	AVB17221AEMCommandTypeAuthenticationAddKeyNonce
+	 @abstract	The command code for the IEEE Std 1722.1™-2021 AEM AUTH_ADD_KEY_NONCE command.
+	 */
+	AVB17221AEMCommandTypeAuthenticationAddKeyNonce API_AVAILABLE(macos(14)) API_UNAVAILABLE(ios, tvos)		= 0x0068,
 } API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos);
 
 

@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2022 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -44,6 +44,19 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 }
 
 /*!
+ @enum			AVVideoCompositionPerFrameHDRDisplayMetadataPolicy
+ @abstract		Configures policy for per frame HDR display metadata
+ @discussion	Determines what HDR display metadata should be attached to the rendered frame.
+ @constant		AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate
+   Default.  Pass the HDR metadata through, if present on the composed frame.
+ @constant		AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate
+   AVVideoComposition may generate HDR metadata and attach it to the rendered frame.  HDR metadata generation is influenced by the color space of the rendered frame, device, and HDR metadata format platform support.  Any previously attached HDR metadata of the same metadata format will be overwritten.
+*/
+typedef NSString *AVVideoCompositionPerFrameHDRDisplayMetadataPolicy NS_TYPED_ENUM														API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+	AVF_EXPORT AVVideoCompositionPerFrameHDRDisplayMetadataPolicy const AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate		API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+	AVF_EXPORT AVVideoCompositionPerFrameHDRDisplayMetadataPolicy const AVVideoCompositionPerFrameHDRDisplayMetadataPolicyGenerate		API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
  @method		videoCompositionWithPropertiesOfAsset:
  @abstract
    Returns a new instance of AVVideoComposition with values and instructions suitable for presenting the video tracks of the specified asset according to its temporal and geometric properties and those of its tracks.
@@ -61,7 +74,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    If the specified asset has no video tracks, this method will return an AVVideoComposition instance with an empty collection of instructions.
  
 */
-+ (AVVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
++ (AVVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		videoCompositionWithPropertiesOfAsset:completionHandler:
@@ -138,6 +151,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
         - When using basic compositing (i.e. AVVideoCompositionLayerInstruction)
 			Setting these properties will ensure that the internal compositor renders (or passes through) frames in specified color space and are tagged as such.
 */
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoComposition (AVVideoCompositionColorimetery)
 
 /*
@@ -166,6 +180,15 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
     Default is nil. Valid values are those suitable for AVVideoTransferFunctionKey. Generally set as a triple along with colorYCbCrMatrix and colorYCbCrMatrix.
 */
 @property (nonatomic, readonly, nullable) NSString *colorTransferFunction API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
+
+/*
+ @property     perFrameHDRDisplayMetadataPolicy
+ @abstract     Configures policy for per frame HDR display metadata on the rendered frame
+ @discussion
+	Allows the system to identify situations where HDR metadata can be generated and attached to the rendered video frame.
+	Default is AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate. Any HDR metadata attached to the composed frame will be propagated to the rendered video frames.
+ */
+@property (nonatomic, readonly) AVVideoCompositionPerFrameHDRDisplayMetadataPolicy perFrameHDRDisplayMetadataPolicy API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 
@@ -206,8 +229,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 					[request finishWithError:err];
 			}];
 */
-+ (AVVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
-			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
++ (AVVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^ NS_SWIFT_SENDABLE)(AVAsynchronousCIImageFilteringRequest *request))applier API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:
@@ -253,7 +275,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 					// handle error
 			}];
  */
-+ (void)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier completionHandler:(void (^)(AVVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
++ (void)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^ NS_SWIFT_SENDABLE)(AVAsynchronousCIImageFilteringRequest *request))applier completionHandler:(void (^)(AVVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -298,7 +320,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    If the specified asset has no video tracks, this method will return an AVMutableVideoComposition instance with an empty collection of instructions.
  
 */
-+ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
++ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		videoCompositionWithPropertiesOfAsset:completionHandler:
@@ -338,7 +360,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    myVideoComposition = [AVVideoComposition videoCompositionWithPropertiesOfAsset:myAsset prototypeInstruction:myPrototypeInstruction];
  
  */
-+ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset prototypeInstruction:(AVVideoCompositionInstruction *)prototypeInstruction API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler:", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
++ (AVMutableVideoComposition *)videoCompositionWithPropertiesOfAsset:(AVAsset *)asset prototypeInstruction:(AVVideoCompositionInstruction *)prototypeInstruction API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler:", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		videoCompositionWithPropertiesOfAsset:prototypeInstruction:completionHandler:
@@ -421,6 +443,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
         - When using basic compositing (i.e. AVVideoCompositionLayerInstruction)
 			Setting these properties will ensure that the internal compositor renders (or passes through) frames in specified color space and are tagged as such.
 */
+API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos)
 @interface AVMutableVideoComposition (AVMutableVideoCompositionColorimetery)
 
 /*
@@ -450,8 +473,18 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 @property (nonatomic, copy, nullable) NSString *colorTransferFunction API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0)) API_UNAVAILABLE(watchos);
 
+/*
+ @property     perFrameHDRDisplayMetadataPolicy
+ @abstract     Configures policy for per frame HDR display metadata on the rendered frame
+ @discussion
+	Allows the system to identify situations where HDR metadata can be generated and attached to the rendered video frame.
+	Default is AVVideoCompositionPerFrameHDRDisplayMetadataPolicyPropagate. Any HDR metadata attached to the composed frame will be propagated to the rendered video frames.
+ */
+@property (nonatomic, copy) AVVideoCompositionPerFrameHDRDisplayMetadataPolicy perFrameHDRDisplayMetadataPolicy API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+
 @end
 
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVMutableVideoComposition (AVMutableVideoCompositionFiltering)
 
 /*!
@@ -487,8 +520,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 					[request finishWithError:err];
 			}];
 */
-+ (AVMutableVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset
-			 applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", watchos(2.0, API_TO_BE_DEPRECATED));
++ (AVMutableVideoComposition *)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^ NS_SWIFT_SENDABLE)(AVAsynchronousCIImageFilteringRequest *request))applier API_DEPRECATED_WITH_REPLACEMENT("videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		videoCompositionWithAsset:applyingCIFiltersWithHandler:completionHandler:
@@ -532,7 +564,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 					// handle error
 			}];
 */
-+ (void)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^)(AVAsynchronousCIImageFilteringRequest *request))applier completionHandler:(void (^)(AVMutableVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
++ (void)videoCompositionWithAsset:(AVAsset *)asset applyingCIFiltersWithHandler:(void (^ NS_SWIFT_SENDABLE)(AVAsynchronousCIImageFilteringRequest *request))applier completionHandler:(void (^)(AVMutableVideoComposition * _Nullable videoComposition, NSError * _Nullable error))completionHandler API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -542,7 +574,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@abstract	An AVVideoCompositionInstruction object represents an operation to be performed by a compositor.
  
 	@discussion
-		An AVVideoComposition object maintains an array of instructions to perform its composition.
+		An AVVideoComposition object maintains an array of instructions to perform its composition.  This class is not intended to be subclassed; instead, conform to AVVideoCompositionInstructionProtocol ("AVVideoCompositionInstruction" in Objective-C).
 */
 
 
@@ -931,9 +963,9 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 
 - (CMPersistentTrackID)unusedTrackID
 #if __swift__
-API_DEPRECATED("Use findUnusedTrackID() instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use findUnusedTrackID() instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("findUnusedTrackIDWithCompletionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("findUnusedTrackIDWithCompletionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -965,7 +997,7 @@ API_DEPRECATED_WITH_REPLACEMENT("findUnusedTrackIDWithCompletionHandler:", macos
    In the course of validation, the receiver will invoke its validationDelegate with reference to any trouble spots in the video composition.
    An exception will be raised if the delegate modifies the receiver's array of instructions or the array of layerInstructions of any AVVideoCompositionInstruction contained therein during validation.
 */
-- (BOOL)isValidForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate API_DEPRECATED_WITH_REPLACEMENT("determineValidityForAsset:timeRange:validationDelegate:completionHandler:", macos(10.8, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+- (BOOL)isValidForAsset:(nullable AVAsset *)asset timeRange:(CMTimeRange)timeRange validationDelegate:(nullable id<AVVideoCompositionValidationHandling>)validationDelegate API_DEPRECATED_WITH_REPLACEMENT("determineValidityForAsset:timeRange:validationDelegate:completionHandler:", macos(10.8, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		determineValidityForAsset:timeRange:validationDelegate:completionHandler:
@@ -987,6 +1019,7 @@ API_DEPRECATED_WITH_REPLACEMENT("findUnusedTrackIDWithCompletionHandler:", macos
 
 @end
 
+API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @protocol AVVideoCompositionValidationHandling <NSObject>
 
 @optional

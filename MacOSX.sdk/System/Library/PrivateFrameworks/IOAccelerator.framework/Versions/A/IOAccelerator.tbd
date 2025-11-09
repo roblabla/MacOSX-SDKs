@@ -108,6 +108,6 @@ exports:
                        _IOAccelVideoContextSetExecutableName, _IOAccelVideoContextSubmitDataBuffers, 
                        _IOAccelVideoContextTestResourceSysMem, ___globalCommPage ]
     objc-classes:    [ IOAccelMTLEvent ]
-    objc-ivars:      [ IOAccelMTLEvent._eventName, IOAccelMTLEvent._globalTraceObjectID, 
-                       IOAccelMTLEvent._sharedRef ]
+    objc-ivars:      [ IOAccelMTLEvent._eventName, IOAccelMTLEvent._eventOptions, 
+                       IOAccelMTLEvent._globalTraceObjectID, IOAccelMTLEvent._sharedRef ]
 ...

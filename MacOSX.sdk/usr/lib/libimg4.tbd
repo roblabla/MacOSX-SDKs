@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libimg4.dylib'
-current-version: 202.100.37
+current-version: 245
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ __img4_chip_ap_category_ff02, __img4_chip_ap_category_ff03, 

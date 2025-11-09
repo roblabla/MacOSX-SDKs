@@ -7,13 +7,14 @@ current-version: 153
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _KSCKErrorDomain, _KSCloudKitAccountDidChange, _KSCloudKitAccountDidChangeAccountChangedKey, 
-                       _KSCloudKitAccountDidChangeDeviceToDeviceKey, _KSCloudKitAccountDidChangeStatusKey, 
-                       _KSCloudKitAccountDidChangeUserChangedKey, _KSCloudKitAccountDidSuccessfullyCreateZone, 
-                       _KSCloudKitIdentitiesDidChange, _KSDeviceProtectionClassDidChange, 
-                       _KSTextReplacementDidChangeNotification, _KeyboardServicesVersionNumber, 
-                       _KeyboardServicesVersionString, __KSDevicesMigrationStateDidChange, 
-                       __KSGetSetting, __KSTIBuddySetupDidFinishNotification_Private, 
+    symbols:         [ _KSCKErrorDomain, _KSCategory, _KSCloudKitAccountDidChange, 
+                       _KSCloudKitAccountDidChangeAccountChangedKey, _KSCloudKitAccountDidChangeDeviceToDeviceKey, 
+                       _KSCloudKitAccountDidChangeStatusKey, _KSCloudKitAccountDidChangeUserChangedKey, 
+                       _KSCloudKitAccountDidSuccessfullyCreateZone, _KSCloudKitIdentitiesDidChange, 
+                       _KSDeviceProtectionClassDidChange, _KSTextReplacementDidChangeNotification, 
+                       _KeyboardServicesVersionNumber, _KeyboardServicesVersionString, 
+                       __KSDevicesMigrationStateDidChange, __KSGetSetting, __KSSharedAcrossLanguagesNegativeLearning, 
+                       __KSSharedAcrossLanguagesVulgarWordUsage, __KSTIBuddySetupDidFinishNotification_Private, 
                        __KSTRCKStoreDidReceiveChangesNotification, __KSTRLegacyStoreDidImportChangesNotification, 
                        __KSTRLegacyStoreDidImportUbiquitousChanges, __KSTRShouldCleanupResources, 
                        __KSTextReplacementDeleteDidFailEntriesKey, __KSTextReplacementDeleteDidFailErrorsKey, 
@@ -28,7 +29,8 @@ exports:
                        _kosxMinorSubversionForCloudKitSync, _kosxMinorVersForCloudKitSync, 
                        _ksDefaultDateNormalise, _ksDefaultEnabled, _ksDefaultPullTime, 
                        _ksDefaultPushTime, _ksDefaultSaveDynamicData, _ksDefaultSaveLanguageModel, 
-                       _ksDefaultSizeNormalise, _ksDefaultSortDynamicData, _ksDefaultSortLanguageModel ]
+                       _ksDefaultSizeNormalise, _ksDefaultSortDynamicData, _ksDefaultSortLanguageModel, 
+                       _ksDefaultSortNegativeLearning, _ksDefaultSortVulgarWordUsageDatabase ]
     objc-classes:    [ ArraySlice, ArraySlicer, _KSAggdLogger, _KSCKSyncStateManagedObject, 
                        _KSCloudKitManager, _KSControlFileController, _KSDeviceInfo, 
                        _KSDeviceStateMonitor, _KSFileDirectory, _KSFileEntry, _KSFileFile, 

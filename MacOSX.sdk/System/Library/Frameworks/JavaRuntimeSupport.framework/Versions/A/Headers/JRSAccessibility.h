@@ -4,7 +4,6 @@
 //
 
 #import <JavaRuntimeSupport/JRSDefines.h>
-#import <JavaRuntimeSupport/JRSDefines.h>
 
 JRS_BEGIN_DECLS
 

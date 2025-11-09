@@ -1,22 +1,20 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
+                   arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_platform.dylib'
-current-version: 292.100.1
+current-version: 306.0.1
 parent-umbrella:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     umbrella:        System
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
-    symbols:         [ '_OSAtomicFifoDequeue$VARIANT$PFZ', '_OSAtomicFifoDequeue$VARIANT$UnfairLock', 
-                       '_OSAtomicFifoEnqueue$VARIANT$PFZ', '_OSAtomicFifoEnqueue$VARIANT$UnfairLock', 
-                       ___no_overread_variant_setup, __sigtramp, _bzero_sse_np, _longjmperror, 
-                       _memmove_sse_np, _memset_pattern16_sse_np, _memset_pattern4_sse_np, 
-                       _memset_pattern8_sse_np, _memset_sse_np ]
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ i386-macos, i386-maccatalyst ]
+    symbols:         [ _MKGetTimeBaseInfo, _udiv10 ]
+  - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst ]
+    symbols:         [ __sigtramp, _longjmperror ]
+  - targets:         [ i386-macos, i386-maccatalyst, x86_64-macos, x86_64-maccatalyst, 
+                       arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _OSAtomicAdd32, _OSAtomicAdd32Barrier, _OSAtomicAdd64, _OSAtomicAdd64Barrier, 
                        _OSAtomicAnd32, _OSAtomicAnd32Barrier, _OSAtomicAnd32Orig, 
                        _OSAtomicAnd32OrigBarrier, _OSAtomicCompareAndSwap32, _OSAtomicCompareAndSwap32Barrier, 
@@ -69,6 +67,12 @@ exports:
                        _setjmp, _siglongjmp, _sigsetjmp, _spin_lock, _spin_lock_try, 
                        _spin_unlock, _swapcontext, _sys_cache_control, _sys_dcache_flush, 
                        _sys_icache_invalidate ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
+    symbols:         [ '_OSAtomicFifoDequeue$VARIANT$PFZ', '_OSAtomicFifoDequeue$VARIANT$UnfairLock', 
+                       '_OSAtomicFifoEnqueue$VARIANT$PFZ', '_OSAtomicFifoEnqueue$VARIANT$UnfairLock', 
+                       ___no_overread_variant_setup, _bzero_sse_np, _memmove_sse_np, 
+                       _memset_pattern16_sse_np, _memset_pattern4_sse_np, _memset_pattern8_sse_np, 
+                       _memset_sse_np ]
   - targets:         [ arm64-macos, arm64-maccatalyst, arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __ctx_done ]
 ...

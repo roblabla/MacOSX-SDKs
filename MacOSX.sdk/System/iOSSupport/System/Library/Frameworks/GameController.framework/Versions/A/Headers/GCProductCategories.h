@@ -16,7 +16,6 @@
 @see GCDevice.h
 */
 
-
 /// Game Controller Product Categories
 
 GAMECONTROLLER_EXTERN NSString *const GCProductCategoryDualSense API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
@@ -24,6 +23,8 @@ GAMECONTROLLER_EXTERN NSString *const GCProductCategoryDualShock4 API_AVAILABLE(
 GAMECONTROLLER_EXTERN NSString *const GCProductCategoryMFi API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 GAMECONTROLLER_EXTERN NSString *const GCProductCategoryXboxOne API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0));
 GAMECONTROLLER_EXTERN NSString *const GCProductCategoryHID API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));
+
+GAMECONTROLLER_EXTERN NSString *const GCProductCategoryArcadeStick API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 
 

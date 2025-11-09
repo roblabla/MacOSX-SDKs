@@ -14,7 +14,8 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIView, UIBezierPath;
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) @interface UIFocusEffect : NSObject <NSCopying>
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+@interface UIFocusEffect : NSObject <NSCopying>
 
 /// Creates a default system effect using metrics inferred from the focus item.
 + (instancetype)effect;
@@ -35,7 +36,8 @@ typedef NS_ENUM(NSInteger, UIFocusHaloEffectPosition) {
 } API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) @interface UIFocusHaloEffect : UIFocusEffect
+UIKIT_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+@interface UIFocusHaloEffect : UIFocusEffect
 
 /// Creates a rectangular halo.
 + (instancetype)effectWithRect:(CGRect)rect;

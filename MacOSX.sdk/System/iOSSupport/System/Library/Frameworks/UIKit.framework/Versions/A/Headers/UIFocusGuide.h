@@ -25,7 +25,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, copy, null_resettable) NSArray<id<UIFocusEnvironment>> *preferredFocusEnvironments API_AVAILABLE(ios(10.0));
 
 /// Setting a preferred focused view marks this guide's layoutFrame as focusable, and if focused, redirects focus to its preferred focused view. If nil, this guide is effectively disabled.
-@property (nonatomic, weak, nullable) UIView *preferredFocusedView API_DEPRECATED_WITH_REPLACEMENT("preferredFocusEnvironments", ios(9.0, 10.0));
+@property (nonatomic, weak, nullable) UIView *preferredFocusedView API_DEPRECATED_WITH_REPLACEMENT("preferredFocusEnvironments", ios(9.0, 10.0)) API_UNAVAILABLE(visionos);
 
 @end
 

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftNearbyInteraction.dylib'
-current-version: 336.0.3
+current-version: 413.3.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -35,6 +35,8 @@ exports:
                        '_$s17NearbyInteraction28NIAlgorithmConvergenceStatusOSQAAMc', 
                        '_$sSo14NINearbyObjectC17NearbyInteractionE15horizontalAngleSfSgvg', 
                        '_$sSo14NINearbyObjectC17NearbyInteractionE15horizontalAngleSfSgvpMV', 
+                       '_$sSo14NINearbyObjectC17NearbyInteractionE23horizontalAngleAccuracySfSgvg', 
+                       '_$sSo14NINearbyObjectC17NearbyInteractionE23horizontalAngleAccuracySfSgvpMV', 
                        '_$sSo14NINearbyObjectC17NearbyInteractionE8distanceSfSgvg', 
                        '_$sSo14NINearbyObjectC17NearbyInteractionE8distanceSfSgvpMV', 
                        '_$sSo14NINearbyObjectC17NearbyInteractionE9directions5SIMD3VySfGSgvg', 

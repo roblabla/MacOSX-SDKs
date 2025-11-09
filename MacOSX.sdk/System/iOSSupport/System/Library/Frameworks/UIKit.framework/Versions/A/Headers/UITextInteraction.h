@@ -19,7 +19,7 @@ typedef NS_ENUM (NSInteger, UITextInteractionMode) {
     UITextInteractionModeNonEditable,
 };
 
-NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
 @protocol UITextInteractionDelegate <NSObject>
 @optional
 - (BOOL)interactionShouldBegin:(UITextInteraction *)interaction atPoint:(CGPoint)point;

@@ -1,4 +1,4 @@
-framework module iAd [extern_c] {
+framework module iAd {
   umbrella header "iAd.h"
   export *
   module * { export * }

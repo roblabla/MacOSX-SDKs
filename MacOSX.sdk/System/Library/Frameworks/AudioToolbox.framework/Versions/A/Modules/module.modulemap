@@ -1,4 +1,4 @@
-framework module AudioToolbox [extern_c] [system] {
+framework module AudioToolbox [system] {
 	umbrella header "AudioToolbox.h"
 
 	header "AUMIDIController.h"

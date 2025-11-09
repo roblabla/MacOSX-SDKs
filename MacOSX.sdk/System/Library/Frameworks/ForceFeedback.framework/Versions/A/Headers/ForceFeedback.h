@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 //      File:           ForceFeedback.h
 //      Contains:       Public interfaces for Force Feedback technology.
-//      Copyright:      © 2002-2003 by Apple Computer, Inc. All rights reserved.
+//      Copyright:      ï¿½ 2002-2003 by Apple Computer, Inc. All rights reserved.
 //
 //-----------------------------------------------------------------------------
 
@@ -18,6 +18,16 @@
 #warning You must turn on gcc extensions to use this header
 #endif
 
+#include <CoreFoundation/CoreFoundation.h>
+#if COREFOUNDATION_CFPLUGINCOM_SEPARATE
+#include <CoreFoundation/CFPlugInCOM.h>
+#endif
+
+#include <MacTypes.h>
+#include <IOKit/IOTypes.h>
+#include <ForceFeedback/ForceFeedbackConstants.h>
+
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -27,15 +37,6 @@ extern "C" {
 	@discussion	The Force Feedback API allows developers to control Force Feedback devices attached to the system.  It is a distilled version of the Force Feedback functionality found in Microsoft's DirectInput API.  Developers familiar with that API should find this API to be similar.
 
 */
-
-#include <CoreFoundation/CoreFoundation.h>
-#if COREFOUNDATION_CFPLUGINCOM_SEPARATE
-#include <CoreFoundation/CFPlugInCOM.h>
-#endif
-
-#include <MacTypes.h>
-#include <IOKit/IOTypes.h>
-#include <ForceFeedback/ForceFeedbackConstants.h>
 
 //-----------------------------------------------------------------------------
 // The Version of the FF API
@@ -461,8 +462,8 @@ typedef FFCAPABILITIES * PFFCAPABILITIES;
 // functions.  Call FFDeviceReleaseEffect to unload the effect and clean up
 // its memory.  - Jeff Mallett 9/25/02
 //
-typedef struct {} __FFDHIDDEN,     * FFDeviceObjectReference;
-typedef struct {} __FFEHIDDEN,     * FFEffectObjectReference;
+typedef struct __FFDHIDDEN * FFDeviceObjectReference;
+typedef struct __FFEHIDDEN * FFEffectObjectReference;
 
 
 //-----------------------------------------------------------------------------

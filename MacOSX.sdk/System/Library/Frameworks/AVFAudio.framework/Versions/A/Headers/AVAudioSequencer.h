@@ -56,6 +56,7 @@ NS_INLINE AVBeatRange AVMakeBeatRange(AVMusicTimeStamp startBeat, AVMusicTimeSta
 	return r;
 }
 
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 typedef NSString *AVAudioSequencerInfoDictionaryKey NS_TYPED_ENUM;
 
 AVAS_EXPORT

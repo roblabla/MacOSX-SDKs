@@ -51,6 +51,12 @@ AX_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0), macos(11.0))
 API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0), macos(11.0))
 @protocol AXCustomContentProvider <NSObject>
 @property (nonatomic, copy, null_resettable) NSArray<AXCustomContent *> *accessibilityCustomContent;
+
+// The block based setter takes precedence over the single line setter and property override.
+// The return type for the block must be a pointer to an AXCustomContent instance.
+typedef NSArray<AXCustomContent *> *_Nullable(^AXCustomContentReturnBlock)(void);
+@optional
+@property (nonatomic, copy, nullable) AXCustomContentReturnBlock accessibilityCustomContentBlock API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0), macos(14.0));
 @end
 
 NS_ASSUME_NONNULL_END

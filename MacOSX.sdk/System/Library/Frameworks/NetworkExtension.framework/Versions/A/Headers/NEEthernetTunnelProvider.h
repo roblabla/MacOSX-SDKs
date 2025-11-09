@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * NEEthernetTunnelProvider is part of NetworkExtension.framework.
  */
-API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NEEthernetTunnelProvider : NEPacketTunnelProvider
 
 @end

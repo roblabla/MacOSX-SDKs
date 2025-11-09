@@ -136,7 +136,11 @@ COREMOTION_EXPORT API_AVAILABLE(ios(4.0)) API_UNAVAILABLE(tvos)
  *    for CMAttitudeReferenceFrameXArbitraryZVertical and CMAttitudeReferenceFrameXArbitraryCorrectedZVertical.
  *
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+@property(readonly, nonatomic) double heading COREMOTION_EXPORT API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(visionos);
+#else
 @property(readonly, nonatomic) double heading COREMOTION_EXPORT API_AVAILABLE(ios(11.0));
+#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  sensorLocation

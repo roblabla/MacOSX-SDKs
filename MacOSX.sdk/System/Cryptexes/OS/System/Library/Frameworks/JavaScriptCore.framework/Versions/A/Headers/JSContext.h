@@ -179,7 +179,7 @@ JS_EXPORT API_AVAILABLE(macos(10.9), ios(7.0))
 @property
 @discussion Controls whether this @link JSContext @/link is inspectable in Web Inspector. The default value is NO.
 */
-@property (nonatomic, getter=isInspectable) BOOL inspectable API_AVAILABLE(macos(13.3), ios(NA)) NS_SWIFT_NAME(isInspectable);
+@property (nonatomic, getter=isInspectable) BOOL inspectable API_AVAILABLE(macos(13.3), ios(16.4)) NS_SWIFT_NAME(isInspectable);
 
 @end
 

@@ -24,6 +24,7 @@ exports:
                        '_$s22NewDeviceOutreachMacUI20NDOCoverageViewModelC13revealElement6forKeyySSSg_tFTq', 
                        '_$s22NewDeviceOutreachMacUI20NDOCoverageViewModelC14deeplinkParamsSSSgvpfi', 
                        '_$s22NewDeviceOutreachMacUI20NDOCoverageViewModelC15fetchedWarranty33_EC16110234CB215D6D59DEF41978F10FLLSo11NDOWarrantyCSgvpfi', 
+                       '_$s22NewDeviceOutreachMacUI20NDOCoverageViewModelC18managePlanLaunchedSbvpfi', 
                        '_$s22NewDeviceOutreachMacUI20NDOCoverageViewModelC18purchaseRetryCount33_EC16110234CB215D6D59DEF41978F10FLLSivpfi', 
                        '_$s22NewDeviceOutreachMacUI20NDOCoverageViewModelC22isExecutingCoverageAPISbvpfP', 
                        '_$s22NewDeviceOutreachMacUI20NDOCoverageViewModelC23_isExecutingCoverageAPI33_EC16110234CB215D6D59DEF41978F10FLL7Combine9PublishedVySbGvpfi', 
@@ -140,7 +141,7 @@ exports:
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerCMn', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerCN', 
                        '_$s22NewDeviceOutreachMacUI27NDOACCoverageViewControllerCfD', 
-                       _NewDeviceOutreachMacUIVersionNumber, _NewDeviceOutreachMacUIVersionString, 
+                       _IsInternal, _NewDeviceOutreachMacUIVersionNumber, _NewDeviceOutreachMacUIVersionString, 
                        __NDOLogSystem ]
     objc-classes:    [ NDOACObjCBridge, NDOFollowUp, _TtC22NewDeviceOutreachMacUI24NDOACAMSUIViewController, 
                        _TtC22NewDeviceOutreachMacUI27NDOACCoverageViewController ]

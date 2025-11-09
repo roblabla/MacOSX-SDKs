@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveSupport.framework/Versions/A/ProactiveSupport'
-current-version: 365.9
+current-version: 388
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -66,7 +66,8 @@ exports:
                        __PAS_sqlite3_bind_nssecurecoding, __PAS_sqlite3_bind_nsstring, 
                        __PAS_sqlite3_column_blob_bytes_block, __PAS_sqlite3_column_nsdata, 
                        __PAS_sqlite3_column_nssecurecoding, __PAS_sqlite3_column_nsstring, 
-                       __pas_registerSqliteCollections, _kPASDatabaseMigratorLatestVersion ]
+                       __pas_calculateDefaultGeoHash, __pas_calculateGeoHash, __pas_registerSqliteCollections, 
+                       _kPASDatabaseMigratorLatestVersion ]
     objc-classes:    [ _PASArgOption, _PASArgParser, _PASArgSubcommand, _PASArgSubcommandHandlerParams, 
                        _PASArgToplevelHandlerParams, _PASArrayProxy, _PASAsset2, 
                        _PASAsset2GuardedData, _PASBigEndianUTF16String, _PASBloomFilter, 
@@ -76,7 +77,7 @@ exports:
                        _PASCompression, _PASCrashHelper, _PASDatabaseJournal, _PASDatabaseJournalFile, 
                        _PASDatabaseMigrationContext, _PASDatabaseMigrator, _PASDeviceIdentifier, 
                        _PASDeviceInfo, _PASDeviceState, _PASDispatch, _PASDomainSelection, 
-                       _PASEntitlement, _PASFileUtils, _PASImmutableDomainSelection, 
+                       _PASEntitlement, _PASFileUtils, _PASHistogramData, _PASImmutableDomainSelection, 
                        _PASInternPool, _PASKVOHandler, _PASKVOHandlerTask, _PASLPArray, 
                        _PASLPArrayContext, _PASLPDictionary, _PASLPDictionaryContext, 
                        _PASLPDictionaryEnumerator, _PASLPReaderBinaryPlist, _PASLPReaderV1, 
@@ -84,20 +85,22 @@ exports:
                        _PASLanguageDetectionNLLanguageIdentifierWrapper, _PASLazyArrayBase, 
                        _PASLazyImmortalResult, _PASLazyPlist, _PASLazyPlistCorruptException, 
                        _PASLazyPlistWithBPlistSupport, _PASLazyPurgeableResult, _PASLazyResult, 
-                       _PASLevenshtein, _PASLock, _PASMutableDomainSelection, _PASNotificationDescriptor, 
-                       _PASNotificationToken, _PASNotificationTracker, _PASPosixDataCollector, 
-                       _PASPosixPipeContext, _PASPosixUtils, _PASProbablisticCrashesConfig, 
-                       _PASProxyConcatenatedString, _PASQueueLock, _PASRng, _PASSQLColumnMapping, 
-                       _PASSecureCodingHelper, _PASSimpleCoalescingTimer, _PASSqlReadTransaction, 
-                       _PASSqlWriteTransaction, _PASSqliteCollectionsConstraintPlanInfo, 
-                       _PASSqliteCollectionsCursor, _PASSqliteDatabase, _PASSqliteDefaultErrorHandler, 
-                       _PASSqliteKeyValueCursor, _PASSqliteNSArrayCursor, _PASSqliteNSDictionaryCursor, 
-                       _PASSqliteNSIndexSetCursor, _PASSqliteNSOrderedSetCursor, 
-                       _PASSqliteNSSetCursor, _PASSqliteRowIdCursor, _PASSqliteRowIdIndexSetCursor, 
-                       _PASSqliteStatement, _PASSqliteStatementCache, _PASSqliteTransaction, 
-                       _PASStringPairs, _PASTempfileDescr, _PASTuple2, _PASUTF8String, 
-                       _PASUnlockBlock, _PASXPCClientHelper, _PASXPCListener, _PASXPCServer, 
-                       _PASXPCServerHelper, _PASXPCUtilities, _PASZoneSupport, _PASZonedObject ]
+                       _PASLevenshtein, _PASLock, _PASLowValueCardinalityMutableDictionary, 
+                       _PASLowValueCardinalityMutableDictionaryEnumerator, _PASMutableDomainSelection, 
+                       _PASNotificationDescriptor, _PASNotificationToken, _PASNotificationTracker, 
+                       _PASPosixDataCollector, _PASPosixPipeContext, _PASPosixUtils, 
+                       _PASProbablisticCrashesConfig, _PASProxyConcatenatedString, 
+                       _PASQueueLock, _PASRng, _PASSQLColumnMapping, _PASSecureCodingHelper, 
+                       _PASSimpleCoalescingTimer, _PASSqlReadTransaction, _PASSqlWriteTransaction, 
+                       _PASSqliteCollectionsConstraintPlanInfo, _PASSqliteCollectionsCursor, 
+                       _PASSqliteDatabase, _PASSqliteDefaultErrorHandler, _PASSqliteKeyValueCursor, 
+                       _PASSqliteNSArrayCursor, _PASSqliteNSDictionaryCursor, _PASSqliteNSIndexSetCursor, 
+                       _PASSqliteNSOrderedSetCursor, _PASSqliteNSSetCursor, _PASSqliteRowIdCursor, 
+                       _PASSqliteRowIdIndexSetCursor, _PASSqliteStatement, _PASSqliteStatementCache, 
+                       _PASSqliteTransaction, _PASStringPairs, _PASTempfileDescr, 
+                       _PASTuple2, _PASUTF8String, _PASUnlockBlock, _PASXPCClientHelper, 
+                       _PASXPCListener, _PASXPCServer, _PASXPCServerHelper, _PASXPCUtilities, 
+                       _PASZoneSupport, _PASZonedObject ]
     objc-eh-types:   [ _PASLazyPlistCorruptException ]
     objc-ivars:      [ _PASArgOption._longOptionFlag, _PASArrayProxy._countBlock, 
                        _PASArrayProxy._objectAtIndexBlock, _PASAsset2GuardedData._bestAssetVersionObserved, 
@@ -114,12 +117,13 @@ exports:
                        _PASDatabaseMigrationContext.object, _PASDatabaseMigrationContext.version, 
                        _PASLRUCacheData.items, _PASLRUCacheData.keysMRU, _PASLanguageDetectionNLLanguageIdentifierWrapper._languageIdentifier, 
                        _PASLazyResult._block, _PASLazyResult._data, _PASLazyResult._lock, 
+                       _PASLowValueCardinalityMutableDictionary._count, _PASLowValueCardinalityMutableDictionary._objectsAndKeys, 
                        _PASNotificationDescriptor.isCanceled, _PASPosixPipeContext._queue, 
                        _PASPosixPipeContext._readChannel, _PASPosixPipeContext._stop, 
                        _PASPosixPipeContext._writeHandle, _PASSqliteDatabase._currentExclusivity, 
                        _PASSqliteDatabase._explainedQueriesLogFile, _PASSqliteDatabase._explainedQueriesLogged, 
                        _PASSqliteDatabase._explainedQueryForPlan, _PASSqliteDatabase._filename, 
                        _PASSqliteDatabase._lock, _PASSqliteDatabase._preparedForFirstQuery, 
-                       _PASSqliteDatabase._statementCache, _PASSqliteDatabase._statementsToFinalizeAsync, 
+                       _PASSqliteDatabase._statementCache, _PASSqliteDatabase._waitingForLock, 
                        _PASUnlockBlock.block, _PASUnlockBlock.qos ]
 ...

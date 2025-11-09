@@ -42,7 +42,6 @@ API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
 static const NSUInteger VNTranslationalImageRegistrationRequestRevision1 = 1;
 
 
-
 /*!
 	@brief An image registration request that will calculate a homographic transformation for morphing a "floating" image onto an unchanging "reference" image.
 	
@@ -62,6 +61,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0))
 static const NSUInteger VNHomographicImageRegistrationRequestRevision1 = 1;
+
 
 
 NS_ASSUME_NONNULL_END

@@ -1,8 +1,10 @@
 /*
 	File:		OBEXSession.h
 	Contains:	OBEX session object.
-    Copyright:	(c) 2010 by Apple, Inc. All rights reserved.
+    Copyright:	(c) 2010, 2023 by Apple, Inc. All rights reserved.
 */
+
+#if __OBJC__
 
 #import <IOKit/IOKitLib.h>
 
@@ -643,3 +645,5 @@ struct OBEXTransportEvent
 -(OBEXError)closeTransportConnection;
 
 @end
+
+#endif // __OBJC__

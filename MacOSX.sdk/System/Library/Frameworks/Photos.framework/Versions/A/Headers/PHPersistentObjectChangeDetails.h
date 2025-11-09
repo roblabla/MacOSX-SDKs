@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PHObject;
 
 API_AVAILABLE(macosx(13), ios(16), tvos(16))
+NS_SWIFT_SENDABLE
 @interface PHPersistentObjectChangeDetails : NSObject
 
 @property (nonatomic, readonly) PHObjectType objectType;

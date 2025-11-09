@@ -172,7 +172,7 @@ nw_txt_record_find_key(nw_txt_record_t txt_record, const char *key);
  * @param value
  *		The value corresponding to the key. If the key does not exist or has no
  *		associated value, value will be NULL. Note that the bytes pointed to by
- *		value is only valid within the scope of the block.
+ *		value are only valid within the scope of the block.
  *
  * @param value_len
  *		The length of the value. If the key does not exist or has no associated

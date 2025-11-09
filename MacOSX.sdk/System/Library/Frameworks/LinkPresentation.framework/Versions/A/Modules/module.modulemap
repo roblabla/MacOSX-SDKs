@@ -1,4 +1,4 @@
-framework module LinkPresentation [extern_c] {
+framework module LinkPresentation {
   umbrella header "LinkPresentation.h"
   export *
   module * { export * }

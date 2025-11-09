@@ -207,6 +207,7 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *  @seealso            CBConnectPeripheralOptionNotifyOnNotificationKey
  *  @seealso            CBConnectPeripheralOptionEnableTransportBridgingKey
  *	@seealso			CBConnectPeripheralOptionRequiresANCS
+ *  @seealso            CBConnectPeripheralOptionEnableAutoReconnect
  *
  */
 - (void)connectPeripheral:(CBPeripheral *)peripheral options:(nullable NSDictionary<NSString *, id> *)options;
@@ -343,6 +344,25 @@ CB_EXTERN_CLASS @interface CBCentralManager : CBManager
  *
  */
 - (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral error:(nullable NSError *)error;
+
+/*!
+ *  @method centralManager:didDisconnectPeripheral:timestamp:isReconnecting:error
+ *
+ *  @param central      The central manager providing this information.
+ *  @param peripheral   The <code>CBPeripheral</code> that has disconnected.
+ *  @param timestamp        Timestamp of the disconnection, it can be now or a few seconds ago.
+ *  @param isReconnecting      If reconnect was triggered upon disconnection.
+ *  @param error        If an error occurred, the cause of the failure.
+ *
+ *  @discussion         This method is invoked upon the disconnection of a peripheral that was connected by {@link connectPeripheral:options:}. If perihperal is
+ *                      connected with connect option {@link CBConnectPeripheralOptionEnableAutoReconnect}, once this method has been called, the system
+ *                      will automatically invoke connect to the peripheral. And if connection is established with the peripheral afterwards,
+ *                      {@link centralManager:didConnectPeripheral:} can be invoked. If perihperal is connected without option
+ *                      CBConnectPeripheralOptionEnableAutoReconnect, once this method has been called, no more methods will be invoked on
+ *                       <i>peripheral</i>'s <code>CBPeripheralDelegate</code> .
+ *
+ */
+- (void)centralManager:(CBCentralManager *)central didDisconnectPeripheral:(CBPeripheral *)peripheral timestamp:(CFAbsoluteTime)timestamp isReconnecting:(BOOL)isReconnecting error:(nullable NSError *)error;
 
 /*!
  *  @method centralManager:connectionEventDidOccur:forPeripheral:

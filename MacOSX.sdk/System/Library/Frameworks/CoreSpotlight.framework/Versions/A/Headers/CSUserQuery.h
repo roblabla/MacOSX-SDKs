@@ -2,7 +2,7 @@
 //  CSUserQuery.h
 //  CoreSpotlight
 //
-//  Copyright © 2021 Apple. All rights reserved.
+//  Copyright © 2022 Apple Inc. All rights reserved.
 //
 
 #import <CoreSpotlight/CSBase.h>
@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(macos(10.13), ios(16.0)) CS_TVOS_UNAVAILABLE
+API_AVAILABLE(macos(13.0), ios(16.0)) CS_TVOS_UNAVAILABLE
 @interface CSUserQueryContext : CSSearchQueryContext
 
 + (CSUserQueryContext *)userQueryContext;
@@ -26,7 +26,7 @@ API_AVAILABLE(macos(10.13), ios(16.0)) CS_TVOS_UNAVAILABLE
 
 @end
 
-API_AVAILABLE(macos(10.13), ios(16.0)) CS_TVOS_UNAVAILABLE
+API_AVAILABLE(macos(13.0), ios(16.0)) CS_TVOS_UNAVAILABLE
 @interface CSUserQuery : CSSearchQuery
 
 - (instancetype)initWithUserQueryString:(NSString * _Nullable)userQueryString userQueryContext:(CSUserQueryContext * _Nullable)userQueryContext NS_DESIGNATED_INITIALIZER;

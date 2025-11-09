@@ -10,7 +10,7 @@ exports:
                        CESAttendeeWrapper, CESAudioAlarmEntityWrapper, CESCalStoreSource, 
                        CESCalendarEntityWrapper, CESCalendarOrderEntityWrapper, CESCalendarWrapper, 
                        CESDisplayAlarmEntityWrapper, CESDriverDataSource, CESEntityWrapper, 
-                       CESEventEntityWrapper, CESEventWrapper, CESObjectWrapper, 
+                       CESEventEntityWrapper, CESEventWrapper, CESLogSubsystem, CESObjectWrapper, 
                        CESOrganizerEntityWrapper, CESOrganizerWrapper, CESRecurrenceEntityWrapper, 
                        CESRecurrenceWrapper ]
 ...

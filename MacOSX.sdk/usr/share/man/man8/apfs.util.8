@@ -1,23 +1,34 @@
-.\" Copyright (c) 2015-2020 Apple Computer, Inc. All rights reserved.
 .\" 
-.\" The contents of this file constitute Original Code as defined in and
-.\" are subject to the Apple Public Source License Version 1.1 (the
-.\" "License").  You may not use this file except in compliance with the
-.\" License.  Please obtain a copy of the License at
-.\" http://www.apple.com/publicsource and read it before using this file.
+.\" Copyright (c) 2015-2023 Apple Inc. All rights reserved.
 .\" 
-.\" This Original Code and all software distributed under the License are
-.\" distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY KIND, EITHER
+.\" @APPLE_OSREFERENCE_LICENSE_HEADER_START@
+.\" 
+.\" This file contains Original Code and/or Modifications of Original Code
+.\" as defined in and that are subject to the Apple Public Source License
+.\" Version 2.0 (the 'License'). You may not use this file except in
+.\" compliance with the License. The rights granted to you under the License
+.\" may not be used to create, or enable the creation or redistribution of,
+.\" unlawful or unlicensed copies of an Apple operating system, or to
+.\" circumvent, violate, or enable the circumvention or violation of, any
+.\" terms of an Apple operating system software license agreement.
+.\" 
+.\" Please obtain a copy of the License at
+.\" http://www.opensource.apple.com/apsl/ and read it before using this file.
+.\" 
+.\" The Original Code and all software distributed under the License are
+.\" distributed on an 'AS IS' basis, WITHOUT WARRANTY OF ANY KIND, EITHER
 .\" EXPRESS OR IMPLIED, AND APPLE HEREBY DISCLAIMS ALL SUCH WARRANTIES,
 .\" INCLUDING WITHOUT LIMITATION, ANY WARRANTIES OF MERCHANTABILITY,
-.\" FITNESS FOR A PARTICULAR PURPOSE OR NON-INFRINGEMENT.  Please see the
-.\" License for the specific language governing rights and limitations
-.\" under the License.
+.\" FITNESS FOR A PARTICULAR PURPOSE, QUIET ENJOYMENT OR NON-INFRINGEMENT.
+.\" Please see the License for the specific language governing rights and
+.\" limitations under the License.
+.\" 
+.\" @APPLE_OSREFERENCE_LICENSE_HEADER_END@
 .\" 
 .\"     @(#)apfs.util.8
-.Dd August 17, 2020
+.Dd May 2, 2023
 .Dt APFS.UTIL 8
-.Os "Mac OS X"
+.Os
 .Sh NAME
 .Nm apfs.util
 .Nd APFS file system utility
@@ -27,7 +38,7 @@
 .Nm
 .Fl A Ar set=yes/no path
 .Nm
-.Fl C Ar -type TYPE path
+.Fl C Ar -type type path
 .Nm
 .Fl D Ar get device
 .Nm
@@ -71,10 +82,11 @@
 .Sh DESCRIPTION
 The
 .Nm
-Command supports getting and setting various file system options.
+command supports getting and setting various file system options.
 
 .Ar path
-argument is a path to any file within the mounted file system.  If it is used to specify a volume, any file within the same volume will get the same result.
+argument is a path to any file within the mounted file system.
+If it is used to specify a volume, any file within the same volume will get the same result.
 .Ar device
 argument is the /dev/diskXsY identifier corresponding to the volume.
 .Ar dir
@@ -88,12 +100,12 @@ get atime update setting for volume specified by
 .It Fl A Ar set=yes/no path
 enable or disable update setting for volume specified by
 .Ar path .
-.It Fl C type Ar TYPE path
+.It Fl C type Ar type path
 clear the purgeability of files of the specified type on the volume referred to by
 .Ar path .
 .br
-.Ar TYPE
-could be one of: photos, music, mail, document, data, podcast, video, movie, messages, books.
+.Ar type
+could be one of: photo, music, mail, document, data, podcast, video, movie, message, book.
 .It Fl D Ar get device
 Get defragmentation setting for volume or container specied by
 .Ar device .
@@ -105,16 +117,18 @@ drop the extents for
 .Ar path
 from the first snapshot
 .It Fl G Ar path
-get stats on the purgeble files on the volume specified by
+get stats on the purgeable files on the volume specified by
 .Ar path .
 .It Fl k
 Return the UUID of the apfs volume on
 .Ar device .
 .It Fl m Ar verb path
-mark the file at path as purgeable with the various options specified.
+mark the file at
+.Ar path
+as purgeable with the various options specified.
 .br
 .Ar verb
-could be many of: -low -med -high -photo -music -mail -document -data -podcast -video -movie -message -book -fault -clear
+could be one or more of: -low -med -high -photo -music -mail -document -data -podcast -video -movie -message -book -fault -clear
 .It Fl M Ar dir
 flag the named directory as "maintain-dir-stats".
 .It Fl O Ar path fs_name
@@ -137,7 +151,11 @@ could be -low -med -high
 .br
 and/or with specified parameters: -minsize VAL -maxage VAL -maxage AGE_IN_SECONDS -total TOTAL_PURGE_AMOUNT
 .br
-and/or specifiend by: -type TYPE, that could be one of -photos -music -mail -document -data -podcast -video -movie -messages -books
+and/or specified by: -type
+.Ar type ,
+that could be one of -photo -music -mail -document -data -podcast -video -movie -message -book
+.br
+(and optionally, -typetotal TYPE_PURGE_AMOUNT)
 .It Fl r Ar dir
 set the sync-root flag on the specified
 .Ar dir
@@ -164,7 +182,7 @@ get the sync-root flag from the specified directory in
 .Ar dir .
 .It Fl z Ar path
 make the file at
-.AR path
+.Ar path
 exempt from copy-on-write semantics for snapshots
 .It Fl Z Ar path
 get the purgeable file flags for the specific file at

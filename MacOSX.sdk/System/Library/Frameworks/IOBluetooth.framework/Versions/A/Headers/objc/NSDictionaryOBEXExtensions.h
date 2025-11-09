@@ -1,7 +1,9 @@
 /*
 	Contains:	OBEX Header construction routines.
-	Copyright:	(C) 2010 by Apple, Inc., all rights reserved.
+	Copyright:	(C) 2010, 2023 by Apple, Inc., all rights reserved.
 */
+
+#if __OBJC__
 
 #import <IOKit/IOKitLib.h>
 #import <stdlib.h>
@@ -53,3 +55,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 
 @end
+
+#endif // __OBJC__

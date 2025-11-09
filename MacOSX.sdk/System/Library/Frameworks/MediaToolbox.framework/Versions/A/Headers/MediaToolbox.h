@@ -9,7 +9,5 @@
 */
 
 #include <MediaToolbox/MTAudioProcessingTap.h>
-#if !TARGET_OS_IPHONE
 #include <MediaToolbox/MTProfessionalVideoWorkflow.h>
-#endif // !TARGET_OS_IPHONE
 #include <MediaToolbox/MTFormatNames.h>

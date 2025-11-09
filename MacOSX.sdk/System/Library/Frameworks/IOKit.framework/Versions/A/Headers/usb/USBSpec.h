@@ -33,22 +33,6 @@
 #include <IOKit/usb/AppleUSBDefinitions.h>
 #include <IOKit/usb/IOUSBHostFamilyDefinitions.h>
 
-#if defined(__has_include)
-
-#if __has_include(<IOKit/usb/IOUSBHostFamily.h>)
-#include <IOKit/usb/IOUSBHostFamily.h>
-#endif
-
-#if __has_include(<IOKit/usb/StandardUSB.h>)
-#include <IOKit/usb/StandardUSB.h>
-
-#ifdef __cplusplus
-using namespace StandardUSB;
-#endif
-#endif
-
-#endif
-
 #ifdef __cplusplus
 extern "C" {
 #endif

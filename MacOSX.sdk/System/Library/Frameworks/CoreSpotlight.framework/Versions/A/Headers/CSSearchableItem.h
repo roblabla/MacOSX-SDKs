@@ -2,7 +2,7 @@
 //  CSSearchableItem.h
 //  CoreSpotlight
 //
-//  Copyright © 2021 Apple. All rights reserved.
+//  Copyright © 2015–2022 Apple Inc. All rights reserved.
 //
 
 #import <CoreSpotlight/CSBase.h>
@@ -43,7 +43,7 @@ CS_TVOS_UNAVAILABLE
                             attributeSet:(CSSearchableItemAttributeSet *)attributeSet;
 
 // For comparison of items ranked by the query
-- (NSComparisonResult)compareByRank:(CSSearchableItem *)other API_AVAILABLE(macos(10.13), ios(16.0)) CS_TVOS_UNAVAILABLE;
+- (NSComparisonResult)compareByRank:(CSSearchableItem *)other API_AVAILABLE(macos(13.0), ios(16.0)) CS_TVOS_UNAVAILABLE;
 
 // Should be unique to your application group.
 // REQUIRED since this is the way you will refer to the item to update the index / delete it from the index

@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IconServices.framework/Versions/A/IconServices'
-current-version: 552
+current-version: 493
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -48,31 +48,33 @@ exports:
                        _kISImageDescriptorMessagesExtensionBadge, _kISImageDescriptorMessagesExtensionLauncher, 
                        _kISImageDescriptorMessagesExtensionStatus, _kISImageDescriptorNotification, 
                        _kISImageDescriptorSpotlight, _kISImageDescriptorTableUIName, 
-                       _kISPrimaryResourceKey, _kISTextResourceKey, _kISTintColorResourceKey, 
-                       _kIconCompilerImageInfoIsSelectedVariantKey, _kIconCompilerImageInfoNameKey, 
-                       _kIconCompilerImageInfoScaleKey, _kIconCompilerImageInfoSizeKey ]
+                       _kISImageDescriptorWidgetAddGallery, _kISPrimaryResourceKey, 
+                       _kISTextResourceKey, _kISTintColorResourceKey, _kIconCompilerImageInfoIsSelectedVariantKey, 
+                       _kIconCompilerImageInfoNameKey, _kIconCompilerImageInfoScaleKey, 
+                       _kIconCompilerImageInfoSizeKey ]
     objc-classes:    [ ISAssetCatalogResource, ISCenterBadgeRecipe, ISCenterEmbossRecipe, 
-                       ISClippingRecipe, ISCompositor, ISCompositorElement, ISCompositorResourceProviderKey, 
-                       ISContentLayer, ISDefaults, ISGenerationRequest, ISGenerationResponse, 
-                       ISGenericRecipe, ISGraphicIconConfiguration, ISIcns, ISIcon, 
-                       ISIconCache, ISIconCacheConfiguration, ISIconDecoration, ISIconDecorationResource, 
-                       ISIconLayer, ISIconObserver, ISIconResourceLocator, ISIconSpecification, 
-                       ISIconTypeResourceLocator, ISIconset, ISImageBag, ISImageCache, 
-                       ISImageDescriptor, ISImageSpecification, ISLayer, ISLeadingStatusBadgeRecipe, 
-                       ISMessagesAppRecipe, ISMultipleFilesRecipe, ISMutableIcns, 
-                       ISMutableStoreIndex, ISOverlayEmbossRecipe, ISResourceFile, 
-                       ISShapeCompositorResource, ISStore, ISStoreIndex, ISStoreMapTable, 
-                       ISStoreUnit, ISSymbol, ISSymbolImageDescriptor, ISSymbolLayer, 
-                       ISTextLayer, ISTrailingStatusBadgeRecipe, ISURLResourcePropertySpecification, 
-                       ISiOSAppClipRecipe, ISiOSAppRecipe, ISiOSMacAppRecipe, ISiosDocumentRecipe, 
-                       ISiosmacDocumentRecipe, ISmacosDocumentRecipe, ISmacosDocumentRecipe1016, 
-                       ISwatchOSAppRecipe ]
+                       ISClippingRecipe, ISCodableIcon, ISCompositor, ISCompositorElement, 
+                       ISCompositorResourceProviderKey, ISContentLayer, ISDefaults, 
+                       ISGenerationRequest, ISGenerationResponse, ISGenericRecipe, 
+                       ISGraphicIconConfiguration, ISIcns, ISIcon, ISIconCache, ISIconCacheConfiguration, 
+                       ISIconDecoration, ISIconDecorationResource, ISIconLayer, ISIconObserver, 
+                       ISIconResourceLocator, ISIconSpecification, ISIconTypeResourceLocator, 
+                       ISIconset, ISImageBag, ISImageDescriptor, ISImageSpecification, 
+                       ISLayer, ISLeadingStatusBadgeRecipe, ISMessagesAppRecipe, 
+                       ISMultipleFilesRecipe, ISMutableIcns, ISMutableStoreIndex, 
+                       ISOverlayEmbossRecipe, ISResourceFile, ISShapeCompositorResource, 
+                       ISStore, ISStoreIndex, ISStoreMapTable, ISStoreUnit, ISSymbol, 
+                       ISSymbolImageDescriptor, ISSymbolLayer, ISTextLayer, ISTrailingStatusBadgeRecipe, 
+                       ISURLResourcePropertySpecification, ISiOSAppClipRecipe, ISiOSAppOverhangingBadgeRecipe, 
+                       ISiOSAppRecipe, ISiOSMacAppRecipe, ISiosDocumentRecipe, ISiosmacDocumentRecipe, 
+                       ISmacosDocumentRecipe, ISmacosDocumentRecipe1016, ISrOSAppRecipe, 
+                       IStvOSAppRecipe, ISwatchOSAppRecipe ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/IconFoundation.framework/Versions/A/IconFoundation'
-current-version: 552
+current-version: 493
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

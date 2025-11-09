@@ -1379,7 +1379,7 @@
  *	feature tests from Configure are generally more reliable.
  */
 #define OSNAME "darwin"		/**/
-#define OSVERS "22.0"		/**/
+#define OSVERS "23.0"		/**/
 
 /* CAT2:
  *	This macro concatenates 2 tokens together.

@@ -57,6 +57,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMovieTrack (AVMovieTrackMediaDataStorage)
 
 /*!
@@ -140,6 +141,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackLanguageProperties)
 
 /*!
@@ -159,6 +161,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackVisualProperties)
 
 /*!
@@ -200,6 +203,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackAudibleProperties)
 
 /*!
@@ -211,6 +215,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackChunkProperties)
 
 /*!
@@ -256,6 +261,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackTrackLevelEditing)
 
 /*!
@@ -310,6 +316,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackMetadataEditing)
 
 /*!
@@ -322,6 +329,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackTrackAssociations)
 
 /*!
@@ -348,6 +356,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackFormatDescriptions)
 
 /*!
@@ -366,6 +375,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (AVMutableMovieTrackSampleLevelEditing)
 
 /*!
@@ -468,6 +478,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  @discussion
 	See AVAssetTrack's interface for more information about these interfaces.
  */
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovieTrack (SynchronousTrackInterface)
 
 - (BOOL)hasMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic;

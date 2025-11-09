@@ -8,8 +8,7 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _ContextKitExtractionVersionNumber, _ContextKitExtractionVersionString ]
     objc-classes:    [ CKContextContentProvider, CKContextContentProviderManager, 
-                       CKContextContentProviderWindowComponent, CKContextExecutor, 
-                       CKContextExtractionItem, CKContextExtractionUtil, CKContextImageSource, 
-                       CKContextItem, CKContextSharedExtractionHelper, CKContextUIClasses, 
-                       CKContextUIElement ]
+                       CKContextExecutor, CKContextExtractionItem, CKContextExtractionUtil, 
+                       CKContextImageSource, CKContextItem, CKContextSharedExtractionHelper, 
+                       CKContextUIClasses, CKContextUIElement ]
 ...

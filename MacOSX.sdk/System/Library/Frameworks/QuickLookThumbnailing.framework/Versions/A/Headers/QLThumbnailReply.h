@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  1. Draw the thumbnail, by providing a QLThumbnailReply created with a drawing block.
  2. Pass the thumbnail file URL, by providing a QLThumbnailReply created with a file URL.
  */
-API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(watchos,tvos)  __attribute__((visibility("default")))
+API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)  __attribute__((visibility("default")))
 @interface QLThumbnailReply : NSObject
 
 ///The extensionBadge is a short string identifying the file type used as a badge when producing an icon.

@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class      MLCGraph
     @discussion A graph of layers that can be used to build a training or inference graph
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 @interface MLCGraph : NSObject
 
 /*! @abstract   The device to be used when compiling and executing a graph

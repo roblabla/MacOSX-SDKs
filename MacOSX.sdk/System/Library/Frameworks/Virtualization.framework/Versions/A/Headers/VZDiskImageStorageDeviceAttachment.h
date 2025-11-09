@@ -2,7 +2,7 @@
 //  VZDiskImageStorageDeviceAttachment.h
 //  Virtualization
 //
-//  Copyright © 2019-2021 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZStorageDeviceAttachment.h>
@@ -58,6 +58,8 @@ typedef NS_ENUM(NSInteger, VZDiskImageSynchronizationMode) {
     This storage device attachment uses a disk image on the host file system as the drive of the storage device.
 
     Only raw data disk images are supported.
+ @see VZNVMExpressControllerDeviceConfiguration
+ @see VZUSBMassStorageDeviceConfiguration
  @see VZVirtioBlockDeviceConfiguration
  */
 VZ_EXPORT API_AVAILABLE(macos(11.0))

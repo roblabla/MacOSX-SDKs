@@ -50,7 +50,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  typically because the input state queue filled up and older input state
  snapshots were dropped.
  */
-- (nullable NSEnumerator<id<GCPhysicalInputElement>> *)changedElements;
+- (nullable NSEnumerator<id<GCPhysicalInputElement>> *)changedElements NS_REFINED_FOR_SWIFT;
 
 @end
 

@@ -36,3 +36,5 @@
 #import <MetricKit/MXAppLaunchDiagnostic.h>
 #import <MetricKit/MXAppExitMetric.h>
 #import <MetricKit/MXError.h>
+#import <MetricKit/MXSignpostRecord.h>
+#import <MetricKit/MXCrashDiagnosticObjectiveCExceptionReason.h>

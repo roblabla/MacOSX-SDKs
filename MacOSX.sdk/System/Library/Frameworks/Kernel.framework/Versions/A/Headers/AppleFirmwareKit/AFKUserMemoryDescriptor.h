@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.100.8) generated from AFKUserMemoryDescriptor.iig */
+/* iig(DriverKit-324.0.10) generated from AFKUserMemoryDescriptor.iig */
 
 /* AFKUserMemoryDescriptor.iig:1-23 */
 /*
@@ -115,7 +115,7 @@ public:\
 \
     static AFKUserMemoryDescriptor *\
     createBuffer(\
-        buffer_options options,\
+        unsigned char * options,\
         uint64_t capacity);\
 \
     IOReturn\

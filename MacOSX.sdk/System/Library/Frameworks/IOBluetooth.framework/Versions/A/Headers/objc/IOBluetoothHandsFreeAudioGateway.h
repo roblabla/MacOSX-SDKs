@@ -1,7 +1,9 @@
 /*
  File:		IOBluetoothHandsFreeAudioGateway.h
- Copyright:	(c) 2010 by Apple Inc. All rights reserved.
+ Copyright:	(c) 2010, 2023 by Apple Inc. All rights reserved.
  */
+
+#if __OBJC__
 
 #import <IOBluetooth/objc/IOBluetoothHandsFree.h>
 
@@ -95,3 +97,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (void)handsFree:(IOBluetoothHandsFreeAudioGateway *)device redial:(NSNumber *)redial NS_AVAILABLE_MAC(10_7);
 
 @end
+
+#endif // __OBJC__

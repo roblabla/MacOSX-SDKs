@@ -1,6 +1,4 @@
-framework module OSLog {
+framework module OSLog [system] {
   umbrella header "OSLog.h"
-
   export *
-  module * { export * }
 }

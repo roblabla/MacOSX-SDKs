@@ -7,6 +7,7 @@ exports:
     symbols:         [ _DACLifecycleServiceResetNotificationName, _DACLifecycleServiceServiceName, 
                        _DACRoleServiceResetNotificationName, _DACRoleServiceServiceName, 
                        _DeviceActivityConductorVersionNumber, _DeviceActivityConductorVersionString ]
-    objc-classes:    [ DACActivityDescriptor, DACActivityList, DACDeviceRole, DACLifecycleManager, 
-                       DACRoleManager, DACUnknownActivityPolicy ]
+    objc-classes:    [ DACActivityAssertion, DACActivityDescriptor, DACActivityList, 
+                       DACChangeMarker, DACDeviceRole, DACLifecycleChangelist, DACLifecycleInfo, 
+                       DACLifecycleManager, DACRoleManager, DACUnknownActivityPolicy ]
 ...

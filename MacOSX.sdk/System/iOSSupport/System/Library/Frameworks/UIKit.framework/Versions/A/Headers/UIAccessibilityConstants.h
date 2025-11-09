@@ -105,6 +105,14 @@ UIKIT_EXTERN UIAccessibilityTraits UIAccessibilityTraitCausesPageTurn API_AVAILA
  */
 UIKIT_EXTERN UIAccessibilityTraits UIAccessibilityTraitTabBar API_AVAILABLE(ios(10.0));
 
+// Used when the element should be treated as a toggle.
+UIKIT_EXTERN UIAccessibilityTraits UIAccessibilityTraitToggleButton API_AVAILABLE(ios(17.0));
+
+/*
+ Used when the element has zoom functionality.
+ */
+UIKIT_EXTERN UIAccessibilityTraits UIAccessibilityTraitSupportsZoom API_AVAILABLE(ios(17.0));
+
 /*
  Accessibility Notifications
  
@@ -226,6 +234,14 @@ typedef NS_ENUM(NSInteger, UIAccessibilityContainerType) {
     UIAccessibilityContainerTypeSemanticGroup API_AVAILABLE(ios(13.0),tvos(13.0)) // Assistive technologies might query the accessibility properties set on the container, such as the accessibilityLabel, in order to output appropriate information about the semantic group to the user
 } API_AVAILABLE(ios(11.0));
 
+typedef NS_OPTIONS(NSUInteger, UIAccessibilityDirectTouchOptions) {
+    UIAccessibilityDirectTouchOptionNone = 0,
+    // Allows a direct touch area to immediately receive touch events without VoiceOver speaking. Appropriate
+    // for apps that provide direct audio feedback during interaction that would conflict with VoiceOver (like a drum pad in a music creation app).
+    UIAccessibilityDirectTouchOptionSilentOnTouch = 1 << 0,
+    // Requires VoiceOver to activate the element before touch passthrough starts.
+    UIAccessibilityDirectTouchOptionRequiresActivation = 1 << 1,
+} NS_SWIFT_NAME(UIAccessibility.DirectTouchOptions) API_AVAILABLE(ios(17.0));
 
 // The following constants can be used with either the accessibilityTextualContext property, or with the
 // UIAccessibilityTextAttributeContext attributed key.
@@ -237,6 +253,17 @@ UIKIT_EXTERN UIAccessibilityTextualContext const UIAccessibilityTextualContextSp
 UIKIT_EXTERN UIAccessibilityTextualContext const UIAccessibilityTextualContextFileSystem API_AVAILABLE(ios(13.0), tvos(13.0));
 UIKIT_EXTERN UIAccessibilityTextualContext const UIAccessibilityTextualContextSourceCode API_AVAILABLE(ios(13.0), tvos(13.0));
 UIKIT_EXTERN UIAccessibilityTextualContext const UIAccessibilityTextualContextConsole API_AVAILABLE(ios(13.0), tvos(13.0));
+
+
+// The following constants can be used with either the accessibilityAnnouncementPriority property, or with the
+// UIAccessibilityAnnouncementPriority attributed key.
+typedef NSString * UIAccessibilityPriority NS_TYPED_ENUM API_AVAILABLE(ios(17.0));
+// Announcements will interrupt other speech and cannot be interrupted once started.
+UIKIT_EXTERN UIAccessibilityPriority const UIAccessibilityPriorityHigh API_AVAILABLE(ios(17.0));
+// Announcements will interrupt existing speech, but are interruptible if a new speech utterance is started.
+UIKIT_EXTERN UIAccessibilityPriority const UIAccessibilityPriorityDefault API_AVAILABLE(ios(17.0));
+// Announcements are queued and spoken when other speech utterances have completed.
+UIKIT_EXTERN UIAccessibilityPriority const UIAccessibilityPriorityLow API_AVAILABLE(ios(17.0));
 
 /*
  Accessibility Speech Attributes
@@ -262,7 +289,10 @@ UIKIT_EXTERN NSAttributedStringKey const UIAccessibilitySpeechAttributePitch API
 // The corresponding value for this key should be a NSNumber with a YES or NO value.
 // If YES, then this announcement will be queued behind existing speech; if NO, then it will interrupt existing speech.
 // Default behavior is to interrupt existing speech.
-UIKIT_EXTERN NSAttributedStringKey const UIAccessibilitySpeechAttributeQueueAnnouncement API_AVAILABLE(ios(11.0));
+UIKIT_EXTERN NSAttributedStringKey const UIAccessibilitySpeechAttributeQueueAnnouncement API_AVAILABLE(ios(11.0)) API_DEPRECATED_WITH_REPLACEMENT("UIAccessibilitySpeechAttributeAnnouncementPriority", ios(11.0, 17.0), visionos(1.0, 1.0));
+
+// Use with a UIAccessibilityAnnouncementPriority value to specify whether this announcement can be queued or interrupted.
+UIKIT_EXTERN NSAttributedStringKey const UIAccessibilitySpeechAttributeAnnouncementPriority API_AVAILABLE(ios(17.0));
 
 // Use an NSString, containing International Phonetic Alphabet (IPA) symbols.
 // Controls the pronunciation of a word or phrase, e.g. a proper name.
@@ -270,6 +300,7 @@ UIKIT_EXTERN NSAttributedStringKey const UIAccessibilitySpeechAttributeIPANotati
 
 // Use an NSNumber with a YES or NO value to specify whether each letter in the string should be spoken separately.
 UIKIT_EXTERN NSAttributedStringKey const UIAccessibilitySpeechAttributeSpellOut API_AVAILABLE(ios(13.0));
+
 
 /*
  Accessibility Text Attributes

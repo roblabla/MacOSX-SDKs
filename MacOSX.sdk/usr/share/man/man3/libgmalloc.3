@@ -102,7 +102,7 @@ modified.
 .Pp
 .Sh ENVIRONMENT
 libgmalloc's behavior can be changed with several additional environment variables:
-.Bl -tag -width "MALLOC_PERMIT_INSANE_REQUESTS"
+.Bl -tag -width "MALLOC_ALLOW_LARGE_REQUESTS"
 .It Ev MALLOC_LOG_FILE <f>
 Create or append messages to the given file path
 .Fa <f>
@@ -126,10 +126,10 @@ aligned, and without the word alignment, any program relying on Cocoa
 or Carbon would immediately crash.
 .It Ev MALLOC_STRICT_SIZE
 This flag specifies that Guard Malloc should always align all allocations on single-byte boundaries such that the last byte of the buffer is at the end of the page.  This will immediately catch even one-byte buffer overruns, but applications that use Carbon or Cocoa, or vector instructions, may not run properly with this option.
-.It Ev MALLOC_PERMIT_INSANE_REQUESTS
-GuardMalloc tries to protect against requests for insane amounts of memory by instructing the program to trap (if running under the debugger) if more than 100MB is requested.  If this environment variable is set, then the check is disabled.
+.It Ev MALLOC_ALLOW_LARGE_REQUESTS
+GuardMalloc tries to protect against requests for large amounts of memory by instructing the program to trap (if running under the debugger) if more than 100MB is requested.  If this environment variable is set, then the check is disabled.
 .It Ev MALLOC_MAXIMUM_VM
-To test how a process handles running out of memory, set this variable to the maximum size, in bytes, of the allocations for the process (including the extra overhead from rounding allocations up to a full page size).  When this limit is hit, attempts to allocate additional memory return NULL.  If MALLOC_PERMIT_INSANE_REQUESTS is not set it will also trap (if running under the debugger).
+To test how a process handles running out of memory, set this variable to the maximum size, in bytes, of the allocations for the process (including the extra overhead from rounding allocations up to a full page size).  When this limit is hit, attempts to allocate additional memory return NULL.  If MALLOC_ALLOW_LARGE_REQUESTS is not set it will also trap (if running under the debugger).
 .It Ev MALLOC_CHECK_HEADER
 This flag is enabled by default, which causes Guard Malloc to check the validity of a magic number in the malloc block header when a block is freed or reallocated.  To turn off this checking, set this environment variable to NO or 0.
 .It Ev MallocStackLogging

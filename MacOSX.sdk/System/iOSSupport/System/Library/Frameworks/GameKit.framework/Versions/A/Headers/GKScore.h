@@ -1,21 +1,15 @@
-//
-//  GKScore.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
 #import <GameKit/GKLeaderboard.h>
-
 
 @class GKPlayer;
 
 NS_ASSUME_NONNULL_BEGIN
 
 /// GKScore represents a score in the leaderboards.
-API_DEPRECATED("Replaced by GKLeaderboardScore", ios(4.1, 14.0), tvos(9.0, 14.0), macosx(10.8, 11.0), watchos(3.0, 7.0))
+API_DEPRECATED_WITH_REPLACEMENT("GKLeaderboardScore", ios(4.1, 14.0), tvos(9.0, 14.0), macosx(10.8, 11.0), watchos(3.0, 7.0))
 @interface GKScore : NSObject <NSCoding, NSSecureCoding>
 
 /// Initialize the score with the local player and current date.
@@ -61,18 +55,18 @@ API_DEPRECATED("Replaced by GKLeaderboardScore", ios(4.1, 14.0), tvos(9.0, 14.0)
 
 @interface GKScore (Deprecated)
 
-- (void)reportScoreWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use +reportScores:withCompletionhandler: instead") ;
-- (instancetype)initWithCategory:(nullable NSString *)category NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use initWithLeaderboardIdentifier: instead") ;
+- (void)reportScoreWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("+reportScores:withCompletionhandler:", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (instancetype)initWithCategory:(nullable NSString *)category API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboardIdentifier:", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 
-@property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *category NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use leaderboardIdentifier instead") ;
+@property(copy, nullable, NS_NONATOMIC_IOSONLY) NSString *category API_DEPRECATED_WITH_REPLACEMENT("-leaderboardIdentifier", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 @end
 
 @interface GKScore (Obsoleted)
 /*** This method is obsolete. Calling this initialiser does nothing and will return nil ***/
-- (nullable instancetype)initWithLeaderboardIdentifier:(NSString *)identifier forPlayer:(NSString *)playerID NS_DEPRECATED_IOS(7_0, 8_0, "This is never invoked and its implementation does nothing, use initWithLeaderboardIdentifier:player:") ;
+- (nullable instancetype)initWithLeaderboardIdentifier:(NSString *)identifier forPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-initWithLeaderboardIdentifier:player:", ios(7.0,8.0), macos(10.9,10.10)) __TVOS_UNAVAILABLE;
 
 /*** This property is obsolete. ***/
-@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)   NSString    *playerID NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use player instead") ;          // The identifier of the player that recorded the score.
+@property(readonly, nullable, retain, NS_NONATOMIC_IOSONLY)   NSString    *playerID API_DEPRECATED_WITH_REPLACEMENT("-player:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;          // The identifier of the player that recorded the score.
 @end
 
 NS_ASSUME_NONNULL_END

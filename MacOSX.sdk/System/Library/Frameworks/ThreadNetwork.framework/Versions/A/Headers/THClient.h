@@ -77,7 +77,7 @@ API_AVAILABLE(ios(15.0))
 /// > ```
 /// >
 /// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
-- (void)retrieveAllActiveCredentials:(void (^)(NSSet<THCredentials*>* _Nullable credentials, NSError* _Nullable error))completion API_AVAILABLE(ios(15.0)) NS_SWIFT_ASYNC_NAME(allActiveCredentials());
+- (void)retrieveAllActiveCredentials:(void (^)(NSSet<THCredentials*>* _Nullable credentials, NSError* _Nullable error))completion API_AVAILABLE(ios(16.4)) NS_SWIFT_ASYNC_NAME(allActiveCredentials());
 
 /// Deletes Thread network credentials from the framework database for a Border
 /// Agent.
@@ -213,7 +213,7 @@ API_AVAILABLE(ios(15.0))
 /// >
 /// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
 - (void)checkPreferredNetworkForActiveOperationalDataset:(NSData *)activeOperationalDataSet
-                                           completion:(void (^)(BOOL isPreferred))completion API_AVAILABLE(ios(15.0))   NS_SWIFT_ASYNC_NAME(isPreferred(forActiveOperationalDataset:));
+                                           completion:(void (^)(BOOL isPreferred))completion API_AVAILABLE(ios(15.5))   NS_SWIFT_ASYNC_NAME(isPreferred(forActiveOperationalDataset:));
 
 /// Determines if the preferred network is available or not
 ///
@@ -230,7 +230,7 @@ API_AVAILABLE(ios(15.0))
 /// > ```
 /// >
 /// > For information about concurrency and asynchronous code in Swift, see <doc://com.apple.documentation/documentation/swift/calling-objective-c-apis-asynchronously>.
-- (void)isPreferredNetworkAvailableWithCompletion:(void (^)(BOOL isPreferredAvailable))completion API_AVAILABLE(ios(15.0))   NS_SWIFT_ASYNC_NAME(isPreferredAvailable());
+- (void)isPreferredNetworkAvailableWithCompletion:(void (^)(BOOL isPreferredAvailable))completion API_AVAILABLE(ios(16.4))   NS_SWIFT_ASYNC_NAME(isPreferredAvailable());
 
 @end
 

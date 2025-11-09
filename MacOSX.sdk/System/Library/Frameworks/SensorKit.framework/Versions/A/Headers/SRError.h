@@ -3,7 +3,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SR_EXTERN NSErrorDomain SRErrorDomain API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
+SR_EXTERN NSErrorDomain SRErrorDomain API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
 typedef NS_ERROR_ENUM(SRErrorDomain, SRErrorCode) {
     /// No valid entitlement found
@@ -20,6 +20,6 @@ typedef NS_ERROR_ENUM(SRErrorDomain, SRErrorCode) {
 
     /// Authorization request not completed
     SRErrorPromptDeclined,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
 NS_ASSUME_NONNULL_END

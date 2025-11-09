@@ -18,7 +18,7 @@ typedef NS_ENUM(NSInteger, MTLFXSpatialScalerColorProcessingMode) {
 @protocol MTLFXSpatialScaler;
 
 API_AVAILABLE(macos(13.0), ios(16.0))
-@interface MTLFXSpatialScalerDescriptor : NSObject
+@interface MTLFXSpatialScalerDescriptor : NSObject <NSCopying>
 
 // These properties must be set to the respective Metal pixel formats for each texture that will be used with the scaler.
 @property (readwrite, nonatomic) MTLPixelFormat colorTextureFormat;

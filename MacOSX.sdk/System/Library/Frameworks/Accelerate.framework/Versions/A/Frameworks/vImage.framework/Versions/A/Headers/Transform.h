@@ -459,7 +459,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
  * The results are available in two varieties, full and half precision. The full precision version covers
  * all pixel values and all exponents and delivers a result within a few ULPs of the IEEE-754 correct powf().
  *
- * The half precision variant provides a precision of ±1/4096:
+ * The half precision variant provides a precision of +-1/4096:
  *
  *          fabs((correct result - result provided)) < 1/4096
  *
@@ -476,7 +476,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), watchos(2.0), tvos(9.0));
  * to control whether you get a full or half precision result. kvImageGamma_UseGammaValue will never use a
  * half-precision calculation.
  *
- * There are some additional gamma types for specific gamma curves. These are precise to ±1/4096, share the same
+ * There are some additional gamma types for specific gamma curves. These are precise to +-1/4096, share the same
  * restrictions as above for the half precision gamma, but execute in less time. (These fixed exponent gamma curves
  * are present in MacOS X.4, unless otherwise noted below.)
  *

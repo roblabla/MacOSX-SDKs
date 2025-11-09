@@ -406,6 +406,13 @@ extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_Keyb
 */
 extern CFStringRef kCMIOSampleBufferAttachment_MouseAndKeyboardModifiersKey_KeyboardModifiersEvent API_AVAILABLE(macos(10.14));
 
+/*!
+	@const		kCMIOSampleBufferAttachmentKey_PixelBufferOverlaidByStaticImage
+	@discussion	A CFBoolean indicating that the underlying pixel buffer has been overlaid by a static image.
+				If this attachement exists it will contain the value kCFBooleanTrue indicating a static image overlay. Otherwise the pixel buffer has not been overlaid.
+*/
+extern CFStringRef kCMIOSampleBufferAttachmentKey_PixelBufferOverlaidByStaticImage API_AVAILABLE(macos(14.0));
+
 //=============================================================================
 //	Constants that specify marker buffers
 //=============================================================================

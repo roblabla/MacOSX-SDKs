@@ -18,5 +18,5 @@ exports:
                        _DMProtocolSAS, _DMProtocolSATA, _DMProtocolSCSI, _DMProtocolUSB, 
                        _DMUnlocalizedTechnicalErrorString ]
     objc-classes:    [ DMAPFS, DMAppleRAID, DMCoreStorage, DMEraseDisk, DMFilesystem, 
-                       DMManager, DMPartitionDisk, DMRepairDisk ]
+                       DMManager, DMPartitionDisk, DMRepairDisk, DMUDSWrapper ]
 ...

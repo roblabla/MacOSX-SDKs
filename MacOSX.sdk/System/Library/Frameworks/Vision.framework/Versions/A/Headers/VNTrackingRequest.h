@@ -32,6 +32,20 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNTrackingRequest : VNImageBasedRequest
 
 /*!
+ @brief This class method returns a maximum number of allowed simultaneously executed trackers for [request revision x tracking level] combination
+ 
+ @details The total number of simultaneously running trackes is limited due to performance concerns. There is a limit for each combination of
+          [request revision x tracking level] and this method could be used to query that limit
+                     
+ @param revision The revision of a specific tracking request (an object of a subclass of VNTrackingRequest).
+ @param trackingLevel Tracking level of a specific tracking request (an object of a subclass of VNTrackingRequest).
+ @param error The address of a variable that will be populated with an error upon failure. If the caller does not need this information, NULL can be passed.
+ 
+ @result Maximum number of trackers for a given combination [request revision x tracking level], or 0 if such combination doesn't exist
+ */
+- (NSUInteger)supportedNumberOfTrackersAndReturnError:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
+/*!
  @property property inputObservation
  @abstract The observation object that defines a region to track. Providing an observation not returned from a tracker (e.g. user-defined, or from a detector) begins a new tracker for the sequence. Providing an observation that was returned from a tracker continues the use of that tracker, to track the region to the next frame. In general, unless documented in the request's documentation, the rectangle must be defined in normalized coordinates (both dimensions normalized to [0,1] with the origin at the lower-left corner).
 */

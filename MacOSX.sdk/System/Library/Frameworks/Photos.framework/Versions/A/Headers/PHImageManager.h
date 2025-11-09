@@ -62,6 +62,7 @@ OS_EXPORT
 @property (nonatomic, assign, getter=isNetworkAccessAllowed) BOOL networkAccessAllowed; // if necessary will download the image from iCloud (client can monitor or cancel using progressHandler). Defaults to NO (see start/stopCachingImagesForAssets)
 @property (nonatomic, assign, getter=isSynchronous) BOOL synchronous; // return only a single result, blocking until available (or failure). Defaults to NO
 @property (nonatomic, copy, nullable) PHAssetImageProgressHandler progressHandler; // provide caller a way to be told how much progress has been made prior to delivering the data when it comes from iCloud. Defaults to nil, shall be set by caller
+@property (nonatomic) BOOL allowSecondaryDegradedImage API_AVAILABLE(macos(14), ios(17), tvos(17)); // in addition to the initial degraded result, an additional degraded result will be returned if conditions permit
 
 @end
 
@@ -101,7 +102,7 @@ typedef NS_ENUM(NSInteger, PHVideoRequestOptionsDeliveryMode) { // only apply wi
 typedef void (^PHAssetVideoProgressHandler)(double progress, NSError *__nullable error, BOOL *stop, NSDictionary *__nullable info);
 
 OS_EXPORT
-@interface PHVideoRequestOptions : NSObject
+@interface PHVideoRequestOptions : NSObject <NSCopying>
 
 @property (nonatomic, assign, getter=isNetworkAccessAllowed) BOOL networkAccessAllowed;
 @property (nonatomic, assign) PHVideoRequestOptionsVersion version;

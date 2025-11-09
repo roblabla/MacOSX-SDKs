@@ -14,7 +14,8 @@ exports:
                        _libcd_set_input_fd, _libcd_set_input_func, _libcd_set_input_mem, 
                        _libcd_set_linkage, _libcd_set_linkage_application_type, _libcd_set_log_writer, 
                        _libcd_set_output_block, _libcd_set_output_fd, _libcd_set_output_func, 
-                       _libcd_set_output_mem, _libcd_set_output_offset, _libcd_set_platform_identifier, 
-                       _libcd_set_signature_generator, _libcd_set_signature_generator_block, 
-                       _libcd_set_signing_id, _libcd_set_team_id, _libcd_superblob_size ]
+                       _libcd_set_output_mem, _libcd_set_output_offset, _libcd_set_page_size, 
+                       _libcd_set_platform_identifier, _libcd_set_signature_generator, 
+                       _libcd_set_signature_generator_block, _libcd_set_signing_id, 
+                       _libcd_set_team_id, _libcd_superblob_size ]
 ...

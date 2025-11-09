@@ -20,14 +20,21 @@ NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 @interface MKMapSnapshotOptions : NSObject <NSCopying>
 
+@property (nonatomic, copy) MKMapConfiguration *preferredConfiguration API_AVAILABLE(ios(17.0), macos(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
 @property (nonatomic, copy) MKMapCamera *camera;
 @property (nonatomic, assign) MKMapRect mapRect;
 @property (nonatomic, assign) MKCoordinateRegion region;
-@property (nonatomic, assign) MKMapType mapType;
+@property (nonatomic, assign) MKMapType mapType API_DEPRECATED("Use preferredConfiguration", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
-@property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic) BOOL showsPointsOfInterest API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
-@property (nonatomic) BOOL showsBuildings; // Affects MKMapTypeStandard
+@property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_DEPRECATED("Use preferredConfiguration", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL showsPointsOfInterest
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+API_DEPRECATED("Use preferredConfiguration", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
+#endif
+@property (nonatomic) BOOL showsBuildings API_DEPRECATED("No longer supported.", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard
 
 // The size of the image to create. Defaults to 256x256
 #if TARGET_OS_IPHONE

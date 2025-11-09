@@ -7,9 +7,9 @@ exports:
     symbols:         [ _SFAuthenticationErrorDomain, _SFContentBlockerErrorDomain, 
                        _SFErrorDomain, _SFExtensionMessageKey, _SSReadingListErrorDomain, 
                        __SFDeviceRegionCodeIsChina, __SFDeviceRegionCodeIsRussia, 
-                       __SFPreferredLanguagesIncludesAnyLanguage, __SFReaderExtractorErrorDomain, 
-                       __SFReaderPageGroupIdentifier, __SFReaderURLScheme, __SFSafariResourceScheme, 
-                       __SFSearchEngineControllerDefaultSearchEngineDidChangeNotification, 
+                       __SFPreferredLanguagesIncludesAnyLanguage, __SFPrivateSearchEngineStringDefaultsKey, 
+                       __SFReaderExtractorErrorDomain, __SFReaderPageGroupIdentifier, 
+                       __SFReaderURLScheme, __SFSafariResourceScheme, __SFSearchEngineControllerDefaultSearchEngineDidChangeNotification, 
                        __SFSearchEngineControllerInstanceDidFinishPopulatingSearchEnginesNotification, 
                        __SFSearchEngineStringDefaultsKey, __SFShouldShowChineseFeatures, 
                        __SFShouldShowRussianFeatures ]

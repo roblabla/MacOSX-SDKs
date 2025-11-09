@@ -34,6 +34,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * Returns nil if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
+ *
+ * @note
+ * SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 @property(readonly, nullable) NSString *ssid NS_AVAILABLE_MAC(10_6);
 
@@ -46,6 +52,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion
  * The SSID is defined as 1-32 octets.
+ *
+ * @note
+ * SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 @property(readonly, nullable) NSData *ssidData NS_AVAILABLE_MAC(10_7);
 
@@ -103,6 +115,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @abstract 
  * Returns the advertised country code (ISO/IEC 3166-1:1997) for the Wi-Fi device.
+ *
+ * @note
+ * Country code information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 @property(readonly, nullable) NSString *countryCode NS_AVAILABLE_MAC(10_7);
 

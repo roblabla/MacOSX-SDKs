@@ -1,4 +1,4 @@
-#if !__has_include(<PassKitUI/PKPaymentButton.h>) || PK_USE_PUBLIC_PASSKIT
+#if (!__has_include(<PassKitUI/PKPaymentButton.h>) && !__has_include(<PassKitMacHelperTemp/PKPaymentButton.h>)) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentButton.h
 //    PassKit
@@ -42,8 +42,10 @@ NS_ASSUME_NONNULL_END
 #endif // __PKPAYMENTBUTTON_H
 
 #else
-#if !TARGET_OS_OSX 
 #import <TargetConditionals.h>
-#import <PassKitUI/PKPaymentButton.h>
+#if TARGET_OS_OSX 
+#import <PassKitMacHelperTemp/PKPaymentButton.h> 
+#else 
+#import <PassKitUI/PKPaymentButton.h> 
 #endif
 #endif

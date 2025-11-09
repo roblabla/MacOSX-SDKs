@@ -1,4 +1,4 @@
-framework module OpenDirectory [extern_c] {
+framework module OpenDirectory [system] {
   umbrella header "OpenDirectory.h"
 
   export *
@@ -6,7 +6,7 @@ framework module OpenDirectory [extern_c] {
 
   exclude header "NSOpenDirectory.h"
 
-  framework module CFOpenDirectory {
+  framework module CFOpenDirectory [system] {
     umbrella header "CFOpenDirectory.h"
     export *
     module * { export * }

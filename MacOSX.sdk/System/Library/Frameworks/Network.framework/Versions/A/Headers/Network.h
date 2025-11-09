@@ -35,6 +35,7 @@
 #include <Network/path.h>
 #include <Network/privacy_context.h>
 #include <Network/protocol_options.h>
+#include <Network/proxy_config.h>
 #include <Network/quic_options.h>
 #include <Network/resolver_config.h>
 #include <Network/tcp_options.h>

@@ -5,7 +5,7 @@ install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbKit.framework/Ve
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ DoNotDisturbKitTests, DoNotDisturbModule, DoNotDisturbSettings, 
-                       Focus, NanoSettings, NanoSettingsGlance, SpringBoard, SpringBoardCore ]
+                       Focus, NanoSettings, NanoSettingsGlance, SpringBoard ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DNDEndOfEventAssertionIdentifier, _DNDKitRegisterLogging, 

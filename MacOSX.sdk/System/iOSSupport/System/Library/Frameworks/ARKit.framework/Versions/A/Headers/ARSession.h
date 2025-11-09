@@ -229,7 +229,6 @@ NS_SWIFT_NAME(createReferenceObject(transform:center:extent:completionHandler:))
 
 @end
 
-
 #pragma mark - ARSessionObserver
 
 

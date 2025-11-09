@@ -1,11 +1,8 @@
-//
-//  GKFriendRequestComposeViewController.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <TargetConditionals.h>
+
+#if !TARGET_OS_WATCH
 
 #if TARGET_OS_IPHONE || TARGET_OS_MACCATALYST
 #import <UIKit/UIKit.h>
@@ -21,7 +18,7 @@
 #if TARGET_OS_IPHONE || TARGET_OS_MACCATALYST
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0) 
+NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0) API_UNAVAILABLE(tvos)
 @interface GKFriendRequestComposeViewController : UINavigationController
 @end
 #else
@@ -32,7 +29,7 @@ NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0)
 @end
 #endif
 
-NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0) 
+NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0) __TVOS_UNAVAILABLE
 @interface GKFriendRequestComposeViewController ()
 /// Get the maximum number of recipients permitted
 + (NSUInteger)maxNumberOfRecipients;
@@ -44,17 +41,19 @@ NS_CLASS_DEPRECATED(10_8, 10_12, 4_2, 10_0)
 /// If you don't specify at least one recipient before presenting the view, the recipients field will be made firstResponder, to encourage the user to add some.
 /// If you add more than maxNumberOfRecipients recipients, these methods will throw an exception.
 - (void)addRecipientPlayers:(NSArray<GKPlayer *> *)players NS_AVAILABLE(10_10, 8_0);
-- (void)addRecipientsWithPlayerIDs:(NSArray<NSString *> *)playerIDs NS_DEPRECATED(10_8, 10_10, 4_2, 8_0, "use addRecipientPlayers:") ;
+- (void)addRecipientsWithPlayerIDs:(NSArray<NSString *> *)playerIDs API_DEPRECATED_WITH_REPLACEMENT("-addRecipientPlayers:", ios(4.2,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 - (void)addRecipientsWithEmailAddresses:(NSArray<NSString *> *)emailAddresses;
 
-@property (nonatomic, weak, nullable) id<GKFriendRequestComposeViewControllerDelegate> composeViewDelegate NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) ;
+@property (nonatomic, weak, nullable) id<GKFriendRequestComposeViewControllerDelegate> composeViewDelegate NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) API_UNAVAILABLE(tvos);
 @end
 
 /// Optional delegate
-NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) 
+NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) API_UNAVAILABLE(tvos)
 @protocol GKFriendRequestComposeViewControllerDelegate
 /// The compose view has finished
-- (void)friendRequestComposeViewControllerDidFinish:(GKFriendRequestComposeViewController *)viewController NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) ;
+- (void)friendRequestComposeViewControllerDidFinish:(GKFriendRequestComposeViewController *)viewController NS_DEPRECATED(10_8, 10_12, 4_2, 10_0) API_UNAVAILABLE(tvos);
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

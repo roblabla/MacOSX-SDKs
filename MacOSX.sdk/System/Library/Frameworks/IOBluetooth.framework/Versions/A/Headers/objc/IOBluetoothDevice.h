@@ -1,7 +1,9 @@
 /*
     File:		IOBluetoothDevice.h
-    Copyright:	(c) 2008 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2008, 2023 by Apple Computer, Inc. All rights reserved.
 */
+
+#if __OBJC__
 
 #import <IOKit/IOKitLib.h>
 
@@ -963,3 +965,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (id)awakeAfterUsingCoder:(NSCoder *)coder;
 
 @end
+
+#endif // __OBJC__

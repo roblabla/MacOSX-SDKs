@@ -33,7 +33,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion
         Mixer definitions control how audio will be rendered to the output in PHASE.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEMixerDefinition : PHASEDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -64,7 +64,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @discussion
         Spatial mixers render audio with spatialization and environmental effects.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESpatialMixerDefinition : PHASEMixerDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -132,7 +132,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
         Ambient mixers do not support distance modeling or directivity modeling.
         Clients can however set the orientation at initialization time.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEAmbientMixerDefinition : PHASEMixerDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -191,7 +191,7 @@ NS_SWIFT_NAME(init(channelLayout:orientation:));
         Use channel mixers for regular stem-based content that needs be rendered directly to the output device, such as stereo music
         or center channel narrative dialogue.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEChannelMixerDefinition : PHASEMixerDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -241,7 +241,7 @@ NS_SWIFT_NAME(init(channelLayout:));
     @interface PHASEMixer
     @abstract A generic object the represents an active mixer in the system
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEMixer : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -275,7 +275,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEMixerParameters
     @abstract An object that holds runtime parameters for mixers when creating PHASESoundEvents.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEMixerParameters : NSObject
 
 /*!

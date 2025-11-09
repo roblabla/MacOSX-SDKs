@@ -1,9 +1,9 @@
-//
-//  GKTurnBasedMatchmakerViewController.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
+
+#import <TargetConditionals.h>
+#import <Foundation/Foundation.h>
+
+#if !TARGET_OS_WATCH
 
 @protocol GKTurnBasedMatchmakerViewControllerDelegate;
 
@@ -11,7 +11,6 @@
 
 @protocol GKTurnBasedMatchmakerViewControllerDelegate;
 
-#import <Foundation/Foundation.h>
 #import <GameKit/GKMatchmakerViewController.h>
 
 /// View controller to manage turn-based matches, invite friends and perform automatching. Present modally from the top view controller.
@@ -56,11 +55,13 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
 @optional
 
 // Deprecated
-- (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController didFindMatch:(GKTurnBasedMatch *)match NS_DEPRECATED(10_8, 10_11, 5_0, 9_0, "use GKTurnBasedEventListener player:receivedTurnEventForMatch:didBecomeActive:") ;
+- (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController didFindMatch:(GKTurnBasedMatch *)match API_DEPRECATED_WITH_REPLACEMENT("-player:receivedTurnEventForMatch:didBecomeActive:", ios(5.0,9.0), macos(10.8,10.11)) API_UNAVAILABLE(tvos);
 
 // Deprectated
-- (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController playerQuitForMatch:(GKTurnBasedMatch *)match NS_DEPRECATED(10_8, 10_11, 5_0, 9_0, "use GKTurnBasedEventListener player:wantsToQuitMatch:") ;
+- (void)turnBasedMatchmakerViewController:(GKTurnBasedMatchmakerViewController *)viewController playerQuitForMatch:(GKTurnBasedMatch *)match API_DEPRECATED_WITH_REPLACEMENT("-player:wantsToQuitMatch:", ios(5.0,9.0), macos(10.8,10.11)) API_UNAVAILABLE(tvos);
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

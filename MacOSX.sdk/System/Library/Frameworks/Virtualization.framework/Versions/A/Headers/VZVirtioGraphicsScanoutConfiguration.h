@@ -2,10 +2,10 @@
 //  VZVirtioGraphicsScanoutConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021-2022 Apple Inc. All rights reserved.
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
 //
 
-#import <Virtualization/VZDefines.h>
+#import <Virtualization/VZGraphicsDisplayConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,10 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  @seealso VZVirtioGraphicsDeviceConfiguration
 */
 VZ_EXPORT API_AVAILABLE(macos(13.0))
-@interface VZVirtioGraphicsScanoutConfiguration : NSObject <NSCopying>
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+@interface VZVirtioGraphicsScanoutConfiguration : VZGraphicsDisplayConfiguration
 
 /*!
  @abstract Create a scanout configuration with the specified pixel dimensions.

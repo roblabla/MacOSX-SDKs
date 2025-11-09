@@ -47,7 +47,6 @@ typedef NS_ERROR_ENUM(ARErrorDomain, ARErrorCode) {
     /** Geo tracking has encountered a runtime error. */
     ARErrorCodeGeoTrackingFailed             API_AVAILABLE(ios(14.0)) = 202,
 
-
     /** Invalid reference image */
     ARErrorCodeInvalidReferenceImage         API_AVAILABLE(ios(11.3)) = 300,
 

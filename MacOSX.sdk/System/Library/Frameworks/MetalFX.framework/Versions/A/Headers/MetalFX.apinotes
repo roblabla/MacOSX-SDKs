@@ -11,6 +11,12 @@ Classes:
   - Selector: 'newTemporalScalerWithDevice:'
     SwiftName: makeTemporalScaler(device:)
     MethodKind: Instance
+  - Selector: 'supportedInputContentMinScaleForDevice:'
+    SwiftName: supportedInputContentMinScale(device:)
+    MethodKind: Class
+  - Selector: 'supportedInputContentMaxScaleForDevice:'
+    SwiftName: supportedInputContentMaxScale(device:)
+    MethodKind: Class
 Protocols:
 - Name: MTLFXSpatialScaler
   Methods:

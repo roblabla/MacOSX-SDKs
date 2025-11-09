@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// object for each type your app supports and delivers it to your delegate's ``PushKit/PKPushRegistryDelegate/pushRegistry:didUpdatePushCredentials:forType:``
 /// method. Don't create ``PushKit/PKPushCredentials`` objects yourself.
 /// 
-API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(8.0), watchos(6.0), tvos(13.0))
+API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(8.0), watchos(6.0), tvos(13.0), visionos(1.0))
 @interface PKPushCredentials : NSObject
 
 /// The push type constant associated with the token.

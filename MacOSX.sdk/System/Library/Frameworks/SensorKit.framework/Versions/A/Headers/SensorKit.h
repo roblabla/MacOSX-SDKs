@@ -25,4 +25,8 @@
 #import <SensorKit/SRDeletionRecord.h>
 #import <SensorKit/SRSensors+SRDeletionRecord.h>
 #import <SensorKit/SRWristDetection.h>
+#import <SensorKit/SRWristTemperature.h>
+#import <SensorKit/SRWristTemperatureSession.h>
 #import <SensorKit/SRMediaEvent.h>
+#import <SensorKit/SRSpeechMetrics.h>
+#import <SensorKit/SRFaceMetrics.h>

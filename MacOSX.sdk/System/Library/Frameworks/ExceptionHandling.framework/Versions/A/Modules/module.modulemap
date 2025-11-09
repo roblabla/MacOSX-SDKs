@@ -1,4 +1,4 @@
-framework module ExceptionHandling [extern_c] {
+framework module ExceptionHandling {
     umbrella header "ExceptionHandling.h"
     export *
     module * { export * }

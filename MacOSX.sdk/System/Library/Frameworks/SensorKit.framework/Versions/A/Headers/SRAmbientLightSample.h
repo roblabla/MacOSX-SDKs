@@ -19,14 +19,14 @@ typedef NS_ENUM(NSInteger, SRAmbientLightSensorPlacement) {
     SRAmbientLightSensorPlacementFrontTopLeft,
     SRAmbientLightSensorPlacementFrontBottomRight,
     SRAmbientLightSensorPlacementFrontBottomLeft,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
 typedef struct {
     Float32 x;
     Float32 y;
-} SRAmbientLightChromaticity API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
+} SRAmbientLightChromaticity API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRAmbientLightSample : NSObject
 
 @property (readonly) SRAmbientLightSensorPlacement placement;

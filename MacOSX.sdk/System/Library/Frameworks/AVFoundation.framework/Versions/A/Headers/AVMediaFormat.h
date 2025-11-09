@@ -22,6 +22,7 @@ AVF_EXPORT AVMediaType const AVMediaTypeSubtitle              API_AVAILABLE(maco
 AVF_EXPORT AVMediaType const AVMediaTypeTimecode              API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMediaType const AVMediaTypeMetadata              API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMediaType const AVMediaTypeMuxed                 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
+AVF_EXPORT AVMediaType const AVMediaTypeHaptic                API_AVAILABLE(macos(10.12), ios(10.0), tvos(10.0), watchos(3.0));
 
 /*!
  @enum          AVVideoRange
@@ -227,6 +228,19 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicTranscribesSpokenDia
 AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDescribesMusicAndSoundForAccessibility API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 
 /*!
+ @constant AVMediaCharacteristicEnhancesSpeechIntelligibility
+ @abstract A media characteristic that indicates that a track or media selection option includes audio that has been prepared or otherwise processed to heighten the intelligibility of speech.
+
+ The value of this characteristic is @"public.accessibility.enhances-speech-intelligibility".
+
+ Note for content authors: for QuickTime movie and .m4v files a media option is considered to have the characteristic AVMediaCharacteristicEnhancesSpeechIntelligibility only if it's explicitly tagged with that characteristic.
+ See the discussion of the tagging of tracks with media characteristics below.
+
+ Also see -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
+*/
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicEnhancesSpeechIntelligibility API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+/*!
  @constant AVMediaCharacteristicEasyToRead
  @abstract A media characteristic that indicates that a track or media selection option provides legible content in the language of its specified locale that has been edited for ease of reading.
  @discussion
@@ -288,6 +302,48 @@ AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicDubbedTranslation AP
  See the discussion of the tagging of tracks with media characteristics below.
 */
 AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicVoiceOverTranslation API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
+
+/*!
+ @constant AVMediaCharacteristicTactileMinimal
+ @abstract A media characteristic that indicates that a track or media selection option includes haptic content that's marked by the content author as providing minimal tactile stimulation.
+ @discussion
+ Example: an option that presents low strength haptics feedback when user is actively attending the device, would typically have this characteristic.
+ See -[AVAssetTrack hasMediaCharacteristic:] and -[AVMediaSelectionOption hasMediaCharacteristic:].
+ The value of this characteristic is @"public.haptics.minimal".
+ Note for content authors: for QuickTime movie and MPEG-4 files a track is considered to have the characteristic AVMediaCharacteristicTactileMinimal only if it's explicitly tagged with that characteristic.
+ See the discussion of the tagging of tracks with media characteristics below.
+*/
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicTactileMinimal API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+/*!
+ @constant AVMediaCharacteristicContainsStereoMultiviewVideo
+ @abstract A media characteristic that indicates that a track contains stereoscopic video captured in a multiview compression format.
+ @discussion
+ Stereoscopic video contains two views with one view for the left eye and one view for the right eye. Multiview video contains more than one view (not necessarily stereoscopic) in the same compressed video sample. The combination of stereoscopic and multiview indicates that multiview carriage is used to carry at least two stereoscopic views. It does not imply that there might not be more than two views. Access to the two stereo views may require opt-in to retrieve both views. Accessing only one of the left or right stereoscopic views as a fallback for playback or compositing where stereoscopic rendering is not supported may itself not be supported.
+ The value of this characteristic is @“public.contains-stereo-multiview-video".
+ Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
+ */
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicContainsStereoMultiviewVideo API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVMediaCharacteristicCarriesVideoStereoMetadata
+ @abstract A media characteristic that indicates that the stereoscopic video track carries additional information related to the stereoscopic video.
+ @discussion
+ This is not an indication that the encoded video carries stereoscopic views. It instead indicates that it carries additional information that may influence the interpretation of those views and contribute to a better experience.
+ The value of this characteristic is @“com.apple.quicktime.video.stereo-metadata".
+ Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
+*/
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicCarriesVideoStereoMetadata API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+/*!
+ @constant AVMediaCharacteristicIndicatesHorizontalFieldOfView
+ @abstract A media characteristic that indicates the video track carries information related to the horizontal field of view.
+ @discussion
+ This media characteristic is currently synthesized if the CMVideoFormatDescription includes a kCMFormatDescriptionExtension_HorizontalFieldOfView extension. This is not an indication that the field of view is expanded beyond or more narrow than typical horizontal fields of view.
+ The value of this characteristic is @“public.indicates-horizontal-field-of-view".
+ Note for content authors: the presence of this characteristic is strictly inferred from the format description of the associated track.
+*/
+AVF_EXPORT AVMediaCharacteristic const AVMediaCharacteristicIndicatesHorizontalFieldOfView API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*
 	Tagging of tracks of .mov and .m4v files with media characteristics
@@ -531,6 +587,15 @@ AVF_EXPORT AVFileType const AVFileTypeAppleiTT API_AVAILABLE(macos(12.0)) API_UN
  Files are identified with the .scc extension.
  */
 AVF_EXPORT AVFileType const AVFileTypeSCC API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
+
+/*!
+ @constant AVFileTypeAHAP
+ @abstract A UTI for the Apple Haptics Audio Pattern file format.
+ @discussion
+ The value of this UTI is @"public.haptics-content".
+ Files are identified with the .ahap extension.
+ */
+AVF_EXPORT AVFileType const AVFileTypeAHAP API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
 
 /*!
  @constant AVStreamingKeyDeliveryContentKeyType

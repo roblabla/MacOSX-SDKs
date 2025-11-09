@@ -1,7 +1,9 @@
 /*
 	Contains:	An object representation of a Bluetooth host controller (HCI).
-	Copyright:	(C) 2006-2007 by Apple Computer, Inc., all rights reserved.
+	Copyright:	(C) 2006-2007, 2023 by Apple Computer, Inc., all rights reserved.
 */
+
+#if __OBJC__
 
 #import <Foundation/Foundation.h>
 #import <IOBluetooth/Bluetooth.h>
@@ -137,3 +139,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 extern NSString * const IOBluetoothHostControllerPoweredOnNotification;
 extern NSString * const IOBluetoothHostControllerPoweredOffNotification;
+
+#endif // __OBJC__

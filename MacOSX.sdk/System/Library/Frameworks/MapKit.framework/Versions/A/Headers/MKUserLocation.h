@@ -23,7 +23,12 @@ NS_CLASS_AVAILABLE(10_9, 3_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 @property (readonly, nonatomic, nullable) CLLocation *location;
 
 // Returns nil if not in MKUserTrackingModeFollowWithHeading
-@property (readonly, nonatomic, nullable) CLHeading *heading NS_AVAILABLE(10_9, 5_0) API_UNAVAILABLE(tvos);
+@property (readonly, nonatomic, nullable) CLHeading *heading
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+NS_AVAILABLE(10_9, 5_0) API_UNAVAILABLE(tvos);
+#endif
 
 // The title to be displayed for the user location annotation.
 @property (nonatomic, copy, nullable) NSString *title;

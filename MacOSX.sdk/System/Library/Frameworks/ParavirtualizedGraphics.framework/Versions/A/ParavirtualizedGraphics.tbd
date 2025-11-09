@@ -7,7 +7,7 @@ exports:
     symbols:         [ _PGCopyOptionROMURL, _PGMaxDisplayPortCount, _PGNewDeviceWithDescriptor, 
                        _PGResumeErrorDomain, _ParavirtualizedGraphicsVersionNumber, 
                        _ParavirtualizedGraphicsVersionString ]
-    objc-classes:    [ PGDeviceDescriptor, PGDisplayDescriptor, PGDisplayMode ]
+    objc-classes:    [ PGDeviceDescriptor, PGDisplayDescriptor, PGDisplayMode, PGMemoryMapDescriptor ]
   - targets:         [ arm64-macos, arm64e-macos ]
     objc-classes:    [ PGIOSurfaceHostDevice, PGIOSurfaceHostDeviceDescriptor ]
 ...

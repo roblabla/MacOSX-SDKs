@@ -33,7 +33,27 @@
 .Sh NAME
 .Nm audit_user
 .Nd "events to be audited for given users"
-.Sh DESCRIPTION (NOW DEPRECATED)
+.Sh DEPRECATION NOTICE
+The
+.Xr audit 4
+subsystem has been deprecated since macOS 11.0,
+disabled since macOS 14.0,
+and \fBWILL BE REMOVED\fR in a future version of macOS.
+Applications that require a security event stream should use the
+.Xr EndpointSecurity 7
+API instead.
+.Pp
+On this version of macOS, you can re-enable
+.Xr audit 4
+by renaming or copying
+.Pa /etc/security/audit_control.example
+to
+.Pa /etc/security/audit_control ,
+re-enabling the
+.Pa system/com.apple.auditd
+service by running \fBlaunchctl enable system/com.apple.auditd\fR as root,
+and rebooting.
+.Sh DESCRIPTION
 The
 .Nm
 file specifies which audit event classes are to be audited for the given users.

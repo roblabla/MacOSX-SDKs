@@ -32,14 +32,13 @@ exports:
                        _EAAccessoryIsReconnecting, _EAAccessoryKey, _EAAccessoryNMEASentenceFilteringSupportChangedNotification, 
                        _EAAccessoryPointOfInterestBufferIDKey, _EAAccessoryPointOfInterestIntentKey, 
                        _EAAccessoryPointOfInterestKey, _EAAccessoryPortPropertyChangedNotification, 
-                       _EAAccessorySelectedKey, _EAAccessorySpeakerMenuEQIndexKey, 
-                       _EAAccessorySpeakerMenuEQNamesKey, _EAAccessoryTimeSyncInfoUpdateNotification, 
-                       _EAAccessoryUpdateNotification, _EAAccessoryVehicleDataUpdateNotification, 
-                       _EABluetoothAccessoryPickerErrorDomain, _EACameraActiveImageCaptureFormatIndex, 
-                       _EACameraActiveLivePreviewFormatIndex, _EACameraBitDepth, 
-                       _EACameraCodec, _EACameraExposureAreaOfInterest, _EACameraExposureMode, 
-                       _EACameraFocusAreaOfInterest, _EACameraFocusMode, _EACameraHeight, 
-                       _EACameraHorizontalOrigin, _EACameraHorizontalResolution, 
+                       _EAAccessorySpeakerMenuEQIndexKey, _EAAccessorySpeakerMenuEQNamesKey, 
+                       _EAAccessoryTimeSyncInfoUpdateNotification, _EAAccessoryUpdateNotification, 
+                       _EAAccessoryVehicleDataUpdateNotification, _EABluetoothAccessoryPickerErrorDomain, 
+                       _EACameraActiveImageCaptureFormatIndex, _EACameraActiveLivePreviewFormatIndex, 
+                       _EACameraBitDepth, _EACameraCodec, _EACameraExposureAreaOfInterest, 
+                       _EACameraExposureMode, _EACameraFocusAreaOfInterest, _EACameraFocusMode, 
+                       _EACameraHeight, _EACameraHorizontalOrigin, _EACameraHorizontalResolution, 
                        _EACameraISO, _EACameraIdentifier, _EACameraInfoCameraCapabilities, 
                        _EACameraInfoCameraProperties, _EACameraLensPosition, _EACameraMaximumISO, 
                        _EACameraMinimumISO, _EACameraName, _EACameraSupportedImageCaptureFormat, 
@@ -85,6 +84,8 @@ exports:
                        _kCFAccessoryPortPropertySupportedSampleRatesInHz, _kCFAccessoryPortPropertyVolumeControlIsSupported, 
                        _kCFAccessoryPortPropertyVolumeScalar, _kCFAccessoryPortUSBIn, 
                        _kCFAccessoryPortUSBOut ]
-    objc-classes:    [ EAAccessory, EAAccessoryManager, EASession, EAWiFiUnconfiguredAccessory, 
-                       EAWiFiUnconfiguredAccessoryBrowser ]
+    objc-classes:    [ EAAccessory, EAAccessoryManager, EASession ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+    symbols:         [ _EAAccessorySelectedKey ]
+    objc-classes:    [ EAWiFiUnconfiguredAccessory, EAWiFiUnconfiguredAccessoryBrowser ]
 ...

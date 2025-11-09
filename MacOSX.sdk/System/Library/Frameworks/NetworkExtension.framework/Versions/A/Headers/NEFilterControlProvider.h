@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NEFilterControlProvider
  * @discussion The NEFilterControlProvider class declares the programmatic interface for an object that is responsible for installing filtering rules on the device.
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterControlProvider : NEFilterProvider
 
 /*!
@@ -43,13 +43,13 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
 					  };
 
  */
-@property (copy, nullable) NSDictionary<NSString *, NSDictionary<NSString *, NSObject *> *> *remediationMap API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSDictionary<NSString *, NSDictionary<NSString *, NSObject *> *> *remediationMap API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property URLAppendStringMap
  * @discussion A dictionary containing strings to be appended to URLs.
  */
-@property (copy, nullable) NSDictionary<NSString *, NSString *> *URLAppendStringMap API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSDictionary<NSString *, NSString *> *URLAppendStringMap API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method handleRemediationForFlow:completionHandler:
@@ -57,7 +57,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @param flow An NEFilterFlow object containing details about the flow that requires remediation.
  * @param completionHandler A block that must be called when the NEFilterControlProvider is ready for the NEFilterDataProvider to re-process the new flow. NEFilterControlVerdict stores the verdict through which the control provider determines if a flow needs to be dropped or allowed. The verdict also indicates if the control plugin wants the data plugin to update its rules and handle the verdict.
  */
-- (void)handleRemediationForFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (void)handleRemediationForFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 
 /*!
@@ -66,13 +66,13 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @param flow An NEFilterFlow object containing details about the flow that requires a rules update.
  * @param completionHandler A block that must be called when the NEFilterControlProvider is ready for the NEFilterDataProvider to re-process the new flow. NEFilterControlVerdict stores the verdict through which the control provider determines if a flow needs to be dropped or allowed. The verdict also indicates if the control plugin wants the data plugin to update its rules and handle the verdict.
  */
-- (void)handleNewFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)handleNewFlow:(NEFilterFlow *)flow completionHandler:(void (^)(NEFilterControlVerdict *))completionHandler API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method notifyRulesChanged
  * @discussion This function is called by filter control implementations to notify the data provider "out of band" that the rules changed.
  */
-- (void)notifyRulesChanged API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (void)notifyRulesChanged API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

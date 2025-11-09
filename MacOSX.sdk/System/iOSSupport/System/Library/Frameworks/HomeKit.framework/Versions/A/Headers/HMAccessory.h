@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  *             one relationship between a physical accessory and an object of this
  *             class. An accessory is composed of one or more services.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMAccessory : NSObject
 
 /*!
@@ -169,7 +169,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  * @brief This defines the protocol for a delegate to receive updates about
  *        different aspects of an accessory
  */
-HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @protocol HMAccessoryDelegate<NSObject>
 
 @optional

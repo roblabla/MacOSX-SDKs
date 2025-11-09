@@ -1226,6 +1226,7 @@ __NKE_API_DEPRECATED;
 extern u_int32_t mbuf_get_minclsize(void)
 __NKE_API_DEPRECATED;
 
+
 /*!
  *       @function mbuf_clear_csum_performed
  *       @discussion Clears the hardware checksum flags and values.

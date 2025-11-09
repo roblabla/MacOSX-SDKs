@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 #import <Speech/SFSpeechRecognitionTaskHint.h>
+#import <Speech/SFSpeechLanguageModel.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -35,6 +36,8 @@ API_AVAILABLE(ios(10.0), macos(10.15))
 
 // If true, punctuations will be automatically included in the recognition results
 @property (nonatomic) BOOL addsPunctuation API_AVAILABLE(ios(16), macos(13));
+
+@property (nonatomic, copy, nullable) SFSpeechLanguageModelConfiguration *customizedLanguageModel API_AVAILABLE(ios(17), macos(14));
 
 @end
 

@@ -46,7 +46,7 @@ typedef enum {
 	nw_error_domain_posix = 1,
 	/*! @const nw_error_domain_dns The error code will be a DNSServiceErrorType error as defined in <dns_sd.h> */
 	nw_error_domain_dns = 2,
-	/*! @const nw_error_domain_tls The error code will be a TLS error as defined in <Security/SecureTransport.h> */
+	/*! @const nw_error_domain_tls The error code will be a TLS error as defined in <Security/SecBase.h> */
 	nw_error_domain_tls = 3
 } nw_error_domain_t;
 

@@ -46,8 +46,8 @@ API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @c attributedInactiveDescriptionVariants will be preferred over inactiveDescriptionVariants.
  
- Only one attribute is presently supported: text attachments. You may annotate the string with an image
- by including a text attachment. The maximum text attachment image size is 64x16 points.
+ Only one type of attribute is presently supported: text attachments. You may annotate the string with images
+ by including one or more text attachments. The maximum text attachment image size is 64x25 points.
 
  @warning All attributes other than text attachment attributes will be removed from your attributed string.
 

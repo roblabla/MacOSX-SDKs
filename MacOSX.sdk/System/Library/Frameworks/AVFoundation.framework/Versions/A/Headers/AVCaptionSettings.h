@@ -9,6 +9,8 @@
 */
 
 #import <AVFoundation/AVBase.h>
+#if TARGET_OS_OSX
+
 #import <Foundation/Foundation.h>
 
 /*!
@@ -56,6 +58,8 @@ AVF_EXPORT AVCaptionSettingsKey const AVCaptionTimeCodeFrameDurationKey API_AVAI
 		The default is NO.
 */
 AVF_EXPORT AVCaptionSettingsKey const AVCaptionUseDropFrameTimeCodeKey API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+#endif // TARGET_OS_OSX
 
 #else
 #import <AVFCore/AVCaptionSettings.h>

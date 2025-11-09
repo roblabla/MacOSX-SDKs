@@ -2,7 +2,7 @@
 //  endpoint.h
 //  Network
 //
-//  Copyright (c) 2014-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2014-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_ENDPOINT_H__
@@ -35,7 +35,7 @@ __BEGIN_DECLS
  *		nw_retain() and nw_release() to retain and release the object.
  */
 #ifndef NW_ENDPOINT_IMPL
-NW_OBJECT_DECL(nw_endpoint);
+NW_SENDABLE_OBJECT_DECL(nw_endpoint);
 #endif // NW_ENDPOINT_IMPL
 
 /*!

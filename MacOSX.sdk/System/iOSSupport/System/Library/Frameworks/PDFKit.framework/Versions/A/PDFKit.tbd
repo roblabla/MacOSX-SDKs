@@ -90,9 +90,9 @@ exports:
                        _kPDFDocumentWriteOption_SaveWithCorePDFLayout, _kPDFDocumentWriteOption_SaveWithTaggedLayout, 
                        _kPDFDocumentWriteOption_UseAppendMode ]
     objc-classes:    [ PDFAction, PDFActionGoTo, PDFActionNamed, PDFActionRemoteGoTo, 
-                       PDFActionResetForm, PDFActionURL, PDFAnnotation, PDFAppearanceCharacteristics, 
-                       PDFBorder, PDFDestination, PDFDocument, PDFExtensionContext, 
-                       PDFExtensionViewController, PDFHostExtensionContext, PDFHostViewController, 
-                       PDFOutline, PDFPage, PDFPageEvaluator, PDFSelection, PDFThumbnailView, 
-                       PDFView, PDFViewLayout, XPCExtensionInterface ]
+                       PDFActionResetForm, PDFActionURL, PDFAnnotation, PDFAnnotationPKDrawing, 
+                       PDFAppearanceCharacteristics, PDFBorder, PDFDestination, PDFDocument, 
+                       PDFExtensionContext, PDFExtensionViewController, PDFHostExtensionContext, 
+                       PDFHostViewController, PDFOutline, PDFPage, PDFPageEvaluator, 
+                       PDFSelection, PDFThumbnailView, PDFView, PDFViewLayout, XPCExtensionInterface ]
 ...

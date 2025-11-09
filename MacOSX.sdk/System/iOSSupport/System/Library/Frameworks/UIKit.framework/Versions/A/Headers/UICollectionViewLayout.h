@@ -102,7 +102,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 - (void)invalidateLayoutWithContext:(UICollectionViewLayoutInvalidationContext *)context API_AVAILABLE(ios(7.0));
 
 - (void)registerClass:(nullable Class)viewClass forDecorationViewOfKind:(NSString *)elementKind;
-- (void)registerNib:(nullable UINib *)nib forDecorationViewOfKind:(NSString *)elementKind;
+- (void)registerNib:(nullable UINib *)nib forDecorationViewOfKind:(NSString *)elementKind API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 @end
 

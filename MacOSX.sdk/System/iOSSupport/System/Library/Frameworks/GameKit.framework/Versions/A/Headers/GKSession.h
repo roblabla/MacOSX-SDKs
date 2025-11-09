@@ -1,9 +1,4 @@
-//
-//  GKSession.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 /**
  The Game Connectivity Kit (GCK) is a framework for handling connectivity and data transport in multiplayer network games.  
@@ -21,14 +16,8 @@
  
  This a not a Game Center feature. To support Game Center and online play, see GKMatch.
 */
-NS_CLASS_DEPRECATED(10_8, 10_10, 3_0, 7_0, "Use MCSession from the MultipeerConnectivity framework instead") 
-#pragma clang diagnostic push
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-@interface GKSession : NSObject {
-#pragma clang diagnostic pop
-@private
-    id _session;
-}
+API_DEPRECATED_WITH_REPLACEMENT("GKMatch", ios(3.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
+@interface GKSession : NSObject
 
 /** Creating a GKSession requires a unique identifier, sessionID, and mode.  All instances of the application must have the same sessionID in order to be able to join a game network.  Additionally, the GKSession requires a name, which is used to identify the specific instances of the application.
 
@@ -40,7 +29,7 @@ If name = nil then GKSession will use the device name.
 - (id)initWithSessionID:(NSString *)sessionID displayName:(NSString *)name sessionMode:(GKSessionMode)mode NS_DEPRECATED(10_8, 10_10, 3_0, 7_0);
 #pragma clang diagnostic pop
 
-@property(weak) id<GKSessionDelegate> delegate NS_DEPRECATED(10_8, 10_10, 3_0, 7_0) ;
+@property(weak) id<GKSessionDelegate> delegate NS_DEPRECATED(10_8, 10_10, 3_0, 7_0) API_UNAVAILABLE(tvos);
 
 @property(readonly) NSString *sessionID;
 @property(readonly) NSString *displayName;

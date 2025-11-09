@@ -69,7 +69,7 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
     AVErrorContentIsNotAuthorized                       = -11835,
     AVErrorApplicationIsNotAuthorized                   = -11836,
 #if TARGET_OS_IPHONE
-    AVErrorDeviceIsNotAvailableInBackground API_DEPRECATED("AVCaptureSession no longer produces an AVCaptureSessionRuntimeErrorNotification with this error. See AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableInBackground.", ios(4.3, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos) = -11837,
+    AVErrorDeviceIsNotAvailableInBackground API_DEPRECATED("AVCaptureSession no longer produces an AVCaptureSessionRuntimeErrorNotification with this error. See AVCaptureSessionInterruptionReasonVideoDeviceNotAvailableInBackground.", ios(4.3, 9.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(macos) = -11837,
 #endif
     AVErrorOperationNotSupportedForAsset                = -11838,
     
@@ -107,8 +107,8 @@ typedef NS_ERROR_ENUM(AVFoundationErrorDomain, AVError) {
 	AVErrorNoSourceTrack API_AVAILABLE(macos(10.13.2), ios(11.2), tvos(11.2), watchos(4.2)) = -11869,
 	AVErrorExternalPlaybackNotSupportedForAsset API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(5.0)) = -11870,
 	AVErrorOperationNotSupportedForPreset API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0)) = -11871,
-	AVErrorSessionHardwareCostOverage API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos) = -11872,
-	AVErrorUnsupportedDeviceActiveFormat API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos, watchos) = -11873,
+	AVErrorSessionHardwareCostOverage API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos) = -11872,
+	AVErrorUnsupportedDeviceActiveFormat API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(watchos) = -11873,
 	AVErrorIncorrectlyConfigured API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11875,
 	AVErrorSegmentStartedWithNonSyncSample API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11876,
 	AVErrorRosettaNotInstalled API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0), watchos(7.0)) = -11877,

@@ -3,12 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/BookUtility.framework/Versions/A/BookUtility'
-current-version: 1854
+current-version: 1969
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _BKApplicationAccessBundleID, _BKDisableBookStorePreferenceKey, 
+    symbols:         [ _BCPointsAlmostEqual, _BKApplicationAccessBundleID, _BKDisableBookStorePreferenceKey, 
                        _BKPreferenceApplicationID, _BKRestrictExplicitContentPreferenceKey, 
                        _BUArrayDescription, _BUAssertionFailed, _BUAssertionLog, 
                        _BUBooksGroupContainerIdentifier, _BUBundle, _BUCFTypeCast, 
@@ -17,8 +17,8 @@ exports:
                        _BUDynamicCast, _BUEncodedBlockInfoAreEqual, _BUEncodedBlockInfoCreate, 
                        _BUErrorDomain, _BUErrorException, _BUForceUnitTestsToHaltDebugger, 
                        _BUFractionalPart, _BUGrantDebuggerPermissionToStopExecution, 
-                       _BUHaltDebugger, _BUIsRunningTests, _BUIsStoreBookAssetID, 
-                       _BULocalizedErrorAlertMessageKey, _BULocalizedErrorAlertTitleKey, 
+                       _BUHaltDebugger, _BUIsGDPRAcknowledgementNeededForBooks, _BUIsRunningTests, 
+                       _BUIsStoreBookAssetID, _BULocalizedErrorAlertMessageKey, _BULocalizedErrorAlertTitleKey, 
                        _BUMix, _BUNetworkMonitorInterfaceDidChangeNotification, _BUObjectReferenceDescription, 
                        _BUOnboardingAllBundleIDs, _BUOnboardingBooksBundleID, _BUProtocolCast, 
                        _BURandom, _BURandomBetween, _BUReportAssertionFailureWithMessage, 
@@ -31,18 +31,32 @@ exports:
                        _BUZipEndOfCentralDirectoryMaxSize, _BUZipEndOfCentralDirectorySignature, 
                        _BUZipInflateDefaultMaxBufferSize, _BUZipLocalFileHeaderSignature, 
                        _BUZipLog, _BUZipVersionMadeBy, _BUZipVersionNeededToExtract, 
-                       _BUZipWriterMaxEntryDataSize, _BookUtilityLog, _NSStringFromBUAccountsType, 
-                       _kTCCDatabaseChangedDarwinNotification ]
-    objc-classes:    [ BUAccountsProvider, BUAppGroup, BUBag, BUBlockCallThrottler, 
-                       BUBufferedReadChannel, BUBufferedReadChannelHelper, BUBundleLookupClass, 
-                       BUCellularIdentity, BUCellularSettings, BUCoalescingCallBlock, 
-                       BUContainedZipArchive, BUCountingAssertionProvider, BUDescription, 
-                       BUEncodedBlockInfoInternal, BUEncodedBlockInfoWithDecodedLengthInternal, 
-                       BUFileIOChannel, BUIOUtils, BUNetworkMonitor, BUOSStateDataSerialization, 
-                       BUOSStateHandler, BUPreferencesRestrictionsProvider, BUReadChannelInputStreamAdapter, 
-                       BURestrictionsProvider, BUSimpleFileCopier, BUTemporaryDirectory, 
-                       BUUnarchivingFileCopier, BUZipArchive, BUZipEntry, BUZipFileArchive, 
-                       BUZipFileDescriptorWrapper, BUZipFileWriter, BUZipInflateReadChannel, 
-                       BUZipReadChannel, BUZipWriter, BUZipWriterEntry, _BUCountingAssertion, 
-                       _BUNullCellularIdentity ]
+                       _BUZipWriterMaxEntryDataSize, _BookUtilityLog, _CGFloatCeilForScale, 
+                       _CGFloatRoundForScale, _CGFloatScale, _CGLineSegmentsIntersect, 
+                       _CGLinesIntersect, _CGPointAdd, _CGPointAddSize, _CGPointClipToRect, 
+                       _CGPointDistanceFromPoint, _CGPointMultiply, _CGPointMultiplyByPoint, 
+                       _CGPointRoundForScale, _CGPointSquaredDistanceFromPoint, _CGPointSubtract, 
+                       _CGPointSubtractSize, _CGRectAlmostEqualToRect, _CGRectCenterRectInRect, 
+                       _CGRectEdgePointAtAngle, _CGRectFitRectInRect, _CGRectFitRectInRectAbsoluteNoRounding, 
+                       _CGRectFitRectInRectClip, _CGRectFitRectInRectNoRounding, 
+                       _CGRectGetCenter, _CGRectGetCenterNoRounding, _CGRectIntersectsLineSegment, 
+                       _CGRectMakeWithCenterAndSize, _CGRectMakeWithOriginSize, _CGRectMakeWithSize, 
+                       _CGRectMultiply, _CGRectRoundedForScale, _CGSizeCeilForScale, 
+                       _CGSizeLength, _CGSizeMakeEvenSize, _CGSizeMin, _CGSizeMultiplyByPoint, 
+                       _CGSizeRotate, _CGSizeRound, _CGSizeRoundForScale, _CGSizeScale, 
+                       _CGSizeScaleThatFillsInCGSize, _CGSizeScaleThatFitsInCGSize, 
+                       _CGSizeScaledToFillInSize, _CGSizeScaledToFitInSize, _NSStringFromBUAccountsType, 
+                       _SegmentCanContainPoint, _kTCCDatabaseChangedDarwinNotification ]
+    objc-classes:    [ BUAccountsProvider, BUAppDataContainer, BUAppGroup, BUBag, 
+                       BUBlockCallThrottler, BUBufferedReadChannel, BUBufferedReadChannelHelper, 
+                       BUBundleLookupClass, BUCellularIdentity, BUCellularSettings, 
+                       BUCoalescingCallBlock, BUContainedZipArchive, BUCountingAssertionProvider, 
+                       BUDescription, BUEncodedBlockInfoInternal, BUEncodedBlockInfoWithDecodedLengthInternal, 
+                       BUFileIOChannel, BUIOUtils, BULogUtilities, BUNetworkMonitor, 
+                       BUOSStateDataSerialization, BUOSStateHandler, BUPreferencesRestrictionsProvider, 
+                       BUReadChannelInputStreamAdapter, BURestrictionsProvider, BUSandboxExtension, 
+                       BUSimpleFileCopier, BUTemporaryDirectory, BUUnarchivingFileCopier, 
+                       BUZipArchive, BUZipEntry, BUZipFileArchive, BUZipFileDescriptorWrapper, 
+                       BUZipFileWriter, BUZipInflateReadChannel, BUZipReadChannel, 
+                       BUZipWriter, BUZipWriterEntry, _BUCountingAssertion, _BUNullCellularIdentity ]
 ...

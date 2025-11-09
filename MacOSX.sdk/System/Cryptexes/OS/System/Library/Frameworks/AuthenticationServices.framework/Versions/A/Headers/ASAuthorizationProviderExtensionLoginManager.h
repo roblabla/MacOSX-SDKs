@@ -9,6 +9,7 @@
 #import <Security/Security.h>
 
 @class ASAuthorizationProviderExtensionLoginConfiguration;
+@class ASAuthorizationProviderExtensionUserLoginConfiguration;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,6 +21,16 @@ typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionKeyType)
     ASAuthorizationProviderExtensionKeyTypeUserDeviceEncryption = 2,
     /// The user's Secure Enclave backed key.
     ASAuthorizationProviderExtensionKeyTypeUserSecureEnclaveKey = 3,
+    /// The shared device signing key.
+    ASAuthorizationProviderExtensionKeyTypeSharedDeviceSigning API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 4,
+    /// The shared device encryption key.
+    ASAuthorizationProviderExtensionKeyTypeSharedDeviceEncryption API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 5,
+    /// The currentdevice signing key.
+    ASAuthorizationProviderExtensionKeyTypeCurrentDeviceSigning API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 10,
+    /// The current device encryption key.
+    ASAuthorizationProviderExtensionKeyTypeCurrentDeviceEncryption API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 11,
+    // The SmartCard for the user.
+    ASAuthorizationProviderExtensionKeyTypeUserSmartCard API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 20,
 } API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
@@ -37,8 +48,23 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /// @abstract Returns the device registration token from the MDM profile.
 @property (nonatomic, nullable, readonly, copy) NSString *registrationToken;
 
+
+/// @abstract Returns the extension data from the MDM profile.
+@property (nonatomic, readonly, copy) NSDictionary *extensionData API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
 /// @abstract The user name to use when authenticating with the identity provider.
-@property (nonatomic, nullable, copy) NSString *loginUserName;
+@property (nonatomic, nullable, copy) NSString *loginUserName API_DEPRECATED_WITH_REPLACEMENT("userLoginConfiguration.loginUserName", macos(13.0, 14.0));
+
+
+/// @abstract Retrieves the current user login configuration for the extension.
+@property (nonatomic, copy, nullable, readonly) ASAuthorizationProviderExtensionUserLoginConfiguration *userLoginConfiguration API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/// Saves or replaces the user login configration.
+/// @param userLoginConfiguration The user login configration to use.
+/// @param error The error when there are validation errors or nil.
+- (BOOL)saveUserLoginConfiguration:(ASAuthorizationProviderExtensionUserLoginConfiguration *)userLoginConfiguration error:(NSError * _Nullable * _Nullable) error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
 
 /// @abstract Retrieves or sets the current SSO tokens response for the current user and extension.
 @property (nonatomic, copy, nullable) NSDictionary *ssoTokens;
@@ -73,8 +99,21 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /// @abstract Requests that user registration be run again for the current user to repair it.
 - (void)userRegistrationsNeedsRepair;
 
+
+/// @abstract Requests that the decryption keys are repaired.
+- (void)decryptionKeysNeedRepair API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
 /// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
 - (void)resetKeys;
+
+
+/// @abstract Creates new Encryption, and Signing keys for the device or user.  The old keys will be destroyed.
+- (void)resetDeviceKeys;
+
+/// @abstract Creates new Encryption, Signing, and Secure Enclave keys for the user.  The old keys will be destroyed.
+- (void)resetUserSecureEnclaveKey;
+
 
 /*! @abstract Asks authorization service to show extension view controller for registration. If the controller cannot be shown an error is returned.  This is only valid during registration.
 */

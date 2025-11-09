@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/SyncServices.framework/Versions/A/SyncServices'
-current-version: 729
+current-version: 730
 compatibility-version: 48
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]

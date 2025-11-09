@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftUniformTypeIdentifiers.dylib'
-current-version: 761.4.6
+current-version: 790
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -112,6 +112,7 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV14quickTimeMovieACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV14unixExecutableACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV14utf16PlainTextACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV15_appleVisionProACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV15_enclosureColorAA010UTHardwareF0OSgvg', 
                        '_$s22UniformTypeIdentifiers6UTTypeV15_enclosureColorAA010UTHardwareF0OSgvpMV', 
                        '_$s22UniformTypeIdentifiers6UTTypeV15osaScriptBundleACvgZ', 
@@ -232,9 +233,9 @@ exports:
                        '_$s22UniformTypeIdentifiers6UTTypeV3urlACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV3usdACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV3wavACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV3xmlACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV3zipACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4_macACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV4aiffACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4dataACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV4epubACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4fontACvgZ', 
-                       '_$s22UniformTypeIdentifiers6UTTypeV4fromACs7Decoder_p_tKcfC', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV4ahapACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4aiffACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV4dataACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4epubACvgZ', 
+                       '_$s22UniformTypeIdentifiers6UTTypeV4fontACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4fromACs7Decoder_p_tKcfC', 
                        '_$s22UniformTypeIdentifiers6UTTypeV4gzipACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4hash4intoys6HasherVz_tF', 
                        '_$s22UniformTypeIdentifiers6UTTypeV4heicACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4heifACvgZ', 
                        '_$s22UniformTypeIdentifiers6UTTypeV4htmlACvgZ', '_$s22UniformTypeIdentifiers6UTTypeV4icnsACvgZ', 

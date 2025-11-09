@@ -4,7 +4,7 @@
 
 	Framework:      AVFoundation
 
-	Copyright © 2021 Apple Inc. All rights reserved.
+	Copyright © 2021-2023 Apple Inc. All rights reserved.
  */
 
 #import <Foundation/Foundation.h>
@@ -13,11 +13,13 @@
 #import <AVFoundation/AVMediaFormat.h>
 #import <AVFoundation/AVAsynchronousKeyValueLoading.h>
 #import <CoreGraphics/CGGeometry.h>
+#import <CoreMedia/CMTag.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVMediaSelectionOption;
 @class AVAssetVariantVideoAttributes;
+@class AVAssetVariantVideoLayoutAttributes;
 @class AVAssetVariantAudioAttributes;
 @class AVAssetVariantAudioRenditionSpecificAttributes;
 
@@ -25,7 +27,9 @@ NS_ASSUME_NONNULL_BEGIN
   @class		AVAssetVariant
   @abstract		An AVAssetVariant represents a bit rate variant.
 				Each asset contains a collection of variants that represent a combination of audio, video, text, closed captions, and subtitles for a particular bit rate.
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface AVAssetVariant : NSObject
 
@@ -57,6 +61,11 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+/*!
+ @class			AVAssetVariantVideoAttributes
+ @abstract		Video attributes for an asset variant.
+ @discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface AVAssetVariantVideoAttributes : NSObject
 
@@ -86,8 +95,36 @@ AV_INIT_UNAVAILABLE
  */
 @property (nonatomic, readonly) double nominalFrameRate;
 
+/*!
+	@property	videoLayoutAttributes
+	@abstract	Describes the video layout attributes.
+	@discussion	videoLayoutAttributes' count may be greater than one if this variant contains a collection of differing video layout media attributes over time.
+*/
+@property (nonatomic, readonly) NSArray <AVAssetVariantVideoLayoutAttributes *> *videoLayoutAttributes API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
 @end
 
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0))
+@interface AVAssetVariantVideoLayoutAttributes : NSObject
+
+AV_INIT_UNAVAILABLE
+
+/*!
+	@property	stereoViewComponents
+	@abstract	Describes the stereo components. If not declared, the value will be `kCMStereoViewComponent_None`. 
+				In case of monoscopic content, the value will be `kCMStereoViewComponent_None` and incase of stereoscopic content, the value will be `(kCMStereoViewComponent_LeftEye | kCMStereoViewComponent_RightEye)`.
+*/
+@property (nonatomic, readonly) CMStereoViewComponents stereoViewComponents;
+
+@end
+
+/*!
+ @class         AVAssetVariantAudioAttributes
+ @abstract      Audio attributes for an asset variant.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface AVAssetVariantAudioAttributes : NSObject
 
@@ -109,18 +146,52 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+/*!
+ @class         AVAssetVariantAudioRenditionSpecificAttributes
+ @abstract      Audio rendition attributes for an asset variant.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface AVAssetVariantAudioRenditionSpecificAttributes : NSObject
 
 /*!
  @property		channelCount
  @abstract		If it is not declared, the value will be negative.
+ @discussion	A channel count greater than two indicates that the variant offers a rich multichannel authoring.
  */
 @property (nonatomic, readonly) NSInteger channelCount;
 
+/*!
+ @property		binaural
+ @abstract		Indicates that the variant is best suited for delivery to headphones.
+ @discussion 	A binaural variant may originate from a direct binaural recording or from the processing of a multichannel audio source.
+*/
+@property (nonatomic, readonly, getter=isBinaural) BOOL binaural API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+
+/*!
+ @property		immersive
+ @abstract		Indicates that this variant contains virtualized or otherwise pre-processed audio content that is suitable for a variety of purposes.
+ @discussion 	If a variant audio redition is immersive it is eligible for rendering either to headphones or speakers.
+*/
+@property (nonatomic, readonly, getter=isImmersive) BOOL immersive API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+/*!
+ @property		downmix
+ @abstract		Indicates that this variant is declared as a downmix derivative of other media of greater channel count.
+ @discussion	If one or more multichannel variants are also provided, the dowmix is assumed to be compatible in its internal timing and other attributes with those variants. Typically this is because it has been derived from the same source. A downmix can be used as a suitable substitute for a multichannel variant under some conditions.
+*/
+@property (nonatomic, readonly, getter=isDownmix) BOOL downmix API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0));
+
 @end
 
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+/*!
+ @class         AVAssetVariantQualifier
+ @abstract      The qualifier of an asset variant.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(10.0))
 @interface AVAssetVariantQualifier : NSObject <NSCopying>
 
 AV_INIT_UNAVAILABLE
@@ -143,7 +214,7 @@ AV_INIT_UNAVAILABLE
 
 /*!
  @method		predicateForChannelCount:mediaSelectionOption:operatorType:
- @abstract		Creates a NSPredicate for audio channel count which can be used with other NSPredicates' to express variant preferences.
+ @abstract		Creates a NSPredicate for audio channel count which can be used with other NSPredicates to express variant preferences.
  @param			channelCount
 				The RHS value for the channel count in the predicate equation.
  @param			mediaSelectionOption
@@ -152,6 +223,36 @@ AV_INIT_UNAVAILABLE
 				The valid values are NSLessThanPredicateOperatorType, NSLessThanOrEqualToPredicateOperatorType, NSGreaterThanPredicateOperatorType, NSGreaterThanOrEqualToPredicateOperatorType, NSEqualToPredicateOperatorType and NSNotEqualToPredicateOperatorType.
  */
 + (NSPredicate *)predicateForChannelCount:(NSInteger)channelCount mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption operatorType:(NSPredicateOperatorType)operatorType;
+
+/*!
+ @method		predicateForBinauralAudio:mediaSelectionOption:
+ @abstract		Creates a NSPredicate for binaural which can be used with other NSPredicates to express variant preferences.
+ @param			isBinaural
+				The RHS value for the value of isBinauralAudio in the predicate equation.
+ @param			mediaSelectionOption
+				The audio media selection option under consideration.
+ */
++ (NSPredicate *)predicateForBinauralAudio:(BOOL)isBinauralAudio mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+/*!
+ @method		predicateForImmersiveAudio:mediaSelectionOption:
+ @abstract		Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
+ @param			isImmersiveAudio
+				The RHS value for the value of isImmersiveAudio in the predicate equation.
+ @param			mediaSelectionOption
+				The audio media selection option under consideration.
+ */
++ (NSPredicate *)predicateForImmersiveAudio:(BOOL)isImmersiveAudio mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+/*!
+ @method		predicateForDownmixAudio:mediaSelectionOption:
+ @abstract		Creates a NSPredicate for immersive audio which can be used with other NSPredicates to express variant preferences.
+ @param			isDownmixAudio
+				The RHS value for the value of isDownmixAudio in the predicate equation.
+ @param			mediaSelectionOption
+				The audio media selection option under consideration.
+ */
++ (NSPredicate *)predicateForDownmixAudio:(BOOL)isDownmixAudio mediaSelectionOption:(AVMediaSelectionOption *)mediaSelectionOption API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
 
 /*!
  @method		predicateForPresentationWidth:operatorType:

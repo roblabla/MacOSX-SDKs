@@ -1,4 +1,4 @@
-framework module AVKit [extern_c] {
+framework module AVKit {
 	umbrella header "AVKit.h"
 	export *
 	module * { export * }

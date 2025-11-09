@@ -29,6 +29,11 @@ NI_EXPORT
  */
 @property (nonatomic, readonly) BOOL supportsCameraAssistance;
 
+/**
+ Whether or not this device is capable of extended distance measurement capabilities
+ */
+@property (nonatomic, readonly) BOOL supportsExtendedDistanceMeasurement API_AVAILABLE(ios(17.0), watchos(10.0), macos(14.0), tvos(17.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

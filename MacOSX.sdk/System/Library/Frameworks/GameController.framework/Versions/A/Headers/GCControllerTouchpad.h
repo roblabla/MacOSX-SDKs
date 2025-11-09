@@ -1,6 +1,6 @@
 //
 //  GCControllerTouchpad.h
-//  GameControllerFramework_iOS
+//  GameController
 //
 //  Copyright © 2019 Apple Inc. All rights reserved.
 //

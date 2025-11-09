@@ -13,7 +13,8 @@ exports:
                        _DiagnosticExtensionsVersionString, _pgrep, _signal_USR2 ]
     objc-classes:    [ DEArchive, DEArchiveReader, DEArchiver, DEAttachmentGroup, 
                        DEAttachmentItem, DEAttachmentItemSandboxExtensionHandle, 
-                       DECollectionProgress, DEExtension, DEExtensionContext, DEExtensionHostContext, 
-                       DEExtensionManager, DEExtensionProvider, DEExtensionTracker, 
-                       DELogMover, DELogging, DELoggingPreferences, DEUtils, DiagnosticExtensions_Subsystem ]
+                       DECollectionProgress, DEDaemonHelper, DEExtension, DEExtensionContext, 
+                       DEExtensionHostContext, DEExtensionManager, DEExtensionProvider, 
+                       DEExtensionTracker, DELogMover, DELogging, DELoggingPreferences, 
+                       DEUtils, DiagnosticExtensions_Subsystem ]
 ...

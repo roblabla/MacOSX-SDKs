@@ -63,4 +63,7 @@ typedef NS_ENUM(NSInteger, INIntentErrorCode) {
     // Decoding
     INIntentErrorDecodingGeneric = 9000,
     
+    // AppIntents
+    INIntentErrorUnableToCreateAppIntentRepresentation = 10000,
+    INIntentErrorNoAppIntent = 10001,
 } API_AVAILABLE(ios(10.0), macos(11.0), watchos(3.2), tvos(14.0));

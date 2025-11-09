@@ -20,7 +20,9 @@
  @abstract View for rendering metal content
  */
 API_AVAILABLE(macos(10.11), ios(9.0))
-
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 @interface MTKView : UIView <NSCoding,CALayerDelegate>
 
 /*!
@@ -232,7 +234,9 @@ API_AVAILABLE(macos(10.11), ios(9.0))
  @abstract Allows an object to render into the view and respond to resize events
  */
 API_AVAILABLE(macos(10.11), ios(9.0))
-
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 @protocol MTKViewDelegate <NSObject>
 
 /*!

@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright © 2012-2018 Apple Inc. All rights reserved.
+	Copyright © 2012-2023 Apple Inc. All rights reserved.
 	
 	A VTFrameSilo stores a large number of sample buffers, as produced by a multi-pass compression session.
 */
@@ -41,7 +41,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		do not expect to get identical object pointers back.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTFrameSilo *VTFrameSiloRef; // a CF type, call CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTFrameSilo *VTFrameSiloRef CM_SWIFT_NONSENDABLE; // a CF type, call CFRetain and CFRelease
 
 VT_EXPORT CFTypeID VTFrameSiloGetTypeID(void) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
 

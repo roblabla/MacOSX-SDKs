@@ -17,20 +17,25 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
 @protocol GCPhysicalInputElement <NSObject>
 
 /**
- The element's SF Symbols name.
- */
-@property (readonly, nullable) NSString *sfSymbolsName;
-
-/**
- The element's localized name.
- */
-@property (readonly, nullable) NSString *localizedName;
-
-/**
  The set of aliases that can be used to access this element with keyed subscript
  notation.
  */
-@property (readonly) NSSet<NSString *> *aliases;
+@property (copy, readonly) NSSet<NSString *> *aliases;
+
+/**
+ The element's localized display name.
+ 
+ This is the string that your app should display in any on-screen messages
+ instructing the user to interact with the control.  For example:
+ 
+     "Press \(buttonA.localizedName) to jump!"
+ 
+ Do not cache this value - it can change when the user remaps controls.
+ */
+@property (copy, readonly, nullable) NSString *localizedName;
+
+/** The SF Symbols name for the element. */
+@property (copy, readonly, nullable) NSString *sfSymbolsName;
 
 @end
 
@@ -41,7 +46,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  input elements found in a device's physical input profile.
  */
 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) NS_REFINED_FOR_SWIFT
-@interface GCPhysicalInputElementCollection<Key: NSString*, Element: id<GCPhysicalInputElement>> : NSObject <NSFastEnumeration>
+@interface GCPhysicalInputElementCollection<Key: NSString*, __covariant Element: id<GCPhysicalInputElement>> : NSObject <NSFastEnumeration>
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

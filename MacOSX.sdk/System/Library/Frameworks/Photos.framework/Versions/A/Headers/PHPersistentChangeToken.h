@@ -10,6 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macos(13), ios(16), tvos(16))
 
+NS_SWIFT_SENDABLE
 @interface PHPersistentChangeToken : NSObject <NSCopying, NSSecureCoding>
 
 + (instancetype)new NS_UNAVAILABLE;

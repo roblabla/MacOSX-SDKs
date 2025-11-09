@@ -47,6 +47,15 @@
 #import <Vision/VNDetectTrajectoriesRequest.h>
 #import <Vision/VNGeneratePersonSegmentationRequest.h>
 #import <Vision/VNDetectDocumentSegmentationRequest.h>
+#import <Vision/VNGenerateForegroundInstanceMaskRequest.h>
+#import <Vision/VNGeneratePersonInstanceMaskRequest.h>
+#import <Vision/VNTrackTranslationalImageRegistrationRequest.h>
+#import <Vision/VNTrackHomographicImageRegistrationRequest.h>
+#import <Vision/VNTrackOpticalFlowRequest.h>
+#import <Vision/VNDetectAnimalBodyPoseRequest.h>
+#import <Vision/VNDetectHumanBodyPose3DRequest.h>
+#import <Vision/VNHumanBodyRecognizedPoint3D.h>
+#import <Vision/VNRecognizedPoint3D.h>
 
 /* The version of the Vision framework */
 VN_EXPORT double VNVisionVersionNumber API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));

@@ -5,7 +5,7 @@ install-name:    '/System/Library/PrivateFrameworks/PassKitUIFoundation.framewor
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _PKGlyphViewSize, _PKTextureLoaderResultCreateDefaultPrivate2DTexture, 
-                       _PKTextureLoaderResultGetSRGBMatchedFormat, _PKUserInterface ]
+                       _PKTextureLoaderResultGetSRGBMatchedFormat ]
     objc-classes:    [ PKAppleBalanceCardView, PKAppleCashCardView, PKAppleHomeKeyCardView, 
                        PKAuthenticator, PKAuthenticatorEvaluationContext, PKAuthenticatorEvaluationRequest, 
                        PKAuthenticatorPreflightContext, PKAuthenticatorSharedRootContext, 

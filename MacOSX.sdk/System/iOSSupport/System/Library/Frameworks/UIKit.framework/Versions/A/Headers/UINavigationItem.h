@@ -23,6 +23,8 @@ typedef NS_ENUM(NSInteger, UINavigationItemLargeTitleDisplayMode) {
     UINavigationItemLargeTitleDisplayModeAlways,
     /// Never use a larger title when this item is topmost.
     UINavigationItemLargeTitleDisplayModeNever,
+    /// Always use a large title when this item is topmost. If there is a back button present, this will revert to `Always`. Leading & center items will move to the overflow menu if present.
+    UINavigationItemLargeTitleDisplayModeInline API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos),
 } NS_SWIFT_NAME(UINavigationItem.LargeTitleDisplayMode);
 
 typedef NS_ENUM(NSInteger, UINavigationItemBackButtonDisplayMode) {

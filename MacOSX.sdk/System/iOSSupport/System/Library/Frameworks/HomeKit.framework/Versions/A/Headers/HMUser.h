@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @brief This class describes a user in the home.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMUser : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

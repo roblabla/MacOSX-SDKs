@@ -6,6 +6,8 @@
 #else // __has_include(<os/availability.h>)
 # undef API_AVAILABLE
 # define API_AVAILABLE(...) /* Nothing */
+# undef API_DEPRECATED
+# define API_DEPRECATED(...) /* Nothing */
 #endif // __has_include(<os/availability.h>)
 
 #ifdef __cplusplus

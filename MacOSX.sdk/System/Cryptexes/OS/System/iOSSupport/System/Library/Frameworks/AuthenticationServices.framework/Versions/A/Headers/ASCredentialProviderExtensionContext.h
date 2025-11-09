@@ -9,6 +9,8 @@
 #import <AuthenticationServices/ASFoundation.h>
 #import <Foundation/Foundation.h>
 
+@class ASPasskeyAssertionCredential;
+@class ASPasskeyRegistrationCredential;
 @class ASPasswordCredential;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -27,6 +29,23 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(14.0), macos(11.0)) API_UNAVAILAB
     NS_SWIFT_DISABLE_ASYNC
     ;
 
+/*! @abstract Complete the assertion request by providing the user selected passkey credential.
+ @param credential the credential that the user has selected. Includes assertion response.
+ @param completionHandler optionally contains any work which the extension may need to perform after the request has been completed,
+ as a background-priority task. The `expired` parameter will be YES if the system decides to prematurely terminate a previous
+ non-expiration invocation of the completionHandler.
+ @discussion Calling this method will eventually dismiss the associated view controller.
+ */
+- (void)completeAssertionRequestWithSelectedPasskeyCredential:(ASPasskeyAssertionCredential *)credential completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler NS_SWIFT_NAME(completeAssertionRequest(using:completionHandler:)) API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+/*! @abstract Complete the registration request by providing the newly created passkey credential.
+ @param credential the credential that was created in response to the registration request.
+ @param completionHandler optionally contains any work which the extension may need to perform after the request has been completed,
+ as a background-priority task. The `expired` parameter will be YES if the system decides to prematurely terminate a previous
+ non-expiration invocation of the completionHandler.
+ @discussion Calling this method will eventually dismiss the associated view controller.
+ */
+- (void)completeRegistrationRequestWithSelectedPasskeyCredential:(ASPasskeyRegistrationCredential *)credential completionHandler:(void(^ _Nullable)(BOOL expired))completionHandler API_AVAILABLE(ios(17.0), macos(14.0)) NS_SWIFT_NAME(completeRegistrationRequest(using:completionHandler:)) API_UNAVAILABLE(watchos, tvos);
 
 
 /*! @abstract Complete the request to configure the extension.

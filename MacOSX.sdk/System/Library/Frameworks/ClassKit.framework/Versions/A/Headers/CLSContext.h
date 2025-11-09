@@ -2,7 +2,7 @@
 //  CLSContext.h
 //  ClassKit
 //
-//  Copyright © 2016-2020 Apple Inc. All rights reserved.
+//  Copyright © 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

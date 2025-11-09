@@ -154,8 +154,14 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
  @return An array of VNHumanHandPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
 */
-+ (nullable NSArray<VNHumanHandPoseObservationJointName>*) supportedJointNamesForRevision:(NSUInteger)revision error:(NSError **)error;
++ (nullable NSArray<VNHumanHandPoseObservationJointName>*) supportedJointNamesForRevision:(NSUInteger)revision error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("supportedJointNamesAndReturnError", macos(11.0, 14.0), ios(14.0, 17.0), tvos(14.0, 17.0));
 
+/*!
+ @brief Obtain the collection of human hand joint names that are supported by a given request object configured with a specific revision.
+ @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
+ @return An array of VNHumanHandPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
+*/
+- (nullable NSArray<VNHumanHandPoseObservationJointName>*) supportedJointNamesAndReturnError:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 /*!
  @brief Obtain the collection of human hand joints group names that are supported by a given request revision.
@@ -163,7 +169,14 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
  @return An array of VNHumanHandPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
 */
-+ (nullable NSArray<VNHumanHandPoseObservationJointsGroupName>*) supportedJointsGroupNamesForRevision:(NSUInteger)revision error:(NSError **)error;
++ (nullable NSArray<VNHumanHandPoseObservationJointsGroupName>*) supportedJointsGroupNamesForRevision:(NSUInteger)revision error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("supportedJointsGroupNamesAndReturnError", macos(11.0, 14.0), ios(14.0, 17.0), tvos(14.0, 17.0));
+
+/*!
+ @brief Obtain the collection of human hand joints group names that are supported by a given request object configured with a specific revision.
+ @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
+ @return An array of VNHumanHandPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
+*/
+- (nullable NSArray<VNHumanHandPoseObservationJointsGroupName>*) supportedJointsGroupNamesAndReturnError:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 /*!
 	@brief Defines an upper bounds to the maximum number of hands that will be processed for key points in an image.

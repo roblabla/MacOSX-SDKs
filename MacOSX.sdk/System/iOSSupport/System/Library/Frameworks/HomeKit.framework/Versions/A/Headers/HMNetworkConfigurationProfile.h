@@ -10,11 +10,11 @@
 #import <HomeKit/HMAccessoryProfile.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol HMNetworkConfigurationProfileDelegate;
 
-HM_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(13.0), watchos(6.0), tvos(13.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMNetworkConfigurationProfile : HMAccessoryProfile
 
 /*!
@@ -44,4 +44,4 @@ API_UNAVAILABLE(macos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

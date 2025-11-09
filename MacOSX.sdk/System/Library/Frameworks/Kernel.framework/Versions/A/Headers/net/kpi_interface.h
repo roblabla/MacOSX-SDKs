@@ -1040,6 +1040,19 @@ extern errno_t ifnet_set_offload(ifnet_t interface, ifnet_offload_t offload)
 __NKE_API_DEPRECATED;
 
 /*!
+ *       @function ifnet_set_offload_enabled
+ *       @discussion Sets the enabled capabilities of the specified interface.
+ *               The supported capabilities (set by ifnet_set_offload()) are
+ *               left unmodified.
+ *       @param interface The interface.
+ *       @param offload The new set of flags indicating which supported offload
+ *               options should be enabled.
+ *       @result 0 on success otherwise the errno error.
+ */
+extern errno_t ifnet_set_offload_enabled(ifnet_t interface, ifnet_offload_t offload)
+__NKE_API_DEPRECATED;
+
+/*!
  *       @function ifnet_offload
  *       @discussion Returns flags indicating which operations can be
  *               offloaded to the interface.

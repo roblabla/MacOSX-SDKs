@@ -9,6 +9,7 @@
 
 #import <AppKit/AppKit.h>
 #import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKitTypes.h>
 
 
 NS_ASSUME_NONNULL_BEGIN
@@ -129,6 +130,12 @@ typedef NS_ENUM(NSInteger, AVPlayerViewControlsStyle) {
 	@abstract	When set to YES, the AVPlayerView will try to find objects, text and people while the media is paused. When an object is found, the user will be able to interact with it selecting and right clicking to present a context menu. Default is YES.
  */
 @property (nonatomic) BOOL allowsVideoFrameAnalysis API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+
+/*!
+	@property	videoFrameAnalysisTypes
+	@abstract	The types of items AVPlayerView looks for in a paused video frame.
+ */
+@property (nonatomic) AVVideoFrameAnalysisType videoFrameAnalysisTypes API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(tvos, watchos, macCatalyst, ios);
 
 /*!
 	@property	allowsMagnification

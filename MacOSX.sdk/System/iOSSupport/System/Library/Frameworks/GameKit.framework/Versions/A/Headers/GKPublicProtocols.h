@@ -1,11 +1,5 @@
-//
-//  GKPublicProtocols.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
-#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GKPublicConstants.h>
 
@@ -16,7 +10,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 /** Callbacks to the GKSession delegate.
 */
-NS_DEPRECATED(10_8, 10_10, 3_0, 7_0, "Use MCSession in association with MCSessionDelegate from the MultipeerConnectivity framework instead") 
+API_DEPRECATED_WITH_REPLACEMENT("GKMatchDelegate", ios(3.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 @protocol GKSessionDelegate <NSObject>
 
 @optional
@@ -48,7 +42,7 @@ Deny by calling -denyConnectionFromPeer:
 @class GKVoiceChatService;
 
 //All clients will need to implement this protocol
-NS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead") 
+API_DEPRECATED_WITH_REPLACEMENT("GKVoiceChat", ios(3.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE
 @protocol GKVoiceChatClient <NSObject>
 
 @required

@@ -39,7 +39,7 @@ API_AVAILABLE(ios(6), macosx(10.14), tvos(6))
 /// is On, you’ve requested tracking authorization from the user by calling the
 /// <doc://com.apple.documentation/documentation/apptrackingtransparency> APIs,
 /// and received authorization, indicated by
-/// <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanagerauthorizationstatus/attrackingmanagerauthorizationstatusauthorized>.
+/// <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/authorized>.
 /// - If the user changes Settings &gt; Privacy &gt; Tracking &gt; Allow Apps to
 /// Request to Track to Off after authorizing your app, and leaves the
 /// permissions On for your app.
@@ -47,11 +47,12 @@ API_AVAILABLE(ios(6), macosx(10.14), tvos(6))
 /// The advertising identifier returns all zeros
 /// (`00000000-0000-0000-0000-000000000000`) in the following cases:
 ///
-/// - In Simulator, regardless of any settings. - When you call this API on a
-/// device running macOS. - On devices running iOS 14.5 and later and iPadOS
-/// 14.5 and later,
-///
-///    if you haven’t requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework. - If you’ve requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework and the user declines, which results in an authorization status of <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanagerauthorizationstatus/attrackingmanagerauthorizationstatusdenied>. - When a profile or configuration restricts access to the advertising identifier. For more information about restrictions, see <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanagerauthorizationstatus/attrackingmanagerauthorizationstatusrestricted>.
+/// - In Simulator, regardless of any settings.
+/// - When you call this API on a device running macOS. 
+/// - When you call this API in a compatible iPad or iPhone app running in visionOS.
+/// - On devices running iOS 14.5 and later and iPadOS 14.5 and later, if you haven’t requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework.
+/// - If you’ve requested authorization using the <doc://com.apple.documentation/documentation/apptrackingtransparency> framework and the user declines, which results in an authorization status of <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/denied>.
+/// - When a profile or configuration restricts access to the advertising identifier. For more information about restrictions, see <doc://com.apple.documentation/documentation/apptrackingtransparency/attrackingmanager/authorizationstatus/restricted>.
 ///
 /// As a best practice, don’t store the advertising identifier value; access
 /// ``ASIdentifierManager/advertisingIdentifier`` instead. Users can change
@@ -74,8 +75,6 @@ API_AVAILABLE(ios(6), macosx(10.14), tvos(6))
 /// the <doc://com.apple.documentation/documentation/apptrackingtransparency>
 /// framework.
 @property (nonatomic, readonly, getter=isAdvertisingTrackingEnabled) BOOL advertisingTrackingEnabled API_DEPRECATED("This has been replaced by functionality in AppTrackingTransparency's ATTrackingManager class.", ios(6, 14), macosx(10.14, 11.0), tvos(6, 14));
-
-- (void)clearAdvertisingIdentifier API_UNAVAILABLE(ios, macos, tvos);
 
 @end
 

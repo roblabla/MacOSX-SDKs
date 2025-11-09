@@ -173,7 +173,6 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 	@param			pixelBufferAttributes
 					The client requirements for output CVPixelBuffers, expressed using the constants in <CoreVideo/CVPixelBuffer.h>.
 	@result			An instance of AVPlayerItemVideoOutput.
-	@discussion		This method throws an exception if the pixel buffer attributes contain keys that are not pixel buffer attribute keys.
  */
 
 - (instancetype)initWithPixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)pixelBufferAttributes NS_DESIGNATED_INITIALIZER;

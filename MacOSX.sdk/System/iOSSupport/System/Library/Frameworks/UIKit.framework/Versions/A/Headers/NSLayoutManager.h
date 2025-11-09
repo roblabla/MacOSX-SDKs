@@ -355,12 +355,12 @@ UIKIT_EXTERN API_AVAILABLE(macos(10.0), ios(7.0))
 
 /************************ Deprecated ************************/
 enum {
-    NSControlCharacterZeroAdvancementAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionZeroAdvancement", ios(7.0, 9.0)) = NSControlCharacterActionZeroAdvancement,
-    NSControlCharacterWhitespaceAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionWhitespace", ios(7.0, 9.0)) = NSControlCharacterActionWhitespace,
-    NSControlCharacterHorizontalTabAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionHorizontalTab", ios(7.0, 9.0)) = NSControlCharacterActionHorizontalTab,
-    NSControlCharacterLineBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionLineBreak", ios(7.0, 9.0)) = NSControlCharacterActionLineBreak,
-    NSControlCharacterParagraphBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionParagraphBreak", ios(7.0, 9.0)) = NSControlCharacterActionParagraphBreak,
-    NSControlCharacterContainerBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionContainerBreak", ios(7.0, 9.0)) = NSControlCharacterActionContainerBreak
+    NSControlCharacterZeroAdvancementAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionZeroAdvancement", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionZeroAdvancement,
+    NSControlCharacterWhitespaceAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionWhitespace", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionWhitespace,
+    NSControlCharacterHorizontalTabAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionHorizontalTab", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionHorizontalTab,
+    NSControlCharacterLineBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionLineBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionLineBreak,
+    NSControlCharacterParagraphBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionParagraphBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionParagraphBreak,
+    NSControlCharacterContainerBreakAction API_DEPRECATED_WITH_REPLACEMENT("NSControlCharacterActionContainerBreak", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) = NSControlCharacterActionContainerBreak
 };
 
 @interface NSLayoutManager (NSLayoutManagerDeprecated)
@@ -369,10 +369,10 @@ enum {
 - (CGGlyph)glyphAtIndex:(NSUInteger)glyphIndex; // Use -CGGlyphAtIndex: instead
 
 // 0.0 - 1.0.  Whenever (width of the real contents of the line) / (the line fragment width) is below this value, hyphenation will be attempted when laying out the line.  By default, the value is 0.0, meaning hyphenation is off.  A value of 1.0 causes hyphenation to be attempted always.  Note that hyphenation will slow down text layout and increase memory usage, so it should be used sparingly.  Maybe overridden on a per-paragraph basis by the NSParagraphStyle's hyphenationFactor.
-@property CGFloat hyphenationFactor API_DEPRECATED("Please use usesDefaultHyphenation or -[NSParagraphStyle hyphenationFactor] instead.", macos(10.0,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0)) API_UNAVAILABLE(macCatalyst);
+@property CGFloat hyphenationFactor API_DEPRECATED("Please use usesDefaultHyphenation or -[NSParagraphStyle hyphenationFactor] instead.", macos(10.0,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(macCatalyst);
 
 // This is the glyph rendering primitive method.  Renders glyphs at positions into the graphicsContext.  The positions are in the user space coordinate system.  graphicsContext that passed in is already configured according to the text attributes arguments: font, textMatrix, and attributes.  The font argument represents the font applied to the graphics state.  The value can be different from the NSFontAttributeName value in the attributes argument because of various font substitutions that the system automatically executes.  The textMatrix is the affine transform mapping the text space coordinate system to the user space coordinate system.  The tx and ty components of textMatrix are ignored since Quartz overrides them with the glyph positions.
-- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const CGPoint *)positions count:(NSUInteger)glyphCount font:(UIFont *)font matrix:(CGAffineTransform)textMatrix attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes inContext:(CGContextRef)graphicsContext API_DEPRECATED_WITH_REPLACEMENT("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:", macos(10.7,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0)) API_UNAVAILABLE(macCatalyst);
+- (void)showCGGlyphs:(const CGGlyph *)glyphs positions:(const CGPoint *)positions count:(NSUInteger)glyphCount font:(UIFont *)font matrix:(CGAffineTransform)textMatrix attributes:(NSDictionary<NSAttributedStringKey, id> *)attributes inContext:(CGContextRef)graphicsContext API_DEPRECATED_WITH_REPLACEMENT("showCGGlyphs:positions:count:font:textMatrix:attributes:inContext:", macos(10.7,10.15), ios(7.0,13.0), watchos(2.0,6.0), tvos(9.0,13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(macCatalyst);
 
 @end
 

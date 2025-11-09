@@ -1,12 +1,9 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                   arm64e-macos, arm64e-maccatalyst ]
+targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/EmojiFoundation.framework/Versions/A/EmojiFoundation'
-current-version: 117
 exports:
-  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
-                       arm64e-macos, arm64e-maccatalyst ]
+  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _EMFEmojiCategoryActivity, _EMFEmojiCategoryFlags, _EMFEmojiCategoryFoodAndDrink, 
                        _EMFEmojiCategoryNature, _EMFEmojiCategoryObjects, _EMFEmojiCategoryPeople, 
                        _EMFEmojiCategoryPrepopulated, _EMFEmojiCategoryRecents, _EMFEmojiCategorySymbols, 
@@ -17,16 +14,18 @@ exports:
                        _EMFSkinToneSpecifierTypeFitzpatrick1_2, _EMFSkinToneSpecifierTypeFitzpatrick3, 
                        _EMFSkinToneSpecifierTypeFitzpatrick4, _EMFSkinToneSpecifierTypeFitzpatrick5, 
                        _EMFSkinToneSpecifierTypeFitzpatrick6, _EMFSkinToneSpecifierTypeFitzpatrickNone, 
-                       _EMFSkinToneSpecifierTypeFitzpatrickSilhouette, _SN_close_env, 
-                       _SN_create_env, _SN_set_current, __compareEmojiGendersUsingDefaultSortCollation, 
+                       _EMFSkinToneSpecifierTypeFitzpatrickSilhouette, _EmojiFoundationVersionNumber, 
+                       _EmojiFoundationVersionString, _SN_close_env, _SN_create_env, 
+                       _SN_set_current, __compareEmojiGendersUsingDefaultSortCollation, 
                        __compareEmojiGendersUsingSortCollation, __compareEmojiStringsUsingDefaultSortCollation, 
-                       __compareEmojiTokensUsingDefaultSortCollation, __createNormalizedString, 
-                       __createStemmedTokensForTokenArray, __createStrippedFallbackLocaleIdentifierForLocale, 
-                       __createStrippedLocaleIdentifierForLocale, __createTokensForString, 
-                       __strategyClassForIndex, _arabic_UTF_8_close_env, _arabic_UTF_8_create_env, 
-                       _arabic_UTF_8_stem, _assign_to, _basque_UTF_8_close_env, _basque_UTF_8_create_env, 
-                       _basque_UTF_8_stem, _catalan_UTF_8_close_env, _catalan_UTF_8_create_env, 
-                       _catalan_UTF_8_stem, _createEmojiTokenMatchesWithMatchingIDsAndEmojiLocaleData, 
+                       __compareEmojiTokensUsingDefaultSortCollation, __compareEmojiTokensUsingGenderInclusiveSortCollation, 
+                       __createNormalizedString, __createStemmedTokensForTokenArray, 
+                       __createStrippedFallbackLocaleIdentifierForLocale, __createStrippedLocaleIdentifierForLocale, 
+                       __createTokensForString, __strategyClassForIndex, _arabic_UTF_8_close_env, 
+                       _arabic_UTF_8_create_env, _arabic_UTF_8_stem, _assign_to, 
+                       _basque_UTF_8_close_env, _basque_UTF_8_create_env, _basque_UTF_8_stem, 
+                       _catalan_UTF_8_close_env, _catalan_UTF_8_create_env, _catalan_UTF_8_stem, 
+                       _createEmojiTokenMatchesWithMatchingIDsAndEmojiLocaleData, 
                        _create_s, _danish_UTF_8_close_env, _danish_UTF_8_create_env, 
                        _danish_UTF_8_stem, _dutch_UTF_8_close_env, _dutch_UTF_8_create_env, 
                        _dutch_UTF_8_stem, _emf_logging_get_default_log, _emf_logging_get_query_log, 
@@ -62,10 +61,11 @@ exports:
                        _swedish_UTF_8_close_env, _swedish_UTF_8_create_env, _swedish_UTF_8_stem, 
                        _tamil_UTF_8_close_env, _tamil_UTF_8_create_env, _tamil_UTF_8_stem, 
                        _turkish_UTF_8_close_env, _turkish_UTF_8_create_env, _turkish_UTF_8_stem ]
-    objc-classes:    [ EMFAbstractIndexStrategy, EMFAnchoredSearchAnchorsLoader, 
-                       EMFAnchoredSearchManager, EMFContextBuilder, EMFContextBuilderLeftHand, 
-                       EMFContextBuilderRightHand, EMFDPEmojiUsageRecorder, EMFDPEventDispatcher, 
-                       EMFDPRecorder, EMFDPReporterMock, EMFDefaultAutocompleteCandidateProvider, 
+    objc-classes:    [ EMFAbstractIndexStrategy, EMFAnchoredSearchAnchorCollection, 
+                       EMFAnchoredSearchAnchorsCache, EMFAnchoredSearchAnchorsLoader, 
+                       EMFAnchoredSearchManager, EMFBiomeEmojiUsageRecorder, EMFContextBuilder, 
+                       EMFContextBuilderLeftHand, EMFContextBuilderRightHand, EMFDPEmojiUsageRecorder, 
+                       EMFDPEventDispatcher, EMFDPRecorder, EMFDPReporterMock, EMFDefaultAutocompleteCandidateProvider, 
                        EMFEmojiCategory, EMFEmojiLocaleData, EMFEmojiPreferences, 
                        EMFEmojiPreferencesClient, EMFEmojiPreferencesService, EMFEmojiSearchEngine, 
                        EMFEmojiStringGenderVariantFactory, EMFEmojiToken, EMFIndexLoader, 

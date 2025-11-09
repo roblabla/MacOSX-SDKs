@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020,2022 Apple Inc. All rights reserved.
+	Copyright 2010-2020,2022-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -44,18 +44,18 @@ typedef NSString * AVVideoCodecType NS_STRING_ENUM;
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeHEVC /* @"hvc1" */                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeH264 /* @"avc1" */                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeJPEG /* @"jpeg" */                    API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes4444 /* @"ap4h" */         API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422 /* @"apcn" */          API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422HQ /* @"apch" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422LT /* @"apcs" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422Proxy /* @"apco" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes4444 /* @"ap4h" */         API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422 /* @"apcn" */          API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422HQ /* @"apch" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422LT /* @"apcs" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
+	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeAppleProRes422Proxy /* @"apco" */		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos);
 
 	/* IMPORTANT NOTE: this constant is used to select the appropriate encoder, but is NOT used on the encoded content, which is backwards compatible and hence uses 'hvc1' as its codec type. */
 	AVF_EXPORT AVVideoCodecType const AVVideoCodecTypeHEVCWithAlpha /* @"muxa" */           API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 
-	AVF_EXPORT NSString *const AVVideoCodecHEVC /* @"hvc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeHEVC", macos(10.13, 10.13), ios(11.0, 11.0), tvos(11.0, 11.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT NSString *const AVVideoCodecH264 /* @"avc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeH264", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
-	AVF_EXPORT NSString *const AVVideoCodecJPEG /* @"jpeg" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeJPEG", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
+	AVF_EXPORT NSString *const AVVideoCodecHEVC /* @"hvc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeHEVC", macos(10.13, 10.13), ios(11.0, 11.0), tvos(11.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
+	AVF_EXPORT NSString *const AVVideoCodecH264 /* @"avc1" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeH264", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
+	AVF_EXPORT NSString *const AVVideoCodecJPEG /* @"jpeg" */                               API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeJPEG", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
 	AVF_EXPORT NSString *const AVVideoCodecAppleProRes4444 /* @"ap4h" */                    API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeAppleProRes4444", macos(10.7, 10.13)) API_UNAVAILABLE(ios, tvos, watchos);
 	AVF_EXPORT NSString *const AVVideoCodecAppleProRes422 /* @"apcn" */                     API_DEPRECATED_WITH_REPLACEMENT("AVVideoCodecTypeAppleProRes422", macos(10.7, 10.13)) API_UNAVAILABLE(ios, tvos, watchos);
 

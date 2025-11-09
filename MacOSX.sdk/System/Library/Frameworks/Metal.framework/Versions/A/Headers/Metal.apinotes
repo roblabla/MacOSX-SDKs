@@ -24,12 +24,35 @@ Functions:
 - Name: MTLIOCreateCompressionContext
   SwiftPrivate: true
 Enumerators:
+- Name: MTLArgumentAccessReadOnly
+  SwiftPrivate: true
+#  SwiftName: readOnly
+- Name: MTLArgumentAccessReadWrite
+  SwiftPrivate: true
+#  SwiftName: readWrite
+- Name: MTLArgumentAccessWriteOnly
+  SwiftPrivate: true
+#  SwiftName: writeOnly
+- Name: MTLBindingAccessReadOnly
+  SwiftName: readOnly
+- Name: MTLBindingAccessReadWrite
+  SwiftName: readWrite
+- Name: MTLBindingAccessWriteOnly
+  SwiftName: writeOnly
 - Name: MTLResourceStorageModeShared
   SwiftName: storageModeShared
 - Name: MTLStorageModeShared
   SwiftName: shared
 - Name: MTLTextureUsageUnknown
   SwiftName: unknown
+- Name: MTLDataTypeBFloat
+  SwiftName: bfloat
+- Name: MTLDataTypeBFloat2
+  SwiftName: bfloat2
+- Name: MTLDataTypeBFloat3
+  SwiftName: bfloat3
+- Name: MTLDataTypeBFloat4
+  SwiftName: bfloat4
 - Name: MTLDataTypeUInt
   SwiftName: uint
 - Name: MTLDataTypeUInt2
@@ -612,6 +635,18 @@ Protocols:
   - Selector: 'setBufferOffset:atIndex:'
     SwiftName: setBufferOffset(_:index:)
     MethodKind: Instance
+  - Selector: 'setBuffer:offset:attributeStride:atIndex:'
+    SwiftName: setBuffer(_:offset:attributeStride:index:)
+    MethodKind: Instance
+  - Selector: 'setBuffers:offsets:attributeStrides:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setBufferOffset:attributeStride:atIndex:'
+    SwiftName:  setBufferOffset(offset:attributeStride:index:)
+    MethodKind: Instance
+  - Selector: 'setBytes:length:attributeStride:atIndex:'
+    SwiftName:  setBytes(_:length:attributeStride:index:)
+    MethodKind: Instance
   - Selector: 'setTexture:atIndex:'
     SwiftName: setTexture(_:index:)
     MethodKind: Instance
@@ -892,6 +927,12 @@ Protocols:
   - Selector: 'heapAccelerationStructureSizeAndAlignWithDescriptor:'
     SwiftName: heapAccelerationStructureSizeAndAlign(descriptor:)
     MethodKind: Instance
+  - Selector: 'newIOFileHandleWithURL:error:'
+    SwiftName: makeIOFileHandle(url:)
+    MethodKind: Instance
+  - Selector: 'newIOFileHandleWithURL:compressionMethod:error:'
+    SwiftName: makeIOFileHandle(url:compressionMethod:)
+    MethodKind: Instance
   - Selector: 'newIOHandleWithURL:error:'
     SwiftName: makeIOHandle(url:)
     MethodKind: Instance
@@ -1093,6 +1134,18 @@ Protocols:
     SwiftPrivate: true
   - Selector: 'setVertexBufferOffset:atIndex:'
     SwiftName: setVertexBufferOffset(_:index:)
+    MethodKind: Instance
+  - Selector: 'setVertexBuffer:offset:attributeStride:atIndex:'
+    SwiftName: setVertexBuffer(_:offset:attributeStride:index:)
+    MethodKind: Instance
+  - Selector: 'setVertexBuffers:offsets:attributeStrides:withRange:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setVertexBufferOffset:attributeStride:atIndex:'
+    SwiftName:  setVertexBufferOffset(offset:attributeStride:index:)
+    MethodKind: Instance
+  - Selector: 'setVertexBytes:length:attributeStride:atIndex:'
+    SwiftName:  setVertexBytes(_:length:attributeStride:index:)
     MethodKind: Instance
   - Selector: 'setVertexTexture:atIndex:'
     SwiftName: setVertexTexture(_:index:)
@@ -1427,6 +1480,9 @@ Protocols:
   - Selector: 'setVertexBuffer:offset:atIndex:'
     SwiftName: setVertexBuffer(_:offset:at:)
     MethodKind: Instance
+  - Selector: 'setVertexBuffer:offset:attributeStride:atIndex:'
+    SwiftName: setVertexBuffer(_:offset:attributeStride:at:)
+    MethodKind: Instance
   - Selector: 'setFragmentBuffer:offset:atIndex:'
     SwiftName: setFragmentBuffer(_:offset:at:)
     MethodKind: Instance    
@@ -1437,6 +1493,9 @@ Protocols:
   Methods:
   - Selector: 'setKernelBuffer:offset:atIndex:'
     SwiftName: setKernelBuffer(_:offset:at:)
+    MethodKind: Instance
+  - Selector: 'setKernelBuffer:offset:attributeStride:atIndex:'
+    SwiftName: setKernelBuffer(_:offset:attributeStride:at:)
     MethodKind: Instance
   - Selector: 'setThreadgroupMemoryLength:atIndex:'
     SwiftName: setThreadgroupMemoryLength(_:index:)
@@ -1482,6 +1541,12 @@ Protocols:
     MethodKind: Instance
   - Selector: 'setOpaqueTriangleIntersectionFunctionWithSignature:withRange:'
     SwiftName: setOpaqueTriangleIntersectionFunction(signature:range:)
+    MethodKind: Instance
+  - Selector: 'setOpaqueCurveIntersectionFunctionWithSignature:atIndex:'
+    SwiftName: setOpaqueCurveIntersectionFunction(signature:index:)
+    MethodKind: Instance
+  - Selector: 'setOpaqueCurveIntersectionFunctionWithSignature:withRange:'
+    SwiftName: setOpaqueCurveIntersectionFunction(signature:range:)
     MethodKind: Instance
 - Name: MTLAccelerationStructureCommandEncoder
   Methods:

@@ -33,9 +33,9 @@ exports:
                        AKPolygonAnnotation, AKPopupAnnotation, AKRectAnnotation, 
                        AKRectangularShapeAnnotation, AKRedactionRectAnnotation, AKSecureSerializationHelper, 
                        AKShapeAnnotation, AKSidecarController, AKSignature, AKSignatureAnnotation, 
-                       AKSignatureView, AKSparseMutableControllerArray, AKSpeechBubbleAnnotation, 
-                       AKStarAnnotation, AKStarAnnotationRenderer, AKStrokedAnnotation, 
-                       AKTextAnnotationAttributeHelper, AKTextBoxAnnotation, AKTextFieldAnnotation, 
-                       AKThoughtBubbleAnnotation, AKToolbarViewController, AKTriangleAnnotation, 
-                       AKUndoController ]
+                       AKSignatureDescription, AKSignatureView, AKSparseMutableControllerArray, 
+                       AKSpeechBubbleAnnotation, AKStarAnnotation, AKStarAnnotationRenderer, 
+                       AKStrokedAnnotation, AKTextAnnotationAttributeHelper, AKTextBoxAnnotation, 
+                       AKTextFieldAnnotation, AKThoughtBubbleAnnotation, AKToolbarViewController, 
+                       AKTriangleAnnotation, AKUndoController ]
 ...

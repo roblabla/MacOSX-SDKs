@@ -5,10 +5,11 @@ install-name:    '/System/Library/PrivateFrameworks/KeyboardLayouts.framework/Ve
 current-version: 226
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _KLDynamicInputSourceIconEntryImageKey, _KLDynamicInputSourceIconEntryInsetDYKey, 
-                       _KLDynamicInputSourceIconEntryLabelKey, _KLDynamicInputSourceIconLanguageKey, 
-                       _KLDynamicInputSourceIconScriptKey, _KLDynamicInputSourceIconSubvariantKey, 
-                       _KLDynamicInputSourceIconTable, _KLDynamicInputSourceIconVariantKey, 
+    symbols:         [ _KLCopyMostRecentlyUsedInputSourceThatSupportsLanguage, _KLDynamicInputSourceIconEntryImageKey, 
+                       _KLDynamicInputSourceIconEntryInsetDYKey, _KLDynamicInputSourceIconEntryLabelKey, 
+                       _KLDynamicInputSourceIconLanguageKey, _KLDynamicInputSourceIconScriptKey, 
+                       _KLDynamicInputSourceIconSubvariantKey, _KLDynamicInputSourceIconTable, 
+                       _KLDynamicInputSourceIconVariantKey, _KLGetSupportedLanguagesByCurrentInputSource, 
                        _KeyboardLayoutsVersionNumber, _KeyboardLayoutsVersionString, 
                        _kKLOpticalSizeAxis, _kKLWidthAxis ]
     objc-classes:    [ KLInputSourceIconManager, KLInputSourceIconStyle ]

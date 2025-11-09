@@ -9,8 +9,8 @@
  */
 
 
-#import <AudioUnit/AudioUnit.h>
 #import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioUnit.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

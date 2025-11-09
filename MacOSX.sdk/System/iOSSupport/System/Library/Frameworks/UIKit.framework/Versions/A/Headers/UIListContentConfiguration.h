@@ -38,7 +38,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 + (instancetype)extraProminentInsetGroupedHeaderConfiguration API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, watchos);
 
 /// Returns the default configuration for a sidebar list cell.
-+ (instancetype)sidebarCellConfiguration API_UNAVAILABLE(tvos, watchos);
++ (instancetype)sidebarCellConfiguration API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 /// Returns the default configuration for a sidebar list cell with subtitle text.
 + (instancetype)sidebarSubtitleCellConfiguration API_UNAVAILABLE(tvos, watchos);
 /// Returns the default configuration for an accompanied sidebar list cell.

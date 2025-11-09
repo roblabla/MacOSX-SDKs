@@ -1,8 +1,9 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-macosx11.0 -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concurrency -module-name _Concurrency -disable-availability-checking
-// swift-module-flags-ignorable: -user-module-version 5.8.0.117.59 -enable-lexical-lifetimes=false -target-min-inlining-version min
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -disable-objc-attr-requires-foundation-module -target x86_64-apple-macosx12.1 -enable-objc-interop -enable-library-evolution -module-link-name swift_Concurrency -parse-stdlib -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -enable-experimental-concurrency -module-name _Concurrency -disable-availability-checking
+// swift-module-flags-ignorable: -user-module-version 5.9.0.123.203 -enable-lexical-lifetimes=false -target-min-inlining-version min
 import Swift
+import SwiftShims
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @_marker public protocol AnyActor : AnyObject, Swift.Sendable {
 }
@@ -13,6 +14,9 @@ public protocol Actor : _Concurrency.AnyActor {
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @_silgen_name("swift_defaultActor_initialize")
 public func _defaultActorInitialize(_ actor: Swift.AnyObject)
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@_silgen_name("swift_nonDefaultDistributedActor_initialize")
+public func _nonDefaultDistributedActorInitialize(_ actor: Swift.AnyObject)
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @_silgen_name("swift_defaultActor_destroy")
 public func _defaultActorDestroy(_ actor: Swift.AnyObject)
@@ -122,12 +126,56 @@ public func swift_deletedAsyncMethodError() async
 #endif
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol Executor : AnyObject, Swift.Sendable {
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(*, deprecated, message: "Implement 'enqueue(_: __owned ExecutorJob)' instead")
   func enqueue(_ job: _Concurrency.UnownedJob)
+  #if compiler(>=5.3) && $MoveOnly
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  @available(*, deprecated, message: "Implement 'enqueue(_: __owned ExecutorJob)' instead")
+  func enqueue(_ job: consuming _Concurrency.Job)
+  #endif
+  #if compiler(>=5.3) && $MoveOnly
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  func enqueue(_ job: consuming _Concurrency.ExecutorJob)
+  #endif
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 public protocol SerialExecutor : _Concurrency.Executor {
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @available(*, deprecated, message: "Implement 'enqueue(_: __owned ExecutorJob)' instead")
   @_nonoverride func enqueue(_ job: _Concurrency.UnownedJob)
+  #if compiler(>=5.3) && $MoveOnly
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  @available(*, deprecated, message: "Implement 'enqueue(_: __owned ExecutorJob)' instead")
+  @_nonoverride func enqueue(_ job: consuming _Concurrency.Job)
+  #endif
+  #if compiler(>=5.3) && $MoveOnly
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  @_nonoverride func enqueue(_ job: consuming _Concurrency.ExecutorJob)
+  #endif
   func asUnownedSerialExecutor() -> _Concurrency.UnownedSerialExecutor
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  func isSameExclusiveExecutionContext(other: Self) -> Swift.Bool
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.Executor {
+  public func enqueue(_ job: _Concurrency.UnownedJob)
+  #if compiler(>=5.3) && $MoveOnly
+  public func enqueue(_ job: consuming _Concurrency.ExecutorJob)
+  #endif
+  #if compiler(>=5.3) && $MoveOnly
+  public func enqueue(_ job: consuming _Concurrency.Job)
+  #endif
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.SerialExecutor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public func asUnownedSerialExecutor() -> _Concurrency.UnownedSerialExecutor
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.SerialExecutor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public func isSameExclusiveExecutionContext(other: Self) -> Swift.Bool
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @frozen public struct UnownedSerialExecutor : Swift.Sendable {
@@ -136,7 +184,13 @@ public protocol SerialExecutor : _Concurrency.Executor {
   internal var executor: Builtin.Executor
   #endif
   #if compiler(>=5.3) && $BuiltinExecutor
-  @inlinable internal init(_ executor: Builtin.Executor) {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public var _executor: Builtin.Executor {
+    get
+  }
+  #endif
+  #if compiler(>=5.3) && $BuiltinExecutor
+  @inlinable public init(_ executor: Builtin.Executor) {
     #if compiler(>=5.5) && $BuiltinExecutor
     self.executor = executor
     #endif
@@ -149,7 +203,18 @@ public protocol SerialExecutor : _Concurrency.Executor {
     fatalError("Swift compiler is incompatible with this SDK version")
     #endif
   }
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  @inlinable public init<E>(complexEquality executor: __shared E) where E : _Concurrency.SerialExecutor {
+    #if compiler(>=5.9) && $BuiltinBuildComplexEqualityExecutor
+    self.executor = Builtin.buildComplexEqualitySerialExecutorRef(executor)
+    #else
+    fatalError("Swift compiler is incompatible with this SDK version")
+    #endif
+  }
 }
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@_silgen_name("swift_task_isOnExecutor")
+public func _taskIsOnExecutor<Executor>(_ executor: Executor) -> Swift.Bool where Executor : _Concurrency.SerialExecutor
 #if compiler(>=5.3) && $BuiltinExecutor
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @_transparent public func _checkExpectedExecutor(_filenameStart: Builtin.RawPointer, _filenameLength: Builtin.Word, _filenameIsASCII: Builtin.Int1, _line: Builtin.Word, _executor: Builtin.Executor) {
@@ -158,9 +223,49 @@ public protocol SerialExecutor : _Concurrency.Executor {
   }
 
   _reportUnexpectedExecutor(
-    _filenameStart, _filenameLength, _filenameIsASCII, _line, _executor)
+      _filenameStart, _filenameLength, _filenameIsASCII, _line, _executor)
 }
 #endif
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.SerialExecutor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.Actor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  nonisolated public func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.GlobalActor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public static func preconditionIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.SerialExecutor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.Actor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  nonisolated public func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.GlobalActor {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public static func assertIsolated(_ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line)
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.Actor {
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  @_unavailableFromAsync(message: "express the closure as an explicit function declared on the specified 'actor' instead") nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  #else
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  nonisolated public func assumeIsolated<T>(_ operation: (isolated Self) throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  #endif
+}
 #if compiler(>=5.3) && $RethrowsProtocol
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncSequence {
@@ -1406,6 +1511,18 @@ extension _Concurrency.MainActor {
   #endif
 }
 #endif
+#if compiler(>=5.3) && $Actors
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.MainActor {
+  #if compiler(>=5.3) && $UnavailableFromAsync
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  @_unavailableFromAsync(message: "await the call to the @MainActor closure directly") public static func assumeIsolated<T>(_ operation: @_Concurrency.MainActor () throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  #else
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public static func assumeIsolated<T>(_ operation: @_Concurrency.MainActor () throws -> T, file: Swift.StaticString = #fileID, line: Swift.UInt = #line) rethrows -> T
+  #endif
+}
+#endif
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @_silgen_name("swift_job_run")
 @usableFromInline
@@ -1415,9 +1532,116 @@ internal func _swiftJobRun(_ job: _Concurrency.UnownedJob, _ executor: _Concurre
   #if compiler(>=5.3) && $BuiltinJob
   private var context: Builtin.Job
   #endif
-  @_alwaysEmitIntoClient @inlinable public func _runSynchronously(on executor: _Concurrency.UnownedSerialExecutor) {
-      _swiftJobRun(self, executor)
+  #if compiler(>=5.3) && $BuiltinJob
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  @usableFromInline
+  internal init(context: Builtin.Job)
+  #endif
+  #if compiler(>=5.3) && $MoveOnly
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public init(_ job: __owned _Concurrency.Job)
+  #endif
+  #if compiler(>=5.3) && $MoveOnly
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public init(_ job: __owned _Concurrency.ExecutorJob)
+  #endif
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public var priority: _Concurrency.JobPriority {
+    get
   }
+  @available(*, deprecated, renamed: "ExecutorJob.runSynchronously(on:)")
+  @_alwaysEmitIntoClient @inlinable public func _runSynchronously(on executor: _Concurrency.UnownedSerialExecutor) {
+    _swiftJobRun(self, executor)
+  }
+  @_alwaysEmitIntoClient @inlinable public func runSynchronously(on executor: _Concurrency.UnownedSerialExecutor) {
+    _swiftJobRun(self, executor)
+  }
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.UnownedJob : Swift.CustomStringConvertible {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public var description: Swift.String {
+    get
+  }
+}
+#if compiler(>=5.3) && $MoveOnly
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(*, deprecated, renamed: "ExecutorJob")
+@frozen @_moveOnly public struct Job : Swift.Sendable {
+  #if compiler(>=5.3) && $BuiltinJob
+  internal var context: Builtin.Job
+  #endif
+  #if compiler(>=5.3) && $BuiltinJob
+  @usableFromInline
+  internal init(context: __owned Builtin.Job)
+  #endif
+  public init(_ job: _Concurrency.UnownedJob)
+  public init(_ job: __owned _Concurrency.ExecutorJob)
+  public var priority: _Concurrency.JobPriority {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+#endif
+#if compiler(>=5.3) && $MoveOnly
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.Job {
+  @_alwaysEmitIntoClient @inlinable public __consuming func runSynchronously(on executor: _Concurrency.UnownedSerialExecutor) {
+    _swiftJobRun(UnownedJob(self), executor)
+  }
+}
+#endif
+#if compiler(>=5.3) && $MoveOnly
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@frozen @_moveOnly public struct ExecutorJob : Swift.Sendable {
+  #if compiler(>=5.3) && $BuiltinJob
+  internal var context: Builtin.Job
+  #endif
+  #if compiler(>=5.3) && $BuiltinJob
+  @usableFromInline
+  internal init(context: __owned Builtin.Job)
+  #endif
+  public init(_ job: _Concurrency.UnownedJob)
+  public init(_ job: __owned _Concurrency.Job)
+  public var priority: _Concurrency.JobPriority {
+    get
+  }
+  public var description: Swift.String {
+    get
+  }
+}
+#endif
+#if compiler(>=5.3) && $MoveOnly
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.ExecutorJob {
+  @_alwaysEmitIntoClient @inlinable public __consuming func runSynchronously(on executor: _Concurrency.UnownedSerialExecutor) {
+    _swiftJobRun(UnownedJob(self), executor)
+  }
+}
+#endif
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@frozen public struct JobPriority : Swift.Sendable {
+  public typealias RawValue = Swift.UInt8
+  public var rawValue: _Concurrency.JobPriority.RawValue
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.TaskPriority {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public init?(_ p: _Concurrency.JobPriority)
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.JobPriority : Swift.Equatable {
+  public static func == (lhs: _Concurrency.JobPriority, rhs: _Concurrency.JobPriority) -> Swift.Bool
+  public static func != (lhs: _Concurrency.JobPriority, rhs: _Concurrency.JobPriority) -> Swift.Bool
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.JobPriority : Swift.Comparable {
+  public static func < (lhs: _Concurrency.JobPriority, rhs: _Concurrency.JobPriority) -> Swift.Bool
+  public static func <= (lhs: _Concurrency.JobPriority, rhs: _Concurrency.JobPriority) -> Swift.Bool
+  public static func > (lhs: _Concurrency.JobPriority, rhs: _Concurrency.JobPriority) -> Swift.Bool
+  public static func >= (lhs: _Concurrency.JobPriority, rhs: _Concurrency.JobPriority) -> Swift.Bool
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @frozen public struct UnsafeContinuation<T, E> : Swift.Sendable where E : Swift.Error {
@@ -1441,11 +1665,11 @@ internal func _swiftJobRun(_ job: _Concurrency.UnownedJob, _ executor: _Concurre
     #endif
   }
   @_alwaysEmitIntoClient public func resume(throwing error: __owned E) {
-#if compiler(>=5.5) && $BuiltinContinuation
+    #if compiler(>=5.5) && $BuiltinContinuation
     Builtin.resumeThrowingContinuationThrowing(context, error)
-#else
+    #else
     fatalError("Swift compiler is incompatible with this SDK version")
-#endif
+    #endif
   }
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -1810,6 +2034,13 @@ extension _Concurrency.TaskPriority : Swift.Comparable {
   public static func > (lhs: _Concurrency.TaskPriority, rhs: _Concurrency.TaskPriority) -> Swift.Bool
   public static func >= (lhs: _Concurrency.TaskPriority, rhs: _Concurrency.TaskPriority) -> Swift.Bool
 }
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+extension _Concurrency.TaskPriority : Swift.CustomStringConvertible {
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public var description: Swift.String {
+    get
+  }
+}
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.TaskPriority : Swift.Codable {
 }
@@ -1824,7 +2055,7 @@ extension _Concurrency.Task where Success == Swift.Never, Failure == Swift.Never
   }
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_alwaysEmitIntoClient internal func taskCreateFlags(priority: _Concurrency.TaskPriority?, isChildTask: Swift.Bool, copyTaskLocals: Swift.Bool, inheritContext: Swift.Bool, enqueueJob: Swift.Bool, addPendingGroupTaskUnconditionally: Swift.Bool) -> Swift.Int {
+@_alwaysEmitIntoClient internal func taskCreateFlags(priority: _Concurrency.TaskPriority?, isChildTask: Swift.Bool, copyTaskLocals: Swift.Bool, inheritContext: Swift.Bool, enqueueJob: Swift.Bool, addPendingGroupTaskUnconditionally: Swift.Bool, isDiscardingTask: Swift.Bool) -> Swift.Int {
   var bits = 0
   bits |= (bits & ~0xFF) | Int(priority?.rawValue ?? 0)
   if isChildTask {
@@ -1842,6 +2073,9 @@ extension _Concurrency.Task where Success == Swift.Never, Failure == Swift.Never
   if addPendingGroupTaskUnconditionally {
     bits |= 1 << 13
   }
+  if isDiscardingTask {
+    bits |= 1 << 14
+  }
   return bits
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -1854,7 +2088,8 @@ extension _Concurrency.Task where Failure == Swift.Never {
     let flags = taskCreateFlags(
       priority: priority, isChildTask: false, copyTaskLocals: true,
       inheritContext: true, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: false)
+      addPendingGroupTaskUnconditionally: false,
+      isDiscardingTask: false)
 
     // Create the asynchronous task.
     let (task, _) = Builtin.createAsyncTask(flags, operation)
@@ -1876,8 +2111,8 @@ extension _Concurrency.Task where Failure == any Swift.Error {
     let flags = taskCreateFlags(
       priority: priority, isChildTask: false, copyTaskLocals: true,
       inheritContext: true, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: false
-    )
+      addPendingGroupTaskUnconditionally: false,
+      isDiscardingTask: false)
 
     // Create the asynchronous task future.
     let (task, _) = Builtin.createAsyncTask(flags, operation)
@@ -1899,7 +2134,8 @@ extension _Concurrency.Task where Failure == Swift.Never {
     let flags = taskCreateFlags(
       priority: priority, isChildTask: false, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: false)
+      addPendingGroupTaskUnconditionally: false,
+      isDiscardingTask: false)
 
     // Create the asynchronous task future.
     let (task, _) = Builtin.createAsyncTask(flags, operation)
@@ -1921,8 +2157,8 @@ extension _Concurrency.Task where Failure == any Swift.Error {
     let flags = taskCreateFlags(
       priority: priority, isChildTask: false, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: false
-    )
+      addPendingGroupTaskUnconditionally: false,
+      isDiscardingTask: false)
 
     // Create the asynchronous task future.
     let (task, _) = Builtin.createAsyncTask(flags, operation)
@@ -1948,6 +2184,10 @@ public struct UnsafeCurrentTask {
     get
   }
   public var priority: _Concurrency.TaskPriority {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+  public var basePriority: _Concurrency.TaskPriority {
     get
   }
   public func cancel()
@@ -2043,10 +2283,7 @@ internal func _reportUnexpectedExecutor(_ _filenameStart: Builtin.RawPointer, _ 
 #if compiler(>=5.3) && $AsyncAwait && $Sendable
 #if $UnsafeInheritExecutor
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_backDeploy(before: macOS 13.3)
-@_backDeploy(before: iOS 16.4)
-@_backDeploy(before: watchOS 9.4)
-@_backDeploy(before: tvOS 16.4)
+@_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
 @_unsafeInheritExecutor public func withTaskCancellationHandler<T>(operation: () async throws -> T, onCancel handler: @Sendable () -> Swift.Void) async rethrows -> T {
   // unconditionally add the cancellation record to the task.
   // if the task was already cancelled, it will be executed right away.
@@ -2062,10 +2299,7 @@ internal func _reportUnexpectedExecutor(_ _filenameStart: Builtin.RawPointer, _ 
 }
 #else
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
-@_backDeploy(before: macOS 13.3)
-@_backDeploy(before: iOS 16.4)
-@_backDeploy(before: watchOS 9.4)
-@_backDeploy(before: tvOS 16.4)
+@_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
 public func withTaskCancellationHandler<T>(operation: () async throws -> T, onCancel handler: @Sendable () -> Swift.Void) async rethrows -> T {
   // unconditionally add the cancellation record to the task.
   // if the task was already cancelled, it will be executed right away.
@@ -2233,14 +2467,15 @@ internal func _taskRemoveCancellationHandler(record: Swift.UnsafeRawPointer)
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: false,
-      addPendingGroupTaskUnconditionally: true
+      addPendingGroupTaskUnconditionally: true,
+      isDiscardingTask: false
     )
 #else
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: true
-    )
+      addPendingGroupTaskUnconditionally: true,
+      isDiscardingTask: false)
 #endif
 
     // Create the task in this group.
@@ -2263,14 +2498,14 @@ internal func _taskRemoveCancellationHandler(record: Swift.UnsafeRawPointer)
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: false,
-      addPendingGroupTaskUnconditionally: false
-    )
+      addPendingGroupTaskUnconditionally: false,
+      isDiscardingTask: false)
 #else
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: false
-    )
+      addPendingGroupTaskUnconditionally: false,
+      isDiscardingTask: false)
 #endif
 
     // Create the task in this group.
@@ -2323,7 +2558,23 @@ extension _Concurrency.TaskGroup : Swift.Sendable {
   #endif
   #if compiler(>=5.3) && $AsyncAwait
   @_alwaysEmitIntoClient public mutating func waitForAll() async throws {
-    while let _ = try await next() { }
+    var firstError: Error? = nil
+
+    // Make sure we loop until all child tasks have completed
+    while !isEmpty {
+      do {
+        while let _ = try await next() {}
+      } catch {
+        // Upon error throws, capture the first one
+        if firstError == nil {
+          firstError = error
+        }
+      }
+    }
+
+    if let firstError {
+      throw firstError
+    }
   }
   #endif
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
@@ -2332,7 +2583,8 @@ extension _Concurrency.TaskGroup : Swift.Sendable {
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: true
+      addPendingGroupTaskUnconditionally: true,
+      isDiscardingTask: false
     )
 
     // Create the task in this group.
@@ -2355,8 +2607,8 @@ extension _Concurrency.TaskGroup : Swift.Sendable {
     let flags = taskCreateFlags(
       priority: priority, isChildTask: true, copyTaskLocals: false,
       inheritContext: false, enqueueJob: true,
-      addPendingGroupTaskUnconditionally: false
-    )
+      addPendingGroupTaskUnconditionally: false,
+      isDiscardingTask: false)
 
     // Create the task in this group.
     _ = Builtin.createAsyncTaskInGroup(flags, _group, operation)
@@ -2436,6 +2688,285 @@ extension _Concurrency.ThrowingTaskGroup : _Concurrency.AsyncSequence {
 @_silgen_name("swift_taskGroup_addPending")
 @usableFromInline
 internal func _taskGroupAddPendingTask(group: Builtin.RawPointer, unconditionally: Swift.Bool) -> Swift.Bool
+@available(macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4, *)
+@_alwaysEmitIntoClient internal func taskGroupCreateFlags(discardResults: Swift.Bool) -> Swift.Int {
+  var bits = 0
+  if discardResults {
+    bits |= 1 << 8
+  }
+  return bits
+}
+#if compiler(>=5.3) && $AsyncAwait
+#if $UnsafeInheritExecutor
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@inlinable @_unsafeInheritExecutor public func withDiscardingTaskGroup<GroupResult>(returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.DiscardingTaskGroup) async -> GroupResult) async -> GroupResult {
+  #if compiler(>=5.5) && $BuiltinCreateTaskGroupWithFlags
+  let flags = taskGroupCreateFlags(
+    discardResults: true
+  )
+
+  let _group = Builtin.createTaskGroupWithFlags(flags, GroupResult.self)
+  var group = DiscardingTaskGroup(group: _group)
+  defer { Builtin.destroyTaskGroup(_group) }
+
+  let result = await body(&group)
+
+  try! await group.awaitAllRemainingTasks() // try!-safe, cannot throw since this is a non throwing group
+
+  return result
+  #else
+  fatalError("Swift compiler is incompatible with this SDK version")
+  #endif
+}
+#else
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@inlinable public func withDiscardingTaskGroup<GroupResult>(returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.DiscardingTaskGroup) async -> GroupResult) async -> GroupResult {
+  #if compiler(>=5.5) && $BuiltinCreateTaskGroupWithFlags
+  let flags = taskGroupCreateFlags(
+    discardResults: true
+  )
+
+  let _group = Builtin.createTaskGroupWithFlags(flags, GroupResult.self)
+  var group = DiscardingTaskGroup(group: _group)
+  defer { Builtin.destroyTaskGroup(_group) }
+
+  let result = await body(&group)
+
+  try! await group.awaitAllRemainingTasks() // try!-safe, cannot throw since this is a non throwing group
+
+  return result
+  #else
+  fatalError("Swift compiler is incompatible with this SDK version")
+  #endif
+}
+#endif
+#endif
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@frozen public struct DiscardingTaskGroup {
+  @usableFromInline
+  internal let _group: Builtin.RawPointer
+  @inlinable internal init(group: Builtin.RawPointer) {
+    self._group = group
+  }
+  #if compiler(>=5.3) && $AsyncAwait
+  @usableFromInline
+  internal mutating func awaitAllRemainingTasks() async throws
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async -> Swift.Void) {
+    let flags = taskCreateFlags(
+      priority: priority, isChildTask: true, copyTaskLocals: false,
+      inheritContext: false, enqueueJob: true,
+      addPendingGroupTaskUnconditionally: true, isDiscardingTask: true
+    )
+
+    // Create the task in this group.
+    _ = Builtin.createAsyncTaskInGroup(flags, _group, operation)
+  }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async -> Swift.Void) -> Swift.Bool {
+    let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
+
+    guard canAdd else {
+      // the group is cancelled and is not accepting any new work
+      return false
+    }
+    let flags = taskCreateFlags(
+      priority: priority, isChildTask: true, copyTaskLocals: false,
+      inheritContext: false, enqueueJob: true,
+      addPendingGroupTaskUnconditionally: false, isDiscardingTask: true
+    )
+
+    // Create the task in this group.
+    _ = Builtin.createAsyncTaskInGroup(flags, _group, operation)
+
+    return true
+  }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @_alwaysEmitIntoClient public mutating func addTask(operation: __owned @escaping @Sendable () async -> Swift.Void) {
+    let flags = taskCreateFlags(
+      priority: nil, isChildTask: true, copyTaskLocals: false,
+      inheritContext: false, enqueueJob: true,
+      addPendingGroupTaskUnconditionally: true, isDiscardingTask: true
+    )
+
+    // Create the task in this group.
+    _ = Builtin.createAsyncTaskInGroup(flags, _group, operation)
+  }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(operation: __owned @escaping @Sendable () async -> Swift.Void) -> Swift.Bool {
+#if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
+    let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
+
+    guard canAdd else {
+      // the group is cancelled and is not accepting any new work
+      return false
+    }
+
+    let flags = taskCreateFlags(
+      priority: nil, isChildTask: true, copyTaskLocals: false,
+      inheritContext: false, enqueueJob: true,
+      addPendingGroupTaskUnconditionally: false, isDiscardingTask: true
+    )
+
+    // Create the task in this group.
+    _ = Builtin.createAsyncTaskInGroup(flags, _group, operation)
+
+    return true
+#else
+    fatalError("Unsupported Swift compiler")
+#endif
+  }
+  #endif
+  public var isEmpty: Swift.Bool {
+    get
+  }
+  public func cancelAll()
+  public var isCancelled: Swift.Bool {
+    get
+  }
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(*, unavailable)
+extension _Concurrency.DiscardingTaskGroup : Swift.Sendable {
+}
+#if compiler(>=5.3) && $AsyncAwait
+#if $UnsafeInheritExecutor
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@inlinable @_unsafeInheritExecutor public func withThrowingDiscardingTaskGroup<GroupResult>(returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.ThrowingDiscardingTaskGroup<any Swift.Error>) async throws -> GroupResult) async throws -> GroupResult {
+  #if compiler(>=5.5) && $BuiltinCreateTaskGroupWithFlags
+  let flags = taskGroupCreateFlags(
+      discardResults: true
+  )
+
+  let _group = Builtin.createTaskGroupWithFlags(flags, GroupResult.self)
+  var group = ThrowingDiscardingTaskGroup<Error>(group: _group)
+  defer { Builtin.destroyTaskGroup(_group) }
+
+  let result: GroupResult
+  do {
+    result = try await body(&group)
+  } catch {
+    group.cancelAll()
+
+    try await group.awaitAllRemainingTasks(bodyError: error)
+
+    throw error
+  }
+
+  try await group.awaitAllRemainingTasks(bodyError: nil)
+
+  return result
+  #else
+  fatalError("Swift compiler is incompatible with this SDK version")
+  #endif
+}
+#else
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@inlinable public func withThrowingDiscardingTaskGroup<GroupResult>(returning returnType: GroupResult.Type = GroupResult.self, body: (inout _Concurrency.ThrowingDiscardingTaskGroup<any Swift.Error>) async throws -> GroupResult) async throws -> GroupResult {
+  #if compiler(>=5.5) && $BuiltinCreateTaskGroupWithFlags
+  let flags = taskGroupCreateFlags(
+      discardResults: true
+  )
+
+  let _group = Builtin.createTaskGroupWithFlags(flags, GroupResult.self)
+  var group = ThrowingDiscardingTaskGroup<Error>(group: _group)
+  defer { Builtin.destroyTaskGroup(_group) }
+
+  let result: GroupResult
+  do {
+    result = try await body(&group)
+  } catch {
+    group.cancelAll()
+
+    try await group.awaitAllRemainingTasks(bodyError: error)
+
+    throw error
+  }
+
+  try await group.awaitAllRemainingTasks(bodyError: nil)
+
+  return result
+  #else
+  fatalError("Swift compiler is incompatible with this SDK version")
+  #endif
+}
+#endif
+#endif
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@frozen public struct ThrowingDiscardingTaskGroup<Failure> where Failure : Swift.Error {
+  @usableFromInline
+  internal let _group: Builtin.RawPointer
+  @inlinable internal init(group: Builtin.RawPointer) {
+    self._group = group
+  }
+  #if compiler(>=5.3) && $AsyncAwait
+  @usableFromInline
+  internal mutating func awaitAllRemainingTasks(bodyError: (any Swift.Error)?) async throws
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @_alwaysEmitIntoClient public mutating func addTask(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async throws -> Swift.Void) {
+#if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
+    let flags = taskCreateFlags(
+      priority: priority, isChildTask: true, copyTaskLocals: false,
+      inheritContext: false, enqueueJob: true,
+      addPendingGroupTaskUnconditionally: true, isDiscardingTask: true
+    )
+
+    // Create the task in this group.
+    _ = Builtin.createAsyncTaskInGroup(flags, _group, operation)
+#else
+    fatalError("Unsupported Swift compiler")
+#endif
+  }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @_alwaysEmitIntoClient public mutating func addTaskUnlessCancelled(priority: _Concurrency.TaskPriority? = nil, operation: __owned @escaping @Sendable () async throws -> Swift.Void) -> Swift.Bool {
+#if compiler(>=5.5) && $BuiltinCreateAsyncTaskInGroup
+    let canAdd = _taskGroupAddPendingTask(group: _group, unconditionally: false)
+
+    guard canAdd else {
+      // the group is cancelled and is not accepting any new work
+      return false
+    }
+
+    let flags = taskCreateFlags(
+      priority: priority, isChildTask: true, copyTaskLocals: false,
+      inheritContext: false, enqueueJob: true,
+      addPendingGroupTaskUnconditionally: false, isDiscardingTask: true
+    )
+
+    // Create the task in this group.
+    _ = Builtin.createAsyncTaskInGroup(flags, _group, operation)
+
+    return true
+#else
+    fatalError("Unsupported Swift compiler")
+#endif
+  }
+  #endif
+  public var isEmpty: Swift.Bool {
+    get
+  }
+  public func cancelAll()
+  public var isCancelled: Swift.Bool {
+    get
+  }
+}
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@available(*, unavailable)
+extension _Concurrency.ThrowingDiscardingTaskGroup : Swift.Sendable {
+}
+#if compiler(>=5.3) && $AsyncAwait
+@available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *)
+@usableFromInline
+@discardableResult
+@_silgen_name("swift_taskGroup_waitAll")
+internal func _taskGroupWaitAll<T>(group: Builtin.RawPointer, bodyError: (any Swift.Error)?) async throws -> T?
+#endif
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 @propertyWrapper final public class TaskLocal<Value> : Swift.Sendable, Swift.CustomStringConvertible where Value : Swift.Sendable {
   public init(wrappedValue defaultValue: Value)
@@ -2448,12 +2979,26 @@ internal func _taskGroupAddPendingTask(group: Builtin.RawPointer, unconditionall
   #if compiler(>=5.3) && $AsyncAwait
   #if $UnsafeInheritExecutor
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
   @discardableResult
-  @_backDeploy(before: macOS 13.3)
-  @_backDeploy(before: iOS 16.4)
-  @_backDeploy(before: watchOS 9.4)
-  @_backDeploy(before: tvOS 16.4)
   @_unsafeInheritExecutor final public func withValue<R>(_ valueDuringOperation: Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
+    return try await withValueImpl(valueDuringOperation, operation: operation, file: file, line: line)
+  }
+  #else
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @_backDeploy(before: macOS 13.3, iOS 16.4, watchOS 9.4, tvOS 16.4)
+  @discardableResult
+  final public func withValue<R>(_ valueDuringOperation: Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
+    return try await withValueImpl(valueDuringOperation, operation: operation, file: file, line: line)
+  }
+  #endif
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  #if $UnsafeInheritExecutor
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  @discardableResult
+  @inlinable @_unsafeInheritExecutor final internal func withValueImpl<R>(_ valueDuringOperation: __owned Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
     // check if we're not trying to bind a value from an illegal context; this may crash
     _checkIllegalTaskLocalBindingWithinWithTaskGroup(file: file, line: line)
 
@@ -2469,12 +3014,9 @@ internal func _taskGroupAddPendingTask(group: Builtin.RawPointer, unconditionall
   }
   #else
   @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
   @discardableResult
-  @_backDeploy(before: macOS 13.3)
-  @_backDeploy(before: iOS 16.4)
-  @_backDeploy(before: watchOS 9.4)
-  @_backDeploy(before: tvOS 16.4)
-  final public func withValue<R>(_ valueDuringOperation: Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
+  @inlinable final internal func withValueImpl<R>(_ valueDuringOperation: __owned Value, operation: () async throws -> R, file: Swift.String = #fileID, line: Swift.UInt = #line) async rethrows -> R {
     // check if we're not trying to bind a value from an illegal context; this may crash
     _checkIllegalTaskLocalBindingWithinWithTaskGroup(file: file, line: line)
 
@@ -2599,6 +3141,16 @@ extension _Concurrency.AsyncStream.Continuation {
   public func yield() -> _Concurrency.AsyncStream<Element>.Continuation.YieldResult where Element == ()
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension _Concurrency.AsyncStream {
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  public static func makeStream(of elementType: Element.Type = Element.self, bufferingPolicy limit: _Concurrency.AsyncStream<Element>.Continuation.BufferingPolicy = .unbounded) -> (stream: _Concurrency.AsyncStream<Element>, continuation: _Concurrency.AsyncStream<Element>.Continuation) {
+    var continuation: AsyncStream<Element>.Continuation!
+    let stream = AsyncStream<Element>(bufferingPolicy: limit) { continuation = $0 }
+    return (stream: stream, continuation: continuation!)
+  }
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncStream : @unchecked Swift.Sendable where Element : Swift.Sendable {
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
@@ -2653,6 +3205,16 @@ extension _Concurrency.AsyncThrowingStream.Continuation {
   public func yield() -> _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.YieldResult where Element == ()
 }
 @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+extension _Concurrency.AsyncThrowingStream {
+  @available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
+  @_backDeploy(before: macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0)
+  public static func makeStream(of elementType: Element.Type = Element.self, throwing failureType: Failure.Type = Failure.self, bufferingPolicy limit: _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation.BufferingPolicy = .unbounded) -> (stream: _Concurrency.AsyncThrowingStream<Element, Failure>, continuation: _Concurrency.AsyncThrowingStream<Element, Failure>.Continuation) where Failure == any Swift.Error {
+    var continuation: AsyncThrowingStream<Element, Failure>.Continuation!
+    let stream = AsyncThrowingStream<Element, Failure>(bufferingPolicy: limit) { continuation = $0 }
+    return (stream: stream, continuation: continuation!)
+  }
+}
+@available(macOS 10.15, iOS 13.0, watchOS 6.0, tvOS 13.0, *)
 extension _Concurrency.AsyncThrowingStream : @unchecked Swift.Sendable where Element : Swift.Sendable {
 }
 @_alwaysEmitIntoClient @_transparent internal func _internalInvariant(_ condition: @autoclosure () -> Swift.Bool, _ message: @autoclosure () -> Swift.String = String(), file: Swift.StaticString = #fileID, line: Swift.UInt = #line) {
@@ -2687,6 +3249,15 @@ extension _Concurrency.Clock {
   #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   public func measure(_ work: () async throws -> Swift.Void) async rethrows -> Self.Instant.Duration
+  #endif
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension _Concurrency.Clock {
+  #if compiler(>=5.3) && $AsyncAwait
+  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+  @_alwaysEmitIntoClient public func sleep(for duration: Self.Instant.Duration, tolerance: Self.Instant.Duration? = nil) async throws {
+    try await sleep(until: now.advanced(by: duration), tolerance: tolerance)
+  }
   #endif
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -2820,12 +3391,12 @@ extension _Concurrency.SuspendingClock.Instant : Swift.InstantProtocol {
 extension _Concurrency.Task where Success == Swift.Never, Failure == Swift.Never {
   #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-  public static func sleep<C>(until deadline: C.Instant, tolerance: C.Instant.Duration? = nil, clock: C) async throws where C : _Concurrency.Clock
+  public static func sleep<C>(until deadline: C.Instant, tolerance: C.Instant.Duration? = nil, clock: C = ContinuousClock()) async throws where C : _Concurrency.Clock
   #endif
   #if compiler(>=5.3) && $AsyncAwait
   @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
-  @_alwaysEmitIntoClient public static func sleep(for duration: Swift.Duration) async throws {
-    try await sleep(until: .now + duration, clock: .continuous)
+  @_alwaysEmitIntoClient public static func sleep<C>(for duration: C.Instant.Duration, tolerance: C.Instant.Duration? = nil, clock: C = ContinuousClock()) async throws where C : _Concurrency.Clock {
+    try await clock.sleep(for: duration, tolerance: tolerance)
   }
   #endif
 }

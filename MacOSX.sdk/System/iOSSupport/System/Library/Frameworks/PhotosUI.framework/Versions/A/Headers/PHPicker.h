@@ -7,6 +7,12 @@
 
 #import <Foundation/Foundation.h>
 
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#else
+#import <AppKit/AppKit.h>
+#endif // TARGET_OS_IPHONE
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class PHPhotoLibrary;
@@ -15,7 +21,6 @@ NS_REFINED_FOR_SWIFT
 typedef NS_ENUM(NSInteger, PHAssetPlaybackStyle);
 
 /// A mode that determines which representation \c PHPickerViewController should provide for an asset given a type identifier, if multiple representations are available.
-NS_REFINED_FOR_SWIFT
 typedef NS_ENUM(NSInteger, PHPickerConfigurationAssetRepresentationMode) {
     /// Uses the best representation determined by the system. This may change in future releases.
     PHPickerConfigurationAssetRepresentationModeAutomatic = 0,
@@ -26,13 +31,40 @@ typedef NS_ENUM(NSInteger, PHPickerConfigurationAssetRepresentationMode) {
 } API_AVAILABLE(ios(14), macos(13)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 
 /// An enum that determines how \c PHPickerViewController handles user selection.
-NS_REFINED_FOR_SWIFT
 typedef NS_ENUM(NSInteger, PHPickerConfigurationSelection) {
     /// Uses the default selection behavior.
     PHPickerConfigurationSelectionDefault = 0,
     /// Uses the selection order made by the user. Selected assets are numbered.
     PHPickerConfigurationSelectionOrdered = 1,
+    /// Selection can be delivered continuously.
+    PHPickerConfigurationSelectionContinuous API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos) = 2,
+    /// Selection can be delivered continuously and uses the selection order made by the user. Selected assets are numbered.
+    PHPickerConfigurationSelectionContinuousAndOrdered API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos) = 3,
 } API_AVAILABLE(ios(15), macos(13)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+
+/// An enum that determines the mode of \c PHPickerViewController.
+typedef NS_ENUM(NSInteger, PHPickerMode) {
+    /// Default picker mode.
+    PHPickerModeDefault API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos) = 0,
+    /// Compact picker mode (single row).
+    PHPickerModeCompact API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos) = 1,
+} NS_REFINED_FOR_SWIFT API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
+
+/// Constants that specify one or a set of \c PHPickerViewController capabilities.
+typedef NS_OPTIONS(NSUInteger, PHPickerCapabilities) {
+    /// No specified capabilities.
+    PHPickerCapabilitiesNone = 0,
+    /// The search bar.
+    PHPickerCapabilitiesSearch = 1 << 0,
+    /// The staging area.
+    PHPickerCapabilitiesStagingArea = 1 << 1,
+    /// The sidebar or the albums tab.
+    PHPickerCapabilitiesCollectionNavigation = 1 << 2,
+    /// The "Cancel" and the "Add" (if possible) button.
+    PHPickerCapabilitiesSelectionActions = 1 << 3,
+    /// Show intervention UI explaining potential risks for kids or teens if a sensitive asset is selected. Analysis and intervention will only be performed if "Communication Safety" is enabled in ScreenTime.
+    PHPickerCapabilitiesSensitivityAnalysisIntervention = 1 << 4,
+} API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos, tvos);
 
 NS_ASSUME_NONNULL_END
 
@@ -97,6 +129,21 @@ API_UNAVAILABLE(watchos)
 
 @end
 
+/// An update configuration for \c PHPickerViewController.
+__attribute__((objc_subclassing_restricted))
+OS_EXPORT
+NS_REFINED_FOR_SWIFT
+API_AVAILABLE(ios(17), macos(14))
+@interface PHPickerUpdateConfiguration : NSObject <NSCopying>
+
+/// The maximum number of assets that can be selected.
+@property (nonatomic) NSInteger selectionLimit API_AVAILABLE(ios(17), macos(14));
+
+/// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between).
+@property (nonatomic) NSDirectionalRectEdge edgesWithoutContentMargins API_AVAILABLE(ios(17), macos(14));
+
+@end
+
 /// A configuration for \c PHPickerViewController.
 __attribute__((objc_subclassing_restricted))
 OS_EXPORT
@@ -122,6 +169,15 @@ API_UNAVAILABLE(watchos)
 /// Local identifiers of assets to be shown as selected when the picker is presented. Default is an empty array.
 /// @discussion \c preselectedAssetIdentifiers should be an empty array if \c selectionLimit is 1 or \c photoLibrary is not specified. Returned item providers for preselected assets are always empty.
 @property (nonatomic, copy) NSArray<NSString *> *preselectedAssetIdentifiers API_AVAILABLE(ios(15)) API_UNAVAILABLE(watchos);
+
+/// The mode of the picker. Default is \c PHPickerModeDefault.
+@property (nonatomic) PHPickerMode mode API_AVAILABLE(ios(17), macos(14)) API_UNAVAILABLE(watchos);
+
+/// Edges of the picker that have no margin between the content and the edge (e.g. without bars in between). Default is \c NSDirectionalRectEdgeNone.
+@property (nonatomic) NSDirectionalRectEdge edgesWithoutContentMargins API_AVAILABLE(ios(17), macos(14));
+
+/// Capabilities of the picker that should be disabled. Default is \c PHPickerCapabilitiesNone.
+@property (nonatomic) PHPickerCapabilities disabledCapabilities API_AVAILABLE(ios(17), macos(14));
 
 /// Initializes a new configuration with the \c photoLibrary the picker should use.
 - (instancetype)initWithPhotoLibrary:(PHPhotoLibrary *)photoLibrary API_UNAVAILABLE(watchos);
@@ -149,22 +205,6 @@ API_UNAVAILABLE(watchos)
 
 @end
 
-NS_ASSUME_NONNULL_END
-API_UNAVAILABLE_END // (tvos, watchos)
-API_AVAILABLE_END // (ios(14), macos(13))
-
-#if __has_include(<AppKit/NSViewController.h>) || __has_include(<UIKit/UIViewController.h>)
-
-#if TARGET_OS_IPHONE
-#import <UIKit/UIKit.h>
-#else
-#import <AppKit/AppKit.h>
-#endif // TARGET_OS_IPHONE
-
-API_AVAILABLE_BEGIN(ios(14), macos(13))
-API_UNAVAILABLE_BEGIN(tvos, watchos)
-NS_ASSUME_NONNULL_BEGIN
-
 @class PHPickerViewController;
 
 /// A set of methods that the delegate must implement to respond to \c PHPickerViewController user events.
@@ -185,11 +225,13 @@ API_UNAVAILABLE(watchos)
 __attribute__((objc_subclassing_restricted))
 OS_EXPORT
 API_UNAVAILABLE(watchos)
-#if TARGET_OS_IPHONE
+#if __has_include(<UIKit/UIViewController.h>) && TARGET_OS_IPHONE
 @interface PHPickerViewController : UIViewController
-#else
+#elif __has_include(<AppKit/NSViewController.h>)
 @interface PHPickerViewController : NSViewController
-#endif // TARGET_OS_IPHONE
+#else
+@interface PHPickerViewController : NSObject
+#endif // __has_include(<UIKit/UIViewController.h>) && TARGET_OS_IPHONE
 
 /// The configuration passed in during initialization.
 @property (nonatomic, copy, readonly) PHPickerConfiguration *configuration NS_REFINED_FOR_SWIFT API_UNAVAILABLE(watchos);
@@ -200,6 +242,9 @@ API_UNAVAILABLE(watchos)
 /// Initializes a new picker with the \c configuration the picker should use.
 - (instancetype)initWithConfiguration:(PHPickerConfiguration *)configuration NS_DESIGNATED_INITIALIZER NS_REFINED_FOR_SWIFT API_UNAVAILABLE(watchos);
 
+/// Updates the picker using the configuration.
+- (void)updatePickerUsingConfiguration:(PHPickerUpdateConfiguration *)configuration API_AVAILABLE(ios(17), macos(14)) NS_REFINED_FOR_SWIFT;
+
 /// Deselects selected assets in the picker.
 /// @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
 - (void)deselectAssetsWithIdentifiers:(NSArray<NSString *> *)identifiers API_AVAILABLE(ios(16));
@@ -208,13 +253,22 @@ API_UNAVAILABLE(watchos)
 /// @discussion Does nothing if asset identifiers are invalid or not selected, or \c photoLibrary is not specified in the configuration.
 - (void)moveAssetWithIdentifier:(NSString *)identifier afterAssetWithIdentifier:(nullable NSString *)afterIdentifier API_AVAILABLE(ios(16));
 
+/// Scrolls content to the initial position if possible.
+- (void)scrollToInitialPosition API_AVAILABLE(ios(17), macos(14));
+
+/// Zooms in content if possible.
+- (void)zoomIn API_AVAILABLE(ios(17), macos(14));
+
+/// Zooms out content if possible.
+- (void)zoomOut API_AVAILABLE(ios(17), macos(14));
+
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;
-#if TARGET_OS_IPHONE
+#if __has_include(<UIKit/UIViewController.h>) && TARGET_OS_IPHONE
 - (instancetype)initWithNibName:(nullable NSString *)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
-#else
+#elif __has_include(<AppKit/NSViewController.h>)
 - (instancetype)initWithNibName:(nullable NSNibName)nibNameOrNil bundle:(nullable NSBundle *)nibBundleOrNil NS_UNAVAILABLE;
-#endif // TARGET_OS_IPHONE
+#endif // __has_include(<UIKit/UIViewController.h>) && TARGET_OS_IPHONE
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_UNAVAILABLE;
 
 @end
@@ -222,5 +276,3 @@ API_UNAVAILABLE(watchos)
 NS_ASSUME_NONNULL_END
 API_UNAVAILABLE_END // (tvos, watchos)
 API_AVAILABLE_END // (ios(14), macos(13))
-
-#endif // __has_include(<AppKit/NSViewController.h>) || __has_include(<UIKit/UIViewController.h>)

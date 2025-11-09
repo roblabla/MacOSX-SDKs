@@ -37,7 +37,6 @@
 
 __BEGIN_DECLS
 
-
 #pragma mark - Private debug IDs
 
 #define DBG_PPT      36
@@ -67,9 +66,6 @@ __BEGIN_DECLS
 #define DBG_AQM_ALWAYSON       0x30
 #define DBG_AQM_STATS          0x31
 
-// DBG_IFNET is the same as DBG_DLIL, DBG_AQM and DBG_SKYWALK, so don't reuse subclasses
-#define DBG_IFNET              0x40
-
 #define PPT_TEST           0x01
 #define PPT_JETSAM_HIWAT   0x02
 #define PPT_JETSAM_TOPPROC 0x03
@@ -81,7 +77,6 @@ __BEGIN_DECLS
 #define PPTDBG_CODE(SubClass, code) KDBG_CODE(DBG_PPT, SubClass, code)
 #define PERFCTRL_CODE(SubClass, code) KDBG_CODE(DBG_PERFCTRL, SubClass, code)
 #define AQMDBG_CODE(SubClass, code) KDBG_CODE(DBG_DLIL, SubClass, code)
-#define IFNETDBG_CODE(SubClass, code) KDBG_CODE(DBG_DLIL, SubClass, code)
 
 
 extern unsigned int kdebug_enable;

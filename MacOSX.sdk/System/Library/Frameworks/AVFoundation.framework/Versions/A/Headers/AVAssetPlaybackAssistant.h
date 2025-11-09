@@ -34,7 +34,9 @@ AVF_EXPORT AVAssetPlaybackConfigurationOption const AVAssetPlaybackConfiguration
 /*!
   @class		AVAssetPlaybackAssistant
   @abstract		AVAssetPlaybackAssistant provides playback information for an asset.
+  @discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0))
 @interface AVAssetPlaybackAssistant : NSObject
 

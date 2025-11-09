@@ -5,10 +5,26 @@
 //  Copyright © 2018 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #ifdef __cplusplus
 #define AS_EXTERN extern "C" __attribute__((visibility ("default")))
 #else
 #define AS_EXTERN extern __attribute__((visibility ("default")))
+#endif
+
+#ifdef NS_HEADER_AUDIT_BEGIN
+#define AS_HEADER_AUDIT_BEGIN NS_HEADER_AUDIT_BEGIN
+#define AS_HEADER_AUDIT_END NS_HEADER_AUDIT_END
+#else
+#define AS_HEADER_AUDIT_BEGIN(...) NS_ASSUME_NONNULL_BEGIN
+#define AS_HEADER_AUDIT_END(...) NS_ASSUME_NONNULL_END
+#endif
+
+#ifdef __AS_INTERNAL_AVAILABILITY
+#define AS_API_AVAILABLE(...)
+#else
+#define AS_API_AVAILABLE API_AVAILABLE
 #endif
 
 #if __has_include(<UIKit/UIKit.h>)

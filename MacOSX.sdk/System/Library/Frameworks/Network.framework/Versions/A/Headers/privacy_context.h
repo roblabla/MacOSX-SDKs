@@ -2,7 +2,7 @@
 //  privacy_context.h
 //  Network
 //
-//  Copyright (c) 2020 Apple Inc. All rights reserved.
+//  Copyright (c) 2020-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_PRIVACY_CONTEXT_H__
@@ -14,6 +14,7 @@
 
 #include <Network/nw_object.h>
 #include <Network/resolver_config.h>
+#include <Network/proxy_config.h>
 
 #include <stdbool.h>
 #include <stdint.h>
@@ -147,6 +148,38 @@ void
 nw_privacy_context_require_encrypted_name_resolution(nw_privacy_context_t privacy_context,
 													 bool require_encrypted_name_resolution,
 													 _Nullable nw_resolver_config_t fallback_resolver_config);
+
+/*!
+ * @function nw_privacy_context_add_proxy
+ *
+ * @abstract
+ * 		Add a proxy configuration to apply to all connections that participate in this
+ * 		context. If set on `NW_DEFAULT_PRIVACY_CONTEXT`, this will additionally
+ * 		apply to other networking APIs used by the calling process.
+ *
+ * @param privacy_context
+ * 		A privacy context to modify. This can include the default privacy context.
+ *
+ * @param proxy_config
+ * 		A proxy configuration object to apply to all connections that use this context.
+ */
+API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0))
+void
+nw_privacy_context_add_proxy(nw_privacy_context_t privacy_context,
+							 nw_proxy_config_t proxy_config);
+
+/*!
+ * @function nw_privacy_context_clear_proxies
+ *
+ * @abstract
+ * 		Clear out any proxies added using `nw_privacy_context_add_proxy`.
+ *
+ * @param privacy_context
+ * 		A privacy context to modify. This can include the default privacy context.
+ */
+API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0))
+void
+nw_privacy_context_clear_proxies(nw_privacy_context_t privacy_context);
 
 NW_ASSUME_NONNULL_END
 

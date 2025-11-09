@@ -9,13 +9,12 @@ exports:
                        _PDSProtoMapEntryReadFrom, _PDSProtoTopicReadFrom, _PDSProtoUserAuthReadFrom, 
                        _PDSProtoUserPushTokenReadFrom, _PDSProtoUserPushTokenRegRequestReadFrom, 
                        _PDSProtoUserPushTokenRegResponseReadFrom, _PDSProtocolVersionNumber, 
-                       _PDSStringForServerEnvironment ]
-    objc-classes:    [ PDSBag, PDSCDCacheContainer, PDSConfiguration, PDSCoordinator, 
-                       PDSDaemon, PDSDaemonListener, PDSDaemonRemoteVendor, PDSEntryStore, 
-                       PDSHeartbeatTracker, PDSInternalDaemonListener, PDSProtoBatchRegisterReq, 
-                       PDSProtoBatchRegisterResp, PDSProtoGSTokenAuth, PDSProtoMapEntry, 
-                       PDSProtoTopic, PDSProtoUserAuth, PDSProtoUserPushToken, PDSProtoUserPushTokenRegRequest, 
-                       PDSProtoUserPushTokenRegResponse, PDSRegisterMessage, PDSRequest, 
-                       PDSRequestInfo, PDSRequestQueue, PDSResponse, PDSUserTracker, 
-                       PDSXPCClient, PDSXPCServer ]
+                       _PDSStringForServerEnvironment, _createPDSServerBag ]
+    objc-classes:    [ PDSCDCacheContainer, PDSConfiguration, PDSCoordinator, PDSDaemon, 
+                       PDSDaemonListener, PDSDaemonRemoteVendor, PDSEntryStore, PDSHeartbeatTracker, 
+                       PDSInternalDaemonListener, PDSProtoBatchRegisterReq, PDSProtoBatchRegisterResp, 
+                       PDSProtoGSTokenAuth, PDSProtoMapEntry, PDSProtoTopic, PDSProtoUserAuth, 
+                       PDSProtoUserPushToken, PDSProtoUserPushTokenRegRequest, PDSProtoUserPushTokenRegResponse, 
+                       PDSRegisterMessage, PDSRequest, PDSRequestInfo, PDSRequestQueue, 
+                       PDSResponse, PDSUserTracker, PDSXPCClient, PDSXPCServer ]
 ...

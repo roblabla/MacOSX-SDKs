@@ -332,13 +332,35 @@ struct au_evclass_map {
 };
 typedef struct au_evclass_map   au_evclass_map_t;
 
+/*
+ * Audit session flags for the ai_flags member of auditinfo_addr.
+ */
+enum audit_session_flags {
+	/* The initial session created by PID 1. */
+	AU_SESSION_FLAG_IS_INITIAL         = 0x0001,
+
+	/* The graphics subsystem (CoreGraphics, etc.) is available. */
+	AU_SESSION_FLAG_HAS_GRAPHIC_ACCESS = 0x0010,
+
+	/* /dev/tty is available. */
+	AU_SESSION_FLAG_HAS_TTY            = 0x0020,
+
+	/* The session was created for a remote connection. */
+	AU_SESSION_FLAG_IS_REMOTE          = 0x1000,
+
+	/* The console and associated devices are available. */
+	AU_SESSION_FLAG_HAS_CONSOLE_ACCESS = 0x2000,
+
+	/* An active, authenticated user is associated with the session. */
+	AU_SESSION_FLAG_HAS_AUTHENTICATED =  0x4000,
+};
+
+__END_DECLS
 
 #define __AUDIT_API_DEPRECATED
 
 /*
  * Audit system calls.
  */
-
-__END_DECLS
 
 #endif /* !_BSM_AUDIT_H */

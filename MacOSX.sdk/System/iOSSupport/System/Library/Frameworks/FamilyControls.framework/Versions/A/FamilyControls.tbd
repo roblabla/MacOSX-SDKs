@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1066
+current-version: 1112
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
@@ -188,6 +188,7 @@ exports:
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTj', 
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTq', 
                        '_$s14FamilyControls10UsageStoreC5index5afterSD5IndexVySSAA0C10ItemRecordV_GAJ_tF', 
+                       '_$s14FamilyControls10UsageStoreC8contains5whereS2bSS3key_AA0C10ItemRecordV5valuet_tKXE_tKF', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_Gvg', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_GvpMV', 
                        '_$s14FamilyControls10UsageStoreC9removeAllyyF', '_$s14FamilyControls10UsageStoreCACycfC', 
@@ -364,7 +365,7 @@ exports:
                        '_$s14FamilyControls15UsageItemRecordVSHAAMc', '_$s14FamilyControls15UsageItemRecordVSQAAMc', 
                        '_$s14FamilyControls15UsageItemRecordVSeAAMc', '_$s14FamilyControls15UsageItemRecordVs23CustomStringConvertibleAAMc', 
                        '_$s14FamilyControls19AuthorizationCenterC014revokeInternalC017completionHandleryys6ResultOyyts5Error_pGc_tF', 
-                       '_$s14FamilyControls19AuthorizationCenterC015requestInternalC017completionHandleryys6ResultOyyts5Error_pGc_tF', 
+                       '_$s14FamilyControls19AuthorizationCenterC015requestInternalC03for17completionHandleryAA0aB6MemberO_ys6ResultOyyts5Error_pGctF', 
                        '_$s14FamilyControls19AuthorizationCenterC02isaB10AuthorizedSbvg', 
                        '_$s14FamilyControls19AuthorizationCenterC02isaB10AuthorizedSbvpMV', 
                        '_$s14FamilyControls19AuthorizationCenterC05resetC016recordIdentifier17completionHandlery10Foundation4UUIDV_ys6ResultOyyts5Error_pGctF', 
@@ -523,6 +524,9 @@ exports:
                        '_$s7SwiftUI4ViewP14FamilyControlsE20familyActivityPicker10headerText06footerJ011isPresented9selectionQrSSSg_AjA7BindingVySbGALyAD0dG9SelectionVGtFQOMQ', 
                        '_$s7SwiftUI4ViewP14FamilyControlsE20familyActivityPicker11isPresented9selectionQrAA7BindingVySbG_AIyAD0dG9SelectionVGtF', 
                        '_$s7SwiftUI4ViewP14FamilyControlsE20familyActivityPicker11isPresented9selectionQrAA7BindingVySbG_AIyAD0dG9SelectionVGtFQOMQ', 
+                       '_$s7SwiftUI5LabelV14FamilyControlsAD0D17ActivityTitleViewVRszAD0df4IconH0VRs_rlE16bundleIdentifier9inProcessACyAfHGSS_SbtcfC', 
+                       '_$s7SwiftUI5LabelV14FamilyControlsAD0D17ActivityTitleViewVRszAD0df4IconH0VRs_rlE16bundleIdentifierACyAfHGSS_tcfC', 
+                       '_$s7SwiftUI5LabelV14FamilyControlsAD0D17ActivityTitleViewVRszAD0df4IconH0VRs_rlE9webDomainACyAfHGSS_tcfC', 
                        '_$s7SwiftUI5LabelV14FamilyControlsAD0D17ActivityTitleViewVRszAD0df4IconH0VRs_rlEyACyAfHG15ManagedSettings5TokenVyAJ0F8CategoryVGcfC', 
                        '_$s7SwiftUI5LabelV14FamilyControlsAD0D17ActivityTitleViewVRszAD0df4IconH0VRs_rlEyACyAfHG15ManagedSettings5TokenVyAJ11ApplicationVGcfC', 
                        '_$s7SwiftUI5LabelV14FamilyControlsAD0D17ActivityTitleViewVRszAD0df4IconH0VRs_rlEyACyAfHG15ManagedSettings5TokenVyAJ9WebDomainVGcfC' ]

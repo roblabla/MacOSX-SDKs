@@ -354,6 +354,14 @@ typedef void (^os_block_t)(void);
 #define __ptrauth_only __unused
 #endif // __has_feature(ptrauth_calls)
 
+#if __has_feature(ptrauth_calls)
+#define XNU_PTRAUTH_SIGNED_FUNCTION_PTR(type) \
+	__ptrauth(ptrauth_key_function_pointer, 1, ptrauth_string_discriminator(type))
+#else
+#define XNU_PTRAUTH_SIGNED_FUNCTION_PTR(type)
+#endif
+#define XNU_PTRAUTH_SIGNED_PTR OS_PTRAUTH_SIGNED_PTR
+#define XNU_PTRAUTH_SIGNED_PTR_AUTH_NULL OS_PTRAUTH_SIGNED_PTR_AUTH_NULL
 
 #define OS_ASSUME_PTR_ABI_SINGLE_BEGIN __ASSUME_PTR_ABI_SINGLE_BEGIN
 #define OS_ASSUME_PTR_ABI_SINGLE_END __ASSUME_PTR_ABI_SINGLE_END

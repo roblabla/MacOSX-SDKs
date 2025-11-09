@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@abstract	AVPictureInPictureController is a subclass of NSObject that can be used to present the contents of an AVPlayerLayer or AVPlayerView floating on top of applications.
  */
 
-API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPictureInPictureController : NSObject
 
 /*!
@@ -61,13 +61,13 @@ API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
 	@property	pictureInPictureButtonStartImage
 	@abstract	System default Picture in Picture start template image for use in client's Picture in Picture button.
  */
-@property (class, nonatomic, readonly) UIImage *pictureInPictureButtonStartImage API_AVAILABLE(ios(13.0), tvos(14.0));
+@property (class, nonatomic, readonly) UIImage *pictureInPictureButtonStartImage API_AVAILABLE(ios(13.0), tvos(14.0), visionos(1.0));
 
 /*!
  	@property	pictureInPictureButtonStopImage
  	@abstract	System default Picture in Picture stop template image for use in client's Picture in Picture button.
  */
-@property (class, nonatomic, readonly) UIImage *pictureInPictureButtonStopImage API_AVAILABLE(ios(13.0), tvos(14.0));
+@property (class, nonatomic, readonly) UIImage *pictureInPictureButtonStopImage API_AVAILABLE(ios(13.0), tvos(14.0), visionos(1.0));
 #elif TARGET_OS_OSX
 /*!
 	@property	pictureInPictureButtonStartImage
@@ -88,7 +88,7 @@ API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
 				The content source to be shown in Picture in Picture.
 	@abstract   Use this initializer for content that may be a sample buffer display layer or a player layer.
  */
-- (instancetype)initWithContentSource:(AVPictureInPictureControllerContentSource *)contentSource API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithContentSource:(AVPictureInPictureControllerContentSource *)contentSource API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos) NS_DESIGNATED_INITIALIZER;
 
 /*!
 	@method		initWithPlayerLayer:
@@ -102,7 +102,7 @@ API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
 	@property   contentSource
 	@abstract   The receiver's content source. Can be changed while Picture in Picture is active, but the new content source must be ready for display (in the case of AVPlayerLayer, that means AVPlayerLayer.isReadyForDisplay must return YES), otherwise Picture in Picture will stop.
  */
-@property (nonatomic, strong, nullable) AVPictureInPictureControllerContentSource *contentSource API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, strong, nullable) AVPictureInPictureControllerContentSource *contentSource API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property	playerLayer
@@ -153,21 +153,21 @@ API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
 	@abstract	Whether or not any Picture in Picture is active, and can be stopped.
 	@discussion	When true, stopPictureInPicture will stop the active Picture in Picture session. Apps should re-inspect the system-provided picture in picture start button image when this property changes. Observable.
  */
-@property (nonatomic, readonly) BOOL canStopPictureInPicture API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, macos, watchos);
+@property (nonatomic, readonly) BOOL canStopPictureInPicture API_AVAILABLE(tvos(14.0)) API_UNAVAILABLE(ios, macos, watchos, visionos);
 
 /*!
 	@property	requiresLinearPlayback
 	@abstract	Disables certain user operations (fast forward, forward skip, and scrubbing).
 	@discussion	This can be used to temporarily enforce playback of mandatory content (such as legalese or advertisements).
  */
-@property (nonatomic) BOOL requiresLinearPlayback API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL requiresLinearPlayback API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property    canStartPictureInPictureAutomaticallyFromInline
 	@abstract    Indicates whether Picture in Picture should be allowed to start automatically when transitioning to background when the receiver’s content is embedded inline. Default is NO.
 	@discussion  This property must only be set to YES for content intended to be the user's primary focus.
  */
-@property (nonatomic) BOOL canStartPictureInPictureAutomaticallyFromInline API_AVAILABLE(ios(14.2)) API_UNAVAILABLE(watchos, tvos, macos);
+@property (nonatomic) BOOL canStartPictureInPictureAutomaticallyFromInline API_AVAILABLE(ios(14.2), visionos(1.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 @end
 
@@ -177,7 +177,7 @@ API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
 	@abstract   A content source for AVPictureInPictureController.
 	@discussion Create a content source with an appropriate layer, and use it to initialize the AVPictureInPictureController.
  */
-API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 NS_SWIFT_NAME(AVPictureInPictureController.ContentSource)
 @interface AVPictureInPictureControllerContentSource : NSObject
 
@@ -206,7 +206,7 @@ NS_SWIFT_NAME(AVPictureInPictureController.ContentSource)
 	@abstract	A protocol for delegates of AVPictureInPictureController.
  */
 
-API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(9.0), macos(10.15), tvos(14.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol AVPictureInPictureControllerDelegate <NSObject>
 @optional
 

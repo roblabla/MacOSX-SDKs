@@ -32,15 +32,6 @@
 
 #include <pexpert/arm64/board_config.h>
 
-/* We cache the current cthread pointer in TPIDRRO_EL0 and
- * the current CPU number in the low 12 bits of TPIDR_EL0.
- *
- * The cthread pointer must be aligned
- * sufficiently that the maximum CPU number will fit.
- *
- * NOTE: Keep this in sync with libsyscall/os/tsd.h, specifically _os_cpu_number()
- */
-#define MACHDEP_TPIDR_CPUNUM_MASK       (0x0000000000000fff)
 
 /*
  * Machine Thread Flags (machine_thread.flags)

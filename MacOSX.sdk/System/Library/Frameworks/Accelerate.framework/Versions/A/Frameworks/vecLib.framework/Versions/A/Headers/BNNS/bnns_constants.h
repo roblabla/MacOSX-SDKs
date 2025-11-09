@@ -1166,7 +1166,7 @@ BNNS_ENUM(BNNSLayerFlags, uint32_t,
  Introduced in macOS 10.15, iOS 13, tvOS 13, watchOS 6.
 
  Note that we require that stride is always increasing, i.e. stride[i+1] >= stride[i].
- As such, the formulae given below for the location of an element uniquely determine what each stride value shuold be
+ As such, the formulae given below for the location of an element uniquely determine what each stride value should be
  for a given memory layout.
 
  if stride[k] is 0, it's replaced by the default value corresponding to contiguous memory. If size[k] corresponds to stride[k], as

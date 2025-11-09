@@ -3,7 +3,7 @@
  
 	Framework:  VideoToolbox
  
-	Copyright 2021 Apple Inc. All rights reserved.
+	Copyright 2021-2023 Apple Inc. All rights reserved.
  
 */
 
@@ -36,7 +36,7 @@ extern "C"
 		and release your object reference.
  */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelRotationSession*  VTPixelRotationSessionRef;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelRotationSession*  VTPixelRotationSessionRef CM_SWIFT_NONSENDABLE;
 
 /*!
 	@function	VTPixelRotationSessionCreate

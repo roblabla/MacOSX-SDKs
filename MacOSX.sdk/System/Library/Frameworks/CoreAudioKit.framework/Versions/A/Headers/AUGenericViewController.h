@@ -9,7 +9,7 @@
  */
 
 #import <CoreAudioKit/AUViewController.h>
-#import <AVFoundation/AVAudioUnit.h>
+#import <AVFoundation/AVFoundation.h>
 
 #if TARGET_OS_IPHONE
 typedef UIColor AUViewColor;

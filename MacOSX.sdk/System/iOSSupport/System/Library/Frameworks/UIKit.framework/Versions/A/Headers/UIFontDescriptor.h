@@ -159,8 +159,8 @@ UIKIT_EXTERN const UIFontWidth UIFontWidthCompressed API_AVAILABLE(ios(16.0));
 // Font feature keys
 #if __swift__
 // Allows for better FeatureKey names for Swift clients
-UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureTypeIdentifierKey NS_SWIFT_NAME(UIFontDescriptorFeatureKey.typeIdentifier) API_DEPRECATED_WITH_REPLACEMENT("UIFontDescriptor.FeatureKey.type", ios(7.0, 15.0));
-UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureSelectorIdentifierKey NS_SWIFT_NAME(UIFontDescriptorFeatureKey.featureIdentifier) API_DEPRECATED_WITH_REPLACEMENT("UIFontDescriptor.FeatureKey.selector", ios(7.0, 15.0));
+UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureTypeIdentifierKey NS_SWIFT_NAME(UIFontDescriptorFeatureKey.typeIdentifier) API_DEPRECATED_WITH_REPLACEMENT("UIFontDescriptor.FeatureKey.type", ios(7.0, 15.0), visionos(1.0, 1.0));
+UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureSelectorIdentifierKey NS_SWIFT_NAME(UIFontDescriptorFeatureKey.featureIdentifier) API_DEPRECATED_WITH_REPLACEMENT("UIFontDescriptor.FeatureKey.selector", ios(7.0, 15.0), visionos(1.0, 1.0));
 UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureTypeIdentifierKey_ForNewSwiftAPI NS_SWIFT_NAME(UIFontDescriptorFeatureKey.type) API_AVAILABLE(ios(15.0));
 UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureSelectorIdentifierKey_ForNewSwiftAPI NS_SWIFT_NAME(UIFontDescriptorFeatureKey.selector) API_AVAILABLE(ios(15.0));
 #else
@@ -173,6 +173,8 @@ UIKIT_EXTERN UIFontDescriptorFeatureKey const UIFontFeatureSelectorIdentifierKey
 
 // Font text styles, semantic descriptions of the intended use for a font returned by +[UIFont preferredFontForTextStyle:]
 UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleLargeTitle API_AVAILABLE(ios(11.0), watchos(5.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleExtraLargeTitle API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleExtraLargeTitle2 API_AVAILABLE(ios(17.0));
 UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleTitle1 API_AVAILABLE(ios(9.0));
 UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleTitle2 API_AVAILABLE(ios(9.0));
 UIKIT_EXTERN UIFontTextStyle const UIFontTextStyleTitle3 API_AVAILABLE(ios(9.0));

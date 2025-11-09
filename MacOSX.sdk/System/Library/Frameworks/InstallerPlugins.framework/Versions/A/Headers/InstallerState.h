@@ -5,9 +5,9 @@
 	All rights reserved.
 */
 
-
-
 #import <Cocoa/Cocoa.h>
+
+__BEGIN_DECLS
 
 /*!
     @const 		InstallerState_Choice_Identifier
@@ -100,3 +100,5 @@ typedef struct InstallerState_Private InstallerState_Private;
 */
 @property (NS_NONATOMIC_IOSONLY, readonly) BOOL installSucceeded;
 @end
+
+__END_DECLS

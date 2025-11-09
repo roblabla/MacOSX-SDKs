@@ -508,12 +508,13 @@ exports:
                        __ZTVN2as6server23MicrophoneConfigurationE, __ZTVN2as6server3BoxE, 
                        __ZTVN2as6server4PortE, __ZTVN2as6server5ClockE, __ZTVN2as6server6DeviceE, 
                        __ZTVN2as6server6DriverE, __ZTVN2as6server7ControlE, __ZTVN2as6server8HWStreamE, 
-                       _kAudioSessionNotification_ConnectedPorts, _kAudioSessionNotification_ConnectedPortsKey_InputAvailable, 
-                       _kAudioSessionNotification_InterruptionInfoKey_InterruptionReason, 
+                       _kAudioSessionInterruptionNotification, _kAudioSessionNotification_InterruptionInfoKey_InterruptionReason, 
+                       _kAudioSessionNotification_InterruptionInfoKey_InterruptorBundleID, 
                        _kAudioSessionNotification_InterruptionInfoKey_InterruptorName, 
                        _kAudioSessionNotification_InterruptionInfoKey_State, _kAudioSessionNotification_InterruptionInfoKey_Type, 
                        _kAudioSessionNotification_InterruptionInfoKey_WasSuspended, 
                        _kAudioSessionNotification_RouteChangeKey_SpatialEnabled, 
                        _kAudioSessionNotification_SpatialPreferencesChanged, _sessionManagerXPCCallbackInterface, 
                        _sessionManagerXPCInterface ]
+    objc-classes:    [ AVAudioApplicationSpecification ]
 ...

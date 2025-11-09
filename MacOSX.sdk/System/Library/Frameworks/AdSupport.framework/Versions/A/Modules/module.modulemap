@@ -1,4 +1,4 @@
-framework module AdSupport [extern_c] {
+framework module AdSupport {
     umbrella header "AdSupport.h"
     export *
     module * { export * }

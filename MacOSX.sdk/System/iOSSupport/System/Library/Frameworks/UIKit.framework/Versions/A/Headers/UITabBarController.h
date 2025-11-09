@@ -40,8 +40,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nullable, nonatomic, assign) __kindof UIViewController *selectedViewController; // This may return the "More" navigation controller if it exists.
 @property(nonatomic) NSUInteger selectedIndex;
 
-@property(nonatomic, readonly) UINavigationController *moreNavigationController API_UNAVAILABLE(tvos); // Returns the "More" navigation controller, creating it if it does not already exist.
-@property(nullable, nonatomic, copy) NSArray<__kindof UIViewController *> *customizableViewControllers API_UNAVAILABLE(tvos); // If non-nil, then the "More" view will include an "Edit" button that displays customization UI for the specified controllers. By default, all view controllers are customizable.
+@property(nonatomic, readonly) UINavigationController *moreNavigationController API_UNAVAILABLE(tvos, visionos); // Returns the "More" navigation controller, creating it if it does not already exist.
+@property(nullable, nonatomic, copy) NSArray<__kindof UIViewController *> *customizableViewControllers API_UNAVAILABLE(tvos, visionos); // If non-nil, then the "More" view will include an "Edit" button that displays customization UI for the specified controllers. By default, all view controllers are customizable.
 
 @property(nonatomic,readonly) UITabBar *tabBar API_AVAILABLE(ios(3.0)); // Provided for -[UIActionSheet showFromTabBar:]. Attempting to modify the contents of the tab bar directly will throw an exception.
 
@@ -55,19 +55,19 @@ NS_SWIFT_UI_ACTOR
 - (BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController API_AVAILABLE(ios(3.0));
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController;
 
-- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
-- (void)tabBarController:(UITabBarController *)tabBarController willEndCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers changed:(BOOL)changed API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
+- (void)tabBarController:(UITabBarController *)tabBarController willBeginCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)tabBarController:(UITabBarController *)tabBarController willEndCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers changed:(BOOL)changed API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 - (void)tabBarController:(UITabBarController *)tabBarController didEndCustomizingViewControllers:(NSArray<__kindof UIViewController *> *)viewControllers changed:(BOOL)changed API_UNAVAILABLE(tvos);
 
-- (UIInterfaceOrientationMask)tabBarControllerSupportedInterfaceOrientations:(UITabBarController *)tabBarController API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos);
-- (UIInterfaceOrientation)tabBarControllerPreferredInterfaceOrientationForPresentation:(UITabBarController *)tabBarController API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos);
+- (UIInterfaceOrientationMask)tabBarControllerSupportedInterfaceOrientations:(UITabBarController *)tabBarController API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (UIInterfaceOrientation)tabBarControllerPreferredInterfaceOrientationForPresentation:(UITabBarController *)tabBarController API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 - (nullable id <UIViewControllerInteractiveTransitioning>)tabBarController:(UITabBarController *)tabBarController
-                      interactionControllerForAnimationController: (id <UIViewControllerAnimatedTransitioning>)animationController API_AVAILABLE(ios(7.0));
+                      interactionControllerForAnimationController: (id <UIViewControllerAnimatedTransitioning>)animationController API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(visionos);
 
 - (nullable id <UIViewControllerAnimatedTransitioning>)tabBarController:(UITabBarController *)tabBarController
             animationControllerForTransitionFromViewController:(UIViewController *)fromVC
-                                              toViewController:(UIViewController *)toVC  API_AVAILABLE(ios(7.0));
+                                              toViewController:(UIViewController *)toVC  API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(visionos);
 
 @end
 
@@ -79,7 +79,7 @@ NS_SWIFT_UI_ACTOR
 
 /* Deprecated on tvOS 15.0 in favor of -[UIViewController setContentScrollView:forEdge:].
  */
-@property(nullable, nonatomic, strong) UIScrollView *tabBarObservedScrollView API_DEPRECATED("Use -setContentScrollView:forEdge: instead.", tvos(13.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos); // Set this property to the full screen scroll view on the tab's top-level view controller, if one exists.
+@property(nullable, nonatomic, strong) UIScrollView *tabBarObservedScrollView API_DEPRECATED("Use -setContentScrollView:forEdge: instead.", tvos(13.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, visionos); // Set this property to the full screen scroll view on the tab's top-level view controller, if one exists.
 
 @end
 

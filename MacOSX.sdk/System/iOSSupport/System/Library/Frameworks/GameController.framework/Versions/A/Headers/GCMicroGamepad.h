@@ -5,17 +5,12 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
-#import <GameController/GCExtern.h>
 #import <GameController/GCPhysicalInputProfile.h>
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class GCController;
 @class GCMicroGamepadSnapshot;
-@class GCControllerDirectionPad;
-@class GCControllerElement;
-@class GCControllerButtonInput;
 
 /**
  The primary directional input surface for the directional gamepad

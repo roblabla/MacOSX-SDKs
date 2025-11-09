@@ -64,6 +64,9 @@ typedef UIAccessibilityCustomRotorItemResult *_Nullable(^UIAccessibilityCustomRo
 // Create the array of UIAccessibilityCustomRotors and set it on the target element or ancestor element to which it applies.
 @interface NSObject (UIAccessibilityCustomRotor)
 @property (nonatomic, retain, nullable) NSArray<UIAccessibilityCustomRotor *> *accessibilityCustomRotors API_AVAILABLE(ios(10.0));
+
+typedef NSArray<UIAccessibilityCustomRotor *> * __nullable (^AXCustomRotorsReturnBlock)(void);
+@property (nullable, nonatomic, copy) AXCustomRotorsReturnBlock accessibilityCustomRotorsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
 @end
 
 // UIAccessibilityCustomRotorSearchPredicate is a container for search parameters.

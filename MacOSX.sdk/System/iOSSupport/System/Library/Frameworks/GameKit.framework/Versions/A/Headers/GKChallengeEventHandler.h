@@ -1,15 +1,11 @@
-//
-//  GKChallengeEventHandler.h
-//  Game Center
-//
-//  Copyright 2012-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
+#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GKChallenge.h>
 
 /// GKChallengeEventHandler's delegate must implement the following protocol to be notified of challenge-related events. All of these methods are called on the main thread.
-NS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.") __WATCHOS_PROHIBITED 
+API_DEPRECATED("You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.", ios(6.0,7.0), macos(10.8,10.10)) __WATCHOS_PROHIBITED API_UNAVAILABLE(tvos)
 @protocol GKChallengeEventHandlerDelegate <NSObject>
 
 @optional
@@ -38,8 +34,7 @@ NS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKChallen
 @end
 
 #if !TARGET_OS_WATCH
-
-NS_CLASS_DEPRECATED(10_8, 10_10, 6_0, 7_0, "You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.") 
+API_DEPRECATED("You should instead implement the GKChallengeListener protocol and register a listener with GKLocalPlayer.", ios(6.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 /// A singleton object responsible for dispatching challenge-related events to its delegate
 @interface GKChallengeEventHandler : NSObject
 

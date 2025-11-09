@@ -1,4 +1,9 @@
-framework module Network [system] [extern_c] {
+framework module Network [system] {
 	umbrella header "Network.h"
 	export *
+
+	explicit module FoundationExtension {
+		header "NSURLSession+Network.h"
+		export *
+	}
 }

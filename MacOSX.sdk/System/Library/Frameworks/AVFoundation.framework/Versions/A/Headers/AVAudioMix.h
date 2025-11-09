@@ -4,7 +4,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2010-2017 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
  
  */
 
@@ -34,6 +34,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVAudioMix : NSObject <NSCopying, NSMutableCopying> {
 @private
@@ -48,6 +49,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 @class AVMutableAudioMixInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableAudioMix : AVAudioMix {
 @private
@@ -92,6 +94,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 @class AVAudioMixInputParametersInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVAudioMixInputParameters : NSObject <NSCopying, NSMutableCopying> {
 @private
@@ -148,6 +151,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @class AVPlayerItemTrack;
 @class AVMutableAudioMixInputParametersInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableAudioMixInputParameters : AVAudioMixInputParameters {
 @private

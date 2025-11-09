@@ -2,7 +2,7 @@
 //  VZVirtioSoundDeviceInputStreamConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZVirtioSoundDeviceStreamConfiguration.h>

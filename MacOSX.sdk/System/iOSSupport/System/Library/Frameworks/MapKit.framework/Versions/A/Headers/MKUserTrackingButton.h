@@ -5,14 +5,22 @@
 //  Copyright © 2017 Apple, Inc. All rights reserved.
 //
 
-#import <UIKit/UIView.h>
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#else
+#import <AppKit/AppKit.h>
+#endif
 
 @class MKMapView;
 
 NS_ASSUME_NONNULL_BEGIN
 
-NS_CLASS_AVAILABLE_IOS(11_0) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, macos, watchos)
+#if TARGET_OS_IPHONE
 @interface MKUserTrackingButton : UIView
+#else
+@interface MKUserTrackingButton : NSView
+#endif
 
 + (instancetype)userTrackingButtonWithMapView:(nullable MKMapView *)mapView;
 @property (nonatomic, nullable, weak) MKMapView *mapView;

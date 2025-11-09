@@ -54,10 +54,10 @@ typedef NS_ENUM(NSInteger, NEProviderStopReason) {
 	/*! @const NEProviderStopReasonConnectionFailed Failed to establish connection. */
 	NEProviderStopReasonConnectionFailed = 14,
 	/*! @const NEProviderStopReasonSleep The device went to sleep and disconnectOnSleep is enabled in the configuration */
-	NEProviderStopReasonSleep API_AVAILABLE(macos(10.15), ios(13.0)) = 15,
+	NEProviderStopReasonSleep API_AVAILABLE(macos(10.15), ios(13.0), tvos(17.0)) = 15,
 	/*! @const NEProviderStopReasonAppUpdate The NEProvider is being updated */
-	NEProviderStopReasonAppUpdate API_AVAILABLE(macos(10.15), ios(13.0)) = 16,
-} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+	NEProviderStopReasonAppUpdate API_AVAILABLE(macos(10.15), ios(13.0), tvos(17.0)) = 16,
+} API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @file NEProvider.h
@@ -74,7 +74,7 @@ typedef NS_ENUM(NSInteger, NEProviderStopReason) {
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NEProvider : NSObject
 
 /*!
@@ -82,13 +82,13 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @discussion This function is called by the framework when the system is about to go to sleep. Subclass developers can override this method to implement custom behavior such as closing connections or pausing some network activity.
  * @param completionHandler When the method is finished handling the sleep event it must execute this completion handler.
  */
-- (void)sleepWithCompletionHandler:(void (^)(void))completionHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)sleepWithCompletionHandler:(void (^)(void))completionHandler API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method wake
  * @discussion This function is called by the framework immediately after the system wakes up from sleep. Subclass developers can override this method to implement custom behavior such as re-establishing connections or resuming some network activity.
  */
-- (void)wake API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)wake API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method createTCPConnectionToEndpoint:enableTLS:TLSParameters:delegate:
@@ -99,7 +99,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param delegate An object to use as the connections delegate. This object should conform to the NWTCPConnectionAuthenticationDelegate protocol.
  * @return An NWTCPConnection object.
  */
-- (NWTCPConnection *)createTCPConnectionToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (NWTCPConnection *)createTCPConnectionToEndpoint:(NWEndpoint *)remoteEndpoint enableTLS:(BOOL)enableTLS TLSParameters:(nullable NWTLSParameters *)TLSParameters delegate:(nullable id)delegate API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method createUDPSessionToEndpoint:fromEndpoint:
@@ -108,7 +108,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param localEndpoint An NWHostEndpoint object that specifies the local IP address endpoint to use as the source endpoint of the UDP session.
  * @return An NWUDPSession object.
  */
-- (NWUDPSession *)createUDPSessionToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (NWUDPSession *)createUDPSessionToEndpoint:(NWEndpoint *)remoteEndpoint fromEndpoint:(nullable NWHostEndpoint *)localEndpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method displayMessage:completionHandler:
@@ -116,7 +116,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param message The message to be displayed.
  * @param completionHandler A block that is executed when the user acknowledges the message. If this method is called on a NEFilterDataProvider instance or the message cannot be displayed, then the completion handler block will be executed immediately with success parameter set to NO. If the message was successfully displayed to the user, then the completion handler block is executed with the success parameter set to YES when the user dismisses the message.
  */
-- (void)displayMessage:(NSString *)message completionHandler:(void (^)(BOOL success))completionHandler API_DEPRECATED_WITH_REPLACEMENT("UILocalNotification", macos(10.12, 10.14), ios(10.0, 12.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)displayMessage:(NSString *)message completionHandler:(void (^)(BOOL success))completionHandler API_DEPRECATED_WITH_REPLACEMENT("UILocalNotification", macos(10.12, 10.14), ios(10.0, 12.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method startSystemExtensionMode
@@ -144,13 +144,13 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *
  *    This method should be called as early as possible after the system extension starts.
  */
-+ (void)startSystemExtensionMode API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
++ (void)startSystemExtensionMode API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property defaultPath
  * @discussion The current default path for connections created by the provider. Use KVO to watch for network changes.
  */
-@property (readonly, nullable) NWPath *defaultPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (readonly, nullable) NWPath *defaultPath API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

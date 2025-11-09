@@ -25,10 +25,10 @@ typedef NS_ENUM(NSInteger, AVAudioSessionRouteSelection) {
 	AVAudioSessionRouteSelectionNone = 0,
 	AVAudioSessionRouteSelectionLocal = 1,
 	AVAudioSessionRouteSelectionExternal = 2
-} NS_SWIFT_NAME(AVAudioSession.RouteSelection) API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+} NS_SWIFT_NAME(AVAudioSession.RouteSelection) API_AVAILABLE(ios(13.0), visionos(1.0)) API_UNAVAILABLE(macos, tvos, watchos);
 
 
-API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos, watchos)
+API_AVAILABLE(ios(13.0), visionos(1.0)) API_UNAVAILABLE(macos, tvos, watchos)
 @interface AVAudioSession (AVPlaybackRouteSelecting)
 
 /*!

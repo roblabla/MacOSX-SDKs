@@ -99,7 +99,8 @@ enum {
 	// options for registerService() & terminate()
 	kIOServiceSynchronous   = 0x00000002,
 	// options for registerService()
-	kIOServiceAsynchronous  = 0x00000008
+	kIOServiceAsynchronous  = 0x00000008,
+	kIOServiceDextRequirePowerForMatching = 0x00000010,
 };
 
 // options for open()
@@ -195,6 +196,7 @@ extern const OSSymbol *     gIODriverKitTestDriverEntitlementKey;
 extern const OSSymbol *     gIODriverKitUserClientEntitlementCommunicatesWithDriversKey;
 extern const OSSymbol *     gIODriverKitUserClientEntitlementAllowThirdPartyUserClientsKey;
 extern const OSSymbol *     gIOMatchDeferKey;
+extern const OSSymbol *     gIOExclaveAssignedKey;
 
 extern const OSSymbol *     gIOAllCPUInitializedKey;
 
@@ -258,6 +260,7 @@ typedef void (^OSObjectApplierBlock)(OSObject * object);
 class IOUserClient;
 class IOPlatformExpert;
 class IOUserServerCheckInToken;
+class IOInterruptEventSource;
 
 /*! @class IOService
  *   @abstract The base class for most I/O Kit families, devices, and drivers.
@@ -1481,6 +1484,9 @@ public:
  *   @result The BSD <code>errno</code> or <code>EIO</code> if unknown. */
 
 	virtual int errnoFromReturn( IOReturn rtn );
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
 
 /* * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 /* * * * * * * * * * end of IOService API  * * * * * * * */

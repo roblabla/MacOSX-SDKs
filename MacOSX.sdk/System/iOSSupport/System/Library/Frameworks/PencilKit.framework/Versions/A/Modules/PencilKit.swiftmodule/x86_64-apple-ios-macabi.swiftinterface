@@ -1,12 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 410.13
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name PencilKit
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 453.5.0.1
+import DeveloperToolsSupport
 import Foundation
 @_exported import PencilKit
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(iOS 14.0, macOS 11.0, *)
 public struct PKStroke {
   public init(ink: PencilKit.PKInk, path: PencilKit.PKStrokePath, transform: CoreFoundation.CGAffineTransform = .identity, mask: UIKit.UIBezierPath? = nil)
@@ -38,6 +40,10 @@ public struct PKStroke {
   public var randomSeed: Swift.UInt32 {
     get
     set
+  }
+  @available(iOS 17.0, macOS 14.0, *)
+  public var requiredContentVersion: PencilKit.PKContentVersion {
+    get
   }
 }
 @available(iOS 14.0, macOS 11.0, *)
@@ -94,6 +100,8 @@ extension PencilKit.PKEraserTool : Swift._ObjectiveCBridgeable {
 @available(iOS 14.0, macOS 11.0, *)
 public struct PKStrokePoint {
   public init(location: CoreFoundation.CGPoint, timeOffset: Foundation.TimeInterval, size: CoreFoundation.CGSize, opacity: CoreFoundation.CGFloat, force: CoreFoundation.CGFloat, azimuth: CoreFoundation.CGFloat, altitude: CoreFoundation.CGFloat)
+  @available(iOS 17.0, macOS 14.0, *)
+  public init(location: CoreFoundation.CGPoint, timeOffset: Foundation.TimeInterval, size: CoreFoundation.CGSize, opacity: CoreFoundation.CGFloat, force: CoreFoundation.CGFloat, azimuth: CoreFoundation.CGFloat, altitude: CoreFoundation.CGFloat, secondaryScale: CoreFoundation.CGFloat)
   public var location: CoreFoundation.CGPoint {
     get
   }
@@ -113,6 +121,10 @@ public struct PKStrokePoint {
     get
   }
   public var altitude: CoreFoundation.CGFloat {
+    get
+  }
+  @available(iOS 17.0, macOS 14.0, *)
+  public var secondaryScale: CoreFoundation.CGFloat {
     get
   }
 }
@@ -137,6 +149,10 @@ public struct PKDrawing {
   public func transformed(using transform: CoreFoundation.CGAffineTransform) -> PencilKit.PKDrawing
   public mutating func append(_ toAppend: PencilKit.PKDrawing)
   public func appending(_ toAppend: PencilKit.PKDrawing) -> PencilKit.PKDrawing
+  @available(iOS 17.0, macOS 14.0, *)
+  public var requiredContentVersion: PencilKit.PKContentVersion {
+    get
+  }
 }
 @available(iOS 14.0, macOS 11.0, *)
 extension PencilKit.PKDrawing {
@@ -175,6 +191,10 @@ public struct PKInk {
     get
     set
   }
+  @available(iOS 17.0, macOS 14.0, *)
+  public var requiredContentVersion: PencilKit.PKContentVersion {
+    get
+  }
 }
 @available(iOS 14.0, macOS 11.0, *)
 extension PencilKit.PKInk : Swift._ObjectiveCBridgeable {
@@ -197,10 +217,22 @@ public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
     case pen
     case pencil
     case marker
+    @available(iOS 17.0, macOS 14.0, *)
+    case monoline
+    @available(iOS 17.0, macOS 14.0, *)
+    case fountainPen
+    @available(iOS 17.0, macOS 14.0, *)
+    case watercolor
+    @available(iOS 17.0, macOS 14.0, *)
+    case crayon
     public var defaultWidth: CoreFoundation.CGFloat {
       get
     }
     public var validWidthRange: Swift.ClosedRange<CoreFoundation.CGFloat> {
+      get
+    }
+    @available(iOS 17.0, macOS 14.0, *)
+    public var requiredContentVersion: PencilKit.PKContentVersion {
       get
     }
     public init?(rawValue: Swift.String)
@@ -221,6 +253,10 @@ public struct PKInkingTool : PencilKit.PKTool, Swift.Equatable {
   public var inkType: PencilKit.PKInkingTool.InkType {
     get
     set
+  }
+  @available(iOS 17.0, macOS 14.0, *)
+  public var requiredContentVersion: PencilKit.PKContentVersion {
+    get
   }
   public static func == (a: PencilKit.PKInkingTool, b: PencilKit.PKInkingTool) -> Swift.Bool
 }

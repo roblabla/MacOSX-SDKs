@@ -38,8 +38,10 @@ typedef NS_ENUM(NSInteger, AVAssetSegmentType) {
 	@class		AVAssetSegmentReport
 	@abstract	This class provides information on a segment data.
 	@discussion	Clients may get an instance of AVAssetSegmentReport through the -assetWriter:didOutputSegmentData:segmentType:segmentReport: delegate method, which is defined in AVAssetWriter.h.
-*/
 
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetSegmentReport : NSObject
 AV_INIT_UNAVAILABLE
@@ -62,8 +64,9 @@ AV_INIT_UNAVAILABLE
 /*!
 	@class		AVAssetSegmentTrackReport
 	@abstract	This class is vended by AVAssetSegmentReport. It will provide information on a track in a segment data.
+	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
-
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetSegmentTrackReport : NSObject
 AV_INIT_UNAVAILABLE
@@ -72,7 +75,6 @@ AV_INIT_UNAVAILABLE
 	@property	trackID
 	@abstract	Indicates the persistent unique identifier for this track.
 */
-
 @property (nonatomic, readonly) CMPersistentTrackID trackID;
 
 /*!
@@ -105,8 +107,9 @@ AV_INIT_UNAVAILABLE
 /*!
 	@class		AVAssetSegmentReportSampleInformation
 	@abstract	This class is vended by AVAssetSegmentTrackReport. It will provide information on a sample in a track.
+	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
-
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetSegmentReportSampleInformation : NSObject
 AV_INIT_UNAVAILABLE

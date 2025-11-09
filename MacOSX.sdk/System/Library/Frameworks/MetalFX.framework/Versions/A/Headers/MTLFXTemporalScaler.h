@@ -11,7 +11,10 @@
 @protocol MTLFXTemporalScaler;
 
 API_AVAILABLE(macos(13.0), ios(16.0))
-@interface MTLFXTemporalScalerDescriptor : NSObject
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
+@interface MTLFXTemporalScalerDescriptor : NSObject <NSCopying>
 
 // These properties must be set to the respective Metal pixel formats for each texture that will be used with the scaler.
 @property (readwrite, nonatomic) MTLPixelFormat colorTextureFormat;
@@ -42,6 +45,10 @@ API_AVAILABLE(macos(13.0), ios(16.0))
 // Metal device.
 - (nullable id <MTLFXTemporalScaler>)newTemporalScalerWithDevice:(nonnull id<MTLDevice>)device;
 
+// Class methods for querying supported min/max input content scale.
++ (float)supportedInputContentMinScaleForDevice:(nonnull id<MTLDevice>)device API_AVAILABLE(macos(14.0), ios(17.0));
++ (float)supportedInputContentMaxScaleForDevice:(nonnull id<MTLDevice>)device API_AVAILABLE(macos(14.0), ios(17.0));
+
 // Class method for determining support
 + (BOOL)supportsDevice:(nonnull id<MTLDevice>)device;
 
@@ -49,6 +56,9 @@ API_AVAILABLE(macos(13.0), ios(16.0))
 
 // This is the object that gets created from the descriptor
 API_AVAILABLE(macos(13.0), ios(16.0))
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 @protocol MTLFXTemporalScaler <NSObject>
 
 // Properties return the minimum required MTLTextureUsage bits required

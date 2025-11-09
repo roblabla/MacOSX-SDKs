@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2022 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -52,6 +52,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVSynchronizedLayer : CALayer
 {

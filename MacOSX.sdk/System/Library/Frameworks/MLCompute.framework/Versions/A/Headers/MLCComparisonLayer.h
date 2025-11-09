@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              with Boolean values result[i] = op1[i] ? op2[i], where ? corresponds to the
  *              given \p MLCComparisonOperation.
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.3, 14.5, 14.5)
 @interface MLCComparisonLayer : MLCLayer
 
 @property (readonly, nonatomic) MLCComparisonOperation operation;

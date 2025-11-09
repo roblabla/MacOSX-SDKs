@@ -122,6 +122,12 @@ AS_EXTERN API_AVAILABLE(ios(13.0), macCatalyst(14.0), macos(10.15)) API_UNAVAILA
  */
 @property (nonatomic, readonly) NSString *localizedCallerDisplayName API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(watchos, tvos);
 
+
+/*! @abstract Audit token of the calling application.
+ */
+@property (nonatomic, readonly) NSData *callerAuditToken API_AVAILABLE(ios(17.0), macos(14.0)) API_UNAVAILABLE(watchos, tvos);
+
+
 /*! @abstract Indicates whether the authorization user interface is enabled.
  @discussion If user interface is not enabled, then the authorization will fail with @see ASAuthorizationErrorNotInteractive if it attempts to display the authorization user interface via @see presentAuthorizationViewControllerWithCompletion.
 */

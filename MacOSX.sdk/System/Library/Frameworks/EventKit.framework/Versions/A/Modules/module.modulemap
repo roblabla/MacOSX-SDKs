@@ -1,4 +1,4 @@
-framework module EventKit [system] [extern_c] {
+framework module EventKit [system] {
   umbrella header "EventKit.h"
   export *
   module * { export * }

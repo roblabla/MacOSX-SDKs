@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GameController/GCProductCategories.h>
 
 @class GCPhysicalInputProfile;
 
@@ -34,7 +35,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (nonatomic, readonly, copy, nullable) NSString *vendorName API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0));
 
 /**
- The product category the controller belongs to. This is useful for setting appropriate UI elements based on what type of device is connected.
+ The product category the device belongs to. This is useful for setting appropriate UI elements based on what type of device is connected.
  
  @see GCProductCategories.h
  */

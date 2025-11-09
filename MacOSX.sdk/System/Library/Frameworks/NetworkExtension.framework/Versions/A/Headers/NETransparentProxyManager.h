@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NETransparentProxyManager : NEVPNManager
 
 /*!
@@ -32,7 +32,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  * @discussion This function asynchronously reads all of the transparent proxy configurations associated with the calling app that have previously been saved to disk and returns them as NETransparentProxyManager objects.
  * @param completionHandler A block that takes an array NETransparentProxyManager objects. The array passed to the block may be empty if no transparent proxy configurations were successfully read from the disk.  The NSError passed to this block will be nil if the load operation succeeded, non-nil otherwise.
  */
-+ (void)loadAllFromPreferencesWithCompletionHandler:(void (^)(NSArray<NETransparentProxyManager *> * __nullable managers, NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
++ (void)loadAllFromPreferencesWithCompletionHandler:(void (^)(NSArray<NETransparentProxyManager *> * __nullable managers, NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

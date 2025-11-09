@@ -131,7 +131,7 @@ enum
 	@abstract	A reference to a CMBufferQueue, a CF object that implements a queue of timed buffers.
 		
 */
-typedef struct CM_BRIDGED_TYPE(id) opaqueCMBufferQueue *CMBufferQueueRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef struct CM_BRIDGED_TYPE(id) opaqueCMBufferQueue *CMBufferQueueRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef	CMBufferRef
@@ -139,7 +139,7 @@ typedef struct CM_BRIDGED_TYPE(id) opaqueCMBufferQueue *CMBufferQueueRef API_AVA
 	@discussion	A CMBuffer can be any CFTypeRef, as long as a getDuration callback can be provided.  Commonly used
 				types are CMSampleBufferRef and CVPixelBufferRef.
 */
-typedef CM_BRIDGED_TYPE(id) CFTypeRef CMBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef	CMBufferGetTimeCallback
@@ -265,7 +265,7 @@ typedef struct {
 																	Can be NULL (then the queue won't listen for it). */
 	CMBufferGetSizeCallback CM_NULLABLE getSize;				/*!< This callback is called (once) during enqueue and dequeue operation to
 																	update the total size of the queue. Can be NULL.  Ignored if version < 1. */
-} CMBufferCallbacks API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+} CMBufferCallbacks API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
 
 #if __BLOCKS__
 #pragma pack(push)
@@ -417,12 +417,28 @@ CM_EXPORT CMBufferRef CM_RETURNS_RETAINED CM_NULLABLE CMBufferQueueDequeueIfData
     @discussion This follows CF "Get" semantics -- it does not retain the returned buffer.
     			Note that with non-FIFO queues it's not guaranteed that the next dequeue will return
     			this particular buffer (if an intervening Enqueue adds a buffer that will dequeue next).
+    			This function is deprecated in favor of CMBufferQueueCopyHead() which returns a
+    			retained buffer. When adopting CMBufferQueueCopyHead(), existing CFRetain() call
+    			on the buffer returned from this function must be removed.
 	@result		The buffer.  Will be NULL if the queue is empty.
 */
 CM_EXPORT CMBufferRef CM_NULLABLE CMBufferQueueGetHead(
 	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
 												The CMBufferQueue from which to retrieve a buffer. */
-							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+							API_DEPRECATED_WITH_REPLACEMENT("CMBufferQueueCopyHead", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(6.0, API_TO_BE_DEPRECATED));
+
+/*!
+	@function   CMBufferQueueCopyHead
+	@abstract   Retrieves & retains the next-to-dequeue buffer from a CMBufferQueue but leaves it in the queue.
+	@discussion This follows CF "Copy" semantics -- it retains the returned buffer.
+				Note that with non-FIFO queues it's not guaranteed that the next dequeue will return
+				this particular buffer (if an intervening Enqueue adds a buffer that will dequeue next).
+	@result		The retained buffer.  Will be NULL if the queue is empty.
+*/
+CM_EXPORT CM_RETURNS_RETAINED CMBufferRef CM_NULLABLE CMBufferQueueCopyHead(
+	CMBufferQueueRef CM_NONNULL queue)		/*! @param queue
+												The CMBufferQueue from which to retrieve a buffer. */
+							API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
 
 /*!
 	@function	CMBufferQueueIsEmpty

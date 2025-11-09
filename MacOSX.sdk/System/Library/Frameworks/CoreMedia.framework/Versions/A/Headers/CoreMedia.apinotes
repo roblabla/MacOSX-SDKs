@@ -83,6 +83,8 @@ Functions:
   SwiftName: "CMBufferQueueDequeueIfDataReady(_:)"
 - Name: CMBufferQueueGetHead
   SwiftName: "CMBufferQueueGetHead(_:)"
+- Name: CMBufferQueueCopyHead
+  SwiftName: "CMBufferQueueCopyHead(_:)"
 - Name: CMBufferQueueIsEmpty
   SwiftName: "CMBufferQueueIsEmpty(_:)"
 - Name: CMBufferQueueMarkEndOfData
@@ -706,6 +708,8 @@ SwiftVersions:
     SwiftName: "CMBufferQueueDequeueIfDataReadyAndRetain(_:)"
   - Name: CMBufferQueueGetHead
     SwiftName: "CMBufferQueueGetHead(_:)"
+  - Name: CMBufferQueueCopyHead
+    SwiftName: "CMBufferQueueCopyHead(_:)"
   - Name: CMBufferQueueIsEmpty
     SwiftName: "CMBufferQueueIsEmpty(_:)"
   - Name: CMBufferQueueMarkEndOfData

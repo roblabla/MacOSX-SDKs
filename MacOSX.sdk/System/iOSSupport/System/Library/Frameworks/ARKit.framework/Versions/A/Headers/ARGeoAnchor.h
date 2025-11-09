@@ -9,6 +9,8 @@
 #import <ARKit/ARGeoTrackingTypes.h>
 #import <CoreLocation/CoreLocation.h>
 
+#define AR_GEO_ANCHOR_PROTOCOLS <ARTrackable>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -17,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  The session needs to be configured with ARGeoTrackingConfiguration.
  */
 API_AVAILABLE(ios(14.0))
-@interface ARGeoAnchor : ARAnchor <ARTrackable>
+@interface ARGeoAnchor : ARAnchor AR_GEO_ANCHOR_PROTOCOLS
 
 /**
  The coordinate where this anchor will be placed.

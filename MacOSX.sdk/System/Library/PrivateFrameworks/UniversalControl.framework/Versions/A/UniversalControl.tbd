@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UniversalControl.framework/Versions/A/UniversalControl'
-current-version: 124.4
+current-version: 139
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -539,6 +539,7 @@ exports:
                        '_$s16UniversalControl0aB6AnchorVN', '_$s16UniversalControl0aB6AnchorVSEAAMc', 
                        '_$s16UniversalControl0aB6AnchorVSHAAMc', '_$s16UniversalControl0aB6AnchorVSLAAMc', 
                        '_$s16UniversalControl0aB6AnchorVSQAAMc', '_$s16UniversalControl0aB6AnchorVSeAAMc', 
+                       '_$s16UniversalControl0aB6DeviceC0C4TypeO07realityC0yA2EmFWC', 
                        '_$s16UniversalControl0aB6DeviceC0C4TypeO11isSimulatorySbSSFZ', 
                        '_$s16UniversalControl0aB6DeviceC0C4TypeO2eeoiySbAE_AEtFZ', 
                        '_$s16UniversalControl0aB6DeviceC0C4TypeO3macyA2EmFWC', '_$s16UniversalControl0aB6DeviceC0C4TypeO4hash4intoys6HasherVz_tF', 
@@ -1024,6 +1025,8 @@ exports:
                        '_$s16UniversalControl16AgentXPCDelegateTL', '_$s16UniversalControl16AgentXPCListenerC15objectDidChangeyyF', 
                        '_$s16UniversalControl16AgentXPCListenerC19currentConnectionIDSOSgvg', 
                        '_$s16UniversalControl16AgentXPCListenerC19currentConnectionIDSOSgvpMV', 
+                       '_$s16UniversalControl16AgentXPCListenerC32currentConnectionIsAdminEntitledSbvg', 
+                       '_$s16UniversalControl16AgentXPCListenerC32currentConnectionIsAdminEntitledSbvpMV', 
                        '_$s16UniversalControl16AgentXPCListenerC6cancelyyF', '_$s16UniversalControl16AgentXPCListenerC7Combine11CancellableAAMc', 
                        '_$s16UniversalControl16AgentXPCListenerC8activateyyF', '_$s16UniversalControl16AgentXPCListenerC8delegateAA0C11XPCDelegate_pSgvM', 
                        '_$s16UniversalControl16AgentXPCListenerC8delegateAA0C11XPCDelegate_pSgvg', 

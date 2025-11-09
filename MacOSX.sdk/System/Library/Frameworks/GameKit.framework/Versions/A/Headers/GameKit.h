@@ -1,25 +1,38 @@
-//
-//  GameKit.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
-
 #import <TargetConditionals.h>
+
 #import <simd/simd.h>
+
+#if TARGET_OS_OSX
 
 #import <Cocoa/Cocoa.h>
 
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 
+#elif TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_MACCATALYST
+
+#import <UIKit/UIKit.h>
+
+#if !TARGET_OS_SIMULATOR
+#import <Metal/Metal.h>
+#import <MetalKit/MetalKit.h>
+#endif
+
+#endif
+
 #import <SpriteKit/SpriteKit.h>
 #import <SceneKit/SceneKit.h>
+
+#if !TARGET_OS_WATCH
 #import <GameplayKit/GameplayKit.h>
 #import <GameController/GameController.h>
 #import <ModelIO/ModelIO.h>
+#endif
 
-#import <GameKit/GKDefines.h>
+#if TARGET_OS_IOS || TARGET_OS_TV || TARGET_OS_MACCATALYST
+#import <ReplayKit/ReplayKit.h>
+#endif
+
 #import <GameKit/GKAccessPoint.h>
 #import <GameKit/GKAchievement.h>
 #import <GameKit/GKAchievementDescription.h>
@@ -29,6 +42,7 @@
 #import <GameKit/GKChallengeEventHandler.h>
 #import <GameKit/GKChallengesViewController.h>
 #import <GameKit/GKCloudPlayer.h>
+#import <GameKit/GKDefines.h>
 #import <GameKit/GKDialogController.h>
 #import <GameKit/GKError.h>
 #import <GameKit/GKEventListener.h>
@@ -48,6 +62,7 @@
 #import <GameKit/GKMatchmaker.h>
 #import <GameKit/GKMatchmakerViewController.h>
 #import <GameKit/GKNotificationBanner.h>
+#import <GameKit/GKPeerPickerController.h>
 #import <GameKit/GKPlayer.h>
 #import <GameKit/GKPublicConstants.h>
 #import <GameKit/GKPublicProtocols.h>

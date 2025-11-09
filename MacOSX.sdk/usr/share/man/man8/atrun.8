@@ -1,42 +1,14 @@
-.\"
-.\" Copyright (c) 1993 Christopher G. Demetriou
-.\" All rights reserved.
-.\"
-.\" Redistribution and use in source and binary forms, with or without
-.\" modification, are permitted provided that the following conditions
-.\" are met:
-.\" 1. Redistributions of source code must retain the above copyright
-.\"    notice, this list of conditions and the following disclaimer.
-.\" 2. Redistributions in binary form must reproduce the above copyright
-.\"    notice, this list of conditions and the following disclaimer in the
-.\"    documentation and/or other materials provided with the distribution.
-.\" 3. All advertising materials mentioning features or use of this software
-.\"    must display the following acknowledgement:
-.\"      This product includes software developed by Christopher G. Demetriou.
-.\" 3. The name of the author may not be used to endorse or promote products
-.\"    derived from this software without specific prior written permission
-.\"
-.\" THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
-.\" IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-.\" OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-.\" IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
-.\" INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
-.\" NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-.\" DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-.\" THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-.\" (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-.\" THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-.\"
-.\"	$Id: atrun.8,v 1.1 1999/05/02 04:21:19 wsanchez Exp $
-.\"
-.Dd March 9, 2008
+.\" $FreeBSD$
+.Dd June 22, 2015
 .Dt ATRUN 8
-.Os "macOS"
+.Os
 .Sh NAME
 .Nm atrun
 .Nd run jobs queued for later execution
 .Sh SYNOPSIS
 .Nm atrun
+.Op Fl l Ar load_avg
+.Op Fl d
 .Sh DESCRIPTION
 The
 .Nm atrun
@@ -56,17 +28,46 @@ is never invoked.
 Execute the following command as root to enable
 .Nm atrun :
 .Dl "launchctl load -w /System/Library/LaunchDaemons/com.apple.atrun.plist"
+.Pp
+At every invocation,
+.Nm
+starts all the jobs in the lowercase queues whose start
+time has elapsed.
+In addition, if the load average over the last minute was less than
+the specified limit, then a maximum of one batch job (denoted by the
+uppercase queues) is started.
+.Pp
+Before starting a job,
+.Nm
+checks the status of its owner's account with
+.Xr pam 3
+and refuses to run the job if the account is unavailable,
+e.g., locked out or expired.
+.Sh OPTIONS
+.Bl -tag -width indent
+.It Fl l Ar load_avg
+Specify a limiting load factor, over which batch jobs should
+not be run, instead of the default of 1.5 * number of active CPUs.
+.It Fl d
+Debug; print error messages to standard error instead of using
+.Xr syslog 3 .
+.El
 .Sh FILES
-.Bl -tag -width /var/at/lockfile -compact
-.It Pa /var/at/jobs
+.Bl -tag -width /usr/lib/cron/spool -compact
+.It Pa /etc/pam.d/atrun
+.Xr pam.conf 5
+configuration file for
+.Nm
+.It Pa /usr/lib/cron/jobs
 Directory containing job files
-.It Pa /var/at/spool
+.It Pa /usr/lib/cron/spool
 Directory containing output spool files
-.It Pa /var/at/lockfile
-Job-creation lock file.
 .El
 .Sh SEE ALSO
 .Xr at 1 ,
+.Xr pam 3 ,
+.Xr syslog 3 ,
+.Xr pam.conf 5 ,
 .Xr launchd 8
 .Sh AUTHORS
 .An Thomas Koenig Aq ig25@rz.uni-karlsruhe.de

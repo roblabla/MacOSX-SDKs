@@ -4,11 +4,11 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AccountsUI.framework/Versions/A/AccountsUI'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ACUICreateAccountInPreferencePane, _ACUIDefaultUIDataclassIdentifiers, 
-                       _ACUIIsNetworkAvailable, _ACUIIsRunningInternetAccountsPref, 
-                       _ACUILog, _ACUIOpenPreferencePaneWithArgs, _ACUIRevealAccountInPreferencePane, 
-                       _ACUIRevealAccountInPreferencePaneAndPromptToEnable, _ACUIUID, 
-                       _AccountsUIVersionNumber, _AccountsUIVersionString ]
+    symbols:         [ _ACUIAllowAccountModification, _ACUICreateAccountInPreferencePane, 
+                       _ACUIDefaultUIDataclassIdentifiers, _ACUIIsNetworkAvailable, 
+                       _ACUIIsRunningInternetAccountsPref, _ACUILog, _ACUIOpenPreferencePaneWithArgs, 
+                       _ACUIRevealAccountInPreferencePane, _ACUIRevealAccountInPreferencePaneAndPromptToEnable, 
+                       _ACUIUID, _AccountsUIVersionNumber, _AccountsUIVersionString ]
     objc-classes:    [ ACUIAccountDataclass, ACUIAccountDataclassCellView, ACUIAccountDetailsViewController, 
                        ACUIAccountInfoViewController, ACUIAccountNotifier, ACUIAccountRowItem, 
                        ACUIAccountSetupViewController, ACUIAccountTypeRowRadio, ACUIAccountTypesCellView, 

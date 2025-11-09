@@ -2,11 +2,12 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/VideosUICore.framework/Versions/A/VideosUICore'
-current-version: 762.43.1
+current-version: 883.0.7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CALayerKeyBounds, _CALayerKeyBoundsOrigin, _CALayerKeyBoundsSize, 
-                       _CALayerKeyPosition, _CALayerKeyShadowPath, _VUIAccessibilityIdDisplayTypeDocument, 
+                       _CALayerKeyPosition, _CALayerKeyShadowPath, _VUIAccessibilityHighContrastFocusIndicatorsEnabledNotification, 
+                       _VUIAccessibilityIdDisplayTypeButton, _VUIAccessibilityIdDisplayTypeDocument, 
                        _VUIAccessibilityReduceMotionStatusDidChangeNotification, 
                        _VUIAccessibilityVoiceOverStatusDidChangeNotification, _VUIApplicationDidBecomeActiveNotification, 
                        _VUIApplicationDidEnterBackgroundNotification, _VUIApplicationWillEnterForegroundNotification, 
@@ -67,17 +68,20 @@ exports:
     objc-classes:    [ VUIAccessibility, VUIApplicationNotificationManager, VUIAssetLibrary, 
                        VUIAsynchronousOperation, VUIAsynchronousWorkToken, VUICollectionChange, 
                        VUICollectionChangeSet, VUICollectionComparator, VUIContentRating, 
-                       VUIContentRatingBadgeManager, VUICoreUtilities, VUIDebugDefaults, 
-                       VUIDelayOperation, VUIDevice, VUIDurationValueTransformer, 
+                       VUIContentRatingBadgeManager, VUICoreUtilities, VUIDataImageDescriptor, 
+                       VUIDebugDefaults, VUIDelayOperation, VUIDevice, VUIDurationValueTransformer, 
                        VUIEntitiesSortedByDateValueTransformer, VUIFeatureFlag, VUIFeatureManager, 
-                       VUIImage, VUIImageDecorator, VUIImageFactory, VUIImageOutlineDecorator, 
-                       VUIImageProxy, VUIImageScaleDecorator, VUIImageView, VUIMobileGestaltLookup, 
-                       VUIModalPresentationConfiguration, VUIModalPresentationNavigationController, 
-                       VUIModalPresenter, VUINSBarButtonItem, VUINSNavigationBar, 
-                       VUINSNavigationBarButton, VUINSNavigationClipView, VUINSNavigationController, 
-                       VUINSNavigationItem, VUINSTraitCollection, VUINetworkReachabilityMonitor, 
-                       VUIPathAnimationAction, VUIPointAnimationAction, VUIRectAnimationAction, 
-                       VUIRemoteImageDescriptor, VUIResourceImageDescriptor, VUIRestrictions, 
-                       VUISortUtilities, VUIStateMachine, VUITitleSortDescriptor, 
+                       VUIGraphicsImageRenderer, VUIImage, VUIImageDecorator, VUIImageFactory, 
+                       VUIImageOutlineDecorator, VUIImageProxy, VUIImageScaleDecorator, 
+                       VUIImageView, VUIMobileGestaltLookup, VUIModalPresentationConfiguration, 
+                       VUIModalPresentationNavigationController, VUIModalPresenter, 
+                       VUINSBarButtonItem, VUINSGraphicsImageRendererContext, VUINSGraphicsImageRendererFormat, 
+                       VUINSGraphicsRendererContext, VUINSGraphicsRendererFormat, 
+                       VUINSNavigationBar, VUINSNavigationBarButton, VUINSNavigationClipView, 
+                       VUINSNavigationController, VUINSNavigationItem, VUINSTraitCollection, 
+                       VUINetworkReachabilityMonitor, VUIPathAnimationAction, VUIPointAnimationAction, 
+                       VUIRectAnimationAction, VUIRemoteImageDescriptor, VUIResourceImageDescriptor, 
+                       VUIRestrictions, VUISortUtilities, VUIStateMachine, VUITitleSortDescriptor, 
+                       VUITraitBaseClass, VUITraitPreferredContentSizeCategory, VUITraitUserInterfaceStyle, 
                        VUIURLImageLoader, VUIURLRequestOperation ]
 ...

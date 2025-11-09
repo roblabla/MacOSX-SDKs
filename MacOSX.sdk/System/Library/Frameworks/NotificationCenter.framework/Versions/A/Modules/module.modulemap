@@ -1,6 +1,5 @@
-framework module NotificationCenter {
-  umbrella header "NotificationCenter.h"
-
-  export *
-  module * { export * }
+framework module NotificationCenter [system] {
+    umbrella header "NotificationCenter.h"
+    export *
+    module * { export * }
 }

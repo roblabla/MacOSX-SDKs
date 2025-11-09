@@ -1,12 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name DeviceActivity
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 280
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name DeviceActivity
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 322
 import Foundation
 import ManagedSettings
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 import os.log
 import os
 @available(iOS 15.0, *)
@@ -81,9 +82,11 @@ public struct DeviceActivityCenter {
     get
   }
   public func schedule(for activity: DeviceActivity.DeviceActivityName) -> DeviceActivity.DeviceActivitySchedule?
+  @available(watchOS, unavailable)
   public func events(for activity: DeviceActivity.DeviceActivityName) -> [DeviceActivity.DeviceActivityEvent.Name : DeviceActivity.DeviceActivityEvent]
   public enum MonitoringError : Foundation.LocalizedError {
     case excessiveActivities
+    @available(watchOS, unavailable)
     case intervalTooLong
     case intervalTooShort
     case invalidDateComponents
@@ -112,8 +115,8 @@ public struct DeviceActivityData : Swift.Hashable {
   public var device: DeviceActivity.DeviceActivityData.Device
   public var segmentInterval: DeviceActivity.DeviceActivityFilter.SegmentInterval
   public var lastUpdatedDate: Foundation.Date
+  public static func == (lhs: DeviceActivity.DeviceActivityData, rhs: DeviceActivity.DeviceActivityData) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
-  public static func == (a: DeviceActivity.DeviceActivityData, b: DeviceActivity.DeviceActivityData) -> Swift.Bool
   public var hashValue: Swift.Int {
     get
   }
@@ -187,8 +190,8 @@ extension DeviceActivity.DeviceActivityData {
     }
     public var name: Swift.String?
     public var model: DeviceActivity.DeviceActivityData.Device.Model
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityData.Device, b: DeviceActivity.DeviceActivityData.Device) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -212,8 +215,8 @@ extension DeviceActivity.DeviceActivityData {
     public var appleID: Swift.String?
     public var nameComponents: Foundation.PersonNameComponents?
     public var role: DeviceActivity.DeviceActivityData.User.FamilyRole
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityData.User, b: DeviceActivity.DeviceActivityData.User) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -246,8 +249,8 @@ public struct DeviceActivityFilter : Swift.Equatable {
             ))
     case daily(during: Foundation.DateInterval)
     case weekly(during: Foundation.DateInterval)
-    public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: DeviceActivity.DeviceActivityFilter.SegmentInterval, b: DeviceActivity.DeviceActivityFilter.SegmentInterval) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
     public var hashValue: Swift.Int {
       get
     }
@@ -287,9 +290,11 @@ public struct DeviceActivityFilter : Swift.Equatable {
 @objc open class DeviceActivityMonitor : ObjectiveC.NSObject {
   open func intervalDidStart(for activity: DeviceActivity.DeviceActivityName)
   open func intervalDidEnd(for activity: DeviceActivity.DeviceActivityName)
+  @available(watchOS, unavailable)
   open func eventDidReachThreshold(_ event: DeviceActivity.DeviceActivityEvent.Name, activity: DeviceActivity.DeviceActivityName)
   open func intervalWillStartWarning(for activity: DeviceActivity.DeviceActivityName)
   open func intervalWillEndWarning(for activity: DeviceActivity.DeviceActivityName)
+  @available(watchOS, unavailable)
   open func eventWillReachThresholdWarning(_ event: DeviceActivity.DeviceActivityEvent.Name, activity: DeviceActivity.DeviceActivityName)
   @objc override dynamic public init()
   @objc deinit

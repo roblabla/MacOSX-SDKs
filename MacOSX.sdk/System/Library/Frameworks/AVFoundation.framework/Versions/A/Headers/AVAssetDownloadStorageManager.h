@@ -4,7 +4,7 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2017 Apple Inc. All rights reserved.
+	Copyright 2017-2023 Apple Inc. All rights reserved.
  
  */
 
@@ -78,6 +78,7 @@ API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos)
  */
 @class AVAssetDownloadStorageManagementPolicyInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @interface AVAssetDownloadStorageManagementPolicy : NSObject <NSCopying, NSMutableCopying> {
 @private
@@ -106,6 +107,7 @@ API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos)
  
 	@discussion	System will put in best-effort to evict all the assets based on expirationDate before evicting based on priority.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @interface AVMutableAssetDownloadStorageManagementPolicy : AVAssetDownloadStorageManagementPolicy
 

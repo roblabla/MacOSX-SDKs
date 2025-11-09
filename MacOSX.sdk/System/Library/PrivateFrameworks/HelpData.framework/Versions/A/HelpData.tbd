@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/HelpData.framework/Versions/A/HelpData'
-current-version: 218.3.1
+current-version: 224
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDMAppleDomain, _DDMAssetURLProtocolRequest, _DDMBookConfigKeyAppBundleID, 
@@ -35,17 +35,18 @@ exports:
                        _HPDClientProcessIDKey, _HPDClientQueryKey, _HPDCoreSpotlightIndexExtension, 
                        _HPDDaemonBundleID, _HPDDefaultLocale, _HPDDefaultLog, _HPDDefaultsKeyCacheAppleLanguages, 
                        _HPDDefaultsKeyClearCacheOnLaunch, _HPDDefaultsKeyIdleTimeout, 
-                       _HPDDefaultsKeyLogLevel, _HPDDefaultsKeyOtherPluginDirs, _HPDDefaultsKeyUseStrictTidy, 
-                       _HPDFindBookWithID, _HPDGeneratedIndexDirectory, _HPDHeaderACTicketKey, 
-                       _HPDHeaderACUserKey, _HPDHeaderClientIDKey, _HPDHelpActionResult, 
-                       _HPDHelpArticleResult, _HPDHelpBookExtension, _HPDHelpDataBundleID, 
-                       _HPDHelpDefaultsDomain, _HPDHelpProjectIdentifier, _HPDHelpSimilarSuggestionResult, 
-                       _HPDHelpSuggestionResult, _HPDHelpViewerBundleID, _HPDHelpdClientClass, 
-                       _HPDHelpindexExtension, _HPDIndexDidChangeNotification, _HPDKnowledgeBaseResult, 
-                       _HPDListenerBridgeService, _HPDLocalCallBack, _HPDLog, _HPDLogDefaultCategory, 
-                       _HPDLogDefaultSubSystem, _HPDLogSubsystem, _HPDMacHelpIconPath, 
-                       _HPDMetaTagAppleIcon, _HPDMetaTagAppleKBProduct, _HPDMetaTagAppleKBURL, 
-                       _HPDMetaTagAppleTitle, _HPDMetaTagDefaultAppleIcon, _HPDMetaTagDefaultAppleIconType, 
+                       _HPDDefaultsKeyLogLevel, _HPDDefaultsKeyOtherPluginDirs, _HPDDefaultsKeyPublicSpotlightIndex, 
+                       _HPDDefaultsKeyUseStrictTidy, _HPDFindBookWithID, _HPDGeneratedIndexDirectory, 
+                       _HPDHeaderACTicketKey, _HPDHeaderACUserKey, _HPDHeaderClientIDKey, 
+                       _HPDHelpActionResult, _HPDHelpArticleResult, _HPDHelpBookExtension, 
+                       _HPDHelpDataBundleID, _HPDHelpDefaultsDomain, _HPDHelpProjectIdentifier, 
+                       _HPDHelpSimilarSuggestionResult, _HPDHelpSuggestionResult, 
+                       _HPDHelpViewerBundleID, _HPDHelpdClientClass, _HPDHelpindexExtension, 
+                       _HPDIndexDidChangeNotification, _HPDKnowledgeBaseResult, _HPDListenerBridgeService, 
+                       _HPDLocalCallBack, _HPDLog, _HPDLogDefaultCategory, _HPDLogDefaultSubSystem, 
+                       _HPDLogSubsystem, _HPDMacHelpIconPath, _HPDMetaTagAppleIcon, 
+                       _HPDMetaTagAppleKBProduct, _HPDMetaTagAppleKBURL, _HPDMetaTagAppleTitle, 
+                       _HPDMetaTagDefaultAppleIcon, _HPDMetaTagDefaultAppleIconType, 
                        _HPDMetaTagDefaultAppleKBURL, _HPDPluginVersion, _HPDPreferredLanguagesKey, 
                        _HPDQueryAnchorSearchOptionKey, _HPDQueryCancelledKey, _HPDQueryIDKey, 
                        _HPDQueryLimitKey, _HPDQueryOptionsKey, _HPDQueryProcessIDKey, 
@@ -71,8 +72,8 @@ exports:
                        _HVSystemVersionPlistPath, _HVTaskType, _HVTopicTemplateFileName, 
                        _HVURLAnchorCommand, _HVURLBookIDKey, _HVURLBookmarkCommand, 
                        _HVURLOpenbookCommand, _HVURLSchemeHTTP, _HVURLSchemeHTTPS, 
-                       _HVURLSchemeHelp, _HVURLSchemeHelpWithColon, _HVUnknownString, 
-                       _WK_DDMAssetURLProtocolRequest, _bookIDVersionNeedsUpdate, 
+                       _HVURLSchemeHelp, _HVURLSchemeHelpWithColon, _HVURLSchemeSpotlightIndex, 
+                       _HVUnknownString, _WK_DDMAssetURLProtocolRequest, _bookIDVersionNeedsUpdate, 
                        _clientPortNameForThisTask, _getVersionFromAppBundle, _getVersionFromAppBundleURL, 
                        _getVersionedBookIDFromAppBundle, _helpDirSort, _isVersionedBookID, 
                        _kHPDAuthenticationNetworkStateDidChangeNotification, _kHPDAuthenticationUserSignInNotification, 
@@ -82,8 +83,9 @@ exports:
                        DDMConfig, DDMContext, DDMInfo, DDMMeta, DDMMisc, DDMObject, 
                        DDMObjectManager, DDMRequest, DDMTocItem, DDMTopic, DDMTopicPreloadOperation, 
                        HPDAuthChallengeHandler, HPDAuthenticationNotification, HPDBaseClient, 
-                       HPDCacheManager, HPDClient, HPDHelpBook, HPDQuery, HPDReachability, 
-                       HPDResult, HPDSearchManager, HPDSearchResult, HVObjectDeallocWatcher ]
+                       HPDCacheManager, HPDClient, HPDFeatureFlags, HPDHelpBook, 
+                       HPDQuery, HPDReachability, HPDResult, HPDSearchManager, HPDSearchResult, 
+                       HVObjectDeallocWatcher ]
     objc-ivars:      [ DDMAssetURLProtocolCoordinator._urlLoadingQueue, DDMAssetURLProtocolDelegate._protocol, 
                        DDMAssetURLProtocolOperation._executing, DDMAssetURLProtocolOperation._finished, 
                        DDMAssetURLProtocolOperation._resumeBlock, DDMTopicPreloadOperation._book, 

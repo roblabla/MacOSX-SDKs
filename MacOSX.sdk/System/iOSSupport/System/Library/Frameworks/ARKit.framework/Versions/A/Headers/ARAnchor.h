@@ -10,6 +10,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#define AR_ANCHOR_PROTOCOLS ARAnchorCopying, NSSecureCoding
+
 @class ARAnchor;
 /**
  An anchor object that can be copied from values of an existing anchor.
@@ -27,12 +29,27 @@ API_AVAILABLE(ios(12.0))
 
 @end
 
+/**
+ A real world object or location in the scene that is being tracked.
+ */
+API_AVAILABLE(ios(11.0))
+@protocol ARTrackable <NSObject>
+
+/**
+ Tracking state of the anchor
+ @discussion The isTracked value is used to determine the anchor transform’s validity. When the object being tracked is no longer detected in the
+ camera image, its anchor will return NO for isTracked.
+ */
+@property (nonatomic, readonly) BOOL isTracked;
+
+@end
+
 
 /**
  Object representing a physical location and orientation in 3D space.
  */
 API_AVAILABLE(ios(11.0))
-@interface ARAnchor : NSObject <ARAnchorCopying, NSSecureCoding>
+@interface ARAnchor : NSObject <AR_ANCHOR_PROTOCOLS>
 
 /**
  Unique identifier of the anchor.
@@ -73,22 +90,6 @@ API_AVAILABLE(ios(11.0))
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
-
-@end
-
-
-/**
- A real world object or location in the scene that is being tracked.
- */
-API_AVAILABLE(ios(11.0))
-@protocol ARTrackable <NSObject>
-
-/**
- Tracking state of the anchor
- @discussion The isTracked value is used to determine the anchor transform’s validity. When the object being tracked is no longer detected in the
- camera image, its anchor will return NO for isTracked.
- */
-@property (nonatomic, readonly) BOOL isTracked;
 
 @end
 

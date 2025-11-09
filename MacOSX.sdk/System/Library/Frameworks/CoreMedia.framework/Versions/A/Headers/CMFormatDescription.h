@@ -3,7 +3,7 @@
 
 	Framework:  CoreMedia
  
-	Copyright © 2005-2021 Apple Inc. All rights reserved.
+	Copyright © 2005-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -58,7 +58,7 @@ enum
 	@typedef	CMFormatDescriptionRef
 	@abstract	A reference to a CMFormatDescription, a CF object describing media of a particular type (audio, video, muxed, etc).
 */
-typedef const struct CM_BRIDGED_TYPE(id) opaqueCMFormatDescription *CMFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef const struct CM_BRIDGED_TYPE(id) opaqueCMFormatDescription *CMFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 /*!
 	@enum CMMediaType
@@ -71,6 +71,7 @@ typedef const struct CM_BRIDGED_TYPE(id) opaqueCMFormatDescription *CMFormatDesc
 	@constant kCMMediaType_Subtitle Subtitle media
 	@constant kCMMediaType_TimeCode TimeCode media
 	@constant kCMMediaType_Metadata Metadata media
+	@constant kCMMediaType_TaggedBufferGroup media
 */
 typedef FourCharCode CMMediaType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -87,6 +88,7 @@ enum
 	kCMMediaType_Subtitle			= 'sbtl',
 	kCMMediaType_TimeCode			= 'tmcd',
 	kCMMediaType_Metadata			= 'meta',
+	kCMMediaType_TaggedBufferGroup	= 'tbgr',
 } API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 /*! 
@@ -309,7 +311,7 @@ enum
 	@typedef CMAudioFormatDescriptionRef
 	SYnonym type used for manipulating audio CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMAudioFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CMFormatDescriptionRef CMAudioFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 CF_IMPLICIT_BRIDGING_DISABLED
 
@@ -515,7 +517,7 @@ Boolean CMAudioFormatDescriptionEqual(
 	@typedef CMVideoFormatDescriptionRef
 	Synonym type used for manipulating video CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CMFormatDescriptionRef CMVideoFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 /*!
 	@enum CMPixelFormatType
@@ -873,6 +875,8 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_MasteringDisplayColorV
 							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ContentLightLevelInfo			// CFData(4 bytes); big-endian structure; same as kCVImageBufferContentLightLevelInfoKey
 							API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(6.0));
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_ContentColorVolume			// CFData; big-endian structure; same as kCVImageBufferContentColorVolumeKey (to be added); matches payload of ITU-T-H.265:11/2019, D.2.40 Content Colour Volume SEI message
+							API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_AlternativeTransferCharacteristics	// CFString (usually kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG when used); corresponds to D.2.38 Alternative Transfer Characteristics SEI message
 							API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0), watchos(6.0));
 
@@ -894,6 +898,42 @@ CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_BitsPerComponent 	// C
 
 CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HorizontalFieldOfView	// CFNumber; horizontal field of view in thousandths of a degree (i.e., 123456 is 123.456 degrees).
 							API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+
+/*!
+	@constant    kCMFormatDescriptionExtension_HeroEye
+	@abstract 
+        Indicates which of the two eyes should be used as the primary when rendering in 2D. It is usually perpendicular to the target image surface.
+	@constant    kCMFormatDescriptionHeroEye_Left
+		Indicates the left eye is the hero eye.
+	@constant    kCMFormatDescriptionHeroEye_Right
+		Indicates the right eye is the hero eye.
+	@discussion
+	The value is a CFString holding one of the kCMFormatDescriptionHeroEye_* constants.
+*/
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HeroEye API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);       // CFString, one of
+CM_EXPORT const CFStringRef kCMFormatDescriptionHeroEye_Left API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+CM_EXPORT const CFStringRef kCMFormatDescriptionHeroEye_Right API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+    @constant    kCMFormatDescriptionExtension_StereoCameraBaseline
+    @abstract
+        Indicates the distance between centers of the lenses of the camera system.
+    @discussion
+    The value is a CFNumber holding an unsigned 32-bit integer that is interpreted in micrometers or thousandths of a millimeter (e.g., 63123 is 63.123 millimeters).
+    This property is optional and should only be specified if the distance is known.
+ */
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_StereoCameraBaseline API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);     // CFNumber(uint32) as micrometers
+
+/*!
+    @constant    kCMFormatDescriptionExtension_HorizontalDisparityAdjustment
+    @abstract
+        Indicates a relative shift of the left and right images, which changes the zero parallax plane.
+    @discussion
+    The value encoded in normalized image space is a CFNumber holding a signed 32-bit integer measured over the range of -10000 to 10000 mapping to the uniform range [-1.0...1.0]. The interval of 0.0 to 1.0 or 0 to 10000 maps onto the stereo eye view image width. The negative interval 0.0 to -1.0 or 0 to -10000 similarly map onto the stereo eye view image width.
+    The default value of 0 is interpreted if this property is not set. If the property is not set, NULL may be set and retrieved. The NULL value should be interpreted as meaning 0.
+    This property is optional and should only be specified if a disparity adjustment including 0 is known.
+ */
+CM_EXPORT const CFStringRef kCMFormatDescriptionExtension_HorizontalDisparityAdjustment API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);     // CFNumber(int32) from -10000 to 10000 for the uniform range [-1.0...1.0]
 
 CM_ASSUME_NONNULL_END
 
@@ -1135,6 +1175,46 @@ Boolean CMVideoFormatDescriptionMatchesImageBuffer(
 	CVImageBufferRef CM_NONNULL imageBuffer)		/*! @param imageBuffer	image buffer validate against. */
 							API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
+/*!
+	@function    CMVideoFormatDescriptionCopyTagCollectionArray
+	@abstract    Copies the multi-image encoding properties as an array of CMTagCollections.
+	@param formatDescription    CMVideoFormatDescription being interrogated.
+	@param tagCollectionsOut    Returned TagCollections with CMTags such as kCMTagCategory_VideoLayerID and kCMTagCategory_StereoViewType.
+	@discussion	On return, the caller owns the returned CFArrayRef and must release it when done with it.
+				This function copies the VideoLayerIDs and LeftAndRightViewIDs from hvcC and 3D Reference Displays Info SEI in the formatDescription.
+				The returned values can be used to enable the multi-image decoding with kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs.
+				It also gives the eye mapping information for the pixel buffers of the decoded CMTaggedBufferGroups.
+	@result      Array of CMTagCollections. The result will be NULL if the CMVideoFormatDescription does not contain multi-image encoding parameters, or if there is some other error.
+*/
+CM_EXPORT OSStatus CMVideoFormatDescriptionCopyTagCollectionArray(
+	CMVideoFormatDescriptionRef CM_NONNULL formatDescription,
+	CM_RETURNS_RETAINED_PARAMETER CFArrayRef CM_NULLABLE *tagCollectionsOut) CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+#pragma mark CMTaggedBufferGroupFormatDescription
+
+/*!
+	@typedef CMTaggedBufferGroupFormatDescriptionRef
+		Synonym type used for manipulating CMTaggedBufferGroup media CMFormatDescriptions
+*/
+typedef CMFormatDescriptionRef CMTaggedBufferGroupFormatDescriptionRef CM_SWIFT_SENDABLE;
+
+/*!
+	@enum CMTaggedBufferGroupFormatType
+	@discussion The subtypes of CMTaggedBufferGroup media type.
+	@constant kCMTaggedBufferGroupFormatType_TaggedBuffer    For sample buffers carrying CMTaggedBufferGroup objects.
+*/
+typedef FourCharCode CMTaggedBufferGroupFormatType;
+#if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
+enum : CMTaggedBufferGroupFormatType
+#else
+enum
+#endif
+{
+	kCMTaggedBufferGroupFormatType_TaggedBufferGroup        = 'tbgr',
+} CF_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+// See CMTaggedBufferGroup.h for CMTaggedBufferGroupFormatDescriptionCreateForTaggedBufferGroup and CMTaggedBufferGroupFormatDescriptionMatchesTaggedBufferGroup
+
 #pragma mark CMMuxedFormatDescription
 
 /*! 
@@ -1145,7 +1225,7 @@ Boolean CMVideoFormatDescriptionMatchesImageBuffer(
 	@typedef CMMuxedFormatDescriptionRef
 	Synonym type used for manipulating muxed media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMMuxedFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CMFormatDescriptionRef CMMuxedFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 /*!
 	@enum CMMuxedStreamType
@@ -1154,6 +1234,8 @@ typedef CMFormatDescriptionRef CMMuxedFormatDescriptionRef API_AVAILABLE(macos(1
 	@constant	kCMMuxedStreamType_MPEG2Transport	MPEG-2 Transport stream
 	@constant	kCMMuxedStreamType_MPEG2Program	MPEG-2 Program stream
 	@constant	kCMMuxedStreamType_DV	DV stream
+	@constant	kCMMuxedStreamType_EmbeddedDeviceScreenRecording	Screen capture on an embedded device
+	@abstract	Contains interleaved sample buffers from multiple media types. The receiver should query the media type of each CMSampleBuffer’s format description to discover if it’s video or audio, and process it accordingly.
 */
 typedef FourCharCode CMMuxedStreamType API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 #if COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS
@@ -1165,7 +1247,8 @@ enum
 	kCMMuxedStreamType_MPEG1System		= 'mp1s',
 	kCMMuxedStreamType_MPEG2Transport	= 'mp2t',
 	kCMMuxedStreamType_MPEG2Program		= 'mp2p',
-	kCMMuxedStreamType_DV				= 'dv  '
+	kCMMuxedStreamType_DV				= 'dv  ',
+	kCMMuxedStreamType_EmbeddedDeviceScreenRecording API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0)) = 'isr '
 } API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
 
 #define CMMuxedFormatDescriptionGetStreamType(desc)  CMFormatDescriptionGetMediaSubType(desc)
@@ -1207,7 +1290,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 	@typedef CMClosedCaptionFormatDescriptionRef
 	Synonym type used for manipulating closed-caption media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMClosedCaptionFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CMFormatDescriptionRef CMClosedCaptionFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 /*!
 	@enum CMClosedCaptionFormatType
@@ -1242,7 +1325,7 @@ enum
 	@typedef CMTextFormatDescriptionRef
 	Synonym type used for manipulating Text media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMTextFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CMFormatDescriptionRef CMTextFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 /*!
 	@enum CMTextFormatType
@@ -1509,7 +1592,7 @@ enum
 	@typedef CMTimeCodeFormatDescriptionRef
 	SYnonym type used for manipulating TimeCode media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMTimeCodeFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CMFormatDescriptionRef CMTimeCodeFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 /*!
 	@enum CMTimeCodeFormatType
@@ -1632,7 +1715,7 @@ CM_ASSUME_NONNULL_END
 	@typedef CMMetadataFormatDescriptionRef
 	SYnonym type used for manipulating Metadata media CMFormatDescriptions
 */
-typedef CMFormatDescriptionRef CMMetadataFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef CMFormatDescriptionRef CMMetadataFormatDescriptionRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE;
 
 /*!
 	@enum CMMetadataFormatType

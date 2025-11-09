@@ -21,6 +21,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos)
 @protocol UIPopoverPresentationControllerSourceItem <NSObject>
+
+- (CGRect)frameInView:(UIView *)referenceView API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos);
+
 @end
 
 API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos)

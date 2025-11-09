@@ -15,6 +15,7 @@ typedef NS_ENUM(NSInteger, INStartCallContactUnsupportedReason) {
     INStartCallContactUnsupportedReasonUnsupportedMmiUssd,
     INStartCallContactUnsupportedReasonNoCallHistoryForRedial API_DEPRECATED("", ios(13.0, 14.0), watchos(6.0, 7.0)) API_UNAVAILABLE(macos),
     INStartCallContactUnsupportedReasonNoUsableHandleForRedial,
+    INStartCallContactUnsupportedReasonRequiringInAppAuthentication API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0)) API_UNAVAILABLE(tvos),
 } API_AVAILABLE(ios(13.0), watchos(6.0)) API_UNAVAILABLE(macos, tvos);
 
 NS_ASSUME_NONNULL_BEGIN

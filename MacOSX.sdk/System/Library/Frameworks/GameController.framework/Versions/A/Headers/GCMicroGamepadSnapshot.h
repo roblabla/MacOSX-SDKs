@@ -5,8 +5,7 @@
 //  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
-#import <GameController/GameController.h>
-#import <Foundation/Foundation.h>
+#import <GameController/GCMicroGamepad.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

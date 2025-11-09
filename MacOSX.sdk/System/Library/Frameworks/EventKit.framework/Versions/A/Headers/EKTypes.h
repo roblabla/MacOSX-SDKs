@@ -19,13 +19,19 @@ NS_ASSUME_NONNULL_BEGIN
                                                     The user cannot change this application’s status, possibly due to
                                                     active restrictions such as parental controls being in place.
     @constant   EKAuthorizationStatusDenied         The user explicitly denied access to the service for this application.
-    @constant   EKAuthorizationStatusAuthorized     This application is authorized to access the service.
+ 
+    @constant   EKAuthorizationStatusWriteOnly      This application is authorized to save new items.
+    @constant   EKAuthorizationStatusFullAccess     This application is authorized to read or modify all data for the service.
+    @constant   EKAuthorizationStatusAuthorized     (Deprecated) This application is authorized to access the service.
  */
 typedef NS_ENUM(NSInteger, EKAuthorizationStatus) {
     EKAuthorizationStatusNotDetermined = 0,
     EKAuthorizationStatusRestricted,
     EKAuthorizationStatusDenied,
-    EKAuthorizationStatusAuthorized,
+    EKAuthorizationStatusFullAccess NS_ENUM_AVAILABLE(14_0, 17_0),
+    EKAuthorizationStatusWriteOnly NS_ENUM_AVAILABLE(14_0, 17_0),
+    
+    EKAuthorizationStatusAuthorized NS_ENUM_DEPRECATED(10_0, 14_0, 6_0, 17_0, "Check for full access or write only access") = EKAuthorizationStatusFullAccess,
 } NS_AVAILABLE(10_9, 6_0);
 
 

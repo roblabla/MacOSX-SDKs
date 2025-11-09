@@ -1,4 +1,4 @@
-framework module InstallerPlugins [extern_c] {
+framework module InstallerPlugins {
   umbrella header "InstallerPlugins.h"
   requires !swift
   export *

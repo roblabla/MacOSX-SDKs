@@ -86,7 +86,7 @@ typedef NS_ENUM(NSInteger, UISceneCollectionJoinBehavior) {
     UISceneCollectionJoinBehaviorPreferred, // If requestingScene is set, add the new scene to its collection and activate it. Otherwise attempt to join a compatible collection.
     UISceneCollectionJoinBehaviorDisallowed, // Create a new collection for the scene, ignoring system settings.
     UISceneCollectionJoinBehaviorPreferredWithoutActivating, // If requestingScene is set, add the new scene without deactivating the requestingScene. Otherwise behaves the same as preferred. For example, in Catalyst this could be used to open a link in a new tab in the background.
-}  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+}  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface UISceneActivationRequestOptions : NSObject
@@ -94,7 +94,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (nullable, nonatomic, readwrite, strong) UIScene *requestingScene;
 
 // A scene collection is a group of scenes that display together. In Catalyst, this is used to add windows to an NSWindowTabGroup.
-@property (nonatomic, readwrite) UISceneCollectionJoinBehavior collectionJoinBehavior  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nonatomic, readwrite) UISceneCollectionJoinBehavior collectionJoinBehavior  API_AVAILABLE(macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
 @end
 
 #pragma mark - UISceneDestructionRequestOptions

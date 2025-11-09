@@ -172,9 +172,12 @@ extern int proc_exiting(proc_t);
 /* returns whether the process has started down proc_exit() */
 extern int proc_in_teardown(proc_t);
 /* this routine returns error if the process is not one with super user privileges */
-int proc_suser(proc_t p);
+extern int proc_suser(proc_t p);
+
 /* returns the cred assicaited with the process; temporary api */
+__deprecated_msg("proc_ucred is unsafe, use kauth_cred_proc_ref()")
 kauth_cred_t proc_ucred(proc_t p);
+
 /* returns 1 if the process is tainted by uid or gid changes,e else 0 */
 extern int proc_issetugid(proc_t p);
 

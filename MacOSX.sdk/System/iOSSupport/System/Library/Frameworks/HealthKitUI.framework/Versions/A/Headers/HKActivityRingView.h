@@ -5,8 +5,10 @@
 //  Copyright (c) 2015 Apple. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <HealthKit/HealthKit.h>
+#import <os/availability.h>
 #import <UIKit/UIKit.h>
-#import <HealthKit/HKDefines.h>
 
 @class HKActivitySummary;
 

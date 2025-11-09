@@ -43,7 +43,7 @@ typedef NS_ENUM(NSInteger, NEHotspotConfigurationEAPType) {
 	NEHotspotConfigurationEAPTypeEAPTTLS = 21,
 	NEHotspotConfigurationEAPTypeEAPPEAP = 25,
 	NEHotspotConfigurationEAPTypeEAPFAST = 43
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) NS_SWIFT_NAME(NEHotspotEAPSettings.EAPType) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos) NS_SWIFT_NAME(NEHotspotEAPSettings.EAPType);
 
 /*!
  * @typedef NEHotspotConfigurationEAPTTLSInnerAuthenticationType
@@ -60,7 +60,7 @@ typedef NS_ENUM(NSInteger, NEHotspotConfigurationTTLSInnerAuthenticationType) {
 	NEHotspotConfigurationEAPTTLSInnerAuthenticationMSCHAP = 2,
 	NEHotspotConfigurationEAPTTLSInnerAuthenticationMSCHAPv2 = 3,
 	NEHotspotConfigurationEAPTTLSInnerAuthenticationEAP = 4
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) NS_SWIFT_NAME(NEHotspotEAPSettings.TTLSInnerAuthenticationType) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos) NS_SWIFT_NAME(NEHotspotEAPSettings.TTLSInnerAuthenticationType);
 
 /*!
  * @typedef NEHotspotConfigurationEAPTLSVersion
@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, NEHotspotConfigurationEAPTLSVersion) {
 	NEHotspotConfigurationEAPTLSVersion_1_0 = 0,
 	NEHotspotConfigurationEAPTLSVersion_1_1 = 1,
 	NEHotspotConfigurationEAPTLSVersion_1_2 = 2,
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) NS_SWIFT_NAME(NEHotspotEAPSettings.TLSVersion) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos) NS_SWIFT_NAME(NEHotspotEAPSettings.TLSVersion);
 
 /*!
  * @interface NEHotspotHS20Settings
@@ -81,7 +81,7 @@ typedef NS_ENUM(NSInteger, NEHotspotConfigurationEAPTLSVersion) {
  *   NEHotspotHS20Settings class provides a set of properties that are required
  *   to discover and negotiate Hotspot 2.0 Wi-Fi networks.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEHotspotHS20Settings : NSObject <NSCopying,NSSecureCoding>
 
 /*!
@@ -89,28 +89,28 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @discussion Domain Name of Legacy Hotspot or Hotspot 2.0 Wi-Fi Network.
  *   This Domain Name is used for Wi-Fi Hotspot 2.0 negotiation.
  */
-@property (nonnull, readonly) NSString *domainName API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (nonnull, readonly) NSString *domainName API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property roamingEnabled
  * @discussion If set to YES, allows connection to networks of roaming service
  *   providers. Defaults to NO.
  */
-@property (getter=isRoamingEnabled) BOOL roamingEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (getter=isRoamingEnabled) BOOL roamingEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property roamingConsortiumOIs
  * @discussion Array of Roaming Consortium Organization Identifiers used
  *   for Wi-Fi Hotspot 2.0 negotiation.
  */
-@property (copy) NSArray<NSString *> *roamingConsortiumOIs API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSArray<NSString *> *roamingConsortiumOIs API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property naiRealmNames
  * @discussion Array of Network Access Identifier Realm names used for
  *   Wi-Fi Hotspot 2.0 negotiation.
  */
-@property (copy) NSArray<NSString *> *naiRealmNames API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSArray<NSString *> *naiRealmNames API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property MCCAndMNCs
@@ -118,7 +118,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   pairs used for Wi-Fi Hotspot 2.0 negotiation. Each string must contain
  *   exactly six digits.
  */
-@property (copy) NSArray<NSString *> *MCCAndMNCs API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSArray<NSString *> *MCCAndMNCs API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method initWithDomainName:roamingEnabled
@@ -130,7 +130,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @param roamingEnabled If YES, allows connections to networks of roaming service providers.
  */
 - (instancetype)initWithDomainName:(NSString *)domainName
-						   roamingEnabled:(BOOL)roamingEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+						   roamingEnabled:(BOOL)roamingEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -140,7 +140,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   NEHotspotEAPSettings class provides a set of properties that are required
  *   to configure a WPA/WPA2 Enterprise or Hotspot 2.0 Wi-Fi networks.
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEHotspotEAPSettings : NSObject <NSCopying,NSSecureCoding>
 
 /*!
@@ -148,35 +148,35 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @discussion Array of supported EAP Types. Refer to NEHotspotConfigurationEAPType
  *   for valid values.
  */
-@property (copy) NSArray<NSNumber *> *supportedEAPTypes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSArray<NSNumber *> *supportedEAPTypes API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property username
  * @discussion A UTF-8 encoded string containing username component of the user authentication
  *   credentials. Length of this property must be between 1 and 253 characters.
  */
-@property (copy) NSString *username API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSString *username API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property outerIdentity
  * @discussion Identity string to be used in EAP-Response/Identity of the outer phase. This key is only
  *   relevant to TTLS, PEAP, and EAP-FAST.
  */
-@property (copy) NSString *outerIdentity API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSString *outerIdentity API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property ttlsInnerAuthentication
  * @discussion Specifies the inner authentication used by the TTLS module.
  *   Possible values are PAP, CHAP, MSCHAP, MSCHAPv2, and EAP. Defaults to EAP.
  */
-@property NEHotspotConfigurationTTLSInnerAuthenticationType ttlsInnerAuthenticationType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property NEHotspotConfigurationTTLSInnerAuthenticationType ttlsInnerAuthenticationType API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property password
  * @discussion The password component of the 802.1X authentication credential.
  *   Length of this property must be between 1 and 64 characters.
  */
-@property (copy) NSString *password API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSString *password API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property trustedServerNames
@@ -184,7 +184,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   The string could have wildcards to specify the name, such as "*.mycompany.net". If a server presents
  *   a certificate with DNSName or Common Name that isn't in this list, it won't be trusted.
  */
-@property (copy) NSArray<NSString *> *trustedServerNames API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (copy) NSArray<NSString *> *trustedServerNames API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property isTLSClientCertificateRequired
@@ -192,14 +192,14 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   If NO, allows for zero-factor authentication for EAP-TLS. The default is YES for EAP-TLS,
  *   and NO for other EAP types.
  */
-@property (getter=isTLSClientCertificateRequired) BOOL tlsClientCertificateRequired API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property (getter=isTLSClientCertificateRequired) BOOL tlsClientCertificateRequired API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property preferredTLSVersion
  * @discussion TLS version to use during the TLS handshake.
  *   Default value is NEHotspotConfigurationEAPTLSVersion_1_2.
  */
-@property NEHotspotConfigurationEAPTLSVersion preferredTLSVersion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property NEHotspotConfigurationEAPTLSVersion preferredTLSVersion API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method setIdentity
@@ -215,7 +215,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * is not found in the application's keychain else returns YES.
  *
  */
-- (BOOL) setIdentity:(SecIdentityRef) identity API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (BOOL) setIdentity:(SecIdentityRef) identity API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method setTrustedServerCertificates
@@ -231,7 +231,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @result returns NO if any element in the array is not an object of type SecCertificateRef or if API
  * fails to find persistent reference for each element from the application's keychain else return YES.
  */
-- (BOOL) setTrustedServerCertificates:(NSArray *) certificates API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (BOOL) setTrustedServerCertificates:(NSArray *) certificates API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -314,7 +314,7 @@ API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos)
  * @param eapSettings EAP configuration
  */
 - (instancetype)initWithSSID:(NSString *)SSID
-					  eapSettings:(NEHotspotEAPSettings *)eapSettings API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+					  eapSettings:(NEHotspotEAPSettings *)eapSettings API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method initWithHS20Settings:eapSettings
@@ -326,7 +326,7 @@ API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos)
  * @param eapSettings EAP configuration
  */
 - (instancetype)initWithHS20Settings:(NEHotspotHS20Settings *)hs20Settings
-						eapSettings:(NEHotspotEAPSettings *)eapSettings API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+						eapSettings:(NEHotspotEAPSettings *)eapSettings API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method initWithSSIDPrefix:
@@ -440,7 +440,7 @@ API_AVAILABLE(ios(11.0), watchos(7.0)) API_UNAVAILABLE(macos, tvos)
  * @discussion This function removes Wi-Fi configuration.
  * @param domainName HS2.0 domainName for which the configuration is to be deleted.
  */
-- (void)removeConfigurationForHS20DomainName:(NSString *)domainName API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (void)removeConfigurationForHS20DomainName:(NSString *)domainName API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 
 /*!

@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/RunningBoard.framework/Versions/A/RunningBoard'
-current-version: 803.100.24
+current-version: 858.0.9
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RBAttributePrimitiveEntitlement, _RBBackBoardClientEntitlement, 
@@ -31,14 +31,14 @@ exports:
                        RBDomainAttributeManagerDataProvider, RBDomainRestriction, 
                        RBEntitlementManager, RBEntitlementPredicate, RBEntitlements, 
                        RBEventQueue, RBEventQueueEvent, RBExtensionDataProvider, 
-                       RBIgnoreAllEntitlementsManager, RBInheritanceCollection, RBJetsamPropertyManager, 
-                       RBLSBundleProperties, RBLaunchManager, RBLaunchTracker, RBLaunchdInterface, 
-                       RBLaunchdJobManager, RBLaunchdProperties, RBMutableInheritanceCollection, 
-                       RBMutableLaunchdProperties, RBMutableProcessAppNapState, RBMutableProcessState, 
-                       RBMutableSystemState, RBPowerAssertionManager, RBPrewarmManager, 
-                       RBProcess, RBProcessAppNapState, RBProcessCPUMaximumLimits, 
-                       RBProcessCPUMinimumLimits, RBProcessIndex, RBProcessManager, 
-                       RBProcessMap, RBProcessMonitor, RBProcessMonitorObserver, 
+                       RBHistoricalStatistics, RBIgnoreAllEntitlementsManager, RBInheritanceCollection, 
+                       RBJetsamPropertyManager, RBLSBundleProperties, RBLaunchManager, 
+                       RBLaunchTracker, RBLaunchdInterface, RBLaunchdJobManager, 
+                       RBLaunchdProperties, RBMutableInheritanceCollection, RBMutableLaunchdProperties, 
+                       RBMutableProcessAppNapState, RBMutableProcessState, RBMutableSystemState, 
+                       RBPowerAssertionManager, RBPrewarmManager, RBProcess, RBProcessAppNapState, 
+                       RBProcessCPUMaximumLimits, RBProcessCPUMinimumLimits, RBProcessIndex, 
+                       RBProcessManager, RBProcessMap, RBProcessMonitor, RBProcessMonitorObserver, 
                        RBProcessMonitorObserverConnection, RBProcessReconnectManager, 
                        RBProcessState, RBProcessStateChange, RBProcessStateChangeSet, 
                        RBRequestManager, RBStateCaptureManager, RBSystemState, RBThermalResponseManager, 

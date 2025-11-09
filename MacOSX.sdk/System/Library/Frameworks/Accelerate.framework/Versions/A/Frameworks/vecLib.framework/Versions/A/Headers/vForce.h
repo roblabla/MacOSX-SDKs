@@ -1,5 +1,5 @@
 /*
-vForce.h (from vecLib-818.100)
+vForce.h (from vecLib-1041.0)
 Copyright (c) 1999-2023 by Apple Inc. All rights reserved.
 
 @APPLE_LICENSE_HEADER_START@
@@ -73,7 +73,13 @@ limitations under the License.
 extern "C" {
 #endif
 
-#include <os/availability.h>
+#if __has_include(<os/availability.h>)
+#  include <os/availability.h>
+#else // __has_include(<os/availability.h>)
+	#if !defined API_AVAILABLE
+	#define API_AVAILABLE(...)
+	#endif
+#endif // __has_include(<os/availability.h>)
 
 
 #if !defined __has_feature

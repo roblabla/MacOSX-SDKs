@@ -3,7 +3,7 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-818.100
+    Version:    vecLib-1041.0
 
     Copyright:  Copyright (c) 2000-2023 by Apple Inc. All rights reserved.
 
@@ -205,7 +205,18 @@
 #endif
 
 
-#include <os/availability.h>
+#if __has_include(<os/availability.h>)
+#  include <os/availability.h>
+#else // __has_include(<os/availability.h>)
+	#if !defined API_AVAILABLE
+	#define API_AVAILABLE(...)
+	#endif
+
+	#if !defined API_DEPRECATED_WITH_REPLACEMENT
+	#define API_DEPRECATED_WITH_REPLACEMENT(...)
+	#endif
+#endif // __has_include(<os/availability.h>)
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -215,8 +226,11 @@ extern "C" {
 #endif
 
 
+#if !0
+
 #include <CoreFoundation/CFAvailability.h>
 #define vDSP_ENUM   CF_ENUM
+#endif
 
 
 #if !defined __has_feature
@@ -238,8 +252,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   818
-#define vDSP_Version1   100
+#define vDSP_Version0   1041
+#define vDSP_Version1   0
 
 
 /*  Define types:
@@ -6850,13 +6864,15 @@ void vDSP_FFT32_zopv(
 
     Multithreading:
 
-        Never call a setup or destroy routine in a thread when any DFT or DCT
-        routine (setup, execution, or destroy) that shares setup data may be
-        executing.  (This applies not just to multiple threads but also to
-        calling DFT or DCT routines in signal handlers.)
+        The Accelerate FFT and DFT setup structures can optionally share
+        underlying memory through the Previous parameter in the appropriate
+        create setup function. To avoid undefined behaviour, don’t call a setup
+        or destroy function on a setup structure while another setup structure
+        that shares its memory is executing.
 
-        Multiple DFT or DCT execution routines may be called simultaneously.
-        (Their access to the setup data is read-only.)
+        The FFT and DFT setup structures only require read-only access to the
+        underlying memory, therefore you can safely run multiple execution
+        routines concurrently on structures that share memory.
 
         If you need to call setup and/or destroy routines while other DFT or
         DCT routines might be executing, you can either use Grand Central

@@ -2,7 +2,7 @@
 //  CLSDefines.h
 //  ClassKit
 //
-//  Copyright © 2018-2021 Apple Inc. All rights reserved.
+//  Copyright © 2018-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef CLSDEFINES_H

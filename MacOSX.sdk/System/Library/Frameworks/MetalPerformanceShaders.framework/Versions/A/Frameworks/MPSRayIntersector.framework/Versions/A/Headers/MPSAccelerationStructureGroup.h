@@ -22,7 +22,7 @@
  * limited by the Metal device's buffer size limits. Therefore, do not group acceleration
  * structures unless they are likely to be used in the same instance acceleration structure.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
+MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0))
 @interface MPSAccelerationStructureGroup : NSObject
 
 /**

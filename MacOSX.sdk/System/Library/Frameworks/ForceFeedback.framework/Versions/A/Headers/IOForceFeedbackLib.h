@@ -27,7 +27,6 @@
 */
 #include <sys/cdefs.h>
 
-__BEGIN_DECLS
 #include <CoreFoundation/CoreFoundation.h>
 #if COREFOUNDATION_CFPLUGINCOM_SEPARATE
 #include <CoreFoundation/CFPlugInCOM.h>
@@ -37,6 +36,7 @@ __BEGIN_DECLS
 #include <IOKit/IOTypes.h>
 #include <ForceFeedback/ForceFeedback.h>
 
+__BEGIN_DECLS
 //====================================================================================================================
 // The Version of the FF PlugIn API
 //====================================================================================================================

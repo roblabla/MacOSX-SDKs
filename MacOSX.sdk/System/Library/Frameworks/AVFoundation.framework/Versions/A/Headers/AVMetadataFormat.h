@@ -233,7 +233,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyAttachedPicture          
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyAudioSeekPointIndex                   /* ASPI Audio seek point index */                               API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyComments                              /* COMM Comments */                                             API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyCommercial                            /* COMR Commercial frame */                                     API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
-AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyCommerical                            /* COMR Commercial frame */                                     API_DEPRECATED_WITH_REPLACEMENT("AVMetadataID3MetadataKeyCommercial", macos(10.7, 10.11), ios(4.0, 9.0), tvos(9.0, 9.0), watchos(1.0, 1.0));
+AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyCommerical                            /* COMR Commercial frame */                                     API_DEPRECATED_WITH_REPLACEMENT("AVMetadataID3MetadataKeyCommercial", macos(10.7, 10.11), ios(4.0, 9.0), tvos(9.0, 9.0), watchos(1.0, 1.0)) API_UNAVAILABLE(visionos);
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyEncryption                            /* ENCR Encryption method registration */                       API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyEqualization                          /* EQUA Equalization */                                         API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVMetadataKey const AVMetadataID3MetadataKeyEqualization2                         /* EQU2 Equalisation (2) */                                     API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));
@@ -331,7 +331,7 @@ AVF_EXPORT AVMetadataKey const AVMetadataIcyMetadataKeyStreamURL                
 // HTTP Live Streaming metadata
 AVF_EXPORT AVMetadataFormat const AVMetadataFormatHLSMetadata                                API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 // HLS Metadata does not define its own keySpace or keys. Use of the keySpace AVMetadataKeySpaceQuickTimeMetadata and its keys is recommended.
-AVF_EXPORT AVMetadataKeySpace const AVMetadataKeySpaceHLSDateRange                           API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
+AVF_EXPORT AVMetadataKeySpace const AVMetadataKeySpaceHLSDateRange                           API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3));
 
 // Keys for metadata provided by AudioToolbox's AudioFile interface. See <AudioToolbox/AudioFile.h>
 AVF_EXPORT AVMetadataKeySpace const AVMetadataKeySpaceAudioFile                              API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));

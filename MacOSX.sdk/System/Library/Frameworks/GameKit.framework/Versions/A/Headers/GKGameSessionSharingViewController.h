@@ -1,10 +1,6 @@
-//
-//  GKGameSessionSharingViewController.h
-//  Game Center
-//
-//  Copyright 2016-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
+#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 
 #if TARGET_OS_TV

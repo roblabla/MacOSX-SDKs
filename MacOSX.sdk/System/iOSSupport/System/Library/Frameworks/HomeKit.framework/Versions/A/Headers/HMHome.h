@@ -45,7 +45,7 @@ typedef NS_ENUM(NSUInteger, HMHomeHubState) {
  *             all the rooms, zones, service groups, users, triggers, and action sets in
  *             the home.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMHome : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -167,7 +167,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError *__nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories())API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(10.0, 15.4))API_UNAVAILABLE(macos, macCatalyst)API_UNAVAILABLE(watchos, tvos);
+- (void)addAndSetupAccessoriesWithCompletionHandler:(void (^)(NSError *__nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories())API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(10.0, 15.4))API_UNAVAILABLE(macos, macCatalyst)API_UNAVAILABLE(watchos, tvos, visionos);
 
 /*!
  * @brief Add accessory with the given setup payload to the home.
@@ -178,7 +178,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
-- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *> *__nullable accessories, NSError *__nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories(payload:))API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(11.3, 15.0))API_UNAVAILABLE(macos, macCatalyst)API_UNAVAILABLE(watchos, tvos);
+- (void)addAndSetupAccessoriesWithPayload:(HMAccessorySetupPayload *)payload completionHandler:(void (^)(NSArray<HMAccessory *> *__nullable accessories, NSError *__nullable error))completion NS_SWIFT_ASYNC_NAME(addAndSetUpAccessories(payload:))API_DEPRECATED("Use -[HMAccessorySetupManager performAccessorySetupUsingRequest:completionHandler:] instead", ios(11.3, 15.0))API_UNAVAILABLE(macos, macCatalyst)API_UNAVAILABLE(watchos, tvos, visionos);
 
 /*!
  * @brief True if this home supports all of the requirements for adding a network router.

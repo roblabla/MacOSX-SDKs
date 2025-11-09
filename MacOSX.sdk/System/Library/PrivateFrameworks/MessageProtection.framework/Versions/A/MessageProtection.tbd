@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/MessageProtection.framework/Versions/A/MessageProtection'
-current-version: 264.100.16
+current-version: 317
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -24,10 +24,18 @@ exports:
                        '_$s17MessageProtection4HKDFCACycfC', '_$s17MessageProtection4HKDFCACycfc', 
                        '_$s17MessageProtection4HKDFCMa', '_$s17MessageProtection4HKDFCMn', 
                        '_$s17MessageProtection4HKDFCN', '_$s17MessageProtection4HKDFCfD', 
-                       _NGMEncryptedAttributeKTGossipData, _SecExposeStream, _SecMPComputePaddingForStorage, 
-                       _SecMPCopyProtectedMsgHash, _SecMPFIAppendSerialization, _SecMPFIAppendSignature, 
-                       _SecMPFICopyProtClass, _SecMPFIPurgeAllFromKeychain, _SecMPFIPurgeFromKeychain, 
-                       _SecMPFIUpdateProtClass, _SecMPFullIdentityCreate, _SecMPFullIdentityCreateFromData, 
+                       '_$s9CryptoKit3AESO17MessageProtectionE2IVV4data10Foundation4DataVyF', 
+                       '_$s9CryptoKit3AESO17MessageProtectionE2IVV9blockSizeSivpfi', 
+                       '_$s9CryptoKit3AESO17MessageProtectionE2IVVAeF10Foundation4DataV_tKcfC', 
+                       '_$s9CryptoKit3AESO17MessageProtectionE2IVVMa', '_$s9CryptoKit3AESO17MessageProtectionE2IVVMn', 
+                       '_$s9CryptoKit3AESO17MessageProtectionE2IVVN', '_$s9CryptoKit3AESO17MessageProtectionE3CTRO7decrypt3key10ciphertext2IV10Foundation4DataVAA12SymmetricKeyV_AmcDEAJVtKFZ', 
+                       '_$s9CryptoKit3AESO17MessageProtectionE3CTRO7encrypt3key7message2IV10Foundation4DataVAA12SymmetricKeyV_AmcDEAJVtKFZ', 
+                       '_$s9CryptoKit3AESO17MessageProtectionE3CTROMa', '_$s9CryptoKit3AESO17MessageProtectionE3CTROMn', 
+                       '_$s9CryptoKit3AESO17MessageProtectionE3CTRON', _NGMEncryptedAttributeKTGossipData, 
+                       _SecExposeStream, _SecMPComputePaddingForStorage, _SecMPCopyProtectedMsgHash, 
+                       _SecMPFIAppendSerialization, _SecMPFIAppendSignature, _SecMPFICopyProtClass, 
+                       _SecMPFIPurgeAllFromKeychain, _SecMPFIPurgeFromKeychain, _SecMPFIUpdateProtClass, 
+                       _SecMPFullIdentityCreate, _SecMPFullIdentityCreateFromData, 
                        _SecMPFullIdentityCreateFromRefs, _SecMPFullIdentityCreateOTRSessionWith, 
                        _SecMPFullIdentityCreateOTRSessionWithFlags, _SecMPFullIdentityCreateWithAccess, 
                        _SecMPFullIdentityCreateWithAccessProtClass, _SecMPFullIdentityCreateWithProtClass, 
@@ -38,10 +46,10 @@ exports:
                        _SecMWCreateSessionSeed, _SecProtectStream ]
     objc-classes:    [ GFTKeyWrapping, GLTDiversifiedKeyAndTPS, GLTKeyDiversification, 
                        MPStatusKitIncomingRatchet, MPStatusKitMessage, MPStatusKitOutgoingRatchet, 
-                       MPStatusKitSubscriptionKeys, NGMFullDeviceIdentity, NGMKeyRollingTicket, 
-                       NGMMessageHasher, NGMProtocolVersion, NGMPublicDeviceIdentity, 
-                       NGMReplayManager, NGMRollingBitmaskBuffer, NGMTimeBasedEvaluations, 
-                       SecMessageLegacyFullIdentity, SecMessageLegacyPublicIdentity, 
+                       MPStatusKitSubscriptionKeys, NGMFullDeviceIdentity, NGMFullPrekey, 
+                       NGMKeyRollingTicket, NGMMessageHasher, NGMProtocolVersion, 
+                       NGMPublicDeviceIdentity, NGMReplayManager, NGMRollingBitmaskBuffer, 
+                       NGMTimeBasedEvaluations, SecMessageLegacyFullIdentity, SecMessageLegacyPublicIdentity, 
                        _TtC17MessageProtection17GLTDiversifiedKey, _TtC17MessageProtection26GLTKeyDiversificationSwift, 
                        _TtC17MessageProtection4HKDF ]
 ...

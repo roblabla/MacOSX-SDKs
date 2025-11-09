@@ -1,9 +1,4 @@
-//
-//  GKLeaderboardEntry.h
-//  Game Center
-//
-//  Copyright 2018-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 
 NS_ASSUME_NONNULL_BEGIN

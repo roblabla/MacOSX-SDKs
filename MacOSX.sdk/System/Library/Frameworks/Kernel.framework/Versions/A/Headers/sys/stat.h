@@ -380,6 +380,7 @@ struct stat64 __DARWIN_STRUCT_STAT64;
 #define EF_IS_PURGEABLE         0x00000008      /* file is purgeable */
 #define EF_IS_SPARSE            0x00000010      /* file has at least one sparse region */
 #define EF_IS_SYNTHETIC         0x00000020      /* a synthetic directory/symlink */
+#define EF_SHARES_ALL_BLOCKS    0x00000040      /* file shares all of its blocks with another file */
 #endif
 
 

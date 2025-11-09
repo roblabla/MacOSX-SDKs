@@ -2,8 +2,10 @@
 //  IOBluetoothObject.h
 //  IOBluetoothFamily
 //
-//  Copyright (c) 2002-2012 Apple Inc. All rights reserved.
+//  Copyright (c) 2002-2012, 2023 Apple Inc. All rights reserved.
 //
+
+#if __OBJC__
 
 #import <Foundation/Foundation.h>
 
@@ -21,3 +23,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 @end
 
 #define kBluetoothTargetDoesNotRespondToCallbackExceptionName	@"BluetoothTargetDoesNotRespondToCallbackException"
+
+#endif // __OBJC__

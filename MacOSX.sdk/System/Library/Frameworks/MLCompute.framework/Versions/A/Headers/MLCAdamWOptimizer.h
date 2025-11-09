@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class      MLCAdamWOptimizer
     @discussion The MLCAdamWOptimizer specifies the AdamW optimizer.
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(12.0, 15.0, 15.0)
 @interface  MLCAdamWOptimizer : MLCOptimizer<NSCopying>
 
 /*! @property   beta1

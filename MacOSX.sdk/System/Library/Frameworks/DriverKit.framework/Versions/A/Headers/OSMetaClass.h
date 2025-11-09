@@ -284,7 +284,7 @@ OSObjectAllocate(
 #define OSTypeAlloc(type) \
 ({ \
     kern_return_t ret; \
-    type * inst; \
+    decltype(new (NULL) type) inst; \
     ret = OSObjectAllocate(OSTypeID(type), (OSObject **) &inst); \
     if (kIOReturnSuccess != ret) inst = NULL; \
     inst; \

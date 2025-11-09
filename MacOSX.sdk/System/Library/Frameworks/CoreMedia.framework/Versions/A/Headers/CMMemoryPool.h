@@ -49,7 +49,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		CFAllocatorDeallocate methods.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMMemoryPool *CMMemoryPoolRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // a CF type; use CFRetain and CFRelease.
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMMemoryPool *CMMemoryPoolRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease.
 
 /*!
 	@enum CMMemoryPool Errors

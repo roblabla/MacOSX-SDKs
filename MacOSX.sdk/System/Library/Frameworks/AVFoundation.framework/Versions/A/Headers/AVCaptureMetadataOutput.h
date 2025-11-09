@@ -4,7 +4,7 @@
  
     Framework:  AVFoundation
  
-    Copyright 2010-2021 Apple Inc. All rights reserved.
+    Copyright 2010-2022 Apple Inc. All rights reserved.
 */
 
 #import <AVFoundation/AVCaptureOutputBase.h>
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     Instances of AVCaptureMetadataOutput emit arrays of AVMetadataObject instances (see AVMetadataObject.h), such as detected faces. Applications can access the metadata objects with the captureOutput:didOutputMetadataObjects:fromConnection: delegate method.
  */
-API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
 @interface AVCaptureMetadataOutput : AVCaptureOutput
 {
 @private
@@ -105,7 +105,7 @@ API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) AP
  
     As of iOS 13, this property can be set without requiring a lengthy rebuild of the session in which video preview is disrupted.
  */
-@property(nonatomic) CGRect rectOfInterest API_AVAILABLE(ios(7.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic) CGRect rectOfInterest API_AVAILABLE(ios(7.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos);
 
 @end
 
@@ -115,7 +115,7 @@ API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) AP
  @abstract
     Defines an interface for delegates of AVCaptureMetadataOutput to receive emitted objects.
  */
-API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(13.0), ios(6.0), macCatalyst(14.0), tvos(17.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos)
 @protocol AVCaptureMetadataOutputObjectsDelegate <NSObject>
 
 @optional

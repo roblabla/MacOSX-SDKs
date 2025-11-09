@@ -25,6 +25,7 @@ exports:
                        '_$s17_StringProcessing13_RegexFactoryV20customCharacterClassyAA0C0VyxGAA7DSLTreeV06CustomfG0VlF', 
                        '_$s17_StringProcessing13_RegexFactoryV21accumulateAlternationyAA0C0VyxGq__q0_tAA0C9ComponentR_AaHR0_r1_lF', 
                        '_$s17_StringProcessing13_RegexFactoryV21lookaheadNonCapturingyAA0C0VyxGq_AA0C9ComponentR_r0_lF', 
+                       '_$s17_StringProcessing13_RegexFactoryV27ignoreCapturesInTypedOutputyAA0C0VySsGxAA0C9ComponentRzlF', 
                        '_$s17_StringProcessing13_RegexFactoryV29negativeLookaheadNonCapturingyAA0C0VyxGq_AA0C9ComponentR_r0_lF', 
                        '_$s17_StringProcessing13_RegexFactoryV4charyAA0C0VyxGSJlF', 
                        '_$s17_StringProcessing13_RegexFactoryV5emptyAA0C0VyxGylF', 

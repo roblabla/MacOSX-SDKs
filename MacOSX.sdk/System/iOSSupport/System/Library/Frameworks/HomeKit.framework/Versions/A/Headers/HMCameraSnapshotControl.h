@@ -9,7 +9,7 @@
 #import <HomeKit/HMCameraControl.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class HMCameraSnapshot;
 @protocol HMCameraSnapshotControlDelegate;
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract This class can be used to take an image snapshot from a camera.
  */
-HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMCameraSnapshotControl : HMCameraControl
 
 /*!
@@ -69,4 +69,4 @@ API_UNAVAILABLE(macos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

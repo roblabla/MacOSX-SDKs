@@ -1,9 +1,9 @@
-/*
- *  hv_vmx.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2020 Apple Inc. All rights reserved.
- */
+//
+//  hv_vmx.h
+//  Hypervisor
+//
+//  Copyright © 2020-2023 Apple Inc. All rights reserved.
+//
 
 #ifndef __HYPERVISOR_HV_VMX__
 #define __HYPERVISOR_HV_VMX__
@@ -11,11 +11,10 @@
 #ifdef __x86_64__
 
 #include <Availability.h>
-
+#include <Hypervisor/hv_arch_vmx.h>
+#include <Hypervisor/hv_arch_x86.h>
 #include <Hypervisor/hv_error.h>
 #include <Hypervisor/hv_types.h>
-#include <Hypervisor/hv_arch_x86.h>
-#include <Hypervisor/hv_arch_vmx.h>
 
 #define __HV_10_10 __API_AVAILABLE(macos(10.10))
 #define __HV_10_15 __API_AVAILABLE(macos(10.15))
@@ -39,7 +38,7 @@ __BEGIN_DECLS
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vmx_vcpu_read_vmcs(hv_vcpuid_t vcpu, uint32_t field,
-	uint64_t *value) __HV_10_10;
+    uint64_t *value) __HV_10_10;
 
 /*!
  * @function   hv_vmx_vcpu_write_vmcs
@@ -65,7 +64,7 @@ extern hv_return_t hv_vmx_vcpu_read_vmcs(hv_vcpuid_t vcpu, uint32_t field,
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vmx_vcpu_write_vmcs(hv_vcpuid_t vcpu, uint32_t field,
-	uint64_t value) __HV_10_10;
+    uint64_t value) __HV_10_10;
 
 /*!
  * @function   hv_vmx_vcpu_get_cap_write_vmcs
@@ -110,7 +109,7 @@ extern hv_return_t hv_vmx_vcpu_get_cap_write_vmcs(hv_vcpuid_t vcpu, uint32_t fie
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vmx_vcpu_read_shadow_vmcs(hv_vcpuid_t vcpu,
-	uint32_t field, uint64_t *value) __HV_10_15;
+    uint32_t field, uint64_t *value) __HV_10_15;
 
 /*!
  * @function   hv_vmx_vcpu_write_shadow_vmcs
@@ -125,16 +124,16 @@ extern hv_return_t hv_vmx_vcpu_read_shadow_vmcs(hv_vcpuid_t vcpu,
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vmx_vcpu_write_shadow_vmcs(hv_vcpuid_t vcpu,
-	uint32_t field, uint64_t value) __HV_10_15;
+    uint32_t field, uint64_t value) __HV_10_15;
 
 /*!
  * @enum       hv_shadow_flags_t
  * @abstract   Shadow VMCS permissions for hv_vcpu_vmx_set_shadow_access()
  */
 enum {
-	HV_SHADOW_VMCS_NONE  = 0,
-	HV_SHADOW_VMCS_READ  = (1ull << 0),
-	HV_SHADOW_VMCS_WRITE = (1ull << 1),
+    HV_SHADOW_VMCS_NONE  = 0,
+    HV_SHADOW_VMCS_READ  = (1ull << 0),
+    HV_SHADOW_VMCS_WRITE = (1ull << 1),
 };
 
 typedef uint64_t hv_shadow_flags_t;
@@ -152,31 +151,31 @@ typedef uint64_t hv_shadow_flags_t;
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vmx_vcpu_set_shadow_access(hv_vcpuid_t vcpu,
-	uint32_t field, hv_shadow_flags_t flags) __HV_10_15;
+    uint32_t field, hv_shadow_flags_t flags) __HV_10_15;
 
 /*!
  * @typedef    hv_vmx_capability_t
  * @abstract   Enum type of VMX capability fields
  */
 typedef enum {
-	HV_VMX_CAP_PINBASED = 0,         /* pin-based VMX capabilities */
-	HV_VMX_CAP_PROCBASED = 1,        /* primary proc.-based VMX capabilities */
-	HV_VMX_CAP_PROCBASED2 = 2,       /* second. proc.-based VMX capabilities */
-	HV_VMX_CAP_ENTRY = 3,            /* VM-entry VMX capabilities */
-	HV_VMX_CAP_EXIT = 4,             /* VM-exit VMX capabilities */
-	HV_VMX_CAP_BASIC = 5,            /* Basic VMX capabilities */
-	HV_VMX_CAP_TRUE_PINBASED = 6,	 /* hw pin-based VMX capabilities */
-	HV_VMX_CAP_TRUE_PROCBASED = 7,	 /* hw primary proc.-based VMX capabilities */
-	HV_VMX_CAP_TRUE_ENTRY = 8,		 /* hw VM-entry VMX capabilities */
-	HV_VMX_CAP_TRUE_EXIT = 9,		 /* hw VM-exit VMX capabilities */
-	HV_VMX_CAP_MISC = 10,            /* Miscellaneous VMX capabilities */
-	HV_VMX_CAP_CR0_FIXED0 = 11,      /* CR0 allowed zero bits */
-	HV_VMX_CAP_CR0_FIXED1 = 12,      /* CR0 allowed one bits */
-	HV_VMX_CAP_CR4_FIXED0 = 13,      /* CR4 allowed zero bits */
-	HV_VMX_CAP_CR4_FIXED1 = 14,      /* CR4 allowed one bits */
-	HV_VMX_CAP_VMCS_ENUM = 15,       /* VMCS enumeration */
-	HV_VMX_CAP_EPT_VPID_CAP = 16,    /* EPT/VPID capabilities */
-	HV_VMX_CAP_PREEMPTION_TIMER = 32 /* VMX preemption timer frequency */
+    HV_VMX_CAP_PINBASED = 0,         /* pin-based VMX capabilities */
+    HV_VMX_CAP_PROCBASED = 1,        /* primary proc.-based VMX capabilities */
+    HV_VMX_CAP_PROCBASED2 = 2,       /* second. proc.-based VMX capabilities */
+    HV_VMX_CAP_ENTRY = 3,            /* VM-entry VMX capabilities */
+    HV_VMX_CAP_EXIT = 4,             /* VM-exit VMX capabilities */
+    HV_VMX_CAP_BASIC = 5,            /* Basic VMX capabilities */
+    HV_VMX_CAP_TRUE_PINBASED = 6,     /* hw pin-based VMX capabilities */
+    HV_VMX_CAP_TRUE_PROCBASED = 7,     /* hw primary proc.-based VMX capabilities */
+    HV_VMX_CAP_TRUE_ENTRY = 8,         /* hw VM-entry VMX capabilities */
+    HV_VMX_CAP_TRUE_EXIT = 9,         /* hw VM-exit VMX capabilities */
+    HV_VMX_CAP_MISC = 10,            /* Miscellaneous VMX capabilities */
+    HV_VMX_CAP_CR0_FIXED0 = 11,      /* CR0 allowed zero bits */
+    HV_VMX_CAP_CR0_FIXED1 = 12,      /* CR0 allowed one bits */
+    HV_VMX_CAP_CR4_FIXED0 = 13,      /* CR4 allowed zero bits */
+    HV_VMX_CAP_CR4_FIXED1 = 14,      /* CR4 allowed one bits */
+    HV_VMX_CAP_VMCS_ENUM = 15,       /* VMCS enumeration */
+    HV_VMX_CAP_EPT_VPID_CAP = 16,    /* EPT/VPID capabilities */
+    HV_VMX_CAP_PREEMPTION_TIMER = 32 /* VMX preemption timer frequency */
 } hv_vmx_capability_t;
 
 /*!
@@ -190,22 +189,22 @@ typedef enum {
  *             be set
  */
 extern hv_return_t hv_vmx_read_capability(hv_vmx_capability_t field,
-	uint64_t *value) __HV_10_10;
+    uint64_t *value) __HV_10_10;
 
 /*!
  * @typedef    hv_vmx_msr_info_t
  * @abstract   Enum type of MSR information fields
  */
 enum {
-	HV_VMX_INFO_MSR_IA32_ARCH_CAPABILITIES = 0,
-	HV_VMX_INFO_MSR_IA32_PERF_CAPABILITIES = 1,
-	HV_VMX_VALID_MSR_IA32_PERFEVNTSEL = 2,
-	HV_VMX_VALID_MSR_IA32_FIXED_CTR_CTRL = 3,
-	HV_VMX_VALID_MSR_IA32_PERF_GLOBAL_CTRL = 4,
-	HV_VMX_VALID_MSR_IA32_PERF_GLOBAL_STATUS = 5,
-	HV_VMX_VALID_MSR_IA32_DEBUGCTL = 6,
-	HV_VMX_VALID_MSR_IA32_SPEC_CTRL = 7,
-	HV_VMX_NEED_MSR_IA32_SPEC_CTRL = 8,
+    HV_VMX_INFO_MSR_IA32_ARCH_CAPABILITIES = 0,
+    HV_VMX_INFO_MSR_IA32_PERF_CAPABILITIES = 1,
+    HV_VMX_VALID_MSR_IA32_PERFEVNTSEL = 2,
+    HV_VMX_VALID_MSR_IA32_FIXED_CTR_CTRL = 3,
+    HV_VMX_VALID_MSR_IA32_PERF_GLOBAL_CTRL = 4,
+    HV_VMX_VALID_MSR_IA32_PERF_GLOBAL_STATUS = 5,
+    HV_VMX_VALID_MSR_IA32_DEBUGCTL = 6,
+    HV_VMX_VALID_MSR_IA32_SPEC_CTRL = 7,
+    HV_VMX_NEED_MSR_IA32_SPEC_CTRL = 8,
 };
 
 typedef uint64_t hv_vmx_msr_info_t;
@@ -232,7 +231,7 @@ extern hv_return_t hv_vmx_get_msr_info(hv_vmx_msr_info_t field, uint64_t *value)
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vmx_vcpu_set_apic_address(hv_vcpuid_t vcpu,
-	hv_gpaddr_t gpa) __HV_10_10;
+    hv_gpaddr_t gpa) __HV_10_10;
 
 /*!
  * @function   hv_vmx_vcpu_set_apic_address_space
@@ -246,7 +245,7 @@ extern hv_return_t hv_vmx_vcpu_set_apic_address(hv_vcpuid_t vcpu,
  *             Must be called by the owning thread
  */
 extern hv_return_t hv_vmx_vcpu_set_apic_address_space(hv_vcpuid_t vcpu,
-	hv_vm_space_t asid, hv_gpaddr_t gpa) __HV_12_0;
+    hv_vm_space_t asid, hv_gpaddr_t gpa) __HV_12_0;
 
 
 __END_DECLS

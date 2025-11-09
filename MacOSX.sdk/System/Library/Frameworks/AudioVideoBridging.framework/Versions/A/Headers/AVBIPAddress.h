@@ -3,7 +3,7 @@
 //  AudioVideoBridging
 //
 //  Created by Ashley Butterworth on 7/16/20.
-//  Copyright © 2020-2022 Apple Inc. All rights reserved.
+//  Copyright © 2020-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -25,7 +25,7 @@ API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos)
  @param		ipv6Address A pointer to 16 octets of memory containing the IPv6 address.
  @result	The initialized receiver.
  */
-- (instancetype)initWithIPv6Address:(uint8_t *)ipv6Address;
+- (instancetype)initWithIPv6Address:(const uint8_t *)ipv6Address;
 
 /*!
  @method	initWithIPv6AddressData:
@@ -49,7 +49,7 @@ API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos)
  @param		sockAddr A pointer to a sock_addr containing either an IPv4 or IPv6 address.
  @result	The initialized receiver.
  */
-- (instancetype)initWithSockAddr:(struct sockaddr *)sockAddr;
+- (instancetype)initWithSockAddr:(const struct sockaddr *)sockAddr;
 
 
 /*!
@@ -69,6 +69,12 @@ API_AVAILABLE(macos(12)) API_UNAVAILABLE(ios, tvos)
  @abstract	An unsigned32 bit integer containg the IPv4 representaion in host byte order. This value is only valid when representsIPv4Address returns YES.
  */
 @property (assign) uint32_t ipv4Address;
+
+/*!
+ @property	stringRepresentation
+ @abstract	A strign representation of the IP address in the appropriate representation for IPv4 or IPv6.
+ */
+@property (copy) NSString *stringRepresentation API_AVAILABLE(macos(14)) API_UNAVAILABLE(ios, tvos);
 
 @end
 

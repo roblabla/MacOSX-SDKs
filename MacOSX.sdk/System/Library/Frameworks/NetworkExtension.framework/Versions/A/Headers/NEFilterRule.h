@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NEFilterRule
  * @discussion The NEFilterRule class declares the programmatic interface of an object that defines a rule for matching network traffic and the action to take when the rule matches.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NEFilterRule : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -26,19 +26,19 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  * @param networkRule A NENetworkRule object that defines the network traffic characteristics that this rule matches.
  * @param action The action to take when this rule matches.
  */
-- (instancetype)initWithNetworkRule:(NENetworkRule *)networkRule action:(NEFilterAction)action API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (instancetype)initWithNetworkRule:(NENetworkRule *)networkRule action:(NEFilterAction)action API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property matchNetworkRule
  * @discussion The NENetworkRule that defines the network traffic characteristics that this rule matches.
  */
-@property (readonly, copy) NENetworkRule *networkRule API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly, copy) NENetworkRule *networkRule API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property action
  * @discussion The action to take when this rule matches network traffic.
  */
-@property (readonly) NEFilterAction action API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NEFilterAction action API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

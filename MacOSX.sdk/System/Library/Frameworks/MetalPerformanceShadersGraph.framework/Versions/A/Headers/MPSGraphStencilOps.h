@@ -2,7 +2,7 @@
 //  MPSGraphStencilOps.h
 //  MetalPerformanceShadersGraph
 //
-//  Created by Riya Savla on 12/16/20.
+//  Created on 12/16/20.
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
@@ -13,36 +13,69 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/// This class defines parameters for a stencil operation.
+///
+/// Use this descriptor with the following ``MPSGraph`` methods:
+/// - ``MPSGraph/stencilWithSourceTensor:weightsTensor:descriptor:name:``.
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
-@interface MPSGraphStencilOpDescriptor : NSObject<NSCopying>
+@interface MPSGraphStencilOpDescriptor : MPSGraphObject<NSCopying>
 
+/// The reduction mode to use within the stecil window. Default value: `MPSGraphReductionModeSum`.
 @property (readwrite, nonatomic) MPSGraphReductionMode reductionMode;
+
+/// An array of length four that determines from which offset to start reading the `input` tensor.
+///
+/// Only used when `paddingStyle` is `MPSGraphPaddingStyleExplicitOffset`.
+/// For example zero offset means that the first stencil window will align its top-left corner (in 4 dimensions) to the top-left corner of the input tensor.
+/// Default value: `@[ @0, @0, @0, @0 ]`
 @property (readwrite, nonatomic, copy) MPSShape * offsets;
+
+/// The property that defines strides for spatial dimensions.
+///
+/// Must be four numbers, one for each spatial dimension, fastest running index last.
+/// Default value: `@[ @1, @1, @1, @1 ]`
 @property (readwrite, nonatomic, copy) MPSShape * strides;
+
+/// The property that defines dilation rates for spatial dimensions.
+///
+/// Must be four numbers, one for each spatial dimension, fastest running index last.
+/// Default value: `@[ @1, @1, @1, @1 ]`
 @property (readwrite, nonatomic, copy) MPSShape * dilationRates;
+
+/// The property that defines padding values for spatial dimensions.
+///
+/// Must be eight numbers, two for each spatial dimension.
+/// For example `paddingValues[0]` defines the explicit padding
+/// amount before the first spatial dimension (slowest running index of spatial dimensions),
+/// `paddingValues[1]` defines the padding amount after the first spatial dimension etc.
+/// Used only when `paddingStyle = MPSGraphPaddingStyleExplicit`.
+/// Default value: `@[ @0, @0, @0, @0, @0, @0, @0, @0 ]`
 @property (readwrite, nonatomic, copy) MPSShape * explicitPadding;
+
+/// The property that determines which values to use for padding the input tensor.
+/// Default value: `MPSGraphPaddingModeZero`.
 @property (readwrite, nonatomic) MPSGraphPaddingMode boundaryMode;
+
+/// The property that defines what kind of padding to apply to the stencil operation.
+/// Default value: `MPSGraphPaddingStyleExplicit`.
 @property (readwrite, nonatomic) MPSGraphPaddingStyle paddingStyle;
+
+/// The padding value for `boundaryMode = MPSGraphPaddingModeConstant`.
+/// Default value: 0.
 @property (readwrite, nonatomic) float paddingConstant;
 
-/*!
- *  @abstract   stencil operation descriptor
- *
- *  @param      reductionMode               Reduction operation used to combine the source with weights. Defaults to Sum.
- *  @param      offsets                             Array of length 4 that determines where to start reading the `input` from.
- *                                  Only used when paddingStyle is MPSGraphPaddingStylExplicitOffset. Defaults to 0.
- *  @param      strides                             Array of length 4 that determines strides for the window of the weights Tensor. Defaults to 1.
- *  @param      dilationRates                Array of length 4 that determines dilation rates for the weights Tensor. Defaults to 1.
- *  @param      explicitPadding           Array of length 8 that determines paddings for the input Tensor's last 4 dimensions.
- *                                  explicitPadding[2*i] and explicitPadding[2*i + 1] for dimension i of the input.
- *                                  Only used when paddingSTyle is MPSGraphPaddingStyleExplicit or ExplicitOffset.
- *  @param      boundaryMode                  Determines what values to pad the input Tensor with. Defaults to MPSGraphPaddingModeZero.
- *  @param      paddingStyle                  Determines how many values to pad the inpur Tensor with.
- *  @param      paddingConstant           Specifies the value to pad the inputTensor with when using boundaryMode = constant. Defaults to 0.
- *
- *  @return     A valid MPSGraphStencilOpDescriptor object
- */
-
+/// Creates a stencil operation descriptor with given values.
+///
+/// - Parameters:
+///   - reductionMode: See `reductionMode` property.
+///   - offsets: See `offsets` property.
+///   - strides: See `strides` property.
+///   - dilationRates: See `dilationRates` property.
+///   - explicitPadding: See `explicitPadding` property.
+///   - boundaryMode: See `boundaryMode` property.
+///   - paddingStyle: See `paddingStyle` property.
+///   - paddingConstant: See `paddingConstant` property.
+/// - Returns: A valid MPSGraphStencilOpDescriptor object
 +(nullable instancetype) descriptorWithReductionMode:(MPSGraphReductionMode) reductionMode
                                              offsets:(MPSShape *) offsets
                                              strides:(MPSShape *) strides
@@ -52,44 +85,27 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
                                         paddingStyle:(MPSGraphPaddingStyle) paddingStyle
                                      paddingConstant:(float) paddingConstant;
 
-/*!
- *  @abstract   stencil operation descriptor
- *  @discussion Stencil operation descriptor for paddingStyle MPSGraphPaddingStyleExplicitOffset.
- *              Default values for everything else.
- *
- *  @param      offsets                             Array of length 4 that determines where to start reading the `input` from.
- *  @param      explicitPadding           Array of length 8 that determines paddings for the input Tensor's last 4 dimensions.
- *                                  explicitPadding[2*i] and explicitPadding[2*i + 1] for dimension i of the input.
- *
- *  @return     A valid MPSGraphStencilOpDescriptor object
- */
-
+/// Creates a stencil operation descriptor with default values.
+///
+/// - Parameters:
+///   - offsets: See `offsets` property.
+///   - explicitPadding: See `explicitPadding` property.
+/// - Returns: A valid MPSGraphStencilOpDescriptor object
 +(nullable instancetype) descriptorWithOffsets:(MPSShape *) offsets
                                explicitPadding:(MPSShape *) explicitPadding;
 
-/*!
- *  @abstract   stencil operation descriptor
- *  @discussion Stencil operation descriptor for paddingStyle MPSGraphPaddingStyleExplicit
- *              Default values for everything else.
- *
- *  @param      explicitPadding           Array of length 8 that determines paddings for the input Tensor's last 4 dimensions.
- *                                  explicitPadding[2*i] and explicitPadding[2*i + 1] for dimension i of the input.
- *
- *  @return     A valid MPSGraphStencilOpDescriptor object
- */
-
+/// Creates a stencil operation descriptor with default values.
+///
+/// - Parameters:
+///   - explicitPadding: See `explicitPadding` property.
+/// - Returns: A valid MPSGraphStencilOpDescriptor object
 +(nullable instancetype) descriptorWithExplicitPadding:(MPSShape *) explicitPadding;
 
-/*!
- *  @abstract   stencil operation descriptor
- *  @discussion Stencil operation descriptor with a user specified paddingStyle.
- *              Default values for everything else.
- *
- *  @param      paddingStyle                  Determines how many values to pad the inpur Tensor with.
- *
- *  @return     A valid MPSGraphStencilOpDescriptor object
- */
-
+/// Creates a stencil operation descriptor with default values.
+///
+/// - Parameters:
+///   - paddingStyle: See `paddingStyle` property.
+/// - Returns: A valid MPSGraphStencilOpDescriptor object
 +(nullable instancetype) descriptorWithPaddingStyle:(MPSGraphPaddingStyle) paddingStyle;
 
 @end
@@ -97,23 +113,20 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 @interface MPSGraph(MPSGraphStencilOps)
 
-/*!
- *  @abstract   stencil operation
- *  @discussion Performs a weighted reduction operation (`reductionMode`) on the last 4 dimensions of the `source`
- *  over the window determined by `weights`, acc. to the given `strides` and `dilationRates` and `paddingStyle`.
- *  `boundaryMode` determines what values to pad the `input` with. `offsets` are used to determine where
- *  to start reading the `input` from. `explicitPadding` can also be provided when using relevant paddingStyles.
- *
- *  y[i] = reduction { x[ i + j ] * w[j] }
- *
- *  @param      source                Tensor containing source data. Must be of rank 4 or greater.
- *  @param      weights              4-D Tensor containing the weights data.
- *  @param      descriptor       Descriptor object that specifies strides, dilationRates etc.
- *  @param      name                     The name for the operation.
- *
- *  @return     A valid MPSGraphTensor object
- */
-
+/// Creates a stencil operation and returns the result tensor.
+///
+/// Performs a weighted reduction operation (See ``MPSGraphStencilOpDescriptor/reductionMode``) on the last 4 dimensions of the `source`
+/// over the window determined by `weights`, according to the value defined in `descriptor`.
+///  ```md
+///     y[i] = reduction{j \in w} ( x[ i + j ]w[j] )
+/// ```
+///
+/// - Parameters:
+///   - source: The tensor containing the source data. Must be of rank 4 or greater.
+///   - weights: A 4-D tensor containing the weights data.
+///   - descriptor: The descriptor object that specifies the parameters for the stencil operation.
+///   - name: The name for the operation.
+/// - Returns: A valid MPSGraphTensor object.
 -(MPSGraphTensor *) stencilWithSourceTensor:(MPSGraphTensor *) source
                               weightsTensor:(MPSGraphTensor *) weights
                                  descriptor:(MPSGraphStencilOpDescriptor *) descriptor

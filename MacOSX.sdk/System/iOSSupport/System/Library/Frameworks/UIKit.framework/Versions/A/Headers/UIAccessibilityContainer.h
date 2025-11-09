@@ -57,6 +57,13 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 // default == UIAccessibilityContainerTypeNone
 @property (nonatomic) UIAccessibilityContainerType accessibilityContainerType API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR;
 
+// An array of container elements similar to accessibilityElements but specific for automation.
+// This can be used to modify the children in the accessibility tree for automation.
+// If not set, automationElements will default first to accessibilityElements if it’s not an accessibility element.
+// If there are no accessibilityElements and the view is an accessibility element, it will return the list of subviews that have accessibilityIdentifier.
+// Otherwise, the default will be an empty array.
+@property (nullable, nonatomic, strong) NSArray *automationElements API_AVAILABLE(ios(17.0), tvos(17.0)) NS_SWIFT_UI_ACTOR;
+
 @end
 
 /* 

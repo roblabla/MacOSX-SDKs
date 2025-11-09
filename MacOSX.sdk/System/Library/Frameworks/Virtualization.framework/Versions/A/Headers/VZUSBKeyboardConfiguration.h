@@ -2,7 +2,7 @@
 //  VZUSBKeyboardConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2021 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZKeyboardConfiguration.h>

@@ -176,8 +176,12 @@ CB_EXTERN_CLASS @interface CBMutableCharacteristic : CBCharacteristic
  *  @discussion			Returns an initialized characteristic.
  *
  */
-- (instancetype)initWithType:(CBUUID *)UUID properties:(CBCharacteristicProperties)properties value:(nullable NSData *)value permissions:(CBAttributePermissions)permissions NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+- (instancetype)initWithType:(CBUUID *)UUID properties:(CBCharacteristicProperties)properties value:(nullable NSData *)value permissions:(CBAttributePermissions)permissions API_AVAILABLE(ios(6.0), macos(10.9)) API_UNAVAILABLE(watchos, tvos) NS_DESIGNATED_INITIALIZER
+#if TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 ;
+
 @end
 
 NS_ASSUME_NONNULL_END

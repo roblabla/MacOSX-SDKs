@@ -28,14 +28,29 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)new NS_UNAVAILABLE;
 
 /**
- * The vendor ID for the device from the Device Attestation Certificate. May be nil only if attestation was unsucessful.
+ * The vendor ID from the Device Attestation Certificate. May be nil only if attestation was unsuccessful.
  */
 @property (nonatomic, readonly, nullable) NSNumber * vendorID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
- * The product ID for the device from the Device Attestation Certificate. May be nil only if attestation was unsucessful.
+ * The product ID from the Device Attestation Certificate. May be nil only if attestation was unsuccessful.
  */
 @property (nonatomic, readonly, nullable) NSNumber * productID API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+/**
+ * The vendor ID value from the device's Basic Information cluster that was used
+ * for device attestation.  If attestation succeeds, this must match the vendor
+ * ID from the certification declaration.
+ */
+@property (nonatomic, readonly) NSNumber * basicInformationVendorID API_AVAILABLE(ios(16.6), macos(13.5), watchos(9.6), tvos(16.6));
+
+/**
+ * The product ID value from the device's Basic Information cluster that was
+ * used for device attestation.  If attestation succeeds, this must match one of
+ * the product IDs from the certification declaration.
+ */
+@property (nonatomic, readonly) NSNumber * basicInformationProductID API_AVAILABLE(ios(16.6), macos(13.5), watchos(9.6), tvos(16.6))
+    ;
 
 @property (nonatomic, readonly) MTRCertificateDERBytes dacCertificate;
 @property (nonatomic, readonly) MTRCertificateDERBytes dacPAICertificate;
@@ -95,13 +110,13 @@ NS_ASSUME_NONNULL_BEGIN
        completedForDevice:(void *)device
     attestationDeviceInfo:(MTRDeviceAttestationDeviceInfo *)attestationDeviceInfo
                     error:(NSError * _Nullable)error
-    API_DEPRECATED("Please implement deviceAttestationCompletedForController:opaqueDeviceHandle:attestationDeviceInfo:error:",
+    MTR_DEPRECATED("Please implement deviceAttestationCompletedForController:opaqueDeviceHandle:attestationDeviceInfo:error:",
         ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (void)deviceAttestation:(MTRDeviceController *)controller
           failedForDevice:(void *)device
                     error:(NSError * _Nonnull)error
-    API_DEPRECATED("Please implement deviceAttestationFailedForController:opaqueDeviceHandle:error:", ios(16.1, 16.4),
+    MTR_DEPRECATED("Please implement deviceAttestationFailedForController:opaqueDeviceHandle:error:", ios(16.1, 16.4),
         macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 @end

@@ -2,7 +2,7 @@
 //  VZError.h
 //  Virtualization
 //
-//  Copyright © 2019-2022 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -37,6 +37,10 @@ VZ_EXPORT NSErrorDomain const VZErrorDomain API_AVAILABLE(macos(11.0));
     The operation was cancelled.
  @constant VZErrorNotSupported
     The operation is not supported.
+ @constant VZErrorSave
+    The save operation failed.
+ @constant VZErrorRestore
+    The restore operation failed.
  @constant VZErrorRestoreImageCatalogLoadFailed
     The restore image catalog failed to load.
  @constant VZErrorInvalidRestoreImageCatalog
@@ -51,6 +55,10 @@ VZ_EXPORT NSErrorDomain const VZErrorDomain API_AVAILABLE(macos(11.0));
     A software update is required to complete the installation.
  @constant VZErrorInstallationFailed
     An error occurred during installation.
+ @constant VZErrorNetworkBlockDeviceNegotiationFailed
+    The connection or the negotiation with the NBD server failed.
+ @constant VZErrorNetworkBlockDeviceDisconnected
+     The NBD client is disconnected from the server.
  */
 typedef NS_ERROR_ENUM(VZErrorDomain, VZErrorCode) {
     VZErrorInternal NS_SWIFT_NAME(internalError) = 1,
@@ -63,6 +71,8 @@ typedef NS_ERROR_ENUM(VZErrorDomain, VZErrorCode) {
     VZErrorOutOfDiskSpace API_AVAILABLE(macos(13.0)) = 8,
     VZErrorOperationCancelled API_AVAILABLE(macos(13.0)) = 9,
     VZErrorNotSupported API_AVAILABLE(macos(13.0)) = 10,
+    VZErrorSave API_AVAILABLE(macos(14.0)) = 11,
+    VZErrorRestore API_AVAILABLE(macos(14.0)) = 12,
 
     /* macOS installation errors. */
     VZErrorRestoreImageCatalogLoadFailed API_AVAILABLE(macos(13.0)) = 10001,
@@ -72,4 +82,8 @@ typedef NS_ERROR_ENUM(VZErrorDomain, VZErrorCode) {
     VZErrorInvalidRestoreImage API_AVAILABLE(macos(13.0)) = 10005,
     VZErrorInstallationRequiresUpdate API_AVAILABLE(macos(13.0)) = 10006,
     VZErrorInstallationFailed API_AVAILABLE(macos(13.0)) = 10007,
-};
+
+    /* Network Block Device errors. */
+    VZErrorNetworkBlockDeviceNegotiationFailed API_AVAILABLE(macos(14.0)) = 20001,
+    VZErrorNetworkBlockDeviceDisconnected API_AVAILABLE(macos(14.0)) = 20002,
+} API_AVAILABLE(macos(11.0));

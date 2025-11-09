@@ -1,4 +1,4 @@
-framework module QuickLook [extern_c] {
+framework module QuickLook {
   umbrella header "QuickLook.h"
   export *
   module * { export * }

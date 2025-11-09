@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol GCPhysicalInputElement;
+@protocol GCPhysicalInputSource;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,7 +26,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
 /**
  Set this block if you want to be notified when the touched state changes.
  */
-@property (copy, nullable) void (^touchedDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCTouchedStateInput> input, BOOL touched);
+@property (atomic, copy, nullable) void (^touchedDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCTouchedStateInput> input, BOOL touched);
 
 /**
  Some buttons feature capacitive touch capabilities, where the user can touch
@@ -55,6 +56,12 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  the device before the event was transmitted to the host.
  */
 @property (readonly) NSTimeInterval lastTouchedStateLatency;
+
+/**
+ An object describing the physical action(s) the user performs to manipulate
+ this input.
+ */
+@property (copy, readonly) NSSet<id<GCPhysicalInputSource>> *sources API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 @end
 

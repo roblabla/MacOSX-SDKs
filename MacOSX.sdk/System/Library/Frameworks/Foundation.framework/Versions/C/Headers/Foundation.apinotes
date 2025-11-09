@@ -1846,6 +1846,8 @@ Enumerators:
   SwiftName: completeFileProtectionUnlessOpen
 - Name: NSDataWritingFileProtectionCompleteUntilFirstUserAuthentication
   SwiftName: completeFileProtectionUntilFirstUserAuthentication
+- Name: NSDataWritingFileProtectionCompleteWhenUserInactive
+  SwiftName: completeFileProtectionWhenUserInactive
 - Name: NSDataWritingFileProtectionMask
   SwiftName: fileProtectionMask
 - Name: NSDataBase64Encoding64CharacterLineLength

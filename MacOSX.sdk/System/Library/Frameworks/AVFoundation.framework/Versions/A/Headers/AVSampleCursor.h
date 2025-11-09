@@ -25,11 +25,12 @@ NS_ASSUME_NONNULL_BEGIN
 	@discussion
 	  AVSampleCursors can be compared by position within the sample sequence.
 	  AVSampleCursors can be used synchronously to perform I/O in order to load media data of one or more media samples into memory.
-	  An AVSampleCursor can provide information about the media sample at its current position, such as its duration, its presentation and decode timestamps, whether it can be decoded independently of other media samples, its offset and length in its storage container, and whether the track signals that the sample is intended to be loaded with other contiguous media samples in a "chunk". 
+	  An AVSampleCursor can provide information about the media sample at its current position, such as its duration, its presentation and decode timestamps, whether it can be decoded independently of other media samples, its offset and length in its storage container, and whether the track signals that the sample is intended to be loaded with other contiguous media samples in a "chunk".
+	  Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
-
 @class AVSampleCursorInternal;
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
 @interface AVSampleCursor : NSObject <NSCopying> {
 @private

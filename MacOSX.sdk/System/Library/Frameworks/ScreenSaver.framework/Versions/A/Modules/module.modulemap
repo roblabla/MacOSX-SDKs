@@ -1,4 +1,4 @@
-framework module ScreenSaver [extern_c] {
+framework module ScreenSaver [system] {
 umbrella header "ScreenSaver.h"
 export *
 module * { export * }

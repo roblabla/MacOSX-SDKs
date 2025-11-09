@@ -1,6 +1,6 @@
-/* iig(DriverKit-256.100.8) generated from OSObject.iig */
+/* iig(DriverKit-324.0.10) generated from OSObject.iig */
 
-/* OSObject.iig:1-147 */
+/* OSObject.iig:1-258 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -61,6 +61,7 @@
 //#define IIG_IMPLEMENTS(i)		void __implements(i *);
 #define IIG_QUEUENAME(name)		__attribute__((annotate("queuename=" # name)))
 #define IIG_SERIALIZABLE		__attribute__((annotate("serializable")))
+#define IIG_CONCRETE			__attribute__((annotate("concrete")))
 
 #if __IIG
 #define KERNEL					IIG_KERNEL
@@ -114,6 +115,20 @@ typedef OSObject OSContainer;
 class IIG_SERIALIZABLE OSContainer;
 #endif  /* !__IIG */
 
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+/*
+ * DRIVERKIT_ macros below can be used to describe the ownership semantics
+ * of functions handling subclasses of OSObject.
+ * The attributes propagate with inheritance, but can be overriden.
+ * New versions of the Clang Static Analyzer can use this knowledge to
+ * check the code for leaks or uses-after-free.
+ */
+
+
+/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
+
+
 class IIG_SERIALIZABLE OSData;
 class IIG_SERIALIZABLE OSNumber;
 class IIG_SERIALIZABLE OSString;
@@ -128,11 +143,11 @@ class IODispatchQueue;
 typedef char IODispatchQueueName[256];
 
 #if __IIG
-/* OSObject.iig:162-164 */
+/* OSObject.iig:273-275 */
 #endif /* __IIG */
 
 
-/* source class OSObject OSObject.iig:165-195 */
+/* source class OSObject OSObject.iig:276-306 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -170,7 +185,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class OSObject OSObject.iig:165-195 */
+/* generated class OSObject OSObject.iig:276-306 */
 
 #define OSObject_SetDispatchQueue_ID            0xe608ae8273dae1bcULL
 #define OSObject_CopyDispatchQueue_ID            0x95115b48fd29f7c9ULL
@@ -195,13 +210,13 @@ public:\
 \
     kern_return_t\
     SetDispatchQueue(\
-        const IODispatchQueueName name,\
+        const char * name,\
         IODispatchQueue * queue,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
     CopyDispatchQueue(\
-        const IODispatchQueueName name,\
+        const char * name,\
         IODispatchQueue ** queue,\
         OSDispatchMethod supermethod = NULL);\
 \
@@ -261,7 +276,7 @@ public:\
 
 #endif /* !__DOCUMENTATION__ */
 
-/* OSObject.iig:197- */
+/* OSObject.iig:308- */
 
 #define DEFN(classname, name)                                       \
 name ## _Impl(classname ## _ ## name ## _Args)

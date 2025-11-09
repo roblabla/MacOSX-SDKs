@@ -35,13 +35,13 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, NEFilterDataAttribute) {
 	/*! @const NEFilterDataAttributeHasIPHeader IP header is included in data */
 	NEFilterDataAttributeHasIPHeader = 0x00000001
-} API_AVAILABLE(macos(10.15.5)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.15.5)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @interface NEFilterDataProvider
  * @discussion The NEFilterDataProvider class declares the programmatic interface for an object that evaluates network data flows based on a set of locally-available rules and makes decisions about whether to block or allow the flows.
  */
-API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterDataProvider : NEFilterProvider
 
 /*!
@@ -50,7 +50,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param flow An NEFilterFlow object containing details about the new flow.
  * @return An NEFilterNewFlowVerdict object containing the verdict for the new flow.
  */
-- (NEFilterNewFlowVerdict *)handleNewFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (NEFilterNewFlowVerdict *)handleNewFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleInboundDataFromFlow:readBytesStartOffset:readBytes:
@@ -60,7 +60,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param readBytes The data that was read.  For non-UDP/TCP flows, since data may optionally include the IP header, readBytes includes a 4-bytes NEFilterDataAttribute field preceding the user data.  Handler must examine the NEFilterDataAttribute field and handle the data accordingly.
  * @return An NEFilterFlowDataVerdict containing the verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleInboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (NEFilterDataVerdict *)handleInboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleOutboundDataFromFlow:readBytesStartOffset:readBytes:
@@ -70,7 +70,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param readBytes The data that was read.  For non-UDP/TCP flows, since data may optionally include the IP header, readBytes includes a 4-bytes NEFilterDataAttribute field preceding the user data.  Handler must examine the NEFilterDataAttribute field and handle the data accordingly.
  * @return An NEFilterFlowDataVerdict containing the verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleOutboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (NEFilterDataVerdict *)handleOutboundDataFromFlow:(NEFilterFlow *)flow readBytesStartOffset:(NSUInteger)offset readBytes:(NSData *)readBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleInboundDataCompleteForFlow:
@@ -78,7 +78,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param flow The flow
  * @return The final NEFilterFlowDataVerdict verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleInboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (NEFilterDataVerdict *)handleInboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleOutboundDataCompleteForFlow:
@@ -86,7 +86,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param flow The flow
  * @return The final NEFilterFlowDataVerdict verdict for the flow.
  */
-- (NEFilterDataVerdict *)handleOutboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (NEFilterDataVerdict *)handleOutboundDataCompleteForFlow:(NEFilterFlow *)flow API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleRemediationForFlow:
@@ -94,13 +94,13 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param flow The flow
  * @return The final NEFilterRemediationVerdict verdict for the flow.
  */
-- (NEFilterRemediationVerdict *)handleRemediationForFlow:(NEFilterFlow *)flow API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (NEFilterRemediationVerdict *)handleRemediationForFlow:(NEFilterFlow *)flow API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method handleRulesChanged
  * @discussion This function is called by the framework when -[NEFilterControlProvider notifyRulesChanged] is called. Subclasses should override this method to reload new rules from disk.
  */
-- (void)handleRulesChanged API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (void)handleRulesChanged API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method applyFilterRules:defaultAction:withCompletionHandler:
@@ -109,7 +109,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *     empty list of rules and a default action of NEFilterActionFilterData.
  * @param completionHandler A block that will be executed when the settings have been applied to the system. If an error occurs then the error parameter will be non-nil.
  */
-- (void)applySettings:(nullable NEFilterSettings *)settings completionHandler:(void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (void)applySettings:(nullable NEFilterSettings *)settings completionHandler:(void (^)(NSError * _Nullable error))completionHandler API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @method resumeFlow:withVerdict:
@@ -120,7 +120,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *    paused the flow. This must be either a NEFilterDataVerdict or a NEFilterNewFlowVerdict. It is invalid to resume
  *    a flow that is not paused.
  */
-- (void)resumeFlow:(NEFilterFlow *)flow withVerdict:(NEFilterVerdict *)verdict API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (void)resumeFlow:(NEFilterFlow *)flow withVerdict:(NEFilterVerdict *)verdict API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @method updateFlow:withVerdict:forDirection:
@@ -129,7 +129,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param verdict The NEFilterDataVerdict. Must be a +[NEFilterDataVerdict allowVerdict], a +[NEFilterDataVerdict dropVerdict], or a +[NEFilterDataVerdict dataVerdictWithPassBytes:peekBytes:].
  * @param direction The direction to which the verdict applies. Pass NETrafficDirectionAny to update the verdict for both the inbound and outbound directions. This parameter is ignored if the verdict is +[NEFilterDataVerdict dropVerdict].
  */
-- (void)updateFlow:(NEFilterSocketFlow *)flow usingVerdict:(NEFilterDataVerdict *)verdict forDirection:(NETrafficDirection)direction API_AVAILABLE(macos(10.15.4)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (void)updateFlow:(NEFilterSocketFlow *)flow usingVerdict:(NEFilterDataVerdict *)verdict forDirection:(NETrafficDirection)direction API_AVAILABLE(macos(10.15.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -139,7 +139,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *
  * NEFilterDataVerdict is part of NetworkExtension.framework
  */
-API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEFilterDataVerdict : NEFilterVerdict <NSSecureCoding,NSCopying>
 
 /*!
@@ -147,21 +147,21 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @discussion The frequency at which the data provider's -[NEFilterProvider handleReport:] method is called with a NEFilterReport instance with an event of NEFilterReportEventFlowStatistics.
  *     The default value is NEFilterReportFrequencyNone, so by default no statistics are reported.
  */
-@property NEFilterReportFrequency statisticsReportFrequency API_AVAILABLE(macos(10.15.4)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property NEFilterReportFrequency statisticsReportFrequency API_AVAILABLE(macos(10.15.4)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @method allowVerdict
  * @discussion This class method returns a verdict indicating that the flow should be allowed.
  * @return The NEFilterDataVerdict object.
  */
-+ (NEFilterDataVerdict *)allowVerdict API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
++ (NEFilterDataVerdict *)allowVerdict API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method dropVerdict
  * @discussion This class method returns a verdict indicating that the flow should be dropped.
  * @return The NEFilterDataVerdict object.
  */
-+ (NEFilterDataVerdict *)dropVerdict API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
++ (NEFilterDataVerdict *)dropVerdict API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method remediateVerdictWithRemediationURLMapKey:remediationButtonTextMapKey:
@@ -170,7 +170,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param remediationButtonTextMapKey Remediation button map key used by the data plugin to get the remediation button text. Passing nil will set the button text to "Request Access"
  * @return The NEFilterDataVerdict object.
  */
-+ (NEFilterDataVerdict *)remediateVerdictWithRemediationURLMapKey:(nullable NSString *)remediationURLMapKey remediationButtonTextMapKey:(nullable NSString *)remediationButtonTextMapKey API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
++ (NEFilterDataVerdict *)remediateVerdictWithRemediationURLMapKey:(nullable NSString *)remediationURLMapKey remediationButtonTextMapKey:(nullable NSString *)remediationButtonTextMapKey API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method dataVerdictWithPassBytes:peekBytes:
@@ -179,14 +179,14 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param peekBytes The number of bytes after the end of the bytes passed that the filter wants to see in the next call to -[NEFilterDataProvider handleOutboundDataFromFlow:readBytesStartOffset:readBytes:] or -[NEFilterDataProvider handleInboundDataFromFlow:readBytesStartOffset:readBytes:].
  * @return The data flow verdict.
  */
-+ (NEFilterDataVerdict *)dataVerdictWithPassBytes:(NSUInteger)passBytes peekBytes:(NSUInteger)peekBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
++ (NEFilterDataVerdict *)dataVerdictWithPassBytes:(NSUInteger)passBytes peekBytes:(NSUInteger)peekBytes API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method needRulesVerdict
  * @discussion This class method returns a verdict indicating that control provider needs to be asked how to handle the data flow. The control provider can either drop or allow the flow, or update the rules and ask the data provider to decide on the data flow again.
  * @return The NEFilterDataVerdict object.
  */
-+ (NEFilterDataVerdict *)needRulesVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
++ (NEFilterDataVerdict *)needRulesVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method pauseVerdict
@@ -195,7 +195,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *     being paused. It is invalid to pause a flow that is already paused.
  * @return The NEFilterDataVerdict object.
  */
-+ (NEFilterDataVerdict *)pauseVerdict API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
++ (NEFilterDataVerdict *)pauseVerdict API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 
@@ -205,7 +205,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *
  * NEFilterRemediationVerdict is part of NetworkExtension.framework
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEFilterRemediationVerdict : NEFilterVerdict <NSSecureCoding,NSCopying>
 
 /*!
@@ -213,21 +213,21 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  * @discussion This class method returns a verdict indicating that the flow should be allowed.
  * @return The NEFilterRemediationVerdict object.
  */
-+ (NEFilterRemediationVerdict *) allowVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
++ (NEFilterRemediationVerdict *) allowVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method dropVerdict
  * @discussion This class method returns a verdict indicating that the flow should be dropped.
  * @return The NEFilterRemediationVerdict object.
  */
-+ (NEFilterRemediationVerdict *) dropVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
++ (NEFilterRemediationVerdict *) dropVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method needRulesVerdict
  * @discussion This class method returns a verdict indicating that control provider needs to be asked how to handle the remediation. The control provider can either drop or allow the flow, or update the rules and ask the data provider to decide on the data flow again.
  * @return The NEFilterRemediationVerdict object.
  */
-+ (NEFilterRemediationVerdict *) needRulesVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
++ (NEFilterRemediationVerdict *) needRulesVerdict API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 

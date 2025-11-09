@@ -5,9 +5,17 @@ install-name:    '/System/Library/PrivateFrameworks/SiriKitInvocation.framework/
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _RunVoiceShortcutDirectInvocationIdentifier, _SKIDefaultLog, 
-                       _SKIHomeAutomationInvocationIdentifierAsyncResponse, _SKILogSubsystem, 
-                       _SKIMessagesDirectInvocationIdentifierAnnounceMessage, _SKIMessagesDirectInvocationIdentifierNewMessage, 
-                       _SKIMessagesDirectInvocationIdentifierNewMessageToContact, 
+                       _SKIFitnessDirectInvocationIdentifierAnnounceWorkoutReminder, 
+                       _SKIFitnessDirectInvocationIdentifierAnnounceWorkoutVoiceFeedback, 
+                       _SKIFitnessDirectInvocationPayloadKeyAnnouncePlatform, _SKIFitnessDirectInvocationPayloadKeyAppBundleIdOfLastAnnouncement, 
+                       _SKIFitnessDirectInvocationPayloadKeyIsSameTypeAsLastAnnouncement, 
+                       _SKIFitnessDirectInvocationPayloadKeyPredictionIdentifier, 
+                       _SKIFitnessDirectInvocationPayloadKeySynchronousBurstIndex, 
+                       _SKIFitnessDirectInvocationPayloadKeyTimeSinceLastAnnouncement, 
+                       _SKIFitnessDirectInvocationPayloadKeyWorkoutPredictionType, 
+                       _SKIFitnessDirectInvocationPayloadKeyWorkoutType, _SKIHomeAutomationInvocationIdentifierAsyncResponse, 
+                       _SKILogSubsystem, _SKIMessagesDirectInvocationIdentifierAnnounceMessage, 
+                       _SKIMessagesDirectInvocationIdentifierNewMessage, _SKIMessagesDirectInvocationIdentifierNewMessageToContact, 
                        _SKIMessagesDirectInvocationIdentifierNewMessageToConversation, 
                        _SKIMessagesDirectInvocationIdentifierReadFromConversation, 
                        _SKIMessagesDirectInvocationIdentifierReadFromNotification, 
@@ -15,7 +23,7 @@ exports:
                        _SKIMessagesDirectInvocationPayloadKeyContactEmailAddress, 
                        _SKIMessagesDirectInvocationPayloadKeyContactName, _SKIMessagesDirectInvocationPayloadKeyContactPhoneNumber, 
                        _SKIMessagesDirectInvocationPayloadKeyConversationIdentifier, 
-                       _SKIMessagesDirectInvocationPayloadKeyNotificationIdentifier, 
+                       _SKIMessagesDirectInvocationPayloadKeyIsMediaPlaying, _SKIMessagesDirectInvocationPayloadKeyNotificationIdentifier, 
                        _SKIMessagesDirectInvocationPayloadKeySynchronousBurstIndex, 
                        _SKIMessagesGatekeeperAppBundleIdKey, _SKIMessagesInvocationIdentifierGatekeeperFlow, 
                        _SKINotebookDirectInvocationIdentifierAnnounceReminder, _SKINotebookDirectInvocationPayloadKeyAnnouncePlatform, 
@@ -27,6 +35,7 @@ exports:
                        _SKINotificationsDirectInvocationIdentifierAnnounceNotification, 
                        _SKINotificationsDirectInvocationPayloadKeyAnnouncePlatform, 
                        _SKINotificationsDirectInvocationPayloadKeyAppBundleId, _SKINotificationsDirectInvocationPayloadKeyInterruptionLevel, 
+                       _SKINotificationsDirectInvocationPayloadKeyIsMediaPlaying, 
                        _SKINotificationsDirectInvocationPayloadKeyIsSameTypeAsLastAnnouncement, 
                        _SKINotificationsDirectInvocationPayloadKeyNotificationBody, 
                        _SKINotificationsDirectInvocationPayloadKeyNotificationDate, 
@@ -84,8 +93,9 @@ exports:
                        _kMessageContentChangedViaSnippetDirectInvocationIdentifier, 
                        _kMessageSendViaSnippetDirectInvocationContentKey, _kMessageSendViaSnippetDirectInvocationIdentifier ]
     objc-classes:    [ SKIAnnounceNotificationDirectInvocationPayload, SKIDirectInvocation, 
-                       SKIDirectInvocationContext, SKIDirectInvocationPayload, SKIHomeAutomationInvocation, 
-                       SKIMapsInvocation, SKIMediaControlsInvocation, SKIMessagesGatekeeperPayload, 
-                       SKIMessagesInvocation, SKIMusicInvocation, SKINotebookInvocation, 
-                       SKINotificationsInvocation, SKIPhoneInvocation, SKIVoiceShortcutsInvocation ]
+                       SKIDirectInvocationContext, SKIDirectInvocationPayload, SKIFitnessInvocation, 
+                       SKIHomeAutomationInvocation, SKIMapsInvocation, SKIMediaControlsInvocation, 
+                       SKIMessagesGatekeeperPayload, SKIMessagesInvocation, SKIMusicInvocation, 
+                       SKINotebookInvocation, SKINotificationsInvocation, SKIPhoneInvocation, 
+                       SKIVoiceShortcutsInvocation ]
 ...

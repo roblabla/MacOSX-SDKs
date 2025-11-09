@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, CMWaterSubmersionDepthState) {
  * Discussion:
  * 	   Datum representating a new state change of type CMWaterSubmersionState.
  */
-COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
+COREMOTION_EXPORT API_AVAILABLE(watchos(9.0), ios(16.0)) API_UNAVAILABLE(macos, tvos, macCatalyst)
 @interface CMWaterSubmersionEvent : NSObject <NSSecureCoding, NSCopying>
 @property (readonly, nonatomic) NSDate* date;
 @property (readonly, nonatomic) CMWaterSubmersionState state;
@@ -46,7 +46,7 @@ COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
  *     Depth, pressure, and pressureUncertainty are null when not submerged or when the state
  *     is CMWaterSubmersionDepthStateSensorDepthError.
  */
-COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
+COREMOTION_EXPORT API_AVAILABLE(watchos(9.0), ios(16.0)) API_UNAVAILABLE(macos, tvos, macCatalyst)
 @interface CMWaterSubmersionMeasurement : NSObject <NSSecureCoding, NSCopying>
 @property (readonly, nonatomic) NSDate* date;
 @property (readonly, nonatomic, nullable) NSMeasurement<NSUnitLength*>* depth;
@@ -61,7 +61,7 @@ COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
  * Discussion:
  * 	   Datum representing an update comprising of temperature, and temperature uncertainty
  */
-COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
+COREMOTION_EXPORT API_AVAILABLE(watchos(9.0), ios(16.0)) API_UNAVAILABLE(macos, tvos, macCatalyst)
 @interface CMWaterTemperature : NSObject <NSSecureCoding, NSCopying>
 @property (readonly, nonatomic) NSDate* date;
 @property (readonly, nonatomic) NSMeasurement<NSUnitTemperature*>* temperature;

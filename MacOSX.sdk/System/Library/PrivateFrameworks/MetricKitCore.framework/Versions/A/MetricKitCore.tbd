@@ -5,5 +5,9 @@ install-name:    '/System/Library/PrivateFrameworks/MetricKitCore.framework/Vers
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MetricKitCoreVersionNumber, _MetricKitCoreVersionString ]
-    objc-classes:    [ MXCore, MXCorePayloadConstructor, MXSource ]
+    objc-classes:    [ MXBundleUtil, MXCleanUtil, MXClientUtil, MXCore, MXCoreHandler, 
+                       MXCorePayloadConstructor, MXDateUtil, MXDeliveryDataCacher, 
+                       MXDeliveryPathUtil, MXDependencyFactory, MXDiagnosticServices, 
+                       MXMetricServices, MXPayloadValidator, MXSource, MXSourceDataCacher, 
+                       MXSourceHandler, MXSourcePathUtil, MXStorageUtil ]
 ...

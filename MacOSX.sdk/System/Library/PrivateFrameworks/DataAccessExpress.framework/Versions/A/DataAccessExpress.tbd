@@ -138,9 +138,9 @@ exports:
                        _kMessageSearchPriorToDate, _kMessageSearchRebuildResults, 
                        _kMessageSearchTruncationSize, _kSearchRangeLengthKey, _kSearchRangeLocKey, 
                        _kSearchResultsDataKey, _kSearchStringKey, _kSearchTimeLimitKey, 
-                       _kSubCalRefreshTaskErrorDomain, _kSubCalURLRequestErrorDomain, 
-                       _kSubCalValidationTaskErrorDomain, _setDALogLevel, _setDALogOutputLevel, 
-                       _shouldDALogAtLevel ]
+                       _kSubCalICSDataActorErrorDomain, _kSubCalRefreshTaskErrorDomain, 
+                       _kSubCalURLRequestErrorDomain, _kSubCalValidationTaskErrorDomain, 
+                       _setDALogLevel, _setDALogOutputLevel, _shouldDALogAtLevel ]
     objc-classes:    [ CalDAVOfficeHour, DAAccountChangeInfo, DAAccountExternalIdentificationInfo, 
                        DABehaviorOptions, DACPLogDFile, DACPLogShared, DACheckSubscribedCalendarIsJunkContext, 
                        DAContactSearchResultElement, DAContactsSearchQuery, DADAMContainerIDCacheKey, 

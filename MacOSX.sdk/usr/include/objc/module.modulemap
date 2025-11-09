@@ -1,20 +1,13 @@
-module ObjectiveC [system] [extern_c] {
+module ObjectiveC [system] {
   umbrella "."
   export *
-  module * { 
+  module * {
     export *
   }
 
   module NSObject {
     requires objc
     header "NSObject.h"
-    export *
-  }
-
-  module List {
-    // Uses @defs, which does not work in ObjC++ or non-ARC.
-    requires objc, !objc_arc, !cplusplus
-    header "List.h"
     export *
   }
 

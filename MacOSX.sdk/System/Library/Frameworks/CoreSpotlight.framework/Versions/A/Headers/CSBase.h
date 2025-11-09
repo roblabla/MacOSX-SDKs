@@ -2,7 +2,7 @@
 //  CSBase.h
 //  CoreSpotlight
 //
-//  Copyright © 2015 Apple. All rights reserved.
+//  Copyright © 2015 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

@@ -11,8 +11,9 @@
     @discussion Contains the InstallerPane class definition
 */
 
-
 #import <Cocoa/Cocoa.h>
+
+__BEGIN_DECLS
 
 /*!
     @enum InstallerSectionDirection
@@ -224,3 +225,5 @@ typedef struct InstallerPane_Private InstallerPane_Private;
 @property (NS_NONATOMIC_IOSONLY, readonly) BOOL gotoPreviousPane;
 
 @end
+
+__END_DECLS

@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, UIScrollViewKeyboardDismissMode) {
     UIScrollViewKeyboardDismissModeInteractive, // the keyboard follows the dragging touch off screen, and may be pulled upward again to cancel the dismiss
     UIScrollViewKeyboardDismissModeOnDragWithAccessory,       // dismisses both keyboard and accessory in the style of UIScrollViewKeyboardDismissModeOnDrag
     UIScrollViewKeyboardDismissModeInteractiveWithAccessory   // dismisses both keyboard and accessory in the style of UIScrollViewKeyboardDismissModeInteractive
-} API_AVAILABLE(ios(7.0));
+} API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(visionos);
 
 typedef NS_ENUM(NSInteger, UIScrollViewIndexDisplayMode) {
     UIScrollViewIndexDisplayModeAutomatic,    // the index will show or hide automatically as needed
@@ -100,7 +100,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic)         UIEdgeInsets                 verticalScrollIndicatorInsets API_AVAILABLE(ios(11.1), tvos(11.1)); // default is UIEdgeInsetsZero.
 @property(nonatomic)         UIEdgeInsets                 horizontalScrollIndicatorInsets API_AVAILABLE(ios(11.1), tvos(11.1)); // default is UIEdgeInsetsZero.
 @property(nonatomic)         UIEdgeInsets                 scrollIndicatorInsets; // use the setter only, as a convenience for setting both verticalScrollIndicatorInsets and horizontalScrollIndicatorInsets to the same value. if those properties have been set to different values, the return value of this getter (deprecated) is undefined.
-- (UIEdgeInsets)scrollIndicatorInsets API_DEPRECATED("The scrollIndicatorInsets getter is deprecated, use the verticalScrollIndicatorInsets and horizontalScrollIndicatorInsets getters instead.", ios(2.0, 13.0), tvos(9.0, 13.0));
+- (UIEdgeInsets)scrollIndicatorInsets API_DEPRECATED("The scrollIndicatorInsets getter is deprecated, use the verticalScrollIndicatorInsets and horizontalScrollIndicatorInsets getters instead.", ios(2.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos);
 @property(nonatomic)         UIScrollViewDecelerationRate decelerationRate API_AVAILABLE(ios(3.0));
 @property(nonatomic)         UIScrollViewIndexDisplayMode indexDisplayMode API_AVAILABLE(tvos(10.2));
 
@@ -167,9 +167,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // `directionalPressGestureRecognizer` is disabled by default, but can be enabled to perform scrolling in response to up / down / left / right arrow button presses directly, instead of scrolling indirectly in response to focus updates.
 @property(nonatomic, readonly) UIGestureRecognizer *directionalPressGestureRecognizer API_DEPRECATED("Configuring the panGestureRecognizer for indirect scrolling automatically supports directional presses now, so this property is no longer useful.", tvos(9.0, 11.0));
 
-@property(nonatomic) UIScrollViewKeyboardDismissMode keyboardDismissMode API_AVAILABLE(ios(7.0)); // default is UIScrollViewKeyboardDismissModeNone
+@property(nonatomic) UIScrollViewKeyboardDismissMode keyboardDismissMode API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(visionos); // default is UIScrollViewKeyboardDismissModeNone
 
 @property (nonatomic, strong, nullable) UIRefreshControl *refreshControl API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(tvos);
+
+/// Set this to YES to make the scroll view animate its content offset in response to keys like Page Up/Down, Home/End, and the arrow keys.
+/// The scroll view must be focused or first responder in order to receive these key events. Default is YES for apps linked after iOS 17.0.
+@property (nonatomic, assign) BOOL allowsKeyboardScrolling API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos);
 
 @end
 

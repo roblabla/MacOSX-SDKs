@@ -37,7 +37,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		Additionally, the CMSync infrastructure monitors relative drift between CMClocks.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
 
 /*!
 	@typedef	CMTimebase
@@ -57,9 +57,9 @@ typedef struct CM_BRIDGED_TYPE(id) OpaqueCMClock* CMClockRef API_AVAILABLE(macos
 		the timebase's time changes relative to the ultimate source clock.
 */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // a CF type; use CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMTimebase* CMTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE; // a CF type; use CFRetain and CFRelease
 
-typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)); // used in argument lists and function results to indicate that either may be passed
+typedef CM_BRIDGED_TYPE(id) CFTypeRef CMClockOrTimebaseRef API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(6.0)) CM_SWIFT_SENDABLE; // used in argument lists and function results to indicate that either may be passed
 
 #ifndef CMTIMEBASE_USE_SOURCE_TERMINOLOGY
 #if (__ENVIRONMENT_MAC_OS_X_VERSION_MIN_REQUIRED__ >= __MAC_12_0) || (__ENVIRONMENT_IPHONE_OS_VERSION_MIN_REQUIRED__ >= __IPHONE_15_0) || (__ENVIRONMENT_TV_OS_VERSION_MIN_REQUIRED__ >= __TVOS_15_0) || (__ENVIRONMENT_WATCH_OS_VERSION_MIN_REQUIRED__ >= __WATCHOS_8_0) || 0

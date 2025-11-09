@@ -212,7 +212,7 @@ _SPARSE_VARIANT(DenseMatrix) _SPARSE_VARIANT(_DenseMatrixFromVector)(_SPARSE_VAR
 
 // This function just provides a shorthand way of delivering an invalid subfactor
 static inline __attribute__((__const__))
-_SPARSE_VARIANT(SparseOpaqueSubfactor) _SPARSE_VARIANT(_SparseInvalidSubfactor)() {
+_SPARSE_VARIANT(SparseOpaqueSubfactor) _SPARSE_VARIANT(_SparseInvalidSubfactor)(void) {
   return (_SPARSE_VARIANT(SparseOpaqueSubfactor)) {
     .contents = SparseSubfactorInvalid,
     .factor = {

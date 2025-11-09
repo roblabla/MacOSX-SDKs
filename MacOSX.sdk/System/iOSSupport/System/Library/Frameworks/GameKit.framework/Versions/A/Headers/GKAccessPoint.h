@@ -1,13 +1,11 @@
-//
-//  GKAccessPoint.h
-//  Game Center
-//
-//  Copyright 2020-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
 #import <TargetConditionals.h>
+#import <Foundation/Foundation.h>
+
+#if !TARGET_OS_WATCH
+
+#import <CoreGraphics/CoreGraphics.h>
 
 #import <GameKit/GKGameCenterViewController.h>
 
@@ -42,7 +40,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (nonatomic, readonly, getter=isVisible) BOOL visible;     /// observable property that indicates when the access point is visible.
 @property (nonatomic, readonly) BOOL isPresentingGameCenter;        /// observable property that becomes true when user taps on the access point and it is showing Game Center UI.  Will become false when it is dismissed
 
-/// Set this property to true if you wish to show the highlights for most recent acheivement, current rank on default leaderboard, etc
+/// Set this property to true if you wish to show the highlights for most recent achievement, current rank on default leaderboard, etc
 @property (nonatomic, assign) BOOL showHighlights;
 
 /// These properties control the placement of the widget
@@ -62,10 +60,12 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (nonatomic, weak, nullable) UIWindow *parentWindow;
 #endif
 
-/// this lets the developer trigger the access point as if the user had touched it.  This is useful for games that use controllers or the remote on AppleTV.  the argument lets you specify a specific state (default, profile, acheivements, leaderboards) for GameCenterViewController
+/// this lets the developer trigger the access point as if the user had touched it.  This is useful for games that use controllers or the remote on AppleTV.  the argument lets you specify a specific state (default, profile, achievements, leaderboards) for GameCenterViewController
 - (void)triggerAccessPointWithHandler:(void (^)(void))handler NS_SWIFT_NAME(trigger(handler:));
 - (void)triggerAccessPointWithState:(GKGameCenterViewControllerState)state handler:(void (^)(void))handler NS_SWIFT_NAME(trigger(state:handler:));
 
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif

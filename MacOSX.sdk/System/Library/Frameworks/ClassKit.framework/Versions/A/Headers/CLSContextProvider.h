@@ -2,7 +2,7 @@
 //  CLSContextProvider.h
 //  ClassKit
 //
-//  Copyright © 2018 - 2019 Apple Inc. All rights reserved.
+//  Copyright © 2018-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

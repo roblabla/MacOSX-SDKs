@@ -20,7 +20,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 /// Called when the `selectedColor` changes.
 - (void)colorPickerViewControllerDidSelectColor:(UIColorPickerViewController *)viewController
-        API_DEPRECATED_WITH_REPLACEMENT("colorPickerViewController:didSelectColor:continuously:", ios(14.0, 15.0));
+        API_DEPRECATED_WITH_REPLACEMENT("colorPickerViewController:didSelectColor:continuously:", ios(14.0, 15.0), visionos(1.0, 1.0));
 
 /// Called when the selected color changes.
 ///

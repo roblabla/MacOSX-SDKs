@@ -2,8 +2,10 @@
 //  PKDrawing.h
 //  PencilKit
 //
-//  Copyright © 2019 Apple. All rights reserved.
+//  Copyright © 2023 Apple. All rights reserved.
 //
+
+#import <PencilKit/PKContentVersion.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -56,6 +58,9 @@ API_AVAILABLE(ios(13.0), macos(10.15))
 /// The bounds of the drawing's contents, taking into account the rendered width of all content.
 /// If these bounds are used to render an image with `imageFromRect:scale:`, no contents will be cropped.
 @property (nonatomic, readonly) CGRect bounds;
+
+/// The PencilKit version required to use this drawing.
+@property (nonatomic, readonly) PKContentVersion requiredContentVersion API_AVAILABLE(ios(17.0), macos(14.0));
 
 /// Renders the drawing to an image.
 ///

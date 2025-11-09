@@ -13,6 +13,8 @@
 
 	@abstract		AVAssetTrackSegment represents a segment of an AVAssetTrack, comprising of a
 					time mapping from the source to the asset track timeline.
+
+					Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 
 #import <AVFoundation/AVBase.h>
@@ -21,6 +23,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVAssetTrackSegment : NSObject
 {

@@ -129,6 +129,7 @@ typedef OBJC_OPTIONS(uint32_t, interface_event_t) {
  * @constant VMNET_BUFFER_EXHAUSTED	Buffers exhausted in kernel.
  * @constant VMNET_TOO_MANY_PACKETS 	Packet count exceeds limit.
  * @constant VMNET_SHARING_SERVICE_BUSY	Vmnet Interface cannot be started as conflicting sharing service is in use.
+ * @constant VMNET_NOT_AUTHORIZED    The operation could not be completed due to missing authorization.
 */
 typedef OBJC_ENUM(uint32_t, vmnet_return_t) {
 	VMNET_SUCCESS				= 1000,
@@ -141,6 +142,7 @@ typedef OBJC_ENUM(uint32_t, vmnet_return_t) {
 	VMNET_BUFFER_EXHAUSTED			= 1007,
 	VMNET_TOO_MANY_PACKETS			= 1008,
 	VMNET_SHARING_SERVICE_BUSY		= 1009,
+    VMNET_NOT_AUTHORIZED            = 1010,
 };
 
 /*!

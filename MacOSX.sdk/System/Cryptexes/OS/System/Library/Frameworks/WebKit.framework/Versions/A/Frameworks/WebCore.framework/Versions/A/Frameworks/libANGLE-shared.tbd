@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebCore.framework/Versions/A/Frameworks/libANGLE-shared.dylib'
-current-version: 615.1.26
+current-version: 616.1.27
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ WebCore, WebCoreTestSupport ]
@@ -124,7 +124,8 @@ exports:
                        _GL_Fogxv, _GL_FramebufferFetchBarrierEXT, _GL_FramebufferMemorylessPixelLocalStorageANGLE, 
                        _GL_FramebufferParameteri, _GL_FramebufferParameteriMESA, 
                        _GL_FramebufferPixelLocalClearValuefvANGLE, _GL_FramebufferPixelLocalClearValueivANGLE, 
-                       _GL_FramebufferPixelLocalClearValueuivANGLE, _GL_FramebufferRenderbuffer, 
+                       _GL_FramebufferPixelLocalClearValueuivANGLE, _GL_FramebufferPixelLocalStorageInterruptANGLE, 
+                       _GL_FramebufferPixelLocalStorageRestoreANGLE, _GL_FramebufferRenderbuffer, 
                        _GL_FramebufferRenderbufferOES, _GL_FramebufferTexture, _GL_FramebufferTexture2D, 
                        _GL_FramebufferTexture2DMultisampleEXT, _GL_FramebufferTexture2DOES, 
                        _GL_FramebufferTexture3DOES, _GL_FramebufferTextureEXT, _GL_FramebufferTextureLayer, 
@@ -151,11 +152,13 @@ exports:
                        _GL_GetFramebufferAttachmentParameterivOES, _GL_GetFramebufferAttachmentParameterivRobustANGLE, 
                        _GL_GetFramebufferParameteriv, _GL_GetFramebufferParameterivMESA, 
                        _GL_GetFramebufferParameterivRobustANGLE, _GL_GetFramebufferPixelLocalStorageParameterfvANGLE, 
-                       _GL_GetFramebufferPixelLocalStorageParameterivANGLE, _GL_GetGraphicsResetStatus, 
-                       _GL_GetGraphicsResetStatusEXT, _GL_GetInteger64i_v, _GL_GetInteger64i_vRobustANGLE, 
-                       _GL_GetInteger64v, _GL_GetInteger64vEXT, _GL_GetInteger64vRobustANGLE, 
-                       _GL_GetIntegeri_v, _GL_GetIntegeri_vRobustANGLE, _GL_GetIntegerv, 
-                       _GL_GetIntegervRobustANGLE, _GL_GetInternalformativ, _GL_GetInternalformativRobustANGLE, 
+                       _GL_GetFramebufferPixelLocalStorageParameterfvRobustANGLE, 
+                       _GL_GetFramebufferPixelLocalStorageParameterivANGLE, _GL_GetFramebufferPixelLocalStorageParameterivRobustANGLE, 
+                       _GL_GetGraphicsResetStatus, _GL_GetGraphicsResetStatusEXT, 
+                       _GL_GetInteger64i_v, _GL_GetInteger64i_vRobustANGLE, _GL_GetInteger64v, 
+                       _GL_GetInteger64vEXT, _GL_GetInteger64vRobustANGLE, _GL_GetIntegeri_v, 
+                       _GL_GetIntegeri_vRobustANGLE, _GL_GetIntegerv, _GL_GetIntegervRobustANGLE, 
+                       _GL_GetInternalformativ, _GL_GetInternalformativRobustANGLE, 
                        _GL_GetLightfv, _GL_GetLightxv, _GL_GetMaterialfv, _GL_GetMaterialxv, 
                        _GL_GetMemoryObjectParameterivEXT, _GL_GetMultisamplefv, _GL_GetMultisamplefvANGLE, 
                        _GL_GetMultisamplefvRobustANGLE, _GL_GetObjectLabel, _GL_GetObjectLabelEXT, 
@@ -239,10 +242,11 @@ exports:
                        _GL_PauseTransformFeedback, _GL_PixelLocalStorageBarrierANGLE, 
                        _GL_PixelStorei, _GL_PointParameterf, _GL_PointParameterfv, 
                        _GL_PointParameterx, _GL_PointParameterxv, _GL_PointSize, 
-                       _GL_PointSizePointerOES, _GL_PointSizex, _GL_PolygonOffset, 
-                       _GL_PolygonOffsetClampEXT, _GL_PolygonOffsetx, _GL_PopDebugGroup, 
-                       _GL_PopDebugGroupKHR, _GL_PopGroupMarkerEXT, _GL_PopMatrix, 
-                       _GL_PrimitiveBoundingBox, _GL_PrimitiveBoundingBoxEXT, _GL_PrimitiveBoundingBoxOES, 
+                       _GL_PointSizePointerOES, _GL_PointSizex, _GL_PolygonModeANGLE, 
+                       _GL_PolygonModeNV, _GL_PolygonOffset, _GL_PolygonOffsetClampEXT, 
+                       _GL_PolygonOffsetx, _GL_PopDebugGroup, _GL_PopDebugGroupKHR, 
+                       _GL_PopGroupMarkerEXT, _GL_PopMatrix, _GL_PrimitiveBoundingBox, 
+                       _GL_PrimitiveBoundingBoxEXT, _GL_PrimitiveBoundingBoxOES, 
                        _GL_ProgramBinary, _GL_ProgramBinaryOES, _GL_ProgramParameteri, 
                        _GL_ProgramParameteriEXT, _GL_ProgramUniform1f, _GL_ProgramUniform1fEXT, 
                        _GL_ProgramUniform1fv, _GL_ProgramUniform1fvEXT, _GL_ProgramUniform1i, 

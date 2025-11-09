@@ -873,9 +873,10 @@ namespace StandardUSB
      * @brief       Find the first PlatformCapabilityDescriptor in a BOS descriptor
      * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first PlatformCapabilityDescriptor
      * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+     * @param       uuid UUID associated with the platform capability
      * @return      PlatformCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
      */
-    const PlatformCapabilityDescriptor* getPlatformCapabilityDescriptor(const BOSDescriptor* bosDescriptor);
+    const PlatformCapabilityDescriptor* getPlatformCapabilityDescriptorWithUUID(const BOSDescriptor* bosDescriptor, uuid_t uuid);
         
     /*!
      * @brief       Find the first BillboardCapabilityDescriptor in a BOS descriptor

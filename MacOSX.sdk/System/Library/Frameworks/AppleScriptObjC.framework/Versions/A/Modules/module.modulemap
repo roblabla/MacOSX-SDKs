@@ -1,4 +1,4 @@
-framework module AppleScriptObjC [extern_c] {
+framework module AppleScriptObjC [system] {
 	umbrella header "AppleScriptObjC.h"
 	export *
 	module * { export * }

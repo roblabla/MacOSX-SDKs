@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright 2012-2013 Apple Inc. All rights reserved.
+	Copyright 2012-2023 Apple Inc. All rights reserved.
 	
 	Video Toolbox object for storage of multi-pass video encoding metadata.
 */
@@ -35,7 +35,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		VTMultiPassStorageRef is a CF type, so call CFRelease and CFRetain to manage objects of this type.
 		The data stored in the VTMultiPassStorage is private to the video encoder.
 */
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTMultiPassStorage*  VTMultiPassStorageRef; // a CF type, call CFRetain and CFRelease
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTMultiPassStorage*  VTMultiPassStorageRef CM_SWIFT_NONSENDABLE; // a CF type, call CFRetain and CFRelease
 
 VT_EXPORT CFTypeID VTMultiPassStorageGetTypeID(void) API_AVAILABLE(macosx(10.10), ios(8.0), tvos(10.2));
 	

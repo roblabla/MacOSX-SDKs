@@ -2,7 +2,7 @@
 //  SFSafariApplication.h
 //  SafariServices
 //
-//  Copyright © 2016 Apple Inc. All rights reserved.
+//  Copyright © 2016-2023 Apple Inc. All rights reserved.
 //
 
 #import <SafariServices/SFFoundation.h>
@@ -14,6 +14,8 @@
 NS_ASSUME_NONNULL_BEGIN
 
 SF_EXTERN NSString * const SFExtensionMessageKey SF_AVAILABLE_MAC_SAFARI(14_0);
+
+SF_EXTERN NSString * const SFExtensionProfileKey SF_AVAILABLE_MAC_SAFARI(17_0);
 
 @class NSRunningApplication;
 @class SFSafariWindow;

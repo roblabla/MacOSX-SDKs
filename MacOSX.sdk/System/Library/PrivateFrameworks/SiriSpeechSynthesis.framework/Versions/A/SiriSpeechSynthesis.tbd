@@ -1,9 +1,10 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SiriSpeechSynthesis.framework/Versions/A/SiriSpeechSynthesis'
 exports:
-  - targets:         [ x86_64-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst ]
     weak-symbols:    [ __ZTIN11flatbuffers16DefaultAllocatorE, __ZTIN11flatbuffers9AllocatorE, 
                        __ZTINSt3__110__function6__baseIFiN14TTSSynthesizer15CallbackMessageEEEE, 
                        __ZTINSt3__110__function6__funcIU8__strongU13block_pointerFiN14TTSSynthesizer15CallbackMessageEENS_9allocatorIS6_EES4_EE, 
@@ -12,7 +13,8 @@ exports:
                        __ZTSNSt3__110__function6__baseIFiN14TTSSynthesizer15CallbackMessageEEEE, 
                        __ZTSNSt3__110__function6__funcIU8__strongU13block_pointerFiN14TTSSynthesizer15CallbackMessageEENS_9allocatorIS6_EES4_EE, 
                        __ZTSU13block_pointerFiN14TTSSynthesizer15CallbackMessageEE ]
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _AudioPlaybackAudioQueueUID, _SFSSAudioFormat48khzOpus, _SFSSAudioFormat48khzPCM, 
                        _SFSSGetLogObject, _SFSS_VOICE_AARON, _SFSS_VOICE_NORA, _SiriSpeechSynthesisVersionNumber, 
                        _SiriSpeechSynthesisVersionString, __audioPlaybackServiceAudioQueueCallback ]

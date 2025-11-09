@@ -31,8 +31,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Indicates whether content should drive the size of arbitrarily resizable windows (which are currently present only on macOS).
 @property(nonatomic, setter=setCanResizeToFitContent:) BOOL canResizeToFitContent API_AVAILABLE(macCatalyst(13.0));
 
-@property(nonatomic,strong) UIScreen *screen API_AVAILABLE(ios(3.2));  // default is [UIScreen mainScreen]. changing the screen may be an expensive operation and should not be done in performance-sensitive code
-- (void)setScreen:(UIScreen *)screen API_DEPRECATED_WITH_REPLACEMENT("setWindowScene:", ios(3.2, 13.0));
+@property(nonatomic,strong) UIScreen *screen API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(visionos);  // default is [UIScreen mainScreen]. changing the screen may be an expensive operation and should not be done in performance-sensitive code
+- (void)setScreen:(UIScreen *)screen API_DEPRECATED_WITH_REPLACEMENT("setWindowScene:", ios(3.2, 13.0)) API_UNAVAILABLE(visionos);
 
 @property(nonatomic) UIWindowLevel windowLevel;                   // default = 0.0
 
@@ -143,9 +143,9 @@ UIKIT_EXTERN NSNotificationName const UIKeyboardWillChangeFrameNotification  API
 UIKIT_EXTERN NSNotificationName const UIKeyboardDidChangeFrameNotification   API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos);
 
 // These keys are superseded by UIKeyboardFrameBeginUserInfoKey and UIKeyboardFrameEndUserInfoKey.
-UIKIT_EXTERN NSString *const UIKeyboardCenterBeginUserInfoKey   API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSString *const UIKeyboardCenterEndUserInfoKey     API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(tvos);
-UIKIT_EXTERN NSString *const UIKeyboardBoundsUserInfoKey        API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSString *const UIKeyboardCenterBeginUserInfoKey   API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSString *const UIKeyboardCenterEndUserInfoKey     API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSString *const UIKeyboardBoundsUserInfoKey        API_DEPRECATED("", ios(2.0, 3.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

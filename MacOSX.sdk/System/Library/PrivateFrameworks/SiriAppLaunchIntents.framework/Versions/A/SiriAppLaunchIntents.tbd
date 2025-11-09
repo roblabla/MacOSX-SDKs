@@ -5,7 +5,8 @@ install-name:    '/System/Library/PrivateFrameworks/SiriAppLaunchIntents.framewo
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ AppLaunchIntentExtension, AppLaunchPlugin, SiriAppLaunchIntentsTests ]
+    clients:         [ AppLaunchIntentExtension, AppLaunchPlugin, AppLaunchSuggestionsPlugin, 
+                       SiriAppLaunchIntentsTests ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s11SiriKitFlow11DisplayHintV0A16AppLaunchIntentsE11descriptionSSvg', 
@@ -117,6 +118,7 @@ exports:
                        '_$s20SiriAppLaunchIntents04DeepC6IntentC10identifier12backingStoreACSSSg_So9PBCodableCSgtcfc', 
                        '_$s20SiriAppLaunchIntents04DeepC6IntentC18pageCanonicalNamesSaySSGSgvpMV', 
                        '_$s20SiriAppLaunchIntents04DeepC6IntentC20requestedApplicationAA0H0CSgvpMV', 
+                       '_$s20SiriAppLaunchIntents04DeepC6IntentC28shouldSkipDefaultSchemaCheckSbyFZ', 
                        '_$s20SiriAppLaunchIntents04DeepC6IntentC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s20SiriAppLaunchIntents04DeepC6IntentC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s20SiriAppLaunchIntents04DeepC6IntentC6domain4verb16parametersByNameACSS_SSSDySSypGSgtcfC', 
@@ -185,6 +187,9 @@ exports:
                        '_$s20SiriAppLaunchIntents05CloseB6IntentC10identifier12backingStoreACSSSg_So9PBCodableCSgtcfc', 
                        '_$s20SiriAppLaunchIntents05CloseB6IntentC11applicationAA11ApplicationCSgvpMV', 
                        '_$s20SiriAppLaunchIntents05CloseB6IntentC12appReferenceAA0bH0OvpMV', 
+                       '_$s20SiriAppLaunchIntents05CloseB6IntentC20requestedApplicationAA0H0CSgvpMV', 
+                       '_$s20SiriAppLaunchIntents05CloseB6IntentC21suggestedApplicationsSayAA11ApplicationCGSgvpMV', 
+                       '_$s20SiriAppLaunchIntents05CloseB6IntentC28shouldSkipDefaultSchemaCheckSbyFZ', 
                        '_$s20SiriAppLaunchIntents05CloseB6IntentC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s20SiriAppLaunchIntents05CloseB6IntentC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s20SiriAppLaunchIntents05CloseB6IntentC6domain4verb16parametersByNameACSS_SSSDySSypGSgtcfC', 
@@ -193,6 +198,19 @@ exports:
                        '_$s20SiriAppLaunchIntents05CloseB6IntentCACycfC', '_$s20SiriAppLaunchIntents05CloseB6IntentCACycfc', 
                        '_$s20SiriAppLaunchIntents05CloseB6IntentCMa', '_$s20SiriAppLaunchIntents05CloseB6IntentCMn', 
                        '_$s20SiriAppLaunchIntents05CloseB6IntentCN', '_$s20SiriAppLaunchIntents05CloseB6IntentCfD', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC012shouldIgnoreB08bundleId3forSbSS_AA7ActionsVtF', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC012shouldIgnoreB08bundleId3forSbSS_AA7ActionsVtFTq', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC012shouldIgnoreB08bundleId8lsRecord3forSbSS_So013LSApplicationL0CSgAA7ActionsVtF', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC012shouldIgnoreB08bundleId8lsRecord3forSbSS_So013LSApplicationL0CSgAA7ActionsVtFTq', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC15unownedExecutorScevg', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC15unownedExecutorScevpMV', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC6sharedACvau', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC6sharedACvgZ', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderC6sharedACvpZ', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderCMa', '_$s20SiriAppLaunchIntents09InstalledB8ProviderCMm', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderCMn', '_$s20SiriAppLaunchIntents09InstalledB8ProviderCN', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderCScAAAMc', 
+                       '_$s20SiriAppLaunchIntents09InstalledB8ProviderCfD', '_$s20SiriAppLaunchIntents09InstalledB8ProviderCfd', 
                        '_$s20SiriAppLaunchIntents0B20NounResolutionResultC14JSONDictionary6intentACSgSDySSypG_So8INIntentCtcfC', 
                        '_$s20SiriAppLaunchIntents0B20NounResolutionResultC14JSONDictionary6intentACSgSDySSypG_So8INIntentCtcfc', 
                        '_$s20SiriAppLaunchIntents0B20NounResolutionResultC20confirmationRequired4withACXDAA0bE0O_tFZ', 
@@ -300,6 +318,7 @@ exports:
                        '_$s20SiriAppLaunchIntents0cB6IntentC17isRemoteExecutionSo8NSNumberCSgvpMV', 
                        '_$s20SiriAppLaunchIntents0cB6IntentC20requestedApplicationAA0G0CSgvpMV', 
                        '_$s20SiriAppLaunchIntents0cB6IntentC21suggestedApplicationsSayAA11ApplicationCGSgvpMV', 
+                       '_$s20SiriAppLaunchIntents0cB6IntentC28shouldSkipDefaultSchemaCheckSbyFZ', 
                        '_$s20SiriAppLaunchIntents0cB6IntentC5coderACSgSo7NSCoderC_tcfC', 
                        '_$s20SiriAppLaunchIntents0cB6IntentC5coderACSgSo7NSCoderC_tcfc', 
                        '_$s20SiriAppLaunchIntents0cB6IntentC6domain4verb16parametersByNameACSS_SSSDySSypGSgtcfC', 
@@ -340,7 +359,15 @@ exports:
                        '_$s20SiriAppLaunchIntents27QuickNoteActivationProviderCN', 
                        '_$s20SiriAppLaunchIntents27QuickNoteActivationProviderCfD', 
                        '_$s20SiriAppLaunchIntents27QuickNoteActivationProviderCfd', 
-                       '_$s27SiriVirtualDeviceResolution0C4UnitC0A16AppLaunchIntentsE11descriptionSSvg', 
+                       '_$s20SiriAppLaunchIntents7ActionsV10launchableACvau', '_$s20SiriAppLaunchIntents7ActionsV10launchableACvgZ', 
+                       '_$s20SiriAppLaunchIntents7ActionsV10launchableACvpZ', '_$s20SiriAppLaunchIntents7ActionsV8rawValueACSi_tcfC', 
+                       '_$s20SiriAppLaunchIntents7ActionsV8rawValueSivg', '_$s20SiriAppLaunchIntents7ActionsV8rawValueSivpMV', 
+                       '_$s20SiriAppLaunchIntents7ActionsV9quittableACvau', '_$s20SiriAppLaunchIntents7ActionsV9quittableACvgZ', 
+                       '_$s20SiriAppLaunchIntents7ActionsV9quittableACvpZ', '_$s20SiriAppLaunchIntents7ActionsVMa', 
+                       '_$s20SiriAppLaunchIntents7ActionsVMn', '_$s20SiriAppLaunchIntents7ActionsVN', 
+                       '_$s20SiriAppLaunchIntents7ActionsVSQAAMc', '_$s20SiriAppLaunchIntents7ActionsVSYAAMc', 
+                       '_$s20SiriAppLaunchIntents7ActionsVs10SetAlgebraAAMc', '_$s20SiriAppLaunchIntents7ActionsVs25ExpressibleByArrayLiteralAAMc', 
+                       '_$s20SiriAppLaunchIntents7ActionsVs9OptionSetAAMc', '_$s27SiriVirtualDeviceResolution0C4UnitC0A16AppLaunchIntentsE11descriptionSSvg', 
                        '_$s27SiriVirtualDeviceResolution9ProximityO0A16AppLaunchIntentsE1loiySbAC_ACtFZ', 
                        '_$s27SiriVirtualDeviceResolution9ProximityOSL0A16AppLaunchIntentsMc', 
                        _SiriAppLaunchIntentsVersionNumber, _SiriAppLaunchIntentsVersionString ]

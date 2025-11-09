@@ -102,7 +102,7 @@ CORETELEPHONY_CLASS_AVAILABLE(4_0)
  *   A dictionary containing CTCarrier objects for each service that contains information about the subscriber's
  *   home cellular service provider.  The key to the dictionary is an NSString representing the service.
  */
-@property(readonly, retain, nullable) NSDictionary<NSString *, CTCarrier *> *serviceSubscriberCellularProviders API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos);
+@property(readonly, retain, nullable) NSDictionary<NSString *, CTCarrier *> *serviceSubscriberCellularProviders API_DEPRECATED("Deprecated with no replacement", ios(12.0, 16.0), watchos(5.0, 9.0)) API_UNAVAILABLE(macos, tvos);
 
 /*
  * subscriberCellularProvider
@@ -124,7 +124,7 @@ CORETELEPHONY_CLASS_AVAILABLE(4_0)
  *   whose information has changed.  This can be used as the key into serviceSubscriberCellularProvider
  *   to obtain the new information.
  */
-@property(nonatomic, copy, nullable) void (^serviceSubscriberCellularProvidersDidUpdateNotifier)(NSString*) API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos);
+@property(nonatomic, copy, nullable) void (^serviceSubscriberCellularProvidersDidUpdateNotifier)(NSString*) API_DEPRECATED("Deprecated with no replacement", ios(12.0, 16.0), watchos(5.0, 9.0)) API_UNAVAILABLE(macos, tvos);
 
 /*
  * subscriberCellularProviderDidUpdateNotifier

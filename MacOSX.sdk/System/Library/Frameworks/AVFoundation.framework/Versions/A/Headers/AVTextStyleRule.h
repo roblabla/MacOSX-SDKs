@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2012-2016 Apple Inc. All rights reserved.
+	Copyright 2012-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVTextStyleRuleInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVTextStyleRule : NSObject <NSCopying> {
 @private

@@ -64,7 +64,7 @@ AV_INIT_UNAVAILABLE
 /* Indicates whether the receiver is playable in the current environment; if YES, an AVPlayerItemTrack of an AVPlayerItem initialized with the receiver's asset can be enabled for playback.  */
 @property (nonatomic, readonly, getter=isPlayable) BOOL playable
 #if __swift__
-API_DEPRECATED("Use load(.isPlayable) instead", macos(10.8, 13.0), ios(5.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use load(.isPlayable) instead", macos(10.8, 13.0), ios(5.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 #endif
@@ -72,7 +72,7 @@ API_AVAILABLE(macos(10.8), ios(5.0), tvos(9.0), watchos(1.0));
 /* Indicates whether the receiver is decodable in the current environment; if YES, the track can be decoded even though decoding may be too slow for real time playback.  */
 @property (nonatomic, readonly, getter=isDecodable) BOOL decodable
 #if __swift__
-API_DEPRECATED("Use load(.isDecodable) instead", macos(10.13, 13.0), ios(11.0, 16.0), tvos(11.0, 16.0), watchos(4.0, 9.0));
+API_DEPRECATED("Use load(.isDecodable) instead", macos(10.13, 13.0), ios(11.0, 16.0), tvos(11.0, 16.0), watchos(4.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 #endif
@@ -148,7 +148,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));
 /* indicates whether this audio track has dependencies (e.g. kAudioFormatMPEGD_USAC) */
 @property (nonatomic, readonly) BOOL hasAudioSampleDependencies
 #if __swift__
-API_DEPRECATED("Use load(.hasAudioSampleDependencies) instead", macos(10.15, 13.0), ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
+API_DEPRECATED("Use load(.hasAudioSampleDependencies) instead", macos(10.15, 13.0), ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 #endif
@@ -168,7 +168,7 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));
 /* indicates the minimum duration of the track's frames; the value will be kCMTimeInvalid if the minimum frame duration is not known or cannot be calculated */
 @property (nonatomic, readonly) CMTime minFrameDuration
 #if __swift__
-API_DEPRECATED("Use load(.minFrameDuration) instead", macos(10.10, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use load(.minFrameDuration) instead", macos(10.10, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
 #endif
@@ -179,7 +179,7 @@ API_AVAILABLE(macos(10.10), ios(7.0), tvos(9.0), watchos(1.0));
 */
 @property (nonatomic, readonly) BOOL requiresFrameReordering
 #if __swift__
-API_DEPRECATED("Use load(.requiresFrameReordering) instead", macos(10.10, 13.0), ios(8.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use load(.requiresFrameReordering) instead", macos(10.10, 13.0), ios(8.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 #endif
@@ -203,9 +203,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 */
 - (nullable AVAssetTrackSegment *)segmentForTrackTime:(CMTime)trackTime
 #if __swift__
-API_DEPRECATED("Use loadSegment(forTrackTime:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadSegment(forTrackTime:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadSegmentForTrackTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadSegmentForTrackTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -228,9 +228,9 @@ API_DEPRECATED_WITH_REPLACEMENT("loadSegmentForTrackTime:completionHandler:", ma
 */
 - (CMTime)samplePresentationTimeForTrackTime:(CMTime)trackTime
 #if __swift__
-API_DEPRECATED("Use loadSamplePresentationTime(forTrackTime:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadSamplePresentationTime(forTrackTime:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadSamplePresentationTimeForTrackTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadSamplePresentationTimeForTrackTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -257,7 +257,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadSamplePresentationTimeForTrackTime:completi
 */
 @property (nonatomic, readonly) NSArray<AVMetadataItem *> *metadata
 #if __swift__
-API_DEPRECATED("Use load(.metadata) instead", macos(10.10, 13.0), ios(8.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use load(.metadata) instead", macos(10.10, 13.0), ios(8.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 #endif
@@ -276,9 +276,9 @@ API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0), watchos(1.0));
 */
 - (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format
 #if __swift__
-API_DEPRECATED("Use loadMetadata(for:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadMetadata(for:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadMetadataForFormat:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadMetadataForFormat:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -365,7 +365,7 @@ AVF_EXPORT AVTrackAssociationType const AVTrackAssociationTypeMetadataReferent A
    Track association types are defined immediately above. */
 @property (nonatomic, readonly) NSArray<AVTrackAssociationType> *availableTrackAssociationTypes
 #if __swift__
-API_DEPRECATED("Use load(.availableTrackAssociationTypes) instead", macos(10.9, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use load(.availableTrackAssociationTypes) instead", macos(10.9, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 #endif
@@ -379,9 +379,9 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 */
 - (NSArray<AVAssetTrack *> *)associatedTracksOfType:(AVTrackAssociationType)trackAssociationType
 #if __swift__
-API_DEPRECATED("Use loadAssociatedTracks(ofType:) instead", macos(10.9, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadAssociatedTracks(ofType:) instead", macos(10.9, 13.0), ios(7.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadAssociatedTracksOfType:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadAssociatedTracksOfType:completionHandler:", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -404,7 +404,7 @@ API_DEPRECATED_WITH_REPLACEMENT("loadAssociatedTracksOfType:completionHandler:",
 /* Indicates whether the receiver can provide instances of AVSampleCursor for traversing its media samples and discovering information about them. */
 @property (nonatomic, readonly) BOOL canProvideSampleCursors
 #if __swift__
-API_DEPRECATED("Use load(.canProvideSampleCursors) instead", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos);
+API_DEPRECATED("Use load(.canProvideSampleCursors) instead", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 #else
 API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0));
 #endif

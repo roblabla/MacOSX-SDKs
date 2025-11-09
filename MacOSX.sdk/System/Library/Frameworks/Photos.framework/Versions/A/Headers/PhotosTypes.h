@@ -176,6 +176,7 @@ typedef NS_ENUM(NSInteger, PHAssetResourceType) {
     PHAssetResourceTypeAdjustmentBasePairedVideo API_AVAILABLE(macos(10.15), ios(10)) = 11,
     PHAssetResourceTypeAdjustmentBaseVideo API_AVAILABLE(macos(10.15), ios(13)) = 12,
 
+    PHAssetResourceTypePhotoProxy API_AVAILABLE(macos(14), ios(17))= 19,
 } API_AVAILABLE(ios(9));
 
 API_AVAILABLE_END

@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @abstract
  A CMIOExtensionDeviceProperties describes a CoreMediaIO extension device properties.
 */
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @interface CMIOExtensionDeviceProperties : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -106,7 +106,7 @@ API_AVAILABLE(macos(12.3))
 
 @end
 
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @protocol CMIOExtensionDeviceSource <NSObject>
 @required
 
@@ -155,7 +155,7 @@ API_AVAILABLE(macos(12.3))
 @abstract
  A CMIOExtensionDevice describes a device.
 */
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @interface CMIOExtensionDevice : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

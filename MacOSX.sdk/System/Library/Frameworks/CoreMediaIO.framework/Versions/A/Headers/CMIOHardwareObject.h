@@ -251,6 +251,7 @@ enum
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIOObject Functions
 
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 /*!
     @functiongroup  CMIOObject
 */
@@ -453,6 +454,7 @@ CMIOObjectRemovePropertyListenerBlock(  CMIOObjectID                        obje
                                         dispatch_queue_t                    dispatchQueue,
                                         CMIOObjectPropertyListenerBlock     listener) API_AVAILABLE(macos(10.8));
 
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
 
 #pragma clang diagnostic pop
 #pragma pack(pop)

@@ -170,6 +170,15 @@ const IOUSBDeviceCapabilityContainerID* IOUSBGetContainerIDDescriptor(const IOUS
 const IOUSBPlatformCapabilityDescriptor* IOUSBGetPlatformCapabilityDescriptor(const IOUSBBOSDescriptor* bosDescriptor);
 
 /*!
+ * @brief       Find the first PlatformCapabilityDescriptor in a BOS descriptor
+ * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first PlatformCapabilityDescriptor
+ * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
+ * @param       uuid UUID associated with the platform capability
+ * @return      PlatformCapabilityDescriptor pointer, or NULL if no matching descriptor can be found
+ */
+const IOUSBPlatformCapabilityDescriptor* IOUSBGetPlatformCapabilityDescriptorWithUUID(const IOUSBBOSDescriptor* bosDescriptor, uuid_t uuid);
+
+/*!
  * @brief       Find the first BillboardCapabilityDescriptor in a BOS descriptor
  * @discussion  This method uses getNextCapabilityDescriptorWithType to fetch the first BillboardCapabilityDescriptor
  * @param       bosDescriptor BOS descriptor that contains the descriptors to iterate through
@@ -210,6 +219,22 @@ uint8_t IOUSBGetEndpointNumber(const IOUSBEndpointDescriptor* descriptor);
  * @return      tEndpointType indicating the type found.
  */
 uint8_t IOUSBGetEndpointType(const IOUSBEndpointDescriptor* descriptor);
+
+/*!
+ * @brief       Extract the usage type of an endpoint from an endpoint descriptor
+ * @discussion  This method parses an endpoint descriptor to determine its usage type. Only periodic endpoints have usage types
+ * @param       descriptor The descriptor to parse
+ * @return      tEndpointUsageType indicating the type found.
+ */
+uint8_t IOUSBGetEndpointUsageType(const IOUSBEndpointDescriptor* descriptor);
+
+/*!
+ * @brief       Extract the synchronization type of an  endpoint from an endpoint descriptor
+ * @discussion  This method parses an endpoint descriptor to determine its synchronization type. Only Isochronous endpoints have non-zero synchronization types
+ * @param       descriptor The descriptor to parse
+ * @return      tEndpointSynchronizationType indicating the type found.
+ */
+uint8_t IOUSBGetEndpointSynchronizationType(const IOUSBEndpointDescriptor* descriptor);
 
 /*!
  * @brief       Extract the max packet size from an endpoint descriptor

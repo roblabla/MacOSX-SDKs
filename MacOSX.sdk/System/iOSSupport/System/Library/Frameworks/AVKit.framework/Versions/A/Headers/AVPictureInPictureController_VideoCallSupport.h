@@ -3,7 +3,7 @@
  
  Framework: AVKit
  
- Copyright © 2021 Apple Inc. All rights reserved.
+ Copyright © 2021-2023 Apple Inc. All rights reserved.
  */
 
 #import <AVKit/AVPictureInPictureController.h>
@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@class      AVPictureInPictureVideoCallViewController
 	@abstract   Subclass or directly use `AVPictureInPictureVideoCallViewController` as the container for content to be shown in Picture in Picture while video calls are active.
  */
-API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, macos, watchos)
+API_AVAILABLE(ios(15.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos)
 @interface AVPictureInPictureVideoCallViewController : UIViewController
 @end
 
@@ -40,7 +40,7 @@ API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, macos, watchos)
 				The view controller that should appear in the system's Picture in Picture window.
 	@abstract   Initializes a new `AVPictureInPictureControllerContentSource` suitable for supporting an active video call. This object should only be used for the duration of the call.
 */
-- (instancetype)initWithActiveVideoCallSourceView:(UIView *)sourceView contentViewController:(AVPictureInPictureVideoCallViewController *)contentViewController API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos, watchos);
+- (instancetype)initWithActiveVideoCallSourceView:(UIView *)sourceView contentViewController:(AVPictureInPictureVideoCallViewController *)contentViewController API_AVAILABLE(ios(15.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos);
 
 /*!
 	@property   activeVideoCallSourceView
@@ -48,7 +48,7 @@ API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, macos, watchos)
 	@discussion `AVPictureInPictureController` uses this view's layout frame and visibility to determine whether or not Picture in Picture should begin automatically when the app moves to background.
 				The layout frame also influences the animation when entering and exiting Picture in Picture.
 */
-@property (nonatomic, weak, readonly) UIView *activeVideoCallSourceView API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (nonatomic, weak, readonly) UIView *activeVideoCallSourceView API_AVAILABLE(ios(15.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos);
 
 /*!
 	@property   activeVideoCallContentViewController
@@ -59,7 +59,7 @@ API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(tvos, macos, watchos)
 				The content should always fill the view controller's view's bounds.
 				Note that this view controller's view is not interactive and will not receive touches or other user input.
 */
-@property (nonatomic, readonly) AVPictureInPictureVideoCallViewController *activeVideoCallContentViewController API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, tvos, watchos);
+@property (nonatomic, readonly) AVPictureInPictureVideoCallViewController *activeVideoCallContentViewController API_AVAILABLE(ios(15.0), tvos(17.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos);
 
 @end
 

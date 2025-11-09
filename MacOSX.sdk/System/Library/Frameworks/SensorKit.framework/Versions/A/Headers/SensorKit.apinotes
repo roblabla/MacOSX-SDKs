@@ -35,6 +35,8 @@ Functions:
 - Name: SRAbsoluteTimeFromCFAbsoluteTime
   SwiftName: 'SRAbsoluteTime.fromCFAbsoluteTime(_cf:)'
 Tags:
+- Name: SRWristTemperatureCondition
+  SwiftName: SRWristTemperature.Condition
 - Name: SRAmbientLightSensorPlacement
   SwiftName: SRAmbientLightSample.SensorPlacement
 - Name: SRLocationCategory
@@ -51,6 +53,10 @@ Tags:
   SwiftName: SRKeyboardMetrics.SentimentCategory
 - Name: SRTextInputSessionType
   SwiftName: SRTextInputSession.SessionType
+- Name: SRSpeechMetricsSessionFlags
+  SwiftName: SRSpeechMetrics.SessionFlags
+- Name: SRFaceMetricsContext
+  SwiftName: SRFaceMetrics.Context
 # Local Variables:
 # mode: yaml
 # End:

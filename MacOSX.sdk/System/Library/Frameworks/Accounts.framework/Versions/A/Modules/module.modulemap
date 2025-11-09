@@ -1,4 +1,4 @@
-framework module Accounts [extern_c] {
+framework module Accounts {
     umbrella header "Accounts.h"
     export *
     module * { export * }

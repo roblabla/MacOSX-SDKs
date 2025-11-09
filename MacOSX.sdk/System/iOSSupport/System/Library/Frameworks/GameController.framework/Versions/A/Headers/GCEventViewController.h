@@ -9,24 +9,15 @@
 
 #import <Foundation/Foundation.h>
 
-#if TARGET_OS_IPHONE
 #import <UIKit/UIViewController.h>
-#else
-#import <AppKit/NSViewController.h>
-#endif
 
 /**
  A view controller subclass that allows fine grained control of the user interface system's handling
  of game controller events. Set an instance of this class as your root view controller if you intend
  to use GCController APIs for handling game controllers.
  */
-#if TARGET_OS_IPHONE
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
 @interface GCEventViewController : UIViewController
-#else
-API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0))
-@interface GCEventViewController : NSViewController
-#endif
 
 /**
  Controllers can be used to control the general UIKit user interface and for many views that is

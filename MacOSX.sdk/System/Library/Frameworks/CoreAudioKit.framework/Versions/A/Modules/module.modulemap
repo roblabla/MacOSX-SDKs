@@ -1,4 +1,4 @@
-framework module CoreAudioKit [extern_c] {
+framework module CoreAudioKit [system] {
     umbrella header "CoreAudioKit.h"
     export *
     module * { export * }

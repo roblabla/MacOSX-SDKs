@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProofReader.framework/Versions/A/ProofReader'
-current-version: 584.8
+current-version: 595
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -11,9 +11,10 @@ exports:
                        _PRCopyCorrectionsForPinyinInputString, _PRCopyModificationsForPinyinInputString, 
                        _PRCopyModificationsForPinyinInputStringWithGeometryModelData, 
                        _PRCopyPrefixesForPinyinInputString, _PRErrorModelKey, _PRGuessKey, 
-                       _PRLetterKey, _PRParameterBundlesKey, _PRParameterNameCapitalizedWordSingleThreshold, 
-                       _PRParameterNameCapitalizedWordThreshold, _PRParameterNameStandaloneLexiconWeight, 
-                       _PRParameterNameTransformerLanguageModelWeight, _PRScoreKey ]
+                       _PRIgnoreTerminationKey, _PRLetterKey, _PRParameterBundlesKey, 
+                       _PRParameterNameCapitalizedWordSingleThreshold, _PRParameterNameCapitalizedWordThreshold, 
+                       _PRParameterNameStandaloneLexiconWeight, _PRParameterNameTransformerLanguageModelWeight, 
+                       _PRScoreKey ]
     objc-classes:    [ AppleSpell, PRAutocorrectionContext, PRErrorModel, PRJyutpingContext, 
                        PRModification, PRPinyinContext, PRPinyinModification, PRPinyinString, 
                        PRZhuyinContext, PRZhuyinModification ]

@@ -110,7 +110,7 @@ NS_SWIFT_UI_ACTOR
 // appearing will receive a viewWillDisappear: call, and the view controller
 // that was disappearing will receive a viewWillAppear: call.  This handler is
 // invoked BEFORE the "will" method calls are made.
-- (void)notifyWhenInteractionEndsUsingBlock: (void (^)(id <UIViewControllerTransitionCoordinatorContext>context))handler API_DEPRECATED_WITH_REPLACEMENT("notifyWhenInteractionChangesUsingBlock", ios(7.0, 10.0));
+- (void)notifyWhenInteractionEndsUsingBlock: (void (^)(id <UIViewControllerTransitionCoordinatorContext>context))handler API_DEPRECATED_WITH_REPLACEMENT("notifyWhenInteractionChangesUsingBlock", ios(7.0, 10.0)) API_UNAVAILABLE(visionos);
 
 // This method behavior is identical to the method above. On 10.0, however, the behavior has
 // changed slightly to account for the fact that transitions can be interruptible. For interruptible transitions

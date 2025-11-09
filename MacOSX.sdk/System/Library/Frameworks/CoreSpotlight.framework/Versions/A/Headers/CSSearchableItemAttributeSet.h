@@ -2,7 +2,7 @@
 //  CSSearchableItemAttributeSet.h
 //  CoreSpotlight
 //
-//  Copyright © 2022 Apple. All rights reserved.
+//  Copyright © 2015–2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -94,8 +94,6 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 
 NS_ASSUME_NONNULL_END
 
-#ifndef CoreSpotlightAPIVersion
+#ifndef CSSearchableItemAttributeSet_Categories_h
 #import <CoreSpotlight/CSSearchableItemAttributeSet_Categories.h>
 #endif
-
-

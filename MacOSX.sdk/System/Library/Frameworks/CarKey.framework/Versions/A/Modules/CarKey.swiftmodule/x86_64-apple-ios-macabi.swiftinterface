@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-ios16.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CarKey
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 35.21.1
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CarKey
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 40.36
 import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 import os
 @_hasMissingDesignatedInitializers @available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
 open class CarKeyRemoteControl {
@@ -82,24 +83,28 @@ public struct RemoteKeylessEntryEnduringAction {
     @objc deinit
   }
 }
+@available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
 public struct FunctionIdentifier : Swift.RawRepresentable, Swift.Hashable {
   public let rawValue: Swift.Int
   public init(_ rawValue: Swift.Int)
   public init(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
 }
+@available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
 public struct ActionIdentifier : Swift.RawRepresentable, Swift.Hashable {
   public let rawValue: Swift.Int
   public init(_ rawValue: Swift.Int)
   public init(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
 }
+@available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
 public struct ExecutionStatus : Swift.RawRepresentable, Swift.Sendable {
   public let rawValue: Swift.Int
   public init(_ rawValue: Swift.Int)
   public init(rawValue: Swift.Int)
   public typealias RawValue = Swift.Int
 }
+@available(iOS 16.0, watchOS 9.0, macOS 13.3, *)
 public struct FunctionStatus : Swift.RawRepresentable, Swift.Hashable {
   public let rawValue: Swift.Int
   public init(_ rawValue: Swift.Int)

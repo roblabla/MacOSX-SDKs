@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2015 Apple Inc. All rights reserved.
+	Copyright 2015-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class AVMediaSelectionInternal;
 @class AVMutableMediaSelectionInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMediaSelection : NSObject <NSCopying, NSMutableCopying>
 {
@@ -54,6 +55,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 
 @end
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMutableMediaSelection : AVMediaSelection
 /*!

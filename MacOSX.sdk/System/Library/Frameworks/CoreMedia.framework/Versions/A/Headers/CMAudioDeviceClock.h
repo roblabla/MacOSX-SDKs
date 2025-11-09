@@ -11,6 +11,8 @@
 #define __CMAUDIODEVICECLOCK__
 
 #include <CoreMedia/CMBase.h>
+#if !TARGET_OS_IPHONE
+
 #include <CoreMedia/CMSync.h>
 
 #include <CoreAudio/CoreAudio.h>
@@ -97,5 +99,7 @@ CF_IMPLICIT_BRIDGING_DISABLED
 #ifdef __cplusplus
 }
 #endif
+
+#endif // !TARGET_OS_IPHONE
 
 #endif // __CMAUDIODEVICECLOCK__

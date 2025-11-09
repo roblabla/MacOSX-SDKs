@@ -2,7 +2,6 @@
 //  MLModelAsset.h
 //  CoreML
 //
-//  Created by Anil Katti on 1/14/22.
 //  Copyright © 2022 Apple Inc. All rights reserved.
 //
 
@@ -15,7 +14,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0))
 @interface MLModelAsset : NSObject
 
 /*!
- * Construct an optimized model asset asynchronously from the contents of specification data.
+ * Construct an optimized model asset from the contents of specification data.
  *
  * @param specificationData Contents of .mlmodel as a data blob.
  * @param error When the model asset creation fails error is populated with the reason for failure.

@@ -15,6 +15,12 @@
 #define kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch 4
 #define kLAPolicyDeviceOwnerAuthenticationWithWristDetection    5
 
+// Biometry types
+#define kLABiometryTypeNone           0
+#define kLABiometryTypeTouchID        1 << 0
+#define kLABiometryTypeFaceID         1 << 1
+#define kLABiometryTypeOpticID        1 << 2
+
 // Credential types
 #define kLACredentialTypeApplicationPassword                0
 #define kLACredentialSmartCardPIN                          -3

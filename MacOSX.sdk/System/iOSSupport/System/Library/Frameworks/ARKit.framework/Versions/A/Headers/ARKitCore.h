@@ -4,6 +4,7 @@
 //
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
+#ifdef __OBJC__
 
 #import <ARKit/ARCamera.h>
 #import <ARKit/ARCollaborationData.h>
@@ -42,8 +43,6 @@
 
 
 
-
-
 #import <ARKit/ARBody2D.h>
 #import <ARKit/ARBodyAnchor.h>
 #import <ARKit/ARMatteGenerator.h>
@@ -52,3 +51,5 @@
 
 
 #import <ARKit/ARDepthData.h>
+#endif // __OBJC__
+

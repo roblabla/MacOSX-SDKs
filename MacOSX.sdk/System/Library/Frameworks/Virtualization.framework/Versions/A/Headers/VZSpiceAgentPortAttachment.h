@@ -2,8 +2,9 @@
 //  VZSpiceAgentPortAttachment.h
 //  Virtualization
 //
-//  Copyright © 2022 Apple Inc. All rights reserved.
+//  Copyright © 2022-2023 Apple Inc. All rights reserved.
 //
+
 
 #import <Virtualization/VZSerialPortAttachment.h>
 
@@ -37,3 +38,4 @@ VZ_EXPORT API_AVAILABLE(macos(13.0))
 @end
 
 NS_ASSUME_NONNULL_END
+

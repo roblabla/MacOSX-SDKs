@@ -68,7 +68,7 @@ typedef NS_ENUM(NSInteger, PHASEPushStreamCompletionCallbackCondition) {
         Control nodes set the logic for how generator nodes are selected, mixed and parameterized before downstream mixer processing.
         Control nodes are always parent nodes, and can be organized into hierarchies for complex sound design scenarios.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESoundEventNodeDefinition : PHASEDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -90,7 +90,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEGeneratorNodeDefinition
     @abstract An object for defining a generator node when building a sound event.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEGeneratorNodeDefinition : PHASESoundEventNodeDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -165,7 +165,7 @@ NS_SWIFT_NAME(setCalibrationMode(calibrationMode:level:));
     @discussion
         Sampler nodes play back registered sound assets.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESamplerNodeDefinition : PHASEGeneratorNodeDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -230,7 +230,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @discussion
         A container node plays back all its children at once.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEContainerNodeDefinition : PHASESoundEventNodeDefinition
 
 /*!
@@ -278,7 +278,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @discussion
         A blend node blends between its children based on a numeric parameter.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEBlendNodeDefinition : PHASESoundEventNodeDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -438,7 +438,7 @@ NS_SWIFT_NAME(addRange(envelope:subtree:));
     @discussion
         A switch node switches between its children based on a string parameter.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESwitchNodeDefinition : PHASESoundEventNodeDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -497,7 +497,7 @@ NS_SWIFT_NAME(init(switchMetaParameterDefinition:))NS_DESIGNATED_INITIALIZER;
     @discussion
         A random node selects one of its children based on a weighted random choice.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASERandomNodeDefinition : PHASESoundEventNodeDefinition
 
 /*!
@@ -543,7 +543,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEPushStreamNodeDefinition
     @abstract An object for defining a push stream sound event node when building a sound event.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEPushStreamNodeDefinition : PHASEGeneratorNodeDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -599,7 +599,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEPushStreamNode
     @abstract An object for addessing an instance of a stream in an executing sound event
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEPushStreamNode : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

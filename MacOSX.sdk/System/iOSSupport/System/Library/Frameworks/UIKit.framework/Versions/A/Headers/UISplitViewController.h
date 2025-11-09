@@ -17,16 +17,16 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerDisplayMode) {
     UISplitViewControllerDisplayModeAutomatic,
     UISplitViewControllerDisplayModeSecondaryOnly,
     UISplitViewControllerDisplayModeOneBesideSecondary, // Two tiled columns. Leading will be UISplitViewControllerColumnSupplementary for UISplitViewControllerStyleTripleColumn, Primary otherwise
-    UISplitViewControllerDisplayModeOneOverSecondary, // Supplementary column overlaid on Secondary column for UISplitViewControllerStyleTripleColumn, Primary overlaid otherwise
+    UISplitViewControllerDisplayModeOneOverSecondary API_UNAVAILABLE(visionos), // Supplementary column overlaid on Secondary column for UISplitViewControllerStyleTripleColumn, Primary overlaid otherwise
     
     // For triple-column style only. Three different ways to lay out primary, supplementary, and secondary columns with the secondary more or less visible, and an additional layout that hides the secondary.
     UISplitViewControllerDisplayModeTwoBesideSecondary NS_ENUM_AVAILABLE_IOS(14_0), // All three columns fully displayed side-by-side and interactive
-    UISplitViewControllerDisplayModeTwoOverSecondary NS_ENUM_AVAILABLE_IOS(14_0), // primary and supplementary columns side-by-side in overlay on top of partially visible detail column (detail column has dimming view). For widths too narrow to see much of the detail when the primary and supplementary columns are tiled.
-    UISplitViewControllerDisplayModeTwoDisplaceSecondary NS_ENUM_AVAILABLE_IOS(14_0), // primary, supplementary and detail columns side-by-side, but the dimmed, noninteractive detail has been displaced toward and cropped on the trailing edge. For wider widths than in TwoOverSecondary but still too narrow for TwoBesideSecondary
+    UISplitViewControllerDisplayModeTwoOverSecondary NS_ENUM_AVAILABLE_IOS(14_0) API_UNAVAILABLE(visionos), // primary and supplementary columns side-by-side in overlay on top of partially visible detail column (detail column has dimming view). For widths too narrow to see much of the detail when the primary and supplementary columns are tiled.
+    UISplitViewControllerDisplayModeTwoDisplaceSecondary NS_ENUM_AVAILABLE_IOS(14_0) API_UNAVAILABLE(visionos), // primary, supplementary and detail columns side-by-side, but the dimmed, noninteractive detail has been displaced toward and cropped on the trailing edge. For wider widths than in TwoOverSecondary but still too narrow for TwoBesideSecondary
 
-    UISplitViewControllerDisplayModePrimaryHidden API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeSecondaryOnly", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeSecondaryOnly,
-    UISplitViewControllerDisplayModeAllVisible API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneBesideSecondary", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeOneBesideSecondary,
-    UISplitViewControllerDisplayModePrimaryOverlay API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneOverSecondary", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeOneOverSecondary,
+    UISplitViewControllerDisplayModePrimaryHidden API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeSecondaryOnly", ios(8.0, 14.0), visionos(1.0, 1.0)) = UISplitViewControllerDisplayModeSecondaryOnly,
+    UISplitViewControllerDisplayModeAllVisible API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneBesideSecondary", ios(8.0, 14.0), visionos(1.0, 1.0)) = UISplitViewControllerDisplayModeOneBesideSecondary,
+    UISplitViewControllerDisplayModePrimaryOverlay API_UNAVAILABLE(visionos) API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerDisplayModeOneOverSecondary", ios(8.0, 14.0)) = UISplitViewControllerDisplayModeOneOverSecondary,
 } API_AVAILABLE(ios(8.0));
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerPrimaryEdge) {
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerBackgroundStyle) {
 } API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UISplitViewControllerStyle) {
-    UISplitViewControllerStyleUnspecified,
+    UISplitViewControllerStyleUnspecified API_DEPRECATED_WITH_REPLACEMENT("UISplitViewControllerStyleDoubleColumn", visionos(1.0, 1.0)),
     UISplitViewControllerStyleDoubleColumn,
     UISplitViewControllerStyleTripleColumn,
 } API_AVAILABLE(ios(14.0));
@@ -59,8 +59,8 @@ typedef NS_ENUM(NSInteger, UISplitViewControllerColumn) {
 typedef NS_ENUM(NSInteger, UISplitViewControllerSplitBehavior) {
     UISplitViewControllerSplitBehaviorAutomatic,
     UISplitViewControllerSplitBehaviorTile,
-    UISplitViewControllerSplitBehaviorOverlay,
-    UISplitViewControllerSplitBehaviorDisplace,
+    UISplitViewControllerSplitBehaviorOverlay API_UNAVAILABLE(visionos),
+    UISplitViewControllerSplitBehaviorDisplace API_UNAVAILABLE(visionos),
 } API_AVAILABLE(ios(14.0));
 
 // Control the displayModeButtonItem visibility for column-style UISplitViewController
@@ -83,7 +83,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
 @property (nullable, nonatomic, weak) id <UISplitViewControllerDelegate> delegate;
 
 // Default NO. The secondary-only shortcut button is applicable only for UISplitViewControllerStyleTripleColumn
-@property(nonatomic) BOOL showsSecondaryOnlyButton API_AVAILABLE(ios(14.0));
+@property(nonatomic) BOOL showsSecondaryOnlyButton API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(visionos);
 
 // Controls allowed display modes
 @property(nonatomic) UISplitViewControllerSplitBehavior preferredSplitBehavior API_AVAILABLE(ios(14.0)); // default Automatic, actual behavior will be determined by width buckets and view aspect ration
@@ -120,7 +120,7 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
 @property (nonatomic, copy) NSArray<__kindof UIViewController *> *viewControllers; // -setViewController:forColumn:/-viewControllerForColumn: recommended for column-style UISplitViewController
 
 // If 'YES', hidden view can be presented and dismissed via a swipe gesture. Defaults to 'YES'.
-@property (nonatomic) BOOL presentsWithGesture API_AVAILABLE(ios(5.1));
+@property (nonatomic) BOOL presentsWithGesture API_AVAILABLE(ios(5.1)) API_UNAVAILABLE(visionos);
 
 // Specifies whether the split view controller has collapsed its primary and secondary view controllers together
 @property(nonatomic, readonly, getter=isCollapsed) BOOL collapsed  API_AVAILABLE(ios(8.0));
@@ -133,14 +133,14 @@ If an animation is started due to -show/hideColumn:, the transitionCoordinator f
 
 // A system bar button item whose action will change the displayMode property depending on the result of targetDisplayModeForActionInSplitViewController:. When inserted into the navigation bar of the secondary view controller it will change its appearance to match its target display mode. When the target displayMode is PrimaryHidden, this will appear as a fullscreen button, for AllVisible or PrimaryOverlay it will appear as a Back button, and when it won't cause any action it will become hidden.
 // Not supported for column-style UISplitViewController
-@property (nonatomic, readonly) UIBarButtonItem *displayModeButtonItem API_AVAILABLE(ios(8.0));
+@property (nonatomic, readonly) UIBarButtonItem *displayModeButtonItem API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(visionos);
 
 /* For column-style UISplitViewController only.
     UISplitViewControllerDisplayModeButtonVisibilityAutomatic is the default behavior where setting presentsWithGesture to NO hides the displayModeButton.
     Set to UISplitViewControllerDisplayModeButtonVisibilityNever to prevent the displayModeButton from showing.
     Set to UISplitViewControllerDisplayModeButtonVisibilityAlways to allow the displayModeButton to show when presentsWithGesture is NO. Note that in displayModes that would not be expected to show the button when presentsWithGesture is YES (e.g., UISplitViewControllerDisplayModeTwoOverSecondary), a value of Always will not force the button to show.
  */
-@property(nonatomic) UISplitViewControllerDisplayModeButtonVisibility displayModeButtonVisibility API_AVAILABLE(ios(14.5)); // default: automatic
+@property(nonatomic) UISplitViewControllerDisplayModeButtonVisibility displayModeButtonVisibility API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(visionos); // default: automatic
 
 
 // An animatable property that can be used to adjust the relative width of the primary view controller in the split view controller. This preferred width will be limited by the maximum and minimum properties (and potentially other system heuristics).
@@ -229,17 +229,17 @@ NS_SWIFT_UI_ACTOR
 
 // Called when a button should be added to a toolbar for a hidden view controller.
 // Implementing this method allows the hidden view controller to be presented via a swipe gesture if 'presentsWithGesture' is 'YES' (the default).
-- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);
+- (void)splitViewController:(UISplitViewController *)svc willHideViewController:(UIViewController *)aViewController withBarButtonItem:(UIBarButtonItem *)barButtonItem forPopoverController:(UIPopoverController *)pc API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Called when the view is shown again in the split view, invalidating the button and popover controller.
-- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);
+- (void)splitViewController:(UISplitViewController *)svc willShowViewController:(UIViewController *)aViewController invalidatingBarButtonItem:(UIBarButtonItem *)barButtonItem API_DEPRECATED("Use splitViewController:willChangeToDisplayMode: and displayModeButtonItem instead", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Called when the view controller is shown in a popover so the delegate can take action like hiding other popovers.
-- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController API_DEPRECATED_WITH_REPLACEMENT("splitViewController:willChangeToDisplayMode:", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);
+- (void)splitViewController:(UISplitViewController *)svc popoverController:(UIPopoverController *)pc willPresentViewController:(UIViewController *)aViewController API_DEPRECATED_WITH_REPLACEMENT("splitViewController:willChangeToDisplayMode:", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Returns YES if a view controller should be hidden by the split view controller in a given orientation.
 // (This method is only called on the leftmost view controller and only discriminates portrait from landscape.)
-- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation  API_DEPRECATED_WITH_REPLACEMENT("preferredDisplayMode", ios(5.0, 8.0)) API_UNAVAILABLE(tvos);
+- (BOOL)splitViewController:(UISplitViewController *)svc shouldHideViewController:(UIViewController *)vc inOrientation:(UIInterfaceOrientation)orientation  API_DEPRECATED_WITH_REPLACEMENT("preferredDisplayMode", ios(5.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 - (UISplitViewControllerColumn)splitViewController:(UISplitViewController *)svc topColumnForCollapsingToProposedTopColumn:(UISplitViewControllerColumn)proposedTopColumn API_AVAILABLE(ios(14.0));
 - (UISplitViewControllerDisplayMode)splitViewController:(UISplitViewController *)svc displayModeForExpandingToProposedDisplayMode:(UISplitViewControllerDisplayMode)proposedDisplayMode API_AVAILABLE(ios(14.0));

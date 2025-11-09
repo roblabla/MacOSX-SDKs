@@ -2,6 +2,8 @@
 
 #import <Foundation/Foundation.h>
 
+@class ASAuthorizationProviderExtensionLoginManager;
+
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
@@ -116,6 +118,19 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  */
 @property (nonatomic, copy) NSURL *jwksEndpointURL;
 
+
+/*!
+ @abstract The root certificates to use for trust evaluation of jwks keys.
+ @discussion if set, certificates will be required in jwks responses and evaluated using the supplied certificates.  If the jwks certificates are missing or fail trust evaluation the login will fail.
+ */
+@property (nonatomic, copy) NSArray *jwksTrustedRootCertificates NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The device context for storing device meta data.
+ */
+@property (nonatomic, nullable, copy) NSData *deviceContext API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
 #pragma mark - Server Nonce
 
 /*!
@@ -143,16 +158,16 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /*!
  @abstract Sets custom claims to be added to the embedded assertion request header.
  @param claims The claims to be added. It must serialize as valid JSON to be accepted.
- @param error Nil or a NSError indicating why the claims where rejected.
- @returns True when successful and false when claims are rejected.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
  */
 - (BOOL)setCustomAssertionRequestHeaderClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error;
 
 /*!
  @abstract Sets custom claims to be added to the embedded assertion request body.
  @param claims The claims to be added. It must serialize as valid JSON to be accepted.
- @param error Nil or a NSError indicating why the claims where rejected.
- @returns True when successful and false when claims are rejected.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
  */
 - (BOOL)setCustomAssertionRequestBodyClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error;
 
@@ -162,6 +177,13 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  @abstract Additional login scopes.
  */
 @property (nonatomic, copy) NSString *additionalScopes;
+
+
+/*!
+ @abstract Additional authorization scopes.
+ */
+@property (nonatomic, nullable, copy) NSString *additionalAuthorizationScopes;
+
 
 /*!
  @abstract If true and there is a refresh token for the user in the SSO tokens, it will be included in the login request.
@@ -173,6 +195,13 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  */
 @property (nonatomic, copy) NSString *previousRefreshTokenClaimName;
 
+
+/*!
+ @abstract The request parameter name for the JWT.  The default is "assertion".
+ */
+@property (nonatomic, nullable, copy) NSString *customRequestJWTParameterName;
+
+
 /*!
  @abstract Custom values added to the login POST request body.
  */
@@ -181,23 +210,69 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 /*!
  @abstract Sets custom claims to be added to the login request header.
  @param claims The claims to be added. It must serialize as valid JSON to be accepted.
- @param error Nil or a NSError indicating why the claims where rejected.
- @returns True when successful and false when claims are rejected.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
  */
 - (BOOL)setCustomLoginRequestHeaderClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable) error;
 
 /*!
  @abstract Sets custom claims to be added to the login request body.
  @param claims The claims to be added. It must serialize as valid JSON to be accepted.
- @param error Nil or a NSError indicating why the claims where rejected.
- @returns True when successful and false when claims are rejected.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
  */
 - (BOOL)setCustomLoginRequestBodyClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable) error;
+
+
+/*!
+ @abstract The claim name for the user unique identifier in the id token. Defaults to "sub".
+ */
+@property (nonatomic, nullable, copy) NSString *uniqueIdentifierClaimName;
+
+/*!
+ @abstract The claim name for group membership request.
+ */
+@property (nonatomic, nullable, copy) NSString *groupRequestClaimName;
+
+/*!
+ @abstract The claim name for group responses in the id_token.
+ */
+@property (nonatomic, nullable, copy) NSString *groupResponseClaimName;
+
 
 /*!
  @abstract The Kerberos ticket mappings to use.
  */
 @property (nonatomic, copy) NSArray<ASAuthorizationProviderExtensionKerberosMapping *> *kerberosTicketMappings;
+
+
+#pragma mark - Refresh Request
+
+/*!
+ @abstract Token Refresh Endpoint URL for login request.  Defaults to the tokenEndpointURL.
+ */
+@property (nonatomic, nullable, copy) NSURL *refreshEndpointURL API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Custom values added to the refresh POST request body.
+ */
+@property (nonatomic, copy) NSArray<NSURLQueryItem *> *customRefreshRequestValues API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Sets custom claims to be added to the refresh request header.
+ @param claims The claims to be added. It must serialize as valid JSON to be accepted.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
+ */
+- (BOOL)setCustomRefreshRequestHeaderClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Sets custom claims to be added to the refresh request bode.
+ @param claims The claims to be added. It must serialize as valid JSON to be accepted.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
+ */
+- (BOOL)setCustomRefreshRequestBodyClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 // MARK: - Federation
@@ -236,6 +311,70 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
  @abstract The custom query string values to add when making the preauthenticaion request.
  */
 @property (nonatomic, copy) NSArray<NSURLQueryItem *> *customFederationUserPreauthenticationRequestValues API_AVAILABLE(macos(13.3)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
+// MARK: - Request Encryption
+
+/*!
+ @abstract The public key to use for encrypting the embedded login assertion.
+ @discussion Only applies to password authentication.  If set, the password will encrypted in an embedded assertion instead of the login request itself.
+ */
+@property (nonatomic, nullable, assign) SecKeyRef loginRequestEncryptionPublicKey API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The APV prefix used for encrypted embedded login assertions.
+ */
+@property (nonatomic, nullable, copy) NSData *loginRequestEncryptionAPVPrefix API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+// MARK: - Key Exchange
+
+/*!
+ @abstract The url endpoint for key service, defaults to token tokenEndpointURL.
+ */
+@property (nonatomic, nullable, copy) NSURL *keyEndpointURL API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Custom values added to the key exchange POST request body.
+ */
+@property (nonatomic, copy) NSArray<NSURLQueryItem *> *customKeyExchangeRequestValues API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Sets custom claims to be added to the key exchange request header.
+ @param claims The claims to be added. It must serialize as valid JSON to be accepted.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
+ */
+- (BOOL)setCustomKeyExchangeRequestHeaderClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Sets custom claims to be added to the key exchange request body.
+ @param claims The claims to be added. It must serialize as valid JSON to be accepted.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
+ */
+- (BOOL)setCustomKeyExchangeRequestBodyClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Custom values added to the key request POST request body.
+ */
+@property (nonatomic, copy) NSArray<NSURLQueryItem *> *customKeyRequestValues API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Sets custom claims to be added to the key request header.
+ @param claims The claims to be added. It must serialize as valid JSON to be accepted.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
+ */
+- (BOOL)setCustomKeyRequestHeaderClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract Sets custom claims to be added to the key request body.
+ @param claims The claims to be added. It must serialize as valid JSON to be accepted.
+ @param error Nil or an NSError indicating why the claims were rejected.
+ @returns YES when successful and NO when claims are rejected.
+ */
+- (BOOL)setCustomKeyRequestBodyClaims:(NSDictionary<NSString *, id> *)claims returningError:(NSError * _Nullable * _Nullable)error API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
 
 @end
 

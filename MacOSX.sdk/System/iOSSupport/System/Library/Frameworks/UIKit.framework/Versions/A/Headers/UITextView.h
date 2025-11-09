@@ -19,12 +19,13 @@
 #import <UIKit/UIDataDetectors.h>
 #import <UIKit/UITextItemInteraction.h>
 #import <UIKit/UIContentSizeCategoryAdjusting.h>
+#import <UIKit/UILetterformAwareAdjusting.h>
 #import <UIKit/UITextPasteConfigurationSupporting.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-@class UIFindInteraction, UIFont, UIColor, UIMenu, UIMenuElement, UITextView, NSTextContainer, NSTextLayoutManager, NSLayoutManager, NSTextStorage, NSTextAttachment;
-@protocol UIEditMenuInteractionAnimating;
+@class UIFindInteraction, UIFont, UIColor, UIMenu, UIMenuElement, UITextView, NSTextContainer, NSTextLayoutManager, NSLayoutManager, NSTextStorage, NSTextAttachment, UITextItem, UITextItemMenuConfiguration;
+@protocol UIEditMenuInteractionAnimating, UIContextMenuInteractionAnimating;
 
 NS_SWIFT_UI_ACTOR
 @protocol UITextViewDelegate <NSObject, UIScrollViewDelegate>
@@ -41,12 +42,6 @@ NS_SWIFT_UI_ACTOR
 - (void)textViewDidChange:(UITextView *)textView;
 
 - (void)textViewDidChangeSelection:(UITextView *)textView;
-
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_AVAILABLE(ios(10.0));
-- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_AVAILABLE(ios(10.0));
-
-- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithURL:inRange:interaction:", ios(7.0, 10.0));
-- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithTextAttachment:inRange:interaction:", ios(7.0, 10.0));
 
 /**
  * @abstract Asks the delegate for the menu to be shown for the specified text range.
@@ -75,10 +70,67 @@ NS_SWIFT_UI_ACTOR
  */
 - (void)textView:(UITextView *)textView willDismissEditMenuWithAnimator:(id<UIEditMenuInteractionAnimating>)animator API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos);
 
+/**
+ * Asks the delegate for the action to be performed when interacting with a text item. If a nil action is provided, the text view
+ * will request a menu to be presented on primary action if possible.
+ *
+ * @param textView  The text view requesting the primary action.
+ * @param textItem  The text item for performing said action.
+ * @param defaultAction The default action for the text item. Return this to perform the default action.
+ *
+ * @return Return a UIAction to be performed when the text item is interacted with. Return @c nil to prevent the action from being performed.
+ */
+- (nullable UIAction *)textView:(UITextView *)textView primaryActionForTextItem:(UITextItem *)textItem defaultAction:(UIAction *)defaultAction API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+
+/**
+ * Asks the delegate for the menu configuration to be performed when interacting with a text item.
+ *
+ * @param textView  The text view requesting the menu.
+ * @param textItem  The text item for performing said action.
+ * @param defaultMenu  The default menu for the specified text item.
+ *
+ * @return Return a menu configuration to be presented when the text item is interacted with. Return @c nil to prevent the menu from being presented.
+ */
+- (nullable UITextItemMenuConfiguration *)textView:(UITextView *)textView menuConfigurationForTextItem:(UITextItem *)textItem defaultMenu:(UIMenu *)defaultMenu API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+
+/**
+ * Informs the delegate that a text item menu is about to be presented with the specified animator.
+ *
+ * @param textView  The text view showing the menu.
+ * @param textItem  The text item for performing said action.
+ * @param animator  Appearance animator. Add animations to this object to run them alongside the appearance transition.
+ */
+- (void)textView:(UITextView *)textView textItemMenuWillDisplayForTextItem:(UITextItem *)textItem animator:(id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+
+/**
+ * Informs the delegate that a text item menu is about to be dismissed with the specified animator.
+ *
+ * @param textView  The text view showing the menu.
+ * @param textItem  The text item for performing said action.
+ * @param animator  Dismissal animator. Add animations to this object to run them alongside the dismissal transition.
+ */
+- (void)textView:(UITextView *)textView textItemMenuWillEndForTextItem:(UITextItem *)textItem animator:(id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(watchos, tvos);
+
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_DEPRECATED("Replaced by primaryActionForTextItem: and menuConfigurationForTextItem: for additional customization options.", ios(10.0, 17.0), visionos(1.0, 1.0));
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange interaction:(UITextItemInteraction)interaction API_DEPRECATED("Replaced by primaryActionForTextItem: and menuConfigurationForTextItem: for additional customization options.", ios(10.0, 17.0), visionos(1.0, 1.0));
+
+- (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithURL:inRange:interaction:", ios(7.0, 10.0)) API_UNAVAILABLE(visionos);
+- (BOOL)textView:(UITextView *)textView shouldInteractWithTextAttachment:(NSTextAttachment *)textAttachment inRange:(NSRange)characterRange API_DEPRECATED_WITH_REPLACEMENT("textView:shouldInteractWithTextAttachment:inRange:interaction:", ios(7.0, 10.0)) API_UNAVAILABLE(visionos);
+
 @end
 
+/// The type of border around the text view.
+typedef NS_ENUM(NSInteger, UITextViewBorderStyle) {
+    /// The text view does not display a border.
+    UITextViewBorderStyleNone,
+
+    /// Displays a rounded-style border for the text view.
+    UITextViewBorderStyleRoundedRect API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios),
+} API_AVAILABLE(ios(17.0), visionos(1.0));
+
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
-@interface UITextView : UIScrollView <UITextInput, UIContentSizeCategoryAdjusting>
+@interface UITextView : UIScrollView <UITextInput, UIContentSizeCategoryAdjusting, UILetterformAwareAdjusting>
 
 @property(nullable,nonatomic,weak) id<UITextViewDelegate> delegate;
 
@@ -88,7 +140,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic) NSTextAlignment textAlignment;    // default is NSLeftTextAlignment
 @property(nonatomic) NSRange selectedRange;
 @property(nonatomic,getter=isEditable) BOOL editable API_UNAVAILABLE(tvos);
-@property(nonatomic,getter=isSelectable) BOOL selectable API_AVAILABLE(ios(7.0)); // toggle selectability, which controls the ability of the user to select content and interact with URLs & attachments. On tvOS this also makes the text view focusable.
+// Toggle selectability, which controls the ability of the user to select content and interact with URLs & attachments. On tvOS this also makes the text view focusable.
+// By default, text item interaction follows selectable if the text item methods on UITextViewDelegate are not implemented; otherwise, they follow the result of the specified delegate methods.
+@property(nonatomic,getter=isSelectable) BOOL selectable API_AVAILABLE(ios(7.0));
 @property(nonatomic) UIDataDetectorTypes dataDetectorTypes API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
 
 @property(nonatomic) BOOL allowsEditingTextAttributes API_AVAILABLE(ios(6.0)); // defaults to NO
@@ -141,6 +195,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /// Enables this text view's built-in find interaction.
 @property (nonatomic, readwrite, getter=isFindInteractionEnabled) BOOL findInteractionEnabled API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+
+
+/// The border style for the text field.
+@property (nonatomic) UITextViewBorderStyle borderStyle API_AVAILABLE(ios(17.0), visionos(1.0));
 
 @end
 

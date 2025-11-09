@@ -14,7 +14,7 @@
 
 #import <UIKit/UIKit.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
  * @abstract This view can render a camera source.
@@ -30,6 +30,6 @@ HM_EXTERN API_AVAILABLE(ios(10.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABL
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)
 
 #endif

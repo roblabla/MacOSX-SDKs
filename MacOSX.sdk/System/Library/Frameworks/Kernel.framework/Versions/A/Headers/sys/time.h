@@ -137,7 +137,7 @@ struct  itimerval {
 }
 #define TIMESPEC_TO_TIMEVAL(tv, ts) {                                   \
 	(tv)->tv_sec = (ts)->tv_sec;                                    \
-	(tv)->tv_usec = (ts)->tv_nsec / 1000;                           \
+	(tv)->tv_usec = (__darwin_suseconds_t)((ts)->tv_nsec / 1000);   \
 }
 
 struct timezone {

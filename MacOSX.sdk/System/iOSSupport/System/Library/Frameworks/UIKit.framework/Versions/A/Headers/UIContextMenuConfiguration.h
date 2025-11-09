@@ -16,7 +16,7 @@ typedef NS_ENUM(NSInteger, UIContextMenuConfigurationElementOrder) {
     UIContextMenuConfigurationElementOrderAutomatic = 0,  /// Allows the system to choose the appropriate ordering strategy for the current context.
     UIContextMenuConfigurationElementOrderPriority,       /// Order menu elements according to priority. Keeping the first element in the UIMenu closest to user's interaction point.
     UIContextMenuConfigurationElementOrderFixed,          /// Display menu elements using their order in the UIMenu's children array.
-} NS_SWIFT_NAME(UIContextMenuConfiguration.ElementOrder) API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+} NS_SWIFT_NAME(UIContextMenuConfiguration.ElementOrder) API_AVAILABLE(ios(16.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 
 @class UIViewController;
@@ -35,7 +35,7 @@ typedef UIMenu * _Nullable (^UIContextMenuActionProvider)(NSArray<UIMenuElement 
 typedef UIViewController * _Nullable (^UIContextMenuContentPreviewProvider)(void);
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIContextMenuConfiguration : NSObject
 
 /// This configuration's identifier. When representing multiple items in your app, this identifier
@@ -43,14 +43,14 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 @property (nonatomic, readonly) id<NSCopying> identifier;
 
 /// When this menu acts on multiple items, you may include the identifiers of secondary items to display a multi-item menu.
-@property (nonatomic, copy) NSSet<id<NSCopying>> *secondaryItemIdentifiers API_AVAILABLE(ios(16.0));
+@property (nonatomic, copy) NSSet<id<NSCopying>> *secondaryItemIdentifiers API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
 
 /// Number of items on which this menu acts. Used to badge a multi-item menu's preview stack.
 /// When unset, this value is determined automatically by the system. Values lower than 2 hide the badge.
-@property (nonatomic) NSInteger badgeCount API_AVAILABLE(ios(16.0));
+@property (nonatomic) NSInteger badgeCount API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos);
 
 /// Preferred menu element ordering strategy for this menu.
-@property (nonatomic) UIContextMenuConfigurationElementOrder preferredMenuElementOrder API_AVAILABLE(ios(16.0));
+@property (nonatomic) UIContextMenuConfigurationElementOrder preferredMenuElementOrder API_AVAILABLE(ios(16.0), tvos(17.0));
 
 /*!
  * @abstract Returns a UIContextMenuConfiguration.

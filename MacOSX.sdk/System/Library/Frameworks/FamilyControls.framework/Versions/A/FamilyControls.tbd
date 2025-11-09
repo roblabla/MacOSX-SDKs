@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/FamilyControls.framework/Versions/A/FamilyControls'
-current-version: 1066
+current-version: 1112
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -130,6 +130,7 @@ exports:
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTj', 
                        '_$s14FamilyControls10UsageStoreC4save2toy10Foundation3URLV_tKFTq', 
                        '_$s14FamilyControls10UsageStoreC5index5afterSD5IndexVySSAA0C10ItemRecordV_GAJ_tF', 
+                       '_$s14FamilyControls10UsageStoreC8contains5whereS2bSS3key_AA0C10ItemRecordV5valuet_tKXE_tKF', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_Gvg', 
                        '_$s14FamilyControls10UsageStoreC8endIndexSD0F0VySSAA0C10ItemRecordV_GvpMV', 
                        '_$s14FamilyControls10UsageStoreC9removeAllyyF', '_$s14FamilyControls10UsageStoreCACycfC', 
@@ -306,7 +307,7 @@ exports:
                        '_$s14FamilyControls15UsageItemRecordVSHAAMc', '_$s14FamilyControls15UsageItemRecordVSQAAMc', 
                        '_$s14FamilyControls15UsageItemRecordVSeAAMc', '_$s14FamilyControls15UsageItemRecordVs23CustomStringConvertibleAAMc', 
                        '_$s14FamilyControls19AuthorizationCenterC014revokeInternalC017completionHandleryys6ResultOyyts5Error_pGc_tF', 
-                       '_$s14FamilyControls19AuthorizationCenterC015requestInternalC017completionHandleryys6ResultOyyts5Error_pGc_tF', 
+                       '_$s14FamilyControls19AuthorizationCenterC015requestInternalC03for17completionHandleryAA0aB6MemberO_ys6ResultOyyts5Error_pGctF', 
                        '_$s14FamilyControls19AuthorizationCenterC02isaB10AuthorizedSbvg', 
                        '_$s14FamilyControls19AuthorizationCenterC02isaB10AuthorizedSbvpMV', 
                        '_$s14FamilyControls19AuthorizationCenterC05resetC016recordIdentifier17completionHandlery10Foundation4UUIDV_ys6ResultOyyts5Error_pGctF', 

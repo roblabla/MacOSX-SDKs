@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
-install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
-current-version: 1732.100.12
+install-name:    '/System/Library/PrivateFrameworks/Symptoms.framework/Versions/A/Frameworks/SymptomPresentationFeed.framework/Versions/A/SymptomPresentationFeed'
+current-version: 1848.0.5
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -62,7 +62,8 @@ exports:
                        _kUsageNetworkWiredInBytes_mean, _kUsageNetworkWiredInBytes_var, 
                        _kUsageNetworkWiredOutBytes, _kUsageNetworkWiredOutBytes_mean, 
                        _kUsageNetworkWiredOutBytes_var, _kUsageNetworkWiredSampleCount, 
-                       _kUsageProcessBundleName, _kUsageProcessProcName, _kUsageSinceTime ]
+                       _kUsageProcessBundleName, _kUsageProcessExtensionName, _kUsageProcessProcName, 
+                       _kUsageSinceTime ]
     objc-classes:    [ NWAppAdvice, NWNetworkAdviceUpdate, NWNetworkOfInterest, NWNetworkOfInterestManager, 
                        NWNetworkPredictions, NWPVar, NWPVarBandit, NWPVarValueItem, 
                        NetworkPerformanceFeed, ProcessNetStatsIndividualEntity, SFCache, 

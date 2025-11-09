@@ -14,11 +14,11 @@ exports:
     symbols:         [ _BAAppStoreClientErrorDomain, _BAAppStoreProgressObserverStateString, 
                        _BABackgroundDownloaderExtensionLabel, _BAContentRequestToString, 
                        _BADownloadNecessityToString, _BADownloaderPriorityDefault, 
-                       _BADownloaderPriorityMax, _BADownloaderPriorityMin, _BAEssentialMaxInstallSize, 
-                       _BAInitialRestrictionsDomainAllowList, _BAInitialRestrictionsDownloadAllowance, 
-                       _BAInitialRestrictionsEssentialDownloadAllowance, _BAInitialRestrictionsKey, 
-                       _BAInitialRestrictionsOptionalDownloadAllowance, _BAManifestURL, 
-                       _BAMaxInstallSize, _BAOptionalMaxInstallSize ]
+                       _BADownloaderPriorityMax, _BADownloaderPriorityMin, _BAErrorDomain, 
+                       _BAEssentialMaxInstallSize, _BAInitialRestrictionsDomainAllowList, 
+                       _BAInitialRestrictionsDownloadAllowance, _BAInitialRestrictionsEssentialDownloadAllowance, 
+                       _BAInitialRestrictionsKey, _BAInitialRestrictionsOptionalDownloadAllowance, 
+                       _BAManifestURL, _BAMaxInstallSize, _BAOptionalMaxInstallSize ]
     objc-classes:    [ BAAgentSystemProxy, BAAppExtensionInfo, BAAppStoreClient, 
                        BAAppStoreEventDescriptor, BAAppStorePrepareDescriptor, BAAppStoreProgressConfiguration, 
                        BAAppStoreProgressInfoDescriptor, BAAppStoreProgressObserver, 

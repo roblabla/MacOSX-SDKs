@@ -1,4 +1,4 @@
-framework module AudioVideoBridging [extern_c] {
+framework module AudioVideoBridging {
   umbrella header "AudioVideoBridging.h"
   
   textual header "AVBConstants.h"

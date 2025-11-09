@@ -1,8 +1,10 @@
 /*
     File:		IOBluetoothSDPDataElement.h
-    Copyright:	� 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	� 2002, 2023 by Apple Computer, Inc. All rights reserved.
 	Writers:	Eric Brown
 */
+
+#if __OBJC__
 
 #import <Foundation/Foundation.h>
 
@@ -262,3 +264,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (BOOL)containsValue:(NSObject *)cmpValue;
 
 @end
+
+#endif // __OBJC__

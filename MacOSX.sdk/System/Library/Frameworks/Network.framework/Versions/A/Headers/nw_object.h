@@ -2,7 +2,7 @@
 //  nw_object.h
 //  Network
 //
-//  Copyright (c) 2016-2021 Apple Inc. All rights reserved.
+//  Copyright (c) 2016-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef __NW_OBJECT_H__
@@ -24,9 +24,15 @@
  * See <os/object.h> for details.
  */
 
+#if __has_attribute(__swift_attr__)
+#  define NW_SWIFT_SENDABLE __attribute__((swift_attr("@Sendable")))
+#else // __has_attribute(__swift_attr__)
+#  define NW_SWIFT_SENDABLE
+#endif // __has_attribute(__swift_attr__)
 
 #if OS_OBJECT_USE_OBJC
 #  define NW_OBJECT_DECL(type) OS_OBJECT_DECL(type)
+#  define NW_SENDABLE_OBJECT_DECL(type) NW_SWIFT_SENDABLE NW_OBJECT_DECL(type)
 #  define NW_OBJECT_DECL_SUBCLASS(type, super) OS_OBJECT_DECL_SUBCLASS(type, super)
 #else // OS_OBJECT_USE_OBJC
 #  define NW_OBJECT_DECL(type)					\
@@ -34,6 +40,7 @@
 		typedef	struct type *type##_t
 #  define NW_OBJECT_DECL_SUBCLASS(type, super)	\
 		typedef super##_t type##_t
+#  define NW_SENDABLE_OBJECT_DECL(type) NW_OBJECT_DECL(type)
 #endif // OS_OBJECT_USE_OBJC
 
 

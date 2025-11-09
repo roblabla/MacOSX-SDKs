@@ -11,12 +11,12 @@ exports:
                        _LIUpdateNSFileProviderRootContainerItemIdentifier, _LIUpdateNSFileProviderWorkingSetContainerItemIdentifier, 
                        _LiveFSAuthCredPasswordKey, _LiveFSAuthCredUsernameKey, _LiveFSFileSystemTypeName, 
                        _LiveFSMounterDisplayNameKey, _LiveFSMounterDomainContainsPhotos, 
-                       _LiveFSMounterDomainErrorKey, _LiveFSMounterDomainHidden, 
-                       _LiveFSMounterDomainStorageKey, _LiveFSMounterMountIDKey, 
-                       _LiveFSMounterMountStateKey, _LiveFSMounterMountedOnKey, _LiveFSMounterVolumeNameKey, 
-                       _LiveFSMounterVolumeProviderNameKey, _LiveFSVersionNumber, 
-                       _LiveFSVersionString, _getBootUUID, _getNSErrorFromLiveFSErrno, 
-                       _livefs_std_log ]
+                       _LiveFSMounterDomainErasable, _LiveFSMounterDomainErrorKey, 
+                       _LiveFSMounterDomainHidden, _LiveFSMounterDomainStorageKey, 
+                       _LiveFSMounterMountIDKey, _LiveFSMounterMountStateKey, _LiveFSMounterMountedOnKey, 
+                       _LiveFSMounterVolumeNameKey, _LiveFSMounterVolumeProviderNameKey, 
+                       _LiveFSVersionNumber, _LiveFSVersionString, _getBootUUID, 
+                       _getNSErrorFromLiveFSErrno, _livefs_std_log ]
     objc-classes:    [ LiveFSAppleDouble, LiveFSAppleDoubleManager, LiveFSClient, 
                        LiveFSDiskUnlock, LiveFSHexAndASCIIString, LiveFSIDHelper, 
                        LiveFSItemPair, LiveFSLRUCache, LiveFSMachPort, LiveFSMemoryMap, 

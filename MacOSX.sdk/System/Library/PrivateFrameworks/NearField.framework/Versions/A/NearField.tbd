@@ -4,8 +4,12 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NearField.framework/Versions/A/NearField'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _NFSecureElementManagerSessionECDSACertificateKey, _NFSecureElementManagerSessionRSAACertificateKey, 
-                       _NFSignedPlatformData, _NFSignedPlatformSignatureBlob, _NF_DCK_EVENT_KEY_APPLET_IDENTIFIER, 
+    symbols:         [ _CH_APP_NAME, _IsValueCBOREncodable, _MAX_HANDOVER_SELECT_DELAY, 
+                       _NFSecureElementManagerSessionECDSACertificateKey, _NFSecureElementManagerSessionRSAACertificateKey, 
+                       _NFSelectVASResponseKeyAppLabel, _NFSelectVASResponseKeyAppVersion, 
+                       _NFSelectVASResponseKeyMobileCapabilities, _NFSelectVASResponseKeySWStatus, 
+                       _NFSelectVASResponseKeyUnpredictable, _NFSignedPlatformData, 
+                       _NFSignedPlatformSignatureBlob, _NF_DCK_EVENT_KEY_APPLET_IDENTIFIER, 
                        _NF_DCK_EVENT_KEY_ERROR, _NF_DCK_EVENT_KEY_KEY_IDENTIFIER, 
                        _NF_DCK_EVENT_KEY_NAME, _NF_DCK_EVENT_KEY_RANGING_SUSPENSION_REASONS, 
                        _NF_DCK_EVENT_KEY_RANGING_TIMEOUT_SEC, _NF_DCK_EVENT_KEY_READER_IDENTIFIER, 
@@ -15,8 +19,11 @@ exports:
                        _NfRestoreCopyUniqueFDRKey, _ObliterationDeleteAllApplets, 
                        _PTErrorDatabase, _PTErrorInternal, _PTErrorInvalidParameters, 
                        _PTErrorKeyAlreadyExist, _PTErrorKeyNotFound, _PTErrorNoMemory, 
-                       _PTErrorRefresh, _PTErrorRequireLocalValidation ]
-    objc-classes:    [ NFApplet, NFAppletExtraInfo, NFAssertion, NFContactlessPaymentEndEvent, 
+                       _PTErrorRefresh, _PTErrorRequireLocalValidation, _SW_STATUS_COND_NOT_SATISFIED, 
+                       _SW_STATUS_DATA_NOT_FOUND, _SW_STATUS_FAILURE, _SW_STATUS_SUCCESS ]
+    objc-classes:    [ NFApplet, NFAppletExtraInfo, NFAssertion, NFConnectionHandoverController, 
+                       NFConnectionHandoverInitiator, NFConnectionHandoverReceiver, 
+                       NFConnectionHandoverRequest, NFConnectionHandoverSelect, NFContactlessPaymentEndEvent, 
                        NFContactlessPaymentSession, NFContactlessPaymentSessionCallbacks, 
                        NFContactlessPaymentSessionInterface, NFContactlessPaymentStartEvent, 
                        NFContactlessSession, NFContactlessSessionCallbacks, NFContactlessSessionInterface, 
@@ -27,8 +34,9 @@ exports:
                        NFFieldNotification, NFFieldNotificationECP1_0, NFFieldNotificationECP2_0, 
                        NFHCESession, NFHardwareControllerInfo, NFHardwareManager, 
                        NFHardwareManagerCallbacks, NFHardwareManagerInterface, NFHardwareManagerXPC, 
-                       NFHardwareSecureElementInfo, NFLPEMConfigSession, NFLoyaltyAndPaymentSession, 
-                       NFNdefMessage, NFNdefRecord, NFNdefTagSession, NFPeerPaymentEnrollmentRequest, 
+                       NFHardwareSecureElementInfo, NFHostEmulationSessionCallbacks, 
+                       NFLPEMConfigSession, NFLoyaltyAndPaymentSession, NFNdefMessage, 
+                       NFNdefRecord, NFNdefTagSession, NFPeerPaymentEnrollmentRequest, 
                        NFPeerPaymentEnrollmentResponse, NFPeerPaymentRequest, NFPeerPaymentResponse, 
                        NFPeerPaymentSession, NFPeerPaymentTransferRequest, NFReaderSession, 
                        NFReaderSessionCallbacks, NFReaderSessionInterface, NFReaderSessionInternalInterface, 

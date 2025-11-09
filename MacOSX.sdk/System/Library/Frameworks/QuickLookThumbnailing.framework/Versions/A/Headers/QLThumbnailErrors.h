@@ -16,5 +16,5 @@ typedef NS_ERROR_ENUM(QLThumbnailErrorDomain, QLThumbnailError) {
     QLThumbnailErrorNoCachedThumbnail,
     QLThumbnailErrorNoCloudThumbnail,
     QLThumbnailErrorRequestInvalid,
-    QLThumbnailErrorRequestCancelled
+    QLThumbnailErrorRequestCancelled,
 } API_AVAILABLE(macos(10.15), ios(13.0));

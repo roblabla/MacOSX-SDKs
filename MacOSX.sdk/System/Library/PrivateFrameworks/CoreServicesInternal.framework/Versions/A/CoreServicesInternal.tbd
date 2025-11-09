@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreServicesInternal.framework/Versions/A/CoreServicesInternal'
-current-version: 483
+current-version: 505
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -25,9 +25,11 @@ exports:
                        __FSURLCopyResourcePropertyForKey, __FSURLCopyResourcePropertyForKeyFromCache, 
                        __FSURLCopyResourcePropertyValuesAndFlags, __FSURLCreateFileReferenceURLFromFSRef, 
                        __FSURLCreateStandardError, __FSURLEndResourcePropertyCacheAccess, 
-                       __FSURLGetCatalogInfo, __FSURLGetFSRef, __FSURLGetObjectInformationNoIO, 
-                       __FSURLGetResourcePropertyFlags, __FSURLGetVolumePropertyFlags, 
-                       __FSURLNoteSecurityScopedResourceMoved, __FSURLResourceIsReachable, 
+                       __FSURLGetCacheAutoFlushingEnabled, __FSURLGetCatalogInfo, 
+                       __FSURLGetFSRef, __FSURLGetObjectInformationNoIO, __FSURLGetResourcePropertyFlags, 
+                       __FSURLGetVolumePropertyFlags, __FSURLNoteSecurityScopedResourceMoved, 
+                       __FSURLNoteSecurityScopedResourceMovedWithFileIdentifier, 
+                       __FSURLResourceIsReachable, __FSURLSetCacheAutoFlushingEnabled, 
                        __FSURLSetPermanentResourcePropertyForKey, __FSURLSetResourcePropertiesForKeys, 
                        __FSURLSetResourcePropertyForKey, __FSURLStartAccessingSecurityScopedResource, 
                        __FSURLStopAccessingSecurityScopedResource, __FileCacheClearPropertyValueForKey, 

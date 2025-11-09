@@ -107,6 +107,11 @@ UIKIT_EXTERN NSNotificationName const UISceneWillDeactivateNotification API_AVAI
 UIKIT_EXTERN NSNotificationName const UISceneWillEnterForegroundNotification API_AVAILABLE(ios(13.0));
 UIKIT_EXTERN NSNotificationName const UISceneDidEnterBackgroundNotification API_AVAILABLE(ios(13.0));
 
+#pragma mark - Session Roles
+
+// A session role which defines an immersive space scene session.
+UIKIT_EXTERN UISceneSessionRole const UISceneSessionRoleImmersiveSpaceApplication API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, macos, watchos);
+
 NS_HEADER_AUDIT_END(nullability, sendability)
 
 #else

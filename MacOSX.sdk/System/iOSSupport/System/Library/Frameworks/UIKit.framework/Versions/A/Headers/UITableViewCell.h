@@ -32,7 +32,7 @@ typedef NS_ENUM(NSInteger, UITableViewCellStyle) {
 typedef NS_ENUM(NSInteger, UITableViewCellSeparatorStyle) {
     UITableViewCellSeparatorStyleNone,
     UITableViewCellSeparatorStyleSingleLine,
-    UITableViewCellSeparatorStyleSingleLineEtched API_DEPRECATED("Use UITableViewCellSeparatorStyleSingleLine for a single line separator.", ios(2.0, 11.0))
+    UITableViewCellSeparatorStyleSingleLineEtched API_DEPRECATED("Use UITableViewCellSeparatorStyleSingleLine for a single line separator.", ios(2.0, 11.0)) API_UNAVAILABLE(visionos)
 } API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UITableViewCellSelectionStyle) {
@@ -116,9 +116,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, strong) UIView *contentView;
 
 // These properties will always return nil when a non-nil `contentConfiguration` is set.
-@property (nonatomic, readonly, strong, nullable) UIImageView *imageView API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED));   // default is nil.  image view will be created if necessary.
-@property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary.
-@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary (and the current style supports a detail label).
+@property (nonatomic, readonly, strong, nullable) UIImageView *imageView API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED));   // default is nil.  image view will be created if necessary.
+@property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary.
+@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(3.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)); // default is nil.  label will be created if necessary (and the current style supports a detail label).
 
 /// Returns a default background configuration for the cell's style.
 /// This background configuration represents the default appearance that the cell will use.
@@ -187,27 +187,27 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UITableViewCell (UIDeprecated)
 
 // Frame is ignored.  The size will be specified by the table view width and row height.
-- (id)initWithFrame:(CGRect)frame reuseIdentifier:(nullable NSString *)reuseIdentifier API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);
+- (id)initWithFrame:(CGRect)frame reuseIdentifier:(nullable NSString *)reuseIdentifier API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Content properties.  These properties were deprecated in iPhone OS 3.0.  The textLabel and imageView properties above should be used instead.
 // For selected attributes, set the highlighted attributes on the textLabel and imageView.
-@property (nonatomic, copy, nullable)   NSString *text API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);                        // default is nil
-@property (nonatomic, strong, nullable) UIFont   *font API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);                        // default is nil (Use default font)
-@property (nonatomic) NSTextAlignment   textAlignment API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);               // default is UITextAlignmentLeft
-@property (nonatomic) NSLineBreakMode   lineBreakMode API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);               // default is UILineBreakModeTailTruncation
-@property (nonatomic, strong, nullable) UIColor  *textColor API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);                   // default is nil (text draws black)
-@property (nonatomic, strong, nullable) UIColor  *selectedTextColor API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);           // default is nil (text draws white)
+@property (nonatomic, copy, nullable)   NSString *text API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);                        // default is nil
+@property (nonatomic, strong, nullable) UIFont   *font API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);                        // default is nil (Use default font)
+@property (nonatomic) NSTextAlignment   textAlignment API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);               // default is UITextAlignmentLeft
+@property (nonatomic) NSLineBreakMode   lineBreakMode API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);               // default is UILineBreakModeTailTruncation
+@property (nonatomic, strong, nullable) UIColor  *textColor API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);                   // default is nil (text draws black)
+@property (nonatomic, strong, nullable) UIColor  *selectedTextColor API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);           // default is nil (text draws white)
 
-@property (nonatomic, strong, nullable) UIImage  *image API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);                       // default is nil. appears on left next to title.
-@property (nonatomic, strong, nullable) UIImage  *selectedImage API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);               // default is nil
+@property (nonatomic, strong, nullable) UIImage  *image API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);                       // default is nil. appears on left next to title.
+@property (nonatomic, strong, nullable) UIImage  *selectedImage API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);               // default is nil
 
 // Use the new editingAccessoryType and editingAccessoryView instead
-@property (nonatomic) BOOL              hidesAccessoryWhenEditing API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);   // default is YES
+@property (nonatomic) BOOL              hidesAccessoryWhenEditing API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);   // default is YES
 
 // Use the table view data source method -tableView:commitEditingStyle:forRowAtIndexPath: or the table view delegate method -tableView:accessoryButtonTappedForRowWithIndexPath: instead
-@property (nonatomic, assign, nullable) id        target API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);                      // target for insert/delete/accessory clicks. default is nil (i.e. go up responder chain). weak reference
-@property (nonatomic, nullable) SEL               editAction API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);                  // action to call on insert/delete call. set by UITableView
-@property (nonatomic, nullable) SEL               accessoryAction API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos);             // action to call on accessory view clicked. set by UITableView
+@property (nonatomic, assign, nullable) id        target API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);                      // target for insert/delete/accessory clicks. default is nil (i.e. go up responder chain). weak reference
+@property (nonatomic, nullable) SEL               editAction API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);                  // action to call on insert/delete call. set by UITableView
+@property (nonatomic, nullable) SEL               accessoryAction API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);             // action to call on accessory view clicked. set by UITableView
 
 @end
 

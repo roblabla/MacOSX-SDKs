@@ -16,6 +16,7 @@
 #if __has_include( <Availability.h> )
 # include <Availability.h>
 #else
+# define __API_AVAILABLE(...)
 # define __API_DEPRECATED_WITH_REPLACEMENT(...)
 # define __API_DEPRECATED(...)
 #endif

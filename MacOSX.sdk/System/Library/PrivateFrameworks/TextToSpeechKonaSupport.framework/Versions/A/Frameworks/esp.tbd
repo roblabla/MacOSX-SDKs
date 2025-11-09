@@ -490,7 +490,7 @@ exports:
                        _vinstr, _vinteractivelfs, _vintstop, _visleft, _visnonseq, 
                        _visright, _vlinkinit, _vmark, _vmeminit, _vmergable, _vmerge, 
                        _vmove_tv, _vmovel, _vmover, _vmult, _vnegate, _vnegative, 
-                       _vnormalize, _vnspop, _vnspush, _vnsqflags, _vnstackCleanup, 
+                       _vnonseq, _vnormalize, _vnspop, _vnspush, _vnsqflags, _vnstackCleanup, 
                        _vocal_tract_anno, _vocative_phrase, _voice_anno, _voice_feature_anno, 
                        _voices, _vonstack, _vphpsize, _vpretcode, _vprogent, _vproj_l, 
                        _vproj_r, _vproject, _vprt_range, _vprt_strm, _vprt_var, _vpush_var, 

@@ -2,7 +2,7 @@
 //  VZVirtualMachineDelegate.h
 //  Virtualization
 //
-//  Copyright © 2020-2021 Apple Inc. All rights reserved.
+//  Copyright © 2020-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @abstract A class conforming to the VZVirtualMachineDelegate protocol can provide
  methods for tracking the virtual machine state.
  */
+VZ_EXPORT API_AVAILABLE(macos(11.0))
 @protocol VZVirtualMachineDelegate <NSObject>
 
 @optional

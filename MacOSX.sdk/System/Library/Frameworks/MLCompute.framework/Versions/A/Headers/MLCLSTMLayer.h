@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract   A LSTM layer
     @discussion The hidden and cell state for inputs and outputs have a layout of [numberOfLayers, numberOfDirections, batchSize, hiddenSize].
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 @interface MLCLSTMLayer : MLCLayer
 
 /*! @property   descriptor

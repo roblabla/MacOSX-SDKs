@@ -18,8 +18,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Discussion:
  *    Typedef of block to be invoked when the device's activity is updated.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+typedef void (^CMMotionActivityHandler)(CMMotionActivity * __nullable activity) COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos, visionos);
+#else
 typedef void (^CMMotionActivityHandler)(CMMotionActivity * __nullable activity) COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
-
+#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 /*
  *  CMMotionActivityQueryHandler
  *
@@ -27,7 +30,11 @@ typedef void (^CMMotionActivityHandler)(CMMotionActivity * __nullable activity) 
  *    Typedef of block to be invoked when the historical activity query is
  *    completed.  The array is an array of CMMotionActivity objects.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+typedef void (^CMMotionActivityQueryHandler)(NSArray<CMMotionActivity *> * __nullable activities, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos, visionos);
+#else
 typedef void (^CMMotionActivityQueryHandler)(NSArray<CMMotionActivity *> * __nullable activities, NSError * __nullable error) COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos);
+#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *   CMMotionActivityManager
@@ -42,7 +49,11 @@ typedef void (^CMMotionActivityQueryHandler)(NSArray<CMMotionActivity *> * __nul
  *      2. By providing a queue and a block to startActivityUpdatesToQueue:withHandler:
  *      which will provide live activity updates to a running application.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos, visionos)
+#else
 COREMOTION_EXPORT API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(macos)
+#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMMotionActivityManager : NSObject
 
 /*

@@ -18,6 +18,9 @@
 #include <CoreMedia/CMBufferQueue.h>
 #include <CoreMedia/CMBlockBuffer.h>
 #include <CoreMedia/CMSampleBuffer.h>
+#include <CoreMedia/CMTag.h>
+#include <CoreMedia/CMTagCollection.h>
+#include <CoreMedia/CMTaggedBufferGroup.h>
 #include <CoreMedia/CMSimpleQueue.h>
 #include <CoreMedia/CMMemoryPool.h>
 #include <CoreMedia/CMSync.h>
@@ -26,6 +29,4 @@
 #if ! TARGET_OS_WINDOWS
 #include <CoreMedia/CMAudioClock.h>
 #endif
-#if ! TARGET_OS_IPHONE
 #include <CoreMedia/CMAudioDeviceClock.h>
-#endif

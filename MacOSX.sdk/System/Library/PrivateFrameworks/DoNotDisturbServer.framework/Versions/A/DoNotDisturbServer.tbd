@@ -5,7 +5,7 @@ install-name:    '/System/Library/PrivateFrameworks/DoNotDisturbServer.framework
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ Carousel, CarouselTests, DoNotDisturbServerTests, SoundBoard, 
-                       SpringBoard, SpringBoardCore, donotdisturbd ]
+                       SpringBoard, donotdisturbd ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BMUserFocusComputedModeUpdateReasonForStateUpdateReason, 
@@ -58,7 +58,7 @@ exports:
                        _DNDUntilILeaveRegionIdentifier, _DNDUserNotificationsCommunicationEntitlement, 
                        _DoNotDisturbServerVersionNumber, _DoNotDisturbServerVersionString, 
                        __DNDSContainingBundleIdentifier, __DNDSPrimaryBundleIdentifier, 
-                       __DNDSRequestRadar, _kDNDModeAssertionScheduleLifetimeBehaviorRecordExpireWhenNextScheduleEndsValue, 
+                       __DNDSRequestRadar, _currentDevicePlatformString, _kDNDModeAssertionScheduleLifetimeBehaviorRecordExpireWhenNextScheduleEndsValue, 
                        _kDNDModeAssertionScheduleLifetimeBehaviorRecordMatchScheduleValue, 
                        _kDNDSIDSSyncEngineActionAck, _kDNDSIDSSyncEngineActionReplace, 
                        _kDNDSIDSSyncEngineActionResync, _kDNDSIDSSyncEngineActionUnlock, 
@@ -152,9 +152,9 @@ exports:
     objc-ivars:      [ DNDSApplicationConfigurationRecord._allowedThreads, DNDSApplicationConfigurationRecord._deniedThreads, 
                        DNDSApplicationConfigurationRecord._minimumBreakthroughUrgency, 
                        DNDSBackingStoreDictionaryContext._applicationIdentifierMapper, 
-                       DNDSBackingStoreDictionaryContext._contactProvider, DNDSBackingStoreDictionaryContext._destination, 
-                       DNDSBackingStoreDictionaryContext._partitionType, DNDSBackingStoreDictionaryContext._redactSensitiveData, 
-                       DNDSBackingStoreDictionaryContext._underlyingHealingSource, 
+                       DNDSBackingStoreDictionaryContext._contactProvider, DNDSBackingStoreDictionaryContext._currentRecord, 
+                       DNDSBackingStoreDictionaryContext._destination, DNDSBackingStoreDictionaryContext._partitionType, 
+                       DNDSBackingStoreDictionaryContext._redactSensitiveData, DNDSBackingStoreDictionaryContext._underlyingHealingSource, 
                        DNDSBehaviorSettingsRecord._interruptionBehaviorSetting, DNDSBypassSettingsRecord._immediateBypassCNGroupIdentifier, 
                        DNDSBypassSettingsRecord._immediateBypassEventSourceType, 
                        DNDSBypassSettingsRecord._repeatEventSourceBehaviorEnabledSetting, 
@@ -166,11 +166,12 @@ exports:
                        DNDSClientConnectionDetails._wantsSettingsUpdates, DNDSClientConnectionDetails._wantsStateUpdates, 
                        DNDSConfigurationRecord._applicationConfigurationType, DNDSConfigurationRecord._compatibilityVersion, 
                        DNDSConfigurationRecord._hideApplicationBadges, DNDSConfigurationRecord._minimumBreakthroughUrgency, 
-                       DNDSConfigurationRecord._senderConfigurationType, DNDSConfigurationRecord._suppressionType, 
-                       DNDSConfigurationSecureRecord._allowedApplications, DNDSConfigurationSecureRecord._allowedWebApplications, 
-                       DNDSConfigurationSecureRecord._deniedApplications, DNDSConfigurationSecureRecord._deniedWebApplications, 
-                       DNDSConfigurationSecureRecord._senderConfiguration, DNDSConfigurationsRecord._modeConfigurations, 
-                       DNDSConfigurationsSecureRecord._modeConfigurations, DNDSContactMonitorChangeCollector._deletedContactIdentifiers, 
+                       DNDSConfigurationRecord._senderConfigurationType, DNDSConfigurationRecord._suppressionMode, 
+                       DNDSConfigurationRecord._suppressionType, DNDSConfigurationSecureRecord._allowedApplications, 
+                       DNDSConfigurationSecureRecord._allowedWebApplications, DNDSConfigurationSecureRecord._deniedApplications, 
+                       DNDSConfigurationSecureRecord._deniedWebApplications, DNDSConfigurationSecureRecord._senderConfiguration, 
+                       DNDSConfigurationsRecord._modeConfigurations, DNDSConfigurationsSecureRecord._modeConfigurations, 
+                       DNDSContactMonitorChangeCollector._deletedContactIdentifiers, 
                        DNDSContactMonitorChangeCollector._monitoredContactIdentifiers, 
                        DNDSContactMonitorChangeCollector._updatedContacts, DNDSContactRecord._contactIdentifier, 
                        DNDSContactRecord._emailAddresses, DNDSContactRecord._firstName, 
@@ -205,7 +206,8 @@ exports:
                        DNDSModeConfigurationRecord._secureConfiguration, DNDSModeConfigurationRecord._triggers, 
                        DNDSModeConfigurationTriggersRecord._triggers, DNDSModeConfigurationsRecord._modeConfigurationsByModeIdentifier, 
                        DNDSModeRecord._identifier, DNDSModeRecord._modeIdentifier, 
-                       DNDSModeRecord._name, DNDSModeRecord._semanticType, DNDSModeRecord._symbolImageName, 
+                       DNDSModeRecord._name, DNDSModeRecord._placeholderExcludedPlatforms, 
+                       DNDSModeRecord._semanticType, DNDSModeRecord._symbolImageName, 
                        DNDSModeRecord._tintColorName, DNDSModeRecord._visibility, 
                        DNDSScheduleSettingsRecord._bedtimeBehaviorEnabledSetting, 
                        DNDSScheduleSettingsRecord._lastUpdatedTimestamp, DNDSScheduleSettingsRecord._scheduleEnabledSetting, 

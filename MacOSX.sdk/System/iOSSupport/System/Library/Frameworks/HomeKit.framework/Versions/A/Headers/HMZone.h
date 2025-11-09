@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class HMRoom;
 
@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *             Eg. "Living Room" and "Kitchen" rooms can be grouped together
  *             in the "Downstairs" zone.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMZone : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -78,4 +78,4 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

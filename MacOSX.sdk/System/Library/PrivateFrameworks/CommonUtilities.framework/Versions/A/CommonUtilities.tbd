@@ -25,17 +25,14 @@ exports:
                        _CUTXPCCreateConnectionForService, _CUTXPCCreateConnectionForServiceWithQueue, 
                        _CUTXPCCreateServerConnection, _cut_arc_os_release, _cut_backtrace, 
                        _cut_dispatch_log_queue, _cut_log_group_generation, _cut_non_arc_os_release ]
-    objc-classes:    [ CUTAsyncReducer, CUTAsyncReducerState, CUTCheckpoint, CUTCheckpointInstant, 
-                       CUTCheckpointRange, CUTCheckpointSignpost, CUTCheckpointTrace, 
-                       CUTDeferredTaskQueue, CUTFileCopier, CUTNetworkInterfaceListener, 
-                       CUTPowerAssertion, CUTPowerMonitor, CUTPromise, CUTPromiseSeal, 
-                       CUTReachability, CUTReporting, CUTResult, CUTTelephonyManager, 
-                       CUTUnsafePromise, CUTUnsafePromiseSeal, CUTWeakReference, 
-                       CUTWiFiManager ]
-    objc-ivars:      [ CUTCheckpoint._frozen, CUTNetworkInterfaceListener._IPv4Addresses, 
-                       CUTNetworkInterfaceListener._IPv6Addresses, CUTNetworkInterfaceListener._cellState, 
-                       CUTNetworkInterfaceListener._delegateMap, CUTNetworkInterfaceListener._delegateQueue, 
-                       CUTNetworkInterfaceListener._dynamicStore, CUTNetworkInterfaceListener._wifiState, 
-                       CUTPowerAssertion._internal, CUTResult._inError, CUTResult._inValue, 
-                       CUTResult._state ]
+    objc-classes:    [ CUTAsyncReducer, CUTAsyncReducerState, CUTDeferredTaskQueue, 
+                       CUTFileCopier, CUTNetworkInterfaceListener, CUTPowerAssertion, 
+                       CUTPowerMonitor, CUTPromise, CUTPromiseSeal, CUTReachability, 
+                       CUTReporting, CUTResult, CUTTelephonyManager, CUTUnsafePromise, 
+                       CUTUnsafePromiseSeal, CUTWeakReference, CUTWiFiManager ]
+    objc-ivars:      [ CUTNetworkInterfaceListener._IPv4Addresses, CUTNetworkInterfaceListener._IPv6Addresses, 
+                       CUTNetworkInterfaceListener._cellState, CUTNetworkInterfaceListener._delegateMap, 
+                       CUTNetworkInterfaceListener._delegateQueue, CUTNetworkInterfaceListener._dynamicStore, 
+                       CUTNetworkInterfaceListener._wifiState, CUTPowerAssertion._internal, 
+                       CUTResult._inError, CUTResult._inValue, CUTResult._state ]
 ...

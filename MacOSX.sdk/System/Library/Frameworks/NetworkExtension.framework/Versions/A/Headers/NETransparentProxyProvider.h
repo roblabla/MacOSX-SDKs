@@ -26,7 +26,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * NETransparentProxyProvider is part of NetworkExtension.framework
  */
-API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos, watchos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NETransparentProxyProvider : NEAppProxyProvider
 @end
 

@@ -317,6 +317,8 @@ struct vnode_fsparam {
 #define VNODE_ATTR_va_clone_id          (1LL<<44)       /* 100000000000 */
 #define VNODE_ATTR_va_extflags          (1LL<<45)       /* 200000000000 */
 #define VNODE_ATTR_va_recursive_gencount (1LL<<46)      /* 400000000000 */
+#define VNODE_ATTR_va_attribution_tag    (1LL<<47)      /* 800000000000 */
+#define VNODE_ATTR_va_clone_refcnt       (1LL<<48)      /* 1000000000000 */
 
 #define VNODE_ATTR_BIT(n)       (VNODE_ATTR_ ## n)
 
@@ -369,7 +371,10 @@ struct vnode_fsparam {
 	                        VNODE_ATTR_BIT(va_private_size) |       \
 	                        VNODE_ATTR_BIT(va_clone_id) |           \
 	                        VNODE_ATTR_BIT(va_extflags) |           \
-	                        VNODE_ATTR_BIT(va_recursive_gencount))
+	                        VNODE_ATTR_BIT(va_recursive_gencount) | \
+	                        VNODE_ATTR_BIT(va_attribution_tag) |    \
+	                        VNODE_ATTR_BIT(va_clone_refcnt))
+
 
 /*
  * Read-only attributes.
@@ -402,7 +407,9 @@ struct vnode_fsparam {
 	                        VNODE_ATTR_BIT(va_private_size) |       \
 	                        VNODE_ATTR_BIT(va_clone_id) |           \
 	                        VNODE_ATTR_BIT(va_extflags) |           \
-	                        VNODE_ATTR_BIT(va_recursive_gencount))
+	                        VNODE_ATTR_BIT(va_recursive_gencount) | \
+	                        VNODE_ATTR_BIT(va_attribution_tag) |    \
+	                        VNODE_ATTR_BIT(va_clone_refcnt))
 
 /*
  * Attributes that can be applied to a new file object.
@@ -506,6 +513,8 @@ struct vnode_attr {
 	uint64_t va_clone_id;     /* If a file is cloned this is a unique id shared by all "perfect" clones */
 	uint64_t va_extflags;     /* extended file/directory flags */
 	uint64_t va_recursive_gencount; /* for dir-stats enabled directories */
+	uint64_t va_attribution_tag;    /* a 64 bit hash of the bundle name associated with this file */
+	uint32_t va_clone_refcnt;       /* the number of "perfect" clones sharing the same clone_id */
 
 	/* add new fields here only */
 };
@@ -1282,6 +1291,7 @@ int     vnode_getwithvid(vnode_t, uint32_t);
  *  @return 0 for success, ENOENT if the vnode is dead, in the process of being reclaimed, or has been recycled and reused.
  */
 int     vnode_getwithref(vnode_t vp);
+
 
 /*!
  *  @function vnode_put

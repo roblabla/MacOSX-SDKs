@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRKeyboardMetrics : NSObject
 
 /// The duration over which these metrics were calculated
@@ -36,7 +36,7 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRKeyboardMetrics (ScalarMetrics)
 
 /// The total number of words typed during the session
@@ -98,7 +98,7 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRKeyboardProbabilityMetric <UnitType : __kindof NSUnit *> : NSObject
 
 /// Sample values from probability distribution
@@ -106,7 +106,7 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRKeyboardMetrics (ProbabilityMetrics)
 
 /// The distance from the touch up to the center of any key
@@ -235,7 +235,7 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 @end
 
 /// Probability metrics for each character in a word in their respective positions (first, second, third, fourth, fifth, and the rest)
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRKeyboardMetrics (PositionalMetrics)
 
 /// The distance from the touch up to the center of the intended key of the characters of a long word
@@ -258,7 +258,7 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 @end
 
-SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRKeyboardMetrics (SpeedMetrics)
 
 /// The total number of pauses during the session
@@ -290,13 +290,13 @@ typedef NS_ENUM(NSInteger, SRKeyboardMetricsSentimentCategory) {
     SRKeyboardMetricsSentimentCategorySad,
     SRKeyboardMetricsSentimentCategoryLowEnergy,
     SRKeyboardMetricsSentimentCategoryConfused,
-} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
 /**
  * These metrics describe the number of words and emoji of a particular category typed during
  * a keyboard session. Words and emoji may be counted in multiple categories.
  */
-SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRKeyboardMetrics (SentimentCounts)
 
 /// The count of words typed per category in the session

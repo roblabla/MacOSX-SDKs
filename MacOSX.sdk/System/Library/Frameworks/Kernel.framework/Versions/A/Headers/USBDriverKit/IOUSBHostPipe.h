@@ -1,6 +1,6 @@
-/* iig(DriverKit-256.100.8) generated from IOUSBHostPipe.iig */
+/* iig(DriverKit-324.0.10) generated from IOUSBHostPipe.iig */
 
-/* IOUSBHostPipe.iig:1-95 */
+/* IOUSBHostPipe.iig:1-100 */
 /*
  * Copyright (c) 2018-2019 Apple Inc. All rights reserved.
  *
@@ -32,7 +32,12 @@
 #ifndef _IOKIT_IOUSBHOSTPIPE_H
 #define _IOKIT_IOUSBHOSTPIPE_H
 
+#include <TargetConditionals.h>
+#if TARGET_OS_DRIVERKIT
 #include <USBDriverKit/AppleUSBDefinitions.h>
+#else
+#include <IOKit/usb/AppleUSBDefinitions.h>
+#endif
 #include <DriverKit/OSAction.h>  /* .iig include */
 #include <DriverKit/IOMemoryDescriptor.h>  /* .iig include */
 
@@ -96,7 +101,7 @@ typedef struct IOUSBIsochronousFrame IOUSBIsochronousFrame;
  */
 enum{ kIOUSBHostPipeBundlingMax = 16 };
 
-/* source class IOUSBHostPipe IOUSBHostPipe.iig:96-332 */
+/* source class IOUSBHostPipe IOUSBHostPipe.iig:101-336 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -237,7 +242,6 @@ public:
      * @brief       Type definition for asynchronous completion routines.
      * @param       action Pointer to the OSAction object of the async request
      * @param       status Result of the operation
-     * @param       actualByteCount Byte could of the completed data phase.
      * @return      void
      */
     virtual void
@@ -337,7 +341,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUSBHostPipe IOUSBHostPipe.iig:96-332 */
+/* generated class IOUSBHostPipe IOUSBHostPipe.iig:101-336 */
 
 #define IOUSBHostPipe_GetSpeed_ID            0xe1fe37db83c583acULL
 #define IOUSBHostPipe_GetDeviceAddress_ID            0x87ac5eade26f9ccaULL
@@ -809,7 +813,7 @@ IOUSBHostPipe_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUSBHostPipe.iig:334- */
+/* IOUSBHostPipe.iig:338- */
 
 #endif /* ! _IOKIT_IOUSBHOSTPIPE_H */
 

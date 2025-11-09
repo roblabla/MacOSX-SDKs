@@ -1,9 +1,8 @@
-//
-//  GKAchievementViewController.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
+
+#import <TargetConditionals.h>
+
+#if !TARGET_OS_TV && !TARGET_OS_WATCH
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -15,17 +14,17 @@
 @protocol GKAchievementViewControllerDelegate;
 
 /// View controller that provides the standard user interface for achievements. Present modally from the top view controller.
-NS_CLASS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead") 
+API_DEPRECATED_WITH_REPLACEMENT("GKGameCenterViewController", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE
 @interface GKAchievementViewController : GKGameCenterViewController
 @property (weak, NS_NONATOMIC_IOSONLY) id<GKAchievementViewControllerDelegate> achievementDelegate;
 @end
 
 /// Optional delegate
-NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use GKGameCenterViewController instead") 
+API_DEPRECATED_WITH_REPLACEMENT("GKGameCenterViewController", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE
 @protocol GKAchievementViewControllerDelegate <NSObject>
 @required
 /// The achievement view has finished
 - (void)achievementViewControllerDidFinish:(GKAchievementViewController *)viewController;
 @end
 
-
+#endif

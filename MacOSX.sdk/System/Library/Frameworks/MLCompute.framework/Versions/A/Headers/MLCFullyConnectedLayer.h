@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion For C:input feature channel, C':output feature channel, the layer maps (*,C) --> (*,C') where * can be 1, 2 or 3 dimesnion.
                 There is an exception for the case of (N,C,1,1) which gets mapped to (N,C',1,1).
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 @interface MLCFullyConnectedLayer : MLCLayer
 
 /*! @property   descriptor

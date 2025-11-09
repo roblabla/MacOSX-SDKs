@@ -1,8 +1,5 @@
 //
-//  LocalAuthentication.h
-//  LocalAuthentication
-//
-//  Copyright (c) 2014 Apple. All rights reserved.
+//  Copyright (c) 2014 Apple Inc. All rights reserved.
 //
 
 #import <LocalAuthentication/LABase.h>

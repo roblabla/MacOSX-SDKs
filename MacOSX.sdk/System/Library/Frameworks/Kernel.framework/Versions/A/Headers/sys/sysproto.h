@@ -631,6 +631,13 @@ struct sigreturn_args {
 	char infostyle_l_[PADL_(int)]; int infostyle; char infostyle_r_[PADR_(int)];
 	char token_l_[PADL_(user_addr_t)]; user_addr_t token; char token_r_[PADR_(user_addr_t)];
 };
+struct panic_with_data_args {
+	char uuid_l_[PADL_(user_addr_t)]; user_addr_t uuid; char uuid_r_[PADR_(user_addr_t)];
+	char addr_l_[PADL_(user_addr_t)]; user_addr_t addr; char addr_r_[PADR_(user_addr_t)];
+	char len_l_[PADL_(uint32_t)]; uint32_t len; char len_r_[PADR_(uint32_t)];
+	char flags_l_[PADL_(uint32_t)]; uint32_t flags; char flags_r_[PADR_(uint32_t)];
+	char msg_l_[PADL_(user_addr_t)]; user_addr_t msg; char msg_r_[PADR_(user_addr_t)];
+};
 struct thread_selfcounts_args {
 	char kind_l_[PADL_(uint32_t)]; uint32_t kind; char kind_r_[PADR_(uint32_t)];
 	char buf_l_[PADL_(user_addr_t)]; user_addr_t buf; char buf_r_[PADR_(user_addr_t)];
@@ -2671,6 +2678,7 @@ int setgid(struct proc *, struct setgid_args *, int *);
 int setegid(struct proc *, struct setegid_args *, int *);
 int seteuid(struct proc *, struct seteuid_args *, int *);
 int sigreturn(struct proc *, struct sigreturn_args *, int *);
+int sys_panic_with_data(struct proc *, struct panic_with_data_args *, int *);
 int thread_selfcounts(struct proc *, struct thread_selfcounts_args *, int *);
 int fdatasync(struct proc *, struct fdatasync_args *, int *);
 int stat(struct proc *, struct stat_args *, int *);
@@ -2768,7 +2776,7 @@ int sys_fstat_extended(struct proc *, struct fstat_extended_args *, int *);
 int chmod_extended(struct proc *, struct chmod_extended_args *, int *);
 int fchmod_extended(struct proc *, struct fchmod_extended_args *, int *);
 int access_extended(struct proc *, struct access_extended_args *, int *);
-int settid(struct proc *, struct settid_args *, int *);
+int sys_settid(struct proc *, struct settid_args *, int *);
 int gettid(struct proc *, struct gettid_args *, int *);
 int setsgroups(struct proc *, struct setsgroups_args *, int *);
 int getsgroups(struct proc *, struct getsgroups_args *, int *);
@@ -2799,7 +2807,7 @@ int psynch_rw_unlock2(struct proc *, struct psynch_rw_unlock2_args *, uint32_t *
 #else
 #endif
 int getsid(struct proc *, struct getsid_args *, int *);
-int settid_with_pid(struct proc *, struct settid_with_pid_args *, int *);
+int sys_settid_with_pid(struct proc *, struct settid_with_pid_args *, int *);
 #if PSYNCH
 int psynch_cvclrprepost(struct proc *, struct psynch_cvclrprepost_args *, int *);
 #else

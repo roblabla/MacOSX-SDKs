@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreSVG.framework/Versions/A/CoreSVG'
-current-version: 232.5.1
+current-version: 324
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -43,6 +43,7 @@ exports:
                        _CGSVGDocumentAddNamedStyle, _CGSVGDocumentContainsWideGamutContent, 
                        _CGSVGDocumentCreate, _CGSVGDocumentCreateFromData, _CGSVGDocumentCreateFromDataProvider, 
                        _CGSVGDocumentCreateFromURL, _CGSVGDocumentCreateOptionVariablesKey, 
+                       _CGSVGDocumentDefsAddNode, _CGSVGDocumentDefsEnumerate, _CGSVGDocumentDefsGetNode, 
                        _CGSVGDocumentGetCanvas, _CGSVGDocumentGetCanvasSize, _CGSVGDocumentGetNamedStyle, 
                        _CGSVGDocumentGetRootNode, _CGSVGDocumentGetTypeID, _CGSVGDocumentIsMonochrome, 
                        _CGSVGDocumentOptionBaseProfileKey, _CGSVGDocumentOptionSecurityLevelKey, 
@@ -56,11 +57,12 @@ exports:
                        _CGSVGGradientCreate, _CGSVGGradientGetCenter, _CGSVGGradientGetEnd, 
                        _CGSVGGradientGetFocal, _CGSVGGradientGetGradientTransform, 
                        _CGSVGGradientGetNumberOfStops, _CGSVGGradientGetRadius, _CGSVGGradientGetSpread, 
-                       _CGSVGGradientGetStart, _CGSVGGradientGetStop, _CGSVGGradientGetType, 
-                       _CGSVGGradientGetTypeID, _CGSVGGradientRelease, _CGSVGGradientRetain, 
-                       _CGSVGGradientSetCenter, _CGSVGGradientSetEnd, _CGSVGGradientSetFocal, 
-                       _CGSVGGradientSetGradientTransform, _CGSVGGradientSetRadius, 
-                       _CGSVGGradientSetSpread, _CGSVGGradientSetStart, _CGSVGGradientStopCreateWithColor, 
+                       _CGSVGGradientGetSpreadMethod, _CGSVGGradientGetStart, _CGSVGGradientGetStop, 
+                       _CGSVGGradientGetType, _CGSVGGradientGetTypeID, _CGSVGGradientRelease, 
+                       _CGSVGGradientRetain, _CGSVGGradientSetCenter, _CGSVGGradientSetEnd, 
+                       _CGSVGGradientSetFocal, _CGSVGGradientSetGradientTransform, 
+                       _CGSVGGradientSetRadius, _CGSVGGradientSetSpread, _CGSVGGradientSetSpreadMethod, 
+                       _CGSVGGradientSetStart, _CGSVGGradientStopCreateWithColor, 
                        _CGSVGGradientStopGetColor, _CGSVGGradientStopGetOffset, _CGSVGGradientStopGetOpacity, 
                        _CGSVGGradientStopGetTypeID, _CGSVGGradientStopRelease, _CGSVGGradientStopRetain, 
                        _CGSVGImageCreateWithNoImage, _CGSVGImageCreateWithRasterImage, 
@@ -114,5 +116,5 @@ exports:
                        _CGSVGViewBoxNodeGetSize, _CGSVGViewBoxNodeGetViewbox, _CGSVGViewBoxNodeSetAspectRatio, 
                        _CGSVGViewBoxNodeSetAspectRatioMeetOrSlice, _CGSVGViewBoxNodeSetSize, 
                        _CGSVGViewBoxNodeSetViewbox, _CoreSVGVersionNumber, _CoreSVGVersionString, 
-                       _kCGSVGPacked ]
+                       _kCGSVGOmitHeaders, _kCGSVGPacked ]
 ...

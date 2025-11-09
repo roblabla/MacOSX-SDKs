@@ -2,7 +2,7 @@
 //  VZMacAuxiliaryStorage.h
 //  Virtualization
 //
-//  Copyright © 2021-2022 Apple Inc. All rights reserved.
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
 //
 
 #ifdef __arm64__

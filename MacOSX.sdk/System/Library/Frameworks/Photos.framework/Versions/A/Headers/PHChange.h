@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
 
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHChange : NSObject
 
 - (nullable PHObjectChangeDetails *)changeDetailsForObject:(PHObject *)object;
@@ -26,6 +27,7 @@ OS_EXPORT
 
 #pragma mark -
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHObjectChangeDetails<ObjectType: PHObject *> : NSObject
 
 // returns the object that was passed in to changeDetailsForObject: (used to determine the changes to the object vs. the objectAfterChanges)
@@ -45,6 +47,7 @@ OS_EXPORT
 
 #pragma mark -
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHFetchResultChangeDetails<ObjectType: PHObject *> : NSObject
 
 // fetch result with the state of the fetched objects before this change (returns the fetch result passed in to changeDetailsForFetchResult:)

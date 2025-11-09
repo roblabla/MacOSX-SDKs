@@ -18,7 +18,11 @@ typedef NS_ENUM(NSInteger, SFSafariViewControllerDismissButtonStyle) {
     SFSafariViewControllerDismissButtonStyleDone,
     SFSafariViewControllerDismissButtonStyleClose,
     SFSafariViewControllerDismissButtonStyleCancel,
-} API_AVAILABLE(ios(11.0)) NS_SWIFT_NAME(SFSafariViewController.DismissButtonStyle);
+}
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
+API_AVAILABLE(ios(11.0)) NS_SWIFT_NAME(SFSafariViewController.DismissButtonStyle);
 
 /*!
  @class SFSafariViewController
@@ -44,7 +48,11 @@ SF_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
     @param entersReaderIfAvailable indicates if the Safari Reader version of content should be shown automatically
     when Safari Reader is available on a web page.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+- (instancetype)initWithURL:(NSURL *)URL entersReaderIfAvailable:(BOOL)entersReaderIfAvailable NS_DESIGNATED_INITIALIZER API_DEPRECATED_WITH_REPLACEMENT("-initWithURL:configuration:", ios(9.0, 11.0)) API_UNAVAILABLE(visionos);
+#else
 - (instancetype)initWithURL:(NSURL *)URL entersReaderIfAvailable:(BOOL)entersReaderIfAvailable NS_DESIGNATED_INITIALIZER API_DEPRECATED_WITH_REPLACEMENT("-initWithURL:configuration:", ios(9.0, 11.0));
+#endif
 
 /*! @abstract Returns a view controller that loads a URL.
     @param URL the initial URL to navigate to. Only supports initial URLs with http:// or https:// schemes.
@@ -52,7 +60,11 @@ SF_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
 - (instancetype)initWithURL:(NSURL *)URL;
 
 /*! @abstract The view controller's delegate. */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+@property (nonatomic, weak, nullable) id <SFSafariViewControllerDelegate> delegate API_UNAVAILABLE(visionos);
+#else
 @property (nonatomic, weak, nullable) id <SFSafariViewControllerDelegate> delegate;
+#endif
 
 /*! @abstract A copy of the configuration with which the view controller was
         initialized. */
@@ -62,13 +74,21 @@ SF_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
     Browsing mode or is displaying an anti-phishing warning page, this color will be ignored. Changes made after the view controller
     has been presented will not be reflected.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+@property (nonatomic, nullable) UIColor *preferredBarTintColor API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos);
+#else
 @property (nonatomic, nullable) UIColor *preferredBarTintColor API_AVAILABLE(ios(10.0));
+#endif
 
 /*! @abstract The preferred color to tint the control buttons on the navigation bar and toolbar. If SFSafariViewController is in Private
     Browsing mode or is displaying an anti-phishing warning page, this color will be ignored. Changes made after the view controller
     has been presented will not be reflected.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+@property (nonatomic, nullable) UIColor *preferredControlTintColor API_AVAILABLE(ios(10.0)) API_UNAVAILABLE(visionos);
+#else
 @property (nonatomic, nullable) UIColor *preferredControlTintColor API_AVAILABLE(ios(10.0));
+#endif
 
 /*! @abstract The style of dismiss button to use in the navigation bar to close SFSafariViewController.
     The default value is SFSafariViewControllerDismissButtonStyleDone, which makes the button title the localized
@@ -76,7 +96,11 @@ SF_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
     ideal when using SFSafariViewController to log in to an external service. All values will show a string localized
     to the user's locale. Changing this property after SFSafariViewController is presented will animate the change.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+@property (nonatomic) SFSafariViewControllerDismissButtonStyle dismissButtonStyle API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(visionos);
+#else
 @property (nonatomic) SFSafariViewControllerDismissButtonStyle dismissButtonStyle API_AVAILABLE(ios(11.0));
+#endif
 
 /*! @abstract Prewarms a connection to each URL. SFSafariViewController will automatically use a
     prewarmed connection if possible when loading its initial URL.
@@ -91,11 +115,18 @@ SF_EXTERN API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
     to present SFSafariViewController soon. Many HTTP servers time out connections after a few minutes.
     After a timeout, prewarming delivers less performance benefit.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
++ (SFSafariViewControllerPrewarmingToken *)prewarmConnectionsToURLs:(NSArray<NSURL *> *)URLs NS_SWIFT_NAME(prewarmConnections(to:)) API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(visionos);
+#else
 + (SFSafariViewControllerPrewarmingToken *)prewarmConnectionsToURLs:(NSArray<NSURL *> *)URLs NS_SWIFT_NAME(prewarmConnections(to:)) API_AVAILABLE(ios(15.0));
+#endif
 
 @end
 
 API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(watchos)
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 @protocol SFSafariViewControllerDelegate <NSObject>
 @optional
 

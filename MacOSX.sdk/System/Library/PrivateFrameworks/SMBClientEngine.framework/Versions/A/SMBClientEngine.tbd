@@ -4,11 +4,12 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SMBClientEngine.framework/Versions/A/SMBClientEngine'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ContextFlags2int, _DIFF1970TO1601, _SMBClientEngineVersionNumber, 
-                       _SMBClientEngineVersionString, _asn1_ContextFlags, _asn1_ContextFlags_tag__2, 
-                       _asn1_MechType, _asn1_MechTypeList, _asn1_MechTypeList_tag__1, 
-                       _asn1_MechType_seofTstruct_0, _asn1_MechType_tag__0, _asn1_NegHints, 
-                       _asn1_NegHints_tag__3, _asn1_NegHints_tag_hintAddress_6, _asn1_NegHints_tag_hintName_4, 
+    symbols:         [ _ContextFlags2int, _DIFF1970TO1601, _HUNDRED_NSEC_PER_SEC, 
+                       _SMBClientEngineVersionNumber, _SMBClientEngineVersionString, 
+                       _asn1_ContextFlags, _asn1_ContextFlags_tag__2, _asn1_MechType, 
+                       _asn1_MechTypeList, _asn1_MechTypeList_tag__1, _asn1_MechType_seofTstruct_0, 
+                       _asn1_MechType_tag__0, _asn1_NegHints, _asn1_NegHints_tag__3, 
+                       _asn1_NegHints_tag_hintAddress_6, _asn1_NegHints_tag_hintName_4, 
                        _asn1_NegResultEnum, _asn1_NegResultEnum_tag__21, _asn1_NegTokenInit, 
                        _asn1_NegTokenInitWin, _asn1_NegTokenInitWin_tag__31, _asn1_NegTokenInitWin_tag__8, 
                        _asn1_NegTokenInitWin_tag_mechTypes_9, _asn1_NegTokenInitWin_tag_negHints_13, 
@@ -71,7 +72,9 @@ exports:
                        _smb2_smb_read_one, _smb2_smb_set_info, _smb2_smb_write_one, 
                        _smb2fs_fullpath, _smb2fs_smb_check_copyfile, _smb2fs_smb_file_id_check, 
                        _smb2fs_smb_listxattrs, _smb2fs_smb_set_delete, _smb2fs_smb_set_eof, 
-                       _smb2fs_smb_setfattrNT, _smb3_msg_decrypt, _smb3_rq_encrypt, 
+                       _smb2fs_smb_setfattrNT, _smb311_pre_auth_integrity_hash_init, 
+                       _smb311_pre_auth_integrity_hash_print, _smb311_pre_auth_integrity_hash_update, 
+                       _smb3_msg_decrypt, _smb3_rq_encrypt, _smb3_verify_session_setup, 
                        _smb_convert_network_to_path, _smb_convert_path_to_network, 
                        _smb_get_cstring_len, _smb_mbuf_get, _smb_put_dmem, _smb_reset_sig, 
                        _smb_rq_bend, _smb_rq_bend32, _smb_rq_bstart, _smb_rq_cancel_all_requests, 

@@ -29,14 +29,25 @@ typedef NS_ENUM(NSInteger, HKWorkoutSessionState) {
     HKWorkoutSessionStatePaused API_AVAILABLE(watchos(3.0)),
     HKWorkoutSessionStatePrepared API_AVAILABLE(watchos(5.0)),
     HKWorkoutSessionStateStopped API_AVAILABLE(watchos(5.0)),
-} API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios);
+} API_AVAILABLE(ios(17.0), watchos(2.0));
 
+/*!
+ @enum          HKWorkoutSessionType
+ @abstract      This enumerated type is used to represent the type of a workout session.
+ 
+ @constant      HKWorkoutSessionTypePrimary      Represents a workout session running locally on the current device.
+ @constant      HKWorkoutSessionTypeMirrored     Represents a workout session being mirrored from a different device.
+ */
+typedef NS_ENUM(NSInteger, HKWorkoutSessionType) {
+    HKWorkoutSessionTypePrimary = 0,
+    HKWorkoutSessionTypeMirrored,
+} API_AVAILABLE(ios(17.0), watchos(10.0));
 
 /*!
  @class         HKWorkoutSession
  @abstract      An HKWorkoutSession is an object describing the properties of a workout activity session.
  */
-HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+HK_EXTERN API_AVAILABLE(ios(17.0), watchos(2.0))
 @interface HKWorkoutSession : NSObject <NSSecureCoding>
 
 /*!
@@ -58,7 +69,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
  @discussion    This returns a copy of the configuration passed when creating the HKWorkoutSession. Changes made to
                 the returned object have no impact on the HKWorkoutSession.
  */
-@property (readonly, copy) HKWorkoutConfiguration *workoutConfiguration API_AVAILABLE(watchos(3.0));
+@property (readonly, copy) HKWorkoutConfiguration *workoutConfiguration API_AVAILABLE(ios(17.0), watchos(3.0));
 
 /*!
  @property      delegate
@@ -75,6 +86,14 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 will be called.
  */
 @property (readonly) HKWorkoutSessionState state;
+
+/*!
+ @property      type
+ @abstract      Indicates the type of the workout session.
+ @discussion    A workout session created using an initializer will be primary, while a session retrieved with
+                the `HKHealthStore` `workoutSessionMirroringStartHandler` property will be mirrored.
+ */
+@property (readonly) HKWorkoutSessionType type API_AVAILABLE(ios(17.0), watchos(10.0));
 
 /*!
  @property      startDate
@@ -99,7 +118,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 a copy of the main workout activity if no new activity has begun. Changes made
                 to the returned object have no impact on the HKWorkoutSession.
  */
-@property (readonly, copy) HKWorkoutActivity *currentActivity API_AVAILABLE(watchos(9.0));
+@property (readonly, copy) HKWorkoutActivity *currentActivity API_AVAILABLE(ios(17.0), watchos(9.0));
 
 /*!
  @method        initWithActivityType:locationType:
@@ -108,7 +127,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
  @param         locationType    The type of location where the workout will be performed.
  */
 - (instancetype)initWithActivityType:(HKWorkoutActivityType)activityType
-                        locationType:(HKWorkoutSessionLocationType)locationType API_DEPRECATED_WITH_REPLACEMENT("initWithHealthStore:configuration:error:", watchos(2.0, 3.0));
+                        locationType:(HKWorkoutSessionLocationType)locationType API_DEPRECATED_WITH_REPLACEMENT("initWithHealthStore:configuration:error:", watchos(2.0, 3.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, macCatalyst, tvos);
 
 /*!
  @method        initWithConfiguration:error:
@@ -117,7 +136,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
  @param         error                If the configuration does not specify valid configuration properties, an
                                      an NSError describing the error is set and nil is returned.
  */
-- (nullable instancetype)initWithConfiguration:(HKWorkoutConfiguration *)workoutConfiguration error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("initWithHealthStore:configuration:error:", watchos(3.0, 5.0));
+- (nullable instancetype)initWithConfiguration:(HKWorkoutConfiguration *)workoutConfiguration error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("initWithHealthStore:configuration:error:", watchos(3.0, 5.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, macCatalyst, tvos);
 
 /*!
  @method        initWithHealthStore:configuration:error:
@@ -129,7 +148,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
  */
 - (nullable instancetype)initWithHealthStore:(HKHealthStore *)healthStore
                                configuration:(HKWorkoutConfiguration *)workoutConfiguration
-                                       error:(NSError **)error API_AVAILABLE(watchos(5.0));
+                                       error:(NSError **)error API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios, tvos) API_UNAVAILABLE(macos, macCatalyst);
 
 - (instancetype)init NS_UNAVAILABLE;
 
@@ -142,7 +161,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 You might call this methods, for example, prior to displaying a countdown on your application while waiting
                 for the activity to start.
  */
-- (void)prepare API_AVAILABLE(watchos(5.0));
+- (void)prepare API_AVAILABLE(ios(17.0), watchos(5.0));
 
 /*!
  @method        startActivityWithDate:
@@ -153,7 +172,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 transition to HKWorkoutSessionStateRunning. Once a session activity is started the system will be in session
                 mode and sensor algorithms will be applied to generate data for the workout activity.
  */
-- (void)startActivityWithDate:(nullable NSDate *)date API_AVAILABLE(watchos(5.0));
+- (void)startActivityWithDate:(nullable NSDate *)date API_AVAILABLE(ios(17.0), watchos(5.0));
 
 /*!
  @method        stopActivityWithDate:
@@ -164,7 +183,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 start a new workout session. Sensor algorithms will be stopped and no new data will be generated for this session.
                 However, the system will remain in session mode.
  */
-- (void)stopActivityWithDate:(nullable NSDate *)date API_AVAILABLE(watchos(5.0));
+- (void)stopActivityWithDate:(nullable NSDate *)date API_AVAILABLE(ios(17.0), watchos(5.0));
 
 /*!
  @method        end
@@ -174,7 +193,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 workout session. Sensor algorithms will be stopped, no new data will be generated for this session, and the
                 system will exit session mode.
  */
-- (void)end API_AVAILABLE(watchos(5.0));
+- (void)end API_AVAILABLE(ios(17.0), watchos(5.0));
 
 /*!
  @method        pause
@@ -183,7 +202,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 will transition to HKWorkoutSessionStatePaused. An HKWorkoutEventTypePause will be generated and
                 delivered to the workout session's delegate.
  */
-- (void)pause API_AVAILABLE(watchos(5.0));
+- (void)pause API_AVAILABLE(ios(17.0), watchos(5.0));
 
 /*!
  @method        resume
@@ -192,7 +211,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 will transition to HKWorkoutSessionStateRunning. An HKWorkoutEventTypeResume will be generated and
                 delivered to the workout session's delegate.
  */
-- (void)resume API_AVAILABLE(watchos(5.0));
+- (void)resume API_AVAILABLE(ios(17.0), watchos(5.0));
 
 /*!
  @method        associatedWorkoutBuilder
@@ -202,7 +221,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 Calling this method more than once will return the previously-created builder. If this session was not
                 initialized with initWithHealthStore:configuration:error:, an exception will be thrown.
  */
-- (HKLiveWorkoutBuilder *)associatedWorkoutBuilder API_AVAILABLE(watchos(5.0));
+- (HKLiveWorkoutBuilder *)associatedWorkoutBuilder API_AVAILABLE(watchos(5.0)) API_UNAVAILABLE(ios);
 
 /*!
  @method        beginNewActivityWithConfiguration:date:metadata:
@@ -213,7 +232,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
  */
 - (void)beginNewActivityWithConfiguration:(HKWorkoutConfiguration *)workoutConfiguration
                                      date:(NSDate *)date
-                                 metadata:(nullable NSDictionary<NSString *, id> *)metadata API_AVAILABLE(watchos(9.0)) NS_SWIFT_NAME(beginNewActivity(configuration:date:metadata:));
+                                 metadata:(nullable NSDictionary<NSString *, id> *)metadata API_AVAILABLE(ios(17.0), watchos(9.0)) NS_SWIFT_NAME(beginNewActivity(configuration:date:metadata:));
 
 /*!
  @method        endCurrentActivityOnDate:
@@ -222,7 +241,42 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
                 would be informed once the activity effectively ends. Sensor algorithms to generate data would be updated to
                 match the main session activity.
  */
-- (void)endCurrentActivityOnDate:(NSDate *)date API_AVAILABLE(watchos(9.0));
+- (void)endCurrentActivityOnDate:(NSDate *)date API_AVAILABLE(ios(17.0), watchos(9.0));
+
+/*!
+ @method        startMirroringToCompanionDeviceWithCompletion:
+ @abstract      Starts mirroring the session to the companion device.
+ @discussion    Calling this method will result in your app on the companion device being launched in the background.
+                When your app is launched set the `HKHealthStore` `workoutSessionMirroringStartHandler` property to retrieve
+                the mirrored session.
+                This method will fail if called for a session that is ended.
+                The completion handler will be executed on an arbitrary background queue.
+ */
+- (void)startMirroringToCompanionDeviceWithCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(watchos(10.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, macCatalyst, tvos) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+
+/*!
+ @method        stopMirroringToCompanionDeviceWithCompletion:
+ @abstract      Stops mirroring the session to the companion device.
+ @discussion    Calling this method will stop sending data to the companion device. The mirrored session's delegate method
+                `didDisconnectFromRemoteDeviceWithError:` will be called to indicate that.
+                When a workout session is ended, mirroring is automatically stopped.
+                The completion handler will be executed on an arbitrary background queue.
+ */
+- (void)stopMirroringToCompanionDeviceWithCompletion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(watchos(10.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(macos, macCatalyst, tvos) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+
+/*!
+ @method        sendDataToRemoteWorkoutSession:completion:
+ @abstract      Sends an NSData object to the connected remote workout session.
+ @discussion    This method can be called to send data from a primary session to its mirrored counterpart and vice-versa.
+                It's only intended to be used for data that describes the current state of the workout, such as accumulated metrics, and any
+                data needed to keep your app on both devices in sync.
+                The maximum amount of data that can be sent is 100 KB in any given 10-second time window.
+                If this limit is exceeded, an error will be returned in the completion handler.
+                An error will also be returned if the session is not mirroring.
+                The completion handler will be executed on an arbitrary background queue.
+ */
+- (void)sendDataToRemoteWorkoutSession:(NSData *)data
+                            completion:(void (^)(BOOL success, NSError * _Nullable error))completion API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos, macCatalyst, tvos) NS_SWIFT_NAME(sendToRemoteWorkoutSession(data:completion:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
 
 @end
 
@@ -231,7 +285,7 @@ HK_EXTERN API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
  @abstract      This protocol should be implemented to be notified when a workout session's state changes.
  @discussion    The methods on this protocol are called on an anonymous serial background queue.
  */
-API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
+API_AVAILABLE(ios(17.0), watchos(2.0))
 @protocol HKWorkoutSessionDelegate <NSObject>
 
 /*!
@@ -274,7 +328,7 @@ API_AVAILABLE(watchos(2.0)) API_UNAVAILABLE(ios)
  */
 - (void)workoutSession:(HKWorkoutSession *)workoutSession
 didBeginActivityWithConfiguration:(HKWorkoutConfiguration *)workoutConfiguration
-                  date:(NSDate *)date API_AVAILABLE(watchos(9.0));
+                  date:(NSDate *)date API_AVAILABLE(ios(17.0), watchos(9.0));
 
 /*!
  @method        workoutSession:didEndActivityWithConfiguration:date:
@@ -285,7 +339,20 @@ didBeginActivityWithConfiguration:(HKWorkoutConfiguration *)workoutConfiguration
  */
 - (void)workoutSession:(HKWorkoutSession *)workoutSession
 didEndActivityWithConfiguration:(HKWorkoutConfiguration *)workoutConfiguration
-                  date:(NSDate *)date API_AVAILABLE(watchos(9.0));
+                  date:(NSDate *)date API_AVAILABLE(ios(17.0), watchos(9.0));
+
+/*!
+ @method        workoutSession:didReceiveDataFromRemoteWorkoutSession:
+ @abstract      This method is called when the session receives data from its remote counterpart.
+ */
+- (void)workoutSession:(HKWorkoutSession *)workoutSession didReceiveDataFromRemoteWorkoutSession:(NSArray<NSData *> *)data API_AVAILABLE(ios(17.0), watchos(10.0));
+
+/*!
+ @method        workoutSession:didDisconnectFromRemoteDeviceWithError:
+ @abstract      This method is called when the session is disconnected from its remote counterpart.
+ @discussion    After this method is called for a mirrored workout session, it is no longer considered valid.
+ */
+- (void)workoutSession:(HKWorkoutSession *)workoutSession didDisconnectFromRemoteDeviceWithError:(nullable NSError *)error API_AVAILABLE(ios(17.0), watchos(10.0));
 
 @end
 

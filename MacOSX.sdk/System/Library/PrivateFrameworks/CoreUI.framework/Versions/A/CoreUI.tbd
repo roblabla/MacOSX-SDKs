@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreUI.framework/Versions/A/CoreUI'
-current-version: 804.2
+current-version: 865.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -22,12 +22,13 @@ exports:
                        _CUIConvertDeepImageTo8, _CUIConvertFromTXRPixelFormat, _CUIConvertImageToPixelFormat, 
                        _CUIConvertPixelFormatToString, _CUIConvertToTXRPixelFormat, 
                        _CUICopyCustomColor, _CUICopyCustomColorWithOptions, _CUICopyCustomFontDescriptor, 
-                       _CUICopyMeasurements, _CUICreateDisplayShape, _CUICreateJoinedPathFromSVGNode, 
-                       _CUICreateLayerContents, _CUICreateMenuPath, _CUICreateOrUpdateLayer, 
-                       _CUICreatePathFromSVGNode, _CUICreateRenderer, _CUICreateSDFEdgeTextureFromImage, 
-                       _CUICreateSDFEdgeTexturePixelFormat, _CUICreateSDFGradientTextureFromImage, 
-                       _CUICreateSDFGradientTexturePixelFormat, _CUICurrentPlatform, 
-                       _CUIDeallocateRGBAImageBuffer, _CUIDefaultThemeRenditionKeyFormat, 
+                       _CUICopyMaskShape, _CUICopyMeasurements, _CUICreateDisplayShape, 
+                       _CUICreateJoinedPathFromSVGNode, _CUICreateLayerContents, 
+                       _CUICreateMenuPath, _CUICreateOrUpdateLayer, _CUICreatePathFromSVGNode, 
+                       _CUICreateRenderer, _CUICreateSDFEdgeTextureFromImage, _CUICreateSDFEdgeTexturePixelFormat, 
+                       _CUICreateSDFGradientTextureFromImage, _CUICreateSDFGradientTexturePixelFormat, 
+                       _CUICreateSubpathArrayFromCGPath, _CUICreateSubpathsFromSVGNode, 
+                       _CUICurrentPlatform, _CUIDeallocateRGBAImageBuffer, _CUIDefaultThemeRenditionKeyFormat, 
                        _CUIDraw, _CUIDrawExtrudedImageInContext, _CUIDrawStyledGlyphsAtPositions, 
                        _CUIDrawStyledGlyphsWithAdvances, _CUIEdgeInsetsEqualToEdgeInsets, 
                        _CUIEdgeInsetsFromCGRect, _CUIEdgeInsetsInsetRect, _CUIEdgeInsetsInvalid, 
@@ -472,8 +473,8 @@ exports:
                        _kCUIWidgetButtonPopUpInset, _kCUIWidgetButtonPopUpSquare, 
                        _kCUIWidgetButtonPopUpTextured, _kCUIWidgetButtonPopUpToolbar, 
                        _kCUIWidgetButtonPush, _kCUIWidgetButtonPushInset, _kCUIWidgetButtonPushInset2, 
-                       _kCUIWidgetButtonPushRecessedTitlebar, _kCUIWidgetButtonPushScope, 
-                       _kCUIWidgetButtonPushScope2, _kCUIWidgetButtonPushSlideshow, 
+                       _kCUIWidgetButtonPushProgressSpinner, _kCUIWidgetButtonPushRecessedTitlebar, 
+                       _kCUIWidgetButtonPushScope, _kCUIWidgetButtonPushScope2, _kCUIWidgetButtonPushSlideshow, 
                        _kCUIWidgetButtonPushTextured, _kCUIWidgetButtonPushToolbar, 
                        _kCUIWidgetButtonRadio, _kCUIWidgetButtonRecessedPullDown, 
                        _kCUIWidgetButtonRound, _kCUIWidgetButtonRoundHelp, _kCUIWidgetButtonRoundInset, 
@@ -534,13 +535,13 @@ exports:
                        _kCUIWindowFrameDrawBottomBarSeparatorKey, _kCUIWindowFrameDrawClippedKey, 
                        _kCUIWindowFrameDrawTitleSeparatorKey, _kCUIWindowFrameIncludeBorder, 
                        _kCUIWindowFrameRoundedBottomCornersKey, _kCUIWindowFrameRoundedTopCornersKey, 
-                       _kCUIWindowFrameTexturedBottomBarMatchesTitleBarKey, _kCUIWindowFrameTopBarOnlyKey, 
-                       _kCUIWindowFrameUnifiedTitleBarHeightKey, _kCUIWindowTypeDocument, 
-                       _kCUIWindowTypeDrawer, _kCUIWindowTypeFullScreen, _kCUIWindowTypeHUD, 
-                       _kCUIWindowTypeKey, _kCUIWindowTypeOnlyBackground, _kCUIWindowTypeOnlyCornerMaskImage, 
-                       _kCUIWindowTypeOnlyTexturedBackground, _kCUIWindowTypeSheet, 
-                       _kCUIWindowTypeTextured, _kCUIWindowTypeTexturedUtility, _kCUIWindowTypeTitlelessUtility, 
-                       _kCUIWindowTypeUtility ]
+                       _kCUIWindowFrameShapeCornerRadius, _kCUIWindowFrameTexturedBottomBarMatchesTitleBarKey, 
+                       _kCUIWindowFrameTopBarOnlyKey, _kCUIWindowFrameUnifiedTitleBarHeightKey, 
+                       _kCUIWindowTypeDocument, _kCUIWindowTypeDrawer, _kCUIWindowTypeFullScreen, 
+                       _kCUIWindowTypeHUD, _kCUIWindowTypeKey, _kCUIWindowTypeOnlyBackground, 
+                       _kCUIWindowTypeOnlyCornerMaskImage, _kCUIWindowTypeOnlyTexturedBackground, 
+                       _kCUIWindowTypeSheet, _kCUIWindowTypeTextured, _kCUIWindowTypeTexturedUtility, 
+                       _kCUIWindowTypeTitlelessUtility, _kCUIWindowTypeUtility ]
     objc-classes:    [ CSIBitmapWrapper, CSIGenerator, CUIBackgroundStyleEffectConfiguration, 
                        CUICatalog, CUIColor, CUICommonAssetStorage, CUIDesignColor, 
                        CUIDesignLibrary, CUIDesignLibraryCatalog, CUIDesignLibraryCompositeCatalog, 
@@ -571,5 +572,6 @@ exports:
                        CUIThemeSchemaLayer, CUIThemeSchemaPSDLayer, CUIThemeSchemaPSDLayerGroup, 
                        CUIThemeSchemaPSDRenditionLayer, CUIThemeSchemaRendition, 
                        CUIThemeSchemaRenditionGroup, CUIVectorGlyphGraphicVariantOptions, 
+                       CUIVectorGlyphHierarchicalLayer, CUIVectorGlyphLayer, CUIVectorGlyphMulticolorLayer, 
                        CUIVectorGlyphMutator, CoreUI ]
 ...

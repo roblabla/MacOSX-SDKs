@@ -17,6 +17,7 @@
 #import <UIKit/UIGeometry.h>
 #import <UIKit/UIGraphics.h>
 #import <UIKit/UIImage.h>
+#import <UIKit/UIImageReader.h>
 #import <UIKit/UIImageConfiguration.h>
 #import <UIKit/UIImageSymbolConfiguration.h>
 #import <UIKit/NSDataAsset.h>
@@ -40,6 +41,7 @@
 #import <UIKit/UIAlertView.h>
 #import <UIKit/UIAppearance.h>
 #import <UIKit/UIApplication.h>
+#import <UIKit/UIOrientation.h>
 #import <UIKit/UIBarButtonItem.h>
 #import <UIKit/UIBarButtonItemGroup.h>
 #import <UIKit/UIBarItem.h>
@@ -80,6 +82,7 @@
 #import <UIKit/UIDatePicker.h>
 #import <UIKit/UIDevice.h>
 #import <UIKit/UIDocument.h>
+#import <UIKit/UIDocumentViewController.h>
 #import <UIKit/UIDocumentPickerViewController.h>
 #import <UIKit/UIDocumentMenuViewController.h>
 #import <UIKit/UIDocumentPickerExtensionViewController.h>
@@ -103,6 +106,7 @@
 #import <UIKit/UIInputViewController.h>
 #import <UIKit/UIInterface.h>
 #import <UIKit/UILabel.h>
+#import <UIKit/UILetterformAwareAdjusting.h>
 #import <UIKit/UILexicon.h>
 #import <UIKit/UILargeContentViewer.h>
 #import <UIKit/UIApplicationShortcutItem.h>
@@ -113,6 +117,9 @@
 #import <UIKit/UIFocusAnimationCoordinator.h>
 #import <UIKit/UIFocusDebugger.h>
 #import <UIKit/UIFocusMovementHint.h>
+#import <UIKit/UIHoverEffect.h>
+#import <UIKit/UIHoverStyle.h>
+#import <UIKit/UIShape.h>
 #import <UIKit/UIHoverGestureRecognizer.h>
 #import <UIKit/UILocalizedIndexedCollation.h>
 #import <UIKit/UILongPressGestureRecognizer.h>
@@ -125,6 +132,7 @@
 #import <UIKit/UINibDeclarations.h>
 #import <UIKit/UINibLoading.h>
 #import <UIKit/UIPageControl.h>
+#import <UIKit/UIPageControlProgress.h>
 #import <UIKit/UIPageViewController.h>
 #import <UIKit/UIPanGestureRecognizer.h>
 #import <UIKit/UIPasteboard.h>
@@ -161,6 +169,7 @@
 #import <UIKit/UIStringDrawing.h>
 #import <UIKit/UISwipeGestureRecognizer.h>
 #import <UIKit/UISwitch.h>
+#import <UIKit/UISymbolEffectCompletion.h>
 #import <UIKit/UITabBar.h>
 #import <UIKit/UITabBarController.h>
 #import <UIKit/UITabBarItem.h>
@@ -170,13 +179,18 @@
 #import <UIKit/UITableViewController.h>
 #import <UIKit/UITapGestureRecognizer.h>
 #import <UIKit/UITextChecker.h>
+#import <UIKit/UITextCursorView.h>
 #import <UIKit/UITextField.h>
 #import <UIKit/UITextInput.h>
 #import <UIKit/UITextInputContext.h>
 #import <UIKit/UITextInputTraits.h>
+#import <UIKit/UITextSelectionDisplayInteraction.h>
+#import <UIKit/UITextSelectionHandleView.h>
+#import <UIKit/UITextSelectionHighlightView.h>
 #import <UIKit/UITextView.h>
 #import <UIKit/UIToolbar.h>
 #import <UIKit/UITouch.h>
+#import <UIKit/UITrait.h>
 #import <UIKit/UITraitCollection.h>
 #import <UIKit/UIUserActivity.h>
 #import <UIKit/UIVideoEditorController.h>
@@ -248,7 +262,9 @@
 #import <UIKit/NSIndexPath+UIKitAdditions.h>
 #import <UIKit/UIPopoverSupport.h>
 #import <UIKit/UITextInteraction.h>
+#import <UIKit/UITextItem.h>
 #import <UIKit/UITextItemInteraction.h>
+#import <UIKit/UITextLoupeSession.h>
 #import <UIKit/UIViewAnimating.h>
 #import <UIKit/UISwipeActionsConfiguration.h>
 #import <UIKit/UIAccessibilityZoom.h>
@@ -279,13 +295,22 @@
 #import <UIKit/UISceneEnhancedStateRestoration.h>
 #import <UIKit/UISceneOptions.h>
 #import <UIKit/UIScene.h>
+#import <UIKit/UIScene+AVAudioSession.h>
 #import <UIKit/UIWindowScene.h>
 #import <UIKit/UISceneSession.h>
+#import <UIKit/UISceneSessionActivationRequest.h>
 #import <UIKit/UISceneActivationConditions.h>
 #import <UIKit/UIWindowSceneGeometry.h>
 #import <UIKit/UIWindowSceneGeometryPreferences.h>
 #import <UIKit/UIWindowSceneGeometryPreferencesMac.h>
 #import <UIKit/UIWindowSceneGeometryPreferencesIOS.h>
+#import <UIKit/UIWindowSceneGeometryPreferencesVision.h>
+#if __has_include(<UIKit/UIWindowSceneGeometryPreferencesReality.h>)
+#import <UIKit/UIWindowSceneGeometryPreferencesReality.h>
+#endif
+#import <UIKit/UIWindowScenePlacement.h>
+#import <UIKit/UIWindowSceneStandardPlacement.h>
+#import <UIKit/UIWindowSceneProminentPlacement.h>
 #import <UIKit/UIOpenURLContext.h>
 #import <UIKit/UIStatusBarManager.h>
 #import <UIKit/UIScreenshotService.h>
@@ -316,6 +341,7 @@
 #import <UIKit/UIWindowSceneActivationConfiguration.h>
 #import <UIKit/UIWindowSceneActivationAction.h>
 #import <UIKit/UIWindowSceneActivationInteraction.h>
+#import <UIKit/UIWindowSceneDragInteraction.h>
 #import <UIKit/UIFocusEffect.h>
 #import <UIKit/UIToolTipInteraction.h>
 #import <UIKit/UICalendarView.h>
@@ -327,4 +353,10 @@
 #import <UIKit/UIFindSession.h>
 #import <UIKit/UIFindInteraction.h>
 #import <UIKit/UIEditMenuInteraction.h>
+#import <UIKit/UIContentUnavailableConfiguration.h>
+#import <UIKit/UIContentUnavailableImageProperties.h>
+#import <UIKit/UIContentUnavailableTextProperties.h>
+#import <UIKit/UIContentUnavailableButtonProperties.h>
+#import <UIKit/UIContentUnavailableConfigurationState.h>
+#import <UIKit/UIContentUnavailableView.h>
 #endif

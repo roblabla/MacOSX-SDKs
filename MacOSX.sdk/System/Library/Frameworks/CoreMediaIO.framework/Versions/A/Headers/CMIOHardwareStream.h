@@ -401,6 +401,7 @@ enum
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIOStream Functions
 
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 /*!
     @functiongroup  CMIOStream
 */
@@ -556,7 +557,7 @@ extern CMTime
 CMIOStreamClockConvertHostTimeToDeviceTime( UInt64      hostTime,
                                             CFTypeRef   clock) API_AVAILABLE(macos(10.7));
 
-
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
 /*!
     @typedef    CMIOStreamScheduledOutputNotificationProc
     @discussion Callback used to notify a client when a buffer was output.

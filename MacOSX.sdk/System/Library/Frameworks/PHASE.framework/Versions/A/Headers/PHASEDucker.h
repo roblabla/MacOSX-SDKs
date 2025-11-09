@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASEDucker
     @abstract A PHASEDucker is used to describe ducking behavior across different groups.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEDucker : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

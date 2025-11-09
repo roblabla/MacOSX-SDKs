@@ -123,6 +123,10 @@ Globals:
   SwiftName: properties
 - Name: kCIImageApplyOrientationProperty
   SwiftName: applyOrientationProperty
+- Name: kCIImageCacheImmediately
+  SwiftName: cacheImmediately
+- Name: kCIImageExpandToHDR
+  SwiftName: expandToHDR
 - Name: kCIImageTextureTarget
   SwiftName: textureTarget
 - Name: kCIImageTextureFormat
@@ -171,8 +175,6 @@ Globals:
   SwiftName: opaque
 - Name: kCIImageCacheHint
   SwiftName: cacheHint
-- Name: kCIImageCacheImmediately
-  SwiftName: cacheImmediately
 - Name: kCIImageYCCMatrix
   SwiftName: YCCMatrix
 - Name: kCIImageIgnorePixelFormatFor601Fixup
@@ -207,6 +209,8 @@ Globals:
   SwiftName: allowLowPower
 - Name: kCIContextName
   SwiftName: name
+- Name: kCIContextMemoryLimit
+  SwiftName: memoryTarget
 
 # CIContextOption - Private
 - Name: kCIContextDisableSoftwareFallback

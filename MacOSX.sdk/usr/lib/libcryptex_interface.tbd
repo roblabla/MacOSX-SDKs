@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libcryptex_interface.dylib'
-current-version: 207.101.2
+current-version: 369.0.11
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ cryptest, cryptex, cryptexctl, cryptexd, cryptexd.diagnostic ]
@@ -19,10 +19,10 @@ exports:
                        _codex_upgrade_stage_semi_splat_reply_pack, _codex_upgrade_stage_semi_splat_reply_unpack, 
                        _codex_upgrade_stage_semi_splat_unpack, _collation_interface_request_endpoint_for_user, 
                        _cryptex_actor_connect, _cryptex_actor_create, _cryptex_actor_trap, 
-                       _cryptex_subsystem_codex, _cryptex_subsystem_create_actor, 
-                       _cryptex_subsystem_cryptex, _cryptex_subsystem_daemon, _cryptex_subsystem_session, 
-                       _cryptex_trampoline_upgrade_interface_wait, _cryptex_uninstall_pack, 
-                       _cryptex_uninstall_reply_pack, _cryptex_uninstall_reply_unpack, 
+                       _cryptex_actor_trap_with_cferr, _cryptex_subsystem_codex, 
+                       _cryptex_subsystem_create_actor, _cryptex_subsystem_cryptex, 
+                       _cryptex_subsystem_daemon, _cryptex_subsystem_session, _cryptex_trampoline_upgrade_interface_wait, 
+                       _cryptex_uninstall_pack, _cryptex_uninstall_reply_pack, _cryptex_uninstall_reply_unpack, 
                        _cryptex_uninstall_unpack, _cryptex_upgrade_interface_abort, 
                        _cryptex_upgrade_interface_acquire_lock, _cryptex_xpc_create_connection, 
                        _daemon_async_pack, _daemon_async_reply_pack, _daemon_async_reply_unpack, 

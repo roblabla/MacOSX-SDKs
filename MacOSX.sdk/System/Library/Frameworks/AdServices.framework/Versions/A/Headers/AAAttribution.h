@@ -12,17 +12,17 @@ NS_ASSUME_NONNULL_BEGIN
 /// The framework attribution error domain.
 extern NSErrorDomain const AAAttributionErrorDomain API_AVAILABLE(ios(14.3), macosx(11.1), tvos(14.3));
         
-/// The error code that the parent class issues.
+/// The error codes that may be returned by AAAttribution.
 typedef NS_ERROR_ENUM(AAAttributionErrorDomain, AAAttributionErrorCode)
 {
-    /// The server is unable to provide a token because the internet isn’t available.
+    /// attributionTokenWithError: is unable to provide a token because the internet isn’t available.
     ///
     /// To receive an attribution token, you must have unimpeded internet access. Make sure
     /// you’re not using a simulator when generating a token.
     AAAttributionErrorCodeNetworkError = 1,
-    /// The server is unable to provide a token because of an internal error.
+    /// attributionTokenWithError: is unable to provide a token because of an internal error.
     AAAttributionErrorCodeInternalError = 2,
-    /// The server is unable to provide a token because of an unsupported operating system.
+    /// attributionTokenWithError: is unable to provide a token because of an unsupported operating system.
     AAAttributionErrorCodePlatformNotSupported = 3
 } API_AVAILABLE(ios(14.3), macosx(11.1), tvos(14.3));
 

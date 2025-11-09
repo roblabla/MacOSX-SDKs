@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      An abstract class representing a type of object that can be stored by HealthKit.
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKObjectType : NSObject <NSSecureCoding, NSCopying>
 
 /*!
@@ -65,7 +66,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @method        requiresPerObjectAuthorization
  @abstract      Returns YES if the authorization for the object type needs to be requested on per object basis.
  */
-- (BOOL)requiresPerObjectAuthorization;
+- (BOOL)requiresPerObjectAuthorization API_AVAILABLE(ios(16.0), macCatalyst(16.0), macos(13.0));
 
 @end
 
@@ -74,6 +75,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents a type of object that describes a characteristic of the user (such as date of birth).
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKCharacteristicType : HKObjectType
 @end
 
@@ -82,6 +84,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents a type of HKSample.
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKSampleType : HKObjectType
 
 /*!
@@ -126,6 +129,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represent a type of HKCategorySample.
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKCategoryType : HKSampleType
 @end
 
@@ -134,6 +138,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents a type of HKCorrelation
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKCorrelationType : HKSampleType
 @end
 
@@ -142,6 +147,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents a type of HKDocument.
  */
 HK_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKDocumentType : HKSampleType
 @end
 
@@ -150,6 +156,7 @@ HK_EXTERN API_AVAILABLE(ios(10.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents types of HKQuantitySamples.
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKQuantityType : HKSampleType
 
 @property (readonly) HKQuantityAggregationStyle aggregationStyle;
@@ -168,6 +175,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents a workout or exercise
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKWorkoutType : HKSampleType
 @end
 
@@ -176,6 +184,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents a type of HKSeriesSample
  */
 HK_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKSeriesType : HKSampleType
 
 + (instancetype)workoutRouteType;
@@ -188,6 +197,7 @@ HK_EXTERN API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0))
  @abstract      Represents an HKActivitySummary
  */
 HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKActivitySummaryType : HKObjectType
 @end
 
@@ -196,6 +206,7 @@ HK_EXTERN API_AVAILABLE(ios(9.3), watchos(2.2), macCatalyst(13.0), macos(13.0))
  @abstract Represents an audiogram sample.
  */
 HK_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKAudiogramSampleType : HKSampleType
 @end
 
@@ -204,6 +215,7 @@ HK_EXTERN API_AVAILABLE(ios(13.0), watchos(6.0), macCatalyst(13.0), macos(13.0))
  @abstract Represents an electrocardiogram sample.
  */
 HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKElectrocardiogramType : HKSampleType
 @end
 
@@ -212,6 +224,7 @@ HK_EXTERN API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0))
  @abstract      Represents a prescription type
  */
 HK_EXTERN API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKPrescriptionType : HKSampleType
 @end
 

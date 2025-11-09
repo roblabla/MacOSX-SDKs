@@ -2,7 +2,6 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotesPreviewKit.framework/Versions/A/NotesPreviewKit'
-current-version: 2215
 swift-abi-version: 7
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -11,7 +10,7 @@ allowable-clients:
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s15NotesPreviewKit010WidgetNoteB8ProviderC6sharedACvgZ', 
-                       '_$s15NotesPreviewKit010WidgetNoteB8ProviderC7preview9accountId04noteI0AA0eB0VSSSg_AItKF', 
+                       '_$s15NotesPreviewKit010WidgetNoteB8ProviderC7preview9accountId04noteI04typeAA0eB0VSSSg_AJSo15ICThumbnailTypeVtKF', 
                        '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMa', '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMm', 
                        '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMn', '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMo', 
                        '_$s15NotesPreviewKit010WidgetNoteB8ProviderCMu', '_$s15NotesPreviewKit010WidgetNoteB8ProviderCN', 

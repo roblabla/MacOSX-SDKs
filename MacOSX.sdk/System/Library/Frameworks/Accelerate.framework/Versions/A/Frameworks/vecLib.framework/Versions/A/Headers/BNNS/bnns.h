@@ -2455,6 +2455,108 @@ int BNNSRandomFillNormalFloat(BNNSRandomGenerator generator, BNNSNDArrayDescript
 __API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 
+/*! @abstract Fill the supplied tensor with random float data using the supplied generator mapped to
+ *  categorical distributions with the given event (log) probabilities.
+ *
+ *  @discussion
+ *  We generate  random values from a categorical distribution with specified event probabilities or event log probabilities.
+ *  Note that if generator is used on multiple threads, usage is serialized through an internal lock. In this scenario we recommend
+ *  users create a different BNNSRandomGenerator object with a different seed for each thread to ensure consistency of output
+ *  on any replay using BNNSRandomGeneratorGetState/BNNSRandomGeneratorSetState and to eliminate contention.
+ *  Assume r is the rank of the probabilities tensor, and K is the inner most dimension of probabilities tensor, i.e., probabilities.size[r-1].
+ *  Then, desc must be a rank r tensor with the first r-1 dimensions having the same size as the first r-1 dimensions of probabilities, where
+ *  the first r-1 dimensions are treated as batch sizes and each desc [i_0, ..., i_r-2, i_r-1] will be an integer in 0,1,..., K-1 drawn from the
+ *  categorical distribution from the corresponding probabilities slice [i_0, ..., i_r-2, :]. That is to say desc.size[r-1] samples are drawn from
+ *  a categorical distribution, such that P(desc[i_0, ..., i_r-2, i_r-1] == k) = probabilities[i0, ..., i_r-2, k].
+ *  The probabilities data is assumed to be nonnegative and finite, which will be normalized to sum one along the inner most dimension.
+ *  The log probabilities data will be normalized, so their exponentials sum to one along the inner most dimension.
+ *
+ *  @param generator - random generator to be used
+ *
+ *  @param desc - tensor descriptor to be filled with random values, data type must be floating point
+ *
+ *  @param probabilities - probabilities or log probabilities, data type must be the same as desc
+ *
+ *  @param log_probabilities - true if log probabilities is provided, otherwise probabilities data is provided
+ *
+ *  @returns 0 on success, nonzero on error.
+ */
+int BNNSRandomFillCategoricalFloat(BNNSRandomGenerator generator,
+                                   const BNNSNDArrayDescriptor *desc,
+                                   const BNNSNDArrayDescriptor *probabilities,
+                                   bool log_probabilities)
+__API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
+
+#pragma mark - K-Nearest Neighbors
+
+/*!
+
+ @abstract K-nearest neighbors container object
+
+ */
+typedef void * _Nullable BNNSNearestNeighbors;
+
+/**
+ @abstract Create a BNNSNearestNeighbors object, that is used to calculate k nearest neighbors of data points
+ based on Euclidean distance
+
+ @param max_n_samples - maximum number of data points
+ @param n_features - number of features (dimensions) of each data point
+ @param n_neighbors - number of nearest neighbors
+ @param data_type - data type of the features, only fp32 and fp16 is supported by now
+ @param filter_params - filter runtime parameters, may be NULL for default parameters
+
+ @return On success, a BNNSNearestNeighbors object is created. On failure, returns NULL.
+ */
+BNNSNearestNeighbors BNNSCreateNearestNeighbors(const unsigned int max_n_samples,
+                                                const unsigned int n_features,
+                                                const unsigned int n_neighbors,
+                                                const BNNSDataType data_type,
+                                                const BNNSFilterParameters * _Nullable filter_params)
+__API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
+
+/**
+ @abstract Destroy a BNNSNearestNeighbors object
+
+ @param knn - the BNNSNearestNeighbors object to be destroyed
+ */
+void BNNSDestroyNearestNeighbors(BNNSNearestNeighbors knn)
+__API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
+
+/**
+ @abstract Add new sample data to BNNSNearestNeighbors
+
+ @param knn - the BNNSNearestNeighbors object used for calculation and storage
+ @param n_new_samples - number of new data points to be added
+ @param data_ptr - pointer to the new data array of size [n_new_samples, n_features]
+
+ @return 0 for success, nonzero on failure (failure reason will reported in os logs)
+ */
+int BNNSNearestNeighborsLoad(BNNSNearestNeighbors knn,
+                             const unsigned int n_new_samples,
+                             const void* data_ptr)
+__API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
+
+/**
+ @abstract Return the sorted indices and distances of the k nearest neighbors to certain sample point
+
+ @param knn -  the BNNSNearestNeighbors object used for calculation and storage
+ @param sample_number - sample number to return the k nearest neighbors, if negative return all of them
+ @param indices - sorted indices of the k nearest neighbors to the sample point (sample_number), if not null.
+  If sample_number is negative, indices is an array of [n_samples, n_neighbors], otherwise indices is an array of [n_neighbors].
+  Return -1 for n_neighbors larger than n_samples.
+ @param distances - sorted distances of the k nearest neighbors to the sample point (sample_number), if not null.
+  If sample_number is negative, distances is an array of [n_samples, n_neighbors], otherwise distances is an array of [n_neighbors].
+  Return INFINITY for n_neighbors larger than n_samples.
+
+ @return 0 for success, nonzero on failure (failure reason will reported in os logs)
+ */
+int BNNSNearestNeighborsGetInfo(const BNNSNearestNeighbors knn,
+                                const int sample_number,
+                                int * _Nullable indices,
+                                void * _Nullable distances)
+__API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
+
 #pragma mark - Deprecated Filter Creation Functions
 
 /*!

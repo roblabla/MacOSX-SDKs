@@ -27,4 +27,3 @@
 #import <PHASE/PHASESource.h>
 #import <PHASE/PHASESpatialPipeline.h>
 #import <PHASE/PHASETypes.h>
-#import <PHASE/PHASEGeneratorParameters.h>

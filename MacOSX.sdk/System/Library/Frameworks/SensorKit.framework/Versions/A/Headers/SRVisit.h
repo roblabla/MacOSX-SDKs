@@ -17,9 +17,9 @@ typedef NS_ENUM(NSInteger, SRLocationCategory) {
     SRLocationCategoryWork,
     SRLocationCategorySchool,
     SRLocationCategoryGym,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRVisit : NSObject
 
 /// The distance between the location of interest to home

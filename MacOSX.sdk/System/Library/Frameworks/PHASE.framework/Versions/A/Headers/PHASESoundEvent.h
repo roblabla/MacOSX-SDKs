@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASESoundEvent
     @abstract A PHASESoundEvent is an object that represents a playable sound event in the PHASE system.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESoundEvent : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

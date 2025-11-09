@@ -2,7 +2,7 @@
 //  AVB17221AECPMessage.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -128,6 +128,13 @@ API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 	@result		An AVB17221AECPAEMMessage instance pre-setup as an AEM response.
  */
 + (AVB17221AECPAEMMessage *)responseMessage;
+
+/*!
+	@method		responseMessageFromCommandMessage
+	@abstract	This method returns an AVB17221AECPAEMMessage instance setup as an AEM response with the appropriate info copied from the supplied command message.
+	@result		An AVB17221AECPAEMMessage instance setup as an AEM response with all info copied from the command message..
+ */
++ (AVB17221AECPAEMMessage *)responseMessageFromCommandMessage:(AVB17221AECPAEMMessage *)commandMessage;
 
 @end
 

@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <os/availability.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -20,7 +21,7 @@ HK_EXTERN NSString * const HKErrorDomain API_AVAILABLE(ios(8.0), watchos(2.0), m
 /*!
  @enum      HKErrorCode
 
- @constant  HKNoError                           No error.
+ @constant  HKUnknownError                      Unknown error.
  @constant  HKErrorHealthDataUnavailable        HealthKit is not available on this device.
  @constant  HKErrorHealthDataRestricted         HealthKit is restricted on this device.
  @constant  HKErrorInvalidArgument              An invalid argument was provided to the API.
@@ -35,10 +36,14 @@ HK_EXTERN NSString * const HKErrorDomain API_AVAILABLE(ios(8.0), watchos(2.0), m
                                                 required data types.
  @constant  HKErrorNoData                       No data is available for the requested query and predicate, and so the
                                                 query's result could not be meaningfully computed.
+ @constant  HKErrorWorkoutActivityNotAllowed    A workout session is not allowed to be created for the activity type.
+ @constant  HKErrorDataSizeExceeded             The provided data's size exceeds the maximum allowed.
+ @constant  HKErrorBackgroundWorkoutSessionNotAllowed   A workout session is not allowed to start or prepare when this app is in the background.
  */
 typedef NS_ENUM(NSInteger, HKErrorCode) {
-    HKNoError = 0,
-    HKErrorHealthDataUnavailable,
+    HKUnknownError = 0,
+    HKNoError API_DEPRECATED_WITH_REPLACEMENT("HKUnknownError", ios(8.0, API_TO_BE_DEPRECATED), watchos(2.0, API_TO_BE_DEPRECATED)) = HKUnknownError,
+    HKErrorHealthDataUnavailable = 1,
     HKErrorHealthDataRestricted,
     HKErrorInvalidArgument,
     HKErrorAuthorizationDenied,
@@ -49,6 +54,9 @@ typedef NS_ENUM(NSInteger, HKErrorCode) {
     HKErrorUserExitedWorkoutSession         API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0)),
     HKErrorRequiredAuthorizationDenied      API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0)),
     HKErrorNoData                           API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0)),
+    HKErrorWorkoutActivityNotAllowed        API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
+    HKErrorDataSizeExceeded                 API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
+    HKErrorBackgroundWorkoutSessionNotAllowed   API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
 } API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 
 /*!
@@ -92,293 +100,10 @@ typedef NS_ENUM(NSInteger, HKAuthorizationRequestStatus) {
     HKAuthorizationRequestStatusUnnecessary,
 } API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0));
 
-/*!
- @enum       HKBiologicalSex
- @abstract   This enumerated type is used to represent the biological sex of an individual.
- */
-typedef NS_ENUM(NSInteger, HKBiologicalSex) {
-    HKBiologicalSexNotSet = 0,
-    HKBiologicalSexFemale,
-    HKBiologicalSexMale,
-    HKBiologicalSexOther API_AVAILABLE(ios(8.2), watchos(2.0), macCatalyst(13.0), macos(13.0)),
-} API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum       HKBloodType
- @abstract   This enumerated type is used to represent the blood type of an individual.
- */
-typedef NS_ENUM(NSInteger, HKBloodType) {
-    HKBloodTypeNotSet = 0,
-    HKBloodTypeAPositive,
-    HKBloodTypeANegative,
-    HKBloodTypeBPositive,
-    HKBloodTypeBNegative,
-    HKBloodTypeABPositive,
-    HKBloodTypeABNegative,
-    HKBloodTypeOPositive,
-    HKBloodTypeONegative,
-} API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValueSleepAnalysis
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierSleepAnalysis type.
- @discussion    To represent the user being both in bed and asleep, use two or more samples with overlapping times. By comparing the
-                start and end times of these samples, it is possible to calculate a number of secondary statistics:
-                1) The amount of time it took for the user to fall asleep
-                2) The percentage of time in bed that the user actually spent sleeping,
-                3) The number of times the user woke while in bed
-                4) The total amount of time spent both in bed and asleep.
-
- @constant HKCategoryValueSleepAnalysisInBed The user is in bed.
- @constant HKCategoryValueSleepAnalysisAwake The user is awake.
- @constant HKCategoryValueSleepAnalysisAsleepUnspecified The user is asleep and no specific stage is specified.
- @constant HKCategoryValueSleepAnalysisAsleepCore Corresponds to Stages 1 and 2 of AASM scoring model.
- @constant HKCategoryValueSleepAnalysisAsleepDeep  Corresponds to Stage 3 of AASM scoring model.
- @constant HKCategoryValueSleepAnalysisAsleepREM Corresponds to REM stage of AASM scoring model.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueSleepAnalysis) {
-    HKCategoryValueSleepAnalysisInBed = 0,
-    HKCategoryValueSleepAnalysisAsleepUnspecified API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 1,
-    HKCategoryValueSleepAnalysisAsleep API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueSleepAnalysisAsleepUnspecified", ios(8.0, 16.0), watchos(2.0, 9.0), macCatalyst(13.0, 16.0), macos(13.0, 13.0)) = HKCategoryValueSleepAnalysisAsleepUnspecified,
-    HKCategoryValueSleepAnalysisAwake API_AVAILABLE(ios(10.0), watchos(3.0), macCatalyst(13.0), macos(13.0)) = 2,
-    HKCategoryValueSleepAnalysisAsleepCore API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 3,
-    HKCategoryValueSleepAnalysisAsleepDeep API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 4,
-    HKCategoryValueSleepAnalysisAsleepREM API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 5,
-} API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
 /// Returns the set of `HKCategoryValueSleepAnalysis` values that are considered to be asleep.
 HK_EXTERN NSSet<NSNumber *> * HKCategoryValueSleepAnalysisAsleepValues(void) API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) NS_REFINED_FOR_SWIFT;
 
-
-/*!
- @enum          HKCategoryValueAppleStandHour
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierAppleStandHour type.
-
- @constant      HKCategoryValueAppleStandHourStood  The user stood up and moved a little for at least one minute during
-                                                    the sample.
- @constant      HKCategoryValueAppleStandHourIdle   The user did not stand up and move a little for at least one
-                                                    continuous minute during the sample.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueAppleStandHour) {
-    HKCategoryValueAppleStandHourStood = 0,
-    HKCategoryValueAppleStandHourIdle,
-} API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKFitzpatrickSkinType
- @abstract      This enumerated type is used to represent the skin type of an individual based on the Fitzpatrick scale.
- @discussion    The Fitzpatrick scale is a numerical classification for skin color based on the skin's response to sun
-                exposure in terms of the degree of burning and tanning.
-
- @constant      HKFitzpatrickSkinTypeI      Pale white skin that always burns easily in the sun and never tans.
- @constant      HKFitzpatrickSkinTypeII     White skin that burns easily and tans minimally.
- @constant      HKFitzpatrickSkinTypeIII    White to light brown skin that burns moderately and tans uniformly.
- @constant      HKFitzpatrickSkinTypeIV     Beige-olive, lightly tanned skin that burns minimally and tans moderately.
- @constant      HKFitzpatrickSkinTypeV      Brown skin that rarely burns and tans profusely.
- @constant      HKFitzpatrickSkinTypeVI     Dark brown to black skin that never burns and tans profusely.
- */
-typedef NS_ENUM(NSInteger, HKFitzpatrickSkinType) {
-    HKFitzpatrickSkinTypeNotSet = 0,
-    HKFitzpatrickSkinTypeI,
-    HKFitzpatrickSkinTypeII,
-    HKFitzpatrickSkinTypeIII,
-    HKFitzpatrickSkinTypeIV,
-    HKFitzpatrickSkinTypeV,
-    HKFitzpatrickSkinTypeVI,
-} API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKWheelchairUse
- @abstract      This enumerated type is used to represent whether the user uses a wheelchair.
-
- @constant      HKWheelchairUseNo      The user does not use a wheelchair.
- @constant      HKWheelchairUseYes     The user does use a wheelchair.
- */
-typedef NS_ENUM(NSInteger, HKWheelchairUse) {
-    HKWheelchairUseNotSet = 0,
-    HKWheelchairUseNo,
-    HKWheelchairUseYes,
-} API_AVAILABLE(ios(10.0), watchos(3.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValueCervicalMucusQuality
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierCervicalMucusQuality type.
- @discussion    These cervical mucus quality values are ordered from least-fertile (Dry) to most-fertile (EggWhite).
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueCervicalMucusQuality) {
-    HKCategoryValueCervicalMucusQualityDry = 1,
-    HKCategoryValueCervicalMucusQualitySticky,
-    HKCategoryValueCervicalMucusQualityCreamy,
-    HKCategoryValueCervicalMucusQualityWatery,
-    HKCategoryValueCervicalMucusQualityEggWhite,
-} API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValueOvulationTestResult
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierOvulationTestResult type.
- @discussion    This category value tracks the result of a home ovulation test that use surges in hormone levels to
-                indicate fertility.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueOvulationTestResult) {
-    HKCategoryValueOvulationTestResultNegative = 1,
-    HKCategoryValueOvulationTestResultLuteinizingHormoneSurge API_AVAILABLE(ios(13.0), watchos(6.0)) = 2,
-    HKCategoryValueOvulationTestResultPositive API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueOvulationTestResultLuteinizingHormoneSurge", ios(9.0, 13.0), watchos(2.0, 6.0)) = HKCategoryValueOvulationTestResultLuteinizingHormoneSurge,
-    HKCategoryValueOvulationTestResultIndeterminate = 3,
-    HKCategoryValueOvulationTestResultEstrogenSurge API_AVAILABLE(ios(13.0), watchos(6.0)) = 4,
-} API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValuePregnancyTestResult
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierPregnancyTestResult type.
- @discussion    This category value tracks the result of a home pregnancy test that checks for presence of the human chorionic
-                gonadotrophin (hCG) hormone in urine to confirm pregnancy.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValuePregnancyTestResult) {
-    HKCategoryValuePregnancyTestResultNegative = 1,
-    HKCategoryValuePregnancyTestResultPositive,
-    HKCategoryValuePregnancyTestResultIndeterminate,
-} API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValueProgesteroneTestResult
- @abstract      Set of values that may be used for HKCategorySamples with the HKCategoryTypeIdentifierProgesteroneTestResult type.
- @discussion    This category value tracks the result of a home ovulation confirmation test that use surges in hormone levels to
-                confirm if ovulation has occurred.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueProgesteroneTestResult) {
-    HKCategoryValueProgesteroneTestResultNegative = 1,
-    HKCategoryValueProgesteroneTestResultPositive,
-    HKCategoryValueProgesteroneTestResultIndeterminate,
-} API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValueMenstrualFlow
- @abstract      Set of values to indicate the type of menstrual flow.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueMenstrualFlow) {
-    HKCategoryValueMenstrualFlowUnspecified = 1,
-    HKCategoryValueMenstrualFlowLight,
-    HKCategoryValueMenstrualFlowMedium,
-    HKCategoryValueMenstrualFlowHeavy,
-    HKCategoryValueMenstrualFlowNone API_AVAILABLE(ios(12.0), watchos(5.0), macCatalyst(13.0), macos(13.0)),
-} API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValue
- @abstract      This category value is to be used for types which don't have a specific value defined.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValue) {
-    HKCategoryValueNotApplicable = 0,
-} API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValueAudioExposureEvent
- @abstract      Specifies the kind of audio exposure event associated with the sample.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueAudioExposureEvent) {
-    HKCategoryValueAudioExposureEventLoudEnvironment API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueEnvironmentalAudioExposureEventMomentaryLimit", ios(13.0, 14.0), watchos(6.0, 7.0)) = 1,
-} API_DEPRECATED_WITH_REPLACEMENT("HKCategoryValueEnvironmentalAudioExposureEvent", ios(13.0, 14.0), watchos(6.0, 7.0));
-
-/*!
- @enum          HKCategoryValueEnvironmentalAudioExposureEvent
- @abstract      Specifies the kind of environmental audio exposure event associated with the sample.
-
- @constant      HKCategoryValueEnvironmentalAudioExposureEventMomentaryLimit          This constant defines environmental events associated
-                with the user being exposed to a loud environment during a short timespan.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueEnvironmentalAudioExposureEvent) {
-    HKCategoryValueEnvironmentalAudioExposureEventMomentaryLimit = 1,
-} API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0));
-
-/*!
- @enum          HKCategoryValueContraceptive
- @abstract      Set of values to indicate the type of contraceptive.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueContraceptive) {
-    HKCategoryValueContraceptiveUnspecified = 1,
-    HKCategoryValueContraceptiveImplant,
-    HKCategoryValueContraceptiveInjection,
-    HKCategoryValueContraceptiveIntrauterineDevice,
-    HKCategoryValueContraceptiveIntravaginalRing,
-    HKCategoryValueContraceptiveOral,
-    HKCategoryValueContraceptivePatch,
-} API_AVAILABLE(ios(14.3), watchos(7.2), macCatalyst(14.3), macos(13.0));
-
-/*!
- @enum          HKCategoryValueSeverity
- @abstract      Set of values to indicate the severity of a symptom.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueSeverity) {
-    HKCategoryValueSeverityUnspecified = 0,
-    HKCategoryValueSeverityNotPresent,
-    HKCategoryValueSeverityMild,
-    HKCategoryValueSeverityModerate,
-    HKCategoryValueSeveritySevere,
-} API_AVAILABLE(ios(13.6), watchos(7.0), macCatalyst(13.6), macos(13.0));
-
-/*!
- @enum          HKCategoryValueAppetiteChanges
- @abstract      Set of values to indicate the direction of appetite changes.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValueAppetiteChanges) {
-    HKCategoryValueAppetiteChangesUnspecified = 0,
-    HKCategoryValueAppetiteChangesNoChange,
-    HKCategoryValueAppetiteChangesDecreased,
-    HKCategoryValueAppetiteChangesIncreased,
-} API_AVAILABLE(ios(13.6), watchos(7.0), macCatalyst(13.6), macos(13.0));
-
-/*!
- @enum          HKCategoryValuePresence
- @abstract      Set of values to indicate whether a data type is present or not.
- */
-typedef NS_ENUM(NSInteger, HKCategoryValuePresence) {
-    HKCategoryValuePresencePresent = 0,
-    HKCategoryValuePresenceNotPresent,
-} API_AVAILABLE(ios(13.6), watchos(7.0), macCatalyst(13.6), macos(13.0));
-
-/*!
-@enum          HKCategoryValueHeadphoneAudioExposureEvent
-@abstract      Specifies the kind of headphone exposure event associated with the sample.
-@constant      HKCategoryValueHeadphoneAudioExposureEventSevenDayLimit     This constant defines headphone events associated with the user being exposed to significant audio levels throught a seven-day period.
-*/
-typedef NS_ENUM(NSInteger, HKCategoryValueHeadphoneAudioExposureEvent) {
-    HKCategoryValueHeadphoneAudioExposureEventSevenDayLimit = 1
-} API_AVAILABLE(ios(14.2), watchos(7.1), macCatalyst(14.2), macos(13.0));
-
-/*!
- @enum          HKCategoryValueLowCardioFitnessEvent
- @abstract      Specifies the type of cardio fitness event.
-
- @constant      HKCategoryValueLowCardioFitnessEventLowFitness       This constant defines an event where a VO2Max measurement was recorded that falls into the "Low" fitness classification
-  */
-typedef NS_ENUM(NSInteger, HKCategoryValueLowCardioFitnessEvent) {
-    HKCategoryValueLowCardioFitnessEventLowFitness = 1,
-} API_AVAILABLE(ios(14.3), watchos(7.2), macCatalyst(14.3), macos(13.0));
-
-/*!
- @enum          HKActivityMoveMode
- @abstract      This enumerated type is used to represent the activity mode for the user's move ring.
- @constant      HKActivityMoveModeActiveEnergy     User's move ring is updated from Active Energy Burned
- @constant      HKActivityMoveModeAppleMoveTime    User's move ring is updated from Apple Move Time
- */
-typedef NS_ENUM(NSInteger, HKActivityMoveMode) {
-    HKActivityMoveModeActiveEnergy = 1,
-    HKActivityMoveModeAppleMoveTime = 2,
-} API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0));
-
-/*!
-@enum          HKCategoryValueAppleWalkingSteadinessEvent
-@abstract      Specifies the kind of Apple Walking Steadiness event associated with the sample.
-@constant      HKCategoryValueAppleWalkingSteadinessEventInitialLow           This constant defines Apple Walking Steadiness events associated with the user's walking steadiness being low.
-@constant      HKCategoryValueAppleWalkingSteadinessEventInitialVeryLow       This constant defines Apple Walking Steadiness events associated with the user's walking steadiness being very low.
-@constant      HKCategoryValueAppleWalkingSteadinessEventRepeatLow            This constant defines Apple Walking Steadiness events associated with the user's walking steadiness remaining low over a significant time period.
-@constant      HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow        This constant defines Apple Walking Steadiness events associated with the user's walking steadiness remaining very low over a significant time period.
-*/
-typedef NS_ENUM(NSInteger, HKCategoryValueAppleWalkingSteadinessEvent) {
-    HKCategoryValueAppleWalkingSteadinessEventInitialLow = 1,
-    HKCategoryValueAppleWalkingSteadinessEventInitialVeryLow = 2,
-    HKCategoryValueAppleWalkingSteadinessEventRepeatLow = 3,
-    HKCategoryValueAppleWalkingSteadinessEventRepeatVeryLow = 4,
-} API_AVAILABLE(ios(15.0), watchos(8.0), macCatalyst(15.0), macos(13.0));
-
 NS_ASSUME_NONNULL_END
+
+#import <HealthKit/HKCategoryValues.h>
+#import <HealthKit/HKCharacteristicValues.h>

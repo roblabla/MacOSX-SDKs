@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  * This API is part of NetworkExtension.framework.
  */
 
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NETunnelProviderSession : NEVPNConnection
 
 /*!
@@ -30,13 +30,13 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *    2. NEVPNErrorConfigurationDisabled
  * @return YES if the tunnel was started successfully, NO if an error occurred.
  */
-- (BOOL)startTunnelWithOptions:(nullable NSDictionary<NSString *,id> *)options andReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (BOOL)startTunnelWithOptions:(nullable NSDictionary<NSString *,id> *)options andReturnError:(NSError **)error API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method stopTunnel
  * @discussion This function is used to stop the tunnel. The tunnel disconnect process is started and this function returns immediately.
  */
-- (void)stopTunnel API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)stopTunnel API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method sendProviderMessage:responseHandler:
@@ -48,7 +48,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param responseHandler A block that handles the response. Can be set to nil if no response is expected.
  * @return YES if the message was sent successfully, NO if an error occurred.
  */
-- (BOOL)sendProviderMessage:(NSData *)messageData returnError:(NSError **)error responseHandler:(nullable void (^)( NSData * __nullable responseData))responseHandler API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (BOOL)sendProviderMessage:(NSData *)messageData returnError:(NSError **)error responseHandler:(nullable void (^)( NSData * __nullable responseData))responseHandler API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

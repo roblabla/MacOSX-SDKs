@@ -1,4 +1,4 @@
-framework module Virtualization [extern_c] [system] {
+framework module Virtualization [system] {
     requires !maccatalyst
 
     umbrella header "Virtualization.h"

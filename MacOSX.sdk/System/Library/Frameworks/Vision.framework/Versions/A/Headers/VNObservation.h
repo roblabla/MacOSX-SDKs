@@ -16,7 +16,6 @@
 #import <Vision/VNDetectedPoint.h>
 #import <Vision/VNRequestRevisionProviding.h>
 
-
 /*!
  @header VNObservation VNObservations describe the results of performing a VNRequest. The type of request determines the type of observations.
  */
@@ -29,6 +28,9 @@ NS_ASSUME_NONNULL_BEGIN
 @class MLFeatureValue;
 @class VNFaceLandmarks2D;
 @class VNPixelBufferObservation;
+@class VNImageRequestHandler;
+@class VNRecognizedPoint3D;
+@class VNHumanBodyRecognizedPoint3D;
 
 
 /*!
@@ -45,7 +47,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @property (readonly, nonatomic, strong) NSUUID *uuid;
 
 /*!
- * @brief The level of confidence normalized to [0, 1] where 1 is most confident
+ * @brief The level of confidence normalized to [0, 1] where 1 is most confident. The only exception is results coming from VNCoreMLRequest, where confidence values are forwarded as is from relevant CoreML models
  * @discussion Confidence can always be returned as 1.0 if confidence is not supported or has no meaning
  */
 @property (readonly, nonatomic, assign) VNConfidence confidence;
@@ -256,7 +258,7 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 
 /*!
  @class VNRectangleObservation
- @superclass VNObservation
+ @superclass VNDetectedObjectObservation
  @brief VNRectangleObservation is the result of a rectangle detector
  @discussion The VNRectangleObservation has a bounding box that encompasses the rectangle found in the image. The rectangle itself is defined by the four corner point properties. The rectangle can be rotated in or even out of plane. A common use case is to use the CIPerspectiveTransform filter to correct a detected rectangle to its 'flat upright' representation. All coordinates are normalized and the coordinates can be outside the image.
 
@@ -264,7 +266,36 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 @interface VNRectangleObservation : VNDetectedObjectObservation
 
-+ (instancetype)rectangleObservationWithRequestRevision:(NSUInteger)requestRevision topLeft:(CGPoint)topLeft bottomLeft:(CGPoint)bottomLeft bottomRight:(CGPoint)bottomRight topRight:(CGPoint)topRight API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
+/*!
+	@brief Create a synthesized `VNRectangleObservation`.
+	@note The clockwise parameter ordered `+[VNRectangleObservation rectangleObservationWithRequestRevision:topLeft:topRight:bottomRight:bottomLeft:]` is the preferred initializer.
+	
+	@param requestRevision The revision of the VNDetectRectanglesRequest that the observation is to be treated as originating from.
+	@param topLeft The top-left corner of the rectangle in normalized coordinate space.
+	@param bottomLeft The bottom-left corner of the rectangle in normalized coordinate space.
+	@param bottomRight The bottom-right corner of the rectangle in normalized coordinate space.
+	@param topRight The top-right corner of the rectangle in normalized coordinate space.
+*/
++ (instancetype) rectangleObservationWithRequestRevision:(NSUInteger)requestRevision
+												 topLeft:(CGPoint)topLeft
+											  bottomLeft:(CGPoint)bottomLeft
+											 bottomRight:(CGPoint)bottomRight
+												topRight:(CGPoint)topRight API_DEPRECATED_WITH_REPLACEMENT("rectangleObservationWithRequestRevision:topLeft:topRight:bottomRight:bottomLeft:", macos(10.15, 14.0), ios(13.0, 17.0), tvos(13.0, 17.0));
+
+/*!
+	@brief Create a synthesized `VNRectangleObservation`.
+	
+	@param requestRevision The revision of the VNDetectRectanglesRequest that the observation is to be treated as originating from.
+	@param topLeft The top-left corner of the rectangle in normalized coordinate space.
+	@param topRight The top-right corner of the rectangle in normalized coordinate space.
+	@param bottomRight The bottom-right corner of the rectangle in normalized coordinate space.
+	@param bottomLeft The bottom-left corner of the rectangle in normalized coordinate space.
+*/
++ (instancetype) rectangleObservationWithRequestRevision:(NSUInteger)requestRevision
+												 topLeft:(CGPoint)topLeft
+												topRight:(CGPoint)topRight
+											 bottomRight:(CGPoint)bottomRight
+											  bottomLeft:(CGPoint)bottomLeft API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 @property (readonly, nonatomic, assign) CGPoint topLeft;
 @property (readonly, nonatomic, assign) CGPoint topRight;
@@ -312,7 +343,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 
 /*!
  @class VNTextObservation
- @superclass VNDetectedObjectObservation
+ @superclass VNRectangleObservation
  @brief VNTextObservation Describes a text area detected by the VNRequestNameDetectTextRectangles request.
  */
 API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
@@ -354,7 +385,7 @@ API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
 
 /*!
  @class VNRecognizedTextObservation
- @superclass VNDetectedObjectObservation
+ @superclass VNRectangleObservation
  @brief VNRecognizedTextObservation Describes a text area detected and recognized by the VNRecognizeTextRequest request.
  */
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0))
@@ -395,6 +426,46 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
 	@brief The string representation of the barcode's payload.  Depending on the symbology of the barcode and/or the payload data itself, a string representation of the payload may not be available.
 */
 @property (readonly, nonatomic, copy, nullable) NSString* payloadStringValue;
+
+
+/*!
+    @brief The raw data representation of the barcode's payload if available.
+ */
+@property (readonly, nonatomic, copy, nullable) NSData* payloadData API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
+
+/*!
+    @brief Boolean indicating if the barcode carries any GS1 application specific data
+ */
+@property (readonly, nonatomic) BOOL isGS1DataCarrier API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
+
+/*!
+    @brief A boolean indicating if the barcode is color inverted
+ */
+@property (readonly, nonatomic) BOOL isColorInverted API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
+
+/*!
+    @brief Represents the supplemental composite type. Currently, this can only refer to the composite flag of the 2D symbology as part of a GS1 composite symbology.
+ This attribute only exists when the primary descriptor is the 1D symbology of a GS1 composite symbology, and of which a valid 2D counterpart has been coalesced into.
+ */
+@property (readonly, nonatomic) VNBarcodeCompositeType supplementalCompositeType API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
+
+/*!
+    @brief Decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed
+ When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload string value.
+ */
+@property (readonly, nonatomic, copy, nullable) NSString* supplementalPayloadString API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
+
+/*!
+    @brief Decode the supplemental code in the descriptor as a string value. Note: this property might be expensive the first time it is accessed
+ When non-NULL, and if the descriptor has supplemental raw payload data, the pointee will be set to the decoded supplemental payload raw data value.
+ */
+@property (readonly, nonatomic, copy, nullable) NSData* supplementalPayloadData API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
 
 @end
 
@@ -664,5 +735,232 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0))
 
 @end
 
+
+#pragma mark ---- VNInstanceMaskObservation ----
+
+
+/*!
+    @brief An observation resulting from an instance mask generation request. It contains an instance mask that labels instances in the mask that labels per pixel an instance.
+*/
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0))
+@interface VNInstanceMaskObservation : VNObservation
+
+/*!
+ *@brief The resulting mask represents all instances in a mask image where 0 represents the background and all other values represent the indices of the instances identified.
+ Note that a pixel can only correspond to one instance and not multiple instances.
+ */
+@property (readonly, nonatomic) CVPixelBufferRef instanceMask CF_RETURNS_NOT_RETAINED;
+
+
+/*!
+ *@brief *The IndexSet that encompases all instances except the background
+ */
+@property (readonly, copy) NSIndexSet* allInstances;
+
+/*!
+ @brief The low res mask from the selected instances in the resolution of the performed analysis which is not upscaled to the image resolution.
+ @param instances An NSIndexSet of selected instances where 0 is the background. An empty set selects all instances but the background
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ The pixel format of kCVPixelFormatType_OneComponent32Float
+ */
+- (nullable CVPixelBufferRef) generateMaskForInstances:(NSIndexSet*)instances error:(NSError**)error CF_RETURNS_RETAINED ;
+
+
+/*!
+ *@brief High res image with everything but the selected instances removed to transparent black.
+ @param instances An NSIndexSet of selected instances where 0 is the background.
+ @param croppedToInstancesExtent Crops the image to the smallest rectangle containg all instances with remaining alpha elements.
+ Setting this value to NO does not perform any cropping.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ */
+- (nullable CVPixelBufferRef) generateMaskedImageOfInstances:(NSIndexSet*)instances fromRequestHandler:(VNImageRequestHandler*)requestHandler croppedToInstancesExtent:(BOOL)cropResult error:(NSError**)error CF_RETURNS_RETAINED;
+
+
+/*!
+ *@brief High res mask with the selected instances preserved while everything else is removed to transparent black.
+ @param forInstances An NSIndexSet of selected instances where 0 is the background.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ */
+- (nullable CVPixelBufferRef) generateScaledMaskForImageForInstances:(NSIndexSet*)instances fromRequestHandler:(VNImageRequestHandler*)requestHandler error:(NSError**)error CF_RETURNS_RETAINED;
+
+@end
+
+
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0))
+@interface VNAnimalBodyPoseObservation : VNRecognizedPointsObservation
+
+/*!
+ @brief All animal joint names available in the observation.
+ */
+@property (readonly, copy) NSArray<VNAnimalBodyPoseObservationJointName>* availableJointNames;
+
+
+/*!
+ @brief All animal joints group names available in the observation.
+ */
+@property (readonly, copy) NSArray<VNAnimalBodyPoseObservationJointsGroupName>* availableJointGroupNames;
+
+
+/*!
+ @brief Obtain a specific normalized point for a named animal body joint.
+ 
+ @param jointName The name of the animal body joint.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ @return the recognized point, or nil if the point could not be obtained.
+*/
+- (nullable VNRecognizedPoint*) recognizedPointForJointName:(VNAnimalBodyPoseObservationJointName)jointName
+                                                      error:(NSError**)error NS_SWIFT_NAME(recognizedPoint(_:));
+
+/*!
+ @brief Obtains the collection of points associated with a named animal body joints group.
+ 
+ @discussion The obtained collection is a dictionary that provides the mapping of animal join names to the recognized point.
+ 
+ @param jointsGroupName The name of the animal body joints group.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ @return a dictionary of recognized points in the group, or nil if an error was encountered.
+*/
+- (nullable NSDictionary<VNAnimalBodyPoseObservationJointName, VNRecognizedPoint*>*) recognizedPointsForJointsGroupName:(VNAnimalBodyPoseObservationJointsGroupName)jointsGroupName
+                                                                                                                  error:(NSError**)error NS_SWIFT_NAME(recognizedPoints(_:));
+
+@end
+
+#pragma mark ---- VNRecognizedPoints3DObservation ----
+
+VN_EXPORT VNRecognizedPointGroupKey const VNRecognizedPoint3DGroupKeyAll API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
+/*!
+ @class VNRecognizedPoints3D
+ Observation
+ @superclass VNObservation
+ @brief VNRecognizedPointsObservation is a request result detailing points in an image.
+ */
+API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
+@interface VNRecognizedPoints3DObservation : VNObservation
+
++ (instancetype) new NS_UNAVAILABLE;
+- (instancetype) init NS_UNAVAILABLE;
+
+/*!
+ @brief Returns all of the point group keys available in the observation.
+ */
+@property (readonly, copy) NSArray<VNRecognizedPointKey>* availableKeys;
+
+
+/*!
+ @brief The availableGroupKeys property returns all of the point group labels usable with the observation.
+ */
+@property (readonly, copy) NSArray<VNRecognizedPointGroupKey>* availableGroupKeys;
+
+/*!
+ @brief Obtains a specific normalized recognized point.
+ @param pointKey The key specifying the desired recognized point.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ @return the recognized point, or nil if the specific point is not defined.
+ */
+- (nullable VNRecognizedPoint3D*) recognizedPointForKey:(VNRecognizedPointKey)pointKey error:(NSError**)error;
+
+/*!
+ @brief Obtains the collection of points associated with an identified grouping.
+ @discussion The obtained collection is a dictionary that provides the mapping of a recognized point's key to the recognized point.
+ @param groupKey The key representing a specific grouping of points.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ @return the dictionary of recognized points in the group, or nil if an error was encountered.
+ */
+- (nullable NSDictionary<VNRecognizedPointKey, VNRecognizedPoint3D*>*) recognizedPointsForGroupKey:(VNRecognizedPointGroupKey)groupKey error:(NSError**)error;
+
+@end
+
+#pragma mark ---- VNHumanBodyPose3DObservation ----
+
+/*!
+ @brief     Height estimation technique used in observation based on available metadata
+            VNHumanBodyPose3DObservationHeightEstimationReference is the default if no LiDAR depth is present
+ @details   reference -   Since no depth was present, a reference height of 1.8 meters is used
+            measured -   LiDAR depth was used to measure a more accurate `bodyHeight` in meters
+ */
+typedef NS_ENUM(NSInteger, VNHumanBodyPose3DObservationHeightEstimation)
+{
+    VNHumanBodyPose3DObservationHeightEstimationReference = 0,
+    VNHumanBodyPose3DObservationHeightEstimationMeasured ,
+}  NS_SWIFT_NAME(VNHumanBodyPose3DObservation.HeightEstimation);
+
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0))
+@interface VNHumanBodyPose3DObservation : VNRecognizedPoints3DObservation
+
+/*!
+ @brief Technique used to estimate body height.   `VNHumanBodyPose3DObservationHeightEstimationMeasured`   indicates`bodyHeight` returns measured height in meters more accurate to true world height.
+ `VNHumanBodyPose3DObservationHeightEstimationReference` indicates `bodyHeight` returns reference height of 1.8 m
+ */
+@property(readonly) VNHumanBodyPose3DObservationHeightEstimation heightEstimation;
+
+/*!
+ @brief A transform from root (at hip) to Camera as projection center.
+ */
+@property(nonatomic, readonly) simd_float4x4 cameraOriginMatrix;
+
+/*!
+ @brief All of the joints group names available in the observation.
+ */
+@property (readonly, copy) NSArray<VNHumanBodyPose3DObservationJointsGroupName>* availableJointsGroupNames;
+
+/*!
+ @brief All of the joint names available in the observation.
+ */
+@property (readonly, copy) NSArray<VNHumanBodyPose3DObservationJointName>* availableJointNames;
+
+/*!
+ @brief Estimated human height, in meters.
+ @note A measured height will be returned in meters if  `heightEstimation` is  `VNHumanBodyPose3DObservationHeightEstimationMeasured`, otherwise reference height of 1.8 meters is returned for `VNHumanBodyPose3DObservationHeightEstimationReference`
+ */
+@property (nonatomic, readonly) float bodyHeight;
+
+/*!
+ @brief Obtains the collection of joints associated with a named human body joints group.
+ @discussion The obtained collection is a dictionary that provides the mapping of human joint names to the recognized point.
+ @param jointsGroupName The name of the human body joints group.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ @return a dictionary of recognized points in the group, or nil if an error was encountered.
+ */
+- (nullable NSDictionary<VNHumanBodyPose3DObservationJointName, VNHumanBodyRecognizedPoint3D*>*) recognizedPointsForJointsGroupName:(VNHumanBodyPose3DObservationJointsGroupName)jointsGroupName
+                                                                                                            error:(NSError **)error NS_SWIFT_NAME(recognizedPoints(_:));
+/*!
+ @brief Obtain a specific point for a named human body joint.
+    Each returned `VNHumanBodyRecognizedPoint3D` instance contains position relative to the model (`position`) and the parent joint (`localPosition`)
+    Model position is relative to root joint (hip) for a named human body joint in meters .
+    Local position is relative to parent joint for a named human body joint in meters.
+ @param jointName The name of the human body joint.
+ @param error The address of a variable that will be populated with the error that describes the failure.  If the caller does not require this information, NULL can be passed.
+ @return The recognized point, or nil if the point could not be obtained.
+ */
+
+- (nullable VNHumanBodyRecognizedPoint3D*) recognizedPointForJointName:(VNHumanBodyPose3DObservationJointName)jointName
+                                                                 error:(NSError**)error NS_SWIFT_NAME(recognizedPoint(_:));
+
+/*!
+ @brief Obtain 2D point relative to the input image for named human body joint
+ @param jointName The name of the human body joint
+ @return A projection of the determined 3D position onto the original 2D image in normalized, lower left origin coordinates
+ */
+- (nullable VNPoint*) pointInImageForJointName:(VNHumanBodyPose3DObservationJointName)jointName
+                                         error:(NSError**)error NS_SWIFT_NAME(pointInImage(_:));
+
+/*!
+ @brief Obtain the parent joint of a specified joint
+ @param jointName The name of the human body joint
+ @return The name of the parent joint
+ */
+- (nullable VNHumanBodyPose3DObservationJointName) parentJointNameForJointName:(VNHumanBodyPose3DObservationJointName)jointName NS_SWIFT_NAME(parentJointName(_:));
+
+/*!
+ @brief Obtain position relative to camera for a named human body joint in meters
+ @param modelPositionOut A reference to a simd_float4x4 that will be updated to contain position of a joint relative to the camera if successful
+ @param jointName The name of the human body joint
+ @return BOOL indicating success of determing position
+ */
+- (BOOL) getCameraRelativePosition:(simd_float4x4*) modelPositionOut
+                        forJointName:(VNHumanBodyPose3DObservationJointName)jointName
+                             error:(NSError**)error;
+
+@end
 
 NS_ASSUME_NONNULL_END

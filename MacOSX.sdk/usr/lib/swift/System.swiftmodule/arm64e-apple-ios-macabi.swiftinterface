@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
 // swift-module-flags: -target arm64e-apple-ios15.0-macabi -enable-objc-interop -enable-library-evolution -module-link-name swiftSystem -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name System
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 23
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 24
 import Darwin
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FileDescriptor : Swift.RawRepresentable, Swift.Hashable, Swift.Codable {
   @_alwaysEmitIntoClient public let rawValue: Swift.CInt
@@ -212,6 +213,15 @@ extension System.FileDescriptor.OpenOptions : Swift.CustomStringConvertible, Swi
     get
   }
 }
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FileDescriptor.AccessMode : Swift.Sendable {
+}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FileDescriptor.OpenOptions : Swift.Sendable {
+}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FileDescriptor.SeekOrigin : Swift.Sendable {
+}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public var isAbsolute: Swift.Bool {
@@ -399,6 +409,15 @@ extension System.FilePath.Root {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension System.FilePath.Root : Swift.Sendable {
+}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension System.FilePath.Component : Swift.Sendable {
+}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension System.FilePath.Component.Kind : Swift.Sendable {
+}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath {
   public struct ComponentView {
   }
@@ -451,6 +470,12 @@ extension System.FilePath.ComponentView {
     get
   }
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension System.FilePath.ComponentView : Swift.Sendable {
+}
+@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
+extension System.FilePath.ComponentView.Index : Swift.Sendable {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 @frozen public struct FilePermissions : Swift.OptionSet, Swift.Hashable, Swift.Codable {
@@ -541,6 +566,9 @@ extension System.FilePermissions : Swift.CustomStringConvertible, Swift.CustomDe
   public var debugDescription: Swift.String {
     get
   }
+}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FilePermissions : Swift.Sendable {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 public typealias CModeT = Darwin.mode_t
@@ -1014,7 +1042,6 @@ extension System.FilePath {
     }
   }
   @_alwaysEmitIntoClient public func withPlatformString<Result>(_ body: (Swift.UnsafePointer<System.CInterop.PlatformChar>) throws -> Result) rethrows -> Result {
-    // For backwards deployment, call withCString if available.
     return try withCString(body)
   }
 }
@@ -1228,9 +1255,12 @@ extension System.FilePath : Swift.Hashable, Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
+extension System.FilePath : Swift.Sendable {
+}
+@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor {
   @_alwaysEmitIntoClient public static func open(_ path: System.FilePath, _ mode: System.FileDescriptor.AccessMode, options: System.FileDescriptor.OpenOptions = FileDescriptor.OpenOptions(), permissions: System.FilePermissions? = nil, retryOnInterrupt: Swift.Bool = true) throws -> System.FileDescriptor {
-    try path.withCString {
+    return try path.withCString {
       try FileDescriptor.open(
         $0, mode, options: options, permissions: permissions, retryOnInterrupt: retryOnInterrupt)
     }
@@ -2122,12 +2152,6 @@ extension System.Errno {
 }
 @available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
 extension System.FileDescriptor : Swift.Sendable {}
-@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension System.FileDescriptor.AccessMode : Swift.Sendable {}
-@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension System.FileDescriptor.OpenOptions : Swift.Sendable {}
-@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension System.FileDescriptor.SeekOrigin : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component : Swift.Encodable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
@@ -2145,12 +2169,8 @@ extension System.FilePath.Component.Kind : Swift.Equatable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.Component.Kind : Swift.Hashable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
-extension System.FilePath.Component.Kind : Swift.Sendable {}
-@available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Encodable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Decodable {}
 @available(macOS 12.0, iOS 15.0, watchOS 8.0, tvOS 15.0, *)
 extension System.FilePath.ComponentView : Swift.Hashable {}
-@available(macOS 11.0, iOS 14.0, watchOS 7.0, tvOS 14.0, *)
-extension System.FilePermissions : Swift.Sendable {}

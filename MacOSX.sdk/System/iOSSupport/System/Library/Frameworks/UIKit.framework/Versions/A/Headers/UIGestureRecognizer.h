@@ -58,8 +58,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_UI_ACTOR
 @property(nonatomic) BOOL delaysTouchesBegan;         // default is NO.  causes all touch or press events to be delivered to the target view only after this gesture has failed recognition. set to YES to prevent views from processing any touches or presses that may be recognized as part of this gesture
 @property(nonatomic) BOOL delaysTouchesEnded;         // default is YES. causes touchesEnded or pressesEnded events to be delivered to the target view only after this gesture has failed recognition. this ensures that a touch or press that is part of the gesture can be cancelled if the gesture is recognized
 
-@property(nonatomic, copy) NSArray<NSNumber *> *allowedTouchTypes API_AVAILABLE(ios(9.0)); // Array of UITouchTypes as NSNumbers.
-@property(nonatomic, copy) NSArray<NSNumber *> *allowedPressTypes API_AVAILABLE(ios(9.0)); // Array of UIPressTypes as NSNumbers.
+@property(nonatomic, copy) NSArray<NSNumber *> *allowedTouchTypes API_AVAILABLE(ios(9.0)); // Array of UITouchTypes as NSNumbers. The default value is platform dependent.
+@property(nonatomic, copy) NSArray<NSNumber *> *allowedPressTypes API_AVAILABLE(ios(9.0)); // Array of UIPressTypes as NSNumbers. The default value is platform dependent.
 
 // Indicates whether the gesture recognizer will consider touches of different touch types simultaneously.
 // If NO, it receives all touches that match its allowedTouchTypes.

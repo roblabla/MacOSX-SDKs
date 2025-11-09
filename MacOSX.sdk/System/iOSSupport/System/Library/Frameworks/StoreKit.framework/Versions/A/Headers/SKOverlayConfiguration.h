@@ -15,10 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SKOverlayPosition) {
     SKOverlayPositionBottom = 0,
     SKOverlayPositionBottomRaised = 1,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED NS_SWIFT_NAME(SKOverlay.Position);
+} API_AVAILABLE(ios(14.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED NS_SWIFT_NAME(SKOverlay.Position);
 
 SK_EXTERN_CLASS
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
+API_AVAILABLE(ios(14.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
 NS_SWIFT_NAME(SKOverlay.Configuration) NS_SWIFT_NONSENDABLE
 @interface SKOverlayConfiguration : NSObject
 
@@ -29,7 +29,7 @@ NS_SWIFT_NAME(SKOverlay.Configuration) NS_SWIFT_NONSENDABLE
 
 SK_EXTERN_CLASS
 SK_CLASS_FINAL
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
+API_AVAILABLE(ios(14.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
 NS_SWIFT_NAME(SKOverlay.AppConfiguration) NS_SWIFT_NONSENDABLE
 /// An overlay configuration that can be used to show any app from the App Store.
 @interface SKOverlayAppConfiguration : SKOverlayConfiguration
@@ -52,10 +52,10 @@ NS_SWIFT_NAME(SKOverlay.AppConfiguration) NS_SWIFT_NONSENDABLE
 @property (nonatomic, retain, nullable) NSString *providerToken;
 
 /// An optional identifier for an app's custom product page.
-@property (nonatomic, retain, nullable) NSString *customProductPageIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+@property (nonatomic, retain, nullable) NSString *customProductPageIdentifier API_AVAILABLE(ios(15.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 /// An optional extra parameter for specifying the version of your app that will be shown to the user.
-@property (nonatomic, retain, nullable) NSString *latestReleaseID API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+@property (nonatomic, retain, nullable) NSString *latestReleaseID API_AVAILABLE(ios(15.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 /// The position an overlay will show at on screen.
 @property (nonatomic) SKOverlayPosition position;
@@ -67,13 +67,13 @@ NS_SWIFT_NAME(SKOverlay.AppConfiguration) NS_SWIFT_NONSENDABLE
 
 - (nullable id)additionalValueForKey:(NSString *)key NS_WARN_UNUSED_RESULT;
 
-- (void)setAdImpression:(SKAdImpression *)impression API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+- (void)setAdImpression:(SKAdImpression *)impression API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos, watchos, visionos) __TVOS_PROHIBITED;
 
 @end
 
 SK_EXTERN_CLASS
 SK_CLASS_FINAL
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
+API_AVAILABLE(ios(14.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED
 NS_SWIFT_NAME(SKOverlay.AppClipConfiguration) NS_SWIFT_NONSENDABLE
 /// An overlay configuration that can be used to show an app clip's full app.
 @interface SKOverlayAppClipConfiguration : SKOverlayConfiguration
@@ -92,10 +92,10 @@ NS_SWIFT_NAME(SKOverlay.AppClipConfiguration) NS_SWIFT_NONSENDABLE
 @property (nonatomic, retain, nullable) NSString *providerToken;
 
 /// An optional identifier for a parent app's custom product page.
-@property (nonatomic, retain, nullable) NSString *customProductPageIdentifier API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+@property (nonatomic, retain, nullable) NSString *customProductPageIdentifier API_AVAILABLE(ios(15.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 /// An optional extra parameter for specifying the version of your app that will be shown to the user.
-@property (nonatomic, retain, nullable) NSString *latestReleaseID API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
+@property (nonatomic, retain, nullable) NSString *latestReleaseID API_AVAILABLE(ios(15.0), visionos(1.0)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED;
 
 /// The position an overlay will show at on screen.
 @property (nonatomic) SKOverlayPosition position;

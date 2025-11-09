@@ -46,6 +46,6 @@ exports:
                        '_$s22WebContentRestrictions16MembershipFilterPSeTb', '_$s22WebContentRestrictions16MembershipFilterPs23CustomStringConvertibleTb', 
                        '_$s22WebContentRestrictions16MembershipFilterTL', _WebContentRestrictionsVersionNumber, 
                        _WebContentRestrictionsVersionString ]
-    objc-classes:    [ WCRAppleAllowList, WCRAutoAssetClient, WCRBloomFilter, WCRLogging, 
-                       _TtC22WebContentRestrictions15BloomFilterShim ]
+    objc-classes:    [ WCRAppleAllowList, WCRAutoAssetClient, WCRBloomFilter, WCRCipherMLClient, 
+                       WCRLogging, WCRURLList, _TtC22WebContentRestrictions15BloomFilterShim ]
 ...

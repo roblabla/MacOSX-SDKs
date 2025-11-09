@@ -1,13 +1,21 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target arm64e-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreData
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1251.6
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target arm64e-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CoreData
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1327
 import Combine
 @_exported import CoreData
 import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
+@available(swift 5.8)
+@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+extension CoreData.NSStagedMigrationManager {
+  @available(swift 5.8)
+  @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+  convenience public init(_ stages: [CoreData.NSMigrationStage])
+}
 @available(macOS 10.12, iOS 10.0, tvOS 10.0, watchOS 3.0, *)
 extension CoreData.NSManagedObject {
   @_disfavoredOverload @objc dynamic public class func fetchRequest() -> CoreData.NSFetchRequest<any CoreData.NSFetchRequestResult>
@@ -18,6 +26,13 @@ extension CoreData.NSManagedObject : Foundation.ObservableObject {
     get
   }
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
+}
+@available(swift 5.8)
+@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+extension CoreData.NSLightweightMigrationStage {
+  @available(swift 5.8)
+  @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+  convenience public init(_ checksums: [Swift.String])
 }
 @available(iOS 15.0, macOS 12.0, *)
 @available(tvOS, unavailable)
@@ -869,6 +884,25 @@ extension CoreData.NSPersistentContainer {
   public func performBackgroundTask<T>(_ block: @escaping (CoreData.NSManagedObjectContext) throws -> T) async rethrows -> T
   #endif
 }
+@available(swift 5.8)
+@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+extension CoreData.NSCustomMigrationStage {
+  @available(swift 5.8)
+  @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+  convenience public init(migratingFrom currentModel: CoreData.NSManagedObjectModelReference, to nextModel: CoreData.NSManagedObjectModelReference)
+  @available(swift 5.8)
+  @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+  public var willMigrateHandler: ((_ migrationManager: CoreData.NSStagedMigrationManager, _ migrationStage: CoreData.NSCustomMigrationStage) throws -> Swift.Void)? {
+    get
+    set
+  }
+  @available(swift 5.8)
+  @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+  public var didMigrateHandler: ((_ migrationManager: CoreData.NSStagedMigrationManager, _ migrationStage: CoreData.NSCustomMigrationStage) throws -> Swift.Void)? {
+    get
+    set
+  }
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension CoreData.NSExpressionDescription {
   public var resultType: CoreData.NSAttributeDescription.AttributeType {
@@ -905,10 +939,16 @@ extension CoreData.NSAttributeDescription.AttributeType {
   public static let uri: CoreData.NSAttributeDescription.AttributeType
   public static let transformable: CoreData.NSAttributeDescription.AttributeType
   public static let objectID: CoreData.NSAttributeDescription.AttributeType
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, watchOS 10.0, *)
+  public static let composite: CoreData.NSAttributeDescription.AttributeType
 }
+@available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
 extension CoreData.NSManagedObjectContext {
+  @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
   public func fetch<T>(_ request: CoreData.NSFetchRequest<T>) throws -> [T] where T : CoreData.NSFetchRequestResult
+  @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
   @_disfavoredOverload public func fetch(_ request: CoreData.NSFetchRequest<any CoreData.NSFetchRequestResult>) throws -> [Any]
+  @available(macOS 10.5, iOS 3.0, tvOS 3.0, watchOS 1.0, *)
   public func count<T>(for request: CoreData.NSFetchRequest<T>) throws -> Swift.Int where T : CoreData.NSFetchRequestResult
 }
 @available(macOS 10.4, iOS 3.0, tvOS 3.0, watchOS 1.0, *)

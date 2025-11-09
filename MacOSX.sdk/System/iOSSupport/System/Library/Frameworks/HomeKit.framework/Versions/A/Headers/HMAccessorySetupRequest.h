@@ -8,12 +8,12 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class HMAccessorySetupPayload;
 @class MTRSetupPayload;
 
-HM_EXTERN API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(macos, macCatalyst)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos, visionos) API_UNAVAILABLE(macos, macCatalyst)
     @interface HMAccessorySetupRequest : NSObject<NSCopying>
 
 /*!
@@ -54,4 +54,4 @@ HM_EXTERN API_AVAILABLE(ios(15.4)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABL
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

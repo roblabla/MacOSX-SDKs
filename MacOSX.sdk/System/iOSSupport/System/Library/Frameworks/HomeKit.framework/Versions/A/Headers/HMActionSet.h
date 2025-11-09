@@ -8,17 +8,17 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class HMAction;
 @class HMCharacteristic;
 
 
 /*!
- * @brief This class represents a collection of action objects that can be executed. 
+ * @brief This class represents a collection of action objects that can be executed.
  *        The order of execution of these actions is undefined.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMActionSet : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -60,7 +60,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *
  * @param name New name for the action set.
  *
- * @param completion Block that is invoked once the request is processed. 
+ * @param completion Block that is invoked once the request is processed.
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
@@ -71,7 +71,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *
  * @param action Action object to add to the action set.
  *
- * @param completion Block that is invoked once the request is processed. 
+ * @param completion Block that is invoked once the request is processed.
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
@@ -82,7 +82,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
  *
  * @param action Action object to remove from the action set.
  *
- * @param completion Block that is invoked once the request is processed. 
+ * @param completion Block that is invoked once the request is processed.
  *                   The NSError provides more information on the status of the request, error
  *                   will be nil on success.
  */
@@ -125,4 +125,4 @@ HM_EXTERN NSString *const HMActionSetTypeUserDefined API_AVAILABLE(ios(9.0), wat
  */
 HM_EXTERN NSString *const HMActionSetTypeTriggerOwned API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos);
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

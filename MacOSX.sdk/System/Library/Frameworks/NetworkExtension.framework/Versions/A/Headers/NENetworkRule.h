@@ -27,7 +27,7 @@ typedef NS_ENUM(NSInteger, NENetworkRuleProtocol) {
 	NENetworkRuleProtocolTCP = 1,
 	/*! @const NENetworkRuleProtocolUDP Matches UDP traffic */
 	NENetworkRuleProtocolUDP = 2,
-} NS_SWIFT_NAME(NENetworkRule.Protocol) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+} NS_SWIFT_NAME(NENetworkRule.Protocol) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @typedef NETrafficDirection
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, NETrafficDirection) {
 	NETrafficDirectionInbound = 1,
 	/*! @const NETrafficDirectionOutbound Outbound direction */
 	NETrafficDirectionOutbound = 2,
-} API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 @class NWHostEndpoint;
 
@@ -48,7 +48,7 @@ typedef NS_ENUM(NSInteger, NETrafficDirection) {
  * @interface NENetworkRule
  * @discussion The NENetworkRule class declares the programmatic interface of an object that contains a specification of a rule that matches the attributes of network traffic.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NENetworkRule : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -61,7 +61,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
  * @return The initialized NENetworkRule instance.
  */
-- (instancetype)initWithDestinationNetwork:(NWHostEndpoint *)networkEndpoint prefix:(NSUInteger)destinationPrefix protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (instancetype)initWithDestinationNetwork:(NWHostEndpoint *)networkEndpoint prefix:(NSUInteger)destinationPrefix protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @method initWithDestinationHost:protocol:
@@ -78,7 +78,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  * @param protocol A NENetworkRuleProtocol value indicating the protocol that the rule matches.
  * @return The initialized NENetworkRule instance.
  */
-- (instancetype)initWithDestinationHost:(NWHostEndpoint *)hostEndpoint protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (instancetype)initWithDestinationHost:(NWHostEndpoint *)hostEndpoint protocol:(NENetworkRuleProtocol)protocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @method initWithRemoteNetwork:prefix:localNetwork:prefix:interface:protocol:direction:
@@ -105,43 +105,43 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
 						 localNetwork:(nullable NWHostEndpoint *)localNetwork
 						  localPrefix:(NSUInteger)localPrefix
 							 protocol:(NENetworkRuleProtocol)protocol
-							direction:(NETrafficDirection)direction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+							direction:(NETrafficDirection)direction API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property matchRemoteEndpoint
  * @discussion The remote endpoint that the rule matches.
  */
-@property (readonly, nullable) NWHostEndpoint *matchRemoteEndpoint API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly, nullable) NWHostEndpoint *matchRemoteEndpoint API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property matchRemotePrefix
  * @discussion A number that specifies the remote sub-network that the rule matches. This property is set to NSNotFound for rules where matchRemoteEndpoint does not contain an IP address.
  */
-@property (readonly) NSUInteger matchRemotePrefix API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NSUInteger matchRemotePrefix API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property matchLocalNetwork
  * @discussion The local network that the rule matches.
  */
-@property (readonly, nullable) NWHostEndpoint *matchLocalNetwork API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly, nullable) NWHostEndpoint *matchLocalNetwork API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property matchLocalPrefix
  * @discussion A number that specifies the local sub-network that the rule matches. This property is set to NSNotFound for rules with a nil matchLocalNetwork property.
  */
-@property (readonly) NSUInteger matchLocalPrefix API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NSUInteger matchLocalPrefix API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property matchProtocol
  * @discussion A NENetworkRuleProtocol value containing the protocol that the rule matches.
  */
-@property (readonly) NENetworkRuleProtocol matchProtocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NENetworkRuleProtocol matchProtocol API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property matchDirection
  * @discussion A NETrafficDirection value indicating the network traffic direction that the rule matches.
  */
-@property (readonly) NETrafficDirection matchDirection API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NETrafficDirection matchDirection API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

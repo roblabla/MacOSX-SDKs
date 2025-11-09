@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/ClassKit.framework/Versions/A/ClassKit'
-current-version: 148.4.37
+current-version: 149.0.37
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -113,7 +113,7 @@ exports:
                        _CLSSyncLatestHandoutSyncFailureDateKey, _CLSSyncLatestRosterSyncDateKey, 
                        _CLSSyncLatestRosterSyncFailureDateKey, _CLSUbiquitousContainerID, 
                        _CLSUserActivityActionType, _CLSUserActivityItemIdentifier, 
-                       _CLSUserDefaultEnableMescalVerification, _CLSUserDefaultEnableResponseStreaming, 
+                       _CLSUserDefaultEnableAssessments, _CLSUserDefaultEnableResponseStreaming, 
                        _CLSUserDefaultEnableVerboseLogging, _CLSUserDefaultRestoreCurrentDefaults, 
                        _CLSUserSettingDateKey, _CLSUserSettingEnabledKey, _CLSXPCDictionaryUpdateWithDictionary, 
                        _CLSiCloudDriveInitialSyncCompleteDarwinNotificationName, 
@@ -129,7 +129,7 @@ exports:
                        _NSStringFromContextType, _NSStringFromDevMode, _NSStringFromFavoriteType, 
                        _NSStringFromHandoutAttachmentCompletionStatus, _NSStringFromHandoutAttachmentType, 
                        _NSStringFromHandoutPublishingState, _NSStringFromHandoutState, 
-                       _NSStringFromHandoutSubstate, _NSStringFromInsightEventType, 
+                       _NSStringFromHandoutSubstate, _NSStringFromHandoutType, _NSStringFromInsightEventType, 
                        _NSStringFromNSStringCompareOptions, _NSStringFromOpenResponseType, 
                        _NSStringFromOriginatingSource, _NSStringFromPermissionType, 
                        _NSStringFromSearchBehaviors, _NSStringFromSearchOptions, 

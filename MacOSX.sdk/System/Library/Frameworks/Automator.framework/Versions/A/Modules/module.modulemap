@@ -1,4 +1,4 @@
-framework module Automator [extern_c] {
+framework module Automator [system] {
 	umbrella header "Automator.h"
 	export *
 	module * { export * }

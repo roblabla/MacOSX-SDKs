@@ -1,9 +1,4 @@
-//
-//  GKVoiceChat.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
@@ -16,7 +11,6 @@ typedef NS_ENUM(NSInteger, GKVoiceChatPlayerState) {
 };
 
 @class GKPlayer;
-
 
 NS_ASSUME_NONNULL_BEGIN
 /// GKVoiceChat represents an instance of a named voice communications channel
@@ -42,15 +36,15 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 
 __WATCHOS_PROHIBITED
 @interface GKVoiceChat (Deprecated)
-@property(copy, NS_NONATOMIC_IOSONLY) void(^playerStateUpdateHandler)(NSString *playerID, GKVoiceChatPlayerState state) NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use setPlayerVoiceChatStateDidChangeHandler:") ;
+@property(copy, NS_NONATOMIC_IOSONLY) void(^playerStateUpdateHandler)(NSString *playerID, GKVoiceChatPlayerState state) API_DEPRECATED_WITH_REPLACEMENT("-setPlayerVoiceChatStateDidChangeHandler:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 @end
 
 __WATCHOS_PROHIBITED
 @interface GKVoiceChat (Obsoleted)
 /*** This property is obsolete. ***/
-@property(readonly, nullable, NS_NONATOMIC_IOSONLY) NSArray<NSString *> *playerIDs NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use players") ;
+@property(readonly, nullable, NS_NONATOMIC_IOSONLY) NSArray<NSString *> *playerIDs API_DEPRECATED_WITH_REPLACEMENT("-players:", ios(5.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)setMute:(BOOL)isMuted forPlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "This is never invoked and its implementation does nothing, use setPlayer:muted:") ;
+- (void)setMute:(BOOL)isMuted forPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-setPlayer:muted:", ios(5.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 @end
 NS_ASSUME_NONNULL_END

@@ -12,7 +12,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*! This subclass of UIPanGestureRecognizer only recognizes if the user slides their finger
     in from the bezel on the specified edge. */
-UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos, visionos) NS_SWIFT_UI_ACTOR
 @interface UIScreenEdgePanGestureRecognizer : UIPanGestureRecognizer
 @property (readwrite, nonatomic, assign) UIRectEdge edges; // The edges on which this gesture recognizes, relative to the current interface orientation
 @end

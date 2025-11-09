@@ -2,7 +2,7 @@
 //  VZVirtualMachineConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2022 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -154,6 +154,8 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 
 /*!
  @abstract List of disk devices. Empty by default.
+ @see VZNVMExpressControllerDeviceConfiguration
+ @see VZUSBMassStorageDeviceConfiguration
  @see VZVirtioBlockDeviceConfiguration
  */
 @property (readwrite, copy) NSArray<VZStorageDeviceConfiguration *> *storageDevices;
@@ -161,6 +163,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract List of keyboards. Empty by default.
  @see VZUSBKeyboardConfiguration
+ @see VZMacKeyboardConfiguration
  */
 @property (copy) NSArray<VZKeyboardConfiguration *> *keyboards API_AVAILABLE(macos(12.0));
 
@@ -190,6 +193,19 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @return YES if the configuration is valid.
  */
 - (BOOL)validateWithError:(NSError **)error;
+
+#if defined(__arm64__)
+/*!
+ @abstract Validate the configuration is savable.
+ @discussion
+    Verify that a virtual machine with this configuration is savable.
+    Not all configuration options can be safely saved and restored from file.
+    If this evaluates to NO, the caller should expect future calls to saveMachineStateToURL:completionHandler: to fail.
+ @param error If not nil, assigned with an error describing the unsupported configuration option.
+ @return YES if the configuration is savable.
+ */
+- (BOOL)validateSaveRestoreSupportWithError:(NSError **)error API_AVAILABLE(macos(14.0));
+#endif
 
 /*!
  @abstract: Minimum amount of memory required by virtual machines.

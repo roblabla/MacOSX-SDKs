@@ -20,6 +20,7 @@
 #import <NetworkExtension/NEDNSProxyProviderProtocol.h>
 #import <NetworkExtension/NEDNSSettings.h>
 #import <NetworkExtension/NEDNSSettingsManager.h>
+#import <NetworkExtension/NEFailureHandlerProvider.h>
 #import <NetworkExtension/NEFilterControlProvider.h>
 #import <NetworkExtension/NEFilterDataProvider.h>
 #import <NetworkExtension/NEFilterFlow.h>
@@ -45,6 +46,8 @@
 #import <NetworkExtension/NEPacketTunnelProvider.h>
 #import <NetworkExtension/NEProvider.h>
 #import <NetworkExtension/NEProxySettings.h>
+#import <NetworkExtension/NERelay.h>
+#import <NetworkExtension/NERelayManager.h>
 #import <NetworkExtension/NETransparentProxyManager.h>
 #import <NetworkExtension/NETransparentProxyNetworkSettings.h>
 #import <NetworkExtension/NETransparentProxyProvider.h>

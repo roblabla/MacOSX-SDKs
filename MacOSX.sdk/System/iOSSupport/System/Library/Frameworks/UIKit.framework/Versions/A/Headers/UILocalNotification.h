@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class CLRegion;
 
 // In iOS 8.0 and later, your application must register for user notifications using -[UIApplication registerUserNotificationSettings:] before being able to schedule and present UILocalNotifications
-UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationRequest", ios(4.0, 10.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationRequest", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UILocalNotification : NSObject<NSCopying, NSCoding>
 
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
@@ -59,7 +59,7 @@ UIKIT_EXTERN API_DEPRECATED("Use UserNotifications Framework's UNNotificationReq
 @end
 
 
-UIKIT_EXTERN NSString *const UILocalNotificationDefaultSoundName API_DEPRECATED("Use UserNotifications Framework's +[UNNotificationSound defaultSound]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSString *const UILocalNotificationDefaultSoundName API_DEPRECATED("Use UserNotifications Framework's +[UNNotificationSound defaultSound]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

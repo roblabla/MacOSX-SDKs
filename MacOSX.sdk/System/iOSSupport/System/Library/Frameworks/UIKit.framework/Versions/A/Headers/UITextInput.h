@@ -249,9 +249,9 @@ NS_SWIFT_UI_ACTOR
 //---------------------------------------------------------------------------------------------------
 
 /* UITextInput keys to style dictionaries are deprecated. Use NSAttributedString keys instead, such as NSFontAttribute, etc. */
-UIKIT_EXTERN NSString *const UITextInputTextBackgroundColorKey API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(tvos); // Key to a UIColor
-UIKIT_EXTERN NSString *const UITextInputTextColorKey           API_DEPRECATED_WITH_REPLACEMENT("NSForegroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(tvos); // Key to a UIColor
-UIKIT_EXTERN NSString *const UITextInputTextFontKey            API_DEPRECATED_WITH_REPLACEMENT("NSFontAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(tvos); // Key to a UIFont
+UIKIT_EXTERN NSString *const UITextInputTextBackgroundColorKey API_DEPRECATED_WITH_REPLACEMENT("NSBackgroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Key to a UIColor
+UIKIT_EXTERN NSString *const UITextInputTextColorKey           API_DEPRECATED_WITH_REPLACEMENT("NSForegroundColorAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Key to a UIColor
+UIKIT_EXTERN NSString *const UITextInputTextFontKey            API_DEPRECATED_WITH_REPLACEMENT("NSFontAttributeName", ios(3.2, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Key to a UIFont
 
 /* To accommodate text entry in documents that contain nested elements, or in which supplying and
  * evaluating characters at indices is an expensive proposition, a position within a text input
@@ -328,18 +328,18 @@ UIKIT_EXTERN API_AVAILABLE(ios(4.2)) NS_SWIFT_UI_ACTOR
 @property (nullable, nonatomic, readonly, strong) NSString *primaryLanguage; // The primary language, if any, of the input mode.  A BCP 47 language identifier such as en-US
 
 // To query the UITextInputMode, refer to the UIResponder method -textInputMode.
-+ (nullable UITextInputMode *)currentInputMode API_DEPRECATED("", ios(4.2, 7.0))  API_UNAVAILABLE(tvos); // The current input mode.  Nil if unset.
++ (nullable UITextInputMode *)currentInputMode API_DEPRECATED("", ios(4.2, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // The current input mode.  Nil if unset.
 @property(class, nonatomic, readonly) NSArray<UITextInputMode *> *activeInputModes; // The active input modes.
 
 @end
 
 UIKIT_EXTERN NSNotificationName const UITextInputCurrentInputModeDidChangeNotification API_AVAILABLE(ios(4.2));
 
-typedef NSWritingDirection UITextWritingDirection API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirection", ios(3.2, 13.0), tvos(9.0, 13.0));
+typedef NSWritingDirection UITextWritingDirection API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirection", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
-static const UITextWritingDirection UITextWritingDirectionNatural API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionNatural", ios(3.2, 13.0), tvos(9.0, 13.0)) = NSWritingDirectionNatural;
-static const UITextWritingDirection UITextWritingDirectionLeftToRight API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionLeftToRight", ios(3.2, 13.0), tvos(9.0, 13.0)) = NSWritingDirectionLeftToRight;
-static const UITextWritingDirection UITextWritingDirectionRightToLeft API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionRightToLeft", ios(3.2, 13.0), tvos(9.0, 13.0)) = NSWritingDirectionRightToLeft;
+static const UITextWritingDirection UITextWritingDirectionNatural API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionNatural", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos) = NSWritingDirectionNatural;
+static const UITextWritingDirection UITextWritingDirectionLeftToRight API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionLeftToRight", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos) = NSWritingDirectionLeftToRight;
+static const UITextWritingDirection UITextWritingDirectionRightToLeft API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionRightToLeft", ios(3.2, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos) = NSWritingDirectionRightToLeft;
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

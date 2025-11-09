@@ -10,10 +10,12 @@
 
 // In this header, you should import all the public headers of your framework using statements like #import <CoreLocationUI/PublicHeader.h>
 
-//! Project version number for CoreLocationUI.
+
+/// The project version number for CoreLocationUI.
 FOUNDATION_EXPORT double CoreLocationUIVersionNumber;
 
-//! Project version string for CoreLocationUI.
+
+/// The project version string for CoreLocationUI.
 FOUNDATION_EXPORT const unsigned char CoreLocationUIVersionString[];
 
 #import <CoreLocationUI/CLLocationButton.h>

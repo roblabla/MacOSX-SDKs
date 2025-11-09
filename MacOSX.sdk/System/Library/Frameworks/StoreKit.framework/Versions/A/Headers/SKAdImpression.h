@@ -10,11 +10,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-SK_EXTERN_CLASS API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(macos, watchos) __TVOS_PROHIBITED @interface SKAdImpression : NSObject
+SK_EXTERN_CLASS API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(macos, watchos, visionos) __TVOS_PROHIBITED @interface SKAdImpression : NSObject
 
 #if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
 
-- (instancetype)initWithSourceAppStoreItemIdentifier:(NSNumber *)sourceAppStoreItemIdentifier advertisedAppStoreItemIdentifier:(NSNumber *)advertisedAppStoreItemIdentifier adNetworkIdentifier:(NSString *)adNetworkIdentifier adCampaignIdentifier:(NSNumber *)adCampaignIdentifier adImpressionIdentifier:(NSString *)adImpressionIdentifier timestamp:(NSNumber *)timestamp signature:(NSString *)signature version:(NSString *)version API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+- (instancetype)initWithSourceAppStoreItemIdentifier:(NSNumber *)sourceAppStoreItemIdentifier advertisedAppStoreItemIdentifier:(NSNumber *)advertisedAppStoreItemIdentifier adNetworkIdentifier:(NSString *)adNetworkIdentifier adCampaignIdentifier:(NSNumber *)adCampaignIdentifier adImpressionIdentifier:(NSString *)adImpressionIdentifier timestamp:(NSNumber *)timestamp signature:(NSString *)signature version:(NSString *)version API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos,visionos) __TVOS_PROHIBITED;
 
 #endif
 
@@ -31,7 +31,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(14.5)) API_UNAVAILABLE(macos, watchos) __TVOS_
 @property (nonatomic, strong) NSNumber *adCampaignIdentifier;
 
 /// The source identifier
-@property (nonatomic, strong) NSNumber *sourceIdentifier API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(macos,watchos) __TVOS_PROHIBITED;
+@property (nonatomic, strong) NSNumber *sourceIdentifier API_AVAILABLE(ios(16.1)) API_UNAVAILABLE(macos,watchos,visionos) __TVOS_PROHIBITED;
 
 /// The nonce used to generate the signature.
 @property (nonatomic, strong) NSString *adImpressionIdentifier;

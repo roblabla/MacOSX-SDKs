@@ -117,7 +117,6 @@ typedef NS_ENUM(NSInteger, ARMeshClassification) {
     ARMeshClassificationDoor,
 };
 
-
 /**
 A three-dimensional shape that represents the geometry of a mesh.
 */
@@ -143,7 +142,6 @@ API_AVAILABLE(ios(13.4))
  Classification for each face in the mesh.
  */
 @property (nonatomic, strong, readonly, nullable) ARGeometrySource *classification;
-
 
 /** Unavailable */
 - (instancetype)init NS_UNAVAILABLE;

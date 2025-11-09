@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2020 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -372,7 +372,7 @@ AV_INIT_UNAVAILABLE
 	
 	This method should not be called concurrently with -[AVAssetWriterInput appendSampleBuffer:] or -[AVAssetWriterInputPixelBufferAdaptor appendPixelBuffer:withPresentationTime:].
 */
-- (BOOL)finishWriting API_DEPRECATED_WITH_REPLACEMENT("finishWritingWithCompletionHandler:", macos(10.7, 10.9), ios(4.1, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+- (BOOL)finishWriting API_DEPRECATED_WITH_REPLACEMENT("finishWritingWithCompletionHandler:", macos(10.7, 10.9), ios(4.1, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method finishWritingWithCompletionHandler:
@@ -397,13 +397,27 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  @property movieFragmentInterval
  @abstract
 	For file types that support movie fragments, specifies the frequency at which movie fragments should be written.
- 
+
  @discussion
 	When movie fragments are used, a partially written asset whose writing is unexpectedly interrupted can be successfully opened and played up to multiples of the specified time interval. The default value of this property is kCMTimeInvalid, which indicates that movie fragments should not be used.
+
+	When using movie fragments, for best writing performance to external storage devices, set the movieFragmentInterval to 10 seconds or greater.
 
 	This property cannot be set after writing has started.
  */
 @property (nonatomic) CMTime movieFragmentInterval;
+
+/*!
+ @property initialMovieFragmentInterval
+ @abstract
+	For file types that support movie fragments, specifies the interval at which initial movie fragment should be written.
+
+ @discussion
+	This property is irrelevant if the movieFragmentInterval property is not set. The default value is kCMTimeInvalid, which indicates that the interval for initial movie fragment is same as the one specified by movieFragmentInterval property.
+
+	This property cannot be set after writing has started.
+ */
+@property (nonatomic) CMTime initialMovieFragmentInterval API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @property initialMovieFragmentSequenceNumber

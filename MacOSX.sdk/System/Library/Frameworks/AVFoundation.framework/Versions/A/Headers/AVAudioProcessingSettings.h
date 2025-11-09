@@ -45,7 +45,7 @@ typedef NSString * AVAudioTimePitchAlgorithm NS_STRING_ENUM;
                 Variable rate from 1/32 to 32.
  
 */
-AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmLowQualityZeroLatency API_DEPRECATED("Use AVAudioTimePitchAlgorithmTimeDomain instead", ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0)) API_UNAVAILABLE(macos);
+AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmLowQualityZeroLatency API_DEPRECATED("Use AVAudioTimePitchAlgorithmTimeDomain instead", ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0)) API_UNAVAILABLE(macos, visionos);
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmTimeDomain API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmSpectral API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 AVF_EXPORT AVAudioTimePitchAlgorithm const AVAudioTimePitchAlgorithmVarispeed API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));

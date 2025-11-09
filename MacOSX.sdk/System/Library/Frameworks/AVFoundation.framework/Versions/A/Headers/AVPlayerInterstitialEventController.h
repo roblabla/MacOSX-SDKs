@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-   Copyright:  2020-2021 by Apple Inc., all rights reserved.
+   Copyright:  2020-2023 by Apple Inc., all rights reserved.
 
 */
 
@@ -65,6 +65,7 @@ AVF_EXPORT AVPlayerInterstitialEventCue const AVPlayerInterstitialEventLeaveCue 
 
 	Note that while previously AVPlayerInterstitialEvent was an immutable object, it is now mutable. This allows it to be created and customized before being set on an AVPlayerInterstitialEventController.
 */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 @interface AVPlayerInterstitialEvent : NSObject <NSCopying>
 
@@ -90,7 +91,7 @@ AV_INIT_UNAVAILABLE
 			    Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier time:(CMTime)time templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED_WITH_REPLACEMENT("interstitialEventWithPrimaryItem:time:", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED));
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier time:(CMTime)time templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED_WITH_REPLACEMENT("interstitialEventWithPrimaryItem:time:", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 
 /*!
   @method       interstitialEventWithPrimaryItem:date:templateItems:restrictions:resumptionOffset:
@@ -113,7 +114,7 @@ AV_INIT_UNAVAILABLE
 			    Storage for attributes defined by the client or the content vendor. Attribute names should begin with X- for uniformity with server insertion.
   @result       An instance of AVPlayerInterstitialEvent.
 */
-+ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier date:(NSDate *)date templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED_WITH_REPLACEMENT("interstitialEventWithPrimaryItem:date:", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED));
++ (instancetype)interstitialEventWithPrimaryItem:(AVPlayerItem *)primaryItem identifier:(nullable NSString *)identifier date:(NSDate *)date templateItems:(NSArray<AVPlayerItem *> *)templateItems restrictions:(AVPlayerInterstitialEventRestrictions)restrictions resumptionOffset:(CMTime)resumptionOffset playoutLimit:(CMTime)playoutLimit userDefinedAttributes:(nullable NSDictionary*)userDefinedAttributes NS_REFINED_FOR_SWIFT API_DEPRECATED_WITH_REPLACEMENT("interstitialEventWithPrimaryItem:date:", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 
 /*!
   @method       interstitialEventWithPrimaryItem:time:

@@ -20,7 +20,9 @@ exports:
                        _der_vm_context_create, _der_vm_context_is_valid, _der_vm_data_from_context, 
                        _der_vm_execute, _der_vm_execute_nocopy, _der_vm_execute_seq_nocopy, 
                        _der_vm_integer_from_context, _der_vm_iterate, _der_vm_iterate_b, 
-                       _der_vm_string_from_context, _kCEAPIMisuse, _kCEAllocationFailed, 
+                       _der_vm_key_is_present, _der_vm_select_bool_for_key, _der_vm_select_int_for_key, 
+                       _der_vm_string_from_context, _der_vm_string_is_allowed_for_key, 
+                       _der_vm_type_for_key, _kCEAPIMisuse, _kCEAllocationFailed, 
                        _kCEInvalidArgument, _kCEMalformedEntitlements, _kCENoError, 
                        _kCENotEligibleForAcceleration, _kCEQueryCannotBeSatisfied ]
 ...

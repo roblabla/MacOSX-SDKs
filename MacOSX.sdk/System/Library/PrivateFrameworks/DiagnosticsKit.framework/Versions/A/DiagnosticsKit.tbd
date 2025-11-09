@@ -22,12 +22,13 @@ exports:
                        DKComponent, DKComponentIdentity, DKComponentPredicate, DKDiagnosticAllowList, 
                        DKDiagnosticAttributes, DKDiagnosticContext, DKDiagnosticContextMock, 
                        DKDiagnosticController, DKDiagnosticControllerMock, DKDiagnosticHostContext, 
-                       DKDiagnosticManager, DKDiagnosticParameters, DKDiagnosticRegistry, 
-                       DKDiagnosticResult, DKDiagnosticService, DKDiagnosticServiceRequest, 
-                       DKDiagnosticXPCManager, DKEnterSandbox, DKExtensionAdapter, 
-                       DKExtensionDiscovery, DKExtensionRequest, DKMutableDiagnosticResult, 
-                       DKReport, DKReportHostContext, DKReportManager, DKReportPlanner, 
-                       DKReporterAttributes, DKReporterContext, DKReporterController, 
-                       DKReporterRegistry, DKReportingConcurrentRequest, DKReportingConcurrentRequestGroup, 
-                       DKRequestContext, DKUtilities, DiagnosticsKit_Subsystem ]
+                       DKDiagnosticManager, DKDiagnosticParameters, DKDiagnosticProgress, 
+                       DKDiagnosticRegistry, DKDiagnosticResult, DKDiagnosticService, 
+                       DKDiagnosticServiceRequest, DKDiagnosticXPCManager, DKEnterSandbox, 
+                       DKExtensionAdapter, DKExtensionDiscovery, DKExtensionRequest, 
+                       DKMutableDiagnosticResult, DKReport, DKReportHostContext, 
+                       DKReportManager, DKReportPlanner, DKReporterAttributes, DKReporterContext, 
+                       DKReporterController, DKReporterRegistry, DKReportingConcurrentRequest, 
+                       DKReportingConcurrentRequestGroup, DKRequestContext, DKUtilities, 
+                       DiagnosticsKit_Subsystem ]
 ...

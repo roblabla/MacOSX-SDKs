@@ -659,7 +659,7 @@ SCN_EXPORT
  @abstract The number of chamfer subdivisions. Animatable.
  @discussion If the value is less than 1, the behavior is undefined. The default value is 10.
  */
-@property(nonatomic) NSInteger chamferSegmentCount API_DEPRECATED("Use SCNText.chamferProfile instead", macos(10.8, 10.9)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+@property(nonatomic) NSInteger chamferSegmentCount API_DEPRECATED("Use SCNText.chamferProfile instead", macos(10.8, 10.9)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 /*!
  @property chamferProfile

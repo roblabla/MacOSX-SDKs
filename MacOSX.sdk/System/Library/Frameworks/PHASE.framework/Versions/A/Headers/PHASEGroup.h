@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
         A PHASEGroup allows clients to group generator nodes for shared processing.
         Clients can set the gain and playback rate, as well as mute and solo the generator nodes in a group.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEGroup : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

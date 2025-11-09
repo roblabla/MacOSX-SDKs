@@ -155,7 +155,15 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
  @return An array of VNHumanBodyPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
 */
-+ (nullable NSArray<VNHumanBodyPoseObservationJointName>*) supportedJointNamesForRevision:(NSUInteger)revision error:(NSError **)error;
++ (nullable NSArray<VNHumanBodyPoseObservationJointName>*) supportedJointNamesForRevision:(NSUInteger)revision error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("supportedJointNamesAndReturnError", macos(11.0, 14.0), ios(14.0, 17.0), tvos(14.0, 17.0));
+
+
+/*!
+ @brief Obtain the collection of human body joint names that are supported by a given request object configured with a specific revision.
+ @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
+ @return An array of VNHumanBodyPoseObservationJointName symbols that are supported by the request revision, or nil if a failure occurs.
+*/
+- (nullable NSArray<VNHumanBodyPoseObservationJointName>*) supportedJointNamesAndReturnError:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 
 /*!
@@ -164,7 +172,15 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
  @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
  @return An array of VNHumanBodyPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
 */
-+ (nullable NSArray<VNHumanBodyPoseObservationJointsGroupName>*) supportedJointsGroupNamesForRevision:(NSUInteger)revision error:(NSError **)error;
++ (nullable NSArray<VNHumanBodyPoseObservationJointsGroupName>*) supportedJointsGroupNamesForRevision:(NSUInteger)revision error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("supportedJointsGroupNamesAndReturnError", macos(11.0, 14.0), ios(14.0, 17.0), tvos(14.0, 17.0));
+
+
+/*!
+ @brief Obtain the collection of human body joints group names that are supported by a given request object configured with a specific revision.
+ @param error The address of a variable that will be populated with an error upon failure.  If the caller does not need this information, NULL can be passed.
+ @return An array of VNHumanBodyPoseObservationJointsGroupName symbols that are supported by the request revision, or nil if a failure occurs.
+*/
+- (nullable NSArray<VNHumanBodyPoseObservationJointsGroupName>*) supportedJointsGroupNamesAndReturnError:(NSError **)error API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 
 /*!

@@ -10,13 +10,14 @@
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIGeometry.h>
 #import <CoreGraphics/CGGeometry.h>
+#import <UIKit/UIHoverStyle.h>
 
 @class UITargetedPreview, UIBezierPath, UIPointerEffect, UIPointerShape, UIPointerAccessory;
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
-@interface UIPointerStyle : NSObject <NSCopying>
+@interface UIPointerStyle : UIHoverStyle <NSCopying>
 
 /// Accessories to display alongside this UIPointerStyle. Supports up to 4 accessories.
 /// The system will attempt to animate between neighboring or similar accessories.
@@ -55,7 +56,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.4)) API_UNAVAILABLE(watchos, tvos) NS_REFINED_FOR_SWIFT NS_SWIFT_UI_ACTOR
-@interface UIPointerEffect : NSObject <NSCopying>
+@interface UIPointerEffect : NSObject <NSCopying, UIHoverEffect>
 
 @property (nonatomic, copy, readonly) UITargetedPreview *preview;
 

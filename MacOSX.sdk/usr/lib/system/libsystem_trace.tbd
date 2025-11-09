@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libsystem_trace.dylib'
-current-version: 1431.100.13
+current-version: 1481.0.12
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -37,7 +37,8 @@ exports:
                        __os_trace_scandir_free_namelist, __os_trace_sect_names, __os_trace_set_diagnostic_flags, 
                        __os_trace_set_mode_for_pid, __os_trace_strdup, __os_trace_sysprefsdir_path, 
                        __os_trace_update_with_datavolume_4launchd, __os_trace_with_buffer, 
-                       __os_trace_write, __os_trace_writev, __os_trace_zalloc, _os_activity_apply, 
+                       __os_trace_write, __os_trace_writev, __os_trace_zalloc, _amfi_check_dyld_policy_for_pid, 
+                       _amfi_check_dyld_policy_self, _amfi_load_trust_cache, _os_activity_apply, 
                        _os_activity_apply_f, _os_activity_diagnostic_for_pid, _os_activity_end, 
                        _os_activity_for_task_thread, _os_activity_for_thread, _os_activity_get_active, 
                        _os_activity_get_identifier, _os_activity_iterate_activities, 
@@ -56,12 +57,13 @@ exports:
                        _os_log_get_type, _os_log_is_debug_enabled, _os_log_is_enabled, 
                        _os_log_pack_compose, _os_log_pack_send, _os_log_pack_send_and_compose, 
                        _os_log_set_client_type, _os_log_set_enabled, _os_log_set_fault_callback, 
-                       _os_log_set_hook, _os_log_set_test_callback, _os_log_shim_enabled, 
-                       _os_log_shim_legacy_logging_enabled, _os_log_shim_with_CFString, 
-                       _os_log_type_enabled, _os_log_type_get_name, _os_log_with_args, 
-                       _os_signpost_enabled, _os_signpost_id_generate, _os_signpost_id_make_with_pointer, 
-                       _os_signpost_set_introspection_hook_4Perf, _os_state_add_handler, 
-                       _os_state_remove_handler, _os_trace_debug_enabled, _os_trace_get_mode, 
-                       _os_trace_get_type, _os_trace_info_enabled, _os_trace_set_mode ]
+                       _os_log_set_hook, _os_log_set_hook_with_params, _os_log_set_test_callback, 
+                       _os_log_shim_enabled, _os_log_shim_legacy_logging_enabled, 
+                       _os_log_shim_with_CFString, _os_log_type_enabled, _os_log_type_get_name, 
+                       _os_log_with_args, _os_signpost_enabled, _os_signpost_id_generate, 
+                       _os_signpost_id_make_with_pointer, _os_signpost_set_introspection_hook_4Perf, 
+                       _os_state_add_handler, _os_state_remove_handler, _os_trace_debug_enabled, 
+                       _os_trace_get_mode, _os_trace_get_type, _os_trace_info_enabled, 
+                       _os_trace_set_mode ]
     objc-classes:    [ OS_os_log ]
 ...

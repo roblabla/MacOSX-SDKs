@@ -1,4 +1,4 @@
-#if !__has_include(<PassKitUI/PKPaymentAuthorizationController.h>) || PK_USE_PUBLIC_PASSKIT
+#if (!__has_include(<PassKitUI/PKPaymentAuthorizationController.h>) && !__has_include(<PassKitMacHelperTemp/PKPaymentAuthorizationController.h>)) || PK_USE_PUBLIC_PASSKIT
 //
 //  PKPaymentAuthorizationController.h
 //    PassKit
@@ -37,6 +37,8 @@ NS_ASSUME_NONNULL_BEGIN
 @class PKPaymentRequestShippingContactUpdate;
 @class PKPaymentRequestMerchantSessionUpdate;
 
+@class PKDisbursementRequest;
+
 @protocol PKPaymentAuthorizationControllerDelegate <NSObject>
 
 @required
@@ -46,7 +48,7 @@ NS_ASSUME_NONNULL_BEGIN
 // paymentAuthorizationController:didAuthorizePayment:completion: has been shown to the user.
 //
 // The delegate is responsible for dismissing and releasing the controller in this method.
-- (void)paymentAuthorizationControllerDidFinish:(PKPaymentAuthorizationController *)controller;
+- (void)paymentAuthorizationControllerDidFinish:(PKPaymentAuthorizationController *)controller NS_SWIFT_UI_ACTOR;
 
 @optional
 
@@ -59,7 +61,7 @@ NS_ASSUME_NONNULL_BEGIN
 // by submitting the payment credential to a processing gateway for payment authorization.
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
                    didAuthorizePayment:(PKPayment *)payment
-                               handler:(void (^)(PKPaymentAuthorizationResult *result))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
+                               handler:(void (^)(PKPaymentAuthorizationResult *result))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0)) NS_SWIFT_UI_ACTOR;
 
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
                    didAuthorizePayment:(PKPayment *)payment
@@ -67,14 +69,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Sent to the delegate before the payment is authorized, but after the user has authenticated using
 // the side button. Optional.
-- (void)paymentAuthorizationControllerWillAuthorizePayment:(PKPaymentAuthorizationController *)controller;
+- (void)paymentAuthorizationControllerWillAuthorizePayment:(PKPaymentAuthorizationController *)controller NS_SWIFT_UI_ACTOR;
 
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
-       didRequestMerchantSessionUpdate:(void (^)(PKPaymentRequestMerchantSessionUpdate *update))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)) NS_SWIFT_ASYNC_NAME(paymentAuthorizationControllerDidRequestMerchantSessionUpdate(controller:));
+       didRequestMerchantSessionUpdate:(void (^)(PKPaymentRequestMerchantSessionUpdate *update))handler API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0)) NS_SWIFT_ASYNC_NAME(paymentAuthorizationControllerDidRequestMerchantSessionUpdate(controller:)) NS_SWIFT_UI_ACTOR;
 
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
                    didChangeCouponCode:(NSString *)couponCode
-                               handler:(void (^)(PKPaymentRequestCouponCodeUpdate *update))completion API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos);
+                               handler:(void (^)(PKPaymentRequestCouponCodeUpdate *update))completion API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR;
 
 // Sent when the user has selected a new shipping method.  The delegate should determine
 // shipping costs based on the shipping method and either the shipping address contact in the original
@@ -87,11 +89,11 @@ NS_ASSUME_NONNULL_BEGIN
 // until it has invoked the completion block.
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
                didSelectShippingMethod:(PKShippingMethod *)shippingMethod
-                               handler:(void (^)(PKPaymentRequestShippingMethodUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
+                               handler:(void (^)(PKPaymentRequestShippingMethodUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0)) NS_SWIFT_UI_ACTOR;
 
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
               didSelectShippingContact:(PKContact *)contact
-                               handler:(void (^)(PKPaymentRequestShippingContactUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
+                               handler:(void (^)(PKPaymentRequestShippingContactUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0)) NS_SWIFT_UI_ACTOR;
 
 
 // Sent when the user has selected a new payment card.  Use this delegate callback if you need to
@@ -102,7 +104,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)paymentAuthorizationController:(PKPaymentAuthorizationController *)controller
                 didSelectPaymentMethod:(PKPaymentMethod *)paymentMethod
-                               handler:(void (^)(PKPaymentRequestPaymentMethodUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0));
+                               handler:(void (^)(PKPaymentRequestPaymentMethodUpdate *requestUpdate))completion API_AVAILABLE(macos(11.0), ios(11.0), watchos(4.0)) NS_SWIFT_UI_ACTOR;
 
 // These delegate methods are deprecated and have been replaced with new callbacks that allow more granular
 // and comprehensive errors to be surfaced to users
@@ -121,13 +123,15 @@ NS_ASSUME_NONNULL_BEGIN
 
 #if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 @required
-#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
+#elif defined(TARGET_OS_VISION) && TARGET_OS_VISION
+@required
+#endif
 
 #if TARGET_OS_OSX
 
 - (nullable NSWindow *)presentationWindowForPaymentAuthorizationController:(PKPaymentAuthorizationController *)controller API_AVAILABLE(macos(11.0));
 
-#else // TARGET_OS_IPHONE
+#else
 
 - (nullable UIWindow *)presentationWindowForPaymentAuthorizationController:(PKPaymentAuthorizationController *)controller API_AVAILABLE(ios(14.0), watchos(7.0));
 
@@ -172,6 +176,20 @@ API_AVAILABLE(macos(11.0), ios(10.0), watchos(3.0))
 // callback, or otherwise wish a dismissal to occur
 - (void)dismissWithCompletion:(nullable void(^)(void))completion;
 
+// Determine whether this device can process disbursement requests.
++ (BOOL)supportsDisbursements API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+// Determine whether this device can process disbursement requests using specific payment network brands.
++ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks NS_SWIFT_NAME(supportsDisbursements(using:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+// Determine whether this device can process disbursements to cards issued in any of the indicated regions using the specified networks and capabilities bitmask.
+// supportedRegions is a list of ISO 3166 country codes. Duplicates are ignored.
++ (BOOL)supportsDisbursementsUsingNetworks:(NSArray<PKPaymentNetwork> *)supportedNetworks
+                              capabilities:(PKMerchantCapability)capabilties NS_SWIFT_NAME(supportsDisbursements(using:capabilities:)) API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+// Initialize the controller with a request to send money to a user.
+- (instancetype)initWithDisbursementRequest:(PKDisbursementRequest *)request API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
 @end
 
 NS_ASSUME_NONNULL_END
@@ -180,8 +198,10 @@ NS_ASSUME_NONNULL_END
 #endif
 
 #else
-#if !TARGET_OS_OSX 
 #import <TargetConditionals.h>
-#import <PassKitUI/PKPaymentAuthorizationController.h>
+#if TARGET_OS_OSX 
+#import <PassKitMacHelperTemp/PKPaymentAuthorizationController.h> 
+#else 
+#import <PassKitUI/PKPaymentAuthorizationController.h> 
 #endif
 #endif

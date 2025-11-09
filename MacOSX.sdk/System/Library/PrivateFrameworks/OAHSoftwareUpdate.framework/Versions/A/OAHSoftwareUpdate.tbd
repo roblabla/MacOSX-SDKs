@@ -14,5 +14,5 @@ exports:
                        _OAHSoftwareUpdateVersionNumber, _OAHSoftwareUpdateVersionString ]
     objc-classes:    [ OAHSUAnalytics, OAHSUError, OAHSULog, OAHSUNVRAM, OAHSUPrefs, 
                        OAHSoftwareUpdateConstants, OAHSoftwareUpdateController, OAHSoftwareUpdateDownloader, 
-                       OAHSoftwareUpdateWindowController ]
+                       OAHSoftwareUpdateWindowController, OAHUpdateServiceController ]
 ...

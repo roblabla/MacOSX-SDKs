@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @brief The likelihood of a sound belonging to identified class
  */
-SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @interface SNClassification : NSObject
 
 /*!
@@ -37,7 +37,7 @@ SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
 /*!
  @brief A result containing the most likely classification candidates in the time range specified
  */
-SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @interface SNClassificationResult : NSObject <SNResult>
 
 /*!
@@ -60,7 +60,7 @@ SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
  @result The classification candidate which has the specified identifier, if it exists. If no such candidate exists, `nil` will be returned.
  */
 - (nullable SNClassification *)classificationForIdentifier:(NSString *)identifier
-    API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+    API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 @end
 

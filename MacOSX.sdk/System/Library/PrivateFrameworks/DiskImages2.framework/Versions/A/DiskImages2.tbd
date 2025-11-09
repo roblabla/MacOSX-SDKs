@@ -2,14 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DiskImages2.framework/Versions/A/DiskImages2'
-current-version: 198.100.13
+current-version: 272
 exports:
-  - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTIN5boost10wrapexceptINS_5uuids13entropy_errorEEE, __ZTIN5boost10wrapexceptISt13runtime_errorEE, 
-                       __ZTIN5boost5uuids13entropy_errorE, __ZTIN5boost9container12out_of_rangeE, 
-                       __ZTIN5boost9container9exceptionE, __ZTSN5boost10wrapexceptINS_5uuids13entropy_errorEEE, 
-                       __ZTSN5boost10wrapexceptISt13runtime_errorEE, __ZTSN5boost5uuids13entropy_errorE, 
-                       __ZTSN5boost9container12out_of_rangeE, __ZTSN5boost9container9exceptionE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DIErrorDomain, _DIErrorVerboseInfoKey, _DiskImages2_Attach, 
                        __Z15make_error_code11DIErrorEnum, __ZN13diskimage_uio11add_di_roleENS_9diskimage4roleEONS_21diskimage_open_paramsE, 
@@ -36,8 +30,8 @@ exports:
                        __ZN13diskimage_uio21diskimage_open_paramsC2ERKNSt3__14__fs10filesystem4pathENS0_4modeE, 
                        __ZN13diskimage_uio21diskimage_open_paramsC2EiNS0_4modeEb, 
                        __ZN13diskimage_uio21diskimage_open_paramsD1Ev, __ZN13diskimage_uio21diskimage_open_paramsD2Ev, 
-                       __ZN13diskimage_uio21diskimage_open_paramsaSEOS0_, __ZN13diskimage_uio9diskimage14create_contextEv, 
-                       __ZN13diskimage_uio9diskimage6createEONS_21diskimage_open_paramsE, 
+                       __ZN13diskimage_uio21diskimage_open_paramsaSEOS0_, __ZN13diskimage_uio29resolve_stack_nodes_from_pathERKNS_14resolve_paramsE, 
+                       __ZN13diskimage_uio9diskimage14create_contextEv, __ZN13diskimage_uio9diskimage6createEONS_21diskimage_open_paramsE, 
                        __ZN13diskimage_uio9diskimage6createEONSt3__16vectorINS_26diskimage_open_params_pairENS1_9allocatorIS3_EEEEj, 
                        __ZN13diskimage_uio9diskimage6createESt16initializer_listINS_12rref_captureINS_26diskimage_open_params_pairEEEEj, 
                        __ZN13diskimage_uio9diskimageC1EONS_21diskimage_open_paramsE, 
@@ -65,6 +59,7 @@ exports:
     objc-classes:    [ DIAttachParams, DIAttachedDeviceInfo, DIBaseParams, DIBlockDevice, 
                        DICommonAttach, DIConvertParams, DICreateASIFParams, DICreateParams, 
                        DICreateRAWParams, DICreateUDSBParams, DIDeviceHandle, DIDiskArb, 
-                       DIError, DIHelpers, DIIOIterator, DIIOMedia, DIIOObject, DIURL, 
-                       DIUserDataParams, DIVerifyParams, DiskImages2 ]
+                       DIError, DIHelpers, DIIOIterator, DIIOMedia, DIIOObject, DIImageInfoParams, 
+                       DIResizeParams, DIStackParams, DIStatsParams, DIURL, DIUserDataParams, 
+                       DIVerifyParams, DiskImageGraph, DiskImages2 ]
 ...

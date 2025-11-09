@@ -136,6 +136,34 @@ enum tEndpointType
 
 typedef enum tEndpointType tEndpointType;
 
+enum tEndpointUsageType
+{
+    // these usage types only apply to Interrupt Endpoints
+    kEndpointUsageTypeInterruptPeriodic        = (kIOUSBEndpointDescriptorUsageTypeInterruptPeriodic >> kIOUSBEndpointDescriptorUsageTypePhase),
+    kEndpointUsageTypeInterruptNotification    = (kIOUSBEndpointDescriptorUsageTypeInterruptNotification >> kIOUSBEndpointDescriptorUsageTypePhase),
+    kEndpointUsageTypeInterruptReserved1       = (kIOUSBEndpointDescriptorUsageTypeInterruptReserved1 >> kIOUSBEndpointDescriptorUsageTypePhase),
+    kEndpointUsageTypeInterruptReserved2       = (kIOUSBEndpointDescriptorUsageTypeInterruptReserved2 >> kIOUSBEndpointDescriptorUsageTypePhase),
+    
+    // these usage types only apply to Isochronous Endpoints
+    kEndpointUsageTypeIsocData                 = (kIOUSBEndpointDescriptorUsageTypeIsocData >> kIOUSBEndpointDescriptorUsageTypePhase),
+    kEndpointUsageTypeIsocFeedback             = (kIOUSBEndpointDescriptorUsageTypeIsocFeedback >> kIOUSBEndpointDescriptorUsageTypePhase),
+    kEndpointUsageTypeIsocImplicit             = (kIOUSBEndpointDescriptorUsageTypeIsocImplicit >> kIOUSBEndpointDescriptorUsageTypePhase),
+    kEndpointUsageTypeIsocReserved             = (kIOUSBEndpointDescriptorUsageTypeIsocReserved >> kIOUSBEndpointDescriptorUsageTypePhase)
+};
+
+typedef enum tEndpointUsageType tEndpointUsageType;
+
+enum tEndpointSynchronizationType
+{
+    // these usage types only apply to Isochronous Endpoints
+    kEndpointSynchronizationTypeNone           = (kIOUSBEndpointDescriptorSynchronizationTypeNone >> kIOUSBEndpointDescriptorSynchronizationTypePhase),
+    kEndpointSynchronizationTypeAsynchronous   = (kIOUSBEndpointDescriptorSynchronizationTypeAsynchronous >> kIOUSBEndpointDescriptorSynchronizationTypePhase),
+    kEndpointSynchronizationTypeAdaptive       = (kIOUSBEndpointDescriptorSynchronizationTypeAdaptive >> kIOUSBEndpointDescriptorSynchronizationTypePhase),
+    kEndpointSynchronizationTypeSynchronous    = (kIOUSBEndpointDescriptorSynchronizationTypeSynchronous >> kIOUSBEndpointDescriptorSynchronizationTypePhase)
+};
+
+typedef enum tEndpointSynchronizationType tEndpointSynchronizationType;
+
 enum tDeviceRequestDirection
 {
     kRequestDirectionOut            = (kDeviceRequestDirectionOut >> kDeviceRequestDirectionPhase),

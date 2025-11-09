@@ -26,25 +26,25 @@ typedef NSString *AVSemanticSegmentationMatteType NS_TYPED_ENUM;
  @constant AVSemanticSegmentationMatteTypeSkin
     A matting image segmenting all skin from all persons in the visible field-of-view of an image.
  */
-AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeSkin API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0));
+AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeSkin API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
 /*!
  @constant AVSemanticSegmentationMatteTypeHair
     A matting image segmenting all hair from all persons in the visible field-of-view of an image.
  */
-AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeHair API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0));
+AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeHair API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
 /*!
  @constant AVSemanticSegmentationMatteTypeTeeth
     A matting image segmenting all teeth from all persons in the visible field-of-view of an image.
  */
-AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeTeeth API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0));
+AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeTeeth API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0), visionos(1.0));
 
 /*!
  @constant AVSemanticSegmentationMatteTypeGlasses
  A matting image segmenting all glasses ( e.g. eyeglasses, sunglasses ) from all persons wearing glasses in the visible field-of-view of an image.
  */
-AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeGlasses API_AVAILABLE(macos(11.0), ios(14.1), macCatalyst(14.1), tvos(14.5), watchos(8.0));
+AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteTypeGlasses API_AVAILABLE(macos(11.0), ios(14.1), macCatalyst(14.1), tvos(14.5), watchos(8.0), visionos(1.0));
 
 /*!
  @class AVSemanticSegmentationMatte
@@ -54,7 +54,7 @@ AVF_EXPORT AVSemanticSegmentationMatteType const AVSemanticSegmentationMatteType
  @discussion
     The pixel data in the matting image is represented in CVPixelBuffers as kCVPixelFormatType_OneComponent8 ('L008'). It is stored in image files as an auxiliary image, accessible using CGImageSourceCopyAuxiliaryDataInfoAtIndex using data types defined in <ImageIO/CGImageProperties.h>.
  */
-API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0))
+API_AVAILABLE(macos(10.15), ios(13.0), macCatalyst(14.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @interface AVSemanticSegmentationMatte : NSObject
 
 AV_INIT_UNAVAILABLE

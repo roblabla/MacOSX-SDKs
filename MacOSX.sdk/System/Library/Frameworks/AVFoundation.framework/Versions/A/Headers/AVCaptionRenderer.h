@@ -4,11 +4,13 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2016-2021 Apple Inc. All rights reserved.
+	Copyright 2016-2023 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
+#if TARGET_OS_OSX
+
 #import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaption.h>
 #import <QuartzCore/QuartzCore.h>
@@ -28,6 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
 	An instance of AVCaptionRenderer performs drawing of a caption "scene" from a population of captions given a time. If there are no captions or no captions at the specified time, "emptiness" will still be drawn (e.g., flood filling with zero alpha or a color).
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVCaptionRenderer : NSObject
 {
@@ -90,7 +93,10 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 	In rendering the timeline established by the captions referenced by an AVCaptionRenderer, there are considerations such as temporal overlapping of captions, the existence of captions and other graphical elements like regions, and whether captions may be animated (e.g., scrolling in regions, character reveal in a caption). To communicate to the AVCaptionRenderer client the minimal set of time ranges where there are any visual differences, AVCaptionRendererScenes can be requested from -[AVCaptionRenderer captionSceneChangesInRange:]. A client wanting to optimize drawing performance may use this timing information to draw scenes only once per scene. Alternatively, clients can ignore scenes and repeatedly call renderInContext:atTime: but this may have additional performance impact.
 	
 	Other information about the rendering of a caption scene can be communicated through the AVCaptionRendererScene. For example, if captions are animated, an AVCaptionRendererScene with the time range and an indication of the animation occurring will be returned. There should be no inference from the number of scenes to the number of captions. Even a single caption with internal animations in part of its duration could result in multiple AVCaptionRendererScenes being produced.
+ 
+	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVCaptionRendererScene : NSObject <NSCopying>
 {
@@ -128,6 +134,8 @@ AV_INIT_UNAVAILABLE
 
 
 NS_ASSUME_NONNULL_END
+
+#endif // TARGET_OS_OSX
 
 #else
 #import <AVFCore/AVCaptionRenderer.h>

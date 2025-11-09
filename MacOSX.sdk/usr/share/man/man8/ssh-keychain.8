@@ -3,28 +3,26 @@
 .Os Darwin
 .Sh NAME
 .Nm ssh-keychain.dylib
-.Nd smartcard/keychain support library
+.Nd smartcard/token support library
 .Sh DESCRIPTION
-The ssh-keychain.dylib library is used as a PKCS11 module replacement for the family of ssh tools.
-It provides certificates on SmartCards and/or in user keychains to the tools.
+The ssh-keychain.dylib library is used as a PKCS#11 and Secure Key module replacement for the family of ssh tools.
+It provides identities from CryptoTokenKit tokens (SmartCards and persistent tokens) to the tools.
 .Sh OVERVIEW
-By default, all valid certificates from all SmartCards currently inserted into attached readers are provided.
+By default, all valid (RSA for PKCS#11 and ecdsa256 for Secure Key module) identities from all SmartCards and persistent tokens currently available in the system are provided.
 Manual configuration of
 .Nm
-is required if certificates in user keychains are desired, or if there is a need to limit which SmartCard
-certificates are provided.
-The public key hash is used to select which certificates should be provided.
+is required if there is a need to limit which token identities are provided.
+The public key hash is used to select which identities should be provided.
 This hash is usually in hexadecimal string form, without the leading
 .Em 0x .
-To determine the hash for certificate on a SmartCard, the
-.Em sc_auth hash
-or
+To determine the hash for identity use the
+.Em sc_auth list-ctk-identities
+and
 .Em sc_auth identities
-commands can be used.
-For certificates in user keychains, it is the value of the
-.Em hpky
+commands or
+.Em pkhh
 attribute from
-.Em security find-certificate
+.Em security export-smartcard
 output.
 .Sh ENVIRONMENT
 Configuration passed through the environment always takes precedence over the configuration file.
@@ -63,6 +61,7 @@ ssh -o PKCS11Provider=/usr/lib/ssh-keychain.dylib machine
 .El
 .Ed
 .Sh SEE ALSO
+.Xr security 1 ,
 .Xr ssh-add 1 ,
 .Xr ssh_config 5 ,
 .Xr sc_auth 8

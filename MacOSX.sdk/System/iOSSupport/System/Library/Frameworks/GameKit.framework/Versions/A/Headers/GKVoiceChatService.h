@@ -1,9 +1,4 @@
-//
-//  GKVoiceChatService.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 /*
 
@@ -96,7 +91,6 @@
  
 */
 
-#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GKDefines.h>
 #import <GameKit/GKPublicProtocols.h>
@@ -105,14 +99,14 @@
 @class GKVoiceChatService;
 
 // GKVoiceChatService provides voice chat capabilities depending on your networking situation.
-NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead") 
+NS_CLASS_DEPRECATED_IOS(3_0, 7_0, "Use GKVoiceChat instead") API_UNAVAILABLE(tvos)
 @interface GKVoiceChatService : NSObject
 
 + (GKVoiceChatService *)defaultVoiceChatService;
 
 + (BOOL)isVoIPAllowed;
 
-@property(assign) id<GKVoiceChatClient> client NS_DEPRECATED_IOS(3_0, 7_0) ;
+@property(assign) id<GKVoiceChatClient> client NS_DEPRECATED_IOS(3_0, 7_0) __TVOS_UNAVAILABLE;
 
 // May fail if you already in a chat, or if there is no peer-to-peer channel that can be made to the participant.
 - (BOOL)startVoiceChatWithParticipantID:(NSString *)participantID error:(NSError **)error;

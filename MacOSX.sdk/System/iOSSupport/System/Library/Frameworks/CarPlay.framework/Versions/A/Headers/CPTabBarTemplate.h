@@ -37,7 +37,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  @warning The system will throw an exception if your app attempts to display more
  than this number of tabs in your tab bar template.
  */
-@property (nonatomic, class, readonly) NSUInteger maximumTabCount;
+@property (nonatomic, class, readonly) NSInteger maximumTabCount;
 
 /**
  The currently-visible templates in the tab bar. Each template corresponds to
@@ -55,6 +55,23 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  Each template in the array becomes a tab on the tab bar.
  */
 - (void)updateTemplates:(NSArray <__kindof CPTemplate *> *)newTemplates;
+
+/**
+ Update the currently-selected tab in this tab bar template, switching to the first tab
+ that is currently hosting @c newTemplate.
+ 
+ @param newTemplate The template that should become selected in the tab bar.
+ */
+- (void)selectTemplate:(CPTemplate *)newTemplate NS_SWIFT_NAME(select(_:)) API_AVAILABLE(ios(17.0));
+
+/**
+ Update the currently-selected tab in this tab bar template, switching to the tab
+ at the specified index.
+ 
+ @param index The index of the tab to select. This must be less than the number
+ of tabs in this tab bar template.
+ */
+- (void)selectTemplateAtIndex:(NSInteger)index NS_SWIFT_NAME(selectTemplate(at:)) API_AVAILABLE(ios(17.0));
 
 @end
 

@@ -9,3 +9,4 @@
 #import <AVKit/AVKitDefines.h>
 
 #import <AVKit/AVPlaybackSpeed.h>
+#import <AVKit/AVKitTypes.h>

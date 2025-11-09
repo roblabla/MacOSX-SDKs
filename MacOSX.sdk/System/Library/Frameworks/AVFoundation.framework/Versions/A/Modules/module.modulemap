@@ -1,4 +1,4 @@
-framework module AVFoundation [extern_c] {
+framework module AVFoundation [system] {
 	umbrella header "AVFoundation.h"
 	export *
 	module * { export * }

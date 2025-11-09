@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/MetalPerformanceShaders.framework/Versions/A/Frameworks/MPSImage.framework/Versions/A/MPSImage'
-current-version: 126.3.5
+current-version: 127.0.19
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -25,8 +25,8 @@ exports:
                        MPSImageNormalizedHistogram, MPSImagePyramid, MPSImageReduceColumnMax, 
                        MPSImageReduceColumnMean, MPSImageReduceColumnMin, MPSImageReduceColumnSum, 
                        MPSImageReduceRowMax, MPSImageReduceRowMean, MPSImageReduceRowMin, 
-                       MPSImageReduceRowSum, MPSImageReduceUnary, MPSImageScale, 
-                       MPSImageScreenTelemetry, MPSImageSobel, MPSImageSpatioTemporalGuidedFilter, 
+                       MPSImageReduceRowSum, MPSImageReduceUnary, MPSImageSIFT, MPSImageSIFTDescriptor, 
+                       MPSImageScale, MPSImageScreenTelemetry, MPSImageSobel, MPSImageSpatioTemporalGuidedFilter, 
                        MPSImageSpatioTemporalGuidedFilterDescriptor, MPSImageStatisticsMean, 
                        MPSImageStatisticsMeanAndVariance, MPSImageStatisticsMinAndMax, 
                        MPSImageSubtract, MPSImageTent, MPSImageThresholdBinary, MPSImageThresholdBinaryInverse, 

@@ -15,17 +15,17 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface MPSGraph(MPSGraphMatrixInverseOps)
 
-/*!
- *  @abstract   Create  Matrix inverse op and return the result tensor
- *  @discussion Find the inverse of a square matrix by calling LU decomposition and solver
- *              The op computes inverse for all batches If the input tensor has more than
- *              2 dimensions. Results are undefined for ill conditioned matrices.
- *
- *  @param      inputTensor          input tensor to inverse op
- *  @param      name                          name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Computes the inverse of an input tensor.
+///
+/// The framework computes the inverse of a square matrix by calling LU decomposition and LU solver.
+/// All dimensions after the first 2 are treated as batch dimensions and the inverse for each batch is computed.
+/// Results are undefined for ill conditioned matrices.
+///
+/// - Parameters:
+///   - inputTensor: The input tensor.
+///   - name: The name for the operation.
+/// - Returns: A valid ``MPSGraphTensor`` object containing the inverse of the input tensor.
+///
 -(MPSGraphTensor *) inverseOfTensor:(MPSGraphTensor *) inputTensor
                                name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( inverse(input:name:) )

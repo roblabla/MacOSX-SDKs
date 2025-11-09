@@ -9,6 +9,7 @@
 #import <os/availability.h>
 #import <MetricKit/MXDiagnostic.h>
 #import <MetricKit/MXCallStackTree.h>
+#import <MetricKit/MXCrashDiagnosticObjectiveCExceptionReason.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -63,6 +64,13 @@ API_AVAILABLE(ios(14.0), macos(12.0)) API_UNAVAILABLE(tvos, watchos)
 @see           sys/signal.h
 */
 @property (readonly, strong, nullable) NSNumber *signal;
+
+/*!
+@property      exceptionReason
+@abstract      The MXCrashDiagnosticObjectiveCExceptionReason object associated with this crash.
+@see           <MetricKit/MXCrashDiagnosticObjectiveCExceptionReason.h>
+*/
+@property (readonly, strong, nullable) MXCrashDiagnosticObjectiveCExceptionReason *exceptionReason API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
 @end
 

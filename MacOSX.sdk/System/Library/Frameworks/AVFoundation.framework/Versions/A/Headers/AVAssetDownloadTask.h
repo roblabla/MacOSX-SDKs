@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
 
-	Copyright 2015-2018 Apple Inc. All rights reserved.
+	Copyright 2015-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -76,7 +76,7 @@ AVF_EXPORT NSString *const AVAssetDownloadTaskPrefersHDRKey API_AVAILABLE(macos(
  @discussion	Should be created with -[AVAssetDownloadURLSession assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:]. To utilize local data for playback for downloads that are in-progress, re-use the URLAsset supplied in initialization. An AVAssetDownloadTask may be instantiated with a destinationURL pointing to an existing asset on disk, for the purpose of completing or augmenting a downloaded asset.
 */
 
-API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(9.0), watchos(10.0)) API_UNAVAILABLE(tvos)
 @interface AVAssetDownloadTask : NSURLSessionTask
 
 /*!
@@ -90,20 +90,20 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @abstract		The file URL supplied to the download task upon initialization.
  @discussion	This URL may have been appended with the appropriate extension for the asset.
 */
-@property (nonatomic, readonly) NSURL *destinationURL API_DEPRECATED("Use the URL property of URLAsset instead", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
+@property (nonatomic, readonly) NSURL *destinationURL API_DEPRECATED("Use the URL property of URLAsset instead", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos, visionos) API_UNAVAILABLE(macos);
 
 /*!
  @property		options
  @abstract		The options supplied to the download task upon initialization.
 */
-@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *options;
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *options API_UNAVAILABLE(watchos);
 
 /*!
  @property		loadedTimeRanges
  @abstract		This property provides a collection of time ranges for which the download task has media data already downloaded and playable. The ranges provided might be discontinuous.
  @discussion	Returns an NSArray of NSValues containing CMTimeRanges.
 */
-@property (nonatomic, readonly) NSArray<NSValue *> *loadedTimeRanges;
+@property (nonatomic, readonly) NSArray<NSValue *> *loadedTimeRanges API_UNAVAILABLE(watchos);
 
 // NSURLRequest and NSURLResponse objects are not available for AVAssetDownloadTask
 AV_INIT_UNAVAILABLE
@@ -121,7 +121,8 @@ AV_INIT_UNAVAILABLE
  
 				It is important to configure your download configuration object appropriately before using it to create a download task. Download task makes a copy of the configuration settings you provide and use those settings to configure the task. Once configured, the task object ignores any changes you make to the NSURLSessionConfiguration object. If you need to modify your settings, you must update the download configuration object and use it to create a new download task object.
  */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_NONSENDABLE
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(10.0))
 @interface AVAssetDownloadConfiguration : NSObject
 
 AV_INIT_UNAVAILABLE
@@ -169,7 +170,8 @@ AV_INIT_UNAVAILABLE
  @class			AVAssetDownloadContentConfiguration
  @abstract		Represents the configuration consisting of variant and the variant's media options.
 */
-API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
+NS_SWIFT_NONSENDABLE
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(10.0))
 @interface AVAssetDownloadContentConfiguration : NSObject <NSCopying>
 
 /*!
@@ -194,6 +196,8 @@ API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos)
  @class			AVAggregateAssetDownloadTask
  @abstract		An AVAssetDownloadTask used for downloading multiple AVMediaSelections for a single AVAsset, under the umbrella of a single download task.
  @discussion	Should be created with -[AVAssetDownloadURLSession aggregateAssetDownloadTaskWithURLAsset:mediaSelections:assetTitle:assetArtworkData:options:. For progress tracking, monitor the delegate callbacks for each childAssetDownloadTask.
+
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos, watchos)
 @interface AVAggregateAssetDownloadTask : NSURLSessionTask
@@ -217,7 +221,7 @@ AV_INIT_UNAVAILABLE
  @abstract		Delegate methods to implement when adopting AVAssetDownloadTask.
 */
 
-API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(9.0), watchos(10.0)) API_UNAVAILABLE(tvos)
 @protocol AVAssetDownloadDelegate <NSURLSessionTaskDelegate>
 @optional
 /*!
@@ -231,7 +235,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @param			location
 				The location the asset has been downloaded to.
 */
-- (void)URLSession:(NSURLSession *)session assetDownloadTask:(AVAssetDownloadTask *)assetDownloadTask didFinishDownloadingToURL:(NSURL *)location API_AVAILABLE(macos(10.15), ios(10.0)) API_UNAVAILABLE(tvos, watchos);
+- (void)URLSession:(NSURLSession *)session assetDownloadTask:(AVAssetDownloadTask *)assetDownloadTask didFinishDownloadingToURL:(NSURL *)location API_AVAILABLE(macos(10.15), ios(10.0), watchos(10.0)) API_UNAVAILABLE(tvos);
 
 /*!
  @method		URLSession:assetDownloadTask:didLoadTimeRange:totalTimeRangesLoaded:timeRangeExpectedToLoad:
@@ -260,6 +264,19 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
 				The resolved media selection for the download task. For the best chance of playing back downloaded content without further network I/O, apply this selection to subsequent AVPlayerItems.
 */
 - (void)URLSession:(NSURLSession *)session assetDownloadTask:(AVAssetDownloadTask *)assetDownloadTask didResolveMediaSelection:(AVMediaSelection *)resolvedMediaSelection API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*
+ @method		URLSession:assetDownloadTask:willDownloadToURL:
+ @abstract		Method called when the asset download task determines the location this asset will be downloaded to.
+ @discussion	This URL should be saved for future instantiations of AVAsset. While an AVAsset already exists for this content, it is advisable to re-use that instance.
+ @param			session
+				The session the asset download task is on.
+ @param			assetDownloadTask
+				The AVAssetDownloadTask.
+ @param			location
+				The file URL this task will download media data to.
+*/
+- (void)URLSession:(NSURLSession *)session assetDownloadTask:(AVAssetDownloadTask *)assetDownloadTask willDownloadToURL:(NSURL *)location API_AVAILABLE(watchos(10.0)) API_UNAVAILABLE(macos, ios, tvos);
 
 /*
  @method		URLSession:aggregateAssetDownloadTask:willDownloadToURL:
@@ -315,7 +332,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @param			variants
 				The variants chosen. Depends on the environmental condition when the download starts.
 */
-- (void)URLSession:(NSURLSession *)session assetDownloadTask:(AVAssetDownloadTask *)assetDownloadTask willDownloadVariants:(NSArray <AVAssetVariant *> *)variants API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0)) API_UNAVAILABLE(watchos);
+- (void)URLSession:(NSURLSession *)session assetDownloadTask:(AVAssetDownloadTask *)assetDownloadTask willDownloadVariants:(NSArray <AVAssetVariant *> *)variants API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(10.0));
 
 @end
 
@@ -323,7 +340,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @class			AVAssetDownloadURLSession
  @abstract		A subclass of NSURLSession to support AVAssetDownloadTask.
 */
-API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
+API_AVAILABLE(macos(10.15), ios(9.0), watchos(10.0)) API_UNAVAILABLE(tvos)
 @interface AVAssetDownloadURLSession : NSURLSession
 
 /*!
@@ -349,7 +366,7 @@ API_AVAILABLE(macos(10.15), ios(9.0)) API_UNAVAILABLE(tvos, watchos)
  @param			options
 				See AVAssetDownloadTask*Key above. Configures non-default behavior for the download task. Using this parameter is required for downloading non-default media selections for HLS assets.
 */
-- (nullable AVAssetDownloadTask *)assetDownloadTaskWithURLAsset:(AVURLAsset *)URLAsset destinationURL:(NSURL *)destinationURL options:(nullable NSDictionary<NSString *, id> *)options API_DEPRECATED("Use assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options: instead", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos) API_UNAVAILABLE(macos);
+- (nullable AVAssetDownloadTask *)assetDownloadTaskWithURLAsset:(AVURLAsset *)URLAsset destinationURL:(NSURL *)destinationURL options:(nullable NSDictionary<NSString *, id> *)options API_DEPRECATED("Use assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options: instead", ios(9.0, 10.0)) API_UNAVAILABLE(tvos, watchos, visionos) API_UNAVAILABLE(macos);
 
 /*!
  @method		assetDownloadTaskWithURLAsset:assetTitle:assetArtworkData:options:

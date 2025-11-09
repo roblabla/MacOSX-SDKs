@@ -1,4 +1,4 @@
-framework module GameKit [extern_c] {
+framework module GameKit {
   umbrella header "GameKit.h"
 
   export *

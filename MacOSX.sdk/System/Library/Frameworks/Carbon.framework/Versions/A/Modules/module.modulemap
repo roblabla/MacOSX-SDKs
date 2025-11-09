@@ -34,12 +34,6 @@ framework module Carbon [extern_c] {
     module * { export * }
   }
 
-  framework module Print {
-    umbrella header "Print.h"
-    export *
-    module * { export * }
-  }
-
   framework module SecurityHI {
     umbrella header "SecurityHI.h"
     export *

@@ -3,7 +3,7 @@
 
 	Framework:	MediaToolbox
 
-	Copyright 2011-2015 Apple Inc. All rights reserved.
+	Copyright 2011-2023 Apple Inc. All rights reserved.
 */
 
 #ifndef MTAUDIOPROCESSINGTAP_H
@@ -21,7 +21,7 @@ extern "C"
 
 #pragma pack(push, 4)
 
-typedef const struct CM_BRIDGED_TYPE(id) opaqueMTAudioProcessingTap *MTAudioProcessingTapRef; // CFType, retain/release please
+typedef const struct CM_BRIDGED_TYPE(id) opaqueMTAudioProcessingTap *MTAudioProcessingTapRef CM_SWIFT_NONSENDABLE; // CFType, retain/release please
 
 MT_EXPORT CFTypeID MTAudioProcessingTapGetTypeID(void) __OSX_AVAILABLE_STARTING(__MAC_10_9,__IPHONE_6_0);
 
@@ -262,7 +262,10 @@ enum
 
 /*!
 	@typedef	MTAudioProcessingTapCallbacks
-
+	@discussion
+		Note that for 64-bit architectures, this struct contains misaligned function pointers.
+		To avoid link-time issues, it is recommended that clients fill MTAudioProcessingTapCallbacks' function pointer fields
+		by using assignment statements, rather than declaring them as global or static structs.
 	@field		version
 				The version number of the structure passed in as a parameter to MTAudioProcessingTapCreate().
 				Must be kMTAudioProcessingTapCallbacksVersion_0.
@@ -290,7 +293,7 @@ typedef struct {
 	MTAudioProcessingTapPrepareCallback CM_NULLABLE prepare;
 	MTAudioProcessingTapUnprepareCallback CM_NULLABLE unprepare;
 	MTAudioProcessingTapProcessCallback CM_NONNULL process;
-} MTAudioProcessingTapCallbacks;
+} MTAudioProcessingTapCallbacks CM_SWIFT_NONSENDABLE;
 
 /*!
 	@function	MTAudioProcessingTapCreate

@@ -21,6 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
 
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHAsset : PHObject
 
 #pragma mark - Properties

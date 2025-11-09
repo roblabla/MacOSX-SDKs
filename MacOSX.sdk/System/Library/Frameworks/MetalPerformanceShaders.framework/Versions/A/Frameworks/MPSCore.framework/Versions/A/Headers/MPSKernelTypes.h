@@ -30,7 +30,8 @@ typedef enum : uint32_t
     MPSDeviceSupportsFloat16BicubicFiltering    = 1 << 9,
     MPSDeviceIsAppleDevice                      = 1 << 10,
     MPSDeviceSupportsSimdShuffleAndFill         = 1 << 11,
-    MPSDeviceCapsLast                           = 1 << 12,
+    MPSDeviceSupportsBFloat16Arithmetic         = 1 << 12,
+    MPSDeviceCapsLast                           = 1 << 13,
     
 } MPSDeviceCapsValues;
 
@@ -51,6 +52,7 @@ constant bool kMPSDeviceSupportsFloat32Filtering = (kMPSDeviceCaps & MPSDeviceSu
 constant bool kMPSDeviceIsAppleDevice  = (kMPSDeviceCaps & MPSDeviceIsAppleDevice)  != 0;
 constant bool kMPSDeviceSupportsNorm16BicubicFiltering = (kMPSDeviceCaps & MPSDeviceSupportsNorm16BicubicFiltering) != 0;
 constant bool kMPSDeviceSupportsFloat16BicubicFiltering = (kMPSDeviceCaps & MPSDeviceSupportsFloat16BicubicFiltering) != 0;
+constant bool kMPSDeviceSupportsBFloat16Arithmetic = (kMPSDeviceCaps & MPSDeviceSupportsBFloat16Arithmetic) != 0;
 
 
 #endif
@@ -742,6 +744,7 @@ template<class _type, class _type4> __attribute__((__always_inline__)) void _MPS
 typedef int64_t  MPSFunctionConstant;
 typedef uint32_t MPSFunctionConstantInMetal;
 static const MPSFunctionConstant    MPSFunctionConstantNone = -1LL;
+static const MPSFunctionConstant    MPSFunctionConstantNoneArray[2] = {-1LL, -1LL};
 
 #   ifdef __cplusplus
 static inline MPSFunctionConstant MPSMakeFunctionConstant( MPSImageType destType,

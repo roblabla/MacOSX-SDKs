@@ -1,3 +1,5 @@
+#if __OBJC__
+
 #import <Foundation/NSObject.h>
 
 /*!
@@ -25,3 +27,4 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 @end
 
+#endif // __OBJC__

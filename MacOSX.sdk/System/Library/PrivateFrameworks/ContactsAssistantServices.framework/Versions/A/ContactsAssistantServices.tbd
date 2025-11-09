@@ -6,6 +6,5 @@ current-version: 0
 compatibility-version: 0
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _NonEmptyOrNilArray, _NonEmptyOrNilString, _YESOrNilNumber ]
     objc-classes:    [ CNAssistantConversion, CNAssistantID ]
 ...

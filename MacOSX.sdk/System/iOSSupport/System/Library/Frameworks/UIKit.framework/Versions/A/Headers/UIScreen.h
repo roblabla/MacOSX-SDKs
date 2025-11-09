@@ -17,16 +17,16 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIScreenMode, CADisplayLink, UIView;
 
 // Object is the UIScreen that represents the new screen. Connection notifications are not sent for screens present when the application is first launched
-UIKIT_EXTERN NSNotificationName const UIScreenDidConnectNotification API_DEPRECATED("Use UISceneDelegate or related notifications to be informed of connecting scenes from other screens", ios(3.2, 16.0));
+UIKIT_EXTERN NSNotificationName const UIScreenDidConnectNotification API_DEPRECATED("Use UISceneDelegate or related notifications to be informed of connecting scenes from other screens", ios(3.2, 16.0)) API_UNAVAILABLE(visionos);
 // Object is the UIScreen that represented the disconnected screen.
-UIKIT_EXTERN NSNotificationName const UIScreenDidDisconnectNotification API_DEPRECATED("Use UISceneDelegate or related notifications to be informed of disconnecting scenes from other screens", ios(3.2, 16.0));
+UIKIT_EXTERN NSNotificationName const UIScreenDidDisconnectNotification API_DEPRECATED("Use UISceneDelegate or related notifications to be informed of disconnecting scenes from other screens", ios(3.2, 16.0)) API_UNAVAILABLE(visionos);
 // Object is the UIScreen which changed. [object currentMode] is the new UIScreenMode.
-UIKIT_EXTERN NSNotificationName const UIScreenModeDidChangeNotification API_AVAILABLE(ios(3.2));
-UIKIT_EXTERN NSNotificationName const UIScreenBrightnessDidChangeNotification API_AVAILABLE(ios(5.0));
+UIKIT_EXTERN NSNotificationName const UIScreenModeDidChangeNotification API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(visionos);
+UIKIT_EXTERN NSNotificationName const UIScreenBrightnessDidChangeNotification API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(visionos);
 // Object is the UIScreen which changed. [object isCaptured] is the new value of captured property.
-UIKIT_EXTERN NSNotificationName const UIScreenCapturedDidChangeNotification API_AVAILABLE(ios(11.0));
+UIKIT_EXTERN NSNotificationName const UIScreenCapturedDidChangeNotification API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(visionos);
 // Object is the UIScreen which changed. [object referenceDisplayModeStatus] is the screen's new reference display mode status.
-UIKIT_EXTERN NSNotificationName const UIScreenReferenceDisplayModeStatusDidChangeNotification API_AVAILABLE(ios(16.0));
+UIKIT_EXTERN NSNotificationName const UIScreenReferenceDisplayModeStatusDidChangeNotification API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(visionos);
 
 
 // when the connected screen is overscanning, UIScreen can attempt to compensate for the overscan to avoid clipping
@@ -35,8 +35,8 @@ typedef NS_ENUM(NSInteger, UIScreenOverscanCompensation) {
     UIScreenOverscanCompensationInsetBounds,                     // the screen's bounds will be inset in the framebuffer to avoid clipping. no scaling will occur
     UIScreenOverscanCompensationNone API_AVAILABLE(ios(9.0)), // no scaling will occur. use overscanCompensationInsets to determine the necessary insets to avoid clipping
     
-    UIScreenOverscanCompensationInsetApplicationFrame API_DEPRECATED_WITH_REPLACEMENT("UIScreenOverscanCompensationNone", ios(5.0, 9.0)) = 2,
-};
+    UIScreenOverscanCompensationInsetApplicationFrame API_DEPRECATED_WITH_REPLACEMENT("UIScreenOverscanCompensationNone", ios(5.0, 9.0)) API_UNAVAILABLE(visionos) = 2,
+} API_UNAVAILABLE(visionos);
 
 // Describes the screen's reference display mode ability
 typedef NS_ENUM(NSInteger, UIScreenReferenceDisplayModeStatus) {
@@ -48,13 +48,13 @@ typedef NS_ENUM(NSInteger, UIScreenReferenceDisplayModeStatus) {
     UIScreenReferenceDisplayModeStatusLimited,
     // A reference display mode is enabled and being displayed accurately
     UIScreenReferenceDisplayModeStatusEnabled
-} API_AVAILABLE(ios(16.0));
+} API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(visionos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(2.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @interface UIScreen : NSObject <UITraitEnvironment>
 
-@property(class, nonatomic, readonly) NSArray<UIScreen *> *screens API_DEPRECATED("Use UIApplication.shared.openSessions to find open sessions with scenes from other screens", ios(3.2, 16.0)); // all screens currently attached to the device
-@property(class, nonatomic, readonly) UIScreen *mainScreen API_DEPRECATED("Use a UIScreen instance found through context instead: i.e, view.window.windowScene.screen", ios(2.0, API_TO_BE_DEPRECATED)); // the device's internal screen
+@property(class, nonatomic, readonly) NSArray<UIScreen *> *screens API_DEPRECATED("Use UIApplication.shared.openSessions to find open sessions with scenes from other screens", ios(3.2, 16.0), visionos(1.0, 1.0)); // all screens currently attached to the device
+@property(class, nonatomic, readonly) UIScreen *mainScreen API_DEPRECATED("Use a UIScreen instance found through context instead: i.e, view.window.windowScene.screen", ios(2.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)); // the device's internal screen
 
 @property(nonatomic,readonly) CGRect  bounds;                // Bounds of entire screen in points
 @property(nonatomic,readonly) CGFloat scale API_AVAILABLE(ios(4.0));
@@ -103,17 +103,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly) CGFloat potentialEDRHeadroom API_AVAILABLE(ios(16.0));
 
 
-@property (nullable, nonatomic, weak, readonly) id<UIFocusItem> focusedItem API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(10.0, 15.0));
-@property (nullable, nonatomic, weak, readonly) UIView *focusedView API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(9.0, 15.0));
-@property (readonly, nonatomic) BOOL supportsFocus API_DEPRECATED("Use -[UIWindowScene focusSystem] != nil instead", ios(9.0, 15.0));
+@property (nullable, nonatomic, weak, readonly) id<UIFocusItem> focusedItem API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(10.0, 15.0), visionos(1.0, 1.0));
+@property (nullable, nonatomic, weak, readonly) UIView *focusedView API_DEPRECATED("Use -[UIWindowScene focusSystem].focusedItem instead", ios(9.0, 15.0), visionos(1.0, 1.0));
+@property (readonly, nonatomic) BOOL supportsFocus API_DEPRECATED("Use -[UIWindowScene focusSystem] != nil instead", ios(9.0, 15.0), visionos(1.0, 1.0));
 
-@property(nonatomic,readonly) CGRect applicationFrame API_DEPRECATED_WITH_REPLACEMENT("bounds", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic,readonly) CGRect applicationFrame API_DEPRECATED_WITH_REPLACEMENT("bounds", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 
 @interface UIScreen (UISnapshotting)
 // Please see snapshotViewAfterScreenUpdates: in UIView.h for some important details on the behavior of this method when called from layoutSubviews.
-- (UIView *)snapshotViewAfterScreenUpdates:(BOOL)afterUpdates API_AVAILABLE(ios(7.0));
+- (UIView *)snapshotViewAfterScreenUpdates:(BOOL)afterUpdates API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(visionos);
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

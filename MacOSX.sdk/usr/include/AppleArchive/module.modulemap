@@ -1,4 +1,4 @@
-module AppleArchive [system] [extern_c] {
+module AppleArchive [system] {
   umbrella header "AppleArchive.h"
   module * { export * }   
   export *

@@ -44,7 +44,7 @@ MP_API(ios(2.0))
 // a color similar to the default, to convey a sense of warning to the user. The same image is used for
 // all control states. For debugging purposes, switch on the "EU Volume Limit" setting in the Developer
 // menu of the Settings application to always enable the volume limit.
-@property (nonatomic, strong, nullable) UIImage *volumeWarningSliderImage MP_API(ios(7.0));
+@property (nonatomic, strong, nullable) UIImage *volumeWarningSliderImage MP_DEPRECATED("This is no longer supported", ios(7.0, 17.0));
 
 - (CGRect)volumeSliderRectForBounds:(CGRect)bounds MP_API(ios(6.0));
 - (CGRect)volumeThumbRectForBounds:(CGRect)bounds volumeSliderRect:(CGRect)rect value:(float)value MP_API(ios(6.0));

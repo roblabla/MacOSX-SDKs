@@ -47,6 +47,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /**
  A now playing button that indicates the current shuffle mode for your app.
  */
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface CPNowPlayingShuffleButton : CPNowPlayingButton
 @end
 
@@ -54,6 +55,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  A now playing button that can be used to allow the user to add the current
  playing item to a collection, like their library.
  */
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface CPNowPlayingAddToLibraryButton : CPNowPlayingButton
 @end
 
@@ -62,6 +64,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  your app could present a @c CPActionSheetTemplate to show more actions
  when the user taps this button.
  */
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface CPNowPlayingMoreButton : CPNowPlayingButton
 @end
 
@@ -69,6 +72,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  A now playing button that shows the current playback rate and allows
  the user to cycle between different playback rates provided by your app.
  */
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface CPNowPlayingPlaybackRateButton : CPNowPlayingButton
 @end
 
@@ -76,6 +80,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  A now playing button that shows the current repeat state, like "once"
  or "all".
  */
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface CPNowPlayingRepeatButton : CPNowPlayingButton
 @end
 
@@ -83,6 +88,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  A now playing button that shows a custom image provided by your app
  for any other custom actions on the now playing screen.
  */
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface CPNowPlayingImageButton : CPNowPlayingButton
 
 /**
@@ -90,6 +96,8 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
  
  @param image A custom image for this button. The maximum image size is CPNowPlayingButtonMaximumImageSize; larger images will be scaled down.
  @param handler A block to execute when the user selects the button. The block has no return value and takes the selected button as its only parameter.
+ 
+ @discussion Provided image should be dark variant and will be recolored.
  */
 - (instancetype)initWithImage:(UIImage *)image
                       handler:(void (^ _Nullable)(__kindof CPNowPlayingButton *))handler;
@@ -97,7 +105,7 @@ API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(macos, watchos, tvos)
 /**
  The custom image, if any, displayed on the button.
 
- @discussion Animated images are not supported. If an animated image is assigned, only the first image will be used.
+ @discussion Animated images are not supported. If an animated image is assigned, only the first image will be used. If an empty or zero-size image is provided, a system placeholder glyph will be displayed instead.
  */
 @property (nullable, nonatomic, readonly, strong) UIImage *image;
 

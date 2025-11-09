@@ -27,6 +27,7 @@ NS_CLASS_AVAILABLE_IOS(10_0)
  */
 - (nullable instancetype)initWithContentsOfFileURL:(NSURL *)fileURL localizedDescription:(NSString *)localizedDescription error:(NSError *_Nullable *)error NS_DESIGNATED_INITIALIZER;
 
+- (instancetype)initWithFileURL:(NSURL *)url identifier:(NSUUID *)identifier localizedDescription:(NSString *)localizedDescription NS_DESIGNATED_INITIALIZER;
 /*!
  @property   imageFileURL
  @abstract   The file URL to the Sticker was initialized with.

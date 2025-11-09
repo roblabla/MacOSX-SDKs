@@ -8,6 +8,8 @@
 #import <ARKit/ARAnchor.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#define AR_FACE_ANCHOR_PROTOCOLS <ARTrackable>
+
 NS_ASSUME_NONNULL_BEGIN
 
 /**
@@ -77,7 +79,7 @@ FOUNDATION_EXTERN ARBlendShapeLocation const ARBlendShapeLocationTongueOut      
  An anchor representing a face and its geometry.
  */
 API_AVAILABLE(ios(11.0))
-@interface ARFaceAnchor : ARAnchor <ARTrackable>
+@interface ARFaceAnchor : ARAnchor AR_FACE_ANCHOR_PROTOCOLS
 
 /**
  The face geometry updated based on the computed blend shapes.

@@ -100,4 +100,11 @@ struct thsc_time_energy_cpi {
 };
 
 
+/* Additional private parameters to getpriority()/setpriority( */
+
+#define PRIO_DARWIN_GAME_MODE   7               /* Second argument is a PID */
+
+#define PRIO_DARWIN_GAME_MODE_OFF   0x0
+#define PRIO_DARWIN_GAME_MODE_ON    0x1
+
 #endif  /* !defined(_SYS_RESOURCE_PRIVATE_H_) */

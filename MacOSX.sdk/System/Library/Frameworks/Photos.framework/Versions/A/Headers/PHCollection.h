@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 API_AVAILABLE_BEGIN(macos(10.15), ios(8), tvos(10))
 
 OS_EXPORT API_AVAILABLE(macos(10.13))
+NS_SWIFT_SENDABLE
 @interface PHCollection : PHObject
 
 @property (nonatomic, assign, readonly) BOOL canContainAssets;
@@ -37,6 +38,7 @@ OS_EXPORT API_AVAILABLE(macos(10.13))
 
 #pragma mark -
 OS_EXPORT API_AVAILABLE(macos(10.13))
+NS_SWIFT_SENDABLE
 @interface PHAssetCollection : PHCollection
 
 @property (nonatomic, assign, readonly) PHAssetCollectionType assetCollectionType;
@@ -87,6 +89,7 @@ OS_EXPORT API_AVAILABLE(macos(10.13))
 
 #pragma mark -
 OS_EXPORT API_AVAILABLE(macos(10.13))
+NS_SWIFT_SENDABLE
 @interface PHCollectionList : PHCollection
 
 @property (nonatomic, assign, readonly) PHCollectionListType collectionListType;

@@ -1,4 +1,4 @@
-framework module CoreText [extern_c] {
+framework module CoreText {
   umbrella header "CoreText.h"
   export *
   module * { export * }

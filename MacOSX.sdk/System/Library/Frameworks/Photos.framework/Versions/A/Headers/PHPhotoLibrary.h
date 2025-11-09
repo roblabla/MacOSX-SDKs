@@ -29,7 +29,7 @@ typedef NS_ENUM(NSInteger, PHAuthorizationStatus) {
 typedef NS_ENUM(NSInteger, PHAccessLevel) {
     PHAccessLevelAddOnly = 1,
     PHAccessLevelReadWrite = 2,
-} API_AVAILABLE(macos(11.0), ios(14), tvos(14));
+} API_AVAILABLE(macos(11), ios(14), tvos(14));
 
 
 #pragma mark -
@@ -53,6 +53,7 @@ API_AVAILABLE(macos(10.15), ios(13), tvos(13))
  */
 #pragma mark -
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHPhotoLibrary : NSObject
 
 + (PHPhotoLibrary *)sharedPhotoLibrary;
@@ -60,8 +61,8 @@ OS_EXPORT
 #pragma mark - Library access authorization status
 
 /// Replaces \c +authorizationStatus to support add-only/read-write access level status
-+ (PHAuthorizationStatus)authorizationStatusForAccessLevel:(PHAccessLevel)accessLevel API_AVAILABLE(macosx(11.0), ios(14), tvos(14));
-+ (void)requestAuthorizationForAccessLevel:(PHAccessLevel)accessLevel handler:(void(^)(PHAuthorizationStatus status))handler API_AVAILABLE(macosx(11.0), ios(14), tvos(14)) NS_SWIFT_ASYNC(2);
++ (PHAuthorizationStatus)authorizationStatusForAccessLevel:(PHAccessLevel)accessLevel API_AVAILABLE(macosx(11), ios(14), tvos(14));
++ (void)requestAuthorizationForAccessLevel:(PHAccessLevel)accessLevel handler:(void(^)(PHAuthorizationStatus status))handler API_AVAILABLE(macosx(11), ios(14), tvos(14)) NS_SWIFT_ASYNC(2);
 
 /// Deprecated and replaced by authorizationStatusForAccessLevel:, will return \c PHAuthorizationStatusAuthorized if the user has chosen limited photo library access
 + (PHAuthorizationStatus)authorizationStatus API_DEPRECATED_WITH_REPLACEMENT("+authorizationStatusForAccessLevel:", ios(8, API_TO_BE_DEPRECATED), macos(10.13, API_TO_BE_DEPRECATED), tvos(10, API_TO_BE_DEPRECATED));

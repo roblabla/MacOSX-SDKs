@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASEListener
     @abstract A PHASEListener represents the listener's point of view within the simulated acoustic scene.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEListener : PHASEObject
 
 - (instancetype)init NS_UNAVAILABLE;

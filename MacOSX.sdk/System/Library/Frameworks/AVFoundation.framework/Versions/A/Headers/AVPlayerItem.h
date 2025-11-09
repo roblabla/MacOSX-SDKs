@@ -40,11 +40,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 // notifications                                                                                description
 AVF_EXPORT NSNotificationName const AVPlayerItemTimeJumpedNotification	 API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(1.0));	// the item's current time has changed discontinuously
-AVF_EXPORT NSString *const AVPlayerItemDidPlayToEndTimeNotification      API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));   // item has played to its end time
-AVF_EXPORT NSString *const AVPlayerItemFailedToPlayToEndTimeNotification API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));   // item has failed to play to its end time
-AVF_EXPORT NSString *const AVPlayerItemPlaybackStalledNotification       API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));    // media did not arrive in time to continue playback
-AVF_EXPORT NSString *const AVPlayerItemNewAccessLogEntryNotification	 API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));	// a new access log entry has been added
-AVF_EXPORT NSString *const AVPlayerItemNewErrorLogEntryNotification		 API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));	// a new error log entry has been added
+AVF_EXPORT NSNotificationName const AVPlayerItemDidPlayToEndTimeNotification      API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0));   // item has played to its end time
+AVF_EXPORT NSNotificationName const AVPlayerItemFailedToPlayToEndTimeNotification API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0));   // item has failed to play to its end time
+AVF_EXPORT NSNotificationName const AVPlayerItemPlaybackStalledNotification       API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));    // media did not arrive in time to continue playback
+AVF_EXPORT NSNotificationName const AVPlayerItemNewAccessLogEntryNotification	 API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));	// a new access log entry has been added
+AVF_EXPORT NSNotificationName const AVPlayerItemNewErrorLogEntryNotification		 API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0), watchos(1.0));	// a new error log entry has been added
 AVF_EXPORT NSNotificationName const AVPlayerItemRecommendedTimeOffsetFromLiveDidChangeNotification		 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0));	// the value of recommendedTimeOffsetFromLive has changed
 AVF_EXPORT NSNotificationName const AVPlayerItemMediaSelectionDidChangeNotification		API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0)); // a media selection group changed its selected option
 
@@ -240,7 +240,7 @@ NS_SWIFT_UI_ACTOR
  
  @discussion 
 	Indicates the size at which the visual portion of the item is presented by the player; can be scaled from this 
-	size to fit within the bounds of an AVPlayerLayer via its videoGravity property. Can be scaled arbitarily for presentation
+	size to fit within the bounds of an AVPlayerLayer via its videoGravity property. Can be scaled arbitrarily for presentation
 	via the frame property of an AVPlayerLayer.
 	
 	The value of this property will accord with the properties of the underlying media resource when the receiver becomes ready to play.
@@ -258,7 +258,7 @@ NS_SWIFT_UI_ACTOR
  
    This property must be accessed on the main thread/queue.
  */
-@property (nonatomic, readonly, nullable) NSArray<AVMetadataItem *> *timedMetadata NS_SWIFT_UI_ACTOR API_DEPRECATED("Use AVPlayerItemMetadataOutput to obtain timed metadata", macos(10.7, 10.15), ios(4.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) NSArray<AVMetadataItem *> *timedMetadata NS_SWIFT_UI_ACTOR API_DEPRECATED("Use AVPlayerItemMetadataOutput to obtain timed metadata", macos(10.7, 10.15), ios(4.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @property automaticallyLoadedAssetKeys
@@ -565,7 +565,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
  @discussion
    When audio spatialization is allowed for an AVPlayerItem, the AVPlayer may render multichannel audio if available even if the output device doesn't support multichannel audio on its own, via use of a synthetic channel layout. When audio spatialization is not allowed, the AVPlayer must render audio with a channel layout that best matches the capabilities of the output device. This property is not observable. Defaults to YES.
  */
-@property (nonatomic, assign, getter=isAudioSpatializationAllowed) BOOL audioSpatializationAllowed API_DEPRECATED_WITH_REPLACEMENT("allowedAudioSpatializationFormats", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic, assign, getter=isAudioSpatializationAllowed) BOOL audioSpatializationAllowed API_DEPRECATED_WITH_REPLACEMENT("allowedAudioSpatializationFormats", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos, watchos);
 
 /*!
  @property allowedAudioSpatializationFormats
@@ -858,7 +858,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
  @param			collector
 				An instance of AVPlayerItemMediaDataCollector
 */
-- (void)addMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
+- (void)addMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3));
 
 /*!
  @method		removeMediaDataCollector:
@@ -866,13 +866,13 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
  @param			collector
 				An instance of AVPlayerItemMediaDataCollector
 */
-- (void)removeMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
+- (void)removeMediaDataCollector:(AVPlayerItemMediaDataCollector *)collector API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3));
 
 /*!
  @property		mediaDataCollectors
  @abstract		The collection of associated mediaDataCollectors.
 */
-@property (nonatomic, readonly) NSArray<AVPlayerItemMediaDataCollector *> *mediaDataCollectors API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
+@property (nonatomic, readonly) NSArray<AVPlayerItemMediaDataCollector *> *mediaDataCollectors API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3));
 
 @end
 
@@ -886,7 +886,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 					The time seeked to may differ from the specified time for efficiency. For sample accurate seeking see seekToTime:toleranceBefore:toleranceAfter:.
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
  */
-- (void)seekToTime:(CMTime)time API_DEPRECATED("Use -seekToTime:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
+- (void)seekToTime:(CMTime)time API_DEPRECATED("Use -seekToTime:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method			seekToTime:toleranceBefore:toleranceAfter:
@@ -902,7 +902,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 					within the seekable ranges.
 					If the seek time is outside of seekable time ranges as indicated by seekableTimeRanges property, the seek request will be cancelled.
  */
-- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter API_DEPRECATED("Use -seekToTime:toleranceBefore:toleranceAfter:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
+- (void)seekToTime:(CMTime)time toleranceBefore:(CMTime)toleranceBefore toleranceAfter:(CMTime)toleranceAfter API_DEPRECATED("Use -seekToTime:toleranceBefore:toleranceAfter:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		seekToDate
@@ -914,7 +914,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
  @param			date	The new position for the playhead.
  @result		Returns true if the playhead was moved to the supplied date.
  */
-- (BOOL)seekToDate:(NSDate *)date API_DEPRECATED("Use -seekToDate:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
+- (BOOL)seekToDate:(NSDate *)date API_DEPRECATED("Use -seekToDate:completionHandler:, passing nil for the completionHandler if you don't require notification of completion", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @method		selectedMediaOptionInMediaSelectionGroup:
@@ -924,7 +924,7 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
  @discussion
    If the value of the property allowsEmptySelection of the AVMediaSelectionGroup is YES, the currently selected option in the group may be nil.
  */
-- (nullable AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup API_DEPRECATED("Use currentMediaSelection to obtain an instance of AVMediaSelection, which encompasses the currently selected AVMediaSelectionOption in each of the available AVMediaSelectionGroups", macos(10.8, 10.13), ios(5.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
+- (nullable AVMediaSelectionOption *)selectedMediaOptionInMediaSelectionGroup:(AVMediaSelectionGroup *)mediaSelectionGroup API_DEPRECATED("Use currentMediaSelection to obtain an instance of AVMediaSelection, which encompasses the currently selected AVMediaSelectionOption in each of the available AVMediaSelectionGroups", macos(10.8, 10.13), ios(5.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
 
 @end
 
@@ -936,7 +936,10 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
  @discussion	An AVPlayerItemAccessLog acculumulates key metrics about network playback and presents them as a collection 
  				of AVPlayerItemAccessLogEvent instances. Each AVPlayerItemAccessLogEvent instance collates the data 
  				that relates to each uninterrupted period of playback.
+
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemAccessLog : NSObject <NSCopying>
 {
@@ -979,7 +982,10 @@ AV_INIT_UNAVAILABLE
  @class			AVPlayerItemErrorLog
  @abstract		An AVPlayerItemErrorLog provides methods to retrieve the error log in a format suitable for serialization.
  @discussion	An AVPlayerItemErrorLog provides data to identify if, and when, network resource playback failures occured.
+
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemErrorLog : NSObject <NSCopying>
 {
@@ -1022,8 +1028,11 @@ AV_INIT_UNAVAILABLE
  @abstract		An AVPlayerItemAccessLogEvent represents a single log entry.
  @discussion	An AVPlayerItemAccessLogEvent provides named properties for accessing the data
 				fields of each log event. None of the properties of this class are observable.
+
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemAccessLogEvent : NSObject <NSCopying>
 {
@@ -1039,7 +1048,7 @@ AV_INIT_UNAVAILABLE
  				This property is not observable.
  				This property is deprecated. Use numberOfMediaRequests instead.
  */
-@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded API_DEPRECATED_WITH_REPLACEMENT("numberOfMediaRequests", macos(10.7, 10.9), ios(4.3, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) NSInteger numberOfSegmentsDownloaded API_DEPRECATED_WITH_REPLACEMENT("numberOfMediaRequests", macos(10.7, 10.9), ios(4.3, 7.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
  @property		numberOfMediaRequests
@@ -1209,7 +1218,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-observed-max-bitrate".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double observedMaxBitrate API_DEPRECATED("Use observedBitrateStandardDeviation to monitor variance in network bitrate.", macos(10.9, 12), ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
+@property (nonatomic, readonly) double observedMaxBitrate API_DEPRECATED("Use observedBitrateStandardDeviation to monitor variance in network bitrate.", macos(10.9, 12), ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0)) API_UNAVAILABLE(visionos);
 
 /*!
  @property		observedMinBitrate
@@ -1217,7 +1226,7 @@ AV_INIT_UNAVAILABLE
  @discussion	Value is negative if unknown. Corresponds to "c-observed-min-bitrate".
 				This property is not observable.
  */
-@property (nonatomic, readonly) double observedMinBitrate API_DEPRECATED("Use observedBitrateStandardDeviation to monitor variance in network bitrate.", macos(10.9, 12), ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0));
+@property (nonatomic, readonly) double observedMinBitrate API_DEPRECATED("Use observedBitrateStandardDeviation to monitor variance in network bitrate.", macos(10.9, 12), ios(7.0, 15.0), tvos(9.0, 15.0), watchos(1.0, 8.0)) API_UNAVAILABLE(visionos);
 
 /*!
  @property		observedBitrateStandardDeviation
@@ -1258,7 +1267,10 @@ AV_INIT_UNAVAILABLE
  @abstract		An AVPlayerItemErrorLogEvent represents a single log entry.
  @discussion	An AVPlayerItemErrorLogEvent provides named properties for accessing the data
 				fields of each log event. None of the properties of this class are observable.
+
+				Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVPlayerItemErrorLogEvent : NSObject <NSCopying>
 {

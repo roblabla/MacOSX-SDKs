@@ -17,6 +17,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Matter/MTRBaseDevice.h>
+#import <Matter/MTRDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -44,8 +45,8 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  * retrieved when performing actions using a combination of MTRBaseDevice
  * and MTRAsyncCallbackQueue.
  */
-+ (instancetype)deviceWithNodeID:(NSNumber *)nodeID
-                      controller:(MTRDeviceController *)controller API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
++ (MTRDevice *)deviceWithNodeID:(NSNumber *)nodeID
+                     controller:(MTRDeviceController *)controller API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
  * The current state of the device.
@@ -61,6 +62,21 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  *      The device is currently unreachable.
  */
 @property (nonatomic, readonly) MTRDeviceState state;
+
+/**
+ * The estimated device system start time.
+ *
+ * A device can report its events with either calendar time or time since system start time. When events are reported with time
+ * since system start time, this property will return an estimation of the device system start time. Because a device may report
+ * timestamps this way due to the lack of a wall clock, system start time can only be estimated based on event receive time and the
+ * timestamp value, and this estimation may change over time.
+ *
+ * Device reboots may also cause the estimated device start time to jump forward.
+ *
+ * If events are always reported with calendar time, then this property will return nil.
+ */
+@property (nonatomic, readonly, nullable)
+    NSDate * estimatedStartTime API_AVAILABLE(ios(16.5), macos(13.4), watchos(9.5), tvos(16.5));
 
 /**
  * Set the delegate to receive asynchronous callbacks about the device.
@@ -132,7 +148,10 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  * @param timeout   timeout in milliseconds for timed invoke, or nil. This value must be within [1, UINT16_MAX], and will be clamped
  * to this range.
  *
- * @param completion  response handler will receive either values or error.
+ * @param completion  response handler will receive either values or error.  A
+ *                    path-specific error status from the command invocation
+ *                    will result in an error being passed to the completion, so
+ *                    values will only be passed in when the command succeeds.
  */
 - (void)invokeCommandWithEndpointID:(NSNumber *)endpointID
                           clusterID:(NSNumber *)clusterID
@@ -166,6 +185,23 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
                                       completion:(MTRDeviceOpenCommissioningWindowHandler)completion
     API_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
 
+/**
+ * Open a commissioning window on the device, using a random setup passcode.
+ *
+ * On success, completion will be called on queue with the MTRSetupPayload that
+ * can be used to commission the device.
+ *
+ * @param discriminator The discriminator to use for the commissionable
+ *                      advertisement.
+ * @param duration      Duration, in seconds, during which the commissioning
+ *                      window will be open.
+ */
+- (void)openCommissioningWindowWithDiscriminator:(NSNumber *)discriminator
+                                        duration:(NSNumber *)duration
+                                           queue:(dispatch_queue_t)queue
+                                      completion:(MTRDeviceOpenCommissioningWindowHandler)completion
+    API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+
 @end
 
 @protocol MTRDeviceDelegate <NSObject>
@@ -186,6 +222,19 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
  * Notifies delegate of event reports from the MTRDevice
  *
  * @param eventReport  An array of response-value objects as described in MTRDeviceResponseHandler
+ *
+ *                In addition to the MTREventPathKey and MTRDataKey containing the path and event values, eventReport also contains
+ *                these keys:
+ *
+ *                MTREventNumberKey : NSNumber-wrapped uint64_t value. Monotonically increasing, and consecutive event reports
+ *                                    should have consecutive numbers unless device reboots, or if events are lost.
+ *                MTREventPriorityKey : NSNumber-wrapped MTREventPriority value.
+ *                MTREventTimeTypeKey : NSNumber-wrapped MTREventTimeType value.
+ *                MTREventSystemUpTimeKey : NSNumber-wrapped NSTimeInterval value.
+ *                MTREventTimestampDateKey : NSDate object.
+ *
+ *                Only one of MTREventTimestampDateKey and MTREventSystemUpTimeKey will be present, depending on the value for
+ *                MTREventTimeTypeKey.
  */
 - (void)device:(MTRDevice *)device receivedEventReport:(NSArray<NSDictionary<NSString *, id> *> *)eventReport;
 
@@ -205,9 +254,9 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
 /**
  * Deprecated MTRDevice APIs.
  */
-+ (instancetype)deviceWithNodeID:(uint64_t)nodeID
-                deviceController:(MTRDeviceController *)deviceController
-    API_DEPRECATED(
++ (MTRDevice *)deviceWithNodeID:(uint64_t)nodeID
+               deviceController:(MTRDeviceController *)deviceController
+    MTR_DEPRECATED(
         "Please use deviceWithNodeID:controller:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (void)invokeCommandWithEndpointID:(NSNumber *)endpointID
@@ -219,7 +268,7 @@ typedef NS_ENUM(NSUInteger, MTRDeviceState) {
                  timedInvokeTimeout:(NSNumber * _Nullable)timeout
                         clientQueue:(dispatch_queue_t)queue
                          completion:(MTRDeviceResponseHandler)completion
-    API_DEPRECATED("Please use "
+    MTR_DEPRECATED("Please use "
                    "invokeCommandWithEndpointID:clusterID:commandID:commandFields:expectedValues:expectedValueInterval:"
                    "timedInvokeTimeout:queue:completion:",
         ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));

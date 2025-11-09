@@ -17,16 +17,19 @@
 
 #import <Foundation/Foundation.h>
 
+#import <Matter/MTRCommissionableBrowserDelegate.h>
+#import <Matter/MTRDefines.h>
 #import <Matter/MTROperationalCertificateIssuer.h>
 
 @class MTRBaseDevice;
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_DEPRECATED("Please use MTRBaseDevice deviceWithNodeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+MTR_DEPRECATED("Please use MTRBaseDevice deviceWithNodeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NSError * _Nullable error);
 
 @class MTRCommissioningParameters;
+@class MTRCommissionableBrowserResult;
 @class MTRSetupPayload;
 @protocol MTRDevicePairingDelegate;
 @protocol MTRDeviceControllerDelegate;
@@ -85,6 +88,40 @@ typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NS
     API_AVAILABLE(ios(16.2), macos(13.1), watchos(9.2), tvos(16.2));
 
 /**
+ * Set up a commissioning session for a device, using the provided discovered
+ * result to connect to it.
+ *
+ * @param discoveredDevice a previously discovered device.
+ * @param payload a setup payload (probably created from a QR code or numeric
+ *                code onboarding payload).
+ * @param newNodeID the planned node id for the node.
+ * @error error indication if the commissioning session establishment can't start at all.
+ *
+ * The connection information for the device will be retrieved from the discovered device.
+ * A device discovered over DNS-SD will use the discovered IPs/ports, while a device discovered
+ * over BLE will use the underlying CBPeripheral.
+ *
+ * Then a PASE session will be established with the device, unless an error
+ * occurs.  MTRDeviceControllerDelegate will be notified as follows:
+ *
+ * * Invalid connection information: onStatusUpdate with MTRCommissioningStatusFailed.
+ *
+ * * Commissioning session setup fails: onPairingComplete with an error.
+ *
+ * * Commissioning session setup succeeds: onPairingComplete with no error.
+ *
+ * Once a commissioning session is set up, getDeviceBeingCommissioned
+ * can be used to get an MTRBaseDevice and discover what sort of network
+ * credentials the device might need, and commissionDevice can be used to
+ * commission the device.
+ */
+- (BOOL)setupCommissioningSessionWithDiscoveredDevice:(MTRCommissionableBrowserResult *)discoveredDevice
+                                              payload:(MTRSetupPayload *)payload
+                                            newNodeID:(NSNumber *)newNodeID
+                                                error:(NSError * __autoreleasing *)error
+    API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+
+/**
  * Commission the node with the given node ID.  The node ID must match the node
  * ID that was used to set up the commissioning session.
  */
@@ -140,6 +177,21 @@ typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NS
                               queue:(dispatch_queue_t)queue API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
 
 /**
+ * Start scanning for commissionable devices.
+ *
+ * This method will fail if the controller factory is not running or the browse has already been started.
+ */
+- (BOOL)startBrowseForCommissionables:(id<MTRCommissionableBrowserDelegate>)delegate
+                                queue:(dispatch_queue_t)queue API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+
+/**
+ * Stop scanning for commissionable devices.
+ *
+ * This method will fail if the controller factory is not running or the browse has not been started.
+ */
+- (BOOL)stopBrowseForCommissionables API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+
+/**
  * Return the attestation challenge for the secure session of the device being commissioned.
  *
  * Attempts to retrieve the attestation challenge for a commissionee with the given Device ID.
@@ -175,79 +227,79 @@ typedef void (^MTRDeviceConnectionCallback)(MTRBaseDevice * _Nullable device, NS
 
 @interface MTRDeviceController (Deprecated)
 
-@property (readonly, nonatomic, nullable) NSNumber * controllerNodeId API_DEPRECATED(
+@property (readonly, nonatomic, nullable) NSNumber * controllerNodeId MTR_DEPRECATED(
     "Please use controllerNodeID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (nullable NSData *)fetchAttestationChallengeForDeviceId:(uint64_t)deviceId
-    API_DEPRECATED(
+    MTR_DEPRECATED(
         "Please use attestationChallengeForDeviceID", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (BOOL)getBaseDevice:(uint64_t)deviceID
                 queue:(dispatch_queue_t)queue
     completionHandler:(MTRDeviceConnectionCallback)completionHandler
-    API_DEPRECATED("Please use [MTRBaseDevice deviceWithNodeID:controller:]", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
+    MTR_DEPRECATED("Please use [MTRBaseDevice deviceWithNodeID:controller:]", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
         tvos(16.1, 16.4));
 
 - (BOOL)pairDevice:(uint64_t)deviceID
      discriminator:(uint16_t)discriminator
       setupPINCode:(uint32_t)setupPINCode
              error:(NSError * __autoreleasing *)error
-    API_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+    MTR_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
         watchos(9.1, 9.4), tvos(16.1, 16.4));
 - (BOOL)pairDevice:(uint64_t)deviceID
            address:(NSString *)address
               port:(uint16_t)port
       setupPINCode:(uint32_t)setupPINCode
              error:(NSError * __autoreleasing *)error
-    API_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+    MTR_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
         watchos(9.1, 9.4), tvos(16.1, 16.4));
 - (BOOL)pairDevice:(uint64_t)deviceID
     onboardingPayload:(NSString *)onboardingPayload
                 error:(NSError * __autoreleasing *)error
-    API_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+    MTR_DEPRECATED("Please use setupCommissioningSessionWithPayload:newNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3),
         watchos(9.1, 9.4), tvos(16.1, 16.4));
 - (BOOL)commissionDevice:(uint64_t)deviceId
      commissioningParams:(MTRCommissioningParameters *)commissioningParams
                    error:(NSError * __autoreleasing *)error
-    API_DEPRECATED("Please use commissionNodeWithID:commissioningParams:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+    MTR_DEPRECATED("Please use commissionNodeWithID:commissioningParams:error:", ios(16.1, 16.4), macos(13.0, 13.3),
         watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (BOOL)stopDevicePairing:(uint64_t)deviceID
                     error:(NSError * __autoreleasing *)error
-    API_DEPRECATED(
+    MTR_DEPRECATED(
         "Please use cancelCommissioningForNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (nullable MTRBaseDevice *)getDeviceBeingCommissioned:(uint64_t)deviceId
                                                  error:(NSError * __autoreleasing *)error
-    API_DEPRECATED("Please use deviceBeingCommissionedWithNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
+    MTR_DEPRECATED("Please use deviceBeingCommissionedWithNodeID:error:", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4),
         tvos(16.1, 16.4));
 
 - (BOOL)openPairingWindow:(uint64_t)deviceID
                  duration:(NSUInteger)duration
                     error:(NSError * __autoreleasing *)error
-    API_DEPRECATED("Please use MTRDevice or MTRBaseDevice openCommissioningWindowWithSetupPasscode", ios(16.1, 16.4),
+    MTR_DEPRECATED("Please use MTRDevice or MTRBaseDevice openCommissioningWindowWithSetupPasscode", ios(16.1, 16.4),
         macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 - (nullable NSString *)openPairingWindowWithPIN:(uint64_t)deviceID
                                        duration:(NSUInteger)duration
                                   discriminator:(NSUInteger)discriminator
                                        setupPIN:(NSUInteger)setupPIN
                                           error:(NSError * __autoreleasing *)error
-    API_DEPRECATED("Please use MTRDevice or MTRBaseDevice openCommissioningWindowWithSetupPasscode", ios(16.1, 16.4),
+    MTR_DEPRECATED("Please use MTRDevice or MTRBaseDevice openCommissioningWindowWithSetupPasscode", ios(16.1, 16.4),
         macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (nullable NSData *)computePaseVerifier:(uint32_t)setupPincode
                               iterations:(uint32_t)iterations
                                     salt:(NSData *)salt
-    API_DEPRECATED("Please use computePASEVerifierForSetupPasscode:iterations:salt:error:", ios(16.1, 16.4), macos(13.0, 13.3),
+    MTR_DEPRECATED("Please use computePASEVerifierForSetupPasscode:iterations:salt:error:", ios(16.1, 16.4), macos(13.0, 13.3),
         watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (void)setPairingDelegate:(id<MTRDevicePairingDelegate>)delegate
-                     queue:(dispatch_queue_t)queue API_DEPRECATED("Please use setDeviceControllerDelegate:", ios(16.1, 16.4),
+                     queue:(dispatch_queue_t)queue MTR_DEPRECATED("Please use setDeviceControllerDelegate:", ios(16.1, 16.4),
                                macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
 - (void)setNocChainIssuer:(id<MTRNOCChainIssuer>)nocChainIssuer
                     queue:(dispatch_queue_t)queue
-    API_DEPRECATED("Please set the operationalCertificateIssuer in the MTRDeviceControllerStartupParams instead.", ios(16.1, 16.4),
+    MTR_DEPRECATED("Please set the operationalCertificateIssuer in the MTRDeviceControllerStartupParams instead.", ios(16.1, 16.4),
         macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 @end
 

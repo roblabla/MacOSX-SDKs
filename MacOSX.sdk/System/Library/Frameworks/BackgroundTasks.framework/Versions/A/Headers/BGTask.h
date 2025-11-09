@@ -108,6 +108,19 @@ BG_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, watchos)
 @end
 
 /*!
+ @abstract A potentially time-consuming task that is required to process data essential to a health research study.
+ */
+BG_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(macos, watchos, tvos)
+/// A task meant to perform processing on behalf of health research studies.
+///
+/// Health research tasks may only be used by applications entitled to perform
+/// studies and user's have opted in to the relevant study. These apps must have the
+/// `com.apple.developer.backgroundtasks.healthresearch` entitlement.
+@interface BGHealthResearchTask : BGProcessingTask
+
+@end
+
+/*!
  @abstract A background task used to update your app's contents in the background.
  */
 BG_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(macos, watchos)

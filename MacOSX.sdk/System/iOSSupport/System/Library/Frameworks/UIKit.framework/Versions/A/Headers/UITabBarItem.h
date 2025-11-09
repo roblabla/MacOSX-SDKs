@@ -50,9 +50,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 /*  These methods are now deprecated. Please use -initWithTitle:image:selectedImage:.
  */
-- (void)setFinishedSelectedImage:(nullable UIImage *)selectedImage withFinishedUnselectedImage:(nullable UIImage *)unselectedImage API_DEPRECATED("Use initWithTitle:image:selectedImage: or the image and selectedImage properties along with UIImageRenderingModeAlwaysOriginal", ios(5.0, 7.0)) API_UNAVAILABLE(tvos);
-- (nullable UIImage *)finishedSelectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(tvos);
-- (nullable UIImage *)finishedUnselectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(tvos);
+- (void)setFinishedSelectedImage:(nullable UIImage *)selectedImage withFinishedUnselectedImage:(nullable UIImage *)unselectedImage API_DEPRECATED("Use initWithTitle:image:selectedImage: or the image and selectedImage properties along with UIImageRenderingModeAlwaysOriginal", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (nullable UIImage *)finishedSelectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (nullable UIImage *)finishedUnselectedImage API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 /* To set item label text attributes use the appearance selectors available on the superclass, UIBarItem.
 

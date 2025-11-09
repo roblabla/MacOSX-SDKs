@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-macosx13.3 -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -module-name RegexBuilder
-// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.8.0.117.59
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-macosx14.0 -enable-objc-interop -enable-library-evolution -module-link-name swiftRegexBuilder -swift-version 5 -O -library-level api -enforce-exclusivity=unchecked -module-name RegexBuilder
+// swift-module-flags-ignorable: -enable-lexical-lifetimes=false -target-min-inlining-version min -user-module-version 5.9.0.123.203
 import Swift
 import _StringProcessing
 extension Swift.BidirectionalCollection where Self.SubSequence == Swift.Substring {
@@ -307,73 +307,95 @@ extension _StringProcessing.Regex.Match {
 @usableFromInline
 internal func makeFactory() -> _StringProcessing._RegexFactory
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
+extension _StringProcessing._RegexFactory {
+  @_alwaysEmitIntoClient internal func accumulate<Output>(_ left: some RegexComponent, ignoringOutputTypeOf right: some RegexComponent) -> _StringProcessing.Regex<Output> {
+    if #available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *) {
+      return accumulate(left, ignoreCapturesInTypedOutput(right))
+    }
+    return accumulate(left, right)
+  }
+  @_alwaysEmitIntoClient internal func accumulate<Output>(ignoringOutputTypeOf left: some RegexComponent, _ right: some RegexComponent) -> _StringProcessing.Regex<Output> {
+    if #available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *) {
+      return accumulate(ignoreCapturesInTypedOutput(left), right)
+    }
+    return accumulate(left, right)
+  }
+  @_alwaysEmitIntoClient internal func accumulate<Output>(ignoringOutputTypeOf left: some RegexComponent, andAlso right: some RegexComponent) -> _StringProcessing.Regex<Output> {
+    if #available(macOS 14.0, iOS 17.0, watchOS 10.0, tvOS 17.0, *) {
+      return accumulate(
+        ignoreCapturesInTypedOutput(left), ignoreCapturesInTypedOutput(right))
+    }
+    return accumulate(left, right)
+  }
+}
+@available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1)>) -> _StringProcessing.Regex<(Swift.Substring, C1)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3, C4>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3, C4)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3, C4)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3, C4, C5>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3, C4, C5)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3, C4, C5)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3, C4, C5, C6>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3, C4, C5, C6)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3, C4, C5, C6)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3, C4, C5, C6, C7>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3, C4, C5, C6, C7)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3, C4, C5, C6, C7)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3, C4, C5, C6, C7, C8>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3, C4, C5, C6, C7, C8)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3, C4, C5, C6, C7, C8)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3, C4, C5, C6, C7, C8, C9>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3, C4, C5, C6, C7, C8, C9)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3, C4, C5, C6, C7, C8, C9)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, W1, C1, C2, C3, C4, C5, C6, C7, C8, C9, C10>(accumulated: some RegexComponent<W0>, next: some RegexComponent<(W1, C1, C2, C3, C4, C5, C6, C7, C8, C9, C10)>) -> _StringProcessing.Regex<(Swift.Substring, C1, C2, C3, C4, C5, C6, C7, C8, C9, C10)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
@@ -695,87 +717,77 @@ extension RegexBuilder.RegexComponentBuilder {
 extension RegexBuilder.RegexComponentBuilder {
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0>(accumulated: some RegexComponent<W0>, next: some RegexComponent) -> _StringProcessing.Regex<Swift.Substring> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(ignoringOutputTypeOf: accumulated, andAlso: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0>(accumulated: some RegexComponent<(W0, C0)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1>(accumulated: some RegexComponent<(W0, C0, C1)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2>(accumulated: some RegexComponent<(W0, C0, C1, C2)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2, C3>(accumulated: some RegexComponent<(W0, C0, C1, C2, C3)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2, C3)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2, C3, C4>(accumulated: some RegexComponent<(W0, C0, C1, C2, C3, C4)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2, C3, C4)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2, C3, C4, C5>(accumulated: some RegexComponent<(W0, C0, C1, C2, C3, C4, C5)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2, C3, C4, C5)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2, C3, C4, C5, C6>(accumulated: some RegexComponent<(W0, C0, C1, C2, C3, C4, C5, C6)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2, C3, C4, C5, C6)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2, C3, C4, C5, C6, C7>(accumulated: some RegexComponent<(W0, C0, C1, C2, C3, C4, C5, C6, C7)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2, C3, C4, C5, C6, C7)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2, C3, C4, C5, C6, C7, C8>(accumulated: some RegexComponent<(W0, C0, C1, C2, C3, C4, C5, C6, C7, C8)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2, C3, C4, C5, C6, C7, C8)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
 extension RegexBuilder.RegexComponentBuilder {
-  @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)
   @_alwaysEmitIntoClient public static func buildPartialBlock<W0, C0, C1, C2, C3, C4, C5, C6, C7, C8, C9>(accumulated: some RegexComponent<(W0, C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)>, next: some RegexComponent) -> _StringProcessing.Regex<(Swift.Substring, C0, C1, C2, C3, C4, C5, C6, C7, C8, C9)> {
     let factory = makeFactory()
-    return factory.accumulate(accumulated, next)
+    return factory.accumulate(accumulated, ignoringOutputTypeOf: next)
   }
 }
 @available(macOS 13.0, iOS 16.0, watchOS 9.0, tvOS 16.0, *)

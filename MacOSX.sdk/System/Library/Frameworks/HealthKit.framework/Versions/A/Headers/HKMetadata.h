@@ -274,6 +274,13 @@ HK_EXTERN NSString * const HKMetadataKeyWorkoutBrandName API_AVAILABLE(ios(8.0),
 HK_EXTERN NSString * const HKMetadataKeyGroupFitness API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
 
 /*!
+  @constant      HKMetadataKeyAppleFitnessPlusSession
+  @abstract      Represents whether or not a workout is a Fitness+ workout.
+  @discussion    The expected value type is an NSNumber containing a BOOL value.
+  */
+HK_EXTERN NSString * const HKMetadataKeyAppleFitnessPlusSession API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
  @constant      HKMetadataKeyIndoorWorkout
  @abstract      Represents whether or not a workout was performed indoors as opposed to outdoors.
  @discussion    The expected value type is an NSNumber containing a BOOL value.
@@ -697,11 +704,84 @@ HK_EXTERN NSString * const HKMetadataKeyQuantityClampedToUpperBound API_AVAILABL
  HK_EXTERN NSString * const HKMetadataKeyGlassesPrescriptionDescription API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));
 
 /*!
+ @enum          HKWaterSalinity
+ @abstract      Represents the water salinity for an underwater depth or water temperature sample.
+ @discussion    This value indicates the water salinity
+ */
+typedef NS_ENUM(NSInteger, HKWaterSalinity) {
+    HKWaterSalinityFreshWater = 1,
+    HKWaterSalinitySaltWater,
+} API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
+ @constant      HKMetadataKeyWaterSalinity
+ @abstract      Represents the water salinity for an underwater depth or water temperature sample.
+ @discussion    The expected value type is an NSNumber containing a HKWaterSalinity value.
+ */
+HK_EXTERN NSString * const HKMetadataKeyWaterSalinity API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
  @constant      HKMetadataKeyHeadphoneGain
  @abstract      Represents the headphone gain associated with a Headphone audio exposure event.
  @discussion    The expected value is an HKQuantity whose value is the gain
                 associated with the event measured in decibels in A-weighted Sound Pressure Level units.
  */
-HK_EXTERN NSString * const HKMetadataKeyHeadphoneGain API_AVAILABLE(ios(16.4), watchos(9.4), macCatalyst(16.4), macos(13.4));
+HK_EXTERN NSString * const HKMetadataKeyHeadphoneGain API_AVAILABLE(ios(16.4), watchos(9.4), macCatalyst(16.4), macos(13.3));
+
+/*!
+ @constant      HKMetadataKeyCyclingFunctionalThresholdPowerTestType
+ @abstract      Represents the test used to determine a Cycling Functional Threshold Power value.
+ @discussion    The expected value type is an NSNumber containing a HKCyclingFunctionalThresholdPowerTestType value.
+ */
+HK_EXTERN NSString * const HKMetadataKeyCyclingFunctionalThresholdPowerTestType API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
+ @enum          HKCyclingFunctionalThresholdPowerTestType
+ @abstract      Represents the test used to determine a Cycling Functional Threshold Power value.
+
+ @constant      HKCyclingFunctionalThresholdPowerTestTypeMaxExercise60Minute        The user was exerted to their physical limit for a sustained period of 60 minutes.
+ @constant      HKCyclingFunctionalThresholdPowerTestTypeMaxExercise20Minute        The user was exerted to their physical limit for a sustained period of 20 minutes.
+ @constant      HKCyclingFunctionalThresholdPowerTestTypeRampTest                   Test with gradual intensity increase until exhaustion.
+ @constant      HKCyclingFunctionalThresholdPowerTestTypePredictionExercise         An equation was used based on data from the user’s cycling workouts to calculate a predicted Cycling Functional Threshold Power.
+ */
+typedef NS_ENUM(NSInteger, HKCyclingFunctionalThresholdPowerTestType) {
+    HKCyclingFunctionalThresholdPowerTestTypeMaxExercise60Minute = 1,
+    HKCyclingFunctionalThresholdPowerTestTypeMaxExercise20Minute,
+    HKCyclingFunctionalThresholdPowerTestTypeRampTest,
+    HKCyclingFunctionalThresholdPowerTestTypePredictionExercise,
+} API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
+ @constant      HKMetadataKeyActivityType
+ @abstract      Represents the activity type related to the sample
+ @discussion    The expected value type is an NSNumber containing a HKWorkoutActivityType value.
+ */
+HK_EXTERN NSString * const HKMetadataKeyActivityType API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
+ @constant      HKMetadataKeyPhysicalEffortEstimationType
+ @abstract      Represents the estimation type used to create the Physical Effort Sample
+ @discussion    The expected value type is an NSNumber containing a HKPhysicalEffortEstimationType value.
+ */
+HK_EXTERN NSString * const HKMetadataKeyPhysicalEffortEstimationType API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
+ @enum          HKPhysicalEffortEstimationType
+ @abstract      Represents the estimation used to create a Physical Effort Sample.
+ 
+ @constant      HKPhysicalEffortEstimationTypeActivityLookup Indicates the value was calculated based on external standard such as a stationary bike
+ @constant      HKPhysicalEffortEstimationTypeDeviceSensed  Indicates the value was calculated based on movement signals (walking, running etc.)
+ */
+typedef NS_ENUM(NSInteger, HKPhysicalEffortEstimationType) {
+    HKPhysicalEffortEstimationTypeActivityLookup = 1,
+    HKPhysicalEffortEstimationTypeDeviceSensed,
+} API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
+
+/*!
+ @constant      HKMetadataKeyMaximumLightIntensity
+ @abstract      Represents maximum intensity of light for an outdoor time sample.
+ @discussion    The expected value type is an HKQuantity expressed in HKUnit Lux.
+ */
+HK_EXTERN NSString * const HKMetadataKeyMaximumLightIntensity API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));
 
 NS_ASSUME_NONNULL_END

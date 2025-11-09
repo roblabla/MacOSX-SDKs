@@ -77,5 +77,3 @@ Tags:
   SwiftName: TKSmartCardUserInteractionForPINOperation.Completion
 - Name: TKSmartCardPINConfirmation
   SwiftName: TKSmartCardUserInteractionForSecurePINChange.Confirmation
-- Name: TKErrorCode
-  NSErrorDomain: TKErrorDomain

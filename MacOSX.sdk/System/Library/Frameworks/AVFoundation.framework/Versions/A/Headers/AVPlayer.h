@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2022 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -566,7 +566,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 					Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.
 					Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
-- (id)addPeriodicTimeObserverForInterval:(CMTime)interval queue:(nullable dispatch_queue_t)queue usingBlock:(void (^)(CMTime time))block;
+- (id)addPeriodicTimeObserverForInterval:(CMTime)interval queue:(nullable dispatch_queue_t)queue usingBlock:(void (^ NS_SWIFT_SENDABLE)(CMTime time))block;
 
 /*!
 	@method			addBoundaryTimeObserverForTimes:queue:usingBlock:
@@ -584,7 +584,7 @@ API_AVAILABLE(macos(10.8), ios(6.0), tvos(9.0), watchos(1.0));
 	@discussion		Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.
 					Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
-- (id)addBoundaryTimeObserverForTimes:(NSArray<NSValue *> *)times queue:(nullable dispatch_queue_t)queue usingBlock:(void (^)(void))block;
+- (id)addBoundaryTimeObserverForTimes:(NSArray<NSValue *> *)times queue:(nullable dispatch_queue_t)queue usingBlock:(void (^ NS_SWIFT_SENDABLE)(void))block;
 
 /*!
 	@method			removeTimeObserver:
@@ -713,19 +713,19 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 @interface AVPlayer (AVPlayerExternalPlaybackSupport)
 
 /* Indicates whether the player allows switching to "external playback" mode. The default value is YES. */
-@property BOOL allowsExternalPlayback API_AVAILABLE(macos(10.11), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property BOOL allowsExternalPlayback API_AVAILABLE(macos(10.11), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos, visionos);
 
 /* Indicates whether the player is currently playing video in "external playback" mode. */
-@property (readonly, getter=isExternalPlaybackActive) BOOL externalPlaybackActive API_AVAILABLE(macos(10.11), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+@property (readonly, getter=isExternalPlaybackActive) BOOL externalPlaybackActive API_AVAILABLE(macos(10.11), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos, visionos);
 
 /* Indicates whether the player should automatically switch to "external playback" mode while the "external 
 	screen" mode is active in order to play video content and switching back to "external screen" mode as soon 
 	as playback is done. Brief transition may be visible on the external display when automatically switching 
 	between the two modes. The default value is NO. Has no effect if allowsExternalPlayback is NO. */
-@property BOOL usesExternalPlaybackWhileExternalScreenIsActive API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
+@property BOOL usesExternalPlaybackWhileExternalScreenIsActive API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos, visionos);
 
 /* Video gravity strictly for "external playback" mode, one of AVLayerVideoGravity* defined in AVAnimation.h */
-@property (nonatomic, copy) AVLayerVideoGravity externalPlaybackVideoGravity API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos);
+@property (nonatomic, copy) AVLayerVideoGravity externalPlaybackVideoGravity API_AVAILABLE(ios(6.0), tvos(9.0)) API_UNAVAILABLE(macos, watchos, visionos);
 
 @end
 
@@ -735,16 +735,16 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0));
 
 /* Indicates whether the player allows AirPlay Video playback. The default value is YES. 
 	This property is deprecated. Use AVPlayer's -allowsExternalPlayback instead. */
-@property BOOL allowsAirPlayVideo API_DEPRECATED_WITH_REPLACEMENT("allowsExternalPlayback", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+@property BOOL allowsAirPlayVideo API_DEPRECATED_WITH_REPLACEMENT("allowsExternalPlayback", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(macos);
 
 /* Indicates whether the player is currently playing video via AirPlay. 
 	This property is deprecated. Use AVPlayer's -externalPlaybackActive instead.*/
-@property (readonly, getter=isAirPlayVideoActive) BOOL airPlayVideoActive API_DEPRECATED_WITH_REPLACEMENT("externalPlaybackActive", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+@property (readonly, getter=isAirPlayVideoActive) BOOL airPlayVideoActive API_DEPRECATED_WITH_REPLACEMENT("externalPlaybackActive", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(macos);
 
 /* Indicates whether the player should automatically switch to AirPlay Video while AirPlay Screen is active in order to play video content, switching back to AirPlay Screen as soon as playback is done. 
 	The default value is NO. Has no effect if allowsAirPlayVideo is NO.
 	This property is deprecated. Use AVPlayer's -usesExternalPlaybackWhileExternalScreenIsActive instead. */
-@property BOOL usesAirPlayVideoWhileAirPlayScreenIsActive API_DEPRECATED_WITH_REPLACEMENT("usesExternalPlaybackWhileExternalScreenIsActive", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(macos);
+@property BOOL usesAirPlayVideoWhileAirPlayScreenIsActive API_DEPRECATED_WITH_REPLACEMENT("usesExternalPlaybackWhileExternalScreenIsActive", ios(5.0, 6.0), tvos(9.0, 9.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(macos);
 
 @end
 
@@ -866,8 +866,20 @@ AVF_EXPORT NSNotificationName const AVPlayerEligibleForHDRPlaybackDidChangeNotif
 #if ! AVF_DEPLOYING_TO_2022_RELEASES_AND_LATER
 NS_SWIFT_UI_ACTOR
 #endif
-API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos);
+API_AVAILABLE(macos(10.14), ios(12.0), tvos(12.0)) API_UNAVAILABLE(watchos, visionos);
 
+@end
+
+@interface AVPlayer (AVPlayerAutomaticBackgroundPrevention)
+
+/*!
+ @property   preventsAutomaticBackgroundingDuringVideoPlayback
+ @abstract   Indicates whether video playback prevents the app from automatically getting backgrounded.
+ @discussion
+	 Default value is YES.
+	 Setting this property to YES prevents an application that is playing video from automatically getting backgrounded.  This property does not prevent the user from backgrounding the application.
+ */
+@property (nonatomic) BOOL preventsAutomaticBackgroundingDuringVideoPlayback API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(macos, ios, tvos, watchos);
 @end
 
 @interface AVPlayer (AVPlayerBackgroundSupport)
@@ -936,10 +948,10 @@ typedef NS_ENUM(NSInteger, AVPlayerAudiovisualBackgroundPlaybackPolicy) {
 
 		For further information about Media Accessibility preferences, see MediaAccessibility framework documentation.
  */
-@property (getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled API_DEPRECATED("Allow AVPlayer to enable closed captions automatically according to user preferences by ensuring that the value of appliesMediaSelectionCriteriaAutomatically is YES.", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos);
+@property (getter=isClosedCaptionDisplayEnabled) BOOL closedCaptionDisplayEnabled API_DEPRECATED("Allow AVPlayer to enable closed captions automatically according to user preferences by ensuring that the value of appliesMediaSelectionCriteriaAutomatically is YES.", macos(10.7, 10.13), ios(4.0, 11.0), tvos(9.0, 11.0)) API_UNAVAILABLE(watchos, visionos);
 
 /* Use sourceClock instead. */
-@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMClockRef masterClock API_DEPRECATED_WITH_REPLACEMENT( "sourceClock", macos(10.8, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+@property (nonatomic, retain, nullable) __attribute__((NSObject)) CMClockRef masterClock API_DEPRECATED_WITH_REPLACEMENT( "sourceClock", macos(10.8, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 
 @end
 

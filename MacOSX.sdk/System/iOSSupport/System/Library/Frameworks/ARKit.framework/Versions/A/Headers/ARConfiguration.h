@@ -102,7 +102,6 @@ typedef NS_ENUM(NSInteger, AREnvironmentTexturing) {
 } NS_SWIFT_NAME(ARWorldTrackingConfiguration.EnvironmentTexturing);
 
 
-
 /**
  Types of scene reconstruction.
  */
@@ -186,7 +185,8 @@ API_AVAILABLE(ios(11.0))
  Returns a pointer to the capture device of the camera that's used for rendering, so developers can adjust capture settings.
  @discussion May return nil if it is not recommended to modify capture settings, for example if the primary camera is used for tracking.
  */
-@property (class, nonatomic, nullable, readonly) AVCaptureDevice *configurableCaptureDeviceForPrimaryCamera API_AVAILABLE(ios(16.0));
+@property (class, nonatomic, nullable, readonly) AVCaptureDevice *configurableCaptureDeviceForPrimaryCamera
+API_AVAILABLE(ios(16.0));
 
 /**
  Returns a video format using a 4K resolution from the list of supported video formats.
@@ -241,7 +241,6 @@ API_AVAILABLE(ios(11.0))
  Determines whether environment textures will be provided with high dynamic range. Enabled by default.
  */
 @property (nonatomic, assign) BOOL wantsHDREnvironmentTextures API_AVAILABLE(ios(13.0));
-
 
 /**
  Type of planes to detect in the scene.

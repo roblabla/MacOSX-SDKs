@@ -10,6 +10,8 @@
 #import <ScreenCaptureKit/SCStream.h>
 #import <ScreenCaptureKit/SCShareableContent.h>
 #import <ScreenCaptureKit/SCError.h>
+#import <ScreenCaptureKit/SCContentSharingPicker.h>
+#import <ScreenCaptureKit/SCScreenshotManager.h>
 
 
 

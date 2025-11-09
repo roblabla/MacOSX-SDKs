@@ -2,7 +2,7 @@
 //  VZSocketDeviceConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @abstract Base class for a socket device configuration.
  @discussion
-    VZNetworkDeviceConfiguration should not be instantiated directly.
+    VZSocketDeviceConfiguration should not be instantiated directly.
     One of its subclasses like VZVirtioSocketDeviceConfiguration should be used instead.
 
  @see VZVirtioSocketDeviceConfiguration

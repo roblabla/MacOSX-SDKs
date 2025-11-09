@@ -25,7 +25,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(11.0)) NS_SWIFT_UI_ACTOR
 /// Return the focus system that the provided environment is contained in. Returns nil if focus
 /// interaction is not supported, or if the environment is not associated with any focus system.
 #if __swift__
-+ (nullable UIFocusSystem *)focusSystemForEnvironment:(id<UIFocusEnvironment>)environment API_DEPRECATED("Use UIFocusSystem.focusSystem(for:) instead.", tvos(12.0, 15.0), ios(12.0, 15.0));
++ (nullable UIFocusSystem *)focusSystemForEnvironment:(id<UIFocusEnvironment>)environment API_DEPRECATED("Use UIFocusSystem.focusSystem(for:) instead.", tvos(12.0, 15.0), ios(12.0, 15.0), visionos(1.0, 1.0));
 #else
 + (nullable UIFocusSystem *)focusSystemForEnvironment:(id<UIFocusEnvironment>)environment API_AVAILABLE(tvos(12.0), ios(12.0));
 #endif

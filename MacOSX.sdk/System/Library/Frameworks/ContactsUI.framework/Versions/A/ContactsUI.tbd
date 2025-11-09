@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/ContactsUI.framework/Versions/A/ContactsUI'
-current-version: 2539.8
+current-version: 2563
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -32,6 +32,13 @@ exports:
                        '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvpMV', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvsTj', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC17hostingControllerSo06NSViewH0CvsTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC18enableStatusBadgesSbvMTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC18enableStatusBadgesSbvMTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC18enableStatusBadgesSbvgTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC18enableStatusBadgesSbvgTq', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC18enableStatusBadgesSbvpMV', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC18enableStatusBadgesSbvsTj', 
+                       '_$s10ContactsUI24ContactHeaderViewWrapperC18enableStatusBadgesSbvsTq', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC7contact011quickActionE5Style8delegateACSo9CNContactC_AA0cdefieJ0OAA0cdeF8Delegate_pSgtcfC', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC7contact011quickActionE5Style8delegateACSo9CNContactC_AA0cdefieJ0OAA0cdeF8Delegate_pSgtcfCTj', 
                        '_$s10ContactsUI24ContactHeaderViewWrapperC7contact011quickActionE5Style8delegateACSo9CNContactC_AA0cdefieJ0OAA0cdeF8Delegate_pSgtcfCTq', 

@@ -32,10 +32,6 @@
 #include <DriverKit/IOCommand.iig>
 
 
-#define LIBKERN_CONSUMED
-#define LIBKERN_RETURNS_NOT_RETAINED
-
-
 class IOCommandPool;
 typedef IOCommandPool * IOCommandPoolPtr;
 

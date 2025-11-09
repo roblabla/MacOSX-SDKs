@@ -321,7 +321,10 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 		Prepare the engine for starting.
 
 	This method preallocates many of the resources the engine requires in order to start.
-	It can be used to be able to start more responsively.
+    Use it to responsively start audio input or output.
+ 
+    On AVAudioSession supported platforms, this method may cause the audio session to be implicitly activated. Activating the audio session (implicitly or explicitly) may cause other audio sessions to be interrupted or ducked depending on the session's configuration. It is recommended to configure and activate the app's audio session before preparing the engine.
+    See https://developer.apple.com/library/archive/documentation/Audio/Conceptual/AudioSessionProgrammingGuide/Introduction/Introduction.html for details.
 */
 - (void)prepare;
 
@@ -343,6 +346,8 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	3. The driver failed to start the hardware.
 
 	In manual rendering mode, prepares the engine to render when requested by the client.
+ 
+    On AVAudioSession supported platforms, this method may cause the audio session to be implicitly activated. It is recommended to configure and activate the app's audio session before starting the engine. For more information, see the `prepare` method above.
 */
 - (BOOL)startAndReturnError:(NSError **)outError;
 
@@ -452,12 +457,17 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(2.0), tvos(9.0))
 	the input node, or create a recording tap on it.
 
 	When the engine is rendering to/from an audio device, the AVAudioSesssion category and/or
-	availability of hardware determine whether an app can perform input (e.g. input hardware is
-	not available on tvos). Check for the input node's input format (i.e. hardware format) for
-	non-zero sample rate and channel count to see if input is enabled.
-	Trying to perform input through the input node when it is not enabled or available will 
+	availability of hardware determine whether an app can perform input. Check for the input node's
+    input format (i.e. hardware format) for non-zero sample rate and channel count to see if input is enabled.
+	Trying to perform input through the input node when it is not enabled or available will
 	cause the engine to throw an error (when possible) or an exception.
 
+	Note that if the engine has at any point previously had its inputNode enabled and permission to
+	record was granted, then any time the engine is running, the mic-in-use indicator will appear.
+
+	For applications which may need to dynamically switch between output-only and input-output
+	modes, it may be advantageous to use two engine instances.
+ 
 	In manual rendering mode, the input node can be used to synchronously supply data to
 	the engine while it is rendering (see 
 	`AVAudioInputNode(setManualRenderingInputPCMFormat:inputBlock:)`.

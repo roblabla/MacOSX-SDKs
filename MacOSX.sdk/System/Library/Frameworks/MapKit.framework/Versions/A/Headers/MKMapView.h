@@ -34,10 +34,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+#endif // MK_SUPPORTS_VIEW_CLASSES
+
+typedef NS_ENUM(NSInteger, MKOverlayLevel) {
+    MKOverlayLevelAboveRoads = 0, // note that labels include shields and point of interest icons.
+    MKOverlayLevelAboveLabels
+} API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.2), watchos(10.0));
+
+#if MK_SUPPORTS_VIEW_CLASSES
+
 typedef NS_ENUM(NSInteger, MKUserTrackingMode) {
 	MKUserTrackingModeNone = 0, // the user's location is not followed
 	MKUserTrackingModeFollow, // the map follows the user's location
-    MKUserTrackingModeFollowWithHeading API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos), // the map follows the user's location and heading
+    MKUserTrackingModeFollowWithHeading  // the map follows the user's location and heading
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
+API_UNAVAILABLE(macos) API_UNAVAILABLE(tvos),
 } API_AVAILABLE(ios(5.0), tvos(9.2), macos(11.0)) API_UNAVAILABLE(watchos);
 
 #if TARGET_OS_IOS
@@ -128,13 +141,20 @@ NS_CLASS_AVAILABLE(10_9, NA)
 @property (nonatomic, getter=isRotateEnabled) BOOL rotateEnabled NS_AVAILABLE(10_9, 7_0) API_UNAVAILABLE(tvos);
 @property (nonatomic, getter=isPitchEnabled) BOOL pitchEnabled NS_AVAILABLE(10_9, 7_0) API_UNAVAILABLE(tvos);
 
+@property (nonatomic, assign) BOOL showsUserTrackingButton API_AVAILABLE(ios(17.0), tvos(17.0), macos(14.0), macCatalyst(17.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic, assign) MKFeatureVisibility pitchButtonVisibility API_AVAILABLE(ios(17.0), tvos(17.0), macos(14.0), macCatalyst(17.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic) BOOL showsPitchControl API_AVAILABLE(macos(11.0), macCatalyst(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 @property (nonatomic) BOOL showsZoomControls API_AVAILABLE(macos(10.9), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
 @property (nonatomic) BOOL showsCompass NS_AVAILABLE(10_9, 9_0) API_UNAVAILABLE(tvos);
 @property (nonatomic) BOOL showsScale NS_AVAILABLE(10_10, 9_0);
 
 @property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_DEPRECATED_WITH_REPLACEMENT("Use pointOfInterestFilter on respective MKMapConfiguration", macos(10.15, API_TO_BE_DEPRECATED), ios(13.0, API_TO_BE_DEPRECATED), tvos(13.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
-@property (nonatomic) BOOL showsPointsOfInterest API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
+@property (nonatomic) BOOL showsPointsOfInterest
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+API_DEPRECATED("Use pointOfInterestFilter", macos(10.9, 10.15), ios(7.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(watchos); // Affects MKMapTypeStandard and MKMapTypeHybrid
+#endif
 @property (nonatomic) BOOL showsBuildings API_DEPRECATED("None", macos(10.9, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // Affects MKMapTypeStandard
 @property (nonatomic) BOOL showsTraffic API_DEPRECATED_WITH_REPLACEMENT("Use showsTraffic on respective MKMapConfiguration", macos(10.11, API_TO_BE_DEPRECATED), ios(9.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)); // Affects MKMapTypeStandard and MKMapTypeHybrid
 
@@ -187,11 +207,6 @@ NS_CLASS_AVAILABLE(10_9, NA)
 
 @end
 
-typedef NS_ENUM(NSInteger, MKOverlayLevel) {
-    MKOverlayLevelAboveRoads = 0, // note that labels include shields and point of interest icons.
-    MKOverlayLevelAboveLabels
-} NS_ENUM_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos);
-
 @interface MKMapView (OverlaysAPI)
 
 // Overlays are models used to represent areas to be drawn on top of the map.
@@ -219,7 +234,12 @@ typedef NS_ENUM(NSInteger, MKOverlayLevel) {
 #if TARGET_OS_IPHONE
 // Currently displayed view for overlay; returns nil if the view has not been created yet.
 // Prefer using MKOverlayRenderer and -rendererForOverlay.
-- (MKOverlayView *)viewForOverlay:(id <MKOverlay>)overlay API_DEPRECATED_WITH_REPLACEMENT("-rendererForOverlay:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+- (MKOverlayView *)viewForOverlay:(id <MKOverlay>)overlay
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+API_DEPRECATED_WITH_REPLACEMENT("-rendererForOverlay:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+#endif
 #endif
 
 // These methods operate implicitly on overlays in MKOverlayLevelAboveRoads and may be deprecated in a future release in favor of the methods that specify the level.
@@ -283,10 +303,20 @@ API_UNAVAILABLE(watchos)
 
 #if TARGET_OS_IPHONE
 // Prefer -mapView:rendererForOverlay:
-- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay API_DEPRECATED_WITH_REPLACEMENT("-mapView:rendererForOverlay:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+- (MKOverlayView *)mapView:(MKMapView *)mapView viewForOverlay:(id <MKOverlay>)overlay API_DEPRECATED_WITH_REPLACEMENT("-mapView:rendererForOverlay:", ios(4.0, 13.0))
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+API_UNAVAILABLE(macos, tvos, watchos);
+#endif
 // Called after the provided overlay views have been added and positioned in the map.
 // Prefer -mapView:didAddOverlayRenderers:
-- (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews API_DEPRECATED_WITH_REPLACEMENT("-mapView:didAddOverlayRenderers:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+- (void)mapView:(MKMapView *)mapView didAddOverlayViews:(NSArray *)overlayViews
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+API_DEPRECATED_WITH_REPLACEMENT("-mapView:didAddOverlayRenderers:", ios(4.0, 13.0)) API_UNAVAILABLE(macos, tvos, watchos);
+#endif
 #endif
 
 // Return nil for default MKClusterAnnotation, it is illegal to return a cluster annotation not containing the identical array of member annotations given.

@@ -17,6 +17,8 @@
 #import <CoreVideo/CVPixelBuffer.h>
 #import <CoreMedia/CMFormatDescription.h>
 
+#import <CoreMedia/CMTaggedBufferGroup.h>
+
 @class AVMetadataItem;
 @class AVAssetWriterInputInternal;
 @class AVCaption;
@@ -268,7 +270,7 @@ AV_INIT_UNAVAILABLE
  
 	This method throws an exception if this method is called more than once.
  */
-- (void)requestMediaDataWhenReadyOnQueue:(dispatch_queue_t)queue usingBlock:(void (^)(void))block;
+- (void)requestMediaDataWhenReadyOnQueue:(dispatch_queue_t)queue usingBlock:(void (^ NS_SWIFT_SENDABLE)(void))block;
 
 /*!
  @method appendSampleBuffer:
@@ -643,7 +645,7 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  
 	This method throws an exception if called more than once.
  */
-- (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t)block API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
+- (void)respondToEachPassDescriptionOnQueue:(dispatch_queue_t)queue usingBlock:(dispatch_block_t NS_SWIFT_SENDABLE)block API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
  @method markCurrentPassAsFinished
@@ -674,7 +676,10 @@ API_AVAILABLE(macos(10.7), ios(4.1), tvos(9.0)) API_UNAVAILABLE(watchos)
  @class AVAssetWriterInputPassDescription
  @abstract
 	Defines an interface for querying information about the requirements of the current pass, such as the time ranges of media data to append.
+ @discussion
+	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
  */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetWriterInputPassDescription : NSObject
 {
@@ -826,6 +831,138 @@ AV_INIT_UNAVAILABLE
 
 @end
 
+/*!
+ @class AVAssetWriterInputTaggedPixelBufferGroupAdaptor
+ @abstract
+	Defines an interface for appending tagged buffer groups packaged as CMTaggedBufferGroupRef objects to a single AVAssetWriterInput object.
+ 
+ @discussion
+	Instances of AVAssetWriterInputTaggedPixelBufferGroupAdaptor provide a CVPixelBufferPool that can be used to allocate the pixel buffers of tagged buffer groups for writing to the output file. Using the provided pixel buffer pool for buffer allocation is typically more efficient than appending pixel buffers allocated using a separate pool.
+ */
+API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos)
+@interface AVAssetWriterInputTaggedPixelBufferGroupAdaptor : NSObject
+AV_INIT_UNAVAILABLE
+
+/*!
+ @method assetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInput:sourcePixelBufferAttributes:
+ @abstract
+	Creates a new tagged buffer adaptor to receive tagged buffer groups for writing to the output file.
+
+ @param input
+	An instance of AVAssetWriterInput to which the receiver should append tagged buffer groups.  Currently, only asset writer inputs that accept media data of type AVMediaTypeVideo can be used to initialize a tagged buffer adaptor.
+ @param sourcePixelBufferAttributes
+	Specifies the attributes of pixel buffers of tagged buffer groups that will be vended by the input's CVPixelBufferPool.
+ @result
+	An instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor.
+
+ @discussion
+	In order to take advantage of the improved efficiency of appending buffers created from the adaptor's pixel buffer pool, clients should specify pixel buffer attributes that most closely accommodate the source format of the video frames being appended.
+
+	Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey.  For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: for advice on choosing a pixel format.
+
+	Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil.
+
+	This method throws an exception if the input is already attached to another asset writer input tagged buffer group adaptor or if the input has already started writing (the asset writer has progressed beyond AVAssetWriterStatusUnknown).
+ */
++ (instancetype)assetWriterInputTaggedPixelBufferGroupAdaptorWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)sourcePixelBufferAttributes;
+
+/*!
+ @method initWithAssetWriterInput:sourcePixelBufferAttributes:
+ @abstract
+	Creates a new tagged buffer group adaptor to receive tagged buffer groups for writing to the output file.
+
+ @param input
+	An instance of AVAssetWriterInput to which the receiver should append tagged buffer groups. In addition to the pixel buffer adaptor, asset writer inputs with media data of type AVMediaTypeVideo can be used to initialize a tagged buffer group adaptor.
+ @param sourcePixelBufferAttributes
+	Specifies the attributes of pixel buffers of tagged buffer groups that will be vended by the input's CVPixelBufferPool.
+ @result
+	An instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor.
+
+ @discussion
+	In order to take advantage of the improved efficiency of appending buffers created from the adaptor's pixel buffer pool, clients should specify pixel buffer attributes that most closely accommodate the source format of the video frames of tagged buffer groups being appended.
+
+	Pixel buffer attributes keys for the pixel buffer pool are defined in <CoreVideo/CVPixelBuffer.h>. To specify the pixel format type, the pixelBufferAttributes dictionary should contain a value for kCVPixelBufferPixelFormatTypeKey. For example, use [NSNumber numberWithInt:kCVPixelFormatType_32BGRA] for 8-bit-per-channel BGRA. See the discussion under appendPixelBuffer:withPresentationTime: in AVAssetWriterInputPixelBufferAdaptor for advice on choosing a pixel format.
+
+	Clients that do not need a pixel buffer pool for allocating buffers should set sourcePixelBufferAttributes to nil.
+	
+	It is an error to initialize an instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor with an asset writer input that is already attached to another instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor. It is also an error to initialize an instance of AVAssetWriterInputTaggedPixelBufferGroupAdaptor with an asset writer input whose asset writer has progressed beyond AVAssetWriterStatusUnknown.
+ */
+- (instancetype)initWithAssetWriterInput:(AVAssetWriterInput *)input sourcePixelBufferAttributes:(nullable NSDictionary<NSString *, id> *)sourcePixelBufferAttributes NS_DESIGNATED_INITIALIZER;
+
+/*!
+ @property assetWriterInput
+ @abstract
+	The asset writer input to which the receiver should append tagged buffer groups.
+ */
+@property (nonatomic, readonly) AVAssetWriterInput *assetWriterInput;
+
+/*!
+ @property sourcePixelBufferAttributes
+ @abstract
+	The pixel buffer attributes of pixel buffers that will be vended by the receiver's CVPixelBufferPool.
+
+ @discussion
+	The value of this property is a dictionary containing pixel buffer attributes keys defined in <CoreVideo/CVPixelBuffer.h>.
+ */
+@property (nonatomic, readonly, nullable) NSDictionary<NSString *, id> *sourcePixelBufferAttributes;
+
+/*!
+ @property pixelBufferPool
+ @abstract
+	A pixel buffer pool that will vend and efficiently recycle CVPixelBuffer objects of tagged buffer groups that can be appended to the receiver.
+
+ @discussion
+	For maximum efficiency, clients should create CVPixelBuffer objects of tagged buffer groups for appendTaggedPixelBufferGroup:withPresentationTime: by using this pool with the CVPixelBufferPoolCreatePixelBuffer() function.
+	
+	The value of this property will be NULL before -[AVAssetWriter startWriting] is called on the associated AVAssetWriter object. Clients should read this property after -[AVAssetWriter startWriting] calling to get a non-NULL value.
+	
+	This property is not key value observable.
+ */
+@property (nonatomic, readonly, nullable) CVPixelBufferPoolRef pixelBufferPool;
+
+/*!
+ @method appendTaggedPixelBufferGroup:withPresentationTime:
+ @abstract
+	Appends a tagged buffer group to the receiver.
+
+ @param taggedPixelBufferGroup
+	The CMTaggedBufferGroup to be appended. All of the buffers in taggedPixelBufferGroup should be CVPixelBuffers, and they should correspond to tag collections that contain kCMTagCategory_VideoLayerID values matching the list set using kVTCompressionPropertyKey_MVHEVCVideoLayerIDs. The pixel buffers should be IOSurface-backed.
+ @param presentationTime
+	The presentation time for the tagged buffer group to be appended. This time will be considered relative to the time passed to -[AVAssetWriter startSessionAtSourceTime:] to determine the timing of the frame in the output file.
+ @result
+	A BOOL value indicating success of appending the tagged buffer group. If a result of NO is returned, clients can check the value of AVAssetWriter.status to determine whether the writing operation completed, failed, or was cancelled. If the status is AVAssetWriterStatusFailed, AVAssetWriter.error will contain an instance of NSError that describes the failure.
+
+ @discussion
+	The receiver will retain the CMTaggedBufferGroup until it is done with it, and then release it. Do not modify a CMTaggedBufferGroup or its contents after you have passed it to this method.
+ 
+	Before calling this method, you must ensure that the input that underlies the receiver is attached to an AVAssetWriter via a prior call to -addInput: and that -startWriting has been called on the asset writer. It is an error to invoke this method before starting a session (via -[AVAssetWriter startSessionAtSourceTime:]) or after ending a session (via -[AVAssetWriter endSessionAtSourceTime:]).
+ 
+	In an AVAssetWriterInput instance creation with AVMediaTypeVideo, kVTCompressionPropertyKey_MVHEVCVideoLayerIDs key must be specified as part of the dictionary given for AVVideoCompressionPropertiesKey. It sets video layer IDs to a target multi-image video encoder. This method checks the values for kCMTagCategory_VideoLayerID tag in tag collections of taggedPixelBufferGroup over the array values for kVTCompressionPropertyKey_MVHEVCVideoLayerIDs key. An NSInvalidArgumentException will be raised if the video layer IDs mismatch between the value of kVTCompressionPropertyKey_MVHEVCVideoLayerIDs in the AVVideoCompressionPropertiesKey sub-dictionary of the input's outputSettings property and tag collections of taggedPixelBufferGroup.
+
+	Below is a sample code sketch focusing on data flow that illustrates how you might append a taggedPixelBufferGroup instance.
+	// Set up an AVAssetWriterInput and AVAssetWriterInputTaggedPixelBufferGroupAdaptor instance
+	AVAssetWriterInput *assetWriterInput = [[AVAssetWriterInput alloc] initWithMediaType:AVMediaTypeVideo outputSettings:@{
+									..,
+									AVVideoCompressionPropertiesKey: @{ (NSString *)kVTCompressionPropertyKey_MVHEVCVideoLayerIDs : .. }}];
+											 
+	AVAssetWriterInputTaggedPixelBufferGroupAdaptor *assetWriterInputAdaptor = [[AVAssetWriterInputTaggedPixelBufferGroupAdaptor alloc] initWithAssetWriterInput:assetWriterInput ..];
+
+	Later, when the writer input is ready for more media data, create and append a tagged buffer group containing one or more pixel buffers and the exact tag values associated with kCMTagCategory_VideoLayerID being specified via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs.
+	// Set up tag collection buffers
+	CMTag tags[] = CMTagMakeWithSInt64Value(kCMTagCategory_VideoLayerID, ..);
+	CMTagCollectionCreate(.., tags, FigCountOf(tags), &tagCollection);
+	CFArrayAppendValue(tagCollectionArray, tagCollection);
+
+	// Set up pixel buffers
+	CVPixelBufferPoolCreatePixelBuffer(.., &pixelBuffer);
+	CFArrayAppendValue(pixelBufferArray, pixelBuffer);
+
+	// Append a CMTaggedBufferGroupRef instance to asset writer input
+	CMTaggedBufferGroupCreate(.., tagCollectionArray, pixelBufferArray, &taggedBufferGroup);
+	[assetWriterInputAdaptor appendTaggedPixelBufferGroup:taggedBufferGroup ..];
+*/
+- (BOOL)appendTaggedPixelBufferGroup:(CMTaggedBufferGroupRef)taggedPixelBufferGroup withPresentationTime:(CMTime)presentationTime;
+@end
 
 @class AVTimedMetadataGroup;
 @class AVAssetWriterInputMetadataAdaptorInternal;

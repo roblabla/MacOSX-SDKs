@@ -4,11 +4,13 @@
  
     Framework:  AVFoundation
  
-	Copyright 2017-2021 Apple Inc. All rights reserved.
+	Copyright 2017-2023 Apple Inc. All rights reserved.
  
 */
 
 #import <AVFoundation/AVBase.h>
+#if TARGET_OS_OSX
+
 #import <AVFoundation/AVCaption.h>
 #import <AVFoundation/AVCaptionSettings.h>
 #import <Foundation/Foundation.h>
@@ -42,6 +44,7 @@ typedef NS_ENUM(NSInteger, AVCaptionConversionValidatorStatus) {
  @class         AVCaptionConversionValidator
  @abstract      Performs a validation of captions for a conversion operation and warns about problems that are encountered.
 */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface AVCaptionConversionValidator : NSObject
 AV_INIT_UNAVAILABLE
@@ -138,7 +141,9 @@ AVF_EXPORT AVCaptionConversionWarningType const AVCaptionConversionWarningTypeEx
 /*!
  @class         AVCaptionConversionWarning
  @abstract      Reports a specific problem encountered during the validation of a caption conversion.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface AVCaptionConversionWarning : NSObject
 AV_INIT_UNAVAILABLE
@@ -180,7 +185,9 @@ AVF_EXPORT AVCaptionConversionAdjustmentType const AVCaptionConversionAdjustment
 /*!
  @class         AVCaptionConversionAdjustment
  @abstract      Describes an adjustment that can be performed in order to correct a problem encountered during the validation of a caption conversion.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface AVCaptionConversionAdjustment : NSObject
 AV_INIT_UNAVAILABLE
@@ -196,7 +203,9 @@ AV_INIT_UNAVAILABLE
 /*!
  @class         AVCaptionConversionTimeRangeAdjustment
  @abstract      Describes an adjustment to the timeRange of one or more captions.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface AVCaptionConversionTimeRangeAdjustment : AVCaptionConversionAdjustment
 AV_INIT_UNAVAILABLE
@@ -218,6 +227,8 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // TARGET_OS_OSX
 
 #else
 #import <AVFCore/AVCaptionConversionValidator.h>

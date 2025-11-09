@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion
     The pixel data in the matting image is represented in CVPixelBuffers as kCVPixelFormatType_OneComponent8 ('L008'). It's stored in image files as an auxiliary image, accessible using CGImageSourceCopyAuxiliaryDataInfoAtIndex with the data type kCGImageAuxiliaryDataTypePortraitEffectsMatte (see <ImageIO/CGImageProperties.h>).
  */
-API_AVAILABLE(macos(10.14), ios(12.0), macCatalyst(14.0), tvos(12.0), watchos(5.0))
+API_AVAILABLE(macos(10.14), ios(12.0), macCatalyst(14.0), tvos(12.0), watchos(5.0), visionos(1.0))
 @interface AVPortraitEffectsMatte : NSObject
 {
 @private

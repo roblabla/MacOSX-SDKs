@@ -2,7 +2,7 @@
 /*!
 	@file		AVAudioSessionTypes.h
 	@framework	AudioSession.framework
-	@copyright	(c) 2009-2020 Apple Inc. All rights reserved.
+	@copyright	(c) 2009-2023 Apple Inc. All rights reserved.
 */
 
 #ifndef AudioSession_AVAudioSessionTypes_h
@@ -19,6 +19,8 @@
 typedef NSString *AVAudioSessionPort NS_STRING_ENUM;
 
 /* input port types */
+/// Continuity microphone for appletv.
+OS_EXPORT AVAudioSessionPort const AVAudioSessionPortContinuityMicrophone API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0)) API_UNAVAILABLE(macos);
 /// Line level input on a dock connector
 OS_EXPORT AVAudioSessionPort const AVAudioSessionPortLineIn      		API_AVAILABLE(ios(6.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 /// Built-in microphone on an iOS device
@@ -105,7 +107,7 @@ OS_EXPORT AVAudioSessionCategory const AVAudioSessionCategoryPlayAndRecord		API_
 
 /*! Use this category when using a hardware codec or signal processor while
  not playing or recording audio. */
-OS_EXPORT AVAudioSessionCategory const AVAudioSessionCategoryAudioProcessing API_DEPRECATED("No longer supported", ios(3.0, 10.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(macos);
+OS_EXPORT AVAudioSessionCategory const AVAudioSessionCategoryAudioProcessing API_DEPRECATED("No longer supported", ios(3.0, 10.0)) API_UNAVAILABLE(watchos, tvos, macos);
 
 /*! Use this category to customize the usage of available audio accessories and built-in audio hardware.
  For example, this category provides an application with the ability to use an available USB output
@@ -150,7 +152,8 @@ OS_EXPORT AVAudioSessionMode const AVAudioSessionModeGameChat API_AVAILABLE(ios(
 OS_EXPORT AVAudioSessionMode const AVAudioSessionModeVideoRecording API_AVAILABLE(ios(5.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /*! Appropriate for applications that wish to minimize the effect of system-supplied signal
- processing for input and/or output audio signals. */
+ processing for input and/or output audio signals.
+ This mode disables some dynamics processing on input and output resulting in a lower output playback level. */
 OS_EXPORT AVAudioSessionMode const AVAudioSessionModeMeasurement API_AVAILABLE(ios(5.0), watchos(2.0), tvos(9.0)) API_UNAVAILABLE(macos);
 
 /*! Engages appropriate output signal processing for movie playback scenarios.  Currently
@@ -412,12 +415,19 @@ typedef NS_OPTIONS(NSUInteger, AVAudioSessionInterruptionOptions) {
     @var   AVAudioSessionInterruptionReasonBuiltInMicMuted
         The audio session was interrupted due to the built-in mic being muted e.g. due to an iPad's Smart Folio being closed.
  
+    @var   AVAudioSessionInterruptionReasonRouteDisconnected
+        The audio session was interrupted due to route getting disconnected.
  */
 typedef NS_ENUM(NSUInteger, AVAudioSessionInterruptionReason) {
     AVAudioSessionInterruptionReasonDefault         = 0,
     AVAudioSessionInterruptionReasonAppWasSuspended API_DEPRECATED("wasSuspended reason no longer present", ios(14.5, 16.0)) = 1,
     AVAudioSessionInterruptionReasonBuiltInMicMuted = 2,
-
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+    ///The audio session was interrupted because its UIScene was backgrounded
+    AVAudioSessionInterruptionReasonSceneWasBackgrounded = 3,
+#endif // TARGET_OS_XR
+    ///The audio session was interrupted because route was disconnected.
+    AVAudioSessionInterruptionReasonRouteDisconnected API_AVAILABLE(ios(17.0), watchos(10.0), tvos(17.0)) API_UNAVAILABLE(macos) = 4
 } NS_SWIFT_NAME(AVAudioSession.InterruptionReason);
 
 ///  options for use when calling setActive:withOptions:error:
@@ -591,9 +601,9 @@ typedef NS_ENUM(NSInteger, AVAudioStereoOrientation) {
 	Introduced: ios(8.0), watchos(4.0)
 */
 typedef NS_ENUM(NSUInteger, AVAudioSessionRecordPermission) {
-	AVAudioSessionRecordPermissionUndetermined = 'undt',
-	AVAudioSessionRecordPermissionDenied = 'deny',
-	AVAudioSessionRecordPermissionGranted = 'grnt'
+	AVAudioSessionRecordPermissionUndetermined API_DEPRECATED_WITH_REPLACEMENT("AVAudioApplicationRecordPermissionUndetermined", ios(8.0, 17.0), watchos(4.0, 10.0)) API_UNAVAILABLE(macos, tvos) = 'undt',
+	AVAudioSessionRecordPermissionDenied API_DEPRECATED_WITH_REPLACEMENT("AVAudioApplicationRecordPermissionDenied", ios(8.0, 17.0), watchos(4.0, 10.0)) API_UNAVAILABLE(macos, tvos) = 'deny',
+	AVAudioSessionRecordPermissionGranted API_DEPRECATED_WITH_REPLACEMENT("AVAudioApplicationRecordPermissionGranted", ios(8.0, 17.0), watchos(4.0, 10.0)) API_UNAVAILABLE(macos, tvos) = 'grnt'
 };
 
 #endif // AudioSession_AVAudioSessionTypes_h

@@ -14,6 +14,7 @@ API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
 // Accessing fetched results (fetches objects from the backing store in chunks on demand rather than all at once)
 // Fetched objects will be kept in a cache and purged under memory pressure
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHFetchResult<__covariant ObjectType> : NSObject <NSCopying, NSFastEnumeration>
 
 @property (readonly) NSUInteger count;

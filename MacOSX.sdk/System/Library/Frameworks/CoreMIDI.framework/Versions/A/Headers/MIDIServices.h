@@ -287,6 +287,7 @@ typedef CF_ENUM(SInt32, MIDIProtocolID) {
 typedef struct MIDIEventList			MIDIEventList;			// Universal MIDI Packet
 typedef struct MIDIPacketList			MIDIPacketList;			// Legacy MIDI 1.0 Packets (deprecated)
 typedef struct MIDISysexSendRequest		MIDISysexSendRequest;
+typedef struct MIDISysexSendRequestUMP MIDISysexSendRequestUMP;
 typedef struct MIDINotification			MIDINotification;
 
 //=============================================================================
@@ -397,68 +398,96 @@ typedef void
 typedef void
 (*MIDICompletionProc)(MIDISysexSendRequest *request);
 
+/*!
+	@typedef		MIDICompletionProcUMP
+	@abstract		A function called when a UMP system-exclusive or system-exclusive 8-bit event has been completely sent.
+	@discussion
+		Callback function to notify the client of the completion of a call to MIDISendSysexUMP or MIDISendSysex8.
+
+	@param			request
+						The MIDISysexSendRequestUMP which has completed, or been
+						aborted.
+*/
+typedef void (*MIDICompletionProcUMP)(MIDISysexSendRequestUMP* request);
+
 //=============================================================================
 #pragma mark	Structures
 
 #pragma pack(push, 4)
-/*!
-	@struct			MIDIEventPacket
-	@abstract		A series of simultaneous MIDI events in UMP format.
- 
-	@field			timeStamp
-						The time at which the events occurred, if receiving MIDI,
-						or, if sending MIDI, the time at which the events are to
-						be played.  Zero means "now."  The time stamp applies
-						to the first byte or word in the packet.
-	@field			wordCount
-						The number of valid MIDI 32-bit words which follow, in data. (It
-						may be larger than 64 words if the packet is dynamically
-						allocated.)
-	@field			words
-						A variable-length stream of native-endian 32-bit Universal MIDI Packets.
-                        Running status is not allowed.  In the case of system-exclusive
-                        messages, a packet may only contain a single message, or portion
-                        of one, with no other MIDI events.
- 
-                        Messages must always be syntactically complete; for example, for 64-bit
-                        message types, both words must be present in the same packet. The same
-                        MIDI message constraints from above apply here.
- 
-                        (This is declared to be 64 words in length so clients don't have to
-                        create custom data structures in simple situations.)
-*/
-struct MIDIEventPacket
-{
-	MIDITimeStamp timeStamp;
-	UInt32 wordCount;
-	UInt32 words[64];
-};
+	/*!
+		@struct			MIDIEventPacket
+		@abstract		A series of simultaneous MIDI events in UMP format.
+
+		@discussion
+			 WARNING: When using MIDIEventPacket in C++ be aware of the following:
+
+			 MIDIEventPacket is a variable-length struct and should ALWAYS be passed-by-pointer
+			 rather than passed-by-reference. Conversion from a MIDIEventPacket reference to a pointer
+			 is undefined behavior and can lead to the unintended truncation of data.
+
+		@field			timeStamp
+							The time at which the events occurred, if receiving MIDI,
+							or, if sending MIDI, the time at which the events are to
+							be played.  Zero means "now."  The time stamp applies
+							applies to each UMP in the word stream.
+		@field			wordCount
+							The number of valid MIDI 32-bit words which follow, in data. (It
+							may be larger than 64 words if the packet is dynamically
+							allocated.)
+		@field			words
+							A variable-length stream of native-endian 32-bit Universal MIDI Packets.
+							Running status is not allowed.  In the case of system-exclusive
+							messages, a packet may only contain a single message, or portion
+							of one, with no other MIDI events.
+
+							Messages must always be syntactically complete; for example, for 64-bit
+							message types, both words must be present in the same packet. The same
+							MIDI message constraints from above apply here.
+
+							(This is declared to be 64 words in length so clients don't have to
+							create custom data structures in simple situations.)
+
+	 */
+	struct MIDIEventPacket
+	{
+		MIDITimeStamp timeStamp;
+		UInt32 wordCount;
+		UInt32 words[64];
+	};
 typedef struct MIDIEventPacket		MIDIEventPacket;
 
 /*!
 	@struct			MIDIEventList
 	@abstract		A variable-length list of MIDIEventPackets.
 
-	The timestamps in the list must be in ascending order.
+	@discussion
+		The timestamps in the list must be in ascending order.
 
-	Note that the packets in the list, while defined as an array, may not be
-	accessed as an array, since they are variable-length.  To iterate through
-	the packets in an event list, use a loop such as:
+		Note that the packets in the list, while defined as an array, may not be
+		accessed as an array, since they are variable-length.  To iterate through
+		the packets in an event list, use a loop such as:
 
-	```
-	MIDIEventPacket *packet = &packetList->packet[0];
-	for (unsigned i = 0; i < packetList->numPackets; ++i) {
-		...
-		packet = MIDIEventPacketNext(packet);
-	}
-	```
+		```
+		MIDIEventPacket *packet = &packetList->packet[0];
+		for (unsigned i = 0; i < packetList->numPackets; ++i) {
+			...
+			packet = MIDIEventPacketNext(packet);
+		}
+		```
+
+		WARNING: When using MIDIEventList in C++ be aware of the following:
+
+		MIDIEventList is a variable-length struct and should ALWAYS be passed-by-pointer
+		rather than passed-by-reference. Conversion from a MIDIEventList reference to a pointer
+		is undefined behavior and can lead to the unintended truncation of data.
 
 	@field	protocol
- 				The MIDI protocol variant of the events in the list.
+				The MIDI protocol variant of the events in the list.
 	@field	numPackets
 				The number of MIDIEventPacket structs in the list.
 	@field	packet
 				An open-ended array of variable-length MIDIEventPacket structs.
+
 */
 struct MIDIEventList
 {
@@ -471,7 +500,14 @@ typedef struct MIDIEventList MIDIEventList;
 /*!
 	@struct			MIDIPacket
 	@abstract		A collection of simultaneous MIDI events.
- 
+
+	@discussion
+		WARNING: When using MIDIPacket in C++ be aware of the following:
+
+		MIDIPacket is a variable-length struct and should ALWAYS be passed-by-pointer
+		rather than passed-by-reference. Conversion from a MIDIPacket reference to a pointer
+		is undefined behavior and can lead to the unintended truncation of data.
+
 	@field			timeStamp
 						The time at which the events occurred, if receiving MIDI,
 						or, if sending MIDI, the time at which the events are to
@@ -486,13 +522,14 @@ typedef struct MIDIEventList MIDIEventList;
 						is not allowed.  In the case of system-exclusive
 						messages, a packet may only contain a single message, or
 						portion of one, with no other MIDI events.
- 
+
 						The MIDI messages in the packet must always be complete,
 						except for system-exclusive.
 
 						(This is declared to be 256 bytes in length so clients
 						don't have to create custom data structures in simple
 						situations.)
+
 */
 struct MIDIPacket
 {
@@ -507,25 +544,32 @@ typedef struct MIDIPacket			MIDIPacket;
 	@abstract		A list of MIDI events being received from, or being sent to,
 					one endpoint.
 
-	The timestamps in the packet list must be in ascending order.
+	@discussion
+		The timestamps in the packet list must be in ascending order.
 
-	Note that the packets in the list, while defined as an array, may not be
-	accessed as an array, since they are variable-length.  To iterate through
-	the packets in a packet list, use a loop such as:
-	
-	```
-	MIDIPacket *packet = &packetList->packet[0];
-	for (unsigned i = 0; i < packetList->numPackets; ++i) {
-		...
-		packet = MIDIPacketNext(packet);
-	}
-	```
-	
-	The MIDIPacketNext macro is especially important when considering that
-	the alignment requirements of MIDIPacket may differ between CPU architectures.
-	On Intel and PowerPC, MIDIPacket is unaligned. On ARM, MIDIPacket must be
-	4-byte aligned.
- 
+		Note that the packets in the list, while defined as an array, may not be
+		accessed as an array, since they are variable-length.  To iterate through
+		the packets in a packet list, use a loop such as:
+
+		```
+		MIDIPacket *packet = &packetList->packet[0];
+		for (unsigned i = 0; i < packetList->numPackets; ++i) {
+			...
+			packet = MIDIPacketNext(packet);
+		}
+		```
+
+		The MIDIPacketNext macro is especially important when considering that
+		the alignment requirements of MIDIPacket may differ between CPU architectures.
+		On Intel and PowerPC, MIDIPacket is unaligned. On ARM, MIDIPacket must be
+		4-byte aligned.
+
+		WARNING: When using MIDIPacketList in C++ be aware of the following:
+
+		MIDIPacketList is a variable-length struct and should ALWAYS be passed-by-pointer
+		rather than passed-by-reference. Conversion from a MIDIPacketList reference to a pointer
+		is undefined behavior and can lead to the unintended truncation of data.
+
 	@field			numPackets
 						The number of MIDIPackets in the list.
 	@field			packet
@@ -574,6 +618,43 @@ struct MIDISysexSendRequest
 	Byte				reserved[3];
 	MIDICompletionProc 	completionProc;
 	void * __nullable	completionRefCon;
+};
+
+/*!
+	@struct			MIDISysexSendRequestUMP
+	@abstract		A request to transmit a UMP system-exclusive event.
+
+	@discussion
+		This represents a request to send a single UMP system-exclusive MIDI event to
+		a MIDI destination asynchronously.
+
+	@field			destination
+						The endpoint to which the event is to be sent.
+	@field			words
+						Initially, a pointer to the UMP SysEx event to be sent.
+						MIDISendUMPSysex will advance this pointer as data is
+						sent.
+	@field			wordsToSend
+						Initially, the number of words to be sent.  MIDISendUMPSysex
+						will decrement this counter as data is sent.
+	@field			complete
+						The client may set this to true at any time to abort
+						transmission.  The implementation sets this to true when
+						all data been transmitted.
+	@field			completionProc
+						Called when all bytes have been sent, or after the client
+						has set complete to true.
+	@field			completionRefCon
+						Passed as a refCon to completionProc.
+*/
+struct MIDISysexSendRequestUMP
+{
+	MIDIEndpointRef destination;
+	UInt32* words;
+	UInt32 wordsToSend;
+	Boolean complete;
+	MIDICompletionProcUMP completionProc;
+	void* __nullable completionRefCon;
 };
 
 /*!
@@ -1240,13 +1321,39 @@ extern const CFStringRef	kMIDIPropertyDisplayName				API_AVAILABLE(macos(10.4), 
 /*!
 	constant		kMIDIPropertyProtocolID
 	@discussion
-		device/entity/endpoint property, MIDIProtocolID. Indicates the native protocol in which
+		device/entity/endpoint property (UMP-native), MIDIProtocolID. Indicates the native protocol in which
 		the endpoint communicates. The value is set by the system on endpoints, when they are
 		created. Drivers may dynamically change the protocol of an endpoint as a result of a MIDI-CI
 		negotiation, by setting this property on the endpoint. Clients can observe changes to
 		this property.
 */
 extern const CFStringRef	kMIDIPropertyProtocolID					API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+	constant		kMIDIPropertyUMPActiveGroupBitmap
+	@discussion
+		entity and endpoint property (UMP-native), 16-bit unsigned integer. If present, describes which
+		groups are currently active and available for message transmission. The most significant bit
+		represents group 16, and the least significant bit represents group 1.
+
+		If a driver sets this property on a UMP-native endpoint provided for legacy MIDI 1.0 compatibility,
+		only a single bit of the bitfield may be used. As a convenience, MIDI messages sent to a driver-
+		created destination provided for legacy MIDI 1.0 compatibility will have all messages converted
+		to the supported group prior to delivery.
+
+		Any UMP-native endpoint lacking this property and subsequently defined property
+		kMIDIPropertyCanTransmitGroupless is assumed to handle/transmit all UMP traffic.
+*/
+extern const CFStringRef kMIDIPropertyUMPActiveGroupBitmap API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+	constant		kMIDIPropertyUMPCanTransmitGroupless
+	@discussion
+		entity and endpoint property (UMP-native), integer. If this property is present and set to 1,
+		the referenced MIDI object is or has (an) endpoint/endpoints capable of transmitting UMP
+		messages with no group (e.g., message type 0 and message type F).
+*/
+extern const CFStringRef kMIDIPropertyUMPCanTransmitGroupless API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
 //==================================================================================================
 #pragma mark	Clients
@@ -2284,7 +2391,59 @@ MIDISend(	MIDIPortRef 			port,
 		request->data must point to a single MIDI system-exclusive message, or portion thereof.
 */
 extern OSStatus
-MIDISendSysex(	MIDISysexSendRequest *request )				API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
+MIDISendSysex(MIDISysexSendRequest* request) API_AVAILABLE(macos(10.0), ios(4.2)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+	@function		MIDISendUMPSysEx
+
+	@abstract 		Sends a single UMP system-exclusive event, asynchronously.
+
+	@param			umpRequest
+						Contains the destination, and a pointer to the MIDI data to be sent.
+	@result			An OSStatus result code.
+
+	@discussion
+		request->words must point to a single MIDI system-exclusive message, or portion thereof.
+*/
+extern OSStatus
+MIDISendUMPSysex(MIDISysexSendRequestUMP* umpRequest) API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+	@function		MIDISendUMPSysEx8
+
+	@abstract 		Sends single system-exclusive 8-bit event, asynchronously.
+
+	@param			umpRequest
+						Contains the destination, and a pointer to the 8-bit system-exclusive data to be sent.
+	@result			An OSStatus result code.
+
+	@discussion
+		request->data must point to a single MIDI system-exclusive message, or portion thereof.
+*/
+extern OSStatus
+MIDISendUMPSysex8(MIDISysexSendRequestUMP* umpRequest) API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
+
+/*!
+	@function		MIDIEventPacketSysexBytesForGroup
+
+	@abstract 		Gets MIDI 1.0 SysEx bytes on the indicated group.
+
+	@param			pkt
+						A MIDIEventPacket containing UMP system-exclusive data.
+
+	@param			groupIndex
+						The target group index, 0 to 15.
+
+	@param			outData
+						When successful, a CFDataRef byte stream of extracted system-exclusive data.
+
+	@result		An OSStatus result code.
+
+	@discussion
+		pkt must contain a single MIDI system-exclusive message on groupIndex, or portion thereof.
+*/
+extern OSStatus
+MIDIEventPacketSysexBytesForGroup(const MIDIEventPacket* pkt, UInt8 groupIndex, CFDataRef __nullable* __nonnull outData) API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!
 	@function		MIDIReceivedEventList

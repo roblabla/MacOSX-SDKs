@@ -109,10 +109,12 @@ extern bool task_is_driver(task_t task);
 #define TWF_NONE                 0
 #define TRW_LRETURNWAIT          0x01           /* task is waiting for fork/posix_spawn/exec to complete */
 #define TRW_LRETURNWAITER        0x02           /* task is waiting for TRW_LRETURNWAIT to get cleared */
+#define TRW_LEXEC_COMPLETE       0x04           /* thread should call exec complete */
 
 /* task clear return wait flags */
 #define TCRW_CLEAR_INITIAL_WAIT   0x1
 #define TCRW_CLEAR_FINAL_WAIT     0x2
+#define TCRW_CLEAR_EXEC_COMPLETE  0x4
 #define TCRW_CLEAR_ALL_WAIT       (TCRW_CLEAR_INITIAL_WAIT | TCRW_CLEAR_FINAL_WAIT)
 
 
@@ -165,6 +167,7 @@ extern int task_get_no_footprint_for_debug(
 #endif /* DEVELOPMENT || DEBUG */
 
 
+
 #if CONFIG_ROSETTA
 extern bool task_is_translated(task_t task);
 #endif
@@ -172,6 +175,7 @@ extern bool task_is_translated(task_t task);
 #if CONFIG_X86_64_COMPAT
 extern bool task_is_x86_64_compat(task_t task);
 #endif
+
 
 __END_DECLS
 

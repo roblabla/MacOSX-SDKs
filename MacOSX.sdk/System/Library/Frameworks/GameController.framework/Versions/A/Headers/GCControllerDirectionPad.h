@@ -5,12 +5,10 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
-
 #import <GameController/GCControllerElement.h>
 
 @class GCControllerAxisInput;
 @class GCControllerButtonInput;
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

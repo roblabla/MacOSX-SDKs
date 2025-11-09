@@ -1,10 +1,6 @@
-//
-//  GKPlayer.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
+#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GKBasePlayer.h>
 #import <GameKit/GKDefines.h>
@@ -16,7 +12,7 @@
 @class UIImage;
 
 /// Deprecated methods that previously returned player IDs will return GKPlayerIDNoLongerAvailable instead.
-extern NSString * _Nonnull const GKPlayerIDNoLongerAvailable API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
+GK_EXTERN NSString * _Nonnull const GKPlayerIDNoLongerAvailable API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) API_UNAVAILABLE(watchos);
 
 NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 
@@ -44,7 +40,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @property(readonly, NS_NONATOMIC_IOSONLY) BOOL isInvitable API_AVAILABLE(ios(14.0), macos(11.0), tvos(14.0)) __WATCHOS_PROHIBITED;
 @end
 
-#import <GameKit/GKPlayer.h>
+#if !TARGET_OS_WATCH
 
 @interface GKPlayer (UI)
 
@@ -65,19 +61,20 @@ typedef NS_ENUM(NSInteger, GKPhotoSize) {
 
 @end
 
+#endif
 
 /// Notification will be posted whenever the player details changes. The object of the notification will be the player.
 GK_EXTERN_WEAK NSNotificationName __nonnull GKPlayerDidChangeNotificationName;
 
 @interface GKPlayer (Deprecated)
 
-@property(readonly, NS_NONATOMIC_IOSONLY)          BOOL         isFriend NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "use -[GKLocalPlayer loadFriendPlayers...]") ;    // True if this player is a friend of the local player
-@property(readonly, nonnull, retain, NS_NONATOMIC_IOSONLY)  NSString *playerID API_DEPRECATED( "use the teamPlayerID property to identify a player",ios(4.1,13.0),tvos(9.0,13.0),macosx(10.8,10.15));
+@property(readonly, NS_NONATOMIC_IOSONLY)          BOOL         isFriend API_DEPRECATED_WITH_REPLACEMENT("-[GKLocalPlayer loadFriendPlayersWithCompletionHandler:]", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;    // True if this player is a friend of the local player
+@property(readonly, nonnull, retain, NS_NONATOMIC_IOSONLY)  NSString *playerID API_DEPRECATED("Use either the gamePlayerID or teamPlayerID property to identify a player.",ios(4.1,13.0),tvos(9.0,13.0),macosx(10.8,10.15));
 
 /// Load the Game Center players for the playerIDs provided. Error will be nil on success.
 /// Possible reasons for error:
 /// 1. Unauthenticated local player
 /// 2. Communications failure
 /// 3. Invalid player identifier
-+ (void)loadPlayersForIdentifiers:(nonnull NSArray<NSString *> *)identifiers withCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable players, NSError * __nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED( "use GKLocalPlayer.loadFriendsWithIdentifiers to load a friend's GKPlayer object.",ios(4.1,14.5),tvos(9.0,14.5),macosx(10.8,11.3), watchos(3.0,7.4));
++ (void)loadPlayersForIdentifiers:(nonnull NSArray<NSString *> *)identifiers withCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable players, NSError * __nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED_WITH_REPLACEMENT("-[GKLocalPlayer loadFriendsWithIdentifiers:completionHandler:]",ios(4.1,14.5),tvos(9.0,14.5),macosx(10.8,11.3), watchos(3.0,7.4));
 @end

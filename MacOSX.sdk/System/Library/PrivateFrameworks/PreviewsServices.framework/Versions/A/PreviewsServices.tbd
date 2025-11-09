@@ -3,25 +3,12 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServices.framework/Versions/A/PreviewsServices'
-current-version: 20.30.46
+current-version: 21.0.58
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ '_$s16PreviewsServices09HostToSimA7ServiceO04machF4NameSSvg', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO04machF4NameSSvpMV', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO11descriptionSSvg', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO11descriptionSSvpMV', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO2eeoiySbAC_ACtFZ', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO4hash4intoys6HasherVz_tF', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO7previewyA2CmFWC', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO9agentPipeyA2CmFWC', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO9hashValueSivg', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceO9hashValueSivpMV', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceOMa', '_$s16PreviewsServices09HostToSimA7ServiceOMn', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceON', '_$s16PreviewsServices09HostToSimA7ServiceOSHAAMc', 
-                       '_$s16PreviewsServices09HostToSimA7ServiceOSQAAMc', '_$s16PreviewsServices09HostToSimA7ServiceOs23CustomStringConvertibleAAMc', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC09hostToSimD0ACSo13OS_xpc_object_p_tcfC', 
+    symbols:         [ '_$s16PreviewsServices0A17ServiceConnectionC09hostToSimD0ACSo13OS_xpc_object_p_tcfC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O11processExityA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O13crashListeneryA2EmFWC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC0C0O7installyA2EmFWC', 
@@ -48,15 +35,9 @@ exports:
                        '_$s16PreviewsServices0A17ServiceConnectionC4send7messageySo14UVPropertyListC_tF', 
                        '_$s16PreviewsServices0A17ServiceConnectionC7serviceA2C0C0O_tcfC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC7serviceAcA0aC0O_tcfC', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfC', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfCTj', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfCTq', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC09hostToSimC0AeA04HostghaC0O_tcfc', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfC', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfCTj', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfCTq', 
-                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC7serviceAeA0aC0O_tcfc', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC5local7serviceAEXDAA0aC0O_tFZ', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC8activate7handleryyACc_tF', 
+                       '_$s16PreviewsServices0A17ServiceConnectionC8ListenerC9hostToSim04machC4Name11descriptionAEXDSS_SStFZ', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerCAEycfC', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerCAEycfc', 
                        '_$s16PreviewsServices0A17ServiceConnectionC8ListenerCMa', 
@@ -89,6 +70,7 @@ exports:
                        '_$s16PreviewsServices0A7ServiceO7VariantOSQAAMc', '_$s16PreviewsServices0A7ServiceO7installyA2C7VariantO_tcACmFWC', 
                        '_$s16PreviewsServices0A7ServiceO7previewyA2C7VariantO_tcACmFWC', 
                        '_$s16PreviewsServices0A7ServiceO9agentPipeyA2C7VariantO_tcACmFWC', 
+                       '_$s16PreviewsServices0A7ServiceO9shellPipeyA2C7VariantO_tcACmFWC', 
                        '_$s16PreviewsServices0A7ServiceOMa', '_$s16PreviewsServices0A7ServiceOMn', 
                        '_$s16PreviewsServices0A7ServiceON', '_$s16PreviewsServices0A7ServiceOs23CustomStringConvertibleAAMc', 
                        '_$s2os6LoggerV16PreviewsServicesE4uvOSACvgZ', '_$s2os6LoggerV16PreviewsServicesE6libxpcACvgZ', 

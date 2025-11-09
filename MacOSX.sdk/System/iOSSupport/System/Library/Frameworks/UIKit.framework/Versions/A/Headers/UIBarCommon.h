@@ -16,8 +16,8 @@ typedef NS_ENUM(NSInteger, UIBarMetrics) {
     UIBarMetricsDefaultPrompt = 101, // Applicable only in bars with the prompt property, such as UINavigationBar and UISearchBar
     UIBarMetricsCompactPrompt,
 
-    UIBarMetricsLandscapePhone API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompact", ios(5.0, 8.0)) = UIBarMetricsCompact,
-    UIBarMetricsLandscapePhonePrompt API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompactPrompt", ios(7.0, 8.0)) = UIBarMetricsCompactPrompt,
+    UIBarMetricsLandscapePhone API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompact", ios(5.0, 8.0)) API_UNAVAILABLE(visionos) = UIBarMetricsCompact,
+    UIBarMetricsLandscapePhonePrompt API_DEPRECATED_WITH_REPLACEMENT("UIBarMetricsCompactPrompt", ios(7.0, 8.0)) API_UNAVAILABLE(visionos) = UIBarMetricsCompactPrompt,
 };
 
 typedef NS_ENUM(NSInteger, UIBarPosition) {

@@ -6,6 +6,7 @@
 //  Copyright © 2021 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 
 UIKIT_EXTERN API_AVAILABLE(ios(16.0)) NS_SWIFT_UI_ACTOR

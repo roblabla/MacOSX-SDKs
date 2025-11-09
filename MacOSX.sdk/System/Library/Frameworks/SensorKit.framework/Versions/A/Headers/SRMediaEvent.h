@@ -13,10 +13,10 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, SRMediaEventType) {
     SRMediaEventOnScreen = 1,
     SRMediaEventOffScreen,
-} API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+} API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
 NS_SWIFT_SENDABLE
-SR_EXTERN API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRMediaEvent : NSObject <NSCopying, NSSecureCoding>
 
 /*!

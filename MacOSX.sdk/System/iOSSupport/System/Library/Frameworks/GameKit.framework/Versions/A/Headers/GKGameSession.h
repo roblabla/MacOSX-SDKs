@@ -1,9 +1,4 @@
-//
-//  GKGameSession.h
-//  Game Center
-//
-//  Copyright 2016-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GKDefines.h>

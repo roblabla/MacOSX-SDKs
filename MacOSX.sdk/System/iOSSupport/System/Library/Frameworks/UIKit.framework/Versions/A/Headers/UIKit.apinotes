@@ -87,6 +87,38 @@ Classes:
   - Selector: "textSelectionsInteractingAtPoint:inContainerAtLocation:anchors:modifiers:selecting:bounds:"
     MethodKind: Instance
     SwiftName: textSelections(interactingAt:inContainerAt:anchors:modifiers:selecting:bounds:)
+- Name: UITraitUserInterfaceIdiom
+  SwiftPrivate: true
+- Name: UITraitUserInterfaceStyle
+  SwiftPrivate: true
+- Name: UITraitLayoutDirection
+  SwiftPrivate: true
+- Name: UITraitDisplayScale
+  SwiftPrivate: true
+- Name: UITraitHorizontalSizeClass
+  SwiftPrivate: true
+- Name: UITraitVerticalSizeClass
+  SwiftPrivate: true
+- Name: UITraitForceTouchCapability
+  SwiftPrivate: true
+- Name: UITraitPreferredContentSizeCategory
+  SwiftPrivate: true
+- Name: UITraitDisplayGamut
+  SwiftPrivate: true
+- Name: UITraitAccessibilityContrast
+  SwiftPrivate: true
+- Name: UITraitUserInterfaceLevel
+  SwiftPrivate: true
+- Name: UITraitLegibilityWeight
+  SwiftPrivate: true
+- Name: UITraitActiveAppearance
+  SwiftPrivate: true
+- Name: UITraitToolbarItemPresentationSize
+  SwiftPrivate: true
+- Name: UITraitImageDynamicRange
+  SwiftPrivate: true
+- Name: UITraitTypesettingLanguage
+  SwiftPrivate: true
 - Name: UICollectionViewCompositionalLayout
   Methods:
   - Selector: "layoutWithListConfiguration:"
@@ -168,6 +200,9 @@ Classes:
   - Selector: "estimatedDimension:"
     MethodKind: Class
     SwiftName: estimated(_:)
+  - Selector: "uniformAcrossSiblingsWithEstimate:"
+    MethodKind: Class
+    SwiftName: uniformAcrossSiblings(estimate:)
 - Name: NSCollectionLayoutGroup
   Methods:
   - Selector: "horizontalGroupWithLayoutSize:repeatingSubitem:count:"
@@ -256,6 +291,25 @@ Classes:
     SwiftPrivate: true
 - Name: UIListSeparatorConfiguration
   SwiftPrivate: true
+- Name: UIContentUnavailableConfiguration
+  SwiftPrivate: true
+- Name: UIContentUnavailableImageProperties
+  SwiftPrivate: true
+- Name: UIContentUnavailableTextProperties
+  SwiftPrivate: true
+- Name: UIContentUnavailableButtonProperties
+  SwiftPrivate: true
+- Name: UIContentUnavailableConfigurationState
+  SwiftPrivate: true
+- Name: UIContentUnavailableView
+  Methods:
+  - Selector: 'initWithConfiguration:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  Properties:
+  - Name: 'configuration'
+    PropertyKind: Instance
+    SwiftPrivate: true
 - Name: UITableViewCell
   Methods:
   - Selector: 'updateConfigurationUsingState:'
@@ -485,6 +539,9 @@ Classes:
   - Selector: 'registerUserNotificationSettings:'
     SwiftName: registerUserNotificationSettings(_:)
     MethodKind: Instance
+  - Selector: 'activateSceneSessionForRequest:errorHandler:'
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: NSIndexPath
   Methods:
   - Selector: 'indexPathForItem:inSection:'
@@ -578,6 +635,39 @@ Classes:
     MethodKind: Instance
     SwiftPrivate: true
   - Selector: 'initWithTitle:image:target:action:menu:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addSymbolEffect:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addSymbolEffect:options:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addSymbolEffect:options:animated:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeSymbolEffectOfType:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeSymbolEffectOfType:options:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeSymbolEffectOfType:options:animated:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeAllSymbolEffects'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeAllSymbolEffectsWithOptions:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeAllSymbolEffectsWithOptions:animated:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setSymbolImage:withContentTransition:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setSymbolImage:withContentTransition:options:'
     MethodKind: Instance
     SwiftPrivate: true
 - Name: UIBarButtonItemGroup
@@ -733,6 +823,9 @@ Classes:
     SwiftName: init(types:categories:)
     MethodKind: Class
 - Name: UIView
+  Properties:
+  - Name: 'traitOverrides'
+    SwiftPrivate: true
   Methods:
   - Selector: 'willMoveToWindow:'
     SwiftName: willMove(toWindow:)
@@ -749,8 +842,17 @@ Classes:
   - Selector: 'setNeedsDisplayInRect:'
     SwiftName: setNeedsDisplay(_:)
     MethodKind: Instance
+  - Selector: 'animateWithSpringDuration:bounce:initialSpringVelocity:delay:options:animations:completion:'
+    MethodKind: Class
+    SwiftPrivate: true
 - Name: UIViewController
   Properties:
+  - Name: 'traitOverrides'
+    SwiftPrivate: true
+  - Name: 'contentUnavailableConfiguration'
+    SwiftPrivate: true
+  - Name: 'contentUnavailableConfigurationState'
+    SwiftPrivate: true
   - Name: presentedViewController
     SwiftName: presentedViewController
   - Name: presentingViewController
@@ -797,6 +899,13 @@ Classes:
   - Selector: 'didMoveToParentViewController:'
     SwiftName: didMove(toParent:)
     MethodKind: Instance
+  - Selector: 'updateContentUnavailableConfigurationUsingState:'
+    SwiftPrivate: true
+    MethodKind: Instance
+- Name: UIPresentationController
+  Properties:
+  - Name: 'traitOverrides'
+    SwiftPrivate: true
 - Name: UIVibrancyEffect
   Methods:
   - Selector: 'effectForBlurEffect:'
@@ -860,7 +969,7 @@ Classes:
   Methods:
   - Selector: 'environment:containsEnvironment:'
     MethodKind: Class
-    Availability: nonswift
+    SwiftPrivate: true
 - Name: UINavigationItem
   Properties:
   - Name: renameDelegate
@@ -873,9 +982,18 @@ Classes:
   SwiftName: UIScene.OpenExternalURLOptions
 - Name: UISceneActivationRequestOptions
   SwiftName: UIScene.ActivationRequestOptions
+- Name: UISceneSessionActivationRequest
+  SwiftPrivate: true
 - Name: UISceneCollectionJoinBehavior
   SwiftName: UIScene.CollectionJoinBehavior
 - Name: UITraitCollection
+  Properties:
+  - Name: 'systemTraitsAffectingColorAppearance'
+    PropertyKind: Class
+    SwiftPrivate: true
+  - Name: 'systemTraitsAffectingImageLookup'
+    PropertyKind: Class
+    SwiftPrivate: true
   Methods:
   - Selector: 'performAsCurrentTraitCollection:'
     MethodKind: Instance
@@ -883,6 +1001,42 @@ Classes:
   - Selector: 'hasDifferentColorAppearanceComparedToTraitCollection:'
     MethodKind: Instance
     SwiftName: 'hasDifferentColorAppearance(comparedTo:)'
+  - Selector: 'traitCollectionWithTraits:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'traitCollectionByModifyingTraits:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'traitCollectionWithCGFloatValue:forTrait:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'traitCollectionByReplacingCGFloatValue:forTrait:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'valueForCGFloatTrait:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'traitCollectionWithNSIntegerValue:forTrait:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'traitCollectionByReplacingNSIntegerValue:forTrait:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'valueForNSIntegerTrait:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'traitCollectionWithObject:forTrait:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'traitCollectionByReplacingObject:forTrait:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'objectForTrait:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'changedTraitsFromTraitCollection:'
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: UIFontPickerViewControllerConfiguration
   SwiftName: UIFontPickerViewController.Configuration
 - Name: UIImage
@@ -938,6 +1092,52 @@ Classes:
   - Selector: 'configurationPreferringMonochrome'
     SwiftName: 'preferringMonochrome()'
     MethodKind: Class
+- Name: UIImageView
+  Methods:
+  - Selector: 'addSymbolEffect:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addSymbolEffect:options:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addSymbolEffect:options:animated:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'addSymbolEffect:options:animated:completion:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeSymbolEffectOfType:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeSymbolEffectOfType:options:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeSymbolEffectOfType:options:animated:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeSymbolEffectOfType:options:animated:completion:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeAllSymbolEffects'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeAllSymbolEffectsWithOptions:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'removeAllSymbolEffectsWithOptions:animated:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setSymbolImage:withContentTransition:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setSymbolImage:withContentTransition:options:'
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: 'setSymbolImage:withContentTransition:options:completion:'
+    MethodKind: Instance
+    SwiftPrivate: true
+- Name: UISymbolEffectCompletionContext
+  SwiftPrivate: true
 - Name: UIDeferredMenuElement
   Methods:
   - Selector: 'elementWithProvider:'
@@ -1002,7 +1202,37 @@ Classes:
   - Selector: 'configurationWithIdentifier:sourcePoint:'
     MethodKind: Class
     SwiftPrivate: true
+- Name: UITextItem
+  Properties:
+  - Name: contentType
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: link
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: textAttachment
+    PropertyKind: Instance
+    SwiftPrivate: true
+  - Name: tagIdentifier
+    PropertyKind: Instance
+    SwiftPrivate: true
+- Name: UITextItemContentType
+  SwiftPrivate: true
+- Name: UITextItemMenuPreview
+  SwiftPrivate: true
+- Name: UITextItemMenuConfiguration
+  SwiftName: UITextItem.MenuConfiguration
+  Methods:
+  - Selector: 'configurationWithMenu:'
+    MethodKind: Class
+    SwiftPrivate: true
+  - Selector: 'configurationWithPreview:menu:'
+    MethodKind: Class
+    SwiftPrivate: true
 - Name: UIWindowScene
+  Properties:
+  - Name: 'traitOverrides'
+    SwiftPrivate: true
   Methods:
     - Selector: 'requestGeometryUpdateWithPreferences:errorHandler:'
       SwiftName: requestGeometryUpdate(_:errorHandler:)
@@ -1011,6 +1241,9 @@ Classes:
   SwiftName: UIWindowScene.ActivationConfiguration
 - Name: UIWindowSceneActivationRequestOptions
   SwiftName: UIWindowScene.ActivationRequestOptions
+  Properties:
+  - Name: 'placement'
+    SwiftPrivate: true
 - Name: UIWindowSceneActivationAction
   SwiftName: UIWindowScene.ActivationAction
 - Name: UIWindowSceneActivationInteraction
@@ -1029,8 +1262,16 @@ Classes:
     - Selector: 'preferencesSystemFrame:'
       MethodKind: Class
       SwiftPrivate: true
+- Name: UIWindowSceneGeometryPreferencesVision
+  SwiftName: UIWindowSceneGeometryPreferences.Vision
 - Name: UIWindowSceneGeometryPreferences
   SwiftName: UIWindowScene.GeometryPreferences
+- Name: UIWindowScenePlacement
+  SwiftPrivate: true
+- Name: UIWindowSceneStandardPlacement
+  SwiftPrivate: true
+- Name: UIWindowSceneProminentPlacement
+  SwiftPrivate: true
 - Name: UISheetPresentationControllerDetent
   SwiftName: UISheetPresentationController.Detent
   Methods:
@@ -1070,6 +1311,33 @@ Protocols:
   - Selector: "textRangeForSelectionGranularity:enclosingLocation:"
     MethodKind: Instance
     SwiftName: textRange(for:enclosing:)
+- Name: UITraitDefinition
+  SwiftPrivate: true
+- Name: UICGFloatTraitDefinition
+  SwiftPrivate: true
+- Name: UINSIntegerTraitDefinition
+  SwiftPrivate: true
+- Name: UIObjectTraitDefinition
+  SwiftPrivate: true
+- Name: UITraitOverrides
+  SwiftPrivate: true
+- Name: UIMutableTraits
+  SwiftPrivate: true
+- Name: UITraitChangeObservable
+  SwiftPrivate: true
+  Methods:
+  - Selector: "registerForTraitChanges:withHandler:"
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: "registerForTraitChanges:withTarget:action:"
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: "registerForTraitChanges:withAction:"
+    MethodKind: Instance
+    SwiftPrivate: true
+  - Selector: "unregisterForTraitChanges:"
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: UIConfigurationState
   SwiftPrivate: true
 - Name: UIContentConfiguration
@@ -1344,6 +1612,11 @@ Protocols:
   - Selector: 'contextMenuInteraction:previewForDismissingMenuWithConfiguration:'
     SwiftName: 'contextMenuInteraction(_:previewForDismissingMenuWithConfiguration:)'
     MethodKind: Instance
+- Name: UIPopoverPresentationControllerSourceItem
+  Methods:
+  - Selector: 'frameInView:'
+    MethodKind: Instance
+    SwiftPrivate: true
 - Name: UINavigationItemRenameDelegate
   Availability: nonswift
 - Name: UITextSearching
@@ -1399,6 +1672,8 @@ Tags:
   SwiftPrivate: true
 - Name: UIListContentTextTransform
   SwiftPrivate: true
+- Name: UIContentUnavailableAlignment
+  SwiftPrivate: true
 - Name: NSTextLayoutOrientation
   SwiftName: NSLayoutManager.TextLayoutOrientation
 - Name: NSGlyphProperty
@@ -1421,6 +1696,8 @@ Tags:
   SwiftName: UIFocusHaloEffect.Position
 - Name: UINavigationItemSearchBarPlacement
   SwiftName: UINavigationItem.SearchBarPlacement
+- Name: UIImageDynamicRange
+  SwiftName: UIImage.DynamicRange
 # Swift 4.2 Renames
 - Name: UIApplicationState
   SwiftName: UIApplication.State
@@ -1468,6 +1745,8 @@ Tags:
   SwiftName: UICollectionViewUpdateItem.Action
 - Name: UICollectionViewDropIntent
   SwiftName: UICollectionViewDropProposal.Intent
+- Name: UICollectionLayoutSectionOrthogonalScrollingBounce
+  SwiftName: UICollectionLayoutSectionOrthogonalScrollingProperties.Bounce
 - Name: UITableViewSelfSizingInvalidation
   SwiftName: UITableView.SelfSizingInvalidation
 - Name: UITableViewSeparatorInsetReference
@@ -1556,6 +1835,8 @@ Tags:
   SwiftName: UISwitch.Style
 - Name: UISegmentedControlSegment
   SwiftName: UISegmentedControl.Segment
+- Name: UITextViewBorderStyle
+  SwiftName: UITextView.BorderStyle
 - Name: UITextBorderStyle
   SwiftName: UITextField.BorderStyle
 - Name: UITextFieldViewMode
@@ -1729,6 +2010,18 @@ Tags:
 Typedefs:
 - Name: NSTextListMarkerFormat
   SwiftName: NSTextList.MarkerFormat
+- Name: UITrait
+  SwiftPrivate: true
+- Name: UICGFloatTrait
+  SwiftPrivate: true
+- Name: UINSIntegerTrait
+  SwiftPrivate: true
+- Name: UIObjectTrait
+  SwiftPrivate: true
+- Name: UITraitMutations
+  SwiftPrivate: true
+- Name: UITraitChangeHandler
+  SwiftPrivate: true
 - Name: UIButtonConfigurationUpdateHandler
   SwiftName: UIButton.ConfigurationUpdateHandler
 - Name: UIConfigurationColorTransformer
@@ -1757,6 +2050,8 @@ Typedefs:
   SwiftName: UICollectionViewDiffableDataSourceReferenceSupplementaryViewProvider
 - Name: UICollectionViewDiffableDataSourceCellProvider
   SwiftName: UICollectionViewDiffableDataSourceReferenceCellProvider
+- Name: UISymbolEffectCompletion
+  SwiftPrivate: true
 - Name: NSAttributedStringDocumentAttributeKey
   SwiftName: NSAttributedString.DocumentAttributeKey
 - Name: NSAttributedStringDocumentReadingOptionKey
@@ -1843,6 +2138,8 @@ Typedefs:
   SwiftName: UIAccessibility.AssistiveTechnologyIdentifier
 - Name: UIAccessibilityCustomActionHandler
   SwiftName: UIAccessibilityCustomAction.Handler
+- Name: UICollectionLayoutSectionOrthogonalScrollingDecelerationRate
+  SwiftName: UICollectionLayoutSectionOrthogonalScrollingProperties.DecelerationRate
 - Name: UITextSearchDocumentIdentifier
   SwiftPrivate: true
 Enumerators:
@@ -1971,6 +2268,8 @@ Globals:
   SwiftName: attachment
 - Name: NSLinkAttributeName
   SwiftName: link
+- Name: UITextItemTagAttributeName
+  SwiftName: textItemTag
 - Name: NSBaselineOffsetAttributeName
   SwiftName: baselineOffset
 - Name: NSUnderlineColorAttributeName
@@ -2015,6 +2314,8 @@ Globals:
   SwiftName: hyphenationFactor
 - Name: NSDefaultTabIntervalDocumentAttribute
   SwiftName: defaultTabInterval
+- Name: NSDefaultFontExcludedDocumentAttribute
+  SwiftName: defaultFontExcluded
 - Name: NSTextScalingDocumentAttribute
   SwiftName: textScaling
 - Name: NSSourceTextScalingDocumentAttribute
@@ -2137,6 +2438,8 @@ Globals:
   SwiftName: UIScene.willEnterForegroundNotification
 - Name: UISceneDidEnterBackgroundNotification
   SwiftName: UIScene.didEnterBackgroundNotification
+- Name: UISceneSessionRoleImmersiveSpaceApplication
+  SwiftName: immersiveSpaceApplication
 - Name: UIScreenReferenceDisplayModeStatusDidChangeNotification
   SwiftName: UIScreen.referenceDisplayModeStatusDidChangeNotification
 - Name: UIWindowSceneSessionRoleApplication
@@ -2145,6 +2448,8 @@ Globals:
   SwiftName: windowExternalDisplay
 - Name: UIWindowSceneSessionRoleExternalDisplayNonInteractive
   SwiftName: windowExternalDisplayNonInteractive
+- Name: UIWindowSceneSessionRoleVolumetricApplication
+  SwiftName: windowApplicationVolumetric
 - Name: UISheetPresentationControllerDetentInactive
   SwiftPrivate: true
 - Name: UISheetPresentationControllerAutomaticDimension
@@ -2466,6 +2771,8 @@ Globals:
   SwiftName: accessibilitySpeechPitch
 - Name: UIAccessibilitySpeechAttributeQueueAnnouncement
   SwiftName: accessibilitySpeechQueueAnnouncement
+- Name: UIAccessibilitySpeechAttributeAnnouncementPriority
+  SwiftName: accessibilitySpeechAnnouncementPriority
 - Name: UIAccessibilitySpeechAttributeIPANotation
   SwiftName: accessibilitySpeechIPANotation
 - Name: UIAccessibilitySpeechAttributeSpellOut
@@ -2506,6 +2813,8 @@ Globals:
   SwiftName: keyboardKey
 - Name: UIAccessibilityTraitStaticText
   SwiftName: staticText
+- Name: UIAccessibilityTraitSupportsZoom
+  SwiftName: supportsZoom
 - Name: UIAccessibilityTraitSummaryElement
   SwiftName: summaryElement
 - Name: UIAccessibilityTraitNotEnabled
@@ -2522,6 +2831,8 @@ Globals:
   SwiftName: causesPageTurn
 - Name: UIAccessibilityTraitTabBar
   SwiftName: tabBar
+- Name: UIAccessibilityTraitToggleButton
+  SwiftName: toggleButton
 - Name: UITrackingRunLoopMode
   SwiftName: tracking
 - Name: UIGuidedAccessErrorDomain
@@ -2605,10 +2916,6 @@ Functions:
   SwiftName: "CTTextAlignment.init(_:)"
 - Name: NSTextAlignmentFromCTTextAlignment
   SwiftName: "NSTextAlignment.init(_:)"
-- Name: UIImagePNGRepresentation
-  SwiftName: "UIImage.pngData(self:)"
-- Name: UIImageJPEGRepresentation
-  SwiftName: "UIImage.jpegData(self:compressionQuality:)"
 - Name: UIAccessibilityPostNotification
   SwiftName: "UIAccessibility.post(notification:argument:)"
 - Name: UIAccessibilityConvertFrameToScreenCoordinates
@@ -3576,6 +3883,8 @@ SwiftVersions:
     SwiftName: UIAccessibilityTraitKeyboardKey
   - Name: UIAccessibilityTraitStaticText
     SwiftName: UIAccessibilityTraitStaticText
+  - Name: UIAccessibilityTraitSupportsZoom
+    SwiftName: UIAccessibilityTraitSupportsZoom
   - Name: UIAccessibilityTraitSummaryElement
     SwiftName: UIAccessibilityTraitSummaryElement
   - Name: UIAccessibilityTraitNotEnabled
@@ -3592,6 +3901,8 @@ SwiftVersions:
     SwiftName: UIAccessibilityTraitCausesPageTurn
   - Name: UIAccessibilityTraitTabBar
     SwiftName: UIAccessibilityTraitTabBar
+  - Name: UIAccessibilityTraitToggleButton
+    SwiftName: UIAccessibilityTraitToggleButton
   - Name: UITrackingRunLoopMode
     SwiftName: UITrackingRunLoopMode
   - Name: UITitlebarToolbarStyle

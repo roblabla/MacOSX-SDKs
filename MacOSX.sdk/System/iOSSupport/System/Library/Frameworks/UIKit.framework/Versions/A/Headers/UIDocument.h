@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIUserActivity.h>
+#import <UIKit/UINavigationItem.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -174,6 +175,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 - (void)revertToContentsOfURL:(NSURL *)url completionHandler:(void (^ __nullable)(BOOL success))completionHandler API_UNAVAILABLE(tvos);
 
 @end
+
+#pragma mark *** Renaming ***
+
+UIKIT_EXTERN API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(tvos, watchos)
+@interface UIDocument () <UINavigationItemRenameDelegate> @end
 
 #pragma mark *** Activity Continuation ***
 

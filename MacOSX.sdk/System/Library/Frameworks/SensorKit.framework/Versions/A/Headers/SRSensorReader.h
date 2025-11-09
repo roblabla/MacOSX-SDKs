@@ -17,7 +17,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class SRSensorReader;
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos)
 @protocol SRSensorReaderDelegate <NSObject>
 @optional
 
@@ -85,7 +85,7 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILAB
 
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos)
 @interface SRSensorReader : NSObject
 
 /**

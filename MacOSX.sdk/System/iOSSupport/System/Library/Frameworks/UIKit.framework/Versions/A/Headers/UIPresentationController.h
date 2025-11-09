@@ -112,8 +112,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 - (void)dismissalTransitionDidEnd:(BOOL)completed;
 
 // Modifies the trait collection for the presentation controller.
-@property(nullable, nonatomic, copy) UITraitCollection *overrideTraitCollection;
+@property(nullable, nonatomic, copy) UITraitCollection *overrideTraitCollection API_DEPRECATED("Use the traitOverrides property instead", ios(8.0, 17.0), visionos(1.0, 1.0));
 
+@end
+
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+@interface UIPresentationController () <UITraitChangeObservable>
+@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides;
 @end
 
 NS_HEADER_AUDIT_END(nullability, sendability)

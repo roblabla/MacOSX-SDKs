@@ -66,10 +66,7 @@ exports:
                        _kAVSystemControllerProperty_NoUI, _kAVSystemControllerProperty_PickableRoutes, 
                        _kAVSystemControllerProperty_PickedRoute, _kAVSystemControllerProperty_RunningInAgent, 
                        _kAVSystemControllerProperty_SelectionInProgress, _kAVSystemControllerProperty_SuspendRoute ]
-    objc-classes:    [ AirPlayRemoteSlideshow, MediaControlClient ]
-    objc-ivars:      [ AirPlayRemoteSlideshow._client, AirPlayRemoteSlideshow._delegate, 
-                       AirPlayRemoteSlideshow._internalQueue, AirPlayRemoteSlideshow._startTime, 
-                       AirPlayRemoteSlideshow._started, AirPlayRemoteSlideshow._userQueue, 
-                       MediaControlClient._client, MediaControlClient._eventHandlerBlock, 
+    objc-classes:    [ MediaControlClient ]
+    objc-ivars:      [ MediaControlClient._client, MediaControlClient._eventHandlerBlock, 
                        MediaControlClient._eventHandlerQueue, MediaControlClient._queue ]
 ...

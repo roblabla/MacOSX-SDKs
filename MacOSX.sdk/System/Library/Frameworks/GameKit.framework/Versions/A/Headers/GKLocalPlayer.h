@@ -1,10 +1,6 @@
-//
-//  GKLocalPlayer.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
+#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GKPlayer.h>
 #import <GameKit/GKDefines.h>
@@ -118,9 +114,9 @@ GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName NS_
 
 @interface GKLocalPlayer (Deprecated)
 
-- (void)setDefaultLeaderboardCategoryID:(nullable NSString *)categoryID completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 6_0, 7_0,"Use setDefaultLeaderboardIdentifier:completionHandler: instead") ;
-- (void)loadDefaultLeaderboardCategoryIDWithCompletionHandler:(void(^__nullable)(NSString * __nullable categoryID, NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 6_0, 7_0,"Use loadDefaultLeaderboardIdentifierWithCompletionHandler: instead") ;
-- (void)authenticateWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_8, 4_1, 6_0, "Set the authenticateHandler instead") ;
+- (void)setDefaultLeaderboardCategoryID:(nullable NSString *)categoryID completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-setDefaultLeaderboardIdentifier:completionHandler:", ios(6.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (void)loadDefaultLeaderboardCategoryIDWithCompletionHandler:(void(^__nullable)(NSString * __nullable categoryID, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadDefaultLeaderboardIdentifierWithCompletionHandler:", ios(6.0,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+- (void)authenticateWithCompletionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-authenticateHandler", ios(4.1,6.0), macos(10.8,10.8)) __TVOS_UNAVAILABLE;
 
 - (void)loadFriendPlayersWithCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable friendPlayers, NSError * __nullable error))completionHandler NS_DEPRECATED(10_10, 10_11, 8_0, 10_0);
 
@@ -130,16 +126,16 @@ GK_EXTERN NSNotificationName GKPlayerAuthenticationDidChangeNotificationName NS_
     1. Communications problem
     2. Unauthenticated player
  */
-- (void)generateIdentityVerificationSignatureWithCompletionHandler:(void (^__nullable)(NSURL * __nullable publicKeyUrl, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler  API_DEPRECATED("API deprecated. Use fetchItemsForIdentityVerificationSignature: and the teamPlayerID value to verify a user identity.", ios(7.0, 13.5), tvos(9.0, 13.4.8), macosx(10.10, 10.15.5), watchos(3.0,6.5));
+- (void)generateIdentityVerificationSignatureWithCompletionHandler:(void (^__nullable)(NSURL * __nullable publicKeyUrl, NSData * __nullable signature, NSData * __nullable salt, uint64_t timestamp, NSError * __nullable error))completionHandler  API_DEPRECATED_WITH_REPLACEMENT("-fetchItemsForIdentityVerificationSignature:completionHandler:", ios(7.0, 13.5), tvos(9.0, 13.4.8), macosx(10.10, 10.15.5), watchos(3.0,6.5));
 @end
 NS_ASSUME_NONNULL_END
 
 @interface GKLocalPlayer (Obsoleted)
 /** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use loadRecentPlayersWithCompletionHandler: instead")  NS_SWIFT_NAME(loadFriendsObsoleted(completionHandler:));;
+- (void)loadFriendsWithCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable friendIDs, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadRecentPlayersWithCompletionHandler:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE NS_SWIFT_NAME(loadFriendsObsoleted(completionHandler:));;
 
 /** This property is obsolete. ***/
-@property(nonatomic, readonly, nullable, retain) NSArray<NSString *> *friends NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, " This property is obsolete, Use loadFriendPlayersWithCompletionHandler: instead") ; // Array of player identifiers of friends for the local player. Not valid until loadFriendsWithCompletionHandler: has completed.
+@property(nonatomic, readonly, nullable, retain) NSArray<NSString *> *friends API_DEPRECATED_WITH_REPLACEMENT("-loadFriendPlayersWithCompletionHandler:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE; // Array of player identifiers of friends for the local player. Not valid until loadFriendsWithCompletionHandler: has completed.
 @end
 
 NS_ASSUME_NONNULL_BEGIN
@@ -247,12 +243,6 @@ typedef NS_ENUM(NSInteger, GKFriendsAuthorizationStatus) {
  */
 - (void)loadFriendsWithIdentifiers:(NSArray<NSString *> *)identifiers completionHandler:(void(^)(NSArray<GKPlayer *> * __nullable friends, NSError * __nullable error))completionHandler API_AVAILABLE(ios(14.5), macos(11.3), tvos(14.5), watchos(7.3)) NS_SWIFT_NAME(loadFriends(identifiedBy:completionHandler:));
 @end
-NS_ASSUME_NONNULL_END
-
-
-#import <GameKit/GKLocalPlayer.h>
-
-NS_ASSUME_NONNULL_BEGIN
 
 @interface GKLocalPlayer (UI)
 
@@ -300,4 +290,3 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 NS_ASSUME_NONNULL_END
-

@@ -75,6 +75,8 @@ to exclude some processes from analysis
 in addition to the supplied processes, target their children, grandchildren, etc.
 .It Fl s , Fl -skip
 skip processes that are dirty tracked and have no outstanding XPC transactions (i.e., are "clean")
+.It Fl -minFootprint Ar MiB
+skip processes with footprint less than the provided minimum MiB.
 .It Fl -forkCorpse
 analyze a forked corpse of the target process rather than the original process. Due to system resource limits on corpses this argument is not compatible with
 .Fl -all
@@ -108,6 +110,10 @@ Start
 in sampling mode, gathering data every
 .Ar interval
 seconds (which can be fractional like 0.5). Text output will be a concatenation of usual text output with added timestamps. JSON output will contain a "samples" array with many of the same key/values that would normally be at the top level. All other command line options are also supported in sampling mode.
+.It Fl -sample-duration Ar duration
+Time limit on the number of seconds to sample when combined with
+.Fl -sample .
+When this flag is omitted or set to 0, sampling continues until <ctrl-c>.
 .It Fl h , Fl -help
 display help and exit
 .El

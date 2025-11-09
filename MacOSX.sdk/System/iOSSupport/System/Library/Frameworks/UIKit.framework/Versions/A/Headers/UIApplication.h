@@ -14,6 +14,7 @@
 #import <UIKit/UIDevice.h>
 #import <UIKit/UIAlert.h>
 #import <UIKit/UIContentSizeCategory.h>
+#import <UIKit/UIOrientation.h>
 #import <UIKit/UISceneDefinitions.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -23,8 +24,8 @@ typedef NS_ENUM(NSInteger, UIStatusBarStyle) {
     UIStatusBarStyleLightContent     API_AVAILABLE(ios(7.0)) = 1, // Light content, for use on dark backgrounds
     UIStatusBarStyleDarkContent     API_AVAILABLE(ios(13.0)) = 3, // Dark content, for use on light backgrounds
     
-    UIStatusBarStyleBlackTranslucent API_DEPRECATED_WITH_REPLACEMENT("UIStatusBarStyleLightContent", ios(2.0, 7.0)) = 1,
-    UIStatusBarStyleBlackOpaque      API_DEPRECATED_WITH_REPLACEMENT("UIStatusBarStyleLightContent", ios(2.0, 7.0)) = 2,
+    UIStatusBarStyleBlackTranslucent API_DEPRECATED_WITH_REPLACEMENT("UIStatusBarStyleLightContent", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) = 1,
+    UIStatusBarStyleBlackOpaque      API_DEPRECATED_WITH_REPLACEMENT("UIStatusBarStyleLightContent", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) = 2,
 } API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UIStatusBarAnimation) {
@@ -33,38 +34,10 @@ typedef NS_ENUM(NSInteger, UIStatusBarAnimation) {
     UIStatusBarAnimationSlide API_AVAILABLE(ios(3.2)),
 } API_UNAVAILABLE(tvos);
 
-// Note that UIInterfaceOrientationLandscapeLeft is equal to UIDeviceOrientationLandscapeRight (and vice versa).
-// This is because rotating the device to the left requires rotating the content to the right.
-typedef NS_ENUM(NSInteger, UIInterfaceOrientation) {
-    UIInterfaceOrientationUnknown            = UIDeviceOrientationUnknown,
-    UIInterfaceOrientationPortrait           = UIDeviceOrientationPortrait,
-    UIInterfaceOrientationPortraitUpsideDown = UIDeviceOrientationPortraitUpsideDown,
-    UIInterfaceOrientationLandscapeLeft      = UIDeviceOrientationLandscapeRight,
-    UIInterfaceOrientationLandscapeRight     = UIDeviceOrientationLandscapeLeft
-} API_UNAVAILABLE(tvos);
-
 /* This exception is raised if supportedInterfaceOrientations returns 0, or if preferredInterfaceOrientationForPresentation
    returns an orientation that is not supported.
 */
 UIKIT_EXTERN NSExceptionName const UIApplicationInvalidInterfaceOrientationException API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos);
-
-typedef NS_OPTIONS(NSUInteger, UIInterfaceOrientationMask) {
-    UIInterfaceOrientationMaskPortrait = (1 << UIInterfaceOrientationPortrait),
-    UIInterfaceOrientationMaskLandscapeLeft = (1 << UIInterfaceOrientationLandscapeLeft),
-    UIInterfaceOrientationMaskLandscapeRight = (1 << UIInterfaceOrientationLandscapeRight),
-    UIInterfaceOrientationMaskPortraitUpsideDown = (1 << UIInterfaceOrientationPortraitUpsideDown),
-    UIInterfaceOrientationMaskLandscape = (UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-    UIInterfaceOrientationMaskAll = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight | UIInterfaceOrientationMaskPortraitUpsideDown),
-    UIInterfaceOrientationMaskAllButUpsideDown = (UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskLandscapeLeft | UIInterfaceOrientationMaskLandscapeRight),
-} API_UNAVAILABLE(tvos);
-
-static inline BOOL UIInterfaceOrientationIsPortrait(UIInterfaceOrientation orientation) API_UNAVAILABLE(tvos) {
-    return ((orientation) == UIInterfaceOrientationPortrait || (orientation) == UIInterfaceOrientationPortraitUpsideDown);
-}
-
-static inline BOOL UIInterfaceOrientationIsLandscape(UIInterfaceOrientation orientation) API_UNAVAILABLE(tvos) {
-    return ((orientation) == UIInterfaceOrientationLandscapeLeft || (orientation) == UIInterfaceOrientationLandscapeRight);
-}
 
 typedef NS_OPTIONS(NSUInteger, UIRemoteNotificationType) {
     UIRemoteNotificationTypeNone    = 0,
@@ -72,7 +45,7 @@ typedef NS_OPTIONS(NSUInteger, UIRemoteNotificationType) {
     UIRemoteNotificationTypeSound   = 1 << 1,
     UIRemoteNotificationTypeAlert   = 1 << 2,
     UIRemoteNotificationTypeNewsstandContentAvailability = 1 << 3,
-} API_DEPRECATED("Use UserNotifications Framework's UNAuthorizationOptions for user notifications and registerForRemoteNotifications for receiving remote notifications instead.", ios(3.0, 8.0)) API_UNAVAILABLE(tvos);
+} API_DEPRECATED("Use UserNotifications Framework's UNAuthorizationOptions for user notifications and registerForRemoteNotifications for receiving remote notifications instead.", ios(3.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSUInteger, UIBackgroundFetchResult) {
     UIBackgroundFetchResultNewData,
@@ -94,7 +67,7 @@ typedef NS_ENUM(NSInteger, UIApplicationState) {
 
 typedef NSUInteger UIBackgroundTaskIdentifier NS_TYPED_ENUM;
 UIKIT_EXTERN const UIBackgroundTaskIdentifier UIBackgroundTaskInvalid  API_AVAILABLE(ios(4.0));
-UIKIT_EXTERN const NSTimeInterval UIMinimumKeepAliveTimeout API_DEPRECATED("Please use PushKit for VoIP applications.", ios(4.0, 13.0), tvos(9.0, 13.0));
+UIKIT_EXTERN const NSTimeInterval UIMinimumKeepAliveTimeout API_DEPRECATED("Please use PushKit for VoIP applications.", ios(4.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos);
 UIKIT_EXTERN const NSTimeInterval UIApplicationBackgroundFetchIntervalMinimum API_AVAILABLE(ios(7.0), tvos(11.0));
 UIKIT_EXTERN const NSTimeInterval UIApplicationBackgroundFetchIntervalNever API_AVAILABLE(ios(7.0), tvos(11.0));
 
@@ -106,7 +79,7 @@ typedef NSString * UIApplicationOpenExternalURLOptionsKey NS_TYPED_ENUM;
 @protocol UIApplicationDelegate;
 @class INIntent;
 @class INIntentResponse;
-@class UIScene, UIWindowScene, UISceneSession, UISceneConfiguration, UISceneConnectionOptions, UISceneActivationRequestOptions, UISceneDestructionRequestOptions;
+@class UIScene, UIWindowScene, UISceneSession, UISceneSessionActivationRequest, UISceneConfiguration, UISceneConnectionOptions, UISceneActivationRequestOptions, UISceneDestructionRequestOptions;
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UIApplication : UIResponder
@@ -115,35 +88,35 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @property(nullable, nonatomic, assign) id<UIApplicationDelegate> delegate;
 
-- (void)beginIgnoringInteractionEvents API_DEPRECATED("Use UIView's userInteractionEnabled property instead", ios(2.0, 13.0)) NS_EXTENSION_UNAVAILABLE_IOS("");               // nested. set should be set during animations & transitions to ignore touch and other events
-- (void)endIgnoringInteractionEvents API_DEPRECATED("Use UIView's userInteractionEnabled property instead", ios(2.0, 13.0)) NS_EXTENSION_UNAVAILABLE_IOS("");
-@property(nonatomic, readonly, getter=isIgnoringInteractionEvents) BOOL ignoringInteractionEvents API_DEPRECATED("Use UIView's userInteractionEnabled property instead", ios(2.0, 13.0));                  // returns YES if we are at least one deep in ignoring events
+- (void)beginIgnoringInteractionEvents API_DEPRECATED("Use UIView's userInteractionEnabled property instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);               // nested. set should be set during animations & transitions to ignore touch and other events
+- (void)endIgnoringInteractionEvents API_DEPRECATED("Use UIView's userInteractionEnabled property instead", ios(2.0, 13.0));
+@property(nonatomic, readonly, getter=isIgnoringInteractionEvents) BOOL ignoringInteractionEvents API_DEPRECATED("Use UIView's userInteractionEnabled property instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);                  // returns YES if we are at least one deep in ignoring events
 
 @property(nonatomic,getter=isIdleTimerDisabled)       BOOL idleTimerDisabled;	  // default is NO
 
-- (BOOL)openURL:(NSURL*)url API_DEPRECATED_WITH_REPLACEMENT("openURL:options:completionHandler:", ios(2.0, 10.0)) NS_EXTENSION_UNAVAILABLE_IOS("");
+- (BOOL)openURL:(NSURL*)url API_DEPRECATED_WITH_REPLACEMENT("openURL:options:completionHandler:", ios(2.0, 10.0)) API_UNAVAILABLE(visionos);
 - (BOOL)canOpenURL:(NSURL *)url API_AVAILABLE(ios(3.0));
 
 // Options are specified in the section below for openURL options. An empty options dictionary will result in the same
 // behavior as the older openURL call, aside from the fact that this is asynchronous and calls the completion handler rather
 // than returning a result.
 // The completion handler is called on the main queue.
-- (void)openURL:(NSURL*)url options:(NSDictionary<UIApplicationOpenExternalURLOptionsKey, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completion API_AVAILABLE(ios(10.0)) NS_EXTENSION_UNAVAILABLE_IOS("");
+- (void)openURL:(NSURL*)url options:(NSDictionary<UIApplicationOpenExternalURLOptionsKey, id> *)options completionHandler:(void (^ __nullable)(BOOL success))completion API_AVAILABLE(ios(10.0));
 
 - (void)sendEvent:(UIEvent *)event;
 
-@property(nullable, nonatomic,readonly) UIWindow *keyWindow API_DEPRECATED("Should not be used for applications that support multiple scenes as it returns a key window across all connected scenes", ios(2.0, 13.0));
-@property(nonatomic,readonly) NSArray<__kindof UIWindow *>  *windows API_DEPRECATED("Use UIWindowScene.windows on a relevant window scene instead", ios(2.0, 15.0));
+@property(nullable, nonatomic,readonly) UIWindow *keyWindow API_DEPRECATED("Should not be used for applications that support multiple scenes as it returns a key window across all connected scenes", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic,readonly) NSArray<__kindof UIWindow *>  *windows API_DEPRECATED("Use UIWindowScene.windows on a relevant window scene instead", ios(2.0, 15.0), visionos(1.0, 1.0));
 
 - (BOOL)sendAction:(SEL)action to:(nullable id)target from:(nullable id)sender forEvent:(nullable UIEvent *)event;
 
-@property(nonatomic,getter=isNetworkActivityIndicatorVisible) BOOL networkActivityIndicatorVisible API_UNAVAILABLE(tvos) API_DEPRECATED("Provide a custom network activity UI in your app if desired.", ios(2.0, 13.0));
+@property(nonatomic,getter=isNetworkActivityIndicatorVisible) BOOL networkActivityIndicatorVisible API_UNAVAILABLE(tvos) API_DEPRECATED("Provide a custom network activity UI in your app if desired.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
 
-@property(readonly, nonatomic) UIStatusBarStyle statusBarStyle API_UNAVAILABLE(tvos) API_DEPRECATED("Use the statusBarManager property of the window scene instead.", ios(2.0, 13.0)); // default is UIStatusBarStyleDefault
+@property(readonly, nonatomic) UIStatusBarStyle statusBarStyle API_UNAVAILABLE(tvos) API_DEPRECATED("Use the statusBarManager property of the window scene instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos); // default is UIStatusBarStyleDefault
 
-@property(readonly, nonatomic,getter=isStatusBarHidden) BOOL statusBarHidden API_UNAVAILABLE(tvos) API_DEPRECATED("Use the statusBarManager property of the window scene instead.", ios(2.0, 13.0));
+@property(readonly, nonatomic,getter=isStatusBarHidden) BOOL statusBarHidden API_UNAVAILABLE(tvos) API_DEPRECATED("Use the statusBarManager property of the window scene instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
 
-@property(readonly, nonatomic) UIInterfaceOrientation statusBarOrientation API_UNAVAILABLE(tvos) API_DEPRECATED("Use the interfaceOrientation property of the window scene instead.", ios(2.0, 13.0));
+@property(readonly, nonatomic) UIInterfaceOrientation statusBarOrientation API_UNAVAILABLE(tvos) API_DEPRECATED("Use the interfaceOrientation property of the window scene instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
 
 // The system only calls this method if the application delegate has not
 // implemented the delegate equivalent. It returns the orientations specified by
@@ -154,10 +127,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // orientations supported by this application.
 - (UIInterfaceOrientationMask)supportedInterfaceOrientationsForWindow:(nullable UIWindow *)window API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos);
 
-@property(nonatomic,readonly) NSTimeInterval statusBarOrientationAnimationDuration API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)); // Returns the animation duration for the status bar during a 90 degree orientation change.  It should be doubled for a 180 degree orientation change.
-@property(nonatomic,readonly) CGRect statusBarFrame API_UNAVAILABLE(tvos) API_DEPRECATED("Use the statusBarManager property of the window scene instead.", ios(2.0, 13.0)); // returns CGRectZero if the status bar is hidden
+@property(nonatomic,readonly) NSTimeInterval statusBarOrientationAnimationDuration API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos); // Returns the animation duration for the status bar during a 90 degree orientation change.  It should be doubled for a 180 degree orientation change.
+@property(nonatomic,readonly) CGRect statusBarFrame API_UNAVAILABLE(tvos) API_DEPRECATED("Use the statusBarManager property of the window scene instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos); // returns CGRectZero if the status bar is hidden
 
-@property(nonatomic) NSInteger applicationIconBadgeNumber;  // set to 0 to hide. default is 0. In iOS 8.0 and later, your application must register for user notifications using -[UIApplication registerUserNotificationSettings:] before being able to set the icon badge.
+@property(nonatomic) NSInteger applicationIconBadgeNumber API_DEPRECATED("Use -[UNUserNotificationCenter setBadgeCount:withCompletionHandler:] instead.", ios(2.0, 17.0));
 
 @property(nonatomic) BOOL applicationSupportsShakeToEdit API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
 
@@ -176,7 +149,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
     This setter will have no effect unless your application has the "fetch" 
     UIBackgroundMode. See the UIApplicationDelegate method
     `application:performFetchWithCompletionHandler:` for more. */
-- (void)setMinimumBackgroundFetchInterval:(NSTimeInterval)minimumBackgroundFetchInterval API_DEPRECATED("Use a BGAppRefreshTask in the BackgroundTasks framework instead", ios(7.0, 13.0), tvos(11.0, 13.0));
+- (void)setMinimumBackgroundFetchInterval:(NSTimeInterval)minimumBackgroundFetchInterval API_DEPRECATED("Use a BGAppRefreshTask in the BackgroundTasks framework instead", ios(7.0, 13.0), tvos(11.0, 13.0)) API_UNAVAILABLE(visionos);
 ;
 
 /*! When background refresh is available for an application, it may launched or resumed in the background to handle significant
@@ -201,10 +174,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // returns YES if the application both declares multiple scene support in its info.plist and the executing environment allows multiple scenes for at least one system type. NO otherwise.
 @property(nonatomic, readonly) BOOL supportsMultipleScenes API_AVAILABLE(ios(13.0));
 
-// Request a given session be activated, first connecting it to the application if necessary.
-// Providing a session will activate, connecting if necessary, the interface backed by the already existing UISceneSession.
-// Providing a user activity will dispatch that activity to the provided session's scene. If no session is provided, then the system will select one (possibly creating a new session, if appropriate) and pass the activity to the session scene's delegate.
-- (void)requestSceneSessionActivation:(nullable UISceneSession *)sceneSession userActivity:(nullable NSUserActivity *)userActivity options:(nullable UISceneActivationRequestOptions *)options errorHandler:(nullable void (^)(NSError * error))errorHandler API_AVAILABLE(ios(13.0));
+/// Asks the system to activate an existing scene, or create a new scene and associate it with your app.
+/// - Parameters:
+///   - request: The activation request.
+///   - errorHandler: A handler to be called if the request fails.
+- (void)activateSceneSessionForRequest:(UISceneSessionActivationRequest *)request
+                          errorHandler:(nullable void (^)(NSError * error))errorHandler API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+- (void)requestSceneSessionActivation:(nullable UISceneSession *)sceneSession
+                         userActivity:(nullable NSUserActivity *)userActivity
+                              options:(nullable UISceneActivationRequestOptions *)options
+                         errorHandler:(nullable void (^)(NSError * error))errorHandler API_DEPRECATED("Please use activateSceneSessionForRequest:errorHandler:", ios(13.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED));
 
 // requests that a given session be closed, disconnecting the currently connected scene if present, and calling the -application:didDiscardSceneSessions: method on the application's delegate
 - (void)requestSceneSessionDestruction:(UISceneSession *)sceneSession options:(nullable UISceneDestructionRequestOptions *)options errorHandler:(nullable void (^)(NSError * error))errorHandler API_AVAILABLE(ios(13.0));
@@ -224,23 +204,23 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Returns YES if the application is currently registered for remote notifications, taking into account any systemwide settings; doesn't relate to connectivity.
 @property(nonatomic, readonly, getter=isRegisteredForRemoteNotifications) BOOL registeredForRemoteNotifications API_AVAILABLE(ios(8.0));
 
-- (void)registerForRemoteNotificationTypes:(UIRemoteNotificationType)types API_DEPRECATED("Use -[UIApplication registerForRemoteNotifications] and UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:]", ios(3.0, 8.0)) API_UNAVAILABLE(tvos);
+- (void)registerForRemoteNotificationTypes:(UIRemoteNotificationType)types API_DEPRECATED("Use -[UIApplication registerForRemoteNotifications] and UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:]", ios(3.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Returns the enabled types, also taking into account any systemwide settings; doesn't relate to connectivity.
-- (UIRemoteNotificationType)enabledRemoteNotificationTypes API_DEPRECATED("Use -[UIApplication isRegisteredForRemoteNotifications] and UserNotifications Framework's -[UNUserNotificationCenter getNotificationSettingsWithCompletionHandler:] to retrieve user-enabled remote notification and user notification settings", ios(3.0, 8.0)) API_UNAVAILABLE(tvos);
+- (UIRemoteNotificationType)enabledRemoteNotificationTypes API_DEPRECATED("Use -[UIApplication isRegisteredForRemoteNotifications] and UserNotifications Framework's -[UNUserNotificationCenter getNotificationSettingsWithCompletionHandler:] to retrieve user-enabled remote notification and user notification settings", ios(3.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 
 // In iOS 8.0 and later, your application must register for user notifications using -[UIApplication registerUserNotificationSettings:] before being able to schedule and present UILocalNotifications
 @interface UIApplication (UILocalNotifications)
 
-- (void)presentLocalNotificationNow:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter addNotificationRequest:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)presentLocalNotificationNow:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter addNotificationRequest:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
-- (void)scheduleLocalNotification:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter addNotificationRequest:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);  // copies notification
-- (void)cancelLocalNotification:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter removePendingNotificationRequestsWithIdentifiers:]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
-- (void)cancelAllLocalNotifications API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter removeAllPendingNotificationRequests]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)scheduleLocalNotification:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter addNotificationRequest:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);  // copies notification
+- (void)cancelLocalNotification:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter removePendingNotificationRequestsWithIdentifiers:]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)cancelAllLocalNotifications API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter removeAllPendingNotificationRequests]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
-@property(nullable,nonatomic,copy) NSArray<UILocalNotification *> *scheduledLocalNotifications API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter getPendingNotificationRequestsWithCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
+@property(nullable,nonatomic,copy) NSArray<UILocalNotification *> *scheduledLocalNotifications API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter getPendingNotificationRequestsWithCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -248,10 +228,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UIApplication (UIUserNotificationSettings)
 
 // Registering UIUserNotificationSettings more than once results in previous settings being overwritten.
-- (void)registerUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:] and -[UNUserNotificationCenter setNotificationCategories:]", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)registerUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:] and -[UNUserNotificationCenter setNotificationCategories:]", ios(8.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Returns the enabled user notification settings, also taking into account any systemwide settings.
-@property(nonatomic, readonly, nullable) UIUserNotificationSettings *currentUserNotificationSettings API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter getNotificationSettingsWithCompletionHandler:] and -[UNUserNotificationCenter getNotificationCategoriesWithCompletionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly, nullable) UIUserNotificationSettings *currentUserNotificationSettings API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter getNotificationSettingsWithCompletionHandler:] and -[UNUserNotificationCenter getNotificationCategoriesWithCompletionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -263,7 +243,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @end
 
 @interface UIApplication (UINewsstand)
-- (void)setNewsstandIconImage:(nullable UIImage *)image API_DEPRECATED("Newsstand apps now behave like normal apps on SpringBoard", ios(5.0, 9.0)) API_UNAVAILABLE(tvos);
+- (void)setNewsstandIconImage:(nullable UIImage *)image API_DEPRECATED("Newsstand apps now behave like normal apps on SpringBoard", ios(5.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 @end
 
 @class UIApplicationShortcutItem;
@@ -316,8 +296,8 @@ NS_SWIFT_UI_ACTOR
 
 - (void)applicationDidBecomeActive:(UIApplication *)application;
 - (void)applicationWillResignActive:(UIApplication *)application;
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url API_DEPRECATED_WITH_REPLACEMENT("application:openURL:options:", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation API_DEPRECATED_WITH_REPLACEMENT("application:openURL:options:", ios(4.2, 9.0)) API_UNAVAILABLE(tvos);
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url API_DEPRECATED_WITH_REPLACEMENT("application:openURL:options:", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation API_DEPRECATED_WITH_REPLACEMENT("application:openURL:options:", ios(4.2, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 
 typedef NSString * UIApplicationOpenURLOptionsKey NS_TYPED_ENUM;
@@ -328,36 +308,36 @@ typedef NSString * UIApplicationOpenURLOptionsKey NS_TYPED_ENUM;
 - (void)applicationWillTerminate:(UIApplication *)application;
 - (void)applicationSignificantTimeChange:(UIApplication *)application;        // midnight, carrier time update, daylight savings time change
 
-- (void)application:(UIApplication *)application willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation duration:(NSTimeInterval)duration API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));
-- (void)application:(UIApplication *)application didChangeStatusBarOrientation:(UIInterfaceOrientation)oldStatusBarOrientation API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));
+- (void)application:(UIApplication *)application willChangeStatusBarOrientation:(UIInterfaceOrientation)newStatusBarOrientation duration:(NSTimeInterval)duration API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
+- (void)application:(UIApplication *)application didChangeStatusBarOrientation:(UIInterfaceOrientation)oldStatusBarOrientation API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
 
-- (void)application:(UIApplication *)application willChangeStatusBarFrame:(CGRect)newStatusBarFrame API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));   // in screen coordinates
-- (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));
+- (void)application:(UIApplication *)application willChangeStatusBarFrame:(CGRect)newStatusBarFrame API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);   // in screen coordinates
+- (void)application:(UIApplication *)application didChangeStatusBarFrame:(CGRect)oldStatusBarFrame API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
 
 // This callback will be made upon calling -[UIApplication registerUserNotificationSettings:]. The settings the user has granted to the application will be passed in as the second argument.
- - (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenter requestAuthorizationWithOptions:completionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken API_AVAILABLE(ios(3.0));
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error API_AVAILABLE(ios(3.0));
 
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications", ios(3.0, 10.0));
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:] for user visible notifications and -[UIApplicationDelegate application:didReceiveRemoteNotification:fetchCompletionHandler:] for silent remote notifications", ios(3.0, 10.0)) API_UNAVAILABLE(visionos);
 
-- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate willPresentNotification:withCompletionHandler:] or -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Called when your app has been activated by the user selecting an action from a local notification.
 // A nil action identifier indicates the default action.
 // You should call the completion handler as soon as you've finished handling the action.
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(UILocalNotification *)notification completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(9.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(9.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Called when your app has been activated by the user selecting an action from a remote notification.
 // A nil action identifier indicates the default action.
 // You should call the completion handler as soon as you've finished handling the action.
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(8.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(UILocalNotification *)notification withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(9.0, 10.0)) API_UNAVAILABLE(tvos);
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(nullable NSString *)identifier forLocalNotification:(UILocalNotification *)notification withResponseInfo:(NSDictionary *)responseInfo completionHandler:(void (^)(void))completionHandler API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(9.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 /*! This delegate method offers an opportunity for applications with the "remote-notification" background mode to fetch appropriate new data in response to an incoming remote notification. You should call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost.
  
@@ -365,7 +345,7 @@ typedef NSString * UIApplicationOpenURLOptionsKey NS_TYPED_ENUM;
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler API_AVAILABLE(ios(7.0));
 
 /// Applications with the "fetch" background mode may be given opportunities to fetch updated content in the background or when it is convenient for the system. This method will be called in these situations. You should call the fetchCompletionHandler as soon as you're finished performing that operation, so the system can accurately estimate its power and data cost.
-- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED("Use a BGAppRefreshTask in the BackgroundTasks framework instead", ios(7.0, 13.0), tvos(11.0, 13.0));
+- (void)application:(UIApplication *)application performFetchWithCompletionHandler:(void (^)(UIBackgroundFetchResult result))completionHandler NS_SWIFT_DISABLE_ASYNC API_DEPRECATED("Use a BGAppRefreshTask in the BackgroundTasks framework instead", ios(7.0, 13.0), tvos(11.0, 13.0)) API_UNAVAILABLE(visionos);
 
 // Called when the user activates your application by selecting a shortcut on the home screen,
 // except when -application:willFinishLaunchingWithOptions: or -application:didFinishLaunchingWithOptions returns NO.
@@ -384,7 +364,7 @@ typedef NSString * UIApplicationOpenURLOptionsKey NS_TYPED_ENUM;
 
 - (nullable id)application:(UIApplication *)application handlerForIntent:(INIntent *)intent API_AVAILABLE(ios(14.0));
 
-- (void)application:(UIApplication *)application handleIntent:(INIntent *)intent completionHandler:(void(^)(INIntentResponse *intentResponse))completionHandler API_DEPRECATED("Use application:handlerForIntent: instead", ios(11.0, 14.0));
+- (void)application:(UIApplication *)application handleIntent:(INIntent *)intent completionHandler:(void(^)(INIntentResponse *intentResponse))completionHandler API_DEPRECATED("Use application:handlerForIntent: instead", ios(11.0, 14.0), visionos(1.0, 1.0));
 
 - (void)applicationDidEnterBackground:(UIApplication *)application API_AVAILABLE(ios(4.0));
 - (void)applicationWillEnterForeground:(UIApplication *)application API_AVAILABLE(ios(4.0));
@@ -412,8 +392,8 @@ typedef NSString * UIApplicationExtensionPointIdentifier NS_TYPED_ENUM;
 - (void)application:(UIApplication *)application didDecodeRestorableStateWithCoder:(NSCoder *)coder API_AVAILABLE(ios(6.0));
 
 // Deprecated State Restoration opt-in methods:
-- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder API_DEPRECATED("Use application:shouldSaveSecureApplicationState: instead", ios(6.0, 13.2));
-- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder API_DEPRECATED("Use application:shouldRestoreSecureApplicationState: instead", ios(6.0, 13.2));
+- (BOOL)application:(UIApplication *)application shouldSaveApplicationState:(NSCoder *)coder API_DEPRECATED("Use application:shouldSaveSecureApplicationState: instead", ios(6.0, 13.2)) API_UNAVAILABLE(visionos);
+- (BOOL)application:(UIApplication *)application shouldRestoreApplicationState:(NSCoder *)coder API_DEPRECATED("Use application:shouldRestoreSecureApplicationState: instead", ios(6.0, 13.2)) API_UNAVAILABLE(visionos);
 
 #pragma mark -- User Activity Continuation protocol adopted by UIApplication delegate --
 
@@ -448,7 +428,7 @@ typedef NSString * UIApplicationExtensionPointIdentifier NS_TYPED_ENUM;
 - (UISceneConfiguration *)application:(UIApplication *)application configurationForConnectingSceneSession:(UISceneSession *)connectingSceneSession options:(UISceneConnectionOptions *)options API_AVAILABLE(ios(13.0));
 
 // Called when the system, due to a user interaction or a request from the application itself, removes one or more representation from the -[UIApplication openSessions] set
-// If sessions are discarded while the application is not running, this method is called shortly after the applications next launch.
+// If sessions are discarded while the application is not running, this method is called shortly after the application's next launch.
 - (void)application:(UIApplication *)application didDiscardSceneSessions:(NSSet<UISceneSession *> *)sceneSessions API_AVAILABLE(ios(13.0));
 
 #pragma mark -- UIKeyCommand Support --
@@ -461,23 +441,23 @@ typedef NSString * UIApplicationExtensionPointIdentifier NS_TYPED_ENUM;
 
 @interface UIApplication(UIApplicationDeprecated)
 
-@property(nonatomic,getter=isProximitySensingEnabled) BOOL proximitySensingEnabled API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(tvos); // default is NO. see UIDevice for replacement
-- (void)setStatusBarHidden:(BOOL)hidden animated:(BOOL)animated API_DEPRECATED("Use -[UIViewController prefersStatusBarHidden]", ios(2.0, 3.2)) API_UNAVAILABLE(tvos);
+@property(nonatomic,getter=isProximitySensingEnabled) BOOL proximitySensingEnabled API_DEPRECATED("", ios(2.0, 3.0)) API_UNAVAILABLE(visionos, tvos); // default is NO. see UIDevice for replacement
+- (void)setStatusBarHidden:(BOOL)hidden animated:(BOOL)animated API_DEPRECATED("Use -[UIViewController prefersStatusBarHidden]", ios(2.0, 3.2)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Explicit setting of the status bar orientation is more limited in iOS 6.0 and later.
-@property(readwrite, nonatomic) UIInterfaceOrientation statusBarOrientation API_DEPRECATED("Explicit setting of the status bar orientation is more limited in iOS 6.0 and later", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
-- (void)setStatusBarOrientation:(UIInterfaceOrientation)interfaceOrientation animated:(BOOL)animated API_DEPRECATED("Explicit setting of the status bar orientation is more limited in iOS 6.0 and later", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
+@property(readwrite, nonatomic) UIInterfaceOrientation statusBarOrientation API_DEPRECATED("Explicit setting of the status bar orientation is more limited in iOS 6.0 and later", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)setStatusBarOrientation:(UIInterfaceOrientation)interfaceOrientation animated:(BOOL)animated API_DEPRECATED("Explicit setting of the status bar orientation is more limited in iOS 6.0 and later", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Setting the statusBarStyle does nothing if your application is using the default UIViewController-based status bar system.
-@property(readwrite, nonatomic) UIStatusBarStyle statusBarStyle API_DEPRECATED("Use -[UIViewController preferredStatusBarStyle]", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
-- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated API_DEPRECATED("Use -[UIViewController preferredStatusBarStyle]", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
+@property(readwrite, nonatomic) UIStatusBarStyle statusBarStyle API_DEPRECATED("Use -[UIViewController preferredStatusBarStyle]", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)setStatusBarStyle:(UIStatusBarStyle)statusBarStyle animated:(BOOL)animated API_DEPRECATED("Use -[UIViewController preferredStatusBarStyle]", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Setting statusBarHidden does nothing if your application is using the default UIViewController-based status bar system.
-@property(readwrite, nonatomic,getter=isStatusBarHidden) BOOL statusBarHidden API_DEPRECATED("Use -[UIViewController prefersStatusBarHidden]", ios(2.0, 9.0)) API_UNAVAILABLE(tvos);
-- (void)setStatusBarHidden:(BOOL)hidden withAnimation:(UIStatusBarAnimation)animation API_DEPRECATED("Use -[UIViewController prefersStatusBarHidden]", ios(3.2, 9.0)) API_UNAVAILABLE(tvos);
+@property(readwrite, nonatomic,getter=isStatusBarHidden) BOOL statusBarHidden API_DEPRECATED("Use -[UIViewController prefersStatusBarHidden]", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)setStatusBarHidden:(BOOL)hidden withAnimation:(UIStatusBarAnimation)animation API_DEPRECATED("Use -[UIViewController prefersStatusBarHidden]", ios(3.2, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
-- (BOOL)setKeepAliveTimeout:(NSTimeInterval)timeout handler:(void(^ __nullable)(void))keepAliveHandler API_DEPRECATED("Please use PushKit for VoIP applications instead of calling this method", ios(4.0, 9.0)) API_UNAVAILABLE(tvos);
-- (void)clearKeepAliveTimeout API_DEPRECATED("Please use PushKit for VoIP applications instead of calling this method", ios(4.0, 9.0)) API_UNAVAILABLE(tvos);
+- (BOOL)setKeepAliveTimeout:(NSTimeInterval)timeout handler:(void(^ __nullable)(void))keepAliveHandler API_DEPRECATED("Please use PushKit for VoIP applications instead of calling this method", ios(4.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)clearKeepAliveTimeout API_DEPRECATED("Please use PushKit for VoIP applications instead of calling this method", ios(4.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -496,12 +476,12 @@ UIKIT_EXTERN NSNotificationName const UIApplicationWillResignActiveNotification;
 UIKIT_EXTERN NSNotificationName const UIApplicationDidReceiveMemoryWarningNotification;
 UIKIT_EXTERN NSNotificationName const UIApplicationWillTerminateNotification;
 UIKIT_EXTERN NSNotificationName const UIApplicationSignificantTimeChangeNotification;
-UIKIT_EXTERN NSNotificationName const UIApplicationWillChangeStatusBarOrientationNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)); // userInfo contains NSNumber with new orientation
-UIKIT_EXTERN NSNotificationName const UIApplicationDidChangeStatusBarOrientationNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));  // userInfo contains NSNumber with old orientation
-UIKIT_EXTERN NSString *const UIApplicationStatusBarOrientationUserInfoKey API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));            // userInfo dictionary key for status bar orientation
-UIKIT_EXTERN NSNotificationName const UIApplicationWillChangeStatusBarFrameNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));       // userInfo contains NSValue with new frame
-UIKIT_EXTERN NSNotificationName const UIApplicationDidChangeStatusBarFrameNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));        // userInfo contains NSValue with old frame
-UIKIT_EXTERN NSString *const UIApplicationStatusBarFrameUserInfoKey API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0));                  // userInfo dictionary key for status bar frame
+UIKIT_EXTERN NSNotificationName const UIApplicationWillChangeStatusBarOrientationNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos); // userInfo contains NSNumber with new orientation
+UIKIT_EXTERN NSNotificationName const UIApplicationDidChangeStatusBarOrientationNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);  // userInfo contains NSNumber with old orientation
+UIKIT_EXTERN NSString *const UIApplicationStatusBarOrientationUserInfoKey API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);            // userInfo dictionary key for status bar orientation
+UIKIT_EXTERN NSNotificationName const UIApplicationWillChangeStatusBarFrameNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);       // userInfo contains NSValue with new frame
+UIKIT_EXTERN NSNotificationName const UIApplicationDidChangeStatusBarFrameNotification API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);        // userInfo contains NSValue with old frame
+UIKIT_EXTERN NSString *const UIApplicationStatusBarFrameUserInfoKey API_UNAVAILABLE(tvos) API_DEPRECATED("Use viewWillTransitionToSize:withTransitionCoordinator: instead.", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);                  // userInfo dictionary key for status bar frame
 UIKIT_EXTERN NSNotificationName const UIApplicationBackgroundRefreshStatusDidChangeNotification API_AVAILABLE(ios(7.0), tvos(11.0));
 
 UIKIT_EXTERN NSNotificationName const UIApplicationProtectedDataWillBecomeUnavailable    API_AVAILABLE(ios(4.0));
@@ -510,8 +490,8 @@ UIKIT_EXTERN NSNotificationName const UIApplicationProtectedDataDidBecomeAvailab
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsURLKey                   NS_SWIFT_NAME(url) API_AVAILABLE(ios(3.0)); // userInfo contains NSURL with launch URL
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsSourceApplicationKey     NS_SWIFT_NAME(sourceApplication) API_AVAILABLE(ios(3.0)); // userInfo contains NSString with bundle ID of the originating application; non-nil if the originating application and this application share the same team identifier
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsRemoteNotificationKey    NS_SWIFT_NAME(remoteNotification) API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos); // userInfo contains NSDictionary with payload
-UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsLocalNotificationKey     NS_SWIFT_NAME(localNotification) API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(tvos); // userInfo contains a UILocalNotification
-UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsAnnotationKey            NS_SWIFT_NAME(annotation) API_DEPRECATED("This dictionary key is no longer used.", ios(3.2, 16.0)); // userInfo contains object with annotation property list
+UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsLocalNotificationKey     NS_SWIFT_NAME(localNotification) API_DEPRECATED("Use UserNotifications Framework's -[UNUserNotificationCenterDelegate didReceiveNotificationResponse:withCompletionHandler:]", ios(4.0, 10.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // userInfo contains a UILocalNotification
+UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsAnnotationKey            NS_SWIFT_NAME(annotation) API_DEPRECATED("This dictionary key is no longer used.", ios(3.2, 16.0)) API_UNAVAILABLE(visionos); // userInfo contains object with annotation property list
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsLocationKey              NS_SWIFT_NAME(location) API_AVAILABLE(ios(4.0)); // app was launched in response to a CoreLocation event.
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsNewsstandDownloadsKey    NS_SWIFT_NAME(newsstandDownloads) API_AVAILABLE(ios(5.0)) API_UNAVAILABLE(tvos); // userInfo contains an NSArray of NKAssetDownload identifiers
 UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsBluetoothCentralsKey     NS_SWIFT_NAME(bluetoothCentrals) API_AVAILABLE(ios(7.0)); // userInfo contains an NSArray of CBCentralManager restore identifiers
@@ -527,7 +507,7 @@ UIKIT_EXTERN UIApplicationLaunchOptionsKey const UIApplicationLaunchOptionsCloud
 UIKIT_EXTERN NSString *const UIApplicationOpenSettingsURLString API_AVAILABLE(ios(8.0));
 
 #if __swift__
-UIKIT_EXTERN NSString *const UIApplicationOpenNotificationSettingsURLString API_DEPRECATED_WITH_REPLACEMENT("UIApplication.openNotificationSettingsURLString", ios(15.4, 16.0));
+UIKIT_EXTERN NSString *const UIApplicationOpenNotificationSettingsURLString API_DEPRECATED_WITH_REPLACEMENT("UIApplication.openNotificationSettingsURLString", ios(15.4, 16.0), visionos(1.0, 1.0));
 #else
 UIKIT_EXTERN NSString *const UIApplicationOpenNotificationSettingsURLString API_AVAILABLE(ios(15.4));
 #endif

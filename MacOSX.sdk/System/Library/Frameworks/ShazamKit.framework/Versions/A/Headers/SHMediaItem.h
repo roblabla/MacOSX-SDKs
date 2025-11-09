@@ -68,6 +68,9 @@ SH_EXPORT SHMediaItemProperty const SHMediaItemTimeRanges API_AVAILABLE(macos(13
 /// The frequency skew ranges that are described by this @c SHMediaItem
 SH_EXPORT SHMediaItemProperty const SHMediaItemFrequencySkewRanges API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_REFINED_FOR_SWIFT;
 
+/// The date when the media item was created
+SH_EXPORT SHMediaItemProperty const SHMediaItemCreationDate API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
 /// @brief @c SHMediaItem represents metadata associated with a @c SHSignature
 /// @discussion A @c SHMediaItem is used in two distinct ways
 ///     1. As the base class of a @c SHMatchedMediaItem, and therefore as the result of a match
@@ -135,6 +138,10 @@ SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), wa
 /// @brief An array of @c SHRange that indicate the frequency skews in the reference signature that this media item describes
 @property (NS_NONATOMIC_IOSONLY, strong, readonly, nonnull) NSArray<SHRange *> *frequencySkewRanges API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_REFINED_FOR_SWIFT;
 
+/// @brief The date when the @c SHMediaItem was created
+/// @note This may be fetched using the key @c SHMediaItemCreationDate
+@property (NS_NONATOMIC_IOSONLY, strong, readonly, nullable) NSDate *creationDate API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
 /// Construct a new instance with the provided dictionary
 /// @param properties A dictionary of @c SHMediaItemProperty and their values
 /// @discussion You may add your own keys here to return custom data, custom data should conform to NSCoding
@@ -142,7 +149,7 @@ SH_EXPORT NS_SWIFT_SENDABLE API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), wa
 
 /// @brief Fetch a @c SHMediaItem by Shazam ID
 /// @discussion The completionHandler will contain a @c SHMediaItem if the ShazamID is valid, otherwise nil and an error
-+ (void)fetchMediaItemWithShazamID:(NSString *)shazamID completionHandler:(void (^)(SHMediaItem * __nullable mediaItem, NSError * __nullable error))completionHandler NS_SWIFT_NAME(fetch(shazamID:completionHandler:));
++ (void)fetchMediaItemWithShazamID:(NSString *)shazamID completionHandler:(void (NS_SWIFT_SENDABLE ^)(SHMediaItem * __nullable mediaItem, NSError * __nullable error))completionHandler NS_SWIFT_NAME(fetch(shazamID:completionHandler:));
 
 /// Retrieve a value using a known key
 /// @param property The `SHMediaItemProperty` for a value

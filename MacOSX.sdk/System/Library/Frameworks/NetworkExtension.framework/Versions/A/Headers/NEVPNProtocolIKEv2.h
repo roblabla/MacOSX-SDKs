@@ -17,20 +17,20 @@ NS_ASSUME_NONNULL_BEGIN
  */
 typedef NS_ENUM(NSInteger, NEVPNIKEv2EncryptionAlgorithm) {
 	/*! @const NEVPNIKEv2EncryptionAlgorithmDES Data Encryption Standard (DES) */
-	NEVPNIKEv2EncryptionAlgorithmDES = 1,
+	NEVPNIKEv2EncryptionAlgorithmDES API_DEPRECATED("Use an encryption algorithm with 256-bit keys instead", macos(10.11, 14.0), ios(8.0, 17.0)) API_UNAVAILABLE(tvos) = 1,
 	/*! @const NEVPNIKEv2EncryptionAlgorithm3DES Triple Data Encryption Algorithm (aka 3DES) */
-	NEVPNIKEv2EncryptionAlgorithm3DES = 2,
+	NEVPNIKEv2EncryptionAlgorithm3DES API_DEPRECATED("Use an encryption algorithm with 256-bit keys instead", macos(10.11, 14.0), ios(8.0, 17.0)) API_UNAVAILABLE(tvos) = 2,
 	/*! @const NEVPNIKEv2EncryptionAlgorithmAES128 Advanced Encryption Standard 128 bit (AES128) */
-	NEVPNIKEv2EncryptionAlgorithmAES128 = 3,
+	NEVPNIKEv2EncryptionAlgorithmAES128 API_DEPRECATED("Use an encryption algorithm with 256-bit keys instead", macos(10.11, 14.0), ios(8.0, 17.0), tvos(17.0, 17.0)) = 3,
 	/*! @const NEVPNIKEv2EncryptionAlgorithmAES256 Advanced Encryption Standard 256 bit (AES256) */
 	NEVPNIKEv2EncryptionAlgorithmAES256 = 4,
 	/*! @const NEVPNIKEv2EncryptionAlgorithmAES128GCM Advanced Encryption Standard 128 bit (AES128GCM) */
-	NEVPNIKEv2EncryptionAlgorithmAES128GCM API_AVAILABLE(macos(10.11), ios(8.3)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED = 5,
+	NEVPNIKEv2EncryptionAlgorithmAES128GCM API_DEPRECATED("Use an encryption algorithm with 256-bit keys instead", macos(10.11, 14.0), ios(8.3, 17.0), tvos(17.0, 17.0)) API_UNAVAILABLE(watchos) = 5,
 	/*! @const NEVPNIKEv2EncryptionAlgorithmAES256GCM Advanced Encryption Standard 256 bit (AES256GCM) */
-	NEVPNIKEv2EncryptionAlgorithmAES256GCM API_AVAILABLE(macos(10.11), ios(8.3)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED = 6,
+	NEVPNIKEv2EncryptionAlgorithmAES256GCM API_AVAILABLE(macos(10.11), ios(8.3), tvos(17.0)) API_UNAVAILABLE(watchos) = 6,
 	/*! @const NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 ChaCha20 and Poly1305 (ChaCha20Poly1305) */
-	NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED = 7,
-} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+	NEVPNIKEv2EncryptionAlgorithmChaCha20Poly1305 API_AVAILABLE(macos(10.15), ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) = 7,
+} API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @typedef NEVPNIKEv2IntegrityAlgorithm
@@ -38,16 +38,16 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2EncryptionAlgorithm) {
  */
 typedef NS_ENUM(NSInteger, NEVPNIKEv2IntegrityAlgorithm) {
 	/*! @const NEVPNIKEv2IntegrityAlgorithmSHA96 SHA-1 96 bit */
-	NEVPNIKEv2IntegrityAlgorithmSHA96 = 1,
+	NEVPNIKEv2IntegrityAlgorithmSHA96 API_DEPRECATED("Use SHA-2 for integrity protection instead", macos(10.11, 14.0), ios(8.0, 17.0)) API_UNAVAILABLE(tvos) = 1,
 	/*! @const NEVPNIKEv2IntegrityAlgorithmSHA160 SHA-1 160 bit */
-	NEVPNIKEv2IntegrityAlgorithmSHA160 = 2,
+	NEVPNIKEv2IntegrityAlgorithmSHA160 API_DEPRECATED("Use SHA-2 for integrity protection instead", macos(10.11, 14.0), ios(8.0, 17.0)) API_UNAVAILABLE(tvos) = 2,
 	/*! @const NEVPNIKEv2IntegrityAlgorithmSHA256 SHA-2 256 bit */
 	NEVPNIKEv2IntegrityAlgorithmSHA256 = 3,
 	/*! @const NEVPNIKEv2IntegrityAlgorithmSHA384 SHA-2 384 bit */
 	NEVPNIKEv2IntegrityAlgorithmSHA384 = 4,
 	/*! @const NEVPNIKEv2IntegrityAlgorithmSHA512 SHA-2 512 bit */
 	NEVPNIKEv2IntegrityAlgorithmSHA512 = 5,
-} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @typedef NEVPNIKEv2DeadPeerDetectionRate
@@ -62,7 +62,7 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2DeadPeerDetectionRate) {
 	NEVPNIKEv2DeadPeerDetectionRateMedium = 2,
 	/*! @const NEVPNIKEv2DeadPeerDetectionRateHigh Run dead peer detection once every 1 minute. If the peer does not respond, retry 5 times at 1 second intervals before declaring the peer dead */
 	NEVPNIKEv2DeadPeerDetectionRateHigh = 3,
-} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @typedef NEVPNIKEv2DiffieHellmanGroup
@@ -72,11 +72,11 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2DiffieHellmanGroup) {
 	/*! @const NEVPNIKEv2DiffieHellmanGroupInvalid Diffie Hellman group 0 is not a valid DH group*/
 	NEVPNIKEv2DiffieHellmanGroupInvalid = 0,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup1 Diffie Hellman group 1 (768-bit MODP) */
-	NEVPNIKEv2DiffieHellmanGroup1 = 1,
+	NEVPNIKEv2DiffieHellmanGroup1 API_DEPRECATED("Use Diffie Hellman group 14 or greater instead", macos(10.11, 14.0), ios(8.0, 17.0)) API_UNAVAILABLE(tvos) = 1,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup2 Diffie Hellman group 2 (1024-bit MODP) */
-	NEVPNIKEv2DiffieHellmanGroup2 = 2,
+	NEVPNIKEv2DiffieHellmanGroup2 API_DEPRECATED("Use Diffie Hellman group 14 or greater instead", macos(10.11, 14.0), ios(8.0, 17.0)) API_UNAVAILABLE(tvos) = 2,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup5 Diffie Hellman group 5 (1536-bit MODP) */
-	NEVPNIKEv2DiffieHellmanGroup5 = 5,
+	NEVPNIKEv2DiffieHellmanGroup5 API_DEPRECATED("Use Diffie Hellman group 14 or greater instead", macos(10.11, 14.0), ios(8.0, 17.0)) API_UNAVAILABLE(tvos) = 5,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup14 Diffie Hellman group 14 (2048-bit MODP) */
 	NEVPNIKEv2DiffieHellmanGroup14 = 14,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup15 Diffie Hellman group 15 (3072-bit MODP) */
@@ -94,25 +94,29 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2DiffieHellmanGroup) {
 	/*! @const NEVPNIKEv2DiffieHellmanGroup21 Diffie Hellman group 21 (521-bit random ECP) */
 	NEVPNIKEv2DiffieHellmanGroup21 = 21,
 	/*! @const NEVPNIKEv2DiffieHellmanGroup31 Diffie Hellman group 31 (Curve25519) */
-	NEVPNIKEv2DiffieHellmanGroup31 API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED = 31,
-} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+	NEVPNIKEv2DiffieHellmanGroup31 API_AVAILABLE(macos(10.15), ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) = 31,
+	/*! @const NEVPNIKEv2DiffieHellmanGroup32 Diffie Hellman group 32 (Curve448) */
+	NEVPNIKEv2DiffieHellmanGroup32 API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) = 32,
+} API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @typedef NEVPNIKEv2CertificateType
  * @abstract IKEv2 Certificate types
  */
 typedef NS_ENUM(NSInteger, NEVPNIKEv2CertificateType) {
-    /*! @const NEVPNIKEv2CertificateType RSA */
-    NEVPNIKEv2CertificateTypeRSA = 1,
-    /*! @const NEVPNIKEv2CertificateTypeECDSA256 ECDSA with p-256 curve */
-    NEVPNIKEv2CertificateTypeECDSA256 = 2,
-    /*! @const NEVPNIKEv2CertificateTypeECDSA384 ECDSA with p-384 curve */
-    NEVPNIKEv2CertificateTypeECDSA384 = 3,
-    /*! @const NEVPNIKEv2CertificateTypeECDSA521 ECDSA with p-521 curve */
-    NEVPNIKEv2CertificateTypeECDSA521 = 4,
-	/*! @const NEVPNIKEv2CertificateTypeEd25519 Edwards 25519 curve */
-	NEVPNIKEv2CertificateTypeEd25519 API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED = 5,
-} API_AVAILABLE(macos(10.11), ios(8.3)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+	/*! @const NEVPNIKEv2CertificateType RSA */
+	NEVPNIKEv2CertificateTypeRSA = 1,
+	/*! @const NEVPNIKEv2CertificateTypeECDSA256 ECDSA with p-256 curve */
+	NEVPNIKEv2CertificateTypeECDSA256 = 2,
+	/*! @const NEVPNIKEv2CertificateTypeECDSA384 ECDSA with p-384 curve */
+	NEVPNIKEv2CertificateTypeECDSA384 = 3,
+	/*! @const NEVPNIKEv2CertificateTypeECDSA521 ECDSA with p-521 curve */
+	NEVPNIKEv2CertificateTypeECDSA521 = 4,
+	/*! @const NEVPNIKEv2CertificateTypeEd25519 EdDSA with Edwards Curve25519 */
+	NEVPNIKEv2CertificateTypeEd25519 API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos) = 5,
+	/*! @const NEVPNIKEv2CertificateTypeRSAPSS RSA-PSS */
+	NEVPNIKEv2CertificateTypeRSAPSS API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos) = 6,
+} API_AVAILABLE(macos(10.11), ios(8.3), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @typedef NEVPNIKEv2TLSVersion
@@ -127,7 +131,7 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2TLSVersion) {
 	NEVPNIKEv2TLSVersion1_1 = 2,
 	/*! @const NEVPNIKEv2TLSVersion1_0 TLS 1.2 */
 	NEVPNIKEv2TLSVersion1_2 = 3,
-} API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.13), ios(11.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @class NEVPNIKEv2SecurityAssociationParameters
@@ -135,32 +139,34 @@ typedef NS_ENUM(NSInteger, NEVPNIKEv2TLSVersion) {
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NEVPNIKEv2SecurityAssociationParameters : NSObject <NSSecureCoding,NSCopying>
 
 /*!
  * @property encryptionAlgorithm
- * @discussion The algorithm used by the Security Association to encrypt and decrypt data. Default is NEVPNIKEv2EncryptionAlgorithm3DES.
+ * @discussion The algorithm used by the Security Association to encrypt and decrypt data. On macOS and iOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256 starting in macOS 11 and iOS 14.
+ * Prior to that the default was NEVPNIKEv2EncryptionAlgorithm3DES. On tvOS, the default is NEVPNIKEv2EncryptionAlgorithmAES256GCM.
  */
-@property NEVPNIKEv2EncryptionAlgorithm encryptionAlgorithm API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEv2EncryptionAlgorithm encryptionAlgorithm API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property integrityAlgorithm
- * @discussion The algorithm used by the Security Association to verify the integrity of data. Default is NEVPNIKEv2IntegrityAlgorithmSHA96. The IKE psedo-random function algorithm will be inferred based on the integrity algorithm.
+ * @discussion The algorithm used by the Security Association to verify the integrity of data.  The IKE psedo-random function algorithm will be inferred based on the integrity algorithm.
+ * Default is NEVPNIKEv2IntegrityAlgorithmSHA256 starting in macOS 11, iOS 14, and tvOS 17.  Prior to that the default was NEVPNIKEv2IntegrityAlgorithmSHA96.
  */
-@property NEVPNIKEv2IntegrityAlgorithm integrityAlgorithm API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEv2IntegrityAlgorithm integrityAlgorithm API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property diffieHellmanGroup
- * @discussion The Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup2.
+ * @discussion The Diffie Hellman group used by the Security Association. Default is NEVPNIKEv2DiffieHellmanGroup14 starting in macOS 11, iOS 14, and tvOS 17. Prior to that the default was NEVPNIKEv2DiffieHellmanGroup2.
  */
-@property NEVPNIKEv2DiffieHellmanGroup diffieHellmanGroup API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEv2DiffieHellmanGroup diffieHellmanGroup API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property lifetimeMinutes
  * @discussion The life time of the Security Association, in minutes. Default is 60 for IKE Security Associations, and 30 for Child Security Associations. Before the lifetime is reached, IKEv2 will attempt to rekey the Security Association to maintain the connection.
  */
-@property int32_t lifetimeMinutes API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property int32_t lifetimeMinutes API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -171,92 +177,92 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * Instances of this class use IKE version 2 for key negotiation.
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NEVPNProtocolIKEv2 : NEVPNProtocolIPSec
 
 /*!
  * @property deadPeerDetectionRate
  * @discussion How frequently the IKEv2 client will run the dead peer detection algorithm.  Default is NEVPNIKEv2DeadPeerDetectionRateMedium.
  */
-@property NEVPNIKEv2DeadPeerDetectionRate deadPeerDetectionRate API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEv2DeadPeerDetectionRate deadPeerDetectionRate API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property serverCertificateIssuerCommonName
  * @discussion A string containing the Subject Common Name field of the Certificate Authority certificate that issued the IKEv2 server's certificate.
  */
-@property (copy, nullable) NSString *serverCertificateIssuerCommonName API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSString *serverCertificateIssuerCommonName API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property serverCertificateCommonName
  * @discussion A string containing the value to verify in the IKEv2 server certificate's Subject Common Name field.
  */
-@property (copy, nullable) NSString *serverCertificateCommonName API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSString *serverCertificateCommonName API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property certificateType
  * @discussion contains the type of certificate if an certificate is configured.  Default is RSA.
  */
-@property NEVPNIKEv2CertificateType certificateType API_AVAILABLE(macos(10.11), ios(8.3)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEv2CertificateType certificateType API_AVAILABLE(macos(10.11), ios(8.3), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property useConfigurationAttributeInternalIPSubnet
  * @discussion Boolean indicating if client should use INTERNAL_IP4_SUBNET / INTERNAL_IP6_SUBNET attributes.  Default is False.
  */
-@property BOOL useConfigurationAttributeInternalIPSubnet API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property BOOL useConfigurationAttributeInternalIPSubnet API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property IKESecurityAssociationParameters
  * @discussion Parameters for the IKE SA
  */
-@property (readonly) NEVPNIKEv2SecurityAssociationParameters *IKESecurityAssociationParameters API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NEVPNIKEv2SecurityAssociationParameters *IKESecurityAssociationParameters API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property childSecurityAssociationParameters
  * @discussion Parameters for the child SA
  */
-@property (readonly) NEVPNIKEv2SecurityAssociationParameters *childSecurityAssociationParameters API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NEVPNIKEv2SecurityAssociationParameters *childSecurityAssociationParameters API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property disableMOBIKE
  * @discussion Disable MOBIKE negotiation. Default is NO.
  */
-@property BOOL disableMOBIKE API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property BOOL disableMOBIKE API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property disableRedirect
  * @discussion Disable Server Redirect. Default is NO.
  */
-@property BOOL disableRedirect API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property BOOL disableRedirect API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property enablePFS
  * @discussion Enable Perfect Forward Secrecy. Default is NO.
  */
-@property BOOL enablePFS API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property BOOL enablePFS API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property enableRevocationCheck
  * @discussion Enable certificate revocation check. Default is NO.
  */
-@property BOOL enableRevocationCheck API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property BOOL enableRevocationCheck API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property strictRevocationCheck
  * @discussion Require positive certificate revocation check response for peer certificate validation to pass. Default is NO.
  */
-@property BOOL strictRevocationCheck API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property BOOL strictRevocationCheck API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property minimumTLSVersion
  * @discussion Sets a minimum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
  */
-@property NEVPNIKEv2TLSVersion minimumTLSVersion API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEv2TLSVersion minimumTLSVersion API_AVAILABLE(macos(10.13), ios(11.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property maximumTLSVersion
  * @discussion Sets a maximum TLS version to allow for EAP-TLS authentication. Default is NEVPNIKEv2TLSVersionDefault.
  */
-@property NEVPNIKEv2TLSVersion maximumTLSVersion API_AVAILABLE(macos(10.13), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEv2TLSVersion maximumTLSVersion API_AVAILABLE(macos(10.13), ios(11.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property enableFallback
@@ -265,13 +271,13 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *     Cellular Data to carry traffic that is eligible for Wi-Fi Assist and also requires VPN. Enabling fallback requires that the
  *     server support multiple tunnels for a single user. Default is NO.
  */
-@property BOOL enableFallback API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+@property BOOL enableFallback API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property mtu
  * @discussion Maximum Transmission Unit (MTU) size in bytes to assign to the tunnel interface.
  */
-@property NSUInteger mtu API_AVAILABLE(macos(11.0), ios(14.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NSUInteger mtu API_AVAILABLE(macos(11.0), ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

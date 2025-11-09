@@ -9,4 +9,5 @@ exports:
     symbols:         [ _PUNSActivateAppAndMakeSceneFrontmostAndKey, _PUNSIsAgentProcess, 
                        _PUNSSetAppActiveAppearance, _PUNSSetSceneUtilities, _PUNSWindowNotificationUISceneKey, 
                        _PUNSWindowRequestZoomNotification ]
+    objc-classes:    [ PUNSWindowChromeHostingContext ]
 ...

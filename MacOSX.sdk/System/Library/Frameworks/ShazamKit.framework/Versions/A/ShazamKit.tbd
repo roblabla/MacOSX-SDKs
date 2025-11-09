@@ -10,46 +10,50 @@ reexported-libraries:
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _SHErrorDeviceToDeviceEncryptionKey, _SHErrorDiscardedAudioDurationKey, 
+    symbols:         [ _SHCustomCatalogTrackingMaximumSignatureDuration, _SHCustomCatalogTrackingMinimumSignatureDuration, 
+                       _SHErrorDeviceToDeviceEncryptionKey, _SHErrorDiscardedAudioDurationKey, 
                        _SHErrorDomain, _SHEventSignalIdentifierMusicRecognitionHistoryActivated, 
                        _SHEventSignalIdentifierMusicRecognitionRecognitionActivated, 
-                       _SHMaximumSignatureDuration, _SHMediaItemAlbumName, _SHMediaItemAppleMusicID, 
-                       _SHMediaItemAppleMusicURL, _SHMediaItemArtist, _SHMediaItemArtworkURL, 
-                       _SHMediaItemAudioStartDate, _SHMediaItemCreationDate, _SHMediaItemExplicitContent, 
-                       _SHMediaItemFrequencySkew, _SHMediaItemFrequencySkewRanges, 
-                       _SHMediaItemFrequencySkewRangesSwift, _SHMediaItemGenres, 
-                       _SHMediaItemISRC, _SHMediaItemLyricsSnippet, _SHMediaItemMatchOffset, 
-                       _SHMediaItemPresentationSettingOpenResultInBrowserOnFailure, 
-                       _SHMediaItemQueryMatchOffsetRanges, _SHMediaItemReferenceMatchOffsetRanges, 
+                       _SHMaximumSignatureDuration, _SHMediaItemAdjustedTimeRanges, 
+                       _SHMediaItemAlbumName, _SHMediaItemAppleMusicID, _SHMediaItemAppleMusicURL, 
+                       _SHMediaItemArtist, _SHMediaItemArtworkURL, _SHMediaItemAudioStartDate, 
+                       _SHMediaItemCreationDate, _SHMediaItemExplicitContent, _SHMediaItemFrequencySkew, 
+                       _SHMediaItemFrequencySkewRanges, _SHMediaItemFrequencySkewRangesSwift, 
+                       _SHMediaItemGenres, _SHMediaItemISRC, _SHMediaItemLyricsSnippet, 
+                       _SHMediaItemMatchOffset, _SHMediaItemPresentationSettingOpenResultInBrowserOnFailure, 
                        _SHMediaItemReleaseDate, _SHMediaItemShazamCount, _SHMediaItemShazamID, 
-                       _SHMediaItemSpeedSkew, _SHMediaItemStaticLyricLines, _SHMediaItemSubtitle, 
-                       _SHMediaItemSyncedLyricsSnippet, _SHMediaItemTimeRanges, _SHMediaItemTimeRangesSwift, 
-                       _SHMediaItemTitle, _SHMediaItemVideoURL, _SHMediaItemWebURL, 
-                       _SHMediaLibraryErrorDomain, _SHMediaLibrarySyncStartConditionInitialFetch, 
-                       _SHMediaLibrarySyncStartConditionInitialUpload, _SHMediaLibrarySyncStartConditionMigration, 
-                       _SHMediaLibrarySyncStartConditionRemotePush, _SHMediaLibrarySyncStartConditionUserAction, 
-                       _SHNotificationKeySessionError, _SHNotificationKeySessionMatch, 
-                       _SHNotificationKeySessionSignature, _SHNotificationNameSessionResult, 
-                       _SHShazamKitClientInterface, _SHShazamKitServiceInterface, 
-                       _SHShazamKitServiceName, _SHShazamKitUIClientInterface, _SHShazamKitUIServiceInterface, 
-                       _SHShazamKitUIServiceName ]
-    objc-classes:    [ SHAttribution, SHCatalog, SHCatalogConfiguration, SHCustomCatalog, 
-                       SHCustomCatalogConfiguration, SHError, SHEventSignaller, SHLyricLine, 
-                       SHManagedSession, SHMatch, SHMatchedMediaItem, SHMatcherResponse, 
-                       SHMediaItem, SHMediaItemPresentationSettings, SHMediaItemPropertyUtilities, 
+                       _SHMediaItemSignatureAlignments, _SHMediaItemSpeedSkew, _SHMediaItemStaticLyricLines, 
+                       _SHMediaItemSubtitle, _SHMediaItemSyncedLyricsSnippet, _SHMediaItemTimeRanges, 
+                       _SHMediaItemTimeRangesSwift, _SHMediaItemTitle, _SHMediaItemVideoURL, 
+                       _SHMediaItemWebURL, _SHMediaLibraryErrorDomain, _SHMediaLibraryRemoteChangeNotification, 
+                       _SHMediaLibrarySyncStartConditionInitialFetch, _SHMediaLibrarySyncStartConditionInitialUpload, 
+                       _SHMediaLibrarySyncStartConditionMigration, _SHMediaLibrarySyncStartConditionRemotePush, 
+                       _SHMediaLibrarySyncStartConditionUserAction, _SHNotificationKeySessionError, 
+                       _SHNotificationKeySessionMatch, _SHNotificationKeySessionSignature, 
+                       _SHNotificationNameDaemonSpectralOutput, _SHNotificationNameSessionResult, 
+                       _SHNotificationSpectralOutputPayloadKey, _SHShazamKitClientInterface, 
+                       _SHShazamKitServiceInterface, _SHShazamKitServiceName, _SHShazamKitUIClientInterface, 
+                       _SHShazamKitUIServiceInterface, _SHShazamKitUIServiceName, 
+                       _SHSpectralOutputDefaultBinCount, _SHSpectralOutputDefaultCallbackFrequency ]
+    objc-classes:    [ SHAttribution, SHAudioUtilities, SHCatalog, SHCatalogConfiguration, 
+                       SHCustomCatalog, SHCustomCatalogConfiguration, SHError, SHEventSignaller, 
+                       SHLyricLine, SHManagedSession, SHMatch, SHMatchedAdjustedTimeRange, 
+                       SHMatchedMediaItem, SHMatcherRequest, SHMatcherResponse, SHMediaItem, 
+                       SHMediaItemPresentationSettings, SHMediaItemPropertyUtilities, 
                        SHMediaLibrary, SHMediaLibraryChange, SHMediaLibraryGroup, 
                        SHMediaLibraryInfo, SHMediaLibraryItemMetadata, SHMediaLibraryLabel, 
                        SHMediaLibraryQueryParameters, SHMediaLibrarySnapshot, SHMediaLibraryTrack, 
-                       SHMediaLibraryTrackBuilder, SHMediaLibraryTrackUpdate, SHMutableSignature, 
-                       SHRange, SHSession, SHShazamKey, SHShazamKitServiceInterfaces, 
-                       SHShazamKitUIServiceInterfaces, SHSignature, SHSignatureBuffer, 
-                       SHSignatureGenerator, SHStreamingSessionDriver, SHSyncedLyrics ]
+                       SHMediaLibraryTrackBuilder, SHMutableSignature, SHRange, SHSession, 
+                       SHShazamKey, SHShazamKitServiceInterfaces, SHShazamKitUIServiceInterfaces, 
+                       SHSignature, SHSignatureAlignment, SHSignatureBuffer, SHSignatureGenerator, 
+                       SHStreamingSessionDriver, SHSyncedLyrics, _SHMediaLibrary, 
+                       __SHManagedSession ]
 --- !tapi-tbd
 tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ShazamCore.framework/Versions/A/ShazamCore'
-current-version: 207.4
+current-version: 236
 compatibility-version: 0
 swift-abi-version: 7
 exports:
@@ -65,14 +69,14 @@ exports:
                        _SHAnalyticsPayloadMatchKey, _SHAnalyticsPayloadNumberShazamsKey, 
                        _SHAnalyticsPayloadSecureAccountKey, _SHAnalyticsPayloadSourceKey, 
                        _SHCampaignTokenDefaultCampaignValue, _SHCoreErrorDomain, 
-                       _SHDefaultWorkerTimeout, _SHRecordingIntermissionDefaultValue, 
-                       _SHShazamKitExternalAudioRecordingEntitlement, _SHShazamKitInternalAudioRecordingEntitlement, 
+                       _SHDefaultWorkerTimeout, _SHLookupDefaultMaxAgeValue, _SHRecordingIntermissionDefaultValue, 
                        _SHShazamKitInternalClientEntitlement, _SHShazamKitTCCEntitlement, 
                        _SHShazamKitTCCEntitlementMediaLibrary, _SHShazamKitTCCEntitlementMicrophone, 
                        _sh_log_object ]
-    objc-classes:    [ SHAnalytics, SHBagContract, SHCampaignTokens, SHCompression, 
-                       SHCoreError, SHDefaultConfigurationValues, SHEndpoints, SHEntitlements, 
-                       SHFeatureFlags, SHHost, SHJSONLFileReader, SHJSONLFileWriter, 
-                       SHLocalization, SHMusicSubscriptionStatus, SHOffers, SHRemoteConfiguration, 
+    objc-classes:    [ SHAnalytics, SHBagContract, SHCacheValues, SHCampaignTokens, 
+                       SHCompression, SHCoreError, SHDefaultConfigurationValues, 
+                       SHEndpoints, SHEntitlements, SHFeatureFlags, SHHost, SHJSONLFileReader, 
+                       SHJSONLFileWriter, SHLocalization, SHMusicSubscriptionStatus, 
+                       SHOffers, SHRecorderConfiguration, SHRemoteConfiguration, 
                        SHStorefront, SHTokenizedURL ]
 ...

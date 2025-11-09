@@ -58,8 +58,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, strong) UIView *contentView;
 
 // These properties will always return nil when a non-nil `contentConfiguration` is set.
-@property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(6.0, API_TO_BE_DEPRECATED));
-@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(6.0, API_TO_BE_DEPRECATED)); // only supported for headers in grouped style
+@property (nonatomic, readonly, strong, nullable) UILabel *textLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(6.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED));
+@property (nonatomic, readonly, strong, nullable) UILabel *detailTextLabel API_DEPRECATED("Use UIListContentConfiguration instead, this property will be deprecated in a future release.", ios(6.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)); // only supported for headers in grouped style
 
 /// Returns a default background configuration for the header/footer's style.
 /// This background configuration represents the default appearance that the header/footer will use.

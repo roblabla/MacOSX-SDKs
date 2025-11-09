@@ -1,21 +1,24 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 70.500.192
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name GroupActivities
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 118.100.1.1.2
 import AVFoundation
 import CloudKit
 import Combine
-import Combine/*.Combine*/
 import CoreGraphics
+import CoreImage
+import CoreTransferable
 import CryptoKit
 import Darwin
 import Foundation
 @_exported import GroupActivities
+import ImageIO
 import Network
 import Swift
 import UniformTypeIdentifiers
 @_exported import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 import os.log
 import os
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
@@ -36,7 +39,7 @@ final public class GroupSession<ActivityType> : Combine.ObservableObject where A
   @Combine.Published @_projectedValueProperty($activity) final public var activity: ActivityType {
     get
     @available(iOS 15, tvOS 15, macOS 12, *)
-    @available(watchOS, unavailable)
+    @available(watchOS, unavailable, introduced: 6.0)
     set
   }
   final public var $activity: Combine.Published<ActivityType>.Publisher {
@@ -54,6 +57,9 @@ final public class GroupSession<ActivityType> : Combine.ObservableObject where A
   final public var localParticipant: GroupActivities.Participant {
     get
   }
+  @available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+  @available(watchOS, unavailable)
+  final public let sceneSessionIdentifier: Swift.String?
   @objc deinit
   final public func join()
   final public func leave()
@@ -68,6 +74,27 @@ extension GroupActivities.GroupSession : Swift.CustomStringConvertible {
   final public var description: Swift.String {
     get
   }
+}
+@available(xrOS 1.0, *)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct SpatialTemplatePreference : Swift.CustomStringConvertible {
+  public var description: Swift.String {
+    get
+  }
+}
+@available(xrOS 1.0, *)
+@available(iOS, unavailable)
+@available(macOS, unavailable)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension GroupActivities.SpatialTemplatePreference {
+  public static var none: GroupActivities.SpatialTemplatePreference
+  public static var sideBySide: GroupActivities.SpatialTemplatePreference
+  public static var conversational: GroupActivities.SpatialTemplatePreference
+  public func contentExtent(_ contentExtent: CoreFoundation.CGFloat) -> GroupActivities.SpatialTemplatePreference
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -106,6 +133,26 @@ extension GroupActivities.GroupActivity {
   public func activate() async throws -> Swift.Bool
   #endif
 }
+@available(iOS 17, macOS 14, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+public struct GroupActivityTransferRepresentation<Item> : CoreTransferable.TransferRepresentation where Item : CoreTransferable.Transferable {
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public init<ActivityType>(exporting: @escaping @Sendable (Item) async throws -> ActivityType) where ActivityType : GroupActivities.GroupActivity
+  #endif
+  public var body: some CoreTransferable.TransferRepresentation {
+    get
+  }
+  public typealias Body = @_opaqueReturnTypeOf("$s15GroupActivities0A30ActivityTransferRepresentationV4bodyQrvp", 0) __<Item>
+}
+@available(iOS 17, macOS 14, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension GroupActivities.GroupActivity where Self : CoreTransferable.Transferable {
+  public static var transferRepresentation: some CoreTransferable.TransferRepresentation {
+    get
+  }
+}
 @_hasMissingDesignatedInitializers @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
 final public class GroupStateObserver : Combine.ObservableObject {
@@ -118,6 +165,58 @@ final public class GroupStateObserver : Combine.ObservableObject {
   convenience public init()
   public typealias ObjectWillChangePublisher = Combine.ObservableObjectPublisher
   @objc deinit
+}
+@_hasMissingDesignatedInitializers @available(iOS 17, macOS 14, tvOS 17, *)
+@available(watchOS, unavailable)
+final public class GroupSessionJournal {
+  #if compiler(>=5.3) && $RethrowsProtocol
+  final public var attachments: GroupActivities.GroupSessionJournal.Attachments {
+    get
+    set
+  }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func add<ItemType>(_ item: ItemType) async throws -> GroupActivities.GroupSessionJournal.Attachment where ItemType : CoreTransferable.Transferable
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func add<ItemType, MetadataType>(_ item: ItemType, metadata: MetadataType) async throws -> GroupActivities.GroupSessionJournal.Attachment where ItemType : CoreTransferable.Transferable, MetadataType : Swift.Decodable, MetadataType : Swift.Encodable
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait
+  final public func remove(attachment: GroupActivities.GroupSessionJournal.Attachment) async throws
+  #endif
+  convenience public init<Activity>(session: GroupActivities.GroupSession<Activity>) where Activity : GroupActivities.GroupActivity
+  @objc deinit
+}
+@available(iOS 17, macOS 14, tvOS 17, *)
+@available(watchOS, unavailable)
+extension GroupActivities.GroupSessionJournal {
+  public struct Attachment : Swift.Identifiable {
+    public var id: Foundation.UUID
+    #if compiler(>=5.3) && $AsyncAwait
+    public func load<AttachmentType>(_ attachmentType: AttachmentType.Type) async throws -> AttachmentType where AttachmentType : CoreTransferable.Transferable
+    #endif
+    #if compiler(>=5.3) && $AsyncAwait
+    public func loadMetadata<MetadataType>(of: MetadataType.Type) async throws -> MetadataType where MetadataType : Swift.Decodable, MetadataType : Swift.Encodable
+    #endif
+    public typealias ID = Foundation.UUID
+  }
+}
+@available(iOS 17, macOS 14, tvOS 17, *)
+@available(watchOS, unavailable)
+extension GroupActivities.GroupSessionJournal {
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public struct Attachments : _Concurrency.AsyncSequence {
+    public typealias Element = [GroupActivities.GroupSessionJournal.Attachment]
+    public func makeAsyncIterator() -> GroupActivities.GroupSessionJournal.Attachments.Iterator
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $AsyncAwait
+      public mutating func next() async -> GroupActivities.GroupSessionJournal.Attachments.Element?
+      #endif
+      public typealias Element = GroupActivities.GroupSessionJournal.Attachments.Element
+    }
+    public typealias AsyncIterator = GroupActivities.GroupSessionJournal.Attachments.Iterator
+  }
+  #endif
 }
 @objc extension Foundation.NSItemProvider {
   #if compiler(>=5.3) && $AsyncAwait
@@ -197,6 +296,37 @@ extension GroupActivities.Participant : Swift.CustomStringConvertible {
   public var description: Swift.String {
     get
   }
+}
+@available(xrOS 1.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+extension GroupActivities.SystemCoordinator {
+  public struct ParticipantState : Swift.Equatable {
+    public let isSpatial: Swift.Bool
+    public static func == (a: GroupActivities.SystemCoordinator.ParticipantState, b: GroupActivities.SystemCoordinator.ParticipantState) -> Swift.Bool
+  }
+}
+@available(xrOS 1.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+extension GroupActivities.SystemCoordinator {
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public struct ParticipantStates : _Concurrency.AsyncSequence {
+    public typealias Element = GroupActivities.SystemCoordinator.ParticipantState
+    public func makeAsyncIterator() -> GroupActivities.SystemCoordinator.ParticipantStates.Iterator
+    public struct Iterator : _Concurrency.AsyncIteratorProtocol {
+      #if compiler(>=5.3) && $AsyncAwait
+      public mutating func next() async -> GroupActivities.SystemCoordinator.ParticipantStates.Element?
+      #endif
+      public typealias Element = GroupActivities.SystemCoordinator.ParticipantStates.Element
+    }
+    public typealias AsyncIterator = GroupActivities.SystemCoordinator.ParticipantStates.Iterator
+  }
+  #endif
 }
 @available(iOS 15, macOS 12, tvOS 15, *)
 @available(watchOS, unavailable)
@@ -290,10 +420,18 @@ extension GroupActivities.GroupSessionMessenger {
 }
 extension GroupActivities.GroupSessionMessenger {
   #if compiler(>=5.3) && $AsyncAwait
+  #if $UnsafeInheritExecutor
+  @_unsafeInheritExecutor final public func send<Message>(_ value: Message, to participants: GroupActivities.Participants = .all) async throws where Message : Swift.Decodable, Message : Swift.Encodable
+  #else
   final public func send<Message>(_ value: Message, to participants: GroupActivities.Participants = .all) async throws where Message : Swift.Decodable, Message : Swift.Encodable
   #endif
+  #endif
   #if compiler(>=5.3) && $AsyncAwait
+  #if $UnsafeInheritExecutor
+  @_unsafeInheritExecutor final public func send(_ value: Foundation.Data, to participants: GroupActivities.Participants = .all) async throws
+  #else
   final public func send(_ value: Foundation.Data, to participants: GroupActivities.Participants = .all) async throws
+  #endif
   #endif
   #if compiler(>=5.3) && $RethrowsProtocol
   final public func messages<Message>(of type: Message.Type) -> GroupActivities.GroupSessionMessenger.Messages<Message> where Message : Swift.Decodable, Message : Swift.Encodable
@@ -331,6 +469,55 @@ extension GroupActivities.GroupSession {
   }
   #endif
 }
+@available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+@available(watchOS, unavailable)
+public struct SceneAssociationBehavior : Swift.Equatable {
+  public static func == (a: GroupActivities.SceneAssociationBehavior, b: GroupActivities.SceneAssociationBehavior) -> Swift.Bool
+}
+@available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+@available(watchOS, unavailable)
+extension GroupActivities.SceneAssociationBehavior {
+  public static let `default`: GroupActivities.SceneAssociationBehavior
+  public static func content(_ contentIdentifier: Swift.String) -> GroupActivities.SceneAssociationBehavior
+  public static let none: GroupActivities.SceneAssociationBehavior
+}
+@available(xrOS 1.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+extension GroupActivities.GroupSession {
+  #if compiler(>=5.3) && $EffectfulProp
+  final public var systemCoordinator: GroupActivities.SystemCoordinator? {
+    get async
+  }
+  #endif
+}
+@_hasMissingDesignatedInitializers @available(xrOS 1.0, *)
+@available(iOS, unavailable)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+@available(macOS, unavailable)
+final public class SystemCoordinator {
+  final public var localParticipantState: GroupActivities.SystemCoordinator.ParticipantState {
+    get
+  }
+  #if compiler(>=5.3) && $RethrowsProtocol
+  final public var localParticipantStates: GroupActivities.SystemCoordinator.ParticipantStates {
+    get
+  }
+  #endif
+  public struct Configuration {
+    public var spatialTemplatePreference: GroupActivities.SpatialTemplatePreference
+    public var supportsGroupImmersiveSpace: Swift.Bool
+    public init()
+  }
+  final public var configuration: GroupActivities.SystemCoordinator.Configuration {
+    get
+    set
+  }
+  @objc deinit
+}
 extension AVFoundation.AVPlaybackCoordinator {
   @available(iOS 15, macOS 12, tvOS 15, *)
   @available(watchOS, unavailable)
@@ -344,6 +531,24 @@ public struct GroupActivityMetadata : Swift.Equatable {
     public static let generic: GroupActivities.GroupActivityMetadata.ActivityType
     public static let listenTogether: GroupActivities.GroupActivityMetadata.ActivityType
     public static let watchTogether: GroupActivities.GroupActivityMetadata.ActivityType
+    @available(iOS 17, macOS 14, tvOS 17, *)
+    @available(watchOS, unavailable)
+    public static let workoutTogether: GroupActivities.GroupActivityMetadata.ActivityType
+    @available(iOS 17, macOS 14, tvOS 17, *)
+    @available(watchOS, unavailable)
+    public static let shopTogether: GroupActivities.GroupActivityMetadata.ActivityType
+    @available(iOS 17, macOS 14, tvOS 17, *)
+    @available(watchOS, unavailable)
+    public static let readTogether: GroupActivities.GroupActivityMetadata.ActivityType
+    @available(iOS 17, macOS 14, tvOS 17, *)
+    @available(watchOS, unavailable)
+    public static let exploreTogether: GroupActivities.GroupActivityMetadata.ActivityType
+    @available(iOS 17, macOS 14, tvOS 17, *)
+    @available(watchOS, unavailable)
+    public static let learnTogether: GroupActivities.GroupActivityMetadata.ActivityType
+    @available(iOS 17, macOS 14, tvOS 17, *)
+    @available(watchOS, unavailable)
+    public static let createTogether: GroupActivities.GroupActivityMetadata.ActivityType
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: GroupActivities.GroupActivityMetadata.ActivityType, b: GroupActivities.GroupActivityMetadata.ActivityType) -> Swift.Bool
     public var hashValue: Swift.Int {
@@ -357,6 +562,9 @@ public struct GroupActivityMetadata : Swift.Equatable {
   public var fallbackURL: Foundation.URL?
   public var preferredBroadcastOptions: GroupActivities.BroadcastOptions
   public var supportsContinuationOnTV: Swift.Bool
+  @available(iOS 17, macOS 14, tvOS 17, xrOS 1, *)
+  @available(watchOS, unavailable)
+  public var sceneAssociationBehavior: GroupActivities.SceneAssociationBehavior
   public init()
   public static func == (a: GroupActivities.GroupActivityMetadata, b: GroupActivities.GroupActivityMetadata) -> Swift.Bool
 }
@@ -364,6 +572,8 @@ extension GroupActivities.GroupActivityMetadata : Swift.Codable {
   public init(from decoder: any Swift.Decoder) throws
   public func encode(to encoder: any Swift.Encoder) throws
 }
+@available(iOS 15, macOS 12, tvOS 15, *)
+@available(watchOS, unavailable)
 extension GroupActivities.GroupActivityMetadata {
   @available(*, deprecated, renamed: "ActivityType")
   public enum Experience : Swift.Int, Swift.Codable {
@@ -402,9 +612,15 @@ extension GroupActivities.GroupSessionMessenger.DeliveryMode : Swift.Equatable {
 @available(iOS 16, macOS 13, tvOS 16, *)
 @available(watchOS, unavailable)
 extension GroupActivities.GroupSessionMessenger.DeliveryMode : Swift.Hashable {}
+@available(iOS 15, macOS 12, tvOS 15, *)
+@available(watchOS, unavailable)
 @available(*, deprecated, renamed: "ActivityType")
 extension GroupActivities.GroupActivityMetadata.Experience : Swift.Equatable {}
+@available(iOS 15, macOS 12, tvOS 15, *)
+@available(watchOS, unavailable)
 @available(*, deprecated, renamed: "ActivityType")
 extension GroupActivities.GroupActivityMetadata.Experience : Swift.Hashable {}
+@available(iOS 15, macOS 12, tvOS 15, *)
+@available(watchOS, unavailable)
 @available(*, deprecated, renamed: "ActivityType")
 extension GroupActivities.GroupActivityMetadata.Experience : Swift.RawRepresentable {}

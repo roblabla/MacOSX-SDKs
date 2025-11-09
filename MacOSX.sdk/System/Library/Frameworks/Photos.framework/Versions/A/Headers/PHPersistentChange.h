@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class PHPersistentObjectChangeDetails;
 
 API_AVAILABLE(macosx(13), ios(16), tvos(16))
+NS_SWIFT_SENDABLE
 @interface PHPersistentChange : NSObject
 
 + (instancetype)new NS_UNAVAILABLE;

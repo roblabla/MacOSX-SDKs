@@ -19,7 +19,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewCellRegistration : NSObject
 
 + (instancetype)registrationWithCellClass:(Class)cellClass configurationHandler:(UICollectionViewCellRegistrationConfigurationHandler)configurationHandler;
-+ (instancetype)registrationWithCellNib:(UINib*)cellNib configurationHandler:(UICollectionViewCellRegistrationConfigurationHandler)configurationHandler;
++ (instancetype)registrationWithCellNib:(UINib*)cellNib configurationHandler:(UICollectionViewCellRegistrationConfigurationHandler)configurationHandler API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 @property(nonatomic,readonly,nullable) Class cellClass;
 @property(nonatomic,readonly,nullable) UINib *cellNib;
@@ -35,7 +35,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0),tvos(14.0)) NS_SWIFT_UI_ACTOR
 @interface UICollectionViewSupplementaryRegistration : NSObject
 
 + (instancetype)registrationWithSupplementaryClass:(Class)supplementaryClass elementKind:(NSString*)elementKind  configurationHandler:(UICollectionViewSupplementaryRegistrationConfigurationHandler)configurationHandler;
-+ (instancetype)registrationWithSupplementaryNib:(UINib*)supplementaryNib elementKind:(NSString*)elementKind configurationHandler:(UICollectionViewSupplementaryRegistrationConfigurationHandler)configurationHandler;
++ (instancetype)registrationWithSupplementaryNib:(UINib*)supplementaryNib elementKind:(NSString*)elementKind configurationHandler:(UICollectionViewSupplementaryRegistrationConfigurationHandler)configurationHandler API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 @property(nonatomic,readonly,nullable) Class supplementaryClass;
 @property(nonatomic,readonly,nullable) UINib *supplementaryNib;

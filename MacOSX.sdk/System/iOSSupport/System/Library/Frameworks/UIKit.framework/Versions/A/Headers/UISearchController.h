@@ -73,7 +73,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, assign, getter = isActive) BOOL active;
 
 @property (nullable, nonatomic, weak) id <UISearchControllerDelegate> delegate;
-@property (nonatomic, assign) BOOL dimsBackgroundDuringPresentation API_UNAVAILABLE(tvos) API_DEPRECATED_WITH_REPLACEMENT("obscuresBackgroundDuringPresentation", ios(8.0,12.0)); // default is YES, and has the same behavior as obscuresBackgroundDuringPresentation.
+@property (nonatomic, assign) BOOL dimsBackgroundDuringPresentation API_UNAVAILABLE(tvos) API_DEPRECATED_WITH_REPLACEMENT("obscuresBackgroundDuringPresentation", ios(8.0,12.0)) API_UNAVAILABLE(visionos); // default is YES, and has the same behavior as obscuresBackgroundDuringPresentation.
 
 /* On iOS, default is NO for apps linked on iOS 15.0 and later, YES otherwise.
  On tvOS, default is NO when contained in UISearchContainerViewController, YES otherwise.
@@ -115,7 +115,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
  
  On iOS, this will be fully deprecated in a future release in favor of `scopeBarActivation`
  */
-@property (nonatomic) BOOL automaticallyShowsScopeBar API_DEPRECATED("Use scopeBarActivation instead", ios(13.0,API_TO_BE_DEPRECATED)) API_AVAILABLE(tvos(13.0));
+@property (nonatomic) BOOL automaticallyShowsScopeBar API_DEPRECATED("Use scopeBarActivation instead", ios(13.0, API_TO_BE_DEPRECATED), visionos(1.0, API_TO_BE_DEPRECATED)) API_AVAILABLE(tvos(13.0));
 
 /// Controls if and when the UISearchController shows and hides the scope bar
 /// However, UISearchBar will not show the scope bar if `scopeButtonTitles` contains fewer than two titles
@@ -148,7 +148,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_UI_ACTOR
    If the search controller is embedded inside a tab bar controller, the tab bar controller
  will also observe this scroll view.
  */
-@property(nullable, nonatomic, strong) UIScrollView *searchControllerObservedScrollView API_DEPRECATED("Use -[UIViewController setContentScrollView:forEdge:] on the searchResultsController instead.", tvos(13.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos); // Set this property to the full screen scroll view in your results view on the results view controller, if one exists. If search controller is embedded inside a tab controller, this will forward the scroll view to the tab controller as tabBarObservedScrollView.
+@property(nullable, nonatomic, strong) UIScrollView *searchControllerObservedScrollView API_DEPRECATED("Use -[UIViewController setContentScrollView:forEdge:] on the searchResultsController instead.", tvos(13.0,API_TO_BE_DEPRECATED)) API_UNAVAILABLE(ios, watchos, visionos); // Set this property to the full screen scroll view in your results view on the results view controller, if one exists. If search controller is embedded inside a tab controller, this will forward the scroll view to the tab controller as tabBarObservedScrollView.
 
 @end
 

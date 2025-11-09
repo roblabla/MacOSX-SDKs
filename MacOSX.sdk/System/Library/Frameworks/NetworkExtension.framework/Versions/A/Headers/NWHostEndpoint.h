@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion NWHostEndpoint is a subclass of NWEndpoint. It represents an endpoint backed by a
  *		hostname and port. Note that a hostname string may be an IP or IPv6 address.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NWHostEndpoint : NWEndpoint
 
 /*!
@@ -32,19 +32,19 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @return An initialized NWHostEndpoint object.
  */
 + (instancetype)endpointWithHostname:(NSString *)hostname
-								port:(NSString *)port API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+								port:(NSString *)port API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property hostname
  * @discussion The endpoint's hostname.
  */
-@property (nonatomic, readonly) NSString *hostname API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) NSString *hostname API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property port
  * @discussion The endpoint's port.
  */
-@property (nonatomic, readonly) NSString *port API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) NSString *port API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

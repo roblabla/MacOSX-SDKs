@@ -2,7 +2,7 @@
 //  VZVirtioBlockDeviceConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2019-2022 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZStorageDeviceConfiguration.h>
@@ -20,9 +20,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 VZ_EXPORT API_AVAILABLE(macos(11.0))
 @interface VZVirtioBlockDeviceConfiguration : VZStorageDeviceConfiguration
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
 
 /*!
  @abstract Initialize a VZVirtioBlockDeviceConfiguration with a device attachment.

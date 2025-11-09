@@ -76,6 +76,7 @@
 #import <Intents/INMessageAttributeOptions.h>
 #import <Intents/INMessageAttributeOptionsResolutionResult.h>
 #import <Intents/INMessageAttributeResolutionResult.h>
+#import <Intents/INMessageLinkMetadata.h>
 #import <Intents/INNote.h>
 #import <Intents/INNoteContentResolutionResult.h>
 #import <Intents/INNoteContentType.h>

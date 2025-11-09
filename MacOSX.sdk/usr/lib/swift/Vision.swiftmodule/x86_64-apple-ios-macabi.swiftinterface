@@ -1,12 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftVision -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Vision
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2.1.2
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftVision -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Vision
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 3.0.3
+import CoreML
 import Darwin
 import Swift
 @_exported import Vision
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(macOS 10.13, iOS 11.0, tvOS 11.0, *)
 extension Vision.VNFaceLandmarkRegion2D {
   @nonobjc public var normalizedPoints: [CoreFoundation.CGPoint] {
@@ -33,6 +35,62 @@ extension Vision.VNContour {
   @nonobjc public var normalizedPoints: [simd.simd_float2] {
     get
   }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension Vision.VNDetectHumanBodyPoseRequest {
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointNames: [Vision.VNHumanBodyPoseObservation.JointName] {
+    get throws
+  }
+  #endif
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointsGroupNames: [Vision.VNHumanBodyPoseObservation.JointsGroupName] {
+    get throws
+  }
+  #endif
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension Vision.VNDetectHumanHandPoseRequest {
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointNames: [Vision.VNHumanHandPoseObservation.JointName] {
+    get throws
+  }
+  #endif
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointsGroupNames: [Vision.VNHumanHandPoseObservation.JointsGroupName] {
+    get throws
+  }
+  #endif
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension Vision.VNDetectAnimalBodyPoseRequest {
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointNames: [Vision.VNAnimalBodyPoseObservation.JointName] {
+    get throws
+  }
+  #endif
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointsGroupNames: [Vision.VNAnimalBodyPoseObservation.JointsGroupName] {
+    get throws
+  }
+  #endif
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension Vision.VNHumanBodyPose3DObservation {
+  @nonobjc public func cameraRelativePosition(_ jointName: Vision.VNHumanBodyPose3DObservation.JointName) throws -> simd.simd_float4x4
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension Vision.VNDetectHumanBodyPose3DRequest {
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointNames: [Vision.VNHumanBodyPose3DObservation.JointName] {
+    get throws
+  }
+  #endif
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedJointsGroupNames: [Vision.VNHumanBodyPose3DObservation.JointsGroupName] {
+    get throws
+  }
+  #endif
 }
 extension Vision.VNBarcodeSymbology {
   @available(macOS, introduced: 10.13, deprecated: 12.0, renamed: "aztec")
@@ -307,4 +365,14 @@ extension Vision.VNBarcodeSymbology {
     @_silgen_name("$sSo18VNBarcodeSymbologya6VisionE4UPCEABvgZ")
     get
   }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension Vision.VNRequest {
+  #if compiler(>=5.3) && $EffectfulProp
+  @nonobjc public var supportedComputeStageDevices: [Vision.VNComputeStage : [CoreML.MLComputeDevice]] {
+    get throws
+  }
+  #endif
+  @nonobjc public func computeDevice(for computeStage: Vision.VNComputeStage) -> CoreML.MLComputeDevice?
+  @nonobjc public func setComputeDevice(_ computeDevice: CoreML.MLComputeDevice?, for computeStage: Vision.VNComputeStage)
 }

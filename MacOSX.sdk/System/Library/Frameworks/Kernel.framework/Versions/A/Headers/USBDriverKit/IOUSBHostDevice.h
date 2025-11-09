@@ -1,6 +1,6 @@
-/* iig(DriverKit-256.100.8) generated from IOUSBHostDevice.iig */
+/* iig(DriverKit-324.0.10) generated from IOUSBHostDevice.iig */
 
-/* IOUSBHostDevice.iig:1-38 */
+/* IOUSBHostDevice.iig:1-43 */
 /*
  * Copyright (c) 2018-2019 Apple Inc. All rights reserved.
  *
@@ -32,14 +32,19 @@
 #ifndef _IOKIT_IOUSBHOSTDEVICE_H
 #define _IOKIT_IOUSBHOSTDEVICE_H
 
+#include <TargetConditionals.h>
+#if TARGET_OS_DRIVERKIT
 #include <USBDriverKit/AppleUSBDefinitions.h>
+#else
+#include <IOKit/usb/AppleUSBDefinitions.h>
+#endif
 #include <DriverKit/OSAction.h>  /* .iig include */
 #include <DriverKit/IOService.h>  /* .iig include */
 #include <DriverKit/IOBufferMemoryDescriptor.h>  /* .iig include */
 
 class IOUSBHostInterface;
 
-/* source class IOUSBHostDevice IOUSBHostDevice.iig:39-376 */
+/* source class IOUSBHostDevice IOUSBHostDevice.iig:44-381 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -381,7 +386,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IOUSBHostDevice IOUSBHostDevice.iig:39-376 */
+/* generated class IOUSBHostDevice IOUSBHostDevice.iig:44-381 */
 
 #define IOUSBHostDevice__GetDescriptor_ID            0xc769617535436f0eULL
 #define IOUSBHostDevice_Open_ID            0xe139dec6668972a6ULL
@@ -957,10 +962,10 @@ IOUSBHostDevice_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IOUSBHostDevice.iig:378-379 */
+/* IOUSBHostDevice.iig:383-384 */
 
 
-/* IOUSBHostDevice.iig:392- */
+/* IOUSBHostDevice.iig:397- */
 
 
 #endif /* ! _IOKIT_IOUSBHOSTDEVICE_H */

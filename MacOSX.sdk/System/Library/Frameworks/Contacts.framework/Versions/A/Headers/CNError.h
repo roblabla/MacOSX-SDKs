@@ -19,6 +19,7 @@ typedef NS_ENUM(NSInteger, CNErrorCode)
     CNErrorCodeNoAccessableWritableContainers NS_ENUM_AVAILABLE(10_13_3, 11_3) = 101,
     CNErrorCodeUnauthorizedKeys API_AVAILABLE(macos(10.14), ios(13.0), watchos(6.0)) = 102,
     CNErrorCodeFeatureDisabledByUser API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0)) = 103,
+    CNErrorCodeFeatureNotAvailable API_AVAILABLE(macos(14), ios(17), watchos(10)) = 104,
 
     CNErrorCodeRecordDoesNotExist = 200,
     CNErrorCodeInsertedRecordAlreadyExists = 201,

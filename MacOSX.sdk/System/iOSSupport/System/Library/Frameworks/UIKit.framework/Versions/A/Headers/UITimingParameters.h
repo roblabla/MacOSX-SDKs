@@ -59,6 +59,21 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0)) NS_SWIFT_UI_ACTOR
 // Equivalent to initWithDampingRatio:initialVelocity: where the velocity is the zero-vector.
 - (instancetype)initWithDampingRatio:(CGFloat)ratio;
 
+// Similar to initWithMass:stiffness:damping:initialVelocity: except this
+// creates a set of parameters that is specified by perceptual duration and
+// bounce. The `duration` specified here is a perceptual duration that
+// defines the pace of the spring. This is approximately equal to the settling
+// duration, but for very bouncy springs, will be the duration of the period of
+// oscillation for the spring. When `bounce` is 0, there are no bounces,
+// positive values indicate increasing amounts of bounciness up to a maximum of
+// 1.0 (corresponding to undamped oscillation), and negative values indicate
+// overdamped springs with a minimum value of -1.0.
+- (instancetype)initWithDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce initialVelocity:(CGVector)velocity NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(17.0));
+
+// Equivalent to initWithDuration:bounce:initialVelocity: where the velocity
+// is the zero-vector.
+- (instancetype)initWithDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce API_AVAILABLE(ios(17.0));
+
 @end
 
 

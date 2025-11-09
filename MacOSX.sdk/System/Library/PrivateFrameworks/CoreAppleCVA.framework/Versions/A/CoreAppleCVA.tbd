@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreAppleCVA.framework/Versions/A/CoreAppleCVA'
-current-version: 4.0.3
+current-version: 4.0.5
 compatibility-version: 4
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst ]

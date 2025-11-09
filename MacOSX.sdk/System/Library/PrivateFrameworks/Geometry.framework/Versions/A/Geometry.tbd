@@ -12,16 +12,15 @@ exports:
                        __ZTINSt3__110__function6__baseIFbjEEE, __ZTINSt3__110__function6__baseIFjRKjEEE, 
                        __ZTINSt3__110__function6__baseIFjRKjS3_EEE, __ZTINSt3__110__function6__baseIFjjEEE, 
                        __ZTINSt3__110__function6__baseIFjjjEEE, __ZTINSt3__110__function6__baseIFvPKDv3_dEEE, 
-                       __ZTINSt3__110__function6__baseIFvPKDv3_fEEE, __ZTINSt3__114unary_functionIRKjjEE, 
-                       __ZTINSt3__18functionIFjRKjEEE, __ZTSNSt3__110__function6__baseIFDv2_djS2_EEE, 
-                       __ZTSNSt3__110__function6__baseIFDv2_fjS2_EEE, __ZTSNSt3__110__function6__baseIFDv3_djS2_EEE, 
-                       __ZTSNSt3__110__function6__baseIFDv3_fjS2_EEE, __ZTSNSt3__110__function6__baseIFNS_8functionIFjRKjS4_EEEiEEE, 
+                       __ZTINSt3__110__function6__baseIFvPKDv3_fEEE, __ZTINSt3__18functionIFjRKjEEE, 
+                       __ZTSNSt3__110__function6__baseIFDv2_djS2_EEE, __ZTSNSt3__110__function6__baseIFDv2_fjS2_EEE, 
+                       __ZTSNSt3__110__function6__baseIFDv3_djS2_EEE, __ZTSNSt3__110__function6__baseIFDv3_fjS2_EEE, 
+                       __ZTSNSt3__110__function6__baseIFNS_8functionIFjRKjS4_EEEiEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_8functionIFjjjEEEiEEE, 
                        __ZTSNSt3__110__function6__baseIFbjEEE, __ZTSNSt3__110__function6__baseIFjRKjEEE, 
                        __ZTSNSt3__110__function6__baseIFjRKjS3_EEE, __ZTSNSt3__110__function6__baseIFjjEEE, 
                        __ZTSNSt3__110__function6__baseIFjjjEEE, __ZTSNSt3__110__function6__baseIFvPKDv3_dEEE, 
-                       __ZTSNSt3__110__function6__baseIFvPKDv3_fEEE, __ZTSNSt3__114unary_functionIRKjjEE, 
-                       __ZTSNSt3__18functionIFjRKjEEE ]
+                       __ZTSNSt3__110__function6__baseIFvPKDv3_fEEE, __ZTSNSt3__18functionIFjRKjEEE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ '_$s10Plane3Type8Geometry31ApproximateConvexDecomposition3PTl', 
                        '_$s11OptionsType8Geometry31ApproximateConvexDecomposition3PTl', 

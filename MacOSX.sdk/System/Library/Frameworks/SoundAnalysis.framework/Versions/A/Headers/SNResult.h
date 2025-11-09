@@ -14,14 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  @brief The base protocol to which analysis results conform
  */
-SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @protocol SNResult <NSObject>
 @end
 
 /*!
  @brief The interface through which clients receive the results of an analysis request
  */
-SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @protocol SNResultsObserving <NSObject>
 /*!
  @brief Provides a new analysis result to the client with the specified time range

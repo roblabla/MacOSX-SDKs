@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// - ``PushKit/PKPushPayload/dictionaryPayload``
 /// - ``PushKit/PKPushPayload/type``
 ///
-API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(8.0), watchos(6.0), tvos(13.0))
+API_AVAILABLE(macos(10.15), macCatalyst(13.0), ios(8.0), watchos(6.0), tvos(13.0), visionos(1.0))
 @interface PKPushPayload : NSObject
 
 /// The type value indicating how to interpret the payload.

@@ -17,4 +17,4 @@ typedef NS_ENUM(NSInteger, SRAuthorizationStatus) {
     /// User has denied authorization to this application or
     /// data collection is disabled in Settings.
     SRAuthorizationStatusDenied,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos) API_UNAVAILABLE(tvos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, macos, visionos) API_UNAVAILABLE(tvos);

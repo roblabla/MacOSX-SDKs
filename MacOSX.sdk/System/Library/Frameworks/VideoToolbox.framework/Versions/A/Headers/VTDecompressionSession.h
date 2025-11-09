@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2006-2013 Apple Inc. All rights reserved.
+    Copyright 2006-2023 Apple Inc. All rights reserved.
   
 	Video Toolbox client API for decompressing video frames.
 	
@@ -22,6 +22,7 @@
 #include <CoreMedia/CMSampleBuffer.h>
 #include <CoreMedia/CMFormatDescription.h>
 #include <CoreMedia/CMTime.h>
+#include <CoreMedia/CMTaggedBufferGroup.h>
 
 #include <VideoToolbox/VTSession.h>
 #include <VideoToolbox/VTDecompressionProperties.h>
@@ -48,7 +49,7 @@ extern "C"
 		to tear it down and CFRelease to release your object reference.
  */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTDecompressionSession*  VTDecompressionSessionRef;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTDecompressionSession*  VTDecompressionSessionRef CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef	VTDecompressionOutputCallback
@@ -94,8 +95,8 @@ typedef void (*VTDecompressionOutputCallback)(
 struct VTDecompressionOutputCallbackRecord {
 	CM_NULLABLE VTDecompressionOutputCallback  decompressionOutputCallback;
 	void * CM_NULLABLE                         decompressionOutputRefCon;
-};
-typedef struct VTDecompressionOutputCallbackRecord VTDecompressionOutputCallbackRecord;
+} CM_SWIFT_NONSENDABLE;
+typedef struct VTDecompressionOutputCallbackRecord VTDecompressionOutputCallbackRecord CM_SWIFT_NONSENDABLE;
 
 /*!
 	@function	VTDecompressionSessionCreate
@@ -219,7 +220,7 @@ typedef void (^VTDecompressionOutputHandler)(
 	VTDecodeInfoFlags infoFlags,
 	CM_NULLABLE CVImageBufferRef imageBuffer,
 	CMTime presentationTimeStamp,
-	CMTime presentationDuration );
+	CMTime presentationDuration ) CM_SWIFT_SENDABLE;
 	
 /*!
 	@function	VTDecompressionSessionDecodeFrameWithOutputHandler
@@ -332,7 +333,153 @@ VTIsHardwareDecodeSupported( CMVideoCodecType codecType ) API_AVAILABLE(macosx(1
 // See VTSession.h for property access APIs on VTDecompressionSessions.
 // See VTDecompressionProperties.h for standard property keys and values for decompression sessions.
 
-    
+#pragma mark Multi-image decompression
+
+/*!
+ 	@function     VTIsStereoMVHEVCDecodeSupported
+ 	@abstract	  Indicates whether the current system supports stereo MV-HEVC decode.
+ 	@discussion   This call returning true does not guarantee that decode resources will be available at all times.
+ */
+VT_EXPORT Boolean
+VTIsStereoMVHEVCDecodeSupported( void ) API_AVAILABLE(macos(14.0), ios(17.0));
+
+/*!
+	@typedef	VTDecompressionOutputMultiImageCallback
+	@abstract	Prototype for callback invoked when multi-image frame decompression is complete.
+	@discussion
+		When you create a decompression session, you pass in a callback function to be called
+		for decompressed frames.  This function will not necessarily be called in display order.
+	@param	decompressionOutputMultiImageRefCon
+		The callback's reference value, copied from the outputMultiImageRefcon passed to
+		VTDecompressionSessionSetMultiImageCallback.
+	@param	sourceFrameRefCon
+		The frame's reference value, copied from the sourceFrameRefCon argument to
+		VTDecompressionSessionDecodeFrame.
+	@param	status
+		noErr if decompression was successful; an error code if decompression was not successful.
+	@param	infoFlags
+		Contains information about the decode operation.
+		The kVTDecodeInfo_Asynchronous bit may be set if the decode ran asynchronously.
+		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped.
+		If the kVTDecodeInfo_ImageBufferModifiable bit is set, it is safe for the client to modify the imageBuffer.
+	@param	taggedBufferGroup
+		Contains the decompressed frame's multiple images, if decompression was successful; otherwise, NULL.
+		IMPORTANT: The video decompressor may still be referencing the pixelBuffers returned in this
+		callback if the kVTDecodeInfo_ImageBufferModifiable flag is not set.  Unless this flag
+		is set, it is not safe to modify the returned pixelBuffers.
+	@param	presentationTimeStamp
+		The frame's presentation timestamp, which will be determined by calling
+		CMSampleBufferGetOutputPresentationTimeStamp; kCMTimeInvalid if not available.
+	@param	presentationDuration
+		The frame's presentation duration, which will be determined by calling
+		CMSampleBufferGetOutputDuration; kCMTimeInvalid if not available.
+*/
+
+typedef void (*VTDecompressionOutputMultiImageCallback)(
+		void * CM_NULLABLE decompressionOutputMultiImageRefCon,
+		void * CM_NULLABLE sourceFrameRefCon,
+		OSStatus status,
+		VTDecodeInfoFlags infoFlags,
+		CM_NULLABLE CMTaggedBufferGroupRef taggedBufferGroup,
+		CMTime presentationTimeStamp,
+		CMTime presentationDuration );
+
+/*!
+	@function	VTDecompressionSessionSetMultiImageCallback
+	@abstract	Provides a callback capable of receiving multiple images for individual DecodeFrame requests.
+	@discussion
+		The outputMultiImageCallback will be used when the video decoder outputs CMTaggedBufferGroups.
+		When installed, outputMultiImageCallback will also be used when DecodeFrame operations fail and return a nonzero status.
+		The original single-image callback will only be used in the case where the video decoder outputs a CVImageBuffer instead of a CMTaggedBufferGroup.
+		Terminology note: in multi-image decompression, a single video sample (from one CMSampleBuffer) contains a single frame (with one PTS) that is decoded to produce multiple images.
+*/
+VT_EXPORT OSStatus
+VTDecompressionSessionSetMultiImageCallback(
+	CM_NONNULL VTDecompressionSessionRef				decompressionSession,
+	CM_NONNULL VTDecompressionOutputMultiImageCallback	outputMultiImageCallback,
+	void * CM_NULLABLE									outputMultiImageRefcon) API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_SWIFT_UNAVAILABLE("Unavailable in Swift");
+
+#if __BLOCKS__
+/*!
+	@typedef	VTDecompressionMultiImageCapableOutputHandler
+	@abstract	Prototype for block invoked when frame decompression is complete.
+	@discussion
+		When you decode a frame, you pass in a callback block to be called
+		for that decompressed frame.  This block will not necessarily be called in display order.
+		If the VTDecompressionSessionDecodeFrameWithOutputHandler call returns an error, the block
+		will not be called.
+	@param	status
+		noErr if decompression was successful; an error code if decompression was not successful.
+	@param	infoFlags
+		Contains information about the decode operation.
+		The kVTDecodeInfo_Asynchronous bit may be set if the decode ran asynchronously.
+		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped.
+		If the kVTDecodeInfo_ImageBufferModifiable bit is set, it is safe for the client to modify the imageBuffer.
+	@param	imageBuffer
+		Contains the decompressed frame, if decompression was successful and the CMSampleBuffer contained
+		a single image frame; otherwise, NULL.
+		IMPORTANT: The video decompressor may still be referencing the imageBuffer returned in this
+		callback if the kVTDecodeInfo_ImageBufferModifiable flag is not set.  Unless this flag
+		is set, it is not safe to modify the returned imageBuffer.
+	@param	taggedBufferGroup
+		Contains the decompressed frame's multiple images, if decompression was successful and the CMSampleBuffer
+		contained a multi-image frame; otherwise, NULL.
+		IMPORTANT: The video decompressor may still be referencing the pixelBuffers returned in this
+		callback if the kVTDecodeInfo_ImageBufferModifiable flag is not set.  Unless this flag
+		is set, it is not safe to modify the returned pixelBuffers.
+	@param	presentationTimeStamp
+		The frame's presentation timestamp; kCMTimeInvalid if not available.
+	@param	presentationDuration
+		The frame's presentation duration; kCMTimeInvalid if not available.
+ */
+typedef void (^VTDecompressionMultiImageCapableOutputHandler)(
+	OSStatus status,
+	VTDecodeInfoFlags infoFlags,
+	CM_NULLABLE CVImageBufferRef imageBuffer,
+	CM_NULLABLE CMTaggedBufferGroupRef taggedBufferGroup,
+	CMTime presentationTimeStamp,
+	CMTime presentationDuration ) CM_SWIFT_SENDABLE;
+
+/*!
+	@function	VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler
+	@abstract	Decompresses a video frame.
+	@discussion
+		Cannot be called with a session created with a VTDecompressionOutputCallbackRecord.
+		If the VTDecompressionSessionDecodeFrameWithOutputHandler call returns an error, the block
+		will not be called.
+	@param	session
+		The decompression session.
+	@param	sampleBuffer
+		A CMSampleBuffer containing one or more video frames.
+	@param	decodeFlags
+		A bitfield of directives to the decompression session and decoder.
+		The kVTDecodeFrame_EnableAsynchronousDecompression bit indicates whether the video decoder
+		may decompress the frame asynchronously.
+		The kVTDecodeFrame_EnableTemporalProcessing bit indicates whether the decoder may delay calls to the output callback
+		so as to enable processing in temporal (display) order.
+		If both flags are clear, the decompression shall complete and your output callback function will be called
+		before VTDecompressionSessionDecodeFrame returns.
+		If either flag is set, VTDecompressionSessionDecodeFrame may return before the output callback function is called.
+	@param	infoFlagsOut
+		Points to a VTDecodeInfoFlags to receive information about the decode operation.
+		The kVTDecodeInfo_Asynchronous bit may be set if the decode is (or was) running
+		asynchronously.
+		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
+		Pass NULL if you do not want to receive this information.
+	@param	multiImageCapableHandler
+		The block to be called when decoding the frame is completed.  If the
+		VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler call returns an error,
+		the block will not be called.
+ */
+VT_EXPORT OSStatus
+VTDecompressionSessionDecodeFrameWithMultiImageCapableOutputHandler(
+	CM_NONNULL VTDecompressionSessionRef		session,
+	CM_NONNULL CMSampleBufferRef				sampleBuffer,
+	VTDecodeFrameFlags							decodeFlags, // bit 0 is enableAsynchronousDecompression
+	VTDecodeInfoFlags * CM_NULLABLE				infoFlagsOut,
+	CM_NONNULL VTDecompressionMultiImageCapableOutputHandler	multiImageCapableOutputHandler )  API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_REFINED_FOR_SWIFT;
+#endif // __BLOCKS__
+
 #pragma pack(pop)
     
 #if defined(__cplusplus)

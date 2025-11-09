@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              in the output should be taken from tensor x (if the element in condition is true) or tensor y (if it is false).
  *              The order of source tensors of the layer must be condition tensor, tensor x, and tensor y.
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.3, 14.5, 14.5)
 @interface MLCSelectionLayer : MLCLayer
 
 /*!

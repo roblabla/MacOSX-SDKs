@@ -10,6 +10,7 @@
 @class INPerson;
 @class INSpeakableString;
 @class INFile;
+@class INMessageLinkMetadata;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -40,6 +41,7 @@ typedef NS_ENUM(NSInteger, INMessageType) {
     INMessageTypeActivitySnippet API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
     INMessageTypeFile API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
     INMessageTypeLink API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macosx),
+    INMessageTypeReaction API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macosx),
 } API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx, tvos);
 
 API_AVAILABLE(ios(10.0), watchos(3.2))
@@ -57,7 +59,18 @@ API_UNAVAILABLE(macosx, tvos)
                          groupName:(nullable INSpeakableString *)groupName
                        messageType:(INMessageType)messageType
                        serviceName:(nullable NSString *)serviceName
-                  audioMessageFile:(nullable INFile *)audioMessageFile NS_DESIGNATED_INITIALIZER API_AVAILABLE(ios(16.0), watchos(9.0)) API_UNAVAILABLE(macos);
+                   attachmentFiles:(nullable NSArray<INFile *> *)attachmentFiles API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos);
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+            conversationIdentifier:(nullable NSString *)conversationIdentifier
+                           content:(nullable NSString *)content
+                          dateSent:(nullable NSDate *)dateSent
+                            sender:(nullable INPerson *)sender
+                        recipients:(nullable NSArray<INPerson *> *)recipients
+                         groupName:(nullable INSpeakableString *)groupName
+                       messageType:(INMessageType)messageType
+                       serviceName:(nullable NSString *)serviceName
+                  audioMessageFile:(nullable INFile *)audioMessageFile API_DEPRECATED("Use initializer with attachmentFile", ios(16.0, 17.0), macos(13.0, 14.0), watchos(9.0, 10.0))  API_UNAVAILABLE(ios, macos, watchos);
 
 - (instancetype)initWithIdentifier:(NSString *)identifier
             conversationIdentifier:(nullable NSString *)conversationIdentifier
@@ -92,6 +105,27 @@ API_UNAVAILABLE(macosx, tvos)
                             sender:(nullable INPerson *)sender
                         recipients:(nullable NSArray<INPerson *> *)recipients;
 
+- (instancetype)initWithIdentifier:(NSString *)identifier
+            conversationIdentifier:(nullable NSString *)conversationIdentifier
+                           content:(nullable NSString *)content
+                          dateSent:(nullable NSDate *)dateSent
+                            sender:(nullable INPerson *)sender
+                        recipients:(nullable NSArray<INPerson *> *)recipients
+                         groupName:(nullable INSpeakableString *)groupName
+                       serviceName:(nullable NSString *)serviceName
+                      linkMetadata:(nullable INMessageLinkMetadata *)linkMetadata API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos);
+
+- (instancetype)initWithIdentifier:(NSString *)identifier
+            conversationIdentifier:(nullable NSString *)conversationIdentifier
+                           content:(nullable NSString *)content
+                          dateSent:(nullable NSDate *)dateSent
+                            sender:(nullable INPerson *)sender
+                        recipients:(nullable NSArray<INPerson *> *)recipients
+                         groupName:(nullable INSpeakableString *)groupName
+                       serviceName:(nullable NSString *)serviceName
+                       messageType:(INMessageType)messageType
+               numberOfAttachments:(nullable NSNumber *)numberOfAttachments API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macos);
+
 @property (readonly, copy, NS_NONATOMIC_IOSONLY) NSString *identifier;
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *conversationIdentifier API_AVAILABLE(ios(11.0), watchos(4.0)) API_UNAVAILABLE(macosx);
@@ -110,7 +144,13 @@ API_UNAVAILABLE(macosx, tvos)
 
 @property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSString *serviceName API_AVAILABLE(ios(13.2), watchos(6.1)) API_UNAVAILABLE(macosx);
 
-@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INFile *audioMessageFile;
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY)  NSArray<INFile *> *attachmentFiles API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macosx);
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) NSNumber *numberOfAttachments API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macosx);
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INFile *audioMessageFile API_DEPRECATED("Use attachmentFile instead", ios(16.0, 17.0), macos(13.0, 14.0), watchos(9.0, 10.0));
+
+@property (readonly, copy, nullable, NS_NONATOMIC_IOSONLY) INMessageLinkMetadata *linkMetadata API_AVAILABLE(ios(17.0), watchos(10.0)) API_UNAVAILABLE(macosx);
 
 @end
 

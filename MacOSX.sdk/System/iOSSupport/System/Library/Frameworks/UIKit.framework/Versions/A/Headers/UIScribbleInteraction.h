@@ -18,7 +18,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
     By default, Scribble allows the user to enter text by handwriting directly into any view that implements UITextInput and is editable. In apps with customized text fields, you can use UIScribbleInteraction's delegate callbacks to optimize the UI for a better writing experience. For example, you might want to hide custom placeholders when writing begins, or request delaying focusing the field if it moves when gaining focus.
     In some cases it is necessary to suppress Scribble, for example if a text view also supports drawing with Apple Pencil. You may also need to suppress Scribble in views that handle Pencil events directly, like a drawing canvas, since nearby text fields could take over the Pencil events for writing.
  */
-UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
 @interface UIScribbleInteraction : NSObject <UIInteraction>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -42,7 +42,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 @end
 
-API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @protocol UIScribbleInteractionDelegate <NSObject>
 
 @optional

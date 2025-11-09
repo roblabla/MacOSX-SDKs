@@ -11,8 +11,7 @@
 API_UNAVAILABLE_BEGIN(ios)
 
 NS_ASSUME_NONNULL_BEGIN
-/// An object that acts as a bridge between your Finder Sync
-/// extension and the Finder.
+/// A controller that acts as a bridge between your Finder Sync extension and the Finder itself.
 ///
 /// Use the Finder Sync controller to configure your extension, to set badges
 /// on items in the Finder’s window, and to get a list of selected and targeted
@@ -44,9 +43,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// - Parameters:
 ///   - image: An <doc://com.apple.documentation/documentation/appkit/nsimage>
 ///     object. The system may or may not draw this image on top of the item’s
-///     icon; when it does, the system determines the overlay position. Do not
-///     add any padding to the image to adjust this positioning. The image may
-///     be drawn at up to 320 x 320 points.
+///     icon; when it does, the system determines the overlay position. Don't
+///     add any padding to the image to adjust this positioning. The image draws
+///     at up to 320 x 320 points.
 ///   - label: A label describing the sync state represented by this badge.
 ///     Each label should be a short localized string, such as "Waiting."
 ///   - badgeID: A unique ID, identifying this badge.
@@ -57,7 +56,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Adds the specified badge to the given file or directory. Setting the
 /// identifier to an empty string (`@""`) removes the badge.
 ///
-/// Avoid adding badges to items that have not been displayed in the Finder.
+/// Avoid adding badges to items that the Finder hasn't displayed yet.
 /// When setting the initial badge, call this method from your Finder Sync
 /// extension’s ``FIFinderSync/requestBadgeIdentifierForURL:``
 /// method. When updating badges, call this method only for items that have
@@ -138,8 +137,7 @@ typedef NS_ENUM(NSUInteger, FIMenuKind) {
 };
 
 
-/// The interface for adding badges, custom shortcut menus, and toolbar buttons
-/// to the Finder.
+/// The group of methods to implement for modifying the Finder user interface to express file synchronization status and control.
 @protocol FIFinderSync
 @optional
 
@@ -238,15 +236,15 @@ typedef NS_ENUM(NSUInteger, FIMenuKind) {
 - (void)valuesForAttributes:(NSArray<NSURLResourceKey> *)attributes forItemWithURL:(NSURL *)itemURL completion:(void(^)(NSDictionary<NSURLResourceKey, id> *, NSError * _Nullable))completion;
 @end
 
-/// The principal object of a Finder Sync extension.
+/// A type to subclass to add badges, custom shortcut menus, and toolbar buttons to the Finder.
 ///
-/// Subclass the `FIFinderSync` class to add badges, custom shortcut menus, and
-/// toolbar buttons to the Finder. Although the `FIFinderSync` class does not
-/// provide any developer accessible API, it does adopt the ``FIFinderSyncProtocol``
-/// protocol. This protocol declares a number of methods you can implement to
-/// modify the appearance of the Finder. For more information on these methods,
-/// see ``FIFinderSyncProtocol``. 
-/// To learn more about creating a Finder Sync extension, see [Finder
+/// Subclass the FIFinderSync class when you want to customize the appearance of
+/// the Finder. Although the FIFinderSync class doesn’t provide any developer
+/// accessible API, it does adopt the ``FIFinderSyncProtocol``
+/// protocol. This protocol declares methods you can implement to modify the
+/// appearance of the Finder. For more information on these methods, see
+/// ``FIFinderSyncProtocol``. To learn more about creating a Finder Sync
+/// extension, see [Finder
 /// Sync](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/Finder.html#//apple_ref/doc/uid/TP40014214-CH15)
 /// in [App Extension Programming
 /// Guide](https://developer.apple.com/library/archive/documentation/General/Conceptual/ExtensibilityPG/index.html#//apple_ref/doc/uid/TP40014214).

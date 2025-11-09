@@ -1,4 +1,4 @@
-framework module Contacts [extern_c] {
+framework module Contacts {
   umbrella header "Contacts.h"
   export *
   module * { export * }

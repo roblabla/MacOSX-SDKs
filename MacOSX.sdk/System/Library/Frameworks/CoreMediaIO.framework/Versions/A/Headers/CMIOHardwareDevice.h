@@ -530,6 +530,7 @@ enum
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark CMIODevice Functions
 
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
 /*!
     @functiongroup  CMIODevice
 */
@@ -588,6 +589,8 @@ CMIODeviceProcessAVCCommand(    CMIODeviceID            deviceID,
 extern OSStatus
 CMIODeviceProcessRS422Command(  CMIODeviceID            deviceID,
                                 CMIODeviceRS422Command* ioRS422Command) API_AVAILABLE(macos(10.7));
+
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
 
 #pragma clang diagnostic pop
 #pragma pack(pop)

@@ -11,7 +11,7 @@
 .Op -i identifier
 .Op -r requirements
 .Op Fl fv
-.Op Ar path ...
+.Ar path ...
 .\" verify code (-v)
 .Nm
 .Ar -v
@@ -28,6 +28,10 @@
 .Ar -h
 .Op Fl v
 .Op Ar pid ...
+.\" validate a constraint plist
+.Nm
+.Ar --validate-constraint
+.Ar path ...
 .Sh DESCRIPTION
 The
 .Nm
@@ -251,6 +255,14 @@ may be passed in to output the entitlements in a desired format, if you pass in 
 as the path to write to standard output.
 If the signature has no entitlement data,
 nothing is written (this is not an error).
+.It Fl -enforce-constraint-validity
+When signing, require that any supplied constraints (e.g.
+.Fl -launch-constraint-*
+or
+.Fl -library-constraint
+) are structurally valid and contain only keys that are known on this version of macOS or properly use the \fI$optional\fR
+operator. By default, constraints are checked and errors are reported but their validity is not required. This default
+behavior allows developers to set contraints for newer OS versions on the current OS version.
 .It Fl -extract-certificates Ar prefix
 When displaying a signature, extract the certificates in the embedded certificate chain
 and write them to individual files. The
@@ -311,7 +323,7 @@ If this option is absent, any old signature has no effect on the signing process
 flag is present on the previous binary, then this option is ignored.
 .br
 This option takes a comma-separated list of names, which you may reasonably abbreviate:
-.Bl -tag -width requirements
+.Bl -tag -width library-constraints
 .It identifier
 Preserve the signing identifier (--identifier) instead of generating a default identifier.
 .It entitlements
@@ -328,8 +340,11 @@ overriding or deriving the version.
 .It launch-constraints
 Preserve any existing launch constraints set on the binary rather than removing them. This
 option is ignored if any of the --launch-constraint-* options are set.
+.It library-constraints
+Preserve any existing library load constraints set on the binary rather than removing them. This
+option is ignored if the --library-constraint option is set.
 .El
-For historical reasons, this option can be given without a value, which preserves all
+For historical reasons, the --preserve-metadata option can be given without a value, which preserves all
 of these values as presently known. This use is deprecated and will eventually be removed;
 always specify an explicit list of preserved items.
 .It Fl -strict Ar options
@@ -382,6 +397,24 @@ When signing, take the file at the given path and embed its contents in the sign
 as a launch constraint on this executable's responsible process. The file at path should
 contain a plist expressing the desired launch constraint conditions. This executable
 will not launch if its responsible process does not satisfy this launch constraint.
+.It Fl -library-constraint Ar path
+When signing, take the file at the given path and embed its contents in the signature
+as a constraint on the libraries this process can load. Operating system libraries can not
+be restricted via this mechanism. The file at path should contain a plist expressing the
+desired constraint conditions. This executable will not load libraries that do not
+satisfy the specified conditions.
+.It Fl -strip-disallowed-xattrs
+When signing, strip xattrs (such as com.apple.FinderInfo and com.apple.ResourceFork) that
+could interfere with code signing. If a disallowed xattr is encountered, codesign will
+complain about the presence of detritus, and the path and xattr of the offending file will
+be logged verbosely.
+.It Fl -single-threaded-signing
+When signing, use one thread for building the resource seal.
+.It Fl -validate-constraint
+Validate that the constraint plist(s) indicated by
+.Ar path(s)
+are structurally valid and contain only keys known on this OS version or keys that are properly wrapped with the \fI$optional\fR operator.
+An error message is printed if an error occurs.
 .El
 .Sh OPERATION
 .\" Signing
@@ -491,6 +524,15 @@ command should not be taken as a statement of formal code validity. Only
 .Ar --verify
 can do that; and in fact, formal verification constructs the hosting chain as part of
 its operation (but does not display it).
+.Pp
+.\" Validate constraint plist
+.\" =============================================================================
+In the fifth synopsis form,
+.Nm
+validates the
+.Ar path(s)
+supplied.  Validation means ensuring that keys and operators are properly structured with
+appropriate types and that all keys and operators are known or nested in the \fI$optional\fR operator.
 .Sh SIGNING IDENTITIES
 To be used for code signing, a digital identity must be stored in a keychain that
 is on the calling user's keychain search list.
@@ -662,6 +704,12 @@ To display the entitlements of process 666:
 .Pp
 To display the XML entitlements of process 1337:
 .Dl codesign --display --entitlements -  --xml +1337
+.Pp
+To sign Terminal.app with an embedded launch constraint and an embedded library constraint:
+.Dl codesign --sign authority --launch-constraint-self self-constraint.plist --library-constraint library-constraint.plist Terminal.app
+.Pp
+To validate a set of constraint files before signing:
+.Dl codesign --validate-constraint self-constraint.plist library-constraint.plist
 .Sh TROUBLESHOOTING
 A common source of confusion when using
 .Nm

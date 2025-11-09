@@ -9,6 +9,8 @@
 */
 
 #import <AVFoundation/AVBase.h>
+#if TARGET_OS_OSX
+
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTimeRange.h>
 
@@ -93,6 +95,8 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // TARGET_OS_OSX
 
 #else
 #import <AVFCore/AVCaptionGroup.h>

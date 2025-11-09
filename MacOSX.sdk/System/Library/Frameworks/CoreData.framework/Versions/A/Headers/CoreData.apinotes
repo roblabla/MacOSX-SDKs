@@ -184,4 +184,5 @@ Enumerators:
   SwiftName: UUIDAttributeType
 - Name: NSURIAttributeType
   SwiftName: URIAttributeType
-
+- Name: NSCompositeAttributeType
+  SwiftName: compositeAttributeType

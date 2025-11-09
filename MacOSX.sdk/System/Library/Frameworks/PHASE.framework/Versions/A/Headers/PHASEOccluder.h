@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASEOccluder
     @abstract A PHASEOccluder represents a shape (with associated materials) that can affect sound transmission within the simulated acoustic scene.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEOccluder : PHASEObject
 
 - (instancetype)init NS_UNAVAILABLE;

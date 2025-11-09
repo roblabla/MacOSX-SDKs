@@ -113,7 +113,7 @@ enum
 	on the last reference to the CMBlockBuffer, any referenced BlockBuffers are released and eligible memory blocks are
 	deallocated. These operations are recursive, so one release could result in many follow on releses.
 */
-typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef struct CM_BRIDGED_TYPE(id) OpaqueCMBlockBuffer *CMBlockBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef CMBlockBufferCustomBlockSource

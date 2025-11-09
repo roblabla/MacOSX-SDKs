@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract This class can be used to control the settings on a camera.
  */
-HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMCameraSettingsControl : HMCameraControl
 
 - (instancetype)init NS_UNAVAILABLE;

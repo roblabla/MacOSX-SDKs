@@ -84,5 +84,25 @@
 #define T_PF_WRITE              0x2             /* write access */
 #define T_PF_USER               0x4             /* from user state */
 
+#if !defined(ASSEMBLER)
+__attribute__((cold, always_inline))
+static inline void
+ml_recoverable_trap(unsigned int code)
+__attribute__((diagnose_if(!__builtin_constant_p(code), "code must be constant", "error")))
+{
+	__asm__ volatile ("brk #%0" : : "i"(code));
+}
+
+__attribute__((cold, noreturn, always_inline))
+static inline void
+ml_fatal_trap(unsigned int code)
+__attribute__((diagnose_if(!__builtin_constant_p(code), "code must be constant", "error")))
+{
+	__asm__ volatile ("brk #%0" : : "i"(code));
+	__builtin_unreachable();
+}
+
+#endif /* !ASSEMBLER */
+
 
 #endif  /* _ARM_TRAP_H_ */

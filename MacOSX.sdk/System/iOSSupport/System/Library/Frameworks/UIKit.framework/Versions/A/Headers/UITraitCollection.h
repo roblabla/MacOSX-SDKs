@@ -6,13 +6,12 @@
 //  Copyright (c) 2013-2018 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-#import <CoreGraphics/CoreGraphics.h>
-#import <UIKit/UIKitDefines.h>
+#import <UIKit/UITrait.h>
 #import <UIKit/UIDevice.h>
 #import <UIKit/UIInterface.h>
 #import <UIKit/UITouch.h>
 #import <UIKit/UIContentSizeCategory.h>
+#import <UIKit/UISceneDefinitions.h>
 
 /*! A trait collection encapsulates the system traits of an interface's environment. */
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -23,12 +22,15 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_SENDABLE
 - (instancetype)init NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype)initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
 
-- (BOOL)containsTraitsInCollection:(nullable UITraitCollection *)trait;
+// This deprecated method considers system traits only.
+- (BOOL)containsTraitsInCollection:(nullable UITraitCollection *)trait API_DEPRECATED("Compare values for specific traits in the trait collections instead", ios(8.0, 17.0), visionos(1.0, 1.0));
 
-/*! Returns a trait collection by merging the traits in `traitCollections`. The last trait along any given
- axis (e.g. interface usage) will supersede any others. */
-+ (UITraitCollection *)traitCollectionWithTraitsFromCollections:(NSArray<UITraitCollection *> *)traitCollections;
-
+// This deprecated method merges system traits only. The value of custom traits in the returned trait collection will be equal to the value of those custom traits in the first trait collection in the array.
+#if __swift__
++ (UITraitCollection *)traitCollectionWithTraitsFromCollections:(NSArray<UITraitCollection *> *)traitCollections API_DEPRECATED("Use UITraitCollection.init(mutations:) and UITraitCollection.modifyingTraits(_:) to create and modify trait collections", ios(8.0, 17.0), visionos(1.0, 1.0));
+#else
++ (UITraitCollection *)traitCollectionWithTraitsFromCollections:(NSArray<UITraitCollection *> *)traitCollections API_DEPRECATED("Use +[UITraitCollection traitCollectionWithTraits:] and -[UITraitCollection traitCollectionByModifyingTraits:] to create and modify trait collections", ios(8.0, 17.0), visionos(1.0, 1.0));
+#endif
 
 + (UITraitCollection *)traitCollectionWithUserInterfaceIdiom:(UIUserInterfaceIdiom)idiom;
 @property (nonatomic, readonly) UIUserInterfaceIdiom userInterfaceIdiom; // unspecified: UIUserInterfaceIdiomUnspecified
@@ -58,10 +60,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_SENDABLE
 @property (nonatomic, readonly) UIDisplayGamut displayGamut API_AVAILABLE(ios(10.0)); // unspecified: UIDisplayGamutUnspecified
 
 + (UITraitCollection *)traitCollectionWithAccessibilityContrast:(UIAccessibilityContrast)accessibilityContrast API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) UIAccessibilityContrast accessibilityContrast API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos); // unspecified: UIAccessibilityContrastUnspecified
+@property (nonatomic, readonly) UIAccessibilityContrast accessibilityContrast API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);// unspecified: UIAccessibilityContrastUnspecified
 
 + (UITraitCollection *)traitCollectionWithUserInterfaceLevel:(UIUserInterfaceLevel)userInterfaceLevel API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
-@property (nonatomic, readonly) UIUserInterfaceLevel userInterfaceLevel API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos); // unspecified: UIUserInterfaceLevelUnspecified
+@property (nonatomic, readonly) UIUserInterfaceLevel userInterfaceLevel API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos); // unspecified: UIUserInterfaceLevelUnspecified
 
 + (UITraitCollection *)traitCollectionWithLegibilityWeight:(UILegibilityWeight)legibilityWeight API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0));
 @property (nonatomic, readonly) UILegibilityWeight legibilityWeight API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)); // unspecified: UILegibilityWeightUnspecified
@@ -76,7 +78,84 @@ UIKIT_EXTERN API_AVAILABLE(ios(8.0)) NS_SWIFT_SENDABLE
 + (UITraitCollection *)traitCollectionWithToolbarItemPresentationSize:(UINSToolbarItemPresentationSize)toolbarItemPresentationSize API_AVAILABLE(macCatalyst(16.0));
 @property (nonatomic, readonly) UINSToolbarItemPresentationSize toolbarItemPresentationSize API_AVAILABLE(macCatalyst(16.0));
 
+/// Construct a new trait collection with the given image content dynamic range.
++ (UITraitCollection *)traitCollectionWithImageDynamicRange:(UIImageDynamicRange)imageDynamicRange API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+/// The imageDynamicRange determines how HDR images will render in the given trait environment. SDR images are unaffected.
+@property (nonatomic, readonly) UIImageDynamicRange imageDynamicRange API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
++ (UITraitCollection *)traitCollectionWithTypesettingLanguage:(NSString *)language API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+@property (nonatomic, readonly) NSString *typesettingLanguage API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+/// Construct a new trait collection with the given scene capture state.
++ (UITraitCollection *)traitCollectionWithSceneCaptureState:(UISceneCaptureState)sceneCaptureState API_AVAILABLE(ios(17.0), tvos(17.0), visionos(1.0));
+
+/// Scene capture state represents whether a scene is currently being mirrored or recorded.
+@property (nonatomic, readonly) UISceneCaptureState sceneCaptureState API_AVAILABLE(ios(17.0), tvos(17.0), visionos(1.0));
+
 @end
+
+
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+@protocol UIMutableTraits <NSObject>
+
+- (void)setCGFloatValue:(CGFloat)value forTrait:(UICGFloatTrait)trait;
+- (CGFloat)valueForCGFloatTrait:(UICGFloatTrait)trait;
+
+- (void)setNSIntegerValue:(NSInteger)value forTrait:(UINSIntegerTrait)trait;
+- (NSInteger)valueForNSIntegerTrait:(UINSIntegerTrait)trait;
+
+- (void)setObject:(nullable id<NSObject>)object forTrait:(UIObjectTrait)trait;
+- (nullable __kindof id<NSObject>)objectForTrait:(UIObjectTrait)trait;
+
+@property (nonatomic) UIUserInterfaceIdiom userInterfaceIdiom;
+@property (nonatomic) UIUserInterfaceStyle userInterfaceStyle;
+@property (nonatomic) UITraitEnvironmentLayoutDirection layoutDirection;
+@property (nonatomic) CGFloat displayScale;
+@property (nonatomic) UIUserInterfaceSizeClass horizontalSizeClass;
+@property (nonatomic) UIUserInterfaceSizeClass verticalSizeClass;
+@property (nonatomic) UIForceTouchCapability forceTouchCapability;
+@property (nonatomic, copy) UIContentSizeCategory preferredContentSizeCategory;
+@property (nonatomic) UIDisplayGamut displayGamut;
+@property (nonatomic) UIAccessibilityContrast accessibilityContrast API_UNAVAILABLE(watchos);
+@property (nonatomic) UIUserInterfaceLevel userInterfaceLevel API_UNAVAILABLE(tvos, watchos);
+@property (nonatomic) UILegibilityWeight legibilityWeight;
+@property (nonatomic) UIUserInterfaceActiveAppearance activeAppearance;
+@property (nonatomic) UINSToolbarItemPresentationSize toolbarItemPresentationSize API_AVAILABLE(macCatalyst(17.0));
+@property (nonatomic) UIImageDynamicRange imageDynamicRange;
+@property (nonatomic) UISceneCaptureState sceneCaptureState API_AVAILABLE(ios(17.0), tvos(17.0), visionos(1.0));
+@property (nonatomic, copy) NSString *typesettingLanguage;
+
+@end
+
+typedef void (^UITraitMutations)(id<UIMutableTraits> mutableTraits) API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+@interface UITraitCollection ()
+
++ (UITraitCollection *)traitCollectionWithTraits:(NS_NOESCAPE UITraitMutations)mutations;
+- (UITraitCollection *)traitCollectionByModifyingTraits:(NS_NOESCAPE UITraitMutations)mutations;
+
++ (UITraitCollection *)traitCollectionWithCGFloatValue:(CGFloat)value forTrait:(UICGFloatTrait)trait;
+- (UITraitCollection *)traitCollectionByReplacingCGFloatValue:(CGFloat)value forTrait:(UICGFloatTrait)trait;
+- (CGFloat)valueForCGFloatTrait:(UICGFloatTrait)trait;
+
++ (UITraitCollection *)traitCollectionWithNSIntegerValue:(NSInteger)value forTrait:(UINSIntegerTrait)trait;
+- (UITraitCollection *)traitCollectionByReplacingNSIntegerValue:(NSInteger)value forTrait:(UINSIntegerTrait)trait;
+- (NSInteger)valueForNSIntegerTrait:(UINSIntegerTrait)trait;
+
++ (UITraitCollection *)traitCollectionWithObject:(nullable id<NSObject>)object forTrait:(UIObjectTrait)trait;
+- (UITraitCollection *)traitCollectionByReplacingObject:(nullable id<NSObject>)object forTrait:(UIObjectTrait)trait;
+- (nullable __kindof id<NSObject>)objectForTrait:(UIObjectTrait)trait;
+
+- (NSSet<UITrait> *)changedTraitsFromTraitCollection:(nullable UITraitCollection *)traitCollection;
+
+@property (nonatomic, readonly, class) NSArray<UITrait> *systemTraitsAffectingColorAppearance;
+@property (nonatomic, readonly, class) NSArray<UITrait> *systemTraitsAffectingImageLookup;
+
+@end
+
 
 /*! Trait environments expose a trait collection that describes their environment. */
 NS_SWIFT_UI_ACTOR
@@ -84,7 +163,40 @@ NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly) UITraitCollection *traitCollection API_AVAILABLE(ios(8.0));
 
 /*! To be overridden as needed to provide custom behavior when the environment's traits change. */
-- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection API_AVAILABLE(ios(8.0));
+- (void)traitCollectionDidChange:(nullable UITraitCollection *)previousTraitCollection API_DEPRECATED("Use the trait change registration APIs declared in the UITraitChangeObservable protocol", ios(8.0, 17.0), visionos(1.0, 1.0));
+@end
+
+
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+@protocol UITraitChangeRegistration <NSObject, NSCopying>
+@end
+
+typedef void (^UITraitChangeHandler)(__kindof id<UITraitEnvironment> traitEnvironment, UITraitCollection *previousCollection) API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+@protocol UITraitOverrides <UIMutableTraits>
+
+- (BOOL)containsTrait:(UITrait)trait;
+- (void)removeTrait:(UITrait)trait;
+
+@end
+
+
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+@protocol UITraitChangeObservable
+
+- (id<UITraitChangeRegistration>)registerForTraitChanges:(NSArray<UITrait> *)traits withHandler:(UITraitChangeHandler)handler;
+
+// The action method you use with the following registration APIs may have zero, one, or two parameters.
+// If the method accepts at least one parameter, the first parameter will be the trait environment whose traits are changing.
+// If the method accepts two parameters, the second parameter will be the trait environment's previous trait collection before the change.
+- (id<UITraitChangeRegistration>)registerForTraitChanges:(NSArray<UITrait> *)traits withTarget:(id)target action:(SEL)action;
+// Convenience method where the target is self.
+- (id<UITraitChangeRegistration>)registerForTraitChanges:(NSArray<UITrait> *)traits withAction:(SEL)action;
+
+- (void)unregisterForTraitChanges:(id<UITraitChangeRegistration>)registration;
+
 @end
 
 

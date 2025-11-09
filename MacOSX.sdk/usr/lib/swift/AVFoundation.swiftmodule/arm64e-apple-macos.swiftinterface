@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target arm64e-apple-macos13.3 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AVFoundation
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2150.23.1
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target arm64e-apple-macos14.0 -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftAVFoundation -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name AVFoundation
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 2180.79.1.4.1
 @_exported import AVFoundation
 import CoreGraphics
 import CoreMedia
@@ -9,12 +9,24 @@ import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension AVFoundation.AVPlayerInterstitialEvent {
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
   convenience public init(primaryItem: AVFoundation.AVPlayerItem, identifier: Swift.String?, time: CoreMedia.CMTime, templateItems: [AVFoundation.AVPlayerItem], restrictions: AVFoundation.AVPlayerInterstitialEvent.Restrictions = [], resumptionOffset: CoreMedia.CMTime = .indefinite, playoutLimit: CoreMedia.CMTime = .invalid, userDefinedAttributes: [Swift.String : Any] = [:])
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
   convenience public init(primaryItem: AVFoundation.AVPlayerItem, identifier: Swift.String?, date: Foundation.Date, templateItems: [AVFoundation.AVPlayerItem], restrictions: AVFoundation.AVPlayerInterstitialEvent.Restrictions = [], resumptionOffset: CoreMedia.CMTime = .indefinite, playoutLimit: CoreMedia.CMTime = .invalid, userDefinedAttributes: [Swift.String : Any] = [:])
+}
+extension Foundation.NSNotification.Name {
+  @available(macOS, introduced: 13.3, deprecated: 14.0, renamed: "AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification")
+  @available(iOS, introduced: 16.4, deprecated: 17.0, renamed: "AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification")
+  @available(tvOS, introduced: 16.4, deprecated: 17.0, renamed: "AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification")
+  @available(watchOS, introduced: 9.4, deprecated: 10.0, renamed: "AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification")
+  @_alwaysEmitIntoClient public static var AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChange: Foundation.NSNotification.Name {
+    get {
+		Self("AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChange")
+	}
+  }
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMetadataItem {
@@ -54,7 +66,8 @@ extension AVFoundation.AVError {
     get
   }
   @available(swift 4.2)
-  @available(macCatalyst 14.0, *)
+  @available(macCatalyst 14.0, tvOS 17.0, *)
+  @available(xrOS, unavailable)
   public var device: AVFoundation.AVCaptureDevice? {
     get
   }
@@ -126,7 +139,7 @@ extension AVFoundation.AVAsynchronousKeyValueLoading {
   #endif
 }
 @_hasMissingDesignatedInitializers @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
-public class AVAnyAsyncProperty : Swift.CustomStringConvertible {
+public class AVAnyAsyncProperty : Swift.CustomStringConvertible, @unchecked Swift.Sendable {
   public var description: Swift.String {
     get
   }
@@ -155,6 +168,9 @@ extension AVFoundation.AVAsyncProperty {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension AVFoundation.AVAsyncProperty.Status : Swift.Equatable where Value : Swift.Equatable {
   public static func == (lhs: AVFoundation.AVAsyncProperty<Root, Value>.Status, rhs: AVFoundation.AVAsyncProperty<Root, Value>.Status) -> Swift.Bool
+}
+@available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+extension AVFoundation.AVAsyncProperty.Status : Swift.Sendable where Value : Swift.Sendable {
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension AVFoundation.AVAsyncProperty.Status : Swift.CustomStringConvertible {
@@ -192,7 +208,8 @@ extension AVFoundation.AVAsynchronousKeyValueLoading {
   public func load<A, B, C, D, E, F, G, H>(_ propertyA: AVFoundation.AVAsyncProperty<Self, A>, _ propertyB: AVFoundation.AVAsyncProperty<Self, B>, _ propertyC: AVFoundation.AVAsyncProperty<Self, C>, _ propertyD: AVFoundation.AVAsyncProperty<Self, D>, _ propertyE: AVFoundation.AVAsyncProperty<Self, E>, _ propertyF: AVFoundation.AVAsyncProperty<Self, F>, _ propertyG: AVFoundation.AVAsyncProperty<Self, G>, _ propertyH: AVFoundation.AVAsyncProperty<Self, H>) async throws -> (A, B, C, D, E, F, G, H)
   #endif
 }
-@available(macOS 11.0, iOS 7.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 7.0, macCatalyst 14.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVMetadataMachineReadableCodeObject {
   @nonobjc public var corners: [CoreFoundation.CGPoint] {
     get
@@ -454,6 +471,12 @@ extension AVFoundation.AVMutableCaption {
   @nonobjc public func removeTextCombine(in range: Foundation.NSRange)
   @nonobjc public func removeRuby(in range: Foundation.NSRange)
 }
+@available(macOS 14, iOS 17, *)
+@available(tvOS, unavailable)
+@available(watchOS, unavailable)
+extension AVFoundation.AVAssetWriterInputTaggedPixelBufferGroupAdaptor {
+  public func appendTaggedBuffers(_ taggedBuffers: [CoreMedia.CMTaggedBuffer], withPresentationTime: CoreMedia.CMTime) -> Swift.Bool
+}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, *)
 @available(watchOS, unavailable)
 extension AVFoundation.AVAsynchronousVideoCompositionRequest {
@@ -506,6 +529,9 @@ extension AVFoundation.AVAssetVariant.AudioAttributes.RenditionSpecificAttribute
     get
   }
 }
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, watchOS 9.0, *)
+extension AVFoundation.AVAssetVariant.VideoAttributes : @unchecked Swift.Sendable {
+}
 extension AVFoundation.AVPlayerItem {
   @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
   convenience public init(asset: AVFoundation.AVAsset, automaticallyLoadedAssetKeys: [AVFoundation.AVPartialAsyncProperty<AVFoundation.AVAsset>] = [])
@@ -515,14 +541,59 @@ extension AVFoundation.AVPlayerItem {
   #endif
 }
 extension Foundation.NSNotification.Name {
-  @available(macOS, deprecated, introduced: 10.7, message: "Use AVPlayerItem.timeJumpedNotification instead.")
-  @available(iOS, deprecated, introduced: 5.0, message: "Use AVPlayerItem.timeJumpedNotification instead.")
-  @available(tvOS, deprecated, introduced: 9.0, message: "Use AVPlayerItem.timeJumpedNotification instead.")
-  @available(watchOS, deprecated, introduced: 1.0, message: "Use AVPlayerItem.timeJumpedNotification instead.")
+  @available(macOS, introduced: 10.7, deprecated: 100000, message: "Use AVPlayerItem.timeJumpedNotification instead.")
+  @available(iOS, introduced: 5.0, deprecated: 100000, message: "Use AVPlayerItem.timeJumpedNotification instead.")
+  @available(tvOS, introduced: 9.0, deprecated: 100000, message: "Use AVPlayerItem.timeJumpedNotification instead.")
+  @available(watchOS, introduced: 1.0, deprecated: 100000, message: "Use AVPlayerItem.timeJumpedNotification instead.")
   @_alwaysEmitIntoClient public static var AVPlayerItemTimeJumped: Foundation.NSNotification.Name {
     get {
 		Self("AVPlayerItemTimeJumpedNotification")
 	}
+  }
+  @available(macOS, introduced: 10.9, deprecated: 100000, message: "Use AVPlayerItem.playbackStalledNotification instead.")
+  @available(iOS, introduced: 6.0, deprecated: 100000, message: "Use AVPlayerItem.playbackStalledNotification instead.")
+  @available(tvOS, introduced: 9.0, deprecated: 100000, message: "Use AVPlayerItem.playbackStalledNotification instead.")
+  @available(watchOS, introduced: 1.0, deprecated: 100000, message: "Use AVPlayerItem.playbackStalledNotification instead.")
+  @_alwaysEmitIntoClient public static var AVPlayerItemPlaybackStalled: Foundation.NSNotification.Name {
+    get {
+        Self("AVPlayerItemPlaybackStalledNotification")
+    }
+  }
+  @available(macOS, introduced: 10.9, deprecated: 100000, message: "Use AVPlayerItem.newErrorLogEntryNotification instead.")
+  @available(iOS, introduced: 6.0, deprecated: 100000, message: "Use AVPlayerItem.newErrorLogEntryNotification instead.")
+  @available(tvOS, introduced: 9.0, deprecated: 100000, message: "Use AVPlayerItem.newErrorLogEntryNotification instead.")
+  @available(watchOS, introduced: 1.0, deprecated: 100000, message: "Use AVPlayerItem.newErrorLogEntryNotification instead.")
+  @_alwaysEmitIntoClient public static var AVPlayerItemNewErrorLogEntry: Foundation.NSNotification.Name {
+    get {
+        Self("AVPlayerItemNewErrorLogEntryNotification")
+    }
+  }
+  @available(macOS, introduced: 10.9, deprecated: 100000, message: "Use AVPlayerItem.newAccessLogEntryNotification instead.")
+  @available(iOS, introduced: 6.0, deprecated: 100000, message: "Use AVPlayerItem.newAccessLogEntryNotification instead.")
+  @available(tvOS, introduced: 9.0, deprecated: 100000, message: "Use AVPlayerItem.newAccessLogEntryNotification instead.")
+  @available(watchOS, introduced: 1.0, deprecated: 100000, message: "Use AVPlayerItem.newAccessLogEntryNotification instead.")
+  @_alwaysEmitIntoClient public static var AVPlayerItemNewAccessLogEntry: Foundation.NSNotification.Name {
+    get {
+        Self("AVPlayerItemNewAccessLogEntryNotification")
+    }
+  }
+  @available(macOS, introduced: 10.7, deprecated: 100000, message: "Use AVPlayerItem.didPlayToEndTimeNotification instead.")
+  @available(iOS, introduced: 4.0, deprecated: 100000, message: "Use AVPlayerItem.didPlayToEndTimeNotification instead.")
+  @available(tvOS, introduced: 9.0, deprecated: 100000, message: "Use AVPlayerItem.didPlayToEndTimeNotification instead.")
+  @available(watchOS, introduced: 1.0, deprecated: 100000, message: "Use AVPlayerItem.didPlayToEndTimeNotification instead.")
+  @_alwaysEmitIntoClient public static var AVPlayerItemDidPlayToEndTime: Foundation.NSNotification.Name {
+    get {
+        Self("AVPlayerItemDidPlayToEndTimeNotification")
+    }
+  }
+  @available(macOS, introduced: 10.7, deprecated: 100000, message: "Use AVPlayerItem.failedToPlayToEndTimeNotification instead.")
+  @available(iOS, introduced: 4.3, deprecated: 100000, message: "Use AVPlayerItem.failedToPlayToEndTimeNotification instead.")
+  @available(tvOS, introduced: 9.0, deprecated: 100000, message: "Use AVPlayerItem.failedToPlayToEndTimeNotification instead.")
+  @available(watchOS, introduced: 1.0, deprecated: 100000, message: "Use AVPlayerItem.failedToPlayToEndTimeNotification instead.")
+  @_alwaysEmitIntoClient public static var AVPlayerItemFailedToPlayToEndTime: Foundation.NSNotification.Name {
+    get {
+        Self("AVPlayerItemFailedToPlayToEndTimeNotification")
+    }
   }
 }
 @available(watchOS, unavailable)
@@ -541,7 +612,7 @@ extension AVFoundation.AVAssetImageGenerator {
   @available(macOS 13, iOS 16, tvOS 16, *)
   @available(watchOS, unavailable)
   public struct Images : _Concurrency.AsyncSequence, _Concurrency.AsyncIteratorProtocol {
-    @frozen public enum Element {
+    @frozen public enum Element : Swift.Sendable {
       case success(requestedTime: CoreMedia.CMTime, image: CoreGraphics.CGImage, actualTime: CoreMedia.CMTime)
       case failure(requestedTime: CoreMedia.CMTime, error: any Swift.Error)
     }
@@ -572,13 +643,18 @@ extension AVFoundation.AVAssetImageGenerator.Images.Element {
   #endif
 }
 #endif
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVRouteDetector : @unchecked Swift.Sendable {
+}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVMutableComposition {
   public static var tracks: AVFoundation.AVAsyncProperty<Root, [AVFoundation.AVMutableCompositionTrack]> {
     get
   }
 }
-@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCapturePhotoOutput {
   @nonobjc public var supportedFlashModes: [AVFoundation.AVCaptureDevice.FlashMode] {
     get
@@ -590,28 +666,34 @@ extension AVFoundation.AVCapturePhotoOutput {
     get
   }
 }
+@available(macOS 10.15, iOS 11.0, macCatalyst 14.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCapturePhotoOutput {
-  @available(macOS 10.15, iOS 11.0, macCatalyst 14.0, *)
+  @available(macOS 10.15, iOS 11.0, macCatalyst 14.0, tvOS 17.0, *)
+  @available(xrOS, unavailable)
   @nonobjc @_alwaysEmitIntoClient public func supportedPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Darwin.OSType] {
 		return __supportedPhotoPixelFormatTypes(forFileType: fileType).map { $0.uint32Value } as [OSType]
 	}
   @available(*, unavailable, message: "Use 'supportedPhotoPixelFormatTypes(for:) -> [OSType]' instead")
   @nonobjc public func supportedPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Foundation.NSNumber]
-  @available(iOS 11.0, macCatalyst 14.0, *)
+  @available(iOS 11.0, macCatalyst 14.0, tvOS 17.0, *)
   @available(macOS, unavailable)
+  @available(xrOS, unavailable)
   @nonobjc @_alwaysEmitIntoClient public func supportedRawPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Darwin.OSType] {
 		return __supportedRawPhotoPixelFormatTypes(forFileType: fileType).map { $0.uint32Value } as [OSType]
 	}
   @available(*, unavailable, message: "Use 'supportedRawPhotoPixelFormatTypes(for:) -> [OSType]' instead")
   @nonobjc public func supportedRawPhotoPixelFormatTypes(for fileType: AVFoundation.AVFileType) -> [Foundation.NSNumber]
 }
-@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCapturePhotoSettings {
   @nonobjc public var availablePreviewPhotoPixelFormatTypes: [Darwin.OSType] {
     get
   }
 }
-@available(macOS 10.15, iOS 11.0, macCatalyst 14.0, *)
+@available(macOS 10.15, iOS 11.0, macCatalyst 14.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCapturePhoto {
   @available(*, unavailable, message: "Use 'cgImageRepresentation() -> CGImage?' instead")
   @nonobjc public func cgImageRepresentation() -> Swift.Unmanaged<CoreGraphics.CGImage>?
@@ -748,32 +830,41 @@ extension CoreMedia.CMTimeMapping : Swift._ObjectiveCBridgeable {
   public static func _unconditionallyBridgeFromObjectiveC(_ source: Foundation.NSValue?) -> CoreMedia.CMTimeMapping
   public typealias _ObjectiveCType = Foundation.NSValue
 }
-@available(macOS 10.7, iOS 5.0, macCatalyst 14.0, *)
+@available(macOS 12.3, iOS 15.4, tvOS 15.4, *)
+@available(watchOS, unavailable)
+extension AVFoundation.AVCoordinatedPlaybackSuspension : @unchecked Swift.Sendable {
+}
+@available(macOS 10.7, iOS 5.0, macCatalyst 14.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCaptureVideoDataOutput {
   @nonobjc public var availableVideoPixelFormatTypes: [Darwin.OSType] {
     get
   }
 }
-@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, *)
+@available(macOS 11.0, iOS 10.0, macCatalyst 14.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCaptureDevice.Format {
   @nonobjc public var supportedColorSpaces: [AVFoundation.AVCaptureColorSpace] {
     get
   }
 }
-@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCaptureDevice.Format {
   @nonobjc public var supportedMaxPhotoDimensions: [CoreMedia.CMVideoDimensions] {
     get
   }
 }
-@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, *)
+@available(macOS 13.0, iOS 16.0, macCatalyst 16.0, tvOS 17.0, *)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCaptureDevice.Format {
   @nonobjc public var secondaryNativeResolutionZoomFactors: [CoreFoundation.CGFloat] {
     get
   }
 }
-@available(iOS 16.0, macCatalyst 16.0, *)
+@available(iOS 16.0, macCatalyst 16.0, tvOS 17.0, *)
 @available(macOS, unavailable)
+@available(xrOS, unavailable)
 extension AVFoundation.AVCaptureDevice.Format {
   @nonobjc public var supportedVideoZoomFactorsForDepthDataDelivery: [CoreFoundation.CGFloat] {
     get
@@ -798,8 +889,3 @@ extension AVFoundation.AVPartialAsyncProperty where Root : AVFoundation.AVURLAss
     get
   }
 }
-#if compiler(>=5.3) && $RethrowsProtocol
-@available(macOS 13, iOS 16, tvOS 16, *)
-@available(watchOS, unavailable)
-extension AVFoundation.AVAssetImageGenerator.Images.Element : Swift.Sendable {}
-#endif

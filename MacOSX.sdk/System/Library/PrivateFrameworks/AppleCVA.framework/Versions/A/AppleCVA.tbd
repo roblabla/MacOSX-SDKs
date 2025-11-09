@@ -2,12 +2,18 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AppleCVA.framework/Versions/A/AppleCVA'
-current-version: 203.101.3
-compatibility-version: 203.101
+current-version: 204.1.6
+compatibility-version: 204.1
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _CVAFaceTrackingCopySemantics, _CVAFaceTrackingCreate, _CVAFaceTrackingGetAPIVersion, 
                        _CVAFaceTrackingGetErrorDescription, _CVAFaceTrackingGetTypeID, 
+                       _CVAFaceTrackingLiteCopyDecodedOutput, _CVAFaceTrackingLiteCreate, 
+                       _CVAFaceTrackingLiteEncodeOutput, _CVAFaceTrackingLiteGetAPIVersion, 
+                       _CVAFaceTrackingLiteGetDefaultCreateOptions, _CVAFaceTrackingLiteGetTypeID, 
+                       _CVAFaceTrackingLiteProcess, _CVAFaceTrackingLiteProcessSecondary, 
+                       _CVAFaceTrackingLiteSetColorImage, _CVAFaceTrackingLiteSetDetectedFaces, 
+                       _CVAFaceTrackingLiteSetLuxLevel, _CVAFaceTrackingLiteSetTimestamp, 
                        _CVAFaceTrackingMaximumNumberOfTrackedFaces, _CVAFaceTrackingPostProcessRecordingExt, 
                        _CVAFaceTrackingProcess, _CVAFaceTrackingTransformData, _kCVAFaceTracking_AddDebugInfo, 
                        _kCVAFaceTracking_AddIdentityModelUUID, _kCVAFaceTracking_AddKeyPoints, 

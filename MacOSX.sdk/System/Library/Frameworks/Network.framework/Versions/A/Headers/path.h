@@ -84,12 +84,14 @@ nw_path_get_status(nw_path_t path);
 typedef enum {
 	/*! @const nw_path_unsatisfied_reason_not_available No reason is given */
 	nw_path_unsatisfied_reason_not_available = 0,
-	/*! @const nw_path_unsatisfied_reason_not_available The user has disabled cellular */
+	/*! @const nw_path_unsatisfied_reason_cellular_denied The user has disabled cellular */
 	nw_path_unsatisfied_reason_cellular_denied = 1,
-	/*! @const nw_path_unsatisfied_reason_not_available The user has disabled Wi-Fi */
+	/*! @const nw_path_unsatisfied_reason_wifi_denied The user has disabled Wi-Fi */
 	nw_path_unsatisfied_reason_wifi_denied = 2,
-	/*! @const nw_path_unsatisfied_reason_not_available The user has disabled local network access */
+	/*! @const nw_path_unsatisfied_reason_local_network_denied The user has disabled local network access */
 	nw_path_unsatisfied_reason_local_network_denied = 3,
+	/*! @const nw_path_unsatisfied_reason_vpn_inactive A required VPN is not active */
+	nw_path_unsatisfied_reason_vpn_inactive API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0)) = 4,
 } nw_path_unsatisfied_reason_t;
 
 /*!

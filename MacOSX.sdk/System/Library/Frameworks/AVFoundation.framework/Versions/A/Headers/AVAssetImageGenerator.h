@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract
     The type of an aperture mode.
 */
-typedef NSString * AVAssetImageGeneratorApertureMode NS_STRING_ENUM;
+typedef NSString * AVAssetImageGeneratorApertureMode NS_STRING_ENUM API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /*!
 	@constant		AVAssetImageGeneratorApertureModeCleanAperture
@@ -173,7 +173,7 @@ AV_INIT_UNAVAILABLE
  
 		On iOS and tvOS, it is particularly important to avoid blocking.  To preserve responsiveness, a synchronous request that blocks for too long (eg, a request to generate an image from an asset on a slow HTTP server) may lead to media services being reset.
 */
-- (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_DEPRECATED_WITH_REPLACEMENT("generateCGImageAsynchronouslyForTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+- (nullable CGImageRef)copyCGImageAtTime:(CMTime)requestedTime actualTime:(nullable CMTime *)actualTime error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_DEPRECATED_WITH_REPLACEMENT("generateCGImageAsynchronouslyForTime:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /* error object indicates the reason for failure if the result is AVAssetImageGeneratorFailed */
 typedef void (^AVAssetImageGeneratorCompletionHandler)(CMTime requestedTime, CGImageRef _Nullable image, CMTime actualTime, AVAssetImageGeneratorResult result, NSError * _Nullable error);

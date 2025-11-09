@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class HMHome;
 @class HMAccessory;
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @brief This class is used to discover new accessories in the home
  *        that have never been paired with and therefore not part of the home.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
     @interface HMAccessoryBrowser : NSObject
 
 /*!
@@ -92,4 +92,4 @@ HM_EXTERN API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatal
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

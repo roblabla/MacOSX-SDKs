@@ -6,10 +6,11 @@
 .Nd Utility to precisely modify the security settings on Apple Silicon Macs.
 .Sh SYNOPSIS
 .Nm
-.Op Fl ldefgnmkcas                     \" [-ldefgnmkcas]
+.Op Fl ldejfgnmkcas                    \" [-ldejfgnmkcas]
 .Op Fl u Ar username                   \" [-u username]
 .Op Fl p Ar password                   \" [-p password]
 .Op Fl v Ar APFS Volume Group UUID     \" [-v APFS Volume Group UUID]
+.Op Fl r Ar APFS Volume Group UUID     \" [-r APFS Volume Group UUID]
 .Sh DESCRIPTION          \" Section Header - required - don't modify
 This utility is not meant for normal users or even sysadmins. It provides unabstracted access to capabilities which are normally handled for the user automatically when changing the security policy through GUIs such as the Startup Security Utility in macOS Recovery (“recoveryOS”). It is possible to make your system security much weaker and therefore easier to compromise using this tool. This tool is not to be used in production environments. It is possible to render your system unbootable with this tool. It should only be used to understand how the security of Apple Silicon Macs works. Use at your own risk!
 .Pp
@@ -54,6 +55,16 @@ Display the detailed contents of the LocalPolicy. This will show specific 4-char
 .It Fl e, -display-all-policies
 .Pp
 Display the detailed contents of the LocalPolicy for every bootable OS installation.
+.It Fl j, -json
+.Pp
+Switch display mode to JSON. Can only be combined with --display-policy and --display-all-policies.
+.It Fl r, -remove Ar AABBCCDD-EEFF-0011-2233-445566778899
+.Pp
+Remove macOS and paired recoveryOS local policies for a given Volume Group UUID.
+.Pp
+Boot environment requirements: software-launched recoveryOS or 1TR.
+.br
+Pairing requirements: None.
 .It Fl f, -full-security
 .Pp
 Changes security mode to Full Security. This option is mutually exclusive with all options below which cause security downgrades. Full Security is effectively a LocalPolicy which is in its default state, lacking all available security downgrades. Full Security also performs an online check at software install and upgrade time to ensure that only the latest version of software can be installed. This prevents accidentally installing old software which has known vulnerabilities in it. If the security is downgraded away from Full Security, and then re-upgraded to Full Security, the online check will be performed, and if the software is no longer the latest available, it will not be possible to set it to Full Security again. Because online checks are only performed at software installation, upgrade, and Full Security policy setting time, it is possible for an OS to report that it is Full Security despite not being the latest software version. Full Security only indicates the state as of the latest install or upgrade.

@@ -28,7 +28,7 @@ NS_SWIFT_NAME(PHASEMedium.Preset);
     @interface PHASEMedium
     @abstract A PHASEMedium describes the acoustic properties of a medium.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEMedium : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

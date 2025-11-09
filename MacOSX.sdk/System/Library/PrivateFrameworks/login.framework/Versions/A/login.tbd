@@ -3,6 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/login'
+current-version: 252
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -63,7 +64,8 @@ exports:
                        _SACScreenLockPreferencesChanged, _SACScreenLockViaTouchIDAssertionTimeout, 
                        _SACScreenSaverCanRun, _SACScreenSaverDidFadeInBackground, 
                        _SACScreenSaverIsRunning, _SACScreenSaverIsRunningInBackground, 
-                       _SACScreenSaverStartNow, _SACScreenSaverStopNow, _SACScreenSaverStopNowWithOptions, 
+                       _SACScreenSaverStartNow, _SACScreenSaverStartNowWithOptions, 
+                       _SACScreenSaverStopNow, _SACScreenSaverStopNowWithOptions, 
                        _SACScreenSaverTimeRemaining, _SACSetAutoLoginPassword, _SACSetClassroomLockCaption, 
                        _SACSetFinalSnapshot, _SACSetMiniBuddyItem, _SACSetMiniBuddyItemForUser, 
                        _SACSetScreenSaverCanRun, _SACShieldWindowShowing, _SACShowClassroomLock, 
@@ -109,6 +111,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/login.framework/Versions/A/Frameworks/loginsupport.framework/Versions/A/loginsupport'
+current-version: 252
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

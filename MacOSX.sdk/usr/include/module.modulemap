@@ -1,19 +1,16 @@
-module AppleTextureEncoder [system] [extern_c] {
+module AppleTextureEncoder [system] {
  header "AppleTextureEncoder.h"
  link "ate"
  export *
 }
-module Bootstrap [system] {
- header "bootstrap.h"
- export *
-}
-module Compression [system] [extern_c] {
+extern module Bootstrap "xpc.modulemap"
+module Compression [system] {
  header "compression.h"
  export *
  link "compression"
 }
 extern module EditLine "editline.modulemap"
-module Darwin [system] [extern_c] [no_undeclared_includes] {
+module Darwin [system] [no_undeclared_includes] {
  // Headers that are repeatedly included, and therefore should not be
  // assigned to any given module.
  exclude header "_structs.h"
@@ -165,8 +162,7 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
  // POSIX
  module POSIX {
   module basic {
-   header "sys/_endian.h"
-   export *
+   export Darwin.machine.endian
   }
   module aio {
    header "aio.h"
@@ -477,6 +473,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export cstd.wctype
   }
  }
+ explicit module ar {
+  header "ar.h"
+  export *
+ }
  module Availability {
         header "AvailabilityVersions.h"
   header "Availability.h"
@@ -486,12 +486,21 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   export *
  }
  extern module bank "bank.modulemap"
+ explicit module bitstring {
+  requires !swift
+  header "bitstring.h"
+  export *
+ }
  module ConditionalMacros {
   header "ConditionalMacros.h"
   export *
  }
  explicit module crt_externs {
   header "crt_externs.h"
+  export *
+ }
+ module fts {
+  header "fts.h"
   export *
  }
  module gethostuuid {
@@ -516,6 +525,8 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
  }
  extern module Mach "mach.modulemap"
  extern module device "device.modulemap"
+ // Use sysdir.h
+ exclude header "NSSystemDirectories.h"
  module libkern {
   export *
   module OSAtomic {
@@ -534,6 +545,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    exclude header "libkern/arm/OSByteOrder.h"
    export *
   }
+ }
+ module libproc {
+  header "libproc.h"
+  export *
  }
  module os {
   module base {
@@ -584,8 +599,16 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   header "_wctype.h"
   export *
  }
+ explicit module aliasdb {
+  header "aliasdb.h"
+  export *
+ }
  module alloca {
   header "alloca.h"
+  export *
+ }
+ explicit module bootparams {
+  header "bootparams.h"
   export *
  }
  module block {
@@ -643,25 +666,35 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
  }
+ module execinfo {
+  header "execinfo.h"
+  export *
+ }
+ module fstab {
+  header "fstab.h"
+  export *
+ }
  module hfs {
   umbrella "hfs"
   module * { export * }
   export *
  }
- explicit module ncurses {
-  header "ncurses.h" // note: same as curses.h
+ explicit module membership {
+  header "membership.h"
   export *
-  explicit module dll {
-   header "ncurses_dll.h"
-   export *
-  }
-  explicit module unctrl {
-   textual header "unctrl.h"
-  }
  }
+ extern module ncurses "ncurses.modulemap"
  extern module net "net.modulemap"
  extern module netinet "netinet.modulemap"
  extern module netinet6 "netinet6.modulemap"
+ explicit module ntsid {
+  header "ntsid.h"
+  export *
+ }
+ explicit module printerdb {
+  header "printerdb.h"
+  export *
+ }
  module runetype {
   header "runetype.h"
   export *
@@ -704,6 +737,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    header "sys/conf.h"
    export *
   }
+  module constrained_ctypes {
+   header "sys/constrained_ctypes.h"
+   export *
+  }
   module disk {
    header "sys/disk.h"
    export *
@@ -734,6 +771,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   }
   module filio {
    header "sys/filio.h"
+   export *
+  }
+  module fsgetpath {
+   header "sys/fsgetpath.h"
    export *
   }
   module gmon {
@@ -826,6 +867,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
   module reboot {
+            // These must be set in the GCC_PREPROCESSOR_DEFINITIONS Xcode build
+            // setting, or passed on the command line with -D in order to have an
+            // effect.
+            // config_macros __APPLE_API_OBSOLETE, __APPLE_API_PRIVATE
    header "sys/reboot.h"
    export *
   }
@@ -938,6 +983,10 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
    export *
   }
  }
+ explicit module sysdir {
+  header "sysdir.h"
+  export *
+ }
  extern module uuid "uuid.modulemap"
  module architecture {
   header "architecture/byte_order.h"
@@ -956,18 +1005,12 @@ module Darwin [system] [extern_c] [no_undeclared_includes] {
   export *
  }
 }
-module asl [system] [extern_c] {
+module asl [system] {
  header "asl.h"
  export *
 }
-module dnssd [system] [extern_c] {
- header "dns_sd.h"
- export *
-}
-module launch {
- header "launch.h"
- export *
-}
+extern module dnssd "dnssd.modulemap"
+extern module launch "xpc.modulemap"
 extern module libunwind "libunwind.modulemap"
 module os [system] {
  module atomic {
@@ -1012,11 +1055,11 @@ module os [system] {
   export *
  }
 }
-module os_object [system] [extern_c] {
+module os_object [system] {
  header "os/object.h"
  export *
 }
-module os_workgroup [system] [extern_c] {
+module os_workgroup [system] {
  module workgroup {
   header "os/workgroup.h"
   header "os/workgroup_base.h"
@@ -1026,7 +1069,7 @@ module os_workgroup [system] [extern_c] {
   export *
  }
 }
-module libkern [system] [extern_c] {
+module libkern [system] {
  module OSCacheControl {
   header "libkern/OSCacheControl.h"
   export *
@@ -1048,7 +1091,7 @@ module libkern [system] [extern_c] {
   export *
  }
 }
-module ldap [system] [extern_c] {
+module ldap [system] {
  header "ldap.h"
  export *
  module lber {
@@ -1073,7 +1116,7 @@ module ldap [system] [extern_c] {
   export *
  }
 }
-module krb5 [system] [extern_c] {
+module krb5 [system] {
  header "krb5/krb5.h"
  export *
  module com_err {
@@ -1096,18 +1139,18 @@ module krb5 [system] [extern_c] {
  requires !swift
 }
 extern module kcdata "kcdata.modulemap"
-module notify [system] [extern_c] {
+module notify [system] {
  header "notify.h"
  export *
 }
 extern module unwind "libunwind.modulemap"
-module zlib [system] [extern_c] {
+module zlib [system] {
  header "zconf.h"
  header "zlib.h"
  export *
  link "z"
 }
-module SQLite3 [system] [extern_c] {
+module SQLite3 [system] {
  header "sqlite3.h"
  link "sqlite3"
  explicit module Ext {
@@ -1116,5 +1159,6 @@ module SQLite3 [system] [extern_c] {
  }
  export *
 }
+extern module vproc "xpc.modulemap"
 extern module xcselect "xcselect.modulemap"
 extern module XPC "xpc.modulemap"

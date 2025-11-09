@@ -25,8 +25,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 		• addMediaDataCollector:
 		• removeMediaDataCollector:
+ 
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
-API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3))
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3))
 @interface AVPlayerItemMediaDataCollector : NSObject
 {
 @private
@@ -43,8 +46,11 @@ API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3))
 	@abstract		A subclass of AVPlayerItemMediaDataCollector that provides AVMetadataGroups for an AVPlayerItem.
 	@discussion
 		This class can be used to inform clients of the current set of AVMetadataGroups on an AVPlayerItem, and when new AVMetadataGroups become available - e.g. in a Live HLS stream.
+
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
-API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3))
+NS_SWIFT_SENDABLE
+API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3))
 @interface AVPlayerItemMetadataCollector : AVPlayerItemMediaDataCollector
 {
 @private

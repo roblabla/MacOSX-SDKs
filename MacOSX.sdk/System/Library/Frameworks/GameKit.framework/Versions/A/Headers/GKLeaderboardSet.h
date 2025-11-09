@@ -1,12 +1,7 @@
-//
-//  GKLeaderboardSet.h
-//  Game Center
-//
-//  Copyright 2012-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
+#import <TargetConditionals.h>
 #import <GameKit/GKDefines.h>
-
 
 @class GKLeaderboard;
 @class UIImage;
@@ -47,12 +42,12 @@ NS_CLASS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0)
 /// Possible reasons for error:
 /// 1. Communications problem
 /// 2. Unauthenticated player
-- (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler API_DEPRECATED("Use loadLeaderboardsWithHandler: instead.", ios(7.0, 14.0), tvos(9.0, 14.0), macosx(10.10, 11.0), watchos(3.0, 7.0));
+- (void)loadLeaderboardsWithCompletionHandler:(void(^__nullable)(NSArray<GKLeaderboard *> * __nullable leaderboards, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-loadLeaderboardsWithHandler:.", ios(7.0, 14.0), tvos(9.0, 14.0), macosx(10.10, 11.0), watchos(3.0, 7.0));
 
 @end
 NS_ASSUME_NONNULL_END
 
-#import <GameKit/GKLeaderboardSet.h>
+#if !TARGET_OS_WATCH
 
 @interface GKLeaderboardSet (UI)
 
@@ -65,5 +60,4 @@ NS_ASSUME_NONNULL_END
 
 @end
 
-
-
+#endif

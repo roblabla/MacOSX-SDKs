@@ -3,7 +3,7 @@
 
     Contains:   AltiVec DSP Interfaces
 
-    Version:    vecLib-818.100
+    Version:    vecLib-1041.0
 
     Copyright:  Copyright (c) 2000-2023 by Apple Inc. All rights reserved.
 
@@ -199,7 +199,18 @@
 */
 
 
-#include <os/availability.h>
+#if __has_include(<os/availability.h>)
+#  include <os/availability.h>
+#else // __has_include(<os/availability.h>)
+	#if !defined API_AVAILABLE
+	#define API_AVAILABLE(...)
+	#endif
+
+	#if !defined API_DEPRECATED_WITH_REPLACEMENT
+	#define API_DEPRECATED_WITH_REPLACEMENT(...)
+	#endif
+#endif // __has_include(<os/availability.h>)
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -244,8 +255,8 @@ extern "C" {
     vDSP_Version0 is a major version number.
     vDSP_Version1 is a minor version number.
 */
-#define vDSP_Version0   818
-#define vDSP_Version1   100
+#define vDSP_Version0   1041
+#define vDSP_Version1   0
 
 
 /*  Define types:

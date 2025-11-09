@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// ## Subclassing Notes
 ///
 /// The `SBElementArray` class is not designed for subclassing.
-NS_CLASS_AVAILABLE(10_5, NA)
+API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 @interface SBElementArray<ObjectType> : NSMutableArray<ObjectType>
 {
 	SBObject *_parent;

@@ -7,10 +7,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- An LPLinkMetadata object contains metadata about a URL.
- */
-
 /// An object that contains metadata about a URL.
 ///
 /// Use ``LPLinkMetadata`` to store the metadata about a URL, including its
@@ -76,17 +72,10 @@ NS_ASSUME_NONNULL_BEGIN
 LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0))
 @interface LPLinkMetadata : NSObject <NSCopying, NSSecureCoding>
 
-/** The original URL that metadata was requested from. */
-
 /// The original URL of the metadata request.
 @property (nonatomic, retain, nullable) NSURL *originalURL;
 
-/**
- The URL that metadata was retrieved from.
- This takes server-side redirects into account.
- */
-
-/// The URL that returns the metadata, taking server-side redirects into
+/// The URL that returned the metadata, taking server-side redirects into
 /// account.
 ///
 /// The URL that returns the metadata may differ from the
@@ -95,35 +84,16 @@ LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0))
 /// has moved, or when the original URL is a domain alias.
 @property (nonatomic, retain, nullable) NSURL *URL;
 
-/**
- A title for the URL.
- */
-
 /// A representative title for the URL.
 @property (nonatomic, copy, nullable) NSString *title;
-
-/**
- An item provider which will return data corresponding to a representative
- icon for the URL.
- */
 
 /// An object that retrieves data corresponding to a representative icon for the
 /// URL.
 @property (nonatomic, retain, nullable) NSItemProvider *iconProvider;
 
-/**
- An item provider which will return data corresponding to a representative
- image for the URL.
- */
-
 /// An object that retrieves data corresponding to a representative image for
 /// the URL.
 @property (nonatomic, retain, nullable) NSItemProvider *imageProvider;
-
-/**
- An item provider which will return data corresponding to a representative
- video for the URL that AVFoundation can play.
- */
 
 /// An object that retrieves data corresponding to a representative video for
 /// the URL.
@@ -132,14 +102,11 @@ LP_EXTERN API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0))
 /// <doc://com.apple.documentation/documentation/avfoundation> can play.
 @property (nonatomic, retain, nullable) NSItemProvider *videoProvider;
 
-/**
- A remote URL corresponding to a representative video for the URL.
-
- This may point to to a remote video file that AVFoundation can stream,
- or to a YouTube video URL.
- */
-
 /// A remote URL corresponding to a representative video for the URL.
+///
+/// This may reference a remote video file that
+/// <doc://com.apple.documentation/documentation/avfoundation> can stream,
+/// or a YouTube video URL.
 @property (nonatomic, retain, nullable) NSURL *remoteVideoURL;
 
 @end

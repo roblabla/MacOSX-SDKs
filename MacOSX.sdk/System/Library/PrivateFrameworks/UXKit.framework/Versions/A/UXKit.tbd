@@ -2,11 +2,11 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/UXKit.framework/Versions/A/UXKit'
-current-version: 541.0.110
+current-version: 608.2.113
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUIApps, 
-                       PhotosUICore, PhotosUICoreProtoApp, PlacesKit ]
+    clients:         [ Mondrian, PhotoPrintProduct, Photos, PhotosUI, PhotosUICore, 
+                       PhotosUICoreProtoApp, PhotosUIPrivate, PlacesKit ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _NSStringFromUXCollectionViewLayoutDropPosition, _UXCollectionElementKindCell, 

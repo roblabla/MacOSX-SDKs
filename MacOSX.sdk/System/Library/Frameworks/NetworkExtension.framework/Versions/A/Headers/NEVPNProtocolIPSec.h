@@ -22,7 +22,7 @@ typedef NS_ENUM(NSInteger, NEVPNIKEAuthenticationMethod) {
 	NEVPNIKEAuthenticationMethodCertificate = 1,
 	/*! @const NEVPNIKEAuthenticationMethodSharedSecret Use a shared secret as the authentication credential */
 	NEVPNIKEAuthenticationMethodSharedSecret = 2,
-} API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @interface NEVPNProtocolIPSec
@@ -30,14 +30,14 @@ typedef NS_ENUM(NSInteger, NEVPNIKEAuthenticationMethod) {
  *
  * Instances of this class use IKE version 1 for key negotiation.
  */
-API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NEVPNProtocolIPSec : NEVPNProtocol
 
 /*!
  * @property authenticationMethod
  * @discussion The method used to authenticate with the IPSec server. Note that if this property is set to NEVPNIKEAuthenticationMethodNone, extended authentication will still be negotiated if useExtendedAuthentication is set to YES.
  */
-@property NEVPNIKEAuthenticationMethod authenticationMethod API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property NEVPNIKEAuthenticationMethod authenticationMethod API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property useExtendedAuthentication
@@ -45,25 +45,25 @@ API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *   For IKE version 1, when this flag is set X-Auth authentication will be negotiated as part of the IKE session, using the username and password properties as the credential.
  *   For IKE version 2, when this flag is set EAP authentication will be negotiated as part of the IKE session, using the username, password, and/or identity properties as the credential depending on which EAP method the server requires.
  */
-@property BOOL useExtendedAuthentication API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property BOOL useExtendedAuthentication API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property sharedSecretReference
  * @discussion A persistent reference to a keychain item of class kSecClassGenericPassword containing the IKE shared secret.
  */
-@property (copy, nullable) NSData *sharedSecretReference API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSData *sharedSecretReference API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property localIdentifier
  * @discussion A string identifying the local IPSec endpoint for authentication purposes.
  */
-@property (copy, nullable) NSString *localIdentifier API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSString *localIdentifier API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property remoteIdentifier
  * @discussion A string identifying the remote IPSec endpoint for authentication purposes.
  */
-@property (copy, nullable) NSString *remoteIdentifier API_AVAILABLE(macos(10.11), ios(8.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSString *remoteIdentifier API_AVAILABLE(macos(10.11), ios(8.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

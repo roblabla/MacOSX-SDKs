@@ -7,9 +7,8 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _CoreDuetContextVersionNumber, _CoreDuetContextVersionString, 
-                       __CDCircularRegionsDidChangeNotification, __CDClientContextConnectionInterrupted, 
-                       __CDClientContextContextChanged, __CDClientContextContextChangedInfoKey, 
-                       __CDClientContextContextChangedRegistrationIdentifierKey, 
+                       __CDCircularRegionsDidChangeNotification, __CDClientContextContextChanged, 
+                       __CDClientContextContextChangedInfoKey, __CDClientContextContextChangedRegistrationIdentifierKey, 
                        __CDContextDataMetadataKey, __CDContextFirstKPValueAfterRebootKey, 
                        __CDContextServiceName, __CDContextTransitionDateMetadataKey, 
                        __CDContextualChangeRegistrationEntityName, __CDContextualKeyPathEntityName, 

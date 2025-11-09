@@ -10,18 +10,14 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UISceneOptions.h>
+#import <UIKit/UIWindowScenePlacement.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(ios(15.0))
+API_DEPRECATED("Please use an appropriate UIWindowScenePlacement", ios(15.0, 17.0), visionos(1.0, 1.0))
 typedef NS_ENUM(NSUInteger, UIWindowScenePresentationStyle) {
-    /// System determines most appropriate style
     UIWindowScenePresentationStyleAutomatic,
-
-    /// The default style of the system
     UIWindowScenePresentationStyleStandard,
-
-    /// Present prominently above others in the current space
     UIWindowScenePresentationStyleProminent
 } NS_SWIFT_NAME(UIWindowScene.PresentationStyle);
 
@@ -29,8 +25,12 @@ typedef NS_ENUM(NSUInteger, UIWindowScenePresentationStyle) {
 UIKIT_EXTERN API_AVAILABLE(ios(15.0))
 @interface UIWindowSceneActivationRequestOptions : UISceneActivationRequestOptions
 
-/// Request a specific presentation style. Defaults to @c UIWindowScenePresentationStyleAutomatic .
-@property (nonatomic, readwrite) UIWindowScenePresentationStyle preferredPresentationStyle;
+@property (nonatomic, readwrite) UIWindowScenePresentationStyle preferredPresentationStyle API_DEPRECATED("Place use .placement with an appropriate UIWindowScenePlacement.", ios(15.0, 17.0), visionos(1.0, 1.0));
+
+/// The preferred placement of the window scene to be activated. Scene placements influence how the
+/// system positions the activated scene. A `nil` value indicates that the system should determine
+/// the most appropriate placement to use.
+@property (nonatomic, nullable, copy) UIWindowScenePlacement *placement API_AVAILABLE(ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

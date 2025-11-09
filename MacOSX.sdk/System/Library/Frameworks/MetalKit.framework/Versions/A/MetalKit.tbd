@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit'
-current-version: 157
+current-version: 159
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MTKMetalVertexDescriptorFromModelIO, _MTKMetalVertexDescriptorFromModelIOWithError, 
@@ -11,11 +11,11 @@ exports:
                        _MTKModelIOVertexFormatFromMetal, _MTKTextureLoaderCubeLayoutVertical, 
                        _MTKTextureLoaderErrorDomain, _MTKTextureLoaderErrorKey, _MTKTextureLoaderOptionAllocateMipmaps, 
                        _MTKTextureLoaderOptionCubeLayout, _MTKTextureLoaderOptionGenerateMipmaps, 
-                       _MTKTextureLoaderOptionOrigin, _MTKTextureLoaderOptionPackedRowStride, 
-                       _MTKTextureLoaderOptionSRGB, _MTKTextureLoaderOptionTextureCPUCacheMode, 
-                       _MTKTextureLoaderOptionTextureStorageMode, _MTKTextureLoaderOptionTextureUsage, 
-                       _MTKTextureLoaderOriginBottomLeft, _MTKTextureLoaderOriginFlippedVertically, 
-                       _MTKTextureLoaderOriginTopLeft ]
+                       _MTKTextureLoaderOptionLoadAsArray, _MTKTextureLoaderOptionOrigin, 
+                       _MTKTextureLoaderOptionPackedRowStride, _MTKTextureLoaderOptionSRGB, 
+                       _MTKTextureLoaderOptionTextureCPUCacheMode, _MTKTextureLoaderOptionTextureStorageMode, 
+                       _MTKTextureLoaderOptionTextureUsage, _MTKTextureLoaderOriginBottomLeft, 
+                       _MTKTextureLoaderOriginFlippedVertically, _MTKTextureLoaderOriginTopLeft ]
     objc-classes:    [ MTKMesh, MTKMeshBuffer, MTKMeshBufferAllocator, MTKSubmesh, 
                        MTKTextureIOBuffer, MTKTextureIOBufferAllocator, MTKTextureIOBufferMap, 
                        MTKTextureLoader, MTKView ]

@@ -20,7 +20,11 @@ NS_ASSUME_NONNULL_BEGIN
  *  Discussion:
  *    Typedef of block to be invoked when the device's altitude is updated.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+typedef void (^CMAltitudeHandler)(CMAltitudeData * __nullable altitudeData, NSError * __nullable error) API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(macos);
+#else
 typedef void (^CMAltitudeHandler)(CMAltitudeData * __nullable altitudeData, NSError * __nullable error) API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos);
+#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 /*
  *  CMAbsoluteAltitudeHandler
@@ -28,7 +32,11 @@ typedef void (^CMAltitudeHandler)(CMAltitudeData * __nullable altitudeData, NSEr
  *  Discussion:
  *    Typedef of block to be invoked when the device's absolute altitude is updated.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
 typedef void (^CMAbsoluteAltitudeHandler)(CMAbsoluteAltitudeData *__nullable altitudeData, NSError *__nullable error) API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(macos, tvos);
+#else
+typedef void (^CMAbsoluteAltitudeHandler)(CMAbsoluteAltitudeData *__nullable altitudeData, NSError *__nullable error) API_AVAILABLE(ios(15.0), watchos(8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(macos, tvos);
+#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 
 
 /*
@@ -37,7 +45,11 @@ typedef void (^CMAbsoluteAltitudeHandler)(CMAbsoluteAltitudeData *__nullable alt
  *  Discussion:
  *		CMAltimeter provides information about the altitude of the device.
  */
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+COREMOTION_EXPORT API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos) API_UNAVAILABLE(visionos)
+#else
 COREMOTION_EXPORT API_AVAILABLE(ios(8.0)) API_UNAVAILABLE(macos)
+#endif // defined(TARGET_OS_VISION) && TARGET_OS_VISION
 @interface CMAltimeter : NSObject
 
 /*

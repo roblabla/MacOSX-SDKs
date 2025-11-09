@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/UsageTracking.framework/Versions/A/UsageTracking'
-current-version: 280
+current-version: 322
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -12,10 +12,14 @@ allowable-clients:
                        DeviceActivityTestApplication, DeviceActivityTests, DeviceActivityUITests, 
                        DeviceManagementTests, FamilyControlsAgent, FamilyControlsTests, 
                        PowerlogHelperdOperators, PowerlogLiteOperators, RemoteManagementTests, 
-                       SafariShared, ScreenTime, ScreenTimeAgent, ScreenTimePreferencesExtension, 
-                       ScreenTimeSettingsUI, ScreenTimeTests, ScreenTimeUI, ScreenTimeWebExtension, 
-                       UsageTrackingAgent, dmd, iCloudSubscriptionOptimizerCore, 
-                       iCloudSubscriptionOptimizerDaemon, remotemanagementd, usagetool ]
+                       SafariShared, ScreenTime, ScreenTimeAgent, ScreenTimeAgentTests, 
+                       ScreenTimeAgentUnitTests, ScreenTimePreferencesExtension, 
+                       ScreenTimeSettingsFunctionalTests, ScreenTimeSettingsUI, ScreenTimeSettingsUIUnitTests, 
+                       ScreenTimeTests, ScreenTimeUI, ScreenTimeUITests, ScreenTimeUnitTests, 
+                       ScreenTimeWebExtension, ScreenTimeWidgetExtensionFunctionalTests, 
+                       UsageTrackingAgent, UsageTrackingFunctionalTests, dmd, iCloudSubscriptionOptimizerCore, 
+                       iCloudSubscriptionOptimizerDaemon, momentsd, remotemanagementd, 
+                       smart-health, usagetool ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

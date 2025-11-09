@@ -106,6 +106,9 @@ typedef NS_ENUM(NSInteger, MLModelError) {
       server.
     */
     MLModelErrorModelCollection API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0)) = 10,
+    
+    /// Core ML throws/returns this error when the prediction is cancelled prior to completing.
+    MLModelErrorPredictionCancelled API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0)) = 11,
 } API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
 NS_ASSUME_NONNULL_END

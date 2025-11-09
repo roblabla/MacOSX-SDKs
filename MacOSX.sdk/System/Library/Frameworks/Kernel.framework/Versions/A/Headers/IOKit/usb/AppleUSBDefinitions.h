@@ -81,9 +81,12 @@
 #define HostToUSB64 OSSwapHostToLittleInt64
 #endif
 
-#define kIOUSB30Bitrate5Gbps  ( 5 * 1000 * 1000 * 1000ULL)
-#define kIOUSB30Bitrate10Gbps (10 * 1000 * 1000 * 1000ULL)
-#define kIOUSB32Bitrate20Gbps (20 * 1000 * 1000 * 1000ULL)
+#define kIOUSB20BitrateLow    (1500 * 1000ULL)
+#define kIOUSB20BitrateFull   (  12 * 1000 * 1000ULL)
+#define kIOUSB20BitrateHigh   ( 480 * 1000 * 1000ULL)
+#define kIOUSB30Bitrate5Gbps  (   5 * 1000 * 1000 * 1000ULL)
+#define kIOUSB30Bitrate10Gbps (  10 * 1000 * 1000 * 1000ULL)
+#define kIOUSB32Bitrate20Gbps (  20 * 1000 * 1000 * 1000ULL)
 
 /*!
  * @enum       kIOUSBAppleVendorID

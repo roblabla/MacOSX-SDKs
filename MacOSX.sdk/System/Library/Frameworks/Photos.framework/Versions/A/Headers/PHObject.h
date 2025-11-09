@@ -14,6 +14,7 @@ API_AVAILABLE_BEGIN(macos(10.13), ios(8), tvos(10))
 
 
 OS_EXPORT
+NS_SWIFT_SENDABLE
 @interface PHObject : NSObject <NSCopying>
 
 // Returns an identifier which persistently identifies the object on a given device
@@ -23,6 +24,7 @@ OS_EXPORT
 
 // PHObjectPlaceholder represents a model object future , vended by change requests when creating a model object.  PHObjectPlaceholder is a read-only object and may be used as a proxy for the real object that will be created both inside and outside of the change block.  Will compare isEqual: to the fetched model object after the change block is performed.
 OS_EXPORT API_AVAILABLE(macos(10.15))
+NS_SWIFT_SENDABLE
 @interface PHObjectPlaceholder : PHObject
 @end
 

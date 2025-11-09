@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  @brief Configure an analyzer to perform sound classification using the provided MLModel.
  @discussion When a new classification result is produced, the results observer will be called with an SNClassificationResult. Audio buffers provided to SNAudioStreamAnalyzer may vary in size, and the analyzer will reblock the audio data to the block size expected by the MLModel. By default, analysis will occur on the first audio channel in the audio stream, and the analyzer will apply sample rate conversion if the provided audio does not match the sample rate required by the MLModel.
  */
-SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @interface SNClassifySoundRequest : NSObject <SNRequest>
 
 /*!
@@ -34,19 +34,19 @@ SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
  @brief The duration of a single analysis window.
  @discussion When performing classification over an audio stream, a classifier computes each classification result based on a single 'analysis window' of audio. Analysis windows are uniformly-sized time intervals, where the size of any given window is considered that window's 'duration'. Some classifiers can operate over analysis windows which conform to one of several different duration options. Larger window durations allow classification to execute less frequently over larger contexts of audio, potentially improving classification performance. Smaller window durations allow classification to execute more frequently over smaller contexts of audio, producing results with sharper time resolution. Depending on the use-case, a larger or smaller window may be preferrable. When configuring the window duration, it is important to respect the capabilities of the classifier. A classifier's supported window durations can be discovered using the `windowDurationConstraint` property. If an unsupported window duration is selected, the window duration will be automatically rounded down to the nearest supported value if possible, else rounded up.
  */
-@property (readwrite, assign) CMTime windowDuration API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+@property (readwrite, assign) CMTime windowDuration API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
  @brief The constraints governing permitted analysis window durations.
  @discussion The analysis window duration is controlled using the `windowDuration` property. If an analysis window duration is selected which does not meet the necessary constraints, it will automatically be adjusted to meet these constraints (see `windowDuration` for more information regarding how this adjustment will be applied).
  */
-@property (readonly, strong) SNTimeDurationConstraint *windowDurationConstraint NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+@property (readonly, strong) SNTimeDurationConstraint *windowDurationConstraint NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
  @brief Lists all labels that can be produced by this request.
  @return An array of strings containing all sound identifiers which can be produced by this request.
  */
-@property (readonly, copy) NSArray<NSString *> *knownClassifications API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+@property (readonly, copy) NSArray<NSString *> *knownClassifications API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
  @brief Initializes a sound classification request with the provided MLModel
@@ -63,7 +63,8 @@ SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
  @discussion This initializer may be used to classify sounds using Apple-provided sound classifiers. Note that Apple may add new classifiers in the future, but it commits to ensuring the consistent performance of existing classifiers.
  */
 - (nullable instancetype)initWithClassifierIdentifier:(SNClassifierIdentifier)classifierIdentifier
-												error:(NSError **)error API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+                                                error:(NSError **)error
+    API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

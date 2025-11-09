@@ -81,6 +81,17 @@ typedef NS_ENUM(NSInteger, UITextSmartInsertDeleteType) {
 } API_AVAILABLE(ios(11.0));
 
 //
+// UITextInlinePredictionType
+//
+// Controls whether inline text prediction is enabled or disabled during typing.
+//
+typedef NS_ENUM(NSInteger, UITextInlinePredictionType) {
+    UITextInlinePredictionTypeDefault,
+    UITextInlinePredictionTypeNo,
+    UITextInlinePredictionTypeYes,
+} API_AVAILABLE(ios(17.0));
+
+//
 // UIKeyboardType
 //
 // Requests that a particular keyboard type be displayed when a text widget
@@ -177,6 +188,10 @@ NS_SWIFT_UI_ACTOR
 @property(nonatomic) UITextSmartQuotesType smartQuotesType API_AVAILABLE(ios(11.0)); // default is UITextSmartQuotesTypeDefault;
 @property(nonatomic) UITextSmartDashesType smartDashesType API_AVAILABLE(ios(11.0)); // default is UITextSmartDashesTypeDefault;
 @property(nonatomic) UITextSmartInsertDeleteType smartInsertDeleteType API_AVAILABLE(ios(11.0)); // default is UITextSmartInsertDeleteTypeDefault;
+
+// This property controls whether inline text prediction is enabled or disabled during typing
+@property(nonatomic) UITextInlinePredictionType inlinePredictionType API_AVAILABLE(ios(17.0)); // default is UITextInlinePredictionTypeDefault
+
 @property(nonatomic) UIKeyboardType keyboardType;                         // default is UIKeyboardTypeDefault
 @property(nonatomic) UIKeyboardAppearance keyboardAppearance;             // default is UIKeyboardAppearanceDefault
 @property(nonatomic) UIReturnKeyType returnKeyType;                       // default is UIReturnKeyDefault (See note under UIReturnKeyType enum)
@@ -232,6 +247,20 @@ UIKIT_EXTERN UITextContentType const UITextContentTypeFlightNumber              
 
 /// Dates, times, or durations such as "7-3-2021" or "This Saturday", "12:30", and "10-11am", respectively.
 UIKIT_EXTERN UITextContentType const UITextContentTypeDateTime                  API_AVAILABLE(ios(15.0));
+
+UIKIT_EXTERN UITextContentType const UITextContentTypeBirthdate                 API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeBirthdateDay              API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeBirthdateMonth            API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeBirthdateYear             API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardSecurityCode    API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardName            API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardGivenName       API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardMiddleName      API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardFamilyName      API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardExpiration      API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardExpirationMonth API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardExpirationYear  API_AVAILABLE(ios(17.0));
+UIKIT_EXTERN UITextContentType const UITextContentTypeCreditCardType            API_AVAILABLE(ios(17.0));
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

@@ -43,6 +43,12 @@ typedef struct {
 
 @class AVVideoCompositionRenderContextInternal;
 
+/*!
+ @class         AVVideoCompositionRenderContext
+ @abstract      The context in which custom compositors render pixel buffers.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionRenderContext : NSObject {
 @private
@@ -86,10 +92,12 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 /*!
 	@class		AVVideoCompositionRenderHint
 	@abstract	An AVVideoCompositionRenderHint instance contains the information necessary for announcing upcoming rendering request time ranges.
+	@discussion	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 
 @class AVVideoCompositionRenderHintInternal;
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos)
 @interface AVVideoCompositionRenderHint : NSObject {
 @private

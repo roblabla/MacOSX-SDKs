@@ -6,5 +6,5 @@ exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _MUCropToolEnabled, _MUEncryptPrivateMetadata ]
     objc-classes:    [ MUCGPDFAnnotationAdaptor, MUContentViewController, MUImageDownsamplingUtilities, 
-                       MUImageView, MUPDFViewBase, MarkupViewController ]
+                       MUImageReader, MUImageView, MUPDFViewBase, MarkupViewController ]
 ...

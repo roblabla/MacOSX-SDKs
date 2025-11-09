@@ -73,6 +73,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
 		A new time to set.  Must be greater than or equal to kCMTimeZero, or kCMTimeInvalid
 	@discussion
 		Sets the timebase's time to time and then sets the rendering rate to rate.  A rate value of 0.0 means "stopped"; a rate value of 1.0 means "play at the natural rate of the media".  Use kCMTimeInvalid for time to not modify the timebase's time.
+		Note that this method updates the rate property synchronously, but the timebase is updated asynchronously.
 */
 - (void)setRate:(float)rate time:(CMTime)time;
 
@@ -106,6 +107,8 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
 		}];
 		CMTime inOneSecond = CMTimeAdd(CMClockGetTime(CMClockGetHostTimeClock()), CMTimeMake(1, 1));
 		[synchronizer setRate:rate time:startTime atHostTime:inOneSecond];
+
+		Also note that this method updates the rate property synchronously, but the timebase is updated asynchronously.
 */
 - (void)setRate:(float)rate time:(CMTime)time atHostTime:(CMTime)hostTime API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5), watchos(7.4));
 
@@ -188,7 +191,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
  
 		Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.  Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
-- (id)addPeriodicTimeObserverForInterval:(CMTime)interval queue:(nullable dispatch_queue_t)queue usingBlock:(void (^)(CMTime time))block;
+- (id)addPeriodicTimeObserverForInterval:(CMTime)interval queue:(nullable dispatch_queue_t)queue usingBlock:(void (^ NS_SWIFT_SENDABLE)(CMTime time))block;
 
 /*!
 	@method			addBoundaryTimeObserverForTimes:queue:usingBlock:
@@ -205,7 +208,7 @@ AVF_EXPORT NSNotificationName const AVSampleBufferRenderSynchronizerRateDidChang
 	@discussion
 		Each call to -addPeriodicTimeObserverForInterval:queue:usingBlock: should be paired with a corresponding call to -removeTimeObserver:.  Releasing the observer object without a call to -removeTimeObserver: will result in undefined behavior.
 */
-- (id)addBoundaryTimeObserverForTimes:(NSArray<NSValue *> *)times queue:(nullable dispatch_queue_t)queue usingBlock:(void (^)(void))block;
+- (id)addBoundaryTimeObserverForTimes:(NSArray<NSValue *> *)times queue:(nullable dispatch_queue_t)queue usingBlock:(void (^ NS_SWIFT_SENDABLE)(void))block;
 
 /*!
 	@method			removeTimeObserver:

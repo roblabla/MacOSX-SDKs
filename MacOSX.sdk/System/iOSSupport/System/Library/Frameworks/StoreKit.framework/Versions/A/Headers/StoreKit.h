@@ -8,11 +8,7 @@
 #import <StoreKit/SKAdImpression.h>
 #import <StoreKit/SKAdNetwork.h>
 #import <StoreKit/SKArcadeService.h>
-
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
 #import <StoreKit/SKANError.h>
-#endif
-
 #import <StoreKit/SKCloudServiceController.h>
 #import <StoreKit/SKCloudServiceSetupViewController.h>
 #import <StoreKit/SKDownload.h>

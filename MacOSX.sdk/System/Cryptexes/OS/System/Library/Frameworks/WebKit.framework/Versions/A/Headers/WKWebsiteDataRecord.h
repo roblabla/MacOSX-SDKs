@@ -62,6 +62,15 @@ WK_EXTERN NSString * const WKWebsiteDataTypeServiceWorkerRegistrations API_AVAIL
 /*! @constant WKWebsiteDataTypeFileSystem File system storage. */
 WK_EXTERN NSString * const WKWebsiteDataTypeFileSystem API_AVAILABLE(macos(13.0), ios(16.0));
 
+/*! @constant WKWebsiteDataTypeSearchFieldRecentSearches Search field history. */
+WK_EXTERN NSString * const WKWebsiteDataTypeSearchFieldRecentSearches API_AVAILABLE(macos(14.0), ios(NA));
+
+/*! @constant WKWebsiteDataTypeMediaKeys MediaKeys storage */
+WK_EXTERN NSString * const WKWebsiteDataTypeMediaKeys API_AVAILABLE(macos(14.0), ios(NA));
+
+/*! @constant WKWebsiteDataTypeHashSalt Hash salt for deviceId */
+WK_EXTERN NSString * const WKWebsiteDataTypeHashSalt API_AVAILABLE(macos(14.0), ios(NA));
+
 /*! A WKWebsiteDataRecord represents website data, grouped by domain name using the public suffix list. */
 WK_EXTERN API_AVAILABLE(macos(10.11), ios(9.0))
 @interface WKWebsiteDataRecord : NSObject

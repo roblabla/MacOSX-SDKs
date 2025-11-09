@@ -8,6 +8,10 @@
 
 #import <AvailabilityMacros.h>
 
+#define ITLIB_INIT_UNAVAILABLE \
+	+ (instancetype)new NS_UNAVAILABLE; \
+	- (instancetype)init NS_UNAVAILABLE;
+
 #define ITLIB_EXPORT __attribute__((visibility("default")))
 
 #ifdef __cplusplus

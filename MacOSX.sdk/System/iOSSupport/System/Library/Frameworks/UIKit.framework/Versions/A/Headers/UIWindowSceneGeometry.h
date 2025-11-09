@@ -12,6 +12,20 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
+typedef NS_ENUM(NSInteger, UIWindowSceneResizingRestrictions) {
+    /// App has no preference on user resize
+    UIWindowSceneResizingRestrictionsUnspecified = 0,
+
+    /// The user cannot resize the scene
+    UIWindowSceneResizingRestrictionsNone,
+
+    /// User resizes are restricted to the current aspect ratio
+    UIWindowSceneResizingRestrictionsUniform,
+    
+    /// User resizes are only restricted by the system and other restrictions put in place
+    UIWindowSceneResizingRestrictionsFreeform
+} API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, macos, watchos);
+
 UIKIT_EXTERN API_AVAILABLE(ios(16.0))
 @interface UIWindowSceneGeometry : NSObject <NSCopying>
 
@@ -19,8 +33,17 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0))
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
-@property (nonatomic, readonly) CGRect systemFrame API_AVAILABLE(macCatalyst(16.0)) API_UNAVAILABLE(ios, watchos, tvos);
+@property (nonatomic, readonly) CGRect systemFrame API_AVAILABLE(macCatalyst(16.0)) API_UNAVAILABLE(ios, watchos, tvos, visionos);
 @property (nonatomic, readonly) UIInterfaceOrientation interfaceOrientation API_UNAVAILABLE(tvos);
+
+/// The current app specified minimumSize. A value of 0,0 is returned if a minimum is not set by the application
+@property (nonatomic, readonly) CGSize minimumSize API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, macos, watchos);
+
+/// The current app specified maximumSize. A value of CGFLOAT_MAX,CGFLOAT_MAX is returned if a maximum is not set by the application
+@property (nonatomic, readonly) CGSize maximumSize API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, macos, watchos);
+
+/// The current app specified resizingRestriction. Default value UIWindowSceneResizingRestrictionsUnspecified
+@property (nonatomic, readonly) UIWindowSceneResizingRestrictions resizingRestrictions API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, macos, watchos);
 
 @end
 

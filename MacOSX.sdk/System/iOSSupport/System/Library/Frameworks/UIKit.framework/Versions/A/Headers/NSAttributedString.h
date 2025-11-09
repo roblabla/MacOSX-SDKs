@@ -39,12 +39,8 @@ UIKIT_EXTERN NSAttributedStringKey const NSLinkAttributeName API_AVAILABLE(macos
 UIKIT_EXTERN NSAttributedStringKey const NSBaselineOffsetAttributeName API_AVAILABLE(macos(10.0), ios(7.0));      // NSNumber containing floating point value, in points; offset from baseline, default 0
 UIKIT_EXTERN NSAttributedStringKey const NSUnderlineColorAttributeName API_AVAILABLE(macos(10.0), ios(7.0));      // UIColor, default nil: same as foreground color
 UIKIT_EXTERN NSAttributedStringKey const NSStrikethroughColorAttributeName API_AVAILABLE(macos(10.0), ios(7.0));  // UIColor, default nil: same as foreground color
-UIKIT_EXTERN NSAttributedStringKey const NSObliquenessAttributeName API_AVAILABLE(macos(10.0), ios(7.0));         // NSNumber containing floating point value; skew to be applied to glyphs, default 0: no skew
-UIKIT_EXTERN NSAttributedStringKey const NSExpansionAttributeName API_AVAILABLE(macos(10.0), ios(7.0));           // NSNumber containing floating point value; log of expansion factor to be applied to glyphs, default 0: no expansion
 
 UIKIT_EXTERN NSAttributedStringKey const NSWritingDirectionAttributeName API_AVAILABLE(macos(10.6), ios(7.0));    // NSArray of NSNumbers representing the nested levels of writing direction overrides as defined by Unicode LRE, RLE, LRO, and RLO characters.  The control characters can be obtained by masking NSWritingDirection and NSWritingDirectionFormatType values.  LRE: NSWritingDirectionLeftToRight|NSWritingDirectionEmbedding, RLE: NSWritingDirectionRightToLeft|NSWritingDirectionEmbedding, LRO: NSWritingDirectionLeftToRight|NSWritingDirectionOverride, RLO: NSWritingDirectionRightToLeft|NSWritingDirectionOverride,
-
-UIKIT_EXTERN NSAttributedStringKey const NSVerticalGlyphFormAttributeName API_AVAILABLE(macos(10.7), ios(6.0));   // An NSNumber containing an integer value.  0 means horizontal text.  1 indicates vertical text.  If not specified, it could follow higher-level vertical orientation settings.  Currently on iOS, it's always horizontal.  The behavior for any other value is undefined.
 
 
 
@@ -130,6 +126,9 @@ UIKIT_EXTERN NSAttributedStringDocumentAttributeKey const NSViewSizeDocumentAttr
 UIKIT_EXTERN NSAttributedStringDocumentAttributeKey const NSViewZoomDocumentAttribute API_AVAILABLE(macos(10.0), ios(7.0));  // @"ViewZoom", NSNumber containing floating point value (100 == 100% zoom)
 UIKIT_EXTERN NSAttributedStringDocumentAttributeKey const NSViewModeDocumentAttribute API_AVAILABLE(macos(10.0), ios(7.0));  // @"ViewMode", NSNumber containing integer; 0 = normal; 1 = page layout
 
+// NSHTMLTextDocumentType document attributes
+UIKIT_EXTERN NSAttributedStringDocumentAttributeKey const NSDefaultFontExcludedDocumentAttribute API_AVAILABLE(macos(14), ios(17), watchos(10), tvos(17)); // for HTML writing only; NSNumber containing a BOOL, when true the HTML writer will not include font information unless specified
+
 // Document settings
 // They are document attributes used by read/write methods.
 UIKIT_EXTERN NSAttributedStringDocumentAttributeKey const NSReadOnlyDocumentAttribute API_AVAILABLE(macos(10.0), ios(7.0));  // @"ReadOnly", NSNumber containing integer; if missing, or 0 or negative, not readonly; 1 or more, readonly. Note that this has nothing to do with the file system protection on the file, but instead, on how the file should be displayed to the user
@@ -188,6 +187,10 @@ UIKIT_EXTERN NSAttributedStringDocumentReadingOptionKey const NSSourceTextScalin
 
 
 /************************ Deprecated ************************/
+UIKIT_EXTERN NSAttributedStringKey const NSObliquenessAttributeName API_DEPRECATED("This attribute is no longer supported with TextKit 2", macos(10.0, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED));         // NSNumber containing floating point value; skew to be applied to glyphs, default 0: no skew
+UIKIT_EXTERN NSAttributedStringKey const NSExpansionAttributeName API_DEPRECATED("This attribute is no longer supported with TextKit 2", macos(10.0, API_TO_BE_DEPRECATED), ios(7.0, API_TO_BE_DEPRECATED));           // NSNumber containing floating point value; log of expansion factor to be applied to glyphs, default 0: no expansion
+UIKIT_EXTERN NSAttributedStringKey const NSVerticalGlyphFormAttributeName API_DEPRECATED("This attribute is no longer supported with TextKit 2", macos(10.7, API_TO_BE_DEPRECATED), ios(6.0, API_TO_BE_DEPRECATED));   // An NSNumber containing an integer value.  0 means horizontal text.  1 indicates vertical text.  If not specified, it could follow higher-level vertical orientation settings.  Currently on iOS, it's always horizontal.  The behavior for any other value is undefined.
+
 // NSUnderlineByWord and the NSUnderlinePattern* values are soft deprecated starting with macOS 10.14/iOS 12 and will be officially deprecated in a future release.  Please use the NSUnderlineStyle* equivalents instead.
 // Underlines will be drawn with a solid pattern by default, so NSUnderlinePatternSolid does not need to be specified.
 static const NSUnderlineStyle NSUnderlinePatternSolid = NSUnderlineStylePatternSolid;
@@ -201,15 +204,15 @@ static const NSUnderlineStyle NSUnderlineByWord = NSUnderlineStyleByWord;
 typedef NS_ENUM(NSInteger, NSTextWritingDirection) {
     NSTextWritingDirectionEmbedding     = (0 << 1),
     NSTextWritingDirectionOverride      = (1 << 1)
-} API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionFormatType", ios(7.0, 9.0)) API_UNAVAILABLE(tvos);
+} API_DEPRECATED_WITH_REPLACEMENT("NSWritingDirectionFormatType", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 #endif
 
 @interface NSAttributedString(NSDeprecatedKitAdditions)
-- (nullable instancetype)initWithFileURL:(NSURL *)url options:(NSDictionary *)options documentAttributes:(NSDictionary* __nullable * __nullable)dict error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("initWithURL:options:documentAttributes:error:", ios(7.0, 9.0)) API_UNAVAILABLE(tvos);
+- (nullable instancetype)initWithFileURL:(NSURL *)url options:(NSDictionary *)options documentAttributes:(NSDictionary* __nullable * __nullable)dict error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("initWithURL:options:documentAttributes:error:", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 @end
 
 @interface NSMutableAttributedString (NSDeprecatedKitAdditions)
-- (BOOL)readFromFileURL:(NSURL *)url options:(NSDictionary *)opts documentAttributes:(NSDictionary* __nullable * __nullable)dict error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("readFromURL:options:documentAttributes:error:", ios(7.0, 9.0)) API_UNAVAILABLE(tvos);
+- (BOOL)readFromFileURL:(NSURL *)url options:(NSDictionary *)opts documentAttributes:(NSDictionary* __nullable * __nullable)dict error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("readFromURL:options:documentAttributes:error:", ios(7.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 @end
 
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS

@@ -40,7 +40,18 @@ typedef NS_ERROR_ENUM(NIErrorDomain, NIErrorCode) {
     NIErrorCodeInvalidARConfiguration API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos, macos) = -5883 ,
 
     /** A Nearby Accessory session has been associated with a peer device (such as a Bluetooth peer) that is not available */
-    NIErrorCodeAccessoryPeerDeviceUnavailable API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos, macos) = -5882
+    NIErrorCodeAccessoryPeerDeviceUnavailable API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos, macos) = -5882,
+    
+    /**
+     The NINearbyPeerConfiguration provided is not compatible with the capabilities of the peer device
+     */
+    NIErrorCodeIncompatiblePeerDevice API_AVAILABLE(ios(17.0), watchos(10.0), macos(14.0), tvos(17.0)) = -5881,
+
+    /**
+     The maximum number of active extended distance measurement sessions was exceeded
+     */
+    NIErrorCodeActiveExtendedDistanceSessionsLimitExceeded API_AVAILABLE(ios(17.0), watchos(10.0), macos(14.0), tvos(17.0)) = -5880,
+
 };
 
 

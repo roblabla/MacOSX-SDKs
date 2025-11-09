@@ -26,8 +26,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+/*!
+ @class         AVCompositionTrackSegment
+ @abstract      A track segment maps a time from the source media track to the composition track.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
 @class AVCompositionTrackSegmentInternal;
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVCompositionTrackSegment : AVAssetTrackSegment
 {

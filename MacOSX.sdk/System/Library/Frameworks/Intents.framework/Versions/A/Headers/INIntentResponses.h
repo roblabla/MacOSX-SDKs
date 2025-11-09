@@ -39,9 +39,11 @@
 
 #import <Intents/INSetRadioStationIntentResponse.h>
 
+#import <Intents/INEditMessageIntentResponse.h>
 #import <Intents/INSearchForMessagesIntentResponse.h>
 #import <Intents/INSendMessageIntentResponse.h>
 #import <Intents/INSetMessageAttributeIntentResponse.h>
+#import <Intents/INUnsendMessagesIntentResponse.h>
 
 #import <Intents/INAddTasksIntentResponse.h>
 #import <Intents/INAppendToNoteIntentResponse.h>

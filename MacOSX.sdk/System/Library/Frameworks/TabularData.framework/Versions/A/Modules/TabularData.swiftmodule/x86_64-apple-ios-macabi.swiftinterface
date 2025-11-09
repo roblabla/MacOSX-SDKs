@@ -1,13 +1,14 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-ios16.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name TabularData
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 27
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name TabularData
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 40
 import Combine
 import Dispatch
 import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public protocol ColumnProtocol<Element> : Swift.BidirectionalCollection {
@@ -37,6 +38,18 @@ public protocol AnyColumnProtocol {
   var wrappedElementType: any Any.Type { get }
   subscript(position: Swift.Int) -> Any? { get }
   subscript(range: Swift.Range<Swift.Int>) -> TabularData.AnyColumnSlice { get }
+}
+extension TabularData.DataFrame {
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  public mutating func renameColumn(_ name: Swift.String, to newName: Swift.String)
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  public mutating func replaceColumn(_ name: Swift.String, with newColumn: TabularData.AnyColumn)
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  public mutating func replaceColumn<T>(_ id: TabularData.ColumnID<T>, with newColumn: TabularData.AnyColumn)
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  public mutating func replaceColumn<T>(_ name: Swift.String, with newColumn: TabularData.Column<T>)
+  @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
+  public mutating func replaceColumn<T, U>(_ id: TabularData.ColumnID<T>, with newColumn: TabularData.Column<U>)
 }
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 @dynamicMemberLookup public struct DataFrame : TabularData.DataFrameProtocol {
@@ -79,11 +92,6 @@ public protocol AnyColumnProtocol {
   public mutating func append(column: TabularData.AnyColumn)
   public mutating func insert<T>(column: TabularData.Column<T>, at index: Swift.Int)
   public mutating func insert(column: TabularData.AnyColumn, at index: Swift.Int)
-  public mutating func renameColumn(_ name: Swift.String, to newName: Swift.String)
-  public mutating func replaceColumn(_ name: Swift.String, with newColumn: TabularData.AnyColumn)
-  public mutating func replaceColumn<T>(_ id: TabularData.ColumnID<T>, with newColumn: TabularData.AnyColumn)
-  public mutating func replaceColumn<T>(_ name: Swift.String, with newColumn: TabularData.Column<T>)
-  public mutating func replaceColumn<T, U>(_ id: TabularData.ColumnID<T>, with newColumn: TabularData.Column<U>)
   @discardableResult
   public mutating func removeColumn<T>(_ id: TabularData.ColumnID<T>) -> TabularData.Column<T>
   @discardableResult
@@ -759,7 +767,7 @@ internal struct PackedOptionalsBuffer<Element> {
         }
 
         // Leave the other buffer in a consisten state
-        other.nilBitmapBuffer.assign(repeating: 0)
+        other.nilBitmapBuffer.update(repeating: 0)
         other.nilCount = count
     }
   @inlinable internal func deallocate() {
@@ -859,7 +867,7 @@ internal struct PackedOptionalsBuffer<Element> {
             setNil(at: i)
             setNonNil(at: j)
         case (false, false):
-            (elements + j).moveAssign(from: elements + i, count: 1)
+            (elements + j).moveUpdate(from: elements + i, count: 1)
             setNil(at: i)
             nilCount += 1
         }
@@ -929,7 +937,7 @@ extension TabularData.PackedOptionalsBuffer : Swift.RangeReplaceableCollection {
             resize(by: growth)
             // Slide the tail part of the buffer forwards, in reverse order
             // so as not to self-clobber.
-            for i in (oldTailIndex ..< newTailIndex).reversed() {
+            for i in (oldTailIndex ..< oldCount).reversed() {
                 swapAt(i, i + growth)
             }
 
@@ -940,7 +948,7 @@ extension TabularData.PackedOptionalsBuffer : Swift.RangeReplaceableCollection {
                 newValues.formIndex(after: &i)
             }
             // Initialize the hole left by sliding the tail forward
-            for j in oldTailIndex..<newTailIndex {
+            for j in oldTailIndex ..< newTailIndex {
                 self[j] = newValues[i]
                 newValues.formIndex(after: &i)
             }
@@ -949,7 +957,7 @@ extension TabularData.PackedOptionalsBuffer : Swift.RangeReplaceableCollection {
             // Assign all the new elements into the start of the subrange
             var i = subrange.lowerBound
             var j = newValues.startIndex
-            for _ in 0..<newCount {
+            for _ in 0 ..< newCount {
                 self[i] = newValues[j]
                 i += 1
                 newValues.formIndex(after: &j)
@@ -1049,6 +1057,12 @@ public enum SFrameReadingError : Swift.Error {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.SFrameReadingError : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+extension TabularData.SFrameReadingError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
     get
   }
 }
@@ -1167,6 +1181,12 @@ extension TabularData.JSONReadingError : Swift.CustomStringConvertible {
     get
   }
 }
+@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+extension TabularData.JSONReadingError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
+    get
+  }
+}
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 public struct CategoricalSummary<Element> : Swift.Hashable, Swift.CustomDebugStringConvertible where Element : Swift.Hashable {
   public var someCount: Swift.Int
@@ -1251,6 +1271,12 @@ public enum CSVReadingError : Swift.Error {
 @available(macOS 12, iOS 15, tvOS 15, watchOS 8, *)
 extension TabularData.CSVReadingError : Swift.CustomStringConvertible {
   public var description: Swift.String {
+    get
+  }
+}
+@available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+extension TabularData.CSVReadingError : Foundation.LocalizedError {
+  public var errorDescription: Swift.String? {
     get
   }
 }
@@ -2202,6 +2228,10 @@ public struct FormattingOptions {
   public var maximumCellWidth: Swift.Int
   public var maximumRowCount: Swift.Int
   public var includesColumnTypes: Swift.Bool
+  @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+  public var includesRowIndices: Swift.Bool
+  @available(macOS 14, iOS 17, tvOS 17, watchOS 10, *)
+  public var includesRowAndColumnCounts: Swift.Bool
   @available(macOS 12.3, iOS 15.4, tvOS 15.4, watchOS 8.5, *)
   public var floatingPointFormatStyle: Foundation.FloatingPointFormatStyle<Swift.Double> {
     get

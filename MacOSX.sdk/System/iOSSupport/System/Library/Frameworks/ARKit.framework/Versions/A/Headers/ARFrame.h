@@ -77,7 +77,6 @@ API_AVAILABLE(ios(11.0))
  */
 @property (nonatomic, readonly) NSTimeInterval timestamp;
 
-
 /**
  The frame’s captured image.
  */

@@ -1,4 +1,4 @@
-framework module DiscRecordingUI [extern_c] {
+framework module DiscRecordingUI {
 	requires !macabi
     umbrella header "DiscRecordingUI.h"
     export *

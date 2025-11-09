@@ -382,7 +382,7 @@ SCN_EXPORT
 
 /*!
  @property primitiveRange
- @abstract Specifies the subrange of primitves to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0).
+ @abstract Specifies the subrange of primitives to render within NSMakeRange(0, primitiveCount). Defaults to NSMakeRange(NSNotFound, 0).
  @discussion When the location of the range is set to NSNotFound, the entire geometry element is rendered.
  */
 @property(nonatomic) NSRange primitiveRange API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0), watchos(4.0));

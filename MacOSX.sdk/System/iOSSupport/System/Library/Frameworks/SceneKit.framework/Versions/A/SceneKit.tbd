@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/SceneKit.framework/Versions/A/SceneKit'
-current-version: 581.255
+current-version: 599
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _C3DGetFileDecryptionCallbacks, _C3DSetFileDecryptionCallbacks, 
@@ -89,15 +89,16 @@ exports:
                        _SCNSceneSourceFormatCOLLADA, _SCNSceneSourceFormatHint, _SCNSceneSourceFormatOBJ, 
                        _SCNSceneSourceFormatSCN, _SCNSceneSourceGeometryMemoryUsageKey, 
                        _SCNSceneSourceInputSource, _SCNSceneSourceLoadTexturesInCPUMemory, 
-                       _SCNSceneSourceLoadingOptionPreserveOriginalTopology, _SCNSceneSourceOverrideAssetURLsKey, 
-                       _SCNSceneSourceSceneIndexKey, _SCNSceneSourceShouldCacheKey, 
-                       _SCNSceneSourceSkipConsistencyCheckKey, _SCNSceneSourceStrictConformanceKey, 
-                       _SCNSceneSourceTextureMemoryUsageKey, _SCNSceneSourceUseModelIOToLoadDAEFiles, 
-                       _SCNSceneSourceUseSafeModeKey, _SCNSceneSourceVerboseMode, 
-                       _SCNSceneStartTimeAttributeKey, _SCNSceneUpAxisAttributeKey, 
-                       _SCNSceneWriteToURLShouldKeepReferencesToFilesOption, _SCNSceneWriteToURLShouldZipOption, 
-                       _SCNSetExternalTextureSource, _SCNSetPerformanceStatisticsEnabled, 
-                       _SCNSetResourceBundle, _SCNSetShaderCollectionEnabled, _SCNShaderModifierEntryPointFragment, 
+                       _SCNSceneSourceLoadingOptionDeinterleaveGeometriesKey, _SCNSceneSourceLoadingOptionPreserveOriginalTopology, 
+                       _SCNSceneSourceOverrideAssetURLsKey, _SCNSceneSourceSceneIndexKey, 
+                       _SCNSceneSourceShouldCacheKey, _SCNSceneSourceSkipConsistencyCheckKey, 
+                       _SCNSceneSourceStrictConformanceKey, _SCNSceneSourceTextureMemoryUsageKey, 
+                       _SCNSceneSourceUseModelIOToLoadDAEFiles, _SCNSceneSourceUseSafeModeKey, 
+                       _SCNSceneSourceVerboseMode, _SCNSceneStartTimeAttributeKey, 
+                       _SCNSceneUpAxisAttributeKey, _SCNSceneWriteToURLShouldKeepReferencesToFilesOption, 
+                       _SCNSceneWriteToURLShouldZipOption, _SCNSetExternalTextureSource, 
+                       _SCNSetPerformanceStatisticsEnabled, _SCNSetResourceBundle, 
+                       _SCNSetShaderCollectionEnabled, _SCNShaderModifierEntryPointFragment, 
                        _SCNShaderModifierEntryPointGeometry, _SCNShaderModifierEntryPointLightingModel, 
                        _SCNShaderModifierEntryPointSurface, _SCNTextureContentWithGLInfo, 
                        _SCNTextureOffsetXKey, _SCNTextureOffsetYKey, _SCNVector3EqualToVector3, 
@@ -121,22 +122,24 @@ exports:
                        SCNConstraint, SCNCylinder, SCNDistanceConstraint, SCNEffect, 
                        SCNEventHandler, SCNExportOperation, SCNFloor, SCNGeometry, 
                        SCNGeometryDeformer, SCNGeometryElement, SCNGeometrySource, 
-                       SCNGeometryTessellator, SCNHitTestResult, SCNIKConstraint, 
-                       SCNImageSource, SCNKeyedArchiver, SCNKeyedUnarchiver, SCNLevelOfDetail, 
-                       SCNLight, SCNLookAtConstraint, SCNManipulableItem, SCNManipulator, 
-                       SCNMaterial, SCNMaterialProperty, SCNMetalLayer, SCNMorpher, 
-                       SCNNode, SCNNodeReference, SCNOffscreenRenderer, SCNParticlePropertyController, 
-                       SCNParticleSystem, SCNPass, SCNPassContext, SCNPhysicsBallSocketJoint, 
-                       SCNPhysicsBehavior, SCNPhysicsBody, SCNPhysicsCharacter, SCNPhysicsConeTwistJoint, 
+                       SCNGeometryTessellator, SCNGeometryVDMCDeformer, SCNGeometryVariableTopologySampleDeformer, 
+                       SCNGeometryWrapDeformer, SCNGeometryWrapDeformerParameters, 
+                       SCNHitTestResult, SCNIKConstraint, SCNImageSource, SCNKeyedArchiver, 
+                       SCNKeyedUnarchiver, SCNLevelOfDetail, SCNLight, SCNLookAtConstraint, 
+                       SCNManipulableItem, SCNManipulator, SCNMaterial, SCNMaterialProperty, 
+                       SCNMetalLayer, SCNMorpher, SCNNode, SCNNodeReference, SCNOffscreenRenderer, 
+                       SCNParticlePropertyController, SCNParticleSystem, SCNPass, 
+                       SCNPassContext, SCNPhysicsBallSocketJoint, SCNPhysicsBehavior, 
+                       SCNPhysicsBody, SCNPhysicsCharacter, SCNPhysicsConeTwistJoint, 
                        SCNPhysicsContact, SCNPhysicsField, SCNPhysicsHingeJoint, 
                        SCNPhysicsShape, SCNPhysicsSliderJoint, SCNPhysicsVehicle, 
                        SCNPhysicsVehicleWheel, SCNPhysicsWorld, SCNPlane, SCNProgram, 
-                       SCNPyramid, SCNReferenceNode, SCNRenderer, SCNRendererEvents, 
-                       SCNRendererViewPoint, SCNReplicatorConstraint, SCNScene, SCNSceneDatabase, 
-                       SCNSceneSource, SCNShape, SCNSkinner, SCNSliderConstraint, 
-                       SCNSphere, SCNStatisticsProvider, SCNTechnique, SCNText, SCNTextureSource, 
-                       SCNTimingFunction, SCNTorus, SCNTransaction, SCNTransformConstraint, 
-                       SCNTube, SCNView, _SCNShadableCompilationIssue ]
+                       SCNPyramid, SCNReferenceNode, SCNRenderer, SCNRendererViewPoint, 
+                       SCNReplicatorConstraint, SCNScene, SCNSceneDatabase, SCNSceneSource, 
+                       SCNShape, SCNSkinner, SCNSliderConstraint, SCNSphere, SCNStatisticsProvider, 
+                       SCNTechnique, SCNText, SCNTextureSource, SCNTimingFunction, 
+                       SCNTorus, SCNTransaction, SCNTransformConstraint, SCNTube, 
+                       SCNView, _SCNShadableCompilationIssue ]
   - targets:         [ arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _SCNMatrix4FromGLKMatrix4, _SCNMatrix4ToGLKMatrix4, _SCNPreferredRenderingAPIKey, 
                        _SCNViewOptionPreferredRenderingAPI ]

@@ -18,13 +18,13 @@
 @protocol UIPopoverBackgroundViewMethods
 /* Represents the the length of the base of the arrow's triangle in points.
  */
-+ (CGFloat)arrowBase;
++ (CGFloat)arrowBase API_UNAVAILABLE(visionos);
 
 /* Describes the distance between each edge of the background view and the corresponding edge of its content view (i.e. if it were strictly a rectangle).
  */
 + (UIEdgeInsets)contentViewInsets;
 
-+ (CGFloat)arrowHeight;
++ (CGFloat)arrowHeight API_UNAVAILABLE(visionos);
 @end
 
 UIKIT_EXTERN API_AVAILABLE(ios(5.0))
@@ -34,7 +34,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0))
  
  This method is called inside an animation block managed by the `UIPopoverController`.
  */
-@property (nonatomic, readwrite) CGFloat arrowOffset;
+@property (nonatomic, readwrite) CGFloat arrowOffset API_UNAVAILABLE(visionos);
 
 /* `arrowDirection` manages which direction the popover arrow is pointing. You may be required to change the direction of the arrow while the popover is still visible on-screen.
  */
@@ -42,7 +42,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(5.0))
 
 /* This method may be overridden to prevent the drawing of the content inset and drop shadow inside the popover. The default implementation of this method returns YES.
  */
-@property(class, nonatomic, readonly) BOOL wantsDefaultContentAppearance API_DEPRECATED("No longer supported", ios(6.0, 13.0));
+@property(class, nonatomic, readonly) BOOL wantsDefaultContentAppearance API_DEPRECATED("No longer supported", ios(6.0, 13.0)) API_UNAVAILABLE(visionos);
 
 @end
 

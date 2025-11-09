@@ -1,6 +1,6 @@
-/* iig(DriverKit-256.100.8) generated from IODispatchQueue.iig */
+/* iig(DriverKit-324.0.10) generated from IODispatchQueue.iig */
 
-/* IODispatchQueue.iig:1-54 */
+/* IODispatchQueue.iig:1-60 */
 /*
  * Copyright (c) 2019-2019 Apple Inc. All rights reserved.
  *
@@ -55,7 +55,13 @@ enum {
 	kIODispatchQueueWakeupAll              = 0x00000001,
 };
 
-/* source class IODispatchQueue IODispatchQueue.iig:55-232 */
+// options for SleepWithDeadline()
+enum {
+	// Sleep on an event which other threads are still waiting on, but has already been signaled
+	kIODispatchQueueSleepReuseEvent        = 0x00000100,
+};
+
+/* source class IODispatchQueue IODispatchQueue.iig:61-238 */
 
 #if __DOCUMENTATION__
 #define KERNEL IIG_KERNEL
@@ -243,7 +249,7 @@ public:
 #undef KERNEL
 #else /* __DOCUMENTATION__ */
 
-/* generated class IODispatchQueue IODispatchQueue.iig:55-232 */
+/* generated class IODispatchQueue IODispatchQueue.iig:61-238 */
 
 #define IODispatchQueue_SetPort_ID            0xc437e970b5609767ULL
 #define IODispatchQueue_Create_ID            0xac000428df2a91d0ULL
@@ -274,7 +280,7 @@ public:\
 \
     static kern_return_t\
     Create(\
-        const IODispatchQueueName name,\
+        const char * name,\
         uint64_t options,\
         uint64_t priority,\
         IODispatchQueue ** queue);\
@@ -436,10 +442,10 @@ IODispatchQueue_DECLARE_IVARS
 
 #endif /* !__DOCUMENTATION__ */
 
-/* IODispatchQueue.iig:234-235 */
+/* IODispatchQueue.iig:240-241 */
 
 #if DRIVERKIT_PRIVATE
-/* IODispatchQueue.iig:242- */
+/* IODispatchQueue.iig:248- */
 #endif
 
 #endif /* ! _IOKIT_UIODISPATCH_H */

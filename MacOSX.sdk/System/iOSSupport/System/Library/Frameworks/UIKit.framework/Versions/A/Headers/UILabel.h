@@ -12,17 +12,45 @@
 #import <UIKit/UIStringDrawing.h>
 #import <UIKit/UIKitDefines.h>
 #import <UIKit/UIContentSizeCategoryAdjusting.h>
+#import <UIKit/UILetterformAwareAdjusting.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIColor, UIFont;
 
+typedef NS_ENUM(NSInteger, UILabelVibrancy) {
+    // No vibrancy will be applied automatically in this mode.
+    UILabelVibrancyNone,
+    
+    // Vibrancy gets applied automatically to labels if the context allows it.
+    // The kind of vibrancy effects depends on the labels text color.
+    // labelColor becomes UIVibrancyEffectStyleLabel,
+    // secondaryLabelColor becomes UIVibrancyEffectStyleSecondaryLabel etc.
+    UILabelVibrancyAutomatic,
+} API_AVAILABLE(visionos(1.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
-@interface UILabel : UIView <NSCoding, UIContentSizeCategoryAdjusting>
+@interface UILabel : UIView <NSCoding, UIContentSizeCategoryAdjusting, UILetterformAwareAdjusting>
 
 @property(nullable, nonatomic,copy)   NSString           *text; // default is nil
 @property(null_resettable, nonatomic,strong) UIFont      *font UI_APPEARANCE_SELECTOR; // default is nil (system font 17 plain)
 @property(null_resettable, nonatomic,strong) UIColor     *textColor UI_APPEARANCE_SELECTOR; // default is labelColor
+
+// Controls whether a label becomes vibrant automatically.
+//
+// If a label has a vibrancy mode other than `None` set, the system tries
+// to apply vibrancy automatically to that label. This will only succeed if
+// the label is in a context that allows vibrancy, which in general means the
+// the label needs to be on top of a blurred material.
+//
+// This property can only be used to opt-in to automatic vibrancy. It is not
+// a way to opt-out of vibrancy that is enabled by other means. A label
+// placed in a vibrant `UIVisualEffectView` with preferred vibrancy `None` will
+// still be vibrant.
+//
+// The default is `automatic` on xrOS and `none` on all other platforms.
+@property (nonatomic) UILabelVibrancy preferredVibrancy UI_APPEARANCE_SELECTOR API_AVAILABLE(visionos(1.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
 @property(nullable, nonatomic,strong) UIColor            *shadowColor UI_APPEARANCE_SELECTOR; // default is nil (no shadow)
 @property(nonatomic)        CGSize             shadowOffset UI_APPEARANCE_SELECTOR; // default is CGSizeMake(0, -1) -- a top shadow
 @property(nonatomic)        NSTextAlignment    textAlignment;   // default is NSTextAlignmentNatural (before iOS 9, the default was NSTextAlignmentLeft)
@@ -82,10 +110,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 // deprecated:
 
-@property(nonatomic) CGFloat minimumFontSize API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos); // deprecated - use minimumScaleFactor. default is 0.0
+@property(nonatomic) CGFloat minimumFontSize API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // deprecated - use minimumScaleFactor. default is 0.0
 
 // Non-functional.  Hand tune by using NSKernAttributeName to affect tracking, or consider using the allowsDefaultTighteningForTruncation property.
-@property(nonatomic) BOOL adjustsLetterSpacingToFitWidth API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic) BOOL adjustsLetterSpacingToFitWidth API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 

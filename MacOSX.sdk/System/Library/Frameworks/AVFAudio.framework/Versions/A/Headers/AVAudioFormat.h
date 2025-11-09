@@ -7,7 +7,7 @@
 
 #import <AVFAudio/AVAudioChannelLayout.h>
 
-#if __has_include(<CoreMedia/CMFormatDescription.h>)
+#if __has_include(<CoreMedia/CMFormatDescription.h>) && !0
 #define AVAUDIOFORMAT_HAVE_CMFORMATDESCRIPTION 1
 #import <CoreMedia/CMFormatDescription.h>
 #endif

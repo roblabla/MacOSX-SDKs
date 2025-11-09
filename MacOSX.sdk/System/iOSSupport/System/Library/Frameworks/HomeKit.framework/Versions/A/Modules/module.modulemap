@@ -1,4 +1,4 @@
-framework module HomeKit [extern_c] {
+framework module HomeKit [system] {
   umbrella header "HomeKit.h"
   export *
   module * { export * }

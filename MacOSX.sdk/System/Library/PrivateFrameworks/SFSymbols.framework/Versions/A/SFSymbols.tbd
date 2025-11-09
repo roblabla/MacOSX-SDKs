@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SFSymbols.framework/Versions/A/SFSymbols'
-current-version: 101.4
+current-version: 134
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -21,6 +21,7 @@ exports:
                        '_$s9SFSymbols12AvailabilityV8PlatformO5macOSyA2EmFWC', '_$s9SFSymbols12AvailabilityV8PlatformO7watchOSyA2EmFWC', 
                        '_$s9SFSymbols12AvailabilityV8PlatformO8rawValueAESgSS_tcfC', 
                        '_$s9SFSymbols12AvailabilityV8PlatformO8rawValueSSvg', '_$s9SFSymbols12AvailabilityV8PlatformO8rawValueSSvpMV', 
+                       '_$s9SFSymbols12AvailabilityV8PlatformO8visionOSyA2EmFWC', 
                        '_$s9SFSymbols12AvailabilityV8PlatformO9sfSymbolsyA2EmFWC', 
                        '_$s9SFSymbols12AvailabilityV8PlatformOMa', '_$s9SFSymbols12AvailabilityV8PlatformOMn', 
                        '_$s9SFSymbols12AvailabilityV8PlatformON', '_$s9SFSymbols12AvailabilityV8PlatformOSHAAMc', 
@@ -202,5 +203,6 @@ exports:
                        _kCoreGlyphsNoFillToFill, _kCoreGlyphsPrivateNameAliases, 
                        _kCoreGlyphsPrivateNoFillToFill, _kCoreGlyphsPrivateSymbolOrder, 
                        _kCoreGlyphsSymbolOrder ]
-    objc-classes:    [ SFSCoreGlyphsBundle, SFSSymbolAssetInfo ]
+    objc-classes:    [ SFSCoreGlyphsBundle, SFSDirectoryCompressor, SFSDirectoryDecompressor, 
+                       SFSSymbolAssetInfo ]
 ...

@@ -91,6 +91,14 @@ API_AVAILABLE(ios(13.0))
 /// Defaults to `PKCanvasViewDrawingPolicyDefault`.
 @property (nonatomic, assign) PKCanvasViewDrawingPolicy drawingPolicy API_AVAILABLE(ios(14.0));
 
+/// The maximum supported PencilKit content version.
+///
+/// Setting this to less than `.latest` limits the edits that can be made so they are compatible with the
+/// specified version. If setting this property, also set it on any `PKToolPicker` used.
+///
+/// Defaults to `.latest`.
+@property (nonatomic, assign) PKContentVersion maximumSupportedContentVersion API_AVAILABLE(ios(17.0), macos(14.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -37,7 +37,10 @@
 #include <stdint.h>
 #include <stdatomic.h>
 
+#ifndef __DARWIN_UINT
 typedef unsigned int                    uint;
+#define __DARWIN_UINT
+#endif
 
 #define BIT(b)                          (1ULL << (b))
 

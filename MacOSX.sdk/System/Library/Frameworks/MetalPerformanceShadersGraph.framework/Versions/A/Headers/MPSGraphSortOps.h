@@ -2,7 +2,7 @@
 //  MPSGraphSortOps.h
 //  MPSGraph
 //
-//  Created by Matteo Franciolini on 6/30/22.
+//  Created on 6/30/22.
 //  Copyright © 2022 Apple Inc. All rights reserved.
 //
 
@@ -16,16 +16,14 @@ NS_ASSUME_NONNULL_BEGIN
 MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 @interface MPSGraph(MPSGraphSortOps)
 
-/*!
- *  @abstract   Create a sort operation and return the result tensor.
- *
- *  @param      tensor              input tensor
- *  @param      axis                  the tensor dimension over which the sort occurs
- *  @param      descending     wether to sort or not in descending order
- *  @param      name                  name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axis: The tensor dimension over which you sort the tensor
+///   - descending: If true, reverse the sort direction
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) sortWithTensor:(MPSGraphTensor *) tensor
                               axis:(NSInteger) axis
                         descending:(BOOL) descending
@@ -33,16 +31,14 @@ MPS_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
 MPS_SWIFT_NAME( sort(_:axis:descending:name:))
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/*!
- *  @abstract   Create a sort operation and return the result tensor.
- *
- *  @param      tensor              input tensor
- *  @param      axisTensor     the tensor dimension over which the sort occurs
- *  @param      descending     wether to sort or not in descending order
- *  @param      name                  name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axisTensor: The tensor dimension over which you sort the tensor
+///   - descending: If true, reverse the sort direction
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) sortWithTensor:(MPSGraphTensor *) tensor
                         axisTensor:(MPSGraphTensor *) axisTensor
                         descending:(BOOL) descending
@@ -50,47 +46,40 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 MPS_SWIFT_NAME( sort(_:axisTensor:descending:name:))
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/*!
- *  @abstract   Create an ascending sort operation and return the result tensor.
- *
- *  @param      tensor        input tensor
- *  @param      axis            the tensor dimension over which the sort occurs
- *  @param      name            name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axis: The tensor dimension over which you sort the tensor
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) sortWithTensor:(MPSGraphTensor *) tensor
                               axis:(NSInteger) axis
                               name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( sort(_:axis:name:))
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/*!
- *  @abstract   Create an ascending sort operation and return the result tensor.
- *
- *  @param      tensor            input tensor
- *  @param      axisTensor   the tensor dimension over which the sort occurs
- *  @param      name                name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axisTensor: The tensor dimension over which you sort the tensor
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object
 -(MPSGraphTensor *) sortWithTensor:(MPSGraphTensor *) tensor
                         axisTensor:(MPSGraphTensor *) axisTensor
                               name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( sort(_:axisTensor:name:))
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 
-/*!
- *  @abstract   Create an argSort operation and return the result tensor of signed
- *              32-bit integers.
- *
- *  @param      tensor              input tensor
- *  @param      axis                  the tensor dimension over which the sort occurs
- *  @param      descending     whether or not to sort in descending order
- *  @param      name                  name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Compute the indices that sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axis: The tensor dimension over which you sort the tensor
+///   - descending: If true, reverse the sort direction
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object with 32-bit integer data type
 -(MPSGraphTensor *) argSortWithTensor:(MPSGraphTensor *) tensor
                                  axis:(NSInteger) axis
                            descending:(BOOL) descending
@@ -98,17 +87,14 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.0), tvos(16.0));
 MPS_SWIFT_NAME( argSort(_:axis:descending:name:))
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
-/*!
- *  @abstract   Create an argSort operation and return the result tensor of signed
- *              32-bit integers.
- *
- *  @param      tensor              input tensor
- *  @param      axisTensor     the tensor dimension over which the sort occurs
- *  @param      descending     whether or not to sort in descending order
- *  @param      name                  name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Compute the indices that sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axisTensor: The tensor dimension over which you sort the tensor
+///   - descending: If true, reverse the sort direction
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object with 32-bit integer data type
 -(MPSGraphTensor *) argSortWithTensor:(MPSGraphTensor *) tensor
                            axisTensor:(MPSGraphTensor *) axisTensor
                            descending:(BOOL) descending
@@ -116,32 +102,26 @@ MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 MPS_SWIFT_NAME( argSort(_:axisTensor:descending:name:))
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
-/*!
- *  @abstract   Create an argSort operation and return the result tensor of signed
- *              32-bit integers.
- *
- *  @param      tensor        input tensor
- *  @param      axis            the tensor dimension over which the sort occurs
- *  @param      name            name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Compute the indices that sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axis: The tensor dimension over which you sort the tensor
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object with 32-bit integer data type
 -(MPSGraphTensor *) argSortWithTensor:(MPSGraphTensor *) tensor
                                  axis:(NSInteger) axis
                                  name:(NSString * _Nullable) name
 MPS_SWIFT_NAME( argSort(_:axis:name:))
 MPS_AVAILABLE_STARTING(macos(13.0), ios(16.1), tvos(16.1));
 
-/*!
- *  @abstract   Create an argSort operation and return the result tensor of signed
- *              32-bit integers.
- *
- *  @param      tensor            input tensor
- *  @param      axisTensor   the tensor dimension over which the sort occurs
- *  @param      name                name for the operation
- *
- *  @return     A valid MPSGraphTensor object.
- */
+/// Compute the indices that sort the elements of the input tensor along the specified axis.
+///
+/// - Parameters:
+///   - tensor: The input tensor
+///   - axisTensor: The tensor dimension over which you sort the tensor
+///   - name: The name for the operation
+/// - Returns: A valid MPSGraphTensor object with 32-bit integer data type
 -(MPSGraphTensor *) argSortWithTensor:(MPSGraphTensor *) tensor
                            axisTensor:(MPSGraphTensor *) axisTensor
                                  name:(NSString * _Nullable) name

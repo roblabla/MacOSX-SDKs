@@ -154,7 +154,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI
 
 
 /// Up/down chevrons that indicate a tap anywhere in the cell presents a pop-up menu.
-UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UICellAccessoryPopUpMenu : UICellAccessory
 
 /// Creates a new pop-up menu accessory using the provided menu.

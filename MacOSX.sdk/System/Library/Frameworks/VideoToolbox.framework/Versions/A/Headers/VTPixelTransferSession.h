@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2006-2013 Apple Inc. All rights reserved.
+    Copyright 2006-2023 Apple Inc. All rights reserved.
   
 	Video Toolbox client API for transferring images between CVPixelBuffers.
 */
@@ -41,7 +41,7 @@ extern "C"
 		to tear it down and CFRelease to release your object reference.
  */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTPixelTransferSession*  VTPixelTransferSessionRef CM_SWIFT_NONSENDABLE;
 
 /*!
 	@function	VTPixelTransferSessionCreate

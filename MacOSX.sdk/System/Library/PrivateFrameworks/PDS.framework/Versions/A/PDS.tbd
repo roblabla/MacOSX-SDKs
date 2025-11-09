@@ -8,7 +8,7 @@ exports:
                        _PDSInternalClientIDEntitlementKey, _PDSInternalDaemonMachServiceName, 
                        _PDSInternalToolEntitlementKey, _PDSInternalWildcardClientID, 
                        _PDSRegistrarErrorDomain, _PDSStringForEntryState, _PDSUserErrorDomain, 
-                       _PDSXPCErrorDomain, _pds_defaultLog, _pds_oversizedLog ]
+                       _PDSXPCErrorDomain, _pds_defaultLog, _pds_oversizedLog, _pds_serverBagLog ]
     objc-classes:    [ PDSEntry, PDSRegistrar, PDSRegistration, PDSRemoteRegistry, 
                        PDSUser, PDSXPCAdapter, PDSXPCConnector, PDSXPCInterface ]
 ...

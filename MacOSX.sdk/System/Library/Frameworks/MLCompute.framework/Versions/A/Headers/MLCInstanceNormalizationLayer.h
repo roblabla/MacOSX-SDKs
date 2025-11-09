@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class      MLCInstanceNormalizationLayer
     @abstract   An instance normalization layer.  For more information refer to https://pytorch.org/docs/stable/nn.html#instancenorm2d
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 @interface MLCInstanceNormalizationLayer : MLCLayer
 
 /*! @property   featureChannelCount

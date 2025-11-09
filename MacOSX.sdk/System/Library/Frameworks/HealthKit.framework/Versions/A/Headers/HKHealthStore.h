@@ -31,6 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract      The HKHealthStore class provides an interface for accessing and storing the user's health data.
  */
 HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
+NS_SWIFT_SENDABLE
 @interface HKHealthStore : NSObject
 
 /*!
@@ -95,7 +96,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
   */
 - (void)requestPerObjectReadAuthorizationForType:(HKObjectType *)objectType
                                        predicate:(nullable NSPredicate *)predicate
-                                      completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+                                      completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_AVAILABLE(ios(16.0), macCatalyst(16.0), macos(13.0));
 
 /*!
  @method        getRequestStatusForAuthorizationToShareTypes:readTypes:completion:
@@ -271,6 +272,17 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 @interface HKHealthStore (HKWorkout)
 
 /*!
+ @property      workoutSessionMirroringStartHandler
+ @abstract      Called when a session has started mirroring.
+ @discussion    This property should always be assigned a value promptly after your app is launched,
+                to ensure it is always observing for incoming mirrored workout sessions.
+                If your app is not active when a mirrored session starts, it will be launched in the background and given a one-time
+                permission to start a Live Activity from the background.
+                The assigned block will be executed on an arbitrary background queue.
+ */
+@property (copy, nullable) void (^workoutSessionMirroringStartHandler)(HKWorkoutSession *mirroredSession) API_AVAILABLE(ios(17.0));
+
+/*!
  @method        addSamples:toWorkout:completion:
  @abstract      Associates samples with a given workout.
  @discussion    This will associate the given samples with the given workout. These samples will then be returned by a
@@ -279,7 +291,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  
                 The workout provided must be one that has already been saved to HealthKit.
  */
-- (void)addSamples:(NSArray<HKSample *> *)samples toWorkout:(HKWorkout *)workout completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addSamples(_:to:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1);
+- (void)addSamples:(NSArray<HKSample *> *)samples toWorkout:(HKWorkout *)workout completion:(void (^)(BOOL success, NSError * _Nullable error))completion NS_SWIFT_ASYNC_NAME(addSamples(_:to:)) NS_SWIFT_ASYNC_THROWS_ON_FALSE(1) API_DEPRECATED("Use HKWorkoutBuilder", ios(8.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        startWorkoutSession:

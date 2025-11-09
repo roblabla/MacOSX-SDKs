@@ -57,7 +57,7 @@ typedef NS_ENUM(NSInteger, LAPolicy)
     ///             unavailable it behaves as LAPolicyDeviceOwnerAuthenticationWithWatch.
     ///
     ///             Watch authentication dialog looks and behaves similarly to biometric variant. When both
-    ///             machanisms are available, user is asked to use biometry and watch authentication will run in
+    ///             mechanisms are available, user is asked to use biometry and watch authentication will run in
     ///             parallel.
     LAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch API_AVAILABLE(macos(10.15), macCatalyst(13.0)) API_UNAVAILABLE(ios, watchos, tvos) = kLAPolicyDeviceOwnerAuthenticationWithBiometricsOrWatch,
     
@@ -344,17 +344,18 @@ typedef NS_ENUM(NSInteger, LAAccessControlOperation)
 typedef NS_ENUM(NSInteger, LABiometryType)
 {
     /// The device does not support biometry.
-    LABiometryTypeNone API_AVAILABLE(macos(10.13.2), ios(11.2)),
+    LABiometryTypeNone API_AVAILABLE(macos(10.13.2), ios(11.2)) = kLABiometryTypeNone,
     LABiometryNone API_DEPRECATED_WITH_REPLACEMENT("LABiometryTypeNone", macos(10.13, 10.13.2), ios(11.0, 11.2)) = LABiometryTypeNone,
     
     /// The device supports Touch ID.
-    LABiometryTypeTouchID,
-    
+    LABiometryTypeTouchID = kLABiometryTypeTouchID,
+
     /// The device supports Face ID.
-    LABiometryTypeFaceID API_AVAILABLE(macos(10.15)),
+    LABiometryTypeFaceID API_AVAILABLE(macos(10.15)) = kLABiometryTypeFaceID,
 
+    /// The device supports Optic ID
+    LABiometryTypeOpticID API_AVAILABLE(visionos(1.0), ios(17.0), macos(14.0)) = kLABiometryTypeOpticID,
 } API_AVAILABLE(macos(10.13.2), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
-
 
 /// Indicates the type of the biometry supported by the device.
 ///

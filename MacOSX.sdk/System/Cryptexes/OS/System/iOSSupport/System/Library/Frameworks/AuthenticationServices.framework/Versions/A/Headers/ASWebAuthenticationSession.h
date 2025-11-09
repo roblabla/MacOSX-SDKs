@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol ASWebAuthenticationPresentationContextProviding;
 
-AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)) API_UNAVAILABLE(tvos)
+AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2), tvos(16.0))
 NSErrorDomain const ASWebAuthenticationSessionErrorDomain;
 
 /*! @enum ASWebAuthenticationSessionErrorCode
@@ -27,9 +27,9 @@ NSErrorDomain const ASWebAuthenticationSessionErrorDomain;
  */
 typedef NS_ERROR_ENUM(ASWebAuthenticationSessionErrorDomain, ASWebAuthenticationSessionErrorCode) {
     ASWebAuthenticationSessionErrorCodeCanceledLogin = 1,
-    ASWebAuthenticationSessionErrorCodePresentationContextNotProvided API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos) = 2,
-    ASWebAuthenticationSessionErrorCodePresentationContextInvalid API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos) = 3,
-} API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)) API_UNAVAILABLE(tvos);
+    ASWebAuthenticationSessionErrorCodePresentationContextNotProvided API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos) = 2,
+    ASWebAuthenticationSessionErrorCodePresentationContextInvalid API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos) = 3,
+} API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2), tvos(16.0));
 
 typedef void (^ASWebAuthenticationSessionCompletionHandler)(NSURL *_Nullable callbackURL, NSError *_Nullable error) NS_SWIFT_NAME(ASWebAuthenticationSession.CompletionHandler);
 
@@ -56,7 +56,7 @@ typedef void (^ASWebAuthenticationSessionCompletionHandler)(NSURL *_Nullable cal
  The app can cancel the session by calling -[ASWebAuthenticationSession cancel]. This will also dismiss the view controller that
  is showing the web service's login page.
  */
-AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)) API_UNAVAILABLE(tvos)
+AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2), tvos(16.0))
 @interface ASWebAuthenticationSession : NSObject
 
 /*! @abstract Returns an ASWebAuthenticationSession object.
@@ -70,13 +70,13 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)
  must be set prior to calling -start, otherwise the authorization view cannot be displayed. If deploying to iOS prior to
  13.0, the desired window is inferred by the application's key window.
  */
-@property (nonatomic, weak) id <ASWebAuthenticationPresentationContextProviding> presentationContextProvider API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos);
+@property (nonatomic, weak) id <ASWebAuthenticationPresentationContextProviding> presentationContextProvider API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos);
 
 /*! @abstract Indicates whether this session should ask the browser for an ephemeral session.
  @discussion Ephemeral web browser sessions do not not share cookies or other browsing data with a user's normal browser session.
  This value is NO by default. Setting this property after calling -[ASWebAuthenticationSession start] has no effect.
  */
-@property (nonatomic) BOOL prefersEphemeralWebBrowserSession API_AVAILABLE(ios(13.0), macos(10.15), watchos(6.2));
+@property (nonatomic) BOOL prefersEphemeralWebBrowserSession API_AVAILABLE(ios(13.0), macos(10.15), watchos(6.2)) API_UNAVAILABLE(tvos);
 
 /*! @abstract Returns whether the session can be successfully started. This property returns the same value as calling -start,
  but without the side effect of actually starting the session.
@@ -93,7 +93,7 @@ AS_EXTERN API_AVAILABLE(ios(12.0), macCatalyst(13.0), macos(10.15), watchos(6.2)
 /*! @abstract Cancel an ASWebAuthenticationSession. If the view controller is already presented to load the webpage for
  authentication, it will be dismissed. Calling cancel on an already canceled session will have no effect.
  */
-- (void)cancel;
+- (void)cancel API_UNAVAILABLE(tvos);
 
 + (instancetype)new NS_UNAVAILABLE;
 - (instancetype)init NS_UNAVAILABLE;

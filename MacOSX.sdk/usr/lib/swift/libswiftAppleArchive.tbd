@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAppleArchive.dylib'
-current-version: 364.100.3
+current-version: 398
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -51,7 +51,7 @@ exports:
                        '_$s12AppleArchive0B11CompressionV3lz4ACvgZ', '_$s12AppleArchive0B11CompressionV4algoAC0C09AlgorithmO_tcfC', 
                        '_$s12AppleArchive0B11CompressionV4lzmaACvgZ', '_$s12AppleArchive0B11CompressionV4noneACvgZ', 
                        '_$s12AppleArchive0B11CompressionV4zlibACvgZ', '_$s12AppleArchive0B11CompressionV5lzfseACvgZ', 
-                       '_$s12AppleArchive0B11CompressionV8rawValueACs6UInt32V_tcfC', 
+                       '_$s12AppleArchive0B11CompressionV8lzbitmapACvgZ', '_$s12AppleArchive0B11CompressionV8rawValueACs6UInt32V_tcfC', 
                        '_$s12AppleArchive0B11CompressionV8rawValues6UInt32VvM', '_$s12AppleArchive0B11CompressionV8rawValues6UInt32Vvg', 
                        '_$s12AppleArchive0B11CompressionV8rawValues6UInt32VvpMV', 
                        '_$s12AppleArchive0B11CompressionV8rawValues6UInt32Vvs', '_$s12AppleArchive0B11CompressionVMa', 

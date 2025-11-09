@@ -6,6 +6,5 @@ install-name:    '/System/Library/PrivateFrameworks/FontServices.framework/libTy
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _T1GetPSFontEncoding, _T1GetSynthesisData, _T1ReleaseSynthesisData, 
-                       _Type1ScalerOpen ]
+    symbols:         [ _Type1ScalerOpen ]
 ...

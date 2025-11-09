@@ -1,15 +1,15 @@
-framework module ApplicationServices [extern_c] [system] {
+framework module ApplicationServices [system] {
   umbrella header "ApplicationServices.h"
   export *
   module * { export * }
 
-  framework module ATS [extern_c] [system] {
+  framework module ATS [system] {
     umbrella header "ATS.h"
     export *
     module * { export * }
   }
 
-  framework module ATSUI [extern_c] [system] {
+  framework module ATSUI [system] {
     umbrella header "ATSUnicode.h"
 
 	// Use ATSUnicodeTypes.h instead
@@ -21,19 +21,19 @@ framework module ApplicationServices [extern_c] [system] {
     module * { export * }
   }
 
-  framework module HIServices [extern_c] [system] {
+  framework module HIServices [system] {
     umbrella header "HIServices.h"
     export *
     module * { export * }
   }
 
-  framework module PrintCore [extern_c] [system] {
+  framework module PrintCore [system] {
     umbrella header "PrintCore.h"
     export *
     module * { export * }
   }
 
-  framework module QD [extern_c] [system] {
+  framework module QD [system] {
     umbrella header "QD.h"
 
 	// Use the ATSUI headers of the same name instead.
@@ -50,7 +50,7 @@ framework module ApplicationServices [extern_c] [system] {
     module * { export * }
   }
 
-  framework module SpeechSynthesis [extern_c] [system] {
+  framework module SpeechSynthesis [system] {
     umbrella header "SpeechSynthesis.h"
     export *
     module * { export * }

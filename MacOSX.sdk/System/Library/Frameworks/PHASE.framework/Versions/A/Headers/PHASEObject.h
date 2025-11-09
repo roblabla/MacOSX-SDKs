@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
     @abstract A PHASEObject represents a 3D object in the engine, which can be organized into a hierarchy with relative transforms.
 */
 
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEObject : NSObject<NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

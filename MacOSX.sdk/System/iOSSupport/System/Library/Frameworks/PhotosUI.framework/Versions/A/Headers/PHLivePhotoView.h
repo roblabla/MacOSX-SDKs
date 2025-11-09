@@ -64,7 +64,12 @@ OS_EXPORT
 #if TARGET_OS_OSX
 /// The mode in which the receiver will display its content. Defaults to PHLivePhotoViewContentModeAspectFit.
 @property (readwrite, nonatomic, assign) PHLivePhotoViewContentMode contentMode;
+#endif
 
+/// The rectangle, in the unit coordinate space, that defines the portion of the Live Photo contents that should be displayed. In this coordinate system, the point `{0.0,0.0}` refers to the upper left corner of the Live Photo, and `{1.0,1.0}` refers to the bottom right corner.
+@property (nonatomic) CGRect contentsRect API_AVAILABLE(macos(14), ios(17), tvos(17));
+
+#if TARGET_OS_OSX
 /// The audio volume during playback
 @property (readwrite, nonatomic, assign) float audioVolume;
 #endif
@@ -85,7 +90,7 @@ OS_EXPORT
 /// Stops live photo playback. If animated is NO, the photo is immediately displayed.
 - (void)stopPlaybackAnimated:(BOOL)animated;
 
-/// Directly access the livePhotoBadge in cases where it should be added to a different place in the view hierachy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
+/// Directly access the livePhotoBadge in cases where it should be added to a different place in the view hierarchy and not the live photo view. This can be useful when the live photo view is added to a scroll view.
 @property (readonly, nonatomic, strong, nullable) NSView *livePhotoBadgeView;
 #endif
 @end

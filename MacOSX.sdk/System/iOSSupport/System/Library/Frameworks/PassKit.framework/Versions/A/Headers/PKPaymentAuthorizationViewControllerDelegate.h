@@ -13,10 +13,8 @@
 
 #if !TARGET_OS_WATCH && !TARGET_OS_TV
 
-#if TARGET_OS_IPHONE
-#if !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && __has_include(<AddressBook/ABRecord.h>)
 #import <AddressBook/ABRecord.h>
-#endif
 #endif
 
 #import <PassKit/PKConstants.h>
@@ -118,7 +116,7 @@ NS_ASSUME_NONNULL_BEGIN
                    didSelectShippingMethod:(PKShippingMethod *)shippingMethod
                                 completion:(void (^)(PKPaymentAuthorizationStatus status, NSArray<PKPaymentSummaryItem *> *summaryItems))completion API_DEPRECATED("Use paymentAuthorizationViewController:didSelectShippingMethod:handler: instead to provide more granular errors", ios(8.0, 11.0));
 
-#if !TARGET_OS_MACCATALYST && !TARGET_OS_OSX
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && __has_include(<AddressBook/ABRecord.h>)
 - (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
                   didSelectShippingAddress:(ABRecordRef)address
                                 completion:(void (^)(PKPaymentAuthorizationStatus status, NSArray<PKShippingMethod *> *shippingMethods,

@@ -3,7 +3,7 @@
 #import <AuthenticationServices/ASPublicKeyCredential.h>
 #import <Foundation/Foundation.h>
 
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 @protocol ASAuthorizationPublicKeyCredentialAssertion <ASPublicKeyCredential>
 
 /*! @abstract A byte sequence containing the encoded authenticatorData blob returned by the authenticator.

@@ -8,6 +8,8 @@
 #import <ARKit/ARAnchor.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+#define AR_IMAGE_ANCHOR_PROTOCOLS <ARTrackable>
+
 @class ARReferenceImage;
 
 NS_ASSUME_NONNULL_BEGIN
@@ -16,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  An anchor representing an image in the world.
  */
 API_AVAILABLE(ios(11.3))
-@interface ARImageAnchor : ARAnchor <ARTrackable>
+@interface ARImageAnchor : ARAnchor AR_IMAGE_ANCHOR_PROTOCOLS
 
 /**
  Reference to the detected image.

@@ -6,3 +6,4 @@
 //
 
 #import <HealthKitUI/HKActivityRingView.h>
+#import <HealthKitUI/HKHealthStore+UIKit.h>

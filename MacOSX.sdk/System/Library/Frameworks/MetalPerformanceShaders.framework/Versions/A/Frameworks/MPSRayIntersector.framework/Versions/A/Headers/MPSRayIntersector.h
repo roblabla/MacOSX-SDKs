@@ -55,7 +55,7 @@ typedef NS_ENUM(NSUInteger, MPSTriangleIntersectionTestType) {
      * than MPSTriangleIntersectionTestTypeDefault.
      */
     MPSTriangleIntersectionTestTypeWatertight = 1,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0));
 
 /**
  * @brief Options for the MPSRayIntersector bounding box intersection test type property
@@ -92,8 +92,8 @@ typedef NS_ENUM(NSUInteger, MPSBoundingBoxIntersectionTestType) {
      * randomized ray distributions. However, synthetic ray distributions or orthographic
      * projections can generate these rays.
      */
-    MPSBoundingBoxIntersectionTestTypeFast MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) = 2,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+    MPSBoundingBoxIntersectionTestTypeFast MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0)) = 2,
+} MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0));
 
 /**
  * @brief Options for the MPSRayIntersector ray mask options property
@@ -113,7 +113,7 @@ typedef NS_OPTIONS(NSUInteger, MPSRayMaskOptions) {
      * @brief Enable instance masks
      */
     MPSRayMaskOptionInstance = 2,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0));
 
 /**
  * @brief Options for the MPSRayIntersector ray data type property
@@ -247,13 +247,13 @@ typedef NS_ENUM(NSUInteger, MPSRayMaskOperator) {
     /**
      * @brief Accept the intersection if primitive mask == ray mask.
      */
-    MPSRayMaskOperatorEqual MPS_ENUM_AVAILABLE_STARTING(macos(10.15.4), ios(13.4), macCatalyst(13.4), tvos(13.4)) = 10,
+    MPSRayMaskOperatorEqual MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15.4, 14.0), ios(13.4, 17.0), macCatalyst(13.4, 17.0), tvos(13.4, 17.0)) = 10,
 
     /**
      * @brief Accept the intersection if primitive mask != ray mask.
      */
-    MPSRayMaskOperatorNotEqual MPS_ENUM_AVAILABLE_STARTING(macos(10.15.4), ios(13.4), macCatalyst(13.4), tvos(13.4)) = 11,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+    MPSRayMaskOperatorNotEqual MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15.4, 14.0), ios(13.4, 17.0), macCatalyst(13.4, 17.0), tvos(13.4, 17.0)) = 11,
+} MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 /**
  * @class MPSRayIntersector
@@ -641,7 +641,7 @@ typedef NS_ENUM(NSUInteger, MPSRayMaskOperator) {
  * intersection tests from multiple threads result in undefined behavior. Instead, multiple
  * threads should copy or create their own MPSRayIntersectors.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
+MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0))
 @interface MPSRayIntersector : MPSKernel <NSSecureCoding, NSCopying>
 
 /**
@@ -708,7 +708,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12
  * @brief The operator to apply to determine whether to accept an intersection between a ray and a
  * primitive or instance. Defaults to MPSRayMaskOperatorAnd.
  */
-@property (nonatomic) MPSRayMaskOperator rayMaskOperator MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+@property (nonatomic) MPSRayMaskOperator rayMaskOperator MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 /**
  * @brief Offset, in bytes, between consecutive rays in the ray buffer. Defaults to 0, indicating
@@ -745,13 +745,13 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12
  * @brief Ray index data type. Defaults to MPSDataTypeUInt32. Only MPSDataTypeUInt16 and
  * MPSDataTypeUInt32 are supported.
  */
-@property (nonatomic) MPSDataType rayIndexDataType MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+@property (nonatomic) MPSDataType rayIndexDataType MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 /**
  * @brief Global ray mask. Defaults to 0xFFFFFFFF. This value will be logically AND-ed with the
  * per-ray mask if the ray data type contains a mask.
  */
-@property (nonatomic) unsigned int rayMask MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+@property (nonatomic) unsigned int rayMask MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 - (nonnull instancetype)init NS_UNAVAILABLE;
 
@@ -894,7 +894,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12
                             rayIndexCount:(NSUInteger)rayIndexCount
                     accelerationStructure:(nonnull MPSAccelerationStructure *)accelerationStructure
     MPS_SWIFT_NAME(encodeIntersection(commandBuffer:intersectionType:rayBuffer:rayBufferOffset:rayIndexBuffer:rayIndexBufferOffset:intersectionBuffer:intersectionBufferOffset:rayIndexCount:accelerationStructure:))
-    MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+    MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 /**
  * @brief Schedule intersection tests between rays and an acceleration structure with a ray count
@@ -935,7 +935,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12
                 rayIndexCountBufferOffset:(NSUInteger)rayIndexCountBufferOffset
                     accelerationStructure:(nonnull MPSAccelerationStructure *)accelerationStructure
                     MPS_SWIFT_NAME(encodeIntersection(commandBuffer:intersectionType:rayBuffer:rayBufferOffset:rayIndexBuffer:rayIndexBufferOffset:intersectionBuffer:intersectionBufferOffset:rayIndexCountBuffer:rayIndexCountBufferOffset:accelerationStructure:))
-                    MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+                    MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 /**
  * @brief Schedule intersection tests between rays and an acceleration structure, where rays and
@@ -998,7 +998,7 @@ MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12
                       intersectionTexture:(nonnull id <MTLTexture>)intersectionTexture
                     accelerationStructure:(nonnull MPSAccelerationStructure *)accelerationStructure
     MPS_SWIFT_NAME(encodeIntersection(commandBuffer:intersectionType:rayTexture:intersectionTexture:accelerationStructure:))
-    MPS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+    MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 @end
 #endif

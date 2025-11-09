@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/PreviewsServicesUI.framework/Versions/A/PreviewsServicesUI'
-current-version: 20.30.46
+current-version: 21.0.58
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
@@ -81,7 +81,9 @@ exports:
                        '_$s18PreviewsServicesUI18PreviewPreferencesV7defaultACvgZ', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesVMa', '_$s18PreviewsServicesUI18PreviewPreferencesVMn', 
                        '_$s18PreviewsServicesUI18PreviewPreferencesVN', '_$s18PreviewsServicesUI18PreviewPreferencesVs23CustomStringConvertibleAAMc', 
-                       '_$s18PreviewsServicesUI22SuppressedPresentationO10fontPickeryA2CmFWC', 
+                       '_$s18PreviewsServicesUI19WindowChromeContextV6radius12CoreGraphics7CGFloatVvgZ', 
+                       '_$s18PreviewsServicesUI19WindowChromeContextVMa', '_$s18PreviewsServicesUI19WindowChromeContextVMn', 
+                       '_$s18PreviewsServicesUI19WindowChromeContextVN', '_$s18PreviewsServicesUI22SuppressedPresentationO10fontPickeryA2CmFWC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO10printPanelyA2CmFWC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO10shareSheetyA2CmFWC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO11colorPickeryA2CmFWC', 
@@ -89,6 +91,11 @@ exports:
                        '_$s18PreviewsServicesUI22SuppressedPresentationO15documentBrowseryA2CmFWC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO15sceneActivationyA2CmFWC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO17catalystErrorCodeACSgSi_tcfC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO18nsPreviewErrorCodeACSgs5UInt8V_tcfC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO5childyA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO5sheetyA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO7unknownyA2CmFWC', 
+                       '_$s18PreviewsServicesUI22SuppressedPresentationO8appModalyA2CmFWC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO8rawValueACSgSS_tcfC', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO8rawValueSSvg', 
                        '_$s18PreviewsServicesUI22SuppressedPresentationO8rawValueSSvpMV', 

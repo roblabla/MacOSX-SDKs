@@ -1,4 +1,4 @@
-framework module AppKit [extern_c] [system] {
+framework module AppKit [system] {
   umbrella header "AppKit.h"
 
   export *

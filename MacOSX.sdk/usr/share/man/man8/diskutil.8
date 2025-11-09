@@ -428,7 +428,9 @@ Externally-connected disk(s) are not affected.
 Ownership of the affected disks is required.
 .\"
 .\"             -- eraseDisk --
-.It Sy eraseDisk Ar format Ar name
+.It Sy eraseDisk
+.Op Ar -noEFI
+.Ar format Ar name
 .Op Nm APM[Format] | MBR[Format] | GPT[Format]
 .Ar device
 .br
@@ -440,6 +442,10 @@ is discussed below in the section for the
 .Sy partitionDisk
 verb.
 Ownership of the affected disk is required.
+.br
+If
+.Ar -noEFI
+is specified, do not create EFI partition on the target disk.
 .\"
 .\"             -- eraseVolume --
 .It Sy eraseVolume
@@ -586,6 +592,7 @@ Consider using APFS encryption (FileVault).
 .\"
 .\"             -- partitionDisk --
 .It Sy partitionDisk Ar device
+.Op -noEFI
 .Op Ar numberOfPartitions
 .Op Nm APM[Format] | MBR[Format] | GPT[Format]
 .Op Ar part1Format Ar part1Name Ar part1Size Ar part2Format Ar part2Name Ar part2Size Ar part3Format part3Name part3Size Ar ...
@@ -599,6 +606,10 @@ The optional
 parameter specifies the number of partitions to create; if given then the number of
 parameter triplets (see below) is expected to match; else, the number of triplets alone
 given will determine the number of partitions created.
+.br
+If
+.Ar -noEFI
+is specified, do not create EFI partition on the target disk.
 .Pp
 The optional partitioning scheme parameter forces a particular partitioning scheme; if not specified, a
 suitable default is chosen.  They are:
@@ -2148,15 +2159,19 @@ To re-lock the volume, make it offline again by ejecting it, e.g. with
 .El
 .\"             -- diskImage --
 .It Sy image
-.Op Sy -stdinpassphrase
-.Op Sy -verbose
-.Op Sy -plist
+.Op Sy --stdinpassphrase
+.Op Sy --verbose
+.Op Sy --plist
 .Ar diskimageverb 
 .br
 .Sy diskutil image verb
 uses DiskImages framework alongside with StorageKit framework to facilitate in manipulating disk images. Currently only
 .Sy attach
-is supported.
+,
+.Sy info
+and
+.Sy create
+are supported.
 .Pp
 Add 
 .Sy verbose
@@ -2181,12 +2196,12 @@ sub-verbs with their descriptions and individual arguments.
 .\"
 .\"             -- DiskImage > attach --
 .It Sy attach
-.Op Sy -readOnly
-.Op Sy -nobrowse
-.Op Sy -mountPoint Ar mountPoint
-.Op Sy -mountOptions Ar opt[,opt]*
-.Op Sy -mountPolicy Ar mountPolicy
-.Op Sy -noMount
+.Op Sy --readOnly
+.Op Sy --nobrowse
+.Op Sy --mountPoint Ar mountPoint
+.Op Sy --mountOptions Ar opt[,opt]*
+.Op Sy --mountPolicy Ar mountPolicy
+.Op Sy --noMount
 .Ar image-url
 .br
 Attach a disk image as a device. Upon success will return the disk identifier matching the attached disk image.
@@ -2237,10 +2252,133 @@ is supplied, then it will be used as the path to view into the volume; a directo
 Note, that when specifying this option, the disk image should contain only a single mountable entity, otherwise the operation will fail.
 Additionally, can manipulate the mount operation by passing
 .Sy mountOptions,
-see mount(8). Can supply multiple options seperated by ','. These options will be used during mount operation.
+see mount(8). Can supply multiple options separated by ','. These options will be used during mount operation.
 Lastly,
 .Sy nobrowse
 can be supplied to hide the mounted volume in the disk image from GUI applications (such as Finder).
+.\"             -- DiskImage > info --
+.It Sy info
+.Op Sy --extra
+.Ar image-url
+.br
+Print out information about a disk image.
+.br
+The operation includes an attach operation of the image in order to retrieve various details. If the image is already attached, it will remain attached. Otherwise, the image is ejected upon completion.
+.br
+If
+.Sy --extra
+is specified, additional information will be retrieved for some image types.
+.\"
+.\"             -- DiskImage > create --
+.It Sy create
+.Op Sy -e, --encrypt
+.Ar [ blank | from ] ...
+.br
+Create a disk image. Either blank or from an existing source.
+
+Creates an optionally encrypted disk image.
+
+With
+.Sy encrypt
+can encrypt the newly created disk image using AES-256.
+When creating from source and encryption applies to both, source and destination, stdinpassphrase applies the first passphrase to source and the second to destination.
+
+At the end of the operation the image is not mounted.
+
+Use
+.Sy blank
+to create a blank disk image.
+Use
+.Sy from
+to create the disk image from source (e.g. disk3 / existing disk image).
+
+.Bl -hang -width "create"
+.It Sy blank
+.Op Sy --format Ar format
+.Op Sy --size Ar size
+.Op Sy --volumeName Ar name
+.Ar image-path
+.br
+Creates a blank disk image.
+
+The disk image will be created at
+.Sy image-path.
+Should be a writable path.
+
+.Sy format
+.Bl -bullet -offset indent
+.It
+RAW     - RAW read-write format (previously known as UDRW)
+.It
+UDSB    - Sparse bundle
+.El
+
+.Sy name
+creates an APFS filesystem with the requested volume name on the image (default: untitled).
+
+.Sy size
+allows to specify the size of the newly created image, see SIZES.
+
+.El
+.Bl -hang -width "create"
+.It Sy from
+.Op Sy --format Ar format
+.Op Sy --source Ar source
+.br
+Creates a disk image from source (e.g. disk3 or disk image URL). 
+
+The disk image will be created at
+.Sy image-path.
+Should be a writable path.
+
+.Sy format
+.Bl -bullet -offset indent
+.It
+RAW     - RAW read-write format (previously known as UDRW)
+.It
+UDRO    - UDIF read-only uncompressed
+.It
+UDZO    - UDIF read-only zlib-compressed
+.It
+ULFO    - UDIF read-only lzfse-compressed
+.It
+ULMO    - UDIF read-only lzma-compressed
+.It
+UDSB    - Sparse bundle
+.El
+
+.Sy source
+should be the source for the disk image to be created from (e.g. disk3 / existing disk image).
+.El
+.\"
+.\"             -- DiskImage > resize --
+.It Sy resize
+.Op Sy -s, --size
+.Op Sy --image-only
+.Ar image-url
+.br
+Resizes an existing disk image represented by
+.Sy image-url
+.
+.br
+Prints disk image resize limits when no
+.Sy size
+is specified.
+
+In case the image contains a resizable filesystem (e.g. APFS) it will be resized and image limits will be calculated accordingly.
+
+In case the image contains one or more partitions, only the last one will be resized based on the input.
+
+Only GPT partition tables are supported or partition-less images with APFS.
+
+The image should not be attached prior to resizing.
+
+.Sy size
+The new size of the disk image, should not exceed the size from the disk image limits. Can be either size from size section (see SIZES) or 'min' to resize to minimum size as reported by diskutil.
+
+.Sy image-only
+Will only resize the disk image and adjust a secondary GPT table to the new size if there is one.
+
 .\"
 .\" List-End-DiskImageVerbs
 .El
@@ -2747,11 +2885,35 @@ diskutil partitionDisk disk3 APM HFS+ vol1 15% Journaled\\ HFS+ vol2 R Journaled
 .Pp
 Attach a 100MiB RAM disk image
 .br
-diskutil image attach -mountPolicy=noMount ram://100MiB
+diskutil image attach --mountPolicy=noMount ram://100MiB
 .Pp
 Attach a read-only disk image at some specified mount point
 .br
-diskutil image attach -readOnly -mountPoint /tmp/myMountPoint /tmp/myImage.dmg
+diskutil image attach --readOnly --mountPoint /tmp/myMountPoint /tmp/myImage.dmg
+.Pp
+Creating a blank 100MiB disk image with UDSB format
+.br
+diskutil image create -s 100MiB -f UDSB /tmp/myImage.dmg
+.Pp
+Creating a blank 100MiB disk image with APFS volume named MyVolume
+.br
+diskutil image create -s 100MiB --volumeName MyVolume /tmp/myImage.dmg
+.Pp
+Creating a disk image from an existing disk
+.br
+diskutil image create from --source disk3 /tmp/myImage.dmg
+.Pp
+Resizing a disk image:
+.br
+diskutil image resize --size 100G /tmp/my.dmg
+.Pp
+Resize to minimal size:
+.br
+diskutil image resize --size min /tmp/my.dmg
+.Pp
+Print resize limits in plist format
+.br
+diskutil image resize --plist /tmp/my.dmg
 .\"
 .\"
 .\"

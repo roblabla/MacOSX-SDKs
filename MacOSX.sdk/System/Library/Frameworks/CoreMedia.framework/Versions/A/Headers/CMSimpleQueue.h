@@ -75,7 +75,7 @@ enum
 	@abstract	A reference to a CMSimpleQueue, a CF object that implements a simple lockless queue of (void *) elements.
 		
 */
-typedef struct CM_BRIDGED_TYPE(id) opaqueCMSimpleQueue *CMSimpleQueueRef API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0));
+typedef struct CM_BRIDGED_TYPE(id) opaqueCMSimpleQueue *CMSimpleQueueRef API_AVAILABLE(macos(10.7), ios(5.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
 
 //=============================================================================
 

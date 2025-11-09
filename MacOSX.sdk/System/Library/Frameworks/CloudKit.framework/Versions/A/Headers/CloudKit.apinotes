@@ -279,6 +279,16 @@ Classes:
 Globals:
 - Name: CKQueryOperationMaximumResults
   SwiftName: CKQueryOperation.maximumResults
+- Name: CKRecordRecordIDKey
+  SwiftPrivate: true
+- Name: CKRecordCreatorUserRecordIDKey
+  SwiftPrivate: true
+- Name: CKRecordCreationDateKey
+  SwiftPrivate: true
+- Name: CKRecordLastModifiedUserRecordIDKey
+  SwiftPrivate: true
+- Name: CKRecordModificationDateKey
+  SwiftPrivate: true
 - Name: CKRecordParentKey
   SwiftPrivate: true
 - Name: CKRecordShareKey

@@ -51,6 +51,8 @@ extern "C"
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Wdocumentation"
 
+#if TARGET_OS_OSX || TARGET_OS_MACCATALYST
+
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    Types
 
@@ -510,7 +512,7 @@ struct  CMIOHardwarePlugInInterface
                         Float64                 frameNumber,
                         Boolean                 playOnCue);
     
-} API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
+} API_DEPRECATED("Use CMIOExtension instead", macos(10.7, 12.3));
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    CMIOObject Functions
@@ -538,7 +540,7 @@ extern OSStatus
 CMIOObjectCreate(   CMIOHardwarePlugInRef   owningPlugIn,
                     CMIOObjectID            owningObjectID,
                     CMIOClassID             classID,
-					CMIOObjectID*           objectID) API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
+					CMIOObjectID*           objectID) API_DEPRECATED("Use CMIOExtension instead", macos(10.7, 12.3));
 
 /*!
     @function       CMIOObjectsPublishedAndDied
@@ -567,7 +569,7 @@ CMIOObjectsPublishedAndDied(    CMIOHardwarePlugInRef   owningPlugIn,
                                 UInt32                  numberPublishedCMIOObjects,
                                 const CMIOObjectID      publishedCMIOObjects[],
                                 UInt32                  numberDeadCMIOObjects,
-								const CMIOObjectID      deadCMIOObjects[]) API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
+								const CMIOObjectID      deadCMIOObjects[]) API_DEPRECATED("Use CMIOExtension instead", macos(10.7, 12.3));
 
 /*!
     @function       CMIOObjectPropertiesChanged
@@ -589,7 +591,7 @@ extern OSStatus
 CMIOObjectPropertiesChanged(    CMIOHardwarePlugInRef           owningPlugIn,
                                 CMIOObjectID                    objectID,
                                 UInt32                          numberAddresses,
-								const CMIOObjectPropertyAddress addresses[]) API_DEPRECATED_WITH_REPLACEMENT("CMIOExtension", macos(10.7, 12.3));
+								const CMIOObjectPropertyAddress addresses[]) API_DEPRECATED("Use CMIOExtension instead", macos(10.7, 12.3));
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 #pragma mark    CMIODevice Functions
@@ -606,6 +608,9 @@ CMIOObjectPropertiesChanged(    CMIOHardwarePlugInRef           owningPlugIn,
 */
 
 //---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+#endif // TARGET_OS_OSX || TARGET_OS_MACCATALYST
+
 #pragma clang diagnostic pop
 #pragma pack(pop)
     

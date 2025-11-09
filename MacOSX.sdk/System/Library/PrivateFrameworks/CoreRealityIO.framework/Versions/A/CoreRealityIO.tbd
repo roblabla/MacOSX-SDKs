@@ -2,11 +2,14 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/CoreRealityIO.framework/Versions/A/CoreRealityIO'
-current-version: 76.4
+current-version: 76.7
 exports:
   - targets:         [ x86_64-macos ]
-    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPKcmEEE, __ZTINSt3__110__function6__baseIFvvEEE, 
-                       __ZTSNSt3__110__function6__baseIFvPKcmEEE, __ZTSNSt3__110__function6__baseIFvvEEE ]
+    weak-symbols:    [ __ZTINSt3__110__function6__baseIFvPKcmEEE, __ZTINSt3__110__function6__baseIFvbEEE, 
+                       __ZTINSt3__110__function6__baseIFvfEEE, __ZTINSt3__110__function6__baseIFviPfS2_EEE, 
+                       __ZTINSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110__function6__baseIFvPKcmEEE, 
+                       __ZTSNSt3__110__function6__baseIFvbEEE, __ZTSNSt3__110__function6__baseIFvfEEE, 
+                       __ZTSNSt3__110__function6__baseIFviPfS2_EEE, __ZTSNSt3__110__function6__baseIFvvEEE ]
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GetCoreRealityIOBundleVersion, _IsCoreRIOBundleVersionValid, 
                        _RIOBuilderAnyValueDirtyPropertyDescriptorCopyMetadataDescriptors, 

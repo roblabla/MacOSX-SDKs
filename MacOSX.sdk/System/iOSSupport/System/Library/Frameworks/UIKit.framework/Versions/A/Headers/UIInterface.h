@@ -19,8 +19,8 @@ typedef NS_ENUM(NSInteger, UIBarStyle) {
     UIBarStyleDefault          = 0,
     UIBarStyleBlack            = 1,
     
-    UIBarStyleBlackOpaque API_UNAVAILABLE(tvos) API_DEPRECATED("Use UIBarStyleBlack instead.", ios(2.0, 13.0)) = 1,
-    UIBarStyleBlackTranslucent API_UNAVAILABLE(tvos) API_DEPRECATED("Use UIBarStyleBlack and set the translucent property to YES instead.", ios(2.0, 13.0)) = 2,
+    UIBarStyleBlackOpaque API_UNAVAILABLE(tvos, visionos) API_DEPRECATED("Use UIBarStyleBlack instead.", ios(2.0, 13.0)) = 1,
+    UIBarStyleBlackTranslucent API_UNAVAILABLE(tvos, visionos) API_DEPRECATED("Use UIBarStyleBlack and set the translucent property to YES instead.", ios(2.0, 13.0)) = 2,
 } API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UIUserInterfaceSizeClass) {
@@ -73,7 +73,7 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceLevel) {
     UIUserInterfaceLevelUnspecified = -1,
     UIUserInterfaceLevelBase,
     UIUserInterfaceLevelElevated
-} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos, watchos);
 
 typedef NS_ENUM(NSInteger, UIUserInterfaceActiveAppearance) {
     UIUserInterfaceActiveAppearanceUnspecified = -1,
@@ -87,6 +87,17 @@ typedef NS_ENUM(NSInteger, UINSToolbarItemPresentationSize) {
     UINSToolbarItemPresentationSizeSmall = 1,
     UINSToolbarItemPresentationSizeLarge = 3
 } API_AVAILABLE(macCatalyst(16.0));
+
+typedef NS_ENUM(NSInteger, UIImageDynamicRange) {
+    /// Do not specify a preferred dynamic range.
+    UIImageDynamicRangeUnspecified = -1,
+    /// Restrict the image content dynamic range to the standard range.
+    UIImageDynamicRangeStandard = 0,
+    /// Allow image content to use some extended range. This is appropriate for mixing content with standard and high dynamic ranges.
+    UIImageDynamicRangeConstrainedHigh = 1,
+    /// Allow image content to use unrestricted extended range.
+    UIImageDynamicRangeHigh = 2
+} API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
 
 // System colors
 
@@ -233,11 +244,11 @@ typedef NS_ENUM(NSInteger, UINSToolbarItemPresentationSize) {
 
 /* groupTableViewBackgroundColor is now the same as systemGroupedBackgroundColor.
  */
-@property(class, nonatomic, readonly) UIColor *groupTableViewBackgroundColor API_DEPRECATED_WITH_REPLACEMENT("systemGroupedBackgroundColor", ios(2.0, 13.0), tvos(13.0, 13.0));
+@property(class, nonatomic, readonly) UIColor *groupTableViewBackgroundColor API_DEPRECATED_WITH_REPLACEMENT("systemGroupedBackgroundColor", ios(2.0, 13.0), tvos(13.0, 13.0)) API_UNAVAILABLE(visionos);
 
-@property(class, nonatomic, readonly) UIColor *viewFlipsideBackgroundColor API_DEPRECATED("", ios(2.0, 7.0)) API_UNAVAILABLE(tvos);
-@property(class, nonatomic, readonly) UIColor *scrollViewTexturedBackgroundColor API_DEPRECATED("", ios(3.2, 7.0)) API_UNAVAILABLE(tvos);
-@property(class, nonatomic, readonly) UIColor *underPageBackgroundColor API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(tvos);
+@property(class, nonatomic, readonly) UIColor *viewFlipsideBackgroundColor API_DEPRECATED("", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+@property(class, nonatomic, readonly) UIColor *scrollViewTexturedBackgroundColor API_DEPRECATED("", ios(3.2, 7.0))  API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+@property(class, nonatomic, readonly) UIColor *underPageBackgroundColor API_DEPRECATED("", ios(5.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 

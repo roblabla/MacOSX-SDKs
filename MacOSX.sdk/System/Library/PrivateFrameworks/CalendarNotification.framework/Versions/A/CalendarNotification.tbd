@@ -50,7 +50,8 @@ exports:
                        _kCALNTriggeredEventNotificationSnoozeUntil5MinutesBeforeActionIdentifier, 
                        _kCALNTriggeredEventNotificationSnoozeUntilEndActionIdentifier, 
                        _kCALNTriggeredEventNotificationSnoozeUntilStartActionIdentifier, 
-                       _kCALNTriggeredEventTopicIdentifier, _kDeclineActionIdentifier ]
+                       _kCALNTriggeredEventTopicIdentifier, _kDeclineActionIdentifier, 
+                       _kHypothesisStaleTimeInterval, _kTravelEngineAlarmPrefix ]
     objc-classes:    [ CALNBundle, CALNCLCoreLocationProvider, CALNCUIKIconProvider, 
                        CALNCUIKTravelAdvisoryDescriptionGenerator, CALNCalAnalyticsHandler, 
                        CALNCalendarCoreLocationManager, CALNCalendarResourceChangedNotificationEKDataSource, 

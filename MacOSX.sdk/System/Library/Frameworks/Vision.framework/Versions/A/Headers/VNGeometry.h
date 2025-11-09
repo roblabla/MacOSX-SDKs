@@ -84,6 +84,21 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 
 
 
+/*!
+@class VNPoint3D
+@brief VNPoint3D represents a single, immutable, three-dimensional point in an image.
+@discussion It should be noted that VNPoint3D is not intended as an overall replacement of simd float4x4, but is used by observations that need to present points which may contain additional metadata.
+ */
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0))
+@interface VNPoint3D : NSObject < NSCopying, NSSecureCoding >
+
+- (instancetype) init NS_UNAVAILABLE;
+- (nullable instancetype)initWithPosition:(simd_float4x4)position NS_DESIGNATED_INITIALIZER;
+
+@property (readonly) simd_float4x4 position;
+
+@end
+
 
 
 /*!

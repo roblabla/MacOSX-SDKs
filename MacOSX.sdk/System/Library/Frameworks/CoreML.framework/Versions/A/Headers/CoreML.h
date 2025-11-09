@@ -37,6 +37,7 @@
 #import <CoreML/MLModelConfiguration.h>
 
 #import <CoreML/MLModel+MLModelCompilation.h>
+#import <CoreML/MLModel+MLComputeDevice.h>
 
 #import <CoreML/MLModelError.h>
 
@@ -60,3 +61,9 @@
 #import <CoreML/MLModelCollection.h>
 #import <CoreML/MLModelCollectionEntry.h>
 #import <CoreML/MLModelAsset.h>
+
+#import <CoreML/MLAllComputeDevices.h>
+#import <CoreML/MLComputeDeviceProtocol.h>
+#import <CoreML/MLCPUComputeDevice.h>
+#import <CoreML/MLGPUComputeDevice.h>
+#import <CoreML/MLNeuralEngineComputeDevice.h>

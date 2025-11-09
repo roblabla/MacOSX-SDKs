@@ -1,4 +1,4 @@
-framework module NetworkExtension [extern_c] {
+framework module NetworkExtension [system] {
   umbrella header "NetworkExtension.h"
   export *
 }

@@ -137,7 +137,7 @@ API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos, watchos
  * argument is set to NULL. This argument may be NULL.
  *
  * @result
- * True if the service was successfully registered, otherwise false.
+ * YES if the service was successfully registered, otherwise NO.
  *
  * @discussion
  * If the service corresponds to a LoginItem bundle, the helper will be started immediately and on subsequent
@@ -178,7 +178,7 @@ API_AVAILABLE(macos(13.0), macCatalyst(16.0)) API_UNAVAILABLE(ios, tvos, watchos
  * argument is set to NULL. This argument may be NULL.
  *
  * @result
- * True if the service was successfully unregistered, otherwise false.
+ * YES if the service was successfully unregistered, otherwise NO.
  *
  * @discussion
  * If the service corresponds to a LoginItem, LaunchAgent, or LaunchDaemon and the service is currently

@@ -32,7 +32,9 @@ typedef NS_ENUM(NSInteger, EKEventViewAction) {
 */
 @protocol EKEventViewDelegate;
 
+#ifdef __APPLE_BLEACH_SDK__
 NS_EXTENSION_UNAVAILABLE_IOS("EventKitUI is not supported in extensions")
+#endif
 EVENTKITUI_CLASS_AVAILABLE(4_0)
 @interface EKEventViewController : UIViewController
 
@@ -67,7 +69,9 @@ EVENTKITUI_CLASS_AVAILABLE(4_0)
 
 @end
 
+#ifdef __APPLE_BLEACH_SDK__
 NS_EXTENSION_UNAVAILABLE_IOS("EventKitUI is not supported in extensions")
+#endif
 @protocol EKEventViewDelegate <NSObject>
 @required
 

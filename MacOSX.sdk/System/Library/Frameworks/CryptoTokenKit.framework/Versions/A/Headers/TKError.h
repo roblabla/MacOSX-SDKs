@@ -12,7 +12,7 @@ TK_EXTERN NSString *const TKErrorDomain
 API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0), watchos(2.0));
 
 API_AVAILABLE(macos(10.10), ios(9.0), tvos(9.0), watchos(2.0))
-typedef NS_ENUM(NSInteger, TKErrorCode) {
+typedef NS_ERROR_ENUM(TKErrorDomain, TKErrorCode) {
     TKErrorCodeNotImplemented        = -1,
     TKErrorCodeCommunicationError    = -2,
     TKErrorCodeCorruptedData         = -3,

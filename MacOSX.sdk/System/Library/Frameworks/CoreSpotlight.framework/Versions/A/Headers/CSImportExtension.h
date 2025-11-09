@@ -2,7 +2,7 @@
 //  CSImportExtension.h
 //  CoreSpotlight
 //
-//  Copyright © 2021 Apple. All rights reserved.
+//  Copyright © 2020–2021 Apple Inc. All rights reserved.
 //
 
 #import <CoreSpotlight/CSSearchableItemAttributeSet.h>

@@ -15,15 +15,15 @@ exports:
                        _SSModuleIsCompatibleArch, _SSPreflightModuleLoadForPath, 
                        _SSRandomInt, _SSRandomPointForSizeWithinBounds, _SSRunningAsNormalUser, 
                        _SSScreenIsMirrored, _SSScreenSaverWindowLevel, _SSSetCrashReporterSignature, 
-                       _SSSystemScreenSaversPath ]
+                       _SSSystemScreenSaversPath, _SanitizedPathForPath ]
     objc-classes:    [ LegacyScreenSaverExtensionModule, LegacyScreenSaverModule, 
-                       ScreenSaverClockView, ScreenSaverClockWindow, ScreenSaverConfigurationViewController, 
-                       ScreenSaverController, ScreenSaverDefaults, ScreenSaverDefaultsManager, 
-                       ScreenSaverEngine, ScreenSaverExtension, ScreenSaverExtensionContext, 
-                       ScreenSaverExtensionManager, ScreenSaverExtensionModule, ScreenSaverExtensionView, 
-                       ScreenSaverHostExtensionContext, ScreenSaverMessage, ScreenSaverMessageTracerLogger, 
-                       ScreenSaverModule, ScreenSaverModules, ScreenSaverPhotoChooser, 
-                       ScreenSaverView, ScreenSaverViewController, ScreenSaverWindow ]
+                       ScreenSaverConfigurationViewController, ScreenSaverController, 
+                       ScreenSaverDefaults, ScreenSaverDefaultsManager, ScreenSaverEngine, 
+                       ScreenSaverExtension, ScreenSaverExtensionContext, ScreenSaverExtensionManager, 
+                       ScreenSaverExtensionModule, ScreenSaverExtensionView, ScreenSaverHostExtensionContext, 
+                       ScreenSaverMessage, ScreenSaverMessageTracerLogger, ScreenSaverModule, 
+                       ScreenSaverModules, ScreenSaverPhotoChooser, ScreenSaverView, 
+                       ScreenSaverViewController, ScreenSaverWindow ]
     objc-ivars:      [ ScreenSaverModule._archCompatible, ScreenSaverModule._archToUse, 
                        ScreenSaverModule._bundle, ScreenSaverModule._displayName, 
                        ScreenSaverModule._enabled, ScreenSaverModule._hasConfigureSheet, 

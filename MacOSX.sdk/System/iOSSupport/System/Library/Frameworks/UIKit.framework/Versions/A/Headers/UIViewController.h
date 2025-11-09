@@ -32,7 +32,9 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 @class UIPopoverController;
 @class UIStoryboard, UIStoryboardSegue, UIStoryboardUnwindSegueSource;
 @class UIScrollView;
+@class UIContentUnavailableConfiguration, UIContentUnavailableConfigurationState;
 @protocol UIViewControllerTransitionCoordinator;
+@protocol UIContentConfiguration;
 
 typedef NS_ENUM(NSInteger, UIModalTransitionStyle) {
     UIModalTransitionStyleCoverVertical = 0,
@@ -115,51 +117,74 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)loadViewIfNeeded API_AVAILABLE(ios(9.0)); // Loads the view controller's view if it has not already been set.
 @property(nullable, nonatomic, readonly, strong) UIView *viewIfLoaded API_AVAILABLE(ios(9.0)); // Returns the view controller's view if loaded, nil if not.
 
-- (void)viewWillUnload API_DEPRECATED("", ios(5.0, 6.0)) API_UNAVAILABLE(tvos);
-- (void)viewDidUnload API_DEPRECATED("", ios(3.0, 6.0)) API_UNAVAILABLE(tvos); // Called after the view controller's view is released and set to nil. For example, a memory warning which causes the view to be purged. Not invoked as a result of -dealloc.
+- (void)viewWillUnload API_DEPRECATED("", ios(5.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)viewDidUnload API_DEPRECATED("", ios(3.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Called after the view controller's view is released and set to nil. For example, a memory warning which causes the view to be purged. Not invoked as a result of -dealloc.
 
 - (void)viewDidLoad; // Called after the view has been loaded. For view controllers created in code, this is after -loadView. For view controllers unarchived from a nib, this is after the view is set.
 @property(nonatomic, readonly, getter=isViewLoaded) BOOL viewLoaded API_AVAILABLE(ios(3.0));
 
-@property(nullable, nonatomic, readonly, copy) NSString *nibName;     // The name of the nib to be loaded to instantiate the view.
-@property(nullable, nonatomic, readonly, strong) NSBundle *nibBundle; // The bundle from which to load the nib.
-@property(nullable, nonatomic, readonly, strong) UIStoryboard *storyboard API_AVAILABLE(ios(5.0));
+@property(nullable, nonatomic, readonly, copy) NSString *nibName API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));     // The name of the nib to be loaded to instantiate the view.
+@property(nullable, nonatomic, readonly, strong) NSBundle *nibBundle API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0)); // The bundle from which to load the nib.
+@property(nullable, nonatomic, readonly, strong) UIStoryboard *storyboard API_AVAILABLE(ios(5.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
-- (void)performSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender API_AVAILABLE(ios(5.0));
-- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender API_AVAILABLE(ios(6.0)); // Invoked immediately prior to initiating a segue. Return NO to prevent the segue from firing. The default implementation returns YES. This method is not invoked when -performSegueWithIdentifier:sender: is used.
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender API_AVAILABLE(ios(5.0));
+- (void)performSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender API_AVAILABLE(ios(5.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
+- (BOOL)shouldPerformSegueWithIdentifier:(NSString *)identifier sender:(nullable id)sender API_AVAILABLE(ios(6.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0)); // Invoked immediately prior to initiating a segue. Return NO to prevent the segue from firing. The default implementation returns YES. This method is not invoked when -performSegueWithIdentifier:sender: is used.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(nullable id)sender API_AVAILABLE(ios(5.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 // View controllers will receive this message during segue unwinding. The default implementation returns the result of -respondsToSelector: - controllers can override this to perform any ancillary checks, if necessary.
-- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController sender:(nullable id)sender API_AVAILABLE(ios(13.0), tvos(13.0));
-- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender API_DEPRECATED_WITH_REPLACEMENT("canPerformUnwindSegueAction:fromViewController:sender:", ios(6.0, 13.0), tvos(9.0, 13.0));
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController sender:(nullable id)sender API_AVAILABLE(ios(13.0), tvos(13.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
+- (BOOL)canPerformUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(id)sender API_DEPRECATED_WITH_REPLACEMENT("canPerformUnwindSegueAction:fromViewController:sender:", ios(6.0, 13.0), tvos(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
 // Returns a subset of the receiver's childViewControllers in the order they should be searched for an unwind destination.
 // The default implementation first sends itself -childViewControllerContainingSegueSource:, then returns a copy of its childViewControllers array excluding that object. A custom container view controller can override this method to affect the order in which its children are searched, or to modify the result of the default implementation.
 // For compatibility, if a view controller overrides the deprecated -viewControllerForUnwindSegueAction:fromViewController:sender: method, but does not override this method, it will receive the deprecated method instead of this method.
 // To affect this view controller's eligibility as an unwind destination, override -canPerformUnwindSegueAction:fromViewController:sender: instead.
-- (NSArray<UIViewController *> *)allowedChildViewControllersForUnwindingFromSource:(UIStoryboardUnwindSegueSource *)source API_AVAILABLE(ios(9.0));
+- (NSArray<UIViewController *> *)allowedChildViewControllersForUnwindingFromSource:(UIStoryboardUnwindSegueSource *)source API_AVAILABLE(ios(9.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 // Returns the child view controller that contains the provided segue source.
 // Custom container view controllers should call this method from their implementation of -allowedChildViewControllersForUnwindingFromSource: to exclude the result from the returned array, as well as to determine the order of the returned array's contents.
 // Do not try to re-implement or override this method; it takes special care to handle situations such as unwinding from a modally-presented view controller.
-- (nullable UIViewController *)childViewControllerContainingSegueSource:(UIStoryboardUnwindSegueSource *)source API_AVAILABLE(ios(9.0));
+- (nullable UIViewController *)childViewControllerContainingSegueSource:(UIStoryboardUnwindSegueSource *)source API_AVAILABLE(ios(9.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 // Deprecated. Returns a direct child of the receiver that responds YES to -canPerformUnwindSegueAction:fromViewController:sender:, or self if no children respond YES but the receiver itself does. If this method has been overridden, UIViewController's implementation does not consult child view controllers at all, and skips straight to sending -canPerformUnwindSegueAction:... to self.
 // Applications targeting iOS 9 or later should not override this method. Applications can instead override -allowedChildViewControllersForUnwindingFromSource: to guide UIKit’s search for a descendant view controller that returns YES from -canPerformUnwindSegueAction:fromViewController:sender:.
-- (nullable UIViewController *)viewControllerForUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(nullable id)sender API_DEPRECATED("", ios(6.0, 9.0));
+- (nullable UIViewController *)viewControllerForUnwindSegueAction:(SEL)action fromViewController:(UIViewController *)fromViewController withSender:(nullable id)sender API_DEPRECATED("", ios(6.0, 9.0)) API_UNAVAILABLE(visionos);
 
 // Custom container view controllers should override this method to modify themselves as part of an ongoing unwind segue. The subsequentVC is the parent, child, or presented view controller closest to the receiver in the direction of the segue's destinationViewController. For example, UINavigationController's implementation of this method will pop any necessary view controllers to reveal the subsequentVC.
-- (void)unwindForSegue:(UIStoryboardSegue *)unwindSegue towardsViewController:(UIViewController *)subsequentVC API_AVAILABLE(ios(9.0));
+- (void)unwindForSegue:(UIStoryboardSegue *)unwindSegue towardsViewController:(UIViewController *)subsequentVC API_AVAILABLE(ios(9.0)) API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 // Deprecated. This method is only used for unwind segues whose destination view controller has been returned by an override of the deprecated method -viewControllerForUnwindSegueAction:fromViewController:withSender:. In that case, UIKit will choose a view controller to act as the “executor” of the unwind. If the destination view controller is being modally presented, the destination view controller itself is the executor. Otherwise, the destination view controller’s parent view controller is the executor. If the executor overrides this method, UIKit will ignore the Custom Class specified in Interface Builder and instead call this method on the executor to obtain a segue that can perform the unwind.
 // The returned segue object must be able to perform all steps necessary to unwind, including dismissing any intermediate modal presentations or popping any necessary navigation items.
 // Applications targeting iOS 9 or later should not override this method. Custom container view controllers should instead override -unwindForSegue:towardsViewController: to modify their local state as part of a UIKit-generated incremental unwind segue.
-- (nullable UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(nullable NSString *)identifier API_DEPRECATED("", ios(6.0, 9.0));
+- (nullable UIStoryboardSegue *)segueForUnwindingToViewController:(UIViewController *)toViewController fromViewController:(UIViewController *)fromViewController identifier:(nullable NSString *)identifier API_DEPRECATED("", ios(6.0, 9.0)) API_UNAVAILABLE(visionos);
 
-- (void)viewWillAppear:(BOOL)animated;    // Called when the view is about to made visible. Default does nothing
-- (void)viewDidAppear:(BOOL)animated;     // Called when the view has been fully transitioned onto the screen. Default does nothing
-- (void)viewWillDisappear:(BOOL)animated; // Called when the view is dismissed, covered or otherwise hidden. Default does nothing
-- (void)viewDidDisappear:(BOOL)animated;  // Called after the view was dismissed, covered or otherwise hidden. Default does nothing
+/// Called when the view is about to made visible, before it is added to the hierarchy.
+/// Because the view is not yet in the hierarchy at the time this method is called, it
+/// is too early in the appearance transition for many usages. Prefer -viewIsAppearing:
+/// instead of this method when possible. Only use this method when its exact timing
+/// before the appearance transition starts running is desired, such as to set up an
+/// alongside animation with a transition coordinator, or as a counterpart for paired
+/// code in a viewWillDisappear/viewDidDisappear callback that does not rely on the
+/// view or view controller's trait collection or the view hierarchy.
+- (void)viewWillAppear:(BOOL)animated;
+/// Called when the view is becoming visible at the beginning of the appearance transition,
+/// after it has been added to the hierarchy and been laid out by its superview. This method
+/// is very similar to -viewWillAppear: and is always called shortly afterwards (so changes
+/// made in either callback will be visible to the user at the same time), but unlike
+/// -viewWillAppear:, at the time when -viewIsAppearing: is called all of the following are
+/// valid for the view controller and its own view:
+///    - View controller and view's trait collection
+///    - View's superview chain and window
+///    - View's geometry (e.g. frame/bounds, safe area insets, layout margins)
+/// Choose this method instead of -viewWillAppear: by default, as it is a direct replacement
+/// that provides equivalent or superior behavior in nearly all cases.
+- (void)viewIsAppearing:(BOOL)animated API_AVAILABLE(ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+/// Called after the view has fully transitioned to visible, when any transition animations have completed.
+- (void)viewDidAppear:(BOOL)animated;
+/// Called when the view is about to be dismissed, covered, or otherwise hidden.
+- (void)viewWillDisappear:(BOOL)animated;
+/// Called after the view has fully been dismissed, covered, or otherwise hidden, when any transition animations have completed.
+- (void)viewDidDisappear:(BOOL)animated;
 
 // Called just before the view controller's view's layoutSubviews method is invoked. Subclasses can implement as necessary. The default is a no-op.
 - (void)viewWillLayoutSubviews API_AVAILABLE(ios(5.0));
@@ -178,7 +203,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nullable,nonatomic,weak,readonly) UIViewController *parentViewController;
 
 // This property has been replaced by presentedViewController.
-@property(nullable, nonatomic,readonly) UIViewController *modalViewController API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos);
+@property(nullable, nonatomic,readonly) UIViewController *modalViewController API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // The view controller that was presented by this view controller or its nearest ancestor.
 @property(nullable, nonatomic,readonly) UIViewController *presentedViewController  API_AVAILABLE(ios(5.0));
@@ -228,10 +253,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)dismissViewControllerAnimated: (BOOL)flag completion: (void (^ __nullable)(void))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(5.0));
 
 // Display another view controller as a modal child. Uses a vertical sheet transition if animated.This method has been replaced by presentViewController:animated:completion:
-- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos);
+- (void)presentModalViewController:(UIViewController *)modalViewController animated:(BOOL)animated API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Dismiss the current modal child. Uses a vertical sheet transition if animated. This method has been replaced by dismissViewControllerAnimated:completion:
-- (void)dismissModalViewControllerAnimated:(BOOL)animated API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos);
+- (void)dismissModalViewControllerAnimated:(BOOL)animated API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 /*
   Defines the transition style that will be used for this view controller when it is presented modally. Set
@@ -253,11 +278,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // Presentation modes may keep the keyboard visible when not required. Default implementation affects UIModalPresentationFormSheet visibility.
 @property(nonatomic, readonly) BOOL disablesAutomaticKeyboardDismissal API_AVAILABLE(ios(4.3));
 
-@property(nonatomic,assign) BOOL wantsFullScreenLayout API_DEPRECATED("", ios(3.0, 7.0)) API_UNAVAILABLE(tvos); // Deprecated in 7_0, Replaced by the following:
+@property(nonatomic,assign) BOOL wantsFullScreenLayout API_DEPRECATED("", ios(3.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // Deprecated in 7_0, Replaced by the following:
 
 @property(nonatomic,assign) UIRectEdge edgesForExtendedLayout API_AVAILABLE(ios(7.0)); // Defaults to UIRectEdgeAll
-@property(nonatomic,assign) BOOL extendedLayoutIncludesOpaqueBars API_AVAILABLE(ios(7.0)); // Defaults to NO, but bars are translucent by default on 7_0.  
-@property(nonatomic,assign) BOOL automaticallyAdjustsScrollViewInsets API_DEPRECATED("Use UIScrollView's contentInsetAdjustmentBehavior instead", ios(7.0,11.0),tvos(7.0,11.0)); // Defaults to YES
+@property(nonatomic,assign) BOOL extendedLayoutIncludesOpaqueBars API_AVAILABLE(ios(7.0)); // Defaults to NO, but bars are translucent by default on 7_0.
+@property(nonatomic,assign) BOOL automaticallyAdjustsScrollViewInsets API_DEPRECATED("Use UIScrollView's contentInsetAdjustmentBehavior instead", ios(7.0,11.0),tvos(7.0,11.0)) API_UNAVAILABLE(visionos); // Defaults to YES
 
 /* Depending on the value passed in the `edge` parameter, a containing UINavigationController,
  UITabBarController, or both will observe the UIScrollView instance in the
@@ -279,13 +304,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic) CGSize preferredContentSize API_AVAILABLE(ios(7.0));
 
 // These methods control the attributes of the status bar when this view controller is shown. They can be overridden in view controller subclasses to return the desired status bar attributes.
-@property(nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos); // Defaults to UIStatusBarStyleDefault
-@property(nonatomic, readonly) BOOL prefersStatusBarHidden API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos); // Defaults to NO
+@property(nonatomic, readonly) UIStatusBarStyle preferredStatusBarStyle API_AVAILABLE(ios(7.0)) API_DEPRECATED("Has no effect on visionOS", visionos(1.0, 1.0)) API_UNAVAILABLE(tvos); // Defaults to UIStatusBarStyleDefault
+@property(nonatomic, readonly) BOOL prefersStatusBarHidden API_AVAILABLE(ios(7.0)) API_DEPRECATED("Has no effect on visionOS", visionos(1.0, 1.0)) API_UNAVAILABLE(tvos); // Defaults to NO
 // Override to return the type of animation that should be used for status bar changes for this view controller. This currently only affects changes to prefersStatusBarHidden.
-@property(nonatomic, readonly) UIStatusBarAnimation preferredStatusBarUpdateAnimation API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos); // Defaults to UIStatusBarAnimationFade
+@property(nonatomic, readonly) UIStatusBarAnimation preferredStatusBarUpdateAnimation API_AVAILABLE(ios(7.0)) API_DEPRECATED("Has no effect on visionOS", visionos(1.0, 1.0)) API_UNAVAILABLE(tvos); // Defaults to UIStatusBarAnimationFade
 
 // This should be called whenever the return values for the view controller's status bar attributes have changed. If it is called from within an animation block, the changes will be animated along with the rest of the animation block.
-- (void)setNeedsStatusBarAppearanceUpdate API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos);
+- (void)setNeedsStatusBarAppearanceUpdate API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos, visionos);
 
 /* This method returns either itself or the nearest ancestor that can perform the given action and, if applicable, has overridden UIViewController's default implementation of the action method. View controllers can return NO from canPerformAction:withSender: to opt out of being a target for a given action. */
 - (nullable UIViewController *)targetViewControllerForAction:(SEL)action sender:(nullable id)sender API_AVAILABLE(ios(8.0));
@@ -302,9 +327,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
  * `childViewControllerForUserInterfaceStyle`).
  * If the value changes, call `setNeedsUserInterfaceAppearanceUpdate` to apply the change.
  */
-@property (nonatomic, readonly) UIUserInterfaceStyle preferredUserInterfaceStyle API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(watchos); // Defaults to UIUserInterfaceStyleUnspecified
+@property (nonatomic, readonly) UIUserInterfaceStyle preferredUserInterfaceStyle API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios, watchos, visionos); // Defaults to UIUserInterfaceStyleUnspecified
 
-- (void)setNeedsUserInterfaceAppearanceUpdate API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(watchos);
+- (void)setNeedsUserInterfaceAppearanceUpdate API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios, watchos);
 
 /* Set `overrideUserInterfaceStyle` to cause this view controller and its children to have a
  * specific `UIUserInterfaceStyle`. This does not affect the application or any parent view controllers.
@@ -316,13 +341,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 // To make it more convenient for applications to adopt rotation, a view controller may implement the below methods. Your UIWindow's frame should use [UIScreen mainScreen].bounds as its frame.
 @interface UIViewController (UIViewControllerRotation)
 
-+ (void)attemptRotationToDeviceOrientation API_DEPRECATED("Please use instance method `setNeedsUpdateOfSupportedInterfaceOrientations`.", ios(5.0, 16.0)) API_UNAVAILABLE(tvos);
++ (void)attemptRotationToDeviceOrientation API_DEPRECATED("Please use instance method `setNeedsUpdateOfSupportedInterfaceOrientations`.", ios(5.0, 16.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
 
 // Applications should use supportedInterfaceOrientations and/or shouldAutorotate.
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(tvos);
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation API_DEPRECATED("", ios(2.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // New Autorotation support.
-@property(nonatomic, readonly) BOOL shouldAutorotate API_DEPRECATED("Update supported interface orientations and call setNeedsUpdateOfSupportedInterfaceOrientations to indicate a change.", ios(6.0, 16.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly) BOOL shouldAutorotate API_DEPRECATED("Update supported interface orientations and call setNeedsUpdateOfSupportedInterfaceOrientations to indicate a change.", ios(6.0, 16.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
 @property(nonatomic, readonly) UIInterfaceOrientationMask supportedInterfaceOrientations API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos);
 // Returns interface orientation masks.
 @property(nonatomic, readonly) UIInterfaceOrientation preferredInterfaceOrientationForPresentation API_AVAILABLE(ios(6.0)) API_UNAVAILABLE(tvos);
@@ -332,20 +357,20 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)setNeedsUpdateOfSupportedInterfaceOrientations API_AVAILABLE(ios(16.0));
 
 // The rotating header and footer views will slide out during the rotation and back in once it has completed.
-- (nullable UIView *)rotatingHeaderView API_DEPRECATED("Header views are animated along with the rest of the view hierarchy", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);     // Must be in the view hierarchy. Default returns nil.
+- (nullable UIView *)rotatingHeaderView API_DEPRECATED("Header views are animated along with the rest of the view hierarchy", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);     // Must be in the view hierarchy. Default returns nil.
 - (nullable UIView *)rotatingFooterView API_DEPRECATED("Footer views are animated along with the rest of the view hierarchy", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);     // Must be in the view hierarchy. Default returns nil.
 
-@property(nonatomic,readonly) UIInterfaceOrientation interfaceOrientation API_DEPRECATED("", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic,readonly) UIInterfaceOrientation interfaceOrientation API_DEPRECATED("", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 // Notifies when rotation begins, reaches halfway point and ends.
-- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("Implement viewWillTransitionToSize:withTransitionCoordinator: instead", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);
-- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation API_DEPRECATED("", ios(2.0, 8.0)) API_UNAVAILABLE(tvos);
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("Implement viewWillTransitionToSize:withTransitionCoordinator: instead", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation API_DEPRECATED("", ios(2.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
-- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("Implement viewWillTransitionToSize:withTransitionCoordinator: instead", ios(3.0, 8.0)) API_UNAVAILABLE(tvos);
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("Implement viewWillTransitionToSize:withTransitionCoordinator: instead", ios(3.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
-- (void)willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(tvos);
-- (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(tvos); // The rotating header and footer views are offscreen.
-- (void)willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(tvos); // A this point, our view orientation is set to the new orientation.
+- (void)willAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (void)didAnimateFirstHalfOfRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // The rotating header and footer views are offscreen.
+- (void)willAnimateSecondHalfOfRotationFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation duration:(NSTimeInterval)duration API_DEPRECATED("", ios(2.0, 5.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // A this point, our view orientation is set to the new orientation.
 
 @end
 
@@ -362,7 +387,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @interface UIViewController (UISearchDisplayControllerSupport)
 
-@property(nullable, nonatomic, readonly, strong) UISearchDisplayController *searchDisplayController API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(tvos);
+@property(nullable, nonatomic, readonly, strong) UISearchDisplayController *searchDisplayController API_DEPRECATED("", ios(3.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @end
 
@@ -421,15 +446,15 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 - (void)endAppearanceTransition __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_5_0);
 
 // Override to return a child view controller or nil. If non-nil, that view controller's status bar appearance attributes will be used. If nil, self is used. Whenever the return values from these methods change, -setNeedsStatusBarAppearanceUpdate should be called.
-@property(nonatomic, readonly, nullable) UIViewController *childViewControllerForStatusBarStyle API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos);
-@property(nonatomic, readonly, nullable) UIViewController *childViewControllerForStatusBarHidden API_AVAILABLE(ios(7.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly, nullable) UIViewController *childViewControllerForStatusBarStyle API_AVAILABLE(ios(7.0)) API_DEPRECATED("Has no effect on visionOS", visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic, readonly, nullable) UIViewController *childViewControllerForStatusBarHidden API_AVAILABLE(ios(7.0)) API_DEPRECATED("Has no effect on visionOS", visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
 
 // Call to modify the trait collection for child view controllers.
-- (void)setOverrideTraitCollection:(nullable UITraitCollection *)collection forChildViewController:(UIViewController *)childViewController API_AVAILABLE(ios(8.0));
-- (nullable UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController API_AVAILABLE(ios(8.0));
+- (void)setOverrideTraitCollection:(nullable UITraitCollection *)collection forChildViewController:(UIViewController *)childViewController API_DEPRECATED("Use the traitOverrides property on the child view controller instead", ios(8.0, 17.0), visionos(1.0, 1.0));
+- (nullable UITraitCollection *)overrideTraitCollectionForChildViewController:(UIViewController *)childViewController API_DEPRECATED("Use the traitOverrides property on the child view controller instead", ios(8.0, 17.0), visionos(1.0, 1.0));
 
 // Override to return a child view controller or nil. If non-nil, that view controller's preferred user interface style will be used. If nil, self is used. Whenever the preferredUserInterfaceStyle for a view controller has changed setNeedsUserInterfaceAppearanceUpdate should be called.
-@property (nonatomic, readonly, nullable) UIViewController *childViewControllerForUserInterfaceStyle API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios, watchos);
+@property (nonatomic, readonly, nullable) UIViewController *childViewControllerForUserInterfaceStyle API_AVAILABLE(tvos(11.0)) API_UNAVAILABLE(ios, watchos, visionos);
 
 @end
 
@@ -444,8 +469,8 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
   willAnimateRotationToInterfaceOrientation:duration: didRotateFromInterfaceOrientation:
 */
 
-- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers API_DEPRECATED("", ios(5.0, 6.0)) API_UNAVAILABLE(tvos);
-- (BOOL)shouldAutomaticallyForwardRotationMethods API_DEPRECATED("Manually forward viewWillTransitionToSize:withTransitionCoordinator: if necessary", ios(6.0, 8.0)) API_UNAVAILABLE(tvos);
+- (BOOL)automaticallyForwardAppearanceAndRotationMethodsToChildViewControllers API_DEPRECATED("", ios(5.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+- (BOOL)shouldAutomaticallyForwardRotationMethods API_DEPRECATED("Manually forward viewWillTransitionToSize:withTransitionCoordinator: if necessary", ios(6.0, 8.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 @property(nonatomic, readonly) BOOL shouldAutomaticallyForwardAppearanceMethods API_AVAILABLE(ios(6.0));
 
@@ -482,10 +507,10 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 
 @interface UIViewController (UIConstraintBasedLayoutCoreMethods)
 /* Base implementation sends -updateConstraints to the view.
-    When a view has a view controller, this message is sent to the view controller during 
+    When a view has a view controller, this message is sent to the view controller during
      the Auto Layout updateConstraints pass in lieu of sending updateConstraints directly
      to the view.
-    You may override this method in a UIViewController subclass for updating custom 
+    You may override this method in a UIViewController subclass for updating custom
      constraints instead of subclassing your view and overriding -[UIView updateConstraints].
     Overrides must call super or send -updateConstraints to the view.
  */
@@ -502,8 +527,8 @@ UIKIT_EXTERN NSExceptionName const UIViewControllerHierarchyInconsistencyExcepti
 
 @interface UIViewController (UILayoutSupport)
 // These objects may be used as layout items in the NSLayoutConstraint API
-@property(nonatomic,readonly,strong) id<UILayoutSupport> topLayoutGuide API_DEPRECATED("Use view.safeAreaLayoutGuide.topAnchor instead of topLayoutGuide.bottomAnchor", ios(7.0,11.0), tvos(7.0,11.0));
-@property(nonatomic,readonly,strong) id<UILayoutSupport> bottomLayoutGuide API_DEPRECATED("Use view.safeAreaLayoutGuide.bottomAnchor instead of bottomLayoutGuide.topAnchor", ios(7.0,11.0), tvos(7.0,11.0));
+@property(nonatomic,readonly,strong) id<UILayoutSupport> topLayoutGuide API_DEPRECATED("Use view.safeAreaLayoutGuide.topAnchor instead of topLayoutGuide.bottomAnchor", ios(7.0,11.0), tvos(7.0,11.0)) API_UNAVAILABLE(visionos);
+@property(nonatomic,readonly,strong) id<UILayoutSupport> bottomLayoutGuide API_DEPRECATED("Use view.safeAreaLayoutGuide.bottomAnchor instead of bottomLayoutGuide.topAnchor", ios(7.0,11.0)) API_UNAVAILABLE(visionos);
 
 /* Custom container UIViewController subclasses can use this property to add to the overlay
  that UIViewController calculates for the safeAreaInsets for contained view controllers.
@@ -575,15 +600,15 @@ NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerPreviewing <NSObject>
 
 // This gesture can be used to cause the previewing presentation to wait until one of your gestures fails or to allow simultaneous recognition during the initial phase of the preview presentation.
-@property (nonatomic, readonly) UIGestureRecognizer *previewingGestureRecognizerForFailureRelationship API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
+@property (nonatomic, readonly) UIGestureRecognizer *previewingGestureRecognizerForFailureRelationship API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
-@property (nonatomic, readonly) id<UIViewControllerPreviewingDelegate> delegate API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
-@property (nonatomic, readonly) UIView *sourceView API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
+@property (nonatomic, readonly) id<UIViewControllerPreviewingDelegate> delegate API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
+@property (nonatomic, readonly) UIView *sourceView API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
 // This rect will be set to the bounds of sourceView before each call to
 // -previewingContext:viewControllerForLocation:
 
-@property (nonatomic) CGRect sourceRect API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
+@property (nonatomic) CGRect sourceRect API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
 @end
 
@@ -592,16 +617,16 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @protocol UIViewControllerPreviewingDelegate <NSObject>
 
 // If you return nil, a preview presentation will not be performed
-- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
-- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
+- (nullable UIViewController *)previewingContext:(id <UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
+- (void)previewingContext:(id <UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
 @end
 
 @interface UIViewController (UIViewControllerPreviewingRegistration)
 
 // Registers a view controller to participate with 3D Touch preview (peek) and commit (pop).
-- (id <UIViewControllerPreviewing>)registerForPreviewingWithDelegate:(id<UIViewControllerPreviewingDelegate>)delegate sourceView:(UIView *)sourceView API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
-- (void)unregisterForPreviewingWithContext:(id <UIViewControllerPreviewing>)previewing API_DEPRECATED_WITH_REPLACEMENT("UIContextMenuInteraction", ios(9.0, 13.0));
+- (id <UIViewControllerPreviewing>)registerForPreviewingWithDelegate:(id<UIViewControllerPreviewingDelegate>)delegate sourceView:(UIView *)sourceView API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
+- (void)unregisterForPreviewingWithContext:(id <UIViewControllerPreviewing>)previewing API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
 @end
 
@@ -648,14 +673,68 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 
 @end
 
+@interface UIViewController ()
+
+/// Setting a content unavailable configuration replaces the existing content unavailable view of the view controller with a new content unavailable view instance from the configuration,
+/// or directly applies the configuration to the existing content unavailable view if the configuration is compatible with the existing content unavailable view type.
+/// The default value is nil.
+@property (nonatomic, copy, nullable) id<UIContentConfiguration> contentUnavailableConfiguration API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+/// Returns the current content unavailable configuration state for the view.
+/// To add your own custom state(s), override the getter and call super to obtain an instance with the
+/// system properties set, then set your own custom states as desired.
+@property (nonatomic, readonly) UIContentUnavailableConfigurationState *contentUnavailableConfigurationState API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+/// Requests the view update its content unavailable configuration for its current state. This method is called automatically
+/// when the view's `contentUnavailableConfigurationState` may have changed, as well as in other circumstances where an
+/// update may be required. Multiple requests may be coalesced into a single update at the appropriate time.
+- (void)setNeedsUpdateContentUnavailableConfiguration API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+/// Subclasses should override this method and update the content unavailable's configuration using the state provided.
+/// This method should not be called directly, use `setNeedsUpdateContentUnavailableConfiguration` to request an update.
+- (void)updateContentUnavailableConfigurationUsingState:(UIContentUnavailableConfigurationState *)state API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+@end
+
 @protocol UIPreviewActionItem;
 
 @interface UIViewController ()
 
-@property(nonatomic, readonly) NSArray <id <UIPreviewActionItem>> *previewActionItems API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0));
+@property(nonatomic, readonly) NSArray <id <UIPreviewActionItem>> *previewActionItems API_DEPRECATED("UIViewControllerPreviewing is deprecated. Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
 @end
 
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+@interface UIViewController () <UITraitChangeObservable>
+
+@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides;
+
+/// Forces an immediate trait update for this view controller and its view, including any view
+/// controllers and views in this subtree. Any trait change callbacks are sent synchronously.
+- (void)updateTraitsIfNeeded;
+
+@end
+
+typedef NS_ENUM(NSInteger, UIContainerBackgroundStyle) {
+    UIContainerBackgroundStyleAutomatic,
+    UIContainerBackgroundStyleGlass,
+    UIContainerBackgroundStyleHidden
+} API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+@interface UIViewController ()
+
+// Indicates the view controller's preference to be displayed on top of a background.
+// The default value is automatic.
+@property (nonatomic, readonly) UIContainerBackgroundStyle preferredContainerBackgroundStyle API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+// Override this on a custom container view controller to delegate the preference to a child
+// view controller.
+@property (nonatomic, nullable, readonly) UIViewController *childViewControllerForPreferredContainerBackgroundStyle API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+// Needs to be called when `preferredContainerBackgroundStyle` changes.
+- (void)setNeedsUpdateOfPreferredContainerBackgroundStyle API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+@end
 
 UIKIT_EXTERN API_AVAILABLE(ios(9.0)) NS_SWIFT_UI_ACTOR
 @protocol UIPreviewActionItem <NSObject>
@@ -668,7 +747,7 @@ typedef NS_ENUM(NSInteger,UIPreviewActionStyle) {
     UIPreviewActionStyleDestructive,
 } API_AVAILABLE(ios(9.0));
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @interface UIPreviewAction : NSObject <NSCopying,UIPreviewActionItem>
 
 @property(nonatomic, copy, readonly) void (^handler)(id<UIPreviewActionItem> action, UIViewController *previewViewController);
@@ -677,7 +756,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInt
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(9.0)) API_DEPRECATED("Please use UIContextMenuInteraction.", ios(9.0, 13.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @interface UIPreviewActionGroup : NSObject <NSCopying,UIPreviewActionItem>
 + (instancetype)actionGroupWithTitle:(NSString *)title style:(UIPreviewActionStyle)style actions:(NSArray<UIPreviewAction *> *)actions;
 @end

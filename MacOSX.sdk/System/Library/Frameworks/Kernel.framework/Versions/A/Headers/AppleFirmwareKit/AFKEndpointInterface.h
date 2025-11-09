@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.100.8) generated from AFKEndpointInterface.iig */
+/* iig(DriverKit-324.0.10) generated from AFKEndpointInterface.iig */
 
 /* AFKEndpointInterface.iig:1-24 */
 /*
@@ -293,7 +293,7 @@ public:\
 \
     virtual AFKUserMemoryDescriptor *\
     allocateBuffer(\
-        buffer_options options,\
+        unsigned char * options,\
         uint64_t capacity) APPLE_KEXT_OVERRIDE;\
 \
     virtual void\
@@ -313,7 +313,7 @@ public:\
         unsigned int packetType,\
         uint64_t timestamp,\
         PayloadBuffer reportBuffer,\
-        endpoint_options options = 0) APPLE_KEXT_OVERRIDE;\
+        unsigned char * options = 0) APPLE_KEXT_OVERRIDE;\
 \
     virtual IOReturn\
     enqueueCommand(\
@@ -322,7 +322,7 @@ public:\
         uint64_t timestamp,\
         PayloadBuffer commandBuffer,\
         PayloadBuffer responseBuffer,\
-        endpoint_options options = 0,\
+        unsigned char * options = 0,\
         IOService * forClient = nullptr) APPLE_KEXT_OVERRIDE;\
 \
     virtual IOReturn\
@@ -331,7 +331,7 @@ public:\
         IOReturn result,\
         uint64_t timestamp,\
         PayloadBuffer responseBuffer,\
-        endpoint_options options = 0) APPLE_KEXT_OVERRIDE;\
+        unsigned char * options = 0) APPLE_KEXT_OVERRIDE;\
 \
 
 
@@ -366,7 +366,7 @@ public:
         uint32_t options) = 0;
 
     virtual AFKUserMemoryDescriptor *
-    allocateBuffer(buffer_options options,
+    allocateBuffer(unsigned char * options,
         uint64_t capacity) = 0;
 
     virtual void
@@ -382,7 +382,7 @@ public:
     enqueueReport(unsigned int packetType,
         uint64_t timestamp,
         PayloadBuffer reportBuffer,
-        endpoint_options options) = 0;
+        unsigned char * options) = 0;
 
     virtual IOReturn
     enqueueCommand(void * context,
@@ -390,7 +390,7 @@ public:
         uint64_t timestamp,
         PayloadBuffer commandBuffer,
         PayloadBuffer responseBuffer,
-        endpoint_options options,
+        unsigned char * options,
         IOService * forClient) = 0;
 
     virtual IOReturn
@@ -398,7 +398,7 @@ public:
         IOReturn result,
         uint64_t timestamp,
         PayloadBuffer responseBuffer,
-        endpoint_options options) = 0;
+        unsigned char * options) = 0;
 
     bool
     open_Call(IOService * forClient,
@@ -410,7 +410,7 @@ public:
         uint32_t options)  { return close(forClient, handler, options); };\
 
     AFKUserMemoryDescriptor *
-    allocateBuffer_Call(buffer_options options,
+    allocateBuffer_Call(unsigned char * options,
         uint64_t capacity)  { return allocateBuffer(options, capacity); };\
 
     void
@@ -426,7 +426,7 @@ public:
     enqueueReport_Call(unsigned int packetType,
         uint64_t timestamp,
         PayloadBuffer reportBuffer,
-        endpoint_options options)  { return enqueueReport(packetType, timestamp, reportBuffer, options); };\
+        unsigned char * options)  { return enqueueReport(packetType, timestamp, reportBuffer, options); };\
 
     IOReturn
     enqueueCommand_Call(void * context,
@@ -434,7 +434,7 @@ public:
         uint64_t timestamp,
         PayloadBuffer commandBuffer,
         PayloadBuffer responseBuffer,
-        endpoint_options options,
+        unsigned char * options,
         IOService * forClient)  { return enqueueCommand(context, packetType, timestamp, commandBuffer, responseBuffer, options, forClient); };\
 
     IOReturn
@@ -442,7 +442,7 @@ public:
         IOReturn result,
         uint64_t timestamp,
         PayloadBuffer responseBuffer,
-        endpoint_options options)  { return enqueueResponse(id, result, timestamp, responseBuffer, options); };\
+        unsigned char * options)  { return enqueueResponse(id, result, timestamp, responseBuffer, options); };\
 
 };
 

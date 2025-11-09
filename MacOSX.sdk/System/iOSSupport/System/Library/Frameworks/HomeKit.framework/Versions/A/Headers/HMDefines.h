@@ -5,6 +5,8 @@
 //      Copyright (c) 2013-2015 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
 #ifndef HM_EXTERN
 #ifdef __cplusplus
 #define HM_EXTERN extern "C" __attribute__((visibility("default")))

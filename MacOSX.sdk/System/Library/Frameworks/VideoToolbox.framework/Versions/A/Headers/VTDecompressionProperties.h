@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-	Copyright © 2007-2020 Apple Inc. All rights reserved.
+	Copyright © 2007-2023 Apple Inc. All rights reserved.
   
 	Standard Video Toolbox decompression properties.
 */
@@ -137,7 +137,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_MaxOutputPresentationTim
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDependencies API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read-only, CFBoolean
 
 #pragma mark Hardware acceleration
-#if !TARGET_OS_IPHONE
+
 /*!
 	@constant	kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder
 	@abstract
@@ -149,7 +149,7 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_ContentHasInterframeDepe
 		this property can be set to kCFBooleanFalse.
 		In MacOS 10.15 and later, hardware decode is enabled in VTDecompressionSessions by default.
 */
-VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // CFBoolean, Optional, true by default
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(17.0), tvos(17.0)); // CFBoolean, Optional, true by default
 
 /*!
 	@constant	kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder
@@ -169,7 +169,7 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_EnableHardwareAccelerat
 			- the requested decoding format or configuration is not supported
 			- the hardware decode resources on the machine are busy
 */
-VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)); // CFBoolean, Optional
+VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequireHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(17.0), tvos(17.0)); // CFBoolean, Optional
 
 /*!
 	@constant	kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder
@@ -180,8 +180,7 @@ VT_EXPORT const CFStringRef kVTVideoDecoderSpecification_RequireHardwareAccelera
 		accelerated decode using kVTVideoDecoderSpecification_EnableHardwareAcceleratedVideoDecoder
 		to see if a hardware accelerated decoder was selected.
 */
-VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(8.0), tvos(10.2)) ; // CFBoolean, Read; assumed false by default
-#endif // !TARGET_OS_IPHONE
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingHardwareAcceleratedVideoDecoder API_AVAILABLE(macosx(10.9), ios(17.0), tvos(17.0)) ; // CFBoolean, Read; assumed false by default
 	
 #pragma mark Decoder behavior
 
@@ -429,10 +428,36 @@ VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_UsingGPURegistryID API_A
 	@abstract
 		This controls whether or not to propagate any per frame HDR
 		display metadata from the input compressed bitstream to the output pixel buffer.
-	@discussion
 */
 VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_PropagatePerFrameHDRDisplayMetadata API_AVAILABLE(macosx(11.0), ios(14.0), tvos(14.0)); // Read/write, CFBoolean, Optional, default is kCFBooleanTrue
 
+/*!
+	@constant       kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata
+	@abstract
+		Generates Per Frame HDR Metadata and attaches it to the resulting decoded CVPixelBuffers.
+	@discussion
+		If the color space and YCbCrMatrix matches a supported HDR format such as HLG (kCMFormatDescriptionTransferFunction_ITU_R_2100_HLG)
+		the decoded frame will be analyzed and metadata will be added as an attachment to the CVPixelBuffer.
+*/
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_GeneratePerFrameHDRDisplayMetadata API_AVAILABLE(macosx(14.0), ios(17.0)); // CFBoolean, Read/Write, Optional, kCFBooleanFalse by default
+
+
+#pragma mark Multi-image decompression
+
+/*!
+    @constant	kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs
+    @abstract
+        Requests multi-image decoding of specific MV-HEVC VideoLayerIDs.
+    @discussion
+        MV-HEVC specific.
+        Requires that the VTDecompressionSession client use VTDecompressionSessionSetMultiImageCallback to install a callback capable of receiving CMTaggedBufferGroups in response to multi-image DecodeFrame requests.
+        The property value is a CFArray containing VideoLayerIDs as CFNumbers.
+        MV-HEVC VideoLayerIDs not in this list do not need to be output, and the decoder may skip decoding them if not otherwise necessary.
+        The property is NULL by default.
+        If this property is NULL, MV-HEVC shall be decoded ignoring layers other than the base layer.
+        Terminology note: in multi-image decompression, a single video sample (from one CMSampleBuffer) contains a single frame (with one PTS) that is decoded to produce multiple images.
+ */
+VT_EXPORT const CFStringRef kVTDecompressionPropertyKey_RequestedMVHEVCVideoLayerIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
 
 	
 CM_ASSUME_NONNULL_END

@@ -68,8 +68,8 @@ typedef NS_OPTIONS(NSInteger, NSStringDrawingOptions) {
 
 /************************ Deprecated ************************/
 @interface NSStringDrawingContext (NSStringDrawingContextDeprecated)
-@property (nonatomic) CGFloat minimumTrackingAdjustment API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(tvos);
-@property (nonatomic, readonly) CGFloat actualTrackingAdjustment API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(tvos);
+@property (nonatomic) CGFloat minimumTrackingAdjustment API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
+@property (nonatomic, readonly) CGFloat actualTrackingAdjustment API_DEPRECATED("", ios(6.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 @end
 
 #endif // UIKIT_HAS_UIFOUNDATION_SYMBOLS

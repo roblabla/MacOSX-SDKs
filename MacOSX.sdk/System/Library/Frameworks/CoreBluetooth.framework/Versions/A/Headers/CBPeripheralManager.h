@@ -142,7 +142,10 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
  */
 
 - (instancetype)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate
-						   queue:(nullable dispatch_queue_t)queue __TVOS_PROHIBITED __WATCHOS_PROHIBITED 
+						   queue:(nullable dispatch_queue_t)queue API_AVAILABLE(ios(6.0), macos(10.9)) API_UNAVAILABLE(watchos, tvos)
+#if TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 ;
 /*!
  *  @method initWithDelegate:queue:options:
@@ -161,7 +164,10 @@ CB_EXTERN_CLASS @interface CBPeripheralManager : CBManager
 
 - (instancetype)initWithDelegate:(nullable id<CBPeripheralManagerDelegate>)delegate
                            queue:(nullable dispatch_queue_t)queue
-                         options:(nullable NSDictionary<NSString *, id> *)options NS_AVAILABLE(10_9, 7_0) NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+                         options:(nullable NSDictionary<NSString *, id> *)options API_AVAILABLE(ios(7.0), macos(10.9)) API_UNAVAILABLE(watchos, tvos) NS_DESIGNATED_INITIALIZER
+#if TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 ;
 
 /*!

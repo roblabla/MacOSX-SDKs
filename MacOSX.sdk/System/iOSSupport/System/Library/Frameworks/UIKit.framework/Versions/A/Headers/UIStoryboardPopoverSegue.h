@@ -13,7 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIPopoverController;
 
-UIKIT_EXTERN API_DEPRECATED("Access destinationViewController.popoverPresentationController from your segue's performHandler or override of -perform", ios(5.0, 9.0)) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("Access destinationViewController.popoverPresentationController from your segue's performHandler or override of -perform", ios(5.0, 9.0)) API_UNAVAILABLE(visionos) NS_SWIFT_UI_ACTOR
 @interface UIStoryboardPopoverSegue : UIStoryboardSegue {
 }
 

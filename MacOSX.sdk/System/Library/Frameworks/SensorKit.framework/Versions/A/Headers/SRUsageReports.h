@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @class SRNotificationUsage;
 @class SRWebUsage;
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRDeviceUsageReport : NSObject
 
 /// The duration of this report
@@ -57,9 +57,9 @@ typedef NS_ENUM(NSInteger, SRTextInputSessionType) {
     SRTextInputSessionTypeThirdPartyKeyboard,
     SRTextInputSessionTypePencil,
     SRTextInputSessionTypeDictation,
-} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+} API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
-SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRTextInputSession : NSObject
 
 @property (readonly) NSTimeInterval duration;
@@ -71,10 +71,10 @@ SR_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
  *
  * @brief Unique identifier of keyboard session
  */
-@property (readonly) NSString *sessionIdentifier API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+@property (readonly, copy) NSString *sessionIdentifier API_AVAILABLE(ios(16.4)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRApplicationUsage : NSObject
 
 /// The bundle identifier of the app in use. Only populated for Apple apps.
@@ -145,9 +145,9 @@ typedef NS_ENUM(NSInteger, SRNotificationEvent) {
     SRNotificationEventDeduped,
     SRNotificationEventDeviceActivated,
     SRNotificationEventDeviceUnlocked,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRNotificationUsage : NSObject
 
 /// The bundle identifier of the application that corresponds to the notification. Only populated for Apple apps.
@@ -157,12 +157,12 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRWebUsage : NSObject
 @property (readonly) NSTimeInterval totalUsageTime;
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRMessagesUsageReport : NSObject
 
 @property (readonly) NSTimeInterval duration;
@@ -172,7 +172,7 @@ SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos
 
 @end
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos)
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos)
 @interface SRPhoneUsageReport : NSObject
 
 @property (readonly) NSTimeInterval duration;

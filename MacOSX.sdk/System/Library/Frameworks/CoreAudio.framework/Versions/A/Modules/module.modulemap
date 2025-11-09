@@ -1,4 +1,4 @@
-framework module CoreAudio [extern_c]
+framework module CoreAudio
 {
 	umbrella header "CoreAudio.h"
 

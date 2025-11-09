@@ -204,6 +204,35 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
 #endif
 ;
 
+#if defined(DOXYGEN)
+    typedef enum MPSFloatDataTypeBit
+#else
+    typedef NS_ENUM(uint32_t, MPSFloatDataTypeBit)
+#endif
+{
+    MPSFloatDataTypeSignBit = 0x00800000,     // 1 bit of sign
+    MPSFloatDataTypeExponentBit = 0x007C0000, // 5 bits of exponent
+    MPSFloatDataTypeMantissaBit = 0x0003FC00, // 8 bits of mantissa
+}
+#if defined(DOXYGEN)
+MPSFloatDataTypeBit
+#endif
+    ;
+
+#if defined(DOXYGEN)
+    typedef enum MPSFloatDataTypeShift
+#else
+    typedef NS_ENUM(uint32_t, MPSFloatDataTypeShift)
+#endif
+{
+    MPSFloatDataTypeSignShift = 23,     // 1 bit of sign
+    MPSFloatDataTypeExponentShift = 18, // 5 bits of exponent
+    MPSFloatDataTypeMantissaShift = 10, // 8 bits of mantissa
+}
+#if defined(DOXYGEN)
+MPSFloatDataTypeShift
+#endif
+    ;
     
 /*! @enum        MPSDataType
  *  @discussion A value to specify a type of data.
@@ -216,6 +245,7 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
  *
  *  @constant   MPSDataTypeFloat32      32-bit floating point (single-precision).
  *  @constant   MPSDataTypeFloat16      16-bit floating point (half-precision).  (IEEE-754-2008 float16 exchange format)
+ *  @constant   MPSDataTypeBFloat16    16-bit brain floating point (1 sign bit, 8 exponent bits, 7 mantissa bits)
  *  @constant   MPSDataTypeInt8         Signed 8-bit integer.
  *  @constant   MPSDataTypeInt16        Signed 16-bit integer.
  *  @constant   MPSDataTypeUInt8        Unsigned 8-bit integer. Not normalized
@@ -235,8 +265,8 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
     MPSDataTypeInvalid MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) MPS_SWIFT_NAME(invalid) = 0,
     
     MPSDataTypeFloatBit MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = 0x10000000,
-    MPSDataTypeFloat32  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MPSDataTypeFloatBit | 32,
-    MPSDataTypeFloat16  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0)) = MPSDataTypeFloatBit | 16,
+    MPSDataTypeFloat32 MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MPSDataTypeFloatBit | 32,
+    MPSDataTypeFloat16 MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0)) = MPSDataTypeFloatBit | 16,
 
     MPSDataTypeComplexBit MPS_ENUM_AVAILABLE_STARTING( macos(13.1), ios(16.2), macCatalyst(16.2), tvos(16.2)) = 0x01000000,
     MPSDataTypeComplexFloat32  MPS_ENUM_AVAILABLE_STARTING( macos(13.1), ios(16.2), macCatalyst(16.2), tvos(13.1)) = MPSDataTypeFloatBit | MPSDataTypeComplexBit | 64,
@@ -256,8 +286,9 @@ typedef NS_ENUM(NSUInteger, MPSImageFeatureChannelFormat)
     MPSDataTypeUInt32  MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(10.0), macCatalyst(13.0), tvos(10.0))   = 32,
     MPSDataTypeUInt64  MPS_ENUM_AVAILABLE_STARTING( macos(11.0), ios(14.1), macCatalyst(14.1), tvos(14.1))    = 64,
 
-    MPSDataTypeAlternateEncodingBit MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))                       = 0x80000000,
-    MPSDataTypeBool                 MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))                       = MPSDataTypeAlternateEncodingBit | 8,
+    MPSDataTypeAlternateEncodingBit MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))         = 0x80000000,
+    MPSDataTypeBool                 MPS_ENUM_AVAILABLE_STARTING( macos(12.0), ios(15.0), tvos(15.0))         = MPSDataTypeAlternateEncodingBit | 8,
+    MPSDataTypeBFloat16 MPS_ENUM_AVAILABLE_STARTING( macos(14.0), ios(16.0), tvos(16.0))                     = MPSDataTypeAlternateEncodingBit | MPSDataTypeFloat16,
 
     // unsigned normalized  (see for example Metal's unorm8 and unorm16 pixel formats). Range: [0, 1.0]
     MPSDataTypeNormalizedBit MPS_ENUM_AVAILABLE_STARTING( macos(10.13), ios(11.0), macCatalyst(13.0), tvos(11.0))   = 0x40000000,

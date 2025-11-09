@@ -43,6 +43,13 @@ exports:
                        '_$s11ShazamKitUI21MatchingFlowViewModelC18sizeUpdatedHandlerySo6CGSizeVcSgvpMV', 
                        '_$s11ShazamKitUI21MatchingFlowViewModelC18sizeUpdatedHandlerySo6CGSizeVcSgvsTj', 
                        '_$s11ShazamKitUI21MatchingFlowViewModelC18sizeUpdatedHandlerySo6CGSizeVcSgvsTq', 
+                       '_$s11ShazamKitUI21MatchingFlowViewModelC19cancellationHandleryycSgvMTj', 
+                       '_$s11ShazamKitUI21MatchingFlowViewModelC19cancellationHandleryycSgvMTq', 
+                       '_$s11ShazamKitUI21MatchingFlowViewModelC19cancellationHandleryycSgvgTj', 
+                       '_$s11ShazamKitUI21MatchingFlowViewModelC19cancellationHandleryycSgvgTq', 
+                       '_$s11ShazamKitUI21MatchingFlowViewModelC19cancellationHandleryycSgvpMV', 
+                       '_$s11ShazamKitUI21MatchingFlowViewModelC19cancellationHandleryycSgvsTj', 
+                       '_$s11ShazamKitUI21MatchingFlowViewModelC19cancellationHandleryycSgvsTq', 
                        '_$s11ShazamKitUI21MatchingFlowViewModelC5stateAA0dE5StateOvMTj', 
                        '_$s11ShazamKitUI21MatchingFlowViewModelC5stateAA0dE5StateOvMTq', 
                        '_$s11ShazamKitUI21MatchingFlowViewModelC5stateAA0dE5StateOvgTj', 
@@ -64,6 +71,16 @@ exports:
                        '_$s11ShazamKitUI21MatchingFlowViewModelCMn', '_$s11ShazamKitUI21MatchingFlowViewModelCMo', 
                        '_$s11ShazamKitUI21MatchingFlowViewModelCMu', '_$s11ShazamKitUI21MatchingFlowViewModelCN', 
                        '_$s11ShazamKitUI21MatchingFlowViewModelCfD', '_$s11ShazamKitUI21MatchingFlowViewModelCfd', 
-                       '_$sSo19SHMediaLibraryTrackCs12Identifiable11ShazamKitUIMc' ]
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV05SwiftC00G0AAMc', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV10$viewModel05SwiftC014ObservedObjectV7WrapperVyAA0efgI0C_Gvg', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV10$viewModel05SwiftC014ObservedObjectV7WrapperVyAA0efgI0C_GvpMV', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV4bodyQrvg', '_$s11ShazamKitUI23AmbientMatchingFlowViewV4bodyQrvpMV', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV4bodyQrvpQOMQ', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV9viewModelAA0efgI0CvM', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV9viewModelAA0efgI0Cvg', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV9viewModelAA0efgI0CvpMV', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewV9viewModelAA0efgI0Cvs', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewVMa', '_$s11ShazamKitUI23AmbientMatchingFlowViewVMn', 
+                       '_$s11ShazamKitUI23AmbientMatchingFlowViewVN', '_$sSo19SHMediaLibraryTrackCs12Identifiable11ShazamKitUIMc' ]
     objc-classes:    [ SHListeningLayer ]
 ...

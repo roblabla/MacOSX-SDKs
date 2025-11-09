@@ -310,15 +310,21 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 
 #endif
 
+/// Indicates that this image is tagged for display of high dynamic range content.
+@property(nonatomic, assign, readonly) BOOL isHighDynamicRange API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+/// Returns a new image that will render within the standard range.
+- (UIImage *)imageRestrictedToStandardDynamicRange API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
 @end
 
 @interface UIImage (PreconfiguredSystemImages)
 
-@property (class, readonly, strong) UIImage *actionsImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white ellipsis on tinted filled circle
-@property (class, readonly, strong) UIImage *addImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white + on green filled circle
-@property (class, readonly, strong) UIImage *removeImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white - on red filled circle
-@property (class, readonly, strong) UIImage *checkmarkImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white ✓ on tinted filled circle
-@property (class, readonly, strong) UIImage *strokedCheckmarkImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)); // currently: white ✓ on tinted filled and white stroked circle
+@property (class, readonly, strong) UIImage *actionsImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
+@property (class, readonly, strong) UIImage *addImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
+@property (class, readonly, strong) UIImage *removeImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
+@property (class, readonly, strong) UIImage *checkmarkImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
+@property (class, readonly, strong) UIImage *strokedCheckmarkImage API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
 
 @end
 
@@ -360,8 +366,12 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_SENDABLE
 @end
 #endif
 
-UIKIT_EXTERN  NSData * __nullable UIImagePNGRepresentation(UIImage * __nonnull image);                               // return image as PNG. May return nil if image has no CGImageRef or invalid bitmap format
-UIKIT_EXTERN  NSData * __nullable UIImageJPEGRepresentation(UIImage * __nonnull image, CGFloat compressionQuality);  // return image as JPEG. May return nil if image has no CGImageRef or invalid bitmap format. compression is 0(most)..1(least)
+/// return image as PNG. May return nil if image has no CGImageRef or invalid bitmap format
+UIKIT_EXTERN NSData * __nullable UIImagePNGRepresentation(UIImage * __nonnull image) NS_SWIFT_NAME(UIImage.pngData(self:));
+/// return image as JPEG. May return nil if image has no CGImageRef or invalid bitmap format. compression is 0(most)..1(least)
+UIKIT_EXTERN NSData * __nullable UIImageJPEGRepresentation(UIImage * __nonnull image, CGFloat compressionQuality) NS_SWIFT_NAME(UIImage.jpegData(self:compressionQuality:));
+/// Returns HEIC data representing the image, or nil if such a representation could not be generated. HEIC is recommended for efficiently storing all kinds of images, including those with high dynamic range content.
+UIKIT_EXTERN NSData * __nullable UIImageHEICRepresentation(UIImage * __nonnull image) API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_NAME(UIImage.heicData(self:));
 
 NS_HEADER_AUDIT_END(nullability, sendability)
 

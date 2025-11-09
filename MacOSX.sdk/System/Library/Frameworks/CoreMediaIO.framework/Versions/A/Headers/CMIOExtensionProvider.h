@@ -18,21 +18,21 @@ NS_ASSUME_NONNULL_BEGIN
 @abstract
  The CoreMediaIO extension info dictionary key.
 */
-FOUNDATION_EXTERN NSString * const CMIOExtensionInfoDictionaryKey API_AVAILABLE(macos(12.3));
+FOUNDATION_EXTERN NSString * const CMIOExtensionInfoDictionaryKey API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 @constant CMIOExtensionMachServiceNameKey
 @abstract
  A key contained in the Info.plist that specifies the mach service name.
 */
-FOUNDATION_EXTERN NSString * const CMIOExtensionMachServiceNameKey API_AVAILABLE(macos(12.3));
+FOUNDATION_EXTERN NSString * const CMIOExtensionMachServiceNameKey API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 @class CMIOExtensionProviderProperties
 @abstract
  A CMIOExtensionProviderProperties describes CoreMediaIO extension provider properties.
 */
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @interface CMIOExtensionProviderProperties : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -102,7 +102,7 @@ API_AVAILABLE(macos(12.3))
 
 @end
 
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @protocol CMIOExtensionProviderSource <NSObject>
 @required
 
@@ -173,7 +173,7 @@ API_AVAILABLE(macos(12.3))
 @abstract
  A CMIOExtensionProvider describes a CoreMediaIO extension provider.
 */
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @interface CMIOExtensionProvider : NSObject
 
 /*!
@@ -279,6 +279,20 @@ API_AVAILABLE(macos(12.3))
  The dictionary of properties having changed.
 */
 - (void)notifyPropertiesChanged:(NSDictionary<CMIOExtensionProperty, CMIOExtensionPropertyState *> *)propertyStates;
+
+@end
+
+API_AVAILABLE(macos(14.0), macCatalyst(17.0)) API_UNAVAILABLE(ios, tvos)
+@interface CMIOExtensionProvider (SignalHandling)
+
+/*!
+@method ignoreSIGTERM
+@abstract
+ Directs provider class to ignore the SIGTERM signal.
+@discussion 
+ Call this method if your provider handles SIGTERM signals; NOTE: if so, your handler must call exit.
+*/
++ (void)ignoreSIGTERM;
 
 @end
 

@@ -1,4 +1,4 @@
-.\" Copyright (c) 2000-2022 Apple Inc. All rights reserved.
+.\" Copyright (c) 2000-2023 Apple Inc. All rights reserved.
 .Dd March 15, 2022
 .Dt "leaks" 1
 .Os
@@ -23,11 +23,13 @@
 .Op Fl fullContent
 .Op Fl readonlyContent
 .Op Fl noContent
+.Op Fl fullStackHistory
 .Op Fl diffFrom=<memgraph>
 .Op Fl traceTree Ar address
 .Op Fl referenceTree
 .Op Fl autoreleasePools
 .Op Fl debug=<mode>
+.Op Fl conservative
 .Sh DESCRIPTION
 .Nm leaks
 identifies leaked memory -- memory that the application has allocated, but has been lost and cannot be freed.
@@ -140,6 +142,9 @@ Although that information can be useful for recognizing the contents
 of the buffer and understanding why it might be leaked,
 it could expose confidential information from the process if
 you, for example, file bug reports with that output included.
+.It Fl fullStackHistory
+When generating a memory graph file, include all available MallocStackLogging backtraces,
+including those for historical allocations that have been freed.
 .It Fl diffFrom=<memgraph>
 Show only the new leaks since the specified memgraph.
 .It Fl traceTree Ar address
@@ -169,6 +174,9 @@ This flag offers several additional more detailed modes of output, intended for
 debugging and deeper investigations. Use
 .Fl debug=help
 to get more information about various debug modes.
+.It Fl conservative
+Ignore type information and scan byte-by-byte for pointers, conservatively assuming that all
+references are owning references.
 .It Fl atExit \- Ar command
 Launches the specified command and runs
 .Nm leaks

@@ -23,10 +23,10 @@ typedef NS_ENUM(NSInteger, UIAlertViewStyle) {
 @protocol UIAlertViewDelegate;
 @class UILabel, UIToolbar, UITabBar, UIWindow, UIBarButtonItem, UIPopoverController;
 
-UIKIT_EXTERN API_DEPRECATED("UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead", ios(2.0, 9.0)) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_DEPRECATED("UIAlertView is deprecated. Use UIAlertController with a preferredStyle of UIAlertControllerStyleAlert instead", ios(2.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
 @interface UIAlertView : UIView
 
-- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message delegate:(nullable id /*<UIAlertViewDelegate>*/)delegate cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION NS_EXTENSION_UNAVAILABLE_IOS("Use UIAlertController instead.");
+- (instancetype)initWithTitle:(nullable NSString *)title message:(nullable NSString *)message delegate:(nullable id /*<UIAlertViewDelegate>*/)delegate cancelButtonTitle:(nullable NSString *)cancelButtonTitle otherButtonTitles:(nullable NSString *)otherButtonTitles, ... NS_REQUIRES_NIL_TERMINATION;
 
 - (id)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER;
 - (nullable instancetype) initWithCoder:(NSCoder *)coder NS_DESIGNATED_INITIALIZER;
@@ -63,25 +63,25 @@ UIKIT_EXTERN API_DEPRECATED("UIAlertView is deprecated. Use UIAlertController wi
 
 @end
 
-API_UNAVAILABLE(tvos) NS_SWIFT_UI_ACTOR
+API_UNAVAILABLE(tvos, visionos) NS_SWIFT_UI_ACTOR
 @protocol UIAlertViewDelegate <NSObject>
 @optional
 
 // Called when a button is clicked. The view will be automatically dismissed after this call returns
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0));
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)) API_UNAVAILABLE(visionos);
 
 // Called when we cancel a view (eg. the user clicks the Home button). This is not called when the user clicks the cancel button.
 // If not defined in the delegate, we simulate a click in the cancel button
-- (void)alertViewCancel:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0));
+- (void)alertViewCancel:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)) API_UNAVAILABLE(visionos);
 
-- (void)willPresentAlertView:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0));  // before animation and showing view
-- (void)didPresentAlertView:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0));  // after animation
+- (void)willPresentAlertView:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)) API_UNAVAILABLE(visionos);  // before animation and showing view
+- (void)didPresentAlertView:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)) API_UNAVAILABLE(visionos);  // after animation
 
-- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)); // before animation and hiding view
-- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0));  // after animation
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)) API_UNAVAILABLE(visionos); // before animation and hiding view
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)) API_UNAVAILABLE(visionos);  // after animation
 
 // Called after edits in any of the default fields added by the style
-- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0));
+- (BOOL)alertViewShouldEnableFirstOtherButton:(UIAlertView *)alertView API_DEPRECATED("Use UIAlertController instead.", ios(2.0, 9.0)) API_UNAVAILABLE(visionos);
 
 @end
 

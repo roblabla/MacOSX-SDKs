@@ -9,7 +9,7 @@ exports:
     symbols:         [ _ICLXEntryGetEntities, _ICLXEntryGetTransientLexicon, _InputContextVersionNumber, 
                        _InputContextVersionString, __ICMachTimeToNanoseconds, __ICPersContactOSLogFacility, 
                        __ICPersNamedEntityOSLogFacility, __ICProactiveQuickTypeOSLogFacility, 
-                       _isPqt1ForContactAutofillEnabled, _isPqt2Enabled ]
+                       _isPqt1ForContactAutofillEnabled, _isPqt2Enabled, _isTransientLexiconIngestionV2Enabled ]
     objc-classes:    [ _ICContact, _ICContactRecord, _ICInputContextFactory, _ICInputContextManager, 
                        _ICInternalSource, _ICLexiconManager, _ICLexiconUtilities, 
                        _ICLexiconView, _ICNamedEntityRecord, _ICNamedEntityStore, 

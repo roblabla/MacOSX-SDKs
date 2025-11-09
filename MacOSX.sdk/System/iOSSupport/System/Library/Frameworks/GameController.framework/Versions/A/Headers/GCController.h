@@ -5,22 +5,24 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
-#import <TargetConditionals.h>
+#import <Foundation/Foundation.h>
 
-#import <GameController/GameController.h>
 #import <GameController/GCExtern.h>
+#import <GameController/GCDevice.h>
+#import <GameController/GCControllerInput.h>
+#import <GameController/GCPhysicalInputProfile.h>
+#import <GameController/GCControllerElement.h>
 #import <GameController/GCColor.h>
 
-#if TARGET_OS_OSX
-#import <IOKit/hid/IOHIDBase.h>
-#endif
 
 @class GCMotion;
 @class CHHapticEngine;
 @class GCDeviceHaptics;
 @class GCDeviceLight;
 @class GCDeviceBattery;
-#import <Foundation/Foundation.h>
+@class GCGamepad;
+@class GCMicroGamepad;
+@class GCExtendedGamepad;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -188,6 +190,11 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
 @property (nonatomic) GCControllerPlayerIndex playerIndex;
 
 /**
+ Gets the input profile for the controller.
+ */
+@property (nonatomic, strong, readonly) GCControllerLiveInput *input API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
+
+/**
  Gets the battery information if controller supports one
  
  This property is useful when you try to notify your user to change or charge controller before it runs out of battery life
@@ -327,14 +334,6 @@ API_AVAILABLE(macos(10.9), ios(7.0), tvos(7.0))
  */
 + (GCController *)controllerWithExtendedGamepad API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0));
 
-#if TARGET_OS_OSX
-/**
- Returns YES if the given HID device is supported by the Game Controller framework, and will have an associated GCController instance.
- 
- @note This is not cheap, be sure to cache the result
- */
-+ (BOOL)supportsHIDDevice:(IOHIDDeviceRef)device API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios, tvos);
-#endif
 
 @end
 

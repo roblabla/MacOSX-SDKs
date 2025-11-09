@@ -1,4 +1,4 @@
-framework module AVFAudio [system] [extern_c] {
+framework module AVFAudio [system] {
     umbrella header "AVFAudio.h"
     export *
     module * { export * }

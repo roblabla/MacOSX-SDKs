@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CalDAV.framework/Versions/A/CalDAV'
-current-version: 1123.4.5
+current-version: 1141
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -117,8 +117,8 @@ exports:
                        CalDAVPrincipalSearchPropertySet, CalDAVPrincipalSearchSupport, 
                        CalDAVPropPatchWithFallbackTaskGroup, CalDAVPutCalendarItemTask, 
                        CalDAVRecurrenceSplitAction, CalDAVRecurrenceSplitTaskGroup, 
-                       CalDAVReplyToSharedCalendarInvitationTaskGroup, CalDAVReportJunkTaskGroup, 
-                       CalDAVResourceTypeItem, CalDAVRetrieveSharedCalendarShareesTaskGroup, 
+                       CalDAVReplyToSharedCalendarInvitationTaskGroup, CalDAVReportJunkAction, 
+                       CalDAVReportJunkTaskGroup, CalDAVResourceTypeItem, CalDAVRetrieveSharedCalendarShareesTaskGroup, 
                        CalDAVScheduleCalendarTranspItem, CalDAVScheduleChangesProperty, 
                        CalDAVScheduleResponseDetailsItem, CalDAVScheduleResponseItem, 
                        CalDAVScheduleTask, CalDAVServerVersion, CalDAVSetOfficeHoursTaskGroup, 

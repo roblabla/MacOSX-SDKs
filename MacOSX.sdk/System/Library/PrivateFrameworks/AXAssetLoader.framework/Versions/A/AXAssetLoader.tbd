@@ -14,7 +14,7 @@ exports:
                        AXAssetUpdateMonitor, AXAssetsService, AXCharacterVoiceAssetPolicy, 
                        AXComfortSoundsAssetPolicy, AXElementVisionModelAssetPolicy, 
                        AXIconVisionModelAssetPolicy, AXImageCaptionModel, AXImageCaptionModelAssetAssertion, 
-                       AXImageCaptionModelAssetPolicy, AXLaunchActivityPolicy, AXPhoenixAssetPolicy, 
-                       AXTTSLegacyCombinedVocalizerAssetPolicy, AXTTSLegacyMacinTalkAssetPolicy, 
-                       AXTTSResourceAssetPolicy ]
+                       AXImageCaptionModelAssetPolicy, AXLaunchActivityPolicy, AXMagnifierAssetPolicy, 
+                       AXPhoenixAssetPolicy, AXTTSLegacyCombinedVocalizerAssetPolicy, 
+                       AXTTSLegacyMacinTalkAssetPolicy, AXTTSResourceAssetPolicy ]
 ...

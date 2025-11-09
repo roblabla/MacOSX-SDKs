@@ -23,8 +23,11 @@ NS_CLASS_AVAILABLE(10_8, 5_0)
  @property    calendars
  @abstract    This is now deprecated in favor of -[EKSource calendarsForEntityType:]
  */
-@property(nonatomic, readonly) NSSet<EKCalendar *> *calendars NS_DEPRECATED(NA, NA, 4_0, 6_0);
-
+@property(nonatomic, readonly) NSSet<EKCalendar *> *calendars NS_DEPRECATED(NA, NA, 4_0, 6_0)
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
+;
 
 /*!
  @method      calendarsForEntityType

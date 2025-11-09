@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASEMetaParameterDefinition
     @abstract A base object for metaparameter definitions
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEMetaParameterDefinition : PHASEDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -42,7 +42,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASENumberMetaParameterDefinition
     @abstract A metaparameter that has a numeric value
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASENumberMetaParameterDefinition : PHASEMetaParameterDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -126,7 +126,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEStringMetaParameterDefinition
     @abstract A Metaparameter that has a string value
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEStringMetaParameterDefinition : PHASEMetaParameterDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -165,7 +165,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEMappedMetaParameterDefinition
     @abstract An object to define a Mapped Metaparameter when building an sound event.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEMappedMetaParameterDefinition : PHASENumberMetaParameterDefinition
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -235,7 +235,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEMetaParameter
     @abstract A generic object that represents an active metaparameter in the system
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEMetaParameter : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -262,7 +262,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASENumberMetaParameter
     @abstract An object that represents an active numeric metaparameter in the system
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASENumberMetaParameter : PHASEMetaParameter
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -301,7 +301,7 @@ NS_SWIFT_NAME(fade(value:duration:));
     @interface PHASEStringMetaParameter
     @abstract An object that represents an active string metaparameter in the system
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEStringMetaParameter : PHASEMetaParameter
 
 - (instancetype)init NS_UNAVAILABLE;

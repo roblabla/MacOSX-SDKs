@@ -26,13 +26,13 @@ typedef NS_ENUM(NSInteger, SNTimeDurationConstraintType) {
 	 @discussion In order for a duration to satisfy a constraint of this type, it must be a member of a particular continuous range of permissible values.
 	 */
 	SNTimeDurationConstraintTypeRange = 2,
-} NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0));
+} NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0));
 
 /*!
  @brief Constrains CMTime durations to a subset of legal values.
  @discussion `SNTimeDurationConstraint` is a union type, which, based on the value of its `type` property, may assume one of several forms. Instance properties may be used to extract information from an object, but certain properties are only valid to exercise under certain circumstances. Before accessing a particular property, refer to its documentation to understand what `type` value is required in order for that property to be valid.
  */
-SN_EXPORT NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+SN_EXPORT NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0), visionos(1.0))
 @interface SNTimeDurationConstraint : NSObject
 
 /*!

@@ -4,11 +4,13 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2015-2021 Apple Inc. All rights reserved.
+	Copyright 2015-2023 Apple Inc. All rights reserved.
 
 */
 
 #import <AVFoundation/AVBase.h>
+#if TARGET_OS_OSX
+
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <CoreMedia/CMTimeRange.h>
@@ -148,6 +150,7 @@ typedef NS_ENUM(NSInteger, AVCaptionRegionScroll) {
  @discussion
 	Currently, there is just four predefined region instances. The interface doesn't support configuration of region settings.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVCaptionRegion : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 
@@ -289,6 +292,7 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
  @abstract
 	Mutable subclass of AVCaptionRegion.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVMutableCaptionRegion : AVCaptionRegion
 
@@ -362,6 +366,7 @@ typedef NS_ENUM(NSInteger, AVCaptionAnimation) {
  @discussion
 	A caption contains one meaningful sentence, paragraph, or otherwise known as a caption cue. Within the active time range, it may perform animation (e.g. Karaoke), rolling-up, changes the visibility, or any other dynamic styling.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVCaption : NSObject <NSCopying, NSMutableCopying, NSSecureCoding>
 AV_INIT_UNAVAILABLE
@@ -429,6 +434,7 @@ AV_INIT_UNAVAILABLE
  @abstract
 	Mutable subclass of AVCaption.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVMutableCaption : AVCaption
 
@@ -867,6 +873,12 @@ typedef NS_ENUM(NSInteger, AVCaptionRubyAlignment) {
 	AVCaptionRubyAlignmentDistributeSpaceAround  = 3,
 } API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos);
 
+/*!
+ @class AVCaptionRuby
+ @discussion
+	Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVCaptionRuby : NSObject <NSCopying, NSSecureCoding>
 AV_INIT_UNAVAILABLE
@@ -899,6 +911,8 @@ AV_INIT_UNAVAILABLE
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif // TARGET_OS_OSX
 
 #else
 #import <AVFCore/AVCaption.h>

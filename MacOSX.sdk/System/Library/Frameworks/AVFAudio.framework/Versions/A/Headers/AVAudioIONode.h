@@ -40,6 +40,49 @@ NS_ASSUME_NONNULL_BEGIN
 */
 typedef const AudioBufferList * __nullable (^AVAudioIONodeInputBlock)(AVAudioFrameCount inNumberOfFrames) API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0), tvos(11.0));
 
+/*!
+	@enum       AVAudioVoiceProcessingSpeechActivityEvent
+	@abstract	Types of speech activity events.
+	@constant	AVAudioVoiceProcessingSpeechActivityStarted
+				Speech activity has started.
+	@constant	AVAudioVoiceProcessingSpeechActivityEnded
+				Speech activity has ended.
+*/
+typedef NS_ENUM(NSInteger, AVAudioVoiceProcessingSpeechActivityEvent)
+{
+	AVAudioVoiceProcessingSpeechActivityStarted = 0,
+	AVAudioVoiceProcessingSpeechActivityEnded = 1
+} API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+/*!
+	@enum	AVAudioVoiceProcessingOtherAudioDuckingLevel
+	@abstract Ducking level applied to other (i.e. non-voice) audio by AVAudio voice processing AU.
+	@discussion
+			DuckingLevelDefault = Default ducking level to other audio for typical voice chat.
+			DuckingLevelMin = minimum ducking to other audio.
+			DuckingLevelMid = medium ducking to other audio.
+			DuckingLevelMax = maximum ducking to other audio.
+*/
+typedef NS_ENUM(NSInteger, AVAudioVoiceProcessingOtherAudioDuckingLevel) {
+	AVAudioVoiceProcessingOtherAudioDuckingLevelDefault = 0,
+	AVAudioVoiceProcessingOtherAudioDuckingLevelMin = 10,
+	AVAudioVoiceProcessingOtherAudioDuckingLevelMid = 20,
+	AVAudioVoiceProcessingOtherAudioDuckingLevelMax = 30
+} API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos) NS_SWIFT_NAME(AVAudioVoiceProcessingOtherAudioDuckingConfiguration.Level);
+
+/*!
+	@struct          AVAudioVoiceProcessingOtherAudioDuckingConfiguration
+	@abstract        The configuration of ducking other (i.e. non-voice) audio
+
+	@var             enableAdvancedDucking
+						 Enables advanced ducking which ducks other audio based on the presence of voice activity from local and/or remote chat participants.
+	@var             duckingLevel
+						 Ducking level of other audio
+*/
+typedef struct API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos) AVAudioVoiceProcessingOtherAudioDuckingConfiguration {
+	BOOL enableAdvancedDucking;
+	AVAudioVoiceProcessingOtherAudioDuckingLevel duckingLevel;
+} AVAudioVoiceProcessingOtherAudioDuckingConfiguration API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);
 
 /*!	@class AVAudioIONode
 	@abstract 
@@ -157,7 +200,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(4.0), tvos(11.0))
 
 /*! @property voiceProcessingBypassed
     @abstract
-       Bypass all processing done by the voice processing unit.
+       Bypass all processing for microphone uplink done by the voice processing unit.
     @discussion
        Querying this property when voice processing is disabled will return false.
  */
@@ -165,7 +208,7 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(4.0), tvos(11.0))
 
 /*! @property voiceProcessingAGCEnabled
     @abstract
-        Enable automatic gain control on the processed microphone/uplink
+        Enable automatic gain control on the processed microphone uplink.
         signal. Enabled by default.
     @discussion
         Querying this property when voice processing is disabled will return false.
@@ -177,8 +220,32 @@ API_AVAILABLE(macos(10.10), ios(8.0), watchos(4.0), tvos(11.0))
         Mutes the input of the voice processing unit.
     @discussion
         Querying this property when voice processing is disabled will return false.
-    */
+*/
 @property (nonatomic, getter=isVoiceProcessingInputMuted) BOOL voiceProcessingInputMuted API_AVAILABLE(macos(10.15), ios(13.0), watchos(6.0), tvos(13.0));
+
+/*! @method setMutedSpeechActivityEventListener
+	@abstract
+		Register a listener to be notified when speech activity event occurs while the input is muted.
+	@param listenerBlock
+		The block the engine will call when speech activity event occurs while the input is muted.
+		Passing nil will remove an already set block.
+	@return
+		YES for success
+	@discussion
+		Continuous presence of or lack of speech activity during mute will not cause redundant notification.
+		In order to use this API, it's expected to implement the mute via the voiceProcessingInputMuted.
+*/
+- (BOOL)setMutedSpeechActivityEventListener:(nullable void (^)(AVAudioVoiceProcessingSpeechActivityEvent event))listenerBlock API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+/*! @property voiceProcessingOtherAudioDuckingConfiguration
+	@abstract
+		The configuration of ducking other (i.e. non-voice) audio
+	@discussion
+		Configures the ducking of other (i.e. non-voice) audio, including advanced ducking enablement and ducking level.
+		In general, when other audio is played during voice chat, applying a higher level of ducking could increase the intelligibility of the voice chat.
+		If not set, the default ducking configuration is to disable advanced ducking, with a ducking level set to AVAudioVoiceProcessingOtherAudioDuckingLevelDefault.
+*/
+@property (nonatomic) AVAudioVoiceProcessingOtherAudioDuckingConfiguration voiceProcessingOtherAudioDuckingConfiguration API_AVAILABLE(macos(10.14), ios(17.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

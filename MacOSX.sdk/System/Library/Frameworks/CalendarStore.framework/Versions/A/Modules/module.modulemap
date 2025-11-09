@@ -1,4 +1,4 @@
-framework module CalendarStore [extern_c] {
+framework module CalendarStore [system] {
     umbrella header "CalendarStore.h"
     requires !swift
     export *

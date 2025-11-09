@@ -11,7 +11,9 @@
 */
 
 #import <Foundation/Foundation.h>
-#import "InstallerPane.h"
+#import <InstallerPlugins/InstallerPane.h>
+
+__BEGIN_DECLS
 
 /*!
     @class		InstallerSection
@@ -147,3 +149,5 @@ typedef struct InstallerSection_Private InstallerSection_Private;
 - (BOOL)gotoPane:(InstallerPane *)pane;
 
 @end
+
+__END_DECLS

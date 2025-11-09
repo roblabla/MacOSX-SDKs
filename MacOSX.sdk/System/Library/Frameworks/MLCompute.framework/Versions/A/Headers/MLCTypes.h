@@ -29,7 +29,7 @@ typedef void (^MLCGraphCompletionHandler)(MLCTensor __autoreleasing * _Nullable 
  *  @enum      MLCDataType
  *  @abstract  A tensor data type.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCDataType) {
     MLCDataTypeInvalid NS_SWIFT_UNAVAILABLE("") = 0,
     /*! The 32-bit floating-point data type.
@@ -63,7 +63,7 @@ typedef NS_ENUM(int32_t, MLCDataType) {
  *  @enum      MLCRandomInitializerType
  *  @abstract  An initializer type you use to create a tensor with random data.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCRandomInitializerType) {
     MLCRandomInitializerTypeInvalid       NS_SWIFT_UNAVAILABLE("") = 0,
     /*! The uniform random initializer type.
@@ -84,7 +84,7 @@ typedef NS_ENUM(int32_t, MLCRandomInitializerType) {
  *  @enum       MLCDeviceType
  *  @abstract   A device type for execution of a neural network.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCDeviceType) {
     /*! The CPU device
      */
@@ -112,7 +112,7 @@ typedef NS_ENUM(int32_t, MLCDeviceType) {
  *  @abstract   A bitmask that specifies the options you use when compiling a graph.
  *  @discussion This is passed as an argument to the compileWithOptions method avalable on MLCTrainingGraph and MLCInferenceGraph
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_OPTIONS(uint64_t, MLCGraphCompilationOptions) {
     /*! No graph compilation options.
      */
@@ -151,7 +151,7 @@ typedef NS_OPTIONS(uint64_t, MLCGraphCompilationOptions) {
  *  @enum       MLCExecutionOptions
  *  @abstract   A bitmask that specifies the options you’ll use when executing a graph.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_OPTIONS(uint64_t, MLCExecutionOptions) {
     MLCExecutionOptionsNone = 0x00,
     /*! The option to skip writing input data to device memory.
@@ -201,7 +201,7 @@ typedef NS_OPTIONS(uint64_t, MLCExecutionOptions) {
  *  @enum       MLCArithmeticOperation
  *  @abstract   The list of supported arithmetic operations.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCArithmeticOperation) {
     /*! An operation that calculates the elementwise sum of its two inputs.
      */
@@ -302,7 +302,7 @@ typedef NS_ENUM(int32_t, MLCArithmeticOperation) {
  *  @enum       MLCLossType
  *  @abstract   A loss function.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCLossType) {
     /*! The mean absolute error loss.
      */
@@ -340,7 +340,7 @@ typedef NS_ENUM(int32_t, MLCLossType) {
  * @enum       MLCActivationType
  * @abstract   An activation type that you specify for an activation descriptor.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCActivationType) {
     /*! The identity activation type.
      */
@@ -501,7 +501,7 @@ typedef NS_ENUM(int32_t, MLCActivationType) {
  * @enum       MLCConvolutionType
  * @abstract   A convolution type that you specify for a convolution descriptor.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCConvolutionType) {
     /*! The standard convolution type.
      */
@@ -518,7 +518,7 @@ typedef NS_ENUM(int32_t, MLCConvolutionType) {
  * @enum       MLCPaddingPolicy
  * @abstract   A padding policy that you specify for a convolution or pooling layer.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCPaddingPolicy) {
     /*! The "same" padding policy.
      */
@@ -535,7 +535,7 @@ typedef NS_ENUM(int32_t, MLCPaddingPolicy) {
  *  @enum       MLCPaddingType
  *  @abstract   A padding type that you specify for a padding layer.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCPaddingType) {
     /*! The zero padding type.
      */
@@ -555,7 +555,7 @@ typedef NS_ENUM(int32_t, MLCPaddingType) {
  *  @enum       MLCPoolingType
  *  @abstract   A pooling function type for a pooling layer.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCPoolingType) {
     /*! The max pooling type.
      */
@@ -575,7 +575,7 @@ typedef NS_ENUM(int32_t, MLCPoolingType) {
  *  @enum       MLCReductionType
  *  @abstract   A reduction operation type.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCReductionType) {
     /*! No reduction.
      */
@@ -615,7 +615,7 @@ typedef NS_ENUM(int32_t, MLCReductionType) {
  *  @enum       MLCRegularizationType
  *  @abstract
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCRegularizationType) {
     /*! No regularization.
      */
@@ -632,7 +632,7 @@ typedef NS_ENUM(int32_t, MLCRegularizationType) {
  *  @enum       MLCSampleMode
  *  @abstract   A sampling mode for an upsample layer.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCSampleMode) {
     /*! The nearest sample mode.
      */
@@ -646,7 +646,7 @@ typedef NS_ENUM(int32_t, MLCSampleMode) {
  *  @enum       MLCSoftmaxOperation
  *  @abstract   A softmax operation.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(int32_t, MLCSoftmaxOperation) {
     /*! The standard softmax operation.
      */
@@ -660,7 +660,7 @@ typedef NS_ENUM(int32_t, MLCSoftmaxOperation) {
  * @enum       MLCLSTMResultMode
  * @abstract   A result mode for an LSTM layer.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 typedef NS_ENUM(uint64_t, MLCLSTMResultMode) {
     /*! The output result mode. When selected for an LSTM layer, the layer will produce a single result tensor representing the final output of the LSTM.
      */
@@ -675,7 +675,7 @@ typedef NS_ENUM(uint64_t, MLCLSTMResultMode) {
  *  @enum       MLCComparisonOperation
  *  @abstract   A comparison operation.
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.3, 14.5, 14.5)
 typedef NS_ENUM(int32_t, MLCComparisonOperation) {
     MLCComparisonOperationEqual          = 0,
     MLCComparisonOperationNotEqual       = 1,
@@ -698,7 +698,7 @@ typedef NS_ENUM(int32_t, MLCComparisonOperation) {
  *  @enum       MLCGradientClippingType
  *  @abstract   The type of clipping applied to gradient
  */
-MLCOMPUTE_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(12.0, 15.0, 15.0)
 typedef NS_ENUM(int32_t, MLCGradientClippingType) {
     MLCGradientClippingTypeByValue      = 0,
     MLCGradientClippingTypeByNorm       = 1,

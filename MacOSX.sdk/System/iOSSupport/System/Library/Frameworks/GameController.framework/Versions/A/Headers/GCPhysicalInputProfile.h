@@ -5,6 +5,8 @@
 //  Copyright (c) 2019 Apple Inc. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+#import <GameController/GCExtern.h>
 
 @protocol GCDevice;
 @class GCControllerElement;
@@ -18,8 +20,6 @@
 @compatibility_alias GCDeviceAxisInput GCControllerAxisInput;
 @compatibility_alias GCDeviceDirectionPad GCControllerDirectionPad;
 @compatibility_alias GCDeviceTouchpad GCControllerTouchpad;
-
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

@@ -158,6 +158,7 @@ CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 
 @end
 
+CS_AVAILABLE(10_13, 9_0) CS_TVOS_UNAVAILABLE
 @interface CSSearchableItemAttributeSet (CSMusic)
 
 //The sample rate of the audio data contained in the file. The sample rate is a

@@ -10,14 +10,7 @@
 #define __PKPASS_H
 
 #import <PassKit/PKObject.h>
-
-typedef NS_ENUM(NSUInteger, PKPassType) {
-    PKPassTypeBarcode,
-    PKPassTypeSecureElement API_AVAILABLE(macos(11.0), ios(13.4), watchos(6.2)),
-    PKPassTypePayment API_DEPRECATED("Use PKPassTypeSecureElement instead", macos(10.12, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), watchos(3.0, API_TO_BE_DEPRECATED)) = PKPassTypeSecureElement,
-    
-    PKPassTypeAny = ~(NSUInteger)0
-} API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0));
+#import <PassKit/PKPass_Types.h>
 
 @class PKPaymentPass;
 @class PKSecureElementPass;

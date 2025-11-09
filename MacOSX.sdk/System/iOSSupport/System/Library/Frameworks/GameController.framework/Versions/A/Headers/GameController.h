@@ -15,6 +15,7 @@
 #import <GameController/GCDevicePhysicalInput.h>
 
 #import <GameController/GCPhysicalInputElement.h>
+#import <GameController/GCPhysicalInputSource.h>
 #import <GameController/GCLinearInput.h>
 #import <GameController/GCAxisInput.h>
 #import <GameController/GCRelativeInput.h>

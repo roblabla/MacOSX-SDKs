@@ -207,4 +207,17 @@ CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionS
  */
 CB_EXTERN CBConnectionEventMatchingOption const CBConnectionEventMatchingOptionPeripheralUUIDs CB_CM_API_AVAILABLE;
 
+
+/*!
+ *  @const CBConnectPeripheralOptionEnableAutoReconnect
+ *
+ *  @discussion An NSNumber (Boolean) indicating that the AutoReconnect is enabled for the peripheral is connected. After peripheral device is connected, this will allow
+ *              the system to initiate connect to the peer device automatically when link is dropped. Caller will get notified about the disconnection with potential delay via
+ *              {@link centralManager:didDisconnectPeripheral:timestamp:isReconnecting:error:}
+ *
+ *  @see        connectPeripheral:
+ *
+ */
+CB_EXTERN NSString * const CBConnectPeripheralOptionEnableAutoReconnect NS_AVAILABLE(14_0, 17_0);
+
 NS_ASSUME_NONNULL_END

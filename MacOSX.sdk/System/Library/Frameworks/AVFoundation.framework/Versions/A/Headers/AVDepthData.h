@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, AVDepthDataQuality) {
     AVDepthDataQualityLow    = 0,
     AVDepthDataQualityHigh   = 1,
-} API_AVAILABLE(macos(10.13), ios(11.0), macCatalyst(14.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(10.13), ios(11.0), macCatalyst(14.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 /*
  @enum AVDepthDataAccuracy
@@ -49,7 +49,7 @@ typedef NS_ENUM(NSInteger, AVDepthDataQuality) {
 typedef NS_ENUM(NSInteger, AVDepthDataAccuracy) {
     AVDepthDataAccuracyRelative    = 0,
     AVDepthDataAccuracyAbsolute    = 1,
-} API_AVAILABLE(macos(10.13), ios(11.0), macCatalyst(14.0), tvos(11.0)) API_UNAVAILABLE(watchos);
+} API_AVAILABLE(macos(10.13), ios(11.0), macCatalyst(14.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @class AVDepthDataInternal;
 
@@ -72,7 +72,7 @@ typedef NS_ENUM(NSInteger, AVDepthDataAccuracy) {
  
     When capturing depth data from a camera using AVCaptureDepthDataOutput, AVDepthData objects are delivered to your AVCaptureDepthDataOutputDelegate in a streaming fashion. When capturing depth data along with photos using AVCapturePhotoOutput, depth data is delivered to your AVCapturePhotoCaptureDelegate as a property of an AVCapturePhoto (see -[AVCapturePhotoCaptureDelegate captureOutput:didFinishProcessingPhoto:error:]). When working with image files containing depth information, AVDepthData may be instantiated using information obtained from ImageIO. When editing images containing depth information, derivative AVDepthData objects may be instantiated reflecting the edits that have been performed.
  */
-API_AVAILABLE(macos(10.13), ios(11.0), macCatalyst(14.0), tvos(11.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(10.13), ios(11.0), macCatalyst(14.0), tvos(11.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVDepthData : NSObject
 {
 @private

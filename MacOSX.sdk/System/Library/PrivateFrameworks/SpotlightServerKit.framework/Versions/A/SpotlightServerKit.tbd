@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/SpotlightServerKit.framework/Versions/A/SpotlightServerKit'
-current-version: 2230.18
+current-version: 2268.10
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _BWA_Create, _BWA_DataAllocate, _BWA_DataDeallocate, _CFDataCreateWithContentsOfURL, 
@@ -11,8 +11,8 @@ exports:
                        _MDBootTime, _MDCopyMachPortDescription, _MDDictionaryCreateMutable, 
                        _MDDictionaryIterate, _MDElapsedTime, _MDGetCurrentTimeSpec, 
                        _MDGetPhysicalRAMSize, _MDGetProcessIOPolicy, _MDGetThreadIOPolicy, 
-                       _MDHash, _MDHashQuick32, _MDHashQuick32Pair, _MDHashQuick64, 
-                       _MDHashQuickPtrAsInt, _MDKillTask, _MDMachAbsoluteTimeDiff, 
+                       _MDHash, _MDHash64Quick64, _MDHashQuick32, _MDHashQuick32Pair, 
+                       _MDHashQuick64, _MDHashQuickPtrAsInt, _MDKillTask, _MDMachAbsoluteTimeDiff, 
                        _MDNumberCreateDouble, _MDNumberCreateInt32, _MDNumberCreateInt64, 
                        _MDNumberGetDouble, _MDNumberGetInt32, _MDNumberGetInt64, 
                        _MDRunningInRosetta, _MDRunningIntel32, _MDRunningIntel64, 
@@ -33,7 +33,8 @@ exports:
                        _MDSetCreateMutable, _MDSetIterate, _MDSetProcessIOPolicy, 
                        _MDSetProcessVNodeRapidAging, _MDSetThreadIOPolicy, _MDSetThreadPriority, 
                        _MDSetThreadVNodeRapidAging, _MDTimeInfoCollect, _MDTimeInfoDifference, 
-                       _MDTimeInfoEnd, _MDTimeInfoSum, _MDTimeSinceBoot, _SpotlightServerKitVersionNumber, 
+                       _MDTimeInfoEnd, _MDTimeInfoSum, _MDTimeSinceBoot, _MDUHash32, 
+                       _MDUHash64, _MDUHashIntPtr, _SpotlightServerKitVersionNumber, 
                        _SpotlightServerKitVersionString, _XPCUtil_CopyCFFromArray, 
                        _XPCUtil_CopyCFFromDictionary, _XPCUtil_CopyCFFromObject, 
                        _XPCUtil_CopyXPCObjectFromCF, _XPCUtil_PackCFIntoArray, _XPCUtil_PackCFIntoDictionary, 

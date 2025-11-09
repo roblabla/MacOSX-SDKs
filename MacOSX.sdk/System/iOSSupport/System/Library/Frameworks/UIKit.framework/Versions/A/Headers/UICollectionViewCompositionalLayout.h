@@ -64,30 +64,52 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTO
 @end
 
 typedef NS_ENUM(NSInteger,UICollectionLayoutSectionOrthogonalScrollingBehavior) {
-    // default behavior. Section will layout along main layout axis (i.e. configuration.scrollDirection)
+    // The section will layout along the main layout axis.
     UICollectionLayoutSectionOrthogonalScrollingBehaviorNone,
     
     // NOTE: For each of the remaining cases, the section content will layout orthogonal to the main layout axis (e.g. main layout axis == .vertical, section will scroll in .horizontal axis)
     
-    // Standard scroll view behavior: UIScrollViewDecelerationRateNormal
+    // The section allows users to scroll its content orthogonally with continuous scrolling.
     UICollectionLayoutSectionOrthogonalScrollingBehaviorContinuous,
     
-    // Scrolling will come to rest on the leading edge of a group boundary
+    // The section allows users to scroll its content orthogonally, coming to a natural stop at the leading boundary of the visible group.
     UICollectionLayoutSectionOrthogonalScrollingBehaviorContinuousGroupLeadingBoundary,
     
-    // Standard scroll view paging behavior (UIScrollViewDecelerationRateFast) with page size == extent of the collection view's bounds
+    // The section allows users to page its content orthogonally.
     UICollectionLayoutSectionOrthogonalScrollingBehaviorPaging,
     
-    // Fractional size paging behavior determined by the sections layout group's dimension
+    // The section allows users to page its content orthogonally one group at a time.
     UICollectionLayoutSectionOrthogonalScrollingBehaviorGroupPaging,
     
-    // Same of group paging with additional leading and trailing content insets to center each group's contents along the orthogonal axis
+    // The section allows users to page its content orthogonally one group at a time, centering each group.
     UICollectionLayoutSectionOrthogonalScrollingBehaviorGroupPagingCentered,
 } API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0));
 
 #if UIKIT_HAS_UIFOUNDATION_SYMBOLS
 
 typedef void (^NSCollectionLayoutSectionVisibleItemsInvalidationHandler)(NSArray<id<NSCollectionLayoutVisibleItem>> *visibleItems, CGPoint contentOffset, id<NSCollectionLayoutEnvironment> layoutEnvironment);
+
+typedef CGFloat UICollectionLayoutSectionOrthogonalScrollingDecelerationRate NS_TYPED_ENUM;
+UIKIT_EXTERN const UICollectionLayoutSectionOrthogonalScrollingDecelerationRate UICollectionLayoutSectionOrthogonalScrollingDecelerationRateAutomatic API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+UIKIT_EXTERN const UICollectionLayoutSectionOrthogonalScrollingDecelerationRate UICollectionLayoutSectionOrthogonalScrollingDecelerationRateNormal API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+UIKIT_EXTERN const UICollectionLayoutSectionOrthogonalScrollingDecelerationRate UICollectionLayoutSectionOrthogonalScrollingDecelerationRateFast API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+typedef NS_ENUM(NSInteger, UICollectionLayoutSectionOrthogonalScrollingBounce) {
+    UICollectionLayoutSectionOrthogonalScrollingBounceAutomatic,
+    UICollectionLayoutSectionOrthogonalScrollingBounceAlways,
+    UICollectionLayoutSectionOrthogonalScrollingBounceNever
+} API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
+UIKIT_EXTERN API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)) NS_SWIFT_UI_ACTOR
+@interface UICollectionLayoutSectionOrthogonalScrollingProperties : NSObject <NSCopying>
+
+/// The orthogonal scroll view's rate of deceleration after the user lifts their finger.
+@property(nonatomic) UICollectionLayoutSectionOrthogonalScrollingDecelerationRate decelerationRate;
+
+/// The orthogonal scroll view's bounce behavior.
+@property(nonatomic) UICollectionLayoutSectionOrthogonalScrollingBounce bounce;
+
+@end
 
 UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 @interface NSCollectionLayoutSection : NSObject<NSCopying>
@@ -108,6 +130,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTO
 
 // default is .none
 @property(nonatomic) UICollectionLayoutSectionOrthogonalScrollingBehavior orthogonalScrollingBehavior;
+
+// Properties to configure the orthogonal scrolling section.
+@property(nonatomic,readonly) UICollectionLayoutSectionOrthogonalScrollingProperties *orthogonalScrollingProperties API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
 
 // Supplementaries associated with the boundary edges of the section
 @property(nonatomic,copy) NSArray<NSCollectionLayoutBoundarySupplementaryItem*> *boundarySupplementaryItems;
@@ -247,13 +272,30 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTO
 // dimension is estimated with a point value. Actual size will be determined when the content is rendered.
 + (instancetype)estimatedDimension:(CGFloat)estimatedDimension;
 
+/// Items with this dimension type will receive at least as much room as the view requires, and will
+/// grow to match the dimension of the largest estimated sibling in their parent.
+/// When specified on the outermost group for a section, the largest size will be shared across the entire section.
+///
+/// Eg: All `NSCollectionLayoutItem`s specified with a `uniformAcrossSiblingsWithEstimate:` `heightDimension` in a horizontal `NSCollectionLayoutGroup`
+/// will have a height equal to the height of the tallest item in that group.
+///
+/// When computing the size for a dimension of this type, the layout will need to retrieve preferred attributes for all siblings
+/// in its parent, which in `UICollectionView` means creating views for all dependent items. This can be very expensive, so `uniformAcrossSiblingsWithEstimate` should
+/// only be used in layouts where the number of dependent items is known to be relatively small.
++ (instancetype)uniformAcrossSiblingsWithEstimate:(CGFloat)estimatedDimension API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
 
 @property(nonatomic,readonly) BOOL isFractionalWidth;
 @property(nonatomic,readonly) BOOL isFractionalHeight;
 @property(nonatomic,readonly) BOOL isAbsolute;
+
+/// Returns `YES` if the receiver is `estimated` OR `uniformAcrossSiblings`.
 @property(nonatomic,readonly) BOOL isEstimated;
+
+@property(nonatomic,readonly) BOOL isUniformAcrossSiblings API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
 @property(nonatomic,readonly) CGFloat dimension;
 @end
 
@@ -554,18 +596,18 @@ API_AVAILABLE(ios(13.0), tvos(13.0), watchos(6.0)) NS_SWIFT_UI_ACTOR
 
 @interface NSCollectionLayoutSection (Deprecated)
 // by default, section supplementaries will follow any section-specific contentInsets
-@property(nonatomic) BOOL supplementariesFollowContentInsets API_DEPRECATED_WITH_REPLACEMENT("supplementaryContentInsetsReference", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
+@property(nonatomic) BOOL supplementariesFollowContentInsets API_DEPRECATED_WITH_REPLACEMENT("supplementaryContentInsetsReference", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0), visionos(1.0, 1.0));
 @end
 
 @interface NSCollectionLayoutGroup (Deprecated)
 
 // Specifies a group that will have N items equally sized along the horizontal axis. use interItemSpacing to insert space between items
 // Forces the width dimension of the subitem to .fractionalWidth(1.0/count).
-+ (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_DEPRECATED_WITH_REPLACEMENT("+horizontalGroupWithLayoutSize:repeatingSubitem:count:", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
++ (instancetype)horizontalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_DEPRECATED_WITH_REPLACEMENT("+horizontalGroupWithLayoutSize:repeatingSubitem:count:", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0), visionos(1.0, 1.0));
 
 // Specifies a group that will have N items equally sized along the vertical axis. use interItemSpacing to insert space between items
 // Forces the height dimension of the subitem to .fractionalHeight(1.0/count).
-+ (instancetype)verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_DEPRECATED_WITH_REPLACEMENT("+verticalGroupWithLayoutSize:repeatingSubitem:count:", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0));
++ (instancetype)verticalGroupWithLayoutSize:(NSCollectionLayoutSize*)layoutSize subitem:(NSCollectionLayoutItem*)subitem count:(NSInteger)count API_DEPRECATED_WITH_REPLACEMENT("+verticalGroupWithLayoutSize:repeatingSubitem:count:", ios(13.0, 16.0), tvos(13.0, 16.0), watchos(6.0, 9.0), visionos(1.0, 1.0));
 
 @end
 

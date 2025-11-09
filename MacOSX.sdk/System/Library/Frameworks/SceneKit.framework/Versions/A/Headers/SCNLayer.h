@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @abstract A SCNLayer is a layer that can display a SCNScene. 
  */
 
-SCN_EXPORT SCN_GL_DEPRECATED_MAC(10_8, 10_14) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst)
+SCN_EXPORT SCN_GL_DEPRECATED_MAC(10_8, 10_14) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos)
 @interface SCNLayer : CAOpenGLLayer <SCNSceneRenderer, SCNTechniqueSupport>
 
 /*! 

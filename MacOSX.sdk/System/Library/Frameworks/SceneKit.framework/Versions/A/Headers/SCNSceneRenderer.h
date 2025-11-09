@@ -225,6 +225,14 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  */
 @property(nonatomic, readonly) SCNRenderingAPI renderingAPI API_AVAILABLE(macos(10.11), ios(9.0));
 
+/*!
+ @property workingColorSpace
+ @abstract Specifies the color space used by the receiver for shading.
+ @discussion SceneKit will automatically color match image and color objects (NSImage, NSColor, CGImageRef, CGColorRef, etc.). When you directly provide color components to shaders, use this property to color match them to the working color space.
+ */
+@property(nonatomic, readonly) CGColorSpaceRef workingColorSpace API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0));
+
+
 #if SCN_ENABLE_OPENGL
 
 /*!
@@ -314,7 +322,7 @@ typedef NS_OPTIONS(NSUInteger, SCNDebugOptions) {
  @abstract Specifies the current time to display the scene.
  @discussion Deprecated, use "sceneTime" instead.
  */
-@property(nonatomic) NSTimeInterval currentTime API_DEPRECATED_WITH_REPLACEMENT("sceneTime", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+@property(nonatomic) NSTimeInterval currentTime API_DEPRECATED_WITH_REPLACEMENT("sceneTime", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 /*!
  @property usesReverseZ

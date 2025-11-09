@@ -11,3 +11,4 @@
 #import <Accessibility/AXColorUtilities.h>
 #import <Accessibility/AXCustomContent.h>
 #import <Accessibility/AXHearingUtilities.h>
+#import <Accessibility/AXSettings.h>

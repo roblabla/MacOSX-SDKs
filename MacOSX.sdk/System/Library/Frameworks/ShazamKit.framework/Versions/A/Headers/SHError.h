@@ -47,12 +47,15 @@ typedef NS_ERROR_ENUM(SHErrorDomain, SHErrorCode) {
     SHErrorCodeCustomCatalogInvalidURL = 301,
     
     /// Failed to sync some content to the user's library
-    /// @discussion Failed to add some items to the user's library, trying again may result in success
+    /// @discussion Failed to sync the user's library, trying again may result in success
     /// Underlying error may contain more details about the failure
     SHErrorCodeMediaLibrarySyncFailed = 400,
     
     /// Internal Error
     /// @discussion ShazamKit encountered an internal error
-    SHErrorCodeInternalError API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = 500
-       
+    SHErrorCodeInternalError API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) = 500,
+    
+    /// Failed to fetch @c SHMediaItem
+    /// @discussion There was an error fetching the @c SHMediaItem or the provided @c shazamID is invalid.
+    SHErrorCodeMediaItemFetchFailed API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0), watchos(10.0)) = 600
 };

@@ -41,7 +41,9 @@ typedef NS_ENUM(NSInteger, EKEventEditViewAction) {
 */
 @protocol EKEventEditViewDelegate;
 
+#ifdef __APPLE_BLEACH_SDK__
 NS_EXTENSION_UNAVAILABLE_IOS("EventKitUI is not supported in extensions")
+#endif
 EVENTKITUI_CLASS_AVAILABLE(4_0)
 @interface EKEventEditViewController : UINavigationController
 
@@ -80,7 +82,9 @@ EVENTKITUI_CLASS_AVAILABLE(4_0)
     @abstract   Delegate protocol for event edit view controller.
 */
 
+#ifdef __APPLE_BLEACH_SDK__
 NS_EXTENSION_UNAVAILABLE_IOS("EventKitUI is not supported in extensions")
+#endif
 @protocol EKEventEditViewDelegate <NSObject>
 @required
 

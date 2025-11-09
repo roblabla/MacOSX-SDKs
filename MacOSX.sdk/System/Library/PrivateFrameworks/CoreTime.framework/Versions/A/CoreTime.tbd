@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CoreTime.framework/Versions/A/CoreTime'
-current-version: 311.0.1
+current-version: 325
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -13,7 +13,7 @@ exports:
                        _TMGetTrustedInterval, _TMIsAutomaticTimeEnabled, _TMIsAutomaticTimeZoneEnabled, 
                        _TMIsBBTimeActive, _TMIsTimeZoneConfirmed, _TMLocationTimeZoneActiveNotification, 
                        _TMProvideBBTime, _TMProvideCellularTimeZone, _TMRTCResetNotification, 
-                       _TMSetAuthenticatedSourceTime, _TMSetAutomaticTimeEnabled, 
+                       _TMResetToFirstLaunch, _TMSetAuthenticatedSourceTime, _TMSetAutomaticTimeEnabled, 
                        _TMSetAutomaticTimeZoneEnabled, _TMSetManualTime, _TMSetSourceAvailable, 
                        _TMSetSourceTime, _TMSetSourceTimeZone, _TMSetSourceUnavailable, 
                        _TMSetupTime, _TMSetupTimeZone, _TMSourceAPNS, _TMSourceAccessory, 

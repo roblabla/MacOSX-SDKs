@@ -22,14 +22,14 @@ typedef NS_ENUM(NSUInteger, MPSPolygonType) {
      * @brief Quadrilaterals with four vertices
      */
     MPSPolygonTypeQuadrilateral = 1,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0));
+} MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0));
 
 /**
  * @brief An acceleration structure built over polygonal shapes
  *
  * @discussion See MPSAccelerationStructure for more information
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0))
+MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0))
 @interface MPSPolygonAccelerationStructure : MPSAccelerationStructure
 
 /**

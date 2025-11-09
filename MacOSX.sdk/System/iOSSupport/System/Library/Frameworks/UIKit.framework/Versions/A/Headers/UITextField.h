@@ -16,6 +16,7 @@
 #import <UIKit/UITextDropping.h>
 #import <UIKit/UITextInput.h>
 #import <UIKit/UIContentSizeCategoryAdjusting.h>
+#import <UIKit/UILetterformAwareAdjusting.h>
 #import <UIKit/UITextPasteConfigurationSupporting.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
@@ -48,7 +49,7 @@ typedef NS_ENUM(NSInteger, UITextFieldDidEndEditingReason) {
 } API_AVAILABLE(ios(10.0));
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
-@interface UITextField : UIControl <UITextInput, NSCoding, UIContentSizeCategoryAdjusting>
+@interface UITextField : UIControl <UITextInput, NSCoding, UIContentSizeCategoryAdjusting, UILetterformAwareAdjusting>
 
 @property(nullable, nonatomic,copy)   NSString               *text;                 // default is nil
 @property(nullable, nonatomic,copy)   NSAttributedString     *attributedText API_AVAILABLE(ios(6.0)); // default is nil
@@ -98,7 +99,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (CGRect)leftViewRectForBounds:(CGRect)bounds;
 - (CGRect)rightViewRectForBounds:(CGRect)bounds;
 
-- (void)drawTextInRect:(CGRect)rect API_DEPRECATED("This method is no longer called.", ios(2.0, 15.0));
+- (void)drawTextInRect:(CGRect)rect API_DEPRECATED("This method is no longer called.", ios(2.0, 15.0), visionos(1.0, 1.0));
 - (void)drawPlaceholderInRect:(CGRect)rect;
 
 // Presented when object becomes first responder.  If set to nil, reverts to following responder chain.  If

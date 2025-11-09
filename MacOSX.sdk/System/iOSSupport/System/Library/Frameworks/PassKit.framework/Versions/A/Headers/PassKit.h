@@ -7,6 +7,7 @@
 
 #import <PassKit/PKConstants.h>
 #import <PassKit/PKObject.h>
+#import <PassKit/PKPass_Types.h>
 #import <PassKit/PKPass.h>
 #import <PassKit/PKSecureElementPass.h>
 #import <PassKit/PKPaymentPass.h>
@@ -92,14 +93,14 @@
 #if __has_include(<PassKit/PKAddPaymentPassViewController.h>)
 #import <PassKit/PKAddPaymentPassViewController.h>
 #endif
-#if __has_include(<PassKit/PKDisbursementVoucher.h>)
-#import <PassKit/PKDisbursementVoucher.h>
-#endif
 #if __has_include(<PassKit/PKDisbursementRequest.h>)
 #import <PassKit/PKDisbursementRequest.h>
 #endif
-#if __has_include(<PassKit/PKDisbursementAuthorizationController.h>)
-#import <PassKit/PKDisbursementAuthorizationController.h>
+#if __has_include(<PassKit/PKInstantFundsOutFeeSummaryItem.h>)
+#import <PassKit/PKInstantFundsOutFeeSummaryItem.h>
+#endif
+#if __has_include(<PassKit/PKDisbursementSummaryItem.h>)
+#import <PassKit/PKDisbursementSummaryItem.h>
 #endif
 #if __has_include(<PassKit/PKBarcodeEventMetadataRequest.h>)
 #import <PassKit/PKBarcodeEventMetadataRequest.h>
@@ -171,3 +172,11 @@
 #import <PassKit/PKIdentityButton.h>
 #endif
 #endif // TARGET_OS_IPHONE || TARGET_OS_OSX
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if __has_include(<PassKit/PKPayLaterView.h>)
+#import <PassKit/PKPayLaterView.h>
+#endif
+#if __has_include(<PassKit/PKPayLaterValidator.h>)
+#import <PassKit/PKPayLaterValidator.h>
+#endif
+#endif // TARGET_OS_IOS && !TARGET_OS_MACCATALYST

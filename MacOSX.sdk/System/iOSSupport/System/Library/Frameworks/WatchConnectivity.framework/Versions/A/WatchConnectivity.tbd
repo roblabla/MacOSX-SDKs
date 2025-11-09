@@ -2,19 +2,19 @@
 tbd-version:     4
 targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
 install-name:    '/System/iOSSupport/System/Library/Frameworks/WatchConnectivity.framework/Versions/A/WatchConnectivity'
-current-version: 203
+current-version: 207
 exports:
   - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
     symbols:         [ _WCApplicationContextFileName, _WCApplicationSupportURLInContainer, 
-                       _WCCheckFileAndConsumeSandboxTokenForProcessID, _WCCheckFileAndCreateExtensionForProcess, 
-                       _WCCompactStringFromCollection, _WCComplicationUserInfoIDFileName, 
-                       _WCDProtoUserInfoTransferReadFrom, _WCDashboardLog, _WCDashboardLogJSON, 
-                       _WCDeleteItemAtURL, _WCDeserializePayloadData, _WCErrorDomain, 
-                       _WCFileTransferDataFileName, _WCFileTransferResultErrorKey, 
-                       _WCFileTransferResultsFileName, _WCFileTransfersURLInContainer, 
-                       _WCInboxAppContextFolderURLInContainer, _WCInboxURLInContainer, 
-                       _WCInternalErrorDomain, _WCIsDataAcceptableSizeForType, _WCIsFileDirectory, 
-                       _WCIsSizeAcceptableForType, _WCPayloadSizeLimitApplicationContext, 
+                       _WCCheckFileAndConsumeSandboxTokenForAuditToken, _WCCheckFileAndConsumeSandboxTokenForProcessID, 
+                       _WCCheckFileAndCreateExtensionForProcess, _WCCompactStringFromCollection, 
+                       _WCComplicationUserInfoIDFileName, _WCDProtoUserInfoTransferReadFrom, 
+                       _WCDashboardLog, _WCDashboardLogJSON, _WCDeleteItemAtURL, 
+                       _WCDeserializePayloadData, _WCErrorDomain, _WCFileTransferDataFileName, 
+                       _WCFileTransferResultErrorKey, _WCFileTransferResultsFileName, 
+                       _WCFileTransfersURLInContainer, _WCInboxAppContextFolderURLInContainer, 
+                       _WCInboxURLInContainer, _WCInternalErrorDomain, _WCIsDataAcceptableSizeForType, 
+                       _WCIsFileDirectory, _WCIsSizeAcceptableForType, _WCPayloadSizeLimitApplicationContext, 
                        _WCPayloadSizeLimitMessage, _WCPayloadSizeLimitUserInfo, _WCPrivateServiceComplicationsManagerEntitlement, 
                        _WCPrivateServiceShouldConnectNotification, _WCPrivateServiceTestToolEntitlement, 
                        _WCSerializePayloadDictionary, _WCServiceAlwaysReachableEntitlement, 

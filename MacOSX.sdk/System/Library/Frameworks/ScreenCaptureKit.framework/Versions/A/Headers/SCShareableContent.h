@@ -11,6 +11,23 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class SCContentFilter;
+
+/*!
+ @typedef SCShareableContentStyle
+ @abstract Defines the type of content being shared
+ @constant SCShareableContentStyleNone content not specified
+ @constant SCShareableContentStyleWindow window bound content stream
+ @constant SCShareableContentStyleDisplay display bound content stream
+*/
+typedef NS_ENUM(NSInteger, SCShareableContentStyle) {
+    SCShareableContentStyleNone,
+    SCShareableContentStyleWindow,
+    SCShareableContentStyleDisplay,
+    SCShareableContentStyleApplication
+};
+
+
 API_AVAILABLE(macos(12.3))
 @interface SCRunningApplication : NSObject
 /*!
@@ -96,6 +113,29 @@ API_AVAILABLE(macos(12.3))
 + (instancetype)new NS_UNAVAILABLE;
 @end
 
+/*!
+ @abstract SCShareableContentInfo
+ @discussion SCShareableContentInformation is an object that has information about the content of the stream
+*/
+API_AVAILABLE(macos(14.0))
+@interface SCShareableContentInfo : NSObject
+/*!
+ @abstract style of stream
+ */
+@property (nonatomic, readonly) SCShareableContentStyle style;
+
+/*!
+ @abstract Pixel to points scaling factor
+ */
+@property (nonatomic, readonly) float pointPixelScale;
+
+/*!
+ @abstract Size and location of content in points
+ */
+@property (nonatomic, readonly) CGRect contentRect;
+
+@end
+
 API_AVAILABLE(macos(12.3))
 @interface SCShareableContent : NSObject
 /*!
@@ -133,6 +173,13 @@ API_AVAILABLE(macos(12.3))
 + (void)getShareableContentExcludingDesktopWindows:(BOOL)excludeDesktopWindows onScreenWindowsOnlyAboveWindow:(SCWindow *)window completionHandler:(void(^)(SCShareableContent * _Nullable shareableContent, NSError * _Nullable error))completionHandler;
 
 /*!
+@abstract infoForFilter:
+@param filter content filter to translate to content details
+@discussion this method will create a SCShareableContentInformation object given a filter
+*/
++ (SCShareableContentInfo *)infoForFilter:(nonnull SCContentFilter *)filter API_AVAILABLE(macos(14.0));
+
+/*!
  @abstract windows SCShareableContent property that contains all the sharable SCWindows
  */
 @property (readonly) NSArray<SCWindow *> *windows;
@@ -148,6 +195,6 @@ API_AVAILABLE(macos(12.3))
 @property (readonly) NSArray<SCRunningApplication *> *applications;
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;
-@end
 
+@end
 NS_ASSUME_NONNULL_END

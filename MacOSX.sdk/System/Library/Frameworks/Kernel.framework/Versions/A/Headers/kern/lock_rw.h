@@ -49,17 +49,6 @@ typedef unsigned int     lck_rw_type_t;
 #define decl_lck_rw_data(class, name)   class lck_rw_t name
 
 
-#if MACH_ASSERT
-#define LCK_RW_ASSERT(lck, type) lck_rw_assert((lck),(type))
-#else /* MACH_ASSERT */
-#define LCK_RW_ASSERT(lck, type)
-#endif /* MACH_ASSERT */
-
-#if DEBUG
-#define LCK_RW_ASSERT_DEBUG(lck, type) lck_rw_assert((lck),(type))
-#else /* DEBUG */
-#define LCK_RW_ASSERT_DEBUG(lck, type)
-#endif /* DEBUG */
 
 /*!
  * @function lck_rw_alloc_init

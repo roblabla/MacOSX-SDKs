@@ -5,17 +5,12 @@
 //  Copyright (c) 2012 Apple Inc. All rights reserved.
 //
 
-#import <GameController/GCExtern.h>
 #import <GameController/GCPhysicalInputProfile.h>
-#import <Foundation/Foundation.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
 @class GCController;
 @class GCExtendedGamepadSnapshot;
-@class GCControllerDirectionPad;
-@class GCControllerElement;
-@class GCControllerButtonInput;
 
 /**
  Extended Gamepad profile. Has all the physical features of a Standard Gamepad and more.

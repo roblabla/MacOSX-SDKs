@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <UIKit/UIControl.h>
 #import <UIKit/UIKitDefines.h>
+#import <UIKit/UIPageControlProgress.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
@@ -57,6 +58,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// hides the indicator if there is only one page, default is NO
 @property (nonatomic) BOOL hidesForSinglePage;
 
+/// An object that defines the progress of the page control. Default is nil.
+@property (nonatomic, strong, nullable) UIPageControlProgress *progress API_AVAILABLE(ios(17.0), tvos(17.0));
+
 /// The tint color for non-selected indicators. Default is nil.
 @property (nullable, nonatomic, strong) UIColor *pageIndicatorTintColor API_AVAILABLE(ios(6.0)) UI_APPEARANCE_SELECTOR;
 
@@ -72,7 +76,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// The current interaction state for when the current page changes. Default is UIPageControlInteractionStateNone
 @property (nonatomic, assign, readonly) UIPageControlInteractionState interactionState API_AVAILABLE(ios(14.0));
 
-/// Returns YES if the continuous interaction is enabled, NO otherwise. Default is YES.
+/// Returns YES if continuous interaction is supported and enabled, NO otherwise. Default is YES for platforms that support it.
 @property (nonatomic, assign) BOOL allowsContinuousInteraction API_AVAILABLE(ios(14.0));
 
 /// The preferred image for indicators. Symbol images are recommended. Default is nil.
@@ -113,10 +117,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (CGSize)sizeForNumberOfPages:(NSInteger)pageCount;
 
 /// if set, tapping to a new page won't update the currently displayed page until -updateCurrentPageDisplay is called. default is NO
-@property (nonatomic) BOOL defersCurrentPageDisplay API_DEPRECATED("defersCurrentPageDisplay no longer does anything reasonable with the new interaction mode.", ios(2.0, 14.0));
+@property (nonatomic) BOOL defersCurrentPageDisplay API_DEPRECATED("defersCurrentPageDisplay no longer does anything reasonable with the new interaction mode.", ios(2.0, 14.0), visionos(1.0, 1.0));
 
 /// update page display to match the currentPage. ignored if defersCurrentPageDisplay is NO. setting the page value directly will update immediately
-- (void)updateCurrentPageDisplay API_DEPRECATED("updateCurrentPageDisplay no longer does anything reasonable with the new interaction mode.", ios(2.0, 14.0));
+- (void)updateCurrentPageDisplay API_DEPRECATED("updateCurrentPageDisplay no longer does anything reasonable with the new interaction mode.", ios(2.0, 14.0), visionos(1.0, 1.0));
 
 @end
 

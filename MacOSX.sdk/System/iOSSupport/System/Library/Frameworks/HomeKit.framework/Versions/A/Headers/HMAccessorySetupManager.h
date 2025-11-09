@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class HMAccessorySetupRequest;
 @class HMAccessorySetupResult;
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              of adding one or more accessories to a particular home and follow up with additional setup.
  *              These APIs do not require that the current app has home data authorization
  */
-HM_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABLE(macos, macCatalyst)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos, visionos) API_UNAVAILABLE(macos, macCatalyst)
     @interface HMAccessorySetupManager : NSObject
 
 /*!
@@ -34,4 +34,4 @@ HM_EXTERN API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos) API_UNAVAILABL
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

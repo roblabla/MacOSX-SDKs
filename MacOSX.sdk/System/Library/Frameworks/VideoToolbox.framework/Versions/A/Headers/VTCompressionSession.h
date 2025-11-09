@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright © 2006-2021 Apple Inc. All rights reserved.
+	Copyright © 2006-2023 Apple Inc. All rights reserved.
 	
 	Video Toolbox client API for compressing video frames.
 	
@@ -23,6 +23,7 @@
 #include <CoreMedia/CMFormatDescription.h>
 #include <CoreMedia/CMTime.h>
 #include <CoreMedia/CMTimeRange.h>
+#include <CoreMedia/CMTaggedBufferGroup.h>
 
 #include <VideoToolbox/VTSession.h>
 #include <VideoToolbox/VTCompressionProperties.h>
@@ -52,7 +53,7 @@ CF_IMPLICIT_BRIDGING_ENABLED
 		to tear it down and CFRelease to release your object reference.
  */
 
-typedef struct CM_BRIDGED_TYPE(id) OpaqueVTCompressionSession*  VTCompressionSessionRef;
+typedef struct CM_BRIDGED_TYPE(id) OpaqueVTCompressionSession*  VTCompressionSessionRef CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef	VTCompressionOutputCallback
@@ -273,7 +274,7 @@ VTCompressionSessionEncodeFrame(
 typedef void (^VTCompressionOutputHandler)(
 		OSStatus status,
 		VTEncodeInfoFlags infoFlags,
-		CM_NULLABLE CMSampleBufferRef sampleBuffer );
+		CM_NULLABLE CMSampleBufferRef sampleBuffer ) CM_SWIFT_SENDABLE;
 	
 /*!
 	@function	VTCompressionSessionEncodeFrameWithOutputHandler
@@ -334,6 +335,103 @@ VTCompressionSessionCompleteFrames(
 	CM_NONNULL VTCompressionSessionRef	session,
 	CMTime								completeUntilPresentationTimeStamp) API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // complete all frames if non-numeric
 	
+#pragma mark Multi-image compression
+
+/*!
+	@function     VTIsStereoMVHEVCEncodeSupported
+	@abstract	  Indicates whether the current system supports stereo MV-HEVC encode.
+	@discussion   This call returning true does not guarantee that encode resources will be available at all times.
+ */
+VT_EXPORT Boolean
+VTIsStereoMVHEVCEncodeSupported( void ) API_AVAILABLE(macos(14.0), ios(17.0));
+
+/*!
+	@function	VTCompressionSessionEncodeMultiImageFrame
+	@abstract
+		Call this function to present a multi-image frame to the compression session.
+		Encoded frames may or may not be output before the function returns.
+	@discussion
+		The client should not modify the pixel data after making this call.
+		The session and/or encoder will retain the image buffer as long as necessary.
+	@param	session
+		The compression session.
+	@param	taggedBufferGroup
+		A CMTaggedBufferGroup containing the multiple images for a video frame to be compressed.
+	@param	presentationTimeStamp
+		The presentation timestamp for this frame, to be attached to the sample buffer.
+		Each presentation timestamp passed to a session must be greater than the previous one.
+	@param	duration
+		The presentation duration for this frame, to be attached to the sample buffer.
+		If you do not have duration information, pass kCMTimeInvalid.
+	@param	frameProperties
+		Contains key/value pairs specifying additional properties for encoding this frame.
+		Note that some session properties may also be changed between frames.
+		Such changes have effect on subsequently encoded frames.
+	@param	sourceFrameRefcon
+		Your reference value for the frame, which will be passed to the output callback function.
+	@param	infoFlagsOut
+		Points to a VTEncodeInfoFlags to receive information about the encode operation.
+		The kVTEncodeInfo_Asynchronous bit may be set if the encode is (or was) running
+		asynchronously.
+		The kVTEncodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
+		Pass NULL if you do not want to receive this information.
+*/
+VT_EXPORT OSStatus
+VTCompressionSessionEncodeMultiImageFrame(
+		CM_NONNULL VTCompressionSessionRef	session,
+		CM_NONNULL CMTaggedBufferGroupRef	taggedBufferGroup,
+		CMTime								presentationTimeStamp,
+		CMTime								duration, // may be kCMTimeInvalid
+		CM_NULLABLE CFDictionaryRef			frameProperties,
+		void * CM_NULLABLE					sourceFrameRefcon,
+		VTEncodeInfoFlags * CM_NULLABLE		infoFlagsOut ) API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_SWIFT_UNAVAILABLE("Unavailable in Swift");
+
+
+#if __BLOCKS__
+/*!
+	@function	VTCompressionSessionEncodeMultiImageFrameWithOutputHandler
+	@abstract
+		Call this function to present a multi-image frame to the compression session.
+		Encoded frames may or may not be output before the function returns.
+	@discussion
+		The client should not modify the pixel data after making this call.
+		The session and/or encoder will retain the image buffer as long as necessary.
+		Cannot be called with a session created with a VTCompressionOutputCallback.
+	@param	session
+		The compression session.
+	@param	taggedBufferGroup
+		A CMTaggedBufferGroup containing the multiple images for a video frame to be compressed.
+	@param	presentationTimeStamp
+		The presentation timestamp for this frame, to be attached to the sample buffer.
+		Each presentation timestamp passed to a session must be greater than the previous one.
+	@param	duration
+		The presentation duration for this frame, to be attached to the sample buffer.
+		If you do not have duration information, pass kCMTimeInvalid.
+	@param	frameProperties
+		Contains key/value pairs specifying additional properties for encoding this frame.
+		Note that some session properties may also be changed between frames.
+		Such changes have effect on subsequently encoded frames.
+	@param	infoFlagsOut
+		Points to a VTEncodeInfoFlags to receive information about the encode operation.
+		The kVTEncodeInfo_Asynchronous bit may be set if the encode is (or was) running
+		asynchronously.
+		The kVTEncodeInfo_FrameDropped bit may be set if the frame was dropped (synchronously).
+		Pass NULL if you do not want to receive this information.
+	@param	outputHandler
+		The block to be called when encoding the frame is completed.
+		This block may be called asynchronously, on a different thread from the one that calls VTCompressionSessionEncodeMultiImageFrameWithOutputHandler.
+ */
+VT_EXPORT OSStatus
+VTCompressionSessionEncodeMultiImageFrameWithOutputHandler(
+		CM_NONNULL VTCompressionSessionRef		session,
+		CM_NONNULL CMTaggedBufferGroupRef		taggedBufferGroup,
+		CMTime									presentationTimeStamp,
+		CMTime									duration, // may be kCMTimeInvalid
+		CM_NULLABLE CFDictionaryRef				frameProperties, // may be NULL
+		VTEncodeInfoFlags * CM_NULLABLE			infoFlagsOut,
+		CM_NONNULL VTCompressionOutputHandler	outputHandler ) API_AVAILABLE(macosx(14.0), ios(17.0)) API_UNAVAILABLE(tvos) CF_REFINED_FOR_SWIFT;
+#endif // __BLOCKS__
+
 #pragma mark Multi-pass
 	
 /*

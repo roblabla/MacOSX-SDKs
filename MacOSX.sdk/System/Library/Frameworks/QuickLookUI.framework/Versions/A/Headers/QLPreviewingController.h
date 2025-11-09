@@ -14,9 +14,10 @@ NS_ASSUME_NONNULL_BEGIN
 @class QLPreviewReply;
 @class QLFilePreviewRequest;
 
+/// A type that defines a block used to load a Quick Look preview item.
 typedef void(^QLPreviewItemLoadingBlock)(NSError * _Nullable error) API_DEPRECATED("Use void (^)(NSError * _Nullable) instead", macos(10.13,10.14)) API_UNAVAILABLE(ios, watchos, tvos);
 
-/**
+/*
  For view based previews, the view controller that implements the QLPreviewingController protocol must at least implement one of the two following methods:
  -[QLPreviewingController preparePreviewOfSearchableItemWithIdentifier:queryString:completionHandler:], to generate previews for Spotlight searchable items.
  -[QLPreviewingController preparePreviewOfFileAtURL:completionHandler:], to generate previews for file URLs.
@@ -28,43 +29,46 @@ typedef void(^QLPreviewItemLoadingBlock)(NSError * _Nullable error) API_DEPRECAT
  
  For data-based previews, subclass QLPreviewProvider which conforms to this protocol.
  */
+
+/**
+ A protocol for implementing a custom controller to create previews of files.
+ 
+ A controller that implements the <doc://com.apple.documentation/documentation/quicklook/qlpreviewingcontroller> protocol must at least implement <doc://com.apple.documentation/documentation//quicklook/qlpreviewingcontroller/2882042-preparepreviewofsearchableitem> or <doc://com.apple.documentation/documentation/quicklook/qlpreviewingcontroller/2867936-preparepreviewoffile>.
+ */
 QL_EXPORT @protocol QLPreviewingController <NSObject>
 
 @optional
 
 /**
- @abstract
- Use this method to prepare the content of the view controller with the data that the searchable item represents.
- 
- @discussion
- This method will be called only once. It will be called in the main thread before presenting the view controller.
- Heavy work potentially blocking the main thread should be avoided in this method.
- 
- @param identifier The identifier of the CSSearchableItem the user interacted with in Spotlight.
- @param queryString The query string the user entered in Spotlight before interacting with the CSSearchableItem.
- @param handler The completion handler should be called whenever the view is ready to be displayed. A loading spinner will be shown until the handler is called.
- It can be called asynchronously after the method has returned.
+ Prepares the preview for a file by using the data from Spotlight’s searchable item.
+
+ The operating system calls this method only once from the main thread before it presents the previewing controller. To avoid blocking the main thread, don’t perform long-running or resource-intensive work.
+ - Parameters:
+    - identifier: The identifier of the searchable item.
+    - queryString: A search string to associate with the searchable item.
+    - handler: A completion handler that notifies the platform that a preview is available. The operating system shows a loading spinner, so call the handler as soon as possible. You can call the completion handler asynchronously after returning from the callback.
  */
 - (void)preparePreviewOfSearchableItemWithIdentifier:(NSString *)identifier queryString:(NSString * _Nullable)queryString completionHandler:(void (^)(NSError * _Nullable))handler NS_SWIFT_NAME(preparePreviewOfSearchableItem(identifier:queryString:completionHandler:));
 
 /**
- @abstract
- Use this method to prepare the content of the view controller with the given file URL.
+ Prepares the preview of a file at the specified file’s URL.
 
- @discussion
- This method will be called only once. It will be called in the main thread before presenting the view controller.
- Heavy work potentially blocking the main thread should be avoided in this method.
- 
- @param url The URL of the file the user is about to preview.
- @param handler The completion handler should be called whenever the view is ready to be displayed. A loading spinner will be shown until the handler is called.
- It can be called asynchronously after the method has returned.
- */
+ The operating system calls this method only once from the main thread before it presents the previewing controller. To avoid blocking the main thread, don’t perform long-running or resource-intensive work.
+
+ When preparing and displaying the view controller, avoid holding open a file descriptors while the user is previewing the file.
+
+ - Parameters:
+    - url: The URL of the file to preview.
+    - handler: A completion handler that notifies the platform that a preview is available. The operating system shows a loading spinner, so call the handler as soon as possible. You can call the completion handler asynchronously after returning from the callback.
+  */
 - (void)preparePreviewOfFileAtURL:(NSURL *)url completionHandler:(void (^)(NSError * _Nullable))handler NS_SWIFT_NAME(preparePreviewOfFile(at:completionHandler:));
 
 /**
- @abstract Use this method to provide a QLPreviewReply that provides preview in the form of NSData, NSURL, PDFDocument, or a drawing into a context.
- @param request An object which contains information about the preview that should be provided. It contains the URL of the file to provide a preview for.
- @param handler Call the completion handler with a QLPreviewReply if you can provide a preview, or with an NSError if you cannot. If an error is passed or reply is nil, a generic preview will be provided instead. The handler can be called asynchronously after the method has returned.
+ Prepares the preview of a file identified within a file preview request.
+
+ - Parameters:
+    - request: The file preview request that identifies the content to preview.
+    - handler: The closure to call with a <doc://com.apple.documentation/documentation/quicklook/qlpreviewreply> for the system to display as the preview.
  */
 - (void)providePreviewForFileRequest:(QLFilePreviewRequest*)request completionHandler:(void (^)(QLPreviewReply * _Nullable reply, NSError * _Nullable error))handler NS_SWIFT_NAME(providePreview(for:completionHandler:));
 @end

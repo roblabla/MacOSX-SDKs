@@ -46,6 +46,36 @@ typedef NS_ENUM(NSInteger, SCFrameStatus) {
     SCFrameStatusStopped
 };
 
+/*!
+ @typedef SCPresenterOverlayAlertSetting
+ @abstract SCPresenterOverlayAlertSetting denotes the setting that can be set to determine when to show the presenter overlay alert for any stream
+ @constant SCPresenterOverlayAlertSettingSystem allow the system to determine when to show the presenter overlay privacy alert.
+ @constant SCPresenterOverlayAlertSettingNever never show the presenter overlay privacy alert.
+ @constant SCPresenterOverlayAlertAlways always show the presenter overlay privacy alert.
+*/
+
+typedef NS_ENUM(NSInteger, SCPresenterOverlayAlertSetting) {
+    SCPresenterOverlayAlertSettingSystem,
+    SCPresenterOverlayAlertSettingNever,
+    SCPresenterOverlayAlertSettingAlways
+} API_AVAILABLE(macos(14.0));
+
+/*!
+ @typedef SCStreamType
+ @abstract SCStreamTypeWindow window stream
+ @constant SCStreamTypeDisplay display stream
+*/
+// To be deprecated, will use SCShareableContentStyle
+typedef NS_ENUM(NSInteger, SCStreamType) {
+    SCStreamTypeWindow,
+    SCStreamTypeDisplay
+};
+
+typedef NS_ENUM(NSInteger, SCCaptureResolutionType) {
+    SCCaptureResolutionAutomatic,
+    SCCaptureResolutionBest,
+    SCCaptureResolutionNominal
+};
 
 /*!
  @abstract SCContentFilter
@@ -53,6 +83,25 @@ typedef NS_ENUM(NSInteger, SCFrameStatus) {
 */
 API_AVAILABLE(macos(12.3))
 @interface SCContentFilter : NSObject
+/*!
+ @abstract streamType type of stream
+ */
+// To be deprecated
+@property(nonatomic, readonly) SCStreamType streamType;
+
+/*!
+ @abstract style of stream
+ */
+@property (nonatomic, readonly) SCShareableContentStyle style;
+/*!
+ @abstract Pixel to points scaling factor
+ */
+@property (nonatomic, readonly) float pointPixelScale;
+
+/*!
+ @abstract Size and location of content in points
+ */
+@property (nonatomic, readonly) CGRect contentRect;
 /*!
  @abstract initWithDesktopIndependentWindow:
  @param window the independent SCWindow you wish to capture
@@ -133,6 +182,16 @@ API_AVAILABLE(macos(12.3))
 @property(nonatomic, assign) BOOL scalesToFit;
 
 /*!
+ @abstract SCStreamProperty that specifies whether the  stream preserves the aspect ratio of the source pixel data. By default the aspect ratio is preserved.
+ */
+@property(nonatomic, assign) BOOL preservesAspectRatio API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract SCStreamProperty the name of the stream 
+ */
+@property(nonatomic, strong, nullable) NSString *streamName API_AVAILABLE(macos(14.0));
+
+/*!
  @abstract SCStreamProperty that specifies whether the cursor should appear in the stream.  By default the cursor is visible.
  */
 @property(nonatomic, assign) BOOL showsCursor;
@@ -143,17 +202,17 @@ API_AVAILABLE(macos(12.3))
 @property(nonatomic, assign) CGColorRef backgroundColor;
 
 /*!
- @abstract SCStreamProperty that specifies that the display stream only samples a subset of the display’s framebuffer.  if not set, then the entire display is streamed. The rectangle is specified in points in the display’s logical coordinate system. Not used for independent window capture
+ @abstract SCStreamProperty that specifies that the stream only samples a subset of the frame input. For display streams, if not set, then the entire display is streamed. For independent window streams, if not set, then the entire window is streamed. The rectangle is specified in points in the display’s logical coordinate system.
  */
 @property(nonatomic, assign) CGRect sourceRect;
 
 /*!
- @abstract SCStreamProperty that specifies that the display stream outputs the frame data into a subset of the output IOSurface object.  If not set then the entire output surface is used. The rectangle is specified in pixels in the surface’s coordinate system. Not used for independent window capture
+ @abstract SCStreamProperty that specifies that the stream outputs the frame data into a subset of the output IOSurface object. For both display streams and independent window streams, if not set, then the entire output surface is used. The rectangle is specified in pixels in the display's coordinate system.
  */
 @property(nonatomic, assign) CGRect destinationRect;
 
 /*!
- @abstract SCStreamProperty that specifies the number of frames to keep in the queue.  If not set the default value is 3 frames.  Specifying more frames uses more memory, but may allow you to process frame data without stalling the display stream and should not exceed 8 frames.
+ @abstract SCStreamProperty that specifies the number of frames to keep in the queue.  If not set the default value is 8 frames.  Specifying more frames uses more memory, but may allow you to process frame data without stalling the display stream and should not exceed 8 frames.
  */
 @property(nonatomic, assign) NSInteger queueDepth;
 
@@ -187,6 +246,46 @@ API_AVAILABLE(macos(12.3))
  @abstract SCAudioProperty whether to exclude audio from current process. Default is set to NO.
  */
 @property(nonatomic, assign) BOOL excludesCurrentProcessAudio API_AVAILABLE(macos(13.0));
+
+/*!
+ @abstract SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
+ */
+@property(nonatomic, assign) BOOL ignoreShadowsDisplay API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract SCStreamProperty to ignore framing on windows in the single window sharing case (will ignore shadows).
+ */
+@property(nonatomic, assign) BOOL ignoreShadowsSingleWindow API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract captureResolution Choose between automatic, best, and nominal.
+ */
+@property(nonatomic, assign) SCCaptureResolutionType captureResolution API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract SCStreamProperty to capture only the shadows of windows.
+ */
+@property(nonatomic, assign) BOOL capturesShadowsOnly API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract SCStreamProperty to ensure partially transparent areas on windows are backed by a solid white color so that the resulting image is fully opaque.
+ */
+@property(nonatomic, assign) BOOL shouldBeOpaque API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract SCStreamProperty to ignore framing on windows in the display sharing case (will ignore shadows).
+ */
+@property(nonatomic, assign) BOOL ignoreGlobalClipDisplay API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract SCStreamProperty to ignore framing on windows in the single window sharing case (will ignore shadows).
+ */
+@property(nonatomic, assign) BOOL ignoreGlobalClipSingleWindow API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract SCStreamProperty that informs the system if a privacy alert should be shown when using presenter overlay for a stream. Defaults to SCPresenterOverlayAlertSettingSystem;
+ */
+@property(nonatomic, assign) SCPresenterOverlayAlertSetting presenterOverlayPrivacyAlertSetting API_AVAILABLE(macos(14.0));
 
 @end
 
@@ -240,6 +339,12 @@ extern SCStreamFrameInfo const SCStreamFrameInfoDirtyRects API_AVAILABLE(macos(1
  @abstract The key for the CFDictionary attached to the CMSampleBuffer for the onscreen location of the captured content
  */
 extern SCStreamFrameInfo const SCStreamFrameInfoScreenRect API_AVAILABLE(macos(13.1));
+
+/*!
+ @key SCStreamFrameInfoBoundingRect
+ @abstract The key for the CFDictionary attached to the CMSampleBuffer for the bounding rect associated with the frame. Bounding rect is the size and location of smallest bounding box containing all captured windows in points and in surface coordinates.
+ */
+extern SCStreamFrameInfo const SCStreamFrameInfoBoundingRect API_AVAILABLE(macos(14.0));
 
 @protocol SCStreamOutput;
 API_AVAILABLE(macos(12.3))
@@ -339,6 +444,22 @@ API_AVAILABLE(macos(12.3))
 */
 - (void)stream:(SCStream *)stream didStopWithError:(NSError *)error;
 
+/*!
+ @abstract outputVideoEffectDidStartForStream:
+ @param stream the SCStream object
+ @discussion notifies the delegate that the stream's overlay video effect has started.
+*/
+- (void)outputVideoEffectDidStartForStream:(SCStream *)stream API_AVAILABLE(macos(14.0));
+
+/*!
+ @abstract stream:outputVideoEffectDidStart:
+ @param stream the SCStream object
+ @discussion notifies the delegate that the stream's overlay video  effect has stopped.
+*/
+- (void)outputVideoEffectDidStopForStream:(SCStream *)stream API_AVAILABLE(macos(14.0));
+
 @end
+
+
 
 NS_ASSUME_NONNULL_END

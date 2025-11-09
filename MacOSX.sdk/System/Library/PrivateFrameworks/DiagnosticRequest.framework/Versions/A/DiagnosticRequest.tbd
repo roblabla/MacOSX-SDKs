@@ -8,8 +8,9 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DRCheckRapidLogSize, _DRConfigStringForState, _DRGetAllLogFileURLs, 
-                       _DRShouldEnableLogGathering, _DRShouldGatherLog, _DRSubmitLog, 
-                       _DRSubmitLogToCKContainer, _DRSubmitRapidLog, _DRTailspinRequest, 
+                       _DRRequestPassesTimeHysteresis, _DRShouldEnableLogGathering, 
+                       _DRShouldGatherLog, _DRSubmitLog, _DRSubmitLogToCKContainer, 
+                       _DRSubmitLogs, _DRSubmitRapidLog, _DRTailspinRequest, _DRTailspinRequestWithLogs, 
                        __DPCCancelPermissiveExpeditedUploadActivity, __DPCEnableLogGatheringQueryMessage, 
                        __DPCGetCKConfig, __DPCGetCloudChannelConfig, __DPCGetConfigStateForUUID, 
                        __DPCInjectEnableLogGatheringQueryResult, __DPCMarkConfigUUIDCompletedOrRejected, 
@@ -18,10 +19,12 @@ exports:
                        __DPCSchedulePermissiveExpeditedUploadActivity, __DPCSendClearTaskingStateMessage, 
                        __DPCSendTaskingSystemJSONDataMessage, __DPCSetCKConfig, __DPCSetCloudChannelConfig, 
                        __DPCSubmitLogRequestMessage, __DPCSubmitLogToCKContainerRequestMessage, 
-                       __DPCSubmitRapidLogRequestMessage, __DPCTailspinRequestMessage, 
-                       __DPCTriggerRequestClean, __DPClientXPCSendMessage, __DPClientXPCSendMessageWithReplySync, 
-                       __DRCResetDampeningConfigurationToDefault, __DRCSetDampeningConfigurationDefaults, 
-                       __DRCSetDampeningIsEnabled, __DRCTriggerCloudKitWork, __DRRequestPassesTailspinHysteresis, 
+                       __DPCSubmitLogsRequestMessage, __DPCSubmitRapidLogRequestMessage, 
+                       __DPCTailspinRequestMessage, __DPCTriggerRequestClean, __DPClientXPCSendMessage, 
+                       __DPClientXPCSendMessageWithReplySync, __DRCResetDampeningConfigurationToDefault, 
+                       __DRCSetDampeningConfigurationDefaults, __DRCSetDampeningIsEnabled, 
+                       __DRCTriggerCloudKitWork, __DRRequestPassesTailspinHysteresis, 
+                       __DRRequestResetHysteresisDict, __DRRequestResetTailspinHysteresis, 
                        _kDRRequestClientError, _kDRRequestOversizedContextDictErrorString ]
-    objc-classes:    [ DRConfig, DRConfigMonitor, DRSubscriptionManager ]
+    objc-classes:    [ DRClientLog, DRConfig, DRConfigMonitor, DRSubscriptionManager ]
 ...

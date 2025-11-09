@@ -26,7 +26,7 @@ extern "C" {
 		This clock will not drift from audio output, but may drift from CMClockGetHostTimeClock().
 		When audio output is completely stopped, the clock continues to advance, tracking CMClockGetHostTimeClock() 
 		until audio output starts up again.
-		This clock is suitable for use as AVPlayer.masterClock when synchronizing video-only playback 
+		This clock is suitable for use as AVPlayer.sourceClock when synchronizing video-only playback
 		with audio played through other APIs or objects.
 	@param	allocator
 		A CFAllocator to use to allocate the clock.  

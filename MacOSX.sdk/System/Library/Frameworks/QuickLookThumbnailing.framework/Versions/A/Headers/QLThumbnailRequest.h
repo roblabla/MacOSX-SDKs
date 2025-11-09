@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  @abstract This class contains information about the thumbnail that should be provided.
  */
-API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(watchos,tvos)  __attribute__((visibility("default")))
+API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)  __attribute__((visibility("default")))
 @interface QLFileThumbnailRequest : NSObject
 
 /**

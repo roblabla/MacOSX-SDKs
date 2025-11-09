@@ -4,7 +4,8 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/EAFirmwareUpdater.framework/Versions/A/EAFirmwareUpdater'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _AUSandboxPlatformInit, _generateHashForDataAtLocation, _generateHashForDataAtLocationAsData, 
+    symbols:         [ _AUSandboxPlatformInit, _generateBase64HashForDataAtLocation, 
+                       _generateHashForDataAtLocation, _generateHashForDataAtLocationAsData, 
                        _generateSHA256HashForDataAtLocation, _generateSHA256HashForDataAtLocationAsData ]
     objc-classes:    [ EAFirmwareUpdater, FirmwareBundle, HSModel, iAUPServer ]
     objc-ivars:      [ EAFirmwareUpdater._accessory, EAFirmwareUpdater._appProtocol, 

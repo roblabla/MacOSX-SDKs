@@ -28,6 +28,7 @@
 
 #import <TargetConditionals.h>
 
+#if !TARGET_OS_IPHONE
 #include <Foundation/NSObjCRuntime.h>
 
 #define WEBKIT_AVAILABLE_MAC(introduced) NS_AVAILABLE_MAC(introduced)
@@ -47,5 +48,16 @@
 #define WEBKIT_ENUM_DEPRECATED_MAC(introduced, deprecated, ...) NS_ENUM_AVAILABLE_MAC(introduced)
 
 #endif /* !defined(BUILDING_WEBKIT) && !defined(DISABLE_LEGACY_WEBKIT_DEPRECATIONS) */
+
+#else
+
+#define WEBKIT_AVAILABLE_MAC(introduced)
+#define WEBKIT_CLASS_AVAILABLE_MAC(introduced)
+#define WEBKIT_ENUM_AVAILABLE_MAC(introduced)
+#define WEBKIT_DEPRECATED_MAC(introduced, deprecated, ...)
+#define WEBKIT_CLASS_DEPRECATED_MAC(introduced, deprecated, ...)
+#define WEBKIT_ENUM_DEPRECATED_MAC(introduced, deprecated, ...)
+
+#endif /* !TARGET_OS_IPHONE */
 
 #endif /* WebKit_WebKitAvailability_h */

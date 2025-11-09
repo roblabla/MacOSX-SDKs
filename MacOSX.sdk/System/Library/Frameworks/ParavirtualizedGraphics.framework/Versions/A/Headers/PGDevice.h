@@ -2,16 +2,16 @@
 //  PGDevice.h
 //  ParavirtualizedGraphics
 //
-//  Copyright © 2018-2022 Apple Inc. All rights reserved.
+//  Copyright © 2018-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef PGDevice_h
 #define PGDevice_h
 
-#include <stdint.h>
-#include <Metal/Metal.h>
-#include <IOSurface/IOSurface.h>
-#include <ParavirtualizedGraphics/PGDefines.h>
+#import <stdint.h>
+#import <Metal/Metal.h>
+#import <IOSurface/IOSurface.h>
+#import <ParavirtualizedGraphics/PGDefines.h>
 
 @protocol PGDevice;
 @protocol PGDisplay;
@@ -262,7 +262,7 @@ API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos)
  @param error An error out parameter, will be populated on resume failure.  Error will be in PGResumeErrorDomain and will have an error code from the PGResumeErrorCode enum.
  @return Returns YES on success.  On failure will return NO and populate error.
  @note Suspended displays should be reattached after this method has been called, but before -[PGDevice didResume:] is invoked.
- @note For resume, this must be the first method invoked on a newly created device.
+ @note For resume, this method must be invoked before any calls to `-[PGDevice mmioWriteAtOffset:value:]` or `-[PGDevice mmioReadAtOffset:]` are made.
  */
 -(bool)willResumeWithSuspendState:(NSData *_Nonnull)suspendState error:(NSError * __autoreleasing _Nullable * _Nullable)error API_AVAILABLE(macos(11.0)) API_UNAVAILABLE(ios) API_UNAVAILABLE(tvos);
 

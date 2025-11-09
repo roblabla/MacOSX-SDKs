@@ -41,7 +41,7 @@ exports:
                        CXSenderIdentity, CXServiceClient, CXServiceDomain, CXSetGroupCallAction, 
                        CXSetHeldCallAction, CXSetMutedCallAction, CXSetPlayedVoicemailAction, 
                        CXSetRelayingCallAction, CXSetScreenShareAttributesCallAction, 
-                       CXSetSendingVideoCallAction, CXSetSharingScreenCallAction, 
+                       CXSetScreeningCallAction, CXSetSendingVideoCallAction, CXSetSharingScreenCallAction, 
                        CXSetTTYTypeCallAction, CXSetTrashedVoicemailAction, CXSetVideoPresentationSizeCallAction, 
                        CXSetVideoPresentationStateCallAction, CXStartCallAction, 
                        CXTransaction, CXTransactionGroup, CXTransactionManager, CXVoicemail, 

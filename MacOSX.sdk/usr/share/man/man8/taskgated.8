@@ -7,30 +7,11 @@
 .\" The following lines are read in generating the apropos(man -k) database. Use only key
 .\" words here as the database is built based on the words here and in the .ND line. 
 .Nd task_for_pid access control daemon
-.Sh SYNOPSIS             \" Section Header - required - don't modify
-.Nm
-.Op Fl s                 \" [-abcd]
-.Op Fl t Ar timeout      \" [-t timeout]
-.Op Fl i Ar pid          \" [-i pid]
-.Sh DESCRIPTION          \" Section Header - required - don't modify
+..Sh DESCRIPTION          \" Section Header - required - don't modify
 .Nm
 is a system daemon that implements a policy for the task_for_pid system service.
 When the kernel is asked for the task port of a process, and preliminary access control
 checks pass, it invokes this daemon (via launchd) to make the decision.
-.Sh OPTIONS
-.Bl -tag -width -indent  \" Differs from above in tag removed 
-.It Fl t Ar timeout
-The daemon will quit after that many seconds of inactivity. It will be relaunched
-by launchd as needed. A timeout of zero can be specified to make the daemon quit
-after servicing each request, but a small positive timeout is better for performance.
-.It Fl i Ar pid
-Inject the service port of
-.Nm
-into the process with the given pid, rather than relying on launchd to install it
-system-wide. This is for testing only, and requires the launchd configuration for
-.Nm
-to be removed.
-.El                      \" Ends the list
 .Pp
 .\" .Sh ENVIRONMENT      \" May not be needed
 .\" .Bl -tag -width "ENV_VAR_1" -indent \" ENV_VAR_1 is width of the string ENV_VAR_1
@@ -40,16 +21,19 @@ to be removed.
 .\" Description of ENV_VAR_2
 .\" .El 
 .Sh AUTHORIZATION RIGHTS
-.Bl -tag -width system.privilege.taskport -compact
+.Bl -tag -width system.privilege.taskport.debug -compact
 .It Pa system.privilege.taskport
-Authorization right used to check access of allowed (but not safe) callers.
+Authorization right used to check access of processes with the \fBcom.apple.security.cs.debugger\fR entitlement.
+.It Pa system.privilege.taskport.safe
+Authorization right used to check access of processes with the \fBcom.apple.private.cs.debugger.safe\fR entitlement.
+.It Pa system.privilege.taskport.debug
+Authorization right used to check access of processes with the \fBcom.apple.private.cs.debugger\fR entitlement.
 .El
 .Sh INFO KEYS
 .Bl -tag -width SecTaskAccess
 .It Pa SecTaskAccess
-A value of "allowed" is required for any program that wants
-access to task ports. A value of "safe" bypasses authorization checks if so configured.
-Code must be signed by any system-trusted signing authority.
+(\fBDEPRECATED as of macOS 10.14\fR, use the com.apple.security.cs.debugger entitlement instead) A value of "allowed" can be set for any program that wants
+access to task ports.
 .El
 .Sh FILES                \" File used or created by the topic of the man page
 .Bl -tag -width "/etc/authorization" -compact
@@ -70,14 +54,3 @@ startup configuration file for
 .Sh SEE ALSO 
 .Xr security 1 , 
 .Xr launchd 8
-.\" .Sh BUGS              \" Document known, unremedied bugs 
-.Sh HISTORY
-.Nm
-was first introduced in Mac OS 10.5 (Leopard).
-.Pp
-Procmod and procview support (-p) was removed in 10.11.
-.Pp
-Certain software updates of Mac OS 10.4 (Tiger) introduced the convention
-requiring membership in the procmod or procview groups to control task port
-access. Before that, any process could obtain the task port of any other process
-with the same user-id.

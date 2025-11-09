@@ -16,6 +16,7 @@
  */
 
 #import <Foundation/Foundation.h>
+#import <Matter/MTRDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -23,8 +24,23 @@ typedef NS_ENUM(NSInteger, MTRCommissioningStatus) {
     MTRCommissioningStatusUnknown = 0,
     MTRCommissioningStatusSuccess = 1,
     MTRCommissioningStatusFailed = 2,
-    MTRCommissioningStatusDiscoveringMoreDevices = 3
+    MTRCommissioningStatusDiscoveringMoreDevices MTR_DEPRECATED("MTRCommissioningStatusDiscoveringMoreDevices is not used.",
+        ios(16.1, 16.5), macos(13.0, 13.4), watchos(9.1, 9.5), tvos(16.1, 16.5))
+    = 3,
 } API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4));
+
+/**
+ * A representation of a (vendor, product) pair that identifies a specific product.
+ */
+API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0))
+@interface MTRProductIdentity : NSObject
+
+@property (nonatomic, copy, readonly) NSNumber * vendorID;
+
+@property (nonatomic, copy, readonly) NSNumber * productID;
+
+- (instancetype)initWithVendorID:(NSNumber *)vendorID productID:(NSNumber *)productID;
+@end
 
 @class MTRDeviceController;
 
@@ -50,26 +66,49 @@ API_AVAILABLE(ios(16.4), macos(13.3), watchos(9.4), tvos(16.4))
 /**
  * Notify the delegate when commissioning is completed.
  */
-- (void)controller:(MTRDeviceController *)controller commissioningComplete:(NSError * _Nullable)error;
+- (void)controller:(MTRDeviceController *)controller
+    commissioningComplete:(NSError * _Nullable)error
+    MTR_DEPRECATED("Please use controller:commissioningComplete:nodeID:", ios(16.4, 17.0), macos(13.3, 14.0), watchos(9.4, 10.0),
+        tvos(16.4, 17.0));
 
+/**
+ * Notify the delegate when commissioning is completed.
+ *
+ * Exactly one of error and nodeID will be nil.
+ *
+ * If nodeID is not nil, then it represents the node id the node was assigned, as encoded in its operational certificate.
+ */
+- (void)controller:(MTRDeviceController *)controller
+    commissioningComplete:(NSError * _Nullable)error
+                   nodeID:(NSNumber * _Nullable)nodeID API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
+
+/**
+ * Notify the delegate when commissioning infomation has been read from the Basic
+ * Information cluster of the commissionee.
+ *
+ * At the point when this notification happens, device attestation has not been performed yet,
+ * so the information delivered by this notification should not be trusted.
+ */
+- (void)controller:(MTRDeviceController *)controller
+    readCommissioningInfo:(MTRProductIdentity *)info API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0));
 @end
 
 typedef NS_ENUM(NSUInteger, MTRPairingStatus) {
-    MTRPairingStatusUnknown API_DEPRECATED(
+    MTRPairingStatusUnknown MTR_DEPRECATED(
         "Please use MTRCommissioningStatusUnknown", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
     = 0,
-    MTRPairingStatusSuccess API_DEPRECATED(
+    MTRPairingStatusSuccess MTR_DEPRECATED(
         "Please use MTRCommissioningStatusSuccess", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
     = 1,
-    MTRPairingStatusFailed API_DEPRECATED(
+    MTRPairingStatusFailed MTR_DEPRECATED(
         "Please use MTRCommissioningStatusFailed", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
     = 2,
-    MTRPairingStatusDiscoveringMoreDevices API_DEPRECATED("Please use MTRCommissioningStatusDiscoveringMoreDevices",
-        ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+    MTRPairingStatusDiscoveringMoreDevices MTR_DEPRECATED("MTRPairingStatusDiscoveringMoreDevices is not used.", ios(16.1, 16.4),
+        macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
     = 3
-} API_DEPRECATED("Please use MTRCommissioningStatus", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
+} MTR_DEPRECATED("Please use MTRCommissioningStatus", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4));
 
-API_DEPRECATED("Please use MTRDeviceControllerDelegate", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
+MTR_DEPRECATED("Please use MTRDeviceControllerDelegate", ios(16.1, 16.4), macos(13.0, 13.3), watchos(9.1, 9.4), tvos(16.1, 16.4))
 @protocol MTRDevicePairingDelegate <NSObject>
 @optional
 - (void)onStatusUpdate:(MTRPairingStatus)status;

@@ -1,5 +1,10 @@
 framework module MessageUI [system] {
   umbrella header "MessageUI.h"
+  
+  explicit module UPI {
+      header "MFMessageComposeViewController+UPI.h"
+      export *
+  }
 
   export *
   module * { export * }

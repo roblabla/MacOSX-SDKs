@@ -1,9 +1,4 @@
-//
-//  GKTurnBasedMatch.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <GameKit/GKPlayer.h>
 #import <GameKit/GKLeaderboardScore.h>
@@ -65,7 +60,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 
 @interface GKTurnBasedParticipant (Obsoleted)
 /*** This property is obsolete. ***/
-@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSString              *playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "use player") ;
+@property(readonly, nullable, copy, NS_NONATOMIC_IOSONLY) NSString              *playerID API_DEPRECATED_WITH_REPLACEMENT("-player:", ios(5.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 @end
 
 NS_ASSUME_NONNULL_BEGIN
@@ -100,14 +95,14 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)player:(GKPlayer *)player wantsToQuitMatch:(GKTurnBasedMatch *)match NS_AVAILABLE(10_11, 9_0) __WATCHOS_AVAILABLE(3_0);
 
 /// Deprecated
-- (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite NS_DEPRECATED_IOS(7_0, 8_0, "use didRequestMatchWithOtherPlayers") ;
+- (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite API_DEPRECATED_WITH_REPLACEMENT("-didRequestMatchWithOtherPlayers:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 
 @end
 
 // Turn timeout constants
 
-extern NSTimeInterval        GKTurnTimeoutDefault NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);    // use a default timeout of one week
-extern NSTimeInterval        GKTurnTimeoutNone NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);
+GK_EXTERN NSTimeInterval        GKTurnTimeoutDefault NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);    // use a default timeout of one week
+GK_EXTERN NSTimeInterval        GKTurnTimeoutNone NS_AVAILABLE(10_9, 6_0) __WATCHOS_AVAILABLE(3_0);
 
 NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 @interface GKTurnBasedMatch : NSObject
@@ -212,7 +207,7 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
 - (void)endMatchInTurnWithMatchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler;
 
 // This will end the match and submit scores and achievements for all participants. Scores should be submitted for all involved players, and multiple scores may be submitted for each to different leaderboards. Earned achievements may also be submitted for any participants. You must set each participant’s matchOutcome before calling this method. All completed exchanges must be resolved or canceled before calling this.
-- (void)endMatchInTurnWithMatchData:(NSData*)matchData scores:(nullable NSArray<GKScore *> *)scores achievements:(nullable NSArray<GKAchievement *> *)achievements completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_10, 11_0, 6_0, 14_0, "pass GKLeaderboardScore to endMatchInTurnWithMatchData:scores:completionHandler instead");
+- (void)endMatchInTurnWithMatchData:(NSData*)matchData scores:(nullable NSArray<GKScore *> *)scores achievements:(nullable NSArray<GKAchievement *> *)achievements completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-endMatchInTurnWithMatchData:scores:completionHandler", ios(6.0,14.0), macos(10.10,11.0));
 
 - (void)endMatchInTurnWithMatchData:(NSData*)matchData leaderboardScores:(NSArray<GKLeaderboardScore *> *)scores achievements:(NSArray *)achievements completionHandler:(void(^)(NSError * __nullable error))completionHandler NS_AVAILABLE(11_0, 14_0);
 
@@ -239,8 +234,8 @@ NS_CLASS_AVAILABLE(10_8, 5_0) __WATCHOS_AVAILABLE(3_0)
                  completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
 // deprecated methods
-- (void)endTurnWithNextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_9, 5_0, 6_0, "Use endTurnWithNextParticipants:... instead") ;
-- (void)participantQuitInTurnWithOutcome:(GKTurnBasedMatchOutcome)matchOutcome nextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_9, 5_0, 6_0, "Use participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:... instead") ;
+- (void)endTurnWithNextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-endTurnWithNextParticipants:turnTimeout:matchData:completionHandler:", ios(5.0,6.0), macos(10.8,10.9)) __TVOS_UNAVAILABLE;
+- (void)participantQuitInTurnWithOutcome:(GKTurnBasedMatchOutcome)matchOutcome nextParticipant:(GKTurnBasedParticipant *)nextParticipant matchData:(NSData*)matchData completionHandler:(void(^__nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-participantQuitInTurnWithOutcome:nextParticipants:turnTimeout:matchData:completionHandler:", ios(5.0,6.0), macos(10.8,10.9)) __TVOS_UNAVAILABLE;
 
 @end
 
@@ -258,9 +253,8 @@ typedef NS_ENUM(int8_t, GKTurnBasedExchangeStatus) {
 
 // Exchange timeout constants
 
-extern NSTimeInterval        GKExchangeTimeoutDefault NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);    // use a default timeout of one day
-extern NSTimeInterval        GKExchangeTimeoutNone NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
-
+GK_EXTERN NSTimeInterval        GKExchangeTimeoutDefault NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);    // use a default timeout of one day
+GK_EXTERN NSTimeInterval        GKExchangeTimeoutNone NS_AVAILABLE(10_10, 7_0) __WATCHOS_AVAILABLE(3_0);
 
 NS_CLASS_AVAILABLE(10_10,7_0) __WATCHOS_AVAILABLE(3_0)
 @interface  GKTurnBasedExchange : NSObject
@@ -285,7 +279,6 @@ NS_CLASS_AVAILABLE(10_10,7_0) __WATCHOS_AVAILABLE(3_0)
 
 @end
 
-    
 NS_CLASS_AVAILABLE(10_10,7_0) __WATCHOS_AVAILABLE(3_0)
 @interface GKTurnBasedExchangeReply  : NSObject
 
@@ -298,7 +291,7 @@ NS_CLASS_AVAILABLE(10_10,7_0) __WATCHOS_AVAILABLE(3_0)
 // deprecated
 
 // see documentation for GKTurnBasedEventListener for the equivalent methods
-NS_DEPRECATED(10_8, 10_10, 5_0, 7_0, "Use registerListener on GKLocalPlayer with an object that implements the GKTurnBasedEventListener protocol") 
+API_DEPRECATED_WITH_REPLACEMENT("-[GKLocalPlayer registerListener:]", ios(5.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 @protocol  GKTurnBasedEventHandlerDelegate
 
 - (void)handleInviteFromGameCenter:(NSArray<NSString *> *)playersToInvite NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);
@@ -310,7 +303,7 @@ NS_DEPRECATED(10_8, 10_10, 5_0, 7_0, "Use registerListener on GKLocalPlayer with
 
 @end
 
-NS_CLASS_DEPRECATED(10_8, 10_10, 5_0, 7_0, "Use registerListener on GKLocalPlayer with an object that implements the GKTurnBasedEventListener protocol") 
+API_DEPRECATED_WITH_REPLACEMENT("-[GKTurnBasedEventListener registerListener:]", ios(5.0,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos)
 @interface GKTurnBasedEventHandler : NSObject
 
 + (GKTurnBasedEventHandler *)sharedTurnBasedEventHandler NS_DEPRECATED(10_8, 10_10, 5_0, 7_0);

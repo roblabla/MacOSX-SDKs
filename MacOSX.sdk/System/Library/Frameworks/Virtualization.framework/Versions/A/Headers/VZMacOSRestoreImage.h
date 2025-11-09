@@ -2,12 +2,11 @@
 //  VZMacOSRestoreImage.h
 //  Virtualization
 //
-//  Copyright © 2021-2022 Apple Inc. All rights reserved.
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
 //
 
 #ifdef __arm64__
 
-#import <Foundation/Foundation.h>
 #import <Virtualization/VZDefines.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -92,7 +91,7 @@ VZ_EXPORT API_AVAILABLE(macos(12.0))
     determine the hardware model and configuration requirements that will provide the most complete feature set on the current
     host. If none of the hardware models are supported on the current host, this property is nil.
  */
-@property (readonly, copy, nullable) VZMacOSConfigurationRequirements *mostFeaturefulSupportedConfiguration;
+@property (readonly, nullable, copy) VZMacOSConfigurationRequirements *mostFeaturefulSupportedConfiguration;
 
 @end
 

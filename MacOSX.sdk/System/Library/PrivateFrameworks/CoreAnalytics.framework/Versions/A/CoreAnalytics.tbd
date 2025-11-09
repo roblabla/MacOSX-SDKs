@@ -20,16 +20,17 @@ exports:
                        __ZTSNSt3__117bad_function_callE ]
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _AnalyticsIsEventUsed, _AnalyticsRolloverEvents, _AnalyticsRolloverWithOptions, 
-                       _AnalyticsSendEvent, _AnalyticsSendEventLazy, _AnalyticsSendEventLazyHighPriority, 
-                       _AnalyticsSendExplodingEventLazy, _AnalyticsSetCallbackForQueriedEvent, 
-                       _AnalyticsSetCallbackForQueriedEventWithQueue, __Z17CAAssertAvailablev, 
-                       __Z17CASetupLogDomainsv, __Z19analytics_tool_dumpv, __Z19analytics_tool_savev, 
-                       __Z21analytics_tool_commitv, __Z23analytics_tool_rolloverv, 
+    symbols:         [ _AnalyticsDisableAllTransformSampling, _AnalyticsIsEventUsed, 
+                       _AnalyticsReenableAllTransformSampling, _AnalyticsRolloverEvents, 
+                       _AnalyticsRolloverWithOptions, _AnalyticsSendEvent, _AnalyticsSendEventLazy, 
+                       _AnalyticsSendEventLazyHighPriority, _AnalyticsSendExplodingEventLazy, 
+                       _AnalyticsSetCallbackForQueriedEvent, _AnalyticsSetCallbackForQueriedEventWithQueue, 
+                       __Z17CAAssertAvailablev, __Z17CASetupLogDomainsv, __Z19analytics_tool_dumpv, 
+                       __Z19analytics_tool_savev, __Z21analytics_tool_commitv, __Z23analytics_tool_rolloverv, 
                        __Z25analytics_tool_has_configv, __Z25analytics_tool_query_listv, 
                        __Z26analytics_tool_config_dumpv, __Z26analytics_tool_config_infov, 
                        __Z26analytics_tool_config_listv, __Z26analytics_tool_query_clearNSt3__18optionalINS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEEE, 
-                       __Z26analytics_tool_query_stateNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10applesauce3xpc6objectES5_, 
+                       __Z26analytics_tool_query_stateNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEN10applesauce3xpc6objectE, 
                        __Z28analytics_tool_config_reloadv, __Z29analytics_tool_app_usage_syncv, 
                        __Z29analytics_tool_get_cache_listv, __Z29analytics_tool_transform_infoNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
                        __Z30analytics_tool_transform_evictNSt3__112basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEE, 
@@ -63,9 +64,11 @@ exports:
                        __ZTIN13CoreAnalytics21ConfigurationObserverE, __ZTSN13CoreAnalytics13EventObserverE, 
                        __ZTSN13CoreAnalytics21ConfigurationObserverE, __ZTVN13CoreAnalytics13EventObserverE, 
                        __ZTVN13CoreAnalytics21ConfigurationObserverE, _ad_addScalarForKey, 
-                       _analytics_is_event_used, _analytics_rollover_events, _analytics_rollover_with_options, 
-                       _analytics_send_event, _analytics_send_event_lazy, _analytics_send_event_lazy_high_priority, 
-                       _analytics_send_exploding_event_lazy, _analytics_set_callback_for_queried_event, 
-                       _analytics_set_callback_for_queried_event_with_queue, _report_locale_prefs_to_analyticsd ]
+                       _analytics_disable_all_transform_sampling, _analytics_is_event_used, 
+                       _analytics_reenable_all_transform_sampling, _analytics_rollover_events, 
+                       _analytics_rollover_with_options, _analytics_send_event, _analytics_send_event_lazy, 
+                       _analytics_send_event_lazy_high_priority, _analytics_send_exploding_event_lazy, 
+                       _analytics_set_callback_for_queried_event, _analytics_set_callback_for_queried_event_with_queue, 
+                       _report_locale_prefs_to_analyticsd ]
     objc-classes:    [ AnalyticsConfigurationObserver, AnalyticsEventObserver ]
 ...

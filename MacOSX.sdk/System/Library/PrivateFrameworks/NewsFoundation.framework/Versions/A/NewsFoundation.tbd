@@ -11,8 +11,9 @@ exports:
                        _NFGeneralDeviceString, _NFInternalBuild, _NFLockSync, _NFPromiseInvokeOnQueue, 
                        _NFSeedBuild, _NFStateMachineErrorDomain, _NFStoreDemoMode, 
                        _NewsFoundationVersionNumber, _NewsFoundationVersionString, 
-                       __UIValueCGRectValue, _kNFPromiseSealingErrorCode, _kNFPromiseSealingErrorName, 
-                       _kNFReachabilityChangedNotification, _zalgo, _zalgoIfMain ]
+                       __UIValueCGRectValue, _kNFPromiseErrorDomain, _kNFPromiseSealingErrorCode, 
+                       _kNFPromiseTimeoutErrorCode, _kNFReachabilityChangedNotification, 
+                       _zalgo, _zalgoIfMain ]
     objc-classes:    [ NFArchiver, NFEventManager, NFEventTrigger, NFLazy, NFMultiDelegate, 
                        NFMutexLock, NFPendingPromise, NFPromise, NFPromiseSeal, NFReachability, 
                        NFStateMachine, NFStateMachineEvent, NFStateMachineState, 

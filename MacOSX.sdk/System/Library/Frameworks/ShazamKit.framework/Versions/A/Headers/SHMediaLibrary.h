@@ -13,8 +13,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /// @brief @c SHMediaLibrary represents the user's synced Shazam library.
 /// @discussion You can add new @c SHMediaItem instances to the user's library.
-/// Before using any @c SHMediaLibrary method, you must obtain permission from the user to use their Media Library by calling - [MPMediaLibrary requestAuthorization:].
-SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
+SH_EXPORT API_DEPRECATED("Use SHLibrary instead", macos(12.0, API_TO_BE_DEPRECATED), ios(15.0, API_TO_BE_DEPRECATED), tvos(15.0, API_TO_BE_DEPRECATED), watchos(8.0, API_TO_BE_DEPRECATED))
 @interface SHMediaLibrary : NSObject
 
 /// @brief Returns an instance of the default Shazam library.
@@ -31,7 +30,7 @@ SH_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(15.0), watchos(8.0))
 ///
 /// @param mediaItems An array containing the @c SHMediaItem objects to be added to the library.
 /// @param completionHandler A block called after all valid @c SHMediaItem objects have been added to the library. If an error occurred, the error parameter will be populated.
-- (void)addMediaItems:(NSArray<SHMediaItem *> *)mediaItems completionHandler:(void (^)(NSError * __nullable error))completionHandler;
+- (void)addMediaItems:(NSArray<SHMediaItem *> *)mediaItems completionHandler:(void (NS_SWIFT_SENDABLE ^)(NSError * __nullable error))completionHandler;
 
 - (instancetype)init NS_UNAVAILABLE;
 + (instancetype)new NS_UNAVAILABLE;

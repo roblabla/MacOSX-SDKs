@@ -226,6 +226,73 @@ UIKIT_EXTERN UIBezierPath *UIAccessibilityConvertPathToScreenCoordinates(UIBezie
  */
 @property(nullable, nonatomic, strong) UIAccessibilityTextualContext accessibilityTextualContext API_AVAILABLE(ios(13.0), tvos(13.0));
 
+// Configure how VoiceOver interacts with direct touch areas.
+@property(nonatomic, assign) UIAccessibilityDirectTouchOptions accessibilityDirectTouchOptions API_AVAILABLE(ios(17.0));
+
+/*
+ Block based setters take precedence over single line setters (i.e setAccessibilityLabel:(NSString *)) and property overrides (i.e. accessibilityLabel).
+ These methods require the block to have a specific return type that corresponds to the attribute's type.
+ Each of these block based setters have a corresponding accessibility property.
+ See the notes for the property for more specific information about that property.
+*/
+
+typedef BOOL (^AXBoolReturnBlock)(void);
+typedef NSString * __nullable (^AXStringReturnBlock)(void);
+typedef NSArray<NSString *> * __nullable (^AXStringArrayReturnBlock)(void);
+typedef NSAttributedString * __nullable (^AXAttributedStringReturnBlock)(void);
+typedef NSArray<NSAttributedString *> * __nullable (^AXAttributedStringArrayReturnBlock)(void);
+typedef CGRect (^AXRectReturnBlock)(void);
+typedef UIBezierPath * __nullable (^AXPathReturnBlock)(void);
+typedef CGPoint (^AXPointReturnBlock)(void);
+typedef __nullable id (^AXObjectReturnBlock)(void);
+typedef NSArray * __nullable (^AXArrayReturnBlock)(void);
+typedef void (^AXVoidReturnBlock)(void);
+typedef UIAccessibilityTraits (^AXTraitsReturnBlock)(void);
+typedef UIAccessibilityNavigationStyle (^AXNavigationStyleReturnBlock)(void);
+typedef UIAccessibilityContainerType (^AXContainerTypeReturnBlock)(void);
+typedef __nullable UIAccessibilityTextualContext (^AXTextualContextReturnBlock)(void);
+typedef NSArray<UIAccessibilityCustomAction *> * __nullable (^AXCustomActionsReturnBlock)(void);
+
+// Basic accessibility
+@property (nullable, nonatomic, copy) AXBoolReturnBlock isAccessibilityElementBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXStringReturnBlock accessibilityLabelBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXStringReturnBlock accessibilityValueBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXStringReturnBlock accessibilityHintBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXTraitsReturnBlock accessibilityTraitsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXStringReturnBlock accessibilityIdentifierBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+
+// Defining accessibility text and language
+@property (nullable, nonatomic, copy) AXArrayReturnBlock accessibilityHeaderElementsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXAttributedStringReturnBlock accessibilityAttributedLabelBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXAttributedStringReturnBlock accessibilityAttributedHintBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXStringReturnBlock accessibilityLanguageBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXTextualContextReturnBlock accessibilityTextualContextBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXStringArrayReturnBlock accessibilityUserInputLabelsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXAttributedStringArrayReturnBlock accessibilityAttributedUserInputLabelsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXAttributedStringReturnBlock accessibilityAttributedValueBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+
+// Configuring behavior
+@property (nullable, nonatomic, copy) AXBoolReturnBlock accessibilityElementsHiddenBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXBoolReturnBlock accessibilityRespondsToUserInteractionBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXBoolReturnBlock accessibilityViewIsModalBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXBoolReturnBlock accessibilityShouldGroupAccessibilityChildrenBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+
+// Navigating elements
+@property (nullable, nonatomic, copy) AXArrayReturnBlock accessibilityElementsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXArrayReturnBlock automationElementsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXContainerTypeReturnBlock accessibilityContainerTypeBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXPointReturnBlock accessibilityActivationPointBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXRectReturnBlock accessibilityFrameBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXNavigationStyleReturnBlock accessibilityNavigationStyleBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXPathReturnBlock accessibilityPathBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+
+// Actions
+@property (nullable, nonatomic, copy) AXBoolReturnBlock accessibilityActivateBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXVoidReturnBlock accessibilityIncrementBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXVoidReturnBlock accessibilityDecrementBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXBoolReturnBlock accessibilityPerformEscapeBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXBoolReturnBlock accessibilityMagicTapBlock API_AVAILABLE(ios(17.0), tvos(17.0));
+@property (nullable, nonatomic, copy) AXCustomActionsReturnBlock accessibilityCustomActionsBlock API_AVAILABLE(ios(17.0), tvos(17.0));
 
 @end
 
@@ -281,6 +348,18 @@ UIKIT_EXTERN __nullable id UIAccessibilityFocusedElement(UIAccessibilityAssistiv
  */   
 - (void)accessibilityIncrement API_AVAILABLE(ios(4.0));
 - (void)accessibilityDecrement API_AVAILABLE(ios(4.0));
+
+/*
+ If an element has the UIAccessibilityTraitSupportsZoom trait, it must also implement
+ the following methods. The point is the center point in the coordinate space of the
+ corresponding view. For example, if an element allows an expand gesture that modifies the
+ view in some way, you may implement accessibilityZoomInAtPoint so that VoiceOver's zoom in
+ custom action will receive the same behavior. If your implementation successfully handles
+ zooming, return YES, otherwise return NO.
+ default == NO
+ */
+- (BOOL)accessibilityZoomInAtPoint:(CGPoint)point API_AVAILABLE(ios(17.0));
+- (BOOL)accessibilityZoomOutAtPoint:(CGPoint)point API_AVAILABLE(ios(17.0));
 
 /*
  If the user interface requires a scrolling action (e.g. turning the page of a book), a view in the view 
@@ -416,7 +495,8 @@ UIKIT_EXTERN void UIAccessibilityPostNotification(UIAccessibilityNotifications n
  Listen for UIAccessibilityVoiceOverStatusDidChangeNotification to know when VoiceOver starts or stops.
  */
 UIKIT_EXTERN BOOL UIAccessibilityIsVoiceOverRunning(void) API_AVAILABLE(ios(4.0));
-UIKIT_EXTERN NSString *const UIAccessibilityVoiceOverStatusChanged API_DEPRECATED_WITH_REPLACEMENT("UIAccessibilityVoiceOverStatusDidChangeNotification", ios(4.0, 11.0), tvos(9.0, 11.0));
+UIKIT_EXTERN NSString *const UIAccessibilityVoiceOverStatusChanged API_DEPRECATED_WITH_REPLACEMENT("UIAccessibilityVoiceOverStatusDidChangeNotification", ios(4.0, 11.0), tvos(9.0, 11.0))
+    API_UNAVAILABLE(visionos);
 UIKIT_EXTERN NSNotificationName const UIAccessibilityVoiceOverStatusDidChangeNotification API_AVAILABLE(ios(11.0), tvos(11.0));
 
 // Returns whether system audio is mixed down from stereo to mono.

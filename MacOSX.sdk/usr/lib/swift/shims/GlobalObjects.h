@@ -89,9 +89,14 @@ struct _SwiftHashingParameters {
   __swift_uint64_t seed1;
   __swift_bool deterministic;
 };
-  
+
+#if __APPLE_SEPOS__
+SWIFT_RUNTIME_STDLIB_API
+struct _SwiftHashingParameters _swift_getHashingParameters();
+#else // !__APPLE_SEPOS__
 SWIFT_RUNTIME_STDLIB_API
 struct _SwiftHashingParameters _swift_stdlib_Hashing_parameters;
+#endif // !__APPLE_SEPOS__
 
 #ifdef __cplusplus
 

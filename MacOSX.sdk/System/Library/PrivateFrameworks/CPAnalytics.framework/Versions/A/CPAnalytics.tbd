@@ -3,13 +3,14 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CPAnalytics.framework/Versions/A/CPAnalytics'
-current-version: 541.0.110
+current-version: 608.2.113
 allowable-clients:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    clients:         [ AssetExplorer, CPAnalyticsTestSupport, MediaMiningKit, PhotoAnalysis, 
-                       PhotoVision, Photos, PhotosTests, PhotosUIApps, PhotosUICore, 
-                       PhotosUIEdit, PhotosUIPrivate, graphctl ]
+    clients:         [ AssetExplorer, CPAnalyticsTestSupport, MediaMiningKit, Photo Booth, 
+                       PhotoAnalysis, PhotoVision, Photos, PhotosFileProvider, PhotosGraph, 
+                       PhotosIntelligence, PhotosTests, PhotosUICore, PhotosUIEdit, 
+                       PhotosUIPrivate, graphctl ]
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -80,9 +81,10 @@ exports:
                        _CPAnalyticsSystemPropertyPersonCount, _CPAnalyticsSystemPropertyPersonCountRange, 
                        _CPAnalyticsSystemPropertyPhotosCount, _CPAnalyticsSystemPropertyProcess, 
                        _CPAnalyticsSystemPropertySceneAnalysisProgress, _CPAnalyticsSystemPropertyVideosCount, 
-                       _CPAnalyticsUserPropertyiCPLEnabled, _CPAnalyticsUserPropertyiCPLExceedingQuota, 
-                       _CPAnalyticsUserPropertyiCPLHasChangesToProcess, _CPAnalyticsUserPropertyiCPLLowDiskSpace, 
-                       _CPAnalyticsUserPropertyiCPLVeryLowDiskSpace, _ScreenViewTrackerNoScreenName ]
+                       _CPAnalyticsUserPropertySharedLibraryEnabled, _CPAnalyticsUserPropertyiCPLEnabled, 
+                       _CPAnalyticsUserPropertyiCPLExceedingQuota, _CPAnalyticsUserPropertyiCPLHasChangesToProcess, 
+                       _CPAnalyticsUserPropertyiCPLLowDiskSpace, _CPAnalyticsUserPropertyiCPLVeryLowDiskSpace, 
+                       _ScreenViewTrackerNoScreenName ]
     objc-classes:    [ CPAnalytics, CPAnalyticsAppStateDestination, CPAnalyticsCompoundEventMatcher, 
                        CPAnalyticsConditional, CPAnalyticsCoreAnalyticsHelper, CPAnalyticsCoreDuetEventMatcher, 
                        CPAnalyticsDashboardDestination, CPAnalyticsDestinationsRegistry, 

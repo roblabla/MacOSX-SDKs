@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASECardioidDirectivityModelSubbandParameters
     @abstract Cardioid directivity model subband parameters.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASECardioidDirectivityModelSubbandParameters : NSObject
 
 - (instancetype)init;
@@ -57,7 +57,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEConeDirectivityModelSubbandParameters
     @abstract Cone directivity model subband parameters.
  */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEConeDirectivityModelSubbandParameters : NSObject
 
 - (instancetype)init;
@@ -115,7 +115,7 @@ NS_SWIFT_NAME(setAngles(innerAngle:outerAngle:));
     @interface PHASEDirectivityModelParameters
     @abstract Directivity model parameters.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEDirectivityModelParameters : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -130,7 +130,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASECardioidDirectivityModelParameters
     @abstract Cardioid directivity model parameters.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASECardioidDirectivityModelParameters : PHASEDirectivityModelParameters
 
 - (instancetype)initWithSubbandParameters: (NSArray<PHASECardioidDirectivityModelSubbandParameters*>*) subbandParameters;
@@ -150,7 +150,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEConeDirectivityModelParameters
     @abstract Cone directivity model parameters.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEConeDirectivityModelParameters : PHASEDirectivityModelParameters
 
 - (instancetype)initWithSubbandParameters: (NSArray<PHASEConeDirectivityModelSubbandParameters*>*) subbandParameters;

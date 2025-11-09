@@ -180,6 +180,10 @@ PDFKIT_EXTERN PDFAnnotationHighlightingMode PDFAnnotationHighlightingModePush PD
 // Used by annotations type(s): /Widget (field type(s): /Tx).
 @property (nonatomic, getter=isMultiline) BOOL multiline;
 
+// Returns whether an annotation is a /FreeText or a /Widget with field type /Tx
+// and the annotation is not hidden or read-only.
+@property (readonly, getter=isActivatableTextField) BOOL activatableTextField;
+
 // Used to determine if a PDF text field is a password field.
 // Used by annotations type(s): /Widget (field type(s): /Tx).
 @property (nonatomic, readonly) BOOL isPasswordField;

@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2016 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  
 	@abstract	AVMetadataGroup is the common superclass for AVTimedMetadataGroup and AVDateRangeMetadataGroup; each represents a collection of metadata items associated with a segment of a timeline. AVTimedMetadataGroup is typically used with content that defines an independent timeline, while AVDateRangeMetadataGroup is typically used with content that's associated with a specific range of dates.
 */
-
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMetadataGroup : NSObject
 
@@ -36,10 +36,10 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMetadataGroup (AVMetadataGroupIdentification)
 
 /* indicates the classifyingLabel of the group; nil if no classifyingLabel is indicated */
-@property (nonatomic, readonly, nullable) NSString *classifyingLabel API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
+@property (nonatomic, readonly, nullable) NSString *classifyingLabel API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3));
 
 /* indicates the unique identifier of the group; nil if no unique identifier is indicated */
-@property (nonatomic, readonly, nullable) NSString *uniqueID API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.3), watchos(2.3));
+@property (nonatomic, readonly, nullable) NSString *uniqueID API_AVAILABLE(macos(10.11.3), ios(9.3), tvos(9.2), watchos(2.3));
 
 @end
 
@@ -48,7 +48,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
  
 	@abstract	AVTimedMetadataGroup is used to represent a collection of metadata items that are valid for use during a specific range of time. For example, AVTimedMetadataGroups are used to represent chapters, optionally containing metadata items for chapter titles and chapter images.
 */
-
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVTimedMetadataGroup : AVMetadataGroup <NSCopying, NSMutableCopying>
 {
@@ -104,7 +104,7 @@ API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
  
 	@abstract	AVMutableTimedMetadataGroup is used to represent a mutable collection of metadata items that are valid for use during a specific range of time.
 */
-
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
 @interface AVMutableTimedMetadataGroup : AVTimedMetadataGroup
 {
@@ -125,7 +125,7 @@ API_AVAILABLE(macos(10.7), ios(4.3), tvos(9.0), watchos(1.0))
  
 	@abstract	AVDateRangeMetadataGroup is used to represent a collection of metadata items that are valid for use within a specific range of dates.
 */
-
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVDateRangeMetadataGroup : AVMetadataGroup <NSCopying, NSMutableCopying>
 {
@@ -162,7 +162,7 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
  
 	@abstract	AVMutableDateRangeMetadataGroup is used to represent a mutable collection of metadata items that are valid for use within a specific range of dates.
 */
-
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 @interface AVMutableDateRangeMetadataGroup : AVDateRangeMetadataGroup
 {

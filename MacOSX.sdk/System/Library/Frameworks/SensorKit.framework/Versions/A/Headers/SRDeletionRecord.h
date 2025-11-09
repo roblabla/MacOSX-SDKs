@@ -25,9 +25,9 @@ typedef NS_ENUM(NSInteger, SRDeletionReason) {
 
     /// Samples were removed because the system was in an invalid state
     SRDeletionReasonSystemInitiated,
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos);
+} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos);
 
-SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos, macos) 
+SR_EXTERN API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, visionos) API_UNAVAILABLE(tvos, macos) 
 @interface SRDeletionRecord : NSObject <NSSecureCoding>
 @property (readonly) SRAbsoluteTime startTime;
 @property (readonly) SRAbsoluteTime endTime;

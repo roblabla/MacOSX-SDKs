@@ -14,11 +14,14 @@ NS_ASSUME_NONNULL_BEGIN
 @class ARSkeleton3D;
 
 
+#define AR_BODY_ANCHOR_PROTOCOLS <ARTrackable>
+
+
 /**
  An anchor representing a body in the world.
  */
 API_AVAILABLE(ios(13.0))
-@interface ARBodyAnchor : ARAnchor <ARTrackable>
+@interface ARBodyAnchor : ARAnchor AR_BODY_ANCHOR_PROTOCOLS
 
 /**
  The tracked skeleton in 3D.

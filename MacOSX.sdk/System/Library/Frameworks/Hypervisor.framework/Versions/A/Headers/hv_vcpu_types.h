@@ -1,9 +1,9 @@
-/*
- *  hv_vcpu_types.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2018-2020 Apple Inc. All rights reserved.
- */
+//
+//  hv_vcpu_types.h
+//  Hypervisor
+//
+//  Copyright © 2018-2023 Apple Inc. All rights reserved.
+//
 
 #pragma once
 

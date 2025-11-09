@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/SafariFoundation.framework/Versions/A/SafariFoundation'
-current-version: 615.1.26
+current-version: 616.1.27
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -12,6 +12,8 @@ exports:
                        _SFCredentialIdentityStoreIdentifierCreateWithAuditToken, 
                        _SFCredentialIdentityStoreIdentifierCreateWithConnectionToExtension, 
                        _SFCredentialIdentityStoreIdentifierCreateWithExtension, _SFCredentialIdentityStoreIdentifierGetPathComponentRepresentation, 
+                       _SFCredentialProviderCapabilitiesKey, _SFCredentialProviderCapabilitiesProvidesPasskeysKey, 
+                       _SFCredentialProviderCapabilitiesProvidesPasswordsKey, _SFCredentialProviderCapabilitiesShowConfigurationUIKey, 
                        _SFCredentialProviderDeveloperEntitlement, _SFCredentialProviderExtensionPointIdentifier, 
                        _SFCredentialProviderShowsConfigurationUIKey, _SFCredentialProviderSystemEntitlement, 
                        _SFCreditCardCardholderNameKey, _SFCreditCardExpirationDateKey, 
@@ -24,9 +26,9 @@ exports:
                        SFCredentialProviderExtensionHelperProxy, SFCredentialProviderExtensionManager, 
                        SFCredentialProviderExtensionState, SFDomainAssociationUtilities, 
                        SFExternalCredentialIdentityStore, SFExternalCredentialIdentityStoreManager, 
-                       SFPasswordCredentialIdentity, SFSafariCredential, SFSafariCredentialStore, 
-                       SFSafariCreditCardStore, SFSharablePassword, SFSharablePasswordReceiver, 
-                       SFSharedWebCredentialsDatabaseEntry, SFStrongPasswordGenerator, 
-                       SFSuggestedUser, SFSuggestedUserProvider, TOTPGeneratorSnapshot, 
-                       _SFSharablePasswordEncryptionInformation ]
+                       SFPasskeyCredentialIdentity, SFPasswordCredentialIdentity, 
+                       SFSafariCredential, SFSafariCredentialStore, SFSafariCreditCardStore, 
+                       SFSharablePassword, SFSharablePasswordReceiver, SFSharedWebCredentialsDatabaseEntry, 
+                       SFStrongPasswordGenerator, SFSuggestedUser, SFSuggestedUserProvider, 
+                       TOTPGeneratorSnapshot, _SFCredentialIdentityTypeMatcher, _SFSharablePasswordEncryptionInformation ]
 ...

@@ -22,6 +22,8 @@
 #define __LATENTSEMANTICMAPPING__
 
 #include <CoreFoundation/CoreFoundation.h>
+#include <TargetConditionals.h>
+
 #if TARGET_OS_IPHONE
 #define __DRIVERSERVICES__
 #define __FP__

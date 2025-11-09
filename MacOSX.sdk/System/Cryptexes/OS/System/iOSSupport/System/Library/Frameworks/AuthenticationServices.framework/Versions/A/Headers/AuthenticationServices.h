@@ -59,6 +59,10 @@
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialAssertionRequest.h>
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialConstants.h>
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialDescriptor.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobAssertionInput.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobAssertionOutput.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobRegistrationInput.h>
+#import <AuthenticationServices/ASAuthorizationPublicKeyCredentialLargeBlobRegistrationOutput.h>
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialParameters.h>
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialRegistration.h>
 #import <AuthenticationServices/ASAuthorizationPublicKeyCredentialRegistrationRequest.h>
@@ -74,7 +78,23 @@
 
 
 
+
 #import <AuthenticationServices/ASAuthorizationWebBrowserExternallyAuthenticatableRequest.h>
 #import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredential.h>
 #import <AuthenticationServices/ASAuthorizationWebBrowserPublicKeyCredentialManager.h>
 
+#import <AuthenticationServices/ASCredentialIdentity.h>
+#import <AuthenticationServices/ASCredentialRequest.h>
+#import <AuthenticationServices/ASPasskeyAssertionCredential.h>
+#import <AuthenticationServices/ASPasskeyCredentialIdentity.h>
+#import <AuthenticationServices/ASPasskeyCredentialRequest.h>
+#import <AuthenticationServices/ASPasskeyCredentialRequestParameters.h>
+#import <AuthenticationServices/ASPasskeyRegistrationCredential.h>
+#import <AuthenticationServices/ASPasswordCredentialRequest.h>
+
+#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialAssertionRequest.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider.h>
+#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialRegistrationRequest.h>
+#import <AuthenticationServices/ASPublicKeyCredentialClientData.h>
+
+#import <AuthenticationServices/ASSettingsHelper.h>

@@ -1,4 +1,4 @@
-module XPC [system] [extern_c] {
+module XPC [system] {
 	header "xpc/xpc.h"
 	header "xpc/availability.h"
 	header "xpc/base.h"
@@ -10,4 +10,19 @@ module XPC [system] [extern_c] {
 }
 
 module XPCOverlay [system] {
+}
+
+module Bootstrap [system] {
+	header "bootstrap.h"
+	export *
+}
+
+module launch [system] {
+	header "launch.h"
+	export *
+}
+
+module vproc [system] {
+	header "vproc.h"
+	export *
 }

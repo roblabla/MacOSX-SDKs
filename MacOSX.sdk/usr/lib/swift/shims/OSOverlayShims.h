@@ -36,7 +36,7 @@ _SWIFT_OS_DEPRECATED
 static inline const unsigned char * _Nonnull
 _swift_os_signpost_points_of_interest(void) {
   /* OS_LOG_CATEGORY_POINTS_OF_INTEREST */
-  return "PointsOfInterest";
+  return (const unsigned char *)"PointsOfInterest";
 }
 
 _SWIFT_OS_DEPRECATED

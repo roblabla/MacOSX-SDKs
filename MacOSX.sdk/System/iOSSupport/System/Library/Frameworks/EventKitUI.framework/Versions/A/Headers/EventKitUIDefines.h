@@ -6,6 +6,8 @@
  *
  */
 
+#include <Availability.h>
+
 #ifdef __cplusplus
 #define EVENTKITUI_EXTERN               extern "C" __attribute__((visibility ("default")))
 #else
@@ -37,3 +39,18 @@
 #define EKUI_IS_SIMULATOR (0)
 #endif
 #endif
+
+
+// Macro to enable extensions to use classes / protocols starting on a certain iOS version.
+
+#if defined(__has_feature)
+  #if __has_feature(attribute_availability_app_extension)
+    #define __EKUI_IOS_EXTENSION_AVAILABLE(_vers,_msg)  __OS_AVAILABILITY_MSG(ios_app_extension,introduced=_vers,_msg)
+  #else
+    #define __EKUI_IOS_EXTENSION_AVAILABLE(_vers,_msg)
+  #endif
+#else
+    #define __EKUI_IOS_EXTENSION_AVAILABLE(_vers,_msg)
+#endif
+
+#define EKUI_EXTENSION_AVAILABLE_IOS(_vers, _msg)  __EKUI_IOS_EXTENSION_AVAILABLE(_vers, _msg)

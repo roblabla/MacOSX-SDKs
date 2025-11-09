@@ -2,7 +2,7 @@
 //  CLSProgressReportingCapability.h
 //  ClassKit
 //
-//  Copyright © 2020 Apple Inc. All rights reserved.
+//  Copyright © 2020-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

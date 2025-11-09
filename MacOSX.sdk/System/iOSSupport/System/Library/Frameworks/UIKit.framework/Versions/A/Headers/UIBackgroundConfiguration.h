@@ -35,7 +35,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(14.0), tvos(14.0), watchos(7.0)) NS_SWIFT_UI_ACTO
 /// Returns the default configuration for a sidebar list header.
 + (instancetype)listSidebarHeaderConfiguration API_UNAVAILABLE(tvos, watchos);
 /// Returns the default configuration for a sidebar list cell.
-+ (instancetype)listSidebarCellConfiguration API_UNAVAILABLE(tvos, watchos);
++ (instancetype)listSidebarCellConfiguration API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos);
 /// Returns the default configuration for an accompanied sidebar list cell.
 + (instancetype)listAccompaniedSidebarCellConfiguration API_UNAVAILABLE(tvos, watchos);
 

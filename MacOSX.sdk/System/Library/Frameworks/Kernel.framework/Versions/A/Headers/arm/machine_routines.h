@@ -79,6 +79,7 @@ void sched_perfcontrol_abandon_preemption_disable_measurement(void);
 /* Check if running at interrupt context */
 boolean_t ml_at_interrupt_context(void);
 
+
 /* Generate a fake interrupt */
 void ml_cause_interrupt(void);
 
@@ -207,8 +208,6 @@ unsigned int ml_cpu_cache_sharing(unsigned int level, cluster_type_t cluster_typ
 
 unsigned int ml_get_cpu_types(void);
 
-unsigned int ml_get_cluster_count(void);
-
 int ml_get_boot_cpu_number(void);
 
 int ml_get_cpu_number(uint32_t phys_id);
@@ -264,10 +263,12 @@ cluster_type_t ml_get_boot_cluster_type(void);
  * @typedef ml_topology_cpu_t
  * @brief Describes one CPU core in the topology.
  *
- * @field cpu_id            Logical CPU ID (EDT: cpu-id): 0, 1, 2, 3, 4, ...
+ * @field cpu_id            Logical CPU ID: 0, 1, 2, 3, 4, ...
+ *                          Dynamically assigned by XNU so it might not match EDT.  No holes.
  * @field phys_id           Physical CPU ID (EDT: reg).  Same as MPIDR[15:0], i.e.
  *                          (cluster_id << 8) | core_number_within_cluster
- * @field cluster_id        Cluster ID (EDT: cluster-id)
+ * @field cluster_id        Logical Cluster ID: 0, 1, 2, 3, 4, ...
+ *                          Dynamically assigned by XNU so it might not match EDT.  No holes.
  * @field die_id            Die ID (EDT: die-id)
  * @field cluster_type      The type of CPUs found in this cluster.
  * @field l2_access_penalty Indicates that the scheduler should try to de-prioritize a core because
@@ -285,8 +286,8 @@ cluster_type_t ml_get_boot_cluster_type(void);
  * @field coresight_regs    IO-mapped virtual address of CoreSight debug register block.
  * @field coresight_pa      Physical address of CoreSight register block.
  * @field coresight_len     Length of CoreSight register block.
- * @field die_cluster_id    Cluster ID within the local die (EDT: die-cluster-id)
- * @field cluster_core_id   Core ID within the local cluster (EDT: cluster-core-id)
+ * @field die_cluster_id    Physical cluster ID within the local die (EDT: die-cluster-id)
+ * @field cluster_core_id   Physical core ID within the local cluster (EDT: cluster-core-id)
  */
 typedef struct ml_topology_cpu {
 	unsigned int                    cpu_id;
@@ -555,6 +556,36 @@ void ml_phys_write_double(
 	vm_offset_t paddr, unsigned long long data);
 void ml_phys_write_double_64(
 	addr64_t paddr, unsigned long long data);
+
+#if defined(__SIZEOF_INT128__) && APPLE_ARM64_ARCH_FAMILY
+/*
+ * Not all dependent projects consuming `machine_routines.h` are built using
+ * toolchains that support 128-bit integers.
+ */
+#define BUILD_QUAD_WORD_FUNCS 1
+#else
+#define BUILD_QUAD_WORD_FUNCS 0
+#endif /* defined(__SIZEOF_INT128__) && APPLE_ARM64_ARCH_FAMILY */
+
+#if BUILD_QUAD_WORD_FUNCS
+/*
+ * Not all dependent projects have their own typedef of `uint128_t` at the
+ * time they consume `machine_routines.h`.
+ */
+typedef unsigned __int128 uint128_t;
+
+/* Read physical address quad word */
+uint128_t ml_phys_read_quad(
+	vm_offset_t paddr);
+uint128_t ml_phys_read_quad_64(
+	addr64_t paddr);
+
+/* Write physical address quad word */
+void ml_phys_write_quad(
+	vm_offset_t paddr, uint128_t data);
+void ml_phys_write_quad_64(
+	addr64_t paddr, uint128_t data);
+#endif /* BUILD_QUAD_WORD_FUNCS */
 
 void ml_static_mfree(
 	vm_offset_t,

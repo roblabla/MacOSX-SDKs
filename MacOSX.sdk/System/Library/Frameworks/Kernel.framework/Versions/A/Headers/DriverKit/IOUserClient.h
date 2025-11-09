@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.100.8) generated from IOUserClient.iig */
+/* iig(DriverKit-324.0.10) generated from IOUserClient.iig */
 
 /* IOUserClient.iig:1-156 */
 /*
@@ -368,7 +368,7 @@ public:\
     AsyncCompletion(\
         OSAction * action,\
         IOReturn status,\
-        const IOUserClientAsyncArgumentsArray asyncData,\
+        const unsigned long long * asyncData,\
         uint32_t asyncDataCount,\
         OSDispatchMethod supermethod = NULL);\
 \
@@ -395,11 +395,11 @@ public:\
     kern_return_t\
     _ExternalMethod(\
         uint64_t selector,\
-        const IOUserClientScalarArray scalarInput,\
+        const unsigned long long * scalarInput,\
         uint32_t scalarInputCount,\
         OSData * structureInput,\
         IOMemoryDescriptor * structureInputDescriptor,\
-        IOUserClientScalarArray scalarOutput,\
+        unsigned long long * scalarOutput,\
         uint32_t * scalarOutputCount,\
         uint64_t structureOutputMaximumSize,\
         OSData ** structureOutput,\

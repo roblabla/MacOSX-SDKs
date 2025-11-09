@@ -1,4 +1,4 @@
-/* iig(DriverKit-256.100.8) generated from IOService.iig */
+/* iig(DriverKit-324.0.10) generated from IOService.iig */
 
 /* IOService.iig:1-71 */
 /*
@@ -770,7 +770,7 @@ public:\
 \
     kern_return_t\
     SetName(\
-        const IOServiceName name,\
+        const char * name,\
         OSDispatchMethod supermethod = NULL);\
 \
     kern_return_t\
@@ -789,8 +789,8 @@ public:\
 \
     kern_return_t\
     SearchProperty(\
-        const IOPropertyName name,\
-        const IORegistryPlaneName plane,\
+        const char * name,\
+        const char * plane,\
         uint64_t options,\
         OSContainer ** property,\
         OSDispatchMethod supermethod = NULL);\
@@ -823,7 +823,7 @@ public:\
     kern_return_t\
     Create(\
         IOService * provider,\
-        const IOPropertyName propertiesKey,\
+        const char * propertiesKey,\
         IOService ** result,\
         OSDispatchMethod supermethod = NULL);\
 \
@@ -940,7 +940,7 @@ public:\
     _ClaimSystemWakeEvent(\
         IOService * device,\
         uint64_t flags,\
-        const IOPropertyName reason,\
+        const char * reason,\
         OSContainer * details,\
         OSDispatchMethod supermethod = NULL);\
 \

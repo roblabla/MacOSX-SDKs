@@ -2,8 +2,10 @@
 //  IOBluetoothObjectPushUIController.h
 //  IOBluetoothFamily
 //
-//  Copyright (c) 2010 Apple, Inc. All rights reserved.
+//  Copyright (c) 2010, 2023 Apple, Inc. All rights reserved.
 //
+
+#if __OBJC__
 
 #import <Cocoa/Cocoa.h>
 #import <Availability.h>
@@ -145,3 +147,6 @@ API_UNAVAILABLE_BEGIN(ios)
 
 @end
 API_UNAVAILABLE_END
+
+#endif // __OBJC__
+

@@ -1,4 +1,4 @@
-framework module AudioUnit [extern_c] [system] {
+framework module AudioUnit [system] {
   umbrella header "AudioUnit.h"
 
   export *

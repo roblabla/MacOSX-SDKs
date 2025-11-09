@@ -1,9 +1,9 @@
-/*
- *  Hypervisor.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2019-2022 Apple Inc. All rights reserved.
- */
+//
+//  Hypervisor.h
+//  Hypervisor
+//
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//
 
 #pragma once
 
@@ -17,9 +17,9 @@
 #elif defined(__x86_64__)
 #include <Hypervisor/hv.h>
 #include <Hypervisor/hv_error.h>
+#include <Hypervisor/hv_intr.h>
 #include <Hypervisor/hv_types.h>
 #include <Hypervisor/hv_vmx.h>
-#include <Hypervisor/hv_intr.h>
 #endif
 
 #include <Hypervisor/hv_vm_allocate.h>

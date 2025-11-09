@@ -99,6 +99,8 @@ exports:
                        '_$s17SiriAppResolution0B17SelectionResponseOMa', '_$s17SiriAppResolution0B17SelectionResponseOMn', 
                        '_$s17SiriAppResolution0B17SelectionResponseON', '_$s17SiriAppResolution0B17SelectionResponseOSHAAMc', 
                        '_$s17SiriAppResolution0B17SelectionResponseOSQAAMc', '_$s17SiriAppResolution0B17SelectionResponseOs23CustomStringConvertibleAAMc', 
+                       '_$s17SiriAppResolution0B6FinderO8listApps8intentID28siriAuthorizationRestriction024extensionPointIdentifierK0SayAA0B0CGSS_ShySo06INSiriJ6StatusVGShySSGtYaFZ', 
+                       '_$s17SiriAppResolution0B6FinderO8listApps8intentID28siriAuthorizationRestriction024extensionPointIdentifierK0SayAA0B0CGSS_ShySo06INSiriJ6StatusVGShySSGtYaFZTu', 
                        '_$s17SiriAppResolution0B6FinderO8listApps8intentID28siriAuthorizationRestriction10completionySS_ShySo06INSiriJ6StatusVGySayAA0B0CGctFZ', 
                        '_$s17SiriAppResolution0B6FinderO8listApps8intentID28siriAuthorizationRestrictionSayAA0B0CGSS_ShySo06INSiriJ6StatusVGtFZ', 
                        '_$s17SiriAppResolution0B6FinderO8listApps8intentID28siriAuthorizationRestrictionSayAA0B0CGSS_ShySo06INSiriJ6StatusVGtYaFZ', 

@@ -13,6 +13,6 @@ exports:
                        _OTSVGGlyphRecordingCreateFromDocument, _OTSVGGlyphRecordingCreateFromID, 
                        _OTSVGGlyphRecordingGetBoundingRect, _OTSVGGlyphRecordingPlayback, 
                        _OTSVGGlyphRecordingPlaybackRecordingsAtPositions, _OTSVGGlyphRecordingRelease, 
-                       _OTSVGTableCreateFromData, _OTSVGTableGetDocumentIndexForGlyph, 
+                       _OTSVGTableCreateFromData, _OTSVGTableEnumerateGlyphs, _OTSVGTableGetDocumentIndexForGlyph, 
                        _OTSVGTableRelease ]
 ...

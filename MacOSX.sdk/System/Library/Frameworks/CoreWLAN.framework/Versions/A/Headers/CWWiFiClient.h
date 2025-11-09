@@ -196,21 +196,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 NS_CLASS_AVAILABLE_MAC(10_10)
 @interface CWWiFiClient : NSObject
-{
-    @private
-    
-        NSXPCConnection     *_xpcConnection;
-        
-        NSMutableSet        *_eventList;
-    
-        dispatch_queue_t    _eventQueue;
-
-        NSMutableDictionary *_interfaceMap;
-        
-        dispatch_queue_t    _mutex;
-        
-        id                  _delegate;
-}
 
 /*! @functiongroup Setting the Delegate */
 
@@ -266,7 +251,8 @@ NS_CLASS_AVAILABLE_MAC(10_10)
  * If no Wi-Fi interfaces are available, this method will return an empty array.
  * Returns nil if an error occurs.
  */
-+ (nullable NSArray<NSString *> *)interfaceNames NS_AVAILABLE_MAC(10_10);
+- (nullable NSArray<NSString *> *)interfaceNames NS_AVAILABLE_MAC(13_0);
++ (nullable NSArray<NSString *> *)interfaceNames NS_DEPRECATED_MAC(10_10, 13_0, "Use -[CWWiFiClient interfaceNames] instead");
 
 /*!
  * @method

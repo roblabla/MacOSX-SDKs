@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NETransparentProxyNetworkSettings : NETunnelNetworkSettings
 
 /*!
@@ -42,7 +42,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  *        The matchLocalNetwork property must be nil.
  *        The matchDirection property must be NETrafficDirectionOutbound.
  */
-@property (copy, nullable) NSArray<NENetworkRule *> *includedNetworkRules API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSArray<NENetworkRule *> *includedNetworkRules API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property excludedNetworkRules
@@ -55,7 +55,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  *        The matchLocalNetwork property must be nil.
  *        The matchDirection property must be NETrafficDirectionOutbound.
  */
-@property (copy, nullable) NSArray<NENetworkRule *> *excludedNetworkRules API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSArray<NENetworkRule *> *excludedNetworkRules API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

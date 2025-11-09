@@ -8,5 +8,4 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ __CDDComplicationChangeNotificationString, __CDDComplicationChangeOverCloudNotificationString, 
                        __CDDCurrentActiveComplications, __CDDExtensionIdForCompanionBundle ]
-    objc-classes:    [ CDDHistoryWindow ]
 ...

@@ -1,12 +1,13 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Accessibility
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 387.10.10
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Accessibility
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 450
 @_exported import Accessibility
 import Foundation
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(macOS 12.2, iOS 15.2, tvOS 15.2, watchOS 8.2, *)
 extension Accessibility.AXBrailleMap {
   public subscript(point: CoreFoundation.CGPoint) -> Swift.Float {
@@ -61,8 +62,11 @@ extension Foundation.AttributeScopes {
     public let accessibilitySpeechIncludesPunctuation: Foundation.AttributeScopes.AccessibilityAttributes.IncludesPunctuationAttribute
     public let accessibilitySpeechAdjustedPitch: Foundation.AttributeScopes.AccessibilityAttributes.AdjustedPitchAttribute
     public let accessibilitySpeechSpellsOutCharacters: Foundation.AttributeScopes.AccessibilityAttributes.SpellOutAttribute
+    @available(*, deprecated, renamed: "accessibilitySpeechAnnouncementPriority")
     public let accessibilitySpeechAnnouncementsQueued: Foundation.AttributeScopes.AccessibilityAttributes.QueueAnnouncementAttribute
     public let accessibilitySpeechPhoneticNotation: Foundation.AttributeScopes.AccessibilityAttributes.IPANotationAttribute
+    @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+    public let accessibilitySpeechAnnouncementPriority: Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute
     public typealias DecodingConfiguration = Foundation.AttributeScopeCodableConfiguration
     public typealias EncodingConfiguration = Foundation.AttributeScopeCodableConfiguration
   }
@@ -151,6 +155,7 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
     }
     public static let markdownName: Swift.String
   }
+  @available(*, deprecated, renamed: "AnnouncementPriorityAttribute")
   @frozen public enum QueueAnnouncementAttribute : Foundation.CodableAttributedStringKey, Foundation.MarkdownDecodableAttributedStringKey {
     public typealias Value = Swift.Bool
     public static var name: Swift.String {
@@ -165,6 +170,59 @@ extension Foundation.AttributeScopes.AccessibilityAttributes {
     }
     public static let markdownName: Swift.String
   }
+  @available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+  @frozen public enum AnnouncementPriorityAttribute : Foundation.CodableAttributedStringKey, Foundation.MarkdownDecodableAttributedStringKey, Foundation.ObjectiveCConvertibleAttributedStringKey {
+    public typealias Value = Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute.AnnouncementPriority
+    public typealias ObjectiveCValue = Foundation.NSString
+    public static var name: Swift.String {
+      get
+    }
+    public static let markdownName: Swift.String
+    public static func objectiveCValue(for value: Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute.AnnouncementPriority) throws -> Foundation.NSString
+    public static func value(for object: Foundation.NSString) throws -> Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute.AnnouncementPriority
+    public enum AnnouncementPriority : Swift.String, Swift.Codable {
+      case low
+      case `default`
+      case high
+      public init?(rawValue: Swift.String)
+      public typealias RawValue = Swift.String
+      public var rawValue: Swift.String {
+        get
+      }
+    }
+  }
+}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+public enum AccessibilityNotification {
+  public struct Announcement : Accessibility._AccessibilityNotifications {
+    public init(_ announcement: Foundation.AttributedString)
+    public init(_ announcement: Swift.String)
+    public init(_ announcement: Foundation.NSAttributedString)
+    public typealias _Info = Foundation.NSAttributedString
+  }
+  public struct LayoutChanged : Accessibility._AccessibilityNotifications {
+    public init(_ element: Any? = nil)
+    public typealias _Info = Any?
+  }
+  public struct ScreenChanged : Accessibility._AccessibilityNotifications {
+    public init(_ element: Any? = nil)
+    public typealias _Info = Any?
+  }
+  public struct PageScrolled : Accessibility._AccessibilityNotifications {
+    public init(_ announcement: Foundation.AttributedString)
+    public init(_ announcement: Swift.String)
+    public init(_ announcement: Foundation.NSAttributedString)
+    public typealias _Info = Foundation.NSAttributedString
+  }
+}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+public protocol _AccessibilityNotifications {
+  associatedtype _Info
+  func post()
+}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Accessibility._AccessibilityNotifications {
+  public func post()
 }
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.HeadingLevelAttribute : Swift.Sendable {}
@@ -191,6 +249,15 @@ extension Foundation.AttributeScopes.AccessibilityAttributes.AdjustedPitchAttrib
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.SpellOutAttribute : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
+@available(*, deprecated, renamed: "AnnouncementPriorityAttribute")
 extension Foundation.AttributeScopes.AccessibilityAttributes.QueueAnnouncementAttribute : Swift.Sendable {}
 @available(macOS 12.0, iOS 15.0, tvOS 15.0, watchOS 8.0, *)
 extension Foundation.AttributeScopes.AccessibilityAttributes.IPANotationAttribute : Swift.Sendable {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute : Swift.Sendable {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute.AnnouncementPriority : Swift.Equatable {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute.AnnouncementPriority : Swift.Hashable {}
+@available(iOS 17.0, macOS 14.0, tvOS 17.0, watchOS 10.0, *)
+extension Foundation.AttributeScopes.AccessibilityAttributes.AnnouncementPriorityAttribute.AnnouncementPriority : Swift.RawRepresentable {}

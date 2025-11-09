@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASEDistanceModelFadeOutParameters
     @abstract Distance model fade out parameters.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEDistanceModelFadeOutParameters : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -53,7 +53,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @interface PHASEDistanceModelParameters
     @abstract Distance model parameters.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEDistanceModelParameters : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -74,7 +74,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @discussion
         Standard geometric spreading loss as a function of geometry and distance.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEGeometricSpreadingDistanceModelParameters : PHASEDistanceModelParameters
 
 - (instancetype)init;
@@ -98,7 +98,7 @@ OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAI
     @discussion
         Envelope-driven attenuation over distance.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEEnvelopeDistanceModelParameters : PHASEDistanceModelParameters
 
 - (instancetype)init NS_UNAVAILABLE;

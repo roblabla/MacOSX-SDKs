@@ -1594,6 +1594,15 @@ VIMAGE_PF vImage_Error vImageConvolveWithBias_Planar16F( const vImage_Buffer *sr
 VIMAGE_PF vImage_Error vImageConvolveWithBias_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,  const int16_t *kernel, uint32_t kernel_height, uint32_t kernel_width, int32_t divisor, int32_t bias, const Pixel_8888 backgroundColor, vImage_Flags flags ) VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(10.4), ios(5.0), watchos(1.0), tvos(5.0));
 
 /*!
+ *  @function vImageConvolveFloatKernel_ARGB8888
+ *  @abstract General convolution on a ARGB888 image of any channel order with a kernel with floating-point weights.
+ *  @discussion Performs a filtering operation just like vImageConvolveWithBias_ARGB8888 but with a float rather than an integer (with divisor) kernel.
+ *
+ */
+VIMAGE_PF vImage_Error vImageConvolveFloatKernel_ARGB8888( const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer, vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y, const float *kernel, uint32_t kernelHeight, uint32_t kernelWidth, float bias, const Pixel_8888 backgroundColor, vImage_Flags flags)
+VIMAGE_NON_NULL(1,2) __API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
+
+/*!
  *  @function vImageConvolveWithBias_ARGBFFFF
  *  @abstract General convolution on a ARGBFFFF image of any channel order with bias.
  *  @discussion This filter applies a convolution filter of your choosing to a ARGBFFFF image.
@@ -4218,6 +4227,13 @@ vImageSepConvolve_Planar8to16U(const vImage_Buffer *src, const vImage_Buffer *de
                                float scale, float bias, Pixel_8 backgroundColor, vImage_Flags flags)
     VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(11.0), ios(14.0), watchos(7.0), tvos(14.0));
 
+
+VIMAGE_PF vImage_Error
+vImageSepConvolve_ARGB8888(const vImage_Buffer *src, const vImage_Buffer *dest, void *tempBuffer,
+                           vImagePixelCount srcOffsetToROI_X, vImagePixelCount srcOffsetToROI_Y,
+                           const float *kernelX, uint32_t kernelX_width, const float *kernelY, uint32_t kernelY_width,
+                           float bias, const Pixel_8888 backgroundColor, vImage_Flags flags)
+    VIMAGE_NON_NULL(1,2) API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0), tvos(17.0));
 
 #ifdef __cplusplus
 }

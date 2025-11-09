@@ -31,8 +31,7 @@ typedef NS_ENUM(NSUInteger, UIDocumentBrowserUserInterfaceStyle) {
     UIDocumentBrowserUserInterfaceStyleWhite = 0,
     UIDocumentBrowserUserInterfaceStyleLight,
     UIDocumentBrowserUserInterfaceStyleDark,
-} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos) NS_SWIFT_NAME(UIDocumentBrowserViewController.BrowserUserInterfaceStyle);
-
+} API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos) API_UNAVAILABLE(visionos) NS_SWIFT_NAME(UIDocumentBrowserViewController.BrowserUserInterfaceStyle);
 
 #pragma mark -
 
@@ -112,7 +111,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos)
 /// A UIDocumentBrowserTransitionController object is used to display a loading indicator, while the application is spending time on time-consuming operations (e.g., loading, parsing, …) after having finished the file download, and before presenting it. To be used together with the UIViewControllerTransitioningDelegate protocol for custom view controller transitions.
 - (UIDocumentBrowserTransitionController *)transitionControllerForDocumentAtURL:(NSURL *)documentURL API_AVAILABLE(ios(12.0)) NS_SWIFT_NAME(transitionController(forDocumentAt:));
 
-- (UIDocumentBrowserTransitionController *)transitionControllerForDocumentURL:(NSURL *)documentURL API_DEPRECATED_WITH_REPLACEMENT("transitionControllerForDocumentAtURL:", ios(11.0,12.0));
+- (UIDocumentBrowserTransitionController *)transitionControllerForDocumentURL:(NSURL *)documentURL API_DEPRECATED_WITH_REPLACEMENT("transitionControllerForDocumentAtURL:", ios(11.0,12.0)) API_UNAVAILABLE(visionos);
 
 
 #pragma mark Custom actions
@@ -123,7 +122,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos)
 #pragma mark UI Customization
 
 /// Allows clients to customize the look of the browser. Default: UIDocumentBrowserUserInterfaceStyleWhite
-@property (assign, nonatomic) UIDocumentBrowserUserInterfaceStyle browserUserInterfaceStyle;
+@property (assign, nonatomic) UIDocumentBrowserUserInterfaceStyle browserUserInterfaceStyle API_UNAVAILABLE(visionos);
 
 /// Title of the Create Document button (default: "Create Document”).
 @property(copy, nonatomic) NSString * localizedCreateDocumentActionTitle API_AVAILABLE(ios(13.0));
@@ -142,7 +141,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos,tvos)
 
 /// Called when the user validates a selection of items to open or pick.
 /// If you have created this document manager to open files, you should then open the document, potentially using a @c UIDocumentBrowserTransitionController for the transition.
-- (void)documentBrowser:(UIDocumentBrowserViewController *)controller didPickDocumentURLs:(NSArray <NSURL *> *)documentURLs API_DEPRECATED_WITH_REPLACEMENT("documentBrowser:didPickDocumentsAtURLs:", ios(11.0, 12.0));
+- (void)documentBrowser:(UIDocumentBrowserViewController *)controller didPickDocumentURLs:(NSArray <NSURL *> *)documentURLs API_DEPRECATED_WITH_REPLACEMENT("documentBrowser:didPickDocumentsAtURLs:", ios(11.0, 12.0)) API_UNAVAILABLE(visionos);
 
 - (void)documentBrowser:(UIDocumentBrowserViewController *)controller didPickDocumentsAtURLs:(NSArray <NSURL *> *)documentURLs API_AVAILABLE(ios(12.0));
 

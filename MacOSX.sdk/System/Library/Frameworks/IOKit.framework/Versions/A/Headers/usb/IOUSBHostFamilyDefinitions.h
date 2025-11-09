@@ -176,6 +176,7 @@ enum tIOUSBHostPortStatus
 #define kUSBHostMatchingPropertyDeviceSubClass                  "bDeviceSubClass"
 #define kUSBHostMatchingPropertyDeviceProtocol                  "bDeviceProtocol"
 #define kUSBHostMatchingPropertyDeviceReleaseNumber             "bcdDevice"
+#define kUSBHostMatchingPropertyDeviceReleaseNumberRange        "bcdDeviceRange"                // OSArray containing 16-bit integer values.  The low and high values (inclusive) are used to determine a range of matching bcdDevice values.
 #define kUSBHostMatchingPropertyConfigurationValue              "bConfigurationValue"
 #define kUSBHostMatchingPropertyInterfaceClass                  "bInterfaceClass"
 #define kUSBHostMatchingPropertyInterfaceSubClass               "bInterfaceSubClass"
@@ -197,9 +198,11 @@ enum tIOUSBHostPortStatus
 #define kUSBHostPropertyAllowSoftRetry                          "UsbAllowSoftRetry"
 #define kUSBHostPropertyExclusiveOwner                          "UsbExclusiveOwner"                 // OSString describing the service or process with an exclusive session to the USB service
 
-#define kUSBHostUserClientPropertyEntitlementRequired           "UsbUserClientEntitlementRequired"
-#define kUSBHostUserClientPropertyEnableReset                   "UsbUserClientEnableReset"
-#define kUSBHostUserClientPropertyEnableDataToggleReset         "UsbUserClientEnableDataToggleReset"
+#define kUSBHostUserClientPropertyEntitlementRequired               "UsbUserClientEntitlementRequired"                  // OSString, or OSDictionary.  OSString - the required entitlemnt, OSDictionary - comprised of key/values below to allow overrides for the entitlement
+#define kUSBHostUserClientPropertyEntitlement                       "UsbUserClientEntitlement"                          // OSString, of the required entitlement, part of an OSDictionary
+#define kUSBHostUserClientPropertyEntitlementExceptionAllowUnlocked "UsbUserClientEntitlementExceptionAllowUnlocked"    // OSBoolean, true or false to allow access if the system is unlocked.  Part of the OSDictionary.
+#define kUSBHostUserClientPropertyEnableReset                       "UsbUserClientEnableReset"
+#define kUSBHostUserClientPropertyEnableDataToggleReset             "UsbUserClientEnableDataToggleReset"
 
 #define kUSBHostDevicePropertyVendorString                      "kUSBVendorString"
 #define kUSBHostDevicePropertySerialNumberString                "kUSBSerialNumberString"
@@ -219,7 +222,8 @@ enum tIOUSBHostPortStatus
 #define kUSBHostDescriptorOverrideVendorStringIndex             "UsbDescriptorOverrideVendorStringIndex"
 #define kUSBHostDescriptorOverrideProductStringIndex            "UsbDescriptorOverrideProductStringIndex"
 #define kUSBHostDescriptorOverrideSerialNumberStringIndex       "UsbDescriptorOverrideSerialNumberStringIndex"
-#define kUSBHostDevicePropertyDeviceECID                        "kUSBDeviceECID"
+#define kUSBHostDevicePropertyDeviceECID                        "UsbAppleDeviceECID"                    // OSNumber with 64-bit device ECID
+#define kUSBHostDevicePropertyDeviceUDID                        "UsbAppleDeviceUDID"                    // OSString with device UDID
 #define kUSBHostDevicePropertyEnableLPM                         "UsbLinkPowerManagement"                // Default kOSBooleanFalse.  kOSBooleanTrue if the device allows U1/U2 or L1 link power management
 #define kUSBHostDevicePropertyDisablePortLPM                    "kUSBHostDeviceDisablePortLPM"          // Disable port initiated LPM for this device
 #define kUSBHostDevicePropertyStreamsSupported                  "UsbStreamsSupported"                   // Default kOSBooleanTrue.  OSBoolean indicating if streaming endpoints are supported.
@@ -287,6 +291,8 @@ enum tIOUSBHostPortStatus
 #define kUSBHostControllerPropertyDisableWakeSources            "UsbHostControllerDisableWakeSources"   // OSBoolean true to disable connect/disconnect/overcurrent wake sources
 #define kUSBHostControllerPropertyPersistFullSpeedIsochronous   "UsbHostControllerPersistFullSpeedIsochronous"  // OSBoolean true to reduce commands related to full-speed isochronous endpoints
 #define kUSBHostControllerPropertyDeferRegisterService          "UsbHostControllerDeferRegisterService" // OSBoolean true to defer registerService call by base class during start
+#define kUSBHostControllerPropertyControlRequestPolicy          "UsbHostControllerControlRequestPolicy" // OSNumber containing tUSBControlRequestPolicy
+#define kUSBHostControllerPropertySoftRetryPolicy               "UsbHostControllerSoftRetryPolicy"      // OSNumber containing tUSBSoftRetryPolicy
 #define kUSBHostControllerPropertyStreamPolicy                  "UsbHostControllerStreamPolicy"         // OSNumber containing tUSBStreamPolicy
 #define kUSBHostControllerPropertyUSB2LPMPolicy                 "UsbHostControllerUSB2LPMPolicy"        // OSNumber containing tUSBLPMPolicy
 #define kUSBHostControllerPropertyUSB3LPMPolicy                 "UsbHostControllerUSB3LPMPolicy"        // OSNumber containing tUSBLPMPolicy

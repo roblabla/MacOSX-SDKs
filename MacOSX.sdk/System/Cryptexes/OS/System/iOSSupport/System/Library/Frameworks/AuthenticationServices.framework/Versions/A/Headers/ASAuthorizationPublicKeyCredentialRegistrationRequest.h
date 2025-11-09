@@ -5,7 +5,7 @@
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 @protocol ASAuthorizationPublicKeyCredentialRegistrationRequest <NSObject, NSSecureCoding, NSCopying>
 
 /*! @abstract The Relying Party identifier used to scope this request.
@@ -34,7 +34,7 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 
 /*! @abstract A preference for the type of attestation that the authenticator should attempt to perform.
  */
-@property (nonatomic) ASAuthorizationPublicKeyCredentialAttestationKind attestationPreference;
+@property (nonatomic) ASAuthorizationPublicKeyCredentialAttestationKind attestationPreference API_UNAVAILABLE(tvos);
 
 @end
 

@@ -47,9 +47,7 @@
 #if !0
 #import <AVFAudio/AVSpeechSynthesis.h>
 #import <AVFAudio/AVSpeechSynthesisProvider.h>
-#endif
-
-#if TARGET_OS_IPHONE && !0
+#import <AVFAudio/AVAudioApplication.h>
 #import <AVFAudio/AVAudioSession.h>
 #import <AVFAudio/AVAudioSessionRoute.h>
 #import <AVFAudio/AVAudioSessionTypes.h>

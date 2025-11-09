@@ -31,8 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// <doc://com.apple.documentation/documentation/usernotifications/modifying_content_in_newly_delivered_notifications>
 /// and
 /// <doc://com.apple.documentation/documentation/usernotificationsui/customizing_the_appearance_of_notifications>.
-PK_EXPORT PKPushType const PKPushTypeVoIP API_AVAILABLE(ios(9.0), macCatalyst(14.0), watchos(9.0)) API_UNAVAILABLE(macos, tvos);
-
+PK_EXPORT PKPushType const PKPushTypeVoIP API_AVAILABLE(ios(9.0), macCatalyst(14.0), watchos(9.0), visionos(1.0)) API_UNAVAILABLE(macos, tvos);
 /// A push type for watchOS complications.
 ///
 /// Use this type of notification to deliver updated data related for your
@@ -50,13 +49,14 @@ PK_EXPORT PKPushType const PKPushTypeVoIP API_AVAILABLE(ios(9.0), macCatalyst(14
 ///
 /// The system limits you to 50 push notifications per day. If you exceed the
 /// limit, subsequent pushes are not delivered.
-PK_EXPORT PKPushType const PKPushTypeComplication API_AVAILABLE(watchos(6.0)) API_DEPRECATED("Complication pushes are supported directly on watchOS now, so this should no longer be used on iOS.", ios(9.0, 13.0), macCatalyst(9.0, 13.0))  API_UNAVAILABLE(macos, tvos);
+PK_EXPORT PKPushType const PKPushTypeComplication API_AVAILABLE(watchos(6.0)) API_DEPRECATED("Complication pushes are supported directly on watchOS now, so this should no longer be used on iOS.", ios(9.0, 13.0), macCatalyst(9.0, 13.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(macos, tvos);
 /// A push type for file provider updates.
 ///
 /// Use file provider notifications to update your File Provider extension's content
 /// from your server. For more information, see <doc://com.apple.documentation/documentation/fileprovider/nonreplicated_file_provider_extension/content_and_change_tracking/tracking_your_file_provider_s_changes>.
 /// 
-PK_EXPORT PKPushType const PKPushTypeFileProvider API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(13.0)) API_UNAVAILABLE(watchos, tvos);
+PK_EXPORT PKPushType const PKPushTypeFileProvider API_AVAILABLE(macos(10.15), ios(11.0), macCatalyst(13.0), visionos(1.0)) API_UNAVAILABLE(watchos, tvos);
+
 
 @protocol PKPushRegistryDelegate;
 @class PKPushCredentials, PKPushPayload;

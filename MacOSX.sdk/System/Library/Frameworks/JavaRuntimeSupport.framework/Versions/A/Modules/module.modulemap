@@ -1,4 +1,4 @@
-framework module JavaRuntimeSupport [extern_c] {
+framework module JavaRuntimeSupport {
     umbrella header "JavaRuntimeSupport.h"
     export *
     module * { export * }

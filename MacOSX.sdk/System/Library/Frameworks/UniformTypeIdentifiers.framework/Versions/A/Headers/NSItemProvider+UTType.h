@@ -28,7 +28,8 @@ API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
                           contentType:(UTType *_Nullable)contentType
                           openInPlace:(BOOL)openInPlace
                           coordinated:(BOOL)coordinated
-                           visibility:(NSItemProviderRepresentationVisibility)visibility NS_REFINED_FOR_SWIFT;
+                           visibility:(NSItemProviderRepresentationVisibility)visibility
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) NS_REFINED_FOR_SWIFT;
 
 // MARK: Registration of additional representations
 
@@ -41,7 +42,8 @@ API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 /// \param loadHandler A block called to provide the data representation.
 - (void)registerDataRepresentationForContentType:(UTType *)contentType
                                       visibility:(NSItemProviderRepresentationVisibility)visibility
-                                     loadHandler:(NSProgress *_Nullable (^NS_SWIFT_SENDABLE)(void (^completionHandler)(NSData *_Nullable data, NSError *_Nullable error)))loadHandler NS_REFINED_FOR_SWIFT;
+                                     loadHandler:(NSProgress *_Nullable (^NS_SWIFT_SENDABLE)(void (^completionHandler)(NSData *_Nullable data, NSError *_Nullable error)))loadHandler
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) NS_REFINED_FOR_SWIFT;
 
 /// Register a representation backed by a file
 /// \discussion It is permissible to provide a URL pointing to a folder. A folder requested as \c NSData will yield a
@@ -61,22 +63,26 @@ API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 - (void)registerFileRepresentationForContentType:(UTType *)contentType
                                       visibility:(NSItemProviderRepresentationVisibility)visibility
                                      openInPlace:(BOOL)openInPlace
-                                     loadHandler:(NSProgress *_Nullable (^NS_SWIFT_SENDABLE)(void (^completionHandler)(NSURL *_Nullable fileURL, BOOL coordinated, NSError *_Nullable error)))loadHandler NS_REFINED_FOR_SWIFT;
+                                     loadHandler:(NSProgress *_Nullable (^NS_SWIFT_SENDABLE)(void (^completionHandler)(NSURL *_Nullable fileURL, BOOL coordinated, NSError *_Nullable error)))loadHandler
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) NS_REFINED_FOR_SWIFT;
 
 // MARK: Content query
 
 /// Registered content types, in the order they were registered
 /// \discussion Content types should be registered in order of fidelity. Prefer using content types that appear earlier
 /// in the array.
-@property (copy, readonly, NS_NONATOMIC_IOSONLY) NSArray<UTType *> *registeredContentTypes;
+@property (copy, readonly, NS_NONATOMIC_IOSONLY) NSArray<UTType *> *registeredContentTypes
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /// Registered content types that can be loaded as files opened in place
-@property (copy, readonly, NS_NONATOMIC_IOSONLY) NSArray<UTType *> *registeredContentTypesForOpenInPlace;
+@property (copy, readonly, NS_NONATOMIC_IOSONLY) NSArray<UTType *> *registeredContentTypesForOpenInPlace
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 /// Return an array of registered content types that conform to a given content type.
 /// \discussion The returned content types are given in order of fidelity. Prefer content types that appear earlier
 /// in the array.
-- (NSArray<UTType *> *)registeredContentTypesConformingToContentType:(UTType *)contentType NS_SWIFT_NAME(registeredContentTypes(conformingTo:));
+- (NSArray<UTType *> *)registeredContentTypesConformingToContentType:(UTType *)contentType NS_SWIFT_NAME(registeredContentTypes(conformingTo:))
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0));
 
 // MARK: Data retrieval
 
@@ -91,7 +97,8 @@ API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 ///                          \c data or a non-nil \c error parameter.
 /// \return A progress object. Use it to monitor loading progress, or to cancel loading.
 - (NSProgress *)loadDataRepresentationForContentType:(UTType *)contentType
-                                   completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSData *_Nullable data, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT;
+                                   completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSData *_Nullable data, NSError *_Nullable error))completionHandler
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) NS_REFINED_FOR_SWIFT;
 
 /// Load a representation as a file
 /// \discussion Except for files registered as open-in-place, a temporary file containing a copy of the original
@@ -113,7 +120,8 @@ API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0))
 /// \return A progress object. Use it to monitor loading progress, or to cancel loading.
 - (NSProgress *)loadFileRepresentationForContentType:(UTType *)contentType
                                          openInPlace:(BOOL)openInPlace
-                                   completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSURL *_Nullable URL, BOOL openInPlace, NSError *_Nullable error))completionHandler NS_REFINED_FOR_SWIFT;
+                                   completionHandler:(void (^ NS_SWIFT_SENDABLE)(NSURL *_Nullable URL, BOOL openInPlace, NSError *_Nullable error))completionHandler
+API_AVAILABLE(macos(13.0), ios(16.0), watchos(9.0), tvos(16.0)) NS_REFINED_FOR_SWIFT;
 
 @end
 

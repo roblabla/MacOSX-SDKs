@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2022 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -55,6 +55,9 @@ AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160				API_AVAILABLE(mac
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT NSString *const AVAssetExportPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos);
 
+AVF_EXPORT NSString *const AVAssetExportPresetMVHEVC960x960				API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetMVHEVC1440x1440			API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
+
 /*  This export option will produce an audio-only .m4a file with appropriate iTunes gapless playback data */
 AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
@@ -64,10 +67,10 @@ AVF_EXPORT NSString *const AVAssetExportPresetAppleM4A			API_AVAILABLE(macos(10.
 AVF_EXPORT NSString *const AVAssetExportPresetPassthrough		API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
 /* This export option will produce a QuickTime movie with Apple ProRes 422 video and LPCM audio. */
-AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	API_AVAILABLE(macos(10.7), ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes422LPCM	API_AVAILABLE(macos(10.7), ios(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 /* This export option will produce a QuickTime movie with Apple ProRes 4444 video and LPCM audio. */
-AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes4444LPCM  API_AVAILABLE(macos(10.15), ios(15.0)) API_UNAVAILABLE(tvos, watchos);
+AVF_EXPORT NSString *const AVAssetExportPresetAppleProRes4444LPCM  API_AVAILABLE(macos(10.15), ios(15.0)) API_UNAVAILABLE(tvos, watchos, visionos);
 
 #if TARGET_OS_OSX
 
@@ -195,6 +198,17 @@ AV_INIT_UNAVAILABLE
 /* indicates that the output file should be optimized for network use, e.g. that a QuickTime movie file should support "fast start" */
 @property (nonatomic) BOOL shouldOptimizeForNetworkUse;
 
+/*!
+ @property		allowsParallelizedExport
+ @abstract		Determines whether or not parallelization can be employed in the export.
+ @discussion	On select platforms, there may be opportunities to expedite the export by using additional resources in parallel.
+				If set to YES, export parallelization will be enabled, only if parallelization requirements are met.  There will
+				be no error signaled if export parallelization is not achievable, and instead the export will proceed as normal
+				(without parallelization).
+				If set to NO, export parallelization will not be used.
+*/
+@property (nonatomic) BOOL allowsParallelizedExport API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, tvos, watchos); // defaults to YES
+
 /* indicates the status of the export session */
 @property (nonatomic, readonly) AVAssetExportSessionStatus status;
 
@@ -256,7 +270,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 								The array is a complete list of the valid identifiers that can be used as arguments to 
 								initWithAsset:presetName: with the specified asset.
 */
-+ (NSArray<NSString *> *)exportPresetsCompatibleWithAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos);
++ (NSArray<NSString *> *)exportPresetsCompatibleWithAsset:(AVAsset *)asset API_DEPRECATED_WITH_REPLACEMENT("determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0)) API_UNAVAILABLE(watchos, visionos);
 
 /*!
 	@method						determineCompatibilityOfExportPreset:withAsset:outputFileType:completionHandler:
@@ -272,7 +286,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  */
 + (void)determineCompatibilityOfExportPreset:(NSString *)presetName withAsset:(AVAsset *)asset outputFileType:(nullable AVFileType)outputFileType completionHandler:(void (^)(BOOL compatible))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(compatibility(ofExportPreset:with:outputFileType:));
 
-@end
+@end // AVAssetExportSessionPresets
 
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionFileTypes)
@@ -290,7 +304,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 - (void)determineCompatibleFileTypesWithCompletionHandler:(void (^)(NSArray<AVFileType> *compatibleFileTypes))handler API_AVAILABLE(macos(10.9), ios(6.0), tvos(9.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(getter:compatibleFileTypes());
 
-@end
+@end // AVAssetExportSessionFileTypes
 
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionDurationAndLength)
@@ -299,10 +313,10 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @property (nonatomic) CMTimeRange timeRange;
 
 /* Provides an estimate of the maximum duration of exported media that is possible given the source asset, the export preset, and the current value of fileLengthLimit.  The export will not stop when it reaches this maximum duration; set the timeRange property to export only a certain time range.  */
-@property (nonatomic, readonly) CMTime maxDuration API_DEPRECATED_WITH_REPLACEMENT("estimateMaximumDurationWithCompletionHandler", macos(10.14, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) CMTime maxDuration API_DEPRECATED_WITH_REPLACEMENT("estimateMaximumDurationWithCompletionHandler", macos(10.14, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /* Indicates the estimated byte size of exported file.  Returns zero when export preset is AVAssetExportPresetPassthrough, AVAssetExportPresetAppleProRes422LPCM or AVAssetExportPresetAppleProRes4444LPCM.  This property will also return zero if a numeric value (ie. not invalid, indefinite, or infinite) for the timeRange property has not been set.  Note that the returned value does not take into account the source asset information.  For a more accurate estimation, use estimateOutputFileLengthWithCompletionHandler. */
-@property (nonatomic, readonly) long long estimatedOutputFileLength API_DEPRECATED_WITH_REPLACEMENT("estimateOutputFileLengthWithCompletionHandler", macos(10.9, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), tvos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) long long estimatedOutputFileLength API_DEPRECATED_WITH_REPLACEMENT("estimateOutputFileLengthWithCompletionHandler", macos(10.9, API_TO_BE_DEPRECATED), ios(5.0, API_TO_BE_DEPRECATED), tvos(5.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos, visionos);
 
 /* Indicates the file length that the output of the session should not exceed.  Depending on the content of the source asset, it is possible for the output to slightly exceed the file length limit.  The length of the output file should be tested if you require that a strict limit be observed before making use of the output.  See also maxDuration and timeRange. */
 @property (nonatomic) long long fileLengthLimit API_AVAILABLE(macos(10.14), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos);
@@ -325,7 +339,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
  */
 - (void)estimateOutputFileLengthWithCompletionHandler:(void (^)(int64_t estimatedOutputFileLength, NSError * _Nullable error ))handler API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos) NS_SWIFT_ASYNC_NAME(getter:estimatedOutputFileLengthInBytes());
 
-@end
+@end // AVAssetExportSessionDurationAndLength
 
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionMetadata)
@@ -340,7 +354,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
    The filter will not be applied to metadata set with via the metadata property.  To apply the filter to metadata before it is set on the metadata property, see the methods in AVMetadataItem's AVMetadataItemArrayFiltering category. */
 @property (nonatomic, retain, nullable) AVMetadataItemFilter *metadataItemFilter API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-@end
+@end // AVAssetExportSessionMetadata
 
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionMediaProcessing)
@@ -371,7 +385,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 @property (nonatomic) AVAssetTrackGroupOutputHandling audioTrackGroupHandling API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos);
 
-@end
+@end // AVAssetExportSessionMediaProcessing
 
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVAssetExportSession (AVAssetExportSessionMultipass)
@@ -404,7 +418,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 */
 @property (nonatomic, copy, nullable) NSURL *directoryForTemporaryFiles API_AVAILABLE(macos(10.10), ios(8.0), tvos(9.0)) API_UNAVAILABLE(watchos);
 
-@end
+@end // AVAssetExportSessionMultipass
 
 NS_ASSUME_NONNULL_END
 

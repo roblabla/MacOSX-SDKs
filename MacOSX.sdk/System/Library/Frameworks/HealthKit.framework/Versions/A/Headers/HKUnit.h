@@ -34,6 +34,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
 // V                (volts)   [Electrical Potential Difference]
 // W                (watts)   [Power]
 // rad              (radians) [Angle]
+// lx               (Lux)     [Illuminance]
 
 // SI units can be prefixed as follows:
 // da   (deca-)   = 10                 d    (deci-)   = 1/10
@@ -261,6 +262,13 @@ typedef NS_ENUM(NSInteger, HKMetricPrefix) {
 + (instancetype)radianAngleUnitWithMetricPrefix:(HKMetricPrefix)prefix API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));  // rad
 + (instancetype)radianAngleUnit API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));  // rad
 + (instancetype)degreeAngleUnit API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0));  // deg
+@end
+
+/* Illuminance Units */
+@interface HKUnit (Illuminance)
++ (instancetype)luxUnitWithMetricPrefix:(HKMetricPrefix)prefix API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));      // lx
++ (instancetype)luxUnit API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0));  // lx
+
 @end
 
 /* Mole Constants */

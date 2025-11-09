@@ -1,11 +1,12 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-ios16.4-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMetal -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Metal
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 306.5.16.1
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-ios17.0-macabi -enable-objc-interop -autolink-force-load -enable-library-evolution -module-link-name swiftMetal -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name Metal
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 341.16.1
 @_exported import Metal
 import Swift
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(macOS 10.11, iOS 8.0, tvOS 8.0, *)
 extension Metal.MTLBlitCommandEncoder {
   public func fill(buffer: any Metal.MTLBuffer, range: Swift.Range<Swift.Int>, value: Swift.UInt8)
@@ -68,6 +69,8 @@ extension Metal.MTLComputeCommandEncoder {
   @available(macOS 10.13, iOS 11.0, tvOS 11.0, *)
   public func useHeaps(_ heaps: [any Metal.MTLHeap])
   public func setBuffers(_ buffers: [(any Metal.MTLBuffer)?], offsets: [Swift.Int], range: Swift.Range<Swift.Int>)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func setBuffers(_ buffers: [(any Metal.MTLBuffer)?], offsets: [Swift.Int], attributeStrides: [Swift.Int], range: Swift.Range<Swift.Int>)
   public func setTextures(_ textures: [(any Metal.MTLTexture)?], range: Swift.Range<Swift.Int>)
   public func setSamplerStates(_ samplers: [(any Metal.MTLSamplerState)?], range: Swift.Range<Swift.Int>)
   public func setSamplerStates(_ samplers: [(any Metal.MTLSamplerState)?], lodMinClamps: [Swift.Float], lodMaxClamps: [Swift.Float], range: Swift.Range<Swift.Int>)
@@ -201,6 +204,8 @@ extension Metal.MTLRenderCommandEncoder {
   @available(macOS 10.13, iOS 12.0, tvOS 14.5, *)
   public func setScissorRects(_ scissorRects: [Metal.MTLScissorRect])
   public func setVertexBuffers(_ buffers: [(any Metal.MTLBuffer)?], offsets: [Swift.Int], range: Swift.Range<Swift.Int>)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func setVertexBuffers(_ buffers: [(any Metal.MTLBuffer)?], offsets: [Swift.Int], attributeStrides: [Swift.Int], range: Swift.Range<Swift.Int>)
   public func setVertexTextures(_ textures: [(any Metal.MTLTexture)?], range: Swift.Range<Swift.Int>)
   public func setVertexSamplerStates(_ samplers: [(any Metal.MTLSamplerState)?], range: Swift.Range<Swift.Int>)
   public func setVertexSamplerStates(_ samplers: [(any Metal.MTLSamplerState)?], lodMinClamps: [Swift.Float], lodMaxClamps: [Swift.Float], range: Swift.Range<Swift.Int>)

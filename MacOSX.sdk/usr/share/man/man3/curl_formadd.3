@@ -5,7 +5,7 @@
 .\" *                            | (__| |_| |  _ <| |___
 .\" *                             \___|\___/|_| \_\_____|
 .\" *
-.\" * Copyright (C) 1998 - 2022, Daniel Stenberg, <daniel@haxx.se>, et al.
+.\" * Copyright (C) Daniel Stenberg, <daniel@haxx.se>, et al.
 .\" *
 .\" * This software is licensed as described in the file COPYING, which
 .\" * you should have received as part of this distribution. The terms
@@ -21,7 +21,7 @@
 .\" * SPDX-License-Identifier: curl
 .\" *
 .\" **************************************************************************
-.TH curl_formadd 3 "October 03, 2022" "libcurl 7.87.0" "libcurl Manual"
+.TH curl_formadd 3 "April 26, 2023" "libcurl 8.1.2" "libcurl"
 
 .SH NAME
 curl_formadd - add a section to a multipart form POST
@@ -177,8 +177,8 @@ for the curl handle.
 See example below.
 .SH EXAMPLE
 .nf
- struct curl_httppost* post = NULL;
- struct curl_httppost* last = NULL;
+ struct curl_httppost *post = NULL;
+ struct curl_httppost *last = NULL;
  char namebuffer[] = "name buffer";
  long namelength = strlen(namebuffer);
  char buffer[] = "test buffer";

@@ -14,7 +14,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 /*!
  @brief The level of optical flow computational accuracy.
- @details Computational accuracy settings are only available for VNGenerateOpticalFlowRequestRevision1.
  */
 API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 typedef NS_ENUM(NSUInteger, VNGenerateOpticalFlowRequestComputationAccuracy)
@@ -57,8 +56,6 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 /*!
  @brief The level of accuracy used to compute the optical flow. Default is VNGenerateOpticalFlowRequestComputationAccuracyMedium.
  @discussion The computational time typically trends with the accuracy level.  This parameter allows for selective tuning by the client application.
-             Computational accuracy settings are only available for VNGenerateOpticalFlowRequestRevision1.
-             VNGenerateOpticalFlowRequestRevision2 uses a neural network to generate the optical flow.
  */
 @property (readwrite, nonatomic, assign) VNGenerateOpticalFlowRequestComputationAccuracy computationAccuracy;
 
@@ -69,7 +66,7 @@ API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0))
 @property (readwrite, nonatomic, assign) OSType outputPixelFormat;
 
 /*!
- @brief Setting this to YES will keep the raw pixel buffer coming the the ML network. The default is NO.
+ @brief Setting this to YES will keep the raw pixel buffer coming from the the ML network. The default is NO.
  @discussion When set to YES, the outputPixelFormat is ignored. Setting this for revision 1 is a no-op as it is not ML-based.
  */
 @property (readwrite, nonatomic, assign) BOOL keepNetworkOutput API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0));

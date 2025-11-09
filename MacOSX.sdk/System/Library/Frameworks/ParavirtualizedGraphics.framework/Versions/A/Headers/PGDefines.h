@@ -2,7 +2,7 @@
 //  PGDefines.h
 //  ParavirtualizedGraphics
 //
-//  Copyright © 2018-2021 Apple Inc. All rights reserved.
+//  Copyright © 2018-2023 Apple Inc. All rights reserved.
 //
 
 #ifndef PGDefines_h

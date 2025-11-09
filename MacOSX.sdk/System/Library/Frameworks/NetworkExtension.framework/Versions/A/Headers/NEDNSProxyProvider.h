@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * NEDNSProxyProvider is part of NetworkExtension.framework
  */
-API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEDNSProxyProvider : NEProvider
 
 /*!
@@ -34,7 +34,7 @@ API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITE
  * @param options A dictionary containing keys and values passed by the provider's containing app. If the containing app did not start the proxy then this parameter will be nil.
  * @param completionHandler A block that must be called when the process of starting the proxy is complete. If the proxy cannot be started then the subclass' implementation of this method must pass a non-nil NSError object to this block. A value of nil passed to the completion handler indicates that the proxy was successfully started.
  */
-- (void)startProxyWithOptions:(nullable NSDictionary<NSString *,id> *)options completionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)startProxyWithOptions:(nullable NSDictionary<NSString *,id> *)options completionHandler:(void (^)(NSError * __nullable error))completionHandler API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method stopProxyWithReason:completionHandler:
@@ -42,14 +42,14 @@ API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITE
  * @param reason An NEProviderStopReason indicating why the proxy is being stopped.
  * @param completionHandler A block that must be called when the proxy is completely stopped.
  */
-- (void)stopProxyWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)stopProxyWithReason:(NEProviderStopReason)reason completionHandler:(void (^)(void))completionHandler API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method cancelProxyWithError:
  * @discussion This function is called by proxy provider implementations to stop the proxy when a network error is encountered that renders the proxy no longer viable. Subclasses should not override this method.
  * @param error An NSError object containing details about the error that the proxy provider implementation encountered.
  */
-- (void)cancelProxyWithError:(nullable NSError *)error API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)cancelProxyWithError:(nullable NSError *)error API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleNewFlow:
@@ -57,7 +57,7 @@ API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITE
  * @param flow The new flow
  * @return YES if the proxy implementation has retained the flow and intends to handle the flow data. NO if the proxy implementation has not retained the flow and will not handle the flow data. In this case the flow is terminated.
  */
-- (BOOL)handleNewFlow:(NEAppProxyFlow *)flow API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (BOOL)handleNewFlow:(NEAppProxyFlow *)flow API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @method handleNewUDPFlow:initialRemoteEndpoint:
@@ -70,13 +70,13 @@ API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITE
  * @param remoteEndpoint The initial remote endpoint provided by the proxied app when the flow was opened.
  * @return YES if the proxy implementation has retained the flow and intends to handle the flow data. NO if the proxy implementation has not retained the flow and will not handle the flow data. In this case the flow is terminated.
  */
-- (BOOL)handleNewUDPFlow:(NEAppProxyUDPFlow *)flow initialRemoteEndpoint:(NWEndpoint *)remoteEndpoint API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (BOOL)handleNewUDPFlow:(NEAppProxyUDPFlow *)flow initialRemoteEndpoint:(NWEndpoint *)remoteEndpoint API_AVAILABLE(macos(10.15), ios(13.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property systemDNSSettings
  * @discussion The current system DNS settings. Use KVO to watch for changes.
  */
-@property (readonly, nullable) NSArray<NEDNSSettings *> *systemDNSSettings API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (readonly, nullable) NSArray<NEDNSSettings *> *systemDNSSettings API_AVAILABLE(macos(10.15), ios(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 

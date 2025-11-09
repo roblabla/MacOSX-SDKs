@@ -1,9 +1,11 @@
 /*
 	File:		IOBluetoothOBEXSession.h
 	Contains:	Bluetooth Transport subclass of the OBEXSession object. 
-    Copyright:	(c) 2002-2003 by Apple Computer, Inc. All rights reserved.
+    Copyright:	(c) 2002-2003, 2023 by Apple Computer, Inc. All rights reserved.
 	Writers:	Jason Giles
 */
+
+#if __OBJC__
 
 #import <IOKit/IOKitLib.h>
 
@@ -287,3 +289,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 			
 			
 @end
+
+#endif // __OBJC__

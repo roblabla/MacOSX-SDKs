@@ -4,5 +4,5 @@ targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/ANECompiler.framework/libORTools.dylib'
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
-    symbols:         [ _ORToolsCpBasedAllocatorUtil_CallCpAllocator ]
+    symbols:         [ _ORToolsCpBasedAllocatorUtil_CallCpAllocator, _ORToolsCpBasedTransposerUtil_CallCpTransposer ]
 ...

@@ -20,6 +20,9 @@ API_AVAILABLE(ios(14.0), macos(11.0))
 /// Create a new point with the provided properties.
 - (instancetype)initWithLocation:(CGPoint)location timeOffset:(NSTimeInterval)timeOffset size:(CGSize)size opacity:(CGFloat)opacity force:(CGFloat)force azimuth:(CGFloat)azimuth altitude:(CGFloat)altitude NS_DESIGNATED_INITIALIZER;
 
+/// Create a new point with the provided properties.
+- (instancetype)initWithLocation:(CGPoint)location timeOffset:(NSTimeInterval)timeOffset size:(CGSize)size opacity:(CGFloat)opacity force:(CGFloat)force azimuth:(CGFloat)azimuth altitude:(CGFloat)altitude secondaryScale:(CGFloat)secondaryScale NS_DESIGNATED_INITIALIZER;
+
 /// Location of the point.
 @property (nonatomic, readonly) CGPoint location;
 /// Time offset since the start of the stroke path in seconds.
@@ -35,6 +38,11 @@ API_AVAILABLE(ios(14.0), macos(11.0))
 @property (nonatomic, readonly) CGFloat force;
 /// Altitude used to create this point in radians, 0.0-π/2 radians
 @property (nonatomic, readonly) CGFloat altitude;
+
+/// The scaling of the point for secondary effects.
+///
+/// For example the scaling of the pigment in the watercolor ink.
+@property (nonatomic, readonly) CGFloat secondaryScale API_AVAILABLE(ios(17.0), macos(14.0));
 
 @end
 

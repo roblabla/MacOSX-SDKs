@@ -158,21 +158,28 @@ The unique identifier for the destination.
 .Pp
 .\" - - - - - - - - - - - - END DESTINATIONINFO LIST  - - - - - - - - - - - - -
 .\" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-.\"
-When more than one destination is configured, the most recent backup destination will be marked with the > indicator.
+.\" - - - - - - - - - - - - - - SETQUOTA  - - - - - - - - - - - - - - - -
+.It Sy setquota
+.Ar destination_id
+.Ar quota_in_gb
+.br
+Set the quota for the destination with the specified unique identifier to the specified number of gigabytes. To obtain the unique identifier for a destination, see
+.Sy destinationinfo.
 .Pp
-When the
-.Fl Sy X
-option is provided, output will be printed in XML property list format.
-.\" - - - - - - - - - - - - - - REMOVEDESTINATION  - - - - - - - - - - - - - - - 
+The new quota will take effect on the next backup to this destination.
+.Pp
+Requires root and Full Disk Access privileges.
+.\" - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+.\" - - - - - - - - - - - - - - REMOVEDESTINATION  - - - - - - - - - - - - - - -
 .It Sy removedestination
 .Ar identifier
 .br
-Remove the destination with the specified unique identifier from the Time Machine configuration. Requires root and Full Disk Access privileges.
-.Pp
+Remove the destination with the specified unique identifier from the Time Machine configuration.
 To obtain the unique identifier for a destination, see
 .Sy destinationinfo.
-.\" - - - - - - - - - - - - - - - ADDEXCLUSION - - - - - - - - - - - - - - - - - 
+.Pp
+Requires root and Full Disk Access privileges.
+.\" - - - - - - - - - - - - - - - ADDEXCLUSION - - - - - - - - - - - - - - - - -
 .It Sy addexclusion Op Fl pv
 .Ar item ...
 .br

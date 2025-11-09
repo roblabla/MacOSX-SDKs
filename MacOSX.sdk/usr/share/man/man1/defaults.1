@@ -1,4 +1,4 @@
-.\""Copyright (c) 2001-2011, Apple Inc. All Rights Reserved.
+.\""Copyright (c) 2001-2023, Apple Inc. All Rights Reserved.
 .Dd Nov 3, 2003 
 .Dt DEFAULTS 1
 .Os "Mac OS X"
@@ -118,6 +118,16 @@ Removes the default named
 .Ar key
 from
 .Ar domain .
+.It Sy delete-all Ar domain
+Removes all default information for
+.Ar domain
+in all known containers.
+.It Sy delete-all Ar domain key
+Removes the default named
+.Ar key
+from
+.Ar domain
+in all known containers.
 .It Sy domains
 Prints the names of all domains in the user's defaults system.
 .It Sy find Ar word

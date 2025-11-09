@@ -351,7 +351,7 @@ __options_decl(eph_panic_flags_t, uint64_t, {
 	EMBEDDED_PANIC_HEADER_FLAG_INCOHERENT_PANICLOG            = 0x8000                              /* ERROR: paniclog integrity check failed (a warning to consumer code i.e. DumpPanic) */
 });
 
-#define EMBEDDED_PANIC_HEADER_CURRENT_VERSION 4
+#define EMBEDDED_PANIC_HEADER_CURRENT_VERSION 5
 #define EMBEDDED_PANIC_MAGIC 0x46554E4B /* FUNK */
 #define EMBEDDED_PANIC_HEADER_OSVERSION_LEN 32
 
@@ -387,6 +387,8 @@ struct embedded_panic_header {
 	char eph_macos_version[EMBEDDED_PANIC_HEADER_OSVERSION_LEN];
 	uuid_string_t eph_bootsessionuuid_string;                      /* boot session UUID */
 	uint64_t eph_roots_installed;                                  /* bitmap indicating which roots are installed on this system */
+	uint32_t eph_ext_paniclog_offset;
+	uint32_t eph_ext_paniclog_len;
 } __attribute__((packed));
 
 

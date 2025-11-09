@@ -20,15 +20,15 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NS_ENUM(NSInteger, UIContextMenuInteractionCommitStyle) {
     UIContextMenuInteractionCommitStyleDismiss = 0,
     UIContextMenuInteractionCommitStylePop,
-} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
 
 typedef NS_ENUM(NSInteger, UIContextMenuInteractionAppearance) {
     UIContextMenuInteractionAppearanceUnknown = 0,
     UIContextMenuInteractionAppearanceRich,            // Modal "rich" menu with optional preview.
     UIContextMenuInteractionAppearanceCompact,         // Non-modal, compact menu with no preview.
-} API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+} API_AVAILABLE(ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIContextMenuInteraction : NSObject <UIInteraction>
 
 /// The interaction's delegate.
@@ -75,7 +75,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIContextMenuInteractionAnimating <NSObject>
 
 /// Displayed preview view controller.
@@ -86,7 +86,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 @end
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIContextMenuInteractionCommitAnimating <UIContextMenuInteractionAnimating>
 
 /// Preferred animation style for the menu's commit action. Triggered when the user taps the preview.
@@ -95,7 +95,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 @end
 
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @protocol UIContextMenuInteractionDelegate <NSObject>
 
 /*!
@@ -120,7 +120,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
  * @param configuration  Configuration of the menu that will be presented if the interaction proceeds.
  * @param identifier     Identifier for the item whose preview is being requested.
  */
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configuration:(UIContextMenuConfiguration *)configuration highlightPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0));
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configuration:(UIContextMenuConfiguration *)configuration highlightPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0), tvos(17.0));
 
 /*!
  * @abstract Called when a context menu is dismissed. Return a UITargetedPreview corresponding to the item with the given identifier.
@@ -129,7 +129,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
  * @param configuration  Configuration of the menu being dismissed.
  * @param identifier     Identifier for the item whose preview is being requested.
  */
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configuration:(UIContextMenuConfiguration *)configuration dismissalPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0));
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configuration:(UIContextMenuConfiguration *)configuration dismissalPreviewForItemWithIdentifier:(id<NSCopying>)identifier API_AVAILABLE(ios(16.0), tvos(17.0));
 
 /*!
  * @abstract Called when the interaction is about to "commit" in response to the user tapping the preview.
@@ -138,7 +138,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
  * @param configuration  Configuration of the currently displayed menu.
  * @param animator       Commit animator. Add animations to this object to run them alongside the commit transition.
  */
-- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator;
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator API_UNAVAILABLE(tvos);
 
 /*!
  * @abstract Called when the interaction is about to display a menu.
@@ -164,7 +164,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
  * @param interaction    The UIContextMenuInteraction requesting a highlighting preview.
  * @param configuration  The configuration of the menu about to be displayed by this interaction.
  */
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("contextMenuInteraction:configuration:previewForHighlightingItemWithIdentifier:", ios(13.0, 16.0));
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("contextMenuInteraction:configuration:highlightPreviewForItemWithIdentifier:", ios(13.0, 16.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
 
 /*!
  * @abstract Called when the interaction is about to dismiss. Return a UITargetedPreview describing the desired dismissal target.
@@ -176,7 +176,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
  * @return Return a UITargetedPreview describing the desired dismissal target. Return nil to cause the menu to
  *         animate away without morphing into a specific view.
  */
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("contextMenuInteraction:configuration:previewForDismissingToItemWithIdentifier:", ios(13.0, 16.0));
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("contextMenuInteraction:configuration:dismissalPreviewForItemWithIdentifier:", ios(13.0, 16.0), visionos(1.0, 1.0)) API_UNAVAILABLE(tvos);
 
 @end
 

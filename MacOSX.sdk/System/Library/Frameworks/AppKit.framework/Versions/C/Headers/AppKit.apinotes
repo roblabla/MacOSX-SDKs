@@ -5245,6 +5245,9 @@ Classes:
   - Name: textColor
     PropertyKind: Class
     SwiftName: textColor
+  - Name: textInsertionPointColor
+    PropertyKind: Class
+    SwiftName: textInsertionPointColor
   - Name: underPageBackgroundColor
     PropertyKind: Class
     SwiftName: underPageBackgroundColor
@@ -5984,6 +5987,9 @@ Classes:
   - Selector: "sidebarWithViewController:"
     MethodKind: Class
     SwiftName: init(sidebarWithViewController:)
+  - Selector: "inspectorWithViewController:"
+    MethodKind: Class
+    SwiftName: init(inspectorWithViewController:)
 - Name: NSStatusBar
   Methods:
   - Selector: "removeStatusItem:"
@@ -6091,18 +6097,18 @@ Classes:
     SwiftName: textLayoutFragment(for:)
 - Name: NSTextListElement
   Methods:
-  - Selector: "initWithParentElement:textList:contents:markerAttributes:childElements:"
-    MethodKind: Instance
-    SwiftName: init(parent:textList:contents:markerAttributes:children:)
-  - Selector: "textListElementWithContents:markerAttributes:textList:childElements:"
-    MethodKind: Class
-    SwiftName: init(contents:markerAttributes:textList:children:)
-  - Selector: "textListElementWithChildElements:textList:nestingLevel:"
-    MethodKind: Class
-    SwiftName: init(children:textList:nestingLevel:)
   - Selector: "childElements"
     MethodKind: Instance
     SwiftName: children
+  - Selector: "initWithParentElement:textList:contents:markerAttributes:childElements:"
+    MethodKind: Instance
+    SwiftName: init(parent:textList:contents:markerAttributes:children:)
+  - Selector: "textListElementWithChildElements:textList:nestingLevel:"
+    MethodKind: Class
+    SwiftName: init(children:textList:nestingLevel:)
+  - Selector: "textListElementWithContents:markerAttributes:textList:childElements:"
+    MethodKind: Class
+    SwiftName: init(contents:markerAttributes:textList:children:)
 - Name: NSTextRange
   Methods:
   - Selector: "containsLocation:"
@@ -9065,6 +9071,8 @@ Globals:
   SwiftName: defaultAttributes
 - Name: NSDefaultTabIntervalDocumentAttribute
   SwiftName: defaultTabInterval
+- Name: NSDefaultFontExcludedDocumentAttribute
+  SwiftName: defaultFontExcluded
 - Name: NSDefaultTokenStyle
   Availability: nonswift
 - Name: NSDefinitionPresentationTypeKey
@@ -10415,6 +10423,8 @@ Globals:
   SwiftName: NSToolbar.didRemoveItemNotification
 - Name: NSToolbarFlexibleSpaceItemIdentifier
   SwiftName: flexibleSpace
+- Name: NSToolbarInspectorTrackingSeparatorItemIdentifier
+  SwiftName: inspectorTrackingSeparator
 - Name: NSToolbarPrintItemIdentifier
   SwiftName: print
 - Name: NSToolbarSeparatorItemIdentifier
@@ -10427,6 +10437,8 @@ Globals:
   SwiftName: sidebarTrackingSeparator
 - Name: NSToolbarSpaceItemIdentifier
   SwiftName: space
+- Name: NSToolbarToggleInspectorItemIdentifier
+  SwiftName: toggleInspector
 - Name: NSToolbarToggleSidebarItemIdentifier
   SwiftName: toggleSidebar
 - Name: NSToolbarWillAddItemNotification

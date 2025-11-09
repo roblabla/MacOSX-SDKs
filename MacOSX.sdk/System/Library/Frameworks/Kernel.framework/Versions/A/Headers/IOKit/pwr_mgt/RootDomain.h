@@ -327,6 +327,7 @@ public:
 
 	IOReturn    setWakeTime(uint64_t wakeContinuousTime);
 
+
 private:
 	unsigned long getRUN_STATE(void);
 

@@ -20,9 +20,10 @@ extern "C" {
 #include <stdint.h>
 #include <stddef.h>
 #include <unistd.h>
-#if __has_include(<os/availability.h>)
+#if __has_include(<os/availability.h>) && !defined(__linux__)
 #    include <os/availability.h>
 #else
+#    define __API_AVAILABLE(...)
 #    define API_AVAILABLE(...) /* nothing */
 #endif // __has_include(<os/availability.h>)
 

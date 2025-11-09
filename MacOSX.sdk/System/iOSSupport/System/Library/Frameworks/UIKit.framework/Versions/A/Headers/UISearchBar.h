@@ -30,7 +30,6 @@ typedef NS_ENUM(NSUInteger, UISearchBarStyle) {
     UISearchBarStyleMinimal     // used by Calendar, Notes and Music
 } API_AVAILABLE(ios(7.0));
 
-
 @protocol UISearchBarDelegate;
 @class UITextField, UILabel, UIButton, UIColor, UISearchTextField;
 
@@ -38,8 +37,13 @@ typedef NS_ENUM(NSUInteger, UISearchBarStyle) {
  UISearchBar officially conformed to UITextInputTraits in iOS 8.0 and privately conformed in iOS 7.0. Prior to 7.0, UISearchBar only implemented these four traits: autocapitalizationType, autocorrectionType, spellCheckingType and keyboardType. If your deployment target is <7.0 and you are using any trait other than one of the four mentioned, you must check its availability with respondsToSelector:
  */
 
+@protocol UILookToDictateCapable <NSObject>
+/// Enable or disable 'Look To Dictate' on the receiver.
+@property (nonatomic, getter=isLookToDictateEnabled) BOOL lookToDictateEnabled API_AVAILABLE(visionos(1.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos, macos);
+@end
+
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
-@interface UISearchBar : UIView <UIBarPositioning, UITextInputTraits>
+@interface UISearchBar : UIView <UIBarPositioning, UITextInputTraits, UILookToDictateCapable>
 
 - (instancetype)init API_UNAVAILABLE(tvos);
 - (instancetype)initWithFrame:(CGRect)frame NS_DESIGNATED_INITIALIZER API_UNAVAILABLE(tvos);
@@ -164,6 +168,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
  */
 - (void)setPositionAdjustment:(UIOffset)adjustment forSearchBarIcon:(UISearchBarIcon)icon API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
 - (UIOffset)positionAdjustmentForSearchBarIcon:(UISearchBarIcon)icon API_AVAILABLE(ios(5.0)) UI_APPEARANCE_SELECTOR;
+
+@property (nonatomic, getter=isLookToDictateEnabled) BOOL lookToDictateEnabled API_AVAILABLE(visionos(1.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos, macos);
 @end
 
 NS_SWIFT_UI_ACTOR

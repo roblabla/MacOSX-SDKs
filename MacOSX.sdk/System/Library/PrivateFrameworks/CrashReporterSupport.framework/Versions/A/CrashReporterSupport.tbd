@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/CrashReporterSupport.framework/Versions/A/CrashReporterSupport'
-current-version: 15110
+current-version: 15121
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -119,17 +119,30 @@ install-name:    '/System/Library/PrivateFrameworks/OSAnalytics.framework/Versio
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
-    symbols:         [ _OSACPUTypeToString, _OSADateFormat, _OSAIsDebugEnabledForRSD, 
-                       _OSAIsRSDDevice, _OSAIsRSDDisplay, _OSAIsRSDHost, _OSANSDateFormat, 
-                       _OSARTCIsProcessOfInterest, _OSASafeCreateDirectory, _OSASafeMoveItemAtURL, 
+    symbols:         [ _OSACPUTypeToString, _OSADateFormat, _OSADaysSinceEpoch, _OSAIsACDCDevice, 
+                       _OSAIsDebugEnabledForRSD, _OSAIsRSDDevice, _OSAIsRSDDisplay, 
+                       _OSAIsRSDHost, _OSANSDateFormat, _OSARTCIsProcessOfInterest, 
+                       _OSARandomSelection, _OSASafeCreateDirectory, _OSASafeMoveItemAtURL, 
                        _OSASafeOpen, _OSASafeOpenReadOnly, _OSASafeOpenWriteOnly, 
                        _OSASafeRemoveFileAtURL, _OSASandboxConsumeExtension, _OSASandboxExtensionForUserSubmissionDirectory, 
                        _OSASanitizeOptionHomeDirectory, _OSASanitizeOptionKeepFilename, 
                        _OSASanitizeOptionMountedVolume, _OSASanitizeOptionNetworkVolume, 
-                       _OSASanitizePath, _OSASetOwnership, _OSAStateMonitorEventCALogWritten, 
-                       _OSAStateMonitorEventSubmission, _OSASyncCrashReporter, _OSATimeIntervalApproximate, 
-                       _OSATransformOptionFullReport, _OSATransformOptionMetadata, 
-                       _OSATransformOptionPersist, _OSATransformOptionSymbolicate, 
+                       _OSASanitizePath, _OSASetOwnership, _OSAStateMonitorEventCA2HrHeartbeat, 
+                       _OSAStateMonitorEventCA2HrHeartbeatStartTimestampKey, _OSAStateMonitorEventCALogRetired, 
+                       _OSAStateMonitorEventCALogRetiredLogPathKey, _OSAStateMonitorEventCALogRetiredReasonKey, 
+                       _OSAStateMonitorEventCALogWritten, _OSAStateMonitorEventCALogWrittenDeprecated, 
+                       _OSAStateMonitorEventCALogWrittenEndTimestampKey, _OSAStateMonitorEventCALogWrittenLogPathKey, 
+                       _OSAStateMonitorEventCALogWrittenStartTimestampKey, _OSAStateMonitorEventCALogWrittenTotalHeartbeatCountKey, 
+                       _OSAStateMonitorEventSubmission, _OSAStateMonitorEventSubmissionCompleted, 
+                       _OSAStateMonitorEventSubmissionErrorDescriptionKey, _OSAStateMonitorEventSubmissionErrorHTTPPostError, 
+                       _OSAStateMonitorEventSubmissionErrorPowerAssertionExpired, 
+                       _OSAStateMonitorEventSubmissionFoundLogs, _OSAStateMonitorEventSubmissionFoundLogsLogsKey, 
+                       _OSAStateMonitorEventSubmissionHTTPPostStarted, _OSAStateMonitorEventSubmissionHTTPPostStartedContentLength, 
+                       _OSAStateMonitorEventSubmissionHTTPPostStartedIncludedLogsKey, 
+                       _OSAStateMonitorEventSubmissionLogsAddedToArchive, _OSAStateMonitorEventSubmissionLogsAddedToArchiveLogsKey, 
+                       _OSAStateMonitorEventSubmissionStarted, _OSASyncCrashReporter, 
+                       _OSATimeIntervalApproximate, _OSATransformOptionFullReport, 
+                       _OSATransformOptionMetadata, _OSATransformOptionPersist, _OSATransformOptionSymbolicate, 
                        _OSATransformOptionTracerGroup, _OSATransformOptionTracerURL, 
                        _OSATransformResultError, _OSATransformResultFileURL, _OSATransformResultMetadata, 
                        _OSATransformResultRadars, _OSATransformResultReport, _OSATransformResultTracerURL, 
@@ -147,7 +160,8 @@ exports:
                        _kOSALogMetadataBugType, _kOSALogMetadataBundleID, _kOSALogMetadataIncidentID, 
                        _kOSALogOptionAlternateMetadata, _kOSALogOptionAppDescription, 
                        _kOSALogOptionCaptureTime, _kOSALogOptionCountKey, _kOSALogOptionCreateTmpFile, 
-                       _kOSALogOptionDialogDisplayed, _kOSALogOptionFileOwner, _kOSALogOptionFileOwnerUID, 
+                       _kOSALogOptionDataVaultPath, _kOSALogOptionDialogDisplayed, 
+                       _kOSALogOptionDisplayName, _kOSALogOptionFileOwner, _kOSALogOptionFileOwnerUID, 
                        _kOSALogOptionMoveSourceFile, _kOSALogOptionObserverInfo, 
                        _kOSALogOptionOverrideCountLimit, _kOSALogOptionOverrideFileExtension, 
                        _kOSALogOptionOverrideFileName, _kOSALogOptionOverrideFilePrefix, 
@@ -160,11 +174,11 @@ exports:
                        _logLineForAppleCare, _ns2xpc, _rollAppleCareLogs, _rtcsc_send, 
                        _runCrashMoverService, _symbolicateSpeedTracer, _xpc2ns ]
     objc-classes:    [ OSABinaryImageCatalog, OSABinaryImageSegment, OSABridgeLinkProxy, 
-                       OSACrackShotReport, OSADefaults, OSADiagnosticsReporterSupport, 
-                       OSALegacyXform, OSALog, OSALogCounterObject, OSAProxyConfiguration, 
-                       OSAReport, OSASafeCreateDirectoryOptions, OSAStackShotReport, 
-                       OSAStateMonitor, OSASymbolInfo, OSASystemConfiguration, OSASystemWatchdogCrashReport, 
-                       OSATasking ]
+                       OSACrackShotReport, OSADateCounter, OSADefaults, OSADiagnosticsReporterSupport, 
+                       OSALegacyXform, OSALog, OSALogTrackerObject, OSAOsLogPackParser, 
+                       OSAParsedOsLogPart, OSAProxyConfiguration, OSAReport, OSASafeCreateDirectoryOptions, 
+                       OSAStackShotReport, OSAStateMonitor, OSASymbolInfo, OSASystemConfiguration, 
+                       OSASystemWatchdogCrashReport, OSATasking ]
     objc-ivars:      [ OSABinaryImageCatalog._absolute_segment, OSABinaryImageCatalog._kernel_cache_segment, 
                        OSABinaryImageCatalog._kernel_segments, OSABinaryImageCatalog._kernel_text_exec_segments, 
                        OSABinaryImageCatalog._notes, OSABinaryImageCatalog._rootedCacheLibs, 

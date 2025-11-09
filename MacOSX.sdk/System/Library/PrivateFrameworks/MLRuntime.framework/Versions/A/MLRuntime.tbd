@@ -11,7 +11,8 @@ exports:
     objc-classes:    [ MLRBMLTSchedulingPolicy, MLRExtensionPrincipalClass, MLRExtensionRemoteContext, 
                        MLRExtensionService_Subsystem, MLRInternalBMLTTask, MLRInternalTrialTask, 
                        MLRInternalTrialTaskResult, MLROnDemandConnectionHandler, 
-                       MLROnDemandPlugin, MLRSandboxExtensionRequest, MLRTask, MLRTaskAttachments, 
-                       MLRTaskParameters, MLRTaskResult, MLRTrialDediscoRecipe, MLRTrialDediscoTaskResult, 
-                       MLRTrialTask, MLRTrialTaskResult, MLRTrialTaskSchedulingPolicy ]
+                       MLROnDemandPlugin, MLRSandboxExtensionRequest, MLRServiceClient, 
+                       MLRTask, MLRTaskAttachments, MLRTaskParameters, MLRTaskResult, 
+                       MLRTrialDediscoRecipe, MLRTrialDediscoTaskResult, MLRTrialTask, 
+                       MLRTrialTaskResult, MLRTrialTaskSchedulingPolicy ]
 ...

@@ -1,9 +1,4 @@
-//
-//  GKEventListener.h
-//  Game Center
-//
-//  Copyright 2012-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
 

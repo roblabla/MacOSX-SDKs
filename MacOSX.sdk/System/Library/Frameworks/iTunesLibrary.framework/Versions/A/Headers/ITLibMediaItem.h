@@ -284,7 +284,7 @@ ITLIB_EXPORT @interface ITLibMediaItem : ITLibMediaEntity
 @property (readonly, nonatomic, retain, nullable) NSDate* skipDate;
 
 /*! @abstract The voice-over language of this media item */
-@property (readonly, nonatomic, copy, nullable) NSString* voiceOverLanguage;
+@property (readonly, nonatomic, copy, nullable) NSString* voiceOverLanguage DEPRECATED_ATTRIBUTE;
 
 /*! @abstract The volume adjustment used for this media item if any. */
 @property (readonly, nonatomic, assign) NSInteger volumeAdjustment;
@@ -369,7 +369,7 @@ ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyStopTime;
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyTotalTime;
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyTrackNumber;
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyLocationType;
-ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyVoiceOverLanguage;
+ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyVoiceOverLanguage DEPRECATED_ATTRIBUTE;
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyVolumeAdjustment;
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyWork;
 ITLIB_EXPORT ITLIB_EXTERN NSString * const ITLibMediaItemPropertyYear;

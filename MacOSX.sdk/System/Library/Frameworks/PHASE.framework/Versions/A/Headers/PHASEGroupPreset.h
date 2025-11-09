@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     @discussion
         These can be either be manually created and added to a PHASEGroupPreset object, or created inline using PHASEGroupPreset addGroup.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEGroupPresetSetting : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -83,7 +83,7 @@ NS_SWIFT_NAME(init(gain:rate:gainCurveType:rateCurveType:));
         Initialize beforehand, and use activate or deactivate to switch to the new preset during playback.
         Activating a preset will automatically deactivate the current one.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEGroupPreset : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

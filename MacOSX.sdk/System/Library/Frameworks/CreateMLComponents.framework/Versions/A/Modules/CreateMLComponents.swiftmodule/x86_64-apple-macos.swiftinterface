@@ -1,9 +1,10 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -library-level api -module-name CreateMLComponents
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 846.100.11
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name CreateMLComponents
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 1141.0.17
 import AVFAudio
 import AVFoundation
+import Accelerate
 import Combine
 import CoreGraphics
 import CoreImage
@@ -11,6 +12,7 @@ import CoreML
 import CoreMedia
 import CoreVideo
 import Foundation
+import OSLog
 import SoundAnalysis
 import Swift
 import TabularData
@@ -18,6 +20,7 @@ import UniformTypeIdentifiers
 import Vision
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 import os
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.AudioReader {
@@ -102,6 +105,19 @@ public struct OneHotEncoder<Category> : CreateMLComponents.Estimator where Categ
   #if compiler(>=5.3) && $Sendable
   public func fitted<S>(to input: S, eventHandler: CreateMLComponents.EventHandler? = nil) throws -> CreateMLComponents.OneHotEncoder<Category>.Transformer where S : Swift.Sequence, S.Element == Category?
   #endif
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.OneHotEncoder : CreateMLComponents.UpdatableEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.OneHotEncoder<Category>.Transformer
+  #if compiler(>=5.3) && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.OneHotEncoder<Category>.Transformer, with input: some Sequence<Category?>, eventHandler: CreateMLComponents.EventHandler? = nil) throws
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.OneHotEncoder<Category>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.OneHotEncoder<Category>.Transformer
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.OneHotEncoder : Swift.Sendable where Category : Swift.Sendable {
@@ -195,6 +211,18 @@ extension CreateMLComponents.MinMaxScaler.Transformer : Swift.Decodable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.MinMaxScaler.Transformer : Swift.Sendable where Element : Swift.Sendable {
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ChooseRandomly<Element> : CreateMLComponents.RandomTransformer {
+  public init<RandomTransformer>(@CreateMLComponents.AugmentationBuilder<Element> _ augmentation: () -> RandomTransformer) where Element == RandomTransformer.Input, RandomTransformer : CreateMLComponents.RandomTransformer, RandomTransformer.Input == RandomTransformer.Output
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to input: Element, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> Element
+  #endif
+  public typealias Input = Element
+  public typealias Output = Element
+}
+@available(*, unavailable)
+extension CreateMLComponents.ChooseRandomly : Swift.Sendable {
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct SlidingWindowTransformer<Input> : CreateMLComponents.TemporalTransformer, Swift.Codable, Swift.Sendable where Input : Swift.Sendable {
   public typealias Input = Input
@@ -246,6 +274,11 @@ extension CreateMLComponents.SlidingWindowTransformer.WindowSequence {
 extension CreateMLComponents.SlidingWindowTransformer.WindowSequence.Iterator : Swift.Sendable {
 }
 #endif
+extension CreateMLComponents.Transformer {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func adaptedAsRandomTransformer() -> some CreateMLComponents.RandomTransformer<Self.Input, Self.Output>
+  
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct PreprocessingUpdatableSupervisedTemporalEstimator<Preprocessor, Estimator> : CreateMLComponents.UpdatableSupervisedTemporalEstimator where Preprocessor : CreateMLComponents.TemporalTransformer, Estimator : CreateMLComponents.UpdatableSupervisedTemporalEstimator, Preprocessor.Output == Estimator.Transformer.Input {
   public typealias Transformer = CreateMLComponents.ComposedTemporalTransformer<Preprocessor, Estimator.Transformer>
@@ -349,8 +382,15 @@ extension CreateMLComponents.TemporalTransformer {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct ImageScaler : CreateMLComponents.Transformer, Swift.Sendable {
-  public var targetSize: CoreFoundation.CGSize
+  public var targetSize: CoreFoundation.CGSize {
+    get
+    set
+  }
   public init(targetSize: CoreFoundation.CGSize)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(targetWidth: Swift.Double)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(targetHeight: Swift.Double)
   #if compiler(>=5.3) && $Sendable
   public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) throws -> CoreImage.CIImage
   #endif
@@ -391,10 +431,27 @@ extension CreateMLComponents.FullyConnectedNetworkRegressor : CreateMLComponents
   public func update<InputSequence>(_ transformer: inout CreateMLComponents.FullyConnectedNetworkRegressorModel<Scalar>, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler? = nil) async throws where InputSequence : Swift.Sequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Swift.Float>
   #endif
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ModelMetadata : Swift.Hashable, Swift.Sendable {
+  public var description: Swift.String
+  public var version: Swift.String
+  public var author: Swift.String
+  public var license: Swift.String
+  public var creatorDefined: [Swift.String : Swift.String]
+  public init(description: Swift.String = "", version: Swift.String = "", author: Swift.String = "", license: Swift.String = "", creatorDefined: [Swift.String : Swift.String] = [:])
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: CreateMLComponents.ModelMetadata, b: CreateMLComponents.ModelMetadata) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct BoostedTreeRegressor<Annotation> : CreateMLComponents.SupervisedTabularEstimator {
   public typealias Transformer = CreateMLComponents.TreeRegressorModel
-  public var configuration: CreateMLComponents.BoostedTreeConfiguration
+  public var configuration: CreateMLComponents.BoostedTreeConfiguration {
+    get
+    set
+  }
   public var annotationColumnID: TabularData.ColumnID<Annotation>
   public var featureColumnNames: [Swift.String]
   public init(annotationColumnName: Swift.String, featureColumnNames: [Swift.String], configuration: CreateMLComponents.BoostedTreeConfiguration = BoostedTreeConfiguration())
@@ -404,8 +461,34 @@ public struct BoostedTreeRegressor<Annotation> : CreateMLComponents.SupervisedTa
   public func encode(_ transformer: CreateMLComponents.TreeRegressorModel, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.TreeRegressorModel
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.BoostedTreeRegressor : CreateMLComponents.UpdatableSupervisedTabularEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.TreeRegressorModel
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.TreeRegressorModel, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler?) async throws
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.TreeRegressorModel, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.TreeRegressorModel
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.BoostedTreeRegressor : Swift.Sendable where Annotation : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ImageColorTransformer : CreateMLComponents.Transformer, Swift.Sendable {
+  public var brightness: Swift.Float?
+  public var contrast: Swift.Float?
+  public var hue: Swift.Float?
+  public var saturation: Swift.Float?
+  public init(brightness: Swift.Float? = nil, contrast: Swift.Float? = nil, hue: Swift.Float? = nil, saturation: Swift.Float? = nil)
+  #if compiler(>=5.3) && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) -> CoreImage.CIImage
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = CoreImage.CIImage
 }
 extension Swift.Sequence {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
@@ -457,6 +540,21 @@ extension CreateMLComponents.MLModelClassifierAdaptor.Label : Swift.ExpressibleB
 extension CreateMLComponents.MLModelClassifierAdaptor.Label : Swift.ExpressibleByIntegerLiteral {
   public init(integerLiteral value: Swift.Int)
   public typealias IntegerLiteralType = Swift.Int
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+public struct HumanBodyPoseExtractor : CreateMLComponents.Transformer, Swift.Sendable {
+  public init()
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> [CreateMLComponents.Pose]
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = [CreateMLComponents.Pose]
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+extension CreateMLComponents.HumanBodyPoseExtractor : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct Classification<Label> : Swift.Hashable where Label : Swift.Hashable {
@@ -764,6 +862,108 @@ extension CreateMLComponents.CategoricalImputer : Swift.Sendable where Element :
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.CategoricalImputer.Strategy : Swift.Sendable where Element : Swift.Sendable {
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ApplyRandomly<RandomTransformer> : CreateMLComponents.RandomTransformer where RandomTransformer : CreateMLComponents.RandomTransformer, RandomTransformer.Input == RandomTransformer.Output {
+  public let probability: Swift.Double
+  public init<Input>(probability: Swift.Double = 0.5, @CreateMLComponents.AugmentationBuilder<Input> _ augmentation: () -> RandomTransformer) where Input == RandomTransformer.Input
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to input: RandomTransformer.Input, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> RandomTransformer.Output
+  #endif
+  public typealias Input = RandomTransformer.Input
+  public typealias Output = RandomTransformer.Input
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ApplyRandomly : Swift.Sendable where RandomTransformer : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label> : CreateMLComponents.Transformer where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint, Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
+  #if compiler(>=5.3) && $AsyncAwait
+  public mutating func updatePrecisionRecallCurves(_ input: some Collection<AnnotatedFeature<MLShapedArray<Scalar>, Set<Label>>>) async throws
+  #endif
+  public func prediction(from input: CoreML.MLShapedArray<Scalar>, confidenceThresholds: [Label : Scalar]) throws -> CreateMLComponents.ClassificationDistribution<Label>
+  public func prediction<S>(from input: S, confidenceThresholds: [Label : Scalar]) throws -> [CreateMLComponents.ClassificationDistribution<Label>] where S : Swift.Sequence, S.Element == CoreML.MLShapedArray<Scalar>
+  #if compiler(>=5.3) && $Sendable
+  public func applied(to input: CoreML.MLShapedArray<Scalar>, eventHandler: CreateMLComponents.EventHandler? = nil) throws -> CreateMLComponents.ClassificationDistribution<Label>
+  #endif
+  public typealias Input = CoreML.MLShapedArray<Scalar>
+  public typealias Output = CreateMLComponents.ClassificationDistribution<Label>
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Sendable where Scalar : Swift.Sendable, Label : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Encodable where Scalar : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.Decodable where Scalar : Swift.Decodable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel {
+  public func evaluation(on input: some Collection<AnnotatedFeature<Input, Set<Label>>>, confidenceThresholds: [Label : Swift.Float]) throws -> CreateMLComponents.MultiLabelClassificationMetrics<Label>
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct MultiLabelClassificationMetrics<Label> where Label : Swift.Hashable {
+  public var exampleCount: Swift.Int {
+    get
+  }
+  public var labels: Swift.Set<Label> {
+    get
+  }
+  public var confidenceThresholds: [Label : Swift.Float] {
+    get
+  }
+  public var meanAveragePrecision: Swift.Float {
+    get
+  }
+  public init(classifications: some Sequence<ClassificationDistribution<Label>>, groundTruth: some Sequence<Set<Label>>, strategy: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy, labels: Swift.Set<Label>) throws
+  public init(classifications: some Sequence<ClassificationDistribution<Label>>, groundTruth: some Sequence<Set<Label>>, strategy: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy) throws
+  public init(_ pairs: some Sequence<(classification: ClassificationDistribution<Label>, labels: Set<Label>)>, strategy: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy, labels: Swift.Set<Label>) throws
+  public init(_ pairs: some Sequence<(classification: ClassificationDistribution<Label>, labels: Set<Label>)>, strategy: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy) throws
+}
+extension CreateMLComponents.MultiLabelClassificationMetrics {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(confidenceThresholds: [Label : Swift.Float])
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public mutating func add(classifications: some Sequence<ClassificationDistribution<Label>>, groundTruth: some Sequence<Set<Label>>)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public mutating func add(_ pairs: some Sequence<(classification: ClassificationDistribution<Label>, labels: Set<Label>)>)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.MultiLabelClassificationMetrics : Swift.Sendable where Label : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ShuffleRandomly<Element> : CreateMLComponents.RandomTransformer {
+  public init<RandomTransformer>(@CreateMLComponents.AugmentationBuilder<Element> _ augmentation: () -> RandomTransformer) where Element == RandomTransformer.Input, RandomTransformer : CreateMLComponents.RandomTransformer, RandomTransformer.Input == RandomTransformer.Output
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to input: Element, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> Element
+  #endif
+  public typealias Input = Element
+  public typealias Output = Element
+}
+@available(*, unavailable)
+extension CreateMLComponents.ShuffleRandomly : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ApplyEachRandomly<Element> : CreateMLComponents.RandomTransformer {
+  public let probability: Swift.Double
+  public init<RandomTransformer>(probability: Swift.Double = 0.5, @CreateMLComponents.AugmentationBuilder<Element> _ augmentation: () -> RandomTransformer) where Element == RandomTransformer.Input, RandomTransformer : CreateMLComponents.RandomTransformer, RandomTransformer.Input == RandomTransformer.Output
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to input: Element, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> Element
+  #endif
+  public typealias Input = Element
+  public typealias Output = Element
+}
+@available(*, unavailable)
+extension CreateMLComponents.ApplyEachRandomly : Swift.Sendable {
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public enum ModelUpdateError : Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
   case invalidState(debugDescription: Swift.String)
@@ -785,6 +985,28 @@ extension CreateMLComponents.UpdatableTabularEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public func appending<Other>(_ other: Other) -> some CreateMLComponents.UpdatableTabularEstimator<CreateMLComponents.ComposedTabularTransformer<Self.Transformer, Other.Transformer>> where Other : CreateMLComponents.UpdatableTabularEstimator
   
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ImageFlipper : CreateMLComponents.Transformer, Swift.Sendable {
+  public var orientation: CreateMLComponents.ImageFlipper.Orientation
+  public init(orientation: CreateMLComponents.ImageFlipper.Orientation)
+  #if compiler(>=5.3) && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) -> CoreImage.CIImage
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = CoreImage.CIImage
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ImageFlipper {
+  public enum Orientation : Swift.Hashable, Swift.Sendable {
+    case horizontal
+    case vertical
+    public static func == (a: CreateMLComponents.ImageFlipper.Orientation, b: CreateMLComponents.ImageFlipper.Orientation) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
@@ -848,6 +1070,28 @@ extension CreateMLComponents.Transformer {
         return result
     }
   #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  @inlinable public func prediction<S, Annotation>(from input: S, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> [CreateMLComponents.AnnotatedPrediction<Self.Output, Annotation>] where S : Swift.Sequence, S.Element == CreateMLComponents.AnnotatedFeature<Self.Input, Annotation> {
+        var result = [AnnotatedPrediction<Output, Annotation>]()
+        result.reserveCapacity(input.underestimatedCount)
+        for example in input {
+            try Task.checkCancellation()
+            let transformed = try await applied(to: example.feature, eventHandler: eventHandler)
+            result.append(AnnotatedPrediction(prediction: transformed, annotation: example.annotation))
+            if let eventHandler = eventHandler {
+                let event = Event(
+                    origin: String(describing: self),
+                    itemCount: result.count,
+                    totalItemCount: input.underestimatedCount,
+                    metrics: [:]
+                )
+                eventHandler(event)
+            }
+        }
+        return result
+    }
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.Transformer {
@@ -885,6 +1129,19 @@ public struct OrdinalEncoder<Category> : CreateMLComponents.Estimator where Cate
   public func fitted<S>(to input: S, eventHandler: CreateMLComponents.EventHandler? = nil) throws -> CreateMLComponents.OrdinalEncoder<Category>.Transformer where S : Swift.Sequence, S.Element == Category?
   #endif
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.OrdinalEncoder : CreateMLComponents.UpdatableEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.OrdinalEncoder<Category>.Transformer
+  #if compiler(>=5.3) && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.OrdinalEncoder<Category>.Transformer, with input: some Sequence<Category?>, eventHandler: CreateMLComponents.EventHandler? = nil) throws
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.OrdinalEncoder<Category>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.OrdinalEncoder<Category>.Transformer
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.OrdinalEncoder : Swift.Sendable where Category : Swift.Sendable {
 }
@@ -920,6 +1177,99 @@ extension CreateMLComponents.OrdinalEncoder.Transformer : Swift.Encodable {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.OrdinalEncoder.Transformer : Swift.Decodable {
   public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct AnnotatedPrediction<Prediction, Annotation> {
+  public var prediction: Prediction
+  public var annotation: Annotation
+  public init(prediction: Prediction, annotation: Annotation)
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.AnnotatedPrediction : Swift.Encodable where Prediction : Swift.Encodable, Annotation : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.AnnotatedPrediction : Swift.Decodable where Prediction : Swift.Decodable, Annotation : Swift.Decodable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.AnnotatedPrediction : Swift.Equatable where Prediction : Swift.Equatable, Annotation : Swift.Equatable {
+  public static func == (a: CreateMLComponents.AnnotatedPrediction<Prediction, Annotation>, b: CreateMLComponents.AnnotatedPrediction<Prediction, Annotation>) -> Swift.Bool
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.AnnotatedPrediction : Swift.Hashable where Prediction : Swift.Hashable, Annotation : Swift.Hashable {
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.AnnotatedPrediction : Swift.Sendable where Prediction : Swift.Sendable, Annotation : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ObjectDetectionAnnotation<Label> : Swift.Decodable, Swift.Equatable where Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
+  public struct Annotation : Swift.Equatable {
+    public let boundingBox: CoreFoundation.CGRect
+    public let label: Label
+    public enum CodingKeys : Swift.String, Swift.CodingKey {
+      case boundingBox
+      case label
+      public init?(rawValue: Swift.String)
+      public init?(stringValue: Swift.String)
+      public init?(intValue: Swift.Int)
+      public typealias RawValue = Swift.String
+      public var intValue: Swift.Int? {
+        get
+      }
+      public var rawValue: Swift.String {
+        get
+      }
+      public var stringValue: Swift.String {
+        get
+      }
+    }
+    public static func == (a: CreateMLComponents.ObjectDetectionAnnotation<Label>.Annotation, b: CreateMLComponents.ObjectDetectionAnnotation<Label>.Annotation) -> Swift.Bool
+  }
+  public let imageFileName: Swift.String
+  public let objects: [CreateMLComponents.ObjectDetectionAnnotation<Label>.Annotation]
+  public let prominentObject: Label
+  public enum CodingKeys : Swift.String, Swift.CodingKey {
+    case imageFileName
+    case objects
+    case prominentObject
+    public init?(rawValue: Swift.String)
+    public init?(stringValue: Swift.String)
+    public init?(intValue: Swift.Int)
+    public typealias RawValue = Swift.String
+    public var intValue: Swift.Int? {
+      get
+    }
+    public var rawValue: Swift.String {
+      get
+    }
+    public var stringValue: Swift.String {
+      get
+    }
+  }
+  public static func == (a: CreateMLComponents.ObjectDetectionAnnotation<Label>, b: CreateMLComponents.ObjectDetectionAnnotation<Label>) -> Swift.Bool
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation : Swift.Identifiable {
+  public var id: Swift.String {
+    get
+  }
+  public typealias ID = Swift.String
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation : Swift.Sendable where Label : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.Annotation : Swift.Decodable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.Annotation : Swift.Sendable where Label : Swift.Sendable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct RobustScaler<Element> : CreateMLComponents.Estimator where Element : Swift.BinaryFloatingPoint, Element : Swift.Decodable, Element : Swift.Encodable {
@@ -978,6 +1328,51 @@ extension CreateMLComponents.RobustScaler.Transformer : Swift.Decodable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.RobustScaler.Transformer : Swift.Sendable where Element : Swift.Sendable {
+}
+extension Swift.Sequence where Self.Element : Swift.FloatingPoint {
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  @_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+  @inlinable internal func mean() -> Self.Element? {
+        var sum = 0 as Element
+        var lowOrderCompensation: Element = .zero // A running compensation for lost low-order bits.
+        var count = 0
+        for element in self {
+            let y = element - lowOrderCompensation
+            let t = sum + y
+            lowOrderCompensation = (t - sum) - y
+            sum = t
+            count += 1
+        }
+        if count == 0 {
+            return nil
+        }
+        return sum / Element(count)
+    }
+}
+extension Swift.Collection where Self.Element : Swift.FloatingPoint {
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  @_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+  @inlinable internal func mean() -> Self.Element {
+        if self.isEmpty {
+            return Element.zero
+        }
+        return sum() / Element(count)
+    }
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  @_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+  @inlinable internal func sum() -> Self.Element {
+        // Kahan summation algorithm, which reduces numerical error
+        var sum: Element = .zero
+        var lowOrderCompensation: Element = .zero // A running compensation for lost low-order bits.
+
+        for element in self {
+            let y = element - lowOrderCompensation
+            let t = sum + y
+            lowOrderCompensation = (t - sum) - y
+            sum = t
+        }
+        return sum
+    }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct EstimatorToSupervisedAdaptor<Estimator, Annotation> : CreateMLComponents.SupervisedEstimator where Estimator : CreateMLComponents.Estimator, Annotation : Swift.Equatable {
@@ -1127,6 +1522,43 @@ extension CreateMLComponents.UpdatableTabularEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public func adaptedAsSupervised<Annotation>(annotationColumnID: TabularData.ColumnID<Annotation>) -> CreateMLComponents.UpdatableTabularEstimatorToSupervisedAdaptor<Self, Annotation> where Annotation : Swift.Equatable
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct PreprocessingTabularEstimator<Preprocessor, Estimator> : CreateMLComponents.TabularEstimator where Preprocessor : CreateMLComponents.TabularTransformer, Estimator : CreateMLComponents.TabularEstimator {
+  public typealias Transformer = CreateMLComponents.ComposedTabularTransformer<Preprocessor, Estimator.Transformer>
+  public typealias Input = Preprocessor.Input
+  public typealias Intermediate = Preprocessor.Output
+  public typealias Output = Estimator.Transformer.Output
+  public var preprocessor: Preprocessor
+  public var estimator: Estimator
+  public init(_ preprocessor: Preprocessor, _ estimator: Estimator)
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func preprocessed(from input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> TabularData.DataFrame {
+        try await preprocessor.applied(to: input, eventHandler: eventHandler)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(toPreprocessed preprocessed: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let fittedTransformer = try await estimator.fitted(to: preprocessed, eventHandler: eventHandler)
+        return ComposedTabularTransformer(preprocessor, fittedTransformer)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(to input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let preprocessed = try await preprocessed(from: input, eventHandler: eventHandler)
+        try Task.checkCancellation()
+        return try await fitted(toPreprocessed: preprocessed, eventHandler: eventHandler)
+    }
+  #endif
+  public func encode(_ transformer: CreateMLComponents.PreprocessingTabularEstimator<Preprocessor, Estimator>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.PreprocessingTabularEstimator<Preprocessor, Estimator>.Transformer
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.PreprocessingTabularEstimator : Swift.Sendable where Preprocessor : Swift.Sendable, Estimator : Swift.Sendable {
+}
+extension CreateMLComponents.TabularTransformer {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other>(_ other: Other) -> CreateMLComponents.PreprocessingTabularEstimator<Self, Other> where Other : CreateMLComponents.TabularEstimator
+}
 extension CreateMLComponents.UpdatableEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public func appending<Other>(_ other: Other) -> some CreateMLComponents.UpdatableTemporalEstimator<CreateMLComponents.ComposedTemporalTransformer<CreateMLComponents.TransformerToTemporalAdaptor<Self.Transformer>, Other>> where Other : CreateMLComponents.TemporalTransformer, Other.Input == Self.Transformer.Output
@@ -1162,15 +1594,55 @@ extension TabularData.DataFrame {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public func selecting(_ selection: CreateMLComponents.ColumnSelection) -> TabularData.DataFrame
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public enum OptimizationError : Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
+  case numericUnderflow
+  case numericOverflow
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public func hash(into hasher: inout Swift.Hasher)
+  public static func == (a: CreateMLComponents.OptimizationError, b: CreateMLComponents.OptimizationError) -> Swift.Bool
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.OptimizationError : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
 extension TabularData.DataFrame {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public init<S, Feature, Annotation>(_ sequence: S, featuresColumnID: TabularData.ColumnID<Feature>, annotationsColumnID: TabularData.ColumnID<Annotation>) throws where S : Swift.Sequence, S.Element == CreateMLComponents.AnnotatedFeature<Feature, Annotation>
+}
+extension CreateMLComponents.Transformer {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func adaptedAsAnnotatedPredictionTransformer<Annotation>(annotationType: Annotation.Type = Annotation.self) -> some CreateMLComponents.Transformer<CreateMLComponents.AnnotatedPrediction<Self.Input, Annotation>, CreateMLComponents.AnnotatedPrediction<Self.Output, Annotation>>
+  
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.FullyConnectedNetworkRegressor {
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.FullyConnectedNetworkRegressorModel<Scalar>
   public func encodeWithOptimizer(_ transformer: CreateMLComponents.FullyConnectedNetworkRegressor<Scalar>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.FullyConnectedNetworkRegressor<Scalar>.Transformer
+}
+extension CreateMLComponents.MultiLabelClassificationMetrics {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public static func meanAveragePrecisionScore(classifications: some Sequence<ClassificationDistribution<Label>>, groundTruth: some Sequence<Set<Label>>, labels: Swift.Set<Label>) -> Swift.Float
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public static func meanAveragePrecisionScore(classifications: some Sequence<ClassificationDistribution<Label>>, groundTruth: some Sequence<Set<Label>>) -> Swift.Float
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public static func meanAveragePrecisionScore(_ pairs: some Sequence<(classification: ClassificationDistribution<Label>, labels: Set<Label>)>, labels: Swift.Set<Label>) -> Swift.Float
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public static func meanAveragePrecisionScore(_ pairs: some Sequence<(classification: ClassificationDistribution<Label>, labels: Set<Label>)>) -> Swift.Float
+}
+extension CreateMLComponents.MultiLabelClassificationMetrics {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func precisionScore(for label: Label) -> Swift.Float
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func recallScore(for label: Label) -> Swift.Float
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct HumanBodyActionCounter : CreateMLComponents.TemporalTransformer, Swift.Sendable {
@@ -1259,6 +1731,16 @@ extension CreateMLComponents.AudioFeaturePrint.FeatureSequence {
 extension CreateMLComponents.AudioFeaturePrint.FeatureSequence.Iterator : Swift.Sendable {
 }
 #endif
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ImageRotator : CreateMLComponents.Transformer, Swift.Sendable {
+  public var angle: Swift.Double
+  public init(angle: Swift.Double)
+  #if compiler(>=5.3) && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) -> CoreImage.CIImage
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = CoreImage.CIImage
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct AudioReader : CreateMLComponents.Transformer, Swift.Sendable {
   public var configuration: CreateMLComponents.AudioReader.Configuration
@@ -1456,6 +1938,19 @@ public struct AnnotatedFeatureProvider<Base, UnwrappedInput> : CreateMLComponent
   public func encode(_ transformer: CreateMLComponents.AnnotatedFeatureProvider<Base, UnwrappedInput>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.AnnotatedFeatureProvider<Base, UnwrappedInput>.Transformer
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.AnnotatedFeatureProvider : CreateMLComponents.UpdatableSupervisedTabularEstimator where Base : CreateMLComponents.UpdatableSupervisedEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.AnnotatedFeatureProvider<Base, UnwrappedInput>.Transformer
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.AnnotatedFeatureProvider<Base, UnwrappedInput>.Transformer, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.AnnotatedFeatureProvider<Base, UnwrappedInput>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.AnnotatedFeatureProvider<Base, UnwrappedInput>.Transformer
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.AnnotatedFeatureProvider : Swift.Sendable where Base : Swift.Sendable {
 }
@@ -1615,6 +2110,12 @@ extension CreateMLComponents.JointsSelector : Swift.CustomDebugStringConvertible
     get
   }
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifier {
+  public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label>
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.FullyConnectedNetworkMultiLabelClassifier<Scalar, Label>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.FullyConnectedNetworkMultiLabelClassifier<Scalar, Label>.Transformer
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct PreprocessingUpdatableEstimator<Preprocessor, Estimator> : CreateMLComponents.UpdatableEstimator where Preprocessor : CreateMLComponents.Transformer, Estimator : CreateMLComponents.UpdatableEstimator, Preprocessor.Output == Estimator.Transformer.Input {
   public typealias Transformer = CreateMLComponents.ComposedTransformer<Preprocessor, Estimator.Transformer>
@@ -1671,7 +2172,13 @@ extension CreateMLComponents.Transformer {
   public func appending<Other>(_ other: Other) -> CreateMLComponents.PreprocessingUpdatableEstimator<Self, Other> where Other : CreateMLComponents.UpdatableEstimator, Self.Output == Other.Transformer.Input
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public struct TreeRegressorModel : CreateMLComponents.TabularTransformer {
+public struct TreeRegressorModel : CreateMLComponents.TabularTransformer, Swift.Sendable {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var featureColumnNames: [Swift.String] {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var predictionColumnName: Swift.String
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func applied(to input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> TabularData.DataFrame
   #endif
@@ -1684,8 +2191,12 @@ extension CreateMLComponents.TreeRegressorModel : Swift.CustomDebugStringConvert
     get
   }
 }
-@available(*, unavailable)
-extension CreateMLComponents.TreeRegressorModel : Swift.Sendable {
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifier : CreateMLComponents.UpdatableSupervisedEstimator {
+  public func makeTransformer() -> CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label>
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func update<InputSequence>(_ transformer: inout CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label>, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler? = nil) async throws where InputSequence : Swift.Sequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Swift.Set<Label>>
+  #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct ImageReader : CreateMLComponents.Transformer, Swift.Sendable {
@@ -1703,12 +2214,74 @@ extension CreateMLComponents.ImageReader : Swift.CustomDebugStringConvertible {
     get
   }
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+@inlinable internal func absoluteError<T>(_ annotatedPrediction: CreateMLComponents.AnnotatedPrediction<T, T>) -> T where T : Swift.FloatingPoint {
+    abs(annotatedPrediction.prediction - annotatedPrediction.annotation)
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public func maximumAbsoluteError<E, C>(_ estimated: E, _ correct: C) -> E.Element where E : Swift.Collection, C : Swift.Collection, E.Element : Swift.FloatingPoint, E.Element == C.Element
+@_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+@inlinable public func maximumAbsoluteError<T>(_ predicted: some Collection<T>, _ groundTruth: some Collection<T>) -> T where T : Swift.FloatingPoint {
+    assert(
+        predicted.count == groundTruth.count,
+        "The collection of predicted values must have the same number of elements as the collection of ground truth values."
+    )
+    if predicted.isEmpty {
+        return .nan
+    }
+    return zip(predicted, groundTruth).map({ abs($0 - $1) }).max() ?? .nan
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+@inlinable public func maximumAbsoluteError<T>(_ annotatedPredictions: [CreateMLComponents.AnnotatedPrediction<T, T>]) -> T where T : Swift.FloatingPoint {
+    if let maximumAbsoluteError = annotatedPredictions.map({ absoluteError($0) }).max() {
+        return maximumAbsoluteError
+    }
+    return .nan
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public func meanAbsoluteError<E, C>(_ estimated: E, _ correct: C) -> E.Element where E : Swift.Collection, C : Swift.Collection, E.Element : Swift.FloatingPoint, E.Element == C.Element
+@_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+@inlinable public func meanAbsoluteError<T>(_ predicted: some Collection<T>, _ groundTruth: some Collection<T>) -> T where T : Swift.FloatingPoint {
+    assert(
+        predicted.count == groundTruth.count,
+        "The collection of predicted values must have the same number of elements as the collection of ground truth values."
+    )
+    if predicted.isEmpty {
+        return .nan
+    }
+    return zip(predicted, groundTruth).map({ abs($0 - $1) }).mean() ?? .nan
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+@inlinable public func meanAbsoluteError<T>(_ annotatedPredictions: [CreateMLComponents.AnnotatedPrediction<T, T>]) -> T where T : Swift.FloatingPoint {
+    if annotatedPredictions.isEmpty {
+        return .nan
+    }
+    return annotatedPredictions.map({ absoluteError($0) }).mean()
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public func rootMeanSquaredError<E, C>(_ estimated: E, _ correct: C) -> E.Element where E : Swift.Collection, C : Swift.Collection, E.Element : Swift.FloatingPoint, E.Element == C.Element
+@_backDeploy(before: macOS 14.0, iOS 17.0, tvOS 17.0)
+@inlinable public func rootMeanSquaredError<T>(_ predicted: some Collection<T>, _ groundTruth: some Collection<T>) -> T where T : Swift.FloatingPoint {
+    assert(
+        predicted.count == groundTruth.count,
+        "The collection of predicted values must have the same number of elements as the collection of ground truth values."
+    )
+    if predicted.isEmpty {
+        return .nan
+    }
+    return zip(predicted, groundTruth).map({ ($0 - $1) * ($0 - $1) }).mean().squareRoot()
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+@inlinable public func rootMeanSquaredError<T>(_ annotatedPredictions: [CreateMLComponents.AnnotatedPrediction<T, T>]) -> T where T : Swift.FloatingPoint {
+    if annotatedPredictions.isEmpty {
+        return .nan
+    }
+    return annotatedPredictions.map({ ($0.prediction - $0.annotation) * ($0.prediction - $0.annotation) }).mean().squareRoot()
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+@inlinable public func meanAbsolutePercentageError<T>(_ annotatedPredictions: [CreateMLComponents.AnnotatedPrediction<T, T>]) -> T where T : Swift.FloatingPoint {
+    if annotatedPredictions.isEmpty {
+        return .nan
+    }
+    return annotatedPredictions.map({ abs(($0.annotation - $0.prediction) / $0.annotation) }).mean()
+}
 #if compiler(>=5.3) && $RethrowsProtocol
 #if $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
@@ -1930,12 +2503,30 @@ extension CreateMLComponents.ColumnConcatenator : Swift.CustomDebugStringConvert
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.ColumnConcatenator : Swift.Sendable where Scalar : Swift.Sendable {
 }
+extension CreateMLComponents.Transformer {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func adaptedAsAnnotatedFeatureTransformer<Annotation>(annotationType: Annotation.Type = Annotation.self) -> some CreateMLComponents.Transformer<CreateMLComponents.AnnotatedFeature<Self.Input, Annotation>, CreateMLComponents.AnnotatedFeature<Self.Output, Annotation>>
+  
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct StandardScaler<Element> : CreateMLComponents.Estimator where Element : Swift.BinaryFloatingPoint, Element : Swift.Decodable, Element : Swift.Encodable {
   public init()
   #if compiler(>=5.3) && $Sendable
   public func fitted<S>(to input: S, eventHandler: CreateMLComponents.EventHandler? = nil) throws -> CreateMLComponents.StandardScaler<Element>.Transformer where Element == S.Element, S : Swift.Sequence
   #endif
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.StandardScaler : CreateMLComponents.UpdatableEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.StandardScaler<Element>.Transformer
+  #if compiler(>=5.3) && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.StandardScaler<Element>.Transformer, with input: some Sequence<Element>, eventHandler: CreateMLComponents.EventHandler? = nil)
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.StandardScaler<Element>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.StandardScaler<Element>.Transformer
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.StandardScaler : Swift.Sendable where Element : Swift.Sendable {
@@ -1986,6 +2577,16 @@ extension CreateMLComponents.StandardScaler.Transformer : Swift.Decodable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.StandardScaler.Transformer : Swift.Sendable where Element : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ImageBlur : CreateMLComponents.Transformer, Swift.Sendable {
+  public var radius: Swift.Double
+  public init(radius: Swift.Double)
+  #if compiler(>=5.3) && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) -> CoreImage.CIImage
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = CoreImage.CIImage
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct FullyConnectedNetworkClassifierModel<Scalar, Label> : CreateMLComponents.Classifier, Swift.Codable where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint, Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
@@ -2094,6 +2695,36 @@ extension CreateMLComponents.Reshaper : Swift.CustomDebugStringConvertible {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.Reshaper : Swift.Sendable where Scalar : Swift.Sendable {
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public enum CompatibilityError : Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
+  case unsupportedRevision(Swift.Int)
+  public var errorDescription: Swift.String? {
+    get
+  }
+  public static func == (a: CreateMLComponents.CompatibilityError, b: CreateMLComponents.CompatibilityError) -> Swift.Bool
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.CompatibilityError : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+extension CreateMLComponents.TabularTransformer {
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  public func export(to url: Foundation.URL) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func export(to url: Foundation.URL, metadata: CreateMLComponents.ModelMetadata) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct RandomImageNoiseGenerator : CreateMLComponents.Transformer, Swift.Sendable {
+  public var intensity: Swift.Double
+  public init(intensity: Swift.Double)
+  #if compiler(>=5.3) && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) -> CoreImage.CIImage
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = CoreImage.CIImage
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct MLModelTransformerAdaptor<Scalar> : CreateMLComponents.Transformer where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint {
   public let model: CoreML.MLModel
@@ -2124,21 +2755,6 @@ public struct FullyConnectedNetworkClassifier<Scalar, Label> : CreateMLComponent
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.FullyConnectedNetworkClassifier : Swift.Sendable where Scalar : Swift.Sendable, Label : Swift.Sendable {
-}
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public struct HumanBodyPoseExtractor : CreateMLComponents.Transformer, Swift.Sendable {
-  public init()
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
-  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> [CreateMLComponents.Pose]
-  #endif
-  public typealias Input = CoreImage.CIImage
-  public typealias Output = [CreateMLComponents.Pose]
-}
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-extension CreateMLComponents.HumanBodyPoseExtractor : Swift.CustomDebugStringConvertible {
-  public var debugDescription: Swift.String {
-    get
-  }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public enum VideoReaderError : Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
@@ -2491,6 +3107,9 @@ extension CreateMLComponents.VideoReader {
         get
       }
     }
+    @available(macOS, introduced: 13.0, deprecated: 14.0, message: "Use the position property instead.")
+    @available(iOS, introduced: 16.0, deprecated: 17.0, message: "Use the position property instead.")
+    @available(tvOS, unavailable)
     public var cameraPosition: CreateMLComponents.VideoReader.CameraConfiguration.Position {
       get
     }
@@ -2504,14 +3123,35 @@ extension CreateMLComponents.VideoReader {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct LinearRegressorModel<Scalar> : CreateMLComponents.Regressor where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint {
+  public typealias Input = CoreML.MLShapedArray<Scalar>
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var featureCount: Swift.Int {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var coefficients: [Scalar] {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(coefficients: some Sequence<Scalar>)
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func applied(to input: CoreML.MLShapedArray<Scalar>, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> Scalar
   #endif
-  public typealias Input = CoreML.MLShapedArray<Scalar>
   public typealias Output = Scalar
 }
-@available(*, unavailable)
-extension CreateMLComponents.LinearRegressorModel : Swift.Sendable {
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+extension CreateMLComponents.LinearRegressorModel : Swift.Sendable where Scalar : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+@_functionBuilder public struct AugmentationBuilder<Element> : Swift.Sendable {
+  public static func buildPartialBlock(first: some RandomTransformer<Element, Element>) -> some CreateMLComponents.RandomTransformer<Element, Element>
+  
+  public static func buildPartialBlock(first: some Transformer<Element, Element>) -> some CreateMLComponents.RandomTransformer<Element, Element>
+  
+  public static func buildPartialBlock(accumulated: some RandomTransformer<Element, Element>, next: some RandomTransformer<Element, Element>) -> some CreateMLComponents.RandomTransformer<Element, Element>
+  
+  public static func buildPartialBlock(accumulated: some RandomTransformer<Element, Element>, next: some Transformer<Element, Element>) -> some CreateMLComponents.RandomTransformer<Element, Element>
+  
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct OptionalUnwrapper<Element> : CreateMLComponents.Transformer {
@@ -2551,6 +3191,61 @@ extension CreateMLComponents.TemporalEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public func appending<Other>(_ other: Other) -> some CreateMLComponents.TemporalEstimator<CreateMLComponents.ComposedTemporalTransformer<Self.Transformer, Other.Transformer>> where Other : CreateMLComponents.TemporalEstimator, Self.Transformer.Output == Other.Transformer.Input
   
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator> : CreateMLComponents.UpdatableTabularEstimator where Preprocessor : CreateMLComponents.TabularTransformer, Estimator : CreateMLComponents.UpdatableTabularEstimator {
+  public typealias Transformer = CreateMLComponents.ComposedTabularTransformer<Preprocessor, Estimator.Transformer>
+  public typealias Input = Preprocessor.Input
+  public typealias Intermediate = Preprocessor.Output
+  public typealias Output = Estimator.Transformer.Output
+  public var preprocessor: Preprocessor
+  public var estimator: Estimator
+  public init(_ inner: Preprocessor, _ outer: Estimator)
+  @inlinable public func makeTransformer() -> CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer {
+        ComposedTabularTransformer(preprocessor, estimator.makeTransformer())
+    }
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func preprocessed(from input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> TabularData.DataFrame {
+        try await preprocessor.applied(to: input, eventHandler: eventHandler)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(toPreprocessed preprocessed: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let fittedTransformer = try await estimator.fitted(to: preprocessed, eventHandler: eventHandler)
+        return ComposedTabularTransformer(preprocessor, fittedTransformer)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(to input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let preprocessed = try await preprocessed(from: input, eventHandler: eventHandler)
+        try Task.checkCancellation()
+        return try await fitted(toPreprocessed: preprocessed, eventHandler: eventHandler)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func update(_ transformer: inout CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer, withPreprocessed preprocessed: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws {
+        try await estimator.update(&transformer.outer, with: preprocessed, eventHandler: eventHandler)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func update(_ transformer: inout CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws {
+        let preprocessed = try await preprocessed(from: input, eventHandler: eventHandler)
+        try Task.checkCancellation()
+
+        try await estimator.update(&transformer.outer, with: preprocessed, eventHandler: eventHandler)
+    }
+  #endif
+  public func encode(_ transformer: CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.PreprocessingUpdatableTabularEstimator<Preprocessor, Estimator>.Transformer
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.PreprocessingUpdatableTabularEstimator : Swift.Sendable where Preprocessor : Swift.Sendable, Estimator : Swift.Sendable {
+}
+extension CreateMLComponents.TabularTransformer {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other>(_ other: Other) -> CreateMLComponents.PreprocessingUpdatableTabularEstimator<Self, Other> where Other : CreateMLComponents.UpdatableTabularEstimator
 }
 extension CreateMLComponents.UpdatableEstimator {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
@@ -2707,6 +3402,36 @@ extension CreateMLComponents.UpdatableSupervisedEstimator {
     }
   #endif
 }
+extension CreateMLComponents.SupervisedEstimator {
+  #if compiler(>=5.3) && $AsyncAwait && $RethrowsProtocol && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func fitted<Input>(to input: Input, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where Input : _Concurrency.AsyncSequence, Input.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $RethrowsProtocol && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func fitted<Input, Validation>(to input: Input, validateOn validation: Validation, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Transformer where Input : _Concurrency.AsyncSequence, Validation : Swift.Sequence, Input.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>, Validation.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>
+  #endif
+}
+extension CreateMLComponents.UpdatableSupervisedEstimator {
+  #if compiler(>=5.3) && $AsyncAwait && $RethrowsProtocol && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update<Input>(_ transformer: inout Self.Transformer, with input: Input, eventHandler: CreateMLComponents.EventHandler? = nil) async throws where Input : _Concurrency.AsyncSequence, Input.Element == CreateMLComponents.AnnotatedFeature<Self.Transformer.Input, Self.Annotation>
+  #endif
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ObjectDetectionMetrics<Label> where Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
+  public var labels: Swift.Set<Label>
+  public var defaultConfidenceThreshold: Swift.Float
+  public init()
+  public static func extractLabels(from annotations: [CreateMLComponents.ObjectDetectionAnnotation<Label>]) -> Swift.Set<Label>
+  public func averagePrecision<Scalar>(predictions: [[CreateMLComponents.DetectedObject<Label>]], annotations: [CreateMLComponents.ObjectDetectionAnnotation<Label>], confidenceThresholds: [Label : Swift.Float] = [:], overlapThreshold: Swift.Double = 0.5) -> [Label : Scalar] where Scalar : Swift.BinaryFloatingPoint
+  public func meanAveragePrecision<Scalar>(predictions: [[CreateMLComponents.DetectedObject<Label>]], annotations: [CreateMLComponents.ObjectDetectionAnnotation<Label>], confidenceThresholds: [Label : Swift.Float] = [:], overlapThreshold: Swift.Double = 0.5) -> Scalar where Scalar : Swift.BinaryFloatingPoint
+  public func averageOfAveragePrecisionAtVariedThresholds<Scalar>(predictions: [[CreateMLComponents.DetectedObject<Label>]], annotations: [CreateMLComponents.ObjectDetectionAnnotation<Label>], confidenceThresholds: [Label : Swift.Float] = [:]) -> [Label : Scalar] where Scalar : Swift.BinaryFloatingPoint
+  public func averageOfMeanAveragePrecisionAtVariedThresholds<Scalar>(predictions: [[CreateMLComponents.DetectedObject<Label>]], annotations: [CreateMLComponents.ObjectDetectionAnnotation<Label>], confidenceThresholds: [Label : Swift.Float] = [:]) -> Scalar where Scalar : Swift.BinaryFloatingPoint
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionMetrics : Swift.Sendable where Label : Swift.Sendable {
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public enum SerializationError : Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
   case packageAlreadyExists(Foundation.URL)
@@ -2774,10 +3499,21 @@ extension Swift.LazySequence {
     }
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public struct TreeClassifierModel<Label> : CreateMLComponents.TabularTransformer where Label : Swift.Hashable {
+public struct TreeClassifierModel<Label> : CreateMLComponents.TabularTransformer, Swift.Sendable where Label : Swift.Hashable {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var featureColumnNames: [Swift.String] {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var predictionColumnName: Swift.String
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var classCount: Swift.Int {
+    get
+  }
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func applied(to input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> TabularData.DataFrame
   #endif
+  public func buildDataFrame(_ distributions: [CreateMLComponents.ClassificationDistribution<Label>]) -> TabularData.DataFrame
   public typealias Input = TabularData.DataFrame
   public typealias Output = TabularData.DataFrame
 }
@@ -2786,9 +3522,6 @@ extension CreateMLComponents.TreeClassifierModel : Swift.CustomDebugStringConver
   public var debugDescription: Swift.String {
     get
   }
-}
-@available(*, unavailable)
-extension CreateMLComponents.TreeClassifierModel : Swift.Sendable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public enum EstimatorEncodingError : Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
@@ -2915,7 +3648,10 @@ extension CreateMLComponents.HumanBodyActionCounter.CumulativeSumSequence.Iterat
 public struct BoostedTreeClassifier<Label> : CreateMLComponents.SupervisedTabularEstimator where Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
   public typealias Transformer = CreateMLComponents.TreeClassifierModel<Label>
   public typealias Annotation = Label
-  public var configuration: CreateMLComponents.BoostedTreeConfiguration
+  public var configuration: CreateMLComponents.BoostedTreeConfiguration {
+    get
+    set
+  }
   public var annotationColumnID: TabularData.ColumnID<Label>
   public var featureColumnNames: [Swift.String]
   public var labels: Swift.Set<Label?>
@@ -2923,23 +3659,77 @@ public struct BoostedTreeClassifier<Label> : CreateMLComponents.SupervisedTabula
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func fitted(to input: TabularData.DataFrame, validateOn validation: TabularData.DataFrame? = nil, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.TreeClassifierModel<Label>
   #endif
+  public func encodeLabels(_ annotations: some Collection<Label?>) throws -> (labels: [Swift.String?], encoded: [Swift.Int])
   public func encode(_ transformer: CreateMLComponents.TreeClassifierModel<Label>, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.TreeClassifierModel<Label>
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.BoostedTreeClassifier : CreateMLComponents.UpdatableSupervisedTabularEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.TreeClassifierModel<Label>
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.TreeClassifierModel<Label>, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler?) async throws
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.TreeClassifierModel<Label>, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.TreeClassifierModel<Label>
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.BoostedTreeClassifier : Swift.Sendable where Label : Swift.Sendable {
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct Augmenter<RandomTransformer, RandomNumberGenerator> where RandomTransformer : CreateMLComponents.RandomTransformer, RandomNumberGenerator : Swift.RandomNumberGenerator, RandomTransformer.Input == RandomTransformer.Output {
+  public init<Input>(generator: RandomNumberGenerator = SystemRandomNumberGenerator(), @CreateMLComponents.AugmentationBuilder<Input> _ builder: @escaping () -> RandomTransformer) where Input == RandomTransformer.Input
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func applied<S, Annotation>(to base: S) -> CreateMLComponents.AugmentationSequence<S, RandomTransformer, RandomNumberGenerator, Annotation> where S : Swift.Sequence, Annotation : Swift.Equatable, S.Element == CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>
+  #endif
+  #if compiler(>=5.3) && $RethrowsProtocol
+  public func applied<C, Annotation>(to elements: C, upsampledBy count: Swift.Int) -> CreateMLComponents.UpsampledAugmentationSequence<C, RandomTransformer, RandomNumberGenerator, Annotation> where C : Swift.Collection, Annotation : Swift.Equatable, C.Element == CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>
+  #endif
+}
+@available(*, unavailable)
+extension CreateMLComponents.Augmenter : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public enum OptimizationStrategy : Swift.Hashable, Swift.Codable, Swift.Sendable {
+  case automatic
+  case nonSmooth
+  case lowMemory
+  case fast
+  public static func == (a: CreateMLComponents.OptimizationStrategy, b: CreateMLComponents.OptimizationStrategy) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public func encode(to encoder: any Swift.Encoder) throws
+  public var hashValue: Swift.Int {
+    get
+  }
+  public init(from decoder: any Swift.Decoder) throws
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct BoostedTreeConfiguration : Swift.Hashable, Swift.Codable, Swift.Sendable {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var learningRate: Swift.Double {
+    get
+    set
+  }
   public var maximumDepth: Swift.Int
   public var maximumIterations: Swift.Int
   public var minimumLossReduction: Swift.Double
   public var minimumChildWeight: Swift.Double
   public var randomSeed: Swift.Int
-  public var stepSize: Swift.Double
+  @available(macOS, introduced: 13.0, deprecated: 14.0, renamed: "learningRate")
+  @available(iOS, introduced: 16.0, deprecated: 17.0, renamed: "learningRate")
+  @available(tvOS, introduced: 16.0, deprecated: 17.0, renamed: "learningRate")
+  public var stepSize: Swift.Double {
+    get
+    set
+  }
   public var earlyStoppingIterationCount: Swift.Int?
   public var rowSubsample: Swift.Double
   public var columnSubsample: Swift.Double
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var parallelTreeCount: Swift.Int
   public init()
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.BoostedTreeConfiguration, b: CreateMLComponents.BoostedTreeConfiguration) -> Swift.Bool
@@ -2980,9 +3770,16 @@ extension CreateMLComponents.AudioPreprocessingError : Swift.CustomDebugStringCo
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct FullyConnectedNetworkConfiguration : Swift.Hashable, Swift.Codable, Swift.Sendable {
   public var hiddenUnitCounts: [Swift.Int]
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var learningRate: Swift.Float
   public var maximumIterations: Swift.Int
-  public var randomSeed: Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var dropoutProbability: Swift.Float
   public var batchSize: Swift.Int
+  public var earlyStoppingTolerance: Swift.Double
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var earlyStopIterationCount: Swift.Int
+  public var randomSeed: Swift.Int
   public init()
   public func hash(into hasher: inout Swift.Hasher)
   public static func == (a: CreateMLComponents.FullyConnectedNetworkConfiguration, b: CreateMLComponents.FullyConnectedNetworkConfiguration) -> Swift.Bool
@@ -2991,6 +3788,35 @@ public struct FullyConnectedNetworkConfiguration : Swift.Hashable, Swift.Codable
     get
   }
   public init(from decoder: any Swift.Decoder) throws
+}
+#if compiler(>=5.3) && $PrimaryAssociatedTypes2
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public protocol RandomTransformer<Input, Output> {
+  associatedtype Input
+  associatedtype Output
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  func applied(to input: Self.Input, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Output
+  #endif
+}
+#else
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public protocol RandomTransformer {
+  associatedtype Input
+  associatedtype Output
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  func applied(to input: Self.Input, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler?) async throws -> Self.Output
+  #endif
+}
+#endif
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct ImageExposureAdjuster : CreateMLComponents.Transformer, Swift.Sendable {
+  public var amount: Swift.Double
+  public init(amount: Swift.Double)
+  #if compiler(>=5.3) && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) -> CoreImage.CIImage
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = CoreImage.CIImage
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public enum ConcatenationError : Foundation.LocalizedError, Swift.Equatable, Swift.Sendable {
@@ -3003,21 +3829,6 @@ public enum ConcatenationError : Foundation.LocalizedError, Swift.Equatable, Swi
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.ConcatenationError : Swift.CustomDebugStringConvertible {
-  public var debugDescription: Swift.String {
-    get
-  }
-}
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-public struct HumanHandPoseExtractor : CreateMLComponents.Transformer, Swift.Sendable {
-  public init()
-  #if compiler(>=5.3) && $AsyncAwait && $Sendable
-  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> [CreateMLComponents.Pose]
-  #endif
-  public typealias Input = CoreImage.CIImage
-  public typealias Output = [CreateMLComponents.Pose]
-}
-@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-extension CreateMLComponents.HumanHandPoseExtractor : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
@@ -3450,17 +4261,15 @@ extension CreateMLComponents.UpdatableSupervisedEstimator where Self.Annotation 
         UpdatableSupervisedEstimatorToTemporalAdaptor(self)
     }
 }
-extension CreateMLComponents.Transformer {
-  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-  public func export(to url: Foundation.URL) throws
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.Pose : Swift.Encodable {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encode(to encoder: any Swift.Encoder) throws
 }
-extension CreateMLComponents.TemporalTransformer {
-  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-  public func export(to url: Foundation.URL) throws
-}
-extension CreateMLComponents.TabularTransformer {
-  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
-  public func export(to url: Foundation.URL) throws
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.Pose : Swift.Decodable {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(from decoder: any Swift.Decoder) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct ImageCropper : CreateMLComponents.Transformer, Swift.Sendable {
@@ -3514,6 +4323,10 @@ public struct MetricsKey : Swift.Hashable, Swift.RawRepresentable, Swift.Sendabl
   public static let validationMaximumError: CreateMLComponents.MetricsKey
   public static let trainingError: CreateMLComponents.MetricsKey
   public static let validationError: CreateMLComponents.MetricsKey
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public static let trainingMeanAveragePrecision: CreateMLComponents.MetricsKey
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public static let validationMeanAveragePrecision: CreateMLComponents.MetricsKey
   public typealias RawValue = Swift.String
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
@@ -3628,6 +4441,19 @@ extension CreateMLComponents.ImputeTransformer : Swift.Hashable where Element : 
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.ImputeTransformer : Swift.Sendable where Element : Swift.Sendable {
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct UniformRandomFloatingPointParameter<RandomTransformer, Parameter> : CreateMLComponents.RandomTransformer where RandomTransformer : CreateMLComponents.RandomTransformer, Parameter : Swift.BinaryFloatingPoint, RandomTransformer.Input == RandomTransformer.Output, Parameter.RawSignificand : Swift.FixedWidthInteger {
+  public var range: Swift.ClosedRange<Parameter>
+  public init<Input>(range: Swift.ClosedRange<Parameter>, @CreateMLComponents.AugmentationBuilder<Input> _ augmentation: @escaping (Parameter) -> RandomTransformer) where Input == RandomTransformer.Input
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to input: RandomTransformer.Input, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> RandomTransformer.Output
+  #endif
+  public typealias Input = RandomTransformer.Input
+  public typealias Output = RandomTransformer.Input
+}
+@available(*, unavailable)
+extension CreateMLComponents.UniformRandomFloatingPointParameter : Swift.Sendable {
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct NumericImputer<Element> : CreateMLComponents.Estimator where Element : Swift.BinaryFloatingPoint, Element : Swift.Decodable, Element : Swift.Encodable {
   public typealias Transformer = CreateMLComponents.ImputeTransformer<Element>
@@ -3643,6 +4469,19 @@ public struct NumericImputer<Element> : CreateMLComponents.Estimator where Eleme
   public func fitted<S>(to input: S, eventHandler: CreateMLComponents.EventHandler? = nil) -> CreateMLComponents.NumericImputer<Element>.Transformer where S : Swift.Sequence, S.Element == Element?
   #endif
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.NumericImputer : CreateMLComponents.UpdatableEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.NumericImputer<Element>.Transformer
+  #if compiler(>=5.3) && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.ImputeTransformer<Element>, with input: some Sequence<Element?>, eventHandler: CreateMLComponents.EventHandler? = nil) throws
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.NumericImputer<Element>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.NumericImputer<Element>.Transformer
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.NumericImputer : Swift.Sendable where Element : Swift.Sendable {
 }
@@ -3653,7 +4492,10 @@ extension CreateMLComponents.NumericImputer.Strategy : Swift.Sendable where Elem
 public struct LinearRegressor<Scalar> : CreateMLComponents.SupervisedEstimator where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint {
   public typealias Transformer = CreateMLComponents.LinearRegressorModel<Scalar>
   public typealias Annotation = Scalar
-  public var configuration: CreateMLComponents.LinearRegressor<Scalar>.Configuration
+  public var configuration: CreateMLComponents.LinearRegressor<Scalar>.Configuration {
+    get
+    set
+  }
   public init(configuration: CreateMLComponents.LinearRegressor<Scalar>.Configuration = Configuration())
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func fitted<Input>(to input: Input, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.LinearRegressorModel<Scalar> where Input : Swift.Sequence, Input.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Scalar>
@@ -3663,6 +4505,19 @@ public struct LinearRegressor<Scalar> : CreateMLComponents.SupervisedEstimator w
   #endif
   public func encode(_ transformer: CreateMLComponents.LinearRegressorModel<Scalar>, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.LinearRegressorModel<Scalar>
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.LinearRegressor : CreateMLComponents.UpdatableSupervisedEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.LinearRegressorModel<Scalar>
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update<InputSequence>(_ transformer: inout CreateMLComponents.LinearRegressor<Scalar>.Transformer, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws where InputSequence : Swift.Sequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Scalar>
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.LinearRegressorModel<Scalar>, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.LinearRegressorModel<Scalar>
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.LinearRegressor : Swift.Sendable where Scalar : Swift.Sendable {
@@ -3675,6 +4530,15 @@ extension CreateMLComponents.LinearRegressor {
     public var maximumIterations: Swift.Int
     public var stepSize: Swift.Double
     public var convergenceThreshold: Swift.Double
+    @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+    public var earlyStopIterationCount: Swift.Int
+    @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+    public var scaleFeatures: Swift.Bool
+    @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+    public var optimizationStrategy: CreateMLComponents.OptimizationStrategy {
+      get
+      set
+    }
     public init()
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.LinearRegressor<Scalar>.Configuration, b: CreateMLComponents.LinearRegressor<Scalar>.Configuration) -> Swift.Bool
@@ -3687,12 +4551,54 @@ extension CreateMLComponents.LinearRegressor {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct ClassificationMetrics<Label> where Label : Swift.Hashable {
-  public var accuracy: Swift.Double
-  public init<Predicted, Correct>(_ predictedLabels: Predicted, _ correctLabels: Correct) where Label == Predicted.Element, Predicted : Swift.Collection, Correct : Swift.Collection, Predicted.Element == Correct.Element
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var exampleCount: Swift.Int {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var labels: Swift.Set<Label>
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var restrictToKnownLabels: Swift.Bool
+  public var accuracy: Swift.Double {
+    get
+    @available(macOS, introduced: 13.0, deprecated: 14.0)
+    @available(iOS, introduced: 16.0, deprecated: 17.0)
+    @available(tvOS, introduced: 16.0, deprecated: 17.0)
+    set
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init()
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init<Predicted, Correct>(predicted: Predicted, groundTruth: Correct, labels: Swift.Set<Label>) where Label == Predicted.Element, Predicted : Swift.Sequence, Correct : Swift.Sequence, Predicted.Element == Correct.Element
+  public init<Predicted, Correct>(_ predicted: Predicted, _ groundTruth: Correct) where Label == Predicted.Element, Predicted : Swift.Collection, Correct : Swift.Collection, Predicted.Element == Correct.Element
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(_ pairs: some Sequence<(predicted: Label, label: Label)>, labels: Swift.Set<Label>)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(_ pairs: some Sequence<(predicted: Label, label: Label)>)
   #if compiler(>=5.3) && $AsyncAwait && $RethrowsProtocol
   public init<S, Inner>(_ predicted: S) async throws where S : Swift.Sequence, Inner : CreateMLComponents.TemporalSequence, S.Element == CreateMLComponents.AnnotatedFeature<Inner, Label>, Inner.Feature == CreateMLComponents.ClassificationDistribution<Label>
   #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public mutating func add(predicted: some Sequence<Label>, groundTruth: some Sequence<Label>)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public mutating func add(_ pairs: some Sequence<(predicted: Label, label: Label)>)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func count(label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func count(predicted: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func count(predicted: Label, label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func truePositiveCount(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func falsePositiveCount(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func trueNegativeCount(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func falseNegativeCount(of label: Label) -> Swift.Int
   public func makeConfusionMatrix() -> CoreML.MLShapedArray<Swift.Float> where Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func mapLabels<T>(_ transform: (Label) throws -> T) rethrows -> CreateMLComponents.ClassificationMetrics<T> where T : Swift.Hashable
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.ClassificationMetrics {
@@ -3700,6 +4606,8 @@ extension CreateMLComponents.ClassificationMetrics {
   public func precisionScore(label: Label) -> Swift.Double
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public func recallScore(label: Label) -> Swift.Double
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func f1Score(label: Label) -> Swift.Double
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.ClassificationMetrics : Swift.Sendable where Label : Swift.Sendable {
@@ -3773,7 +4681,16 @@ extension CreateMLComponents.TemporalTransformer {
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct ImageFeaturePrint : CreateMLComponents.ImageFeatureExtractor {
   public let cropAndScale: Vision.VNImageCropAndScaleOption
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public static let latestRevision: Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var revision: Swift.Int {
+    get
+    set
+  }
   public init(cropAndScale: Vision.VNImageCropAndScaleOption = .centerCrop, context: CoreImage.CIContext = CIContext())
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(revision: Swift.Int, cropAndScale: Vision.VNImageCropAndScaleOption = .centerCrop, context: CoreImage.CIContext = CIContext())
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CoreML.MLShapedArray<Swift.Float>
   #endif
@@ -3848,6 +4765,31 @@ extension CreateMLComponents.MaxAbsScaler.Transformer : Swift.Decodable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.MaxAbsScaler.Transformer : Swift.Sendable where Element : Swift.Sendable {
+}
+extension CreateMLComponents.MultiLabelClassificationMetrics {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public enum ThresholdSelectionStrategy : Swift.Hashable, Swift.Equatable {
+    case balancedPrecisionAndRecall
+    case precision(Swift.Float, minimumRecall: Swift.Float)
+    case recall(Swift.Float, minimumPrecision: Swift.Float)
+    case fixed([Label : Swift.Float])
+    public func hash(into hasher: inout Swift.Hasher)
+    public static func == (a: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy, b: CreateMLComponents.MultiLabelClassificationMetrics<Label>.ThresholdSelectionStrategy) -> Swift.Bool
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.MultiLabelClassificationMetrics.ThresholdSelectionStrategy : Swift.Encodable where Label : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.MultiLabelClassificationMetrics.ThresholdSelectionStrategy : Swift.Decodable where Label : Swift.Decodable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.MultiLabelClassificationMetrics.ThresholdSelectionStrategy : Swift.Sendable where Label : Swift.Sendable {
 }
 #if compiler(>=5.3) && $PrimaryAssociatedTypes2
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
@@ -3928,6 +4870,96 @@ extension CreateMLComponents.TemporalTransformer {
   #endif
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+public struct HumanHandPoseExtractor : CreateMLComponents.Transformer, Swift.Sendable {
+  public init()
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to image: CoreImage.CIImage, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> [CreateMLComponents.Pose]
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = [CreateMLComponents.Pose]
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+extension CreateMLComponents.HumanHandPoseExtractor : Swift.CustomDebugStringConvertible {
+  public var debugDescription: Swift.String {
+    get
+  }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct DetectedObject<Label> : Swift.Equatable where Label : Swift.Comparable, Label : Swift.Hashable {
+  public var boundingBox: CoreFoundation.CGRect
+  public var label: Label
+  public var confidence: Swift.Float
+  public init(boundingBox: CoreFoundation.CGRect, label: Label, probability: Swift.Float)
+  public static func == (a: CreateMLComponents.DetectedObject<Label>, b: CreateMLComponents.DetectedObject<Label>) -> Swift.Bool
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.DetectedObject : Swift.Encodable where Label : Swift.Encodable {
+  public func encode(to encoder: any Swift.Encoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.DetectedObject : Swift.Decodable where Label : Swift.Decodable {
+  public init(from decoder: any Swift.Decoder) throws
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.DetectedObject : Swift.Sendable where Label : Swift.Sendable {
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct PreprocessingSupervisedTabularEstimator<Preprocessor, Estimator> : CreateMLComponents.SupervisedTabularEstimator where Preprocessor : CreateMLComponents.TabularTransformer, Estimator : CreateMLComponents.SupervisedTabularEstimator {
+  public typealias Transformer = CreateMLComponents.ComposedTabularTransformer<Preprocessor, Estimator.Transformer>
+  public typealias Input = Preprocessor.Input
+  public typealias Intermediate = Preprocessor.Output
+  public typealias Output = Estimator.Transformer.Output
+  public typealias Annotation = Estimator.Annotation
+  public var preprocessor: Preprocessor
+  public var estimator: Estimator
+  public var annotationColumnID: TabularData.ColumnID<Estimator.Annotation> {
+    get
+    set
+  }
+  public init(_ preprocessor: Preprocessor, _ estimator: Estimator)
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func preprocessed(from input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> TabularData.DataFrame {
+        try await preprocessor.applied(to: input, eventHandler: eventHandler)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(toPreprocessed preprocessedInput: TabularData.DataFrame, validateOn preprocessedValidation: TabularData.DataFrame?, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let fittedTransformer = try await estimator.fitted(
+            to: preprocessedInput,
+            validateOn: preprocessedValidation,
+            eventHandler: eventHandler
+        )
+        return ComposedTabularTransformer(preprocessor, fittedTransformer)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(to input: TabularData.DataFrame, validateOn validation: TabularData.DataFrame?, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let preprocessedInput = try await preprocessed(from: input, eventHandler: eventHandler)
+        let preprocessedValidation: DataFrame?
+        if let validation {
+            preprocessedValidation = try await preprocessed(from: validation, eventHandler: eventHandler)
+        } else {
+            preprocessedValidation = nil
+        }
+        try Task.checkCancellation()
+        return try await fitted(
+            toPreprocessed: preprocessedInput,
+            validateOn: preprocessedValidation,
+            eventHandler: eventHandler
+        )
+    }
+  #endif
+  public func encode(_ transformer: CreateMLComponents.PreprocessingSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.PreprocessingSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.PreprocessingSupervisedTabularEstimator : Swift.Sendable where Preprocessor : Swift.Sendable, Estimator : Swift.Sendable {
+}
+extension CreateMLComponents.TabularTransformer {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other>(_ other: Other) -> CreateMLComponents.PreprocessingSupervisedTabularEstimator<Self, Other> where Other : CreateMLComponents.SupervisedTabularEstimator
+}
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct ColumnSelector<Estimator, UnwrappedInput> : CreateMLComponents.TabularEstimator where Estimator : CreateMLComponents.Estimator, Estimator.Transformer.Input == UnwrappedInput? {
   public var columnSelection: CreateMLComponents.ColumnSelection
   public var estimator: Estimator
@@ -3942,6 +4974,19 @@ public struct ColumnSelector<Estimator, UnwrappedInput> : CreateMLComponents.Tab
   #endif
   public func encode(_ transformer: CreateMLComponents.ColumnSelector<Estimator, UnwrappedInput>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.ColumnSelector<Estimator, UnwrappedInput>.Transformer
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ColumnSelector : CreateMLComponents.UpdatableTabularEstimator where Estimator : CreateMLComponents.UpdatableEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.ColumnSelectorTransformer<Estimator.Transformer, UnwrappedInput>
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update(_ transformer: inout CreateMLComponents.ColumnSelector<Estimator, UnwrappedInput>.Transformer, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.ColumnSelector<Estimator, UnwrappedInput>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.ColumnSelector<Estimator, UnwrappedInput>.Transformer
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.ColumnSelector : Swift.Sendable where Estimator : Swift.Sendable, UnwrappedInput : Swift.Sendable {
@@ -3986,6 +5031,21 @@ extension CreateMLComponents.VideoReader.AsyncFrames {
 extension CreateMLComponents.VideoReader.AsyncFrames.Iterator : Swift.Sendable {
 }
 #endif
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+final public class UniformRandomIntegerParameter<RandomTransformer, Parameter> : CreateMLComponents.RandomTransformer where RandomTransformer : CreateMLComponents.RandomTransformer, Parameter : Swift.FixedWidthInteger, RandomTransformer.Input == RandomTransformer.Output {
+  final public var range: Swift.Range<Parameter>
+  public init<Input>(range: Swift.Range<Parameter>, @CreateMLComponents.AugmentationBuilder<Input> _ augmentation: @escaping (Parameter) -> RandomTransformer) where Input == RandomTransformer.Input
+  public init<Input>(range: Swift.ClosedRange<Parameter>, @CreateMLComponents.AugmentationBuilder<Input> _ augmentation: @escaping (Parameter) -> RandomTransformer) where Input == RandomTransformer.Input
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  final public func applied(to input: RandomTransformer.Input, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> RandomTransformer.Output
+  #endif
+  public typealias Input = RandomTransformer.Input
+  public typealias Output = RandomTransformer.Input
+  @objc deinit
+}
+@available(*, unavailable)
+extension CreateMLComponents.UniformRandomIntegerParameter : Swift.Sendable {
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public enum PoseSelectionStrategy : Swift.Sendable {
   case maximumBoundingBoxArea
@@ -4017,6 +5077,37 @@ extension CreateMLComponents.PoseSelector : Swift.CustomDebugStringConvertible {
   public var debugDescription: Swift.String {
     get
   }
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct FullyConnectedNetworkMultiLabelClassifier<Scalar, Label> : CreateMLComponents.SupervisedEstimator where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint, Scalar : Swift.Decodable, Scalar : Swift.Encodable, Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
+  public typealias Transformer = CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label>
+  public typealias Annotation = Swift.Set<Label>
+  public var configuration: CreateMLComponents.FullyConnectedNetworkConfiguration
+  @available(macOS, unavailable)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  public var networkConfiguration: CreateMLComponents.FullyConnectedNetworkConfiguration {
+    get
+    set
+  }
+  public var labels: Swift.Set<Label>
+  public static var defaultConfiguration: CreateMLComponents.FullyConnectedNetworkConfiguration {
+    get
+  }
+  @available(macOS, unavailable)
+  @available(iOS, unavailable)
+  @available(tvOS, unavailable)
+  public init(labels: Swift.Set<Label>, networkConfiguration: CreateMLComponents.FullyConnectedNetworkConfiguration)
+  public init(labels: Swift.Set<Label>, configuration: CreateMLComponents.FullyConnectedNetworkConfiguration = defaultConfiguration)
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func fitted<Input>(to input: Input, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label> where Input : Swift.Sequence, Input.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Swift.Set<Label>>
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func fitted<Input, Validation>(to input: Input, validateOn validation: Validation, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.FullyConnectedNetworkMultiLabelClassifierModel<Scalar, Label> where Input : Swift.Sequence, Validation : Swift.Sequence, Input.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Swift.Set<Label>>, Validation.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Swift.Set<Label>>
+  #endif
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.FullyConnectedNetworkMultiLabelClassifier : Swift.Sendable where Scalar : Swift.Sendable, Label : Swift.Sendable {
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.FullyConnectedNetworkClassifier : CreateMLComponents.UpdatableSupervisedEstimator {
@@ -4087,6 +5178,18 @@ extension CreateMLComponents.ComposedTransformer : Swift.Decodable where Inner :
 extension CreateMLComponents.Transformer {
   @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
   public func appending<Other>(_ other: Other) -> CreateMLComponents.ComposedTransformer<Self, Other> where Other : CreateMLComponents.Transformer, Self.Output == Other.Input
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other, Annotation>(_ other: Other) -> some CreateMLComponents.Transformer<CreateMLComponents.AnnotatedFeature<Self.Input, Annotation>, Other.Output> where Other : CreateMLComponents.Transformer, Other.Input == CreateMLComponents.AnnotatedFeature<Self.Output, Annotation>
+  
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other, Annotation>(_ other: Other) -> some CreateMLComponents.Transformer<Self.Input, CreateMLComponents.AnnotatedFeature<Other.Output, Annotation>> where Other : CreateMLComponents.Transformer, Self.Output == CreateMLComponents.AnnotatedFeature<Other.Input, Annotation>
+  
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other, Annotation>(_ other: Other) -> some CreateMLComponents.Transformer<CreateMLComponents.AnnotatedPrediction<Self.Input, Annotation>, Other.Output> where Other : CreateMLComponents.Transformer, Other.Input == CreateMLComponents.AnnotatedPrediction<Self.Output, Annotation>
+  
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other, Annotation>(_ other: Other) -> some CreateMLComponents.Transformer<Self.Input, CreateMLComponents.AnnotatedPrediction<Other.Output, Annotation>> where Other : CreateMLComponents.Transformer, Self.Output == CreateMLComponents.AnnotatedPrediction<Other.Input, Annotation>
+  
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public protocol ImageFeatureExtractor : CreateMLComponents.Transformer where Self.Input == CoreImage.CIImage, Self.Output == CoreML.MLShapedArray<Swift.Float> {
@@ -4104,6 +5207,8 @@ public enum ModelCompatibilityError : Foundation.LocalizedError, Swift.Equatable
   case incompatibleOutputCount(expected: Swift.Int, actual: Swift.Int)
   case missingInput(name: Swift.String)
   case missingOutput(name: Swift.String)
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  case incompatibleMetadataKey(name: Swift.String)
   public var errorDescription: Swift.String? {
     get
   }
@@ -4181,6 +5286,152 @@ public struct AnyTemporalIterator<Element> : _Concurrency.AsyncIteratorProtocol 
 extension CreateMLComponents.AnyTemporalIterator : Swift.Sendable {
 }
 #endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation> : _Concurrency.AsyncSequence where Base : Swift.Sequence, RandomTransformer : CreateMLComponents.RandomTransformer, RandomNumberGenerator : Swift.RandomNumberGenerator, Base.Element == CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>, RandomTransformer.Input == RandomTransformer.Output {
+  public typealias Element = Base.Element
+  public var transformer: RandomTransformer
+  public func makeAsyncIterator() -> CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.AsyncIterator
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(*, unavailable)
+extension CreateMLComponents.AugmentationSequence : Swift.Sendable {
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension CreateMLComponents.AugmentationSequence {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $AsyncAwait
+    public mutating func next() async throws -> Base.Element?
+    #endif
+    public typealias Element = CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>
+  }
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension CreateMLComponents.AugmentationSequence {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func batches(ofSize size: Swift.Int, dropsLastPartialBatch: Swift.Bool) -> CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.BatchedSequence
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public struct BatchedSequence : _Concurrency.AsyncSequence {
+    public typealias Element = [CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.Element]
+    public func makeAsyncIterator() -> CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.BatchedSequence.AsyncIterator
+  }
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension CreateMLComponents.AugmentationSequence.BatchedSequence {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $AsyncAwait
+    public mutating func next() async throws -> [CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.Element]?
+    #endif
+    public typealias Element = [CreateMLComponents.AugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.Element]
+  }
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(*, unavailable)
+extension CreateMLComponents.AugmentationSequence.AsyncIterator : Swift.Sendable {
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(*, unavailable)
+extension CreateMLComponents.AugmentationSequence.BatchedSequence : Swift.Sendable {
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(*, unavailable)
+extension CreateMLComponents.AugmentationSequence.BatchedSequence.AsyncIterator : Swift.Sendable {
+}
+#endif
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator> : CreateMLComponents.UpdatableSupervisedTabularEstimator where Preprocessor : CreateMLComponents.TabularTransformer, Estimator : CreateMLComponents.UpdatableSupervisedTabularEstimator {
+  public typealias Transformer = CreateMLComponents.ComposedTabularTransformer<Preprocessor, Estimator.Transformer>
+  public typealias Input = Preprocessor.Input
+  public typealias Intermediate = Preprocessor.Output
+  public typealias Output = Estimator.Transformer.Output
+  public typealias Annotation = Estimator.Annotation
+  public var preprocessor: Preprocessor
+  public var estimator: Estimator
+  public var annotationColumnID: TabularData.ColumnID<Estimator.Annotation> {
+    get
+    set
+  }
+  public init(_ preprocessor: Preprocessor, _ estimator: Estimator)
+  @inlinable public func makeTransformer() -> CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer {
+        ComposedTabularTransformer(preprocessor, estimator.makeTransformer())
+    }
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func preprocessed(from input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> TabularData.DataFrame {
+        try await preprocessor.applied(to: input, eventHandler: eventHandler)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(toPreprocessed preprocessedInput: TabularData.DataFrame, validateOn preprocessedValidation: TabularData.DataFrame?, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let fittedTransformer = try await estimator.fitted(
+            to: preprocessedInput,
+            validateOn: preprocessedValidation,
+            eventHandler: eventHandler
+        )
+        return ComposedTabularTransformer(preprocessor, fittedTransformer)
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func fitted(to input: TabularData.DataFrame, validateOn validation: TabularData.DataFrame?, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer {
+        let preprocessedInput = try await preprocessed(from: input, eventHandler: eventHandler)
+        try Task.checkCancellation()
+
+        let preprocessedValidation: DataFrame?
+        if let validation {
+            preprocessedValidation = try await preprocessed(from: validation, eventHandler: eventHandler)
+            try Task.checkCancellation()
+        } else {
+            preprocessedValidation = nil
+        }
+
+        return try await fitted(
+            toPreprocessed: preprocessedInput,
+            validateOn: preprocessedValidation,
+            eventHandler: eventHandler
+        )
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func update(_ transformer: inout CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer, withPreprocessed preprocessed: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws {
+        try await estimator.update(
+            &transformer.outer,
+            with: preprocessed,
+            eventHandler: eventHandler
+        )
+    }
+  #endif
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @inlinable public func update(_ transformer: inout CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer, with input: TabularData.DataFrame, eventHandler: CreateMLComponents.EventHandler? = nil) async throws {
+        let preprocessed = try await preprocessed(from: input, eventHandler: eventHandler)
+        try Task.checkCancellation()
+
+        try await estimator.update(
+            &transformer.outer,
+            with: preprocessed,
+            eventHandler: eventHandler
+        )
+    }
+  #endif
+  public func encode(_ transformer: CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Preprocessor, Estimator>.Transformer
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator : Swift.Sendable where Preprocessor : Swift.Sendable, Estimator : Swift.Sendable {
+}
+extension CreateMLComponents.TabularTransformer {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func appending<Other>(_ other: Other) -> CreateMLComponents.PreprocessingUpdatableSupervisedTabularEstimator<Self, Other> where Other : CreateMLComponents.UpdatableSupervisedTabularEstimator
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct PreprocessingUpdatableSupervisedEstimator<Preprocessor, Estimator> : CreateMLComponents.UpdatableSupervisedEstimator where Preprocessor : CreateMLComponents.Transformer, Estimator : CreateMLComponents.UpdatableSupervisedEstimator, Preprocessor.Output == Estimator.Transformer.Input {
   public typealias Transformer = CreateMLComponents.ComposedTransformer<Preprocessor, Estimator.Transformer>
@@ -4341,6 +5592,14 @@ public struct Pose : Swift.Sendable {
   public var keypoints: [CreateMLComponents.JointKey : CreateMLComponents.JointPoint]
   public func boundingBoxArea(confidenceThreshold: Swift.Float = 0.2) -> Swift.Float
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.JointPoint : Swift.Equatable {
+  public static func == (a: CreateMLComponents.JointPoint, b: CreateMLComponents.JointPoint) -> Swift.Bool
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.Pose : Swift.Equatable {
+  public static func == (a: CreateMLComponents.Pose, b: CreateMLComponents.Pose) -> Swift.Bool
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct VideoReader : CreateMLComponents.Transformer, Swift.Sendable {
   public init()
@@ -4365,6 +5624,26 @@ public struct VideoReader : CreateMLComponents.Transformer, Swift.Sendable {
   #if compiler(>=5.3) && $RethrowsProtocol
   public typealias Output = CreateMLComponents.VideoReader.AsyncFrames
   #endif
+}
+extension CreateMLComponents.MultiLabelClassificationMetrics {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func count(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func truePositiveCount(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func trueNegativeCount(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func falsePositiveCount(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func falseNegativeCount(of label: Label) -> Swift.Int
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func f1Score(for label: Label) -> Swift.Float
+}
+extension CreateMLComponents.TemporalTransformer {
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  public func export(to url: Foundation.URL) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func export(to url: Foundation.URL, metadata: CreateMLComponents.ModelMetadata) throws
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public protocol EstimatorEncoder {
@@ -4566,6 +5845,12 @@ extension CreateMLComponents.UpdatableTemporalEstimator {
     }
   #endif
 }
+extension CreateMLComponents.Transformer {
+  @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+  public func export(to url: Foundation.URL) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func export(to url: Foundation.URL, metadata: CreateMLComponents.ModelMetadata) throws
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.TemporalEstimator {
   public func write(_ transformer: Self.Transformer, to url: Foundation.URL, overwrite: Swift.Bool = true) throws
@@ -4581,11 +5866,43 @@ extension CreateMLComponents.UpdatableSupervisedTemporalEstimator {
   public func writeWithOptimizer(_ transformer: Self.Transformer, to url: Foundation.URL, overwrite: Swift.Bool = true) throws
   public func readWithOptimizer(from url: Foundation.URL) throws -> Self.Transformer
 }
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct UpsampledAugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation> : _Concurrency.AsyncSequence where Base : Swift.Collection, RandomTransformer : CreateMLComponents.RandomTransformer, RandomNumberGenerator : Swift.RandomNumberGenerator, Base.Element == CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>, RandomTransformer.Input == RandomTransformer.Output {
+  public typealias Element = Base.Element
+  public let transformer: RandomTransformer
+  public func makeAsyncIterator() -> CreateMLComponents.UpsampledAugmentationSequence<Base, RandomTransformer, RandomNumberGenerator, Annotation>.AsyncIterator
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(*, unavailable)
+extension CreateMLComponents.UpsampledAugmentationSequence : Swift.Sendable {
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+extension CreateMLComponents.UpsampledAugmentationSequence {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public struct AsyncIterator : _Concurrency.AsyncIteratorProtocol {
+    #if compiler(>=5.3) && $AsyncAwait
+    public mutating func next() async throws -> Base.Element?
+    #endif
+    public typealias Element = CreateMLComponents.AnnotatedFeature<RandomTransformer.Input, Annotation>
+  }
+}
+#endif
+#if compiler(>=5.3) && $RethrowsProtocol
+@available(*, unavailable)
+extension CreateMLComponents.UpsampledAugmentationSequence.AsyncIterator : Swift.Sendable {
+}
+#endif
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct LogisticRegressionClassifier<Scalar, Label> : CreateMLComponents.SupervisedEstimator where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint, Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
   public typealias Transformer = CreateMLComponents.LogisticRegressionClassifierModel<Scalar, Label>
   public typealias Annotation = Label
-  public var configuration: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Configuration
+  public var configuration: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Configuration {
+    get
+    set
+  }
   public var labels: Swift.Set<Label>
   public init(labels: Swift.Set<Label>, configuration: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Configuration = Configuration())
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
@@ -4596,6 +5913,19 @@ public struct LogisticRegressionClassifier<Scalar, Label> : CreateMLComponents.S
   #endif
   public func encode(_ transformer: CreateMLComponents.LogisticRegressionClassifierModel<Scalar, Label>, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
   public func decode(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.LogisticRegressionClassifierModel<Scalar, Label>
+}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.LogisticRegressionClassifier : CreateMLComponents.UpdatableSupervisedEstimator {
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func makeTransformer() -> CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Transformer
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func update<InputSequence>(_ transformer: inout CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Transformer, with input: InputSequence, eventHandler: CreateMLComponents.EventHandler?) async throws where InputSequence : Swift.Sequence, InputSequence.Element == CreateMLComponents.AnnotatedFeature<CoreML.MLShapedArray<Scalar>, Label>
+  #endif
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func encodeWithOptimizer(_ transformer: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Transformer, to encoder: inout any CreateMLComponents.EstimatorEncoder) throws
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public func decodeWithOptimizer(from decoder: inout any CreateMLComponents.EstimatorDecoder) throws -> CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Transformer
 }
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.LogisticRegressionClassifier : Swift.Sendable where Scalar : Swift.Sendable, Label : Swift.Sendable {
@@ -4608,6 +5938,15 @@ extension CreateMLComponents.LogisticRegressionClassifier {
     public var maximumIterations: Swift.Int
     public var stepSize: Swift.Double
     public var convergenceThreshold: Swift.Double
+    @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+    public var earlyStopIterationCount: Swift.Int
+    @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+    public var scaleFeatures: Swift.Bool
+    @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+    public var optimizationStrategy: CreateMLComponents.OptimizationStrategy {
+      get
+      set
+    }
     public init()
     public func hash(into hasher: inout Swift.Hasher)
     public static func == (a: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Configuration, b: CreateMLComponents.LogisticRegressionClassifier<Scalar, Label>.Configuration) -> Swift.Bool
@@ -4618,17 +5957,52 @@ extension CreateMLComponents.LogisticRegressionClassifier {
     public init(from decoder: any Swift.Decoder) throws
   }
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+public struct RandomImageCropper : CreateMLComponents.RandomTransformer, Swift.Sendable {
+  public init(targetSize: CoreFoundation.CGSize)
+  public init(targetWidth: Swift.Double, targetHeight: Swift.Double)
+  public init(scale: Swift.ClosedRange<Swift.Double>, aspectRatio: Swift.Double? = nil)
+  #if compiler(>=5.3) && $AsyncAwait && $Sendable
+  public func applied(to image: CoreImage.CIImage, generator: inout some RandomNumberGenerator, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CoreImage.CIImage
+  #endif
+  public typealias Input = CoreImage.CIImage
+  public typealias Output = CoreImage.CIImage
+}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 public struct LogisticRegressionClassifierModel<Scalar, Label> : CreateMLComponents.Classifier where Scalar : CoreML.MLShapedArrayScalar, Scalar : Swift.BinaryFloatingPoint, Label : Swift.Comparable, Label : Swift.Decodable, Label : Swift.Encodable, Label : Swift.Hashable {
+  public typealias Input = CoreML.MLShapedArray<Scalar>
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var featureCount: Swift.Int {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public var coefficients: [Scalar] {
+    get
+  }
+  @available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+  public init(coefficients: some Sequence<Scalar>, labels: Swift.Set<Label>)
   #if compiler(>=5.3) && $AsyncAwait && $Sendable
   public func applied(to input: CoreML.MLShapedArray<Scalar>, eventHandler: CreateMLComponents.EventHandler? = nil) async throws -> CreateMLComponents.ClassificationDistribution<Label>
   #endif
-  public typealias Input = CoreML.MLShapedArray<Scalar>
   public typealias Output = CreateMLComponents.ClassificationDistribution<Label>
 }
-@available(*, unavailable)
-extension CreateMLComponents.LogisticRegressionClassifierModel : Swift.Sendable {
+@available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
+extension CreateMLComponents.LogisticRegressionClassifierModel : Swift.Sendable where Scalar : Swift.Sendable, Label : Swift.Sendable {
 }
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.Annotation.CodingKeys : Swift.Equatable {}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.Annotation.CodingKeys : Swift.Hashable {}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.Annotation.CodingKeys : Swift.RawRepresentable {}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.CodingKeys : Swift.Equatable {}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.CodingKeys : Swift.Hashable {}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.ObjectDetectionAnnotation.CodingKeys : Swift.RawRepresentable {}
+@available(macOS 14.0, iOS 17.0, tvOS 17.0, *)
+extension CreateMLComponents.OptimizationError : Swift.Hashable {}
 @available(macOS 13.0, iOS 16.0, tvOS 16.0, *)
 extension CreateMLComponents.AudioReaderError : Swift.Hashable {}
 @available(macOS 13.0, iOS 16.0, *)

@@ -16,6 +16,7 @@ typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionAuthenticationMethod)
 {
     ASAuthorizationProviderExtensionAuthenticationMethodPassword = 1,
     ASAuthorizationProviderExtensionAuthenticationMethodUserSecureEnclaveKey = 2,
+    ASAuthorizationProviderExtensionAuthenticationMethodSmartCard API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 3,
 } API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
@@ -26,6 +27,10 @@ typedef NS_OPTIONS(NSUInteger, ASAuthorizationProviderExtensionRequestOptions) {
     ASAuthorizationProviderExtensionRequestOptionsUserInteractionEnabled = 1 << 0,
     // The registration is called to repair a previous registration.
     ASAuthorizationProviderExtensionRequestOptionsRegistrationRepair = 1 << 1,
+    // The registration is using shared device keys.
+    ASAuthorizationProviderExtensionRequestOptionsRegistrationSharedDeviceKeys API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 2,
+    // The registration is changing to or from shared device keys.
+    ASAuthorizationProviderExtensionRequestOptionsRegistrationDeviceKeyMigration API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos) = 1 << 3,
 };
 
 typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionRegistrationResult)
@@ -39,6 +44,27 @@ typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionRegistrationResult)
     // The registration failed, do not retry.
     ASAuthorizationProviderExtensionRegistrationResultFailedNoRetry = 3,
 } API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
+typedef NS_OPTIONS(NSInteger, ASAuthorizationProviderExtensionSupportedGrantTypes) {
+    // None
+    ASAuthorizationProviderExtensionSupportedGrantTypesNone = 0,
+    // password grant type
+    ASAuthorizationProviderExtensionSupportedGrantTypesPassword = 1 << 0,
+    // jwt-bearer
+    ASAuthorizationProviderExtensionSupportedGrantTypesJWTBearer = 1 << 1,
+    // SAML 1.1
+    ASAuthorizationProviderExtensionSupportedGrantTypesSAML1_1 NS_SWIFT_NAME(saml1_1) = 1 << 2 ,
+    // SAML 2.0
+    ASAuthorizationProviderExtensionSupportedGrantTypesSAML2_0 NS_SWIFT_NAME(saml2_0) = 1 << 3,
+} API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+typedef NS_ENUM(NSInteger, ASAuthorizationProviderExtensionPlatformSSOProtocolVersion) {
+    // Version 1.0
+    ASAuthorizationProviderExtensionPlatformSSOProtocolVersion1_0 = 0,
+    // Version 2.0
+    ASAuthorizationProviderExtensionPlatformSSOProtocolVersion2_0 = 1,
+} API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 
 API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
@@ -68,6 +94,21 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 
 /// @abstract Call to extension to free any resources used by the extension during registration. It will be called once after all current registration calls are complete.
 - (void)registrationDidComplete;
+
+/// @abstract Call to extension when the registration has been cancelled.
+- (void)registrationDidCancel API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+
+/*!
+ @abstract The grant types supported by the identity provider.
+ */
+- (ASAuthorizationProviderExtensionSupportedGrantTypes)supportedGrantTypes API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
+/*!
+ @abstract The protocol version supported by the identity provider.
+ */
+- (ASAuthorizationProviderExtensionPlatformSSOProtocolVersion)protocolVersion API_AVAILABLE(macos(14.0)) API_UNAVAILABLE(ios, watchos, tvos);
+
 
 @end
 

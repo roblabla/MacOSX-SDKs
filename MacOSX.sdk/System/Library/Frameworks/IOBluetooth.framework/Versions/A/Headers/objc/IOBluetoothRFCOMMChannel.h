@@ -1,8 +1,10 @@
 /*
     File:		IOBluetoothRFCOMMChannel.h
-    Copyright:	� 2002 by Apple Computer, Inc. All rights reserved.
+    Copyright:	� 2002, 2023 by Apple Computer, Inc. All rights reserved.
 */
  
+#if __OBJC__
+
 #import <Foundation/Foundation.h>
 #import <IOKit/IOKitLib.h>
 #import <IOKit/IODataQueueShared.h>
@@ -339,3 +341,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (void)rfcommChannelQueueSpaceAvailable:(IOBluetoothRFCOMMChannel*)rfcommChannel;
 
 @end
+
+#endif // __OBJC__

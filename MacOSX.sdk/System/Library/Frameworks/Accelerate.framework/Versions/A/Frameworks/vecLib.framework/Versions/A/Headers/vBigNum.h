@@ -3,7 +3,7 @@
  
      Contains:   Algebraic and logical operations on large operands.
  
-     Version:    vecLib-818.100
+     Version:    vecLib-1041.0
  
      Copyright:  Copyright (c) 1999-2023 by Apple Inc. All rights reserved.
  
@@ -19,7 +19,21 @@
 #include <stdint.h>
 #include "vecLibTypes.h"
 
-#include <os/availability.h>
+#include <TargetConditionals.h>
+
+#if !0
+
+#if __has_include(<os/availability.h>)
+#  include <os/availability.h>
+#else // __has_include(<os/availability.h>)
+	#if !defined API_AVAILABLE
+	#define API_AVAILABLE(...)
+	#endif
+
+	#if !defined API_UNAVAILABLE
+	#define API_UNAVAILABLE(...)
+	#endif
+#endif // __has_include(<os/availability.h>)
 
 #if PRAGMA_ONCE
 #pragma once
@@ -1438,5 +1452,7 @@ vR1024Rotate(
 #ifdef __cplusplus
 }
 #endif
+
+#endif	
 
 #endif /* __VBIGNUM__ */

@@ -1,14 +1,16 @@
 // Copyright © 2020 Apple Inc. All rights reserved.
 
 #import <AuthenticationServices/ASAuthorizationProvider.h>
-#import <Foundation/Foundation.h>
+#import <AuthenticationServices/ASFoundation.h>
+
+#import <AuthenticationServices/ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider.h>
 
 @class ASAuthorizationPlatformPublicKeyCredentialAssertionRequest;
 @class ASAuthorizationPlatformPublicKeyCredentialRegistrationRequest;
 
-NS_HEADER_AUDIT_BEGIN(nullability, sendability)
+AS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 @interface ASAuthorizationPlatformPublicKeyCredentialProvider : NSObject <ASAuthorizationProvider>
 
 - (instancetype)initWithRelyingPartyIdentifier:(NSString *)relyingPartyIdentifier NS_DESIGNATED_INITIALIZER;
@@ -34,4 +36,8 @@ API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 
 @end
 
-NS_HEADER_AUDIT_END(nullability, sendability)
+API_AVAILABLE(macos(13.5), macCatalyst(16.6)) API_UNAVAILABLE(ios, tvos, watchos)
+@interface ASAuthorizationPlatformPublicKeyCredentialProvider () <ASAuthorizationWebBrowserPlatformPublicKeyCredentialProvider>
+@end
+
+AS_HEADER_AUDIT_END(nullability, sendability)

@@ -2,8 +2,8 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/LearnedFeatures.framework/Versions/A/LearnedFeatures'
-current-version: 5.54.29
-compatibility-version: 5.54.29
+current-version: 6.33.4
+compatibility-version: 6.33.4
 exports:
   - targets:         [ x86_64-macos ]
     weak-symbols:    [ __ZTIFvvE, __ZTINSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
@@ -14,6 +14,9 @@ exports:
                        __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKcEEE, 
                        __ZTSNSt3__110__function6__baseIFNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEERKjEEE, 
                        __ZTSNSt3__110__function6__baseIFvvEEE, __ZTSNSt3__110shared_ptrIKNS_12basic_stringIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS7_S6_EE, 
+                       __ZTSNSt3__110shared_ptrINS_14basic_ifstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
+                       __ZTSNSt3__110shared_ptrINS_14basic_ofstreamIcNS_11char_traitsIcEEEEE27__shared_ptr_default_deleteIS4_S4_EE, 
+                       __ZTSNSt3__110shared_ptrINS_18basic_stringstreamIcNS_11char_traitsIcEENS_9allocatorIcEEEEE27__shared_ptr_default_deleteIS6_S6_EE, 
                        __ZTSNSt3__117bad_function_callE, __ZTSNSt3__16vectorIfNS_9allocatorIfEEEE, 
                        __ZTSNSt3__16vectorIhNS_9allocatorIhEEEE, __ZTSNSt3__16vectorItNS_9allocatorItEEEE, 
                        __ZTSPFvvE ]
@@ -31,7 +34,8 @@ exports:
                        _LFV2DescriptorsRelease, _LFV2DescriptorsRetain, _LFV2DetectAndComputeFeatures, 
                        _LFV2FeaturesGetGlobalDescriptors, _LFV2FeaturesGetKeypoints, 
                        _LFV2FeaturesGetLocalDescriptors, _LFV2FeaturesRelease, _LFV2FeaturesRetain, 
-                       _LFV2HandleCreate, _LFV2HandleRelease, _LFV2KeypointsAppend, 
-                       _LFV2KeypointsCreate, _LFV2KeypointsGetData, _LFV2KeypointsGetSize, 
-                       _LFV2KeypointsRelease, _LFV2KeypointsRetain, _LearnedFeaturesGetVersion ]
+                       _LFV2HandleCreate, _LFV2HandleRelease, _LFV2HandleSupported, 
+                       _LFV2KeypointsAppend, _LFV2KeypointsCreate, _LFV2KeypointsGetData, 
+                       _LFV2KeypointsGetSize, _LFV2KeypointsRelease, _LFV2KeypointsRetain, 
+                       _LearnedFeaturesGetVersion ]
 ...

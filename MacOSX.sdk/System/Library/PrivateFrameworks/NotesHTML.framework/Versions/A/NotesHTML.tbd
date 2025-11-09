@@ -2,18 +2,19 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/NotesHTML.framework/Versions/A/NotesHTML'
-current-version: 2215
+current-version: 351
 allowable-clients:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     clients:         [ AvatarStack.2.preview-thunk, ICLinkPresentationPreviewGenerator, 
                        NoteWidgetView.2.preview-thunk, Notes, NotesAccountNotificationPlugin, 
                        NotesAnalytics, NotesAnalyticsUnitTests, NotesDebug, NotesFolderWidgetView.2.preview-thunk, 
-                       NotesIAAccountMigratorPlugin, NotesPreviewKitUnitTests, NotesShared, 
+                       NotesIAAccountMigratorPlugin, NotesIMAPSupport, NotesIMAPSupportFunctionalTests, 
+                       NotesIMAPSupportTests, NotesPreviewKitUnitTests, NotesShared, 
                        NotesSharedStressTests, NotesSharedUnitTests, NotesStressTests, 
                        NotesUI, NotesUITests, NotesUIUnitTests, NotesUnitTests, WidgetHeader.2.preview-thunk, 
                        com.apple.Notes.QuickLookExtension, com.apple.Notes.SharingExtension, 
                        com.apple.Notes.SpotlightIndexExtension, com.apple.NotesImporter, 
-                       notesexport, notestool, notestoolUnitTests ]
+                       exchangenotesd, notesexport, notestool, notestoolUnitTests ]
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _ICHTMLIndexerDataSourceIdentifier, _ICNFMCAccountAccountID, 
@@ -134,7 +135,8 @@ exports:
                        _NFEntityNameFolder, _NFEntityNameIMAPAccount, _NFEntityNameIMAPFolder, 
                        _NFEntityNameIMAPNote, _NFEntityNameLocalAccount, _NFEntityNameNote, 
                        _NFEntityNameNoteBody, _NFEntityNameOfflineAction, _NFEntityNameTrashFolder, 
-                       _NFPasswordsDidChange, _NFPrimaryFolderName, _NFStringKeyInvalidFolderNameError, 
+                       _NFInAppExchangeSyncEnabled, _NFNewIMAPSyncEnabled, _NFPasswordsDidChange, 
+                       _NFPrimaryFolderName, _NFStringKeyInvalidFolderNameError, 
                        _NFStringKeyNewNoteTitle, _NotesHTMLVersionNumber, _NotesHTMLVersionString, 
                        _lookupFlag, _sStringKeyIMAPAccountDescription, _sStringKeyLocalAccountDescription, 
                        _sStringKeyMimeAttachmentFilename ]

@@ -4,6 +4,9 @@
  *
  */
 
+#ifndef JRSDefines_h
+#define JRSDefines_h
+
 #include <os/availability.h>
 #include <sys/cdefs.h>
 
@@ -26,3 +29,5 @@
 #define JRS_DEPRECATED_2020 API_DEPRECATED("This functionality is longer supported as it does not seem to be used in Java 7+. It may be removed in a future version of macOS.", macos(10.10, 11.0))
 #define JRS_DEPRECATED_2020_7 API_DEPRECATED("This functionality is no longer supported as it does not seem to be used in Java 8+. It may be removed in a future version of macOS.", macos(10.10, 11.0))
 #define JRS_DEPRECATED_2020_11 API_DEPRECATED("This functionality is no longer supported as it does not seem to be used in modern versions of Java. It may be removed in a future version of macOS.", macos(10.10, 11.0))
+
+#endif /* JRSDefines_h */

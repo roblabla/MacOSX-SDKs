@@ -44,6 +44,19 @@ typedef NSString * PKPaymentErrorKey NS_STRING_ENUM;
 extern PKPaymentErrorKey const PKPaymentErrorContactFieldUserInfoKey  API_AVAILABLE(ios(11.0), watchos(4.0)); // a PKContactField the error relates to. Use with PKPaymentShippingContactInvalidError
 extern PKPaymentErrorKey const PKPaymentErrorPostalAddressUserInfoKey API_AVAILABLE(ios(11.0), watchos(4.0)); // if the error relates to PKContactFieldPostalAddress you may set the specific key here
 
+// PKDisbursementErrorDomain is used for errors with in-app disbursements.
+// You create your own PKDisbursementErrors and return them to indicate problems with a transfer.
+extern NSString * const PKDisbursementErrorDomain API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+typedef NS_ERROR_ENUM(PKDisbursementErrorDomain, PKDisbursementErrorCode) {
+    PKDisbursementUnknownError = -1,               // there was an unknown error processing the disbursement. The user should try again.
+    PKDisbursementUnsupportedCardError = 1,        // the selected card does not support receiving funds in.
+    PKDisbursementRecipientContactInvalidError,    // the recipient contact information has an error. Use the PKDisbursementErrorKeys in the userInfo to detail the problem.
+} API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos);
+
+typedef NSString * PKDisbursementErrorKey NS_STRING_ENUM;
+extern PKDisbursementErrorKey const PKDisbursementErrorContactFieldUserInfoKey  API_AVAILABLE(ios(17.0)) API_UNAVAILABLE(macos, watchos, tvos); // a PKContactField the error relates to. Use with PKDisbursementRecipientContactInvalidError
+
 typedef NS_ENUM(NSInteger, PKAddPaymentPassError) {
     PKAddPaymentPassErrorUnsupported,
     PKAddPaymentPassErrorUserCancelled,

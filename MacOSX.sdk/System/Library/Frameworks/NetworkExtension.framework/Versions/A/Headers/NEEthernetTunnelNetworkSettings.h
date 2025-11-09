@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NEEthernetTunnelNetworkSettings : NEPacketTunnelNetworkSettings
 
 /*!
@@ -32,13 +32,13 @@ API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  * @param ethernetAddress The ethernet address to be assigned to the tunnel interface. This string should be in the format "xx:xx:xx:xx:xx:xx", where each xx is a hexidecimal number between 0 and ff.
  * @param mtu The MTU (Maxium Transmission Unit) in bytes to be assigned to the tunnel interface.
  */
-- (instancetype)initWithTunnelRemoteAddress:(NSString *)address ethernetAddress:(NSString *)ethernetAddress mtu:(NSInteger)mtu API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (instancetype)initWithTunnelRemoteAddress:(NSString *)address ethernetAddress:(NSString *)ethernetAddress mtu:(NSInteger)mtu API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @property ethernetAddress
  * @discussion An NSString object containing the ethernet address of the tunnel interface.
  */
-@property (readonly) NSString *ethernetAddress API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NSString *ethernetAddress API_AVAILABLE(macos(13.0)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

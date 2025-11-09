@@ -64,7 +64,11 @@ struct perfmon_spec {
 };
 
 
+__END_DECLS
+
 #include <sys/ioccom.h>
+
+__BEGIN_DECLS
 
 // A perfmon file is initially mutable, where events can be added and
 // attributes set.  The fine-grained nature of this API gives clients insight

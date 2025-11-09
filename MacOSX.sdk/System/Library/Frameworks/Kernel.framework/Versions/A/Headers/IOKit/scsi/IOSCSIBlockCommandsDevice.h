@@ -49,6 +49,7 @@ enum
 	kMediaStateLocked 	= 1
 };
 
+#define kIOStorageFeatureUnmapCapable        "UnmapCapable"
 
 //-----------------------------------------------------------------------------
 //	Includes

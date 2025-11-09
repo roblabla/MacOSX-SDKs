@@ -23,6 +23,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) NS_SWIFT_UI_ACTOR
 /// Image that can appear next to this element.
 @property (nullable, nonatomic, copy) UIImage *image;
 
+/// Image that can appear next to this action when the `state` is `UIMenuElementStateOn`
+@property (nullable, nonatomic, copy) UIImage *selectedImage API_AVAILABLE(ios(17.0));
+
 /// Elaborated title used in keyboard shortcut overlay.
 @property (nullable, nonatomic, copy) NSString *discoverabilityTitle;
 

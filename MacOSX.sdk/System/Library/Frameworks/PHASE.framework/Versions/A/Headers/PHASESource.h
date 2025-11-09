@@ -25,7 +25,7 @@ NS_ASSUME_NONNULL_BEGIN
         A point source simulates the sound from a point in space.
         A volumetric source simulates the sound from a shape.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASESource : PHASEObject
 
 - (instancetype)init NS_UNAVAILABLE;

@@ -51,7 +51,8 @@ exports:
                        _CNMetricsKeyUIContactShown, _CNMetricsKeyUIDestinationType, 
                        _CNMetricsKeyUIIsSelection, _CNMetricsKeyUIIsSuggestion, _CNMetricsKeyUIMediaType, 
                        _CNMetricsKeyUIPropertyName, _CNMetricsKeyUISearchAction, 
-                       _CNMetricsKeyUISearchPerformed, _CNMetricsKeyUIShareType ]
+                       _CNMetricsKeyUISearchPerformed, _CNMetricsKeyUIShareType, 
+                       _CNMetricsKeyUnknownNumberGeminiViewSIMSwitchEvent, _CNMetricsKeyUnknownNumberGeminiViewSIMSwitchType ]
     objc-classes:    [ CNMetricsReporter, CNMetricsReporterSpiedEntry, CNMetricsReporterSpy, 
                        CNMetricsReporterStub, CNMetricsUIReporter ]
 ...

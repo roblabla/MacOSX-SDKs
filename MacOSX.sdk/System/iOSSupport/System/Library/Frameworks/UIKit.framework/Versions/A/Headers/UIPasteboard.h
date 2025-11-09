@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 typedef NSString * UIPasteboardName NS_TYPED_EXTENSIBLE_ENUM;
 
 UIKIT_EXTERN UIPasteboardName const UIPasteboardNameGeneral API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos);
-UIKIT_EXTERN NSString *const UIPasteboardNameFind API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_DEPRECATED("The Find pasteboard is no longer available.", ios(3.0, 10.0));
+UIKIT_EXTERN NSString *const UIPasteboardNameFind API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos) API_UNAVAILABLE(visionos) API_DEPRECATED("The Find pasteboard is no longer available.", ios(3.0, 10.0));
 
 typedef NSString * UIPasteboardDetectionPattern NS_TYPED_ENUM API_AVAILABLE(ios(14.0));
 
@@ -59,7 +59,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watch
 + (void)removePasteboardWithName:(UIPasteboardName)pasteboardName;
 
 @property(readonly,getter=isPersistent,nonatomic) BOOL persistent;
-- (void)setPersistent:(BOOL)persistent API_DEPRECATED("Do not set persistence on pasteboards. This property is set automatically.", ios(3.0, 10.0));
+- (void)setPersistent:(BOOL)persistent API_DEPRECATED("Do not set persistence on pasteboards. This property is set automatically.", ios(3.0, 10.0)) API_UNAVAILABLE(visionos);
 @property(readonly,nonatomic) NSInteger changeCount;
 
 // Item provider interface

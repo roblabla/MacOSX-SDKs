@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 /*!
  * @abstract This enumeration describes the current activation state of the event trigger.
@@ -42,4 +42,4 @@ typedef NS_ENUM(NSUInteger, HMEventTriggerActivationState) {
     HMEventTriggerActivationStateEnabled = 4,
 };
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

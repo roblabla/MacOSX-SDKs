@@ -2,11 +2,12 @@
 //  PKInkingTool.h
 //  PencilKit
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2023 Apple. All rights reserved.
 //
 
 #import <PencilKit/PKTool.h>
 #import <PencilKit/PKInkType.h>
+#import <PencilKit/PKContentVersion.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -85,6 +86,9 @@ API_AVAILABLE(ios(13.0), macos(10.15))
 
 /// The ink that this tool will create strokes with.
 @property (nonatomic, readonly) PKInk *ink API_AVAILABLE(ios(14.0));
+
+/// The PencilKit version required to use this inking tool.
+@property (nonatomic, readonly) PKContentVersion requiredContentVersion API_AVAILABLE(ios(17.0), macos(14.0));
 
 @end
 NS_ASSUME_NONNULL_END

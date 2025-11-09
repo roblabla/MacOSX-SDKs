@@ -1,6 +1,10 @@
 // ServiceManagement.framework module map
 
-framework module ServiceManagement [extern_c] {
-	umbrella header "ServiceManagement.h"
-	module * {}
+framework module ServiceManagement [system] {
+	umbrella "Headers"
+	
+	header "ServiceManagement.h"
+	export *
+	
+	explicit module * { export * }
 }

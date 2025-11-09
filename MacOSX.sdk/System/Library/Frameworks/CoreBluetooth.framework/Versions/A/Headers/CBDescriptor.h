@@ -67,7 +67,10 @@ CB_EXTERN_CLASS @interface CBMutableDescriptor : CBDescriptor
  *					once the parent service has been published.
  *
  */
-- (instancetype)initWithType:(CBUUID *)UUID value:(nullable id)value NS_DESIGNATED_INITIALIZER __TVOS_PROHIBITED __WATCHOS_PROHIBITED
+- (instancetype)initWithType:(CBUUID *)UUID value:(nullable id)value API_AVAILABLE(ios(6.0), macos(10.9)) API_UNAVAILABLE(watchos, tvos) NS_DESIGNATED_INITIALIZER
+#if TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
 ;
 
 @end

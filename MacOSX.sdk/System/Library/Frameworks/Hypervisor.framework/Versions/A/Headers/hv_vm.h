@@ -1,9 +1,9 @@
-/*
- *  hv_vm.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2018-2022 Apple Inc. All rights reserved.
- */
+//
+//  hv_vm.h
+//  Hypervisor
+//
+//  Copyright © 2018-2023 Apple Inc. All rights reserved.
+//
 
 #pragma once
 

@@ -1,7 +1,9 @@
 /*
  File:		BluetoothHandsFree.h
- Copyright:	(c) 2010 by Apple Inc. All rights reserved.
+ Copyright:	(c) 2010, 2023 by Apple Inc. All rights reserved.
  */
+
+#if __OBJC__
 
 #import <Foundation/Foundation.h>
 
@@ -475,5 +477,4 @@ API_UNAVAILABLE(ios, watchos, tvos)
 
 @end
 
-
-
+#endif // __OBJC__

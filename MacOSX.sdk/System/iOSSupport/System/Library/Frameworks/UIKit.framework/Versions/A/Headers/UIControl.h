@@ -129,42 +129,47 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 - (void)sendActionsForControlEvents:(UIControlEvents)controlEvents;
 
 /// Returns a UIContextMenuInteraction with this control set as its delegate. Before constructing the UIContextMenuInteraction, UIControl verifies 'self' is a viable delegate. See 'Implementing UIControl Menus' below for more details.
-@property (nonatomic, readonly, strong, nullable) UIContextMenuInteraction *contextMenuInteraction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, strong, nullable) UIContextMenuInteraction *contextMenuInteraction API_AVAILABLE(ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// Specifies if the context menu interaction is enabled. NO by default.
-@property (nonatomic, readwrite, assign, getter = isContextMenuInteractionEnabled) BOOL contextMenuInteractionEnabled API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readwrite, assign, getter = isContextMenuInteractionEnabled) BOOL contextMenuInteractionEnabled API_AVAILABLE(ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 /// If the contextMenuInteraction is the primary action of the control, invoked on touch-down. NO by default.
-@property (nonatomic, readwrite, assign) BOOL showsMenuAsPrimaryAction API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readwrite, assign) BOOL showsMenuAsPrimaryAction API_AVAILABLE(ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Return a point in this control's coordinate space to which to attach the given configuration's menu.
-- (CGPoint)menuAttachmentPointForConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+- (CGPoint)menuAttachmentPointForConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /// Assigning a value to this property causes the tool tip to be displayed for the view. Setting the property to nil cancels the display of the tool tip for the view.
 @property (nonatomic, copy, nullable) NSString *toolTip API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 /// Returns the control's default UIToolTipInteraction.
 @property (nonatomic, readonly, strong, nullable) UIToolTipInteraction *toolTipInteraction API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
+/// Whether or not symbol animations are enabled for this control.
+/// The default value varies depending on the control.
+@property (nonatomic, getter=isSymbolAnimationEnabled) BOOL symbolAnimationEnabled API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0));
+
 @end
 
-#if TARGET_OS_IOS
+#if TARGET_OS_IOS || TARGET_OS_TV
 
 /// Implementing UIControl Menus
 /// UIControl will only create a UIContextMenuInteraction if you've created a subclass of UIControl with a minimum viable delegate implementation. UIControl extends the contract of UIContextMenuInteractionDelegate for these methods, see each method for more detail.
+API_AVAILABLE(ios(14.0), tvos(17.0))
 @interface UIControl() <UIContextMenuInteractionDelegate>
 
 /// An override is required for UIControl to create a UIContextMenuInteraction. Direct UIControl subclasses do not need to call super.
-- (nullable UIContextMenuConfiguration *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configurationForMenuAtLocation:(CGPoint)location API_AVAILABLE(ios(14.0));
+- (nullable UIContextMenuConfiguration *)contextMenuInteraction:(UIContextMenuInteraction *)interaction configurationForMenuAtLocation:(CGPoint)location API_AVAILABLE(ios(14.0), tvos(17.0));
 
 /// Direct UIControl subclasses do not need to call super.
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0));
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForHighlightingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0), tvos(17.0));
 
 /// Direct UIControl subclasses do not need to call super.
-- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0));
+- (nullable UITargetedPreview *)contextMenuInteraction:(UIContextMenuInteraction *)interaction previewForDismissingMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_AVAILABLE(ios(14.0), tvos(17.0));
 
 /// UIControl subclasses should always call super.
-- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willDisplayMenuForConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator NS_REQUIRES_SUPER API_AVAILABLE(ios(14.0));
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willDisplayMenuForConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator NS_REQUIRES_SUPER API_AVAILABLE(ios(14.0), tvos(17.0));
 
 /// UIControl subclasses should always call super.
-- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willEndForConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator NS_REQUIRES_SUPER API_AVAILABLE(ios(14.0));
+- (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willEndForConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator NS_REQUIRES_SUPER API_AVAILABLE(ios(14.0), tvos(17.0));
 
 /// UIControl based menus do not display previews, so this method will not be called even if implemented. UIControl does not have an implementation.
 - (void)contextMenuInteraction:(UIContextMenuInteraction *)interaction willPerformPreviewActionForMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(id<UIContextMenuInteractionCommitAnimating>)animator NS_UNAVAILABLE;

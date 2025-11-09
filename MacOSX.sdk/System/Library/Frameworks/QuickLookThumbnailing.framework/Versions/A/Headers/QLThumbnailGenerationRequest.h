@@ -23,7 +23,7 @@ typedef NS_OPTIONS (NSUInteger, QLThumbnailGenerationRequestRepresentationTypes)
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos,tvos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
 QLT_EXPORT NS_SWIFT_NAME(QLThumbnailGenerator.Request) @interface QLThumbnailGenerationRequest : NSObject <NSCopying, NSSecureCoding>
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -44,7 +44,7 @@ QLT_EXPORT NS_SWIFT_NAME(QLThumbnailGenerator.Request) @interface QLThumbnailGen
 /**
 The content type of the file being thumbnailed is used to determine the provider of the thumbnail and the icon styles applied if iconMode is requested. By default the content type is derived from the file extension. Setting this property will override the derived content type. This is useful for files that don't have meaningful extensions but for which you may already know the content type. 
  */
-@property (nonatomic, copy, null_resettable) UTType *contentType API_AVAILABLE(ios(14.0), macos(11.0));
+@property (nonatomic, copy, null_resettable) UTType *contentType API_AVAILABLE(ios(14.0), macos(11.0)) API_UNAVAILABLE(watchos, tvos);
 
 /**
  Defaults to 0. If set, the thumbnail will have a width and height greater or equal to minimumDimension * scale.

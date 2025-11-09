@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2014-2022 Apple Inc. All rights reserved.
+	Copyright 2014-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -29,6 +29,7 @@ NS_ASSUME_NONNULL_BEGIN
 		Each request for CMSampleBuffer creation is described in an AVSampleBufferRequest object.
 		CMSampleBuffers are returned synchronously.
 		If requested, sample data may be loaded asynchronously (depending on file format support).
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 @class AVSampleBufferRequest;
 
@@ -36,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVSampleBufferGeneratorInternal;
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
 @interface AVSampleBufferGenerator : NSObject {
 @private
@@ -69,7 +71,7 @@ AV_INIT_UNAVAILABLE
 - (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request error:(NSError * _Nullable * _Nullable)outError CF_RETURNS_RETAINED API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0)) NS_SWIFT_NAME(makeSampleBuffer(for:));
 
 /* It is an error to use an AVSampleBufferRequest with mode set to AVSampleBufferRequestModeScheduled when the AVSampleBufferGenerator was created with a NULL timebase. */
-- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED API_DEPRECATED("Use -createSampleBufferForRequest: error:, passing NULL for the error if not required", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos);
+- (nullable CMSampleBufferRef)createSampleBufferForRequest:(AVSampleBufferRequest *)request CF_RETURNS_RETAINED API_DEPRECATED("Use -createSampleBufferForRequest: error:, passing NULL for the error if not required", macos(10.10, 13.0)) API_UNAVAILABLE(ios, tvos, watchos, visionos);
 
 /*!
   @method		makeBatch
@@ -150,6 +152,7 @@ typedef NS_ENUM(NSInteger, AVSampleBufferRequestMode) {
  
 	@abstract	An AVSampleBufferRequest describes a CMSampleBuffer creation request.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.10), ios(16.0), tvos(16.0), watchos(9.0))
 @interface AVSampleBufferRequest : NSObject {
 @private
@@ -190,8 +193,10 @@ AV_INIT_UNAVAILABLE
 		The AVSampleBufferGeneratorBatch loads sample data asynchronously, by aggregating adjacent I/O requests and overlapping them when possible for all CMSampleBuffers within a batch.
 		An AVSampleBufferGeneratorBatch is associated with an AVSampleBufferGenerator. See -[AVSampleBufferGenerator makeBatch] to create an AVSampleBufferGeneratorBatch.
 		See -[AVSampleBufferGeneratorBatch createSampleBufferForRequest: addingToBatch: error:] to create a CMSampleBuffer, defer I/O for its data, and build up a batch.
+		Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
 */
 
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), watchos(9.0))
 @interface AVSampleBufferGeneratorBatch : NSObject
 

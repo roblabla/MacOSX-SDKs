@@ -4,17 +4,20 @@
  
 	Framework:  AVFoundation
  
-	Copyright 2015-2021 Apple Inc. All rights reserved.
+	Copyright 2015-2023 Apple Inc. All rights reserved.
  
 */
 
-#import <Foundation/Foundation.h>
 #import <AVFoundation/AVBase.h>
+#if TARGET_OS_OSX
+
+#import <Foundation/Foundation.h>
 #import <AVFoundation/AVCaption.h>
 #import <AVFoundation/AVCaptionGroup.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @interface AVCaptionGrouper : NSObject
 {
@@ -28,6 +31,8 @@ API_AVAILABLE(macos(12.0)) API_UNAVAILABLE(ios, tvos, watchos)
 @end
 
 NS_ASSUME_NONNULL_END
+
+#endif //TARGET_OS_OSX
 
 #else
 #import <AVFCore/AVCaptionGrouper.h>

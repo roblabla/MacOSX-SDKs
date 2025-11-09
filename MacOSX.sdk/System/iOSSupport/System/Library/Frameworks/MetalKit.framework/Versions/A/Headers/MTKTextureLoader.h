@@ -126,6 +126,13 @@ MTK_EXTERN MTKTextureLoaderOrigin __nonnull const MTKTextureLoaderOriginBottomLe
  */
 MTK_EXTERN MTKTextureLoaderOrigin __nonnull const MTKTextureLoaderOriginFlippedVertically NS_AVAILABLE(10_12, 10_0);
 
+/*!
+ @constant MTKTextureLoaderOptionLoadAsArray
+ @abstract Identifier specifying that the texture should be loaded as an array texture when possible.
+ @discussion Type is an NSNumber with a boolean value.
+ */
+MTK_EXTERN MTKTextureLoaderOption __nonnull const MTKTextureLoaderOptionLoadAsArray NS_AVAILABLE(14_0, 17_0);
+
 typedef void (^MTKTextureLoaderCallback) (id <MTLTexture> __nullable texture, NSError * __nullable error) NS_SWIFT_NAME(MTKTextureLoader.Callback);
 
 typedef void (^MTKTextureLoaderArrayCallback) (NSArray<id <MTLTexture>> * __nonnull textures, NSError * __nullable error) NS_SWIFT_NAME(MTKTextureLoader.ArrayCallback) NS_AVAILABLE(10_12, 10_0);

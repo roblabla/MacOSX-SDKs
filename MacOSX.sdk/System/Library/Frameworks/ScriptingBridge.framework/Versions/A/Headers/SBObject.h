@@ -36,7 +36,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// `iTunesApplication` and `iTunesTrack` by examining the header file created
 /// by the `sdp` tool. Alternatively, you give these variables the dynamic
 /// Objective-C type `id`.
-NS_CLASS_AVAILABLE(10_5, NA)
+API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 @interface SBObject : NSObject <NSCoding>
 {
 	AEDesc _specifier;
@@ -103,6 +103,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 @end
 
 
+API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 @interface SBObject (SBGlueInterface)
 // These methods, while public, are primarily intended for use by sdp-generated glue
 // code.  You are not expected to use them directly, but you may, for example, to control

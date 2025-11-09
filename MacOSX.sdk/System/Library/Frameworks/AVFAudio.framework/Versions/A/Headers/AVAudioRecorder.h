@@ -3,7 +3,7 @@
 	
 	Framework:  AVFoundation
 
-	Copyright 2008-2016 Apple Inc. All rights reserved.
+	Copyright 2008-2023 Apple Inc. All rights reserved.
 */
 
 #import <AVFAudio/AVAudioFormat.h>
@@ -15,95 +15,225 @@ NS_ASSUME_NONNULL_BEGIN
 @protocol AVAudioRecorderDelegate;
 @class NSURL, NSError;
 
-
-API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
+/*!
+    @class AVAudioRecorder
+    @abstract An object that records audio data to a file.
+ */
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0), tvos(17.0))
 @interface AVAudioRecorder : NSObject {
 @private
     void *_impl;
 }
 
-
-/* The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists. */
+/*!
+    @method initWithURL:settings:error:
+    @abstract Init the AudioRecorder with a specified url and settings.
+    @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists.
+ */
 - (nullable instancetype)initWithURL:(NSURL *)url settings:(NSDictionary<NSString *, id> *)settings error:(NSError **)outError;
 
-/* The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists. */
-- (nullable instancetype)initWithURL:(NSURL *)url format:(AVAudioFormat *)format error:(NSError **)outError API_AVAILABLE(macos(10.12), ios(10.0), watchos(4.0)) API_UNAVAILABLE(tvos);
+/*!
+    @method initWithURL:format:error:
+    @abstract Init the AudioRecorder with a specified url and format.
+    @discussion The file type to create can be set through the corresponding settings key. If not set, it will be inferred from the file extension. Will overwrite a file at the specified url if a file exists.
+ */
+- (nullable instancetype)initWithURL:(NSURL *)url format:(AVAudioFormat *)format error:(NSError **)outError API_AVAILABLE(macos(10.12), ios(10.0), watchos(4.0), tvos(17.0));
 
 /* transport control */
 /* methods that return BOOL return YES on success and NO on failure. */
-- (BOOL)prepareToRecord; /* creates the file and gets ready to record. happens automatically on record. */
-- (BOOL)record; /* start or resume recording to file. */
-- (BOOL)recordAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0)) API_UNAVAILABLE(tvos); /* start recording at specified time in the future. time is an absolute time based on and greater than deviceCurrentTime. */
-- (BOOL)recordForDuration:(NSTimeInterval) duration; /* record a file of a specified duration. the recorder will stop when it has recorded this length of audio */
-- (BOOL)recordAtTime:(NSTimeInterval)time forDuration:(NSTimeInterval) duration API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0)) API_UNAVAILABLE(tvos); /* record a file of a specified duration starting at specified time. time is an absolute time based on and greater than deviceCurrentTime. */
-- (void)pause; /* pause recording */
-- (void)stop; /* stops recording. closes the file. */
 
-- (BOOL)deleteRecording; /* delete the recorded file. recorder must be stopped. returns NO on failure. */
+/*!
+    @method prepareToRecord
+    @abstract Creates the output file and gets ready to record.
+    @discussion This method is called automatically on record. Returns YES on success and NO on failure.
+ */
+- (BOOL)prepareToRecord;
+
+/*!
+    @method record
+    @abstract Start or resume recording to file.
+    @discussion Returns YES on success and NO on failure.
+ */
+- (BOOL)record;
+
+/*!
+    @method recordAtTime:
+    @abstract Start recording at specified time in the future.
+    @discussion Time is an absolute time based on and greater than deviceCurrentTime. Returns YES on success and NO on failure.
+ */
+- (BOOL)recordAtTime:(NSTimeInterval)time API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0), tvos(17.0));
+
+/*!
+    @method recordForDuration:
+    @abstract Record for a specified duration.
+    @discussion The recorder will stop when it has recorded this length of audio. Returns YES on success and NO on failure.
+ */
+- (BOOL)recordForDuration:(NSTimeInterval) duration;
+
+/*!
+    @method recordAtTime:forDuration:
+    @abstract Record for a specified duration at a specified time in the future.
+    @discussion Time is an absolute time based on and greater than deviceCurrentTime. Returns YES on success and NO on failure.
+ */
+- (BOOL)recordAtTime:(NSTimeInterval)time forDuration:(NSTimeInterval) duration API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0), tvos(17.0));
+
+/*!
+    @method pause
+    @abstract Pause recording.
+ */
+- (void)pause;
+
+/*!
+    @method stop
+    @abstract Stop recording.
+    @discussion This method also closes the output file.
+ */
+- (void)stop;
+
+/*!
+    @method deleteRecording
+    @abstract Delete the recorded file.
+    @discussion AudioRecorder must be stopped. Returns YES on success and NO on failure.
+ */
+- (BOOL)deleteRecording;
 
 /* properties */
 
-@property(readonly, getter=isRecording) BOOL recording; /* is it recording or not? */
+/*!
+    @property recording
+    @abstract Returns YES if the AudioRecorder is currently recording.
+ */
+@property(readonly, getter=isRecording) BOOL recording;
 
-@property(readonly) NSURL *url; /* URL of the recorded file */
+/*!
+    @property url
+    @abstract URL of the recorded file.
+ */
+@property(readonly) NSURL *url;
 
-/* these settings are fully valid only when prepareToRecord has been called */
+/*!
+    @property settings
+    @abstract A dictionary of settings for the AudioRecorder.
+    @discussion These settings are fully valid only when prepareToRecord has been called. For supported key-value pairs, see https://developer.apple.com/documentation/avfaudio/avaudiorecorder/1388386-initwithurl?language=objc
+ */
 @property(readonly) NSDictionary<NSString *, id> *settings;
 
-/* this object is fully valid only when prepareToRecord has been called */
-@property(readonly) AVAudioFormat *format API_AVAILABLE(macos(10.12), ios(10.0), watchos(4.0)) API_UNAVAILABLE(tvos);
+/*!
+    @property format
+    @abstract The audio format of the AudioRecorder.
+    @discussion This property is fully valid only when prepareToRecord has been called.
+ */
+@property(readonly) AVAudioFormat *format API_AVAILABLE(macos(10.12), ios(10.0), watchos(4.0), tvos(17.0));
 
-/* the delegate will be sent messages from the AVAudioRecorderDelegate protocol */ 
+/*!
+    @property delegate
+    @abstract A delegate object to the AudioRecorder that conforms to the AVAudioRecorderDelegate protocol.
+ */
 @property(weak, nullable) id<AVAudioRecorderDelegate> delegate;
 
-/* get the current time of the recording - only valid while recording */
+/*!
+    @property currentTime
+    @abstract Get the current time of the recording.
+    @discussion This method is only vaild while recording.
+ */
 @property(readonly) NSTimeInterval currentTime;
-/* get the device current time - always valid */
-@property(readonly) NSTimeInterval deviceCurrentTime API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0)) API_UNAVAILABLE(tvos);
+
+/*!
+    @property deviceCurrentTime
+    @abstract Get the device current time.
+    @discussion This method is always valid.
+ */
+@property(readonly) NSTimeInterval deviceCurrentTime API_AVAILABLE(macos(10.9), ios(6.0), watchos(4.0), tvos(17.0));
 
 /* metering */
 
-@property(getter=isMeteringEnabled) BOOL meteringEnabled; /* turns level metering on or off. default is off. */
+/*!
+    @property meteringEnabled
+    @abstract Turns level metering on or off.
+    @discussion Default is off.
+ */
+@property(getter=isMeteringEnabled) BOOL meteringEnabled;
 
-- (void)updateMeters; /* call to refresh meter values */
+/*!
+    @method updateMeters
+    @abstract Call this method to refresh meter values.
+ */
+- (void)updateMeters;
 
-- (float)peakPowerForChannel:(NSUInteger)channelNumber; /* returns peak power in decibels for a given channel */
-- (float)averagePowerForChannel:(NSUInteger)channelNumber; /* returns average power in decibels for a given channel */
+/*!
+    @method peakPowerForChannel:
+    @abstract Returns peak power in decibels for a given channel.
+ */
+- (float)peakPowerForChannel:(NSUInteger)channelNumber;
 
-/* The channels property lets you assign the output to record specific channels as described by AVAudioSession's channels property */
-/* This property is nil valued until set. */
-/* The array must have the same number of channels as returned by the numberOfChannels property. */
-@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(ios(7.0), watchos(4.0)) API_UNAVAILABLE(macos, tvos) ; /* Array of AVAudioSessionChannelDescription objects */
+/*!
+    @method averagePowerForChannel:
+    @abstract Returns average power in decibels for a given channel.
+ */
+- (float)averagePowerForChannel:(NSUInteger)channelNumber;
+
+/*!
+    @property channelAssignments
+    @abstract Array of AVAudioSessionChannelDescription objects
+    @discussion The channels property lets you assign the output to record specific channels as described by AVAudioSessionPortDescription's channels property. This property is nil valued until set. The array must have the same number of channels as returned by the numberOfChannels property.
+ */
+@property(nonatomic, copy, nullable) NSArray<AVAudioSessionChannelDescription *> *channelAssignments API_AVAILABLE(ios(7.0), watchos(4.0), tvos(17.0)) API_UNAVAILABLE(macos) ;
 
 @end
 
-
-/* A protocol for delegates of AVAudioRecorder */
-API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0)) API_UNAVAILABLE(tvos)
+/*!
+    @protocol AVAudioRecorderDelegate
+    @abstract A protocol for delegates of AVAudioRecorder.
+ */
+API_AVAILABLE(macos(10.7), ios(3.0), watchos(4.0), tvos(17.0))
 @protocol AVAudioRecorderDelegate <NSObject>
 @optional 
 
-/* audioRecorderDidFinishRecording:successfully: is called when a recording has been finished or stopped. This method is NOT called if the recorder is stopped due to an interruption. */
+/*!
+    @method audioRecorderDidFinishRecording:successfully:
+    @abstract This callback method is called when a recording has been finished or stopped.
+    @discussion This method is NOT called if the recorder is stopped due to an interruption.
+ */
 - (void)audioRecorderDidFinishRecording:(AVAudioRecorder *)recorder successfully:(BOOL)flag;
 
-/* if an error occurs while encoding it will be reported to the delegate. */
+/*!
+    @method audioRecorderEncodeErrorDidOccur:error:
+    @abstract This callback method is called when an error occurs while encoding.
+    @discussion If an error occurs while encoding it will be reported to the delegate.
+ */
 - (void)audioRecorderEncodeErrorDidOccur:(AVAudioRecorder *)recorder error:(NSError * __nullable)error;
 
 #if TARGET_OS_IPHONE
 
 /* AVAudioRecorder INTERRUPTION NOTIFICATIONS ARE DEPRECATED - Use AVAudioSession instead. */
 
-/* audioRecorderBeginInterruption: is called when the audio session has been interrupted while the recorder was recording. The recorded file will be closed. */
-- (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder NS_DEPRECATED_IOS(2_2, 8_0);
+/*!
+    @method audioRecorderBeginInterruption:
+    @abstract audioRecorderBeginInterruption: is called when the audio session has been interrupted while the recorder was recording. The recorded file will be closed.
+    @discussion Deprecated - use AVAudioSession instead.
+ */
+- (void)audioRecorderBeginInterruption:(AVAudioRecorder *)recorder API_UNAVAILABLE(tvos) API_DEPRECATED("Deprecated - use AVAudioSession instead", ios(2.2, 8.0));
 
-/* audioRecorderEndInterruption:withOptions: is called when the audio session interruption has ended and this recorder had been interrupted while recording. */
-/* Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume. */
-- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder withOptions:(NSUInteger)flags NS_DEPRECATED_IOS(6_0, 8_0);
+/*!
+    @method audioRecorderEndInterruption:withOptions:
+    @abstract audioRecorderEndInterruption:withOptions: is called when the audio session interruption has ended and this recorder had been interrupted while recording.
+    @discussion Currently the only flag is AVAudioSessionInterruptionFlags_ShouldResume.  Deprecated - use AVAudioSession instead.
+ */
+- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder withOptions:(NSUInteger)flags API_UNAVAILABLE(tvos) API_DEPRECATED("Deprecated - use AVAudioSession instead", ios(6.0, 8.0));
 
-- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder withFlags:(NSUInteger)flags NS_DEPRECATED_IOS(4_0, 6_0);
+/*!
+    @method audioRecorderEndInterruption:withFlags:
+    @abstract audioRecorderEndInterruption:withFlags: is called when the audio session interruption has ended and this recorder had been interrupted while recording.
+    @discussion Deprecated - use AVAudioSession instead.
+ */
+- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder withFlags:(NSUInteger)flags API_UNAVAILABLE(tvos) API_DEPRECATED("Deprecated - use AVAudioSession instead", ios(4.0, 6.0));
 
-/* audioRecorderEndInterruption: is called when the preferred method, audioRecorderEndInterruption:withFlags:, is not implemented. */
-- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder NS_DEPRECATED_IOS(2_2, 6_0);
+/*!
+    @method audioRecorderEndInterruption:
+    @abstract audioRecorderEndInterruption: is called when the preferred method, audioRecorderEndInterruption:withFlags:, is not implemented.
+    @discussion Deprecated - use AVAudioSession instead.
+ */
+- (void)audioRecorderEndInterruption:(AVAudioRecorder *)recorder API_UNAVAILABLE(tvos) API_DEPRECATED("Deprecated - use AVAudioSession instead", ios(2.2, 6.0));
 
 #endif // TARGET_OS_IPHONE
 

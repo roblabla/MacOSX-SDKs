@@ -1,4 +1,4 @@
-framework module Speech [extern_c] {
+framework module Speech {
     umbrella header "Speech.h"
     export *
     module * { export * }

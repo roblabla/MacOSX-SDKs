@@ -342,6 +342,17 @@ Information presented includes reader, reader driver, card, card driver, availab
 OS X has built-in support for USB CCID class-compliant SmartCard readers. For other readers, install the reader driver in
 .Pa /usr/local/libexec/SmartCardServices/drivers .
 Each driver is a bundle. The bundle contains an XML file Info.plist which contains the device's USB vendor ID and product ID. For detailed description of the plist format and how to write a reader driver, see http://pcsclite.alioth.debian.org/api/group__IFDHandler.html
+.sp
+The built-in SmarCard reader driver is prefered by the System and it is possible to change the preference to the IFD CCID by setting the global preference
+.Bd -literal -offset indent
+sudo defaults write /Library/Preferences/com.apple.security.smartcard useIFDCCID -bool yes
+.Ed
+.Pp
+To disable using alternative frequency and baud-rate by setting the global preference
+.Bd -literal -offset indent
+sudo defaults write /Library/Preferences/com.apple.security.smartcard AllowAlternativeFiDi -bool no
+.Ed
+.Pp
 .Sh SMART CARD APDU LOGGING
 It is possible to turn on logging for SmartCards by setting the global preference:
 .Bd -literal -offset indent

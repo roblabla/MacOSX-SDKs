@@ -2,12 +2,12 @@
 //  VZMacGraphicsDisplayConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021 Apple Inc. All rights reserved.
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
 //
 
-#import <Virtualization/VZDefines.h>
-
 #import <AppKit/AppKit.h>
+
+#import <Virtualization/VZGraphicsDisplayConfiguration.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,10 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion This display can be shown in a VZVirtualMachineView.
 */
 VZ_EXPORT API_AVAILABLE(macos(12.0))
-@interface VZMacGraphicsDisplayConfiguration : NSObject <NSCopying>
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
+@interface VZMacGraphicsDisplayConfiguration : VZGraphicsDisplayConfiguration
 
 /*!
  @abstract Create a display configuration with the specified pixel dimensions and pixel density.

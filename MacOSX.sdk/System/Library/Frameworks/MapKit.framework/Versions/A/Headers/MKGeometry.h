@@ -137,7 +137,7 @@ NS_INLINE BOOL MKMapRectIsNull(MKMapRect rect) {
 }
 
 NS_INLINE BOOL MKMapRectIsEmpty(MKMapRect rect) {
-    return MKMapRectIsNull(rect) || (rect.size.width == 0.0 && rect.size.height == 0.0);
+    return MKMapRectIsNull(rect) || rect.size.width == 0.0 || rect.size.height == 0.0;
 }
 
 NS_INLINE NSString *MKStringFromMapPoint(MKMapPoint point) {

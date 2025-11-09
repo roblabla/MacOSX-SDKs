@@ -25,7 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
  * Only one NFCReaderSession can be active at any time in the system. Subsequent opened sessions will get queued up and processed by the system in FIFO order.
  * The NFCISO15693 tag object returned by this session will only respond to the legacy APIs that are introducted in iOS11.  
  */
-API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
+API_UNAVAILABLE(watchos, macos, tvos)
+API_DEPRECATED_WITH_REPLACEMENT("NFCTagReaderSession", ios(11.0, 17.0))
 @interface NFCISO15693ReaderSession : NFCReaderSession
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -39,7 +40,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *
  * @return          A new NFCISO15693ReaderSession instance.
  */
-- (instancetype)initWithDelegate:(id<NFCReaderSessionDelegate>)delegate queue:(nullable dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER NS_EXTENSION_UNAVAILABLE("Not available to extensions");
+- (instancetype)initWithDelegate:(id<NFCReaderSessionDelegate>)delegate queue:(nullable dispatch_queue_t)queue NS_DESIGNATED_INITIALIZER NS_EXTENSION_UNAVAILABLE("Not available to extensions") API_DEPRECATED("No longer supported", ios(11.0, 17.0));
 
 /*!
  * @method restartPolling
@@ -48,7 +49,7 @@ API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(watchos, macos, tvos)
  *             @link/ will become invalid, and all references to these tags shall be removed to properly release the resources.  Calling this method on an invalidated session
  *             will have no effect; a new reader session is required to restart the reader.
  */
-- (void)restartPolling;
+- (void)restartPolling API_DEPRECATED("No longer supported", ios(11.0, 17.0));
 
 @end
 

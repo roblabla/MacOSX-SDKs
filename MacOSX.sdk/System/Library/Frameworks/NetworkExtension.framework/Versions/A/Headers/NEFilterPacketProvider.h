@@ -27,7 +27,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NEFilterPacketContext
  * @discussion The NEFilterPacketContext class identifies the current filtering context.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NEFilterPacketContext : NSObject
 @end
 
@@ -42,7 +42,7 @@ typedef NS_ENUM(NSInteger, NEFilterPacketProviderVerdict) {
 	NEFilterPacketProviderVerdictDrop = 1,
 	/* @const NEFilterPacketProviderVerdictDelay Delay a packet until a future verdict */
 	NEFilterPacketProviderVerdictDelay = 2,
-} NS_SWIFT_NAME(NEFilterPacketProvider.Verdict) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+} NS_SWIFT_NAME(NEFilterPacketProvider.Verdict) API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @typedef NEFilterPacketHandler
@@ -55,13 +55,13 @@ typedef NS_ENUM(NSInteger, NEFilterPacketProviderVerdict) {
  * @return A NEFilterPacketProviderVerdict. If the returned verdict is NEFilterPacketProviderVerdictDelay, then the framework assumes that the block already called -[NEFilterPacketProvider delayCurrentPacket] to obtain a reference to the packet.
  */
 typedef NEFilterPacketProviderVerdict (^NEFilterPacketHandler)(NEFilterPacketContext *context, _Nonnull nw_interface_t interface, NETrafficDirection direction, const void *packetBytes, const size_t packetLength)
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @interface NEFilterPacketProvider
  * @discussion The NEFilterPacketProvider class declares the programmatic interface for an object that evaluates network packets decisions about whether to block, allow, or delay the packets.
  */
-API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos)
 @interface NEFilterPacketProvider : NEFilterProvider
 
 /*!
@@ -73,7 +73,7 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  *			   simultaneous threads.  This packet handler must be able to handle execution
  *			   in a multi-threaded environment.
  */
-@property (strong, nullable) NEFilterPacketHandler packetHandler API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+@property (strong, nullable) NEFilterPacketHandler packetHandler API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @method delayCurrentPacket
@@ -85,14 +85,14 @@ API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED
  * @param context The context of the current packet filter which is passed to the packetHandler block.
  *		   The packetHandler block must pass this context when calling delayCurrentPacket().
  */
-- (NEPacket *)delayCurrentPacket:(NEFilterPacketContext *)context API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (NEPacket *)delayCurrentPacket:(NEFilterPacketContext *)context API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 /*!
  * @method allowPacket:
  * @discussion This function is used to allow a previously-delayed packet to continue its journey into or out of the networking stack.
  * @param packet A NEPacket object that contains the data of the packet that was previously delayed by the NEFilterPacketProvider.
  */
-- (void)allowPacket:(NEPacket *)packet API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, tvos) __WATCHOS_PROHIBITED;
+- (void)allowPacket:(NEPacket *)packet API_AVAILABLE(macos(10.15)) API_UNAVAILABLE(ios, watchos, tvos);
 
 @end
 

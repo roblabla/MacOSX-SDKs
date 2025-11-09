@@ -10,7 +10,7 @@
 #import <UIKit/UIKitDefines.h>
 #import <CoreGraphics/CoreGraphics.h>
 
-UIKIT_EXTERN API_AVAILABLE(ios(3.2)) NS_SWIFT_SENDABLE
+UIKIT_EXTERN API_AVAILABLE(ios(3.2)) API_UNAVAILABLE(visionos) NS_SWIFT_SENDABLE
 @interface UIScreenMode : NSObject
 
 @property(readonly,nonatomic) CGSize  size;             // The width and height in pixels

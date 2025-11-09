@@ -11,7 +11,7 @@
 
 #import <CoreGraphics/CoreGraphics.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @protocol HMCameraStreamControlDelegate;
 @class HMCameraStream;
@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*!
  * @abstract This class can be used to control the stream from a camera.
  */
-HM_EXTERN API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(10.0), watchos(3.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMCameraStreamControl : HMCameraControl
 
 /*!
@@ -77,4 +77,4 @@ API_UNAVAILABLE(macos)
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

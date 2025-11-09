@@ -99,7 +99,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(7.0)) NS_SWIFT_UI_ACTOR
 + (instancetype)keyCommandWithInput:(NSString *)input modifierFlags:(UIKeyModifierFlags)modifierFlags action:(SEL)action;
 
 // Key Commands with a discoverabilityTitle _will_ be discoverable in the UI.
-+ (instancetype)keyCommandWithInput:(NSString *)input modifierFlags:(UIKeyModifierFlags)modifierFlags action:(SEL)action discoverabilityTitle:(NSString *)discoverabilityTitle API_DEPRECATED_WITH_REPLACEMENT("keyCommandWithInput:modifierFlags:action:", ios(9.0, 13.0));
++ (instancetype)keyCommandWithInput:(NSString *)input modifierFlags:(UIKeyModifierFlags)modifierFlags action:(SEL)action discoverabilityTitle:(NSString *)discoverabilityTitle API_DEPRECATED_WITH_REPLACEMENT("keyCommandWithInput:modifierFlags:action:", ios(9.0, 13.0)) API_UNAVAILABLE(visionos);
 
 // UICommand initializers are unavailable
 + (instancetype)commandWithTitle:(NSString *)title

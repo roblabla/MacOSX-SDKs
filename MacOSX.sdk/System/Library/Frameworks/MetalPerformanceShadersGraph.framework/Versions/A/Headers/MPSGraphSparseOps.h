@@ -13,26 +13,31 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-/*!
- *  @typedef    MPSGraphSparseStorageType
- *  @abstract   Sparse Storage options in graph
- *
- *  @constant   MPSGraphSparseStorageCOO                                  COO Storage
- *  @constant   MPSGraphSparseStorageCSC                                   CSC Storage
- *  @constant   MPSGraphSparseStorageCSR                                   CSR Storage
- */
+/// Sparse Storage options in MPSGraph.
 typedef NS_ENUM(uint64_t, MPSGraphSparseStorageType) {
+    /// COO Storage
     MPSGraphSparseStorageCOO MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) MPS_SWIFT_NAME(COO) = 0,
+    /// CSC Storage
     MPSGraphSparseStorageCSC MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) = 1L,
+    /// CSR Storage
     MPSGraphSparseStorageCSR MPS_ENUM_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0)) = 2L,
 };
 
 MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
-@interface MPSGraphCreateSparseOpDescriptor : NSObject <NSCopying>
+@interface MPSGraphCreateSparseOpDescriptor : MPSGraphObject <NSCopying>
 
+/// Defines storage format of sparse tensor.
 @property(readwrite, nonatomic) MPSGraphSparseStorageType sparseStorageType;
+
+/// Defines datatype of sparse tensor.
 @property(readwrite, nonatomic) MPSDataType dataType;
 
+/// Creates a descriptor for a sparse tensor.
+///
+/// - Parameters:
+///   - sparseStorageType: A sparseStorageType.
+///   - dataType: A dataType of sparse tensor.
+/// - Returns: The descriptor.
 + (nullable instancetype)descriptorWithStorageType:(MPSGraphSparseStorageType)sparseStorageType
                                           dataType:(MPSDataType)dataType
     MPS_SWIFT_NAME(sparseDescriptor(descriptorWithStorageType:dataType:));
@@ -41,23 +46,22 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
 
 @interface MPSGraph (MPSGraphSparseOps)
 
-/*!
- *  @abstract   Create sparseTensor op and return the result tensor
- *
- *
- *  @param      sparseStorageType       sparseStorageType
- *  @param      inputTensorArray         array of input tensors as [sparseVals, indexTensor0, indexTensor1]
- *  @param      shape                                  shape of sparse tensor
- *  @param      dataType                           dataType of sparse tensor
- *  @param      name                                    name for the operation
- *
- *  @discussion sparseVals corresponds to non zero values in matrix.
- *              indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure
- *              For COO, indexTensor0 is x index and indexTensor1 is y index
- *              For CSC, indexTensor0 and indexTensor1 correspond to rowIndex and colStarts respectively.
- *              For CSR, indexTensor0 and indexTensor1 correspond to colIndex and rowStarts respectively.
- *  @return     A valid MPSGraphTensor object.
- */
+/// Creates a sparseTensor representation.
+///
+/// sparseVals corresponds to non zero values in matrix. 
+/// indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure. 
+/// For COO, indexTensor0 is x index and indexTensor1 is y index. 
+/// For CSC, indexTensor0 and indexTensor1 correspond to rowIndex and colStarts respectively. 
+/// For CSR, indexTensor0 and indexTensor1 correspond to colIndex and rowStarts respectively.
+/// You must set input tensors appropriately for each sparse storage type.
+///
+/// - Parameters:
+///   - sparseStorageType: A sparseStorageType.
+///   - inputTensorArray: An array of input tensors as [sparseVals, indexTensor0, indexTensor1].
+///   - shape: The shape of the sparse tensor.
+///   - dataType: The dataType of the sparse tensor.
+///   - name: A name for the operation.
+/// - Returns: A valid ``MPSGraphTensor`` object.
 - (MPSGraphTensor *)sparseTensorWithType:(MPSGraphSparseStorageType)sparseStorageType
                                  tensors:(NSArray<MPSGraphTensor *> *)inputTensorArray
                                    shape:(MPSShape *)shape
@@ -66,22 +70,21 @@ MPS_CLASS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
     MPS_AVAILABLE_STARTING(macos(12.0), ios(15.0), tvos(15.0))
     MPS_SWIFT_NAME(sparseTensor(sparseTensorWithType:tensors:shape:dataType:name:));
 
-/*!
- *  @abstract   Create sparseTensor op and return the result tensor
- *
- *
- *  @param      sparseDescriptor         sparseDescriptorType
- *  @param      inputTensorArray         array of input tensors as [sparseVals, indexTensor0, indexTensor1]
- *  @param      shape                                  shape of sparse tensor
- *  @param      name                                    name for the operation
- *
- *  @discussion sparseVals corresponds to non zero values in matrix.
- *              indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure
- *              For COO, indexTensor0 is x index and indexTensor1 is y index
- *              For CSC, indexTensor0 and indexTensor1 correspond to rowIndex and colStarts respectively.
- *              For CSR, indexTensor0 and indexTensor1 correspond to colIndex and rowStarts respectively.
- *  @return     A valid MPSGraphTensor object.
- */
+/// Creates a sparseTensor representation.
+///
+/// sparseVals corresponds to non zero values in matrix. 
+/// indexTensor0 and indexTensor1 are indices used for indexing into sparse data structure. 
+/// For COO, indexTensor0 is x index and indexTensor1 is y index .
+/// For CSC, indexTensor0 and indexTensor1 correspond to rowIndex and colStarts respectively. 
+/// For CSR, indexTensor0 and indexTensor1 correspond to colIndex and rowStarts respectively.
+/// You must set input tensors appropriately for each sparse storage type.
+///
+/// - Parameters:
+///   - sparseDescriptor: A sparseDescriptor.
+///   - inputTensorArray: An array of input tensors as [sparseVals, indexTensor0, indexTensor1].
+///   - shape: The shape of the sparse tensor.
+///   - name: A name for the operation.
+/// - Returns: A valid ``MPSGraphTensor`` object
 - (MPSGraphTensor *)sparseTensorWithDescriptor:(MPSGraphCreateSparseOpDescriptor *)sparseDescriptor
                                        tensors:(NSArray<MPSGraphTensor *> *)inputTensorArray
                                          shape:(MPSShape *)shape

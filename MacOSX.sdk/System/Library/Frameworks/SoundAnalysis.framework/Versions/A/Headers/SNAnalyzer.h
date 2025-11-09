@@ -17,7 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
  @discussion SNAudioStreamAnalyzer should be used to analyze a stream of audio, represented by a sequence of audio buffers over time.
  */
 
-SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @interface SNAudioStreamAnalyzer : NSObject
 
 /*!
@@ -71,7 +71,7 @@ SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
  @brief Analyzes an audio file and provides analysis results to the client
  */
 
-SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0))
+SN_EXPORT API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0), watchos(6.0), visionos(1.0))
 @interface SNAudioFileAnalyzer : NSObject
 
 /*!

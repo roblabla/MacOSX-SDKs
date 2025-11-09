@@ -16,6 +16,12 @@ typedef NS_ENUM(NSInteger, UISceneActivationState) {
     UISceneActivationStateBackground
 } API_AVAILABLE(ios(13.0));
 
+typedef NS_ENUM(NSInteger, UISceneCaptureState) {
+    UISceneCaptureStateUnspecified = -1,
+    UISceneCaptureStateInactive = 0,
+    UISceneCaptureStateActive = 1
+} API_AVAILABLE(ios(17.0), tvos(17.0), visionos(1.0));
+
 #pragma mark - UISceneSessionRole
 typedef NSString * UISceneSessionRole NS_TYPED_ENUM API_AVAILABLE(ios(13.0));
 

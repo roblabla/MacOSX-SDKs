@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
                 Result of this layer is a tensor of the same shape as source tensor,
                 except for the given dimension which is set to 1.
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 @interface MLCReductionLayer : MLCLayer
 
 /*! @property   reductionType

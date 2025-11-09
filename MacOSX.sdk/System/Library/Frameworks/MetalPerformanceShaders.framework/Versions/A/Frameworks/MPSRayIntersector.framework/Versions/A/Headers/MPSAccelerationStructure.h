@@ -20,7 +20,7 @@
 /**
  * @brief A block of code invoked when an operation on an MPSAccelerationStructure is completed
  */
-MPS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
+MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0))
 typedef void (^MPSAccelerationStructureCompletionHandler)(MPSAccelerationStructure * _Nullable);
 
 /**
@@ -55,7 +55,7 @@ typedef NS_OPTIONS(NSUInteger, MPSAccelerationStructureUsage) {
      * triangle counts, the acceleration structure may be built on the CPU. This option will force
      * the acceleration structure to be always be built on the GPU whenever possible.
      */
-    MPSAccelerationStructureUsagePreferGPUBuild MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) = 4,
+    MPSAccelerationStructureUsagePreferGPUBuild MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0)) = 4,
 
     /**
      * @brief Prefer building the acceleration structure on the CPU. By default, the acceleration
@@ -63,8 +63,8 @@ typedef NS_OPTIONS(NSUInteger, MPSAccelerationStructureUsage) {
      * building on the CPU. However, in some cases it may be preferable to build on the CPU such as
      * to avoid framerate hitches when the GPU is rendering the user interface.
      */
-    MPSAccelerationStructureUsagePreferCPUBuild  MPS_ENUM_AVAILABLE_STARTING(macos(10.15), ios(13.0), macCatalyst(13.0), tvos(13.0)) = 8,
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+    MPSAccelerationStructureUsagePreferCPUBuild  MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.15, 14.0), ios(13.0, 17.0), macCatalyst(13.0, 17.0), tvos(13.0, 17.0)) = 8,
+} MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0));
 
 /**
  * @brief Possible values of the acceleration structure status property
@@ -79,7 +79,7 @@ typedef NS_ENUM(NSUInteger, MPSAccelerationStructureStatus) {
      * @brief The acceleration structure has finished building
      */
     MPSAccelerationStructureStatusBuilt = 1
-} MPS_ENUM_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0));
+} MPS_ENUM_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0));
 
 /**
  * @brief A data structure built over geometry used to accelerate ray tracing
@@ -319,7 +319,7 @@ typedef NS_ENUM(NSUInteger, MPSAccelerationStructureStatus) {
  * However, it is safe to encode intersection tests with a single acceleration structure
  * from multiple threads as long as each thread uses its own MPSRayIntersector.
  */
-MPS_CLASS_AVAILABLE_STARTING(macos(10.14), ios(12.0), macCatalyst(13.0), tvos(12.0))
+MPS_AVAILABLE_STARTING_BUT_DEPRECATED("Use Metal ray tracing API instead", macos(10.14, 14.0), ios(12.0, 17.0), macCatalyst(13.0, 17.0), tvos(12.0, 17.0))
 @interface MPSAccelerationStructure : MPSKernel <NSSecureCoding, NSCopying>
 
 /**

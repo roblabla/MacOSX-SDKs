@@ -2,7 +2,7 @@
 //  VZBridgedNetworkInterface.h
 //  Virtualization
 //
-//  Copyright © 2019 Apple Inc. All rights reserved.
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -36,7 +36,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 @property (readonly, copy) NSString *identifier;
 
 /*! @abstract Return a display name if available (e.g. "Ethernet"). */
-@property (readonly, copy, nullable) NSString *localizedDisplayName;
+@property (readonly, nullable, copy) NSString *localizedDisplayName;
 
 @end
 

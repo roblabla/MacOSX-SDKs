@@ -7,6 +7,9 @@
 
  */
 
+#import <TargetConditionals.h>
+
+
 #import <AVFoundation/AVBase.h>
 #import <AVFoundation/AVAnimation.h>
 #import <AVFoundation/AVAsset.h>
@@ -30,14 +33,14 @@
 
 #import <AVFoundation/AVAssetDownloadTask.h>
 #import <AVFoundation/AVAssetDownloadStorageManager.h>
-#if TARGET_OS_OSX
+
 #import <AVFoundation/AVCaption.h>
 #import <AVFoundation/AVCaptionGroup.h>
 #import <AVFoundation/AVCaptionGrouper.h>
 #import <AVFoundation/AVCaptionConversionValidator.h>
 #import <AVFoundation/AVCaptionFormatConformer.h>
 #import <AVFoundation/AVCaptionRenderer.h>
-#endif
+#import <AVFoundation/AVCaptionSettings.h>
 
 #import <AVFoundation/AVComposition.h>
 #import <AVFoundation/AVCompositionTrack.h>
@@ -49,17 +52,15 @@
 #import <AVFoundation/AVMetadataFormat.h>
 #import <AVFoundation/AVMetadataIdentifiers.h>
 #import <AVFoundation/AVMetadataItem.h>
-#if (TARGET_OS_MAC && ! TARGET_OS_TV)
 #import <AVFoundation/AVMovie.h>
 #import <AVFoundation/AVMovieTrack.h>
-#endif
 #import <AVFoundation/AVOutputSettingsAssistant.h>
 #import <AVFoundation/AVPlaybackCoordinator.h>
 #import <AVFoundation/AVPlayer.h>
 #import <AVFoundation/AVPlayerItem.h>
 #import <AVFoundation/AVPlayerItemMediaDataCollector.h>
 #import <AVFoundation/AVPlayerItemOutput.h>
-#if (TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE))
+#if ((TARGET_OS_MAC && !(TARGET_OS_EMBEDDED || TARGET_OS_IPHONE)) || TARGET_OS_MACCATALYST)
 #import <AVFoundation/AVPlayerItemProtectedContentAdditions.h>
 #endif
 #import <AVFoundation/AVPlayerItemTrack.h>
@@ -73,6 +74,7 @@
 #import <AVFoundation/AVSampleBufferDisplayLayer.h>
 #import <AVFoundation/AVSampleBufferRenderSynchronizer.h>
 #import <AVFoundation/AVSampleBufferGenerator.h>
+#import <AVFoundation/AVSampleBufferVideoRenderer.h>
 #import <AVFoundation/AVSampleCursor.h>
 #import <AVFoundation/AVSynchronizedLayer.h>
 #import <AVFoundation/AVTextStyleRule.h>

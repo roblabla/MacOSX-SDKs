@@ -24,8 +24,6 @@ typedef NS_ENUM(NSInteger, UIImageSymbolScale) {
 } API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0));
 
 // -- symbol image weights
-// only regular is supported by now, but you can specify any weight
-// you need for future implementation.
 typedef NS_ENUM(NSInteger, UIImageSymbolWeight) {
     UIImageSymbolWeightUnspecified = 0,
     UIImageSymbolWeightUltraLight = 1,
@@ -79,8 +77,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0),tvos(13.0),watchos(6.0)) NS_SWIFT_SENDABLE
 - (instancetype)configurationWithoutPointSizeAndWeight;
 
 // checks if the other configuration is equal to this one.
-// the values have to match exactly. If you only want to check "specified"
-// values, use `isEquivalentToConfiguration:`.
+// the values have to match exactly.
 - (BOOL)isEqualToConfiguration:(nullable UIImageSymbolConfiguration *)otherConfiguration;
 
 @end

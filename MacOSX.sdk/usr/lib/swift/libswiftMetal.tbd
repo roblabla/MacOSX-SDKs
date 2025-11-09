@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftMetal.dylib'
-current-version: 306.5.16
+current-version: 341.16.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -43,6 +43,7 @@ exports:
                        '_$sSo23MTLRenderCommandEncoderP5MetalE15setMeshTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE15setScissorRectsyySaySo14MTLScissorRectaGF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE16setObjectBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
+                       '_$sSo23MTLRenderCommandEncoderP5MetalE16setVertexBuffers_7offsets16attributeStrides5rangeySaySo9MTLBuffer_pSgG_SaySiGAKSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE16setVertexBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE17setObjectTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo23MTLRenderCommandEncoderP5MetalE17setVertexTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
@@ -68,6 +69,7 @@ exports:
                        '_$sSo23MTLRenderPassDescriptorC5MetalE18getSamplePositionsSaySo17MTLSamplePositionaGyF', 
                        '_$sSo23MTLRenderPassDescriptorC5MetalE18setSamplePositionsyySaySo17MTLSamplePositionaGF', 
                        '_$sSo23MTLVisibleFunctionTableP5MetalE12setFunctions_5rangeySaySo17MTLFunctionHandle_pSgG_SnySiGtF', 
+                       '_$sSo24MTLComputeCommandEncoderP5MetalE10setBuffers_7offsets16attributeStrides5rangeySaySo9MTLBuffer_pSgG_SaySiGAKSnySiGtF', 
                        '_$sSo24MTLComputeCommandEncoderP5MetalE10setBuffers_7offsets5rangeySaySo9MTLBuffer_pSgG_SaySiGSnySiGtF', 
                        '_$sSo24MTLComputeCommandEncoderP5MetalE11setTextures_5rangeySaySo10MTLTexture_pSgG_SnySiGtF', 
                        '_$sSo24MTLComputeCommandEncoderP5MetalE12useResources_5usageySaySo11MTLResource_pG_So0H5UsageVtF', 

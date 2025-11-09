@@ -7,9 +7,6 @@
 
 #import <Foundation/Foundation.h>
 #import <MapKit/MKFoundation.h>
-
-#if __has_include(<UIKit/UIView.h>) || !TARGET_OS_IPHONE
-
 #import <CoreLocation/CoreLocation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
@@ -44,5 +41,3 @@ NS_CLASS_AVAILABLE(10_9, 7_0) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 @end
 
 NS_ASSUME_NONNULL_END
-
-#endif

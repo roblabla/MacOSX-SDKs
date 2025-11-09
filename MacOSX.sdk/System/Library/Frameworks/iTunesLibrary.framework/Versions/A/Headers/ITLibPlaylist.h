@@ -118,6 +118,7 @@ API_UNAVAILABLE(ios)
 ITLIB_EXPORT @interface ITLibPlaylist : ITLibMediaEntity
 {
 	NSMutableArray * _items;
+	NSMutableArray * _playableItems;
 }
 
 /*! @abstract The name or title of this playlist. */

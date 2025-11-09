@@ -14,7 +14,7 @@ NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class UIBezierPath, UIColor;
 
-UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI_ACTOR
+UIKIT_EXTERN API_AVAILABLE(ios(13.0), tvos(17.0)) API_UNAVAILABLE(watchos) NS_SWIFT_UI_ACTOR
 @interface UIPreviewParameters : NSObject <NSCopying>
 
 /* The default parameters. Use these for most previews.
@@ -40,7 +40,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 
 /* Bezier path to be used to draw the preview's shadow. If nil, the visiblePath is used.
  */
-@property (nonatomic, copy, nullable) UIBezierPath *shadowPath API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, copy, nullable) UIBezierPath *shadowPath API_AVAILABLE(ios(14.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /* The background color that the preview draws behind the specified view.
  * Set this to `nil` to reset to the default value.

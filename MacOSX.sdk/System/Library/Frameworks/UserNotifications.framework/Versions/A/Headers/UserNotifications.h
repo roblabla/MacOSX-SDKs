@@ -15,9 +15,8 @@
 #import <UserNotifications/UNNotificationContent.h>
 #import <UserNotifications/UNNotificationRequest.h>
 #import <UserNotifications/UNNotificationResponse.h>
+#import <UserNotifications/UNNotificationServiceExtension.h>
 #import <UserNotifications/UNNotificationSettings.h>
 #import <UserNotifications/UNNotificationSound.h>
 #import <UserNotifications/UNNotificationTrigger.h>
 #import <UserNotifications/UNUserNotificationCenter.h>
-
-#import <UserNotifications/UNNotificationServiceExtension.h>

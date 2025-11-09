@@ -40,6 +40,8 @@ Classes:
   - Name: 'codecTypes'
     PropertyKind: Instance
     SwiftPrivate: true
+- Name: AVAssetVariantVideoLayoutAttributes
+  SwiftName: AVAssetVariantVideoAttributes.LayoutAttributes
 - Name: AVAssetVariantAudioAttributes
   SwiftName: AVAssetVariant.AudioAttributes
   Properties:
@@ -415,6 +417,11 @@ Classes:
   Properties:
   - Name: 'outputObscuredDueToInsufficientExternalProtection'
     SwiftName: isOutputObscuredDueToInsufficientExternalProtection
+- Name: AVSampleBufferVideoRenderer
+  Methods:
+  - Selector: 'flushWithRemovalOfDisplayedImage:completionHandler:'
+    SwiftName: 'flush(removingDisplayedImage:completionHandler:)'
+    MethodKind: Instance
 - Name: AVPlayerItem
   Methods:
   - Selector: 'selectMediaOption:inMediaSelectionGroup:'
@@ -906,6 +913,8 @@ Typedefs:
   SwiftName: AVCaptionConversionAdjustment.AdjustmentType
 - Name: AVCaptionConversionWarningType
   SwiftName: AVCaptionConversionWarning.WarningType
+- Name: AVVideoCompositionPerFrameHDRDisplayMetadataPolicy
+  SwiftName: AVVideoComposition.PerFrameHDRDisplayMetadataPolicy
 
 Globals:
 # AVCaptureDevice constants
@@ -1280,6 +1289,14 @@ Globals:
 - Name: AVSampleBufferRenderSynchronizerRateDidChangeNotification
   SwiftName: AVSampleBufferRenderSynchronizer.rateDidChangeNotification
 
+# AVSampleBufferVideoRenderer
+- Name: AVSampleBufferVideoRendererDidFailToDecodeNotification
+  SwiftName: AVSampleBufferVideoRenderer.didFailToDecodeNotification
+- Name: AVSampleBufferVideoRendererDidFailToDecodeNotificationErrorKey
+  SwiftName: AVSampleBufferVideoRenderer.didFailToDecodeNotificationErrorKey
+- Name: AVSampleBufferVideoRendererRequiresFlushToResumeDecodingDidChangeNotification
+  SwiftName: AVSampleBufferVideoRenderer.requiresFlushToResumeDecodingDidChangeNotification
+
 # AVPlayer
 - Name: AVPlayerEligibleForHDRPlaybackDidChangeNotification
   SwiftName: AVPlayer.eligibleForHDRPlaybackDidChangeNotification
@@ -1299,12 +1316,24 @@ Globals:
   SwiftName: AVPlayerItem.timeJumpedNotification
 - Name: AVPlayerItemTimeJumpedOriginatingParticipantKey
   SwiftName: AVPlayerItem.timeJumpedOriginatingParticipantKey
+- Name: AVPlayerItemPlaybackStalledNotification
+  SwiftName: AVPlayerItem.playbackStalledNotification
+- Name: AVPlayerItemNewErrorLogEntryNotification
+  SwiftName: AVPlayerItem.newErrorLogEntryNotification
+- Name: AVPlayerItemNewAccessLogEntryNotification
+  SwiftName: AVPlayerItem.newAccessLogEntryNotification
+- Name: AVPlayerItemDidPlayToEndTimeNotification
+  SwiftName: AVPlayerItem.didPlayToEndTimeNotification
+- Name: AVPlayerItemFailedToPlayToEndTimeNotification
+  SwiftName: AVPlayerItem.failedToPlayToEndTimeNotification
   
 # AVPlayerInterstitialEventController
 - Name: AVPlayerInterstitialEventMonitorEventsDidChangeNotification
   SwiftName: AVPlayerInterstitialEventMonitor.eventsDidChangeNotification
 - Name: AVPlayerInterstitialEventMonitorCurrentEventDidChangeNotification
   SwiftName: AVPlayerInterstitialEventMonitor.currentEventDidChangeNotification
+- Name: AVPlayerInterstitialEventMonitorAssetListResponseStatusDidChangeNotification
+  SwiftName: AVPlayerInterstitialEventMonitor.assetListResponseStatusDidChangeNotification
 
 # AVPlaybackCoordinator
 - Name: AVPlaybackCoordinatorOtherParticipantsDidChangeNotification

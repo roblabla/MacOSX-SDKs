@@ -19,7 +19,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @interface UIWindowScene : UIScene
 
 #pragma mark Geometry
-@property (nonatomic, readonly) UIScreen *screen;
+@property (nonatomic, readonly) UIScreen *screen API_UNAVAILABLE(visionos);
 @property (nonatomic, readonly) UIInterfaceOrientation interfaceOrientation API_UNAVAILABLE(tvos);
 @property (nonatomic, readonly) id<UICoordinateSpace> coordinateSpace;
 @property (nonatomic, readonly) UITraitCollection *traitCollection;
@@ -52,6 +52,11 @@ UIKIT_EXTERN API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @property (nonatomic, readonly, getter=isFullScreen) BOOL fullScreen API_AVAILABLE(macCatalyst(16.0));
 @end
 
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+@interface UIWindowScene () <UITraitEnvironment, UITraitChangeObservable>
+@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides;
+@end
+
 #pragma mark - UIWindowSceneDelegate
 API_AVAILABLE(ios(13.0)) NS_SWIFT_UI_ACTOR
 @protocol UIWindowSceneDelegate <UISceneDelegate>
@@ -80,7 +85,10 @@ UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleApplication API_AV
 
 // A session role which defines an interface for a non-interactive external display
 UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleExternalDisplayNonInteractive API_AVAILABLE(ios(16.0));
-UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleExternalDisplay API_DEPRECATED_WITH_REPLACEMENT("UIWindowSceneSessionRoleExternalDisplayNonInteractive", ios(13.0, 16.0));
+UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleExternalDisplay API_DEPRECATED_WITH_REPLACEMENT("UIWindowSceneSessionRoleExternalDisplayNonInteractive", ios(13.0, 16.0), visionos(1.0, 1.0));
+
+// A session role which defines a 3D volumetric application
+UIKIT_EXTERN UISceneSessionRole const UIWindowSceneSessionRoleVolumetricApplication API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(ios, tvos, macos, watchos);
 
 #pragma mark - UIWindowSceneDismissalAnimation
 typedef NS_ENUM(NSInteger, UIWindowSceneDismissalAnimation) {

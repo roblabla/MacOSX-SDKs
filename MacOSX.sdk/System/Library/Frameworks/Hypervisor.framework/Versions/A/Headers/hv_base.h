@@ -1,16 +1,16 @@
-/*
- *  hv_base.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2019-2022 Apple Inc. All rights reserved.
- */
+//
+//  hv_base.h
+//  Hypervisor
+//
+//  Copyright © 2019-2023 Apple Inc. All rights reserved.
+//
 
 #pragma once
 
-#include <stdbool.h>
-#include <stdint.h>
 #include <os/availability.h>
 #include <os/base.h>
+#include <stdbool.h>
+#include <stdint.h>
 #include <sys/cdefs.h>
 #include <sys/types.h>
 

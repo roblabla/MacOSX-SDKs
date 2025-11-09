@@ -1,9 +1,9 @@
-//
-//  GKMatchmakerViewController.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
+
+#import <TargetConditionals.h>
+#import <Foundation/Foundation.h>
+
+#if !TARGET_OS_WATCH
 
 @class GKMatchRequest, GKInvite, GKMatch, GKPlayer;
 
@@ -19,7 +19,6 @@ typedef NS_ENUM(NSInteger, GKMatchmakingMode) {
 /// View controller to invite friends, respond to invites, and perform automatching. Present modally from the top view controller.
 #if TARGET_OS_IPHONE
 
-#import <Foundation/Foundation.h>
 #import <UIKit/UINavigationController.h> // UINavigationController
 
 NS_ASSUME_NONNULL_BEGIN
@@ -56,16 +55,16 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 - (void)setHostedPlayer:(GKPlayer *)player didConnect:(BOOL)connected NS_AVAILABLE(10_10, 8_0);
 
 /// deprecated, set the message on the match request instead
-@property(nonatomic, nullable, copy) NSString *defaultInvitationMessage NS_DEPRECATED(10_8, 10_10, 5_0, 7_0) ; // default message to use when inviting friends. Can be edited by the user.
+@property(nonatomic, nullable, copy) NSString *defaultInvitationMessage NS_DEPRECATED(10_8, 10_10, 5_0, 7_0) __TVOS_UNAVAILABLE; // default message to use when inviting friends. Can be edited by the user.
 @end
 
 @interface GKMatchmakerViewController (Obsoleted)
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)setHostedPlayer:(NSString *)playerID connected:(BOOL)connected NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "This is never invoked and its implementation does nothing, use setHostedPlayer:didConnect:") ;
+- (void)setHostedPlayer:(NSString *)playerID connected:(BOOL)connected API_DEPRECATED_WITH_REPLACEMENT("-setHostedPlayer:didConnect:", ios(5.0,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 
 #if TARGET_OS_IPHONE
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)setHostedPlayerReady:(NSString *)playerID NS_DEPRECATED(NA, NA, 4_1, 5_0, "This is never invoked and its implementation does nothing, use setHostedPlayer:connected: instead") ;
+- (void)setHostedPlayerReady:(NSString *)playerID NS_DEPRECATED(NA, NA, 4_1, 5_0, "This is never invoked and its implementation does nothing, use setHostedPlayer:connected: instead") __TVOS_UNAVAILABLE;
 #endif
 @end
 
@@ -87,8 +86,11 @@ NS_CLASS_AVAILABLE(10_8, 4_1)
 /// An invited player has accepted a hosted invite.  Apps should connect through the hosting server and then update the player's connected state (using setConnected:forHostedPlayer:)
 - (void)matchmakerViewController:(GKMatchmakerViewController *)viewController hostedPlayerDidAccept:(GKPlayer *)player NS_AVAILABLE(10_10, 8_0);
 
+
 /*** These protocol methods are obsoleted. They will never be invoked and their implementation does nothing***/
-- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindPlayers:(NSArray<NSString *> *)playerIDs NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use matchmakerViewController:didFindHostedPlayers:") ;
-- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didReceiveAcceptFromHostedPlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "This is never invoked and its implementation does nothing, use matchmakerViewController:hostedPlayerDidAccept:") ;
+- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didFindPlayers:(NSArray<NSString *> *)playerIDs API_DEPRECATED_WITH_REPLACEMENT("-matchmakerViewController:didFindHostedPlayers:", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
+- (void)matchmakerViewController:(GKMatchmakerViewController *)viewController didReceiveAcceptFromHostedPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-matchmakerViewController:hostedPlayerDidAccept:", ios(5.0,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 @end
 NS_ASSUME_NONNULL_END
+
+#endif

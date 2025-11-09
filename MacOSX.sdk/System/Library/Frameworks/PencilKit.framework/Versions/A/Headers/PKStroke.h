@@ -2,8 +2,10 @@
 //  PKStroke.h
 //  PencilKit
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2023 Apple. All rights reserved.
 //
+
+#import <PencilKit/PKContentVersion.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -72,6 +74,9 @@ API_AVAILABLE(ios(14.0), macos(11.0))
 
 /// The random seed for drawing strokes that use randomized effects.
 @property (nonatomic, readonly) uint32_t randomSeed API_AVAILABLE(ios(16.0), macos(13.0));
+
+/// The PencilKit version required to use this stroke.
+@property (nonatomic, readonly) PKContentVersion requiredContentVersion API_AVAILABLE(ios(17.0), macos(14.0));
 
 @end
 

@@ -161,7 +161,7 @@ JS_EXPORT void JSGlobalContextSetName(JSGlobalContextRef ctx, JSStringRef name) 
 @param ctx The JSGlobalContext that you want to change the inspectability of.
 @result Whether the context is inspectable in Web Inspector.
 */
-JS_EXPORT bool JSGlobalContextIsInspectable(JSGlobalContextRef ctx) API_AVAILABLE(macos(13.3), ios(NA));
+JS_EXPORT bool JSGlobalContextIsInspectable(JSGlobalContextRef ctx) API_AVAILABLE(macos(13.3), ios(16.4));
 
 /*!
 @function
@@ -169,7 +169,7 @@ JS_EXPORT bool JSGlobalContextIsInspectable(JSGlobalContextRef ctx) API_AVAILABL
 @param ctx The JSGlobalContext that you want to change the inspectability of.
 @param inspectable YES to allow Web Inspector to connect to the context, otherwise NO.
 */
-JS_EXPORT void JSGlobalContextSetInspectable(JSGlobalContextRef ctx, bool inspectable) API_AVAILABLE(macos(13.3), ios(NA));
+JS_EXPORT void JSGlobalContextSetInspectable(JSGlobalContextRef ctx, bool inspectable) API_AVAILABLE(macos(13.3), ios(16.4));
 
 #ifdef __cplusplus
 }

@@ -115,7 +115,11 @@ API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
  @abstract A relevance provider to indicate relevance at a specific location.
  @note Your app needs Always or When in Use location authorization to use this relevance provider.
  */
+#if (defined(TARGET_OS_VISION) && TARGET_OS_VISION)
+API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos) API_UNAVAILABLE(visionos)
+#else
 API_AVAILABLE(ios(12.0), watchos(5.0)) API_UNAVAILABLE(macos, tvos)
+#endif
 @interface INLocationRelevanceProvider : INRelevanceProvider
 
 /*!

@@ -34,7 +34,6 @@
 #include <kern/assert.h>
 
 
-
 typedef struct __lck_spin_t__           lck_spin_t;
 typedef struct __lck_mtx_t__            lck_mtx_t;
 typedef struct __lck_mtx_ext_t__        lck_mtx_ext_t;

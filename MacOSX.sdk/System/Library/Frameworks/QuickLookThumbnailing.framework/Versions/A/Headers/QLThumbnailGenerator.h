@@ -13,7 +13,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos,tvos)
+API_AVAILABLE(ios(13.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos)
 QLT_EXPORT @interface QLThumbnailGenerator : NSObject
 
 @property (class, readonly) QLThumbnailGenerator *sharedGenerator NS_SWIFT_NAME(shared);

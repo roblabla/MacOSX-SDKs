@@ -1228,6 +1228,15 @@ UT_EXPORT UTType *const UTTypeEPUB NS_REFINED_FOR_SWIFT;
 */
 UT_EXPORT UTType *const UTTypeLog NS_REFINED_FOR_SWIFT;
 
+/**
+    \brief An Apple Haptics Audio Pattern file.
+
+    UTI: com.apple.haptics.ahap
+*/
+UT_EXPORT UTType *const UTTypeAHAP NS_REFINED_FOR_SWIFT
+API_AVAILABLE(macos(14.0), macCatalyst(17.0), ios(17.0), watchos(10.0), tvos(17.0));
+
+
 UT_AVAILABLE_END
 NS_ASSUME_NONNULL_END
 __END_DECLS

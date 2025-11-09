@@ -1,13 +1,10 @@
-//
-//  GKGameSessionError.h
-//  Game Center
-//
-//  Copyright 2016-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
 
-extern NSString * __nonnull GKGameSessionErrorDomain API_DEPRECATED("GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.", ios(10.0, 12.0), tvos(10.0, 12.0), macosx(10.12, 10.14)) API_UNAVAILABLE(watchos);
+#import <GameKit/GKDefines.h>
+
+GK_EXTERN NSString * __nonnull GKGameSessionErrorDomain API_DEPRECATED("GKGameSession is deprecated, use real-time and turn-based matchmaking APIs instead.", ios(10.0, 12.0), tvos(10.0, 12.0), macosx(10.12, 10.14)) API_UNAVAILABLE(watchos);
 
 typedef  NS_ENUM(NSInteger, GKGameSessionErrorCode) {
     GKGameSessionErrorUnknown = 1,

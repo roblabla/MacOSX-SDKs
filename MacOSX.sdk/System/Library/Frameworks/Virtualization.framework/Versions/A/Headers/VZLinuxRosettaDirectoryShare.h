@@ -2,12 +2,13 @@
 //  VZLinuxRosettaDirectoryShare.h
 //  Virtualization
 //
-//  Copyright © 2022 Apple Inc. All rights reserved.
+//  Copyright © 2022-2023 Apple Inc. All rights reserved.
 //
 
 #ifdef __arm64__
 
 #import <Virtualization/VZDirectoryShare.h>
+#import <Virtualization/VZLinuxRosettaCachingOptions.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -51,6 +52,11 @@ VZ_EXPORT API_AVAILABLE(macos(13.0))
  @see +[VZLinuxRosettaDirectoryShare availability]
  */
 + (void)installRosettaWithCompletionHandler:(void(^)(NSError * _Nullable))completionHandler;
+
+/*!
+ @abstract Enable translation caching and configure the socket communication type for Rosetta.
+ */
+@property (nullable, strong) VZLinuxRosettaCachingOptions *options NS_REFINED_FOR_SWIFT API_AVAILABLE(macos(14.0));
 
 /*!
  @abstract Check the availability of Rosetta support for the directory share.

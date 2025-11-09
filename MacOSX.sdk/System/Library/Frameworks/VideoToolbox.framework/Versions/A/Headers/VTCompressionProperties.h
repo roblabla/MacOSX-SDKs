@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
 	
-	Copyright 2007-2021 Apple Inc. All rights reserved.
+	Copyright 2007-2022 Apple Inc. All rights reserved.
 	
 	Standard Video Toolbox compression properties.
 */
@@ -43,10 +43,10 @@ CM_ASSUME_NONNULL_BEGIN
 /*
 	Recommendations for configuring VTCompressionSessions
 
-	These are recommendations for configuring VTCompressionSessions for some common scenarios.  
-	These are starting points; you may find that the details of your application necessitate further adjustments.
+	These are recommendations for configuring VTCompressionSessions for some common scenarios.
+	These are starting points. The requirements of the application may necessitate further adjustments.
 
-	Video-conferencing, live capture, and live broadcast scenarios:
+	Live capture and live broadcast scenarios:
 		• kVTCompressionPropertyKey_RealTime: kCFBooleanTrue
 		• kVTCompressionPropertyKey_ExpectedFrameRate: set to real-time frame rate if possible
 
@@ -58,9 +58,21 @@ CM_ASSUME_NONNULL_BEGIN
 		• kVTCompressionPropertyKey_RealTime: kCFBooleanFalse
 		• kVTCompressionPropertyKey_MaximizePowerEfficiency: kCFBooleanTrue
 
-	Ultra-low-latency capture / conferencing / cloud gaming (cases where every millisecond counts):
+	Ultra-low-latency conferencing and cloud gaming (cases where every millisecond counts):
+		• kVTVideoEncoderSpecification_EnableLowLatencyRateControl: kCFBooleanTrue
 		• kVTCompressionPropertyKey_RealTime: kCFBooleanTrue
+		• kVTCompressionPropertyKey_ExpectedFrameRate: set to real-time frame rate if possible
 		• kVTCompressionPropertyKey_PrioritizeEncodingSpeedOverQuality: kCFBooleanTrue
+
+	Optionally, kVTCompressionPropertyKey_AllowTemporalCompression, kVTCompressionPropertyKey_AllowFrameReordering,
+	    kVTCompressionPropertyKey_MaxKeyFrameInterval, and kVTCompressionPropertyKey_MaxKeyFrameIntervalDuration
+	    may be used to configure frame dependencies in the video stream.
+
+	kVTCompressionPropertyKey_AverageBitRate, kVTCompressionPropertyKey_DataRateLimits, kVTCompressionPropertyKey_ConstantBitRate may be used to configure the video data rate.
+
+		• kVTCompressionPropertyKey_AverageBitRate specifies the desired long term average bit rate. It is a soft limit, so the encoder may overshoot or undershoot and the average bit rate of the output video may be over or under the target.
+		• kVTCompressionPropertyKey_DataRateLimits specifies a hard data rate cap for a given time window. The encoder will not overshoot. kVTCompressionPropertyKey_AverageBitRate and kVTCompressionPropertyKey_DataRateLimits may be used together to specify an overall target bit rate while also establishing hard limits over a smaller window.
+		• kVTCompressionPropertyKey_ConstantBitRate is intended for legacy content distribution networks which require constant bitrate, and is not intended for general streaming scenarios.
 */
 
 #pragma mark Buffers
@@ -214,6 +226,23 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_AverageBitRate API_AVAILAB
 		Note that data rate settings only have an effect when timing
 		information is provided for source frames, and that some codecs do
 		not support limiting to specified data rates.
+
+		When both kVTCompressionPropertyKey_DataRateLimits and
+		kVTCompressionPropertyKey_AverageBitRate are supported,
+		it is recommended that kVTCompressionPropertyKey_AverageBitRate
+		be set when kVTCompressionPropertyKey_DataRateLimits is set.
+		If kVTCompressionPropertyKey_AverageBitRate is not specified,
+		an overall average bit rate target will be selected at a safe margin below
+		the kVTCompressionPropertyKey_DataRateLimits target, so that regional
+		overshoot in the encoding will not exceed the
+		kVTCompressionPropertyKey_DataRateLimits.
+		The overall average bitrate target generated from
+		kVTCompressionPropertyKey_DataRateLimits in the absence of
+		kVTCompressionPropertyKey_AverageBitRate may not be ideal for all
+		scenarios.
+		Encoding is more likely to undershoot a requested
+		kVTCompressionPropertyKey_AverageBitRate if the specified target is too
+		close to a hard limit specified by kVTCompressionPropertyKey_DataRateLimits.
 */
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_DataRateLimits API_AVAILABLE(macosx(10.8), ios(8.0), tvos(10.2)); // Read/write, CFArray[CFNumber], [bytes, seconds, bytes, seconds...], Optional
 
@@ -961,6 +990,54 @@ VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MultiPassStorage API_AVAIL
 VT_EXPORT const CFStringRef kVTCompressionPropertyKey_EncoderID API_AVAILABLE(macosx(10.13), ios(11.0), tvos(11.0)); // CFStringRef
 
 /*!
+	@constant	kVTCompressionPropertyKey_RecommendedParallelizationLimit
+	@abstract
+		If supported by the underlying video encoder, returns the recommended number of VTCompressionSessions to instantiate in a parallel encoding configuration.
+	@discussion
+		Parallel encoding VTCompressionSessions require the use of the properties kVTCompressionPropertyKey_MoreFramesBeforeStart, kVTCompressionPropertyKey_MoreFramesAfterEnd, and kVTCompressionPropertyKey_SourceFrameCount.
+		e.g. If the property returns 4, a setup for 4 VTCompressionSessions on a 400 frame movie might look like:
+			compressionSession1
+				kVTCompressionPropertyKey_MoreFramesBeforeStart = false
+				kVTCompressionPropertyKey_MoreFramesAfterEnd = true
+				kVTCompressionPropertyKey_SourceFrameCount = 100
+			compressionSession2
+				kVTCompressionPropertyKey_MoreFramesBeforeStart = true
+				kVTCompressionPropertyKey_MoreFramesAfterEnd = true
+				kVTCompressionPropertyKey_SourceFrameCount = 100
+			compressionSession3
+				kVTCompressionPropertyKey_MoreFramesBeforeStart = true
+				kVTCompressionPropertyKey_MoreFramesAfterEnd = true
+				kVTCompressionPropertyKey_SourceFrameCount = 100
+			compressionSession4
+				kVTCompressionPropertyKey_MoreFramesBeforeStart = true
+				kVTCompressionPropertyKey_MoreFramesAfterEnd = false
+				kVTCompressionPropertyKey_SourceFrameCount = 100
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizationLimit API_AVAILABLE(macosx(14.0)) API_UNAVAILABLE(ios, tvos, watchos); // Read-only, CFNumber<int>
+
+/*!
+	@constant	kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount
+	@abstract
+		If supported by the underlying video encoder, returns the recommended minimum number of video frames for a given subdivision in a parallel encoding configuration.
+	@discussion
+		For best results, ensure that the total number of frames of a parallelized subdivision is greater than or equal to this returned value.
+		See also kVTCompressionPropertyKey_RecommendedParallelizationLimit
+		See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount API_AVAILABLE(macosx(14.0)) API_UNAVAILABLE(ios, tvos, watchos); // Read-only, CFNumber<uint64_t>
+
+/*!
+	@constant	kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration
+	@abstract
+		If supported by the underlying video encoder, returns the recommended minimum duration for a given subdivision in a parallel encoding configuration.
+	@discussion
+		For best results, ensure that the total duration of a parallelized subdivision is greater than or equal to this returned value.
+		See also kVTCompressionPropertyKey_RecommendedParallelizationLimit
+		See also kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumFrameCount
+*/
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_RecommendedParallelizedSubdivisionMinimumDuration API_AVAILABLE(macosx(14.0)) API_UNAVAILABLE(ios, tvos, watchos); // Read-only, CMTime as CFDictionary
+
+/*!
 	@constant	kVTCompressionPropertyKey_PreserveDynamicHDRMetadata
 	@abstract
 		Controls whether or not to preserve any dynamic HDR metadata on the input pixel buffer
@@ -1080,6 +1157,72 @@ VT_EXPORT const CFStringRef kVTEncodeFrameOptionKey_ForceLTRRefresh API_AVAILABL
 */
 VT_EXPORT const CFStringRef kVTSampleAttachmentKey_RequireLTRAcknowledgementToken API_AVAILABLE(macosx(12.0), ios(15.0), tvos(15.0)); // CFNumberRef, Optional
 
+#pragma mark Multi-image compression
+
+/*!
+    @constant	kVTCompressionPropertyKey_MVHEVCVideoLayerIDs
+    @abstract
+        Requests multi-image encoding; advises encoder to expect CMTaggedBufferGroups with specific CMTags referencing these MV-HEVC VideoLayerIDs.
+    @discussion
+        MV-HEVC specific.
+        The property value is a CFArray containing VideoLayerIDs as CFNumbers.
+        The property is NULL by default.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCVideoLayerIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
+
+/*!
+    @constant	kVTCompressionPropertyKey_MVHEVCViewIDs
+    @abstract
+        Specifies the ViewIDs corresponding to the VideoLayerIDs provided via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs.
+    @discussion
+        MV-HEVC specific.
+        The property value is a CFArray containing ViewIDs as CFNumbers.
+        The entries in this array should be in the same order and have the same count as the value set via kVTCompressionPropertyKey_MVHEVCVideoLayerIDs.
+        The property is NULL by default.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCViewIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray(CFNumber), Optional
+
+/*!
+    @constant	kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs
+    @abstract
+        Specifies which of the ViewIDs provided via kVTCompressionPropertyKey_MVHEVCViewIDs is the "left view id" and which is the "right view id".
+    @discussion
+        MV-HEVC specific.
+        These ViewIDs will be incorporated into the 3D Reference Displays Info SEI message.
+        The property value is a CFArray containing two ViewIDs as CFNumbers with the first correspponding to the left eye and the second corresponding to the right eye.
+        The property is NULL by default.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_MVHEVCLeftAndRightViewIDs API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos); // Read/write, CFArray[CFNumber(left view ID), CFNumber(right view ID)], Optional
+
+#pragma mark VideoExtendedUsage signaling
+
+/*!
+    @constant	kVTCompressionPropertyKey_HeroEye
+    @abstract
+        Specifies the value of kCMFormatDescriptionExtension_HeroEye.
+    @discussion
+        The value will be set on the format description for output samples and may affect the decoded frame presentation.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HeroEye API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);	// CFString, see kCMFormatDescriptionExtension_HeroEye
+
+/*!
+	@constant	kVTCompressionPropertyKey_StereoCameraBaseline
+    @abstract
+        Specifies the value of kCMFormatDescriptionExtension_StereoCameraBaseline.
+    @discussion
+        The value will be set on the format description for output samples and may affect the decoded frame presentation.
+ */
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_StereoCameraBaseline API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);	// CFNumber(uint32), see kCMFormatDescriptionExtension_StereoCameraBaseline
+
+/*!
+    @constant	kVTCompressionPropertyKey_HorizontalDisparityAdjustment
+    @abstract
+        Specifies the value of kCMFormatDescriptionExtension_HorizontalDisparityAdjustment.
+    @discussion
+        The value will be set on the format description for output samples and may affect the decoded frame presentation.
+ */
+
+VT_EXPORT const CFStringRef kVTCompressionPropertyKey_HorizontalDisparityAdjustment API_AVAILABLE(macos(14.0), ios(17.0)) API_UNAVAILABLE(tvos, watchos);	// CFNumber(int32), see kCMFormatDescriptionExtension_HorizontalDisparityAdjustment
 
 	
 CM_ASSUME_NONNULL_END

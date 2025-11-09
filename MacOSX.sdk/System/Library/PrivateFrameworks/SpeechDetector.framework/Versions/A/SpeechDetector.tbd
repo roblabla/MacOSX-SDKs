@@ -8,5 +8,5 @@ exports:
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _SDLogContextFacilityLocalSRBridge, _SDLogInitIfNeeded, _SDLoggingSubsystem, 
                        _kSDLoggingContextFramework ]
-    objc-classes:    [ OSDAnalyzer, OSDFeatures ]
+    objc-classes:    [ LipMovementData, OSDAnalyzer, OSDFeatures, SDLipMovementVAD ]
 ...

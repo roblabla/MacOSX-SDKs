@@ -10,8 +10,8 @@ exports:
                        __IMAssistantCoreGeneralSignpostLogHandle, __IMAssistantCoreSearchForMessageSignpostLogHandle, 
                        __IMAssistantCoreSendMessageSignpostLogHandle ]
     objc-classes:    [ IMAssistantAudioPlayer, IMAssistantChatParticipant, IMAssistantCommSafetyManager, 
-                       IMAssistantHandleFromContact, IMAssistantINMessageConverter, 
-                       IMAssistantIntentHandler, IMAssistantMessageAttributeOptions, 
+                       IMAssistantEditMessageHandler, IMAssistantHandleFromContact, 
+                       IMAssistantINMessageConverter, IMAssistantIntentHandler, IMAssistantMessageAttributeOptions, 
                        IMAssistantMessageHandler, IMAssistantMessagePlayAudioHandler, 
                        IMAssistantMessagePlayMessageSoundHandler, IMAssistantMessageQueryHandler, 
                        IMAssistantMessageReadAttributeSanitizer, IMAssistantMessageSearchHandler, 

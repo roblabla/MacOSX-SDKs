@@ -32,6 +32,8 @@
 #include <sys/cdefs.h>
 #include <sys/constrained_ctypes.h>
 #include <sys/types.h>
+#include <sys/_types/_mount_t.h>
+#include <sys/_types/_vnode_t.h>
 #include <stdint.h>
 
 #ifdef BSD_BUILD
@@ -59,12 +61,7 @@ typedef struct ucred * ucred_t;
 __CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct ucred, ucred);
 #endif
 
-struct mount;
-typedef struct mount * mount_t;
 __CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct mount, mount);
-
-struct vnode;
-typedef struct vnode * vnode_t;
 __CCT_DECLARE_CONSTRAINED_PTR_TYPES(struct vnode, vnode);
 
 struct proc;

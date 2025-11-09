@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2012-2021 Apple Inc. All rights reserved.
+	Copyright 2012-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -32,6 +32,8 @@ AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC1920x1080WithA
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160				API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC3840x2160WithAlpha	API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
 AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC7680x4320				API_AVAILABLE(macos(12.1)) API_UNAVAILABLE(ios, tvos, watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC960x960				API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetMVHEVC1440x1440			API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @class AVOutputSettingsAssistantInternal;
 
@@ -44,6 +46,7 @@ AVF_EXPORT AVOutputSettingsPreset const AVOutputSettingsPresetHEVC7680x4320				A
  
 		The recommendations made by an instance get better as you tell it more about the format of your source data.  For example, if you set the sourceVideoFormat property, the recommendation made by the videoSettings property will ensure that your video frames are not scaled up from a smaller size.
  */
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0)) API_UNAVAILABLE(watchos)
 @interface AVOutputSettingsAssistant : NSObject
 {

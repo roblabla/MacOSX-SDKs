@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/Frameworks/WebKit.framework/Versions/A/Frameworks/WebKitLegacy.framework/Versions/A/WebKitLegacy'
-current-version: 615.1.26
+current-version: 616.1.27
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DOMEventException, _DOMException, _DOMRangeException, _DOMXPathException, 
@@ -95,7 +95,9 @@ exports:
                        WebIconDatabase, WebInspector, WebJavaScriptTextInputPanel, 
                        WebKitStatistics, WebNavigationData, WebNotification, WebPanelAuthenticationHandler, 
                        WebPluginDatabase, WebPolicyDecisionListener, WebPreferences, 
-                       WebResource, WebScriptCallFrame, WebScriptWorld, WebSecurityOrigin, 
-                       WebStorageManager, WebStringTruncator, WebTextIterator, WebURLsWithTitles, 
-                       WebUserContentURLPattern, WebView ]
+                       WebResource, WebScriptCallFrame, WebScriptObject, WebScriptWorld, 
+                       WebSecurityOrigin, WebStorageManager, WebStringTruncator, 
+                       WebTextIterator, WebURLsWithTitles, WebUndefined, WebUserContentURLPattern, 
+                       WebView ]
+    objc-ivars:      [ WebScriptObject._private ]
 ...

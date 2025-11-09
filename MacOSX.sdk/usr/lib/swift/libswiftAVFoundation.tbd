@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/swift/libswiftAVFoundation.dylib'
-current-version: 2150.23.1
+current-version: 2180.79.1
 swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
@@ -230,6 +230,7 @@ exports:
                        '_$sSo37AVAsynchronousVideoCompositionRequestC12AVFoundationE24sourceSampleDataTrackIDsSays5Int32VGvpMV', 
                        '_$sSo46AVAssetVariantAudioRenditionSpecificAttributesC12AVFoundationE12channelCountSiSgvg', 
                        '_$sSo46AVAssetVariantAudioRenditionSpecificAttributesC12AVFoundationE12channelCountSiSgvpMV', 
+                       '_$sSo47AVAssetWriterInputTaggedPixelBufferGroupAdaptorC12AVFoundationE06appendD7Buffers_20withPresentationTimeSbSay9CoreMedia08CMTaggedF0VG_So6CMTimeatF', 
                        '_$sSo6CMTimea12AVFoundationE19_bridgeToObjectiveCSo7NSValueCyF', 
                        '_$sSo6CMTimea12AVFoundationE26_forceBridgeFromObjectiveC_6resultySo7NSValueC_ABSgztFZ', 
                        '_$sSo6CMTimea12AVFoundationE34_conditionallyBridgeFromObjectiveC_6resultSbSo7NSValueC_ABSgztFZ', 

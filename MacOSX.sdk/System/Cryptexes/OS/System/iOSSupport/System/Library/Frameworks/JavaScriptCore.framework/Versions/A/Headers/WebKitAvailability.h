@@ -31,21 +31,6 @@
 #include <AvailabilityMacros.h>
 #include <CoreFoundation/CoreFoundation.h>
 
-#if defined(BUILDING_GTK__) || defined(BUILDING_JSCONLY__)
-#undef API_AVAILABLE
-#define API_AVAILABLE(...)
-
-#undef API_DEPRECATED
-#define API_DEPRECATED(...)
-
-#undef API_DEPRECATED_WITH_REPLACEMENT
-#define API_DEPRECATED_WITH_REPLACEMENT(...)
-#endif
-
-#else
-#define API_AVAILABLE(...)
-#define API_DEPRECATED(...)
-#define API_DEPRECATED_WITH_REPLACEMENT(...)
 #endif
 
 #endif /* __WebKitAvailability__ */

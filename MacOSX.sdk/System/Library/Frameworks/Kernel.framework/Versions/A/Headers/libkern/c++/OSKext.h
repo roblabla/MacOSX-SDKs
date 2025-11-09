@@ -362,7 +362,8 @@ private:
 	virtual OSReturn unload(void);
 	static OSReturn queueKextNotification(
 		const char * notificationName,
-		OSString   * kextIdentifier);
+		OSString   * kextIdentifier,
+		OSData     * dextUniqueIdentifier);
 
 	static void recordIdentifierRequest(
 		OSString * kextIdentifier);
@@ -542,6 +543,9 @@ public:
 	bool isInFileset(void);
 private:
 	static OSKextLoadedKextSummary *summaryForAddress(const uintptr_t addr);
+	static kern_return_t summaryForAddressExt(
+		const void              * addr,
+		OSKextLoadedKextSummary * summary);
 	static void *kextForAddress(const void *addr);
 	static boolean_t summaryIsInBacktrace(
 		OSKextLoadedKextSummary * summary,
@@ -708,6 +712,7 @@ public:
 	virtual bool               isKernel(void);
 	virtual bool               isKernelComponent(void);
 	virtual bool               isExecutable(void);
+	virtual bool               isSpecialKernelBinary(void);
 	virtual bool               isLoadableInSafeBoot(void);
 	virtual bool               isPrelinked(void);
 	virtual bool               isLoaded(void);

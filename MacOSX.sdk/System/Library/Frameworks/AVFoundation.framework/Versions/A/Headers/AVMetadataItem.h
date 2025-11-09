@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2010-2022 Apple Inc. All rights reserved.
+	Copyright 2010-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -37,6 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVMetadataItemInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMetadataItem : NSObject <AVAsynchronousKeyValueLoading, NSCopying, NSMutableCopying>
 {
@@ -101,14 +102,14 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 
 - (AVKeyValueStatus)statusOfValueForKey:(NSString *)key error:(NSError * _Nullable * _Nullable)outError
 #if __swift__
-API_DEPRECATED("Use status(of:) instead", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use status(of:) instead", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 #endif
 
 - (void)loadValuesAsynchronouslyForKeys:(NSArray<NSString *> *)keys completionHandler:(nullable void (^)(void))handler
 #if __swift__
-API_DEPRECATED("Use load(_:) instead.  For non-deprecated properties that do not have an AVAsyncProperty equivalent, continue to query these properties synchronously", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use load(_:) instead.  For non-deprecated properties that do not have an AVAsyncProperty equivalent, continue to query these properties synchronously", macos(10.7, 13.0), ios(4.2, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
 API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 #endif
@@ -200,6 +201,7 @@ API_AVAILABLE(macos(10.7), ios(4.2), tvos(9.0), watchos(1.0));
 
 @class AVMutableMetadataItemInternal;
 
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
 @interface AVMutableMetadataItem : AVMetadataItem
 {
@@ -271,7 +273,7 @@ API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(1.0))
  		This method is intended for the creation of metadata items for optional display purposes, when there is no immediate need to load specific metadata values. For example, see the interface for navigation markers as consumed by AVPlayerViewController. It's not intended for the creation of metadata items with values that are required immediately, such as metadata items that are provided for impending serialization operations (e.g. via -[AVAssetExportSession setMetadata:] and other similar methods defined on AVAssetWriter and AVAssetWriterInput). 
 		When -loadValuesAsynchronouslyForKeys:completionHandler: is invoked on an AVMetadataItem created via +metadataItemWithPropertiesOfMetadataItem:valueLoadingHandler: and @"value" is among the keys for which loading is requested, the block you provide as the value loading handler will be executed on an arbitrary dispatch queue, off the main thread. The handler can perform I/O and other necessary operations to obtain the value. If loading of the value succeeds, provide the value by invoking -[AVMetadataItemValueRequest respondWithValue:]. If loading of the value fails, provide an instance of NSError that describes the failure by invoking -[AVMetadataItemValueRequest respondWithError:].
 */
-+ (AVMetadataItem *)metadataItemWithPropertiesOfMetadataItem:(AVMetadataItem *)metadataItem valueLoadingHandler:(void (^)(AVMetadataItemValueRequest *valueRequest))handler API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
++ (AVMetadataItem *)metadataItemWithPropertiesOfMetadataItem:(AVMetadataItem *)metadataItem valueLoadingHandler:(void (^ NS_SWIFT_SENDABLE)(AVMetadataItemValueRequest *valueRequest))handler API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0));
 
 @end
 
@@ -314,6 +316,12 @@ API_AVAILABLE(macos(10.11), ios(9.0), tvos(9.0), watchos(2.0))
 
 @class AVMetadataItemFilterInternal;
 
+/*!
+ @class         AVMetadataItemFilter
+ @abstract      Filters selected information from a metadata item.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.9), ios(7.0), tvos(9.0), watchos(1.0))
 @interface AVMetadataItemFilter : NSObject {
 @private

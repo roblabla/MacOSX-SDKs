@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/AvatarKit.framework/Versions/A/AvatarKit'
-current-version: 325.255
+current-version: 342
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AVTAnimojiThumbnailCameraKey, _AVTAnimojiThumbnailLargeSizeKey, 
@@ -24,18 +24,21 @@ exports:
                        _AVTLocalizedStickerName, _AVTMakeColorPresetLocalizableKey, 
                        _AVTMakePresetLocalizableKey, _AVTMakePresetPairLocalizableKey, 
                        _AVTMovieCodecKey, _AVTMovieGenerateAlphaMask, _AVTMovieRateKey, 
-                       _AVTMovieSizeKey, _AVTMovieTransparentBackground, _AVTPrereleaseStickerPackForStickerPack, 
-                       _AVTPresetCategoriesPairs, _AVTPresetCategoryFromString, _AVTPresetCategoryIsOnLeftInPair, 
+                       _AVTMovieSizeKey, _AVTMovieTransparentBackground, _AVTPrereleaseEditorMetadata, 
+                       _AVTPrereleaseStickerPackForStickerPack, _AVTPresetCategoriesPairs, 
+                       _AVTPresetCategoryFromString, _AVTPresetCategoryIsOnLeftInPair, 
                        _AVTPresetCategoryIsOnRightInPair, _AVTPresetCategoryIsPairable, 
-                       _AVTPresetCategoryPairToString, _AVTPresetCategoryToColorCategoryString, 
-                       _AVTPresetCategoryToString, _AVTRendererOptionInitiallyConfigureForARMode, 
+                       _AVTPresetCategoryIsPrerelease, _AVTPresetCategoryPairToString, 
+                       _AVTPresetCategoryToColorCategoryString, _AVTPresetCategoryToString, 
+                       _AVTRendererOptionEnableFaceTrackingLossFeedback, _AVTRendererOptionInitiallyConfigureForARMode, 
                        _AVTRenderingCacheFolderURL, _AVTSnapshotAnimatedKey, _AVTSnapshotAnimationDurationKey, 
                        _AVTSnapshotAntialiasedKey, _AVTSnapshotAsH264Key, _AVTSnapshotBackgroundColorKey, 
                        _AVTSnapshotDestinationPathKey, _AVTSnapshotFramingMode, _AVTSnapshotMemojiColorPresetSubstitutions, 
                        _AVTSnapshotMemojiPresetSubstitutions, _AVTSnapshotMemojiSecondaryColorPresetSubstitutions, 
-                       _AVTSnapshotMemojiThirdColorPresetSubstitutions, _AVTSnapshotPose, 
-                       _AVTSnapshotPoseAnimation, _AVTSnapshotRateKey, _AVTSnapshotShaderCollectorNeverCopyKey, 
-                       _AVTSnapshotSizeKey, _AVTSnapshotUpscaleKey, _AVTUpgradeColorPresetIdentifierIfNeeded, 
+                       _AVTSnapshotMemojiThirdColorPresetSubstitutions, _AVTSnapshotNoCopy, 
+                       _AVTSnapshotPose, _AVTSnapshotPoseAnimation, _AVTSnapshotRateKey, 
+                       _AVTSnapshotShaderCollectorNeverCopyKey, _AVTSnapshotSizeKey, 
+                       _AVTSnapshotUpscaleKey, _AVTUpgradeColorPresetIdentifierIfNeeded, 
                        _AVTUpgradePairedPresetCategoriesIfNeeded, _AVTUpgradePresetIdentifierIfNeeded, 
                        _AVTViewSnapshotDisableSuperSamplingFactorKey, _kAVTBodyPosePackMemojiEditor, 
                        _kAVTStickerPackAllStickers, _kAVTStickerPackDefault, _kAVTStickerPackDefaultPrerelease, 
@@ -49,5 +52,6 @@ exports:
                        AVTImageUtilities, AVTLockscreenCoordinator, AVTMemoji, AVTMemojiDescriptor, 
                        AVTPresentationConfiguration, AVTPreset, AVTRecordView, AVTRenderer, 
                        AVTSnapshotBuilder, AVTStickerConfiguration, AVTStickerGenerator, 
-                       AVTStickerGeneratorOptions, AVTVariantBatchSnapshotter, AVTView ]
+                       AVTStickerGeneratorOptions, AVTStickerGeneratorPosterOptions, 
+                       AVTVariantBatchSnapshotter, AVTView ]
 ...

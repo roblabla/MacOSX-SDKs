@@ -23,7 +23,7 @@ typedef NS_ENUM(NSInteger, UISegmentedControlStyle) {
     UISegmentedControlStyleBordered,  // large bordered
     UISegmentedControlStyleBar,       // small button/nav bar style. tintable
     UISegmentedControlStyleBezeled,   // DEPRECATED. Do not use this style.
-} API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(tvos);
+} API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 enum {
     UISegmentedControlNoSegment = -1   // segment index for no selected segment
@@ -60,7 +60,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 /// Returns the index of the segment associated with the given actionIdentifier, or NSNotFound if the identifier could not be found.
 - (NSInteger)segmentIndexForActionIdentifier:(UIActionIdentifier)actionIdentifier API_AVAILABLE(ios(14.0));
 
-@property(nonatomic) UISegmentedControlStyle segmentedControlStyle API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(tvos);
+@property(nonatomic) UISegmentedControlStyle segmentedControlStyle API_DEPRECATED("The segmentedControlStyle property no longer has any effect", ios(2.0, 7.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 @property(nonatomic,getter=isMomentary) BOOL momentary;             // if set, then we don't keep showing selected state after tracking ends. default is NO
 @property(nonatomic,readonly) NSUInteger numberOfSegments;
 

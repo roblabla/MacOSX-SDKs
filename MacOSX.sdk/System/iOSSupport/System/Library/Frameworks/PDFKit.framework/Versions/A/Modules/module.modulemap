@@ -1,4 +1,4 @@
-framework module PDFKit {
+framework module PDFKit [system] {
   umbrella header "PDFKit.h"
 
   export *

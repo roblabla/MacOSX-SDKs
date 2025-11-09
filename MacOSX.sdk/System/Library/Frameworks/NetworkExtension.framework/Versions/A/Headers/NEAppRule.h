@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  * Instances of this class are thread safe.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos)
 @interface NEAppRule : NSObject <NSSecureCoding,NSCopying>
 
 /*!
@@ -32,7 +32,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @discussion Initializes a newly-allocated NEAppRule object.
  * @param signingIdentifier The signing identifier of the executable that matches the rule.
  */
-- (instancetype)initWithSigningIdentifier:(NSString *)signingIdentifier API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+- (instancetype)initWithSigningIdentifier:(NSString *)signingIdentifier API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method initWithSigningIdentifier:designatedRequirement:
@@ -46,7 +46,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @property matchSigningIdentifier
  * @discussion A string containing a signing identifier. If the code signature of the executable being evaluated has a signing identifier equal to this string and all other conditions of the rule match, then the rule matches.
  */
-@property (readonly) NSString *matchSigningIdentifier API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (readonly) NSString *matchSigningIdentifier API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property matchDesignatedRequirement
@@ -58,13 +58,13 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @property matchPath
  * @discussion A string containing a file system path. If the file system path of the executable being evaluated is equal to this string and all other conditions of the rule match, then the rule matches. This property is optional.
  */
-@property (copy, nullable) NSString *matchPath API_AVAILABLE(macos(10.11), ios(9.3)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSString *matchPath API_AVAILABLE(macos(10.11), ios(9.3)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property matchDomains
  * @discussion An array of strings. This property is actually read-only. If the destination host of the network traffic being evaluated has a suffix equal to one of the strings in this array and all other conditions of the rule match, then the rule matches. This property is optional.
  */
-@property (copy, nullable) NSArray *matchDomains API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (copy, nullable) NSArray *matchDomains API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @property matchTools

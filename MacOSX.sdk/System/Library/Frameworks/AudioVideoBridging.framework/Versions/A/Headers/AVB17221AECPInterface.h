@@ -2,7 +2,7 @@
 //  AVB17221AECPInterface.h
 //  AudioVideoBridging
 //
-//  Copyright (c) 2011-2022 Apple Inc. All rights reserved.
+//  Copyright (c) 2011-2023 Apple Inc. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class AVB17221AECPMessage;
 @class AVB17221AECPInterface;
+@class AVB17221AECPVendorMessage;
 
 /*!
  @protocol	AVB17221AECPClient
@@ -132,6 +133,18 @@ API_AVAILABLE(macos(10.8)) API_UNAVAILABLE(ios, tvos)
 	@discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread. 
  */
 - (BOOL)sendResponse:(AVB17221AECPMessage *)message toMACAddress:(AVBMACAddress *)destMAC error:(NSError **)error;
+
+/*!
+	@method		sendVendorUniqueCommand:toMACAddress:expectResponseWithinTimeout:completionHandler:
+	@abstract	Send an AECP vendor unique command message expected to receive a matching response.
+	@param		message	An instance of AVB17221AECPVendorMessage which contains the command message.
+	@param		destMAC	The MAC address of the end station to send the message to.
+	@param		timeout	The number of milliseconds before the command times out.
+	@param		completionHandler	A block containing code to execute when the command has been sent or timed out.
+	@result		A BOOL indicating success or failure
+	@discussion	This method synchronizes access to the kernel service providing transport for the message. This method is safe to call from any thread.
+ */
+- (BOOL)sendVendorUniqueCommand:(AVB17221AECPVendorMessage *)message toMACAddress:(AVBMACAddress *)destMAC expectResponseWithinTimeout:(int64_t)timeout completionHandler:(AVB17221AECPInterfaceCompletion)completionHandler API_AVAILABLE(macos(14)) API_UNAVAILABLE(ios, tvos);
 
 @end
 

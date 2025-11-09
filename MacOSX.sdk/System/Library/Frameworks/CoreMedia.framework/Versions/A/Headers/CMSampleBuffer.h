@@ -3,7 +3,7 @@
 	
 	Framework:  CoreMedia
  
-	Copyright © 2005-2022 Apple Inc. All rights reserved.
+	Copyright © 2005-2023 Apple Inc. All rights reserved.
  
 */
 
@@ -129,7 +129,7 @@ enum
 				samples of a particular media type (audio, video, muxed, etc).
 		
 */
-typedef struct CM_BRIDGED_TYPE(id) opaqueCMSampleBuffer *CMSampleBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0));
+typedef struct CM_BRIDGED_TYPE(id) opaqueCMSampleBuffer *CMSampleBufferRef API_AVAILABLE(macos(10.7), ios(4.0), tvos(9.0), watchos(6.0)) CM_SWIFT_NONSENDABLE;
 
 /*!
 	@typedef	CMSampleTimingInfo

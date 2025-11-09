@@ -48,7 +48,9 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
     @method     authorizationStatusForEntityType:
     @discussion Returns the authorization status for the given entity type
  */
+
 + (EKAuthorizationStatus)authorizationStatusForEntityType:(EKEntityType)entityType NS_AVAILABLE(10_9, 6_0);
+
 
 /*!
     @method     initWithAccessToEntityTypes:
@@ -79,18 +81,13 @@ NS_CLASS_AVAILABLE(10_8, 4_0)
 
 typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError * __nullable error);
 
-/*!
-    @method     requestAccessToEntityType:completion:
-    @discussion Users are able to grant or deny access to event and reminder data on a per-app basis. To request access to
-                event and/or reminder data, call -requestAccessToEntityType:completion:. This will not block the app while
-                the user is being asked to grant or deny access.
- 
-                Until access has been granted for an entity type, the event store will not contain any calendars for that
-                entity type, and any attempt to save will fail. The user will only be prompted the first time access is
-                requested; any subsequent instantiations of EKEventStore will use the existing permissions. When the user
-                taps to grant or deny access, the completion handler will be called on an arbitrary queue.
-*/
-- (void)requestAccessToEntityType:(EKEntityType)entityType completion:(EKEventStoreRequestAccessCompletionHandler)completion NS_AVAILABLE(10_9, 6_0);
+- (void)requestFullAccessToEventsWithCompletion:(EKEventStoreRequestAccessCompletionHandler)completion API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0));
+
+- (void)requestWriteOnlyAccessToEventsWithCompletion:(EKEventStoreRequestAccessCompletionHandler)completion API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0));
+
+- (void)requestFullAccessToRemindersWithCompletion:(EKEventStoreRequestAccessCompletionHandler)completion API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0));
+
+- (void)requestAccessToEntityType:(EKEntityType)entityType completion:(EKEventStoreRequestAccessCompletionHandler)completion API_DEPRECATED("Use -requestFullAccessToEventsWithCompletion:, -requestWriteOnlyAccessToEventsWithCompletion:, or -requestFullAccessToRemindersWithCompletion:", ios(6.0, 17.0), macos(10.0, 14.0), watchos(1.0, 10.0));
 
 /*!
     @property   eventStoreIdentifier
@@ -130,7 +127,11 @@ typedef void(^EKEventStoreRequestAccessCompletionHandler)(BOOL granted, NSError 
                  and only returns calendars that support events. If you want reminder calendars
                  you should use calendarsForEntityType:
 */
-@property(nonatomic, readonly) NSArray<EKCalendar *> *calendars NS_DEPRECATED(NA, NA, 4_0, 6_0);
+@property(nonatomic, readonly) NSArray<EKCalendar *> *calendars NS_DEPRECATED(NA, NA, 4_0, 6_0)
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos)
+#endif
+;
 
 /*!
     @method     calendarsForEntityType

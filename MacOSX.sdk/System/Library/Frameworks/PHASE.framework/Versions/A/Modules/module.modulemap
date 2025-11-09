@@ -1,4 +1,4 @@
-framework module PHASE [extern_c] [system] {
+framework module PHASE [system] {
 	umbrella header "PHASE.h"
 
 	export *

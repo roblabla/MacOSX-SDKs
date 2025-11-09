@@ -16,12 +16,17 @@ exports:
                        _BCBrtControlSetPropertyAync, _BCBrtMonitorCancel, _BoostFactorUpdateNotificationCallback, 
                        _BrightnessControlVersionNumber, _BrightnessControlVersionString, 
                        _DEFAULT_POTENTIAL_HEADROOM, _DEFAULT_REFERENCE_HEADROOM, 
-                       __COREBRIGHTNESS_LOG_DEFAULT, __freeBlockWrapper, __iokitCallback, 
-                       __newBlockWrapper, _clamp, _copyNitsToUserMapping, _displays, 
-                       _float_equal, _getUserForNits, _init_default_corebrightness_log, 
-                       _linear_interpolation, _mach_time_now_in_milliseconds, _mach_time_now_in_nanoseconds, 
-                       _mach_time_now_in_seconds, _mach_time_to_milliseconds, _mach_time_to_nanoseconds, 
-                       _mach_time_to_seconds, _main, _scaleForExponent, _setBrightnessOnAllDisplays ]
+                       __COREBRIGHTNESS_LOG_DEFAULT, __Z10find_boundPKfmfPmS1_, __freeBlockWrapper, 
+                       __iokitCallback, __newBlockWrapper, _clamp, _copyNitsToUserMapping, 
+                       _create_integer_array_from_cfdata, _displays, _float_equal, 
+                       _getUserForNits, _get_float_from_cfdata, _get_integer_from_cfdata, 
+                       _init_default_corebrightness_log, _linear_interpolation, _load_fixed_float_from_edt, 
+                       _load_float_array_from_edt, _load_float_from_edt, _load_int_from_edt, 
+                       _load_integer_array_from_edt, _mach_time_now_in_milliseconds, 
+                       _mach_time_now_in_nanoseconds, _mach_time_now_in_seconds, 
+                       _mach_time_to_milliseconds, _mach_time_to_nanoseconds, _mach_time_to_seconds, 
+                       _main, _matrix_element, _scaleForExponent, _setBrightnessOnAllDisplays, 
+                       _two_dimensional_interpolation ]
     objc-classes:    [ APToDCPEndpoint, BCAppleBacklightBrtControl, BCBrtControl, 
                        BCBrtMonitor, BCHIDBrtControl, BCVirtualBrtControl, CBAPEndpoint ]
     objc-ivars:      [ BCBrtControl._capabilities, BCBrtControl._cfContainerID, BCBrtControl._containerID, 

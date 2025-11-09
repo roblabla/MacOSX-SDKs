@@ -265,7 +265,7 @@ OSReportWithBacktrace(const char *str, ...) __printflike(1, 2);
  *  @abstract Release an object if not <code>NULL</code>, then set it to <code>NULL</code>.
  *  @param    inst  Instance of an OSObject, may be <code>NULL</code>.
  */
-#define OSSafeReleaseNULL(inst) { if (NULL != (inst)) { (inst)->release(); (inst) = NULL; } }
+#define OSSafeReleaseNULL(inst) do { if (NULL != (inst)) { (inst)->release(); (inst) = NULL; } } while (0)
 
 /*! @macro IONew
  *   @abstract Calls IOMalloc with the size of an array of types.

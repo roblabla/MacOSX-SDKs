@@ -168,9 +168,9 @@ NS_SWIFT_UI_ACTOR
 
 // These methods provide support for copy/paste actions on cells.
 // All three should be implemented if any are.
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0));
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0));
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0));
+- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos);
+- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos);
+- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(nullable id)sender API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(6.0, 13.0)) API_UNAVAILABLE(visionos);
 
 // support for custom transition layout
 - (nonnull UICollectionViewTransitionLayout *)collectionView:(UICollectionView *)collectionView transitionLayoutForOldLayout:(UICollectionViewLayout *)fromLayout newLayout:(UICollectionViewLayout *)toLayout;
@@ -186,7 +186,7 @@ NS_SWIFT_UI_ACTOR
 - (BOOL)collectionView:(UICollectionView *)collectionView selectionFollowsFocusForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 - (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveOfItemFromOriginalIndexPath:(NSIndexPath *)originalIndexPath atCurrentIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_AVAILABLE(ios(15.0), tvos(15.0), watchos(8.0));
-- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveFromItemAtIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:targetIndexPathForMoveOfItemFromOriginalIndexPath:atCurrentIndexPath:toProposedIndexPath:", ios(9.0, 15.0));
+- (NSIndexPath *)collectionView:(UICollectionView *)collectionView targetIndexPathForMoveFromItemAtIndexPath:(NSIndexPath *)currentIndexPath toProposedIndexPath:(NSIndexPath *)proposedIndexPath API_DEPRECATED_WITH_REPLACEMENT("collectionView:targetIndexPathForMoveOfItemFromOriginalIndexPath:atCurrentIndexPath:toProposedIndexPath:", ios(9.0, 15.0), visionos(1.0, 1.0));
 
 - (CGPoint)collectionView:(UICollectionView *)collectionView targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset API_AVAILABLE(ios(9.0)); // customize the content offset to be applied during transition or update animations
 
@@ -260,7 +260,7 @@ NS_SWIFT_UI_ACTOR
  */
 - (nullable UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView
            contextMenuConfigurationForItemsAtIndexPaths:(NSArray<NSIndexPath *> *)indexPaths
-                                                  point:(CGPoint)point API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+                                                  point:(CGPoint)point API_AVAILABLE(ios(16.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Called when a context menu interaction begins in this collection view to request a preview for the interaction's initial highlight effect.
@@ -272,7 +272,7 @@ NS_SWIFT_UI_ACTOR
  */
 - (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView
                       contextMenuConfiguration:(UIContextMenuConfiguration *)configuration
-            highlightPreviewForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+            highlightPreviewForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Called when a context menu presented from this collection view is dismissed. Return a @c UITargetedPreview corresponding to the item at the given indexPath.
@@ -283,7 +283,7 @@ NS_SWIFT_UI_ACTOR
  */
 - (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView
                       contextMenuConfiguration:(UIContextMenuConfiguration *)configuration
-            dismissalPreviewForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos);
+            dismissalPreviewForItemAtIndexPath:(NSIndexPath *)indexPath API_AVAILABLE(ios(16.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Called when the interaction is about to "commit" in response to the user tapping the preview.
@@ -301,7 +301,7 @@ NS_SWIFT_UI_ACTOR
  * @param configuration   The configuration of the menu about to be displayed.
  * @param animator        Appearance animator. Add animations to run them alongside the appearance transition.
  */
-- (void)collectionView:(UICollectionView *)collectionView willDisplayContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(13.2)) API_UNAVAILABLE(watchos, tvos);
+- (void)collectionView:(UICollectionView *)collectionView willDisplayContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(13.2), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Called when the collection view's context menu interaction is about to end.
@@ -310,7 +310,7 @@ NS_SWIFT_UI_ACTOR
  * @param configuration   Ending configuration.
  * @param animator        Disappearance animator. Add animations to run them alongside the disappearance transition.
  */
-- (void)collectionView:(UICollectionView *)collectionView willEndContextMenuInteractionWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(13.2)) API_UNAVAILABLE(watchos, tvos);
+- (void)collectionView:(UICollectionView *)collectionView willEndContextMenuInteractionWithConfiguration:(UIContextMenuConfiguration *)configuration animator:(nullable id<UIContextMenuInteractionAnimating>)animator API_AVAILABLE(ios(13.2), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @abstract Return a valid @c UIWindowSceneActivationConfiguration to allow for the cell to be expanded into a new scene. Return nil to prevent the interaction from starting.
@@ -335,7 +335,7 @@ NS_SWIFT_UI_ACTOR
  */
 - (nullable UIContextMenuConfiguration *)collectionView:(UICollectionView *)collectionView
              contextMenuConfigurationForItemAtIndexPath:(NSIndexPath *)indexPath
-                                                  point:(CGPoint)point API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(13.0, 16.0)) API_UNAVAILABLE(watchos, tvos);
+                                                  point:(CGPoint)point API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfigurationForItemsAtIndexPaths:point:", ios(13.0, 16.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @abstract Called when the interaction begins. Return a UITargetedPreview describing the desired highlight preview.
@@ -344,7 +344,7 @@ NS_SWIFT_UI_ACTOR
  * @param collectionView  The @c UICollectionView.
  * @param configuration   The configuration of the menu about to be displayed by this interaction.
  */
-- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfiguration:highlightPreviewForItemAtIndexPath:", ios(13.0, 16.0)) API_UNAVAILABLE(watchos, tvos);
+- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForHighlightingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfiguration:highlightPreviewForItemAtIndexPath:", ios(13.0, 16.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos, tvos);
 
 /*!
  * @abstract Called when the interaction is about to dismiss. Return a UITargetedPreview describing the desired dismissal target.
@@ -354,7 +354,7 @@ NS_SWIFT_UI_ACTOR
  * @param collectionView  The @c UICollectionView.
  * @param configuration   The configuration of the menu displayed by this interaction.
  */
-- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfiguration:dismissalPreviewForItemAtIndexPath:", ios(13.0, 16.0)) API_UNAVAILABLE(watchos, tvos);
+- (nullable UITargetedPreview *)collectionView:(UICollectionView *)collectionView previewForDismissingContextMenuWithConfiguration:(UIContextMenuConfiguration *)configuration API_DEPRECATED_WITH_REPLACEMENT("collectionView:contextMenuConfiguration:dismissalPreviewForItemAtIndexPath:", ios(13.0, 16.0), visionos(1.0, 1.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
 
@@ -381,7 +381,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
  */
 @property (nonatomic) BOOL dragInteractionEnabled API_AVAILABLE(ios(11.0)) API_UNAVAILABLE(tvos, watchos);
 
-@property (nonatomic, readonly, nullable) UIContextMenuInteraction *contextMenuInteraction API_AVAILABLE(ios(13.2)) API_UNAVAILABLE(watchos, tvos);
+@property (nonatomic, readonly, nullable) UIContextMenuInteraction *contextMenuInteraction API_AVAILABLE(ios(13.2), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /* Reordering cadence affects how easily reordering occurs while dragging around a reorder-capable drop destination.
  * Default is UICollectionViewReorderingCadenceImmediate.
@@ -396,10 +396,10 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 // If a nib is registered, it must contain exactly 1 top level object which is a UICollectionViewCell.
 // If a class is registered, it will be instantiated via alloc/initWithFrame:
 - (void)registerClass:(nullable Class)cellClass forCellWithReuseIdentifier:(NSString *)identifier;
-- (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier;
+- (void)registerNib:(nullable UINib *)nib forCellWithReuseIdentifier:(NSString *)identifier API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 - (void)registerClass:(nullable Class)viewClass forSupplementaryViewOfKind:(NSString *)elementKind withReuseIdentifier:(NSString *)identifier;
-- (void)registerNib:(nullable UINib *)nib forSupplementaryViewOfKind:(NSString *)kind withReuseIdentifier:(NSString *)identifier;
+- (void)registerNib:(nullable UINib *)nib forSupplementaryViewOfKind:(NSString *)kind withReuseIdentifier:(NSString *)identifier API_DEPRECATED("Loading Interface Builder products will not be supported in a future version of visionOS.", visionos(1.0, 1.0));
 
 - (__kindof UICollectionViewCell *)dequeueReusableCellWithReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
 - (__kindof UICollectionReusableView *)dequeueReusableSupplementaryViewOfKind:(NSString *)elementKind withReuseIdentifier:(NSString *)identifier forIndexPath:(NSIndexPath *)indexPath;
@@ -440,7 +440,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(6.0)) NS_SWIFT_UI_ACTOR
 - (nullable NSIndexPath *)indexPathForCell:(UICollectionViewCell *)cell;
 
 // Returns any existing visible or prepared cell for the index path. Returns nil when no cell exists, or if index path is out of range.
-- (nullable UICollectionViewCell *)cellForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (nullable __kindof UICollectionViewCell *)cellForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @property (nonatomic, readonly) NSArray<__kindof UICollectionViewCell *> *visibleCells;
 @property (nonatomic, readonly) NSArray<NSIndexPath *> *indexPathsForVisibleItems;

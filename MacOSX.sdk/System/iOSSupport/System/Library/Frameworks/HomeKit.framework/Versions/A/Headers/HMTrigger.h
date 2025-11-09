@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
 @class HMActionSet;
 
@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @discussion This class describes a trigger which is an event that can
  *             be used to execute one or more action sets when the event fires.
  */
-HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) API_UNAVAILABLE(macos)
     @interface HMTrigger : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -44,7 +44,7 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 /*!
  * @brief The date that this trigger was most recently fired.
  */
-@property (readonly, copy, nonatomic, nullable) NSDate *lastFireDate;
+@property (readonly, copy, nonatomic, nullable) NSDate *lastFireDate API_DEPRECATED("No longer supported", macos(11.0, 14.0), ios(8.0, 17.0), watchos(2.0, 10.0), tvos(10.0, 17.0));
 
 /*!
  * @brief A unique identifier for the trigger.
@@ -101,4 +101,4 @@ HM_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), tvos(10.0), macCatalyst(14.0)) A
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

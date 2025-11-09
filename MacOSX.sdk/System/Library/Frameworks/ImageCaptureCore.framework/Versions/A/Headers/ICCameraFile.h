@@ -224,6 +224,15 @@ IC_AVAILABLE(macos(10.4), ios(13.0))
 - (void)requestReadDataAtOffset:(off_t)offset length:(off_t)length
                      completion:(void (^)(NSData* _Nullable, NSError* _Nullable)) completion IC_AVAILABLE(macos(10.15), ios(13.0));
 
+/*!
+   @method requestSecurityScopedURLWithCompletion
+   @abstract ￼Requests a security scoped NSURL* for a media file on a mass storage volume. The returned NSURL* requires the use of
+ startAccessingSecurityScopedResource, and stopAccessingSecurityScopedResource for access.
+   @param completion Completion block called with an NSURL*, and an NSError* for status.
+   @note The completion block will execute on an any available queue, often this will not be the main queue.
+ */
+- (void)requestSecurityScopedURLWithCompletion:(void (^)(NSURL* _Nullable, NSError* _Nullable))completion IC_AVAILABLE(macos(14.0), ios(17.0));
+
 @end
 
 CF_ASSUME_NONNULL_END

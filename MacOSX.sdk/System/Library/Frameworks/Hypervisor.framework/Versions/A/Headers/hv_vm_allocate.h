@@ -1,22 +1,21 @@
-/*
- *  hv_vm_allocate.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2021-2022 Apple Inc. All rights reserved.
- */
+//
+//  hv_vm_allocate.h
+//  Hypervisor
+//
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//
 
 #pragma once
 
 #include <Hypervisor/hv_base.h>
-
 #include <os/availability.h>
 #include <os/base.h>
 #include <sys/types.h>
 
-#if __arm64__
-#include <arm64/hv/hv_kern_types.h>
+#if defined(__arm64__)
 #include <Hypervisor/hv_vm_types.h>
-#elif __x86_64__
+#include <arm64/hv/hv_kern_types.h>
+#elif defined(__x86_64__)
 #include <Hypervisor/hv_error.h>
 #include <Hypervisor/hv_types.h>
 #endif

@@ -1,4 +1,4 @@
-framework module StoreKit [extern_c] {
+framework module StoreKit {
   umbrella header "StoreKit.h"
      
   export *

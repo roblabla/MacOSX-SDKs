@@ -2,7 +2,7 @@
 .\"
 .\" SPDX-License-Identifier: ISC
 .\"
-.\" Copyright (c) 1996,1998-2005, 2007-2020
+.\" Copyright (c) 1996,1998-2005, 2007-2023
 .\"	Todd C. Miller <Todd.Miller@sudo.ws>
 .\"
 .\" Permission to use, copy, modify, and distribute this software for any
@@ -21,7 +21,7 @@
 .\" Agency (DARPA) and Air Force Research Laboratory, Air Force
 .\" Materiel Command, USAF, under agreement number F39502-99-1-0512.
 .\"
-.TH "VISUDO" "8" "August 27, 2020" "Sudo 1.9.5p2" "System Manager's Manual"
+.TH "VISUDO" "8" "January 16, 2023" "Sudo 1.9.13p2" "System Manager's Manual"
 .nh
 .if n .ad l
 .SH "NAME"
@@ -30,7 +30,7 @@
 .SH "SYNOPSIS"
 .HP 7n
 \fBvisudo\fR
-[\fB\-chqsV\fR]
+[\fB\-chIOPqsV\fR]
 [[\fB\-f\fR]\ \fIsudoers\fR]
 .SH "DESCRIPTION"
 \fBvisudo\fR
@@ -71,10 +71,7 @@ The
 option should be used with extreme caution because if
 \fBvisudo\fR
 believes there to be a syntax error, so will
-\fBsudo\fR
-and no one will be able to run
-\fBsudo\fR
-again until the error is fixed.
+\fBsudo\fR.
 If
 \(oqe\(cq
 is typed to edit the
@@ -87,7 +84,7 @@ There are two
 settings that determine which editor
 \fBvisudo\fR
 will run.
-.TP 10n
+.TP 12n
 editor
 A colon
 (\(oq:\&\(cq)
@@ -96,16 +93,15 @@ separated list of editors allowed to be used with
 \fBvisudo\fR
 will choose the editor that matches the user's
 \fRSUDO_EDITOR\fR,
-\fRVISUAL\fR
+\fRVISUAL\fR,
 or
 \fREDITOR\fR
 environment variable if possible, or the first editor in the
 list that exists and is executable.
-Note that
 \fBsudo\fR
 does not preserve the
 \fRSUDO_EDITOR\fR,
-\fRVISUAL\fR
+\fRVISUAL\fR,
 or
 \fREDITOR\fR
 environment variables unless they are present in the
@@ -116,34 +112,33 @@ option is disabled in the
 \fIsudoers\fR
 file.
 The default editor path is
-\fIvi\fR
+\fI/usr/bin/vi\fR
 which can be set at compile time via the
 \fR--with-editor\fR
 configure option.
-.TP 10n
+.TP 12n
 env_editor
 If set,
 \fBvisudo\fR
 will use the value of the
 \fRSUDO_EDITOR\fR,
-\fRVISUAL\fR
+\fRVISUAL\fR,
 or
 \fREDITOR\fR
 environment variables before falling back on the default editor list.
-Note that
 \fBvisudo\fR
 is typically run as root so this option may allow a user with
 \fBvisudo\fR
 privileges to run arbitrary commands as root without logging.
 An alternative is to place a colon-separated list of
 \(lqsafe\(rq
-editors int the
+editors in the
 \fIeditor\fR
 variable.
 \fBvisudo\fR
 will then only use
 \fRSUDO_EDITOR\fR,
-\fRVISUAL\fR
+\fRVISUAL\fR,
 or
 \fREDITOR\fR
 if they match a value specified in
@@ -152,7 +147,7 @@ If the
 \fIenv_reset\fR
 flag is enabled, the
 \fRSUDO_EDITOR\fR,
-\fRVISUAL\fR
+\fRVISUAL\fR,
 and/or
 \fREDITOR\fR
 environment variables must be present in the
@@ -170,7 +165,7 @@ which can be set at compile time via the
 configure option.
 .PP
 The options are as follows:
-.TP 12n
+.TP 8n
 \fB\-c\fR, \fB\--check\fR
 Enable
 \fIcheck-only\fR
@@ -183,7 +178,11 @@ If the path to the
 \fIsudoers\fR
 file was not specified,
 \fBvisudo\fR
-will also check the file owner and mode.
+will also check the file ownership and permissions (see the
+\fB\-O\fR
+and
+\fB\-P\fR
+options).
 A message will be printed to the standard output describing the status of
 \fIsudoers\fR
 unless the
@@ -195,7 +194,7 @@ will exit with a value of 0.
 If an error is encountered,
 \fBvisudo\fR
 will exit with a value of 1.
-.TP 12n
+.TP 8n
 \fB\-f\fR \fIsudoers\fR, \fB\--file\fR=\fIsudoers\fR
 Specify an alternate
 \fIsudoers\fR
@@ -205,10 +204,52 @@ As of version 1.8.27, the
 path can be specified without using the
 \fB\-f\fR
 option.
-.TP 12n
+.TP 8n
 \fB\-h\fR, \fB\--help\fR
 Display a short help message to the standard output and exit.
-.TP 12n
+.TP 8n
+\fB\-I\fR, \fB\--no-includes\fR
+Disable the editing of include files unless there is a pre-existing
+syntax error.
+By default,
+\fBvisudo\fR
+will edit the main
+\fIsudoers\fR
+file and any files included via
+\fI@include\fR
+or
+\fI#include\fR
+directives.
+Files included via
+\fI@includedir\fR
+or
+\fI#includedir\fR
+are never edited unless they contain a syntax error.
+.TP 8n
+\fB\-O\fR, \fB\--owner\fR
+Enforce the default ownership (user and group) of the
+\fIsudoers\fR
+file.
+In edit mode, the owner of the edited file will be set to the default.
+In check mode
+(\fB\-c\fR),
+an error will be reported if the owner is incorrect.
+This option is enabled by default if the
+\fIsudoers\fR
+file was not specified.
+.TP 8n
+\fB\-P\fR, \fB\--perms\fR
+Enforce the default permissions (mode) of the
+\fIsudoers\fR
+file.
+In edit mode, the permissions of the edited file will be set to the default.
+In check mode
+(\fB\-c\fR),
+an error will be reported if the file permissions are incorrect.
+This option is enabled by default if the
+\fIsudoers\fR
+file was not specified.
+.TP 8n
 \fB\-q\fR, \fB\--quiet\fR
 Enable
 \fIquiet\fR
@@ -218,7 +259,7 @@ This option is only useful when combined with
 the
 \fB\-c\fR
 option.
-.TP 12n
+.TP 8n
 \fB\-s\fR, \fB\--strict\fR
 Enable
 \fIstrict\fR
@@ -229,12 +270,12 @@ If an alias is referenced but not actually defined
 or if there is a cycle in an alias,
 \fBvisudo\fR
 will consider this a syntax error.
-Note that it is not possible to differentiate between an
-alias and a host name or user name that consists solely of uppercase
-letters, digits, and the underscore
+It is not possible to differentiate between an alias and a host
+name or user name that consists solely of uppercase letters, digits,
+and the underscore
 (\(oq_\(cq)
 character.
-.TP 12n
+.TP 8n
 \fB\-V\fR, \fB\--version\fR
 Print the
 \fBvisudo\fR
@@ -266,7 +307,7 @@ include file for syntax errors.
 \fBvisudo\fR
 versions 1.8.4 and higher support a flexible debugging framework
 that is configured via
-\fRDebug\fR
+\fIDebug\fR
 lines in the
 sudo.conf(5)
 file.
@@ -279,7 +320,7 @@ will also parse the arguments to the
 \fIsudoers\fR
 plugin to override the default
 \fIsudoers\fR
-path name, UID, GID and file mode.
+path name, user-ID, group-ID, and file mode.
 These arguments, if present, should be listed after the path to the plugin
 (i.e., after
 \fIsudoers.so\fR).
@@ -287,32 +328,32 @@ Multiple arguments may be specified, separated by white space.
 For example:
 .nf
 .sp
-.RS 6n
+.RS 4n
 Plugin sudoers_policy sudoers.so sudoers_mode=0400
 .RE
 .fi
 .PP
 The following arguments are supported:
-.TP 10n
+.TP 6n
 sudoers_file=pathname
 The
 \fIsudoers_file\fR
 argument can be used to override the default path to the
 \fIsudoers\fR
 file.
-.TP 10n
-sudoers_uid=uid
+.TP 6n
+sudoers_uid=user-ID
 The
 \fIsudoers_uid\fR
 argument can be used to override the default owner of the sudoers file.
 It should be specified as a numeric user-ID.
-.TP 10n
-sudoers_gid=gid
+.TP 6n
+sudoers_gid=group-ID
 The
 \fIsudoers_gid\fR
 argument can be used to override the default group of the sudoers file.
 It must be specified as a numeric group-ID (not a group name).
-.TP 10n
+.TP 6n
 sudoers_mode=mode
 The
 \fIsudoers_mode\fR
@@ -321,7 +362,7 @@ It should be specified as an octal value.
 .PP
 For more information on configuring
 sudo.conf(5),
-please refer to its manual.
+refer to its manual.
 .SH "ENVIRONMENT"
 The following environment variables may be consulted depending on
 the value of the
@@ -354,7 +395,7 @@ is set
 .SH "FILES"
 .TP 26n
 \fI/private/etc/sudo.conf\fR
-Sudo front end configuration
+Sudo front-end configuration
 .TP 26n
 \fI/private/etc/sudoers\fR
 List of who can run what
@@ -427,7 +468,7 @@ file.
 The
 \fIsudoers\fR
 file contains a
-\fRDefaults\fR
+\fIDefaults\fR
 setting not recognized by
 \fBvisudo\fR.
 .SH "SEE ALSO"
@@ -445,9 +486,9 @@ over the years; this version consists of code written primarily by:
 Todd C. Miller
 .RE
 .PP
-See the CONTRIBUTORS file in the
+See the CONTRIBUTORS.md file in the
 \fBsudo\fR
-distribution (https://www.sudo.ws/contributors.html) for an
+distribution (https://www.sudo.ws/about/contributors/) for an
 exhaustive list of people who have contributed to
 \fBsudo\fR.
 .SH "CAVEATS"
@@ -456,9 +497,9 @@ the editor used by
 \fBvisudo\fR
 allows shell escapes.
 .SH "BUGS"
-If you feel you have found a bug in
+If you believe you have found a bug in
 \fBvisudo\fR,
-please submit a bug report at https://bugzilla.sudo.ws/
+you can submit a bug report at https://bugzilla.sudo.ws/
 .SH "SUPPORT"
 Limited free support is available via the sudo-users mailing list,
 see https://www.sudo.ws/mailman/listinfo/sudo-users to subscribe or
@@ -470,6 +511,6 @@ is provided
 and any express or implied warranties, including, but not limited
 to, the implied warranties of merchantability and fitness for a
 particular purpose are disclaimed.
-See the LICENSE file distributed with
+See the LICENSE.md file distributed with
 \fBsudo\fR
-or https://www.sudo.ws/license.html for complete details.
+or https://www.sudo.ws/about/license/ for complete details.

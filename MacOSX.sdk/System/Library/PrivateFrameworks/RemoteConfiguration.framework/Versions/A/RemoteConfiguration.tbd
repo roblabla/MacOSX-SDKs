@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/RemoteConfiguration.framework/Versions/A/RemoteConfiguration'
-current-version: 169
+current-version: 184.0.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -24,7 +24,7 @@ exports:
                        _RCConfigurationResourceLastFetchedDateKey, _RCConfigurationResourceLastModifiedFallbackStringKey, 
                        _RCConfigurationResourceLastModifiedStringKey, _RCConfigurationResourceRequestKey, 
                        _RCConfigurationResourceSegmentSetIDsKey, _RCConfigurationResourceTreatmentIDsKey, 
-                       _RCConfigurationResourceUserSegmentationConfigurationKey, 
+                       _RCConfigurationResourceUserIDKey, _RCConfigurationResourceUserSegmentationConfigurationKey, 
                        _RCConfigurationSettingsBundleIDKey, _RCConfigurationSettingsDebugOverridesKey, 
                        _RCConfigurationSettingsDeviceInfoKey, _RCConfigurationSettingsFallbackURLKey, 
                        _RCConfigurationSettingsRequestKey, _RCConfigurationSettingsResponseKey, 
@@ -33,10 +33,11 @@ exports:
                        _RCConfigurationWrapperIDKey, _RCConfigurationWrapperLastModifiedKey, 
                        _RCDebugOverridesAdditionalSegmentSetIDsKey, _RCDebugOverridesDisableAbTestingKey, 
                        _RCDebugOverridesOverrideSegmentSetIDsKey, _RCDeviceInfoAppVersionKey, 
-                       _RCDeviceInfoCountryCodeKey, _RCDeviceInfoDeviceTypeKey, _RCDeviceInfoDstOffsetKey, 
-                       _RCDeviceInfoFormatVersionKey, _RCDeviceInfoOsVersionKey, 
-                       _RCDeviceInfoPreferredLanguagesKey, _RCDeviceInfoUtcOffsetKey, 
-                       _RCDeviceModelString, _RCDeviceOSVersion, _RCDispatchAfterWithQualityOfService, 
+                       _RCDeviceInfoBuildNumberKey, _RCDeviceInfoCountryCodeKey, 
+                       _RCDeviceInfoDeviceTypeKey, _RCDeviceInfoDstOffsetKey, _RCDeviceInfoFormatVersionKey, 
+                       _RCDeviceInfoOsVersionKey, _RCDeviceInfoPreferredLanguagesKey, 
+                       _RCDeviceInfoSeedNumberKey, _RCDeviceInfoUtcOffsetKey, _RCDeviceModelString, 
+                       _RCDeviceOSVersion, _RCDispatchAfterWithQualityOfService, 
                        _RCDispatchAsyncWithQualityOfService, _RCDispatchGroupIsEmpty, 
                        _RCDispatchGroupNotifyWithQualityOfService, _RCDispatchGroupNotifyWithTimeout, 
                        _RCDispatchGroupWrap, _RCDispatchQueueForQualityOfService, 
@@ -85,13 +86,15 @@ exports:
                        _RCWaitUntilBlockIsInvoked, _RCWidgetConfigurationEndpointURLKey, 
                        _RemoteConfigurationVersionNumber, _RemoteConfigurationVersionString ]
     objc-classes:    [ RCAsyncBlockOperation, RCAsyncOnceOperation, RCAsyncSerialQueue, 
+                       RCBackgroundFetchConfiguration, RCBackgroundTaskResult, RCBackgroundURLSessionHandler, 
                        RCBoostableOperationThrottler, RCCancelHandler, RCChangeTag, 
-                       RCConfigurationManager, RCConfigurationResource, RCConfigurationSettings, 
-                       RCDebugOverrides, RCDeviceInfo, RCEndpointError, RCEndpointOperation, 
-                       RCFallbackOperation, RCGroupCancelHandler, RCKeyValueStore, 
-                       RCMutexLock, RCNetworkEvent, RCOnce, RCOperation, RCOperationDelayedRetrySignal, 
-                       RCOperationExternalSignal, RCOperationImmediateRetrySignal, 
-                       RCOperationNotificationRetrySignal, RCOperationThrottler, 
-                       RCRequestInfo, RCTimedOperationThrottler, RCURLFetchOperation, 
-                       RCUnfairLock, RCUserSegmentationConfiguration ]
+                       RCConfigurationFetchResult, RCConfigurationManager, RCConfigurationResource, 
+                       RCConfigurationSettings, RCDebugOverrides, RCDeviceInfo, RCEndpointError, 
+                       RCEndpointOperation, RCEndpointResponseProcessing, RCFallbackOperation, 
+                       RCGroupCancelHandler, RCKeyValueStore, RCMutexLock, RCNetworkEvent, 
+                       RCNetworkOperationTask, RCNetworkOperationURLSessionDelegate, 
+                       RCOnce, RCOperation, RCOperationDelayedRetrySignal, RCOperationExternalSignal, 
+                       RCOperationImmediateRetrySignal, RCOperationNotificationRetrySignal, 
+                       RCOperationThrottler, RCRequestInfo, RCTimedOperationThrottler, 
+                       RCURLFetchOperation, RCURLSession, RCUnfairLock, RCUserSegmentationConfiguration ]
 ...

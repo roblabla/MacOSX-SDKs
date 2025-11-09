@@ -61,8 +61,8 @@ exports:
                        _encodedTypeRetain, _kAutodiscoverProtocolActiveSync, _kAutodiscoverProtocolEWS, 
                        _kCacheMaxTimeInterval, _kExchangeBasicAccountMigrationLastAttemptDate, 
                        _kExchangeBasicAccountMigrationStatus, _kExchangeJWKSCacheDate, 
-                       _kExchangeJWKSData, _kExchangeJWKSURI, _kExchangeOAuthSupportedKey, 
-                       _kExchangeOAuthVersion, _kExchangeRenewCredentialsShouldTriggerMigrationKey, 
+                       _kExchangeJWKSData, _kExchangeJWKSURI, _kExchangeOAuthOnPremKey, 
+                       _kExchangeOAuthSupportedKey, _kExchangeOAuthVersion, _kExchangeRenewCredentialsShouldTriggerMigrationKey, 
                        _kExchangeTokenIssuer, _kExchangeTokenRequestURI, _kExchangeWebSignInURI, 
                        _kExchangeWebSignInV2URI, _sMapping ]
     objc-classes:    [ CodeChallenge, EWSAbsoluteMonthlyRecurrencePatternType, EWSAbsoluteYearlyRecurrencePatternType, 

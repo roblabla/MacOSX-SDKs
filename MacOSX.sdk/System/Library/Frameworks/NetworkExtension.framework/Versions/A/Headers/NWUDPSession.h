@@ -40,13 +40,13 @@ typedef NS_ENUM(NSInteger, NWUDPSessionState) {
 	NWUDPSessionStateFailed = 4,
 	/*! @constant NWUDPSessionStateCancelled The session has been cancelled by the client */
 	NWUDPSessionStateCancelled = 5,
-} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @interface NWUDPSession
  * @discussion Open UDP datagram sessions to an endpoint, and send and receive datagrams.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NWUDPSession : NSObject
 
 /*!
@@ -65,7 +65,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param session The original session from which the application will upgrade
  * @return An initialized NWUDPSession object.
  */
-- (instancetype)initWithUpgradeForSession:(NWUDPSession *)session API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (instancetype)initWithUpgradeForSession:(NWUDPSession *)session API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property state
@@ -74,39 +74,39 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *		NWUDPSessionStateFailed if the endpoint could not be resolved, or all endpoints have been
  *		rejected. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly) NWUDPSessionState state API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) NWUDPSessionState state API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property endpoint
  * @discussion The provided endpoint.
  */
-@property (atomic, readonly) NWEndpoint *endpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (atomic, readonly) NWEndpoint *endpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property resolvedEndpoint
  * @discussion The currently targeted remote endpoint. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly, nullable) NWEndpoint *resolvedEndpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly, nullable) NWEndpoint *resolvedEndpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property viable
  * @discussion YES if the connection can read and write data, NO otherwise.
  *		Use KVO to watch this property.
  */
-@property (nonatomic, readonly, getter=isViable) BOOL viable API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly, getter=isViable) BOOL viable API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property hasBetterPath
  * @discussion YES if there is another path available that is preferred over the currentPath.
  *		To take advantage of this path, create a new UDPSession. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly) BOOL hasBetterPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) BOOL hasBetterPath API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property currentPath
  * @discussion The current evaluated path for the resolvedEndpoint. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly, nullable) NWPath *currentPath API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly, nullable) NWPath *currentPath API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method tryNextResolvedEndpoint
@@ -115,7 +115,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *		with the current resolvedEndpoint, and the caller has determined that it is unusable. If
  *		there are no other resolved endpoints, the session will move to the failed state.
  */
-- (void)tryNextResolvedEndpoint API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)tryNextResolvedEndpoint API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property maximumDatagramLength
@@ -124,7 +124,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  *		value is not guaranteed to be the maximum datagram length for end-to-end communication
  *		across the network. Use KVO to watch for changes.
  */
-@property (nonatomic, readonly) NSUInteger maximumDatagramLength API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) NSUInteger maximumDatagramLength API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method setReadHandler:maxDatagrams
@@ -134,7 +134,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param maxDatagrams The maximum number of datagrams to send to the handler.
  */
 - (void)setReadHandler:(void (^)(NSArray<NSData *> * _Nullable datagrams, NSError * _Nullable error))handler
-		  maxDatagrams:(NSUInteger)maxDatagrams API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+		  maxDatagrams:(NSUInteger)maxDatagrams API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method writeMultipleDatagrams:completionHandler
@@ -144,7 +144,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param completionHandler A handler called when the write request has either succeeded or failed.
  */
 - (void)writeMultipleDatagrams:(NSArray<NSData *> *)datagramArray
-			 completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+			 completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method writeDatagram:completionHandler
@@ -154,14 +154,14 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param completionHandler A handler called when the write request has either succeeded or failed.
  */
 - (void)writeDatagram:(NSData *)datagram
-	completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+	completionHandler:(void (^)(NSError * _Nullable error))completionHandler NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @method cancel
  * @discussion Move into the NWUDPSessionStateCancelled state. The connection will be terminated,
  *		and all handlers will be cancelled.
  */
-- (void)cancel API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (void)cancel API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

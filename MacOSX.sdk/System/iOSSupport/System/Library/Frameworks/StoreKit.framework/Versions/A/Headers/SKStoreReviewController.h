@@ -14,7 +14,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 /** Controller class to request a review from the current user */
-SK_EXTERN_CLASS API_AVAILABLE(ios(10.3), macos(10.14)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED NS_SWIFT_SENDABLE @interface SKStoreReviewController : NSObject
+SK_EXTERN_CLASS API_AVAILABLE(ios(10.3), macos(10.14), visionos(1.0)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED NS_SWIFT_SENDABLE @interface SKStoreReviewController : NSObject
 
 /** Request StoreKit to ask the user for an app review. Uses the keyWindow's UIWindowScene which may or may not be the scene a user is interacting with.
  *
@@ -24,7 +24,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(10.3), macos(10.14)) API_UNAVAILABLE(watchos) 
  *  from a button or any other user action. For presenting a write review form, a deep link is 
  *  available to the App Store by appending the query params "action=write-review" to a product URL.
  */
-+ (void)requestReview API_AVAILABLE(macos(10.14)) API_DEPRECATED_WITH_REPLACEMENT("-[SKStoreReviewController requestReviewInScene:]", ios(10.3, 14.0)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED;
++ (void)requestReview API_AVAILABLE(macos(10.14)) API_DEPRECATED_WITH_REPLACEMENT("-[SKStoreReviewController requestReviewInScene:]", ios(10.3, 14.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED;
 
 #if TARGET_OS_IOS
 /** Request StoreKit to ask the user for an app review in a given UIWindowScene.
@@ -35,7 +35,7 @@ SK_EXTERN_CLASS API_AVAILABLE(ios(10.3), macos(10.14)) API_UNAVAILABLE(watchos) 
  *  from a button or any other user action. For presenting a write review form, a deep link is
  *  available to the App Store by appending the query params "action=write-review" to a product URL.
  */
-+ (void)requestReviewInScene:(UIWindowScene *)windowScene API_AVAILABLE(ios(14.0)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED NS_SWIFT_UI_ACTOR;
++ (void)requestReviewInScene:(UIWindowScene *)windowScene API_AVAILABLE(ios(14.0), visionos(1.0)) API_UNAVAILABLE(watchos) __TVOS_PROHIBITED NS_SWIFT_UI_ACTOR;
 #endif
 @end
 

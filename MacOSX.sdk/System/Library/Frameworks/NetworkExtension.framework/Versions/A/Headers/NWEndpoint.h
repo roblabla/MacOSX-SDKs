@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
  * @interface NWEndpoint
  * @discussion NWEndpoint is a generic class to represent network endpoints, such as a port on a remote server.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NWEndpoint : NSObject <NSSecureCoding, NSCopying>
 
 @end

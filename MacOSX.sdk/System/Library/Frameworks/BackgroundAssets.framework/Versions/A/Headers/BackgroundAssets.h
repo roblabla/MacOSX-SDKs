@@ -15,3 +15,4 @@
 #import <BackgroundAssets/BADownloaderExtension.h>
 #import <BackgroundAssets/BADownloadManager.h>
 #import <BackgroundAssets/BAURLDownload.h>
+#import <BackgroundAssets/BAError.h>

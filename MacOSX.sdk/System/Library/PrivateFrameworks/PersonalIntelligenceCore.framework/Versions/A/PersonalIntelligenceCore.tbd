@@ -1,11 +1,13 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/PersonalIntelligenceCore.framework/Versions/A/PersonalIntelligenceCore'
-current-version: 1193.26
+current-version: 1226.0.1
 swift-abi-version: 7
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CoreSuggestions, CoreSuggestionsInternals, CoreSuggestionsML, 
                        CoreSuggestionsMLTests, CoreSuggestionsPerfTests, CoreSuggestionsTests, 
                        CoreSuggestionsUI, CoreSuggestionsUITests, FoundInAppsPlugins, 
@@ -21,7 +23,8 @@ allowable-clients:
                        hvtool, portrait, ppppttool, pptool, pretool, psgtool, reversetemplated, 
                        suggest_tool, suggestbench, suggestd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ '_$s24PersonalIntelligenceCore11MetricStoreC10identifier11storeConfig19enrichmentProviders16messageListeners15windowStartDate13configuration12sendIntervalACSS_So07BMStoreH0CSgSaySo26IIMetricEnrichmentProvider_pGSaySbSS_SDySSypGtcG10Foundation0O0VAA0D13ConfigurationVSgSdtcfC', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC10identifier11storeConfig19enrichmentProviders16messageListeners15windowStartDate13configuration12sendIntervalACSS_So07BMStoreH0CSgSaySo26IIMetricEnrichmentProvider_pGSaySbSS_SDySSypGtcG10Foundation0O0VAA0D13ConfigurationVSgSdtcfCTq', 
                        '_$s24PersonalIntelligenceCore11MetricStoreC10identifier11storeConfig19enrichmentProviders16messageListeners15windowStartDate13configuration12sendIntervalACSS_So07BMStoreH0CSgSaySo26IIMetricEnrichmentProvider_pGSaySbSS_SDySSypGtcG10Foundation0O0VAA0D13ConfigurationVSgSdtcfc', 
@@ -58,5 +61,7 @@ exports:
                        _kIIFeatureEngagementMetricName, _kIIFeatureNameFieldName, 
                        _kIIFrustrationCountFieldName, _kIILogSubsystem, _kIIOfferedCountFieldName, 
                        _kIISignpostSubsystem, _kIITrialTreatmentsFieldName ]
-    objc-classes:    [ IIMetricsDispatcher, IIPaths, IISMetricStore, IIStartupManager ]
+    objc-classes:    [ IILanguageDetection, IILanguageDetectionNLLanguageIdentifierWrapper, 
+                       IIMetricsDispatcher, IIPaths, IISMetricStore, IIStartupManager ]
+    objc-ivars:      [ IILanguageDetectionNLLanguageIdentifierWrapper._languageIdentifier ]
 ...

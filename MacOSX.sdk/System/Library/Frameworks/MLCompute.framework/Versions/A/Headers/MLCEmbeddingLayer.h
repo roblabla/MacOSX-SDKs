@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
  *              a second graph containing the embedding layer can be created first. The result of this layer can then be fed as an input to the second graph
  *              and respectively the gradient result of the first layer of the second graph can be passed to this graph for weight update.
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0), ios(14.0), tvos(14.0))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.0, 14.0, 14.0)
 @interface MLCEmbeddingLayer : MLCLayer
 
 @property (readonly, nonatomic, copy) MLCEmbeddingDescriptor *descriptor;

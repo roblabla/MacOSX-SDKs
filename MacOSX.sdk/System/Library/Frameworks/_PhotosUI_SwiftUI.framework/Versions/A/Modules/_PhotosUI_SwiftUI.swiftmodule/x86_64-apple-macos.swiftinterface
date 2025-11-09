@@ -1,7 +1,7 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.8 (swiftlang-5.8.0.117.59 clang-1403.0.22.8.50)
-// swift-module-flags: -target x86_64-apple-macos13.3 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name _PhotosUI_SwiftUI
-// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 541.0.110
+// swift-compiler-version: Apple Swift version 5.9 (swiftlang-5.9.0.123.203 clang-1500.0.37.1)
+// swift-module-flags: -target x86_64-apple-macos14.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Osize -library-level api -module-name _PhotosUI_SwiftUI
+// swift-module-flags-ignorable: -enable-bare-slash-regex -user-module-version 608.2.113
 import CoreTransferable
 @_exported import PhotosUI
 import Swift
@@ -9,6 +9,7 @@ import SwiftUI
 import UniformTypeIdentifiers
 import _Concurrency
 import _StringProcessing
+import _SwiftConcurrencyShims
 @available(iOS 16.0, macOS 13.0, *)
 @available(watchOS, unavailable)
 @available(tvOS, unavailable)
@@ -23,7 +24,26 @@ extension Photos.PHLivePhoto : CoreTransferable.Transferable {
 public struct PhotosPickerSelectionBehavior : Swift.Equatable, Swift.Hashable {
   public static let `default`: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior
   public static let ordered: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior
+  @available(iOS 17.0, macOS 14.0, *)
+  @available(watchOS, unavailable)
+  public static let continuous: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior
+  @available(iOS 17.0, macOS 14.0, *)
+  @available(watchOS, unavailable)
+  public static let continuousAndOrdered: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior
   public static func == (a: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior, b: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior) -> Swift.Bool
+  public func hash(into hasher: inout Swift.Hasher)
+  public var hashValue: Swift.Int {
+    get
+  }
+}
+@available(iOS 17.0, macOS 14.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+public struct PhotosPickerStyle : Swift.Equatable, Swift.Hashable {
+  public static let presentation: _PhotosUI_SwiftUI.PhotosPickerStyle
+  public static var inline: _PhotosUI_SwiftUI.PhotosPickerStyle
+  public static var compact: _PhotosUI_SwiftUI.PhotosPickerStyle
+  public static func == (a: _PhotosUI_SwiftUI.PhotosPickerStyle, b: _PhotosUI_SwiftUI.PhotosPickerStyle) -> Swift.Bool
   public func hash(into hasher: inout Swift.Hasher)
   public var hashValue: Swift.Int {
     get
@@ -104,5 +124,16 @@ extension SwiftUI.View {
   
   @available(watchOS, unavailable)
   public func photosPicker(isPresented: SwiftUI.Binding<Swift.Bool>, selection: SwiftUI.Binding<[_PhotosUI_SwiftUI.PhotosPickerItem]>, maxSelectionCount: Swift.Int? = nil, selectionBehavior: _PhotosUI_SwiftUI.PhotosPickerSelectionBehavior = .default, matching filter: PhotosUI.PHPickerFilter? = nil, preferredItemEncoding: _PhotosUI_SwiftUI.PhotosPickerItem.EncodingDisambiguationPolicy = .automatic, photoLibrary: Photos.PHPhotoLibrary) -> some SwiftUI.View
+  
+}
+@available(iOS 17.0, macOS 14.0, *)
+@available(watchOS, unavailable)
+@available(tvOS, unavailable)
+extension SwiftUI.View {
+  public func photosPickerStyle(_ style: _PhotosUI_SwiftUI.PhotosPickerStyle) -> some SwiftUI.View
+  
+  public func photosPickerAccessoryVisibility(_ visibility: SwiftUI.Visibility, edges: SwiftUI.Edge.Set = .all) -> some SwiftUI.View
+  
+  public func photosPickerDisabledCapabilities(_ disabledCapabilities: PhotosUI.PHPickerCapabilities) -> some SwiftUI.View
   
 }

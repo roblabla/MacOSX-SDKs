@@ -8,9 +8,9 @@
 #import <Foundation/Foundation.h>
 #import <HomeKit/HMDefines.h>
 
-NS_ASSUME_NONNULL_BEGIN
+NS_HEADER_AUDIT_BEGIN(nullability, sendability)
 
-HM_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
     @interface HMAccessoryOwnershipToken : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -30,7 +30,7 @@ HM_EXTERN API_AVAILABLE(ios(13.0)) API_UNAVAILABLE(macos, watchos, tvos, macCata
 
 @end
 
-HM_EXTERN API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
+HM_EXTERN NS_SWIFT_SENDABLE API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos, tvos, macCatalyst)
     @interface HMAccessorySetupPayload : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -58,4 +58,4 @@ HM_EXTERN API_AVAILABLE(ios(11.3)) API_UNAVAILABLE(macos, watchos, tvos, macCata
 
 @end
 
-NS_ASSUME_NONNULL_END
+NS_HEADER_AUDIT_END(nullability, sendability)

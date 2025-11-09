@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/usr/lib/libSMC.dylib'
-current-version: 25.100.4
+current-version: 31
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _AccumSetupSettingsCPU, _AccumSetupSettingsGPU, _AccumSetupSettingsHP, 
@@ -67,6 +67,5 @@ exports:
                        _atmasDataAccumLookupSt1sec_K91F, _atmasDataAccumLookupSt1sec_K92, 
                        _atmasDataAccumLookupSt1sec_M96, _atmasDataAccumLookupSt1sec_M97, 
                        _atmasDataAccumLookupSt1sec_k18, _atmasDataAccumLookupSt1sec_m87, 
-                       _atmasDataAccumLookupSt1sec_m98, _gNotification, _gNotifyPort, 
-                       _gSMCClientList, _getSMCQueue ]
+                       _atmasDataAccumLookupSt1sec_m98, _getSMCQueue ]
 ...

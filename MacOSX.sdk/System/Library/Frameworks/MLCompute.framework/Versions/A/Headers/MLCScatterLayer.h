@@ -18,7 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class      MLCScatterLayer
     @abstract   A scatter layer
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.3), ios(14.5), tvos(14.5))
+MLCOMPUTE_AVAILABLE_STARTING_BUT_DEPRECATED_MACOS14(11.3, 14.5, 14.5)
 @interface MLCScatterLayer : MLCLayer
 
 /*! @property   dimension

@@ -287,7 +287,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
  */
 @property(nonatomic,readonly,strong) UILayoutGuide *safeAreaLayoutGuide API_AVAILABLE(ios(11.0),tvos(11.0));
 
-/// Follows the keyboard when on screen and docked. When the keyboard is offscreen or undocked, keyboardLayoutGuide.topAnchor matches the view's safeAreaLayoutGuide.bottomAnchor.
+/// Follows the keyboard when on screen and docked. See UIKeyboardLayoutGuide.h for additional options.
 @property(nonatomic,readonly,strong) UIKeyboardLayoutGuide *keyboardLayoutGuide API_AVAILABLE(ios(15.0)) API_UNAVAILABLE(watchos, tvos);
 
 @end
@@ -306,7 +306,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic)                 BOOL              clearsContextBeforeDrawing; // default is YES. ignored for opaque views. for non-opaque views causes the active CGContext in drawRect: to be pre-filled with transparent pixels
 @property(nonatomic,getter=isHidden) BOOL              hidden;                     // default is NO. doesn't check superviews
 @property(nonatomic)                 UIViewContentMode contentMode;                // default is UIViewContentModeScaleToFill
-@property(nonatomic)                 CGRect            contentStretch API_DEPRECATED("", ios(3.0, 6.0)) API_UNAVAILABLE(tvos); // animatable. default is unit rectangle {{0,0} {1,1}}. Now deprecated: please use -[UIImage resizableImageWithCapInsets:] to achieve the same effect.
+@property(nonatomic)                 CGRect            contentStretch API_DEPRECATED("", ios(3.0, 6.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos); // animatable. default is unit rectangle {{0,0} {1,1}}. Now deprecated: please use -[UIImage resizableImageWithCapInsets:] to achieve the same effect.
 
 @property(nullable, nonatomic,strong)          UIView           *maskView API_AVAILABLE(ios(8.0));
 
@@ -350,6 +350,9 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 + (void)animateWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(4.0)); // delay = 0.0, options = 0
 
 + (void)animateWithDuration:(NSTimeInterval)duration animations:(void (^)(void))animations API_AVAILABLE(ios(4.0)); // delay = 0.0, options = 0, completion = NULL
+
+/* Performs `animations` using a timing curve described by the motion of a spring. The `duration` specified here is a perceptual duration that defines the pace of the spring. This is approximately equal to the settling duration, but for very bouncy springs, will be the duration of the period of oscillation for the spring. When `bounce` is 0, there are no bounces, positive values indicate increasing amounts of bounciness up to a maximum of 1.0 (corresponding to undamped oscillation), and negative values indicate overdamped springs with a minimum value of -1.0. You can use the initial spring velocity to specify how fast the object at the end of the simulated spring was moving before it was attached. It's a unit coordinate system, where 1 is defined as traveling the total animation distance in a second. So if you're changing an object's position by 200pt in this animation, and you want the animation to behave as if the object was moving at 100pt/s before the animation started, you'd pass 0.5. You'll typically want to pass 0 for the velocity. */
++ (void)animateWithSpringDuration:(NSTimeInterval)duration bounce:(CGFloat)bounce initialSpringVelocity:(CGFloat)velocity delay:(NSTimeInterval)delay options:(UIViewAnimationOptions)options animations:(void (NS_NOESCAPE ^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(17.0));
 
 /* Performs `animations` using a timing curve described by the motion of a spring. When `dampingRatio` is 1, the animation will smoothly decelerate to its final model values without oscillating. Damping ratios less than 1 will oscillate more and more before coming to a complete stop. You can use the initial spring velocity to specify how fast the object at the end of the simulated spring was moving before it was attached. It's a unit coordinate system, where 1 is defined as traveling the total animation distance in a second. So if you're changing an object's position by 200pt in this animation, and you want the animation to behave as if the object was moving at 100pt/s before the animation started, you'd pass 0.5. You'll typically want to pass 0 for the velocity. */
 + (void)animateWithDuration:(NSTimeInterval)duration delay:(NSTimeInterval)delay usingSpringWithDamping:(CGFloat)dampingRatio initialSpringVelocity:(CGFloat)velocity options:(UIViewAnimationOptions)options animations:(void (^)(void))animations completion:(void (^ __nullable)(BOOL finished))completion NS_SWIFT_DISABLE_ASYNC API_AVAILABLE(ios(7.0));
@@ -486,7 +489,7 @@ typedef NS_ENUM(NSInteger, UILayoutConstraintAxis) {
  */
 @property(nonatomic, readonly) UIEdgeInsets alignmentRectInsets API_AVAILABLE(ios(6.0));
 
-- (UIView *)viewForBaselineLayout API_DEPRECATED("Override -viewForFirstBaselineLayout or -viewForLastBaselineLayout as appropriate, instead", ios(6.0, 9.0)) API_UNAVAILABLE(tvos);
+- (UIView *)viewForBaselineLayout API_DEPRECATED("Override -viewForFirstBaselineLayout or -viewForLastBaselineLayout as appropriate, instead", ios(6.0, 9.0)) API_UNAVAILABLE(visionos) API_UNAVAILABLE(tvos);
 
 /* -viewForFirstBaselineLayout is called by the constraints system when interpreting
  the firstBaseline attribute for a view.
@@ -649,19 +652,19 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
 
 /* Deprecated in iOS 13.0. Please use the block-based animation API instead. */
 
-+ (void)beginAnimations:(nullable NSString *)animationID context:(nullable void *)context                       API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)commitAnimations                                                                                        API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationDelegate:(nullable id)delegate                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationWillStartSelector:(nullable SEL)selector                                                    API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationDidStopSelector:(nullable SEL)selector                                                      API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationDuration:(NSTimeInterval)duration                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationDelay:(NSTimeInterval)delay                                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationStartDate:(NSDate *)startDate                                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationCurve:(UIViewAnimationCurve)curve                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationRepeatCount:(float)repeatCount                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationRepeatAutoreverses:(BOOL)repeatAutoreverses                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationBeginsFromCurrentState:(BOOL)fromCurrentState                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
-+ (void)setAnimationTransition:(UIViewAnimationTransition)transition forView:(UIView *)view cache:(BOOL)cache   API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0));
++ (void)beginAnimations:(nullable NSString *)animationID context:(nullable void *)context                       API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)commitAnimations                                                                                        API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationDelegate:(nullable id)delegate                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationWillStartSelector:(nullable SEL)selector                                                    API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationDidStopSelector:(nullable SEL)selector                                                      API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationDuration:(NSTimeInterval)duration                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationDelay:(NSTimeInterval)delay                                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationStartDate:(NSDate *)startDate                                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationCurve:(UIViewAnimationCurve)curve                                                           API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationRepeatCount:(float)repeatCount                                                              API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationRepeatAutoreverses:(BOOL)repeatAutoreverses                                                 API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationBeginsFromCurrentState:(BOOL)fromCurrentState                                               API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
++ (void)setAnimationTransition:(UIViewAnimationTransition)transition forView:(UIView *)view cache:(BOOL)cache   API_DEPRECATED("Use the block-based animation API instead", ios(2.0, 13.0)) API_UNAVAILABLE(visionos);
 
 @end
 
@@ -670,19 +673,12 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
 /* Set `overrideUserInterfaceStyle` to cause this view and its subviews to have a specific `UIUserInterfaceStyle`.
  * Reading this property does not return the current `UIUserInterfaceStyle`. Use `traitCollection.userInterfaceStyle` instead.
  *
- * Whenever possible, use the `overrideUserInterfaceStyle` property on `UIViewController` instead.
- *
- * Use this property only when:
- * - You want a particular style on a single view or small view hierarchy.
- * - You want a particular style on an entire `UIWindow` and its view controllers and presentations,
- *   but don't want to force your entire application to have that style.
- *
  *  (If you do want your entire application to have a certain style, don't use this, but instead
  *   set the `UIUserInterfaceStyle" key in your Info.plist.)
  *
  * When set on an ordinary `UIView`:
- * - This property affects only the traits of this view and its subviews.
- * - It does not affect any view controllers, or any subviews that are owned by different view controllers.
+ * - This property affects the user interface style of this view and its subviews.
+ * - Starting in iOS 17, this also affects any nested view controllers and subviews of those view controllers.
  *
  * When set on a `UIWindow`:
  * - This property affects the `rootViewController` and thus the entire view controller and view hierarchy.
@@ -717,6 +713,17 @@ UIKIT_EXTERN const CGSize UILayoutFittingExpandedSize API_AVAILABLE(ios(6.0));
 /// content size category each view has and if that view has limits applied.
 /// This is for debugging purposes only.
 @property (nonatomic, copy, readonly) NSString *appliedContentSizeCategoryLimitsDescription API_AVAILABLE(ios(15.0));
+
+@end
+
+API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0))
+@interface UIView () <UITraitChangeObservable>
+
+@property (nonatomic, readonly) id<UITraitOverrides> traitOverrides;
+
+/// Forces an immediate trait update for this view (and its view controller, if applicable) and any subviews,
+/// including any view controllers or views in its subtree. Any trait change callbacks are sent synchronously.
+- (void)updateTraitsIfNeeded;
 
 @end
 

@@ -1,11 +1,8 @@
-//
-//  GKMatch.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
+
+#import <GameKit/GKDefines.h>
 
 @class GKVoiceChat;
 @class GKPlayer;
@@ -76,21 +73,21 @@ __WATCHOS_PROHIBITED
 - (BOOL)match:(GKMatch *)match shouldReinviteDisconnectedPlayer:(GKPlayer *)player NS_AVAILABLE(10_10, 8_0);
 
 /*** These protocol methods are obsoleted. They will never be invoked and their implementation does nothing***/
-- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use match:didReceiveData:fromRemotePlayer:") ;
-- (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state NS_DEPRECATED(10_8, 10_8, 4_1, 8_0, "This is never invoked and its implementation does nothing, use match:player:didChangeConnectionState:") ;
-- (BOOL)match:(GKMatch *)match shouldReinvitePlayer:(NSString *)playerID NS_DEPRECATED(10_8, 10_10, 5_0, 8_0, "This is never invoked and its implementation does nothing, use shouldReinviteDisconnectedPlayer:") ;
+- (void)match:(GKMatch *)match didReceiveData:(NSData *)data fromPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-match:didReceiveData:fromRemotePlayer:", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
+- (void)match:(GKMatch *)match player:(NSString *)playerID didChangeState:(GKPlayerConnectionState)state API_DEPRECATED_WITH_REPLACEMENT("-match:player:didChangeConnectionState:", ios(4.1,8.0), macos(10.8,10.8)) API_UNAVAILABLE(tvos);
+- (BOOL)match:(GKMatch *)match shouldReinvitePlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-shouldReinviteDisconnectedPlayer:", ios(5.0,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 @end
 
 __WATCHOS_PROHIBITED
 @interface GKMatch (Obsoleted)
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)chooseBestHostPlayerWithCompletionHandler:(void(^)(NSString * __nullable playerID))completionHandler NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "This is never invoked and its implementation does nothing, use chooseBestHostingPlayerWithCompletionHandler:") ;
+- (void)chooseBestHostPlayerWithCompletionHandler:(void(^)(NSString * __nullable playerID))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-chooseBestHostingPlayerWithCompletionHandler:", ios(6.0,8.0), macos(10.9,10.10)) __TVOS_UNAVAILABLE;
 
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (BOOL)sendData:(NSData *)data toPlayers:(NSArray<NSString *> *)playerIDs withDataMode:(GKMatchSendDataMode)mode error:(NSError **)error NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use sendData:toPlayers:dataMode:error:") ;
+- (BOOL)sendData:(NSData *)data toPlayers:(NSArray<NSString *> *)playerIDs withDataMode:(GKMatchSendDataMode)mode error:(NSError **)error API_DEPRECATED_WITH_REPLACEMENT("-sendData:toPlayers:dataMode:error:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 
 /*** This property is obsolete.  ***/
-@property(nonatomic, nullable, readonly) NSArray<NSString *> *playerIDs NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use players instead.") ;   // NSStrings of player identifiers in the match
+@property(nonatomic, nullable, readonly) NSArray<NSString *> *playerIDs API_DEPRECATED_WITH_REPLACEMENT("-players:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;   // NSStrings of player identifiers in the match
 
 @end
 NS_ASSUME_NONNULL_END

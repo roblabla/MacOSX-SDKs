@@ -226,9 +226,19 @@ typedef union {
 
 
 
+/* H15 Coll e-Core. */
+#define CPU_PART_ECORE_COLL    0x50
+
+/* H15 Coll p-Core. */
+#define CPU_PART_PCORE_COLL    0x51
+
+
 
 /* M11 e-Core */
 #define CPU_PART_SAWTOOTH_M11       0x46
+
+
+
 
 
 /* Cache type identification */

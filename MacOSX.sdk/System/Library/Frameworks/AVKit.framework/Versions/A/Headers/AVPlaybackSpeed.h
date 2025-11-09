@@ -24,7 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
  @class         AVPlaybackSpeed
  @abstract      Class used to define a user selectable playback speed in a playback UI.
  */
-API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPlaybackSpeed : NSObject
 
 AVKIT_INIT_UNAVAILABLE

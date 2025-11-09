@@ -13,7 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class CMWaterSubmersionManager;
 
-COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
+COREMOTION_EXPORT API_AVAILABLE(watchos(9.0), ios(16.0)) API_UNAVAILABLE(macos, tvos, macCatalyst)
 /*
  * CMWaterSubmersionManagerDelegate
  *
@@ -62,7 +62,7 @@ COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
 - (void)manager:(CMWaterSubmersionManager*)manager errorOccurred:(NSError*)error;
 @end
 
-COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
+COREMOTION_EXPORT API_AVAILABLE(watchos(9.0), ios(16.0)) API_UNAVAILABLE(macos, tvos, macCatalyst)
 /*
  *  CMWaterSubmersionManager
  *
@@ -99,6 +99,20 @@ COREMOTION_EXPORT API_AVAILABLE(watchos(9.0))
  *      under Motion & Fitness.
  */
 @property (class, nonatomic, readonly) CMAuthorizationStatus authorizationStatus;
+
+/*
+ *  maximumDepth
+ *
+ *  Discussion:
+ *      Returns the maximum depth threshold that this client is authorized to
+ *      receive. This is the threshold at which the API will change state
+ *      to CMWaterSubmersionDepthStatePastMaxDepth. The API will continue
+ *      to vend data until CMWaterSubmersionDepthStateSensorDepthError, 10%
+ *      above this threshold.
+ *
+ *      Returns nil if client is not authorized for submersion data.
+ */
+@property (nonatomic, readonly, nullable) NSMeasurement<NSUnitLength *> *maximumDepth;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -25,7 +25,7 @@
 .Op Fl Fl stderr Ar PATH
 .Op Fl Fl stdin Ar PATH
 .Op Fl Fl stdout Ar PATH
-.Ar
+.Op Fl Fl arch Ar ARCH
 .Op Fl Fl args Ar arg1 ...
 .Sh DESCRIPTION
 The
@@ -49,7 +49,7 @@ Specifies the application to use for opening the file
 .It Fl b\ \&bundle_identifier
 Specifies the bundle identifier for the application to use when opening the file
 .It Fl e
-Causes the file to be opened with /Applications/TextEdit
+Causes the file to be opened with the TextEdit application
 .It Fl t
 Causes the file to be opened with the default text editor, as determined via LaunchServices
 .It Fl f
@@ -76,6 +76,10 @@ Open a new instance of the application(s) even if one is already running.
 Do not bring the application to the foreground.
 .It Fl j
 Launches the app hidden.
+.It Fl Fl arch Ar ARCH
+Launch with the given cpu architecture type and subtype;
+.Ar ARCH
+should be one of any, arm, arm64, arm64e, arm64_32, x86_64, x86_64h, i386.  Two integers matching the values for cpu_type_t and cpu_subtype_t can be specified as integers separated by a '/' character, like "12/13" for CPU_TYPE_ARM/CPU_SUBTYPE_ARM_V8.
 .It Fl h
 Searches header locations for a header whose name matches the given string and then opens it.  Pass a full header name (such as NSView.h) for increased performance.
 .It Fl s

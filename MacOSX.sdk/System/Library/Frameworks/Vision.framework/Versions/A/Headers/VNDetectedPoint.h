@@ -12,12 +12,6 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-typedef NSString * VNRecognizedPointKey NS_STRING_ENUM;
-
-typedef NSString * VNRecognizedPointGroupKey NS_STRING_ENUM;
-
-
-
 /*!
  @class VNDetectedPoint
  @brief VNDetectedPoint is a VNPoint with a confidence value.

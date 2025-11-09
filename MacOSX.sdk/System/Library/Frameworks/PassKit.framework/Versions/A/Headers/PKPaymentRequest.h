@@ -16,9 +16,9 @@
 
 #import <PassKit/PKDeferredPaymentRequest.h>
 
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && __has_include(<AddressBook/ABRecord.h>)
 #import <AddressBook/ABRecord.h>
-#endif // TARGET_OS_IOS
+#endif
 
 #ifndef __PKPAYMENTREQUEST_H__
 #define __PKPAYMENTREQUEST_H__
@@ -29,10 +29,12 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_OPTIONS(NSUInteger, PKMerchantCapability) {
-    PKMerchantCapability3DS                                  = 1UL << 0,   // Merchant supports 3DS
-    PKMerchantCapabilityEMV                                  = 1UL << 1,   // Merchant supports EMV
-    PKMerchantCapabilityCredit NS_ENUM_AVAILABLE(11_0, 9_0) = 1UL << 2,   // Merchant supports credit
-    PKMerchantCapabilityDebit  NS_ENUM_AVAILABLE(11_0, 9_0) = 1UL << 3    // Merchant supports debit
+    PKMerchantCapability3DS             NS_SWIFT_NAME(threeDSecure)                                  = 1UL << 0,   // Merchant supports 3DS
+    PKMerchantCapabilityEMV             NS_SWIFT_NAME(emv)                                           = 1UL << 1,   // Merchant supports EMV
+    PKMerchantCapabilityCredit          NS_SWIFT_NAME(credit)          NS_ENUM_AVAILABLE(11_0, 9_0) = 1UL << 2,   // Merchant supports credit
+    PKMerchantCapabilityDebit           NS_SWIFT_NAME(debit)           NS_ENUM_AVAILABLE(11_0, 9_0) = 1UL << 3    // Merchant supports debit
+    , PKMerchantCapabilityInstantFundsOut NS_SWIFT_NAME(instantFundsOut) NS_ENUM_AVAILABLE(14_0, 17_0) = 1UL << 7    // Merchant supports instant funds out
+    // There are more PKMerchantCapability constants defined in PKPaymentRequest_Private.h; beware of conflicting values when adding new public cases
 } API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0));
 
 typedef NS_OPTIONS(NSUInteger, PKAddressField) {
@@ -52,9 +54,16 @@ typedef NS_ENUM(NSUInteger, PKShippingType) {
 }  API_AVAILABLE(macos(11.0), ios(8.3), watchos(3.0));
 
 typedef NS_ENUM(NSUInteger, PKShippingContactEditingMode) {
-    PKShippingContactEditingModeEnabled = 1,
-    PKShippingContactEditingModeStorePickup
+    PKShippingContactEditingModeAvailable = 1,
+    PKShippingContactEditingModeStorePickup,
+    PKShippingContactEditingModeEnabled __deprecated_enum_msg("Use PKShippingContactEditingModeAvailable instead") = PKShippingContactEditingModeAvailable,
 }  API_AVAILABLE(macos(12.0), ios(15.0), watchos(8.0));
+
+typedef NS_ENUM(NSInteger, PKApplePayLaterAvailability) {
+    PKApplePayLaterAvailable, /// Default state where Apple Pay Later is available
+    PKApplePayLaterUnavailableItemIneligible, /// One or more ineligible items are in the basket, such as items with long fulfillment or prohibited MCCs
+    PKApplePayLaterUnavailableRecurringTransaction, /// There is a recurring payment or subscription in the basket
+} API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0));
 
 // PKPaymentRequest defines an application's request to produce a payment instrument for the
 // purchase of goods and services. It encapsulates information about the selling party's payment
@@ -88,7 +97,7 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // Convenience method to create a payment coupon code expired error with the supplied description.
 + (NSError *)paymentCouponCodeExpiredErrorWithLocalizedDescription:(nullable NSString *)localizedDescription API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos) NS_REFINED_FOR_SWIFT;
 
-// Identifies the merchant, as previously agreed with Apple.  Must match one of the merchant
+// Identifies the merchant, as previously agreed with Apple. Must match one of the merchant
 // identifiers in the application's entitlement.
 @property (nonatomic, copy) NSString *merchantIdentifier;
 
@@ -155,7 +164,7 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 // issued in the supported countries.
 @property (nonatomic, copy, nullable) NSSet<NSString *> *supportedCountries API_AVAILABLE(macos(10.13), ios(11.0), watchos(4.0));
 
-#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST
+#if TARGET_OS_IOS && !TARGET_OS_MACCATALYST && __has_include(<AddressBook/ABRecord.h>)
 // These properties have been deprecated and should not be used.
 @property (nonatomic, assign, nullable) ABRecordRef shippingAddress __WATCHOS_PROHIBITED API_DEPRECATED("ABRecordRef has been deprecated, and does not support all available address properties. You should migrate to shippingContact.", ios(8.0, 9.0));
 
@@ -199,6 +208,11 @@ API_AVAILABLE(macos(11.0), ios(8.0), watchos(3.0))
 //
 // Merchant-specific payment tokens are not supported on watchOS.
 @property (nonatomic, strong, nullable) PKDeferredPaymentRequest *deferredPaymentRequest API_AVAILABLE(macos(13.3), ios(16.4)) API_UNAVAILABLE(watchos);
+
+// Opt out of Apple Pay Later. Defaults to enabled.
+// Only set this property if you have a specific requirement to disable Apple Pay Later.
+// Be sure to select the correct mode that matches your requirement, since this will be displayed to the user.
+@property (nonatomic, assign) PKApplePayLaterAvailability applePayLaterAvailability API_AVAILABLE(macos(14.0), ios(17.0), watchos(10.0)) NS_REFINED_FOR_SWIFT;
 
 @end
 

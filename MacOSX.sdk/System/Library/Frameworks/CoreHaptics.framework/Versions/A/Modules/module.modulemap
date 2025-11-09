@@ -1,4 +1,4 @@
-framework module CoreHaptics [extern_c] [system] {
+framework module CoreHaptics [system] {
 	umbrella header "CoreHaptics.h"
 	
 	export *

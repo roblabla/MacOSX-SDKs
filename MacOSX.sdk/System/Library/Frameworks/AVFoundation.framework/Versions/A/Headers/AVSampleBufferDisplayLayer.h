@@ -4,7 +4,7 @@
 
 	Framework:  AVFoundation
  
-	Copyright 2011-2021 Apple Inc. All rights reserved.
+	Copyright 2011-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -26,6 +26,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @class AVSampleBufferDisplayLayerInternal;
+@class AVSampleBufferVideoRenderer;
 
 AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotification API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos); // decode failed, see NSError in notification payload
 AVF_EXPORT NSString *const AVSampleBufferDisplayLayerFailedToDecodeNotificationErrorKey API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos); // NSError
@@ -67,7 +68,18 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 @end
 
 
+API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerQueueManagement) <AVQueuedSampleBufferRendering>
+
+/*!
+	@property		timebase
+	@abstract		The renderer's timebase, which governs how time stamps are interpreted.
+	@discussion
+		The timebase is used to interpret time stamps.
+ 
+		The timebase is read-only.  Use the AVSampleBufferRenderSynchronizer to set the rate or time.
+*/
+@property (retain, readonly) __attribute__((NSObject)) CMTimebaseRef timebase API_DEPRECATED("Use sampleBufferRenderer's timebase instead", macos(10.8, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property		status
@@ -76,14 +88,14 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 		
 					This property is key value observable.
  */
-@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly) AVQueuedSampleBufferRenderingStatus status API_DEPRECATED("Use sampleBufferRenderer's status instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property		error
 	@abstract		If the display layer's status is AVQueuedSampleBufferRenderingStatusFailed, this describes the error that caused the failure.
 	@discussion		The value of this property is an NSError that describes what caused the display layer to no longer be able to enqueue sample buffers. If the status is not AVQueuedSampleBufferRenderingStatusFailed, the value of this property is nil.
  */
-@property (nonatomic, readonly, nullable) NSError *error API_AVAILABLE(macos(10.10), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos);
+@property (nonatomic, readonly, nullable) NSError *error API_DEPRECATED("Use sampleBufferRenderer's error instead", macos(10.10, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			enqueueSampleBuffer:
@@ -109,8 +121,10 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					IMPORTANT NOTE:  When using CMSampleBuffers that wrap CVPixelBuffer, it is important that such CVPixelBuffers be IOSurface-backed.
 					CoreVideo allocates IOSurface-backed CVPixelBuffers when the pixel buffer attribute dictionary passed to CVPixelBufferPoolCreate contains
 					an entry with key kCVPixelBufferIOSurfacePropertiesKey and value being a dictionary (which can be an empty dictionary).
+
+					The combination of either a non-NULL controlTimebase or an AVSampleBufferRenderSynchronizer with the use of kCMSampleAttachmentKey_DisplayImmediately as an attachment to the CMSampleBuffers that are enqueued for display is not recommended.
  */
-- (void)enqueueSampleBuffer:(CMSampleBufferRef)sampleBuffer;
+- (void)enqueueSampleBuffer:(CMSampleBufferRef)sampleBuffer API_DEPRECATED("Use sampleBufferRenderer's enqueueSampleBuffer: instead", macos(10.8, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			flush
@@ -119,7 +133,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					so the next frame passed to enqueueSampleBuffer: should be an IDR frame
 					(also known as a key frame or sync sample).
 */
-- (void)flush;
+- (void)flush API_DEPRECATED("Use sampleBufferRenderer's flush instead", macos(10.8, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			flushAndRemoveImage
@@ -129,7 +143,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					so the next frame passed to enqueueSampleBuffer: should be an IDR frame
 					(also known as a key frame or sync sample).
 */
-- (void)flushAndRemoveImage;
+- (void)flushAndRemoveImage API_DEPRECATED("Use sampleBufferRenderer's flushWithRemovalOfDisplayedImage:completionHandler: instead", macos(10.8, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@property		requiresFlushToResumeDecoding
@@ -139,8 +153,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					Clients can track changes to this property via AVSampleBufferDisplayLayerRequiresFlushToResumeDecodingDidChangeNotification.
 					This property is not key value observable.
 */
-@property (nonatomic, readonly) BOOL requiresFlushToResumeDecoding API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0)) API_UNAVAILABLE(watchos);
-
+@property (nonatomic, readonly) BOOL requiresFlushToResumeDecoding API_DEPRECATED("Use sampleBufferRenderer's requiresFlushToResumeDecoding instead", macos(11.0, API_TO_BE_DEPRECATED), ios(14.0, API_TO_BE_DEPRECATED), tvos(14.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 /*!
 	@property		readyForMoreMediaData
 	@abstract		Indicates the readiness of the layer to accept more sample buffers.
@@ -166,7 +179,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 	
 					This property is not key value observable.
 */
-@property (readonly, getter=isReadyForMoreMediaData) BOOL readyForMoreMediaData;
+@property (readonly, getter=isReadyForMoreMediaData) BOOL readyForMoreMediaData API_DEPRECATED("Use sampleBufferRenderer's readyForMoreMediaData instead", macos(10.8, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			requestMediaDataWhenReadyOnQueue:usingBlock:
@@ -184,17 +197,25 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 					AVSampleBufferDisplayLayer without a call to stopRequestingMediaData will result
 					in undefined behavior.
 */
-- (void)requestMediaDataWhenReadyOnQueue:(dispatch_queue_t)queue usingBlock:(void (^)(void))block;
+- (void)requestMediaDataWhenReadyOnQueue:(dispatch_queue_t)queue usingBlock:(void (^ NS_SWIFT_SENDABLE)(void))block API_DEPRECATED("Use sampleBufferRenderer's requestMediaDataWhenReadyOnQueue:usingBlock: instead", macos(10.8, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 /*!
 	@method			stopRequestingMediaData
 	@abstract		Cancels any current requestMediaDataWhenReadyOnQueue:usingBlock: call.
 	@discussion		This method may be called from outside the block or from within the block.
 */
-- (void)stopRequestingMediaData;
+- (void)stopRequestingMediaData API_DEPRECATED("Use sampleBufferRenderer's stopRequestingMediaData instead", macos(10.8, API_TO_BE_DEPRECATED), ios(8.0, API_TO_BE_DEPRECATED), tvos(10.2, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
+
+/*!
+	@property	hasSufficientMediaDataForReliablePlaybackStart
+	@abstract	Indicates whether the enqueued media data meets the renderer's preroll level.
+	@discussion	Clients should fetch the value of this property to learn if the renderer has had enough media data enqueued to start playback reliably. Starting playback when this property is NO may prevent smooth playback following an immediate start.
+ */
+@property (nonatomic, readonly) BOOL hasSufficientMediaDataForReliablePlaybackStart API_DEPRECATED("Use sampleBufferRenderer's hasSufficientMediaDataForReliablePlaybackStart instead", macos(11.3, API_TO_BE_DEPRECATED), ios(14.5, API_TO_BE_DEPRECATED), tvos(14.5, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(watchos);
 
 @end
 
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerImageProtection)
 
 /*!
@@ -205,6 +226,7 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
 
 @end
 
+API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos, visionos)
 @interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerVideoDisplaySleepPrevention)
 
 /*!
@@ -215,10 +237,26 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
  Setting this property to NO does not force the display to sleep, it simply stops preventing display sleep.  Other apps or frameworks within your app may still be preventing display sleep for various reasons.
  Note: If sample buffers are being enqueued for playback at the user's request, you should ensure that the value of this property is set to YES. If video is not being displayed as part of the user's primary focus, you should ensure that the value of this property is set to NO.
  */
-@property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos);
+@property (nonatomic) BOOL preventsDisplaySleepDuringVideoPlayback API_AVAILABLE(macos(10.15), ios(13.0), tvos(13.0)) API_UNAVAILABLE(watchos, visionos);
 
 @end
 
+API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(macos, ios, tvos, watchos)
+@interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerAutomaticBackgroundPrevention)
+
+/*!
+ @property   preventsAutomaticBackgroundingDuringVideoPlayback
+ @abstract   Indicates whether video playback prevents the app from automatically getting backgrounded.
+ @discussion
+	 Default is YES.
+	 Setting this property to YES prevents an application that is playing video from automatically getting backgrounded.  This property does not prevent the user from backgrounding the application.
+	 Note: If sample buffers are being enqueued for playback at the user's request, you should ensure that the value of this property is set to YES. If video is not being displayed as part of the user's primary focus, you should ensure that the value of this property is set to NO.
+ */
+@property (nonatomic) BOOL preventsAutomaticBackgroundingDuringVideoPlayback API_AVAILABLE(visionos(1.0)) API_UNAVAILABLE(macos, ios, tvos, watchos);
+
+@end
+
+API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5)) API_UNAVAILABLE(watchos)
 @interface AVSampleBufferDisplayLayer (ProtectedContent)
 
 /*!
@@ -241,6 +279,19 @@ API_AVAILABLE(macos(10.8), ios(8.0), tvos(10.2)) API_UNAVAILABLE(watchos)
  */
 @property (nonatomic, readonly) BOOL outputObscuredDueToInsufficientExternalProtection API_AVAILABLE(macos(11.3), ios(14.5), tvos(14.5)) API_UNAVAILABLE(watchos);
 @end
+
+API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos)
+@interface AVSampleBufferDisplayLayer (AVSampleBufferDisplayLayerRenderer)
+
+/*!
+	@property		sampleBufferRenderer
+	@abstract		An AVSampleBufferVideoRenderer instance that allows enqueuing sample buffers for rendering.
+	@discussion		Although AVSampleBufferDisplayLayer conforms to the AVQueuedSampleBufferRendering protocol, the sampleBufferRenderer should be used to enqueue sample buffers. sampleBufferRenderer allows the client to safely enqueue sample buffers from a background thread. NOTE: Do not use AVSampleBufferDisplayLayer's AVQueuedSampleBufferRendering functions when using sampleBufferRenderer.
+ */
+@property (nonatomic, readonly) AVSampleBufferVideoRenderer *sampleBufferRenderer API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0)) API_UNAVAILABLE(watchos);
+
+@end
+
 
 NS_ASSUME_NONNULL_END
 

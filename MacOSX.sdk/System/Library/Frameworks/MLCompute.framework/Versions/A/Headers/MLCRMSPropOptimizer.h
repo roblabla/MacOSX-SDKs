@@ -15,7 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 /*! @class      MLCRMSPropOptimizer
     @discussion The MLCRMSPropOptimizer specifies the RMSProp optimizer.
  */
-MLCOMPUTE_CLASS_AVAILABLE_STARTING(macos(11.0))
+API_DEPRECATED("Use Metal Performance Shaders Graph or BNNS instead.", macos(11.0, API_TO_BE_DEPRECATED))
 @interface  MLCRMSPropOptimizer : MLCOptimizer<NSCopying>
 
 /*! @property   momentumScale

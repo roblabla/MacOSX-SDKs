@@ -191,10 +191,12 @@ extern "C" {
 	#define CM_EXPORT __declspec( dllimport ) extern
 	#define VT_EXPORT __declspec( dllimport ) extern
 	#define MT_EXPORT __declspec( dllimport ) extern
+	#define ME_EXPORT __declspec( dllimport ) extern
 #else
 	#define CM_EXPORT extern
 	#define VT_EXPORT extern
 	#define MT_EXPORT extern
+	#define ME_EXPORT extern
 #endif
 
 // These have 32-bit range in a 32-bit build, and 64-bit range in a 64-bit build.
@@ -225,7 +227,7 @@ typedef CFIndex CMItemIndex;
 #define COREMEDIA_USE_DERIVED_ENUMS_FOR_CONSTANTS COREMEDIA_FALSE
 #endif
 
-#if (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature)
+#if (TARGET_OS_IPHONE || TARGET_OS_MAC || TARGET_OS_LINUX) && defined(__has_feature)
 #if __has_feature(nullability)
 	#define COREMEDIA_DECLARE_NULLABILITY COREMEDIA_TRUE
 #endif
@@ -249,7 +251,7 @@ typedef CFIndex CMItemIndex;
 	#define COREMEDIA_DECLARE_RELEASES_ARGUMENT COREMEDIA_TRUE
 #endif
 
-#endif // (TARGET_OS_IPHONE || TARGET_OS_MAC) && defined(__has_feature)
+#endif // (TARGET_OS_IPHONE || TARGET_OS_MAC || TARGET_OS_LINUX) && defined(__has_feature)
 
 #ifndef COREMEDIA_DECLARE_NULLABILITY
 #define COREMEDIA_DECLARE_NULLABILITY COREMEDIA_FALSE
@@ -284,8 +286,13 @@ typedef CFIndex CMItemIndex;
 #endif
 
 #if COREMEDIA_DECLARE_NULLABILITY
+#if TARGET_OS_LINUX
+#define CM_NULLABLE _Nullable
+#define CM_NONNULL _Nonnull
+#else // TARGET_OS_LINUX
 #define CM_NULLABLE __nullable
 #define CM_NONNULL __nonnull
+#endif //TARGET_OS_LINUX
 #else
 #define CM_NULLABLE
 #define CM_NONNULL
@@ -360,6 +367,23 @@ enum
 		#define CM_INLINE static    
 	#endif
 #endif
+
+// These defines are copied over from CFNSObjCRuntime.h
+#if __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
+	// The typedef or struct should be imported as 'Sendable' in Swift
+	#define CM_SWIFT_SENDABLE __attribute__((swift_attr("@Sendable")))
+	// The struct should *not* be imported as 'Sendable' in Swift even if it normally would be
+	#define CM_SWIFT_NONSENDABLE __attribute__((swift_attr("@_nonSendable")))
+#else
+	#define CM_SWIFT_SENDABLE
+	#define CM_SWIFT_NONSENDABLE
+#endif // __SWIFT_ATTR_SUPPORTS_SENDABLE_DECLS
+
+// Swift macros not available on Windows builds
+#if TARGET_OS_WINDOWS
+#define CF_SWIFT_UNAVAILABLE(_unused)
+#define CF_REFINED_FOR_SWIFT
+#endif // TARGET_OS_WINDOWS
 
 #pragma pack(pop)
     

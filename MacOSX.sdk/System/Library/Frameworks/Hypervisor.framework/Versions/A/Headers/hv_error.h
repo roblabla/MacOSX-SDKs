@@ -1,9 +1,9 @@
-/*
- *  hv_error.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2021 Apple Inc. All rights reserved.
- */
+//
+//  hv_error.h
+//  Hypervisor
+//
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//
 
 #ifndef __HYPERVISOR_HV_RETURN__
 #define __HYPERVISOR_HV_RETURN__
@@ -25,15 +25,15 @@ __BEGIN_DECLS
  * @abstract   Hypervisor Framework return codes
  */
 enum {
-	HV_SUCCESS		= 0,
-	HV_ERROR		= err_common_hypervisor | 0x01, /* (0xfae94001) */
-	HV_BUSY			= err_common_hypervisor | 0x02, /* (0xfae94002) */
-	HV_BAD_ARGUMENT	= err_common_hypervisor | 0x03, /* (0xfae94003) */
-	HV_NO_RESOURCES	= err_common_hypervisor | 0x05, /* (0xfae94005) */
-	HV_NO_DEVICE	= err_common_hypervisor | 0x06, /* (0xfae94006) */
-	HV_DENIED		= err_common_hypervisor | 0x07, /* (0xfae94007) */
-	HV_FAULT        = err_common_hypervisor | 0x08, /* (0xfae94008) */
-	HV_UNSUPPORTED	= err_common_hypervisor | 0x0f  /* (0xfae9400f) */
+    HV_SUCCESS        = 0,
+    HV_ERROR        = err_common_hypervisor | 0x01, /* (0xfae94001) */
+    HV_BUSY            = err_common_hypervisor | 0x02, /* (0xfae94002) */
+    HV_BAD_ARGUMENT    = err_common_hypervisor | 0x03, /* (0xfae94003) */
+    HV_NO_RESOURCES    = err_common_hypervisor | 0x05, /* (0xfae94005) */
+    HV_NO_DEVICE    = err_common_hypervisor | 0x06, /* (0xfae94006) */
+    HV_DENIED        = err_common_hypervisor | 0x07, /* (0xfae94007) */
+    HV_FAULT        = err_common_hypervisor | 0x08, /* (0xfae94008) */
+    HV_UNSUPPORTED    = err_common_hypervisor | 0x0f  /* (0xfae9400f) */
 };
 
 typedef mach_error_t hv_return_t;

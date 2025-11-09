@@ -13,6 +13,7 @@
 #import <CoreMotion/CMAccelerometer.h>
 #import <CoreMotion/CMAltimeter.h>
 #import <CoreMotion/CMAltitude.h>
+#import <CoreMotion/CMAbsoluteAltitude.h>
 #import <CoreMotion/CMAttitude.h>
 #import <CoreMotion/CMAuthorization.h>
 #import <CoreMotion/CMAvailability.h>
@@ -34,6 +35,9 @@
 #import <CoreMotion/CMStepCounter.h>
 #import <CoreMotion/CMSensorRecorder.h>
 #import <CoreMotion/CMRecordedPressureData.h>
+#import <CoreMotion/CMHighFrequencyHeartRateData.h>
+#import <CoreMotion/CMOdometer.h>
 #import <CoreMotion/CMWaterSubmersionManager.h>
+#import <CoreMotion/CMBatchedSensorManager.h>
 
 #endif /* __COREMOTION__ */

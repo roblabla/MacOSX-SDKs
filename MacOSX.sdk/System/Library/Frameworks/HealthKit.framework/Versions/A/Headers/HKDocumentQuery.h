@@ -5,7 +5,7 @@
 //  Copyright (c) 2016-2022 Apple Inc. All rights reserved.
 //
 
-#include <HealthKit/HKQuery.h>
+#import <HealthKit/HKQuery.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

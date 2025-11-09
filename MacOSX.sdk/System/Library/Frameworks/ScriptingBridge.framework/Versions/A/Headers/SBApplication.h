@@ -41,7 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// the shared instance of a application-specific subclass typically by calling
 /// one of the `applicationWith...` class methods, using a bundle identifier,
 /// process identifier, or URL to identify the application.
-NS_CLASS_AVAILABLE(10_5, NA)
+API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 @interface SBApplication : SBObject <NSCoding>
 
 
@@ -263,6 +263,7 @@ NS_CLASS_AVAILABLE(10_5, NA)
 /// ``SBApplication/delegate`` method. If you do not set a delegate and have the
 /// delegate handle the error in some way, ``SBApplication`` raises an
 /// exception.
+API_AVAILABLE(macos(10.5), macCatalyst(13.0))
 @protocol SBApplicationDelegate
 
 

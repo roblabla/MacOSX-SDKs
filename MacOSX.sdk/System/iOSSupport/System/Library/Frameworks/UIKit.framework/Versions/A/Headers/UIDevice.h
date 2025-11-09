@@ -8,18 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKitDefines.h>
+#import <UIKit/UIOrientation.h>
 
 NS_HEADER_AUDIT_BEGIN(nullability, sendability)
-
-typedef NS_ENUM(NSInteger, UIDeviceOrientation) {
-    UIDeviceOrientationUnknown,
-    UIDeviceOrientationPortrait,            // Device oriented vertically, home button on the bottom
-    UIDeviceOrientationPortraitUpsideDown,  // Device oriented vertically, home button on the top
-    UIDeviceOrientationLandscapeLeft,       // Device oriented horizontally, home button on the right
-    UIDeviceOrientationLandscapeRight,      // Device oriented horizontally, home button on the left
-    UIDeviceOrientationFaceUp,              // Device oriented flat, face up
-    UIDeviceOrientationFaceDown             // Device oriented flat, face down
-} API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSInteger, UIDeviceBatteryState) {
     UIDeviceBatteryStateUnknown,
@@ -35,23 +26,10 @@ typedef NS_ENUM(NSInteger, UIUserInterfaceIdiom) {
     UIUserInterfaceIdiomTV API_AVAILABLE(ios(9.0)), // Apple TV style UI
     UIUserInterfaceIdiomCarPlay API_AVAILABLE(ios(9.0)), // CarPlay style UI
     UIUserInterfaceIdiomMac API_AVAILABLE(ios(14.0)) = 5, // Optimized for Mac UI
+    UIUserInterfaceIdiomVision API_AVAILABLE(ios(17.0)) = 6, // Vision UI
 };
 
-static inline BOOL UIDeviceOrientationIsPortrait(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos) {
-    return ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown);
-}
 
-static inline BOOL UIDeviceOrientationIsLandscape(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos) {
-    return ((orientation) == UIDeviceOrientationLandscapeLeft || (orientation) == UIDeviceOrientationLandscapeRight);
-}
-
-static inline __attribute__((always_inline)) BOOL UIDeviceOrientationIsFlat(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos) {
-    return ((orientation) == UIDeviceOrientationFaceUp || (orientation) == UIDeviceOrientationFaceDown);
-}
-
-static inline __attribute__((always_inline)) BOOL UIDeviceOrientationIsValidInterfaceOrientation(UIDeviceOrientation orientation)  API_UNAVAILABLE(tvos) {
-    return ((orientation) == UIDeviceOrientationPortrait || (orientation) == UIDeviceOrientationPortraitUpsideDown || (orientation) == UIDeviceOrientationLandscapeLeft || (orientation) == UIDeviceOrientationLandscapeRight);
-}
 
 UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @interface UIDevice : NSObject
@@ -63,13 +41,13 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 @property(nonatomic,readonly,strong) NSString    *localizedModel;    // localized version of model
 @property(nonatomic,readonly,strong) NSString    *systemName;        // e.g. @"iOS"
 @property(nonatomic,readonly,strong) NSString    *systemVersion;     // e.g. @"4.0"
-@property(nonatomic,readonly) UIDeviceOrientation orientation API_UNAVAILABLE(tvos);       // return current device orientation.  this will return UIDeviceOrientationUnknown unless device orientation notifications are being generated.
+@property(nonatomic,readonly) UIDeviceOrientation orientation API_UNAVAILABLE(tvos, visionos);       // return current device orientation.  this will return UIDeviceOrientationUnknown unless device orientation notifications are being generated.
 
 @property(nullable, nonatomic,readonly,strong) NSUUID      *identifierForVendor API_AVAILABLE(ios(6.0));      // a UUID that may be used to uniquely identify the device, same across apps from a single vendor.
 
-@property(nonatomic,readonly,getter=isGeneratingDeviceOrientationNotifications) BOOL generatesDeviceOrientationNotifications API_UNAVAILABLE(tvos);
-- (void)beginGeneratingDeviceOrientationNotifications API_UNAVAILABLE(tvos);      // nestable
-- (void)endGeneratingDeviceOrientationNotifications API_UNAVAILABLE(tvos);
+@property(nonatomic,readonly,getter=isGeneratingDeviceOrientationNotifications) BOOL generatesDeviceOrientationNotifications API_UNAVAILABLE(tvos, visionos);
+- (void)beginGeneratingDeviceOrientationNotifications API_UNAVAILABLE(tvos, visionos);      // nestable
+- (void)endGeneratingDeviceOrientationNotifications API_UNAVAILABLE(tvos, visionos);
 
 @property(nonatomic,getter=isBatteryMonitoringEnabled) BOOL batteryMonitoringEnabled API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);  // default is NO
 @property(nonatomic,readonly) UIDeviceBatteryState          batteryState API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);  // UIDeviceBatteryStateUnknown if monitoring disabled
@@ -82,7 +60,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(2.0)) NS_SWIFT_UI_ACTOR
 
 @property(nonatomic,readonly) UIUserInterfaceIdiom userInterfaceIdiom API_AVAILABLE(ios(3.2));
 
-- (void)playInputClick API_AVAILABLE(ios(4.2));  // Plays a click only if an enabling input view is on-screen and user has enabled input clicks.
+- (void)playInputClick API_AVAILABLE(ios(4.2)) API_UNAVAILABLE(visionos);  // Plays a click only if an enabling input view is on-screen and user has enabled input clicks.
 
 @end
 
@@ -90,19 +68,19 @@ NS_SWIFT_UI_ACTOR
 @protocol UIInputViewAudioFeedback <NSObject>
 @optional
 
-@property (nonatomic, readonly) BOOL enableInputClicksWhenVisible; // If YES, an input view will enable playInputClick.
+@property (nonatomic, readonly) BOOL enableInputClicksWhenVisible API_UNAVAILABLE(visionos); // If YES, an input view will enable playInputClick.
 
 @end
 
 /* The UI_USER_INTERFACE_IDIOM() function is provided for use when deploying to a version of the iOS less than 3.2. If the earliest version of iPhone/iOS that you will be deploying for is 3.2 or greater, you may use -[UIDevice userInterfaceIdiom] directly.
  */
-static inline UIUserInterfaceIdiom UI_USER_INTERFACE_IDIOM(void) API_DEPRECATED("Use -[UIDevice userInterfaceIdiom] directly.", ios(2.0, 13.0), tvos(9.0, 11.0)) {
+static inline UIUserInterfaceIdiom UI_USER_INTERFACE_IDIOM(void) API_DEPRECATED("Use -[UIDevice userInterfaceIdiom] directly.", ios(2.0, 13.0), tvos(9.0, 11.0)) API_UNAVAILABLE(visionos) {
     return ([[UIDevice currentDevice] respondsToSelector:@selector(userInterfaceIdiom)] ?
             [[UIDevice currentDevice] userInterfaceIdiom] :
             UIUserInterfaceIdiomPhone);
 }
 
-UIKIT_EXTERN NSNotificationName const UIDeviceOrientationDidChangeNotification API_UNAVAILABLE(tvos);
+UIKIT_EXTERN NSNotificationName const UIDeviceOrientationDidChangeNotification API_UNAVAILABLE(tvos, visionos);
 UIKIT_EXTERN NSNotificationName const UIDeviceBatteryStateDidChangeNotification   API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
 UIKIT_EXTERN NSNotificationName const UIDeviceBatteryLevelDidChangeNotification   API_AVAILABLE(ios(3.0)) API_UNAVAILABLE(tvos);
 UIKIT_EXTERN NSNotificationName const UIDeviceProximityStateDidChangeNotification API_AVAILABLE(ios(3.0));

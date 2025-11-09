@@ -20,11 +20,10 @@
 #import <Vision/VNDefines.h>
 #import <Vision/VNRequest.h>
 
-
 NS_ASSUME_NONNULL_BEGIN
 
 @class CIImage;
-
+@class AVDepthData;
 /*!
  @brief Options keys passed into the VNImageRequestHandler creations or requests that take an auxiliary image. These are options that either describe specific properties of an image like the VNImageOptionCameraIntrinsics or how an image needs to be handled like the VNImageOptionCIContext.
 */
@@ -57,7 +56,6 @@ VN_EXPORT VNImageOption const VNImageOptionCameraIntrinsics API_AVAILABLE(macos(
 
 VN_EXPORT VNImageOption const VNImageOptionCIContext API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0));
 
-
 /*!
  @brief Performs requests on a single image.
  @discussion The VNImageRequestHandler is created with an image that is used to be used for the requests a client might want to schedule. The VNImageRequestHandler retains, but never modifies, the image source for its entire lifetime. The client also must not modify the content of the image source once the VNImageRequestHandler is created otherwise the results are undefined.
@@ -84,6 +82,18 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  @param options A dictionary with options specifying auxiliary information for the buffer/image like VNImageOptionCameraIntrinsics
  */
 - (instancetype)initWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options;
+
+/*!
+ @brief initWithCVPixelBuffer:depthData:orientation:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as buffer with depth information.
+ @param pixelBuffer A CVPixelBuffer containing the image to be used for performing the requests. The content of the buffer cannot be modified for the lifetime of the VNImageRequestHandler.
+ @param depthData An AVDepthData instance associated with the pixelBuffer
+ @param orientation The orientation of the image and depth buffers based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information and should match for both buffers.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image
+ */
+- (instancetype)initWithCVPixelBuffer:(CVPixelBufferRef)pixelBuffer
+                            depthData:(AVDepthData*)depthData
+                          orientation:(CGImagePropertyOrientation)orientation
+                              options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 /*!
  @brief initWithCGImage:options creates a VNImageRequestHandler to be used for performing requests against the image passed in as a CGImageRef.
@@ -200,6 +210,20 @@ API_AVAILABLE(macos(10.13), ios(11.0), tvos(11.0))
  */
 - (instancetype)initWithCMSampleBuffer:(CMSampleBufferRef)sampleBuffer orientation:(CGImagePropertyOrientation)orientation options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(11.0), ios(14.0), tvos(14.0));
 
+/*!
+ @brief Creates a VNImageRequestHandler to be used for performing requests against the image buffer contained in the CMSampleBufferRef
+ 
+ @param sampleBuffer A CMSampleBuffer containing the imageBuffer that will be used for performing the requests. Not all types of sample buffers are supported. They need to contain a CVImageBuffer, be valid and ready.
+ @param depthData An AVDepthData instance associated with the pixelBuffer
+ @param orientation The orientation of the image and depth buffers based on the EXIF specification. For details see kCGImagePropertyOrientation. The value has to be an integer from 1 to 8. This supersedes every other orientation information and should match for both buffers.
+ @param options A dictionary with options specifying auxiliary information for the buffer/image
+ @note CMSampleBuffers can contain metadata like camera intrinsics that will be used by algorithms supporting it unless overwritten by the options.
+ @note:  Because CoreImage is unable to render certain pixel formats in the iOS simulator, request results may not be accurate in those cases.
+ */
+- (instancetype)initWithCMSampleBuffer:(CMSampleBufferRef)sampleBuffer
+                             depthData:(AVDepthData*)depthData
+                           orientation:(CGImagePropertyOrientation)orientation
+                               options:(NSDictionary<VNImageOption, id> *)options API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 /*!
  @brief performRequests schedules one or more VNRequests to be performed. The function returns once all requests have been finished.

@@ -5,11 +5,9 @@
 //  Copyright © 2020 Apple Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 #import <GameController/GCMicroGamepad.h>
 
 NS_ASSUME_NONNULL_BEGIN
-
 
 /**
  The primary directional input surface for the directional gamepad

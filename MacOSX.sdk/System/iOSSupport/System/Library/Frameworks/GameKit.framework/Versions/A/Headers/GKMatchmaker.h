@@ -1,15 +1,12 @@
-//
-//  GKMatchmaker.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
-#include <Foundation/Foundation.h>
+#import <TargetConditionals.h>
+#import <Foundation/Foundation.h>
 
-@class GKPlayer;
+#import <GameKit/GKDefines.h>
+
 @class GKMatch;
-
+@class GKPlayer;
 
 /// Possible invitee responses
 typedef NS_ENUM(NSInteger, GKInviteRecipientResponse) {
@@ -29,7 +26,7 @@ typedef NS_ENUM(NSInteger, GKInviteRecipientResponse) {
     GKInviteeResponseNoAnswer           = GKInviteRecipientResponseNoAnswer,
 };
 
-typedef GKInviteRecipientResponse GKInviteeResponse;
+typedef GKInviteRecipientResponse GKInviteeResponse API_DEPRECATED_WITH_REPLACEMENT("GKInviteRecipientResponse", ios(6.0,17.0), macos(10.8,14.0), tvos(9.0,17.0), watchos(3.0,10.0));
 
 NS_ASSUME_NONNULL_BEGIN
 /// GKMatchRequest represents the parameters needed to create the match.
@@ -61,11 +58,11 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 /// Whether or not a match will be created only using automatch.  If YES, then a player will not be able to
 /// invite anyone (including contacts, friends, and nearby players) to the match, but rely on automatching to
 /// find players for the match.  Default is NO.
-@property(assign) BOOL restrictToAutomatch API_DEPRECATED("Set the matchmakingMode of GKMatchmakerViewController instead.", ios(13.0, 14.0), tvos(13.0, 14.0), macosx(10.15, 11.0));
+@property(assign) BOOL restrictToAutomatch API_DEPRECATED_WITH_REPLACEMENT("-[GKMatchmakerViewController matchmakingMode:]", ios(13.0, 14.0), tvos(13.0, 14.0), macosx(10.15, 11.0));
 
 /// An recipientResponseHandler can be set in order to receive responses from programmatically invited players.
 @property(copy, nullable) void(^recipientResponseHandler)(GKPlayer *player, GKInviteRecipientResponse response) NS_AVAILABLE(10_10, 8_0);
-@property(copy, nullable) void(^inviteeResponseHandler)(NSString *playerID, GKInviteeResponse response) NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "use recipientResponseHandler") ;
+@property(copy, nullable) void(^inviteeResponseHandler)(NSString *playerID, GKInviteeResponse response) API_DEPRECATED_WITH_REPLACEMENT("recipientResponseHandler", ios(6.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 
 typedef NS_ENUM(NSUInteger, GKMatchType) {
     GKMatchTypePeerToPeer,
@@ -76,9 +73,8 @@ typedef NS_ENUM(NSUInteger, GKMatchType) {
 /// To determine the maximum allowed players for each type of match supported.
 + (NSUInteger)maxPlayersAllowedForMatchOfType:(GKMatchType)matchType NS_AVAILABLE(10_9, 6_0);
 
-@property(retain, nullable) NSArray<NSString *> *playersToInvite NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This property is obsolete, use recipients instead") ; // Array of player IDs to invite, or nil if none
+@property(retain, nullable) NSArray<NSString *> *playersToInvite API_DEPRECATED_WITH_REPLACEMENT("-recipients:", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos); // Array of player IDs to invite, or nil if none
 @end
-
 
 /// GKInvite represents an accepted game invite, it is used to create a GKMatchmakerViewController
 NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
@@ -92,7 +88,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 @property(readonly, NS_NONATOMIC_IOSONLY) uint32_t playerAttributes NS_AVAILABLE(10_9, 6_0);
 
 /*** This property is obsolete. ***/
-@property(readonly, retain, NS_NONATOMIC_IOSONLY) NSString *inviter NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This property is obsolete, use sender instead") ;
+@property(readonly, retain, NS_NONATOMIC_IOSONLY) NSString *inviter API_DEPRECATED_WITH_REPLACEMENT("-sender:", ios(4.1,8.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 @end
 
 /// GKInviteEventListener uses the GKLocalPlayerListener mechanism on GKLocalPlayer to listen to the two kinds of invite events that a game must respond to
@@ -107,7 +103,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 - (void)player:(GKPlayer *)player didRequestMatchWithRecipients:(NSArray<GKPlayer *> *)recipientPlayers NS_AVAILABLE(10_10, 8_0) __WATCHOS_PROHIBITED;
 
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite NS_DEPRECATED_IOS(7_0, 8_0, "This method is obsolete.  It will never be invoked its implementation does nothing, use player:didRequestMatchWithRecipients:") ;
+- (void)player:(GKPlayer *)player didRequestMatchWithPlayers:(NSArray<NSString *> *)playerIDsToInvite API_DEPRECATED_WITH_REPLACEMENT("-player:didRequestMatchWithRecipients:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 @end
 
 
@@ -139,6 +135,7 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 /// 2. Unauthenticated player
 /// 3. Timeout
 - (void)findPlayersForHostedRequest:(GKMatchRequest *)request withCompletionHandler:(void(^__nullable)(NSArray<GKPlayer *> * __nullable players, NSError * __nullable error))completionHandler NS_AVAILABLE(10_10, 8_0);
+
 
 /// Automatching or invites to add additional players to a peer-to-peer match for the specified request. Error will be nil on success:
 /// Possible reasons for error:
@@ -185,18 +182,18 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_PROHIBITED
 __WATCHOS_PROHIBITED
 @interface GKMatchmaker (GKDeprecated)
 
-@property(nonatomic, nullable, copy) void(^inviteHandler)(GKInvite *acceptedInvite, NSArray * __nullable playerIDsToInvite) NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use registerListener on GKLocalPlayer to register an object that implements the GKInviteEventListenerProtocol instead") ;
+@property(nonatomic, nullable, copy) void(^inviteHandler)(GKInvite *acceptedInvite, NSArray * __nullable playerIDsToInvite) API_DEPRECATED("Use registerListener on GKLocalPlayer to register an object that implements the GKInviteEventListenerProtocol instead.", ios(4.1,7.0), macos(10.8,10.10)) API_UNAVAILABLE(tvos);
 @end
 
 __WATCHOS_PROHIBITED
 @interface GKMatchmaker (Obsoleted)
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)startBrowsingForNearbyPlayersWithReachableHandler:(void(^__nullable)(NSString *playerID, BOOL reachable))reachableHandler NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "This is never invoked and its implementation does nothing, Use startBrowsingForNearbyPlayersWithHandler: instead") ;
+- (void)startBrowsingForNearbyPlayersWithReachableHandler:(void(^__nullable)(NSString *playerID, BOOL reachable))reachableHandler API_DEPRECATED_WITH_REPLACEMENT("-startBrowsingForNearbyPlayersWithHandler:", ios(6.0,8.0), macos(10.9,10.10)) __TVOS_UNAVAILABLE;
 
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)cancelInviteToPlayer:(NSString *)playerID NS_DEPRECATED(10_9, 10_10, 6_0, 8_0, "This is never invoked and its implementation does nothing, use cancelPendingInviteToPlayer:") ;
+- (void)cancelInviteToPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-cancelPendingInviteToPlayer:", ios(6.0,8.0), macos(10.9,10.10)) __TVOS_UNAVAILABLE;
 
 /*** This method is obsolete. It will never be invoked and its implementation does nothing***/
-- (void)findPlayersForHostedMatchRequest:(GKMatchRequest *)request withCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable playerIDs, NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 8_0, "This is never invoked and its implementation does nothing, use findPlayersForHostedRequest:") ;
+- (void)findPlayersForHostedMatchRequest:(GKMatchRequest *)request withCompletionHandler:(void(^__nullable)(NSArray<NSString *> * __nullable playerIDs, NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("-findPlayersForHostedRequest:", ios(4.1,8.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 @end
 NS_ASSUME_NONNULL_END

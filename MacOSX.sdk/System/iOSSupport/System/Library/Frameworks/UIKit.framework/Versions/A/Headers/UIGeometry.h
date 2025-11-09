@@ -100,7 +100,7 @@ typedef NS_OPTIONS(NSUInteger, UIDirectionalRectEdge) {
     UIDirectionalRectEdgeBottom     = 1 << 2,
     UIDirectionalRectEdgeTrailing   = 1 << 3,
     UIDirectionalRectEdgeAll    = UIDirectionalRectEdgeTop | UIDirectionalRectEdgeLeading | UIDirectionalRectEdgeBottom | UIDirectionalRectEdgeTrailing
-} API_DEPRECATED_WITH_REPLACEMENT("NSDirectionalRectEdge", ios(13.0, 13.0), watchos(6.0,6.0), tvos(13.0,13.0));
+} API_DEPRECATED_WITH_REPLACEMENT("NSDirectionalRectEdge", ios(13.0, 13.0), watchos(6.0,6.0), tvos(13.0,13.0)) API_UNAVAILABLE(visionos);
 
 typedef NS_ENUM(NSInteger, NSRectAlignment) {
     NSRectAlignmentNone = 0,

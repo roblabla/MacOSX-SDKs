@@ -5,6 +5,7 @@
 //  Copyright © 2019 Apple. All rights reserved.
 //
 
+#import <PencilKit/PKContentVersion.h>
 #import <UIKit/UIKit.h>
 
 NS_ASSUME_NONNULL_BEGIN
@@ -70,6 +71,14 @@ API_AVAILABLE(ios(13.0))
 
 /// The name used to automatically save the tool picker's state in the defaults system.
 @property (nonatomic, copy, nullable) NSString *stateAutosaveName API_AVAILABLE(ios(14.0));
+
+/// The maximum supported PencilKit content version.
+///
+/// Setting this to less than `.latest` limits the tools that are available to select so that they are compatible with the
+/// specified version. If setting this property, also set it on `PKCanvasView`.
+///
+/// Defaults to `.latest`.
+@property (nonatomic, assign) PKContentVersion maximumSupportedContentVersion API_AVAILABLE(ios(17.0), macos(14.0));
 
 /// The frame within a specific view that the tool picker covers.
 ///

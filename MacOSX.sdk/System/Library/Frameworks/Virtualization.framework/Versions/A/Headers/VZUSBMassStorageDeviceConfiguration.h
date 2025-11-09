@@ -2,7 +2,7 @@
 //  VZUSBMassStorageDeviceConfiguration.h
 //  Virtualization
 //
-//  Copyright © 2021-2022 Apple Inc. All rights reserved.
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZStorageDeviceConfiguration.h>
@@ -16,9 +16,6 @@ NS_ASSUME_NONNULL_BEGIN
  */
 VZ_EXPORT API_AVAILABLE(macos(13.0))
 @interface VZUSBMassStorageDeviceConfiguration : VZStorageDeviceConfiguration
-
-+ (instancetype)new NS_UNAVAILABLE;
-- (instancetype)init NS_UNAVAILABLE;
 
 /*!
  @abstract Initialize a VZUSBMassStorageDeviceConfiguration with a device attachment.

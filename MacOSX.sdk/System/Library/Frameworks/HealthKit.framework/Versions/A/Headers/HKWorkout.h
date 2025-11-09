@@ -102,6 +102,7 @@ typedef NS_ENUM(NSUInteger, HKWorkoutActivityType) {
     HKWorkoutActivityTypeCooldown           API_AVAILABLE(ios(14.0), watchos(7.0), macCatalyst(14.0), macos(13.0)),    // Low intensity stretching and mobility exercises following a more vigorous workout type
     HKWorkoutActivityTypeSwimBikeRun        API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)) = 82,
     HKWorkoutActivityTypeTransition         API_AVAILABLE(ios(16.0), watchos(9.0), macCatalyst(16.0), macos(13.0)),
+    HKWorkoutActivityTypeUnderwaterDiving   API_AVAILABLE(ios(17.0), watchos(10.0), macCatalyst(17.0), macos(14.0)),
     
     HKWorkoutActivityTypeOther = 3000,
 } API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
@@ -260,7 +261,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
  */
 + (instancetype)workoutWithActivityType:(HKWorkoutActivityType)workoutActivityType
                               startDate:(NSDate *)startDate
-                                endDate:(NSDate *)endDate;
+                                endDate:(NSDate *)endDate API_DEPRECATED("Use HKWorkoutBuilder", ios(8.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata
@@ -281,7 +282,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                           workoutEvents:(nullable NSArray<HKWorkoutEvent *> *)workoutEvents
                       totalEnergyBurned:(nullable HKQuantity *)totalEnergyBurned
                           totalDistance:(nullable HKQuantity *)totalDistance
-                               metadata:(nullable NSDictionary<NSString *, id> *)metadata;
+                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_DEPRECATED("Use HKWorkoutBuilder", ios(8.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:metadata
@@ -304,7 +305,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                       totalEnergyBurned:(nullable HKQuantity *)totalEnergyBurned
                           totalDistance:(nullable HKQuantity *)totalDistance
                                  device:(nullable HKDevice *)device
-                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_DEPRECATED("Use HKWorkoutBuilder", ios(9.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:metadata:
@@ -325,7 +326,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                                duration:(NSTimeInterval)duration
                       totalEnergyBurned:(nullable HKQuantity *)totalEnergyBurned
                           totalDistance:(nullable HKQuantity *)totalDistance
-                               metadata:(nullable NSDictionary<NSString *, id> *)metadata;
+                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_DEPRECATED("Use HKWorkoutBuilder", ios(8.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        workoutWithActivityType:startDate:endDate:duration:totalEnergyBurned:totalDistance:device:metadata:
@@ -348,7 +349,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                       totalEnergyBurned:(nullable HKQuantity *)totalEnergyBurned
                           totalDistance:(nullable HKQuantity *)totalDistance
                                  device:(nullable HKDevice *)device
-                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_AVAILABLE(ios(9.0), watchos(2.0), macCatalyst(13.0), macos(13.0));
+                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_DEPRECATED("Use HKWorkoutBuilder", ios(9.0, 17.0), watchos(2.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalSwimmingStrokeCount:device:metadata:
@@ -373,7 +374,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                           totalDistance:(nullable HKQuantity *)totalDistance
                totalSwimmingStrokeCount:(nullable HKQuantity *)totalSwimmingStrokeCount
                                  device:(nullable HKDevice *)device
-                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_AVAILABLE(ios(10.0), watchos(3.0), macCatalyst(13.0), macos(13.0));
+                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_DEPRECATED("Use HKWorkoutBuilder", ios(10.0, 17.0), watchos(3.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 /*!
  @method        workoutWithActivityType:startDate:endDate:workoutEvents:totalEnergyBurned:totalDistance:totalFlightsClimbed:device:metadata:
@@ -399,7 +400,7 @@ HK_EXTERN API_AVAILABLE(ios(8.0), watchos(2.0), macCatalyst(13.0), macos(13.0))
                           totalDistance:(nullable HKQuantity *)totalDistance
                     totalFlightsClimbed:(nullable HKQuantity *)totalFlightsClimbed
                                  device:(nullable HKDevice *)device
-                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_AVAILABLE(ios(11.0), watchos(4.0), macCatalyst(13.0), macos(13.0));
+                               metadata:(nullable NSDictionary<NSString *, id> *)metadata API_DEPRECATED("Use HKWorkoutBuilder", ios(11.0, 17.0), watchos(4.0, 10.0), macCatalyst(13.0, 16.0), macos(13.0, 14.0));
 
 @end
 

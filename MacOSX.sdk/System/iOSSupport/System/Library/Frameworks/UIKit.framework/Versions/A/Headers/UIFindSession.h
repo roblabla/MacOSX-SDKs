@@ -112,7 +112,7 @@ UIKIT_EXTERN API_AVAILABLE(ios(16.0)) API_UNAVAILABLE(watchos, tvos) NS_SWIFT_UI
 /// when the search query is cleared, options changed, or any other event where we may not perform another search right away.
 - (void)invalidateFoundResults;
 
-@property (nonatomic, readonly) BOOL allowsReplacement API_DEPRECATED_WITH_REPLACEMENT("supportsReplacement", ios(16.0, 16.0));
+@property (nonatomic, readonly) BOOL allowsReplacement API_DEPRECATED_WITH_REPLACEMENT("supportsReplacement", ios(16.0, 16.0), visionos(1.0, 1.0));
 
 @end
 

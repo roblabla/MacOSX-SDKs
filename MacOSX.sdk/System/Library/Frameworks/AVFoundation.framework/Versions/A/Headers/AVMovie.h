@@ -4,7 +4,7 @@
 
 	Framework:		AVFoundation
  
-	Copyright 2009-2022 Apple Inc. All rights reserved.
+	Copyright 2009-2023 Apple Inc. All rights reserved.
 
 */
 
@@ -191,6 +191,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 	AVMovieWritingTruncateDestinationToMovieHeaderOnly =		(1UL << 0)
 } API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos);
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMovie (AVMovieMovieHeaderSupport)
 
 /*!
@@ -231,6 +232,7 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 
 @end
 
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMovie (AVMovieTrackInspection)
 
 /*!
@@ -243,9 +245,9 @@ typedef NS_OPTIONS(NSUInteger, AVMovieWritingOptions) {
 */
 - (nullable AVMovieTrack *)trackWithTrackID:(CMPersistentTrackID)trackID
 #if __swift__
-API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -268,9 +270,9 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos
 */
 - (NSArray<AVMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType
 #if __swift__
-API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -293,9 +295,9 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", ma
 */
 - (NSArray<AVMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic
 #if __swift__
-API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -465,7 +467,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
-    
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieMovieLevelEditing)
 
 /*!
@@ -543,6 +545,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieTrackLevelEditing)
 
 /*!
@@ -573,7 +576,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 					An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack object. Pass nil for default initialization behavior.
 	@result			An AVMutableMovieTrack object
 	@discussion		The trackID of the newly added track is a property of the returned instance of AVMutableMovieTrack.
-					This method throws an exception if media type is not equal to the track's media type.
+					This method throws an exception if media type is not equal to the track's media type, or if any option is invalid.
 					Note that metadata will not be automatically copied.
 */
 - (nullable AVMutableMovieTrack *)addMutableTrackWithMediaType:(AVMediaType)mediaType copySettingsFromTrack:(nullable AVAssetTrack *)track options:(nullable NSDictionary<NSString *, id> *)options;
@@ -587,6 +590,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 					An NSDictionary object that contains keys for specifying options for the initialization of the new AVMutableMovieTrack objects. Pass nil for default initialization behavior.
 	@result			An array of AVMutableMovieTrack objects; the index of a track in this array is the same as the index of its source track in the existingTracks array.
     @discussion		This method creates one or more empty tracks in the target movie and configures those tracks with settings (such as track userdata and metadata, width, height, and preferred volume) copied from the source tracks in the existingTracks array. Also, properties involving pairs of tracks (such as track references) are copied from the source tracks to the target tracks.
+					This method throws an exception if any option is invalid.
 */
 - (NSArray<AVMutableMovieTrack *> *)addMutableTracksCopyingSettingsFromTracks:(NSArray<AVAssetTrack *> *)existingTracks options:(nullable NSDictionary<NSString *, id> *)options;
 
@@ -601,6 +605,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @end
 
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieMetadataEditing)
 
 /*!
@@ -612,6 +617,7 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (AVMutableMovieTrackInspection)
 
 /*!
@@ -679,6 +685,13 @@ API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 #pragma mark --- AVMediaDataStorage ---
 @class AVMediaDataStorageInternal;
+
+/*!
+ @class         AVMediaDataStorage
+ @abstract      Media sample data storage file.
+ @discussion    Subclasses of this type that are used from Swift must fulfill the requirements of a Sendable type.
+*/
+NS_SWIFT_SENDABLE
 API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMediaDataStorage : NSObject {
 @private
@@ -748,6 +761,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 
 @end
 
+API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovie (AVFragmentedMovieTrackInspection)
 
 /*!
@@ -760,9 +774,9 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 */
 - (nullable AVFragmentedMovieTrack *)trackWithTrackID:(CMPersistentTrackID)trackID
 #if __swift__
-API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadTrack(withTrackID:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -785,9 +799,9 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTrackWithTrackID:completionHandler:", macos
 */
 - (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaType:(AVMediaType)mediaType
 #if __swift__
-API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadTracks(withMediaType:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -810,9 +824,9 @@ API_DEPRECATED_WITH_REPLACEMENT("loadTracksWithMediaType:completionHandler:", ma
 */
 - (NSArray<AVFragmentedMovieTrack *> *)tracksWithMediaCharacteristic:(AVMediaCharacteristic)mediaCharacteristic
 #if __swift__
-API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0));
+API_DEPRECATED("Use loadTracks(withMediaCharacteristic:) instead", macos(10.7, 13.0), ios(4.0, 16.0), tvos(9.0, 16.0), watchos(1.0, 9.0)) API_UNAVAILABLE(visionos);
 #else
-API_DEPRECATED("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED));
+API_DEPRECATED("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.7, API_TO_BE_DEPRECATED), ios(4.0, API_TO_BE_DEPRECATED), tvos(9.0, API_TO_BE_DEPRECATED), watchos(1.0, API_TO_BE_DEPRECATED)) API_UNAVAILABLE(visionos);
 #endif
 
 /*!
@@ -833,7 +847,7 @@ API_DEPRECATED("loadTracksWithMediaCharacteristic:completionHandler:", macos(10.
 	@abstract		A class that periodically checks whether additional movie fragments have been appended to fragmented movie files.
 	@discussion		AVFragmentedMovieMinder is identical to AVFragmentedAssetMinder except that it's capable of minding only assets of class AVFragmentedMovie.
 */
-
+NS_SWIFT_NONSENDABLE
 API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVFragmentedMovieMinder : AVFragmentedAssetMinder
 
@@ -895,6 +909,7 @@ API_AVAILABLE(macos(10.10), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
  @discussion
 	See AVAsset's interface for more information about these interfaces.
  */
+API_AVAILABLE(macos(10.11), ios(13.0), watchos(6.0)) API_UNAVAILABLE(tvos)
 @interface AVMutableMovie (SynchronousAssetInterface)
 
 - (NSArray<AVMetadataItem *> *)metadataForFormat:(AVMetadataFormat)format;

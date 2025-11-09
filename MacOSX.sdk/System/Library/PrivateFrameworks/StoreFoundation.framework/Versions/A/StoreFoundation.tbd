@@ -134,7 +134,7 @@ exports:
                        _kISTriggerDownloadQueueKey, _kITunesDaemonDefaultsChangedNotification, 
                        _kItemsKey, _kOpenURLAction, _kProductTypeApp, _kProductTypeWidget, 
                        _kReloadPageAction, _kSSOperationDefaultSnapshotInterval, 
-                       _markMainQueue, _sITunesStoreRootCertificate ]
+                       _markMainQueue ]
     objc-classes:    [ CKBook, CKBookFetchCoverImageOperation, CKDAAPPurchasedItem, 
                        CKDockMessaging, CKLocalization, CKRootHelper, CKSoftwareProduct, 
                        CKSoftwareUpdateStatus, CKUpdate, ISAppleIDLookupOperation, 

@@ -30,39 +30,6 @@
 NS_ASSUME_NONNULL_BEGIN
 NS_CLASS_AVAILABLE_MAC(10_6)
 @interface CWInterface : NSObject
-{
-    @private
-    
-        void                    *_device;
-    
-        NSString                *_interfaceName;
-    
-        NSArray<NSNumber *>     *_capabilities;
-    
-        IONotificationPortRef   _interfaceRemovedNotificationPort;
-    
-        io_iterator_t           _interfaceRemovedNotification;
-    
-        BOOL                    _deviceAttached;
-    
-        id                      _eapolClient;
-    
-        id                      _ipMonitor;
-    
-        dispatch_queue_t        _internalQueue;
-    
-        void                    *_serviceStore;
-    
-        void                    *_interfaceStore;
-    
-        BOOL                    _lastPowerState;
-
-		dispatch_queue_t		_eventQueue;
-
-        NSXPCConnection         *_xpcConnection;
-    
-        BOOL                    _ownsXPCConnection;
-}
 
 /*!
  * @property
@@ -131,6 +98,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * @discussion 
  * Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network,
  * or if the SSID can not be encoded as a valid UTF-8 or WinLatin1 string.
+ *
+ * @note
+ * SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSString *)ssid NS_AVAILABLE_MAC(10_6);
 
@@ -142,6 +115,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion 
  * Returns nil if an error occurs, or if the interface is not participating in a Wi-Fi network.
+ *
+ * @note
+ * SSID information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSData *)ssidData NS_AVAILABLE_MAC(10_7);
 
@@ -215,6 +194,12 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  *
  * @discussion 
  * Returns nil if an error occurs, or if the Wi-Fi interface is off.
+ *
+ * @note
+ * Country code information is not available unless Location Services is enabled and the user has authorized the calling app to use location services.
+ *
+ * @seealso
+ * CLLocationManager
  */
 - (nullable NSString *)countryCode NS_AVAILABLE_MAC(10_6);
 
@@ -307,7 +292,7 @@ NS_CLASS_AVAILABLE_MAC(10_6)
  * Returns an empty NSArray object if no Wi-Fi interfaces exist.
  * Returns nil if an error occurs.
  */
-+ (nullable NSSet<NSString *> *)interfaceNames NS_DEPRECATED_MAC(10_6, 10_10, "Use +[CWWiFiClient interfaceNames] instead");
++ (nullable NSSet<NSString *> *)interfaceNames NS_DEPRECATED_MAC(10_6, 10_10, "Use -[CWWiFiClient interfaceNames] instead");
 
 /*!
  * @method

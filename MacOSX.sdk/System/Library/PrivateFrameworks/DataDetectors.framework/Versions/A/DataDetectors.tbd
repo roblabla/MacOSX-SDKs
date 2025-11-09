@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/DataDetectors.framework/Versions/A/DataDetectors'
-current-version: 445
+current-version: 452
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _DDActionsManagerDidRunActionNotification, _DDActionsManagerWillRunActionNotification, 
@@ -30,7 +30,8 @@ exports:
                        _kDataDetectorsReferenceDateKey, _kDataDetectorsSelectionStringKey, 
                        _kDataDetectorsSpecialURLKey, _kDataDetectorsTrailingTextKey ]
     objc-classes:    [ DDActionContext, DDActionViewController, DDActionsManager, 
-                       DDDetectorManager2, DDMacAction, DDPhoneOrMailURI, DDThreadManager ]
+                       DDDetectorManager2, DDMacAction, DDPhoneOrMailURI, DDSecureActionContext, 
+                       DDThreadManager ]
     objc-ivars:      [ DDPhoneOrMailURI._isFileScheme, DDPhoneOrMailURI._isHttpScheme, 
                        DDPhoneOrMailURI._isMailScheme, DDPhoneOrMailURI._value ]
 ...

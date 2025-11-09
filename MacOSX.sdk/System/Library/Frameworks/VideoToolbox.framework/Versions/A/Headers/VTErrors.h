@@ -3,7 +3,7 @@
 	
 	Framework:  VideoToolbox
  
-    Copyright 2006-2021 Apple Inc. All rights reserved.
+    Copyright 2006-2022 Apple Inc. All rights reserved.
   
 */
 
@@ -64,6 +64,9 @@ enum
 	kVTVideoDecoderReferenceMissingErr		= -17694,
 	kVTVideoDecoderCallbackMessagingErr		= -17695,
 	kVTVideoDecoderUnknownErr				= -17696,
+	kVTExtensionDisabledErr 				= -17697,
+    kVTVideoEncoderMVHEVCVideoLayerIDsMismatchErr = -17698,
+	kVTCouldNotOutputTaggedBufferGroupErr	= -17699,
 };
 
 /*!
@@ -93,11 +96,28 @@ typedef CF_OPTIONS(uint32_t, VTDecodeFrameFlags) {
 	kVTDecodeFrame_EnableTemporalProcessing = 1<<3,
 };
 
-// Informational status for decoding -- non-error flags 
+/*!
+	@enum		VTDecodeInfoFlags
+	@abstract	Informational status for decoding -- non-error flags
+
+	@constant	kVTDecodeInfo_Asynchronous
+		The kVTDecodeInfo_Asynchronous bit may be set if the decode ran asynchronously.
+	@constant	kVTDecodeInfo_FrameDropped
+		The kVTDecodeInfo_FrameDropped bit may be set if the frame was dropped.
+	@constant	kVTDecodeInfo_ImageBufferModifiable
+		If the kVTDecodeInfo_ImageBufferModifiable bit is set, it is safe for the client to modify the imageBuffer.
+	@constant	kVTDecodeInfo_SkippedLeadingFrameDropped
+		The kVTDecodeInfo_SkippedLeadingFrameDropped may be set if a leading frame after a sync frame is dropped.
+		This can happen when a seek to a sync frame is initiated and, due to frame reordering, there are leading
+		frames following the sync frame that cannot be decoded due to missing references.  Dropping these frames 
+		has no impact to playback since the non-decodeable frames will not be rendered.
+		If kVTDecodeInfo_SkippedLeadingFrameDropped is set, kVTDecodeInfo_FrameDropped will also be set.
+*/
 typedef CF_OPTIONS(UInt32, VTDecodeInfoFlags) {
 	kVTDecodeInfo_Asynchronous = 1UL << 0,
 	kVTDecodeInfo_FrameDropped = 1UL << 1,
 	kVTDecodeInfo_ImageBufferModifiable = 1UL << 2,
+	kVTDecodeInfo_SkippedLeadingFrameDropped = 1UL << 3,
 };
 
 // Informational status for encoding -- non-error flags 

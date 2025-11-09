@@ -1,4 +1,4 @@
-framework module AddressBook [extern_c] {
+framework module AddressBook {
   umbrella header "AddressBook.h"
 
   export *

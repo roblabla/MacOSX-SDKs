@@ -4,32 +4,32 @@
 
 /*! @abstract A string indicating a preference for whether the authenticator should attempt to verify the user, such as through a PIN or biometrics.
  */
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 typedef NSString *ASAuthorizationPublicKeyCredentialUserVerificationPreference NS_TYPED_EXTENSIBLE_ENUM;
 
 /*! @abstract Indicates that the authenticator should try to verify the user if possible, but authentication should proceed even if user verification is not currently available.
  */
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 extern ASAuthorizationPublicKeyCredentialUserVerificationPreference const ASAuthorizationPublicKeyCredentialUserVerificationPreferencePreferred;
 
 /*! @abstract Indicates that the authenticator must attempt to verify the user. If the authenticator is not currently capable of verifying the user, authentication will fail.
  */
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 extern ASAuthorizationPublicKeyCredentialUserVerificationPreference const ASAuthorizationPublicKeyCredentialUserVerificationPreferenceRequired;
 
 /*! @abstract Indicates that the authenticator should prefer _not_ verifying the user, if possible. This may be used to streamline an authentication process where the user has already been verified.
  */
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0), tvos(16.0)) API_UNAVAILABLE(watchos)
 extern ASAuthorizationPublicKeyCredentialUserVerificationPreference const ASAuthorizationPublicKeyCredentialUserVerificationPreferenceDiscouraged;
 
 /*! @abstract A string indicating the type of attestation the authenticator should attempt to perform.
  */
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos)
 typedef NSString *ASAuthorizationPublicKeyCredentialAttestationKind NS_TYPED_EXTENSIBLE_ENUM;
 
 /*! @abstract Indicates that the authenticator should not perform attestation.
  */
-API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
+API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos) API_UNAVAILABLE(tvos)
 extern ASAuthorizationPublicKeyCredentialAttestationKind const ASAuthorizationPublicKeyCredentialAttestationKindNone;
 
 /*! @abstract Indicates that the authenticator should perform attestation itself.
@@ -66,3 +66,9 @@ extern ASAuthorizationPublicKeyCredentialResidentKeyPreference const ASAuthoriza
  */
 API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(watchos, tvos)
 extern ASAuthorizationPublicKeyCredentialResidentKeyPreference const ASAuthorizationPublicKeyCredentialResidentKeyPreferenceRequired;
+
+AS_API_AVAILABLE(macos(13.5), ios(16.6)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+typedef NS_ENUM(NSInteger, ASAuthorizationPublicKeyCredentialAttachment) {
+    ASAuthorizationPublicKeyCredentialAttachmentPlatform,
+    ASAuthorizationPublicKeyCredentialAttachmentCrossPlatform,
+};

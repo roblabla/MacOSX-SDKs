@@ -1,9 +1,4 @@
-//
-//  GKAchievement.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
 #import <Foundation/Foundation.h>
 #import <GameKit/GKDefines.h>
@@ -13,7 +8,6 @@
 NS_ASSUME_NONNULL_BEGIN
 // GKAchievement represents a game achievement that the player has started or completely achieved.
 NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
-
 @interface GKAchievement : NSObject <NSCoding, NSSecureCoding>
 
 /// Asynchronously load all achievements for the local player
@@ -57,14 +51,14 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @end
 
 @interface GKAchievement (Deprecated)
-- (void)reportAchievementWithCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use +reportAchievements:withCompletionHandler:") ;
-@property(assign, getter=isHidden, readonly, NS_NONATOMIC_IOSONLY) BOOL hidden NS_DEPRECATED(10_8, 10_10, 4_1, 6_0, "Use isHidden on the GKAchievementDescription class instead") ;
+- (void)reportAchievementWithCompletionHandler:(void(^ __nullable)(NSError * __nullable error))completionHandler API_DEPRECATED_WITH_REPLACEMENT("+reportAchievements:withCompletionHandler:", ios(4.1,7.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
+@property(assign, getter=isHidden, readonly, NS_NONATOMIC_IOSONLY) BOOL hidden API_DEPRECATED_WITH_REPLACEMENT("-[GKAchievementDescription isHidden:]", ios(4.1,6.0), macos(10.8,10.10)) __TVOS_UNAVAILABLE;
 @end
 
 @interface GKAchievement (Obsoleted)
 /*** This method is obsolete. Calling this initialiser does nothing and will return nil ***/
-- (nullable instancetype)initWithIdentifier:(nullable NSString *)identifier forPlayer:(NSString *)playerID NS_DEPRECATED_IOS(7_0, 8_0, "This is never invoked and its implementation does nothing, use initWithIdentifier:player:") ;
+- (nullable instancetype)initWithIdentifier:(nullable NSString *)identifier forPlayer:(NSString *)playerID API_DEPRECATED_WITH_REPLACEMENT("-initWithIdentifier:player:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 /*** This property is obsolete. ***/
-@property(readonly, copy, nullable, NS_NONATOMIC_IOSONLY)  NSString * playerID NS_DEPRECATED_IOS(7_0, 8_0, "This will return a null string, use player instead") ;
+@property(readonly, copy, nullable, NS_NONATOMIC_IOSONLY)  NSString * playerID API_DEPRECATED_WITH_REPLACEMENT("-player:", ios(7.0,8.0), macos(10.9,10.10)) API_UNAVAILABLE(tvos);
 @end
 NS_ASSUME_NONNULL_END

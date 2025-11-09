@@ -3,7 +3,6 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/AccessibilitySharedSupport.framework/Versions/A/AccessibilitySharedSupport'
-swift-abi-version: 7
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -87,26 +86,29 @@ exports:
                        _AXSSVoiceOverLocalizedNameForTextualContextIdentifier, _AXSSVoiceOverPunctuationCloudKitUpdateNotification, 
                        _AXSSVoiceOverPunctuationGroupAll, _AXSSVoiceOverPunctuationGroupNone, 
                        _AXSSVoiceOverPunctuationGroupSome, _AXSSVoiceOverPunctuationGroupsChangedNotification, 
-                       _AXSSVoiceOverTextualContextConsole, _AXSSVoiceOverTextualContextFileSystem, 
-                       _AXSSVoiceOverTextualContextMessaging, _AXSSVoiceOverTextualContextNarrative, 
-                       _AXSSVoiceOverTextualContextSocialMedia, _AXSSVoiceOverTextualContextSourceCode, 
-                       _AXSSVoiceOverTextualContextSpreadsheet, _AXSSVoiceOverTextualContextWordProcessing, 
-                       ___AXSSCastAsClass, _kAXSSColorRecommendedContrastRatioEnhanced, 
-                       _kAXSSColorRecommendedContrastRatioLight, _kAXSSColorRecommendedContrastRatioMedium, 
-                       _kAXSSColorRecommendedContrastRatioMinimum ]
-    objc-classes:    [ AXSSActionManager, AXSSCloudKitHelper, AXSSCloudKitHelperManagedObjectContext, 
-                       AXSSDatabaseManager, AXSSDialectMap, AXSSEventManager, AXSSInterDeviceCommunicator, 
+                       _AXSSVoiceOverSymbolNameForTextualContextIdentifier, _AXSSVoiceOverTextualContextConsole, 
+                       _AXSSVoiceOverTextualContextFileSystem, _AXSSVoiceOverTextualContextMessaging, 
+                       _AXSSVoiceOverTextualContextNarrative, _AXSSVoiceOverTextualContextSocialMedia, 
+                       _AXSSVoiceOverTextualContextSourceCode, _AXSSVoiceOverTextualContextSpreadsheet, 
+                       _AXSSVoiceOverTextualContextWordProcessing, ___AXSSCastAsClass, 
+                       _kAXSSColorRecommendedContrastRatioEnhanced, _kAXSSColorRecommendedContrastRatioLight, 
+                       _kAXSSColorRecommendedContrastRatioMedium, _kAXSSColorRecommendedContrastRatioMinimum ]
+    objc-classes:    [ AXSSActionManager, AXSSAudioDevice, AXSSAudioDeviceManager, 
+                       AXSSAudioInputDevice, AXSSAudioOutputDevice, AXSSCloudKitHelper, 
+                       AXSSCloudKitHelperManagedObjectContext, AXSSDatabaseManager, 
+                       AXSSDialectMap, AXSSEventManager, AXSSInterDeviceCommunicator, 
                        AXSSInterDeviceSearchResult, AXSSInterDeviceSecurityHelper, 
                        AXSSInterDeviceSwitchEvent, AXSSKeyChord, AXSSKeyboardCommand, 
                        AXSSKeyboardCommandCategory, AXSSKeyboardCommandInfo, AXSSKeyboardCommandMap, 
                        AXSSKeyboardEvent, AXSSLanguageLoader, AXSSLanguageManager, 
-                       AXSSLanguageMap, AXSSLanguageTag, AXSSLanguageTagger, AXSSMotionTracker, 
-                       AXSSMotionTrackingCameraInput, AXSSMotionTrackingExpressionConfiguration, 
+                       AXSSLanguageMap, AXSSLanguageTag, AXSSLanguageTagger, AXSSLiveSpeechPhraseManager, 
+                       AXSSMotionTracker, AXSSMotionTrackingCameraInput, AXSSMotionTrackingExpressionConfiguration, 
                        AXSSMotionTrackingHIDInput, AXSSMotionTrackingInput, AXSSMotionTrackingInputConfiguration, 
                        AXSSMotionTrackingInputManager, AXSSMotionTrackingState, AXSSMotionTrackingUtilities, 
                        AXSSMotionTrackingVideoFileInput, AXSSMotionTrackingVirtualEyeTracker, 
                        AXSSPronunciationSubstitution, AXSSPunctuationEntry, AXSSPunctuationGroup, 
-                       AXSSPunctuationManager, AXSSRateLimitingLogger, AXSSSwitchControlSettings, 
+                       AXSSPunctuationManager, AXSSRateLimitingLogger, AXSSSpeechSynthesisController, 
+                       AXSSSpeechSynthesisQueue, AXSSSpeechSynthesizer, AXSSSwitchControlSettings, 
                        AXSSVoiceTagger, AXSSWordDescriptionManager, AXSS_PunctuationCloudDeletionCache, 
                        AXSS_PunctuationContext, AXSS_PunctuationEntry, AXSS_PunctuationGroup, 
                        VOBundle, VOLanguage, VOSubstitution, VOVoice ]

@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
     @interface PHASEShapeElement
     @abstract A single element within a shape. The attached material defines its acoustical properties.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 NS_SWIFT_NAME(PHASEShape.Element)
 @interface PHASEShapeElement : NSObject
 
@@ -41,7 +41,7 @@ NS_SWIFT_NAME(PHASEShape.Element)
     @interface PHASEShape
     @abstract The physical representation of an object within the simulated acoustic scene.
 */
-OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0)) API_UNAVAILABLE(tvos) API_UNAVAILABLE(watchos)
+OS_EXPORT API_AVAILABLE(macos(12.0), ios(15.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface PHASEShape : NSObject<NSCopying>
 
 - (instancetype)init NS_UNAVAILABLE;

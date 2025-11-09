@@ -1,4 +1,4 @@
-framework module CoreGraphics [extern_c] [system] {
+framework module CoreGraphics [system] {
   umbrella header "CoreGraphics.h"
   export *
   module * { export * }

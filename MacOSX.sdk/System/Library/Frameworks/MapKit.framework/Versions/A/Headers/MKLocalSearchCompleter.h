@@ -17,7 +17,12 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, MKSearchCompletionFilterType) {
     MKSearchCompletionFilterTypeLocationsAndQueries = 0, // Returns completions for points of interest as well as query suggestions (e.g., "coffee")
     MKSearchCompletionFilterTypeLocationsOnly, // Returns completions only for points of interest
-} API_DEPRECATED("Use MKLocalSearchCompleterResultType", ios(9.3, 13.0), macos(10.11.4, 10.15), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos);
+}
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+API_DEPRECATED("Use MKLocalSearchCompleterResultType", ios(9.3, 13.0), macos(10.11.4, 10.15), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos);
+#endif
 
 typedef NS_OPTIONS(NSUInteger, MKLocalSearchCompleterResultType) {
     MKLocalSearchCompleterResultTypeAddress = 1 << 0,
@@ -30,7 +35,12 @@ NS_CLASS_AVAILABLE(10_11_4, 9_3) __TVOS_AVAILABLE(9_2) API_UNAVAILABLE(watchos)
 
 @property (nonatomic, copy) NSString *queryFragment;
 @property (nonatomic, assign) MKCoordinateRegion region;
-@property (nonatomic, assign) MKSearchCompletionFilterType filterType API_DEPRECATED("Use resultTypes", ios(9.3, 13.0), macos(10.11.4, 10.15), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos); // Defaults to MKSearchCompletionFilterTypeLocationsAndQueries
+@property (nonatomic, assign) MKSearchCompletionFilterType filterType
+#if defined(TARGET_OS_VISION) && TARGET_OS_VISION
+API_UNAVAILABLE(visionos);
+#else
+API_DEPRECATED("Use resultTypes", ios(9.3, 13.0), macos(10.11.4, 10.15), tvos(9.2, 13.0)) API_UNAVAILABLE(watchos); // Defaults to MKSearchCompletionFilterTypeLocationsAndQueries
+#endif
 @property (nonatomic, assign) MKLocalSearchCompleterResultType resultTypes API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
 @property (nonatomic, copy, nullable) MKPointOfInterestFilter *pointOfInterestFilter API_AVAILABLE(ios(13.0), macos(10.15), tvos(13.0)) API_UNAVAILABLE(watchos);
 

@@ -12,7 +12,7 @@ exports:
                        _kGapManufacturerDataType, _kSPAdvertisementData, _kSPChannel, 
                        _kSPDeviceAddress, _kSPOptional, _kSPSaturated, _kSPScanDate, 
                        _kSPStatus, _kSPrssi, _kWPDFrameworkMessageQueue ]
-    objc-classes:    [ Endpoint, PipeDataTransfer, PipeInfo, WPAdvertisingRequest, 
+    objc-classes:    [ AdvMetrics, Endpoint, PipeDataTransfer, PipeInfo, WPAdvertisingRequest, 
                        WPAdvertisingRequestsQueue, WPCharacteristic, WPDAdvertisingData, 
                        WPDAdvertisingManager, WPDClient, WPDConnection, WPDManager, 
                        WPDObjectDiscoveryClient, WPDObjectDiscoveryData, WPDObjectDiscoveryManager, 

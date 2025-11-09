@@ -1,7 +1,9 @@
 /*
     File:		IOBluetoothL2CAPChannel.h
-    Copyright:	(c) 2012 by Apple, Inc. All rights reserved.
+    Copyright:	(c) 2012, 2023 by Apple, Inc. All rights reserved.
 */
+
+#if __OBJC__
  
 #import <Foundation/Foundation.h>
 #import <IOKit/IOKitLib.h>
@@ -387,3 +389,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (IOBluetoothL2CAPChannelRef)getL2CAPChannelRef DEPRECATED_IN_MAC_OS_X_VERSION_10_7_AND_LATER;
 
 @end
+
+#endif // __OBJC__

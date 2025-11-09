@@ -93,6 +93,11 @@ module Darwin.Mach [system] {
     export *
   }
 
+  module hv {
+    header "arm64/hv/hv_kern_types.h"
+    export *
+  }
+
   module kern_return {
     header "mach/kern_return.h"
     export *

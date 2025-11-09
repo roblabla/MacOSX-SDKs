@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @class QLFileThumbnailRequest, QLThumbnailReply;
 
-API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(tvos, watchos) __attribute__((visibility("default")))
+API_AVAILABLE(ios(11.0), macos(10.15)) API_UNAVAILABLE(watchos, tvos) __attribute__((visibility("default")))
 @interface QLThumbnailProvider : NSObject
 
 /**

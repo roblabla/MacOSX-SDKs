@@ -1,10 +1,12 @@
 --- !tapi-tbd
 tbd-version:     4
-targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                   arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/ProactiveHarvesting.framework/Versions/A/ProactiveHarvesting'
-current-version: 1193.26
+current-version: 1226.0.1
 allowable-clients:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     clients:         [ CoreSuggestions, CoreSuggestionsInternals, CoreSuggestionsML, 
                        CoreSuggestionsMLTests, CoreSuggestionsPerfTests, CoreSuggestionsTests, 
                        CoreSuggestionsUI, CoreSuggestionsUITests, FoundInAppsPlugins, 
@@ -20,7 +22,8 @@ allowable-clients:
                        hvtool, portrait, ppppttool, pptool, pretool, psgtool, reversetemplated, 
                        suggest_tool, suggestbench, suggestd ]
 exports:
-  - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
+  - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
+                       arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _HVBatteryMonitoringOverrideIsConnectedToPowerForTesting, 
                        _HVBatteryMonitoringStart, _HVDataSourceAssertSingleSource, 
                        _HVDataSourceContentStateKey, _HVDataSourceDescription, _HVDataSourceFileProtection, 
@@ -53,17 +56,18 @@ exports:
                        _kHVContentAdmissionSuggestionsShouldShowPastEventsKey, _kHVContentAdmissionSuite, 
                        _kHVFindToShowMigrationKey, _kHVHarvestBudgetCPUTimeSeconds, 
                        _kHVHarvestBudgetDisabled, _kHVHarvestBudgetNumberOfOperations, 
-                       _kHVHarvestBudgetRefillDisabled, _kHVHarvestBudgetThrottleBudgetDisabled, 
-                       _kHVLogSubsystem, _kHVMaxHtmlSize, _kHVNotificationQueueContentAdded, 
-                       _kHVNotificationScheduledTaskCompleted, _kHVNotificationScheduledTaskDeferred, 
-                       _kHVNotificationScheduledTaskStarted, _kHVPowerBudgetCanDoDiscretionaryWork, 
-                       _kHVPowerBudgetDisabled, _kHVPowerBudgetDiscretionaryWorkInProgress, 
-                       _kHVPowerBudgetHasDuetBudgetRemaining, _kHVPowerBudgetIsProcessing, 
-                       _kHVPowerBudgetLastPluginTime, _kHVPowerBudgetRefillDisabled, 
-                       _kHVPowerBudgetThrottleBudgetDisabled, _kHVQueuesMemoryDefaultLimit, 
-                       _kHVQueuesMemoryLargeLimit, _kHVQueuesMemoryNoLimit, _kHVQueuesMemorySmallLimit, 
-                       _kHVQueuesMemoryUnsetLimit, _kHVSafariNonReaderTextSourceString, 
-                       _kHVSafariReaderTextSourceString, _kHVSignpostSubsystem, _kHVSpotlightToCanLearnMigrationKey, 
+                       _kHVHarvestBudgetRefillDisabled, _kHVHarvestBudgetReserve, 
+                       _kHVHarvestBudgetThrottleBudgetDisabled, _kHVLogSubsystem, 
+                       _kHVMaxHtmlSize, _kHVNotificationQueueContentAdded, _kHVNotificationScheduledTaskCompleted, 
+                       _kHVNotificationScheduledTaskDeferred, _kHVNotificationScheduledTaskStarted, 
+                       _kHVPowerBudgetCanDoDiscretionaryWork, _kHVPowerBudgetDisabled, 
+                       _kHVPowerBudgetDiscretionaryWorkInProgress, _kHVPowerBudgetHasDuetBudgetRemaining, 
+                       _kHVPowerBudgetIsProcessing, _kHVPowerBudgetLastPluginTime, 
+                       _kHVPowerBudgetRefillDisabled, _kHVPowerBudgetThrottleBudgetDisabled, 
+                       _kHVQueuesMemoryDefaultLimit, _kHVQueuesMemoryLargeLimit, 
+                       _kHVQueuesMemoryNoLimit, _kHVQueuesMemorySmallLimit, _kHVQueuesMemoryUnsetLimit, 
+                       _kHVSafariNonReaderTextSourceString, _kHVSafariReaderTextSourceString, 
+                       _kHVSignpostSubsystem, _kHVSpotlightToCanLearnMigrationKey, 
                        _kHVThrottlingStateExtraOpsLeftKey, _kHVThrottlingStateNsecLeftKey, 
                        _kHVThrottlingStateOpsLeftKey, _kHVUserDefaultsSuite, _kHVXPCInternalEntitlement, 
                        _kHVXPCInternalServiceName, _kHVXPCSysdiagnoseEntitlement, 
@@ -77,7 +81,7 @@ exports:
                        HVInteraction, HVMutableContentState, HVNotifications, HVPBContentState, 
                        HVPBContentStateEntry, HVPBDataSourceContentState, HVPBDeprecatedContentStateEntry, 
                        HVPaths, HVPathsBase, HVPowerBudget, HVPowerBudgetThrottlingState, 
-                       HVProactiveHarvestingSystem, HVQueue, HVQueueGuardedData, 
+                       HVProactiveHarvestingSystem, HVQueue, HVQueueBookmark, HVQueueGuardedData, 
                        HVQueues, HVQueuesGuardedData, HVScheduledTasks, HVSearchableItemHelper, 
                        HVSearchableItemSerializedAttributes, HVSearchableUserActivity, 
                        HVSpotlightDeletionRequest, HVUserDefaults, HVXPCInternalServer, 

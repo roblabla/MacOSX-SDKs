@@ -22,7 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@abstract	Informs Picture in Picture controller that it should request an updated playback state from its sampleBufferPlaybackDelegate.
 	@discussion	This should always be called whenever playback is paused or unpaused, or the underlying content duration changes.
 */
-- (void)invalidatePlaybackState API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos);
+- (void)invalidatePlaybackState API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos);
 
 @end
 
@@ -31,7 +31,7 @@ NS_ASSUME_NONNULL_BEGIN
 	@protocol	AVPictureInPictureSampleBufferPlaybackDelegate
 	@abstract	A protocol for controlling playback from an AVSampleBufferDisplayLayer in Picture in Picture.
 */
-API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @protocol AVPictureInPictureSampleBufferPlaybackDelegate <NSObject>
 
 /*!
@@ -105,7 +105,7 @@ API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos)
 @end
 
 
-API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0)) API_UNAVAILABLE(watchos)
+API_AVAILABLE(ios(15.0), tvos(15.0), macos(12.0), visionos(1.0)) API_UNAVAILABLE(watchos)
 @interface AVPictureInPictureControllerContentSource (AVSampleBufferDisplayLayerSupport)
 
 /*!

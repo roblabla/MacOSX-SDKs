@@ -14,7 +14,9 @@
 #import <HealthKit/HKAudiogramSample.h>
 #import <HealthKit/HKCDADocumentSample.h>
 #import <HealthKit/HKCategorySample.h>
+#import <HealthKit/HKCategoryValues.h>
 #import <HealthKit/HKCharacteristicObjects.h>
+#import <HealthKit/HKCharacteristicValues.h>
 #import <HealthKit/HKClinicalRecord.h>
 #import <HealthKit/HKClinicalType.h>
 #import <HealthKit/HKContactsLensSpecification.h>

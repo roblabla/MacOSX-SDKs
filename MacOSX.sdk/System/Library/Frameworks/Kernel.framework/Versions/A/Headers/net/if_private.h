@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2000-2021 Apple Inc. All rights reserved.
+ * Copyright (c) 2000-2023 Apple Inc. All rights reserved.
  *
  * @APPLE_OSREFERENCE_LICENSE_HEADER_START@
  *
@@ -103,6 +103,7 @@
 #define IFEF_NOAUTOIPV6LL       0x00002000      /* Need explicit IPv6 LL address */
 #define IFEF_EXPENSIVE          0x00004000      /* Data access has a cost */
 #define IFEF_IPV4_ROUTER        0x00008000      /* interior when in IPv4 router mode */
+#define IFEF_CLONE              0x00010000      /* created using if_clone */
 #define IFEF_LOCALNET_PRIVATE   0x00020000      /* local private network */
 #define IFEF_SERVICE_TRIGGERED  IFEF_LOCALNET_PRIVATE
 #define IFEF_IPV6_ND6ALT        0x00040000      /* alternative. KPI for ND6 */
@@ -200,6 +201,10 @@ struct  ifreq {
 #define IFRTYPE_SUBFAMILY_INTCOPROC     6
 #define IFRTYPE_SUBFAMILY_QUICKRELAY    7
 #define IFRTYPE_SUBFAMILY_DEFAULT       8
+#define IFRTYPE_SUBFAMILY_VMNET         9
+#define IFRTYPE_SUBFAMILY_SIMCELL       10
+#define IFRTYPE_SUBFAMILY_REDIRECT      11
+#define IFRTYPE_SUBFAMILY_MANAGEMENT    12
 		} ifru_type;
 		u_int32_t ifru_functional_type;
 #define IFRTYPE_FUNCTIONAL_UNKNOWN              0
@@ -210,7 +215,8 @@ struct  ifreq {
 #define IFRTYPE_FUNCTIONAL_CELLULAR             5
 #define IFRTYPE_FUNCTIONAL_INTCOPROC            6
 #define IFRTYPE_FUNCTIONAL_COMPANIONLINK        7
-#define IFRTYPE_FUNCTIONAL_LAST                 7
+#define IFRTYPE_FUNCTIONAL_MANAGEMENT           8
+#define IFRTYPE_FUNCTIONAL_LAST                 8
 		u_int32_t ifru_expensive;
 		u_int32_t ifru_constrained;
 		u_int32_t ifru_2kcl;
@@ -247,6 +253,7 @@ struct  ifreq {
 			u_int8_t technology;
 			u_int8_t channel;
 		} ifru_radio_details;
+		uint64_t ifru_creation_generation_id;
 	} ifr_ifru;
 #define ifr_addr        ifr_ifru.ifru_addr      /* address */
 #define ifr_dstaddr     ifr_ifru.ifru_dstaddr   /* other end of p-to-p link */
@@ -297,6 +304,7 @@ struct  ifreq {
 #define ifr_noack_prio          ifr_ifru.ifru_noack_prio
 #define ifr_estimated_throughput  ifr_ifru.ifru_estimated_throughput
 #define ifr_radio_details       ifr_ifru.ifru_radio_details
+#define ifr_creation_generation_id       ifr_ifru.ifru_creation_generation_id
 };
 
 #define _SIZEOF_ADDR_IFREQ(ifr) \
@@ -618,6 +626,24 @@ struct if_protolistreq {
 	u_int32_t               *ifpl_list;
 };
 
+
+
+/*
+ * Entitlement to send/receive data on an INTCOPROC interface
+ */
+#define INTCOPROC_RESTRICTED_ENTITLEMENT "com.apple.private.network.intcoproc.restricted"
+#define INTCOPROC_RESTRICTED_ENTITLEMENT_DEVELOPMENT "com.apple.private.network.intcoproc.restricted.development"
+
+/*
+ * Entitlement to send/receive data on a management interface
+ */
+#define MANAGEMENT_DATA_ENTITLEMENT "com.apple.private.network.management.data"
+#define MANAGEMENT_DATA_ENTITLEMENT_DEVELOPMENT "com.apple.private.network.management.data.development"
+
+/*
+ * Entitlement to make change to a management interface
+ */
+#define MANAGEMENT_CONTROL_ENTITLEMENT "com.apple.private.network.management.control"
 
 #endif /* (_POSIX_C_SOURCE && !_DARWIN_C_SOURCE) */
 

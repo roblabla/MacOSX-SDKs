@@ -1,4 +1,4 @@
-framework module PreferencePanes [extern_c] {
+framework module PreferencePanes {
   umbrella header "PreferencePanes.h"
   export *
   module * { export * }

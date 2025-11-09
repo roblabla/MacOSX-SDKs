@@ -1,4 +1,4 @@
-framework module AVRouting [extern_c] {
+framework module AVRouting {
 	umbrella header "AVRouting.h"
 	export *
 	module * { export * }

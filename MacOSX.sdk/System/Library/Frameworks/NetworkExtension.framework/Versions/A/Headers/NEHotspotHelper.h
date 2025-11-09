@@ -93,7 +93,7 @@ typedef NS_ENUM(NSInteger, NEHotspotHelperCommandType) {
 	kNEHotspotHelperCommandTypePresentUI		= 4,
 	kNEHotspotHelperCommandTypeMaintain			= 5,
 	kNEHotspotHelperCommandTypeLogoff			= 6,
-} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @typedef NEHotspotHelperResult
@@ -130,7 +130,7 @@ typedef NS_ENUM(NSInteger, NEHotspotHelperResult) {
 	kNEHotspotHelperResultAuthenticationRequired= 4,
 	kNEHotspotHelperResultUnsupportedNetwork	= 5,
 	kNEHotspotHelperResultTemporaryFailure		= 6,
-} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @typedef NEHotspotHelperConfidence
@@ -150,7 +150,7 @@ typedef NS_ENUM(NSInteger, NEHotspotHelperConfidence) {
 	kNEHotspotHelperConfidenceNone		= 0,
 	kNEHotspotHelperConfidenceLow		= 1,
 	kNEHotspotHelperConfidenceHigh		= 2,
-} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @category NEHotspotNetwork(HotspotHelper)
@@ -160,7 +160,7 @@ typedef NS_ENUM(NSInteger, NEHotspotHelperConfidence) {
  *   the current network or filter the Wi-Fi scan list, it annotates the NEHotspotNetwork
  *   via the setConfidence method.
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEHotspotNetwork (HotspotHelper)
 
 /*!
@@ -170,14 +170,14 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   the range 0.0 (weak/no signal) to 1.0 (strong signal).
  */
 @property (readonly) double signalStrength
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property secure
  * @discussion Indicates whether the network is secure
  */
 @property (readonly, getter=isSecure) BOOL secure
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property autoJoined
@@ -186,7 +186,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   (YES) or joined by the user (NO).
  */
 @property (readonly, getter=didAutoJoin) BOOL autoJoined
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property justJoined
@@ -196,7 +196,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   is for the initial join, or the subsequent periodic callback.
  */
 @property (readonly, getter=didJustJoin) BOOL justJoined
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property chosenHelper
@@ -208,7 +208,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   and restarted.
  */
 @property (readonly, getter=isChosenHelper) BOOL chosenHelper
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method setConfidence
@@ -221,7 +221,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   kNEHotspotHelperCommandTypeFilterScanList commands.
  */
 - (void)setConfidence:(NEHotspotHelperConfidence)confidence
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method setPassword
@@ -236,7 +236,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   command.
  */
 - (void)setPassword:(NSString *)password
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -254,7 +254,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   network or networkList (Evaluate/FilterScanList only),
  *   then delivers it.
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEHotspotHelperCommand : NSObject
 
 /*!
@@ -263,7 +263,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   The type of the command.
  */
 @property (readonly) NEHotspotHelperCommandType commandType
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property network
@@ -271,7 +271,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   The network associated with the command. May be nil.
  */
 @property (readonly, nullable) NEHotspotNetwork * network
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @property networkList
@@ -281,7 +281,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   This property returns an NSArray of NEHotspotNetwork.
  */
 @property (readonly, nullable) NSArray<NEHotspotNetwork *> * networkList
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method createResponse:
@@ -293,7 +293,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   NEHotspotHelperResponse with the specified result.
  */
 - (NEHotspotHelperResponse *)createResponse:(NEHotspotHelperResult)result
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method createTCPConnection
@@ -306,7 +306,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   non-nil NWTCPConnection object if successful, nil otherwise
  */
 - (NWTCPConnection *)createTCPConnection:(NWEndpoint *)endpoint
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method createUDPSession
@@ -319,7 +319,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   non-nil NWUDPSession object if successful, nil otherwise
  */
 - (NWUDPSession *)createUDPSession:(NWEndpoint *)endpoint
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -329,7 +329,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   The HotspotHelper creates an NEHotspotHelperResponse object to provide
  *   the results of running the corresponding NEHotspotHelperCommand.
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEHotspotHelperResponse : NSObject
 
 /*!
@@ -343,7 +343,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   the current network.
  */
 - (void)setNetwork:(NEHotspotNetwork *)network
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method setNetworkList
@@ -357,7 +357,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   confidence in handling should not be specified.
  */
 - (void)setNetworkList:(NSArray<NEHotspotNetwork *> *)networkList
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method deliver
@@ -367,7 +367,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   Deliver the NEHotspotHelperResponse to the HotspotHelper infrastructure.
  */
 - (void)deliver
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 @end
 
 /*!
@@ -380,7 +380,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   The block is invoked every time there is a command to be processed.
  */
 typedef void (^NEHotspotHelperHandler)(NEHotspotHelperCommand * cmd)
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 NEHS_EXPORT
 /*!
@@ -397,7 +397,7 @@ NEHS_EXPORT
  *   name if the helper indicated that it was able to handle the network.
  */
 const NSString * kNEHotspotHelperOptionDisplayName
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @interface NEHotspotHelper
@@ -405,7 +405,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
  *   The NEHotspotHelper class allows an application to register itself as a
  *   HotspotHelper.
  */
-API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos)
 @interface NEHotspotHelper : NSObject
 
 /*!
@@ -443,7 +443,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
 + (BOOL)registerWithOptions:(nullable NSDictionary<NSString *,NSObject *> *)options
 					  queue:(dispatch_queue_t)queue
 					handler:(NEHotspotHelperHandler)handler
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method logoff:
@@ -469,7 +469,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   kNEHotspotHelperResultSuccess, the Wi-Fi network is disassociated.
  */
 + (BOOL)logoff:(NEHotspotNetwork *)network
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 /*!
  * @method supportedNetworkInterfaces
@@ -491,7 +491,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   non-nil NSArray of NEHotspotNetwork objects otherwise.
  */
 + (NSArray *_Nullable)supportedNetworkInterfaces /* of NEHotspotNetwork */
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 
 @end
 
@@ -510,7 +510,7 @@ API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED
  *   the NEHotspotHelperCommand object.
  */
 - (void)bindToHotspotHelperCommand:(NEHotspotHelperCommand *)command
-	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, tvos) __WATCHOS_PROHIBITED;
+	API_AVAILABLE(ios(9.0)) API_UNAVAILABLE(macos, watchos, tvos);
 @end
 
 NS_ASSUME_NONNULL_END

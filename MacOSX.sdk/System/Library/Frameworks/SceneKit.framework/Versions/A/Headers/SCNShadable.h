@@ -268,19 +268,19 @@ SCN_EXPORT
  @property tessellationControlShader
  @abstract Determines the receiver's tessellation control shader. Tessellation shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *tessellationControlShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+@property(nonatomic, copy, nullable) NSString *tessellationControlShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 /*!
  @property tessellationEvaluationShader
  @abstract Determines the receiver's tessellation evaluation shader. Tessellation shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *tessellationEvaluationShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+@property(nonatomic, copy, nullable) NSString *tessellationEvaluationShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 /*!
  @property geometryShader
  @abstract Determines the receiver's geometry shader. Geometry shaders require OpenGL Core Profile.
  */
-@property(nonatomic, copy, nullable) NSString *geometryShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+@property(nonatomic, copy, nullable) NSString *geometryShader API_AVAILABLE(macos(10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 /*!
  @property vertexFunctionName
@@ -362,7 +362,7 @@ API_UNAVAILABLE(watchos)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleBindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+- (BOOL)program:(SCNProgram *)program bindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleBindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 /*!
  @method program:withID:bindValueForSymbol:atLocation:renderer:
@@ -373,7 +373,7 @@ API_UNAVAILABLE(watchos)
  @param programID The program object.
  @param renderer The renderer that is currently rendering the scene.
  */
-- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleUnbindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+- (void)program:(SCNProgram *)program unbindValueForSymbol:(NSString *)symbol atLocation:(unsigned int)location programID:(unsigned int)programID renderer:(SCNRenderer *)renderer API_DEPRECATED("Use -[SCNShadable handleUnbindingOfSymbol:usingBlock:] instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 /*!
  @method handleError
@@ -390,7 +390,7 @@ API_UNAVAILABLE(watchos)
  @param program The queried program.
  @discussion This is deprecated. Use SCNProgram's opaque property instead.
  */
-- (BOOL)programIsOpaque:(SCNProgram *)program API_DEPRECATED("Use SCNProgram.opaque instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst);
+- (BOOL)programIsOpaque:(SCNProgram *)program API_DEPRECATED("Use SCNProgram.opaque instead", macos(10.8, 10.10)) API_UNAVAILABLE(ios, tvos, watchos, macCatalyst, visionos);
 
 @end
 

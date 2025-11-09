@@ -7,6 +7,9 @@
 
 #import <Foundation/Foundation.h>
 
+@protocol GCPhysicalInputElement;
+@protocol GCPhysicalInputSource;
+
 NS_ASSUME_NONNULL_BEGIN
 
 API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
@@ -18,7 +21,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  @param input the element that has been modified.
  @see value
  */
-@property (copy, nullable) void (^positionDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCSwitchPositionInput> input, NSInteger position);
+@property (atomic, copy, nullable) void (^positionDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCSwitchPositionInput> input, NSInteger position);
 
 /**
  The switch's position.
@@ -64,6 +67,12 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  the device before the event was transmitted to the host.
  */
 @property (readonly) NSTimeInterval lastPositionLatency;
+
+/**
+ An object describing the physical action(s) the user performs to manipulate
+ this input.
+ */
+@property (copy, readonly) NSSet<id<GCPhysicalInputSource>> *sources API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 @end
 

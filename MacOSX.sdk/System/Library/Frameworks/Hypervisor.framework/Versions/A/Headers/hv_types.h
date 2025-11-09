@@ -1,9 +1,9 @@
-/*
- *  hv_types.h
- *  Hypervisor Framework
- *
- *  Copyright (c) 2021 Apple Inc. All rights reserved.
- */
+//
+//  hv_types.h
+//  Hypervisor
+//
+//  Copyright © 2021-2023 Apple Inc. All rights reserved.
+//
 
 #ifndef __HYPERVISOR_HV_TYPES__
 #define __HYPERVISOR_HV_TYPES__
@@ -12,7 +12,6 @@
 
 #include <Hypervisor/hv_base.h>
 #include <Kernel/kern/hv_io_notifier.h>
-
 #include <mach/message.h>
 
 OS_ASSUME_NONNULL_BEGIN
@@ -24,8 +23,8 @@ __BEGIN_DECLS
  * @abstract   Capability IDs
  */
 enum {
-	HV_CAP_VCPUMAX,
-	HV_CAP_ADDRSPACEMAX
+    HV_CAP_VCPUMAX,
+    HV_CAP_ADDRSPACEMAX
 };
 
 typedef uint64_t hv_capability_t;
@@ -35,7 +34,7 @@ typedef uint64_t hv_capability_t;
  * @abstract   Type of a guest address space
  */
 enum {
-	HV_VM_SPACE_DEFAULT = (0ull)
+    HV_VM_SPACE_DEFAULT = (0ull)
 };
 
 typedef unsigned hv_vm_space_t;
@@ -126,11 +125,11 @@ typedef uint32_t hv_ion_flags_t;
  * @field      trailer Mach message trailer
  */
 typedef struct {
-	mach_msg_header_t header;
-	uint64_t addr;
-	uint64_t size;
-	uint64_t value;
-	mach_msg_trailer_t trailer;
+    mach_msg_header_t header;
+    uint64_t addr;
+    uint64_t size;
+    uint64_t value;
+    mach_msg_trailer_t trailer;
 } hv_ion_message_t;
 
 /*!
@@ -186,7 +185,7 @@ OS_ENUM(hv_apic_lvt_flavor, uint32_t,
 );
 
 /*!
- * @enum	   hv_apic_intr_trigger_t
+ * @enum       hv_apic_intr_trigger_t
  * @abstract   APIC triggers
  */
 OS_ENUM(hv_apic_intr_trigger, uint32_t,

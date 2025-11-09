@@ -1,7 +1,9 @@
 /*
 	Contains:	API to pair with a Bluetooth device.
-	Copyright:	(C) 2008 by Apple, Inc., all rights reserved.
+	Copyright:	(C) 2008, 2023 by Apple, Inc., all rights reserved.
 */
+
+#if __OBJC__
 
 #import <IOKit/IOReturn.h>
 #import <IOBluetooth/Bluetooth.h>
@@ -205,3 +207,5 @@ API_UNAVAILABLE(ios, watchos, tvos)
 - (void)replyUserConfirmation:(BOOL)reply;
 
 @end
+
+#endif // __OBJC__

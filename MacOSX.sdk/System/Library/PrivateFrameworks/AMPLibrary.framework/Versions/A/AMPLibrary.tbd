@@ -11,7 +11,10 @@ exports:
     objc-classes:    [ AMPArtworkClient, AMPArtworkEventInfo, AMPArtworkRequest, 
                        AMPArtworkRequestResponse, AMPArtworkSourceInfo, AMPLClient, 
                        AMPLFrameworkClient, AMPLMediaAppClient, AMPLSharingClient, 
-                       AMPLegacyITunesPrefs, AMPLibRequest, AMPLibRequestContainer, 
-                       AMPLibResponse, AMPLibraryAddToCloudMusicLibraryRequest, AMPRemoveArtworkRequest, 
-                       AMPSetArtworkResponse ]
+                       AMPLegacyITunesPrefs, AMPLibModelAlbumKind, AMPLibModelArtistKind, 
+                       AMPLibModelGenreKind, AMPLibModelKind, AMPLibModelPlaylistKind, 
+                       AMPLibModelSongKind, AMPLibRequest, AMPLibRequestContainer, 
+                       AMPLibRequestPropertyFilter, AMPLibResponse, AMPLibSearchRequest, 
+                       AMPLibSearchResponse, AMPLibSearchScope, AMPLibraryAddToCloudMusicLibraryRequest, 
+                       AMPRemoveArtworkRequest, AMPSetArtworkResponse ]
 ...

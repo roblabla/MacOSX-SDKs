@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/Frameworks/PHASE.framework/Versions/A/PHASE'
-current-version: 175
+current-version: 249.10.1
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -28,19 +28,18 @@ exports:
                        PHASEExternalOutputStreamController, PHASEExternalOutputStreamDefinition, 
                        PHASEExternalStream, PHASEExternalStreamCollection, PHASEExternalStreamDebugInfo, 
                        PHASEExternalStreamGroupDebugInfo, PHASEGeneratorNodeDefinition, 
-                       PHASEGeneratorParameters, PHASEGeometricSpreadingDistanceModelParameters, 
-                       PHASEGeometryView, PHASEGlobalMetaParameterAsset, PHASEGroup, 
-                       PHASEGroupPreset, PHASEGroupPresetSetting, PHASEListener, 
-                       PHASEMappedMetaParameterDefinition, PHASEMaterial, PHASEMedium, 
-                       PHASEMeshView, PHASEMetaParameter, PHASEMetaParameterDefinition, 
-                       PHASEMixer, PHASEMixerDefinition, PHASEMixerInformation, PHASEMixerParameters, 
+                       PHASEGeometricSpreadingDistanceModelParameters, PHASEGeometryView, 
+                       PHASEGlobalMetaParameterAsset, PHASEGroup, PHASEGroupPreset, 
+                       PHASEGroupPresetSetting, PHASEListener, PHASEMappedMetaParameterDefinition, 
+                       PHASEMaterial, PHASEMedium, PHASEMeshView, PHASEMetaParameter, 
+                       PHASEMetaParameterDefinition, PHASEMixer, PHASEMixerDefinition, 
+                       PHASEMixerInformation, PHASEMixerParameters, PHASEMutedSpeechActivityInfo, 
                        PHASENumberMetaParameter, PHASENumberMetaParameterDefinition, 
                        PHASENumericPair, PHASEObject, PHASEOccluder, PHASEPreSpatialTapSource, 
                        PHASEPresetMedium, PHASEProcedureNodeDefinition, PHASEPushStreamNode, 
                        PHASEPushStreamNodeDefinition, PHASERandomNodeDefinition, 
-                       PHASERouteChangeInfo, PHASESamplerNodeDefinition, PHASEScatteringData, 
-                       PHASEServiceSharedEntityDebugInfo, PHASEShape, PHASEShapeElement, 
-                       PHASESharedEngine, PHASESharedEntityDebugInfo, PHASESharedListener, 
+                       PHASESamplerNodeDefinition, PHASEScatteringData, PHASEServiceSharedEntityDebugInfo, 
+                       PHASEShape, PHASEShapeElement, PHASESharedEntityDebugInfo, 
                        PHASESharedListenerDebugInfo, PHASESoundAsset, PHASESoundEvent, 
                        PHASESoundEventNodeAsset, PHASESoundEventNodeDefinition, PHASESoundPrototype, 
                        PHASESoundReductionIndex, PHASESource, PHASESpatialMixer, 
@@ -52,4 +51,6 @@ exports:
                        PHASETransmissionModelerView, PHASETriangleSet, PHASEVoxelLevelView, 
                        PHASEVoxelSet3D, PHASEVoxelTreeView, PHASEWaterProcedureNodeDefinition, 
                        PHASEXPCService ]
+  - targets:         [ x86_64-maccatalyst, arm64-maccatalyst, arm64e-maccatalyst ]
+    objc-classes:    [ PHASESharedEngine, PHASESharedListener ]
 ...

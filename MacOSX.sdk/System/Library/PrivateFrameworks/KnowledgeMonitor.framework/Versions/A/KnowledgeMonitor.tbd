@@ -9,13 +9,14 @@ exports:
     symbols:         [ _KnowledgeMonitorVersionNumber, _KnowledgeMonitorVersionString, 
                        __DKApplicationIsForegroundType, __DKApplicationIsTrackableType, 
                        __DKUserIsActiveByActivityState ]
-    objc-classes:    [ _DKApplicationMonitor, _DKApplicationUsageMonitor, _DKAssertionsPreventingRestartMonitor, 
-                       _DKBacklightMonitor, _DKBatteryMonitor, _DKBluetoothMonitor, 
-                       _DKCPUUsageMonitor, _DKDeviceActivityLevelMonitor, _DKDoNotDisturbMonitor, 
-                       _DKLocationCoordinatesMonitor, _DKLocationMonitor, _DKLowPowerModeMonitor, 
-                       _DKMonitor, _DKNetworkQualityMonitor, _DKNotificationScreenLockMonitor, 
-                       _DKNowPlayingMonitor, _DKPeriod, _DKPluggedInMonitor, _DKScreenSharingMonitor, 
-                       _DKSunriseSunsetMonitor, _DKTemporalNumericState, _DKThermalPressureMonitor, 
-                       _DKUserNearbyMonitor, _DKWakeRequestMonitor, _DKWifiNetworkQualityMonitor, 
-                       _DKWiredNetworkQualityMonitor ]
+    objc-classes:    [ _DKApplicationMonitor, _DKApplicationMonitorBase, _DKApplicationUsageMonitor, 
+                       _DKAssertionsPreventingRestartMonitor, _DKBacklightMonitor, 
+                       _DKBatteryMonitor, _DKBluetoothMonitor, _DKCPUUsageMonitor, 
+                       _DKDeviceActivityLevelMonitor, _DKDoNotDisturbMonitor, _DKLocationCoordinatesMonitor, 
+                       _DKLocationMonitor, _DKLowPowerModeMonitor, _DKMonitor, _DKNetworkQualityMonitor, 
+                       _DKNotificationScreenLockMonitor, _DKNotificationTimeZoneChangeMonitor, 
+                       _DKNowPlayingMonitor, _DKPluggedInMonitor, _DKProcessContext, 
+                       _DKScreenSharingMonitor, _DKSunriseSunsetMonitor, _DKTemporalNumericState, 
+                       _DKThermalPressureMonitor, _DKUserNearbyMonitor, _DKWakeRequestMonitor, 
+                       _DKWiFiConnectionMonitor, _DKWifiNetworkQualityMonitor, _DKWiredNetworkQualityMonitor ]
 ...

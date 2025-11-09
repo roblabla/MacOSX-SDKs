@@ -2,7 +2,7 @@
 //  VZVirtioSocketListener.h
 //  Virtualization
 //
-//  Copyright © 2020 Apple Inc. All rights reserved.
+//  Copyright © 2020-2023 Apple Inc. All rights reserved.
 //
 
 #import <Virtualization/VZDefines.h>
@@ -27,7 +27,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
 /*!
  @abstract Pointer to a delegate object for the listener.
  */
-@property (readwrite, weak) id <VZVirtioSocketListenerDelegate> delegate;
+@property (nullable, weak) id <VZVirtioSocketListenerDelegate> delegate;
 
 @end
 
@@ -39,6 +39,7 @@ VZ_EXPORT API_AVAILABLE(macos(11.0))
  @see VZVirtioSocketListener
  @see VZVirtioSocketConnection
  */
+VZ_EXPORT API_AVAILABLE(macos(11.0))
 @protocol VZVirtioSocketListenerDelegate <NSObject>
 @optional
 

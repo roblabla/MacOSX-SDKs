@@ -8,6 +8,7 @@
 #import <Foundation/Foundation.h>
 
 @protocol GCPhysicalInputElement;
+@protocol GCPhysicalInputSource;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -25,7 +26,7 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  @param input the input that has been modified.
  @param value the value the axis was set to at the time the valueDidChangeHandler fired.
  */
-@property (copy, nullable) void (^valueDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCLinearInput> input, float value);
+@property (atomic, copy, nullable) void (^valueDidChangeHandler)(__kindof id<GCPhysicalInputElement> element, id<GCLinearInput> input, float value);
 
 /**
  A normalized value for the axis input, between 0 and 1 (inclusive). The values
@@ -73,6 +74,12 @@ API_AVAILABLE(macos(13.0), ios(16.0), tvos(16.0))
  the device before the event was transmitted to the host.
  */
 @property (readonly) NSTimeInterval lastValueLatency;
+
+/**
+ An object describing the physical action(s) the user performs to manipulate
+ this input.
+ */
+@property (copy, readonly) NSSet<id<GCPhysicalInputSource>> *sources API_AVAILABLE(macos(14.0), ios(17.0), tvos(17.0));
 
 @end
 

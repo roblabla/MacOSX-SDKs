@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/DeviceManagement.framework/Versions/A/DeviceManagement'
-current-version: 140
+current-version: 162
 reexported-libraries:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -12,14 +12,15 @@ exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
     symbols:         [ _DMFAllConfigurationOrganizationTypes, _DMFAppLog, _DMFAppStatusDidChangeNotificationName, 
-                       _DMFBundleIdentifierErrorKey, _DMFCEMReasonCodeBad, _DMFCEMReasonCodeConflict, 
-                       _DMFCEMReasonCodeCouldNotDecrypt, _DMFCEMReasonCodeInvalidSignature, 
-                       _DMFCEMReasonCodeOtherConflict, _DMFCEMReasonCodePayloadPhase, 
-                       _DMFCEMReasonCodePendingConfigurations, _DMFCEMReasonCodePendingTether, 
-                       _DMFCEMReasonCodePermissionDenied, _DMFCEMReasonCodeUnknown, 
-                       _DMFCEMReasonCodeUnknownPayloadKeys, _DMFCommandPayloadDictionaryKey, 
-                       _DMFCommandPayloadIdentifierKey, _DMFCommandPayloadRequiresNetworkTetherKey, 
-                       _DMFCommandPayloadStatusKey, _DMFCommandPayloadTypeKey, _DMFCommandStateAssetsUsedKey, 
+                       _DMFAtomicFileWritingLog, _DMFBundleIdentifierErrorKey, _DMFCEMReasonCodeBad, 
+                       _DMFCEMReasonCodeConflict, _DMFCEMReasonCodeCouldNotDecrypt, 
+                       _DMFCEMReasonCodeInvalidSignature, _DMFCEMReasonCodeOtherConflict, 
+                       _DMFCEMReasonCodePayloadPhase, _DMFCEMReasonCodePendingConfigurations, 
+                       _DMFCEMReasonCodePendingTether, _DMFCEMReasonCodePermissionDenied, 
+                       _DMFCEMReasonCodeUnknown, _DMFCEMReasonCodeUnknownPayloadKeys, 
+                       _DMFCommandPayloadDictionaryKey, _DMFCommandPayloadIdentifierKey, 
+                       _DMFCommandPayloadRequiresNetworkTetherKey, _DMFCommandPayloadStatusKey, 
+                       _DMFCommandPayloadTypeKey, _DMFCommandStateAssetsUsedKey, 
                        _DMFCommandStateErrorChainErrorCodeKey, _DMFCommandStateErrorChainErrorDomainKey, 
                        _DMFCommandStateErrorChainKey, _DMFCommandStateErrorChainLocalizedDescriptionKey, 
                        _DMFCommandStateErrorChainUSEnglishDescriptionKey, _DMFCommandStatePayloadKey, 
@@ -191,10 +192,10 @@ exports:
                        DMFRestartDeviceRequest, DMFScheduleOSUpdateRequest, DMFScheduleOSUpdateResultObject, 
                        DMFSecurityInformation, DMFSendEventRequest, DMFSetAirPlayRouteRequest, 
                        DMFSetAppAnalyticsEnabledRequest, DMFSetAppAssociatedDomainsEnableDirectDownloadsRequest, 
-                       DMFSetAppAssociatedDomainsRequest, DMFSetAppConfigurationRequest, 
-                       DMFSetAppExtensionUUIDsRequest, DMFSetAppRemovabilityRequest, 
-                       DMFSetAppTapToPayScreenLockRequest, DMFSetAppVPNUUIDRequest, 
-                       DMFSetBluetoothEnabledRequest, DMFSetDataRoamingEnabledRequest, 
+                       DMFSetAppAssociatedDomainsRequest, DMFSetAppCellularSliceUUIDRequest, 
+                       DMFSetAppConfigurationRequest, DMFSetAppExtensionUUIDsRequest, 
+                       DMFSetAppRemovabilityRequest, DMFSetAppTapToPayScreenLockRequest, 
+                       DMFSetAppVPNUUIDRequest, DMFSetBluetoothEnabledRequest, DMFSetDataRoamingEnabledRequest, 
                        DMFSetDeclarationsRequest, DMFSetDeviceNameRequest, DMFSetDiagnosticSubmissionEnabledRequest, 
                        DMFSetInterfaceOrientationRequest, DMFSetMaximumResidentUsersRequest, 
                        DMFSetPasscodeLockGracePeriodRequest, DMFSetPersonalHotspotEnabledRequest, 
@@ -210,7 +211,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/System/Library/PrivateFrameworks/Catalyst.framework/Versions/A/Catalyst'
-current-version: 9.1
+current-version: 10
 exports:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]

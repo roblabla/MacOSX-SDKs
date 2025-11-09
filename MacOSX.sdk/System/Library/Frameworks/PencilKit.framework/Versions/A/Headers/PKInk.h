@@ -2,11 +2,11 @@
 //  PKInk.h
 //  PencilKit
 //
-//  Copyright © 2020 Apple. All rights reserved.
+//  Copyright © 2023 Apple. All rights reserved.
 //
 
 #import <PencilKit/PKInkType.h>
-
+#import <PencilKit/PKContentVersion.h>
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -33,6 +33,9 @@ API_AVAILABLE(ios(14.0), macos(11.0))
 #else
 @property (nonatomic, readonly) NSColor *color;
 #endif
+
+/// The PencilKit version required to use this ink.
+@property (nonatomic, readonly) PKContentVersion requiredContentVersion API_AVAILABLE(ios(17.0), macos(14.0));
 
 @end
 

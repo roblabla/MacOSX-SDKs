@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 typedef NS_ENUM(NSInteger, CMIOExtensionStreamDirection) {
     CMIOExtensionStreamDirectionSource      = 0,
     CMIOExtensionStreamDirectionSink        = 1,
-} NS_SWIFT_NAME(CMIOExtensionStream.Direction) API_AVAILABLE(macos(12.3));
+} NS_SWIFT_NAME(CMIOExtensionStream.Direction) API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 @enum CMIOExtensionStreamClockType
@@ -40,7 +40,7 @@ typedef NS_ENUM(NSInteger, CMIOExtensionStreamClockType) {
     CMIOExtensionStreamClockTypeHostTime                    = 0,
     CMIOExtensionStreamClockTypeLinkedCoreAudioDeviceUID    = 1,
     CMIOExtensionStreamClockTypeCustom                      = 2,
-} NS_SWIFT_NAME(CMIOExtensionStream.ClockType) API_AVAILABLE(macos(12.3));
+} NS_SWIFT_NAME(CMIOExtensionStream.ClockType) API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 @enum CMIOExtensionStreamDiscontinuityFlags
@@ -60,14 +60,14 @@ typedef NS_OPTIONS(uint32_t, CMIOExtensionStreamDiscontinuityFlags) {
     CMIOExtensionStreamDiscontinuityFlagUnknown         = (1L << 0),
     CMIOExtensionStreamDiscontinuityFlagTime            = (1L << 1),
     CMIOExtensionStreamDiscontinuityFlagSampleDropped   = (1L << 6),
-} NS_SWIFT_NAME(CMIOExtensionStream.DiscontinuityFlags) API_AVAILABLE(macos(12.3));
+} NS_SWIFT_NAME(CMIOExtensionStream.DiscontinuityFlags) API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos);
 
 /*!
 @class CMIOExtensionStreamProperties
 @abstract
  A CMIOExtensionStreamProperties describes a CoreMediaIO extension stream properties.
 */
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @interface CMIOExtensionStreamProperties : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;
@@ -185,7 +185,7 @@ API_AVAILABLE(macos(12.3))
 @end
 
 
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @protocol CMIOExtensionStreamSource <NSObject>
 @required
 
@@ -276,7 +276,7 @@ API_AVAILABLE(macos(12.3))
 @abstract
  A CMIOExtensionStream describes a stream of media data.
 */
-API_AVAILABLE(macos(12.3))
+API_AVAILABLE(macos(12.3), macCatalyst(15.4)) API_UNAVAILABLE(ios, tvos)
 @interface CMIOExtensionStream : NSObject
 
 - (instancetype)init NS_UNAVAILABLE;

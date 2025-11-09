@@ -5562,7 +5562,10 @@ exports:
                        ___jit_debug_register_code, _abort, _decodeInstruction, _getPointerToNamedFunction, 
                        _llvm_regcomp, _llvm_regerror, _llvm_regexec, _llvm_regfree, 
                        _llvm_strlcpy, _raise, _x86DisassemblerDebug, _x86DisassemblerGetInstrName ]
-    weak-symbols:    [ __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE10removeLoopENSt3__111__wrap_iterIPKPS2_EE, 
+    weak-symbols:    [ __ZN4llvm11IntervalMapINS_9SlotIndexEPNS_12LiveIntervalELj8ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj4ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                       __ZN4llvm11IntervalMapINS_9SlotIndexEjLj9ENS_15IntervalMapInfoIS1_EEE10deleteNodeENS_15IntervalMapImpl7NodeRefEj, 
+                       __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE10removeLoopENSt3__111__wrap_iterIPKPS2_EE, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE11removeBlockEPS1_, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE13changeLoopForEPS1_PS2_, 
                        __ZN4llvm12LoopInfoBaseINS_10BasicBlockENS_4LoopEE13releaseMemoryEv, 

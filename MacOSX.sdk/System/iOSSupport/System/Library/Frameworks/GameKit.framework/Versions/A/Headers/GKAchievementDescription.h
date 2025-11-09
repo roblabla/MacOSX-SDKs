@@ -1,13 +1,8 @@
-//
-//  GKAchievementDescription.h
-//  Game Center
-//
-//  Copyright 2010-2023 Apple Inc. All rights reserved.
-//
+// Copyright © Apple Inc. All rights reserved.
 
+#import <TargetConditionals.h>
 #import <Foundation/Foundation.h>
 #import <GameKit/GKDefines.h>
-
 
 NS_ASSUME_NONNULL_BEGIN
 /// GKAchievementDescription is a full description of the achievement as defined before app submission in App Store Connect.
@@ -32,8 +27,13 @@ NS_CLASS_AVAILABLE(10_8, 4_1) __WATCHOS_AVAILABLE(3_0)
 @property(getter = isHidden, assign, readonly, NS_NONATOMIC_IOSONLY) BOOL hidden;
 /// Whether or not the achievement will be reported by the game when the user earns it again. This allows the achievement to be used for challenges when the recipient has previously earned it.
 @property(nonatomic, getter = isReplayable, assign, readonly) BOOL replayable  NS_AVAILABLE(10_8, 6_0);
+/// If present, the rarity of the achievement expressed as a percentage of players that earned it. Null if not enough data is available to compute it.
+@property(copy, readonly, nullable) NSNumber *rarityPercent API_AVAILABLE(ios(17.0), macos(14.0), watchos(10.0), tvos(17.0)) NS_REFINED_FOR_SWIFT;
 @end
 NS_ASSUME_NONNULL_END
+
+
+#if !TARGET_OS_WATCH
 
 #if TARGET_OS_IPHONE
 @class UIImage;
@@ -41,14 +41,12 @@ NS_ASSUME_NONNULL_END
 @class NSImage;
 #endif
 
-#import <GameKit/GKAchievementDescription.h>
-
 @interface GKAchievementDescription (UI)
 
 #if TARGET_OS_IPHONE
 
 // Image for completed achievement. Not valid until loadImage: has completed. Deprecated -- use loadImageWithCompletionHandler: instead.
-@property(nonatomic, retain, readonly, nullable) UIImage *image NS_DEPRECATED(10_8, 10_10, 4_1, 7_0, "Use loadImageWithCompletionHandler: instead");
+@property(nonatomic, retain, readonly, nullable) UIImage *image API_DEPRECATED_WITH_REPLACEMENT("-loadImageWithCompletionHandler:", ios(4.1,7.0), macos(10.8,10.10));
 
 // Asynchronously load the image. Error will be nil on success.
 - (void)loadImageWithCompletionHandler:(void(^ __nullable)(UIImage * __nullable image, NSError * __nullable error))completionHandler;
@@ -81,4 +79,4 @@ NS_ASSUME_NONNULL_END
 
 @end
 
-
+#endif

@@ -51,15 +51,14 @@ exports:
                        _newsBundleIdentifier, _notesBundleIdentifier, _remindersBundleIdentifier, 
                        _safariBundleIdentifier, _siriBundleIdentifier, _stocksBundleIdentifier, 
                        _vsCallJSFunction ]
-    objc-classes:    [ AOSUIAccountContactBaseViewModel, MMAccountInterface, MMAlert, 
-                       MMBaseInterface, MMCloudAccountInterface, MMDateFormatter, 
-                       MMDeviceInfo, MMFeatureManager, MMJSDialog, MMJSDialogController, 
-                       MMMBWebKitViewController, MMMessagesInterface, MMModalDialog, 
-                       MMNetworkReachability, MMPinFieldBoxUIElement, MMPinFieldView, 
-                       MMQuotaInterface, MMScriptFactory, MMScriptInterface, MMURLRequestFactory, 
-                       MMUserContentController, MMUtilities, MMWebKitController, 
-                       MMWebProcessPlugInDelegateInterface, MMWebProcessPlugInResourceLoadInfo, 
-                       iCloudLocHelper ]
+    objc-classes:    [ AOSUIAccountContactBaseViewModel, AOSUIFeatureManager, MMAccountInterface, 
+                       MMAlert, MMBaseInterface, MMCloudAccountInterface, MMDateFormatter, 
+                       MMDeviceInfo, MMJSDialog, MMJSDialogController, MMMBWebKitViewController, 
+                       MMMessagesInterface, MMModalDialog, MMNetworkReachability, 
+                       MMPinFieldBoxUIElement, MMPinFieldView, MMQuotaInterface, 
+                       MMScriptFactory, MMScriptInterface, MMURLRequestFactory, MMUserContentController, 
+                       MMUtilities, MMWebKitController, MMWebProcessPlugInDelegateInterface, 
+                       MMWebProcessPlugInResourceLoadInfo, iCloudLocHelper ]
     objc-ivars:      [ MMAlert._completionHandler, MMAlert._helpHandler, MMPinFieldBoxUIElement._index, 
                        MMPinFieldBoxUIElement._parent, MMWebKitController._altDSID, 
                        MMWebKitController._appleID, MMWebKitController._appleIDController, 

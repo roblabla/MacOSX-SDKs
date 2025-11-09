@@ -31,7 +31,7 @@ typedef NS_ENUM(NSInteger, NWPathStatus) {
 	/*! @const NWPathStatusSatisfiable The path may become satisfied upon
 	 *		a connection attempt. */
 	NWPathStatusSatisfiable = 3,
-} API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+} API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @interface NWPath
@@ -39,20 +39,20 @@ typedef NS_ENUM(NSInteger, NWPathStatus) {
  *		properties of the path that a networking connection will take on the device. For example,
  *		if the path status is NWPathStatusSatisfied, then a connection could use that path.
  */
-API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
+API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos)
 @interface NWPath : NSObject
 
 /*!
  * @property status
  * @discussion The evaluated NWPathStatus of the NWPath.
  */
-@property (nonatomic, readonly) NWPathStatus status API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly) NWPathStatus status API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property expensive
  * @discussion Returns YES if the path is considered expensive, as when using a cellular data plan.
  */
-@property (nonatomic, readonly, getter=isExpensive) BOOL expensive API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+@property (nonatomic, readonly, getter=isExpensive) BOOL expensive API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 /*!
  * @property constrained
@@ -65,7 +65,7 @@ API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED
  * @param path An NWPath object to compare.
  * @return YES if the two path objects have the same content, NO otherwise.
  */
-- (BOOL)isEqualToPath:(NWPath *)path API_AVAILABLE(macos(10.11), ios(9.0)) API_UNAVAILABLE(tvos) __WATCHOS_PROHIBITED;
+- (BOOL)isEqualToPath:(NWPath *)path API_AVAILABLE(macos(10.11), ios(9.0), tvos(17.0)) API_UNAVAILABLE(watchos);
 
 @end
 

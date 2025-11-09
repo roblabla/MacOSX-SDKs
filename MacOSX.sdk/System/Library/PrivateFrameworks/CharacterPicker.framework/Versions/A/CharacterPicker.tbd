@@ -14,5 +14,6 @@ exports:
                        _CPKLogTypeSessionEvents, _CPKLogTypeStartupPerformance, _CPKSearchFieldDidGetFocusNotification ]
     objc-classes:    [ CPKCharactersView, CPKDefaultDataSource, CPKEmojiDataSource, 
                        CPKEmojiIMDataSource, CPKEmojiIMViewController, CPKFont, CPKPopover, 
-                       CPKSearchField, CPKStandardCharacterEntity, CPKWindow ]
+                       CPKSearchField, CPKStandardCharacterEntity, CPKState, CPKSuggestedEmojiController, 
+                       CPKWindow ]
 ...

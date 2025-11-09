@@ -2,7 +2,7 @@
 tbd-version:     4
 targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
 install-name:    '/System/Library/PrivateFrameworks/Suggestions.framework/Versions/A/Suggestions'
-current-version: 331
+current-version: 333
 exports:
   - targets:         [ x86_64-macos, arm64-macos, arm64e-macos ]
     symbols:         [ _GetQueryStringAndAttributesFromInput, _SGTAddressBookAccessAllowed, 
@@ -30,6 +30,7 @@ exports:
                        _kSGTUserQueryAttributedInputDateKey, _kSGTUserQueryAttributedInputDateStartKey ]
     objc-classes:    [ SGTBaseCollector, SGTCategory, SGTCompletionTableView, SGTCompletionWindow, 
                        SGTCoreSpotlightBasedSuggester, SGTCoreSpotlightCollector, 
+                       SGTCoreSpotlightFileBasedSuggester, SGTCoreSpotlightFileCollector, 
                        SGTDateSuggester, SGTDateSuggestion, SGTFileLabelSuggester, 
                        SGTFileLabelSuggestion, SGTFolderNameField, SGTFolderSuggester, 
                        SGTFolderSuggestion, SGTHasAttachmentSuggester, SGTISODateRange, 
@@ -45,18 +46,18 @@ exports:
                        SGTMDQueryItem._attributesAndValues, SGTMDQueryItem._matchingAttributes, 
                        SGTSearchQueryContext._NLRange, SGTSearchQueryContext._NLScope, 
                        SGTSearchQueryContext._additionalAttributeNames, SGTSearchQueryContext._attributeNames, 
-                       SGTSearchQueryContext._excludeScopes, SGTSearchQueryContext._input, 
-                       SGTSearchQueryContext._inputString, SGTSearchQueryContext._isNLSearch, 
-                       SGTSearchQueryContext._matchesFinderFilesOnly, SGTSearchQueryContext._matchesSupportFiles, 
-                       SGTSearchQueryContext._maxCount, SGTSearchQueryContext._queryString, 
-                       SGTSearchQueryContext._rankingTerms, SGTSearchQueryContext._scopes, 
-                       SGTSearchQueryContext._searchId, SGTSearchQueryContext._sortingAttributeNames, 
-                       SGTStringComparator._alignment, SGTStringComparator._allScoreCombinations, 
-                       SGTStringComparator._hasLogScore, SGTStringComparator._logScore, 
-                       SGTStringComparator._spotlightScore, SGTStringComparator._stringA, 
-                       SGTStringComparator._stringB, SGTStringComparator._tailAlignment, 
-                       SGTStringComparator.hasEmptySentence, _SGTQueryScopeMenuOverride._action, 
-                       _SGTQueryScopeMenuOverride._item, _SGTQueryScopeMenuOverride._spin, 
-                       _SGTQueryScopeMenuOverride._spinnerMessage, _SGTQueryScopeMenuOverride._target, 
-                       _SGTQueryScopeMenuOverride._title ]
+                       SGTSearchQueryContext._excludeScopes, SGTSearchQueryContext._includeBundles, 
+                       SGTSearchQueryContext._input, SGTSearchQueryContext._inputString, 
+                       SGTSearchQueryContext._isNLSearch, SGTSearchQueryContext._matchesFinderFilesOnly, 
+                       SGTSearchQueryContext._matchesSupportFiles, SGTSearchQueryContext._maxCount, 
+                       SGTSearchQueryContext._queryString, SGTSearchQueryContext._rankingTerms, 
+                       SGTSearchQueryContext._scopes, SGTSearchQueryContext._searchId, 
+                       SGTSearchQueryContext._sortingAttributeNames, SGTStringComparator._alignment, 
+                       SGTStringComparator._allScoreCombinations, SGTStringComparator._hasLogScore, 
+                       SGTStringComparator._logScore, SGTStringComparator._spotlightScore, 
+                       SGTStringComparator._stringA, SGTStringComparator._stringB, 
+                       SGTStringComparator._tailAlignment, SGTStringComparator.hasEmptySentence, 
+                       _SGTQueryScopeMenuOverride._action, _SGTQueryScopeMenuOverride._item, 
+                       _SGTQueryScopeMenuOverride._spin, _SGTQueryScopeMenuOverride._spinnerMessage, 
+                       _SGTQueryScopeMenuOverride._target, _SGTQueryScopeMenuOverride._title ]
 ...

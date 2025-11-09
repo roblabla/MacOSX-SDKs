@@ -3,7 +3,7 @@ tbd-version:     4
 targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                    arm64e-macos, arm64e-maccatalyst ]
 install-name:    '/usr/lib/system/libdispatch.dylib'
-current-version: 1415.100.11
+current-version: 1462.0.4
 parent-umbrella:
   - targets:         [ x86_64-macos, x86_64-maccatalyst, arm64-macos, arm64-maccatalyst, 
                        arm64e-macos, arm64e-maccatalyst ]
@@ -131,12 +131,13 @@ exports:
                        _os_eventlink_extract_remote_port, _os_eventlink_signal, _os_eventlink_signal_and_wait, 
                        _os_eventlink_signal_and_wait_until, _os_eventlink_wait, _os_eventlink_wait_until, 
                        _os_release, _os_retain, _os_workgroup_attr_set_flags, _os_workgroup_attr_set_interval_type, 
-                       _os_workgroup_cancel, _os_workgroup_copy_port, _os_workgroup_create, 
-                       _os_workgroup_create_with_port, _os_workgroup_create_with_workgroup, 
-                       _os_workgroup_create_with_workload_id, _os_workgroup_create_with_workload_id_and_port, 
-                       _os_workgroup_create_with_workload_id_and_workgroup, _os_workgroup_get_working_arena, 
-                       _os_workgroup_interval_copy_current_4AudioToolbox, _os_workgroup_interval_create, 
-                       _os_workgroup_interval_create_with_workload_id, _os_workgroup_interval_data_set_flags, 
+                       _os_workgroup_attr_set_telemetry_flavor, _os_workgroup_cancel, 
+                       _os_workgroup_copy_port, _os_workgroup_create, _os_workgroup_create_with_port, 
+                       _os_workgroup_create_with_workgroup, _os_workgroup_create_with_workload_id, 
+                       _os_workgroup_create_with_workload_id_and_port, _os_workgroup_create_with_workload_id_and_workgroup, 
+                       _os_workgroup_get_working_arena, _os_workgroup_interval_copy_current_4AudioToolbox, 
+                       _os_workgroup_interval_create, _os_workgroup_interval_create_with_workload_id, 
+                       _os_workgroup_interval_data_set_flags, _os_workgroup_interval_data_set_telemetry, 
                        _os_workgroup_interval_finish, _os_workgroup_interval_start, 
                        _os_workgroup_interval_update, _os_workgroup_join, _os_workgroup_join_self, 
                        _os_workgroup_leave, _os_workgroup_leave_self, _os_workgroup_max_parallel_threads, 
@@ -158,7 +159,8 @@ exports:
                        OS_dispatch_io, OS_dispatch_mach, OS_dispatch_mach_msg, OS_dispatch_object, 
                        OS_dispatch_operation, OS_dispatch_queue, OS_dispatch_queue_attr, 
                        OS_dispatch_queue_concurrent, OS_dispatch_queue_global, OS_dispatch_queue_main, 
-                       OS_dispatch_queue_serial, OS_dispatch_semaphore, OS_dispatch_source, 
-                       OS_dispatch_workloop, OS_object, OS_os_eventlink, OS_os_workgroup, 
-                       OS_os_workgroup_interval, OS_os_workgroup_parallel, OS_voucher ]
+                       OS_dispatch_queue_serial, OS_dispatch_queue_serial_executor, 
+                       OS_dispatch_semaphore, OS_dispatch_source, OS_dispatch_workloop, 
+                       OS_object, OS_os_eventlink, OS_os_workgroup, OS_os_workgroup_interval, 
+                       OS_os_workgroup_parallel, OS_voucher ]
 ...

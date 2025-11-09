@@ -28,7 +28,8 @@ UIKIT_EXTERN API_AVAILABLE(ios(10.0))
 
 @property (nonatomic) CGFloat scale; // display scale of the context. The preferredFormat uses the scale most appropriate for the main screen's current configuration.
 @property (nonatomic) BOOL opaque; // indicates the bitmap context will draw fully opaque. The preferredFormat sets this to NO.
-@property (nonatomic) BOOL prefersExtendedRange API_DEPRECATED("Use the preferredRange property instead", ios(10.0, 12.0)); // indicates the bitmap context should draw into a context capable of rendering extended color images. The preferredFormat sets this according to the main screen's current configuration.
+@property (nonatomic) BOOL prefersExtendedRange API_DEPRECATED("Use the preferredRange property instead", ios(10.0, 12.0)) API_UNAVAILABLE(visionos); // indicates the bitmap context should draw into a context capable of rendering extended color images. The preferredFormat sets this according to the main screen's current configuration.
+@property (nonatomic, readonly, assign) BOOL supportsHighDynamicRange API_AVAILABLE(ios(17.0), tvos(17.0), watchos(10.0)); /// indicates if the format supports high dynamic range rendering.
 
 @property (nonatomic) UIGraphicsImageRendererFormatRange preferredRange API_AVAILABLE(ios(12.0));
 

@@ -35,19 +35,12 @@
 #include <sys/cdefs.h>
 #include <kern/thread.h>
 
-__BEGIN_DECLS
-
-#include <mach/mach_types.h>
-#include <mach/mach_interface.h>
-#include <mach/memory_object_types.h>
-
 #include <stdarg.h>
 #include <stdint.h>
 #include <string.h>
 
 #include <IOKit/assert.h>  /* Must be before other includes of kern/assert.h */
 
-#include <kern/kern_types.h>
 #include <kern/debug.h>
 #include <kern/task.h>
 #include <kern/sched_prim.h>
@@ -55,6 +48,15 @@ __BEGIN_DECLS
 #include <kern/queue.h>
 #include <kern/ipc_mig.h>
 #include <libkern/libkern.h>
+
+
+__BEGIN_DECLS
+
+#include <mach/mach_types.h>
+#include <mach/mach_interface.h>
+#include <mach/memory_object_types.h>
+
+#include <kern/kern_types.h>
 
 
 #ifndef _MISC_PROTOS_H_
